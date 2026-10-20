@@ -2628,7 +2628,11 @@ function fnameCat(p: number[]) {
   return id ? 0 : cons ? 1 : oo ? 2 : 3;
 }
 const D_FNAME: [number, number][] = [[0, 1], [0, 3], [0, 24]];
-const fnameOk = (p: number[]) => inDom(p, D_FNAME) && fnameCat(p) === p[1] && !(p[0] === 1 && (p[1] === 0 || p[1] === 1) && p[2] > 12);
+const fnameKey = (p: number[]) => {
+  const { A, B: Bs, f } = fnameMap(p);
+  return `${A}|${Bs}|${f}`;
+};
+const fnameOk = (p: number[]) => inDom(p, D_FNAME) && fnameCat(p) === p[1] && !(p[0] === 1 && (p[1] === 0 || p[1] === 1) && p[2] > 12) && !Array.from({ length: p[2] }, (_, s) => s).some((s) => fnameCat([p[0], p[1], s]) === p[1] && fnameKey([p[0], p[1], s]) === fnameKey(p));
 const fnameChoices = (p: number[]) => shuf("aofname", p, p[0] === 0 ? FN0 : FN1);
 
 // ---------------------------------------------------------------- recognising standard graphs
@@ -2689,6 +2693,149 @@ function grFigure([f, , k]: number[]) {
 }
 /** Evaluate an option by its own rule written out again (not the table used to draw): for the independent check. */
 const GR_EVAL: ((x: number) => number)[] = [(x) => x, (x) => x ** 2, (x) => x * x * x, (x) => (x < 0 ? -x : x), (x) => x ** -1, (x) => (x > 0 ? 1 : x < 0 ? -1 : 0), (x) => x - (((x % 1) + 1) % 1), (x) => Math.exp(x * Math.LN2), (x) => Math.log(x) / Math.LN2, (x) => 0 - x, (x) => x ** 0.5, (x) => -(x ** 2)];
+
+// ---------------------------------------------------------------- counting principles
+const D_FUND: [number, number][] = [[0, 3], [1, 9], [0, 9], [0, 5]];
+const fundOk = (p: number[]) => {
+  if (!inDom(p, D_FUND)) return false;
+  const [q, a, b, c] = p;
+  if (q === 0) return a >= 2 && a <= 6 && b >= 2 && b <= 5 && c >= 1 && c <= 4;
+  if (q === 1) return a >= 3 && b <= 1 && c >= 2 && c <= 4 && c <= a;
+  if (q === 2) return a >= 2 && a <= 6 && b >= 2 && b <= 6 && c >= 1 && c <= 4;
+  return a >= 2 && b >= 2 && c <= 5;
+};
+const fundAns = ([q, a, b, c]: number[]) => (q === 0 ? a * b * c : q === 1 ? (b === 0 ? a ** c : perm(a, c)) : q === 2 ? a * b + c : a + b + c);
+function fundText([q, a, b, c]: number[], w = false) {
+  if (q === 0) return w ? `For a school function ${nm(a + b)} can wear one of ${a} kurtas, one of ${b} pyjamas${c > 1 ? ` and one of ${c} pairs of sandals` : " and the one pair of sandals she has"}. How many different outfits are possible?` : `${nm(a + b)} has ${a} shirts, ${b} pairs of trousers${c > 1 ? ` and ${c} pairs of shoes` : " and 1 pair of shoes"}. An outfit is one shirt, one pair of trousers and one pair of shoes. How many different outfits are possible?`;
+  if (q === 1) return w ? `A bicycle lock has ${c} dials, and each dial can be set to any of the ${a} digits 1 to ${a}${b === 1 ? ", but the lock's maker uses only codes in which no digit is repeated" : " (digits may repeat)"}. How many codes are possible?` : `How many ${c}-digit codes can be made from the digits 1 to ${a} if ${b === 1 ? "no digit may be repeated" : "digits may be repeated"}?`;
+  if (q === 2) return w ? `From Madurai to Dindigul there are ${a} bus routes, and from Dindigul to Karur there are ${b}. There are also ${pl(c, "direct route", "direct routes")} from Madurai to Karur. In how many ways can a traveller go from Madurai to Karur (either through Dindigul or directly)?` : `There are ${a} roads from town X to town Y, ${b} roads from Y to town Z, and ${pl(c, "road", "roads")} going directly from X to Z. In how many ways can one travel from X to Z, either through Y or directly?`;
+  return w ? `A library lets a student borrow one book: a Tamil novel (${a} on the shelf), an English novel (${b} on the shelf)${c ? ` or a comic (${c} on the shelf)` : ""}. In how many ways can one book be chosen?` : `A canteen menu has ${a} South Indian dishes, ${b} North Indian dishes${c ? ` and ${c} Chinese dishes` : ""}. In how many ways can a student choose exactly one dish?`;
+}
+
+const D_FACT: [number, number][] = [[0, 3], [2, 15], [1, 13]];
+const factOk = (p: number[]) => {
+  if (!inDom(p, D_FACT)) return false;
+  const [q, n, m] = p;
+  if (q === 0) return n >= 5 && n <= 12 && m >= n - 4 && m <= n - 1 && m >= 1;
+  if (q === 1) return n >= 3 && n <= 9 && m === 1;
+  if (q === 2) return n >= 5 && n <= 10 && m >= 2 && m <= n - 2;
+  return n >= 3 && n <= 15 && m === 1;
+};
+const bigF = (k: number): bigint => (k <= 1 ? 1n : BigInt(k) * bigF(k - 1));
+function factText([q, n, m]: number[]) {
+  if (q === 0) return `Evaluate ${n}!/${m}!.`;
+  if (q === 1) return `If 1/${n}! + 1/${n + 1}! = x/${n + 2}!, find x.`;
+  if (q === 2) return `Evaluate ${n}!/(${m}! × ${n - m}!).`;
+  return `If n!/(n − 2)! = ${n * (n - 1)}, find the natural number n.`;
+}
+const factAns = ([q, n, m]: number[]) => (q === 0 ? fact(n) / fact(m) : q === 1 ? (n + 2) ** 2 : q === 2 ? choose(n, m) : n);
+
+const D_NCRP: [number, number][] = [[0, 3], [2, 20], [1, 18]];
+const ncrpOk = (p: number[]) => {
+  if (!inDom(p, D_NCRP)) return false;
+  const [q, a, b] = p;
+  if (q === 0) return a < b && a >= 2 && a + b <= 30 && b - a >= 2;
+  if (q === 1) return a >= 5 && a <= 10 && b >= 2 && b <= 5 && b < a;
+  if (q === 2) return a >= 4 && a <= 20 && b === 1;
+  return a >= 5 && a <= 15 && b >= 2 && b <= a - 2;
+};
+function ncrpText([q, a, b]: number[]) {
+  const C = (n: number | string, r: number | string) => `${typeof n === "number" ? sup(n) : "ⁿ"}C${typeof r === "number" ? sub(r) : r}`;
+  if (q === 0) return `If ${C("n", a)} = ${C("n", b)}, find n.`;
+  if (q === 1) return `For some r, ${sup(a)}P${"ᵣ"} = ${perm(a, b)} and ${sup(a)}C${"ᵣ"} = ${choose(a, b)}. Find r.`;
+  if (q === 2) return `If ${C("n", 2)} = ${choose(a, 2)}, find n.`;
+  return `Find ${C(a, b)} + ${C(a, b - 1)}.`;
+}
+const ncrpAns = ([q, a, b]: number[]) => (q === 0 ? a + b : q === 1 ? b : q === 2 ? a : choose(a + 1, b));
+
+const D_GEOC: [number, number][] = [[0, 3], [4, 20], [0, 12]];
+const geocOk = (p: number[]) => {
+  if (!inDom(p, D_GEOC)) return false;
+  const [q, n, m] = p;
+  if (q === 0) return m === 0;
+  if (q === 1) return n <= 15 && m === 0;
+  return n >= 6 && n <= 14 && m >= 3 && m <= n - 2;
+};
+const geocAns = ([q, n, m]: number[]) => (q === 0 ? choose(n, 2) - n : q === 1 ? choose(n, 3) : q === 2 ? choose(n, 3) - choose(m, 3) : choose(n, 2) - choose(m, 2) + 1);
+function geocText([q, n, m]: number[], w = false) {
+  if (q === 0) return w ? `A park in Coimbatore has a walking track shaped like a regular polygon with ${n} corners. Straight paths are to be laid between every two corners that are not next to each other. How many such paths are needed?` : `How many diagonals does a polygon with ${n} sides have?`;
+  if (q === 1) return w ? `${n} lamp posts stand at the corners of a regular ${n}-sided garden. How many different triangular flower beds can be marked out with three of the lamp posts as corners?` : `How many triangles can be formed with their corners at the vertices of a polygon with ${n} sides?`;
+  if (q === 2) return w ? `On a kolam board there are ${n} dots; ${m} of them lie on one straight line and no other three are in a straight line. How many triangles can be drawn with three of the dots as corners?` : `There are ${n} points in a plane, of which exactly ${m} lie on one straight line; no other three of them are collinear. How many triangles can be formed with corners at these points?`;
+  return w ? `On a kolam board there are ${n} dots; ${m} of them lie on one straight line and no other three are in a straight line. How many different straight lines can be drawn, each through at least two of the dots?` : `There are ${n} points in a plane, of which exactly ${m} lie on one straight line; no other three of them are collinear. How many different straight lines can be drawn through pairs of these points?`;
+}
+/** Points for the brute-force check: m on a far-away horizontal line, the rest on the parabola y = x² + 1 (no three collinear otherwise). */
+function geocPoints(n: number, m: number): [number, number][] {
+  return [...Array.from({ length: m }, (_, j) => [100 + j, 0] as [number, number]), ...Array.from({ length: n - m }, (_, i) => [i + 1, (i + 1) ** 2 + 1] as [number, number])];
+}
+
+const D_MIX: [number, number][] = [[0, 3], [3, 12], [1, 7], [1, 3]];
+const mixOk = (p: number[]) => {
+  if (!inDom(p, D_MIX)) return false;
+  const [q, n, r, b] = p;
+  if (q === 0) return n >= 5 && r >= 2 && r <= 4 && r < n && b === 1;
+  if (q === 1) return n >= 5 && r >= 2 && r <= 3 && b === 1;
+  if (q === 2) return n >= 3 && n <= 5 && r >= 4 && r <= 7 && b <= 2;
+  return n >= 5 && n <= 10 && r >= 3 && r <= 4 && r < n && b === 1;
+};
+const ROLES = ["captain", "vice-captain", "treasurer"];
+function mixText([q, n, r, b]: number[], w = false) {
+  if (q === 0) return w ? `${n} friends have tickets to a cricket match but only ${r} can go in the first car. In how many ways can the ${r} who go first be picked?` : `A teacher must send ${r} of her ${n} students to represent the class at a science exhibition. In how many ways can she pick them?`;
+  if (q === 1) return w ? `${n} runners take part in a race and medals go to the first ${r} places (${["gold", "silver", "bronze"].slice(0, r).join(", ")}). In how many ways can the medals be won, if no two runners tie?` : `A class of ${n} students elects a ${ROLES.slice(0, r).join(", a ").replace(/, a ([a-z-]+)$/, " and a $1")}, all different students. In how many ways can this be done?`;
+  if (q === 2) return w ? `For a name tag, ${nm(n + r)} picks ${b === 1 ? "1 vowel" : `${b} different vowels`} from the ${n} vowels on a sheet and 2 different consonants from ${r} consonants, and then writes the chosen letters in any order. How many different tags are possible?` : `How many words (with or without meaning) of ${b + 2} different letters can be made by choosing ${b === 1 ? "1 vowel" : `${b} vowels`} from ${n} given vowels and 2 consonants from ${r} given consonants, and arranging the chosen letters?`;
+  return w ? `A residents' welfare committee of ${r} members is to be formed from ${n} volunteers, and one of the ${r} is then made the secretary. In how many ways can this be done?` : `A committee of ${r} people is to be chosen from ${n} people, and one of the chosen ${r} is to be its chairperson. In how many ways can this be done?`;
+}
+const mixAns = ([q, n, r, b]: number[]) => (q === 0 ? choose(n, r) : q === 1 ? perm(n, r) : q === 2 ? choose(n, b) * choose(r, 2) * fact(b + 2) : choose(n, r) * r);
+
+const WORDS = ["CHAIR", "TIGER", "MANGO", "DELHI", "TAMIL", "SALEM", "KOVAI", "PUNE", "RAGI", "DOSA", "IDLY", "MILK", "BREAD", "SUGAR", "CAMEL", "HORSE", "KANPUR", "NAGPUR", "MYSORE", "PLANET", "THENI", "VELUR", "GUNTUR", "BIHAR"];
+const D_ARR: [number, number][] = [[0, 5], [2, 23], [0, 4]];
+const arrOk = (p: number[]) => {
+  if (!inDom(p, D_ARR)) return false;
+  const [q, n, r] = p;
+  if (q === 0) return n >= 3 && n <= 8 && r >= 2 && r <= 4;
+  if (q === 1 || q === 2) return n >= 4 && n <= 8 && r === 0;
+  if (q === 3 || q === 4) return n >= 3 && n <= 9 && r === 0;
+  return r === 0 && new Set(WORDS[n]).size === WORDS[n].length;
+};
+function arrText([q, n, r]: number[], w = false) {
+  if (q === 0) return w ? `A shop's gift vouchers carry a code of ${r} letters, each one of the ${n} letters A to ${"ABCDEFGH"[n - 1]}; letters may be repeated. How many different codes are possible?` : `How many ${r}-letter codes can be made from ${n} different letters if a letter may be used more than once?`;
+  if (q === 1) return w ? `${n} cousins stand in a row for a wedding photograph, and the bride and groom (two of the ${n}) must stand next to each other. In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if two particular people must stand together?`;
+  if (q === 2) return w ? `${n} cousins stand in a row for a photograph, but two of them who have quarrelled must not stand next to each other. In how many ways can they stand?` : `In how many ways can ${n} people stand in a row if two particular people must not stand next to each other?`;
+  if (q === 3) return w ? `${n} friends sit around a round table at a restaurant in Madurai. In how many different ways can they sit? (Seatings that differ only by everyone moving round the table are the same.)` : `In how many ways can ${n} people be seated around a round table?`;
+  if (q === 4) return w ? `${nm(n)} strings ${n} different flowers into a circular garland. How many different garlands are possible? (Turning the garland over gives the same garland.)` : `In how many ways can ${n} different beads be arranged to form a necklace?`;
+  return w ? `In a word game, all the arrangements of the letters of the word ${WORDS[n]} are written in a list in dictionary (alphabetical) order. At which position in the list does ${WORDS[n]} itself appear?` : `The letters of the word ${WORDS[n]} are arranged in all possible ways and the arrangements are listed in dictionary order. Find the rank of the word ${WORDS[n]} in the list.`;
+}
+function rankOf(w: string) {
+  const L = w.split("");
+  let rank = 1;
+  L.forEach((ch, i) => {
+    const smaller = L.slice(i + 1).filter((c) => c < ch).length;
+    rank += smaller * fact(L.length - i - 1);
+  });
+  return rank;
+}
+const arrAns = ([q, n, r]: number[]) => (q === 0 ? n ** r : q === 1 ? 2 * fact(n - 1) : q === 2 ? fact(n) - 2 * fact(n - 1) : q === 3 ? fact(n - 1) : q === 4 ? fact(n - 1) / 2 : rankOf(WORDS[n]));
+/** All arrangements of a list (for the independent counts). */
+function perms<T>(xs: T[]): T[][] {
+  if (xs.length <= 1) return [xs];
+  return xs.flatMap((x, i) => perms([...xs.slice(0, i), ...xs.slice(i + 1)]).map((r) => [x, ...r]));
+}
+
+const D_PAS: [number, number][] = [[0, 2], [3, 12], [0, 11]];
+const pasOk = (p: number[]) => {
+  if (!inDom(p, D_PAS)) return false;
+  const [q, n, r] = p;
+  if (q === 0) return n <= 11 && r >= 1 && r <= n;
+  if (q === 1) return n <= 10 && r >= 1 && r <= n - 1;
+  return r === 0;
+};
+const pasRow = (n: number) => Array.from({ length: n + 1 }, (_, i) => choose(n, i));
+function pasText([q, n, r]: number[]) {
+  const row = pasRow(n).join(", ");
+  if (q === 0) return `Row ${n} of Pascal's triangle is ${row}. Build the next row, row ${n + 1}, by adding neighbours. What is its entry in position ${r} (counting the first 1 as position 0)?`;
+  if (q === 1) return `Row ${n} of Pascal's triangle is ${row}. Use it to find the coefficient of a${sup(n - r)}b${r === 1 ? "" : sup(r)} in the expansion of (a + b)${sup(n)}.`;
+  return `What is the sum of all the entries in row ${n} of Pascal's triangle (row 0 is the single 1 at the top)?`;
+}
+const pasAns = ([q, n, r]: number[]) => (q === 0 ? choose(n + 1, r) : q === 1 ? choose(n, r) : 2 ** n);
 
 export const NEW15: Def[] = [
   // ============================================================ roster, set-builder and descriptive forms
@@ -3279,6 +3426,574 @@ export const NEW15: Def[] = [
       ],
     },
     limits: "Twelve standard graphs drawn on a −5 to 5 window, some moved up or down by 1; sketching graphs is marked by an educator.",
+  },
+  // ============================================================ multiplication and addition principles
+  {
+    id: "aofund",
+    arity: 4,
+    title: "The multiplication and addition principles of counting",
+    competency: PERM,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, a, b, c]: q 0 outfits (a × b × c), 1 codes from a digits with (b = 0) or without (b = 1) repetition, 2 routes via Y or direct (ab + c), 3 one item from either group (a + b + c)
+    reject: (p) => (fundOk(p) ? null : "Outfits, codes, routes or an either-or choice, with small numbers."),
+    prompt: (p) => fundText(p),
+    solve: (p) => {
+      const [q, a, b, c] = p;
+      const steps: Step[] =
+        q === 0
+          ? [{ id: "mult", op: "multiply", competency: PERM, inputs: [a, b, c], value: a * b * c }]
+          : q === 1
+            ? [{ id: "slots", op: "multiply", competency: PERM, inputs: Array.from({ length: c }, (_, i) => (b === 0 ? a : a - i)), value: fundAns(p) }]
+            : q === 2
+              ? [{ id: "via", op: "multiply", competency: PERM, inputs: [a, b], value: a * b }, { id: "either", op: "add", competency: PERM, inputs: [a * b, c], value: a * b + c }]
+              : [{ id: "either", op: "add", competency: PERM, inputs: [a, b, c], value: a + b + c }];
+      return { steps, answer: fundAns(p) };
+    },
+    // independent: list every possibility (tuples of choices) and count them
+    validate: (p, v) => {
+      const [q, a, b, c] = p;
+      let n = 0;
+      if (q === 0) for (let i = 0; i < a; i++) for (let j = 0; j < b; j++) for (let k = 0; k < c; k++) n++;
+      else if (q === 1) {
+        const rec = (len: number, used: number[]) => {
+          if (len === c) return void n++;
+          for (let d = 1; d <= a; d++) if (b === 0 || !used.includes(d)) rec(len + 1, [...used, d]);
+        };
+        rec(0, []);
+      } else if (q === 2) {
+        const routes = new Set<string>();
+        for (let i = 0; i < a; i++) for (let j = 0; j < b; j++) routes.add(`XY${i}-YZ${j}`);
+        for (let k = 0; k < c; k++) routes.add(`XZ${k}`);
+        n = routes.size;
+      } else n = new Set([...Array.from({ length: a }, (_, i) => `s${i}`), ...Array.from({ length: b }, (_, i) => `n${i}`), ...Array.from({ length: c }, (_, i) => `c${i}`)]).size;
+      return v === n;
+    },
+    bugs: (p) => {
+      const [q, a, b, c] = p;
+      const ans = fundAns(p);
+      const out: Bug[] = [];
+      if (q === 0) out.push({ id: "added", kind: "conceptual", competency: PERM, says: "The numbers of choices were added; each shirt goes with each pair of trousers and each pair of shoes, so the choices multiply.", predict: a + b + c });
+      if (q === 1) {
+        out.push({ id: "repetition-mixed", kind: "conceptual", competency: PERM, says: b === 0 ? `Each digit was used only once (${a} × ${a - 1} × …); repetition is allowed, so every one of the ${c} places has all ${a} choices.` : `Every place was given all ${a} choices; with no repetition the choices go down by one each time.`, predict: b === 0 ? perm(a, c) : a ** c });
+        if (c ** a <= 1e9) out.push({ id: "power-swapped", kind: "procedural", competency: EXPN, says: `${c}${sup(a)} was worked out; with ${a} choices for each of ${c} places the count is ${a}${sup(c)}.`, predict: b === 0 ? c ** a : null });
+        out.push({ id: "added-places", kind: "conceptual", competency: PERM, says: "The choices for the places were added; the places are filled one after another, so the choices multiply.", predict: b === 0 ? a * c : Array.from({ length: c }, (_, i) => a - i).reduce((x, y) => x + y, 0) });
+      }
+      if (q === 2) {
+        out.push({ id: "direct-forgotten", kind: "procedural", competency: PERM, says: `The ${c} direct road${c === 1 ? " was" : "s were"} left out; going directly is another way, so it is added.`, predict: a * b });
+        out.push({ id: "all-added", kind: "conceptual", competency: PERM, says: "All the numbers were added; going through Y needs a road for the first part AND one for the second part, so those two multiply.", predict: a + b + c });
+        out.push({ id: "all-multiplied", kind: "conceptual", competency: PERM, says: "The direct roads were multiplied in too; 'through Y' OR 'directly' are separate cases, so they are added.", predict: a * b * c });
+      }
+      if (q === 3) out.push({ id: "multiplied", kind: "conceptual", competency: PERM, says: "The numbers were multiplied; only ONE dish is chosen, from one group OR another, so by the addition principle they are added.", predict: c ? a * b * c : a * b });
+      return out.filter((x) => x.predict !== null && x.predict !== ans);
+    },
+    variants: ([q, a, b, c]) => [[q, a + 1, b, c], [q, a, b, c + 1]].filter(fundOk),
+    explain: (s) => (s.id === "mult" || s.id === "slots" || s.id === "via" ? `One choice after another, so multiply: ${s.inputs.join(" × ")} = ${s.value}` : `Separate cases (one or the other), so add: ${s.inputs.join(" + ")} = ${s.value}`),
+    domain: D_FUND,
+    keep: fundOk,
+    difficulty: ([q]) => (q === 0 || q === 3 ? 1 : q === 1 ? 2 : 3),
+    word: (p) => fundText(p, true),
+    teach: {
+      idea: "Multiplication principle: if one thing can be done in m ways and then another in n ways, both can be done in m × n ways. Addition principle: if a choice is either one of m things or one of n other things (not both), there are m + n ways.",
+      method: "Ask: is it 'this AND then that' (multiply) or 'this OR that' (add)? For codes, count the choices for each place in turn; with no repetition, each place has one fewer choice.",
+      alternatives: [
+        { id: "tree", title: "A tree diagram", kind: "conceptual", text: ["Draw a branch for each first choice, and from each of them a branch for each second choice.", "Count the ends of the branches: that is the product."] },
+        { id: "and-or", title: "AND multiplies, OR adds", kind: "procedural", text: ["Underline the words 'and then' (stages) and 'or' (cases) in the question.", "Multiply across stages; add across cases."] },
+      ],
+    },
+    limits: "Two or three stages or groups with small numbers; problems mixing many conditions are in the other counting families.",
+  },
+  // ============================================================ factorial notation
+  {
+    id: "aofact",
+    arity: 3,
+    title: "Evaluating and simplifying expressions with factorials",
+    competency: PERM,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, n, m]: q 0 n!/m!, 1 1/n! + 1/(n+1)! = x/(n+2)!, 2 n!/(m!(n − m)!), 3 n!/(n − 2)! = n(n − 1) given, find n
+    reject: (p) => (factOk(p) ? null : "Factorial quotients and equations with small n."),
+    prompt: factText,
+    solve: (p) => {
+      const [q, n, m] = p;
+      const steps: Step[] =
+        q === 0
+          ? [{ id: "cancel", op: "cancel", competency: PERM, inputs: Array.from({ length: n - m }, (_, i) => n - i), value: fact(n) / fact(m) }]
+          : q === 1
+            ? [{ id: "common", op: "rewrite", competency: PERM, inputs: [n], value: `${(n + 1) * (n + 2)}/${n + 2}! + ${n + 2}/${n + 2}!` }, { id: "add", op: "add", competency: PERM, inputs: [(n + 1) * (n + 2), n + 2], value: (n + 2) ** 2 }]
+            : q === 2
+              ? [{ id: "cancel", op: "cancel", competency: PERM, inputs: [n, Math.max(m, n - m)], value: fact(n) / fact(Math.max(m, n - m)) }, { id: "divide", op: "divide", competency: PERM, inputs: [fact(n) / fact(Math.max(m, n - m)), fact(Math.min(m, n - m))], value: choose(n, m) }]
+              : [{ id: "simplify", op: "cancel", competency: PERM, inputs: ["n!/(n − 2)! = n(n − 1)"], value: n * (n - 1) }, { id: "solve", op: "solve", competency: PERM, inputs: [n * (n - 1)], value: n }];
+      return { steps, answer: factAns(p) };
+    },
+    // independent: exact factorials in big integers (and for the equation, a search over n)
+    validate: ([q, n, m], v) => {
+      if (typeof v !== "number" || !Number.isInteger(v)) return false;
+      if (q === 0) return BigInt(v) === bigF(n) / bigF(m);
+      if (q === 1) return BigInt(v) * bigF(n) * bigF(n + 1) === bigF(n + 2) * (bigF(n + 1) + bigF(n));
+      if (q === 2) return BigInt(v) * bigF(m) * bigF(n - m) === bigF(n);
+      for (let k = 2; k <= 40; k++) if (bigF(k) / bigF(k - 2) === BigInt(n * (n - 1))) return v === k;
+      return false;
+    },
+    bugs: (p) => {
+      const [q, n, m] = p;
+      const ans = factAns(p);
+      const out: Bug[] = [];
+      if (q === 0) {
+        if (n % m === 0) out.push({ id: "divide-numbers", kind: "conceptual", competency: PERM, says: `${n}!/${m}! was taken as (${n}/${m})!; factorials do not divide like that. Cancel ${m}! from ${n}! = ${n} × ${n - 1} × … × 1.`, predict: fact(n / m) });
+        out.push({ id: "difference", kind: "conceptual", competency: PERM, says: `${n}!/${m}! was taken as (${n} − ${m})!; after cancelling, the factors ${n} × … × ${m + 1} are left.`, predict: fact(n - m) });
+        if (n - m >= 2) out.push({ id: "one-factor", kind: "procedural", competency: PERM, says: `Only the first factor ${n} was kept; every factor from ${n} down to ${m + 1} is left after cancelling.`, predict: n });
+      }
+      if (q === 1) {
+        out.push({ id: "one-factor-scaled", kind: "procedural", competency: PERM, says: `1/${n}! was rewritten with only one extra factor; ${n + 2}! = ${n + 2} × ${n + 1} × ${n}!, so 1/${n}! = ${(n + 1) * (n + 2)}/${n + 2}!.`, predict: 2 * n + 3 });
+        out.push({ id: "second-not-scaled", kind: "procedural", competency: PERM, says: `1/${n + 1}! was not rewritten over ${n + 2}!; it equals ${n + 2}/${n + 2}!.`, predict: (n + 1) * (n + 2) + 1 });
+      }
+      if (q === 2) {
+        out.push({ id: "one-factorial", kind: "procedural", competency: PERM, says: `Only ${m}! was divided out; the denominator also has ${n - m}!.`, predict: fact(n) / fact(m) });
+        out.push({ id: "sum-factorial", kind: "conceptual", competency: PERM, says: `${m}! × ${n - m}! was taken as (${m} + ${n - m})! = ${n}!, giving 1; a product of factorials is not the factorial of the sum.`, predict: 1 });
+      }
+      if (q === 3) out.push({ id: "smaller-factor", kind: "procedural", competency: PERM, says: `${n * (n - 1)} = ${n} × ${n - 1}, and n!/(n − 2)! = n(n − 1), so n is the LARGER factor.`, predict: n - 1 });
+      return out.filter((x) => x.predict !== ans);
+    },
+    variants: ([q, n, m]) => [[q, n + 1, m], [q, n, m + 1]].filter(factOk),
+    explain: (s) => (s.id === "cancel" ? `Cancel the common factorial: ${s.inputs.join(" × ")}${s.inputs.length > 1 ? "" : ""} → ${s.value}` : s.id === "common" ? `Write both over ${Number(s.inputs[0]) + 2}!: ${s.value}` : s.id === "add" ? `x = ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "divide" ? `Divide by the other factorial: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : s.id === "simplify" ? `n!/(n − 2)! = n(n − 1) = ${s.value}` : `Two consecutive numbers with product ${s.inputs[0]}: n = ${s.value}`),
+    domain: D_FACT,
+    keep: factOk,
+    difficulty: ([q]) => (q === 0 ? 1 : q === 2 ? 2 : 3),
+    teach: {
+      idea: "n! = n × (n − 1) × … × 2 × 1, and n! = n × (n − 1)!. So a bigger factorial contains every smaller one: 8! = 8 × 7 × 6!.",
+      method: "To simplify a quotient, write the bigger factorial down to the smaller one and cancel. To add fractions with factorials, rewrite each over the biggest factorial.",
+      alternatives: [
+        { id: "expand", title: "Write the factors out", kind: "procedural", text: ["Write each factorial as a product of its factors.", "Cross out the factors that appear on top and bottom; multiply what is left."] },
+        { id: "chain", title: "The factorial chain", kind: "conceptual", text: ["(n + 2)! = (n + 2)(n + 1) n!: each step up multiplies by the next number.", "So 1/n! = (n + 1)(n + 2)/(n + 2)!."] },
+      ],
+    },
+    limits: "Factorials up to 15!; equations in n with one natural-number solution.",
+  },
+  // ============================================================ properties of ⁿCᵣ
+  {
+    id: "aoncrp",
+    arity: 3,
+    title: "Using ⁿCᵣ = ⁿCₙ₋ᵣ, ⁿPᵣ = r!·ⁿCᵣ and Pascal's rule",
+    competency: PERM,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, a, b]: q 0 ⁿCₐ = ⁿC_b → n; 1 r from ⁿPᵣ and ⁿCᵣ (n = a, r = b); 2 ⁿC₂ given → n (n = a); 3 ᵃC_b + ᵃC_(b−1)
+    reject: (p) => (ncrpOk(p) ? null : "Equations and sums with the properties of ⁿCᵣ, small numbers."),
+    prompt: ncrpText,
+    solve: (p) => {
+      const [q, a, b] = p;
+      const steps: Step[] =
+        q === 0
+          ? [{ id: "symmetry", op: "rewrite", competency: PERM, inputs: [a, b], value: a + b }]
+          : q === 1
+            ? [{ id: "ratio", op: "divide", competency: PERM, inputs: [perm(a, b), choose(a, b)], value: fact(b) }, { id: "r", op: "solve", competency: PERM, inputs: [fact(b)], value: b }]
+            : q === 2
+              ? [{ id: "equation", op: "rewrite", competency: PERM, inputs: [choose(a, 2)], value: a * (a - 1) }, { id: "n", op: "solve", competency: PERM, inputs: [a * (a - 1)], value: a }]
+              : [{ id: "pascal", op: "rewrite", competency: PERM, inputs: [a, b], value: `${sup(a + 1)}C${sub(b)}` }, { id: "value", op: "evaluate", competency: PERM, inputs: [a + 1, b], value: choose(a + 1, b) }];
+      return { steps, answer: ncrpAns(p) };
+    },
+    // independent: Pascal's triangle by addition, and searches over n or r
+    validate: ([q, a, b], v) => {
+      const rows: number[][] = [[1]];
+      for (let i = 1; i <= 40; i++) rows.push(rows[i - 1].map((x, j) => x + (j > 0 ? rows[i - 1][j - 1] : 0)).concat([1]));
+      const C = (n: number, r: number) => (r < 0 || r > n ? 0 : rows[n][r]);
+      if (q === 0) {
+        const ns = [];
+        for (let n = b; n <= 40; n++) if (C(n, a) === C(n, b)) ns.push(n);
+        return ns.length === 1 && v === ns[0];
+      }
+      if (q === 1) {
+        let P = 1;
+        for (let r = 1; r <= a; r++) {
+          P *= a - r + 1;
+          if (P === perm(a, b) && C(a, r) === choose(a, b)) return v === r;
+        }
+        return false;
+      }
+      if (q === 2) {
+        for (let n = 2; n <= 40; n++) if (C(n, 2) === choose(a, 2)) return v === n;
+        return false;
+      }
+      return v === C(a, b) + C(a, b - 1);
+    },
+    bugs: ([q, a, b]) => {
+      const out: Bug[] = [];
+      if (q === 0) {
+        out.push({ id: "difference", kind: "conceptual", competency: PERM, says: `ⁿCₐ = ⁿC_b was read as a − b or b − a = n; the property is ⁿCᵣ = ⁿCₙ₋ᵣ, so ${b} = n − ${a}.`, predict: b - a });
+        out.push({ id: "larger-index", kind: "procedural", competency: PERM, says: `n was taken as the larger index ${b}; then ⁿC${sub(a)} and ⁿC${sub(b)} would be different.`, predict: b });
+      }
+      if (q === 1) out.push({ id: "no-factorial", kind: "recall", competency: PERM, says: `ⁿPᵣ ÷ ⁿCᵣ was taken as r; it is r! (each selection has r! arrangements), so r! = ${fact(b)}.`, predict: fact(b) });
+      if (q === 2) {
+        const k = a * (a - 1) / 2;
+        const t = Math.round((1 + Math.sqrt(1 + 4 * k)) / 2);
+        if (t * (t - 1) === k && t !== a) out.push({ id: "no-half", kind: "recall", competency: PERM, says: `ⁿC₂ was taken as n(n − 1); it is n(n − 1)/2.`, predict: t });
+        out.push({ id: "one-less", kind: "procedural", competency: PERM, says: `n(n − 1) = ${a * (a - 1)} was solved with the smaller factor; n is the larger of the two consecutive numbers.`, predict: a - 1 });
+      }
+      if (q === 3) {
+        out.push({ id: "upper-index", kind: "conceptual", competency: PERM, says: `The upper index was kept as ${a}; Pascal's rule is ⁿCᵣ + ⁿCᵣ₋₁ = ⁿ⁺¹Cᵣ.`, predict: choose(a, b) });
+        if (b + 1 <= a + 1 && choose(a + 1, b + 1) !== choose(a + 1, b)) out.push({ id: "lower-index", kind: "procedural", competency: PERM, says: `The lower index was raised as well; ⁿCᵣ + ⁿCᵣ₋₁ = ⁿ⁺¹Cᵣ keeps r.`, predict: choose(a + 1, b + 1) });
+      }
+      return out.filter((x) => x.predict !== ncrpAns([q, a, b]) && (typeof x.predict !== "number" || x.predict > 0));
+    },
+    variants: ([q, a, b]) => [[q, a + 1, b], [q, a, b + 1]].filter(ncrpOk),
+    explain: (s) => (s.id === "symmetry" ? `ⁿCₐ = ⁿC_b with a ≠ b means a = n − b, so n = ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "ratio" ? `r! = ⁿPᵣ ÷ ⁿCᵣ = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : s.id === "r" ? `r! = ${s.inputs[0]} gives r = ${s.value}` : s.id === "equation" ? `n(n − 1)/2 = ${s.inputs[0]}, so n(n − 1) = ${s.value}` : s.id === "n" ? `${s.inputs[0]} = ${s.value} × ${Number(s.value) - 1}, so n = ${s.value}` : s.id === "pascal" ? `By Pascal's rule the sum is ${s.value}` : `${sup(Number(s.inputs[0]))}C${sub(Number(s.inputs[1]))} = ${s.value}`),
+    domain: D_NCRP,
+    keep: ncrpOk,
+    difficulty: ([q]) => (q === 0 ? 1 : q === 3 ? 2 : 3),
+    teach: {
+      idea: "Choosing r to take is choosing n − r to leave, so ⁿCᵣ = ⁿCₙ₋ᵣ. Each selection of r can be arranged in r! ways, so ⁿPᵣ = r!·ⁿCᵣ. A selection of r from n + 1 either includes one particular object or not: ⁿ⁺¹Cᵣ = ⁿCᵣ + ⁿCᵣ₋₁.",
+      method: "For ⁿCₐ = ⁿC_b (a ≠ b), use a + b = n. Divide ⁿPᵣ by ⁿCᵣ to get r!. For a sum ⁿCᵣ + ⁿCᵣ₋₁, write ⁿ⁺¹Cᵣ and evaluate.",
+      alternatives: [
+        { id: "pascal", title: "Pascal's triangle", kind: "conceptual", text: ["Each entry is the sum of the two above it: that is Pascal's rule.", "Each row reads the same from both ends: that is ⁿCᵣ = ⁿCₙ₋ᵣ."] },
+        { id: "check", title: "Check by working out", kind: "procedural", text: ["Put your n or r back and evaluate both sides.", "For small numbers, list the selections to see why the property holds."] },
+      ],
+    },
+    limits: "Equations and sums with whole numbers up to 30; proofs of the properties are written work.",
+  },
+  // ============================================================ geometric counting
+  {
+    id: "aogeoc",
+    arity: 3,
+    title: "Counting diagonals, triangles and lines with combinations",
+    competency: PERM,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, n, m]: q 0 diagonals of an n-gon, 1 triangles from its vertices, 2 triangles from n points with m collinear, 3 lines through them
+    reject: (p) => (geocOk(p) ? null : "Polygons with 4 to 20 sides; 6 to 14 points with 3 or more collinear."),
+    prompt: (p) => geocText(p),
+    solve: (p) => {
+      const [q, n, m] = p;
+      const steps: Step[] =
+        q === 0
+          ? [{ id: "pairs", op: "choose", competency: PERM, inputs: [n, 2], value: choose(n, 2) }, { id: "sides", op: "subtract", competency: PERM, inputs: [choose(n, 2), n], value: choose(n, 2) - n }]
+          : q === 1
+            ? [{ id: "triples", op: "choose", competency: PERM, inputs: [n, 3], value: choose(n, 3) }]
+            : q === 2
+              ? [{ id: "triples", op: "choose", competency: PERM, inputs: [n, 3], value: choose(n, 3) }, { id: "collinear", op: "subtract", competency: PERM, inputs: [m, 3], value: choose(n, 3) - choose(m, 3) }]
+              : [{ id: "pairs", op: "choose", competency: PERM, inputs: [n, 2], value: choose(n, 2) }, { id: "collinear", op: "subtract", competency: PERM, inputs: [m, 2], value: choose(n, 2) - choose(m, 2) }, { id: "one-line", op: "add", competency: PERM, inputs: [1], value: geocAns(p) }];
+      return { steps, answer: geocAns(p) };
+    },
+    // independent: actual points; check every pair or triple (cross products for collinearity, adjacency on the polygon)
+    validate: ([q, n, m], v) => {
+      if (q <= 1) {
+        let c = 0;
+        if (q === 0) {
+          for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) if (j - i !== 1 && !(i === 0 && j === n - 1)) c++;
+        } else for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) for (let k = j + 1; k < n; k++) c++;
+        return v === c;
+      }
+      const P = geocPoints(n, m);
+      const cross = (a: number[], b: number[], c: number[]) => (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0]);
+      if (q === 2) {
+        let c = 0;
+        for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) for (let k = j + 1; k < n; k++) if (cross(P[i], P[j], P[k]) !== 0) c++;
+        return v === c;
+      }
+      const lines = new Set<string>();
+      for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+        const [x1, y1] = P[i];
+        const [x2, y2] = P[j];
+        let A = y2 - y1;
+        let Bb = x1 - x2;
+        let Cc = A * x1 + Bb * y1;
+        const g = gcd(gcd(A, Bb), Cc) || 1;
+        [A, Bb, Cc] = [A / g, Bb / g, Cc / g];
+        if (A < 0 || (A === 0 && Bb < 0)) [A, Bb, Cc] = [-A, -Bb, -Cc];
+        lines.add(`${A},${Bb},${Cc}`);
+      }
+      return v === lines.size;
+    },
+    bugs: ([q, n, m]) => {
+      const ans = geocAns([q, n, m]);
+      const out: Bug[] = [];
+      if (q === 0) {
+        out.push({ id: "sides-counted", kind: "conceptual", competency: PERM, says: `All ${sup(n)}C₂ = ${choose(n, 2)} segments were counted; ${n} of them are sides, not diagonals.`, predict: choose(n, 2) });
+        out.push({ id: "no-half", kind: "procedural", competency: PERM, says: `n(n − 3) = ${n * (n - 3)} counts each diagonal twice (once from each end); divide by 2.`, predict: n * (n - 3) });
+      }
+      if (q === 1) out.push({ id: "order-counted", kind: "conceptual", competency: PERM, says: "The three corners were counted in order; a triangle is the same whichever corner is named first, so use combinations.", predict: perm(n, 3) });
+      if (q === 2) {
+        out.push({ id: "collinear-ignored", kind: "conceptual", competency: PERM, says: `Every choice of 3 points was counted; the ${sup(m)}C₃ = ${choose(m, 3)} choices from the collinear points give no triangle.`, predict: choose(n, 3) });
+        out.push({ id: "remove-pairs", kind: "procedural", competency: PERM, says: `${sup(m)}C₂ was taken away; the choices that fail are the triples from the ${m} collinear points, ${sup(m)}C₃.`, predict: choose(n, 3) - choose(m, 2) });
+      }
+      if (q === 3) {
+        out.push({ id: "line-not-added", kind: "procedural", competency: PERM, says: `The ${sup(m)}C₂ pairs on the common line were removed, but that line itself must be counted once: add 1.`, predict: choose(n, 2) - choose(m, 2) });
+        out.push({ id: "collinear-ignored", kind: "conceptual", competency: PERM, says: `Every pair was counted as a separate line; all ${sup(m)}C₂ pairs of the collinear points give the same one line.`, predict: choose(n, 2) });
+      }
+      return out.filter((x) => x.predict !== ans);
+    },
+    variants: ([q, n, m]) => [[q, n + 1, m], [q, n, m + 1]].filter(geocOk),
+    explain: (s) => (s.id === "pairs" ? `Pairs of points: ${sup(Number(s.inputs[0]))}C₂ = ${s.value}` : s.id === "triples" ? `Triples of points: ${sup(Number(s.inputs[0]))}C₃ = ${s.value}` : s.id === "sides" ? `Remove the ${s.inputs[1]} sides: ${s.value}` : s.id === "collinear" ? `Remove the choices from the ${s.inputs[0]} collinear points: ${s.value}` : `Add back the one line through the collinear points: ${s.value}`),
+    domain: D_GEOC,
+    keep: geocOk,
+    difficulty: ([q]) => (q <= 1 ? 1 : q === 2 ? 2 : 3),
+    word: (p) => geocText(p, true),
+    teach: {
+      idea: "A segment needs 2 points and a triangle 3 non-collinear points, with no order, so they are counted with ⁿC₂ and ⁿC₃. Then remove what does not count: the sides (for diagonals), or the choices from collinear points.",
+      method: "Diagonals: ⁿC₂ − n = n(n − 3)/2. Triangles: ⁿC₃ − ᵐC₃. Lines: ⁿC₂ − ᵐC₂ + 1 (the collinear points give one line).",
+      alternatives: [
+        { id: "small", title: "Draw a small case", kind: "conceptual", text: ["Draw a pentagon and its diagonals: there are 5, and ⁵C₂ − 5 = 5.", "Draw 5 points with 3 on a line and count the triangles: ⁵C₃ − ³C₃ = 9."] },
+        { id: "from-a-vertex", title: "Count from one vertex", kind: "procedural", text: ["From each vertex of an n-gon, n − 3 diagonals start.", "n(n − 3) counts each diagonal from both ends, so divide by 2."] },
+      ],
+    },
+    limits: "Polygons up to 20 sides and up to 14 points with one set of collinear points.",
+  },
+  // ============================================================ order matters? selection and arrangement
+  {
+    id: "aomix",
+    arity: 4,
+    title: "Deciding whether order matters, and combining selection with arrangement",
+    competency: PERM,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, n, r, b]: q 0 a selection (order does not matter), 1 distinct roles (order matters), 2 choose b vowels of n and 2 consonants of r and arrange, 3 choose r of n and a chairperson
+    reject: (p) => (mixOk(p) ? null : "Selections, distinct roles, words from chosen letters, or a committee with a chairperson."),
+    prompt: (p) => mixText(p),
+    solve: (p) => {
+      const [q, n, r, b] = p;
+      const steps: Step[] =
+        q === 0
+          ? [{ id: "decide", op: "classify", competency: PERM, inputs: ["no order"], value: "combination" }, { id: "count", op: "choose", competency: PERM, inputs: [n, r], value: choose(n, r) }]
+          : q === 1
+            ? [{ id: "decide", op: "classify", competency: PERM, inputs: ["different roles"], value: "permutation" }, { id: "count", op: "arrange", competency: PERM, inputs: [n, r], value: perm(n, r) }]
+            : q === 2
+              ? [{ id: "select", op: "choose", competency: PERM, inputs: [choose(n, b), choose(r, 2)], value: choose(n, b) * choose(r, 2) }, { id: "arrange", op: "multiply", competency: PERM, inputs: [choose(n, b) * choose(r, 2), fact(b + 2)], value: mixAns(p) }]
+              : [{ id: "select", op: "choose", competency: PERM, inputs: [n, r], value: choose(n, r) }, { id: "chair", op: "multiply", competency: PERM, inputs: [choose(n, r), r], value: mixAns(p) }];
+      return { steps, answer: mixAns(p) };
+    },
+    // independent: list every outcome (ordered lists, sets, or (set, chair) pairs) and count
+    validate: ([q, n, r, b], v) => {
+      let c = 0;
+      const subsets = (N: number, k: number): number[][] => {
+        const out: number[][] = [];
+        const rec = (s: number, acc: number[]) => {
+          if (acc.length === k) return void out.push(acc);
+          for (let i = s; i < N; i++) rec(i + 1, [...acc, i]);
+        };
+        rec(0, []);
+        return out;
+      };
+      if (q === 0) c = subsets(n, r).length;
+      else if (q === 1) {
+        const rec = (used: number[]) => {
+          if (used.length === r) return void c++;
+          for (let i = 0; i < n; i++) if (!used.includes(i)) rec([...used, i]);
+        };
+        rec([]);
+      } else if (q === 2) {
+        const words = new Set<string>();
+        for (const vs of subsets(n, b)) for (const cs of subsets(r, 2)) for (const w of perms([...vs.map((x) => `v${x}`), ...cs.map((x) => `c${x}`)])) words.add(w.join(""));
+        c = words.size;
+      } else for (const s of subsets(n, r)) c += s.length;
+      return v === c;
+    },
+    bugs: (p) => {
+      const [q, n, r, b] = p;
+      const ans = mixAns(p);
+      const out: Bug[] = [];
+      if (q === 0) out.push({ id: "order-counted", kind: "conceptual", competency: PERM, says: "The students were counted in order; picking the same students in a different order gives the same group, so use ⁿCᵣ.", predict: perm(n, r) });
+      if (q === 1) out.push({ id: "order-ignored", kind: "conceptual", competency: PERM, says: "The roles were ignored; the posts are different, so swapping two people gives a different result and order matters (ⁿPᵣ).", predict: choose(n, r) });
+      if (q === 2) {
+        out.push({ id: "not-arranged", kind: "procedural", competency: PERM, says: `The letters were chosen but not arranged; each choice of ${b + 2} letters can be written in ${b + 2}! = ${fact(b + 2)} orders.`, predict: choose(n, b) * choose(r, 2) });
+        out.push({ id: "added", kind: "conceptual", competency: PERM, says: "The vowel choices and the consonant choices were added; both are needed, so they multiply.", predict: (choose(n, b) + choose(r, 2)) * fact(b + 2) });
+      }
+      if (q === 3) {
+        out.push({ id: "chair-forgotten", kind: "procedural", competency: PERM, says: `The chairperson was not chosen; each committee can pick its chairperson in ${r} ways.`, predict: choose(n, r) });
+        out.push({ id: "all-ordered", kind: "conceptual", competency: PERM, says: "All the members were arranged in order; only the chairperson is a special post, the others are not ordered.", predict: perm(n, r) });
+      }
+      return out.filter((x) => x.predict !== ans);
+    },
+    variants: ([q, n, r, b]) => [[q === 0 ? 1 : 0, n, Math.min(r, 3), b]].filter(mixOk),
+    explain: (s) => (s.id === "decide" ? `The wording means ${s.inputs[0]}: use a ${s.value}` : s.id === "count" ? `${sup(Number(s.inputs[0]))}${s.op === "choose" ? "C" : "P"}${sub(Number(s.inputs[1]))} = ${s.value}` : s.id === "select" ? (s.inputs.length === 2 && Number(s.inputs[1]) > 3 ? `Choose: ${s.value} selections` : `Choose: ${s.value} selections`) : s.id === "arrange" ? `Arrange each selection: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `Pick the chairperson: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
+    domain: D_MIX,
+    keep: mixOk,
+    difficulty: ([q]) => (q <= 1 ? 2 : 3),
+    word: (p) => mixText(p, true),
+    teach: {
+      idea: "Order matters when swapping two chosen things gives a different result (different posts, places, positions, a word); then count arrangements (ⁿPᵣ). If swapping gives the same result (a group, a team, a committee), count selections (ⁿCᵣ). Many problems first select, then arrange.",
+      method: "Ask: if I swap two of the chosen, is it a different outcome? Select with combinations, then multiply by the number of arrangements (or of ways to fill the special posts).",
+      alternatives: [
+        { id: "swap-test", title: "The swap test", kind: "conceptual", text: ["Imagine two chosen people swapping places.", "Different outcome: order matters (P). Same outcome: it does not (C)."] },
+        { id: "two-steps", title: "Select, then arrange", kind: "procedural", text: ["Step 1: choose the members (combinations, multiplied across groups).", "Step 2: arrange or assign posts to the chosen (r! or r ways); multiply."] },
+      ],
+    },
+    limits: "Groups of up to 12 with two-step problems; restrictions such as 'at least' are in the committee family.",
+  },
+  // ============================================================ arrangements: repetition, restrictions, circles, rank
+  {
+    id: "aoarr",
+    arity: 3,
+    title: "Arrangements with repetition, restrictions, around a circle, and the rank of a word",
+    competency: PERM,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, n, r]: q 0 r-letter codes from n letters with repetition; 1 n in a row, two together; 2 two apart; 3 round table; 4 necklace; 5 rank of WORDS[n]
+    reject: (p) => (arrOk(p) ? null : "Codes, rows with two people together or apart, circles, necklaces, or the rank of a word with different letters."),
+    prompt: (p) => arrText(p),
+    solve: (p) => {
+      const [q, n, r] = p;
+      if (q === 5) {
+        const L = WORDS[n].split("");
+        const counts = L.map((ch, i) => L.slice(i + 1).filter((c) => c < ch).length * fact(L.length - i - 1));
+        return { steps: [{ id: "before", op: "count", competency: PERM, inputs: counts, value: counts.reduce((a, b) => a + b, 0) }, { id: "rank", op: "add", competency: PERM, inputs: [1], value: rankOf(WORDS[n]) }], answer: rankOf(WORDS[n]) };
+      }
+      const steps: Step[] =
+        q === 0
+          ? [{ id: "power", op: "multiply", competency: PERM, inputs: [n, r], value: n ** r }]
+          : q === 1
+            ? [{ id: "block", op: "arrange", competency: PERM, inputs: [n - 1], value: fact(n - 1) }, { id: "inside", op: "multiply", competency: PERM, inputs: [fact(n - 1), 2], value: 2 * fact(n - 1) }]
+            : q === 2
+              ? [{ id: "all", op: "arrange", competency: PERM, inputs: [n], value: fact(n) }, { id: "together", op: "multiply", competency: PERM, inputs: [fact(n - 1), 2], value: 2 * fact(n - 1) }, { id: "apart", op: "subtract", competency: PERM, inputs: [fact(n), 2 * fact(n - 1)], value: arrAns(p) }]
+              : [{ id: "circle", op: "arrange", competency: PERM, inputs: [n - 1], value: fact(n - 1) }, ...(q === 4 ? [{ id: "flip", op: "divide", competency: PERM, inputs: [fact(n - 1), 2], value: arrAns(p) } as Step] : [])];
+      return { steps, answer: arrAns(p) };
+    },
+    // independent: list the arrangements and count them (rows, rotations and reflections removed by a canonical form)
+    validate: ([q, n, r], v) => {
+      if (q === 5) {
+        const all = [...new Set(perms(WORDS[n].split("")).map((x) => x.join("")))].sort();
+        return v === all.indexOf(WORDS[n]) + 1;
+      }
+      if (q === 0) {
+        let c = 0;
+        const rec = (len: number) => {
+          if (len === r) return void c++;
+          for (let i = 0; i < n; i++) rec(len + 1);
+        };
+        rec(0);
+        return v === c;
+      }
+      const ps = perms(Array.from({ length: n }, (_, i) => i));
+      if (q === 1 || q === 2) {
+        const adj = (x: number[]) => Math.abs(x.indexOf(0) - x.indexOf(1)) === 1;
+        return v === ps.filter((x) => (q === 1 ? adj(x) : !adj(x))).length;
+      }
+      const canon = (x: number[]) => {
+        const forms: string[] = [];
+        for (let s = 0; s < n; s++) {
+          const rot = [...x.slice(s), ...x.slice(0, s)];
+          forms.push(rot.join(","));
+          if (q === 4) forms.push([...rot].reverse().join(","));
+        }
+        return forms.sort()[0];
+      };
+      return v === new Set(ps.map(canon)).size;
+    },
+    bugs: ([q, n, r]) => {
+      const ans = arrAns([q, n, r]);
+      const out: Bug[] = [];
+      if (q === 0) {
+        if (r <= n) out.push({ id: "no-repetition", kind: "conceptual", competency: PERM, says: "Each letter was used at most once; repetition is allowed, so every place has all the letters to choose from.", predict: perm(n, r) });
+        out.push({ id: "power-swapped", kind: "procedural", competency: EXPN, says: `${r}${sup(n)} was worked out; ${r} places with ${n} choices each give ${n}${sup(r)}.`, predict: r ** n });
+      }
+      if (q === 1) out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: "The two people inside the block were not arranged; they can stand in 2 orders, so multiply by 2.", predict: fact(n - 1) });
+      if (q === 2) {
+        out.push({ id: "pair-not-swapped", kind: "procedural", competency: PERM, says: "The 'together' arrangements were counted without the 2 orders of the pair; there are 2 × (n − 1)! of them.", predict: fact(n) - fact(n - 1) });
+        out.push({ id: "together-given", kind: "conceptual", competency: PERM, says: "The number of arrangements with the two TOGETHER was given; 'not together' is all arrangements minus those.", predict: 2 * fact(n - 1) });
+      }
+      if (q === 3) out.push({ id: "row-count", kind: "conceptual", competency: PERM, says: `${n}! counts rows; around a table, turning everyone one seat gives the same seating, so fix one person: (${n} − 1)!.`, predict: fact(n) });
+      if (q === 4) {
+        out.push({ id: "flip-ignored", kind: "conceptual", competency: PERM, says: "The circle count (n − 1)! was given; a necklace can be turned over, which pairs up the arrangements, so divide by 2.", predict: fact(n - 1) });
+        out.push({ id: "row-count", kind: "conceptual", competency: PERM, says: `${n}! counts arrangements in a row; on a necklace, turning and flipping do not give new necklaces.`, predict: fact(n) });
+      }
+      if (q === 5) {
+        out.push({ id: "words-before", kind: "procedural", competency: PERM, says: "The number of words before it was given; its rank is one more than that.", predict: ans - 1 });
+        const L = WORDS[n].split("");
+        const wrong = 1 + L.reduce((s, ch, i) => s + L.filter((c) => c < ch).length * fact(L.length - i - 1), 0);
+        if (wrong !== ans) out.push({ id: "used-letters-counted", kind: "procedural", competency: PERM, says: "Letters already used were counted again; at each place only the letters not yet used, and smaller than the word's letter, start earlier words.", predict: wrong });
+      }
+      return out.filter((x) => x.predict !== ans && (x.predict as number) > 0);
+    },
+    variants: ([q, n, r]) => [[q, n + 1, r]].filter(arrOk),
+    explain: (s) => (s.id === "power" ? `${s.inputs[1]} places with ${s.inputs[0]} choices each: ${s.inputs[0]}${sup(Number(s.inputs[1]))} = ${s.value}` : s.id === "block" ? `Treat the two as one block: ${s.inputs[0]} things in a row, ${s.inputs[0]}! = ${s.value}` : s.id === "inside" ? `The pair can swap: × 2 = ${s.value}` : s.id === "all" ? `All arrangements: ${s.inputs[0]}! = ${s.value}` : s.id === "together" ? `Arrangements with the two together: 2 × ${s.inputs[0]} = ${s.value}` : s.id === "apart" ? `Not together: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : s.id === "circle" ? `Fix one and arrange the rest: (${Number(s.inputs[0]) + 1} − 1)! = ${s.value}` : s.id === "flip" ? `Turning over gives the same: ${s.inputs[0]} ÷ 2 = ${s.value}` : s.id === "before" ? `Words before it, letter by letter: ${(s.inputs as number[]).join(" + ")} = ${s.value}` : `Its rank is ${s.value}`),
+    domain: D_ARR,
+    keep: arrOk,
+    difficulty: ([q]) => (q === 0 || q === 3 ? 1 : q === 5 ? 3 : 2),
+    word: (p) => arrText(p, true),
+    teach: {
+      idea: "With repetition each place has all n choices (nʳ). For 'together', glue the two into a block; for 'not together', subtract. Around a circle only relative positions count: (n − 1)!, and a necklace can also be flipped: (n − 1)!/2. A word's rank is 1 + the number of arrangements that come before it in dictionary order.",
+      method: "Name the restriction, count with the matching rule, and check the answer with a very small case. For a rank, go letter by letter: (number of unused smaller letters) × (factorial of the places left), add them up and add 1.",
+      alternatives: [
+        { id: "small-case", title: "Try a small case", kind: "conceptual", text: ["Three people A, B, C around a table: ABC, ACB — only 2 = (3 − 1)!.", "Listing small cases shows why the rule works."] },
+        { id: "rank-table", title: "A rank table", kind: "procedural", text: ["Write the word's letters in alphabetical order.", "For each position, count the unused letters that come before the word's letter and multiply by the factorial of the positions left."] },
+      ],
+    },
+    limits: "Groups up to 9 and words of 4 to 6 different letters; words with repeated letters are left out.",
+  },
+  // ============================================================ Pascal's triangle
+  {
+    id: "aopas",
+    arity: 3,
+    title: "Building Pascal's triangle and reading binomial coefficients from it",
+    competency: BIN,
+    type: "integer",
+    mc: true,
+    parse: none,
+    // [q, n, r]: q 0 entry r of row n + 1 from row n; 1 coefficient of aⁿ⁻ʳbʳ from row n; 2 the sum of row n
+    reject: (p) => (pasOk(p) ? null : "Rows 3 to 12 of Pascal's triangle."),
+    prompt: pasText,
+    solve: (p) => {
+      const [q, n, r] = p;
+      const steps: Step[] =
+        q === 0
+          ? [{ id: "neighbours", op: "add", competency: BIN, inputs: [choose(n, r - 1), choose(n, r)], value: choose(n + 1, r) }]
+          : q === 1
+            ? [{ id: "position", op: "read", competency: BIN, inputs: [n, r], value: choose(n, r) }]
+            : [{ id: "sum", op: "evaluate", competency: BIN, inputs: [n], value: 2 ** n }];
+      return { steps, answer: pasAns(p) };
+    },
+    // independent: build the triangle row by row by adding neighbours; for the coefficient, expand (a + b)ⁿ by repeated multiplication
+    validate: ([q, n, r], v) => {
+      let row = [1];
+      const rows = [row];
+      for (let i = 1; i <= n + 1; i++) {
+        row = row.map((x, j) => x + (j > 0 ? row[j - 1] : 0)).concat([1]);
+        rows.push(row);
+      }
+      if (q === 0) return v === rows[n + 1][r];
+      if (q === 1) {
+        let c = [1];
+        for (let i = 0; i < n; i++) c = Array.from({ length: c.length + 1 }, (_, j) => (j < c.length ? c[j] : 0) + (j > 0 ? c[j - 1] : 0));
+        return v === c[r];
+      }
+      return v === rows[n].reduce((a, b) => a + b, 0);
+    },
+    bugs: ([q, n, r]) => {
+      const ans = pasAns([q, n, r]);
+      const out: Bug[] = [];
+      if (q === 0) {
+        out.push({ id: "copied", kind: "conceptual", competency: BIN, says: "The entry in the same position of the given row was copied; each new entry is the SUM of the two entries above it.", predict: choose(n, r) });
+        if (r >= 2) out.push({ id: "wrong-pair", kind: "procedural", competency: BIN, says: `The wrong pair of neighbours was added; position ${r} of the new row is the sum of positions ${r - 1} and ${r} of the row above.`, predict: choose(n, r - 1) + choose(n, r - 2) });
+      }
+      if (q === 1) {
+        out.push({ id: "position-off", kind: "procedural", competency: BIN, says: `The positions were counted from 1; the coefficient of a${sup(n - r)}b${r === 1 ? "" : sup(r)} is in position ${r}, counting the first 1 as position 0.`, predict: choose(n, r - 1) });
+        out.push({ id: "power-of-a", kind: "conceptual", competency: BIN, says: `The power of a (${n - r}) was used as the position; that also works only from the other end — check by counting the power of b.`, predict: choose(n, Math.min(n, n - r + 1)) });
+      }
+      if (q === 2) {
+        out.push({ id: "count-entries", kind: "conceptual", competency: BIN, says: `The number of entries (${n + 1}) was given; the question asks for their sum.`, predict: n + 1 });
+        out.push({ id: "double-n", kind: "conceptual", competency: BIN, says: `The sum was taken as 2 × ${n}; each row's sum is DOUBLE the sum of the row before, so it is 2${sup(n)}.`, predict: 2 * n });
+      }
+      return out.filter((x) => x.predict !== ans);
+    },
+    variants: ([q, n, r]) => [[q, n + 1, r], [q, n, r + 1]].filter(pasOk),
+    explain: (s) => (s.id === "neighbours" ? `Add the two entries above: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "position" ? `The coefficient is in position ${s.inputs[1]} of row ${s.inputs[0]}: ${s.value}` : `Each row's sum doubles: 2${sup(Number(s.inputs[0]))} = ${s.value}`),
+    domain: D_PAS,
+    keep: pasOk,
+    difficulty: ([q, n]) => (q === 0 && n <= 6 ? 1 : q === 2 ? 2 : 2),
+    teach: {
+      idea: "Pascal's triangle starts with 1; each row starts and ends with 1, and every other entry is the sum of the two entries above it. Row n gives the coefficients ⁿC₀, ⁿC₁, …, ⁿCₙ of (a + b)ⁿ.",
+      method: "To build the next row, add each pair of neighbours and put a 1 at each end. The coefficient of aⁿ⁻ʳbʳ is the entry in position r (the first 1 is position 0).",
+      alternatives: [
+        { id: "triangle", title: "Write the triangle out", kind: "procedural", text: ["Write rows 0, 1, 2, … down the page, each one centred under the last.", "Every entry is the sum of the two diagonally above it."], visual: ([, n]) => ({ type: "table", head: ["row", "entries"], rows: Array.from({ length: Math.min(n, 7) + 1 }, (_, i) => [String(i), pasRow(i).join("  ")]) }) },
+        { id: "paths", title: "Why it gives binomial coefficients", kind: "conceptual", text: ["Expanding (a + b)ⁿ⁺¹ = (a + b)ⁿ(a + b): each term of the new row comes from two terms of the old one.", "That is exactly the 'add the two above' rule."] },
+      ],
+    },
+    limits: "Rows 3 to 12; the binomial coefficient families cover larger rows by formula.",
   },
 ];
 B15.push(...NEW15);

@@ -1125,3 +1125,1198 @@ export const B07: Def[] = [
     limits: "Only the automatically marked part of the competency: choosing the counterexample among five given numbers for four claims; saying whether a claim is always, sometimes or never true, and justifying it, needs written reasoning that an educator marks.",
   },
 ];
+
+// ================================================================ gap@1 additions (fractions on a number line, co-prime
+// numbers, writing and reading expressions, terms, measurement word problems, LCM of three numbers, HCF/LCM word
+// problems, HCF × LCM = product, conversions between fractions, decimals and percentages, primality tests, Euclid's
+// division algorithm, HCF and LCM from prime factorisations, kinds of fractions, expression trees)
+
+const PERC = "MATH.number.percentage";
+const EUC = "MATH.number.euclid-algorithm";
+const TREE = "MATH.algebra.expression-trees";
+const PF = "MATH.number.prime-factorisation";
+const Bg = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Bug["predict"]): Bug => ({ id, kind, competency, says, predict });
+const ordered = <T,>(salt: string, xs: T[]) => [...xs].sort((a, b) => hm(salt + String(a)) - hm(salt + String(b)) || (String(a) < String(b) ? -1 : 1));
+const mixedOf = (n: number, d: number) => {
+  const w = Math.floor(n / d);
+  const r = n % d;
+  const g = gcd(r, d);
+  return r === 0 ? String(w) : w === 0 ? `${r / g}/${d / g}` : `${w} ${r / g}/${d / g}`;
+};
+/** Read a mixed number, fraction or whole number written as text, as an exact [numerator, denominator]. */
+const readMixed = (v: Value): [number, number] | null => {
+  const m = String(v).trim().replace(/−/g, "-").match(/^(\d+)(?:\s+(\d+)\/(\d+))?$|^(\d+)\/(\d+)$/);
+  if (!m) return null;
+  if (m[4] !== undefined) return [Number(m[4]), Number(m[5])];
+  return m[2] === undefined ? [Number(m[1]), 1] : [Number(m[1]) * Number(m[3]) + Number(m[2]), Number(m[3])];
+};
+/** The seeds (0 … n − 1) whose problem differs from every earlier seed's (distinct@1), worked out once. */
+const firstSeeds = (() => {
+  const memo = new Map<string, Set<number>>();
+  return (fam: string, n: number, sig: (s: number) => string) => {
+    if (!memo.has(fam)) {
+      const seen = new Set<string>();
+      const ok = new Set<number>();
+      for (let s = 0; s < n; s++) {
+        const k = sig(s);
+        if (!seen.has(k)) {
+          seen.add(k);
+          ok.add(s);
+        }
+      }
+      memo.set(fam, ok);
+    }
+    return memo.get(fam)!;
+  };
+})();
+const lcm3 = (a: number, b: number, c: number) => lcm(lcm(a, b), c);
+const evalText = (t: string) => {
+  try {
+    return evaluate(parse(t.replace(/×/g, "*").replace(/÷/g, "/").replace(/−/g, "-")), {});
+  } catch {
+    return NaN;
+  }
+};
+
+// ---------------------------------------------------------------- fractions beyond 1 on a number line (agnl)
+const nlOk = ([n, d]: number[]) => d >= 2 && d <= 8 && n > d && n < 5 * d && n <= 32 && n % d !== 0;
+
+// ---------------------------------------------------------------- co-prime pairs (agcop)
+type Pair = [number, number];
+function copSet(seed: number): { pairs: Pair[]; right: number; odd: number; prime: number } {
+  const r = (k: number) => hm(`agcop:${seed}:${k}`);
+  // the co-prime pair: two composite numbers with no common factor (so it cannot be spotted by "one of them is prime")
+  const comp = [4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 25, 26, 27, 28, 32, 33, 34, 35, 38, 39, 49, 51, 55];
+  let cp: Pair = [8, 15];
+  for (let k = 0; k < 200; k++) {
+    const a = comp[r(k) % comp.length];
+    const b = comp[r(k + 500) % comp.length];
+    if (a < b && gcd(a, b) === 1) {
+      cp = [a, b];
+      break;
+    }
+  }
+  // two odd numbers that share a factor (looks co-prime to someone who thinks odd numbers have no common factor)
+  const oddP: Pair[] = [[9, 15], [15, 25], [21, 35], [9, 21], [15, 21], [25, 35], [27, 45], [21, 49], [33, 55], [35, 45], [39, 65], [45, 75], [9, 33], [15, 27], [35, 55], [21, 33]];
+  // a prime and one of its multiples (looks co-prime to someone who thinks a prime is co-prime to every number)
+  const primeP: Pair[] = [[7, 21], [5, 35], [3, 27], [11, 33], [13, 39], [7, 49], [5, 45], [3, 51], [11, 55], [13, 26], [17, 51], [7, 42]];
+  const evenP: Pair[] = [[12, 18], [14, 20], [16, 22], [6, 26], [10, 24], [18, 30], [8, 28], [20, 34], [22, 36], [24, 38]];
+  const o = oddP[r(1) % oddP.length];
+  const pr = primeP[r(2) % primeP.length];
+  const ev = evenP[r(3) % evenP.length];
+  const pairs = ordered(`agcop:${seed}`, [cp, o, pr, ev].map((p) => p.join(","))).map((s) => s.split(",").map(Number) as Pair);
+  const at = (p: Pair) => pairs.findIndex((q) => q[0] === p[0] && q[1] === p[1]);
+  return { pairs, right: at(cp), odd: at(o), prime: at(pr) };
+}
+
+// ---------------------------------------------------------------- writing an expression for a situation (agwrite)
+/** For each situation (the agbod everyday forms), the right expression and two that a learner often writes instead. */
+const WRITE: ((a: number, b: number, c: number) => string[])[] = [
+  (a, b, c) => [`${a} + ${b} × ${c}`, `(${a} + ${b}) × ${c}`, `${a} × ${b} + ${c}`, `${a} + ${b} + ${c}`],
+  (a, b, c) => [`${a} − ${b} × ${c}`, `(${a} − ${b}) × ${c}`, `${a} − ${b} − ${c}`, `${a} − ${b} + ${c}`],
+  (a, b, c) => [`(${a} + ${b}) × ${c}`, `${a} + ${b} × ${c}`, `${a} × ${b} + ${c}`, `${a} + ${b} + ${c}`],
+  (a, b, c) => [`${a} − ${b} + ${c}`, `${a} − (${b} + ${c})`, `${a} + ${b} − ${c}`, `${a} − ${b} − ${c}`],
+  (a, b, c) => [`${a} + ${b} ÷ ${c}`, `(${a} + ${b}) ÷ ${c}`, `${a} + ${c} ÷ ${b}`, `${a} × ${b} ÷ ${c}`],
+  (a, b, c) => [`${a} × (${b} − ${c})`, `${a} × ${b} − ${c}`, `${a} × ${c} − ${b}`, `(${a} − ${c}) × ${b}`],
+];
+/** The story's answer by acting it out step by step (independent of any expression). */
+function story(f: number, a: number, b: number, c: number): number {
+  let n = a;
+  if (f === 0) for (let i = 0; i < b; i++) n += c;
+  else if (f === 1) for (let i = 0; i < b; i++) n -= c;
+  else if (f === 2) {
+    n = 0;
+    for (let i = 0; i < c; i++) n += a + b;
+  } else if (f === 3) n = a - b + c;
+  else if (f === 4) {
+    let share = 0;
+    for (let left = b; left >= c; left -= c) share++;
+    n = a + share;
+  } else {
+    n = 0;
+    for (let i = 0; i < a; i++) n += b - c;
+  }
+  return n;
+}
+const writeOk = ([f, a, b, c]: number[]) => {
+  if (f < 0 || f > 5 || a < 2 || a > 40 || b < 2 || b > 12 || c < 2 || c > 12) return false;
+  if ((f === 1 && a <= b * c) || (f === 3 && a <= b + c) || (f === 4 && b % c !== 0) || (f === 5 && b <= c)) return false;
+  const opts = WRITE[f](a, b, c);
+  const vals = opts.map(evalText);
+  // every wrong expression must give a different value (so only the right one fits the story) and stay a whole number ≥ 0
+  return Number.isInteger(vals[0]) && vals[0] >= 0 && vals.every((v, i) => Number.isFinite(v) && (i === 0 || Math.abs(v - vals[0]) > 1e-9)) && new Set(opts).size === 4;
+};
+
+// ---------------------------------------------------------------- terms of an expression (agterm)
+type Term = { text: string; value: number; nums: number };
+/** An expression of 3 or 4 terms for a seed: whole numbers, products, quotients and bracketed products. */
+function termExpr(seed: number): { terms: Term[]; signs: string[]; text: string } {
+  const r = (k: number) => hm(`agterm:${seed}:${k}`);
+  const n = 3 + (r(0) % 2);
+  const terms: Term[] = [];
+  for (let i = 0; i < n; i++) {
+    const kind = r(10 + i) % 4;
+    const p = 2 + (r(20 + i) % 9);
+    const q = 2 + (r(30 + i) % 8);
+    const s = 1 + (r(40 + i) % 6);
+    if (kind === 0) terms.push({ text: String(p + q * 3), value: p + q * 3, nums: 1 });
+    else if (kind === 1) terms.push({ text: `${p} × ${q}`, value: p * q, nums: 2 });
+    else if (kind === 2) terms.push({ text: `${p * q} ÷ ${q}`, value: p, nums: 2 });
+    else terms.push({ text: `(${p} + ${s}) × ${q}`, value: (p + s) * q, nums: 3 });
+  }
+  const signs = ["", ...Array.from({ length: n - 1 }, (_, i) => (r(50 + i) % 3 === 0 ? "−" : "+"))];
+  // keep the value positive: the first term is made the largest
+  terms.sort((x, y) => y.value - x.value);
+  const text = terms.map((t, i) => (i === 0 ? t.text : `${signs[i]} ${t.text}`)).join(" ");
+  return { terms, signs, text };
+}
+/** Split an expression at the + and − signs that are not inside brackets (an independent reading of its terms). */
+function splitTerms(t: string): string[] {
+  const out: string[] = [];
+  let depth = 0;
+  let cur = "";
+  for (const ch of t) {
+    if (ch === "(") depth++;
+    if (ch === ")") depth--;
+    if ((ch === "+" || ch === "−") && depth === 0 && cur.trim()) {
+      out.push(cur.trim());
+      cur = ch === "−" ? "−" : "";
+      continue;
+    }
+    cur += ch;
+  }
+  out.push(cur.trim());
+  return out;
+}
+const termOk = ([seed, ask]: number[]) => {
+  if (seed < 0 || seed > 149 || ask < 0 || ask > 1) return false;
+  const e = termExpr(seed);
+  return e.terms.some((t) => t.nums > 1) && (ask === 0 || e.signs.slice(1).includes("−")) && evalText(e.text) > 0;
+};
+/** For ask 1: the term asked about (the first one with a minus sign in front). */
+const termAsked = (seed: number) => termExpr(seed).signs.findIndex((s, i) => i > 0 && s === "−");
+
+// ---------------------------------------------------------------- measurement with mixed units (agmeas)
+const MEAS = [
+  { big: "m", small: "cm", f: 100, thing: (A: string, y: number, op: number, nm: string) => (op ? `${nm} has a ribbon ${A} m long and cuts off ${y} cm to tie a gift. How long is the ribbon left, in metres?` : `${nm} joins a rope ${A} m long to another rope ${y} cm long. How long is the joined rope, in metres?`) },
+  { big: "kg", small: "g", f: 1000, thing: (A: string, y: number, op: number, nm: string) => (op ? `A sack holds ${A} kg of rice. ${nm} takes out ${y} g to cook. How much rice is left in the sack, in kg?` : `${nm} buys ${A} kg of tomatoes and ${y} g of beans. What is the total mass, in kg?`) },
+  { big: "km", small: "m", f: 1000, thing: (A: string, y: number, op: number, nm: string) => (op ? `The way from ${nm}'s house to the school is ${A} km. ${nm} has already walked ${y} m. How far is there still to go, in km?` : `${nm} cycles ${A} km to the market and then ${y} m more to the library. How far does ${nm} cycle altogether, in km?`) },
+  { big: "L", small: "mL", f: 1000, thing: (A: string, y: number, op: number, nm: string) => (op ? `A can holds ${A} L of milk. ${nm} pours out ${y} mL for tea. How much milk is left, in litres?` : `${nm} pours ${A} L of water into a bucket and then adds ${y} mL more. How much water is in the bucket, in litres?`) },
+];
+// [ctx, A, y, op]: A tenths of the big unit (1.1 to 9.9), y × 25 of the small unit (cm) or y × 50 (g, m, mL)
+const measY = (ctx: number, y: number) => y * (ctx === 0 ? 5 : 50);
+const measOk = ([ctx, A, y, op]: number[]) => {
+  if (ctx < 0 || ctx > 3 || A < 11 || A > 99 || A % 10 === 0 || y < 1 || y > 19 || (op !== 0 && op !== 1)) return false;
+  const f = MEAS[ctx].f;
+  const big = (A * f) / 10;
+  const sm = measY(ctx, y);
+  return sm < f && (op === 0 || big > sm);
+};
+const measAns = ([ctx, A, y, op]: number[]) => {
+  const f = MEAS[ctx].f;
+  const sm = measY(ctx, y);
+  const tot = (A * f) / 10 + (op ? -sm : sm);
+  return { units: tot, f, k: f === 100 ? 2 : 3 };
+};
+
+// ---------------------------------------------------------------- HCF and LCM in word problems (aghlw)
+const HLW = [
+  { hcf: true, text: (a: number, b: number, nm: string) => `${nm} has ${a} laddoos and ${b} jalebis for a party. All the plates must be the same: each plate gets the same number of laddoos and the same number of jalebis, with nothing left over. What is the greatest number of plates ${nm} can fill?` },
+  { hcf: true, text: (a: number, b: number) => `Two pieces of cloth are ${a} cm and ${b} cm long. A tailor cuts both into pieces that are all the same length, as long as possible, with nothing left over. How long is each piece, in cm?` },
+  { hcf: true, text: (a: number, b: number) => `A school has ${a} girls and ${b} boys going on a trip. They must be put into groups of the same size, each group all girls or all boys. What is the largest possible group size?` },
+  { hcf: false, text: (a: number, b: number) => `At a railway junction, one train arrives every ${a} minutes and another every ${b} minutes. Both arrive together at 6 a.m. After how many minutes will they next arrive together?` },
+  { hcf: false, text: (a: number, b: number, nm: string) => `${nm} wants to buy the same number of pencils and erasers. Pencils come in packets of ${a} and erasers in packets of ${b}. What is the smallest number of each ${nm} can buy, using full packets?` },
+  { hcf: false, text: (a: number, b: number) => `Two runners go round a track. One takes ${a} minutes for a round and the other ${b} minutes. They start together. After how many minutes are they next at the starting point together?` },
+];
+const hlwOk = ([ctx, a, b]: number[]) => {
+  if (ctx < 0 || ctx > 5 || a >= b) return false;
+  if (HLW[ctx].hcf) return a >= 12 && b <= 96 && gcd(a, b) >= 3 && gcd(a, b) < a && b % a !== 0;
+  return a >= 2 && b <= 30 && gcd(a, b) > 1 && b % a !== 0 && lcm(a, b) <= 180;
+};
+
+// ---------------------------------------------------------------- HCF × LCM = product (aghlp)
+// [mode, g, x, y]: the numbers are g·x and g·y (x < y co-prime); mode 0: find the LCM; 1: find the second number; 2: find the HCF
+const hlpOk = ([mode, g, x, y]: number[]) => mode >= 0 && mode <= 2 && g >= 2 && g <= 15 && x >= 1 && x < y && y <= 12 && gcd(x, y) === 1 && g * y <= 120 && !(x === 1 && mode === 2);
+
+// ---------------------------------------------------------------- percent and decimal to fraction (agpfrac), fraction to decimal or percent (agfdec)
+/** [mode, n, d]: mode 0 the percentage 100n/d %, mode 1 the decimal n/d; answer n/d in its simplest form (n/d reduced). */
+const PFD = [2, 4, 5, 8, 10, 16, 20, 25, 40, 50];
+const pfOk = ([mode, n, d]: number[]) => {
+  if (mode < 0 || mode > 1 || !PFD.includes(d) || n < 1 || gcd(n, d) !== 1 || n === d) return false;
+  if (mode === 0) return n < 2 * d && ((100 * n) % d === 0 || (1000 * n) % d === 0) && d !== 2;
+  return n < d && d !== 2 && d !== 10;
+};
+const pfShown = ([mode, n, d]: number[]) => (mode === 0 ? `${String((100 * n) / d)}%` : String(n / d));
+const fdOk = ([mode, n, d]: number[]) => (mode === 0 || mode === 1) && PFD.includes(d) && d !== 2 && d !== 10 && n >= 1 && n < 2 * d && n !== d && gcd(n, d) === 1;
+/** The decimal of n/d by long division, digit by digit (exact for these denominators). */
+function longDiv(n: number, d: number): string {
+  const w = Math.floor(n / d);
+  let r = n % d;
+  let out = "";
+  for (let i = 0; i < 6 && r; i++) {
+    r *= 10;
+    out += String(Math.floor(r / d));
+    r %= d;
+  }
+  return out ? `${w}.${out}` : String(w);
+}
+function fdOpts([mode, n, d]: number[]) {
+  const dec = longDiv(n, d);
+  const right = mode === 0 ? dec : `${String(Number(dec) * 100).replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "")}%`;
+  const asDigits = mode === 0 ? `${n}.${d}` : `${n}${d}%`;
+  const flip = mode === 0 ? longDiv(d, n).slice(0, 5) : `${d}.${n}%`;
+  const tenth = mode === 0 ? String(n / 10) : `${n}%`;
+  const near = mode === 0 ? String(Math.round((n / d) * 100) / 100 + 0.01) : `${Math.round((100 * n) / d) + 1}%`;
+  const set: string[] = [];
+  for (const o of [right, asDigits, flip, tenth, near]) if (!set.includes(o) && set.length < 4) set.push(o);
+  return { opts: ordered(`agfdec:${mode},${n},${d}`, set), right, asDigits, flip };
+}
+
+// ---------------------------------------------------------------- testing primality (agptest)
+const isPr = (n: number) => {
+  if (n < 2) return false;
+  for (let k = 2; k < n; k++) if (n % k === 0) return false;
+  return true;
+};
+const spf = (n: number) => {
+  for (let p = 2; p * p <= n; p++) if (n % p === 0) return p;
+  return n;
+};
+const ptOk = ([mode, n]: number[]) => (mode === 0 ? n >= 50 && n <= 999 && n % 2 === 1 && n % 5 !== 0 : mode === 1 ? n >= 101 && n <= 999 && n % 2 === 1 && n % 3 !== 0 && n % 5 !== 0 && (spf(n) >= 7 || isPr(n)) : false);
+const lastPrimeTest = (n: number) => {
+  let best = 2;
+  for (let p = 2; p * p <= n; p++) if (spf(p) === p) best = p;
+  return best;
+};
+
+// ---------------------------------------------------------------- Euclid's division algorithm (agediv)
+function euclidSteps(a: number, b: number): { a: number; b: number; q: number; r: number }[] {
+  const out = [];
+  let [x, y] = [a, b];
+  while (y) {
+    out.push({ a: x, b: y, q: Math.floor(x / y), r: x % y });
+    [x, y] = [y, x % y];
+  }
+  return out;
+}
+const edOk = ([mode, a, b]: number[]) => mode >= 0 && mode <= 1 && b >= 20 && a > b && a <= 999 && a % b !== 0 && euclidSteps(a, b).length >= 3 && euclidSteps(a, b).length <= 6;
+
+// ---------------------------------------------------------------- HCF and LCM from prime factorisations (agfta)
+const PR3 = [2, 3, 5, 7];
+/** [ask, e]: e encodes the exponents of 2, 3, 5, 7 in two numbers (0 … 3 each); ask 0 the HCF, 1 the LCM. */
+const ftaExp = (e: number) => {
+  const xs: number[] = [];
+  let k = e;
+  for (let i = 0; i < 8; i++) {
+    xs.push(k % 4);
+    k = Math.floor(k / 4);
+  }
+  return { a: xs.slice(0, 4), b: xs.slice(4) };
+};
+const fromExp = (ex: number[]) => ex.reduce((v, k, i) => v * PR3[i] ** k, 1);
+const ftaText = (ex: number[]) =>
+  ex
+    .map((k, i) => (k === 0 ? "" : k === 1 ? String(PR3[i]) : `${PR3[i]}${"⁰¹²³"[k]}`))
+    .filter(Boolean)
+    .join(" × ");
+const ftaOk = ([ask, e]: number[]) => {
+  if (ask < 0 || ask > 1 || e < 0 || e >= 65536) return false;
+  const { a, b } = ftaExp(e);
+  const A = fromExp(a);
+  const Bn = fromExp(b);
+  const used = a.filter((x) => x).length >= 2 && b.filter((x) => x).length >= 2;
+  // two different numbers up to 5000 sharing at least one prime, each with at least two primes, neither dividing the other,
+  // and the 7s kept small
+  return used && A !== Bn && A <= 5000 && Bn <= 5000 && gcd(A, Bn) > 1 && A % Bn !== 0 && Bn % A !== 0 && a[3] + b[3] <= 2 && a.some((x, i) => x !== b[i] && x && b[i]);
+};
+
+// ---------------------------------------------------------------- kinds of fractions (agclass)
+const FKIND = ["a proper fraction", "an improper fraction", "a mixed number"];
+const classOk = ([form, n, d]: number[]) => d >= 2 && d <= 12 && n >= 1 && (form === 0 ? n < d : form === 1 ? n >= d && n <= 3 * d : form === 2 ? n < d && gcd(n, d) === 1 : false) && (form === 2 || gcd(n, d) === 1 || n === d);
+const classText = ([form, n, d]: number[]) => (form === 2 ? `${1 + ((n + d) % 4)} ${n}/${d}` : `${n}/${d}`);
+
+// ---------------------------------------------------------------- expression trees (agtree)
+type TNode = { op: string; l: TNode | number; r: TNode | number } | number;
+const OPS = ["+", "−", "×"];
+function treeOf(shape: number, seed: number): TNode {
+  const r = (k: number) => hm(`agtree:${shape}:${seed}:${k}`);
+  const num = (k: number) => 2 + (r(k) % 9);
+  const op = (k: number) => OPS[r(k) % 3];
+  const leaf = (k: number): TNode => ({ op: op(k), l: num(k + 1) + (op(k) === "−" ? 9 : 0), r: num(k + 2) });
+  if (shape === 0) return { op: op(10), l: leaf(20), r: num(11) };
+  if (shape === 1) return { op: op(10), l: num(11) + 20, r: leaf(30) };
+  return { op: op(10), l: leaf(20), r: leaf(30) };
+}
+const tval = (t: TNode): number => (typeof t === "number" ? t : t.op === "+" ? tval(t.l) + tval(t.r) : t.op === "−" ? tval(t.l) - tval(t.r) : tval(t.l) * tval(t.r));
+/** The expression the tree stands for, with brackets round every branch that is an operation (as a learner writes it). */
+const tbr = (t: TNode, top = true): string => (typeof t === "number" ? String(t) : top ? `${tbr(t.l, false)} ${t.op} ${tbr(t.r, false)}` : `(${tbr(t.l, false)} ${t.op} ${tbr(t.r, false)})`);
+/** The tree read flat, left to right, with no brackets. */
+const tflat = (t: TNode): string => (typeof t === "number" ? String(t) : `${tflat(t.l)} ${t.op} ${tflat(t.r)}`);
+const leftToRight = (s: string) => {
+  const tok = s.split(" ");
+  let v = Number(tok[0]);
+  for (let i = 1; i < tok.length; i += 2) v = tok[i] === "+" ? v + Number(tok[i + 1]) : tok[i] === "−" ? v - Number(tok[i + 1]) : v * Number(tok[i + 1]);
+  return v;
+};
+function treeTable(t: TNode): Visual {
+  const rows: string[][] = [];
+  const names = ["the top", "box P", "box Q"];
+  let next = 1;
+  const visit = (n: TNode, label: string) => {
+    if (typeof n === "number") return;
+    const sub = (c: TNode) => (typeof c === "number" ? String(c) : names[next++]);
+    const L = sub(n.l);
+    const R = sub(n.r);
+    rows.push([label, n.op, L, R]);
+    if (typeof n.l !== "number") visit(n.l, L);
+    if (typeof n.r !== "number") visit(n.r, R);
+  };
+  visit(t, names[0]);
+  return { type: "table", head: ["Box", "Operation", "Left branch", "Right branch"], rows };
+}
+const treeOk = ([shape, seed]: number[]) => {
+  if (shape < 0 || shape > 2 || seed < 0 || seed > 79) return false;
+  const t = treeOf(shape, seed);
+  const v = tval(t);
+  const sub = (n: TNode) => typeof n === "number" || tval(n) > 0;
+  return v > 0 && v <= 500 && typeof t !== "number" && sub(t.l) && sub(t.r) && leftToRight(tflat(t)) !== v;
+};
+
+const WRITE_SAYS: [string, string][] = [
+  ["Brackets were put round the first two numbers, so the marbles already there were multiplied too. Only the packets are multiplied: the packets × the marbles in each, then add what was there at the start.", "The numbers were joined in the order they appear in the story. The marbles at the start are added on; it is the number of packets that multiplies the marbles in each packet."],
+  ["Brackets were put round the first two numbers, so the money was multiplied as well. Only the pens are multiplied (number of pens × cost of each), and that total is taken from the money.", "Only one pen's cost was taken away. All the pens cost the number of pens × the cost of each."],
+  ["The brackets were left out, so only the blue chairs were multiplied by the number of rows. Each row has BOTH colours, so add them first, inside brackets, then multiply.", "The numbers were joined in the order they appear in the story. Each row has red + blue chairs, and there are that many rows."],
+  ["The people getting on were taken away too. People get off (take away), then others get on (add): left to right, with no brackets.", "The getting on and getting off were swapped round. Those who get off are taken away and those who get on are added."],
+  ["Brackets were put round the stickers already there and the packet, so they were all shared. Only the packet is shared out: packet ÷ friends, then add.", "The division was written the wrong way round. The packet's stickers are divided by the number of friends."],
+  ["The mangoes taken out were taken away only once. They are taken from EVERY box, so take them from each box first (inside brackets), then multiply by the number of boxes.", "The numbers were mixed up: it is the mangoes in each box, minus those taken out, that is multiplied by the number of boxes."],
+];
+
+B07.push(
+  // ================================================================ fractions beyond 1 on a number line
+  {
+    id: "agnl",
+    arity: 2,
+    title: "Fractions greater than 1 on a number line",
+    competency: MIX,
+    type: "mixed",
+    mc: true,
+    // [n, d]: n jumps of 1/d from 0
+    parse: none,
+    reject: (p) => (nlOk(p) ? null : "Jumps of 1/2 to 1/8, more than one whole and less than 5, up to 32 jumps, not landing on a whole number."),
+    prompt: ([n, d]) => `Meena starts at 0 and makes ${n} equal jumps of 1/${d} along the number line in the picture. At which number does she land? Write it as a mixed number in its simplest form (for example 2 1/3).`,
+    solve: ([n, d]) => ({ steps: [{ id: "count", op: "multiply", competency: MIX, inputs: [n, `1/${d}`], value: `${n}/${d}` }, { id: "mixed", op: "convert", competency: MIX, inputs: [n, d], value: mixedOf(n, d) }], answer: mixedOf(n, d) }),
+    // independent: add 1/d again and again, counting whole ones as they fill up, and check the form is simplest
+    validate: ([n, d], v) => {
+      const m = String(v).match(/^(\d+) (\d+)\/(\d+)$/);
+      if (!m) return false;
+      const [w, r, den] = [Number(m[1]), Number(m[2]), Number(m[3])];
+      if (r < 1 || r >= den || gcd(r, den) !== 1) return false;
+      let wholes = 0;
+      let parts = 0;
+      for (let i = 0; i < n; i++) {
+        parts++;
+        if (parts === d) {
+          wholes++;
+          parts = 0;
+        }
+      }
+      return wholes === w && parts * den === r * d;
+    },
+    bugs: ([n, d]) => {
+      const w = Math.floor(n / d);
+      const r = n % d;
+      return [
+        Bg("counted-start", "procedural", MIX, "The starting point 0 was counted as a jump. Count the jumps (the arcs), not the marks they start and end on.", mixedOf(n + 1, d) === mixedOf(n, d) || (n + 1) % d === 0 ? null : mixedOf(n + 1, d)),
+        Bg("jumps-as-wholes", "conceptual", MIX, `Each jump was counted as 1 whole. Each jump is only 1/${d}: ${d} jumps make 1 whole.`, String(n)),
+        ...(gcd(r, d) > 1 ? [Bg("not-simplest", "procedural", MIX, `${w} ${r}/${d} is the right amount but not in its simplest form: ${r}/${d} = ${r / gcd(r, d)}/${d / gcd(r, d)}.`, `${w} ${r}/${d}`)] : []),
+      ];
+    },
+    distractors: ([n, d]) => [mixedOf(n + d, d), mixedOf(Math.max(d + 1, n - 1), d), `${Math.floor(n / d) + 1} ${1}/${d}`].filter((x) => x !== mixedOf(n, d)),
+    variants: () => [],
+    explain: (st) => (st.id === "count" ? `${st.inputs[0]} jumps of ${st.inputs[1]} take her to ${st.value}` : `${st.inputs[0]}/${st.inputs[1]} = ${st.value}: count the whole ones (each is ${st.inputs[1]} jumps) and the jumps left over`),
+    domain: [[3, 32], [2, 8]],
+    keep: nlOk,
+    difficulty: ([n, d]) => (d <= 4 && n < 3 * d ? 1 : gcd(n % d, d) > 1 ? 3 : 2),
+    figure: ([n, d]) => ({ type: "numberline", from: 0, to: Math.ceil(n / d), step: 1, jumps: Array.from({ length: n }, (_, i) => [i / d, (i + 1) / d]) }),
+    word: ([n, d]) => `A snail crawls 1/${d} of a metre every minute along a straight garden path. How far from its start is it after ${n} minutes? Write the distance in metres as a mixed number in its simplest form.`,
+    teach: {
+      idea: "On a number line every whole is cut into equal parts. A fraction greater than 1 lies beyond 1: its whole-number part says how many wholes are passed, and the fraction part how far into the next whole.",
+      method: "Count the jumps: that many parts is (jumps)/(parts in a whole). Take out the whole ones (each is one full set of parts) and write the rest as the fraction part; simplify it.",
+      visual: ([n, d]) => ({ type: "numberline", from: 0, to: Math.ceil(n / d), step: 1, marks: [n / d] }),
+      alternatives: [
+        { id: "count_by_wholes", title: "Count whole by whole", kind: "procedural", text: ["Every whole on the line holds the same number of jumps (the denominator).", "Count how many wholes the jumps fill, then count the jumps past the last whole number."] },
+        { id: "fraction_strips", title: "Use fraction strips", kind: "conceptual", text: ["Lay strips of 1/d end to end along a ruler marked in whole units.", "Where the last strip ends is the number: wholes, and a part of the next whole."], visual: ([, d]) => ({ type: "grid", rows: 2, cols: d, shaded: d + 1 }) },
+      ],
+    },
+    limits: "Fractions from 1 to 5 with denominators 2 to 8, read from jumps on a number line; marking a point on a drawn line is an educator-marked task.",
+  },
+  // ================================================================ co-prime numbers
+  {
+    id: "agcop",
+    arity: 1,
+    title: "Which pair of numbers is co-prime?",
+    competency: HL,
+    type: "choice",
+    parse: none,
+    reject: ([s]) => (s < 0 || s > 159 ? "Sets of four pairs of numbers up to 75." : null),
+    choices: ([s]) => copSet(s).pairs.map(([a, b]) => `${a} and ${b}`),
+    prompt: () => "Two numbers are co-prime when their only common factor is 1. Which pair of numbers is co-prime?",
+    solve: ([s]) => {
+      const { pairs, right } = copSet(s);
+      return { steps: pairs.map(([a, b], i) => ({ id: `pair${i}`, op: "hcf", competency: HL, inputs: [a, b], value: gcd(a, b) })), answer: right };
+    },
+    // independent: list the common factors of each pair by trying every number from 2 up; exactly the chosen pair has none
+    validate: ([s], v) => {
+      const { pairs } = copSet(s);
+      const noCommon = (a: number, b: number) => {
+        for (let k = 2; k <= Math.min(a, b); k++) if (a % k === 0 && b % k === 0) return false;
+        return true;
+      };
+      return typeof v === "number" && pairs.filter(([a, b]) => noCommon(a, b)).length === 1 && !!pairs[v] && noCommon(pairs[v][0], pairs[v][1]);
+    },
+    bugs: ([s]) => {
+      const { pairs, odd, prime } = copSet(s);
+      const [o1, o2] = pairs[odd];
+      const [p1, p2] = pairs[prime];
+      return [
+        Bg("odd-means-coprime", "conceptual", HL, `Two odd numbers were taken to have no common factor. Odd numbers have no factor 2, but they can share another one: ${o1} and ${o2} are both divisible by ${gcd(o1, o2)}.`, odd),
+        Bg("prime-means-coprime", "conceptual", HL, `A pair with a prime number in it was taken to be co-prime. A prime has no factors except 1 and itself, but it can still divide the other number: ${p2} = ${p1} × ${p2 / p1}.`, prime),
+      ];
+    },
+    variants: () => [],
+    explain: (st) => `HCF of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}${st.value === 1 ? ": co-prime" : ""}`,
+    domain: [[0, 159]],
+    keep: ([s]) => firstSeeds("agcop", 160, (k) => copSet(k).pairs.map((p) => p.join(",")).join(";")).has(s),
+    difficulty: ([s]) => (copSet(s).pairs[copSet(s).right][0] % 2 === 0 ? 2 : 3),
+    teach: {
+      idea: "Co-prime numbers have no common factor except 1, so their HCF is 1. Neither number needs to be prime: 8 and 15 are co-prime, but 9 and 15 are not.",
+      method: "For each pair, test the small primes 2, 3, 5, 7, … : if one of them divides both numbers, the pair is not co-prime. If none does, it is.",
+      alternatives: [
+        { id: "factor_lists", title: "Compare factor lists", kind: "procedural", text: ["List the factors of both numbers.", "If 1 is the only number in both lists, they are co-prime."] },
+        { id: "prime_factors", title: "Look at prime factors", kind: "conceptual", text: ["Write each number as a product of primes: 8 = 2 × 2 × 2, 15 = 3 × 5.", "No prime appears in both, so they are co-prime."] },
+      ],
+    },
+    limits: "Choosing the co-prime pair among four pairs up to 75; explaining why is an educator-marked task.",
+  },
+  // ================================================================ writing an expression for a situation
+  {
+    id: "agwrite",
+    arity: 4,
+    title: "Writing an expression for a situation",
+    competency: OOO,
+    type: "choice",
+    // [f, a, b, c]: the situation of shape f (as in agbod) with numbers a, b, c
+    parse: none,
+    reject: (p) => (writeOk(p) ? null : "Six kinds of situation with numbers that keep every expression a whole number, and different values for different expressions."),
+    choices: ([f, a, b, c]) => ordered(`agwrite:${f},${a},${b},${c}`, WRITE[f](a, b, c)),
+    prompt: (p) => `${(B07.find((d) => d.id === "agbod")!.word as (q: number[]) => string)(p)} Which expression gives the answer?`,
+    solve: ([f, a, b, c]) => {
+      const opts = ordered(`agwrite:${f},${a},${b},${c}`, WRITE[f](a, b, c));
+      const right = WRITE[f](a, b, c)[0];
+      return { steps: [{ id: "write", op: "model", competency: OOO, inputs: [f], value: right }, { id: "value", op: "evaluate", competency: OOO, inputs: [right], value: evalText(right) }], answer: opts.indexOf(right) };
+    },
+    // independent: act the story out step by step, then evaluate every option; only the chosen one may give that number
+    validate: ([f, a, b, c], v) => {
+      const opts = ordered(`agwrite:${f},${a},${b},${c}`, WRITE[f](a, b, c));
+      const want = story(f, a, b, c);
+      return typeof v === "number" && opts.filter((o) => evalText(o) === want).length === 1 && evalText(opts[v]) === want;
+    },
+    bugs: ([f, a, b, c]) => {
+      const all = WRITE[f](a, b, c);
+      const opts = ordered(`agwrite:${f},${a},${b},${c}`, all);
+      return [Bg("brackets", "conceptual", OOO, WRITE_SAYS[f][0], opts.indexOf(all[1])), Bg("order-of-story", "procedural", OOO, WRITE_SAYS[f][1], opts.indexOf(all[2]))];
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "write" ? `The story is ${st.value}` : `${st.inputs[0]} = ${st.value}`),
+    domain: [[0, 5], [2, 40], [2, 12], [2, 12]],
+    keep: writeOk,
+    cap: 360,
+    difficulty: ([f]) => (f === 0 || f === 3 ? 1 : f === 2 || f === 5 ? 3 : 2),
+    word: (p) => `${(B07.find((d) => d.id === "agbod")!.word as (q: number[]) => string)(p)} ${name(p[1] + 2)} wants to work it out on a calculator in one go. Which expression should ${name(p[1] + 2)} type in?`,
+    teach: {
+      idea: "An expression is the story written in numbers and signs. Brackets show what must be worked out first; without brackets, × and ÷ are done before + and −.",
+      method: "Say the story in steps: what is there at the start, what is added or taken away, what is repeated. Write each step, and put brackets round anything that must happen before a multiplication.",
+      alternatives: [
+        { id: "check_value", title: "Check with the story's answer", kind: "procedural", text: ["Work the story out step by step without any expression.", "Evaluate each option (brackets first, then × and ÷, then + and −); the one that gives the story's answer is right."] },
+        { id: "tree", title: "Draw the story as a tree", kind: "conceptual", text: ["The last step of the story goes at the top of the tree; what it uses hangs below as branches.", "Read the tree back as an expression, with brackets round each branch that is an operation."] },
+      ],
+    },
+    limits: "Six kinds of one- and two-step situations with three numbers; writing an expression from scratch, and longer stories, are educator-marked tasks.",
+  },
+  // ================================================================ terms of an expression
+  {
+    id: "agterm",
+    arity: 2,
+    title: "The terms of an expression",
+    competency: OOO,
+    type: "integer",
+    mc: true,
+    // [seed, ask]: an expression of 3 or 4 terms; ask 0: how many terms; ask 1: the value of the first term after a minus sign
+    parse: none,
+    reject: (p) => (termOk(p) ? null : "Expressions of 3 or 4 terms with products, quotients or brackets."),
+    prompt: ([seed, ask]) => {
+      const e = termExpr(seed);
+      return ask === 0 ? `How many terms does the expression ${e.text} have?` : `In the expression ${e.text}, what is the value of the ${["first", "second", "third", "fourth"][termAsked(seed)]} term? (A term after a minus sign is negative: give its sign.)`;
+    },
+    solve: ([seed, ask]) => {
+      const e = termExpr(seed);
+      if (ask === 0) return { steps: [{ id: "split", op: "split", competency: OOO, inputs: [e.text], value: e.terms.map((t, i) => (i === 0 ? t.text : `${e.signs[i]}${t.text}`)).join(" | ") }, { id: "count", op: "count", competency: OOO, inputs: [e.terms.length], value: e.terms.length }], answer: e.terms.length };
+      const k = termAsked(seed);
+      return { steps: [{ id: "term", op: "split", competency: OOO, inputs: [e.text], value: `−${e.terms[k].text}` }, { id: "value", op: "evaluate", competency: OOO, inputs: [`−(${e.terms[k].text})`], value: -e.terms[k].value }], answer: -e.terms[k].value };
+    },
+    // independent: read the written expression, cut it at the + and − signs outside brackets, and evaluate the piece
+    validate: ([seed, ask], v) => {
+      const pieces = splitTerms(termExpr(seed).text);
+      if (ask === 0) return v === pieces.length;
+      const piece = pieces[termAsked(seed)];
+      return piece.startsWith("−") && typeof v === "number" && Math.abs(evalText(piece.replace(/^−\s*/, "-(") + ")") - v) < 1e-9;
+    },
+    bugs: ([seed, ask]) => {
+      const e = termExpr(seed);
+      if (ask === 0) {
+        const nums = e.terms.reduce((s, t) => s + t.nums, 0);
+        const br = e.terms.length + e.terms.filter((t) => t.nums === 3).length;
+        return [
+          Bg("counted-numbers", "conceptual", OOO, "The numbers were counted. A term is a part joined to the rest by + or −; a product like 4 × 3 is one term.", nums === e.terms.length ? null : nums),
+          Bg("split-brackets", "procedural", OOO, "The + inside a bracket was taken to start a new term. A bracket is worked out as one piece, so (5 + 2) × 3 is a single term.", br === e.terms.length || br === nums ? null : br),
+        ];
+      }
+      const t = e.terms[termAsked(seed)];
+      const first = Number(t.text.replace(/[()]/g, "").split(" ")[0]);
+      return [
+        Bg("sign-dropped", "conceptual", OOO, "The minus sign in front was left off. The term includes its sign: after a minus sign the term is negative.", t.value),
+        Bg("first-number", "procedural", OOO, `Only the first number of the term was taken. The term is everything up to the next + or − outside brackets: ${t.text}.`, first === t.value ? null : -first),
+      ];
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "split" ? `Cut at each + and − outside brackets: ${st.value}` : st.id === "count" ? `${st.value} terms` : st.id === "term" ? `The term is ${st.value}` : `${st.inputs[0]} = ${st.value}`),
+    domain: [[0, 149], [0, 1]],
+    keep: (p) => termOk(p) && firstSeeds("agterm", 150, (k) => termExpr(k).text).has(p[0]),
+    difficulty: ([seed, ask]) => (ask === 0 ? (termExpr(seed).terms.some((t) => t.nums === 3) ? 2 : 1) : 3),
+    teach: {
+      idea: "The terms of an expression are the parts joined by + and − (outside brackets). Each term carries the sign in front of it: 20 − 3 × 4 + 6 is 20 + (−12) + 6, with terms 20, −3 × 4 and 6.",
+      method: "Read along the expression and cut it at every + and − that is not inside brackets. Each piece, with the sign before it, is a term; work out each term on its own.",
+      alternatives: [
+        { id: "underline", title: "Underline each term", kind: "procedural", text: ["Underline each piece between the + and − signs; a whole bracket and whatever multiplies it stays in one piece.", "Count the underlined pieces, and write the sign in front of each."] },
+        { id: "money", title: "Think of money in and out", kind: "conceptual", text: ["Each term is one amount of money: + means money coming in, − money going out.", "4 × 3 after a minus sign is one payment of ₹12 going out: the term −12."] },
+      ],
+    },
+    limits: "Expressions of 3 or 4 terms with whole numbers, products, quotients and one kind of bracket.",
+  },
+  // ================================================================ measurement problems with two units
+  {
+    id: "agmeas",
+    arity: 4,
+    title: "Measurement problems with two units (m and cm, kg and g, km and m, L and mL)",
+    competency: DEC,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [ctx, A, y, op]: A tenths of the larger unit; y × 5 cm, or y × 50 g, m or mL; op 0 add, 1 take away
+    parse: none,
+    reject: (p) => (measOk(p) ? null : "1.1 to 9.9 of the larger unit and up to 95 cm or 950 g, m or mL, added or taken away."),
+    prompt: ([ctx, A, y, op]) => MEAS[ctx].thing(dec(A, 1), measY(ctx, y), op, name(A + y)),
+    solve: (p) => {
+      const [ctx, A, y, op] = p;
+      const { units: u, f, k } = measAns(p);
+      const sm = measY(ctx, y);
+      return {
+        steps: [
+          { id: "convert", op: "convert", competency: "MATH.measurement.unit-conversions", inputs: [sm, MEAS[ctx].small, f, MEAS[ctx].big], value: dec(sm, k) },
+          { id: "combine", op: op ? "subtract" : "add", competency: DEC, inputs: [dec(A, 1), dec(sm, k), op ? "−" : "+"], value: dec(u, k) },
+        ],
+        answer: dec(u, k),
+      };
+    },
+    // independent: change the answer back into the smaller unit and undo the adding or taking away
+    validate: ([ctx, A, y, op], v) => {
+      const f = MEAS[ctx].f;
+      const u = units(v, f === 100 ? 2 : 3);
+      if (u === null) return false;
+      const big = (A * f) / 10;
+      const sm = measY(ctx, y);
+      return op ? u + sm === big : u - sm === big;
+    },
+    bugs: (p) => {
+      const [ctx, A, y, op] = p;
+      const { f, units: u } = measAns(p);
+      const sm = measY(ctx, y);
+      const asBig = op ? A / 10 - sm : A / 10 + sm;
+      const wrongF = f === 1000 ? 100 : 1000;
+      const slip = A / 10 + (op ? -1 : 1) * (sm / wrongF);
+      const r = (x: number) => String(Math.round(x * 1e6) / 1e6);
+      return [
+        Bg("units-not-matched", "conceptual", DEC, `${sm} ${MEAS[ctx].small} was ${op ? "taken from" : "added to"} ${dec(A, 1)} ${MEAS[ctx].big} as if they were the same unit. Change ${MEAS[ctx].small} into ${MEAS[ctx].big} first: ${sm} ${MEAS[ctx].small} = ${dec(sm, f === 100 ? 2 : 3)} ${MEAS[ctx].big}.`, asBig > 0 ? r(asBig) : null),
+        Bg("wrong-factor", "recall", "MATH.measurement.unit-conversions", `The ${MEAS[ctx].small} were changed into ${MEAS[ctx].big} by dividing by ${wrongF}. 1 ${MEAS[ctx].big} = ${f} ${MEAS[ctx].small}, so divide by ${f}.`, slip > 0 && Math.abs(slip * f - u) > 1e-6 ? r(slip) : null),
+      ];
+    },
+    distractors: (p) => {
+      const { units: u, f } = measAns(p);
+      return [u + f / 10, u - f / 10, u + f].filter((x) => x > 0).map((x) => String(Math.round((x / f) * 1e6) / 1e6));
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "convert" ? `${st.inputs[0]} ${st.inputs[1]} = ${st.inputs[0]} ÷ ${st.inputs[2]} = ${st.value} ${st.inputs[3]}` : `${st.inputs[0]} ${st.inputs[2]} ${st.inputs[1]} = ${st.value}, with the decimal points lined up`),
+    domain: [[0, 3], [11, 99], [1, 19], [0, 1]],
+    keep: measOk,
+    cap: 400,
+    difficulty: ([ctx, , , op]) => (ctx === 0 && op === 0 ? 1 : op === 0 ? 2 : 3),
+    teach: {
+      idea: "Only amounts in the same unit can be added or taken away. 1 m = 100 cm, and 1 kg = 1000 g, 1 km = 1000 m, 1 L = 1000 mL, so the smaller unit becomes a decimal of the larger one.",
+      method: "Change the amount in the smaller unit into the larger unit (divide by 100 or 1000), line up the decimal points, then add or subtract.",
+      alternatives: [
+        { id: "all_small", title: "Work in the smaller unit", kind: "procedural", text: ["Change both amounts into the smaller unit: 2.5 kg = 2500 g.", "Add or subtract the whole numbers, then change back: 2500 g + 750 g = 3250 g = 3.25 kg."] },
+        { id: "place_value", title: "Use a place-value table", kind: "conceptual", text: ["Write the amounts in a table with columns ones, tenths, hundredths, thousandths of the larger unit.", "750 g is 0.750 kg: the 7 goes in the tenths column."] },
+      ],
+    },
+    limits: "Two amounts, one in each unit, added or taken away; three or more amounts and changes from the larger into the smaller unit are other families.",
+  },
+  // ================================================================ LCM of three numbers
+  {
+    id: "aglcm3",
+    arity: 3,
+    title: "The lowest common multiple of three numbers",
+    competency: HL,
+    type: "integer",
+    mc: true,
+    parse: none,
+    reject: ([a, b, c]) => (a < 2 || a >= b || b >= c || c > 20 || lcm3(a, b, c) > 420 || lcm3(a, b, c) === c ? "Three numbers from 2 to 20, in increasing order, whose LCM is at most 420 and more than the largest." : null),
+    prompt: ([a, b, c]) => `What is the lowest common multiple (LCM) of ${a}, ${b} and ${c}?`,
+    solve: ([a, b, c]) => ({ steps: [{ id: "two", op: "lcm", competency: HL, inputs: [a, b], value: lcm(a, b) }, { id: "three", op: "lcm", competency: HL, inputs: [lcm(a, b), c], value: lcm3(a, b, c) }], answer: lcm3(a, b, c) }),
+    // independent: go up the multiples of the largest number until the other two both divide it
+    validate: ([a, b, c], v) => {
+      let m = c;
+      while (m % a !== 0 || m % b !== 0) m += c;
+      return v === m;
+    },
+    bugs: ([a, b, c]) => {
+      const L = lcm3(a, b, c);
+      return [
+        Bg("product", "conceptual", HL, `${a} × ${b} × ${c} is a common multiple, but the numbers share factors, so a smaller one comes first.`, a * b * c === L ? null : a * b * c),
+        Bg("two-only", "procedural", HL, `This is the LCM of ${b} and ${c} only. Check that ${a} divides it too.`, lcm(b, c) === L ? null : lcm(b, c)),
+        Bg("hcf-for-lcm", "conceptual", HL, "A common factor was found. The LCM is the smallest number that all three divide into: it is never smaller than the largest number.", gcd(gcd(a, b), c)),
+        Bg("common-not-lowest", "procedural", HL, "A common multiple was found, but not the lowest. Check the smaller multiples first.", 2 * L),
+      ];
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "two" ? `LCM of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}` : `LCM of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}`),
+    domain: [[2, 18], [3, 19], [4, 20]],
+    keep: ([a, b, c]) => a < b && b < c && lcm3(a, b, c) <= 420 && lcm3(a, b, c) !== c,
+    cap: 400,
+    difficulty: ([a, b, c]) => (lcm3(a, b, c) <= 60 ? 1 : lcm3(a, b, c) <= 180 ? 2 : 3),
+    word: ([a, b, c]) => `Three temple bells ring together at 6 o'clock in the morning. After that, one rings every ${a} minutes, one every ${b} minutes and one every ${c} minutes. After how many minutes will all three next ring together?`,
+    teach: {
+      idea: "The LCM of three numbers is the smallest number in all three times tables.",
+      method: "Find the LCM of two of the numbers, then the LCM of that and the third. Or go up the times table of the largest number until the other two both divide it.",
+      alternatives: [
+        { id: "ladder", title: "Divide all three together", kind: "procedural", text: ["Divide by a prime that divides at least two of the numbers; write the quotients (and copy any number it does not divide).", "Repeat until no two numbers share a factor; multiply all the divisors and the numbers left at the bottom."] },
+        { id: "prime_powers", title: "Highest powers of primes", kind: "procedural", text: ["Write each number as a product of primes.", "Take each prime as many times as it appears in the number that has most of it, and multiply."] },
+      ],
+    },
+    limits: "Three numbers from 2 to 20 with LCM up to 420.",
+  },
+  // ================================================================ HCF or LCM? word problems
+  {
+    id: "aghlw",
+    arity: 3,
+    title: "Sharing, grouping and timing problems: HCF or LCM?",
+    competency: HL,
+    type: "integer",
+    mc: true,
+    // [ctx, a, b]: situation HLW[ctx]; the first three need the HCF, the last three the LCM
+    parse: none,
+    reject: (p) => (hlwOk(p) ? null : "Sharing and cutting problems with numbers up to 96 (HCF), timing and buying problems with numbers up to 30 (LCM)."),
+    prompt: ([ctx, a, b]) => HLW[ctx].text(a, b, name(a + b)),
+    solve: ([ctx, a, b]) => (HLW[ctx].hcf ? { steps: [{ id: "decide", op: "choose", competency: HL, inputs: ["HCF"], value: "HCF" }, { id: "hcf", op: "hcf", competency: HL, inputs: [a, b], value: gcd(a, b) }], answer: gcd(a, b) } : { steps: [{ id: "decide", op: "choose", competency: HL, inputs: ["LCM"], value: "LCM" }, { id: "lcm", op: "lcm", competency: HL, inputs: [a, b], value: lcm(a, b) }], answer: lcm(a, b) }),
+    // independent: try every possible answer in turn (largest equal share, or first time both fit) and keep the first that works
+    validate: ([ctx, a, b], v) => {
+      if (HLW[ctx].hcf) {
+        for (let k = a; k >= 1; k--) if (a % k === 0 && b % k === 0) return v === k;
+        return false;
+      }
+      for (let m = 1; m <= a * b; m++) if (m % a === 0 && m % b === 0) return v === m;
+      return false;
+    },
+    bugs: ([ctx, a, b]) => {
+      const g = gcd(a, b);
+      if (HLW[ctx].hcf) {
+        const small = [2, 3, 5, 7, 11].find((p) => g % p === 0)!;
+        return [Bg("lcm-for-hcf", "conceptual", HL, "The LCM was found. Sharing or cutting into the greatest equal parts needs the greatest number that divides both: the HCF.", lcm(a, b)), Bg("a-common-factor", "procedural", HL, "A number that divides both was found, but not the greatest one.", small === g ? null : small)];
+      }
+      return [Bg("hcf-for-lcm", "conceptual", HL, "The HCF was found. Waiting until two repeating things happen together needs the smallest number both divide into: the LCM.", g), Bg("product", "procedural", HL, `${a} × ${b} is a common multiple, but ${a} and ${b} share the factor ${g}, so they meet sooner.`, a * b)];
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "decide" ? (st.value === "HCF" ? "The parts must divide both amounts exactly and be as large as possible: use the HCF" : "The two must happen together again as soon as possible: use the LCM") : `${st.op === "hcf" ? "HCF" : "LCM"} of ${st.inputs[0]} and ${st.inputs[1]} = ${st.value}`),
+    domain: [[0, 5], [2, 95], [3, 96]],
+    keep: hlwOk,
+    cap: 400,
+    difficulty: ([ctx, a, b]) => (HLW[ctx].hcf ? (b <= 40 ? 1 : 2) : lcm(a, b) <= 60 ? 2 : 3),
+    teach: {
+      idea: "Sharing or cutting into the biggest equal parts with nothing left over uses the HCF (it divides both). Waiting for two repeating events to happen together, or buying equal amounts in packets, uses the LCM (both divide it).",
+      method: "Ask: is the answer smaller than the numbers (a part of them)? Then it is the HCF. Is it bigger (a time or amount both reach)? Then it is the LCM. Then work it out.",
+      alternatives: [
+        { id: "act_out", title: "Try it out", kind: "conceptual", text: ["For a timing problem, list the times each event happens: 6, 12, 18, … and 8, 16, 24, ….", "The first time in both lists is the answer. For sharing, try the number of plates from the biggest down."] },
+        { id: "size_check", title: "Is the answer bigger or smaller?", kind: "procedural", text: ["Groups and pieces must fit INTO the amounts: the answer is at most the smaller number (HCF).", "Meeting times come AFTER both: the answer is at least the bigger number (LCM)."] },
+      ],
+    },
+    limits: "Two-number sharing, cutting and grouping (HCF) and timing and packet (LCM) problems; three-number problems use aghcf3 and aglcm3.",
+  },
+  // ================================================================ HCF × LCM = product of the two numbers
+  {
+    id: "aghlp",
+    arity: 4,
+    title: "Using HCF × LCM = product of the two numbers",
+    competency: HL,
+    type: "integer",
+    mc: true,
+    // [mode, g, x, y]: the numbers g·x and g·y; mode 0: find the LCM; 1: find the second number; 2: find the HCF
+    parse: none,
+    reject: (p) => (hlpOk(p) ? null : "Two numbers g·x and g·y up to 120 (x and y co-prime) with HCF g."),
+    prompt: ([mode, g, x, y]) => {
+      const [A, Bn, L] = [g * x, g * y, g * x * y];
+      return mode === 0 ? `The HCF of ${A} and ${Bn} is ${g}. Use HCF × LCM = product of the numbers to find their LCM.` : mode === 1 ? `Two numbers have HCF ${g} and LCM ${L}. One of the numbers is ${A}. Find the other number.` : `The LCM of ${A} and ${Bn} is ${L}. Use HCF × LCM = product of the numbers to find their HCF.`;
+    },
+    solve: ([mode, g, x, y]) => {
+      const [A, Bn, L] = [g * x, g * y, g * x * y];
+      if (mode === 0) return { steps: [{ id: "product", op: "multiply", competency: MT, inputs: [A, Bn], value: A * Bn }, { id: "divide", op: "divide", competency: HL, inputs: [A * Bn, g], value: L }], answer: L };
+      if (mode === 1) return { steps: [{ id: "product", op: "multiply", competency: MT, inputs: [g, L], value: g * L }, { id: "divide", op: "divide", competency: HL, inputs: [g * L, A], value: Bn }], answer: Bn };
+      return { steps: [{ id: "product", op: "multiply", competency: MT, inputs: [A, Bn], value: A * Bn }, { id: "divide", op: "divide", competency: HL, inputs: [A * Bn, L], value: g }], answer: g };
+    },
+    // independent: search directly (the smallest common multiple, the number whose HCF and LCM with A fit, the largest common factor)
+    validate: ([mode, g, x, y], v) => {
+      const [A, Bn, L] = [g * x, g * y, g * x * y];
+      const hcfOf = (p: number, q: number) => {
+        for (let k = Math.min(p, q); k >= 1; k--) if (p % k === 0 && q % k === 0) return k;
+        return 1;
+      };
+      if (typeof v !== "number" || v < 1) return false;
+      if (mode === 0) {
+        let m = Bn;
+        while (m % A !== 0) m += Bn;
+        return v === m;
+      }
+      if (mode === 1) return L % v === 0 && hcfOf(A, v) === g && (A * v) / hcfOf(A, v) === L;
+      return v === hcfOf(A, Bn);
+    },
+    bugs: ([mode, g, x, y]) => {
+      const [A, Bn, L] = [g * x, g * y, g * x * y];
+      if (mode === 0) return [Bg("product-is-lcm", "conceptual", HL, `The product ${A} × ${Bn} was given as the LCM. The product equals HCF × LCM, so divide it by the HCF, ${g}.`, A * Bn), Bg("hcf-times", "procedural", HL, `The HCF was multiplied by the product instead of dividing it into the product.`, A * Bn * g)];
+      if (mode === 1) return [Bg("forgot-hcf", "procedural", HL, `The LCM was divided by ${A}, leaving out the HCF. HCF × LCM = ${A} × (other number), so the other number is ${g} × ${L} ÷ ${A}.`, L / A === Bn ? null : L / A), Bg("lcm-over-hcf", "procedural", HL, `The LCM was divided by the HCF. Use HCF × LCM ÷ (the number you know).`, L / g === Bn || L / g === L / A ? null : L / g)];
+      return [Bg("lcm-over-number", "procedural", HL, `The LCM was divided by one number. The HCF is the product of the two numbers ÷ the LCM.`, L / A === g ? null : L / A), Bg("product-is-hcf", "conceptual", HL, "The product of the numbers was not divided by the LCM. HCF × LCM = product, so the HCF = product ÷ LCM.", A * Bn)];
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "product" ? `${st.inputs[0]} × ${st.inputs[1]} = ${st.value}` : `${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value}`),
+    domain: [[0, 2], [2, 15], [1, 11], [2, 12]],
+    keep: hlpOk,
+    cap: 400,
+    difficulty: ([mode]) => (mode === 0 ? 1 : mode === 2 ? 2 : 3),
+    word: ([mode, g, x, y]) => {
+      const [A, Bn, L] = [g * x, g * y, g * x * y];
+      return mode === 0 ? `Two packets hold ${A} and ${Bn} sweets. ${name(g)} knows the biggest equal share that divides both is ${g}. Using HCF × LCM = product, what is the smallest number of sweets that can be packed in full packets of either size?` : mode === 1 ? `Two ropes have whole-number lengths in metres. The longest piece that measures both exactly is ${g} m, and the shortest length both measure exactly is ${L} m. One rope is ${A} m long. How long is the other rope, in metres?` : `Two buses leave a depot every ${A} and every ${Bn} minutes; they leave together every ${L} minutes. Using HCF × LCM = product, what is the HCF of ${A} and ${Bn}?`;
+    },
+    teach: {
+      idea: "For two numbers, HCF × LCM = the product of the numbers: the common prime factors are counted once in the HCF and the rest in the LCM, so together they use every prime factor of both numbers exactly once.",
+      method: "Write HCF × LCM = first number × second number, put in the three values you know, and divide to find the fourth.",
+      alternatives: [
+        { id: "check_example", title: "Check with a small example", kind: "conceptual", text: ["Take 4 and 6: HCF 2, LCM 12. 2 × 12 = 24 = 4 × 6.", "Use the same pattern with the numbers in the question."] },
+        { id: "prime_split", title: "Split into prime factors", kind: "procedural", text: ["Write both numbers as products of primes; the HCF takes the shared primes, the LCM takes the rest of them as well.", "Multiplying HCF and LCM uses every prime of both numbers, the same as multiplying the numbers."] },
+      ],
+    },
+    limits: "Two numbers up to 120; the rule does not hold for three numbers (not asked).",
+  },
+  // ================================================================ percentages and decimals as fractions
+  {
+    id: "agpfrac",
+    arity: 3,
+    title: "Writing a percentage or a decimal as a fraction in its simplest form",
+    competency: PERC,
+    type: "mixed",
+    mc: true,
+    // [mode, n, d]: mode 0: the percentage 100n/d %; mode 1: the decimal n/d; the answer is n/d (a mixed number when more than 1)
+    parse: none,
+    reject: (p) => (pfOk(p) ? null : "Percentages and decimals that are fractions with denominators 2 to 50 made of 2s and 5s."),
+    prompt: (p) => `Write ${pfShown(p)} as a fraction in its simplest form. (If it is more than 1, write it as a mixed number, for example 1 1/4.)`,
+    solve: ([mode, n, d]) => {
+      const shown = pfShown([mode, n, d]);
+      const places = mode === 0 ? (String((100 * n) / d).split(".")[1] ?? "").length : String(n / d).split(".")[1].length;
+      const den = mode === 0 ? 100 * 10 ** places : 10 ** places;
+      const num = Math.round((n / d) * den);
+      return { steps: [{ id: "over", op: "rewrite", competency: mode === 0 ? PERC : DTEN, inputs: [shown], value: `${num}/${den}` }, { id: "simplify", op: "simplify", competency: "MATH.number.equivalent-fractions", inputs: [num, den, gcd(num, den)], value: mixedOf(n, d) }], answer: mixedOf(n, d) };
+    },
+    // independent: the fraction must be in simplest form, and dividing it out (long division) must give the number shown
+    validate: ([mode, n, d], v) => {
+      const f = readMixed(v);
+      if (!f) return false;
+      const m = String(v).match(/(\d+)\/(\d+)$/);
+      if (m && (gcd(Number(m[1]), Number(m[2])) !== 1 || Number(m[1]) >= Number(m[2]))) return false;
+      if (f[0] > f[1] && !/\s/.test(String(v).trim())) return false;
+      const ld = longDiv(f[0] * (mode === 0 ? 100 : 1), f[1]);
+      return mode === 0 ? `${ld}%` === pfShown([mode, n, d]) : ld === pfShown([mode, n, d]);
+    },
+    bugs: ([mode, n, d]) => {
+      const shown = pfShown([mode, n, d]);
+      const places = mode === 0 ? (String((100 * n) / d).split(".")[1] ?? "").length : String(n / d).split(".")[1].length;
+      const den = mode === 0 ? 100 * 10 ** places : 10 ** places;
+      const num = Math.round((n / d) * den);
+      const digits = Number(shown.replace(/[.%]/g, "").replace(/^0+/, ""));
+      return [
+        Bg("not-simplified", "procedural", "MATH.number.equivalent-fractions", `${num}/${den} is right but not in its simplest form: divide the top and bottom by ${gcd(num, den)}.`, num > den ? null : `${num}/${den}`),
+        mode === 0
+          ? Bg("percent-as-tenths", "conceptual", PERC, `${shown} was written over 10. Per cent means out of 100: ${shown} = ${String((100 * n) / d)}/100.`, mixedOf(digits, 10 * 10 ** places) === mixedOf(n, d) ? null : mixedOf(digits, 10 * 10 ** places))
+          : Bg("hundredths-always", "conceptual", DTEN, `Every decimal was put over 100. ${shown} has ${places} decimal place${places === 1 ? "" : "s"}, so it is ${num} over ${den}.`, places === 2 ? null : mixedOf(digits, 100)),
+      ];
+    },
+    distractors: ([mode, n, d]) => [mixedOf(d, n), mixedOf(n + 1, d), mixedOf(n, d * 2)].filter((x) => x !== mixedOf(n, d)),
+    variants: () => [],
+    explain: (st) => (st.id === "over" ? `${st.inputs[0]} = ${st.value}` : `Divide the top and bottom by ${st.inputs[2]}: ${st.value}`),
+    domain: [[0, 1], [1, 99], [2, 50]],
+    keep: pfOk,
+    difficulty: ([mode, n, d]) => (mode === 0 && (100 * n) % d === 0 && n < d ? 1 : n > d || (mode === 0 && (100 * n) % d !== 0) ? 3 : 2),
+    word: (p) => {
+      const [mode, n, d] = p;
+      if (mode === 1) return `A water tank is ${pfShown(p)} full, says its gauge. ${name(n + d)} wants to say how full it is as a fraction in its simplest form. What fraction is it?`;
+      return n < d ? `A shop's sale board says "${pfShown(p)} off". ${name(n + d)} wants to write the part taken off as a fraction of the price, in its simplest form. What fraction is it?` : `This year a farm grew ${pfShown(p)} of last year's harvest. Write this year's harvest as a fraction of last year's, in its simplest form, as a mixed number.`;
+    },
+    teach: {
+      idea: "A percentage is a number of hundredths, and a decimal is a number of tenths, hundredths or thousandths. Either can be written as a fraction and then simplified.",
+      method: "Percentage: write it over 100 (multiply top and bottom by 10 to clear a decimal point, as 12.5/100 = 125/1000). Decimal: write the digits over 10, 100 or 1000 (one zero for each decimal place). Then divide the top and bottom by their HCF.",
+      alternatives: [
+        { id: "known_facts", title: "Build from facts you know", kind: "conceptual", text: ["50% = 1/2, 25% = 1/4, 12.5% = 1/8, 20% = 1/5.", "37.5% = 3 × 12.5% = 3/8; 0.75 = 3 × 0.25 = 3/4."] },
+        { id: "hcf_first", title: "Find the HCF in one go", kind: "procedural", text: ["Find the HCF of the top and bottom (for 375 and 1000 it is 125).", "Divide both by it once: 375/1000 = 3/8."] },
+      ],
+    },
+    limits: "Percentages (up to two decimal places) and decimals whose fractions have denominators made of 2s and 5s up to 50; recurring decimals are another family.",
+  },
+  {
+    id: "agfdec",
+    arity: 3,
+    title: "Writing a fraction as a decimal or a percentage",
+    competency: PERC,
+    type: "choice",
+    // [mode, n, d]: mode 0: n/d as a decimal; mode 1: n/d as a percentage
+    parse: none,
+    reject: (p) => (fdOk(p) ? null : "Fractions in simplest form with denominators 4 to 50 made of 2s and 5s, less than 2."),
+    choices: (p) => fdOpts(p).opts,
+    prompt: ([mode, n, d]) => `Which ${mode === 0 ? "decimal" : "percentage"} is equal to ${n}/${d}?`,
+    solve: (p) => {
+      const { opts, right } = fdOpts(p);
+      const [mode, n, d] = p;
+      return { steps: [{ id: "divide", op: "divide", competency: "MATH.number.long-division", inputs: [mode === 0 ? n : 100 * n, d], value: mode === 0 ? longDiv(n, d) : longDiv(100 * n, d) }, { id: "write", op: "write", competency: PERC, inputs: [mode], value: right }], answer: opts.indexOf(right) };
+    },
+    // independent: multiply the chosen decimal back by the denominator (and by 100 for a percentage): it must give the numerator
+    validate: ([mode, n, d], v) => {
+      const o = fdOpts([mode, n, d]).opts;
+      if (typeof v !== "number" || !o[v]) return false;
+      const x = Number(o[v].replace("%", ""));
+      const ok = (s: string) => Math.abs(Number(s.replace("%", "")) * d - (mode === 0 ? n : 100 * n)) < 1e-9;
+      return Number.isFinite(x) && o.filter(ok).length === 1 && ok(o[v]);
+    },
+    bugs: (p) => {
+      const [mode, n, d] = p;
+      const { opts, asDigits, flip } = fdOpts(p);
+      return [
+        Bg("digits-joined", "conceptual", PERC, `The numerator and denominator were just written next to each other${mode === 0 ? " with a point between them" : ""}. ${n}/${d} means ${n} ÷ ${d}${mode === 1 ? ", and then × 100 for a percentage" : ""}.`, opts.indexOf(asDigits)),
+        Bg("divided-wrong-way", "procedural", "MATH.number.long-division", `${d} was divided by ${n}. The fraction ${n}/${d} is ${n} ÷ ${d}: the top divided by the bottom.`, opts.indexOf(flip)),
+      ];
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "divide" ? `${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value}` : `So the ${st.inputs[0] === 0 ? "decimal" : "percentage"} is ${st.value}`),
+    domain: [[0, 1], [1, 99], [4, 50]],
+    keep: fdOk,
+    cap: 300,
+    difficulty: ([mode, n, d]) => (d <= 5 && n < d ? 1 : mode === 0 ? 2 : 3),
+    word: ([mode, n, d]) =>
+      mode === 0
+        ? `A recipe needs ${n}/${d} kg of sugar. ${name(n + d)}'s kitchen scale shows decimals only. Which reading on the scale is ${n}/${d} kg?`
+        : n < d
+          ? `${n} out of every ${d} children in a school come by bus. ${name(n + d)} wants to write this as a percentage for the school magazine. Which percentage is it?`
+          : `This year a village had ${n}/${d} times last year's rainfall. ${name(n + d)} wants to write this year's rainfall as a percentage of last year's. Which percentage is it?`,
+    teach: {
+      idea: "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal × 100 (the number of hundredths).",
+      method: "Divide the numerator by the denominator (long division, adding zeros after the point), or scale the fraction to a denominator of 10, 100 or 1000. For a percentage, multiply the decimal by 100.",
+      alternatives: [
+        { id: "scale", title: "Scale to 100 or 1000", kind: "procedural", text: ["3/8: 8 × 125 = 1000, so 3/8 = 375/1000 = 0.375.", "7/20: 20 × 5 = 100, so 7/20 = 35/100 = 0.35 = 35%."] },
+        { id: "eighths", title: "Use known eighths and quarters", kind: "conceptual", text: ["1/8 = 0.125 = 12.5%, so 3/8 = 0.375 = 37.5% and 5/8 = 0.625 = 62.5%.", "1/4 = 0.25 = 25%, so 5/4 = 1.25 = 125%."] },
+      ],
+    },
+    limits: "Fractions less than 2 with terminating decimals; recurring decimals are another family. A choice of four is used so that the fraction itself is not typed back as the answer.",
+  },
+  // ================================================================ primality by testing up to the square root
+  {
+    id: "agptest",
+    arity: 2,
+    title: "Testing for primes by dividing up to the square root",
+    competency: PRI,
+    type: "integer",
+    mc: true,
+    // [mode, n]: mode 0: the largest prime that must be tried before n can be called prime; mode 1: the smallest prime factor of n (n itself if prime)
+    parse: none,
+    reject: (p) => (ptOk(p) ? null : "Odd numbers from 50 to 999 not ending in 5 (mode 0); odd numbers from 101 to 999 with no factor 3 or 5 (mode 1)."),
+    prompt: ([mode, n]) => (mode === 0 ? `To decide whether ${n} is prime, ${name(n)} divides it by the primes 2, 3, 5, 7, … in order. If none of them divides ${n} exactly, what is the largest prime ${name(n)} needs to have tried before saying ${n} is prime?` : `What is the smallest prime factor of ${n}? (If ${n} is prime, write ${n}.)`),
+    solve: ([mode, n]) => {
+      const r = Math.floor(Math.sqrt(n));
+      if (mode === 0) return { steps: [{ id: "root", op: "square-root", competency: "MATH.number.square-roots", inputs: [n], value: r }, { id: "prime", op: "largest-prime", competency: PRI, inputs: [r], value: lastPrimeTest(n) }], answer: lastPrimeTest(n) };
+      const p = spf(n);
+      return { steps: [{ id: "root", op: "square-root", competency: "MATH.number.square-roots", inputs: [n], value: r }, { id: "try", op: "divide", competency: PRI, inputs: [n, r], value: p === n ? "no prime up to the square root divides it" : `${p} divides it: ${n} = ${p} × ${n / p}` }], answer: p };
+    },
+    // independent: mode 0, the answer must be prime, its square at most n, and no larger prime's square at most n;
+    // mode 1, try EVERY number from 2 upwards (no square-root shortcut)
+    validate: ([mode, n], v) => {
+      if (typeof v !== "number" || v < 2) return false;
+      if (mode === 0) {
+        if (!isPr(v) || v * v > n) return false;
+        for (let q = v + 1; q * q <= n; q++) if (isPr(q)) return false;
+        return true;
+      }
+      for (let k = 2; k <= n; k++) if (n % k === 0) return v === k;
+      return false;
+    },
+    bugs: ([mode, n]) => {
+      if (mode === 0) {
+        let half = Math.floor(n / 2);
+        while (!isPr(half)) half--;
+        const r = Math.floor(Math.sqrt(n));
+        return [Bg("up-to-half", "conceptual", PRI, `Primes up to half of ${n} were tried. If ${n} had a factor bigger than its square root, it would have a partner factor smaller than the square root, already tested. So stop at √${n} ≈ ${r}.`, half), Bg("root-not-prime", "procedural", PRI, `${r} is the whole number below √${n}, but only primes need to be tried: ${r} is not prime.`, isPr(r) ? null : r)];
+      }
+      const p = spf(n);
+      return p === n
+        ? [Bg("half-a-check", "procedural", PRI, `A factor was guessed without checking. Every prime up to √${n} ≈ ${Math.floor(Math.sqrt(n))} leaves a remainder, so ${n} is prime.`, null)]
+        : [Bg("stopped-early", "procedural", PRI, `Only 2, 3 and 5 were tried, and ${n} was called prime. Keep going with 7, 11, 13, … up to √${n} ≈ ${Math.floor(Math.sqrt(n))}: ${p} divides ${n}.`, n), Bg("largest-factor", "conceptual", PRI, `${n / p} is a factor, but the question asks for the smallest prime factor: ${n} = ${p} × ${n / p}.`, n / p)];
+    },
+    distractors: ([mode, n]) => {
+      const a = mode === 0 ? lastPrimeTest(n) : spf(n);
+      return [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31].filter((q) => q !== a && (mode === 0 || n % q !== 0)).slice(0, 4);
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "root" ? `√${st.inputs[0]} is a little more than ${st.value} (${st.value}² = ${Number(st.value) ** 2})` : st.id === "prime" ? `The largest prime not more than ${st.inputs[0]} is ${st.value}` : `Try the primes up to ${st.inputs[1]}: ${st.value}`),
+    domain: [[0, 1], [50, 999]],
+    keep: ptOk,
+    cap: 400,
+    difficulty: ([mode, n]) => (mode === 0 ? (n < 400 ? 1 : 2) : isPr(n) ? 3 : 2),
+    word: ([mode, n]) => (mode === 0 ? `A computer checks whether the ticket number ${n} is prime by dividing it by 2, 3, 5, 7, 11, … in order. If no division is exact, what is the last prime it needs to try before printing "prime"?` : `${n} marbles are to be packed into bags of equal size (more than one marble in each, and more than one bag). What is the smallest possible number of marbles in each bag? (If it cannot be done, write ${n}.)`),
+    teach: {
+      idea: "Factors come in pairs: if n = a × b, one of a and b is at most √n. So if no prime up to √n divides n, n has no factor other than 1 and itself: it is prime.",
+      method: "Find the whole number just below √n (the largest k with k² ≤ n). Divide n by each prime up to k. The first one that divides exactly is the smallest prime factor; if none does, n is prime.",
+      alternatives: [
+        { id: "square_list", title: "Use a list of squares", kind: "procedural", text: ["Write the prime squares: 4, 9, 25, 49, 121, 169, 289, 361, 529, 841, 961.", "Try each prime whose square is not more than n; stop at the first prime whose square is bigger than n."] },
+        { id: "factor_pairs", title: "Factor pairs meet at the square root", kind: "conceptual", text: ["For 91: 1 × 91, 7 × 13. The pairs close in on √91 ≈ 9.5 from both sides.", "Once you pass the square root, every factor you would find is the partner of one already found."] },
+      ],
+    },
+    limits: "Odd numbers up to 999; numbers with the factors 2, 3 or 5 are left out of the smallest-factor questions so that a real test is needed. Writing out the whole factorisation is the ajpf family.",
+  },
+  // ================================================================ Euclid's division algorithm, step by step
+  {
+    id: "agediv",
+    arity: 3,
+    title: "The steps of Euclid's division algorithm",
+    competency: EUC,
+    type: "integer",
+    mc: true,
+    // [mode, a, b]: mode 0: how many divisions; mode 1: the remainder in the second division
+    parse: none,
+    reject: (p) => (edOk(p) ? null : "Two numbers up to 999, the larger not a multiple of the smaller, needing 3 to 6 divisions."),
+    prompt: ([mode, a, b]) => `Euclid's division algorithm finds the HCF of ${a} and ${b}: divide ${a} by ${b}, then divide ${b} by the remainder, and keep dividing the last divisor by the last remainder until a remainder is 0. ${mode === 0 ? "How many divisions are made altogether (counting the one with remainder 0)?" : "What is the remainder in the second division?"}`,
+    solve: ([mode, a, b]) => {
+      const S = euclidSteps(a, b);
+      const steps = S.map((s, i) => ({ id: `div${i + 1}`, op: "divide", competency: EUC, inputs: [s.a, s.b, s.q], value: s.r }));
+      return { steps: mode === 0 ? steps : steps.slice(0, 2), answer: mode === 0 ? S.length : S[1].r };
+    },
+    // independent: subtract the smaller number again and again (Euclid's subtraction form); each run of the same subtraction is one division
+    validate: ([mode, a, b], v) => {
+      let [x, y] = [a, b];
+      let runs = 0;
+      const rems: number[] = [];
+      while (y > 0) {
+        while (x >= y) x -= y;
+        runs++;
+        rems.push(x);
+        [x, y] = [y, x];
+      }
+      return mode === 0 ? v === runs : v === rems[1];
+    },
+    bugs: ([mode, a, b]) => {
+      const S = euclidSteps(a, b);
+      if (mode === 0) return [Bg("last-not-counted", "procedural", EUC, "The last division, the one with remainder 0, was not counted. It is the step that shows the algorithm is finished.", S.length - 1)];
+      return [Bg("first-remainder", "procedural", EUC, `The remainder of the first division was given. In the second division, ${S[1].a} is divided by ${S[1].b}.`, S[0].r), Bg("quotient-for-remainder", "procedural", EUC, `The quotient of the second division was given. ${S[1].a} = ${S[1].b} × ${S[1].q} + ${S[1].r}: the remainder is what is left over.`, S[1].q === S[1].r ? null : S[1].q)];
+    },
+    distractors: ([mode, a, b]) => {
+      const S = euclidSteps(a, b);
+      const ans = mode === 0 ? S.length : S[1].r;
+      return [ans + 1, ans + 2, ans - 1, mode === 1 ? S[2].r : ans + 3].filter((x) => x >= 0 && x !== ans);
+    },
+    variants: () => [],
+    explain: (st) => `${st.inputs[0]} = ${st.inputs[1]} × ${st.inputs[2]} + ${st.value}`,
+    domain: [[0, 1], [21, 999], [20, 998]],
+    keep: edOk,
+    cap: 400,
+    difficulty: ([mode, a, b]) => (mode === 1 ? (a < 300 ? 1 : 2) : euclidSteps(a, b).length <= 3 ? 2 : 3),
+    word: ([mode, a, b]) => `A carpenter has a rectangular board ${a} cm by ${b} cm. He cuts off as many squares of side ${b} cm as he can, leaving a strip. From the strip he again cuts the biggest squares possible, and so on, until nothing is left over. ${mode === 0 ? "How many rounds of cutting does he make (one round for each size of square)?" : "How wide is the strip left after the second round, in cm?"}`,
+    teach: {
+      idea: "If a = bq + r, every common factor of a and b is also a factor of r, so HCF(a, b) = HCF(b, r). Repeating with smaller and smaller numbers must end with remainder 0; the last divisor is the HCF. (Aryabhata's 'mutual division' uses the same chain of divisions.)",
+      method: "Write a = b × q + r. Replace (a, b) by (b, r) and repeat. Stop when the remainder is 0: the divisor at that step is the HCF.",
+      alternatives: [
+        { id: "squares", title: "Cut squares from a rectangle", kind: "conceptual", text: ["Cutting the biggest squares from a rectangle is one division: the number of squares is the quotient, the leftover strip the remainder.", "Keep cutting squares from the strip; the side of the last squares, which fit exactly, is the HCF."] },
+        { id: "table", title: "Keep a table", kind: "procedural", text: ["Make columns: dividend, divisor, quotient, remainder.", "Each new row starts with the last row's divisor and remainder; count the rows at the end."] },
+      ],
+    },
+    limits: "Two numbers up to 999 needing 3 to 6 divisions; the subtraction form of the algorithm is the akeuclid family. Proving why the algorithm works is an educator-marked task.",
+  },
+  // ================================================================ HCF and LCM from prime factorisations
+  {
+    id: "agfta",
+    arity: 2,
+    title: "HCF and LCM from prime factorisations",
+    competency: EUC,
+    type: "integer",
+    mc: true,
+    // [ask, e]: two numbers with the exponents in e (of 2, 3, 5, 7); ask 0 the HCF, 1 the LCM
+    parse: none,
+    reject: (p) => (ftaOk(p) ? null : "Two different numbers up to 5000 built from 2, 3, 5 and 7, sharing a prime."),
+    prompt: ([ask, e]) => {
+      const { a, b } = ftaExp(e);
+      return `${fromExp(a)} = ${ftaText(a)} and ${fromExp(b)} = ${ftaText(b)}. Use these prime factorisations to find the ${ask === 0 ? "HCF" : "LCM"} of ${fromExp(a)} and ${fromExp(b)}.`;
+    },
+    solve: ([ask, e]) => {
+      const { a, b } = ftaExp(e);
+      const ex = a.map((x, i) => (ask === 0 ? Math.min(x, b[i]) : Math.max(x, b[i])));
+      return { steps: [{ id: "powers", op: ask === 0 ? "lowest-powers" : "highest-powers", competency: EUC, inputs: [ftaText(a), ftaText(b)], value: ftaText(ex) }, { id: "multiply", op: "multiply", competency: EUC, inputs: [ftaText(ex)], value: fromExp(ex) }], answer: fromExp(ex) };
+    },
+    // independent: from the numbers themselves, search downwards for the largest common factor or upwards through the multiples
+    validate: ([ask, e], v) => {
+      const { a, b } = ftaExp(e);
+      const [A, Bn] = [fromExp(a), fromExp(b)];
+      if (ask === 0) {
+        for (let k = Math.min(A, Bn); k >= 1; k--) if (A % k === 0 && Bn % k === 0) return v === k;
+        return false;
+      }
+      const big = Math.max(A, Bn);
+      const small = Math.min(A, Bn);
+      for (let m = big; m <= A * Bn; m += big) if (m % small === 0) return v === m;
+      return false;
+    },
+    bugs: ([ask, e]) => {
+      const { a, b } = ftaExp(e);
+      const [A, Bn] = [fromExp(a), fromExp(b)];
+      const lo = fromExp(a.map((x, i) => Math.min(x, b[i])));
+      const hi = fromExp(a.map((x, i) => Math.max(x, b[i])));
+      const common = PR3.reduce((v, p, i) => (a[i] && b[i] ? v * p : v), 1);
+      return ask === 0
+        ? [Bg("highest-for-hcf", "conceptual", EUC, "The higher power of each prime was taken. The HCF uses each COMMON prime with the LOWER power (the most that divides both numbers).", hi), Bg("primes-once", "procedural", EUC, "Each common prime was taken only once. The HCF takes each common prime to the lower of its two powers.", common === lo ? null : common)]
+        : [Bg("lowest-for-lcm", "conceptual", EUC, "The lower powers of the common primes were taken: that is the HCF. The LCM takes every prime that appears, with the HIGHER power.", lo), Bg("product", "conceptual", EUC, `The two numbers were multiplied. They share primes, so the LCM is ${A} × ${Bn} ÷ HCF.`, A * Bn)];
+    },
+    variants: () => [],
+    explain: (st) => (st.id === "powers" ? `${st.op === "lowest-powers" ? "Common primes, lower powers" : "Every prime, higher power"}: ${st.value}` : `${st.inputs[0]} = ${st.value}`),
+    domain: [[0, 1], [0, 65535]],
+    keep: ftaOk,
+    cap: 400,
+    difficulty: ([, e]) => {
+      const { a, b } = ftaExp(e);
+      return a.filter(Boolean).length + b.filter(Boolean).length <= 4 ? 1 : a.some((x, i) => x && b[i] && x !== b[i]) ? 3 : 2;
+    },
+    teach: {
+      idea: "By the Fundamental Theorem of Arithmetic every number has exactly one prime factorisation. A common factor can only use primes both numbers have, as often as both allow; a common multiple must contain every prime of each number.",
+      method: "HCF: multiply the common primes, each to the LOWER of its two powers. LCM: multiply every prime that appears, each to the HIGHER power. Check: HCF × LCM = the product of the two numbers.",
+      alternatives: [
+        { id: "venn", title: "Sort the primes in a Venn diagram", kind: "conceptual", text: ["Put the shared prime factors in the middle and the rest on each side.", "The middle multiplied is the HCF; everything multiplied is the LCM."] },
+        { id: "table_powers", title: "A table of powers", kind: "procedural", text: ["Make a row for each number and a column for each prime, writing its power (0 if missing).", "Take the smaller entry in each column for the HCF and the bigger for the LCM."] },
+      ],
+    },
+    limits: "Numbers up to 5000 built from 2, 3, 5 and 7; stating and proving the Fundamental Theorem of Arithmetic is an educator-marked task.",
+  },
+  // ================================================================ kinds of fractions
+  {
+    id: "agclass",
+    arity: 3,
+    title: "Proper fractions, improper fractions and mixed numbers",
+    competency: MIX,
+    type: "choice",
+    // [form, n, d]: form 0 a proper fraction n/d, 1 an improper fraction n/d (n ≥ d), 2 a mixed number w n/d
+    parse: none,
+    reject: (p) => (classOk(p) ? null : "Fractions with denominators 2 to 12 in simplest form (and fractions equal to 1), and mixed numbers."),
+    choices: (p) => ordered(`agclass:${p}`, FKIND),
+    prompt: (p) => `What kind of number is ${classText(p)}?`,
+    solve: (p) => ({ steps: [{ id: "look", op: "classify", competency: MIX, inputs: [classText(p)], value: FKIND[p[0]] }], answer: ordered(`agclass:${p}`, FKIND).indexOf(FKIND[p[0]]) }),
+    // independent: read the written number: a whole part in front makes a mixed number; otherwise compare top and bottom
+    validate: (p, v) => {
+      const t = classText(p);
+      const m = t.match(/^(?:(\d+) )?(\d+)\/(\d+)$/);
+      if (!m || typeof v !== "number") return false;
+      const kind = m[1] ? 2 : Number(m[2]) < Number(m[3]) ? 0 : 1;
+      return ordered(`agclass:${p}`, FKIND)[v] === FKIND[kind];
+    },
+    bugs: (p) => {
+      const [form, n, d] = p;
+      const o = ordered(`agclass:${p}`, FKIND);
+      if (form === 0) return [Bg("reversed-rule", "conceptual", MIX, `The rule was turned round. In a proper fraction the top number is SMALLER than the bottom one, as in ${n}/${d}: it is less than 1.`, o.indexOf(FKIND[1]))];
+      if (form === 1) return n === d ? [Bg("one-is-proper", "conceptual", MIX, `${n}/${d} is exactly 1, so it was taken as proper. A proper fraction is less than 1; when the top equals the bottom (or is bigger) the fraction is improper.`, o.indexOf(FKIND[0]))] : [Bg("more-than-one-mixed", "conceptual", MIX, `${n}/${d} is more than 1, so it was called a mixed number. It is written as one fraction with the top bigger than the bottom: an improper fraction. A mixed number has a whole number written in front.`, o.indexOf(FKIND[2]))];
+      return [Bg("more-than-one-improper", "conceptual", MIX, `${classText(p)} is more than 1, so it was called improper. It is written as a whole number and a proper fraction side by side: a mixed number.`, o.indexOf(FKIND[1]))];
+    },
+    variants: () => [],
+    explain: (st) => `${st.inputs[0]} is ${st.value}`,
+    domain: [[0, 2], [1, 36], [2, 12]],
+    keep: classOk,
+    difficulty: ([form, n, d]) => (form === 0 ? 1 : form === 1 && n === d ? 3 : 2),
+    word: (p) => `A shopkeeper writes "${classText(p)} m of ribbon" on a bill. ${name(p[1] + p[2])}'s teacher asks what kind of number ${classText(p)} is. What should ${name(p[1] + p[2])} answer?`,
+    teach: {
+      idea: "A proper fraction is less than 1 (top smaller than bottom). An improper fraction has the top equal to or bigger than the bottom, so it is 1 or more. A mixed number writes a value over 1 as a whole number and a proper fraction.",
+      method: "Is there a whole number in front? Then it is a mixed number. If not, compare the top and the bottom: top smaller → proper; top equal or bigger → improper.",
+      alternatives: [
+        { id: "pizza", title: "Count the pieces", kind: "conceptual", text: ["7/4 of a pizza cut in quarters is 7 quarters: more than one whole pizza.", "1 3/4 is the same amount written as 1 whole pizza and 3 quarters."], visual: () => ({ type: "grid", rows: 2, cols: 4, shaded: 7 }) },
+        { id: "number_line", title: "Place it on a number line", kind: "procedural", text: ["Fractions between 0 and 1 are proper.", "From 1 onwards they are improper, or can be written as mixed numbers."], visual: () => ({ type: "numberline", from: 0, to: 3, step: 1, marks: [0.75, 1.75] }) },
+      ],
+    },
+    limits: "Fractions with denominators up to 12; converting between the forms is the agimp and agmix families.",
+  },
+  // ================================================================ reading a tree diagram as an expression
+  {
+    id: "agtree",
+    arity: 2,
+    title: "The value of an expression given as a tree diagram",
+    competency: TREE,
+    type: "integer",
+    mc: true,
+    // [shape, seed]: shape 0 (a ○ b) ○ c, 1 a ○ (b ○ c), 2 (a ○ b) ○ (c ○ d)
+    parse: none,
+    reject: (p) => (treeOk(p) ? null : "Tree diagrams of two or three operations with whole-number branches."),
+    prompt: () => "The table describes a tree diagram for a numerical expression. Each box does its operation on the values of its left and right branches; a branch can be a number or another box. What is the value of the whole expression (the box at the top)?",
+    solve: ([shape, seed]) => {
+      const t = treeOf(shape, seed);
+      const steps: { id: string; op: string; competency: string; inputs: (number | string)[]; value: number }[] = [];
+      const go = (n: TNode): number => {
+        if (typeof n === "number") return n;
+        const [l, r] = [go(n.l), go(n.r)];
+        const v = n.op === "+" ? l + r : n.op === "−" ? l - r : l * r;
+        steps.push({ id: `box${steps.length + 1}`, op: n.op === "+" ? "add" : n.op === "−" ? "subtract" : "multiply", competency: TREE, inputs: [l, n.op, r], value: v });
+        return v;
+      };
+      const v = go(t);
+      return { steps, answer: v };
+    },
+    // independent: write the tree as an expression with brackets and evaluate it with the expression reader
+    validate: ([shape, seed], v) => typeof v === "number" && Math.abs(evalText(tbr(treeOf(shape, seed))) - v) < 1e-9,
+    bugs: ([shape, seed]) => {
+      const t = treeOf(shape, seed);
+      const v = tval(t);
+      const ltr = leftToRight(tflat(t));
+      const bod = evalText(tflat(t));
+      return [
+        Bg("read-flat", "conceptual", TREE, `The numbers and signs were read in a line from left to right (${tflat(t)}), ignoring the branches. A box must be worked out before the box above it uses its value: that is what brackets do.`, ltr),
+        Bg("bodmas-without-brackets", "conceptual", TREE, `The expression was written without brackets (${tflat(t)}) and worked out by the usual order. The tree says which part comes first: write it with brackets, ${tbr(t)}.`, bod === v || bod === ltr ? null : bod),
+      ];
+    },
+    variants: () => [],
+    explain: (st) => `${st.inputs[0]} ${st.inputs[1]} ${st.inputs[2]} = ${st.value}`,
+    domain: [[0, 2], [0, 79]],
+    keep: (p) => treeOk(p) && firstSeeds(`agtree${p[0]}`, 80, (k) => (treeOk([p[0], k]) ? tbr(treeOf(p[0], k)) : `x${k}`)).has(p[1]),
+    difficulty: ([shape]) => (shape === 0 ? 1 : shape === 1 ? 2 : 3),
+    figure: ([shape, seed]) => treeTable(treeOf(shape, seed)),
+    teach: {
+      idea: "A tree diagram shows the order of work: the operation at the top is done last, and each branch that is a box must be worked out first. Written as an expression, every such branch goes in brackets.",
+      method: "Start at the bottom: work out each box whose branches are both numbers. Put its value in place of the box, and move up until the top box is done.",
+      alternatives: [
+        { id: "write_brackets", title: "Write it with brackets", kind: "procedural", text: ["Write the top box as (left branch) op (right branch).", "Replace each branch that is a box by its own expression in brackets; then work out the brackets first."] },
+        { id: "family_tree", title: "Children before parents", kind: "conceptual", text: ["Think of each box as a parent and its branches as children.", "A parent can only be worked out when all its children have values."] },
+      ],
+    },
+    limits: "Trees with two or three operations (+, −, ×) and whole numbers, given as a table of boxes (no drawn trees yet); drawing a tree for an expression is an educator-marked task.",
+  },
+);

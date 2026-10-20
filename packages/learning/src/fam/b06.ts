@@ -2301,7 +2301,7 @@ B06.push(
       const naive = 2 * fwd - 1;
       return [
         B("forward-only", "conceptual", PZ, "Only the trips across were counted. The boat has to come back each time, and the return trips count as crossings too.", fwd === ans ? null : fwd),
-        B("rower-forgotten", "conceptual", PZ, `Each trip across was taken to move ${k} people for good. Someone rows the boat back, so each round trip moves only ${k} − 1 = ${k - 1} more people across (the last trip moves ${k}).`, naive === ans ? null : naive),
+        B("rower-forgotten", "conceptual", PZ, `Each trip across was taken to move ${k} people for good. Someone rows the boat back, so each round trip moves only ${k} − 1 = ${k - 1} more ${k === 2 ? "person" : "people"} across (the last trip moves ${k}).`, naive === ans ? null : naive),
       ];
     },
     distractors: (p) => [riverAns(p) + 2, riverAns(p) - 2, riverAns(p) + 1].filter((x) => x > 0),
@@ -2322,7 +2322,7 @@ B06.push(
     word: ([mode, n, k]) =>
       mode === 0
         ? `At a ghat on the Kaveri, ${n} pilgrims want to cross the river in a round coracle that holds at most ${k} people. Someone must row the coracle back after every trip across. What is the fewest number of crossings (trips either way) to get all ${n} pilgrims across?`
-        : `${n} fishermen${n === 1 ? "" : ""} want to reach an island, but the only boat belongs to two village children. It can carry one fisherman, or one child, or both children, never a fisherman with a child. The children must end up back home with their boat. What is the fewest number of crossings (trips either way)?`,
+        : `${n} ${n === 1 ? "fisherman wants" : "fishermen want"} to reach an island, but the only boat belongs to two village children. It can carry one fisherman, or one child, or both children, never a fisherman with a child. The children must end up back home with their boat. What is the fewest number of crossings (trips either way)?`,
     teach: {
       idea: "Act the puzzle out one trip at a time and look for the pattern that repeats. A round trip (across and back) is what moves people, and the boat's rower has to come back each time.",
       method: "Work out what one full round achieves (how many more people end up across), count how many rounds are needed before the last trip, then add the last trip.",
@@ -2600,3 +2600,300 @@ B06.push(
     },
     limits: "Rectangles and squares in a full grid; triangles in a triangle cut by lines from one corner and lines parallel to the base. Irregular composite figures are not included (no pictures of them yet).",
   },
+  // ============================================================ cube nets
+  {
+    id: "afcube",
+    arity: 3,
+    title: "Cube nets: opposite faces, and which shapes fold into a cube",
+    competency: NETS,
+    type: "choice",
+    // [mode, i, q]: mode 0: the i-th cube net (every turn and flip drawn separately), lettered; which face is opposite
+    // the q-th square? mode 1: the i-th shape of six squares (q = 0): does it fold into a cube?
+    parse: none,
+    reject: ([mode, i, q]) => (mode === 0 ? (i >= 0 && i < NET_LIST.length && q >= 0 && q <= 5 ? null : "A cube net and one of its six faces.") : mode === 1 ? (i >= 0 && i < HEXOMINOES.length && q === 0 ? null : "A shape of six squares.") : "Modes 0 and 1."),
+    choices: ([mode, i, q]) => (mode === 0 ? cubeOpts([i, q]).letters : mixOrder(`afcube:yn:${i}`, ["Yes, it folds into a cube", "No, it does not fold into a cube"])),
+    prompt: ([mode, i, q]) => (mode === 0 ? `The picture shows a net of a cube with its six squares lettered. When it is folded into a cube, which face is opposite face ${netLabels(i)[q]}?` : "The picture shows a shape made of six squares (■). Can it be folded along the lines into a cube, with no two squares overlapping?"),
+    solve: ([mode, i, q]) => {
+      if (mode === 0) {
+        const { letters, lab, opp } = cubeOpts([i, q]);
+        return { steps: [st("fold", "fold", NETS, [lab[q]], lab[opp])], answer: letters.indexOf(lab[opp]) };
+      }
+      const ok = foldsToCube(HEXOMINOES[i]);
+      const ch = mixOrder(`afcube:yn:${i}`, ["Yes, it folds into a cube", "No, it does not fold into a cube"]);
+      return { steps: [st("fold", "fold", NETS, ["six squares"], ok ? "six different faces" : "two squares land on the same face")], answer: ch.findIndex((c) => c.startsWith(ok ? "Yes" : "No")) };
+    },
+    // independent: mode 0, roll a labelled die over the squares from the other end and see which labels land opposite;
+    // mode 1, compare the shape (every turn and flip) with the eleven known cube nets
+    validate: ([mode, i, q], v) => {
+      if (typeof v !== "number") return false;
+      if (mode === 0) {
+        const cs = NET_LIST[i];
+        const lab = netLabels(i);
+        const bottoms = dieBottoms(cs);
+        const at = (k: number) => bottoms.get(`${cs[k][0]}:${cs[k][1]}`)!;
+        const chosen = lab.indexOf(cubeOpts([i, q]).letters[v]);
+        return chosen >= 0 && chosen !== q && (at(chosen) ^ 1) === at(q);
+      }
+      const ch = mixOrder(`afcube:yn:${i}`, ["Yes, it folds into a cube", "No, it does not fold into a cube"]);
+      return ch[v]?.startsWith(CUBE_NET_KEYS.has(cellKey(HEXOMINOES[i])) ? "Yes" : "No") ?? false;
+    },
+    bugs: ([mode, i, q]) => {
+      if (mode === 1) {
+        const ok = foldsToCube(HEXOMINOES[i]);
+        const ch = mixOrder(`afcube:yn:${i}`, ["Yes, it folds into a cube", "No, it does not fold into a cube"]);
+        return [ok ? B("looks-odd", "conceptual", NETS, "The shape looks unusual, but folding it square by square gives six different faces, so it is a cube net. Many different shapes fold into a cube (there are 11 nets).", ch.findIndex((c) => c.startsWith("No"))) : B("six-is-enough", "conceptual", NETS, "Six squares were taken to be enough. When this shape is folded, two squares land on the same face of the cube and one face is left open.", ch.findIndex((c) => c.startsWith("Yes")))];
+      }
+      const { letters, lab, adj, corner } = cubeOpts([i, q]);
+      return [
+        ...(adj.length && letters.includes(lab[adj[0]]) ? [B("next-door", "conceptual", NETS, `${lab[adj[0]]} shares an edge with ${lab[q]} in the net, so after folding it is next to ${lab[q]}, not opposite. A face is never opposite a square it touches in the net.`, letters.indexOf(lab[adj[0]]))] : []),
+        ...(corner.length && letters.includes(lab[corner[0]]) ? [B("round-corner", "procedural", NETS, `${lab[corner[0]]} does not touch ${lab[q]} in the net, but after folding it is next to it. Fold the net in your mind one square at a time to see where each square ends up.`, letters.indexOf(lab[corner[0]]))] : []),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "fold" && s.inputs[0] === "six squares" ? `Fold it square by square: ${s.value}` : `Folding square by square, face ${s.value} ends up opposite face ${s.inputs[0]}`),
+    domain: [[0, 1], [0, 215], [0, 5]],
+    keep: ([mode, i, q]) => (mode === 0 ? i < NET_LIST.length : i < HEXOMINOES.length && q === 0 && (foldsToCube(HEXOMINOES[i]) || hh(`afcube:keep:${i}`) % 3 === 0)),
+    cap: 400,
+    difficulty: ([mode, i]) => (mode === 1 ? 2 : NET_LIST[i].some((c) => NET_LIST[i].filter((d) => d[0] === c[0]).length === 4) ? 1 : 3),
+    figure: ([mode, i]) => (mode === 0 ? netPicture(NET_LIST[i], netLabels(i)) : netPicture(HEXOMINOES[i], null)),
+    word: ([mode, i, q]) => (mode === 0 ? `${name(i + q)} cuts out the net in the picture to make a dice-shaped gift box, writing a letter on each square. When the box is folded, which letter is opposite ${netLabels(i)[q]}?` : `${name(i)} wants to make a small closed box shaped like a cube from one piece of card cut into the shape in the picture (six squares, ■). Will the card fold into a cube with no gaps or overlaps?`),
+    teach: {
+      idea: "A net is a solid unfolded flat. For a cube the six squares must fold into six different faces; a square's neighbours in the net become its neighbours on the cube, and the face opposite it is one that never touches it.",
+      method: "Pick a square as the bottom and fold up the squares round it one at a time, saying which face each becomes (front, back, left, right, top). Opposite pairs are bottom–top, front–back, left–right; in a straight row of squares, the squares one apart are opposite.",
+      alternatives: [
+        { id: "straight_row", title: "Squares one apart in a row", kind: "procedural", text: ["In a straight line of three squares, the first and the third fold onto opposite faces.", "Use this rule along every straight row and column of the net; the face left over pairs with the last one."] },
+        { id: "make_it", title: "Make it from paper", kind: "conceptual", text: ["Copy the net on squared paper, cut it out and fold it.", "Write the letters on both sides so you can check which faces end up opposite each other."], visual: () => netPicture(fromPicture(CUBE_NETS[0]), ["A", "B", "C", "D", "E", "F"]) },
+      ],
+    },
+    limits: "Nets made of six squares joined edge to edge (all turns and flips); nets of other solids are the afnet family. Making and folding a real net is hands-on.",
+  },
+  // ============================================================ nets and views of solids
+  {
+    id: "afnet",
+    arity: 2,
+    title: "Matching solids with their nets and views",
+    competency: NETS,
+    type: "choice",
+    // [i, f]: solid SOLIDS[i]; f 0 net → solid, 1 solid → net, 2 top and front views → solid, 3 top view, 4 front view, 5 end view lying down
+    parse: none,
+    reject: (p) => (netOk(p) ? null : "Seventeen solids; nets only for solids that have one, end views only for prisms and the cylinder."),
+    choices: netOpts,
+    prompt: netPrompt,
+    solve: ([i, f]) => {
+      const s = SOLIDS[i];
+      const want = f === 1 ? s.net! : f === 3 ? s.top : f === 4 ? s.front : f === 5 ? s.end! : s.name;
+      return { steps: [st("match", "match", NETS, [s.name, ["net", "net", "views", "top view", "front view", "end view"][f]], want)], answer: netOpts([i, f]).indexOf(want) };
+    },
+    // independent: work out from the solid's structure (its base, and its faces counted by building it) what its net and
+    // views must contain, and check the chosen option against that
+    validate: ([i, f], v) => {
+      if (typeof v !== "number") return false;
+      const opt = netOpts([i, f])[v];
+      if (!opt) return false;
+      if (f === 0 || f === 2) {
+        const j = SOLIDS.findIndex((x) => x.name === opt);
+        if (j < 0) return false;
+        const sj = structure(j);
+        if (f === 0) {
+          const net = SOLIDS[i].net!;
+          return countPieces(net) === sj.faces && sj.netWords.every((w) => net.includes(w));
+        }
+        return sj.topWords.every((w) => SOLIDS[i].top.includes(w)) && SOLIDS[i].front === `a ${sj.frontWord}` && (sj.topWords.includes("lines") === SOLIDS[i].top.includes("lines")) && (sj.topWords.includes("dot") === SOLIDS[i].top.includes("dot"));
+      }
+      const si = structure(i);
+      if (f === 1) return countPieces(opt) === si.faces && si.netWords.every((w) => opt.includes(w));
+      if (f === 3) return si.topWords.every((w) => opt.includes(w)) && (si.topWords.includes("lines") === opt.includes("lines")) && (si.topWords.includes("dot") === opt.includes("dot"));
+      if (f === 4) return opt === `a ${si.frontWord}`;
+      return opt === `a ${si.endWord}`;
+    },
+    bugs: ([i, f]) => {
+      const s = SOLIDS[i];
+      const o = netOpts([i, f]);
+      const field = (j: number) => (f === 1 ? SOLIDS[j].net : f === 3 ? SOLIDS[j].top : f === 4 ? SOLIDS[j].front : f === 5 ? SOLIDS[j].end ?? SOLIDS[j].front : SOLIDS[j].name);
+      const [c1, c2] = CONFUSE[i];
+      const out: Bug[] = [];
+      const add = (id: string, j: number, says: string) => {
+        const k = o.indexOf(field(j) ?? "");
+        if (k >= 0 && field(j) !== field(i)) out.push(B(id, "conceptual", NETS, says, k));
+      };
+      if (f <= 2) {
+        add("similar-solid", c1, f === 2 ? `The views of a ${SOLIDS[c1].name} were mixed up with these. Check both views: the view from above shows the base, the front view shows whether the sides go up straight (a rectangle) or meet at a point (a triangle).` : `The ${SOLIDS[c1].name} was mixed up with the ${s.name}. Count the pieces and look at their shapes: the ends or base tell which solid it is.`);
+        add("count-slip", c2, f === 2 ? `These views were not checked carefully against the ${SOLIDS[c2].name}: count the sides of the shape seen from above, and look whether the front view is a rectangle or a triangle.` : `The pieces do not match: count the faces of the solid and check the shape of each piece (the base or ends decide the solid).`);
+      } else {
+        add("other-view", c1, f === 3 ? "This is what another solid looks like from above. From straight above you see the outline of the base (and, for a pyramid or cone, the point at the top in the middle)." : f === 4 ? "This view belongs to another solid. From the front, a prism or cylinder shows straight upright sides (a rectangle); a pyramid or cone shows sides meeting at a point (a triangle)." : "This view belongs to another solid. Lying on its side with an end facing you, a prism shows its end face (the shape of its base).");
+      }
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => `The ${s.inputs[1]} of a ${s.inputs[0]}: ${s.value}`,
+    domain: [[0, 16], [0, 5]],
+    keep: netOk,
+    difficulty: ([i, f]) => (i <= 4 && f !== 5 ? 1 : f <= 1 ? 2 : 3),
+    figure: ([i, f]) => (f === 1 || f >= 3 ? SOLIDS[i].fig ?? null : null),
+    teach: {
+      idea: "A net is the solid's faces unfolded flat; a view is what you see from one side. Both come from the solid's parts: a prism has two equal ends joined by rectangles, a pyramid a base joined by triangles to a point; a cylinder has two circles and a curved side, a cone one circle and a curved side.",
+      method: "For a net, count the pieces and look at their shapes: the ends or base name the solid. For a view, picture yourself looking from that side: from above you see the base's outline; from the front, straight upright sides look like a rectangle and sides meeting at a point look like a triangle.",
+      alternatives: [
+        { id: "unroll", title: "Unroll the curved surface", kind: "conceptual", text: ["Cut a cylinder's curved side straight down and it unrolls into a rectangle; a cone's curved side unrolls into a fan shape (a sector).", "So a cylinder's net is 2 circles and a rectangle, and a cone's is 1 circle and a sector."], visual: () => ({ type: "solid", name: "cone" }) },
+        { id: "real_objects", title: "Look at real objects", kind: "procedural", text: ["A tin of oil is a cylinder, a birthday cap a cone, a Toblerone box a triangular prism.", "Hold one at eye level and then look down on it from above; say what shape you see each time."], visual: () => ({ type: "solid", name: "cylinder" }) },
+      ],
+    },
+    limits: "Nets and views described in words (no pictures of nets of solids yet); cube nets drawn on squares are the afcube family. Building solids from nets is hands-on.",
+  },
+  // ============================================================ views of a building made of cubes
+  {
+    id: "afview",
+    arity: 2,
+    title: "Top, front and side views of a building of cubes",
+    competency: NETS,
+    type: "integer",
+    mc: true,
+    // [g, ask]: building VIEW_GRIDS[g]; ask 0 top view, 1 front view, 2 right-hand side view: how many squares does it show?
+    parse: none,
+    reject: ([g, ask]) => (g < 0 || g >= VIEW_GRIDS.length || ask < 0 || ask > 2 ? "Sixty small buildings of cubes, three views." : null),
+    prompt: ([, ask]) => `The table is a plan of a building made of cubes standing on a mat: each number tells how many cubes are stacked on that square. The front of the building is the bottom row of the table. When you look at the building ${VIEWASK[ask]}, how many squares do you see?`,
+    solve: ([g, ask]) => {
+      const G = VIEW_GRIDS[g];
+      if (ask === 0) {
+        const n = G.flat().filter((x) => x > 0).length;
+        return { steps: [st("top", "count", NETS, ["squares with cubes"], n)], answer: n };
+      }
+      const tall = ask === 1 ? G[0].map((_, c) => Math.max(...G.map((row) => row[c]))) : G.map((row) => Math.max(...row));
+      const n = tall.reduce((a, b) => a + b, 0);
+      return { steps: [st("tallest", "max", NETS, [ask === 1 ? "each column" : "each row"], tall.join(", ")), st("view", "add", NETS, tall, n)], answer: n };
+    },
+    // independent: build every cube in space, then flatten the building onto the mat (top), the front wall or the side wall
+    validate: ([g, ask], v) => {
+      const G = VIEW_GRIDS[g];
+      const seen = new Set<string>();
+      G.forEach((row, r) => row.forEach((h, c) => {
+        for (let z = 0; z < h; z++) seen.add(ask === 0 ? `${r},${c}` : ask === 1 ? `${c},${z}` : `${r},${z}`);
+      }));
+      return v === seen.size;
+    },
+    bugs: ([g, ask]) => {
+      const G = VIEW_GRIDS[g];
+      const total = G.flat().reduce((a, b) => a + b, 0);
+      const front = G[0].map((_, c) => Math.max(...G.map((row) => row[c]))).reduce((a, b) => a + b, 0);
+      const side = G.map((row) => Math.max(...row)).reduce((a, b) => a + b, 0);
+      const top = G.flat().filter((x) => x > 0).length;
+      const ans = [top, front, side][ask];
+      const keep = (x: number) => (x === ans ? null : x);
+      if (ask === 0) return [B("all-cubes", "conceptual", NETS, "Every cube was counted. From above you see only the top of each stack, one square for each square of the mat that has cubes on it.", keep(total)), B("whole-mat", "procedural", NETS, "An empty square of the mat was counted too. Where nothing is stacked you see no cube.", keep(G.length * G[0].length))];
+      if (ask === 1) return [B("all-cubes", "conceptual", NETS, "Every cube was counted. From the front, cubes behind each other hide each other: in each column you see only as high as the tallest stack.", keep(total)), B("front-row-only", "procedural", NETS, "Only the front row was looked at. A taller stack further back shows above the front row.", keep(G[G.length - 1].reduce((a, b) => a + b, 0)))];
+      return [B("all-cubes", "conceptual", NETS, "Every cube was counted. From the side, cubes in the same row hide each other: in each row you see only as high as the tallest stack.", keep(total)), B("front-for-side", "procedural", NETS, "The front view was counted instead of the side view. From the right-hand side, each ROW of the plan (from the front to the back) becomes one column of the view.", keep(front))];
+    },
+    distractors: ([g, ask]) => {
+      const G = VIEW_GRIDS[g];
+      const top = G.flat().filter((x) => x > 0).length;
+      const front = G[0].map((_, c) => Math.max(...G.map((row) => row[c]))).reduce((a, b) => a + b, 0);
+      const side = G.map((row) => Math.max(...row)).reduce((a, b) => a + b, 0);
+      const a = [top, front, side][ask];
+      return [a + 1, a - 1, a + 2, a - 2].filter((x) => x > 0);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "top" ? `From above, one square for each square of the mat with cubes: ${s.value}` : s.id === "tallest" ? `The tallest stack in ${s.inputs[0]}: ${s.value}` : `Add them: ${s.value} squares`),
+    domain: [[0, 59], [0, 2]],
+    difficulty: ([g, ask]) => (ask === 0 ? 1 : VIEW_GRIDS[g].length === 2 ? 2 : 3),
+    figure: ([g]) => {
+      const G = VIEW_GRIDS[g];
+      return { type: "table", head: ["", ...G[0].map((_, c) => (c === 0 ? "left" : c === G[0].length - 1 ? "right" : ""))], rows: G.map((row, r) => [r === 0 ? "back" : r === G.length - 1 ? "front" : "", ...row.map(String)]) };
+    },
+    word: ([, ask]) => `In a shop, boxes of the same size are stacked on a floor marked in squares, as the plan in the table shows (each number is how many boxes are piled on that square; the front is the bottom row). A security camera looks at the stacks ${VIEWASK[ask]}. How many box faces does the camera see?`,
+    teach: {
+      idea: "A view shows only what faces you: from above, the top of each stack; from the front, the tallest stack in each column (cubes behind are hidden); from the side, the tallest stack in each row.",
+      method: "Top view: count the squares that have cubes. Front view: for each column find the biggest number and add these. Side view: for each row find the biggest number and add these.",
+      alternatives: [
+        { id: "build_it", title: "Build it with blocks", kind: "conceptual", text: ["Build the stacks with cubes or matchboxes on squares drawn on paper.", "Crouch down to eye level in front of them and count the squares you see, then do the same from the side."], visual: () => ({ type: "solid", name: "cube" }) },
+        { id: "draw_views", title: "Draw each view on squared paper", kind: "procedural", text: ["For the front view, draw one column for each column of the plan, as tall as its tallest stack.", "Count the squares in your drawing."] },
+      ],
+    },
+    limits: "Buildings of up to 18 cubes on 2 × 2 to 3 × 3 mats, every stack resting on the mat; counting squares in a view stands in for drawing it (drawing views is an educator-marked task).",
+  },
+  // ============================================================ the rule of a sequence
+  {
+    id: "affrule",
+    arity: 3,
+    title: "Which rule makes the sequence?",
+    competency: FIG,
+    type: "choice",
+    // [kind, a, k]: kind 0 squares, 1 triangular, 2 cubes, 3 powers of 2, 4 odd numbers, 5 add k; a = where the five terms start
+    parse: none,
+    reject: (p) => (ruleOk(p) ? null : "Square, triangular, cube, power-of-2 and odd-number sequences from different starts, and add-k sequences."),
+    choices: (p) => ruleOpts(p).rules.map((r) => r.text),
+    prompt: (p) => `Look at the sequence ${ruleTerms(p).join(", ")}, … Which rule makes it?`,
+    solve: (p) => {
+      const t = ruleTerms(p);
+      const { rules, right } = ruleOpts(p);
+      return { steps: [st("gaps", "subtract", FIG, t, t.slice(1).map((x, i) => x - t[i]).join(", ")), st("rule", "match", FIG, [rules[right].text], rules[right].text)], answer: right };
+    },
+    // independent: test every offered rule against all five terms; exactly one may fit, and it must be the chosen one
+    validate: (p, v) => {
+      const t = ruleTerms(p);
+      const { rules } = ruleOpts(p);
+      return typeof v === "number" && rules.filter((r) => r.fits(t)).length === 1 && !!rules[v]?.fits(t);
+    },
+    bugs: (p) => {
+      const t = ruleTerms(p);
+      const { gap, near } = ruleOpts(p);
+      const gaps = t.slice(1).map((x, i) => x - t[i]);
+      const kind = p[0];
+      if (kind === 4)
+        return [
+          B("odd-even", "conceptual", FIG, `The numbers go up in 2s, as the even numbers do, but ${t[0]}, ${t[1]}, … are odd numbers (they end in 1, 3, 5, 7 or 9).`, gap),
+          B("step-miscount", "procedural", FIG, `The step from one number to the next was miscounted: ${t[0]} to ${t[1]} is ${gaps[0]}.`, near),
+        ];
+      if (kind === 5)
+        return [
+          B("step-miscount", "procedural", FIG, `The step from one number to the next was miscounted by one: ${t[0]} to ${t[1]} is ${gaps[0]}. Count on from ${t[0]} to check.`, gap),
+          B("step-miscount-down", "procedural", FIG, `The step was counted one too small: ${t[0]} + ${gaps[0] - 1} = ${t[0] + gaps[0] - 1}, not ${t[1]}.`, near),
+        ];
+      return [
+        B("first-gap", "procedural", FIG, `Only the first step (${t[0]} to ${t[1]}) was checked. A rule must work for every step; here the steps are ${gaps.join(", ")}.`, gap),
+        B("untested-rule", "conceptual", FIG, `A rule was chosen without testing it on the numbers. Try it on each number: does it really give ${t[1]}, ${t[2]}, ${t[3]}, …?`, near),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "gaps" ? `The steps from one number to the next are ${s.value}` : `The rule that fits every number: ${s.value}`),
+    domain: [[0, 5], [0, 30], [0, 12]],
+    keep: ruleOk,
+    cap: 300,
+    difficulty: ([kind]) => (kind === 4 || kind === 5 ? 1 : kind === 0 || kind === 3 ? 2 : 3),
+    word: (p) => `${name(p[0] + p[1])} records the number of ${["tiles in square floor patterns", "glasses in triangular stacks", "small cubes in bigger cubes", "bacteria in a dish counted every hour", "beads in each row of a necklace pattern", "seats in each row of a hall"][p[0]]}: ${ruleTerms(p).join(", ")}, … Which rule makes these numbers?`,
+    teach: {
+      idea: "A rule must explain EVERY number of the sequence, not just the first step. Look at the steps between numbers: equal steps mean 'add the same each time'; steps that grow by 1 give triangular numbers, by 2 square numbers; numbers that double are powers of 2.",
+      method: "Write the steps (differences) between neighbouring numbers. If they are equal, the rule adds that number. If not, test the special sequences (squares, triangular, cubes, doubling) on all the numbers.",
+      alternatives: [
+        { id: "steps_table", title: "A table of steps", kind: "procedural", text: ["Write the numbers in a row and the steps between them underneath.", "If the steps themselves follow a pattern, write the steps of the steps: for square numbers they are all 2."], visual: (p) => ({ type: "table", head: ["Number", ...ruleTerms(p).map(String)], rows: [["Step", "", ...ruleTerms(p).slice(1).map((x, i) => String(x - ruleTerms(p)[i]))]] }) },
+        { id: "pictures", title: "Draw the numbers as dots", kind: "conceptual", text: ["Square numbers make squares of dots, triangular numbers make triangles, and doubling makes two copies of the last picture.", "Draw the first few as dots and see which picture fits."], visual: () => ({ type: "dots", count: 9, rows: 3 }) },
+      ],
+    },
+    limits: "Five terms of squares, triangular numbers, cubes, powers of 2, odd numbers or add-k sequences, from different starting points; writing the rule in words or symbols is an educator-marked task.",
+  },
+);
+
+/** The structure of SOLIDS[j], worked out from its name (base and kind) and by building it: what its net and views contain. */
+function structure(j: number): { faces: number; netWords: string[]; topWords: string[]; frontWord: string; endWord: string } {
+  const nm = SOLIDS[j].name;
+  const m = nm.match(/^(\w+) (prism|pyramid)$/);
+  if (m) {
+    const n = Number(Object.keys(BASES).find((k) => BASES[Number(k)] === m[1]));
+    const solid = m[2] === "prism" ? 0 : 1;
+    const [faces] = buildSolid(solid, n);
+    const poly = POLY[n];
+    return solid === 0 ? { faces, netWords: [poly, "rectangle"], topWords: [poly], frontWord: "rectangle", endWord: poly } : { faces, netWords: n === 3 ? ["triangle"] : [poly, "triangle"], topWords: [poly, "lines"], frontWord: "triangle", endWord: "" };
+  }
+  const special: Record<string, { faces: number; netWords: string[]; topWords: string[]; frontWord: string; endWord: string }> = {
+    cube: { faces: 6, netWords: ["square"], topWords: ["square"], frontWord: "square", endWord: "" },
+    cuboid: { faces: 6, netWords: ["rectangle"], topWords: ["rectangle"], frontWord: "rectangle", endWord: "" },
+    cylinder: { faces: 3, netWords: ["circle", "rectangle"], topWords: ["circle"], frontWord: "rectangle", endWord: "circle" },
+    cone: { faces: 2, netWords: ["circle", "sector"], topWords: ["circle", "dot"], frontWord: "triangle", endWord: "" },
+    sphere: { faces: 1, netWords: [], topWords: ["circle"], frontWord: "circle", endWord: "" },
+    "hemisphere (flat face down)": { faces: 2, netWords: [], topWords: ["circle"], frontWord: "semicircle", endWord: "" },
+  };
+  return special[nm];
+}
+/** The number of pieces in a net described in words ("2 hexagons and 6 rectangles" → 8). */
+function countPieces(t: string) {
+  return (t.replace(/\(.*?\)/g, "").match(/\d+/g) ?? []).map(Number).reduce((a, b) => a + b, 0);
+}

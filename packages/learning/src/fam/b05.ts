@@ -2224,7 +2224,7 @@ const GEO_MORE: Def[] = [
       const items = q.items!;
       let best = -1;
       for (let i = 1; i < items.length; i++) if (objAngle(items[i]) !== 180 && (best < 0 || Math.abs(objAngle(items[i]) - 90) < Math.abs(objAngle(items[best]) - 90))) best = i;
-      if (best > 0) out.push({ id: "nearly-square", kind: "conceptual", competency: ANG, says: `${items[best].text[0].toUpperCase()}${items[best].text.slice(1)} makes an angle that is not far from a square corner, but a folded-paper right angle would not fit it exactly.`, predict: q.at(best) });
+      if (best > 0) out.push({ id: "nearly-square", kind: "conceptual", competency: ANG, says: `The angle at ${items[best].text} is not far from a square corner, but a folded-paper right angle would not fit it exactly.`, predict: q.at(best) });
       const flat = items.findIndex((o) => objAngle(o) === 180);
       if (flat > 0) out.push({ id: "straight-as-right", kind: "conceptual", competency: ANG, says: "A flat, straight angle (an open book lying flat) was taken for a right angle; a right angle is only half of a straight angle.", predict: q.at(flat) });
       return out;
@@ -2584,3 +2584,1831 @@ const GEO_MORE: Def[] = [
   },
 ];
 B05.push(...GEO_MORE);
+
+// ---------------------------------------------------------------- number helpers for the gap@1 families
+
+/** International comma grouping: 4070523 → 4,070,523. */
+const intl = (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const w3 = (n: number) => [n >= 100 ? `${ONES[Math.floor(n / 100)]} hundred` : "", n % 100 ? w2(n % 100) : ""].filter(Boolean).join(" ");
+const indName = (n: number) => {
+  const parts = [[Math.floor(n / 1e7), "crore"], [Math.floor(n / 1e5) % 100, "lakh"], [Math.floor(n / 1000) % 100, "thousand"]] as [number, string][];
+  const out = parts.filter(([v]) => v).map(([v, u]) => `${w3(v)} ${u}`);
+  if (n % 1000) out.push(w3(n % 1000));
+  return out.join(" ");
+};
+const intlName = (n: number) => {
+  const parts = [[Math.floor(n / 1e9) % 1000, "billion"], [Math.floor(n / 1e6) % 1000, "million"], [Math.floor(n / 1000) % 1000, "thousand"]] as [number, string][];
+  const out = parts.filter(([v]) => v).map(([v, u]) => `${w3(v)} ${u}`);
+  if (n % 1000) out.push(w3(n % 1000));
+  return out.join(" ");
+};
+const WORDVAL: Record<string, number> = Object.fromEntries([...ONES.map((w, i) => [w, i]), ...TENS.map((w, i) => [w, 10 * i]).filter(([w]) => w)]);
+const BIG: Record<string, number> = { crore: 1e7, lakh: 1e5, million: 1e6, billion: 1e9, thousand: 1000 };
+/** Read a number name back into a number, word by word (an independent reading of what was written). */
+const readName = (t: string) => {
+  let total = 0;
+  let cur = 0;
+  for (const w of t.replace(/-/g, " ").split(/\s+/).filter(Boolean)) {
+    if (w in WORDVAL) cur += WORDVAL[w];
+    else if (w === "hundred") cur *= 100;
+    else if (w in BIG) {
+      total += cur * BIG[w];
+      cur = 0;
+    } else return NaN;
+  }
+  return total + cur;
+};
+/** A number with the given count of digits, some of them zeros, from a seed. */
+const numWith = (seed: number, len: number) => {
+  const r = rng(seed);
+  let s = String(1 + Math.floor(r() * 9));
+  while (s.length < len) s += r() < 0.3 ? "0" : String(1 + Math.floor(r() * 9));
+  if (!/0/.test(s.slice(1))) s = s.slice(0, -2) + "0" + s.slice(-1);
+  return Number(s);
+};
+const dropZero = (n: number) => Number(String(n).replace(/(?<=.)0/, ""));
+const swapAdj = (n: number) => {
+  const s = String(n).split("");
+  for (let i = s.length - 1; i > 0; i--) if (s[i] !== s[i - 1] && s[i] !== "0" && s[i - 1] !== "0") {
+    [s[i], s[i - 1]] = [s[i - 1], s[i]];
+    return Number(s.join(""));
+  }
+  return n + 1;
+};
+const expanded = (n: number) => String(n).split("").map((d, i, a) => [Number(d), 10 ** (a.length - 1 - i)]).filter(([d]) => d).map(([d, u]) => (u === 1 ? `${d}` : `${d} × ${ind(u)}`)).join(" + ");
+const leftGroups = (n: number) => String(n).replace(/(\d{3})(?=\d)/g, "$1,");
+const INDCOMMA = /^\d{1,2}(,\d{2})*,\d{3}$/;
+const INTCOMMA = /^\d{1,3}(,\d{3})+$/;
+const NF_LEN = (kind: number, s: number) => (kind === 0 || kind === 3 ? 5 + (s % 2) : kind <= 2 ? 6 + (s % 4) : kind === 4 ? 7 + (s % 3) : 8 + (s % 2));
+const nfNum = (kind: number, s: number) => numWith(s * 7 + kind * 1000 + 81000, NF_LEN(kind, s));
+const nfQ = ([kind, s]: number[]) => {
+  const n = nfNum(kind, s);
+  const nameOf = kind === 4 ? intlName : indName;
+  if (kind === 0 || kind === 4 || kind === 5) {
+    const wrong = [dropZero(n), n * 10, swapAdj(n)];
+    return { ...shuffled(`aenumf:${kind},${s}`, [n, ...wrong].map(nameOf)), n };
+  }
+  if (kind === 1 || kind === 2) {
+    const base = kind === 1 ? [ind(n), intl(n), leftGroups(n), String(n).replace(/\B(?=(\d{2})+$)/g, ",")] : [intl(n), ind(n), leftGroups(n), String(n).replace(/\B(?=(\d{2})+$)/g, ",")];
+    return { ...shuffled(`aenumf:${kind},${s}`, base), n };
+  }
+  return { ...shuffled(`aenumf:${kind},${s}`, [expanded(n), expanded(dropZero(n)), expanded(n * 10), expanded(swapAdj(n))]), n };
+};
+/** The value of "4 × 1,00,000 + 7 × 1,000 + 52"-style sums, term by term. */
+const sumTerms = (t: string) => t.split("+").reduce((acc, term) => acc + term.split("×").reduce((m, f) => m * Number(f.replace(/,/g, "").trim()), 1), 0);
+
+/** Thousandths as a decimal in simplest form: 34507 → "34.507", 34500 → "34.5". */
+const d3 = (th: number) => {
+  const neg = th < 0;
+  const a = Math.abs(th);
+  const w = Math.floor(a / 1000);
+  const r = a % 1000;
+  const frac = r === 0 ? "" : `.${String(r).padStart(3, "0").replace(/0+$/, "")}`;
+  return `${neg ? "-" : ""}${w}${frac}`;
+};
+const thou = (v: Value) => {
+  const x = typeof v === "string" ? Number(v.trim()) : typeof v === "number" ? v : NaN;
+  const t = Math.round(x * 1000);
+  return Number.isFinite(x) && Math.abs(x * 1000 - t) < 1e-6 ? t : null;
+};
+/** Read a sum like "20 + 5 + 0.3 + 0.007" or "20 + 5 + 3/10" in thousandths. */
+const sumDec = (t: string) => t.split("+").reduce((acc, term) => {
+  const [a, b] = term.trim().split("/");
+  return acc + Math.round((Number(a) / (b ? Number(b) : 1)) * 1000);
+}, 0);
+const PLACES3 = ["tens", "ones", "tenths", "hundredths", "thousandths"];
+const PLACEV = [10000, 1000, 100, 10, 1]; // in thousandths
+/** A decimal with two whole digits and three decimal places, from a seed: kind 0 all digits different and not 0;
+ * otherwise one of the tenths or hundredths is 0. */
+const dpvNum = (kind: number, s: number) => {
+  const r = rng(s * 13 + kind * 977 + 33000);
+  for (;;) {
+    const ds = Array.from({ length: 5 }, () => 1 + Math.floor(r() * 9));
+    if (kind === 0 && new Set(ds).size !== 5) continue;
+    if (kind > 0) ds[2 + Math.floor(r() * 2)] = 0;
+    return ds;
+  }
+};
+const dpvQ = ([kind, s]: number[]) => {
+  const ds = dpvNum(kind, s);
+  const th = ds.reduce((acc, d, i) => acc + d * PLACEV[i], 0);
+  if (kind === 0) {
+    const pos = 1 + (s % 4); // ones, tenths, hundredths or thousandths
+    const near3 = [0, 1, 2, 3, 4].filter((i) => i !== pos).sort((x, y) => Math.abs(x - pos) - Math.abs(y - pos) || y - x).slice(0, 3);
+    const base = [pos, ...near3].map((i) => d3(ds[pos] * PLACEV[i]));
+    return { ...shuffled(`aedpv:${kind},${s}`, base), ds, th, pos, base };
+  }
+  const zeroAt = ds[2] === 0 ? 2 : 3;
+  const terms = (xs: number[], shift = 0) => xs.map((d, i) => [d, PLACEV[i] / 10 ** shift] as const).filter(([d]) => d).map(([d, u]) => d3(d * u)).join(" + ");
+  const noZero = [...ds.slice(0, zeroAt), ...ds.slice(zeroAt + 1), 0];
+  const swapWO = [ds[1], ds[0], ...ds.slice(2)];
+  if (kind === 1) {
+    const base = [terms(ds), terms(noZero), terms(swapWO), terms([0, ...ds.slice(0, 4)])];
+    return { ...shuffled(`aedpv:${kind},${s}`, base), ds, th, pos: zeroAt, base };
+  }
+  const val = (xs: number[]) => d3(xs.reduce((acc, d, i) => acc + d * PLACEV[i], 0));
+  const base = [val(ds), val(noZero), val(swapWO), val([...ds.slice(0, 2), ds[4], ds[3], ds[2]])];
+  return { ...shuffled(`aedpv:${kind},${s}`, base), ds, th, pos: zeroAt, base };
+};
+const dordNums = (s: number) => {
+  const w = s % 10;
+  const t = 1 + (Math.floor(s / 10) % 8);
+  const u = 1 + Math.floor(s / 80);
+  // w.t, w.(t − 1)u, w.t0u and w.tu: more digits does not mean bigger
+  const xs = [1000 * w + 100 * t, 1000 * w + 100 * (t - 1) + 10 * u, 1000 * w + 100 * t + u, 1000 * w + 100 * t + 10 * u];
+  const pm = perm(`aedord:${s}`, 4);
+  return pm.map((i) => xs[i]);
+};
+const FRACS: [number, number][] = [[1, 2], [1, 4], [3, 4], [1, 5], [2, 5], [3, 5], [4, 5], [1, 8], [3, 8], [5, 8], [7, 8], [1, 20], [3, 20], [7, 20], [9, 20], [11, 20], [1, 25], [2, 25], [6, 25], [12, 25], [1, 50], [3, 50], [7, 50], [21, 50], [3, 2], [5, 4], [7, 4], [9, 8], [6, 5], [13, 20]];
+const dfrQ = ([kind, s]: number[]) => {
+  if (kind === 0) {
+    // s < 9: s + 1 tenths; otherwise a number of hundredths not a multiple of 10
+    const h = s < 9 ? 10 * (s + 1) : [1, 3, 7, 9, 11, 13, 17, 19, 21, 23, 27, 29, 31, 33, 37, 39, 41, 43, 47, 49, 51, 53, 57, 59, 61, 63, 67, 69, 71, 73, 77, 79, 81, 83, 87, 89, 91, 93, 97, 99, 2, 4, 6, 8, 12, 14, 16, 18, 22, 24][s - 9];
+    const tenths = h % 10 === 0;
+    const num = tenths ? h / 10 : h;
+    const base = tenths ? [`${num}/10`, `${num}/100`, `1/${num}`, `${num}/1000`] : [`${num}/100`, `${num}/10`, `${num}/1000`, `1/${num}`];
+    const uniq = [...new Set(base)];
+    return { ...shuffled(`aedfr:${kind},${s}`, uniq), dec: ds(h), val: h / 100, base: uniq };
+  }
+  const [a, b] = FRACS[s % FRACS.length];
+  const th = (1000 * a) / b;
+  if (kind === 1) {
+    const raw = Math.round(th) % 10 === 0 ? (Math.round(th) % 100 === 0 ? [Math.round(th) / 100, 10] : [Math.round(th) / 10, 100]) : [Math.round(th), 1000];
+    const base = [`${a}/${b}`, `${raw[0]}/${raw[1]}`, `${b}/${a}`, `${a + 1}/${b}`];
+    return { ...shuffled(`aedfr:${kind},${s}`, [...new Set(base)]), dec: d3(th), val: a / b, base: [...new Set(base)] };
+  }
+  const base = [d3(th), `${a}.${b}`, `${b}.${a}`, d3(th + (th % 10 === 0 ? 100 : 10))];
+  return { ...shuffled(`aedfr:${kind},${s}`, [...new Set(base)]), dec: d3(th), val: a / b, base: [...new Set(base)] };
+};
+const fracVal = (t: string) => {
+  const [a, b] = t.split("/").map(Number);
+  return b ? a / b : NaN;
+};
+const AMPM = (H: number, m: number) => `${H % 12 === 0 ? 12 : H % 12}:${String(m).padStart(2, "0")} ${H < 12 ? "a.m." : "p.m."}`;
+const ampmQ = ([H, k]: number[]) => {
+  const mm = String(5 * k).padStart(2, "0");
+  const h12 = H % 12 === 0 ? 12 : H % 12;
+  const own = H < 12 ? "a.m." : "p.m.";
+  const other = H < 12 ? "p.m." : "a.m.";
+  const third = H === 0 || H === 12 ? `0:${mm} ${own}` : H >= 13 ? `${H}:${mm} ${own}` : `${h12 + 1}:${mm} ${own}`;
+  const fourth = H >= 13 ? `${H - 10}:${mm} ${own}` : H === 0 || H === 12 ? `1:${mm} ${own}` : `${h12 === 1 ? 12 : h12 - 1}:${mm} ${own}`;
+  const base = [AMPM(H, 5 * k), `${h12}:${mm} ${other}`, third, fourth];
+  return { ...shuffled(`aeampm:${H},${k}`, base), base };
+};
+/** Minutes since midnight of "3:20 p.m." (an independent reading of the written time). */
+const readAmPm = (t: string) => {
+  const m = t.match(/^(\d{1,2}):(\d{2}) (a\.m\.|p\.m\.)$/);
+  if (!m) return null;
+  const h = Number(m[1]);
+  if (h < 1 || h > 12) return null;
+  return (h === 12 ? 0 : h) * 60 + Number(m[2]) + (m[3] === "p.m." ? 720 : 0);
+};
+const rev = (n: number) => Number(String(n).split("").reverse().join(""));
+const isPal = (n: number) => String(n) === String(rev(n));
+const palSteps = (x: number) => {
+  let n = x;
+  let k = 0;
+  while (!isPal(n) && k < 30) {
+    n += rev(n);
+    k++;
+  }
+  return k;
+};
+const r10 = (n: number) => roundTo(n, 10);
+const rLead = (n: number) => roundTo(n, n >= 100 ? 100 : 10);
+type ChkQ = { op: number; a: number; b: number; claim: number; exact: number };
+const chkData = (s: number): ChkQ => {
+  const r = rng(s * 5 + 71000);
+  const op = s % 3;
+  const c = Math.floor(s / 3);
+  if (op === 0) {
+    const a = 120 + Math.floor(r() * 780);
+    const b = 12 + Math.floor(r() * 87);
+    return { op, a, b, exact: a + b, claim: c % 2 ? a + 10 * b : a + b };
+  }
+  if (op === 1) {
+    const a = 300 + Math.floor(r() * 700);
+    const b = 12 + Math.floor(r() * Math.min(87, Math.floor(a / 10) - 13));
+    return { op, a, b, exact: a - b, claim: c % 2 ? a - 10 * b : a - b };
+  }
+  const a = 12 + Math.floor(r() * 87);
+  const b = 12 + Math.floor(r() * 87);
+  const t = c % 3;
+  return { op, a, b, exact: a * b, claim: t === 0 ? a * b : t === 1 ? a * (b % 10) + a * Math.floor(b / 10) : a * (b % 10) + a * Math.floor(b / 10) * 100 };
+};
+const estOf = (q: ChkQ) => (q.op === 0 ? rLead(q.a) + rLead(q.b) : q.op === 1 ? rLead(q.a) - rLead(q.b) : r10(q.a) * r10(q.b));
+const CHK = ["Reasonable: it is close to the estimate", "Not reasonable: it is far too big", "Not reasonable: it is far too small"];
+type Sit = { text: string; exact: boolean };
+const SITS: Sit[] = [
+  ...["the change a shopkeeper gives back", "the amount written on a cheque", "the number of tablets a doctor tells you to take", "the marks written on a report card", "the price printed on a train ticket", "the weight of gold bought at a jewellery shop", "the time a train leaves the station", "the number of chairs to put out for 32 invited guests"].map((text) => ({ text, exact: true })),
+  ...["the number of people at a temple festival, for a news report", "how long it takes to walk to a friend's house", "the number of mangoes on a big tree", "the distance from Chennai to Madurai, when planning a trip", "the number of grains in a bag of rice", "the rain that fell in a month, for a weather report", "the size of the crowd at a cricket match", "how many leaves are on a neem tree"].map((text) => ({ text, exact: false })),
+];
+const sitPick = (s: number) => {
+  const r = rng(s * 3 + 17000);
+  const odd = s % 2 === 0; // s even: one item needs an exact answer and three do not; s odd: the other way round
+  const ones = SITS.filter((x) => x.exact === odd);
+  const many = [...SITS.filter((x) => x.exact !== odd)];
+  const first = ones[Math.floor(r() * ones.length)];
+  const rest: Sit[] = [];
+  while (rest.length < 3) rest.push(many.splice(Math.floor(r() * many.length), 1)[0]);
+  return [first, ...rest];
+};
+const sizeData = (s: number) => {
+  const r = rng(s * 9 + 23000);
+  const a = s % 2 ? 12 + Math.floor(r() * 87) : 110 + Math.floor(r() * 880);
+  const b = 12 + Math.floor(r() * 87);
+  return { a, b, E: rLead(a) * rLead(b) };
+};
+const chkQ = ([kind, s]: number[]) => {
+  if (kind === 0) {
+    const q = chkData(s);
+    const right = q.claim === q.exact ? 0 : q.claim > q.exact ? 1 : 2;
+    return { ...shuffled(`aechk:${kind},${s}`, CHK), right: CHK[right], q };
+  }
+  if (kind === 1) {
+    const items = sitPick(s);
+    return { ...shuffled(`aechk:${kind},${s}`, items.map((x) => x.text)), right: items[0].text, items };
+  }
+  const z = sizeData(s);
+  const base = [z.E, z.E / 10, z.E * 10, z.E * 100].map((x) => `about ${ind(x)}`);
+  return { ...shuffled(`aechk:${kind},${s}`, base), right: base[0], z };
+};
+const RND_PLACE = ["", "", "", "thousand", "ten thousand", "lakh", "ten lakh", "crore"];
+const rndNum = (k: number, s: number) => {
+  const u = 10 ** k;
+  const r = rng(s * 11 + k * 1000 + 44000);
+  return 2 * u + Math.floor(r() * 98 * u);
+};
+const RND_CTX = [
+  (n: number) => `A truck has travelled ${ind(n)} km in its working life.`,
+  (n: number) => `The number of people living in a district is ${ind(n)}.`,
+  (n: number) => `A company's sales last year were ₹${ind(n)}.`,
+  (n: number) => `${ind(n)} tickets were sold for a film in its first month.`,
+];
+const decThou = (s: number) => {
+  const r = rng(s * 7 + 64000);
+  const w = Math.floor(r() * 60);
+  let f = 1 + Math.floor(r() * 999);
+  if (f % 10 === 0) f += 3;
+  return 1000 * w + f;
+};
+const roundTh = (th: number, place: number) => {
+  const u = [1000, 100, 10][place];
+  return Math.floor((th + u / 2) / u) * u;
+};
+
+const NUM_MORE: Def[] = [
+  {
+    id: "aepair",
+    arity: 2,
+    title: "Even or odd by putting things in pairs",
+    competency: EVEN,
+    type: "choice",
+    // [pic, n]: n counters drawn as dots (pic 0) or in ten frames (pic 1)
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 1], [5, 50]]) ? "5 to 50 counters, drawn as dots or in ten frames." : null),
+    prompt: ([pic]) => (pic === 0 ? "Put the dots in the picture into pairs (join them two by two). Is the number of dots even or odd?" : "Each ten frame in the picture has two rows of 5 squares. Pair each counter with the one above or below it. Is the number of counters even or odd?"),
+    choices: (p) => shuffled(`aepair:${p}`, ["even", "odd"]).choices,
+    solve: (p) => {
+      const q = shuffled(`aepair:${p}`, ["even", "odd"]);
+      const left = p[1] % 2;
+      return { steps: [{ id: "pairs", op: "divide", competency: EVEN, inputs: [p[1], 2], value: Math.floor(p[1] / 2) }, { id: "left", op: "classify", competency: EVEN, inputs: [left], value: q.at(left) }], answer: q.at(left) };
+    },
+    // independent: take pairs away one at a time and see whether one is left
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      let n = p[1];
+      while (n >= 2) n -= 2;
+      return shuffled(`aepair:${p}`, ["even", "odd"]).choices[v] === (n === 0 ? "even" : "odd");
+    },
+    bugs: (p) => {
+      const q = shuffled(`aepair:${p}`, ["even", "odd"]);
+      const n = p[1];
+      const pairs = Math.floor(n / 2);
+      return [
+        { id: "pairs-count", kind: "conceptual", competency: EVEN, says: `The number of pairs (${pairs}) was checked for being even; what decides is whether one is left over without a partner (${n % 2 ? "one is left" : "none is left"}).`, predict: pairs % 2 === n % 2 ? q.at(pairs % 2) : null },
+        ...(n >= 10 ? [{ id: "tens-digit", kind: "conceptual", competency: EVEN, says: `The tens digit (${Math.floor(n / 10)}) was looked at; tens always pair up, so only the ones (or the counter left over) decide.`, predict: Math.floor(n / 10) % 2 !== n % 2 ? q.at(Math.floor(n / 10) % 2) : null } as Bug] : []),
+      ].filter((b) => b.predict !== null && b.predict !== q.at(n % 2));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "pairs" ? `${s.inputs[0]} make ${s.value} pairs` : Number(s.inputs[0]) ? "One is left over without a partner: odd" : "None is left over: even"),
+    domain: [[0, 1], [5, 50]],
+    difficulty: ([pic, n]) => (n <= 12 ? 1 : pic === 1 ? 2 : 3),
+    figure: ([pic, n]) => (pic === 0 ? { type: "dots", count: n } : { type: "tenframe", filled: n, frames: Math.ceil(n / 10) }),
+    word: ([pic, n]) => `For a dance at the school assembly, children stand in pairs. There is one child for each ${pic === 0 ? "dot" : "counter"} in the picture. Is the number of children even or odd?`,
+    teach: {
+      idea: "An even number of things can be put into pairs with none left over. An odd number always leaves exactly one without a partner.",
+      method: "Join the things two by two (or look down the columns of a ten frame). If every one has a partner, the number is even; if one is left over, it is odd.",
+      visual: ([, n]) => ({ type: "tenframe", filled: n, frames: Math.ceil(n / 10) }),
+      alternatives: [
+        { id: "last_digit", title: "Check with the last digit", kind: "conceptual", text: ["Count them and look at the ones digit.", "0, 2, 4, 6 or 8 means even; 1, 3, 5, 7 or 9 means odd — the same answer as pairing."] },
+      ],
+    },
+    limits: "5 to 50 counters drawn as dots or in ten frames; the last-digit rule on written numbers is the family aeeven.",
+  },
+  {
+    id: "aerev",
+    arity: 2,
+    title: "Patterns in reverse-and-add sums and in the addition chart",
+    competency: PATR,
+    type: "integer",
+    mc: true,
+    // [kind, x]: 0 x + (x reversed); 1 reverse-and-add steps to a palindrome; 2 even sums in row x of the addition chart;
+    // 3 how many cells of the 0–10 addition chart show the sum x
+    parse: none,
+    reject: ([kind, x]) => {
+      if (!inRange([kind, x], [[0, 3], [0, 99]])) return "A two-digit number, a row of the addition chart, or a sum in it.";
+      if (kind === 0) return x < 12 || x % 10 === 0 || isPal(x) ? "A two-digit number with different digits, not ending in 0." : null;
+      if (kind === 1) return x < 12 || x % 10 === 0 || isPal(x) || palSteps(x) < 2 || palSteps(x) > 4 || (x % 10 > Math.floor(x / 10)) ? "A two-digit number that needs 2 to 4 steps (tens digit larger, so each pair of reversals is asked once)." : null;
+      if (kind === 2) return x > 20 ? "Rows 0 to 20." : null;
+      return x < 1 || x > 19 ? "Sums 1 to 19." : null;
+    },
+    prompt: ([kind, x]) =>
+      [
+        `Take ${x}, reverse its digits to get ${rev(x)}, and add the two numbers. What is the sum?`,
+        `Start with ${x}. Reverse its digits and add. Keep doing this with each answer until you get a palindrome (a number that reads the same both ways, like 121). How many reverse-and-add steps does it take?`,
+        `In an addition chart, row ${x} lists the sums ${x} + 0, ${x} + 1, ${x} + 2, … up to ${x} + 10. How many of these 11 sums are even?`,
+        `An addition chart has rows 0 to 10 and columns 0 to 10, and each cell shows row + column. How many cells show the sum ${x}?`,
+      ][kind],
+    solve: ([kind, x]) => {
+      const ans = kind === 0 ? x + rev(x) : kind === 1 ? palSteps(x) : kind === 2 ? (x % 2 ? 5 : 6) : x <= 10 ? x + 1 : 21 - x;
+      return { steps: [{ id: ["sum", "steps", "row", "diagonal"][kind], op: kind === 0 ? "add" : "count", competency: PATR, inputs: [x], value: ans }], answer: ans };
+    },
+    // independent: build the sums digit by digit, step through the chart cell by cell
+    validate: ([kind, x], v) => {
+      if (!isInt(v)) return false;
+      if (kind === 0) return v === 11 * (Math.floor(x / 10) + (x % 10));
+      if (kind === 1) {
+        let n = x;
+        for (let k = 1; k <= 6; k++) {
+          n = n + Number([...String(n)].reverse().join(""));
+          if ([...String(n)].reverse().join("") === String(n)) return v === k;
+        }
+        return false;
+      }
+      let c = 0;
+      for (let r = 0; r <= 10; r++) for (let col = 0; col <= 10; col++) if (kind === 2 ? r === 0 && (x + col) % 2 === 0 : r + col === x) c++;
+      return v === c;
+    },
+    bugs: ([kind, x]) => {
+      if (kind === 0) {
+        const [t, o] = [Math.floor(x / 10), x % 10];
+        return [
+          { id: "no-carry", kind: "procedural", competency: ADDSUB, says: `The ones (${o} + ${t} = ${o + t}) were added but the ten was not carried.`, predict: o + t >= 10 ? ((t + o) % 10) * 10 + ((o + t) % 10) : null },
+          { id: "doubled", kind: "procedural", competency: PATR, says: `${x} was doubled; the second number is ${x} with its digits reversed, ${rev(x)}.`, predict: 2 * x },
+        ];
+      }
+      if (kind === 1) {
+        const k = palSteps(x);
+        return [
+          { id: "count-start", kind: "procedural", competency: PATR, says: "The starting number was counted as a step; count only the reverse-and-add steps.", predict: k + 1 },
+          { id: "stop-early", kind: "procedural", competency: PATR, says: "The count stopped too early: keep going until the sum itself reads the same both ways.", predict: k - 1 },
+        ];
+      }
+      if (kind === 2) return [{ id: "half-of-eleven", kind: "conceptual", competency: EVEN, says: `Even and odd sums take turns, but 11 sums cannot split equally: starting with ${x} (${x % 2 ? "odd" : "even"}), there is one more ${x % 2 ? "odd" : "even"} sum than ${x % 2 ? "even" : "odd"}.`, predict: x % 2 ? 6 : 5 }];
+      return [
+        { id: "row-zero-missed", kind: "procedural", competency: PATR, says: "Row 0 (or column 0) was left out; 0 + a number is a cell of the chart too.", predict: x <= 10 ? x : null },
+        { id: "diagonal-length", kind: "conceptual", competency: PATR, says: "The cells with the same sum lie on a slanting line; past 10 that line gets shorter again, because rows and columns stop at 10.", predict: x > 10 ? x + 1 : null },
+      ];
+    },
+    distractors: ([kind, x]) => (kind === 0 ? [x + rev(x) + 10, x + rev(x) - 10, x + rev(x) + 11] : kind === 1 ? [palSteps(x) + 2, 1] : kind === 2 ? [10, 11, 4] : [11, 10, 21 - x === x + 1 ? 9 : Math.abs(10 - x) + 1]),
+    variants: () => [],
+    explain: (s) => (s.id === "sum" ? `${s.inputs[0]} + ${rev(Number(s.inputs[0]))} = ${s.value}; such sums are always multiples of 11` : s.id === "steps" ? `${s.value} reverse-and-add ${s.value === 1 ? "step makes" : "steps make"} a palindrome` : s.id === "row" ? `The sums go even, odd, even … in turn: ${s.value} of the 11 are even` : `The cells with sum ${s.inputs[0]} lie on one slanting line of the chart: ${s.value} cells`),
+    domain: [[0, 3], [0, 99]],
+    difficulty: ([kind, x]) => (kind === 0 ? ((x % 10) + Math.floor(x / 10) >= 10 ? 2 : 1) : kind === 1 ? 3 : 2),
+    figure: ([kind, x]) => (kind === 2 ? { type: "table", head: ["+", ...Array.from({ length: 11 }, (_, i) => String(i))], rows: [[String(x), ...Array.from({ length: 11 }, () => "")]] } : null),
+    word: ([kind, x]) =>
+      [
+        `${name(x)}'s bus number is ${x}. ${name(x)} adds it to the number made by writing its digits the other way round. What total does ${name(x)} get?`,
+        `In a class number game, ${name(x)} starts with ${x}, then keeps reversing the digits and adding, until the answer reads the same forwards and backwards. How many times does ${name(x)} reverse and add?`,
+        `${name(x)} fills row ${x} of an addition chart: ${x} + 0, ${x} + 1, … up to ${x} + 10, and colours the even sums. How many sums does ${name(x)} colour?`,
+        `${name(x)} draws an addition chart with rows 0 to 10 and columns 0 to 10 (each cell is row + column) and circles every cell showing ${x}. How many cells are circled?`,
+      ][kind],
+    teach: {
+      idea: "Addition makes patterns: the sums in an addition chart grow by 1 to the right and down, the same sum lies along a slanting line, and a two-digit number plus its reverse is always 11 × (sum of its digits).",
+      method: "Work out a few cases, look for what repeats, then use the rule: even and odd sums alternate along a row, and ab + ba = 11 × (a + b).",
+      alternatives: [
+        { id: "chart", title: "Colour the chart", kind: "conceptual", text: ["Draw a small addition chart and colour the even sums.", "The colours make a chessboard pattern, and equal sums run in slanting lines from top-right to bottom-left."] },
+      ],
+    },
+    limits: "Two-digit starting numbers needing at most four reverse-and-add steps, and the 0–10 addition chart.",
+  },
+  {
+    id: "aecons",
+    arity: 3,
+    title: "Sums of consecutive numbers",
+    competency: PATR,
+    type: "integer",
+    mc: true,
+    // [kind, a, k]: kind 0 the sum of k consecutive numbers from a; kind 1 k (3 or 5) consecutive numbers with a given sum — the smallest
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 1], [1, 40], [3, 6]]) || (p[0] === 1 && p[2] % 2 === 0) ? "3 to 6 consecutive numbers starting at 1 to 40 (3 or 5 when the sum is given)." : null),
+    prompt: ([kind, a, k]) => (kind === 0 ? `What is the sum of the ${k} consecutive numbers starting at ${a} (that is, ${a}, ${a + 1}, ${a + 2}, …)?` : `${k === 3 ? "Three" : "Five"} consecutive numbers add up to ${k * a + (k * (k - 1)) / 2}. What is the smallest of them?`),
+    solve: ([kind, a, k]) => {
+      const S = k * a + (k * (k - 1)) / 2;
+      return kind === 0
+        ? { steps: [{ id: "pairs", op: "multiply", competency: PATR, inputs: [k, 2 * a + k - 1], value: S }], answer: S }
+        : { steps: [{ id: "middle", op: "divide", competency: PATR, inputs: [S, k], value: S / k }, { id: "smallest", op: "subtract", competency: PATR, inputs: [S / k, (k - 1) / 2], value: a }], answer: a };
+    },
+    // independent: add the numbers one by one; for the smallest, try every starting number
+    validate: ([kind, a, k], v) => {
+      if (!isInt(v)) return false;
+      const sum = (st: number) => {
+        let t = 0;
+        for (let i = 0; i < k; i++) t += st + i;
+        return t;
+      };
+      if (kind === 0) return v === sum(a);
+      return v >= 0 && sum(v) === sum(a);
+    },
+    bugs: ([kind, a, k]) =>
+      kind === 0
+        ? [
+            { id: "k-times-start", kind: "procedural", competency: PATR, says: `${k} × ${a} was found, but each number after the first is 1, 2, 3 … more than ${a}.`, predict: k * a },
+            { id: "first-last", kind: "procedural", competency: PATR, says: "Only the first and last numbers were added; all the numbers in between belong to the sum too.", predict: 2 * a + k - 1 },
+          ]
+        : [
+            { id: "middle-given", kind: "procedural", competency: PATR, says: `The sum ÷ ${k} gives the middle number; the smallest is ${(k - 1) / 2} less.`, predict: a + (k - 1) / 2 },
+            { id: "largest-given", kind: "procedural", competency: PATR, says: "The largest of the numbers was given; the question asks for the smallest.", predict: a + k - 1 },
+          ],
+    distractors: ([kind, a, k]) => (kind === 0 ? [k * a + (k * (k - 1)) / 2 + k, k * a + (k * (k + 1)) / 2] : [a + 1, a - 1].filter((x) => x > 0)),
+    variants: () => [],
+    explain: (s) => (s.id === "pairs" ? `Pair the first and last, the second and second-last …: the sum is ${s.inputs[0]} × (first + last) ÷ 2 = ${s.value}` : s.id === "middle" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, the middle number` : `The smallest is ${s.inputs[1]} less than the middle: ${s.value}`),
+    domain: [[0, 1], [1, 40], [3, 6]],
+    difficulty: ([kind, a, k]) => (kind === 1 ? 3 : k <= 4 && a <= 20 ? 1 : 2),
+    word: ([kind, a, k]) => (kind === 0 ? `${name(a)} saves ₹${a} on the first day, ₹${a + 1} on the second, ₹${a + 2} on the third, and so on, one rupee more each day, for ${k} days. How many rupees is that altogether?` : `The house numbers of ${k === 3 ? "three" : "five"} houses in a row on a street go up by 1 (they are consecutive) and add up to ${k * a + (k * (k - 1)) / 2}. What is the smallest house number?`),
+    teach: {
+      idea: "In a run of consecutive numbers, the middle number is the average: 3 consecutive numbers add up to 3 × the middle one. The first and last together make the same total as the second and second-last.",
+      method: "To add them: number of terms × (first + last) ÷ 2. To find them from the sum (an odd number of them): sum ÷ how many = the middle; count back to the smallest.",
+      alternatives: [
+        { id: "staircase", title: "Make a staircase", kind: "conceptual", text: ["Draw the numbers as towers of blocks: each tower is one block taller than the last.", "Move blocks from the tall end to the short end: all towers become as tall as the middle one."] },
+      ],
+    },
+    limits: "3 to 6 consecutive whole numbers starting at 1 to 40; the parity of sums of even and odd numbers is the parity family (akpar).",
+  },
+  {
+    id: "aenumf",
+    arity: 2,
+    title: "Number names, commas and expanded forms of large numbers",
+    competency: LARGE,
+    type: "choice",
+    // [kind, s]: 0 Indian number name; 1 Indian commas; 2 International commas; 3 expanded form; 4 International
+    // number name (millions); 5 Indian number name with crores — of the number nfNum(kind, s)
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 5], [0, 149]])) return "A large number to name, punctuate or expand.";
+      const q = nfQ(p);
+      if (new Set(q.choices).size !== 4) return "Four different options.";
+      return repeatOf(`aenumf${p[0]}`, 150, (t) => String(nfNum(p[0], t)), p[1]) ? "An earlier choice already uses this number (distinct@1)." : null;
+    },
+    prompt: ([kind, s]) => {
+      const n = nfNum(kind, s);
+      return [
+        `Which is the number name of ${ind(n)} in the Indian system?`,
+        `Which shows ${n} with commas placed correctly in the Indian system?`,
+        `Which shows ${n} with commas placed correctly in the International system?`,
+        `Which is the expanded form of ${ind(n)}?`,
+        `Which is the number name of ${intl(n)} in the International system?`,
+        `Which is the number name of ${ind(n)} in the Indian system?`,
+      ][kind];
+    },
+    choices: (p) => nfQ(p).choices,
+    solve: (p) => {
+      const q = nfQ(p);
+      return { steps: [{ id: ["name", "commas", "commas", "expand", "name", "name"][p[0]], op: "place", competency: LARGE, inputs: [p[0], q.n], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: read the chosen option back into a number (word by word, or term by term) and check the comma pattern
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = nfQ(p);
+      const o = q.choices[v];
+      if (o === undefined) return false;
+      const [kind] = p;
+      if (kind === 0 || kind === 4 || kind === 5) return readName(o) === q.n && (kind === 4 ? !/lakh|crore/.test(o) : !/million|billion/.test(o));
+      if (kind === 1) return Number(o.replace(/,/g, "")) === q.n && INDCOMMA.test(o);
+      if (kind === 2) return Number(o.replace(/,/g, "")) === q.n && INTCOMMA.test(o);
+      return sumTerms(o) === q.n;
+    },
+    bugs: (p) => {
+      const q = nfQ(p);
+      const [kind] = p;
+      if (kind === 1) return [{ id: "international-commas", kind: "conceptual", competency: LARGE, says: "The commas were placed every three digits, as in the International system; in the Indian system the first comma is after three digits from the right, then after every two.", predict: q.at(1) }, { id: "from-left", kind: "procedural", competency: LARGE, says: "The commas were counted from the left; periods are always counted from the right, starting with the ones.", predict: q.at(2) }];
+      if (kind === 2) return [{ id: "indian-commas", kind: "conceptual", competency: LARGE, says: "The commas were placed as in the Indian system (3, then 2s); the International system groups every three digits from the right.", predict: q.at(1) }, { id: "from-left", kind: "procedural", competency: LARGE, says: "The commas were counted from the left; periods are always counted from the right, starting with the ones.", predict: q.at(2) }];
+      return [
+        { id: "zero-dropped", kind: "conceptual", competency: PV, says: "A zero was skipped, so the digits after it moved into the wrong places; a 0 holds its place even though it is not said aloud.", predict: q.at(1) },
+        { id: "extra-place", kind: "procedural", competency: PV, says: "The digits were read one place too high (an extra place was counted); count the places from the ones.", predict: q.at(2) },
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "commas" ? `Group the digits from the right: ${s.inputs[0] === 1 ? ind(Number(s.inputs[1])) : intl(Number(s.inputs[1]))}` : s.id === "expand" ? `Each digit times its place value: ${expanded(Number(s.inputs[1]))}` : `Read period by period: ${s.inputs[0] === 4 ? intlName(Number(s.inputs[1])) : indName(Number(s.inputs[1]))}`),
+    domain: [[0, 5], [0, 149]],
+    cap: 600,
+    difficulty: ([kind]) => (kind === 0 || kind === 3 ? 1 : kind <= 2 ? 2 : 3),
+    word: ([kind, s]) => {
+      const n = nfNum(kind, s);
+      return [
+        `The number of visitors to a museum in Chennai last year was ${ind(n)}. How is this number written in words in the Indian system?`,
+        `A bank slip shows the amount ₹${n} without commas. How should it be written with commas in the Indian system?`,
+        `A science magazine prints the distance ${n} km without commas. How is it written with commas in the International system?`,
+        `${name(s)} breaks the number of books in a city library, ${ind(n)}, into its place values. Which expanded form is right?`,
+        `A world news report gives a country's population as ${intl(n)}. How is this number written in words in the International system?`,
+        `A state's budget for school books is ₹${ind(n)}. How is this amount written in words in the Indian system?`,
+      ][kind];
+    },
+    teach: {
+      idea: "Digits are grouped into periods from the right. Indian system: ones (3 digits), thousands (2), lakhs (2), crores. International system: ones, thousands, millions, each 3 digits.",
+      method: "Starting from the right, mark off three digits, then twos (Indian) or threes (International). Read each period with its name; a zero keeps its place even when it is not said.",
+      alternatives: [
+        { id: "chart", title: "Use a place-value chart", kind: "procedural", text: ["Write the number in a chart with the periods labelled (Cr, L, Th, ones).", "Read the number in each period followed by the period's name, left to right."] },
+      ],
+    },
+    limits: "Numbers of 5 to 9 digits with some zeros; converting between lakhs and millions is the family ajmill.",
+  },
+  {
+    id: "aernd",
+    arity: 2,
+    title: "Rounding large numbers in real situations",
+    competency: ROUND,
+    type: "integer",
+    mc: true,
+    // [k, s]: round rndNum(k, s) to the nearest 10^k (thousand … crore); the situation is RND_CTX[s % 4]
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[3, 7], [0, 59]])) return "A large number rounded to the nearest thousand, ten thousand, lakh, ten lakh or crore.";
+      const [k, s] = p;
+      return rndNum(k, s) % 10 ** k === 0 ? "Not already a multiple of the place." : null;
+    },
+    prompt: ([k, s]) => `${RND_CTX[s % 4](rndNum(k, s))} Round this number to the nearest ${RND_PLACE[k]}.`,
+    solve: ([k, s]) => {
+      const n = rndNum(k, s);
+      const u = 10 ** k;
+      return { steps: [{ id: "look", op: "compare", competency: ROUND, inputs: [n, u], value: Math.floor((n % u) / (u / 10)) }, { id: "round", op: "round", competency: ROUND, inputs: [n, u], value: roundTo(n, u) }], answer: roundTo(n, u) };
+    },
+    // independent: find the multiples of the place just below and just above, and take the nearer (halfway goes up)
+    validate: ([k, s], v) => {
+      const n = rndNum(k, s);
+      const u = 10 ** k;
+      const below = n - (n % u);
+      const above = below + u;
+      return v === (n - below < above - n ? below : above);
+    },
+    bugs: ([k, s]) => {
+      const n = rndNum(k, s);
+      const u = 10 ** k;
+      const down = n - (n % u);
+      return [
+        { id: "always-down", kind: "conceptual", competency: ROUND, says: `The digits after the ${RND_PLACE[k]}s place were just changed to zeros; when the next digit is 5 or more, round up.`, predict: down },
+        { id: "wrong-place", kind: "procedural", competency: PV, says: `The number was rounded to the wrong place (the nearest ${RND_PLACE[k + 1] ?? "ten crore"} instead of the nearest ${RND_PLACE[k]}).`, predict: roundTo(n, 10 * u) },
+        { id: "too-fine", kind: "procedural", competency: PV, says: `The number was rounded to a smaller place than asked (${RND_PLACE[k - 1] || "hundred"}s instead of ${RND_PLACE[k]}s).`, predict: roundTo(n, u / 10) },
+      ];
+    },
+    distractors: ([k, s]) => {
+      const n = rndNum(k, s);
+      const u = 10 ** k;
+      return [roundTo(n, u) + u, roundTo(n, u) - u].filter((x) => x > 0);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "look" ? `Look at the digit just after the place you round to: it is ${s.value}` : `${ind(Number(s.inputs[0]))} is nearer to ${ind(Number(s.value))}`),
+    domain: [[3, 7], [0, 59]],
+    difficulty: ([k]) => (k <= 3 ? 1 : k <= 5 ? 2 : 3),
+    word: ([k, s]) => `A newspaper headline gives a rounded figure. The exact number is ${ind(rndNum(k, s))}, and the paper rounds it to the nearest ${RND_PLACE[k]}. What number does the headline show?`,
+    teach: {
+      idea: "Large numbers in news and plans are usually rounded: 4,37,862 people is 'about 4,40,000' to the nearest ten thousand. Rounding finds the nearer of the two round numbers on either side.",
+      method: "Find the place you round to, look at the digit just to its right: 0–4 keep the place and write zeros after it; 5–9 add 1 to the place and write zeros after it.",
+      visual: ([k, s]) => {
+        const n = rndNum(k, s);
+        const u = 10 ** k;
+        const lo = n - (n % u);
+        return { type: "numberline", from: lo / u, to: lo / u + 1, step: 0.1, marks: [n / u] };
+      },
+      alternatives: [
+        { id: "between", title: "Which two round numbers?", kind: "conceptual", text: ["Write the round number just below and just above (for example 4,30,000 and 4,40,000).", "The halfway number is 4,35,000; the number is past halfway, so it rounds up."] },
+      ],
+    },
+    limits: "Numbers from 2 thousand up to 100 crore rounded to the nearest thousand, ten thousand, lakh, ten lakh or crore; rounding in the International system is not asked.",
+  },
+  {
+    id: "aeestp",
+    arity: 3,
+    title: "Estimating a product by rounding",
+    competency: ROUND,
+    type: "integer",
+    mc: true,
+    // [mode, a, b]: mode 0 a, b two-digit, rounded to tens; mode 1 a three-digit (to hundreds) times b two-digit (to tens)
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [11, 999], [11, 99]])) return "Two numbers to round and multiply.";
+      const [mode, a, b] = p;
+      if (mode === 0 ? a > 99 : a < 101) return mode === 0 ? "Two two-digit numbers." : "A three-digit number times a two-digit number.";
+      if (b % 10 === 0 || b % 10 === 5 || a % 10 === 0 || (mode === 0 && a % 10 === 5) || (mode === 1 && (a % 100 === 50 || a % 100 === 0))) return "Neither number already round or exactly halfway.";
+      return null;
+    },
+    keep: ([mode, a]) => mode === 0 || a % 7 === 3,
+    prompt: ([mode, a, b]) => `Estimate ${a} × ${b} by rounding ${mode === 0 ? "each number to the nearest ten" : `${a} to the nearest hundred and ${b} to the nearest ten`} first.`,
+    solve: ([mode, a, b]) => {
+      const ra = roundTo(a, mode ? 100 : 10);
+      const rb = roundTo(b, 10);
+      return { steps: [{ id: "ra", op: "round", competency: ROUND, inputs: [a, mode ? 100 : 10], value: ra }, { id: "rb", op: "round", competency: ROUND, inputs: [b, 10], value: rb }, { id: "product", op: "multiply", competency: MM, inputs: [ra, rb], value: ra * rb }], answer: ra * rb };
+    },
+    // independent: walk from each number to its nearest round number, then add the rounded first number rb times
+    validate: ([mode, a, b], v) => {
+      const near = (n: number, u: number) => {
+        let lo = n;
+        while (lo % u) lo--;
+        return n - lo < lo + u - n ? lo : lo + u;
+      };
+      const [ra, rb] = [near(a, mode ? 100 : 10), near(b, 10)];
+      let t = 0;
+      for (let i = 0; i < rb; i++) t += ra;
+      return v === t;
+    },
+    bugs: ([mode, a, b]) => {
+      const u = mode ? 100 : 10;
+      const [ra, rb] = [roundTo(a, u), roundTo(b, 10)];
+      return [
+        { id: "exact", kind: "procedural", competency: ROUND, says: "The exact product was worked out; an estimate rounds the numbers first so it can be done in your head.", predict: a * b },
+        { id: "round-down", kind: "conceptual", competency: ROUND, says: "Both numbers were rounded down (the digits just cut off); round up when the next digit is 5 or more.", predict: (a - (a % u)) * (b - (b % 10)) },
+        { id: "one-only", kind: "procedural", competency: ROUND, says: `Only ${a} was rounded; round both numbers before multiplying.`, predict: ra * b },
+        { id: "zeros", kind: "procedural", competency: P10, says: `${ra / u} × ${rb / 10} was found, but the zeros of ${ra} and ${rb} were not all put back.`, predict: (ra * rb) / 10 },
+      ];
+    },
+    distractors: ([mode, a, b]) => {
+      const e = roundTo(a, mode ? 100 : 10) * roundTo(b, 10);
+      return [e * 10, e + (mode ? 1000 : 100)];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "product" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} rounds to ${s.value}`),
+    domain: [[0, 1], [11, 999], [11, 99]],
+    cap: 450,
+    difficulty: ([mode, a, b]) => (mode === 1 ? 3 : a % 10 >= 5 || b % 10 >= 5 ? 2 : 1),
+    word: ([mode, a, b]) => (mode === 0 ? `A school orders ${a} cartons of notebooks with ${b} notebooks in each carton. About how many notebooks is that? Estimate by rounding each number to the nearest ten.` : `A cinema hall sells ${a} tickets a day for ${b} days of a film festival. About how many tickets is that? Estimate by rounding ${a} to the nearest hundred and ${b} to the nearest ten.`),
+    teach: {
+      idea: "Rounding both numbers turns a hard product into an easy one (48 × 32 ≈ 50 × 30). The estimate shows roughly how big the exact answer must be.",
+      method: "Round each number as asked, multiply the non-zero digits, then put back all the zeros of both rounded numbers.",
+      alternatives: [
+        { id: "area", title: "Think of a rectangle", kind: "conceptual", text: ["A product is the area of a rectangle. Rounding the sides a little changes the area only a little.", "50 by 30 is easy to picture: 15 hundreds."] },
+      ],
+    },
+    limits: "Two-digit by two-digit (rounded to tens) and three-digit by two-digit (rounded to hundreds and tens); halfway values are left out.",
+  },
+  {
+    id: "aechk",
+    arity: 2,
+    title: "Judging answers with an estimate",
+    competency: ROUND,
+    skill: "MATH.reasoning.estimate-check",
+    type: "choice",
+    // [kind, s]: 0 is a worked answer reasonable? 1 when is an estimate enough, or an exact answer needed? 2 about how big is a product?
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [0, 299]])) return "An estimate to judge an answer or a situation.";
+      const [kind, s] = p;
+      if (kind === 0) {
+        const q = chkData(s);
+        const e = estOf(q);
+        if (e <= 0) return "A positive estimate.";
+        const off = Math.abs(q.claim - e) / e;
+        if (q.claim === q.exact ? Math.abs(q.exact - e) / e > 0.2 : off < 0.5) return "The estimate must clearly decide.";
+        return null;
+      }
+      if (kind === 1) return repeatOf("aechk1", 300, (t) => (t % 2 === s % 2 ? sitPick(t).map((x) => x.text).sort().join("|") : null), s) ? "An earlier choice already shows these situations (distinct@1)." : null;
+      return repeatOf("aechk2", 300, (t) => `${sizeData(t).a}x${sizeData(t).b}`, s) ? "An earlier choice already shows this product (distinct@1)." : null;
+    },
+    prompt: ([kind, s]) => {
+      if (kind === 0) {
+        const q = chkData(s);
+        return `${name(s)} worked out ${q.a} ${["+", "−", "×"][q.op]} ${q.b} and got ${q.claim}. Without working it out exactly, round the numbers to estimate the answer. What can you say about ${name(s)}'s answer?`;
+      }
+      if (kind === 1) return s % 2 === 0 ? "Which of these needs an EXACT answer (an estimate is not good enough)?" : "For which of these is an ESTIMATE good enough (an exact answer is not needed)?";
+      const z = sizeData(s);
+      return `Without working it out exactly, about how big is ${z.a} × ${z.b}?`;
+    },
+    choices: (p) => chkQ(p).choices,
+    solve: (p) => {
+      const q = chkQ(p);
+      const i = q.choices.indexOf(q.right);
+      return { steps: [{ id: "judge", op: "estimate", competency: ROUND, inputs: [p[0]], value: i }], answer: i };
+    },
+    // independent: kind 0 compares the claim with the rounded estimate; kind 1 reads each situation's need; kind 2
+    // finds the option nearest the exact product (by how many times bigger or smaller it is)
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = chkQ(p);
+      const o = q.choices[v];
+      if (o === undefined) return false;
+      if (p[0] === 0) {
+        const d = chkData(p[1]);
+        const e = estOf(d);
+        return o === CHK[Math.abs(d.claim - e) <= 0.3 * e ? 0 : d.claim > e ? 1 : 2];
+      }
+      if (p[0] === 1) {
+        const want = p[1] % 2 === 0;
+        const hit = q.items!.filter((x) => x.exact === want);
+        return hit.length === 1 && hit[0].text === o;
+      }
+      const z = sizeData(p[1]);
+      const exact = z.a * z.b;
+      const val = (t: string) => Number(t.replace(/[^\d]/g, ""));
+      const best = [...q.choices].sort((x, y) => Math.abs(Math.log(val(x) / exact)) - Math.abs(Math.log(val(y) / exact)))[0];
+      return o === best;
+    },
+    bugs: (p) => {
+      const q = chkQ(p);
+      const at = (t: string) => q.choices.indexOf(t);
+      if (p[0] === 0) {
+        const d = q.q!;
+        return d.claim === d.exact
+          ? [{ id: "not-equal", kind: "conceptual", competency: ROUND, says: "The answer was thought wrong because it is not exactly the estimate; an estimate only has to be close.", predict: at(CHK[d.claim > estOf(d) ? 1 : 2]) }]
+          : [{ id: "trust-working", kind: "procedural", competency: ROUND, says: "The worked answer was trusted without comparing it with the estimate; it is many times too " + (d.claim > d.exact ? "big" : "small") + ", so there must be a mistake (often a digit put in the wrong column).", predict: at(CHK[0]) }];
+      }
+      if (p[0] === 1) {
+        const items = q.items!;
+        return [{ id: "big-means-exact", kind: "conceptual", competency: ROUND, says: p[1] % 2 === 0 ? "A large or important-sounding number was taken to need an exact answer; an estimate is enough when only the rough size matters (news, planning), but money handed over and doses must be exact." : "A situation where money or a dose changes hands was taken as one where an estimate is enough; those need exact answers.", predict: at(items[1].text) }];
+      }
+      return [
+        { id: "zeros-short", kind: "procedural", competency: P10, says: "A zero was lost when multiplying the rounded numbers; put back all the zeros of both.", predict: at(q.choices.find((c) => Number(c.replace(/[^\d]/g, "")) === q.z!.E / 10)!) },
+        { id: "zeros-extra", kind: "procedural", competency: P10, says: "One zero too many was put on; count the zeros of both rounded numbers.", predict: at(q.choices.find((c) => Number(c.replace(/[^\d]/g, "")) === q.z!.E * 10)!) },
+      ];
+    },
+    variants: () => [],
+    explain: (s) => ["Round the numbers, work out the estimate and compare the answer with it", "Ask whether only the rough size matters, or every unit counts", "Round each number to its biggest place and multiply"][Number(s.inputs[0])],
+    domain: [[0, 2], [0, 299]],
+    difficulty: ([kind]) => (kind === 1 ? 1 : kind === 2 ? 2 : 3),
+    word: ([kind, s]) => {
+      if (kind === 0) {
+        const q = chkData(s);
+        return `At a shop, ${name(s)}'s bill needs ${q.a} ${["+", "−", "×"][q.op]} ${q.b}, and the cashier's screen shows ${q.claim}. Use an estimate (round the numbers first) to judge the cashier's answer.`;
+      }
+      if (kind === 1) return s % 2 === 0 ? `${name(s)} is helping at home and in the market. In which of these must the answer be EXACT?` : `${name(s)} is reading the newspaper and planning a trip. For which of these is an ESTIMATE good enough?`;
+      const z = sizeData(s);
+      return `A box holds ${z.b} packets and a shop has ${z.a} boxes. About how many packets does the shop have?`;
+    },
+    teach: {
+      idea: "An estimate is a quick, nearly-right answer. It tells you how big an exact answer should be, so a worked answer far from it must have a mistake. Some situations (giving change, a medicine dose) need exact answers; others (a crowd, a distance for planning) need only an estimate.",
+      method: "Round each number (to the nearest ten or hundred), work out the estimate in your head, and compare. Close: reasonable. Many times bigger or smaller: check the working.",
+      alternatives: [
+        { id: "columns", title: "Look for a column slip", kind: "procedural", text: ["If an answer is about ten times too big or too small, a digit was probably written in the wrong column.", "Line the numbers up by their ones digits and work it again."] },
+      ],
+    },
+    limits: "Sums, differences and products of two- and three-digit numbers where the estimate clearly decides; mental-calculation tricks for exact answers are other families.",
+  },
+  {
+    id: "aerdec",
+    arity: 2,
+    title: "Rounding a decimal to a whole number, tenths or hundredths",
+    competency: ROUND,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [place, s]: round the three-place decimal decThou(s) (in thousandths) to the nearest whole (0), tenth (1) or hundredth (2)
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [0, 199]])) return "A decimal with three places, rounded to a whole number, tenths or hundredths.";
+      const th = decThou(p[1]);
+      const u = [1000, 100, 10][p[0]];
+      if (th % u === 0 || th < 1000) return "Not already rounded, at least 1.";
+      return repeatOf("aerdec", 200, (t) => String(decThou(t)), p[1]) ? "An earlier choice already uses this number (distinct@1)." : null;
+    },
+    prompt: ([place, s]) => `Round ${d3(decThou(s))} to the nearest ${["whole number", "tenth", "hundredth"][place]}.`,
+    solve: ([place, s]) => {
+      const th = decThou(s);
+      const r = roundTh(th, place);
+      return { steps: [{ id: "look", op: "compare", competency: ROUND, inputs: [d3(th), place], value: Math.floor((th % [1000, 100, 10][place]) / [100, 10, 1][place]) }, { id: "round", op: "round", competency: ROUND, inputs: [d3(th), place], value: r / 1000 }], answer: r / 1000 };
+    },
+    // independent: list the two candidates on either side (in thousandths) and pick the nearer; halfway goes up
+    validate: ([place, s], v) => {
+      const th = decThou(s);
+      const a = thou(v);
+      if (a === null) return false;
+      const u = [1000, 100, 10][place];
+      let lo = th;
+      while (lo % u) lo--;
+      return a === (th - lo < lo + u - th ? lo : lo + u);
+    },
+    bugs: ([place, s]) => {
+      const th = decThou(s);
+      const u = [1000, 100, 10][place];
+      return [
+        { id: "cut-off", kind: "conceptual", competency: ROUND, says: "The digits after the place were simply dropped; when the next digit is 5 or more, the place goes up by 1.", predict: (th - (th % u)) / 1000 },
+        { id: "wrong-place", kind: "procedural", competency: DEC, says: `The number was rounded to the ${["tenths", "hundredths", "tenths"][place]} instead of the ${["ones (a whole number)", "tenths", "hundredths"][place]}: the first place after the point is tenths, the second hundredths.`, predict: roundTh(th, place === 2 ? 1 : place + 1) / 1000 },
+      ];
+    },
+    distractors: ([place, s]) => {
+      const r = roundTh(decThou(s), place);
+      const u = [1000, 100, 10][place];
+      return [(r + u) / 1000, (r - u) / 1000];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "look" ? `Look at the digit after the ${["ones", "tenths", "hundredths"][Number(s.inputs[1])]} place: it is ${s.value}` : `${s.inputs[0]} rounds to ${s.value}`),
+    domain: [[0, 2], [0, 199]],
+    difficulty: ([place]) => (place === 0 ? 1 : place === 1 ? 2 : 3),
+    word: ([place, s]) => [`A parcel weighs ${d3(decThou(s))} kg. The courier's bill shows the weight to the nearest whole kilogram. What weight is on the bill, in kg?`, `${name(s)} ran 100 m in a time the stopwatch showed as ${d3(decThou(s))} seconds. The school record book writes times to the nearest tenth of a second. What time is written, in seconds?`, `A jeweller weighs a gold chain at ${d3(decThou(s))} g and writes the weight to the nearest hundredth of a gram. What weight is written, in grams?`][place],
+    teach: {
+      idea: "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
+      method: "Find the place you round to. Look at the digit just to its right: 0–4 keep the place and drop the digits after it; 5–9 add 1 to the place and drop the digits after it.",
+      visual: ([place, s]) => {
+        const th = decThou(s);
+        const u = [1000, 100, 10][place];
+        const lo = th - (th % u);
+        return { type: "numberline", from: lo / 1000, to: (lo + u) / 1000, step: u / 10000, marks: [th / 1000] };
+      },
+      alternatives: [
+        { id: "money", title: "Think of rupees and paise", kind: "conceptual", text: ["₹23.47 to the nearest rupee: is it nearer ₹23 or ₹24? 47 paise is less than 50, so ₹23.", "To the nearest tenth (10 paise): ₹23.47 is between ₹23.40 and ₹23.50, nearer ₹23.50."] },
+      ],
+    },
+    limits: "Decimals with three places from 1 to 60, rounded to a whole number, tenths or hundredths.",
+  },
+];
+B05.push(...NUM_MORE);
+
+// ---------------------------------------------------------------- measures: helpers for the gap@1 families
+
+const CU = [
+  { big: "m", small: "cm", f: 100, bigw: "metres", smallw: "centimetres" },
+  { big: "kg", small: "g", f: 1000, bigw: "kilograms", smallw: "grams" },
+  { big: "L", small: "mL", f: 1000, bigw: "litres", smallw: "millilitres" },
+  { big: "km", small: "m", f: 1000, bigw: "kilometres", smallw: "metres" },
+  { big: "cm", small: "mm", f: 10, bigw: "centimetres", smallw: "millimetres" },
+  { big: "g", small: "mg", f: 1000, bigw: "grams", smallw: "milligrams" },
+];
+const REM1000 = [5, 8, 20, 45, 50, 75, 125, 250, 305, 450, 600, 930, 999, 64, 402, 710, 85, 333, 560, 18];
+const REM100 = [5, 8, 12, 25, 30, 45, 50, 60, 75, 99];
+/** An amount in the small unit: big part 1 to 9 and a small part from a list (with zeros inside), or null. */
+const cuAmount = (k: number, v: number) => {
+  const f = CU[k].f;
+  const b = 1 + (v % 9);
+  const r = Math.floor(v / 9);
+  if (f === 10) return r < 9 ? 10 * b + (r + 1) : null;
+  if (f === 100) return r < REM100.length ? 100 * b + REM100[r] : null;
+  return r < REM1000.length ? 1000 * b + REM1000[r] : null;
+};
+const TAB_ITEMS = [["notebooks", "notebook"], ["pens", "pen"], ["erasers", "eraser"], ["geometry boxes", "geometry box"], ["rulers", "ruler"], ["packets of crayons", "packet of crayons"], ["drawing books", "drawing book"]];
+const tabData = (s: number) => {
+  const r = rng(s * 3 + 12000);
+  const pick: number[] = [];
+  while (pick.length < 3) {
+    const i = Math.floor(r() * TAB_ITEMS.length);
+    if (!pick.includes(i)) pick.push(i);
+  }
+  const rows = pick.map((i) => ({ item: TAB_ITEMS[i], q: 2 + Math.floor(r() * 11), p: PRICES[Math.floor(r() * 12)] }));
+  return rows;
+};
+const tabFig = (s: number) => {
+  const rows = tabData(s);
+  return { type: "table", head: ["Item", "How many", "Price of one (₹)", "Cost (₹)"], rows: rows.map((x, i) => [x.item[0], i === 2 ? "?" : x.q, i === 1 ? "?" : x.p, i === 0 ? "?" : x.q * x.p]) };
+};
+const SPEEDS = [30, 40, 45, 50, 60];
+const bigData = (kind: number, s: number) => {
+  const r = rng(s * 7 + kind * 300 + 5000);
+  if (kind === 0) return { a: 100000 + Math.floor(r() * 900000), b: 1000 + Math.floor(r() * 19000), c: 1000 + Math.floor(r() * 14000) };
+  if (kind === 1) {
+    const n = 3 + Math.floor(r() * 10);
+    const c = 10000 + 500 * Math.floor(r() * 160);
+    const B = 100000 * (Math.ceil((n * c) / 100000) + 1 + Math.floor(r() * 20));
+    return { a: B, b: n, c };
+  }
+  return { a: 120 + Math.floor(r() * 830), b: 2 + Math.floor(r() * 6), c: 4 + Math.floor(r() * 49) };
+};
+// ---------------------------------------------------------------- attribute-matching puzzles (aematch)
+const MATCH_SETS = [
+  { what: "fruit", verb: "likes", items: ["mangoes", "bananas", "guavas", "grapes"] },
+  { what: "sport", verb: "plays", items: ["kabaddi", "cricket", "chess", "football"] },
+  { what: "colour of bicycle", verb: "rides a bicycle that is", items: ["red", "blue", "green", "yellow"] },
+  { what: "instrument", verb: "plays", items: ["the veena", "the flute", "the drums", "the violin"] },
+];
+const PERMS4: number[][] = [];
+for (let a = 0; a < 4; a++) for (let b = 0; b < 4; b++) for (let c = 0; c < 4; c++) for (let d = 0; d < 4; d++) if (new Set([a, b, c, d]).size === 4) PERMS4.push([a, b, c, d]);
+type Clue = { who: number; item: number; yes: boolean };
+const matchData = (s: number) => {
+  const r = rng(s * 17 + 8000);
+  const set = MATCH_SETS[s % MATCH_SETS.length];
+  const people = [0, 1, 2, 3].map((i) => name(s + 3 * i));
+  if (new Set(people).size < 4) return null;
+  const truth = PERMS4[Math.floor(r() * 24)]; // truth[person] = item
+  const clues: Clue[] = [];
+  const fits = (pm: number[]) => clues.every((c) => (pm[c.who] === c.item) === c.yes);
+  for (let guard = 0; guard < 200 && PERMS4.filter(fits).length > 1; guard++) {
+    const who = Math.floor(r() * 4);
+    const yes = clues.filter((c) => c.yes).length === 0 && r() < 0.25;
+    const item = yes ? truth[who] : (truth[who] + 1 + Math.floor(r() * 3)) % 4;
+    const before = PERMS4.filter(fits).length;
+    clues.push({ who, item, yes });
+    if (PERMS4.filter(fits).length === before) clues.pop();
+  }
+  if (PERMS4.filter(fits).length !== 1) return null;
+  // the item asked about: never one a "does" clue names outright
+  const open = [0, 1, 2, 3].filter((i) => !clues.some((c) => c.yes && c.item === i));
+  const ask = open[Math.floor(r() * open.length)];
+  return { set, people, truth, clues, ask };
+};
+const andList = (xs: string[]) => `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`;
+const clueText = (d: NonNullable<ReturnType<typeof matchData>>, c: Clue) => `${d.people[c.who]} ${c.yes ? "" : "does not "}${c.yes ? d.set.verb : d.set.verb.replace(/^likes/, "like").replace(/^plays/, "play").replace(/^rides/, "ride")} ${d.set.items[c.item]}.`;
+// ---------------------------------------------------------------- estimating irregular areas on a grid (aeirr)
+const IRR_SYM = { full: "■", more: "◕", half: "◑", less: "◔", none: "□" };
+const irrData = (s: number) => {
+  const r = rng(s * 23 + 2700);
+  const rows = 6;
+  const cols = 7;
+  const cy = 2.5 + r();
+  const cx = 3 + r();
+  const ry = 1.6 + r() * 1.2;
+  const rx = 2 + r() * 1.3;
+  const grid: string[][] = [];
+  for (let i = 0; i < rows; i++) {
+    const row: string[] = [];
+    for (let j = 0; j < cols; j++) {
+      const d = ((i + 0.5 - cy) / ry) ** 2 + ((j + 0.5 - cx) / rx) ** 2 + (r() - 0.5) * 0.35;
+      row.push(d < 0.55 ? "full" : d < 0.8 ? "more" : d < 1.0 ? (r() < 0.5 ? "half" : "more") : d < 1.25 ? "less" : "none");
+    }
+    grid.push(row);
+  }
+  const count = (k: string) => grid.flat().filter((x) => x === k).length;
+  return { grid, full: count("full"), more: count("more"), half: count("half"), less: count("less") };
+};
+const twoShapes = (s: number) => {
+  const r = rng(s * 29 + 3100);
+  const grid = Array.from({ length: 5 }, () => Array(8).fill("·"));
+  const fill = (c0: number, c1: number, ch: string) => {
+    for (let i = 0; i < 5; i++) {
+      const w0 = c0 + Math.floor(r() * 2);
+      const w1 = c1 - Math.floor(r() * 2);
+      if (r() < 0.15) continue;
+      for (let j = w0; j <= w1; j++) grid[i][j] = ch;
+    }
+  };
+  fill(0, 3, "A");
+  fill(4, 7, "B");
+  const a = grid.flat().filter((x) => x === "A").length;
+  const b = grid.flat().filter((x) => x === "B").length;
+  return { grid, a, b };
+};
+const euclid = (a: number, b: number) => {
+  const rs: number[] = [];
+  let [x, y] = [a, b];
+  while (y) {
+    rs.push(x % y);
+    [x, y] = [y, x % y];
+  }
+  return rs; // the remainders, one per division
+};
+const FIBS = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233];
+
+const MEAS_MORE: Def[] = [
+  {
+    id: "aedivm",
+    arity: 3,
+    title: "Dividing a measure in two units",
+    competency: MIX,
+    type: "tuple",
+    mc: true,
+    // [kind, A, n]: the measure n × (mixed A) shared into n equal parts; kind 0 m cm, 1 kg g, 2 L mL
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [20, 99], [2, 9]])) return "A measure shared into 2 to 9 equal parts.";
+      const [kind, A, n] = p;
+      const [b, s] = mixed(kind, A);
+      const f = UNITS[kind].f;
+      const D = n * (b * f + s);
+      return s === 0 || Math.floor(D / f) % n === 0 || Math.floor(D / f) > 40 ? "The large units must not share out exactly (so the small units are needed), with up to 40 large units." : null;
+    },
+    prompt: ([kind, A, n]) => {
+      const [b, s] = mixed(kind, A);
+      const f = UNITS[kind].f;
+      const D = n * (b * f + s);
+      const u = UNITS[kind];
+      return `Divide ${say(kind, Math.floor(D / f), D % f)} into ${n} equal parts. How much is each part? Write the answer as (${u.big}, ${u.small}); for example, 3 ${u.big} 45 ${u.small} is (3, 45).`;
+    },
+    solve: ([kind, A, n]) => {
+      const [b, s] = mixed(kind, A);
+      const f = UNITS[kind].f;
+      const D = n * (b * f + s);
+      const [B, S] = [Math.floor(D / f), D % f];
+      return {
+        steps: [
+          { id: "big", op: "divide", competency: MIX, inputs: [B, n], value: Math.floor(B / n) },
+          { id: "regroup", op: "regroup", competency: CONV, inputs: [B % n, f, S], value: (B % n) * f + S },
+          { id: "small", op: "divide", competency: "MATH.number.long-division", inputs: [(B % n) * f + S, n], value: ((B % n) * f + S) / n },
+        ],
+        answer: tup(b, s),
+      };
+    },
+    // independent: multiply the answer back by n (the inverse) and compare with the measure shared
+    validate: ([kind, A, n], v) => {
+      const t = readTuple(v);
+      const f = UNITS[kind].f;
+      if (!t || t.length !== 2 || t[1] < 0 || t[1] >= f || t[0] < 0) return false;
+      const [b, s] = mixed(kind, A);
+      let tot = 0;
+      for (let i = 0; i < n; i++) tot += t[0] * f + t[1];
+      return tot === n * (b * f + s);
+    },
+    bugs: ([kind, A, n]) => {
+      const [b, s] = mixed(kind, A);
+      const f = UNITS[kind].f;
+      const u = UNITS[kind];
+      const D = n * (b * f + s);
+      const [B, S] = [Math.floor(D / f), D % f];
+      return [
+        { id: "left-over-dropped", kind: "conceptual", competency: CONV, says: `${B} ${u.big} ÷ ${n} leaves ${B % n} ${u.big} over; ${B % n === 1 ? "that 1" : `those ${B % n}`} ${u.big} must be changed into ${u.small} (${(B % n) * f} ${u.small}) and shared too.`, predict: tup(Math.floor(B / n), Math.floor(S / n)) },
+        ...(f === 1000 && ((B % n) * 100 + S) % n === 0 && ((B % n) * 100 + S) / n < f ? [{ id: "change-100", kind: "recall", competency: CONV, says: `The ${u.big} left over were changed into 100 ${u.small} each; 1 ${u.big} = 1000 ${u.small}.`, predict: tup(Math.floor(B / n), ((B % n) * 100 + S) / n) } as Bug] : []),
+      ];
+    },
+    distractors: ([kind, A]) => {
+      const [b, s] = mixed(kind, A);
+      return [tup(b + 1, s), tup(b, (s + UNITS[kind].step) % UNITS[kind].f)];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "big" ? `Large units: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, with ${Number(s.inputs[0]) % Number(s.inputs[1])} left over` : s.id === "regroup" ? `Change the ${s.inputs[0]} left over into small units and add the ${s.inputs[2]}: ${s.value}` : `Small units: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    domain: [[0, 2], [20, 99], [2, 9]],
+    cap: 400,
+    difficulty: ([kind, , n]) => (kind === 0 && n <= 4 ? 1 : n <= 5 ? 2 : 3),
+    word: ([kind, A, n]) => {
+      const [b, s] = mixed(kind, A);
+      const f = UNITS[kind].f;
+      const D = n * (b * f + s);
+      const m = say(kind, Math.floor(D / f), D % f);
+      return [
+        `${name(A + n)} cuts a rope of ${m} into ${n} equal pieces for a tug-of-war game. How long is each piece? Write (m, cm).`,
+        `A shopkeeper packs ${m} of rice equally into ${n} bags. How much rice is in each bag? Write (kg, g).`,
+        `${m} of buttermilk is poured equally into ${n} jugs for a wedding. How much buttermilk is in each jug? Write (L, mL).`,
+      ][kind];
+    },
+    teach: {
+      idea: "Dividing a measure shares the large units first; whatever large units are left over are changed into small units and shared with the small units.",
+      method: "Divide the large units. Change the ones left over into small units (× 100 or × 1000), add the small units, and divide those. Check: multiply the answer back.",
+      alternatives: [
+        { id: "all_small", title: "Work in the small unit", kind: "procedural", text: ["Change the whole measure into the small unit (7 m 20 cm = 720 cm).", "Divide (720 ÷ 4 = 180 cm) and change back (1 m 80 cm)."] },
+      ],
+    },
+    limits: "Measures that share exactly into 2 to 9 parts (cm in fives, g and mL in fifties); division with remainders is not here.",
+  },
+  {
+    id: "aeconvu",
+    arity: 2,
+    title: "Changing a measure into the larger unit and what is left",
+    competency: CONV,
+    type: "tuple",
+    mc: true,
+    // [k, v]: cuAmount(k, v) of the small unit of CU[k], written as (large, small)
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 5], [0, 179]]) || cuAmount(p[0], p[1]) === null ? "An amount in cm, g, mL, m, mm or mg." : null),
+    prompt: ([k, v]) => `${cuAmount(k, v)} ${CU[k].small} = how many ${CU[k].big} and ${CU[k].small}? Write the answer as (${CU[k].big}, ${CU[k].small}); for example, 3 ${CU[k].big} 5 ${CU[k].small} is (3, 5).`,
+    solve: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      const f = CU[k].f;
+      return { steps: [{ id: "big", op: "divide", competency: CONV, inputs: [a, f], value: Math.floor(a / f) }, { id: "left", op: "subtract", competency: CONV, inputs: [a, Math.floor(a / f) * f], value: a % f }], answer: tup(Math.floor(a / f), a % f) };
+    },
+    // independent: build the amount back from the answer (large × factor + small) and check the small part is less than one large unit
+    validate: ([k, v], ans) => {
+      const t = readTuple(ans);
+      const f = CU[k].f;
+      return !!t && t.length === 2 && t[1] >= 0 && t[1] < f && t[0] * f + t[1] === cuAmount(k, v);
+    },
+    bugs: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      const f = CU[k].f;
+      const g = f === 100 ? 1000 : f === 10 ? 100 : 100;
+      return [
+        { id: "wrong-factor", kind: "recall", competency: CONV, says: `1 ${CU[k].big} was taken as ${g} ${CU[k].small}; 1 ${CU[k].big} = ${f} ${CU[k].small}.`, predict: Math.floor(a / g) > 0 ? tup(Math.floor(a / g), a % g) : null },
+        { id: "left-dropped", kind: "procedural", competency: CONV, says: `The ${CU[k].small} left over were dropped; ${a % f} ${CU[k].small} remain after taking out the whole ${CU[k].big}.`, predict: tup(Math.floor(a / f), 0) },
+      ];
+    },
+    distractors: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      const f = CU[k].f;
+      return [tup(Math.floor(a / f) + 1, a % f), tup(Math.floor(a / f), (a % f) * 10 < f ? (a % f) * 10 : Math.floor((a % f) / 10))];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "big" ? `${s.inputs[0]} ÷ ${s.inputs[1]}: ${s.value} whole large ${s.value === 1 ? "unit" : "units"}` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} small units left`),
+    domain: [[0, 5], [0, 179]],
+    cap: 450,
+    difficulty: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      return a % CU[k].f < CU[k].f / 10 ? 3 : k === 0 || k === 4 ? 1 : 2;
+    },
+    word: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      return [
+        `A ribbon is ${a} cm long. How long is it in metres and centimetres? Write (m, cm).`,
+        `A sack of onions weighs ${a} g. What is that in kilograms and grams? Write (kg, g).`,
+        `A water can holds ${a} mL. What is that in litres and millilitres? Write (L, mL).`,
+        `${name(v)} cycles ${a} m to the market. What is that in kilometres and metres? Write (km, m).`,
+        `A pencil is ${a} mm long. How long is it in centimetres and millimetres? Write (cm, mm).`,
+        `A tablet strip says each tablet has ${a} mg of medicine. What is that in grams and milligrams? Write (g, mg).`,
+      ][k];
+    },
+    teach: {
+      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL, 1 km = 1000 m. To change into the larger unit, see how many whole large units fit, and what is left.",
+      method: "Divide by 100, 10 or 1000: the whole number of times is the large unit; the remainder is the small unit (3450 g = 3 kg 450 g).",
+      alternatives: [
+        { id: "split_digits", title: "Split the digits", kind: "procedural", text: ["For × 1000 units, the last three digits are the small unit: 3|450 g = 3 kg 450 g; 3|045 g = 3 kg 45 g.", "For cm to m, the last two digits; for mm to cm, the last digit."] },
+      ],
+    },
+    limits: "Whole amounts with 1 to 9 large units; decimals of the large unit are the family aeconvd.",
+  },
+  {
+    id: "aeconvd",
+    arity: 2,
+    title: "Writing a measure as a decimal of the larger unit",
+    competency: CONV,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [k, v]: cuAmount(k, v) of the small unit of CU[k], as a decimal of the large unit
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 5], [0, 179]]) || cuAmount(p[0], p[1]) === null ? "An amount in cm, g, mL, m, mm or mg." : null),
+    prompt: ([k, v]) => `Write ${cuAmount(k, v)} ${CU[k].small} in ${CU[k].bigw} (as a decimal).`,
+    solve: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      return { steps: [{ id: "divide", op: "divide", competency: CONV, inputs: [a, CU[k].f], value: a / CU[k].f }], answer: a / CU[k].f };
+    },
+    // independent: multiply the answer back by the factor and compare with the amount
+    validate: ([k, v], ans) => {
+      const t = thou(ans);
+      return t !== null && (t * CU[k].f) / 1000 === cuAmount(k, v);
+    },
+    bugs: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      const f = CU[k].f;
+      const g = f === 1000 ? 100 : 1000;
+      const w = Math.floor(a / f);
+      const rest = a % f;
+      return [
+        { id: "wrong-factor", kind: "recall", competency: CONV, says: `1 ${CU[k].big} was taken as ${g} ${CU[k].small}; 1 ${CU[k].big} = ${f} ${CU[k].small}.`, predict: a / g },
+        { id: "zero-lost", kind: "conceptual", competency: DEC, says: `The ${rest} ${CU[k].small} were written straight after the point, but they are ${f === 1000 ? "thousandths" : f === 100 ? "hundredths" : "tenths"} of a ${CU[k].big}, so they need ${String(f).length - 1} decimal places: put zeros in the empty places.`, predict: String(rest).length < String(f).length - 1 ? Number(`${w}.${rest}`) : null },
+      ];
+    },
+    distractors: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      return [a / (CU[k].f * 10), a / 10 === a / CU[k].f ? a : a / 10];
+    },
+    variants: () => [],
+    explain: (s) => `${s.inputs[0]} ÷ ${s.inputs[1]} = ${String(s.value)}`,
+    domain: [[0, 5], [0, 179]],
+    cap: 450,
+    difficulty: ([k, v]) => (String(cuAmount(k, v)! % CU[k].f).length < String(CU[k].f).length - 1 ? 3 : 2),
+    word: ([k, v]) => {
+      const a = cuAmount(k, v)!;
+      return [`A tailor measures ${a} cm of cloth. The bill shows it in metres. What number of metres is on the bill?`, `A parcel weighs ${a} g. The post office writes the weight in kilograms. What does it write?`, `A bottle of oil holds ${a} mL. How many litres is that?`, `A walk is ${a} m long. How many kilometres is that?`, `A screw is ${a} mm long. How many centimetres is that?`, `A medicine has ${a} mg of a vitamin. How many grams is that?`][k];
+    },
+    teach: {
+      idea: "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so 3450 g = 3450 thousandths of a kg = 3.450 kg = 3.45 kg.",
+      method: "Divide by 1000 (or 100, or 10): move the decimal point 3 (or 2, or 1) places to the left, filling empty places with zeros (3045 g = 3.045 kg).",
+      alternatives: [
+        { id: "chart", title: "A place-value chart", kind: "procedural", text: ["Write the amount in a chart with kg in the ones column and g in the tenths, hundredths and thousandths columns.", "3045 g: 3 in the ones, then 0, 4, 5: 3.045 kg."] },
+      ],
+    },
+    limits: "Amounts with 1 to 9 large units; changing a decimal back into the smaller unit is the family aidp10.",
+  },
+  {
+    id: "aewcmp",
+    arity: 2,
+    title: "Comparing weights in different units with <, = or >",
+    competency: CONV,
+    type: "choice",
+    // [kind, s]: kind 0 kg and g against g; kind 1 g and mg against mg
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 149]])) return "Two weights to compare.";
+      const [kind, s] = p;
+      const w = wcData(kind, s);
+      return w.c <= 0 || repeatOf(`aewcmp${kind}`, 150, (t) => { const x = wcData(kind, t); return `${x.a},${x.b},${x.c}`; }, s) ? "An earlier choice already compares these weights (distinct@1)." : null;
+    },
+    prompt: ([kind, s]) => {
+      const w = wcData(kind, s);
+      const [B, S] = kind ? ["g", "mg"] : ["kg", "g"];
+      return `Which sign goes in the box: ${w.a} ${B} ${w.b} ${S} ☐ ${w.c} ${S}? Choose <, = or >.`;
+    },
+    choices: (p) => shuffled(`aewcmp:${p}`, ["<", "=", ">"]).choices,
+    solve: ([kind, s]) => {
+      const w = wcData(kind, s);
+      const L = 1000 * w.a + w.b;
+      const q = shuffled(`aewcmp:${[kind, s]}`, ["<", "=", ">"]);
+      const i = L < w.c ? 0 : L === w.c ? 1 : 2;
+      return { steps: [{ id: "convert", op: "convert", competency: CONV, inputs: [w.a, w.b], value: L }, { id: "compare", op: "compare", competency: CONV, inputs: [L, w.c], value: q.at(i) }], answer: q.at(i) };
+    },
+    // independent: change the right-hand weight into the large and small units, then compare large units first
+    validate: ([kind, s], v) => {
+      if (!isIdx(v)) return false;
+      const w = wcData(kind, s);
+      const [cb, cs] = [Math.floor(w.c / 1000), w.c % 1000];
+      const sign = w.a !== cb ? (w.a < cb ? "<" : ">") : w.b === cs ? "=" : w.b < cs ? "<" : ">";
+      return shuffled(`aewcmp:${[kind, s]}`, ["<", "=", ">"]).choices[v] === sign;
+    },
+    bugs: ([kind, s]) => {
+      const w = wcData(kind, s);
+      const q = shuffled(`aewcmp:${[kind, s]}`, ["<", "=", ">"]);
+      const heard = Number(`${w.a}${w.b}`);
+      const L = 1000 * w.a + w.b;
+      const sg = (x: number) => (x < w.c ? 0 : x === w.c ? 1 : 2);
+      const [B, S] = kind ? ["g", "mg"] : ["kg", "g"];
+      return [
+        { id: "side-by-side", kind: "conceptual", competency: PV, says: `${w.a} ${B} ${w.b} ${S} was read as ${heard} ${S} by writing the numbers side by side; it is ${w.a} × 1000 + ${w.b} = ${L} ${S}.`, predict: sg(heard) !== sg(L) ? q.at(sg(heard)) : null },
+        { id: "bigger-number", kind: "conceptual", competency: CONV, says: `The numbers were compared without the units (${w.c} looks bigger than ${w.a} and ${w.b}); change both weights into the same unit first.`, predict: sg(L) !== 0 ? q.at(0) : null },
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} large units ${s.inputs[1]} small units = ${s.value} small units` : `Compare ${s.inputs[0]} and ${s.inputs[1]}`),
+    domain: [[0, 1], [0, 149]],
+    difficulty: ([kind, s]) => (s % 3 === 1 ? 3 : kind ? 2 : 1),
+    word: ([kind, s]) => {
+      const w = wcData(kind, s);
+      return kind === 0 ? `${name(s)}'s bag of potatoes weighs ${w.a} kg ${w.b} g and ${name(s + 1)}'s weighs ${w.c} g. Which sign is true: ${name(s)}'s bag ☐ ${name(s + 1)}'s bag? Choose <, = or >.` : `One medicine packet holds ${w.a} g ${w.b} mg of powder and another holds ${w.c} mg. Which sign is true: first packet ☐ second packet? Choose <, = or >.`;
+    },
+    teach: {
+      idea: "Weights can be compared only in the same unit: 1 kg = 1000 g and 1 g = 1000 mg.",
+      method: "Change the weight in two units into the small unit (2 kg 50 g = 2050 g), then compare the numbers.",
+      alternatives: [
+        { id: "large_first", title: "Compare the large units first", kind: "procedural", text: ["Change the single amount into large and small units (2500 g = 2 kg 500 g).", "Compare kilograms first; only if they are equal, compare the grams."] },
+      ],
+    },
+    limits: "Weights in kg and g, or g and mg, compared with one amount in the small unit.",
+  },
+  {
+    id: "aeftin",
+    arity: 3,
+    title: "Feet, inches and centimetres, and estimating with a known length",
+    competency: CONV,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [kind, a, b]: kind 0 a feet; kind 1 a feet b inches (to cm, 1 foot ≈ 30 cm, 1 inch ≈ 2.5 cm); kind 2 a times the reference REFS[b]
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [1, 12], [0, 11]])) return "Feet and inches, or a number of known lengths.";
+      const [kind, a, b] = p;
+      if (kind === 0) return b !== 0 || a < 2 ? "2 to 12 feet." : null;
+      if (kind === 1) return a > 7 || b < 1 ? "1 to 7 feet and 1 to 11 inches." : null;
+      return a < 3 || b >= REFS.length ? "3 to 12 times a known length." : null;
+    },
+    prompt: ([kind, a, b]) =>
+      kind === 0 ? `1 foot is about 30 cm. About how many centimetres is ${a} feet?`
+        : kind === 1 ? `1 foot is about 30 cm and 1 inch is about 2.5 cm (12 inches make 1 foot). About how many centimetres is ${a} ${a === 1 ? "foot" : "feet"} ${b} ${b === 1 ? "inch" : "inches"}?`
+          : `${REFS[b][0]} is about ${REFS[b][1]} m ${REFS[b][2]}. ${REFS[b][3](a)} About how many metres is that?`,
+    solve: ([kind, a, b]) => {
+      if (kind === 2) return { steps: [{ id: "times", op: "multiply", competency: CONV, inputs: [a, REFS[b][1]], value: a * REFS[b][1] }], answer: a * REFS[b][1] };
+      return { steps: [{ id: "feet", op: "multiply", competency: CONV, inputs: [a, 30], value: 30 * a }, { id: "inches", op: "multiply", competency: CONV, inputs: [b, 2.5], value: 2.5 * b }], answer: 30 * a + 2.5 * b };
+    },
+    // independent: change everything into inches first (12 to a foot), then 2.5 cm each; for a known length, add it again and again
+    validate: ([kind, a, b], v) => {
+      const t = thou(v);
+      if (t === null) return false;
+      if (kind === 2) {
+        let s = 0;
+        for (let i = 0; i < a; i++) s += REFS[b][1];
+        return t === s * 1000;
+      }
+      return t === (12 * a + b) * 2500;
+    },
+    bugs: ([kind, a, b]) =>
+      kind === 2
+        ? [{ id: "added", kind: "conceptual", competency: CONV, says: `The known length and the number of times were added; ${a} of them end to end is ${a} × ${REFS[b][1]} m.`, predict: a + REFS[b][1] }]
+        : [
+            { id: "ten-inches", kind: "recall", competency: CONV, says: "A foot was taken as 10 inches; 1 foot = 12 inches.", predict: kind === 1 ? (10 * a + b) * 2.5 : null },
+            { id: "inches-as-cm", kind: "conceptual", competency: CONV, says: "The inches were counted as centimetres; an inch is about 2.5 cm.", predict: kind === 1 ? 30 * a + b : null },
+            { id: "foot-12cm", kind: "recall", competency: CONV, says: "A foot was taken as 12 cm (the number of inches in it); 1 foot is about 30 cm.", predict: 12 * a + 2.5 * b },
+          ],
+    distractors: ([kind, a, b]) => (kind === 2 ? [a * REFS[b][1] * 10, (a + 1) * REFS[b][1]] : [30 * a + 2.5 * b + 30, 3 * a]),
+    variants: () => [],
+    explain: (s) => (s.id === "times" ? `${s.inputs[0]} × ${s.inputs[1]} m = ${s.value} m` : s.id === "feet" ? `${s.inputs[0]} feet ≈ ${s.inputs[0]} × 30 = ${s.value} cm` : `${s.inputs[0]} inches ≈ ${s.inputs[0]} × 2.5 = ${s.value} cm; add the two parts`),
+    domain: [[0, 2], [1, 12], [0, 11]],
+    difficulty: ([kind, , b]) => (kind === 0 ? 1 : kind === 2 ? 2 : b % 2 ? 3 : 2),
+    word: ([kind, a, b]) => (kind === 2 ? `${name(a + b)} wants to estimate a length without a tape. ${REFS[b][0]} is about ${REFS[b][1]} m ${REFS[b][2]}. ${REFS[b][3](a)} Estimate the length in metres.` : `${name(a + b)}'s height is written as ${a} ${a === 1 ? "foot" : "feet"}${kind === 1 ? ` ${b} ${b === 1 ? "inch" : "inches"}` : ""} on an old card. Using 1 foot ≈ 30 cm${kind === 1 ? " and 1 inch ≈ 2.5 cm" : ""}, about how many centimetres is that?`),
+    teach: {
+      idea: "Feet and inches are older units still used for heights: 12 inches make 1 foot, 1 inch is about 2.5 cm and 1 foot about 30 cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
+      method: "Change feet to cm (× 30) and inches to cm (× 2.5) and add. To estimate with a known length, count how many of it fit and multiply.",
+      alternatives: [
+        { id: "body", title: "Use your body", kind: "conceptual", text: ["Your foot is close to a foot long for an adult; a thumb-width is close to an inch.", "Your step is about half a metre: 10 steps make about 5 m."] },
+      ],
+    },
+    limits: "Rounded conversion facts (1 foot ≈ 30 cm, 1 inch ≈ 2.5 cm) and five everyday reference lengths; exact conversion (1 inch = 2.54 cm) is the family aecf.",
+  },
+  {
+    id: "aecf",
+    arity: 3,
+    title: "Converting units with a conversion factor",
+    competency: CONV,
+    skill: "MATH.number.unit-rate",
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [kind, x, r]: 0 18x km/h to m/s; 1 5x m/s to km/h; 2 x inches to cm (2.54); 3 5x miles to km (1.6); 4 $x to rupees at ₹(82 + r)
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 4], [1, 40], [0, 6]])) return "A speed, length, distance or amount of money to convert.";
+      const [kind, x, r] = p;
+      if (kind !== 4 && r !== 0) return "The rate is used only for money.";
+      return (kind <= 1 && x > 15) || (kind === 3 && x > 20) || (kind === 4 && x > 20) ? "Numbers that keep the working short." : null;
+    },
+    prompt: ([kind, x, r]) =>
+      [
+        `A car travels at ${18 * x} km/h. What is this speed in metres per second? (1 km = 1000 m, 1 hour = 3600 seconds.)`,
+        `A cheetah runs at ${5 * x} m/s. What is this speed in kilometres per hour? (1 km = 1000 m, 1 hour = 3600 seconds.)`,
+        `1 inch = 2.54 cm. A tablet screen is ${x} inches across. How many centimetres is that?`,
+        `1 mile is about 1.6 km. A road sign abroad shows ${5 * x} miles. About how many kilometres is that?`,
+        `On one day, 1 US dollar is worth ₹${82 + r}. How many rupees is ${10 * x} dollars?`,
+      ][kind],
+    solve: ([kind, x, r]) => {
+      const [inp, factor, out] = [[18 * x, 5 / 18, 5 * x], [5 * x, 18 / 5, 18 * x], [x, 2.54, 2.54 * x], [5 * x, 1.6, 8 * x], [10 * x, 82 + r, 10 * x * (82 + r)]][kind];
+      return { steps: [{ id: "factor", op: "multiply", competency: CONV, inputs: [inp, kind <= 1 ? (kind === 0 ? "5/18" : "18/5") : factor], value: out }], answer: out };
+    },
+    // independent: follow the units one step at a time (km → m and h → s), or add the factor once for each unit
+    validate: ([kind, x, r], v) => {
+      const t = thou(v);
+      if (t === null) return false;
+      if (kind === 0) return t === Math.round(((18 * x * 1000) / 3600) * 1000);
+      if (kind === 1) return t === Math.round(((5 * x * 3600) / 1000) * 1000);
+      const [n, step] = [[x, 2540], [5 * x, 1600], [10 * x, (82 + r) * 1000]][kind - 2];
+      let s = 0;
+      for (let i = 0; i < n; i++) s += step;
+      return t === s;
+    },
+    bugs: ([kind, x, r]) => {
+      const inp = [18 * x, 5 * x, x, 5 * x, 10 * x][kind];
+      const f = [5 / 18, 18 / 5, 2.54, 1.6, 82 + r][kind];
+      const inv = Math.round((inp / f) * 1000) / 1000;
+      return [
+        { id: "factor-upside-down", kind: "conceptual", competency: CONV, says: kind <= 1 ? `The factor was used the wrong way up (${kind === 0 ? "18/5 instead of 5/18" : "5/18 instead of 18/5"}); ask whether the new number should be bigger or smaller.` : `The amount was divided by ${f} instead of multiplied; ${kind === 4 ? "each dollar is worth many rupees, so the number of rupees is bigger" : "each unit is more than one of the new unit, so the new number is bigger"}.`, predict: Math.abs(inv * 1000 - Math.round(inv * 1000)) < 1e-9 && Number.isInteger(Math.round(inv * 1000)) && Math.abs(inv - inp / f) < 1e-9 ? inv : null },
+        ...(kind <= 1 ? [{ id: "metres-only", kind: "procedural", competency: CONV, says: "Only the kilometres and metres were changed; the hours and seconds must be changed too (1 hour = 3600 s).", predict: kind === 0 ? 18 * x * 1000 : (5 * x) / 1000 } as Bug] : []),
+      ];
+    },
+    distractors: ([kind, x, r]) => {
+      const out = [5 * x, 18 * x, 2.54 * x, 8 * x, 10 * x * (82 + r)][kind];
+      return [out * 10, out + [5, 18, 2.54, 8, 10 * (82 + r)][kind]];
+    },
+    variants: () => [],
+    explain: (s) => `${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)}`,
+    domain: [[0, 4], [1, 40], [0, 6]],
+    difficulty: ([kind]) => (kind >= 2 ? 2 : 3),
+    word: ([kind, x, r]) =>
+      [
+        `A train's speed board shows ${18 * x} km/h. ${name(x)} wants to know how many metres it goes each second. What is the speed in m/s?`,
+        `In a science book, a falcon dives at ${5 * x} m/s. ${name(x)} wants the speed in km/h to compare it with a car. What is it?`,
+        `${name(x)} buys a TV advertised as ${x} inches (1 inch = 2.54 cm). How many centimetres is that?`,
+        `On a trip abroad, ${name(x)} reads that the next town is ${5 * x} miles away (1 mile ≈ 1.6 km). About how many km is that?`,
+        `${name(x)}'s uncle sends ${10 * x} US dollars home when 1 dollar is worth ₹${82 + r}. How many rupees is that?`,
+      ][kind],
+    teach: {
+      idea: "A conversion factor says how many of one unit make one of the other: 1 inch = 2.54 cm, 1 km/h = 5/18 m/s. Converting is multiplying by the factor, because the amount is proportional.",
+      method: "Write the factor as 'new units per old unit' and multiply. Check the direction: going to a smaller unit gives a bigger number.",
+      alternatives: [
+        { id: "chain", title: "Change one unit at a time", kind: "procedural", text: ["For speeds, change km into m (× 1000), then per hour into per second (÷ 3600).", "72 km/h = 72 000 m per 3600 s = 20 m/s."] },
+      ],
+    },
+    limits: "Speeds (km/h and m/s), inches, miles and dollars with given factors; compound units beyond speed are not here.",
+  },
+];
+const REFS: [string, number, string, (a: number) => string][] = [
+  ["A classroom door", 2, "tall", (a) => `A school building is about ${a} doors tall.`],
+  ["One floor of a building", 3, "high", (a) => `A building has ${a} floors.`],
+  ["A city bus", 10, "long", (a) => `A queue of buses parked end to end is ${a} buses long.`],
+  ["A cricket pitch", 20, "long", (a) => `A running track straight is about ${a} pitches long.`],
+  ["A railway coach", 25, "long", (a) => `A train has ${a} coaches.`],
+];
+const wcData = (kind: number, s: number) => {
+  const r = rng(s * 13 + kind * 101 + 9000);
+  const a = 1 + Math.floor(r() * 8);
+  const b = REM1000[Math.floor(r() * REM1000.length)];
+  const L = 1000 * a + b;
+  const t = s % 3;
+  const heard = Number(`${a}${b}`);
+  const c = t === 0 ? L : t === 1 && heard !== L ? heard : L + (r() < 0.5 ? -1 : 1) * 10 * (1 + Math.floor(r() * 9));
+  return { a, b, c };
+};
+B05.push(...MEAS_MORE);
+
+const MIX_MORE: Def[] = [
+  {
+    id: "aediv0",
+    arity: 3,
+    title: "Dividing a multiple of 10, 100 or 1000 by a one-digit number",
+    competency: P10,
+    type: "integer",
+    mc: true,
+    // [d, q, k]: (d × q × 10^k) ÷ d
+    parse: (t) => {
+      const m = t.replace(/\s/g, "").match(/^(\d+)[÷/]([2-9])=?\??$/);
+      if (!m) return null;
+      const n = Number(m[1]);
+      const d = Number(m[2]);
+      for (let k = 1; k <= 3; k++) {
+        const q = n / (d * 10 ** k);
+        if (Number.isInteger(q) && q >= 2 && q <= 9) return [d, q, k];
+      }
+      return null;
+    },
+    reject: (p) => (!inRange(p, [[2, 9], [2, 9], [1, 3]]) ? "A multiple of 10, 100 or 1000 from a table fact, divided by 2 to 9." : null),
+    prompt: ([d, q, k]) => `${d * q * 10 ** k} ÷ ${d} = ?`,
+    solve: ([d, q, k]) => ({
+      steps: [
+        { id: "fact", op: "divide", competency: MT, inputs: [d * q, d], value: q },
+        { id: "zeros", op: "multiply", competency: P10, inputs: [q, 10 ** k], value: q * 10 ** k },
+      ],
+      answer: q * 10 ** k,
+    }),
+    // independent: take d away again and again from the number and count how many times
+    validate: ([d, q, k], v) => {
+      let n = d * q * 10 ** k;
+      let c = 0;
+      while (n > 0) {
+        n -= d;
+        c++;
+      }
+      return n === 0 && v === c;
+    },
+    bugs: ([d, q, k]) => [
+      { id: "zero-lost", kind: "procedural", competency: P10, says: `${d * q} ÷ ${d} = ${q} was right, but a zero was lost: ${d * q * 10 ** k} is ${d * q} ${["", "tens", "hundreds", "thousands"][k]}, so the answer is ${q} ${["", "tens", "hundreds", "thousands"][k]}.`, predict: k === 1 ? q : q * 10 ** (k - 1) },
+      { id: "extra-zero", kind: "procedural", competency: P10, says: `One zero too many was written; ${d * q * 10 ** k} has ${k} ${k === 1 ? "zero" : "zeros"} after ${d * q}, and the answer keeps exactly those.`, predict: q * 10 ** (k + 1) },
+      { id: "fact-slip", kind: "prerequisite", competency: MT, says: `The division fact ${d * q} ÷ ${d} is not yet reliable.`, predict: [(q + 1) * 10 ** k, (q - 1) * 10 ** k].filter((x) => x > 0), probe: `gen:mul:${d},${q}` },
+    ],
+    variants: () => [],
+    explain: (s) => (s.id === "fact" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}` : `So ${s.inputs[0]} ${["", "tens", "hundreds", "thousands"][String(s.inputs[1]).length - 1]}: ${s.value}`),
+    domain: [[2, 9], [2, 9], [1, 3]],
+    difficulty: ([, , k]) => (k === 1 ? 1 : k === 2 ? 2 : 3),
+    word: ([d, q, k]) => `${d * q * 10 ** k} rupees collected for a school trip are shared equally among ${d} classes. How many rupees does each class get?`,
+    teach: {
+      idea: "2400 is 24 hundreds, so 2400 ÷ 6 is 24 hundreds ÷ 6 = 4 hundreds = 400.",
+      method: "Cover the zeros, divide using the table fact, then put the zeros back on the answer.",
+      visual: ([d, q]) => ({ type: "array", rows: d, cols: q }),
+      alternatives: [
+        { id: "check", title: "Check by multiplying", kind: "procedural", text: ["Multiply the answer by the divisor: 400 × 6 = 2400.", "If you get the number you started with, the division is right."] },
+      ],
+    },
+    limits: "Table facts with 10, 100 or 1000; dividing by 10, 100 and 1000 themselves is the family aep10.",
+  },
+  {
+    id: "aetab",
+    arity: 2,
+    title: "A table of quantities and costs with missing values",
+    competency: MULTI,
+    type: "integer",
+    mc: true,
+    // [kind, s]: the table tabData(s), one value missing in each row; kind 0 the total bill, 1 the missing price, 2 the missing number
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 2], [0, 199]])) return "A shopping table with missing values.";
+      return repeatOf("aetab", 200, (t) => JSON.stringify(tabData(t)), p[1]) ? "An earlier choice already shows this table (distinct@1)." : null;
+    },
+    prompt: ([kind, s]) => {
+      const rows = tabData(s);
+      return `The table in the picture shows a school's order from a stationery shop; some values are missing (?). ${[`What is the total cost of the whole order, in rupees?`, `What is the price of one ${rows[1].item[1]}, in rupees?`, `How many ${rows[2].item[0]} were ordered?`][kind]}`;
+    },
+    solve: ([kind, s]) => {
+      const [r0, r1, r2] = tabData(s);
+      if (kind === 0) return { steps: [{ id: "cost0", op: "multiply", competency: MM, inputs: [r0.q, r0.p], value: r0.q * r0.p }, { id: "total", op: "add", competency: ADDSUB, inputs: [r0.q * r0.p, r1.q * r1.p, r2.q * r2.p], value: r0.q * r0.p + r1.q * r1.p + r2.q * r2.p }], answer: r0.q * r0.p + r1.q * r1.p + r2.q * r2.p };
+      const r = kind === 1 ? r1 : r2;
+      return { steps: [{ id: kind === 1 ? "price" : "number", op: "divide", competency: "MATH.number.long-division", inputs: [r.q * r.p, kind === 1 ? r.q : r.p], value: kind === 1 ? r.p : r.q }], answer: kind === 1 ? r.p : r.q };
+    },
+    // independent: read the table back (as drawn) and fill each '?' by trying values until the row is consistent
+    validate: ([kind, s], v) => {
+      if (!isInt(v)) return false;
+      const rows = (tabFig(s).rows as (string | number)[][]).map((r) => r.slice(1));
+      const fill = (r: (string | number)[]) => {
+        for (let x = 1; x <= 2000; x++) {
+          const [q, p, c] = r.map((y) => (y === "?" ? x : Number(y)));
+          if (q * p === c) return [q, p, c];
+        }
+        return [NaN, NaN, NaN];
+      };
+      const full = rows.map(fill);
+      return v === [full[0][2] + full[1][2] + full[2][2], full[1][1], full[2][0]][kind];
+    },
+    bugs: ([kind, s]) => {
+      const [r0, r1, r2] = tabData(s);
+      if (kind === 0) return [
+        { id: "missing-left-out", kind: "procedural", competency: MULTI, says: `The cost of the ${r0.item[0]} (missing in the table) was left out; work it out first: ${r0.q} × ₹${r0.p}.`, predict: r1.q * r1.p + r2.q * r2.p },
+        { id: "price-for-cost", kind: "procedural", competency: MULTI, says: `The price of one ${r0.item[1]} was added instead of the cost of all ${r0.q}.`, predict: r0.p + r1.q * r1.p + r2.q * r2.p },
+      ];
+      const r = kind === 1 ? r1 : r2;
+      return [
+        { id: "subtract", kind: "conceptual", competency: MULTI, says: `The ${kind === 1 ? "number" : "price"} was taken away from the cost; the cost is number × price, so divide.`, predict: r.q * r.p - (kind === 1 ? r.q : r.p) },
+        { id: "other-column", kind: "procedural", competency: MULTI, says: `The wrong column was read: the question asks for the ${kind === 1 ? "price of one" : "number bought"}.`, predict: kind === 1 ? r.q : r.p },
+      ];
+    },
+    distractors: ([kind, s]) => {
+      const [r0, r1, r2] = tabData(s);
+      const a = [r0.q * r0.p + r1.q * r1.p + r2.q * r2.p, r1.p, r2.q][kind];
+      return [a + 10, a * 2, a + 1];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "cost0" ? `${s.inputs[0]} × ₹${s.inputs[1]} = ₹${s.value}` : s.id === "total" ? `₹${s.inputs[0]} + ₹${s.inputs[1]} + ₹${s.inputs[2]} = ₹${s.value}` : `₹${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    domain: [[0, 2], [0, 199]],
+    difficulty: ([kind]) => (kind === 0 ? 3 : 2),
+    figure: ([, s]) => tabFig(s),
+    word: ([kind, s]) => {
+      const rows = tabData(s);
+      return `${name(s)} finds a torn bill from the class's stationery order; the picture shows what can still be read (? marks a torn-off value). ${[`How much did the whole order cost, in rupees?`, `What did one ${rows[1].item[1]} cost, in rupees?`, `How many ${rows[2].item[0]} were bought?`][kind]}`;
+    },
+    teach: {
+      idea: "In each row, cost = how many × price of one. Knowing any two of the three gives the third: multiply for the cost, divide the cost to find the number or the price.",
+      method: "Fill each missing value first (multiply or divide in its row), then answer the question, adding the costs for a total.",
+      alternatives: [
+        { id: "row_by_row", title: "One row at a time", kind: "procedural", text: ["Cover all rows except one and ask: which of number, price and cost is missing?", "Cost missing: multiply. Price or number missing: divide the cost by the other."] },
+      ],
+    },
+    limits: "Three rows with whole-rupee prices; discounts and change are other families.",
+  },
+  {
+    id: "aetrip",
+    arity: 4,
+    title: "Problems that combine time, distance and money",
+    competency: MULTI,
+    type: "integer",
+    mc: true,
+    // [kind, a, b, c]: kind 0 SPEEDS[a] km/h for b hours at ₹(10 + c) a km; kind 1 rowing (a + 2) km/h, b × (a + 2) km each way, ₹(50 + 10c) an hour
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 4], [1, 5], [0, 10]])) return "A journey with a speed, a time and a charge.";
+      return p[0] === 1 && p[2] > 3 ? "Up to 3 hours each way." : null;
+    },
+    prompt: ([kind, a, b, c]) =>
+      kind === 0
+        ? `A taxi travels at ${SPEEDS[a]} km per hour for ${b} ${b === 1 ? "hour" : "hours"}. The fare is ₹${10 + c} for every kilometre. What is the fare, in rupees?`
+        : `A boat can be hired for ₹${50 + 10 * c} an hour. ${name(a + b)} rows at ${a + 2} km per hour to an island ${b * (a + 2)} km away and back again. How much does the boat hire cost, in rupees?`,
+    solve: ([kind, a, b, c]) => {
+      if (kind === 0) {
+        const d = SPEEDS[a] * b;
+        return { steps: [{ id: "distance", op: "multiply", competency: MM, inputs: [SPEEDS[a], b], value: d }, { id: "fare", op: "multiply", competency: MM, inputs: [d, 10 + c], value: d * (10 + c) }], answer: d * (10 + c) };
+      }
+      const t = 2 * b;
+      return { steps: [{ id: "time", op: "divide", competency: MULTI, inputs: [2 * b * (a + 2), a + 2], value: t }, { id: "hire", op: "multiply", competency: MM, inputs: [t, 50 + 10 * c], value: t * (50 + 10 * c) }], answer: t * (50 + 10 * c) };
+    },
+    // independent: go hour by hour (or km by km), adding up distance and money as you go
+    validate: ([kind, a, b, c], v) => {
+      let money = 0;
+      if (kind === 0) {
+        for (let h = 0; h < b; h++) for (let km = 0; km < SPEEDS[a]; km++) money += 10 + c;
+        return v === money;
+      }
+      let left = 2 * b * (a + 2);
+      while (left > 0) {
+        left -= a + 2;
+        money += 50 + 10 * c;
+      }
+      return left === 0 && v === money;
+    },
+    bugs: ([kind, a, b, c]) =>
+      kind === 0
+        ? [
+            { id: "hours-times-rate", kind: "conceptual", competency: MULTI, says: "The hours were multiplied by the fare per km; first find the distance (speed × time), then multiply by the fare per km.", predict: b * (10 + c) },
+            { id: "speed-times-rate", kind: "procedural", competency: MULTI, says: `Only one hour was paid for (${SPEEDS[a]} km); the taxi travels for ${b} hours.`, predict: b > 1 ? SPEEDS[a] * (10 + c) : null },
+          ]
+        : [
+            { id: "one-way", kind: "procedural", competency: MULTI, says: "Only the trip to the island was counted; the boat must come back too.", predict: b * (50 + 10 * c) },
+            { id: "km-for-hours", kind: "conceptual", competency: MULTI, says: "The kilometres were paid for as if they were hours; the hire is by the hour, so find the time (distance ÷ speed) first.", predict: 2 * b * (a + 2) * (50 + 10 * c) },
+          ],
+    distractors: ([kind, a, b, c]) => {
+      const ans = kind === 0 ? SPEEDS[a] * b * (10 + c) : 2 * b * (50 + 10 * c);
+      return [ans + (kind === 0 ? 10 + c : 50 + 10 * c), ans * 2];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "distance" ? `Distance = ${s.inputs[0]} km/h × ${s.inputs[1]} h = ${s.value} km` : s.id === "fare" ? `Fare = ${s.inputs[0]} km × ₹${s.inputs[1]} = ₹${s.value}` : s.id === "time" ? `Time = ${s.inputs[0]} km ÷ ${s.inputs[1]} km/h = ${s.value} hours (there and back)` : `Hire = ${s.inputs[0]} hours × ₹${s.inputs[1]} = ₹${s.value}`),
+    domain: [[0, 1], [0, 4], [1, 5], [0, 10]],
+    cap: 400,
+    difficulty: ([kind, , b]) => (kind === 1 ? 3 : b <= 2 ? 1 : 2),
+    word: ([kind, a, b, c]) => (kind === 0 ? `For a charity walkathon, every kilometre walked raises ₹${10 + c}. ${name(a + b + c)}'s cycling team rides at ${SPEEDS[a]} km per hour for ${b} ${b === 1 ? "hour" : "hours"} instead. How much money does the team raise?` : `At Pichavaram, ${name(a + b)} hires a rowing boat at ₹${50 + 10 * c} an hour, rows ${b * (a + 2)} km to see the mangroves at ${a + 2} km per hour and rows back the same way. How much is the hire?`),
+    teach: {
+      idea: "Speed links distance and time: distance = speed × time, and time = distance ÷ speed. A charge per km or per hour then turns the distance or the time into money.",
+      method: "Decide what the money depends on (km or hours). Find that quantity first from the speed, then multiply by the charge.",
+      alternatives: [
+        { id: "table", title: "Make a table", kind: "procedural", text: ["Write a row for each hour: the km travelled that hour and the money for those km.", "Add the rows up, or multiply when every row is the same."] },
+      ],
+    },
+    limits: "Whole hours and whole kilometres with whole-rupee charges.",
+  },
+  {
+    id: "aebig",
+    arity: 2,
+    title: "Multi-step problems with large numbers",
+    competency: MULTI,
+    skill: LARGE,
+    type: "integer",
+    mc: true,
+    // [kind, s]: 0 a town's population with births and people moving away; 1 money in lakhs spent on n items; 2 a truck's kilometres over weeks
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 2], [0, 99]]) ? "Population, money or distance in large numbers." : null),
+    prompt: ([kind, s]) => {
+      const { a, b, c } = bigData(kind, s);
+      return [
+        `A town had ${ind(a)} people. In one year ${ind(b)} babies were born and ${ind(c)} people moved away. How many people lived in the town at the end of the year?`,
+        `A school has ₹${ind(a)} to spend. It buys ${b} computers at ₹${ind(c)} each. How many rupees are left?`,
+        `A truck makes ${b} trips a week between two cities that are ${a} km apart (each trip one way). How many kilometres does it travel in ${c} weeks?`,
+      ][kind];
+    },
+    solve: ([kind, s]) => {
+      const { a, b, c } = bigData(kind, s);
+      if (kind === 0) return { steps: [{ id: "add", op: "add", competency: ADDSUB, inputs: [a, b], value: a + b }, { id: "sub", op: "subtract", competency: ADDSUB, inputs: [a + b, c], value: a + b - c }], answer: a + b - c };
+      if (kind === 1) return { steps: [{ id: "cost", op: "multiply", competency: MM, inputs: [b, c], value: b * c }, { id: "left", op: "subtract", competency: ADDSUB, inputs: [a, b * c], value: a - b * c }], answer: a - b * c };
+      return { steps: [{ id: "week", op: "multiply", competency: MM, inputs: [b, a], value: a * b }, { id: "all", op: "multiply", competency: MM, inputs: [a * b, c], value: a * b * c }], answer: a * b * c };
+    },
+    // independent: the other order (take away first, then add; pay one computer at a time; add week by week)
+    validate: ([kind, s], v) => {
+      const { a, b, c } = bigData(kind, s);
+      if (kind === 0) return v === a - c + b;
+      if (kind === 1) {
+        let m = a;
+        for (let i = 0; i < b; i++) m -= c;
+        return v === m;
+      }
+      let km = 0;
+      for (let w = 0; w < c; w++) for (let t = 0; t < b; t++) km += a;
+      return v === km;
+    },
+    bugs: ([kind, s]) => {
+      const { a, b, c } = bigData(kind, s);
+      return [
+        [
+          { id: "both-added", kind: "conceptual", competency: MULTI, says: "The people who moved away were added; they leave the town, so take them away.", predict: a + b + c },
+          { id: "both-taken", kind: "conceptual", competency: MULTI, says: "The babies born were taken away; they join the town, so add them.", predict: a - b - c },
+        ],
+        [
+          { id: "one-item", kind: "procedural", competency: MULTI, says: `Only one computer was paid for; ${b} computers cost ${b} × ₹${ind(c)}.`, predict: a - c },
+          { id: "cost-not-left", kind: "procedural", competency: MULTI, says: "The total cost was given; the question asks how much money is left.", predict: b * c },
+        ],
+        [
+          { id: "one-week", kind: "procedural", competency: MULTI, says: `Only one week was counted; the truck runs for ${c} weeks.`, predict: a * b },
+          { id: "added", kind: "conceptual", competency: MULTI, says: "The numbers were added; equal trips every week are counted by multiplying.", predict: a + b + c },
+        ],
+      ][kind] as Bug[];
+    },
+    distractors: ([kind, s]) => {
+      const { a, b, c } = bigData(kind, s);
+      const ans = [a + b - c, a - b * c, a * b * c][kind];
+      return [ans + 1000, ans - 1000, ans + 10000];
+    },
+    variants: () => [],
+    explain: (s) => (s.op === "add" ? `${ind(Number(s.inputs[0]))} + ${ind(Number(s.inputs[1]))} = ${ind(Number(s.value))}` : s.op === "subtract" ? `${ind(Number(s.inputs[0]))} − ${ind(Number(s.inputs[1]))} = ${ind(Number(s.value))}` : `${ind(Number(s.inputs[0]))} × ${s.inputs[1]} = ${ind(Number(s.value))}`),
+    domain: [[0, 2], [0, 99]],
+    difficulty: ([kind]) => (kind === 0 ? 2 : 3),
+    word: ([kind, s]) => {
+      const { a, b, c } = bigData(kind, s);
+      return [
+        `The census office of a district town counts ${ind(a)} residents. Over the next year ${ind(b)} children are born and ${ind(c)} people leave for jobs in other cities. What is the new number of residents?`,
+        `A village panchayat receives ₹${ind(a)} for its school and spends it on ${b} smart boards at ₹${ind(c)} each. How much money is left?`,
+        `A lorry carries vegetables ${b} times a week from Ooty to a market ${a} km away (each trip one way). How far does it travel in ${c} weeks?`,
+      ][kind];
+    },
+    teach: {
+      idea: "Large numbers in real life (people, rupees, kilometres) follow the same rules as small ones: decide what joins (add), what leaves (subtract) and what repeats (multiply).",
+      method: "Write the steps in order in words first, then calculate each one, keeping the places lined up. Use Indian commas to read the answer.",
+      alternatives: [
+        { id: "estimate_first", title: "Estimate first", kind: "conceptual", text: ["Round the numbers and get a rough answer before calculating.", "If the exact answer is far from the estimate, check the working."] },
+      ],
+    },
+    limits: "Populations up to 10 lakh, money up to about 70 lakh, and distances up to a few lakh km; crores are in the family aenumf.",
+  },
+  {
+    id: "aematch",
+    arity: 1,
+    title: "An attribute-matching puzzle",
+    competency: MULTI,
+    skill: "MATH.reasoning.systematic-enumeration",
+    type: "choice",
+    // [s]: four friends, four different things, and clues that fix exactly one matching
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 199]])) return "A matching puzzle.";
+      const d = matchData(p[0]);
+      if (!d) return "The clues must fix one answer.";
+      return repeatOf("aematch", 200, (t) => {
+        const x = matchData(t);
+        return x ? x.clues.map((c) => clueText(x, c)).join(" ") + x.ask : null;
+      }, p[0]) ? "An earlier choice already shows this puzzle (distinct@1)." : null;
+    },
+    prompt: ([s]) => {
+      const d = matchData(s)!;
+      const intro = d.set.what === "colour of bicycle" ? `${andList(d.people)} each ride a bicycle of a different colour: ${d.set.items.join(", ")}.` : `${andList(d.people)} each ${d.set.verb.replace(/^likes/, "like").replace(/^plays/, "play")} a different ${d.set.what}: ${d.set.items.join(", ")}.`;
+      return `${intro} Clues: ${d.clues.map((c) => clueText(d, c)).join(" ")} Who ${d.set.verb} ${d.set.items[d.ask]}?`;
+    },
+    choices: ([s]) => shuffled(`aematch:${s}`, matchData(s)!.people).choices,
+    solve: ([s]) => {
+      const d = matchData(s)!;
+      const who = d.truth.indexOf(d.ask);
+      const q = shuffled(`aematch:${s}`, d.people);
+      return { steps: [{ id: "match", op: "deduce", competency: MULTI, inputs: [d.clues.length], value: q.at(who) }], answer: q.at(who) };
+    },
+    // independent: try all 24 ways of matching people to things and keep those that fit every clue
+    validate: ([s], v) => {
+      if (!isIdx(v)) return false;
+      const d = matchData(s)!;
+      const ok = PERMS4.filter((pm) => d.clues.every((c) => (pm[c.who] === c.item) === c.yes));
+      if (ok.length !== 1) return false;
+      return shuffled(`aematch:${s}`, d.people).choices[v] === d.people[ok[0].indexOf(d.ask)];
+    },
+    bugs: ([s]) => {
+      const d = matchData(s)!;
+      const q = shuffled(`aematch:${s}`, d.people);
+      const neg = d.clues.find((c) => !c.yes && c.item === d.ask);
+      return neg ? [{ id: "not-read-as-yes", kind: "procedural", competency: MULTI, says: `The clue "${clueText(d, neg)}" was read as if it said ${d.people[neg.who]} does; a "not" clue only rules ${d.people[neg.who]} out.`, predict: q.at(neg.who) }] : [];
+    },
+    variants: () => [],
+    explain: () => "Make a grid of people and things, put ✗ for every clue that rules a pair out and ✓ for every clue that fixes one; a row or column with three ✗ has its ✓ in the last place",
+    domain: [[0, 199]],
+    difficulty: ([s]) => (matchData(s) && matchData(s)!.clues.length <= 4 ? 2 : 3),
+    word: ([s]) => {
+      const d = matchData(s)!;
+      return `At a school fair, four friends talk about themselves. ${d.clues.map((c) => clueText(d, c)).join(" ")} Each of ${andList(d.people)} has a different one of these: ${d.set.items.join(", ")}. Who ${d.set.verb} ${d.set.items[d.ask]}?`;
+    },
+    teach: {
+      idea: "In a matching puzzle every person goes with exactly one thing and every thing with exactly one person. Each clue rules out (or fixes) some pairs; when only one choice is left in a row or column, it must be the answer.",
+      method: "Draw a 4 × 4 grid (people down, things across). Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓.",
+      alternatives: [
+        { id: "try_all", title: "Try the possibilities", kind: "procedural", text: ["Start with the person who has the most ✗: try each thing still possible for them.", "If a choice breaks a clue later, go back and try the next one."] },
+      ],
+    },
+    limits: "Four people and four things with 'does' and 'does not' clues; map-colouring puzzles are another family.",
+  },
+  {
+    id: "aeirr",
+    arity: 2,
+    title: "Estimating the area of an irregular shape and comparing two areas",
+    competency: AREA,
+    type: "fraction",
+    mc: true,
+    decimals: true,
+    // [kind, s]: kind 0 an irregular shape on squared paper (full, more than half, half, less than half squares);
+    // kind 1 two shapes A and B made of whole squares — how many more squares the bigger one covers
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 199]])) return "A shape on squared paper.";
+      const [kind, s] = p;
+      if (kind === 0) {
+        const d = irrData(s);
+        if (d.full < 3 || d.more + d.half < 3 || d.less < 1) return "Some full and some part squares.";
+        return repeatOf("aeirr0", 200, (t) => JSON.stringify(irrData(t).grid), s) ? "An earlier choice already shows this shape (distinct@1)." : null;
+      }
+      const z = twoShapes(s);
+      if (z.a === z.b || z.a < 6 || z.b < 6) return "Two shapes of different sizes.";
+      return repeatOf("aeirr1", 200, (t) => JSON.stringify(twoShapes(t).grid), s) ? "An earlier choice already shows these shapes (distinct@1)." : null;
+    },
+    prompt: ([kind]) =>
+      kind === 0
+        ? "The picture shows a leaf traced on squared paper. ■ is a square fully covered, ◕ more than half covered, ◑ exactly half covered, ◔ less than half covered, □ not covered. Estimate the area of the leaf in square units: count a full square as 1, a square more than half covered as 1, a half-covered square as ½, and leave out squares less than half covered."
+        : "The picture shows two shapes, A and B, drawn on squared paper (each letter fills one square). Which shape covers more squares, and how many more? Give the number of extra squares.",
+    solve: ([kind, s]) => {
+      if (kind === 0) {
+        const d = irrData(s);
+        const v = d.full + d.more + d.half / 2;
+        return { steps: [{ id: "full", op: "count", competency: AREA, inputs: [d.full, d.more], value: d.full + d.more }, { id: "halves", op: "count", competency: AREA, inputs: [d.half], value: d.half / 2 }, { id: "total", op: "add", competency: AREA, inputs: [d.full + d.more, d.half / 2], value: v }], answer: v };
+      }
+      const z = twoShapes(s);
+      return { steps: [{ id: "count", op: "count", competency: AREA, inputs: [z.a, z.b], value: Math.abs(z.a - z.b) }], answer: Math.abs(z.a - z.b) };
+    },
+    // independent: go through the picture square by square and add up what each symbol is worth
+    validate: ([kind, s], v) => {
+      const t = thou(v);
+      if (t === null) return false;
+      if (kind === 0) {
+        const rows = irrData(s).grid.map((r) => r.map((k) => IRR_SYM[k as keyof typeof IRR_SYM]));
+        let half = 0;
+        for (const r of rows) for (const c of r) half += c === "■" || c === "◕" ? 2 : c === "◑" ? 1 : 0;
+        return t === half * 500;
+      }
+      let [a, b] = [0, 0];
+      for (const r of twoShapes(s).grid) for (const c of r) {
+        if (c === "A") a++;
+        if (c === "B") b++;
+      }
+      return t === Math.abs(a - b) * 1000;
+    },
+    bugs: ([kind, s]) => {
+      if (kind === 0) {
+        const d = irrData(s);
+        return [
+          { id: "every-part", kind: "conceptual", competency: AREA, says: "Every square the leaf touches was counted as 1; squares less than half covered are left out, and half-covered squares count as ½.", predict: d.full + d.more + d.half + d.less },
+          { id: "full-only", kind: "procedural", competency: AREA, says: "Only the fully covered squares were counted; squares more than half covered count as 1 and half-covered ones as ½.", predict: d.full },
+          { id: "half-as-one", kind: "procedural", competency: AREA, says: "Half-covered squares were counted as whole ones; each counts ½.", predict: d.full + d.more + d.half },
+        ];
+      }
+      const z = twoShapes(s);
+      return [
+        { id: "total", kind: "procedural", competency: AREA, says: "The two areas were added; the question asks how many MORE squares the bigger shape covers (the difference).", predict: z.a + z.b },
+        { id: "bigger-only", kind: "procedural", competency: AREA, says: "Only the bigger shape's squares were counted; take away the smaller shape's squares to find how many more.", predict: Math.max(z.a, z.b) },
+      ];
+    },
+    distractors: ([kind, s]) => {
+      if (kind === 0) {
+        const d = irrData(s);
+        const v = d.full + d.more + d.half / 2;
+        return [v + 1, v - 1, v + 0.5];
+      }
+      const z = twoShapes(s);
+      return [Math.abs(z.a - z.b) + 1, Math.abs(z.a - z.b) + 2].filter((x) => x > 0);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "full" ? `Full squares and squares more than half covered: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "halves" ? `${s.inputs[0]} half squares make ${String(s.value)}` : s.id === "total" ? `About ${s.inputs[0]} + ${String(s.inputs[1])} = ${String(s.value)} square units` : `A covers ${s.inputs[0]} squares and B covers ${s.inputs[1]}: the difference is ${s.value}`),
+    domain: [[0, 1], [0, 199]],
+    difficulty: ([kind, s]) => (kind === 1 ? 1 : irrData(s).half % 2 ? 3 : 2),
+    figure: ([kind, s]) => (kind === 0 ? { type: "table", head: Array(7).fill(" "), rows: irrData(s).grid.map((r) => r.map((k) => IRR_SYM[k as keyof typeof IRR_SYM])) } : { type: "table", head: Array(8).fill(" "), rows: twoShapes(s).grid }),
+    word: ([kind, s]) => (kind === 0 ? `${name(s)} traces a banyan leaf on squared paper for a science project; the picture shows the squares (■ full, ◕ more than half, ◑ half, ◔ less than half, □ none). Counting full and more-than-half squares as 1, half squares as ½ and leaving out the rest, about how many square units is the leaf?` : `Two flower beds, A and B, are drawn on a squared plan of the school garden (each letter is one square). How many more squares does the bigger bed cover?`),
+    teach: {
+      idea: "Area is the number of unit squares a shape covers. For a curved shape the squares on the edge are only partly covered, so we estimate: more than half counts as a whole square, exactly half as ½, less than half as nothing.",
+      method: "Count the full squares, then the more-than-half squares, then the half squares (each ½). Add them. To compare two shapes, count each and subtract.",
+      alternatives: [
+        { id: "pairs", title: "Pair up the bits", kind: "conceptual", text: ["A square that is a bit more than half covered and one a bit less than half covered together make about one whole square.", "That is why more than half counts as 1 and less than half as 0: the extras roughly balance out."] },
+      ],
+    },
+    limits: "Shapes on a 6 × 7 or 5 × 8 grid with the coverage of each square shown; judging the coverage from a drawn curve is done on paper.",
+  },
+];
+B05.push(...MIX_MORE);
