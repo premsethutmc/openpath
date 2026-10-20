@@ -212,3 +212,36 @@ def teaching(spec, error, answers):
         if operation == 'quotient placement': explanation += ' Keep quotient digits above their matching dividend place, including interior zeroes.'
         visual = {'groups': q, 'size': d, 'total': partial, 'remainder': rem}
     return {'status': 'possible-support-needs' if possible else 'unresolved-possible-slip', 'possible': possible, 'explanation': explanation, 'visual': visual, 'note': 'These provisional follow-ups guide practice. They do not confirm a misconception or grant mastery.'}
+
+
+def answer_layout():
+    return {'id':'answer-paper@1','version':1,'width':720,'height':280,
+            'regions':[{'id':'answer','label':'Answer','role':'expression','order':0,'x':10,'y':10,'width':700,'height':260}]}
+
+
+def final_answer(spec, raw):
+    """Final-answer entry to the existing deterministic validator; no mastery inference."""
+    import re
+    if not isinstance(raw, str) or len(raw)>100:
+        return {'outcome':'format','message':'Please enter a short number or fraction.'}
+    text = raw.strip().replace('−','-')
+    if not text: return {'outcome':'incomplete','message':'Type your answer first.'}
+    if spec['topic']=='division':
+        match=re.fullmatch(r'([+-]?\d{1,9})\s*(?:r|remainder)\s*([+-]?\d{1,9})',text,re.I)
+        if not match:
+            if re.fullmatch(r'[+-]?\d{1,9}',text):
+                return {'outcome':'incomplete','message':'Include the remainder too, for example: 62 R 0.'}
+            return {'outcome':'format','message':'Use a quotient and remainder, for example: 62 R 0.'}
+        q,r=map(int,match.groups())
+        a,b=spec['parameters']['dividend'],spec['parameters']['divisor']
+        correct=(q,r)==divmod(a,b)
+        return {'outcome':'complete' if correct else 'incorrect',
+                'message':f'Correct! {a} ÷ {b} = {q} remainder {r}.' if correct else 'Not quite. Want a hint or another try?'}
+    # Reuse fraction equivalence and generated multiplication checking, including bounds/format safeguards.
+    w={'tokens':[{'regionId':'answer','text':text,'status':'confirmed','bounds':{'x':0,'y':0},'strokeIds':[]}],
+       'strokes':[],'erased':[],'layout':spec['layout']}
+    result=check(spec,w)
+    outcome=result['outcome']
+    return {'outcome':'format' if outcome=='input-clarification' else outcome,
+            'message':'Correct! Your answer is equivalent.' if outcome=='complete' else
+                      'Not quite. Want a hint or another try?' if outcome=='incorrect' else result['message']}

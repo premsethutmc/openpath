@@ -35,7 +35,10 @@ def destination(pupil):
     competencies = {'division': 'MATH.number.long-division', 'fraction': 'MATH.number.equivalent-fractions',
                     'multiplication': 'MATH.number.multiplication-tables'}
     competency = competencies.get(latest.topic if latest else '', 'MATH.number.long-division')
-    return '/year/?' + urlencode({'demo': 'student', 'learner': str(pupil.pk), 'writingReturn': '["subject:mathematics"]'}) + '#writing/' + competency
+    query = {'demo':'student','learner':str(pupil.pk),'writingReturn':'["subject:mathematics"]'}
+    if latest and latest.support.get('simple',{}).get('round'):
+        query.update(answerRound=latest.support['simple']['round'],answerTopic=latest.topic)
+    return '/year/?' + urlencode(query) + '#writing/' + competency
 
 @require_GET
 def bootstrap(request):

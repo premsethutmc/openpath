@@ -21,6 +21,7 @@ import {
 } from "./model";
 import { unavailableRecognizer, receiptValidator } from "./adapters";
 export interface WorkspaceProps {
+  compact?: boolean;
   work: Work;
   onChange: (work: Work) => void;
   recognizer?: Recognizer;
@@ -34,6 +35,7 @@ export interface WorkspaceProps {
 /** Embeddable, controlled input component. Host owns identity, storage and evidence policy. */
 export function WritingWorkspace({
   work,
+  compact = false,
   onChange,
   recognizer = unavailableRecognizer,
   validator = receiptValidator,
@@ -154,16 +156,18 @@ export function WritingWorkspace({
       : externalFeedback;
   return (
     <section
-      className="math-workspace"
+      className={compact ? "math-workspace answer-canvas" : "math-workspace"}
       aria-label="Mathematical input workspace"
     >
-      <header>
-        <h2>{work.problem.statement}</h2>
-        <p>
-          Write naturally, or type each step. Recognition uncertainty is an
-          input issue, not a maths mistake.
-        </p>
-      </header>
+      {!compact && (
+        <header>
+          <h2>{work.problem.statement}</h2>
+          <p>
+            Write naturally, or type each step. Recognition uncertainty is an
+            input issue, not a maths mistake.
+          </p>
+        </header>
+      )}
       <div className="writing-tools" role="toolbar" aria-label="Writing tools">
         {(["ink", "eraser", "pan"] as const).map((t) => (
           <button key={t} aria-pressed={tool === t} onClick={() => setTool(t)}>
@@ -260,131 +264,137 @@ export function WritingWorkspace({
           ? "Candidate confidence is not mathematical correctness."
           : "Unavailable — the typed path below works for the entire exercise."}
       </p>
-      <button
-        type="button"
-        onClick={() => {
-          input.current?.scrollIntoView({ block: "center" });
-          input.current?.focus();
-        }}
-      >
-        Type instead
-      </button>
-      <section className="input-editor" aria-label="Typed mathematical input">
-        <h3>{token ? "Clarify or edit this symbol" : "Type a step"}</h3>
-        <label>
-          Mathematical region
-          <select
-            aria-label="Mathematical region"
-            value={region}
-            onChange={(e) => {
-              setRegion(e.target.value);
-              setToken(null);
-              setText("");
-            }}
-          >
-            {work.layout.regions.map((r) => (
-              <option key={r.id} value={r.id}>
-                {r.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            act(() =>
-              token
-                ? confirm(work, token, text, keypad ? "keypad" : "keyboard")
-                : manual(work, region, text, keypad ? "keypad" : "keyboard"),
-            );
-            if (text.trim()) {
-              setText("");
-              setToken(null);
-            }
+      {!compact && (
+        <button
+          type="button"
+          onClick={() => {
+            input.current?.scrollIntoView({ block: "center" });
+            input.current?.focus();
           }}
         >
-          <label>
-            {token ? "Intended symbol or expression" : "Number or expression"}
-            <input
-              ref={input}
-              value={text}
-              maxLength={500}
-              inputMode={keypad ? "decimal" : "text"}
-              onChange={(e) => {
-                setKeypad(false);
-                setText(e.target.value);
-              }}
-              autoComplete="off"
-              autoCorrect="off"
-              spellCheck={false}
-            />
-          </label>
-          <details open={!studentMode}>
-            <summary>Number and maths keyboard</summary>
-            <div
-              className="math-keypad"
-              role="group"
-              aria-label="Mathematical keyboard"
-            >
-              {[
-                "7",
-                "8",
-                "9",
-                "÷",
-                "4",
-                "5",
-                "6",
-                "×",
-                "1",
-                "2",
-                "3",
-                "−",
-                "0",
-                ".",
-                "/",
-                "+",
-                "(",
-                ")",
-                "=",
-                "x",
-                "²",
-                "√",
-                "π",
-                "⌫",
-              ].map((k) => (
-                <button
-                  type="button"
-                  key={k}
-                  aria-label={
-                    k === "⌫" ? "Delete last character" : `Insert ${k}`
-                  }
-                  onClick={() => {
-                    setKeypad(true);
-                    setText((s) => (k === "⌫" ? s.slice(0, -1) : s + k));
-                    input.current?.focus();
-                  }}
-                >
-                  {k}
-                </button>
-              ))}
-            </div>
-          </details>
-          <button type="submit" disabled={!text.trim()}>
-            {token ? "Confirm this symbol" : "Add typed step"}
-          </button>
-          {token && (
-            <button
-              type="button"
-              onClick={() => {
-                setToken(null);
-                setText("");
-              }}
-            >
-              Cancel edit
-            </button>
+          Type instead
+        </button>
+      )}
+      {(!compact || token) && (
+        <section className="input-editor" aria-label="Typed mathematical input">
+          <h3>{token ? "Clarify or edit this symbol" : "Type a step"}</h3>
+          {!compact && (
+            <label>
+              Mathematical region
+              <select
+                aria-label="Mathematical region"
+                value={region}
+                onChange={(e) => {
+                  setRegion(e.target.value);
+                  setToken(null);
+                  setText("");
+                }}
+              >
+                {work.layout.regions.map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.label}
+                  </option>
+                ))}
+              </select>
+            </label>
           )}
-        </form>
-      </section>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              act(() =>
+                token
+                  ? confirm(work, token, text, keypad ? "keypad" : "keyboard")
+                  : manual(work, region, text, keypad ? "keypad" : "keyboard"),
+              );
+              if (text.trim()) {
+                setText("");
+                setToken(null);
+              }
+            }}
+          >
+            <label>
+              {token ? "Intended symbol or expression" : "Number or expression"}
+              <input
+                ref={input}
+                value={text}
+                maxLength={500}
+                inputMode={keypad ? "decimal" : "text"}
+                onChange={(e) => {
+                  setKeypad(false);
+                  setText(e.target.value);
+                }}
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
+              />
+            </label>
+            <details open={!studentMode}>
+              <summary>Number and maths keyboard</summary>
+              <div
+                className="math-keypad"
+                role="group"
+                aria-label="Mathematical keyboard"
+              >
+                {[
+                  "7",
+                  "8",
+                  "9",
+                  "÷",
+                  "4",
+                  "5",
+                  "6",
+                  "×",
+                  "1",
+                  "2",
+                  "3",
+                  "−",
+                  "0",
+                  ".",
+                  "/",
+                  "+",
+                  "(",
+                  ")",
+                  "=",
+                  "x",
+                  "²",
+                  "√",
+                  "π",
+                  "⌫",
+                ].map((k) => (
+                  <button
+                    type="button"
+                    key={k}
+                    aria-label={
+                      k === "⌫" ? "Delete last character" : `Insert ${k}`
+                    }
+                    onClick={() => {
+                      setKeypad(true);
+                      setText((s) => (k === "⌫" ? s.slice(0, -1) : s + k));
+                      input.current?.focus();
+                    }}
+                  >
+                    {k}
+                  </button>
+                ))}
+              </div>
+            </details>
+            <button type="submit" disabled={!text.trim()}>
+              {token ? "Confirm this symbol" : "Add typed step"}
+            </button>
+            {token && (
+              <button
+                type="button"
+                onClick={() => {
+                  setToken(null);
+                  setText("");
+                }}
+              >
+                Cancel edit
+              </button>
+            )}
+          </form>
+        </section>
+      )}
       <section aria-label="Interpreted working">
         <h3>
           {studentMode
@@ -474,16 +484,20 @@ export function WritingWorkspace({
         <p role="status">
           Input clarification needed.{" "}
           {outstanding.some((x) => x.startsWith("Some handwriting"))
-            ? "Select the region and type only the unrecognized part."
+            ? "Type the unclear part, or choose Type instead."
             : "Choose the highlighted symbol and type what you meant."}
         </p>
       )}
-      <button
-        disabled={busy || !!outstanding.length || !work.tokens.length}
-        onClick={send}
-      >
-        {studentMode ? "Check my working" : "Send confirmed steps to validator"}
-      </button>
+      {!compact && (
+        <button
+          disabled={busy || !!outstanding.length || !work.tokens.length}
+          onClick={send}
+        >
+          {studentMode
+            ? "Check my working"
+            : "Send confirmed steps to validator"}
+        </button>
+      )}
       {currentFeedback && !studentMode && (
         <section aria-label="Validator feedback">
           <h3>

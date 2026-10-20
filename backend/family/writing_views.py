@@ -9,7 +9,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from .views import AccountBase
 from .models import Pupil, PupilEvent, WritingDraft
-from .writing_math import lesson, checked_work, check, probes, teaching, CONTRACT
+from .writing_math import lesson, checked_work, check, probes, teaching, CONTRACT, final_answer, answer_layout
 
 
 def receipt(draft, action, payload):
@@ -25,7 +25,7 @@ def receipt(draft, action, payload):
 
 
 def output(d):
-    return {'probe': next(({k:v for k,v in p.items() if k!='expected'} for p in probes(lesson(d.topic,d.parameters), d.support['error']) if p['id'] not in d.support.get('answers',{})),None) if d.stage=='diagnostic' else None, 'id': str(d.pk), 'version': d.version, 'stage': d.stage, 'work': d.work, 'lesson': lesson(d.topic, d.parameters), 'support': d.support,
+    return {'probe': next(({k:v for k,v in p.items() if k!='expected'} for p in probes(lesson(d.topic,d.parameters), d.support['error']) if p['id'] not in d.support.get('answers',{})),None) if d.stage=='diagnostic' else None, 'id': str(d.pk), 'version': d.version, 'stage': d.stage, 'work': d.work, 'lesson': {**lesson(d.topic, d.parameters), 'answerLayout':answer_layout()}, 'support': d.support,
             'receipts': [e for e in PupilEvent.objects.filter(pupil=d.pupil, subject='mathematics', kind='math_writing').order_by('seq').values_list('body', flat=True) if e.get('draftId') == str(d.pk)]}
 
 
@@ -75,7 +75,42 @@ class WritingActionView(AccountBase):
             d = locked(request, pupil_id, draft_id)
             action = request.data.get('action')
             spec = lesson(d.topic, d.parameters)
-            if action == 'next':
+            if action in ['answer-draft','check-answer','answer-help','guided']:
+                if request.data.get('version') != d.version:
+                    return Response({'detail':'This lesson changed. Reload before editing.'},status=409)
+                simple = d.support.setdefault('simple',{})
+                if action in ['answer-draft','check-answer']:
+                    raw=request.data.get('answer','')
+                    if not isinstance(raw,str) or len(raw)>100:raise ValidationError({'answer':'Use at most 100 characters.'})
+                    if action=='answer-draft':
+                        round_number=request.data.get('round',0)
+                        if type(round_number) is not int or not 0<=round_number<=99:raise ValidationError({'round':'Invalid practice round.'})
+                        simple['round']=round_number
+                    simple['answer']=raw
+                    if action=='answer-draft':simple.pop('result',None)
+                    if action=='answer-draft' and 'ink' in request.data:
+                        from types import SimpleNamespace
+                        ink=request.data['ink']
+                        simple['ink']=checked_work(ink,SimpleNamespace(pk=d.pk,work=simple.get('ink')), {**spec,'layout':answer_layout()})
+                    if action=='check-answer':
+                        result=final_answer(spec,raw)
+                        if request.data.get('method')=='ink':
+                            from .writing_math import values
+                            if not simple.get('ink') or values(simple['ink']) is None:
+                                result={'outcome':'clarification','message':'Please clarify the unclear writing, or type your answer. No maths error recorded.'}
+                        simple['result']=result
+                        if result['outcome'] in ['complete','incorrect']:
+                            receipt(d,'answer-validation',{'result':result,'response':raw,'competency':spec['competency'], 'inputMethod':'ink' if request.data.get('method')=='ink' else 'keyboard', 'input':{k:v for k,v in simple['ink'].items() if k not in ['history','future']} if request.data.get('method')=='ink' and simple.get('ink') else None, 'afterFeedback':PupilEvent.objects.filter(pupil=d.pupil,body__draftId=str(d.pk),body__action='answer-validation').exists()})
+                        if result['outcome']=='complete':d.stage='complete'
+                        elif d.stage=='complete':d.stage='intro'
+                elif action=='answer-help':
+                    d.support['helpSeen']=True
+                    receipt(d,'instruction',{'mode':'optional-help'})
+                elif action=='guided':
+                    d.support['helpSeen']=True
+                    if d.stage=='complete' and not d.work:d.stage='intro'
+                    receipt(d,'instruction',{'mode':'guided'})
+            elif action == 'next':
                 if d.stage not in ['intro', 'worked']:
                     raise ValidationError({'action': 'The lesson is already open.'})
                 d.stage = 'worked' if d.stage == 'intro' else 'workspace'

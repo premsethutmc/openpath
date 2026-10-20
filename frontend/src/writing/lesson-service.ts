@@ -37,12 +37,18 @@ export interface LessonActivity {
   lesson: {
     problem: Work["problem"];
     layout: Layout;
+    answerLayout: Layout;
     topic: string;
     competency: string;
     explanation: string;
     example: { statement: string; steps: string[]; answer: string };
   };
   support: {
+    simple?: {
+      answer?: string;
+      ink?: Work;
+      result?: { outcome: string; message: string };
+    };
     error?: {
       region: string;
       operation: string;
@@ -129,7 +135,7 @@ export class WritingLessonRepo {
       const a = await this.api.request<LessonActivity>(
         "POST",
         `/pupils/${this.pupil}/writing/${this.id}/action/`,
-        { action, ...extra },
+        { action, version: this.version, ...extra },
       );
       this.version = a.version;
       return a;

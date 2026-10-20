@@ -39,7 +39,7 @@ Use the existing service's **Settings**, not a new Blueprint or new service:
 
 `render.preview.yaml` records this configuration and declares **no database**. Do not apply it to create resources. `render.yaml` is intentionally unchanged because it describes the separate older English demo.
 
-After an authorized deployment, open `https://openpath-pr55-preview.onrender.com/` and tap **Try OpenPath as a Demo Student**. No credentials are required. The button creates an isolated synthetic learner and opens My Learning Year → Mathematics → the existing long-division explanation. The collapsed **Account access** form retains the preview password and normal OpenPath account authentication for account testing. See [demo session safeguards and tests](PREVIEW_DEMO_STUDENT.md).
+After an authorized deployment, open `https://openpath-pr55-preview.onrender.com/` and tap **Try OpenPath as a Demo Student**. No credentials are required. The button creates an isolated synthetic learner and opens My Learning Year → Mathematics → the long-division question with one answer field. The collapsed **Account access** form retains the preview password and normal OpenPath account authentication for account testing. See [demo session safeguards and tests](PREVIEW_DEMO_STUDENT.md).
 
 Future feature branches based on this integration retain the same deployment files. Changing the source branch is sufficient; do not change the Dockerfile path, root directory or startup command. If a branch predates these files, incorporate this deployment change first. CI builds the exact Dockerfile and exercises the private application without invoking Render.
 

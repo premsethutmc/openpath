@@ -184,3 +184,5 @@
     gap: 4px;
   }
 }
+
+.simple-maths{max-width:600px;margin:0 auto;padding:12px 16px!important}.simple-maths h1{font-size:1.8rem;margin:12px 0 20px}.simple-maths form>label{display:block}.simple-maths #math-answer{width:100%;font-size:1.3rem;padding:14px;border:2px solid #cbbfe9;border-radius:12px;min-width:0}.simple-maths form>.primary{width:100%;margin:12px 0}.simple-maths>button{min-height:44px;margin:6px 0}.simple-maths small{display:block;margin-top:8px;color:#625b71}.answer-format{font-size:.85rem;margin:6px 0}.answer-actions,.answer-help{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.answer-help button,.answer-actions button{min-height:44px;padding:8px 10px;font-size:.95rem}.answer-feedback{padding:12px;border-radius:12px;background:#fff0df;margin:10px 0}.answer-feedback.complete{background:#dff6ec}.answer-canvas .writing-scroll{max-height:260px}.simple-maths .math-workspace{padding:0}.answer-canvas .writing-paper{min-height:180px}.simple-maths [aria-label="Write your answer"]>p{font-size:.85rem}.simple-maths button{touch-action:manipulation}

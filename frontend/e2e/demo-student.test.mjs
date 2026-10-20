@@ -40,9 +40,7 @@ async function start(c) {
     fullPage: true,
   });
   await button.click();
-  await p
-    .getByRole("heading", { name: "Understand the idea", exact: true })
-    .waitFor();
+  await p.getByLabel("Mathematics question", { exact: true }).waitFor();
   await p.getByLabel("Demo student session").waitFor();
   return p;
 }
@@ -67,6 +65,9 @@ if (process.env.PREVIEW_PHASE === "resume") {
     const p = await c.newPage();
     await p.goto(saved.url);
     await p
+      .getByRole("button", { name: "Help me step by step", exact: true })
+      .click();
+    await p
       .getByRole("button", { name: "Edit Quotient: 12", exact: true })
       .waitFor();
     await c.close();
@@ -89,6 +90,9 @@ if (process.env.PREVIEW_PHASE === "resume") {
       path: "../docs/product/mathematical-writing/screens-demo/one-tap-lesson-android.png",
       fullPage: true,
     });
+    await p
+      .getByRole("button", { name: "Help me step by step", exact: true })
+      .click();
     await p
       .getByRole("button", { name: "See a worked example", exact: true })
       .click();
@@ -120,6 +124,9 @@ if (process.env.PREVIEW_PHASE === "resume") {
       })
       .click();
     await p
+      .getByRole("button", { name: "Help me step by step", exact: true })
+      .click();
+    await p
       .getByRole("button", { name: "Edit Quotient: 12", exact: true })
       .waitFor();
     assert.equal((await status(c)).learner, a.learner);
@@ -139,9 +146,7 @@ if (process.env.PREVIEW_PHASE === "resume") {
     await p
       .getByRole("button", { name: "Reset demo and restart", exact: true })
       .click();
-    await p
-      .getByRole("heading", { name: "Understand the idea", exact: true })
-      .waitFor();
+    await p.getByLabel("Mathematics question", { exact: true }).waitFor();
     const fresh = await status(c);
     assert.notEqual(fresh.learner, a.learner);
     assert.equal((await status(other)).learner, b.learner);
@@ -212,6 +217,9 @@ if (process.env.PREVIEW_PHASE === "resume") {
     const c = await browser.newContext(opts);
     const p = await start(c);
     const s = await status(c);
+    await p
+      .getByRole("button", { name: "Help me step by step", exact: true })
+      .click();
     await p
       .getByRole("button", { name: "See a worked example", exact: true })
       .click();
