@@ -1888,3 +1888,715 @@ function aprOk(kind: number, l: number, w: number, c: number) {
   if (kind === 0) return (l * w) % c === 0 && (l * w) / c !== l && (l * w) / c !== w && (l * w) / c <= 30 && c <= 30;
   return c < l + w && l + w - c !== l && l + w - c !== w && l + w - c >= 1 && c <= l + w - 1;
 }
+
+// ================================================================ gap@1 additions (river crossings, direction after a
+// turn, naming quadrilaterals including kites and trapeziums, unknown sides, figures hidden in a figure, cube nets,
+// nets and views of solids, views of block buildings, the rule of a sequence)
+
+/** A fixed, well-mixed hash of a text (FNV-1a with a murmur finaliser): option orders that differ from problem to problem. */
+const hh = (s: string) => {
+  let x = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) x = Math.imul(x ^ s.charCodeAt(i), 0x01000193) >>> 0;
+  x = Math.imul(x ^ (x >>> 16), 0x85ebca6b) >>> 0;
+  x = Math.imul(x ^ (x >>> 13), 0xc2b2ae35) >>> 0;
+  return (x ^ (x >>> 16)) >>> 0;
+};
+/** Options in an order fixed by the parameters (so the right letter is not predictable). */
+const mixOrder = <T,>(salt: string, xs: T[]) => [...xs].sort((a, b) => hh(salt + String(a)) - hh(salt + String(b)) || (String(a) < String(b) ? -1 : 1));
+const B = (id: string, kind: Bug["kind"], competency: string, says: string, predict: Bug["predict"]): Bug => ({ id, kind, competency, says, predict });
+
+// ---------------------------------------------------------------- river crossings (afriver)
+/** The fewest crossings, found by searching every possible sequence of trips (breadth first). mode 0: n people, a boat
+ * for at most k, anyone rows; mode 1: n soldiers and two children, the boat carries one soldier or one or two children,
+ * and the children end on the starting bank with the boat. */
+function riverSearch(mode: number, n: number, k: number): number {
+  const key = (a: number, c: number, side: number) => `${a},${c},${side}`;
+  const start = mode === 0 ? [n, 0, 0] : [n, 2, 0];
+  const seen = new Set([key(start[0], start[1], 0)]);
+  let frontier = [start];
+  for (let d = 0; d < 400 && frontier.length; d++) {
+    const next: number[][] = [];
+    for (const [a, c, side] of frontier) {
+      if (mode === 0 ? a === 0 : a === 0 && c === 2 && side === 0) return d;
+      const moves: [number, number][] = [];
+      if (mode === 0) {
+        const here = side === 0 ? a : n - a;
+        for (let m = 1; m <= Math.min(k, here); m++) moves.push([m, 0]);
+      } else {
+        const sHere = side === 0 ? a : n - a;
+        const cHere = side === 0 ? c : 2 - c;
+        if (sHere >= 1) moves.push([1, 0]);
+        if (cHere >= 1) moves.push([0, 1]);
+        if (cHere >= 2) moves.push([0, 2]);
+      }
+      for (const [ms, mc] of moves) {
+        const na = side === 0 ? a - ms : a + ms;
+        const nc = side === 0 ? c - mc : c + mc;
+        const kk = key(na, nc, 1 - side);
+        if (!seen.has(kk)) {
+          seen.add(kk);
+          next.push([na, nc, 1 - side]);
+        }
+      }
+    }
+    frontier = next;
+  }
+  return -1;
+}
+const riverOk = ([mode, n, k]: number[]) => (mode === 0 ? n >= 3 && n <= 30 && k >= 2 && k <= 6 && n > k : mode === 1 ? k === 2 && n >= 1 && n <= 20 : false);
+const riverAns = ([mode, n, k]: number[]) => (mode === 1 ? 4 * n : 2 * Math.ceil((n - k) / (k - 1)) + 1);
+
+// ---------------------------------------------------------------- direction after a turn (afface)
+const TURNW = ["", "one eighth of a full turn", "a quarter turn", "three eighths of a full turn", "a half turn", "five eighths of a full turn", "a three-quarter turn", "seven eighths of a full turn"];
+function faceOpts([s, k, cw]: number[]) {
+  const end = cw ? (s + k) % 8 : (s - k + 8) % 8;
+  const other = cw ? (s - k + 8) % 8 : (s + k) % 8;
+  // a quarter taken as one of the eight steps (even turns), or each eighth taken as a quarter (odd turns)
+  const slipSteps = k % 2 === 0 ? k / 2 : (2 * k) % 8;
+  const slip = cw ? (s + slipSteps) % 8 : (s - slipSteps + 8) % 8;
+  const set: number[] = [];
+  for (const d of [end, other, slip, (end + 4) % 8, (end + 1) % 8, (end + 7) % 8, (end + 2) % 8]) if (!set.includes(d) && set.length < 4) set.push(d);
+  const opts = mixOrder(`afface:${s},${k},${cw}`, set);
+  return { opts, end, other, slip };
+}
+
+// ---------------------------------------------------------------- naming a quadrilateral (afkind)
+const QNAMES = ["square", "rectangle", "rhombus", "parallelogram", "kite", "trapezium"];
+type QDesc = { sides: number[]; par: number; right: boolean; angles: string; equalOpp: boolean };
+/** Quadrilateral ABCD of a kind (0 square … 5 trapezium), sides AB, BC, CD, DA; par: pairs of parallel sides. */
+function qdesc(kind: number, seed: number): QDesc {
+  const th = [60, 70, 80, 100, 110, 120][seed % 6];
+  if (kind === 0) {
+    const s = 3 + seed;
+    return { sides: [s, s, s, s], par: 2, right: true, angles: "All four angles are 90°.", equalOpp: true };
+  }
+  if (kind === 1 || kind === 3) {
+    const w = 2 + (seed % 5);
+    const l = w + 1 + Math.floor(seed / 5);
+    return kind === 1 ? { sides: [l, w, l, w], par: 2, right: true, angles: "All four angles are 90°.", equalOpp: true } : { sides: [l, w, l, w], par: 2, right: false, angles: `∠A = ∠C = ${th}°, ∠B = ∠D = ${180 - th}°.`, equalOpp: true };
+  }
+  if (kind === 2) {
+    const s = 3 + seed;
+    return { sides: [s, s, s, s], par: 2, right: false, angles: `∠A = ∠C = ${th}°, ∠B = ∠D = ${180 - th}°.`, equalOpp: true };
+  }
+  if (kind === 4) {
+    const a = 3 + (seed % 5);
+    const b = a + 2 + Math.floor(seed / 5);
+    return { sides: [a, b, b, a], par: 0, right: false, angles: "∠B = ∠D; ∠A and ∠C are different.", equalOpp: false };
+  }
+  const b2 = 3 + (seed % 5);
+  const d = 3 + Math.floor(seed / 5);
+  return { sides: [b2 + d, d + 1, b2, d], par: 1, right: false, angles: "No two angles are equal.", equalOpp: false };
+}
+const parText = (q: QDesc) => (q.par === 2 ? "AB ∥ DC and AD ∥ BC" : q.par === 1 ? "AB ∥ DC only (AD and BC are not parallel)" : "No two sides are parallel");
+/** Name a described quadrilateral from its listed properties alone (independent of the kind it was made from). */
+function nameFrom(q: QDesc): number {
+  const [ab, bc, cd, da] = q.sides;
+  const allEq = ab === bc && bc === cd && cd === da;
+  const oppEq = ab === cd && bc === da;
+  if (q.par === 2 && oppEq) return allEq ? (q.right ? 0 : 2) : q.right ? 1 : 3;
+  if (q.par === 1) return 5;
+  if (q.par === 0 && ((ab === da && bc === cd) || (ab === bc && cd === da)) && !allEq) return 4;
+  return -1;
+}
+function kindOpts([kind, seed]: number[]) {
+  const slips: Record<number, number[]> = { 0: [2, 1, 3], 1: [3, 0, 5], 2: [0, 4, 3], 3: [1, 2, 5], 4: [2, 3, 5], 5: [3, 4, 1] };
+  return mixOrder(`afkind:${kind},${seed}`, [kind, ...slips[kind]]);
+}
+
+// ---------------------------------------------------------------- unknown sides of parallelograms and rhombuses (afpside)
+/** mode 2/3 expressions: AB = p x + q and CD (mode 2) or BC (mode 3) = r x − s, from code = p, d = r − p, q. */
+const psideCode = (x: number, code: number) => {
+  const p = 1 + (code % 3);
+  const d = 1 + (Math.floor(code / 3) % 2);
+  const q = 1 + Math.floor(code / 6);
+  const r = p + d;
+  const s = d * x - q;
+  return { p, q, r, s };
+};
+const psideOk = ([mode, a, b]: number[]) => {
+  if (mode === 0) return a >= 4 && a <= 20 && b >= 2 && b < a;
+  if (mode === 1) return a >= 3 && a <= 25 && b === 0;
+  if (mode === 2 || mode === 3) return a >= 2 && a <= 9 && b >= 0 && b <= 53 && psideCode(a, b).s >= 1;
+  return false;
+};
+const expr = (k: number, c: number, sign: string) => `${k === 1 ? "" : k}x ${sign} ${c}`;
+
+// ---------------------------------------------------------------- figures hidden in a figure (afhidden)
+const choose2 = (n: number) => (n * (n - 1)) / 2;
+const hiddenOk = ([mode, a, b]: number[]) =>
+  mode === 0 ? a >= 1 && b >= 2 && a <= b && b <= 6 : mode === 1 ? a >= 2 && a <= b && b <= 8 : mode === 2 ? a >= 1 && a <= 12 && b === 0 : mode === 3 ? a >= 1 && a <= 8 && b >= 1 && b <= 3 : false;
+const hiddenAns = ([mode, a, b]: number[]) => {
+  if (mode === 0) return choose2(a + 1) * choose2(b + 1);
+  if (mode === 1) {
+    let t = 0;
+    for (let k = 1; k <= a; k++) t += (a - k + 1) * (b - k + 1);
+    return t;
+  }
+  return (mode === 2 ? 1 : b + 1) * choose2(a + 2);
+};
+
+// ---------------------------------------------------------------- cube nets (afcube)
+type Cell = [number, number];
+const normCells = (cs: Cell[]): Cell[] => {
+  const r0 = Math.min(...cs.map((c) => c[0]));
+  const c0 = Math.min(...cs.map((c) => c[1]));
+  return cs.map(([r, c]) => [r - r0, c - c0] as Cell).sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+};
+const cellKey = (cs: Cell[]) => normCells(cs).map((c) => c.join(":")).join("|");
+/** Every fixed hexomino (six squares joined edge to edge, each position and turn counted separately), in a fixed order. */
+const HEXOMINOES: Cell[][] = (() => {
+  let level = new Map<string, Cell[]>([["0:0", [[0, 0]]]]);
+  for (let size = 2; size <= 6; size++) {
+    const next = new Map<string, Cell[]>();
+    for (const cs of level.values())
+      for (const [r, c] of cs)
+        for (const [dr, dc] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const n: Cell = [r + dr, c + dc];
+          if (cs.some((x) => x[0] === n[0] && x[1] === n[1])) continue;
+          const g = normCells([...cs, n]);
+          next.set(cellKey(g), g);
+        }
+    level = next;
+  }
+  return [...level.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1)).map((e) => e[1]);
+})();
+/** Fold by rolling a cube over the squares: each square gets the direction (a unit vector) of the cube face lying on it. */
+function rollNormals(cs: Cell[]): Map<string, string> {
+  type V = [number, number, number];
+  const neg = (v: V): V => [-v[0], -v[1], -v[2]];
+  const out = new Map<string, string>();
+  const has = (r: number, c: number) => cs.some((x) => x[0] === r && x[1] === c);
+  const stack: [number, number, V, V, V][] = [[cs[0][0], cs[0][1], [0, 0, -1], [1, 0, 0], [0, 1, 0]]];
+  while (stack.length) {
+    const [r, c, nrm, R, D] = stack.pop()!;
+    const k = `${r}:${c}`;
+    if (out.has(k)) continue;
+    out.set(k, nrm.join(","));
+    if (has(r, c + 1)) stack.push([r, c + 1, R, neg(nrm), D]);
+    if (has(r, c - 1)) stack.push([r, c - 1, neg(R), nrm, D]);
+    if (has(r + 1, c)) stack.push([r + 1, c, D, R, neg(nrm)]);
+    if (has(r - 1, c)) stack.push([r - 1, c, neg(D), R, nrm]);
+  }
+  return out;
+}
+const foldsToCube = (cs: Cell[]) => new Set(rollNormals(cs).values()).size === 6;
+/** The eleven nets of a cube, drawn once each (any turn or flip of one of these is the same net). */
+const CUBE_NETS = ["#...|####|#...", "#...|####|.#..", "#...|####|..#.", "#...|####|...#", ".#..|####|.#..", ".#..|####|..#.", "##..|.###|.#..", "##..|.###|..#.", "##..|.###|...#", "##..|.##.|..##", "###..|..###"];
+const fromPicture = (s: string): Cell[] => s.split("|").flatMap((row, r) => [...row].flatMap((ch, c) => (ch === "#" ? [[r, c] as Cell] : [])));
+const turnsOf = (cs: Cell[]): string[] => {
+  const out: string[] = [];
+  let cur = cs;
+  for (let f = 0; f < 2; f++) {
+    for (let t = 0; t < 4; t++) {
+      out.push(cellKey(cur));
+      cur = cur.map(([r, c]) => [c, -r] as Cell);
+    }
+    cur = cur.map(([r, c]) => [r, -c] as Cell);
+  }
+  return out;
+};
+const CUBE_NET_KEYS = new Set(CUBE_NETS.flatMap((s) => turnsOf(fromPicture(s))));
+/** The hexominoes that fold into a cube (found by rolling), in the fixed order. */
+const NET_LIST = HEXOMINOES.filter(foldsToCube);
+const FACE_LETTERS = "ABCDEF";
+/** The letters on the squares of net i: a hash-chosen order, so different nets and queries read differently. */
+const netLabels = (i: number) => mixOrder(`afcube:labels:${i}`, [...FACE_LETTERS]);
+const netPicture = (cs: Cell[], labels: string[] | null): Visual => {
+  const R = Math.max(...cs.map((c) => c[0])) + 1;
+  const C = Math.max(...cs.map((c) => c[1])) + 1;
+  const rows = Array.from({ length: R }, (_, r) => Array.from({ length: C }, (_, c) => {
+    const at = cs.findIndex((x) => x[0] === r && x[1] === c);
+    return at < 0 ? "" : labels ? labels[at] : "■";
+  }));
+  return { type: "table", head: Array.from({ length: C }, () => ""), rows };
+};
+/** The face opposite face q of net i (by rolling), and the letters next to q in the net. */
+function cubeOpp(i: number, q: number) {
+  const cs = NET_LIST[i];
+  const nm = rollNormals(cs);
+  const lab = netLabels(i);
+  const vec = (k: number) => nm.get(`${cs[k][0]}:${cs[k][1]}`)!.split(",").map(Number);
+  const v = vec(q);
+  const opp = cs.findIndex((_, k) => vec(k).every((x, j) => x === -v[j]));
+  const adj = cs.map((_, k) => k).filter((k) => Math.abs(cs[k][0] - cs[q][0]) + Math.abs(cs[k][1] - cs[q][1]) === 1);
+  // a square two steps away in a straight line is opposite; a square two steps away round a corner is not (a common slip)
+  const corner = cs.map((_, k) => k).filter((k) => k !== opp && k !== q && !adj.includes(k));
+  return { lab, opp, adj, corner };
+}
+function cubeOpts([i, q]: number[]) {
+  const { lab, opp, adj, corner } = cubeOpp(i, q);
+  const set = [opp, ...corner, ...adj].filter((k, j, a) => a.indexOf(k) === j).slice(0, 4);
+  return { letters: mixOrder(`afcube:${i},${q}`, set.map((k) => lab[k])), lab, opp, adj, corner };
+}
+/** Opposite faces by a different method: roll a die whose six faces carry labels and read the face at the bottom on
+ * each square (top, bottom, north, south, east, west swap as the die tips over an edge), starting from the LAST square. */
+function dieBottoms(cs: Cell[]): Map<string, number> {
+  const out = new Map<string, number>();
+  const has = (r: number, c: number) => cs.some((x) => x[0] === r && x[1] === c);
+  // [top, bottom, north, south, east, west]: labels 0 and 1, 2 and 3, 4 and 5 are opposite on the die
+  const last = cs[cs.length - 1];
+  const stack: [number, number, number[]][] = [[last[0], last[1], [0, 1, 2, 3, 4, 5]]];
+  while (stack.length) {
+    const [r, c, d] = stack.pop()!;
+    const k = `${r}:${c}`;
+    if (out.has(k)) continue;
+    out.set(k, d[1]);
+    const [T, Bo, N, S, E, W] = d;
+    if (has(r, c + 1)) stack.push([r, c + 1, [W, E, N, S, T, Bo]]);
+    if (has(r, c - 1)) stack.push([r, c - 1, [E, W, N, S, Bo, T]]);
+    if (has(r + 1, c)) stack.push([r + 1, c, [N, S, Bo, T, E, W]]);
+    if (has(r - 1, c)) stack.push([r - 1, c, [S, N, T, Bo, E, W]]);
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------- nets and views of solids (afnet)
+type Solid = { name: string; net: string | null; top: string; front: string; end?: string; fig?: Visual };
+const PRISM = (n: number, base: string, poly: string): Solid => ({ name: `${base} prism`, net: `2 ${poly}s and ${n} rectangles`, top: `a ${poly}`, front: "a rectangle", end: `a ${poly}` });
+const PYRAMID = (n: number, base: string, poly: string): Solid => ({ name: `${base} pyramid`, net: `1 ${poly} and ${n} triangles`, top: `a ${poly} with lines from its corners to its centre`, front: "a triangle" });
+const SOLIDS: Solid[] = [
+  { name: "cube", net: "6 equal squares", top: "a square", front: "a square", fig: { type: "solid", name: "cube" } },
+  { name: "cuboid", net: "6 rectangles, in three matching pairs", top: "a rectangle", front: "a rectangle", fig: { type: "solid", name: "cuboid" } },
+  { name: "cylinder", net: "2 equal circles and 1 rectangle", top: "a circle", front: "a rectangle", end: "a circle", fig: { type: "solid", name: "cylinder" } },
+  { name: "cone", net: "1 circle and 1 fan shape (a sector of a bigger circle)", top: "a circle with a dot at its centre", front: "a triangle", fig: { type: "solid", name: "cone" } },
+  { name: "sphere", net: null, top: "a circle", front: "a circle", fig: { type: "solid", name: "sphere" } },
+  { name: "hemisphere (flat face down)", net: null, top: "a circle", front: "a semicircle" },
+  PRISM(3, "triangular", "triangle"),
+  PRISM(5, "pentagonal", "pentagon"),
+  PRISM(6, "hexagonal", "hexagon"),
+  PRISM(7, "heptagonal", "heptagon"),
+  PRISM(8, "octagonal", "octagon"),
+  { ...PYRAMID(4, "square", "square"), fig: { type: "solid", name: "pyramid" } },
+  { name: "triangular pyramid", net: "4 triangles", top: "a triangle with lines from its corners to its centre", front: "a triangle" },
+  PYRAMID(5, "pentagonal", "pentagon"),
+  PYRAMID(6, "hexagonal", "hexagon"),
+  PYRAMID(7, "heptagonal", "heptagon"),
+  PYRAMID(8, "octagonal", "octagon"),
+];
+/** Solids that are easily confused with solid i (the same base, the other family; the base with one side more or fewer). */
+const CONFUSE: Record<number, number[]> = { 0: [1, 11, 6], 1: [0, 6, 11], 2: [3, 1, 8], 3: [2, 11, 4], 4: [5, 2, 3], 5: [4, 3, 2], 6: [12, 7, 1], 7: [13, 8, 6], 8: [14, 9, 7], 9: [15, 10, 8], 10: [16, 9, 8], 11: [1, 12, 13], 12: [6, 11, 13], 13: [7, 14, 11], 14: [8, 15, 13], 15: [9, 16, 14], 16: [10, 15, 14] };
+// form 0: net → solid; 1: solid → net; 2: top and front views → solid; 3: solid → top view; 4: solid → front view;
+// 5: a prism or cylinder lying on its side, an end facing you → front view
+const netOk = ([i, f]: number[]) => i >= 0 && i < SOLIDS.length && f >= 0 && f <= 5 && (f > 1 || SOLIDS[i].net !== null) && (f !== 5 || SOLIDS[i].end !== undefined);
+function netOpts([i, f]: number[]): string[] {
+  const s = SOLIDS[i];
+  const want = f === 1 ? s.net! : f === 3 ? s.top : f === 4 ? s.front : f === 5 ? s.end! : s.name;
+  const field = (j: number) => (f === 1 ? SOLIDS[j].net : f === 3 ? SOLIDS[j].top : f === 4 ? SOLIDS[j].front : f === 5 ? SOLIDS[j].end ?? SOLIDS[j].front : SOLIDS[j].name);
+  const set = [want];
+  for (const j of [...CONFUSE[i], ...SOLIDS.map((_, k) => k)]) {
+    const v = field(j);
+    if (v && !set.includes(v) && set.length < 4) {
+      // a views question must not offer another solid with exactly the same two views
+      if (f === 2 && SOLIDS[j].top === s.top && SOLIDS[j].front === s.front) continue;
+      // a cube is also a cuboid, and a square is also a rectangle: never offer both
+      if ((i <= 1 && j <= 1) || (["a square", "a rectangle"].includes(want) && ["a square", "a rectangle"].includes(v))) continue;
+      set.push(v);
+    }
+  }
+  return mixOrder(`afnet:${i},${f}`, set);
+}
+const netPrompt = ([i, f]: number[]) => {
+  const s = SOLIDS[i];
+  if (f === 0) return `A net is made of ${s.net}. Which solid does it fold into?`;
+  if (f === 1) return `Which of these nets folds into a ${s.name}?`;
+  if (f === 2) return `A solid stands on a table. Seen from straight above it looks like ${s.top}; seen from the front it looks like ${s.front}. Which solid is it?`;
+  const on = i === 4 || i === 5 ? "" : " on its base";
+  if (f === 3) return `A ${s.name} stands on a table${on}. What do you see when you look at it from straight above?`;
+  if (f === 4) return `A ${s.name} stands on a table${on}. What do you see when you look at it from the front, at eye level?`;
+  return `A ${s.name} lies on its side on a table, with one end facing you. What do you see when you look at it from the front, at eye level?`;
+};
+
+// ---------------------------------------------------------------- views of a block building (afview)
+/** Heights of stacks of cubes on a mat, rows from the back to the front, columns from left to right. */
+const VIEW_GRIDS: number[][][] = (() => {
+  const out: number[][][] = [];
+  const seen = new Set<string>();
+  for (let s = 0; out.length < 60 && s < 2000; s++) {
+    const r = rng(90001 + s * 131);
+    const R = 2 + pick(r, 2);
+    const C = 2 + pick(r, 2);
+    const g = Array.from({ length: R }, () => Array.from({ length: C }, () => pick(r, 4)));
+    const total = g.flat().reduce((a, b) => a + b, 0);
+    const k = JSON.stringify(g);
+    // every row and column has some cubes (so the picture is one building), at most one empty square, 5 to 18 cubes
+    if (g.some((row) => row.every((x) => x === 0)) || g[0].some((_, c) => g.every((row) => row[c] === 0)) || g.flat().filter((x) => x === 0).length > 1 || total < 5 || total > 18 || seen.has(k)) continue;
+    seen.add(k);
+    out.push(g);
+  }
+  return out;
+})();
+const VIEWASK = ["from straight above (the top view)", "from the front", "from the right-hand side"];
+
+// ---------------------------------------------------------------- the rule of a sequence (affrule)
+type Rule = { text: string; fits: (t: number[]) => boolean };
+const isSq = (x: number) => Number.isInteger(Math.sqrt(x)) && x > 0;
+const consecutive = (t: number[], f: (k: number) => number) => {
+  for (let k = 1; k <= 60; k++) if (t.every((x, i) => x === f(k + i))) return true;
+  return false;
+};
+const RULES: Record<string, Rule> = {
+  squares: { text: "They are square numbers in order: 1 × 1, 2 × 2, 3 × 3, …", fits: (t) => consecutive(t, (k) => k * k) },
+  triangular: { text: "They are triangular numbers in order: 1, 1 + 2, 1 + 2 + 3, …", fits: (t) => consecutive(t, (k) => (k * (k + 1)) / 2) },
+  cubes: { text: "They are cube numbers in order: 1 × 1 × 1, 2 × 2 × 2, …", fits: (t) => consecutive(t, (k) => k * k * k) },
+  powers: { text: "Each number is double the one before (powers of 2)", fits: (t) => t.every((x, i) => i === 0 || x === 2 * t[i - 1]) },
+  triple: { text: "Each number is three times the one before", fits: (t) => t.every((x, i) => i === 0 || x === 3 * t[i - 1]) },
+  odd: { text: "They are the odd numbers in order", fits: (t) => t.every((x, i) => x % 2 === 1 && (i === 0 || x === t[i - 1] + 2)) },
+  even: { text: "They are the even numbers in order", fits: (t) => t.every((x, i) => x % 2 === 0 && (i === 0 || x === t[i - 1] + 2)) },
+};
+const addRule = (d: number): Rule => ({ text: `Add ${d} each time`, fits: (t) => t.every((x, i) => i === 0 || x === t[i - 1] + d) });
+const growRule = (d: number): Rule => ({ text: `Add ${d}, then ${d + 1}, then ${d + 2}, and so on (one more each time)`, fits: (t) => t.every((x, i) => i === 0 || x === t[i - 1] + d + i - 1) });
+// kinds: 0 squares, 1 triangular, 2 cubes, 3 powers of 2, 4 odd numbers, 5 add k (k = 3 … 12); a = where it starts
+const ruleOk = ([kind, a, k]: number[]) =>
+  kind === 0 ? a >= 2 && a <= 20 && k === 0 : kind === 1 ? a >= 2 && a <= 20 && k === 0 : kind === 2 ? a >= 1 && a <= 8 && k === 0 : kind === 3 ? a >= 0 && a <= 9 && k === 0 : kind === 4 ? a >= 1 && a <= 30 && k === 0 : kind === 5 ? a >= 1 && a <= 12 && k >= 3 && k <= 12 && a % k !== 0 : false;
+function ruleTerms([kind, a, k]: number[]): number[] {
+  return Array.from({ length: 5 }, (_, i) => [(a + i) ** 2, ((a + i) * (a + i + 1)) / 2, (a + i) ** 3, 2 ** (a + i), 2 * (a + i) - 1, a + i * k][kind]);
+}
+/** The four rules offered: the right one, the rule a learner reads from the first gap only, and two near ones. */
+function ruleOpts(p: number[]): { rules: Rule[]; right: number; gap: number; near: number } {
+  const [kind, , k] = p;
+  const t = ruleTerms(p);
+  const g = t[1] - t[0];
+  const right = [RULES.squares, RULES.triangular, RULES.cubes, RULES.powers, RULES.odd, addRule(k)][kind];
+  const firstGap = kind <= 3 ? addRule(g) : kind === 4 ? RULES.even : addRule(k + 1);
+  const nearR = [RULES.triangular, RULES.squares, RULES.squares, RULES.triple, addRule(1), addRule(k - 1)][kind];
+  const other = kind === 3 ? growRule(g) : kind <= 1 ? growRule(g + 1) : kind === 2 ? RULES.powers : kind === 4 ? RULES.squares : RULES.powers;
+  const rules = mixOrder(`affrule:${p}`, [right, firstGap, nearR, other].map((r) => r.text)).map((tx) => [right, firstGap, nearR, other].find((r) => r.text === tx)!);
+  return { rules, right: rules.indexOf(right), gap: rules.indexOf(firstGap), near: rules.indexOf(nearR) };
+}
+
+B06.push(
+  // ============================================================ river crossings (puzzle-strategy)
+  {
+    id: "afriver",
+    arity: 3,
+    title: "River-crossing puzzles: the fewest crossings",
+    competency: PZ,
+    type: "integer",
+    mc: true,
+    // [mode, n, k]: mode 0: n people, a boat for at most k (someone rows it back); mode 1: n soldiers and two children (k = 2)
+    parse: none,
+    reject: (p) => (riverOk(p) ? null : "Groups of up to 30 with a boat for 2 to 6 people, or up to 20 soldiers with the two children's boat."),
+    prompt: ([mode, n, k]) =>
+      mode === 0
+        ? `${n} scouts must cross a river in one small boat. The boat holds at most ${k} people, and someone must be in it to row it, so after each trip across someone rows it back. What is the smallest number of crossings needed to get all ${n} scouts across? (Every trip, in either direction, is one crossing.)`
+        : `${n} soldier${n > 1 ? "s" : ""} must cross a river. The only boat belongs to two children. The boat can carry one soldier, or one child, or both children, but never a soldier with a child. At the end the two children must be back on the starting bank with their boat. What is the smallest number of crossings? (Every trip, in either direction, is one crossing.)`,
+    solve: (p) => {
+      const [mode, n, k] = p;
+      if (mode === 1)
+        return { steps: [st("one", "reason", PZ, [1], 4), st("all", "multiply", PZ, [n, 4], 4 * n)], answer: 4 * n };
+      const rounds = Math.ceil((n - k) / (k - 1));
+      return { steps: [st("net", "subtract", PZ, [k, 1], k - 1), st("rounds", "divide", PZ, [n - k, k - 1], rounds), st("total", "add", PZ, [2 * rounds, 1], riverAns(p))], answer: riverAns(p) };
+    },
+    // independent: search every possible sequence of trips (breadth first) for the shortest one
+    validate: ([mode, n, k], v) => v === riverSearch(mode, n, k),
+    bugs: ([mode, n, k]) => {
+      const ans = riverAns([mode, n, k]);
+      if (mode === 1)
+        return [
+          B("children-not-back", "procedural", PZ, "Only the soldier's trip and one trip back were counted for each soldier. The boat is with the children, so for every soldier: both children cross, one brings the boat back, the soldier crosses, and the other child brings it back: 4 crossings.", 2 * n),
+          B("last-return", "procedural", PZ, "The last trip back was left out. The children must end on the starting bank with their boat, so the final return counts too.", 4 * n - 1),
+        ];
+      const fwd = Math.ceil(n / k);
+      const naive = 2 * fwd - 1;
+      return [
+        B("forward-only", "conceptual", PZ, "Only the trips across were counted. The boat has to come back each time, and the return trips count as crossings too.", fwd === ans ? null : fwd),
+        B("rower-forgotten", "conceptual", PZ, `Each trip across was taken to move ${k} people for good. Someone rows the boat back, so each round trip moves only ${k} − 1 = ${k - 1} more people across (the last trip moves ${k}).`, naive === ans ? null : naive),
+      ];
+    },
+    distractors: (p) => [riverAns(p) + 2, riverAns(p) - 2, riverAns(p) + 1].filter((x) => x > 0),
+    variants: () => [],
+    explain: (s) =>
+      s.id === "one"
+        ? "For one soldier: both children cross, one child rows back, the soldier crosses, the other child rows back: 4 crossings, and everything is as before except one soldier is across"
+        : s.id === "all"
+          ? `${s.inputs[0]} soldiers × 4 crossings = ${s.value}`
+          : s.id === "net"
+            ? `Each round trip (across and back) leaves ${s.value} more ${s.value === 1 ? "person" : "people"} on the far bank, because one rows the boat back`
+            : s.id === "rounds"
+              ? `Before the last trip, ${s.inputs[0]} people must be moved by round trips: ${s.inputs[0]} ÷ ${s.inputs[1]} rounded up = ${s.value} round trips`
+              : `${s.inputs[0]} crossings for the round trips + 1 last trip with a full boat = ${s.value}`,
+    domain: [[0, 1], [1, 30], [2, 6]],
+    keep: riverOk,
+    difficulty: ([mode, n, k]) => (mode === 1 ? (n <= 5 ? 1 : 2) : k === 2 ? 2 : 3),
+    word: ([mode, n, k]) =>
+      mode === 0
+        ? `At a ghat on the Kaveri, ${n} pilgrims want to cross the river in a round coracle that holds at most ${k} people. Someone must row the coracle back after every trip across. What is the fewest number of crossings (trips either way) to get all ${n} pilgrims across?`
+        : `${n} fishermen${n === 1 ? "" : ""} want to reach an island, but the only boat belongs to two village children. It can carry one fisherman, or one child, or both children, never a fisherman with a child. The children must end up back home with their boat. What is the fewest number of crossings (trips either way)?`,
+    teach: {
+      idea: "Act the puzzle out one trip at a time and look for the pattern that repeats. A round trip (across and back) is what moves people, and the boat's rower has to come back each time.",
+      method: "Work out what one full round achieves (how many more people end up across), count how many rounds are needed before the last trip, then add the last trip.",
+      alternatives: [
+        { id: "act_out", title: "Act it out with counters", kind: "conceptual", text: ["Use counters for the people and a coin for the boat on two sides of a line.", "Move them trip by trip and write each trip in a table; count the rows at the end."], visual: ([mode, n, k]) => ({ type: "table", head: ["Trip", "Who crosses", "Left bank", "Right bank"], rows: mode === 0 ? [["1", `${k} →`, String(n - k), String(k)], ["2", "1 ←", String(n - k + 1), String(k - 1)]] : [["1", "2 children →", `${n} soldiers`, "2 children"], ["2", "1 child ←", `${n} soldiers, 1 child`, "1 child"]] }) },
+        { id: "small_cases", title: "Solve smaller puzzles first", kind: "procedural", text: ["Try the same puzzle with 1, 2 and 3 people (or soldiers) and count the crossings.", "See how much the count grows each time one more person is added, and use that to reach the number asked."] },
+      ],
+    },
+    limits: "Two kinds of crossing puzzle (a group with a small boat; soldiers and two children); puzzles with rules about who may be left together are not included.",
+  },
+  // ============================================================ the direction faced after a turn
+  {
+    id: "afface",
+    arity: 3,
+    title: "The compass direction faced after a turn",
+    competency: AT,
+    type: "choice",
+    // [s, k, cw]: facing DIRS[s], turning k eighths of a full turn, clockwise (1) or anticlockwise (0)
+    parse: none,
+    reject: ([s, k, cw]) => (s < 0 || s > 7 || k < 1 || k > 7 || (cw !== 0 && cw !== 1) ? "Turns of one to seven eighths of a full turn from one of the eight compass directions." : null),
+    choices: (p) => faceOpts(p).opts.map((d) => DIRS[d]),
+    prompt: ([s, k, cw]) => `${name(s + k)} is facing ${DIRS[s]} and makes ${TURNW[k]} ${cw ? "clockwise" : "anticlockwise"}. Which direction is ${name(s + k)} facing now?`,
+    solve: (p) => {
+      const [s, k, cw] = p;
+      const { opts, end } = faceOpts(p);
+      return { steps: [st("eighths", "convert", AT, [k], k), st("count", "count", AT, [s, k, cw], DIRS[end])], answer: opts.indexOf(end) };
+    },
+    // independent: point an arrow at the start and turn it 45° at a time, k times, then compare the chosen direction
+    validate: ([s, k, cw], v) => {
+      if (typeof v !== "number") return false;
+      let deg = 45 * s;
+      for (let i = 0; i < k; i++) deg = (deg + (cw ? 45 : 315)) % 360;
+      return faceOpts([s, k, cw]).opts.map((d) => DIRS[d])[v] === DIRS[deg / 45];
+    },
+    bugs: (p) => {
+      const [, k, cw] = p;
+      const { opts, end, other, slip } = faceOpts(p);
+      return [
+        ...(other !== end ? [B("other-way", "conceptual", "MATH.geometry.maps-directions", `The turn was made the other way. ${cw ? "Clockwise is the way clock hands move: North → North-East → East → …" : "Anticlockwise is against the clock hands: North → North-West → West → …"}`, opts.indexOf(other))] : []),
+        ...(slip !== end && slip !== other ? [B(k % 2 === 0 ? "quarter-as-eighth" : "eighth-as-quarter", "procedural", AT, k % 2 === 0 ? "Each quarter turn was taken as one step between neighbouring directions. With the in-between directions there are 8 steps in a full turn, so a quarter turn is 2 steps." : "Each eighth was taken as a quarter turn. A quarter turn is 2 of the 8 steps, so one eighth is just one step, to the next direction.", opts.indexOf(slip))] : []),
+      ];
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "eighths" ? `The turn is ${s.inputs[0]} eighth${s.inputs[0] === 1 ? "" : "s"} of a full turn: ${s.inputs[0]} step${s.inputs[0] === 1 ? "" : "s"} round the 8 directions` : `Count ${s.inputs[1]} step${s.inputs[1] === 1 ? "" : "s"} ${s.inputs[2] ? "clockwise" : "anticlockwise"} from ${DIRS[Number(s.inputs[0])]}: ${s.value}`),
+    domain: [[0, 7], [1, 7], [0, 1]],
+    difficulty: ([s, k]) => (s % 2 === 0 && k % 2 === 0 ? 1 : k % 2 === 0 ? 2 : 3),
+    figure: ([s]) => compass(s),
+    word: ([s, k, cw]) => `The arrow on a temple weathervane points ${DIRS[s]}. A gust of wind turns it ${TURNW[k]} ${cw ? "clockwise" : "anticlockwise"}. Which direction does the arrow point now?`,
+    teach: {
+      idea: "The eight compass directions split a full turn into eight equal steps; a quarter turn is two steps and a half turn is four. Clockwise goes North → East → South → West.",
+      method: "Change the turn into eighths (a quarter = 2, a half = 4, three quarters = 6), then count that many steps round the compass, the way of the turn.",
+      alternatives: [
+        { id: "stand_and_turn", title: "Stand up and turn", kind: "conceptual", text: ["Face the starting direction and point your arm straight ahead.", "Turn your body step by step (each step to the next direction on the compass) and say the directions aloud as you pass them."], visual: () => compass(0) },
+        { id: "clock_face", title: "Use a clock face", kind: "procedural", text: ["Put North at 12, East at 3, South at 6 and West at 9; the in-between directions sit half-way.", "A quarter turn clockwise moves the minute hand from 12 to 3: from North to East."], visual: () => ({ type: "clock", h: 3, m: 0 }) },
+      ],
+    },
+    limits: "Turns of whole eighths, less than a full turn, from the eight compass directions; turns given in degrees are the angle families.",
+  },
+  // ============================================================ naming a quadrilateral, kites and trapeziums included
+  {
+    id: "afkind",
+    arity: 2,
+    title: "Naming a quadrilateral from its properties (kites and trapeziums included)",
+    competency: QC,
+    type: "choice",
+    // [kind, seed]: kind 0 square, 1 rectangle, 2 rhombus, 3 parallelogram, 4 kite, 5 trapezium; seed sets the measurements
+    parse: none,
+    reject: ([kind, seed]) => (kind < 0 || kind > 5 || seed < 0 || seed > 19 ? "Six kinds of quadrilateral, twenty sets of measurements each." : null),
+    choices: (p) => kindOpts(p).map((k) => `a ${QNAMES[k]}`),
+    prompt: () => "The table describes quadrilateral ABCD (the sides are listed in order round the shape). Which name describes it best, the most special name that fits?",
+    solve: ([kind, seed]) => {
+      const q = qdesc(kind, seed);
+      return { steps: [st("sides", "compare", QC, q.sides, q.sides.join(", ")), st("parallel", "read", QC, [q.par], parText(q)), st("name", "classify", QC, [kind], QNAMES[kind])], answer: kindOpts([kind, seed]).indexOf(kind) };
+    },
+    // independent: name the shape from the listed properties alone, then compare with the chosen option
+    validate: ([kind, seed], v) => typeof v === "number" && kindOpts([kind, seed])[v] === nameFrom(qdesc(kind, seed)),
+    bugs: ([kind, seed]) => {
+      const o = kindOpts([kind, seed]);
+      const say: Record<number, [string, number, string][]> = {
+        0: [["sides-only", 2, "Only the sides were looked at. Four equal sides make a rhombus, but these angles are all 90° as well, so the most special name is square."], ["angles-only", 1, "Only the angles were looked at. Four right angles make a rectangle, but all four sides are equal too, so the most special name is square."]],
+        1: [["general-name", 3, "A rectangle is a parallelogram, but its four right angles make 'rectangle' the more special name."], ["right-angles-square", 0, "Four right angles were taken to mean a square. A square also needs all four sides equal; here the sides are not all equal."]],
+        2: [["equal-sides-square", 0, "Four equal sides were taken to mean a square. A square also needs four right angles; these angles are not 90°."], ["general-kite", 4, "Pairs of equal sides next to each other do fit a kite, but all four sides are equal and opposite sides are parallel: the more special name is rhombus."]],
+        3: [["opposite-sides-rectangle", 1, "Opposite sides equal were taken to mean a rectangle. A rectangle also needs four right angles; these angles are not 90°."], ["pairs-rhombus", 2, "A rhombus needs all four sides equal; here only opposite sides are equal."]],
+        4: [["pairs-parallelogram", 3, "Two pairs of equal sides were taken to mean a parallelogram. In a parallelogram the equal sides are OPPOSITE each other and parallel; here the equal sides are next to each other and no sides are parallel: a kite."], ["pairs-rhombus", 2, "A rhombus has all four sides equal. Here there are two different lengths, each used for two sides next to each other: a kite."]],
+        5: [["one-pair-parallelogram", 3, "One pair of parallel sides was taken to be enough for a parallelogram. A parallelogram needs BOTH pairs of opposite sides parallel; with exactly one pair it is a trapezium."], ["any-kite", 4, "A kite has two pairs of equal sides next to each other; here all four sides are different."]],
+      };
+      return say[kind].map(([id, k, s]) => B(id, "conceptual", QC, s, o.indexOf(k)));
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "sides" ? `The sides in order are ${s.value} (cm)` : s.id === "parallel" ? `Parallel sides: ${s.value}` : `So the most special name is ${s.value}`),
+    domain: [[0, 5], [0, 19]],
+    difficulty: ([kind]) => (kind <= 1 ? 1 : kind <= 3 ? 2 : 3),
+    figure: ([kind, seed]) => {
+      const q = qdesc(kind, seed);
+      const [ab, bc, cd, da] = q.sides;
+      return { type: "table", head: ["Property", "Quadrilateral ABCD"], rows: [["Sides", `AB = ${ab} cm, BC = ${bc} cm, CD = ${cd} cm, DA = ${da} cm`], ["Parallel sides", parText(q)], ["Angles", q.angles]] };
+    },
+    word: () => "A carpenter has made a wooden frame ABCD for a window and written down its measurements in the table (sides in order round the frame). Which name describes the frame best, the most special name that fits?",
+    teach: {
+      idea: "Each name is a list of properties. A square has every property; a kite has two pairs of equal sides NEXT to each other; a trapezium has exactly one pair of parallel sides. The best name is the most special one whose properties all hold.",
+      method: "Check, in order: both pairs of opposite sides parallel? (parallelogram family: then all sides equal → rhombus, right angles → rectangle, both → square). Exactly one pair parallel? → trapezium. No parallel sides but two pairs of equal neighbouring sides? → kite.",
+      alternatives: [
+        { id: "family_tree", title: "A family tree of quadrilaterals", kind: "conceptual", text: ["Parallelograms hold rectangles and rhombuses; squares sit inside both. Kites and trapeziums are separate branches.", "A shape is named by the lowest branch whose properties it has."], visual: () => ({ type: "table", head: ["Name", "Parallel pairs", "Equal sides", "Right angles"], rows: [["Square", "2", "all 4", "4"], ["Rectangle", "2", "opposite", "4"], ["Rhombus", "2", "all 4", "—"], ["Parallelogram", "2", "opposite", "—"], ["Kite", "0", "2 pairs next to each other", "—"], ["Trapezium", "1", "—", "—"]] }) },
+        { id: "draw_it", title: "Sketch it from the table", kind: "procedural", text: ["Sketch the shape roughly, marking equal sides with the same tick and parallel sides with arrows.", "Look at the sketch: which ticks and arrows does it have? Match them to a name."], visual: ([kind]) => ({ type: "shape", kind: ["square", "rectangle", "rhombus", "parallelogram", "kite", "trapezium"][kind] }) },
+      ],
+    },
+    limits: "One quadrilateral described by its side lengths, parallel sides and angles; the best (most special) name among squares, rectangles, rhombuses, parallelograms, kites and trapeziums. Proving the properties is marked by an educator.",
+  },
+  // ============================================================ unknown sides of parallelograms and rhombuses
+  {
+    id: "afpside",
+    arity: 3,
+    title: "Unknown sides of a parallelogram or rhombus",
+    competency: QC,
+    type: "integer",
+    mc: true,
+    // [mode, a, b]: 0 parallelogram, perimeter 2(a + b) and side a → the other side b; 1 rhombus, perimeter 4a → side;
+    // 2 parallelogram with AB = px + q and CD = rx − s → AB; 3 rhombus with AB = px + q and BC = rx − s → perimeter
+    parse: none,
+    reject: (p) => (psideOk(p) ? null : "Whole-number sides up to 25 cm, or sides written as px + q and rx − s with x from 2 to 9."),
+    prompt: ([mode, a, b]) => {
+      if (mode === 0) return `The perimeter of parallelogram ABCD is ${2 * (a + b)} cm and AB = ${a} cm. What is the length of BC, in cm?`;
+      if (mode === 1) return `The perimeter of rhombus PQRS is ${4 * a} cm. How long is each side, in cm?`;
+      const { p, q, r, s } = psideCode(a, b);
+      return mode === 2
+        ? `In parallelogram ABCD, AB = (${expr(p, q, "+")}) cm and CD = (${expr(r, s, "−")}) cm. What is the length of AB, in cm?`
+        : `In rhombus ABCD, AB = (${expr(p, q, "+")}) cm and BC = (${expr(r, s, "−")}) cm. What is the perimeter of the rhombus, in cm?`;
+    },
+    solve: ([mode, a, b]) => {
+      if (mode === 0) return { steps: [st("half", "divide", QC, [2 * (a + b), 2], a + b), st("other", "subtract", QC, [a + b, a], b)], answer: b };
+      if (mode === 1) return { steps: [st("quarter", "divide", QC, [4 * a, 4], a)], answer: a };
+      const { p, q, r, s } = psideCode(a, b);
+      const side = p * a + q;
+      return { steps: [st("equate", "equate", QC, [`${expr(p, q, "+")} = ${expr(r, s, "−")}`], `x = ${a}`), st("side", "substitute", QC, [p, a, q], side), ...(mode === 3 ? [st("perimeter", "multiply", QC, [4, side], 4 * side)] : [])], answer: mode === 3 ? 4 * side : side };
+    },
+    // independent: try each whole-number length (and each x) and keep the one that fits the shape's rules
+    validate: ([mode, a, b], v) => {
+      if (typeof v !== "number") return false;
+      if (mode === 0) return v + a + v + a === 2 * (a + b) && v > 0;
+      if (mode === 1) return v + v + v + v === 4 * a;
+      const { p, q, r, s } = psideCode(a, b);
+      for (let x = 1; x <= 50; x++) if (p * x + q === r * x - s) return v === (mode === 3 ? 4 : 1) * (p * x + q);
+      return false;
+    },
+    bugs: ([mode, a, b]) => {
+      if (mode === 0) return [B("whole-perimeter", "procedural", QC, `${a} was taken from the whole perimeter. The perimeter has two sides of each length, so first halve it: AB + BC = ${a + b}.`, 2 * (a + b) - a), B("all-equal", "conceptual", QC, "The perimeter was shared equally among four sides, as for a rhombus. In a parallelogram only OPPOSITE sides are equal.", (2 * (a + b)) % 4 === 0 && (a + b) / 2 !== b ? (a + b) / 2 : null)];
+      if (mode === 1) return [B("half", "conceptual", QC, "The perimeter was halved. A rhombus has four equal sides, so divide by 4.", 2 * a)];
+      const { p, q, r, s } = psideCode(a, b);
+      const side = p * a + q;
+      const xs = (s - q) / (r - p);
+      const slip = Number.isInteger(xs) && xs > 0 ? (mode === 3 ? 4 : 1) * (p * xs + q) : null;
+      return [
+        B("x-not-side", "procedural", QC, `x = ${a} was given, but the question asks for a length: put x = ${a} back into the expression.`, a),
+        ...(mode === 3 ? [B("side-not-perimeter", "procedural", QC, `The side (${side} cm) was given. The perimeter is all four equal sides: 4 × ${side}.`, side)] : []),
+        B("sign-slip", "procedural", "MATH.algebra.linear-equations", `When the numbers were moved across the equals sign, their signs were not changed (${r - p}x = ${s} − ${q}). Moving +${q} to the other side makes it −${q}, and moving −${s} makes it +${s}: ${r - p}x = ${s} + ${q}.`, slip === (mode === 3 ? 4 * side : side) ? null : slip),
+      ];
+    },
+    variants: () => [],
+    explain: (s) =>
+      s.id === "half"
+        ? `Opposite sides are equal, so AB + BC is half the perimeter: ${s.inputs[0]} ÷ 2 = ${s.value} cm`
+        : s.id === "other"
+          ? `BC = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value} cm`
+          : s.id === "quarter"
+            ? `All four sides are equal: ${s.inputs[0]} ÷ 4 = ${s.value} cm`
+            : s.id === "equate"
+              ? `The two sides are equal: ${s.inputs[0]}, so ${s.value}`
+              : s.id === "side"
+                ? `The side is ${s.inputs[0] === 1 ? "" : `${s.inputs[0]} × `}${s.inputs[1]} + ${s.inputs[2]} = ${s.value} cm`
+                : `Perimeter = 4 × ${s.inputs[1]} = ${s.value} cm`,
+    domain: [[0, 3], [2, 25], [0, 53]],
+    keep: psideOk,
+    cap: 400,
+    difficulty: ([mode]) => (mode <= 1 ? 1 : mode === 2 ? 2 : 3),
+    word: ([mode, a, b]) => {
+      if (mode === 0) return `${name(a + b)} puts a lace border round a parallelogram-shaped table mat. The border is ${2 * (a + b)} cm long and one side of the mat is ${a} cm. How long is the side next to it, in cm?`;
+      if (mode === 1) return `A rhombus-shaped rangoli frame is made from ${4 * a} cm of bamboo strip, all used for the four sides. How long is each side, in cm?`;
+      const { p, q, r, s } = psideCode(a, b);
+      return mode === 2 ? `A garden gate is a parallelogram. Its top bar measures (${expr(p, q, "+")}) cm and its bottom bar (${expr(r, s, "−")}) cm. How long is the top bar, in cm?` : `The four sides of a rhombus-shaped kolam frame are equal; two neighbouring sides measure (${expr(p, q, "+")}) cm and (${expr(r, s, "−")}) cm. How much strip goes round the whole frame, in cm?`;
+    },
+    teach: {
+      idea: "In a parallelogram opposite sides are equal, so the perimeter is twice (one side + the next side). In a rhombus all four sides are equal.",
+      method: "Parallelogram: halve the perimeter and take away the side you know. Rhombus: divide the perimeter by 4. When sides are given as expressions, set the two equal sides equal, solve for x, then substitute.",
+      alternatives: [
+        { id: "walk_round", title: "Walk round the shape", kind: "conceptual", text: ["Walking round a parallelogram you go along AB, BC, then the same lengths again.", "So half the walk is AB + BC: the side you know plus the side you want."], visual: ([, a, b]) => ({ type: "shape", kind: "parallelogram", lengths: [`${a} cm`, `${b} cm`, `${a} cm`, `${b} cm`] }) },
+        { id: "balance", title: "Equal sides balance", kind: "procedural", text: ["Write the two equal sides on the two pans of a balance: px + q = rx − s.", "Take px from both sides and add s to both; then divide to find x."] },
+      ],
+    },
+    limits: "Whole-number sides; the side expressions are linear in x with a whole-number solution. Angles are the afpara family.",
+  },
+  // ============================================================ figures hidden in a figure
+  {
+    id: "afhidden",
+    arity: 3,
+    title: "Counting the rectangles, squares or triangles hidden in a figure",
+    competency: EN,
+    type: "integer",
+    mc: true,
+    // [mode, a, b]: 0 rectangles in an a × b grid; 1 squares in an a × b grid; 2 triangles when a lines are drawn from
+    // the top corner of a triangle to its base; 3 the same with b lines parallel to the base as well
+    parse: none,
+    reject: (p) => (hiddenOk(p) ? null : "Grids up to 6 × 6 (rectangles) or 8 × 8 (squares); up to 12 lines from the top corner of a triangle, with up to 3 lines across."),
+    prompt: ([mode, a, b]) =>
+      mode === 0
+        ? `The picture shows a rectangle divided into a grid of ${a} row${a > 1 ? "s" : ""} and ${b} columns of small squares. How many rectangles of any size can you find in it? (Squares count as rectangles, and so does the whole figure.)`
+        : mode === 1
+          ? `The picture shows a grid of ${a} rows and ${b} columns of small squares. How many squares of any size are there in it altogether?`
+          : mode === 2
+            ? `A triangle has ${a} straight line${a > 1 ? "s" : ""} drawn from its top corner down to its base, cutting it into ${a + 1} thin triangles side by side. How many triangles of any size are there in the figure altogether?`
+            : `A triangle has ${a} straight line${a > 1 ? "s" : ""} drawn from its top corner down to its base, and ${b} straight line${b > 1 ? "s" : ""} drawn across it parallel to the base, from one side to the other. How many triangles of any size are there in the figure altogether?`,
+    solve: (p) => {
+      const [mode, a, b] = p;
+      if (mode === 0) return { steps: [st("across", "choose", EN, [b + 1, 2], choose2(b + 1)), st("down", "choose", EN, [a + 1, 2], choose2(a + 1)), st("all", "multiply", EN, [choose2(b + 1), choose2(a + 1)], hiddenAns(p))], answer: hiddenAns(p) };
+      if (mode === 1) {
+        const steps = [];
+        for (let k = 1; k <= a; k++) steps.push(st(`size${k}`, "count", EN, [k, a - k + 1, b - k + 1], (a - k + 1) * (b - k + 1)));
+        return { steps: [...steps, st("all", "add", EN, steps.map((s) => Number(s.value)), hiddenAns(p))], answer: hiddenAns(p) };
+      }
+      return { steps: [st("pairs", "choose", EN, [a + 2, 2], choose2(a + 2)), st("all", "multiply", EN, [choose2(a + 2), mode === 2 ? 1 : b + 1], hiddenAns(p))], answer: hiddenAns(p) };
+    },
+    // independent: list every candidate figure one by one and count those that are really there
+    validate: ([mode, a, b], v) => {
+      let n = 0;
+      if (mode <= 1) {
+        for (let r1 = 0; r1 < a; r1++) for (let r2 = r1; r2 < a; r2++) for (let c1 = 0; c1 < b; c1++) for (let c2 = c1; c2 < b; c2++) if (mode === 0 || r2 - r1 === c2 - c1) n++;
+      } else {
+        // a triangle is two of the lines from the top corner (the two sides count) and one line across (the base counts)
+        const lines = a + 2;
+        const across = mode === 2 ? 1 : b + 1;
+        for (let i = 0; i < lines; i++) for (let j = i + 1; j < lines; j++) for (let h = 0; h < across; h++) n++;
+      }
+      return v === n;
+    },
+    bugs: (p) => {
+      const [mode, a, b] = p;
+      const ans = hiddenAns(p);
+      const keep = (x: number) => (x === ans ? null : x);
+      if (mode === 0) return [B("small-only", "conceptual", EN, "Only the smallest squares were counted. Rectangles can be made of several squares together, up to the whole figure.", keep(a * b)), B("rows-only", "procedural", EN, "Only rectangles one row high were counted. Count rectangles of every height as well as every width.", keep(a * choose2(b + 1)))];
+      if (mode === 1) return [B("small-only", "conceptual", EN, "Only the smallest squares were counted. Bigger squares are made of 2 × 2, 3 × 3, … small squares.", keep(a * b)), B("small-and-whole", "procedural", EN, "Only the small squares and the biggest ones were counted; the middle sizes were missed.", keep(a * b + (b - a + 1)))];
+      const per = choose2(a + 2);
+      return [B("thin-only", "conceptual", EN, mode === 2 ? "Only the thin triangles side by side were counted. Two or more next to each other also make a triangle, and so does the whole figure." : "Only the smallest triangles, at the top above the first line across, were counted. Two or more of them together make a triangle too, and every line across is the base of more triangles.", keep(a + 1)), ...(mode === 3 ? [B("one-layer", "procedural", EN, `Only the triangles standing on the base were counted (${per}). Each line across makes another set of triangles with the top corner.`, keep(per))] : [B("thin-and-whole", "procedural", EN, "Only the thin triangles and the whole triangle were counted; triangles made of two, three, … thin ones were missed.", keep(a + 2))])];
+    },
+    distractors: (p) => [hiddenAns(p) + 1, hiddenAns(p) - 1, hiddenAns(p) + 5].filter((x) => x > 0),
+    variants: () => [],
+    explain: (s) =>
+      s.id === "across"
+        ? `A rectangle needs 2 of the ${s.inputs[0]} upright lines: ${s.value} ways`
+        : s.id === "down"
+          ? `and 2 of the ${s.inputs[0]} lines across: ${s.value} ways`
+          : s.id === "pairs"
+            ? `A triangle needs 2 of the ${s.inputs[0]} lines from the top corner (the two sides included): ${s.value} ways`
+            : s.id.startsWith("size")
+              ? `Squares ${s.inputs[0]} × ${s.inputs[0]}: ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}`
+              : `Altogether ${s.value}`,
+    domain: [[0, 3], [1, 12], [0, 8]],
+    keep: hiddenOk,
+    difficulty: ([mode, a, b]) => (mode === 2 ? (a <= 3 ? 1 : 2) : mode === 3 ? 3 : a * b <= 6 ? 1 : 2),
+    figure: ([mode, a, b]) => (mode <= 1 ? { type: "grid", rows: a, cols: b } : null),
+    word: ([mode, a, b]) =>
+      mode === 0
+        ? `A window has ${a} row${a > 1 ? "s" : ""} of ${b} square glass panes in a wooden frame. ${name(a + b)} plays a game: how many rectangles of any size can be traced along the wooden bars? (Single panes and the whole window count.)`
+        : mode === 1
+          ? `A chessboard-style kolam is drawn as a grid of ${a} rows and ${b} columns of squares. How many squares of any size can be traced in it?`
+          : mode === 2
+            ? `A paper fan is shaped like a triangle with ${a} fold line${a > 1 ? "s" : ""} running from the handle (the top corner) to the edge, making ${a + 1} thin triangles. How many triangles of any size can you see?`
+            : `A triangular signboard has ${a} line${a > 1 ? "s" : ""} painted from its top corner to its base and ${b} line${b > 1 ? "s" : ""} painted across it, parallel to the base. How many triangles of any size are there on the board?`,
+    teach: {
+      idea: "Counting hidden figures goes wrong when we just look and count. Instead, describe each figure by the lines that make it, and count the choices of lines systematically.",
+      method: "Rectangles in a grid: choose 2 of the upright lines and 2 of the lines across, and multiply the numbers of ways. Squares: count each size separately and add. Triangles from one corner: choose 2 of the lines from the corner, times the number of lines across.",
+      visual: ([mode, a, b]) => (mode <= 1 ? { type: "grid", rows: a, cols: b } : null),
+      alternatives: [
+        { id: "by_size", title: "Count size by size", kind: "procedural", text: ["Make a table: figures made of 1 piece, of 2 pieces, of 3 pieces, ….", "Count each row of the table carefully, then add the rows."], visual: ([, a]) => ({ type: "table", head: ["Pieces in the figure", "1", "2", "3", "…"], rows: [["How many", String(a + 1), "?", "?", "…"]] }) },
+        { id: "small_first", title: "Start with a smaller figure", kind: "conceptual", text: ["Count the figures in a 1 × 2 grid, then a 1 × 3 grid, then a 1 × 4 grid.", "Notice the pattern 3, 6, 10, … (the triangular numbers) and use it to count bigger figures."], visual: () => ({ type: "grid", rows: 1, cols: 3 }) },
+      ],
+    },
+    limits: "Rectangles and squares in a full grid; triangles in a triangle cut by lines from one corner and lines parallel to the base. Irregular composite figures are not included (no pictures of them yet).",
+  },

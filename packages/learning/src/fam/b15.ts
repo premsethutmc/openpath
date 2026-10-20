@@ -2158,3 +2158,1127 @@ export const B15: Def[] = [
 function par2(v: number) {
   return v < 0 ? `(${n_(v)})` : String(v);
 }
+
+// ================================================================================== gap@1 additions (b15)
+
+/** Shuffle a list of option strings by a hash of the family and parameters (so the right letter is not predictable). */
+const shuf = (tag: string, p: number[], xs: string[]) => [...xs].sort((x, y) => fnv(`${tag}:${p.join(",")}:${x}`) - fnv(`${tag}:${p.join(",")}:${y}`) || (x < y ? -1 : 1));
+const braces = (xs: (string | number)[]) => (xs.length ? `{${xs.map((x) => (typeof x === "number" ? n_(x) : x)).join(", ")}}` : "∅");
+const isPrime = (n: number) => {
+  if (n < 2) return false;
+  for (let d = 2; d * d <= n; d++) if (n % d === 0) return false;
+  return true;
+};
+
+// ---------------------------------------------------------------- roster, set-builder and descriptive forms
+/** A set rule: t = 0 {kn : n ≤ m}, 1 {n² : n ≤ m}, 2 {n + k : n ≤ m}, 3 factors of FN[k] (variant m), 4 primes below PN[k] (variant m). */
+type SR = { t: number; k: number; m: number; v: number };
+const FN = [12, 18, 20, 24, 28, 30, 36, 40, 42, 45];
+const PN = [10, 12, 15, 20, 22, 25, 26, 30, 32, 34];
+function srText({ t, k, m, v }: SR): string {
+  const le = v === 1 ? "<" : "≤";
+  if (t === 0) return v === 2 ? `{x : x = ${k}n + ${k}, n ∈ ℕ and n ${le} ${m}}` : `{x : x = ${k}n, n ∈ ℕ and n ${le} ${m}}`;
+  if (t === 1) return v === 2 ? `{x : x = 2n, n ∈ ℕ and n ≤ ${m}}` : `{x : x = n², n ∈ ℕ and n ${le} ${m}}`;
+  if (t === 2) return v === 2 ? `{x : x = n + ${k + 1}, n ∈ ℕ and n ≤ ${m}}` : `{x : x = n + ${k}, n ∈ ℕ and n ${le} ${m}}`;
+  if (t === 3) return [`{x : x ∈ ℕ and x is a factor of ${FN[k]}}`, `{x : x ∈ ℕ, x is a factor of ${FN[k]} and x < ${FN[k]}}`, `{x : x ∈ ℕ, x is a factor of ${FN[k]} and x > 1}`, `{x : x is a prime factor of ${FN[k]}}`][v];
+  return [`{x : x is a prime number and x < ${PN[k]}}`, `{x : x is an odd prime number and x < ${PN[k]}}`, `{x : x is an odd number and 1 < x < ${PN[k]}}`, `{x : x is a prime number and x < ${PN[k] + 6}}`][v];
+}
+function srDesc({ t, k, m }: SR): string {
+  return [`the set of the first ${m} positive multiples of ${k}`, `the set of the squares of the first ${m} natural numbers`, `the set of natural numbers greater than ${k} and less than ${k + m + 1}`, `the set of all the factors of ${FN[k]}`, `the set of prime numbers less than ${PN[k]}`][t];
+}
+/** The members by the rule's construction. */
+function srList({ t, k, m, v }: SR): number[] {
+  const mm = v === 1 ? m - 1 : m;
+  if (t === 0) return Array.from({ length: mm }, (_, i) => k * (i + 1) + (v === 2 ? k : 0));
+  if (t === 1) return Array.from({ length: mm }, (_, i) => (v === 2 ? 2 * (i + 1) : (i + 1) ** 2));
+  if (t === 2) return Array.from({ length: mm }, (_, i) => i + 1 + k + (v === 2 ? 1 : 0));
+  if (t === 3) {
+    const N = FN[k];
+    const fs = Array.from({ length: N }, (_, i) => i + 1).filter((d) => N % d === 0);
+    return v === 0 ? fs : v === 1 ? fs.filter((d) => d < N) : v === 2 ? fs.filter((d) => d > 1) : fs.filter(isPrime);
+  }
+  const N = PN[k];
+  const ps = Array.from({ length: N + 6 }, (_, i) => i).filter(isPrime);
+  return v === 0 ? ps.filter((x) => x < N) : v === 1 ? ps.filter((x) => x < N && x > 2) : v === 2 ? Array.from({ length: N }, (_, i) => i).filter((x) => x % 2 === 1 && x > 1) : ps;
+}
+/** Membership read straight from the condition (independent of srList): which x from 0 to 200 satisfy it. */
+function srTest({ t, k, m, v }: SR): number[] {
+  const out: number[] = [];
+  const nOk = (n: number) => n >= 1 && (v === 1 ? n < m : n <= m);
+  for (let x = 0; x <= 200; x++) {
+    let ok = false;
+    if (t === 0) ok = v === 2 ? x % k === 0 && nOk(x / k - 1) : x % k === 0 && nOk(x / k);
+    else if (t === 1) ok = v === 2 ? x % 2 === 0 && x / 2 >= 1 && x / 2 <= m : Number.isInteger(Math.sqrt(x)) && nOk(Math.sqrt(x));
+    else if (t === 2) ok = nOk(x - k - (v === 2 ? 1 : 0)) && (v !== 2 || x - k - 1 <= m);
+    else if (t === 3) ok = x >= 1 && FN[k] % x === 0 && (v !== 1 || x < FN[k]) && (v !== 2 || x > 1) && (v !== 3 || isPrime(x));
+    else ok = v === 2 ? x % 2 === 1 && x > 1 && x < PN[k] : isPrime(x) && x < PN[k] + (v === 3 ? 6 : 0) && (v !== 1 || x % 2 === 1);
+    if (ok) out.push(x);
+  }
+  return out;
+}
+const sameList = (a: number[], b: number[]) => a.length === b.length && a.every((x, i) => x === b[i]);
+/** The three distractor rules for a rule (variants 1, 2, 3 where they exist; m + 1 for t ≤ 2). */
+function srWrong(s: SR): SR[] {
+  return s.t <= 2 ? [{ ...s, v: 1 }, { ...s, v: 2 }, { ...s, m: s.m + 1 }] : [1, 2, 3].map((v) => ({ ...s, v }));
+}
+const sfOf = ([t, k, m]: number[]): SR => ({ t, k, m, v: 0 });
+const D_SF: [number, number][] = [[0, 4], [0, 9], [3, 6], [0, 2]];
+const sfOk = (p: number[]) => {
+  if (!inDom(p, D_SF)) return false;
+  const [t, k, m] = p;
+  if (t === 0 && (k < 2 || k > 7)) return false;
+  if (t === 1 && k !== 0) return false;
+  if (t >= 3 && m !== 3) return false;
+  const s = sfOf(p);
+  const lists = [s, ...srWrong(s)].map(srList);
+  return lists.every((l) => l.length >= 2 && l.length <= 12) && new Set(lists.map((l) => l.join(","))).size === 4;
+};
+function sfOptions(p: number[]): string[] {
+  const s = sfOf(p);
+  const all = [s, ...srWrong(s)];
+  return shuf("aosetform", p, all.map((x) => (p[3] === 0 ? srText(x) : braces(srList(x)))));
+}
+const sfRight = (p: number[]) => (p[3] === 0 ? srText(sfOf(p)) : braces(srList(sfOf(p))));
+
+// ---------------------------------------------------------------- classifying sets
+/** Single sets in set-builder form, with a parameter a: [text, universe, condition]. */
+const SINGLE: [(a: number) => string, "N" | "Z" | "R", (x: number, a: number) => boolean][] = [
+  [(a) => `{x ∈ ℕ : x + ${a} = 0}`, "N", (x, a) => x + a === 0],
+  [(a) => `{x ∈ ℤ : x + ${a} = 0}`, "Z", (x, a) => x + a === 0],
+  [(a) => `{x ∈ ℕ : x² = ${a * a}}`, "N", (x, a) => x * x === a * a],
+  [(a) => `{x ∈ ℤ : x² = ${a * a}}`, "Z", (x, a) => x * x === a * a],
+  [(a) => `{x ∈ ℝ : x² + ${a * a} = 0}`, "R", (x, a) => x * x + a * a === 0],
+  [(a) => `{x ∈ ℕ : x > ${a}}`, "N", (x, a) => x > a],
+  [(a) => `{x ∈ ℤ : x < ${a}}`, "Z", (x, a) => x < a],
+  [(a) => `{x ∈ ℕ : x < ${a + 1}}`, "N", (x, a) => x < a + 1],
+  [(a) => `{x ∈ ℝ : ${a} < x < ${a + 1}}`, "R", (x, a) => a < x && x < a + 1],
+  [(a) => `{x ∈ ℕ : ${a} < x < ${a + 1}}`, "N", (x, a) => a < x && x < a + 1],
+  [(a) => `{x ∈ ℕ : x is a factor of ${a + 1}}`, "N", (x, a) => (a + 1) % x === 0],
+];
+const CL0 = ["The set is empty", "The set is a singleton set", "The set is finite with more than one element", "The set is infinite"];
+/** Count members on a grid of the universe: [count on a small window, count on a window twice as wide and twice as fine]. */
+function gridCount(u: "N" | "Z" | "R", f: (x: number) => boolean): [number, number] {
+  const c = (R: number, step: number) => {
+    let n = 0;
+    for (let i = Math.ceil((u === "N" ? 1 : -R) / step); i * step <= R; i++) {
+      const x = Math.round(i * step * 1000) / 1000;
+      if (u !== "R" && !Number.isInteger(x)) continue;
+      if (f(x)) n++;
+    }
+    return n;
+  };
+  return [c(60, u === "R" ? 0.1 : 1), c(120, u === "R" ? 0.05 : 1)];
+}
+const clSingle = (t: number, a: number) => {
+  const [c1, c2] = gridCount(SINGLE[t][1], (x) => SINGLE[t][2](x, a));
+  return c2 > c1 ? 3 : c1 === 0 ? 0 : c1 === 1 ? 1 : 2;
+};
+/** Finite sets for pairs: [text, members]. */
+const LET = (w: string) => [...new Set(w.split(""))];
+const PSETS: [string, (number | string)[]][] = [
+  ["{x ∈ ℕ : x is a factor of 6}", [1, 2, 3, 6]],
+  ["{6, 3, 2, 1}", [6, 3, 2, 1]],
+  ["{x ∈ ℕ : x is a factor of 8}", [1, 2, 4, 8]],
+  ["{x ∈ ℕ : x is even and x ≤ 8}", [2, 4, 6, 8]],
+  ["{x ∈ ℕ : x is prime and x < 10}", [2, 3, 5, 7]],
+  ["{x ∈ ℕ : x < 5}", [1, 2, 3, 4]],
+  ["{x ∈ ℕ : x is odd and x < 10}", [1, 3, 5, 7, 9]],
+  ["{x ∈ ℕ : x² < 10}", [1, 2, 3]],
+  ["{x ∈ ℕ : 1 < x < 5}", [2, 3, 4]],
+  ["{x ∈ ℕ : x is a multiple of 3 and x < 10}", [3, 6, 9]],
+  ["{x ∈ ℕ : 2x − 1 < 10}", [1, 2, 3, 4, 5]],
+  ["{x ∈ ℕ : x is a factor of 12}", [1, 2, 3, 4, 6, 12]],
+  ["{x ∈ ℕ : x is a multiple of 6 and x ≤ 12}", [6, 12]],
+  ["{x ∈ ℕ : 5 < x < 8}", [6, 7]],
+  ["the set of letters of the word FOLLOW", LET("FOLLOW")],
+  ["the set of letters of the word WOLF", LET("WOLF")],
+  ["the set of letters of the word SALEM", LET("SALEM")],
+  ["the set of letters of the word MEALS", LET("MEALS")],
+  ["the set of letters of the word KERALA", LET("KERALA")],
+  ["the set of letters of the word DELHI", LET("DELHI")],
+  ["the set of letters of the word TAMIL", LET("TAMIL")],
+  ["the set of letters of the word MADURAI", LET("MADURAI")],
+  ["the set of vowels of the English alphabet", ["A", "E", "I", "O", "U"]],
+  ["the set of letters of the word RADAR", LET("RADAR")],
+  ["the set of letters of the word ERODE", LET("ERODE")],
+];
+/** The word behind a letter set, when it has a repeated letter (for the 'letters counted twice' slip). */
+const wordOf = (i: number) => {
+  const m = PSETS[i][0].match(/word ([A-Z]+)$/);
+  return m && new Set(m[1]).size !== m[1].length ? m[1] : null;
+};
+const CL1 = ["A = B", "A and B are equivalent but not equal, and they are disjoint", "A and B are equivalent but not equal, and they are not disjoint", "A and B are not equivalent"];
+const CL2 = ["A ⊂ B (A is a proper subset of B)", "B ⊂ A (B is a proper subset of A)", "A = B", "Neither set is a subset of the other"];
+function clPair(i: number, j: number, n1?: number, n2?: number) {
+  const A = PSETS[i][1].map(String);
+  const Bs = PSETS[j][1].map(String);
+  const nA = n1 ?? new Set(A).size;
+  const nB = n2 ?? new Set(Bs).size;
+  const inB = (x: string) => Bs.includes(x);
+  const inA = (x: string) => A.includes(x);
+  const AinB = A.every(inB);
+  const BinA = Bs.every(inA);
+  const equal = AinB && BinA;
+  const disjoint = !A.some(inB);
+  return { c1: equal ? 0 : nA === nB ? (disjoint ? 1 : 2) : 3, c2: equal ? 2 : AinB ? 0 : BinA ? 1 : 3 };
+}
+const D_CL: [number, number][] = [[0, 3], [0, 24], [0, 24]];
+const numSet = (i: number) => typeof PSETS[i][1][0] === "number";
+const clOk = (p: number[]) => {
+  if (!inDom(p, D_CL)) return false;
+  const [q, i, j] = p;
+  if (q === 0) return i < SINGLE.length && j >= 1 && j <= 9;
+  if (q === 3) return i >= 1 && j > i && j <= 9;
+  if (i === j) return false;
+  if (q === 1) return i < j && (clPair(i, j).c1 !== 3 || (i + j) % 3 === 0);
+  return numSet(i) === numSet(j) && (clPair(i, j).c2 !== 3 || (i + j) % 2 === 0);
+};
+const psOpts = (a: number, b: number) => {
+  const s = (xs: string[]) => `{${xs.join(", ")}}`;
+  return [s(["∅", `{${a}}`, `{${b}}`, `{${a}, ${b}}`]), s([`{${a}}`, `{${b}}`, `{${a}, ${b}}`]), s(["∅", `{${a}}`, `{${b}}`]), s(["∅", `${a}`, `${b}`, `{${a}, ${b}}`])];
+};
+function clChoices(p: number[]): string[] {
+  const [q, i, j] = p;
+  return shuf("aosetcl", p, q === 0 ? CL0 : q === 1 ? CL1 : q === 2 ? CL2 : psOpts(i, j));
+}
+function clRightLabel(p: number[]): string {
+  const [q, i, j] = p;
+  if (q === 0) return CL0[clSingle(i, j)];
+  if (q === 1) return CL1[clPair(i, j).c1];
+  if (q === 2) return CL2[clPair(i, j).c2];
+  return psOpts(i, j)[0];
+}
+function clPrompt(p: number[]): string {
+  const [q, i, j] = p;
+  if (q === 0) return `Classify the set ${SINGLE[i][0](j)}. Which statement is true?`;
+  if (q === 3) return `A = {${i}, ${j}}. Which of these is the power set P(A)?`;
+  const d = (k: number) => (PSETS[k][0].startsWith("{") ? PSETS[k][0] : PSETS[k][0]);
+  return `A is ${d(i)} and B is ${d(j)}. Which statement is true?`;
+}
+
+// ---------------------------------------------------------------- associative property
+/** Three small sets from a seed: each a subset of {1, …, 10} with 3 to 5 elements. */
+function law3(seed: number): number[][] {
+  let s = (fnv(`law3:${seed}`) % 2147483646) + 1;
+  const rnd = () => (s = (s * 48271) % 2147483647);
+  return [0, 1, 2].map((i) => {
+    const size = 3 + (rnd() % 3);
+    const pick = new Set<number>();
+    while (pick.size < size) pick.add(1 + (rnd() % 10));
+    return [...pick].sort((x, y) => x - y);
+  });
+}
+const LAWQ = ["A ∪ (B ∪ C)", "(A ∪ B) ∪ C", "A ∩ (B ∩ C)", "(A ∩ B) ∩ C"];
+const uni = (a: number[], b: number[]) => [...new Set([...a, ...b])].sort((x, y) => x - y);
+const cap2 = (a: number[], b: number[]) => a.filter((x) => b.includes(x));
+function lawAns(seed: number, q: number) {
+  const [A, Bs, C] = law3(seed);
+  return q === 0 ? uni(A, uni(Bs, C)) : q === 1 ? uni(uni(A, Bs), C) : q === 2 ? cap2(A, cap2(Bs, C)) : cap2(cap2(A, Bs), C);
+}
+const D_LAW3: [number, number][] = [[0, 199], [0, 3]];
+const law3Ok = (p: number[]) => {
+  if (!inDom(p, D_LAW3)) return false;
+  const [A, Bs, C] = law3(p[0]);
+  const ans = lawAns(p[0], p[1]);
+  if (!ans.length) return false;
+  if (p[1] >= 2) return cap2(A, Bs).length > ans.length || cap2(Bs, C).length > ans.length;
+  return ans.length <= 10 && uni(A, Bs).length < ans.length;
+};
+
+// ---------------------------------------------------------------- three-set counting in context
+/** Regions: only A, only B, only C, A∩B only, B∩C only, C∩A only, all three, none; and the question q. */
+const D_V3: [number, number][] = [[1, 9], [1, 9], [1, 9], [0, 5], [0, 5], [0, 5], [1, 4], [0, 9], [0, 3]];
+const v3Ok = (p: number[]) => inDom(p, D_V3) && (p[8] === 2 ? p[7] >= 1 : p[7] === 0);
+function v3Given([x1, x2, x3, y1, y2, y3, z, w]: number[]) {
+  const nA = x1 + y1 + y3 + z;
+  const nB = x2 + y1 + y2 + z;
+  const nC = x3 + y2 + y3 + z;
+  const nAB = y1 + z;
+  const nBC = y2 + z;
+  const nCA = y3 + z;
+  return { nA, nB, nC, nAB, nBC, nCA, z, N: nA + nB + nC - nAB - nBC - nCA + z + w };
+}
+const V3Q = ["at least one of the three", "exactly one of the three", "none of the three", "only the first"];
+function v3Text(p: number[], ctx: number) {
+  const g = v3Given(p);
+  const C = ctx === 0
+    ? { who: "students of a class in a Coimbatore school", s: ["cricket", "football", "kabaddi"], verb: "play", q: ["play at least one of the three games", "play exactly one of the three games", "play none of the three games", "play only cricket"] }
+    : { who: "families in a housing colony in Tiruchirappalli", s: ["a Tamil newspaper", "an English newspaper", "a Hindi newspaper"], verb: "read", q: ["read at least one of the three newspapers", "read exactly one of the three newspapers", "read none of the three newspapers", "read only the Tamil newspaper"] };
+  const [a, b, c] = C.s;
+  const V = (n: number) => `${n} ${n === 1 ? `${C.verb}s` : C.verb}`;
+  const lead = p[8] === 2 ? `A survey of ${g.N} ${C.who} found that` : `In a survey of ${C.who},`;
+  return `${lead} ${V(g.nA)} ${a}, ${V(g.nB)} ${b} and ${V(g.nC)} ${c}; ${V(g.nAB)} both ${a} and ${b}, ${V(g.nBC)} both ${b} and ${c}, ${V(g.nCA)} both ${c} and ${a}, and ${V(g.z)} all three. How many ${ctx === 0 ? "students" : "families"} ${C.q[p[8]]}?`;
+}
+function v3Ans(p: number[]) {
+  const g = v3Given(p);
+  const U = g.nA + g.nB + g.nC - g.nAB - g.nBC - g.nCA + g.z;
+  const onlyA = g.nA - g.nAB - g.nCA + g.z;
+  const onlyB = g.nB - g.nAB - g.nBC + g.z;
+  const onlyC = g.nC - g.nBC - g.nCA + g.z;
+  return [U, onlyA + onlyB + onlyC, g.N - U, onlyA][p[8]];
+}
+
+// ---------------------------------------------------------------- sample spaces
+type Exp = { text: string; S: string[]; events: [string, (o: string) => boolean][] };
+function experiment(e: number, k: number): Exp {
+  const coins = (n: number) => {
+    let out = [""];
+    for (let i = 0; i < n; i++) out = out.flatMap((s) => [`${s}H`, `${s}T`]);
+    return out;
+  };
+  const cnt = (o: string, ch: string) => o.split("").filter((c) => c === ch).length;
+  if (e === 0 || e === 1) {
+    const n = e + 2;
+    return {
+      text: `${n === 2 ? "Two" : "Three"} coins are tossed together (H for head, T for tail, the coins listed in order: first, second${n === 3 ? ", third" : ""})`,
+      S: coins(n),
+      events: [["at least one head", (o) => cnt(o, "H") >= 1], ["exactly one head", (o) => cnt(o, "H") === 1], ["at most one head", (o) => cnt(o, "H") <= 1], ["no tail", (o) => cnt(o, "T") === 0], ["the first coin shows a head", (o) => o[0] === "H"], ["exactly two heads", (o) => cnt(o, "H") === 2], ["all the coins show the same face", (o) => new Set(o).size === 1]],
+    };
+  }
+  if (e === 2) {
+    const S = ["H", "T"].flatMap((c) => Array.from({ length: k }, (_, i) => `${c}${i + 1}`));
+    return { text: `A coin is tossed and then a spinner with ${k} equal parts numbered 1 to ${k} is spun (an outcome such as H2 means a head and then 2)`, S, events: [["a head and an even number", (o) => o[0] === "H" && Number(o.slice(1)) % 2 === 0], ["a tail and a number greater than 2", (o) => o[0] === "T" && Number(o.slice(1)) > 2], ["an odd number", (o) => Number(o.slice(1)) % 2 === 1], [`a head and a number at least ${k - 1}`, (o) => o[0] === "H" && Number(o.slice(1)) >= k - 1]] };
+  }
+  if (e === 3 || e === 4) {
+    const n = e - 1;
+    let S = [""];
+    for (let i = 0; i < n; i++) S = S.flatMap((s) => [`${s}B`, `${s}G`]);
+    return { text: `A family has ${n === 2 ? "two" : "three"} children; each child is a boy (B) or a girl (G), listed from the eldest`, S, events: [["at least one girl", (o) => o.includes("G")], ["all the children are of the same gender", (o) => new Set(o).size === 1], ["the eldest child is a boy", (o) => o[0] === "B"], ["exactly one boy", (o) => cnt(o, "B") === 1]] };
+  }
+  if (e === 5 || e === 7) {
+    if (e === 7) k = 6;
+    const S = Array.from({ length: k }, (_, i) => Array.from({ length: k }, (_, j) => `${i + 1}${j + 1}`)).flat();
+    const evs: [string, (o: string) => boolean][] = [["both spins give the same number", (o) => o[0] === o[1]], ["the first number is greater than the second", (o) => o[0] > o[1]]];
+    for (let s = e === 7 ? 2 : 3; s <= (e === 7 ? 12 : k + 2); s++) evs.push([`the sum of the two numbers is ${s}`, (o) => Number(o[0]) + Number(o[1]) === s]);
+    if (e === 7) evs.push(["the first die shows 6", (o) => o[0] === "6"]);
+    if (e === 7) return { text: "Two dice are thrown, one red and one blue (an outcome such as 25 means 2 on the red die and 5 on the blue die)", S, events: evs };
+    return { text: `A spinner with ${k} equal parts numbered 1 to ${k} is spun twice (an outcome such as 13 means 1 on the first spin and 3 on the second)`, S, events: evs };
+  }
+  const cols = ["R", "G", "B", "Y"].slice(0, k);
+  const S = cols.flatMap((a) => cols.filter((b) => b !== a).map((b) => `${a}${b}`));
+  return { text: `A bag has ${k} balls of different colours (${cols.join(", ")}: ${["red", "green", "blue", "yellow"].slice(0, k).join(", ")}). Two balls are drawn one after the other without putting the first back (an outcome such as RG means red first, then green)`, S, events: [["the first ball is red", (o) => o[0] === "R"], ["the red ball is not drawn", (o) => !o.includes("R")], ["one of the balls is green", (o) => o.includes("G")]] };
+}
+const D_SAMP: [number, number][] = [[0, 7], [3, 6], [0, 14]];
+const sampOk = (p: number[]) => {
+  if (!inDom(p, D_SAMP)) return false;
+  const [e, k, ev] = p;
+  if (e <= 1 || e === 3 || e === 4) { if (k !== 3) return false; }
+  else if (e === 5) { if (k > 5) return false; }
+  else if (e === 7) { if (k !== 6) return false; }
+  else if (e === 6) { if (k > 4) return false; }
+  const X = experiment(e, k);
+  if (ev > X.events.length) return false;
+  if (ev === 0) return X.S.length <= 12;
+  const E = X.S.filter(X.events[ev - 1][1]);
+  return E.length >= 1 && E.length < X.S.length && sampOpts(p).length === 4;
+};
+/** The options: the right set first, then wrong sets (complement, one outcome dropped, one outcome added, order ignored). */
+function sampSets(p: number[]): { set: string[]; why: string }[] {
+  const [e, k, ev] = p;
+  const X = experiment(e, k);
+  const out: { set: string[]; why: string }[] = [];
+  if (ev === 0) {
+    out.push({ set: X.S, why: "right" });
+    const unordered = [...new Set(X.S.map((o) => o.split("").sort().join("")))];
+    if (unordered.length !== X.S.length) out.push({ set: unordered, why: "order" });
+    out.push({ set: X.S.slice(0, -1), why: "drop" });
+    if (e === 6) out.push({ set: [...X.S, `${X.S[0][0]}${X.S[0][0]}`], why: "replace" });
+    else out.push({ set: X.S.filter((_, i) => i % 2 === 0), why: "half" });
+    if (out.length < 4) out.push({ set: X.S.slice(1), why: "drop" });
+    return out;
+  }
+  const E = X.S.filter(X.events[ev - 1][1]);
+  out.push({ set: E, why: "right" });
+  const comp = X.S.filter((o) => !E.includes(o));
+  out.push({ set: comp, why: "complement" });
+  if (E.length >= 2) out.push({ set: E.slice(0, -1), why: "drop" });
+  const extra = comp.find((o) => !E.includes(o));
+  if (extra) out.push({ set: [...E, extra].sort((a, b) => X.S.indexOf(a) - X.S.indexOf(b)), why: "extra" });
+  if (out.length < 4 && comp.length >= 2) out.push({ set: comp.slice(1), why: "drop-comp" });
+  return out;
+}
+function sampOpts(p: number[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const s of sampSets(p)) {
+    const t = braces(s.set);
+    if (s.set.length && !seen.has(t)) {
+      seen.add(t);
+      out.push(t);
+    }
+  }
+  return out.slice(0, 4);
+}
+
+// ---------------------------------------------------------------- is a relation a function?
+const FNQ = ["Yes, R is a function from A to B", "No: an element of A has two or more images in B", "No: an element of A has no image in B", "No: two elements of A have the same image"];
+/** A small random-looking generator from a seed (Lehmer). */
+const lehmer = (tag: string) => {
+  let s = (fnv(tag) % 2147483646) + 1;
+  return (lo: number, hi: number) => {
+    s = (s * 48271) % 2147483647;
+    return lo + (s % (hi - lo + 1));
+  };
+};
+const FNRULES: { text: string; A: number[]; B: number[]; rel: (x: number, y: number) => boolean }[] = [
+  { text: "y = x²", A: [-2, -1, 0, 1, 2], B: [0, 1, 2, 3, 4], rel: (x, y) => y === x * x },
+  { text: "y² = x", A: [0, 1, 4, 9], B: [-3, -2, -1, 0, 1, 2, 3], rel: (x, y) => y * y === x },
+  { text: "y = x + 1", A: [1, 2, 3, 4, 5], B: [1, 2, 3, 4, 5], rel: (x, y) => y === x + 1 },
+  { text: "y = 2x", A: [1, 2, 3], B: [2, 4, 6, 8], rel: (x, y) => y === 2 * x },
+  { text: "x + y = 5", A: [1, 2, 3, 4], B: [1, 2, 3, 4], rel: (x, y) => x + y === 5 },
+  { text: "y = |x|", A: [-2, -1, 0, 1, 2], B: [0, 1, 2], rel: (x, y) => y === Math.abs(x) },
+  { text: "|y| = x", A: [0, 1, 2], B: [-2, -1, 0, 1, 2], rel: (x, y) => Math.abs(y) === x },
+  { text: "y = x − 3", A: [1, 2, 3, 4], B: [0, 1, 2, 3], rel: (x, y) => y === x - 3 },
+  { text: "y < x", A: [1, 2, 3], B: [0, 1, 2], rel: (x, y) => y < x },
+  { text: "y = x² − 1", A: [-1, 0, 1, 2], B: [-1, 0, 3], rel: (x, y) => y === x * x - 1 },
+];
+/** [form, c, seed]: the sets and the pairs of R. */
+function fnRel([f, c, seed]: number[]): { A: number[]; B: number[]; R: [number, number][] } {
+  if (f === 3) {
+    const r = FNRULES[seed];
+    return { A: r.A, B: r.B, R: r.A.flatMap((x) => r.B.filter((y) => r.rel(x, y)).map((y) => [x, y] as [number, number])) };
+  }
+  const rnd = lehmer(`aoisfn:${f}:${c}:${seed}`);
+  const n = rnd(3, 5);
+  const a0 = rnd(-2, 3);
+  const A = Array.from({ length: n }, (_, i) => a0 + i);
+  const m = rnd(3, 5);
+  const b0 = rnd(-1, 4);
+  const Bs = Array.from({ length: m }, (_, i) => b0 + 2 * i);
+  let R: [number, number][] = A.map((x) => [x, Bs[rnd(0, m - 1)]]);
+  if (c === 1) {
+    const i = rnd(0, n - 1);
+    const other = Bs.filter((y) => y !== R[i][1])[rnd(0, m - 2)];
+    R.splice(i + 1, 0, [A[i], other]);
+  }
+  if (c === 2) R = R.filter((_, i) => i !== (seed % n));
+  return { A, B: Bs, R };
+}
+function fnCat(p: number[]) {
+  const { A, B: Bs, R } = fnRel(p);
+  const imgs = A.map((x) => R.filter(([a, b]) => a === x && Bs.includes(b)).length);
+  return imgs.some((k) => k >= 2) ? 1 : imgs.some((k) => k === 0) ? 2 : 0;
+}
+const D_ISF: [number, number][] = [[0, 3], [0, 2], [0, 19]];
+const isfOk = (p: number[]) => inDom(p, D_ISF) && (p[0] === 3 ? p[1] === 0 && p[2] < FNRULES.length : fnCat(p) === p[1]);
+const isfChoices = (p: number[]) => shuf("aoisfn", p, FNQ);
+const pairsS = (R: [number, number][]) => `{${R.map(([a, b]) => `(${n_(a)}, ${n_(b)})`).join(", ")}}`;
+function isfPrompt(p: number[]) {
+  const { A, B: Bs, R } = fnRel(p);
+  const sets = `A = ${braces(A)} and B = ${braces(Bs)}`;
+  if (p[0] === 0) return `${sets}. The relation R = ${pairsS(R)} goes from A to B. Is R a function from A to B?`;
+  if (p[0] === 1) return `${sets}. The table in the picture lists the pairs (x, y) of a relation R from A to B. Is R a function from A to B?`;
+  if (p[0] === 2) return `${sets}. The picture shows the pairs (x, y) of a relation R from A to B as points; use the vertical line test. Is R a function from A to B?`;
+  return `${sets}. R = {(x, y) : x ∈ A, y ∈ B and ${FNRULES[p[2]].text}}. Is R a function from A to B?`;
+}
+
+// ---------------------------------------------------------------- naming functions (TN): one-one / many-one, onto / into, identity, constant
+const FN0 = ["f is one-one and onto (a bijection)", "f is one-one and into", "f is many-one and onto", "f is many-one and into"];
+const FN1 = ["f is the identity function on A", "f is a constant function", "f is one-one but not the identity function", "f is neither constant nor one-one"];
+function fnameMap([q, c, seed]: number[]): { A: number[]; B: number[]; f: number[] } {
+  const rnd = lehmer(`aofname:${q}:${c}:${seed}`);
+  if (q === 1) {
+    const n = rnd(3, 5);
+    const a0 = rnd(1, 6);
+    const A = Array.from({ length: n }, (_, i) => a0 + i);
+    let f: number[];
+    if (c === 0) f = [...A];
+    else if (c === 1) {
+      const k = A[rnd(0, n - 1)];
+      f = A.map(() => k);
+    } else if (c === 2) {
+      const sh = rnd(1, n - 1);
+      f = A.map((_, i) => A[(i + sh) % n]);
+    } else {
+      f = A.map(() => A[rnd(0, n - 1)]);
+      f[0] = A[1];
+      f[1] = A[1];
+      if (new Set(f).size === 1) f[n - 1] = A[0];
+    }
+    return { A, B: A, f };
+  }
+  const oo = c === 0 || c === 1;
+  const onto = c === 0 || c === 2;
+  const n = oo ? rnd(3, 4) : rnd(3, 5);
+  const m = oo ? (onto ? n : n + rnd(1, 2)) : onto ? n - 1 : rnd(2, n);
+  const a0 = rnd(1, 5);
+  const A = Array.from({ length: n }, (_, i) => a0 + i);
+  const b0 = rnd(-2, 8);
+  const Bs = Array.from({ length: m }, (_, i) => b0 + 3 * i);
+  let f: number[];
+  if (oo) {
+    const order = [...Bs].sort((x, y) => fnv(`o:${seed}:${x}`) - fnv(`o:${seed}:${y}`));
+    f = A.map((_, i) => order[i]);
+  } else if (onto) {
+    f = A.map((_, i) => Bs[i % m]);
+  } else {
+    const used = Bs.slice(0, Math.max(1, m - 1));
+    f = A.map((_, i) => used[(i * 7 + seed) % used.length]);
+    if (new Set(f).size === f.length) f[1] = f[0];
+  }
+  return { A, B: Bs, f };
+}
+function fnameCat(p: number[]) {
+  const { A, B: Bs, f } = fnameMap(p);
+  const oo = new Set(f).size === A.length;
+  const onto = Bs.every((b) => f.includes(b));
+  if (p[0] === 0) return (oo ? 0 : 2) + (onto ? 0 : 1);
+  const id = A.every((a, i) => f[i] === a);
+  const cons = new Set(f).size === 1;
+  return id ? 0 : cons ? 1 : oo ? 2 : 3;
+}
+const D_FNAME: [number, number][] = [[0, 1], [0, 3], [0, 24]];
+const fnameOk = (p: number[]) => inDom(p, D_FNAME) && fnameCat(p) === p[1] && !(p[0] === 1 && (p[1] === 0 || p[1] === 1) && p[2] > 12);
+const fnameChoices = (p: number[]) => shuf("aofname", p, p[0] === 0 ? FN0 : FN1);
+
+// ---------------------------------------------------------------- recognising standard graphs
+const STDF: { label: (k: number) => string; f: (x: number) => number; dom: (x: number) => boolean; jump?: boolean }[] = [
+  { label: (k) => `y = x${kS(k)}`, f: (x) => x, dom: () => true },
+  { label: (k) => `y = x²${kS(k)}`, f: (x) => x * x, dom: () => true },
+  { label: (k) => `y = x³${kS(k)}`, f: (x) => x ** 3, dom: () => true },
+  { label: (k) => `y = |x|${kS(k)}`, f: (x) => Math.abs(x), dom: () => true },
+  { label: (k) => `y = 1/x${kS(k)}`, f: (x) => 1 / x, dom: (x) => x !== 0 },
+  { label: (k) => `y = sgn x${kS(k)} (signum)`, f: (x) => Math.sign(x), dom: () => true, jump: true },
+  { label: (k) => `y = [x]${kS(k)} (greatest integer)`, f: (x) => Math.floor(x), dom: () => true, jump: true },
+  { label: (k) => `y = 2ˣ${kS(k)}`, f: (x) => 2 ** x, dom: () => true },
+  { label: (k) => `y = log₂ x${kS(k)}`, f: (x) => Math.log2(x), dom: (x) => x > 0 },
+  { label: (k) => `y = −x${kS(k)}`, f: (x) => -x, dom: () => true },
+  { label: (k) => `y = √x${kS(k)}`, f: (x) => Math.sqrt(x), dom: (x) => x >= 0 },
+  { label: (k) => `y = −x²${kS(k)}`, f: (x) => -x * x, dom: () => true },
+];
+function kS(k: number) {
+  return k === 0 ? "" : k > 0 ? ` + ${k}` : ` − ${-k}`;
+}
+/** The functions a learner most often confuses with each one. */
+const CONF = [[9, 2, 3], [3, 11, 10], [0, 1, 7], [1, 0, 9], [8, 9, 2], [6, 0, 9], [5, 0, 10], [8, 1, 10], [7, 10, 4], [0, 11, 3], [8, 1, 3], [1, 9, 3]];
+const D_GR: [number, number][] = [[0, 11], [0, 2], [-1, 1]];
+const grOk = (p: number[]) => inDom(p, D_GR) && !(STDF[p[0]].jump && p[2] !== 0);
+function grOptions([f, d, k]: number[]): number[] {
+  const conf = CONF[f];
+  const rest = STDF.map((_, i) => i).filter((i) => i !== f && !conf.includes(i)).sort((x, y) => fnv(`gr:${f}:${d}:${x}`) - fnv(`gr:${f}:${d}:${y}`));
+  const picks = d === 0 ? conf : d === 1 ? [conf[0], conf[1], rest[0]] : [conf[0], rest[0], rest[1]];
+  return [f, ...picks].sort((x, y) => fnv(`grs:${f}:${d}:${k}:${x}`) - fnv(`grs:${f}:${d}:${k}:${y}`));
+}
+/** The picture: the graph as short segments (clipped to the window), and dots at the jumps. */
+function grFigure([f, , k]: number[]) {
+  const F = STDF[f];
+  const R = 5;
+  const segs: [[number, number], [number, number]][] = [];
+  const pts: [number, number][] = [];
+  if (f === 6) {
+    for (let n = -R; n < R; n++) if (Math.abs(n) <= R) {
+      segs.push([[n, n], [n + 0.92, n]]);
+      pts.push([n, n]);
+    }
+  } else if (f === 5) {
+    segs.push([[-R, -1 + k], [-0.15, -1 + k]], [[0.15, 1 + k], [R, 1 + k]]);
+    pts.push([0, k]);
+  } else {
+    const h = 0.125;
+    for (let x = -R; x < R - 1e-9; x += h) {
+      const a = x;
+      const b = x + h;
+      if (!F.dom(a) || !F.dom(b) || (f === 4 && a < 0 && b > 0)) continue;
+      const ya = F.f(a) + k;
+      const yb = F.f(b) + k;
+      if (Math.abs(ya) > R || Math.abs(yb) > R || !Number.isFinite(ya) || !Number.isFinite(yb)) continue;
+      segs.push([[a, Math.round(ya * 1000) / 1000], [b, Math.round(yb * 1000) / 1000]]);
+    }
+  }
+  return { type: "plane" as const, points: pts, segments: segs, range: R };
+}
+/** Evaluate an option by its own rule written out again (not the table used to draw): for the independent check. */
+const GR_EVAL: ((x: number) => number)[] = [(x) => x, (x) => x ** 2, (x) => x * x * x, (x) => (x < 0 ? -x : x), (x) => x ** -1, (x) => (x > 0 ? 1 : x < 0 ? -1 : 0), (x) => x - (((x % 1) + 1) % 1), (x) => Math.exp(x * Math.LN2), (x) => Math.log(x) / Math.LN2, (x) => 0 - x, (x) => x ** 0.5, (x) => -(x ** 2)];
+
+export const NEW15: Def[] = [
+  // ============================================================ roster, set-builder and descriptive forms
+  {
+    id: "aosetform",
+    arity: 4,
+    title: "Converting between roster, set-builder and descriptive forms",
+    competency: SETS,
+    type: "choice",
+    parse: none,
+    // [t, k, m, dir]: a rule (SR); dir 0 roster → set-builder, 1 set-builder → roster, 2 description → roster
+    reject: (p) => (sfOk(p) ? null : "Multiples, squares, consecutive numbers, factors or primes, with four different options."),
+    prompt: (p) => {
+      const s = sfOf(p);
+      return p[3] === 0 ? `Which set-builder form describes the set ${braces(srList(s))}?` : p[3] === 1 ? `Write the set ${srText(s)} in roster form. Which is it?` : `Which is ${srDesc(s)}, written in roster form?`;
+    },
+    choices: sfOptions,
+    solve: (p) => {
+      const s = sfOf(p);
+      return {
+        steps: [
+          { id: "list", op: "list", competency: SETS, inputs: [srText(s)], value: braces(srList(s)) },
+          { id: "match", op: "compare", competency: SETS, inputs: [sfRight(p)], value: sfOptions(p).indexOf(sfRight(p)) },
+        ],
+        answer: sfOptions(p).indexOf(sfRight(p)),
+      };
+    },
+    // independent: read every option's condition (or list) and test the numbers 0 to 200 against it
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const s = sfOf(p);
+      const target = srTest(s);
+      const opt = sfOptions(p)[v];
+      if (opt === undefined) return false;
+      const cands = [s, ...srWrong(s)];
+      const hit = cands.filter((c) => (p[3] === 0 ? srText(c) : braces(srTest(c))) === opt);
+      return hit.length === 1 && sameList(srTest(hit[0]), target) && cands.filter((c) => sameList(srTest(c), target)).length === 1;
+    },
+    bugs: (p) => {
+      const s = sfOf(p);
+      const [w1, w2, w3] = srWrong(s);
+      const at = (w: SR) => sfOptions(p).indexOf(p[3] === 0 ? srText(w) : braces(srList(w)));
+      const out: Bug[] = [];
+      if (s.t <= 2) {
+        out.push({ id: "strict-end", kind: "procedural", competency: SETS, says: p[3] === 0 ? `The condition "n < ${s.m}" was taken to include n = ${s.m}; it stops at n = ${s.m - 1}, so it misses the last element.` : `"n ≤ ${s.m}" was read as "n < ${s.m}"; the value n = ${s.m} is included, so the last element ${srList(s)[s.m - 1]} belongs to the set.`, predict: at(w1) });
+        out.push({ id: "count-off", kind: "procedural", competency: SETS, says: `The elements were counted wrongly: the rule gives exactly ${s.m} elements, one for each n from 1 to ${s.m}.`, predict: at(w3) });
+        if (s.t === 1) out.push({ id: "square-as-double", kind: "prerequisite", competency: EXPN, says: "n² was worked out as 2 × n; n² means n × n.", predict: at(w2) });
+        else out.push({ id: "first-element", kind: "procedural", competency: SETS, says: `The first element was not checked: put n = 1 into the rule; it must give ${srList(s)[0]}.`, predict: at(w2) });
+      } else if (s.t === 3) {
+        out.push({ id: "number-left-out", kind: "conceptual", competency: SETS, says: `${FN[s.k]} itself was left out; every number is a factor of itself.`, predict: at(w1) });
+        out.push({ id: "one-left-out", kind: "conceptual", competency: SETS, says: "1 was left out; 1 is a factor of every natural number.", predict: at(w2) });
+        out.push({ id: "prime-factors", kind: "conceptual", competency: SETS, says: "Only the prime factors were listed; the factors include 1, the number itself and every composite factor.", predict: at(w3) });
+      } else {
+        out.push({ id: "two-not-prime", kind: "conceptual", competency: SETS, says: "2 was left out; 2 is a prime number (the only even prime).", predict: at(w1) });
+        out.push({ id: "odd-as-prime", kind: "conceptual", competency: SETS, says: "Odd numbers were taken as primes; 9, 15, 21, … are odd but not prime.", predict: at(w2) });
+      }
+      return out.filter((b) => b.predict !== -1);
+    },
+    variants: ([t, k, m, d]) => [[t, k, m, (d + 1) % 3]].filter(sfOk),
+    explain: (s) => (s.id === "list" ? `${s.inputs[0]} = ${s.value}` : `So the answer is ${s.inputs[0]}`),
+    domain: D_SF,
+    keep: sfOk,
+    difficulty: ([t, , , d]) => (d === 2 ? 1 : t <= 2 ? 2 : 3),
+    word: (p) => {
+      const s = sfOf(p);
+      const ask = p[3] === 0 ? "Which set-builder form describes the tokens she gets?" : "Which list (roster form) shows the tokens she gets?";
+      const what = p[3] === 0 ? `she gets the tokens ${braces(srList(s))}` : p[3] === 1 ? `the tokens are the set ${srText(s)}` : `the tokens are ${srDesc(s)}`;
+      return `At a school fair, ${nm(s.k + s.m + s.t)} wins numbered tokens for a lucky draw: ${what}. ${ask}`;
+    },
+    teach: {
+      idea: "One set can be written three ways: roster form lists the elements in braces, set-builder form gives the rule {x : condition}, and descriptive form says it in words. All three must give exactly the same elements.",
+      method: "To check a set-builder form, put n = 1, 2, 3, … (or test numbers) into the rule and list what it gives; compare with the roster, including the first and the last element.",
+      alternatives: [
+        { id: "table", title: "Make a table of n and x", kind: "procedural", text: ["Write n = 1, 2, 3, … in one row and the value the rule gives in the row below.", "Stop at the last n the condition allows; the second row is the roster form."] },
+        { id: "test-ends", title: "Test the ends", kind: "conceptual", text: ["Most mistakes are at the ends: is the first element right, and is the last one included or not?", "Check ≤ against < carefully."] },
+      ],
+    },
+    limits: "Sets of 2 to 12 natural numbers given by simple rules; writing a set-builder form freely is marked by an educator.",
+  },
+  // ============================================================ classifying sets, subsets and power sets
+  {
+    id: "aosetcl",
+    arity: 3,
+    title: "Empty, singleton, finite, infinite, equal, equivalent and disjoint sets, subsets and power sets",
+    competency: SETS,
+    type: "choice",
+    parse: none,
+    // [q, i, j]: q 0 classify SINGLE[i] with a = j; q 1 equal / equivalent / disjoint for PSETS i, j; q 2 subset relation; q 3 the power set of {i, j}
+    reject: (p) => (clOk(p) ? null : "A set in set-builder form, a pair of finite sets, or a two-element set."),
+    prompt: clPrompt,
+    choices: clChoices,
+    solve: (p) => {
+      const lab = clRightLabel(p);
+      return { steps: [{ id: "decide", op: "classify", competency: SETS, inputs: [p[0]], value: lab }, { id: "pick", op: "compare", competency: SETS, inputs: [lab], value: clChoices(p).indexOf(lab) }], answer: clChoices(p).indexOf(lab) };
+    },
+    // independent: list the elements by brute force (a grid of the universe; two windows decide infinite), or build the
+    // power set from bit patterns
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [q, i, j] = p;
+      const opt = clChoices(p)[v];
+      if (q === 0) {
+        const [c1, c2] = gridCount(SINGLE[i][1], (x) => SINGLE[i][2](x, j));
+        return opt === CL0[c2 > c1 ? 3 : Math.min(c1, 2)];
+      }
+      if (q === 3) {
+        const els = [i, j];
+        const subs = [0, 1, 2, 3].map((m) => els.filter((_, b) => (m >> b) & 1));
+        const want = `{${subs.map((s) => (s.length ? `{${s.join(", ")}}` : "∅")).join(", ")}}`;
+        return opt === want;
+      }
+      const A = new Set(PSETS[i][1].map(String));
+      const Bs = new Set(PSETS[j][1].map(String));
+      const sub = (X: Set<string>, Y: Set<string>) => [...X].every((x) => Y.has(x));
+      if (q === 1) {
+        const eq = sub(A, Bs) && sub(Bs, A);
+        const dis = ![...A].some((x) => Bs.has(x));
+        return opt === CL1[eq ? 0 : A.size === Bs.size ? (dis ? 1 : 2) : 3];
+      }
+      return opt === CL2[sub(A, Bs) && sub(Bs, A) ? 2 : sub(A, Bs) ? 0 : sub(Bs, A) ? 1 : 3];
+    },
+    bugs: (p) => {
+      const [q, i, j] = p;
+      const ch = clChoices(p);
+      const at = (s: string) => ch.indexOf(s);
+      const out: Bug[] = [];
+      if (q === 0) {
+        const c = clSingle(i, j);
+        const u = SINGLE[i][1];
+        if (i === 0 || i === 9) out.push({ id: "universe-ignored", kind: "conceptual", competency: SETS, says: i === 0 ? `x = −${j} was counted as an element, but x must be a natural number, and −${j} is not one.` : `The universe was ignored: there is no natural number strictly between ${j} and ${j + 1}.`, predict: at(CL0[i === 0 ? 1 : 3]) });
+        if (i === 3) out.push({ id: "negative-root-missed", kind: "conceptual", competency: SETS, says: `Only x = ${j} was found; x = −${j} is an integer too and (−${j})² = ${j * j}.`, predict: at(CL0[1]) });
+        if (i === 8) out.push({ id: "reals-as-integers", kind: "conceptual", competency: SETS, says: `There is no whole number between ${j} and ${j + 1}, so the set was called empty; x is a real number, and there are infinitely many real numbers between ${j} and ${j + 1}.`, predict: at(CL0[0]) });
+        if (i === 4) out.push({ id: "zero-as-element", kind: "conceptual", competency: SETS, says: `The set {0} was taken; x² + ${j * j} is at least ${j * j} for every real x, so no real number satisfies it.`, predict: at(CL0[1]) });
+        if (c === 0 && i !== 4) out.push({ id: "empty-as-singleton", kind: "conceptual", competency: SETS, says: "The empty set was taken to have one element; ∅ has no elements at all (it is not {0}).", predict: at(CL0[1]) });
+        if (u !== "R" && c === 3) out.push({ id: "large-as-finite", kind: "conceptual", competency: SETS, says: "The set was called finite because its numbers start from a fixed number; it has no last element, so it is infinite.", predict: at(CL0[2]) });
+        return out.filter((b) => b.predict !== clChoices(p).indexOf(clRightLabel(p)));
+      }
+      if (q === 3) {
+        const o = psOpts(i, j);
+        return [
+          { id: "empty-left-out", kind: "conceptual", competency: SETS, says: "∅ was left out; the empty set is a subset of every set, so it is in P(A).", predict: at(o[1]) },
+          { id: "whole-left-out", kind: "conceptual", competency: SETS, says: `A itself was left out; every set is a subset of itself, so {${i}, ${j}} is in P(A).`, predict: at(o[2]) },
+          { id: "elements-not-sets", kind: "conceptual", competency: SETS, says: `The elements ${i} and ${j} were written instead of the subsets {${i}} and {${j}}; the elements of P(A) are sets.`, predict: at(o[3]) },
+        ];
+      }
+      const r = clPair(i, j);
+      const wi = wordOf(i);
+      const wj = wordOf(j);
+      if (wi || wj) {
+        const n1 = wi ? wi.length : undefined;
+        const n2 = wj ? wj.length : undefined;
+        const wrong = clPair(i, j, n1, n2);
+        const pr = q === 1 ? CL1[wrong.c1] : CL2[wrong.c2];
+        if (q === 1 && pr !== CL1[r.c1]) out.push({ id: "repeated-letters", kind: "conceptual", competency: SETS, says: `The repeated letters of ${wi ?? wj} were counted more than once; in a set each element is listed only once.`, predict: at(pr) });
+      }
+      if (q === 1) {
+        if (r.c1 === 0) out.push({ id: "equal-as-equivalent", kind: "conceptual", competency: SETS, says: "The sets were taken as different because they are written differently; they have exactly the same elements, so they are equal.", predict: at(CL1[2]) });
+        if (r.c1 === 1 || r.c1 === 2) out.push({ id: "equivalent-as-equal", kind: "conceptual", competency: SETS, says: "Sets with the same number of elements were taken as equal; equal sets must have the same elements, while equivalent sets only need n(A) = n(B).", predict: at(CL1[0]) });
+        if (r.c1 === 1) out.push({ id: "disjoint-not-equivalent", kind: "conceptual", competency: SETS, says: "Disjoint sets were taken as never equivalent; sets with no common element can still have the same number of elements.", predict: at(CL1[3]) });
+        if (r.c1 === 3) out.push({ id: "equivalent-guess", kind: "procedural", competency: SETS, says: "The elements were not counted carefully; list both sets in roster form and count.", predict: at(CL1[2]) });
+      } else {
+        if (r.c2 === 0 || r.c2 === 1) out.push({ id: "direction", kind: "conceptual", competency: SETS, says: "The subset sign was read the wrong way round: A ⊂ B means every element of A is in B.", predict: at(CL2[1 - r.c2]) });
+        if (r.c2 === 2) out.push({ id: "equal-as-proper", kind: "conceptual", competency: SETS, says: "Equal sets were called a proper subset; A is a proper subset of B only when B has an element that A does not.", predict: at(CL2[0]) });
+        if (r.c2 === 3) out.push({ id: "overlap-as-subset", kind: "conceptual", competency: SETS, says: "Sharing some elements was taken as being a subset; a subset needs EVERY element to be in the other set.", predict: at(CL2[numSet(i) && PSETS[i][1].length < PSETS[j][1].length ? 0 : 1]) });
+      }
+      return out.filter((b) => b.predict !== clChoices(p).indexOf(clRightLabel(p)) && b.predict !== -1);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "decide" ? `Listing the elements shows: ${s.value}` : `So the answer is: ${s.inputs[0]}`),
+    domain: D_CL,
+    keep: clOk,
+    cap: 500,
+    difficulty: ([q, i]) => (q === 3 ? 1 : q === 0 ? (i === 8 || i === 4 ? 3 : 2) : 2),
+    teach: {
+      idea: "A set is empty (∅) if it has no elements, a singleton if it has one, finite if its elements can be counted to an end, and infinite otherwise. A = B when they have the same elements; A and B are equivalent when n(A) = n(B); disjoint when A ∩ B = ∅. A ⊂ B when every element of A is in B and B has more.",
+      method: "First write each set in roster form (each element once), paying attention to the universe (ℕ, ℤ or ℝ). Then count, compare the elements one by one, and decide.",
+      alternatives: [
+        { id: "roster-first", title: "Roster form first", kind: "procedural", text: ["Turn every set-builder form into a list; for letters of a word, write each letter only once.", "With both lists in front of you, equal, equivalent, disjoint and subset can be read off."] },
+        { id: "power-set", title: "Build the power set by in-or-out", kind: "conceptual", text: ["For each element decide in or out: for {a, b} that gives ∅, {a}, {b}, {a, b}.", "The power set of a set with n elements has 2ⁿ elements, and each of them is a set."] },
+      ],
+    },
+    limits: "Sets of natural numbers, integers, real numbers and letters given by short rules; proofs about sets are marked by an educator.",
+  },
+  // ============================================================ associative property
+  {
+    id: "aosetlaw",
+    arity: 2,
+    title: "Verifying the associative property of union and intersection",
+    competency: SETS,
+    type: "set",
+    parse: none,
+    reject: (p) => (law3Ok(p) ? null : "Three small sets from {1, …, 10} with a non-empty answer."),
+    prompt: ([s, q]) => {
+      const [A, Bs, C] = law3(s);
+      const other = LAWQ[q ^ 1];
+      return `A = ${braces(A)}, B = ${braces(Bs)} and C = ${braces(C)}. Find ${LAWQ[q]}, working out the bracket first. (By the associative property it equals ${other}.) List its elements, separated by commas.`;
+    },
+    solve: ([s, q]) => {
+      const [A, Bs, C] = law3(s);
+      const inner = q === 0 ? uni(Bs, C) : q === 1 ? uni(A, Bs) : q === 2 ? cap2(Bs, C) : cap2(A, Bs);
+      const ans = lawAns(s, q);
+      return {
+        steps: [
+          { id: "inner", op: q < 2 ? "union" : "intersect", competency: SETS, inputs: [["B ∪ C", "A ∪ B", "B ∩ C", "A ∩ B"][q]], value: inner.length ? inner : [0] },
+          { id: "outer", op: q < 2 ? "union" : "intersect", competency: SETS, inputs: [LAWQ[q]], value: ans },
+          { id: "other", op: "check", competency: SETS, inputs: [LAWQ[q ^ 1]], value: lawAns(s, q ^ 1) },
+        ],
+        answer: ans,
+      };
+    },
+    // independent: test each number 1 to 10 for membership of A, B and C directly
+    validate: ([s, q], v) => {
+      const [A, Bs, C] = law3(s);
+      const want: number[] = [];
+      for (let x = 1; x <= 10; x++) {
+        const a = A.includes(x);
+        const b = Bs.includes(x);
+        const c = C.includes(x);
+        if (q < 2 ? a || b || c : a && b && c) want.push(x);
+      }
+      return Array.isArray(v) && v.length === want.length && [...v].sort((x, y) => x - y).every((x, i) => x === want[i]);
+    },
+    bugs: ([s, q]) => {
+      const [A, Bs, C] = law3(s);
+      const inner = q === 0 ? uni(Bs, C) : q === 1 ? uni(A, Bs) : q === 2 ? cap2(Bs, C) : cap2(A, Bs);
+      const swapped = q === 0 ? uni(A, cap2(Bs, C)) : q === 1 ? uni(cap2(A, Bs), C) : q === 2 ? cap2(A, uni(Bs, C)) : cap2(uni(A, Bs), C);
+      const ans = lawAns(s, q);
+      const out: Bug[] = [
+        { id: "inner-only", kind: "procedural", competency: SETS, says: `Only the bracket ${["B ∪ C", "A ∪ B", "B ∩ C", "A ∩ B"][q]} was found; it must then be combined with the remaining set.`, predict: orNull(inner) },
+        { id: "mixed-operations", kind: "conceptual", competency: SETS, says: `${q < 2 ? "∪ and ∩ were mixed up inside the bracket" : "∪ and ∩ were mixed up inside the bracket"}; every operation in ${LAWQ[q]} is ${q < 2 ? "a union" : "an intersection"}.`, predict: orNull(swapped) },
+        { id: "union-intersection", kind: "conceptual", competency: SETS, says: q < 2 ? "∪ was read as the common elements; a union collects every element that is in any of the sets." : "∩ was read as all the elements together; an intersection keeps only elements in every set.", predict: orNull(q < 2 ? cap2(A, cap2(Bs, C)) : uni(A, uni(Bs, C))) },
+      ];
+      return out.filter((b) => b.predict !== null && b.predict.join(",") !== ans.join(","));
+    },
+    variants: ([s, q]) => [[s, q ^ 1], [s, q ^ 2]].filter(law3Ok),
+    explain: (s) => (s.id === "inner" ? `${s.inputs[0]} = ${braces((s.value as number[]).filter((x) => x))}` : s.id === "outer" ? `${s.inputs[0]} = ${braces(s.value as number[])}` : `Check: ${s.inputs[0]} = ${braces(s.value as number[])} too, as the associative property says`),
+    domain: D_LAW3,
+    keep: law3Ok,
+    difficulty: ([, q]) => (q < 2 ? 1 : 2),
+    teach: {
+      idea: "Union and intersection are associative: (A ∪ B) ∪ C = A ∪ (B ∪ C) and (A ∩ B) ∩ C = A ∩ (B ∩ C). They are also commutative: A ∪ B = B ∪ A and A ∩ B = B ∩ A.",
+      method: "Work out the bracket first, then combine the result with the third set. Do the other grouping too; the two answers are the same set.",
+      alternatives: [
+        { id: "venn3", title: "Three-circle Venn diagram", kind: "conceptual", text: ["Place each number of {1, …, 10} in its region of a three-circle Venn diagram.", "A ∪ B ∪ C is everything inside any circle; A ∩ B ∩ C is the small middle region — the grouping does not matter."] },
+        { id: "membership", title: "Test each element", kind: "procedural", text: ["For each number ask: is it in A? in B? in C?", "For a union of all three it needs at least one yes; for an intersection it needs three yeses."] },
+      ],
+    },
+    limits: "Three sets of up to five numbers from 1 to 10; writing out a verification of the property in full is a written task.",
+  },
+  // ============================================================ three-set counting
+  {
+    id: "aoven3",
+    arity: 9,
+    title: "Counting with three overlapping sets in a survey",
+    competency: SETS,
+    type: "integer",
+    mc: true,
+    parse: none,
+    reject: (p) => (v3Ok(p) ? null : "Venn regions of small sizes, with a total only when 'none' is asked."),
+    prompt: (p) => v3Text(p, 0),
+    solve: (p) => {
+      const g = v3Given(p);
+      const U = g.nA + g.nB + g.nC - g.nAB - g.nBC - g.nCA + g.z;
+      const steps: Step[] = [{ id: "union", op: "inclusion-exclusion", competency: SETS, inputs: [g.nA, g.nB, g.nC, g.nAB, g.nBC, g.nCA, g.z], value: U }];
+      if (p[8] === 1 || p[8] === 3) steps.push({ id: "only", op: "subtract", competency: SETS, inputs: [p[8]], value: v3Ans(p) });
+      if (p[8] === 2) steps.push({ id: "none", op: "subtract", competency: SETS, inputs: [g.N, U], value: g.N - U });
+      return { steps, answer: v3Ans(p) };
+    },
+    // independent: build the list of people region by region and count those who fit the question
+    validate: (p, v) => {
+      const flags: [boolean, boolean, boolean][] = [];
+      const regions: [boolean, boolean, boolean][] = [[true, false, false], [false, true, false], [false, false, true], [true, true, false], [false, true, true], [true, false, true], [true, true, true], [false, false, false]];
+      regions.forEach((r, i) => {
+        for (let k = 0; k < p[i]; k++) flags.push(r);
+      });
+      const n = flags.filter(([a, b, c]) => [a || b || c, Number(a) + Number(b) + Number(c) === 1, !a && !b && !c, a && !b && !c][p[8]]).length;
+      return v === n;
+    },
+    bugs: (p) => {
+      const g = v3Given(p);
+      const U = g.nA + g.nB + g.nC - g.nAB - g.nBC - g.nCA + g.z;
+      const ans = v3Ans(p);
+      const out: Bug[] = [];
+      const uNoTriple = U - g.z;
+      const uSum = g.nA + g.nB + g.nC;
+      if (p[8] === 0) {
+        out.push({ id: "triple-not-added-back", kind: "procedural", competency: SETS, says: `n(A ∩ B ∩ C) = ${g.z} was not added back; those counted in all three are taken away three times with the pairs, so they must be added once again.`, predict: uNoTriple });
+        out.push({ id: "just-added", kind: "conceptual", competency: SETS, says: "The three totals were simply added; everyone in two or three groups is then counted more than once.", predict: uSum });
+      }
+      if (p[8] === 1) {
+        out.push({ id: "only-first", kind: "procedural", competency: SETS, says: "Only the first group's 'only' count was found; 'exactly one' adds the people in only the first, only the second and only the third group.", predict: g.nA - g.nAB - g.nCA + g.z });
+        out.push({ id: "at-least-one", kind: "conceptual", competency: SETS, says: "'Exactly one' was taken as 'at least one'; people in two or three groups must be left out.", predict: U });
+      }
+      if (p[8] === 2) {
+        out.push({ id: "triple-not-added-back", kind: "procedural", competency: SETS, says: `In n(A ∪ B ∪ C) the ${g.z} in all three were not added back.`, predict: g.N - uNoTriple });
+        out.push({ id: "union-given", kind: "procedural", competency: SETS, says: "n(A ∪ B ∪ C) was given; 'none' is the total minus that number.", predict: U });
+      }
+      if (p[8] === 3) {
+        out.push({ id: "triple-not-added-back", kind: "procedural", competency: SETS, says: `n(A ∩ B) and n(C ∩ A) were both taken away, which removes the ${g.z} in all three twice; add them back once.`, predict: g.nA - g.nAB - g.nCA });
+        out.push({ id: "one-overlap", kind: "procedural", competency: SETS, says: "Only one of the two overlaps was taken away; people in the first group who are also in the third must be removed too.", predict: g.nA - g.nAB });
+      }
+      return out.filter((b) => b.predict !== ans);
+    },
+    distractors: (p) => [v3Ans(p) + 1, v3Ans(p) + v3Given(p).z, Math.max(1, v3Ans(p) - 2)],
+    variants: (p) => [[...p.slice(0, 8), p[8] === 0 ? 1 : 0]].filter(v3Ok),
+    explain: (s) => (s.id === "union" ? `n(A ∪ B ∪ C) = ${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[2]} − ${s.inputs[3]} − ${s.inputs[4]} − ${s.inputs[5]} + ${s.inputs[6]} = ${s.value}` : s.id === "none" ? `None of the three: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `Fill the Venn regions from the middle outwards: the number asked for is ${s.value}`),
+    domain: D_V3,
+    keep: v3Ok,
+    cap: 400,
+    difficulty: ([, , , , , , , , q]) => (q === 0 ? 2 : q === 3 ? 2 : 3),
+    word: (p) => v3Text(p, 1),
+    teach: {
+      idea: "n(A ∪ B ∪ C) = n(A) + n(B) + n(C) − n(A ∩ B) − n(B ∩ C) − n(C ∩ A) + n(A ∩ B ∩ C): adding the three totals counts the overlaps too often, subtracting the pairs removes the middle three times, so it is added back once.",
+      method: "Draw three overlapping circles. Write n(A ∩ B ∩ C) in the middle, then each 'two only' region (pair minus middle), then each 'one only' region. Add the regions the question asks for.",
+      alternatives: [
+        { id: "regions", title: "Fill the Venn diagram from the middle", kind: "procedural", text: ["Middle first: all three.", "Then each pair region: n(A ∩ B) − middle, and so on; then each 'only' region: the total minus its three inner regions."] },
+        { id: "check", title: "Check the totals", kind: "conceptual", text: ["The four regions inside circle A must add up to n(A); do the same for B and C.", "If a region comes out negative, a number was taken away twice."] },
+      ],
+    },
+    limits: "Three overlapping groups with small region sizes; drawing the Venn diagram itself is marked by an educator.",
+  },
+  // ============================================================ sample spaces and events
+  {
+    id: "aosamp",
+    arity: 3,
+    title: "Sample spaces and events in set notation",
+    competency: SETS,
+    type: "choice",
+    parse: none,
+    // [e, k, ev]: experiment e (k parts or balls where used); ev 0 the sample space, ev ≥ 1 an event
+    reject: (p) => (sampOk(p) ? null : "Coins, children, a coin and a spinner, a spinner twice, or two balls drawn; four different options."),
+    prompt: (p) => {
+      const X = experiment(p[0], p[1]);
+      return p[2] === 0 ? `${X.text}. Which set is the sample space S?` : `${X.text}. Which set is the event "${X.events[p[2] - 1][0]}"?`;
+    },
+    choices: (p) => shuf("aosamp", p, sampOpts(p)),
+    solve: (p) => {
+      const right = sampOpts(p)[0];
+      return { steps: [{ id: "list", op: "list", competency: SETS, inputs: [p[2]], value: right }, { id: "pick", op: "compare", competency: SETS, inputs: [right], value: shuf("aosamp", p, sampOpts(p)).indexOf(right) }], answer: shuf("aosamp", p, sampOpts(p)).indexOf(right) };
+    },
+    // independent: generate the outcomes by a tree (every choice at each stage) and test the event on each
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const [e, k, ev] = p;
+      const stages: string[][] = e <= 1 ? Array(e + 2).fill(["H", "T"]) : e === 2 ? [["H", "T"], Array.from({ length: k }, (_, i) => String(i + 1))] : e <= 4 ? Array(e - 1).fill(["B", "G"]) : e === 5 || e === 7 ? [Array.from({ length: e === 7 ? 6 : k }, (_, i) => String(i + 1)), Array.from({ length: e === 7 ? 6 : k }, (_, i) => String(i + 1))] : [["R", "G", "B", "Y"].slice(0, k), ["R", "G", "B", "Y"].slice(0, k)];
+      let out = [""];
+      for (const st of stages) out = out.flatMap((s) => st.filter((c) => !(e === 6 && s.includes(c))).map((c) => s + c));
+      const X = experiment(e, k);
+      const want = ev === 0 ? out : out.filter(X.events[ev - 1][1]);
+      const opt = shuf("aosamp", p, sampOpts(p))[v];
+      if (!opt) return false;
+      const got = opt.slice(1, -1).split(", ");
+      return got.length === want.length && want.every((o) => got.includes(o));
+    },
+    bugs: (p) => {
+      const ch = shuf("aosamp", p, sampOpts(p));
+      const out: Bug[] = [];
+      for (const s of sampSets(p)) {
+        const i = ch.indexOf(braces(s.set));
+        if (i < 0 || s.why === "right") continue;
+        if (s.why === "order") out.push({ id: "order-ignored", kind: "conceptual", competency: SETS, says: "Outcomes like HT and TH were taken as the same; the first and second stages are different, so they are different outcomes.", predict: i });
+        if (s.why === "complement") out.push({ id: "complement", kind: "conceptual", competency: SETS, says: "The outcomes where the event does NOT happen were listed; the event is the set of outcomes where it does happen.", predict: i });
+        if (s.why === "drop") out.push({ id: "outcome-missed", kind: "procedural", competency: SETS, says: "One outcome was missed; go through the outcomes systematically (a tree diagram helps).", predict: i });
+        if (s.why === "extra") out.push({ id: "outcome-extra", kind: "procedural", competency: SETS, says: "An outcome was included that does not fit the description; check each outcome against the event.", predict: i });
+        if (s.why === "replace") out.push({ id: "replacement", kind: "conceptual", competency: SETS, says: "The first ball was taken as put back; without replacement the same colour cannot be drawn twice.", predict: i });
+      }
+      return out;
+    },
+    variants: ([e, k, ev]) => [[e, k, ev + 1], [e, k, 0]].filter(sampOk),
+    explain: (s) => (s.id === "list" ? `Listing the outcomes systematically gives ${s.value}` : `So the answer is ${s.inputs[0]}`),
+    domain: D_SAMP,
+    keep: sampOk,
+    difficulty: ([e, , ev]) => (ev === 0 && e <= 1 ? 1 : e >= 5 ? 3 : 2),
+    teach: {
+      idea: "The sample space S of a random experiment is the set of all its possible outcomes; an event is a subset of S — the outcomes for which it happens.",
+      method: "List the outcomes stage by stage (a tree diagram: every choice at the first stage, then every choice at the second). Then go through S and keep the outcomes that fit the event.",
+      alternatives: [
+        { id: "tree", title: "A tree diagram", kind: "procedural", text: ["Draw a branch for each result of the first stage, and from each a branch for each result of the second.", "Each path from the start to the end is one outcome; there are (choices at stage 1) × (choices at stage 2) of them."] },
+        { id: "table", title: "A two-way table", kind: "procedural", text: ["Write the first stage's results down the side and the second stage's across the top.", "Each cell is one outcome of the sample space."] },
+      ],
+    },
+    limits: "Small experiments with up to 16 outcomes; describing an experiment of one's own is marked by an educator.",
+  },
+
+  // ============================================================ is it a function?
+  {
+    id: "aoisfn",
+    arity: 3,
+    title: "Deciding whether a relation is a function",
+    competency: FUN,
+    type: "choice",
+    parse: none,
+    // [form, c, seed]: form 0 a set of pairs, 1 a table, 2 points on a graph (vertical line test), 3 a rule; c the built case
+    reject: (p) => (isfOk(p) ? null : "A relation from a small set A to a set B, as pairs, a table, points or a rule."),
+    prompt: isfPrompt,
+    figure: (p) => {
+      const { R } = fnRel(p);
+      if (p[0] === 1) return { type: "table", head: ["x", "y"], rows: R.map(([a, b]) => [a, b]) };
+      if (p[0] === 2) return { type: "plane", points: R.map(([a, b]) => [a, b] as [number, number]), range: Math.max(5, ...R.flat().map(Math.abs)) };
+      return null;
+    },
+    choices: isfChoices,
+    solve: (p) => {
+      const lab = FNQ[fnCat(p)];
+      return { steps: [{ id: "images", op: "count", competency: FUN, inputs: ["images of each element of A"], value: lab }, { id: "pick", op: "compare", competency: FUN, inputs: [lab], value: isfChoices(p).indexOf(lab) }], answer: isfChoices(p).indexOf(lab) };
+    },
+    // independent: for each element of A, draw a 'vertical line' through the pairs and count the hits that land in B
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const { A, B: Bs, R } = fnRel(p);
+      let many = false;
+      let none = false;
+      for (const x of A) {
+        const hits = new Set(R.filter((pr) => pr[0] === x && Bs.indexOf(pr[1]) >= 0).map((pr) => pr[1])).size;
+        if (hits > 1) many = true;
+        if (hits === 0) none = true;
+      }
+      return isfChoices(p)[v] === FNQ[many ? 1 : none ? 2 : 0];
+    },
+    bugs: (p) => {
+      const c = fnCat(p);
+      const { A, R } = fnRel(p);
+      const ch = isfChoices(p);
+      const out: Bug[] = [];
+      const imgs = R.map((x) => x[1]);
+      if (c === 0 && new Set(imgs).size < imgs.length) out.push({ id: "many-one-not-function", kind: "conceptual", competency: FUN, says: "Two elements of A sharing an image was taken to stop R being a function; that is allowed (a many-one function). What is not allowed is ONE element with two images.", predict: ch.indexOf(FNQ[3]) });
+      if (c === 1) out.push({ id: "repeat-missed", kind: "procedural", competency: FUN, says: `An element of A appears in two pairs with different second entries; go through A = ${braces(A)} one element at a time.`, predict: ch.indexOf(FNQ[0]) });
+      if (c === 2) out.push({ id: "missing-image", kind: "conceptual", competency: FUN, says: "Every listed element had one image, so R was called a function; a function from A must give an image to EVERY element of A.", predict: ch.indexOf(FNQ[0]) });
+      if (c === 1) out.push({ id: "two-images-as-shared", kind: "procedural", competency: FUN, says: "The pairs were read the wrong way round (by their second entries); a function is about each element of A, the first entries.", predict: ch.indexOf(FNQ[3]) });
+      return out.filter((b) => b.predict !== ch.indexOf(FNQ[c]));
+    },
+    variants: ([f, c, s]) => [[f, (c + 1) % 3, s], [(f + 1) % 3, c, s]].filter(isfOk),
+    explain: (s) => (s.id === "images" ? `Count the images of each element of A: ${s.value}` : `So: ${s.inputs[0]}`),
+    domain: D_ISF,
+    keep: isfOk,
+    difficulty: ([f, c]) => (f === 0 && c === 1 ? 1 : f === 3 || c === 2 ? 3 : 2),
+    word: (p) => {
+      const { A, B: Bs } = fnRel(p);
+      const shown = p[0] === 0 ? `The list of (student, locker) pairs is ${pairsS(fnRel(p).R)}.` : p[0] === 3 ? `Student x is given locker y exactly when ${FNRULES[p[2]].text}.` : `The pairs (student, locker) are shown in the picture.`;
+      return `In a Chennai school, the students with roll numbers A = ${braces(A)} are to be given lockers numbered B = ${braces(Bs)}. ${shown} The rule 'each student gets exactly one locker' is the same as asking: is this relation a function from A to B?`;
+    },
+    teach: {
+      idea: "A relation R from A to B is a function when every element of A has exactly one image in B. Two elements may share an image (many-one), but one element may not have two images, and none may be left without an image.",
+      method: "Go through A one element at a time and count its pairs in R. If every count is exactly 1, R is a function. On a graph this is the vertical line test: no vertical line through an element of A meets the graph twice.",
+      alternatives: [
+        { id: "arrows", title: "Draw an arrow diagram", kind: "conceptual", text: ["Write A in one oval and B in another, and draw an arrow for each pair.", "A function has exactly one arrow leaving every element of A; arrows may arrive together."] },
+        { id: "vertical", title: "The vertical line test", kind: "procedural", text: ["Plot the pairs as points.", "Above each element of A there must be exactly one point."] },
+      ],
+    },
+    limits: "Relations between small sets of integers; drawing arrow diagrams is done on paper.",
+  },
+  // ============================================================ one-one, many-one, onto, into, identity, constant
+  {
+    id: "aofname",
+    arity: 3,
+    title: "Naming a function: one-one or many-one, onto or into, identity or constant",
+    competency: FUN,
+    type: "choice",
+    parse: none,
+    // [q, c, seed]: q 0 f : A → B as pairs (one-one/many-one, onto/into); q 1 f : A → A (identity, constant, …); c the built case
+    reject: (p) => (fnameOk(p) ? null : "A function on small sets given as pairs."),
+    prompt: (p) => {
+      const { A, B: Bs, f } = fnameMap(p);
+      return `${p[0] === 0 ? `A = ${braces(A)}, B = ${braces(Bs)} and f : A → B` : `A = ${braces(A)} and f : A → A`} is the function f = ${pairsS(A.map((a, i) => [a, f[i]]))}. Which statement is true?`;
+    },
+    choices: fnameChoices,
+    solve: (p) => {
+      const lab = (p[0] === 0 ? FN0 : FN1)[fnameCat(p)];
+      return { steps: [{ id: "images", op: "check", competency: FUN, inputs: ["one-one?", "onto?"], value: lab }, { id: "pick", op: "compare", competency: FUN, inputs: [lab], value: fnameChoices(p).indexOf(lab) }], answer: fnameChoices(p).indexOf(lab) };
+    },
+    // independent: count how many elements of A go to each element of B
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const { A, B: Bs, f } = fnameMap(p);
+      const hits = Bs.map((b) => f.filter((y) => y === b).length);
+      const oo = hits.every((h) => h <= 1);
+      const onto = hits.every((h) => h >= 1);
+      if (p[0] === 0) return fnameChoices(p)[v] === FN0[(oo ? 0 : 2) + (onto ? 0 : 1)];
+      const id = A.every((a, i) => f[i] - a === 0);
+      const cons = hits.filter((h) => h > 0).length === 1;
+      return fnameChoices(p)[v] === FN1[id ? 0 : cons ? 1 : oo ? 2 : 3];
+    },
+    bugs: (p) => {
+      const c = fnameCat(p);
+      const ch = fnameChoices(p);
+      const L = p[0] === 0 ? FN0 : FN1;
+      const at = (i: number) => ch.indexOf(L[i]);
+      const out: Bug[] = [];
+      if (p[0] === 0) {
+        if (c === 1 || c === 3) out.push({ id: "into-as-onto", kind: "conceptual", competency: FUN, says: "f was called onto because every element of A has an image; onto means every element of B is an image, and here some element of B is not reached (f is into).", predict: at(c - 1) });
+        if (c === 2 || c === 3) out.push({ id: "many-one-missed", kind: "procedural", competency: FUN, says: "Two elements of A with the same image were missed; then f is many-one, not one-one.", predict: at(c - 2) });
+        if (c === 0) out.push({ id: "codomain-check", kind: "procedural", competency: FUN, says: "Every element of B is reached and no image is shared, so f is both one-one and onto; check each condition separately.", predict: at(1) });
+      } else {
+        if (c === 2) out.push({ id: "one-one-as-identity", kind: "conceptual", competency: FUN, says: "A one-one function from A to A was taken as the identity; the identity sends EVERY element to itself.", predict: at(0) });
+        if (c === 1) out.push({ id: "constant-not-function", kind: "conceptual", competency: FUN, says: "Sending everything to the same element was taken as not being a proper function; it is the constant function.", predict: at(3) });
+        if (c === 3) out.push({ id: "repeat-as-constant", kind: "conceptual", competency: FUN, says: "Some repeated images were taken to make f constant; a constant function has only ONE image for all elements.", predict: at(1) });
+        if (c === 0) out.push({ id: "identity-as-constant", kind: "conceptual", competency: FUN, says: "The identity was confused with a constant function; the identity's output changes with the input (f(x) = x).", predict: at(1) });
+      }
+      return out;
+    },
+    variants: ([q, c, s]) => [[q, (c + 1) % 4, s]].filter(fnameOk),
+    explain: (s) => (s.id === "images" ? `Checking images: ${s.value}` : `So: ${s.inputs[0]}`),
+    domain: D_FNAME,
+    keep: fnameOk,
+    difficulty: ([q, c]) => (q === 1 && c <= 1 ? 1 : q === 1 ? 2 : c === 0 ? 2 : 3),
+    word: (p) => {
+      const { A, B: Bs, f } = fnameMap(p);
+      return p[0] === 0
+        ? `At a sports day in Salem, the runners with numbers ${braces(A)} each finish at one of the posts ${braces(Bs)}. The (runner, post) pairs are ${pairsS(A.map((a, i) => [a, f[i]]))}. Think of this as a function f from runners to posts. Which statement is true?`
+        : `In a game, the children holding cards ${braces(A)} each pass their card's number to a child: the pairs (card, number passed) are ${pairsS(A.map((a, i) => [a, f[i]]))}, a function f from A to A. Which statement is true?`;
+    },
+    teach: {
+      idea: "f : A → B is one-one if different elements have different images, and many-one otherwise; it is onto if every element of B is an image, and into otherwise. On A → A, the identity sends each x to x, and a constant function sends every x to one value.",
+      method: "List the images f(a). Repeated images → many-one. Compare the set of images (the range) with B: equal → onto, smaller → into.",
+      alternatives: [
+        { id: "arrows", title: "Arrow diagram", kind: "conceptual", text: ["Draw the arrows from A to B.", "Two arrows meeting at one element: many-one. An element of B with no arrow: into."] },
+        { id: "range", title: "Compare range and codomain", kind: "procedural", text: ["Write the range {f(a) : a ∈ A}.", "Onto means the range is the whole codomain B."] },
+      ],
+    },
+    limits: "Functions between small finite sets given as pairs; real-valued functions on infinite sets are in the one-one/onto families.",
+  },
+  // ============================================================ recognising graphs of standard functions
+  {
+    id: "aograph",
+    arity: 3,
+    title: "Recognising the graph of a standard function",
+    competency: STD,
+    type: "choice",
+    parse: none,
+    // [f, d, k]: the graph of STDF[f] + k; d picks the distractors
+    reject: (p) => (grOk(p) ? null : "Twelve standard functions, moved up or down by at most 1 (step and signum graphs are not moved)."),
+    prompt: () => "Which function has the graph shown in the picture? (Where the graph jumps, a dot marks the value taken at the jump.)",
+    figure: grFigure,
+    choices: (p) => grOptions(p).map((i) => STDF[i].label(p[2])),
+    solve: (p) => ({ steps: [{ id: "features", op: "read", competency: STD, inputs: [STDF[p[0]].label(p[2])], value: STDF[p[0]].label(p[2]) }, { id: "pick", op: "compare", competency: STD, inputs: [STDF[p[0]].label(p[2])], value: grOptions(p).indexOf(p[0]) }], answer: grOptions(p).indexOf(p[0]) }),
+    // independent: evaluate each option (from its own rule) at the drawn end points; exactly the chosen one fits them all
+    validate: (p, v) => {
+      if (typeof v !== "number") return false;
+      const fig = grFigure(p);
+      const pts = [...fig.segments.flat(), ...fig.points];
+      const fits = (i: number) => pts.every(([x, y]) => {
+        const val = GR_EVAL[i](x);
+        return Number.isFinite(val) && Math.abs(val + p[2] - y) < 0.01;
+      });
+      const ok = grOptions(p).map(fits);
+      return ok.filter(Boolean).length === 1 && ok[v] === true;
+    },
+    bugs: (p) => {
+      const opts = grOptions(p);
+      const [f, , k] = p;
+      const out: Bug[] = [];
+      const say: Record<string, string> = {
+        "1-3": "The V shape of y = |x| was confused with the curve y = x²; |x| is made of two straight pieces with a sharp corner.",
+        "3-1": "The parabola y = x² was confused with y = |x|; x² curves smoothly and is flat at the bottom.",
+        "0-2": "y = x³ was confused with y = x; x³ flattens near 0 and rises steeply further out.",
+        "2-0": "The straight line y = x was confused with y = x³; a cube curve bends.",
+        "4-8": "y = log₂ x was confused with y = 1/x; the reciprocal graph has two separate branches and never meets the axes.",
+        "8-4": "y = 1/x was confused with y = log₂ x; log₂ x exists only for x > 0 and crosses the x-axis at x = 1.",
+        "7-8": "y = log₂ x was confused with y = 2ˣ; 2ˣ exists for every x and is always above the x-axis.",
+        "8-7": "y = 2ˣ was confused with y = log₂ x; the two are mirror images in the line y = x.",
+        "6-5": "The signum graph was confused with the step graph; signum takes only the values −1, 0 and 1.",
+        "5-6": "The step graph [x] was confused with signum; [x] jumps up by 1 at every integer.",
+        "0-9": "The sign of the slope was misread: y = −x goes down from left to right.",
+        "9-0": "The sign of the slope was misread: y = x goes up from left to right.",
+        "1-11": "y = −x² was confused with y = x²; −x² opens downwards.",
+        "11-1": "y = x² was confused with y = −x²; x² opens upwards.",
+        "10-1": "y = x² was confused with y = √x; √x starts at the origin and exists only for x ≥ 0.",
+        "1-10": "y = √x was confused with y = x²; x² is defined for negative x too.",
+      };
+      for (const i of opts) {
+        const t = say[`${f}-${i}`];
+        if (t) out.push({ id: `confused-${f}-${i}`, kind: "conceptual", competency: STD, says: t, predict: opts.indexOf(i) });
+      }
+      if (k !== 0) out.push({ id: "shift-ignored", kind: "procedural", competency: STD, says: `The graph is the standard graph moved ${k > 0 ? "up" : "down"} by 1; read where it crosses the y-axis (or where its corner or branch sits).`, predict: null });
+      return out.filter((b) => b.predict !== null);
+    },
+    variants: ([f, d, k]) => [[f, (d + 1) % 3, k]].filter(grOk),
+    explain: (s) => (s.id === "features" ? `Its shape, where it is defined and where it crosses the axes match ${s.value}` : `So the answer is ${s.inputs[0]}`),
+    domain: D_GR,
+    keep: grOk,
+    difficulty: ([f, , k]) => (f <= 3 && k === 0 ? 1 : f >= 4 && f <= 8 ? 3 : 2),
+    teach: {
+      idea: "Each standard function has a recognisable graph: y = x a line through the origin, x² a parabola, x³ an S-shaped curve, |x| a V, 1/x two branches, sgn x three levels −1, 0, 1, [x] steps, 2ˣ an always-positive rising curve and log₂ x its mirror image for x > 0.",
+      method: "Look at where the graph is defined, where it crosses the axes, whether it has corners or jumps and how it behaves far out; then check one or two points, e.g. x = 1 and x = 2, in each option.",
+      alternatives: [
+        { id: "points", title: "Check points", kind: "procedural", text: ["Read two or three points from the graph, for example at x = 0, 1 and 2.", "Put those x-values into each option; only one gives all the y-values."] },
+        { id: "features", title: "Key features", kind: "conceptual", text: ["Defined only for x > 0: log. Never below the x-axis: 2ˣ, |x| or x². A jump: signum or [x].", "Shifting by k moves the whole graph up (k > 0) or down."] },
+      ],
+    },
+    limits: "Twelve standard graphs drawn on a −5 to 5 window, some moved up or down by 1; sketching graphs is marked by an educator.",
+  },
+];
+B15.push(...NEW15);

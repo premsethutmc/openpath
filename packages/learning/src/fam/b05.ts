@@ -4,7 +4,7 @@
  * tenths and hundredths, even and odd, large numbers in the Indian system, × and ÷ by 10, 100, 1000, rounding,
  * and multi-step money and capacity problems. Written by OpenPath; CC0.
  */
-import type { Bug, Def, Value } from "../family-kit";
+import type { Bug, Def, Value, Visual } from "../family-kit";
 
 const PATR = "MATH.algebra.pattern-rules";
 const GROW = "MATH.algebra.growing-patterns";
@@ -1925,3 +1925,662 @@ function indWords([L, T, H, r]: number[]): string {
 function estNums([k, a, b]: number[]): [number, number] {
   return k === 1 ? [a, b] : [a * 10 + (b % 10), b * 10 + (a % 10)];
 }
+
+// ================================================================ gap@1: further families for the Grades 4–8 outcomes
+// (angles in pictures, parts of a circle, symmetry in designs, digits and mirrors, …). Written by OpenPath; CC0.
+
+const hash1 = (s: string) => {
+  let x = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) x = Math.imul(x ^ s.charCodeAt(i), 0x01000193) >>> 0;
+  return x;
+};
+/** A fixed shuffle of 0 … n − 1 for these parameters, so the right letter of a choice is not predictable. */
+const perm = (salt: string, n: number) => Array.from({ length: n }, (_, i) => i).sort((a, b) => hash1(`${salt}:${a}`) - hash1(`${salt}:${b}`) || a - b);
+const firstSeen = new Map<string, Map<string, number>>();
+/** distinct@1: whether an earlier seed (0 … s − 1) already gives the same key (the same question). */
+const repeatOf = (tag: string, n: number, key: (t: number) => string | null, s: number) => {
+  let m = firstSeen.get(tag);
+  if (!m) {
+    m = new Map();
+    for (let t = 0; t < n; t++) {
+      const k = key(t);
+      if (k !== null && !m.has(k)) m.set(k, t);
+    }
+    firstSeen.set(tag, m);
+  }
+  const k = key(s);
+  return k !== null && m.get(k) !== s;
+};
+/** A choice question: the base options in a fixed shuffled order; `at(j)` is where base option j is shown. */
+const shuffled = (salt: string, base: string[]) => {
+  const pm = perm(salt, base.length);
+  return { choices: pm.map((i) => base[i]), at: (j: number) => pm.indexOf(j) };
+};
+const isIdx = (v: Value): v is number => typeof v === "number" && Number.isInteger(v);
+
+// ---------------------------------------------------------------- right angles in pictures and objects (aertang)
+
+type Obj = { text: string; deg?: number; clock?: number };
+const RIGHT_OBJ: Obj[] = [
+  { text: "the corner of a notebook page" }, { text: "the corner of a classroom door" }, { text: "the corner of a carrom board" }, { text: "the corner of a postcard" },
+  { text: "the corner of a square floor tile" }, { text: "the corner of a blackboard" }, { text: "the corner of a matchbox" }, { text: "the corner where a wall meets the flat floor" },
+  { text: "the hands of a clock at 3 o'clock", clock: 3 }, { text: "the hands of a clock at 9 o'clock", clock: 9 },
+].map((o) => ({ deg: 90, ...o }));
+const OTHER_OBJ: Obj[] = [
+  { text: "the tip of a slice of pizza", deg: 45 }, { text: "the point of a sharpened pencil", deg: 25 }, { text: "a corner of a samosa", deg: 60 }, { text: "the tip of a star in a rangoli", deg: 36 },
+  { text: "a corner of a honeycomb cell", deg: 120 }, { text: "an open book lying flat on a table", deg: 180 },
+  ...[1, 2, 4, 5, 7, 8, 10, 11].map((h) => ({ text: `the hands of a clock at ${h} o'clock`, clock: h })),
+];
+/** The angle an object makes, worked out again: the hands of a clock are 30° apart for each hour between them. */
+const objAngle = (o: Obj) => (o.clock !== undefined ? 30 * Math.min(o.clock, 12 - o.clock) : o.deg!);
+const RT_DEGS = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 90, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160];
+const RT_CMP = ["smaller than a right angle", "exactly a right angle", "bigger than a right angle"];
+const rtObjs = (s: number) => {
+  const r = rng(s + 91000);
+  const pool = [...OTHER_OBJ.keys()];
+  const others: number[] = [];
+  while (others.length < 3) others.push(pool.splice(Math.floor(r() * pool.length), 1)[0]);
+  return { right: s % RIGHT_OBJ.length, others };
+};
+const rtQ = ([mode, v]: number[]) => {
+  if (mode === 0) {
+    const deg = RT_DEGS[v];
+    return { ...shuffled(`aertang:${mode},${v}`, RT_CMP), right: deg < 90 ? 0 : deg === 90 ? 1 : 2, deg };
+  }
+  const { right, others } = rtObjs(v);
+  const items = [RIGHT_OBJ[right], ...others.map((i) => OTHER_OBJ[i])];
+  return { ...shuffled(`aertang:${mode},${v}`, items.map((o) => o.text)), right: 0, items, deg: 90 };
+};
+
+// ---------------------------------------------------------------- kinds of angle with reflex angles (aeangk)
+
+const AKINDS = ["acute", "right", "obtuse", "straight", "reflex"];
+const akind = (d: number) => (d < 90 ? 0 : d === 90 ? 1 : d < 180 ? 2 : d === 180 ? 3 : 4);
+const akQ = ([mode, v]: number[]) => {
+  const d = 5 * v;
+  const k = akind(d);
+  const others = k === 4 ? [akind(360 - d), 3, akind(360 - d) === 0 ? 2 : 0] : [[2, 4, 1], [0, 2, 3], [0, 4, 3], [2, 4, 1]][k];
+  const base = [k, ...others].map((i) => AKINDS[i]);
+  return { ...shuffled(`aeangk:${mode},${v}`, base), d, k, base };
+};
+
+// ---------------------------------------------------------------- vertex and arms (aearms)
+
+const ALET = "ABCDEFGHKLMNPQRSTXYZ";
+const TRIPLES: string[] = [];
+for (let i = 0; i < ALET.length; i++) for (let j = i + 1; j < ALET.length; j++) for (let k = j + 1; k < ALET.length; k++) TRIPLES.push(ALET[i] + ALET[j] + ALET[k]);
+/** The angle's three letters (the middle one is the vertex): every seed gives its own triple. */
+const armsName = (s: number) => {
+  const t = TRIPLES[(s * 37) % TRIPLES.length];
+  return [t, `${t[1]}${t[0]}${t[2]}`, `${t[0]}${t[2]}${t[1]}`][s % 3];
+};
+const armQ = ([kind, s]: number[]) => {
+  const [a, b, c] = armsName(s).split("");
+  if (kind === 0) return { ...shuffled(`aearms:${kind},${s}`, [b, a, c]), a, b, c };
+  if (kind === 1) return { ...shuffled(`aearms:${kind},${s}`, [`the rays ${b}${a} and ${b}${c}`, `the rays ${a}${b} and ${a}${c}`, `the rays ${c}${a} and ${c}${b}`, `the line segment ${a}${c}`]), a, b, c };
+  const [s1, s2] = [1 + (s % 5), 1 + Math.floor(s / 5)];
+  return { ...shuffled(`aearms:${kind},${s}`, ["∠X is bigger", "∠Y is bigger", "They are the same size"]), a, b, c, s1, s2 };
+};
+
+// ---------------------------------------------------------------- parts of a circle (aecpart)
+
+const CPARTS = ["the centre", "a radius", "a diameter", "a chord", "an arc", "a sector", "a segment"];
+/** What each part is, as features: what it joins, whether it is a region, whether it is curved, whether it goes through the centre. */
+const CFEAT = [
+  { point: true }, { joins: "centre-edge" }, { joins: "edge-edge", centre: true }, { joins: "edge-edge", centre: false }, { curved: true }, { region: "radii-arc" }, { region: "chord-arc" },
+] as { point?: boolean; joins?: string; centre?: boolean; curved?: boolean; region?: string }[];
+/** The name of a part from its features (an independent reading of the definitions). */
+const cname = (f: (typeof CFEAT)[number]) => (f.point ? 0 : f.joins === "centre-edge" ? 1 : f.joins === "edge-edge" ? (f.centre ? 2 : 3) : f.curved ? 4 : f.region === "radii-arc" ? 5 : 6);
+const CCEN = ["O", "C", "P", "M"];
+const CPAIRS = ["AB", "XY", "DE", "RS", "KL", "GH", "TU", "FN"];
+const cpQ = ([part, s]: number[]) => {
+  const o = CCEN[s % 4];
+  const [a, b] = CPAIRS[Math.floor(s / 4)].split("");
+  const others = part <= 2 ? [0, 1, 2, 3].filter((i) => i !== part) : { 3: [2, 4, 1], 4: [3, 5, 6], 5: [6, 4, 1], 6: [5, 3, 4] }[part as 3]!;
+  const base = [part, ...others].map((i) => CPARTS[i]);
+  const desc = [
+    `the point ${o}, which is the same distance from every point on the circle`,
+    `the line segment ${o}${a}, which joins the centre ${o} to the point ${a} on the circle`,
+    `the line segment ${a}${b}, which joins two points ${a} and ${b} on the circle and passes through the centre ${o}`,
+    `the line segment ${a}${b}, which joins two points ${a} and ${b} on the circle but does not pass through the centre ${o}`,
+    `the curved part of the circle from ${a} to ${b}`,
+    `the region inside the circle bounded by the two radii ${o}${a}, ${o}${b} and the curved part of the circle from ${a} to ${b}`,
+    `the region inside the circle between the straight line segment ${a}${b} (which does not pass through the centre) and the curved part of the circle from ${a} to ${b}`,
+  ][part];
+  return { ...shuffled(`aecpart:${part},${s}`, base), base, o, a, b, desc };
+};
+
+// ---------------------------------------------------------------- symmetry of designs and shapes (aedsym)
+
+const DGROUPS = [[], ["v"], ["h"], ["d"], ["v", "h"], ["d", "e"], ["v", "h", "d", "e"]] as string[][];
+const reflectCell = (n: number, r: number, c: number, line: string): [number, number] => (line === "v" ? [r, n - 1 - c] : line === "h" ? [n - 1 - r, c] : line === "d" ? [c, r] : [n - 1 - c, n - 1 - r]);
+const design = (s: number) => {
+  const n = s % 2 ? 5 : 4;
+  const g = DGROUPS[Math.floor(s / 2) % DGROUPS.length];
+  const r = rng(s + 52000);
+  const cells = Array.from({ length: n }, () => Array.from({ length: n }, () => (r() < 0.35 ? 1 : 0)));
+  // fill the design so it has the chosen lines: a cell is shaded when any of its mirror images is
+  for (let round = 0; round < 3; round++)
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (cells[i][j]) for (const l of g) {
+      const [a, b] = reflectCell(n, i, j, l);
+      cells[a][b] = 1;
+    }
+  return { n, g, cells };
+};
+/** Fold the drawn design along each of the four lines and see whether the halves match (the check by folding). */
+const foldLines = (cells: number[][]) => {
+  const n = cells.length;
+  return ["v", "h", "d", "e"].filter((l) => cells.every((row, i) => row.every((x, j) => {
+    const [a, b] = reflectCell(n, i, j, l);
+    return cells[a][b] === x;
+  })));
+};
+const designFig = (cells: number[][]) => ({ type: "table", head: cells[0].map(() => " "), rows: cells.map((row) => row.map((x) => (x ? "■" : "□"))) });
+type ShapeS = { name: string; lines: number; pts: number[][]; fig: Visual };
+const regular = (n: number) => Array.from({ length: n }, (_, i) => [110 + 80 * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), 100 + 80 * Math.sin((2 * Math.PI * i) / n - Math.PI / 2)]);
+const SSHAPES: ShapeS[] = [
+  { name: "an equilateral triangle", lines: 3, pts: regular(3), fig: { type: "shape", sides: 3, name: "equilateral triangle" } },
+  { name: "a square", lines: 4, pts: [[60, 40], [170, 40], [170, 150], [60, 150]], fig: { type: "shape", kind: "square", name: "square" } },
+  { name: "a rectangle (not a square)", lines: 2, pts: [[30, 50], [190, 50], [190, 150], [30, 150]], fig: { type: "shape", kind: "rectangle", name: "rectangle" } },
+  { name: "a rhombus (not a square)", lines: 2, pts: [[110, 20], [166, 100], [110, 180], [54, 100]], fig: { type: "shape", kind: "rhombus", name: "rhombus" } },
+  { name: "a kite", lines: 1, pts: [[110, 20], [170, 80], [110, 180], [50, 80]], fig: { type: "shape", kind: "kite", name: "kite" } },
+  { name: "a parallelogram (not a rectangle or rhombus)", lines: 0, pts: [[60, 50], [200, 50], [160, 150], [20, 150]], fig: { type: "shape", kind: "parallelogram", name: "parallelogram" } },
+  { name: "a trapezium with equal slanting sides", lines: 1, pts: [[70, 50], [150, 50], [200, 150], [20, 150]], fig: { type: "shape", kind: "trapezium", name: "trapezium" } },
+  { name: "a regular pentagon", lines: 5, pts: regular(5), fig: { type: "shape", sides: 5, name: "regular pentagon" } },
+  { name: "a regular hexagon", lines: 6, pts: regular(6), fig: { type: "shape", sides: 6, name: "regular hexagon" } },
+  { name: "a regular octagon", lines: 8, pts: regular(8), fig: { type: "shape", sides: 8, name: "regular octagon" } },
+  { name: "a triangle with three different sides", lines: 0, pts: [[20, 160], [240, 160], [100, 30]], fig: { type: "triangle" } },
+  { name: "a right-angled triangle with two different shorter sides", lines: 0, pts: [[30, 160], [230, 160], [30, 30]], fig: { type: "triangle", right: true } },
+];
+/** Lines of symmetry of a polygon found numerically: try mirror lines through its centre every half degree. */
+const polyLines = (pts: number[][]) => {
+  const cx = pts.reduce((s, p) => s + p[0], 0) / pts.length;
+  const cy = pts.reduce((s, p) => s + p[1], 0) / pts.length;
+  let count = 0;
+  for (let j = 0; j < 360; j++) {
+    const t = (j * Math.PI) / 360;
+    const [ux, uy] = [Math.cos(t), Math.sin(t)];
+    const ok = pts.every(([x, y]) => {
+      const [dx, dy] = [x - cx, y - cy];
+      const dot = dx * ux + dy * uy;
+      const [rx, ry] = [cx + 2 * dot * ux - dx, cy + 2 * dot * uy - dy];
+      return pts.some(([px, py]) => Math.abs(px - rx) < 1e-6 && Math.abs(py - ry) < 1e-6);
+    });
+    if (ok) count++;
+  }
+  return count;
+};
+
+// ---------------------------------------------------------------- digits as on a digital clock (aedigsym)
+
+const SEG: Record<string, string> = { 0: "abcdef", 1: "bc", 2: "abged", 3: "abgcd", 4: "fgbc", 5: "afgcd", 6: "afgedc", 7: "abc", 8: "abcdefg", 9: "abcdfg" };
+const segMap = (s: string, m: Record<string, string>) => [...s].map((c) => m[c] ?? c).sort().join("");
+const HSEG = { a: "d", d: "a", b: "c", c: "b", f: "e", e: "f" };
+const VSEG = { b: "f", f: "b", c: "e", e: "c" };
+const digitOf = (segs: string) => Object.keys(SEG).find((d) => [...SEG[d]].sort().join("") === segs) ?? null;
+/** The rule by segments: a number has a horizontal line when every digit's top and bottom halves swap onto itself; a
+ * vertical line when the mirrored digits, read in reverse order, give the same number. */
+const hasLineSeg = (x: number, axis: number) => {
+  const ds = String(x).split("");
+  if (axis === 1) return ds.every((d) => digitOf(segMap(SEG[d], HSEG)) === d);
+  const mirrored = [...ds].reverse().map((d) => digitOf(segMap(SEG[d], VSEG)));
+  return mirrored.join("") === ds.join("");
+};
+/** The digits drawn on a 5-row, 3-column grid (with a blank column between digits): used to fold the drawing. */
+const segCells: Record<string, [number, number][]> = { a: [[0, 0], [0, 1], [0, 2]], b: [[0, 2], [1, 2], [2, 2]], c: [[2, 2], [3, 2], [4, 2]], d: [[4, 0], [4, 1], [4, 2]], e: [[2, 0], [3, 0], [4, 0]], f: [[0, 0], [1, 0], [2, 0]], g: [[2, 0], [2, 1], [2, 2]] };
+const drawNumber = (x: number) => {
+  const ds = String(x).split("");
+  const w = ds.length * 4 - 1;
+  const g = Array.from({ length: 5 }, () => Array(w).fill(0));
+  ds.forEach((d, i) => { for (const s of SEG[d]) for (const [r, c] of segCells[s]) g[r][4 * i + c] = 1; });
+  return g;
+};
+const foldsNum = (x: number, axis: number) => {
+  const g = drawNumber(x);
+  return axis === 1 ? g.every((row, i) => row.join("") === g[4 - i].join("")) : g.every((row) => row.join("") === [...row].reverse().join(""));
+};
+const DIGITEMS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 18, 30, 33, 38, 80, 81, 83, 88, 101, 103, 108, 110, 131, 138, 181, 303, 383, 808, 818, 838, 888, 25, 52, 285, 47, 69, 12, 55, 77, 14, 60, 90, 525];
+const digList = (s: number) => {
+  const r = rng(s + 61000);
+  const pool = [...DIGITEMS];
+  const out: number[] = [];
+  while (out.length < 5) out.push(pool.splice(Math.floor(r() * pool.length), 1)[0]);
+  return out;
+};
+
+// ---------------------------------------------------------------- mirror images of words (aemirror)
+
+const allIn = (w: string, set: Set<string>) => [...w].every((c) => set.has(c));
+const pal = (w: string) => w === [...w].reverse().join("");
+const MW_SIDE = ["MOM", "WOW", "TOT", "TOOT", "OTTO", "AHA", "MUM", "YAY", "HAH", "OHO"].filter((w) => allIn(w, VSYM) && pal(w));
+const MW_VNOTPAL = ["MAT", "TOY", "WAY", "HAT", "HOT", "TAX", "OAT", "AUTO", "MAY", "YAM", "TOW", "MATH", "WITH"].filter((w) => allIn(w, VSYM) && !pal(w));
+const MW_PALNOT = ["NUN", "LEVEL", "NOON", "DAD", "PEEP", "POP", "EYE", "PUP", "SOS", "DID", "REFER", "RADAR", "GIG", "NAN"].filter((w) => !allIn(w, VSYM) && pal(w));
+const MW_NEITHER = ["CAT", "DOG", "PEN", "SUN", "RICE", "FISH", "LEAF", "DRUM", "GATE", "CLAY"].filter((w) => !allIn(w, VSYM) && !pal(w) && !allIn(w, HSYM));
+const MW_WATER = ["HIDE", "CODE", "DICE", "ICE", "ECHO", "DECIDE", "CHOICE", "EXCEED", "DEED", "HOOD", "OXIDE"].filter((w) => allIn(w, HSYM));
+const MW_ONEOFF = ["HIDES", "COLD", "RIDE", "TIDE", "SIDE", "NICE", "DIET", "HOME", "DOOR", "CHIEF", "MICE", "CHOP"].filter((w) => !allIn(w, HSYM) && [...w].filter((c) => !HSYM.has(c)).length === 1);
+/** Side-mirror words that do NOT look the same in water (for the water question's wrong option). */
+const MW_SIDE_W = MW_SIDE.filter((w) => !allIn(w, HSYM));
+const mirQ = ([kind, s]: number[]) => {
+  const lists = kind === 0 ? [MW_SIDE, MW_VNOTPAL, MW_PALNOT, MW_NEITHER] : [MW_WATER, MW_SIDE_W, MW_ONEOFF, MW_NEITHER];
+  let t = s;
+  const words = lists.map((l) => {
+    const w = l[t % l.length];
+    t = Math.floor(t / l.length);
+    return w;
+  });
+  return { ...shuffled(`aemirror:${kind},${s}`, words), words };
+};
+/** Seen in a mirror standing beside the word: the order of the letters reverses and each letter flips left to right. */
+const sameInSideMirror = (w: string) => [...w].every((c) => BITMAP[c] && foldsV(c)) && [...w].reverse().join("") === w;
+/** Seen in still water below: each letter flips top to bottom and the order stays. */
+const sameInWater = (w: string) => [...w].every((c) => BITMAP[c] && foldsH(c));
+
+const GEO_MORE: Def[] = [
+  {
+    id: "aertang",
+    arity: 2,
+    title: "Spotting right angles in pictures and objects",
+    competency: ANG,
+    type: "choice",
+    // [mode, v]: mode 0 — the angle in the picture is RT_DEGS[v]; compare it with a right angle. mode 1 — v chooses
+    // one object with a right angle and three without; which one has the right angle?
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 299]])) return "An angle in a picture, or four everyday objects.";
+      if (p[0] === 0 && p[1] >= RT_DEGS.length) return "One of the drawn angles.";
+      return p[0] === 1 && repeatOf("aertang", 300, (t) => {
+        const { right, others } = rtObjs(t);
+        return `${right}|${[...others].sort((x, y) => x - y)}`;
+      }, p[1]) ? "An earlier choice already shows these four objects (distinct@1)." : null;
+    },
+    prompt: ([mode, v]) => (mode === 0 ? "Hold the corner of a folded paper (a right angle) against the angle in the picture. Is the angle in the picture smaller than a right angle, exactly a right angle, or bigger than a right angle?" : `Which of these makes a right angle (a square corner)?`),
+    choices: (p) => rtQ(p).choices,
+    solve: (p) => {
+      const q = rtQ(p);
+      return { steps: [{ id: "compare", op: "compare", competency: ANG, inputs: [p[0], q.deg], value: q.at(q.right) }], answer: q.at(q.right) };
+    },
+    // independent: work out the angle each option makes (a clock's hands are 30° apart per hour) and test it against 90°
+    validate: (p, v) => {
+      const q = rtQ(p);
+      if (!isIdx(v) || v < 0 || v >= q.choices.length) return false;
+      const pm = perm(`aertang:${p[0]},${p[1]}`, q.choices.length);
+      if (p[0] === 0) {
+        const d = RT_DEGS[p[1]];
+        const quarter = d / 90;
+        return pm[v] === (quarter < 1 ? 0 : quarter === 1 ? 1 : 2);
+      }
+      const o = q.items![pm[v]];
+      return objAngle(o) === 90 && q.items!.filter((x) => objAngle(x) === 90).length === 1;
+    },
+    bugs: (p) => {
+      const q = rtQ(p);
+      if (p[0] === 0) {
+        const d = q.deg;
+        if (d === 90) return [{ id: "looks-big", kind: "conceptual", competency: ANG, says: "The square corner was judged by eye as a little too wide; a right angle fits the folded-paper corner exactly, with no gap on either side.", predict: q.at(2) }];
+        if (Math.abs(d - 90) <= 25) return [{ id: "nearly-square", kind: "conceptual", competency: ANG, says: `An angle close to a square corner was taken as a right angle; when the paper corner is held on it there is a small gap ${d < 90 ? "outside the angle's arm" : "between the paper and the arm"}, so it is not exactly a right angle.`, predict: q.at(1) }];
+        return [{ id: "corner-reversed", kind: "conceptual", competency: ANG, says: "The paper-corner test was read the wrong way round: if the angle fits inside the square corner it is smaller; if the square corner fits inside the angle it is bigger.", predict: q.at(d < 90 ? 2 : 0) }];
+      }
+      const out: Bug[] = [];
+      const items = q.items!;
+      let best = -1;
+      for (let i = 1; i < items.length; i++) if (objAngle(items[i]) !== 180 && (best < 0 || Math.abs(objAngle(items[i]) - 90) < Math.abs(objAngle(items[best]) - 90))) best = i;
+      if (best > 0) out.push({ id: "nearly-square", kind: "conceptual", competency: ANG, says: `${items[best].text[0].toUpperCase()}${items[best].text.slice(1)} makes an angle that is not far from a square corner, but a folded-paper right angle would not fit it exactly.`, predict: q.at(best) });
+      const flat = items.findIndex((o) => objAngle(o) === 180);
+      if (flat > 0) out.push({ id: "straight-as-right", kind: "conceptual", competency: ANG, says: "A flat, straight angle (an open book lying flat) was taken for a right angle; a right angle is only half of a straight angle.", predict: q.at(flat) });
+      return out;
+    },
+    variants: () => [],
+    explain: (s) => (s.inputs[0] === 0 ? `Compare with a square corner (90°): the angle is ${RT_CMP[Number(s.inputs[1]) < 90 ? 0 : Number(s.inputs[1]) === 90 ? 1 : 2]}` : "Only the square corner fits a folded-paper right angle exactly"),
+    domain: [[0, 1], [0, 299]],
+    difficulty: ([mode, v]) => (mode === 1 ? 2 : Math.abs(RT_DEGS[v] - 90) <= 25 ? 3 : 1),
+    figure: ([mode, v]) => (mode === 0 ? { type: "angle", deg: RT_DEGS[v] } : null),
+    word: ([mode, v]) => (mode === 0 ? `${name(v)} opens a pair of scissors so that the blades make the angle in the picture. Is the angle between the blades smaller than a right angle, exactly a right angle, or bigger than a right angle?` : `${name(v)} walks round the school checking corners with a folded-paper right angle. Which of these will the paper corner fit exactly?`),
+    teach: {
+      idea: "A right angle is a square corner, like the corner of a page: a quarter of a full turn. Folding a paper twice makes a right-angle tester.",
+      method: "Hold the folded corner in the angle with one edge along one arm. If the other arm lies along the other edge, it is a right angle; if the angle fits inside the corner it is smaller; if the corner fits inside the angle it is bigger.",
+      visual: () => ({ type: "angle", deg: 90 }),
+      alternatives: [
+        { id: "clock_quarter", title: "A quarter turn on a clock", kind: "conceptual", text: ["The hands of a clock at 3 o'clock make a right angle: the minute hand at 12, the hour hand a quarter of the way round.", "Fewer than 3 hours apart is smaller than a right angle; more (up to 6) is bigger."], visual: () => ({ type: "clock", h: 3, m: 0 }) },
+      ],
+    },
+    limits: "Drawn angles clearly away from 90° (or exactly 90°) and everyday objects; holding a real folded-paper tool against real objects is done in class, not in the app.",
+  },
+  {
+    id: "aeangk",
+    arity: 2,
+    title: "Classifying angles, including reflex angles",
+    competency: ANG,
+    type: "choice",
+    // [mode, v]: the angle is 5v degrees (5° to 355°); mode 0 gives its measure, mode 1 draws it
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 1], [1, 71]]) ? "An angle from 5° to 355°, given by its measure or drawn." : null),
+    prompt: ([mode, v]) => (mode === 0 ? `An angle measures ${5 * v}°. What kind of angle is it?` : "What kind of angle is marked by the arc in the picture?"),
+    choices: (p) => akQ(p).choices,
+    solve: (p) => {
+      const q = akQ(p);
+      return { steps: [{ id: "classify", op: "compare", competency: ANG, inputs: [q.d], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: count how many right angles fit into the angle and name it from that
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = akQ(p);
+      const k = q.d / 90;
+      const nameOf = k < 1 ? "acute" : k === 1 ? "right" : k < 2 ? "obtuse" : k === 2 ? "straight" : k < 4 ? "reflex" : "";
+      return q.choices[v] === nameOf;
+    },
+    bugs: (p) => {
+      const q = akQ(p);
+      const at = (nm: string) => q.choices.indexOf(nm);
+      const out: Bug[] = [];
+      if (q.k === 4) out.push({ id: "inner-angle", kind: "conceptual", competency: ANG, says: `The smaller angle between the arms (360° − ${q.d}° = ${360 - q.d}°) was named; the arc goes the long way round, so the angle is more than 180°: a reflex angle.`, predict: at(AKINDS[akind(360 - q.d)]) });
+      if (q.k === 0) out.push({ id: "acute-obtuse-swap", kind: "recall", competency: ANG, says: "The names were mixed up: an angle smaller than a right angle is acute; obtuse is between 90° and 180°.", predict: at("obtuse") });
+      if (q.k === 2) out.push({ id: "acute-obtuse-swap", kind: "recall", competency: ANG, says: "The names were mixed up: an angle between 90° and 180° is obtuse; acute is smaller than 90°.", predict: at("acute") }, { id: "big-is-reflex", kind: "conceptual", competency: ANG, says: "Every angle bigger than a right angle was called reflex; a reflex angle is bigger than a straight angle (more than 180°).", predict: at("reflex") });
+      if (q.k === 3) out.push({ id: "biggest-bent", kind: "conceptual", competency: ANG, says: "A straight angle is not obtuse: its two arms make one straight line, exactly 180°.", predict: at("obtuse") });
+      if (q.k === 1) out.push({ id: "upright-as-straight", kind: "recall", competency: ANG, says: "An arm standing straight up was taken for a straight angle; a straight angle is a flat line (180°), and a square corner is a right angle.", predict: at("straight") });
+      return out.filter((b) => (b.predict as number) >= 0);
+    },
+    variants: () => [],
+    explain: (s) => {
+      const d = Number(s.inputs[0]);
+      return d < 90 ? `${d}° is less than 90°: acute` : d === 90 ? "90° is a right angle" : d < 180 ? `${d}° is between 90° and 180°: obtuse` : d === 180 ? "180° is a straight angle" : `${d}° is between 180° and 360°: reflex`;
+    },
+    domain: [[0, 1], [1, 71]],
+    difficulty: ([mode, v]) => (5 * v > 180 ? 3 : mode === 1 ? 2 : 1),
+    figure: ([mode, v]) => (mode === 1 ? { type: "angle", deg: 5 * v } : null),
+    word: ([mode, v]) => (mode === 0 ? `The door of ${name(v)}'s cupboard swings round through ${5 * v}° from closed. What kind of angle has it turned through?` : `${name(v)} turns a key through the angle marked by the arc in the picture. What kind of angle is that turn?`),
+    teach: {
+      idea: "Angles are named by comparing them with a right angle (90°) and a straight angle (180°): acute < 90° < obtuse < 180° < reflex < 360°.",
+      method: "Look at how far the arc turns. Less than a square corner: acute; a square corner: right; less than a straight line: obtuse; a straight line: straight; more than a straight line: reflex.",
+      visual: ([, v]) => ({ type: "angle", deg: 5 * v }),
+      alternatives: [
+        { id: "two_sides", title: "Every pair of arms makes two angles", kind: "conceptual", text: ["Two arms from one point make two angles that add up to 360°: one the short way round and one the long way round.", "If the short one is 120°, the long one is 240° — a reflex angle. The arc shows which one is meant."] },
+      ],
+    },
+    limits: "Angles in steps of 5° from 5° to 355°; measuring with a protractor is a separate family.",
+  },
+  {
+    id: "aearms",
+    arity: 2,
+    title: "The vertex and arms of an angle, and comparing angles by turning",
+    competency: ANG,
+    type: "choice",
+    // [kind, s]: kind 0 the vertex of ∠(name s); kind 1 its arms; kind 2 compare turns of 1 + s % 5 and 1 + ⌊s / 5⌋ numbers
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 2], [0, 59]]) || (p[0] === 2 && p[1] >= 25) ? "An angle named by three letters, or two turns to compare." : null),
+    prompt: ([kind, s]) => {
+      const q = armQ([kind, s]);
+      if (kind === 0) return `Which point is the vertex of ∠${q.a}${q.b}${q.c}?`;
+      if (kind === 1) return `What are the arms of ∠${q.a}${q.b}${q.c}?`;
+      return `∠X is the turn made by the minute hand of a clock moving from 12 to ${q.s1}. ∠Y is drawn with arms twice as long, and is the turn of the hand moving from 12 to ${q.s2}. If ∠X is placed on top of ∠Y with the vertices and one arm together, which is true?`;
+    },
+    choices: (p) => armQ(p).choices,
+    solve: (p) => {
+      const q = armQ(p);
+      const right = p[0] === 2 ? (q.s1! > q.s2! ? 0 : q.s1! < q.s2! ? 1 : 2) : 0;
+      return { steps: [{ id: "read", op: "identify", competency: ANG, inputs: [p[0], `${q.a}${q.b}${q.c}`], value: q.at(right) }], answer: q.at(right) };
+    },
+    // independent: read the middle letter of the name; for turns, step the hand round and compare the degrees turned
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = armQ(p);
+      const nm = `${q.a}${q.b}${q.c}`;
+      const c = q.choices[v];
+      if (p[0] === 0) return c === nm.charAt(1);
+      if (p[0] === 1) return c === `the rays ${nm.charAt(1)}${nm.charAt(0)} and ${nm.charAt(1)}${nm.charAt(2)}`;
+      let [x, y] = [0, 0];
+      for (let i = 0; i < q.s1!; i++) x += 30;
+      for (let i = 0; i < q.s2!; i++) y += 30;
+      return c === (x > y ? "∠X is bigger" : x < y ? "∠Y is bigger" : "They are the same size");
+    },
+    bugs: (p) => {
+      const q = armQ(p);
+      if (p[0] === 0) return [{ id: "first-letter", kind: "conceptual", competency: ANG, says: `The first letter was taken as the vertex; in ∠${q.a}${q.b}${q.c} the vertex is always the middle letter, where the two arms meet.`, predict: q.at(1) }];
+      if (p[0] === 1) return [
+        { id: "first-letter", kind: "conceptual", competency: ANG, says: "The first letter was taken as the vertex, so the arms were drawn from the wrong point; both arms start at the middle letter.", predict: q.at(1) },
+        { id: "join-ends", kind: "conceptual", competency: ANG, says: "The segment joining the two outer points was taken as an arm; the arms are the two rays that start at the vertex.", predict: q.at(3) },
+      ];
+      return q.s1! < q.s2! ? [] : [{ id: "longer-arms", kind: "conceptual", competency: ANG, says: "∠Y was taken as bigger because its arms are longer; the size of an angle is the amount of turn between the arms, not how long the arms are drawn.", predict: q.at(1) }];
+    },
+    variants: () => [],
+    explain: (s) => (s.inputs[0] === 0 ? `In ∠${s.inputs[1]} the middle letter is the vertex` : s.inputs[0] === 1 ? `The arms of ∠${s.inputs[1]} are the two rays from the middle letter` : "Compare the amounts of turn: 30° for each number the hand passes"),
+    domain: [[0, 2], [0, 59]],
+    difficulty: ([kind, s]) => (kind === 0 ? 1 : kind === 1 ? 2 : (1 + (s % 5)) >= 1 + Math.floor(s / 5) ? 3 : 2),
+    word: ([kind, s]) => {
+      const q = armQ([kind, s]);
+      if (kind === 0) return `On a map, ${name(s)} marks three villages ${q.a}, ${q.b} and ${q.c} and draws the roads from ${q.b} to the other two, making ∠${q.a}${q.b}${q.c}. Which village is at the vertex of the angle?`;
+      if (kind === 1) return `${name(s)} stretches two strings from a peg to make ∠${q.a}${q.b}${q.c} on the playground. Which are the arms of the angle?`;
+      return `${name(s)} opens a small fan from closed by the turn a minute hand makes from 12 to ${q.s1} (∠X). A big fan, with blades twice as long, is opened by the turn from 12 to ${q.s2} (∠Y). Laying one angle on the other, which is true?`;
+    },
+    teach: {
+      idea: "An angle is made by two rays (its arms) starting from one point (its vertex). Its size is the amount of turn from one arm to the other.",
+      method: "In ∠ABC the middle letter B is the vertex and the arms are BA and BC. To compare two angles, put one on the other with vertices and one arm together: the one whose second arm turns further is bigger.",
+      alternatives: [
+        { id: "trace", title: "Trace and lay on top", kind: "conceptual", text: ["Trace one angle on thin paper and lay it on the other, vertex on vertex and one arm along one arm.", "If the traced second arm lies inside the other angle, the traced angle is smaller — however long the arms are."] },
+      ],
+    },
+    limits: "Angles named by three capital letters and turns on a clock face; superposition with real paper cut-outs is done in class.",
+  },
+  {
+    id: "aecpart",
+    arity: 2,
+    title: "Naming the parts of a circle",
+    competency: CIRC,
+    type: "choice",
+    // [part, s]: part 0 centre, 1 radius, 2 diameter, 3 chord, 4 arc, 5 sector, 6 segment; s picks the letters
+    parse: none,
+    reject: (p) => (!inRange(p, [[0, 6], [0, 31]]) ? "A part of a circle described with letters." : p[0] === 0 && p[1] >= 4 ? "The centre needs only its letter." : null),
+    prompt: (p) => `A circle has centre ${cpQ(p).o}. What is the name for ${cpQ(p).desc}?`,
+    choices: (p) => cpQ(p).choices,
+    solve: (p) => {
+      const q = cpQ(p);
+      return { steps: [{ id: "name", op: "identify", competency: CIRC, inputs: [CPARTS[p[0]]], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: name the part again from its features (what it joins, whether it is a region or curved)
+    validate: (p, v) => isIdx(v) && cpQ(p).choices[v] === CPARTS[cname(CFEAT[p[0]])],
+    bugs: (p) => {
+      const q = cpQ(p);
+      const at = (i: number) => q.base.indexOf(CPARTS[i]) >= 0 ? q.at(q.base.indexOf(CPARTS[i])) : -1;
+      const B: Bug[] = [
+        ...(p[0] === 1 ? [{ id: "radius-diameter", kind: "conceptual", competency: CIRC, says: "A radius and a diameter were mixed up: a radius goes from the centre to the circle; a diameter goes right across through the centre.", predict: at(2) } as Bug] : []),
+        ...(p[0] === 2 ? [{ id: "radius-diameter", kind: "conceptual", competency: CIRC, says: "A radius and a diameter were mixed up: a segment across the whole circle through the centre is a diameter (two radii).", predict: at(1) } as Bug, { id: "any-chord", kind: "conceptual", competency: CIRC, says: "It is a chord, but a chord through the centre has its own name, the diameter (the longest chord).", predict: at(3) } as Bug] : []),
+        ...(p[0] === 3 ? [{ id: "chord-as-diameter", kind: "conceptual", competency: CIRC, says: "Every segment across the circle was called a diameter; a diameter must pass through the centre, and this one does not.", predict: at(2) } as Bug] : []),
+        ...(p[0] === 4 ? [{ id: "arc-chord", kind: "conceptual", competency: CIRC, says: "The curved piece was called a chord; a chord is the straight segment joining the two points, the curved piece is an arc.", predict: at(3) } as Bug] : []),
+        ...(p[0] === 5 ? [{ id: "sector-segment", kind: "conceptual", competency: CIRC, says: "Sector and segment were mixed up: a sector is cut off by two radii (like a slice of a round cake); a segment is cut off by a chord.", predict: at(6) } as Bug] : []),
+        ...(p[0] === 6 ? [{ id: "sector-segment", kind: "conceptual", competency: CIRC, says: "Sector and segment were mixed up: a region cut off by a chord is a segment; a sector is cut off by two radii.", predict: at(5) } as Bug] : []),
+        ...(p[0] === 0 ? [{ id: "centre-radius", kind: "recall", competency: CIRC, says: "The centre is a point; the radius is the distance (or segment) from the centre to the circle.", predict: at(1) } as Bug] : []),
+      ];
+      return B.filter((b) => (b.predict as number) >= 0);
+    },
+    variants: () => [],
+    explain: (s) => `That is ${s.inputs[0]}`,
+    domain: [[0, 6], [0, 31]],
+    difficulty: ([part]) => (part <= 2 ? 1 : part <= 4 ? 2 : 3),
+    figure: (p) => {
+      const q = cpQ(p);
+      return p[0] === 1 ? { type: "circle", radius: `${q.o}${q.a}` } : p[0] === 2 ? { type: "circle", diameter: `${q.a}${q.b}` } : p[0] === 5 ? { type: "circle", sector: 70 } : { type: "circle" };
+    },
+    word: (p) => {
+      const q = cpQ(p);
+      return `${name(p[1])} draws a round rangoli with a string tied to a peg at its centre ${q.o}. In the drawing, what is the name for ${q.desc}?`;
+    },
+    teach: {
+      idea: "Every point of a circle is the same distance from the centre. A radius joins the centre to the circle; a chord joins two points of the circle, and the chord through the centre is a diameter. An arc is a piece of the circle itself.",
+      method: "Ask: is it a point, a straight segment, a curved piece or a region? For a segment, where do its ends lie and does it pass through the centre? For a region, is it cut off by two radii (sector) or by a chord (segment)?",
+      visual: () => ({ type: "circle", radius: "r", sector: 60 }),
+      alternatives: [
+        { id: "food", title: "Think of food", kind: "conceptual", text: ["A slice of a round cake, cut from the middle, is a sector.", "Cutting a straight line across a chapati, not through the middle, cuts off a segment; the cut itself is a chord."] },
+      ],
+    },
+    limits: "The centre, radius, diameter (Grade 4) and chord, arc, sector, segment (Grade 7) described in words with a simple picture; drawing them is marked by an educator.",
+  },
+  {
+    id: "aedsym",
+    arity: 2,
+    title: "Counting the lines of symmetry of a design or a shape",
+    competency: SYM,
+    type: "integer",
+    mc: true,
+    // [kind, s]: kind 0 — a square design of shaded squares (seed s); kind 1 — the shape SSHAPES[s]
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 199]])) return "A square design or a named shape.";
+      const [kind, s] = p;
+      if (kind === 1) return s >= SSHAPES.length ? "One of the named shapes." : null;
+      const { cells, g } = design(s);
+      const filled = cells.flat().filter(Boolean).length;
+      if (filled < 4 || filled > cells.length * cells.length - 3) return "A design with some squares shaded and some not.";
+      if (foldLines(cells).length !== g.length) return "The design must have exactly the lines it was made with.";
+      return repeatOf("aedsym", 200, (t) => JSON.stringify(design(t).cells), s) ? "An earlier choice already shows this design (distinct@1)." : null;
+    },
+    prompt: ([kind, s]) => (kind === 0 ? "The picture shows a square design made of shaded and white squares. How many lines of symmetry does the design have? (Count fold lines going up and down, across, and along the two diagonals.)" : `How many lines of symmetry does ${SSHAPES[s].name} have? (The picture shows it.)`),
+    solve: ([kind, s]) => {
+      const n = kind === 0 ? design(s).g.length : SSHAPES[s].lines;
+      return { steps: [{ id: "lines", op: "count", competency: SYM, inputs: [kind, s], value: n }], answer: n };
+    },
+    // independent: fold the drawing along each line (design), or test mirror lines through the centre every half degree (shape)
+    validate: ([kind, s], v) => isInt(v) && v === (kind === 0 ? foldLines(design(s).cells).length : polyLines(SSHAPES[s].pts)),
+    bugs: ([kind, s]) => {
+      if (kind === 0) {
+        const g = design(s).g;
+        const straight = g.filter((l) => l === "v" || l === "h").length;
+        return [
+          { id: "diagonals-missed", kind: "procedural", competency: SYM, says: "Only the up-and-down and across fold lines were tried; a square design can also fold along its diagonals.", predict: straight !== g.length ? straight : null },
+          { id: "looks-balanced", kind: "conceptual", competency: SYM, says: "The design was counted as symmetric because it looks balanced; a fold line works only when every shaded square lands on a shaded square.", predict: g.length === 0 ? 1 : null },
+        ];
+      }
+      const sh = SSHAPES[s];
+      const reg = /regular|equilateral/.test(sh.name);
+      return [
+        ...(/rectangle|rhombus/.test(sh.name) ? [{ id: "diagonals-counted", kind: "conceptual", competency: SYM, says: "The diagonals were counted as fold lines; folding along a diagonal of this shape does not make the two halves match.", predict: 4 } as Bug] : []),
+        ...(/parallelogram/.test(sh.name) ? [{ id: "half-turn", kind: "conceptual", competency: SYM, says: "A parallelogram looks the same after a half turn, but that is not a fold: no fold line makes its halves match.", predict: 2 } as Bug] : []),
+        ...(/square/.test(sh.name) && !/not a square/.test(sh.name) ? [{ id: "diagonals-missed", kind: "procedural", competency: SYM, says: "Only the up-and-down and across lines were counted; a square also folds along both diagonals.", predict: 2 } as Bug] : []),
+        ...(reg && sh.lines % 2 === 0 ? [{ id: "corners-only", kind: "procedural", competency: SYM, says: "Only the lines through opposite corners were counted; lines through the middles of opposite sides are lines of symmetry too.", predict: sh.lines / 2 } as Bug] : []),
+        ...(reg && sh.lines % 2 === 1 ? [{ id: "one-line", kind: "conceptual", competency: SYM, says: "Only the up-and-down line was found; a regular shape has a line of symmetry through every corner.", predict: 1 } as Bug] : []),
+        ...(/triangle with|right-angled/.test(sh.name) ? [{ id: "any-shape", kind: "conceptual", competency: SYM, says: "A fold was taken to work for this triangle, but with three different sides (or two different shorter sides) no fold makes the halves match.", predict: 1 } as Bug] : []),
+        ...(/kite|trapezium/.test(sh.name) ? [{ id: "two-ways", kind: "procedural", competency: SYM, says: "A second fold line (across) was counted; for this shape only the up-and-down fold makes the halves match.", predict: 2 } as Bug] : []),
+      ];
+    },
+    distractors: ([kind, s]) => {
+      const n = kind === 0 ? design(s).g.length : SSHAPES[s].lines;
+      return [n + 1, n + 2, n - 1, 4, 2, 0].filter((x) => x >= 0 && x !== n);
+    },
+    variants: () => [],
+    explain: (s) => (s.inputs[0] === 0 ? `Fold along each of the four lines: ${s.value} ${s.value === 1 ? "fold makes" : "folds make"} the halves match` : `It has ${s.value} ${s.value === 1 ? "line" : "lines"} of symmetry`),
+    domain: [[0, 1], [0, 199]],
+    difficulty: ([kind, s]) => (kind === 1 ? (SSHAPES[s].lines >= 5 ? 3 : 2) : design(s).g.some((l) => l === "d" || l === "e") ? 3 : design(s).g.length ? 2 : 1),
+    figure: ([kind, s]) => (kind === 0 ? designFig(design(s).cells) : SSHAPES[s].fig),
+    word: ([kind, s]) => (kind === 0 ? `${name(s)} makes a square kolam-style tile pattern, shown in the picture with shaded and white squares. In how many different ways can the pattern be folded so that the two halves match exactly?` : `${name(s)} cuts ${SSHAPES[s].name} out of paper for a festival decoration. In how many different ways can it be folded so that the two halves match exactly?`),
+    teach: {
+      idea: "A line of symmetry is a fold line where one half lands exactly on the other. A shape can have none, one, or several.",
+      method: "Try each possible fold: up and down, across, and along the diagonals (and, for regular shapes, through every corner and every side's middle). Count only the folds where every part matches.",
+      alternatives: [
+        { id: "mirror", title: "Use a mirror", kind: "conceptual", text: ["Stand a small mirror on the line you are testing.", "If the half you see plus its reflection looks exactly like the whole design, the line is a line of symmetry."] },
+      ],
+    },
+    limits: "Square designs of 4 × 4 or 5 × 5 squares (lines up and down, across, and the two diagonals) and twelve named shapes; drawing the other half is marked by an educator.",
+  },
+  {
+    id: "aedigsym",
+    arity: 2,
+    title: "Lines of symmetry in digits and numbers",
+    competency: SYM,
+    type: "integer",
+    mc: true,
+    // [axis, s]: axis 0 vertical, 1 horizontal; the seed chooses five digits or numbers drawn as on a digital clock
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 199]])) return "Five digits or numbers and a vertical or horizontal line.";
+      const k = digList(p[1]).filter((x) => hasLineSeg(x, p[0])).length;
+      if (k === 0 || k === 5) return "Some, but not all, have the line.";
+      return repeatOf(`aedigsym${p[0]}`, 200, (t) => [...digList(t)].sort((a, b) => a - b).join(","), p[1]) ? "An earlier choice already shows these numbers (distinct@1)." : null;
+    },
+    prompt: ([axis, s]) => `These are written the way a digital clock shows them, with straight bars: ${digList(s).join(", ")}. How many of them have a ${axis ? "horizontal line of symmetry (a fold straight across the middle, top half onto bottom half)" : "vertical line of symmetry (a fold straight down the middle, left half onto right half)"}?`,
+    solve: ([axis, s]) => {
+      const xs = digList(s).filter((x) => hasLineSeg(x, axis));
+      return { steps: [{ id: "check", op: "count", competency: SYM, inputs: [axis ? "horizontal" : "vertical", xs.join(", ")], value: xs.length }], answer: xs.length };
+    },
+    // independent: draw each number on a grid of bars and fold the drawing
+    validate: ([axis, s], v) => v === digList(s).filter((x) => foldsNum(x, axis)).length,
+    bugs: ([axis, s]) => {
+      const xs = digList(s);
+      const right = xs.filter((x) => hasLineSeg(x, axis)).length;
+      const other = xs.filter((x) => hasLineSeg(x, 1 - axis)).length;
+      const each = xs.filter((x) => String(x).split("").every((d) => hasLineSeg(Number(d), axis))).length;
+      return [
+        { id: "axis-swap", kind: "conceptual", competency: SYM, says: `The numbers were folded the other way (${axis ? "down the middle" : "across the middle"}); a ${axis ? "horizontal line goes across, so the top half must land on the bottom half" : "vertical line goes down the middle, so the left half must land on the right half"}.`, predict: other },
+        ...(axis === 0 ? [{ id: "digit-by-digit", kind: "conceptual", competency: SYM, says: "Each digit was checked on its own, but folding a whole number down its middle also swaps the order of the digits: 80 folds onto 08, which is different.", predict: each !== right ? each : null } as Bug] : []),
+      ];
+    },
+    distractors: ([axis, s]) => [0, 1, 2, 3, 4, 5].filter((x) => x !== digList(s).filter((n) => hasLineSeg(n, axis)).length),
+    variants: () => [],
+    explain: (s) => `${s.inputs[1]} ${Number(s.value) === 1 ? "has" : "have"} a ${s.inputs[0]} line of symmetry: ${s.value}`,
+    domain: [[0, 1], [0, 199]],
+    difficulty: ([axis, s]) => (axis === 1 ? (digList(s).some((x) => x > 9) ? 2 : 1) : 3),
+    figure: ([, s]) => ({ type: "table", head: ["1st", "2nd", "3rd", "4th", "5th"], rows: [digList(s).map(String)] }),
+    word: ([axis, s]) => `${name(s)} makes number cards for a class game, drawing the numbers with straight bars like a digital clock: ${digList(s).join(", ")}. ${name(s)} folds each card ${axis ? "straight across the middle" : "straight down the middle"}. For how many cards do the two halves of the number match exactly?`,
+    teach: {
+      idea: "On a digital clock each digit is made of straight bars. Some digits, like 8 and 0, match when folded either way; 1 and 3 match only when folded across.",
+      method: "For a fold across, check each digit's top and bottom halves. For a fold down the middle of a whole number, the left end must match the right end: read the mirrored digits in reverse order and see if you get the same number.",
+      alternatives: [
+        { id: "mirror", title: "Hold a mirror", kind: "conceptual", text: ["Stand a mirror along the middle of the number (across or up and down).", "If the half on paper and its reflection together show the same number, that line is a line of symmetry."] },
+      ],
+    },
+    limits: "Digits drawn as on a digital clock (straight bars), so the answer does not depend on handwriting; numbers of up to three digits.",
+  },
+  {
+    id: "aemirror",
+    arity: 2,
+    title: "Which word looks the same in a mirror",
+    competency: SYM,
+    type: "choice",
+    // [kind, s]: kind 0 — a mirror standing beside the word; kind 1 — reflection in still water below; s chooses the four words
+    parse: none,
+    reject: (p) => {
+      if (!inRange(p, [[0, 1], [0, 199]])) return "Four words and a mirror beside them or water below.";
+      const n = p[0] === 0 ? MW_SIDE.length * MW_VNOTPAL.length * MW_PALNOT.length * MW_NEITHER.length : MW_WATER.length * MW_SIDE_W.length * MW_ONEOFF.length * MW_NEITHER.length;
+      return p[1] >= Math.min(200, n) ? "One of the sets of four words." : null;
+    },
+    prompt: ([kind]) =>
+      kind === 0
+        ? "A word is written in plain capital letters on a card, and the card is held next to a mirror standing straight up beside it. Which of these words looks exactly the same in the mirror as on the card?"
+        : "A word is painted in plain capital letters along the side of a boat, and the still water below shows its reflection upside down. Which of these words looks exactly the same in the reflection as on the boat?",
+    choices: (p) => mirQ(p).choices,
+    solve: (p) => {
+      const q = mirQ(p);
+      return { steps: [{ id: "mirror", op: "reflect", competency: SYM, inputs: [p[0] ? "water" : "side", q.words[0]], value: q.at(0) }], answer: q.at(0) };
+    },
+    // independent: fold each letter's drawing (left onto right, or top onto bottom) and, for a side mirror, reverse the order
+    validate: (p, v) => {
+      if (!isIdx(v)) return false;
+      const q = mirQ(p);
+      const ok = q.choices.map((w) => (p[0] === 0 ? sameInSideMirror(w) : sameInWater(w)));
+      return ok[v] && ok.filter(Boolean).length === 1;
+    },
+    bugs: (p) => {
+      const q = mirQ(p);
+      return p[0] === 0
+        ? [
+            { id: "palindrome-only", kind: "conceptual", competency: SYM, says: `${q.words[2]} reads the same backwards, but its letters themselves flip in a mirror (${[...new Set([...q.words[2]].filter((c) => !VSYM.has(c)))].join(", ")} look different), so it does not look the same.`, predict: q.at(2) },
+            { id: "letters-only", kind: "conceptual", competency: SYM, says: `Each letter of ${q.words[1]} looks the same in a mirror, but a mirror beside the word also reverses the order of the letters: it shows ${[...q.words[1]].reverse().join("")}.`, predict: q.at(1) },
+          ]
+        : [
+            { id: "side-rule", kind: "conceptual", competency: SYM, says: `The rule for a mirror standing beside the word was used; water below flips each letter top to bottom and keeps the order, and ${[...new Set([...q.words[1]].filter((c) => !HSYM.has(c)))].join(", ")} look different upside down.`, predict: q.at(1) },
+            { id: "one-letter", kind: "procedural", competency: SYM, says: `Not every letter of ${q.words[2]} was checked: ${[...q.words[2]].filter((c) => !HSYM.has(c)).join(", ")} looks different when flipped top to bottom.`, predict: q.at(2) },
+          ];
+    },
+    variants: () => [],
+    explain: (s) => (s.inputs[0] === "side" ? `In a mirror beside it, ${s.inputs[1]} is reversed and every letter is flipped left to right, and it comes back the same` : `In the water every letter of ${s.inputs[1]} is flipped top to bottom, the order stays, and each letter looks the same`),
+    domain: [[0, 1], [0, 199]],
+    difficulty: ([kind]) => (kind === 0 ? 2 : 3),
+    word: ([kind, s]) => (kind === 0 ? `${name(s)} writes words on cards in plain capitals for a mirror game: a card held beside a standing mirror wins if the mirror shows exactly the same word. Which card wins?` : `At the Ooty boat lake, ${name(s)} sees boats with names painted in plain capitals, reflected upside down in the still water. Which name looks exactly the same in its reflection?`),
+    teach: {
+      idea: "A mirror standing beside a word flips it left to right: the letters come in the reverse order and each letter is flipped. Water below flips it top to bottom: the order stays, but each letter is turned upside down.",
+      method: "For a mirror beside the word: every letter must have an up-and-down line of symmetry AND the word must read the same backwards. For water below: every letter must have an across line of symmetry.",
+      alternatives: [
+        { id: "try_it", title: "Try it with a mirror", kind: "conceptual", text: ["Write the word in big capitals and hold a mirror beside it, then below it.", "Read what the mirror shows, letter by letter, and compare it with the card."] },
+      ],
+    },
+    limits: "Words in plain block capitals (letters such as B, K and Q, whose shape depends on the font, are left out); drawing mirror images is marked by an educator.",
+  },
+];
+B05.push(...GEO_MORE);
