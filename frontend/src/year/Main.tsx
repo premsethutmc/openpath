@@ -31,7 +31,7 @@ import "./year.css";
 
 declare const OPENPATH_REVIEW_FIXTURE: boolean;
 // TEST BUILDS ONLY: treat every question as educator-reviewed, so acceptance tests can show a verified (green) skill.
-if (typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE) useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z" });
+if (typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE) useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z", all: true }); // generated questions too (the dashboard's test build reads the same)
 
 const api = new Api();
 const uid = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -137,6 +137,14 @@ function App() {
   }, [view]);
 
   const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}`, marks }) : null), [learner, events, now, registryLoaded, marks]);
+  // ?skill=<competency> (from the curriculum dashboard): open that skill's module once the year is loaded
+  const wanted = useRef(new URLSearchParams(location.search).get("skill"));
+  useEffect(() => {
+    const want = wanted.current;
+    if (!want || !st?.release || !moduleFor(want)) return;
+    wanted.current = null;
+    setView({ name: "module", competency: want, back: { name: "year" } });
+  }, [st?.release]);
   const session = `learn:${learner}:${visit.current}`;
   const ctxOf = () => ({ learnerId: learner, sessionId: session, at: new Date().toISOString() });
 

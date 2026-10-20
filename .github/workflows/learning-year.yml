@@ -13,6 +13,9 @@ on:
         "frontend/src/learning/**",
         "frontend/e2e/learning-year.test.mjs",
         "frontend/scripts/build-year.mjs",
+        "frontend/src/curriculum/**",
+        "frontend/e2e/curriculum.test.mjs",
+        "frontend/scripts/build-curriculum.mjs",
         ".github/workflows/learning-year.yml",
       ]
 permissions:
@@ -51,7 +54,7 @@ jobs:
           node --import tsx ../packages/learning/scripts/board-releases.ts
           node --import tsx ../packages/learning/scripts/compile-coverage.ts
           git diff --exit-code ../content/learning/family-specs.v1.json ../content/learning/generated.v1.json ../content/learning/library.v1.json ../content/learning/families-parity.v1.json ../docs/learning-year/COVERAGE.md ../content/learning/competency-expansion.v1.json ../content/learning/syllabus ../content/learning/curricula ../packages/learning/src/board-releases.ts ../content/learning/coverage-matrix.v1.json ../docs/mathematics/COVERAGE_MATRIX.md ../content/learning/marking-parity.v1.json
-      - run: node scripts/build-mathematics-journey.mjs && node scripts/build-year.mjs --test
+      - run: node scripts/build-mathematics-journey.mjs && node scripts/build-year.mjs --test && node scripts/build-curriculum.mjs --test
         working-directory: frontend
       - run: npx playwright install --with-deps chromium
         working-directory: frontend
@@ -83,6 +86,13 @@ jobs:
             exit 1
           fi
           cat /tmp/year-e2e.log
+          # the Mathematics curriculum dashboard (/curriculum/): journeys A–N against the same Django API
+          if ! YEAR_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' SHOTS=/tmp/year-screens/curriculum/ node --import tsx --test e2e/curriculum.test.mjs > /tmp/curriculum-e2e.log 2>&1; then
+            cat /tmp/curriculum-e2e.log
+            grep -E "^not ok|error:|Error|expected|actual|at .*curriculum.test" /tmp/curriculum-e2e.log | head -40 | while IFS= read -r line; do echo "::error::$line"; done
+            exit 1
+          fi
+          cat /tmp/curriculum-e2e.log
       - uses: actions/upload-artifact@v7
         if: always()
         with:
