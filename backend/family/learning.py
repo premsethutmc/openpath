@@ -27,6 +27,7 @@ RECORDS = {
     'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working'},
     'teach': {'rule', 'strategy', 'competency'},
     'skip': {'target'},
+    'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
     'topic_session': {'academicYear', 'stage', 'target', 'minutes', 'curriculum'},
 }
 BASE = {'kind', 'id', 'at', 'learnerId', 'sessionId', 'record'}
@@ -293,6 +294,8 @@ def checked_learning(event, pupil):
             _reject('A session plan must use the learner current Grade 7 curriculum.')
         if event.get('target') not in c['modules'] or not _known_release(event.get('curriculum'), prior):
             _reject('Unknown session target or curriculum.')
+    elif record == 'study_session':
+        event = _study_session(event, prior, pupil, c)
     elif record == 'goal':
         if event.get('pathway') not in c['goals'] or type(event.get('active')) is not bool:
             _reject('Unknown goal pathway.')
@@ -312,6 +315,11 @@ def checked_learning(event, pupil):
             _reject('Hints and solutions are recorded as given.')
         if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or not _answer_ok(q['type'], event['response']):
             _reject('That answer is not in the form this question asks for.')
+        if isinstance(event.get('context'), str) and event['context'].startswith('study:'):
+            plan_id = event['context'][6:]
+            visits = [e for e in prior if e.get('record') == 'study_session' and e.get('planId') == plan_id]
+            if not visits or visits[-1]['phase'] == 'ended':
+                _reject('Open this study session before recording answers; a completed summary is final.')
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')
         w = event.get('working', [])
@@ -333,3 +341,56 @@ def checked_learning(event, pupil):
             _reject('Invalid skip.')
     # the server keeps the time: the delayed check and everything else is measured by it
     return {**event, 'at': now.isoformat().replace('+00:00', 'Z'), 'savedAt': now.isoformat()}
+
+
+def _study_session(event, prior, pupil, c):
+    """Cumulative client timing + server-counted performance, never mastery evidence."""
+    plan = next((e for e in prior if e.get('id') == event.get('planId') and e.get('record') == 'topic_session' and e.get('stage') == 'plan'), None)
+    if not plan:
+        _reject('A study session needs this learner saved study plan.')
+    visits = [e for e in prior if e.get('record') == 'study_session' and e.get('planId') == plan['id']]
+    last = visits[-1] if visits else None
+    phase = event.get('phase')
+    if type(event.get('revision')) is not int or event['revision'] != (last['revision'] + 1 if last else 0):
+        _reject('Reload the latest study session before saving another checkpoint.')
+    if (last and last['phase'] == 'ended') or phase not in ('start', 'active', 'ended') or (phase == 'start') != (last is None):
+        _reject('A study session starts once and ends once. Its saved summary is final.')
+    clock = event.get('time')
+    keys = {'activeMs', 'solvingMs', 'idleMs'}
+    if not isinstance(clock, dict) or set(clock) != keys or any(type(v) is not int or not 0 <= v <= 86_400_000 for v in clock.values()):
+        _reject('Invalid cumulative study timing.')
+    before = last['time'] if last else dict.fromkeys(keys, 0)
+    if any(clock[k] < before[k] for k in keys) or clock['solvingMs'] - before['solvingMs'] > clock['activeMs'] - before['activeMs']:
+        _reject('Timing must be cumulative; solving time is part of active time.')
+    if phase == 'start' and any(clock.values()):
+        _reject('Start a new study clock at zero.')
+    if phase != 'ended':
+        if 'advice' in event:
+            _reject('Recommendations belong to the completed session summary.')
+        return event
+    advice = event.get('advice')
+    if not isinstance(advice, dict) or set(advice) != {'gaps', 'morePractice', 'next'}:
+        _reject('A session summary needs the shared planner recommendations.')
+    gaps, more, nxt = advice['gaps'], advice['morePractice'], advice['next']
+    if not isinstance(more, list) or len(more) > 200 or len(set(x for x in more if isinstance(x, str))) != len(more) or any(not isinstance(x, str) or x not in c['graph'] for x in more):
+        _reject('Unknown practice competency.')
+    if not isinstance(nxt, dict) or set(nxt) != {'competency', 'reason'} or (nxt['competency'] is not None and (not isinstance(nxt['competency'], str) or nxt['competency'] not in c['graph'])) or not _text(nxt['reason'], 1000):
+        _reject('Unknown next recommendation.')
+    if not isinstance(gaps, list) or len(gaps) > 100:
+        _reject('Invalid prerequisite findings.')
+    attempts = [e for e in prior if e.get('record') == 'attempt' and e.get('context') == f"study:{plan['id']}"]
+    for gap in gaps:
+        if not isinstance(gap, dict) or set(gap) != {'competency', 'reason', 'sourceQuestion'} or not isinstance(gap['competency'], str) or gap['competency'] not in c['graph'] or not _text(gap['reason'], 1000) or not any(a['questionId'] == gap['sourceQuestion'] for a in prior if a.get('record') == 'attempt'):
+            _reject('A prerequisite finding needs its recorded source question.')
+    from .models import WrittenMark
+    marks = dict(WrittenMark.objects.filter(pupil=pupil).values_list('attempt_id', 'verdict'))
+    correct, incorrect, pending = [], [], []
+    for a in attempts:
+        q = c['questions'].get(a['questionId']) or generated(a['questionId'])
+        if q['type'] in HUMAN and a['id'] not in marks:
+            pending.append(a['id'])
+        elif (marks.get(a['id']) == 'correct' if q['type'] in HUMAN else right(q, a['response'])):
+            correct.append(a['id'])
+        else:
+            incorrect.append(a['id'])
+    return {**event, 'summary': {**advice, 'attemptIds': [a['id'] for a in attempts], 'correctIds': correct, 'incorrectIds': incorrect, 'pendingIds': pending, 'competencies': list(dict.fromkeys(a['competency'] for a in attempts))}}

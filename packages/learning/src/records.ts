@@ -1,3 +1,4 @@
+import type {StudyTime,StudyAdvice,StudySummary} from "./study-session";
 /**
  * A learner's My Learning Year records: kind "learning_record" in the existing (append-only) mathematics record of the
  * same OpenPath account and learner. Everything else (year, curriculum, tiles, statuses, plan) is derived from them.
@@ -22,6 +23,7 @@ export type LearningRecord =
   | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[] })
   | (Base & { record: "teach"; rule: string; strategy: string; competency: string })
   | (Base & { record: "topic_session"; academicYear: string; stage: "diagnostic" | "plan"; target: string; minutes?: 15 | 30 | 60; curriculum: { id: string; version: string; hash: string } })
+  | (Base & { record: "study_session"; planId:string; revision:number; phase:"start"|"active"|"ended"; time:StudyTime; advice?:StudyAdvice; summary?:StudySummary })
   | (Base & { record: "skip"; target: string });
 
 export interface Attempt {

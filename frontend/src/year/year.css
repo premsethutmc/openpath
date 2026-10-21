@@ -176,3 +176,5 @@ body:has(.year-paper) { background: #fbfaf6; }
 .topic-session .session-duration { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .topic-session .session-duration button { min-width: 0; padding: 8px; min-height: 48px; font-size: 0.95rem; border-radius: 8px; }
 .topic-session h2 { overflow-wrap: anywhere; }
+.study-timer{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.9rem;padding:6px 0;border-bottom:1px solid #e4e0ed}
+.study-session [aria-label="Planned time finished"]{border-left:3px solid #8b79c8;padding:0 10px;font-size:.9rem}

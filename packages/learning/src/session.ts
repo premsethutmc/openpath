@@ -16,7 +16,10 @@ const rid = () => `lr-${Date.now().toString(36)}-${(counter++).toString(36)}-${M
 type Ctx = { learnerId: string; sessionId: string; at: string };
 const base = (c: Ctx) => ({ kind: "learning_record" as const, id: rid(), at: c.at, learnerId: c.learnerId, sessionId: c.sessionId });
 
+export type StudyRecord = Extract<LearningRecord,{record:"study_session"}>;
+export type StudyUpdate = Pick<StudyRecord,"planId"|"revision"|"phase"|"time"|"advice">;
 export const make = {
+  study: (c:Ctx, update:StudyUpdate):StudyRecord => ({...base(c), ...update,record:"study_session",id:`${update.planId}:study:${update.phase === "ended" ? "end" : update.revision}`}),
   topicStart: (c: Ctx, target: string, r: CurriculumRelease, academicYear: string): LearningRecord => ({ ...base(c), record: "topic_session", academicYear, stage: "diagnostic", target, curriculum: { id: r.id, version: r.version, hash: r.hash } }),
   sessionPlan: (c: Ctx, target: string, minutes: 15 | 30 | 60, r: CurriculumRelease, academicYear: string): LearningRecord => ({ ...base(c), record: "topic_session", academicYear, stage: "plan", target, minutes, curriculum: { id: r.id, version: r.version, hash: r.hash } }),
   enrol: (c: Ctx, grade: number, academicYear: string, r: CurriculumRelease): LearningRecord => ({ ...base(c), record: "enrol", grade, academicYear, curriculum: { id: r.id, version: r.version, hash: r.hash } }),

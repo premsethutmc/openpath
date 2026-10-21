@@ -21,7 +21,7 @@ import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
 import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
-import { learnerState, make } from "../../../packages/learning/src/session";
+import { learnerState, make, type StudyRecord, type StudyUpdate } from "../../../packages/learning/src/session";
 import { writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
 import { isDrawing, SketchView } from "./SketchPad";
 import { flatten, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
@@ -56,7 +56,9 @@ class Repo {
   }
   append(event: LearningRecord) {
     const work = this.queue.then(async () => {
-      const r = await api.request<{ count: number }>("POST", `/pupils/${this.learner}/events/`, { subject: "mathematics", seq: this.count, event });
+      let r:{count:number};
+      try { r = await api.request<{ count: number }>("POST", `/pupils/${this.learner}/events/`, { subject: "mathematics", seq: this.count, event }); }
+      catch(error){const known=await this.load();if(known.some((e:any)=>e.id===event.id))return known;throw error;}
       this.count = r.count;
       return this.load();
     });
@@ -171,6 +173,12 @@ function App() {
     }
   }
 
+  async function saveStudy(update:StudyUpdate):Promise<StudyRecord|null> {
+    if(!repo)return null;
+    try{const next=await repo.append(make.study(ctxOf(),update));setEvents(next);return [...next].reverse().find((e:any)=>e.record==='study_session'&&e.planId===update.planId) as StudyRecord;}
+    catch { return null; } // The study timer owns retry/error state and clears it after a successful save.
+  }
+
   const banner = reviewFixtureActive() ? <div className="test-banner" role="note">TEST BUILD · questions are treated as educator-reviewed so that “verified” can be shown. Never use with real learners.</div> : null;
   if (!ready) return <Shell banner={banner}><p className="muted center">Opening OpenPath…</p></Shell>;
   if (!signedIn) return <Shell banner={banner} error={error}><SignIn onDone={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} onError={setError} /></Shell>;
@@ -255,7 +263,7 @@ function App() {
   };
 
   if (view.name === "topic-diagnostic")
-    return <Shell paper banner={banner} error={error} top={top(home, name)}><TopicSession academicYear={st.enrolment!.academicYear} learner={learner} target={view.competency} ctx={ctx} release={release} events={events ?? []} saveStart={() => save(make.topicStart(ctxOf(),view.competency,release,st.enrolment!.academicYear))} savePlan={minutes => save(make.sessionPlan(ctxOf(), view.competency, minutes, release,st.enrolment!.academicYear))} /></Shell>;
+    return <Shell paper banner={banner} error={error} top={top(home, name)}><TopicSession academicYear={st.enrolment!.academicYear} learner={learner} target={view.competency} ctx={ctx} release={release} events={events ?? []} saveStudy={saveStudy} saveStart={() => save(make.topicStart(ctxOf(),view.competency,release,st.enrolment!.academicYear))} savePlan={minutes => save(make.sessionPlan(ctxOf(), view.competency, minutes, release,st.enrolment!.academicYear))} /></Shell>;
   if (view.name === "module")
     return (
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
@@ -355,6 +363,7 @@ function App() {
           {activeGoals.map((g) => <span key={g} className="chip">Goal: {goalById(g)?.name}</span>)}
         </div>
       </div>
+      {events && (()=>{const done=[...events].reverse().find((e:any)=>e.record==='study_session'&&e.phase==='ended'&&events.some((p:any)=>p.id===e.planId&&p.academicYear===st.enrolment?.academicYear&&p.curriculum?.id===release.id&&p.curriculum?.hash===release.hash)) as StudyRecord|undefined;if(!done?.summary)return null;const plan=events.find((e:any)=>e.id===done.planId) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return plan?<p className="small">Last study session: {done.summary.correctIds.length} correct, {done.summary.incorrectIds.length} incorrect. <a href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(plan.target)}&diagnostic=topic`}>View session summary</a> · Performance is separate from verified mastery.</p>:null;})()}
       <div className="actions">
         {events && (() => { const last=[...events].reverse().find((e:any)=>e.record==='topic_session'&&e.academicYear===st.enrolment?.academicYear&&e.curriculum?.id===release.id&&e.curriculum?.hash===release.hash) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return last?<a className="primary" href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(last.target)}&diagnostic=topic`}>Resume topic session</a>:null;})()}
         <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
