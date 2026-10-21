@@ -1,6 +1,7 @@
 import type { Module, Question, Screen } from "./content";
-import type { Bug, Problem, Step, Visual } from "./family-kit";
+import type { Bug, Def, Problem, Step, Visual } from "./family-kit";
 import { explainStep, FAMILIES } from "./families";
+import { graph } from "./graph";
 
 export const TEACHING_PRESENTATION_VERSION = "openpath-teaching-presentation@1" as const;
 
@@ -56,14 +57,113 @@ const numericAnswer = (answer: string) => {
   const fraction = answer.match(/^(-?\d+)\/(-?\d+)$/);
   return fraction ? Number(fraction[1]) / Number(fraction[2]) : Number(answer);
 };
-const explainOperation = (step: Step) => {
-  const inputs = step.inputs.map(shown).join(" and ");
-  const action: Record<string, string> = {
-    add: "Add", subtract: "Subtract", multiply: "Multiply", divide: "Divide", simplify: "Simplify",
-    compare: "Compare", count: "Count", measure: "Measure", solve: "Undo the operations", rewrite: "Rewrite",
-  };
-  return `${action[step.op] ?? "Use the stated operation with"} ${inputs}${inputs ? "" : " in this step"}. This gives ${shown(step.value)}.`;
-};
+/** Generic helper competencies (like multiplication tables) don't add conceptual context. */
+const HELPER_COMPETENCIES = new Set(["MATH.number.multiplication-tables", "MATH.number.exponents", "MATH.number.addition"]);
+
+/**
+ * Look up the human-readable competency name from the graph, returning "" for unknown or helper competencies.
+ * Helper competencies (like "Use multiplication facts") describe a skill, not a concept being taught,
+ * so they are suppressed in favour of the family's own teaching context.
+ */
+function competencyContext(competencyId: string): string {
+  if (HELPER_COMPETENCIES.has(competencyId)) return "";
+  try { return graph.get(competencyId).name; } catch { return ""; }
+}
+
+/**
+ * Shared mathematical explanation engine.
+ *
+ * Derives WHY each step is mathematically valid from three knowledge sources
+ * that already exist in the codebase:
+ *
+ *   1. step.op → the mathematical operation performed
+ *   2. step.competency + graph → the domain-specific concept this step serves
+ *   3. family.teach.idea / .method → the overarching mathematical principle
+ *
+ * The templates explain the reasoning behind each operation type, contextualised
+ * by the competency being taught. When the step uses a generic helper competency
+ * (like multiplication tables), the family's own teach.idea provides the "why".
+ *
+ * This single function replaces the old generic explainOperation() for all families,
+ * so one architectural change improves teaching across arithmetic, fractions, algebra,
+ * and geometry without per-family branches.
+ */
+function mathematicalExplanation(step: Step, family: Def): string {
+  const concept = competencyContext(step.competency);
+  const idea = family.teach?.idea ?? "";
+
+  // Use the domain concept when it's specific, otherwise the family's teaching idea.
+  // Trim long teach.idea strings to the first sentence for readability in step explanations.
+  const trimmed = idea.includes(".") ? idea.slice(0, idea.indexOf(".") + 1) : idea;
+  const why = concept || trimmed;
+
+  const a = shown(step.inputs[0]), b = step.inputs.length > 1 ? shown(step.inputs[1]) : "";
+  const result = shown(step.value);
+
+  switch (step.op) {
+    case "add":
+      return why
+        ? `${a} + ${b} = ${result} — adding combines the quantities (${why}).`
+        : `${a} + ${b} = ${result}, combining the two quantities.`;
+    case "subtract":
+      return why
+        ? `${a} − ${b} = ${result} — subtracting removes an equal amount from both sides (${why}).`
+        : `${a} − ${b} = ${result}, removing ${b} from ${a}.`;
+    case "multiply":
+      return why
+        ? `${a} × ${b} = ${result} — multiplying counts how many units fit (${why}).`
+        : `${a} × ${b} = ${result}, each unit of one factor pairs with every unit of the other.`;
+    case "divide":
+      return why
+        ? `${a} ÷ ${b} = ${result} — dividing finds how many equal groups fit (${why}).`
+        : `${a} ÷ ${b} = ${result}, undoing multiplication to find the other factor.`;
+    case "compare":
+      return why
+        ? `Comparing ${a} and ${b}: ${result} (${why}).`
+        : `Comparing ${a} and ${b} gives ${result}.`;
+    case "count":
+      return why
+        ? `Counting gives ${result} (${why}).`
+        : `Counting the elements gives ${result}.`;
+    case "measure":
+      return why
+        ? `Measuring gives ${result} (${why}).`
+        : `Measuring the quantity gives ${result}.`;
+    case "solve":
+      return why
+        ? `Isolating the unknown: ${result} (${why}).`
+        : `Undoing the operations in reverse order gives ${result}.`;
+    case "rewrite":
+      return why
+        ? `Rewriting into an equivalent form gives ${result} (${why}).`
+        : `Rewriting the expression gives ${result}.`;
+    case "pair":
+      return why
+        ? `Finding values whose product and sum match the coefficients: ${result} (${why}).`
+        : `The pair that fits the coefficients: ${result}.`;
+    case "evaluate":
+      return why
+        ? `Substituting the known values gives ${result} (${why}).`
+        : `Evaluating with the known values gives ${result}.`;
+    case "integrate":
+      return why
+        ? `The antiderivative gives ${result} (${why}).`
+        : `Integrating gives ${result}.`;
+    case "place": {
+      const placeNames: Record<string, string> = { "1": "ones", "10": "tens", "100": "hundreds", "1000": "thousands", "10000": "ten-thousands", "100000": "lakhs" };
+      const placeName = placeNames[String(step.inputs[1])] ?? `${b}-place`;
+      return why
+        ? `The digit ${a} in the ${placeName} place is worth ${result} (${why}).`
+        : `The digit ${a} in the ${placeName} place is worth ${result}.`;
+    }
+    default: {
+      const inputs = step.inputs.map(shown).join(" and ");
+      return why
+        ? `Applying ${step.op} to ${inputs} gives ${result} (${why}).`
+        : `Applying ${step.op} to ${inputs} gives ${result}.`;
+    }
+  }
+}
 
 function familyWorkedSteps(problem: Problem): TeachingPresentationStep[] {
   const [a, b, mode] = problem.params;
@@ -88,7 +188,9 @@ function familyWorkedSteps(problem: Problem): TeachingPresentationStep[] {
       { expression: `= ${shown(result)}`, explanation: `The movement ends at ${shown(result)}.` },
     ];
   }
-  return problem.steps.map((step) => ({ expression: explainStep(problem, step), explanation: explainOperation(step) }));
+  const family = FAMILIES.get(problem.family);
+  if (!family) return problem.steps.map((step) => ({ expression: explainStep(problem, step), explanation: mathematicalExplanation(step, { teach: undefined } as unknown as Def) }));
+  return problem.steps.map((step) => ({ expression: explainStep(problem, step), explanation: mathematicalExplanation(step, family) }));
 }
 
 export function visualPresentation(visual: Visual | Screen["widget"] | undefined, problem?: Problem | null): TeachingVisual | undefined {
