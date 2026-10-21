@@ -4,6 +4,7 @@
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
 import { useState } from "react";
+import {useResume} from "./resume";
 import { Figure } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { HANDWRITING_ENABLED } from "../writing/features";
@@ -56,11 +57,12 @@ const COUNTS: Record<LearningActivity, string> = {
   challenge: "On your own · enrichment",
 };
 
-interface Fb {
+export interface Fb {
   qid: string;
   response: string;
   right: boolean;
   working?: string[];
+  activity?: LearningActivity;
 }
 
 const ANSWER_LABEL: Record<string, string> = {
@@ -113,7 +115,7 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
   );
 }
 
-function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => void; label?: string }) {
+function Feedback({ fb, onNext, label = "Continue", onRetry }: { fb: Fb; onNext: () => void; label?: string; onRetry?: (hint:boolean) => void }) {
   const q = question(fb.qid);
   if (needsMarking(q))
     return (
@@ -134,7 +136,8 @@ function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => vo
       <div className={`feedback ${fb.right ? "good" : "bad"}`} role="status">
         <strong>{fb.right ? "Right." : "Not this time."}</strong>
         {says && <p>{says}</p>}
-        <p>{q.solution}</p>
+        {(!onRetry || fb.right) && <p>{q.solution}</p>}
+        {onRetry && !fb.right && <><p>Your answer and working are saved. A wrong answer alone does not tell us why.</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
       </div>
       {check && (
         <div className={`feedback ${check.valid ? "good" : "bad"}`} role="note" aria-label="Your working">
@@ -143,18 +146,19 @@ function Feedback({ fb, onNext, label = "Continue" }: { fb: Fb; onNext: () => vo
         </div>
       )}
       <div className="actions sticky">
-        <button className="primary" onClick={onNext}>{label}</button>
+        <button className="primary" onClick={onNext}>{onRetry && !fb.right ? "Continue with another question" : label}</button>
       </div>
     </div>
   );
 }
 
 /** One question: answer, see feedback. */
-export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = false, heading }: { qid: string; activity: LearningActivity; ctx: Ctx; onAnswered?: (fb: Fb) => void; context?: string; hintAllowed?: boolean; heading?: string }) {
+export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = false, heading, resumeKey, previous, showHint = false }: { qid: string; activity: LearningActivity; ctx: Ctx; onAnswered?: (fb: Fb) => void; context?: string; hintAllowed?: boolean; heading?: string; resumeKey?: string; previous?: Fb; showHint?: boolean }) {
   const q = question(qid);
-  const [value, setValue] = useState("");
-  const [hint, setHint] = useState(false);
-  const [working, setWorking] = useState("");
+  const [value, setValue] = useResume(resumeKey && `${resumeKey}:answer`, previous?.response ?? "");
+  const [hint, setHint] = useResume(resumeKey && `${resumeKey}:hint`, showHint);
+  const [working, setWorking] = useResume(resumeKey && `${resumeKey}:working`, previous?.working?.join("\n") ?? "");
+  const [workingOpen,setWorkingOpen] = useResume(resumeKey && `${resumeKey}:working-open`, !!working);
   const fam = familyOf(qid);
   const workable = !!fam && canCheckWorking(problemOf(fam)!);
   return (
@@ -165,13 +169,13 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       {q.figure && <Figure v={q.figure} />}
       <AnswerInput q={q} value={value} setValue={setValue} disabled={ctx.saving} />
       {workable && (
-        <details className="working">
+        <details className="working" open={workingOpen} onToggle={e=>setWorkingOpen(e.currentTarget.open)}>
           <summary>Show your working (optional)</summary>
           <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />
           <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>
         </details>
       )}
-      {hint && q.hint && <p className="hint">{q.hint}</p>}
+      {(hint || showHint) && <aside className="hint" aria-label="Contextual help"><p>{q.hint ?? "Look at the explanation and try one part at a time."}</p>{showHint && <p>{q.solution}</p>}</aside>}
       <div className="actions">
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
         <button
@@ -179,8 +183,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           disabled={!value.trim() || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
           onClick={async () => {
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
-            const ok = await ctx.answer(qid, value, activity, { hints: hint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}) });
-            if (ok) onAnswered?.({ qid, response: value, right: isCorrect(q, value), ...(lines.length ? { working: lines } : {}) });
+            const ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}) });
+            if (ok) onAnswered?.({ qid, response: value, activity, right: isCorrect(q, value), ...(lines.length ? { working: lines } : {}) });
           }}
         >
           {ctx.saving ? "Saving…" : "Check"}
@@ -222,8 +226,9 @@ function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
   );
 }
 
-function Lesson({ s, onDone, saving }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean }) {
-  const [i, setI] = useState(0);
+export function Lesson({ s, onDone, saving, resumeKey }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string }) {
+  const [stored, setI] = useResume(resumeKey, 0);
+  const i = Number.isInteger(stored) && stored >= 0 && stored < s.screens.length ? stored : 0;
   const sc = s.screens[i];
   const last = i === s.screens.length - 1;
   return (
@@ -245,8 +250,9 @@ function Lesson({ s, onDone, saving }: { s: Strategy | { title: string; screens:
 }
 
 /** One skill, end to end, as the engine directs. */
-export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null }) {
-  const [own, setOwn] = useState<Fb | null>(null);
+export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean }) {
+  const [own, setOwn] = useResume<Fb | null>(resumeKey && `${resumeKey}:feedback`, null);
+  const [retry, setRetry] = useResume<boolean | "hint">(resumeKey && `${resumeKey}:retry`, false);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
@@ -268,14 +274,17 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
       {stepper}
     </>
   );
-  if (fb) return <div className="stack">{head}<Feedback fb={fb} onNext={() => setFb(null)} /></div>;
+  if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}</div>;
+  if (sessionMode && ms.phase === "retention") return <div className="stack">{head}<p>A delayed check is reserved for a later session. Your completed work is preserved.</p><button className="primary" onClick={onExit}>Next planned competency</button></div>;
+  if (sessionMode && ms.question && writtenTask(ms.question)?.answer === "drawing" && !HANDWRITING_ENABLED)
+    return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
   if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p><button className="secondary wide" onClick={onExit}>Back</button></div>;
   if (ms.phase === "chapter" && ms.strategy)
     return (
       <div className="stack">
         {head}
         <p className="why">{ms.reason}</p>
-        <Lesson s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
+        <Lesson key={ms.strategy.id} resumeKey={resumeKey && `${resumeKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
     );
   if (ms.question)
@@ -283,7 +292,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
       <div className="stack">
         {head}
         <p className="why">{ms.reason}</p>
-        <Ask key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
+        <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
       </div>
     );
   // done or pause
@@ -295,7 +304,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
         <p>{ms.reason}</p>
         <p className="small">On your own: {ev.independent.right} right of {ev.independent.total}. With help: {ev.assisted.right} right of {ev.assisted.total}.</p>
       </div>
-      {!embedded && <button className="secondary wide" onClick={onExit}>Back to the year</button>}
+      {!embedded && <button className="secondary wide" onClick={onExit}>{sessionMode ? "Next planned competency" : "Back to the year"}</button>}
     </div>
   );
 }
