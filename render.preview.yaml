@@ -1,0 +1,26 @@
+# Reference configuration for the EXISTING service srv-dbaeu33ncjis73dagjt0.
+# Do not apply a Blueprint or create resources automatically. Obtain approval before changing Render settings.
+# Future branches retain deploy/preview/Dockerfile; select only the source branch, not a different Docker path.
+services:
+  - type: web
+    name: openpath-pr55-preview
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: feat/interactive-mathematics-preview-v1
+    autoDeployTrigger: "off"
+    dockerfilePath: ./deploy/preview/Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    envVars:
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: DEMO_SESSION_SECRET
+        generateValue: true
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEMO_SESSION_HOURS
+        value: "168"
+# No database/resource declarations. Default SQLite contains synthetic preview data only and is ephemeral.
+# Optional PREVIEW_DATABASE_URL must identify an existing, dedicated SYNTHETIC preview PostgreSQL database.
+# Ordinary DATABASE_URL and model credentials are ignored/removed by this preview startup.
