@@ -21,12 +21,25 @@ for (const width of [360, 393]) test(`${width}px teaching-first preview uses rea
     for (const x of examples) {
       await page.goto(`${base}/curriculum/?preview=1#b=${x.board}&g=${x.grade}&c=${encodeURIComponent(x.competency)}`);
       await page.locator(".teaching-page").waitFor();
-      assert.ok(await page.locator(".teaching-math").first().isVisible(), "worked mathematics opens with teaching");
+      const example = page.locator(".teaching-block").first().locator(".progressive-worked");
+      assert.ok(await example.isVisible(), "worked mathematics opens with teaching");
       assert.equal(await page.locator(".preview-stages").count(), 0, "developer state strip is removed");
       assert.equal(await page.locator(".tech, .families, .review-line").count(), 0, "no internal metadata is shown");
-      if (x.board === "tn") assert.doesNotMatch(await page.locator(".teaching-page").innerText(), /reflexive|symmetric|transitive/i, "the product-count lesson does not mix in a separate relations-property concept");
+      if (x.board === "tn") {
+        assert.doesNotMatch(await page.locator(".teaching-page").innerText(), /reflexive|symmetric|transitive/i, "the product-count lesson does not mix in a separate relations-property concept");
+        assert.match(await page.locator(".pair-visual").innerText(), /\(1, a\).*\(3, b\)/s, "the product visual contains actual ordered pairs");
+        assert.match(await page.locator(".pair-visual").innerText(), /n\(A × B\) = 3 × 2 = 6/, "the grid is connected to its formula");
+      } else {
+        assert.match(await page.locator(".movement-line").first().getAttribute("aria-label"), /right from 26 to 51/i, "the number line shows the mathematically correct movement");
+      }
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "teaching has no horizontal overflow");
-      await page.screenshot({ path: `${shots}/${width}-${x.name}-teaching.png`, fullPage: true });
+      await page.screenshot({ path: `${shots}/${width}-${x.name}-teaching-initial.png`, fullPage: true });
+      await example.getByRole("button", { name: /Next step/ }).click();
+      assert.equal(await example.locator(".worked-step").count(), 1);
+      await page.screenshot({ path: `${shots}/${width}-${x.name}-teaching-intermediate.png`, fullPage: true });
+      while (await example.getByRole("button", { name: /Next step/ }).count()) await example.getByRole("button", { name: /Next step/ }).click();
+      assert.equal(await example.locator(".worked-step").count(), 3);
+      await page.screenshot({ path: `${shots}/${width}-${x.name}-teaching-complete.png`, fullPage: true });
 
       await page.getByRole("button", { name: "Practice this concept" }).click();
       await page.locator(".practice-workspace").waitFor();

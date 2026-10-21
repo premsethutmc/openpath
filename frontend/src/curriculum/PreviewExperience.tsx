@@ -6,23 +6,25 @@ import { problemOf } from "../../../packages/learning/src/families";
 import { canCheckWorking, checkWorking } from "../../../packages/learning/src/working";
 import { AnswerInput } from "../year/Learn";
 import { Figure } from "../year/Figure";
+import { ProgressiveWorkedExample, teachingVisualFor, workedExampleFor } from "./TeachingPrimitives";
 import type { DashRelease } from "../../../packages/learning/src/dashboard";
 
 type View = "teaching" | "practice" | "complete";
 type Result = "wrong" | "right" | null;
 
-function TeachingBlock({ screen, index, total, focusProduct }: { screen: Screen; index: number; total: number; focusProduct: boolean }) {
+function TeachingBlock({ screen, index, total, focusProduct, problem, q, visualProblem }: { screen: Screen; index: number; total: number; focusProduct: boolean; problem: ReturnType<typeof problemOf>; q: ReturnType<typeof question> | null; visualProblem: ReturnType<typeof problemOf> }) {
   const lines = focusProduct
     ? screen.text.map((line) => line.split(/ A relation from| For the number of relations|; a relation/i)[0]).filter(Boolean)
     : screen.text;
   const title = focusProduct ? screen.title.replace(/ and relations from A to B/i, "") : screen.title;
+  const worked = workedExampleFor(problem, q, screen);
+  const visual = teachingVisualFor(visualProblem ?? problem);
   return <section className="teaching-block">
     <div className="teaching-step"><p className="teaching-label">{index === 0 ? "The idea" : `Example ${index}`}</p>{index > 0 ? <span>{index} of {Math.max(1, total - 1)}</span> : null}</div>
     <h3>{title}</h3>
     {lines.map((line, i) => <p key={i}>{line}</p>)}
-    {screen.widget ? <Figure v={screen.widget} /> : null}
-    {screen.math?.length ? <div className="teaching-math" aria-label="Worked mathematics">{screen.math.map((line, i) => <div key={i}>{line}</div>)}</div> : null}
-    {screen.tip ? <aside className="teaching-tip"><strong>Watch out</strong><span>{screen.tip}</span></aside> : null}
+    {visual ?? (screen.widget ? <Figure v={screen.widget} /> : null)}
+    {worked ? <ProgressiveWorkedExample example={worked} /> : null}
   </section>;
 }
 
@@ -50,6 +52,10 @@ export function PreviewExperience({ release, competency, home, back }: { release
   if (!c) return <p>This topic is not available in this curriculum.</p>;
 
   const q = practice[index] ? question(practice[index]) : null;
+  const primaryQ = practice[0] ? question(practice[0]) : null;
+  const primaryProblem = primaryQ ? problemOf(primaryQ.id) : null;
+  const gridProblem = module?.strategies.find((strategy) => strategy.id === "grid")?.guided;
+  const primaryVisualProblem = gridProblem ? problemOf(gridProblem) : primaryProblem;
   const family = q ? familyOf(q.id) : null;
   const familyProblem = family ? problemOf(family) : null;
   const workable = !!familyProblem && canCheckWorking(familyProblem);
@@ -79,7 +85,7 @@ export function PreviewExperience({ release, competency, home, back }: { release
         <h2>{focusProduct ? "Counting elements in A × B" : module?.title ?? c.name}</h2>
         <p className="teaching-intro">{focusProduct ? "Each element of A can be paired with each element of B. Multiplication counts all the ordered pairs." : c.description}</p>
       </header>
-      {teaching.length ? teaching.map((screen, i) => <TeachingBlock key={`${screen.title}-${i}`} screen={screen} index={i} total={teaching.length} focusProduct={focusProduct} />) : <section className="teaching-block unavailable"><h3>Teaching is being prepared</h3><p>This topic does not yet have suitable teaching content.</p></section>}
+      {teaching.length ? teaching.map((screen, i) => <TeachingBlock key={`${competency}-${screen.title}-${i}`} screen={screen} index={i} total={teaching.length} focusProduct={focusProduct} problem={i === 0 ? primaryProblem : null} q={i === 0 ? primaryQ : null} visualProblem={i === 0 ? primaryVisualProblem : null} />) : <section className="teaching-block unavailable"><h3>Teaching is being prepared</h3><p>This topic does not yet have suitable teaching content.</p></section>}
       <section className="practice-invitation">
         <h3>Ready to try it?</h3>
         <p>Work through one question at a time. You can return to this explanation whenever you need it.</p>

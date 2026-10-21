@@ -44,7 +44,7 @@ for (const width of [360, 393]) test(`${width}px: all four curricula and every e
       }
       await page.getByRole("article", { name: "Mathematics teaching and practice preview" }).waitFor();
       await page.locator(".teaching-page").waitFor();
-      assert.ok(await page.locator(".teaching-math").first().isVisible(), "teaching opens first with worked mathematics");
+      assert.ok(await page.locator(".progressive-worked").first().isVisible(), "teaching opens first with worked mathematics");
       const parent = selected.path.at(-2);
       await page.getByRole("button", { name: /Back/ }).click();
       await page.getByRole("heading", { name: parent.title, exact: true }).waitFor();
