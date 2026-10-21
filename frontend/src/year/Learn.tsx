@@ -6,6 +6,7 @@
 import { useState } from "react";
 import { Figure } from "./Figure";
 import { SketchPad } from "./SketchPad";
+import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
 import { needsMarking } from "../../../packages/learning/src/content";
 import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
@@ -92,13 +93,10 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
       </div>
     );
   const task = q.type === "written" && q.id ? writtenTask(q.id) : null;
+  if (task?.answer === "drawing" && !HANDWRITING_ENABLED)
+    return <p role="note">This task requires a drawing or construction and is unavailable with keyboard input. It has not been changed to a final-answer question. Previously saved work remains available for educator review.</p>;
   if (task?.answer === "drawing")
-    return (
-      <div className="field">
-        Your drawing (an educator will look at it and mark it)
-        <SketchPad value={value} onChange={setValue} canvas={task.canvas} disabled={disabled} />
-      </div>
-    );
+    return <div className="field">Your drawing (an educator will look at it and mark it)<SketchPad value={value} onChange={setValue} canvas={task.canvas} disabled={disabled} /></div>;
   if (q.type === "written")
     return (
       <label className="field">
@@ -178,7 +176,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
         <button
           className="primary"
-          disabled={!value.trim() || ctx.saving}
+          disabled={!value.trim() || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
           onClick={async () => {
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
             const ok = await ctx.answer(qid, value, activity, { hints: hint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}) });

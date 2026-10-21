@@ -20,7 +20,8 @@
     "../packages/learning/src",
     "../packages/learning/scripts",
     "../tools/mathematics/prerequisite-report.mts",
-    "../tools/mathematics/fingerprint-portability.mts"
+    "../tools/mathematics/fingerprint-portability.mts",
+    "src/writing"
   ],
   "exclude": []
 }

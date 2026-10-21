@@ -15,6 +15,7 @@ await mkdir(out, { recursive: true });
 await esbuild.build({
   entryPoints: [`${root}/src/year/Main.tsx`],
   bundle: true,
+  loader: { ".woff2": "file" },
   format: "esm",
   target: "es2022",
   minify: !test,

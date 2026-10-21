@@ -1,3 +1,4 @@
+import { KeyboardPractice } from "../writing/KeyboardPractice";
 /**
  * My Learning Year (/year/): one learner's school year through the shared learning engine. Same account, learner and
  * record as the rest of OpenPath (kind "learning_record" in the mathematics record). Everything shown is derived from
@@ -87,6 +88,7 @@ const childHeading = (ts: Tile[]) => {
 const KIND_WORD: Record<Tile["kind"], string> = { subject: "Subject", unit: "Unit", chapter: "Chapter", section: "Section", skill: "Skill", micro: "Smaller step", proposal: "Not mapped yet", unsupported: "Not supported yet" };
 
 function App() {
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [pupils, setPupils] = useState<PupilSummary[]>([]);
@@ -242,8 +244,10 @@ function App() {
 
   if (view.name === "module")
     return (
-      <Shell banner={banner} error={error} wide={false} top={top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
-        <Module competency={view.competency} ctx={ctx} onExit={() => setView(view.back)} />
+      <Shell banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
+        <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
+          <Module competency={view.competency} ctx={ctx} onExit={() => setView(view.back)} />
+        </KeyboardPractice>
       </Shell>
     );
   if (view.name === "stuck")

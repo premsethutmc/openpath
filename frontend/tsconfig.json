@@ -34,6 +34,7 @@
     "src/year",
     "src/learning",
     "src/review",
-    "src/curriculum"
+    "src/curriculum",
+    "src/writing"
   ]
 }

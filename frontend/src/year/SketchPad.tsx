@@ -1,3 +1,4 @@
+import { HANDWRITING_ENABLED } from "../writing/features";
 /**
  * draw@1: a drawing answer for written tasks a computer cannot mark reliably — graph sketches, constructions and
  * diagrams. The learner draws with a pen, a straight edge (line), a compass (circle) and points; the drawing and an
@@ -100,7 +101,7 @@ export function SketchView({ raw, canvas }: { raw: string; canvas?: Canvas }) {
 }
 
 /** The drawing pad. `value` and `onChange` carry the whole response ("draw@1 …"). */
-export function SketchPad({ value, onChange, canvas, disabled }: { value: string; onChange: (v: string) => void; canvas?: Canvas; disabled?: boolean }) {
+function DeferredSketchPad({ value, onChange, canvas, disabled }: { value: string; onChange: (v: string) => void; canvas?: Canvas; disabled?: boolean }) {
   const d = readDrawing(value) ?? { text: "", s: [] };
   const [tool, setTool] = useState<"p" | "l" | "c" | "d">(canvas?.axes ? "p" : "l");
   const [live, setLive] = useState<Stroke | null>(null);
@@ -170,3 +171,5 @@ export function SketchPad({ value, onChange, canvas, disabled }: { value: string
     </div>
   );
 }
+
+export function SketchPad(props: Parameters<typeof DeferredSketchPad>[0]) { return HANDWRITING_ENABLED ? <DeferredSketchPad {...props} /> : null; }

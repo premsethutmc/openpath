@@ -1,8 +1,13 @@
+from . import writing_views
 from django.urls import path
 
 from . import written, content_review, developer, views
 
 urlpatterns = [
+    path("pupils/<uuid:pupil_id>/writing/", writing_views.WritingLessonsView.as_view(), name="writing-lessons"),
+    path("pupils/<uuid:pupil_id>/writing/<uuid:draft_id>/", writing_views.WritingDraftView.as_view(), name="writing-draft"),
+    path("pupils/<uuid:pupil_id>/writing/<uuid:draft_id>/action/", writing_views.WritingActionView.as_view(), name="writing-action"),
+    path("pupils/<uuid:pupil_id>/writing/<uuid:draft_id>/validate/", writing_views.WritingValidationView.as_view(), name="writing-validate"),
     path("account/", views.AccountView.as_view(), name="account"),
     path("account/register/", views.RegisterView.as_view(), name="account-register"),
     path("account/login/", views.LoginView.as_view(), name="account-login"),
