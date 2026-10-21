@@ -262,6 +262,11 @@ function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId, prescribe
             }}
             details={learnerId && n.kind === "chapter" ? hashOf({...route,node:n.id,competency:null}) : undefined}
             onOpen={() => {
+              if ((n.kind === "competency" || n.kind === "micro") && learnerId) {
+                const target = r.competencies[n.competency!]?.evidenceTarget ?? n.competency!;
+                location.href = `/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(target)}&practice=curriculum`;
+                return;
+              }
               return (n.kind === "competency" || n.kind === "micro" ? go({ ...route, competency: n.competency! }) : n.kind === "unsupported" || n.kind === "proposal" ? undefined : go({ ...route, node: n.id, competency: null }));}}
           />
         ))}

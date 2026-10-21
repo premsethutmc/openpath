@@ -31,6 +31,9 @@ for (const width of [360, 393]) test(`${width}px teaching-first preview uses rea
         assert.match(await page.locator(".pair-visual").innerText(), /n\(A × B\) = 3 × 2 = 6/, "the grid is connected to its formula");
       } else {
         assert.match(await page.locator(".movement-line").first().getAttribute("aria-label"), /right from 26 to 51/i, "the number line shows the mathematically correct movement");
+        assert.match(await page.locator(".movement-line").nth(1).getAttribute("aria-label"), /left from −17 to −24/i, "the worked example starts at −17 and moves seven units left");
+        assert.match(await page.locator(".teaching-page").innerText(), /larger absolute value/i);
+        assert.doesNotMatch(await page.locator(".teaching-page").innerText(), /larger size/i);
       }
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "teaching has no horizontal overflow");
       await page.screenshot({ path: `${shots}/${width}-${x.name}-teaching-initial.png`, fullPage: true });

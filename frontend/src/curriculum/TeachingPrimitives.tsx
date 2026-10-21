@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import type { Question, Screen } from "../../../packages/learning/src/content";
 import type { Problem as FamilyProblem } from "../../../packages/learning/src/families";
 
@@ -51,8 +51,12 @@ export function MovementNumberLine({ start, end }: { start: number; end: number 
 }
 
 /** The page asks for one tap per reasoning step; no answer or learner evidence is submitted. */
-export function ProgressiveWorkedExample({ example }: { example: WorkedExample }) {
-  const [shown, setShown] = useState(0);
+export function ProgressiveWorkedExample({ example, storageKey }: { example: WorkedExample; storageKey?: string }) {
+  const [shown, setShown] = useState(() => {
+    if (!storageKey) return 0;
+    try { return Math.min(example.steps.length, Math.max(0, Number(localStorage.getItem(storageKey)) || 0)); } catch { return 0; }
+  });
+  useEffect(() => { if (storageKey) try { localStorage.setItem(storageKey, String(shown)); } catch { /* resume is optional; the ledger stays authoritative */ } }, [shown, storageKey]);
   return <section className="progressive-worked" aria-label="Progressive worked example">
     <p className="worked-question">{example.question}</p>
     <div className="worked-steps" aria-live="polite">
