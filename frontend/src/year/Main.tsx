@@ -1,3 +1,4 @@
+import { CurriculumPractice } from "./CurriculumPractice";
 import { TopicSession } from "./TopicSession";
 import { KeyboardPractice } from "../writing/KeyboardPractice";
 /**
@@ -72,6 +73,7 @@ type View =
   | { name: "setup"; sameYear?: boolean }
   | { name: "tile"; path: string[] }
   | { name: "topic-diagnostic"; competency: string; back: View }
+  | { name: "curriculum-practice"; competency: string; back: View }
   | { name: "module"; competency: string; back: View }
   | { name: "stuck"; qid: string }
   | { name: "single"; qid: string; heading: string; note?: string }
@@ -149,7 +151,8 @@ function App() {
     const want = wanted.current;
     if (!want || !st?.release || !moduleFor(want)) return;
     wanted.current = null;
-    if (new URLSearchParams(location.search).get("diagnostic") === "topic" && st.enrolment?.grade === 7) setView({name:"topic-diagnostic",competency:want,back:{name:"year"}});
+    if (new URLSearchParams(location.search).get("practice") === "curriculum") setView({name:"curriculum-practice",competency:want,back:{name:"year"}});
+    else if (new URLSearchParams(location.search).get("diagnostic") === "topic" && st.enrolment?.grade === 7) setView({name:"topic-diagnostic",competency:want,back:{name:"year"}});
     else setView({name:"module",competency:want,back:{name:"year"}});
   }, [st?.release]);
   const session = `learn:${learner}:${visit.current}`;
@@ -262,6 +265,17 @@ function App() {
     setView({ name: "tile", path });
   };
 
+  if (view.name === "curriculum-practice")
+    return (
+      <Shell paper banner={banner} error={error} top={top(home, name)}>
+        <CurriculumPractice
+          key={`${learner}:${release.hash}:${view.competency}`}
+          competency={view.competency} ctx={ctx}
+          resumeKey={`openpath.curriculum-practice@1:${learner}:${st.enrolment.academicYear}:${release.hash}:${view.competency}`}
+          back={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner#c=${encodeURIComponent(view.competency)}`}
+        />
+      </Shell>
+    );
   if (view.name === "topic-diagnostic")
     return <Shell paper banner={banner} error={error} top={top(home, name)}><TopicSession academicYear={st.enrolment!.academicYear} learner={learner} target={view.competency} ctx={ctx} release={release} events={events ?? []} saveStudy={saveStudy} saveStart={() => save(make.topicStart(ctxOf(),view.competency,release,st.enrolment!.academicYear))} savePlan={minutes => save(make.sessionPlan(ctxOf(), view.competency, minutes, release,st.enrolment!.academicYear))} /></Shell>;
   if (view.name === "module")

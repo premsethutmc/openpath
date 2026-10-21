@@ -236,12 +236,12 @@ function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last 
 function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId }: { learnerId?: string; nodes: DashNode[]; parent: string; r: DashRelease; skillOf: ((c: string) => Mastery) | null; route: Route; arrange: boolean }) {
   const [order, setOrder] = useState(() => readOrder(r.release.id, parent));
   useEffect(() => setOrder(readOrder(r.release.id, parent)), [r.release.id, parent]);
-  const shown = ordered(nodes, order);
+  const shown = learnerId ? nodes : ordered(nodes, order);
   const ids = shown.map((n) => n.id);
   // progressive: a long level shows its first tiles and the rest on request (never hundreds at once)
   const [all, setAll] = useState(false);
   const LIMIT = 24;
-  const visible = all || arrange ? shown : shown.slice(0, LIMIT);
+  const visible = all || arrange || learnerId ? shown : shown.slice(0, LIMIT);
   return (
     <>
       <ul className="tiles">
@@ -261,13 +261,11 @@ function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId }: { learn
             }}
             details={learnerId && n.kind === "chapter" ? hashOf({...route,node:n.id,competency:null}) : undefined}
             onOpen={() => {
-              const next = learnerId && n.kind === "chapter" ? nextTopicSkill(n,r,skillOf!) : null;
-              if (next) { location.href = `/year/?learner=${encodeURIComponent(learnerId!)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}&diagnostic=topic`; return; }
               return (n.kind === "competency" || n.kind === "micro" ? go({ ...route, competency: n.competency! }) : n.kind === "unsupported" || n.kind === "proposal" ? undefined : go({ ...route, node: n.id, competency: null }));}}
           />
         ))}
       </ul>
-      {!all && !arrange && shown.length > LIMIT ? (
+      {!learnerId && !all && !arrange && shown.length > LIMIT ? (
         <button type="button" className="secondary more" onClick={() => setAll(true)}>
           Show {shown.length - LIMIT} more
         </button>
@@ -360,9 +358,10 @@ function Detail({ r, id, route, learner, registry, skillOf }: { r: DashRelease; 
               {s && s.retention !== "none" ? ` · delayed check: ${s.retention}` : ""}
             </span>
             {next ? <p className="next">{next}</p> : null}
+            {c.families.length > 0 && c.module ? <p><a className="primary" href={`/year/?learner=${encodeURIComponent(learner.learnerId)}&skill=${encodeURIComponent(c.evidenceTarget)}&practice=curriculum`}>Practise competency</a></p> : <p className="muted">Keyboard practice is not available for this competency yet. Any required written method still needs educator assessment.</p>}
             {content.learn && state !== "verified" ? (
               <a className="primary" href={`/year/?learner=${encodeURIComponent(learner.learnerId)}&skill=${encodeURIComponent(c.evidenceTarget)}${r.release.grade === 7 ? "&diagnostic=topic" : ""}`}>
-                {state === "not_assessed" ? "Start in My Learning Year" : "Continue in My Learning Year"}
+                {r.release.grade === 7 ? "Optional diagnostic and study plan" : "Optional teaching module"}
               </a>
             ) : null}
           </>
@@ -744,7 +743,7 @@ function App() {
                 ) : null}
               </div>
               {arrange ? <p className="muted small">Arranging changes only the order on this device. The curriculum, its skills and every learner's evidence stay the same.</p> : null}
-              <Tiles learnerId={learnerMode && grade === 7 && learner ? learnerId : undefined} nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
+              <Tiles learnerId={learnerMode && learner ? learnerId : undefined} nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
               <OutcomeList r={r} ids={node?.outcomes ?? []} />
             </>
           )}

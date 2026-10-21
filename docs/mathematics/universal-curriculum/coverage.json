@@ -1,0 +1,3737 @@
+{
+  "scope": "Existing mapped requirements, not a claim of complete or educator-approved curriculum. Working questions means at least one mapped competency has grade-eligible keyboard practice. Partial includes method/drawing requirements that cannot be fulfilled by final answers.",
+  "curricula": [
+    {
+      "release": {
+        "id": "cbse-ncert-mathematics-grade-7",
+        "version": "1.1.0",
+        "hash": "84d6b440",
+        "grade": 7,
+        "board": "cbse",
+        "boardLabel": "CBSE (NCERT textbooks)",
+        "title": "Ganita Prakash: Textbook of Mathematics for Grade 7, Part I and Part II — Grade 7 Mathematics (CBSE / NCERT)",
+        "sourceVerified": true
+      },
+      "chapters": [
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c01",
+          "title": "Large Numbers Around Us (Part 1, chapter 1)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c02",
+          "title": "Arithmetic Expressions (Part 1, chapter 2)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c03",
+          "title": "A Peek Beyond the Point (Part 1, chapter 3)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c08",
+          "title": "Working with Fractions (Part 1, chapter 8)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t2-c02",
+          "title": "Operations with Integers (Part 2, chapter 2)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t2-c03",
+          "title": "Finding Common Ground (Part 2, chapter 3)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t2-c04",
+          "title": "Another Peek Beyond the Point (Part 2, chapter 4)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c04",
+          "title": "Expressions using Letter-Numbers (Part 1, chapter 4)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t2-c07",
+          "title": "Finding the Unknown (Part 2, chapter 7)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c05",
+          "title": "Parallel and Intersecting Lines (Part 1, chapter 5)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c07",
+          "title": "A Tale of Three Intersecting Lines (Part 1, chapter 7)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t2-c01",
+          "title": "Geometric Twins (Part 2, chapter 1)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t2-c06",
+          "title": "Constructions and Tilings (Part 2, chapter 6)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t2-c05",
+          "title": "Connecting the Dots (Part 2, chapter 5)"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-7:cbse-g07-t1-c06",
+          "title": "Number Play (Part 1, chapter 6)"
+        }
+      ],
+      "totalRequirements": 56,
+      "mappedRequirements": 56,
+      "mappedCompetencies": 46,
+      "competenciesWithKeyboardPractice": 42,
+      "requirementsWithWorkingQuestions": 52,
+      "requirementsWithQuestionsForEveryMappedCompetency": 50,
+      "partial": 4,
+      "unsupported": 0,
+      "awaitingReview": 52,
+      "validated": 0,
+      "families": 133,
+      "releasedFamilies": 0,
+      "checkedPracticeQuestions": 24671,
+      "requirements": [
+        {
+          "id": "cbse-g07-t1-c01-o02",
+          "text": "Explain place value as repeated groupings of ten (e.g. how many thousands make a lakh, how many lakhs make a crore).",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.large-numbers"
+          ],
+          "workingCompetencies": [
+            "MATH.number.large-numbers"
+          ],
+          "writtenTasks": [
+            "wr:num:lakh-crore"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c01-o01",
+          "text": "Read, write and compare numbers up to crores in the Indian system and convert them to and from the international system (millions, billions).",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Converting from the international system back to the Indian system (millions to lakhs/crores) and billions are not assessed: ajmill only turns crores into millions, and ajcrore's pool has no million/billion items despite its stated limits.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.indian-international-numeration",
+            "MATH.number.large-numbers"
+          ],
+          "workingCompetencies": [
+            "MATH.number.indian-international-numeration",
+            "MATH.number.large-numbers"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c01-o03",
+          "text": "Tell when an exact value is needed and when an approximate one is enough, and round large numbers sensibly.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.rounding",
+            "MATH.reasoning.estimate-check"
+          ],
+          "workingCompetencies": [
+            "MATH.number.rounding",
+            "MATH.reasoning.estimate-check"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c01-o04",
+          "text": "Use patterns in products (e.g. multiplying by powers of ten) to calculate and estimate large products and to judge the size of large quantities.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Judging the size of large quantities (e.g. how many days 1 lakh seconds is, or whether 1 crore of something is plausible) is not asked; only products with powers of ten and estimates of products are.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.multi-multiplication",
+            "MATH.number.multiply-divide-powers-of-ten",
+            "MATH.number.rounding"
+          ],
+          "workingCompetencies": [
+            "MATH.number.multi-multiplication",
+            "MATH.number.multiply-divide-powers-of-ten",
+            "MATH.number.rounding"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c02-o01",
+          "text": "Write an arithmetic expression for a situation and evaluate it.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.order-of-operations"
+          ],
+          "workingCompetencies": [
+            "MATH.number.order-of-operations"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c02-o02",
+          "text": "Identify the terms of an expression and evaluate expressions with brackets using the conventions for order of operations.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.order-of-operations"
+          ],
+          "workingCompetencies": [
+            "MATH.number.order-of-operations"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c02-o03",
+          "text": "Compare or rewrite expressions without fully evaluating them by swapping and grouping terms and handling signs when removing brackets.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.operation-properties",
+            "MATH.algebra.identities-intro"
+          ],
+          "workingCompetencies": [
+            "MATH.number.operation-properties"
+          ],
+          "writtenTasks": [
+            "wr:ops:smart-calc"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c03-o01",
+          "text": "Represent tenths, hundredths and thousandths in decimal notation and state the place value of each digit.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c03-o03",
+          "text": "Locate decimals on a number line and compare and order them.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "writtenTasks": [
+            "wr:dec:number-line"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c03-o04",
+          "text": "Add and subtract decimals, including in measurement and money problems.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-operations"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-operations"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c03-o02",
+          "text": "Write measurements in larger units using decimals (e.g. cm to m, g to kg) and convert between them.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.length-conversion",
+            "MATH.measurement.unit-conversions"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.length-conversion",
+            "MATH.measurement.unit-conversions"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c08-o01",
+          "text": "Multiply fractions and mixed numbers, and interpret the product with an area model.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.fraction-multiply",
+            "MATH.number.fraction-product"
+          ],
+          "workingCompetencies": [
+            "MATH.number.fraction-multiply",
+            "MATH.number.fraction-product"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c08-o02",
+          "text": "Divide fractions and whole numbers using reciprocals.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.fraction-product"
+          ],
+          "workingCompetencies": [
+            "MATH.number.fraction-product"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c08-o03",
+          "text": "Solve word problems that need multiplication or division of fractions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.fraction-product",
+            "MATH.reasoning.operation-choice"
+          ],
+          "workingCompetencies": [
+            "MATH.number.fraction-product",
+            "MATH.reasoning.operation-choice"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c02-o01",
+          "text": "Add and subtract integers fluently (revision of Grade 6).",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.integer-add"
+          ],
+          "workingCompetencies": [
+            "MATH.number.integer-add"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c02-o02",
+          "text": "Multiply integers using sign rules, explained through patterns or models.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.integer-multiply"
+          ],
+          "workingCompetencies": [
+            "MATH.number.integer-multiply"
+          ],
+          "writtenTasks": [
+            "wr:int:sign-patterns"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c02-o03",
+          "text": "Evaluate expressions and solve context problems that combine integer operations.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.integer-add",
+            "MATH.number.integer-multiply",
+            "MATH.number.operation-properties"
+          ],
+          "workingCompetencies": [
+            "MATH.number.integer-add",
+            "MATH.number.integer-multiply",
+            "MATH.number.operation-properties"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c03-o01",
+          "text": "Find the highest common factor (HCF) of two or more numbers.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.hcf-lcm"
+          ],
+          "workingCompetencies": [
+            "MATH.number.hcf-lcm"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c03-o04",
+          "text": "Solve word problems that need an HCF or an LCM, such as grouping or scheduling.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.hcf-lcm"
+          ],
+          "workingCompetencies": [
+            "MATH.number.hcf-lcm"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c03-o02",
+          "text": "Find the least common multiple (LCM) of two or more numbers.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.hcf-lcm"
+          ],
+          "workingCompetencies": [
+            "MATH.number.hcf-lcm"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c03-o03",
+          "text": "Explore properties linking HCF and LCM (e.g. HCF x LCM = product of two numbers) and use an efficient procedure to find the HCF.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.euclid-algorithm",
+            "MATH.number.hcf-lcm"
+          ],
+          "workingCompetencies": [
+            "MATH.number.euclid-algorithm",
+            "MATH.number.hcf-lcm"
+          ],
+          "writtenTasks": [
+            "wr:hcf:product-rule",
+            "wr:hcf:euclid-steps"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c04-o01",
+          "text": "Multiply decimals by whole numbers, by powers of ten and by other decimals.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-product"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-product"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c04-o02",
+          "text": "Divide decimals by whole numbers, by powers of ten and by other decimals.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-product"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-product"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c04-o03",
+          "text": "Estimate before calculating to check that decimal products and quotients are reasonable, and solve problems in context.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-product",
+            "MATH.reasoning.estimate-check"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-product",
+            "MATH.reasoning.estimate-check"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c04-o01",
+          "text": "Use letters for unknown or varying quantities to write algebraic expressions for situations.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.expressions-intro",
+            "MATH.algebra.variables"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.expressions-intro",
+            "MATH.algebra.variables"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c04-o02",
+          "text": "Evaluate algebraic expressions for given values of the letters.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.variables"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.variables"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c04-o03",
+          "text": "Simplify algebraic expressions by collecting like terms, following the convention of leaving out the multiplication sign.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.algebra-simplify"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.algebra-simplify"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c04-o04",
+          "text": "Describe patterns (e.g. in matchstick figures or calendars) with algebraic expressions and use them to reveal relationships.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.generalise-with-expressions"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.generalise-with-expressions"
+          ],
+          "writtenTasks": [
+            "wr:alg:stick-houses"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c07-o01",
+          "text": "Write a linear equation in one unknown to model a situation or puzzle.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c07-o03",
+          "text": "Find and correct mistakes in worked solutions of equations.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "writtenTasks": [
+            "wr:eq:find-mistakes"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c07-o02",
+          "text": "Solve linear equations in one unknown systematically by doing the same operation to both sides, and check the solution.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "writtenTasks": [
+            "wr:eq:find-mistakes"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c07-o04",
+          "text": "Solve word problems by forming and solving a linear equation.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c05-o01",
+          "text": "Use the facts that angles in a linear pair add to 180 degrees and that vertically opposite angles are equal to find unknown angles where two lines cross.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.angle-pairs"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.angle-pairs"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c05-o02",
+          "text": "Identify perpendicular and parallel lines, and make them by paper folding.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.lines-segments"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.lines-segments"
+          ],
+          "writtenTasks": [
+            "wr:fold-parallel",
+            "wr:line:rays-segments"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c05-o03",
+          "text": "Name the corresponding and alternate angles made by a transversal and use them to find unknown angles when the lines are parallel.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.parallel-angles"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.parallel-angles"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c05-o04",
+          "text": "Use angle conditions to decide whether two lines are parallel and justify the decision.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.parallel-angles"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.parallel-angles"
+          ],
+          "writtenTasks": [
+            "wr:par:is-parallel"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c05-o05",
+          "text": "Draw a line parallel to a given line through a given point using geometric tools.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.basic-constructions"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:bas:parallel",
+            "wr:bas:parallel-copy-angle"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c07-o01",
+          "text": "Construct a triangle from three given side lengths and use the triangle inequality to decide whether such a triangle exists.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.construction-triangles",
+            "MATH.geometry.triangle-properties"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.triangle-properties"
+          ],
+          "writtenTasks": [
+            "wr:tri:sss"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c07-o02",
+          "text": "Construct a triangle from two sides and the included angle, or from two angles and a side.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.construction-triangles"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:tri:sas",
+            "wr:tri:asa"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c07-o03",
+          "text": "Use the fact that the angles of a triangle add to 180 degrees to find unknown angles and to decide whether given angles can form a triangle.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.triangle-properties"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.triangle-properties"
+          ],
+          "writtenTasks": [
+            "wr:tri:isosceles-angles"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c07-o04",
+          "text": "Draw the altitudes of a triangle.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.basic-constructions"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:bas:altitude"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c07-o05",
+          "text": "Classify triangles by their sides and by their angles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.triangle-types"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.triangle-types"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t2-c01-o02",
+          "text": "Use the SSS, SAS, ASA/AAS and RHS conditions to decide whether two triangles are congruent.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.congruence"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.congruence"
+          ],
+          "writtenTasks": [
+            "wr:cong:which-rule",
+            "wr:cong:kite"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c01-o01",
+          "text": "Recognise congruent figures and match corresponding sides and angles of congruent triangles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.congruence"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.congruence"
+          ],
+          "writtenTasks": [
+            "wr:cong:kite"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c01-o03",
+          "text": "Use the equal-angle properties of isosceles and equilateral triangles to find unknown angles and justify them.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.congruence",
+            "MATH.geometry.triangle-properties"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.congruence",
+            "MATH.geometry.triangle-properties"
+          ],
+          "writtenTasks": [
+            "wr:tri:isosceles-angles"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c06-o02",
+          "text": "Decide which shapes can tile a flat surface without gaps or overlaps, using the angles that meet at a point.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.shape-tiling",
+            "MATH.geometry.tessellations"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.shape-tiling",
+            "MATH.geometry.tessellations"
+          ],
+          "writtenTasks": [
+            "wr:tile-polygons",
+            "wr:tes:tiling"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c06-o01",
+          "text": "Carry out the ruler-and-compass constructions in the chapter and explain why each one works.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.basic-constructions",
+            "MATH.geometry.constructions-bisectors"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:bis:why-they-work",
+            "wr:con:basic60",
+            "wr:bas:special-angles",
+            "wr:bas:parallel-copy-angle"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c06-o03",
+          "text": "Create and describe tiling patterns made from one or more shapes.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.tessellations"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.tessellations"
+          ],
+          "writtenTasks": [
+            "wr:tes:tiling"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c05-o01",
+          "text": "Tell statistical questions (answered by collecting varying data) apart from other questions and from statements.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.statistical-questions"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.statistical-questions"
+          ],
+          "writtenTasks": [
+            "wr:stq:pose"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c05-o04",
+          "text": "Investigate a question with data and justify a conclusion from the evidence.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.statistical-questions"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.statistical-questions"
+          ],
+          "writtenTasks": [
+            "wr:stq:walk-or-bus",
+            "wr:stq:conclude",
+            "wr:stq:claim",
+            "wr:stq:plan"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c05-o02",
+          "text": "Calculate the mean and median of a data set and choose the more suitable representative value.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.averages-intro",
+            "MATH.statistics.median-mode"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.averages-intro",
+            "MATH.statistics.median-mode"
+          ],
+          "writtenTasks": [
+            "wr:avg:mean-change",
+            "wr:avg:mode-median-choice"
+          ]
+        },
+        {
+          "id": "cbse-g07-t2-c05-o03",
+          "text": "Choose and draw a suitable graph for a data set and read information from graphs.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.evaluate-data-displays",
+            "MATH.statistics.scaled-bars"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.evaluate-data-displays",
+            "MATH.statistics.scaled-bars"
+          ],
+          "writtenTasks": [
+            "wr:bar:rainfall-choose-draw",
+            "wr:disp:choose"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c06-o01",
+          "text": "Predict and justify whether a sum, difference or product is even or odd without calculating it.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.reasoning.parity"
+          ],
+          "workingCompetencies": [
+            "MATH.reasoning.parity"
+          ],
+          "writtenTasks": [
+            "wr:par:predict-odd-even"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c06-o02",
+          "text": "Solve and reason about grid puzzles such as magic squares with given row, column and diagonal sums.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.reasoning.number-grid-puzzles"
+          ],
+          "workingCompetencies": [
+            "MATH.reasoning.number-grid-puzzles"
+          ],
+          "writtenTasks": [
+            "wr:grid:supercell-3x3"
+          ]
+        },
+        {
+          "id": "cbse-g07-t1-c06-o03",
+          "text": "Generate Virahanka-Fibonacci numbers, link them to counting problems (e.g. rhythms of short and long beats), and explore their patterns.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Exploring patterns in the Virahanka-Fibonacci numbers (e.g. sums of terms, which terms are even) is not asked: ahfib has a single form asking for a later term, and ahrhy covers only the counting link.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.sequences.explicit-recursive-rules"
+          ],
+          "workingCompetencies": [
+            "MATH.sequences.explicit-recursive-rules"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g07-t1-c06-o04",
+          "text": "Work out the hidden digits in letter-coded addition or multiplication puzzles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.reasoning.digit-puzzles"
+          ],
+          "workingCompetencies": [
+            "MATH.reasoning.digit-puzzles"
+          ],
+          "writtenTasks": [
+            "wr:cry:ab-plus-b"
+          ]
+        }
+      ]
+    },
+    {
+      "release": {
+        "id": "tn-samacheer-mathematics-grade-7",
+        "version": "1.1.0",
+        "hash": "9705d234",
+        "grade": 7,
+        "board": "tn",
+        "boardLabel": "Tamil Nadu State Board (Samacheer Kalvi)",
+        "title": "Mathematics - Standard Seven (Term I, Term II, Term III), English Medium — Grade 7 Mathematics (Tamil Nadu State Board)",
+        "sourceVerified": false
+      },
+      "chapters": [
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t1-c01",
+          "title": "Number System (Term 1, chapter 1)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t1-c04",
+          "title": "Direct and Inverse Proportion (Term 1, chapter 4)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t2-c01",
+          "title": "Number System (Term 2, chapter 1)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t2-c03",
+          "title": "Algebra (Term 2, chapter 3)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t3-c01",
+          "title": "Number System (Term 3, chapter 1)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t3-c02",
+          "title": "Percentage and Simple Interest (Term 3, chapter 2)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t1-c03",
+          "title": "Algebra (Term 1, chapter 3)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t2-c05",
+          "title": "Information Processing (Term 2, chapter 5)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t3-c03",
+          "title": "Algebra (Term 3, chapter 3)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t1-c05",
+          "title": "Geometry (Term 1, chapter 5)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t1-c06",
+          "title": "Information Processing (Term 1, chapter 6)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t2-c04",
+          "title": "Geometry (Term 2, chapter 4)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t3-c04",
+          "title": "Geometry (Term 3, chapter 4)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t1-c02",
+          "title": "Measurements (Term 1, chapter 2)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t2-c02",
+          "title": "Measurements (Term 2, chapter 2)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t3-c05",
+          "title": "Statistics (Term 3, chapter 5)"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-7:tn-g07-t3-c06",
+          "title": "Information Processing (Term 3, chapter 6)"
+        }
+      ],
+      "totalRequirements": 54,
+      "mappedRequirements": 54,
+      "mappedCompetencies": 56,
+      "competenciesWithKeyboardPractice": 48,
+      "requirementsWithWorkingQuestions": 52,
+      "requirementsWithQuestionsForEveryMappedCompetency": 51,
+      "partial": 2,
+      "unsupported": 0,
+      "awaitingReview": 52,
+      "validated": 0,
+      "families": 183,
+      "releasedFamilies": 0,
+      "checkedPracticeQuestions": 34979,
+      "requirements": [
+        {
+          "id": "tn-g07-t1-c01-o01",
+          "text": "Add and subtract integers, using the number line and sign rules.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.integer-add"
+          ],
+          "workingCompetencies": [
+            "MATH.number.integer-add"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c01-o02",
+          "text": "Multiply and divide integers using the sign rules.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.integer-multiply",
+            "MATH.number.rational-numbers"
+          ],
+          "workingCompetencies": [
+            "MATH.number.integer-multiply",
+            "MATH.number.rational-numbers"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c01-o03",
+          "text": "Check which properties (closure, commutative, associative, identity, distributive) hold for each integer operation, using counterexamples where a property fails.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.operation-properties",
+            "MATH.reasoning.counterexamples-intro"
+          ],
+          "workingCompetencies": [
+            "MATH.number.operation-properties",
+            "MATH.reasoning.counterexamples-intro"
+          ],
+          "writtenTasks": [
+            "wr:gen:integer-props",
+            "wr:ops:smart-calc"
+          ]
+        },
+        {
+          "id": "tn-g07-t1-c01-o04",
+          "text": "Solve word problems that need several integer operations, such as temperature changes, depths or scores.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.integer-add",
+            "MATH.reasoning.multi-step"
+          ],
+          "workingCompetencies": [
+            "MATH.number.integer-add",
+            "MATH.reasoning.multi-step"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c04-o02",
+          "text": "Recognise when two quantities vary inversely and solve problems about workers and time or speed and time.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.inverse-proportion"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.inverse-proportion"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c04-o01",
+          "text": "Recognise when two quantities vary directly and solve direct-proportion problems with the unitary method or a ratio.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.proportion"
+          ],
+          "workingCompetencies": [
+            "MATH.number.proportion"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c04-o03",
+          "text": "Decide from a table or situation whether a relationship is direct, inverse or neither.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.reasoning.proportional-check"
+          ],
+          "workingCompetencies": [
+            "MATH.reasoning.proportional-check"
+          ],
+          "writtenTasks": [
+            "wr:prop:photo-tailor"
+          ]
+        },
+        {
+          "id": "tn-g07-t2-c01-o01",
+          "text": "Represent decimals in place-value form, expanded form and with tenths/hundredths models.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c01-o03",
+          "text": "Compare and order decimal numbers.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "writtenTasks": [
+            "wr:dec:number-line"
+          ]
+        },
+        {
+          "id": "tn-g07-t2-c01-o02",
+          "text": "Convert fractions to decimals and decimals to fractions in simplest form.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-tenths",
+            "MATH.number.equivalent-fractions"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-tenths",
+            "MATH.number.equivalent-fractions"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c01-o04",
+          "text": "Locate decimal numbers on a number line.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-tenths"
+          ],
+          "writtenTasks": [
+            "wr:dec:number-line"
+          ]
+        },
+        {
+          "id": "tn-g07-t2-c03-o02",
+          "text": "Apply the product, quotient, power-of-a-power and zero-exponent laws to simplify expressions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.exponents"
+          ],
+          "workingCompetencies": [
+            "MATH.number.exponents"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c03-o01",
+          "text": "Write repeated products in exponential form and evaluate powers, including expressing a number as a product of prime powers.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.exponents",
+            "MATH.number.prime-factorisation"
+          ],
+          "workingCompetencies": [
+            "MATH.number.exponents",
+            "MATH.number.prime-factorisation"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c03-o03",
+          "text": "Find the unit digit of a large power using the repeating cycle of unit digits.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.pattern-rules",
+            "MATH.number.exponents"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.pattern-rules",
+            "MATH.number.exponents"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c03-o04",
+          "text": "Determine the degree of a monomial or polynomial expression.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.polynomials"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.polynomials"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c01-o01",
+          "text": "Round decimals to the nearest whole number, tenth or hundredth.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.rounding",
+            "MATH.reasoning.estimate-check"
+          ],
+          "workingCompetencies": [
+            "MATH.number.rounding",
+            "MATH.reasoning.estimate-check"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c01-o02",
+          "text": "Add and subtract decimal numbers, including in money and measurement problems.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-operations"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-operations"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c01-o03",
+          "text": "Multiply decimals by whole numbers, by powers of 10 and by other decimals.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-product"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-product"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c01-o04",
+          "text": "Divide decimals by whole numbers, by powers of 10 and by other decimals, and solve related word problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.decimal-product"
+          ],
+          "workingCompetencies": [
+            "MATH.number.decimal-product"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c02-o01",
+          "text": "Convert between fractions, decimals and percentages.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.percent-intro",
+            "MATH.number.percentage"
+          ],
+          "workingCompetencies": [
+            "MATH.number.percent-intro",
+            "MATH.number.percentage"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c02-o02",
+          "text": "Calculate a percentage of a quantity and express one quantity as a percentage of another in real-life situations such as marks, populations or discounts.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.percentage"
+          ],
+          "workingCompetencies": [
+            "MATH.number.percentage"
+          ],
+          "writtenTasks": [
+            "wr:pct:claims"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c02-o03",
+          "text": "Calculate simple interest, amount, principal, rate or time when the other quantities are given.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.profit-loss"
+          ],
+          "workingCompetencies": [
+            "MATH.number.profit-loss"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c03-o01",
+          "text": "Identify the terms, coefficients and constants of an expression, and tell like terms from unlike terms.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.algebra-simplify"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.algebra-simplify"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c03-o03",
+          "text": "Add and subtract algebraic expressions by combining like terms.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.algebra-simplify"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.algebra-simplify"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c03-o02",
+          "text": "Evaluate an algebraic expression for given values of its variables.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.variables"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.variables"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c03-o04",
+          "text": "Form and solve simple linear equations in one variable from word problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-equations"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c05-o01",
+          "text": "Find the linear rule linking two quantities from a table of values and use it to predict new values.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.linear-two-variables",
+            "MATH.algebra.pattern-rules"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-two-variables",
+            "MATH.algebra.pattern-rules"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c05-o02",
+          "text": "Build Pascal's triangle and describe the number patterns in its rows and diagonals.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.number-patterns",
+            "MATH.algebra.pattern-rules"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.number-patterns",
+            "MATH.algebra.pattern-rules"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c03-o01",
+          "text": "Use area models to multiply monomials and binomials.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.identities-intro"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.identities-intro"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c03-o02",
+          "text": "Verify the identities for (a+b)^2, (a-b)^2 and (a+b)(a-b) with area diagrams and use them to expand expressions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.identities",
+            "MATH.algebra.identities-intro"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.identities",
+            "MATH.algebra.identities-intro"
+          ],
+          "writtenTasks": [
+            "wr:idt:square-sum",
+            "wr:idt:a-minus-b-area",
+            "wr:idt:diff-squares-area",
+            "wr:idt:errors-mental"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c03-o03",
+          "text": "Factorise expressions that match a standard identity.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.factorisation"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.factorisation"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c03-o04",
+          "text": "Solve simple one-variable inequations over whole numbers or integers and show the solution set on a number line.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.inequalities"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.inequalities"
+          ],
+          "writtenTasks": [
+            "wr:ineq:integer-line"
+          ]
+        },
+        {
+          "id": "tn-g07-t1-c05-o01",
+          "text": "Use adjacent angles, linear pairs and vertically opposite angles at intersecting lines to find unknown angles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.angle-pairs"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.angle-pairs"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c05-o02",
+          "text": "Identify the corresponding, alternate and co-interior angles formed by a transversal, and use them to find angles or test lines for parallelism.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.parallel-angles"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.parallel-angles"
+          ],
+          "writtenTasks": [
+            "wr:par:is-parallel"
+          ]
+        },
+        {
+          "id": "tn-g07-t1-c05-o03",
+          "text": "Construct the perpendicular bisector of a line segment and the bisector of an angle with ruler and compass.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.constructions-bisectors"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:bis:why-they-work",
+            "wr:con:perpbis",
+            "wr:con:angbis"
+          ]
+        },
+        {
+          "id": "tn-g07-t1-c05-o04",
+          "text": "Construct special angles such as 60, 30, 90, 45 and 120 degrees with ruler and compass only.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.basic-constructions",
+            "MATH.geometry.constructions-bisectors"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:bas:special-angles"
+          ]
+        },
+        {
+          "id": "tn-g07-t1-c06-o01",
+          "text": "Fit tetromino shapes together to tile or fill a given region.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.shape-tiling"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.shape-tiling"
+          ],
+          "writtenTasks": [
+            "wr:tile:tetrominoes"
+          ]
+        },
+        {
+          "id": "tn-g07-t1-c06-o02",
+          "text": "Read a route map to describe paths with directions and choose the shortest or most suitable route.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.maps-directions",
+            "MATH.geometry.positions",
+            "MATH.reasoning.multi-step"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.maps-directions",
+            "MATH.geometry.positions",
+            "MATH.reasoning.multi-step"
+          ],
+          "writtenTasks": [
+            "wr:map-route-choose",
+            "wr:pos-temple"
+          ]
+        },
+        {
+          "id": "tn-g07-t2-c04-o01",
+          "text": "Use the angle-sum property and the exterior-angle property to find unknown angles of triangles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.triangle-properties"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.triangle-properties"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c04-o02",
+          "text": "Identify corresponding parts of congruent figures and use the SSS, SAS, ASA and RHS criteria to decide whether two triangles are congruent.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.congruence"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.congruence"
+          ],
+          "writtenTasks": [
+            "wr:cong:which-rule",
+            "wr:cong:kite"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c04-o01",
+          "text": "Apply reflections, translations and rotations to figures and identify the symmetry each transformation produces.",
+          "coverage": "partial",
+          "reason": "Perform and describe reflections, translations and rotations of figures: missing relations",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.rotational-symmetry",
+            "MATH.geometry.transformations"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.rotational-symmetry",
+            "MATH.geometry.transformations"
+          ],
+          "writtenTasks": [
+            "wr:sym:motif-designs",
+            "wr:tr-reflection",
+            "wr:tr-turns"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c04-o02",
+          "text": "Construct circles and concentric circles from given radii, or from a given ring width, using a compass.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.basic-constructions",
+            "MATH.geometry.circles"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circles"
+          ],
+          "writtenTasks": [
+            "wr:circ:concentric-rings"
+          ]
+        },
+        {
+          "id": "tn-g07-t1-c02-o01",
+          "text": "Calculate the area and perimeter of a parallelogram from its base, height and sides, and find a missing dimension.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.parallelogram-rhombus-area"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.parallelogram-rhombus-area"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c02-o02",
+          "text": "Calculate the area of a rhombus from its diagonals and use it to find an unknown diagonal.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.parallelogram-rhombus-area"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.parallelogram-rhombus-area"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t1-c02-o03",
+          "text": "Calculate the area of a trapezium from its parallel sides and height, including in field and plot problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.trapezium-area"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.trapezium-area"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c02-o01",
+          "text": "Name the parts of a circle and relate radius and diameter.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.circles"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circles"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c02-o02",
+          "text": "Calculate the circumference of a circle and find the radius from a given circumference, including distance-by-wheel problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.circle-area"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.circle-area"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c02-o03",
+          "text": "Calculate the area of a circle, and of rings and semicircles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.circle-area"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.circle-area"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t2-c02-o04",
+          "text": "Find the area of rectangular and circular pathways by subtracting inner areas from outer areas.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.circle-area",
+            "MATH.measurement.trapezium-area"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.circle-area",
+            "MATH.measurement.trapezium-area"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g07-t3-c05-o01",
+          "text": "Collect and organise data into tables.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.data-frequency"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.data-frequency"
+          ],
+          "writtenTasks": [
+            "wr:freq:tally-table"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c05-o03",
+          "text": "Find the mode and median of ungrouped data and choose an appropriate representative value.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.median-mode"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.median-mode"
+          ],
+          "writtenTasks": [
+            "wr:avg:mode-median-choice"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c05-o02",
+          "text": "Calculate the arithmetic mean of a data set and interpret it as a representative value.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.averages-intro"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.averages-intro"
+          ],
+          "writtenTasks": [
+            "wr:avg:mean-change"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c06-o01",
+          "text": "Read a flowchart that uses the standard symbols and trace it to find the output.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.reasoning.algorithms-flowcharts"
+          ],
+          "workingCompetencies": [
+            "MATH.reasoning.algorithms-flowcharts"
+          ],
+          "writtenTasks": [
+            "wr:alg:fare-flowchart"
+          ]
+        },
+        {
+          "id": "tn-g07-t3-c06-o02",
+          "text": "Draw a flowchart, with decisions where needed, for a simple process or computation.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.reasoning.algorithms-flowcharts"
+          ],
+          "workingCompetencies": [
+            "MATH.reasoning.algorithms-flowcharts"
+          ],
+          "writtenTasks": [
+            "wr:alg:fare-flowchart"
+          ]
+        }
+      ]
+    },
+    {
+      "release": {
+        "id": "cbse-ncert-mathematics-grade-10",
+        "version": "1.1.0",
+        "hash": "50b2cdb6",
+        "grade": 10,
+        "board": "cbse",
+        "boardLabel": "CBSE (NCERT textbooks)",
+        "title": "Mathematics: Textbook for Class X — Grade 10 Mathematics (CBSE / NCERT)",
+        "sourceVerified": true
+      },
+      "chapters": [
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c01",
+          "title": "Real Numbers"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c02",
+          "title": "Polynomials"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c03",
+          "title": "Pair of Linear Equations in Two Variables"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c04",
+          "title": "Quadratic Equations"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c05",
+          "title": "Arithmetic Progressions"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c06",
+          "title": "Triangles"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c10",
+          "title": "Circles"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c11",
+          "title": "Areas Related to Circles"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c12",
+          "title": "Surface Areas and Volumes"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c13",
+          "title": "Statistics"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c14",
+          "title": "Probability"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c07",
+          "title": "Coordinate Geometry"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c08",
+          "title": "Introduction to Trigonometry"
+        },
+        {
+          "id": "chapter:cbse-ncert-mathematics-grade-10:cbse-g10-c09",
+          "title": "Some Applications of Trigonometry"
+        }
+      ],
+      "totalRequirements": 58,
+      "mappedRequirements": 58,
+      "mappedCompetencies": 33,
+      "competenciesWithKeyboardPractice": 31,
+      "requirementsWithWorkingQuestions": 57,
+      "requirementsWithQuestionsForEveryMappedCompetency": 56,
+      "partial": 7,
+      "unsupported": 0,
+      "awaitingReview": 51,
+      "validated": 0,
+      "families": 146,
+      "releasedFamilies": 0,
+      "checkedPracticeQuestions": 25870,
+      "requirements": [
+        {
+          "id": "cbse-g10-c01-o02",
+          "text": "Find the HCF and LCM of numbers from their prime factorisations, use HCF x LCM = product for two numbers, and solve word problems with them.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.euclid-algorithm",
+            "MATH.number.factors-multiples",
+            "MATH.number.hcf-lcm"
+          ],
+          "workingCompetencies": [
+            "MATH.number.euclid-algorithm",
+            "MATH.number.factors-multiples",
+            "MATH.number.hcf-lcm"
+          ],
+          "writtenTasks": [
+            "wr:euc:fta-hcf-decimals",
+            "wr:hcf:product-rule"
+          ]
+        },
+        {
+          "id": "cbse-g10-c01-o03",
+          "text": "Use uniqueness of prime factorisation to justify number facts, e.g. that 6^n can never end in 0.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.reasoning.mathematical-argument"
+          ],
+          "workingCompetencies": [
+            "MATH.reasoning.mathematical-argument"
+          ],
+          "writtenTasks": [
+            "wr:arg:squares-factors"
+          ]
+        },
+        {
+          "id": "cbse-g10-c01-o01",
+          "text": "Express a natural number as a product of primes and state the Fundamental Theorem of Arithmetic (uniqueness of prime factorisation).",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.euclid-algorithm",
+            "MATH.number.prime-factorisation",
+            "MATH.number.primes"
+          ],
+          "workingCompetencies": [
+            "MATH.number.euclid-algorithm",
+            "MATH.number.prime-factorisation",
+            "MATH.number.primes"
+          ],
+          "writtenTasks": [
+            "wr:num:fta-statement",
+            "wr:euc:fta-hcf-decimals"
+          ]
+        },
+        {
+          "id": "cbse-g10-c01-o04",
+          "text": "Prove by contradiction that sqrt 2, sqrt 3 and sqrt 5 are irrational, using the fact that if a prime divides a^2 it divides a.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.irrationality-proofs"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:irr:sqrt2",
+            "wr:irr:sqrt3",
+            "wr:irr:sqrt5",
+            "wr:irr:sqrt2-sqrt3-g9"
+          ]
+        },
+        {
+          "id": "cbse-g10-c01-o05",
+          "text": "Prove that numbers such as 3 + 2 sqrt 5 or 1/sqrt 2 are irrational, given the irrationality of the surd.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.irrationality-proofs",
+            "MATH.number.real-numbers"
+          ],
+          "workingCompetencies": [
+            "MATH.number.real-numbers"
+          ],
+          "writtenTasks": [
+            "wr:irr:sum",
+            "wr:irr:reciprocal"
+          ]
+        },
+        {
+          "id": "cbse-g10-c02-o01",
+          "text": "Find the number of zeros of a polynomial from its graph by counting where it meets the x-axis.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.polynomial-zeros",
+            "MATH.algebra.polynomials"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.polynomial-zeros",
+            "MATH.algebra.polynomials"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c02-o03",
+          "text": "Write a quadratic polynomial whose zeros have a given sum and product.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.polynomial-zeros"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.polynomial-zeros"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c02-o02",
+          "text": "Find the zeros of a quadratic polynomial by factorising, and check the sum and product of zeros against the coefficients.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.factorisation",
+            "MATH.algebra.polynomial-zeros"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.factorisation",
+            "MATH.algebra.polynomial-zeros"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c02-o04",
+          "text": "Evaluate symmetric expressions in the zeros (e.g. alpha^2 + beta^2, 1/alpha + 1/beta) without finding the zeros, and find unknown coefficients from conditions on the zeros.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.identities",
+            "MATH.algebra.polynomial-zeros"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.identities",
+            "MATH.algebra.polynomial-zeros"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c03-o01",
+          "text": "Represent a situation as a pair of linear equations in two variables.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c03-o02",
+          "text": "Solve a pair of linear equations graphically and interpret intersecting, parallel and coincident lines.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "writtenTasks": [
+            "wr:sys:intersect",
+            "wr:sys:parallel-coincident"
+          ]
+        },
+        {
+          "id": "cbse-g10-c03-o03",
+          "text": "Decide from the coefficient ratios a1/a2, b1/b2, c1/c2 whether a pair has one, none or infinitely many solutions, and find parameter values for a given case.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "writtenTasks": [
+            "wr:sys:parallel-coincident"
+          ]
+        },
+        {
+          "id": "cbse-g10-c03-o04",
+          "text": "Solve a pair of linear equations by substitution.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "writtenTasks": [
+            "wr:gap:named-methods"
+          ]
+        },
+        {
+          "id": "cbse-g10-c03-o05",
+          "text": "Solve a pair of linear equations by elimination.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-systems"
+          ],
+          "writtenTasks": [
+            "wr:gap:named-methods"
+          ]
+        },
+        {
+          "id": "cbse-g10-c03-o06",
+          "text": "Model and solve everyday problems (ages, money, speeds, digits, geometry) with a pair of linear equations and interpret the solution.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.linear-systems",
+            "MATH.reasoning.model-selection"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-systems",
+            "MATH.reasoning.model-selection"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c04-o01",
+          "text": "Recognise quadratic equations in standard form ax^2 + bx + c = 0 (a not 0) and form them from situations.",
+          "coverage": "partial",
+          "reason": "Solve quadratic equations: missing relations; not every part is assessed: Forming a quadratic equation from a situation is never itself asked: auqwp says 'form a quadratic equation' but check only the final root, which can be found by trial; auqstd covers recognising and standard form only.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c04-o03",
+          "text": "Solve quadratic equations with real roots using the quadratic formula.",
+          "coverage": "partial",
+          "reason": "Solve quadratic equations: missing relations",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c04-o02",
+          "text": "Solve quadratic equations by factorisation (splitting the middle term).",
+          "coverage": "partial",
+          "reason": "Solve quadratic equations: missing relations",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c04-o05",
+          "text": "Model everyday problems (areas, speeds, ages, numbers) with quadratic equations, solve them and reject solutions that do not fit the context.",
+          "coverage": "partial",
+          "reason": "Solve quadratic equations: missing relations",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.quadratics",
+            "MATH.reasoning.model-selection"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.quadratics",
+            "MATH.reasoning.model-selection"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c04-o04",
+          "text": "Use the discriminant to decide the nature of roots and find parameter values for equal or real roots.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.quadratic-discriminant"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.quadratic-discriminant"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c05-o02",
+          "text": "Derive and use the nth-term formula of an AP, including the nth term from the end and which term has a given value.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "writtenTasks": [
+            "wr:ap:derive-nth"
+          ]
+        },
+        {
+          "id": "cbse-g10-c05-o01",
+          "text": "Decide whether a list is an AP and identify its first term and common difference.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c05-o03",
+          "text": "Derive and use the formula for the sum of the first n terms of an AP.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "writtenTasks": [
+            "wr:ap:derive-sum"
+          ]
+        },
+        {
+          "id": "cbse-g10-c05-o04",
+          "text": "Solve everyday problems (savings, instalments, arrangements) with AP terms and sums.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Everyday problems (savings, instalments, arrangements) are not assessed: apn, auaps and auapk ask only for terms and sums of bare APs, with no context in any of their 3,360 problems.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c06-o02",
+          "text": "Prove the Basic Proportionality Theorem: a line parallel to one side of a triangle divides the other two sides in the same ratio.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.similarity",
+            "MATH.geometry.triangle-proof"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.similarity",
+            "MATH.geometry.triangle-proof"
+          ],
+          "writtenTasks": [
+            "wr:sim:bpt-trapezium"
+          ]
+        },
+        {
+          "id": "cbse-g10-c06-o03",
+          "text": "Use the BPT and its converse to find lengths and to show lines are parallel.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.similarity"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.similarity"
+          ],
+          "writtenTasks": [
+            "wr:sim:converses",
+            "wr:sim:bpt-trapezium"
+          ]
+        },
+        {
+          "id": "cbse-g10-c06-o01",
+          "text": "Explain when figures are similar versus congruent, with examples and counterexamples (e.g. polygons with equal angles but sides not in proportion).",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.similarity"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.similarity"
+          ],
+          "writtenTasks": [
+            "wr:sim:similar-vs-congruent"
+          ]
+        },
+        {
+          "id": "cbse-g10-c06-o05",
+          "text": "Prove triangles similar and deduce relations between their sides, such as equal products of segments.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.similarity",
+            "MATH.geometry.triangle-proof"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.similarity",
+            "MATH.geometry.triangle-proof"
+          ],
+          "writtenTasks": [
+            "wr:sim:chord-products",
+            "wr:sim:bpt-trapezium"
+          ]
+        },
+        {
+          "id": "cbse-g10-c06-o04",
+          "text": "Apply the AA/AAA, SSS and SAS similarity criteria to find unknown sides and angles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.similarity"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.similarity"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c10-o04",
+          "text": "Use tangent properties to find lengths and angles and to prove results such as AB + CD = AD + BC for a quadrilateral circumscribing a circle.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "writtenTasks": [
+            "wr:tan:proofs"
+          ]
+        },
+        {
+          "id": "cbse-g10-c10-o01",
+          "text": "Tell tangents, secants and non-intersecting lines apart and state how many tangents can be drawn from a point inside, on or outside a circle.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c10-o02",
+          "text": "Prove that the tangent at any point of a circle is perpendicular to the radius through the point of contact.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "writtenTasks": [
+            "wr:tan:proofs"
+          ]
+        },
+        {
+          "id": "cbse-g10-c10-o03",
+          "text": "Prove that the two tangents drawn from an external point to a circle are equal in length.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "writtenTasks": [
+            "wr:tan:proofs"
+          ]
+        },
+        {
+          "id": "cbse-g10-c11-o01",
+          "text": "Calculate the area of a sector and the length of its arc from the radius and central angle.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.sectors"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.sectors"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c11-o02",
+          "text": "Calculate the area of a segment of a circle for central angles of 60, 90 or 120 degrees.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.sectors"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.sectors"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c11-o03",
+          "text": "Solve applied problems with sectors and segments, such as clock hands, wipers and designs.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.circle-area",
+            "MATH.measurement.sectors"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.circle-area",
+            "MATH.measurement.sectors"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c12-o01",
+          "text": "Calculate the surface area of a solid made of two basic solids (cube, cuboid, cylinder, cone, sphere, hemisphere), deciding which faces stay exposed.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: combinations with a cuboid or a whole sphere are not asked (cube combinations are)",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c12-o03",
+          "text": "Model real objects (toys, tents, capsules, vessels) as combinations of solids and answer questions about material or capacity.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.combined-solids",
+            "MATH.reasoning.model-selection"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.combined-solids",
+            "MATH.reasoning.model-selection"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c12-o02",
+          "text": "Calculate the volume of a solid made of two basic solids.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: combinations with a cuboid or a whole sphere are not asked (cube combinations are)",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c13-o01",
+          "text": "Calculate the mean of grouped data by the direct, assumed-mean and step-deviation methods.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c13-o04",
+          "text": "Find a missing frequency from a given mean or median and interpret which measure of centre suits a situation.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "writtenTasks": [
+            "wr:gmean:missing-f"
+          ]
+        },
+        {
+          "id": "cbse-g10-c13-o02",
+          "text": "Calculate the mode of grouped data from the modal class with the formula.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c13-o03",
+          "text": "Calculate the median of grouped data using cumulative frequencies and the median formula.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.grouped-mean"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c14-o01",
+          "text": "Calculate theoretical (classical) probabilities for experiments with equally likely outcomes, such as coins, dice, cards and balls in bags.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.probability.classical"
+          ],
+          "workingCompetencies": [
+            "MATH.probability.classical"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c14-o02",
+          "text": "Use the facts that P(E) + P(not E) = 1, that 0 <= P(E) <= 1, and that impossible and sure events have probabilities 0 and 1.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.probability.complements"
+          ],
+          "workingCompetencies": [
+            "MATH.probability.complements"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c14-o03",
+          "text": "List the sample space of two-stage experiments (two coins, two dice) and find probabilities of events defined on it.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.probability.classical",
+            "MATH.probability.sample-space"
+          ],
+          "workingCompetencies": [
+            "MATH.probability.classical",
+            "MATH.probability.sample-space"
+          ],
+          "writtenTasks": [
+            "wr:prob:spinner-table"
+          ]
+        },
+        {
+          "id": "cbse-g10-c07-o02",
+          "text": "Use distances to test collinearity, classify triangles and quadrilaterals, and find points equidistant from given points.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.coordinate.distance",
+            "MATH.coordinate.distance-intro",
+            "MATH.reasoning.mathematical-argument"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.distance",
+            "MATH.coordinate.distance-intro",
+            "MATH.reasoning.mathematical-argument"
+          ],
+          "writtenTasks": [
+            "wr:dist:rhombus-equidistant",
+            "wr:dist:derive-collinear"
+          ]
+        },
+        {
+          "id": "cbse-g10-c07-o03",
+          "text": "Find the point dividing a segment internally in a given ratio, including the midpoint and points of trisection.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.coordinate.distance"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.distance"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c07-o01",
+          "text": "Calculate the distance between two points with the distance formula.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.coordinate.distance"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.distance"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c07-o04",
+          "text": "Find the ratio in which a point or an axis divides a segment, and unknown vertices (e.g. of a parallelogram) using the section formula.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.coordinate.distance",
+            "MATH.coordinate.distance-intro"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.distance",
+            "MATH.coordinate.distance-intro"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c08-o01",
+          "text": "Define the six trigonometric ratios of an acute angle in a right triangle and explain, using similarity, why they depend only on the angle.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "writtenTasks": [
+            "wr:trig:ratios-similar"
+          ]
+        },
+        {
+          "id": "cbse-g10-c08-o02",
+          "text": "Find the other trigonometric ratios of an angle from one given ratio.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c08-o03",
+          "text": "Recall and justify the ratios of 30, 45 and 60 degrees (and the motivated values at 0 and 90), and evaluate expressions with them.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "writtenTasks": [
+            "wr:gap:trig-derive"
+          ]
+        },
+        {
+          "id": "cbse-g10-c08-o04",
+          "text": "Prove sin^2 A + cos^2 A = 1 and the related identities with sec/tan and cosec/cot.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "writtenTasks": [
+            "wr:trig:identities"
+          ]
+        },
+        {
+          "id": "cbse-g10-c08-o05",
+          "text": "Prove simple trigonometric identities and simplify expressions using the basic identities.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "writtenTasks": [
+            "wr:trig:identities"
+          ]
+        },
+        {
+          "id": "cbse-g10-c09-o01",
+          "text": "Identify angles of elevation and depression and draw a labelled diagram for a heights-and-distances situation.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "writtenTasks": [
+            "wr:hd:roof-tower"
+          ]
+        },
+        {
+          "id": "cbse-g10-c09-o02",
+          "text": "Find heights or distances with one right triangle and angles of 30, 45 or 60 degrees.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "cbse-g10-c09-o03",
+          "text": "Solve heights-and-distances problems involving two right triangles (e.g. two observation points, an object seen from a height).",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "writtenTasks": [
+            "wr:hd:roof-tower"
+          ]
+        }
+      ]
+    },
+    {
+      "release": {
+        "id": "tn-samacheer-mathematics-grade-10",
+        "version": "1.1.0",
+        "hash": "9fea1b7a",
+        "grade": 10,
+        "board": "tn",
+        "boardLabel": "Tamil Nadu State Board (Samacheer Kalvi)",
+        "title": "Mathematics, Standard Ten — Grade 10 Mathematics (Tamil Nadu State Board)",
+        "sourceVerified": true
+      },
+      "chapters": [
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c01",
+          "title": "Relations and Functions"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c02",
+          "title": "Numbers and Sequences"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c03",
+          "title": "Algebra"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c04",
+          "title": "Geometry"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c07",
+          "title": "Mensuration"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c08",
+          "title": "Statistics and Probability"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c05",
+          "title": "Coordinate Geometry"
+        },
+        {
+          "id": "chapter:tn-samacheer-mathematics-grade-10:tn-g10-c06",
+          "title": "Trigonometry"
+        }
+      ],
+      "totalRequirements": 49,
+      "mappedRequirements": 49,
+      "mappedCompetencies": 48,
+      "competenciesWithKeyboardPractice": 46,
+      "requirementsWithWorkingQuestions": 48,
+      "requirementsWithQuestionsForEveryMappedCompetency": 47,
+      "partial": 8,
+      "unsupported": 0,
+      "awaitingReview": 41,
+      "validated": 0,
+      "families": 194,
+      "releasedFamilies": 0,
+      "checkedPracticeQuestions": 36038,
+      "requirements": [
+        {
+          "id": "tn-g10-c01-o01",
+          "text": "Form ordered pairs and Cartesian products of two or three sets and find the number of elements in a product.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.relations",
+            "MATH.algebra.sets",
+            "MATH.sets-relations.cartesian-product"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.relations",
+            "MATH.algebra.sets",
+            "MATH.sets-relations.cartesian-product"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c01-o03",
+          "text": "Decide whether a relation is a function using arrow diagrams, ordered pairs, tables, rules and the vertical line test, and represent functions in these forms.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Deciding from an arrow diagram is not assessed (aoisfn uses ordered pairs, tables, point plots with the vertical line test and rules; none of its 190 problems is an arrow diagram), and representing a function in these forms is asked only once, as an arrow diagram in wr:fn:one-one-onto (a).",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.functions"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.functions"
+          ],
+          "writtenTasks": [
+            "wr:fn:one-one-onto"
+          ]
+        },
+        {
+          "id": "tn-g10-c01-o02",
+          "text": "Identify relations as subsets of a Cartesian product and state their domain, co-domain and range.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.relations"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.relations"
+          ],
+          "writtenTasks": [
+            "wr:rel:subset"
+          ]
+        },
+        {
+          "id": "tn-g10-c01-o04",
+          "text": "Classify functions as one-one, many-one, onto, into or bijective, and recognise constant, identity and real-valued functions.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Recognising a real-valued function is never asked (one-one/many-one, onto/into, bijective, constant and identity are all in aofname/aqonto).",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.functions",
+            "MATH.algebra.inverse-functions",
+            "MATH.sets-relations.function-types"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.functions",
+            "MATH.algebra.inverse-functions",
+            "MATH.sets-relations.function-types"
+          ],
+          "writtenTasks": [
+            "wr:fn:one-one-onto",
+            "wr:inv:restrict-square"
+          ]
+        },
+        {
+          "id": "tn-g10-c01-o05",
+          "text": "Form and evaluate compositions of functions and check whether composition is commutative or associative for given functions.",
+          "coverage": "partial",
+          "reason": "Combine functions by sum, difference, product, quotient and composition: missing relations",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.function-operations"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.function-operations"
+          ],
+          "writtenTasks": [
+            "wr:comp:not-commutative"
+          ]
+        },
+        {
+          "id": "tn-g10-c01-o06",
+          "text": "Recognise and sketch graphs of linear, modulus, quadratic, cubic, reciprocal and constant functions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.functions"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.functions"
+          ],
+          "writtenTasks": [
+            "wr:fn:sketch-standard",
+            "wr:fn:sketch-lin-quad-recip"
+          ]
+        },
+        {
+          "id": "tn-g10-c02-o03",
+          "text": "Use congruence modulo n to find remainders, solve simple congruences and model cyclic situations such as clock times and weekdays.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.number.modular-arithmetic"
+          ],
+          "workingCompetencies": [
+            "MATH.number.modular-arithmetic"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c02-o01",
+          "text": "Apply Euclid's division lemma and algorithm to find the HCF of integers and to prove statements about integer forms.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.euclid-algorithm"
+          ],
+          "workingCompetencies": [
+            "MATH.number.euclid-algorithm"
+          ],
+          "writtenTasks": [
+            "wr:euc:lemma-forms"
+          ]
+        },
+        {
+          "id": "tn-g10-c02-o02",
+          "text": "Use the fundamental theorem of arithmetic to factorise numbers, find HCF and LCM, and reason about divisibility and terminating decimals.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.number.euclid-algorithm"
+          ],
+          "workingCompetencies": [
+            "MATH.number.euclid-algorithm"
+          ],
+          "writtenTasks": [
+            "wr:euc:fta-hcf-decimals"
+          ]
+        },
+        {
+          "id": "tn-g10-c02-o04",
+          "text": "Find terms of sequences from general or recursive rules, and find nth terms, number of terms and conditions for arithmetic progressions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c02-o05",
+          "text": "Find the sum of the first n terms of an arithmetic series and solve related word problems.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Word problems on arithmetic series are not assessed: auaps asks the sum of bare APs only, and wr:ap:derive-sum (c) is a bare number sum.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.arithmetic-sequences"
+          ],
+          "writtenTasks": [
+            "wr:ap:derive-sum"
+          ]
+        },
+        {
+          "id": "tn-g10-c02-o06",
+          "text": "Find nth terms of geometric progressions, sums of finite and infinite geometric series, and solve related problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.geometric-sequences"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.geometric-sequences"
+          ],
+          "writtenTasks": [
+            "wr:gp:hanoi"
+          ]
+        },
+        {
+          "id": "tn-g10-c02-o07",
+          "text": "Evaluate sums of the first n natural numbers, odd numbers, squares and cubes using standard formulas.",
+          "coverage": "partial",
+          "reason": "Sum special series of natural numbers: missing relations",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.sequences.power-sums"
+          ],
+          "workingCompetencies": [
+            "MATH.sequences.power-sums"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c03-o01",
+          "text": "Solve a system of three linear equations in three variables by elimination and recognise systems with no or infinitely many solutions.",
+          "coverage": "partial",
+          "reason": "not every part is assessed: Solving by elimination is not seen: al3sys is answer-only and no written task asks for the elimination steps for three variables (almeth covers two variables only).",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.linear-systems",
+            "MATH.algebra.linear-systems-three-variables"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.linear-systems",
+            "MATH.algebra.linear-systems-three-variables"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c03-o02",
+          "text": "Find the GCD and LCM of polynomials and use the relation that their product equals the product of the two polynomials.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.polynomial-gcd-lcm"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.polynomial-gcd-lcm"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c03-o03",
+          "text": "Reduce rational expressions to lowest terms, state excluded values, and multiply, divide, add and subtract rational expressions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.rational-expressions"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.rational-expressions"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c03-o04",
+          "text": "Find the square root of a perfect-square polynomial by factorisation and by the long-division method.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.polynomial-square-root"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.polynomial-square-root"
+          ],
+          "writtenTasks": [
+            "wr:gap:poly-sqrt-long-division"
+          ]
+        },
+        {
+          "id": "tn-g10-c03-o05",
+          "text": "Solve quadratic equations by factorisation, completing the square and the formula, and apply them to word problems.",
+          "coverage": "partial",
+          "reason": "Solve quadratic equations: missing relations",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.quadratics"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c03-o06",
+          "text": "Analyse the roots of a quadratic without fully solving it: use the discriminant to determine their nature and find parameter values, and use the sum and product of roots to form equations and evaluate symmetric expressions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.algebra.polynomial-zeros",
+            "MATH.algebra.quadratic-discriminant"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.polynomial-zeros",
+            "MATH.algebra.quadratic-discriminant"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c03-o07",
+          "text": "Draw graphs of direct and inverse variation, and plot quadratic graphs to solve quadratic equations, including by intersection with a straight line.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.inverse-proportion",
+            "MATH.algebra.quadratic-graphs",
+            "MATH.number.proportion"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.inverse-proportion",
+            "MATH.algebra.quadratic-graphs",
+            "MATH.number.proportion"
+          ],
+          "writtenTasks": [
+            "wr:var:direct-printer",
+            "wr:var:inverse-workers",
+            "wr:quad:graph-line"
+          ]
+        },
+        {
+          "id": "tn-g10-c03-o08",
+          "text": "Identify the order and types of matrices, and add, subtract, scalar-multiply, multiply and transpose matrices, verifying their properties.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.algebra.matrices",
+            "MATH.matrices.transpose-symmetry"
+          ],
+          "workingCompetencies": [
+            "MATH.algebra.matrices",
+            "MATH.matrices.transpose-symmetry"
+          ],
+          "writtenTasks": [
+            "wr:mat:order-matters"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o02",
+          "text": "Construct a triangle similar to a given triangle for a given scale factor less than or greater than 1.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.scaled-construction"
+          ],
+          "workingCompetencies": [],
+          "writtenTasks": [
+            "wr:scl:smaller",
+            "wr:scl:larger"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o01",
+          "text": "Use AA, SAS and SSS similarity criteria and results on ratios of altitudes, perimeters and areas of similar triangles to solve problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.similarity"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.similarity"
+          ],
+          "writtenTasks": [
+            "wr:sim:bpt-trapezium"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o03",
+          "text": "Prove and apply the basic proportionality (Thales) theorem, the angle bisector theorem, and their converses.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.similarity",
+            "MATH.geometry.triangle-proof"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.similarity",
+            "MATH.geometry.triangle-proof"
+          ],
+          "writtenTasks": [
+            "wr:sim:bpt-trapezium",
+            "wr:sim:angle-bisector-thm",
+            "wr:sim:converses"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o04",
+          "text": "Construct a triangle given its base, vertical angle and either the median, the altitude, or the point where the vertical-angle bisector meets the base.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.circle-theorems",
+            "MATH.geometry.construction-triangles"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circle-theorems"
+          ],
+          "writtenTasks": [
+            "wr:con:base-vertical-median",
+            "wr:gap:construct-altitude",
+            "wr:gap:construct-bisector"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o05",
+          "text": "Prove the Pythagoras theorem and its converse and apply them, including Pythagorean triples.",
+          "coverage": "partial",
+          "reason": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.pythagoras",
+            "MATH.geometry.similarity"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.pythagoras",
+            "MATH.geometry.similarity"
+          ],
+          "writtenTasks": [
+            "wr:pyth:similarity-proof",
+            "wr:pyth:converse-proof"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o06",
+          "text": "Apply tangent properties (radius–tangent perpendicularity, equal tangents from an external point, alternate segment theorem, common tangents) to find lengths and angles.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "writtenTasks": [
+            "wr:tan:proofs"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o08",
+          "text": "Apply Ceva's theorem to test concurrency of cevians and Menelaus' theorem to test collinearity, and find unknown segment ratios.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.ceva-menelaus"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.ceva-menelaus"
+          ],
+          "writtenTasks": [
+            "wr:ceva:menelaus"
+          ]
+        },
+        {
+          "id": "tn-g10-c04-o07",
+          "text": "Construct a tangent at a point on a circle and a pair of tangents from an external point, and measure their lengths.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "workingCompetencies": [
+            "MATH.geometry.circle-tangents"
+          ],
+          "writtenTasks": [
+            "wr:tan:construct"
+          ]
+        },
+        {
+          "id": "tn-g10-c07-o02",
+          "text": "Calculate surface areas and volumes of right circular cones, spheres, hemispheres and hollow hemispheres/spherical shells.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.cones-spheres"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.cones-spheres"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c07-o01",
+          "text": "Calculate curved and total surface areas of solid and hollow cylinders.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.cylinder"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.cylinder"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c07-o03",
+          "text": "Calculate surface area and volume of a frustum of a cone.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.frustum"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.frustum"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c07-o04",
+          "text": "Find surface areas and volumes of solids formed by combining cylinders, cones, spheres and hemispheres.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c07-o05",
+          "text": "Solve problems where a solid is melted or recast into another shape using conservation of volume.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "workingCompetencies": [
+            "MATH.measurement.combined-solids"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c08-o02",
+          "text": "Compute variance and standard deviation for raw, ungrouped and grouped data by direct, mean, assumed-mean and step-deviation methods.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.statistics.dispersion"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.dispersion"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c08-o01",
+          "text": "Find the range and coefficient of range of a data set and explain what dispersion measures.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.dispersion"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.dispersion"
+          ],
+          "writtenTasks": [
+            "wr:disp:batsmen-cv"
+          ]
+        },
+        {
+          "id": "tn-g10-c08-o03",
+          "text": "Compute the coefficient of variation and use it to compare the consistency of two data sets.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.statistics.dispersion"
+          ],
+          "workingCompetencies": [
+            "MATH.statistics.dispersion"
+          ],
+          "writtenTasks": [
+            "wr:disp:batsmen-cv"
+          ]
+        },
+        {
+          "id": "tn-g10-c08-o04",
+          "text": "List sample spaces of random experiments using tree diagrams and find probabilities of events.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.probability.classical",
+            "MATH.probability.sample-space"
+          ],
+          "workingCompetencies": [
+            "MATH.probability.classical",
+            "MATH.probability.sample-space"
+          ],
+          "writtenTasks": [
+            "wr:gap:tree-diagram"
+          ]
+        },
+        {
+          "id": "tn-g10-c08-o05",
+          "text": "Use the algebra of events (union, intersection, complement) and types of events (mutually exclusive, complementary, sure, impossible) to compute probabilities.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.probability.complements",
+            "MATH.probability.events"
+          ],
+          "workingCompetencies": [
+            "MATH.probability.complements",
+            "MATH.probability.events"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c08-o06",
+          "text": "Apply the addition theorem of probability for two and three events to solve problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.probability.events"
+          ],
+          "workingCompetencies": [
+            "MATH.probability.events"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c05-o01",
+          "text": "Find the area of a triangle and of a quadrilateral from the coordinates of their vertices, and use zero area to test collinearity.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.coordinate.polygon-area"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.polygon-area"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c05-o05",
+          "text": "Use coordinate methods to solve geometric problems such as finding vertices, altitudes or the type of a quadrilateral.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.coordinate.distance",
+            "MATH.coordinate.straight-lines"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.distance",
+            "MATH.coordinate.straight-lines"
+          ],
+          "writtenTasks": [
+            "wr:line:orthocentre",
+            "wr:dist:rhombus-equidistant"
+          ]
+        },
+        {
+          "id": "tn-g10-c05-o02",
+          "text": "Find the slope of a line from its inclination or from two points, and use slopes to test parallelism, perpendicularity and collinearity.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.coordinate.straight-lines"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.straight-lines"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c05-o03",
+          "text": "Write the equation of a straight line in slope-intercept, point-slope, two-point and intercept forms, including lines parallel to the axes.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.coordinate.straight-lines"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.straight-lines"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c05-o04",
+          "text": "Convert between general form ax+by+c=0 and other forms, read slope and intercepts, and find equations of lines parallel or perpendicular to a given line.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.coordinate.straight-lines"
+          ],
+          "workingCompetencies": [
+            "MATH.coordinate.straight-lines"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c06-o01",
+          "text": "Recall trigonometric ratios and their values for standard and complementary angles as a basis for identities.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.ratios"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c06-o02",
+          "text": "Prove trigonometric identities using the Pythagorean identities and the reciprocal and quotient relations.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "writtenTasks": [
+            "wr:trig:identities"
+          ]
+        },
+        {
+          "id": "tn-g10-c06-o03",
+          "text": "Use identities to simplify expressions and find values of other ratios from given conditions.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": false,
+          "competencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.identities"
+          ],
+          "writtenTasks": []
+        },
+        {
+          "id": "tn-g10-c06-o04",
+          "text": "Solve height and distance problems involving angles of elevation, depression, or both, including two-observation problems.",
+          "coverage": "awaiting",
+          "reason": "Awaiting educator review.",
+          "methodRequired": true,
+          "competencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "workingCompetencies": [
+            "MATH.trigonometry.heights-distances"
+          ],
+          "writtenTasks": [
+            "wr:hd:roof-tower"
+          ]
+        }
+      ]
+    }
+  ]
+}

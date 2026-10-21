@@ -115,7 +115,7 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
   );
 }
 
-function Feedback({ fb, onNext, label = "Continue", onRetry }: { fb: Fb; onNext: () => void; label?: string; onRetry?: (hint:boolean) => void }) {
+export function Feedback({ fb, onNext, label = "Continue", onRetry }: { fb: Fb; onNext: () => void; label?: string; onRetry?: (hint:boolean) => void }) {
   const q = question(fb.qid);
   if (needsMarking(q))
     return (
