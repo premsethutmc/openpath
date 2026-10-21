@@ -137,8 +137,51 @@ button, select, a { font: inherit; }
 
 /* Student topic navigation shares the approved notebook surface; educator tools keep their layout. */
 body:has(.learner-notebook) { background: #fbfaf6; }
+body:has(.preview-notebook) { background: #fbfaf6; }
 .learner-notebook { --ink: #1d2130; --brand: #6954c8; --card: #fffefa; --line: #e6e2db; }
+.preview-notebook { --ink: #1d2130; --brand: #6954c8; --card: #fffefa; --line: #e6e2db; max-width: 760px; }
 .learner-notebook .tile { box-shadow: none; border-radius: 8px; }
+.preview-notebook .tile { box-shadow: none; border-radius: 8px; }
 .learner-notebook .primary { border-radius: 8px; box-shadow: none; }
+.preview-notebook .primary { border-radius: 8px; box-shadow: none; }
 .learner-curriculum { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
 .learner-curriculum p { margin: 0; }
+
+/* Read-only product preview: same curriculum and learner components, with a small state navigator. */
+.preview-badge { display: inline-flex; align-items: center; width: fit-content; min-height: 28px; padding: 3px 9px; border-radius: 99px; background: #eeeafd; color: #5742bd; font-size: .75rem; font-weight: 800; }
+.preview-intro { margin: 8px 0 14px; padding: 10px 12px; border-left: 3px solid var(--brand); color: var(--muted); font-size: .9rem; }
+.experience-preview { max-width: 560px; margin: 0 auto; }
+.preview-nav { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); }
+.preview-head { padding: 12px 0 8px; }
+.preview-head .eyebrow, .preview-sheet .eyebrow, .preview-workspace .eyebrow, .experience-preview .lesson .eyebrow { margin: 0 0 5px; color: var(--muted); font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.preview-head h2 { margin: 0 0 8px; font: 700 1.7rem/1.15 Georgia, "Times New Roman", serif; }
+.preview-stages { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 8px 0 12px; }
+.preview-stages button { min-width: 0; min-height: 38px; padding: 0 5px; border: 1px solid var(--line); border-radius: 99px; background: transparent; color: var(--muted); font-size: .72rem; font-weight: 700; }
+.preview-stages button[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-soft); color: var(--brand); }
+.preview-sheet, .preview-workspace { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 18px 16px; }
+.preview-sheet h3 { margin: 3px 0 8px; font: 700 1.35rem/1.2 Georgia, "Times New Roman", serif; }
+.preview-progress { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin: 18px 0 8px; }
+.preview-progress span { height: 4px; border-radius: 4px; background: var(--line); }
+.preview-progress span:first-child { background: var(--brand); }
+.preview-workspace .prompt { margin: 8px 0 20px; color: #111827; font: 700 1.45rem/1.35 Georgia, "Times New Roman", serif; }
+.preview-workspace .field { display: grid; gap: 6px; font-size: .85rem; font-weight: 700; }
+.preview-workspace input, .preview-workspace textarea { width: 100%; min-height: 52px; padding: 10px 12px; border: 1px solid #d6d1ca; border-radius: 8px; background: #fff; color: var(--ink); font: 600 1.1rem/1.2 inherit; }
+.preview-workspace .options { display: grid; gap: 7px; }
+.preview-workspace .option { min-height: 46px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; text-align: left; }
+.preview-workspace .option.picked { border-color: var(--brand); background: var(--brand-soft); }
+.preview-workspace svg { max-width: 100%; height: auto; }
+.preview-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+.preview-actions > * { flex: 1 1 130px; }
+.experience-preview .panel.lesson { border: 1px solid var(--line); border-radius: 8px; background: var(--card); box-shadow: none; }
+.experience-preview .formula { font-family: Georgia, "Times New Roman", serif; }
+.experience-preview .feedback { margin-top: 12px; border-radius: 8px; padding: 14px; }
+.experience-preview .feedback.bad { border: 1px solid #e8b8b1; background: #fff1ef; color: #752e26; }
+.experience-preview .feedback.good { border: 1px solid #b9ddc7; background: #eef9f1; color: #225f3b; }
+.completion { text-align: center; padding-block: 28px; }
+.success-mark { display: grid; place-items: center; width: 44px; height: 44px; margin: 0 auto 12px; border-radius: 50%; background: #2e9b62; color: #fff; font-size: 1.5rem; font-weight: 900; }
+@media (max-width: 420px) {
+  .preview-notebook .cur-title { align-items: center; flex-wrap: wrap; }
+  .preview-notebook .cur-title h1 { font-size: 1.3rem; }
+  .preview-head h2 { font-size: 1.45rem; }
+  .preview-sheet, .preview-workspace { padding: 15px 13px; }
+}

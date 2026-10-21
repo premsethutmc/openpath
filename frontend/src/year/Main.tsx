@@ -381,6 +381,7 @@ function App() {
       <div className="actions">
         {events && (() => { const last=[...events].reverse().find((e:any)=>e.record==='topic_session'&&e.academicYear===st.enrolment?.academicYear&&e.curriculum?.id===release.id&&e.curriculum?.hash===release.hash) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return last?<a className="primary" href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(last.target)}&diagnostic=topic`}>Resume topic session</a>:null;})()}
         <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
+        <a className="secondary" href={`/curriculum/?preview=1#b=${release.id.startsWith("tn-") ? "tn" : "cbse"}&g=${grade}`}>Preview Mathematics experience</a>
         <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
       </div>
       <div className="stats" role="list" aria-label="This year so far">

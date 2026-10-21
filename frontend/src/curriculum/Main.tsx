@@ -48,6 +48,7 @@ declare const OPENPATH_REVIEW_FIXTURE: boolean;
 const TEST_BUILD = typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE;
 const api = new Api();
 const Preview = lazy(() => import("./preview").then((m) => ({ default: m.Preview })));
+const PreviewExperience = lazy(() => import("./PreviewExperience").then((m) => ({ default: m.PreviewExperience })));
 const BOARD_WORD = { cbse: "CBSE / NCERT", tn: "Tamil Nadu" } as const;
 type Board = "cbse" | "tn";
 
@@ -233,15 +234,15 @@ function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last 
   );
 }
 
-function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId }: { learnerId?: string; nodes: DashNode[]; parent: string; r: DashRelease; skillOf: ((c: string) => Mastery) | null; route: Route; arrange: boolean }) {
+function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId, prescribed = false }: { learnerId?: string; prescribed?: boolean; nodes: DashNode[]; parent: string; r: DashRelease; skillOf: ((c: string) => Mastery) | null; route: Route; arrange: boolean }) {
   const [order, setOrder] = useState(() => readOrder(r.release.id, parent));
   useEffect(() => setOrder(readOrder(r.release.id, parent)), [r.release.id, parent]);
-  const shown = learnerId ? nodes : ordered(nodes, order);
+  const shown = learnerId || prescribed ? nodes : ordered(nodes, order);
   const ids = shown.map((n) => n.id);
   // progressive: a long level shows its first tiles and the rest on request (never hundreds at once)
   const [all, setAll] = useState(false);
   const LIMIT = 24;
-  const visible = all || arrange || learnerId ? shown : shown.slice(0, LIMIT);
+  const visible = all || arrange || learnerId || prescribed ? shown : shown.slice(0, LIMIT);
   return (
     <>
       <ul className="tiles">
@@ -265,7 +266,7 @@ function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId }: { learn
           />
         ))}
       </ul>
-      {!learnerId && !all && !arrange && shown.length > LIMIT ? (
+      {!learnerId && !prescribed && !all && !arrange && shown.length > LIMIT ? (
         <button type="button" className="secondary more" onClick={() => setAll(true)}>
           Show {shown.length - LIMIT} more
         </button>
@@ -521,6 +522,7 @@ function App() {
   const route = useRoute();
   const params = new URLSearchParams(location.search);
   const learnerMode = params.get("view") === "learner";
+  const previewMode = params.get("preview") === "1";
   const [index, setIndex] = useState<DashIndex | null>(null);
   const [release, setRelease] = useState<DashRelease | null>(null);
   const [error, setError] = useState("");
@@ -627,14 +629,13 @@ function App() {
       : [];
 
   return (
-    <div className={`cur${learnerMode ? " learner-notebook" : ""}`}>
+    <div className={`cur${learnerMode ? " learner-notebook" : ""}${previewMode ? " preview-notebook" : ""}`}>
       {TEST_BUILD ? <div className="test-banner">TEST BUILD: every question is treated as educator-reviewed. Never deploy.</div> : null}
       <header className="cur-head">
         <div className="cur-title">
-          <a href={learnerId ? `/year/?learner=${encodeURIComponent(learnerId)}` : "/year/"} className="back-home">
-            OpenPath
-          </a>
+          <a href={previewMode ? "/curriculum/?preview=1#b=cbse&g=7" : learnerId ? `/year/?learner=${encodeURIComponent(learnerId)}` : "/year/"} className="back-home">{previewMode ? "Preview home" : "OpenPath"}</a>
           <h1>Mathematics</h1>
+          {previewMode ? <span className="preview-badge">Preview mode · no progress saved</span> : null}
         </div>
         {!learnerMode ? (
           <div className="controls">
@@ -652,7 +653,7 @@ function App() {
                 </button>
               ))}
             </div>
-            <label className="learner-pick">
+            {!previewMode ? <label className="learner-pick">
               Learner
               {signedIn ? (
                 <span className="pick-row">
@@ -677,7 +678,7 @@ function App() {
               ) : (
                 <span className="muted small">Checking your account…</span>
               )}
-            </label>
+            </label> : null}
           </div>
         ) : (
           <div className="learner-curriculum">
@@ -711,7 +712,11 @@ function App() {
           {!r.release.sourceVerified ? <p className="note">Parts of this book's inventory could not be checked against the official textbook yet.</p> : null}
 
           {route.competency ? (
-            <Detail r={r} id={route.competency} route={routeHere} learner={learner} registry={registry} skillOf={skillOf} />
+            previewMode ? (
+              <Suspense fallback={<p className="muted">Loading the experience…</p>}>
+                <PreviewExperience release={r} competency={route.competency} home={() => go({ board, grade, node: null, competency: null })} back={() => history.back()} />
+              </Suspense>
+            ) : <Detail r={r} id={route.competency} route={routeHere} learner={learner} registry={registry} skillOf={skillOf} />
           ) : (
             <>
               <h2 className="scope-title">{node ? node.title : `Grade ${grade} Mathematics`}</h2>
@@ -719,7 +724,7 @@ function App() {
                 {node ? "" : `${r.nodes.length} chapters · `}
                 {scope.competencies.length} competencies · {scope.outcomes.length} curriculum outcomes
               </p>
-              <Summary m={masteryRollup(scope.competencies, skillOf ?? (() => "not_assessed"))} c={coverageRollup(r, scope.outcomes)} learner={learner} scopeWord={node ? node.title : `Grade ${grade}`} />
+              {!previewMode ? <Summary m={masteryRollup(scope.competencies, skillOf ?? (() => "not_assessed"))} c={coverageRollup(r, scope.outcomes)} learner={learner} scopeWord={node ? node.title : `Grade ${grade}`} /> : <p className="preview-intro">Explore freely. Open any chapter, topic or competency; preview controls let you visit teaching, question and feedback states without submitting work.</p>}
               {learner && learnerMode && node ? <TopicPlan node={node} r={r} skillOf={skillOf!} route={routeHere} learnerId={learnerId} registry={registry} /> : null}
               {goalCards.length && !node ? (
                 <section className="goals">
@@ -736,15 +741,15 @@ function App() {
               ) : null}
               <div className="level-head">
                 <h3>{node ? "Inside" : "Chapters"}</h3>
-                {!learnerMode ? (
+                {!learnerMode && !previewMode ? (
                   <button type="button" className="link" aria-pressed={arrange} onClick={() => setArrange((a) => !a)}>
                     {arrange ? "Done arranging" : "Arrange tiles"}
                   </button>
                 ) : null}
               </div>
               {arrange ? <p className="muted small">Arranging changes only the order on this device. The curriculum, its skills and every learner's evidence stay the same.</p> : null}
-              <Tiles learnerId={learnerMode && learner ? learnerId : undefined} nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
-              <OutcomeList r={r} ids={node?.outcomes ?? []} />
+              <Tiles prescribed={previewMode} learnerId={learnerMode && learner ? learnerId : undefined} nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
+              {!previewMode ? <OutcomeList r={r} ids={node?.outcomes ?? []} /> : null}
             </>
           )}
         </main>
