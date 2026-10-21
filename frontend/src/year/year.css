@@ -167,3 +167,8 @@ textarea.book { width: 100%; min-height: 220px; font: inherit; font-size: 0.85re
 .sketch-sheet { width: 100%; max-width: 420px; aspect-ratio: 1; border: 1px solid var(--line); border-radius: 10px; background: #fff; cursor: crosshair; }
 .sketch { margin: 0; display: flex; flex-direction: column; gap: 6px; }
 .sketch .sketch-sheet { cursor: default; max-width: 320px; }
+
+/* Grade 7 student navigation and learning reuse the Mathematics notebook palette. */
+body:has(.year-paper) { background: #fbfaf6; }
+.year-paper { --brand: #6954c8; --ink: #1d2130; --line: #e6e2db; }
+.year-paper .card, .year-paper .primary { box-shadow: none; border-radius: 8px; }

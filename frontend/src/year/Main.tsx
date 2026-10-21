@@ -66,7 +66,7 @@ class Repo {
 
 type View =
   | { name: "year" }
-  | { name: "setup" }
+  | { name: "setup"; sameYear?: boolean }
   | { name: "tile"; path: string[] }
   | { name: "module"; competency: string; back: View }
   | { name: "stuck"; qid: string }
@@ -94,7 +94,7 @@ function App() {
   const [pupils, setPupils] = useState<PupilSummary[]>([]);
   const [learner, setLearner] = useState<string>(new URLSearchParams(location.search).get("learner") ?? "");
   const [events, setEvents] = useState<{ kind: string }[] | null>(null);
-  const [view, setView] = useState<View>({ name: "year" });
+  const [view, setView] = useState<View>(new URLSearchParams(location.search).get("curriculum") === "change" ? { name: "setup", sameYear: true } : { name: "year" });
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [now, setNow] = useState(Date.now());
@@ -210,15 +210,24 @@ function App() {
       <Shell banner={banner} error={error} top={top(st.enrolment ? home : switcher, name)}>
         <Setup
           current={st.enrolment?.grade ?? null}
+          sameYear={view.name === "setup" && view.sameYear}
+          currentYear={st.enrolment?.academicYear}
           goals={[...st.records.goals.keys()]}
           saving={saving}
           onSave={async (grade, release, saveRelease, goal, year) => {
             const recs: LearningRecord[] = [];
             if (saveRelease) recs.push(make.curriculum(ctxOf(), release));
             recs.push(make.enrol(ctxOf(), grade, year, release));
-            for (const g of st.records.goals.keys()) if (g !== goal) recs.push(make.goal(ctxOf(), g, false));
-            if (goal && !st.records.goals.has(goal)) recs.push(make.goal(ctxOf(), goal, true));
-            if (await save(...recs)) setView({ name: "year" });
+            if (!(view.name === "setup" && view.sameYear)) {
+              for (const g of st.records.goals.keys()) if (g !== goal) recs.push(make.goal(ctxOf(), g, false));
+              if (goal && !st.records.goals.has(goal)) recs.push(make.goal(ctxOf(), goal, true));
+            }
+            if (await save(...recs)) {
+              const url = new URL(location.href);
+              url.searchParams.delete("curriculum");
+              history.replaceState(null, "", url);
+              setView({ name: "year" });
+            }
           }}
         />
       </Shell>
@@ -244,7 +253,7 @@ function App() {
 
   if (view.name === "module")
     return (
-      <Shell banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
+      <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
         <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
           <Module competency={view.competency} ctx={ctx} onExit={() => setView(view.back)} />
         </KeyboardPractice>
@@ -331,7 +340,7 @@ function App() {
     if (next.competency) setView({ name: "module", competency: next.competency, back: { name: "year" } });
   };
   return (
-    <Shell banner={banner} error={error} wide top={top(switcher, name)}>
+    <Shell paper={grade === 7} banner={banner} error={error} wide top={top(switcher, name)}>
       <div className="year-head">
         <p className="eyebrow">My Learning Year</p>
         <h1>Grade {grade} · {st.enrolment.academicYear}</h1>
@@ -340,6 +349,10 @@ function App() {
           {release.source.synthetic && <span className="chip">Sample textbook</span>}
           {activeGoals.map((g) => <span key={g} className="chip">Goal: {goalById(g)?.name}</span>)}
         </div>
+      </div>
+      <div className="actions">
+        <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
+        <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
       </div>
       <div className="stats" role="list" aria-label="This year so far">
         <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
@@ -614,9 +627,9 @@ function StuckBox({ onOpen }: { onOpen: (qid: string) => void }) {
   );
 }
 
-function Setup({ current, goals: active, saving, onSave }: { current: number | null; goals: string[]; saving: boolean; onSave: (grade: number, r: CurriculumRelease, saveRelease: boolean, goal: string | null, year: string) => void }) {
-  const [grade, setGrade] = useState<number | null>(current ? Math.min(current + 1, 12) : null);
-  const [year, setYear] = useState(academicYear(new Date(), current ? 1 : 0));
+function Setup({ current, sameYear = false, currentYear, goals: active, saving, onSave }: { current: number | null; sameYear?: boolean; currentYear?: string; goals: string[]; saving: boolean; onSave: (grade: number, r: CurriculumRelease, saveRelease: boolean, goal: string | null, year: string) => void }) {
+  const [grade, setGrade] = useState<number | null>(current ? sameYear ? current : Math.min(current + 1, 12) : null);
+  const [year, setYear] = useState(sameYear && currentYear ? currentYear : academicYear(new Date(), current ? 1 : 0));
   const [board, setBoard] = useState<string | null>(null);
   const [subjects, setSubjects] = useState<Set<string>>(new Set(["Mathematics"]));
   const [mode, setMode] = useState<string | null>(null);
@@ -641,7 +654,7 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
   };
   return (
     <div className="stack">
-      <h1>{current ? "Start the next year" : "Set up My Learning Year"}</h1>
+      <h1>{sameYear ? "Choose your curriculum" : current ? "Start the next year" : "Set up My Learning Year"}</h1>
       {current && <p className="muted">Every record from Grade {current} is kept. Skills you have shown stay shown.</p>}
       <h2>Which grade?</h2>
       <div className="tiles">
@@ -670,7 +683,7 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
               );
             })}
           </div>
-          <h2>Long-term goal (optional)</h2>
+          {!sameYear && <><h2>Long-term goal (optional)</h2>
           <div className="cards">
             {[null, ...goals.map((g) => g.id)].map((g) => (
               <button key={g ?? "none"} className={`card ${goal === g ? "accent" : ""}`} aria-pressed={goal === g} onClick={() => setGoal(g)}>
@@ -679,6 +692,7 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
               </button>
             ))}
           </div>
+          </>}
           <h2>Board or curriculum</h2>
           {boards.length > 1 && (
             <div className="actions" role="radiogroup" aria-label="Board">
@@ -692,8 +706,8 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
           </div>
         </>
       )}
-      {mode === "sample" && sample && <button className="primary" disabled={saving} onClick={() => finish(sample, false)}>{saving ? "Saving…" : `Start Grade ${grade}`}</button>}
-      {mode && mode !== "sample" && mode !== "book" && grade && <button className="primary" disabled={saving} onClick={() => finish(releasesFor(grade).find((r) => r.id === mode)!, false)}>{saving ? "Saving…" : `Start Grade ${grade}`}</button>}
+      {mode === "sample" && sample && <button className="primary" disabled={saving} onClick={() => finish(sample, false)}>{saving ? "Saving…" : sameYear ? "Use this curriculum" : `Start Grade ${grade}`}</button>}
+      {mode && mode !== "sample" && mode !== "book" && grade && <button className="primary" disabled={saving} onClick={() => finish(releasesFor(grade).find((r) => r.id === mode)!, false)}>{saving ? "Saving…" : sameYear ? "Use this curriculum" : `Start Grade ${grade}`}</button>}
       {mode === "book" && !draft && (
         <div className="stack">
           <p className="small muted">Paste the contents pages: chapter headings with pages (units and numbered sections too), and the lists of what learners will be able to do. Or choose a PDF (one with selectable text; scanned pages cannot be read yet).</p>
@@ -746,12 +760,12 @@ function Setup({ current, goals: active, saving, onSave }: { current: number | n
   );
 }
 
-function Shell({ children, top, error, banner, wide }: { children: React.ReactNode; top?: React.ReactNode; error?: string; banner?: React.ReactNode; wide?: boolean }) {
+function Shell({ children, top, error, banner, wide, paper }: { paper?: boolean; children: React.ReactNode; top?: React.ReactNode; error?: string; banner?: React.ReactNode; wide?: boolean }) {
   return (
     <>
       {banner}
       {top}
-      <main className={`page ${wide ? "wide" : ""}`}>
+      <main className={`page ${wide ? "wide" : ""} ${paper ? "year-paper" : ""}`}>
         {error && <p className="error" role="alert">{error}</p>}
         {children}
       </main>

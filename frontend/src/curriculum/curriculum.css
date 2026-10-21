@@ -134,3 +134,11 @@ button, select, a { font: inherit; }
 .preview .option { display: flex; gap: 8px; align-items: center; min-height: 44px; border: 2px solid var(--line); background: #fff; border-radius: 12px; padding: 6px 10px; text-align: left; }
 .preview .option.picked { border-color: var(--brand); background: var(--brand-soft); }
 .preview svg { max-width: 100%; height: auto; }
+
+/* Student topic navigation shares the approved notebook surface; educator tools keep their layout. */
+body:has(.learner-notebook) { background: #fbfaf6; }
+.learner-notebook { --ink: #1d2130; --brand: #6954c8; --card: #fffefa; --line: #e6e2db; }
+.learner-notebook .tile { box-shadow: none; border-radius: 8px; }
+.learner-notebook .primary { border-radius: 8px; box-shadow: none; }
+.learner-curriculum { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.learner-curriculum p { margin: 0; }

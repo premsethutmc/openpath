@@ -578,7 +578,8 @@ function App() {
   const own = learnerMode && learner?.enrolment ? index?.releases.find((e) => e.release === learner.enrolment!.curriculum.id) ?? null : null;
   const board: Board = own ? own.board : route.board;
   const grade = own ? own.grade : route.grade;
-  const entry = index?.releases.find((e) => e.board === board && e.grade === grade) ?? null;
+  const ownUnavailable = learnerMode && learner?.enrolment && index && !own;
+  const entry = ownUnavailable ? null : index?.releases.find((e) => e.board === board && e.grade === grade) ?? null;
   useEffect(() => {
     setRelease(null); // never show one curriculum's tiles under another's heading
     if (!entry) return;
@@ -622,11 +623,11 @@ function App() {
       : [];
 
   return (
-    <div className="cur">
+    <div className={`cur${learnerMode ? " learner-notebook" : ""}`}>
       {TEST_BUILD ? <div className="test-banner">TEST BUILD: every question is treated as educator-reviewed. Never deploy.</div> : null}
       <header className="cur-head">
         <div className="cur-title">
-          <a href="/year/" className="back-home">
+          <a href={learnerId ? `/year/?learner=${encodeURIComponent(learnerId)}` : "/year/"} className="back-home">
             OpenPath
           </a>
           <h1>Mathematics</h1>
@@ -675,16 +676,19 @@ function App() {
             </label>
           </div>
         ) : (
-          <p className="muted">{pupilName ? `${pupilName}'s year` : "Your year"}</p>
+          <div className="learner-curriculum">
+            <p className="muted">{pupilName ? `${pupilName}'s year` : "Your year"} · {BOARD_WORD[board]} · Grade {grade}</p>
+            <a className="link" href={`/year/?learner=${encodeURIComponent(learnerId)}&curriculum=change`}>Change board or curriculum</a>
+          </div>
         )}
       </header>
 
       {error ? <p className="error" role="alert">{error}</p> : null}
       {!index || (entry && !r) ? <p className="muted loading">Loading the curriculum…</p> : null}
-      {index && !entry ? <p className="muted">No {BOARD_WORD[board]} release for Grade {grade} yet.</p> : null}
+      {ownUnavailable ? <p className="note">Your selected curriculum is available in My Learning Year. This topic dashboard currently lists CBSE/NCERT and Tamil Nadu.</p> : index && !entry ? <p className="muted">No {BOARD_WORD[board]} release for Grade {grade} yet.</p> : null}
       {learnerLoading ? <p className="muted small">Loading {pupilName ?? "the learner"}'s evidence…</p> : null}
 
-      {r && scope ? (
+      {r && scope && (!learnerMode || !learnerId || learner) ? (
         <main key={`${r.release.id}@${r.release.version}`}>
           <nav className="crumbs" aria-label="Where you are">
             <button type="button" className="link" onClick={() => go({ board, grade, node: null, competency: null })}>
@@ -712,7 +716,7 @@ function App() {
                 {scope.competencies.length} competencies · {scope.outcomes.length} curriculum outcomes
               </p>
               <Summary m={masteryRollup(scope.competencies, skillOf ?? (() => "not_assessed"))} c={coverageRollup(r, scope.outcomes)} learner={learner} scopeWord={node ? node.title : `Grade ${grade}`} />
-              {learner && learnerMode && node ? <TopicPlan node={node} r={r} skillOf={skillOf!} route={routeHere} /> : null}
+              {learner && learnerMode && node ? <TopicPlan node={node} r={r} skillOf={skillOf!} route={routeHere} learnerId={learnerId} registry={registry} /> : null}
               {goalCards.length && !node ? (
                 <section className="goals">
                   {goalCards.map(({ g, o }) => (
@@ -746,7 +750,7 @@ function App() {
 }
 
 /** A learner opening a topic: what is verified, being learned, waiting for its delayed check, and what to do next. */
-function TopicPlan({ node, r, skillOf, route }: { node: DashNode; r: DashRelease; skillOf: (c: string) => Mastery; route: Route }) {
+function TopicPlan({ node, r, skillOf, route, learnerId, registry }: { registry: RegistryLike | null; learnerId: string; node: DashNode; r: DashRelease; skillOf: (c: string) => Mastery; route: Route }) {
   const ids = scopeOf(node).competencies;
   const by = (m: Mastery) => ids.filter((c) => skillOf(c) === m);
   const next = [...by("review"), ...by("learning"), ...by("not_assessed").filter((c) => r.competencies[c]?.module)][0];
@@ -756,12 +760,14 @@ function TopicPlan({ node, r, skillOf, route }: { node: DashNode; r: DashRelease
         <strong>{by("verified").length}</strong> verified · <strong>{by("learning").length + by("review").length}</strong> learning · <strong>{by("pending").length}</strong> awaiting verification (a delayed check or an educator's mark)
       </div>
       {next ? (
-        <p>
+        <div>
           Next:{" "}
           <button type="button" className="link" onClick={() => go({ ...route, competency: next })}>
             {r.competencies[next].name}
           </button>
-        </p>
+          {contentOf(r.competencies[next]).learn && <p><a className="primary" href={`/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}`}>Start learning</a></p>}
+          <p className="muted small">Content review: {REVIEW_WORD[reviewState(registry, `module:${next}`, r.competencies[next].module?.hash ?? "")]}. Practice does not grant verified mastery.</p>
+        </div>
       ) : null}
     </section>
   );
