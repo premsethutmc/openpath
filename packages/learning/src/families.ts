@@ -881,7 +881,7 @@ const F: Def[] = [
     solve: ([a, b, x]) => {
       const rhs = a * x + b;
       return { steps: [
-        { id: "undo-add", op: "subtract", competency: "MATH.algebra.linear-equations", inputs: [rhs, b], value: a * x, justification: { rule: "equality-preservation" as const, operation: "subtract", operand: b, lhsBefore: `${a}x + ${b}`, rhsBefore: String(rhs) } },
+        { id: "undo-add", op: "subtract", competency: "MATH.algebra.linear-equations", inputs: [rhs, b], value: a * x, justification: { rule: "equality-preservation" as const, operation: "subtract", operand: b, lhsBefore: `${a}x + ${b}`, rhsBefore: String(rhs), lhsAfter: `${a}x`, rhsAfter: String(a * x) } },
         { id: "undo-multiply", op: "divide", competency: MT, inputs: [a * x, a], value: x, justification: { rule: "inverse-operation" as const, undoing: "multiply", applying: "divide", operand: a } },
       ], answer: x };
     },

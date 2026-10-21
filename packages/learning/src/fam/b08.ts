@@ -160,7 +160,7 @@ export const B08: Def[] = [
       const op = ["subtract", "add", "divide", "multiply"][f];
       const undoing = ["add", "subtract", "multiply", "divide"][f];
       return { steps: [{ id: `undo-${op}`, op, competency: LINI, inputs: [e.b, a], value: e.x,
-        justification: { rule: "equality-preservation" as const, operation: op, operand: a, lhsBefore: e.lhs, rhsBefore: String(e.b) },
+        justification: { rule: "equality-preservation" as const, operation: op, operand: a, lhsBefore: e.lhs, rhsBefore: String(e.b), lhsAfter: "x", rhsAfter: String(e.x) },
       }], answer: e.x };
     },
     // independent: trial — try x = 0, 1, 2 … in the equation itself until it balances

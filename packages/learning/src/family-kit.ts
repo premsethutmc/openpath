@@ -30,6 +30,10 @@ export type Justification =
       lhsBefore: string;
       /** The equation's right-hand side before the transformation. */
       rhsBefore: string;
+      /** The equation's left-hand side after the transformation (simplified). */
+      lhsAfter: string;
+      /** The equation's right-hand side after the transformation (simplified). */
+      rhsAfter: string;
     }
   | {
       /** Multiplying numerator and denominator by the same nonzero value preserves the fraction's value (×k/k = ×1). */

@@ -89,7 +89,7 @@ function mathematicalExplanation(step: Step, family: Def): string {
     const j = step.justification;
     switch (j.rule) {
       case "equality-preservation":
-        return `${j.operation} ${shown(j.operand)} on both sides: ${j.lhsBefore} = ${j.rhsBefore} — the equation stays balanced because the same operation is applied to both sides.`;
+        return `${j.lhsBefore} = ${j.rhsBefore} → ${j.operation} ${shown(j.operand)} on both sides → ${j.lhsAfter} = ${j.rhsAfter}. The equation stays balanced because the same operation is applied to both sides.`;
 
       case "fraction-equivalence":
         return `Multiply numerator and denominator of ${j.numeratorBefore}/${j.denominatorBefore} by ${j.scalingFactor}: the fraction's value is unchanged because multiplying top and bottom by the same number preserves equivalence.`;
@@ -97,14 +97,18 @@ function mathematicalExplanation(step: Step, family: Def): string {
       case "unit-coverage":
         return `${j.rows} × ${j.columns} = ${result} ${j.unit} — each row of ${j.columns} units is counted ${j.rows} times to cover the whole shape.`;
 
-      case "positional-value":
-        return `The digit ${j.digit} is in the ${j.placeName} place, so its value is ${j.digit} × ${j.placeValue} = ${result} — each position represents a power of 10.`;
+      case "positional-value": {
+        // Derive the positional contribution from digit × placeValue, never from step.value
+        // (step.value may include lower-order digits as a solver remainder).
+        const contribution = j.digit * j.placeValue;
+        return `The digit ${j.digit} is in the ${j.placeName} place, so its value is ${j.digit} × ${shown(j.placeValue)} = ${shown(contribution)} — each position represents a power of 10.`;
+      }
 
       case "additive-combination":
         return `${j.parts.map(shown).join(" + ")} = ${result} — combining ${j.what}.`;
 
       case "inverse-operation":
-        return `${j.applying} by ${shown(j.operand)} undoes the ${j.undoing}: the inverse operation isolates the unknown.`;
+        return `${j.applying} by ${shown(j.operand)} undoes the ${j.undoing} → x = ${result}. The inverse operation isolates the unknown.`;
 
       case "scaling":
         return `Multiply by ${j.factor}: ${j.what}, so the result is ${j.factor} × the single measure = ${result}.`;
@@ -154,7 +158,11 @@ function mathematicalExplanation(step: Step, family: Def): string {
     case "place": {
       const placeNames: Record<string, string> = { "1": "ones", "10": "tens", "100": "hundreds", "1000": "thousands", "10000": "ten-thousands", "100000": "lakhs" };
       const placeName = placeNames[String(step.inputs[1])] ?? `${b}-place`;
-      return `The digit ${a} in the ${placeName} place is worth ${result}.`;
+      // Derive contribution from digit × placeValue, never from step.value
+      const digitVal = Number(step.inputs[0]);
+      const placeVal = Number(step.inputs[1]);
+      const contribution = digitVal * placeVal;
+      return `The digit ${a} in the ${placeName} place is worth ${shown(contribution)}.`;
     }
     default: {
       const inputs = step.inputs.map(shown).join(" and ");

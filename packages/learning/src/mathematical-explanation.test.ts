@@ -130,15 +130,56 @@ test("divide for scaling factor vs divide for inverse operation are distinguishe
 // CRITERION 4: Mathematical relationships are structurally correct
 // ═══════════════════════════════════════════════════════════════════════════
 
-test("equality-preservation: operand and sides are mathematically consistent", () => {
-  // 3x + 7 = 19 → subtract 7 from both sides
+test("equality-preservation: before/after states are mathematically consistent", () => {
+  // 3x + 7 = 19 → subtract 7 from both sides → 3x = 12
   const lin = solveFamily("lin", [3, 7, 4]);
-  const ep = lin.steps[0].justification as { rule: "equality-preservation"; operation: string; operand: number | string; lhsBefore: string; rhsBefore: string };
+  const ep = lin.steps[0].justification as { rule: "equality-preservation"; operation: string; operand: number | string; lhsBefore: string; rhsBefore: string; lhsAfter: string; rhsAfter: string };
   assert.equal(ep.rule, "equality-preservation");
   assert.equal(ep.operation, "subtract");
   assert.equal(ep.operand, 7);
-  // The RHS before transformation should equal a*x + b where a=3, x=4, b=7
-  assert.equal(Number(ep.rhsBefore), 3 * 4 + 7, "RHS = ax + b");
+  // Before: RHS = ax + b
+  assert.equal(Number(ep.rhsBefore), 3 * 4 + 7, "RHS before = ax + b");
+  // After: applying the operation to the RHS before must give the RHS after
+  assert.equal(Number(ep.rhsBefore) - Number(ep.operand), Number(ep.rhsAfter),
+    "rhsBefore − operand = rhsAfter");
+  // After: the after-state must be a valid equation (lhsAfter evaluated = rhsAfter)
+  assert.equal(ep.lhsAfter, "3x", "LHS after removes the constant");
+  assert.equal(Number(ep.rhsAfter), 12, "RHS after = 3 × 4 = 12");
+});
+
+test("equality-preservation: after-states carry through two-step equations", () => {
+  // 2x + 3 = 11 → subtract 3 → 2x = 8 → divide by 2 → x = 4
+  const lneg = solveFamily("lneg", [2, 3, 4]);
+  const step1 = lneg.steps[0].justification as { rule: "equality-preservation"; lhsBefore: string; rhsBefore: string; lhsAfter: string; rhsAfter: string; operand: number | string };
+  assert.equal(step1.rule, "equality-preservation");
+  // After step 1: 2x = 8
+  assert.equal(Number(step1.rhsBefore) - Number(step1.operand), Number(step1.rhsAfter),
+    "step 1 after-state: rhsBefore − operand = rhsAfter");
+  // Step 2: inverse-operation divides to get x
+  const step2 = lneg.steps[1].justification as { rule: "inverse-operation"; operand: number | string };
+  assert.equal(step2.rule, "inverse-operation");
+  assert.equal(Number(step1.rhsAfter) / Number(step2.operand), 4,
+    "step1.rhsAfter ÷ step2.operand = solution x");
+});
+
+test("equality-preservation: final solution satisfies original equation by substitution", () => {
+  // Verify for multiple parameter sets
+  for (const [a, b, x] of [[3, 7, 4], [5, 2, 3], [2, 9, 6]]) {
+    const lin = solveFamily("lin", [a, b, x]);
+    const ep = lin.steps[0].justification as { rule: "equality-preservation"; rhsBefore: string };
+    // Original equation: ax + b = rhsBefore
+    // Substituting x into the LHS must equal rhsBefore
+    assert.equal(a * x + b, Number(ep.rhsBefore),
+      `substitution check: ${a}×${x}+${b} = ${ep.rhsBefore}`);
+  }
+});
+
+test("equality-preservation: one-step equations (ahone) have correct after-states", () => {
+  // x + 5 = 8 → subtract 5 → x = 3
+  const ahone = solveFamily("ahone", [0, 5, 3]);
+  const ep = ahone.steps[0].justification as { rule: "equality-preservation"; lhsAfter: string; rhsAfter: string };
+  assert.equal(ep.lhsAfter, "x", "after isolating, LHS is x");
+  assert.equal(Number(ep.rhsAfter), 3, "after isolating, RHS is the solution");
 });
 
 test("fraction-equivalence: scaling preserves the fraction value", () => {
@@ -178,6 +219,50 @@ test("positional-value: digit × placeValue is a valid place contribution", () =
     // (step.value may bundle lower-order digits as well)
     assert.ok(pv.digit * pv.placeValue <= (step.value as number),
       `digit contribution ${pv.digit * pv.placeValue} ≤ step value ${step.value}`);
+  }
+});
+
+test("positional-value: rendered text shows digit × placeValue, never step.value", () => {
+  // This is the critical test for the aeind bug: hundreds digit 5 with step.value=512
+  // must render "5 × 100 = 500", NOT "5 × 100 = 512"
+  const aeind = solveFamily("aeind", [3, 4, 5, 6, 7, 8]);
+  const pres = presentationFor("aeind", [3, 4, 5, 6, 7, 8]);
+
+  for (let i = 0; i < aeind.steps.length; i++) {
+    const step = aeind.steps[i];
+    const pv = step.justification as { rule: "positional-value"; digit: number; placeValue: number };
+    const contribution = pv.digit * pv.placeValue;
+    const explanation = pres.workedExample!.steps[i].explanation;
+
+    // The rendered text must contain the correct contribution
+    if (pv.digit !== 0) {
+      assert.ok(explanation.includes(String(contribution)),
+        `step ${i}: rendered text must contain ${contribution} (digit=${pv.digit} × place=${pv.placeValue}), got: "${explanation}"`);
+    }
+
+    // The rendered text must NOT contain step.value when it differs from contribution
+    if (step.value !== contribution && pv.digit !== 0) {
+      assert.ok(!explanation.includes(` = ${step.value}`) && !explanation.includes(`= ${step.value} `),
+        `step ${i}: rendered text must NOT show step.value=${step.value} as the product (contribution=${contribution})`);
+    }
+  }
+});
+
+test("positional-value: zero-digit steps correctly render zero contribution", () => {
+  // Use params where some digits are 0
+  const aeind = solveFamily("aeind", [0, 0, 5, 0, 7, 0]);
+  const pres = presentationFor("aeind", [0, 0, 5, 0, 7, 0]);
+
+  for (let i = 0; i < aeind.steps.length; i++) {
+    const step = aeind.steps[i];
+    const pv = step.justification as { rule: "positional-value"; digit: number; placeValue: number };
+    const explanation = pres.workedExample!.steps[i].explanation;
+
+    if (pv.digit === 0) {
+      // Zero digit: contribution is 0, explanation should convey "0 × placeValue = 0"
+      assert.ok(explanation.includes("0"),
+        `zero digit step ${i}: explanation should mention zero`);
+    }
   }
 });
 
@@ -252,6 +337,31 @@ test("rendering includes justification parameters, not just op name", () => {
   // The explanation should contain the operand (7) and the equation sides
   assert.ok(step1.explanation.includes("7"), "explanation includes the operand from justification");
   assert.ok(step1.explanation.includes("19"), "explanation includes the RHS from justification");
+});
+
+test("rendering: equality-preservation shows before → operation → after", () => {
+  // 3x + 7 = 19 → subtract 7 → 3x = 12
+  const linPres = presentationFor("lin", [3, 7, 4]);
+  const step1Explanation = linPres.workedExample!.steps[0].explanation;
+  // Must show the before-state
+  assert.ok(step1Explanation.includes("3x + 7"), "shows LHS before");
+  assert.ok(step1Explanation.includes("19"), "shows RHS before");
+  // Must show the after-state
+  assert.ok(step1Explanation.includes("3x") && step1Explanation.includes("12"),
+    "shows after-state (3x = 12)");
+  // Must mention the operation
+  assert.ok(step1Explanation.includes("subtract"),
+    "mentions the balancing operation");
+});
+
+test("rendering: inverse-operation shows the resulting value", () => {
+  // lin [3, 7, 4]: step 2 is divide by 3 → x = 4
+  const linPres = presentationFor("lin", [3, 7, 4]);
+  const step2Explanation = linPres.workedExample!.steps[1].explanation;
+  assert.ok(step2Explanation.includes("4"),
+    "inverse-operation explanation includes the solution value");
+  assert.ok(step2Explanation.includes("3"),
+    "inverse-operation explanation includes the operand");
 });
 
 test("varying parameters changes justification data, not the rule", () => {
