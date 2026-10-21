@@ -450,15 +450,16 @@ export function createDemoServer(
       });
 
     if (path === "/login") {
+      const requested = safeReturnPath(url.searchParams.get("next"));
       if (req.method === "GET" || req.method === "HEAD") {
         if (session(req)) {
-          res.writeHead(303, { ...base(), Location: "/" });
+          res.writeHead(303, { ...base(), Location: requested });
           return res.end();
         }
         return page(
           res,
           200,
-          loginPage(url.searchParams.has("out") ? "You are logged out." : ""),
+          loginPage(url.searchParams.has("out") ? "You are logged out." : "", requested),
         );
       }
       if (req.method !== "POST")
@@ -478,8 +479,10 @@ export function createDemoServer(
       inFlight.set(who, (inFlight.get(who) ?? 0) + 1);
       totalInFlight++;
       let ok = false;
+      let destination = requested;
       try {
         const form = await readForm(req);
+        destination = safeReturnPath(form.get("next"));
         const password = form.get("password") ?? "";
         const turn = checking.then(() => verify(password, config.hash));
         checking = turn.then(
@@ -498,13 +501,13 @@ export function createDemoServer(
       if (!ok) {
         fail(who);
         if (res.destroyed) return;
-        return page(res, 401, loginPage("That password is not right."));
+        return page(res, 401, loginPage("That password is not right.", destination));
       }
       failures.delete(who);
       const s = issue();
       res.writeHead(303, {
         ...base(),
-        Location: "/",
+        Location: destination,
         "Set-Cookie": cookie(s.token, Math.floor(config.sessionMs / 1000)),
         "Cache-Control": "no-store",
       });
@@ -552,9 +555,10 @@ export function createDemoServer(
         (req.headers["sec-fetch-mode"] === "navigate" ||
           (req.headers.accept ?? "").includes("text/html"));
       if (navigation) {
+        const destination = `${path}${url.search}`;
         res.writeHead(303, {
           ...base(),
-          Location: "/login",
+          Location: `/login?next=${encodeURIComponent(destination)}`,
           "Cache-Control": "no-store",
         });
         return res.end();
@@ -660,18 +664,34 @@ const esc = (s) =>
     /[&<>"]/g,
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
   );
+
+function safeReturnPath(value) {
+  if (
+    typeof value !== "string" ||
+    !value.startsWith("/") ||
+    value.startsWith("//")
+  )
+    return "/";
+  try {
+    const parsed = new URL(value, "http://preview.invalid");
+    if (parsed.origin !== "http://preview.invalid") return "/";
+    return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+  } catch {
+    return "/";
+  }
+}
 const shell = (
   title,
   body,
 ) => `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>${title}</title>
 <style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#eef2f7;color:#1c2333;font:17px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}main{width:100%;max-width:380px;background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(31,58,147,.08)}h1{font-size:1.3rem;margin:0 0 4px;color:#1f3a93}p{margin:8px 0}.small{font-size:.85rem;color:#5a6478}label{display:block;font-weight:600;margin:16px 0 6px}input{width:100%;font:inherit;padding:12px;border:2px solid #c9d3e6;border-radius:10px}input:focus{outline:none;border-color:#1f3a93}button{width:100%;min-height:48px;margin-top:16px;font:inherit;font-weight:600;border:0;border-radius:10px;background:#1f3a93;color:#fff}button.secondary{background:#fff;color:#1f3a93;border:2px solid #1f3a93}.msg{background:#fff4d6;border-radius:8px;padding:8px 12px}a{color:#1f3a93}</style></head><body><main>${body}</main></body></html>`;
 
-function loginPage(message) {
+function loginPage(message, next = "/") {
   return shell(
     "OpenPath preview: log in",
     `<h1>OpenPath private feature preview</h1><p class="small">Private preview for the owner: My Learning Year, mathematical writing, English and the Tamil pilot. Draft content, synthetic test learners only. Not for pupils.</p>
 ${message ? `<p class="msg" role="status">${esc(message)}</p>` : ""}
-<form method="post" action="/login"><label for="password">Preview password</label><input id="password" name="password" type="password" autocomplete="current-password" required autofocus maxlength="200"><button type="submit">Log in</button></form>`,
+<form method="post"><input name="next" type="hidden" value="${esc(safeReturnPath(next))}"><label for="password">Preview password</label><input id="password" name="password" type="password" autocomplete="current-password" required autofocus maxlength="200"><button type="submit">Log in</button></form>`,
   );
 }
 
