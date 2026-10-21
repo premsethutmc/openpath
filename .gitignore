@@ -22,3 +22,4 @@ frontend/dist-english-pilot-approved/
 
 # Tamil pilot build
 frontend/dist-tamil/
+package-lock.json
