@@ -709,7 +709,7 @@ function App() {
             ))}
             {route.competency ? <span> › {r.competencies[route.competency]?.name ?? route.competency}</span> : null}
           </nav>
-          {!r.release.sourceVerified ? <p className="note">Parts of this book's inventory could not be checked against the official textbook yet.</p> : null}
+          {!previewMode && !r.release.sourceVerified ? <p className="note">Parts of this book's inventory could not be checked against the official textbook yet.</p> : null}
 
           {route.competency ? (
             previewMode ? (

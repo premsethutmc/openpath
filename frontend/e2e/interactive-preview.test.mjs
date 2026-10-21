@@ -42,40 +42,23 @@ for (const width of [360, 393]) test(`${width}px: all four curricula and every e
       for (const node of selected.path) {
         await page.locator(".tiles > li").filter({ has: page.locator(".tile-title", { hasText: node.title }) }).getByRole("button").first().click();
       }
-      await page.getByRole("article", { name: "Mathematics experience preview" }).waitFor();
-      await page.getByText("Read-only preview", { exact: true }).waitFor();
-      assert.equal(await page.getByRole("button", { name: "Overview", exact: true }).getAttribute("aria-pressed"), "true");
+      await page.getByRole("article", { name: "Mathematics teaching and practice preview" }).waitFor();
+      await page.locator(".teaching-page").waitFor();
+      assert.ok(await page.locator(".teaching-math").first().isVisible(), "teaching opens first with worked mathematics");
       const parent = selected.path.at(-2);
       await page.getByRole("button", { name: /Back/ }).click();
       await page.getByRole("heading", { name: parent.title, exact: true }).waitFor();
       await page.locator(".tiles > li").filter({ has: page.locator(".tile-title", { hasText: selected.n.title }) }).getByRole("button").first().click();
-      await page.getByRole("article", { name: "Mathematics experience preview" }).waitFor();
+      await page.getByRole("article", { name: "Mathematics teaching and practice preview" }).waitFor();
+      await screenshot(page, `${width}-${board}-${grade}-teaching`);
+      await page.getByRole("button", { name: "Practice this concept" }).click();
+      await page.locator(".practice-workspace").waitFor();
+      assert.ok(await page.getByLabel("Your answer").isVisible(), "native keyboard answer input is available");
+      await screenshot(page, `${width}-${board}-${grade}-practice`);
+      await page.getByRole("button", { name: /Teaching/ }).click();
+      await page.locator(".teaching-page").waitFor();
 
-      await page.getByRole("button", { name: "Teaching", exact: true }).click();
-      await page.locator(".lesson").waitFor();
-      await page.getByRole("button", { name: "Try it", exact: true }).click();
-      assert.equal(await page.getByRole("button", { name: "Example", exact: true }).getAttribute("aria-pressed"), "true");
-      await page.getByRole("button", { name: "Teaching", exact: true }).click();
-      await page.getByRole("button", { name: "Example", exact: true }).click();
-      await page.getByText("Worked example", { exact: false }).waitFor();
-      await screenshot(page, `${width}-${board}-${grade}-example`);
-      await page.getByRole("button", { name: "Try it", exact: true }).click();
-      assert.equal(await page.getByRole("button", { name: "Question", exact: true }).getAttribute("aria-pressed"), "true");
-      await page.getByRole("button", { name: "Question", exact: true }).click();
-      await page.locator(".preview-workspace .prompt").waitFor();
-      if (await page.getByRole("textbox").count()) await page.getByRole("textbox").first().fill("42");
-      await screenshot(page, `${width}-${board}-${grade}-question`);
-      await page.getByRole("button", { name: "Mistake", exact: true }).click();
-      await page.getByText("Not this time.", { exact: true }).waitFor();
-      await screenshot(page, `${width}-${board}-${grade}-mistake`);
-      await page.getByRole("button", { name: "Correct", exact: true }).click();
-      await page.getByText("Right.", { exact: true }).waitFor();
-      await screenshot(page, `${width}-${board}-${grade}-correct`);
-      await page.getByRole("button", { name: "Complete", exact: true }).click();
-      await page.getByRole("heading", { name: "Nice work", exact: true }).waitFor();
-      await screenshot(page, `${width}-${board}-${grade}-complete`);
-
-      await page.getByRole("button", { name: "Home", exact: true }).click();
+      await page.getByRole("button", { name: `Grade ${grade}⌄`, exact: true }).click();
       await page.getByRole("heading", { name: `Grade ${grade} Mathematics`, exact: true }).waitFor();
       const firstChapter = release.nodes[0].title;
       await page.locator(".tiles > li").first().getByRole("button").click();
