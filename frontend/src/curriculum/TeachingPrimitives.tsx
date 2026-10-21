@@ -65,9 +65,11 @@ export function EquationTransformation({ lines }: Extract<TeachingVisual, { kind
 }
 
 export function LabeledGeometry({ shape, labels }: Extract<TeachingVisual, { kind: "geometry" }>) {
-  const length = String(labels.length ?? labels.base ?? "l");
-  const width = String(labels.width ?? labels.height ?? "w");
-  return <figure className={`teaching-data-visual geometry-visual ${shape}`} aria-label={`Labeled ${shape}`}><svg viewBox="0 0 320 170"><rect x="55" y="30" width="210" height="105" rx="2" /><text x="160" y="22" textAnchor="middle">{length}</text><text x="35" y="88" textAnchor="middle">{width}</text></svg><figcaption>{Object.entries(labels).map(([key, value]) => <span key={key}><b>{key}</b>: {value}</span>)}</figcaption></figure>;
+  const dimensionUnit = String(labels.dimensionUnit ?? "");
+  const length = `${String(labels.length ?? labels.base ?? "l")} ${dimensionUnit}`.trim();
+  const width = `${String(labels.width ?? labels.height ?? "w")} ${dimensionUnit}`.trim();
+  const unit = String(labels.measureUnit ?? "");
+  return <figure className={`teaching-data-visual geometry-visual ${shape}`} aria-label={`Labeled ${shape}`}><svg viewBox="0 0 320 170"><rect x="55" y="30" width="210" height="105" rx="2" /><text x="160" y="22" textAnchor="middle">{length}</text><text x="35" y="88" textAnchor="middle">{width}</text></svg><figcaption>{Object.entries(labels).filter(([key]) => key !== "measureUnit" && key !== "dimensionUnit").map(([key, value]) => <span key={key}><b>{key}</b>: {value}{key === "area" || key === "perimeter" ? ` ${unit}` : ""}</span>)}</figcaption></figure>;
 }
 
 /** One renderer for typed presentation data. No grade or competency routing lives here. */

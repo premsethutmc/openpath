@@ -28,6 +28,7 @@ for (const width of [360, 393]) test(`${width}px universal teaching renders six 
       assert.ok(await page.locator(concept.visual).first().isVisible(), `${concept.name} selects its typed visual`);
       const worked = page.locator(".progressive-worked").first();
       assert.ok(await worked.isVisible(), `${concept.name} has checked progressive working`);
+      assert.equal(await worked.locator(".worked-step").count(), 0, "the worked answer is not revealed before learner action");
       if (await worked.getByRole("button", { name: /Next step/ }).count()) await worked.getByRole("button", { name: /Next step/ }).click();
       assert.equal(await worked.locator(".worked-step").count(), 1, "one tap reveals one step");
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "teaching does not overflow");
