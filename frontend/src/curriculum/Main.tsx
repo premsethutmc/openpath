@@ -175,7 +175,7 @@ function Summary({ m, c, learner, scopeWord }: { m: MasteryRollup; c: CoverageRo
   );
 }
 
-function Tile({ node, r, skillOf, onOpen, arrange, onMove, first, last }: { node: DashNode; r: DashRelease; skillOf: ((c: string) => Mastery) | null; onOpen: () => void; arrange: boolean; onMove: (by: -1 | 1) => void; first: boolean; last: boolean }) {
+function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last }: { node: DashNode; r: DashRelease; skillOf: ((c: string) => Mastery) | null; onOpen: () => void; details?: string; arrange: boolean; onMove: (by: -1 | 1) => void; first: boolean; last: boolean }) {
   const scope = node.kind === "competency" || node.kind === "micro" ? { competencies: node.competency ? [node.competency] : [], outcomes: [] } : scopeOf(node);
   const m = skillOf ? masteryRollup(scope.competencies, skillOf) : null;
   const cov = coverageRollup(r, scope.outcomes);
@@ -218,6 +218,7 @@ function Tile({ node, r, skillOf, onOpen, arrange, onMove, first, last }: { node
           {partial ? <span className="tag partial">Partial</span> : null}
         </span>
       </button>
+      {details && <a className="link" href={details}>View topic details</a>}
       {arrange ? (
         <span className="arrange">
           <button type="button" aria-label={`Move ${node.title} earlier`} disabled={first} onClick={() => onMove(-1)}>
@@ -232,7 +233,7 @@ function Tile({ node, r, skillOf, onOpen, arrange, onMove, first, last }: { node
   );
 }
 
-function Tiles({ nodes, parent, r, skillOf, route, arrange }: { nodes: DashNode[]; parent: string; r: DashRelease; skillOf: ((c: string) => Mastery) | null; route: Route; arrange: boolean }) {
+function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId }: { learnerId?: string; nodes: DashNode[]; parent: string; r: DashRelease; skillOf: ((c: string) => Mastery) | null; route: Route; arrange: boolean }) {
   const [order, setOrder] = useState(() => readOrder(r.release.id, parent));
   useEffect(() => setOrder(readOrder(r.release.id, parent)), [r.release.id, parent]);
   const shown = ordered(nodes, order);
@@ -258,7 +259,11 @@ function Tiles({ nodes, parent, r, skillOf, route, arrange }: { nodes: DashNode[
               setOrder(next);
               writeOrder(r.release.id, parent, next);
             }}
-            onOpen={() => (n.kind === "competency" || n.kind === "micro" ? go({ ...route, competency: n.competency! }) : n.kind === "unsupported" || n.kind === "proposal" ? undefined : go({ ...route, node: n.id, competency: null }))}
+            details={learnerId && n.kind === "chapter" ? hashOf({...route,node:n.id,competency:null}) : undefined}
+            onOpen={() => {
+              const next = learnerId && n.kind === "chapter" ? nextTopicSkill(n,r,skillOf!) : null;
+              if (next) { location.href = `/year/?learner=${encodeURIComponent(learnerId!)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}&diagnostic=topic`; return; }
+              return (n.kind === "competency" || n.kind === "micro" ? go({ ...route, competency: n.competency! }) : n.kind === "unsupported" || n.kind === "proposal" ? undefined : go({ ...route, node: n.id, competency: null }));}}
           />
         ))}
       </ul>
@@ -356,7 +361,7 @@ function Detail({ r, id, route, learner, registry, skillOf }: { r: DashRelease; 
             </span>
             {next ? <p className="next">{next}</p> : null}
             {content.learn && state !== "verified" ? (
-              <a className="primary" href={`/year/?learner=${encodeURIComponent(learner.learnerId)}&skill=${encodeURIComponent(c.evidenceTarget)}`}>
+              <a className="primary" href={`/year/?learner=${encodeURIComponent(learner.learnerId)}&skill=${encodeURIComponent(c.evidenceTarget)}${r.release.grade === 7 ? "&diagnostic=topic" : ""}`}>
                 {state === "not_assessed" ? "Start in My Learning Year" : "Continue in My Learning Year"}
               </a>
             ) : null}
@@ -739,7 +744,7 @@ function App() {
                 ) : null}
               </div>
               {arrange ? <p className="muted small">Arranging changes only the order on this device. The curriculum, its skills and every learner's evidence stay the same.</p> : null}
-              <Tiles nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
+              <Tiles learnerId={learnerMode && grade === 7 && learner ? learnerId : undefined} nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
               <OutcomeList r={r} ids={node?.outcomes ?? []} />
             </>
           )}
@@ -749,11 +754,16 @@ function App() {
   );
 }
 
+function nextTopicSkill(node: DashNode, r: DashRelease, skillOf: (c:string)=>Mastery) {
+ const ids=scopeOf(node).competencies;
+ return ["review","learning","not_assessed"].flatMap(m=>ids.filter(c=>skillOf(c)===m)).find(c=>contentOf(r.competencies[c]).learn) ?? null;
+}
+
 /** A learner opening a topic: what is verified, being learned, waiting for its delayed check, and what to do next. */
 function TopicPlan({ node, r, skillOf, route, learnerId, registry }: { registry: RegistryLike | null; learnerId: string; node: DashNode; r: DashRelease; skillOf: (c: string) => Mastery; route: Route }) {
   const ids = scopeOf(node).competencies;
   const by = (m: Mastery) => ids.filter((c) => skillOf(c) === m);
-  const next = [...by("review"), ...by("learning"), ...by("not_assessed").filter((c) => r.competencies[c]?.module)][0];
+  const next = nextTopicSkill(node,r,skillOf);
   return (
     <section className="topic-plan card">
       <div className="small">
@@ -765,7 +775,7 @@ function TopicPlan({ node, r, skillOf, route, learnerId, registry }: { registry:
           <button type="button" className="link" onClick={() => go({ ...route, competency: next })}>
             {r.competencies[next].name}
           </button>
-          {contentOf(r.competencies[next]).learn && <p><a className="primary" href={`/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}`}>Start learning</a></p>}
+          {contentOf(r.competencies[next]).learn && <p><a className="primary" href={`/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}${r.release.grade === 7 ? "&diagnostic=topic" : ""}`}>{r.release.grade === 7 ? "Start diagnostic" : "Start learning"}</a></p>}
           <p className="muted small">Content review: {REVIEW_WORD[reviewState(registry, `module:${next}`, r.competencies[next].module?.hash ?? "")]}. Practice does not grant verified mastery.</p>
         </div>
       ) : null}

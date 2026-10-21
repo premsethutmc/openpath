@@ -27,6 +27,7 @@ RECORDS = {
     'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working'},
     'teach': {'rule', 'strategy', 'competency'},
     'skip': {'target'},
+    'topic_session': {'academicYear', 'stage', 'target', 'minutes', 'curriculum'},
 }
 BASE = {'kind', 'id', 'at', 'learnerId', 'sessionId', 'record'}
 # a written answer (proof, construction, explanation) may be long; an educator marks it
@@ -280,6 +281,18 @@ def checked_learning(event, pupil):
             _reject('An academic year looks like 2026-27.')
         if not _known_release(event.get('curriculum'), prior):
             _reject('Unknown curriculum release (or its content has changed).')
+    elif record == 'topic_session':
+        if event.get('stage') not in ('diagnostic', 'plan'):
+            _reject('Unknown topic session stage.')
+        if event['stage'] == 'diagnostic' and 'minutes' in event:
+            _reject('Select a duration only after diagnosis.')
+        if event['stage'] == 'plan' and (type(event.get('minutes')) is not int or event['minutes'] not in (15, 30, 60)):
+            _reject('Choose a 15, 30 or 60 minute session.')
+        current = next((e for e in reversed(prior) if e.get('record') == 'enrol'), None)
+        if not current or event.get('academicYear') != current.get('academicYear') or current.get('grade') != 7 or event.get('curriculum') != current.get('curriculum'):
+            _reject('A session plan must use the learner current Grade 7 curriculum.')
+        if event.get('target') not in c['modules'] or not _known_release(event.get('curriculum'), prior):
+            _reject('Unknown session target or curriculum.')
     elif record == 'goal':
         if event.get('pathway') not in c['goals'] or type(event.get('active')) is not bool:
             _reject('Unknown goal pathway.')

@@ -13,6 +13,7 @@ on:
         "frontend/src/writing/**",
         "frontend/e2e/keyboard-dashboard.test.mjs",
         "frontend/e2e/grade7-entry.test.mjs",
+        "frontend/e2e/grade7-session.test.mjs",
         "frontend/e2e/writing-components.test.mjs",
         "frontend/e2e/keyboard-policy-components.test.mjs",
         "frontend/src/learning/**",
@@ -104,6 +105,7 @@ jobs:
           CHROMIUM_PATH='' node --test e2e/writing-components.test.mjs e2e/keyboard-policy-components.test.mjs
           YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/keyboard node --import tsx --test e2e/keyboard-dashboard.test.mjs
           YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7 node --test e2e/grade7-entry.test.mjs
+          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-session node --import tsx --test e2e/grade7-session.test.mjs
       - uses: actions/upload-artifact@v7
         if: always()
         with:

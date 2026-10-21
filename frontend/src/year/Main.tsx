@@ -1,3 +1,4 @@
+import { TopicSession } from "./TopicSession";
 import { KeyboardPractice } from "../writing/KeyboardPractice";
 /**
  * My Learning Year (/year/): one learner's school year through the shared learning engine. Same account, learner and
@@ -68,6 +69,7 @@ type View =
   | { name: "year" }
   | { name: "setup"; sameYear?: boolean }
   | { name: "tile"; path: string[] }
+  | { name: "topic-diagnostic"; competency: string; back: View }
   | { name: "module"; competency: string; back: View }
   | { name: "stuck"; qid: string }
   | { name: "single"; qid: string; heading: string; note?: string }
@@ -145,7 +147,8 @@ function App() {
     const want = wanted.current;
     if (!want || !st?.release || !moduleFor(want)) return;
     wanted.current = null;
-    setView({ name: "module", competency: want, back: { name: "year" } });
+    if (new URLSearchParams(location.search).get("diagnostic") === "topic" && st.enrolment?.grade === 7) setView({name:"topic-diagnostic",competency:want,back:{name:"year"}});
+    else setView({name:"module",competency:want,back:{name:"year"}});
   }, [st?.release]);
   const session = `learn:${learner}:${visit.current}`;
   const ctxOf = () => ({ learnerId: learner, sessionId: session, at: new Date().toISOString() });
@@ -251,6 +254,8 @@ function App() {
     setView({ name: "tile", path });
   };
 
+  if (view.name === "topic-diagnostic")
+    return <Shell paper banner={banner} error={error} top={top(home, name)}><TopicSession academicYear={st.enrolment!.academicYear} learner={learner} target={view.competency} ctx={ctx} release={release} events={events ?? []} saveStart={() => save(make.topicStart(ctxOf(),view.competency,release,st.enrolment!.academicYear))} savePlan={minutes => save(make.sessionPlan(ctxOf(), view.competency, minutes, release,st.enrolment!.academicYear))} /></Shell>;
   if (view.name === "module")
     return (
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
@@ -351,6 +356,7 @@ function App() {
         </div>
       </div>
       <div className="actions">
+        {events && (() => { const last=[...events].reverse().find((e:any)=>e.record==='topic_session'&&e.academicYear===st.enrolment?.academicYear&&e.curriculum?.id===release.id&&e.curriculum?.hash===release.hash) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return last?<a className="primary" href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(last.target)}&diagnostic=topic`}>Resume topic session</a>:null;})()}
         <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
         <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
       </div>

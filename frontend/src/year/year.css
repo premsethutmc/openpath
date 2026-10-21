@@ -172,3 +172,7 @@ textarea.book { width: 100%; min-height: 220px; font: inherit; font-size: 0.85re
 body:has(.year-paper) { background: #fbfaf6; }
 .year-paper { --brand: #6954c8; --ink: #1d2130; --line: #e6e2db; }
 .year-paper .card, .year-paper .primary { box-shadow: none; border-radius: 8px; }
+
+.topic-session .session-duration { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.topic-session .session-duration button { min-width: 0; padding: 8px; min-height: 48px; font-size: 0.95rem; border-radius: 8px; }
+.topic-session h2 { overflow-wrap: anywhere; }

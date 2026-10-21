@@ -21,6 +21,7 @@ export type LearningRecord =
   | (Base & { record: "curriculum"; release: CurriculumRelease })
   | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[] })
   | (Base & { record: "teach"; rule: string; strategy: string; competency: string })
+  | (Base & { record: "topic_session"; academicYear: string; stage: "diagnostic" | "plan"; target: string; minutes?: 15 | 30 | 60; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "skip"; target: string });
 
 export interface Attempt {
