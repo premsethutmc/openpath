@@ -2,8 +2,9 @@ import { useMemo } from "react";
 import { moduleFor, needsMarking, question, type Question, type Screen } from "../../../packages/learning/src/content";
 import { problemOf, parseProblem, type Problem as FamilyProblem } from "../../../packages/learning/src/families";
 import { modulePhasePool } from "../../../packages/learning/src/library";
+import { teachingPresentationFrom, type TeachingPresentation } from "../../../packages/learning/src/teaching-presentation";
 import { Figure } from "../year/Figure";
-import { ProgressiveWorkedExample, teachingVisualFor, workedExampleFor } from "./TeachingPrimitives";
+import { ProgressiveWorkedExample, TeachingVisualRenderer } from "./TeachingPrimitives";
 
 interface TopicCopy {
   name: string;
@@ -21,7 +22,7 @@ function problemFromScreen(screen: Screen): FamilyProblem | null {
   return parsed?.supported ? parsed.problem : null;
 }
 
-function TeachingBlock({ screen, index, total, focusProduct, problem, q, visualProblem, resumeKey }: {
+function TeachingBlock({ screen, index, total, focusProduct, problem, q, visualProblem, practiceIds, resumeKey }: {
   screen: Screen;
   index: number;
   total: number;
@@ -29,18 +30,20 @@ function TeachingBlock({ screen, index, total, focusProduct, problem, q, visualP
   problem: FamilyProblem | null;
   q: Question | null;
   visualProblem: FamilyProblem | null;
+  practiceIds: string[];
   resumeKey?: string;
 }) {
   const ownProblem = problem ?? problemFromScreen(screen);
   const title = focusProduct ? screen.title.replace(/ and relations from A to B/i, "") : screen.title;
-  const worked = workedExampleFor(ownProblem, q, screen);
-  const visual = teachingVisualFor(visualProblem ?? ownProblem);
+  const presentation: TeachingPresentation | null = ownProblem ? teachingPresentationFrom({ module: moduleFor(ownProblem.competency)!, screen, problem: ownProblem, question: q, practiceIds, visualProblem }) : null;
+  const worked = presentation?.workedExample ?? null;
+  const visual = presentation?.visual ? <TeachingVisualRenderer visual={presentation.visual} /> : null;
   return <section className="teaching-block">
     <div className="teaching-step"><p className="teaching-label">{index === 0 ? "The idea" : `Example ${index}`}</p>{index > 0 ? <span>{index} of {Math.max(1, total - 1)}</span> : null}</div>
     <h3>{title}</h3>
     {displayedLines(screen, focusProduct).map((line, i) => <p key={i}>{line}</p>)}
     {visual ?? (screen.widget ? <Figure v={screen.widget} /> : null)}
-    {worked ? <ProgressiveWorkedExample example={worked} storageKey={resumeKey && `${resumeKey}:example:${index}`} /> : null}
+    {worked ? <ProgressiveWorkedExample example={worked} storageKey={resumeKey && `${resumeKey}:example:${index}`} /> : <p className="teaching-support-note">{presentation?.unsupportedReason ?? "A checked worked example is not available for this concept yet."}</p>}
   </section>;
 }
 
@@ -72,7 +75,7 @@ export function TeachingContent({ competency, topic, onPractice, resumeKey }: { 
       <h2>{focusProduct ? "Counting elements in A × B" : module?.title ?? topic.name}</h2>
       <p className="teaching-intro">{focusProduct ? "Each element of A can be paired with each element of B. Multiplication counts all the ordered pairs." : topic.description}</p>
     </header>
-    {teaching.length ? teaching.map((screen, i) => <TeachingBlock key={`${competency}-${screen.title}-${i}`} screen={screen} index={i} total={teaching.length} focusProduct={focusProduct} problem={i === 0 ? primaryProblem : null} q={i === 0 ? primaryQ : null} visualProblem={i === 0 ? primaryVisualProblem : null} resumeKey={resumeKey} />) : <section className="teaching-block unavailable"><h3>Teaching is being prepared</h3><p>This topic does not yet have suitable teaching content.</p></section>}
+    {teaching.length ? teaching.map((screen, i) => <TeachingBlock key={`${competency}-${screen.title}-${i}`} screen={screen} index={i} total={teaching.length} focusProduct={focusProduct} problem={i === 0 ? primaryProblem : null} q={i === 0 ? primaryQ : null} visualProblem={i === 0 ? primaryVisualProblem : null} practiceIds={practice} resumeKey={resumeKey} />) : <section className="teaching-block unavailable"><h3>Teaching is being prepared</h3><p>This topic does not yet have suitable teaching content.</p></section>}
     <section className="practice-invitation">
       <h3>Ready to try it?</h3>
       <p>Work through one question at a time. You can return to this explanation whenever you need it.</p>

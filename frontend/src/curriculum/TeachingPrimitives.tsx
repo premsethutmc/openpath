@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import type { Question, Screen } from "../../../packages/learning/src/content";
 import type { Problem as FamilyProblem } from "../../../packages/learning/src/families";
+import type { TeachingVisual } from "../../../packages/learning/src/teaching-presentation";
 
 const signed = (value: number) => String(value).replace("-", "−");
 const wrapped = (value: number) => value < 0 ? `(${signed(value)})` : signed(value);
@@ -48,6 +49,35 @@ export function MovementNumberLine({ start, end }: { start: number; end: number 
       <text className="movement-label" x={mid} y="24" textAnchor="middle">{signed(end - start)}</text>
     </svg>
   </figure>;
+}
+
+export function PlaceValueChart({ headings, rows }: Extract<TeachingVisual, { kind: "place-value" }>) {
+  return <figure className="teaching-data-visual place-value-visual"><table><thead><tr>{headings.map((heading) => <th key={heading}>{heading}</th>)}</tr></thead><tbody>{rows.map((row, index) => <tr key={index}>{row.map((value, cell) => <td key={cell}>{value}</td>)}</tr>)}</tbody></table><figcaption>Each digit keeps the value of its column.</figcaption></figure>;
+}
+
+export function FractionStrip({ numerator, denominator, comparison }: Extract<TeachingVisual, { kind: "fraction-strip" }>) {
+  const strip = (top: number, bottom: number, label: string) => <div className="fraction-strip-row" aria-label={`${top} out of ${bottom} equal parts`}><b>{label}</b><span className="fraction-parts" style={{ gridTemplateColumns: `repeat(${bottom}, 1fr)` }}>{Array.from({ length: bottom }, (_, index) => <i className={index < top ? "shaded" : ""} key={index} />)}</span><strong>{top}/{bottom}</strong></div>;
+  return <figure className="teaching-data-visual fraction-strip-visual">{strip(numerator, denominator, "Whole")}{comparison ? strip(comparison.numerator, comparison.denominator, "Compare") : null}<figcaption>Equal fractions cover the same length of the same whole.</figcaption></figure>;
+}
+
+export function EquationTransformation({ lines }: Extract<TeachingVisual, { kind: "equation" }>) {
+  return <figure className="teaching-data-visual equation-visual" aria-label="Equation transformation">{lines.map((line, index) => <div key={`${line}-${index}`}><span>{line}</span>{index < lines.length - 1 ? <small>↓</small> : null}</div>)}</figure>;
+}
+
+export function LabeledGeometry({ shape, labels }: Extract<TeachingVisual, { kind: "geometry" }>) {
+  const length = String(labels.length ?? labels.base ?? "l");
+  const width = String(labels.width ?? labels.height ?? "w");
+  return <figure className={`teaching-data-visual geometry-visual ${shape}`} aria-label={`Labeled ${shape}`}><svg viewBox="0 0 320 170"><rect x="55" y="30" width="210" height="105" rx="2" /><text x="160" y="22" textAnchor="middle">{length}</text><text x="35" y="88" textAnchor="middle">{width}</text></svg><figcaption>{Object.entries(labels).map(([key, value]) => <span key={key}><b>{key}</b>: {value}</span>)}</figcaption></figure>;
+}
+
+/** One renderer for typed presentation data. No grade or competency routing lives here. */
+export function TeachingVisualRenderer({ visual }: { visual: TeachingVisual }) {
+  if (visual.kind === "place-value") return <PlaceValueChart {...visual} />;
+  if (visual.kind === "number-line") return <MovementNumberLine start={visual.from} end={visual.to} />;
+  if (visual.kind === "fraction-strip") return <FractionStrip {...visual} />;
+  if (visual.kind === "cartesian-grid") return <PairGrid rows={visual.rows} columns={visual.columns} />;
+  if (visual.kind === "equation") return <EquationTransformation {...visual} />;
+  return <LabeledGeometry {...visual} />;
 }
 
 /** The page asks for one tap per reasoning step; no answer or learner evidence is submitted. */
