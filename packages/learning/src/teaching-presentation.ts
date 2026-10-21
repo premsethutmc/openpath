@@ -1,5 +1,6 @@
 import type { Module, Question, Screen } from "./content";
 import type { Bug, Problem, Step, Visual } from "./family-kit";
+import { explainStep, FAMILIES } from "./families";
 
 export const TEACHING_PRESENTATION_VERSION = "openpath-teaching-presentation@1" as const;
 
@@ -29,6 +30,26 @@ export interface TeachingPresentation {
   unsupportedReason?: string;
 }
 
+export interface TeachingScope {
+  family: string | null;
+  title: string;
+  introduction: string | null;
+  accepts: (problem: Problem) => boolean;
+  strategyId?: string;
+}
+
+/** Scope comes from the module's declared pool and family metadata, never learner-facing text. */
+export function teachingScopeFor(module: Module): TeachingScope {
+  const family = module.pool?.family ?? module.pools?.[0]?.family ?? null;
+  const def = family ? FAMILIES.get(family) : undefined;
+  if (!family || !def) return { family, title: module.title, introduction: null, accepts: () => false };
+  if (family === "aocart") return {
+    family, title: "Counting elements in A × B", introduction: "Each element of A can be paired with each element of B. Multiplication counts all the ordered pairs.",
+    accepts: (problem) => problem.family === family && problem.params[2] !== 1, strategyId: "grid",
+  };
+  return { family, title: def.title, introduction: def.teach?.idea ?? null, accepts: (problem) => problem.family === family };
+}
+
 const shown = (value: unknown) => Array.isArray(value) ? value.join(", ") : String(value).replace(/-/g, "−");
 const explainOperation = (step: Step) => {
   const inputs = step.inputs.map(shown).join(" and ");
@@ -36,7 +57,7 @@ const explainOperation = (step: Step) => {
     add: "Add", subtract: "Subtract", multiply: "Multiply", divide: "Divide", simplify: "Simplify",
     compare: "Compare", count: "Count", measure: "Measure", solve: "Undo the operations", rewrite: "Rewrite",
   };
-  return `${action[step.op] ?? "Use the rule with"} ${inputs}${inputs ? "" : " in this step"}. This gives ${shown(step.value)}.`;
+  return `${action[step.op] ?? "Use the stated operation with"} ${inputs}${inputs ? "" : " in this step"}. This gives ${shown(step.value)}.`;
 };
 
 function familyWorkedSteps(problem: Problem): TeachingPresentationStep[] {
@@ -62,7 +83,7 @@ function familyWorkedSteps(problem: Problem): TeachingPresentationStep[] {
       { expression: `= ${shown(result)}`, explanation: `The movement ends at ${shown(result)}.` },
     ];
   }
-  return problem.steps.map((step) => ({ expression: shown(step.value), explanation: explainOperation(step) }));
+  return problem.steps.map((step) => ({ expression: explainStep(problem, step), explanation: explainOperation(step) }));
 }
 
 export function visualPresentation(visual: Visual | Screen["widget"] | undefined, problem?: Problem | null): TeachingVisual | undefined {
@@ -100,19 +121,52 @@ export function familyTeachingVisual(problem: Problem): TeachingVisual | undefin
   if (["eqfrac", "fadd", "adfcmp", "adfname", "adshade"].includes(problem.family)) {
     const numerator = Math.max(0, a);
     const denominator = Math.max(1, b);
-    return { kind: "fraction-strip", numerator, denominator };
+    return { kind: "fraction-strip", numerator, denominator, ...(problem.family === "eqfrac" ? { comparison: { numerator: Number(problem.answer), denominator: c } } : {}) };
   }
   if (["lin", "ahone", "lneg"].includes(problem.family)) {
     return { kind: "equation", lines: [problem.prompt.replace(/^Solve |^Find x: /, ""), ...problem.steps.map((step) => `${step.op}: ${shown(step.value)}`)] };
   }
   if (problem.family === "aeind") {
-    const value = problem.steps.reduce((total, step) => total + (typeof step.value === "number" ? step.value : 0), 0);
-    return { kind: "place-value", headings: ["L", "TTh", "Th", "H", "T", "O"], rows: [String(value).padStart(6, "0").split("")] };
+    const value = Number(problem.answer);
+    if (!Number.isSafeInteger(value) || value < 0 || value > 999999) return undefined;
+    const places = [100000, 10000, 1000, 100, 10, 1];
+    return { kind: "place-value", headings: ["L", "TTh", "Th", "H", "T", "O"], rows: [places.map((place) => Math.floor(value / place) % 10)] };
   }
   if (["rect", "aearea", "rperim"].includes(problem.family)) {
-    return { kind: "geometry", shape: "rectangle", labels: { length: Math.max(a, b), width: Math.min(a, b), area: a * b } };
+    const length = Math.max(a, b), width = Math.min(a, b);
+    return { kind: "geometry", shape: "rectangle", labels: { length, width, [problem.family === "rperim" ? "perimeter" : "area"]: Number(problem.answer) } };
   }
   return undefined;
+}
+
+/** Checks every displayed mathematical claim used by the six typed adapters. */
+export function validateTeachingPresentation(problem: Problem, presentation: Pick<TeachingPresentation, "workedExample" | "visual">): string[] {
+  const errors: string[] = [];
+  const family = FAMILIES.get(problem.family);
+  const answer = Number(problem.answer);
+  if (!family || !Number.isFinite(answer) || !family.validate(problem.params, answer)) errors.push("The family answer does not validate.");
+  const expected = familyWorkedSteps(problem);
+  if (!presentation.workedExample || presentation.workedExample.steps.length !== expected.length || expected.some((step, index) => step.expression !== presentation.workedExample?.steps[index]?.expression)) errors.push("Displayed worked steps differ from the checked family steps.");
+  const visual = presentation.visual;
+  if (["aeind", "aiint", "eqfrac", "aocart", "apcartn", "lin", "ahone", "lneg", "rect", "aearea", "rperim"].includes(problem.family) && !visual) errors.push("The family requires a typed teaching visual.");
+  if (visual?.kind === "place-value" && Number(visual.rows[0]?.join("")) !== answer) errors.push("The place-value digits do not reconstruct the answer.");
+  if (visual?.kind === "number-line" && (visual.from !== problem.params[0] || visual.to !== answer)) errors.push("The number-line endpoints do not match the problem.");
+  if (visual?.kind === "fraction-strip") {
+    if (!(visual.denominator > 0 && visual.numerator >= 0 && visual.numerator <= visual.denominator)) errors.push("The fraction strip is outside its whole.");
+    if (visual.comparison && visual.numerator * visual.comparison.denominator !== visual.comparison.numerator * visual.denominator) errors.push("The two fraction strips are not equivalent.");
+  }
+  if (visual?.kind === "cartesian-grid") {
+    const mode = problem.params[2];
+    if (visual.rows.length !== problem.params[0] || visual.columns.length !== problem.params[1]) errors.push("The Cartesian grid dimensions do not match the sets.");
+    if ((mode === 0 && visual.rows.length * visual.columns.length !== answer) || (mode === 2 && visual.columns.length !== answer)) errors.push("The Cartesian grid does not match the answer.");
+  }
+  if (visual?.kind === "equation" && !visual.lines.some((line) => line.includes(shown(problem.answer)))) errors.push("The equation transformations omit the checked answer.");
+  if (visual?.kind === "geometry") {
+    const l = Number(visual.labels.length), w = Number(visual.labels.width);
+    const shownMeasure = problem.family === "rperim" ? 2 * (l + w) : l * w;
+    if (shownMeasure !== answer) errors.push("The labelled dimensions do not produce the checked measure.");
+  }
+  return errors;
 }
 
 export function teachingPresentationFrom(args: {
@@ -133,7 +187,7 @@ export function teachingPresentationFrom(args: {
     ?? visualPresentation(screen.widget, problem);
   const misconception: Bug | undefined = problem?.bugs.find((bug) => bug.predict !== null);
   const supported = !!problem && steps.length > 0;
-  return {
+  const result: TeachingPresentation = {
     version: TEACHING_PRESENTATION_VERSION,
     status: supported ? "supported" : "unsupported",
     concept: module.title,
@@ -145,4 +199,9 @@ export function teachingPresentationFrom(args: {
     practice: { competency: module.competency, families: [...new Set([module.pool?.family, ...(module.pools ?? []).map((pool) => pool.family)].filter((family): family is string => !!family))], questionIds: practiceIds },
     ...(!supported ? { unsupportedReason: problem ? "This family has no ordered worked steps yet." : "No deterministic family example is available for this concept." } : {}),
   };
+  if (problem) {
+    const errors = validateTeachingPresentation(problem, result);
+    if (errors.length) return { ...result, status: "unsupported", workedExample: null, visual: undefined, unsupportedReason: errors.join(" ") };
+  }
+  return result;
 }
