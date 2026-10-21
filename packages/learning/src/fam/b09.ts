@@ -1707,7 +1707,14 @@ export const B09: Def[] = [
     prompt: ([a, b, o]) => `${par(a)} ${o ? "−" : "+"} ${par(b)} = ?`,
     solve: ([a, b, o]) => {
       const r = o ? a - b : a + b;
-      return o ? { steps: [step("opposite", "note", INTA, [`subtract ${par(b)}`], `add ${par(-b)}`), step("add", "add", INTA, [a, -b], r)], answer: r } : { steps: [step("add", "add", INTA, [a, b], r)], answer: r };
+      return o
+        ? { steps: [
+            { ...step("opposite", "note", INTA, [`subtract ${par(b)}`], `add ${par(-b)}`), justification: { rule: "inverse-operation" as const, undoing: "subtract", applying: "add opposite", operand: b } },
+            { ...step("add", "add", INTA, [a, -b], r), justification: { rule: "number-line-movement" as const, start: a, direction: (-b < 0 ? "left" : "right") as "left" | "right", distance: Math.abs(b) } },
+          ], answer: r }
+        : { steps: [
+            { ...step("add", "add", INTA, [a, b], r), justification: { rule: "number-line-movement" as const, start: a, direction: (b < 0 ? "left" : "right") as "left" | "right", distance: Math.abs(b) } },
+          ], answer: r };
     },
     // independent: walk along the number line one step at a time
     validate: ([a, b, o], v) => {

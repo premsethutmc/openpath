@@ -271,8 +271,8 @@ export const CORE: Def[] = [
       const c = a * x + b;
       return {
         steps: [
-          { id: "move", op: "subtract", competency: "MATH.number.integer-add", inputs: [c, b], value: c - b },
-          { id: "divide", op: "divide", competency: "MATH.number.integer-multiply", inputs: [c - b, a], value: x },
+          { id: "move", op: "subtract", competency: "MATH.number.integer-add", inputs: [c, b], value: c - b, justification: { rule: "equality-preservation" as const, operation: "subtract", operand: b, lhsBefore: `${a}x + ${b}`.replace(/\+ -/, "− "), rhsBefore: String(c) } },
+          { id: "divide", op: "divide", competency: "MATH.number.integer-multiply", inputs: [c - b, a], value: x, justification: { rule: "inverse-operation" as const, undoing: "multiply", applying: "divide", operand: a } },
         ],
         answer: x,
       };

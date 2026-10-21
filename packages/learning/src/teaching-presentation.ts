@@ -71,96 +71,94 @@ function competencyContext(competencyId: string): string {
 }
 
 /**
- * Shared mathematical explanation engine.
+ * Justification-driven mathematical explanation engine.
  *
- * Derives WHY each step is mathematically valid from three knowledge sources
- * that already exist in the codebase:
+ * Reads the typed `step.justification` to determine WHY a step is valid, then
+ * renders that mathematical reason as learner-facing text. The same arithmetic
+ * operation (e.g. subtraction) produces DIFFERENT explanations in different
+ * contexts because the justification rule — not the op — drives the text.
  *
- *   1. step.op → the mathematical operation performed
- *   2. step.competency + graph → the domain-specific concept this step serves
- *   3. family.teach.idea / .method → the overarching mathematical principle
- *
- * The templates explain the reasoning behind each operation type, contextualised
- * by the competency being taught. When the step uses a generic helper competency
- * (like multiplication tables), the family's own teach.idea provides the "why".
- *
- * This single function replaces the old generic explainOperation() for all families,
- * so one architectural change improves teaching across arithmetic, fractions, algebra,
- * and geometry without per-family branches.
+ * Falls back to a generic op-based explanation only for steps without a
+ * justification (backward compatibility with families not yet annotated).
  */
 function mathematicalExplanation(step: Step, family: Def): string {
+  const result = shown(step.value);
+
+  // ── Primary path: justification-driven rendering ──
+  if (step.justification) {
+    const j = step.justification;
+    switch (j.rule) {
+      case "equality-preservation":
+        return `${j.operation} ${shown(j.operand)} on both sides: ${j.lhsBefore} = ${j.rhsBefore} — the equation stays balanced because the same operation is applied to both sides.`;
+
+      case "fraction-equivalence":
+        return `Multiply numerator and denominator of ${j.numeratorBefore}/${j.denominatorBefore} by ${j.scalingFactor}: the fraction's value is unchanged because multiplying top and bottom by the same number preserves equivalence.`;
+
+      case "unit-coverage":
+        return `${j.rows} × ${j.columns} = ${result} ${j.unit} — each row of ${j.columns} units is counted ${j.rows} times to cover the whole shape.`;
+
+      case "positional-value":
+        return `The digit ${j.digit} is in the ${j.placeName} place, so its value is ${j.digit} × ${j.placeValue} = ${result} — each position represents a power of 10.`;
+
+      case "additive-combination":
+        return `${j.parts.map(shown).join(" + ")} = ${result} — combining ${j.what}.`;
+
+      case "inverse-operation":
+        return `${j.applying} by ${shown(j.operand)} undoes the ${j.undoing}: the inverse operation isolates the unknown.`;
+
+      case "scaling":
+        return `Multiply by ${j.factor}: ${j.what}, so the result is ${j.factor} × the single measure = ${result}.`;
+
+      case "quotient":
+        return `${j.dividend} ÷ ${j.divisor} = ${result} — ${j.purpose}.`;
+
+      case "product-counting":
+        return `${j.factors.map(shown).join(" × ")} = ${result} — counting ${j.what}.`;
+
+      case "like-denomination":
+        return `${j.operation === "add" ? "Add" : "Subtract"} the numerators (${j.numeratorA} ${j.operation === "add" ? "+" : "−"} ${j.numeratorB}) over the common denominator ${j.denominator}: when parts are the same size, ${j.operation === "add" ? "add" : "subtract"} how many you have.`;
+
+      case "number-line-movement":
+        return `Start at ${shown(j.start)}, move ${j.distance} places ${j.direction} to reach ${result} — the number line shows the direction and size of the change.`;
+
+      case "comparison":
+        return `${shown(j.left)} ${j.relation} ${shown(j.right)} — compare the two values to find which is ${j.relation === "<" || j.relation === "≤" ? "smaller" : j.relation === ">" || j.relation === "≥" ? "greater" : "equal"}.`;
+
+      case "arithmetic-fact":
+        return `${j.operation} = ${result} — ${j.supports}.`;
+    }
+  }
+
+  // ── Fallback: op-based explanation for un-annotated steps ──
   const concept = competencyContext(step.competency);
   const idea = family.teach?.idea ?? "";
-
-  // Use the domain concept when it's specific, otherwise the family's teaching idea.
-  // Trim long teach.idea strings to the first sentence for readability in step explanations.
   const trimmed = idea.includes(".") ? idea.slice(0, idea.indexOf(".") + 1) : idea;
   const why = concept || trimmed;
-
   const a = shown(step.inputs[0]), b = step.inputs.length > 1 ? shown(step.inputs[1]) : "";
-  const result = shown(step.value);
 
   switch (step.op) {
     case "add":
-      return why
-        ? `${a} + ${b} = ${result} — adding combines the quantities (${why}).`
-        : `${a} + ${b} = ${result}, combining the two quantities.`;
+      return why ? `${a} + ${b} = ${result} — ${why}.` : `${a} + ${b} = ${result}.`;
     case "subtract":
-      return why
-        ? `${a} − ${b} = ${result} — subtracting removes an equal amount from both sides (${why}).`
-        : `${a} − ${b} = ${result}, removing ${b} from ${a}.`;
+      return why ? `${a} − ${b} = ${result} — ${why}.` : `${a} − ${b} = ${result}.`;
     case "multiply":
-      return why
-        ? `${a} × ${b} = ${result} — multiplying counts how many units fit (${why}).`
-        : `${a} × ${b} = ${result}, each unit of one factor pairs with every unit of the other.`;
+      return why ? `${a} × ${b} = ${result} — ${why}.` : `${a} × ${b} = ${result}.`;
     case "divide":
-      return why
-        ? `${a} ÷ ${b} = ${result} — dividing finds how many equal groups fit (${why}).`
-        : `${a} ÷ ${b} = ${result}, undoing multiplication to find the other factor.`;
+      return why ? `${a} ÷ ${b} = ${result} — ${why}.` : `${a} ÷ ${b} = ${result}.`;
     case "compare":
-      return why
-        ? `Comparing ${a} and ${b}: ${result} (${why}).`
-        : `Comparing ${a} and ${b} gives ${result}.`;
+      return `Comparing ${a} and ${b}: ${result}.`;
     case "count":
-      return why
-        ? `Counting gives ${result} (${why}).`
-        : `Counting the elements gives ${result}.`;
-    case "measure":
-      return why
-        ? `Measuring gives ${result} (${why}).`
-        : `Measuring the quantity gives ${result}.`;
-    case "solve":
-      return why
-        ? `Isolating the unknown: ${result} (${why}).`
-        : `Undoing the operations in reverse order gives ${result}.`;
-    case "rewrite":
-      return why
-        ? `Rewriting into an equivalent form gives ${result} (${why}).`
-        : `Rewriting the expression gives ${result}.`;
-    case "pair":
-      return why
-        ? `Finding values whose product and sum match the coefficients: ${result} (${why}).`
-        : `The pair that fits the coefficients: ${result}.`;
+      return `Counting gives ${result}.`;
     case "evaluate":
-      return why
-        ? `Substituting the known values gives ${result} (${why}).`
-        : `Evaluating with the known values gives ${result}.`;
-    case "integrate":
-      return why
-        ? `The antiderivative gives ${result} (${why}).`
-        : `Integrating gives ${result}.`;
+      return `Evaluating gives ${result}.`;
     case "place": {
       const placeNames: Record<string, string> = { "1": "ones", "10": "tens", "100": "hundreds", "1000": "thousands", "10000": "ten-thousands", "100000": "lakhs" };
       const placeName = placeNames[String(step.inputs[1])] ?? `${b}-place`;
-      return why
-        ? `The digit ${a} in the ${placeName} place is worth ${result} (${why}).`
-        : `The digit ${a} in the ${placeName} place is worth ${result}.`;
+      return `The digit ${a} in the ${placeName} place is worth ${result}.`;
     }
     default: {
       const inputs = step.inputs.map(shown).join(" and ");
-      return why
-        ? `Applying ${step.op} to ${inputs} gives ${result} (${why}).`
-        : `Applying ${step.op} to ${inputs} gives ${result}.`;
+      return why ? `${step.op}: ${inputs} → ${result} — ${why}.` : `${step.op}: ${inputs} → ${result}.`;
     }
   }
 }

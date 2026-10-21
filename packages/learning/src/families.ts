@@ -61,7 +61,7 @@ const F: Def[] = [
     },
     reject: ([l, w]) => (l < 1 || w < 1 || l > 12 || w > 12 ? "Only rectangles with whole-number sides up to 12 are supported." : null),
     prompt: ([l, w]) => `A rectangle is ${l} cm by ${w} cm. What is its area in square centimetres?`,
-    solve: ([l, w]) => ({ steps: [mul(l, w, MT, "area")], answer: l * w }),
+    solve: ([l, w]) => ({ steps: [{ ...mul(l, w, MT, "area"), justification: { rule: "unit-coverage" as const, rows: l, columns: w, unit: "square cm" } }], answer: l * w }),
     validate: ([l, w], v) => {
       let n = 0;
       for (let i = 0; i < l; i++) for (let j = 0; j < w; j++) n++; // count unit squares
@@ -90,7 +90,10 @@ const F: Def[] = [
     prompt: ([a, b, d]) => `${a}/${b} = □/${d}`,
     solve: ([a, b, d]) => {
       const k = d / b;
-      return { steps: [{ id: "factor", op: "divide", competency: MT, inputs: [d, b], value: k }, mul(a, k, MT, "top")], answer: a * k };
+      return { steps: [
+        { id: "factor", op: "divide", competency: MT, inputs: [d, b], value: k, justification: { rule: "quotient" as const, dividend: d, divisor: b, purpose: "scaling factor between equivalent denominators" } },
+        { ...mul(a, k, MT, "top"), justification: { rule: "fraction-equivalence" as const, scalingFactor: k, numeratorBefore: a, denominatorBefore: b } },
+      ], answer: a * k };
     },
     validate: ([a, b, d], v) => typeof v === "number" && a * d === b * v, // cross-multiplication
     bugs: ([a, b, d]) => {
@@ -118,7 +121,7 @@ const F: Def[] = [
     },
     reject: (p) => (p.length > 4 ? "Only fractions with the same denominator are supported (unlike denominators are not yet)." : p[3] !== 1 && p[3] !== -1 ? "Unknown operation." : p[2] < 2 || p[2] > 20 || (p[3] < 0 && p[1] > p[0]) ? "Only like fractions with denominators up to 20 and a result of at least 0 are supported." : null),
     prompt: ([a, b, n, s]) => `${a}/${n} ${s > 0 ? "+" : "−"} ${b}/${n} = ?`,
-    solve: ([a, b, n, s]) => ({ steps: [{ id: "tops", op: s > 0 ? "add" : "subtract", competency: "MATH.number.fraction-add-like", inputs: [a, b], value: a + s * b }], answer: (a + s * b) / n }),
+    solve: ([a, b, n, s]) => ({ steps: [{ id: "tops", op: s > 0 ? "add" : "subtract", competency: "MATH.number.fraction-add-like", inputs: [a, b], value: a + s * b, justification: { rule: "like-denomination" as const, operation: (s > 0 ? "add" : "subtract") as "add" | "subtract", numeratorA: a, numeratorB: b, denominator: n } }], answer: (a + s * b) / n }),
     validate: ([a, b, n, s], v) => typeof v === "number" && Math.abs(v - (a / n + (s * b) / n)) < 1e-9,
     bugs: ([a, b, n, s]) =>
       s > 0
@@ -547,7 +550,10 @@ const F: Def[] = [
     parse: () => null,
     reject: ([l, w]) => (l < 1 || w < 1 || l > 20 || w > 20 || l === w ? "Only rectangles (not squares) with whole-number sides up to 20 are supported." : null),
     prompt: ([l, w]) => `A rectangle is ${l} cm long and ${w} cm wide. What is its perimeter in centimetres?`,
-    solve: ([l, w]) => ({ steps: [{ id: "pair", op: "add", competency: "MATH.number.addition", inputs: [l, w], value: l + w }, { id: "double", op: "multiply", competency: "MATH.measurement.rectangle-perimeter", inputs: [2, l + w], value: 2 * (l + w) }], answer: 2 * (l + w) }),
+    solve: ([l, w]) => ({ steps: [
+      { id: "pair", op: "add", competency: "MATH.number.addition", inputs: [l, w], value: l + w, justification: { rule: "additive-combination" as const, what: "one length and one width of the rectangle", parts: [l, w] } },
+      { id: "double", op: "multiply", competency: "MATH.measurement.rectangle-perimeter", inputs: [2, l + w], value: 2 * (l + w), justification: { rule: "scaling" as const, factor: 2, what: "half-perimeter (the rectangle has two pairs of equal sides)" } },
+    ], answer: 2 * (l + w) }),
     // walk once around the outside, one unit edge at a time
     validate: ([l, w], v) => {
       let n = 0;
@@ -872,7 +878,13 @@ const F: Def[] = [
     // [a, b, x]: a x + b = a·x + b
     reject: ([a, b, x]) => (a < 2 || a > 9 || b < 1 || b > 30 || x < 1 || x > 12 ? "Only ax + b = c with 2 ≤ a ≤ 9, 1 ≤ b ≤ 30 and a whole-number solution from 1 to 12 is supported." : null),
     prompt: ([a, b, x]) => `Solve ${a}x + ${b} = ${a * x + b}. What is x?`,
-    solve: ([a, b, x]) => ({ steps: [{ id: "undo-add", op: "subtract", competency: "MATH.algebra.linear-equations", inputs: [a * x + b, b], value: a * x }, { id: "undo-multiply", op: "divide", competency: MT, inputs: [a * x, a], value: x }], answer: x }),
+    solve: ([a, b, x]) => {
+      const rhs = a * x + b;
+      return { steps: [
+        { id: "undo-add", op: "subtract", competency: "MATH.algebra.linear-equations", inputs: [rhs, b], value: a * x, justification: { rule: "equality-preservation" as const, operation: "subtract", operand: b, lhsBefore: `${a}x + ${b}`, rhsBefore: String(rhs) } },
+        { id: "undo-multiply", op: "divide", competency: MT, inputs: [a * x, a], value: x, justification: { rule: "inverse-operation" as const, undoing: "multiply", applying: "divide", operand: a } },
+      ], answer: x };
+    },
     // substitution: the answer makes the two sides of the equation equal (computed by repeated addition)
     validate: ([a, b, x], v) => typeof v === "number" && Number.isInteger(v) && v >= 1 && v <= 100 && [...Array(v)].reduce((s) => s + a, 0) + b === a * x + b && v >= 1,
     bugs: ([a, b, x]) => {

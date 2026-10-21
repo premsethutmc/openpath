@@ -1412,12 +1412,21 @@ export const B16: Def[] = [
       return {
         steps:
           v === 0
-            ? [st("count-a", "count", SETS, [`{x ∈ ℤ : ${o - 2} ≤ x < ${o - 2 + m}}`], m), st("product", "multiply", CART, [m, n], ans)]
+            ? [
+                { ...st("count-a", "count", SETS, [`{x ∈ ℤ : ${o - 2} ≤ x < ${o - 2 + m}}`], m), justification: { rule: "arithmetic-fact" as const, operation: "count elements of a set-builder set", supports: "product-counting" } },
+                { ...st("product", "multiply", CART, [m, n], ans), justification: { rule: "product-counting" as const, what: "ordered pairs in A × B", factors: [m, n] } },
+              ]
             : v === 1
-              ? [st("product", "multiply", CART, [m, n, o + 2], ans)]
+              ? [{ ...st("product", "multiply", CART, [m, n, o + 2], ans), justification: { rule: "product-counting" as const, what: "ordered triples in A × B × C", factors: [m, n, o + 2] } }]
               : v === 2
-                ? [st("pairs", "multiply", CART, [m, n], m * n), st("union", "add", SETS, [m * n, m * n], ans)]
-                : [st("common", "count", SETS, ["B ∩ C"], o), st("product", "multiply", CART, [m, o], ans)],
+                ? [
+                    { ...st("pairs", "multiply", CART, [m, n], m * n), justification: { rule: "product-counting" as const, what: "ordered pairs in one product", factors: [m, n] } },
+                    { ...st("union", "add", SETS, [m * n, m * n], ans), justification: { rule: "additive-combination" as const, what: "pairs from A × B and B × A (disjoint union)", parts: [m * n, m * n] } },
+                  ]
+                : [
+                    { ...st("common", "count", SETS, ["B ∩ C"], o), justification: { rule: "arithmetic-fact" as const, operation: "count elements of B ∩ C", supports: "product-counting" } },
+                    { ...st("product", "multiply", CART, [m, o], ans), justification: { rule: "product-counting" as const, what: "ordered pairs in A × (B ∩ C)", factors: [m, o] } },
+                  ],
         answer: ans,
       };
     },

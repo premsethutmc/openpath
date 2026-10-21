@@ -158,7 +158,10 @@ export const B08: Def[] = [
       const [f, a] = p;
       const e = oneStep(p);
       const op = ["subtract", "add", "divide", "multiply"][f];
-      return { steps: [{ id: `undo-${op}`, op, competency: LINI, inputs: [e.b, a], value: e.x }], answer: e.x };
+      const undoing = ["add", "subtract", "multiply", "divide"][f];
+      return { steps: [{ id: `undo-${op}`, op, competency: LINI, inputs: [e.b, a], value: e.x,
+        justification: { rule: "equality-preservation" as const, operation: op, operand: a, lhsBefore: e.lhs, rhsBefore: String(e.b) },
+      }], answer: e.x };
     },
     // independent: trial — try x = 0, 1, 2 … in the equation itself until it balances
     validate: (p, v) => {

@@ -441,7 +441,7 @@ export const B04: Def[] = [
       const [c, d] = pairOf(mode, k, y);
       const first = a / b > c / d === !ask;
       return {
-        steps: [{ id: "compare", op: "compare", competency: FCMP, inputs: [fr(a, b), fr(c, d), mode], value: first ? a / b : c / d }],
+        steps: [{ id: "compare", op: "compare", competency: FCMP, inputs: [fr(a, b), fr(c, d), mode], value: first ? a / b : c / d, justification: { rule: "comparison" as const, left: fr(a, b), right: fr(c, d), relation: (a / b > c / d ? ">" : a / b < c / d ? "<" : "=") as "<" | ">" | "=" } }],
         answer: first ? a / b : c / d,
       };
     },
@@ -577,8 +577,8 @@ export const B04: Def[] = [
     prompt: () => `What fraction of the shape in the picture is shaded? All the small squares are the same size.`,
     solve: ([r, c, s]) => ({
       steps: [
-        { id: "parts", op: "count", competency: FMOD, inputs: [r, c], value: r * c },
-        { id: "name", op: "evaluate", competency: FMOD, inputs: [s, r * c], value: s / (r * c) },
+        { id: "parts", op: "count", competency: FMOD, inputs: [r, c], value: r * c, justification: { rule: "product-counting" as const, what: "total equal parts in the shape", factors: [r, c] } },
+        { id: "name", op: "evaluate", competency: FMOD, inputs: [s, r * c], value: s / (r * c), justification: { rule: "arithmetic-fact" as const, operation: `${s} shaded out of ${r * c} total`, supports: "fraction-naming" } },
       ],
       answer: s / (r * c),
     }),
@@ -1946,7 +1946,10 @@ export const B04: Def[] = [
     parse: none,
     reject: ([r, c, a, b]) => (r < 1 || r > 6 || c < 2 || c > 10 || r * c > 40 || b < 2 || b > 10 || a < 1 || a >= b || gcd(a, b) !== 1 || (r * c) % b !== 0 || (r * c) / b < 2 ? "A fraction in simplest form of a grid of up to 40 squares that shares exactly." : null),
     prompt: ([r, c, a, b]) => `The grid in the picture has ${r * c} equal squares. How many squares must be shaded to show ${frw(a, b)} of the grid?`,
-    solve: ([r, c, a, b]) => ({ steps: [sp("part", "divide", SHARE, [r * c, b], (r * c) / b), sp("take", "multiply", MT, [a, (r * c) / b], (a * r * c) / b)], answer: (a * r * c) / b }),
+    solve: ([r, c, a, b]) => ({ steps: [
+      { ...sp("part", "divide", SHARE, [r * c, b], (r * c) / b), justification: { rule: "quotient" as const, dividend: r * c, divisor: b, purpose: "size of one equal part of the grid" } },
+      { ...sp("take", "multiply", MT, [a, (r * c) / b], (a * r * c) / b), justification: { rule: "product-counting" as const, what: "squares to shade", factors: [a, (r * c) / b] } },
+    ], answer: (a * r * c) / b }),
     // independent: shade squares one at a time until shaded ÷ all equals the fraction
     validate: ([r, c, a, b], v) => {
       if (typeof v !== "number") return false;

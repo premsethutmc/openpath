@@ -645,8 +645,8 @@ export const B15: Def[] = [
     reject: (p) => (cartOk(p) ? null : "Sets of 1 to 10 elements; for counting relations, n(A) × n(B) at most 12."),
     prompt: ([m, n, q]) => (q === 0 ? `A = ${nums(m)} and B = ${lets(n)}. How many ordered pairs are in A × B?` : q === 1 ? `A = ${nums(m)} and B = ${lets(n)}. How many relations are there from A to B?` : `A = ${nums(m)} and n(A × B) = ${m * n}. How many elements does B have?`),
     solve: ([m, n, q]) => {
-      const steps: Step[] = [{ id: "pairs", op: q === 2 ? "divide" : "multiply", competency: REL, inputs: q === 2 ? [m * n, m] : [m, n], value: q === 2 ? n : m * n }];
-      if (q === 1) steps.push({ id: "subsets", op: "evaluate", competency: EXPN, inputs: [2, m * n], value: 2 ** (m * n) });
+      const steps: Step[] = [{ id: "pairs", op: q === 2 ? "divide" : "multiply", competency: REL, inputs: q === 2 ? [m * n, m] : [m, n], value: q === 2 ? n : m * n, justification: q === 2 ? { rule: "quotient" as const, dividend: m * n, divisor: m, purpose: "finding n(B) from n(A × B) and n(A)" } : { rule: "product-counting" as const, what: "ordered pairs in A × B", factors: [m, n] } }];
+      if (q === 1) steps.push({ id: "subsets", op: "evaluate", competency: EXPN, inputs: [2, m * n], value: 2 ** (m * n), justification: { rule: "arithmetic-fact" as const, operation: `2^${m * n}`, supports: "counting all subsets of A × B (each pair is either in the relation or not)" } });
       return { steps, answer: q === 0 ? m * n : q === 1 ? 2 ** (m * n) : n };
     },
     // independent: build the pairs one by one; count subsets of them by doubling; search for n(B)

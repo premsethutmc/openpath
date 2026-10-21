@@ -7,6 +7,127 @@ import type { AnswerType } from "./answer-types";
 /** A value: a number, a set of numbers (type "set"), or an answer written in its type's own form (answers@2: "2√3",
  * "(3, −2)", "x > 3", "2x cos(x²)"), compared by that type's rules. */
 export type Value = number | number[] | string;
+/**
+ * A mathematical justification: the rule or invariant that makes a step valid.
+ *
+ * The same arithmetic operation (e.g. subtraction) carries a DIFFERENT justification
+ * depending on the mathematical context: subtracting to preserve equality in an equation
+ * is not the same as subtracting to find a difference in a perimeter calculation.
+ *
+ * Each variant is a reusable rule that works across families and parameter values.
+ * The presentation layer reads these to generate learner-facing text; changing parameters
+ * changes the numbers but the same rule applies.
+ */
+export type Justification =
+  | {
+      /** Performing the same operation on both sides of an equation preserves equality. */
+      rule: "equality-preservation";
+      /** The operation applied to both sides. */
+      operation: string;
+      /** The value applied (e.g. subtract 7 from both sides → operand = 7). */
+      operand: number | string;
+      /** The equation's left-hand side before the transformation. */
+      lhsBefore: string;
+      /** The equation's right-hand side before the transformation. */
+      rhsBefore: string;
+    }
+  | {
+      /** Multiplying numerator and denominator by the same nonzero value preserves the fraction's value (×k/k = ×1). */
+      rule: "fraction-equivalence";
+      /** The scaling factor applied to both numerator and denominator. */
+      scalingFactor: number;
+      /** Original numerator. */
+      numeratorBefore: number;
+      /** Original denominator. */
+      denominatorBefore: number;
+    }
+  | {
+      /** Area = rows × columns of unit squares covering the rectangle without gaps or overlaps. */
+      rule: "unit-coverage";
+      /** Number of rows (or one dimension). */
+      rows: number;
+      /** Number of columns (or other dimension). */
+      columns: number;
+      /** The unit being counted (e.g. "square cm", "square units"). */
+      unit: string;
+    }
+  | {
+      /** A digit's contribution is digit × place value, determined by its base-ten position. */
+      rule: "positional-value";
+      digit: number;
+      placeValue: number;
+      /** The name of the position (e.g. "lakhs", "hundreds"). */
+      placeName: string;
+    }
+  | {
+      /** Adding quantities that measure the same attribute (like-denomination fractions, perimeter sides). */
+      rule: "additive-combination";
+      /** What is being combined (e.g. "sides of the rectangle", "like-fraction numerators"). */
+      what: string;
+      parts: (number | string)[];
+    }
+  | {
+      /** Applying the inverse operation to isolate the unknown (divide undoes multiply, etc.). */
+      rule: "inverse-operation";
+      /** The operation being undone. */
+      undoing: string;
+      /** The operation applied. */
+      applying: string;
+      /** The value used. */
+      operand: number | string;
+    }
+  | {
+      /** Scaling a value by a constant factor (e.g. doubling a half-perimeter). */
+      rule: "scaling";
+      factor: number;
+      /** What is being scaled. */
+      what: string;
+    }
+  | {
+      /** Finding the scaling factor between two equivalent denominators. */
+      rule: "quotient";
+      dividend: number;
+      divisor: number;
+      /** Why this quotient matters. */
+      purpose: string;
+    }
+  | {
+      /** Counting elements by a product rule (Cartesian product, combinations). */
+      rule: "product-counting";
+      /** What is being counted. */
+      what: string;
+      factors: (number | string)[];
+    }
+  | {
+      /** Like-fraction operation: numerators are combined because denominators match. */
+      rule: "like-denomination";
+      operation: "add" | "subtract";
+      numeratorA: number;
+      numeratorB: number;
+      denominator: number;
+    }
+  | {
+      /** Movement on a number line (integer addition/subtraction). */
+      rule: "number-line-movement";
+      start: number;
+      direction: "left" | "right";
+      distance: number;
+    }
+  | {
+      /** Comparison of two values to determine order. */
+      rule: "comparison";
+      left: number | string;
+      right: number | string;
+      relation: "<" | ">" | "=" | "≤" | "≥";
+    }
+  | {
+      /** A helper arithmetic fact used in service of another rule (e.g. a multiplication fact within an area calculation). */
+      rule: "arithmetic-fact";
+      operation: string;
+      /** The higher-level rule this fact supports. */
+      supports: string;
+    };
+
 export interface Step {
   id: string;
   /** What the step does (multiply, simplify, factorise, differentiate, substitute, convert, count, measure …). */
@@ -14,6 +135,8 @@ export interface Step {
   competency: string;
   inputs: (number | string)[];
   value: Value;
+  /** The mathematical rule or invariant that justifies this transformation. Optional for backward compatibility. */
+  justification?: Justification;
 }
 export interface Bug {
   id: string;

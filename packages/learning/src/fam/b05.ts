@@ -828,7 +828,7 @@ export const B05: Def[] = [
     parse: none,
     reject: (p) => (!inRange(p, [[2, 10], [2, 12]]) ? "A rectangle of 2 to 10 rows and 2 to 12 columns of squares." : null),
     prompt: ([r, c]) => `Each small square in the picture is 1 square unit. The rectangle has ${r} rows with ${c} squares in each row. What is its area, in square units?`,
-    solve: ([r, c]) => ({ steps: [{ id: "rows", op: "multiply", competency: MT, inputs: [r, c], value: r * c }], answer: r * c }),
+    solve: ([r, c]) => ({ steps: [{ id: "rows", op: "multiply", competency: MT, inputs: [r, c], value: r * c, justification: { rule: "unit-coverage" as const, rows: r, columns: c, unit: "square units" } }], answer: r * c }),
     // independent: count the squares one by one, row after row
     validate: ([r, c], v) => {
       let n = 0;
@@ -1412,9 +1412,9 @@ export const B05: Def[] = [
     prompt: (p) => `Write in figures: ${indWords(p)}. (Write the number without commas, for example 407052.)`,
     solve: ([L, T, H, r]) => ({
       steps: [
-        { id: "lakhs", op: "place", competency: LARGE, inputs: [L, 100000], value: L * 100000 },
-        { id: "thousands", op: "place", competency: THOU, inputs: [T, 1000], value: T * 1000 },
-        { id: "rest", op: "place", competency: PV, inputs: [H, REST[r]], value: H * 100 + REST[r] },
+        { id: "lakhs", op: "place", competency: LARGE, inputs: [L, 100000], value: L * 100000, justification: { rule: "positional-value" as const, digit: L, placeValue: 100000, placeName: "lakhs" } },
+        { id: "thousands", op: "place", competency: THOU, inputs: [T, 1000], value: T * 1000, justification: { rule: "positional-value" as const, digit: T, placeValue: 1000, placeName: "thousands" } },
+        { id: "rest", op: "place", competency: PV, inputs: [H, REST[r]], value: H * 100 + REST[r], justification: { rule: "positional-value" as const, digit: H, placeValue: 100, placeName: "hundreds" } },
       ],
       answer: L * 100000 + T * 1000 + H * 100 + REST[r],
     }),

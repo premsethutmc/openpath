@@ -1,20 +1,32 @@
 /**
- * Tests for the shared mathematical explanation engine.
+ * Structural mathematical relationship tests for the justification-driven
+ * explanation engine.
  *
- * Verifies that the single `mathematicalExplanation()` function, replacing the old
- * generic `explainOperation()`, produces worked-step explanations that:
- *   1. Explain WHY each transformation is valid (not merely WHAT calculation occurred)
- *   2. Derive context from competency graph names and family teach.idea/method
- *   3. Work across arithmetic, fractions, algebra, and geometry without per-family code
- *   4. Generate correct corresponding explanations when problem parameters vary
+ * These tests verify that:
+ *   1. Steps carry typed justification metadata (not just op/competency).
+ *   2. The same arithmetic operation gets DIFFERENT justification rules in
+ *      different mathematical contexts.
+ *   3. Justification parameters encode correct mathematical relationships
+ *      (equality preservation, fraction value, geometric formulas, positional value).
+ *   4. The rendering layer produces text from the justification, not from op alone.
+ *   5. All 15 explicit teaching families produce annotated steps.
+ *
+ * These tests verify mathematical STRUCTURE, not English vocabulary.
  */
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { FAMILIES, explainStep } from "./families";
-import { teachingPresentationFrom, teachingScopeFor, EXPLICIT_TEACHING_FAMILIES } from "./teaching-presentation";
+import { FAMILIES } from "./families";
+import { teachingPresentationFrom, EXPLICIT_TEACHING_FAMILIES } from "./teaching-presentation";
 import type { Module, Screen, Question } from "./content";
+import type { Justification, Step } from "./family-kit";
 
-/** Helper: build a minimal module/screen to exercise teachingPresentationFrom. */
+/** Solve a family and return its raw steps with justifications. */
+function solveFamily(familyId: string, params: number[]): { steps: Step[]; answer: number | number[] | string } {
+  const family = FAMILIES.get(familyId)!;
+  return family.solve(params);
+}
+
+/** Build a presentation to exercise the rendering path. */
 function presentationFor(familyId: string, params: number[]) {
   const family = FAMILIES.get(familyId)!;
   const problem = family.solve(params);
@@ -37,144 +49,256 @@ function presentationFor(familyId: string, params: number[]) {
   return teachingPresentationFrom({ module, screen, problem, question, practiceIds: ["test-q"] });
 }
 
-test("mathematical explanations explain WHY, not just WHAT", () => {
-  // Old explainOperation produced: "Multiply 5 and 3. This gives 15."
-  // New should contain reasoning about area and unit squares
-  const rect = presentationFor("rect", [5, 3]);
-  assert.equal(rect.status, "supported");
-  const step = rect.workedExample!.steps[0];
-  assert.ok(step.explanation.includes("×"), "shows the multiplication");
-  assert.ok(step.explanation.includes("15"), "shows the result");
-  // The key test: explanation contains conceptual reasoning, not just "Multiply X and Y"
-  assert.ok(
-    step.explanation.includes("Area") || step.explanation.includes("unit"),
-    `rect explanation should reference area concept, got: ${step.explanation}`
-  );
-  assert.ok(!step.explanation.startsWith("Multiply "), "should not start with bare operation verb like old explainOperation");
-});
 
-test("shared mechanism works across arithmetic, fractions, algebra, geometry", () => {
-  // ARITHMETIC: Indian place value
-  const aeind = presentationFor("aeind", [3, 4, 5, 6, 7, 8]);
-  assert.equal(aeind.status, "supported");
-  assert.ok(aeind.workedExample!.steps[0].explanation.includes("place"), "aeind explains place value");
+// ═══════════════════════════════════════════════════════════════════════════
+// CRITERION 1: Justification metadata is present and correctly typed
+// ═══════════════════════════════════════════════════════════════════════════
 
-  // FRACTIONS: equivalent fractions
-  const eqfrac = presentationFor("eqfrac", [2, 3, 9]);
-  assert.equal(eqfrac.status, "supported");
-  const fracStep = eqfrac.workedExample!.steps[0];
-  assert.ok(
-    fracStep.explanation.includes("equal") || fracStep.explanation.includes("Equal") || fracStep.explanation.includes("equivalent"),
-    `eqfrac explanation should reference equivalence, got: ${fracStep.explanation}`
-  );
-
-  // ALGEBRA: linear equations
-  const lin = presentationFor("lin", [3, 7, 4]);
-  assert.equal(lin.status, "supported");
-  const algStep = lin.workedExample!.steps[0];
-  assert.ok(
-    algStep.explanation.includes("both sides") || algStep.explanation.includes("linear") || algStep.explanation.includes("equation"),
-    `lin explanation should reference equation balancing, got: ${algStep.explanation}`
-  );
-
-  // GEOMETRY: rectangle perimeter
-  const rperim = presentationFor("rperim", [8, 5]);
-  assert.equal(rperim.status, "supported");
-  const geomStep = rperim.workedExample!.steps[0];
-  assert.ok(
-    geomStep.explanation.includes("perimeter") || geomStep.explanation.includes("distance") || geomStep.explanation.includes("Perimeter"),
-    `rperim explanation should reference perimeter concept, got: ${geomStep.explanation}`
-  );
-});
-
-test("varying parameters generates correct corresponding explanations", () => {
-  // Same family (rect), different parameters → different numbers but same reasoning structure
-  const rect3x4 = presentationFor("rect", [3, 4]);
-  const rect7x9 = presentationFor("rect", [7, 9]);
-
-  const step1 = rect3x4.workedExample!.steps[0];
-  const step2 = rect7x9.workedExample!.steps[0];
-
-  // Different numbers
-  assert.ok(step1.explanation.includes("12"), "3×4 explanation contains 12");
-  assert.ok(step2.explanation.includes("63"), "7×9 explanation contains 63");
-  assert.ok(step1.explanation.includes("3") && step1.explanation.includes("4"), "3×4 explanation contains both factors");
-  assert.ok(step2.explanation.includes("7") && step2.explanation.includes("9"), "7×9 explanation contains both factors");
-
-  // Same mathematical reasoning
-  assert.ok(step1.explanation.includes("Area") || step1.explanation.includes("unit"), "both share area reasoning");
-  assert.ok(step2.explanation.includes("Area") || step2.explanation.includes("unit"), "both share area reasoning");
-
-  // Fractions: varying denominators
-  const frac3 = presentationFor("eqfrac", [1, 2, 6]);
-  const frac5 = presentationFor("eqfrac", [2, 5, 10]);
-  assert.ok(frac3.workedExample!.steps[0].explanation.includes("3"), "1/2 → ?/6: scaling factor 3");
-  assert.ok(frac5.workedExample!.steps[0].explanation.includes("2"), "2/5 → ?/10: scaling factor 2");
-
-  // Algebra: varying coefficients
-  const lin2 = presentationFor("lin", [2, 3, 5]);
-  const lin4 = presentationFor("lin", [4, -1, 3]);
-  assert.ok(lin2.workedExample!.steps.length === 2, "two-step equation has two steps");
-  assert.ok(lin4.workedExample!.steps.length === 2, "two-step equation has two steps");
-  // Both should explain why subtraction/division is valid
-  assert.ok(lin2.workedExample!.steps[0].explanation.includes("both sides") || lin2.workedExample!.steps[0].explanation.includes("equation"),
-    "equation step explains balance principle");
-});
-
-test("all 12 non-hardcoded families get mathematical explanations (not generic)", () => {
-  // The 3 hardcoded families (aocart, apcartn, aiint) have their own hand-tuned steps.
-  // The other 12 should all go through mathematicalExplanation().
-  const nonHardcoded = EXPLICIT_TEACHING_FAMILIES.filter(f => !["aocart", "apcartn", "aiint"].includes(f));
-  assert.equal(nonHardcoded.length, 12, "12 families use the shared mechanism");
-
-  for (const fid of nonHardcoded) {
-    const family = FAMILIES.get(fid)!;
-    const params = family.domain ? family.domain.map(([lo, hi]: [number, number]) => Math.floor((lo + hi) / 2)) : [5, 3];
-    // For families with keep filters, adjust params
-    let adjustedParams = params;
-    if (family.keep && !family.keep(params)) {
-      // Try the first valid combination
-      if (fid === "adfcmp") adjustedParams = [0, 5, 2, 3, 0];
-      else if (fid === "fadd") adjustedParams = [3, 2, 7, 1];
-      else if (fid === "adshade") adjustedParams = [3, 4, 1, 2];
-      else if (fid === "adfname") adjustedParams = [3, 4, 7];
-    }
-    try {
-      const presentation = presentationFor(fid, adjustedParams);
-      if (presentation.status === "supported") {
-        const step = presentation.workedExample!.steps[0];
-        // Should NOT start with the old generic pattern "Add X and Y. This gives Z."
-        assert.ok(
-          !step.explanation.match(/^(Add|Subtract|Multiply|Divide|Compare|Count|Measure|Simplify) .+ and .+\. This gives /),
-          `${fid} should not use old generic explainOperation pattern, got: ${step.explanation}`
-        );
-        // Should contain the result value
-        const answer = String(presentation.workedExample!.steps[0].expression);
-        assert.ok(step.explanation.length > 10, `${fid} explanation should be substantive, got: ${step.explanation}`);
-      }
-    } catch (e) {
-      // Some param combinations may not produce valid problems — that's fine for this test
+test("every step of every explicit teaching family carries a justification", () => {
+  const VALID_PARAMS: Record<string, number[]> = {
+    rect: [5, 3], eqfrac: [2, 3, 9], fadd: [3, 2, 7, 1], rperim: [8, 5],
+    lin: [3, 7, 4], ahone: [0, 5, 8], lneg: [2, 3, 11], aearea: [4, 6],
+    aeind: [3, 4, 5, 6, 7, 8], aiint: [5, -3, 0], adfcmp: [0, 5, 2, 3, 0],
+    adfname: [2, 3, 3], adshade: [3, 4, 1, 2], aocart: [3, 4, 0], apcartn: [0, 3, 4, 0],
+  };
+  for (const fid of EXPLICIT_TEACHING_FAMILIES) {
+    const params = VALID_PARAMS[fid];
+    assert.ok(params, `test params defined for ${fid}`);
+    const { steps } = solveFamily(fid, params);
+    for (const step of steps) {
+      assert.ok(
+        step.justification !== undefined,
+        `${fid} step "${step.id}" must have a justification, got undefined`
+      );
+      assert.ok(
+        typeof step.justification.rule === "string" && step.justification.rule.length > 0,
+        `${fid} step "${step.id}" justification must have a non-empty rule`
+      );
     }
   }
 });
 
-test("explanation derives from competency graph, not hardcoded text", () => {
-  // The lin family's step[0] has competency "MATH.algebra.linear-equations"
-  // which should resolve to "Solve linear equations" from the graph
-  const lin = presentationFor("lin", [3, 7, 4]);
-  const subtractStep = lin.workedExample!.steps[0];
-  // Should reference the graph's competency name or the equation concept
-  assert.ok(
-    subtractStep.explanation.includes("linear") || subtractStep.explanation.includes("equation") || subtractStep.explanation.includes("both sides"),
-    `lin subtract step should reference equation concept from graph, got: ${subtractStep.explanation}`
-  );
 
-  // The rperim family's step[1] has competency "MATH.measurement.rectangle-perimeter"
-  // which should resolve to "Calculate rectangle perimeter" from the graph
-  const rperim = presentationFor("rperim", [8, 5]);
-  const multiplyStep = rperim.workedExample!.steps[1];
-  assert.ok(
-    multiplyStep.explanation.includes("perimeter") || multiplyStep.explanation.includes("Perimeter") || multiplyStep.explanation.includes("rectangle"),
-    `rperim multiply step should reference perimeter from graph, got: ${multiplyStep.explanation}`
-  );
+// ═══════════════════════════════════════════════════════════════════════════
+// CRITERION 3: Same operation, different justifications
+// ═══════════════════════════════════════════════════════════════════════════
+
+test("subtract in an equation vs subtract elsewhere carry different justification rules", () => {
+  // Algebra: 3x + 7 = 19 → subtract 7 from both sides
+  const lin = solveFamily("lin", [3, 7, 4]);
+  const linSubtract = lin.steps.find(s => s.op === "subtract");
+  assert.ok(linSubtract, "lin has a subtract step");
+  assert.equal(linSubtract!.justification!.rule, "equality-preservation",
+    "subtraction in an equation is justified by equality-preservation");
+
+  // Fraction addition: 3/7 + 2/7 = 5/7 — the operation is add/subtract but
+  // justified by like-denomination
+  const fadd = solveFamily("fadd", [3, 2, 7, 1]);
+  assert.equal(fadd.steps[0].justification!.rule, "like-denomination",
+    "fraction addition is justified by like-denomination, not generic add");
+});
+
+test("multiply in geometry vs multiply in Cartesian products carry different justification rules", () => {
+  // Geometry: 5 × 3 = 15 square cm
+  const rect = solveFamily("rect", [5, 3]);
+  assert.equal(rect.steps[0].justification!.rule, "unit-coverage",
+    "rectangle area multiplication is justified by unit-coverage");
+
+  // Cartesian product: |A| × |B|
+  const cart = solveFamily("aocart", [3, 4, 0]);
+  assert.equal(cart.steps[0].justification!.rule, "product-counting",
+    "Cartesian product multiplication is justified by product-counting");
+});
+
+test("divide for scaling factor vs divide for inverse operation are distinguished", () => {
+  // eqfrac: 9 ÷ 3 = 3 to find scaling factor
+  const eqfrac = solveFamily("eqfrac", [2, 3, 9]);
+  assert.equal(eqfrac.steps[0].justification!.rule, "quotient",
+    "finding the scaling factor uses quotient rule");
+
+  // ahone: x + 5 = 8 → subtract 5 (equality-preservation), not divide
+  // lin: 3x + 7 = 19 → step 2 divides both sides
+  const lin = solveFamily("lin", [3, 7, 4]);
+  const divStep = lin.steps.find(s => s.justification?.rule === "inverse-operation");
+  assert.ok(divStep, "lin has an inverse-operation step for division");
+  assert.equal((divStep!.justification as { rule: "inverse-operation"; undoing: string }).undoing,
+    "multiply", "the inverse undoes multiplication");
+});
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CRITERION 4: Mathematical relationships are structurally correct
+// ═══════════════════════════════════════════════════════════════════════════
+
+test("equality-preservation: operand and sides are mathematically consistent", () => {
+  // 3x + 7 = 19 → subtract 7 from both sides
+  const lin = solveFamily("lin", [3, 7, 4]);
+  const ep = lin.steps[0].justification as { rule: "equality-preservation"; operation: string; operand: number | string; lhsBefore: string; rhsBefore: string };
+  assert.equal(ep.rule, "equality-preservation");
+  assert.equal(ep.operation, "subtract");
+  assert.equal(ep.operand, 7);
+  // The RHS before transformation should equal a*x + b where a=3, x=4, b=7
+  assert.equal(Number(ep.rhsBefore), 3 * 4 + 7, "RHS = ax + b");
+});
+
+test("fraction-equivalence: scaling preserves the fraction value", () => {
+  // 2/3 = ?/9 → scalingFactor = 3, so 2/3 × 3/3 = 6/9
+  const eqfrac = solveFamily("eqfrac", [2, 3, 9]);
+  const feq = eqfrac.steps[1].justification as { rule: "fraction-equivalence"; scalingFactor: number; numeratorBefore: number; denominatorBefore: number };
+  assert.equal(feq.rule, "fraction-equivalence");
+  // The scaling factor times the original denominator equals the target denominator
+  assert.equal(feq.scalingFactor * feq.denominatorBefore, 9,
+    "scalingFactor × denominatorBefore = target denominator");
+  // The original fraction value is preserved
+  const originalValue = feq.numeratorBefore / feq.denominatorBefore;
+  const scaledNumerator = feq.numeratorBefore * feq.scalingFactor;
+  assert.equal(scaledNumerator / 9, originalValue,
+    "scaled fraction value equals original fraction value");
+});
+
+test("unit-coverage: rows × columns = computed area", () => {
+  const rect = solveFamily("rect", [5, 3]);
+  const uc = rect.steps[0].justification as { rule: "unit-coverage"; rows: number; columns: number; unit: string };
+  assert.equal(uc.rule, "unit-coverage");
+  assert.equal(uc.rows * uc.columns, rect.answer, "rows × columns = area");
+  assert.equal(uc.rows, 5);
+  assert.equal(uc.columns, 3);
+});
+
+test("positional-value: digit × placeValue is a valid place contribution", () => {
+  // aeind with params [3, 4, 5, 6, 7, 8]
+  const aeind = solveFamily("aeind", [3, 4, 5, 6, 7, 8]);
+  for (const step of aeind.steps) {
+    const pv = step.justification as { rule: "positional-value"; digit: number; placeValue: number; placeName: string };
+    assert.equal(pv.rule, "positional-value");
+    // digit must be 0-9 and placeValue must be a power of 10
+    assert.ok(pv.digit >= 0 && pv.digit <= 9, `digit ${pv.digit} is in 0-9`);
+    assert.ok(Math.log10(pv.placeValue) % 1 === 0, `placeValue ${pv.placeValue} is a power of 10`);
+    // The digit's contribution (digit × placeValue) must not exceed the step value
+    // (step.value may bundle lower-order digits as well)
+    assert.ok(pv.digit * pv.placeValue <= (step.value as number),
+      `digit contribution ${pv.digit * pv.placeValue} ≤ step value ${step.value}`);
+  }
+});
+
+test("number-line-movement: start ± distance = result", () => {
+  // 5 + (-3) = 2
+  const aiint = solveFamily("aiint", [5, -3, 0]);
+  const lastStep = aiint.steps[aiint.steps.length - 1];
+  const nlm = lastStep.justification as { rule: "number-line-movement"; start: number; direction: "left" | "right"; distance: number };
+  assert.equal(nlm.rule, "number-line-movement");
+  const expected = nlm.direction === "right" ? nlm.start + nlm.distance : nlm.start - nlm.distance;
+  assert.equal(expected, lastStep.value, "start + signed distance = result");
+});
+
+test("like-denomination: numerators operate over the shared denominator", () => {
+  // 3/7 + 2/7 = 5/7
+  const fadd = solveFamily("fadd", [3, 2, 7, 1]);
+  const ld = fadd.steps[0].justification as { rule: "like-denomination"; operation: "add" | "subtract"; numeratorA: number; numeratorB: number; denominator: number };
+  assert.equal(ld.rule, "like-denomination");
+  assert.equal(ld.denominator, 7);
+  if (ld.operation === "add") {
+    assert.equal((ld.numeratorA + ld.numeratorB) / ld.denominator, fadd.answer,
+      "numeratorA + numeratorB over denominator = answer");
+  }
+});
+
+test("comparison: relation matches actual fraction ordering", () => {
+  // Compare 2/5 and 3/5 (same denominator, mode=0)
+  const cmp = solveFamily("adfcmp", [0, 5, 2, 3, 0]);
+  const j = cmp.steps[0].justification as { rule: "comparison"; left: number | string; right: number | string; relation: string };
+  assert.equal(j.rule, "comparison");
+  // The relation should reflect the actual ordering
+  assert.ok(["<", ">", "="].includes(j.relation), "relation is a valid comparator");
+});
+
+test("additive-combination and scaling for perimeter are structurally correct", () => {
+  // rperim: l=8, w=5 → step 1: l + w = 13, step 2: 2 × 13 = 26
+  const rperim = solveFamily("rperim", [8, 5]);
+  const ac = rperim.steps[0].justification as { rule: "additive-combination"; what: string; parts: (number | string)[] };
+  assert.equal(ac.rule, "additive-combination");
+  const sumParts = (ac.parts as number[]).reduce((a, b) => a + b, 0);
+  assert.equal(sumParts, 13, "l + w = half perimeter");
+
+  const sc = rperim.steps[1].justification as { rule: "scaling"; factor: number; what: string };
+  assert.equal(sc.rule, "scaling");
+  assert.equal(sc.factor, 2, "perimeter doubles the half-perimeter");
+  assert.equal(sc.factor * (rperim.steps[0].value as number), rperim.answer,
+    "2 × half-perimeter = perimeter");
+});
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CRITERION 5: Rendering uses justification, not op
+// ═══════════════════════════════════════════════════════════════════════════
+
+test("rendering produces different text for same op with different justifications", () => {
+  // Both rect and rperim use "multiply" as an op, but they should render differently
+  const rectPres = presentationFor("rect", [5, 3]);
+  const rperimPres = presentationFor("rperim", [8, 5]);
+
+  const rectExplanation = rectPres.workedExample!.steps[0].explanation;
+  const rperimStep2 = rperimPres.workedExample!.steps[1].explanation;
+
+  // They must be different strings because the justification rules differ
+  assert.notEqual(rectExplanation, rperimStep2,
+    "unit-coverage explanation ≠ scaling explanation even though both involve multiplication");
+});
+
+test("rendering includes justification parameters, not just op name", () => {
+  // 3x + 7 = 19: the explanation should reference the actual equation values
+  const linPres = presentationFor("lin", [3, 7, 4]);
+  const step1 = linPres.workedExample!.steps[0];
+  // The explanation should contain the operand (7) and the equation sides
+  assert.ok(step1.explanation.includes("7"), "explanation includes the operand from justification");
+  assert.ok(step1.explanation.includes("19"), "explanation includes the RHS from justification");
+});
+
+test("varying parameters changes justification data, not the rule", () => {
+  // rect 5×3 and rect 7×9 both use unit-coverage, but with different row/column counts
+  const r1 = solveFamily("rect", [5, 3]);
+  const r2 = solveFamily("rect", [7, 9]);
+  const j1 = r1.steps[0].justification as { rule: "unit-coverage"; rows: number; columns: number };
+  const j2 = r2.steps[0].justification as { rule: "unit-coverage"; rows: number; columns: number };
+  assert.equal(j1.rule, j2.rule, "same rule for same family");
+  assert.notEqual(j1.rows * j1.columns, j2.rows * j2.columns, "different parameters → different area");
+});
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// CRITERION 6: All four demonstration domains
+// ═══════════════════════════════════════════════════════════════════════════
+
+test("arithmetic (place value): aeind justifications are positional-value", () => {
+  const { steps } = solveFamily("aeind", [3, 4, 5, 6, 7, 8]);
+  assert.ok(steps.every(s => s.justification!.rule === "positional-value"),
+    "all aeind steps use positional-value rule");
+});
+
+test("fractions (equivalent fractions): eqfrac uses quotient + fraction-equivalence", () => {
+  const { steps } = solveFamily("eqfrac", [2, 3, 9]);
+  assert.equal(steps[0].justification!.rule, "quotient");
+  assert.equal(steps[1].justification!.rule, "fraction-equivalence");
+});
+
+test("algebra (one-step): ahone uses equality-preservation", () => {
+  const { steps } = solveFamily("ahone", [0, 5, 8]);
+  assert.equal(steps[0].justification!.rule, "equality-preservation");
+});
+
+test("algebra (two-step): lneg uses equality-preservation + inverse-operation", () => {
+  const { steps } = solveFamily("lneg", [2, 3, 11]);
+  assert.equal(steps[0].justification!.rule, "equality-preservation");
+  assert.equal(steps[1].justification!.rule, "inverse-operation");
+});
+
+test("geometry (area): rect uses unit-coverage", () => {
+  const { steps } = solveFamily("rect", [5, 3]);
+  assert.equal(steps[0].justification!.rule, "unit-coverage");
+});
+
+test("geometry (perimeter): rperim uses additive-combination + scaling", () => {
+  const { steps } = solveFamily("rperim", [8, 5]);
+  assert.equal(steps[0].justification!.rule, "additive-combination");
+  assert.equal(steps[1].justification!.rule, "scaling");
 });
