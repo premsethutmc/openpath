@@ -2,6 +2,7 @@ import type { Module, Question, Screen } from "./content";
 import type { Bug, Def, Problem, Step, Visual } from "./family-kit";
 import { explainStep, FAMILIES } from "./families";
 import { graph } from "./graph";
+import { adaptProblem, kernelWorkedSteps, rulesUsed, type AdaptedProblem } from "./kernel-adapter";
 
 export const TEACHING_PRESENTATION_VERSION = "openpath-teaching-presentation@1" as const;
 
@@ -30,6 +31,15 @@ export interface TeachingPresentation {
   misconception?: { id: string; explanation: string };
   practice: { competency: string; families: string[]; questionIds: string[] };
   unsupportedReason?: string;
+  /** Kernel-derived teaching data (when the problem's steps have justifications). */
+  kernel?: {
+    /** Whether all steps were adapted to kernel rules. */
+    fullyAdapted: boolean;
+    /** Kernel rule IDs used in the solution. */
+    rulesUsed: string[];
+    /** Worked steps derived from kernel transformations (principle + explanation). */
+    workedSteps: { expression: string; explanation: string; before: string; after: string; principle: string }[];
+  };
 }
 
 export interface TeachingScope {
@@ -424,6 +434,22 @@ export function teachingPresentationFrom(args: {
     practice: { competency: module.competency, families: [...new Set([module.pool?.family, ...(module.pools ?? []).map((pool) => pool.family)].filter((family): family is string => !!family))], questionIds: practiceIds },
     ...(!supported ? { unsupportedReason: problem ? "This family has no ordered worked steps yet." : "No deterministic family example is available for this concept." } : {}),
   };
+  // Enrich with kernel data when the problem has justified steps
+  if (problem && problem.steps.some((s) => s.justification)) {
+    try {
+      const adapted = adaptProblem(problem);
+      const kWorked = kernelWorkedSteps(adapted);
+      if (kWorked.length > 0) {
+        result.kernel = {
+          fullyAdapted: adapted.fullyAdapted,
+          rulesUsed: rulesUsed(adapted),
+          workedSteps: kWorked,
+        };
+      }
+    } catch {
+      // Kernel adaptation is best-effort; the existing pipeline continues
+    }
+  }
   if (problem) {
     const errors = validateTeachingPresentation(problem, result);
     if (errors.length) return { ...result, status: "unsupported", workedExample: null, visual: undefined, unsupportedReason: errors.join(" ") };
