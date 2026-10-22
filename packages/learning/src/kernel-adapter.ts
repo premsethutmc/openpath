@@ -312,10 +312,10 @@ function adaptPositionalValue(
 
   const explanation: RuleExplanation = {
     principle: "Base-ten positional value",
-    action: `${j.digit} × ${j.placeValue.toLocaleString()} = ${contribution.toLocaleString()}`,
-    justification: `The ${j.placeName} digit ${j.digit} contributes ${j.digit} × ${j.placeValue.toLocaleString()} = ${contribution.toLocaleString()} to the number`,
+    action: `${j.digit} × ${j.placeValue} = ${contribution}`,
+    justification: `The ${j.placeName} digit ${j.digit} contributes ${j.digit} × ${j.placeValue} = ${contribution} to the number`,
     beforeText: `${j.digit} in the ${j.placeName} place`,
-    afterText: `${contribution.toLocaleString()}`,
+    afterText: `${contribution}`,
   };
 
   return { transformation, explanation };
@@ -415,10 +415,12 @@ function adaptInverseOperation(
 
   const transformation = registry.applyRule(state, ruleId, { value, equationIndex: 0 });
 
+  const result = typeof step.value === "number" ? step.value : Array.isArray(step.value) ? step.value.join(", ") : String(step.value);
+
   const explanation: RuleExplanation = {
     principle: "Inverse operation",
-    action: `${j.applying} ${j.operand} (undoing ${j.undoing})`,
-    justification: `Applying ${j.applying} undoes ${j.undoing}: isolates the unknown`,
+    action: `${j.applying} by ${j.operand} (undoing ${j.undoing})`,
+    justification: `${j.applying} by ${j.operand} undoes the ${j.undoing} → x = ${result}. The inverse operation isolates the unknown.`,
     beforeText: renderStatement(state.statements[0]),
     afterText: renderStatement(transformation.after.statements[0]),
   };

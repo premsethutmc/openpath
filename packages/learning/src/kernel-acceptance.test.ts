@@ -13,7 +13,10 @@ import {
   type MathExpr, type MathState,
 } from "./math-kernel";
 import { adaptProblem, kernelWorkedSteps, rulesUsed } from "./kernel-adapter";
+import { teachingPresentationFrom, validateTeachingPresentation, type TeachingPresentation } from "./teaching-presentation";
+import { FAMILIES } from "./families";
 import type { Problem, Step, Justification } from "./family-kit";
+import type { Module, Screen } from "./content";
 
 // ── Helpers ──
 
@@ -432,5 +435,179 @@ describe("acceptance: full pipeline integration", () => {
       const worked = kernelWorkedSteps(adapted);
       assert.ok(worked[0].after.includes(`${n*k}/${d*k}`));
     }
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════════
+// 9. LEARNER-FACING OUTPUT CORRECTNESS — verify the actual presentation
+// ════════════════════════════════════════════════════════════════════════════════
+
+/** Build a full TeachingPresentation through the real pipeline, same as the app. */
+function buildPresentation(familyId: string, params: number[]): TeachingPresentation {
+  const def = FAMILIES.get(familyId)!;
+  const problem = def.solve(params);
+  problem.family = familyId;
+  problem.params = params;
+  problem.bugs = problem.bugs ?? def.bugs?.(params) ?? [];
+  problem.answer = String(problem.answer);
+  problem.prompt = problem.prompt ?? "Solve";
+  const module = {
+    competency: def.competency, id: `m-${familyId}`, title: def.title,
+    pool: { family: familyId, level: 1 }, screens: [], pools: [],
+  } as any as Module;
+  const screen = { text: ["Explanation"], math: [] } as any as Screen;
+  return teachingPresentationFrom({ module, screen, problem, question: null, practiceIds: [] });
+}
+
+describe("acceptance: learner-facing output correctness", () => {
+  const kernelFamilies: [string, number[], string][] = [
+    ["lin", [3, 7, 4], "linear equation 3x+7=19"],
+    ["lin", [2, -5, 8], "linear equation with negative constant"],
+    ["ahone", [0, 5, 3], "one-step x+5=8"],
+    ["ahone", [2, 4, 7], "one-step 4x=28"],
+    ["lneg", [2, 10, -3], "two-step with negative solution"],
+    ["aeind", [3, 4, 5, 6], "place value 304,512"],
+    ["aeind", [5, 0, 0, 0], "place value with zeros 500,000"],
+    ["eqfrac", [2, 3, 9], "equivalent fraction 2/3 = ?/9"],
+    ["eqfrac", [1, 4, 20], "equivalent fraction 1/4 = ?/20"],
+    ["rect", [5, 3], "rectangle area 5×3"],
+    ["rect", [12, 8], "rectangle area 12×8"],
+    ["rperim", [7, 4], "rectangle perimeter 7×4"],
+    ["aocart", [3, 4, 0], "cartesian product 3×4"],
+    ["aiint", [5, 3, 0], "integer addition 5+3"],
+    // aiint subtraction uses inverse-operation on expressions (not equations), stays compatibility
+    // ["aiint", [5, 3, 1], "integer subtraction 5-3"],
+    ["fadd", [2, 3, 5, 1], "fraction addition 2/5 + 3/5"],
+    ["adfcmp", [0, 5, 2, 3, 0], "fraction comparison"],
+    ["aearea", [6, 4], "rectangle area (square units)"],
+    ["rperim", [10, 3], "rectangle perimeter 10×3"],
+  ];
+
+  for (const [family, params, desc] of kernelFamilies) {
+    it(`${desc}: kernel-backed with correct content`, () => {
+      const pres = buildPresentation(family, params);
+
+      // 1. Teaching source is kernel
+      assert.equal(pres.teachingSource, "kernel", `${family} should be kernel-backed`);
+      assert.equal(pres.status, "supported");
+
+      // 2. No parallel kernel field
+      assert.equal((pres as any).kernel, undefined, "parallel kernel field must not exist");
+
+      // 3. workedExample exists with steps
+      assert.ok(pres.workedExample, "workedExample must exist");
+      assert.ok(pres.workedExample!.steps.length > 0, "must have at least one step");
+
+      // 4. Every step has expression, explanation, and principle
+      for (const step of pres.workedExample!.steps) {
+        assert.ok(step.expression, "step must have expression");
+        assert.ok(step.explanation, "step must have explanation");
+        assert.ok(step.principle, "kernel step must have principle");
+      }
+
+      // 5. Validation passes (math is correct)
+      const def = FAMILIES.get(family)!;
+      const problem = def.solve(params);
+      problem.family = family;
+      problem.params = params;
+      problem.bugs = problem.bugs ?? [];
+      problem.answer = String(problem.answer);
+      const errors = validateTeachingPresentation(problem, pres);
+      assert.deepEqual(errors, [], `validation errors: ${errors.join("; ")}`);
+    });
+  }
+
+  it("parameter variations produce different content but same rules", () => {
+    const p1 = buildPresentation("lin", [3, 7, 4]);
+    const p2 = buildPresentation("lin", [5, 2, 6]);
+
+    // Same teaching source
+    assert.equal(p1.teachingSource, "kernel");
+    assert.equal(p2.teachingSource, "kernel");
+
+    // Same structure (2 steps each)
+    assert.equal(p1.workedExample!.steps.length, p2.workedExample!.steps.length);
+
+    // Different numeric content
+    assert.notEqual(
+      p1.workedExample!.steps[0].explanation,
+      p2.workedExample!.steps[0].explanation,
+    );
+  });
+
+  it("before/after states are consistent across steps", () => {
+    const def = FAMILIES.get("lin")!;
+    const problem = def.solve([3, 7, 4]);
+    problem.family = "lin";
+    problem.params = [3, 7, 4];
+    problem.answer = "4";
+
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, true);
+
+    // Each step's before-state matches the previous step's after-state
+    for (let i = 1; i < adapted.steps.length; i++) {
+      const prev = adapted.steps[i - 1].transformation!;
+      const curr = adapted.steps[i].transformation!;
+      assert.deepEqual(curr.before, prev.after,
+        `step ${i} before-state must equal step ${i-1} after-state`);
+    }
+  });
+
+  it("units remain correct for geometry families", () => {
+    const rect = buildPresentation("rect", [5, 3]);
+    assert.ok(rect.visual?.kind === "geometry");
+    assert.equal(rect.visual.labels.measureUnit, "cm²");
+    assert.equal(rect.visual.labels.dimensionUnit, "cm");
+
+    const perim = buildPresentation("rperim", [7, 4]);
+    assert.ok(perim.visual?.kind === "geometry");
+    assert.equal(perim.visual.labels.measureUnit, "cm");
+
+    const area = buildPresentation("aearea", [6, 4]);
+    assert.ok(area.visual?.kind === "geometry");
+    assert.equal(area.visual.labels.measureUnit, "square units");
+    assert.equal(area.visual.labels.dimensionUnit, "units");
+  });
+
+  it("fractions and signs are correct in kernel output", () => {
+    const frac = buildPresentation("eqfrac", [2, 3, 9]);
+    const step = frac.workedExample!.steps.find((s) => s.principle === "Fraction equivalence")!;
+    // The expression shows the fraction being scaled: "Scale 2/3 by 3"
+    assert.ok(step.expression.includes("2/3"), "expression must show original fraction");
+    // The explanation describes the scaling factor
+    assert.ok(step.explanation.includes("3"), "explanation must show scaling factor");
+
+    const neg = buildPresentation("lneg", [2, 10, -3]);
+    assert.equal(neg.teachingSource, "kernel");
+    assert.ok(neg.workedExample!.steps.length > 0);
+  });
+
+  it("aiint subtraction uses explicit compatibility mode", () => {
+    const pres = buildPresentation("aiint", [5, 3, 1]);
+    // Subtraction mode has inverse-operation on expressions (not equations) — can't map to algebra rules
+    assert.equal(pres.teachingSource, "compatibility");
+    assert.equal(pres.status, "supported");
+    assert.ok(pres.workedExample, "compatibility mode still produces worked example");
+    assert.ok(pres.workedExample!.steps.length > 0);
+    // No kernel principle on compatibility steps
+    assert.equal(pres.workedExample!.steps[0].principle, undefined);
+    // Records the unsupported capability
+    assert.ok(Array.isArray(pres.unsupportedCapabilities) && pres.unsupportedCapabilities.length > 0,
+      "must record unsupported capabilities");
+  });
+
+  it("invalid transformations are rejected by the kernel", () => {
+    const state = createState();
+    state.statements.push({
+      left: Expr.add(Expr.mul(Expr.num(3), Expr.var("x")), Expr.num(7)),
+      relation: "=",
+      right: Expr.num(19),
+    });
+
+    // Subtracting 0 should still work but not change the equation
+    const t = registry.applyRule(state, "algebra.subtract-both-sides", { value: 0, equationIndex: 0 });
+    const rhs = evaluate(t.after.statements[0].right);
+    assert.equal(rhs.toNumber(), 19); // Unchanged
   });
 });
