@@ -13,7 +13,7 @@ import {
   type MathExpr, type MathState,
 } from "./math-kernel";
 import { adaptProblem, kernelWorkedSteps, rulesUsed } from "./kernel-adapter";
-import { teachingPresentationFrom, validateTeachingPresentation, type TeachingPresentation } from "./teaching-presentation";
+import { teachingPresentationFrom, validateTeachingPresentation, type TeachingPresentation, type KernelFailure } from "./teaching-presentation";
 import { FAMILIES } from "./families";
 import type { Problem, Step, Justification } from "./family-kit";
 import type { Module, Screen } from "./content";
@@ -609,5 +609,167 @@ describe("acceptance: learner-facing output correctness", () => {
     const t = registry.applyRule(state, "algebra.subtract-both-sides", { value: 0, equationIndex: 0 });
     const rhs = evaluate(t.after.statements[0].right);
     assert.equal(rhs.toNumber(), 19); // Unchanged
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════════
+// 10. MATHEMATICAL CONSISTENCY — displayed steps match kernel records
+// ════════════════════════════════════════════════════════════════════════════════
+
+describe("acceptance: mathematical consistency verification", () => {
+  it("kernel-backed steps match transformation records exactly", () => {
+    // Build a presentation and independently re-adapt to get kernel records
+    const pres = buildPresentation("lin", [3, 7, 4]);
+    assert.equal(pres.teachingSource, "kernel");
+
+    // Re-adapt to get the authoritative records
+    const def = FAMILIES.get("lin")!;
+    const problem = def.solve([3, 7, 4]);
+    problem.family = "lin";
+    problem.params = [3, 7, 4];
+    problem.answer = "4";
+    problem.bugs = [];
+    const adapted = adaptProblem(problem);
+    const kSteps = kernelWorkedSteps(adapted);
+
+    // Every displayed step must match the kernel's records
+    const displayed = pres.workedExample!.steps;
+    assert.equal(displayed.length, kSteps.length, "step count must match");
+    for (let i = 0; i < displayed.length; i++) {
+      assert.equal(displayed[i].expression, kSteps[i].expression, `step ${i} expression`);
+      assert.equal(displayed[i].explanation, kSteps[i].explanation, `step ${i} explanation`);
+      assert.equal(displayed[i].principle, kSteps[i].principle, `step ${i} principle`);
+      assert.equal(displayed[i].before, kSteps[i].before, `step ${i} before`);
+      assert.equal(displayed[i].after, kSteps[i].after, `step ${i} after`);
+    }
+  });
+
+  it("consistency check catches tampered expression", () => {
+    const pres = buildPresentation("lin", [3, 7, 4]);
+    assert.equal(pres.teachingSource, "kernel");
+
+    // Tamper with a step's expression
+    const tampered = { ...pres, workedExample: {
+      ...pres.workedExample!,
+      steps: pres.workedExample!.steps.map((s, i) =>
+        i === 0 ? { ...s, expression: "WRONG" } : s
+      ),
+    }};
+
+    const def = FAMILIES.get("lin")!;
+    const problem = def.solve([3, 7, 4]);
+    problem.family = "lin";
+    problem.params = [3, 7, 4];
+    problem.answer = "4";
+    problem.bugs = [];
+
+    const errors = validateTeachingPresentation(problem, tampered);
+    assert.ok(errors.some((e) => e.includes("expression") && e.includes("WRONG")),
+      `expected expression mismatch error, got: ${errors.join("; ")}`);
+  });
+
+  it("consistency check catches tampered before-state", () => {
+    const pres = buildPresentation("eqfrac", [2, 3, 9]);
+    assert.equal(pres.teachingSource, "kernel");
+
+    const tampered = { ...pres, workedExample: {
+      ...pres.workedExample!,
+      steps: pres.workedExample!.steps.map((s) => ({ ...s, before: "FAKE" })),
+    }};
+
+    const def = FAMILIES.get("eqfrac")!;
+    const problem = def.solve([2, 3, 9]);
+    problem.family = "eqfrac";
+    problem.params = [2, 3, 9];
+    problem.answer = String(problem.answer);
+    problem.bugs = [];
+
+    const errors = validateTeachingPresentation(problem, tampered);
+    assert.ok(errors.some((e) => e.includes("before-state")),
+      `expected before-state mismatch, got: ${errors.join("; ")}`);
+  });
+
+  it("consistency check catches tampered principle", () => {
+    const pres = buildPresentation("rect", [5, 3]);
+    assert.equal(pres.teachingSource, "kernel");
+
+    const tampered = { ...pres, workedExample: {
+      ...pres.workedExample!,
+      steps: pres.workedExample!.steps.map((s) => ({ ...s, principle: "Fake principle" })),
+    }};
+
+    const def = FAMILIES.get("rect")!;
+    const problem = def.solve([5, 3]);
+    problem.family = "rect";
+    problem.params = [5, 3];
+    problem.answer = String(problem.answer);
+    problem.bugs = [];
+
+    const errors = validateTeachingPresentation(problem, tampered);
+    assert.ok(errors.some((e) => e.includes("principle")),
+      `expected principle mismatch, got: ${errors.join("; ")}`);
+  });
+
+  it("multiple families all pass consistency verification", () => {
+    const cases: [string, number[]][] = [
+      ["lin", [2, -5, 8]], ["ahone", [0, 5, 3]], ["lneg", [2, 10, -3]],
+      ["aeind", [3, 4, 5, 6]], ["eqfrac", [1, 4, 20]], ["rect", [12, 8]],
+      ["rperim", [7, 4]], ["aocart", [3, 4, 0]], ["aiint", [5, 3, 0]],
+      ["fadd", [2, 3, 5, 1]], ["aearea", [6, 4]],
+    ];
+
+    for (const [family, params] of cases) {
+      const pres = buildPresentation(family, params);
+      if (pres.teachingSource !== "kernel") continue; // skip compatibility
+      const def = FAMILIES.get(family)!;
+      const problem = def.solve(params);
+      problem.family = family;
+      problem.params = params;
+      problem.answer = String(problem.answer);
+      problem.bugs = [];
+      const errors = validateTeachingPresentation(problem, pres);
+      assert.deepEqual(errors, [], `${family}(${params}): ${errors.join("; ")}`);
+    }
+  });
+});
+
+// ════════════════════════════════════════════════════════════════════════════════
+// 11. FAILURE CLASSIFICATION — no silent fallbacks
+// ════════════════════════════════════════════════════════════════════════════════
+
+describe("acceptance: failure classification", () => {
+  it("unsupported rule records diagnostic with rule names", () => {
+    // aiint subtraction has an unsupported inverse-operation on expressions
+    const pres = buildPresentation("aiint", [5, 3, 1]);
+    assert.equal(pres.teachingSource, "compatibility");
+    assert.ok(pres.kernelDiagnostic, "must have kernel diagnostic");
+    assert.equal(pres.kernelDiagnostic!.kind, "unsupported-rule");
+    if (pres.kernelDiagnostic!.kind === "unsupported-rule") {
+      assert.ok(pres.kernelDiagnostic!.rules.length > 0, "must name the unsupported rules");
+    }
+  });
+
+  it("kernel-backed families do NOT have a kernel diagnostic", () => {
+    const pres = buildPresentation("lin", [3, 7, 4]);
+    assert.equal(pres.teachingSource, "kernel");
+    assert.equal(pres.kernelDiagnostic, undefined, "no diagnostic for fully kernel-backed");
+  });
+
+  it("compatibility-mode families preserve worked example", () => {
+    // aiint subtraction falls to compatibility but still produces valid teaching
+    const pres = buildPresentation("aiint", [5, 3, 1]);
+    assert.equal(pres.status, "supported");
+    assert.ok(pres.workedExample, "compatibility mode still has worked example");
+    assert.ok(pres.workedExample!.steps.length > 0);
+  });
+
+  it("unsupported capabilities are recorded for partial adaptation", () => {
+    const pres = buildPresentation("aiint", [5, 3, 1]);
+    assert.ok(Array.isArray(pres.unsupportedCapabilities));
+    assert.ok(pres.unsupportedCapabilities!.length > 0);
+    // The specific unsupported rule should be named
+    assert.ok(pres.unsupportedCapabilities!.some((c) =>
+      c === "inverse-operation" || c === "number-line-movement"
+    ));
   });
 });

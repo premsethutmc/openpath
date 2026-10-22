@@ -2,7 +2,7 @@ import type { Module, Question, Screen } from "./content";
 import type { Bug, Def, Problem, Step, Visual } from "./family-kit";
 import { explainStep, FAMILIES } from "./families";
 import { graph } from "./graph";
-import { adaptProblem, kernelWorkedSteps } from "./kernel-adapter";
+import { adaptProblem, kernelWorkedSteps, type AdaptedProblem, type KernelWorkedStep } from "./kernel-adapter";
 
 export const TEACHING_PRESENTATION_VERSION = "openpath-teaching-presentation@1" as const;
 
@@ -45,6 +45,12 @@ export interface TeachingPresentation {
   teachingSource?: "kernel" | "compatibility";
   /** For compatibility-mode families, records which kernel rules or capabilities are missing. */
   unsupportedCapabilities?: string[];
+  /**
+   * Diagnostic information about kernel adaptation failure.
+   * Not exposed to learners; available for development and debugging.
+   * Present only when kernel adaptation did not fully succeed.
+   */
+  kernelDiagnostic?: KernelFailure;
 }
 
 export interface TeachingScope {
@@ -352,6 +358,108 @@ function validateFamilyStructure(problem: Problem): string[] {
   return e;
 }
 
+// ════════════════════════════════════════════════════════════════════════════════
+// KERNEL FAILURE CLASSIFICATION
+// ════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Classify kernel adaptation failures so invalid mathematics never silently
+ * falls back to apparently valid teaching.
+ */
+export type KernelFailure =
+  | { kind: "unsupported-rule"; rules: string[] }
+  | { kind: "unsupported-family"; family: string }
+  | { kind: "invalid-transformation"; message: string }
+  | { kind: "kernel-error"; message: string };
+
+/**
+ * Classify an error thrown during kernel adaptation.
+ * Precondition violations (invalid math) are distinguished from
+ * unexpected implementation errors.
+ */
+function classifyKernelError(error: unknown, problem: Problem): KernelFailure {
+  const msg = error instanceof Error ? error.message : String(error);
+  if (/precondition/i.test(msg)) {
+    return { kind: "invalid-transformation", message: msg };
+  }
+  if (/unknown.*rule|not.*found|no.*rule/i.test(msg)) {
+    return { kind: "unsupported-rule", rules: [msg] };
+  }
+  return { kind: "kernel-error", message: `${problem.family}: ${msg}` };
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+// KERNEL CONSISTENCY VERIFICATION
+// ════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Verify that displayed presentation steps match the underlying kernel
+ * transformation records. Uses the transformation records as the
+ * source of truth — does NOT duplicate the rule engine.
+ *
+ * Checks:
+ * 1. Step count matches transformation count.
+ * 2. Each step's before/after text matches the corresponding transformation's explanation.
+ * 3. Each step's principle matches the transformation's explanation principle.
+ * 4. Transformation chain is contiguous (step N's before-state = step N-1's after-state).
+ * 5. No reordered or missing steps.
+ */
+function verifyKernelConsistency(
+  adapted: AdaptedProblem,
+  displayedSteps: TeachingPresentationStep[],
+  kSteps: KernelWorkedStep[],
+): string[] {
+  const errors: string[] = [];
+
+  // 1. Step count must match
+  if (displayedSteps.length !== kSteps.length) {
+    errors.push(`Displayed step count (${displayedSteps.length}) differs from kernel step count (${kSteps.length}).`);
+    return errors; // Can't verify individual steps if counts differ
+  }
+
+  // 2–3. Each displayed step must match the kernel's records
+  for (let i = 0; i < displayedSteps.length; i++) {
+    const displayed = displayedSteps[i];
+    const kernel = kSteps[i];
+
+    // Expression (the action) must match exactly
+    if (displayed.expression !== kernel.expression) {
+      errors.push(`Step ${i}: displayed expression "${displayed.expression}" does not match kernel "${kernel.expression}".`);
+    }
+
+    // Explanation (the justification) must match exactly
+    if (displayed.explanation !== kernel.explanation) {
+      errors.push(`Step ${i}: displayed explanation does not match kernel explanation.`);
+    }
+
+    // Principle must match exactly
+    if (displayed.principle !== kernel.principle) {
+      errors.push(`Step ${i}: displayed principle "${displayed.principle}" does not match kernel "${kernel.principle}".`);
+    }
+
+    // Before/after text must match the kernel's records
+    if (displayed.before !== kernel.before) {
+      errors.push(`Step ${i}: displayed before-state does not match kernel before-state.`);
+    }
+    if (displayed.after !== kernel.after) {
+      errors.push(`Step ${i}: displayed after-state does not match kernel after-state.`);
+    }
+  }
+
+  // 4. Transformation chain continuity (uses kernel's own records, not presentation text)
+  const transformedSteps = adapted.steps.filter((s) => s.transformation !== null);
+  for (let i = 1; i < transformedSteps.length; i++) {
+    const prev = transformedSteps[i - 1].transformation!;
+    const curr = transformedSteps[i].transformation!;
+    // The kernel state objects must be the same reference (chained in adaptProblem)
+    if (curr.before !== prev.after) {
+      errors.push(`Transformation chain broken at step ${i}: before-state is not the previous after-state.`);
+    }
+  }
+
+  return errors;
+}
+
 /** Checks every displayed mathematical claim used by the six typed adapters. */
 export function validateTeachingPresentation(problem: Problem, presentation: Pick<TeachingPresentation, "workedExample" | "visual" | "teachingSource">): string[] {
   const errors: string[] = [];
@@ -360,12 +468,27 @@ export function validateTeachingPresentation(problem: Problem, presentation: Pic
   if (!family || !Number.isFinite(answer) || !family.validate(problem.params, answer)) errors.push("The family answer does not validate.");
   errors.push(...validateFamilyStructure(problem));
   if (presentation.teachingSource === "kernel") {
-    // Kernel-backed: the kernel's own rule verification ensures mathematical correctness.
-    // Validate that steps exist and have content.
-    if (!presentation.workedExample || presentation.workedExample.steps.length === 0)
+    // Kernel-backed: verify steps exist, have content, and match kernel transformation records.
+    if (!presentation.workedExample || presentation.workedExample.steps.length === 0) {
       errors.push("Kernel-backed presentation has no worked steps.");
-    if (presentation.workedExample?.steps.some((s) => !s.expression || !s.explanation))
+    } else if (presentation.workedExample.steps.some((s) => !s.expression || !s.explanation)) {
       errors.push("Kernel-backed worked steps have empty expressions or explanations.");
+    } else {
+      // Cross-check displayed steps against the kernel's verified transformation records.
+      // Re-adapt the problem to get the authoritative records (does not duplicate the rule engine;
+      // re-uses the same registry and rules that produced the teaching).
+      try {
+        const adapted = adaptProblem(problem);
+        if (adapted.fullyAdapted) {
+          const kSteps = kernelWorkedSteps(adapted);
+          errors.push(...verifyKernelConsistency(adapted, presentation.workedExample.steps, kSteps));
+        } else {
+          errors.push("Kernel-backed presentation claims kernel source but problem is not fully adapted.");
+        }
+      } catch (err) {
+        errors.push(`Kernel consistency check failed: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
   } else {
     // Compatibility mode: compare against familyWorkedSteps template output.
     const expected = familyWorkedSteps(problem);
@@ -431,8 +554,10 @@ export function teachingPresentationFrom(args: {
   let steps: TeachingPresentationStep[];
   let teachingSource: "kernel" | "compatibility" = "compatibility";
   let unsupportedCapabilities: string[] | undefined;
+  let kernelFailure: KernelFailure | undefined;
 
   if (problem && problem.steps.some((s) => s.justification)) {
+    let failure: KernelFailure | undefined;
     try {
       const adapted = adaptProblem(problem);
       if (adapted.fullyAdapted) {
@@ -448,6 +573,8 @@ export function teachingPresentationFrom(args: {
           }));
           teachingSource = "kernel";
         } else {
+          // Kernel produced no steps despite full adaptation — implementation error
+          failure = { kind: "kernel-error", message: `${problem.family}: fully adapted but kernelWorkedSteps returned empty` };
           steps = familyWorkedSteps(problem);
         }
       } else {
@@ -455,14 +582,31 @@ export function teachingPresentationFrom(args: {
         steps = familyWorkedSteps(problem);
         const unadapted = adapted.steps.filter((s) => !s.adapted);
         if (unadapted.length > 0) {
-          unsupportedCapabilities = unadapted.map((s) =>
+          const missingRules = unadapted.map((s) =>
             s.original.justification?.rule ?? s.original.op
           );
+          unsupportedCapabilities = missingRules;
+          failure = { kind: "unsupported-rule", rules: missingRules };
         }
       }
-    } catch {
-      // Kernel adaptation failed entirely: explicit compatibility mode
-      steps = familyWorkedSteps(problem);
+    } catch (err) {
+      // Classify the error: invalid math must not silently become valid-looking teaching
+      failure = classifyKernelError(err, problem);
+      if (failure.kind === "invalid-transformation") {
+        // Mathematical precondition violation: do NOT fall back to compatibility —
+        // the problem itself has invalid mathematics that must be surfaced.
+        steps = [];
+      } else {
+        // Unsupported rule/family or unexpected error: compatibility mode is safe
+        steps = familyWorkedSteps(problem);
+        if (failure.kind === "unsupported-family") {
+          unsupportedCapabilities = [problem.family];
+        }
+      }
+    }
+    // Record failure diagnostic (not exposed to learners; available for development)
+    if (failure) {
+      kernelFailure = failure;
     }
   } else if (problem) {
     // No justified steps: compatibility mode
@@ -497,6 +641,7 @@ export function teachingPresentationFrom(args: {
     ...(!supported ? { unsupportedReason: problem ? "This family has no ordered worked steps yet." : "No deterministic family example is available for this concept." } : {}),
     teachingSource,
     ...(unsupportedCapabilities?.length ? { unsupportedCapabilities } : {}),
+    ...(kernelFailure ? { kernelDiagnostic: kernelFailure } : {}),
   };
   if (problem) {
     const errors = validateTeachingPresentation(problem, result);
