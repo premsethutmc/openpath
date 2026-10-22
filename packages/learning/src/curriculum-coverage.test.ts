@@ -1,20 +1,14 @@
 /**
- * Curriculum-wide mathematical teaching coverage tests.
+ * Curriculum-wide coverage tests — honest numbers.
  *
- * These tests verify that the op-based kernel adaptation achieves
- * broad coverage across the full 1,080 family curriculum, and that
- * kernel-backed teaching preserves mathematical correctness.
+ * After removing unverifiable op mappings from the kernel adapter,
+ * only families whose every step passes verify() count as kernel-backed.
+ * These tests reflect that reality rather than inflated thresholds.
  */
 import { describe, it } from "node:test";
 import * as assert from "node:assert/strict";
 import { FAMILIES } from "./families.js";
-import {
-  adaptProblem,
-  kernelWorkedSteps,
-  rulesUsed,
-  hasOpMappableSteps,
-} from "./kernel-adapter.js";
-import { teachingPresentationFrom } from "./teaching-presentation.js";
+import { adaptProblem, hasOpMappableSteps } from "./kernel-adapter.js";
 
 // ════════════════════════════════════════════════════════════════════════════════
 // Helpers
@@ -42,70 +36,114 @@ function tryGetProblem(def: any): any {
 }
 
 // ════════════════════════════════════════════════════════════════════════════════
-// Coverage thresholds
+// Classification — scan every family once
 // ════════════════════════════════════════════════════════════════════════════════
 
-describe("curriculum-wide coverage: threshold", () => {
-  let kernelBacked = 0;
-  let compatibility = 0;
-  let noProblem = 0;
-  const kernelByDomain = new Map<string, number>();
-  const totalByDomain = new Map<string, number>();
+interface CoverageStats {
+  total: number;
+  kernelBacked: number;
+  partiallyVerified: number;
+  compatibility: number;
+  noProblem: number;
+  kernelFamilyIds: Set<string>;
+}
 
-  // Run once for all threshold tests
-  const families = [...FAMILIES.entries()];
-  for (const [id, def] of families) {
-    const domain = (def.competency || "").split(".")[1] || "unknown";
-    totalByDomain.set(domain, (totalByDomain.get(domain) || 0) + 1);
+function classifyAll(): CoverageStats {
+  const stats: CoverageStats = {
+    total: 0,
+    kernelBacked: 0,
+    partiallyVerified: 0,
+    compatibility: 0,
+    noProblem: 0,
+    kernelFamilyIds: new Set(),
+  };
 
+  for (const [id, def] of FAMILIES) {
+    stats.total++;
     const problem = tryGetProblem(def);
-    if (!problem) { noProblem++; continue; }
+    if (!problem) {
+      stats.noProblem++;
+      continue;
+    }
 
     try {
       const adapted = adaptProblem(problem);
-      const kSteps = kernelWorkedSteps(adapted);
-      if (adapted.fullyAdapted && kSteps.length > 0) {
-        kernelBacked++;
-        kernelByDomain.set(domain, (kernelByDomain.get(domain) || 0) + 1);
+      if (adapted.fullyAdapted) {
+        stats.kernelBacked++;
+        stats.kernelFamilyIds.add(id);
+      } else if (adapted.steps.some((s: any) => s.adapted)) {
+        stats.partiallyVerified++;
       } else {
-        compatibility++;
+        stats.compatibility++;
       }
     } catch {
-      compatibility++;
+      stats.compatibility++;
     }
   }
 
-  it("at least 80% of families are kernel-backed", () => {
-    const total = families.length;
-    const pct = (kernelBacked / total) * 100;
-    assert.ok(pct >= 80, `Only ${pct.toFixed(1)}% kernel-backed (${kernelBacked}/${total}), need ≥80%`);
+  return stats;
+}
+
+const stats = classifyAll();
+
+// ════════════════════════════════════════════════════════════════════════════════
+// Honest coverage numbers
+// ════════════════════════════════════════════════════════════════════════════════
+
+describe("curriculum-wide coverage: honest numbers", () => {
+  it("total families count is 1,080", () => {
+    assert.equal(stats.total, 1080,
+      `Expected 1,080 families, got ${stats.total}`);
   });
 
-  it("no domain falls below 70% coverage", () => {
-    for (const [domain, total] of totalByDomain) {
-      const kernel = kernelByDomain.get(domain) || 0;
-      const pct = (kernel / total) * 100;
-      assert.ok(pct >= 70 || total < 10,
-        `Domain "${domain}" only ${pct.toFixed(1)}% (${kernel}/${total}), need ≥70%`);
-    }
+  it("kernel-backed families (all steps verified) is at least 100", () => {
+    // Sanity floor, not an aspirational target.
+    assert.ok(stats.kernelBacked >= 100,
+      `Only ${stats.kernelBacked} kernel-backed families; sanity floor is 100`);
+  });
+
+  it("partially-verified families are reported separately", () => {
+    // They exist and are distinct from kernel-backed.
+    assert.ok(stats.partiallyVerified > 0,
+      "Expected some partially-verified families");
+    assert.ok(stats.partiallyVerified !== stats.kernelBacked,
+      "Partially-verified count should differ from kernel-backed");
+  });
+
+  it("compatibility families are NOT counted as kernel-backed", () => {
+    // Compatibility families must not overlap with kernel-backed.
+    assert.ok(stats.compatibility > 0,
+      "Expected some compatibility-mode families");
+    // The kernel-backed set should be much smaller than total minus noProblem.
+    const generatable = stats.total - stats.noProblem;
+    assert.ok(stats.kernelBacked < generatable,
+      "Kernel-backed should be a subset of generatable families");
+  });
+
+  it("total adds up: kernel + partial + compat + noProblem = total", () => {
+    const sum = stats.kernelBacked + stats.partiallyVerified
+              + stats.compatibility + stats.noProblem;
+    assert.equal(sum, stats.total,
+      `${stats.kernelBacked} + ${stats.partiallyVerified} + ${stats.compatibility} + ${stats.noProblem} = ${sum}, expected ${stats.total}`);
   });
 
   it("fewer than 40 families cannot generate problems", () => {
-    assert.ok(noProblem < 40,
-      `${noProblem} families cannot generate problems, threshold is <40`);
+    assert.ok(stats.noProblem < 40,
+      `${stats.noProblem} families cannot generate problems, threshold is <40`);
   });
 });
 
 // ════════════════════════════════════════════════════════════════════════════════
-// Mathematical correctness of kernel-backed teaching
+// Correctness — adapted steps actually verify arithmetic
 // ════════════════════════════════════════════════════════════════════════════════
 
-describe("curriculum-wide coverage: kernel correctness", () => {
-  it("every kernel-backed family produces worked steps with explanations", () => {
+describe("curriculum-wide coverage: correctness of kernel-backed families", () => {
+  it("adapted steps in kernel-backed families have verified transformations", () => {
     let checked = 0;
     const failures: string[] = [];
 
-    for (const [id, def] of FAMILIES) {
+    for (const id of stats.kernelFamilyIds) {
+      const def = FAMILIES.get(id)!;
       const problem = tryGetProblem(def);
       if (!problem) continue;
 
@@ -113,286 +151,98 @@ describe("curriculum-wide coverage: kernel correctness", () => {
         const adapted = adaptProblem(problem);
         if (!adapted.fullyAdapted) continue;
 
-        const kSteps = kernelWorkedSteps(adapted);
-        if (kSteps.length === 0) {
-          failures.push(`${id}: kernel-backed but no worked steps`);
-          continue;
-        }
-
-        for (const step of kSteps) {
-          if (!step.explanation) {
-            failures.push(`${id}: step missing explanation`);
-          }
-          if (!step.principle) {
-            failures.push(`${id}: step missing principle`);
-          }
-        }
-        checked++;
-      } catch {}
-    }
-
-    assert.ok(checked > 800, `Only checked ${checked} families, expected >800`);
-    assert.ok(failures.length === 0,
-      `${failures.length} failures:\n${failures.slice(0, 10).join("\n")}`);
-  });
-
-  it("every kernel-backed family has at least one rule in its transformation chain", () => {
-    const failures: string[] = [];
-
-    for (const [id, def] of FAMILIES) {
-      const problem = tryGetProblem(def);
-      if (!problem) continue;
-
-      try {
-        const adapted = adaptProblem(problem);
-        if (!adapted.fullyAdapted) continue;
-
-        const rules = rulesUsed(adapted);
-        if (rules.length === 0) {
-          failures.push(`${id}: fully adapted but no rules used`);
-        }
-
-        // Every rule must be a known kernel rule
-        for (const r of rules) {
-          if (!r.startsWith("arithmetic.") && !r.startsWith("comparison.") &&
-              !r.startsWith("fraction.") && !r.startsWith("algebra.") &&
-              !r.startsWith("geometry.") && !r.startsWith("decomposition.")) {
-            failures.push(`${id}: unknown rule prefix "${r}"`);
-          }
-        }
-      } catch {}
-    }
-
-    assert.ok(failures.length === 0,
-      `${failures.length} failures:\n${failures.slice(0, 10).join("\n")}`);
-  });
-
-  it("op-adapted steps preserve the family solver's answer", () => {
-    let checked = 0;
-    const failures: string[] = [];
-
-    for (const [id, def] of FAMILIES) {
-      const problem = tryGetProblem(def);
-      if (!problem) continue;
-      if (problem.steps.some((s: any) => s.justification)) continue; // Skip explicit families
-
-      try {
-        const adapted = adaptProblem(problem);
-        if (!adapted.fullyAdapted) continue;
-
-        // Check each adapted step includes original value in its evidence or explanation
         for (const step of adapted.steps) {
-          if (!step.adapted) continue;
-          const originalValue = String(step.original.value);
-          const evidence = step.transformation?.evidence || "";
-          const explanation = step.explanation?.justification || "";
-          const combined = evidence + explanation;
-
-          if (originalValue && !combined.includes(originalValue)) {
-            failures.push(`${id}: step ${step.original.id} value "${originalValue}" not in evidence`);
+          if (!(step as any).adapted) continue;
+          if (!(step as any).transformation) {
+            failures.push(`${id}: adapted step has no transformation`);
           }
         }
         checked++;
       } catch {}
     }
 
-    assert.ok(checked > 500, `Only checked ${checked} families, expected >500`);
-    // Allow some flexibility since evidence format varies
-    assert.ok(failures.length < 50,
-      `${failures.length} failures (threshold <50):\n${failures.slice(0, 10).join("\n")}`);
+    assert.ok(checked >= 100,
+      `Only checked ${checked} kernel-backed families, expected >=100`);
+    assert.ok(failures.length === 0,
+      `${failures.length} failures:\n${failures.slice(0, 10).join("\n")}`);
   });
-});
 
-// ════════════════════════════════════════════════════════════════════════════════
-// Domain-specific coverage checks
-// ════════════════════════════════════════════════════════════════════════════════
-
-describe("curriculum-wide coverage: domain checks", () => {
-  it("core arithmetic (number domain) has strong coverage", () => {
-    let kernel = 0;
-    let total = 0;
+  it("non-adapted steps do NOT claim kernel verification", () => {
+    let checked = 0;
 
     for (const [id, def] of FAMILIES) {
-      if (!(def.competency || "").includes(".number.")) continue;
-      total++;
       const problem = tryGetProblem(def);
       if (!problem) continue;
+
       try {
         const adapted = adaptProblem(problem);
-        if (adapted.fullyAdapted) kernel++;
-      } catch {}
-    }
+        if (adapted.fullyAdapted) continue; // skip fully-adapted families
 
-    const pct = (kernel / total) * 100;
-    assert.ok(pct >= 80, `Number domain: ${pct.toFixed(1)}% (${kernel}/${total}), need ≥80%`);
-  });
-
-  it("algebra domain has strong coverage", () => {
-    let kernel = 0;
-    let total = 0;
-
-    for (const [id, def] of FAMILIES) {
-      if (!(def.competency || "").includes(".algebra.")) continue;
-      total++;
-      const problem = tryGetProblem(def);
-      if (!problem) continue;
-      try {
-        const adapted = adaptProblem(problem);
-        if (adapted.fullyAdapted) kernel++;
-      } catch {}
-    }
-
-    const pct = (kernel / total) * 100;
-    assert.ok(pct >= 80, `Algebra domain: ${pct.toFixed(1)}% (${kernel}/${total}), need ≥80%`);
-  });
-
-  it("statistics and probability have strong coverage", () => {
-    let kernel = 0;
-    let total = 0;
-
-    for (const [id, def] of FAMILIES) {
-      const comp = def.competency || "";
-      if (!comp.includes(".statistics.") && !comp.includes(".probability.")) continue;
-      total++;
-      const problem = tryGetProblem(def);
-      if (!problem) continue;
-      try {
-        const adapted = adaptProblem(problem);
-        if (adapted.fullyAdapted) kernel++;
-      } catch {}
-    }
-
-    const pct = (kernel / total) * 100;
-    assert.ok(pct >= 80, `Stats+Prob: ${pct.toFixed(1)}% (${kernel}/${total}), need ≥80%`);
-  });
-});
-
-// ════════════════════════════════════════════════════════════════════════════════
-// Grade-level representative families
-// ════════════════════════════════════════════════════════════════════════════════
-
-describe("curriculum-wide coverage: grade-level representatives", () => {
-  // Representative families for each grade level
-  const gradeRepresentatives: Record<string, string[]> = {
-    "Grade 2": ["cnt", "aarow", "aaheavy", "aalong"],
-    "Grade 5": ["mul", "divr", "fmulw", "pct"],
-    "Grade 8": ["factor", "quad", "mean4", "root"],
-    "Grade 10": ["lin", "cdist", "condp", "vol"],
-    "Grade 12": ["cint", "dpow", "det2", "lim"],
-  };
-
-  for (const [grade, familyIds] of Object.entries(gradeRepresentatives)) {
-    it(`${grade} representative families are kernel-backed`, () => {
-      const results: string[] = [];
-
-      for (const id of familyIds) {
-        const def = FAMILIES.get(id);
-        if (!def) { results.push(`${id}: not found`); continue; }
-
-        const problem = tryGetProblem(def);
-        if (!problem) { results.push(`${id}: no problem generated`); continue; }
-
-        try {
-          const adapted = adaptProblem(problem);
-          if (!adapted.fullyAdapted) {
-            results.push(`${id}: not fully adapted`);
+        for (const step of adapted.steps) {
+          if (!(step as any).adapted) {
+            // A non-adapted step should not have a verified transformation.
+            assert.ok(!(step as any).transformation?.verified,
+              `${id}: non-adapted step falsely claims verification`);
           }
-        } catch (e: any) {
-          results.push(`${id}: error — ${e.message}`);
         }
-      }
-
-      assert.ok(results.length === 0,
-        `${grade} failures:\n${results.join("\n")}`);
-    });
-  }
-});
-
-// ════════════════════════════════════════════════════════════════════════════════
-// Teaching presentation integration
-// ════════════════════════════════════════════════════════════════════════════════
-
-describe("curriculum-wide coverage: kernel adaptation reach", () => {
-  it("explicit-teaching families are fully adapted by the kernel", () => {
-    const EXPLICIT = [
-      "aeind", "aiint", "eqfrac", "fadd", "adfcmp", "adfname", "adshade",
-      "aocart", "apcartn", "lin", "ahone", "lneg", "rect", "aearea", "rperim",
-    ];
-
-    let adapted = 0;
-    const failures: string[] = [];
-
-    for (const id of EXPLICIT) {
-      const def = FAMILIES.get(id);
-      if (!def) continue;
-
-      const problem = tryGetProblem(def);
-      if (!problem) continue;
-
-      try {
-        const result = adaptProblem(problem);
-        if (result.fullyAdapted) {
-          adapted++;
-        } else {
-          failures.push(`${id}: not fully adapted`);
-        }
-      } catch (e: any) {
-        failures.push(`${id}: error — ${e.message}`);
-      }
-    }
-
-    assert.ok(adapted > 10, `Only ${adapted} explicit families adapted, expected >10`);
-  });
-
-  it("op-adapted families get kernel transformations for mathematical backing", () => {
-    let adapted = 0;
-
-    for (const [id, def] of FAMILIES) {
-      const problem = tryGetProblem(def);
-      if (!problem) continue;
-      if (problem.steps.some((s: any) => s.justification)) continue;
-
-      try {
-        const result = adaptProblem(problem);
-        if (result.fullyAdapted) adapted++;
+        checked++;
       } catch {}
     }
 
-    // The op-based adaptation should cover most non-explicit families
-    assert.ok(adapted > 800, `Only ${adapted} op-adapted families, expected >800`);
+    assert.ok(checked > 100,
+      `Only checked ${checked} non-adapted families, expected >100`);
   });
 });
 
 // ════════════════════════════════════════════════════════════════════════════════
-// Op-mapping consistency
+// hasOpMappableSteps vs adaptProblem consistency
 // ════════════════════════════════════════════════════════════════════════════════
 
 describe("curriculum-wide coverage: op-mapping consistency", () => {
-  it("hasOpMappableSteps agrees with adaptProblem for sampled families", () => {
-    let checked = 0;
-    const disagreements: string[] = [];
+  it("if a family IS fully adapted, hasOpMappableSteps is true (or it has justifications)", () => {
+    const failures: string[] = [];
+
+    for (const id of stats.kernelFamilyIds) {
+      const def = FAMILIES.get(id)!;
+      const problem = tryGetProblem(def);
+      if (!problem) continue;
+
+      const hasJustifications = problem.steps.some((s: any) => s.justification);
+      const hasMappable = hasOpMappableSteps(problem);
+
+      if (!hasMappable && !hasJustifications) {
+        failures.push(`${id}: fully adapted but hasOpMappableSteps=false and no justifications`);
+      }
+    }
+
+    assert.ok(failures.length === 0,
+      `${failures.length} inconsistencies:\n${failures.slice(0, 10).join("\n")}`);
+  });
+
+  it("hasOpMappableSteps=true does NOT guarantee full adaptation", () => {
+    // There should exist families where hasOpMappableSteps is true
+    // but adaptation fails (verify() rejects some steps).
+    let mappableButNotAdapted = 0;
 
     for (const [id, def] of FAMILIES) {
       const problem = tryGetProblem(def);
       if (!problem) continue;
-      if (problem.steps.some((s: any) => s.justification)) continue;
 
       const hasMappable = hasOpMappableSteps(problem);
+      if (!hasMappable) continue;
+
       try {
         const adapted = adaptProblem(problem);
-        // If hasOpMappableSteps says yes, at least one step should adapt.
-        // Exception: steps with null values fail adaptation even with a mapped op,
-        // so we only flag disagreements when all steps have non-null values.
-        const allHaveValues = problem.steps.every((s: any) => s.value != null);
-        if (hasMappable && allHaveValues && adapted.steps.every((s: any) => !s.adapted)) {
-          disagreements.push(`${id}: hasOpMappableSteps=true but no steps adapted`);
+        if (!adapted.fullyAdapted) {
+          mappableButNotAdapted++;
         }
-      } catch {}
-      checked++;
+      } catch {
+        mappableButNotAdapted++;
+      }
     }
 
-    assert.ok(checked > 500, `Only checked ${checked}, expected >500`);
-    assert.ok(disagreements.length === 0,
-      `${disagreements.length} disagreements:\n${disagreements.slice(0, 10).join("\n")}`);
+    assert.ok(mappableButNotAdapted > 0,
+      "Expected some families where hasOpMappableSteps=true but adaptation fails — " +
+      "this confirms that verify() gates adaptation honestly");
   });
 });

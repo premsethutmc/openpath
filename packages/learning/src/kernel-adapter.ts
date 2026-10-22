@@ -241,13 +241,20 @@ interface OpMapping {
 
 /**
  * Mapping from step `op` values to kernel rules.
- * Each entry maps a family operation to the kernel rule that governs it,
- * with arithmetic verification. Only operations whose mathematical meaning
- * is unambiguous are included — domain-specific ops (e.g. "find the shelf")
- * remain in compatibility mode.
+ *
+ * VERIFICATION POLICY: A step is kernel-backed only when the adapter can
+ * independently verify the arithmetic from its inputs and output.
+ * An operation name alone is insufficient — the inputs, output, semantics
+ * and preconditions must be enough to confirm the rule.
+ *
+ * Operations whose mathematical meaning requires context beyond
+ * (inputs → output) — integrate, differentiate, factorise, solve, etc. —
+ * remain in compatibility mode. They are valid teaching content but
+ * cannot be independently verified by the kernel.
  */
 const OP_RULE_MAP = new Map<string, OpMapping>([
-  // Multiplicative operations → arithmetic.multiplicative-composition
+  // ── Multiplicative operations ───────────────────────────────────────────────────────
+  // Each verifies: inputs ×/÷ → result within floating-point tolerance.
   ["multiply", {
     ruleId: "arithmetic.multiplicative-composition",
     principle: "Multiplication: combining equal groups",
@@ -290,8 +297,15 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
     verify: (inputs, result) => inputs.length >= 1 && Math.abs(inputs[0] / 2 - result) < 1e-9,
     evidence: ([a], r) => `${a} ÷ 2 = ${r}`,
   }],
+  ["share", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Sharing equally: dividing into equal groups",
+    buildExpr: ([a, b]) => Expr.div(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && inputs[1] !== 0 && Math.abs(inputs[0] / inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} ÷ ${b} = ${r} (sharing equally)`,
+  }],
 
-  // Additive operations → arithmetic.additive-composition
+  // ── Additive operations ───────────────────────────────────────────────────────────
   ["add", {
     ruleId: "arithmetic.additive-composition",
     principle: "Addition: combining quantities",
@@ -306,6 +320,13 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
   ["subtract", {
     ruleId: "arithmetic.additive-composition",
     principle: "Subtraction: finding the difference",
+    buildExpr: ([a, b]) => Expr.sub(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] - inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} − ${b} = ${r}`,
+  }],
+  ["difference", {
+    ruleId: "arithmetic.additive-composition",
+    principle: "Finding the difference between values",
     buildExpr: ([a, b]) => Expr.sub(Expr.num(a), Expr.num(b)),
     verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] - inputs[1] - result) < 1e-9,
     evidence: ([a, b], r) => `${a} − ${b} = ${r}`,
@@ -332,547 +353,54 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
     evidence: ([a, b], r) => `${a} + ${b} = ${r}`,
   }],
 
-  // Evaluation operations → arithmetic.evaluate
-  ["evaluate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Evaluating an expression",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,  // Evaluation is verified by the family solver
-    evidence: (inputs, r) => `Evaluate(${inputs.join(", ")}) = ${r}`,
-  }],
-  ["count", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Counting objects or elements",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Count: ${r}`,
-  }],
-  ["read", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Reading a value",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Read: ${r}`,
-  }],
-  ["write", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Writing a mathematical expression",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Write: ${r}`,
-  }],
-  ["simplify", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Simplifying: reducing to simplest form",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Simplify: ${r}`,
-  }],
-  ["convert", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Converting between representations",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Convert: ${r}`,
-  }],
-  ["round", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Rounding to the required precision",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Round: ${r}`,
-  }],
-  ["rewrite", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Rewriting in an equivalent form",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Rewrite: ${r}`,
-  }],
-  ["find", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding a value",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Find: ${r}`,
-  }],
-  ["draw", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Constructing a mathematical object",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Draw: ${r}`,
-  }],
-  ["pair", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Forming an ordered pair",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Pair: ${r}`,
-  }],
-  ["reduce", {
-    ruleId: "fraction.equivalence",
-    principle: "Reducing a fraction to lowest terms",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Reduce: ${r}`,
-  }],
-
-  // Comparison operations → comparison.ordering
-  ["compare", {
-    ruleId: "comparison.ordering",
-    principle: "Comparing quantities: which is greater, less, or equal",
-    buildExpr: ([a, b]) => Expr.num(a),
-    verify: () => true,  // Comparison verified by family solver
-    evidence: (inputs, r) => `Compare: ${inputs.join(" vs ")} → ${r}`,
-  }],
-  ["sort", {
-    ruleId: "comparison.ordering",
-    principle: "Sorting: arranging in order",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Sort: ${r}`,
-  }],
-  ["order", {
-    ruleId: "comparison.ordering",
-    principle: "Ordering: arranging from least to greatest or greatest to least",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Order: ${r}`,
-  }],
-
-  // Decomposition → decomposition.base-ten
-  ["expand", {
-    ruleId: "decomposition.base-ten",
-    principle: "Expanding: writing in place-value form",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Expand: ${r}`,
-  }],
-  ["place", {
-    ruleId: "decomposition.base-ten",
-    principle: "Place value: the value of a digit depends on its position",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Place: ${r}`,
-  }],
-
-  // Algebraic operations
-  ["solve", {
-    ruleId: "algebra.subtract-both-sides",
-    principle: "Solving: isolating the unknown",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Solve: ${r}`,
-  }],
-  ["row-reduce", {
-    ruleId: "algebra.add-both-sides",
-    principle: "Row reduction: applying row operations to a matrix",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Row-reduce: ${r}`,
-  }],
-  ["rearrange", {
-    ruleId: "algebra.subtract-both-sides",
-    principle: "Rearranging: isolating terms",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Rearrange: ${r}`,
-  }],
-
-  // Higher mathematical operations → arithmetic.evaluate (trust family solver)
-  ["classify", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Classifying a mathematical object by its properties",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Classify: ${r}`,
-  }],
-  ["substitute", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Substituting a value into an expression",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Substitute: ${r}`,
-  }],
-  ["note", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Recording an intermediate observation",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Note: ${r}`,
-  }],
-  ["integrate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Integration: finding the antiderivative or area",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Integrate: ${r}`,
-  }],
-  ["factorise", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Factorising: expressing as a product of factors",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Factorise: ${r}`,
-  }],
-  ["recall", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Recalling a mathematical fact or formula",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Recall: ${r}`,
-  }],
-  ["differentiate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Differentiation: finding the rate of change",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Differentiate: ${r}`,
-  }],
-  ["root", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding the root of an expression",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Root: ${r}`,
-  }],
-  ["choose", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Selecting the correct option or value",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Choose: ${r}`,
-  }],
-  ["check", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Verifying a result or condition",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Check: ${r}`,
-  }],
-  ["combine", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Combining terms or expressions",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Combine: ${r}`,
-  }],
-  ["list", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Listing elements or values",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `List: ${r}`,
-  }],
-  ["model", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Setting up a mathematical model",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Model: ${r}`,
-  }],
-  ["hcf", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding the highest common factor",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `HCF: ${r}`,
-  }],
-  ["lcm", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding the lowest common multiple",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `LCM: ${r}`,
-  }],
-  ["multiply-add", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Multiply then add in one step",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Multiply-add: ${r}`,
-  }],
-  ["identify", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Identifying a mathematical property or object",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Identify: ${r}`,
-  }],
-  ["split", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Splitting into parts",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Split: ${r}`,
-  }],
-  ["intersect", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding where things meet or overlap",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Intersect: ${r}`,
-  }],
-  ["transpose", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Transposing: swapping rows and columns",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Transpose: ${r}`,
-  }],
-  ["complete-square", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Completing the square",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Complete square: ${r}`,
-  }],
-  ["complete the square", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Completing the square",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Complete the square: ${r}`,
-  }],
+  // ── Verifiable single-input operations ──────────────────────────────────────────
+  // These can be verified because the mathematical relationship between
+  // input and output is unambiguous and computable.
   ["square-root", {
     ruleId: "arithmetic.evaluate",
     principle: "Finding the square root",
     buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Square root: ${r}`,
+    verify: (inputs, result) => inputs.length >= 1 && result >= 0 && Math.abs(result * result - inputs[0]) < 1e-6,
+    evidence: ([a], r) => `√${a} = ${r}`,
   }],
   ["cube-root", {
     ruleId: "arithmetic.evaluate",
     principle: "Finding the cube root",
     buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Cube root: ${r}`,
-  }],
-  ["generalise", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Generalising from specific cases",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Generalise: ${r}`,
-  }],
-  ["reflect", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Reflecting: creating a mirror image",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Reflect: ${r}`,
-  }],
-  ["test", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Testing a condition or hypothesis",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Test: ${r}`,
-  }],
-  ["distribute", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Distributing: applying the distributive law",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Distribute: ${r}`,
-  }],
-  ["interior-angle", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding interior angles of a polygon",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Interior angle: ${r}`,
-  }],
-  ["decide", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Making a mathematical decision",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Decide: ${r}`,
-  }],
-  ["partial fractions", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Decomposing into partial fractions",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Partial fractions: ${r}`,
-  }],
-  ["partial-fractions", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Decomposing into partial fractions",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Partial fractions: ${r}`,
-  }],
-  ["conjugate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Multiplying by the conjugate",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Conjugate: ${r}`,
-  }],
-  ["sign", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Determining the sign of an expression",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Sign: ${r}`,
-  }],
-  ["sign-chart", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Building a sign chart",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Sign chart: ${r}`,
-  }],
-  ["sign chart", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Building a sign chart",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Sign chart: ${r}`,
-  }],
-  ["average", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding the average",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Average: ${r}`,
-  }],
-  ["match", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Matching: pairing elements by a rule",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Match: ${r}`,
-  }],
-  ["find-pattern", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding the pattern in a sequence or structure",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Find pattern: ${r}`,
-  }],
-  ["difference", {
-    ruleId: "arithmetic.additive-composition",
-    principle: "Finding the difference between values",
-    buildExpr: ([a, b]) => Expr.sub(Expr.num(a), Expr.num(b)),
-    verify: () => true,
-    evidence: (inputs, r) => `Difference: ${r}`,
-  }],
-  ["cross", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Cross product or cross multiplication",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Cross: ${r}`,
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(result * result * result - inputs[0]) < 1e-6,
+    evidence: ([a], r) => `∛${a} = ${r}`,
   }],
   ["floor", {
     ruleId: "arithmetic.evaluate",
     principle: "Floor function: rounding down to the nearest integer",
     buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Floor: ${r}`,
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(Math.floor(inputs[0]) - result) < 1e-9,
+    evidence: ([a], r) => `⌊${a}⌋ = ${r}`,
   }],
-  ["group", {
+  ["average", {
     ruleId: "arithmetic.evaluate",
-    principle: "Grouping elements",
+    principle: "Finding the average (mean)",
     buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Group: ${r}`,
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(inputs.reduce((s, x) => s + x, 0) / inputs.length - result) < 1e-9,
+    evidence: (inputs, r) => `mean(${inputs.join(", ")}) = ${r}`,
   }],
-  ["share", {
-    ruleId: "arithmetic.multiplicative-composition",
-    principle: "Sharing equally: dividing into equal groups",
-    buildExpr: ([a, b]) => Expr.div(Expr.num(a), Expr.num(b)),
-    verify: () => true,
-    evidence: (inputs, r) => `Share: ${r}`,
-  }],
-  ["estimate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Estimating: finding an approximate value",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Estimate: ${r}`,
-  }],
-  ["inverse", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding the inverse operation",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Inverse: ${r}`,
-  }],
-  ["equate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Setting expressions equal",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Equate: ${r}`,
-  }],
-  ["pythagoras", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Applying the Pythagorean theorem",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Pythagoras: ${r}`,
-  }],
-  ["iterate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Repeating a process to converge on a result",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Iterate: ${r}`,
-  }],
-  ["cancel", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Cancelling common factors",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Cancel: ${r}`,
-  }],
-  ["invert", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Finding the inverse of a matrix or expression",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Invert: ${r}`,
-  }],
-  ["eliminate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Eliminating a variable from a system",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Eliminate: ${r}`,
-  }],
-  ["separate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Separating variables",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Separate: ${r}`,
-  }],
-  ["translate", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Translating: shifting position",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Translate: ${r}`,
-  }],
-  ["adjust", {
-    ruleId: "arithmetic.evaluate",
-    principle: "Adjusting a value",
-    buildExpr: ([a]) => Expr.num(a),
-    verify: () => true,
-    evidence: (inputs, r) => `Adjust: ${r}`,
-  }],
+
+  // ── No unverified mappings below this line ─────────────────────────────────────────
+  // Operations like integrate, differentiate, factorise, solve, classify,
+  // substitute, simplify, convert, expand, reduce, evaluate, count, read,
+  // write, compare, sort, order, place, etc. are NOT mapped because the
+  // kernel cannot independently verify their results from (inputs, output)
+  // alone. They remain in compatibility mode: valid teaching, no kernel label.
 ]);
 
 /**
  * Attempt op-based adaptation for a step without explicit justification.
- * Returns null if the op is not in the mapping.
- * For arithmetic ops, tries strict numeric verification first; if that fails,
- * degrades gracefully to arithmetic.evaluate (trusting the family solver).
+ * Returns null if the op is not in the mapping or if verification fails.
+ *
+ * SOUNDNESS POLICY: A step receives kernel-backed status ONLY when its
+ * arithmetic is independently verified. There is no fallback to
+ * arithmetic.evaluate with verify: () => true. If verification fails,
+ * the step is not adapted (adapted: false / compatibility mode).
  */
 function adaptFromOp(step: Step, state: MathState): AdaptedStep | null {
   const mapping = OP_RULE_MAP.get(step.op);
@@ -890,33 +418,12 @@ function adaptFromOp(step: Step, state: MathState): AdaptedStep | null {
   const result = typeof step.value === "number" ? step.value :
     typeof step.value === "string" ? Number(step.value) : NaN;
 
-  // For arithmetic ops, try strict numeric verification first
-  const isArithmetic = ["multiply", "divide", "add", "subtract", "square", "power",
-    "remainder", "negate", "half", "regroup", "count on"].includes(step.op);
-
-  let useMapping = mapping;
-  let verifiedArithmetic = false;
-
-  if (isArithmetic) {
-    if (numInputs.length >= 1 && !isNaN(result) && mapping.verify(numInputs, result)) {
-      verifiedArithmetic = true;
-    } else {
-      // Arithmetic verification failed — the op name is reused for a more complex
-      // computation (e.g., "multiply" for area, "divide" for percentage).
-      // Degrade to arithmetic.evaluate: trust the family solver's result.
-      if (step.value == null) return null;
-      useMapping = {
-        ruleId: "arithmetic.evaluate",
-        principle: mapping.principle,
-        buildExpr: mapping.buildExpr,
-        verify: () => true,
-        evidence: (_inputs, r) => `${step.op}: ${(step.inputs || []).filter((i) => i != null).join(", ")} → ${r}`,
-      };
-    }
-  } else {
-    // Non-arithmetic ops: accept as long as we have SOME value
-    if (step.value == null) return null;
-  }
+  // Every mapped op MUST pass its verify function.
+  // There is no graceful degradation — failed verification means not adapted.
+  if (step.value == null) return null;
+  if (numInputs.length < 1) return null;
+  if (isNaN(result)) return null;
+  if (!mapping.verify(numInputs, result)) return null;
 
   // Build before and after states
   const before = cloneState(state);
@@ -924,20 +431,18 @@ function adaptFromOp(step: Step, state: MathState): AdaptedStep | null {
   const exprKey = `step_${step.id}`;
 
   if (numInputs.length >= 2) {
-    before.expressions.set(exprKey, useMapping.buildExpr(numInputs));
+    before.expressions.set(exprKey, mapping.buildExpr(numInputs));
   } else if (numInputs.length === 1) {
     before.expressions.set(exprKey, Expr.num(numInputs[0]));
   }
-  after.expressions.set(exprKey, Expr.num(isNaN(result) ? 0 : result));
+  after.expressions.set(exprKey, Expr.num(result));
 
-  const evidence = verifiedArithmetic && numInputs.length >= 1
-    ? useMapping.evidence(numInputs, result)
-    : `${step.op}: ${(step.inputs || []).filter((i) => i != null).join(", ")} → ${step.value}`;
+  const evidence = mapping.evidence(numInputs, result);
 
   const transformation: Transformation = {
     before,
-    ruleId: useMapping.ruleId,
-    params: { inputs: numInputs, result: isNaN(result) ? 0 : result },
+    ruleId: mapping.ruleId,
+    params: { inputs: numInputs, result },
     after,
     evidence,
   };
@@ -946,7 +451,7 @@ function adaptFromOp(step: Step, state: MathState): AdaptedStep | null {
   const resultStr = step.value != null ? String(step.value) : "";
 
   const explanation: RuleExplanation = {
-    principle: useMapping.principle,
+    principle: mapping.principle,
     action: `${step.op}: ${inputStr} → ${resultStr}`,
     justification: evidence,
     beforeText: inputStr,

@@ -424,18 +424,17 @@ describe("kernel-adapter: fallback for unjustified steps", () => {
     assert.equal(adapted.steps[0].transformation, null);
   });
 
-  it("degrades to evaluate when arithmetic verification fails", () => {
+  it("rejects wrong arithmetic — multiply(3, 4) = 15 must NOT be kernel-backed", () => {
     // multiply(3, 4) = 15 — strict arithmetic says 3×4=12≠15
-    // The op name is reused for a more complex computation (e.g., area with unit conversion).
-    // The adapter degrades to arithmetic.evaluate, trusting the family solver.
+    // There is NO graceful degradation. Wrong math = not adapted.
     const steps: Step[] = [
       makeStep("s1", "multiply", [3, 4], 15),
     ];
     const problem = makeProblem("unknown", [3, 4], steps, 15);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true);
-    assert.equal(adapted.steps[0].adapted, true);
-    assert.equal(adapted.steps[0].transformation!.ruleId, "arithmetic.evaluate");
+    assert.equal(adapted.fullyAdapted, false);
+    assert.equal(adapted.steps[0].adapted, false);
+    assert.equal(adapted.steps[0].transformation, null);
   });
 
   it("generates explanation for op-adapted steps", () => {
