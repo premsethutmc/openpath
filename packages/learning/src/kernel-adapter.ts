@@ -275,21 +275,12 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
     buildExpr: ([a, b]) => Expr.div(Expr.num(a), Expr.num(b)),
     verify: (inputs, result) => {
       if (inputs.length < 2 || inputs[1] === 0) return false;
+      // Exact division only — integer quotient is a different operation
+      // and the divide op does not carry information distinguishing them
       const exact = inputs[0] / inputs[1];
-      // Exact division
-      if (Math.abs(exact - result) < 1e-9) return true;
-      // Integer division (quotient): floor(a/b) = result
-      // Verified only when both inputs are integers and result is a non-negative integer
-      if (Number.isInteger(inputs[0]) && Number.isInteger(inputs[1]) &&
-          Number.isInteger(result) && result >= 0 &&
-          Math.floor(inputs[0] / inputs[1]) === result) return true;
-      return false;
+      return Math.abs(exact - result) < 1e-9;
     },
-    evidence: ([a, b], r) => {
-      const exact = a / b;
-      if (Math.abs(exact - r) < 1e-9) return `${a} ÷ ${b} = ${r}`;
-      return `${a} ÷ ${b} = ${r} (integer quotient)`;
-    },
+    evidence: ([a, b], r) => `${a} ÷ ${b} = ${r}`,
   }],
   ["square", {
     ruleId: "arithmetic.multiplicative-composition",
@@ -418,49 +409,25 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
     principle: "Rounding to a given place value",
     buildExpr: ([a]) => Expr.num(a),
     verify: (inputs, result) => {
-      if (inputs.length < 1) return false;
+      // Require explicit place value — do not infer precision from the answer
+      if (inputs.length < 2 || inputs[1] <= 0) return false;
       const value = inputs[0];
-      if (inputs.length >= 2 && inputs[1] > 0) {
-        // Explicit place value: round(value, place)
-        const place = inputs[1];
-        return Math.abs(Math.round(value / place) * place - result) < 1e-9;
-      }
-      // Single input: try common place values
-      for (const place of [1, 10, 100, 1000, 10000, 100000, 1000000]) {
-        if (Math.abs(Math.round(value / place) * place - result) < 1e-9) return true;
-      }
-      return false;
+      const place = inputs[1];
+      return Math.abs(Math.round(value / place) * place - result) < 1e-9;
     },
     evidence: (inputs, r) => {
-      if (inputs.length >= 2) return `round(${inputs[0]}, to nearest ${inputs[1]}) = ${r}`;
-      return `round(${inputs[0]}) = ${r}`;
+      return `round(${inputs[0]}, to nearest ${inputs[1]}) = ${r}`;
     },
   }],
 
-  // ── Convert as multiplication/division ─────────────────────────────────────────────
-  // When convert has exactly 2 numeric inputs and the result equals input[0] × input[1]
-  // or input[0] / input[1], the conversion is independently verifiable as multiplication.
-  ["convert", {
-    ruleId: "arithmetic.multiplicative-composition",
-    principle: "Unit conversion: multiplying or dividing by a conversion factor",
-    buildExpr: ([a, b]) => Expr.mul(Expr.num(a), Expr.num(b)),
-    verify: (inputs, result) => {
-      if (inputs.length < 2) return false;
-      // Check multiply: input[0] × input[1] = result
-      if (Math.abs(inputs[0] * inputs[1] - result) < 1e-9) return true;
-      // Check divide: input[0] / input[1] = result (reverse conversion)
-      if (inputs[1] !== 0 && Math.abs(inputs[0] / inputs[1] - result) < 1e-9) return true;
-      return false;
-    },
-    evidence: ([a, b], r) => {
-      if (Math.abs(a * b - r) < 1e-9) return `${a} × ${b} = ${r} (conversion)`;
-      return `${a} ÷ ${b} = ${r} (conversion)`;
-    },
-  }],
+  // ── convert removed from verification ──────────────────────────────────────────────
+  // Convert verifies arithmetic (a × b = r) but not that the conversion factor is
+  // correct for the claimed unit conversion. Without source/target units, dimension
+  // compatibility cannot be validated. Retained in compatibility mode.
 
   // ── No unverified mappings below this line ─────────────────────────────────────────
   // Operations like integrate, differentiate, factorise, solve, classify,
-  // substitute, simplify, expand, reduce, evaluate, count, read,
+  // substitute, simplify, expand, reduce, evaluate, count, read, convert,
   // write, compare, sort, order, place, etc. are NOT mapped because the
   // kernel cannot independently verify their results from (inputs, output)
   // alone. They remain in compatibility mode: valid teaching, no kernel label.

@@ -564,57 +564,61 @@ describe("multi-input multiply", () => {
 // 11. Integer division (quotient) — floor(a/b) verification
 // ════════════════════════════════════════════════════════════════════════════════
 
-describe("integer division (quotient)", () => {
-  it("divide(5, 3) = 1 — integer quotient", () => {
-    const steps = [makeStep("s1", "divide", [5, 3], 1)];
-    const problem = makeProblem("test", [5, 3], steps, 1);
-    const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true, "floor(5/3)=1 should verify");
-  });
-
-  it("divide(17, 5) = 3 — integer quotient", () => {
-    const steps = [makeStep("s1", "divide", [17, 5], 3)];
-    const problem = makeProblem("test", [17, 5], steps, 3);
-    const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true, "floor(17/5)=3 should verify");
-  });
-
-  it("divide(10, 3) = 3 — integer quotient", () => {
-    const steps = [makeStep("s1", "divide", [10, 3], 3)];
-    const problem = makeProblem("test", [10, 3], steps, 3);
-    const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true, "floor(10/3)=3 should verify");
-  });
-
-  it("exact division still works: divide(20, 4) = 5", () => {
+describe("exact division only — no integer quotient", () => {
+  it("exact division: divide(20, 4) = 5", () => {
     const steps = [makeStep("s1", "divide", [20, 4], 5)];
     const problem = makeProblem("test", [20, 4], steps, 5);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true);
+    assert.equal(adapted.fullyAdapted, true, "exact division verified");
   });
 
-  it("REJECTS divide(5, 3) = 2 — wrong quotient", () => {
+  it("exact division: divide(7, 2) = 3.5", () => {
+    const steps = [makeStep("s1", "divide", [7, 2], 3.5)];
+    const problem = makeProblem("test", [7, 2], steps, 3.5);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, true, "exact non-integer result verified");
+  });
+
+  it("REJECTS divide(5, 3) = 1 — quotient is not exact division", () => {
+    const steps = [makeStep("s1", "divide", [5, 3], 1)];
+    const problem = makeProblem("test", [5, 3], steps, 1);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, false, "floor(5/3)=1 is not 5÷3");
+  });
+
+  it("REJECTS divide(17, 5) = 3 — quotient is not exact division", () => {
+    const steps = [makeStep("s1", "divide", [17, 5], 3)];
+    const problem = makeProblem("test", [17, 5], steps, 3);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, false, "floor(17/5)=3 is not 17÷5");
+  });
+
+  it("REJECTS divide(10, 3) = 3 — quotient is not exact division", () => {
+    const steps = [makeStep("s1", "divide", [10, 3], 3)];
+    const problem = makeProblem("test", [10, 3], steps, 3);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, false, "floor(10/3)=3 is not 10÷3");
+  });
+
+  it("REJECTS divide(5, 3) = 2 — wrong result", () => {
     const steps = [makeStep("s1", "divide", [5, 3], 2)];
     const problem = makeProblem("test", [5, 3], steps, 2);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, false, "wrong quotient must fail");
+    assert.equal(adapted.fullyAdapted, false, "wrong result must fail");
   });
 
-  it("REJECTS integer division for non-integer inputs", () => {
-    // divide(5.5, 3) = 1 — inputs not integers, should not get quotient shortcut
-    const steps = [makeStep("s1", "divide", [5.5, 3], 1)];
-    const problem = makeProblem("test", [5.5, 3], steps, 1);
+  it("REJECTS divide by zero", () => {
+    const steps = [makeStep("s1", "divide", [5, 0], 0)];
+    const problem = makeProblem("test", [5, 0], steps, 0);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, false, "non-integer inputs should not use quotient");
+    assert.equal(adapted.fullyAdapted, false, "divide by zero must fail");
   });
 
-  it("REJECTS integer division for negative result", () => {
-    // divide(5, -3) = -1 — negative result not accepted for quotient
-    const steps = [makeStep("s1", "divide", [5, -3], -1)];
-    const problem = makeProblem("test", [5, -3], steps, -1);
+  it("REJECTS divide with single input", () => {
+    const steps = [makeStep("s1", "divide", [5], 5)];
+    const problem = makeProblem("test", [5], steps, 5);
     const adapted = adaptProblem(problem);
-    // This should fail quotient (negative result) but also fail exact (-1.667≠-1)
-    assert.equal(adapted.fullyAdapted, false, "negative quotient not verified");
+    assert.equal(adapted.fullyAdapted, false, "needs 2 operands");
   });
 });
 
@@ -622,54 +626,76 @@ describe("integer division (quotient)", () => {
 // 12. Round verification — round to nearest place value
 // ════════════════════════════════════════════════════════════════════════════════
 
-describe("round verification", () => {
-  it("round(23, 10) = 20 — round to nearest 10", () => {
+describe("round verification — explicit precision required", () => {
+  it("round(23, 10) = 20 — explicit place value", () => {
     const steps = [makeStep("s1", "round", [23, 10], 20)];
     const problem = makeProblem("test", [23], steps, 20);
     const adapted = adaptProblem(problem);
     assert.equal(adapted.fullyAdapted, true);
   });
 
-  it("round(164, 10) = 160 — round to nearest 10", () => {
+  it("round(164, 10) = 160 — explicit place value", () => {
     const steps = [makeStep("s1", "round", [164, 10], 160)];
     const problem = makeProblem("test", [164], steps, 160);
     const adapted = adaptProblem(problem);
     assert.equal(adapted.fullyAdapted, true);
   });
 
-  it("round(6686230, 100000) = 6700000 — round to nearest 100000", () => {
+  it("round(6686230, 100000) = 6700000 — explicit place value", () => {
     const steps = [makeStep("s1", "round", [6686230, 100000], 6700000)];
     const problem = makeProblem("test", [6686230], steps, 6700000);
     const adapted = adaptProblem(problem);
     assert.equal(adapted.fullyAdapted, true);
   });
 
-  it("round(5) = 10 — single input, inferred round to 10", () => {
+  it("round(2.5, 1) = 3 — halfway case rounds up", () => {
+    const steps = [makeStep("s1", "round", [2.5, 1], 3)];
+    const problem = makeProblem("test", [2.5], steps, 3);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, true);
+  });
+
+  it("round(-2.5, 1) = -2 — negative halfway case", () => {
+    const steps = [makeStep("s1", "round", [-2.5, 1], -2)];
+    const problem = makeProblem("test", [-2.5], steps, -2);
+    const adapted = adaptProblem(problem);
+    // Math.round(-2.5) = -2 in JS (rounds toward +Infinity)
+    assert.equal(adapted.fullyAdapted, true, "negative halfway follows JS Math.round");
+  });
+
+  it("REJECTS round(5) = 10 — no explicit precision", () => {
     const steps = [makeStep("s1", "round", [5], 10)];
     const problem = makeProblem("test", [5], steps, 10);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true);
+    assert.equal(adapted.fullyAdapted, false, "single input without precision must fail");
   });
 
-  it("round(3) = 0 — single input, round to 10", () => {
+  it("REJECTS round(3) = 0 — no explicit precision", () => {
     const steps = [makeStep("s1", "round", [3], 0)];
     const problem = makeProblem("test", [3], steps, 0);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true);
+    assert.equal(adapted.fullyAdapted, false, "cannot verify without knowing the place");
   });
 
-  it("REJECTS round(5) = 7 — wrong rounding", () => {
-    const steps = [makeStep("s1", "round", [5], 7)];
-    const problem = makeProblem("test", [5], steps, 7);
-    const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, false, "incorrect rounding must fail");
-  });
-
-  it("REJECTS round(23, 10) = 30 — wrong rounding", () => {
+  it("REJECTS round(23, 10) = 30 — wrong rounding result", () => {
     const steps = [makeStep("s1", "round", [23, 10], 30)];
     const problem = makeProblem("test", [23], steps, 30);
     const adapted = adaptProblem(problem);
     assert.equal(adapted.fullyAdapted, false, "wrong round-to-10 must fail");
+  });
+
+  it("REJECTS round(23, 0) — place value zero", () => {
+    const steps = [makeStep("s1", "round", [23, 0], 23)];
+    const problem = makeProblem("test", [23], steps, 23);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, false, "place=0 is invalid");
+  });
+
+  it("REJECTS round(23, -10) — negative place value", () => {
+    const steps = [makeStep("s1", "round", [23, -10], 20)];
+    const problem = makeProblem("test", [23], steps, 20);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, false, "negative place is invalid");
   });
 });
 
@@ -677,47 +703,34 @@ describe("round verification", () => {
 // 13. Convert as multiplication — unit conversion with verifiable factor
 // ════════════════════════════════════════════════════════════════════════════════
 
-describe("convert as multiplication/division", () => {
-  it("convert(3, 60) = 180 — hours to minutes", () => {
+describe("convert removed — always compatibility mode", () => {
+  // Convert verifies arithmetic but not the conversion factor or unit dimensions.
+  // Without unit information, it cannot establish mathematical correctness.
+  it("REJECTS convert(3, 60) = 180 — arithmetic correct but factor unverified", () => {
     const steps = [makeStep("s1", "convert", [3, 60], 180)];
     const problem = makeProblem("test", [3], steps, 180);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true);
+    assert.equal(adapted.fullyAdapted, false, "convert is not in OP_RULE_MAP");
   });
 
-  it("convert(3, 1000) = 3000 — litres to ml", () => {
-    const steps = [makeStep("s1", "convert", [3, 1000], 3000)];
-    const problem = makeProblem("test", [3], steps, 3000);
-    const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true);
-  });
-
-  it("convert as division: convert(200, 1000) = 0.2", () => {
+  it("REJECTS convert(200, 1000) = 0.2 — factor unverified", () => {
     const steps = [makeStep("s1", "convert", [200, 1000], 0.2)];
     const problem = makeProblem("test", [200], steps, 0.2);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, true, "200/1000=0.2 should verify");
+    assert.equal(adapted.fullyAdapted, false, "convert always falls to compatibility");
   });
 
-  it("REJECTS convert with 1 input (factor unknown)", () => {
-    // convert(5) = 500 — we don't know the factor, can't verify independently
+  it("REJECTS convert with 1 input", () => {
     const steps = [makeStep("s1", "convert", [5], 500)];
     const problem = makeProblem("test", [5], steps, 500);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, false, "1-input convert has unknown factor");
-  });
-
-  it("REJECTS convert(5, 18) = 5018 — not multiply or divide", () => {
-    const steps = [makeStep("s1", "convert", [5, 18], 5018)];
-    const problem = makeProblem("test", [5], steps, 5018);
-    const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, false, "5×18≠5018 and 5/18≠5018");
+    assert.equal(adapted.fullyAdapted, false, "convert not mapped");
   });
 
   it("REJECTS convert with non-numeric inputs", () => {
     const steps = [makeStep("s1", "convert", ["a metre", 100], 100)];
     const problem = makeProblem("test", [100], steps, 100);
     const adapted = adaptProblem(problem);
-    assert.equal(adapted.fullyAdapted, false, "non-numeric first input");
+    assert.equal(adapted.fullyAdapted, false, "convert not mapped");
   });
 });
