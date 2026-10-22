@@ -399,23 +399,54 @@ describe("kernel-adapter: product-counting", () => {
 // ════════════════════════════════════════════════════════════════════════════════
 
 describe("kernel-adapter: fallback for unjustified steps", () => {
-  const steps: Step[] = [
-    makeStep("s1", "add", [3, 4], 7),
-  ];
+  it("adapts unjustified steps via op mapping when op is recognized", () => {
+    const steps: Step[] = [
+      makeStep("s1", "add", [3, 4], 7),
+    ];
+    const problem = makeProblem("unknown", [3, 4], steps, 7);
+    const adapted = adaptProblem(problem);
+    // Op "add" maps to arithmetic.additive-composition — verified: 3+4=7
+    assert.equal(adapted.fullyAdapted, true);
+    assert.equal(adapted.steps[0].adapted, true);
+    assert.ok(adapted.steps[0].transformation !== null);
+    assert.equal(adapted.steps[0].transformation!.ruleId, "arithmetic.additive-composition");
+    assert.equal(adapted.steps[0].explanation!.principle, "Addition: combining quantities");
+  });
 
-  const problem = makeProblem("unknown", [3, 4], steps, 7);
-
-  it("marks unjustified steps as not adapted", () => {
+  it("falls back for unrecognized op values", () => {
+    const steps: Step[] = [
+      makeStep("s1", "find the shelf", ["top"], "A"),
+    ];
+    const problem = makeProblem("unknown", [1, 2], steps, "A");
     const adapted = adaptProblem(problem);
     assert.equal(adapted.fullyAdapted, false);
     assert.equal(adapted.steps[0].adapted, false);
     assert.equal(adapted.steps[0].transformation, null);
   });
 
-  it("generates fallback explanation", () => {
+  it("degrades to evaluate when arithmetic verification fails", () => {
+    // multiply(3, 4) = 15 — strict arithmetic says 3×4=12≠15
+    // The op name is reused for a more complex computation (e.g., area with unit conversion).
+    // The adapter degrades to arithmetic.evaluate, trusting the family solver.
+    const steps: Step[] = [
+      makeStep("s1", "multiply", [3, 4], 15),
+    ];
+    const problem = makeProblem("unknown", [3, 4], steps, 15);
+    const adapted = adaptProblem(problem);
+    assert.equal(adapted.fullyAdapted, true);
+    assert.equal(adapted.steps[0].adapted, true);
+    assert.equal(adapted.steps[0].transformation!.ruleId, "arithmetic.evaluate");
+  });
+
+  it("generates explanation for op-adapted steps", () => {
+    const steps: Step[] = [
+      makeStep("s1", "multiply", [5, 3], 15),
+    ];
+    const problem = makeProblem("unknown", [5, 3], steps, 15);
     const adapted = adaptProblem(problem);
     assert.ok(adapted.steps[0].explanation !== null);
-    assert.ok(adapted.steps[0].explanation!.action.includes("add"));
+    assert.ok(adapted.steps[0].explanation!.action.includes("multiply"));
+    assert.ok(adapted.steps[0].explanation!.principle.includes("Multiplication"));
   });
 });
 

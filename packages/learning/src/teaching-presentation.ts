@@ -2,7 +2,7 @@ import type { Module, Question, Screen } from "./content";
 import type { Bug, Def, Problem, Step, Visual } from "./family-kit";
 import { explainStep, FAMILIES } from "./families";
 import { graph } from "./graph";
-import { adaptProblem, kernelWorkedSteps, type AdaptedProblem, type KernelWorkedStep } from "./kernel-adapter";
+import { adaptProblem, kernelWorkedSteps, hasOpMappableSteps, type AdaptedProblem, type KernelWorkedStep } from "./kernel-adapter";
 
 export const TEACHING_PRESENTATION_VERSION = "openpath-teaching-presentation@1" as const;
 
@@ -556,7 +556,7 @@ export function teachingPresentationFrom(args: {
   let unsupportedCapabilities: string[] | undefined;
   let kernelFailure: KernelFailure | undefined;
 
-  if (problem && problem.steps.some((s) => s.justification)) {
+  if (problem && (problem.steps.some((s) => s.justification) || hasOpMappableSteps(problem))) {
     let failure: KernelFailure | undefined;
     try {
       const adapted = adaptProblem(problem);
