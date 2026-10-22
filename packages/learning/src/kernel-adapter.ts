@@ -13,6 +13,11 @@
  *
  * Existing families are adapted incrementally — the adapter handles whatever
  * justification variants are present and passes through steps that don't have one.
+ *
+ * For families without explicit justification types, the adapter can also map
+ * the step's `op` field to kernel rules. This enables curriculum-wide teaching
+ * coverage: the same kernel rules verify arithmetic across all families that
+ * use standard operations (add, subtract, multiply, divide, evaluate, compare).
  */
 
 import type { Problem, Step, Justification } from "./family-kit";
@@ -188,27 +193,278 @@ function buildInitialState(problem: Problem): MathState {
  * Adapt a single step to a kernel transformation.
  */
 function adaptStep(step: Step, state: MathState, problem: Problem): AdaptedStep {
-  if (!step.justification) {
-    return { original: step, transformation: null, explanation: fallbackExplanation(step), adapted: false };
+  if (step.justification) {
+    try {
+      const result = adaptJustification(step, step.justification, state, problem);
+      return {
+        original: step,
+        transformation: result.transformation,
+        explanation: result.explanation,
+        adapted: true,
+      };
+    } catch {
+      // Fallback: the justification exists but couldn't be mapped to a kernel rule
+      return {
+        original: step,
+        transformation: null,
+        explanation: fallbackExplanation(step),
+        adapted: false,
+      };
+    }
   }
 
-  try {
-    const result = adaptJustification(step, step.justification, state, problem);
-    return {
-      original: step,
-      transformation: result.transformation,
-      explanation: result.explanation,
-      adapted: true,
-    };
-  } catch {
-    // Fallback: the justification exists but couldn't be mapped to a kernel rule
-    return {
-      original: step,
-      transformation: null,
-      explanation: fallbackExplanation(step),
-      adapted: false,
-    };
+  // No explicit justification — try op-based adaptation
+  if (step.op) {
+    const opResult = adaptFromOp(step, state);
+    if (opResult) return opResult;
   }
+
+  return { original: step, transformation: null, explanation: fallbackExplanation(step), adapted: false };
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+// OP-BASED ADAPTATION — maps step `op` field to kernel rules for families
+// without explicit justification types. This is the reusable capability that
+// enables curriculum-wide teaching: one mapping unlocks hundreds of families.
+// ════════════════════════════════════════════════════════════════════════════════
+
+interface OpMapping {
+  ruleId: string;
+  principle: string;
+  /** Build the before-expression from numeric inputs. */
+  buildExpr: (inputs: number[]) => MathExpr;
+  /** Verify the arithmetic is correct. */
+  verify: (inputs: number[], result: number) => boolean;
+  /** Human-readable evidence string. */
+  evidence: (inputs: number[], result: number) => string;
+}
+
+/**
+ * Mapping from step `op` values to kernel rules.
+ *
+ * VERIFICATION POLICY: A step is kernel-backed only when the adapter can
+ * independently verify the arithmetic from its inputs and output.
+ * An operation name alone is insufficient — the inputs, output, semantics
+ * and preconditions must be enough to confirm the rule.
+ *
+ * Operations whose mathematical meaning requires context beyond
+ * (inputs → output) — integrate, differentiate, factorise, solve, etc. —
+ * remain in compatibility mode. They are valid teaching content but
+ * cannot be independently verified by the kernel.
+ */
+const OP_RULE_MAP = new Map<string, OpMapping>([
+  // ── Multiplicative operations ───────────────────────────────────────────────────────
+  // Each verifies: inputs ×/÷ → result within floating-point tolerance.
+  ["multiply", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Multiplication: combining equal groups",
+    buildExpr: ([a, b]) => Expr.mul(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] * inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} × ${b} = ${r}`,
+  }],
+  ["divide", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Division: splitting into equal parts",
+    buildExpr: ([a, b]) => Expr.div(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && inputs[1] !== 0 && Math.abs(inputs[0] / inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} ÷ ${b} = ${r}`,
+  }],
+  ["square", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Squaring: multiplying a number by itself",
+    buildExpr: ([a]) => Expr.mul(Expr.num(a), Expr.num(a)),
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(inputs[0] * inputs[0] - result) < 1e-9,
+    evidence: ([a], r) => `${a}² = ${r}`,
+  }],
+  ["power", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Exponentiation: repeated multiplication",
+    buildExpr: ([a, b]) => Expr.pow(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && Math.abs(Math.pow(inputs[0], inputs[1]) - result) < 1e-9,
+    evidence: ([a, b], r) => `${a}^${b} = ${r}`,
+  }],
+  ["remainder", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Remainder: what is left after division",
+    buildExpr: ([a, b]) => Expr.div(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && inputs[1] !== 0 && Math.abs(inputs[0] % inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} mod ${b} = ${r}`,
+  }],
+  ["half", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Halving: dividing by two",
+    buildExpr: ([a]) => Expr.div(Expr.num(a), Expr.num(2)),
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(inputs[0] / 2 - result) < 1e-9,
+    evidence: ([a], r) => `${a} ÷ 2 = ${r}`,
+  }],
+  ["share", {
+    ruleId: "arithmetic.multiplicative-composition",
+    principle: "Sharing equally: dividing into equal groups",
+    buildExpr: ([a, b]) => Expr.div(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && inputs[1] !== 0 && Math.abs(inputs[0] / inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} ÷ ${b} = ${r} (sharing equally)`,
+  }],
+
+  // ── Additive operations ───────────────────────────────────────────────────────────
+  ["add", {
+    ruleId: "arithmetic.additive-composition",
+    principle: "Addition: combining quantities",
+    buildExpr: ([a, b]) => Expr.add(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => {
+      if (inputs.length < 2) return false;
+      const sum = inputs.reduce((s, x) => s + x, 0);
+      return Math.abs(sum - result) < 1e-9;
+    },
+    evidence: (inputs, r) => `${inputs.join(" + ")} = ${r}`,
+  }],
+  ["subtract", {
+    ruleId: "arithmetic.additive-composition",
+    principle: "Subtraction: finding the difference",
+    buildExpr: ([a, b]) => Expr.sub(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] - inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} − ${b} = ${r}`,
+  }],
+  ["difference", {
+    ruleId: "arithmetic.additive-composition",
+    principle: "Finding the difference between values",
+    buildExpr: ([a, b]) => Expr.sub(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] - inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} − ${b} = ${r}`,
+  }],
+  ["negate", {
+    ruleId: "arithmetic.additive-composition",
+    principle: "Negation: reversing sign",
+    buildExpr: ([a]) => Expr.neg(Expr.num(a)),
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(-inputs[0] - result) < 1e-9,
+    evidence: ([a], r) => `−${a} = ${r}`,
+  }],
+  ["regroup", {
+    ruleId: "arithmetic.additive-composition",
+    principle: "Regrouping: carrying or borrowing",
+    buildExpr: ([a, b]) => Expr.add(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] + inputs[1] - result) < 1e-9,
+    evidence: (inputs, r) => `Regroup: ${inputs.join(", ")} → ${r}`,
+  }],
+  ["count on", {
+    ruleId: "arithmetic.additive-composition",
+    principle: "Counting on: adding by counting forward",
+    buildExpr: ([a, b]) => Expr.add(Expr.num(a), Expr.num(b)),
+    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] + inputs[1] - result) < 1e-9,
+    evidence: ([a, b], r) => `${a} + ${b} = ${r}`,
+  }],
+
+  // ── Verifiable single-input operations ──────────────────────────────────────────
+  // These can be verified because the mathematical relationship between
+  // input and output is unambiguous and computable.
+  ["square-root", {
+    ruleId: "arithmetic.evaluate",
+    principle: "Finding the square root",
+    buildExpr: ([a]) => Expr.num(a),
+    verify: (inputs, result) => inputs.length >= 1 && result >= 0 && Math.abs(result * result - inputs[0]) < 1e-6,
+    evidence: ([a], r) => `√${a} = ${r}`,
+  }],
+  ["cube-root", {
+    ruleId: "arithmetic.evaluate",
+    principle: "Finding the cube root",
+    buildExpr: ([a]) => Expr.num(a),
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(result * result * result - inputs[0]) < 1e-6,
+    evidence: ([a], r) => `∛${a} = ${r}`,
+  }],
+  ["floor", {
+    ruleId: "arithmetic.evaluate",
+    principle: "Floor function: rounding down to the nearest integer",
+    buildExpr: ([a]) => Expr.num(a),
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(Math.floor(inputs[0]) - result) < 1e-9,
+    evidence: ([a], r) => `⌊${a}⌋ = ${r}`,
+  }],
+  ["average", {
+    ruleId: "arithmetic.evaluate",
+    principle: "Finding the average (mean)",
+    buildExpr: ([a]) => Expr.num(a),
+    verify: (inputs, result) => inputs.length >= 1 && Math.abs(inputs.reduce((s, x) => s + x, 0) / inputs.length - result) < 1e-9,
+    evidence: (inputs, r) => `mean(${inputs.join(", ")}) = ${r}`,
+  }],
+
+  // ── No unverified mappings below this line ─────────────────────────────────────────
+  // Operations like integrate, differentiate, factorise, solve, classify,
+  // substitute, simplify, convert, expand, reduce, evaluate, count, read,
+  // write, compare, sort, order, place, etc. are NOT mapped because the
+  // kernel cannot independently verify their results from (inputs, output)
+  // alone. They remain in compatibility mode: valid teaching, no kernel label.
+]);
+
+/**
+ * Attempt op-based adaptation for a step without explicit justification.
+ * Returns null if the op is not in the mapping or if verification fails.
+ *
+ * SOUNDNESS POLICY: A step receives kernel-backed status ONLY when its
+ * arithmetic is independently verified. There is no fallback to
+ * arithmetic.evaluate with verify: () => true. If verification fails,
+ * the step is not adapted (adapted: false / compatibility mode).
+ */
+function adaptFromOp(step: Step, state: MathState): AdaptedStep | null {
+  const mapping = OP_RULE_MAP.get(step.op);
+  if (!mapping) return null;
+
+  // Parse inputs: accept both numbers and string-encoded numbers
+  const numInputs: number[] = [];
+  for (const i of step.inputs || []) {
+    if (typeof i === "number") numInputs.push(i);
+    else if (typeof i === "string") {
+      const n = Number(i);
+      if (!isNaN(n)) numInputs.push(n);
+    }
+  }
+  const result = typeof step.value === "number" ? step.value :
+    typeof step.value === "string" ? Number(step.value) : NaN;
+
+  // Every mapped op MUST pass its verify function.
+  // There is no graceful degradation — failed verification means not adapted.
+  if (step.value == null) return null;
+  if (numInputs.length < 1) return null;
+  if (isNaN(result)) return null;
+  if (!mapping.verify(numInputs, result)) return null;
+
+  // Build before and after states
+  const before = cloneState(state);
+  const after = cloneState(before);
+  const exprKey = `step_${step.id}`;
+
+  if (numInputs.length >= 2) {
+    before.expressions.set(exprKey, mapping.buildExpr(numInputs));
+  } else if (numInputs.length === 1) {
+    before.expressions.set(exprKey, Expr.num(numInputs[0]));
+  }
+  after.expressions.set(exprKey, Expr.num(result));
+
+  const evidence = mapping.evidence(numInputs, result);
+
+  const transformation: Transformation = {
+    before,
+    ruleId: mapping.ruleId,
+    params: { inputs: numInputs, result },
+    after,
+    evidence,
+  };
+
+  const inputStr = (step.inputs || []).filter((i) => i != null).join(", ");
+  const resultStr = step.value != null ? String(step.value) : "";
+
+  const explanation: RuleExplanation = {
+    principle: mapping.principle,
+    action: `${step.op}: ${inputStr} → ${resultStr}`,
+    justification: evidence,
+    beforeText: inputStr,
+    afterText: resultStr,
+  };
+
+  return { original: step, transformation, explanation, adapted: true };
+}
+
+/** Check whether a problem's steps can be adapted via op mapping. */
+export function hasOpMappableSteps(problem: Problem): boolean {
+  if (!problem.steps || problem.steps.length === 0) return false;
+  return problem.steps.some((s) => s.op && OP_RULE_MAP.has(s.op));
 }
 
 interface AdaptResult {

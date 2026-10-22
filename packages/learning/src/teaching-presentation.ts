@@ -556,7 +556,7 @@ export function teachingPresentationFrom(args: {
   let unsupportedCapabilities: string[] | undefined;
   let kernelFailure: KernelFailure | undefined;
 
-  if (problem && problem.steps.some((s) => s.justification)) {
+  if (problem && problem.steps && problem.steps.length > 0) {
     let failure: KernelFailure | undefined;
     try {
       const adapted = adaptProblem(problem);
