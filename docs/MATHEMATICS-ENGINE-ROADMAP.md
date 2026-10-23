@@ -77,3 +77,30 @@ Each issue must contain: ID, scope, input/output contract, dependencies, tests a
 - K06 fails template-free construction: no expansion of question families as a workaround.
 - Verification cannot certify an output: never show it as verified.
 - No owner approval: no merge or deployment.
+
+
+## Live execution status — audit snapshot 2026-10-23
+
+The status below tracks **actual evidence**, not completion claims. See [initial audit](MATHEMATICS-ENGINE-AUDIT.md). The audited implementation is on an unmerged feature branch; tests have not been independently rerun.
+
+| Work item | Status | What happened / evidence | Next action |
+|---|---|---|---|
+| K00-A Repository audit | IN PROGRESS | Inspected kernel, adapter, family contract, family registry, teaching presentation and coverage report; documented findings | Complete repository-wide inventory and execute tests |
+| K00-B Locked 100-problem benchmark | NOT STARTED | No benchmark cases frozen | Define and freeze cases and expected outcomes |
+| K00-C Backend comparison | NOT STARTED | No comparative run | Execute TypeScript, SymPy and hybrid after K00-B |
+| K00-D 20-spec synthesis feasibility | NOT STARTED | No frozen synthesis benchmark | Define constraints and measure generated outputs |
+| K00-E Architecture decision | BLOCKED | Requires K00-C and K00-D evidence and owner review | Await benchmarks |
+| K01 Mathematical representation | NOT STARTED (existing partial capability) | Existing AST and rational type identified, not acceptance-tested | Decide reuse/repair after K00 |
+| K02 Exact arithmetic | NOT STARTED (existing partial capability) | JS-number-based Rational found; no large-number validation | Execute reference-oracle checks after K00 |
+| K03 Symbolic transformations | NOT STARTED (existing partial capability) | Existing simplification/substitution found; no acceptance run | Audit and test rules |
+| K04 General solver | NOT VERIFIED | Existing family-specific solve contract; no general solver demonstrated | Repository-wide search and unseen benchmark |
+| K05 Derivation planner | NOT VERIFIED | Existing step adapters do not establish independent planning | Search and demonstrate planner |
+| K06 Constraint constructor | NOT VERIFIED | Parameterized families identified, general synthesis unproven | Run 20-spec benchmark |
+| K07 Difficulty model | NOT STARTED | No new-engine evidence | Wait for K06 |
+| K08 Misconception diagnosis | NOT STARTED (existing related systems) | Not audited against new-engine contract | Audit after K05 |
+| K09 Teaching renderer | NOT STARTED (existing partial capability) | Existing teaching presentation inspected | Validate against verified derivations |
+| K10 Curriculum alignment | NOT STARTED (existing inventory) | Curriculum file identified; completeness unverified | Audit curriculum coverage |
+| K11 Adaptive controller | NOT STARTED (existing related systems) | Not audited against new-engine contract | Audit existing evidence and planner |
+| K12 Learner integration | NOT STARTED (existing UI) | No new-engine integration performed | Wait for upstream gates |
+
+**Update rule:** Every subsequent change must update this table with date, pinned commit, executed tests, observed result, blocker and next action. A status of PASSED requires reproducible evidence. No merge or deployment without explicit approval.
