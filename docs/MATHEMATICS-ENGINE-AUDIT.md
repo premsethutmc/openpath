@@ -45,3 +45,28 @@ Audit status: **INITIAL / PARTIAL**. This does not satisfy the full K00-A invent
 3. Freeze 100 solver cases and 20 construction specifications.
 4. Benchmark existing kernel, SymPy and hybrid; record accuracy, derivation, coverage and latency.
 5. Review results and approve a backend decision before implementing K01.
+
+## Follow-up inspection — 2026-10-23
+
+Pinned audited feature-branch HEAD: `8121178c5d67536adfb6e8a38b7d9c4010970c61`. Remote Git tree returned 1,494 entries. This inspection reviewed additional relevant source files; it is **not** a complete line-by-line audit.
+
+| Component | Additional finding | Classification | Evidence |
+|---|---|---|---|
+| Family specifications / approvals | `spec.ts` computes family release-pool fingerprints and checks deterministic item construction, answer validators, misconception options, difficulty and boundaries. Strong reusable governance; still invokes `Def.solve`. | REUSE; cannot establish general synthesis | `packages/learning/src/spec.ts` |
+| General family engine | `families.ts` documents family-specific `solve`, `validate`, `bugs`, `variants`; individual families such as multiplication and rectangle area supply handwritten functions. | REUSE FOR LAUNCH; not general solver | `packages/learning/src/families.ts` |
+| Learner diagnosis | `diagnostic.ts` implements six hypotheses, posterior updates and expected-information-gain selection; policy is explicitly draft and likelihoods uncalibrated. | REUSE WITH VALIDATION | `packages/learning/src/diagnostic.ts` |
+| Prerequisite graph | `graph.ts` loads versioned math prerequisites and audit/reclassification; provisional competencies; edges steer recovery rather than block navigation. | REUSE WITH CURRICULUM AUDIT | `packages/learning/src/graph.ts` |
+| Kernel acceptance tests | `kernel-acceptance.test.ts` exercises problem-to-rule-to-teaching pathways and examples with changed parameters. These tests demonstrate rule reuse, **not** autonomous planning. | EXISTING TESTS; RUN REQUIRED | `packages/learning/src/kernel-acceptance.test.ts` |
+| Adversarial verification tests | `kernel-adversarial.test.ts` includes deliberately wrong arithmetic to reject false kernel-backed classification. | REUSE; RUN REQUIRED | `packages/learning/src/kernel-adversarial.test.ts` |
+| Kernel unit tests | `math-kernel.test.ts` checks fraction reduction, arithmetic, expression operations and rule application. The inspected opening tests do not establish arbitrary-precision correctness. | EXISTING TESTS; EXPAND | `packages/learning/src/math-kernel.test.ts` |
+
+### Environment and execution blocker
+
+The GitHub connector supports remote file reads/writes but does not execute repository commands. An attempted `git ls-remote https://github.com/premsethutmc/openpath.git HEAD` in the working container failed with `Could not resolve host: github.com`. Therefore no clone, dependency installation, unit tests, benchmark executions or latency measurements could be completed in this environment. **Do not mark those tasks passed.**
+
+### Additional audit conclusions
+
+- The application already has **a deterministic review/fingerprint mechanism**, **a provisional diagnosis model**, and **a versioned prerequisite graph**. Building parallel substitutes would waste work.
+- Existing tests are a useful starting point but **a passing kernel acceptance suite cannot prove a strategy-selecting solver or constraint-driven constructor**.
+- The existing family validation is described as independent in source comments, but must be independently checked for mathematical correctness on representative cases; comments are not proof.
+- Launch can continue using approved family-based content. General-engine acceptance must measure unseen structural generation without new family-specific solvers.
