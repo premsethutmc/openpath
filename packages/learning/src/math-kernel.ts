@@ -17,80 +17,172 @@
 // ════════════════════════════════════════════════════════════════════════════════
 
 function gcd(a: number, b: number): number {
-  a = Math.abs(a);
-  b = Math.abs(b);
+  return Number(gcdBig(BigInt(a), BigInt(b)));
+}
+
+function gcdBig(a: bigint, b: bigint): bigint {
+  if (a < 0n) a = -a;
+  if (b < 0n) b = -b;
   while (b) {
     [a, b] = [b, a % b];
   }
   return a;
 }
 
-/** Exact rational number: numerator/denominator, always reduced, denominator > 0. */
-export class Rational {
-  readonly num: number;
-  readonly den: number;
-
-  constructor(num: number, den: number = 1) {
-    if (den === 0) throw new Error("Division by zero");
-    if (den < 0) {
-      num = -num;
-      den = -den;
+/**
+ * A JS number as an exact bigint fraction [num, den]. Integers are taken as they are. A non-integer is read as the
+ * shortest decimal that prints as that number (0.1 → 1/10, 1e-7 → 1/10000000), which is the value a person wrote.
+ * NaN and ±Infinity are rejected rather than turned into a wrong fraction.
+ */
+function numberToFraction(n: number): [bigint, bigint] {
+  if (!Number.isFinite(n)) throw new RangeError(`Not a finite number: ${n}`);
+  if (Number.isInteger(n)) {
+    if (!Number.isSafeInteger(n)) {
+      throw new RangeError(`${n} is beyond the exact integer range of a JS number; pass a bigint instead`);
     }
-    const g = gcd(Math.abs(num), den);
-    this.num = num / g;
-    this.den = den / g;
+    return [BigInt(n), 1n];
+  }
+  const m = String(n).match(/^(-?)(\d+)(?:\.(\d+))?(?:e([+-]\d+))?$/i);
+  if (!m) throw new RangeError(`Cannot read ${n} as an exact decimal`);
+  const [, sign, int, frac = "", expText = "0"] = m;
+  let num = BigInt(int + frac);
+  let den = 10n ** BigInt(frac.length);
+  const exp = Number(expText);
+  if (exp > 0) num *= 10n ** BigInt(exp);
+  if (exp < 0) den *= 10n ** BigInt(-exp);
+  return [sign ? -num : num, den];
+}
+
+function toBig(x: number | bigint): [bigint, bigint] {
+  return typeof x === "bigint" ? [x, 1n] : numberToFraction(x);
+}
+
+/** A bigint as a JS number, refusing (instead of silently rounding) when it is not exactly representable. */
+function exactNumber(x: bigint, what: string): number {
+  const n = Number(x);
+  if (!Number.isSafeInteger(n)) {
+    throw new RangeError(`Rational ${what} ${x} is beyond the exact range of a JS number; use ${what}Big`);
+  }
+  return n;
+}
+
+/**
+ * Exact rational number: numerator/denominator, always reduced, denominator > 0.
+ *
+ * Stored as bigints, so arithmetic never loses precision however large the numbers get. `num` and `den` stay
+ * plain numbers for existing callers and THROW (never round) if the exact value no longer fits a JS number;
+ * `numBig` and `denBig` always give the exact value.
+ */
+export class Rational {
+  readonly numBig: bigint;
+  readonly denBig: bigint;
+
+  constructor(num: number | bigint, den: number | bigint = 1) {
+    // A non-integer number argument is read as the decimal it prints as, so new Rational(2.5) is 5/2.
+    const [nn, nd] = toBig(num);
+    const [dn, dd] = toBig(den);
+    let n = nn * dd;
+    let d = nd * dn;
+    if (d === 0n) throw new Error("Division by zero");
+    if (d < 0n) {
+      n = -n;
+      d = -d;
+    }
+    const g = gcdBig(n, d);
+    this.numBig = n / g;
+    this.denBig = d / g;
   }
 
+  get num(): number { return exactNumber(this.numBig, "num"); }
+  get den(): number { return exactNumber(this.denBig, "den"); }
+
   static fromNumber(n: number): Rational {
-    if (Number.isInteger(n)) return new Rational(n);
-    // Convert decimal to fraction
-    const s = String(n);
-    const dp = s.indexOf(".");
-    if (dp < 0) return new Rational(n);
-    const decimals = s.length - dp - 1;
-    const den = Math.pow(10, decimals);
-    return new Rational(Math.round(n * den), den);
+    return new Rational(n);
   }
 
   static zero = new Rational(0);
   static one = new Rational(1);
 
-  isZero(): boolean { return this.num === 0; }
-  isOne(): boolean { return this.num === 1 && this.den === 1; }
-  isInteger(): boolean { return this.den === 1; }
-  toNumber(): number { return this.num / this.den; }
+  isZero(): boolean { return this.numBig === 0n; }
+  isOne(): boolean { return this.numBig === 1n && this.denBig === 1n; }
+  isInteger(): boolean { return this.denBig === 1n; }
+  /** Nearest JS number (an approximation by nature: 1/3 has no exact binary value). */
+  toNumber(): number {
+    const n = Number(this.numBig);
+    const d = Number(this.denBig);
+    if (Number.isFinite(n) && Number.isFinite(d)) return n / d;
+    // Both huge: scale down together so the quotient is still meaningful.
+    const shift = BigInt(Math.max(this.numBig.toString(2).length, this.denBig.toString(2).length) - 1000);
+    return Number(this.numBig >> shift) / Number(this.denBig >> shift);
+  }
 
-  neg(): Rational { return new Rational(-this.num, this.den); }
-  inv(): Rational { return new Rational(this.den, this.num); }
+  neg(): Rational { return new Rational(-this.numBig, this.denBig); }
+  inv(): Rational { return new Rational(this.denBig, this.numBig); }
 
   add(other: Rational): Rational {
-    return new Rational(this.num * other.den + other.num * this.den, this.den * other.den);
+    return new Rational(this.numBig * other.denBig + other.numBig * this.denBig, this.denBig * other.denBig);
   }
   sub(other: Rational): Rational {
     return this.add(other.neg());
   }
   mul(other: Rational): Rational {
-    return new Rational(this.num * other.num, this.den * other.den);
+    return new Rational(this.numBig * other.numBig, this.denBig * other.denBig);
   }
   div(other: Rational): Rational {
     return this.mul(other.inv());
   }
   pow(n: number): Rational {
+    if (!Number.isSafeInteger(n)) throw new RangeError(`Exponent must be an integer, got ${n}`);
     if (n < 0) return this.inv().pow(-n);
-    let result = Rational.one;
-    for (let i = 0; i < n; i++) result = result.mul(this);
-    return result;
+    const e = BigInt(n);
+    return new Rational(this.numBig ** e, this.denBig ** e);
   }
 
-  eq(other: Rational): boolean { return this.num === other.num && this.den === other.den; }
-  lt(other: Rational): boolean { return this.num * other.den < other.num * this.den; }
+  eq(other: Rational): boolean { return this.numBig === other.numBig && this.denBig === other.denBig; }
+  lt(other: Rational): boolean { return this.numBig * other.denBig < other.numBig * this.denBig; }
   gt(other: Rational): boolean { return other.lt(this); }
   le(other: Rational): boolean { return !this.gt(other); }
   ge(other: Rational): boolean { return !this.lt(other); }
 
   toString(): string {
-    if (this.den === 1) return String(this.num);
-    return `${this.num}/${this.den}`;
+    if (this.denBig === 1n) return String(this.numBig);
+    return `${this.numBig}/${this.denBig}`;
+  }
+}
+
+/**
+ * Read an exact rational from a number or from text such as "7", "-3/4", "2.5" or "−1/2" (Unicode minus).
+ * Returns null for anything else, so a caller can refuse rather than verify against NaN.
+ */
+export function parseRational(x: number | string | Rational): Rational | null {
+  if (x instanceof Rational) return x;
+  if (typeof x === "number") return Number.isFinite(x) ? new Rational(x) : null;
+  const m = x.trim().replace(/−/g, "-").match(/^(-?\d+(?:\.\d+)?)(?:\s*\/\s*(-?\d+(?:\.\d+)?))?$/);
+  if (!m) return null;
+  const toFraction = (t: string) => {
+    const [i, f = ""] = t.replace("-", "").split(".");
+    const v = new Rational(BigInt(i + f), 10n ** BigInt(f.length));
+    return t.startsWith("-") ? v.neg() : v;
+  };
+  const n = toFraction(m[1]);
+  if (m[2] === undefined) return n;
+  const d = toFraction(m[2]);
+  return d.isZero() ? null : n.div(d);
+}
+
+function strictOrdering(a: Rational, b: Rational): "<" | ">" | "=" {
+  return a.lt(b) ? "<" : a.gt(b) ? ">" : "=";
+}
+
+/** Whether `a relation b` is true, exactly. */
+function orderingHolds(a: Rational, b: Rational, relation: MathRelation): boolean {
+  switch (relation) {
+    case "<": return a.lt(b);
+    case ">": return a.gt(b);
+    case "=": return a.eq(b);
+    case "≤": return a.le(b);
+    case "≥": return a.ge(b);
+    case "≠": return !a.eq(b);
   }
 }
 
@@ -176,10 +268,10 @@ export function renderExpr(expr: MathExpr): string {
   switch (expr.kind) {
     case "num": {
       const v = expr.value;
-      if (v.den === 1) {
-        return v.num < 0 ? `(${v.num})` : String(v.num);
+      if (v.denBig === 1n) {
+        return v.numBig < 0n ? `(${v.numBig})` : String(v.numBig);
       }
-      return `${v.num}/${v.den}`;
+      return `${v.numBig}/${v.denBig}`;
     }
     case "var":
       return expr.name;
@@ -1148,35 +1240,44 @@ const numericOrdering: MathRule = {
   appliesTo: ["number"],
   description: "Determine the ordering between two numbers",
   precondition: (_state, params) => {
-    const a = params.left as number;
-    const b = params.right as number;
-    if (a === undefined || b === undefined) return "Two numbers required";
+    // Exact values only: text such as "2/5" is read as a fraction, and anything unreadable (NaN) is refused
+    // instead of being ordered — NaN compares as neither < nor >, which would "verify" any claimed equality.
+    const a = parseRational(params.left as number | string | Rational);
+    const b = parseRational(params.right as number | string | Rational);
+    if (!a || !b) return "Two exact numbers required";
+    const claimed = params.claimed as MathRelation | undefined;
+    if (claimed !== undefined && !orderingHolds(a, b, claimed)) {
+      return `Claimed ${params.left} ${claimed} ${params.right} is false`;
+    }
     return null;
   },
   apply: (state, params) => {
-    const a = params.left as number;
-    const b = params.right as number;
+    const a = parseRational(params.left as number | string | Rational)!;
+    const b = parseRational(params.right as number | string | Rational)!;
     const newState = cloneState(state);
-    const relation: MathRelation = a < b ? "<" : a > b ? ">" : "=";
     newState.statements.push({
       left: Expr.num(a),
-      relation,
+      relation: strictOrdering(a, b),
       right: Expr.num(b),
     });
     return newState;
   },
   verify: (_before, after, params) => {
-    const a = params.left as number;
-    const b = params.right as number;
+    const a = parseRational(params.left as number | string | Rational);
+    const b = parseRational(params.right as number | string | Rational);
+    if (!a || !b) return false;
     const stmt = after.statements[after.statements.length - 1];
     if (!stmt) return false;
-    const expectedRelation: MathRelation = a < b ? "<" : a > b ? ">" : "=";
-    return stmt.relation === expectedRelation;
+    // Independently recompute from the after-state's own numbers, not from the rule's choice.
+    if (stmt.left.kind !== "num" || stmt.right.kind !== "num") return false;
+    if (!stmt.left.value.eq(a) || !stmt.right.value.eq(b)) return false;
+    const claimed = params.claimed as MathRelation | undefined;
+    return stmt.relation === strictOrdering(a, b) && (claimed === undefined || orderingHolds(a, b, claimed));
   },
   explain: (_before, _after, params) => {
-    const a = params.left as number;
-    const b = params.right as number;
-    const rel = a < b ? "<" : a > b ? ">" : "=";
+    const a = params.left as number | string;
+    const b = params.right as number | string;
+    const rel = strictOrdering(parseRational(a)!, parseRational(b)!);
     return {
       principle: "Numeric ordering",
       action: `Compare ${a} and ${b}`,
