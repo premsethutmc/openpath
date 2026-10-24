@@ -6,6 +6,8 @@
 > platform principles, which still apply. Their V1 plan and M1 are paused or
 > superseded.
 
+**Starting a work session?** Read [`STATUS.md`](STATUS.md) first. It says what is in flight and what is next.
+
 Suggested reading order for the product owner:
 
 1. [`PRODUCT_VISION.md`](PRODUCT_VISION.md): what OpenPath is, in my words, for you to check.
