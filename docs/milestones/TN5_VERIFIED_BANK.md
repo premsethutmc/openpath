@@ -23,6 +23,9 @@ Every one of the 57 competencies already has at least one family, so this milest
 not new content. Today 32% of these problems have every step checked by the kernel, 32% have some steps checked, and
 37% rely on their family's own answer check.
 
+A later measurement via the coverage matrix's family list gave 194 families and 61,025 problems. The two-family
+difference is resolved in T0, and the final numbers in the report are the ones that count.
+
 Out of scope: other grades and boards, new subjects, handwriting, photo input, learner-typed problems, any LLM, any
 change to the learner interface, and any change to production or paid services.
 
@@ -55,8 +58,12 @@ time but spend usage faster; I will report usage after T1.
 4. **Labelling.** 100% of items carry exactly one label. Zero unlabelled. Unverified items are not served.
 5. **Answer independence.** 100% of items have the final answer confirmed by a second method, with zero
    disagreements. A self-test injects 500 wrong answers, and all 500 are rejected.
-6. **Step verification target.** At least **90%** of items kernel-verified (today 32%). The remainder are
-   answer-verified, and every remaining step type is listed with its item count. The 90% figure is revised after T1.
+6. **Step verification: 100%.** Every item in the bank (today 32% kernel-verified) is either fully machine-checked,
+   or its unchecked steps are all on a named allowlist of narrative steps that make no mathematical claim (for
+   example "write the answer"), which the owner reviews. An item that is neither is fixed or removed from the bank.
+   There are no silent exceptions. Steps with nothing to calculate (reading a clock, classifying a shape) are
+   checked against the problem's own data (the figure, the definition). Measured basis: the 41,760 unverified
+   Grade 5 problems depend on 74 step types, about 40 of them in a single family each.
 7. **No wrong item accepted.** A separate SymPy/exact-fraction re-check of at least 10,000 random items plus at
    least 20 items from each of the 192 families finds zero incorrect answers.
 8. **Depth.** Each competency has at least 30 distinct items in each of three difficulty bands, or a shortfall
@@ -82,6 +89,7 @@ time but spend usage faster; I will report usage after T1.
   10 catches that.
 
 ## Decisions for the owner
-1. Is **90%** kernel-verified the right bar for "complete", or must it be 100%?
+1. ~~Is 90% the right bar?~~ **Decided by the owner (24 Oct): 100%**, as defined in acceptance test 6. The
+   allowlist of narrative steps still needs your review at the end of T2.
 2. Approve the new **machine-verified** status, kept separate from educator approval?
 3. Approve parallel agents for T2 (faster, spends usage faster)?
