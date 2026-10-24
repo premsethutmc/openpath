@@ -22,7 +22,7 @@
 
 import type { Problem, Step, Justification } from "./family-kit";
 import {
-  Rational, Expr, evaluate, simplify, renderExpr, renderStatement,
+  Rational, Expr, evaluate, simplify, renderExpr, renderStatement, parseRational,
   createState, createDefaultRegistry, cloneState,
   type MathExpr, type MathState, type Transformation, type RuleRegistry, type RuleExplanation,
 } from "./math-kernel";
@@ -192,24 +192,97 @@ function buildInitialState(problem: Problem): MathState {
 /**
  * Adapt a single step to a kernel transformation.
  */
+/** A step's stated value equals an exact expected value, or is its nearest double (families store 2/3 as 0.666…). */
+function sameValue(stated: unknown, expected: Rational | null): boolean {
+  if (expected === null || (typeof stated !== "number" && typeof stated !== "string")) return false;
+  const s = parseRational(stated);
+  return (s !== null && s.eq(expected)) || (typeof stated === "number" && stated === expected.toNumber());
+}
+const prodOf = (xs: readonly (number | string)[]): Rational | null =>
+  xs.reduce<Rational | null>((p, x) => { const r = parseRational(x); return p && r ? p.mul(r) : null; }, Rational.one);
+const sumOf = (xs: readonly (number | string)[]): Rational | null =>
+  xs.reduce<Rational | null>((p, x) => { const r = parseRational(x); return p && r ? p.add(r) : null; }, Rational.zero);
+
+/** Evaluate "7 × 4", "12 ÷ 3", "2^2", "−5 + 3" exactly; null for anything else (text descriptions are not checkable). */
+function evaluateSimpleOperation(text: string): Rational | null {
+  const num = "(-?\\d+(?:\\.\\d+)?(?:\\/\\d+)?)";
+  const m = text.replace(/\u2212/g, "-").match(new RegExp(`^\\s*${num}\\s*([+\\-×x*÷/^])\\s*${num}\\s*$`));
+  if (!m) return null;
+  const a = parseRational(m[1]), b = parseRational(m[3]);
+  if (!a || !b) return null;
+  switch (m[2]) {
+    case "+": return a.add(b);
+    case "-": return a.sub(b);
+    case "×": case "x": case "*": return a.mul(b);
+    case "÷": case "/": return b.isZero() ? null : a.div(b);
+    case "^": return b.isInteger() && b.numBig >= 0n && b.numBig <= 64n ? a.pow(Number(b.numBig)) : null;
+  }
+  return null;
+}
+
+/**
+ * Whether a step's STATED value is what its justification computes, exactly. The adapters below apply a kernel rule
+ * to the justification's own numbers; without this check a wrong stated value is still reported as verified (a
+ * corrupted value passed all 117 mutation trials). A kind with no check here returns false: its justification may
+ * still explain the step, but it does not make the step "verified".
+ */
+export function justificationValueHolds(step: Step, j: Justification, transformation: Transformation | null = null): boolean {
+  const V = step.value;
+  switch (j.rule) {
+    case "equality-preservation":
+    case "inverse-operation": {
+      // The kernel rebuilt the equation from the problem's own parameters and applied the operation to both sides.
+      // The step's stated value must be the right-hand side it computed. A step whose stated equation is not the
+      // one the kernel rebuilt (a mismatch) fails here and falls back to the step-type check.
+      const after = transformation?.after.statements[0];
+      if (!after) return false;
+      try { return sameValue(V, evaluate(after.right)); } catch { return false; }
+    }
+    case "positional-value": {
+      const base = prodOf([j.digit, j.placeValue]);
+      return sameValue(V, base && j.plus !== undefined ? base.add(new Rational(j.plus)) : base);
+    }
+    case "unit-coverage": return sameValue(V, prodOf([j.rows, j.columns]));
+    case "additive-combination": return sameValue(V, sumOf(j.parts));
+    case "product-counting": return sameValue(V, prodOf(j.factors));
+    case "scaling": {
+      // [x] scaled by the factor, or [factor, x]
+      const shapeOk = step.inputs.length === 1 || (step.inputs.length === 2 && sameValue(step.inputs[0], parseRational(j.factor)));
+      return shapeOk && sameValue(V, prodOf([j.factor, step.inputs[step.inputs.length - 1]]));
+    }
+    case "quotient": {
+      const a = parseRational(j.dividend), d = parseRational(j.divisor);
+      return !!a && !!d && !d.isZero() && sameValue(V, a.div(d));
+    }
+    case "number-line-movement": return sameValue(V, parseRational(j.direction === "right" ? j.start + j.distance : j.start - j.distance));
+    case "like-denomination": return sameValue(V, parseRational(j.operation === "add" ? j.numeratorA + j.numeratorB : j.numeratorA - j.numeratorB));
+    case "fraction-equivalence": {
+      const same = j.denominatorBefore !== 0 ? parseRational(j.numeratorBefore / j.denominatorBefore === Math.floor(j.numeratorBefore / j.denominatorBefore) ? j.numeratorBefore / j.denominatorBefore : `${j.numeratorBefore}/${j.denominatorBefore}`) : null;
+      // the scaled numerator, the scaled denominator, or the equivalent fraction itself ("15/20" for 3/4 × 5/5)
+      return sameValue(V, prodOf([j.numeratorBefore, j.scalingFactor])) || sameValue(V, prodOf([j.denominatorBefore, j.scalingFactor])) || sameValue(V, same);
+    }
+    case "arithmetic-fact": return sameValue(V, evaluateSimpleOperation(j.operation));
+    case "comparison": return V === j.relation || sameValue(V, parseRational(j.left)) || sameValue(V, parseRational(j.right));
+    default: return false; // equality-preservation, inverse-operation, arithmetic-fact: no value check yet
+  }
+}
+
 function adaptStep(step: Step, state: MathState, problem: Problem): AdaptedStep {
   if (step.justification) {
     try {
       const result = adaptJustification(step, step.justification, state, problem);
-      return {
-        original: step,
-        transformation: result.transformation,
-        explanation: result.explanation,
-        adapted: true,
-      };
+      // A justification makes the step verified only if the step's stated value is what it computes. Otherwise
+      // fall through to the step-type check below, which verifies the stated value from the step's inputs.
+      if (justificationValueHolds(step, step.justification, result.transformation)) {
+        return {
+          original: step,
+          transformation: result.transformation,
+          explanation: result.explanation,
+          adapted: true,
+        };
+      }
     } catch {
-      // Fallback: the justification exists but couldn't be mapped to a kernel rule
-      return {
-        original: step,
-        transformation: null,
-        explanation: fallbackExplanation(step),
-        adapted: false,
-      };
+      // the justification could not be mapped to a kernel rule: try the step-type check instead
     }
   }
 
