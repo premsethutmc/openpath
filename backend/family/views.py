@@ -399,11 +399,17 @@ class PupilEventsView(AccountBase):
                         {"detail": "This was deleted on another device. Open the learner again to carry on.", "count": count},
                         status=status.HTTP_409_CONFLICT,
                     )
+            if subject == "mathematics":
+                from .mathematics import checked_activity
+                event = checked_activity(event, pupil)
             PupilEvent.objects.create(pupil=pupil, subject=subject, seq=seq, kind=event["kind"], occurred_at=_occurred_at(event), body=event)
-        return Response({"count": count + 1}, status=status.HTTP_201_CREATED)
+        # the saved time (mathematics records keep the server's clock), so the app can use exactly what was stored
+        return Response({"count": count + 1, "at": event.get("at")}, status=status.HTTP_201_CREATED)
 
     def put(self, request, pupil_id):
         """Import a whole record (a backup from a device) into an empty one. History is never overwritten."""
+        if request.data.get("subject") == "mathematics":
+            raise ValidationError({"detail": "Mathematics imports require the versioned activity append protocol."})
         subject = _subject(request.data.get("subject"))
         events = request.data.get("events")
         if not isinstance(events, list) or not events:
@@ -452,6 +458,6 @@ class PupilExportView(AccountBase):
         subjects = {}
         for subject in sorted(ACTIVE_SUBJECTS):
             subjects[subject] = list(PupilEvent.objects.filter(pupil=pupil, subject=subject).order_by("seq").values_list("body", flat=True))
-        response = Response({"pupil": _pupil_json(pupil), "consent_policy": pupil.consent_policy, "subjects": subjects})
+        response = Response({"pupil": _pupil_json(pupil), "consent_policy": pupil.consent_policy, "subjects": subjects, "writingDrafts": list(pupil.writing_drafts.values("id", "topic", "parameters", "stage", "work", "version"))})
         response["Content-Disposition"] = f'attachment; filename="openpath-pupil-{pupil.pk}.json"'
         return response

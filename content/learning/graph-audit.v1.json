@@ -1,0 +1,294 @@
+{
+ "schema": "math-relation-audit@1",
+ "graph": "prerequisites 1.1.0",
+ "version": "1.1.0",
+ "status": "proposal: not educator-reviewed",
+ "reviewer": "OpenPath engineering (mathematical review by Claude); needs educator review",
+ "scope": "Every mandatory edge of graph 1.1.0 whose target is assigned by a sample curriculum, has a learning module, or is a learning support.",
+ "meaning": {
+  "mandatory": "needed to learn the target; kept, and traced in recovery",
+  "plausible": "kept as mandatory; traced in recovery; educator to confirm",
+  "support": "useful supporting knowledge, never a gate: traced in recovery as a support",
+  "disputed": "not mathematically needed: not traced in recovery; proposed for removal from the mandatory graph",
+  "trivial": "true but uninformative (remote foundations): not traced"
+ },
+ "note": "The mandatory graph is not changed by this file. It changes only which relations recovery follows; no evidence or competency ID changes. 1.1.0 adds the mandatory edges into the competencies of the synthesised modules (6 edges); the 41 edges of 1.0.0 are unchanged.",
+ "edges": [
+  {
+   "target": "MATH.algebra.arithmetic-sequences",
+   "source": "MATH.algebra.quadratic-discriminant",
+   "classification": "disputed",
+   "reason": "An arithmetic progression needs neither quadratics nor the discriminant: a sequence-order artefact."
+  },
+  {
+   "target": "MATH.algebra.expressions-intro",
+   "source": "MATH.algebra.pattern-rules",
+   "classification": "plausible",
+   "reason": "Writing a rule with a symbol usually follows saying it in words."
+  },
+  {
+   "target": "MATH.algebra.factorisation",
+   "source": "MATH.algebra.identities",
+   "classification": "plausible",
+   "reason": "Factorising uses the identities (difference of squares, perfect squares)."
+  },
+  {
+   "target": "MATH.algebra.functions",
+   "source": "MATH.algebra.relations",
+   "classification": "mandatory",
+   "reason": "A function is a kind of relation."
+  },
+  {
+   "target": "MATH.algebra.identities",
+   "source": "MATH.algebra.linear-rational",
+   "classification": "disputed",
+   "reason": "Using (a + b)² = a² + 2ab + b² does not need equations with rational coefficients."
+  },
+  {
+   "target": "MATH.algebra.inequalities",
+   "source": "MATH.algebra.quadratic-complex",
+   "classification": "disputed",
+   "reason": "Linear inequalities need no complex numbers: a sequence-order artefact."
+  },
+  {
+   "target": "MATH.algebra.linear-equations",
+   "source": "MATH.algebra.linear-intro",
+   "classification": "mandatory",
+   "reason": "Multi-step linear equations build on one-step equations."
+  },
+  {
+   "target": "MATH.algebra.linear-equations",
+   "source": "MATH.number.rational-numbers",
+   "classification": "plausible",
+   "reason": "Coefficients and solutions are often fractions or negatives."
+  },
+  {
+   "target": "MATH.algebra.quadratic-discriminant",
+   "source": "MATH.algebra.quadratics",
+   "classification": "mandatory",
+   "reason": "The discriminant is about quadratic equations."
+  },
+  {
+   "target": "MATH.algebra.quadratics",
+   "source": "MATH.algebra.linear-systems",
+   "classification": "disputed",
+   "reason": "Solving a quadratic does not need simultaneous linear equations; factorisation, identities and square roots support it."
+  },
+  {
+   "target": "MATH.algebra.sets",
+   "source": "MATH.algebra.arithmetic-sequences",
+   "classification": "disputed",
+   "reason": "Set operations need no arithmetic progressions: a sequence-order artefact."
+  },
+  {
+   "target": "MATH.algebra.variables",
+   "source": "MATH.algebra.expressions-intro",
+   "classification": "mandatory",
+   "reason": "Evaluating an expression needs knowing what a symbol in it stands for."
+  },
+  {
+   "target": "MATH.calculus.area-integrals",
+   "source": "MATH.calculus.definite-integrals",
+   "classification": "mandatory",
+   "reason": "An area is computed as a definite integral."
+  },
+  {
+   "target": "MATH.calculus.definite-integrals",
+   "source": "MATH.calculus.integration-methods",
+   "classification": "disputed",
+   "reason": "A definite integral needs an antiderivative (indefinite integrals), not substitution or parts in particular; the edge is too specific."
+  },
+  {
+   "target": "MATH.calculus.derivatives",
+   "source": "MATH.calculus.limits",
+   "classification": "mandatory",
+   "reason": "A derivative from first principles is a limit."
+  },
+  {
+   "target": "MATH.calculus.limits",
+   "source": "MATH.number.addition",
+   "classification": "trivial",
+   "reason": "True of everything after Grade 1, so it carries no information for recovery."
+  },
+  {
+   "target": "MATH.calculus.limits",
+   "source": "MATH.algebra.functions",
+   "classification": "mandatory",
+   "reason": "A limit is of a function."
+  },
+  {
+   "target": "MATH.coordinate.cartesian",
+   "source": "MATH.number.addition",
+   "classification": "support",
+   "reason": "Plotting in four quadrants needs signed numbers on a line more than addition within 20; useful, not a gate."
+  },
+  {
+   "target": "MATH.coordinate.distance",
+   "source": "MATH.coordinate.distance-intro",
+   "classification": "mandatory",
+   "reason": "The formula generalises the introduction."
+  },
+  {
+   "target": "MATH.coordinate.distance",
+   "source": "MATH.number.square-roots",
+   "classification": "mandatory",
+   "reason": "The distance formula ends in a square root."
+  },
+  {
+   "target": "MATH.coordinate.straight-lines",
+   "source": "MATH.coordinate.distance",
+   "classification": "support",
+   "reason": "Slope and line equations use coordinates, not the distance formula; useful, not a gate."
+  },
+  {
+   "target": "MATH.geometry.angles-intro",
+   "source": "MATH.geometry.shape-tiling",
+   "classification": "disputed",
+   "reason": "Comparing angles does not need tiling."
+  },
+  {
+   "target": "MATH.geometry.circles",
+   "source": "MATH.geometry.angles-intro",
+   "classification": "disputed",
+   "reason": "Centre, radius and diameter need no angle classification."
+  },
+  {
+   "target": "MATH.measurement.rectangle-area",
+   "source": "MATH.measurement.unit-conversions",
+   "classification": "disputed",
+   "reason": "Area in one unit needs no conversion between units."
+  },
+  {
+   "target": "MATH.measurement.rectangle-area",
+   "source": "MATH.number.multi-multiplication",
+   "classification": "support",
+   "reason": "Small rectangles need multiplication facts only; multi-digit multiplication matters for larger sides."
+  },
+  {
+   "target": "MATH.measurement.rectangle-perimeter",
+   "source": "MATH.measurement.area-squares",
+   "classification": "disputed",
+   "reason": "Perimeter (length around) does not need area."
+  },
+  {
+   "target": "MATH.measurement.volume-cubes",
+   "source": "MATH.measurement.rectangle-area",
+   "classification": "support",
+   "reason": "Counting cubes layer by layer is helped by area, not gated by it."
+  },
+  {
+   "target": "MATH.number.addition",
+   "source": "MATH.number.place-value-tens",
+   "classification": "support",
+   "reason": "Addition within 20 can be done by counting; tens and ones help with bridging ten."
+  },
+  {
+   "target": "MATH.number.fraction-add-like",
+   "source": "MATH.number.equivalent-fractions",
+   "classification": "disputed",
+   "reason": "Adding like fractions adds numerators; equivalent fractions matter only for simplifying the result."
+  },
+  {
+   "target": "MATH.number.fraction-comparison",
+   "source": "MATH.number.fraction-models",
+   "classification": "mandatory",
+   "reason": "Comparing fractions needs fractions as equal parts of a whole."
+  },
+  {
+   "target": "MATH.number.fraction-multiply",
+   "source": "MATH.number.fraction-add",
+   "classification": "disputed",
+   "reason": "A fraction times a whole number is repeated addition of like fractions; unlike fractions are not needed."
+  },
+  {
+   "target": "MATH.number.long-division",
+   "source": "MATH.number.multi-multiplication",
+   "classification": "plausible",
+   "reason": "The division algorithm multiplies the divisor at each step."
+  },
+  {
+   "target": "MATH.number.multi-multiplication",
+   "source": "MATH.number.large-numbers",
+   "classification": "support",
+   "reason": "Multi-digit multiplication uses place value; reading very large numbers is not required."
+  },
+  {
+   "target": "MATH.number.percent-intro",
+   "source": "MATH.number.decimal-operations",
+   "classification": "support",
+   "reason": "Percent as hundredths needs decimals as numbers, not decimal addition."
+  },
+  {
+   "target": "MATH.number.percentage",
+   "source": "MATH.number.rational-numbers",
+   "classification": "plausible",
+   "reason": "Percentages are computed with fractions and decimals."
+  },
+  {
+   "target": "MATH.number.primes",
+   "source": "MATH.number.factors-multiples",
+   "classification": "mandatory",
+   "reason": "Prime means exactly two factors."
+  },
+  {
+   "target": "MATH.number.proportion",
+   "source": "MATH.number.percentage",
+   "classification": "disputed",
+   "reason": "Direct proportion does not need percentages."
+  },
+  {
+   "target": "MATH.number.rational-numbers",
+   "source": "MATH.number.unit-rate",
+   "classification": "disputed",
+   "reason": "Operations on rational numbers do not need unit rates."
+  },
+  {
+   "target": "MATH.number.square-roots",
+   "source": "MATH.number.exponents",
+   "classification": "support",
+   "reason": "Squares are powers, but the exponent laws are not needed for squares and square roots."
+  },
+  {
+   "target": "MATH.reasoning.counterexamples-intro",
+   "source": "MATH.reasoning.multi-step",
+   "classification": "disputed",
+   "reason": "Testing a claim with an example does not need multi-step explanations."
+  },
+  {
+   "target": "MATH.statistics.averages-intro",
+   "source": "MATH.statistics.scaled-bars",
+   "classification": "disputed",
+   "reason": "Finding a mean does not need scaled bar charts."
+  },
+  {
+   "target": "MATH.number.exponents",
+   "source": "MATH.number.profit-loss",
+   "classification": "disputed",
+   "reason": "Exponent laws need repeated multiplication, not profit and loss: a sequence-order artefact."
+  },
+  {
+   "target": "MATH.calculus.indefinite-integrals",
+   "source": "MATH.calculus.applications",
+   "classification": "disputed",
+   "reason": "Antiderivatives reverse the differentiation rules; rates and extrema are not needed. Differentiation rules are a learning support instead."
+  },
+  {
+   "target": "MATH.calculus.integration-methods",
+   "source": "MATH.calculus.indefinite-integrals",
+   "classification": "mandatory",
+   "reason": "Substitution and parts rewrite an integral into one whose antiderivative is known."
+  },
+  {
+   "target": "MATH.algebra.identities-intro",
+   "source": "MATH.algebra.algebra-simplify",
+   "classification": "plausible",
+   "reason": "Expanding a(x + b) produces like terms to collect; simplifying is closely tied but a(x + b) itself needs only the distributive property."
+  },
+  {
+   "target": "MATH.calculus.derivative-rules",
+   "source": "MATH.calculus.differentiability",
+   "classification": "support",
+   "reason": "Applying the power rule does not require testing differentiability; knowing where rules apply is useful context."
+  }
+ ]
+}

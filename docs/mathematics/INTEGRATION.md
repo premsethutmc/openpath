@@ -1,0 +1,15 @@
+# Mathematics integration boundary — recorded before implementation
+
+Base: main b578c7893136fcdea5cd1805296243089e7039ce. PR #49 (9e36a1b) and #50 (5a72a48), essay branches and Tamil f4dc8d5 are separate, unmodified workstreams.
+
+Inspection: packages/english-core/src/types.ts defines Framework, CodeItem, GeneratedFrom, LedgerEvent; framework.ts validates the English hierarchy; updater.ts/model.ts own inference; store.ts exposes append-only LearnerStore. frontend/src/english/logic/{learner,events,state,store,account,plan,select,content,mastery-policy}.ts own profiles, replay, persistence, planning and evidence gates. The current framework loader is English-specific. The older src/core counting prototype and backend assessment code are not a second foundation to extend. Research remains a separate repository; no research code is promoted implicitly.
+
+Reuse: TypeScript pure modules, stable competency/family IDs, generated provenance, provisional content semantics, React/esbuild, violet/mint/peach and compact touch layouts. Do not force MATH IDs into the English framework or extend its event union on this branch. No estimator, planner, mastery policy, account or English UI edits.
+
+Host integration required: register the math graph in a language/subject-neutral framework loader; inject the existing learner ID and read-only competency view; implement a program-storage port keyed by learner/program/version/journey; submit candidate response envelopes through the existing ledger's validated event conversion. Candidate envelopes are NOT admissible LedgerEvents. Only the host's existing gate may decide eligibility and update the vector. All generated items here remain provisional practice. Repeats, hints, solutions and variant exposure must survive conversion. No direct call to updater is made.
+
+The standalone UI is a synthetic device-only prototype, not another learner profile or adaptive tutor. Its persisted activity receipts describe navigation/completion/time only. Understanding is supplied by the host view (unavailable in preview), never inferred from completion. School and exam program keys differ but competency IDs are shared. Production navigation wiring and authenticated persistence are deferred to avoid active frontend/essay integration conflicts.
+
+Official-source checks on 2026-10-18: NCERT, CBSE, Tamil Nadu textbook corporation, NTA JEE Main/CUET, JEE Advanced and ETS GRE HTTPS requests all returned proxy CONNECT 403. Therefore curriculum editions, board placement and current exam timing/scoring are unverified, explicitly provisional. Official timed simulations remain disabled; no current specification claim is made. Relevant source URLs are recorded for verification when network access is available.
+
+Follow-up: `canonical.ts` now provides the tested practice-only native ledger codec, identity binding and shared-profile projection. See [FOLLOW_UP.md](FOLLOW_UP.md). The original pre-implementation findings above remain historical; production registration and persistence are still not wired.

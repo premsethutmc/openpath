@@ -1,0 +1,4853 @@
+{
+ "schema": "competency-expansion@1",
+ "version": "1.0.0",
+ "status": "provisional",
+ "note": "New competencies found by comparing the Grades 1-12 CBSE/NCERT and Tamil Nadu State Board inventories (content/learning/syllabus) with the 200-competency graph. Existing ids are unchanged; no learner evidence is remapped. Written by content/learning/src/expansion.py; AI-assisted, not educator-reviewed.",
+ "merged": [
+  {
+   "from": "MATH.algebra.function-composition",
+   "into": "MATH.algebra.function-operations",
+   "reason": "composition is one of the operations on functions"
+  },
+  {
+   "from": "MATH.algebra.linear-functions",
+   "into": "MATH.algebra.linear-two-variables",
+   "reason": "y = ax + b relationships are the existing linear equations in two variables"
+  },
+  {
+   "from": "MATH.algebra.lp-modelling",
+   "into": "MATH.algebra.linear-programming",
+   "reason": "formulating a linear programme is part of the existing linear-programming competency"
+  },
+  {
+   "from": "MATH.algebra.zeros-coefficients",
+   "into": "MATH.algebra.polynomial-zeros",
+   "reason": "relation of zeros and coefficients (quadratics are the first case)"
+  },
+  {
+   "from": "MATH.geometry.triangle-centres",
+   "into": "MATH.geometry.triangle-concurrency",
+   "reason": "medians, altitudes, bisectors and their points of concurrency"
+  },
+  {
+   "from": "MATH.measurement.quadrilateral-area",
+   "into": "MATH.measurement.parallelogram-rhombus-area",
+   "reason": "areas of parallelograms and rhombuses, CBSE Grade 8 and TN Grade 7 wording"
+  },
+  {
+   "from": "MATH.number.decimal-expansions",
+   "into": "MATH.number.real-numbers",
+   "reason": "terminating and recurring decimals are part of representing rational and irrational numbers"
+  },
+  {
+   "from": "MATH.probability.axiomatic",
+   "into": "MATH.probability.events",
+   "reason": "axiomatic probability on a finite sample space is the existing event-algebra competency"
+  },
+  {
+   "from": "MATH.reasoning.algorithmic-thinking",
+   "into": "MATH.reasoning.algorithms-flowcharts",
+   "reason": "the same skill (step-by-step algorithms), Grade 9 CBSE and Grades 6-8 TN wording"
+  },
+  {
+   "from": "MATH.sequences.recursive-sequences",
+   "into": "MATH.sequences.explicit-recursive-rules",
+   "reason": "recursive rules for sequences (Grade 7 and Grade 9)"
+  },
+  {
+   "from": "MATH.sequences.special-series-sums",
+   "into": "MATH.sequences.power-sums",
+   "reason": "sums of k, k squared and k cubed"
+  }
+ ],
+ "competencies": [
+  {
+   "id": "MATH.algebra.absolute-value",
+   "name": "Solve equations and inequalities involving absolute value",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Solve equations and inequalities involving absolute value"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c02-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.equality-inequality",
+   "name": "Express equality and inequality between expressions using =, < and >",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    3,
+    5
+   ],
+   "objectives": [
+    "Express equality and inequality between expressions using =, < and >"
+   ],
+   "evidence": [
+    "tn-g05:tn-g05-t3-c04-o01",
+    "tn-g05:tn-g05-t3-c04-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.expression-trees",
+   "name": "Convert between numerical/algebraic expressions and tree diagrams",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    6,
+    7
+   ],
+   "objectives": [
+    "Convert between numerical/algebraic expressions and tree diagrams"
+   ],
+   "evidence": [
+    "tn-g06:tn-g06-t2-c05-o01",
+    "tn-g06:tn-g06-t2-c05-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.figurate-numbers",
+   "name": "Relate figurate number sequences to their dot and shape pictures",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    5,
+    8
+   ],
+   "objectives": [
+    "Relate figurate number sequences to their dot and shape pictures"
+   ],
+   "evidence": [
+    "cbse-g06:cbse-g06-c01-o01",
+    "cbse-g06:cbse-g06-c01-o02",
+    "cbse-g06:cbse-g06-c01-o03",
+    "cbse-g06:cbse-g06-c01-o04",
+    "cbse-g08:cbse-g08-t1-c01-o01",
+    "tn-g05:tn-g05-t1-c03-o02",
+    "tn-g05:tn-g05-t1-c03-o03",
+    "tn-g05:tn-g05-t2-c02-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.function-operations",
+   "name": "Combine functions by sum, difference, product, quotient and composition",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    10,
+    12
+   ],
+   "objectives": [
+    "Combine functions by sum, difference, product, quotient and composition",
+    "Compose functions"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c02-o05",
+    "cbse-g11:cbse-g11-c02-o06",
+    "cbse-g12:cbse-g12-c01-o04",
+    "tn-g10:tn-g10-c01-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.function-transformations",
+   "name": "Graph functions using translations, reflections and dilations",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Graph functions using translations, reflections and dilations"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c01-o07"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.generalise-with-expressions",
+   "name": "Express and justify a general pattern with an algebraic expression",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    7,
+    8
+   ],
+   "objectives": [
+    "Express and justify a general pattern with an algebraic expression"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c04-o04",
+    "cbse-g08:cbse-g08-t2-c06-o01",
+    "cbse-g08:cbse-g08-t2-c06-o02",
+    "cbse-g08:cbse-g08-t2-c06-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.inequalities-two-variables",
+   "name": "Graph linear inequalities and systems in two variables",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Graph linear inequalities and systems in two variables"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c05-o05",
+    "cbse-g12:cbse-g12-c12-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.linear-systems-three-variables",
+   "name": "Solve linear systems in three variables",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    10,
+    12
+   ],
+   "objectives": [
+    "Solve linear systems in three variables"
+   ],
+   "evidence": [
+    "tn-g10:tn-g10-c03-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.logarithms",
+   "name": "Use logarithm laws and solve logarithmic equations",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Use logarithm laws and solve logarithmic equations"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c02-o08"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.nonlinear-inequalities",
+   "name": "Solve quadratic and rational inequalities",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Solve quadratic and rational inequalities"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c02-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.partial-fractions",
+   "name": "Decompose rational functions into partial fractions",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Decompose rational functions into partial fractions"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c02-o06",
+    "tn-g11:tn-g11-c11-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.polynomial-equation-solving",
+   "name": "Solve higher-degree polynomial equations using structure",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Solve higher-degree polynomial equations using structure"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c03-o03",
+    "tn-g12:tn-g12-c03-o04",
+    "tn-g12:tn-g12-c03-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.polynomial-gcd-lcm",
+   "name": "Find GCD and LCM of polynomials",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    9,
+    10
+   ],
+   "objectives": [
+    "Find GCD and LCM of polynomials"
+   ],
+   "evidence": [
+    "tn-g09:tn-g09-c03-o06",
+    "tn-g10:tn-g10-c03-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.polynomial-root-analysis",
+   "name": "Determine the nature and number of roots of a polynomial",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Determine the nature and number of roots of a polynomial"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c03-o02",
+    "tn-g12:tn-g12-c03-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.polynomial-square-root",
+   "name": "Find square roots of polynomials",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Find square roots of polynomials"
+   ],
+   "evidence": [
+    "tn-g10:tn-g10-c03-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.polynomial-zeros",
+   "name": "Relate zeros of a polynomial to its graph and coefficients",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    10,
+    11
+   ],
+   "objectives": [
+    "Relate roots and coefficients of quadratics",
+    "Relate zeros of a polynomial to its graph and coefficients"
+   ],
+   "evidence": [
+    "cbse-g10:cbse-g10-c02-o01",
+    "cbse-g10:cbse-g10-c02-o02",
+    "cbse-g10:cbse-g10-c02-o03",
+    "cbse-g10:cbse-g10-c02-o04",
+    "tn-g10:tn-g10-c03-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.quadratic-graphs",
+   "name": "Solve quadratics graphically",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    10,
+    11
+   ],
+   "objectives": [
+    "Solve quadratics graphically"
+   ],
+   "evidence": [
+    "tn-g10:tn-g10-c03-o07"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.rational-expressions",
+   "name": "Simplify rational algebraic expressions",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    9,
+    11
+   ],
+   "objectives": [
+    "Simplify and operate on rational expressions",
+    "Simplify rational algebraic expressions"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c04-o06",
+    "tn-g10:tn-g10-c03-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.standard-function-graphs",
+   "name": "Sketch and read graphs of standard real functions",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Sketch and read graphs of standard real functions"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c02-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.algebra.vieta-relations",
+   "name": "Relate roots and coefficients of polynomial equations",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Relate roots and coefficients of polynomial equations"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c03-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.curve-sketching",
+   "name": "Sketch curves using derivatives, symmetry and asymptotes",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Sketch curves using derivatives, symmetry and asymptotes"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c07-o07"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.definite-integral-properties",
+   "name": "Evaluate definite integrals using their properties",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Evaluate definite integrals using their properties"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c07-o07"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.higher-derivatives",
+   "name": "Find and use second-order derivatives",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Find and use second-order derivatives"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c05-o06",
+    "cbse-g12:cbse-g12-c06-o04",
+    "cbse-g12:cbse-g12-c09-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.homogeneous-de",
+   "name": "Solve homogeneous first-order first-degree differential equations",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Solve homogeneous first-order first-degree differential equations"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c09-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.implicit-parametric-differentiation",
+   "name": "Differentiate implicit, parametric and logarithmically transformed functions",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Differentiate implicit, parametric and logarithmically transformed functions"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c05-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.improper-gamma-integrals",
+   "name": "Evaluate improper integrals and gamma integrals",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Evaluate improper integrals and gamma integrals"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c09-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.lhopital",
+   "name": "Evaluate indeterminate forms using l'Hopital's rule",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Evaluate indeterminate forms using l'Hopital's rule"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c07-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.linear-approximation",
+   "name": "Use differentials for linear approximation and error estimates",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use differentials for linear approximation and error estimates"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c08-o01",
+    "tn-g12:tn-g12-c08-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.linear-first-order-de",
+   "name": "Solve linear first-order differential equations with an integrating factor",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Solve linear first-order differential equations with an integrating factor"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c09-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.mean-value-theorems",
+   "name": "Apply Rolle's and Lagrange's mean value theorems",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Apply Rolle's and Lagrange's mean value theorems"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c07-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.monotonicity",
+   "name": "Find intervals where a function increases or decreases",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Find intervals where a function increases or decreases"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c06-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.multivariable-limits",
+   "name": "Examine limits and continuity of functions of two variables",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Examine limits and continuity of functions of two variables"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c08-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.ode-modelling",
+   "name": "Model growth, decay and mixing with first-order differential equations",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Model growth, decay and mixing with first-order differential equations"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c10-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.partial-derivatives",
+   "name": "Compute partial derivatives and apply Euler's theorem",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Compute partial derivatives and apply Euler's theorem"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c08-o03",
+    "tn-g12:tn-g12-c08-o04",
+    "tn-g12:tn-g12-c08-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.partial-fractions-integration",
+   "name": "Integrate rational functions by partial fractions",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Integrate rational functions by partial fractions"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c07-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.reduction-formulae",
+   "name": "Use reduction formulae for definite integrals",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use reduction formulae for definite integrals"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c09-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.taylor-series",
+   "name": "Expand functions as Taylor and Maclaurin series",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Expand functions as Taylor and Maclaurin series"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c07-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.calculus.volumes-of-revolution",
+   "name": "Find volumes of solids of revolution by integration",
+   "strand": "calculus",
+   "domain": "calculus",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Find volumes of solids of revolution by integration"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c09-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.coordinate.conic-tangents-normals",
+   "name": "Find tangents and normals to circles and conics",
+   "strand": "coordinate",
+   "domain": "coordinate",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Find tangents and normals to circles and conics"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.coordinate.locus",
+   "name": "Derive the equation of a locus",
+   "strand": "coordinate",
+   "domain": "coordinate",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Derive the equation of a locus"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c06-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.coordinate.pair-of-lines",
+   "name": "Analyse pairs of straight lines from second-degree equations",
+   "strand": "coordinate",
+   "domain": "coordinate",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Analyse pairs of straight lines from second-degree equations"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c06-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.coordinate.polygon-area",
+   "name": "Find polygon areas from coordinates",
+   "strand": "coordinate",
+   "domain": "coordinate",
+   "gradeRange": [
+    10,
+    11
+   ],
+   "objectives": [
+    "Find polygon areas from coordinates"
+   ],
+   "evidence": [
+    "tn-g10:tn-g10-c05-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.coordinate.skew-line-distance",
+   "name": "Find the shortest distance between skew or parallel lines in space",
+   "strand": "coordinate",
+   "domain": "coordinate",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Find the shortest distance between skew or parallel lines in space"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c11-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.angle-pairs",
+   "name": "Use linear pairs, vertically opposite, complementary and supplementary angles",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    5,
+    7
+   ],
+   "objectives": [
+    "Identify and use complementary, supplementary, adjacent, linear-pair and vertically opposite angles",
+    "Use linear pairs, vertically opposite, complementary and supplementary angles"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c05-o01",
+    "tn-g05:tn-g05-t2-c01-o01",
+    "tn-g06:tn-g06-t1-c04-o03",
+    "tn-g07:tn-g07-t1-c05-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.angles-as-turns",
+   "name": "Describe angles as fractions of a turn and direction of turning",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    5,
+    5
+   ],
+   "objectives": [
+    "Describe angles as fractions of a turn and direction of turning"
+   ],
+   "evidence": [
+    "cbse-g05:cbse-g05-c03-o01",
+    "cbse-g05:cbse-g05-c03-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.ceva-menelaus",
+   "name": "Apply Ceva and Menelaus theorems",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Apply Ceva and Menelaus theorems"
+   ],
+   "evidence": [
+    "tn-g10:tn-g10-c04-o08"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.construction-quadrilaterals",
+   "name": "Construct quadrilaterals, trapeziums and special quadrilaterals from sufficient data",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    8,
+    8
+   ],
+   "objectives": [
+    "Construct quadrilaterals, trapeziums and special quadrilaterals from sufficient data"
+   ],
+   "evidence": [
+    "tn-g08:tn-g08-c05-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.fractal-iteration",
+   "name": "Describe iterative fractal constructions and quantify each stage",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    5,
+    8
+   ],
+   "objectives": [
+    "Describe iterative fractal constructions and quantify each stage"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t2-c04-o01",
+    "tn-g05:tn-g05-t2-c01-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.line-types",
+   "name": "Identify and draw straight and curved lines in different orientations",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    2,
+    3
+   ],
+   "objectives": [
+    "Identify and draw straight and curved lines in different orientations"
+   ],
+   "evidence": [
+    "cbse-g02:cbse-g02-c05-o01",
+    "cbse-g02:cbse-g02-c05-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.maps-directions",
+   "name": "Locate positions and describe routes using grids, maps and directions",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    2,
+    5
+   ],
+   "objectives": [
+    "Locate positions and describe routes using grids, maps and directions"
+   ],
+   "evidence": [
+    "cbse-g02:cbse-g02-c09-o04",
+    "cbse-g04:cbse-g04-c02-o02",
+    "cbse-g04:cbse-g04-c02-o03",
+    "cbse-g04:cbse-g04-c02-o04",
+    "cbse-g05:cbse-g05-c03-o04",
+    "cbse-g05:cbse-g05-c14-o01",
+    "cbse-g05:cbse-g05-c14-o02",
+    "cbse-g05:cbse-g05-c14-o03",
+    "tn-g04:tn-g04-t2-c07-o01",
+    "tn-g04:tn-g04-t2-c07-o02",
+    "tn-g05:tn-g05-t2-c06-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.midpoint-theorem",
+   "name": "Prove and apply the midpoint theorem and its converse",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    9,
+    10
+   ],
+   "objectives": [
+    "Prove and apply the midpoint theorem and its converse"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c12-o04",
+    "cbse-g09:cbse-g09-c12-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.parallelogram-proofs",
+   "name": "Prove properties and tests of parallelograms",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    9,
+    10
+   ],
+   "objectives": [
+    "Prove properties and tests of parallelograms"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c12-o02",
+    "cbse-g09:cbse-g09-c12-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.polyhedra-euler",
+   "name": "Count faces, vertices and edges of polyhedra and verify Euler's formula",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    8,
+    8
+   ],
+   "objectives": [
+    "Count faces, vertices and edges of polyhedra and verify Euler's formula"
+   ],
+   "evidence": [
+    "tn-g08:tn-g08-c02-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.pythagoras",
+   "name": "Apply the Baudhayana-Pythagoras theorem and its converse",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    7,
+    10
+   ],
+   "objectives": [
+    "Apply the Baudhayana-Pythagoras theorem and its converse",
+    "Apply the Pythagoras theorem and its converse",
+    "Apply the Pythagorean theorem and its converse to right triangles"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t2-c02-o01",
+    "cbse-g08:cbse-g08-t2-c02-o02",
+    "cbse-g08:cbse-g08-t2-c02-o03",
+    "cbse-g08:cbse-g08-t2-c02-o04",
+    "tn-g08:tn-g08-c05-o03",
+    "tn-g10:tn-g10-c04-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.quadrilateral-classification",
+   "name": "Classify quadrilaterals by side, angle and diagonal properties",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    5,
+    8
+   ],
+   "objectives": [
+    "Classify quadrilaterals by side, angle and diagonal properties"
+   ],
+   "evidence": [
+    "cbse-g05:cbse-g05-c07-o03",
+    "cbse-g08:cbse-g08-t1-c04-o01",
+    "cbse-g08:cbse-g08-t1-c04-o03",
+    "cbse-g08:cbse-g08-t1-c04-o04",
+    "cbse-g08:cbse-g08-t1-c04-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.rotational-symmetry",
+   "name": "Identify rotational symmetry and its order (and translational symmetry in patterns)",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    5,
+    8
+   ],
+   "objectives": [
+    "Find the order and angles of rotational symmetry",
+    "Identify rotational symmetry and its order (and translational symmetry in patterns)",
+    "Recognise rotational symmetry"
+   ],
+   "evidence": [
+    "cbse-g05:cbse-g05-c10-o02",
+    "cbse-g05:cbse-g05-c10-o03",
+    "cbse-g06:cbse-g06-c09-o03",
+    "cbse-g06:cbse-g06-c09-o04",
+    "tn-g06:tn-g06-t3-c04-o03",
+    "tn-g06:tn-g06-t3-c04-o04",
+    "tn-g07:tn-g07-t3-c04-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.scale-drawings",
+   "name": "Use scales on maps and scale drawings",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    8,
+    8
+   ],
+   "objectives": [
+    "Use scales on maps and scale drawings"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t2-c03-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.tessellations",
+   "name": "Decide which polygons tile the plane and create tilings",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    7,
+    7
+   ],
+   "objectives": [
+    "Decide which polygons tile the plane and create tilings"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t2-c06-o02",
+    "cbse-g07:cbse-g07-t2-c06-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.transformations",
+   "name": "Perform and describe reflections, translations and rotations of figures",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    4,
+    8
+   ],
+   "objectives": [
+    "Perform and describe reflections, translations and rotations of figures"
+   ],
+   "evidence": [
+    "tn-g04:tn-g04-t2-c01-o02",
+    "tn-g05:tn-g05-t1-c01-o02",
+    "tn-g05:tn-g05-t1-c01-o03",
+    "tn-g05:tn-g05-t2-c03-o01",
+    "tn-g06:tn-g06-t3-c04-o02",
+    "tn-g07:tn-g07-t3-c04-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.geometry.triangle-concurrency",
+   "name": "Locate and construct triangle centres",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    7,
+    10
+   ],
+   "objectives": [
+    "Construct and identify medians, altitudes, perpendicular bisectors and angle bisectors of a triangle and their points of concurrency",
+    "Locate and construct triangle centres"
+   ],
+   "evidence": [
+    "tn-g08:tn-g08-c05-o04",
+    "tn-g09:tn-g09-c04-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.matrices.adjoint-inverse",
+   "name": "Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3)",
+   "strand": "algebra",
+   "domain": "matrices",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Find minors, cofactors, adjoint and inverse of a square matrix (up to 3x3)"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c04-o03",
+    "cbse-g12:cbse-g12-c04-o04",
+    "cbse-g12:cbse-g12-c04-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.matrices.rank-row-reduction",
+   "name": "Reduce matrices to echelon form and find rank",
+   "strand": "algebra",
+   "domain": "matrices",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Reduce matrices to echelon form and find rank"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c01-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.matrices.system-consistency",
+   "name": "Test consistency of linear systems by the rank method",
+   "strand": "algebra",
+   "domain": "matrices",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Test consistency of linear systems by the rank method"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c01-o05",
+    "tn-g12:tn-g12-c01-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.matrices.transpose-symmetry",
+   "name": "Use transposes and symmetric/skew-symmetric decomposition",
+   "strand": "algebra",
+   "domain": "matrices",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use transposes and symmetric/skew-symmetric decomposition"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c03-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.24-hour-clock",
+   "name": "Convert between 12-hour and 24-hour time",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    4,
+    5
+   ],
+   "objectives": [
+    "Convert between 12-hour and 24-hour time"
+   ],
+   "evidence": [
+    "cbse-g04:cbse-g04-c12-o02",
+    "cbse-g05:cbse-g05-c12-o01",
+    "tn-g04:tn-g04-t2-c05-o01",
+    "tn-g04:tn-g04-t2-c05-o02",
+    "tn-g05:tn-g05-t1-c05-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.area-perimeter-relation",
+   "name": "Compare shapes with equal area or equal perimeter",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    5,
+    6
+   ],
+   "objectives": [
+    "Compare shapes with equal area or equal perimeter"
+   ],
+   "evidence": [
+    "cbse-g05:cbse-g05-c11-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.brahmagupta-formula",
+   "name": "Find the area of a cyclic quadrilateral using Brahmagupta's formula",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    9,
+    9
+   ],
+   "objectives": [
+    "Find the area of a cyclic quadrilateral using Brahmagupta's formula"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c06-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.calendar",
+   "name": "Read and use a calendar",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    1,
+    5
+   ],
+   "objectives": [
+    "Read and use a calendar"
+   ],
+   "evidence": [
+    "cbse-g01:cbse-g01-c10-o03",
+    "cbse-g02:cbse-g02-c09-o02",
+    "cbse-g03:cbse-g03-c13-o02",
+    "cbse-g04:cbse-g04-c12-o01",
+    "tn-g04:tn-g04-t1-c05-o01",
+    "tn-g04:tn-g04-t1-c05-o02",
+    "tn-g04:tn-g04-t3-c04-o02",
+    "tn-g04:tn-g04-t3-c04-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.compute-with-measures",
+   "name": "Calculate with measured quantities in mixed units",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    4,
+    6
+   ],
+   "objectives": [
+    "Calculate with measured quantities in mixed units"
+   ],
+   "evidence": [
+    "cbse-g04:cbse-g04-c08-o04",
+    "cbse-g05:cbse-g05-c05-o04",
+    "cbse-g05:cbse-g05-c08-o03",
+    "cbse-g05:cbse-g05-c08-o04",
+    "tn-g04:tn-g04-t1-c04-o02",
+    "tn-g04:tn-g04-t2-c04-o02",
+    "tn-g04:tn-g04-t3-c03-o02",
+    "tn-g05:tn-g05-t1-c04-o02",
+    "tn-g05:tn-g05-t2-c04-o02",
+    "tn-g05:tn-g05-t2-c04-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.frustum",
+   "name": "Calculate frustum surface area and volume",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Calculate frustum surface area and volume"
+   ],
+   "evidence": [
+    "tn-g10:tn-g10-c07-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.money-totals",
+   "name": "Make and total amounts with notes and coins",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    1,
+    4
+   ],
+   "objectives": [
+    "Make and total amounts with notes and coins"
+   ],
+   "evidence": [
+    "cbse-g01:cbse-g01-c12-o02",
+    "cbse-g01:cbse-g01-c12-o03",
+    "cbse-g02:cbse-g02-c10-o02",
+    "cbse-g03:cbse-g03-c12-o03",
+    "cbse-g04:cbse-g04-c03-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.non-standard-units",
+   "name": "Measure with non-standard units",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    1,
+    3
+   ],
+   "objectives": [
+    "Measure with non-standard units"
+   ],
+   "evidence": [
+    "cbse-g01:cbse-g01-c07-o02",
+    "cbse-g01:cbse-g01-c07-o04",
+    "cbse-g02:cbse-g02-c07-o01",
+    "cbse-g02:cbse-g02-c07-o03",
+    "cbse-g03:cbse-g03-c10-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.parallelogram-rhombus-area",
+   "name": "Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas)",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    7,
+    8
+   ],
+   "objectives": [
+    "Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas)",
+    "Calculate areas of parallelograms and rhombuses"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t2-c07-o02",
+    "tn-g07:tn-g07-t1-c02-o01",
+    "tn-g07:tn-g07-t1-c02-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.pyramids",
+   "name": "Calculate surface area and volume of pyramids",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    9,
+    11
+   ],
+   "objectives": [
+    "Calculate surface area and volume of pyramids"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c14-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.measurement.time-unit-conversion",
+   "name": "Convert between hours, minutes and seconds",
+   "strand": "measurement",
+   "domain": "measurement",
+   "gradeRange": [
+    3,
+    5
+   ],
+   "objectives": [
+    "Convert between hours, minutes and seconds"
+   ],
+   "evidence": [
+    "cbse-g03:cbse-g03-c13-o04",
+    "cbse-g04:cbse-g04-c12-o04",
+    "cbse-g05:cbse-g05-c12-o02",
+    "cbse-g05:cbse-g05-c12-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.complex-locus",
+   "name": "Describe loci and regions in the complex plane",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Describe loci and regions in the complex plane"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c02-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.complex-polar-form",
+   "name": "Write complex numbers in modulus-argument (polar) form",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Write complex numbers in modulus-argument (polar) form"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c04-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.de-moivre-roots",
+   "name": "Apply de Moivre's theorem and find nth roots",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Apply de Moivre's theorem and find nth roots"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c02-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.even-odd",
+   "name": "Classify numbers as even or odd",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    4,
+    5
+   ],
+   "objectives": [
+    "Classify numbers as even or odd"
+   ],
+   "evidence": [
+    "cbse-g04:cbse-g04-c03-o02",
+    "cbse-g04:cbse-g04-c10-o04",
+    "cbse-g05:cbse-g05-c04-o04",
+    "tn-g04:tn-g04-t1-c02-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.exponential-growth",
+   "name": "Compare linear and exponential growth",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    8,
+    8
+   ],
+   "objectives": [
+    "Compare linear and exponential growth"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t1-c02-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.fraction-of-collection",
+   "name": "Find a fraction of a collection",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    3,
+    5
+   ],
+   "objectives": [
+    "Find a fraction of a collection"
+   ],
+   "evidence": [
+    "cbse-g03:cbse-g03-c08-o02",
+    "cbse-g04:cbse-g04-c05-o04",
+    "tn-g04:tn-g04-t2-c06-o03",
+    "tn-g05:tn-g05-t2-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.hcf-lcm",
+   "name": "Find common factors, common multiples, HCF and LCM",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    5,
+    7
+   ],
+   "objectives": [
+    "Find HCF and LCM (by listing or prime factorisation) and apply them in problems",
+    "Find common factors, common multiples, HCF and LCM"
+   ],
+   "evidence": [
+    "cbse-g06:cbse-g06-c05-o01",
+    "cbse-g06:cbse-g06-c05-o03",
+    "cbse-g07:cbse-g07-t2-c03-o01",
+    "cbse-g07:cbse-g07-t2-c03-o02",
+    "cbse-g07:cbse-g07-t2-c03-o03",
+    "cbse-g07:cbse-g07-t2-c03-o04",
+    "tn-g05:tn-g05-t2-c02-o03",
+    "tn-g06:tn-g06-t2-c01-o04",
+    "tn-g06:tn-g06-t2-c01-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.indian-international-numeration",
+   "name": "Read, write and convert numbers in the Indian and international systems",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    7,
+    7
+   ],
+   "objectives": [
+    "Read, write and convert numbers in the Indian and international systems"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c01-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.integer-multiply",
+   "name": "Multiply integers using sign rules",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    7,
+    7
+   ],
+   "objectives": [
+    "Multiply integers using sign rules"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t2-c02-o02",
+    "cbse-g07:cbse-g07-t2-c02-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.irrationality-proofs",
+   "name": "Prove that a number is irrational",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    9,
+    10
+   ],
+   "objectives": [
+    "Prove that a number is irrational"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c03-o04",
+    "cbse-g10:cbse-g10-c01-o04",
+    "cbse-g10:cbse-g10-c01-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.mental-arithmetic",
+   "name": "Add, subtract and multiply mentally using place-value strategies",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    2,
+    5
+   ],
+   "objectives": [
+    "Add, subtract and multiply mentally using place-value strategies"
+   ],
+   "evidence": [
+    "tn-g04:tn-g04-t3-c02-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.mixed-fractions",
+   "name": "Convert between mixed and improper fractions",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    5,
+    6
+   ],
+   "objectives": [
+    "Convert between mixed and improper fractions"
+   ],
+   "evidence": [
+    "cbse-g05:cbse-g05-c02-o04",
+    "cbse-g06:cbse-g06-c07-o03",
+    "tn-g05:tn-g05-t3-c06-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.modular-arithmetic",
+   "name": "Use congruence modulo n",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    10,
+    10
+   ],
+   "objectives": [
+    "Use congruence modulo n"
+   ],
+   "evidence": [
+    "tn-g10:tn-g10-c02-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.multi-digit-add-subtract",
+   "name": "Add and subtract multi-digit numbers with regrouping",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    3,
+    5
+   ],
+   "objectives": [
+    "Add and subtract multi-digit numbers with regrouping"
+   ],
+   "evidence": [
+    "cbse-g03:cbse-g03-c04-o01",
+    "cbse-g03:cbse-g03-c12-o01",
+    "cbse-g03:cbse-g03-c12-o02",
+    "cbse-g04:cbse-g04-c07-o01",
+    "cbse-g04:cbse-g04-c07-o02",
+    "cbse-g04:cbse-g04-c10-o01",
+    "cbse-g04:cbse-g04-c10-o02",
+    "cbse-g05:cbse-g05-c04-o01",
+    "cbse-g05:cbse-g05-c04-o03",
+    "tn-g04:tn-g04-t1-c02-o04",
+    "tn-g04:tn-g04-t1-c02-o05",
+    "tn-g05:tn-g05-t1-c02-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.multiply-divide-powers-of-ten",
+   "name": "Multiply and divide by 10, 100 and 1000",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    4,
+    5
+   ],
+   "objectives": [
+    "Multiply and divide by 10, 100 and 1000"
+   ],
+   "evidence": [
+    "cbse-g04:cbse-g04-c13-o02",
+    "cbse-g04:cbse-g04-c13-o04",
+    "cbse-g05:cbse-g05-c09-o02",
+    "tn-g04:tn-g04-t1-c03-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.number-bases",
+   "name": "Represent numbers in place-value systems with different bases",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    8,
+    8
+   ],
+   "objectives": [
+    "Represent numbers in place-value systems with different bases"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t1-c03-o01",
+    "cbse-g08:cbse-g08-t1-c03-o02",
+    "cbse-g08:cbse-g08-t1-c03-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.number-line",
+   "name": "Locate and compare numbers on a number line",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    2,
+    5
+   ],
+   "objectives": [
+    "Locate and compare numbers on a number line"
+   ],
+   "evidence": [
+    "cbse-g02:cbse-g02-c03-o03",
+    "cbse-g03:cbse-g03-c03-o02",
+    "cbse-g03:cbse-g03-c06-o03",
+    "cbse-g03:cbse-g03-c09-o02",
+    "cbse-g04:cbse-g04-c04-o03",
+    "cbse-g04:cbse-g04-c04-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.operation-properties",
+   "name": "Use commutative, associative and distributive properties to transform and compare expressions",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    6,
+    8
+   ],
+   "objectives": [
+    "Use closure, commutative, associative, distributive and identity properties of operations on a number system",
+    "Use commutative, associative and distributive properties to transform and compare expressions"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c02-o03",
+    "cbse-g07:cbse-g07-t2-c02-o03",
+    "cbse-g08:cbse-g08-t1-c06-o04",
+    "tn-g06:tn-g06-t1-c01-o05",
+    "tn-g07:tn-g07-t1-c01-o03",
+    "tn-g08:tn-g08-c01-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.order-of-operations",
+   "name": "Evaluate arithmetic expressions using brackets and operation precedence",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    5,
+    7
+   ],
+   "objectives": [
+    "Evaluate arithmetic expressions using brackets and operation precedence",
+    "Evaluate expressions using the order of operations (brackets, division/multiplication, addition/subtraction)"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c02-o01",
+    "cbse-g07:cbse-g07-t1-c02-o02",
+    "tn-g06:tn-g06-t1-c01-o03",
+    "tn-g06:tn-g06-t2-c05-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.prime-factorisation",
+   "name": "Express a number as a product of primes",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    6,
+    8
+   ],
+   "objectives": [
+    "Express a number as a product of primes"
+   ],
+   "evidence": [
+    "cbse-g06:cbse-g06-c05-o04",
+    "cbse-g08:cbse-g08-t1-c01-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.ratio-division",
+   "name": "Divide a quantity in a given ratio",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    7,
+    8
+   ],
+   "objectives": [
+    "Divide a quantity in a given ratio"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t1-c07-o04",
+    "cbse-g08:cbse-g08-t2-c03-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.root-length-construction",
+   "name": "Construct irrational lengths such as sqrt n on the number line",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    9,
+    9
+   ],
+   "objectives": [
+    "Construct irrational lengths such as sqrt n on the number line"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c03-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.number.rounding",
+   "name": "Round numbers to the nearest ten, hundred or thousand",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    4,
+    7
+   ],
+   "objectives": [
+    "Round numbers and distinguish exact from approximate values",
+    "Round numbers to the nearest ten, hundred or thousand",
+    "Round whole numbers and decimals to a given place and use rounding to estimate"
+   ],
+   "evidence": [
+    "cbse-g04:cbse-g04-c10-o03",
+    "cbse-g05:cbse-g05-c01-o02",
+    "cbse-g06:cbse-g06-c03-o04",
+    "cbse-g07:cbse-g07-t1-c01-o03",
+    "tn-g04:tn-g04-t3-c02-o03",
+    "tn-g05:tn-g05-t3-c02-o01",
+    "tn-g06:tn-g06-t1-c01-o04",
+    "tn-g07:tn-g07-t3-c01-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.probability.binomial-distribution",
+   "name": "Apply Bernoulli and binomial distributions",
+   "strand": "probability",
+   "domain": "probability",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Apply Bernoulli and binomial distributions"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c11-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.probability.continuous-random-variables",
+   "name": "Work with probability density and distribution functions",
+   "strand": "probability",
+   "domain": "probability",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Work with probability density and distribution functions"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c11-o02",
+    "tn-g12:tn-g12-c11-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.probability.independent-events",
+   "name": "Test and use independence of events",
+   "strand": "probability",
+   "domain": "probability",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Test and use independence of events"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c13-o03",
+    "cbse-g12:cbse-g12-c13-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.probability.total-probability",
+   "name": "Apply the law of total probability over a partition",
+   "strand": "probability",
+   "domain": "probability",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Apply the law of total probability over a partition"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c13-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.probability.tree-diagrams",
+   "name": "Use tree diagrams and two-way tables for compound experiments",
+   "strand": "probability",
+   "domain": "probability",
+   "gradeRange": [
+    9,
+    12
+   ],
+   "objectives": [
+    "Use tree diagrams and two-way tables for compound experiments"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c07-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.algorithms-flowcharts",
+   "name": "Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    6,
+    12
+   ],
+   "objectives": [
+    "Describe, trace and improve step-by-step algorithms",
+    "Follow, devise and represent step-by-step algorithms, iterative processes and flowcharts"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c11-o01",
+    "cbse-g09:cbse-g09-c11-o02",
+    "cbse-g09:cbse-g09-c11-o05",
+    "tn-g06:tn-g06-t3-c05-o01",
+    "tn-g06:tn-g06-t3-c05-o02",
+    "tn-g06:tn-g06-t3-c05-o03",
+    "tn-g07:tn-g07-t3-c06-o01",
+    "tn-g07:tn-g07-t3-c06-o02",
+    "tn-g08:tn-g08-c07-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.coding-ciphers",
+   "name": "Encode and decode messages using rule-based ciphers",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    8,
+    8
+   ],
+   "objectives": [
+    "Encode and decode messages using rule-based ciphers"
+   ],
+   "evidence": [
+    "tn-g08:tn-g08-c07-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.conjecture-testing",
+   "name": "Formulate and test conjectures from number explorations",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    6,
+    8
+   ],
+   "objectives": [
+    "Formulate and test conjectures from number explorations"
+   ],
+   "evidence": [
+    "cbse-g06:cbse-g06-c01-o03",
+    "cbse-g06:cbse-g06-c03-o02",
+    "cbse-g06:cbse-g06-c03-o03",
+    "cbse-g08:cbse-g08-t1-c01-o04",
+    "cbse-g08:cbse-g08-t1-c05-o03",
+    "cbse-g08:cbse-g08-t2-c06-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.digit-puzzles",
+   "name": "Solve cryptarithm (digits-in-disguise) puzzles",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    7,
+    8
+   ],
+   "objectives": [
+    "Solve cryptarithm (digits-in-disguise) puzzles"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c06-o04",
+    "cbse-g08:cbse-g08-t1-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.mathematical-induction",
+   "name": "Prove statements by mathematical induction",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Prove statements by mathematical induction"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c04-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.number-grid-puzzles",
+   "name": "Solve number grid puzzles such as supercells and magic squares",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    6,
+    7
+   ],
+   "objectives": [
+    "Solve number grid puzzles such as supercells and magic squares"
+   ],
+   "evidence": [
+    "cbse-g06:cbse-g06-c03-o01",
+    "cbse-g06:cbse-g06-c10-o04",
+    "cbse-g07:cbse-g07-t1-c06-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.parity",
+   "name": "Reason with parity of sums and products",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    7,
+    8
+   ],
+   "objectives": [
+    "Reason with parity of sums and products"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c06-o01",
+    "cbse-g08:cbse-g08-t1-c05-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.propositional-logic",
+   "name": "Analyse compound statements with truth tables",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Analyse compound statements with truth tables"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c12-o03",
+    "tn-g12:tn-g12-c12-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.puzzle-strategy",
+   "name": "Reason systematically to solve puzzles and strategy games",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    4,
+    5
+   ],
+   "objectives": [
+    "Reason systematically to solve puzzles and strategy games"
+   ],
+   "evidence": [
+    "cbse-g04:cbse-g04-c07-o04",
+    "cbse-g04:cbse-g04-c10-o05",
+    "cbse-g05:cbse-g05-c01-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.sort-by-attribute",
+   "name": "Sort and match objects by attributes",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    1,
+    2
+   ],
+   "objectives": [
+    "Sort and match objects by attributes"
+   ],
+   "evidence": [
+    "cbse-g01:cbse-g01-c01-o02",
+    "cbse-g02:cbse-g02-c02-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.systematic-enumeration",
+   "name": "List or count all arrangements or configurations systematically (including figures within a figure)",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    4,
+    8
+   ],
+   "objectives": [
+    "List or count all arrangements or configurations systematically (including figures within a figure)"
+   ],
+   "evidence": [
+    "tn-g04:tn-g04-t1-c06-o01",
+    "tn-g05:tn-g05-t1-c06-o01",
+    "tn-g05:tn-g05-t3-c02-o02",
+    "tn-g06:tn-g06-t1-c06-o01",
+    "tn-g06:tn-g06-t1-c06-o02",
+    "tn-g06:tn-g06-t1-c06-o03",
+    "tn-g08:tn-g08-c07-o01",
+    "tn-g08:tn-g08-c07-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.reasoning.winning-strategies",
+   "name": "Find and justify winning strategies in simple number games",
+   "strand": "reasoning",
+   "domain": "reasoning",
+   "gradeRange": [
+    6,
+    6
+   ],
+   "objectives": [
+    "Find and justify winning strategies in simple number games"
+   ],
+   "evidence": [
+    "cbse-g06:cbse-g06-c03-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.agp-hp",
+   "name": "Work with arithmetico-geometric and harmonic progressions",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Work with arithmetico-geometric and harmonic progressions"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c05-o03",
+    "tn-g11:tn-g11-c05-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.am-gm-relation",
+   "name": "Use arithmetic and geometric means and the AM-GM inequality",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Use arithmetic and geometric means and the AM-GM inequality"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c08-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.explicit-recursive-rules",
+   "name": "Describe sequences with explicit and recursive rules",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    7,
+    11
+   ],
+   "objectives": [
+    "Describe sequences with explicit and recursive rules",
+    "Generate and reason about recursively defined sequences"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c06-o03",
+    "cbse-g09:cbse-g09-c08-o02",
+    "cbse-g09:cbse-g09-c08-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.infinite-series-expansions",
+   "name": "Use binomial, exponential and logarithmic series",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Use binomial, exponential and logarithmic series"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c05-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.power-sums",
+   "name": "Sum special series of natural numbers",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    10,
+    11
+   ],
+   "objectives": [
+    "Evaluate sums of k, k squared and k cubed and series built from them",
+    "Sum special series of natural numbers"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c08-o06",
+    "tn-g10:tn-g10-c02-o07"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.sequence-notation",
+   "name": "Describe sequences and series by general term, recursion and sigma notation",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Describe sequences and series by general term, recursion and sigma notation"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c08-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.series-summation",
+   "name": "Sum finite series using standard sums and telescoping",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Sum finite series using standard sums and telescoping"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sets-relations.binary-operations",
+   "name": "Test properties of binary operations",
+   "strand": "algebra",
+   "domain": "sets-relations",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Test properties of binary operations"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c12-o01",
+    "tn-g12:tn-g12-c12-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sets-relations.cartesian-product",
+   "name": "Form Cartesian products and count their elements",
+   "strand": "algebra",
+   "domain": "sets-relations",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Form Cartesian products and count their elements"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c02-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sets-relations.function-types",
+   "name": "Classify functions as one-one, onto or bijective",
+   "strand": "algebra",
+   "domain": "sets-relations",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Classify functions as one-one, onto or bijective"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c01-o03",
+    "cbse-g12:cbse-g12-c02-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sets-relations.real-intervals",
+   "name": "Represent subsets of the real line in interval notation",
+   "strand": "algebra",
+   "domain": "sets-relations",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Represent subsets of the real line in interval notation"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c01-o03",
+    "cbse-g11:cbse-g11-c05-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sets-relations.relation-properties",
+   "name": "Test relations for reflexivity, symmetry, transitivity and equivalence",
+   "strand": "algebra",
+   "domain": "sets-relations",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Test relations for reflexivity, symmetry, transitivity and equivalence"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c01-o01",
+    "cbse-g12:cbse-g12-c01-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.evaluate-data-displays",
+   "name": "Choose, design and critique data displays and infographics",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    6,
+    8
+   ],
+   "objectives": [
+    "Choose, design and critique data displays and infographics"
+   ],
+   "evidence": [
+    "cbse-g06:cbse-g06-c04-o05",
+    "cbse-g07:cbse-g07-t2-c05-o03",
+    "cbse-g08:cbse-g08-t2-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.mean-deviation",
+   "name": "Calculate mean deviation about the mean or median",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Calculate mean deviation about the mean or median"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c13-o02"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.pie-charts",
+   "name": "Read and draw pie charts",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    4,
+    8
+   ],
+   "objectives": [
+    "Read and draw pie charts"
+   ],
+   "evidence": [
+    "cbse-g08:cbse-g08-t2-c03-o03",
+    "tn-g04:tn-g04-t1-c06-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.stacked-bar-charts",
+   "name": "Read and construct stacked and 100% stacked bar charts",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    9,
+    10
+   ],
+   "objectives": [
+    "Read and construct stacked and 100% stacked bar charts"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c10-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.statistical-questions",
+   "name": "Pose statistical questions and draw conclusions from data",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    7,
+    8
+   ],
+   "objectives": [
+    "Pose statistical questions and draw conclusions from data"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t2-c05-o01",
+    "cbse-g07:cbse-g07-t2-c05-o04",
+    "cbse-g08:cbse-g08-t2-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.weighted-mean",
+   "name": "Calculate and interpret weighted and combined means",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    9,
+    11
+   ],
+   "objectives": [
+    "Calculate and interpret weighted and combined means"
+   ],
+   "evidence": [
+    "cbse-g09:cbse-g09-c10-o02",
+    "cbse-g09:cbse-g09-c10-o03"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.trigonometry.compound-angle-identities",
+   "name": "Apply compound, multiple-angle and sum-to-product identities",
+   "strand": "trigonometry",
+   "domain": "trigonometry",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Apply compound, multiple-angle and sum-to-product identities"
+   ],
+   "evidence": [
+    "cbse-g11:cbse-g11-c03-o04",
+    "cbse-g11:cbse-g11-c03-o05"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.trigonometry.triangle-laws",
+   "name": "Solve triangles using sine, cosine and projection rules",
+   "strand": "trigonometry",
+   "domain": "trigonometry",
+   "gradeRange": [
+    11,
+    11
+   ],
+   "objectives": [
+    "Solve triangles using sine, cosine and projection rules"
+   ],
+   "evidence": [
+    "tn-g11:tn-g11-c03-o05",
+    "tn-g11:tn-g11-c03-o06"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.vectors.direction-cosines",
+   "name": "Find direction cosines and direction ratios of vectors and lines",
+   "strand": "vectors",
+   "domain": "vectors",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Find direction cosines and direction ratios of vectors and lines"
+   ],
+   "evidence": [
+    "cbse-g12:cbse-g12-c10-o02",
+    "cbse-g12:cbse-g12-c11-o01"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.vectors.triple-products",
+   "name": "Use scalar and vector triple products",
+   "strand": "vectors",
+   "domain": "vectors",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use scalar and vector triple products"
+   ],
+   "evidence": [
+    "tn-g12:tn-g12-c06-o02"
+   ],
+   "status": "provisional"
+  }
+ ],
+ "relations": [
+  {
+   "target": "MATH.algebra.absolute-value",
+   "from": "MATH.algebra.inequalities",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.absolute-value",
+   "from": "MATH.number.real-numbers",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.equality-inequality",
+   "from": "MATH.number.compare-numbers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.equality-inequality",
+   "from": "MATH.algebra.missing-number",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.expression-trees",
+   "from": "MATH.number.order-of-operations",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.expression-trees",
+   "from": "MATH.algebra.variables",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.figurate-numbers",
+   "from": "MATH.algebra.growing-patterns",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.figurate-numbers",
+   "from": "MATH.algebra.pattern-rules",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.function-operations",
+   "from": "MATH.algebra.inverse-functions",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.function-transformations",
+   "from": "MATH.algebra.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.function-transformations",
+   "from": "MATH.coordinate.cartesian",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.generalise-with-expressions",
+   "from": "MATH.algebra.variables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.generalise-with-expressions",
+   "from": "MATH.algebra.algebra-simplify",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.generalise-with-expressions",
+   "from": "MATH.algebra.pattern-rules",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.inequalities-two-variables",
+   "from": "MATH.algebra.inequalities",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.inequalities-two-variables",
+   "from": "MATH.algebra.linear-two-variables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.inequalities-two-variables",
+   "from": "MATH.algebra.linear-programming",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.linear-systems-three-variables",
+   "from": "MATH.algebra.linear-systems",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.linear-systems-three-variables",
+   "from": "MATH.algebra.matrix-systems",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.logarithms",
+   "from": "MATH.number.exponents",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.nonlinear-inequalities",
+   "from": "MATH.algebra.inequalities",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.nonlinear-inequalities",
+   "from": "MATH.algebra.quadratics",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.nonlinear-inequalities",
+   "from": "MATH.algebra.quadratic-discriminant",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.partial-fractions",
+   "from": "MATH.algebra.factorisation",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.partial-fractions",
+   "from": "MATH.algebra.polynomials",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.partial-fractions",
+   "from": "MATH.algebra.linear-systems",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-equation-solving",
+   "from": "MATH.algebra.factor-theorem",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-equation-solving",
+   "from": "MATH.algebra.vieta-relations",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-equation-solving",
+   "from": "MATH.algebra.quadratic-complex",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-gcd-lcm",
+   "from": "MATH.algebra.factorisation",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-gcd-lcm",
+   "from": "MATH.algebra.polynomials",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-gcd-lcm",
+   "from": "MATH.number.euclid-algorithm",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-gcd-lcm",
+   "from": "MATH.number.factors-multiples",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-root-analysis",
+   "from": "MATH.algebra.polynomials",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-root-analysis",
+   "from": "MATH.algebra.quadratic-discriminant",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-root-analysis",
+   "from": "MATH.algebra.vieta-relations",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-square-root",
+   "from": "MATH.algebra.identities",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-square-root",
+   "from": "MATH.algebra.polynomials",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-square-root",
+   "from": "MATH.algebra.factorisation",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-square-root",
+   "from": "MATH.number.square-roots",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.polynomial-zeros",
+   "from": "MATH.algebra.polynomials",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-zeros",
+   "from": "MATH.algebra.quadratics",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-zeros",
+   "from": "MATH.coordinate.cartesian",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.polynomial-zeros",
+   "from": "MATH.algebra.factorisation",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.quadratic-graphs",
+   "from": "MATH.algebra.variables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.quadratic-graphs",
+   "from": "MATH.coordinate.cartesian",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.quadratic-graphs",
+   "from": "MATH.algebra.functions",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.quadratic-graphs",
+   "from": "MATH.algebra.quadratic-discriminant",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.quadratic-graphs",
+   "from": "MATH.algebra.quadratics",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.rational-expressions",
+   "from": "MATH.algebra.factorisation",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.rational-expressions",
+   "from": "MATH.number.fraction-add",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.rational-expressions",
+   "from": "MATH.number.fraction-product",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.rational-expressions",
+   "from": "MATH.algebra.identities",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.rational-expressions",
+   "from": "MATH.algebra.polynomial-gcd-lcm",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.standard-function-graphs",
+   "from": "MATH.algebra.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.standard-function-graphs",
+   "from": "MATH.coordinate.straight-lines",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.vieta-relations",
+   "from": "MATH.algebra.polynomials",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.vieta-relations",
+   "from": "MATH.algebra.quadratics",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.vieta-relations",
+   "from": "MATH.number.complex",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.curve-sketching",
+   "from": "MATH.calculus.applications",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.curve-sketching",
+   "from": "MATH.algebra.function-transformations",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.definite-integral-properties",
+   "from": "MATH.calculus.definite-integrals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.higher-derivatives",
+   "from": "MATH.calculus.derivative-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.higher-derivatives",
+   "from": "MATH.calculus.implicit-parametric-differentiation",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.homogeneous-de",
+   "from": "MATH.calculus.differential-equations",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.homogeneous-de",
+   "from": "MATH.calculus.integration-methods",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.implicit-parametric-differentiation",
+   "from": "MATH.calculus.derivative-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.improper-gamma-integrals",
+   "from": "MATH.calculus.definite-integrals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.improper-gamma-integrals",
+   "from": "MATH.calculus.limits",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.improper-gamma-integrals",
+   "from": "MATH.calculus.integration-methods",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.lhopital",
+   "from": "MATH.calculus.derivative-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.lhopital",
+   "from": "MATH.calculus.limits",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.lhopital",
+   "from": "MATH.algebra.logarithms",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.linear-approximation",
+   "from": "MATH.calculus.derivative-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.linear-approximation",
+   "from": "MATH.calculus.partial-derivatives",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.linear-first-order-de",
+   "from": "MATH.calculus.differential-equations",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.linear-first-order-de",
+   "from": "MATH.calculus.integration-methods",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.mean-value-theorems",
+   "from": "MATH.calculus.continuity",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.mean-value-theorems",
+   "from": "MATH.calculus.differentiability",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.monotonicity",
+   "from": "MATH.calculus.derivative-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.monotonicity",
+   "from": "MATH.sets-relations.real-intervals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.monotonicity",
+   "from": "MATH.calculus.applications",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.multivariable-limits",
+   "from": "MATH.calculus.continuity",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.multivariable-limits",
+   "from": "MATH.calculus.limits",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.ode-modelling",
+   "from": "MATH.calculus.differential-equations",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.ode-modelling",
+   "from": "MATH.algebra.logarithms",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.ode-modelling",
+   "from": "MATH.reasoning.model-selection",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.partial-derivatives",
+   "from": "MATH.calculus.derivative-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.partial-derivatives",
+   "from": "MATH.calculus.multivariable-limits",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.partial-fractions-integration",
+   "from": "MATH.algebra.polynomials",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.partial-fractions-integration",
+   "from": "MATH.calculus.indefinite-integrals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.partial-fractions-integration",
+   "from": "MATH.calculus.integration-methods",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.reduction-formulae",
+   "from": "MATH.calculus.definite-integrals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.reduction-formulae",
+   "from": "MATH.calculus.integration-methods",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.taylor-series",
+   "from": "MATH.calculus.derivative-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.taylor-series",
+   "from": "MATH.sequences.infinite-series-expansions",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.volumes-of-revolution",
+   "from": "MATH.calculus.definite-integrals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.calculus.volumes-of-revolution",
+   "from": "MATH.calculus.area-integrals",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.calculus.volumes-of-revolution",
+   "from": "MATH.measurement.cones-spheres",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.coordinate.conic-tangents-normals",
+   "from": "MATH.coordinate.conics",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.coordinate.conic-tangents-normals",
+   "from": "MATH.calculus.applications",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.coordinate.locus",
+   "from": "MATH.coordinate.distance",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.coordinate.pair-of-lines",
+   "from": "MATH.algebra.quadratics",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.coordinate.pair-of-lines",
+   "from": "MATH.coordinate.straight-lines",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.coordinate.pair-of-lines",
+   "from": "MATH.algebra.determinants",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.coordinate.polygon-area",
+   "from": "MATH.coordinate.cartesian",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.coordinate.polygon-area",
+   "from": "MATH.coordinate.distance",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.coordinate.polygon-area",
+   "from": "MATH.measurement.triangle-area",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.coordinate.skew-line-distance",
+   "from": "MATH.coordinate.space-lines",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.coordinate.skew-line-distance",
+   "from": "MATH.vectors.products",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.angle-pairs",
+   "from": "MATH.geometry.angle-measure",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.angle-pairs",
+   "from": "MATH.geometry.lines-segments",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.angle-pairs",
+   "from": "MATH.geometry.parallel-angles",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.angles-as-turns",
+   "from": "MATH.geometry.angles-intro",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.angles-as-turns",
+   "from": "MATH.number.fraction-models",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.angles-as-turns",
+   "from": "MATH.geometry.maps-directions",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.ceva-menelaus",
+   "from": "MATH.number.ratio",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.ceva-menelaus",
+   "from": "MATH.geometry.similarity",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.ceva-menelaus",
+   "from": "MATH.geometry.triangle-concurrency",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.construction-quadrilaterals",
+   "from": "MATH.geometry.construction-triangles",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.construction-quadrilaterals",
+   "from": "MATH.geometry.quadrilaterals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.construction-quadrilaterals",
+   "from": "MATH.geometry.basic-constructions",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.fractal-iteration",
+   "from": "MATH.algebra.growing-patterns",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.fractal-iteration",
+   "from": "MATH.number.exponents",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.line-types",
+   "from": "MATH.geometry.shapes",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.maps-directions",
+   "from": "MATH.geometry.positions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.maps-directions",
+   "from": "MATH.geometry.solid-views",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.midpoint-theorem",
+   "from": "MATH.geometry.congruence",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.midpoint-theorem",
+   "from": "MATH.geometry.parallel-angles",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.midpoint-theorem",
+   "from": "MATH.geometry.parallelogram-proofs",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.midpoint-theorem",
+   "from": "MATH.geometry.similarity",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.parallelogram-proofs",
+   "from": "MATH.geometry.congruence",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.parallelogram-proofs",
+   "from": "MATH.geometry.parallel-angles",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.parallelogram-proofs",
+   "from": "MATH.geometry.quadrilaterals",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.parallelogram-proofs",
+   "from": "MATH.geometry.triangle-proof",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.polyhedra-euler",
+   "from": "MATH.geometry.shape-properties",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.polyhedra-euler",
+   "from": "MATH.geometry.nets",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.polyhedra-euler",
+   "from": "MATH.geometry.solid-views",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.pythagoras",
+   "from": "MATH.geometry.triangle-types",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.pythagoras",
+   "from": "MATH.coordinate.distance-intro",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.pythagoras",
+   "from": "MATH.geometry.similarity",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.pythagoras",
+   "from": "MATH.geometry.triangle-properties",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.pythagoras",
+   "from": "MATH.measurement.area-squares",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.pythagoras",
+   "from": "MATH.trigonometry.ratios",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.quadrilateral-classification",
+   "from": "MATH.geometry.angles-intro",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.quadrilateral-classification",
+   "from": "MATH.geometry.shape-properties",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.quadrilateral-classification",
+   "from": "MATH.geometry.congruence",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.quadrilateral-classification",
+   "from": "MATH.geometry.parallel-angles",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.quadrilateral-classification",
+   "from": "MATH.geometry.quadrilaterals",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.quadrilateral-classification",
+   "from": "MATH.geometry.triangle-types",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.rotational-symmetry",
+   "from": "MATH.geometry.angles-intro",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.rotational-symmetry",
+   "from": "MATH.geometry.symmetry-lines",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.rotational-symmetry",
+   "from": "MATH.geometry.angles-as-turns",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.rotational-symmetry",
+   "from": "MATH.geometry.transformations",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.scale-drawings",
+   "from": "MATH.number.ratio",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.scale-drawings",
+   "from": "MATH.measurement.unit-conversions",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.tessellations",
+   "from": "MATH.geometry.angle-measure",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.tessellations",
+   "from": "MATH.geometry.polygon-angles",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.tessellations",
+   "from": "MATH.geometry.shape-tiling",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.transformations",
+   "from": "MATH.geometry.symmetry-lines",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.transformations",
+   "from": "MATH.coordinate.cartesian",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.triangle-concurrency",
+   "from": "MATH.geometry.triangle-properties",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.triangle-concurrency",
+   "from": "MATH.geometry.construction-triangles",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.geometry.triangle-concurrency",
+   "from": "MATH.geometry.triangle-proof",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.matrices.adjoint-inverse",
+   "from": "MATH.algebra.determinants",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.matrices.adjoint-inverse",
+   "from": "MATH.algebra.matrix-systems",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.matrices.rank-row-reduction",
+   "from": "MATH.algebra.matrices",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.matrices.rank-row-reduction",
+   "from": "MATH.algebra.determinants",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.matrices.system-consistency",
+   "from": "MATH.algebra.matrix-systems",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.matrices.system-consistency",
+   "from": "MATH.matrices.rank-row-reduction",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.matrices.transpose-symmetry",
+   "from": "MATH.algebra.matrices",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.24-hour-clock",
+   "from": "MATH.measurement.clock",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.24-hour-clock",
+   "from": "MATH.measurement.elapsed-time",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.area-perimeter-relation",
+   "from": "MATH.measurement.area-squares",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.area-perimeter-relation",
+   "from": "MATH.measurement.perimeter-intro",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.area-perimeter-relation",
+   "from": "MATH.measurement.rectangle-area",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.area-perimeter-relation",
+   "from": "MATH.measurement.rectangle-perimeter",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.brahmagupta-formula",
+   "from": "MATH.geometry.circle-theorems",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.brahmagupta-formula",
+   "from": "MATH.measurement.heron",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.brahmagupta-formula",
+   "from": "MATH.reasoning.mathematical-argument",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.calendar",
+   "from": "MATH.number.count-objects",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.calendar",
+   "from": "MATH.measurement.time-order",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.compute-with-measures",
+   "from": "MATH.measurement.unit-conversions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.compute-with-measures",
+   "from": "MATH.number.multi-digit-add-subtract",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.compute-with-measures",
+   "from": "MATH.number.long-division",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.compute-with-measures",
+   "from": "MATH.number.multi-multiplication",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.frustum",
+   "from": "MATH.measurement.cones-spheres",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.frustum",
+   "from": "MATH.geometry.similarity",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.frustum",
+   "from": "MATH.measurement.combined-solids",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.money-totals",
+   "from": "MATH.measurement.money-coins",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.money-totals",
+   "from": "MATH.number.addition",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.money-totals",
+   "from": "MATH.measurement.money-change",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.non-standard-units",
+   "from": "MATH.number.count-objects",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.non-standard-units",
+   "from": "MATH.measurement.length-comparison",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.non-standard-units",
+   "from": "MATH.measurement.mass-comparison",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.parallelogram-rhombus-area",
+   "from": "MATH.measurement.rectangle-area",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.parallelogram-rhombus-area",
+   "from": "MATH.measurement.triangle-area",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.parallelogram-rhombus-area",
+   "from": "MATH.measurement.trapezium-area",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.pyramids",
+   "from": "MATH.measurement.cube-volume",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.pyramids",
+   "from": "MATH.measurement.triangle-area",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.pyramids",
+   "from": "MATH.measurement.cones-spheres",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.measurement.time-unit-conversion",
+   "from": "MATH.measurement.clock",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.time-unit-conversion",
+   "from": "MATH.number.multiplication-tables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.measurement.time-unit-conversion",
+   "from": "MATH.measurement.elapsed-time",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.complex-locus",
+   "from": "MATH.coordinate.locus",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.complex-locus",
+   "from": "MATH.number.complex",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.complex-locus",
+   "from": "MATH.coordinate.conics",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.complex-polar-form",
+   "from": "MATH.number.complex",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.complex-polar-form",
+   "from": "MATH.trigonometry.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.de-moivre-roots",
+   "from": "MATH.number.complex",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.de-moivre-roots",
+   "from": "MATH.trigonometry.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.even-odd",
+   "from": "MATH.number.count-objects",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.even-odd",
+   "from": "MATH.number.equal-groups",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.exponential-growth",
+   "from": "MATH.number.exponents",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.exponential-growth",
+   "from": "MATH.number.compound-interest",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.fraction-of-collection",
+   "from": "MATH.number.sharing",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.fraction-of-collection",
+   "from": "MATH.number.unit-fractions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.fraction-of-collection",
+   "from": "MATH.number.fraction-models",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.hcf-lcm",
+   "from": "MATH.number.factors-multiples",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.hcf-lcm",
+   "from": "MATH.number.primes",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.hcf-lcm",
+   "from": "MATH.number.euclid-algorithm",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.hcf-lcm",
+   "from": "MATH.number.fraction-add",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.hcf-lcm",
+   "from": "MATH.number.prime-factorisation",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.indian-international-numeration",
+   "from": "MATH.number.large-numbers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.integer-multiply",
+   "from": "MATH.number.integers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.integer-multiply",
+   "from": "MATH.number.integer-add",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.irrationality-proofs",
+   "from": "MATH.number.primes",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.irrationality-proofs",
+   "from": "MATH.number.real-numbers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.irrationality-proofs",
+   "from": "MATH.reasoning.proof-intro",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.irrationality-proofs",
+   "from": "MATH.number.factors-multiples",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.irrationality-proofs",
+   "from": "MATH.reasoning.mathematical-argument",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.mental-arithmetic",
+   "from": "MATH.number.place-value-tens",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.mental-arithmetic",
+   "from": "MATH.number.multiplication-tables",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.mental-arithmetic",
+   "from": "MLY.mult.derive",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.mixed-fractions",
+   "from": "MATH.number.division-remainders",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.mixed-fractions",
+   "from": "MATH.number.fraction-models",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.mixed-fractions",
+   "from": "MATH.number.number-line",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.modular-arithmetic",
+   "from": "MATH.number.division-remainders",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.modular-arithmetic",
+   "from": "MATH.number.integers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.modular-arithmetic",
+   "from": "MATH.number.euclid-algorithm",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.multi-digit-add-subtract",
+   "from": "MATH.number.addition-regroup",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.multi-digit-add-subtract",
+   "from": "MATH.number.subtraction-regroup",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.multi-digit-add-subtract",
+   "from": "MATH.number.large-numbers",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.multi-digit-add-subtract",
+   "from": "MATH.number.thousands",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.multiply-divide-powers-of-ten",
+   "from": "MATH.number.multiplication-tables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.multiply-divide-powers-of-ten",
+   "from": "MATH.number.thousands",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.multiply-divide-powers-of-ten",
+   "from": "MATH.number.multi-multiplication",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.number-bases",
+   "from": "MLY.pow.whole",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.number-bases",
+   "from": "MATH.number.large-numbers",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.number-line",
+   "from": "MATH.number.compare-numbers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.number-line",
+   "from": "MATH.number.hundreds",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.number-line",
+   "from": "MATH.number.place-value-tens",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.operation-properties",
+   "from": "MATH.number.addition",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.operation-properties",
+   "from": "MATH.number.equal-groups",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.operation-properties",
+   "from": "MATH.number.order-of-operations",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.operation-properties",
+   "from": "MATH.number.rational-numbers",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.operation-properties",
+   "from": "MLY.alg.distributive",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.order-of-operations",
+   "from": "MATH.number.addition-regroup",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.order-of-operations",
+   "from": "MATH.number.long-division",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.order-of-operations",
+   "from": "MATH.number.multi-multiplication",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.order-of-operations",
+   "from": "MATH.number.multiplication-tables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.order-of-operations",
+   "from": "MATH.algebra.variables",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.prime-factorisation",
+   "from": "MATH.number.primes",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.prime-factorisation",
+   "from": "MATH.number.factors-multiples",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.ratio-division",
+   "from": "MATH.number.ratio",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.ratio-division",
+   "from": "MATH.number.proportion",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.root-length-construction",
+   "from": "MATH.geometry.basic-constructions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.root-length-construction",
+   "from": "MATH.number.square-roots",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.root-length-construction",
+   "from": "MATH.coordinate.distance-intro",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.root-length-construction",
+   "from": "MATH.number.real-numbers",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.rounding",
+   "from": "MATH.number.decimal-tenths",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.rounding",
+   "from": "MATH.number.large-numbers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.rounding",
+   "from": "MATH.number.place-value-tens",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.rounding",
+   "from": "MATH.number.thousands",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.rounding",
+   "from": "MATH.number.number-line",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.rounding",
+   "from": "MATH.reasoning.estimate-check",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.probability.binomial-distribution",
+   "from": "MATH.algebra.binomial",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.probability.binomial-distribution",
+   "from": "MATH.probability.random-variables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.probability.binomial-distribution",
+   "from": "MATH.algebra.permutations",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.probability.continuous-random-variables",
+   "from": "MATH.calculus.definite-integrals",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.probability.continuous-random-variables",
+   "from": "MATH.probability.random-variables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.probability.independent-events",
+   "from": "MATH.probability.conditional",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.probability.total-probability",
+   "from": "MATH.probability.conditional",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.probability.total-probability",
+   "from": "MATH.probability.bayes",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.probability.tree-diagrams",
+   "from": "MATH.probability.sample-space",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.probability.tree-diagrams",
+   "from": "MATH.number.fraction-product",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.probability.tree-diagrams",
+   "from": "MATH.probability.classical",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.algorithms-flowcharts",
+   "from": "MATH.reasoning.multi-step",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.reasoning.algorithms-flowcharts",
+   "from": "MATH.number.euclid-algorithm",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.algorithms-flowcharts",
+   "from": "MATH.number.primes",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.coding-ciphers",
+   "from": "MATH.algebra.pattern-rules",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.conjecture-testing",
+   "from": "MATH.reasoning.counterexamples-intro",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.digit-puzzles",
+   "from": "MATH.number.large-numbers",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.digit-puzzles",
+   "from": "MATH.number.multi-multiplication",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.mathematical-induction",
+   "from": "MATH.reasoning.mathematical-argument",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.reasoning.mathematical-induction",
+   "from": "MATH.algebra.arithmetic-sequences",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.number-grid-puzzles",
+   "from": "MATH.algebra.missing-number",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.number-grid-puzzles",
+   "from": "MATH.number.compare-numbers",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.parity",
+   "from": "MATH.number.factors-multiples",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.propositional-logic",
+   "from": "MATH.reasoning.logic",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.puzzle-strategy",
+   "from": "MATH.number.addition",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.sort-by-attribute",
+   "from": "MATH.geometry.shapes",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.systematic-enumeration",
+   "from": "MATH.algebra.permutations",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.systematic-enumeration",
+   "from": "MATH.probability.sample-space",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.reasoning.winning-strategies",
+   "from": "MATH.reasoning.multi-step",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.agp-hp",
+   "from": "MATH.algebra.arithmetic-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.agp-hp",
+   "from": "MATH.algebra.geometric-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.am-gm-relation",
+   "from": "MATH.algebra.arithmetic-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.am-gm-relation",
+   "from": "MATH.algebra.geometric-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.am-gm-relation",
+   "from": "MATH.reasoning.mathematical-argument",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.explicit-recursive-rules",
+   "from": "MATH.algebra.pattern-rules",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.explicit-recursive-rules",
+   "from": "MATH.algebra.variables",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.explicit-recursive-rules",
+   "from": "MATH.algebra.arithmetic-sequences",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.explicit-recursive-rules",
+   "from": "MATH.algebra.geometric-sequences",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.explicit-recursive-rules",
+   "from": "MATH.algebra.number-patterns",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.infinite-series-expansions",
+   "from": "MATH.algebra.binomial",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.infinite-series-expansions",
+   "from": "MATH.algebra.geometric-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.infinite-series-expansions",
+   "from": "MATH.algebra.logarithms",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.power-sums",
+   "from": "MATH.algebra.arithmetic-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.power-sums",
+   "from": "MATH.algebra.algebra-simplify",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.sequence-notation",
+   "from": "MATH.algebra.arithmetic-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.series-summation",
+   "from": "MATH.algebra.arithmetic-sequences",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.series-summation",
+   "from": "MATH.reasoning.mathematical-induction",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sets-relations.binary-operations",
+   "from": "MATH.algebra.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sets-relations.binary-operations",
+   "from": "MATH.algebra.matrices",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sets-relations.cartesian-product",
+   "from": "MATH.algebra.sets",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sets-relations.cartesian-product",
+   "from": "MATH.algebra.relations",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sets-relations.function-types",
+   "from": "MATH.algebra.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sets-relations.function-types",
+   "from": "MATH.algebra.inverse-functions",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sets-relations.real-intervals",
+   "from": "MATH.algebra.sets",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sets-relations.real-intervals",
+   "from": "MATH.number.real-numbers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sets-relations.real-intervals",
+   "from": "MATH.algebra.inequalities",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sets-relations.relation-properties",
+   "from": "MATH.algebra.relations",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sets-relations.relation-properties",
+   "from": "MATH.reasoning.mathematical-argument",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.evaluate-data-displays",
+   "from": "MATH.statistics.scaled-bars",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.statistics.evaluate-data-displays",
+   "from": "MATH.statistics.pictographs",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.mean-deviation",
+   "from": "MATH.statistics.grouped-mean",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.statistics.mean-deviation",
+   "from": "MATH.statistics.dispersion",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.pie-charts",
+   "from": "MATH.number.ratio",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.stacked-bar-charts",
+   "from": "MATH.number.percentage",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.statistics.stacked-bar-charts",
+   "from": "MATH.statistics.scaled-bars",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.statistics.stacked-bar-charts",
+   "from": "MATH.statistics.grouped-data",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.statistical-questions",
+   "from": "MATH.statistics.data-frequency",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.weighted-mean",
+   "from": "MATH.statistics.averages-intro",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.statistics.weighted-mean",
+   "from": "MATH.number.percentage",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.weighted-mean",
+   "from": "MATH.number.ratio",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.trigonometry.compound-angle-identities",
+   "from": "MATH.trigonometry.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.trigonometry.compound-angle-identities",
+   "from": "MATH.trigonometry.identities",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.trigonometry.triangle-laws",
+   "from": "MATH.trigonometry.functions",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.trigonometry.triangle-laws",
+   "from": "MATH.measurement.heron",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.vectors.direction-cosines",
+   "from": "MATH.coordinate.space-coordinates",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.vectors.direction-cosines",
+   "from": "MATH.vectors.algebra",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.vectors.direction-cosines",
+   "from": "MATH.coordinate.space-lines",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.vectors.triple-products",
+   "from": "MATH.vectors.products",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.vectors.triple-products",
+   "from": "MATH.algebra.determinants",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.number.addition-regroup",
+   "from": "MATH.number.place-value-tens",
+   "type": "plausible",
+   "reason": "regrouping trades ten ones for one ten: it rests on tens and ones"
+  },
+  {
+   "target": "MATH.number.subtraction-regroup",
+   "from": "MATH.number.place-value-tens",
+   "type": "plausible",
+   "reason": "exchanging a ten for ten ones rests on tens and ones"
+  },
+  {
+   "target": "MATH.algebra.linear-equations",
+   "from": "MATH.number.integer-add",
+   "type": "plausible",
+   "reason": "solving with negative numbers adds and subtracts integers"
+  },
+  {
+   "target": "MATH.algebra.linear-equations",
+   "from": "MATH.number.integer-multiply",
+   "type": "support",
+   "reason": "dividing by a negative coefficient uses the sign rules"
+  },
+  {
+   "target": "MATH.number.fraction-product",
+   "from": "MATH.number.multiplication-tables",
+   "type": "support",
+   "reason": "multiplying fractions multiplies whole numbers top and bottom"
+  },
+  {
+   "target": "MATH.number.fraction-multiply",
+   "from": "MATH.number.multiplication-tables",
+   "type": "support",
+   "reason": "a fraction of a whole number multiplies and divides whole numbers"
+  }
+ ],
+ "disputed": [
+  {
+   "target": "MATH.algebra.function-operations",
+   "from": "MATH.algebra.functions",
+   "reason": "the prerequisite starts in Grade 11, after the competency (Grade 10): it would hold a younger learner back"
+  },
+  {
+   "target": "MATH.geometry.pythagoras",
+   "from": "MATH.number.square-roots",
+   "reason": "the prerequisite starts in Grade 8, after the competency (Grade 7): it would hold a younger learner back"
+  },
+  {
+   "target": "MATH.geometry.triangle-concurrency",
+   "from": "MATH.geometry.constructions-bisectors",
+   "reason": "the prerequisite starts in Grade 9, after the competency (Grade 7): it would hold a younger learner back"
+  },
+  {
+   "target": "MATH.sequences.power-sums",
+   "from": "MATH.sequences.sequence-notation",
+   "reason": "the prerequisite starts in Grade 11, after the competency (Grade 10): it would hold a younger learner back"
+  },
+  {
+   "target": "MATH.statistics.pie-charts",
+   "from": "MATH.geometry.angle-measure",
+   "reason": "the prerequisite starts in Grade 5, after the competency (Grade 4): it would hold a younger learner back"
+  },
+  {
+   "target": "MATH.statistics.pie-charts",
+   "from": "MATH.number.percentage",
+   "reason": "the prerequisite starts in Grade 7, after the competency (Grade 4): it would hold a younger learner back"
+  },
+  {
+   "target": "MATH.geometry.transformations",
+   "from": "MATH.geometry.rotational-symmetry",
+   "type": "support",
+   "reason": "would make a cycle of prerequisites"
+  },
+  {
+   "target": "MATH.algebra.quadratics",
+   "from": "MATH.algebra.polynomial-zeros",
+   "type": "support",
+   "reason": "would make a cycle of prerequisites"
+  }
+ ],
+ "droppedReferences": []
+}

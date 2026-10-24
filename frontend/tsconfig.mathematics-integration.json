@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.english.json",
+  "compilerOptions": {
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/mathematics/canonical.test.ts",
+    "../packages/mathematics/src/canonical.ts",
+    "src/mathematics/journey",
+    "../packages/mathematics/src/chapter.ts",
+    "src/mathematics/chapter",
+    "../packages/mathematics/src/unit.ts",
+    "src/mathematics/unit",
+    "src/globals.d.ts",
+    "src/mathematics/foundation",
+    "src/year",
+    "src/learning",
+    "src/review",
+    "src/curriculum",
+    "../packages/learning/src",
+    "../packages/learning/scripts",
+    "../tools/mathematics/prerequisite-report.mts",
+    "../tools/mathematics/fingerprint-portability.mts",
+    "src/writing"
+  ],
+  "exclude": []
+}

@@ -1,0 +1,21 @@
+﻿competency_id,name,area,in_reference
+EN.GRM.VERB.sva,Subject–verb agreement,grammar,yes
+EN.GRM.VERB.present_past_simple,Present and past simple,grammar,yes
+EN.GRM.VERB.aspect,Progressive and perfect aspect,grammar,yes
+EN.GRM.NOUN.articles,Articles,grammar,yes
+EN.GRM.NOUN.plurals_countability,Plurals and countability,grammar,no
+EN.WRT.ACC.grammar,Grammatical accuracy in writing,grammar,no
+EN.GRM.PREP.time_place,Prepositions of time and place,prepositions,yes
+EN.GRM.PREP.dependent,Dependent prepositions,prepositions,yes
+EN.SEN.CMP.fragments,"Complete sentences, not fragments",sentence_structure,yes
+EN.SEN.CMP.run_ons,Avoids run-on sentences and comma splices,sentence_structure,yes
+EN.SEN.CMB.coordination,Coordination,sentence_structure,no
+EN.SEN.CMB.subordination,Subordination,sentence_structure,yes
+EN.GRM.PUN.commas,Commas,sentence_structure,yes
+EN.VOC.USE.word_choice,Precise word choice in writing,vocabulary,yes
+EN.VOC.REL.collocations,Collocations,vocabulary,yes
+EN.SEN.COH.connectives,Connectives and transitions,coherence,yes
+EN.SEN.COH.reference_across,Reference across sentences,coherence,no
+EN.WRT.ORG.sequencing,Logical sequencing,coherence,yes
+EN.WRT.ORG.paragraphing,Paragraphing,coherence,no
+EN.SEN.PRE.concision,Concision,concision,yes

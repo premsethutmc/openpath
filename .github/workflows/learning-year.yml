@@ -1,0 +1,119 @@
+name: My Learning Year
+on:
+  pull_request:
+    paths:
+      [
+        "packages/learning/**",
+        "packages/english-core/src/**",
+        "packages/mathematics/src/**",
+        "content/learning/**",
+        "content/mathematics/curriculum.v1.json",
+        "backend/family/**",
+        "frontend/src/year/**",
+        "frontend/src/writing/**",
+        "frontend/e2e/keyboard-dashboard.test.mjs",
+        "frontend/e2e/grade7-entry.test.mjs",
+        "frontend/e2e/grade7-session.test.mjs",
+        "frontend/e2e/grade7-practice.test.mjs",
+        "frontend/e2e/grade7-completion.test.mjs",
+        "frontend/e2e/writing-components.test.mjs",
+        "frontend/e2e/keyboard-policy-components.test.mjs",
+        "frontend/src/learning/**",
+        "frontend/e2e/learning-year.test.mjs",
+        "frontend/scripts/build-year.mjs",
+        "frontend/src/curriculum/**",
+        "frontend/e2e/curriculum.test.mjs",
+        "frontend/scripts/build-curriculum.mjs",
+        ".github/workflows/learning-year.yml",
+      ]
+permissions:
+  contents: read
+jobs:
+  year:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+      - run: pip install -r backend/requirements.txt
+      - run: npm ci
+        working-directory: frontend
+      - run: python manage.py test --noinput
+        working-directory: backend
+      - run: npm run typecheck && npm test
+        working-directory: frontend
+      # the content pipeline's outputs are generated: they must match their sources
+      - name: Library, parity and coverage are up to date
+        working-directory: frontend
+        run: |
+          node --import tsx ../packages/learning/scripts/specs.ts
+          node --import tsx ../packages/learning/scripts/library.ts
+          node --import tsx ../packages/learning/scripts/families-parity.ts
+          node --import tsx ../packages/learning/scripts/coverage.ts
+          python3 ../content/learning/src/expansion.py
+          node --import tsx ../packages/learning/scripts/board-releases.ts
+          node --import tsx ../packages/learning/scripts/compile-coverage.ts
+          git diff --exit-code ../content/learning/family-specs.v1.json ../content/learning/generated.v1.json ../content/learning/library.v1.json ../content/learning/families-parity.v1.json ../docs/learning-year/COVERAGE.md ../content/learning/competency-expansion.v1.json ../content/learning/syllabus ../content/learning/curricula ../packages/learning/src/board-releases.ts ../content/learning/coverage-matrix.v1.json ../docs/mathematics/COVERAGE_MATRIX.md ../content/learning/marking-parity.v1.json
+      - run: node scripts/build-mathematics-journey.mjs && node scripts/build-year.mjs --test && node scripts/build-curriculum.mjs --test
+        working-directory: frontend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      # Journeys A–F through the UI against the real Django API. The TEST BUILD treats questions as reviewed so that a
+      # verified skill can be shown (it says so on every screen); synthetic learners only; nothing is deployed.
+      - name: Browser acceptance journeys (learners, platform scenarios, educator review)
+        shell: bash
+        run: |
+          python backend/manage.py migrate --noinput
+          # TEST ONLY: a per-pupil clock for synthetic pupils, so a delayed check can be reached (no record is changed)
+          export OPENPATH_TEST_CLOCK_FILE=/tmp/year-clock.json
+          echo '{}' > "$OPENPATH_TEST_CLOCK_FILE"
+          # many synthetic accounts are registered in one run (learners and reviewers): a test-only registration rate
+          OPENPATH_ACCOUNT_RATE=1000/hour python backend/manage.py runserver 127.0.0.1:8014 --noreload --nothreading > /tmp/year-api.log 2>&1 &
+          api_pid=$!
+          PORT=4190 API_TARGET=http://127.0.0.1:8014 node frontend/scripts/preview-english.mjs > /tmp/year-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$api_pid" "$preview_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4190/api/account/ > /dev/null; then break; fi
+            sleep 1
+          done
+          cd frontend
+          if ! YEAR_MANAGE="python backend/manage.py" YEAR_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' SHOTS=/tmp/year-screens/ node --import tsx --test e2e/learning-year.test.mjs > /tmp/year-e2e.log 2>&1; then
+            cat /tmp/year-e2e.log
+            # the failures as annotations, readable without the full log
+            grep -E "^not ok|error:|Error|expected|actual|at .*learning-year" /tmp/year-e2e.log | head -40 | while IFS= read -r line; do echo "::error::$line"; done
+            tail -20 /tmp/year-api.log | while IFS= read -r line; do echo "::warning::api: $line"; done
+            exit 1
+          fi
+          cat /tmp/year-e2e.log
+          # the Mathematics curriculum dashboard (/curriculum/): journeys A–N against the same Django API
+          if ! YEAR_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' SHOTS=/tmp/year-screens/curriculum/ node --import tsx --test e2e/curriculum.test.mjs > /tmp/curriculum-e2e.log 2>&1; then
+            cat /tmp/curriculum-e2e.log
+            grep -E "^not ok|error:|Error|expected|actual|at .*curriculum.test" /tmp/curriculum-e2e.log | head -40 | while IFS= read -r line; do echo "::error::$line"; done
+            exit 1
+          fi
+          cat /tmp/curriculum-e2e.log
+          # Keyboard integration uses the actual provisional-content builds, not the educator-review fixture.
+          node scripts/build-year.mjs
+          node scripts/build-curriculum.mjs
+          CHROMIUM_PATH='' node --test e2e/writing-components.test.mjs e2e/keyboard-policy-components.test.mjs
+          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/keyboard node --import tsx --test e2e/keyboard-dashboard.test.mjs
+          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7 node --test e2e/grade7-entry.test.mjs
+          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-session node --import tsx --test e2e/grade7-session.test.mjs
+          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-practice node --import tsx --test e2e/grade7-practice.test.mjs
+          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-completion node --import tsx --test e2e/grade7-completion.test.mjs
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: my-learning-year-screens
+          path: /tmp/year-screens/
+          retention-days: 14
+          if-no-files-found: ignore

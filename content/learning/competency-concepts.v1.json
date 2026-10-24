@@ -1,0 +1,847 @@
+{
+ "schema": "competency-concepts@1",
+ "version": "1.1.0",
+ "status": "provisional",
+ "note": "Concept annotations for curriculum interpretation (meaning@3 and meaning@4, packages/learning/src/meaning.ts): concepts a competency carries that its short name does not say. They change only how textbook outcomes are matched to competencies (a reviewer still decides); no competency, relation or evidence changes. Version 1.1.0 (meaning@4) annotates the competencies of the curriculum expansion and every competency whose name carries one concept or none. Written with AI assistance, not educator-reviewed.",
+ "annotations": {
+  "MATH.number.exponents": [
+   "powers"
+  ],
+  "MATH.algebra.identities-intro": [
+   "expansion",
+   "distributive"
+  ],
+  "MATH.algebra.identities": [
+   "expansion",
+   "binomialProduct"
+  ],
+  "MATH.algebra.factorisation": [
+   "factorise",
+   "expressions"
+  ],
+  "MATH.algebra.polynomials": [
+   "polynomials"
+  ],
+  "MATH.calculus.continuity": [
+   "continuity"
+  ],
+  "MATH.calculus.differentiability": [
+   "differentiability"
+  ],
+  "MATH.calculus.derivative-rules": [
+   "derivatives",
+   "differentiationRules"
+  ],
+  "MATH.calculus.derivatives": [
+   "derivatives",
+   "firstPrinciples"
+  ],
+  "MATH.calculus.applications": [
+   "derivatives",
+   "extrema"
+  ],
+  "MATH.calculus.indefinite-integrals": [
+   "integrals",
+   "antiderivative"
+  ],
+  "MATH.calculus.integration-methods": [
+   "integrals",
+   "substitution",
+   "byParts"
+  ],
+  "MATH.calculus.definite-integrals": [
+   "integrals",
+   "definite"
+  ],
+  "MATH.calculus.area-integrals": [
+   "integrals",
+   "area"
+  ],
+  "MATH.algebra.matrices": [
+   "matrices",
+   "matrixOps"
+  ],
+  "MATH.algebra.determinants": [
+   "determinants"
+  ],
+  "MATH.probability.conditional": [
+   "probability",
+   "conditional"
+  ],
+  "MATH.probability.bayes": [
+   "probability",
+   "bayes"
+  ],
+  "MATH.probability.classical": [
+   "probability"
+  ],
+  "MATH.vectors.products": [
+   "vectors"
+  ],
+  "MATH.vectors.algebra": [
+   "vectors"
+  ],
+  "MATH.algebra.quadratic-complex": [
+   "complexNumbers",
+   "quadratic"
+  ],
+  "MATH.number.complex": [
+   "complexNumbers"
+  ],
+  "MATH.measurement.combined-solids": [
+   "solids"
+  ],
+  "MATH.measurement.cones-spheres": [
+   "solids",
+   "sphereCone",
+   "surfaceArea"
+  ],
+  "MATH.trigonometry.ratios": [
+   "trigonometry"
+  ],
+  "MATH.algebra.quadratic-discriminant": [
+   "discriminant",
+   "quadratic",
+   "equations"
+  ],
+  "MATH.algebra.matrix-systems": [
+   "matrices",
+   "equations",
+   "twoVariables",
+   "cramer"
+  ],
+  "MATH.algebra.binomial": [
+   "binomialTheorem"
+  ],
+  "MATH.number.count-objects": [
+   "counting"
+  ],
+  "MATH.number.place-value-tens": [
+   "placeValue"
+  ],
+  "MATH.number.hundreds": [
+   "placeValue"
+  ],
+  "MATH.number.thousands": [
+   "placeValue"
+  ],
+  "MATH.number.large-numbers": [
+   "placeValue"
+  ],
+  "MATH.number.zero": [
+   "zero"
+  ],
+  "MATH.geometry.positions": [
+   "positions"
+  ],
+  "MATH.measurement.length-comparison": [
+   "length"
+  ],
+  "MATH.measurement.mass-comparison": [
+   "mass"
+  ],
+  "MATH.measurement.time-order": [
+   "sequenceEvents"
+  ],
+  "MATH.measurement.money-coins": [
+   "money"
+  ],
+  "MATH.measurement.money-change": [
+   "money",
+   "subtraction"
+  ],
+  "MATH.statistics.picture-data": [
+   "pictograph",
+   "data"
+  ],
+  "MATH.reasoning.explain-counting": [
+   "counting",
+   "explain"
+  ],
+  "MATH.geometry.shapes": [
+   "shapes"
+  ],
+  "MATH.geometry.shape-properties": [
+   "shapes",
+   "facesEdges",
+   "tangram"
+  ],
+  "MATH.geometry.symmetry-fold": [
+   "symmetry",
+   "lineSymmetry"
+  ],
+  "MATH.measurement.standard-length": [
+   "length",
+   "standardUnits",
+   "measuring"
+  ],
+  "MATH.measurement.standard-mass": [
+   "mass",
+   "standardUnits",
+   "measuring"
+  ],
+  "MATH.measurement.capacity": [
+   "capacity"
+  ],
+  "MATH.measurement.clock": [
+   "clock"
+  ],
+  "MATH.statistics.pictographs": [
+   "pictograph"
+  ],
+  "MATH.reasoning.operation-choice": [
+   "operationChoice",
+   "wordProblems"
+  ],
+  "MATH.algebra.missing-number": [
+   "missingNumber"
+  ],
+  "MATH.algebra.growing-patterns": [
+   "growingPattern"
+  ],
+  "MATH.algebra.repeating-patterns": [
+   "repeatingPattern"
+  ],
+  "MATH.geometry.lines-segments": [
+   "lines"
+  ],
+  "MATH.geometry.line-types": [
+   "lines"
+  ],
+  "MATH.geometry.shape-tiling": [
+   "tiling",
+   "shapes"
+  ],
+  "MATH.measurement.length-conversion": [
+   "length"
+  ],
+  "MATH.measurement.elapsed-time": [
+   "timeUnits",
+   "clock"
+  ],
+  "MATH.statistics.tables": [
+   "tableData",
+   "tally"
+  ],
+  "MATH.statistics.bar-charts": [
+   "barChart"
+  ],
+  "MATH.geometry.symmetry-lines": [
+   "symmetry",
+   "lineSymmetry"
+  ],
+  "MATH.measurement.unit-conversions": [
+   "length",
+   "mass",
+   "capacity",
+   "standardUnits"
+  ],
+  "MATH.statistics.scaled-bars": [
+   "barChart"
+  ],
+  "MATH.reasoning.multi-step": [
+   "wordProblems"
+  ],
+  "MATH.geometry.triangle-types": [
+   "triangle",
+   "angleTypes"
+  ],
+  "MATH.geometry.angles-intro": [
+   "angleTypes"
+  ],
+  "MATH.geometry.nets": [
+   "nets"
+  ],
+  "MATH.measurement.time-speed-intro": [
+   "speed"
+  ],
+  "MATH.number.integers": [
+   "integers"
+  ],
+  "MATH.number.integer-add": [
+   "integers"
+  ],
+  "MATH.number.integer-multiply": [
+   "integers"
+  ],
+  "MATH.geometry.triangle-properties": [
+   "triangle",
+   "angleSum"
+  ],
+  "MATH.statistics.data-frequency": [
+   "frequency",
+   "tableData"
+  ],
+  "MATH.probability.chance-language": [
+   "chanceLanguage",
+   "probability"
+  ],
+  "MATH.number.profit-loss": [
+   "commerce"
+  ],
+  "MATH.geometry.parallel-angles": [
+   "parallelPerpendicular"
+  ],
+  "MATH.geometry.congruence": [
+   "congruence",
+   "triangle"
+  ],
+  "MATH.statistics.median-mode": [
+   "medianMode"
+  ],
+  "MATH.number.cubes": [
+   "cubes"
+  ],
+  "MATH.number.scientific-notation": [
+   "scientific",
+   "powers"
+  ],
+  "MATH.number.compound-interest": [
+   "commerce",
+   "compound"
+  ],
+  "MATH.geometry.quadrilaterals": [
+   "quadrilateral"
+  ],
+  "MATH.geometry.polygon-angles": [
+   "polygon",
+   "angleSum"
+  ],
+  "MATH.geometry.solid-views": [
+   "views"
+  ],
+  "MATH.measurement.cylinder": [
+   "cylinder",
+   "surfaceArea"
+  ],
+  "MATH.measurement.trapezium-area": [
+   "quadrilateral"
+  ],
+  "MATH.statistics.histograms": [
+   "histogram",
+   "grouped"
+  ],
+  "MATH.probability.sample-space": [
+   "sampleSpace",
+   "probability"
+  ],
+  "MATH.reasoning.proof-intro": [
+   "proof"
+  ],
+  "MATH.number.radicals": [
+   "irrational"
+  ],
+  "MATH.number.real-numbers": [
+   "irrational"
+  ],
+  "MATH.algebra.factor-theorem": [
+   "remainderTheorem",
+   "polynomials"
+  ],
+  "MATH.geometry.euclidean": [
+   "proof"
+  ],
+  "MATH.geometry.triangle-proof": [
+   "proof",
+   "triangle",
+   "congruence"
+  ],
+  "MATH.geometry.circle-theorems": [
+   "chord"
+  ],
+  "MATH.measurement.heron": [
+   "heron",
+   "triangle"
+  ],
+  "MATH.statistics.grouped-data": [
+   "grouped",
+   "frequency"
+  ],
+  "MATH.reasoning.mathematical-argument": [
+   "proof"
+  ],
+  "MATH.number.euclid-algorithm": [
+   "factorsMultiples"
+  ],
+  "MATH.geometry.similarity": [
+   "similarity",
+   "triangle"
+  ],
+  "MATH.geometry.circle-tangents": [
+   "tangent",
+   "circle"
+  ],
+  "MATH.geometry.scaled-construction": [
+   "similarity"
+  ],
+  "MATH.measurement.sectors": [
+   "sector",
+   "circle"
+  ],
+  "MATH.trigonometry.heights-distances": [
+   "heightsDistances",
+   "trigonometry"
+  ],
+  "MATH.probability.complements": [
+   "complement",
+   "probability"
+  ],
+  "MATH.reasoning.model-selection": [
+   "modelling"
+  ],
+  "MATH.algebra.relations": [
+   "relations"
+  ],
+  "MATH.algebra.permutations": [
+   "permutations"
+  ],
+  "MATH.trigonometry.radians": [
+   "radians"
+  ],
+  "MATH.coordinate.conics": [
+   "conics"
+  ],
+  "MATH.coordinate.space-coordinates": [
+   "space",
+   "coordinates"
+  ],
+  "MATH.statistics.dispersion": [
+   "dispersion"
+  ],
+  "MATH.probability.events": [
+   "events",
+   "probability"
+  ],
+  "MATH.algebra.linear-programming": [
+   "linearProgramming"
+  ],
+  "MATH.calculus.differential-equations": [
+   "differentialEquations"
+  ],
+  "MATH.coordinate.space-lines": [
+   "space"
+  ],
+  "MATH.coordinate.space-planes": [
+   "space"
+  ],
+  "MATH.probability.random-variables": [
+   "randomVariable",
+   "probability"
+  ],
+  "MATH.algebra.logarithms": [
+   "logarithms"
+  ],
+  "MATH.algebra.absolute-value": [
+   "absoluteValue"
+  ],
+  "MATH.algebra.function-transformations": [
+   "transformationsOfGraphs",
+   "graphs"
+  ],
+  "MATH.algebra.function-operations": [
+   "composition"
+  ],
+  "MATH.calculus.lhopital": [
+   "lhopital",
+   "limits"
+  ],
+  "MATH.calculus.mean-value-theorems": [
+   "meanValue"
+  ],
+  "MATH.calculus.monotonicity": [
+   "monotonic",
+   "derivatives"
+  ],
+  "MATH.calculus.implicit-parametric-differentiation": [
+   "implicit"
+  ],
+  "MATH.calculus.higher-derivatives": [
+   "higherDerivatives"
+  ],
+  "MATH.calculus.linear-approximation": [
+   "approximation",
+   "derivatives"
+  ],
+  "MATH.calculus.homogeneous-de": [
+   "differentialEquations"
+  ],
+  "MATH.calculus.linear-first-order-de": [
+   "differentialEquations"
+  ],
+  "MATH.calculus.ode-modelling": [
+   "differentialEquations",
+   "modelling"
+  ],
+  "MATH.calculus.improper-gamma-integrals": [
+   "improper"
+  ],
+  "MATH.calculus.reduction-formulae": [
+   "reduction"
+  ],
+  "MATH.calculus.volumes-of-revolution": [
+   "revolution"
+  ],
+  "MATH.calculus.taylor-series": [
+   "taylor",
+   "series"
+  ],
+  "MATH.calculus.partial-derivatives": [
+   "partialDerivatives"
+  ],
+  "MATH.calculus.curve-sketching": [
+   "asymptotes",
+   "graphs"
+  ],
+  "MATH.calculus.partial-fractions-integration": [
+   "partialFractions"
+  ],
+  "MATH.algebra.partial-fractions": [
+   "partialFractions"
+  ],
+  "MATH.algebra.rational-expressions": [
+   "rationalExpressions"
+  ],
+  "MATH.algebra.vieta-relations": [
+   "rootsCoefficients"
+  ],
+  "MATH.algebra.polynomial-zeros": [
+   "zeros",
+   "graphs"
+  ],
+  "MATH.algebra.polynomial-root-analysis": [
+   "zeros"
+  ],
+  "MATH.algebra.quadratic-graphs": [
+   "graphs"
+  ],
+  "MATH.algebra.standard-function-graphs": [
+   "graphs"
+  ],
+  "MATH.coordinate.conic-tangents-normals": [
+   "tangent",
+   "conics"
+  ],
+  "MATH.coordinate.locus": [
+   "locus"
+  ],
+  "MATH.coordinate.pair-of-lines": [
+   "pairOfLines"
+  ],
+  "MATH.coordinate.polygon-area": [
+   "polygonArea"
+  ],
+  "MATH.coordinate.skew-line-distance": [
+   "space"
+  ],
+  "MATH.coordinate.distance": [
+   "section"
+  ],
+  "MATH.geometry.angle-pairs": [
+   "anglePairs"
+  ],
+  "MATH.geometry.ceva-menelaus": [
+   "triangle",
+   "proof"
+  ],
+  "MATH.geometry.construction-quadrilaterals": [
+   "quadrilateral"
+  ],
+  "MATH.geometry.construction-triangles": [
+   "triangle"
+  ],
+  "MATH.geometry.fractal-iteration": [
+   "fractal"
+  ],
+  "MATH.geometry.maps-directions": [
+   "directions"
+  ],
+  "MATH.geometry.midpoint-theorem": [
+   "midpoint",
+   "triangle"
+  ],
+  "MATH.geometry.parallelogram-proofs": [
+   "quadrilateral",
+   "proof"
+  ],
+  "MATH.geometry.polyhedra-euler": [
+   "polyhedra",
+   "facesEdges"
+  ],
+  "MATH.geometry.pythagoras": [
+   "pythagoras"
+  ],
+  "MATH.geometry.quadrilateral-classification": [
+   "quadrilateral"
+  ],
+  "MATH.geometry.rotational-symmetry": [
+   "symmetry",
+   "rotationalSymmetry"
+  ],
+  "MATH.geometry.scale-drawings": [
+   "scaleDrawing"
+  ],
+  "MATH.geometry.tessellations": [
+   "tiling"
+  ],
+  "MATH.geometry.transformations": [
+   "transformations"
+  ],
+  "MATH.geometry.triangle-concurrency": [
+   "triangleCentres"
+  ],
+  "MATH.matrices.adjoint-inverse": [
+   "adjoint"
+  ],
+  "MATH.matrices.rank-row-reduction": [
+   "rank"
+  ],
+  "MATH.matrices.system-consistency": [
+   "consistency",
+   "matrices"
+  ],
+  "MATH.matrices.transpose-symmetry": [
+   "transpose",
+   "matrices"
+  ],
+  "MATH.measurement.24-hour-clock": [
+   "twentyFourHour",
+   "clock"
+  ],
+  "MATH.measurement.brahmagupta-formula": [
+   "brahmagupta",
+   "quadrilateral"
+  ],
+  "MATH.measurement.compute-with-measures": [
+   "mixedUnits"
+  ],
+  "MATH.measurement.frustum": [
+   "frustum",
+   "surfaceArea"
+  ],
+  "MATH.measurement.money-totals": [
+   "money"
+  ],
+  "MATH.measurement.money-decimals": [
+   "decimals"
+  ],
+  "MATH.measurement.non-standard-units": [
+   "nonStandard",
+   "measuring"
+  ],
+  "MATH.measurement.parallelogram-rhombus-area": [
+   "quadrilateral"
+  ],
+  "MATH.measurement.pyramids": [
+   "pyramid",
+   "surfaceArea"
+  ],
+  "MATH.measurement.surface-area-intro": [
+   "surfaceArea",
+   "cuboid"
+  ],
+  "MATH.measurement.cube-volume": [
+   "cuboid"
+  ],
+  "MATH.measurement.volume-cubes": [
+   "cuboid"
+  ],
+  "MATH.measurement.time-unit-conversion": [
+   "timeUnits"
+  ],
+  "MATH.number.complex-locus": [
+   "complexLocus",
+   "complexNumbers"
+  ],
+  "MATH.number.complex-polar-form": [
+   "polarForm"
+  ],
+  "MATH.number.de-moivre-roots": [
+   "deMoivre",
+   "complexNumbers"
+  ],
+  "MATH.number.even-odd": [
+   "evenOdd"
+  ],
+  "MATH.number.exponential-growth": [
+   "exponential"
+  ],
+  "MATH.number.indian-international-numeration": [
+   "indianSystem",
+   "placeValue"
+  ],
+  "MATH.number.irrationality-proofs": [
+   "irrational",
+   "proof"
+  ],
+  "MATH.number.mental-arithmetic": [
+   "mental"
+  ],
+  "MATH.number.modular-arithmetic": [
+   "modular"
+  ],
+  "MATH.number.multiply-divide-powers-of-ten": [
+   "powersOfTen"
+  ],
+  "MATH.number.number-bases": [
+   "bases"
+  ],
+  "MATH.number.number-line": [
+   "numberLine"
+  ],
+  "MATH.number.operation-properties": [
+   "operationProperties"
+  ],
+  "MATH.number.order-of-operations": [
+   "orderOfOperations"
+  ],
+  "MATH.number.root-length-construction": [
+   "irrational",
+   "numberLine"
+  ],
+  "MATH.number.addition-regroup": [
+   "regrouping"
+  ],
+  "MATH.number.subtraction-regroup": [
+   "regrouping"
+  ],
+  "MATH.number.multi-digit-add-subtract": [
+   "regrouping"
+  ],
+  "MATH.probability.binomial-distribution": [
+   "bernoulli",
+   "probability"
+  ],
+  "MATH.probability.continuous-random-variables": [
+   "density"
+  ],
+  "MATH.probability.independent-events": [
+   "independence",
+   "probability"
+  ],
+  "MATH.probability.total-probability": [
+   "totalProbability"
+  ],
+  "MATH.probability.tree-diagrams": [
+   "treeDiagram",
+   "probability"
+  ],
+  "MATH.reasoning.digit-puzzles": [
+   "puzzles"
+  ],
+  "MATH.reasoning.mathematical-induction": [
+   "induction",
+   "proof"
+  ],
+  "MATH.reasoning.number-grid-puzzles": [
+   "puzzles"
+  ],
+  "MATH.reasoning.parity": [
+   "evenOdd"
+  ],
+  "MATH.reasoning.propositional-logic": [
+   "logic"
+  ],
+  "MATH.reasoning.logic": [
+   "logic"
+  ],
+  "MATH.reasoning.puzzle-strategy": [
+   "puzzles"
+  ],
+  "MATH.reasoning.systematic-enumeration": [
+   "enumeration"
+  ],
+  "MATH.reasoning.winning-strategies": [
+   "puzzles"
+  ],
+  "MATH.reasoning.counterexamples-intro": [
+   "generalise"
+  ],
+  "MATH.reasoning.sort-by-attribute": [
+   "sorting"
+  ],
+  "MATH.sequences.agp-hp": [
+   "harmonic"
+  ],
+  "MATH.sequences.am-gm-relation": [
+   "means"
+  ],
+  "MATH.sequences.explicit-recursive-rules": [
+   "recursive"
+  ],
+  "MATH.sequences.infinite-series-expansions": [
+   "series"
+  ],
+  "MATH.sequences.power-sums": [
+   "series"
+  ],
+  "MATH.sequences.series-summation": [
+   "series"
+  ],
+  "MATH.sequences.sequence-notation": [
+   "series"
+  ],
+  "MATH.sets-relations.binary-operations": [
+   "binaryOperation"
+  ],
+  "MATH.sets-relations.cartesian-product": [
+   "cartesianProduct"
+  ],
+  "MATH.sets-relations.function-types": [
+   "functionTypes"
+  ],
+  "MATH.sets-relations.real-intervals": [
+   "intervals"
+  ],
+  "MATH.sets-relations.relation-properties": [
+   "relations"
+  ],
+  "MATH.statistics.evaluate-data-displays": [
+   "survey"
+  ],
+  "MATH.statistics.mean-deviation": [
+   "dispersion"
+  ],
+  "MATH.statistics.statistical-questions": [
+   "survey"
+  ],
+  "MATH.statistics.stacked-bar-charts": [
+   "barChart"
+  ],
+  "MATH.statistics.weighted-mean": [
+   "mean"
+  ],
+  "MATH.trigonometry.compound-angle-identities": [
+   "compoundAngles"
+  ],
+  "MATH.trigonometry.triangle-laws": [
+   "triangleLaws"
+  ],
+  "MATH.trigonometry.inverse": [
+   "inverseTrig"
+  ],
+  "MATH.vectors.direction-cosines": [
+   "directionCosines"
+  ],
+  "MATH.vectors.triple-products": [
+   "tripleProduct"
+  ],
+  "MATH.algebra.figurate-numbers": [
+   "figurate"
+  ],
+  "MATH.algebra.generalise-with-expressions": [
+   "generalise"
+  ],
+  "MATH.algebra.algebra-simplify": [
+   "likeTerms"
+  ],
+  "MATH.algebra.variables": [
+   "evaluate"
+  ],
+  "MATH.algebra.number-patterns": [
+   "skipCounting"
+  ],
+  "MATH.algebra.linear-equations": [
+   "oneVariable"
+  ]
+ }
+}

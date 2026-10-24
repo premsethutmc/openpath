@@ -1,0 +1,255 @@
+{
+ "id": "openpath-sample-mathematics-grade-7",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 7,
+ "title": "OpenPath Sample Mathematics, Grade 7",
+ "hash": "984c767b",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 7",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true,
+  "extractor": "structured-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency (for an educator to check: ch2-simple-equations.o2, ch3-percentages-and-proportion.o2). Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-rational-numbers",
+     "number": 1,
+     "title": "Rational numbers",
+     "pages": "1–14",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "8"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch1-rational-numbers.o1",
+       "text": "Operate on rational numbers",
+       "pages": "2",
+       "location": {
+        "line": 12,
+        "page": 2
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.rational-numbers",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.real-numbers",
+          "score": 0.88,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.proportion",
+          "score": 0.629,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on ratio, rationalNumbers.",
+        "concepts": [
+         "ratio",
+         "rationalNumbers"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-simple-equations",
+     "number": 2,
+     "title": "Simple equations",
+     "pages": "15–30",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "20"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch2-simple-equations.o1",
+       "text": "Evaluate variable expressions for given values",
+       "pages": "16",
+       "location": {
+        "line": 17,
+        "page": 16
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.variables",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.algebra-simplify",
+          "score": 0.731,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.factorisation",
+          "score": 0.718,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on expressions.",
+        "concepts": [
+         "expressions"
+        ]
+       }
+      },
+      {
+       "id": "ch2-simple-equations.o2",
+       "text": "Solve linear equations in one variable",
+       "pages": "22",
+       "location": {
+        "line": 18,
+        "page": 22
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.linear-equations",
+          "score": 0.651,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.linear-intro",
+          "score": 0.591,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.algebra-simplify",
+          "score": 0.521,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "uncertain",
+        "why": "Two skills are close (Solve linear equations; Solve one-step equations): a reviewer should choose.",
+        "concepts": [
+         "expressions",
+         "equations",
+         "linear",
+         "oneVariable"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch3-percentages-and-proportion",
+     "number": 3,
+     "title": "Percentages and proportion",
+     "pages": "31–44",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "36"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch3-percentages-and-proportion.o1",
+       "text": "Calculate percentages",
+       "pages": "32",
+       "location": {
+        "line": 23,
+        "page": 32
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percentage",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 0.693,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on percent.",
+        "concepts": [
+         "percent"
+        ]
+       }
+      },
+      {
+       "id": "ch3-percentages-and-proportion.o2",
+       "text": "Solve direct proportions",
+       "pages": "38",
+       "location": {
+        "line": 24,
+        "page": 38
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.proportion",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.unit-rate",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.trigonometry.ratios",
+          "score": 0.82,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "uncertain",
+        "why": "Two skills are close (Solve direct proportions; Calculate unit rates): a reviewer should choose.",
+        "concepts": [
+         "ratio"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

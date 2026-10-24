@@ -1,0 +1,18 @@
+{
+  "name": "openpath-engine-trial",
+  "private": true,
+  "type": "module",
+  "description": "Offline trial of open-source maths components for the OpenPath kernel. Not a production or browser dependency.",
+  "scripts": {
+    "k02": "node --import tsx k02-arithmetic.mts out/k02.json",
+    "k04": "node --import tsx k04-equations.mts out/k04.json",
+    "check": "python3 check.py out/k02.json out/k04.json --summary out/summary.json",
+    "selftest": "python3 check_selftest.py out/k02.json out/k04.json"
+  },
+  "dependencies": {
+    "@cortex-js/compute-engine": "0.161.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
+  }
+}

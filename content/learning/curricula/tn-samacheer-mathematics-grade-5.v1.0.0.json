@@ -1,0 +1,2183 @@
+{
+ "id": "tn-samacheer-mathematics-grade-5",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 5,
+ "title": "Mathematics, Standard V (Term I, Term II, Term III) — Grade 5 Mathematics (Tamil Nadu State Board)",
+ "hash": "9240cfb5",
+ "source": {
+  "kind": "textbook",
+  "title": "Mathematics, Standard V (Term I, Term II, Term III)",
+  "edition": "Samacheer Kalvi term books of the revised syllabus (introduced 2019-20), annual reprints; selfstudys.com labels them '2020-21' edition; exact 2026 imprint not seen",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/tn-g05.json. 19 of 19 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://textbooksonline.tn.nic.in/ https://www.tnschools.gov.in/textbooks https://www.dtnext.in/news/tamilnadu/class-1-to-3-textbooks-ready-works-for-classes-4-to-12-in-primary-stage https://www.dtnext.in/news/tamilnadu/tamil-nadu-classes-4-12-curriculum-preparation-in-third-phase. Notes: Official sources could not be read: textbooksonline.tn.nic.in and textbookcorp.tn.gov.in refuse the fetch tool (robots.txt); tnschools.gov.in and scert.tnschools.gov.in are JavaScript apps that return no content to the fetch tool; the sandbox shell has no internet access. All chapter information comes from secondary sites, so every chapter is verified:false. For 2026-27, Classes 4-5 still use the existing Samacheer Kalvi term books (the syllabus revision introduced 2019-20). DT Next (7 May 2026) reports that books for Classes 4-12 are being produced 'still following the old syllabus', and that new-curriculum books for those classes are targeted for 2027-28. Expect a full change of this grade's books in 2027-28. Chapter titles are consistent across BrainKart, Shaalaa and selfstudys. They are still verified:false because no official PDF or table of contents could be opened.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "tn-g05-t1-c02",
+     "number": 2,
+     "title": "Numbers (Term 1, chapter 2)",
+     "outcomes": [
+      {
+       "id": "tn-g05-t1-c02-o03",
+       "text": "Add and subtract large numbers with regrouping.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition-regroup",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.multi-digit-add-subtract",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.subtraction-regroup",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t1-c02-s01",
+       "number": "2.1",
+       "title": "The uses of numbers beyond 10000 in real life situation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s02",
+       "number": "2.2",
+       "title": "Place value chart",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c02-o01",
+         "text": "Read, write and expand numbers beyond 10,000 using a place-value chart and comma grouping.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.large-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s03",
+       "number": "2.3",
+       "title": "Importance of commas or periods",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s04",
+       "number": "2.4",
+       "title": "Comparison of Numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s05",
+       "number": "2.5",
+       "title": "Ascending and descending order of numbers",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c02-o02",
+         "text": "Compare large numbers and arrange them in ascending or descending order.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.compare-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.large-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; ordered-list, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s06",
+       "number": "2.6",
+       "title": "Addition",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s07",
+       "number": "2.7",
+       "title": "Subtraction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s08",
+       "number": "2.8",
+       "title": "Multiplication",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s09",
+       "number": "2.9",
+       "title": "Multiply the three digit numbers by two digit numbers",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c02-o04",
+         "text": "Multiply a 3-digit number by a 2-digit number.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.multi-multiplication",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s10",
+       "number": "2.10",
+       "title": "Division Algorithm",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c02-s11",
+       "number": "2.11",
+       "title": "Divide 4 digits by 2 digits",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c02-o05",
+         "text": "Divide a 4-digit number by a 2-digit number using the division algorithm, and check with quotient x divisor + remainder.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.division-remainders",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.long-division",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g05-t2-c02",
+     "number": 2,
+     "title": "Numbers (Term 2, chapter 2)",
+     "outcomes": [
+      {
+       "id": "tn-g05-t2-c02-o03",
+       "text": "Find the LCM of small numbers and use it in everyday problems.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.hcf-lcm",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t2-c02-s01",
+       "number": "2.1",
+       "title": "Introduction of square numbers",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c02-o04",
+         "text": "Recognise square numbers as products of a number with itself.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.figurate-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c02-s02",
+       "number": "2.2",
+       "title": "Factors and multiples",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c02-o01",
+         "text": "Find the factors and multiples of a number.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.factors-multiples",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c02-s03",
+       "number": "2.3",
+       "title": "Composite and Prime Numbers",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c02-o02",
+         "text": "Classify numbers as prime or composite.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.primes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c02-s04",
+       "number": "2.4",
+       "title": "Least Common Multiple (L C M )",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c02-s05",
+       "number": "2.5",
+       "title": "Life Applications of L C M",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g05-t2-c05",
+     "number": 5,
+     "title": "Interconcept (Term 2, chapter 5)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t2-c05-s01",
+       "number": "5.1",
+       "title": "Comparing Time, Money, Distance",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c05-o02",
+         "text": "Relate distance travelled to time taken, and compare speeds as distance per unit time.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.time-speed-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, numeric)."
+         }
+        },
+        {
+         "id": "tn-g05-t2-c05-o03",
+         "text": "Work out cost from distance at a fixed rate (e.g. fare per km).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.unit-rate",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c05-s02",
+       "number": "5.2",
+       "title": "Create problems integrating time, money and distance",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c05-o01",
+         "text": "Compare and solve everyday problems that combine time, money and distance.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.multi-step",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+         }
+        },
+        {
+         "id": "tn-g05-t2-c05-o05",
+         "text": "Write their own word problems combining time, money and distance.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.operation-choice",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c05-s03",
+       "number": "5.3",
+       "title": "Relation between Speed, time and Distance",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c05-s04",
+       "number": "5.4",
+       "title": "Relation between Distance and Money",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c05-s05",
+       "number": "5.5",
+       "title": "Use fractions in the context of units of length, time and money",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c05-o04",
+         "text": "Find a fraction of a length, a time or an amount of money (e.g. 3/4 of an hour).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-of-collection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, money, time)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g05-t3-c02",
+     "number": 2,
+     "title": "Numbers (Term 3, chapter 2)",
+     "outcomes": [
+      {
+       "id": "tn-g05-t3-c02-o01",
+       "text": "Round numbers to estimate results, then judge whether an exact answer is reasonable.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.rounding",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.estimate-check",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; estimation, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t3-c02-s01",
+       "number": "2.1",
+       "title": "Estimation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c02-s02",
+       "number": "2.2",
+       "title": "Systematic Ordering",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c02-o02",
+         "text": "Order numbers or items systematically by a stated rule.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.compare-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.systematic-enumeration",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; ordered-list)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g05-t3-c05",
+     "number": 5,
+     "title": "Money (Term 3, chapter 5)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t3-c05-s01",
+       "number": "5.1",
+       "title": "Addition and Subtraction using money",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c05-o01",
+         "text": "Add and subtract money amounts in rupees and paise.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.money-decimals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.decimal-operations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g05-t3-c05-o02",
+         "text": "Multiply and divide money amounts to find total costs or cost per item.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.money-decimals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.unit-rate",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c05-s02",
+       "number": "5.2",
+       "title": "Multiplication and Division in Money",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c05-s03",
+       "number": "5.3",
+       "title": "Expensive, inexpensive costly, cheap, affordable and luxurious",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c05-o03",
+         "text": "Use cost vocabulary (cheap, expensive, affordable) to compare prices and make sensible buying choices.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.operation-choice",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g05-t3-c06",
+     "number": 6,
+     "title": "Fractions (Term 3, chapter 6)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t3-c06-s01",
+       "number": "6.1",
+       "title": "Compare fractions",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c06-o03",
+         "text": "Compare fractions that share a denominator or a numerator.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-comparison",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, ordered-list)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s02",
+       "number": "6.2",
+       "title": "Types of fractions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s03",
+       "number": "6.3",
+       "title": "Equivalent fractions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s04",
+       "number": "6.4",
+       "title": "Like fractions and unlike fractions",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c06-o01",
+         "text": "Classify fractions as proper, improper or mixed, and convert between improper fractions and mixed numbers.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.mixed-fractions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, multiple-choice)."
+         }
+        },
+        {
+         "id": "tn-g05-t3-c06-o02",
+         "text": "Make equivalent fractions and tell like fractions from unlike ones.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.equivalent-fractions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.frac.scale",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, true-false)."
+         }
+        },
+        {
+         "id": "tn-g05-t3-c06-o04",
+         "text": "Add and subtract like fractions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-add-like",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+         }
+        },
+        {
+         "id": "tn-g05-t3-c06-o05",
+         "text": "Multiply a fraction by a 1-digit whole number.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-multiply",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s05",
+       "number": "6.5",
+       "title": "Comparing like fractions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s06",
+       "number": "6.6",
+       "title": "Comparing fractions with equal numerators",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s07",
+       "number": "6.7",
+       "title": "Addition of like fractions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s08",
+       "number": "6.8",
+       "title": "Subtraction of like fractions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s09",
+       "number": "6.9",
+       "title": "Multiplication of fractions by a single digit number",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c06-s10",
+       "number": "6.10",
+       "title": "Relationship between Fractions and Decimals",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c06-o06",
+         "text": "Write tenths and hundredths as decimals and the other way round.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.decimal-tenths",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g05-t1-c03",
+     "number": 3,
+     "title": "Patterns (Term 1, chapter 3)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t1-c03-s01",
+       "number": "3.1",
+       "title": "Patterns in Shapes",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c03-o01",
+         "text": "Extend patterns made of shapes and state their rule.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.pattern-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c03-s02",
+       "number": "3.2",
+       "title": "Patterns in Numbers: square, triangular numbers",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c03-o02",
+         "text": "Recognise and continue square and triangular numbers from dot arrangements.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.figurate-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; pattern, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c03-s03",
+       "number": "3.3",
+       "title": "Relationship between consecutive square numbers and odd numbers",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c03-o03",
+         "text": "Explain that the gap between consecutive square numbers is an odd number.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.figurate-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; written-explanation, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g05-t2-c03",
+     "number": 3,
+     "title": "Patterns (Term 2, chapter 3)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t2-c03-s01",
+       "number": "3.1",
+       "title": "Patterns in Geometry",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c03-s02",
+       "number": "3.2",
+       "title": "Patterns of shapes using angles",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c03-o01",
+         "text": "Make and continue patterns by turning shapes through given angles.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.repeating-patterns",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.transformations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c03-s03",
+       "number": "3.3",
+       "title": "Rotating angles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c03-s04",
+       "number": "3.4",
+       "title": "Find patterns in a collections of words",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c03-o02",
+         "text": "Find and describe the rule in a pattern of letters or words.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.pattern-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g05-t3-c04",
+     "number": 4,
+     "title": "Algebra (Term 3, chapter 4)",
+     "outcomes": [
+      {
+       "id": "tn-g05-t3-c04-o01",
+       "text": "Decide whether two number expressions are equal and fill in missing numbers to make them balance.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.equality-inequality",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.missing-number",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, true-false)."
+       }
+      },
+      {
+       "id": "tn-g05-t3-c04-o02",
+       "text": "Compare two expressions with <, > or = without necessarily working them out in full.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.equality-inequality",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t3-c04-s01",
+       "number": "4.1",
+       "title": "Equality",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c04-s02",
+       "number": "4.2",
+       "title": "Inequality",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c04-s03",
+       "number": "4.3",
+       "title": "Using letters",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c04-o03",
+         "text": "Use a letter for an unknown or varying number in a simple rule.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.expressions-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g05-t1-c01",
+     "number": 1,
+     "title": "Geometry (Term 1, chapter 1)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t1-c01-s01",
+       "number": "1.1",
+       "title": "Recall: 2D 3D",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c01-s02",
+       "number": "1.2",
+       "title": "Draw 3-D shapes from 2-D Shapes",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c01-o01",
+         "text": "Draw solid shapes on paper from their 2-D outlines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.solid-views",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; diagram-drawing)."
+         }
+        },
+        {
+         "id": "tn-g05-t1-c01-o03",
+         "text": "Recognise and draw reflections of 2-D shapes, and spot symmetry in 3-D shapes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.transformations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; diagram-drawing, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c01-s03",
+       "number": "1.3",
+       "title": "Able to explore rotations of familiar 2-D Shapes intuitively",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c01-o02",
+         "text": "Recognise rotations (turns) of familiar 2-D shapes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.transformations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c01-s04",
+       "number": "1.4",
+       "title": "Able to explore reflections of familiar 2D shapes intuitively",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c01-s05",
+       "number": "1.5",
+       "title": "Symmetry in familiar 3-D shapes",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c01-s06",
+       "number": "1.6",
+       "title": "Make the shapes of cubes, cylinders and cones using nets",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c01-o04",
+         "text": "Match cubes, cylinders and cones to their nets and build them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.nets",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c01-s07",
+       "number": "1.7",
+       "title": "Introduction of Angles",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c01-o05",
+         "text": "Recognise angles and tell right, acute and obtuse angles apart.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angles-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "tn-g05-t2-c01",
+     "number": 1,
+     "title": "Geometry (Term 2, chapter 1)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t2-c01-s01",
+       "number": "1.1",
+       "title": "Recall",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c01-s02",
+       "number": "1.2",
+       "title": "Complementary Angles and Supplementary Angles",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c01-o01",
+         "text": "Recognise complementary and supplementary angle pairs and find a missing angle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angle-pairs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c01-s03",
+       "number": "1.3",
+       "title": "Fractals",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c01-o02",
+         "text": "Explore fractal-like patterns made by repeating a shape rule at smaller scales.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.growing-patterns",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.fractal-iteration",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; pattern, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "tn-g05-t2-c06",
+     "number": 6,
+     "title": "Information Processing (Term 2, chapter 6)",
+     "outcomes": [
+      {
+       "id": "tn-g05-t2-c06-o01",
+       "text": "Represent a real situation with a simple model (diagram, map or table) and use it to answer questions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.maps-directions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.model-selection",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; diagram-drawing, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t2-c06-s01",
+       "number": "6.1",
+       "title": "Modelling",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "tn-g05-t1-c04",
+     "number": 4,
+     "title": "Measurements (Term 1, chapter 4)",
+     "outcomes": [
+      {
+       "id": "tn-g05-t1-c04-o01",
+       "text": "Convert between km, m, cm and mm.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.unit-conversions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t1-c04-s01",
+       "number": "4.1",
+       "title": "Length",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c04-o02",
+         "text": "Add, subtract, multiply and divide lengths given in mixed units, including word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.compute-with-measures",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c04-s02",
+       "number": "4.2",
+       "title": "Conversion of length",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c04-s03",
+       "number": "4.3",
+       "title": "Addition of length",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c04-s04",
+       "number": "4.4",
+       "title": "Subtraction of length",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c04-s05",
+       "number": "4.5",
+       "title": "Multiplication of length",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c04-s06",
+       "number": "4.6",
+       "title": "Division of length",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "tn-g05-t1-c05",
+     "number": 5,
+     "title": "Time (Term 1, chapter 5)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t1-c05-s01",
+       "number": "5.1",
+       "title": "Recall",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c05-s02",
+       "number": "5.2",
+       "title": "Railway time",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c05-o01",
+         "text": "Convert between 12-hour times and railway (24-hour) times.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.24-hour-clock",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; time)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c05-s03",
+       "number": "5.3",
+       "title": "Railway time Conversion",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c05-s04",
+       "number": "5.4",
+       "title": "Use addition and subtraction in finding time interval",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c05-o02",
+         "text": "Find time intervals by adding and subtracting hours and minutes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.elapsed-time",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; time, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "tn-g05-t2-c04",
+     "number": 4,
+     "title": "Measurements (Term 2, chapter 4)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t2-c04-s01",
+       "number": "4.1",
+       "title": "Weight",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c04-o01",
+         "text": "Convert weights between kg and g, and capacities between L and mL.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.unit-conversions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        },
+        {
+         "id": "tn-g05-t2-c04-o02",
+         "text": "Add, subtract, multiply and divide weights given in mixed units.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.compute-with-measures",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c04-s02",
+       "number": "4.2",
+       "title": "Conversion in Weight",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c04-s03",
+       "number": "4.3",
+       "title": "Addition and Subtraction in Weight",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c04-s04",
+       "number": "4.4",
+       "title": "Multiplication and Division in Weight",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c04-s05",
+       "number": "4.5",
+       "title": "Capacity",
+       "outcomes": [
+        {
+         "id": "tn-g05-t2-c04-o03",
+         "text": "Add, subtract, multiply and divide capacities given in mixed units.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.compute-with-measures",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c04-s06",
+       "number": "4.6",
+       "title": "Conversion in Capacity",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c04-s07",
+       "number": "4.7",
+       "title": "Addition and Subtraction in Capacity",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t2-c04-s08",
+       "number": "4.8",
+       "title": "Multiplication and Division in capacity",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "tn-g05-t3-c01",
+     "number": 1,
+     "title": "Geometry (Term 3, chapter 1)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t3-c01-s01",
+       "number": "1.1",
+       "title": "Perimeter of the rectangle and square",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c01-o01",
+         "text": "Calculate the perimeter of rectangles and squares.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.rectangle-perimeter",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g05-t3-c01-o03",
+         "text": "Tell perimeter and area apart, and choose the right one in a problem.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.area-squares",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.perimeter-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c01-s02",
+       "number": "1.2",
+       "title": "Area of the rectangle and square",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c01-o02",
+         "text": "Calculate the area of rectangles and squares in square units.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.rectangle-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "tn-g05-t3-c03",
+     "number": 3,
+     "title": "Measurements (Term 3, chapter 3)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t3-c03-s01",
+       "number": "3.1",
+       "title": "Volume of a solid body by informal measurement",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c03-o01",
+         "text": "Compare the volumes of solids using informal units.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.volume-cubes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c03-s02",
+       "number": "3.2",
+       "title": "Finding volume using water",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c03-o03",
+         "text": "Find the volume of an object from the rise in water level (displacement).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.capacity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.volume-cubes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c03-s03",
+       "number": "3.3",
+       "title": "Finding volume using unit cubes",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c03-o02",
+         "text": "Find the volume of a solid by counting unit cubes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.volume-cubes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "tn-g05-t1-c06",
+     "number": 6,
+     "title": "Information Processing (Term 1, chapter 6)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t1-c06-s01",
+       "number": "6.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c06-s02",
+       "number": "6.2",
+       "title": "Systematic Listing",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c06-o01",
+         "text": "List all possibilities in an organised way.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.systematic-enumeration",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; set, ordered-list)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c06-s03",
+       "number": "6.3",
+       "title": "Collection of two - dimensional quantitative Data",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c06-o02",
+         "text": "Record data with two categories in a table.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.tables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; data-table)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c06-s04",
+       "number": "6.4",
+       "title": "Pictograph",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c06-o03",
+         "text": "Read and draw pictographs that use a key.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.pictographs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; data-table, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c06-s05",
+       "number": "6.5",
+       "title": "Graphical Representation of Data",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t1-c06-s06",
+       "number": "6.6",
+       "title": "Bar graph",
+       "outcomes": [
+        {
+         "id": "tn-g05-t1-c06-o04",
+         "text": "Draw and interpret bar graphs, including ones with a scale.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.bar-charts",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.statistics.scaled-bars",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, data-table)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    },
+    {
+     "id": "tn-g05-t3-c07",
+     "number": 7,
+     "title": "Information Processing (Term 3, chapter 7)",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g05-t3-c07-s01",
+       "number": "7.1",
+       "title": "Able to split bigger task into smaller known task",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c07-o01",
+         "text": "Break a larger problem into smaller known steps and solve it step by step.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.multi-step",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; word-problem, written-explanation)."
+         }
+        },
+        {
+         "id": "tn-g05-t3-c07-o02",
+         "text": "Compare different ways of solving a task and pick an efficient one.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.multi-step",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c07-s02",
+       "number": "7.2",
+       "title": "Find out easy and difficult ways to solve tasks",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g05-t3-c07-s03",
+       "number": "7.3",
+       "title": "Factor Bingo",
+       "outcomes": [
+        {
+         "id": "tn-g05-t3-c07-o03",
+         "text": "Use factors in a game setting to spot numbers that share factors.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.factors-multiples",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-reasoning",
+      "number": 6,
+      "title": "Mathematical reasoning"
+     }
+    }
+   ]
+  }
+ ]
+}

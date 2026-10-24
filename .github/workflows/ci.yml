@@ -286,6 +286,27 @@ jobs:
         run: |
           npm run english:e2e-spelling 2>&1 | tee english-spelling-e2e.log
           ../.github/scripts/require-tests.sh english-spelling-e2e.log "Spelling check end-to-end"
+      - name: Serve the essay gateway with a mocked model provider (deterministic; no paid call)
+        run: |
+          nohup node frontend/e2e/lib/essay-model-mock.mjs provider 8791 > essay-mock.log 2>&1 &
+          cd backend
+          OPENPATH_ESSAY_EVALUATOR=llm OPENPATH_LLM_PROVIDER=anthropic OPENPATH_LLM_MODEL=mock-model \
+            OPENPATH_LLM_BASE_URL=http://127.0.0.1:8791 OPENPATH_LLM_API_KEY=ci-mock-key OPENPATH_LLM_RETRIES=0 \
+            nohup python manage.py runserver 127.0.0.1:8001 --noreload > ../api-essay.log 2>&1 &
+          curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:8001/
+          cd ../frontend
+          PORT=4176 API_TARGET=http://127.0.0.1:8001 nohup npm run english:preview > ../english-essay-web.log 2>&1 &
+          curl -s -o /dev/null --retry 30 --retry-delay 1 --retry-connrefused http://127.0.0.1:4176/
+      - name: Essay-to-diagnostic workflow through Django's real gateway and LLM client (mocked provider)
+        working-directory: frontend
+        env:
+          ESSAY_DIAG_URL: http://127.0.0.1:4176
+          ESSAY_MOCK_URL: http://127.0.0.1:8791
+          ESSAY_DIAG_SHOTS: e2e/shots/essay-diagnostic
+          E2E_CLAIM_CMD: cd ../backend && python manage.py developer issue-claim
+        run: |
+          npm run essay:e2e-diagnostic 2>&1 | tee essay-diagnostic-e2e.log
+          ../.github/scripts/require-tests.sh essay-diagnostic-e2e.log "Essay-to-diagnostic end-to-end (real gateway)"
       - name: A pilot build refuses to build with no approvals, and builds from the recorded ones
         working-directory: frontend
         run: |
@@ -328,7 +349,7 @@ jobs:
           ../.github/scripts/require-tests.sh english-demo-e2e.log "Private demo end-to-end"
       - name: Show server logs
         if: failure()
-        run: tail -n 60 api.log web.log english-web.log english-api-web.log english-pilot-web.log english-pilot-approved-web.log
+        run: tail -n 60 api.log web.log english-web.log english-api-web.log english-pilot-web.log english-pilot-approved-web.log api-essay.log essay-mock.log english-essay-web.log
       - name: Keep the screenshots
         if: always()
         uses: actions/upload-artifact@v7
@@ -391,4 +412,76 @@ jobs:
           path: |
             tools/english/out/simulation-*
             tools/english/out/bank-coverage.*
+          if-no-files-found: ignore
+
+  essay-learning-experience:
+    name: Essay UX fixtures and phone journey (no intelligence service)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run essay:test
+      - run: npm run english:build
+      - run: node scripts/build-english.mjs --pilot --out=dist-english-pilot
+      - run: npx playwright install --with-deps chromium
+      - name: Start existing English previews (development and reviewed pilot)
+        run: |
+          PORT=4190 nohup npm run english:preview > /tmp/essay-preview.log 2>&1 &
+          PORT=4191 DIST=dist-english-pilot nohup npm run english:preview > /tmp/essay-pilot-preview.log 2>&1 &
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4190/ -o /tmp/essay-index.html
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4191/ -o /tmp/essay-pilot-index.html
+      - run: npm run essay:e2e
+      - name: Essay-to-diagnostic workflow against a mocked server (deterministic; no paid call)
+        run: |
+          nohup node e2e/lib/essay-model-mock.mjs gateway 8790 > /tmp/essay-mock.log 2>&1 &
+          PORT=4192 API_TARGET=http://127.0.0.1:8790 nohup npm run english:preview > /tmp/essay-diag-preview.log 2>&1 &
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:8790/__mock/calls -o /dev/null
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4192/ -o /dev/null
+          ESSAY_DIAG_URL=http://127.0.0.1:4192 ESSAY_MOCK_URL=http://127.0.0.1:8790 npm run essay:e2e-diagnostic
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: essay-learning-phone-screenshots
+          path: docs/product/essay-learning/screenshots/
+          if-no-files-found: ignore
+
+  tamil-foundation:
+    name: Tamil foundation (provisional content and mobile flow)
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run tamil:test
+      - run: npm run tamil:build
+      - run: npx playwright install --with-deps chromium
+      - name: Start Tamil preview and verify HTML
+        run: |
+          nohup npm run tamil:preview > /tmp/tamil-preview.log 2>&1 &
+          curl --fail --silent --show-error --retry 20 --retry-delay 1 --retry-connrefused http://127.0.0.1:4176/ -o /tmp/tamil-index.html
+      - run: npm run tamil:e2e
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: tamil-mobile-screenshots
+          path: frontend/e2e/shots/tamil/
           if-no-files-found: ignore

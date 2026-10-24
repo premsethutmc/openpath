@@ -1,0 +1,419 @@
+{
+ "version": "1.1.0",
+ "status": "provisional",
+ "note": "Additions for My Learning Year on top of content/mathematics/curriculum.v1.json, which is unchanged. Micro-skills refine an existing competency (partOf); their evidence also counts for that parent competency in the shared ledger. 'supports' edges are teaching-navigation links used for prerequisite recovery; they are not the v1 inference prerequisites and do not change any estimate. Original, AI-assisted, not educator-reviewed. 1.1.0 adds micro-skills, supports, and two relation kinds that are never followed by recovery: 'alternatives' (another way to do the same work) and 'enrichment' (going further). Nothing in 1.0.0 is changed or removed.",
+ "competencies": [
+  {
+   "id": "MLY.mult.facts-2-5-10",
+   "name": "Multiplication facts for 2, 5 and 10",
+   "partOf": "MATH.number.multiplication-tables",
+   "gradeRange": [
+    2,
+    3
+   ],
+   "objectives": [
+    "Recall products with 2, 5 and 10 quickly"
+   ]
+  },
+  {
+   "id": "MLY.mult.facts-3-4",
+   "name": "Multiplication facts for 3 and 4",
+   "partOf": "MATH.number.multiplication-tables",
+   "gradeRange": [
+    3,
+    3
+   ],
+   "objectives": [
+    "Recall or quickly derive products with 3 and 4"
+   ]
+  },
+  {
+   "id": "MLY.mult.facts-6-9",
+   "name": "Multiplication facts for 6, 7, 8 and 9",
+   "partOf": "MATH.number.multiplication-tables",
+   "gradeRange": [
+    3,
+    4
+   ],
+   "objectives": [
+    "Recall or derive products such as 7 × 8"
+   ]
+  },
+  {
+   "id": "MLY.mult.derive",
+   "name": "Derive an unknown fact from known facts",
+   "partOf": "MATH.number.multiplication-tables",
+   "gradeRange": [
+    3,
+    4
+   ],
+   "objectives": [
+    "Split a factor, double, or adjust a near fact to find a product"
+   ]
+  },
+  {
+   "id": "MLY.frac.same-whole",
+   "name": "Equal parts of the same whole",
+   "partOf": "MATH.number.equivalent-fractions",
+   "gradeRange": [
+    3,
+    4
+   ],
+   "objectives": [
+    "See that 1/2 and 2/4 of the same strip cover the same length"
+   ]
+  },
+  {
+   "id": "MLY.frac.scale",
+   "name": "Multiply numerator and denominator by the same number",
+   "partOf": "MATH.number.equivalent-fractions",
+   "gradeRange": [
+    4,
+    4
+   ],
+   "objectives": [
+    "Make an equivalent fraction by scaling both parts"
+   ]
+  },
+  {
+   "id": "MLY.frac.check-equal",
+   "name": "Decide whether two fractions are equal",
+   "partOf": "MATH.number.equivalent-fractions",
+   "gradeRange": [
+    4,
+    5
+   ],
+   "objectives": [
+    "Compare by a common denominator or by scaling"
+   ]
+  },
+  {
+   "id": "MLY.calc.area-constant",
+   "name": "Area under a constant function is a rectangle",
+   "partOf": "MATH.calculus.area-integrals",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Read the integral of a constant as width × height"
+   ]
+  },
+  {
+   "id": "MLY.pow.whole",
+   "name": "Powers of whole numbers",
+   "partOf": "MATH.number.exponents",
+   "gradeRange": [
+    6,
+    7
+   ],
+   "objectives": [
+    "Work out a power such as 2⁵ as repeated multiplication"
+   ]
+  },
+  {
+   "id": "MLY.alg.distributive",
+   "name": "The distributive property: a(x + b)",
+   "partOf": "MATH.algebra.identities-intro",
+   "gradeRange": [
+    6,
+    7
+   ],
+   "objectives": [
+    "Multiply every term inside a bracket by the number outside"
+   ]
+  },
+  {
+   "id": "MLY.alg.expand-binomials",
+   "name": "Expand (x + a)(x + b)",
+   "partOf": "MATH.algebra.identities",
+   "gradeRange": [
+    8,
+    9
+   ],
+   "objectives": [
+    "Multiply two brackets term by term and collect the x terms"
+   ]
+  },
+  {
+   "id": "MLY.calc.power-derivative",
+   "name": "Differentiate a power of x",
+   "partOf": "MATH.calculus.derivative-rules",
+   "gradeRange": [
+    11,
+    12
+   ],
+   "objectives": [
+    "Use d/dx (k xⁿ) = k n xⁿ⁻¹ and evaluate it at a point"
+   ]
+  },
+  {
+   "id": "MLY.calc.power-antiderivative",
+   "name": "Antiderivative of a power of x",
+   "partOf": "MATH.calculus.indefinite-integrals",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use ∫ k xⁿ dx = k xⁿ⁺¹ ⁄ (n + 1) + C and evaluate it between limits"
+   ]
+  },
+  {
+   "id": "MLY.calc.substitution",
+   "name": "Integrate by substitution",
+   "partOf": "MATH.calculus.integration-methods",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Choose u, rewrite the integral in u, and change the limits"
+   ]
+  },
+  {
+   "id": "MLY.calc.by-parts",
+   "name": "Integrate by parts",
+   "partOf": "MATH.calculus.integration-methods",
+   "gradeRange": [
+    12,
+    12
+   ],
+   "objectives": [
+    "Use ∫ u dv = uv − ∫ v du"
+   ]
+  }
+ ],
+ "supports": [
+  {
+   "competency": "MATH.calculus.area-integrals",
+   "supports": [
+    "MATH.measurement.rectangle-area",
+    "MATH.coordinate.cartesian"
+   ],
+   "note": "An area integral of a constant is a rectangle: width × height, read from the graph. (Definite integrals are already its mandatory prerequisite; not repeated here.)"
+  },
+  {
+   "competency": "MATH.calculus.definite-integrals",
+   "supports": [
+    "MATH.measurement.rectangle-area",
+    "MATH.algebra.functions"
+   ]
+  },
+  {
+   "competency": "MATH.measurement.rectangle-area",
+   "supports": [
+    "MATH.number.multiplication-tables",
+    "MATH.measurement.area-squares"
+   ]
+  },
+  {
+   "competency": "MATH.number.multiplication-tables",
+   "supports": [
+    "MATH.number.equal-groups",
+    "MATH.number.addition"
+   ]
+  },
+  {
+   "competency": "MATH.number.equivalent-fractions",
+   "supports": [
+    "MATH.number.fraction-models",
+    "MATH.number.multiplication-tables"
+   ]
+  },
+  {
+   "competency": "MATH.number.fraction-add",
+   "supports": [
+    "MATH.number.equivalent-fractions",
+    "MATH.number.fraction-add-like"
+   ]
+  },
+  {
+   "competency": "MATH.algebra.quadratics",
+   "supports": [
+    "MATH.algebra.identities",
+    "MATH.algebra.factorisation",
+    "MATH.number.square-roots"
+   ]
+  },
+  {
+   "competency": "MATH.number.equal-groups",
+   "supports": [
+    "MATH.number.addition"
+   ]
+  },
+  {
+   "competency": "MATH.number.fraction-add-like",
+   "supports": [
+    "MATH.number.fraction-models"
+   ],
+   "note": "Adding like fractions counts equal parts."
+  },
+  {
+   "competency": "MATH.coordinate.cartesian",
+   "supports": [
+    "MATH.number.integers"
+   ],
+   "note": "Four quadrants need signed numbers."
+  },
+  {
+   "competency": "MATH.number.fraction-multiply",
+   "supports": [
+    "MATH.number.fraction-add-like"
+   ],
+   "note": "A fraction times a whole number is repeated addition of like fractions."
+  },
+  {
+   "competency": "MATH.number.exponents",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "A whole-number power is repeated multiplication."
+  },
+  {
+   "competency": "MATH.algebra.identities-intro",
+   "supports": [
+    "MATH.number.multiplication-tables",
+    "MATH.algebra.variables"
+   ],
+   "note": "Expanding a(x + b) multiplies a by each term."
+  },
+  {
+   "competency": "MATH.algebra.identities",
+   "supports": [
+    "MATH.algebra.identities-intro",
+    "MATH.number.integer-add"
+   ],
+   "note": "(x + a)(x + b) is two distributive steps; the x terms are collected with signed numbers."
+  },
+  {
+   "competency": "MATH.calculus.derivative-rules",
+   "supports": [
+    "MATH.number.exponents",
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "The power rule lowers the power by one and multiplies by it."
+  },
+  {
+   "competency": "MATH.calculus.indefinite-integrals",
+   "supports": [
+    "MATH.calculus.derivative-rules",
+    "MATH.number.exponents",
+    "MATH.number.fraction-add-like"
+   ],
+   "note": "An antiderivative undoes a derivative; evaluating it needs powers and fractions with the same denominator."
+  },
+  {
+   "competency": "MATH.calculus.integration-methods",
+   "supports": [
+    "MATH.algebra.variables",
+    "MATH.number.exponents"
+   ],
+   "note": "A substitution evaluates u = x² + c at the limits."
+  },
+  {
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "supports": [
+    "MATH.number.integer-add",
+    "MATH.number.exponents"
+   ],
+   "note": "b² − 4ac is signed arithmetic with a square."
+  },
+  {
+   "competency": "MATH.number.multi-multiplication",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "Each digit's product is a multiplication fact."
+  },
+  {
+   "competency": "MATH.number.division-remainders",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "Groups of the divisor are multiplication facts."
+  },
+  {
+   "competency": "MATH.number.long-division",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "Each step of a division is a multiplication fact."
+  },
+  {
+   "competency": "MATH.coordinate.distance",
+   "supports": [
+    "MATH.number.square-roots",
+    "MATH.number.integer-add"
+   ],
+   "note": "Differences of coordinates, squared, added, and a square root."
+  },
+  {
+   "competency": "MATH.calculus.limits",
+   "supports": [
+    "MATH.algebra.identities"
+   ],
+   "note": "x² − a² = (x − a)(x + a)."
+  },
+  {
+   "competency": "MATH.algebra.linear-rational",
+   "supports": [
+    "MATH.number.integer-add"
+   ],
+   "note": "Undoing a term moves it with its sign: adding and subtracting negative numbers."
+  },
+  {
+   "competency": "MATH.measurement.time-speed-intro",
+   "supports": [
+    "MATH.number.long-division"
+   ],
+   "note": "Distance per unit time is a division: the distance divided by the time."
+  },
+  {
+   "competency": "MATH.number.mixed-fractions",
+   "supports": [
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "A mixed number becomes an improper fraction by multiplying the whole number by the denominator."
+  },
+  {
+   "competency": "MATH.measurement.cube-volume",
+   "supports": [
+    "MATH.measurement.volume-cubes"
+   ],
+   "note": "Length × width × height counts the unit cubes, one layer of the base for each unit of height."
+  }
+ ],
+ "alternatives": [
+  {
+   "competency": "MATH.algebra.identities",
+   "alternatives": [
+    "MATH.measurement.rectangle-area"
+   ],
+   "note": "An area model: (x + a)(x + b) is a rectangle x + a by x + b, cut into four parts."
+  },
+  {
+   "competency": "MATH.algebra.quadratics",
+   "alternatives": [
+    "MATH.algebra.functions"
+   ],
+   "note": "Read the solutions where the graph of y = x² + px + q crosses the x-axis."
+  }
+ ],
+ "enrichment": [
+  {
+   "competency": "MATH.algebra.quadratics",
+   "enrichment": [
+    "MATH.algebra.quadratic-complex"
+   ],
+   "note": "When there are no real solutions, the complex ones."
+  },
+  {
+   "competency": "MATH.calculus.integration-methods",
+   "enrichment": [
+    "MATH.calculus.differential-equations"
+   ],
+   "note": "Separable differential equations use the same integrals."
+  }
+ ]
+}

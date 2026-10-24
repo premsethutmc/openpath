@@ -1,0 +1,1223 @@
+{
+  "version": "1.1.0-proposal",
+  "baseVersion": "1.0.0",
+  "status": "proposed-pedagogical-overlay-not-estimator-policy",
+  "identityPolicy": "Existing canonical IDs unchanged. No evidence remap, deletion or mastery transfer. Proposed refinements are not registered capabilities.",
+  "revisions": [
+    {
+      "id": "MATH.number.count-objects",
+      "prerequisites": [],
+      "previousPrerequisites": [],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.number.compare-numbers",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.place-value-tens",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.compare-numbers"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.addition",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.place-value-tens"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.subtraction",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.addition"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.zero",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.subtraction"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.repeating-patterns",
+      "prerequisites": [],
+      "previousPrerequisites": [],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.geometry.shapes",
+      "prerequisites": [],
+      "previousPrerequisites": [],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.geometry.positions",
+      "prerequisites": [],
+      "previousPrerequisites": [
+        "MATH.geometry.shapes"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.measurement.length-comparison",
+      "prerequisites": [],
+      "previousPrerequisites": [],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.measurement.mass-comparison",
+      "prerequisites": [],
+      "previousPrerequisites": [
+        "MATH.measurement.length-comparison"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.measurement.time-order",
+      "prerequisites": [],
+      "previousPrerequisites": [
+        "MATH.measurement.mass-comparison"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.measurement.money-coins",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.time-order"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.statistics.picture-data",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.reasoning.explain-counting",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.hundreds",
+      "prerequisites": [
+        "MATH.number.place-value-tens"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.zero"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.addition-regroup",
+      "prerequisites": [
+        "MATH.number.addition",
+        "MATH.number.hundreds"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.hundreds"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.subtraction-regroup",
+      "prerequisites": [
+        "MATH.number.subtraction",
+        "MATH.number.hundreds"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.addition-regroup"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.equal-groups",
+      "prerequisites": [
+        "MATH.number.count-objects",
+        "MATH.number.addition"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.sharing",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.equal-groups"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.unit-fractions",
+      "prerequisites": [
+        "MATH.geometry.shapes"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.sharing"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.number-patterns",
+      "prerequisites": [
+        "MATH.number.addition",
+        "MATH.algebra.repeating-patterns"
+      ],
+      "previousPrerequisites": [
+        "MATH.algebra.repeating-patterns"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.shape-properties",
+      "prerequisites": [
+        "MATH.geometry.shapes"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.positions"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.symmetry-fold",
+      "prerequisites": [
+        "MATH.geometry.shapes"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.shape-properties"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.standard-length",
+      "prerequisites": [
+        "MATH.measurement.length-comparison",
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.money-coins"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.standard-mass",
+      "prerequisites": [
+        "MATH.measurement.mass-comparison",
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.standard-length"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.capacity",
+      "prerequisites": [
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.standard-mass"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.clock",
+      "prerequisites": [
+        "MATH.measurement.time-order",
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.capacity"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.money-change",
+      "prerequisites": [
+        "MATH.measurement.money-coins",
+        "MATH.number.subtraction"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.clock"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.statistics.pictographs",
+      "prerequisites": [
+        "MATH.statistics.picture-data",
+        "MATH.number.equal-groups"
+      ],
+      "previousPrerequisites": [
+        "MATH.statistics.picture-data"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.reasoning.operation-choice",
+      "prerequisites": [
+        "MATH.number.addition",
+        "MATH.number.subtraction"
+      ],
+      "previousPrerequisites": [
+        "MATH.reasoning.explain-counting"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.thousands",
+      "prerequisites": [
+        "MATH.number.hundreds"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.unit-fractions"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.multiplication-tables",
+      "prerequisites": [
+        "MATH.number.equal-groups"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.thousands"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.division-remainders",
+      "prerequisites": [
+        "MATH.number.sharing",
+        "MATH.number.equal-groups"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.multiplication-tables"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.fraction-models",
+      "prerequisites": [
+        "MATH.number.unit-fractions"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.division-remainders"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.fraction-comparison",
+      "prerequisites": [
+        "MATH.number.fraction-models"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.fraction-models"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.missing-number",
+      "prerequisites": [
+        "MATH.number.addition",
+        "MATH.number.subtraction"
+      ],
+      "previousPrerequisites": [
+        "MATH.algebra.number-patterns"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.growing-patterns",
+      "prerequisites": [
+        "MATH.algebra.number-patterns"
+      ],
+      "previousPrerequisites": [
+        "MATH.algebra.missing-number"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.lines-segments",
+      "prerequisites": [
+        "MATH.geometry.positions"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.symmetry-fold"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.shape-tiling",
+      "prerequisites": [
+        "MATH.geometry.shapes"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.lines-segments"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.length-conversion",
+      "prerequisites": [
+        "MATH.measurement.standard-length",
+        "MATH.number.place-value-tens"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.money-change"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.perimeter-intro",
+      "prerequisites": [
+        "MATH.measurement.standard-length",
+        "MATH.number.addition"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.length-conversion"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.elapsed-time",
+      "prerequisites": [
+        "MATH.measurement.clock",
+        "MATH.number.subtraction"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.perimeter-intro"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.money-decimals",
+      "prerequisites": [
+        "MATH.measurement.money-coins",
+        "MATH.number.hundreds"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.elapsed-time"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.statistics.tables",
+      "prerequisites": [
+        "MATH.statistics.picture-data"
+      ],
+      "previousPrerequisites": [
+        "MATH.statistics.pictographs"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.statistics.bar-charts",
+      "prerequisites": [
+        "MATH.statistics.tables",
+        "MATH.measurement.standard-length"
+      ],
+      "previousPrerequisites": [
+        "MATH.statistics.tables"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.reasoning.estimate-check",
+      "prerequisites": [
+        "MATH.number.compare-numbers",
+        "MATH.number.addition",
+        "MATH.number.subtraction"
+      ],
+      "previousPrerequisites": [
+        "MATH.reasoning.operation-choice"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.large-numbers",
+      "prerequisites": [
+        "MATH.number.thousands"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.fraction-comparison"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.multi-multiplication",
+      "prerequisites": [
+        "MATH.number.multiplication-tables",
+        "MATH.number.hundreds"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.large-numbers"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.long-division",
+      "prerequisites": [
+        "MATH.number.division-remainders",
+        "MATH.number.hundreds"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.multi-multiplication"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.equivalent-fractions",
+      "prerequisites": [
+        "MATH.number.fraction-models",
+        "MATH.number.equal-groups"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.long-division"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.fraction-add-like",
+      "prerequisites": [
+        "MATH.number.fraction-models",
+        "MATH.number.addition",
+        "MATH.number.subtraction"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.equivalent-fractions"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.decimal-tenths",
+      "prerequisites": [
+        "MATH.number.fraction-models",
+        "MATH.number.place-value-tens"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.fraction-add-like"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.pattern-rules",
+      "prerequisites": [
+        "MATH.algebra.growing-patterns"
+      ],
+      "previousPrerequisites": [
+        "MATH.algebra.growing-patterns"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.angles-intro",
+      "prerequisites": [
+        "MATH.geometry.lines-segments",
+        "MATH.geometry.shapes"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.shape-tiling"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.circles",
+      "prerequisites": [
+        "MATH.geometry.shapes"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.angles-intro"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.symmetry-lines",
+      "prerequisites": [
+        "MATH.geometry.symmetry-fold"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.circles"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.area-squares",
+      "prerequisites": [
+        "MATH.geometry.shapes",
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.money-decimals"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.rectangle-perimeter",
+      "prerequisites": [
+        "MATH.measurement.perimeter-intro",
+        "MATH.geometry.shape-properties"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.area-squares"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.unit-conversions",
+      "prerequisites": [
+        "MATH.measurement.standard-length",
+        "MATH.measurement.standard-mass",
+        "MATH.measurement.capacity",
+        "MATH.number.place-value-tens"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.rectangle-perimeter"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.statistics.scaled-bars",
+      "prerequisites": [
+        "MATH.statistics.bar-charts",
+        "MATH.number.equal-groups"
+      ],
+      "previousPrerequisites": [
+        "MATH.statistics.bar-charts"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.reasoning.multi-step",
+      "prerequisites": [
+        "MATH.reasoning.operation-choice",
+        "MATH.reasoning.estimate-check"
+      ],
+      "previousPrerequisites": [
+        "MATH.reasoning.estimate-check"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.factors-multiples",
+      "prerequisites": [
+        "MATH.number.multiplication-tables",
+        "MATH.number.division-remainders"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.decimal-tenths"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.primes",
+      "prerequisites": [
+        "MATH.number.factors-multiples"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.factors-multiples"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.fraction-add",
+      "prerequisites": [
+        "MATH.number.equivalent-fractions",
+        "MATH.number.fraction-add-like"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.primes"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.fraction-multiply",
+      "prerequisites": [
+        "MATH.number.fraction-models",
+        "MATH.number.equal-groups"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.fraction-add"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.decimal-operations",
+      "prerequisites": [
+        "MATH.number.decimal-tenths",
+        "MATH.number.addition-regroup",
+        "MATH.number.subtraction-regroup"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.fraction-multiply"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.percent-intro",
+      "prerequisites": [
+        "MATH.number.equivalent-fractions",
+        "MATH.number.decimal-tenths"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.decimal-operations"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.expressions-intro",
+      "prerequisites": [
+        "MATH.algebra.pattern-rules",
+        "MATH.algebra.missing-number"
+      ],
+      "previousPrerequisites": [
+        "MATH.algebra.pattern-rules"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.angle-measure",
+      "prerequisites": [
+        "MATH.geometry.angles-intro",
+        "MATH.measurement.standard-length"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.symmetry-lines"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.triangle-types",
+      "prerequisites": [
+        "MATH.geometry.shape-properties",
+        "MATH.geometry.angles-intro"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.angle-measure"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.nets",
+      "prerequisites": [
+        "MATH.geometry.shape-properties"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.triangle-types"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.rectangle-area",
+      "prerequisites": [
+        "MATH.measurement.area-squares",
+        "MATH.number.equal-groups"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.unit-conversions",
+        "MATH.number.multi-multiplication"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.volume-cubes",
+      "prerequisites": [
+        "MATH.geometry.shape-properties",
+        "MATH.number.count-objects"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.rectangle-area"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.time-speed-intro",
+      "prerequisites": [
+        "MATH.measurement.standard-length",
+        "MATH.measurement.elapsed-time",
+        "MATH.number.division-remainders"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.volume-cubes"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.statistics.averages-intro",
+      "prerequisites": [
+        "MATH.statistics.tables",
+        "MATH.number.addition",
+        "MATH.number.sharing"
+      ],
+      "previousPrerequisites": [
+        "MATH.statistics.scaled-bars"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.reasoning.counterexamples-intro",
+      "prerequisites": [
+        "MATH.reasoning.explain-counting"
+      ],
+      "previousPrerequisites": [
+        "MATH.reasoning.multi-step"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.integers",
+      "prerequisites": [
+        "MATH.number.compare-numbers",
+        "MATH.number.zero"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.percent-intro"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.integer-add",
+      "prerequisites": [
+        "MATH.number.integers",
+        "MATH.number.addition",
+        "MATH.number.subtraction"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.integers"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.fraction-product",
+      "prerequisites": [
+        "MATH.number.fraction-multiply",
+        "MATH.number.equivalent-fractions",
+        "MATH.number.sharing"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.integer-add"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.decimal-product",
+      "prerequisites": [
+        "MATH.number.decimal-tenths",
+        "MATH.number.multi-multiplication",
+        "MATH.number.long-division"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.fraction-product"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.ratio",
+      "prerequisites": [
+        "MATH.number.equal-groups",
+        "MATH.number.equivalent-fractions"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.decimal-product"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.number.unit-rate",
+      "prerequisites": [
+        "MATH.number.ratio",
+        "MATH.number.division-remainders"
+      ],
+      "previousPrerequisites": [
+        "MATH.number.ratio"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.variables",
+      "prerequisites": [
+        "MATH.algebra.expressions-intro"
+      ],
+      "previousPrerequisites": [
+        "MATH.algebra.expressions-intro"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.algebra.linear-intro",
+      "prerequisites": [
+        "MATH.algebra.missing-number",
+        "MATH.algebra.variables"
+      ],
+      "previousPrerequisites": [
+        "MATH.algebra.variables"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.basic-constructions",
+      "prerequisites": [
+        "MATH.geometry.lines-segments",
+        "MATH.geometry.circles",
+        "MATH.measurement.standard-length"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.nets"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.geometry.triangle-properties",
+      "prerequisites": [
+        "MATH.geometry.triangle-types",
+        "MATH.geometry.angle-measure"
+      ],
+      "previousPrerequisites": [
+        "MATH.geometry.basic-constructions"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.triangle-area",
+      "prerequisites": [
+        "MATH.measurement.rectangle-area",
+        "MATH.geometry.triangle-types",
+        "MATH.number.sharing"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.time-speed-intro"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.measurement.cube-volume",
+      "prerequisites": [
+        "MATH.measurement.volume-cubes",
+        "MATH.number.multi-multiplication"
+      ],
+      "previousPrerequisites": [
+        "MATH.measurement.triangle-area"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.statistics.data-frequency",
+      "prerequisites": [
+        "MATH.statistics.tables"
+      ],
+      "previousPrerequisites": [
+        "MATH.statistics.averages-intro"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    },
+    {
+      "id": "MATH.probability.chance-language",
+      "prerequisites": [],
+      "previousPrerequisites": [
+        "MATH.number.addition"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": "Independent concrete entry point; introduce through everyday experience."
+    },
+    {
+      "id": "MATH.reasoning.divisibility",
+      "prerequisites": [
+        "MATH.number.factors-multiples"
+      ],
+      "previousPrerequisites": [
+        "MATH.reasoning.counterexamples-intro"
+      ],
+      "reason": "Domain-specific conceptual requirements; no unrelated chronological fallback.",
+      "rootJustification": null
+    }
+  ],
+  "proposedRefinements": [
+    {
+      "proposalId": "proposal.math.one-to-one",
+      "name": "One-to-one correspondence and cardinality",
+      "proposedGrade": 1,
+      "refines": "MATH.number.count-objects",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.numeral-quantity",
+      "name": "Connect spoken names, numerals and quantities",
+      "proposedGrade": 1,
+      "refines": "MATH.number.count-objects",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.subitising",
+      "name": "Recognise small quantities without recounting",
+      "proposedGrade": 1,
+      "refines": "MATH.number.count-objects",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.number-line",
+      "name": "Number-line position and counted jumps",
+      "proposedGrade": 1,
+      "refines": "MATH.number.compare-numbers",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.part-whole",
+      "name": "Decompose and recompose numbers within ten",
+      "proposedGrade": 1,
+      "refines": "MATH.number.addition",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.unit-iteration",
+      "name": "Measure without gaps or overlaps",
+      "proposedGrade": 2,
+      "refines": "MATH.measurement.standard-length",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.array-structure",
+      "name": "Relate equal groups, arrays and repeated addition",
+      "proposedGrade": 3,
+      "refines": "MATH.number.equal-groups",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.division-grouping",
+      "name": "Distinguish sharing from grouping division",
+      "proposedGrade": 3,
+      "refines": "MATH.number.sharing",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.fraction-number-line",
+      "name": "Fractions as numbers on a number line",
+      "proposedGrade": 3,
+      "refines": "MATH.number.fraction-models",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.equal-whole",
+      "name": "Equal parts and same-whole comparison",
+      "proposedGrade": 3,
+      "refines": "MATH.number.fraction-models",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.fraction-unlike-compare",
+      "name": "Compare unlike fractions through common units",
+      "proposedGrade": 5,
+      "refines": "MATH.number.equivalent-fractions",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.decimal-compare",
+      "name": "Compare decimals using place value, including zero placeholders",
+      "proposedGrade": 5,
+      "refines": "MATH.number.decimal-tenths",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.ratio-additive-contrast",
+      "name": "Distinguish multiplicative ratios from additive comparisons",
+      "proposedGrade": 6,
+      "refines": "MATH.number.ratio",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    },
+    {
+      "proposalId": "proposal.math.fraction-division-meaning",
+      "name": "Interpret fraction division using measures and grouping",
+      "proposedGrade": 6,
+      "refines": "MATH.number.fraction-product",
+      "migration": "Keep all historical evidence on parent; no automatic inheritance to future subskills."
+    }
+  ],
+  "compoundSkills": [
+    {
+      "id": "MATH.geometry.shapes",
+      "action": "Separate plane-shape recognition from solid-shape recognition; retain historical parent."
+    },
+    {
+      "id": "MATH.number.fraction-product",
+      "action": "Split fraction multiplication and fraction division; grade placement requires board review."
+    },
+    {
+      "id": "MATH.number.decimal-product",
+      "action": "Split multiplication and division; do not infer one from the other."
+    },
+    {
+      "id": "MATH.measurement.unit-conversions",
+      "action": "Separate length, mass and capacity conversions."
+    },
+    {
+      "id": "MATH.number.fraction-add-like",
+      "action": "Separate addition and subtraction evidence while retaining parent."
+    },
+    {
+      "id": "MATH.geometry.shape-properties",
+      "action": "Separate 2D sides/corners from 3D edges/faces/vertices."
+    }
+  ],
+  "sources": [
+    {
+      "board": "NCERT",
+      "url": "https://ncert.nic.in/textbook.php",
+      "edition": null,
+      "status": "unverified; proxy CONNECT 403 on 2026-10-19"
+    },
+    {
+      "board": "Tamil Nadu Samacheer Kalvi",
+      "url": "https://textbookcorp.tn.gov.in/",
+      "edition": null,
+      "status": "unverified; proxy CONNECT 403 on 2026-10-19"
+    }
+  ],
+  "boardDifferences": [
+    {
+      "topic": "Fractions and decimals",
+      "NCERT": "Edition/chapter/grade verification pending",
+      "TamilNadu": "Independent edition/chapter/grade verification pending",
+      "risk": "Do not equate the current grade-4 equivalence label with either official board sequence."
+    },
+    {
+      "topic": "Ratios and percentages",
+      "NCERT": "Edition/chapter/grade verification pending",
+      "TamilNadu": "Independent edition/chapter/grade verification pending",
+      "risk": "Existing grade-5 percentages and grade-6 fraction division need edition-specific review; may be enrichment rather than grade expectation."
+    },
+    {
+      "topic": "Geometry and measurement",
+      "NCERT": "Edition/chapter/grade verification pending",
+      "TamilNadu": "Independent edition/chapter/grade verification pending",
+      "risk": "Construction, triangle area and cuboid volume placements may differ; avoid identical board mappings."
+    },
+    {
+      "topic": "Data and averages",
+      "NCERT": "Edition/chapter/grade verification pending",
+      "TamilNadu": "Independent edition/chapter/grade verification pending",
+      "risk": "Mean at grade 5 and frequency at grade 6 are provisional; concrete data work should precede procedural statistics."
+    }
+  ]
+}

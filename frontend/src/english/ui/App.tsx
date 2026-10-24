@@ -460,7 +460,13 @@ export function App() {
         <Home
           learner={learner}
           onStart={start}
-          onResume={() => (learner.state.open?.event.type === "doubling_journey" ? setInJourney(true) : setInSession(true))}
+          onResume={() => {
+            const type = learner.state.open?.event.type;
+            // an essay sitting continues in the essay studio, not in the question session screen
+            if (type === "essay") return void location.assign("?experience=essay-live");
+            if (type === "doubling_journey") setInJourney(true);
+            else setInSession(true);
+          }}
           onJourney={async () => {
             await learner.startJourney();
             setInJourney(true);

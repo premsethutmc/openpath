@@ -1,0 +1,6020 @@
+[
+  {
+    "id": "ta.vowel.0",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.0",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "அ"
+    ],
+    "options": [
+      "அ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.0",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.0",
+    "format": "choice",
+    "prompt": "«அ» குறிலா, நெடிலா?",
+    "answers": [
+      "குறில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "நெடில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.1",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.1",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஆ"
+    ],
+    "options": [
+      "ஆ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.1",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.1",
+    "format": "choice",
+    "prompt": "«ஆ» குறிலா, நெடிலா?",
+    "answers": [
+      "நெடில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "குறில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.2",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.2",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "இ"
+    ],
+    "options": [
+      "இ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.2",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.2",
+    "format": "choice",
+    "prompt": "«இ» குறிலா, நெடிலா?",
+    "answers": [
+      "குறில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "நெடில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.3",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.3",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஈ"
+    ],
+    "options": [
+      "ஈ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.3",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.3",
+    "format": "choice",
+    "prompt": "«ஈ» குறிலா, நெடிலா?",
+    "answers": [
+      "நெடில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "குறில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.4",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.4",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "உ"
+    ],
+    "options": [
+      "உ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.4",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.4",
+    "format": "choice",
+    "prompt": "«உ» குறிலா, நெடிலா?",
+    "answers": [
+      "குறில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "நெடில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.5",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.5",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஊ"
+    ],
+    "options": [
+      "ஊ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.5",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.5",
+    "format": "choice",
+    "prompt": "«ஊ» குறிலா, நெடிலா?",
+    "answers": [
+      "நெடில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "குறில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.6",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.6",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "எ"
+    ],
+    "options": [
+      "எ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.6",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.6",
+    "format": "choice",
+    "prompt": "«எ» குறிலா, நெடிலா?",
+    "answers": [
+      "குறில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "நெடில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.7",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.7",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஏ"
+    ],
+    "options": [
+      "ஏ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.7",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.7",
+    "format": "choice",
+    "prompt": "«ஏ» குறிலா, நெடிலா?",
+    "answers": [
+      "நெடில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "குறில்": "TA.short-long"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.8",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.8",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஐ"
+    ],
+    "options": [
+      "ஐ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.length.8",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.8",
+    "format": "choice",
+    "prompt": "«ஐ» குறிலா, நெடிலா?",
+    "answers": [
+      "நெடில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "குறில்": "TA.short-long"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.vowel.9",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.9",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஒ"
+    ],
+    "options": [
+      "ஒ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.length.9",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.9",
+    "format": "choice",
+    "prompt": "«ஒ» குறிலா, நெடிலா?",
+    "answers": [
+      "குறில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "நெடில்": "TA.short-long"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.vowel.10",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.10",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஓ"
+    ],
+    "options": [
+      "ஓ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.length.10",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.10",
+    "format": "choice",
+    "prompt": "«ஓ» குறிலா, நெடிலா?",
+    "answers": [
+      "நெடில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "குறில்": "TA.short-long"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.vowel.11",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.11",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "ஔ"
+    ],
+    "options": [
+      "ஔ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.length.11",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.11",
+    "format": "choice",
+    "prompt": "«ஔ» குறிலா, நெடிலா?",
+    "answers": [
+      "நெடில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "குறில்": "TA.short-long"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.rec.0",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.0",
+    "format": "choice",
+    "prompt": "«க்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "க்"
+    ],
+    "options": [
+      "க",
+      "க்",
+      "அ"
+    ],
+    "wrong": {
+      "க": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.0",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.0",
+    "format": "compose",
+    "prompt": "«க» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "க்"
+    ],
+    "options": [],
+    "wrong": {
+      "க": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.1",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.1",
+    "format": "choice",
+    "prompt": "«ங்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ங்"
+    ],
+    "options": [
+      "ங",
+      "ங்",
+      "அ"
+    ],
+    "wrong": {
+      "ங": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.1",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.1",
+    "format": "compose",
+    "prompt": "«ங» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ங்"
+    ],
+    "options": [],
+    "wrong": {
+      "ங": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.2",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.2",
+    "format": "choice",
+    "prompt": "«ச்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ச்"
+    ],
+    "options": [
+      "ச",
+      "ச்",
+      "அ"
+    ],
+    "wrong": {
+      "ச": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.2",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.2",
+    "format": "compose",
+    "prompt": "«ச» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ச்"
+    ],
+    "options": [],
+    "wrong": {
+      "ச": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.3",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.3",
+    "format": "choice",
+    "prompt": "«ஞ்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ஞ்"
+    ],
+    "options": [
+      "ஞ",
+      "ஞ்",
+      "அ"
+    ],
+    "wrong": {
+      "ஞ": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.3",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.3",
+    "format": "compose",
+    "prompt": "«ஞ» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ஞ்"
+    ],
+    "options": [],
+    "wrong": {
+      "ஞ": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.4",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.4",
+    "format": "choice",
+    "prompt": "«ட்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ட்"
+    ],
+    "options": [
+      "ட",
+      "ட்",
+      "அ"
+    ],
+    "wrong": {
+      "ட": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.4",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.4",
+    "format": "compose",
+    "prompt": "«ட» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ட்"
+    ],
+    "options": [],
+    "wrong": {
+      "ட": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.5",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.5",
+    "format": "choice",
+    "prompt": "«ண்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ண்"
+    ],
+    "options": [
+      "ண",
+      "ண்",
+      "அ"
+    ],
+    "wrong": {
+      "ண": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.5",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.5",
+    "format": "compose",
+    "prompt": "«ண» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ண்"
+    ],
+    "options": [],
+    "wrong": {
+      "ண": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.6",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.6",
+    "format": "choice",
+    "prompt": "«த்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "த்"
+    ],
+    "options": [
+      "த",
+      "த்",
+      "அ"
+    ],
+    "wrong": {
+      "த": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.6",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.6",
+    "format": "compose",
+    "prompt": "«த» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "த்"
+    ],
+    "options": [],
+    "wrong": {
+      "த": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.7",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.7",
+    "format": "choice",
+    "prompt": "«ந்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ந்"
+    ],
+    "options": [
+      "ந",
+      "ந்",
+      "அ"
+    ],
+    "wrong": {
+      "ந": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.7",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.7",
+    "format": "compose",
+    "prompt": "«ந» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ந்"
+    ],
+    "options": [],
+    "wrong": {
+      "ந": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.8",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.8",
+    "format": "choice",
+    "prompt": "«ப்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ப்"
+    ],
+    "options": [
+      "ப",
+      "ப்",
+      "அ"
+    ],
+    "wrong": {
+      "ப": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.8",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.8",
+    "format": "compose",
+    "prompt": "«ப» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ப்"
+    ],
+    "options": [],
+    "wrong": {
+      "ப": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.9",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.9",
+    "format": "choice",
+    "prompt": "«ம்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ம்"
+    ],
+    "options": [
+      "ம",
+      "ம்",
+      "அ"
+    ],
+    "wrong": {
+      "ம": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.9",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.9",
+    "format": "compose",
+    "prompt": "«ம» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ம்"
+    ],
+    "options": [],
+    "wrong": {
+      "ம": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.10",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.10",
+    "format": "choice",
+    "prompt": "«ய்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ய்"
+    ],
+    "options": [
+      "ய",
+      "ய்",
+      "அ"
+    ],
+    "wrong": {
+      "ய": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.10",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.10",
+    "format": "compose",
+    "prompt": "«ய» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ய்"
+    ],
+    "options": [],
+    "wrong": {
+      "ய": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.11",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.11",
+    "format": "choice",
+    "prompt": "«ர்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ர்"
+    ],
+    "options": [
+      "ர",
+      "ர்",
+      "அ"
+    ],
+    "wrong": {
+      "ர": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.make.11",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.11",
+    "format": "compose",
+    "prompt": "«ர» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ர்"
+    ],
+    "options": [],
+    "wrong": {
+      "ர": "TA.missing-pulli"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.12",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.12",
+    "format": "choice",
+    "prompt": "«ல்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ல்"
+    ],
+    "options": [
+      "ல",
+      "ல்",
+      "அ"
+    ],
+    "wrong": {
+      "ல": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.make.12",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.12",
+    "format": "compose",
+    "prompt": "«ல» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ல்"
+    ],
+    "options": [],
+    "wrong": {
+      "ல": "TA.missing-pulli"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.rec.13",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.13",
+    "format": "choice",
+    "prompt": "«வ்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "வ்"
+    ],
+    "options": [
+      "வ",
+      "வ்",
+      "அ"
+    ],
+    "wrong": {
+      "வ": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.make.13",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.13",
+    "format": "compose",
+    "prompt": "«வ» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "வ்"
+    ],
+    "options": [],
+    "wrong": {
+      "வ": "TA.missing-pulli"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.rec.14",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.14",
+    "format": "choice",
+    "prompt": "«ழ்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ழ்"
+    ],
+    "options": [
+      "ழ",
+      "ழ்",
+      "அ"
+    ],
+    "wrong": {
+      "ழ": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.make.14",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.14",
+    "format": "compose",
+    "prompt": "«ழ» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ழ்"
+    ],
+    "options": [],
+    "wrong": {
+      "ழ": "TA.missing-pulli"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.rec.15",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.15",
+    "format": "choice",
+    "prompt": "«ள்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ள்"
+    ],
+    "options": [
+      "ள",
+      "ள்",
+      "அ"
+    ],
+    "wrong": {
+      "ள": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.make.15",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.15",
+    "format": "compose",
+    "prompt": "«ள» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ள்"
+    ],
+    "options": [],
+    "wrong": {
+      "ள": "TA.missing-pulli"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.rec.16",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.16",
+    "format": "choice",
+    "prompt": "«ற்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ற்"
+    ],
+    "options": [
+      "ற",
+      "ற்",
+      "அ"
+    ],
+    "wrong": {
+      "ற": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.make.16",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.16",
+    "format": "compose",
+    "prompt": "«ற» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ற்"
+    ],
+    "options": [],
+    "wrong": {
+      "ற": "TA.missing-pulli"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.rec.17",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.17",
+    "format": "choice",
+    "prompt": "«ன்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "ன்"
+    ],
+    "options": [
+      "ன",
+      "ன்",
+      "அ"
+    ],
+    "wrong": {
+      "ன": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.mei.make.17",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.17",
+    "format": "compose",
+    "prompt": "«ன» மீது புள்ளி சேர்த்து மெய்யெழுத்தை எழுது.",
+    "answers": [
+      "ன்"
+    ],
+    "options": [],
+    "wrong": {
+      "ன": "TA.missing-pulli"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.க.0",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.க.0",
+    "format": "compose",
+    "prompt": "க் + அ = ?",
+    "answers": [
+      "க"
+    ],
+    "options": [],
+    "wrong": {
+      "கா": "TA.short-long",
+      "க்": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.1",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.க.1",
+    "format": "compose",
+    "prompt": "க் + ஆ = ?",
+    "answers": [
+      "கா"
+    ],
+    "options": [],
+    "wrong": {
+      "க": "TA.short-long",
+      "க்ா": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.2",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.க.2",
+    "format": "compose",
+    "prompt": "க் + இ = ?",
+    "answers": [
+      "கி"
+    ],
+    "options": [],
+    "wrong": {
+      "கீ": "TA.short-long",
+      "க்ி": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.3",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.க.3",
+    "format": "compose",
+    "prompt": "க் + ஈ = ?",
+    "answers": [
+      "கீ"
+    ],
+    "options": [],
+    "wrong": {
+      "கி": "TA.short-long",
+      "க்ீ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.4",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.க.4",
+    "format": "compose",
+    "prompt": "க் + உ = ?",
+    "answers": [
+      "கு"
+    ],
+    "options": [],
+    "wrong": {
+      "கூ": "TA.short-long",
+      "க்ு": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.5",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.க.5",
+    "format": "compose",
+    "prompt": "க் + ஊ = ?",
+    "answers": [
+      "கூ"
+    ],
+    "options": [],
+    "wrong": {
+      "கு": "TA.short-long",
+      "க்ூ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.6",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.க.6",
+    "format": "compose",
+    "prompt": "க் + எ = ?",
+    "answers": [
+      "கெ"
+    ],
+    "options": [],
+    "wrong": {
+      "கே": "TA.short-long",
+      "க்ெ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.7",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.க.7",
+    "format": "compose",
+    "prompt": "க் + ஏ = ?",
+    "answers": [
+      "கே"
+    ],
+    "options": [],
+    "wrong": {
+      "கெ": "TA.short-long",
+      "க்ே": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.8",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.க.8",
+    "format": "compose",
+    "prompt": "க் + ஐ = ?",
+    "answers": [
+      "கை"
+    ],
+    "options": [],
+    "wrong": {
+      "க்ை": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.9",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.க.9",
+    "format": "compose",
+    "prompt": "க் + ஒ = ?",
+    "answers": [
+      "கொ"
+    ],
+    "options": [],
+    "wrong": {
+      "க்ொ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.10",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.க.10",
+    "format": "compose",
+    "prompt": "க் + ஓ = ?",
+    "answers": [
+      "கோ"
+    ],
+    "options": [],
+    "wrong": {
+      "க்ோ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.11",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.க.11",
+    "format": "compose",
+    "prompt": "க் + ஔ = ?",
+    "answers": [
+      "கௌ"
+    ],
+    "options": [],
+    "wrong": {
+      "க்ௌ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.0",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ச.0",
+    "format": "compose",
+    "prompt": "ச் + அ = ?",
+    "answers": [
+      "ச"
+    ],
+    "options": [],
+    "wrong": {
+      "சா": "TA.short-long",
+      "ச்": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.1",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ச.1",
+    "format": "compose",
+    "prompt": "ச் + ஆ = ?",
+    "answers": [
+      "சா"
+    ],
+    "options": [],
+    "wrong": {
+      "ச": "TA.short-long",
+      "ச்ா": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.2",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ச.2",
+    "format": "compose",
+    "prompt": "ச் + இ = ?",
+    "answers": [
+      "சி"
+    ],
+    "options": [],
+    "wrong": {
+      "சீ": "TA.short-long",
+      "ச்ி": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.3",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ச.3",
+    "format": "compose",
+    "prompt": "ச் + ஈ = ?",
+    "answers": [
+      "சீ"
+    ],
+    "options": [],
+    "wrong": {
+      "சி": "TA.short-long",
+      "ச்ீ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.4",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ச.4",
+    "format": "compose",
+    "prompt": "ச் + உ = ?",
+    "answers": [
+      "சு"
+    ],
+    "options": [],
+    "wrong": {
+      "சூ": "TA.short-long",
+      "ச்ு": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.5",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ச.5",
+    "format": "compose",
+    "prompt": "ச் + ஊ = ?",
+    "answers": [
+      "சூ"
+    ],
+    "options": [],
+    "wrong": {
+      "சு": "TA.short-long",
+      "ச்ூ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.6",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ச.6",
+    "format": "compose",
+    "prompt": "ச் + எ = ?",
+    "answers": [
+      "செ"
+    ],
+    "options": [],
+    "wrong": {
+      "சே": "TA.short-long",
+      "ச்ெ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.7",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ச.7",
+    "format": "compose",
+    "prompt": "ச் + ஏ = ?",
+    "answers": [
+      "சே"
+    ],
+    "options": [],
+    "wrong": {
+      "செ": "TA.short-long",
+      "ச்ே": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.8",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ச.8",
+    "format": "compose",
+    "prompt": "ச் + ஐ = ?",
+    "answers": [
+      "சை"
+    ],
+    "options": [],
+    "wrong": {
+      "ச்ை": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.9",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ச.9",
+    "format": "compose",
+    "prompt": "ச் + ஒ = ?",
+    "answers": [
+      "சொ"
+    ],
+    "options": [],
+    "wrong": {
+      "ச்ொ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.10",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ச.10",
+    "format": "compose",
+    "prompt": "ச் + ஓ = ?",
+    "answers": [
+      "சோ"
+    ],
+    "options": [],
+    "wrong": {
+      "ச்ோ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ச.11",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ச.11",
+    "format": "compose",
+    "prompt": "ச் + ஔ = ?",
+    "answers": [
+      "சௌ"
+    ],
+    "options": [],
+    "wrong": {
+      "ச்ௌ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.0",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.த.0",
+    "format": "compose",
+    "prompt": "த் + அ = ?",
+    "answers": [
+      "த"
+    ],
+    "options": [],
+    "wrong": {
+      "தா": "TA.short-long",
+      "த்": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.1",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.த.1",
+    "format": "compose",
+    "prompt": "த் + ஆ = ?",
+    "answers": [
+      "தா"
+    ],
+    "options": [],
+    "wrong": {
+      "த": "TA.short-long",
+      "த்ா": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.2",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.த.2",
+    "format": "compose",
+    "prompt": "த் + இ = ?",
+    "answers": [
+      "தி"
+    ],
+    "options": [],
+    "wrong": {
+      "தீ": "TA.short-long",
+      "த்ி": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.3",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.த.3",
+    "format": "compose",
+    "prompt": "த் + ஈ = ?",
+    "answers": [
+      "தீ"
+    ],
+    "options": [],
+    "wrong": {
+      "தி": "TA.short-long",
+      "த்ீ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.4",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.த.4",
+    "format": "compose",
+    "prompt": "த் + உ = ?",
+    "answers": [
+      "து"
+    ],
+    "options": [],
+    "wrong": {
+      "தூ": "TA.short-long",
+      "த்ு": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.5",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.த.5",
+    "format": "compose",
+    "prompt": "த் + ஊ = ?",
+    "answers": [
+      "தூ"
+    ],
+    "options": [],
+    "wrong": {
+      "து": "TA.short-long",
+      "த்ூ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.6",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.த.6",
+    "format": "compose",
+    "prompt": "த் + எ = ?",
+    "answers": [
+      "தெ"
+    ],
+    "options": [],
+    "wrong": {
+      "தே": "TA.short-long",
+      "த்ெ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.7",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.த.7",
+    "format": "compose",
+    "prompt": "த் + ஏ = ?",
+    "answers": [
+      "தே"
+    ],
+    "options": [],
+    "wrong": {
+      "தெ": "TA.short-long",
+      "த்ே": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.8",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.த.8",
+    "format": "compose",
+    "prompt": "த் + ஐ = ?",
+    "answers": [
+      "தை"
+    ],
+    "options": [],
+    "wrong": {
+      "த்ை": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.9",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.த.9",
+    "format": "compose",
+    "prompt": "த் + ஒ = ?",
+    "answers": [
+      "தொ"
+    ],
+    "options": [],
+    "wrong": {
+      "த்ொ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.10",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.த.10",
+    "format": "compose",
+    "prompt": "த் + ஓ = ?",
+    "answers": [
+      "தோ"
+    ],
+    "options": [],
+    "wrong": {
+      "த்ோ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.த.11",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.த.11",
+    "format": "compose",
+    "prompt": "த் + ஔ = ?",
+    "answers": [
+      "தௌ"
+    ],
+    "options": [],
+    "wrong": {
+      "த்ௌ": "TA.vowel-sign"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.ப.0",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ப.0",
+    "format": "compose",
+    "prompt": "ப் + அ = ?",
+    "answers": [
+      "ப"
+    ],
+    "options": [],
+    "wrong": {
+      "பா": "TA.short-long",
+      "ப்": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.1",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ப.1",
+    "format": "compose",
+    "prompt": "ப் + ஆ = ?",
+    "answers": [
+      "பா"
+    ],
+    "options": [],
+    "wrong": {
+      "ப": "TA.short-long",
+      "ப்ா": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.2",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ப.2",
+    "format": "compose",
+    "prompt": "ப் + இ = ?",
+    "answers": [
+      "பி"
+    ],
+    "options": [],
+    "wrong": {
+      "பீ": "TA.short-long",
+      "ப்ி": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.3",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ப.3",
+    "format": "compose",
+    "prompt": "ப் + ஈ = ?",
+    "answers": [
+      "பீ"
+    ],
+    "options": [],
+    "wrong": {
+      "பி": "TA.short-long",
+      "ப்ீ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.4",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ப.4",
+    "format": "compose",
+    "prompt": "ப் + உ = ?",
+    "answers": [
+      "பு"
+    ],
+    "options": [],
+    "wrong": {
+      "பூ": "TA.short-long",
+      "ப்ு": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.5",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ப.5",
+    "format": "compose",
+    "prompt": "ப் + ஊ = ?",
+    "answers": [
+      "பூ"
+    ],
+    "options": [],
+    "wrong": {
+      "பு": "TA.short-long",
+      "ப்ூ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.6",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ப.6",
+    "format": "compose",
+    "prompt": "ப் + எ = ?",
+    "answers": [
+      "பெ"
+    ],
+    "options": [],
+    "wrong": {
+      "பே": "TA.short-long",
+      "ப்ெ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.7",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ப.7",
+    "format": "compose",
+    "prompt": "ப் + ஏ = ?",
+    "answers": [
+      "பே"
+    ],
+    "options": [],
+    "wrong": {
+      "பெ": "TA.short-long",
+      "ப்ே": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.8",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ப.8",
+    "format": "compose",
+    "prompt": "ப் + ஐ = ?",
+    "answers": [
+      "பை"
+    ],
+    "options": [],
+    "wrong": {
+      "ப்ை": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.9",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ப.9",
+    "format": "compose",
+    "prompt": "ப் + ஒ = ?",
+    "answers": [
+      "பொ"
+    ],
+    "options": [],
+    "wrong": {
+      "ப்ொ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.10",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ப.10",
+    "format": "compose",
+    "prompt": "ப் + ஓ = ?",
+    "answers": [
+      "போ"
+    ],
+    "options": [],
+    "wrong": {
+      "ப்ோ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ப.11",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ப.11",
+    "format": "compose",
+    "prompt": "ப் + ஔ = ?",
+    "answers": [
+      "பௌ"
+    ],
+    "options": [],
+    "wrong": {
+      "ப்ௌ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.0",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ம.0",
+    "format": "compose",
+    "prompt": "ம் + அ = ?",
+    "answers": [
+      "ம"
+    ],
+    "options": [],
+    "wrong": {
+      "மா": "TA.short-long",
+      "ம்": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.1",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ம.1",
+    "format": "compose",
+    "prompt": "ம் + ஆ = ?",
+    "answers": [
+      "மா"
+    ],
+    "options": [],
+    "wrong": {
+      "ம": "TA.short-long",
+      "ம்ா": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.2",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ம.2",
+    "format": "compose",
+    "prompt": "ம் + இ = ?",
+    "answers": [
+      "மி"
+    ],
+    "options": [],
+    "wrong": {
+      "மீ": "TA.short-long",
+      "ம்ி": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.3",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ம.3",
+    "format": "compose",
+    "prompt": "ம் + ஈ = ?",
+    "answers": [
+      "மீ"
+    ],
+    "options": [],
+    "wrong": {
+      "மி": "TA.short-long",
+      "ம்ீ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.4",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ம.4",
+    "format": "compose",
+    "prompt": "ம் + உ = ?",
+    "answers": [
+      "மு"
+    ],
+    "options": [],
+    "wrong": {
+      "மூ": "TA.short-long",
+      "ம்ு": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.5",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.ம.5",
+    "format": "compose",
+    "prompt": "ம் + ஊ = ?",
+    "answers": [
+      "மூ"
+    ],
+    "options": [],
+    "wrong": {
+      "மு": "TA.short-long",
+      "ம்ூ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.6",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ம.6",
+    "format": "compose",
+    "prompt": "ம் + எ = ?",
+    "answers": [
+      "மெ"
+    ],
+    "options": [],
+    "wrong": {
+      "மே": "TA.short-long",
+      "ம்ெ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.7",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ம.7",
+    "format": "compose",
+    "prompt": "ம் + ஏ = ?",
+    "answers": [
+      "மே"
+    ],
+    "options": [],
+    "wrong": {
+      "மெ": "TA.short-long",
+      "ம்ே": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.8",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ம.8",
+    "format": "compose",
+    "prompt": "ம் + ஐ = ?",
+    "answers": [
+      "மை"
+    ],
+    "options": [],
+    "wrong": {
+      "ம்ை": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.9",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ம.9",
+    "format": "compose",
+    "prompt": "ம் + ஒ = ?",
+    "answers": [
+      "மொ"
+    ],
+    "options": [],
+    "wrong": {
+      "ம்ொ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.10",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ம.10",
+    "format": "compose",
+    "prompt": "ம் + ஓ = ?",
+    "answers": [
+      "மோ"
+    ],
+    "options": [],
+    "wrong": {
+      "ம்ோ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.join.ம.11",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.ம.11",
+    "format": "compose",
+    "prompt": "ம் + ஔ = ?",
+    "answers": [
+      "மௌ"
+    ],
+    "options": [],
+    "wrong": {
+      "ம்ௌ": "TA.vowel-sign"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.vowel-sign"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.word.rec.0",
+    "version": 1,
+    "competencies": [
+      "TA.recognition"
+    ],
+    "family": "ta.word.மரம்",
+    "format": "choice",
+    "prompt": "«மரம்» என்ற சொல்லைத் தொடு.",
+    "answers": [
+      "மரம்"
+    ],
+    "options": [
+      "மறம்",
+      "மரம்"
+    ],
+    "wrong": {
+      "மறம்": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.make.0",
+    "version": 1,
+    "competencies": [
+      "TA.spelling"
+    ],
+    "family": "ta.word.மரம்",
+    "format": "compose",
+    "prompt": "ம + ர + ம் — இணைத்துச் சொல்லை எழுது.",
+    "answers": [
+      "மரம்"
+    ],
+    "options": [],
+    "wrong": {
+      "மறம்": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "grapheme-assembly",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.rec.1",
+    "version": 1,
+    "competencies": [
+      "TA.recognition"
+    ],
+    "family": "ta.word.மலர்",
+    "format": "choice",
+    "prompt": "«மலர்» என்ற சொல்லைத் தொடு.",
+    "answers": [
+      "மலர்"
+    ],
+    "options": [
+      "மளர்",
+      "மலர்"
+    ],
+    "wrong": {
+      "மளர்": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.make.1",
+    "version": 1,
+    "competencies": [
+      "TA.spelling"
+    ],
+    "family": "ta.word.மலர்",
+    "format": "compose",
+    "prompt": "ம + ல + ர் — இணைத்துச் சொல்லை எழுது.",
+    "answers": [
+      "மலர்"
+    ],
+    "options": [],
+    "wrong": {
+      "மளர்": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "grapheme-assembly",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.rec.2",
+    "version": 1,
+    "competencies": [
+      "TA.recognition"
+    ],
+    "family": "ta.word.படம்",
+    "format": "choice",
+    "prompt": "«படம்» என்ற சொல்லைத் தொடு.",
+    "answers": [
+      "படம்"
+    ],
+    "options": [
+      "படம",
+      "படம்"
+    ],
+    "wrong": {
+      "படம": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.make.2",
+    "version": 1,
+    "competencies": [
+      "TA.spelling"
+    ],
+    "family": "ta.word.படம்",
+    "format": "compose",
+    "prompt": "ப + ட + ம் — இணைத்துச் சொல்லை எழுது.",
+    "answers": [
+      "படம்"
+    ],
+    "options": [],
+    "wrong": {
+      "படம": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "grapheme-assembly",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.rec.3",
+    "version": 1,
+    "competencies": [
+      "TA.recognition"
+    ],
+    "family": "ta.word.கடல்",
+    "format": "choice",
+    "prompt": "«கடல்» என்ற சொல்லைத் தொடு.",
+    "answers": [
+      "கடல்"
+    ],
+    "options": [
+      "கடல",
+      "கடல்"
+    ],
+    "wrong": {
+      "கடல": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.make.3",
+    "version": 1,
+    "competencies": [
+      "TA.spelling"
+    ],
+    "family": "ta.word.கடல்",
+    "format": "compose",
+    "prompt": "க + ட + ல் — இணைத்துச் சொல்லை எழுது.",
+    "answers": [
+      "கடல்"
+    ],
+    "options": [],
+    "wrong": {
+      "கடல": "TA.word-spelling"
+    },
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "grapheme-assembly",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.rec.4",
+    "version": 1,
+    "competencies": [
+      "TA.recognition"
+    ],
+    "family": "ta.word.கல்",
+    "format": "choice",
+    "prompt": "«கல்» என்ற சொல்லைத் தொடு.",
+    "answers": [
+      "கல்"
+    ],
+    "options": [
+      "கால்",
+      "கல்"
+    ],
+    "wrong": {
+      "கால்": "TA.word-spelling"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.word.make.4",
+    "version": 1,
+    "competencies": [
+      "TA.spelling"
+    ],
+    "family": "ta.word.கல்",
+    "format": "compose",
+    "prompt": "க + ல் — இணைத்துச் சொல்லை எழுது.",
+    "answers": [
+      "கல்"
+    ],
+    "options": [],
+    "wrong": {
+      "கால்": "TA.word-spelling"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "grapheme-assembly",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.word.rec.5",
+    "version": 1,
+    "competencies": [
+      "TA.recognition"
+    ],
+    "family": "ta.word.கால்",
+    "format": "choice",
+    "prompt": "«கால்» என்ற சொல்லைத் தொடு.",
+    "answers": [
+      "கால்"
+    ],
+    "options": [
+      "கல்",
+      "கால்"
+    ],
+    "wrong": {
+      "கல்": "TA.word-spelling"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.word.make.5",
+    "version": 1,
+    "competencies": [
+      "TA.spelling"
+    ],
+    "family": "ta.word.கால்",
+    "format": "compose",
+    "prompt": "கா + ல் — இணைத்துச் சொல்லை எழுது.",
+    "answers": [
+      "கால்"
+    ],
+    "options": [],
+    "wrong": {
+      "கல்": "TA.word-spelling"
+    },
+    "stage": "transfer",
+    "transfer": true,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "grapheme-assembly",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": "Reserved written example; novelty must be checked against learner exposure history"
+  },
+  {
+    "id": "ta.aytham.0",
+    "version": 1,
+    "competencies": [
+      "TA.aytham"
+    ],
+    "family": "ta.aytham.symbol",
+    "format": "choice",
+    "prompt": "ஆய்த எழுத்தைத் தொடு.",
+    "answers": [
+      "ஃ"
+    ],
+    "options": [
+      "அ",
+      "ஃ",
+      "க்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.aytham.1",
+    "version": 1,
+    "competencies": [
+      "TA.aytham"
+    ],
+    "family": "ta.aytham.symbol",
+    "format": "choice",
+    "prompt": "ஆய்த எழுத்தைத் தொடு.",
+    "answers": [
+      "ஃ"
+    ],
+    "options": [
+      "ஃ",
+      "ம்",
+      "ஆ"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.aytham.2",
+    "version": 1,
+    "competencies": [
+      "TA.aytham"
+    ],
+    "family": "ta.aytham.symbol",
+    "format": "choice",
+    "prompt": "ஆய்த எழுத்தைத் தொடு.",
+    "answers": [
+      "ஃ"
+    ],
+    "options": [
+      "இ",
+      "ச்",
+      "ஃ"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.aytham.3",
+    "version": 1,
+    "competencies": [
+      "TA.aytham"
+    ],
+    "family": "ta.aytham.symbol",
+    "format": "choice",
+    "prompt": "ஆய்த எழுத்தைத் தொடு.",
+    "answers": [
+      "ஃ"
+    ],
+    "options": [
+      "ஔ",
+      "ஃ",
+      "ந்"
+    ],
+    "wrong": {},
+    "stage": "independent",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.vowel.0.guided",
+    "version": 1,
+    "competencies": [
+      "TA.vowels"
+    ],
+    "family": "ta.vowel.0",
+    "format": "choice",
+    "prompt": "உயிரெழுத்தைத் தொடு.",
+    "answers": [
+      "அ"
+    ],
+    "options": [
+      "அ",
+      "க்",
+      "ம்"
+    ],
+    "wrong": {},
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.mei.rec.0.guided",
+    "version": 1,
+    "competencies": [
+      "TA.consonants"
+    ],
+    "family": "ta.mei.0",
+    "format": "choice",
+    "prompt": "«க்» என்ற மெய்யெழுத்தைத் தொடு.",
+    "answers": [
+      "க்"
+    ],
+    "options": [
+      "க",
+      "க்",
+      "அ"
+    ],
+    "wrong": {
+      "க": "TA.missing-pulli",
+      "அ": "TA.consonant-confusion"
+    },
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.missing-pulli",
+      "TA.consonant-confusion"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.aytham.0.guided",
+    "version": 1,
+    "competencies": [
+      "TA.aytham"
+    ],
+    "family": "ta.aytham.symbol",
+    "format": "choice",
+    "prompt": "ஆய்த எழுத்தைத் தொடு.",
+    "answers": [
+      "ஃ"
+    ],
+    "options": [
+      "அ",
+      "ஃ",
+      "க்"
+    ],
+    "wrong": {},
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 1,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.length.0.guided",
+    "version": 1,
+    "competencies": [
+      "TA.length"
+    ],
+    "family": "ta.length.0",
+    "format": "choice",
+    "prompt": "«அ» குறிலா, நெடிலா?",
+    "answers": [
+      "குறில்"
+    ],
+    "options": [
+      "குறில்",
+      "நெடில்"
+    ],
+    "wrong": {
+      "நெடில்": "TA.short-long"
+    },
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "vowel-classification",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.0.guided",
+    "version": 1,
+    "competencies": [
+      "TA.composition"
+    ],
+    "family": "ta.join.க.0",
+    "format": "compose",
+    "prompt": "க் + அ = ?",
+    "answers": [
+      "க"
+    ],
+    "options": [],
+    "wrong": {
+      "கா": "TA.short-long",
+      "க்": "TA.vowel-sign"
+    },
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.join.க.6.guided",
+    "version": 1,
+    "competencies": [
+      "TA.signs"
+    ],
+    "family": "ta.join.க.6",
+    "format": "compose",
+    "prompt": "க் + எ = ?",
+    "answers": [
+      "கெ"
+    ],
+    "options": [],
+    "wrong": {
+      "கே": "TA.short-long",
+      "க்ெ": "TA.vowel-sign"
+    },
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "script-rule",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.short-long",
+      "TA.vowel-sign"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.rec.0.guided",
+    "version": 1,
+    "competencies": [
+      "TA.recognition"
+    ],
+    "family": "ta.word.மரம்",
+    "format": "choice",
+    "prompt": "«மரம்» என்ற சொல்லைத் தொடு.",
+    "answers": [
+      "மரம்"
+    ],
+    "options": [
+      "மறம்",
+      "மரம்"
+    ],
+    "wrong": {
+      "மறம்": "TA.word-spelling"
+    },
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "recognition",
+      "cue": "visual-match",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  },
+  {
+    "id": "ta.word.make.0.guided",
+    "version": 1,
+    "competencies": [
+      "TA.spelling"
+    ],
+    "family": "ta.word.மரம்",
+    "format": "compose",
+    "prompt": "ம + ர + ம் — இணைத்துச் சொல்லை எழுது.",
+    "answers": [
+      "மரம்"
+    ],
+    "options": [],
+    "wrong": {
+      "மறம்": "TA.word-spelling"
+    },
+    "stage": "guided",
+    "transfer": false,
+    "difficulty": {
+      "level": 2,
+      "source": "author_assumption",
+      "calibrated": false
+    },
+    "review": "provisional",
+    "provenance": {
+      "source": "OpenPath authored Tamil candidates",
+      "method": "curated-template-v1",
+      "educatorReviewed": false
+    },
+    "audio": null,
+    "task": {
+      "demand": "construction",
+      "cue": "grapheme-assembly",
+      "audioAssessed": false
+    },
+    "misconceptionTags": [
+      "TA.word-spelling"
+    ],
+    "transferBasis": null
+  }
+]
