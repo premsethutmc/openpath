@@ -24,3 +24,6 @@ frontend/dist-english-pilot-approved/
 frontend/dist-tamil/
 package-lock.json
 test-results/
+
+# TN5 bank build output (rebuild with tools/mathematics/tn5-bank/build-bank.mts; hash is in results/manifest.json)
+tools/mathematics/tn5-bank/out/

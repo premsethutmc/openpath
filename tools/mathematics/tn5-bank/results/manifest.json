@@ -1,0 +1,1837 @@
+{
+ "release": "tn-samacheer-mathematics-grade-5",
+ "engine": "kernel@f0c565cbfd98",
+ "competencies": 58,
+ "families": 192,
+ "problems": 60774,
+ "labels": {
+  "kernel-verified": 19144,
+  "partial": 19208,
+  "answer-verified": 22422
+ },
+ "sha256": "7c1ae862e18db9ea69936c1d94fe29183b93e16091e0612b1e78fae4490ad4dc",
+ "bytes": 68437615,
+ "uncheckedStepTypes": 209,
+ "uncheckedSteps": [
+  [
+   "accmpx/compare",
+   800
+  ],
+  [
+   "acmoneymul/convert",
+   800
+  ],
+  [
+   "adest/round",
+   800
+  ],
+  [
+   "aedec/place",
+   800
+  ],
+  [
+   "aghcf3/hcf",
+   800
+  ],
+  [
+   "aglcm3/lcm",
+   800
+  ],
+  [
+   "avpest/round",
+   800
+  ],
+  [
+   "avlat/add",
+   797
+  ],
+  [
+   "aechk/estimate",
+   693
+  ],
+  [
+   "acelapsed/count on",
+   652
+  ],
+  [
+   "agcop/hcf",
+   640
+  ],
+  [
+   "acelhm/add",
+   602
+  ],
+  [
+   "abgrid/count",
+   600
+  ],
+  [
+   "acpictmore/read",
+   600
+  ],
+  [
+   "aenumf/place",
+   600
+  ],
+  [
+   "afbar/read",
+   600
+  ],
+  [
+   "acelhm/count on",
+   594
+  ],
+  [
+   "aerdec/compare",
+   594
+  ],
+  [
+   "aerdec/round",
+   573
+  ],
+  [
+   "aeirr/count",
+   567
+  ],
+  [
+   "acsub3/regroup and subtract",
+   552
+  ],
+  [
+   "aesym/count",
+   551
+  ],
+  [
+   "fmulw/evaluate",
+   528
+  ],
+  [
+   "agdec/rewrite",
+   500
+  ],
+  [
+   "agrupee/regroup",
+   500
+  ],
+  [
+   "aeconvu/divide",
+   450
+  ],
+  [
+   "aeround/compare",
+   450
+  ],
+  [
+   "adbar/read",
+   448
+  ],
+  [
+   "adestcost/round",
+   420
+  ],
+  [
+   "adcolx/subtract",
+   406
+  ],
+  [
+   "aedpv/place",
+   404
+  ],
+  [
+   "aapatn/continue",
+   400
+  ],
+  [
+   "aapatn/find the place in the part",
+   400
+  ],
+  [
+   "aapatn/find the repeating part",
+   400
+  ],
+  [
+   "abcup/read",
+   400
+  ],
+  [
+   "acelapsed/read clock",
+   400
+  ],
+  [
+   "acstory/choose operation",
+   400
+  ],
+  [
+   "acsub2/regroup",
+   400
+  ],
+  [
+   "actrain/add",
+   400
+  ],
+  [
+   "addr/regroup",
+   400
+  ],
+  [
+   "adford/order",
+   400
+  ],
+  [
+   "adfordu/convert",
+   400
+  ],
+  [
+   "adfordu/lcm",
+   400
+  ],
+  [
+   "adfordu/order",
+   400
+  ],
+  [
+   "advenn/choose cells",
+   400
+  ],
+  [
+   "aeang/compare",
+   400
+  ],
+  [
+   "aedec/add",
+   400
+  ],
+  [
+   "aedivm/divide",
+   400
+  ],
+  [
+   "aedivm/regroup",
+   400
+  ],
+  [
+   "aehund/add",
+   400
+  ],
+  [
+   "aemirror/reflect",
+   400
+  ],
+  [
+   "aemulm/multiply",
+   400
+  ],
+  [
+   "aemulm/regroup",
+   400
+  ],
+  [
+   "aepat/count",
+   400
+  ],
+  [
+   "aerefl/reflect",
+   400
+  ],
+  [
+   "afcube/fold",
+   400
+  ],
+  [
+   "aghlw/choose",
+   400
+  ],
+  [
+   "agmeas/convert",
+   400
+  ],
+  [
+   "agprime/classify",
+   400
+  ],
+  [
+   "agspd/read",
+   400
+  ],
+  [
+   "agspdc/compare",
+   400
+  ],
+  [
+   "ajbest/compare",
+   400
+  ],
+  [
+   "anpair/substitute",
+   400
+  ],
+  [
+   "anpair/subtract",
+   400
+  ],
+  [
+   "anpair/write",
+   400
+  ],
+  [
+   "avrsub/subtract",
+   400
+  ],
+  [
+   "aaordx/compare digits from the left",
+   394
+  ],
+  [
+   "aaordx/order",
+   394
+  ],
+  [
+   "actrain/count on",
+   386
+  ],
+  [
+   "agptest/square-root",
+   386
+  ],
+  [
+   "avlow/evaluate",
+   360
+  ],
+  [
+   "avvcmp/compare",
+   360
+  ],
+  [
+   "avrsub/divide",
+   352
+  ],
+  [
+   "aedigsym/count",
+   347
+  ],
+  [
+   "accal/divide",
+   336
+  ],
+  [
+   "adbartf/compare",
+   336
+  ],
+  [
+   "adbartf/read",
+   336
+  ],
+  [
+   "avdiv/divide",
+   325
+  ],
+  [
+   "acstory4/choose operation",
+   320
+  ],
+  [
+   "aertang/compare",
+   305
+  ],
+  [
+   "aaordn/order",
+   300
+  ],
+  [
+   "aaweave/find the repeating part",
+   300
+  ],
+  [
+   "abcupord/compare cups",
+   300
+  ],
+  [
+   "abdisp/volume",
+   300
+  ],
+  [
+   "acgrow/find rule",
+   300
+  ],
+  [
+   "acpaise/convert",
+   300
+  ],
+  [
+   "acpict/count",
+   300
+  ],
+  [
+   "acpicthalf/count",
+   300
+  ],
+  [
+   "acplace/place digits",
+   300
+  ],
+  [
+   "aecmp/compare",
+   300
+  ],
+  [
+   "aedecc/compare",
+   300
+  ],
+  [
+   "aedord/compare",
+   300
+  ],
+  [
+   "aernd/compare",
+   300
+  ],
+  [
+   "agjump/lcm",
+   300
+  ],
+  [
+   "agjump/multiples",
+   300
+  ],
+  [
+   "anquad/compare",
+   300
+  ],
+  [
+   "anquad/factorise",
+   300
+  ],
+  [
+   "anquad/write",
+   300
+  ],
+  [
+   "avlike/compare",
+   300
+  ],
+  [
+   "acstory9/choose operation",
+   288
+  ],
+  [
+   "adpreg/count",
+   288
+  ],
+  [
+   "aeampm/convert",
+   288
+  ],
+  [
+   "aet24/convert",
+   288
+  ],
+  [
+   "adfcmpu/compare",
+   287
+  ],
+  [
+   "adfcmpu/convert",
+   287
+  ],
+  [
+   "adfcmpu/lcm",
+   287
+  ],
+  [
+   "acp2r/divide",
+   282
+  ],
+  [
+   "aewcmp/compare",
+   281
+  ],
+  [
+   "aewcmp/convert",
+   281
+  ],
+  [
+   "acfacts/inverse",
+   280
+  ],
+  [
+   "aacmp/compare tens",
+   279
+  ],
+  [
+   "agmix/divide",
+   279
+  ],
+  [
+   "adtally/count",
+   270
+  ],
+  [
+   "aglcm/hcf",
+   253
+  ],
+  [
+   "adestchk/compare",
+   249
+  ],
+  [
+   "adestchk/round",
+   249
+  ],
+  [
+   "acmoneyadd/subtract",
+   246
+  ],
+  [
+   "aagrp/compare",
+   243
+  ],
+  [
+   "agfac/factorise",
+   243
+  ],
+  [
+   "acgrow/count on",
+   240
+  ],
+  [
+   "agptest/divide",
+   240
+  ],
+  [
+   "aapatu/count",
+   228
+  ],
+  [
+   "aapatu/find the repeating part",
+   228
+  ],
+  [
+   "aecol4/add",
+   225
+  ],
+  [
+   "afpair/recall",
+   220
+  ],
+  [
+   "adcolx/add",
+   216
+  ],
+  [
+   "adrec/count",
+   216
+  ],
+  [
+   "adrec/read",
+   216
+  ],
+  [
+   "acmissing/subtract",
+   213
+  ],
+  [
+   "actrain/subtract",
+   207
+  ],
+  [
+   "acmoneyadd/add",
+   203
+  ],
+  [
+   "avfwq/evaluate",
+   202
+  ],
+  [
+   "aghlw/hcf",
+   201
+  ],
+  [
+   "aematch/deduce",
+   200
+  ],
+  [
+   "aeperar/add",
+   200
+  ],
+  [
+   "aaweave/full repeats and the part left",
+   199
+  ],
+  [
+   "aghlw/lcm",
+   199
+  ],
+  [
+   "aemix/regroup",
+   195
+  ],
+  [
+   "agclass/classify",
+   191
+  ],
+  [
+   "aasign/compare",
+   189
+  ],
+  [
+   "affrule/match",
+   189
+  ],
+  [
+   "affrule/subtract",
+   189
+  ],
+  [
+   "agcomf/factorise",
+   163
+  ],
+  [
+   "agcomf/intersect",
+   163
+  ],
+  [
+   "aecons/multiply",
+   160
+  ],
+  [
+   "avlat/evaluate",
+   159
+  ],
+  [
+   "aet12/convert",
+   156
+  ],
+  [
+   "agptest/largest-prime",
+   153
+  ],
+  [
+   "aadigmax/smallest digit first (not 0)",
+   151
+  ],
+  [
+   "abseat/find the row",
+   150
+  ],
+  [
+   "abseat/find the seat",
+   150
+  ],
+  [
+   "abseat/move back",
+   150
+  ],
+  [
+   "abseat/move right",
+   150
+  ],
+  [
+   "aadigmax/biggest digit first",
+   149
+  ],
+  [
+   "aedsym/count",
+   146
+  ],
+  [
+   "aearms/identify",
+   145
+  ],
+  [
+   "accal/count on",
+   142
+  ],
+  [
+   "aeangk/compare",
+   142
+  ],
+  [
+   "adfnl/compare",
+   126
+  ],
+  [
+   "adfmeas/convert",
+   122
+  ],
+  [
+   "aedrip/convert",
+   120
+  ],
+  [
+   "afview/max",
+   120
+  ],
+  [
+   "aedfr/convert",
+   119
+  ],
+  [
+   "afhidden/count",
+   112
+  ],
+  [
+   "avfold/evaluate",
+   112
+  ],
+  [
+   "afletter/multiply",
+   110
+  ],
+  [
+   "acmissing/add",
+   106
+  ],
+  [
+   "abdir/use the directions",
+   104
+  ],
+  [
+   "agnl/convert",
+   103
+  ],
+  [
+   "aaweave/find the place",
+   101
+  ],
+  [
+   "abdisp/add",
+   100
+  ],
+  [
+   "abroute/add the squares",
+   100
+  ],
+  [
+   "abroute/use the scale",
+   100
+  ],
+  [
+   "acstory/take away",
+   100
+  ],
+  [
+   "aanext/count back",
+   98
+  ],
+  [
+   "afcross/equal",
+   98
+  ],
+  [
+   "affig/evaluate",
+   98
+  ],
+  [
+   "affig/find-pattern",
+   98
+  ],
+  [
+   "aanext/count on",
+   97
+  ],
+  [
+   "abjug/read",
+   94
+  ],
+  [
+   "affigrel/relate",
+   94
+  ],
+  [
+   "aabig/compare sizes",
+   90
+  ],
+  [
+   "aeparts/convert",
+   90
+  ],
+  [
+   "afdigits/count",
+   90
+  ],
+  [
+   "afmatch/write",
+   90
+  ],
+  [
+   "afnet/match",
+   87
+  ],
+  [
+   "acsticks/count",
+   84
+  ],
+  [
+   "acsticks/extend",
+   84
+  ],
+  [
+   "acsticks/find rule",
+   84
+  ],
+  [
+   "afpaint/subtract",
+   84
+  ],
+  [
+   "acmissing/divide",
+   81
+  ],
+  [
+   "afhidden/choose",
+   76
+  ],
+  [
+   "abroute/add each route",
+   74
+  ],
+  [
+   "abroute/compare",
+   74
+  ],
+  [
+   "aerev/add",
+   72
+  ],
+  [
+   "ldiv/evaluate",
+   64
+  ],
+  [
+   "afview/count",
+   60
+  ],
+  [
+   "aerev/count",
+   54
+  ],
+  [
+   "acpicttab/compare",
+   50
+  ],
+  [
+   "afsolid/count",
+   48
+  ],
+  [
+   "afsolid/rearrange",
+   48
+  ],
+  [
+   "adwtcap/add",
+   40
+  ],
+  [
+   "afpaint/edges",
+   34
+  ],
+  [
+   "afpaint/faces",
+   30
+  ],
+  [
+   "adwtcap/difference",
+   28
+  ],
+  [
+   "aacmp/compare",
+   21
+  ],
+  [
+   "afpaint/inside",
+   20
+  ],
+  [
+   "afletter/add",
+   11
+  ],
+  [
+   "afletter/subtract",
+   11
+  ]
+ ],
+ "depthShortfalls": [
+  {
+   "competency": "MATH.number.fraction-of-collection",
+   "band": 1,
+   "items": 21
+  },
+  {
+   "competency": "MATH.geometry.fractal-iteration",
+   "band": 3,
+   "items": 22
+  },
+  {
+   "competency": "MATH.measurement.time-speed-intro",
+   "band": 1,
+   "items": 18
+  },
+  {
+   "competency": "MATH.geometry.solid-views",
+   "band": 1,
+   "items": 12
+  }
+ ],
+ "perFamily": {
+  "aabig": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 90
+  },
+  "aacmp": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "aadigmax": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "aagrp": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 243
+  },
+  "aanext": {
+   "kernel-verified": 99,
+   "partial": 0,
+   "answer-verified": 195
+  },
+  "aaordn": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "aaordx": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 394
+  },
+  "aapatn": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "aapatu": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 228
+  },
+  "aasign": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 189
+  },
+  "aaweave": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "abcup": {
+   "kernel-verified": 0,
+   "partial": 184,
+   "answer-verified": 216
+  },
+  "abcupord": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "abdir": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 104
+  },
+  "abdisp": {
+   "kernel-verified": 0,
+   "partial": 200,
+   "answer-verified": 100
+  },
+  "abgrid": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 0
+  },
+  "abjug": {
+   "kernel-verified": 0,
+   "partial": 47,
+   "answer-verified": 47
+  },
+  "abmove": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abroute": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 174
+  },
+  "abseat": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "acbalance": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acbill": {
+   "kernel-verified": 240,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "accal": {
+   "kernel-verified": 75,
+   "partial": 194,
+   "answer-verified": 142
+  },
+  "accmpx": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "acelapsed": {
+   "kernel-verified": 0,
+   "partial": 252,
+   "answer-verified": 148
+  },
+  "acelhm": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "acfacts": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 280
+  },
+  "acgrow": {
+   "kernel-verified": 0,
+   "partial": 60,
+   "answer-verified": 240
+  },
+  "acmissing": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "acmoneyadd": {
+   "kernel-verified": 74,
+   "partial": 203,
+   "answer-verified": 123
+  },
+  "acmoneymul": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "acp2r": {
+   "kernel-verified": 18,
+   "partial": 282,
+   "answer-verified": 0
+  },
+  "acpaise": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 0
+  },
+  "acpict": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 0
+  },
+  "acpicthalf": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 0
+  },
+  "acpictmore": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 0
+  },
+  "acpicttab": {
+   "kernel-verified": 250,
+   "partial": 50,
+   "answer-verified": 0
+  },
+  "acplace": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 0
+  },
+  "acsticks": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 84
+  },
+  "acstory": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 100
+  },
+  "acstory4": {
+   "kernel-verified": 0,
+   "partial": 320,
+   "answer-verified": 0
+  },
+  "acstory9": {
+   "kernel-verified": 0,
+   "partial": 288,
+   "answer-verified": 0
+  },
+  "acsub2": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "acsub3": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "acsubn": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "actrain": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "adbar": {
+   "kernel-verified": 0,
+   "partial": 336,
+   "answer-verified": 112
+  },
+  "adbartf": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 336
+  },
+  "adcol3": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adcolx": {
+   "kernel-verified": 234,
+   "partial": 225,
+   "answer-verified": 41
+  },
+  "addr": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "adest": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "adestchk": {
+   "kernel-verified": 0,
+   "partial": 249,
+   "answer-verified": 0
+  },
+  "adestcost": {
+   "kernel-verified": 0,
+   "partial": 120,
+   "answer-verified": 0
+  },
+  "adfcmp": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfcmpu": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 287
+  },
+  "adfcol": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfmeas": {
+   "kernel-verified": 0,
+   "partial": 122,
+   "answer-verified": 0
+  },
+  "adfnl": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 126
+  },
+  "adford": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "adfordu": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "admental": {
+   "kernel-verified": 384,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "admper": {
+   "kernel-verified": 178,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adperim": {
+   "kernel-verified": 178,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adpreg": {
+   "kernel-verified": 0,
+   "partial": 288,
+   "answer-verified": 0
+  },
+  "adrec": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 216
+  },
+  "adtally": {
+   "kernel-verified": 0,
+   "partial": 180,
+   "answer-verified": 90
+  },
+  "adtwo": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "advenn": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "adwtcap": {
+   "kernel-verified": 91,
+   "partial": 0,
+   "answer-verified": 68
+  },
+  "aeadd3": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeaddn": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeampm": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 288
+  },
+  "aeang": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "aeangk": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 142
+  },
+  "aearea": {
+   "kernel-verified": 99,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aearms": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 145
+  },
+  "aebig": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aecf": {
+   "kernel-verified": 230,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aechk": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 693
+  },
+  "aecmp": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "aecol4": {
+   "kernel-verified": 225,
+   "partial": 0,
+   "answer-verified": 225
+  },
+  "aecons": {
+   "kernel-verified": 80,
+   "partial": 0,
+   "answer-verified": 160
+  },
+  "aeconv": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeconvd": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeconvu": {
+   "kernel-verified": 0,
+   "partial": 450,
+   "answer-verified": 0
+  },
+  "aedec": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "aedecc": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "aedfr": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 119
+  },
+  "aedigsym": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 347
+  },
+  "aedivm": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "aedord": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "aedpv": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 404
+  },
+  "aedrip": {
+   "kernel-verified": 0,
+   "partial": 120,
+   "answer-verified": 0
+  },
+  "aedsym": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 146
+  },
+  "aeel24": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeest": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeestp": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeftin": {
+   "kernel-verified": 138,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aehund": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "aeind": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeirr": {
+   "kernel-verified": 0,
+   "partial": 197,
+   "answer-verified": 173
+  },
+  "aematch": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 200
+  },
+  "aemirror": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "aemix": {
+   "kernel-verified": 255,
+   "partial": 195,
+   "answer-verified": 0
+  },
+  "aemulm": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "aenumf": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 600
+  },
+  "aeparts": {
+   "kernel-verified": 0,
+   "partial": 90,
+   "answer-verified": 0
+  },
+  "aepat": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "aeperar": {
+   "kernel-verified": 200,
+   "partial": 0,
+   "answer-verified": 200
+  },
+  "aerdec": {
+   "kernel-verified": 0,
+   "partial": 21,
+   "answer-verified": 573
+  },
+  "aerefl": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "aerev": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 126
+  },
+  "aernd": {
+   "kernel-verified": 0,
+   "partial": 300,
+   "answer-verified": 0
+  },
+  "aeround": {
+   "kernel-verified": 0,
+   "partial": 450,
+   "answer-verified": 0
+  },
+  "aertang": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 305
+  },
+  "aeshop": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aesym": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 551
+  },
+  "aet12": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 156
+  },
+  "aet24": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 288
+  },
+  "aetab": {
+   "kernel-verified": 600,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aetrans": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aetrip": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeturn": {
+   "kernel-verified": 132,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aewcmp": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 281
+  },
+  "afbar": {
+   "kernel-verified": 0,
+   "partial": 240,
+   "answer-verified": 120
+  },
+  "afcount": {
+   "kernel-verified": 100,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afcross": {
+   "kernel-verified": 202,
+   "partial": 0,
+   "answer-verified": 98
+  },
+  "afcube": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "afdigits": {
+   "kernel-verified": 0,
+   "partial": 90,
+   "answer-verified": 0
+  },
+  "affig": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 98
+  },
+  "affigrel": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 94
+  },
+  "affrac": {
+   "kernel-verified": 118,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "affrule": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 189
+  },
+  "afhidden": {
+   "kernel-verified": 0,
+   "partial": 84,
+   "answer-verified": 0
+  },
+  "afletter": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 132
+  },
+  "afmatch": {
+   "kernel-verified": 0,
+   "partial": 90,
+   "answer-verified": 0
+  },
+  "afnet": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 87
+  },
+  "afpaint": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 84
+  },
+  "afpair": {
+   "kernel-verified": 0,
+   "partial": 220,
+   "answer-verified": 0
+  },
+  "afsolid": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 96
+  },
+  "afview": {
+   "kernel-verified": 0,
+   "partial": 120,
+   "answer-verified": 60
+  },
+  "agclass": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 191
+  },
+  "agcomf": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 163
+  },
+  "agcop": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 160
+  },
+  "agdec": {
+   "kernel-verified": 0,
+   "partial": 500,
+   "answer-verified": 0
+  },
+  "agfac": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 97
+  },
+  "aghcf3": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "aghlp": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aghlw": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "agimp": {
+   "kernel-verified": 279,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agjump": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "aglcm": {
+   "kernel-verified": 0,
+   "partial": 253,
+   "answer-verified": 0
+  },
+  "aglcm3": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "agmeas": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "agmix": {
+   "kernel-verified": 0,
+   "partial": 279,
+   "answer-verified": 0
+  },
+  "agnl": {
+   "kernel-verified": 0,
+   "partial": 103,
+   "answer-verified": 0
+  },
+  "agprime": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 400
+  },
+  "agptest": {
+   "kernel-verified": 0,
+   "partial": 7,
+   "answer-verified": 386
+  },
+  "agrupee": {
+   "kernel-verified": 0,
+   "partial": 500,
+   "answer-verified": 0
+  },
+  "agspd": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "agspdc": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "aisolid": {
+   "kernel-verified": 96,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ajbest": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "ajfare": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ajrate": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ajwork": {
+   "kernel-verified": 253,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "anpair": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "anquad": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "avdfact": {
+   "kernel-verified": 90,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avdiv": {
+   "kernel-verified": 175,
+   "partial": 325,
+   "answer-verified": 0
+  },
+  "avfence": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avfold": {
+   "kernel-verified": 0,
+   "partial": 112,
+   "answer-verified": 0
+  },
+  "avfwq": {
+   "kernel-verified": 198,
+   "partial": 202,
+   "answer-verified": 0
+  },
+  "avlat": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 320
+  },
+  "avlike": {
+   "kernel-verified": 0,
+   "partial": 0,
+   "answer-verified": 300
+  },
+  "avlow": {
+   "kernel-verified": 0,
+   "partial": 360,
+   "answer-verified": 0
+  },
+  "avmdiv": {
+   "kernel-verified": 360,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avpest": {
+   "kernel-verified": 0,
+   "partial": 400,
+   "answer-verified": 0
+  },
+  "avpp": {
+   "kernel-verified": 420,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avrsub": {
+   "kernel-verified": 0,
+   "partial": 48,
+   "answer-verified": 352
+  },
+  "avstrat": {
+   "kernel-verified": 320,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avvcmp": {
+   "kernel-verified": 0,
+   "partial": 360,
+   "answer-verified": 0
+  },
+  "divr": {
+   "kernel-verified": 536,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "eqfrac": {
+   "kernel-verified": 405,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "fadd": {
+   "kernel-verified": 825,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "fmulw": {
+   "kernel-verified": 0,
+   "partial": 528,
+   "answer-verified": 0
+  },
+  "ldiv": {
+   "kernel-verified": 640,
+   "partial": 64,
+   "answer-verified": 0
+  },
+  "mmul": {
+   "kernel-verified": 640,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "rect": {
+   "kernel-verified": 121,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "rperim": {
+   "kernel-verified": 190,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "vol": {
+   "kernel-verified": 196,
+   "partial": 0,
+   "answer-verified": 0
+  }
+ }
+}
