@@ -13,7 +13,7 @@ const spf = (n: bigint): bigint => { for (let k = 2n; k < n; k++) if (n % k === 
 
 /** avrsub: prompt "Start at S and take away D again and again ..." (inputs [S, D, takes, ...]). */
 const takeAway = (p: Problem): { s: bigint; d: bigint } | null => {
-  const m = p.prompt.match(/^Start at (\d+) and (?:keep )?taking? away (\d+)/);
+  const m = p.prompt.match(/^Start at (\d+) and (?:keep taking|take) away (\d+)/);
   return m ? { s: BigInt(m[1]), d: BigInt(m[2]) } : null;
 };
 /** inputs [S, D, takes]: the number left after taking D away as many times as possible = S mod D. */
