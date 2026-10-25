@@ -1,0 +1,18 @@
+{
+ "transitions": {
+  "invalid": 1353,
+  "invalidRejected": 1353,
+  "valid": 1531,
+  "validAccepted": 1531,
+  "reasonCodesExactMatch": "1353/1353",
+  "errors": 0
+ },
+ "claims": {
+  "wrong": 294,
+  "wrongRejected": 294,
+  "right": 106,
+  "rightAccepted": 106
+ },
+ "mismatches": [],
+ "mismatchCount": 0
+}
