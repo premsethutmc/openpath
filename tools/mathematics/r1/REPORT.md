@@ -25,7 +25,7 @@ Also changed, disclosed: `rationalRoots` refuses when the candidate set is over 
 | Checker vs adversarial / claims | 1,353 of 1,353 rejected, 1,531 of 1,531 accepted; 294 of 294, 106 of 106 | identical (verifier is now the authority, same reason codes) |
 | K05.1 smoke20, seeded500, edge50, holdout-b, constructed (1,436) | committed results | traces byte-identical, SymPy check 0 problems each |
 | SymPy re-check of engine traces | dev 1,089, eval 2,118, holdout 1,669 steps, 0 invalid | dev 1,071, eval 2,118, holdout 1,669 steps, 0 invalid, 0 wrong claims |
-| Independent adversarial suite (155 equation and step cases) | 47 pass; 31 false refusals or uncoded; 33 crashes; 9+ invalid steps accepted; 2 wrong or wrongly answered | 155 of 155 pass (18 of them as correct coded refusals of flexible cases); 0 crashes |
+| Independent adversarial suite (155 equation and step cases) | 47 pass; 27 false refusals; 36 refusals without a code; 33 crashes; 9 invalid steps accepted; 2 answers where a refusal was required; 1 step rejected by exception | 155 of 155 pass (18 of them as correct coded refusals of flexible cases); 0 crashes |
 | Audit counterexamples (`audit-cases.json`) | 0 of 6 | 6 of 6 |
 | Unit tests | 26 pass | 34 pass |
 
