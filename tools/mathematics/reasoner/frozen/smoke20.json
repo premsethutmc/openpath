@@ -1,0 +1,122 @@
+[
+ {
+  "text": "3*(x+2)=21",
+  "class": "unique",
+  "solution": "5",
+  "id": "m00"
+ },
+ {
+  "text": "5*x-7=18",
+  "class": "unique",
+  "solution": "5",
+  "id": "m01"
+ },
+ {
+  "text": "2*(x-3)=x+4",
+  "class": "unique",
+  "solution": "10",
+  "id": "m02"
+ },
+ {
+  "text": "x/3+4=9",
+  "class": "unique",
+  "solution": "15",
+  "id": "m03"
+ },
+ {
+  "text": "4*(x+1)=2*(x+7)",
+  "class": "unique",
+  "solution": "5",
+  "id": "m04"
+ },
+ {
+  "text": "7-2*x=15",
+  "class": "unique",
+  "solution": "-4",
+  "id": "m05"
+ },
+ {
+  "text": "(x+3)/2=x-1",
+  "class": "unique",
+  "solution": "5",
+  "id": "m06"
+ },
+ {
+  "text": "x/2+x/3=10",
+  "class": "unique",
+  "solution": "12",
+  "id": "m07"
+ },
+ {
+  "text": "3*(2*x-1)=4*(x+2)-5",
+  "class": "unique",
+  "solution": "3",
+  "id": "m08"
+ },
+ {
+  "text": "-4*x+9=-3*x-2",
+  "class": "unique",
+  "solution": "11",
+  "id": "m09"
+ },
+ {
+  "text": "2*(3*(x-1)+4)=22",
+  "class": "unique",
+  "solution": "10/3",
+  "id": "m10"
+ },
+ {
+  "text": "(2/3)*x-5=7",
+  "class": "unique",
+  "solution": "18",
+  "id": "m11"
+ },
+ {
+  "text": "10-(x+4)=3*x",
+  "class": "unique",
+  "solution": "3/2",
+  "id": "m12"
+ },
+ {
+  "text": "x/4-x/6=1",
+  "class": "unique",
+  "solution": "12",
+  "id": "m13"
+ },
+ {
+  "text": "6=2*(x-5)+3*x",
+  "class": "unique",
+  "solution": "16/5",
+  "id": "m14"
+ },
+ {
+  "text": "5*(x-2)-3*(x+1)=1",
+  "class": "unique",
+  "solution": "7",
+  "id": "m15"
+ },
+ {
+  "text": "(3*x-1)/4=(x+5)/2",
+  "class": "unique",
+  "solution": "11",
+  "id": "m16"
+ },
+ {
+  "text": "0.5*x+1=4",
+  "class": "unique",
+  "solution": "6",
+  "id": "m17"
+ },
+ {
+  "text": "-(x-3)=2*x+9",
+  "class": "unique",
+  "solution": "-2",
+  "id": "m18"
+ },
+ {
+  "text": "9*x-4=5*x+12",
+  "class": "unique",
+  "solution": "4",
+  "id": "m19"
+ }
+]
