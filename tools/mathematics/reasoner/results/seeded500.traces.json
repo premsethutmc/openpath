@@ -150,9 +150,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -422,7 +422,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+4--x=-16--x"
+    "to": "-x+4-(-x)=-16-(-x)"
    },
    {
     "rule": "simplify",
@@ -575,7 +575,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "-(3*x)+18--(3*x)=3*x+3--(3*x)"
+    "to": "-(3*x)+18-(-(3*x))=3*x+3-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -609,9 +609,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -660,9 +660,9 @@
    }
   ],
   "stats": {
-   "visited": 25,
-   "generated": 33,
-   "duplicates": 6,
+   "visited": 33,
+   "generated": 45,
+   "duplicates": 10,
    "depth": 7,
    "capped": false
   }
@@ -872,7 +872,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-15--x=3*x-9--x"
+    "to": "-x-15-(-x)=3*x-9-(-x)"
    },
    {
     "rule": "simplify",
@@ -906,9 +906,9 @@
    }
   ],
   "stats": {
-   "visited": 28,
-   "generated": 37,
-   "duplicates": 6,
+   "visited": 34,
+   "generated": 47,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -928,7 +928,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-x+12--(5*x)=-(5*x)+8--(5*x)"
+    "to": "-x+12-(-(5*x))=-(5*x)+8-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -957,8 +957,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -979,7 +979,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+2--x=x+8--x"
+    "to": "-x+2-(-x)=x+8-(-x)"
    },
    {
     "rule": "simplify",
@@ -1013,9 +1013,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 34,
-   "duplicates": 6,
+   "visited": 32,
+   "generated": 44,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -1647,9 +1647,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -1853,7 +1853,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "-16--(3*x)=-(3*x)+16--(3*x)"
+    "to": "-16-(-(3*x))=-(3*x)+16-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -1950,7 +1950,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+16--x=3*x+4--x"
+    "to": "-x+16-(-x)=3*x+4-(-x)"
    },
    {
     "rule": "simplify",
@@ -1984,9 +1984,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -2096,9 +2096,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -2323,7 +2323,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "-40--(7*x)=-(7*x)+20--(7*x)"
+    "to": "-40-(-(7*x))=-(7*x)+20-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -2403,9 +2403,9 @@
    }
   ],
   "stats": {
-   "visited": 28,
-   "generated": 37,
-   "duplicates": 6,
+   "visited": 36,
+   "generated": 49,
+   "duplicates": 10,
    "depth": 7,
    "capped": false
   }
@@ -2497,7 +2497,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-x+5--(5*x)=-(5*x)+14--(5*x)"
+    "to": "-x+5-(-(5*x))=-(5*x)+14-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -2526,8 +2526,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -2635,7 +2635,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+4--x=5*x-5--x"
+    "to": "-x+4-(-x)=5*x-5-(-x)"
    },
    {
     "rule": "simplify",
@@ -2669,9 +2669,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -2875,7 +2875,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-3--x=3*x-13--x"
+    "to": "-x-3-(-x)=3*x-13-(-x)"
    },
    {
     "rule": "simplify",
@@ -2909,9 +2909,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -2931,7 +2931,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "-(8*x)+18--(8*x)=-(6*x)+7--(8*x)"
+    "to": "-(8*x)+18-(-(8*x))=-(6*x)+7-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -2965,8 +2965,8 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
+   "visited": 33,
+   "generated": 46,
    "duplicates": 6,
    "depth": 8,
    "capped": false
@@ -3087,9 +3087,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -3153,9 +3153,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -3190,7 +3190,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(5*x)-20--(6*x)=-(6*x)-54--(6*x)"
+    "to": "-(5*x)-20-(-(6*x))=-(6*x)-54-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -3210,7 +3210,7 @@
   ],
   "stats": {
    "visited": 21,
-   "generated": 29,
+   "generated": 30,
    "duplicates": 3,
    "depth": 8,
    "capped": false
@@ -3490,9 +3490,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -3522,7 +3522,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "x--(6*x)=-(6*x)-37--(6*x)"
+    "to": "x-(-(6*x))=-(6*x)-37-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -3541,9 +3541,9 @@
    }
   ],
   "stats": {
-   "visited": 24,
-   "generated": 32,
-   "duplicates": 6,
+   "visited": 29,
+   "generated": 40,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -3878,9 +3878,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -3900,7 +3900,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-x-21--(2*x)=-(2*x)+8--(2*x)"
+    "to": "-x-21-(-(2*x))=-(2*x)+8-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -3920,7 +3920,7 @@
   ],
   "stats": {
    "visited": 15,
-   "generated": 22,
+   "generated": 23,
    "duplicates": 2,
    "depth": 5,
    "capped": false
@@ -4123,9 +4123,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -4442,7 +4442,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-(5*x)+40--(5*x)=2*x-16--(5*x)"
+    "to": "-(5*x)+40-(-(5*x))=2*x-16-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -4476,9 +4476,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -4493,7 +4493,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+2--x=-35--x"
+    "to": "-x+2-(-x)=-35-(-x)"
    },
    {
     "rule": "simplify",
@@ -4759,7 +4759,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "-(5*x)+4--(7*x)=-(7*x)-14--(7*x)"
+    "to": "-(5*x)+4-(-(7*x))=-(7*x)-14-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -4788,8 +4788,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -4805,7 +4805,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "25--x=-x+16--x"
+    "to": "25-(-x)=-x+16-(-x)"
    },
    {
     "rule": "simplify",
@@ -4846,7 +4846,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-7--x=5*x+10--x"
+    "to": "-x-7-(-x)=5*x+10-(-x)"
    },
    {
     "rule": "simplify",
@@ -4880,9 +4880,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -4946,9 +4946,9 @@
    }
   ],
   "stats": {
-   "visited": 30,
-   "generated": 39,
-   "duplicates": 7,
+   "visited": 36,
+   "generated": 49,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -5094,9 +5094,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -5216,9 +5216,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -5545,7 +5545,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-(5*x)+8--(5*x)=6*x+14--(5*x)"
+    "to": "-(5*x)+8-(-(5*x))=6*x+14-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -5579,9 +5579,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -5749,7 +5749,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "3*x--(6*x)=-(6*x)-21--(6*x)"
+    "to": "3*x-(-(6*x))=-(6*x)-21-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -5768,9 +5768,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -5867,7 +5867,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)-17--(6*x)=-x+18--(6*x)"
+    "to": "-(6*x)-17-(-(6*x))=-x+18-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -5901,8 +5901,8 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
+   "visited": 33,
+   "generated": 46,
    "duplicates": 6,
    "depth": 8,
    "capped": false
@@ -5967,9 +5967,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -6163,7 +6163,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "3*x--x=-x-25--x"
+    "to": "3*x-(-x)=-x-25-(-x)"
    },
    {
     "rule": "simplify",
@@ -6182,9 +6182,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -6245,7 +6245,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "6*x--(9*x)=-(9*x)-1--(9*x)"
+    "to": "6*x-(-(9*x))=-(9*x)-1-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -6264,9 +6264,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 35,
-   "duplicates": 6,
+   "visited": 31,
+   "generated": 43,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -6305,8 +6305,8 @@
    }
   ],
   "stats": {
-   "visited": 19,
-   "generated": 27,
+   "visited": 21,
+   "generated": 31,
    "duplicates": 6,
    "depth": 5,
    "capped": false
@@ -6647,9 +6647,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -6797,7 +6797,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "10--(7*x)=-(7*x)+11--(7*x)"
+    "to": "10-(-(7*x))=-(7*x)+11-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -6848,7 +6848,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+1--x=x-6--x"
+    "to": "-x+1-(-x)=x-6-(-x)"
    },
    {
     "rule": "simplify",
@@ -6882,9 +6882,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 34,
-   "duplicates": 6,
+   "visited": 32,
+   "generated": 44,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -7127,9 +7127,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -7174,7 +7174,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "4*x--(6*x)=-(6*x)+70--(6*x)"
+    "to": "4*x-(-(6*x))=-(6*x)+70-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -7193,9 +7193,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -7307,7 +7307,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "-(7*x)+7--(7*x)=-(5*x)-12--(7*x)"
+    "to": "-(7*x)+7-(-(7*x))=-(5*x)-12-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -7341,8 +7341,8 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
+   "visited": 33,
+   "generated": 46,
    "duplicates": 6,
    "depth": 8,
    "capped": false
@@ -7363,7 +7363,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-5--x=2*x+6--x"
+    "to": "-x-5-(-x)=2*x+6-(-x)"
    },
    {
     "rule": "simplify",
@@ -7397,9 +7397,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -7419,7 +7419,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "-(7*x)+11--(7*x)=-x-17--(7*x)"
+    "to": "-(7*x)+11-(-(7*x))=-x-17-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -7453,8 +7453,8 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
+   "visited": 33,
+   "generated": 46,
    "duplicates": 6,
    "depth": 8,
    "capped": false
@@ -7725,7 +7725,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "-(4*x)+28--(4*x)=x+9--(4*x)"
+    "to": "-(4*x)+28-(-(4*x))=x+9-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -7759,9 +7759,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 41,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 51,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -7827,7 +7827,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+11--x=x-1--x"
+    "to": "-x+11-(-x)=x-1-(-x)"
    },
    {
     "rule": "simplify",
@@ -7861,9 +7861,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 34,
-   "duplicates": 6,
+   "visited": 32,
+   "generated": 44,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -7929,7 +7929,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-7--x=4*x+15--x"
+    "to": "-x-7-(-x)=4*x+15-(-x)"
    },
    {
     "rule": "simplify",
@@ -7963,9 +7963,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -8029,9 +8029,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -8330,9 +8330,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -8377,7 +8377,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "6*x--(2*x)=-(2*x)+46--(2*x)"
+    "to": "6*x-(-(2*x))=-(2*x)+46-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -8396,9 +8396,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -8576,7 +8576,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+2--x=x-1--x"
+    "to": "-x+2-(-x)=x-1-(-x)"
    },
    {
     "rule": "simplify",
@@ -8610,9 +8610,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 34,
-   "duplicates": 6,
+   "visited": 32,
+   "generated": 44,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -8632,7 +8632,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+13--x=5*x-4--x"
+    "to": "-x+13-(-x)=5*x-4-(-x)"
    },
    {
     "rule": "simplify",
@@ -8666,9 +8666,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -8713,7 +8713,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "6*x--(6*x)=-(6*x)-66--(6*x)"
+    "to": "6*x-(-(6*x))=-(6*x)-66-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -8732,9 +8732,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -8959,7 +8959,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "-x+17--(4*x)=-(4*x)-8--(4*x)"
+    "to": "-x+17-(-(4*x))=-(4*x)-8-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -8988,8 +8988,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -9025,7 +9025,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+3--x=x+9--x"
+    "to": "-x+3-(-x)=x+9-(-x)"
    },
    {
     "rule": "simplify",
@@ -9059,9 +9059,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 41,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 51,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -9081,7 +9081,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)-16--(6*x)=-x+15--(6*x)"
+    "to": "-(6*x)-16-(-(6*x))=-x+15-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -9115,8 +9115,8 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
+   "visited": 33,
+   "generated": 46,
    "duplicates": 6,
    "depth": 8,
    "capped": false
@@ -9373,7 +9373,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+10--x=55--x"
+    "to": "-x+10-(-x)=55-(-x)"
    },
    {
     "rule": "simplify",
@@ -9521,7 +9521,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-9--x=x+8--x"
+    "to": "-x-9-(-x)=x+8-(-x)"
    },
    {
     "rule": "simplify",
@@ -9555,9 +9555,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 41,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 51,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -9777,7 +9777,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)-42--(6*x)=4*x-4--(6*x)"
+    "to": "-(6*x)-42-(-(6*x))=4*x-4-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -9811,9 +9811,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -9833,7 +9833,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-16--x=x-12--x"
+    "to": "-x-16-(-x)=x-12-(-x)"
    },
    {
     "rule": "simplify",
@@ -9867,9 +9867,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 34,
-   "duplicates": 6,
+   "visited": 32,
+   "generated": 44,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -10104,7 +10104,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+4--x=4*x-15--x"
+    "to": "-x+4-(-x)=4*x-15-(-x)"
    },
    {
     "rule": "simplify",
@@ -10138,9 +10138,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -10357,9 +10357,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -10410,7 +10410,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-x-14--(6*x)=-(6*x)-19--(6*x)"
+    "to": "-x-14-(-(6*x))=-(6*x)-19-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -10439,8 +10439,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -10880,7 +10880,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "5*x--(5*x)=-(5*x)-30--(5*x)"
+    "to": "5*x-(-(5*x))=-(5*x)-30-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -10899,9 +10899,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -10962,7 +10962,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+15--x=13--x"
+    "to": "-x+15-(-x)=13-(-x)"
    },
    {
     "rule": "simplify",
@@ -11013,7 +11013,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-5--x=25--x"
+    "to": "-x-5-(-x)=25-(-x)"
    },
    {
     "rule": "simplify",
@@ -11103,9 +11103,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -11125,7 +11125,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-10--x=5--x"
+    "to": "-x-10-(-x)=5-(-x)"
    },
    {
     "rule": "simplify",
@@ -11176,7 +11176,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-5--x=-48--x"
+    "to": "-x-5-(-x)=-48-(-x)"
    },
    {
     "rule": "simplify",
@@ -11271,9 +11271,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -11288,7 +11288,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "13--x=-x+8--x"
+    "to": "13-(-x)=-x+8-(-x)"
    },
    {
     "rule": "simplify",
@@ -11421,7 +11421,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-x-8--(2*x)=-(2*x)-13--(2*x)"
+    "to": "-x-8-(-(2*x))=-(2*x)-13-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -11441,7 +11441,7 @@
   ],
   "stats": {
    "visited": 15,
-   "generated": 22,
+   "generated": 23,
    "duplicates": 2,
    "depth": 5,
    "capped": false
@@ -11462,7 +11462,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "-(4*x)-7--(4*x)=5*x-4--(4*x)"
+    "to": "-(4*x)-7-(-(4*x))=5*x-4-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -11496,9 +11496,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -11747,7 +11747,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-x+5--(2*x)=-(2*x)-16--(2*x)"
+    "to": "-x+5-(-(2*x))=-(2*x)-16-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -11767,7 +11767,7 @@
   ],
   "stats": {
    "visited": 21,
-   "generated": 29,
+   "generated": 30,
    "duplicates": 3,
    "depth": 8,
    "capped": false
@@ -12008,7 +12008,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "-x-3--(3*x)=-(3*x)-1--(3*x)"
+    "to": "-x-3-(-(3*x))=-(3*x)-1-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -12037,8 +12037,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -12059,7 +12059,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+10--x=-5--x"
+    "to": "-x+10-(-x)=-5-(-x)"
    },
    {
     "rule": "simplify",
@@ -12231,9 +12231,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -12452,7 +12452,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "x--(4*x)=-(4*x)+24--(4*x)"
+    "to": "x-(-(4*x))=-(4*x)+24-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -12471,9 +12471,9 @@
    }
   ],
   "stats": {
-   "visited": 30,
-   "generated": 39,
-   "duplicates": 7,
+   "visited": 35,
+   "generated": 47,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -12549,7 +12549,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "9*x--(4*x)=-(4*x)+18--(4*x)"
+    "to": "9*x-(-(4*x))=-(4*x)+18-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -12568,9 +12568,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 35,
-   "duplicates": 6,
+   "visited": 31,
+   "generated": 43,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -12626,7 +12626,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-x-6--(5*x)=-(5*x)+13--(5*x)"
+    "to": "-x-6-(-(5*x))=-(5*x)+13-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -12655,8 +12655,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -12892,7 +12892,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "x--(9*x)=-(9*x)+14--(9*x)"
+    "to": "x-(-(9*x))=-(9*x)+14-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -12911,9 +12911,9 @@
    }
   ],
   "stats": {
-   "visited": 24,
-   "generated": 32,
-   "duplicates": 6,
+   "visited": 29,
+   "generated": 40,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -13270,7 +13270,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "5*x--(4*x)=-(4*x)-6--(4*x)"
+    "to": "5*x-(-(4*x))=-(4*x)-6-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -13289,9 +13289,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -13372,7 +13372,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "-4--(4*x)=-(4*x)+5--(4*x)"
+    "to": "-4-(-(4*x))=-(4*x)+5-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -13523,9 +13523,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -13788,9 +13788,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -13927,7 +13927,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "6*x--(5*x)=-(5*x)+79--(5*x)"
+    "to": "6*x-(-(5*x))=-(5*x)+79-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -13946,9 +13946,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -14048,8 +14048,8 @@
    }
   ],
   "stats": {
-   "visited": 19,
-   "generated": 29,
+   "visited": 20,
+   "generated": 32,
    "duplicates": 2,
    "depth": 8,
    "capped": false
@@ -14162,7 +14162,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)+12--(6*x)=3*x+3--(6*x)"
+    "to": "-(6*x)+12-(-(6*x))=3*x+3-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -14196,9 +14196,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -14308,9 +14308,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -14330,7 +14330,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "-(2*x)+14--(7*x)=-(7*x)+15--(7*x)"
+    "to": "-(2*x)+14-(-(7*x))=-(7*x)+15-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -14359,8 +14359,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -14422,7 +14422,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-7--x=x+7--x"
+    "to": "-x-7-(-x)=x+7-(-x)"
    },
    {
     "rule": "simplify",
@@ -14456,9 +14456,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 34,
-   "duplicates": 6,
+   "visited": 32,
+   "generated": 44,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -14534,7 +14534,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "4*x--(6*x)=-(6*x)+1--(6*x)"
+    "to": "4*x-(-(6*x))=-(6*x)+1-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -14553,9 +14553,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 35,
-   "duplicates": 6,
+   "visited": 31,
+   "generated": 43,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -15056,7 +15056,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-39--(6*x)=-(6*x)+17--(6*x)"
+    "to": "-39-(-(6*x))=-(6*x)+17-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -15136,9 +15136,9 @@
    }
   ],
   "stats": {
-   "visited": 28,
-   "generated": 37,
-   "duplicates": 6,
+   "visited": 36,
+   "generated": 49,
+   "duplicates": 10,
    "depth": 7,
    "capped": false
   }
@@ -15321,7 +15321,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "x--(8*x)=-(8*x)-37--(8*x)"
+    "to": "x-(-(8*x))=-(8*x)-37-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -15340,9 +15340,9 @@
    }
   ],
   "stats": {
-   "visited": 24,
-   "generated": 32,
-   "duplicates": 6,
+   "visited": 29,
+   "generated": 40,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -15493,9 +15493,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -15709,7 +15709,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-x-1--(5*x)=-(5*x)-15--(5*x)"
+    "to": "-x-1-(-(5*x))=-(5*x)-15-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -15738,8 +15738,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -15770,7 +15770,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "9*x--(3*x)=-(3*x)-17--(3*x)"
+    "to": "9*x-(-(3*x))=-(3*x)-17-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -15789,9 +15789,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 35,
-   "duplicates": 6,
+   "visited": 31,
+   "generated": 43,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -15937,9 +15937,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -16005,7 +16005,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "13--(4*x)=-(4*x)-11--(4*x)"
+    "to": "13-(-(4*x))=-(4*x)-11-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -16182,9 +16182,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -16250,7 +16250,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-6--x=2*x-15--x"
+    "to": "-x-6-(-x)=2*x-15-(-x)"
    },
    {
     "rule": "simplify",
@@ -16284,9 +16284,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -16524,9 +16524,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -16561,7 +16561,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)+54--(6*x)=x+2--(6*x)"
+    "to": "-(6*x)+54-(-(6*x))=x+2-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -16595,9 +16595,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 41,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 51,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -16719,7 +16719,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)+30--(6*x)=5*x-10--(6*x)"
+    "to": "-(6*x)+30-(-(6*x))=5*x-10-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -16753,9 +16753,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -17019,9 +17019,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -17215,7 +17215,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "-(9*x)-5--(9*x)=8*x+16--(9*x)"
+    "to": "-(9*x)-5-(-(9*x))=8*x+16-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -17249,9 +17249,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -17271,7 +17271,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-x-10--(2*x)=-(2*x)-3--(2*x)"
+    "to": "-x-10-(-(2*x))=-(2*x)-3-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -17291,7 +17291,7 @@
   ],
   "stats": {
    "visited": 15,
-   "generated": 22,
+   "generated": 23,
    "duplicates": 2,
    "depth": 5,
    "capped": false
@@ -17445,7 +17445,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-(3*x)+6--(5*x)=-(5*x)+35--(5*x)"
+    "to": "-(3*x)+6-(-(5*x))=-(5*x)+35-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -17474,8 +17474,8 @@
    }
   ],
   "stats": {
-   "visited": 33,
-   "generated": 43,
+   "visited": 36,
+   "generated": 49,
    "duplicates": 7,
    "depth": 10,
    "capped": false
@@ -17785,9 +17785,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -17976,7 +17976,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-(5*x)-5--(5*x)=6*x+18--(5*x)"
+    "to": "-(5*x)-5-(-(5*x))=6*x+18-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -18010,9 +18010,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -18081,9 +18081,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 41,
-   "duplicates": 7,
+   "visited": 40,
+   "generated": 53,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -18282,7 +18282,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+5--x=x-5--x"
+    "to": "-x+5-(-x)=x-5-(-x)"
    },
    {
     "rule": "simplify",
@@ -18316,9 +18316,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 34,
-   "duplicates": 6,
+   "visited": 32,
+   "generated": 44,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -18455,7 +18455,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "6*x--(2*x)=-(2*x)-28--(2*x)"
+    "to": "6*x-(-(2*x))=-(2*x)-28-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -18474,9 +18474,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -18571,9 +18571,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -18603,7 +18603,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "4*x--(9*x)=-(9*x)-5--(9*x)"
+    "to": "4*x-(-(9*x))=-(9*x)-5-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -18622,9 +18622,9 @@
    }
   ],
   "stats": {
-   "visited": 26,
-   "generated": 35,
-   "duplicates": 6,
+   "visited": 31,
+   "generated": 43,
+   "duplicates": 8,
    "depth": 7,
    "capped": false
   }
@@ -18690,7 +18690,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+1--x=3*x+5--x"
+    "to": "-x+1-(-x)=3*x+5-(-x)"
    },
    {
     "rule": "simplify",
@@ -18724,9 +18724,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -18792,7 +18792,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "-10--(4*x)=-(4*x)+6--(4*x)"
+    "to": "-10-(-(4*x))=-(4*x)+6-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -18923,9 +18923,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -18994,9 +18994,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -19139,7 +19139,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "-x+9--(3*x)=-(3*x)-3--(3*x)"
+    "to": "-x+9-(-(3*x))=-(3*x)-3-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -19168,8 +19168,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -19219,9 +19219,9 @@
    }
   ],
   "stats": {
-   "visited": 28,
-   "generated": 37,
-   "duplicates": 6,
+   "visited": 36,
+   "generated": 49,
+   "duplicates": 10,
    "depth": 7,
    "capped": false
   }
@@ -19297,7 +19297,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-1--x=4*x-9--x"
+    "to": "-x-1-(-x)=4*x-9-(-x)"
    },
    {
     "rule": "simplify",
@@ -19331,9 +19331,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -19353,7 +19353,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "-(2*x)+17--(9*x)=-(9*x)+3--(9*x)"
+    "to": "-(2*x)+17-(-(9*x))=-(9*x)+3-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -19382,8 +19382,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -19419,7 +19419,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-(5*x)+20--(5*x)=-(3*x)-15--(5*x)"
+    "to": "-(5*x)+20-(-(5*x))=-(3*x)-15-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -19453,8 +19453,8 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
+   "visited": 39,
+   "generated": 53,
    "duplicates": 7,
    "depth": 11,
    "capped": false
@@ -19516,7 +19516,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+5--x=4*x-4--x"
+    "to": "-x+5-(-x)=4*x-4-(-x)"
    },
    {
     "rule": "simplify",
@@ -19550,9 +19550,9 @@
    }
   ],
   "stats": {
-   "visited": 29,
-   "generated": 38,
-   "duplicates": 6,
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
    "depth": 8,
    "capped": false
   }
@@ -19738,9 +19738,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -20090,9 +20090,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -20112,7 +20112,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "9--(4*x)=-(4*x)+19--(4*x)"
+    "to": "9-(-(4*x))=-(4*x)+19-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -20299,9 +20299,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -20519,9 +20519,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -20784,9 +20784,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -20954,7 +20954,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)-24--(6*x)=4*x-16--(6*x)"
+    "to": "-(6*x)-24-(-(6*x))=4*x-16-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -20988,9 +20988,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -21266,7 +21266,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "6*x--(3*x)=-(3*x)+60--(3*x)"
+    "to": "6*x-(-(3*x))=-(3*x)+60-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -21285,9 +21285,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -21312,7 +21312,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "-1*x--(3*x)=-(3*x)-15--(3*x)"
+    "to": "-1*x-(-(3*x))=-(3*x)-15-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -21331,9 +21331,9 @@
    }
   ],
   "stats": {
-   "visited": 10,
-   "generated": 12,
-   "duplicates": 0,
+   "visited": 14,
+   "generated": 18,
+   "duplicates": 1,
    "depth": 6,
    "capped": false
   }
@@ -21399,7 +21399,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "4--(8*x)=-(8*x)-19--(8*x)"
+    "to": "4-(-(8*x))=-(8*x)-19-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -21650,7 +21650,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)-4--(6*x)=-(5*x)-10--(6*x)"
+    "to": "-(6*x)-4-(-(6*x))=-(5*x)-10-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -21675,7 +21675,7 @@
   ],
   "stats": {
    "visited": 17,
-   "generated": 26,
+   "generated": 28,
    "duplicates": 2,
    "depth": 6,
    "capped": false
@@ -21696,7 +21696,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-x+9--(5*x)=-(5*x)-4--(5*x)"
+    "to": "-x+9-(-(5*x))=-(5*x)-4-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -21725,8 +21725,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -22108,9 +22108,9 @@
    }
   ],
   "stats": {
-   "visited": 30,
-   "generated": 39,
-   "duplicates": 7,
+   "visited": 36,
+   "generated": 49,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -22130,7 +22130,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-x-4--(5*x)=-(5*x)-2--(5*x)"
+    "to": "-x-4-(-(5*x))=-(5*x)-2-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -22159,8 +22159,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 36,
+   "visited": 30,
+   "generated": 42,
    "duplicates": 6,
    "depth": 7,
    "capped": false
@@ -22773,9 +22773,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -22928,7 +22928,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-12--(2*x)=-(2*x)-19--(2*x)"
+    "to": "-12-(-(2*x))=-(2*x)-19-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -23023,9 +23023,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -23168,7 +23168,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "21--(8*x)=-(8*x)+10--(8*x)"
+    "to": "21-(-(8*x))=-(8*x)+10-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -23503,9 +23503,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -23550,7 +23550,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "2*x--(5*x)=-(5*x)-24--(5*x)"
+    "to": "2*x-(-(5*x))=-(5*x)-24-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -23569,9 +23569,9 @@
    }
   ],
   "stats": {
-   "visited": 32,
-   "generated": 42,
-   "duplicates": 7,
+   "visited": 37,
+   "generated": 50,
+   "duplicates": 9,
    "depth": 10,
    "capped": false
   }
@@ -23717,9 +23717,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 43,
+   "generated": 57,
+   "duplicates": 11,
    "depth": 11,
    "capped": false
   }
@@ -24023,8 +24023,8 @@
    }
   ],
   "stats": {
-   "visited": 27,
-   "generated": 37,
+   "visited": 29,
+   "generated": 41,
    "duplicates": 7,
    "depth": 9,
    "capped": false
@@ -24111,7 +24111,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)+42--(6*x)=3*x+15--(6*x)"
+    "to": "-(6*x)+42-(-(6*x))=3*x+15-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -24145,9 +24145,9 @@
    }
   ],
   "stats": {
-   "visited": 35,
-   "generated": 45,
-   "duplicates": 7,
+   "visited": 41,
+   "generated": 55,
+   "duplicates": 9,
    "depth": 11,
    "capped": false
   }
@@ -24167,7 +24167,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-x+4--(2*x)=-(2*x)+11--(2*x)"
+    "to": "-x+4-(-(2*x))=-(2*x)+11-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -24187,7 +24187,7 @@
   ],
   "stats": {
    "visited": 15,
-   "generated": 22,
+   "generated": 23,
    "duplicates": 2,
    "depth": 5,
    "capped": false

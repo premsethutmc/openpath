@@ -44,7 +44,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "24*x--(9*x)=-(9*x)+495--(9*x)"
+    "to": "24*x-(-(9*x))=-(9*x)+495-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -105,7 +105,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+8--x=x-6--x"
+    "to": "-x+8-(-x)=x-6-(-x)"
    },
    {
     "rule": "simplify",
@@ -202,7 +202,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-(2*x)-7--(2*x)=x-58--(2*x)"
+    "to": "-(2*x)-7-(-(2*x))=x-58-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -365,7 +365,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "x--x=-x+50--x"
+    "to": "x-(-x)=-x+50-(-x)"
    },
    {
     "rule": "simplify",
@@ -1659,7 +1659,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(63*x) from both sides",
-    "to": "-(63*x)+16--(63*x)=-(8*x)+1061--(63*x)"
+    "to": "-(63*x)+16-(-(63*x))=-(8*x)+1061-(-(63*x))"
    },
    {
     "rule": "simplify",
@@ -2159,7 +2159,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-(5*x)+85--(5*x)=40*x+1345--(5*x)"
+    "to": "-(5*x)+85-(-(5*x))=40*x+1345-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -2292,7 +2292,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "-(7*x)+18--(7*x)=40*x-969--(7*x)"
+    "to": "-(7*x)+18-(-(7*x))=40*x-969-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -2665,7 +2665,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(25*x) from both sides",
-    "to": "-(25*x)+10--(25*x)=7*x-246--(25*x)"
+    "to": "-(25*x)+10-(-(25*x))=7*x-246-(-(25*x))"
    },
    {
     "rule": "simplify",
@@ -3226,7 +3226,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+38--x=18--x"
+    "to": "-x+38-(-x)=18-(-x)"
    },
    {
     "rule": "simplify",
@@ -3858,7 +3858,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "5*x--x=-x-66--x"
+    "to": "5*x-(-x)=-x-66-(-x)"
    },
    {
     "rule": "simplify",
@@ -3899,7 +3899,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "6*x--x=-x+105--x"
+    "to": "6*x-(-x)=-x+105-(-x)"
    },
    {
     "rule": "simplify",
@@ -4072,7 +4072,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(3*x) from both sides",
-    "to": "32*x--(3*x)=-(3*x)+910--(3*x)"
+    "to": "32*x-(-(3*x))=-(3*x)+910-(-(3*x))"
    },
    {
     "rule": "simplify",
@@ -4382,7 +4382,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(36*x) from both sides",
-    "to": "-(36*x)+816--(36*x)=56*x+264--(36*x)"
+    "to": "-(36*x)+816-(-(36*x))=56*x+264-(-(36*x))"
    },
    {
     "rule": "simplify",
@@ -4811,7 +4811,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "-(8*x)+5--(8*x)=-(3*x)-45--(8*x)"
+    "to": "-(8*x)+5-(-(8*x))=-(3*x)-45-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -5128,7 +5128,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "6*x--(6*x)=-(6*x)+324--(6*x)"
+    "to": "6*x-(-(6*x))=-(6*x)+324-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -5838,7 +5838,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "8*x--(7*x)=-(7*x)-270--(7*x)"
+    "to": "8*x-(-(7*x))=-(7*x)-270-(-(7*x))"
    },
    {
     "rule": "simplify",
@@ -6124,7 +6124,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(1/2*x) from both sides",
-    "to": "-(1/2*x)-(75/2)--(1/2*x)=x-(165/2)--(1/2*x)"
+    "to": "-(1/2*x)-(75/2)-(-(1/2*x))=x-(165/2)-(-(1/2*x))"
    },
    {
     "rule": "simplify",
@@ -6318,7 +6318,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)-198--(6*x)=18*x-774--(6*x)"
+    "to": "-(6*x)-198-(-(6*x))=18*x-774-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -6623,7 +6623,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(16*x) from both sides",
-    "to": "-(16*x)-32--(16*x)=3*x-146--(16*x)"
+    "to": "-(16*x)-32-(-(16*x))=3*x-146-(-(16*x))"
    },
    {
     "rule": "simplify",
@@ -6699,7 +6699,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "6*x--x=-x-140--x"
+    "to": "6*x-(-x)=-x-140-(-x)"
    },
    {
     "rule": "simplify",
@@ -6898,7 +6898,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(47*x) from both sides",
-    "to": "20*x--(47*x)=-(47*x)+268--(47*x)"
+    "to": "20*x-(-(47*x))=-(47*x)+268-(-(47*x))"
    },
    {
     "rule": "simplify",
@@ -7032,7 +7032,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+68--x=2*x+77--x"
+    "to": "-x+68-(-x)=2*x+77-(-x)"
    },
    {
     "rule": "simplify",
@@ -7420,7 +7420,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(48*x) from both sides",
-    "to": "2*x--(48*x)=-(48*x)-900--(48*x)"
+    "to": "2*x-(-(48*x))=-(48*x)-900-(-(48*x))"
    },
    {
     "rule": "simplify",
@@ -7763,7 +7763,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)-33--(6*x)=x+2--(6*x)"
+    "to": "-(6*x)-33-(-(6*x))=x+2-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -8126,7 +8126,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(35*x) from both sides",
-    "to": "-(35*x)+21--(35*x)=x-15--(35*x)"
+    "to": "-(35*x)+21-(-(35*x))=x-15-(-(35*x))"
    },
    {
     "rule": "simplify",
@@ -8223,7 +8223,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(10*x) from both sides",
-    "to": "-(10*x)-(105/2)--(10*x)=3*x-(287/2)--(10*x)"
+    "to": "-(10*x)-(105/2)-(-(10*x))=3*x-(287/2)-(-(10*x))"
    },
    {
     "rule": "simplify",
@@ -8279,7 +8279,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+20--x=8*x+119--x"
+    "to": "-x+20-(-x)=8*x+119-(-x)"
    },
    {
     "rule": "simplify",
@@ -8591,7 +8591,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "-(8*x)+9--(8*x)=x+99--(8*x)"
+    "to": "-(8*x)+9-(-(8*x))=x+99-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -9358,7 +9358,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "49*x--(8*x)=-(8*x)-456--(8*x)"
+    "to": "49*x-(-(8*x))=-(8*x)-456-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -9584,7 +9584,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "-(6*x)+42--(6*x)=1/9*x+97--(6*x)"
+    "to": "-(6*x)+42-(-(6*x))=1/9*x+97-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -9952,7 +9952,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "12*x--(2*x)=-(2*x)+294--(2*x)"
+    "to": "12*x-(-(2*x))=-(2*x)+294-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -10120,7 +10120,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+11--x=3*x+119--x"
+    "to": "-x+11-(-x)=3*x+119-(-x)"
    },
    {
     "rule": "simplify",
@@ -10835,7 +10835,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9/2*x) from both sides",
-    "to": "-(9/2*x)+54--(9/2*x)=x-111--(9/2*x)"
+    "to": "-(9/2*x)+54-(-(9/2*x))=x-111-(-(9/2*x))"
    },
    {
     "rule": "simplify",
@@ -11115,7 +11115,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(4*x) from both sides",
-    "to": "5/4*x--(4*x)=-(4*x)-(273/4)--(4*x)"
+    "to": "5/4*x-(-(4*x))=-(4*x)-(273/4)-(-(4*x))"
    },
    {
     "rule": "simplify",
@@ -11415,15 +11415,96 @@
  {
   "id": "c238",
   "text": "8*(3*(12-5*x))=3*(9*x+10)/2-3732",
-  "outcome": "not-found",
-  "reason": "no solution path within depth 14",
-  "answer": null,
-  "steps": [],
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "30",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (tidy)",
+    "to": "8*(3*(-(5*x)+12))=3*(9*x+10)/2-3732"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "8*(3*-(5*x)+3*12)=3*(9*x+10)/2-3732"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "8*(-(15*x)+36)=3*(9*x+10)/2-3732"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "8*-(15*x)+8*36=3*(9*x+10)/2-3732"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "-(120*x)+288=3*(9*x+10)/2-3732"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "-(120*x)+288=(3*(9*x)+3*10)/2-3732"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "-(120*x)+288=(27*x+30)/2-3732"
+   },
+   {
+    "rule": "expand",
+    "explain": "divide each term of the numerator by the denominator",
+    "to": "-(120*x)+288=27*x/2+30/2-3732"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers, combine like terms)",
+    "to": "-(120*x)+288=27/2*x-3717"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(120*x) from both sides",
+    "to": "-(120*x)+288-(-(120*x))=27/2*x-3717-(-(120*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "288=267/2*x-3717"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 3717 to both sides",
+    "to": "288+3717=267/2*x-3717+3717"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "4005=267/2*x"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 267/2",
+    "to": "4005/(267/2)=267/2*x/(267/2)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "30=x"
+   },
+   {
+    "rule": "swap-sides",
+    "explain": "write the unknown on the left",
+    "to": "x=30"
+   }
+  ],
   "stats": {
-   "visited": 47,
-   "generated": 63,
-   "duplicates": 10,
-   "depth": 14,
+   "visited": 55,
+   "generated": 72,
+   "duplicates": 12,
+   "depth": 16,
    "capped": false
   }
  },
@@ -12029,7 +12110,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(27*x) from both sides",
-    "to": "-(27*x)+180--(27*x)=5*x+564--(27*x)"
+    "to": "-(27*x)+180-(-(27*x))=5*x+564-(-(27*x))"
    },
    {
     "rule": "simplify",
@@ -12187,7 +12268,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "245*x--x=-x-6888--x"
+    "to": "245*x-(-x)=-x-6888-(-x)"
    },
    {
     "rule": "simplify",
@@ -12228,7 +12309,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(6*x) from both sides",
-    "to": "196*x--(6*x)=-(6*x)-404--(6*x)"
+    "to": "196*x-(-(6*x))=-(6*x)-404-(-(6*x))"
    },
    {
     "rule": "simplify",
@@ -12519,7 +12600,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(8*x) from both sides",
-    "to": "x--(8*x)=-(8*x)-243--(8*x)"
+    "to": "x-(-(8*x))=-(8*x)-243-(-(8*x))"
    },
    {
     "rule": "simplify",
@@ -12774,7 +12855,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "84*x--(2*x)=-(2*x)-688--(2*x)"
+    "to": "84*x-(-(2*x))=-(2*x)-688-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -12896,7 +12977,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-(2*x)+20--(2*x)=x+89--(2*x)"
+    "to": "-(2*x)+20-(-(2*x))=x+89-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -13065,7 +13146,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "6*x--(9*x)=-(9*x)+255--(9*x)"
+    "to": "6*x-(-(9*x))=-(9*x)+255-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -13301,7 +13382,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x-56--x=x-4--x"
+    "to": "-x-56-(-x)=x-4-(-x)"
    },
    {
     "rule": "simplify",
@@ -13408,7 +13489,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(24*x) from both sides",
-    "to": "2*x--(24*x)=-(24*x)-520--(24*x)"
+    "to": "2*x-(-(24*x))=-(24*x)-520-(-(24*x))"
    },
    {
     "rule": "simplify",
@@ -13449,7 +13530,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(48*x) from both sides",
-    "to": "-(48*x)+180--(48*x)=x-1143--(48*x)"
+    "to": "-(48*x)+180-(-(48*x))=x-1143-(-(48*x))"
    },
    {
     "rule": "simplify",
@@ -13505,7 +13586,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -x from both sides",
-    "to": "-x+8--x=17--x"
+    "to": "-x+8-(-x)=17-(-x)"
    },
    {
     "rule": "simplify",
@@ -13551,7 +13632,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(5*x) from both sides",
-    "to": "-(5*x)-(25/2)--(5*x)=30*x-(655/2)--(5*x)"
+    "to": "-(5*x)-(25/2)-(-(5*x))=30*x-(655/2)-(-(5*x))"
    },
    {
     "rule": "simplify",
@@ -14403,7 +14484,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(12*x) from both sides",
-    "to": "-(12*x)-26--(12*x)=-12*x--(12*x)"
+    "to": "-(12*x)-26-(-(12*x))=-12*x-(-(12*x))"
    },
    {
     "rule": "simplify",
@@ -15315,7 +15396,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(2*x) from both sides",
-    "to": "-(2*x)+86--(2*x)=-(2*x)+86--(2*x)"
+    "to": "-(2*x)+86-(-(2*x))=-(2*x)+86-(-(2*x))"
    },
    {
     "rule": "simplify",
@@ -15771,7 +15852,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(9*x) from both sides",
-    "to": "-(9*x)+9--(9*x)=-(9*x)+9--(9*x)"
+    "to": "-(9*x)+9-(-(9*x))=-(9*x)+9-(-(9*x))"
    },
    {
     "rule": "simplify",
@@ -16191,7 +16272,7 @@
    {
     "rule": "subtract-both-sides",
     "explain": "subtract -(7*x) from both sides",
-    "to": "-(7*x)-14--(7*x)=-(7*x)-14--(7*x)"
+    "to": "-(7*x)-14-(-(7*x))=-(7*x)-14-(-(7*x))"
    },
    {
     "rule": "simplify",

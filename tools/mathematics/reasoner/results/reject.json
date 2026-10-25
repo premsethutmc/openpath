@@ -1,0 +1,62 @@
+{
+ "seed": 20261029,
+ "kinds": {
+  "off-by-one constant": {
+   "injected": 134,
+   "invalid": 133,
+   "rejected": 133,
+   "excluded": 1
+  },
+  "multiply one side only": {
+   "injected": 135,
+   "invalid": 135,
+   "rejected": 135,
+   "excluded": 0
+  },
+  "divide one side only": {
+   "injected": 134,
+   "invalid": 132,
+   "rejected": 132,
+   "excluded": 2
+  },
+  "flip a + or - sign": {
+   "injected": 61,
+   "invalid": 61,
+   "rejected": 61,
+   "excluded": 0
+  },
+  "multiply both sides by 0": {
+   "injected": 134,
+   "invalid": 134,
+   "rejected": 134,
+   "excluded": 0
+  },
+  "multiply both sides by x": {
+   "injected": 134,
+   "invalid": 131,
+   "rejected": 131,
+   "excluded": 3
+  },
+  "divide both sides by x": {
+   "injected": 134,
+   "invalid": 134,
+   "rejected": 134,
+   "excluded": 0
+  },
+  "negate one side": {
+   "injected": 134,
+   "invalid": 131,
+   "rejected": 131,
+   "excluded": 3
+  }
+ },
+ "total": {
+  "injected": 1000,
+  "invalid": 991,
+  "rejected": 991,
+  "excluded": 9
+ },
+ "missed": [],
+ "genuineStepsAccepted": 300,
+ "genuineStepsTried": 300
+}
