@@ -32,6 +32,7 @@ Components, inputs, outputs, acceptance tests and dependencies are in the owner'
 | K03 | Symbolic manipulation | Basic folding only. No expand or factor yet. |
 | K04 | Equation solver | **Criterion met in the trial** (PR #69): 1,000 unseen linear and quadratic equations, all correct, using CortexJS Compute Engine (MIT), checked by SymPy. |
 | K05 | Solution planner (teacher-style steps, no per-family `solve()`) | **First version built, draft PR #75 (25 Oct), linear equations only.** Searches over general moves with no stored answers. Every equation in the in-scope sets (20 + 500 + 500 + 360) solved or correctly classified, every step checked by SymPy; all 991 provably invalid injected steps rejected. Not integrated with the Grade 5 pipeline, by decision. Quadratics, inequalities, systems and variable denominators are not done. Reference design: mathsteps (Apache-2.0, unmaintained). |
+| K05.2 | Domain-aware reasoning for rational equations (restrictions kept through every step, extraneous candidates rejected) | **Proposal and frozen tests only, draft PR #76 (25 Oct).** No planner code. Tests: dev 206, eval 400, holdout 300, unsupported 112, 2,884 adversarial transitions, 400 claims, each checked by two independent oracles. Awaiting the owner's decisions in section 14 of `docs/milestones/DOMAIN_AWARE_REASONER.md`. |
 | K06–K12 | Generator, difficulty, error analyzer, renderer, prerequisites, adaptive controller, integration | Not started. Hold until K05 passes. |
 
 Stop rule from the board: if K04 cannot solve unseen equations, K06 cannot be declared complete; if K06 cannot
@@ -71,7 +72,7 @@ Decision in force: the reasoner stays separate from the Grade 5 release pipeline
 1. Merge decisions for PRs #69, #70, #71 and #72 (nothing merged or deployed).
 2. Follow-up milestone, scope in `docs/milestones/MULTI_FORMAT_BANK.md` (proposal): add the multiple-choice and
    everyday-situation forms of the Grade 5 problems to the bank, fully verified, so skills can reach "verified".
-3. K05 growth: review PR #75, then choose the next capability (quadratics, domain-aware reasoning for variable denominators, or inequalities). Propose scope and acceptance tests first.
+3. K05 growth: review PR #75, then PR #76 (the domain-aware proposal with frozen tests) and answer its section 14. Quadratics after clearing denominators would be K05.3. Do not start D0 without approval.
 
 ## Open decisions for the owner
 - Whether to merge the exact-arithmetic fix from PR #69 into `feat/expand-verified-teaching` (it fixes a comparison
