@@ -1,0 +1,394 @@
+[
+ {
+  "id": "e00",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e01",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e02",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e03",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e04",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e05",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e06",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e07",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e08",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e09",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e10",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e11",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e12",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e13",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e14",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e15",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e16",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e17",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e18",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e19",
+  "outcome": "no-solution",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e20",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e21",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e22",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e23",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e24",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e25",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e26",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e27",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e28",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e29",
+  "outcome": "identity",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e30",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e31",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e32",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e33",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e34",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e35",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e36",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e37",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e38",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e39",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-nonlinear",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e40",
+  "outcome": "unsupported",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e41",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e42",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e43",
+  "outcome": "unsupported",
+  "frozenClass": "identity",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e44",
+  "outcome": "unsupported",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e45",
+  "outcome": "unsupported",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e46",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e47",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e48",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e49",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e50",
+  "outcome": "unsupported",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e51",
+  "outcome": "unsupported",
+  "frozenClass": "no-solution",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e52",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e53",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e54",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ },
+ {
+  "id": "e55",
+  "outcome": "unsupported",
+  "frozenClass": "unsupported-variable-denominator",
+  "ok": true,
+  "problems": []
+ }
+]

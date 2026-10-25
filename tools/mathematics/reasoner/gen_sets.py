@@ -12,7 +12,9 @@ from fractions import Fraction
 import sympy as sp
 
 x = sp.Symbol("x")
-rnd = random.Random(20261025)
+import os
+SEED = int(os.environ.get("GEN_SEED", "20261025"))
+rnd = random.Random(SEED)
 
 def S(text):
     lhs, rhs = text.split("=")
@@ -189,7 +191,7 @@ def main(out_dir):
     for i, o in enumerate(ed): o["id"] = f"e{i:02d}"
     files = {"smoke20.json": sm[:20], "seeded500.json": seeded, "edge50.json": ed}
     assert len(sm) >= 20 and all(o["class"] == "unique" for o in sm[:20]), [o for o in sm if o["class"] != "unique"]
-    manifest = {"seed": 20261025, "sympy": sp.__version__, "files": {}}
+    manifest = {"seed": SEED, "sympy": sp.__version__, "files": {}}
     for name, rows in files.items():
         body = json.dumps(rows, indent=1, ensure_ascii=False) + "\n"
         open(f"{out_dir}/{name}", "w").write(body)
