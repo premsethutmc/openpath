@@ -42,9 +42,9 @@ function greedy(text: string) {
   STUCK.push(text + "  LOOP-> " + printExpr(s.math.statements[0].left) + " = " + printExpr(s.math.statements[0].right)); return { cls: "stuck", sol: null, steps };
 }
 const out: any = {};
-for (const name of ["dev", "eval", "holdout"]) {
-  const cases = JSON.parse(readFileSync(root + name + ".json", "utf8")); let ok = 0; const bad: string[] = []; const cats: Record<string, number> = {};
+for (const name of process.env.SUITE === "challenge" ? ["challenge"] : ["dev", "eval", "holdout"]) {
+  const cases = name === "challenge" ? JSON.parse(readFileSync("/home/claude/k052/tools/mathematics/audit/challenge/suite.json", "utf8")).filter((c: any) => c.label === "supported") : JSON.parse(readFileSync(root + name + ".json", "utf8")); let ok = 0; const bad: string[] = []; const cats: Record<string, number> = {};
   for (const c of cases) { const g = greedy(c.text); const same = g.cls === c.class && (c.class !== "unique" || JSON.stringify(g.sol) === JSON.stringify(c.solution)); if (same) ok++; else { bad.push(c.id); cats[g.cls] = (cats[g.cls] ?? 0) + 1; } }
   out[name] = { cases: cases.length, greedyCorrect: ok, rate: +(ok / cases.length).toFixed(4), failedIds: bad.slice(0, 15), failedByGot: cats };
 }
-console.log(STUCK.slice(0,8).join("\n")); writeFileSync("/home/claude/k052/tools/mathematics/audit/ablation-"+MODE+".json", JSON.stringify(out, null, 1)); console.log(JSON.stringify(out, null, 1));
+console.log(STUCK.slice(0,8).join("\n")); writeFileSync("/home/claude/k052/tools/mathematics/audit/ablation-"+(process.env.SUITE ?? "frozen")+"-"+MODE+".json", JSON.stringify(out, null, 1)); console.log(JSON.stringify(out, null, 1));
