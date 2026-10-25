@@ -138,12 +138,16 @@ const aemulmMultiply: Claim = (s, p) => {
 const aemulmRegroup: Claim = (s, p) => { const d = mulm(p); return d && s.id === "regroup" ? rat((d.n * d.b) / d.f) : null; };
 
 // ---- aemix: add two measures
-/** Reading: "Add: A U b u + C U d u"; regroup = small units left after carrying whole big units. */
-const aemixRegroup: Claim = (_s, p) => {
-  const m = /^Add: (\d+) (\w+) (\d+) (\w+) \+ (\d+) (\w+) (\d+) (\w+)\. Write the answer as/.exec(p.prompt);
-  if (!m || m[2] !== m[6] || m[4] !== m[8]) return null;
-  const f = factorOf(m[2], m[4]);
-  return f ? rat((B(m[3]) + B(m[7])) % f) : null;
+/** Reading: "Add: A U b u + C U d u": regroup = small units left after carrying whole big units; "Subtract: A U b u - C U d u"
+ *  (a missing small part is 0): borrow = the minuend's small units plus one big unit changed to small units. */
+const aemixRegroup: Claim = (s, p) => {
+  const m = /^(Add|Subtract): (\d+) (\w+)(?: (\d+) (\w+))? [+−] (\d+) (\w+)(?: (\d+) (\w+))?\. Write the answer as \((\w+), (\w+)\)/.exec(p.prompt);
+  if (!m || m[3] !== m[7] || m[10] !== m[3] || m[5] !== undefined && m[5] !== m[11] || m[9] !== undefined && m[9] !== m[11]) return null;
+  const f = factorOf(m[3], m[11]);
+  if (!f) return null;
+  const b = B(m[4]), d = B(m[8]);
+  if (m[1] === "Add") return s.id === "regroup" ? rat((b + d) % f) : null;
+  return s.id === "borrow" && b < d ? rat(b + f) : null;
 };
 
 // ---- actrain: arrival time after a journey
