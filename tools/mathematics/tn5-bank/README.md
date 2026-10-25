@@ -68,9 +68,24 @@ tool `claim-mutation.mts` reproduce the numbers below.
 - `aabig/compare sizes`: a fixed common-sense size order of everyday objects.
 - `avfwq/evaluate`: compares a floating-point stated value with a tolerance of 1e-9.
 
-### Left for Phase 3 (60 pairs, 15,771 steps)
-All need the data in a picture or table: clock reading and elapsed time (`acelapsed`, `accal`), bar charts, pictographs,
-tallies and tables (`afbar`, `adbar`, `adbartf`, `acpict*`, `adrec`, `abcup*`, `advenn`), grids and seating plans
-(`abgrid`, `abseat`, `abroute`), symmetry, reflection and nets (`aesym`, `aemirror`, `aerefl`, `afcube`, `afnet`),
-solids and cube views (`afsolid`, `afpaint`, `afview`, `afhidden`), lattice multiplication (`avlat`), angles
-(`aeang`, `aertang`), directions (`abdir`), and `acmissing`'s code step.
+## Phase 3 (picture- and table-based steps): 59 pairs, four parallel agents
+| | Before Phase 3 | After |
+|---|---:|---:|
+| Items fully machine-checked | 48,525 (79.8%) | **60,374 (99.3%)** |
+| Partly checked / answer-verified only | 6,491 / 5,758 | 400 / 0 |
+| Unchecked (family, step) pairs | 60 | 3 |
+| Unchecked steps | 15,771 | 400 |
+
+- Every claim confirms every readable released step: 63,893 steps, 0 mismatches. No family defect found in Phase 3.
+- Corruption: 239,967 corrupted values; 0 genuine corruptions confirmed (the same 111 whitespace-only list rewrites).
+- Bank rebuilt twice: identical SHA-256 `fce8fa3abffc7fa3…`. Tests: 933 pass, 0 fail.
+- Still unchecked: the first step of each `acmissing` family (`subtract`, `add`, `divide`, 400 steps). It states which
+  operation solves the equation, as a family-internal code. Candidate for the reviewed allowlist or a convention claim.
+
+### How strong is each check? (the 60,374 are not all equally strong; the owner reviews the weaker kinds)
+Every claim is labelled in `packages/learning/src/claims/*` (`BASIS`) and counted in `results/manifest.json` (`weakerBasis`).
+- **Prompt-independent**: the facts come from the question text or its parameters. The strongest kind.
+- **Figure-consistent**: the only source of the facts is the data of the picture the family itself emitted (bar heights,
+  tallies, clock hands, seating plans). It proves the step agrees with the displayed picture, not that the picture is
+  correct. 9,311 steps in 6,846 items.
+- **Convention**: the check rests on a rule, not pure mathematics (see the Phase 2 list). 1,993 steps in 1,993 items.

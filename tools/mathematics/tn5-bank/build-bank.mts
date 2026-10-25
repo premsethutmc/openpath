@@ -17,6 +17,10 @@ import { assigned, allOutcomesOf } from "../../../packages/learning/src/curricul
 import { adaptProblem } from "../../../packages/learning/src/kernel-adapter";
 import { fingerprintOf } from "../../../packages/learning/src/review";
 import { canonicalOf } from "../../../packages/learning/src/answer-types";
+import { CLAIM_BASIS } from "../../../packages/learning/src/claims/index";
+
+/** Claims that rest on a convention rather than pure mathematics; the owner reviews these. */
+const CONVENTION = new Set(["aechk/estimate", "acstory/choose operation", "acstory4/choose operation", "acstory9/choose operation", "aabig/compare sizes", "avfwq/evaluate"]);
 
 const RELEASE = "tn-samacheer-mathematics-grade-5";
 const outDir = process.argv[2] ?? "out";
@@ -37,6 +41,7 @@ const unverifiedOps: Record<string, number> = {};
 const perFamily: Record<string, Record<Label, number>> = {};
 const depth: Record<string, Record<string, number>> = {}; // competency → difficulty band → distinct items
 const ids = new Set<string>();
+const weak = { figureConsistentItems: 0, conventionItems: 0, figureConsistentSteps: 0, conventionSteps: 0 };
 
 for (const fam of families) {
   const fp = fingerprintOf(fam);
@@ -50,6 +55,12 @@ for (const fam of families) {
     perFamily[fam][label]++;
     const unchecked = p.steps.filter((_, i) => !a.steps[i].adapted).map((s) => s.op);
     for (const op of unchecked) unverifiedOps[`${fam}/${op}`] = (unverifiedOps[`${fam}/${op}`] ?? 0) + 1;
+    const keyOf = (i: number) => `${fam}/${p.steps[i].op}`;
+    const fcSteps = p.steps.filter((_, i) => a.steps[i].adapted && CLAIM_BASIS[keyOf(i)] === "figure-consistent").length;
+    const cvSteps = p.steps.filter((_, i) => a.steps[i].adapted && CONVENTION.has(keyOf(i))).length;
+    weak.figureConsistentSteps += fcSteps; weak.conventionSteps += cvSteps;
+    if (fcSteps) weak.figureConsistentItems++;
+    if (cvSteps) weak.conventionItems++;
     const diff = difficultyOf(p);
     ((depth[p.competency] ??= {})[diff] = (depth[p.competency][diff] ?? 0) + 1);
     lines.push(JSON.stringify({
@@ -58,7 +69,7 @@ for (const fam of families) {
       answer: p.answer, answerType: p.type, canonical: canonicalOf(p.type, p.answer),
       steps: p.steps.map((s, i) => ({ id: s.id, op: s.op, competency: s.competency, inputs: s.inputs, value: s.value, checked: a.steps[i].adapted })),
       wrongAnswers: p.bugs.map((b) => ({ id: b.id, kind: b.kind, says: b.says, predicts: b.predict })),
-      label, uncheckedOps: unchecked, engine: ENGINE, fingerprint: fp,
+      label, uncheckedOps: unchecked, figureConsistentSteps: fcSteps, conventionSteps: cvSteps, engine: ENGINE, fingerprint: fp,
     }));
   }
 }
@@ -79,7 +90,7 @@ writeFileSync(join(outDir, "coverage.json"), JSON.stringify({ release: RELEASE, 
 
 const manifest = {
   release: RELEASE, engine: ENGINE, competencies: comps.length, families: families.length, problems: lines.length,
-  labels: byLabel, sha256: sha(body), bytes: Buffer.byteLength(body),
+  labels: byLabel, weakerBasis: weak, sha256: sha(body), bytes: Buffer.byteLength(body),
   uncheckedStepTypes: Object.keys(unverifiedOps).length,
   uncheckedSteps: Object.entries(unverifiedOps).sort((x, y) => y[1] - x[1] || (x[0] < y[0] ? -1 : 1)),
   depthShortfalls: Object.entries(depth).flatMap(([c, d]) => [1, 2, 3].filter((b) => (d[b] ?? 0) < 30).map((b) => ({ competency: c, band: b, items: d[b] ?? 0 }))),

@@ -138,6 +138,8 @@ for (const key of ["adbar/read", "acpict/count", "acpictmore/read", "acpicthalf/
     for (const { p, s } of sample(steps(key), 100)) {
       const f: any = p.figure;
       const labels: string[] = f.labels ?? f.rows.map((r: unknown[]) => r[0]);
+      const data: unknown[] = f.counts ?? f.values ?? f.rows.map((r: unknown[]) => r[1]);
+      if (new Set(data).size !== data.length) continue; // equal bars would make a different label legitimately give the same value
       const ask = p.prompt.slice(p.prompt.lastIndexOf(". ") + 2);
       const head = p.prompt.slice(0, p.prompt.length - ask.length);
       const ls = key === "abcup/read" ? labels.map((l) => l.toLowerCase()) : labels;
@@ -158,8 +160,11 @@ test("adbartf/compare: a statement that is false for the picture is never judged
     const vals: number[] = f.values;
     const idx = f.labels.map((l: string, i: number) => ({ i, at: stmt.search(new RegExp(`${l}(?:es|s)?\\b`, "i")) })).filter((h: { at: number }) => h.at >= 0).sort((a: any, b: any) => a.at - b.at).map((h: { i: number }) => h.i);
     let altered: number[] | null = null;
-    if (/ in all\.$/.test(stmt)) altered = vals.map((v, i) => (i === 0 ? v + 1 : v));
-    else if (/\d/.test(stmt) && idx.length === 2) altered = vals.map((v, i) => (i === idx[0] ? v + 1 : v));
+    const n = Number((stmt.match(/\d+/) ?? ["0"])[0]);
+    const was = s.value === "True";
+    // flip the truth of the statement by changing the picture
+    if (/ in all\.$/.test(stmt)) altered = vals.map((v, i) => (i === 0 ? (was ? v + 1 : v + n - vals.reduce((a, b) => a + b, 0)) : v));
+    else if (/\d/.test(stmt) && idx.length === 2) altered = vals.map((v, i) => (i === idx[0] ? (was ? v + 1 : vals[idx[1]] + n) : v));
     else if (idx.length === 2) altered = vals.map((v, i) => (i === idx[0] ? vals[idx[1]] : i === idx[1] ? vals[idx[0]] : v));
     if (!altered) continue;
     flipped++;

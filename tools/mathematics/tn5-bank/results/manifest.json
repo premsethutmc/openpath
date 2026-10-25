@@ -5,253 +5,31 @@
  "families": 192,
  "problems": 60774,
  "labels": {
-  "kernel-verified": 48525,
-  "partial": 6491,
-  "answer-verified": 5758
+  "kernel-verified": 60374,
+  "partial": 400,
+  "answer-verified": 0
  },
- "sha256": "455174e8aa2e1fb619031720414c0e517b8fa1abebb7d69782217b8602e3c685",
- "bytes": 68050627,
- "uncheckedStepTypes": 60,
+ "weakerBasis": {
+  "figureConsistentItems": 6846,
+  "conventionItems": 1993,
+  "figureConsistentSteps": 9311,
+  "conventionSteps": 1993
+ },
+ "sha256": "fce8fa3abffc7fa38b226788c31ab780dab57149e89184106b94261a31af6295",
+ "bytes": 70747885,
+ "uncheckedStepTypes": 3,
  "uncheckedSteps": [
-  [
-   "avlat/add",
-   797
-  ],
-  [
-   "acelapsed/count on",
-   652
-  ],
-  [
-   "abgrid/count",
-   600
-  ],
-  [
-   "acpictmore/read",
-   600
-  ],
-  [
-   "afbar/read",
-   600
-  ],
-  [
-   "aeirr/count",
-   567
-  ],
-  [
-   "aesym/count",
-   551
-  ],
-  [
-   "adbar/read",
-   448
-  ],
-  [
-   "abcup/read",
-   400
-  ],
-  [
-   "acelapsed/read clock",
-   400
-  ],
-  [
-   "advenn/choose cells",
-   400
-  ],
-  [
-   "aeang/compare",
-   400
-  ],
-  [
-   "aemirror/reflect",
-   400
-  ],
-  [
-   "aerefl/reflect",
-   400
-  ],
-  [
-   "afcube/fold",
-   400
-  ],
-  [
-   "agspd/read",
-   400
-  ],
-  [
-   "agspdc/compare",
-   400
-  ],
-  [
-   "avvcmp/compare",
-   360
-  ],
-  [
-   "aedigsym/count",
-   347
-  ],
-  [
-   "accal/divide",
-   336
-  ],
-  [
-   "adbartf/compare",
-   336
-  ],
-  [
-   "adbartf/read",
-   336
-  ],
-  [
-   "aertang/compare",
-   305
-  ],
-  [
-   "abcupord/compare cups",
-   300
-  ],
-  [
-   "abdisp/volume",
-   300
-  ],
-  [
-   "acpict/count",
-   300
-  ],
-  [
-   "acpicthalf/count",
-   300
-  ],
-  [
-   "acplace/place digits",
-   300
-  ],
-  [
-   "adpreg/count",
-   288
-  ],
-  [
-   "adtally/count",
-   270
-  ],
-  [
-   "aagrp/compare",
-   243
-  ],
-  [
-   "adrec/count",
-   216
-  ],
-  [
-   "adrec/read",
-   216
-  ],
   [
    "acmissing/subtract",
    213
-  ],
-  [
-   "abseat/find the row",
-   150
-  ],
-  [
-   "abseat/find the seat",
-   150
-  ],
-  [
-   "abseat/move back",
-   150
-  ],
-  [
-   "abseat/move right",
-   150
-  ],
-  [
-   "aedsym/count",
-   146
-  ],
-  [
-   "accal/count on",
-   142
-  ],
-  [
-   "afview/max",
-   120
-  ],
-  [
-   "afhidden/count",
-   112
   ],
   [
    "acmissing/add",
    106
   ],
   [
-   "abdir/use the directions",
-   104
-  ],
-  [
-   "abroute/add the squares",
-   100
-  ],
-  [
-   "abroute/use the scale",
-   100
-  ],
-  [
-   "abjug/read",
-   94
-  ],
-  [
-   "afnet/match",
-   87
-  ],
-  [
-   "afpaint/subtract",
-   84
-  ],
-  [
    "acmissing/divide",
    81
-  ],
-  [
-   "afhidden/choose",
-   76
-  ],
-  [
-   "abroute/add each route",
-   74
-  ],
-  [
-   "abroute/compare",
-   74
-  ],
-  [
-   "afview/count",
-   60
-  ],
-  [
-   "acpicttab/compare",
-   50
-  ],
-  [
-   "afsolid/count",
-   48
-  ],
-  [
-   "afsolid/rearrange",
-   48
-  ],
-  [
-   "afpaint/edges",
-   34
-  ],
-  [
-   "afpaint/faces",
-   30
-  ],
-  [
-   "afpaint/inside",
-   20
   ]
  ],
  "depthShortfalls": [
@@ -293,9 +71,9 @@
    "answer-verified": 0
   },
   "aagrp": {
-   "kernel-verified": 0,
+   "kernel-verified": 243,
    "partial": 0,
-   "answer-verified": 243
+   "answer-verified": 0
   },
   "aanext": {
    "kernel-verified": 294,
@@ -333,34 +111,34 @@
    "answer-verified": 0
   },
   "abcup": {
-   "kernel-verified": 0,
-   "partial": 184,
-   "answer-verified": 216
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
   },
   "abcupord": {
-   "kernel-verified": 0,
+   "kernel-verified": 300,
    "partial": 0,
-   "answer-verified": 300
+   "answer-verified": 0
   },
   "abdir": {
-   "kernel-verified": 0,
+   "kernel-verified": 104,
    "partial": 0,
-   "answer-verified": 104
+   "answer-verified": 0
   },
   "abdisp": {
-   "kernel-verified": 0,
-   "partial": 300,
+   "kernel-verified": 300,
+   "partial": 0,
    "answer-verified": 0
   },
   "abgrid": {
-   "kernel-verified": 0,
-   "partial": 300,
+   "kernel-verified": 300,
+   "partial": 0,
    "answer-verified": 0
   },
   "abjug": {
-   "kernel-verified": 0,
-   "partial": 47,
-   "answer-verified": 47
+   "kernel-verified": 94,
+   "partial": 0,
+   "answer-verified": 0
   },
   "abmove": {
    "kernel-verified": 300,
@@ -368,14 +146,14 @@
    "answer-verified": 0
   },
   "abroute": {
-   "kernel-verified": 0,
+   "kernel-verified": 174,
    "partial": 0,
-   "answer-verified": 174
+   "answer-verified": 0
   },
   "abseat": {
-   "kernel-verified": 0,
+   "kernel-verified": 300,
    "partial": 0,
-   "answer-verified": 300
+   "answer-verified": 0
   },
   "acbalance": {
    "kernel-verified": 400,
@@ -388,9 +166,9 @@
    "answer-verified": 0
   },
   "accal": {
-   "kernel-verified": 75,
-   "partial": 194,
-   "answer-verified": 142
+   "kernel-verified": 411,
+   "partial": 0,
+   "answer-verified": 0
   },
   "accmpx": {
    "kernel-verified": 400,
@@ -398,9 +176,9 @@
    "answer-verified": 0
   },
   "acelapsed": {
-   "kernel-verified": 0,
-   "partial": 252,
-   "answer-verified": 148
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
   },
   "acelhm": {
    "kernel-verified": 400,
@@ -443,28 +221,28 @@
    "answer-verified": 0
   },
   "acpict": {
-   "kernel-verified": 0,
-   "partial": 300,
+   "kernel-verified": 300,
+   "partial": 0,
    "answer-verified": 0
   },
   "acpicthalf": {
-   "kernel-verified": 0,
-   "partial": 300,
+   "kernel-verified": 300,
+   "partial": 0,
    "answer-verified": 0
   },
   "acpictmore": {
-   "kernel-verified": 0,
-   "partial": 300,
+   "kernel-verified": 300,
+   "partial": 0,
    "answer-verified": 0
   },
   "acpicttab": {
-   "kernel-verified": 250,
-   "partial": 50,
+   "kernel-verified": 300,
+   "partial": 0,
    "answer-verified": 0
   },
   "acplace": {
-   "kernel-verified": 0,
-   "partial": 300,
+   "kernel-verified": 300,
+   "partial": 0,
    "answer-verified": 0
   },
   "acsticks": {
@@ -508,14 +286,14 @@
    "answer-verified": 0
   },
   "adbar": {
-   "kernel-verified": 0,
-   "partial": 336,
-   "answer-verified": 112
+   "kernel-verified": 448,
+   "partial": 0,
+   "answer-verified": 0
   },
   "adbartf": {
-   "kernel-verified": 0,
+   "kernel-verified": 336,
    "partial": 0,
-   "answer-verified": 336
+   "answer-verified": 0
   },
   "adcol3": {
    "kernel-verified": 500,
@@ -598,19 +376,19 @@
    "answer-verified": 0
   },
   "adpreg": {
-   "kernel-verified": 0,
-   "partial": 288,
+   "kernel-verified": 288,
+   "partial": 0,
    "answer-verified": 0
   },
   "adrec": {
-   "kernel-verified": 0,
+   "kernel-verified": 216,
    "partial": 0,
-   "answer-verified": 216
+   "answer-verified": 0
   },
   "adtally": {
-   "kernel-verified": 0,
-   "partial": 180,
-   "answer-verified": 90
+   "kernel-verified": 270,
+   "partial": 0,
+   "answer-verified": 0
   },
   "adtwo": {
    "kernel-verified": 400,
@@ -618,8 +396,8 @@
    "answer-verified": 0
   },
   "advenn": {
-   "kernel-verified": 0,
-   "partial": 400,
+   "kernel-verified": 400,
+   "partial": 0,
    "answer-verified": 0
   },
   "adwtcap": {
@@ -643,9 +421,9 @@
    "answer-verified": 0
   },
   "aeang": {
-   "kernel-verified": 0,
+   "kernel-verified": 400,
    "partial": 0,
-   "answer-verified": 400
+   "answer-verified": 0
   },
   "aeangk": {
    "kernel-verified": 142,
@@ -723,9 +501,9 @@
    "answer-verified": 0
   },
   "aedigsym": {
-   "kernel-verified": 0,
+   "kernel-verified": 347,
    "partial": 0,
-   "answer-verified": 347
+   "answer-verified": 0
   },
   "aedivm": {
    "kernel-verified": 400,
@@ -748,9 +526,9 @@
    "answer-verified": 0
   },
   "aedsym": {
-   "kernel-verified": 0,
+   "kernel-verified": 146,
    "partial": 0,
-   "answer-verified": 146
+   "answer-verified": 0
   },
   "aeel24": {
    "kernel-verified": 400,
@@ -783,9 +561,9 @@
    "answer-verified": 0
   },
   "aeirr": {
-   "kernel-verified": 0,
-   "partial": 197,
-   "answer-verified": 173
+   "kernel-verified": 370,
+   "partial": 0,
+   "answer-verified": 0
   },
   "aematch": {
    "kernel-verified": 200,
@@ -793,9 +571,9 @@
    "answer-verified": 0
   },
   "aemirror": {
-   "kernel-verified": 0,
+   "kernel-verified": 400,
    "partial": 0,
-   "answer-verified": 400
+   "answer-verified": 0
   },
   "aemix": {
    "kernel-verified": 450,
@@ -833,8 +611,8 @@
    "answer-verified": 0
   },
   "aerefl": {
-   "kernel-verified": 0,
-   "partial": 400,
+   "kernel-verified": 400,
+   "partial": 0,
    "answer-verified": 0
   },
   "aerev": {
@@ -853,9 +631,9 @@
    "answer-verified": 0
   },
   "aertang": {
-   "kernel-verified": 0,
+   "kernel-verified": 305,
    "partial": 0,
-   "answer-verified": 305
+   "answer-verified": 0
   },
   "aeshop": {
    "kernel-verified": 400,
@@ -863,9 +641,9 @@
    "answer-verified": 0
   },
   "aesym": {
-   "kernel-verified": 0,
+   "kernel-verified": 551,
    "partial": 0,
-   "answer-verified": 551
+   "answer-verified": 0
   },
   "aet12": {
    "kernel-verified": 156,
@@ -903,9 +681,9 @@
    "answer-verified": 0
   },
   "afbar": {
-   "kernel-verified": 0,
-   "partial": 240,
-   "answer-verified": 120
+   "kernel-verified": 360,
+   "partial": 0,
+   "answer-verified": 0
   },
   "afcount": {
    "kernel-verified": 100,
@@ -918,9 +696,9 @@
    "answer-verified": 0
   },
   "afcube": {
-   "kernel-verified": 0,
+   "kernel-verified": 400,
    "partial": 0,
-   "answer-verified": 400
+   "answer-verified": 0
   },
   "afdigits": {
    "kernel-verified": 90,
@@ -948,8 +726,8 @@
    "answer-verified": 0
   },
   "afhidden": {
-   "kernel-verified": 0,
-   "partial": 84,
+   "kernel-verified": 84,
+   "partial": 0,
    "answer-verified": 0
   },
   "afletter": {
@@ -963,14 +741,14 @@
    "answer-verified": 0
   },
   "afnet": {
-   "kernel-verified": 0,
+   "kernel-verified": 87,
    "partial": 0,
-   "answer-verified": 87
+   "answer-verified": 0
   },
   "afpaint": {
-   "kernel-verified": 0,
+   "kernel-verified": 84,
    "partial": 0,
-   "answer-verified": 84
+   "answer-verified": 0
   },
   "afpair": {
    "kernel-verified": 220,
@@ -978,14 +756,14 @@
    "answer-verified": 0
   },
   "afsolid": {
-   "kernel-verified": 0,
+   "kernel-verified": 96,
    "partial": 0,
-   "answer-verified": 96
+   "answer-verified": 0
   },
   "afview": {
-   "kernel-verified": 0,
-   "partial": 120,
-   "answer-verified": 60
+   "kernel-verified": 180,
+   "partial": 0,
+   "answer-verified": 0
   },
   "agclass": {
    "kernel-verified": 191,
@@ -1078,13 +856,13 @@
    "answer-verified": 0
   },
   "agspd": {
-   "kernel-verified": 0,
-   "partial": 400,
+   "kernel-verified": 400,
+   "partial": 0,
    "answer-verified": 0
   },
   "agspdc": {
-   "kernel-verified": 0,
-   "partial": 400,
+   "kernel-verified": 400,
+   "partial": 0,
    "answer-verified": 0
   },
   "aisolid": {
@@ -1148,9 +926,9 @@
    "answer-verified": 0
   },
   "avlat": {
-   "kernel-verified": 0,
-   "partial": 159,
-   "answer-verified": 161
+   "kernel-verified": 320,
+   "partial": 0,
+   "answer-verified": 0
   },
   "avlike": {
    "kernel-verified": 300,
@@ -1188,8 +966,8 @@
    "answer-verified": 0
   },
   "avvcmp": {
-   "kernel-verified": 0,
-   "partial": 360,
+   "kernel-verified": 360,
+   "partial": 0,
    "answer-verified": 0
   },
   "divr": {
