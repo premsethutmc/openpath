@@ -36,7 +36,7 @@ function readName(name: string, indian: boolean): bigint | null {
   let hundreds = 0, tens = 0, ones = 0, seen = false, hundredWord = false;
   const group = () => hundreds * 100 + tens + ones;
   for (const w of words) {
-    if (w in ONES) { if (ones || tens + 0 && ONES[w] > 9 || (!tens && ones)) return null; ones = ONES[w]; seen = true; }
+    if (w in ONES) { if (ones || (tens && ONES[w] > 9)) return null; ones = ONES[w]; seen = true; }
     else if (w in TENS) { if (tens || ones) return null; tens = TENS[w]; seen = true; }
     else if (w === "hundred") { if (hundredWord || hundreds || tens || !ones || ones > 9) return null; hundreds = ones; ones = 0; hundredWord = true; }
     else if (w in SCALE) {
@@ -118,7 +118,7 @@ const aedpv: Check = (s, p) => {
 };
 
 // ---------------------------------------------------------------- aerdec/compare, aernd/compare
-/** The digit of a positive rational at 10^-k's place... i.e. floor(n * 10^k) mod 10. */
+/** floor(n * 10^k) mod 10: the k-th digit after the point of a non-negative rational. */
 const digitAt = (n: Rational, k: number): Rational => rat((((n.numBig * 10n ** BigInt(k)) / n.denBig) % 10n));
 // aerdec: inputs [decimal, place] with place 0/1/2 = round to whole/tenth/hundredth; the deciding digit is the next one
 // after that place: the 1st/2nd/3rd digit after the point.
