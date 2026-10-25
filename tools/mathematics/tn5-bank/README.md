@@ -105,3 +105,10 @@ equation, plus the family's own 0..3 form code.
 - Re-census of all 341,483 problems: worse 0, better 41,630 (`results/recensus.json`).
 - Strength (per item, in the bank): 6,846 items include a figure-consistent step (9,311 steps) and 2,393 include a
   convention step (2,793 steps). The owner accepted these on 25 Oct 2026 and will fix them from real usage.
+
+## Depth (acceptance test 8)
+Four shortfalls closed by adding variants to `adfcol`, `affrac`, `agspd` and `aisolid` (569 new items); no existing item
+changed (only the family fingerprint of those four families, because their specification changed). Every competency now
+has at least 30 items in each of the three difficulty bands. Bank: 61,343 items, all kernel-verified, 0 unchecked steps,
+rebuilt twice with identical SHA-256 `e24392f643ee4982…`. Re-census of 342,052 problems: worse 0, new items not
+kernel-verified 0.

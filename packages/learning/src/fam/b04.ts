@@ -712,7 +712,7 @@ export const B04: Def[] = [
     explain: (s) => (s.id === "share" ? `Share ${s.inputs[0]} into ${s.inputs[1]} equal groups: ${s.value} in each group` : `Take ${s.inputs[0]} of the groups: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
     figure: ([, b, m]) => ({ type: "dots", count: b * m, rows: b }),
     domain: [[1, 9], [2, 10], [1, 10]],
-    cap: 300,
+    cap: 1000,
     difficulty: ([a, b, m]) => (a === 1 && b <= 4 && m <= 6 ? 1 : a === 1 || b * m <= 24 ? 2 : 3),
     word: ([a, b, m]) => `${nm(a + m)} has ${b * m} laddoos and gives ${fr(a, b)} of them to ${nm(a + m + 3)}. How many laddoos does ${nm(a + m + 3)} get?`,
     teach: {

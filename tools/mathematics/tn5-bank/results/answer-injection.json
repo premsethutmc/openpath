@@ -1,0 +1,1291 @@
+{
+ "seed": 20261025,
+ "perFamilyMin": 2,
+ "summary": {
+  "items": 500,
+  "noCandidate": 0,
+  "controlAccepted": 500,
+  "injectedAcceptedByApp": 0,
+  "appRejected": 500,
+  "sameAnswerChecked": 73,
+  "sameAnswerRejected": 73,
+  "unreadableInjected": 0,
+  "chainOriginal": {
+   "last": 414,
+   "any": 4,
+   "covered": 19,
+   "component": 14,
+   "undecided": 49
+  },
+  "chainRejected": 418,
+  "chainAccepted": 0,
+  "chainCannotDecide": 82,
+  "chainLastStepRejected": 414,
+  "chainLastStepDecidable": 414,
+  "dodgedIntermediate": 21
+ },
+ "chainCannotDecideByFamily": {
+  "abmove": 2,
+  "abseat": 2,
+  "acelhm": 1,
+  "acmoneyadd": 4,
+  "acp2r": 3,
+  "acsub2": 2,
+  "acsub3": 4,
+  "acsubn": 2,
+  "adcol3": 2,
+  "adcolx": 4,
+  "addr": 5,
+  "aeadd3": 2,
+  "aeconvu": 3,
+  "aedivm": 2,
+  "aeel24": 3,
+  "aeftin": 1,
+  "aeind": 2,
+  "aemix": 2,
+  "aemulm": 4,
+  "aet12": 2,
+  "aet24": 2,
+  "aetrans": 3,
+  "agcop": 1,
+  "agfac": 2,
+  "agimp": 2,
+  "agmix": 2,
+  "agptest": 1,
+  "agrupee": 3,
+  "anpair": 2,
+  "avdfact": 3,
+  "fadd": 5,
+  "fmulw": 3,
+  "afcube": 1
+ },
+ "failures": [],
+ "examples": [
+  {
+   "family": "aabig",
+   "type": "choice",
+   "answer": "A",
+   "wrong": "B"
+  },
+  {
+   "family": "aabig",
+   "type": "choice",
+   "answer": "A",
+   "wrong": "B"
+  },
+  {
+   "family": "aacmp",
+   "type": "integer",
+   "answer": "85",
+   "wrong": "95"
+  },
+  {
+   "family": "aacmp",
+   "type": "integer",
+   "answer": "11",
+   "wrong": "12"
+  },
+  {
+   "family": "aadigmax",
+   "type": "integer",
+   "answer": "654321",
+   "wrong": "654320"
+  },
+  {
+   "family": "aadigmax",
+   "type": "integer",
+   "answer": "709",
+   "wrong": "710"
+  },
+  {
+   "family": "aagrp",
+   "type": "choice",
+   "answer": "B",
+   "wrong": "C"
+  },
+  {
+   "family": "aagrp",
+   "type": "choice",
+   "answer": "A",
+   "wrong": "C"
+  },
+  {
+   "family": "aanext",
+   "type": "integer",
+   "answer": "96",
+   "wrong": "95"
+  },
+  {
+   "family": "aanext",
+   "type": "integer",
+   "answer": "50",
+   "wrong": "05"
+  },
+  {
+   "family": "aaordn",
+   "type": "tuple",
+   "answer": "27, 19, 14",
+   "wrong": "27, 91, 14"
+  },
+  {
+   "family": "aaordn",
+   "type": "tuple",
+   "answer": "97, 52, 38",
+   "wrong": "96, 52, 38"
+  }
+ ],
+ "perFamily": {
+  "aabig": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aacmp": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aadigmax": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aagrp": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aanext": {
+   "n": 5,
+   "appRejected": 5,
+   "chainRejected": 5,
+   "chainCannotDecide": 0
+  },
+  "aaordn": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aaordx": {
+   "n": 5,
+   "appRejected": 5,
+   "chainRejected": 5,
+   "chainCannotDecide": 0
+  },
+  "aapatn": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aapatu": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aasign": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "aaweave": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "abcup": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "abcupord": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "abdir": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "abdisp": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "abgrid": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "abjug": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "abmove": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "abroute": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "abseat": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "acbalance": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "acbill": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "accal": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "accmpx": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acelapsed": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "acelhm": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 1,
+   "chainCannotDecide": 1
+  },
+  "acfacts": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acgrow": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acmissing": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acmoneyadd": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 0,
+   "chainCannotDecide": 4
+  },
+  "acmoneymul": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "acp2r": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 0,
+   "chainCannotDecide": 3
+  },
+  "acpaise": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acpict": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acpicthalf": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acpictmore": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "acpicttab": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "acplace": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "acsticks": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acstory": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "acstory4": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "acstory9": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "acsub2": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "acsub3": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 0,
+   "chainCannotDecide": 4
+  },
+  "acsubn": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 1,
+   "chainCannotDecide": 2
+  },
+  "actrain": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "adbar": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "adbartf": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "adcol3": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "adcolx": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 0,
+   "chainCannotDecide": 4
+  },
+  "addr": {
+   "n": 5,
+   "appRejected": 5,
+   "chainRejected": 0,
+   "chainCannotDecide": 5
+  },
+  "adest": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "adestchk": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adestcost": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adfcmp": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "adfcmpu": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "adfcol": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adfmeas": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adfnl": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adford": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adfordu": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "admental": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "admper": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "adperim": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adpreg": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adrec": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "adtally": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "adtwo": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "advenn": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "adwtcap": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeadd3": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "aeaddn": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeampm": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeang": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "aeangk": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aearea": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aearms": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aebig": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aecf": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aechk": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aecmp": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aecol4": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aecons": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeconv": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aeconvd": {
+   "n": 5,
+   "appRejected": 5,
+   "chainRejected": 5,
+   "chainCannotDecide": 0
+  },
+  "aeconvu": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 0,
+   "chainCannotDecide": 3
+  },
+  "aedec": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aedecc": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aedfr": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aedigsym": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aedivm": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "aedord": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aedpv": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aedrip": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aedsym": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeel24": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 0,
+   "chainCannotDecide": 3
+  },
+  "aeest": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeestp": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "aeftin": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 1,
+   "chainCannotDecide": 1
+  },
+  "aehund": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeind": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "aeirr": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aematch": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aemirror": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aemix": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "aemulm": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 0,
+   "chainCannotDecide": 4
+  },
+  "aenumf": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeparts": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aepat": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aeperar": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aerdec": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aerefl": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aerev": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aernd": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aeround": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aertang": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aeshop": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "aesym": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aet12": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "aet24": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "aetab": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "aetrans": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 0,
+   "chainCannotDecide": 3
+  },
+  "aetrip": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aeturn": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aewcmp": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "afbar": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afcount": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afcross": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afcube": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 3,
+   "chainCannotDecide": 1
+  },
+  "afdigits": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "affig": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "affigrel": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "affrac": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "affrule": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afhidden": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afletter": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afmatch": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afnet": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afpaint": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afpair": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "afsolid": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "afview": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "agclass": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "agcomf": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "agcop": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 1,
+   "chainCannotDecide": 1
+  },
+  "agdec": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "agfac": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "aghcf3": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aghlp": {
+   "n": 5,
+   "appRejected": 5,
+   "chainRejected": 5,
+   "chainCannotDecide": 0
+  },
+  "aghlw": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "agimp": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "agjump": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "aglcm": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "aglcm3": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "agmeas": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "agmix": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "agnl": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "agprime": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "agptest": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 1,
+   "chainCannotDecide": 1
+  },
+  "agrupee": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 0,
+   "chainCannotDecide": 3
+  },
+  "agspd": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "agspdc": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "aisolid": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "ajbest": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "ajfare": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "ajrate": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "ajwork": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "anpair": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 0,
+   "chainCannotDecide": 2
+  },
+  "anquad": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avdfact": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 0,
+   "chainCannotDecide": 3
+  },
+  "avdiv": {
+   "n": 5,
+   "appRejected": 5,
+   "chainRejected": 5,
+   "chainCannotDecide": 0
+  },
+  "avfence": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avfold": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avfwq": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avlat": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avlike": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "avlow": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avmdiv": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "avpest": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avpp": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "avrsub": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avstrat": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "avvcmp": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "divr": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "eqfrac": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "fadd": {
+   "n": 5,
+   "appRejected": 5,
+   "chainRejected": 0,
+   "chainCannotDecide": 5
+  },
+  "fmulw": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 0,
+   "chainCannotDecide": 3
+  },
+  "ldiv": {
+   "n": 3,
+   "appRejected": 3,
+   "chainRejected": 3,
+   "chainCannotDecide": 0
+  },
+  "mmul": {
+   "n": 4,
+   "appRejected": 4,
+   "chainRejected": 4,
+   "chainCannotDecide": 0
+  },
+  "rect": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "rperim": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  },
+  "vol": {
+   "n": 2,
+   "appRejected": 2,
+   "chainRejected": 2,
+   "chainCannotDecide": 0
+  }
+ }
+}

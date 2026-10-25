@@ -1317,7 +1317,7 @@ export const B06: Def[] = [
     mc: true,
     // [a, k, n, ctx]: a pieces at stage 0, each replaced by k smaller pieces at every stage; stage n; ctx 0 shapes, 1 a branching tree
     parse: none,
-    reject: ([a, k, n, ctx]) => (a < 1 || a > 4 || k < 2 || k > 8 || (k > 5 && !(k === 8 && a === 1)) || n < 2 || n > 6 || (ctx !== 0 && ctx !== 1) || a * k ** n > 1000 ? "a × kⁿ pieces, at most 1000." : null),
+    reject: ([a, k, n, ctx]) => (a < 1 || a > 4 || k < 2 || k > 8 || n < 2 || n > 6 || (ctx !== 0 && ctx !== 1) || a * k ** n > 1000 ? "a × kⁿ pieces, at most 1000." : null),
     prompt: ([a, k, n, ctx]) => fracText(a, k, n, ctx),
     solve: ([a, k, n]) => {
       const steps: Step[] = [];
@@ -1346,7 +1346,7 @@ export const B06: Def[] = [
     variants: () => [],
     explain: (s) => `${s.id.replace("stage", "Stage ")}: ${s.inputs[0]} pieces, each replaced by ${s.inputs[1]}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`,
     domain: [[1, 4], [2, 8], [2, 6], [0, 1]],
-    keep: ([a, k, n]) => (k <= 5 || (k === 8 && a === 1)) && a * k ** n <= 1000,
+    keep: ([a, k, n]) => a * k ** n <= 1000,
     difficulty: ([a, k, n]) => (a * k ** n <= 50 ? 1 : a * k ** n <= 300 ? 2 : 3),
     figure: ([a, k, , ctx]) => ({ type: "table", head: ["Stage", "0", "1"], rows: [[ctx === 1 ? "Tips" : "Pieces", String(a), String(a * k)]] }),
     word: ([a, k, n]) => `${name(a + k)} has ${a} sheet${a > 1 ? "s" : ""} of paper. In each round, ${name(a + k)} cuts every piece into ${k} smaller pieces. How many pieces are there after ${n} rounds?`,

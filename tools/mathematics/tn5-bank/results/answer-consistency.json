@@ -1,0 +1,2166 @@
+{
+ "summary": {
+  "note": "last = last step states the whole answer; any = an earlier step does; covered = every part of a multi-part answer is stated by some step (order-blind: weak, not counted as decided); component = a step states only one part (too weak to decide); undecided = the chain does not state the answer in a comparable form (not an error).",
+  "items": 61343,
+  "last": 49896,
+  "any": 453,
+  "covered": 3165,
+  "component": 1434,
+  "undecided": 6395,
+  "families": 192,
+  "familiesAllLast": 158,
+  "decided": 50349,
+  "familiesAllDecided": 159,
+  "familiesNoneDecided": [
+   "abmove",
+   "abseat",
+   "addr",
+   "aeadd3",
+   "aeconvu",
+   "aedivm",
+   "aeel24",
+   "aemix",
+   "aemulm",
+   "aet12",
+   "aet24",
+   "aetrans",
+   "agfac",
+   "agimp",
+   "agmix",
+   "anpair",
+   "fadd"
+  ],
+  "familiesPartlyUndecided": [
+   "acelhm",
+   "acmoneyadd",
+   "acp2r",
+   "acsub2",
+   "acsub3",
+   "acsubn",
+   "adcol3",
+   "adcolx",
+   "aeftin",
+   "aeind",
+   "afcube",
+   "agcop",
+   "agptest",
+   "agrupee",
+   "avdfact",
+   "fmulw"
+  ]
+ },
+ "perFamily": {
+  "aabig": {
+   "items": 90,
+   "last": 90,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aacmp": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aadigmax": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aagrp": {
+   "items": 243,
+   "last": 243,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aanext": {
+   "items": 294,
+   "last": 294,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aaordn": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aaordx": {
+   "items": 394,
+   "last": 394,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aapatn": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aapatu": {
+   "items": 228,
+   "last": 228,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aasign": {
+   "items": 189,
+   "last": 189,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aaweave": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "abcup": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "abcupord": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "abdir": {
+   "items": 104,
+   "last": 104,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "abdisp": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "abgrid": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "abjug": {
+   "items": 94,
+   "last": 94,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "abmove": {
+   "items": 300,
+   "last": 0,
+   "any": 0,
+   "covered": 300,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "abroute": {
+   "items": 174,
+   "last": 174,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "abseat": {
+   "items": 300,
+   "last": 0,
+   "any": 0,
+   "covered": 300,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "acbalance": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acbill": {
+   "items": 240,
+   "last": 240,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "accal": {
+   "items": 411,
+   "last": 411,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "accmpx": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "acelapsed": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acelhm": {
+   "items": 400,
+   "last": 198,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 202,
+   "types": [
+    "tuple"
+   ]
+  },
+  "acfacts": {
+   "items": 280,
+   "last": 280,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "acgrow": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acmissing": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acmoneyadd": {
+   "items": 400,
+   "last": 21,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 379,
+   "types": [
+    "fraction"
+   ]
+  },
+  "acmoneymul": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "acp2r": {
+   "items": 300,
+   "last": 0,
+   "any": 18,
+   "covered": 0,
+   "component": 0,
+   "undecided": 282,
+   "types": [
+    "fraction"
+   ]
+  },
+  "acpaise": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acpict": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acpicthalf": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acpictmore": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acpicttab": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acplace": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acsticks": {
+   "items": 84,
+   "last": 84,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acstory": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acstory4": {
+   "items": 320,
+   "last": 320,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acstory9": {
+   "items": 288,
+   "last": 288,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "acsub2": {
+   "items": 400,
+   "last": 0,
+   "any": 103,
+   "covered": 0,
+   "component": 0,
+   "undecided": 297,
+   "types": [
+    "integer"
+   ]
+  },
+  "acsub3": {
+   "items": 400,
+   "last": 0,
+   "any": 4,
+   "covered": 0,
+   "component": 0,
+   "undecided": 396,
+   "types": [
+    "integer"
+   ]
+  },
+  "acsubn": {
+   "items": 300,
+   "last": 0,
+   "any": 34,
+   "covered": 0,
+   "component": 0,
+   "undecided": 266,
+   "types": [
+    "integer"
+   ]
+  },
+  "actrain": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "adbar": {
+   "items": 448,
+   "last": 448,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adbartf": {
+   "items": 336,
+   "last": 336,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "adcol3": {
+   "items": 500,
+   "last": 0,
+   "any": 1,
+   "covered": 0,
+   "component": 0,
+   "undecided": 499,
+   "types": [
+    "integer"
+   ]
+  },
+  "adcolx": {
+   "items": 500,
+   "last": 0,
+   "any": 9,
+   "covered": 0,
+   "component": 0,
+   "undecided": 491,
+   "types": [
+    "integer"
+   ]
+  },
+  "addr": {
+   "items": 400,
+   "last": 0,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 400,
+   "types": [
+    "integer"
+   ]
+  },
+  "adest": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adestchk": {
+   "items": 249,
+   "last": 249,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "adestcost": {
+   "items": 120,
+   "last": 120,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adfcmp": {
+   "items": 500,
+   "last": 500,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "adfcmpu": {
+   "items": 287,
+   "last": 287,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "adfcol": {
+   "items": 349,
+   "last": 349,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adfmeas": {
+   "items": 122,
+   "last": 122,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adfnl": {
+   "items": 126,
+   "last": 126,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "adford": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "adfordu": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "admental": {
+   "items": 384,
+   "last": 384,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "admper": {
+   "items": 178,
+   "last": 178,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adperim": {
+   "items": 178,
+   "last": 178,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adpreg": {
+   "items": 288,
+   "last": 288,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adrec": {
+   "items": 216,
+   "last": 216,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adtally": {
+   "items": 270,
+   "last": 270,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adtwo": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "advenn": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "adwtcap": {
+   "items": 159,
+   "last": 159,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeadd3": {
+   "items": 400,
+   "last": 0,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 400,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeaddn": {
+   "items": 450,
+   "last": 450,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeampm": {
+   "items": 288,
+   "last": 288,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aeang": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeangk": {
+   "items": 142,
+   "last": 142,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aearea": {
+   "items": 99,
+   "last": 99,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aearms": {
+   "items": 145,
+   "last": 145,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aebig": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aecf": {
+   "items": 230,
+   "last": 230,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "aechk": {
+   "items": 693,
+   "last": 693,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aecmp": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aecol4": {
+   "items": 450,
+   "last": 450,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aecons": {
+   "items": 240,
+   "last": 240,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeconv": {
+   "items": 450,
+   "last": 450,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeconvd": {
+   "items": 450,
+   "last": 450,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "aeconvu": {
+   "items": 450,
+   "last": 0,
+   "any": 0,
+   "covered": 450,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aedec": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "exact"
+   ]
+  },
+  "aedecc": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "exact"
+   ]
+  },
+  "aedfr": {
+   "items": 119,
+   "last": 119,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aedigsym": {
+   "items": 347,
+   "last": 347,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aedivm": {
+   "items": 400,
+   "last": 0,
+   "any": 0,
+   "covered": 400,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aedord": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aedpv": {
+   "items": 404,
+   "last": 404,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aedrip": {
+   "items": 120,
+   "last": 120,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aedsym": {
+   "items": 146,
+   "last": 146,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeel24": {
+   "items": 400,
+   "last": 0,
+   "any": 0,
+   "covered": 400,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aeest": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeestp": {
+   "items": 450,
+   "last": 450,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeftin": {
+   "items": 138,
+   "last": 50,
+   "any": 11,
+   "covered": 0,
+   "component": 0,
+   "undecided": 77,
+   "types": [
+    "fraction"
+   ]
+  },
+  "aehund": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeind": {
+   "items": 400,
+   "last": 0,
+   "any": 2,
+   "covered": 0,
+   "component": 0,
+   "undecided": 398,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeirr": {
+   "items": 370,
+   "last": 370,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "aematch": {
+   "items": 200,
+   "last": 200,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aemirror": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aemix": {
+   "items": 450,
+   "last": 0,
+   "any": 0,
+   "covered": 450,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aemulm": {
+   "items": 400,
+   "last": 0,
+   "any": 0,
+   "covered": 0,
+   "component": 400,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aenumf": {
+   "items": 600,
+   "last": 600,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aeparts": {
+   "items": 90,
+   "last": 90,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aepat": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeperar": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aerdec": {
+   "items": 594,
+   "last": 594,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "aerefl": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aerev": {
+   "items": 126,
+   "last": 126,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aernd": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeround": {
+   "items": 450,
+   "last": 450,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aertang": {
+   "items": 305,
+   "last": 305,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "aeshop": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aesym": {
+   "items": 551,
+   "last": 551,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aet12": {
+   "items": 156,
+   "last": 0,
+   "any": 0,
+   "covered": 2,
+   "component": 154,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aet24": {
+   "items": 288,
+   "last": 0,
+   "any": 0,
+   "covered": 5,
+   "component": 283,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aetab": {
+   "items": 600,
+   "last": 600,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aetrans": {
+   "items": 400,
+   "last": 0,
+   "any": 0,
+   "covered": 400,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "aetrip": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aeturn": {
+   "items": 132,
+   "last": 132,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aewcmp": {
+   "items": 281,
+   "last": 281,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "afbar": {
+   "items": 360,
+   "last": 360,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "afcount": {
+   "items": 100,
+   "last": 100,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "afcross": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "afcube": {
+   "items": 400,
+   "last": 284,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 116,
+   "types": [
+    "choice"
+   ]
+  },
+  "afdigits": {
+   "items": 90,
+   "last": 90,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "affig": {
+   "items": 98,
+   "last": 98,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "affigrel": {
+   "items": 94,
+   "last": 94,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "affrac": {
+   "items": 152,
+   "last": 152,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "affrule": {
+   "items": 189,
+   "last": 189,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "afhidden": {
+   "items": 84,
+   "last": 84,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "afletter": {
+   "items": 132,
+   "last": 132,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "exact"
+   ]
+  },
+  "afmatch": {
+   "items": 90,
+   "last": 90,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "exact"
+   ]
+  },
+  "afnet": {
+   "items": 87,
+   "last": 87,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "afpaint": {
+   "items": 84,
+   "last": 84,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "afpair": {
+   "items": 220,
+   "last": 220,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "afsolid": {
+   "items": 96,
+   "last": 96,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "afview": {
+   "items": 180,
+   "last": 180,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "agclass": {
+   "items": 191,
+   "last": 191,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "agcomf": {
+   "items": 163,
+   "last": 163,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "set"
+   ]
+  },
+  "agcop": {
+   "items": 160,
+   "last": 12,
+   "any": 86,
+   "covered": 0,
+   "component": 0,
+   "undecided": 62,
+   "types": [
+    "choice"
+   ]
+  },
+  "agdec": {
+   "items": 500,
+   "last": 500,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "agfac": {
+   "items": 97,
+   "last": 0,
+   "any": 0,
+   "covered": 0,
+   "component": 97,
+   "undecided": 0,
+   "types": [
+    "set"
+   ]
+  },
+  "aghcf3": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aghlp": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aghlw": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "agimp": {
+   "items": 279,
+   "last": 0,
+   "any": 0,
+   "covered": 31,
+   "component": 248,
+   "undecided": 0,
+   "types": [
+    "mixed"
+   ]
+  },
+  "agjump": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "set"
+   ]
+  },
+  "aglcm": {
+   "items": 253,
+   "last": 253,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aglcm3": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "agmeas": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "agmix": {
+   "items": 279,
+   "last": 0,
+   "any": 0,
+   "covered": 27,
+   "component": 252,
+   "undecided": 0,
+   "types": [
+    "mixed"
+   ]
+  },
+  "agnl": {
+   "items": 103,
+   "last": 103,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "mixed"
+   ]
+  },
+  "agprime": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "set"
+   ]
+  },
+  "agptest": {
+   "items": 393,
+   "last": 153,
+   "any": 10,
+   "covered": 0,
+   "component": 0,
+   "undecided": 230,
+   "types": [
+    "integer"
+   ]
+  },
+  "agrupee": {
+   "items": 500,
+   "last": 35,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 465,
+   "types": [
+    "fraction"
+   ]
+  },
+  "agspd": {
+   "items": 790,
+   "last": 790,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "agspdc": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "aisolid": {
+   "items": 192,
+   "last": 192,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "ajbest": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "ajfare": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "ajrate": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "ajwork": {
+   "items": 253,
+   "last": 253,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "anpair": {
+   "items": 400,
+   "last": 0,
+   "any": 0,
+   "covered": 400,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "tuple"
+   ]
+  },
+  "anquad": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avdfact": {
+   "items": 90,
+   "last": 4,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 86,
+   "types": [
+    "choice"
+   ]
+  },
+  "avdiv": {
+   "items": 500,
+   "last": 325,
+   "any": 175,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avfence": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avfold": {
+   "items": 112,
+   "last": 112,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "avfwq": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "fraction"
+   ]
+  },
+  "avlat": {
+   "items": 320,
+   "last": 320,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avlike": {
+   "items": 300,
+   "last": 300,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "avlow": {
+   "items": 360,
+   "last": 360,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "mixed"
+   ]
+  },
+  "avmdiv": {
+   "items": 360,
+   "last": 360,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avpest": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avpp": {
+   "items": 420,
+   "last": 420,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avrsub": {
+   "items": 400,
+   "last": 400,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avstrat": {
+   "items": 320,
+   "last": 320,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "avvcmp": {
+   "items": 360,
+   "last": 360,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "choice"
+   ]
+  },
+  "divr": {
+   "items": 536,
+   "last": 536,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "eqfrac": {
+   "items": 405,
+   "last": 405,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "fadd": {
+   "items": 825,
+   "last": 0,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 825,
+   "types": [
+    "fraction"
+   ]
+  },
+  "fmulw": {
+   "items": 528,
+   "last": 4,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 524,
+   "types": [
+    "fraction"
+   ]
+  },
+  "ldiv": {
+   "items": 704,
+   "last": 704,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "mmul": {
+   "items": 640,
+   "last": 640,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "rect": {
+   "items": 121,
+   "last": 121,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "rperim": {
+   "items": 190,
+   "last": 190,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  },
+  "vol": {
+   "items": 196,
+   "last": 196,
+   "any": 0,
+   "covered": 0,
+   "component": 0,
+   "undecided": 0,
+   "types": [
+    "integer"
+   ]
+  }
+ }
+}

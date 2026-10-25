@@ -358,8 +358,12 @@ export const B09: Def[] = [
     mc: true,
     // [kind, n, what, net]: prism (0) or pyramid (1) on an n-gon; what 0 faces, 1 edges, 2 vertices; net 0 named, 1 described by its net
     parse: none,
-    reject: ([k, n, w, t]) => (k < 0 || k > 1 || n < 3 || n > 10 || w < 0 || w > 2 || t < 0 || t > 1 ? "Prisms and pyramids on polygons with 3 to 10 sides." : null),
-    prompt: ([k, n, w, t]) => (t ? `A net is made of ${netText(k, n)}. When it is folded up into a solid, how many ${WHAT[w]} does the solid have?` : `How many ${WHAT[w]} does ${an(solidName(k, n))} have?`),
+    reject: ([k, n, w, t]) => (k < 0 || k > 1 || n < 3 || n > 10 || w < 0 || w > 2 || t < 0 || t > 3 ? "Prisms and pyramids on polygons with 3 to 10 sides." : null),
+    prompt: ([k, n, w, t]) =>
+      t === 1 ? `A net is made of ${netText(k, n)}. When it is folded up into a solid, how many ${WHAT[w]} does the solid have?`
+      : t === 2 ? `A solid has ${endsText(k, n)}. How many ${WHAT[w]} does the solid have?`
+      : t === 3 ? `${name(n + w + 3)} makes a clay model of ${an(solidName(k, n))}. How many ${WHAT[w]} does the model have?`
+      : `How many ${WHAT[w]} does ${an(solidName(k, n))} have?`,
     solve: ([k, n, w]) => {
       const c = counts(k, n);
       const v = w === 0 ? c.F : w === 1 ? c.E : c.V;
@@ -381,12 +385,12 @@ export const B09: Def[] = [
         if (w === 0) out.push(B("ends-forgotten", "conceptual", VIEWS, "Only the side faces were counted; a prism also has two end faces.", n));
         if (w === 1) out.push(B("side-edges-forgotten", "conceptual", VIEWS, `Only the edges round the two ends were counted; there are also ${n} edges joining the ends.`, 2 * n));
         if (w === 2) out.push(B("one-end-only", "conceptual", VIEWS, "Only the corners of one end were counted; the other end has just as many.", n));
-        if (t && w > 0) out.push(B("net-sides-counted", "conceptual", NETS, `Every ${w === 1 ? "side" : "corner"} of every piece of the net was counted; when the net folds up, ${w === 1 ? "two sides meet to make each edge" : "several corners meet at each vertex"}.`, 6 * n));
+        if (t === 1 && w > 0) out.push(B("net-sides-counted", "conceptual", NETS, `Every ${w === 1 ? "side" : "corner"} of every piece of the net was counted; when the net folds up, ${w === 1 ? "two sides meet to make each edge" : "several corners meet at each vertex"}.`, 6 * n));
       } else {
         if (w === 0) out.push(B("base-forgotten", "conceptual", VIEWS, "Only the triangular faces were counted; the base is a face too.", n));
         if (w === 1) out.push(B("base-edges-only", "conceptual", VIEWS, `Only the edges round the base were counted; ${n} more edges go up to the top point.`, n));
         if (w === 2) out.push(B("apex-forgotten", "conceptual", VIEWS, "The top point (apex) was forgotten; it is a vertex too.", n));
-        if (t && w > 0) out.push(B("net-sides-counted", "conceptual", NETS, `Every ${w === 1 ? "side" : "corner"} of every piece of the net was counted; when the net folds up, ${w === 1 ? "two sides meet to make each edge" : "several corners meet at each vertex"}.`, 4 * n));
+        if (t === 1 && w > 0) out.push(B("net-sides-counted", "conceptual", NETS, `Every ${w === 1 ? "side" : "corner"} of every piece of the net was counted; when the net folds up, ${w === 1 ? "two sides meet to make each edge" : "several corners meet at each vertex"}.`, 4 * n));
       }
       return out;
     },
@@ -396,10 +400,10 @@ export const B09: Def[] = [
     },
     variants: () => [],
     explain: say({ faces: "Faces", edges: "Edges", vertices: "Vertices" }),
-    domain: [[0, 1], [3, 10], [0, 2], [0, 1]],
-    difficulty: ([k, n, w, t]) => (n <= 4 && !t ? 1 : t && w > 0 ? 3 : 2),
+    domain: [[0, 1], [3, 10], [0, 2], [0, 3]],
+    difficulty: ([k, n, w, t]) => (t >= 2 ? (n <= (t === 2 ? 5 : 4) ? 1 : 2) : n <= 4 && !t ? 1 : t && w > 0 ? 3 : 2),
     figure: ([k, n]) => (n === 4 ? { type: "solid", name: k === 0 ? "cuboid" : "pyramid" } : null),
-    word: ([k, n, w, t]) => (t ? `${name(n + w)} has a craft sheet cut into ${netText(k, n)}. Folded up, it makes a closed box shape. How many ${WHAT[w]} does the box shape have?` : `${name(n + w)} has a paperweight shaped like ${an(solidName(k, n))}. How many ${WHAT[w]} does the paperweight have?`),
+    word: ([k, n, w, t]) => (t === 1 ? `${name(n + w)} has a craft sheet cut into ${netText(k, n)}. Folded up, it makes a closed box shape. How many ${WHAT[w]} does the box shape have?` : `${name(n + w)} has a paperweight shaped like ${an(solidName(k, n))}. How many ${WHAT[w]} does the paperweight have?`),
     teach: {
       idea: `A prism has two equal ends joined by rectangles; a pyramid has one base and triangles meeting at a top point. The shape of the end or base tells you all the counts.`,
       method: "For a prism on an n-sided end: n + 2 faces, 3n edges (n round each end and n joining them), 2n vertices. For a pyramid on an n-sided base: n + 1 faces, 2n edges, n + 1 vertices.",
@@ -1815,6 +1819,10 @@ function counts(kind: number, n: number) {
 }
 function solidName(kind: number, n: number) {
   return `${ADJ[n]} ${kind === 0 ? "prism" : "pyramid"}`;
+}
+function endsText(kind: number, n: number) {
+  const base = PIECE[n];
+  return kind === 0 ? `two ${base} ends joined by ${n} rectangular faces` : `${an(base)} base and ${n} triangular faces that meet at one top point`;
 }
 function netText(kind: number, n: number) {
   const base = PIECE[n];

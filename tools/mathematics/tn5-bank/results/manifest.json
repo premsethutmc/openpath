@@ -3,9 +3,9 @@
  "engine": "kernel@a43be6abeecd",
  "competencies": 58,
  "families": 192,
- "problems": 60774,
+ "problems": 61343,
  "labels": {
-  "kernel-verified": 60774,
+  "kernel-verified": 61343,
   "partial": 0,
   "answer-verified": 0
  },
@@ -15,32 +15,11 @@
   "figureConsistentSteps": 9311,
   "conventionSteps": 2793
  },
- "sha256": "45df5279f265ffd2bae26adf4f221a6c1e25ddf60b8b4d15cd3b0592ddce5b1d",
- "bytes": 70747377,
+ "sha256": "e24392f643ee4982467192f1a41a2757cfcf8deddacd3650269f2c65b5a4ce9a",
+ "bytes": 71515488,
  "uncheckedStepTypes": 0,
  "uncheckedSteps": [],
- "depthShortfalls": [
-  {
-   "competency": "MATH.number.fraction-of-collection",
-   "band": 1,
-   "items": 21
-  },
-  {
-   "competency": "MATH.geometry.fractal-iteration",
-   "band": 3,
-   "items": 22
-  },
-  {
-   "competency": "MATH.measurement.time-speed-intro",
-   "band": 1,
-   "items": 18
-  },
-  {
-   "competency": "MATH.geometry.solid-views",
-   "band": 1,
-   "items": 12
-  }
- ],
+ "depthShortfalls": [],
  "perFamily": {
   "aabig": {
    "kernel-verified": 90,
@@ -323,7 +302,7 @@
    "answer-verified": 0
   },
   "adfcol": {
-   "kernel-verified": 300,
+   "kernel-verified": 349,
    "partial": 0,
    "answer-verified": 0
   },
@@ -703,7 +682,7 @@
    "answer-verified": 0
   },
   "affrac": {
-   "kernel-verified": 118,
+   "kernel-verified": 152,
    "partial": 0,
    "answer-verified": 0
   },
@@ -843,7 +822,7 @@
    "answer-verified": 0
   },
   "agspd": {
-   "kernel-verified": 400,
+   "kernel-verified": 790,
    "partial": 0,
    "answer-verified": 0
   },
@@ -853,7 +832,7 @@
    "answer-verified": 0
   },
   "aisolid": {
-   "kernel-verified": 96,
+   "kernel-verified": 192,
    "partial": 0,
    "answer-verified": 0
   },

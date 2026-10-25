@@ -105,7 +105,7 @@
     "MATH.measurement.time-speed-intro"
    ],
    "families": 2,
-   "problems": 800
+   "problems": 1190
   },
   {
    "id": "tn-g05-t2-c05-o03",
@@ -145,7 +145,7 @@
     "MATH.number.fraction-of-collection"
    ],
    "families": 2,
-   "problems": 422
+   "problems": 471
   },
   {
    "id": "tn-g05-t3-c02-o01",
@@ -353,7 +353,7 @@
     "MATH.geometry.solid-views"
    ],
    "families": 1,
-   "problems": 96
+   "problems": 192
   },
   {
    "id": "tn-g05-t1-c01-o03",
@@ -415,7 +415,7 @@
     "MATH.geometry.fractal-iteration"
    ],
    "families": 3,
-   "problems": 502
+   "problems": 536
   },
   {
    "id": "tn-g05-t2-c06-o01",
