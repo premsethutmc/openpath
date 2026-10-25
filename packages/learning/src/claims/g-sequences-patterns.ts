@@ -142,7 +142,7 @@ const affigEvaluate = (s: Step, p: Problem) => {
 /** Table "Shape 1 2 3 4" with a row of 4 terms; the rule is an + b (a = the common difference, b = term 1 minus a). */
 const afmatchWrite = (s: Step, p: Problem): boolean | null => {
   const r = figRow(p);
-  if (!r || r.length !== 5) return null;
+  if (!r || r.length !== 5 || !/^The table shows the number of .* Write a rule for the number of .* in shape n\.$/.test(p.prompt)) return null;
   const t = r.slice(1).map(int);
   if (t.some((x) => x === null)) return null;
   const [t1, t2] = t as bigint[];
