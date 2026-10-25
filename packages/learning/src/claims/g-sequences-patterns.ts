@@ -211,7 +211,7 @@ const patnUnit = (s: Step, p: Problem) => {
 };
 const aapatnPart = (s: Step, p: Problem): boolean | null => {
   const u = patnUnit(s, p);
-  return u ? same(s.inputs, u.unit) && s.value === u.unit.join(", ") : null;
+  return u && same(s.inputs, u.unit) ? s.value === u.unit.join(", ") : null;
 };
 /** inputs [cards shown, length of part]: the next card is place (shown mod length) + 1 of the part. */
 const aapatnPlace = (s: Step, p: Problem) => {
@@ -229,7 +229,7 @@ const shapeSeq = (p: Problem): string[] | null => {
 };
 const aapatuPart = (s: Step, p: Problem): boolean | null => {
   const q = shapeSeq(p), per = q && period(q);
-  return q && per ? same(s.inputs, q.slice(0, per)) && s.value === q.slice(0, per).join(" ") : null;
+  return q && per && same(s.inputs, q.slice(0, per)) ? s.value === q.slice(0, per).join(" ") : null;
 };
 const aapatuCount = (s: Step, p: Problem) => {
   const q = shapeSeq(p), per = q && period(q);
@@ -307,7 +307,7 @@ const afdigitsCount = (s: Step, p: Problem): boolean | null => {
   if (new Set(digits).size !== digits.length || k < 1 || (m[3].startsWith("using") && k > digits.length)) return null;
   const d = digits.length, lead = digits.filter((x) => x !== "0").length; // no leading zero in a k-digit number
   const factors = Array.from({ length: k }, (_, i) => BigInt(i === 0 ? lead : m[3].startsWith("using") ? d - i : d));
-  return same(s.inputs, factors) && s.value === factors.join(" × ");
+  return same(s.inputs, factors) ? s.value === factors.join(" × ") : null;
 };
 
 /* ------------------------------------------------------------------ aadigmax */

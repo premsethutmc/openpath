@@ -48,3 +48,29 @@ tool `claim-mutation.mts` reproduce the numbers below.
 - Corruption: 78,722 corrupted values across every claim-checked step; 0 genuine corruptions confirmed (111 were a
   palindromic list reordered with a space, i.e. the same list).
 - Bank rebuilt twice: identical SHA-256 `73a759dca087a158…`. Tests: 489 pass, 0 fail.
+
+## Phase 2 (units, fractions, patterns, factors, number properties, arithmetic leftovers): 99 pairs, five parallel agents
+| | Before Phase 2 | After |
+|---|---:|---:|
+| Items fully machine-checked | 29,591 (48.7%) | **48,525 (79.8%)** |
+| Partly checked / answer-verified only | 17,278 / 13,905 | 6,491 / 5,758 |
+| Unchecked (family, step) pairs | 156 | 60 (42 families) |
+| Unchecked steps | 41,271 | 15,771 |
+
+- Every claim confirms every readable released step: 48,313 steps, 0 mismatches. No family defect found in Phase 2.
+- Corruption: 182,608 corrupted values; 0 genuine corruptions confirmed (the same 111 whitespace-only list rewrites).
+- Left unchecked by design: the first step of each `acmissing` family states a family-internal code (equation form), not a result.
+- Bank rebuilt twice: identical SHA-256 `455174e8aa2e1fb6…`. Tests: 702 pass, 0 fail.
+
+### Checks that rest on a convention rather than pure mathematics (owner to review)
+- `aechk/estimate`: "a reasonable estimate" is within 30% of a rounded estimate.
+- `acstory/choose operation`, `acstory4/…`, `acstory9/…`: the operation is read from fixed template wording; the numeric code (add 0, take away 1, multiply 2, share 3) is the families' own convention.
+- `aabig/compare sizes`: a fixed common-sense size order of everyday objects.
+- `avfwq/evaluate`: compares a floating-point stated value with a tolerance of 1e-9.
+
+### Left for Phase 3 (60 pairs, 15,771 steps)
+All need the data in a picture or table: clock reading and elapsed time (`acelapsed`, `accal`), bar charts, pictographs,
+tallies and tables (`afbar`, `adbar`, `adbartf`, `acpict*`, `adrec`, `abcup*`, `advenn`), grids and seating plans
+(`abgrid`, `abseat`, `abroute`), symmetry, reflection and nets (`aesym`, `aemirror`, `aerefl`, `afcube`, `afnet`),
+solids and cube views (`afsolid`, `afpaint`, `afview`, `afhidden`), lattice multiplication (`avlat`), angles
+(`aeang`, `aertang`), directions (`abdir`), and `acmissing`'s code step.

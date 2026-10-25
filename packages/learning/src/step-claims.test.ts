@@ -4,14 +4,19 @@ import assert from "node:assert/strict";
 import { pool } from "./families";
 import { STEP_CLAIMS, stepClaimHolds } from "./step-claims";
 
+/** Steps that state a family-internal code (the equation form), not a mathematical result: left unchecked by design. */
+const UNCHECKED_BY_DESIGN = new Set(["acmissing/subtract", "acmissing/add", "acmissing/divide"]);
+
 for (const key of Object.keys(STEP_CLAIMS)) {
   const [fam, op] = key.split("/");
   test(`claim ${key}: true values hold, corrupted values are rejected`, () => {
     let seen = 0;
-    for (const p of pool(fam).items.slice(0, 300)) {
+    const all = pool(fam).items, stride = Math.max(1, Math.floor(all.length / 300));
+    for (const p of all.filter((_, i) => i % stride === 0)) { // an even sample across the pool, not just its first problems
       for (const s of p.steps) {
         if (s.op !== op) continue;
         seen++;
+        if (UNCHECKED_BY_DESIGN.has(key) && stepClaimHolds(s, p) === null) continue;
         assert.equal(stepClaimHolds(s, p), true, `${p.id} ${s.id}`);
         const n = Number(s.value);
         // soundness: a corrupted value must never be confirmed (false, or null = cannot read, but never true)
