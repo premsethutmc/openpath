@@ -57,7 +57,7 @@ function tryEval(e: MathExpr): Rational | null {
   try { return evaluate(e); } catch { return null; }
 }
 const canonLin = (k: Rational): MathExpr =>
-  k.isOne() ? Expr.var("x") : Expr.mul(num(k), Expr.var("x"));
+  k.isZero() ? num(ZERO) : k.isOne() ? Expr.var("x") : Expr.mul(num(k), Expr.var("x"));
 
 /** Flatten a +/- chain into signed terms. */
 function terms(e: MathExpr, sign = 1, out: { sign: number; t: MathExpr }[] = []): { sign: number; t: MathExpr }[] {
@@ -87,7 +87,7 @@ function simplify(e: MathExpr, notes: Set<string>): MathExpr {
       let cSum = ZERO; for (const q of consts) cSum = cSum.add((q.t as { value: Rational }).value.mul(new Rational(q.sign)));
       if (lins.length > 1 || consts.length > 1) notes.add("combine like terms");
       const out: { sign: number; t: MathExpr }[] = [];
-      if (lins.length) { if (!kSum.isZero() || (!consts.length && !others.length)) out.push({ sign: kSum.lt(ZERO) ? -1 : 1, t: canonLin(kSum.lt(ZERO) ? kSum.neg() : kSum) }); }
+      if (lins.length) { if (!kSum.isZero()) out.push({ sign: kSum.lt(ZERO) ? -1 : 1, t: canonLin(kSum.lt(ZERO) ? kSum.neg() : kSum) }); }
       for (const o of others) out.push(o);
       if (consts.length && (!cSum.isZero() || out.length === 0)) out.push({ sign: cSum.lt(ZERO) ? -1 : 1, t: num(cSum.lt(ZERO) ? cSum.neg() : cSum) });
       if (out.length && out[0].sign < 0 && out[0].t.kind === "num") { const v = (out[0].t as { value: Rational }).value; out[0] = { sign: 1, t: num(v.neg()) }; }
@@ -171,8 +171,9 @@ export function movesFrom(q: Eq): Move[] {
   for (const side of ["left", "right"] as const) {
     for (const { sign, t } of terms(q[side])) {
       if (isNum(t) && t.value.isZero()) continue;
-      const wasSingle = terms(q[side]).length === 1;
-      if (wasSingle) continue; // cannot move the only term of a side
+      const other = side === "left" ? q.right : q.left;
+      // moving the only term of a side is pointless unless it is an x-term that can meet x-terms on the other side
+      if (terms(q[side]).length === 1 && !(hasVar(t) && hasVar(other))) continue;
       const inv = sign > 0 ? "subtract" : "add";
       const mk = (e: MathExpr) => (sign > 0 ? Expr.sub(e, t) : Expr.add(e, t));
       add(`${inv}-both-sides`, `${inv} ${printExpr(t)} from both sides`.replace("add ", "add ").replace("from both", sign > 0 ? "from both" : "to both"), { left: mk(q.left), right: mk(q.right) });
@@ -224,7 +225,7 @@ function unsupportedReason(q: Eq): string | null {
 }
 
 export function plan(text: string, opts: { maxDepth?: number; maxNodes?: number; log?: boolean } = {}): PlanResult {
-  const maxDepth = opts.maxDepth ?? 14, maxNodes = opts.maxNodes ?? 100000;
+  const maxDepth = opts.maxDepth ?? 24, maxNodes = opts.maxNodes ?? 100000;
   const parts = text.split("=");
   if (parts.length !== 2) throw new Error(`not an equation: ${text}`);
   const start: Eq = { left: parseExpr(parts[0]), right: parseExpr(parts[1]) };

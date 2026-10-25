@@ -49,9 +49,17 @@ export function parseExpr(src: string): MathExpr {
   return e;
 }
 
-function numText(r: Rational): string {
+function decimalText(r: Rational): string | null { // terminating decimal, else null
+  let d = r.den; while (d % 2 === 0) d /= 2; while (d % 5 === 0) d /= 5;
+  if (d !== 1) return null;
+  const neg = r.lt(Rational.zero); const a = neg ? r.neg() : r;
+  let k = 0, p = 1; while ((a.num * p) % a.den !== 0) { p *= 10; k++; }
+  const digits = String((a.num * p) / a.den).padStart(k + 1, "0");
+  return (neg ? "-" : "") + digits.slice(0, digits.length - k) + "." + digits.slice(digits.length - k);
+}
+function numText(r: Rational, decimals: boolean): string {
   if (r.isInteger()) return r.toString();
-  return `${r.num}/${r.den}`; // only used for non-integer constants (printed in brackets)
+  return (decimals ? decimalText(r) : null) ?? `${r.num}/${r.den}`;
 }
 
 const prec = (e: MathExpr): number =>
@@ -59,13 +67,13 @@ const prec = (e: MathExpr): number =>
   e.kind === "neg" ? 3 : e.kind === "pow" ? 4 :
   e.kind === "num" ? (!e.value.isInteger() ? 2 : e.value.lt(Rational.zero) ? 3 : 5) : 5;
 
-export function printExpr(e: MathExpr): string {
-  const wrap = (c: MathExpr, need: boolean) => (need ? `(${printExpr(c)})` : printExpr(c));
+export function printExpr(e: MathExpr, decimals = false): string {
+  const wrap = (c: MathExpr, need: boolean) => (need ? `(${printExpr(c, decimals)})` : printExpr(c, decimals));
   switch (e.kind) {
-    case "num": return numText(e.value);
+    case "num": return numText(e.value, decimals);
     case "var": return e.name;
-    case "add": return `${wrap(e.left, prec(e.left) < 1)}+${wrap(e.right, prec(e.right) < 1 || (e.right.kind === "num" && e.right.value.lt(Rational.zero)))}`;
-    case "sub": return `${wrap(e.left, prec(e.left) < 1)}-${wrap(e.right, prec(e.right) <= 1 || (e.right.kind === "num" && (e.right.value.lt(Rational.zero) || !e.right.value.isInteger())))}`;
+    case "add": return `${wrap(e.left, prec(e.left) < 1)}+${wrap(e.right, prec(e.right) < 1 || e.right.kind === "neg" || (e.right.kind === "num" && e.right.value.lt(Rational.zero)))}`;
+    case "sub": return `${wrap(e.left, prec(e.left) < 1)}-${wrap(e.right, prec(e.right) <= 1 || e.right.kind === "neg" || (e.right.kind === "num" && (e.right.value.lt(Rational.zero) || !e.right.value.isInteger())))}`;
     case "mul": return `${wrap(e.left, prec(e.left) < 2)}*${wrap(e.right, prec(e.right) <= 2)}`;
     case "div": return `${wrap(e.left, prec(e.left) < 2)}/${wrap(e.right, prec(e.right) <= 2)}`;
     case "neg": return `-${wrap(e.operand, prec(e.operand) < 4)}`;
