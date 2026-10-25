@@ -4,124 +4,96 @@
  "bankItems": 61343,
  "summary": {
   "sampled": 14775,
-  "rederived": 8216,
-  "disagree": 66,
-  "not_rederivable_from_text": 6559,
+  "rederived": 11200,
+  "disagree": 0,
+  "not_rederivable_from_text": 3575,
   "parse_error": 0,
-  "randomSample": 10000,
+  "randomSampleSize": 10000,
   "perFamilySample": 30,
   "familiesWithZeroRederivable": [
    "aabig",
-   "aapatn",
-   "aapatu",
-   "aaweave",
    "abcup",
    "abcupord",
    "abdir",
-   "abdisp",
    "abgrid",
    "abjug",
-   "abroute",
    "abseat",
    "acbill",
    "acelapsed",
-   "acfacts",
    "acgrow",
    "acpict",
    "acpicthalf",
    "acpictmore",
    "acpicttab",
-   "acplace",
-   "acsticks",
    "acstory",
    "acstory4",
    "acstory9",
    "adbar",
    "adbartf",
    "adestchk",
-   "adestcost",
-   "adfnl",
    "admper",
    "adperim",
    "adrec",
    "adtally",
    "adtwo",
    "advenn",
-   "aeang",
-   "aearea",
    "aearms",
    "aechk",
-   "aedec",
-   "aedfr",
    "aedigsym",
    "aedsym",
-   "aehund",
    "aeirr",
    "aematch",
    "aemirror",
-   "aenumf",
-   "aeperar",
-   "aernd",
    "aertang",
-   "aeshop",
    "aesym",
-   "aet12",
    "aetab",
    "afbar",
-   "afcount",
    "afcube",
-   "afdigits",
-   "affig",
-   "affigrel",
-   "affrac",
-   "affrule",
-   "afhidden",
-   "afletter",
    "afmatch",
    "afnet",
-   "afpaint",
    "afview",
-   "agclass",
-   "agcop",
-   "aghlw",
-   "agjump",
-   "agmeas",
-   "agnl",
-   "agspdc",
-   "aisolid",
-   "anpair",
-   "anquad",
-   "avdfact",
-   "avfold",
-   "avlat",
-   "avlike",
-   "avvcmp"
+   "agspdc"
   ],
   "familiesWithFewerThan20Rederived": [
-   "adwtcap",
    "aeangk",
-   "aeftin",
-   "afsolid"
+   "aisolid"
   ]
  },
+ "randomSample": {
+  "sampled": 10000,
+  "rederived": 7618,
+  "disagree": 0
+ },
+ "selfTestCorruptedAnswers": {
+  "total": 11200,
+  "detected": 11200
+ },
  "byRule": {
-  "r_compare_numbers": 333,
+  "r_compare_numbers": 356,
   "r_digits": 73,
   "r_next": 52,
+  "r_batch3": 773,
   "r_order": 438,
+  "r_patterns": 459,
   "r_sign": 226,
+  "r_words_vol": 672,
   "r_misc": 2037,
   "r_box": 270,
   "r_time": 471,
+  "r_facts": 101,
   "r_arith": 1703,
   "r_money": 289,
+  "r_exprs": 385,
   "r_estimate": 361,
+  "r_batch4": 359,
   "r_fractions": 423,
   "r_units": 559,
-  "r_place": 89,
+  "r_place": 113,
   "r_words": 82,
   "r_round": 231,
-  "r_hcf_lcm": 579
+  "r_hcf_lcm": 579,
+  "r_hlw": 89,
+  "r_meas": 99
  },
  "perFamily": {
   "aabig": {
@@ -143,8 +115,7 @@
   },
   "aanext": {
    "sampled": 80,
-   "rederived": 52,
-   "not_rederivable_from_text": 28
+   "rederived": 80
   },
   "aaordn": {
    "sampled": 76,
@@ -157,11 +128,11 @@
   },
   "aapatn": {
    "sampled": 92,
-   "not_rederivable_from_text": 92
+   "rederived": 92
   },
   "aapatu": {
    "sampled": 59,
-   "not_rederivable_from_text": 59
+   "rederived": 59
   },
   "aasign": {
    "sampled": 60,
@@ -169,7 +140,8 @@
   },
   "aaweave": {
    "sampled": 63,
-   "not_rederivable_from_text": 63
+   "not_rederivable_from_text": 22,
+   "rederived": 41
   },
   "abcup": {
    "sampled": 90,
@@ -185,7 +157,8 @@
   },
   "abdisp": {
    "sampled": 74,
-   "not_rederivable_from_text": 74
+   "rederived": 50,
+   "not_rederivable_from_text": 24
   },
   "abgrid": {
    "sampled": 58,
@@ -201,7 +174,8 @@
   },
   "abroute": {
    "sampled": 62,
-   "not_rederivable_from_text": 62
+   "rederived": 38,
+   "not_rederivable_from_text": 24
   },
   "abseat": {
    "sampled": 81,
@@ -234,7 +208,8 @@
   },
   "acfacts": {
    "sampled": 73,
-   "not_rederivable_from_text": 73
+   "rederived": 62,
+   "not_rederivable_from_text": 11
   },
   "acgrow": {
    "sampled": 78,
@@ -278,11 +253,11 @@
   },
   "acplace": {
    "sampled": 61,
-   "not_rederivable_from_text": 61
+   "rederived": 61
   },
   "acsticks": {
    "sampled": 39,
-   "not_rederivable_from_text": 39
+   "rederived": 39
   },
   "acstory": {
    "sampled": 99,
@@ -343,12 +318,11 @@
   },
   "adestcost": {
    "sampled": 45,
-   "not_rederivable_from_text": 45
+   "rederived": 45
   },
   "adfcmp": {
    "sampled": 121,
-   "rederived": 98,
-   "not_rederivable_from_text": 23
+   "rederived": 121
   },
   "adfcmpu": {
    "sampled": 73,
@@ -360,12 +334,11 @@
   },
   "adfmeas": {
    "sampled": 44,
-   "rederived": 22,
-   "not_rederivable_from_text": 22
+   "rederived": 44
   },
   "adfnl": {
    "sampled": 41,
-   "not_rederivable_from_text": 41
+   "rederived": 41
   },
   "adford": {
    "sampled": 86,
@@ -377,8 +350,7 @@
   },
   "admental": {
    "sampled": 91,
-   "rederived": 34,
-   "not_rederivable_from_text": 57
+   "rederived": 91
   },
   "admper": {
    "sampled": 59,
@@ -390,8 +362,8 @@
   },
   "adpreg": {
    "sampled": 72,
-   "not_rederivable_from_text": 42,
-   "rederived": 30
+   "rederived": 62,
+   "not_rederivable_from_text": 10
   },
   "adrec": {
    "sampled": 67,
@@ -411,8 +383,7 @@
   },
   "adwtcap": {
    "sampled": 50,
-   "rederived": 12,
-   "not_rederivable_from_text": 38
+   "rederived": 50
   },
   "aeadd3": {
    "sampled": 85,
@@ -428,7 +399,7 @@
   },
   "aeang": {
    "sampled": 101,
-   "not_rederivable_from_text": 101
+   "rederived": 101
   },
   "aeangk": {
    "sampled": 44,
@@ -437,7 +408,7 @@
   },
   "aearea": {
    "sampled": 38,
-   "not_rederivable_from_text": 38
+   "rederived": 38
   },
   "aearms": {
    "sampled": 49,
@@ -449,8 +420,7 @@
   },
   "aecf": {
    "sampled": 55,
-   "rederived": 46,
-   "not_rederivable_from_text": 9
+   "rederived": 55
   },
   "aechk": {
    "sampled": 131,
@@ -458,8 +428,7 @@
   },
   "aecmp": {
    "sampled": 66,
-   "rederived": 66,
-   "disagree": 66
+   "rederived": 66
   },
   "aecol4": {
    "sampled": 96,
@@ -479,12 +448,11 @@
   },
   "aeconvu": {
    "sampled": 98,
-   "rederived": 62,
-   "not_rederivable_from_text": 36
+   "rederived": 98
   },
   "aedec": {
    "sampled": 96,
-   "not_rederivable_from_text": 96
+   "rederived": 96
   },
   "aedecc": {
    "sampled": 74,
@@ -492,7 +460,7 @@
   },
   "aedfr": {
    "sampled": 41,
-   "not_rederivable_from_text": 41
+   "rederived": 41
   },
   "aedigsym": {
    "sampled": 78,
@@ -532,12 +500,12 @@
   },
   "aeftin": {
    "sampled": 52,
-   "rederived": 4,
-   "not_rederivable_from_text": 48
+   "rederived": 28,
+   "not_rederivable_from_text": 24
   },
   "aehund": {
    "sampled": 89,
-   "not_rederivable_from_text": 89
+   "rederived": 89
   },
   "aeind": {
    "sampled": 82,
@@ -565,7 +533,8 @@
   },
   "aenumf": {
    "sampled": 130,
-   "not_rederivable_from_text": 130
+   "rederived": 84,
+   "not_rederivable_from_text": 46
   },
   "aeparts": {
    "sampled": 40,
@@ -577,7 +546,7 @@
   },
   "aeperar": {
    "sampled": 81,
-   "not_rederivable_from_text": 81
+   "rederived": 81
   },
   "aerdec": {
    "sampled": 127,
@@ -589,12 +558,13 @@
   },
   "aerev": {
    "sampled": 47,
-   "rederived": 30,
-   "not_rederivable_from_text": 17
+   "rederived": 43,
+   "not_rederivable_from_text": 4
   },
   "aernd": {
    "sampled": 72,
-   "not_rederivable_from_text": 72
+   "rederived": 44,
+   "not_rederivable_from_text": 28
   },
   "aeround": {
    "sampled": 104,
@@ -606,7 +576,7 @@
   },
   "aeshop": {
    "sampled": 88,
-   "not_rederivable_from_text": 88
+   "rederived": 88
   },
   "aesym": {
    "sampled": 112,
@@ -614,7 +584,7 @@
   },
   "aet12": {
    "sampled": 55,
-   "not_rederivable_from_text": 55
+   "rederived": 55
   },
   "aet24": {
    "sampled": 77,
@@ -630,8 +600,7 @@
   },
   "aetrip": {
    "sampled": 90,
-   "rederived": 56,
-   "not_rederivable_from_text": 34
+   "rederived": 90
   },
   "aeturn": {
    "sampled": 50,
@@ -647,12 +616,11 @@
   },
   "afcount": {
    "sampled": 42,
-   "not_rederivable_from_text": 42
+   "rederived": 42
   },
   "afcross": {
    "sampled": 78,
-   "not_rederivable_from_text": 51,
-   "rederived": 27
+   "rederived": 78
   },
   "afcube": {
    "sampled": 102,
@@ -660,31 +628,31 @@
   },
   "afdigits": {
    "sampled": 39,
-   "not_rederivable_from_text": 39
+   "rederived": 39
   },
   "affig": {
    "sampled": 38,
-   "not_rederivable_from_text": 38
+   "rederived": 38
   },
   "affigrel": {
    "sampled": 40,
-   "not_rederivable_from_text": 40
+   "rederived": 40
   },
   "affrac": {
    "sampled": 50,
-   "not_rederivable_from_text": 50
+   "rederived": 50
   },
   "affrule": {
    "sampled": 55,
-   "not_rederivable_from_text": 55
+   "rederived": 55
   },
   "afhidden": {
    "sampled": 37,
-   "not_rederivable_from_text": 37
+   "rederived": 37
   },
   "afletter": {
    "sampled": 42,
-   "not_rederivable_from_text": 42
+   "rederived": 42
   },
   "afmatch": {
    "sampled": 37,
@@ -696,7 +664,8 @@
   },
   "afpaint": {
    "sampled": 34,
-   "not_rederivable_from_text": 34
+   "rederived": 26,
+   "not_rederivable_from_text": 8
   },
   "afpair": {
    "sampled": 55,
@@ -704,8 +673,8 @@
   },
   "afsolid": {
    "sampled": 40,
-   "not_rederivable_from_text": 28,
-   "rederived": 12
+   "not_rederivable_from_text": 20,
+   "rederived": 20
   },
   "afview": {
    "sampled": 67,
@@ -713,7 +682,7 @@
   },
   "agclass": {
    "sampled": 56,
-   "not_rederivable_from_text": 56
+   "rederived": 56
   },
   "agcomf": {
    "sampled": 53,
@@ -721,7 +690,7 @@
   },
   "agcop": {
    "sampled": 52,
-   "not_rederivable_from_text": 52
+   "rederived": 52
   },
   "agdec": {
    "sampled": 105,
@@ -741,7 +710,7 @@
   },
   "aghlw": {
    "sampled": 89,
-   "not_rederivable_from_text": 89
+   "rederived": 89
   },
   "agimp": {
    "sampled": 73,
@@ -749,7 +718,7 @@
   },
   "agjump": {
    "sampled": 71,
-   "not_rederivable_from_text": 71
+   "rederived": 71
   },
   "aglcm": {
    "sampled": 71,
@@ -761,7 +730,7 @@
   },
   "agmeas": {
    "sampled": 99,
-   "not_rederivable_from_text": 99
+   "rederived": 99
   },
   "agmix": {
    "sampled": 69,
@@ -769,7 +738,7 @@
   },
   "agnl": {
    "sampled": 44,
-   "not_rederivable_from_text": 44
+   "rederived": 44
   },
   "agprime": {
    "sampled": 92,
@@ -777,8 +746,7 @@
   },
   "agptest": {
    "sampled": 79,
-   "not_rederivable_from_text": 27,
-   "rederived": 52
+   "rederived": 79
   },
   "agrupee": {
    "sampled": 107,
@@ -794,7 +762,8 @@
   },
   "aisolid": {
    "sampled": 54,
-   "not_rederivable_from_text": 54
+   "not_rederivable_from_text": 37,
+   "rederived": 17
   },
   "ajbest": {
    "sampled": 97,
@@ -802,13 +771,12 @@
   },
   "ajfare": {
    "sampled": 80,
-   "rederived": 41,
-   "not_rederivable_from_text": 39
+   "rederived": 78,
+   "not_rederivable_from_text": 2
   },
   "ajrate": {
    "sampled": 89,
-   "rederived": 69,
-   "not_rederivable_from_text": 20
+   "rederived": 89
   },
   "ajwork": {
    "sampled": 66,
@@ -816,15 +784,15 @@
   },
   "anpair": {
    "sampled": 92,
-   "not_rederivable_from_text": 92
+   "rederived": 92
   },
   "anquad": {
    "sampled": 81,
-   "not_rederivable_from_text": 81
+   "rederived": 81
   },
   "avdfact": {
    "sampled": 39,
-   "not_rederivable_from_text": 39
+   "rederived": 39
   },
   "avdiv": {
    "sampled": 97,
@@ -836,7 +804,7 @@
   },
   "avfold": {
    "sampled": 43,
-   "not_rederivable_from_text": 43
+   "rederived": 43
   },
   "avfwq": {
    "sampled": 92,
@@ -844,11 +812,11 @@
   },
   "avlat": {
    "sampled": 72,
-   "not_rederivable_from_text": 72
+   "rederived": 72
   },
   "avlike": {
    "sampled": 74,
-   "not_rederivable_from_text": 74
+   "rederived": 74
   },
   "avlow": {
    "sampled": 88,
@@ -876,7 +844,7 @@
   },
   "avvcmp": {
    "sampled": 82,
-   "not_rederivable_from_text": 82
+   "rederived": 82
   },
   "divr": {
    "sampled": 97,
@@ -915,601 +883,6 @@
    "rederived": 56
   }
  },
- "disagreements": [
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:103",
-   "prompt": "Write these numbers in ascending order (smallest first): 22,105; 6,125; 22,015; 20,215. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6125, 20215, 22015, 22105)",
-   "recomputed": "([Fraction(6, 1), Fraction(15, 1), Fraction(20, 1), Fraction(22, 1), Fraction(22, 1), Fraction(105, 1), Fraction(125, 1), Fraction(215, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:104",
-   "prompt": "Write these numbers in ascending order (smallest first): 20,234; 22,304; 6,324; 22,034. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6324, 20234, 22034, 22304)",
-   "recomputed": "([Fraction(6, 1), Fraction(20, 1), Fraction(22, 1), Fraction(22, 1), Fraction(34, 1), Fraction(234, 1), Fraction(304, 1), Fraction(324, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:105",
-   "prompt": "Write these numbers in ascending order (smallest first): 10,563; 15,603; 2,653; 15,063. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(2653, 10563, 15063, 15603)",
-   "recomputed": "([Fraction(2, 1), Fraction(10, 1), Fraction(15, 1), Fraction(15, 1), Fraction(63, 1), Fraction(563, 1), Fraction(603, 1), Fraction(653, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:115",
-   "prompt": "Write these numbers in ascending order (smallest first): 7,928; 42,098; 40,298; 42,908. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(7928, 40298, 42098, 42908)",
-   "recomputed": "([Fraction(7, 1), Fraction(40, 1), Fraction(42, 1), Fraction(42, 1), Fraction(98, 1), Fraction(298, 1), Fraction(908, 1), Fraction(928, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:116",
-   "prompt": "Write these numbers in ascending order (smallest first): 4,137; 23,017; 20,317; 23,107. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(4137, 20317, 23017, 23107)",
-   "recomputed": "([Fraction(4, 1), Fraction(17, 1), Fraction(20, 1), Fraction(23, 1), Fraction(23, 1), Fraction(107, 1), Fraction(137, 1), Fraction(317, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:118",
-   "prompt": "Write these numbers in ascending order (smallest first): 70,376; 73,706; 9,736; 73,076. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9736, 70376, 73076, 73706)",
-   "recomputed": "([Fraction(9, 1), Fraction(70, 1), Fraction(73, 1), Fraction(73, 1), Fraction(76, 1), Fraction(376, 1), Fraction(706, 1), Fraction(736, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:122",
-   "prompt": "Write these numbers in ascending order (smallest first): 50,583; 55,803; 8,853; 55,083. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8853, 50583, 55083, 55803)",
-   "recomputed": "([Fraction(8, 1), Fraction(50, 1), Fraction(55, 1), Fraction(55, 1), Fraction(83, 1), Fraction(583, 1), Fraction(803, 1), Fraction(853, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:131",
-   "prompt": "Write these numbers in ascending order (smallest first): 30,834; 38,304; 8,384; 38,034. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8384, 30834, 38034, 38304)",
-   "recomputed": "([Fraction(8, 1), Fraction(30, 1), Fraction(34, 1), Fraction(38, 1), Fraction(38, 1), Fraction(304, 1), Fraction(384, 1), Fraction(834, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:133",
-   "prompt": "Write these numbers in ascending order (smallest first): 34,069; 30,469; 34,609; 9,649. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9649, 30469, 34069, 34609)",
-   "recomputed": "([Fraction(9, 1), Fraction(30, 1), Fraction(34, 1), Fraction(34, 1), Fraction(69, 1), Fraction(469, 1), Fraction(609, 1), Fraction(649, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:136",
-   "prompt": "Write these numbers in ascending order (smallest first): 33,086; 30,386; 33,806; 4,836. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(4836, 30386, 33086, 33806)",
-   "recomputed": "([Fraction(4, 1), Fraction(30, 1), Fraction(33, 1), Fraction(33, 1), Fraction(86, 1), Fraction(386, 1), Fraction(806, 1), Fraction(836, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:137",
-   "prompt": "Write these numbers in ascending order (smallest first): 39,074; 30,974; 39,704; 8,794. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8794, 30974, 39074, 39704)",
-   "recomputed": "([Fraction(8, 1), Fraction(30, 1), Fraction(39, 1), Fraction(39, 1), Fraction(74, 1), Fraction(704, 1), Fraction(794, 1), Fraction(974, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:151",
-   "prompt": "Write these numbers in ascending order (smallest first): 60,574; 65,704; 7,754; 65,074. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(7754, 60574, 65074, 65704)",
-   "recomputed": "([Fraction(7, 1), Fraction(60, 1), Fraction(65, 1), Fraction(65, 1), Fraction(74, 1), Fraction(574, 1), Fraction(704, 1), Fraction(754, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:16",
-   "prompt": "Write these numbers in ascending order (smallest first): 47,052; 40,752; 47,502; 9,572. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9572, 40752, 47052, 47502)",
-   "recomputed": "([Fraction(9, 1), Fraction(40, 1), Fraction(47, 1), Fraction(47, 1), Fraction(52, 1), Fraction(502, 1), Fraction(572, 1), Fraction(752, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:17",
-   "prompt": "Write these numbers in ascending order (smallest first): 36,058; 30,658; 36,508; 5,568. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(5568, 30658, 36058, 36508)",
-   "recomputed": "([Fraction(5, 1), Fraction(30, 1), Fraction(36, 1), Fraction(36, 1), Fraction(58, 1), Fraction(508, 1), Fraction(568, 1), Fraction(658, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:172",
-   "prompt": "Write these numbers in ascending order (smallest first): 60,842; 68,402; 7,482; 68,042. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(7482, 60842, 68042, 68402)",
-   "recomputed": "([Fraction(7, 1), Fraction(42, 1), Fraction(60, 1), Fraction(68, 1), Fraction(68, 1), Fraction(402, 1), Fraction(482, 1), Fraction(842, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:176",
-   "prompt": "Write these numbers in ascending order (smallest first): 28,059; 20,859; 28,509; 5,589. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(5589, 20859, 28059, 28509)",
-   "recomputed": "([Fraction(5, 1), Fraction(20, 1), Fraction(28, 1), Fraction(28, 1), Fraction(59, 1), Fraction(509, 1), Fraction(589, 1), Fraction(859, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:181",
-   "prompt": "Write these numbers in ascending order (smallest first): 20,217; 22,107; 3,127; 22,017. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(3127, 20217, 22017, 22107)",
-   "recomputed": "([Fraction(3, 1), Fraction(17, 1), Fraction(20, 1), Fraction(22, 1), Fraction(22, 1), Fraction(107, 1), Fraction(127, 1), Fraction(217, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:182",
-   "prompt": "Write these numbers in ascending order (smallest first): 10,945; 19,405; 3,495; 19,045. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(3495, 10945, 19045, 19405)",
-   "recomputed": "([Fraction(3, 1), Fraction(10, 1), Fraction(19, 1), Fraction(19, 1), Fraction(45, 1), Fraction(405, 1), Fraction(495, 1), Fraction(945, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:183",
-   "prompt": "Write these numbers in ascending order (smallest first): 50,816; 58,106; 9,186; 58,016. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9186, 50816, 58016, 58106)",
-   "recomputed": "([Fraction(9, 1), Fraction(16, 1), Fraction(50, 1), Fraction(58, 1), Fraction(58, 1), Fraction(106, 1), Fraction(186, 1), Fraction(816, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:187",
-   "prompt": "Write these numbers in ascending order (smallest first): 70,726; 77,206; 9,276; 77,026. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9276, 70726, 77026, 77206)",
-   "recomputed": "([Fraction(9, 1), Fraction(26, 1), Fraction(70, 1), Fraction(77, 1), Fraction(77, 1), Fraction(206, 1), Fraction(276, 1), Fraction(726, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:188",
-   "prompt": "Write these numbers in ascending order (smallest first): 65,032; 60,532; 65,302; 8,352. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8352, 60532, 65032, 65302)",
-   "recomputed": "([Fraction(8, 1), Fraction(32, 1), Fraction(60, 1), Fraction(65, 1), Fraction(65, 1), Fraction(302, 1), Fraction(352, 1), Fraction(532, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:196",
-   "prompt": "Write these numbers in ascending order (smallest first): 66,807; 9,867; 66,087; 60,687. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9867, 60687, 66087, 66807)",
-   "recomputed": "([Fraction(9, 1), Fraction(60, 1), Fraction(66, 1), Fraction(66, 1), Fraction(87, 1), Fraction(687, 1), Fraction(807, 1), Fraction(867, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:198",
-   "prompt": "Write these numbers in ascending order (smallest first): 12,035; 10,235; 12,305; 6,325. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6325, 10235, 12035, 12305)",
-   "recomputed": "([Fraction(6, 1), Fraction(10, 1), Fraction(12, 1), Fraction(12, 1), Fraction(35, 1), Fraction(235, 1), Fraction(305, 1), Fraction(325, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:2",
-   "prompt": "Write these numbers in ascending order (smallest first): 64,025; 60,425; 64,205; 8,245. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8245, 60425, 64025, 64205)",
-   "recomputed": "([Fraction(8, 1), Fraction(25, 1), Fraction(60, 1), Fraction(64, 1), Fraction(64, 1), Fraction(205, 1), Fraction(245, 1), Fraction(425, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:201",
-   "prompt": "Write these numbers in ascending order (smallest first): 58,071; 50,871; 58,701; 9,781. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9781, 50871, 58071, 58701)",
-   "recomputed": "([Fraction(9, 1), Fraction(50, 1), Fraction(58, 1), Fraction(58, 1), Fraction(71, 1), Fraction(701, 1), Fraction(781, 1), Fraction(871, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:202",
-   "prompt": "Write these numbers in ascending order (smallest first): 55,204; 9,254; 55,024; 50,524. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9254, 50524, 55024, 55204)",
-   "recomputed": "([Fraction(9, 1), Fraction(24, 1), Fraction(50, 1), Fraction(55, 1), Fraction(55, 1), Fraction(204, 1), Fraction(254, 1), Fraction(524, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:203",
-   "prompt": "Write these numbers in ascending order (smallest first): 20,378; 23,708; 9,738; 23,078. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9738, 20378, 23078, 23708)",
-   "recomputed": "([Fraction(9, 1), Fraction(20, 1), Fraction(23, 1), Fraction(23, 1), Fraction(78, 1), Fraction(378, 1), Fraction(708, 1), Fraction(738, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:205",
-   "prompt": "Write these numbers in ascending order (smallest first): 5,325; 42,035; 40,235; 42,305. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(5325, 40235, 42035, 42305)",
-   "recomputed": "([Fraction(5, 1), Fraction(35, 1), Fraction(40, 1), Fraction(42, 1), Fraction(42, 1), Fraction(235, 1), Fraction(305, 1), Fraction(325, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:207",
-   "prompt": "Write these numbers in ascending order (smallest first): 9,543; 74,053; 70,453; 74,503. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9543, 70453, 74053, 74503)",
-   "recomputed": "([Fraction(9, 1), Fraction(53, 1), Fraction(70, 1), Fraction(74, 1), Fraction(74, 1), Fraction(453, 1), Fraction(503, 1), Fraction(543, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:216",
-   "prompt": "Write these numbers in ascending order (smallest first): 42,304; 8,324; 42,034; 40,234. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8324, 40234, 42034, 42304)",
-   "recomputed": "([Fraction(8, 1), Fraction(34, 1), Fraction(40, 1), Fraction(42, 1), Fraction(42, 1), Fraction(234, 1), Fraction(304, 1), Fraction(324, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:223",
-   "prompt": "Write these numbers in ascending order (smallest first): 7,192; 59,012; 50,912; 59,102. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(7192, 50912, 59012, 59102)",
-   "recomputed": "([Fraction(7, 1), Fraction(12, 1), Fraction(50, 1), Fraction(59, 1), Fraction(59, 1), Fraction(102, 1), Fraction(192, 1), Fraction(912, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:224",
-   "prompt": "Write these numbers in ascending order (smallest first): 29,057; 20,957; 29,507; 8,597. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8597, 20957, 29057, 29507)",
-   "recomputed": "([Fraction(8, 1), Fraction(20, 1), Fraction(29, 1), Fraction(29, 1), Fraction(57, 1), Fraction(507, 1), Fraction(597, 1), Fraction(957, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:228",
-   "prompt": "Write these numbers in ascending order (smallest first): 77,028; 70,728; 77,208; 8,278. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8278, 70728, 77028, 77208)",
-   "recomputed": "([Fraction(8, 1), Fraction(28, 1), Fraction(70, 1), Fraction(77, 1), Fraction(77, 1), Fraction(208, 1), Fraction(278, 1), Fraction(728, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:229",
-   "prompt": "Write these numbers in ascending order (smallest first): 6,653; 45,063; 40,563; 45,603. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6653, 40563, 45063, 45603)",
-   "recomputed": "([Fraction(6, 1), Fraction(40, 1), Fraction(45, 1), Fraction(45, 1), Fraction(63, 1), Fraction(563, 1), Fraction(603, 1), Fraction(653, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:230",
-   "prompt": "Write these numbers in ascending order (smallest first): 56,084; 50,684; 56,804; 8,864. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8864, 50684, 56084, 56804)",
-   "recomputed": "([Fraction(8, 1), Fraction(50, 1), Fraction(56, 1), Fraction(56, 1), Fraction(84, 1), Fraction(684, 1), Fraction(804, 1), Fraction(864, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:237",
-   "prompt": "Write these numbers in ascending order (smallest first): 9,693; 79,063; 70,963; 79,603. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9693, 70963, 79063, 79603)",
-   "recomputed": "([Fraction(9, 1), Fraction(63, 1), Fraction(70, 1), Fraction(79, 1), Fraction(79, 1), Fraction(603, 1), Fraction(693, 1), Fraction(963, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:250",
-   "prompt": "Write these numbers in ascending order (smallest first): 19,028; 10,928; 19,208; 5,298. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(5298, 10928, 19028, 19208)",
-   "recomputed": "([Fraction(5, 1), Fraction(10, 1), Fraction(19, 1), Fraction(19, 1), Fraction(28, 1), Fraction(208, 1), Fraction(298, 1), Fraction(928, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:253",
-   "prompt": "Write these numbers in ascending order (smallest first): 51,207; 6,217; 51,027; 50,127. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6217, 50127, 51027, 51207)",
-   "recomputed": "([Fraction(6, 1), Fraction(27, 1), Fraction(50, 1), Fraction(51, 1), Fraction(51, 1), Fraction(127, 1), Fraction(207, 1), Fraction(217, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:256",
-   "prompt": "Write these numbers in ascending order (smallest first): 78,053; 70,853; 78,503; 8,583. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8583, 70853, 78053, 78503)",
-   "recomputed": "([Fraction(8, 1), Fraction(53, 1), Fraction(70, 1), Fraction(78, 1), Fraction(78, 1), Fraction(503, 1), Fraction(583, 1), Fraction(853, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:260",
-   "prompt": "Write these numbers in ascending order (smallest first): 60,134; 61,304; 9,314; 61,034. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9314, 60134, 61034, 61304)",
-   "recomputed": "([Fraction(9, 1), Fraction(34, 1), Fraction(60, 1), Fraction(61, 1), Fraction(61, 1), Fraction(134, 1), Fraction(304, 1), Fraction(314, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:263",
-   "prompt": "Write these numbers in ascending order (smallest first): 60,386; 63,806; 9,836; 63,086. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9836, 60386, 63086, 63806)",
-   "recomputed": "([Fraction(9, 1), Fraction(60, 1), Fraction(63, 1), Fraction(63, 1), Fraction(86, 1), Fraction(386, 1), Fraction(806, 1), Fraction(836, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:268",
-   "prompt": "Write these numbers in ascending order (smallest first): 49,038; 40,938; 49,308; 7,398. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(7398, 40938, 49038, 49308)",
-   "recomputed": "([Fraction(7, 1), Fraction(38, 1), Fraction(40, 1), Fraction(49, 1), Fraction(49, 1), Fraction(308, 1), Fraction(398, 1), Fraction(938, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:269",
-   "prompt": "Write these numbers in ascending order (smallest first): 25,704; 4,754; 25,074; 20,574. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(4754, 20574, 25074, 25704)",
-   "recomputed": "([Fraction(4, 1), Fraction(20, 1), Fraction(25, 1), Fraction(25, 1), Fraction(74, 1), Fraction(574, 1), Fraction(704, 1), Fraction(754, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:274",
-   "prompt": "Write these numbers in ascending order (smallest first): 69,065; 60,965; 69,605; 9,695. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9695, 60965, 69065, 69605)",
-   "recomputed": "([Fraction(9, 1), Fraction(60, 1), Fraction(65, 1), Fraction(69, 1), Fraction(69, 1), Fraction(605, 1), Fraction(695, 1), Fraction(965, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:277",
-   "prompt": "Write these numbers in ascending order (smallest first): 30,357; 33,507; 9,537; 33,057. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9537, 30357, 33057, 33507)",
-   "recomputed": "([Fraction(9, 1), Fraction(30, 1), Fraction(33, 1), Fraction(33, 1), Fraction(57, 1), Fraction(357, 1), Fraction(507, 1), Fraction(537, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:28",
-   "prompt": "Write these numbers in ascending order (smallest first): 36,097; 30,697; 36,907; 9,967. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9967, 30697, 36097, 36907)",
-   "recomputed": "([Fraction(9, 1), Fraction(30, 1), Fraction(36, 1), Fraction(36, 1), Fraction(97, 1), Fraction(697, 1), Fraction(907, 1), Fraction(967, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:283",
-   "prompt": "Write these numbers in ascending order (smallest first): 40,764; 47,604; 6,674; 47,064. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6674, 40764, 47064, 47604)",
-   "recomputed": "([Fraction(6, 1), Fraction(40, 1), Fraction(47, 1), Fraction(47, 1), Fraction(64, 1), Fraction(604, 1), Fraction(674, 1), Fraction(764, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:289",
-   "prompt": "Write these numbers in ascending order (smallest first): 37,013; 30,713; 37,103; 6,173. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6173, 30713, 37013, 37103)",
-   "recomputed": "([Fraction(6, 1), Fraction(13, 1), Fraction(30, 1), Fraction(37, 1), Fraction(37, 1), Fraction(103, 1), Fraction(173, 1), Fraction(713, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:297",
-   "prompt": "Write these numbers in ascending order (smallest first): 10,263; 12,603; 9,623; 12,063. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9623, 10263, 12063, 12603)",
-   "recomputed": "([Fraction(9, 1), Fraction(10, 1), Fraction(12, 1), Fraction(12, 1), Fraction(63, 1), Fraction(263, 1), Fraction(603, 1), Fraction(623, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:299",
-   "prompt": "Write these numbers in ascending order (smallest first): 33,062; 30,362; 33,602; 6,632. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6632, 30362, 33062, 33602)",
-   "recomputed": "([Fraction(6, 1), Fraction(30, 1), Fraction(33, 1), Fraction(33, 1), Fraction(62, 1), Fraction(362, 1), Fraction(602, 1), Fraction(632, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:37",
-   "prompt": "Write these numbers in ascending order (smallest first): 77,908; 8,978; 77,098; 70,798. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8978, 70798, 77098, 77908)",
-   "recomputed": "([Fraction(8, 1), Fraction(70, 1), Fraction(77, 1), Fraction(77, 1), Fraction(98, 1), Fraction(798, 1), Fraction(908, 1), Fraction(978, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:53",
-   "prompt": "Write these numbers in ascending order (smallest first): 9,835; 63,085; 60,385; 63,805. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9835, 60385, 63085, 63805)",
-   "recomputed": "([Fraction(9, 1), Fraction(60, 1), Fraction(63, 1), Fraction(63, 1), Fraction(85, 1), Fraction(385, 1), Fraction(805, 1), Fraction(835, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:59",
-   "prompt": "Write these numbers in ascending order (smallest first): 43,506; 7,536; 43,056; 40,356. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(7536, 40356, 43056, 43506)",
-   "recomputed": "([Fraction(7, 1), Fraction(40, 1), Fraction(43, 1), Fraction(43, 1), Fraction(56, 1), Fraction(356, 1), Fraction(506, 1), Fraction(536, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:61",
-   "prompt": "Write these numbers in ascending order (smallest first): 6,875; 57,085; 50,785; 57,805. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6875, 50785, 57085, 57805)",
-   "recomputed": "([Fraction(6, 1), Fraction(50, 1), Fraction(57, 1), Fraction(57, 1), Fraction(85, 1), Fraction(785, 1), Fraction(805, 1), Fraction(875, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:62",
-   "prompt": "Write these numbers in ascending order (smallest first): 9,629; 22,069; 20,269; 22,609. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9629, 20269, 22069, 22609)",
-   "recomputed": "([Fraction(9, 1), Fraction(20, 1), Fraction(22, 1), Fraction(22, 1), Fraction(69, 1), Fraction(269, 1), Fraction(609, 1), Fraction(629, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:63",
-   "prompt": "Write these numbers in ascending order (smallest first): 15,096; 10,596; 15,906; 2,956. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(2956, 10596, 15096, 15906)",
-   "recomputed": "([Fraction(2, 1), Fraction(10, 1), Fraction(15, 1), Fraction(15, 1), Fraction(96, 1), Fraction(596, 1), Fraction(906, 1), Fraction(956, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:65",
-   "prompt": "Write these numbers in ascending order (smallest first): 40,362; 43,602; 8,632; 43,062. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8632, 40362, 43062, 43602)",
-   "recomputed": "([Fraction(8, 1), Fraction(40, 1), Fraction(43, 1), Fraction(43, 1), Fraction(62, 1), Fraction(362, 1), Fraction(602, 1), Fraction(632, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:70",
-   "prompt": "Write these numbers in ascending order (smallest first): 50,254; 52,504; 7,524; 52,054. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(7524, 50254, 52054, 52504)",
-   "recomputed": "([Fraction(7, 1), Fraction(50, 1), Fraction(52, 1), Fraction(52, 1), Fraction(54, 1), Fraction(254, 1), Fraction(504, 1), Fraction(524, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:72",
-   "prompt": "Write these numbers in ascending order (smallest first): 9,728; 72,078; 70,278; 72,708. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9728, 70278, 72078, 72708)",
-   "recomputed": "([Fraction(9, 1), Fraction(70, 1), Fraction(72, 1), Fraction(72, 1), Fraction(78, 1), Fraction(278, 1), Fraction(708, 1), Fraction(728, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:76",
-   "prompt": "Write these numbers in ascending order (smallest first): 75,708; 8,758; 75,078; 70,578. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8758, 70578, 75078, 75708)",
-   "recomputed": "([Fraction(8, 1), Fraction(70, 1), Fraction(75, 1), Fraction(75, 1), Fraction(78, 1), Fraction(578, 1), Fraction(708, 1), Fraction(758, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:78",
-   "prompt": "Write these numbers in ascending order (smallest first): 20,432; 24,302; 6,342; 24,032. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6342, 20432, 24032, 24302)",
-   "recomputed": "([Fraction(6, 1), Fraction(20, 1), Fraction(24, 1), Fraction(24, 1), Fraction(32, 1), Fraction(302, 1), Fraction(342, 1), Fraction(432, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:8",
-   "prompt": "Write these numbers in ascending order (smallest first): 8,641; 74,061; 70,461; 74,601. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(8641, 70461, 74061, 74601)",
-   "recomputed": "([Fraction(8, 1), Fraction(61, 1), Fraction(70, 1), Fraction(74, 1), Fraction(74, 1), Fraction(461, 1), Fraction(601, 1), Fraction(641, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:81",
-   "prompt": "Write these numbers in ascending order (smallest first): 33,209; 9,239; 33,029; 30,329. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(9239, 30329, 33029, 33209)",
-   "recomputed": "([Fraction(9, 1), Fraction(29, 1), Fraction(30, 1), Fraction(33, 1), Fraction(33, 1), Fraction(209, 1), Fraction(239, 1), Fraction(329, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:83",
-   "prompt": "Write these numbers in ascending order (smallest first): 46,702; 5,762; 46,072; 40,672. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(5762, 40672, 46072, 46702)",
-   "recomputed": "([Fraction(5, 1), Fraction(40, 1), Fraction(46, 1), Fraction(46, 1), Fraction(72, 1), Fraction(672, 1), Fraction(702, 1), Fraction(762, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:9",
-   "prompt": "Write these numbers in ascending order (smallest first): 40,384; 43,804; 6,834; 43,084. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6834, 40384, 43084, 43804)",
-   "recomputed": "([Fraction(6, 1), Fraction(40, 1), Fraction(43, 1), Fraction(43, 1), Fraction(84, 1), Fraction(384, 1), Fraction(804, 1), Fraction(834, 1)], True)",
-   "rule": "r_order"
-  },
-  {
-   "family": "aecmp",
-   "id": "gen:aecmp:91",
-   "prompt": "Write these numbers in ascending order (smallest first): 54,903; 6,943; 54,093; 50,493. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
-   "options": null,
-   "stated": "(6943, 50493, 54093, 54903)",
-   "recomputed": "([Fraction(6, 1), Fraction(50, 1), Fraction(54, 1), Fraction(54, 1), Fraction(93, 1), Fraction(493, 1), Fraction(903, 1), Fraction(943, 1)], True)",
-   "rule": "r_order"
-  }
- ],
+ "disagreements": [],
  "parseErrors": []
 }
