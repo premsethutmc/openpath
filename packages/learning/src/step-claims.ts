@@ -8,10 +8,9 @@
  *
  * Keep each claim small and general; the table below is the reviewable list of what is being asserted.
  */
-import { Rational, parseRational } from "./math-kernel";
-import type { Problem, Step } from "./family-kit";
-
-type Claim = (step: Step, problem: Problem) => Rational | null;
+import { Rational, parseRational, rat, gcdB, roundHalfUp } from "./claim-kit";
+import type { Claim, ClaimTable, Problem, Step } from "./claim-kit";
+import { MODULE_CLAIMS } from "./claims/index";
 
 const ints = (xs: readonly unknown[]): bigint[] | null => {
   const out: bigint[] = [];
@@ -23,21 +22,12 @@ const ints = (xs: readonly unknown[]): bigint[] | null => {
   }
   return out.length >= 2 ? out : null;
 };
-const gcdB = (a: bigint, b: bigint): bigint => (b === 0n ? a : gcdB(b, a % b));
-const rat = (n: bigint) => new Rational(n);
 
 /** Highest common factor of all the inputs. */
 const hcf: Claim = (s) => { const v = ints(s.inputs); return v ? rat(v.reduce(gcdB)) : null; };
 /** Lowest common multiple of all the inputs. */
 const lcm: Claim = (s) => { const v = ints(s.inputs); return v ? rat(v.reduce((a, b) => (a / gcdB(a, b)) * b)) : null; };
 
-/** Round half up to the nearest multiple of `unit` (positive values). */
-function roundHalfUp(n: Rational, unit: Rational): Rational | null {
-  if (unit.isZero() || n.numBig < 0n) return null;
-  const q = n.div(unit).add(new Rational(1, 2)); // floor(q) below
-  const fl = q.numBig / q.denBig; // bigint floor for a positive rational
-  return rat(fl).mul(unit);
-}
 /** inputs [n, k]: round n to k decimal places. */
 const roundToDecimalPlaces: Claim = (s) => {
   if (s.inputs.length !== 2) return null;
@@ -59,7 +49,7 @@ const roundToGreatestPlace: Claim = (s) => {
   return roundHalfUp(n, rat(10n ** BigInt(n.numBig.toString().length - 1)));
 };
 
-export const STEP_CLAIMS: Record<string, Claim> = {
+const CORE_CLAIMS: ClaimTable = {
   "aghcf3/hcf": hcf, "agcop/hcf": hcf, "aglcm/hcf": hcf, "aghlw/hcf": hcf,
   "aglcm3/lcm": lcm, "adfordu/lcm": lcm, "agjump/lcm": lcm, "adfcmpu/lcm": lcm, "aghlw/lcm": lcm,
   "adest/round": roundToTen,
@@ -67,16 +57,20 @@ export const STEP_CLAIMS: Record<string, Claim> = {
   "aerdec/round": roundToDecimalPlaces,
 };
 
+export const STEP_CLAIMS: ClaimTable = { ...CORE_CLAIMS, ...MODULE_CLAIMS };
+
 /** Whether a listed claim holds for this step: null if the pair has no claim or the claim cannot read the step. */
 export function stepClaimHolds(step: Step, problem: Problem): boolean | null {
-  const claim = STEP_CLAIMS[`${problem.family}/${step.op}`];
-  if (!claim) return null;
-  let expected: Rational | null;
-  try { expected = claim(step, problem); } catch { return null; }
-  if (!expected) return null;
-  if (typeof step.value !== "number" && typeof step.value !== "string") return false;
-  const stated = parseRational(step.value);
-  return !!stated && stated.eq(expected);
+  const entry = STEP_CLAIMS[`${problem.family}/${step.op}`];
+  if (!entry) return null;
+  try {
+    if (typeof entry !== "function") return entry.check(step, problem);
+    const expected = entry(step, problem);
+    if (!expected) return null;
+    if (typeof step.value !== "number" && typeof step.value !== "string") return false;
+    const stated = parseRational(step.value);
+    return !!stated && stated.eq(expected);
+  } catch { return null; }
 }
 
 /** Whether a claim is listed for this (family, step type). */
