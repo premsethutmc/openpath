@@ -1,0 +1,4283 @@
+[
+ {
+  "key": "accmpx/compare",
+  "steps": 800,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    400
+   ],
+   [
+    "in[int]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Choose <, > or = to make this true. Try to decide without working out both sides in full: 24 + 15 ○ 21 + 15",
+   "inputs": [
+    -3,
+    0,
+    0
+   ],
+   "value": 3,
+   "id": "change",
+   "answer": "A",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acmoneymul/convert",
+  "steps": 800,
+  "sigs": [
+   [
+    "in[numstr]->int",
+    400
+   ],
+   [
+    "in[int]->numstr",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "One box of crayons costs ₹1.10. What do 3 boxes of crayons cost? Write the answer in rupees, like 4.50.",
+   "inputs": [
+    "1.10"
+   ],
+   "value": 110,
+   "id": "paise",
+   "answer": "3.30",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aedec/place",
+  "steps": 800,
+  "sigs": [
+   [
+    "in[int]->dec",
+    716
+   ],
+   [
+    "in[int]->int",
+    84
+   ]
+  ],
+  "sample": {
+   "prompt": "In the picture, a big square (flat) is 1 whole, a rod is one tenth and a small cube is one hundredth. The pict",
+   "inputs": [
+    1
+   ],
+   "value": 0.1,
+   "id": "tenths",
+   "answer": "0.1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "avlat/add",
+  "steps": 797,
+  "sigs": [
+   [
+    "in[int]->int",
+    797
+   ]
+  ],
+  "sample": {
+   "prompt": "The grid in the picture is the lattice for 12 × 12: 12 along the top, 12 down the right side, and each box hol",
+   "inputs": [
+    0
+   ],
+   "value": 4,
+   "id": "d0",
+   "answer": "144",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aechk/estimate",
+  "steps": 693,
+  "sigs": [
+   [
+    "in[int]->int",
+    693
+   ]
+  ],
+  "sample": {
+   "prompt": "Anu worked out 296 + 36 and got 332. Without working it out exactly, round the numbers to estimate the answer.",
+   "inputs": [
+    0
+   ],
+   "value": 2,
+   "id": "judge",
+   "answer": "C",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acelapsed/count on",
+  "steps": 652,
+  "sigs": [
+   [
+    "in[time,time]->int",
+    652
+   ]
+  ],
+  "sample": {
+   "prompt": "A school play starts at the time shown on the clock. It ends at 1:15. How many minutes does the play last?",
+   "inputs": [
+    "1:10",
+    "1:15"
+   ],
+   "value": 5,
+   "id": "count",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acelhm/add",
+  "steps": 602,
+  "sigs": [
+   [
+    "in[time,int]->time",
+    404
+   ],
+   [
+    "in[int,int]->text",
+    198
+   ]
+  ],
+  "sample": {
+   "prompt": "A function in the school hall starts at 1:00 p.m. and ends at 3:35 p.m. How long does it last? Write the answe",
+   "inputs": [
+    0,
+    35
+   ],
+   "value": "(2, 35)",
+   "id": "total",
+   "answer": "(2, 35)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "abgrid/count",
+  "steps": 600,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    600
+   ]
+  ],
+  "sample": {
+   "prompt": "On the grid, S is the start and E is the end. You may move only along the grid lines: left, right, up or down.",
+   "inputs": [
+    0,
+    2
+   ],
+   "value": 2,
+   "id": "across",
+   "answer": "3",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acpictmore/read",
+  "steps": 600,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    600
+   ]
+  ],
+  "sample": {
+   "prompt": "The pictograph shows how the children of a school come to school. Each ● stands for 1 child. How many more chi",
+   "inputs": [
+    6,
+    1
+   ],
+   "value": 6,
+   "id": "big",
+   "answer": "4",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aenumf/place",
+  "steps": 600,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    600
+   ]
+  ],
+  "sample": {
+   "prompt": "Which is the number name of 34,907 in the Indian system?",
+   "inputs": [
+    0,
+    34907
+   ],
+   "value": 3,
+   "id": "name",
+   "answer": "D",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afbar/read",
+  "steps": 600,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    600
+   ]
+  ],
+  "sample": {
+   "prompt": "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on",
+   "inputs": [
+    1,
+    2
+   ],
+   "value": 2,
+   "id": "read1",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acelhm/count on",
+  "steps": 594,
+  "sigs": [
+   [
+    "in[time,time]->int",
+    594
+   ]
+  ],
+  "sample": {
+   "prompt": "A function in the school hall starts at 1:00 p.m. and ends at 3:35 p.m. How long does it last? Write the answe",
+   "inputs": [
+    "1:00 p.m.",
+    "1:00 p.m."
+   ],
+   "value": 0,
+   "id": "to-hour",
+   "answer": "(2, 35)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aerdec/compare",
+  "steps": 594,
+  "sigs": [
+   [
+    "in[numstr,int]->int",
+    594
+   ]
+  ],
+  "sample": {
+   "prompt": "Round 26.995 to the nearest whole number.",
+   "inputs": [
+    "26.995",
+    0
+   ],
+   "value": 9,
+   "id": "look",
+   "answer": "27",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aeirr/count",
+  "steps": 567,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    370
+   ],
+   [
+    "in[int]->dec",
+    110
+   ],
+   [
+    "in[int]->int",
+    87
+   ]
+  ],
+  "sample": {
+   "prompt": "The picture shows a leaf traced on squared paper. ■ is a square fully covered, ◕ more than half covered, ◑ exa",
+   "inputs": [
+    13,
+    9
+   ],
+   "value": 22,
+   "id": "full",
+   "answer": "23.5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acsub3/regroup and subtract",
+  "steps": 552,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    552
+   ]
+  ],
+  "sample": {
+   "prompt": "110 − 93 = ?",
+   "inputs": [
+    10,
+    3,
+    1
+   ],
+   "value": 7,
+   "id": "ones",
+   "answer": "17",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aesym/count",
+  "steps": 551,
+  "sigs": [
+   [
+    "in[text,text]->int",
+    551
+   ]
+  ],
+  "sample": {
+   "prompt": "Look at these capital letters: G  A  J  Z  T. How many of them have a vertical line of symmetry (a fold going ",
+   "inputs": [
+    "vertical",
+    "A, T"
+   ],
+   "value": 2,
+   "id": "check",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "fmulw/evaluate",
+  "steps": 528,
+  "sigs": [
+   [
+    "in[int]->int",
+    528
+   ]
+  ],
+  "sample": {
+   "prompt": "2 × 1/2 = ? (A fraction is fine.)",
+   "inputs": [
+    2
+   ],
+   "value": 2,
+   "id": "keep",
+   "answer": "1",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agdec/rewrite",
+  "steps": 500,
+  "sigs": [
+   [
+    "in[numstr,numstr]->numstr",
+    500
+   ]
+  ],
+  "sample": {
+   "prompt": "Work out 1.1 + 3.74.",
+   "inputs": [
+    "1.1",
+    "1.10"
+   ],
+   "value": "1.10",
+   "id": "line-up",
+   "answer": "4.84",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agrupee/regroup",
+  "steps": 500,
+  "sigs": [
+   [
+    "in[int]->int",
+    338
+   ],
+   [
+    "in[int,int]->int",
+    162
+   ]
+  ],
+  "sample": {
+   "prompt": "₹10.55 + ₹19.60 = ? Give the answer in rupees (for example, write 12.50 for ₹12.50).",
+   "inputs": [
+    115
+   ],
+   "value": 15,
+   "id": "exchange",
+   "answer": "30.15",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aeconvu/divide",
+  "steps": 450,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    450
+   ]
+  ],
+  "sample": {
+   "prompt": "208 cm = how many m and cm? Write the answer as (m, cm); for example, 3 m 5 cm is (3, 5).",
+   "inputs": [
+    208,
+    100
+   ],
+   "value": 2,
+   "id": "big",
+   "answer": "(2, 8)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aeround/compare",
+  "steps": 450,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    450
+   ]
+  ],
+  "sample": {
+   "prompt": "Round 206 to the nearest ten.",
+   "inputs": [
+    206,
+    10
+   ],
+   "value": 6,
+   "id": "look",
+   "answer": "210",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adbar/read",
+  "steps": 448,
+  "sigs": [
+   [
+    "in[int,int,int,int]->list",
+    224
+   ],
+   [
+    "in[int]->int",
+    112
+   ],
+   [
+    "in[int,int]->list",
+    112
+   ]
+  ],
+  "sample": {
+   "prompt": "The bar chart shows the fruit children in Class 3 like best. How many children like Mango best?",
+   "inputs": [
+    0
+   ],
+   "value": 8,
+   "id": "read",
+   "answer": "8",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adestcost/round",
+  "steps": 420,
+  "sigs": [
+   [
+    "in[int]->int",
+    420
+   ]
+  ],
+  "sample": {
+   "prompt": "Anu buys the things in the picture: a school bag for ₹107, a torch for ₹81, a towel for ₹179. Round each price",
+   "inputs": [
+    107
+   ],
+   "value": 110,
+   "id": "round0",
+   "answer": "370",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adcolx/subtract",
+  "steps": 406,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    406
+   ]
+  ],
+  "sample": {
+   "prompt": "752 − 13 = ?",
+   "inputs": [
+    2,
+    3,
+    0
+   ],
+   "value": 9,
+   "id": "ones",
+   "answer": "739",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aedpv/place",
+  "steps": 404,
+  "sigs": [
+   [
+    "in[numstr,int]->int",
+    404
+   ]
+  ],
+  "sample": {
+   "prompt": "What is the place value of the digit 5 in 95.426?",
+   "inputs": [
+    "95.426",
+    1
+   ],
+   "value": 1,
+   "id": "place",
+   "answer": "B",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aapatn/continue",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "The number cards in the picture make a pattern that repeats: 1, 2, 1, 2, ?. Which number comes next?",
+   "inputs": [],
+   "value": 1,
+   "id": "next",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aapatn/find the place in the part",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "The number cards in the picture make a pattern that repeats: 1, 2, 1, 2, ?. Which number comes next?",
+   "inputs": [
+    4,
+    2
+   ],
+   "value": 1,
+   "id": "place",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aapatn/find the repeating part",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int]->text",
+    201
+   ],
+   [
+    "in[int,int,int,int]->text",
+    132
+   ],
+   [
+    "in[int,int]->text",
+    67
+   ]
+  ],
+  "sample": {
+   "prompt": "The number cards in the picture make a pattern that repeats: 1, 2, 1, 2, ?. Which number comes next?",
+   "inputs": [
+    1,
+    2
+   ],
+   "value": "1, 2",
+   "id": "unit",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abcup/read",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text]->int",
+    216
+   ],
+   [
+    "in[text,text]->list",
+    184
+   ]
+  ],
+  "sample": {
+   "prompt": "The chart shows how many cups of water fill each container, using the same small cup. How many more cups does ",
+   "inputs": [
+    "Jug",
+    "Pot"
+   ],
+   "value": [
+    5,
+    3
+   ],
+   "id": "read2",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acelapsed/read clock",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->time",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "A school play starts at the time shown on the clock. It ends at 1:15. How many minutes does the play last?",
+   "inputs": [
+    1,
+    10
+   ],
+   "value": "1:10",
+   "id": "read",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acstory/choose operation",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "12 children are playing in the park. 2 more children come to play. How many children are in the park now?",
+   "inputs": [
+    "add"
+   ],
+   "value": 0,
+   "id": "choose",
+   "answer": "14",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acsub2/regroup",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "24 − 15 = ?",
+   "inputs": [
+    2,
+    4
+   ],
+   "value": 14,
+   "id": "regroup",
+   "answer": "9",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "actrain/add",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[time,text]->time",
+    207
+   ],
+   [
+    "in[int,int]->text",
+    193
+   ]
+  ],
+  "sample": {
+   "prompt": "The timetable in the picture is for the Coral Coast Express from Tirunelveli to Chennai. How long does the jou",
+   "inputs": [
+    1440,
+    410
+   ],
+   "value": "(30, 50)",
+   "id": "total",
+   "answer": "(30, 50)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "addr/regroup",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "11 + 19 = ?",
+   "inputs": [
+    10
+   ],
+   "value": 0,
+   "id": "regroup",
+   "answer": "30",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adford/order",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int,int]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Write these fractions in order from the smallest to the largest: 2/4, 1/4, 3/4. Write them in brackets, separa",
+   "inputs": [
+    2,
+    1,
+    3,
+    0
+   ],
+   "value": "(1/4, 2/4, 3/4)",
+   "id": "order",
+   "answer": "(1/4, 2/4, 3/4)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "adfordu/convert",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[fracstr,fracstr,fracstr]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Write these fractions in order from the smallest to the largest: 1/2, 1/3, 2/5. Write them in brackets, separa",
+   "inputs": [
+    "1/2",
+    "1/3",
+    "2/5"
+   ],
+   "value": "15/30, 10/30, 12/30",
+   "id": "rewrite",
+   "answer": "(1/3, 2/5, 1/2)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "adfordu/order",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Write these fractions in order from the smallest to the largest: 1/2, 1/3, 2/5. Write them in brackets, separa",
+   "inputs": [
+    30
+   ],
+   "value": "(1/3, 2/5, 1/2)",
+   "id": "order",
+   "answer": "(1/3, 2/5, 1/2)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "advenn/choose cells",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows which of two games, cricket and kho-kho, the children of a class play. How many children play ",
+   "inputs": [
+    1
+   ],
+   "value": "1, 1",
+   "id": "cells",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aeang/compare",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "The table gives the sizes of four angles: P = 10°, Q = 90°, R = 110°, S = 180°. Which one is an acute angle? W",
+   "inputs": [
+    "acute",
+    90
+   ],
+   "value": 10,
+   "id": "compare",
+   "answer": "10",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aedec/add",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int]->numstr",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "In the picture, a big square (flat) is 1 whole, a rod is one tenth and a small cube is one hundredth. The pict",
+   "inputs": [
+    0,
+    1,
+    0
+   ],
+   "value": "0.1",
+   "id": "total",
+   "answer": "0.1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aedivm/divide",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Divide 8 m 5 cm into 7 equal parts. How much is each part? Write the answer as (m, cm); for example, 3 m 45 cm",
+   "inputs": [
+    8,
+    7
+   ],
+   "value": 1,
+   "id": "big",
+   "answer": "(1, 15)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aedivm/regroup",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Divide 8 m 5 cm into 7 equal parts. How much is each part? Write the answer as (m, cm); for example, 3 m 45 cm",
+   "inputs": [
+    1,
+    100,
+    5
+   ],
+   "value": 105,
+   "id": "regroup",
+   "answer": "(1, 15)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aehund/add",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "On a 1–100 number grid there are 10 numbers in each row (1 to 10 in the first row, 11 to 20 in the next, and s",
+   "inputs": [
+    1,
+    2
+   ],
+   "value": 21,
+   "id": "down",
+   "answer": "21",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aemirror/reflect",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text,text]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "A word is written in plain capital letters on a card, and the card is held next to a mirror standing straight ",
+   "inputs": [
+    "side",
+    "MOM"
+   ],
+   "value": 0,
+   "id": "mirror",
+   "answer": "A",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aemulm/multiply",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Work out 7 × 1 m 15 cm. Write the answer as (m, cm); for example, 3 m 45 cm is (3, 45).",
+   "inputs": [
+    1,
+    7,
+    1
+   ],
+   "value": 8,
+   "id": "big",
+   "answer": "(8, 5)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aemulm/regroup",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Work out 7 × 1 m 15 cm. Write the answer as (m, cm); for example, 3 m 45 cm is (3, 45).",
+   "inputs": [
+    105,
+    100
+   ],
+   "value": 1,
+   "id": "regroup",
+   "answer": "(8, 5)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aepat/count",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "A number pattern starts at 1. The rule is: add 4 each time. The pattern begins 1, 5, 9, 13, … What is the 10th",
+   "inputs": [
+    10
+   ],
+   "value": 9,
+   "id": "jumps",
+   "answer": "37",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aerefl/reflect",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "In the picture, the point P is at (0, 0) and the mirror line is x = 1. Reflect P in the mirror line. What are ",
+   "inputs": [
+    0,
+    1,
+    -1
+   ],
+   "value": "(2, 0)",
+   "id": "image",
+   "answer": "(2, 0)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afcube/fold",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "The picture shows a net of a cube with its six squares lettered. When it is folded into a cube, which face is ",
+   "inputs": [
+    "F"
+   ],
+   "value": "D",
+   "id": "fold",
+   "answer": "D",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aghlw/choose",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Arjun has 15 laddoos and 24 jalebis for a party. All the plates must be the same: each plate gets the same num",
+   "inputs": [
+    "HCF"
+   ],
+   "value": "HCF",
+   "id": "decide",
+   "answer": "3",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agmeas/convert",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,text,int,text]->numstr",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Imran joins a rope 1.1 m long to another rope 90 cm long. How long is the joined rope, in metres?",
+   "inputs": [
+    90,
+    "cm",
+    100,
+    "m"
+   ],
+   "value": "0.9",
+   "id": "convert",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agprime/classify",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->list",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "List all the prime numbers from 4 to 24.",
+   "inputs": [
+    4,
+    24
+   ],
+   "value": [
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23
+   ],
+   "id": "test",
+   "answer": "5,7,11,13,17,19,23",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agspd/read",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,text,text]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "A van travels 36 km in 3 hours, going the same distance every hour. How many km does it travel in 1 hour?",
+   "inputs": [
+    36,
+    3,
+    "km",
+    "hours"
+   ],
+   "value": 36,
+   "id": "total",
+   "answer": "12",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "agspdc/compare",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows how far Lakshmi and Imran cycled and how long each took, each at a steady speed. How many metr",
+   "inputs": [
+    20,
+    27
+   ],
+   "value": 27,
+   "id": "compare",
+   "answer": "27",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "ajbest/compare",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Pack A has 2 soaps for ₹20. Pack B has 3 soaps for ₹147. Find the price of one soap in the pack that is better",
+   "inputs": [
+    10,
+    49
+   ],
+   "value": 10,
+   "id": "compare",
+   "answer": "10",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "anpair/substitute",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "For a school play, 2 children's tickets and 3 adult tickets cost ₹40, and 3 children's tickets and 1 adult tic",
+   "inputs": [
+    40,
+    3,
+    10,
+    2
+   ],
+   "value": 5,
+   "id": "x",
+   "answer": "(5, 10)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "anpair/subtract",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text]->text",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "For a school play, 2 children's tickets and 3 adult tickets cost ₹40, and 3 children's tickets and 1 adult tic",
+   "inputs": [
+    "3 × first − 2 × second"
+   ],
+   "value": "7y = 70",
+   "id": "eliminate",
+   "answer": "(5, 10)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "anpair/write",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[text,text]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "For a school play, 2 children's tickets and 3 adult tickets cost ₹40, and 3 children's tickets and 1 adult tic",
+   "inputs": [
+    "2x + 3y = 40",
+    "3x + 1y = 25"
+   ],
+   "value": 2,
+   "id": "model",
+   "answer": "(5, 10)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "avrsub/subtract",
+  "steps": 400,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    400
+   ]
+  ],
+  "sample": {
+   "prompt": "Start at 4 and take away 2 again and again, as long as you can. How many times can you take away 2?",
+   "inputs": [
+    4,
+    2,
+    2
+   ],
+   "value": 0,
+   "id": "takes",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aaordx/compare digits from the left",
+  "steps": 394,
+  "sigs": [
+   [
+    "in[int,int,int,int]->text",
+    394
+   ]
+  ],
+  "sample": {
+   "prompt": "Put these numbers in ascending order (from the smallest to the greatest): 9, 4, 5, 7. Write them in that order",
+   "inputs": [
+    9,
+    4,
+    5,
+    7
+   ],
+   "value": "4, 5, 7, 9",
+   "id": "compare",
+   "answer": "4, 5, 7, 9",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aaordx/order",
+  "steps": 394,
+  "sigs": [
+   [
+    "in[int]->text",
+    394
+   ]
+  ],
+  "sample": {
+   "prompt": "Put these numbers in ascending order (from the smallest to the greatest): 9, 4, 5, 7. Write them in that order",
+   "inputs": [
+    0
+   ],
+   "value": "4, 5, 7, 9",
+   "id": "order",
+   "answer": "4, 5, 7, 9",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "actrain/count on",
+  "steps": 386,
+  "sigs": [
+   [
+    "in[time,time]->int",
+    193
+   ],
+   [
+    "in[time,time,int]->int",
+    193
+   ]
+  ],
+  "sample": {
+   "prompt": "The timetable in the picture is for the Coral Coast Express from Tirunelveli to Chennai. How long does the jou",
+   "inputs": [
+    "00:00",
+    "24:00"
+   ],
+   "value": 1440,
+   "id": "to-midnight",
+   "answer": "(30, 50)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "agptest/square-root",
+  "steps": 386,
+  "sigs": [
+   [
+    "in[int]->int",
+    386
+   ]
+  ],
+  "sample": {
+   "prompt": "To decide whether 53 is prime, Imran divides it by the primes 2, 3, 5, 7, … in order. If none of them divides ",
+   "inputs": [
+    53
+   ],
+   "value": 7,
+   "id": "root",
+   "answer": "7",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "avlow/evaluate",
+  "steps": 360,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    360
+   ]
+  ],
+  "sample": {
+   "prompt": "Write 2/4 in its lowest terms.",
+   "inputs": [
+    2,
+    4
+   ],
+   "value": 2,
+   "id": "hcf",
+   "answer": "1/2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "avvcmp/compare",
+  "steps": 360,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    360
+   ]
+  ],
+  "sample": {
+   "prompt": "Box A is built from 1 cm cubes: 2 long, 2 wide and 2 high. Box B is built from 1 cm cubes: 2 long, 2 wide and ",
+   "inputs": [
+    8,
+    12
+   ],
+   "value": "Box B has the greater volume",
+   "id": "compare",
+   "answer": "A",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "avrsub/divide",
+  "steps": 352,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    352
+   ]
+  ],
+  "sample": {
+   "prompt": "Start at 5 and take away 2 again and again, as long as you can. How many times can you take away 2?",
+   "inputs": [
+    5,
+    2,
+    2,
+    1
+   ],
+   "value": 2,
+   "id": "division",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aedigsym/count",
+  "steps": 347,
+  "sigs": [
+   [
+    "in[text,text]->int",
+    250
+   ],
+   [
+    "in[text,numstr]->int",
+    97
+   ]
+  ],
+  "sample": {
+   "prompt": "These are written the way a digital clock shows them, with straight bars: 30, 83, 888, 6, 808. How many of the",
+   "inputs": [
+    "vertical",
+    "888, 808"
+   ],
+   "value": 2,
+   "id": "check",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "accal/divide",
+  "steps": 336,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    336
+   ]
+  ],
+  "sample": {
+   "prompt": "The hour hand of a clock points to 1. Where will it point 13 hours later?",
+   "inputs": [
+    13,
+    12
+   ],
+   "value": 1,
+   "id": "rounds",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adbartf/compare",
+  "steps": 336,
+  "sigs": [
+   [
+    "in[int]->text",
+    336
+   ]
+  ],
+  "sample": {
+   "prompt": "The bar chart shows the fruit children in Class 3 like best. Is this statement true or false? \"More children l",
+   "inputs": [
+    0
+   ],
+   "value": "True",
+   "id": "judge",
+   "answer": "B",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adbartf/read",
+  "steps": 336,
+  "sigs": [
+   [
+    "in[int,int,int,int]->text",
+    336
+   ]
+  ],
+  "sample": {
+   "prompt": "The bar chart shows the fruit children in Class 3 like best. Is this statement true or false? \"More children l",
+   "inputs": [
+    8,
+    9,
+    6,
+    4
+   ],
+   "value": "More children like Banana best than Mango.",
+   "id": "read",
+   "answer": "B",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "avdiv/divide",
+  "steps": 325,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    325
+   ]
+  ],
+  "sample": {
+   "prompt": "Use long division to work out 155 ÷ 2. What is the quotient?",
+   "inputs": [
+    155,
+    2
+   ],
+   "value": 77,
+   "id": "long",
+   "answer": "77",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acstory4/choose operation",
+  "steps": 320,
+  "sigs": [
+   [
+    "in[text]->int",
+    320
+   ]
+  ],
+  "sample": {
+   "prompt": "A village has 2,952 men and 4,005 women. How many people live in the village?",
+   "inputs": [
+    "add"
+   ],
+   "value": 0,
+   "id": "choose",
+   "answer": "6957",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aertang/compare",
+  "steps": 305,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    305
+   ]
+  ],
+  "sample": {
+   "prompt": "Hold the corner of a folded paper (a right angle) against the shaded angle at the centre of the circle in the ",
+   "inputs": [
+    0,
+    20
+   ],
+   "value": 1,
+   "id": "compare",
+   "answer": "B",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aaordn/order",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int,int]->text",
+    164
+   ],
+   [
+    "in[int,int,int,int]->text",
+    136
+   ]
+  ],
+  "sample": {
+   "prompt": "Put these numbers in order from the smallest to the biggest: 48, 86, 95, 89. Write them with commas.",
+   "inputs": [
+    48,
+    86,
+    95,
+    89
+   ],
+   "value": "48, 86, 89, 95",
+   "id": "order",
+   "answer": "48, 86, 89, 95",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aaweave/find the repeating part",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "A mat is woven with a strip that goes over 1 and under 1, again and again: over, under, over, under, … In the ",
+   "inputs": [
+    1,
+    1
+   ],
+   "value": 2,
+   "id": "repeat",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abcupord/compare cups",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int,int,int]->text",
+    240
+   ],
+   [
+    "in[int,int,int]->text",
+    60
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows how many cups of water fill each container, and how tall each one is. Put the containers in or",
+   "inputs": [
+    3,
+    5,
+    8
+   ],
+   "value": "3, 2, 1",
+   "id": "order",
+   "answer": "3, 2, 1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abdisp/volume",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "A measuring jar has water up to the 100 ml mark. A stone is dropped in and sinks; the water rises to the 110 m",
+   "inputs": [],
+   "value": 10,
+   "id": "answer",
+   "answer": "10",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acgrow/find rule",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows a growing pattern of dots. How many dots will there be in step 4?",
+   "inputs": [
+    1,
+    2
+   ],
+   "value": 1,
+   "id": "rule",
+   "answer": "4",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acpaise/convert",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "How many paise are there in ₹1 and 10 paise?",
+   "inputs": [
+    1
+   ],
+   "value": 100,
+   "id": "rupees",
+   "answer": "110",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acpict/count",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[text]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 1 child. How many chi",
+   "inputs": [
+    "Mango"
+   ],
+   "value": 1,
+   "id": "pictures",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acpicthalf/count",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[text]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 2 children, and a hal",
+   "inputs": [
+    "Mango"
+   ],
+   "value": 14,
+   "id": "halves",
+   "answer": "14",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acplace/place digits",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "Use each of the digit cards in the picture (1, 2, 4, 3) once to make two two-digit numbers. What is the larges",
+   "inputs": [
+    42,
+    31
+   ],
+   "value": "42 and 31",
+   "id": "place",
+   "answer": "73",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aecmp/compare",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int,int,int]->text",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "Write these numbers in ascending order (smallest first): 15,092; 10,592; 15,902; 6,952. Write the list in brac",
+   "inputs": [
+    15092,
+    10592,
+    15902,
+    6952
+   ],
+   "value": "(6952, 10592, 15092, 15902)",
+   "id": "order",
+   "answer": "(6952, 10592, 15092, 15902)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aedecc/compare",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->numstr",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "Which number is greater: 0.1 or 0.08? Write the greater number.",
+   "inputs": [
+    1,
+    0
+   ],
+   "value": "0.1",
+   "id": "tenths",
+   "answer": "0.1",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aedord/compare",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[numstr,numstr,numstr,numstr]->text",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "Write these decimals in ascending order (smallest first): 0.1; 0.01; 0.101; 0.11. Write them in brackets, sepa",
+   "inputs": [
+    "0.1",
+    "0.01",
+    "0.101",
+    "0.11"
+   ],
+   "value": "(0.01, 0.1, 0.101, 0.11)",
+   "id": "order",
+   "answer": "(0.01, 0.1, 0.101, 0.11)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aernd/compare",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "A truck has travelled 60,104 km in its working life. Round this number to the nearest thousand.",
+   "inputs": [
+    60104,
+    1000
+   ],
+   "value": 1,
+   "id": "look",
+   "answer": "60000",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agjump/multiples",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->list",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "A frog starts at 0 and jumps 2 at a time. A rabbit starts at 0 and jumps 3 at a time. The picture shows their ",
+   "inputs": [
+    6,
+    40
+   ],
+   "value": [
+    6,
+    12,
+    18,
+    24,
+    30,
+    36
+   ],
+   "id": "repeat",
+   "answer": "6,12,18,24,30,36",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "anquad/compare",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int]->int",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "The length of a rectangular plot is 1 m more than its width, and its area is 6 m². Form a quadratic equation a",
+   "inputs": [
+    -3
+   ],
+   "value": 2,
+   "id": "reject",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "anquad/factorise",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "The length of a rectangular plot is 1 m more than its width, and its area is 6 m². Form a quadratic equation a",
+   "inputs": [
+    1,
+    -6
+   ],
+   "value": "2, −3",
+   "id": "roots",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "anquad/write",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[text]->text",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "The length of a rectangular plot is 1 m more than its width, and its area is 6 m². Form a quadratic equation a",
+   "inputs": [
+    "x(x + 1) = 6"
+   ],
+   "value": "x² + 1x − 6 = 0",
+   "id": "model",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "avlike/compare",
+  "steps": 300,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    300
+   ]
+  ],
+  "sample": {
+   "prompt": "Which pair are like fractions?",
+   "inputs": [
+    3,
+    3
+   ],
+   "value": "1/3 and 2/3",
+   "id": "bottoms",
+   "answer": "B",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acstory9/choose operation",
+  "steps": 288,
+  "sigs": [
+   [
+    "in[text]->int",
+    288
+   ]
+  ],
+  "sample": {
+   "prompt": "Kavya has 1 balloon. Her brother gives her 1 more. How many balloons does she have now?",
+   "inputs": [
+    "add"
+   ],
+   "value": 0,
+   "id": "choose",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adpreg/count",
+  "steps": 288,
+  "sigs": [
+   [
+    "in[text]->int",
+    288
+   ]
+  ],
+  "sample": {
+   "prompt": "All the sides of the equilateral triangle in the picture are equal, and one side is 2 cm. What is its perimete",
+   "inputs": [
+    "equilateral triangle"
+   ],
+   "value": 3,
+   "id": "count",
+   "answer": "6",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aeampm/convert",
+  "steps": 288,
+  "sigs": [
+   [
+    "in[int]->int",
+    288
+   ]
+  ],
+  "sample": {
+   "prompt": "A railway clock shows 00:00 (24-hour time). How is this time written on a 12-hour clock with a.m. or p.m.? (12",
+   "inputs": [
+    0
+   ],
+   "value": 2,
+   "id": "ampm",
+   "answer": "C",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aet24/convert",
+  "steps": 288,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    288
+   ]
+  ],
+  "sample": {
+   "prompt": "Write 1:00 a.m. in 24-hour time. Give the hours and the minutes as (hours, minutes); for example, 13:05 is wri",
+   "inputs": [
+    1,
+    0
+   ],
+   "value": 1,
+   "id": "hours",
+   "answer": "(1, 0)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adfcmpu/compare",
+  "steps": 287,
+  "sigs": [
+   [
+    "in[int,int]->fracstr",
+    287
+   ]
+  ],
+  "sample": {
+   "prompt": "Which fraction is smaller: 1/2 or 2/9? Write that fraction.",
+   "inputs": [
+    9,
+    4
+   ],
+   "value": "2/9",
+   "id": "compare",
+   "answer": "2/9",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "adfcmpu/convert",
+  "steps": 287,
+  "sigs": [
+   [
+    "in[fracstr,fracstr]->text",
+    287
+   ]
+  ],
+  "sample": {
+   "prompt": "Which fraction is smaller: 1/2 or 2/9? Write that fraction.",
+   "inputs": [
+    "1/2",
+    "2/9"
+   ],
+   "value": "9/18 and 4/18",
+   "id": "rewrite",
+   "answer": "2/9",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acp2r/divide",
+  "steps": 282,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    282
+   ]
+  ],
+  "sample": {
+   "prompt": "Change 205 paise into rupees. Write the answer in rupees, like 4.50.",
+   "inputs": [
+    205,
+    100
+   ],
+   "value": 2,
+   "id": "rupees",
+   "answer": "2.05",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aewcmp/compare",
+  "steps": 281,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    281
+   ]
+  ],
+  "sample": {
+   "prompt": "Which sign goes in the box: 1 kg 600 g ☐ 1600 g? Choose <, = or >.",
+   "inputs": [
+    1600,
+    1600
+   ],
+   "value": 1,
+   "id": "compare",
+   "answer": "B",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aewcmp/convert",
+  "steps": 281,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    281
+   ]
+  ],
+  "sample": {
+   "prompt": "Which sign goes in the box: 1 kg 600 g ☐ 1600 g? Choose <, = or >.",
+   "inputs": [
+    1,
+    600
+   ],
+   "value": 1600,
+   "id": "convert",
+   "answer": "B",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acfacts/inverse",
+  "steps": 280,
+  "sigs": [
+   [
+    "in[int,int,int]->text",
+    280
+   ]
+  ],
+  "sample": {
+   "prompt": "1,015 + 3,645 = 4,660. Which subtraction fact belongs to the same fact family?",
+   "inputs": [
+    1015,
+    3645,
+    4660
+   ],
+   "value": "4,660 − 1,015 = 3,645",
+   "id": "relate",
+   "answer": "C",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aacmp/compare tens",
+  "steps": 279,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    279
+   ]
+  ],
+  "sample": {
+   "prompt": "Which number is more: 13 or 19?",
+   "inputs": [
+    1,
+    1
+   ],
+   "value": 19,
+   "id": "tens",
+   "answer": "19",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "agmix/divide",
+  "steps": 279,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    279
+   ]
+  ],
+  "sample": {
+   "prompt": "Write 3/2 as a mixed number (for example 2 1/3).",
+   "inputs": [
+    3,
+    2
+   ],
+   "value": 1,
+   "id": "divide",
+   "answer": "1 1/2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "adtally/count",
+  "steps": 270,
+  "sigs": [
+   [
+    "in[text]->int",
+    90
+   ],
+   [
+    "in[text,text,text]->list",
+    90
+   ],
+   [
+    "in[text,text]->list",
+    90
+   ]
+  ],
+  "sample": {
+   "prompt": "Children in a class chose their favourite fruit. The table shows their choices as tally marks (||||/ stands fo",
+   "inputs": [
+    "||||/ ||||/ |"
+   ],
+   "value": 11,
+   "id": "count",
+   "answer": "11",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adestchk/compare",
+  "steps": 249,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    249
+   ]
+  ],
+  "sample": {
+   "prompt": "Anu worked out 871 + 113 and got 984. Round each number to the nearest ten to estimate the answer. Is the answ",
+   "inputs": [
+    984,
+    980
+   ],
+   "value": "The answer is sensible",
+   "id": "judge",
+   "answer": "B",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "adestchk/round",
+  "steps": 249,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    249
+   ]
+  ],
+  "sample": {
+   "prompt": "Anu worked out 871 + 113 and got 984. Round each number to the nearest ten to estimate the answer. Is the answ",
+   "inputs": [
+    871,
+    113
+   ],
+   "value": "870 and 110",
+   "id": "round",
+   "answer": "B",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acmoneyadd/subtract",
+  "steps": 246,
+  "sigs": [
+   [
+    "in[int,int,text,int]->int",
+    246
+   ]
+  ],
+  "sample": {
+   "prompt": "₹4.45 − ₹3.70 = ? Write the answer in rupees, like 4.50.",
+   "inputs": [
+    45,
+    70,
+    "−",
+    1
+   ],
+   "value": 75,
+   "id": "paise",
+   "answer": "0.75",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aagrp/compare",
+  "steps": 243,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    243
+   ]
+  ],
+  "sample": {
+   "prompt": "Look at the mangoes on the two plates in the picture. Which plate has more mangoes? If they have the same numb",
+   "inputs": [
+    1,
+    1
+   ],
+   "value": "Both have the same number",
+   "id": "compare",
+   "answer": "B",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "agfac/factorise",
+  "steps": 243,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    243
+   ]
+  ],
+  "sample": {
+   "prompt": "List all the factors of 4.",
+   "inputs": [
+    1,
+    4
+   ],
+   "value": 4,
+   "id": "pair1",
+   "answer": "1,2,4",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acgrow/count on",
+  "steps": 240,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    240
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows a growing pattern of dots. How many dots will there be in step 5?",
+   "inputs": [
+    3,
+    1,
+    2
+   ],
+   "value": 5,
+   "id": "extend",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "agptest/divide",
+  "steps": 240,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    240
+   ]
+  ],
+  "sample": {
+   "prompt": "What is the smallest prime factor of 101? (If 101 is prime, write 101.)",
+   "inputs": [
+    101,
+    10
+   ],
+   "value": "no prime up to the square root divides it",
+   "id": "try",
+   "answer": "101",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aapatu/count",
+  "steps": 228,
+  "sigs": [
+   [
+    "in[int]->int",
+    228
+   ]
+  ],
+  "sample": {
+   "prompt": "This pattern of shapes repeats: ● ▲ ● ▲. How many shapes are in the part that repeats?",
+   "inputs": [
+    2
+   ],
+   "value": 2,
+   "id": "count",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aapatu/find the repeating part",
+  "steps": 228,
+  "sigs": [
+   [
+    "in[text,text,text]->text",
+    108
+   ],
+   [
+    "in[text,text,text,text]->text",
+    96
+   ],
+   [
+    "in[text,text]->text",
+    24
+   ]
+  ],
+  "sample": {
+   "prompt": "This pattern of shapes repeats: ● ▲ ● ▲. How many shapes are in the part that repeats?",
+   "inputs": [
+    "●",
+    "▲"
+   ],
+   "value": "● ▲",
+   "id": "unit",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aecol4/add",
+  "steps": 225,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    225
+   ]
+  ],
+  "sample": {
+   "prompt": "1,123 + 34,937 = ?",
+   "inputs": [
+    1123,
+    34937,
+    2
+   ],
+   "value": 36060,
+   "id": "add",
+   "answer": "36060",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afpair/recall",
+  "steps": 220,
+  "sigs": [
+   [
+    "in[int]->int",
+    220
+   ]
+  ],
+  "sample": {
+   "prompt": "Two angles are complementary. One of them is 10°. What is the other angle, in degrees?",
+   "inputs": [
+    0
+   ],
+   "value": 90,
+   "id": "total",
+   "answer": "80",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adcolx/add",
+  "steps": 216,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    216
+   ]
+  ],
+  "sample": {
+   "prompt": "387 + 94 = ?",
+   "inputs": [
+    7,
+    4,
+    0
+   ],
+   "value": 1,
+   "id": "ones",
+   "answer": "481",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adrec/count",
+  "steps": 216,
+  "sigs": [
+   [
+    "in[int,int,int,int]->text",
+    216
+   ]
+  ],
+  "sample": {
+   "prompt": "The list in the picture shows each child of a class and what they chose for breakfast. Record it in a table wi",
+   "inputs": [
+    3,
+    2,
+    5,
+    2
+   ],
+   "value": "Boys: 3 idli, 2 dosa; Girls: 5 idli, 2 dosa",
+   "id": "tally",
+   "answer": "3",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adrec/read",
+  "steps": 216,
+  "sigs": [
+   [
+    "in[int]->int",
+    216
+   ]
+  ],
+  "sample": {
+   "prompt": "The list in the picture shows each child of a class and what they chose for breakfast. Record it in a table wi",
+   "inputs": [
+    0
+   ],
+   "value": 3,
+   "id": "read",
+   "answer": "3",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acmissing/subtract",
+  "steps": 213,
+  "sigs": [
+   [
+    "in[text]->int",
+    213
+   ]
+  ],
+  "sample": {
+   "prompt": "What number goes in the box? □ + 2 = 4",
+   "inputs": [
+    "subtract"
+   ],
+   "value": 0,
+   "id": "undo",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "actrain/subtract",
+  "steps": 207,
+  "sigs": [
+   [
+    "in[int,int]->time",
+    207
+   ]
+  ],
+  "sample": {
+   "prompt": "The Silver Sands Express leaves Rameswaram at 00:50 and the journey takes 24 hours 5 minutes. At what time doe",
+   "inputs": [
+    24,
+    24
+   ],
+   "value": "00:55",
+   "id": "days",
+   "answer": "(0, 55)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acmoneyadd/add",
+  "steps": 203,
+  "sigs": [
+   [
+    "in[int,int,text,int]->int",
+    203
+   ]
+  ],
+  "sample": {
+   "prompt": "₹1.45 + ₹16.70 = ? Write the answer in rupees, like 4.50.",
+   "inputs": [
+    45,
+    70,
+    "+",
+    1
+   ],
+   "value": 15,
+   "id": "paise",
+   "answer": "18.15",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "avfwq/evaluate",
+  "steps": 202,
+  "sigs": [
+   [
+    "in[int,int]->dec",
+    184
+   ],
+   [
+    "in[int,int]->int",
+    18
+   ]
+  ],
+  "sample": {
+   "prompt": "Each glass holds 1/2 litre of buttermilk. How many litres do 3 such glasses hold? (A fraction or mixed number ",
+   "inputs": [
+    3,
+    2
+   ],
+   "value": 1.5,
+   "id": "keep",
+   "answer": "3/2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aematch/deduce",
+  "steps": 200,
+  "sigs": [
+   [
+    "in[int]->int",
+    200
+   ]
+  ],
+  "sample": {
+   "prompt": "Anu, Arjun, Divya and Priya each like a different fruit: mangoes, bananas, guavas, grapes. Clues: Anu likes ba",
+   "inputs": [
+    4
+   ],
+   "value": 3,
+   "id": "match",
+   "answer": "D",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aeperar/add",
+  "steps": 200,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    200
+   ]
+  ],
+  "sample": {
+   "prompt": "A rectangular garden is 3 m long and 2 m wide. How many metres of fencing are needed to go once round the gard",
+   "inputs": [
+    2,
+    3
+   ],
+   "value": 10,
+   "id": "perimeter",
+   "answer": "10",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aaweave/full repeats and the part left",
+  "steps": 199,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    199
+   ]
+  ],
+  "sample": {
+   "prompt": "A mat is woven with a strip that goes over 1 and under 1, again and again: over, under, over, under, … In the ",
+   "inputs": [
+    5,
+    0
+   ],
+   "value": 5,
+   "id": "count",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aemix/regroup",
+  "steps": 195,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    195
+   ]
+  ],
+  "sample": {
+   "prompt": "Add: 1 m 60 cm + 5 m 65 cm. Write the answer as (m, cm); for example, 3 m 45 cm is (3, 45).",
+   "inputs": [
+    125,
+    100
+   ],
+   "value": 25,
+   "id": "regroup",
+   "answer": "(7, 25)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agclass/classify",
+  "steps": 191,
+  "sigs": [
+   [
+    "in[fracstr]->text",
+    146
+   ],
+   [
+    "in[text]->text",
+    45
+   ]
+  ],
+  "sample": {
+   "prompt": "What kind of number is 1/2?",
+   "inputs": [
+    "1/2"
+   ],
+   "value": "a proper fraction",
+   "id": "look",
+   "answer": "A",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aasign/compare",
+  "steps": 189,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    189
+   ]
+  ],
+  "sample": {
+   "prompt": "Which sign goes in the box: 6 ☐ 1? Choose <, > or =.",
+   "inputs": [
+    6,
+    1
+   ],
+   "value": ">",
+   "id": "compare",
+   "answer": "B",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "affrule/match",
+  "steps": 189,
+  "sigs": [
+   [
+    "in[text]->text",
+    189
+   ]
+  ],
+  "sample": {
+   "prompt": "Look at the sequence 4, 9, 16, 25, 36, … Which rule makes it?",
+   "inputs": [
+    "They are consecutive square numbers (a whole number times itself, then the next whole number times itself, …)"
+   ],
+   "value": "They are consecutive square numbers (a whole number times itself, then the next whole number times itself, …)",
+   "id": "rule",
+   "answer": "A",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "affrule/subtract",
+  "steps": 189,
+  "sigs": [
+   [
+    "in[int,int,int,int,int]->text",
+    189
+   ]
+  ],
+  "sample": {
+   "prompt": "Look at the sequence 4, 9, 16, 25, 36, … Which rule makes it?",
+   "inputs": [
+    4,
+    9,
+    16,
+    25,
+    36
+   ],
+   "value": "5, 7, 9, 11",
+   "id": "gaps",
+   "answer": "A",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agcomf/factorise",
+  "steps": 163,
+  "sigs": [
+   [
+    "in[int]->list",
+    163
+   ]
+  ],
+  "sample": {
+   "prompt": "List all the common factors of 6 and 12.",
+   "inputs": [
+    6
+   ],
+   "value": [
+    1,
+    2,
+    3,
+    6
+   ],
+   "id": "factors-a",
+   "answer": "1,2,3,6",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agcomf/intersect",
+  "steps": 163,
+  "sigs": [
+   [
+    "in[int]->list",
+    163
+   ]
+  ],
+  "sample": {
+   "prompt": "List all the common factors of 6 and 12.",
+   "inputs": [
+    12
+   ],
+   "value": [
+    1,
+    2,
+    3,
+    6
+   ],
+   "id": "common",
+   "answer": "1,2,3,6",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aecons/multiply",
+  "steps": 160,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    160
+   ]
+  ],
+  "sample": {
+   "prompt": "What is the sum of the 3 consecutive numbers starting at 1 (that is, 1, 2, 3, …)?",
+   "inputs": [
+    3,
+    4
+   ],
+   "value": 6,
+   "id": "pairs",
+   "answer": "6",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "avlat/evaluate",
+  "steps": 159,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    159
+   ]
+  ],
+  "sample": {
+   "prompt": "The grid in the picture is the lattice for 12 × 12: 12 along the top, 12 down the right side, and each box hol",
+   "inputs": [
+    4,
+    4,
+    1,
+    0
+   ],
+   "value": 144,
+   "id": "carry",
+   "answer": "144",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aet12/convert",
+  "steps": 156,
+  "sigs": [
+   [
+    "in[int]->int",
+    156
+   ]
+  ],
+  "sample": {
+   "prompt": "A railway timetable shows 00:00. What time does an ordinary 12-hour clock show then? Write it as (hours, minut",
+   "inputs": [
+    0
+   ],
+   "value": 12,
+   "id": "hours",
+   "answer": "(12, 0)",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "agptest/largest-prime",
+  "steps": 153,
+  "sigs": [
+   [
+    "in[int]->int",
+    153
+   ]
+  ],
+  "sample": {
+   "prompt": "To decide whether 53 is prime, Imran divides it by the primes 2, 3, 5, 7, … in order. If none of them divides ",
+   "inputs": [
+    7
+   ],
+   "value": 7,
+   "id": "prime",
+   "answer": "7",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aadigmax/smallest digit first (not 0)",
+  "steps": 151,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    32
+   ],
+   [
+    "in[int,int,int,int]->int",
+    32
+   ],
+   [
+    "in[int,int,int,int,int,int,int]->int",
+    30
+   ]
+  ],
+  "sample": {
+   "prompt": "Use each of the digits 8, 4, 9 exactly once to make the smallest 3-digit number. Write it without commas.",
+   "inputs": [
+    8,
+    4,
+    9
+   ],
+   "value": 489,
+   "id": "arrange",
+   "answer": "489",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "abseat/find the row",
+  "steps": 150,
+  "sigs": [
+   [
+    "in[int]->int",
+    150
+   ]
+  ],
+  "sample": {
+   "prompt": "The table is the seating plan of a classroom: row 1 is at the front and seat 1 is on the left. In which row an",
+   "inputs": [
+    2
+   ],
+   "value": 2,
+   "id": "row",
+   "answer": "(2, 4)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abseat/find the seat",
+  "steps": 150,
+  "sigs": [
+   [
+    "in[int]->int",
+    150
+   ]
+  ],
+  "sample": {
+   "prompt": "The table is the seating plan of a classroom: row 1 is at the front and seat 1 is on the left. In which row an",
+   "inputs": [
+    4
+   ],
+   "value": 4,
+   "id": "seat",
+   "answer": "(2, 4)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abseat/move back",
+  "steps": 150,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    150
+   ]
+  ],
+  "sample": {
+   "prompt": "In the seating plan, row 1 is at the front and seat 1 is on the left. Anu sits in row 3, seat 1. Anu's best fr",
+   "inputs": [
+    3,
+    1
+   ],
+   "value": 4,
+   "id": "row",
+   "answer": "(4, 2)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abseat/move right",
+  "steps": 150,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    150
+   ]
+  ],
+  "sample": {
+   "prompt": "In the seating plan, row 1 is at the front and seat 1 is on the left. Anu sits in row 3, seat 1. Anu's best fr",
+   "inputs": [
+    1,
+    1
+   ],
+   "value": 2,
+   "id": "seat",
+   "answer": "(4, 2)",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aadigmax/biggest digit first",
+  "steps": 149,
+  "sigs": [
+   [
+    "in[int,int,int,int,int,int]->int",
+    32
+   ],
+   [
+    "in[int,int,int,int,int]->int",
+    31
+   ],
+   [
+    "in[int,int,int,int,int,int,int]->int",
+    30
+   ]
+  ],
+  "sample": {
+   "prompt": "Use each of the digits 8, 4, 9 exactly once to make the greatest 3-digit number. Write it without commas.",
+   "inputs": [
+    8,
+    4,
+    9
+   ],
+   "value": 984,
+   "id": "arrange",
+   "answer": "984",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aedsym/count",
+  "steps": 146,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    146
+   ]
+  ],
+  "sample": {
+   "prompt": "The picture shows a square design made of shaded and white squares. How many lines of symmetry does the design",
+   "inputs": [
+    0,
+    0
+   ],
+   "value": 0,
+   "id": "lines",
+   "answer": "0",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aearms/identify",
+  "steps": 145,
+  "sigs": [
+   [
+    "in[int,text]->int",
+    145
+   ]
+  ],
+  "sample": {
+   "prompt": "Which point is the vertex of ∠ABC?",
+   "inputs": [
+    0,
+    "ABC"
+   ],
+   "value": 0,
+   "id": "read",
+   "answer": "A",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "accal/count on",
+  "steps": 142,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    142
+   ]
+  ],
+  "sample": {
+   "prompt": "The hour hand of a clock points to 2. Where will it point 23 hours later?",
+   "inputs": [
+    2,
+    11
+   ],
+   "value": 1,
+   "id": "move",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aeangk/compare",
+  "steps": 142,
+  "sigs": [
+   [
+    "in[int]->int",
+    142
+   ]
+  ],
+  "sample": {
+   "prompt": "An angle measures 5°. What kind of angle is it?",
+   "inputs": [
+    5
+   ],
+   "value": 3,
+   "id": "classify",
+   "answer": "D",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "adfnl/compare",
+  "steps": 126,
+  "sigs": [
+   [
+    "in[fracstr,fracstr]->fracstr",
+    126
+   ]
+  ],
+  "sample": {
+   "prompt": "The two dots on the number line from 0 to 1 in the picture show 1/2 (one-half) and 1/3 (one-third). Which frac",
+   "inputs": [
+    "1/2",
+    "1/3"
+   ],
+   "value": "1/3",
+   "id": "compare",
+   "answer": "B",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adfmeas/convert",
+  "steps": 122,
+  "sigs": [
+   [
+    "in[text,int]->int",
+    122
+   ]
+  ],
+  "sample": {
+   "prompt": "How many minutes are there in 1/2 (one-half) of an hour?",
+   "inputs": [
+    "an hour",
+    60
+   ],
+   "value": 60,
+   "id": "whole",
+   "answer": "30",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aedrip/convert",
+  "steps": 120,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    120
+   ]
+  ],
+  "sample": {
+   "prompt": "A tap drips 5 mL of water every minute. How many millilitres of water drip out in 1 hour?",
+   "inputs": [
+    1,
+    60
+   ],
+   "value": 60,
+   "id": "minutes",
+   "answer": "300",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afview/max",
+  "steps": 120,
+  "sigs": [
+   [
+    "in[text]->text",
+    120
+   ]
+  ],
+  "sample": {
+   "prompt": "The table is a plan of a building made of cubes standing on a mat: each number tells how many cubes are stacke",
+   "inputs": [
+    "each column"
+   ],
+   "value": "3, 3",
+   "id": "tallest",
+   "answer": "6",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aedfr/convert",
+  "steps": 119,
+  "sigs": [
+   [
+    "in[numstr]->int",
+    119
+   ]
+  ],
+  "sample": {
+   "prompt": "Write 0.1 as a fraction.",
+   "inputs": [
+    "0.1"
+   ],
+   "value": 3,
+   "id": "tenths",
+   "answer": "D",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afhidden/count",
+  "steps": 112,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    112
+   ]
+  ],
+  "sample": {
+   "prompt": "The picture shows a grid of 2 rows and 2 columns of small squares. How many squares of any size are there in i",
+   "inputs": [
+    1,
+    2,
+    2
+   ],
+   "value": 4,
+   "id": "size1",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "avfold/evaluate",
+  "steps": 112,
+  "sigs": [
+   [
+    "in[int,int,int,int]->fracstr",
+    112
+   ]
+  ],
+  "sample": {
+   "prompt": "A sheet of paper is folded into 2 equal strips and 1 of the strips is coloured, so 1/2 of the sheet is coloure",
+   "inputs": [
+    1,
+    2,
+    2,
+    4
+   ],
+   "value": "2/4",
+   "id": "equal",
+   "answer": "D",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afletter/multiply",
+  "steps": 110,
+  "sigs": [
+   [
+    "in[text,int,int]->text",
+    110
+   ]
+  ],
+  "sample": {
+   "prompt": "A number machine multiplies any number put in by 2. The number put in is m. Write the number that comes out, u",
+   "inputs": [
+    "m",
+    2,
+    0
+   ],
+   "value": "2m",
+   "id": "rule",
+   "answer": "2m",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acmissing/add",
+  "steps": 106,
+  "sigs": [
+   [
+    "in[text]->int",
+    106
+   ]
+  ],
+  "sample": {
+   "prompt": "What number goes in the box? □ − 2 = 1",
+   "inputs": [
+    "add"
+   ],
+   "value": 2,
+   "id": "undo",
+   "answer": "3",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abdir/use the directions",
+  "steps": 104,
+  "sigs": [
+   [
+    "in[int,int,int]->text",
+    104
+   ]
+  ],
+  "sample": {
+   "prompt": "Anu faces North and turns right (a quarter turn). Which way does Anu face now?",
+   "inputs": [
+    0,
+    0,
+    0
+   ],
+   "value": "East",
+   "id": "direction",
+   "answer": "C",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "agnl/convert",
+  "steps": 103,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    103
+   ]
+  ],
+  "sample": {
+   "prompt": "Meena starts at 0 and makes 3 equal jumps of 1/2 along the number line in the picture. At which number does sh",
+   "inputs": [
+    3,
+    2
+   ],
+   "value": "1 1/2",
+   "id": "mixed",
+   "answer": "1 1/2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aaweave/find the place",
+  "steps": 101,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    101
+   ]
+  ],
+  "sample": {
+   "prompt": "A mat is woven with a strip that goes over 1 and under 1, again and again: over, under, over, under, … At whic",
+   "inputs": [
+    9,
+    0
+   ],
+   "value": 20,
+   "id": "place",
+   "answer": "20",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abdisp/add",
+  "steps": 100,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    100
+   ]
+  ],
+  "sample": {
+   "prompt": "A measuring jar has water up to the 100 ml mark. A metal block of volume 15 cm³ is dropped in and sinks. To wh",
+   "inputs": [
+    115,
+    100
+   ],
+   "value": 15,
+   "id": "rise",
+   "answer": "115",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abroute/add the squares",
+  "steps": 100,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    100
+   ]
+  ],
+  "sample": {
+   "prompt": "On the map, each side of a square stands for 2 km. Anu starts at S, walks 1 square East and then 3 squares Sou",
+   "inputs": [
+    1,
+    3
+   ],
+   "value": 4,
+   "id": "squares",
+   "answer": "8",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abroute/use the scale",
+  "steps": 100,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    100
+   ]
+  ],
+  "sample": {
+   "prompt": "On the map, each side of a square stands for 2 km. Anu starts at S, walks 1 square East and then 3 squares Sou",
+   "inputs": [
+    4,
+    2
+   ],
+   "value": 8,
+   "id": "scale",
+   "answer": "8",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acstory/take away",
+  "steps": 100,
+  "sigs": [
+   [
+    "in[int,int,text]->int",
+    100
+   ]
+  ],
+  "sample": {
+   "prompt": "There are 14 laddus on a plate. The children eat 2 of them. How many laddus are left?",
+   "inputs": [
+    14,
+    2,
+    "take away"
+   ],
+   "value": 12,
+   "id": "work",
+   "answer": "12",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aanext/count back",
+  "steps": 98,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    98
+   ]
+  ],
+  "sample": {
+   "prompt": "Which number comes just before 2?",
+   "inputs": [
+    2,
+    0
+   ],
+   "value": 1,
+   "id": "step",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afcross/equal",
+  "steps": 98,
+  "sigs": [
+   [
+    "in[int]->int",
+    98
+   ]
+  ],
+  "sample": {
+   "prompt": "Two straight lines cross each other, making four angles. One of the angles is 21°. What is the angle opposite ",
+   "inputs": [
+    21
+   ],
+   "value": 21,
+   "id": "opposite",
+   "answer": "21",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "affig/evaluate",
+  "steps": 98,
+  "sigs": [
+   [
+    "in[int,text]->int",
+    98
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows the first four square numbers: 1, 4, 9, 16. What is the 5th number in this pattern?",
+   "inputs": [
+    5,
+    "n × n"
+   ],
+   "value": 25,
+   "id": "term",
+   "answer": "25",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "affig/find-pattern",
+  "steps": 98,
+  "sigs": [
+   [
+    "in[int]->text",
+    98
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows the first four square numbers: 1, 4, 9, 16. What is the 5th number in this pattern?",
+   "inputs": [
+    0
+   ],
+   "value": "n × n",
+   "id": "rule",
+   "answer": "25",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aanext/count on",
+  "steps": 97,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    97
+   ]
+  ],
+  "sample": {
+   "prompt": "Which number comes between 1 and 3?",
+   "inputs": [
+    2,
+    2
+   ],
+   "value": 2,
+   "id": "step",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abjug/read",
+  "steps": 94,
+  "sigs": [
+   [
+    "in[int]->int",
+    94
+   ]
+  ],
+  "sample": {
+   "prompt": "The scale on a 500 mL measuring jug is shown as a line, and the dot shows the water level. How much water is i",
+   "inputs": [
+    500
+   ],
+   "value": 50,
+   "id": "read",
+   "answer": "50",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "affigrel/relate",
+  "steps": 94,
+  "sigs": [
+   [
+    "in[int]->int",
+    94
+   ]
+  ],
+  "sample": {
+   "prompt": "Add the first 3 odd numbers: 1 + 3 + 5. What do you get?",
+   "inputs": [
+    3
+   ],
+   "value": 9,
+   "id": "square",
+   "answer": "9",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aabig/compare sizes",
+  "steps": 90,
+  "sigs": [
+   [
+    "in[text,text]->text",
+    90
+   ]
+  ],
+  "sample": {
+   "prompt": "Think of an ant and a lemon. Which is bigger?",
+   "inputs": [
+    "an ant",
+    "a lemon"
+   ],
+   "value": "a lemon",
+   "id": "compare",
+   "answer": "B",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "aeparts/convert",
+  "steps": 90,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    90
+   ]
+  ],
+  "sample": {
+   "prompt": "How many packets of 100 g together make 1 kg?",
+   "inputs": [
+    1,
+    1000
+   ],
+   "value": 1000,
+   "id": "small",
+   "answer": "10",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afdigits/count",
+  "steps": 90,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    48
+   ],
+   [
+    "in[int,int,int]->text",
+    42
+   ]
+  ],
+  "sample": {
+   "prompt": "How many different 2-digit numbers can you make from the digits 3, 5, using each digit at most once?",
+   "inputs": [
+    2,
+    1
+   ],
+   "value": "2 × 1",
+   "id": "choices",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afmatch/write",
+  "steps": 90,
+  "sigs": [
+   [
+    "in[int,int]->text",
+    90
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows the number of matchsticks in the first four shapes of a growing pattern. Write a rule for the ",
+   "inputs": [
+    2,
+    0
+   ],
+   "value": "2n",
+   "id": "rule",
+   "answer": "2n",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afnet/match",
+  "steps": 87,
+  "sigs": [
+   [
+    "in[text,text]->text",
+    87
+   ]
+  ],
+  "sample": {
+   "prompt": "A net is made of 6 equal squares. Which solid does it fold into?",
+   "inputs": [
+    "cube",
+    "net"
+   ],
+   "value": "cube",
+   "id": "match",
+   "answer": "C",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acsticks/count",
+  "steps": 84,
+  "sigs": [
+   [
+    "in[text]->int",
+    84
+   ]
+  ],
+  "sample": {
+   "prompt": "One triangle is made with 3 matchsticks, as in the picture. Triangles are joined in a row, and each one shares",
+   "inputs": [
+    "triangle"
+   ],
+   "value": 3,
+   "id": "first",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acsticks/extend",
+  "steps": 84,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    84
+   ]
+  ],
+  "sample": {
+   "prompt": "One triangle is made with 3 matchsticks, as in the picture. Triangles are joined in a row, and each one shares",
+   "inputs": [
+    3,
+    2,
+    1
+   ],
+   "value": 5,
+   "id": "total",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acsticks/find rule",
+  "steps": 84,
+  "sigs": [
+   [
+    "in[int]->int",
+    84
+   ]
+  ],
+  "sample": {
+   "prompt": "One triangle is made with 3 matchsticks, as in the picture. Triangles are joined in a row, and each one shares",
+   "inputs": [
+    3
+   ],
+   "value": 2,
+   "id": "each",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afpaint/subtract",
+  "steps": 84,
+  "sigs": [
+   [
+    "in[int,int,int]->text",
+    84
+   ]
+  ],
+  "sample": {
+   "prompt": "A 2 × 2 × 3 block is built from small cubes, as in the picture. The whole outside of the block is painted. How",
+   "inputs": [
+    2,
+    2,
+    3
+   ],
+   "value": "0, 0, 1",
+   "id": "inner",
+   "answer": "4",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "acmissing/divide",
+  "steps": 81,
+  "sigs": [
+   [
+    "in[text]->int",
+    81
+   ]
+  ],
+  "sample": {
+   "prompt": "What number goes in the box? 2 × □ = 4",
+   "inputs": [
+    "divide"
+   ],
+   "value": 3,
+   "id": "undo",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afhidden/choose",
+  "steps": 76,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    76
+   ]
+  ],
+  "sample": {
+   "prompt": "The picture shows a rectangle divided into a grid of 1 row and 2 columns of small squares. How many rectangles",
+   "inputs": [
+    3,
+    2
+   ],
+   "value": 3,
+   "id": "across",
+   "answer": "3",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abroute/add each route",
+  "steps": 74,
+  "sigs": [
+   [
+    "in[int,int,int]->text",
+    74
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows the roads between four villages and their lengths. There are three ways to go from Anur to Dev",
+   "inputs": [
+    12,
+    17,
+    16
+   ],
+   "value": "12, 17, 16",
+   "id": "routes",
+   "answer": "12",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "abroute/compare",
+  "steps": 74,
+  "sigs": [
+   [
+    "in[]->int",
+    74
+   ]
+  ],
+  "sample": {
+   "prompt": "The table shows the roads between four villages and their lengths. There are three ways to go from Anur to Dev",
+   "inputs": [],
+   "value": 12,
+   "id": "shortest",
+   "answer": "12",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aerev/add",
+  "steps": 72,
+  "sigs": [
+   [
+    "in[int]->int",
+    72
+   ]
+  ],
+  "sample": {
+   "prompt": "Take 12, reverse its digits to get 21, and add the two numbers. What is the sum?",
+   "inputs": [
+    12
+   ],
+   "value": 33,
+   "id": "sum",
+   "answer": "33",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "ldiv/evaluate",
+  "steps": 64,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    64
+   ]
+  ],
+  "sample": {
+   "prompt": "40 ÷ 2 = ?",
+   "inputs": [
+    40,
+    2
+   ],
+   "value": 20,
+   "id": "whole",
+   "answer": "20",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afview/count",
+  "steps": 60,
+  "sigs": [
+   [
+    "in[text]->int",
+    60
+   ]
+  ],
+  "sample": {
+   "prompt": "The table is a plan of a building made of cubes standing on a mat: each number tells how many cubes are stacke",
+   "inputs": [
+    "squares with cubes"
+   ],
+   "value": 4,
+   "id": "top",
+   "answer": "4",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aerev/count",
+  "steps": 54,
+  "sigs": [
+   [
+    "in[int]->int",
+    54
+   ]
+  ],
+  "sample": {
+   "prompt": "Start with 64. Reverse its digits and add. Keep doing this with each answer until you get a palindrome (a numb",
+   "inputs": [
+    64
+   ],
+   "value": 2,
+   "id": "steps",
+   "answer": "2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "acpicttab/compare",
+  "steps": 50,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    50
+   ]
+  ],
+  "sample": {
+   "prompt": "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 2 children. How many ",
+   "inputs": [
+    1,
+    5,
+    3,
+    3
+   ],
+   "value": 5,
+   "id": "longest",
+   "answer": "10",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afsolid/count",
+  "steps": 48,
+  "sigs": [
+   [
+    "in[int,int,int]->int",
+    48
+   ]
+  ],
+  "sample": {
+   "prompt": "How many faces does a triangular prism have?",
+   "inputs": [
+    0,
+    3,
+    0
+   ],
+   "value": 5,
+   "id": "count",
+   "answer": "5",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afsolid/rearrange",
+  "steps": 48,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    48
+   ]
+  ],
+  "sample": {
+   "prompt": "A solid with flat faces has 6 vertices and 9 edges. Using Euler's rule (faces + vertices − edges = 2), how man",
+   "inputs": [
+    0,
+    5,
+    9,
+    6
+   ],
+   "value": 5,
+   "id": "euler",
+   "answer": "5",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "adwtcap/add",
+  "steps": 40,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    40
+   ]
+  ],
+  "sample": {
+   "prompt": "A bag has 1 kg of potatoes and 700 g of tomatoes. Anu estimates that the bag weighs about 2 kg. Check the esti",
+   "inputs": [
+    1,
+    700
+   ],
+   "value": 1700,
+   "id": "work",
+   "answer": "1700",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afpaint/edges",
+  "steps": 34,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    34
+   ]
+  ],
+  "sample": {
+   "prompt": "A 2 × 2 × 3 block is built from small cubes, as in the picture. The whole outside of the block is painted. How",
+   "inputs": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "value": 4,
+   "id": "count",
+   "answer": "4",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afpaint/faces",
+  "steps": 30,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    30
+   ]
+  ],
+  "sample": {
+   "prompt": "A 2 × 3 × 3 block is built from small cubes, as in the picture. The whole outside of the block is painted. How",
+   "inputs": [
+    0,
+    1,
+    1,
+    2
+   ],
+   "value": 2,
+   "id": "count",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "adwtcap/difference",
+  "steps": 28,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    28
+   ]
+  ],
+  "sample": {
+   "prompt": "Anu estimated that a school bag weighs about 3 kg. On the weighing scale it showed 4 kg. By how many kilograms",
+   "inputs": [
+    3,
+    4
+   ],
+   "value": 1,
+   "id": "work",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "aacmp/compare",
+  "steps": 21,
+  "sigs": [
+   [
+    "in[int,int]->int",
+    21
+   ]
+  ],
+  "sample": {
+   "prompt": "Which number is less: 4 or 2?",
+   "inputs": [
+    4,
+    2
+   ],
+   "value": 2,
+   "id": "compare",
+   "answer": "2",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afpaint/inside",
+  "steps": 20,
+  "sigs": [
+   [
+    "in[int,int,int,int]->int",
+    20
+   ]
+  ],
+  "sample": {
+   "prompt": "A 3 × 3 × 3 block is built from small cubes, as in the picture. The whole outside of the block is painted. How",
+   "inputs": [
+    1,
+    1,
+    1,
+    3
+   ],
+   "value": 1,
+   "id": "count",
+   "answer": "1",
+   "hasFigure": true
+  }
+ },
+ {
+  "key": "afletter/add",
+  "steps": 11,
+  "sigs": [
+   [
+    "in[text,int,int]->text",
+    11
+   ]
+  ],
+  "sample": {
+   "prompt": "A number machine adds 2 to any number put in. The number put in is m. Write the number that comes out, using m",
+   "inputs": [
+    "m",
+    2,
+    0
+   ],
+   "value": "m + 2",
+   "id": "rule",
+   "answer": "m + 2",
+   "hasFigure": false
+  }
+ },
+ {
+  "key": "afletter/subtract",
+  "steps": 11,
+  "sigs": [
+   [
+    "in[text,int,int]->text",
+    11
+   ]
+  ],
+  "sample": {
+   "prompt": "A number machine takes 2 away from any number put in. The number put in is m. Write the number that comes out,",
+   "inputs": [
+    "m",
+    2,
+    0
+   ],
+   "value": "m − 2",
+   "id": "rule",
+   "answer": "m − 2",
+   "hasFigure": false
+  }
+ }
+]
