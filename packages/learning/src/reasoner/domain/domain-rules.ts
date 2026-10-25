@@ -5,6 +5,8 @@
 import { Rational, Expr, RuleRegistry, type MathExpr, type MathRule, type MathState } from "../../math-kernel.ts";
 import { Poly, RatFun, polyToExpr, ratFunToExpr } from "./poly.ts";
 import { movesFrom } from "../planner.ts";
+import * as V from "../verifier/verifier.ts";
+import { Refusal } from "../outcomes.ts";
 import { printExpr, parseExpr } from "../expr-text.ts";
 import { hasX, denominatorsOf, zerosOfDenominators, excludedOf, checkTransition, constraintOf, type Effect, type DomainState, type Evidence, type Violation } from "./domain-state.ts";
 
@@ -216,7 +218,7 @@ function toMathRule(d: Def): MathRule {
     id: d.id, appliesTo: ["equation"], description: d.description,
     precondition: (s, p) => { const bad = d.checks(s, p).find((c) => !c.held); return bad ? `${bad.name} (${bad.detail})` : null; },
     apply: d.apply,
-    verify: (before, after, p) => (d.verify ? d.verify(before, after, p) : verifyEffect(d.effect, before, after)),
+    verify: (before, after, p) => (d.verify ? d.verify(before, after, p) : true) && verifyEffect(d.effect, before, after),
     explain: (before, after, p) => ({ principle: d.principle, action: d.action(before, after, p), justification: d.principle, beforeText: eqText2(before), afterText: eqText2(after) }),
   };
 }
@@ -224,7 +226,17 @@ function toMathRule(d: Def): MathRule {
 export function violations(effect: Effect, before: MathState, after: MathState): Violation[] {
   return checkTransition({ ...asEq(before), excluded: excludedOf(before) }, { ...asEq(after), excluded: excludedOf(after) }, effect, origRestr(after));
 }
-const verifyEffect = (effect: Effect, before: MathState, after: MathState) => violations(effect, before, after).length === 0;
+/** R1: a rule's result is accepted only if the INDEPENDENT verifier (own parser/polynomials) accepts it, working from the printed texts of the two states.
+ *  The earlier Poly-based check must agree; a disagreement is a defect somewhere and raises PROOF_FAILED instead of being resolved silently. */
+const stateText = (s: MathState) => ({ eq: eqText2(s), excluded: excludedOf(s).map(String) });
+const originalText = (s: MathState) => { const l = s.expressions.get("original.left"), r = s.expressions.get("original.right"); return l && r ? `${printExpr(l)}=${printExpr(r)}` : undefined; };
+export function verifyEffect(effect: Effect, before: MathState, after: MathState): boolean {
+  const v = V.checkStep(stateText(before), stateText(after), effect, originalText(after));
+  const legacyOk = violations(effect, before, after).length === 0;
+  if (v.valid !== legacyOk) { DISAGREEMENTS.push(`${eqText2(before)} -> ${eqText2(after)} (${effect}): verifier ${v.valid ? "accepts" : "rejects"} [${v.reasons}], legacy ${legacyOk ? "accepts" : "rejects"}`); throw new Refusal("PROOF_FAILED", "independent verifier and internal check disagree"); }
+  return v.valid;
+}
+export const DISAGREEMENTS: string[] = [];
 
 export function createDomainRegistry(): RuleRegistry { const r = new RuleRegistry(); for (const d of DEFS.values()) r.register(toMathRule(d)); return r; }
 export const effectOf = (ruleId: string): Effect => DEFS.get(ruleId)!.effect;
@@ -234,7 +246,7 @@ export function applyDomainRule(registry: RuleRegistry, ds: DomainState, ruleId:
   const def = DEFS.get(ruleId)!; const checks = def.checks(ds.math, params);
   const t = registry.applyRule(ds.math, ruleId, params);                          // throws if a precondition fails or exact verification fails
   const step = ds.evidence.length + 1;
-  const v = def.verify ? [] : violations(def.effect, t.before, t.after);
+  const v = violations(def.effect, t.before, t.after);
   const ob = (id: string, kind: string, bad: Violation[], how: string) => ({ id, kind, discharged: !bad.some((x) => x === id as Violation), how });
   const evidence: Evidence = {
     step, rule: ruleId, effect: def.effect, preconditions: checks,
@@ -243,6 +255,7 @@ export function applyDomainRule(registry: RuleRegistry, ds: DomainState, ruleId:
       { id: "I2-denominators-restricted", kind: "restriction", discharged: !v.includes("restriction-closure-violated"), how: "every zero of every denominator is in the restrictions (exact polynomial roots)" },
       { id: "I3-original-contained", kind: "restriction", discharged: !v.includes("original-restriction-lost"), how: "the original restrictions are contained in the current ones" },
       { id: def.effect === "equivalence" ? "solution-set-equal" : "solution-set-superset", kind: "solution-set", discharged: !v.includes("solution-set-changed") && !v.includes("solution-set-lost"), how: "reduced numerator, restricted factors removed, squarefree comparison (exact)" },
+      { id: "independent-verifier-accepts", kind: "verification", discharged: V.checkStep(stateText(t.before), stateText(t.after), def.effect, originalText(t.after)).valid, how: "separate parser, polynomial code, restriction extraction and real-solution-set algebra (verifier.ts)" },
     ],
   };
   const known = ds.restrictions; const now = excludedOf(t.after);

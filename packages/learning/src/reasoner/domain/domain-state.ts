@@ -1,6 +1,7 @@
 // K05.2 stage D1: the domain-aware mathematical state, its invariants, and exact solution-set reasoning.
 // Everything here is exact (Poly / RatFun over the kernel's Rational). Nothing samples, nothing approximates.
-import { Rational, Expr, type MathExpr, type MathState, type MathConstraint } from "../../math-kernel.ts";
+import { Rational, Expr, evaluate, type MathExpr, type MathState, type MathConstraint } from "../../math-kernel.ts";
+import { Refusal } from "../outcomes.ts";
 import { Poly, RatFun, OutsideBoundary } from "./poly.ts";
 import { parseExpr, printExpr } from "../expr-text.ts";
 
@@ -24,16 +25,57 @@ export interface DomainState {
   evidence: Evidence[];
 }
 
-// ---------- reading denominators ----------
+// ---------- reading denominators and restrictions (R1: general, from the WRITTEN expression tree) ----------
+/** Constant integer value of an exponent expression, or a structured refusal (x in an exponent, non-integer, undefined, too large). */
+function exponentOf(e: MathExpr): number {
+  if (hasX(e)) throw new Refusal("UNSUPPORTED_OPERATOR", "x in an exponent");
+  let v: Rational; try { v = evaluate(e, new Map()); } catch { throw new Refusal("DOMAIN_UNRESOLVED", "exponent is undefined"); }
+  if (!v.isInteger()) throw new Refusal("UNSUPPORTED_OPERATOR", "non-integer exponent");
+  if (v.numBig > 12n || v.numBig < -12n) throw new Refusal("UNSUPPORTED_EXPRESSION", "exponent beyond the supported range");
+  return Number(v.numBig);
+}
+/** Written denominators: every x-containing divisor and every base raised to a negative integer power (as base^|k|). Nested ones are included. */
 export function denominatorsOf(e: MathExpr, out: MathExpr[] = []): MathExpr[] {
   switch (e.kind) {
     case "div": if (hasX(e.right)) out.push(e.right); denominatorsOf(e.left, out); denominatorsOf(e.right, out); break;
+    case "frac": if (hasX(e.den)) out.push(e.den); denominatorsOf(e.num, out); denominatorsOf(e.den, out); break;
     case "add": case "sub": case "mul": denominatorsOf(e.left, out); denominatorsOf(e.right, out); break;
     case "neg": denominatorsOf(e.operand, out); break;
-    case "pow": denominatorsOf(e.base, out); if (e.exp.kind === "num" && e.exp.value.lt(Rational.zero)) out.push(e.base); break;
+    case "quantity": denominatorsOf(e.value, out); break;
+    case "pow": { denominatorsOf(e.base, out); denominatorsOf(e.exp, out);
+      if (hasX(e.base)) { const k = exponentOf(e.exp); if (k < 0) out.push(k === -1 ? e.base : Expr.pow(e.base, Expr.num(new Rational(-k)))); } break; }
     default: break;
   }
   return out;
+}
+/** Every polynomial that must be non-zero for the written expression to be defined: numerators of all divisors (nested ones included), bases of
+ *  negative and zero powers. Walks the unevaluated tree, so cancellation later never removes a restriction. Refuses anything outside the grammar. */
+export function conditionsOf(e: MathExpr): Poly[] {
+  const conds: Poly[] = [];
+  const need = (p: Poly) => { if (p.isZero()) throw new Refusal("DOMAIN_UNRESOLVED", "division by an expression that is zero everywhere"); if (p.degree >= 1) conds.push(p); };
+  const walk = (n: MathExpr): RatFun => {
+    switch (n.kind) {
+      case "num": return RatFun.fromPoly(Poly.const(n.value));
+      case "var": if (n.name !== "x") throw new Refusal("PARSE_ERROR", `unknown variable ${n.name}`); return RatFun.fromPoly(Poly.x);
+      case "neg": return walk(n.operand).neg();
+      case "quantity": return walk(n.value);
+      case "add": { const a = walk(n.left), b = walk(n.right); return a.add(b); }
+      case "sub": { const a = walk(n.left), b = walk(n.right); return a.sub(b); }
+      case "mul": { const a = walk(n.left), b = walk(n.right); return a.mul(b); }
+      case "div": { const a = walk(n.left), b = walk(n.right); need(b.n); return new RatFun(a.n.mul(b.d), a.d.mul(b.n)); }
+      case "frac": { const a = walk(n.num), b = walk(n.den); need(b.n); return new RatFun(a.n.mul(b.d), a.d.mul(b.n)); }
+      case "pow": {
+        const k = exponentOf(n.exp), b = walk(n.base);
+        if (k > 0) { let r = RatFun.fromPoly(Poly.one); for (let i = 0; i < k; i++) r = r.mul(b); return r; }
+        need(b.n);                                              // base^0 and base^-k both require base != 0 (0^0 is undefined)
+        if (k === 0) return RatFun.fromPoly(Poly.one);
+        let r = RatFun.fromPoly(Poly.one); for (let i = 0; i < -k; i++) r = r.mul(b); return new RatFun(r.d, r.n);
+      }
+      default: throw new Refusal("UNSUPPORTED_OPERATOR", `expression kind ${(n as { kind: string }).kind}`);
+    }
+  };
+  walk(e);
+  return conds;
 }
 export const hasX = (e: MathExpr): boolean => {
   switch (e.kind) {
@@ -44,15 +86,12 @@ export const hasX = (e: MathExpr): boolean => {
   }
 };
 const uniqSorted = (xs: Rational[]) => { const m = new Map<string, Rational>(); for (const v of xs) m.set(v.toString(), v); return [...m.values()].sort((a, b) => (a.lt(b) ? -1 : a.gt(b) ? 1 : 0)); };
-/** Real zeros (all rational by the stated boundary) of every x-containing denominator in the expression. Throws OutsideBoundary otherwise. */
+/** Real zeros (all rational by the stated boundary) of every restriction polynomial of the written expression. Throws OutsideBoundary otherwise. */
 export function zerosOfDenominators(e: MathExpr): Rational[] {
   const out: Rational[] = [];
-  for (const d of denominatorsOf(e)) {
-    const p = Poly.fromExpr(d);
-    if (!p) throw new OutsideBoundary("denominator is not a polynomial");
-    if (p.degree < 1) continue;
+  for (const p of conditionsOf(e)) {
     const s = p.splitLinear();
-    if (!s) throw new OutsideBoundary("denominator does not split into linear factors over Q");
+    if (!s) throw new OutsideBoundary("a denominator does not split into linear factors over Q", ["denominator-outside-boundary"]);
     out.push(...s.roots);
   }
   return uniqSorted(out);
@@ -95,7 +134,7 @@ export function solSubset(a: SolSet, b: SolSet): boolean {
 export type Violation = "restriction-closure-violated" | "restriction-dropped" | "original-restriction-lost" | "solution-set-changed" | "solution-set-lost";
 export interface StateText { eq: string; excluded: string[] }
 export function parseEq(text: string): { left: MathExpr; right: MathExpr } {
-  const i = text.indexOf("="); if (i < 0 || text.indexOf("=", i + 1) >= 0) throw new Error(`not an equation: ${text}`);
+  const i = text.indexOf("="); if (i < 0 || text.indexOf("=", i + 1) >= 0) throw new Refusal("PARSE_ERROR", `not an equation: ${text}`);
   return { left: parseExpr(text.slice(0, i)), right: parseExpr(text.slice(i + 1)) };
 }
 export function valuesOf(strs: string[]): Rational[] { return uniqSorted(strs.map((s) => { const [a, b] = s.split("/"); return new Rational(BigInt(a), BigInt(b ?? "1")); })); }

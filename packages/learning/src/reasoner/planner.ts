@@ -3,6 +3,7 @@
 // general algebra rules. Breadth-first with a depth limit and a node cap. Every move names its rule.
 import { Rational, Expr, evaluate, type MathExpr } from "../math-kernel.ts";
 import { parseExpr, printExpr } from "./expr-text.ts";
+import { Refusal } from "./outcomes.ts";
 
 export interface Eq { left: MathExpr; right: MathExpr }
 export interface Move { rule: string; explain: string; to: Eq }
@@ -227,7 +228,7 @@ function unsupportedReason(q: Eq): string | null {
 export function plan(text: string, opts: { maxDepth?: number; maxNodes?: number; log?: boolean } = {}): PlanResult {
   const maxDepth = opts.maxDepth ?? 24, maxNodes = opts.maxNodes ?? 100000;
   const parts = text.split("=");
-  if (parts.length !== 2) throw new Error(`not an equation: ${text}`);
+  if (parts.length !== 2) throw new Refusal("PARSE_ERROR", `not an equation: ${text}`);
   const start: Eq = { left: parseExpr(parts[0]), right: parseExpr(parts[1]) };
   const stats = { visited: 0, generated: 0, duplicates: 0, depth: 0, capped: false };
   const visitLog: NonNullable<PlanResult["visitLog"]> = [];
