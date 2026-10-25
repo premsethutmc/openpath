@@ -70,3 +70,42 @@ The GitHub connector supports remote file reads/writes but does not execute repo
 - Existing tests are a useful starting point but **a passing kernel acceptance suite cannot prove a strategy-selecting solver or constraint-driven constructor**.
 - The existing family validation is described as independent in source comments, but must be independently checked for mathematical correctness on representative cases; comments are not proof.
 - Launch can continue using approved family-based content. General-engine acceptance must measure unseen structural generation without new family-specific solvers.
+
+## Follow-up source inspection and TN5 unchecked-step evidence (2026-10-25)
+
+Source feature branch pinned at `8121178c5d67536adfb6e8a38b7d9c4010970c61` (feat/expand-verified-teaching).
+
+| Component | Finding | Evidence | Audit state |
+|---|---|---|---|
+| Family specifications | Deterministic release pools, specification fingerprints, validation probes and educator approval structure exist; each family still delegates to its own `solve` and `validate` | `packages/learning/src/spec.ts` | SOURCE REVIEWED; tests not run |
+| Diagnostic engine | Six hypotheses (secure, conceptual, procedural, recall, prerequisite, transfer); information-gain question choice; at most three questions; priors and likelihoods explicitly draft, not calibrated | `packages/learning/src/diagnostic.ts` | SOURCE REVIEWED; pedagogical validity unverified |
+| Competency graph | Typed prerequisite/support/disputed/alternative relationships and provisional competencies exist; relations guide recovery without gating navigation | `packages/learning/src/graph.ts` | SOURCE REVIEWED; graph validity not tested |
+| Acceptance tests | Source contains mechanism tests for kernel rule application, adaptation and teaching; their existence is not execution evidence | `packages/learning/src/kernel-acceptance.test.ts` | SOURCE REVIEWED; not executed |
+| TN5 unchecked-step report | User-provided `unchecked.md` states 54,299 unchecked steps, 197 family/step pairs across 138 of 192 families | User-supplied report, dated provenance not supplied | EXTERNAL REPORT; reproduction and denominator definitions pending |
+
+### TN5 report: largest unchecked categories by family
+
+| Family | Reported unchecked steps | Named unchecked operations |
+|---|---:|---|
+| aedec | 1,200 | place (800), add (400) |
+| aapatn | 1,200 | continue, find place in part, find repeating part (400 each) |
+| anpair | 1,200 | substitute, subtract, write (400 each) |
+| acelhm | 1,196 | add (602), count on (594) |
+| acelapsed | 1,052 | count on (652), read clock (400) |
+| actrain | 993 | add (400), count on (386), subtract (207) |
+| avlat | 956 | add (797), evaluate (159) |
+| anquad | 900 | compare, factorise, write (300 each) |
+| accmpx | 800 | compare (800) |
+| acmoneymul | 800 | convert (800) |
+
+The uploaded report enumerates 138 affected families and reports 54,299 steps. It does **not** supply a verified denominator of all steps in the TN5 bank, a reproducible generator seed/command, a source commit, or a definition proving that every unchecked step is mathematically incorrect. Do not interpret the unchecked count as a wrong-answer count or compute a percentage without the denominator.
+
+### Updated audit conclusions
+- Existing specifications and diagnosis infrastructure provide meaningful reuse opportunities; they do not replace an independent general solver or proof-producing constructor.
+- TN5 is a concrete verification backlog. Group by **mathematical semantics** (comparisons, place value, unit conversion with dimensions, sequences, graphical reading, spatial reasoning), not by family ID.
+- Distinguish arithmetic correctness from semantic correctness: a unit conversion needs source/target units, a comparison needs operands and ordering relation, and a visual-reading step needs the source representation.
+- Do not promote a family from unchecked to verified solely because its step label matches an arithmetic operation.
+- Before accepting TN5 coverage improvements, rerun the exact bank with pinned commit and seed; record total steps, checked steps, unchecked steps, invalid steps, and independent oracle outcomes.
+
+### Still not completed
+No local test run, no frozen 100-case benchmark, no frozen 20-spec synthesis benchmark, and no TypeScript/SymPy/hybrid comparison. K00-A remains **IN PROGRESS**, K00-B–E remain **NOT STARTED**.
