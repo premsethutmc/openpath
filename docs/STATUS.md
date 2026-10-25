@@ -1,6 +1,6 @@
 # Status
 
-*Last updated 24 Oct 2026. Update this file at the end of every milestone, in the same PR. It is the first thing a
+*Last updated 25 Oct 2026. Update this file at the end of every milestone, in the same PR. It is the first thing a
 new session reads, so keep it short and true. Remove lines that stop being true instead of adding "(old)".*
 
 ## How to read this
@@ -14,6 +14,7 @@ new session reads, so keep it short and true. Remove lines that stop being true 
 | English app, ages 10–15 (first intended product) | Feature expansion frozen. Goal: a trustworthy supervised demonstration of the consonant-doubling spelling journey. Content stays provisional until a human educator validates it. | `main`, `english/*` branches, `docs/english/` |
 | Mathematics: curriculum content and teaching | 1,080 question families, Grades 1–12 for CBSE and Tamil Nadu Samacheer, JEE chapters. Only 175 families (16%) have every step checked by the kernel; 203 are partly checked; 667 rely on each family's own answer check. | `feat/expand-verified-teaching` (most recently updated, 22 Oct), `feat/universal-curriculum-journey-v1`. None of this is on `main` yet. |
 | Mathematics: verified engine (this board) | Trial done, not merged. See below. | PR #69, branch `spike/oss-math-engine` |
+| Mathematics: Tamil Nadu Grade 5 verified bank | **Built, awaiting review and merge approval.** 61,343 released problems from 192 families; every step machine-checked (0 unchecked), rebuilt byte-identically; re-check found 0 wrong answers. Limits below. | PR #72 (draft), branch `feat/tn5-verified-bank`; scope in PR #71; numbers in `tools/mathematics/tn5-bank/README.md` |
 | Tutor architecture | Orchestration layer over existing engine and planners. Proposal agreed in concept. | PR #42, `docs/autonomous-tutor-architecture` |
 | Child-facing tutor UI | Codex's work. Do not touch. | `feat/autonomous-tutor-ux-v1` (named by the owner; not on GitHub when checked on 24 Oct) |
 | OpenPath Kids (Chintoo, ages ~3–7) | Started 19 Oct. Independent of the mastery engine. | `feat/openpath-kids-chintoo` |
@@ -42,11 +43,29 @@ registries were blocked; install `@cortex-js/compute-engine@0.161.0` from npm an
 one-variable linear and quadratic equations were tested. School presentation rules (complex roots shown as "no real
 solution", an identity as "every number works") belong to the planner and renderer, and are not decided.
 
+## Tamil Nadu Grade 5 verified bank (PR #72): what is proven and what is not
+Proven (committed results): 61 of 61 syllabus requirements map to a family; 61,343 items, all with every step checked
+by an independent exact calculation (corrupting any stated value is never accepted: 244,200 attempts, none genuine);
+byte-identical rebuild; at least 30 items per competency per difficulty band; re-census of all 342,052 problems shows 0
+labelled worse than before; 500 injected wrong answers all rejected; 966 tests pass.
+Not proven: (1) the final answer is independently re-derived from the question text for about 76% of a 14,775-item
+sample (0 disagreements); 42 families (pictures, tables, conventions) cannot be, and 10% of items cannot be tied to
+their step chain by the answer-consistency check. (2) 6,846 items rest on a picture's own data and 2,393 on a
+convention (an estimate tolerance, the add/take-away/multiply/share codes, an object-size order); the owner accepted
+these on 25 Oct to be fixed from real usage. Each check carries its basis in the code. (3) "Machine-verified" is a label
+in the bank file, not yet wired into the app's status. (4) Simulated learners only; no real device, no real child.
+Engine findings from the learner journeys: skills can reach "verified" only with two answer types, and the bank holds
+only the typed form (155 of 192 families also have a multiple-choice form and 178 an everyday-situation form); a failed
+delayed check cannot be cleared; two lucky answers can look like "shown on their own"; mastery needs reviewed content.
+
 ## Next step, awaiting approval
-K05: propose its scope and acceptance tests first (for example: 500 unseen problems, each derivation ordered, every
-step checked by the kernel, no family-specific solver). Do not start code before approval.
+1. Merge decisions for PRs #69, #70, #71 and #72 (nothing merged or deployed).
+2. Follow-up milestone, scope in `docs/milestones/MULTI_FORMAT_BANK.md` (proposal): add the multiple-choice and
+   everyday-situation forms of the Grade 5 problems to the bank, fully verified, so skills can reach "verified".
+3. K05 (solution planner): propose scope and acceptance tests first. Do not start code before approval.
 
 ## Open decisions for the owner
 - Whether to merge the exact-arithmetic fix from PR #69 into `feat/expand-verified-teaching` (it fixes a comparison
   step that was reported as verified without being compared).
-- Which one grade and board to make complete first (CBSE or Tamil Nadu Samacheer).
+- ~~Which one grade and board first~~ Decided: Tamil Nadu Grade 5 (built, PR #72).
+- How to fix the engine findings above (failed delayed check permanent, guessing, review fixture): a separate decision.
