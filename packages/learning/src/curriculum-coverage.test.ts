@@ -152,7 +152,7 @@ describe("curriculum-wide coverage: correctness of kernel-backed families", () =
         if (!adapted.fullyAdapted) continue;
 
         for (const step of adapted.steps) {
-          if (!(step as any).adapted) continue;
+          if (!(step as any).adapted || (step as any).claimVerified) continue; // a listed claim has no kernel transformation
           if (!(step as any).transformation) {
             failures.push(`${id}: adapted step has no transformation`);
           }

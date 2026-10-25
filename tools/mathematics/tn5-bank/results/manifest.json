@@ -1,17 +1,17 @@
 {
  "release": "tn-samacheer-mathematics-grade-5",
- "engine": "kernel@f0c565cbfd98",
+ "engine": "kernel@a43be6abeecd",
  "competencies": 58,
  "families": 192,
  "problems": 60774,
  "labels": {
-  "kernel-verified": 19144,
-  "partial": 19208,
-  "answer-verified": 22422
+  "kernel-verified": 21157,
+  "partial": 20115,
+  "answer-verified": 19502
  },
- "sha256": "7c1ae862e18db9ea69936c1d94fe29183b93e16091e0612b1e78fae4490ad4dc",
- "bytes": 68437615,
- "uncheckedStepTypes": 209,
+ "sha256": "8af56821736a56b52fd03b8cc10b08095c749c3862a04d0d36cf6094cb7c43f1",
+ "bytes": 68385655,
+ "uncheckedStepTypes": 197,
  "uncheckedSteps": [
   [
    "accmpx/compare",
@@ -22,23 +22,7 @@
    800
   ],
   [
-   "adest/round",
-   800
-  ],
-  [
    "aedec/place",
-   800
-  ],
-  [
-   "aghcf3/hcf",
-   800
-  ],
-  [
-   "aglcm3/lcm",
-   800
-  ],
-  [
-   "avpest/round",
    800
   ],
   [
@@ -52,10 +36,6 @@
   [
    "acelapsed/count on",
    652
-  ],
-  [
-   "agcop/hcf",
-   640
   ],
   [
    "acelhm/add",
@@ -84,10 +64,6 @@
   [
    "aerdec/compare",
    594
-  ],
-  [
-   "aerdec/round",
-   573
   ],
   [
    "aeirr/count",
@@ -179,10 +155,6 @@
   ],
   [
    "adfordu/convert",
-   400
-  ],
-  [
-   "adfordu/lcm",
    400
   ],
   [
@@ -386,10 +358,6 @@
    300
   ],
   [
-   "agjump/lcm",
-   300
-  ],
-  [
    "agjump/multiples",
    300
   ],
@@ -434,10 +402,6 @@
    287
   ],
   [
-   "adfcmpu/lcm",
-   287
-  ],
-  [
    "acp2r/divide",
    282
   ],
@@ -464,10 +428,6 @@
   [
    "adtally/count",
    270
-  ],
-  [
-   "aglcm/hcf",
-   253
   ],
   [
    "adestchk/compare",
@@ -542,10 +502,6 @@
    202
   ],
   [
-   "aghlw/hcf",
-   201
-  ],
-  [
    "aematch/deduce",
    200
   ],
@@ -555,10 +511,6 @@
   ],
   [
    "aaweave/full repeats and the part left",
-   199
-  ],
-  [
-   "aghlw/lcm",
    199
   ],
   [
@@ -1129,8 +1081,8 @@
    "answer-verified": 0
   },
   "adest": {
-   "kernel-verified": 0,
-   "partial": 400,
+   "kernel-verified": 400,
+   "partial": 0,
    "answer-verified": 0
   },
   "adestchk": {
@@ -1150,8 +1102,8 @@
   },
   "adfcmpu": {
    "kernel-verified": 0,
-   "partial": 0,
-   "answer-verified": 287
+   "partial": 287,
+   "answer-verified": 0
   },
   "adfcol": {
    "kernel-verified": 300,
@@ -1175,8 +1127,8 @@
   },
   "adfordu": {
    "kernel-verified": 0,
-   "partial": 0,
-   "answer-verified": 400
+   "partial": 400,
+   "answer-verified": 0
   },
   "admental": {
    "kernel-verified": 384,
@@ -1425,8 +1377,8 @@
   },
   "aerdec": {
    "kernel-verified": 0,
-   "partial": 21,
-   "answer-verified": 573
+   "partial": 594,
+   "answer-verified": 0
   },
   "aerefl": {
    "kernel-verified": 0,
@@ -1594,9 +1546,9 @@
    "answer-verified": 163
   },
   "agcop": {
-   "kernel-verified": 0,
+   "kernel-verified": 160,
    "partial": 0,
-   "answer-verified": 160
+   "answer-verified": 0
   },
   "agdec": {
    "kernel-verified": 0,
@@ -1609,9 +1561,9 @@
    "answer-verified": 97
   },
   "aghcf3": {
-   "kernel-verified": 0,
+   "kernel-verified": 400,
    "partial": 0,
-   "answer-verified": 400
+   "answer-verified": 0
   },
   "aghlp": {
    "kernel-verified": 400,
@@ -1620,8 +1572,8 @@
   },
   "aghlw": {
    "kernel-verified": 0,
-   "partial": 0,
-   "answer-verified": 400
+   "partial": 400,
+   "answer-verified": 0
   },
   "agimp": {
    "kernel-verified": 279,
@@ -1630,18 +1582,18 @@
   },
   "agjump": {
    "kernel-verified": 0,
-   "partial": 0,
-   "answer-verified": 300
+   "partial": 300,
+   "answer-verified": 0
   },
   "aglcm": {
-   "kernel-verified": 0,
-   "partial": 253,
+   "kernel-verified": 253,
+   "partial": 0,
    "answer-verified": 0
   },
   "aglcm3": {
-   "kernel-verified": 0,
+   "kernel-verified": 400,
    "partial": 0,
-   "answer-verified": 400
+   "answer-verified": 0
   },
   "agmeas": {
    "kernel-verified": 0,
@@ -1764,8 +1716,8 @@
    "answer-verified": 0
   },
   "avpest": {
-   "kernel-verified": 0,
-   "partial": 400,
+   "kernel-verified": 400,
+   "partial": 0,
    "answer-verified": 0
   },
   "avpp": {

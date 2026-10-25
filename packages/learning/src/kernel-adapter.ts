@@ -21,6 +21,7 @@
  */
 
 import type { Problem, Step, Justification } from "./family-kit";
+import { stepClaimHolds, hasStepClaim } from "./step-claims";
 import {
   Rational, Expr, evaluate, simplify, renderExpr, renderStatement, parseRational,
   createState, createDefaultRegistry, cloneState,
@@ -40,6 +41,8 @@ export interface AdaptedStep {
   explanation: RuleExplanation | null;
   /** Whether the step was successfully adapted to a kernel rule. */
   adapted: boolean;
+  /** True when the step is checked by a listed claim (step-claims.ts) rather than a kernel rule: no transformation. */
+  claimVerified?: true;
 }
 
 export interface AdaptedProblem {
@@ -284,6 +287,11 @@ function adaptStep(step: Step, state: MathState, problem: Problem): AdaptedStep 
     } catch {
       // the justification could not be mapped to a kernel rule: try the step-type check instead
     }
+  }
+
+  // A listed claim for this (family, step): the stated value must equal an independent exact computation
+  if (stepClaimHolds(step, problem) === true) {
+    return { original: step, transformation: null, explanation: fallbackExplanation(step), adapted: true, claimVerified: true };
   }
 
   // No explicit justification — try op-based adaptation
@@ -603,7 +611,7 @@ function adaptFromOp(step: Step, state: MathState): AdaptedStep | null {
 /** Check whether a problem's steps can be adapted via op mapping. */
 export function hasOpMappableSteps(problem: Problem): boolean {
   if (!problem.steps || problem.steps.length === 0) return false;
-  return problem.steps.some((s) => s.op && OP_RULE_MAP.has(s.op));
+  return problem.steps.some((s) => (s.op && OP_RULE_MAP.has(s.op)) || hasStepClaim(problem.family, s.op));
 }
 
 interface AdaptResult {
