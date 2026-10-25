@@ -31,7 +31,7 @@ Components, inputs, outputs, acceptance tests and dependencies are in the owner'
 | K02 | Exact arithmetic | **Criterion met in the trial** (PR #69): 10,000 cases, 0 wrong against SymPy. The previous kernel gave 1,123 silent errors. |
 | K03 | Symbolic manipulation | Basic folding only. No expand or factor yet. |
 | K04 | Equation solver | **Criterion met in the trial** (PR #69): 1,000 unseen linear and quadratic equations, all correct, using CortexJS Compute Engine (MIT), checked by SymPy. |
-| K05 | Solution planner (teacher-style steps, no per-family `solve()`) | **Next.** Not started. This is OpenPath's own core work. Reference design: mathsteps (Apache-2.0, unmaintained). |
+| K05 | Solution planner (teacher-style steps, no per-family `solve()`) | **First version built, draft PR #75 (25 Oct), linear equations only.** Searches over general moves with no stored answers. Every equation in the in-scope sets (20 + 500 + 500 + 360) solved or correctly classified, every step checked by SymPy; all 991 provably invalid injected steps rejected. Not integrated with the Grade 5 pipeline, by decision. Quadratics, inequalities, systems and variable denominators are not done. Reference design: mathsteps (Apache-2.0, unmaintained). |
 | K06–K12 | Generator, difficulty, error analyzer, renderer, prerequisites, adaptive controller, integration | Not started. Hold until K05 passes. |
 
 Stop rule from the board: if K04 cannot solve unseen equations, K06 cannot be declared complete; if K06 cannot
@@ -58,11 +58,20 @@ Engine findings from the learner journeys: skills can reach "verified" only with
 only the typed form (155 of 192 families also have a multiple-choice form and 178 an everyday-situation form); a failed
 delayed check cannot be cleared; two lucky answers can look like "shown on their own"; mastery needs reviewed content.
 
+## Mathematical reasoner (PR #75, draft): what is proven and what is not
+A small program that searches for solution paths with reusable moves instead of stored answers (milestone proposal: PR #74).
+
+Proven, with SymPy as the independent checker: 20/20 smoke, 500/500 frozen, 500/500 on a fresh-seed holdout (493 genuinely new, 7 overlapping), 360/360 equations built from constraints (300 unique, 30 no-solution, 30 identity), and 30 contradictions and 10 identities in the edge set classified correctly. 1,000 deliberately corrupted steps: 991 provably invalid, all 991 rejected, none missed. Cancelling `x/x` is rejected; the planner refuses `(a*x)/x = c` rather than cancel silently.
+
+Not proven: anything beyond one-unknown linear equations; invention of new kinds of move; the frozen 500 was tuned on once and the constructed set after its first run, so Holdout B is the cleaner evidence. Reproduce with `tools/mathematics/reasoner/run-e3.sh`; full report in `tools/mathematics/reasoner/REPORT.md` on the branch.
+
+Decision in force: the reasoner stays separate from the Grade 5 release pipeline until its generality is established.
+
 ## Next step, awaiting approval
 1. Merge decisions for PRs #69, #70, #71 and #72 (nothing merged or deployed).
 2. Follow-up milestone, scope in `docs/milestones/MULTI_FORMAT_BANK.md` (proposal): add the multiple-choice and
    everyday-situation forms of the Grade 5 problems to the bank, fully verified, so skills can reach "verified".
-3. K05 (solution planner): propose scope and acceptance tests first. Do not start code before approval.
+3. K05 growth: review PR #75, then choose the next capability (quadratics, domain-aware reasoning for variable denominators, or inequalities). Propose scope and acceptance tests first.
 
 ## Open decisions for the owner
 - Whether to merge the exact-arithmetic fix from PR #69 into `feat/expand-verified-teaching` (it fixes a comparison
