@@ -1,0 +1,12 @@
+{
+ "baseline": "PR #69 census (before the soundness guard)",
+ "problems": 341483,
+ "worse": 0,
+ "better": 41230,
+ "same": 300253,
+ "now": {
+  "kernel": 107136,
+  "partial": 58589,
+  "compat": 175758
+ }
+}

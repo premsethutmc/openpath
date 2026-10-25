@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { pool } from "./families";
 import { STEP_CLAIMS, stepClaimHolds } from "./step-claims";
 
-/** Steps that state a family-internal code (the equation form), not a mathematical result: left unchecked by design. */
+/** Steps left unchecked by design: a family-internal code (acmissing equation form), or nothing else. */
 const UNCHECKED_BY_DESIGN = new Set(["acmissing/subtract", "acmissing/add", "acmissing/divide"]);
 
 for (const key of Object.keys(STEP_CLAIMS)) {

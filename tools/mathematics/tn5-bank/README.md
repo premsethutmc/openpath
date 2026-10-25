@@ -89,3 +89,9 @@ Every claim is labelled in `packages/learning/src/claims/*` (`BASIS`) and counte
   tallies, clock hands, seating plans). It proves the step agrees with the displayed picture, not that the picture is
   correct. 9,311 steps in 6,846 items.
 - **Convention**: the check rests on a rule, not pure mathematics (see the Phase 2 list). 1,993 steps in 1,993 items.
+
+## Acceptance test 10: re-census of all 341,483 problems against the PR #69 baseline
+Worse than before: **0**. Better: 41,230. Same: 300,253 (). Now: kernel-verified 107,136, partial
+58,589, answer-verified 175,758. The soundness fix had first demoted 295 problems outside Grade 5 (families ,
+) whose stated values had never been checked; they now have real claims () and are
+verified again, so no problem anywhere is labelled worse than before.
