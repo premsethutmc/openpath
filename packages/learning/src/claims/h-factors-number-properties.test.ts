@@ -41,10 +41,8 @@ for (const key of Object.keys(CLAIMS)) {
   test(`claim ${key}: real steps hold, corrupted values are never confirmed`, () => {
     const steps = pool(fam).items.flatMap((p) => p.steps.filter((s) => s.op === op).map((s) => ({ p, s })));
     assert.ok(steps.length > 0, `no ${op} steps in ${fam}`);
-    // steps that state a family-internal code (acmissing's "which operation" step) make no checkable claim and stay unchecked
     const readable = steps.filter(({ p, s }) => stepClaimHolds(s, p) !== null);
-    if (fam === "acmissing") assert.ok(readable.length > 0 && readable.length < steps.length, "the code-only first step must stay unchecked");
-    else assert.equal(readable.length, steps.length, "every step is readable");
+    assert.equal(readable.length, steps.length, "every step is readable");
     const stride = Math.max(1, Math.floor(readable.length / 100));
     let seen = 0;
     for (let i = 0; i < readable.length; i += stride) {
@@ -67,12 +65,16 @@ test("claims return null (unchecked) when the step does not match the prompt", (
   }
 });
 
-test("steps that restate a family code stay unchecked", () => {
-  for (const [fam, op] of [["acmissing", "subtract"], ["acmissing", "add"], ["acmissing", "divide"]]) {
-    const first = pool(fam).items.map((p) => ({ p, s: p.steps[0] })).find(({ s }) => s.op === op);
-    assert.ok(first);
-    assert.equal(stepClaimHolds(first.s, first.p), null, fam + op);
-  }
+test("acmissing: the undo step names the operation that undoes the equation, with the family's form code", () => {
+  const f = (prompt: string, op: string, value: number) =>
+    stepClaimHolds({ id: "undo", op, competency: "c", inputs: [op], value } as never, { family: "acmissing", prompt, params: [], steps: [] } as never);
+  assert.equal(f("What number goes in the box? □ + 3 = 10", "subtract", 0), true);
+  assert.equal(f("What number goes in the box? 10 − □ = 3", "subtract", 1), true);
+  assert.equal(f("What number goes in the box? □ − 3 = 10", "add", 2), true);
+  assert.equal(f("What number goes in the box? 3 × □ = 12", "divide", 3), true);
+  assert.equal(f("What number goes in the box? □ + 3 = 10", "add", 0), false); // the wrong operation
+  assert.equal(f("What number goes in the box? □ + 3 = 10", "subtract", 2), false); // the wrong form code
+  assert.equal(f("What number goes in the box? 3 × □ = 12", "subtract", 3), false);
 });
 
 test("acmissing: the answer follows the equation form", () => {

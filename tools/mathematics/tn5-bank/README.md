@@ -95,3 +95,13 @@ Worse than before: **0**. Better: 41,230. Same: 300,253 (`results/recensus.json`
 58,589, answer-verified 175,758. The soundness fix had first demoted 295 problems outside Grade 5 (families `adfname`,
 `apcartn`) whose stated values had never been checked; they now have real claims (`claims/n-other-grades.ts`) and are
 verified again, so no problem anywhere is labelled worse than before.
+
+## Step verification: 100% (acceptance test 6)
+All 60,774 Grade 5 items are fully machine-checked: 0 unchecked steps, 0 unchecked (family, step) pairs. The last
+400 steps (the first step of the three `acmissing` families) now have a claim: the operation that undoes the
+equation, plus the family's own 0..3 form code.
+- Bank rebuilt twice: identical SHA-256 `45df5279f265ffd2…`. Tests: 935 pass, 0 fail.
+- Corruption: 242,640 corrupted values; 0 genuine corruptions confirmed (the same 111 whitespace-only list rewrites).
+- Re-census of all 341,483 problems: worse 0, better 41,630 (`results/recensus.json`).
+- Strength (per item, in the bank): 6,846 items include a figure-consistent step (9,311 steps) and 2,393 include a
+  convention step (2,793 steps). The owner accepted these on 25 Oct 2026 and will fix them from real usage.

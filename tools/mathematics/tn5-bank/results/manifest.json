@@ -5,33 +5,20 @@
  "families": 192,
  "problems": 60774,
  "labels": {
-  "kernel-verified": 60374,
-  "partial": 400,
+  "kernel-verified": 60774,
+  "partial": 0,
   "answer-verified": 0
  },
  "weakerBasis": {
   "figureConsistentItems": 6846,
-  "conventionItems": 1993,
+  "conventionItems": 2393,
   "figureConsistentSteps": 9311,
-  "conventionSteps": 1993
+  "conventionSteps": 2793
  },
- "sha256": "fce8fa3abffc7fa38b226788c31ab780dab57149e89184106b94261a31af6295",
- "bytes": 70747885,
- "uncheckedStepTypes": 3,
- "uncheckedSteps": [
-  [
-   "acmissing/subtract",
-   213
-  ],
-  [
-   "acmissing/add",
-   106
-  ],
-  [
-   "acmissing/divide",
-   81
-  ]
- ],
+ "sha256": "45df5279f265ffd2bae26adf4f221a6c1e25ddf60b8b4d15cd3b0592ddce5b1d",
+ "bytes": 70747377,
+ "uncheckedStepTypes": 0,
+ "uncheckedSteps": [],
  "depthShortfalls": [
   {
    "competency": "MATH.number.fraction-of-collection",
@@ -196,8 +183,8 @@
    "answer-verified": 0
   },
   "acmissing": {
-   "kernel-verified": 0,
-   "partial": 400,
+   "kernel-verified": 400,
+   "partial": 0,
    "answer-verified": 0
   },
   "acmoneyadd": {

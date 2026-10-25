@@ -1,4 +1,4 @@
-import { Rational, rat } from "../claim-kit";
+import { Rational, parseRational, rat } from "../claim-kit";
 import type { ClaimTable, Problem, Step } from "../claim-kit";
 
 /** Phase 2 claims: h-factors-number-properties. Every value is recomputed from the problem text (prompt/options) and the
@@ -285,6 +285,27 @@ const acmissingAdd = missing(["minus"], (a, b) => rat(a + b));
 /** a × □ = b gives b ÷ a. */
 const acmissingDivide = missing(["times"], (a, b) => (a === 0n ? null : new Rational(b, a)));
 
+/** The first ("undo") step of acmissing has one input, the operation that undoes the equation, and states the family's own
+ *  code (0..3) for the equation form. The operation is mathematics (inverse operation); the numbering is the family's convention. */
+const UNDO: Record<string, [number, string]> = { plus: [0, "subtract"], from: [1, "subtract"], minus: [2, "add"], times: [3, "divide"] };
+const undoStep = (s: Step, p: Problem): boolean | null => {
+  const q = missingParts(p);
+  if (!q) return null;
+  const [code, op] = UNDO[q.form];
+  return s.op === op && s.inputs[0] === op && s.value === code;
+};
+/** One entry per step op: the undo step (one input) by the rule above, the working step (two inputs) by its numeric claim. */
+const acmissingBoth = (numeric: (s: Step, p: Problem) => Rational | null): { check: (s: Step, p: Problem) => boolean | null } => ({
+  check: (s, p) => {
+    if (s.inputs.length === 1) return undoStep(s, p);
+    const expected = numeric(s, p);
+    if (!expected) return null;
+    if (typeof s.value !== "number" && typeof s.value !== "string") return false;
+    const stated = parseRational(s.value);
+    return !!stated && stated.eq(expected);
+  },
+});
+
 // ---------- acstory, acstory4, acstory9 ----------
 /** The operation a one-step story needs, from fixed template wording; null unless exactly one operation's wording is present. */
 const WORDS: Record<string, RegExp[]> = {
@@ -372,9 +393,9 @@ export const CLAIMS: ClaimTable = {
   "anpair/write": anpairWrite,
   "acfacts/inverse": { check: acfactsInverse },
   "aematch/deduce": aematchDeduce,
-  "acmissing/subtract": acmissingSubtract,
-  "acmissing/add": acmissingAdd,
-  "acmissing/divide": acmissingDivide,
+  "acmissing/subtract": acmissingBoth(acmissingSubtract),
+  "acmissing/add": acmissingBoth(acmissingAdd),
+  "acmissing/divide": acmissingBoth(acmissingDivide),
   "acstory/choose operation": { check: chooseOperation },
   "acstory4/choose operation": { check: chooseOperation },
   "acstory9/choose operation": { check: chooseOperation },

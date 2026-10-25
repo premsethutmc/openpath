@@ -20,7 +20,7 @@ import { canonicalOf } from "../../../packages/learning/src/answer-types";
 import { CLAIM_BASIS } from "../../../packages/learning/src/claims/index";
 
 /** Claims that rest on a convention rather than pure mathematics; the owner reviews these. */
-const CONVENTION = new Set(["aechk/estimate", "acstory/choose operation", "acstory4/choose operation", "acstory9/choose operation", "aabig/compare sizes", "avfwq/evaluate"]);
+const CONVENTION = new Set(["aechk/estimate", "acstory/choose operation", "acstory4/choose operation", "acstory9/choose operation", "aabig/compare sizes", "avfwq/evaluate", "acmissing/subtract", "acmissing/add", "acmissing/divide"]);
 
 const RELEASE = "tn-samacheer-mathematics-grade-5";
 const outDir = process.argv[2] ?? "out";

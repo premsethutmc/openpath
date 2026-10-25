@@ -4,8 +4,8 @@ import assert from "node:assert/strict";
 import { pool } from "./families";
 import { STEP_CLAIMS, stepClaimHolds } from "./step-claims";
 
-/** Steps left unchecked by design: a family-internal code (acmissing equation form), or nothing else. */
-const UNCHECKED_BY_DESIGN = new Set(["acmissing/subtract", "acmissing/add", "acmissing/divide"]);
+/** Steps a claim may leave unread (none now: every released step of every claim is read). */
+const UNCHECKED_BY_DESIGN = new Set<string>([]);
 
 for (const key of Object.keys(STEP_CLAIMS)) {
   const [fam, op] = key.split("/");
