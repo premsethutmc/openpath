@@ -161,7 +161,7 @@ reg({
   id: "domain.divide-both-sides", effect: "equivalence", principle: "Dividing by e is valid only where e != 0. When every zero of e is already restricted, e is non-zero on the whole domain, so nothing is lost.",
   description: "Divide both sides by e, provided every zero of e is restricted. Otherwise not applicable: dividing could discard a solution.",
   checks(s, p) { const f = factorParam(p); if (!f) return [{ name: "the divisor is a polynomial", held: false, detail: String(p.factor) }]; const z = zerosIn(f, excludedOf(s)); return [{ name: "the divisor is non-zero on the domain", held: z.ok, detail: z.detail }]; },
-  apply: (s, p) => { const e = parseExpr(String(p.factor)); return withEq(s, Expr.div(eqOf(s).left, e), Expr.div(eqOf(s).right, e)); },
+  apply: (s, p) => { const e = parseExpr(String(p.factor)); const d = (x: MathExpr) => (isZeroLit(x) ? x : Expr.div(x, e)); return withEq(s, d(eqOf(s).left), d(eqOf(s).right)); },   // 0 / e = 0 because e is non-zero on the domain
   action: (s, a, p) => `divide both sides by ${p.factor}`,
 });
 
