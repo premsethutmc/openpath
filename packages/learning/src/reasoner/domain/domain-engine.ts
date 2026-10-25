@@ -77,10 +77,12 @@ function movesOf(s: DomainState): Move[] {
   return out;
 }
 
+const constOf = (e: MathExpr): Rational | null => (e.kind === "num" ? e.value : e.kind === "neg" ? constOf(e.operand)?.neg() ?? null : null);
 function terminal(s: DomainState): { kind: "candidate"; value: Rational } | { kind: "none" } | { kind: "identity" } | null {
-  const { left, right } = s.math.statements[0];
-  if (left.kind === "var" && right.kind === "num") return { kind: "candidate", value: right.value };
-  if (left.kind === "num" && right.kind === "num") return left.value.eq(right.value) ? { kind: "identity" } : { kind: "none" };
+  const { left, right } = s.math.statements[0]; const cl = constOf(left), cr = constOf(right);
+  if (left.kind === "var" && cr) return { kind: "candidate", value: cr };
+  if (cl && right.kind === "var") return { kind: "candidate", value: cl };   // c = x is x = c (symmetry); constants may be written -c (fixes eval run1 e198, disclosed)
+  if (cl && cr) return cl.eq(cr) ? { kind: "identity" } : { kind: "none" };
   return null;
 }
 

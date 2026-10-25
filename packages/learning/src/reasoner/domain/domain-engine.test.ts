@@ -24,3 +24,6 @@ test("traces are deterministic and every step carries discharged obligations", (
   assert.equal(strip(a), strip(b));
   for (const s of solve("x/(x-2)=2/(x-2)+3").steps) assert.ok(s.obligations.every((o) => o.startsWith("discharged")) && s.preconditions.every((p) => p.startsWith("ok")));
 });
+test("a candidate written c = x is recognised (symmetry of equality)", () => {
+  const r = solve("-6=x^2/x"); assert.equal(r.class, "unique"); assert.deepEqual(r.solution, ["-6"]);
+});

@@ -1,0 +1,52 @@
+{
+ "summary": {
+  "dataset": "eval",
+  "stage": "D4",
+  "label": "run1",
+  "sha256": "6147a52e23e0028323e9fb4d714234171e484c03c8ad0c3f121d69c3e236603d",
+  "cases": 400,
+  "correct": 399,
+  "rate": 0.9975,
+  "failuresByCategory": {
+   "search-cap": 1
+  },
+  "invalidStepsInTraces": 0,
+  "openObligations": 0,
+  "moveVerifyRejected": 0,
+  "movePreconditionRefused": 10203,
+  "visited": {
+   "median": 24,
+   "p95": 73,
+   "worst": 111
+  },
+  "pathLength": {
+   "median": 6,
+   "p95": 9,
+   "worst": 9
+  },
+  "ms": {
+   "median": 27.43,
+   "p95": 145.7,
+   "worst": 317.45
+  }
+ },
+ "failures": [
+  {
+   "id": "e198",
+   "text": "-12=x^2/(x)",
+   "category": "search-cap",
+   "expected": [
+    "unique",
+    [
+     "-12"
+    ]
+   ],
+   "got": [
+    "refused",
+    null,
+    [],
+    "no-path"
+   ]
+  }
+ ]
+}
