@@ -104,3 +104,16 @@ The status below tracks **actual evidence**, not completion claims. See [initial
 | K12 Learner integration | NOT STARTED (existing UI) | No new-engine integration performed | Wait for upstream gates |
 
 **Update rule:** Every subsequent change must update this table with date, pinned commit, executed tests, observed result, blocker and next action. A status of PASSED requires reproducible evidence. No merge or deployment without explicit approval.
+
+
+### Audit update — 2026-10-25
+
+| Work item | Status | New evidence | Next action |
+|---|---|---|---|
+| K00-A | IN PROGRESS | Inspected `spec.ts`, `diagnostic.ts`, `graph.ts`, `kernel-acceptance.test.ts` at `8121178c`; incorporated user-provided TN5 unchecked report: 54,299 unchecked steps across 138/192 families | Full code inventory, run tests, reproduce TN5 bank and establish total-step denominator |
+| K00-B | NOT STARTED | No frozen benchmark | Freeze 100 cases |
+| K00-C | NOT STARTED | No comparative executions | Run three backends |
+| K00-D | NOT STARTED | No frozen constraint specs | Freeze 20 specs |
+| K00-E | BLOCKED | K00-C/D absent | Owner approval after evidence |
+
+Detailed findings: [Mathematics Engine Audit](MATHEMATICS-ENGINE-AUDIT.md). No code merges or deployments.
