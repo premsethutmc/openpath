@@ -25,6 +25,7 @@ export interface Misconception { id: string; label: string; explanation: string;
 export interface WorkingStep {
   index: number; from: string; to: string; interpretedAs?: string; status: StepStatus; reasons: string[]; explanation: string;
   route?: string[]; misconceptions: Misconception[]; followsFromEarlierError?: boolean; refusal?: string;
+  domain?: { original: string[]; expression: string[]; assumptions: string[]; carried: string[] };   // the layers the step was judged on
 }
 export interface WorkingEvaluation {
   problem: string;
@@ -39,7 +40,8 @@ export interface WorkingEvaluation {
 }
 
 // ---------- reading the student's text ----------
-const GLYPHS: [RegExp, string][] = [[/[−–—]/g, "-"], [/[×·]/g, "*"], [/÷/g, "/"], [/²/g, "^2"], [/³/g, "^3"], [/\s+/g, " "]];
+// Supported mathematical glyphs, each unambiguous: minus signs/dashes, multiplication dots and crosses, division signs and slashes.
+const GLYPHS: [RegExp, string][] = [[/[−–—‐‑‒﹣－]/g, "-"], [/[×·⋅∙∗⨯]/g, "*"], [/[÷∕⁄]/g, "/"], [/²/g, "^2"], [/³/g, "^3"], [/\s+/g, " "]];
 /** Deterministic normalisation of how people write mathematics. `grouping` selects how "a/2x" is read: false = (a/2)*x, true = a/(2*x). */
 export function normalizeLine(raw: string, grouping = false): string {
   if (/\s(or|OR|Or)\s/.test(raw)) return raw.split(/\s+or\s+/i).map((q) => normalizeOne(q, grouping)).join(" or ");
@@ -47,9 +49,9 @@ export function normalizeLine(raw: string, grouping = false): string {
 }
 function normalizeOne(raw: string, grouping: boolean): string {
   let s = raw.trim(); for (const [re, to] of GLYPHS) s = s.replace(re, to);
+  // tight reading, applied BEFORE juxtaposition is made explicit: a number after "/" binds the WHOLE juxtaposed run that follows it (x, x^k, bracket groups, with or without spaces): 3/2(x+1)(x+2) = 3/(2(x+1)(x+2)), 7/2 x = 7/(2x)
+  if (grouping) s = s.replace(/\/\s*(\d+(?:\.\d+)?)((?:\s*(?:x(?:\^\d+)?|\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\)))+)/g, (_m, num, run) => `/(${num}${run.replace(/\s+/g, "")})`);
   s = s.replace(/(?<=[\d.)x]) +(?=[\dx(])/g, (m, off, str) => (/\d$/.test(str.slice(0, off)) && /^\d/.test(str.slice(off + m.length)) ? " " : "*")).replace(/ /g, (m, off, str) => (/\d$/.test(str.slice(0, off)) && /^\d/.test(str.slice(off + 1)) ? " " : ""));
-  // tight reading: a number after "/" binds the WHOLE juxtaposed run that follows it (x, x^k, bracket groups): 3/2(x+1)(x+2) = 3/(2(x+1)(x+2))
-  if (grouping) s = s.replace(/\/(\d+(?:\.\d+)?)((?:x(?:\^\d+)?|\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\))+)/g, "/($1$2)");
   s = s.replace(/(\d|\))(?=x|\()/g, "$1*").replace(/x(?=\(|\d|x)/g, "x*").replace(/\)(?=\d|x)/g, ")*");
   return s;
 }
@@ -141,68 +143,116 @@ function routeOf(prevText: string, nextText: string, problem: string, domain: Ra
 }
 
 // ---------- the evaluation ----------
-interface Parsed { raw: string; text: string; excluded?: string[] }
+// Layered domain semantics (see docs/mathematics/semantics.md): original domain / current expression domain / temporary assumptions / carried case
+// assumptions are kept apart (V.relateLines), and gained candidates are an outstanding proof obligation that only the original problem can close.
+interface Parsed { raw: string; text: string; excluded?: string[]; kind: "eq" | "case-eq" | "case-neq"; c?: Rational; body?: string }
 const lineOf = (l: Line): { eq: string; excluded?: string[] } => (typeof l === "string" ? { eq: l } : l);
+const CASE = /^\s*case\s+x\s*(=|!=|≠)\s*([^:]+?)\s*:\s*(.+?)\s*$/i;
+const toR = (v: string): Rational => { const [n, d] = v.split("/"); return new Rational(BigInt(n), BigInt(d ?? "1")); };
+const finiteSol = (rats: Rational[]): V.Sol => ({ kind: "set", rats: sortR(rats), irr: [Rational.one] });
+const withDomainLayers = (L: V.DomainLayers) => ({ original: L.original.map(String), expression: L.expression.map(String), assumptions: L.assumptions.map(String), carried: L.carried.map(String) });
 
 function evaluateConvention(problem: string, lines: Line[], grouping: boolean, opts: { route: boolean }): { steps: WorkingStep[]; domain: Rational[]; refusal?: string } {
   const prob = normalizeLine(problem, grouping);
   let domain: Rational[]; try { domain = V.analyse(prob).required; } catch (e) { if (e instanceof Refusal) return { steps: [], domain: [], refusal: `${e.code}: ${e.message}` }; throw e; }
   const stepLines = lines.length && parseClaimLine(lineOf(lines[lines.length - 1]).eq)?.kind !== undefined && parseClaimLine(lineOf(lines[lines.length - 1]).eq)!.kind !== "set" ? lines.slice(0, -1) : lines;
-  const parsed: Parsed[] = [{ raw: problem, text: prob }, ...stepLines.map((l) => { const x = lineOf(l); return { raw: x.eq, text: normalizeLine(x.eq, grouping), excluded: x.excluded }; })];
-  const steps: WorkingStep[] = []; let earlierInvalid = false; let openObligation = false;
-  let origSol: V.Sol; try { origSol = V.solutionOf(prob).sol; } catch { origSol = { kind: "set", rats: [], irr: [Rational.one] }; }
-  const excl = (p: Parsed): string[] => p.excluded ?? [...new Set([...domain.map(String), ...V.analyseLine(p.text).required.map(String)])];
-  for (let i = 1; i < parsed.length; i++) {
-    const a = parsed[i - 1], b = parsed[i];
-    const base: WorkingStep = { index: i, from: a.raw, to: b.raw, interpretedAs: b.text !== b.raw ? b.text : undefined, status: "valid", reasons: [], explanation: "", misconceptions: [] };
+  const parsed: Parsed[] = stepLines.map((l) => {
+    const x = lineOf(l); const m = CASE.exec(x.eq);
+    if (m) { const c = ratOf(normalizeLine(m[2], grouping).replace(/\s/g, "")); return { raw: x.eq, text: "", kind: m[1] === "=" ? "case-eq" : "case-neq", c: c ?? undefined, body: m[3] } as Parsed; }
+    return { raw: x.eq, text: normalizeLine(x.eq, grouping), excluded: x.excluded, kind: "eq" } as Parsed;
+  });
+  const steps: WorkingStep[] = []; let earlierInvalid = false; let openObligation = false; let chainBroken = false;
+  let O: V.Analysed | null = null; try { O = V.analyse(prob); } catch { O = null; }
+  const origOn = (carried: Rational[]): V.Sol => { try { return V.solution(O!.f, V.toVals([...domain, ...carried].map(String))); } catch { return { kind: "set", rats: [], irr: [Rational.one] }; } };
+  let cur: { raw: string; text: string; unreadable?: boolean } = { raw: problem, text: prob }; let carried: Rational[] = []; const caseRoots: Rational[] = []; let splitOpen = false;
+  const note = (st: WorkingStep): WorkingStep => { if (earlierInvalid && !st.followsFromEarlierError && (st.status === "valid" || st.status === "valid-discharge" || st.status === "valid-with-obligation")) st.followsFromEarlierError = true; return st; };
+  for (let i = 0; i < parsed.length; i++) {
+    const b = parsed[i]; const idx = i + 1;
+    const base: WorkingStep = { index: idx, from: cur.raw, to: b.raw, interpretedAs: b.kind === "eq" && b.text !== b.raw ? b.text : undefined, status: "valid", reasons: [], explanation: "", misconceptions: [] };
     try {
-      if (a.text.replace(/\s/g, "") === b.text.replace(/\s/g, "")) { steps.push({ ...base, status: "no-change", explanation: "the line repeats the previous one" }); continue; }
-      const from = { eq: a.text, excluded: excl(a) }, to = { eq: b.text, excluded: excl(b) };
-      const eqv = V.checkStep(from, to, "equivalence", prob);
-      if (eqv.refusal) { steps.push({ ...base, status: "unsupported", reasons: eqv.reasons, refusal: eqv.refusal, explanation: `this line cannot be analysed exactly (${eqv.refusal}); it is not judged` }); continue; }
-      if (eqv.valid) {
-        const st: WorkingStep = { ...base, status: "valid", explanation: "the line has exactly the same solutions as the previous one on the problem's domain" };
-        if (opts.route) { const r = routeOf(a.text, b.text, prob, domain); if (r) st.route = r; }
-        if (earlierInvalid) st.followsFromEarlierError = true; steps.push(st); continue;
+      if (cur.unreadable) {
+        const nb = b.kind === "eq" ? b.text : null; let ok = false; if (nb) { try { V.analyseLine(nb); ok = true; } catch { ok = false; } }
+        steps.push({ ...base, status: "unsupported", reasons: ["evidence-chain-broken"], explanation: "the previous line could not be analysed, so nothing can be said about how this line follows from it; it is not judged" });
+        cur = ok ? { raw: b.raw, text: nb! } : { raw: b.raw, text: "", unreadable: true }; chainBroken = true; continue;
       }
-      const imp = V.checkStep(from, to, "implication", prob);
-      const A = V.analyseLine(a.text), B = V.analyseLine(b.text);
-      const before = A.solve(from.excluded.map((s) => { const [n, d] = s.split("/"); return new Rational(BigInt(n), BigInt(d ?? "1")); })), after = B.solve(to.excluded.map((s) => { const [n, d] = s.split("/"); return new Rational(BigInt(n), BigInt(d ?? "1")); }));
+      // ---- explicit case checks ----
+      if (b.kind === "case-eq") {
+        if (!b.c) { steps.push({ ...base, status: "unsupported", explanation: "the case value is not an exact number; the case is not judged" }); chainBroken = true; continue; }
+        const A = V.analyseLine(cur.text); const dom = V.toVals([...domain, ...A.required, ...carried].map(String));
+        const excludedHere = dom.some((v) => v.eq(b.c!));
+        const body = normalizeLine(b.body!, grouping).replace(/\s/g, "").toLowerCase();
+        if (excludedHere) { steps.push(/^(excluded|undefined|not-?allowed)$/.test(body) ? { ...base, explanation: `x = ${b.c} is not allowed in the problem, so there is nothing to check` } : { ...base, status: "invalid", reasons: ["case-excluded-value"], explanation: `x = ${b.c} makes a denominator zero, so it cannot be a case that gives a solution` }); if (steps[steps.length - 1].status === "invalid") earlierInvalid = true; continue; }
+        const eqn = body.split("="); let truthE: boolean; try { if (eqn.length !== 2 || /x/.test(body)) throw new Error("not numeric"); truthE = evaluate(parseExpr(eqn[0]), new Map()).eq(evaluate(parseExpr(eqn[1]), new Map())); } catch { steps.push({ ...base, status: "unsupported", explanation: "the case result is not a numeric equation; the case is not judged" }); chainBroken = true; continue; }
+        const q = parseEq(cur.text); let truthL: boolean;
+        try { truthL = evaluate(q.left, new Map([["x", b.c]])).eq(evaluate(q.right, new Map([["x", b.c]]))); } catch { steps.push({ ...base, status: "unsupported", explanation: "the line being split cannot be evaluated at this value; the case is not judged" }); chainBroken = true; continue; }
+        if (truthE !== truthL) { steps.push({ ...base, status: "invalid", reasons: ["case-truth-wrong"], explanation: `at x = ${b.c} the line ${cur.raw} is ${truthL ? "true" : "false"}, but the case says ${truthE ? "true" : "false"}` }); earlierInvalid = true; continue; }
+        if (truthL && !caseRoots.some((v) => v.eq(b.c!))) caseRoots.push(b.c); splitOpen = true;
+        steps.push({ ...base, explanation: `x = ${b.c} is checked on its own: the line is ${truthL ? "true, so it is a solution" : "false, so it is not a solution"}` }); continue;
+      }
+      let toText: string; let carriedFrom = carried; let carriedTo = carried;
+      // a line that STATES its own restrictions must state those of the original problem (the original domain is permanent whether or not it is written)
+      if (b.kind === "eq" && b.excluded && domain.some((v) => !b.excluded!.some((u) => toR(u).eq(v)))) { steps.push({ ...base, status: "invalid", reasons: ["original-restriction-lost"], explanation: `a restriction of the original problem is missing: the line states its restrictions but leaves out ${domain.filter((v) => !b.excluded!.some((u) => toR(u).eq(v))).map((v) => `x != ${v}`).join(", ")}` }); earlierInvalid = true; cur = { raw: b.raw, text: b.text }; continue; }
+      if (b.kind === "case-neq") {
+        if (!b.c) { steps.push({ ...base, status: "unsupported", explanation: "the case value is not an exact number; the case is not judged" }); chainBroken = true; continue; }
+        toText = normalizeLine(b.body!, grouping); carriedFrom = V.toVals([...carried, b.c].map(String)); carriedTo = carriedFrom;
+      } else { toText = b.text; }
+      if (b.kind === "eq" && b.excluded?.length) carriedTo = V.toVals([...carried.map(String), ...b.excluded]);
+      if (cur.text.replace(/\s/g, "") === toText.replace(/\s/g, "") && b.kind === "eq") { steps.push({ ...base, status: "no-change", explanation: "the line repeats the previous one" }); continue; }
+      let R = V.relateLines(cur.text, toText, prob, carriedFrom, carriedTo);
+      if ("refusal" in R) { steps.push({ ...base, status: "unsupported", reasons: ["state-unanalysable"], refusal: R.refusal, explanation: `this line cannot be analysed exactly (${R.refusal}); it is not judged` }); chainBroken = true; cur = { raw: b.raw, text: "", unreadable: true }; continue; }
+      let before = R.before, after = R.after, layers = R.toLayers; let merged = false;
+      // a line that combines the branches of an explicit split: the old branch plus the checked case roots, with the branch assumptions released
+      if (R.relation !== "equivalent" && carried.length && caseRoots.length && b.kind === "eq") {
+        const M = V.relateLines(cur.text, toText, prob, carried, []);
+        if (!("refusal" in M)) { const uni = V.solUnion(M.before, finiteSol(caseRoots)); if (V.solEq(uni, M.after)) { R = { ...M, relation: "equivalent", before: uni }; before = uni; after = M.after; layers = M.toLayers; merged = true; } }
+      }
+      const eqvValid = R.relation === "equivalent";
       const dn = diffNote(before, after);
-      // a step that SHRINKS the solution set is not an equivalence, but while an obligation is open (an earlier step admitted extra candidates) it is the legitimate discharge of that obligation
-      // as long as it keeps every solution of the ORIGINAL problem; it never certifies anything by itself.
-      // information destroyed: a finite solution set replaced by "every x" (multiplying both sides by 0, or by an expression that is 0 everywhere). Every old solution is kept, but nothing is left to check or narrow down.
-      if (after.kind === "all" && before.kind !== "all") { steps.push({ ...base, status: "invalid", reasons: [...eqv.reasons, "collapse-to-identity"], explanation: `this line is true for every allowed x, so it no longer says anything about the previous line (${describe(before)}); for example both sides were multiplied by 0`, misconceptions: [] }); earlierInvalid = true; continue; }
-      if (openObligation && before.kind === "set" && !imp.valid && V.solSub(after, before) && V.solSub(origSol, after) && !eqv.reasons.some((r) => r !== "solution-set-changed")) {
-        if (V.solEq(origSol, after)) openObligation = false;
-        const gone = dn && dn.lost.length ? dn.lost.map((v) => `x = ${v}`).join(", ") : "some candidates";
-        const st2: WorkingStep = { ...base, status: "valid-discharge", reasons: eqv.reasons, explanation: `this line drops ${gone}; the earlier step had admitted extra candidates, and every solution of the original equation is kept`, misconceptions: [] };
-        if (earlierInvalid) st2.followsFromEarlierError = true; steps.push(st2); continue;
+      const ledger = withDomainLayers(layers);
+      const done = (st: WorkingStep) => { st.domain = ledger; steps.push(note(st)); };
+      if (chainBroken && !eqvValid) {
+        // the earlier unsupported line breaks the evidence chain. A pairwise verdict is still sound when it does not depend on the missing context:
+        // gaining candidates is always only an implication; losing a solution of the ORIGINAL problem is invalid in every context; losing only extra candidates cannot be told from a legitimate discharge.
+        if (R.relation === "loss" || R.relation === "both") {
+          const keepsOriginal = V.solSub(origOn(carried), after);
+          if (keepsOriginal) { steps.push({ ...base, status: "unsupported", reasons: ["evidence-chain-broken"], explanation: "an earlier line could not be analysed, so it is unknown whether this line legitimately discards earlier candidates; it is not judged", domain: ledger }); cur = { raw: b.raw, text: toText }; continue; }
+        }
       }
-      if (imp.valid) {
+      if (eqvValid) {
+        const st: WorkingStep = { ...base, status: "valid", explanation: merged ? "the branches are combined: the line is the branch result together with the checked case solutions" : "the line has exactly the same solutions as the previous one on the problem's domain" };
+        if (opts.route && b.kind === "eq" && !carried.length) { const r = routeOf(cur.text, toText, prob, domain); if (r) st.route = r; }
+        if (chainBroken) st.reasons = ["assessed-independently-of-the-broken-chain"];
+        if (merged) { carried = []; caseRoots.length = 0; splitOpen = false; } else if (b.kind === "case-neq") carried = carriedTo;
+        done(st); cur = { raw: b.raw, text: toText }; continue;
+      }
+      // information destroyed: a finite solution set replaced by "every x" (multiplying both sides by 0, or by an expression that is 0 everywhere)
+      if (after.kind === "all" && before.kind !== "all") { steps.push({ ...base, status: "invalid", reasons: ["solution-set-changed", "collapse-to-identity"], domain: ledger, explanation: `this line is true for every allowed x, so it no longer says anything about the previous line (${describe(before)}); for example both sides were multiplied by 0`, misconceptions: [] }); earlierInvalid = true; cur = { raw: b.raw, text: toText }; continue; }
+      // a SHRINK is the legitimate discharge of an open obligation only if it keeps every solution of the ORIGINAL problem
+      if (R.relation === "loss" && openObligation && before.kind === "set" && V.solSub(origOn(carried), after)) {
+        if (V.solEq(origOn(carried), after)) openObligation = false;
+        const gone = dn && dn.lost.length ? dn.lost.map((v) => `x = ${v}`).join(", ") : "some candidates";
+        done({ ...base, status: "valid-discharge", reasons: ["solution-set-changed"], explanation: `this line drops ${gone}; an earlier step had admitted extra candidates, and every solution of the original equation is kept`, misconceptions: [] }); cur = { raw: b.raw, text: toText }; continue;
+      }
+      if (R.relation === "gain") {
         openObligation = true;
         const gained = dn ? dn.gained.map((v) => `x = ${v}`).join(", ") : "new candidates";
-        steps.push({ ...base, status: "valid-with-obligation", reasons: eqv.reasons, explanation: `every solution of the previous line is kept, but this line also admits ${gained}. These are candidates only: each must be checked in the ORIGINAL equation.`, misconceptions: [] }); continue;
+        const viaAssumption = dn ? dn.gained.filter((v) => R.fromLayers.assumptions.some((u) => u.eq(v))) : [];
+        done({ ...base, status: "valid-with-obligation", reasons: ["solution-set-changed"], explanation: `every solution of the previous line is kept, but this line also admits ${gained}${viaAssumption.length ? " (the previous line excluded " + viaAssumption.map((v) => `x = ${v}`).join(", ") + " only through a denominator the student introduced)" : ""}. These are candidates only: each must be checked in the ORIGINAL equation.`, misconceptions: [] }); cur = { raw: b.raw, text: toText }; continue;
       }
       const why: string[] = [];
-      if (eqv.reasons.includes("restriction-dropped")) why.push("a restriction recorded earlier was dropped");
-      if (eqv.reasons.includes("restriction-closure-violated")) why.push("the line divides by an expression that can be 0 but the matching restriction is not recorded");
-      if (eqv.reasons.includes("original-restriction-lost")) why.push("a restriction of the original problem is missing");
-      if (eqv.reasons.includes("from-restriction-missing")) why.push("the previous line's restrictions are incomplete");
-      let sets = "";
-      if (eqv.reasons.includes("solution-set-changed") || eqv.reasons.includes("solution-set-lost")) {
-        sets = `the previous line has ${describe(before)}; this line has ${describe(after)}`;
-        if (dn && (dn.lost.length || dn.gained.length)) sets += `${dn.lost.length ? `; it lost ${dn.lost.map((v) => `x = ${v}`).join(", ")}` : ""}${dn.gained.length ? `; it gained ${dn.gained.map((v) => `x = ${v}`).join(", ")}` : ""}`;
-        why.push(sets);
-      }
-      const mis = nameCauses(a.text, b.text, before, after, domain.length ? domain : []);
-      steps.push({ ...base, status: "invalid", reasons: eqv.reasons, explanation: `not an equivalent step: ${why.join("; ")}`, misconceptions: mis }); earlierInvalid = true;
+      if (R.relation === "both") why.push("the solutions both changed in two directions"); 
+      let sets = `the previous line has ${describe(before)}; this line has ${describe(after)}`;
+      if (dn && (dn.lost.length || dn.gained.length)) sets += `${dn.lost.length ? `; it lost ${dn.lost.map((v) => `x = ${v}`).join(", ")}` : ""}${dn.gained.length ? `; it gained ${dn.gained.map((v) => `x = ${v}`).join(", ")}` : ""}`;
+      why.push(sets);
+      const mis = nameCauses(cur.text, toText, before, after, domain.length ? domain : []);
+      steps.push({ ...base, status: "invalid", reasons: ["solution-set-changed"], domain: ledger, explanation: `not an equivalent step: ${why.join("; ")}`, misconceptions: mis }); earlierInvalid = true; cur = { raw: b.raw, text: toText };
     } catch (e) {
       if (e instanceof Refusal) steps.push({ ...base, status: "unsupported", refusal: e.code, explanation: `this line cannot be analysed exactly (${e.code}: ${e.message}); it is not judged` });
       else steps.push({ ...base, status: "unsupported", explanation: `internal error, line not judged: ${String(e).slice(0, 120)}` });
+      chainBroken = true; cur = { raw: b.raw, text: "", unreadable: true };
     }
   }
-  return { steps, domain };
+  void splitOpen; return { steps, domain };
 }
 
 /** "x = c" or "c = x" where c is any variable-free expression ("(25/36)", "- 7 / 6", "−8", "(39 ÷ 4)"): returns the exact value, else null. */

@@ -29,7 +29,7 @@ const nested = (e: MathExpr): boolean => { switch (e.kind) { case "div": return 
 const hasXFrac = (e: MathExpr): boolean => { switch (e.kind) { case "div": return hasX(e.right) || hasXFrac(e.left); case "add": case "sub": case "mul": return hasXFrac(e.left) || hasXFrac(e.right); case "neg": return hasXFrac(e.operand); case "pow": return hasXFrac(e.base); default: return false; } };
 const xTerms = (e: MathExpr) => flat(e).filter((t) => hasXFrac(t.t));
 const reducedTerm = (t: MathExpr): boolean => { if (nested(t)) return false; const f = RatFun.fromExpr(t); if (!f) return false; return f.n.gcd(f.d).degree <= 0; };
-const startFracCount = (text: string): number => { const [l, r] = text.split("="); const c = startState(text); return [...xTermsOf(eqOf(c.math))].filter((t) => { const f = RatFun.fromExpr(t.t); return !!f && f.d.degree > 0; }).length; };
+const startFracCount = (text: string): number => { const [l, r] = text.split("="); const c = startState(text); return [...xTermsOf(eqOf(c.math))].filter((t) => { const f = RatFun.fromExpr(t.t); return !!f && f.reduce().d.degree > 0; }).length; };
 const xTermsOf = (e: { left: MathExpr; right: MathExpr }) => [...flat(e.left), ...flat(e.right)].filter((t) => hasXFrac(t.t));
 const isMonoSum = (e: MathExpr): boolean => {
   if (isLit0(e)) return true; const ts = flat(e); const ks = new Set<number>();

@@ -220,6 +220,32 @@ export function checkStep(from: StateText, to: StateText, effect: Effect = "equi
   if (effect === "equivalence") { if (!solEq(a, b)) why.push("solution-set-changed"); } else if (!solSub(a, b)) why.push("solution-set-lost");
   return { valid: why.length === 0, reasons: why };
 }
+// ---------------------------------------------------------------- layered domain semantics (student working)
+// Four layers are kept apart:
+//   original    zeros of the denominators of the ORIGINAL problem: permanently excluded, every line is judged with them removed;
+//   expression  zeros of the denominators written in THIS line;
+//   assumptions expression \ original: values excluded only because the line is written with an introduced denominator; they restrict THAT line's
+//               meaning, never the original solution set and never later lines; a later line that drops them may GAIN those values;
+//   carried     explicit case assumptions ("case x != c") that stay in force for the lines of that branch.
+// The meaning of a line is its solution set over  R \ (original U expression U carried).  A step is judged by comparing the two meanings:
+//   equivalent  -> valid;   gain (old set inside new set) -> implication, creates an outstanding proof obligation;   loss or both -> NOT a valid step.
+export interface DomainLayers { original: Rational[]; expression: Rational[]; assumptions: Rational[]; carried: Rational[]; domain: Rational[] }
+const uniqSorted = (xs: Rational[]) => sortVals([...new Map(xs.map((r) => [r.toString(), r] as const)).values()]);
+export function domainLayers(line: AnalysedLine, original: Rational[], carried: Rational[] = []): DomainLayers {
+  const assumptions = line.required.filter((v) => !original.some((u) => u.eq(v)));
+  return { original, expression: line.required, assumptions, carried, domain: uniqSorted([...original, ...line.required, ...carried]) };
+}
+export type Relation = "equivalent" | "gain" | "loss" | "both";
+export interface Relate { relation: Relation; before: Sol; after: Sol; fromLayers: DomainLayers; toLayers: DomainLayers; refusal?: string }
+export function relateLines(fromText: string, toText: string, originalText: string, carriedFrom: Rational[] = [], carriedTo: Rational[] = []): Relate | { refusal: string } {
+  let A: AnalysedLine, B: AnalysedLine, O: Analysed;
+  try { A = analyseLine(fromText); B = analyseLine(toText); O = analyse(originalText); }
+  catch (e) { if (e instanceof Refusal) return { refusal: e.code }; throw e; }
+  const fromLayers = domainLayers(A, O.required, carriedFrom), toLayers = domainLayers(B, O.required, carriedTo);
+  const before = A.solve(fromLayers.domain), after = B.solve(toLayers.domain);
+  const up = solSub(before, after), down = solSub(after, before);
+  return { relation: up && down ? "equivalent" : up ? "gain" : down ? "loss" : "both", before, after, fromLayers, toLayers };
+}
 /** Exact description of the solution set of the written equation over its natural domain. */
 export function solutionOf(text: string): { sol: Sol; required: Rational[] } { const a = analyse(text); return { sol: solution(a.f, a.required), required: a.required }; }
 export function checkClaim(eq: string, claimed: string[] | "all-except-excluded" | "all-real"): { valid: boolean; truth: string[] | "all-except-excluded" | "undecidable" } {
