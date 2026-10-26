@@ -280,3 +280,149 @@ export function checkTrace(originalText: string, states: StateText[], effects: E
   }
   return { valid: problems.length === 0, problems };
 }
+
+// ---------------------------------------------------------------- expression-level analysis (no equals sign): identity, domain, form
+// Used by the student-working layer for lines that are EXPRESSIONS (expand / factorise / simplify). Same parser, same rational-function builder,
+// same restriction extraction as the equation checker; nothing here samples or uses floating point.
+const sqfree = (p: P): P => (p.length <= 1 ? [ONE] : prim(pexact(p, pgcd(p, pderiv(p)))!));
+/** Product of the polynomials that must be non-zero for the WRITTEN expression to be defined (1 when there are none). */
+export interface ExprAnalysis { f: RF; cond: P; tree: N }
+export function analyseExpression(text: string): ExprAnalysis {
+  const tree = parseSide(text); const conds: P[] = []; const f = build(tree, conds);
+  return { f, cond: conds.reduce((a, c) => pmul(a, c), [ONE]), tree };
+}
+/** Real restrictions of `p` (a squarefree product of conditions): the rational values, and whether further irrational real values exist. */
+export function restrictionsOf(cond: P): { rats: Rational[]; irrational: boolean } {
+  if (cond.length <= 1) return { rats: [], irrational: false };
+  const { roots, rest } = rationalFactor(cond);
+  return { rats: uniqSorted(roots), irrational: rest.length > 1 && realRootCount(sqfree(rest)) > 0 };
+}
+/** The part of `a`'s restrictions that `b` does not have: a squarefree polynomial, [1] when no real value is involved. */
+function extraRestriction(a: P, b: P): P {
+  const sa = sqfree(a), sb = sqfree(b); const g = pgcd(sa, sb); const q = g.length > 1 ? pexact(sa, g)! : sa;
+  return q.length > 1 && realRootCount(q) > 0 ? prim(q) : [ONE];
+}
+export interface ExprRelation {
+  /** identical: equal for every x where both are defined (a general identity); conditional: equal only at some values; never: equal nowhere */
+  kind: "identical" | "conditional" | "never";
+  /** values where `from` is undefined but `to` is defined (a cancellation widened the domain) */
+  dropped: { rats: Rational[]; irrational: boolean };
+  /** values where `to` is undefined but `from` is defined (a restriction was introduced) */
+  added: { rats: Rational[]; irrational: boolean };
+  /** for a conditional equality: where the two lines agree */
+  agreeAt?: Sol;
+}
+export function relateExpressions(fromText: string, toText: string): ExprRelation {
+  const A = analyseExpression(fromText), B = analyseExpression(toText);
+  const dropped = restrictionsOf(extraRestriction(A.cond, B.cond)), added = restrictionsOf(extraRestriction(B.cond, A.cond));
+  const D = psub(pmul(A.f.n, B.f.d), pmul(B.f.n, A.f.d));
+  if (!D.length) return { kind: "identical", dropped, added };
+  const ra = restrictionsOf(sqfree(A.cond)), rb = restrictionsOf(sqfree(B.cond));
+  const agreeAt = solution({ n: D, d: [ONE] }, uniqSorted([...ra.rats, ...rb.rats]));
+  const none = agreeAt.kind === "set" && !agreeAt.rats.length && agreeAt.irr.length === 1;
+  return { kind: none ? "never" : "conditional", dropped, added, agreeAt };
+}
+/** Evaluate a written expression exactly at a rational point (null where undefined). */
+export const evalExpressionAt = (text: string, x: Rational): Rational | null => evalAt(parseSide(text), x);
+
+// ---- factorisation over Q (Gauss: primitive integer polynomials; roots by the rational-root test, quadratic/cubic factors by Kronecker)
+const content = (p: P) => { const q = prim(p); return q.length ? q : p; };
+function ints(p: P): bigint[] { let l = 1n; for (const c of p) l = (l * c.denBig) / gcdB(l, c.denBig); return p.map((c) => (c.numBig * l) / c.denBig); }
+function divisorsOf(n: bigint): bigint[] { n = n < 0n ? -n : n; const o: bigint[] = []; for (let d = 1n; d * d <= n; d++) if (n % d === 0n) { o.push(d); if (d * d !== n) o.push(n / d); } return o; }
+/** Does p (degree >= 2) have a factor of degree d over Q? Kronecker interpolation; refuses when the search is too large. */
+function hasFactorOfDegree(p: P, d: number): boolean {
+  const ip = ints(prim(p)).map((v) => new Rational(v)); const pts: bigint[] = []; for (let a = 0n; pts.length < d + 1; a = a <= 0n ? -a + 1n : -a) { if (!peval(ip, new Rational(a)).isZero()) pts.push(a); }
+  const lists = pts.map((a) => { const v = peval(ip, new Rational(a)).numBig; return divisorsOf(v).flatMap((x) => [x, -x]); });
+  if (lists.reduce((n, l) => n * l.length, 1) > 400000) throw new Refusal("DOMAIN_UNRESOLVED", "factorisation search too large");
+  const tryTuple = (vals: bigint[]): boolean => {
+    let poly: P = [];                                   // Lagrange interpolation over Q
+    for (let i = 0; i < pts.length; i++) { let basis: P = [ONE], den = ONE;
+      for (let j = 0; j < pts.length; j++) if (j !== i) { basis = pmul(basis, [new Rational(-pts[j]), ONE]); den = den.mul(new Rational(pts[i] - pts[j])); }
+      poly = padd(poly, pscale(basis, new Rational(vals[i]).div(den))); }
+    if (poly.length - 1 !== d) return false;
+    return pexact(ip, poly) !== null;
+  };
+  const rec = (i: number, acc: bigint[]): boolean => (i === lists.length ? tryTuple(acc) : lists[i].some((v) => rec(i + 1, [...acc, v])));
+  return rec(0, []);
+}
+/** Irreducible over Q (degree >= 1). */
+export function irreducible(p: P): boolean {
+  const n = p.length - 1; if (n <= 1) return n === 1;
+  if (rationalFactor(p).roots.length) return false;
+  if (n <= 3) return true;
+  for (let d = 2; d <= Math.floor(n / 2); d++) if (hasFactorOfDegree(p, d)) return false;
+  return true;
+}
+const isPrimitiveInt = (p: P) => p.every((c) => c.isInteger()) && p.reduce((g, c) => gcdB(g, c.numBig), 0n) === 1n;
+
+// ---- structural facts about how an expression is WRITTEN
+export interface FormFacts {
+  /** every term is a single coefficient times a single power of x (no brackets to multiply out) */
+  expandedShape: boolean;
+  /** …and no two terms have the same power of x */
+  collected: boolean;
+  /** a product of irreducible, primitive factors (and a constant), not a sum */
+  factorisedCompletely: boolean;
+  /** one fraction (or none) whose numerator and denominator have no common factor, with no fraction inside either */
+  lowestTerms: boolean;
+  /** no x-power is multiplied by another power of the same base, no power of a power or of a product */
+  powersCombined: boolean;
+  /** has x in a denominator or a negative power */
+  rational: boolean;
+}
+const flat = (n: N, op: "+" | "*"): N[] => (n.t === "bin" && n.op === op ? [...flat(n.a, op), ...flat(n.b, op)] : [n]);
+function addTerms(n: N, sign = 1, out: { s: number; n: N }[] = []): { s: number; n: N }[] {
+  if (n.t === "bin" && n.op === "+") { addTerms(n.a, sign, out); addTerms(n.b, sign, out); }
+  else if (n.t === "bin" && n.op === "-") { addTerms(n.a, sign, out); addTerms(n.b, -sign, out); }
+  else if (n.t === "neg") addTerms(n.a, -sign, out); else out.push({ s: sign, n });
+  return out;
+}
+const noX = (n: N) => !hasX(n);
+/** degree of a single-monomial term c·x^k written canonically (one coefficient, one power of x), else null */
+function monomialDegree(t: N): number | null {
+  let nums = 0, xs = 0, k = 0; let ok = true;
+  const walk = (n: N) => {
+    if (n.t === "neg") return walk(n.a);
+    if (n.t === "bin" && n.op === "*") { walk(n.a); walk(n.b); return; }
+    if (n.t === "bin" && n.op === "/" && noX(n.b) && n.b.t === "num") { nums++; walk(n.a); return; }
+    if (n.t === "num") { nums++; return; }
+    if (n.t === "x") { xs++; k += 1; return; }
+    if (n.t === "pow" && n.a.t === "x") { const e = constInt(n.e); if (e === null || e < 2) ok = false; xs++; k += e ?? 0; return; }
+    if (noX(n) && n.t === "pow") { nums++; return; }
+    ok = false;
+  };
+  walk(t); return ok && nums <= 1 && xs <= 1 ? k : null;
+}
+export function formFacts(text: string): FormFacts {
+  const tree = parseSide(text); const conds: P[] = []; build(tree, conds);
+  const terms = addTerms(tree); const degs = terms.map((t) => monomialDegree(t.n));
+  const expandedShape = degs.every((d) => d !== null);
+  const collected = expandedShape && new Set(degs).size === degs.length;
+  // lowest terms: strip a leading minus, then either a single fraction of two fraction-free polynomial expressions, or a fraction-free expression
+  const frFree = (n: N): boolean => n.t === "num" || n.t === "x" || (n.t === "neg" && frFree(n.a)) || (n.t === "bin" && n.op !== "/" && frFree(n.a) && frFree(n.b)) || (n.t === "bin" && n.op === "/" && noX(n.b) && frFree(n.a)) || (n.t === "pow" && frFree(n.a) && noX(n.e) && (constInt(n.e) ?? -1) >= 0);
+  let top: N = tree; while (top.t === "neg") top = top.a;
+  const lowestTerms = frFree(tree) || (top.t === "bin" && top.op === "/" && frFree(top.a) && frFree(top.b) && hasX(top.b) && pgcd(build(top.a, []).n, build(top.b, []).n).length <= 1);
+  // factorised completely: a single product of a constant and primitive irreducible factors (each possibly to a positive power)
+  let factorisedCompletely = false;
+  if (addTerms(tree).length === 1) {
+    factorisedCompletely = true;
+    for (const f of flat(top, "*")) {
+      let base: N = f, k = 1; if (f.t === "pow" && noX(f.e)) { base = f.a; k = constInt(f.e) ?? 0; }
+      if (k < 1) { factorisedCompletely = false; break; }
+      if (noX(base)) continue;
+      if (!frFree(base) || (base.t === "bin" && base.op === "*")) { factorisedCompletely = false; break; }
+      const q = build(base, []), poly = pscale(q.n, q.d[0].inv());
+      if (poly.length < 2 || !isPrimitiveInt(poly) || !irreducible(poly)) { factorisedCompletely = false; break; }
+    }
+  }
+  // powers combined: no repeated base within any product, no power of a power or of a product/quotient
+  let powersCombined = true;
+  const key = (n: N): string => (n.t === "pow" ? key(n.a) : n.t === "x" ? "x" : JSON.stringify(n, (_k, v) => (typeof v === "bigint" ? v.toString() : v instanceof Rational ? v.toString() : v)));
+  const chk = (n: N): void => {
+    if (n.t === "bin" && n.op === "*") { const fs = flat(n, "*").filter((f) => hasX(f)); const ks = fs.map(key); if (new Set(ks).size !== ks.length) powersCombined = false; fs.forEach(chk); return; }
+    if (n.t === "pow") { if (n.a.t === "pow" || (n.a.t === "bin" && (n.a.op === "*" || n.a.op === "/")) || (n.a.t === "neg")) powersCombined = false; chk(n.a); return; }
+    if (n.t === "bin") { chk(n.a); chk(n.b); } else if (n.t === "neg") chk(n.a);
+  };
+  chk(tree);
+  return { expandedShape, collected, factorisedCompletely, lowestTerms, powersCombined, rational: conds.length > 0 };
+}
