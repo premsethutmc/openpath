@@ -25,7 +25,7 @@ export type SymStepStatus = "valid" | "valid-with-obligation" | "no-change" | "i
 export type Relation = "identity" | "at-values" | "never";
 export interface SymCause { id: string; label: string; explanation: string; detail: string }
 export interface SymStep { index: number; from: string; to: string; status: SymStepStatus; relation: Relation | null; explanation: string; errors: SymCause[] }
-export interface DomainReport { lost: string[]; irrationalLost: boolean; stated: string[]; missing: string[]; status: "preserved" | "stated" | "missing" | "n/a" }
+export interface DomainReport { /** values the ORIGINAL expression already excludes */ original: string[]; lost: string[]; irrationalLost: boolean; stated: string[]; /** stated restrictions that the original expression already implies (redundant, never wrong) */ implied: string[]; missing: string[]; /** stated restrictions that exclude inputs neither the original expression nor any written line requires */ narrowed: string[]; status: "preserved" | "stated" | "missing" | "narrowed" | "n/a" }
 export interface SymbolicAssessment {
   outcome: "verified" | "invalid" | "ambiguous" | "unsupported" | "incomplete"; correct: true | false | null; firstInvalidStep: number | null;
   steps: SymStep[]; errors: SymCause[];
@@ -45,7 +45,7 @@ export function readSymbolicProblem(raw: string): Problem | null {
   if (/=|[<>≠≤≥]/.test(t) || MULTI.test(t.replace(/\b\d*e\d+\b/gi, ""))) return null;
   const letters = new Set(t.match(/[a-zA-Z]/g) ?? []); if (letters.size !== 1) return null;
   const v = [...letters][0]; if (!/[\dx\w]/.test(t)) return null;
-  try { V.parseSide(normalizeLine(renameVar(t, v), false)); } catch { return null; }
+  try { V.analyseExpression(normalizeLine(renameVar(t, v), false)); } catch (e) { if (e instanceof Refusal) return null; throw e; }
   return { text: t, v, form };
 }
 export const isSymbolicProblem = (raw: string): boolean => readSymbolicProblem(raw) !== null;
@@ -96,7 +96,7 @@ function skillsOfStep(prev: string, cur: string): Set<SymSkillId> {
   const pieces = (n: V.N): V.N[] => (n.t === "bin" && n.op === "/" ? [n.a, n.b] : [n]);
   if (pieces(a).some((pa) => isSumN(strip(pa))) && pieces(b).some((pb) => { const q = flat(strip(pb), "*"); return q.length >= 2 && q.some((f) => isSumN(strip(f))); }) && !pieces(a).some((pa) => pieces(b).some((pb) => sameTree(pa, pb) && flat(strip(pb), "*").length >= 2))) out.add("factorise");
   if (isSumN(strip(a)) && fs.length >= 2 && fs.some((f) => isSumN(strip(f)))) {
-    if (fs.length === 2 && fs.filter((f) => isSumN(strip(f))).length === 1) out.add("common-factor");
+    if (fs.length >= 2 && fs.filter((f) => isSumN(strip(f))).length === 1) out.add("common-factor");
     const sums = fs.filter((f) => isSumN(strip(f)));
     if (sums.length >= 2) { const pa = V.analyseExpression(prev).f.n; if (pa.length === 3 && pa[1].isZero() && !pa[0].isZero() && pa[0].mul(pa[2]).lt(Rational.zero)) out.add("difference-of-squares"); if (sums.length === 2 && sameTree(strip(sums[0]), strip(sums[1]))) out.add("perfect-square"); }
   }
@@ -124,13 +124,13 @@ function formCheck(text: string, form: SymForm): { ok: boolean; detail: string }
 // ---------- whole working ----------
 export function assessSymbolicWorking(problemText: string, lines: string[], opts: SymbolicOptions = {}): SymbolicAssessment {
   const sk = opts.requiredSkills ?? [];
-  const mk = (o: Partial<SymbolicAssessment>): SymbolicAssessment => ({ outcome: "unsupported", correct: null, firstInvalidStep: null, steps: [], errors: [], final: { value: "", form: "n/a", detail: "" }, skills: { required: sk, demonstrated: [], missing: sk, status: sk.length ? "not-demonstrated" : "n/a" }, domain: { lost: [], irrationalLost: false, stated: [], missing: [], status: "n/a" }, summary: "", ...o });
+  const mk = (o: Partial<SymbolicAssessment>): SymbolicAssessment => ({ outcome: "unsupported", correct: null, firstInvalidStep: null, steps: [], errors: [], final: { value: "", form: "n/a", detail: "" }, skills: { required: sk, demonstrated: [], missing: sk, status: sk.length ? "not-demonstrated" : "n/a" }, domain: { original: [], lost: [], irrationalLost: false, stated: [], implied: [], missing: [], narrowed: [], status: "n/a" }, summary: "", ...o });
   const P = readSymbolicProblem(problemText); if (!P) return mk({ summary: "the problem is not a one-variable expression this engine can read" });
   const form = opts.form ?? P.form; const probText = normalizeLine(renameVar(P.text, P.v), false);
   const pa = guard(() => V.analyseExpression(probText)); if ("refusal" in pa) return mk({ summary: `the problem cannot be analysed exactly (${pa.refusal})` });
   const steps: SymStep[] = []; let firstInvalid: number | null = null; let errors: SymCause[] = [];
   let prevText = probText, prevShow = problemText, prevOk = true; let lastMain: Line | null = null; let unsupported = 0, ambiguous = 0;
-  const shown = new Set<SymSkillId>(); const stated: Rational[] = []; const lostSoFar: { at: number; r: Rational[] }[] = [];
+  const origRats = V.restrictionsOf(pa.cond).rats; const reqRats: Rational[] = [...origRats]; const shown = new Set<SymSkillId>(); const stated: Rational[] = []; const lostSoFar: { at: number; r: Rational[] }[] = [];
   lines.forEach((raw, k) => {
     const i = k + 1; const push = (status: SymStepStatus, explanation: string, relation: Relation | null = null, errs: SymCause[] = []) => { steps.push({ index: i, from: prevShow, to: raw, status, relation, explanation, errors: errs }); if (status === "invalid" && firstInvalid === null) { firstInvalid = i; errors = errs; } if (status === "unsupported") unsupported++; if (status === "ambiguous") ambiguous++; };
     const L = readLine(raw, P.v);
@@ -157,12 +157,24 @@ export function assessSymbolicWorking(problemText: string, lines: string[], opts
       push("invalid", w.relation === "at-values" ? `not an identity: ${worst.b} equals ${cl} only at ${where(w.agreeAt)} (true for particular values of x, not for all x)` : `not equal to ${cl} for any x`, w.relation, errs);
       prevText = last; prevShow = raw; prevOk = false; return;
     }
-    if (narrowed) { push("invalid", `this line is undefined${narrowed.r.length ? ` at x = ${showRats(narrowed.r).join(", ")}` : " at some values"} where the previous line was defined: it adds a restriction the expression did not have`, "identity"); prevText = last; prevShow = raw; prevOk = false; return; }
+    const lineA = guard(() => V.analyseExpression(last)); if (!("refusal" in lineA)) reqRats.push(...V.restrictionsOf(lineA.cond).rats);
+    // a restriction the new line has that the previous line lacked: fine if the ORIGINAL expression already excluded it (it is only being restored); a conditional
+    // transformation (valid, with an obligation) if the student states it; otherwise an unstated restriction that changes the expression
+    let conditional = false;
+    if (narrowed) {
+      const fresh = narrowed.r.filter((r) => !origRats.some((o) => o.eq(r)));
+      if (narrowed.irr) { push("invalid", "this line is undefined at some irrational values where the previous line was defined", "identity"); prevText = last; prevShow = raw; prevOk = false; return; }
+      if (fresh.length) {
+        if (fresh.every((r) => stated.some((u) => u.eq(r)))) conditional = true;
+        else { push("invalid", `this line is undefined at x = ${showRats(fresh).join(", ")} where the previous line was defined and the original expression was not: it adds a restriction that was not stated`, "identity"); prevText = last; prevShow = raw; prevOk = false; return; }
+      }
+    }
     for (const s of skillsOfStep(ref, sides[0])) shown.add(s); for (let j = 0; j + 1 < sides.length; j++) for (const s of skillsOfStep(sides[j], sides[j + 1])) shown.add(s);
     const unstated = uniq(widened).filter((r) => !L.stated.some((u) => u.eq(r)) && !stated.some((u) => u.eq(r)));
     const same = prevOk && sides.length === 1 && V.parseSide(sides[0]) && sameTree(V.parseSide(ref), V.parseSide(sides[0]));
     if (widened.length || irrW) lostSoFar.push({ at: i, r: uniq(widened) });
-    if (unstated.length || irrW) push("valid-with-obligation", `equal to the previous line wherever both are defined; the previous line is not defined at x = ${showRats(unstated).join(", ")}${irrW ? " (and at some irrational values)" : ""}, so that restriction should be kept`, "identity");
+    if (conditional) push("valid-with-obligation", "an identity wherever both lines are defined; the new line is undefined at a value the previous line allowed, and the student has stated that restriction, so it is a conditional step: that value is excluded by the student, not by the problem", "identity");
+    else if (unstated.length || irrW) push("valid-with-obligation", `equal to the previous line wherever both are defined; the previous line is not defined at x = ${showRats(unstated).join(", ")}${irrW ? " (and at some irrational values)" : ""}, so that restriction should be kept`, "identity");
     else push(same ? "no-change" : "valid", "an identity with the previous line (exact algebra)", "identity");
     prevText = last; prevShow = raw; prevOk = true; lastMain = { ...L, text: last };
   });
@@ -170,17 +182,17 @@ export function assessSymbolicWorking(problemText: string, lines: string[], opts
   const skills = { required, demonstrated: dem, missing: miss, status: (required.length ? (miss.length ? "not-demonstrated" : "demonstrated") : "n/a") as "demonstrated" | "not-demonstrated" | "n/a" };
   const skillNote = skills.status === "not-demonstrated" ? ` The working does not show: ${miss.map((m) => SYM_SKILLS[m]).join("; ")}.` : "";
   // domain: what the final line lost relative to the problem, and what the student has stated
-  let domain: DomainReport = { lost: [], irrationalLost: false, stated: showRats(uniq(stated)), missing: [], status: "n/a" };
+  let domain: DomainReport = { original: showRats(origRats), lost: [], irrationalLost: false, stated: showRats(uniq(stated)), implied: [], missing: [], narrowed: [], status: "n/a" };
   const lm = lastMain as Line | null;
-  if (lm && !firstInvalid) { const net = guard(() => V.relateExpressions(probText, lm.text)); if (!("refusal" in net)) { const lost = uniq(net.dropped.rats); const miss2 = lost.filter((r) => !stated.some((u) => u.eq(r))); domain = { lost: showRats(lost), irrationalLost: net.dropped.irrational, stated: showRats(uniq(stated)), missing: showRats(miss2), status: !lost.length && !net.dropped.irrational ? "preserved" : miss2.length || net.dropped.irrational ? "missing" : "stated" }; } }
-  const domNote = domain.status === "missing" ? ` The final line is defined at x = ${domain.missing.join(", ")}${domain.irrationalLost ? " and at some irrational values" : ""} where the problem was not; that restriction is not stated.` : "";
+  if (lm && !firstInvalid) { const net = guard(() => V.relateExpressions(probText, lm.text)); if (!("refusal" in net)) { const lost = uniq(net.dropped.rats); const miss2 = lost.filter((r) => !stated.some((u) => u.eq(r))); const narrowedV = uniq(stated).filter((r) => !reqRats.some((o) => o.eq(r))); domain = { original: showRats(origRats), lost: showRats(lost), irrationalLost: net.dropped.irrational, stated: showRats(uniq(stated)), implied: showRats(uniq(stated).filter((r) => origRats.some((o) => o.eq(r)))), missing: showRats(miss2), narrowed: showRats(narrowedV), status: miss2.length || net.dropped.irrational ? "missing" : narrowedV.length ? "narrowed" : !lost.length ? "preserved" : "stated" }; } }
+  const domNote = domain.status === "narrowed" ? ` The student excluded x = ${domain.narrowed.join(", ")}, which neither the problem nor the working required.` : domain.status === "missing" ? ` The final line is defined at x = ${domain.missing.join(", ")}${domain.irrationalLost ? " and at some irrational values" : ""} where the problem was not; that restriction is not stated.` : "";
   let outcome: SymbolicAssessment["outcome"]; let summary: string; let fin: SymbolicAssessment["final"] = { value: lm ? lm.expr : "", form: "n/a", detail: "" };
   if (firstInvalid !== null) { outcome = "invalid"; summary = `Step ${firstInvalid} is not a valid transformation.`; }
   else if (ambiguous) { outcome = "ambiguous"; summary = "A line can be read in more than one way."; }
   else if (unsupported) { outcome = "unsupported"; summary = "A line could not be checked exactly; no claim is made about the working."; }
   else if (!lines.length || !lm) { outcome = "incomplete"; summary = "No working was given."; }
   else { const fc = formCheck(lm.text, form); if (fc.ok) { outcome = "verified"; fin = { ...fin, form: "ok" }; summary = "Every step is an identity with the one before it and the working reaches the requested form."; } else { outcome = "incomplete"; fin = { ...fin, form: "not-requested-form", detail: fc.detail }; summary = `Every step so far is valid, but ${fc.detail}.`; } }
-  if (outcome === "verified" && opts.requireDomain && domain.status === "missing") { outcome = "incomplete"; summary = "Every step is valid, but a restriction of the problem is lost and not stated."; }
+  if (outcome === "verified" && opts.requireDomain && (domain.status === "missing" || domain.status === "narrowed")) { outcome = "incomplete"; summary = domain.status === "missing" ? "Every step is valid, but a restriction of the problem is lost and not stated." : "Every step is valid, but the student excluded inputs the problem allows."; }
   return { outcome, correct: outcome === "verified" ? true : outcome === "invalid" ? false : null, firstInvalidStep: firstInvalid, steps, errors, final: fin, skills, domain, summary: summary + skillNote + domNote };
 }
 

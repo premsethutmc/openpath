@@ -11,7 +11,8 @@ import { Refusal } from "../reasoner/outcomes.ts";
 import { isExactNumberProblem, assessNumberWorking, verifyNumberStep, type NumberAssessment, type NumberOptions } from "./number/index.ts";
 import { isSymbolicProblem, assessSymbolicWorking, verifySymbolicStep, SYM_SKILLS, type SymbolicAssessment, type SymbolicOptions, type SymForm, type SymSkillId } from "./symbolic.ts";
 import { SKILLS } from "./number/index.ts";
-export type { NumberAssessment, NumberOptions, SymbolicAssessment, SymbolicOptions };
+import { isMvProblem, assessMultivariateWorking, verifyMultivariateStep, type MvAssessment } from "./multivariate/index.ts";
+export type { MvAssessment, NumberAssessment, NumberOptions, SymbolicAssessment, SymbolicOptions };
 /** Options for either engine: `form` and `requiredSkills` are read by whichever engine takes the problem (ids unknown to it are ignored); `requireDomain` is for expression problems. */
 export interface WorkingOptions { form?: NumberOptions["form"] | SymForm; requiredSkills?: (NonNullable<NumberOptions["requiredSkills"]>[number] | SymSkillId)[]; requireDomain?: boolean }
 const numOpts = (o: WorkingOptions): NumberOptions => ({ form: o.form as NumberOptions["form"], requiredSkills: o.requiredSkills?.filter((s) => s in SKILLS) as NumberOptions["requiredSkills"] });
@@ -32,6 +33,8 @@ export interface WorkingAssessment {
   number?: NumberAssessment;
   /** present when the problem was handled by the symbolic-algebra engine: relation kind per step, causes, form, skills and domain obligations (all kept apart from correctness) */
   symbolic?: SymbolicAssessment;
+  /** present for expressions in several letters / symbolic parameters / symbolic exponents (same four separate judgements) */
+  multivariate?: MvAssessment;
 }
 const OUTCOME: Record<WorkingEvaluation["status"], Outcome> = { "valid-complete": "verified", "valid-incomplete": "incomplete", invalid: "invalid", ambiguous: "ambiguous", unsupported: "unsupported" };
 
@@ -49,6 +52,12 @@ export function assessWorking(problem: string, lines: Line[], opts: WorkingOptio
       steps: a.steps.map((s) => ({ index: s.index, from: s.from, to: s.to, status: (s.status === "ambiguous" ? "unsupported" : s.status) as WorkingStep["status"], explanation: s.explanation })),
       causes: a.errors.map((m) => m.label), summary: a.summary, symbolic: a };
   }
+  if (isMvProblem(problem)) {
+    const a = assessMultivariateWorking(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)), symOpts(opts));
+    return { outcome: a.outcome, correct: a.correct, advisory: true, firstInvalidStep: a.firstInvalidStep, invalidAt: a.firstInvalidStep === null ? null : "step",
+      steps: a.steps.map((s) => ({ index: s.index, from: s.from, to: s.to, status: (s.status === "ambiguous" ? "unsupported" : s.status) as WorkingStep["status"], explanation: s.explanation })),
+      causes: a.errors.map((m) => m.label), summary: a.summary, multivariate: a };
+  }
   let e: WorkingEvaluation;
   try { e = evaluateWorking(problem, lines, { route: false, engine: false }); }
   catch (err) { return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: `not assessed: ${err instanceof Refusal ? err.code : "internal error"}` }; }
@@ -65,6 +74,7 @@ export interface StepVerdict { outcome: "verified" | "invalid" | "unsupported"; 
 export function verifyWorkingStep(problem: string, from: string, to: string): StepVerdict {
   if (isExactNumberProblem(problem)) { const r = verifyNumberStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? "equivalence" : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }
   if (isSymbolicProblem(problem)) { const r = verifySymbolicStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? (r.effect === "invalid" ? "equivalence" : r.effect) : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }
+  if (isMvProblem(problem)) { const r = verifyMultivariateStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? (r.effect === "invalid" ? "equivalence" : r.effect) : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }
   try {
     const n = (t: string) => normalizeLine(t, false);   // the same reading of student notation as assessWorking (a/2x is not guessed here: use assessWorking for ambiguity)
     const r = V.relateLines(n(from), n(to), n(problem));

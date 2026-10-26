@@ -3,7 +3,8 @@ import { Rational, parseRational, Expr, type MathExpr } from "../math-kernel.ts"
 import { Refusal } from "./outcomes.ts";
 
 const FUNCS = new Set(["sqrt", "abs", "ln", "log", "exp", "sin", "cos", "tan", "floor", "ceil", "min", "max"]);
-export function parseExpr(src: string): MathExpr {
+/** `multi` (default off, so every existing caller is unchanged) lets any single letter be a variable, for multivariate expressions. */
+export function parseExpr(src: string, multi = false): MathExpr {
   if (/[0-9.]\s+[0-9.]/.test(src)) throw new Refusal("PARSE_ERROR", `whitespace inside a number in "${src}"`);   // "1 0" is not 10 (R1)
   const s = src.replace(/\s+/g, "");
   { let d = 0, maxd = 0; for (const ch of s) { if (ch === "(") { d++; maxd = Math.max(maxd, d); } else if (ch === ")" && --d < 0) break; }
@@ -46,6 +47,7 @@ export function parseExpr(src: string): MathExpr {
     const c = peek();
     if (c === "(") { i++; const e = sum(); if (s[i++] !== ")") fail("expected )"); return e; }
     if (c === "x" && !/^[a-zA-Z]/.test(s[i + 1] ?? "")) { i++; return Expr.var("x"); }
+    if (multi && c && /[a-zA-Z]/.test(c) && !/^[a-zA-Z]/.test(s[i + 1] ?? "")) { i++; return Expr.var(c); }
     if (c && /[a-zA-Z]/.test(c)) { const w = /^[a-zA-Z]+/.exec(s.slice(i))![0]; if (FUNCS.has(w.toLowerCase())) throw new Refusal("UNSUPPORTED_OPERATOR", `function ${w} in "${src}"`); return fail(`unknown symbol ${w}`); }
     const m = /^\d+(\.\d+)?/.exec(s.slice(i));
     if (!m) return fail("unexpected token");
