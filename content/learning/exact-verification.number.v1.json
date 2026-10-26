@@ -1,0 +1,78 @@
+{
+ "schema": "exact-verification@1",
+ "scope": "number",
+ "families": {
+  "hcf": {
+   "questions": 1402,
+   "fingerprint": "b44474ec2d69d447"
+  },
+  "faddu": {
+   "questions": 870,
+   "fingerprint": "5a87654fb762c34e"
+  },
+  "avfas": {
+   "questions": 420,
+   "fingerprint": "84d58ef74bd2abb7"
+  },
+  "avdiv": {
+   "questions": 500,
+   "fingerprint": "17053cc1f058b262"
+  },
+  "adcol3": {
+   "questions": 500,
+   "fingerprint": "9761052396f96ba7"
+  },
+  "adcolx": {
+   "questions": 500,
+   "fingerprint": "5a1e5eca04cf1022"
+  },
+  "ajsi": {
+   "questions": 500,
+   "fingerprint": "e38fb1ebf1edccd5"
+  },
+  "avmarked": {
+   "questions": 420,
+   "fingerprint": "02915abbfd371287"
+  },
+  "eqfrac": {
+   "questions": 405,
+   "fingerprint": "14bb997375d63e08"
+  },
+  "fmulw": {
+   "questions": 528,
+   "fingerprint": "c897b386075ddffd"
+  },
+  "aiint": {
+   "questions": 500,
+   "fingerprint": "33f3dee4d4e7284a"
+  },
+  "agdec": {
+   "questions": 500,
+   "fingerprint": "b23a9462bfad332c"
+  },
+  "ajrat": {
+   "questions": 450,
+   "fingerprint": "6364ef25a949d5ae"
+  },
+  "aerdec": {
+   "questions": 594,
+   "fingerprint": "46d2c711edc78d8c"
+  },
+  "aeround": {
+   "questions": 450,
+   "fingerprint": "a38ab49860399474"
+  },
+  "adford": {
+   "questions": 400,
+   "fingerprint": "5d1dec46fdd7a8f0"
+  },
+  "adfordu": {
+   "questions": 400,
+   "fingerprint": "0aceffd081eefd35"
+  },
+  "ajcrore": {
+   "questions": 450,
+   "fingerprint": "d1ec989d7a9a62ad"
+  }
+ }
+}
