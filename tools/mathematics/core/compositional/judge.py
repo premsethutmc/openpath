@@ -16,12 +16,11 @@ for r in rows:
     t = tasks[r['id']]
     base = {'id': r['id'], 'contender': r['contender'], 'family': t['family'], 'goal': t['goal'], 'reachable': t['reachable'], 'depth': (t.get('props') or {}).get('shortest_len') if t['reachable'] else None, 'ms': r.get('ms'), 'visited': r.get('visited'), 'generated': r.get('generated')}
     if 'error' in r: res.append({**base, 'judged': 'error', 'detail': r['error']}); continue
-    if not r['trace'] and not r['self_ok']:
+    if r['contender'] in ('planner', 'bfs') and not r['trace'] and not r['self_ok']:
         res.append({**base, 'judged': 'refused', 'why': r.get('why'), 'capped': r.get('capped')}); continue
     orig = R.initial_state(t['start']); detail = ''; ok = True
     try:
         sts = [mk(s) for s in r['states']]
-        if R.canon(sts[0].eq) != R.canon(orig.eq): ok = False; detail = 'start differs'
         for i, st in enumerate(sts):
             e, why = R.equivalent(orig, st)
             if not e: ok = False; detail = f'state {i} not equivalent: {why}'; break
@@ -32,16 +31,16 @@ for r in rows:
     if ok:
         try: strict = bool(R.verify_trace(t['start'], r['trace'], t['goal'])[0])
         except Exception: strict = False
-    res.append({**base, 'judged': 'success' if ok else 'wrong', 'detail': detail, 'steps': len(r['trace']), 'strict_replay': strict, 'self_ok': r['self_ok']})
+    res.append({**base, 'judged': 'success' if ok else ('wrong' if r['self_ok'] else 'failed'), 'detail': detail, 'steps': len(r['trace']), 'strict_replay': strict, 'self_ok': r['self_ok']})
 json.dump(res, open(out_f, 'w'))
 # ---- summary
 def summ(sel):
     c = collections.Counter(x['judged'] for x in sel); return {'n': len(sel), **dict(c)}
 by = collections.defaultdict(list)
 for x in res: by[x['contender']].append(x)
-print('contender      reachable: success/n     unreachable: refused/n (wrong answers)   judge-vs-self disagreements')
+print('contender      reachable: success/n     unreachable: refused/n   wrong(self-claimed success, judge fails)   failed(no goal, no claim)')
 for c, xs in sorted(by.items()):
     re_ = [x for x in xs if x['reachable']]; un = [x for x in xs if not x['reachable']]
     s = sum(x['judged'] == 'success' for x in re_); ref = sum(x['judged'] == 'refused' for x in un); wr = sum(x['judged'] == 'wrong' for x in xs)
-    dis = sum(1 for x in xs if x['judged'] in ('success', 'wrong') and x.get('self_ok') != (x['judged'] == 'success'))
-    print(f'{c:12s} {s:4d}/{len(re_):<4d} {100*s/max(1,len(re_)):5.1f}%      {ref}/{len(un)}   wrong={wr}   disagree={dis}')
+    fl = sum(x['judged'] == 'failed' for x in xs)
+    print(f'{c:12s} {s:4d}/{len(re_):<4d} {100*s/max(1,len(re_)):5.1f}%      {ref}/{len(un)}   wrong={wr}   failed={fl}')

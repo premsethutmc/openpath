@@ -16,15 +16,16 @@ def q(xs, p):
 by = collections.defaultdict(list)
 for x in J: by[x['contender']].append(x)
 names = ['planner', 'bfs', 'P1', 'P2', 'P4']
-print('| contender | reachable solved (verified) | incorrect results | unreachable correctly refused | reachable falsely refused | node-cap stops | median / p95 expansions | median / p95 ms |')
-print('|---|---|---|---|---|---|---|---|')
+print('| contender | reachable solved (verified) | incorrect results (claimed success, judge fails) | ended without goal, no claim (reachable / unreachable) | unreachable correctly refused | reachable falsely refused | node-cap stops | median / p95 expansions | median / p95 ms |')
+print('|---|---|---|---|---|---|---|---|---|')
 for c in names:
     xs = by[c]; re_ = [x for x in xs if x['reachable']]; un = [x for x in xs if not x['reachable']]
     s = sum(x['judged'] == 'success' for x in re_); wr = sum(x['judged'] == 'wrong' for x in xs)
+    fre = sum(x['judged'] == 'failed' for x in re_); fun = sum(x['judged'] == 'failed' for x in un)
     cr = sum(x['judged'] == 'refused' for x in un); fr = sum(x['judged'] == 'refused' for x in re_)
     capd = sum(1 for x in xs if x.get('capped'))
     ex = [x['visited'] for x in xs if x.get('visited') is not None]; ms = [x['ms'] for x in xs if x.get('ms') is not None]
-    print(f"| {c} | {s}/{len(re_)} ({100*s/len(re_):.1f}%) | {wr} | {cr}/{len(un)} | {fr} | {capd} | {q(ex,.5):.0f} / {q(ex,.95):.0f} | {q(ms,.5):.1f} / {q(ms,.95):.0f} |")
+    print(f"| {c} | {s}/{len(re_)} ({100*s/len(re_):.1f}%) | {wr} | {fre} / {fun} | {cr}/{len(un)} | {fr} | {capd} | {q(ex,.5):.0f} / {q(ex,.95):.0f} | {q(ms,.5):.1f} / {q(ms,.95):.0f} |")
 def table(key, title, keyf):
     print(f'\n**{title}** (reachable tasks solved / reachable tasks)\n'); ks = sorted({keyf(x) for x in J}, key=str)
     print('| ' + key + ' | n | ' + ' | '.join(names) + ' |'); print('|---|---|' + '---|' * len(names))

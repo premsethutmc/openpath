@@ -23,7 +23,9 @@ export const fineStrategy = (allowed: string[], maxDepth = 8, maxNodes = 20000):
 const nodeCount = (e: MathExpr): boolean => denominatorsOf(e).some((d) => hasX(d));
 const hasXDen = (s: CoreState) => nodeCount(eqOf(s.math).left) || nodeCount(eqOf(s.math).right);
 const isLit0 = (e: MathExpr) => e.kind === "num" && e.value.isZero();
-const nested = (e: MathExpr): boolean => { switch (e.kind) { case "div": return hasX(e.right) && (hasXFrac(e.left) || hasXFrac(e.right)); case "neg": return nested(e.operand); case "mul": return nested(e.left) || nested(e.right); default: return false; } };
+const anyDiv = (e: MathExpr): boolean => { switch (e.kind) { case "div": return true; case "add": case "sub": case "mul": return anyDiv(e.left) || anyDiv(e.right); case "neg": return anyDiv(e.operand); case "pow": return anyDiv(e.base); default: return false; } };
+/** A quotient with x in its denominator whose numerator or denominator itself contains a quotient (numeric fractions included) is a nested fraction. */
+const nested = (e: MathExpr): boolean => { switch (e.kind) { case "div": return (hasX(e.right) && (anyDiv(e.left) || anyDiv(e.right))) || nested(e.left); case "neg": return nested(e.operand); case "mul": return nested(e.left) || nested(e.right); default: return false; } };
 const hasXFrac = (e: MathExpr): boolean => { switch (e.kind) { case "div": return hasX(e.right) || hasXFrac(e.left); case "add": case "sub": case "mul": return hasXFrac(e.left) || hasXFrac(e.right); case "neg": return hasXFrac(e.operand); case "pow": return hasXFrac(e.base); default: return false; } };
 const xTerms = (e: MathExpr) => flat(e).filter((t) => hasXFrac(t.t));
 const reducedTerm = (t: MathExpr): boolean => { if (nested(t)) return false; const f = RatFun.fromExpr(t); if (!f) return false; return f.n.gcd(f.d).degree <= 0; };

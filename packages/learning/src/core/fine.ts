@@ -147,7 +147,8 @@ R({
   checks: (s) => [{ name: "collecting changes the written form", held: !(same(collectSide(eqOf(s).left), eqOf(s).left) && same(collectSide(eqOf(s).right), eqOf(s).right)), detail: "" }],
   apply: (s) => withEq(s, collectSide(eqOf(s).left), collectSide(eqOf(s).right)), action: () => "collect like terms",
 });
-const divTerms = (s: MathState, side: "left" | "right") => sideTerms(s, side).map((t, i) => ({ t, i })).filter((x) => xDenTerm(x.t));
+/** Candidates for cancelling: additive terms with x in a denominator that are products/quotients - NOT a bracket group (a sum), which would be combine + cancel in one step. */
+const divTerms = (s: MathState, side: "left" | "right") => sideTerms(s, side).map((t, i) => ({ t, i })).filter((x) => xDenTerm(x.t) && !isSumNode(x.t.t));
 R({
   id: "fine.cancel-common-factor", ops: ["cancel-common-factor"], effect: "equivalence", name: () => "cancel-common-factor",
   description: "Cancel every common polynomial factor between numerator and denominator of one additive term; its restriction stays.",
@@ -155,6 +156,7 @@ R({
   match: (s) => (["left", "right"] as const).flatMap((side) => divTerms(s, side).map((x) => ({ side: side === "left" ? "L" : "R", idx: x.i }))),
   checks(s, p) {
     const x = sideTerms(s, SD(p.side))[Number(p.idx)]; if (!x) return [{ name: "the term exists", held: false, detail: String(p.index) }];
+    if (isSumNode(x.t)) return [{ name: "the term is a product or quotient, not a bracketed sum", held: false, detail: "sum group" }];
     const f = RatFun.fromExpr(x.t); if (!f) return [{ name: "the term is a rational function", held: false, detail: "no" }];
     const g = f.n.gcd(f.d); return [{ name: "numerator and denominator have a common factor of degree >= 1", held: g.degree >= 1, detail: `gcd degree ${g.degree}` }];
   },
