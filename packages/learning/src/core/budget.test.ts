@@ -24,3 +24,40 @@ test("a later call is not affected by an earlier exhausted budget", () => {
   assessWorking("Expand (a+b+c+d+e+1)^20", ["a"]);
   assert.equal(assessWorking("Expand (x+1)(x+2)", ["x^2+3x+2"]).outcome, "verified");
 });
+
+// ---- state isolation audit
+import { bounded, budgetTripped } from "./budget.ts";
+import { assessMultivariateWorking, isMvProblem } from "./multivariate/index.ts";
+import { assessDerivation } from "./derivation.ts";
+const BOOM = "Expand (a+b+c+d+e+1)^20", OK = "Expand (x+1)(x+2)";
+test("sequential assessments with different budgets do not leak", () => {
+  const seq: string[] = [];
+  try {
+    for (const ops of [1, LIMITS.ops, 5, LIMITS.ops, 1, LIMITS.ops]) { setDefaultOps(ops); seq.push(assessWorking(OK, ["x^2+3x+2"]).outcome); }
+  } finally { setDefaultOps(LIMITS.ops); }
+  assert.deepEqual(seq, ["unsupported", "verified", "unsupported", "verified", "unsupported", "verified"]);
+});
+test("direct engine calls after exhaustion run normally (the budget only exists inside an assessment scope)", () => {
+  assert.equal(assessWorking(BOOM, ["a"]).resourceLimit, true);
+  assert.equal(budgetTripped(), true);                       // readable until the next scope starts
+  assert.equal(isMvProblem("Expand (x+y)(x+2y)"), true);
+  assert.equal(assessMultivariateWorking("Expand (x+y)(x+2y)", ["x^2+3xy+2y^2"]).outcome, "verified");
+  assert.equal(assessWorking(OK, ["x^2+3x+2"]).resourceLimit, undefined);   // a new outermost scope starts clean
+  assert.equal(budgetTripped(), false);
+});
+test("repeated assessment of the same input is deterministic, including the limit outcome", () => {
+  const a = Array.from({ length: 4 }, () => JSON.stringify(assessWorking(BOOM, ["a"]))); assert.equal(new Set(a).size, 1);
+  const b = Array.from({ length: 4 }, () => JSON.stringify(assessWorking("Simplify (x^2-1)/(x-1)", ["x+1"]))); assert.equal(new Set(b).size, 1);
+});
+test("an unsupported result is followed by correct ordinary results; interleaving with derivations", () => {
+  const out: string[] = [];
+  for (let i = 0; i < 3; i++) { out.push(assessWorking(BOOM, ["a"]).outcome); out.push(assessDerivation({ problem: "Simplify (x^2-1)/(x-1)", lines: ["x+1", "x ≠ 1"] }).mathematics); out.push(assessWorking("Expand (x+1)^2", ["x^2+1"]).outcome); }
+  assert.deepEqual(out, ["unsupported", "correct", "invalid", "unsupported", "correct", "invalid", "unsupported", "correct", "invalid"]);
+});
+test("exceptional exits restore the scope; nested scopes share one budget and the next outer scope starts clean", () => {
+  assert.throws(() => bounded(() => { throw new Error("boom"); }), /boom/);
+  assert.equal(assessWorking(OK, ["x^2+3x+2"]).outcome, "verified");
+  const r = bounded(() => [assessWorking(BOOM, ["a"]).resourceLimit, assessWorking(OK, ["x^2+3x+2"]).outcome]);   // nested: the second call inherits the exhausted shared budget (not an independent assessment)
+  assert.equal(r[0], true); assert.equal(r[1], "unsupported");
+  assert.equal(assessWorking(OK, ["x^2+3x+2"]).outcome, "verified");
+});
