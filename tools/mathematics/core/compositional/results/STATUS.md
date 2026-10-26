@@ -1,0 +1,1 @@
+PARTIAL / IN PROGRESS: raw shard output of the compositional run, committed as a checkpoint only. Not judged, not complete; do not read results from these files until judged.json and SUMMARY.md exist.
