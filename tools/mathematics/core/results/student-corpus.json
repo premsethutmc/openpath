@@ -1,14 +1,37 @@
 {
  "summary": {
+  "definitions": {
+   "verdictAccuracy": "status equals oracle status / all tasks",
+   "falseAcceptance": "evaluator says valid-complete|valid-incomplete where oracle says invalid|unsupported|ambiguous / oracle non-valid tasks",
+   "falseRejection": "evaluator says invalid where oracle says valid-* / oracle valid tasks",
+   "overRefusal": "evaluator says unsupported|ambiguous where oracle gives a definite verdict / oracle definite tasks",
+   "underRefusal": "evaluator gives a definite verdict where oracle says unsupported|ambiguous / those tasks",
+   "firstErrorLocalization": "first invalid line equal and invalid_at=step / oracle step-invalid tasks"
+  },
+  "metrics": {
+   "exp_validish": 173,
+   "falseRejection": 0,
+   "exp_nonvalid": 527,
+   "falseAcceptance": 0,
+   "exp_decidable": 634,
+   "overRefusal": 0,
+   "exp_unsupportedOrAmbiguous": 66,
+   "underRefusal": 5,
+   "exp_stepInvalid": 364,
+   "firstOk": 364,
+   "exp_finalClaim": 97,
+   "finalOk": 97,
+   "wrongVerdict": 0
+  },
   "tasks": 700,
   "crashes": 0,
   "unsafeCertifications": 0,
-  "statusAgree": 641,
+  "statusAgree": 695,
   "firstInvalidAgree": 695,
   "byFamily": {
    "A": {
     "n": 150,
-    "status": 149,
+    "status": 150,
     "first": 150
    },
    "B": {
@@ -23,12 +46,12 @@
    },
    "D": {
     "n": 50,
-    "status": 0,
+    "status": 50,
     "first": 50
    },
    "E": {
     "n": 40,
-    "status": 37,
+    "status": 40,
     "first": 40
    },
    "F": {
@@ -38,31 +61,29 @@
    }
   },
   "confusion": {
-   "valid-complete -> valid-complete": 121,
+   "valid-complete -> valid-complete": 145,
    "valid-incomplete -> valid-incomplete": 28,
-   "valid-complete -> unsupported": 24,
-   "invalid -> invalid": 434,
-   "invalid -> unsupported": 27,
-   "ambiguous -> ambiguous": 23,
-   "ambiguous -> valid-complete": 3,
+   "invalid -> invalid": 461,
+   "ambiguous -> ambiguous": 26,
    "unsupported -> unsupported": 35,
    "unsupported -> invalid": 5
   }
  },
  "misconceptionByClass": {
   "sign-error-moving-term": {
-   "sign-error-moving-term": 22,
-   "sign-error-moving-term+partial-division+divided-by-unknown-factor": 2,
-   "sign-error-moving-term+partial-division": 1
+   "sign-error-moving-term": 23,
+   "sign-error-moving-term+partial-division+divided-by-unknown-factor": 2
   },
   "one-sided-term-removal": {
-   "one-sided-term-removal": 24,
-   "sign-error-moving-term+one-sided-term-removal": 1
+   "one-sided-term-removal": 23,
+   "sign-error-moving-term+one-sided-term-removal": 1,
+   "one-sided-term-removal+partial-division": 1
   },
   "partial-division": {
-   "partial-division": 5,
-   "arithmetic-slip": 19,
-   "sign-error-moving-term": 1
+   "partial-division": 8,
+   "unbalanced-division": 15,
+   "sign-error-moving-term+unbalanced-division": 1,
+   "partial-division+unbalanced-division": 1
   },
   "partial-distribution": {
    "partial-distribution": 25
@@ -104,10 +125,10 @@
    "drop-denominator": 24
   },
   "unbalanced-multiplication": {
-   "arithmetic-slip": 12,
-   "one-sided-term-removal+partial-clearing+unbalanced-multiplication": 1,
-   "partial-clearing+unbalanced-multiplication": 11,
-   "sign-error-moving-term+one-sided-term-removal+partial-clearing+unbalanced-multiplication": 1
+   "unbalanced-division": 12,
+   "one-sided-term-removal+unbalanced-division+partial-clearing+unbalanced-multiplication": 1,
+   "unbalanced-division+partial-clearing+unbalanced-multiplication": 11,
+   "sign-error-moving-term+one-sided-term-removal+unbalanced-division+partial-clearing+unbalanced-multiplication": 1
   },
   "divided-by-unknown-factor": {
    "divided-by-unknown-factor": 25
@@ -121,762 +142,6 @@
   }
  },
  "mismatches": [
-  {
-   "id": "A-0027",
-   "family": "A",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0001",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0002",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0003",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0004",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0005",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0006",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0007",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0008",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0009",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0010",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0011",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0012",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0013",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0014",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0015",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0016",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0017",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0018",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0019",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0020",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0021",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0022",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0023",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0024",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0025",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0026",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0027",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0028",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0029",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0030",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0031",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0032",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0033",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0034",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0035",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0036",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0037",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0038",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0039",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0040",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0041",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0042",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0043",
-   "family": "D",
-   "expected": [
-    "invalid",
-    null,
-    "final-claim"
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0044",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0045",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0046",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0047",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0048",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0049",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "D-0050",
-   "family": "D",
-   "expected": [
-    "valid-complete",
-    null,
-    null
-   ],
-   "got": [
-    "unsupported",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "E-0006",
-   "family": "E",
-   "expected": [
-    "ambiguous",
-    null,
-    null
-   ],
-   "got": [
-    "valid-complete",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "E-0010",
-   "family": "E",
-   "expected": [
-    "ambiguous",
-    null,
-    null
-   ],
-   "got": [
-    "valid-complete",
-    null,
-    null
-   ]
-  },
-  {
-   "id": "E-0014",
-   "family": "E",
-   "expected": [
-    "ambiguous",
-    null,
-    null
-   ],
-   "got": [
-    "valid-complete",
-    null,
-    null
-   ]
-  },
   {
    "id": "F-0005",
    "family": "F",

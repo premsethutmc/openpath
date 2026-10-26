@@ -6,8 +6,8 @@
   "judgedValidWhileOracleSaysInvalid": 0,
   "judgedNotValidWhileOracleSaysValid": 0,
   "oracleInvalidButImplicationFlagged": 235,
-  "medianMs": 0.5,
-  "p95Ms": 5.88
+  "medianMs": 0.64,
+  "p95Ms": 10.73
  },
  "byKind": {
   "multiply-by-expression-no-check": {

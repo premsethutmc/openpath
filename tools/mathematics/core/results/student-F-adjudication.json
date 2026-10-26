@@ -1,0 +1,42 @@
+[
+ {
+  "id": "F-0005",
+  "prev": "-2*(x-3)+3=3*x-26",
+  "cur": "x^2-3=0",
+  "prev_set": "{7}",
+  "cur_set": "{-sqrt(3), sqrt(3)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "F-0013",
+  "prev": "-1*(x+3)=-2",
+  "cur": "x^2-6=0",
+  "prev_set": "{-1}",
+  "cur_set": "{-sqrt(6), sqrt(6)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "F-0021",
+  "prev": "x^2-36=-1(x-6)",
+  "cur": "x^2-3=0",
+  "prev_set": "{-7}",
+  "cur_set": "{-sqrt(3), sqrt(3)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "F-0029",
+  "prev": "-7*x-7=5*x-67",
+  "cur": "x^2=10",
+  "prev_set": "{5}",
+  "cur_set": "{-sqrt(10), sqrt(10)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "F-0037",
+  "prev": "5x+7x=-20+35",
+  "cur": "x^2-7=0",
+  "prev_set": "{5/4}",
+  "cur_set": "{-sqrt(7), sqrt(7)}",
+  "sympy_says_different": true
+ }
+]

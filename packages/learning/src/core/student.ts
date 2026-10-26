@@ -20,7 +20,7 @@ import { MALRULES, malRuleById } from "./misconceptions.ts";
 import * as T from "./tactics.ts";
 
 export type Line = string | { eq: string; excluded?: string[] };
-export type StepStatus = "valid" | "valid-with-obligation" | "no-change" | "invalid" | "unsupported";
+export type StepStatus = "valid" | "valid-discharge" | "valid-with-obligation" | "no-change" | "invalid" | "unsupported";
 export interface Misconception { id: string; label: string; explanation: string; evidence: "matches" | "consistent"; detail: string }
 export interface WorkingStep {
   index: number; from: string; to: string; interpretedAs?: string; status: StepStatus; reasons: string[]; explanation: string;
@@ -42,13 +42,18 @@ export interface WorkingEvaluation {
 const GLYPHS: [RegExp, string][] = [[/[−–—]/g, "-"], [/[×·]/g, "*"], [/÷/g, "/"], [/²/g, "^2"], [/³/g, "^3"], [/\s+/g, " "]];
 /** Deterministic normalisation of how people write mathematics. `grouping` selects how "a/2x" is read: false = (a/2)*x, true = a/(2*x). */
 export function normalizeLine(raw: string, grouping = false): string {
+  if (/\s(or|OR|Or)\s/.test(raw)) return raw.split(/\s+or\s+/i).map((q) => normalizeOne(q, grouping)).join(" or ");
+  return normalizeOne(raw, grouping);
+}
+function normalizeOne(raw: string, grouping: boolean): string {
   let s = raw.trim(); for (const [re, to] of GLYPHS) s = s.replace(re, to);
   s = s.replace(/(?<=[\d.)x]) +(?=[\dx(])/g, (m, off, str) => (/\d$/.test(str.slice(0, off)) && /^\d/.test(str.slice(off + m.length)) ? " " : "*")).replace(/ /g, (m, off, str) => (/\d$/.test(str.slice(0, off)) && /^\d/.test(str.slice(off + 1)) ? " " : ""));
-  if (grouping) { s = s.replace(/\/(\d+(?:\.\d+)?)x/g, "/($1*x)"); s = s.replace(/\/(\d+(?:\.\d+)?)(\((?:[^()]|\([^()]*\))*\))/g, "/($1*$2)"); }
+  // tight reading: a number after "/" binds the WHOLE juxtaposed run that follows it (x, x^k, bracket groups): 3/2(x+1)(x+2) = 3/(2(x+1)(x+2))
+  if (grouping) s = s.replace(/\/(\d+(?:\.\d+)?)((?:x(?:\^\d+)?|\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\))+)/g, "/($1$2)");
   s = s.replace(/(\d|\))(?=x|\()/g, "$1*").replace(/x(?=\(|\d|x)/g, "x*").replace(/\)(?=\d|x)/g, ")*");
   return s;
 }
-const hasImplicitDivision = (raw: string) => /\/\d+(?:\.\d+)?[x(]/.test(raw.replace(/\s+/g, ""));
+const hasImplicitDivision = (raw: string) => { let g = raw; for (const [re, to] of GLYPHS) g = g.replace(re, to); return /\/\d+(?:\.\d+)?[x(]/.test(g.replace(/\s+/g, "")); };
 
 // ---------- exact descriptions of solution sets ----------
 const sortR = (xs: Rational[]) => xs.slice().sort((a, b) => (a.lt(b) ? -1 : a.gt(b) ? 1 : 0));
@@ -142,10 +147,11 @@ const lineOf = (l: Line): { eq: string; excluded?: string[] } => (typeof l === "
 function evaluateConvention(problem: string, lines: Line[], grouping: boolean, opts: { route: boolean }): { steps: WorkingStep[]; domain: Rational[]; refusal?: string } {
   const prob = normalizeLine(problem, grouping);
   let domain: Rational[]; try { domain = V.analyse(prob).required; } catch (e) { if (e instanceof Refusal) return { steps: [], domain: [], refusal: `${e.code}: ${e.message}` }; throw e; }
-  const stepLines = lines.length && parseClaimLine(lineOf(lines[lines.length - 1]).eq) ? lines.slice(0, -1) : lines;
+  const stepLines = lines.length && parseClaimLine(lineOf(lines[lines.length - 1]).eq)?.kind !== undefined && parseClaimLine(lineOf(lines[lines.length - 1]).eq)!.kind !== "set" ? lines.slice(0, -1) : lines;
   const parsed: Parsed[] = [{ raw: problem, text: prob }, ...stepLines.map((l) => { const x = lineOf(l); return { raw: x.eq, text: normalizeLine(x.eq, grouping), excluded: x.excluded }; })];
-  const steps: WorkingStep[] = []; let earlierInvalid = false;
-  const excl = (p: Parsed): string[] => p.excluded ?? [...new Set([...domain.map(String), ...V.analyse(p.text).required.map(String)])];
+  const steps: WorkingStep[] = []; let earlierInvalid = false; let openObligation = false;
+  let origSol: V.Sol; try { origSol = V.solutionOf(prob).sol; } catch { origSol = { kind: "set", rats: [], irr: [Rational.one] }; }
+  const excl = (p: Parsed): string[] => p.excluded ?? [...new Set([...domain.map(String), ...V.analyseLine(p.text).required.map(String)])];
   for (let i = 1; i < parsed.length; i++) {
     const a = parsed[i - 1], b = parsed[i];
     const base: WorkingStep = { index: i, from: a.raw, to: b.raw, interpretedAs: b.text !== b.raw ? b.text : undefined, status: "valid", reasons: [], explanation: "", misconceptions: [] };
@@ -160,10 +166,19 @@ function evaluateConvention(problem: string, lines: Line[], grouping: boolean, o
         if (earlierInvalid) st.followsFromEarlierError = true; steps.push(st); continue;
       }
       const imp = V.checkStep(from, to, "implication", prob);
-      const A = V.analyse(a.text), B = V.analyse(b.text);
-      const before = V.solution(A.f, from.excluded.map((s) => { const [n, d] = s.split("/"); return new Rational(BigInt(n), BigInt(d ?? "1")); })), after = V.solution(B.f, to.excluded.map((s) => { const [n, d] = s.split("/"); return new Rational(BigInt(n), BigInt(d ?? "1")); }));
+      const A = V.analyseLine(a.text), B = V.analyseLine(b.text);
+      const before = A.solve(from.excluded.map((s) => { const [n, d] = s.split("/"); return new Rational(BigInt(n), BigInt(d ?? "1")); })), after = B.solve(to.excluded.map((s) => { const [n, d] = s.split("/"); return new Rational(BigInt(n), BigInt(d ?? "1")); }));
       const dn = diffNote(before, after);
+      // a step that SHRINKS the solution set is not an equivalence, but while an obligation is open (an earlier step admitted extra candidates) it is the legitimate discharge of that obligation
+      // as long as it keeps every solution of the ORIGINAL problem; it never certifies anything by itself.
+      if (openObligation && !imp.valid && V.solSub(after, before) && V.solSub(origSol, after) && !eqv.reasons.some((r) => r !== "solution-set-changed")) {
+        if (V.solEq(origSol, after)) openObligation = false;
+        const gone = dn && dn.lost.length ? dn.lost.map((v) => `x = ${v}`).join(", ") : "some candidates";
+        const st2: WorkingStep = { ...base, status: "valid-discharge", reasons: eqv.reasons, explanation: `this line drops ${gone}; the earlier step had admitted extra candidates, and every solution of the original equation is kept`, misconceptions: [] };
+        if (earlierInvalid) st2.followsFromEarlierError = true; steps.push(st2); continue;
+      }
       if (imp.valid) {
+        openObligation = true;
         const gained = dn ? dn.gained.map((v) => `x = ${v}`).join(", ") : "new candidates";
         steps.push({ ...base, status: "valid-with-obligation", reasons: eqv.reasons, explanation: `every solution of the previous line is kept, but this line also admits ${gained}. These are candidates only: each must be checked in the ORIGINAL equation.`, misconceptions: [] }); continue;
       }
@@ -192,7 +207,8 @@ const SOLVED = /^x=(-?[\d./]+)$|^(-?[\d./]+)=x$/;
 /** A last line that states an answer in words or as alternatives rather than being an equation to check: "no solution", "all real numbers [except a, b]", "x=a or x=b". */
 type ClaimLine = { kind: "none" } | { kind: "all"; except: string[] } | { kind: "set"; values: string[] };
 export function parseClaimLine(raw: string): ClaimLine | null {
-  const t = raw.toLowerCase().replace(/[−–—]/g, "-").replace(/\s+/g, " ").trim();
+  let g = raw; for (const [re, to] of GLYPHS) g = g.replace(re, to);
+  const t = g.toLowerCase().replace(/\s+/g, " ").trim();
   if (/^(no solutions?|none|empty set|∅)$/.test(t)) return { kind: "none" };
   const a = /^(all real numbers|all reals|every real number|any real number|identity)(?: (?:except|but not|excluding|apart from)(?: x ?(?:=|≠|!=))? ?(.*))?$/.exec(t);
   if (a) { const ex = (a[2] ?? "").split(/,| and | or /).map((v) => v.replace(/^x ?(=|≠|!=) ?/, "").trim()).filter(Boolean); return { kind: "all", except: ex }; }

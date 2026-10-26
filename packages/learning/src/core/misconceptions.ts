@@ -46,12 +46,24 @@ export const MALRULES: MalRule[] = [
     id: "partial-division", label: "divided only some of the terms by the coefficient",
     explanation: "Dividing both sides by a number divides EVERY term of both sides; only some terms were divided.",
     generate(q) {
+      // the divisor is a term's coefficient with either sign (people divide by -6, not by 6); the other side is divided completely, this side only in one term
       const out: { to: T.Eq; note: string }[] = [];
       for (const side of sides) { const ts = T.terms(q[side]); if (ts.length < 2) continue;
         ts.forEach((t, i) => { const k = T.linCoef(t.t); if (!k || k.isZero() || k.isOne()) return;
-          const kk = k.lt(Rational.zero) ? k.neg() : k; const div = (e: MathExpr) => Expr.div(e, T.num(kk));
-          const newSide = T.rebuild(ts.map((u, j) => (j === i ? { sign: u.sign, t: T.canonLin(T.linCoef(u.t)!.div(kk).lt(Rational.zero) ? T.linCoef(u.t)!.div(kk).neg() : T.linCoef(u.t)!.div(kk)) } : u)));
-          out.push({ to: { ...withSide(q, side, newSide), [other(side)]: div(q[other(side)]) } as T.Eq, note: `only ${printExpr(t.t)} was divided by ${kk}` }); }); }
+          for (const kk of [k, k.neg()]) { if (kk.isOne()) continue; const div = (e: MathExpr) => Expr.div(e, T.num(kk));
+            const newSide = T.rebuild(ts.map((u, j) => (j === i ? { sign: u.sign, t: T.canonLin(T.linCoef(u.t)!.div(kk).lt(Rational.zero) ? T.linCoef(u.t)!.div(kk).neg() : T.linCoef(u.t)!.div(kk)) } : u)));
+            out.push({ to: { ...withSide(q, side, newSide), [other(side)]: div(q[other(side)]) } as T.Eq, note: `only ${printExpr(t.t)} was divided by ${kk}` }); } }); }
+      return out;
+    },
+  },
+  {
+    id: "unbalanced-division", label: "divided one side only by the coefficient",
+    explanation: "Both sides of an equation must be divided by the same non-zero number; only one side was divided.",
+    generate(q) {
+      const out: { to: T.Eq; note: string }[] = [];
+      for (const side of sides) { const ts = T.terms(q[side]);
+        for (const t of ts) { const k = T.linCoef(t.t); if (!k || k.isZero() || k.isOne()) continue;
+          for (const kk of [k, k.neg()]) out.push({ to: withSide(q, side, T.simplify(Expr.div(q[side], T.num(kk)), new Set())), note: `only the ${side} side divided by ${kk}` }); } }
       return out;
     },
   },

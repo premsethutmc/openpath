@@ -186,16 +186,37 @@ export interface StateText { eq: string; excluded: string[] }
 export const toVals = (xs: string[]): Rational[] => sortVals([...new Map(xs.map((s) => { const [a, b] = s.split("/"); const r = new Rational(BigInt(a), BigInt(b ?? "1")); return [r.toString(), r] as const; })).values()]);
 export type Reason = "from-restriction-missing" | "restriction-closure-violated" | "restriction-dropped" | "original-restriction-lost" | "solution-set-changed" | "solution-set-lost" | "state-unanalysable";
 /** Check one step between two explicit states. Both states are validated first: an invalid starting state is never accepted. */
+// ---------------------------------------------------------------- finite disjunctions ("x=2 or x=3")
+/** A line may be a finite disjunction of equations. Its domain is R minus the zeros of the denominators of ALL disjuncts (and the explicitly excluded values);
+ *  its solution set is the UNION of the solution sets of the disjuncts over that common domain. */
+export const splitDisjuncts = (text: string): string[] => text.split(/\s+or\s+/i).map((t) => t.trim()).filter(Boolean);
+export const isDisjunction = (text: string) => splitDisjuncts(text).length > 1;
+export function solUnion(a: Sol, b: Sol): Sol {
+  if (a.kind === "all" && b.kind === "all") return { kind: "all", excluded: a.excluded.filter((v) => b.excluded.some((u) => u.eq(v))) };
+  if (a.kind === "all" || b.kind === "all") {
+    const [al, st] = a.kind === "all" ? [a, b as Extract<Sol, { kind: "set" }>] : [b as Extract<Sol, { kind: "all" }>, a as Extract<Sol, { kind: "set" }>];
+    return { kind: "all", excluded: al.excluded.filter((v) => !st.rats.some((u) => u.eq(v)) && !(st.irr.length > 1 && peval(st.irr, v).isZero())) };
+  }
+  const rats = sortVals([...new Map([...a.rats, ...b.rats].map((r) => [r.toString(), r])).values()]);
+  const irr = a.irr.length === 1 ? b.irr : b.irr.length === 1 ? a.irr : samePoly(a.irr, b.irr) ? a.irr : prim(pmul(a.irr, pexact(b.irr, pgcd(a.irr, b.irr))!));
+  return { kind: "set", rats, irr };
+}
+export interface AnalysedLine { required: Rational[]; solve: (excluded: Rational[]) => Sol }
+export function analyseLine(text: string): AnalysedLine {
+  const parts = splitDisjuncts(text).map((t) => analyse(t));
+  const req = new Map<string, Rational>(); for (const p of parts) for (const v of p.required) req.set(v.toString(), v);
+  return { required: sortVals([...req.values()]), solve: (ex) => parts.map((p) => solution(p.f, ex)).reduce(solUnion) };
+}
 export function checkStep(from: StateText, to: StateText, effect: Effect = "equivalence", originalText?: string): { valid: boolean; reasons: Reason[]; refusal?: string } {
-  let A: Analysed, B: Analysed, O: Analysed | null = null;
-  try { A = analyse(from.eq); B = analyse(to.eq); O = originalText ? analyse(originalText) : null; }
+  let A: AnalysedLine, B: AnalysedLine, O: Analysed | null = null;
+  try { A = analyseLine(from.eq); B = analyseLine(to.eq); O = originalText ? analyse(originalText) : null; }
   catch (e) { if (e instanceof Refusal) return { valid: false, reasons: ["state-unanalysable"], refusal: e.code }; throw e; }
   const ex1 = toVals(from.excluded), ex2 = toVals(to.excluded); const why: Reason[] = [];
   if (!sub(A.required, ex1)) why.push("from-restriction-missing");
   if (!sub(B.required, ex2)) why.push("restriction-closure-violated");
   if (!sub(ex1, ex2)) why.push("restriction-dropped");
   if (O && !sub(O.required, ex2)) why.push("original-restriction-lost");
-  const a = solution(A.f, ex1), b = solution(B.f, ex2);
+  const a = A.solve(ex1), b = B.solve(ex2);
   if (effect === "equivalence") { if (!solEq(a, b)) why.push("solution-set-changed"); } else if (!solSub(a, b)) why.push("solution-set-lost");
   return { valid: why.length === 0, reasons: why };
 }

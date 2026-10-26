@@ -44,3 +44,26 @@ test("what cannot be analysed is never certified", () => {
 test("an unfinished but valid working is incomplete, and engine comparison is available", () => {
   const r = evaluateWorking("2*x+1=7", ["2*x=6"]); assert.equal(r.status, "valid-incomplete"); assert.deepEqual(r.engine!.solution, ["3"]);
 });
+
+// ---- finite disjunctions, discharge of obligations, juxtaposed-denominator grouping
+test("disjunction line: union semantics and the discharge of an extraneous candidate", () => {
+  const r = evaluateWorking("4*x+8=6*x-4", ["(x + 2)(4x + 8) = (x + 2)(6x − 4)", "x + 2 = 0 or (4x + 8) − (6x − 4) = 0", "x = −2 or x = 6", "x = 6"], { route: false, engine: false });
+  assert.deepEqual(r.steps.map((s) => s.status), ["valid-with-obligation", "valid", "valid", "valid-discharge"]);
+  assert.equal(r.status, "valid-complete");
+});
+test("accepting the extraneous candidate in the final claim is invalid", () => {
+  const r = evaluateWorking("4*x+8=6*x-4", ["(x + 2)(4x + 8) = (x + 2)(6x − 4)", "x + 2 = 0 or (4x + 8) − (6x − 4) = 0", "x = −2 or x = 6"], { route: false, engine: false });
+  assert.equal(r.status, "invalid"); assert.equal(r.invalidAt, "final-claim");
+});
+test("a shrinking step with NO open obligation is invalid, not a discharge", () => {
+  const r = evaluateWorking("x*(x-1)/(x-1)=3", ["x=3 or x=1"], { route: false, engine: false });
+  assert.notEqual(r.steps[0].status, "valid-discharge");
+});
+test("tight vs left-to-right reading of 1÷5(x-6) is reported as ambiguous", () => {
+  const r = evaluateWorking("(x-6)/5=-4", ["1÷5(x − 6) = −4", "x − 6 = −20", "x = −14"], { route: false, engine: false });
+  assert.equal(r.status, "ambiguous");
+});
+test("tight reading binds the whole juxtaposed run after a slash", () => {
+  assert.equal(normalizeLine("3/2(x+1)(x+2)", true), "3/(2*(x+1)*(x+2))");
+  assert.equal(normalizeLine("3/2(x+1)(x+2)", false), "3/2*(x+1)*(x+2)");
+});
