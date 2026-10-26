@@ -33,3 +33,7 @@ test("D9: lowest terms includes a common numeric factor", () => {
   assert.equal(A("Simplify (3x+6)/(3x+9)", ["(x+2)/(x+3)"]).outcome, "verified");
   assert.equal(A("Simplify (x+1)/(2x)", ["(x+1)/(2x)"]).outcome, "verified");
 });
+test("D10: ambiguous problem or line text never gets a definite verdict", () => {
+  for (const [p, l] of [["Simplify 1/2x", ["x/2"]], ["Simplify 1/2x", ["1/(2x)"]], ["Simplify 6/2(1+2)", ["9"]], ["Simplify 1/(x(x+1))", ["1/x(x+1)"]], ["Simplify 1/((x+1)(x+2))", ["1/(x+1)(x+2)"]]] as [string, string[]][]) { const a = A(p, l); assert.equal(a.outcome, "ambiguous", `${p} ${l}`); assert.equal(a.correct, null); }
+  assert.equal(A("Simplify 1/(2x)", ["1/(2*x)"]).outcome, "verified");     // bracketed: unambiguous
+});

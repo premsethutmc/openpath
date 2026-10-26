@@ -11,6 +11,7 @@ import { Refusal } from "../reasoner/outcomes.ts";
 import { isExactNumberProblem, assessNumberWorking, verifyNumberStep, type NumberAssessment, type NumberOptions } from "./number/index.ts";
 import { isSymbolicProblem, assessSymbolicWorking, verifySymbolicStep, SYM_SKILLS, type SymbolicAssessment, type SymbolicOptions, type SymForm, type SymSkillId } from "./symbolic.ts";
 import { SKILLS } from "./number/index.ts";
+import { ambiguousText } from "./ambiguity.ts";
 import { inputWithinLimits, bounded, budgetTripped } from "./budget.ts";
 import { isMvProblem, assessMultivariateWorking, verifyMultivariateStep, type MvAssessment } from "./multivariate/index.ts";
 export type { MvAssessment, NumberAssessment, NumberOptions, SymbolicAssessment, SymbolicOptions };
@@ -54,6 +55,7 @@ function assessWorkingBounded(problem: string, lines: Line[], opts: WorkingOptio
   return budgetTripped() ? { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: a computation limit was reached (unsupported, not wrong)", resourceLimit: true } : r;
 }
 function assessWorkingInner(problem: string, lines: Line[], opts: WorkingOptions): WorkingAssessment {
+  if (ambiguousText(problem)) return { outcome: "ambiguous", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "the problem itself can be read in more than one way (a division followed by a letter, number or bracket); no claim is made" };
   if (isExactNumberProblem(problem)) {
     const a = assessNumberWorking(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)), numOpts(opts));
     return { outcome: a.outcome, correct: a.correct, advisory: true, firstInvalidStep: a.firstInvalidStep, invalidAt: a.firstInvalidStep === null ? null : "step",

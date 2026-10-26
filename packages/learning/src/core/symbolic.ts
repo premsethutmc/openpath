@@ -6,6 +6,7 @@
  * Four judgements are kept apart: correctness (every step an identity), required skills shown, final-form compliance, domain obligations.
  * It decides nothing about marking: the result is advisory evidence for an educator.
  */
+import { ambiguousText } from "./ambiguity.ts";
 import * as V from "../reasoner/verifier/verifier.ts";
 import { Refusal } from "../reasoner/outcomes.ts";
 import { Rational } from "../math-kernel.ts";
@@ -70,7 +71,7 @@ function readLine(raw: string, v: string): Line | { err: string } {
   }
   if (exprs.length > 1) return { err: "more than one expression on a line" };
   const rest = exprs[0] ?? "";
-  const g = rest.replace(/[−–—]/g, "-").replace(/[÷∕⁄]/g, "/").replace(/\s+/g, ""); const ambiguous = /\/\d+(?:\.\d+)?[x(]/.test(g);
+  const ambiguous = ambiguousText(rest);
   return { expr: rest, text: rest ? normalizeLine(rest, false) : "", stated, ambiguous };
 }
 const uniq = (xs: Rational[]) => [...new Map(xs.map((r) => [r.toString(), r] as const)).values()].sort((a, b) => (a.lt(b) ? -1 : a.gt(b) ? 1 : 0));

@@ -63,7 +63,7 @@ function readLine(raw: string, allowed: Set<string>): Line | { err: string } {
   const expr = exprs[0] ?? ""; void allowed;     // a letter that is not in the problem is allowed: it makes the line a different expression, which the exact comparison then decides
   return { expr, text: expr, stated, ambiguous: ambiguousText(expr), shorthand };
 }
-const ambiguousText = (expr: string): boolean => { const g = expr.replace(/[−–—]/g, "-").replace(/[÷∕⁄]/g, "/").replace(/\s+/g, ""); return /\/\d+(?:\.\d+)?[a-zA-Z(]/.test(g) || /[a-zA-Z0-9)]\/[a-zA-Z]\(|\/[a-zA-Z][a-zA-Z]/.test(g); };
+import { ambiguousText } from "../ambiguity.ts";
 const guard = <T,>(f: () => T): T | { refusal: string } => { try { return f(); } catch (e) { if (e instanceof Refusal) return { refusal: `${e.code}: ${e.message}` }; throw e; } };
 const ptText = (o?: Record<string, string>) => (o ? Object.entries(o).map(([k, v]) => `${k} = ${v}`).join(", ") : "");
 const rest = (e: MathExpr, f: (x: MathExpr) => boolean): boolean => f(e) || (e.kind === "add" || e.kind === "sub" || e.kind === "mul" || e.kind === "div" ? rest(e.left, f) || rest(e.right, f) : e.kind === "neg" ? rest(e.operand, f) : e.kind === "pow" ? rest(e.base, f) || rest(e.exp, f) : false);
