@@ -51,6 +51,7 @@ export interface Goal { id: string; test(s: CoreState): Reached | null }
 export interface Strategy {
   id: string;
   allowed: ReadonlySet<string>;     // vocabulary operations the planner may use
+  level?: "macro" | "fine";        // rule granularity (default macro)
   prune: boolean;                   // confluent pruning: if an information-preserving tidy-up applies, offer only the highest-priority tier
   maxDepth: number; maxNodes: number;
 }
@@ -67,7 +68,7 @@ export const stateKey = (s: CoreState) => `${eqText(s.math)}|${excludedOf(s.math
 
 /** Which moves does the strategy see in this state? Applies the optional confluent-pruning tiers. */
 export function movesFor(s: CoreState, st: Strategy): Move[] {
-  const all = library.discover(s.math, st.allowed);
+  const all = library.discover(s.math, st.allowed, st.level);
   if (!st.prune) return all;
   const tiers = [...new Set(all.filter((m) => m.rule.eager !== undefined).map((m) => m.rule.eager!))].sort((a, b) => a - b);
   return tiers.length ? all.filter((m) => m.rule.eager === tiers[0]) : all;
@@ -112,6 +113,34 @@ export function search(start: CoreState, goal: Goal, st: Strategy, opts: { alter
     frontier = next;
   }
   return finish(false, frontier.length ? "depth" : "exhausted", []);
+}
+
+/** Best-first variant of the same search: identical rule discovery, application, verification and deduplication; only the order in which states are expanded
+ *  differs (f = depth + weight * heuristic). Not optimal; it exists to reduce search effort, and returns the path it found. */
+export function searchBest(start: CoreState, goal: Goal, st: Strategy, h: (s: CoreState) => number, weight = 1): SearchResult {
+  const t0 = performance.now(); const stats: SearchStats = { visited: 0, generated: 0, duplicates: 0, depth: 0, capped: false, precondFailed: 0, verifyRejected: 0, ms: 0 };
+  const nodes = new Map<string, Node>(); const k0 = stateKey(start); const root: Node = { key: k0, state: start, depth: 0, edges: [] }; nodes.set(k0, root);
+  const done = (found: boolean, why: SearchResult["why"], n?: Node, reached?: Reached): SearchResult => {
+    stats.ms = performance.now() - t0; const paths: Node[][] = [];
+    if (found && n) { const p: Node[] = [n]; let c = n; while (c.edges.length) { c = nodes.get(c.edges[0].parent)!; p.unshift(c); } paths.push(p); }
+    return { found, reached, goalNode: n, paths, edgesOf: (x) => x.edges, nodes, stats, why };
+  };
+  const r0 = goal.test(start); if (r0) return done(true, "goal", root, r0);
+  const open: { f: number; seq: number; key: string }[] = [{ f: weight * h(start), seq: 0, key: k0 }]; let seq = 1;
+  const pop = () => { let b = 0; for (let i = 1; i < open.length; i++) if (open[i].f < open[b].f || (open[i].f === open[b].f && open[i].seq < open[b].seq)) b = i; return open.splice(b, 1)[0]; };
+  while (open.length) {
+    const cur = pop(); const node = nodes.get(cur.key)!; if (node.depth >= st.maxDepth) continue; stats.visited++;
+    for (const mv of movesFor(node.state, st)) {
+      stats.generated++; let ns: CoreState;
+      try { ns = applyMove(node.state, mv); } catch (e) { if (e instanceof RuleFailure) { if (e.kind === "verification") stats.verifyRejected++; else stats.precondFailed++; continue; } throw e; }
+      const tk = stateKey(ns); if (nodes.has(tk)) { stats.duplicates++; continue; }
+      const nn: Node = { key: tk, state: ns, depth: node.depth + 1, edges: [{ parent: cur.key, move: mv }] }; nodes.set(tk, nn); stats.depth = Math.max(stats.depth, nn.depth);
+      const t = goal.test(ns); if (t) return done(true, "goal", nn, t);
+      if (nodes.size > st.maxNodes) { stats.capped = true; return done(false, "nodes"); }
+      open.push({ f: nn.depth + weight * h(ns), seq: seq++, key: tk });
+    }
+  }
+  return done(false, "exhausted");
 }
 export type { Params, Move };
 export { Refusal };

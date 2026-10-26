@@ -26,6 +26,8 @@ export function violations(effect: Effect, before: MathState, after: MathState):
 /** One step, verified once: the independent verifier decides; the internal invariant check must agree (else PROOF_FAILED). */
 export function verifyStep(effect: Effect, before: MathState, after: MathState): { ok: boolean; violations: Violation[] } {
   const v = V.checkStep(stateText(before), stateText(after), effect, originalText(after));
+  // a state the independent verifier cannot analyse (size/shape limits) is UNRESOLVED: the step is rejected, never accepted on the legacy check alone
+  if (!v.valid && v.reasons.some((r) => String(r) === "state-unanalysable")) return { ok: false, violations: [] };
   const viol = violations(effect, before, after);
   if (v.valid !== (viol.length === 0)) { DISAGREEMENTS.push(`${eqText(before)} -> ${eqText(after)} (${effect}): verifier ${v.valid ? "accepts" : "rejects"} [${v.reasons}], legacy ${viol.length === 0 ? "accepts" : "rejects"}`); throw new Refusal("PROOF_FAILED", "independent verifier and internal check disagree"); }
   return { ok: v.valid, violations: viol };

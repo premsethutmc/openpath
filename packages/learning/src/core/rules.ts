@@ -57,7 +57,7 @@ const reg = (r: Omit<CoreRule, "opsOf"> & { ops: string[] | ((p: Params) => stri
 
 // ---------- restrict ----------
 reg({
-  id: "core.restrict", ops: ["restrict"], effect: "equivalence", eager: 0,
+  id: "core.restrict", level: "both", ops: ["restrict"], effect: "equivalence", eager: 0,
   description: "Record x != r for every real zero r of every denominator containing x.",
   principle: "Division by zero is undefined, so every value that makes a denominator zero is excluded from the problem for ever.",
   match: (s) => { try { return closureHolds(s) ? [] : [{}]; } catch { return []; } },
@@ -173,7 +173,7 @@ reg({
 
 // ---------- K05.2 rules for rational equations ----------
 reg({
-  id: "core.move-to-left", ops: ["move-to-left"], effect: "equivalence",
+  id: "core.move-to-left", level: "both", ops: ["move-to-left"], effect: "equivalence",
   description: "L = R becomes L - R = 0.", principle: "Subtracting the same expression from both sides keeps the solution set (the expression is defined wherever the equation is).",
   match: (s) => (isZeroLit(eqOf(s).right) ? [] : [{}]),
   checks: (s) => [{ name: "the right side is not already 0", held: !isZeroLit(eqOf(s).right), detail: printExpr(eqOf(s).right) }],

@@ -11,6 +11,7 @@ export type Params = Record<string, unknown>;
 export interface Check { name: string; held: boolean; detail: string }
 export interface CoreRule {
   id: string;
+  level?: "macro" | "fine" | "both";                   // granularity: macro rules (K05.1/K05.2 tidy-ups) or fine single-step rules; strategies choose a level
   opsOf(p: Params): string[];                       // vocabulary operations this application embodies (strategy filter)
   effect: Effect;
   eager?: number;                                   // confluent tier (information-preserving tidy-up); only used when a strategy enables pruning
@@ -32,9 +33,9 @@ export class RuleLibrary {
   get(id: string): CoreRule { const r = this.rules.find((x) => x.id === id); if (!r) throw new Error(`unknown rule ${id}`); return r; }
   all(): readonly CoreRule[] { return this.rules; }
   /** Every candidate application of every allowed rule to the state, in registration order. `allowed` = vocabulary operations (undefined: all). */
-  discover(s: MathState, allowed?: ReadonlySet<string>): Move[] {
+  discover(s: MathState, allowed?: ReadonlySet<string>, level: "macro" | "fine" = "macro"): Move[] {
     const out: Move[] = [];
-    for (const rule of this.rules) for (const params of rule.match(s)) {
+    for (const rule of this.rules) if (rule.level === "both" || (rule.level ?? "macro") === level) for (const params of rule.match(s)) {
       if (allowed && !rule.opsOf(params).every((o) => allowed.has(o))) continue;
       out.push({ rule, params, name: rule.name ? rule.name(params) : rule.id.replace(/^core\./, "") });
     }
