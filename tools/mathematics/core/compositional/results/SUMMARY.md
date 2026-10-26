@@ -22,3 +22,6 @@ Corrected analysis (first attempt voided): 26 of 30 capped tasks are dominated b
 - P2's 90 priority orders per goal were selected on tuning.json only; P2/P4 never claim wrongly but stop early.
 - Re-freeze: after A-2-U037..U042 were changed by the dataset author, those six were re-run; fields of other tasks were not re-verified beyond SHA match of the final file.
 - Reproduction: `cd /home/claude/core && /tmp/runts.sh tools/mathematics/core/compositional/run-compositional.ts` (SET/ONLY/ORDERS env as in the script header), then `python3 tools/mathematics/core/compositional/judge.py` and `summarize.py`.
+
+## Update (pass 2, after the semantics/goal/identity work)
+A-6-017 is fixed (REDUCED start count now uses reduced fractions; permanent regression test goals.test.ts): 0 incorrect results for every contender. Canonical vs text state key, planner and BFS: see pass2/KEY-COMPARISON.md. The first-pass tables above are preserved unchanged as history.
