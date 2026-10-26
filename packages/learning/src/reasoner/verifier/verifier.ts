@@ -76,11 +76,13 @@ const deg = (p: P) => p.length - 1;
 const padd = (a: P, b: P): P => { spend(16 * Math.max(a.length, b.length) + 1); const o: P = []; for (let i = 0; i < Math.max(a.length, b.length); i++) o.push((a[i] ?? Z).add(b[i] ?? Z)); return trim(o); };
 const pneg = (a: P): P => a.map((v) => v.neg());
 const psub = (a: P, b: P) => padd(a, pneg(b));
-const pmul = (a: P, b: P): P => { spend(32 * a.length * b.length + 1); if (!a.length || !b.length) return []; const o: P = new Array(a.length + b.length - 1).fill(Z); a.forEach((u, i) => b.forEach((v, j) => { o[i + j] = o[i + j].add(u.mul(v)); })); return trim(o); };
+/** rough size of the coefficients (hex digits of the middle one): arithmetic on big numbers costs more, so it is charged more */
+const bigW = (p: P): number => (p.length ? 1 + (((p[p.length >> 1].numBig < 0n ? -p[p.length >> 1].numBig : p[p.length >> 1].numBig).toString(16).length + p[p.length >> 1].denBig.toString(16).length) >> 4) : 1);
+const pmul = (a: P, b: P): P => { spend(32 * a.length * b.length * Math.max(bigW(a), bigW(b)) + 1); if (!a.length || !b.length) return []; const o: P = new Array(a.length + b.length - 1).fill(Z); a.forEach((u, i) => b.forEach((v, j) => { o[i + j] = o[i + j].add(u.mul(v)); })); return trim(o); };
 const ppow = (a: P, k: number): P => { let r: P = [ONE]; for (let i = 0; i < k; i++) r = pmul(r, a); return r; };
 const pscale = (a: P, k: Rational): P => trim(a.map((v) => v.mul(k)));
 const pdivmod = (a: P, b: P): { q: P; r: P } => { let r = a; const q: P = new Array(Math.max(0, a.length - b.length + 1)).fill(Z);
-  while (r.length >= b.length && r.length) { spend(8 * r.length + 1); const k = r[r.length - 1].div(b[b.length - 1]), d = r.length - b.length; q[d] = k; r = psub(r, pmul(new Array(d).fill(Z).concat([k]), b)); } return { q: trim(q), r }; };
+  while (r.length >= b.length && r.length) { spend(8 * r.length * bigW(r) + 1); const k = r[r.length - 1].div(b[b.length - 1]), d = r.length - b.length; q[d] = k; r = psub(r, pmul(new Array(d).fill(Z).concat([k]), b)); } return { q: trim(q), r }; };
 const gcdB = (a: bigint, b: bigint): bigint => { a = a < 0n ? -a : a; b = b < 0n ? -b : b; while (b) [a, b] = [b, a % b]; return a; };
 /** Integer primitive part with positive leading coefficient: the normal form used for gcds and comparisons. */
 function prim(p: P): P { if (!p.length) return p; let l = 1n; for (const c of p) l = (l * c.denBig) / gcdB(l, c.denBig);

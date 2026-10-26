@@ -48,3 +48,11 @@ test("D3: a derivation shares one budget, so cost cannot multiply by the number 
   const r = assessDerivation({ problem: `Factorise ${poly}`, lines: Array(40).fill(poly) });
   assert.equal(r.resourceLimit, true); assert.equal(r.mathematics, "undetermined"); assert.ok(performance.now() - t < 8000);
 });
+test("D10 residual / D12 residual: x2 is ambiguous; ill-typed input is unsupported, never an exception", () => {
+  for (const [p, l] of [["Simplify x+x", ["x2"]], ["Simplify x*x", ["x2"]]] as [string, string[]][]) assert.equal(A(p, l).outcome, "ambiguous", `${p} ${l}`);
+  assert.equal(assessWorking(undefined as unknown as string, ["x"]).outcome, "unsupported");
+  assert.equal(assessWorking("Expand (x+1)^2", [null as unknown as string]).outcome, "unsupported");
+  assert.equal(assessDerivation({ problem: undefined as unknown as string, lines: [] }).mathematics, "undetermined");
+  assert.equal(assessDerivation({ problem: "Expand (x+1)^2", lines: [null as unknown as string] }).mathematics, "undetermined");
+  assert.equal(assessDerivation({ problem: "Expand (x+1)^2", lines: ["x^2+2x+1"], config: { maxLines: NaN } }).mathematics, "correct");
+});

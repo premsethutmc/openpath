@@ -44,6 +44,7 @@ const OUTCOME: Record<WorkingEvaluation["status"], Outcome> = { "valid-complete"
 
 /** Assess a whole working (problem + the student's lines). Never throws on bad input: an unreadable problem is `unsupported`. */
 export function assessWorking(problem: string, lines: Line[], opts: WorkingOptions = {}): WorkingAssessment {
+  if (typeof problem !== "string" || !Array.isArray(lines) || lines.some((l) => typeof l !== "string" && typeof (l as { eq?: unknown })?.eq !== "string")) return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: the input is not text (unsupported, not wrong)" };
   if (!inputWithinLimits(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)))) return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: the working exceeds the size limits (unsupported, not wrong)", resourceLimit: true };
   return bounded(() => assessWorkingBounded(problem, lines, opts));
 }

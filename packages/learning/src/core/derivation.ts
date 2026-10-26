@@ -65,12 +65,13 @@ const IRR = "restriction at irrational values (cannot be stated as x ≠ a)";
 const norm = (s: string) => s.replace(/\s+/g, "").toLowerCase();
 const DEF = { maxLines: 40, maxChars: 400 };
 
-/** One shared budget (4 assessments' worth) for the whole derivation, so cost cannot multiply by the number of lines; if it trips, nothing from this run is trusted. */
+/** One shared budget (one assessment’s worth) for the whole derivation, so cost cannot multiply by the number of lines; if it trips, nothing from this run is trusted. */
 export function assessDerivation(input: DerivationInput): DerivationResult {
-  return bounded(() => { const r = assessDerivationInner(input); return budgetTripped() ? { ...r, mathematics: "undetermined" as const, conditionality: "n/a" as const, firstInvalidStep: null, firstUnsupportedStep: null, invalidAt: null, transitions: [], obligations: [], outstandingObligations: [], resourceLimit: true, summary: "not assessed: a computation limit was reached (unsupported, not wrong)", completeness: { complete: false, gaps: [] }, laterLinesDoNotRepair: true } : r; }, 4);
+  return bounded(() => { const r = assessDerivationInner(input); return budgetTripped() ? { ...r, mathematics: "undetermined" as const, conditionality: "n/a" as const, firstInvalidStep: null, firstUnsupportedStep: null, invalidAt: null, transitions: [], obligations: [], outstandingObligations: [], resourceLimit: true, summary: "not assessed: a computation limit was reached (unsupported, not wrong)", completeness: { complete: false, gaps: [] }, laterLinesDoNotRepair: true } : r; }, 1);
 }
 function assessDerivationInner(input: DerivationInput): DerivationResult {
-  const cfg = { ...DEF, ...(input.config ?? {}) };
+  if (typeof input?.problem !== "string" || !Array.isArray(input.lines) || input.lines.some((l) => typeof l !== "string") || (input.declarations !== undefined && (!Array.isArray(input.declarations) || input.declarations.some((l) => typeof l !== "string")))) return { mathematics: "undetermined", conditionality: "n/a", firstInvalidStep: null, firstUnsupportedStep: null, invalidAt: null, transitions: [], obligations: [], outstandingObligations: [], restrictionsCarried: [], narrowing: [], finalEquivalentToProblem: null, objective: { formAchieved: null, equivalentToTarget: null, skillsDemonstrated: [], skillsMissing: [] }, completeness: { complete: false, gaps: [] }, alternativeRouteSteps: [], causes: [], laterLinesDoNotRepair: true, resourceLimit: false, summary: "not assessed: the input is not text (unsupported, not wrong)", advisory: true };
+  const cfg = { maxLines: Number.isFinite(input.config?.maxLines) ? Math.min(input.config!.maxLines!, DEF.maxLines) : DEF.maxLines, maxChars: Number.isFinite(input.config?.maxChars) ? Math.min(input.config!.maxChars!, DEF.maxChars) : DEF.maxChars, requireDomain: input.config?.requireDomain };
   const decl = input.declarations ?? [];
   const badDecl = decl.some((d) => !/(?:≠|!=|=\/=)/.test(d));
   const lines = [...decl, ...input.lines];
