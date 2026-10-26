@@ -15,26 +15,26 @@ import { OPS, fineStrategy, goalFor, sizeOf, begin, stateOut, type RefStep } fro
 import { eqOf } from "./verify.ts";
 import { excludedOf } from "../reasoner/domain/domain-state.ts";
 
-export interface Run { ok: boolean; trace: RefStep[]; states: { eq: string; restr: string[] }[]; visited: number; generated: number; capped: boolean; ms: number; why?: string }
+export interface Run { ok: boolean; trace: RefStep[]; states: { eq: string; restr: string[] }[]; visited: number; generated: number; capped: boolean; ms: number; why?: string; unique?: number }
 const opOf = (m: Move) => m.rule.opsOf(m.params)[0];
 const stepOf = (m: Move): RefStep => ({ op: opOf(m), params: m.params as Record<string, unknown> });
 const moves = (s: CoreState, allowed: Set<string>) => library.discover(s.math, allowed, "fine");
 const attempt = (s: CoreState, m: Move): CoreState | null => { try { return applyMove(s, m); } catch (e) { if (e instanceof RuleFailure) return null; throw e; } };
 const head = (allowed: Set<string>): RefStep[] => (allowed.has("restrict") ? [{ op: "restrict", params: {} }] : []);
-const finish = (start: CoreState, goalName: string, text: string, trace: RefStep[], s: CoreState, st: { visited: number; generated: number; capped: boolean }, t0: number, states: Run["states"]): Run =>
-  ({ ok: !!goalFor(goalName, text).test(s), trace, states, visited: st.visited, generated: st.generated, capped: st.capped, ms: performance.now() - t0 });
+const finish = (start: CoreState, goalName: string, text: string, trace: RefStep[], s: CoreState, st: { visited: number; generated: number; capped: boolean; unique?: number }, t0: number, states: Run["states"]): Run =>
+  ({ ok: !!goalFor(goalName, text).test(s), trace, states, visited: st.visited, generated: st.generated, capped: st.capped, unique: st.unique, ms: performance.now() - t0 });
 
-function pathRun(text: string, allowed: Set<string>, goalName: string, mode: "best" | "bfs", maxNodes = 20000, maxDepth = 8): Run {
-  const t0 = performance.now(); const s0 = begin(text); const goal = goalFor(goalName, text); const st = fineStrategy([...allowed].filter((o) => o !== "restrict"), maxDepth, maxNodes);
+function pathRun(text: string, allowed: Set<string>, goalName: string, mode: "best" | "bfs", maxNodes = 20000, maxDepth = 8, key: "text" | "canonical" = "text"): Run {
+  const t0 = performance.now(); const s0 = begin(text); const goal = goalFor(goalName, text); const st = fineStrategy([...allowed].filter((o) => o !== "restrict"), maxDepth, maxNodes, key);
   const r = mode === "bfs" ? search(s0, goal, st) : searchBest(s0, goal, st, sizeOf, 1);
-  const stats = { visited: r.stats.visited, generated: r.stats.generated, capped: r.stats.capped };
+  const stats = { visited: r.stats.visited, generated: r.stats.generated, capped: r.stats.capped, unique: r.nodes.size };
   if (!r.found) return { ok: false, trace: [], states: [stateOut(s0)], ...stats, ms: performance.now() - t0, why: r.why };
   const path = r.paths[0]; const trace: RefStep[] = [...head(allowed)]; const states = [stateOut(s0)];
   for (let i = 1; i < path.length; i++) { const e = path[i].edges.find((x) => x.parent === path[i - 1].key)!; trace.push(stepOf(e.move)); states.push(stateOut(path[i].state)); }
   return finish(s0, goalName, text, trace, path[path.length - 1].state, stats, t0, states);
 }
-export const runPlanner = (t: string, a: Set<string>, g: string) => pathRun(t, a, g, "best");
-export const runBFS = (t: string, a: Set<string>, g: string, cap = 20000) => pathRun(t, a, g, "bfs", cap);
+export const runPlanner = (t: string, a: Set<string>, g: string, key: "text" | "canonical" = "text", cap = 20000) => pathRun(t, a, g, "best", cap, 8, key);
+export const runBFS = (t: string, a: Set<string>, g: string, cap = 20000, key: "text" | "canonical" = "text") => pathRun(t, a, g, "bfs", cap, 8, key);
 
 class Walker {
   s: CoreState; trace: RefStep[]; states: Run["states"]; seen = new Set<string>(); generated = 0; text: string; allowed: Set<string>;

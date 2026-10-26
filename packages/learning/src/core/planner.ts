@@ -4,13 +4,13 @@
 //                 search for the nearest state satisfying the GOAL -> alternative shortest paths -> structured refusal when no verified path exists.
 // What it does not: know any equation, any fixed operation order, or any answer. Strategies only choose WHICH operations are allowed and the
 //                 search bounds; confluent pruning (eager tidy-up tiers) is an explicit, switchable strategy option, off by default.
-import { Rational } from "../math-kernel.ts";
+import { Rational, type MathExpr } from "../math-kernel.ts";
 import { Refusal } from "../reasoner/outcomes.ts";
 import { excludedOf, constraintOf, type Violation, type Evidence } from "../reasoner/domain/domain-state.ts";
 import type { CoreState } from "./state.ts";
 import { library } from "./rules.ts";
 import type { Move, Params } from "./rule.ts";
-import { eqText, verifyStep } from "./verify.ts";
+import { eqText, eqOf, verifyStep } from "./verify.ts";
 
 export class RuleFailure extends Error { readonly kind: "precondition" | "verification"; constructor(kind: "precondition" | "verification", detail: string) { super(`${kind}: ${detail}`); this.kind = kind; } }
 const inSet = (v: Rational, xs: Rational[]) => xs.some((u) => u.eq(v));
@@ -54,6 +54,7 @@ export interface Strategy {
   level?: "macro" | "fine";        // rule granularity (default macro)
   prune: boolean;                   // confluent pruning: if an information-preserving tidy-up applies, offer only the highest-priority tier
   maxDepth: number; maxNodes: number;
+  key?: "text" | "canonical";   // state identity used for deduplication (default: the printed text)
 }
 export interface SearchStats { visited: number; generated: number; duplicates: number; depth: number; capped: boolean; precondFailed: number; verifyRejected: number; ms: number }
 export interface Edge { parent: string; move: Move }
@@ -66,6 +67,44 @@ export interface SearchResult {
 }
 export const stateKey = (s: CoreState) => `${eqText(s.math)}|${excludedOf(s.math).map(String).join(",")}`;
 
+// ---- canonical state identity (associative/commutative equivalence) ----
+// Two states get the same canonical key only if they differ by nothing but the ORDER of the terms of a sum or the factors of a product
+// (and the sign convention a-b = a+(-b)). Everything that can change the meaning of the state or the truth of a goal stays in the key:
+// the restrictions (domain), every constraint, the open proof obligations, the side of the equation each term is on, and bracket structure
+// (a sum that is the right operand of another sum / a factor of a product stays a visible group, because EXPANDED_POLY / REDUCED look at it).
+// Presentation is unaffected: the node keeps the first-reached state, written as the rules wrote it.
+function canonExpr(e: MathExpr): string {
+  switch (e.kind) {
+    case "num": return e.value.toString();
+    case "var": return e.name;
+    case "pow": return `${canonExpr(e.base)}^${canonExpr(e.exp)}`;
+    case "div": return `(${canonExpr(e.left)})/(${canonExpr(e.right)})`;
+    case "mul": { const fs: string[] = []; const walk = (n: MathExpr) => { if (n.kind === "mul") { walk(n.left); walk(n.right); } else fs.push(canonFactor(n)); }; walk(e); return fs.sort().join("*"); }
+    case "add": case "sub": case "neg": { const ts: string[] = []; sumTerms(e, "+", ts); return ts.sort().join(""); }
+    default: return `?${JSON.stringify(e, (_k, v) => (typeof v === "bigint" ? v.toString() : v))}`;
+  }
+}
+const canonFactor = (n: MathExpr): string => (n.kind === "add" || n.kind === "sub" || n.kind === "neg" ? `[${canonExpr(n)}]` : canonExpr(n));
+// only the LEFT spine of a sum is flattened; a sum on the right of +/- is a visible bracket group and is kept as one signed term
+function sumTerms(e: MathExpr, sign: "+" | "-", out: string[]): void {
+  const flip = (g: "+" | "-"): "+" | "-" => (g === "+" ? "-" : "+");
+  if (e.kind === "add") { sumTerms(e.left, sign, out); pushTerm(e.right, sign, out); }
+  else if (e.kind === "sub") { sumTerms(e.left, sign, out); pushTerm(e.right, flip(sign), out); }
+  else pushTerm(e, sign, out);
+}
+function pushTerm(t: MathExpr, sign: "+" | "-", out: string[]): void {
+  const flip = (g: "+" | "-"): "+" | "-" => (g === "+" ? "-" : "+");
+  if (t.kind === "neg") { pushTerm(t.operand, flip(sign), out); return; }
+  if (t.kind === "num" && t.value.lt(Rational.zero)) { out.push(`${flip(sign)}${t.value.neg().toString()}`); return; }
+  out.push(`${sign}${t.kind === "add" || t.kind === "sub" ? `[${canonExpr(t)}]` : canonExpr(t)}`);
+}
+export const canonicalKey = (s: CoreState): string => {
+  const q = eqOf(s.math); const ob = s.obligations.filter((o) => o.closed === undefined).map((o) => o.kind).sort().join(",");
+  const cons = s.math.constraints.map((c) => `${c.kind}:${canonExpr(c.expr)}`).sort().join(",");
+  return `${canonExpr(q.left)}=${canonExpr(q.right)}|${excludedOf(s.math).map(String).join(",")}|${cons}|${ob}`;
+};
+const keyFn = (st: Strategy) => (st.key === "canonical" ? canonicalKey : stateKey);
+
 /** Which moves does the strategy see in this state? Applies the optional confluent-pruning tiers. */
 export function movesFor(s: CoreState, st: Strategy): Move[] {
   const all = library.discover(s.math, st.allowed, st.level);
@@ -77,7 +116,7 @@ export function movesFor(s: CoreState, st: Strategy): Move[] {
 export function search(start: CoreState, goal: Goal, st: Strategy, opts: { alternatives?: number; onEdge?: (from: string, name: string, to: string, status: "new" | "duplicate") => void } = {}): SearchResult {
   const t0 = performance.now(); const stats: SearchStats = { visited: 0, generated: 0, duplicates: 0, depth: 0, capped: false, precondFailed: 0, verifyRejected: 0, ms: 0 };
   const alts = Math.max(1, opts.alternatives ?? 1);
-  const nodes = new Map<string, Node>(); const k0 = stateKey(start);
+  const key = keyFn(st); const nodes = new Map<string, Node>(); const k0 = key(start);
   const root: Node = { key: k0, state: start, depth: 0, edges: [] }; nodes.set(k0, root);
   const finish = (found: boolean, why: SearchResult["why"], goalNodes: { node: Node; reached: Reached }[]): SearchResult => {
     stats.ms = performance.now() - t0;
@@ -100,7 +139,7 @@ export function search(start: CoreState, goal: Goal, st: Strategy, opts: { alter
         let ns: CoreState;
         try { ns = applyMove(node.state, mv); }
         catch (e) { if (e instanceof RuleFailure) { if (e.kind === "verification") stats.verifyRejected++; else stats.precondFailed++; continue; } throw e; }
-        const tk = stateKey(ns); const known = nodes.get(tk);
+        const tk = key(ns); const known = nodes.get(tk);
         if (known) { stats.duplicates++; opts.onEdge?.(k, mv.name, tk, "duplicate"); if (known.depth === depth && alts > 1) known.edges.push({ parent: k, move: mv }); continue; }
         const nn: Node = { key: tk, state: ns, depth, edges: [{ parent: k, move: mv }] }; nodes.set(tk, nn); stats.depth = depth; opts.onEdge?.(k, mv.name, tk, "new");
         const t = goal.test(ns);
@@ -119,7 +158,7 @@ export function search(start: CoreState, goal: Goal, st: Strategy, opts: { alter
  *  differs (f = depth + weight * heuristic). Not optimal; it exists to reduce search effort, and returns the path it found. */
 export function searchBest(start: CoreState, goal: Goal, st: Strategy, h: (s: CoreState) => number, weight = 1): SearchResult {
   const t0 = performance.now(); const stats: SearchStats = { visited: 0, generated: 0, duplicates: 0, depth: 0, capped: false, precondFailed: 0, verifyRejected: 0, ms: 0 };
-  const nodes = new Map<string, Node>(); const k0 = stateKey(start); const root: Node = { key: k0, state: start, depth: 0, edges: [] }; nodes.set(k0, root);
+  const key = keyFn(st); const nodes = new Map<string, Node>(); const k0 = key(start); const root: Node = { key: k0, state: start, depth: 0, edges: [] }; nodes.set(k0, root);
   const done = (found: boolean, why: SearchResult["why"], n?: Node, reached?: Reached): SearchResult => {
     stats.ms = performance.now() - t0; const paths: Node[][] = [];
     if (found && n) { const p: Node[] = [n]; let c = n; while (c.edges.length) { c = nodes.get(c.edges[0].parent)!; p.unshift(c); } paths.push(p); }
@@ -133,7 +172,7 @@ export function searchBest(start: CoreState, goal: Goal, st: Strategy, h: (s: Co
     for (const mv of movesFor(node.state, st)) {
       stats.generated++; let ns: CoreState;
       try { ns = applyMove(node.state, mv); } catch (e) { if (e instanceof RuleFailure) { if (e.kind === "verification") stats.verifyRejected++; else stats.precondFailed++; continue; } throw e; }
-      const tk = stateKey(ns); if (nodes.has(tk)) { stats.duplicates++; continue; }
+      const tk = key(ns); if (nodes.has(tk)) { stats.duplicates++; continue; }
       const nn: Node = { key: tk, state: ns, depth: node.depth + 1, edges: [{ parent: cur.key, move: mv }] }; nodes.set(tk, nn); stats.depth = Math.max(stats.depth, nn.depth);
       const t = goal.test(ns); if (t) return done(true, "goal", nn, t);
       if (nodes.size > st.maxNodes) { stats.capped = true; return done(false, "nodes"); }

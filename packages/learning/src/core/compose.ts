@@ -17,7 +17,7 @@ const pkey = (p: Record<string, unknown>) => JSON.stringify(Object.keys(p).sort(
 export const moveOf = (s: CoreState, op: string, params: Record<string, unknown>): Move | null => {
   const m = library.discover(s.math, new Set([op]), "fine").find((x) => pkey(x.params) === pkey(params)); return m ?? null;
 };
-export const fineStrategy = (allowed: string[], maxDepth = 8, maxNodes = 20000): Strategy => ({ id: "fine", allowed: new Set(allowed), level: "fine", prune: false, maxDepth, maxNodes });
+export const fineStrategy = (allowed: string[], maxDepth = 8, maxNodes = 20000, key: "text" | "canonical" = "text"): Strategy => ({ id: "fine", allowed: new Set(allowed), level: "fine", prune: false, maxDepth, maxNodes, key });
 
 // ---------- goals ----------
 const nodeCount = (e: MathExpr): boolean => denominatorsOf(e).some((d) => hasX(d));
