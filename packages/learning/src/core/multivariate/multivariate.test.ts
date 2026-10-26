@@ -87,7 +87,9 @@ test("correctness, skill demonstration, form are separate; refusals are honest; 
   assert.equal(M("Expand (x+y)(x-y)", ["x^2-y^2"], { requiredSkills: ["expand-brackets"] }).skills.status, "demonstrated");
   assert.equal(M("Simplify (a^2-b^2)/(a-b)", ["(a-b)(a+b)/(a-b)", "a+b"], { requiredSkills: ["factorise", "cancel-common-factor"] }).skills.status, "demonstrated");
   assert.equal(M("Factorise x^2-y^2", ["x^2-y^2"]).outcome, "incomplete");
-  for (const [p, l] of [["Simplify sin(x)+y", ["sin(x)+y"]], ["Expand (x+y)^2", ["x^2+2xz+y^2"]], ["Simplify x^(1/2)*y", ["x*y"]]] as const) { const r = M(p, [...l]); assert.ok(["unsupported", "ambiguous"].includes(r.outcome), p); assert.equal(r.correct, null); }
+  for (const [p, l] of [["Simplify sin(x)+y", ["sin(x)+y"]], ["Simplify x^(1/2)*y", ["x*y"]]] as const) { const r = M(p, [...l]); assert.ok(["unsupported", "ambiguous"].includes(r.outcome), p); assert.equal(r.correct, null); }
+  // a letter that is not in the problem is allowed since the validation cycle: x^2+2xz+y^2 differs from (x+y)^2 at x=y=1, z=0 (4 vs 2), an exact witness, so it is INVALID, not unsupported
+  assert.equal(M("Expand (x+y)^2", ["x^2+2xz+y^2"]).outcome, "invalid");
   assert.equal(M("Expand (x+y)^2", ["x^2+2xy+y^2 = 0"]).outcome, "invalid");   // a chain claims the equality: it holds only at some points
   assert.equal(M("Simplify a/2b", ["a/(2b)"]).outcome, "ambiguous");
   assert.equal(isMvProblem("Simplify 2x+3x"), false); assert.equal(isMvProblem("Simplify x+y = 3"), false);   // one letter: the one-variable engine; equations: not here
@@ -121,7 +123,7 @@ test("randomised: expansions of random 3-letter products — right verifies, per
     const problem = `Expand ${fs.map(wr).join("")}`; const right = npShow(prod); const keys = [...prod.keys()]; const pert = new Map(prod); const kk = keys[rnd(keys.length)]; pert.set(kk, (pert.get(kk) ?? 0) + 1); if (pert.get(kk) === 0) pert.delete(kk);
     if (!isMvProblem(problem)) continue; trials++;
     const t = performance.now(); const a = M(problem, [right]); const b = M(problem, [npShow(pert)]); const d = performance.now() - t; ms += d; worst = Math.max(worst, d); n += 2;
-    if (a.steps[0]?.status === "valid" || a.steps[0]?.status === "no-change") good++; if (b.steps[0]?.status === "invalid") caught++;
+    if (a.steps[0]?.status === "valid" || a.steps[0]?.status === "no-change") good++; ; if (b.steps[0]?.status === "invalid") caught++;
   }
   assert.equal(good, trials); assert.equal(caught, trials); assert.ok(worst < 400, `worst ${worst}`);
   console.log(`      random 3-letter expansions: ${n} assessments, mean ${(ms / n).toFixed(1)} ms, worst pair ${worst.toFixed(0)} ms`);

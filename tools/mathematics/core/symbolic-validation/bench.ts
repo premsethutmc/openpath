@@ -6,10 +6,21 @@ type Case = { problem: string; lines: string[] };
 const gen = (c: string, i: number): Case => {
   const vs3 = ["x", "y", "z"];
   switch (c) {
-    case "uni-simple": { const a = `${r(3) + 1}x+${r(5) + 1}`, b = `x-${r(5) + 1}`; return [{ problem: `Expand (${a})(${b})`, lines: [`${a.split("+")[0]}x^2`] }, { problem: `Simplify (x^2-${(r(4) + 1) ** 2})/(x-${r(4) + 1})`, lines: [`x+${r(4) + 1}`] }, { problem: `Factorise x^2+${r(6) + 2}x+${r(6) + 1}`, lines: [`(x+${r(4) + 1})(x+${r(4) + 1})`] }][i % 3]; }
-    case "mv-expand": { const k = 2 + (i % 2); const fs = Array.from({ length: k }, () => `(${L(vs3, 2)})`); return { problem: `Expand ${fs.join("")}`, lines: [`${fs.join("")}`, "x"] }; }
-    case "rational": { const f = `(${L(vs3, 2)})`; const g = `(${L(vs3, 2)})`; const h = `(${L(vs3, 2)})`; return { problem: `Simplify ${f}${g}/(${f}${h})`, lines: [`${g}/${h}`, `${g}/${h}, ${f} ≠ 0`] }; }
-    case "symexp": { const e = ["n", "m", "n+1", "2n", "n-m"]; const a = e[r(5)], b = e[r(5)]; const base = ["x", "2x", "(x+1)", "(a+b)"][r(4)]; return { problem: `Simplify ${base}^(${a})*${base}^(${b})`, lines: [`${base}^(${a}+${b})`] }; }
+    case "uni-simple": { const a = r(3) + 1, b = r(5) + 1, c = r(5) + 1, p = r(6) + 1, q = r(6) + 1, k = r(4) + 1;
+      return [{ problem: `Expand (${a}x+${b})(x-${c})`, lines: [`${a}x^2${b - a * c < 0 ? "" : "+"}${b - a * c}x-${b * c}`] },
+        { problem: `Simplify (x^2-${k * k})/(x-${k})`, lines: [`x+${k}`] },
+        { problem: `Factorise x^2+${p + q}x+${p * q}`, lines: [`(x+${p})(x+${q})`] }][i % 3]; }
+    case "mv-expand": {
+      const k = 2 + (i % 2); const fs = Array.from({ length: k }, () => { const a = r(3), b = (a + 1 + r(2)) % 3; return [[vs3[a], r(3) + 1], [vs3[b], -(r(3) + 1)], ["", r(4) + 1]] as [string, number][]; });
+      let P = new Map<string, number>([["", 1]]);
+      for (const f of fs) { const N = new Map<string, number>(); for (const [m, c] of P) for (const [v, d] of f) { const key = [...(m + v)].sort().join(""); N.set(key, (N.get(key) ?? 0) + c * d); } P = N; }
+      const show = (m: string, c: number) => `${c < 0 ? "-" : "+"}${Math.abs(c)}${m ? "*" + [...m].join("*") : ""}`;
+      const text = [...P].filter(([, c]) => c !== 0).map(([m, c]) => show(m, c)).join("").replace(/^\+/, "");
+      const fx = fs.map((f) => `(${f.map(([v, c], j) => `${c < 0 ? "-" : j ? "+" : ""}${Math.abs(c)}${v ? "*" + v : ""}`).join("")})`);
+      return { problem: `Expand ${fx.join("")}`, lines: [text] };
+    }
+    case "rational": { const f = `(${L(vs3, 2)})`; const g = `(${L(vs3, 2)})`; const h = `(${L(vs3, 2)})`; return { problem: `Simplify ${f}${g}/(${f}${h})`, lines: [`${g}/${h}`, `${f.slice(1, -1)} ≠ 0`] }; }
+    case "symexp": { const e = ["n", "m", "n+1", "2n", "n-m"]; const a = e[r(5)], b = e[r(5)]; const base = ["x", "(2x)", "(x+1)", "(a+b)"][r(4)]; return { problem: `Simplify ${base}^(${a})*${base}^(${b})`, lines: [`${base}^(${a}+${b})`] }; }
     case "long-derivation": { const lines: string[] = []; let terms = ["x^2", "2xy", "y^2", "3x", "4y", "5"]; for (let k = 0; k < 30; k++) { terms = [...terms.slice(1), terms[0]]; lines.push(terms.join("+")); } return { problem: `Simplify ${terms.join("+")}`, lines }; }
     case "high-degree": { const d = 10 + (i % 12); return [{ problem: `Expand (x+1)^${d}`, lines: [`(x+1)^${d}`] }, { problem: `Expand (a+b+c)^${6 + (i % 4)}`, lines: [`(a+b+c)^${6 + (i % 4)}`] }, { problem: `Simplify ((x+1)^2+1)^${3 + (i % 3)}`, lines: [`((x+1)^2+1)^${3 + (i % 3)}`] }][i % 3]; }
     case "adversarial": { return [
@@ -25,6 +36,7 @@ const gen = (c: string, i: number): Case => {
   }
   throw new Error("category");
 };
+if (process.env.SHOW) { for (let i = 0; i < 3; i++) { const c = gen(cat, i); const a = assessWorking(c.problem, c.lines); console.log(JSON.stringify(c), a.outcome, a.summary); } }
 const ms: number[] = []; const outcomes: Record<string, number> = {}; const h0 = process.memoryUsage().heapUsed;
 for (let i = 0; i < N; i++) { const c = gen(cat, i); const t = performance.now(); let o = "crash"; try { const a = assessWorking(c.problem, c.lines); o = a.outcome + (a.resourceLimit ? "(resource-limit)" : ""); } catch (e: any) { o = "CRASH:" + String(e?.message ?? e).slice(0, 40); } ms.push(performance.now() - t); outcomes[o] = (outcomes[o] ?? 0) + 1; }
 const q = (p: number) => ms.slice().sort((a, b) => a - b)[Math.min(ms.length - 1, Math.floor(p * ms.length))];

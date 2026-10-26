@@ -11,6 +11,7 @@ import { Refusal } from "../reasoner/outcomes.ts";
 import { isExactNumberProblem, assessNumberWorking, verifyNumberStep, type NumberAssessment, type NumberOptions } from "./number/index.ts";
 import { isSymbolicProblem, assessSymbolicWorking, verifySymbolicStep, SYM_SKILLS, type SymbolicAssessment, type SymbolicOptions, type SymForm, type SymSkillId } from "./symbolic.ts";
 import { SKILLS } from "./number/index.ts";
+import { inputWithinLimits, bounded, budgetTripped } from "./budget.ts";
 import { isMvProblem, assessMultivariateWorking, verifyMultivariateStep, type MvAssessment } from "./multivariate/index.ts";
 export type { MvAssessment, NumberAssessment, NumberOptions, SymbolicAssessment, SymbolicOptions };
 /** Options for either engine: `form` and `requiredSkills` are read by whichever engine takes the problem (ids unknown to it are ignored); `requireDomain` is for expression problems. */
@@ -35,11 +36,24 @@ export interface WorkingAssessment {
   symbolic?: SymbolicAssessment;
   /** present for expressions in several letters / symbolic parameters / symbolic exponents (same four separate judgements) */
   multivariate?: MvAssessment;
+  /** true when the answer is `unsupported` because an input-size or computation limit was reached (never a verdict about the student's working) */
+  resourceLimit?: boolean;
 }
 const OUTCOME: Record<WorkingEvaluation["status"], Outcome> = { "valid-complete": "verified", "valid-incomplete": "incomplete", invalid: "invalid", ambiguous: "ambiguous", unsupported: "unsupported" };
 
 /** Assess a whole working (problem + the student's lines). Never throws on bad input: an unreadable problem is `unsupported`. */
 export function assessWorking(problem: string, lines: Line[], opts: WorkingOptions = {}): WorkingAssessment {
+  if (!inputWithinLimits(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)))) return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: the working exceeds the size limits (unsupported, not wrong)", resourceLimit: true };
+  return bounded(() => assessWorkingBounded(problem, lines, opts));
+}
+function assessWorkingBounded(problem: string, lines: Line[], opts: WorkingOptions): WorkingAssessment {
+  let r: WorkingAssessment;
+  try { r = assessWorkingInner(problem, lines, opts); }
+  catch (e) { if (e instanceof Refusal && e.code === "SEARCH_LIMIT") return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: a computation limit was reached (unsupported, not wrong)", resourceLimit: true }; throw e; }
+  // if the limit was hit anywhere (even inside a check that swallows refusals, e.g. the form or skill check), nothing from this run is trusted
+  return budgetTripped() ? { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: a computation limit was reached (unsupported, not wrong)", resourceLimit: true } : r;
+}
+function assessWorkingInner(problem: string, lines: Line[], opts: WorkingOptions): WorkingAssessment {
   if (isExactNumberProblem(problem)) {
     const a = assessNumberWorking(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)), numOpts(opts));
     return { outcome: a.outcome, correct: a.correct, advisory: true, firstInvalidStep: a.firstInvalidStep, invalidAt: a.firstInvalidStep === null ? null : "step",
@@ -74,6 +88,10 @@ export type StepEffect = "equivalence" | "implication" | "invalid-loss" | "inval
 export interface StepVerdict { outcome: "verified" | "invalid" | "unsupported"; effect: StepEffect | null; correct: Correctness; detail: string }
 /** One step, in the context of the ORIGINAL problem. `verified` + effect "implication" means every old solution is kept but candidates were gained (an obligation). */
 export function verifyWorkingStep(problem: string, from: string, to: string): StepVerdict {
+  try { return bounded(() => verifyWorkingStepInner(problem, from, to)); }
+  catch (e) { if (e instanceof Refusal && e.code === "SEARCH_LIMIT") return { outcome: "unsupported", effect: null, correct: null, detail: "a computation limit was reached (unsupported, not wrong)" }; throw e; }
+}
+function verifyWorkingStepInner(problem: string, from: string, to: string): StepVerdict {
   if (isExactNumberProblem(problem)) { const r = verifyNumberStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? "equivalence" : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }
   if (isSymbolicProblem(problem)) { const r = verifySymbolicStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? (r.effect === "invalid" ? "equivalence" : r.effect) : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }
   if (isMvProblem(problem)) { const r = verifyMultivariateStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? (r.effect === "invalid" ? "equivalence" : r.effect) : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }

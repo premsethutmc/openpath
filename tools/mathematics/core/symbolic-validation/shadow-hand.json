@@ -1,0 +1,471 @@
+{
+ "note": "Hand-authored and labelled from mathematics BEFORE running the adapter; never tuned to its output.",
+ "cases": [
+  {
+   "id": "H01-alt-route-distribute",
+   "problem": "Expand (x+1)(x+2)",
+   "lines": [
+    "x(x+1)+2(x+1)",
+    "x^2+3x+2"
+   ],
+   "opts": {
+    "form": "expanded"
+   },
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "none",
+    "formAchieved": true,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H02-alt-route-foil",
+   "problem": "Expand (x+1)(x+2)",
+   "lines": [
+    "x^2+2x+x+2",
+    "x^2+3x+2"
+   ],
+   "opts": {
+    "form": "expanded"
+   },
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "none",
+    "formAchieved": true,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H03-skill-shown",
+   "problem": "Factorise x^2-9",
+   "lines": [
+    "(x-3)(x+3)"
+   ],
+   "opts": {
+    "form": "factorised",
+    "requiredSkills": [
+     "difference-of-squares"
+    ]
+   },
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "none",
+    "formAchieved": true,
+    "firstInvalid": null,
+    "skillsDemonstrated": [
+     "difference-of-squares"
+    ],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H04-skill-missing",
+   "problem": "Factorise x^2-9",
+   "lines": [
+    "(x-3)(x+3)"
+   ],
+   "opts": {
+    "form": "factorised",
+    "requiredSkills": [
+     "common-factor"
+    ]
+   },
+   "expect": {
+    "category": "correct-but-incomplete",
+    "domain": "none",
+    "formAchieved": true,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": [
+     "common-factor"
+    ]
+   }
+  },
+  {
+   "id": "H05-domain-loss",
+   "problem": "Simplify (x^2-1)/(x-1)",
+   "lines": [
+    "x+1"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "valid-with-outstanding-obligations",
+    "domain": "outstanding",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H06-restriction-stated-after",
+   "problem": "Simplify (x^2-1)/(x-1)",
+   "lines": [
+    "x+1",
+    "x ≠ 1"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "discharged",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H07-restriction-stated-before",
+   "problem": "Simplify (x^2-1)/(x-1)",
+   "lines": [
+    "x ≠ 1",
+    "x+1"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "carried",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   },
+   "label_correction": "Label corrected from 'discharged' to 'carried' BEFORE any change to the engine: an obligation is opened only when a step drops a restriction that is not already in force; a restriction stated on an earlier line is carried, so no obligation ever opens. Independent reasoning, not engine output."
+  },
+  {
+   "id": "H08-obligation-across-lines",
+   "problem": "Simplify (x^2-4)/(x-2)",
+   "lines": [
+    "(x-2)(x+2)/(x-2)",
+    "x+2"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "valid-with-outstanding-obligations",
+    "domain": "outstanding",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H09-obligation-discharged-late",
+   "problem": "Simplify (x^2-4)/(x-2)",
+   "lines": [
+    "(x-2)(x+2)/(x-2)",
+    "x+2",
+    "x ≠ 2"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "discharged",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H10-unnecessary-restriction",
+   "problem": "Expand (x+1)(x+2)",
+   "lines": [
+    "x^2+3x+2",
+    "x ≠ 5"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "correct-but-incomplete",
+    "domain": "narrowed",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H11-invalid-single",
+   "problem": "Expand (x+1)^2",
+   "lines": [
+    "x^2+1"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "mathematically-invalid",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": 1,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H12-invalid-then-valid",
+   "problem": "Expand (x+1)^2",
+   "lines": [
+    "x^2+1",
+    "x^2+2x+1"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "mathematically-invalid",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": 1,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H13-invalid-second-step",
+   "problem": "Expand (x+1)(x+2)",
+   "lines": [
+    "x^2+2x+x+2",
+    "x^2+3x+3"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "mathematically-invalid",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": 2,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H14-wrong-cancel",
+   "problem": "Simplify (x^2+1)/(x+1)",
+   "lines": [
+    "x"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "mathematically-invalid",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": 1,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H15-mv-cancel",
+   "problem": "Simplify (a^2-b^2)/(a-b)",
+   "lines": [
+    "a+b"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "valid-with-outstanding-obligations",
+    "domain": "outstanding",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H16-mv-cancel-stated",
+   "problem": "Simplify (a^2-b^2)/(a-b)",
+   "lines": [
+    "a+b",
+    "a ≠ b"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "discharged",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H17-mv-xy/x",
+   "problem": "Simplify x*y/x",
+   "lines": [
+    "y"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "valid-with-outstanding-obligations",
+    "domain": "outstanding",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H18-mv-wrong",
+   "problem": "Expand (a+b)^2",
+   "lines": [
+    "a^2+b^2"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "mathematically-invalid",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": 1,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H19-symexp-valid",
+   "problem": "Simplify x^n*x^m",
+   "lines": [
+    "x^(n+m)"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H20-symexp-wrong",
+   "problem": "Simplify x^n*x^m",
+   "lines": [
+    "x^(n*m)"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "mathematically-invalid",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": 1,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H21-unsupported-sqrt",
+   "problem": "Simplify sqrt(x^2)",
+   "lines": [
+    "x"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "unsupported-or-undecidable",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H22-unreadable",
+   "problem": "Expand (x+1)(x+2)",
+   "lines": [
+    "the answer is x squared plus"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "unsupported-or-undecidable",
+    "domain": "none",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H23-form-not-reached",
+   "problem": "Expand (x+1)(x+2)",
+   "lines": [
+    "x(x+2)+1(x+2)"
+   ],
+   "opts": {
+    "form": "expanded"
+   },
+   "expect": {
+    "category": "correct-but-incomplete",
+    "domain": "none",
+    "formAchieved": false,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H24-two-cancellations",
+   "problem": "Simplify x^2*y/(x*y^2)",
+   "lines": [
+    "x/y"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "valid-with-outstanding-obligations",
+    "domain": "outstanding",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H25-param-dependent",
+   "problem": "Simplify (x-a)/(x-a)",
+   "lines": [
+    "1"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "valid-with-outstanding-obligations",
+    "domain": "outstanding",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H26-param-dependent-stated",
+   "problem": "Simplify (x-a)/(x-a)",
+   "lines": [
+    "1",
+    "x ≠ a"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "correct-and-complete",
+    "domain": "discharged",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  },
+  {
+   "id": "H27-xy-restriction-implied",
+   "problem": "Simplify x*y/x",
+   "lines": [
+    "y",
+    "y ≠ 0"
+   ],
+   "opts": {},
+   "expect": {
+    "category": "valid-with-outstanding-obligations",
+    "domain": "outstanding",
+    "formAchieved": null,
+    "firstInvalid": null,
+    "skillsDemonstrated": [],
+    "skillsMissing": []
+   }
+  }
+ ]
+}

@@ -5,6 +5,7 @@
 // It does not use poly.ts, domain-state.ts, expr-text.ts or the planner. Everything is exact; nothing is sampled.
 import { Rational } from "../../math-kernel.ts";
 import { Refusal } from "../outcomes.ts";
+import { spend } from "../../core/budget.ts";
 
 const Z = Rational.zero, ONE = Rational.one;
 // ---------------------------------------------------------------- syntax
@@ -75,7 +76,7 @@ const deg = (p: P) => p.length - 1;
 const padd = (a: P, b: P): P => { const o: P = []; for (let i = 0; i < Math.max(a.length, b.length); i++) o.push((a[i] ?? Z).add(b[i] ?? Z)); return trim(o); };
 const pneg = (a: P): P => a.map((v) => v.neg());
 const psub = (a: P, b: P) => padd(a, pneg(b));
-const pmul = (a: P, b: P): P => { if (!a.length || !b.length) return []; const o: P = new Array(a.length + b.length - 1).fill(Z); a.forEach((u, i) => b.forEach((v, j) => { o[i + j] = o[i + j].add(u.mul(v)); })); return trim(o); };
+const pmul = (a: P, b: P): P => { spend(a.length * b.length + 1); if (!a.length || !b.length) return []; const o: P = new Array(a.length + b.length - 1).fill(Z); a.forEach((u, i) => b.forEach((v, j) => { o[i + j] = o[i + j].add(u.mul(v)); })); return trim(o); };
 const ppow = (a: P, k: number): P => { let r: P = [ONE]; for (let i = 0; i < k; i++) r = pmul(r, a); return r; };
 const pscale = (a: P, k: Rational): P => trim(a.map((v) => v.mul(k)));
 const pdivmod = (a: P, b: P): { q: P; r: P } => { let r = a; const q: P = new Array(Math.max(0, a.length - b.length + 1)).fill(Z);

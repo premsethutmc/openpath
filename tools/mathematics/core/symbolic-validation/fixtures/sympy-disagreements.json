@@ -1,0 +1,86 @@
+[
+ {
+  "id": "data/cases.s2.json|invalid:cancel-added-term:147",
+  "sympy": "identity",
+  "engine": "not-identity",
+  "case": {
+   "id": "data/cases.s2.json|invalid:cancel-added-term:147",
+   "kind": "invalid",
+   "family": "cancel-added-term",
+   "problem": "Simplify (-2*a + 3*b)/(-2*a + 3*b)",
+   "lines": [
+    "(3b)/(3b)"
+   ],
+   "oracle": {
+    "steps": [
+     {
+      "cls": "invalid"
+     }
+    ],
+    "first_invalid": 1,
+    "final": {
+     "missing": false,
+     "narrowed": false
+    }
+   }
+  },
+  "classification": "assumption mismatch: SymPy simplifies E/E to 1 ignoring the domain; the contract compares domains (new restriction not stated => invalid)",
+  "exact_witness": "witness a=1,b=0: original (-2)/(-2) defined; new 0/0 undefined"
+ },
+ {
+  "id": "data/cases.s3.json|invalid:cancel-added-term:423",
+  "sympy": "identity",
+  "engine": "not-identity",
+  "case": {
+   "id": "data/cases.s3.json|invalid:cancel-added-term:423",
+   "kind": "invalid",
+   "family": "cancel-added-term",
+   "problem": "Simplify (2*a + 3*z + 3)/(2*a + 3*z + 3)",
+   "lines": [
+    "(2a + 3)/(2a + 3)"
+   ],
+   "oracle": {
+    "steps": [
+     {
+      "cls": "invalid"
+     }
+    ],
+    "first_invalid": 1,
+    "final": {
+     "missing": false,
+     "narrowed": false
+    }
+   }
+  },
+  "classification": "assumption mismatch: SymPy simplifies E/E to 1 ignoring the domain; the contract compares domains (new restriction not stated => invalid)",
+  "exact_witness": "witness a=-3/2,z=1 (see ORACLE_CORRECTIONS C1)"
+ },
+ {
+  "id": "data/cases.s3.json|invalid:cancel-added-term:630",
+  "sympy": "identity",
+  "engine": "not-identity",
+  "case": {
+   "id": "data/cases.s3.json|invalid:cancel-added-term:630",
+   "kind": "invalid",
+   "family": "cancel-added-term",
+   "problem": "Simplify (6*y + 3)/(6*y + 3)",
+   "lines": [
+    "(3*y)/(3*y)"
+   ],
+   "oracle": {
+    "steps": [
+     {
+      "cls": "invalid"
+     }
+    ],
+    "first_invalid": 1,
+    "final": {
+     "missing": false,
+     "narrowed": false
+    }
+   }
+  },
+  "classification": "assumption mismatch: SymPy simplifies E/E to 1 ignoring the domain; the contract compares domains (new restriction not stated => invalid)",
+  "exact_witness": "y=0: original 3/3 defined, new 0/0 undefined"
+ }
+]

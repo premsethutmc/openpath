@@ -1,3 +1,5 @@
+import { spend } from "../budget.ts";
+import { Refusal } from "../../reasoner/outcomes.ts";
 // Sparse multivariate polynomials over Q (kernel Rational, BigInt inside) with exact division, GCD, squarefree part and irreducibility
 // certificates. Variables are strings. Nothing here samples or uses floats.
 import { Rational } from "../../math-kernel.ts";
@@ -19,25 +21,25 @@ export class Poly {
   isZero() { return this.t.size === 0; }
   isConst() { return this.t.size === 0 || (this.t.size === 1 && this.t.has("")); }
   constVal(): Rational { return this.t.get("")?.c ?? ZERO; }
-  vars(): string[] { const s = new Set<string>(); for (const { m } of this.t.values()) for (const v of Object.keys(m)) s.add(v); return [...s].sort(); }
+  vars(): string[] { spend(this.t.size + 1); const s = new Set<string>(); for (const { m } of this.t.values()) for (const v of Object.keys(m)) s.add(v); return [...s].sort(); }
   deg(v: string): number { let d = 0; for (const { m } of this.t.values()) d = Math.max(d, m[v] ?? 0); return d; }
-  totalDeg(): number { let d = 0; for (const { m } of this.t.values()) d = Math.max(d, Object.values(m).reduce((a, b) => a + b, 0)); return d; }
+  totalDeg(): number { spend(this.t.size + 1); let d = 0; for (const { m } of this.t.values()) d = Math.max(d, Object.values(m).reduce((a, b) => a + b, 0)); return d; }
   private add1(c: Rational, m: Mon) { const k = mkey(m); const e = this.t.get(k); if (!e) { if (!c.isZero()) this.t.set(k, { c, m: clean(m) }); } else { const n = e.c.add(c); if (n.isZero()) this.t.delete(k); else e.c = n; } }
-  add(o: Poly): Poly { const r = new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c, m: e.m }]))); for (const e of o.t.values()) r.add1(e.c, e.m); return r; }
-  neg(): Poly { return new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c.neg(), m: e.m }]))); }
+  add(o: Poly): Poly { spend(this.t.size + o.t.size + 1); const r = new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c, m: e.m }]))); for (const e of o.t.values()) r.add1(e.c, e.m); return r; }
+  neg(): Poly { spend(this.t.size + 1); return new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c.neg(), m: e.m }]))); }
   sub(o: Poly) { return this.add(o.neg()); }
-  scale(c: Rational): Poly { if (c.isZero()) return Poly.zero(); return new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c.mul(c), m: e.m }]))); }
-  mul(o: Poly): Poly { const r = new Poly(); for (const a of this.t.values()) for (const b of o.t.values()) { const m: Mon = { ...a.m }; for (const v of Object.keys(b.m)) m[v] = (m[v] ?? 0) + b.m[v]; r.add1(a.c.mul(b.c), m); } return r; }
+  scale(c: Rational): Poly { spend(this.t.size + 1); if (c.isZero()) return Poly.zero(); return new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c.mul(c), m: e.m }]))); }
+  mul(o: Poly): Poly { spend(10 * this.t.size * o.t.size + 1); const r = new Poly(); for (const a of this.t.values()) for (const b of o.t.values()) { const m: Mon = { ...a.m }; for (const v of Object.keys(b.m)) m[v] = (m[v] ?? 0) + b.m[v]; r.add1(a.c.mul(b.c), m); } return r; }
   pow(n: number): Poly { let r = Poly.one(), b: Poly = this; let k = n; while (k > 0) { if (k & 1) r = r.mul(b); k >>= 1; if (k) b = b.mul(b); } return r; }
   eq(o: Poly): boolean { return this.sub(o).isZero(); }
   /** leading term in lex order over sorted variables */
-  lead(): Term | null { let best: Term | null = null; let bk: number[] | null = null; const vs = this.vars(); for (const e of this.t.values()) { const k = vs.map((v) => e.m[v] ?? 0); if (!bk || cmp(k, bk) > 0) { best = e; bk = k; } } return best; }
+  lead(): Term | null { spend(this.t.size + 1); let best: Term | null = null; let bk: number[] | null = null; const vs = this.vars(); for (const e of this.t.values()) { const k = vs.map((v) => e.m[v] ?? 0); if (!bk || cmp(k, bk) > 0) { best = e; bk = k; } } return best; }
   /** coefficients as a polynomial in v: index = degree */
-  coeffs(v: string): Poly[] { const d = this.deg(v); const out: Poly[] = Array.from({ length: d + 1 }, () => new Poly()); for (const e of this.t.values()) { const k = e.m[v] ?? 0; const m = { ...e.m }; delete m[v]; out[k].add1(e.c, m); } return out; }
+  coeffs(v: string): Poly[] { spend(this.t.size + 1); const d = this.deg(v); const out: Poly[] = Array.from({ length: d + 1 }, () => new Poly()); for (const e of this.t.values()) { const k = e.m[v] ?? 0; const m = { ...e.m }; delete m[v]; out[k].add1(e.c, m); } return out; }
   static fromCoeffs(v: string, cs: Poly[]): Poly { let r = Poly.zero(); cs.forEach((c, k) => { r = r.add(c.mul(Poly.v(v, k).isZero() ? Poly.one() : k === 0 ? Poly.one() : Poly.v(v, k))); }); return r; }
-  deriv(v: string): Poly { const r = new Poly(); for (const e of this.t.values()) { const k = e.m[v] ?? 0; if (!k) continue; const m = { ...e.m }; m[v] = k - 1; r.add1(e.c.mul(new Rational(k)), m); } return r; }
+  deriv(v: string): Poly { spend(this.t.size + 1); const r = new Poly(); for (const e of this.t.values()) { const k = e.m[v] ?? 0; if (!k) continue; const m = { ...e.m }; m[v] = k - 1; r.add1(e.c.mul(new Rational(k)), m); } return r; }
   /** exact value at a point (variables not in `pt` make this return null) */
-  at(pt: Record<string, Rational>): Rational | null { let s = ZERO; for (const e of this.t.values()) { let c = e.c; for (const v of Object.keys(e.m)) { const x = pt[v]; if (!x) return null; for (let i = 0; i < e.m[v]; i++) c = c.mul(x); } s = s.add(c); } return s; }
+  at(pt: Record<string, Rational>): Rational | null { spend(this.t.size + 1); let s = ZERO; for (const e of this.t.values()) { let c = e.c; for (const v of Object.keys(e.m)) { const x = pt[v]; if (!x) return null; for (let i = 0; i < e.m[v]; i++) c = c.mul(x); } s = s.add(c); } return s; }
   /** substitute numbers for some variables */
   sub_(pt: Record<string, Rational>): Poly { let r = Poly.zero(); for (const e of this.t.values()) { let c = e.c; const m: Mon = {}; for (const v of Object.keys(e.m)) { const x = pt[v]; if (x) for (let i = 0; i < e.m[v]; i++) c = c.mul(x); else m[v] = e.m[v]; } r.add1(c, m); } return r; }
   toString(): string {
@@ -52,7 +54,7 @@ export function divExact(a: Poly, b: Poly): Poly | null {
   if (b.isZero()) return null; if (a.isZero()) return Poly.zero();
   const lb = b.lead()!; let r = a; let q = Poly.zero(); let guard = 0;
   while (!r.isZero()) {
-    if (++guard > 5000) return null; const lr = r.lead()!; const m: Mon = { ...lr.m };
+    if (++guard > 5000) throw new Refusal("SEARCH_LIMIT", "division step limit"); spend(b.t.size + 1); const lr = r.lead()!; const m: Mon = { ...lr.m };
     for (const v of Object.keys(lb.m)) { const d = (m[v] ?? 0) - lb.m[v]; if (d < 0) return null; m[v] = d; }
     const c = lr.c.div(lb.c); const t = new Poly(); t.t.set(mkey(m), { c, m: clean(m) }); q = q.add(t); r = r.sub(t.mul(b));
   }
