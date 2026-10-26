@@ -41,7 +41,7 @@ interface Problem { text: string; v: string; form: SymForm }
 /** Read "Expand (x+1)(x+2)", "Simplify (x^2-1)/(x-1)", or a bare one-variable expression. Anything with an equals sign or words is not read. */
 export function readSymbolicProblem(raw: string): Problem | null {
   let t = raw.trim().replace(/[.?:]\s*$/, ""); let form: SymForm = "any";
-  for (const [re, f] of VERBS) if (re.test(t)) { form = f; t = t.replace(re, "").replace(/^\s*[:,-]?\s*/, "").replace(/^(?:the\s+)?(?:expression\s+)?/i, "").replace(/^\s*[:,]\s*/, "").replace(/^(?:completely|fully)\s*/i, "").replace(/\s+(?:completely|fully)\s*$/i, ""); break; }
+  for (const [re, f] of VERBS) if (re.test(t)) { form = f; t = t.replace(re, "").replace(/^\s*[:,]\s*/, "").replace(/^(?:the\s+)?(?:expression\s+)?/i, "").replace(/^\s*[:,]\s*/, "").replace(/^(?:completely|fully)\s*/i, "").replace(/\s+(?:completely|fully)\s*$/i, ""); break; }
   if (/=|[<>≠≤≥]/.test(t) || MULTI.test(t.replace(/\b\d*e\d+\b/gi, ""))) return null;
   const letters = new Set(t.match(/[a-zA-Z]/g) ?? []); if (letters.size !== 1) return null;
   const v = [...letters][0]; if (!/[\dx\w]/.test(t)) return null;
@@ -56,7 +56,18 @@ interface Line { expr: string; text: string; stated: Rational[]; ambiguous: bool
 function readLine(raw: string, v: string): Line | { err: string } {
   if (MULTI.test(raw.replace(/\b(?:and|for|where|when|provided|if|with)\b/gi, " "))) return { err: "contains a symbol or word that is not a single variable" };
   const letters = new Set((raw.replace(/\b(?:and|for|where|when|provided|if|with)\b/gi, " ").match(/[a-zA-Z]/g) ?? [])); if (letters.size > 1 || (letters.size === 1 && !letters.has(v))) return { err: `uses a different variable from the problem (${v})` };
-  const s0 = renameVar(raw, v); const stated: Rational[] = []; const rest = s0.replace(RESTRICTION, (_m, n) => { const r = parseRat(n); if (r) stated.push(r); return " "; }).replace(/^[\s,;]+|[\s,;]+$/g, "");
+  const s0 = renameVar(raw, v); const stated: Rational[] = []; const exprs: string[] = [];
+  // every "A ≠ B" segment is a restriction: its excluded values are the rational roots of A − B (an irrational root cannot be stated as x ≠ a, so it is refused, not guessed)
+  let depth = 0, cur = ""; const segs: string[] = [];
+  for (const ch of s0.replace(/\b(?:and|for|where|when|provided|if|with)\b/gi, ",")) { if (ch === "(") depth++; if (ch === ")") depth--; if (depth === 0 && (ch === "," || ch === ";")) { segs.push(cur); cur = ""; } else cur += ch; }
+  segs.push(cur);
+  for (const sg of segs.map((x) => x.trim()).filter(Boolean)) {
+    const m = /^\(?\s*(.+?)\s*(?:≠|!=|=\/=)\s*(.+?)\s*\)?$/.exec(sg);
+    if (!m) { exprs.push(sg); continue; }
+    try { const r = V.solutionOf(`${normalizeLine(m[1], false)}=${normalizeLine(m[2], false)}`).sol; if (r.kind === "all") return { err: "a restriction that excludes every value" }; if (r.irr.length > 1) return { err: "a restriction with irrational excluded values cannot be stated as x ≠ a" }; stated.push(...r.rats); } catch (e) { if (e instanceof Refusal) return { err: `a restriction cannot be read (${e.message})` }; throw e; }
+  }
+  if (exprs.length > 1) return { err: "more than one expression on a line" };
+  const rest = exprs[0] ?? "";
   const g = rest.replace(/[−–—]/g, "-").replace(/[÷∕⁄]/g, "/").replace(/\s+/g, ""); const ambiguous = /\/\d+(?:\.\d+)?[x(]/.test(g);
   return { expr: rest, text: rest ? normalizeLine(rest, false) : "", stated, ambiguous };
 }

@@ -1,0 +1,96 @@
+[
+ {
+  "id": "symexp:quotient:122",
+  "why": "conditionality",
+  "case": {
+   "id": "symexp:quotient:122",
+   "kind": "symexp",
+   "family": "quotient",
+   "problem": "Simplify (x^2)^(n+1)/(x^2)^(n)",
+   "lines": [
+    "(x^2)^(n+1-(n))"
+   ],
+   "oracle": {
+    "steps": [
+     {
+      "cls": "valid"
+     }
+    ],
+    "first_invalid": null,
+    "final": {
+     "missing": false,
+     "narrowed": false
+    }
+   }
+  },
+  "engine": {
+   "id": "symexp:quotient:122",
+   "ms": 0.99,
+   "engine": "mv",
+   "outcome": "incomplete",
+   "first": null,
+   "steps": [
+    "valid-with-obligation"
+   ],
+   "rel": [
+    "identity"
+   ],
+   "domain": {
+    "status": "missing",
+    "missing": [
+     "x \u2260 0"
+    ],
+    "narrowed": [],
+    "implied": []
+   },
+   "causes": []
+  }
+ },
+ {
+  "id": "symexp:quotient:137",
+  "why": "conditionality",
+  "case": {
+   "id": "symexp:quotient:137",
+   "kind": "symexp",
+   "family": "quotient",
+   "problem": "Simplify ((x+1))^(m+2)/((x+1))^(m)",
+   "lines": [
+    "((x+1))^(m+2-(m))"
+   ],
+   "oracle": {
+    "steps": [
+     {
+      "cls": "valid"
+     }
+    ],
+    "first_invalid": null,
+    "final": {
+     "missing": false,
+     "narrowed": false
+    }
+   }
+  },
+  "engine": {
+   "id": "symexp:quotient:137",
+   "ms": 1.56,
+   "engine": "mv",
+   "outcome": "verified",
+   "first": null,
+   "steps": [
+    "valid-with-obligation"
+   ],
+   "rel": [
+    "identity"
+   ],
+   "domain": {
+    "status": "missing",
+    "missing": [
+     "x+1 \u2260 0"
+    ],
+    "narrowed": [],
+    "implied": []
+   },
+   "causes": []
+  }
+ }
+]

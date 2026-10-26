@@ -87,6 +87,17 @@ export function gcd(a: Poly, b: Poly, depth = 0): Poly {
 }
 /** squarefree part (radical): p / gcd(p, all partials) */
 export function radical(p: Poly): Poly { if (p.isConst()) return Poly.one(); let g = Poly.zero(); for (const v of p.vars()) g = gcd(g, p.deriv(v)); g = gcd(p, g); return normalise(divExact(p, g) ?? p); }
+/** p = Π F_k^k with each F_k squarefree and pairwise coprime (k ≥ 1): [F_k, k] for the non-trivial ones */
+export function squarefreeDecomposition(p: Poly): [Poly, number][] {
+  const out: [Poly, number][] = []; let cur = normalise(p); let k = 1;
+  while (!cur.isConst() && k < 60) {
+    const rad = radical(cur); const next = divExact(cur, rad); if (!next) { out.push([cur, 1]); break; }
+    const radNext = next.isConst() ? Poly.one() : radical(next); const F = normalise(divExact(rad, radNext) ?? rad);
+    if (!F.isConst()) out.push([F, k]);
+    cur = next.isConst() ? Poly.one() : normalise(next); k++;
+  }
+  return out;
+}
 /** the part of `a` (radical) not already in `b` (radical): a / gcd(a, b) */
 export function extra(a: Poly, b: Poly): Poly { const ra = radical(a), rb = radical(b); const g = gcd(ra, rb); return normalise(divExact(ra, g) ?? ra); }
 /** no real point can make it zero: positive constant plus positive-coefficient terms that are all even powers */

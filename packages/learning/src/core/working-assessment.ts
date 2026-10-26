@@ -46,14 +46,16 @@ export function assessWorking(problem: string, lines: Line[], opts: WorkingOptio
       steps: a.steps.map((s) => ({ index: s.index, from: s.from, to: s.to, status: (s.status === "ambiguous" ? "unsupported" : s.status) as WorkingStep["status"], explanation: s.explanation })),
       causes: a.errors.map((m) => m.label), summary: a.summary, number: a };
   }
-  if (isSymbolicProblem(problem)) {
+  const probLetter = isSymbolicProblem(problem) ? (problem.replace(/^\s*(?:expand|factori[sz]e|factor|simplify|collect)\b/i, "").match(/[a-zA-Z]/g) ?? [])[0] : undefined;
+  const strayLetters = probLetter !== undefined && lines.some((l) => ((typeof l === "string" ? l : l.eq).replace(/\b(?:and|for|where|when|provided|if|with)\b/gi, " ").match(/[a-zA-Z]/g) ?? []).some((c) => c !== probLetter));
+  if (isSymbolicProblem(problem) && !strayLetters) {
     const a = assessSymbolicWorking(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)), symOpts(opts));
     return { outcome: a.outcome, correct: a.correct, advisory: true, firstInvalidStep: a.firstInvalidStep, invalidAt: a.firstInvalidStep === null ? null : "step",
       steps: a.steps.map((s) => ({ index: s.index, from: s.from, to: s.to, status: (s.status === "ambiguous" ? "unsupported" : s.status) as WorkingStep["status"], explanation: s.explanation })),
       causes: a.errors.map((m) => m.label), summary: a.summary, symbolic: a };
   }
-  if (isMvProblem(problem)) {
-    const a = assessMultivariateWorking(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)), symOpts(opts));
+  if (isMvProblem(problem) || strayLetters) {
+    const a = assessMultivariateWorking(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)), { ...symOpts(opts), anyLetters: true });
     return { outcome: a.outcome, correct: a.correct, advisory: true, firstInvalidStep: a.firstInvalidStep, invalidAt: a.firstInvalidStep === null ? null : "step",
       steps: a.steps.map((s) => ({ index: s.index, from: s.from, to: s.to, status: (s.status === "ambiguous" ? "unsupported" : s.status) as WorkingStep["status"], explanation: s.explanation })),
       causes: a.errors.map((m) => m.label), summary: a.summary, multivariate: a };

@@ -31,12 +31,12 @@ const FILLER = /\b(?:and|for|where|when|provided|if|with)\b/gi;
 const letters = (s: string) => new Set(s.match(/[a-zA-Z]/g) ?? []);
 export interface MvProblem { text: string; form: SymForm; vars: string[] }
 /** "Expand (x+y)^2", "Simplify (a^2-b^2)/(a-b)", "Simplify x^n*x^m": two or more letters, or one letter with a symbolic exponent (other single-letter problems belong to the one-variable engine) */
-export function readMvProblem(raw: string): MvProblem | null {
+export function readMvProblem(raw: string, allowSingle = false): MvProblem | null {
   let t = raw.trim().replace(/[.?:]\s*$/, ""); let form: SymForm = "any";
-  for (const [re, f] of VERBS) if (re.test(t)) { form = f; t = t.replace(re, "").replace(/^\s*[:,-]?\s*/, "").replace(/^(?:the\s+)?(?:expression\s+)?/i, "").replace(/^(?:completely|fully)\s*/i, "").replace(/\s+(?:completely|fully)\s*$/i, ""); break; }
+  for (const [re, f] of VERBS) if (re.test(t)) { form = f; t = t.replace(re, "").replace(/^\s*[:,]\s*/, "").replace(/^(?:the\s+)?(?:expression\s+)?/i, "").replace(/^(?:completely|fully)\s*/i, "").replace(/\s+(?:completely|fully)\s*$/i, ""); break; }
   if (/=|[<>≤≥≠]/.test(t) || /\b[a-zA-Z]{4,}\b/.test(t)) return null;
   const L = letters(t); if (L.size < 1) return null;
-  try { const b = build(parseMv(t)); if (L.size < 2 && b.expSyms.size === 0) return null; } catch (e) { if (e instanceof Refusal) return null; throw e; }
+  try { const b = build(parseMv(t)); if (L.size < 2 && b.expSyms.size === 0 && !allowSingle) return null; } catch (e) { if (e instanceof Refusal) return null; throw e; }
   return { text: t, form, vars: [...L].sort() };
 }
 export const isMvProblem = (raw: string): boolean => readMvProblem(raw) !== null;
@@ -53,7 +53,7 @@ function readLine(raw: string, allowed: Set<string>): Line | { err: string } {
     else exprs.push(sg);
   }
   if (exprs.length > 1) return { err: "more than one expression on a line" };
-  const expr = exprs[0] ?? ""; const L = letters(expr); for (const c of L) if (!allowed.has(c)) return { err: `uses a letter that is not in the problem (${c})` };
+  const expr = exprs[0] ?? ""; void allowed;     // a letter that is not in the problem is allowed: it makes the line a different expression, which the exact comparison then decides
   return { expr, text: expr, stated, ambiguous: ambiguousText(expr) };
 }
 const ambiguousText = (expr: string): boolean => { const g = expr.replace(/[−–—]/g, "-").replace(/[÷∕⁄]/g, "/").replace(/\s+/g, ""); return /\/\d+(?:\.\d+)?[a-zA-Z(]/.test(g) || /[a-zA-Z0-9)]\/[a-zA-Z]\(|\/[a-zA-Z][a-zA-Z]/.test(g); };
@@ -130,11 +130,11 @@ function causes(from: MathExpr, toText: string): SymCause[] { return nameExpress
 export const relateMultivariate = (from: string, to: string): MvRelation => relateMv(from, to);
 
 // ---------- whole working ----------
-export function assessMultivariateWorking(problemText: string, lines: string[], opts: MvOptions = {}): MvAssessment {
+export function assessMultivariateWorking(problemText: string, lines: string[], opts: MvOptions & { anyLetters?: boolean } = {}): MvAssessment {
   const sk = opts.requiredSkills ?? [];
   const nd: MvDomain = { original: [], lost: [], stated: [], implied: [], missing: [], narrowed: [], status: "n/a" };
   const mk = (o: Partial<MvAssessment>): MvAssessment => ({ outcome: "unsupported", correct: null, firstInvalidStep: null, steps: [], errors: [], final: { value: "", form: "n/a", detail: "" }, skills: { required: sk, demonstrated: [], missing: sk, status: sk.length ? "not-demonstrated" : "n/a" }, domain: nd, assumptions: [], variables: [], summary: "", ...o });
-  const P = readMvProblem(problemText); if (!P) return mk({ summary: "the problem is not a multi-letter expression this engine can read" });
+  const P = readMvProblem(problemText, opts.anyLetters); if (!P) return mk({ summary: "the problem is not a multi-letter expression this engine can read" });
   if (ambiguousText(P.text)) return mk({ outcome: "ambiguous", summary: "the problem itself can be read in more than one way (a division followed by a letter or bracket)", variables: P.vars });
   const probE = parseMv(P.text); const pb = guard(() => build(probE)); if ("refusal" in pb) return mk({ summary: `the problem cannot be analysed exactly (${pb.refusal})` });
   const allowed = new Set(P.vars); const D0 = domainPoly(pb); const steps: MvStep[] = []; let firstInvalid: number | null = null; let errs: SymCause[] = [];

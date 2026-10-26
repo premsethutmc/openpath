@@ -5,7 +5,7 @@
 import { Rational, Expr, type MathExpr } from "../../math-kernel.ts";
 import { Refusal } from "../../reasoner/outcomes.ts";
 import { parseExpr } from "../../reasoner/expr-text.ts";
-import { Poly, gcd, divExact, radical, extra, normalise, noRealZero, type Mon } from "./poly.ts";
+import { Poly, gcd, divExact, radical, extra, normalise, noRealZero, squarefreeDecomposition, type Mon } from "./poly.ts";
 
 export interface RF { n: Poly; d: Poly }
 export interface Built { rf: RF; conds: Poly[]; gens: Map<string, { base: Poly; mu: Mon }>; expSyms: Set<string>; vars: Set<string> }
@@ -32,10 +32,18 @@ const mulMon = (a: Mon, b: Mon): Mon => { const m: Mon = { ...a }; for (const v 
 export function build(e: MathExpr): Built {
   const conds: Poly[] = []; const gens = new Map<string, { base: Poly; mu: Mon }>(); const expSyms = new Set<string>(); const vars = new Set<string>();
   /** a condition "p ≠ 0"; a monomial in generators reads as the conditions on their bases ([x^m] ≠ 0 means x ≠ 0) */
-  const need = (p: Poly) => { if (p.isConst()) return; if (p.t.size === 1) { const t = p.t.values().next().value!; for (const v of Object.keys(t.m)) conds.push(v.startsWith("[") ? gens.get(v)!.base : Poly.v(v)); } else conds.push(p); };
+  const need = (p: Poly) => {
+    if (p.isConst()) return;
+    // peel the monomial common to every term (variables and generators): a generator [B^e] ≠ 0 reads as B ≠ 0; what is left is a condition in itself
+    let M: Record<string, number> | null = null; for (const t of p.t.values()) { if (!M) M = { ...t.m }; else for (const v of Object.keys(M)) M[v] = Math.min(M[v], t.m[v] ?? 0); }
+    for (const v of Object.keys(M ?? {})) if (M![v] > 0) conds.push(v.startsWith("[") ? gens.get(v)!.base : Poly.v(v));
+    const q = new Poly(); for (const t of p.t.values()) { const m: Mon = { ...t.m }; for (const v of Object.keys(M ?? {})) { m[v] = (m[v] ?? 0) - M![v]; if (m[v] === 0) delete m[v]; } const one = new Poly(); one.t.set(Object.keys(m).sort().map((v) => `${v}^${m[v]}`).join("*"), { c: t.c, m }); q.t.set([...one.t.keys()][0], [...one.t.values()][0]); }
+    if (!q.isConst()) conds.push(q);
+  };
   const inv = (r: RF): RF => { need(r.n); if (r.n.isZero()) fail("division by zero"); return { n: r.d, d: r.n }; };
   const mul = (a: RF, b: RF): RF => ({ n: a.n.mul(b.n), d: a.d.mul(b.d) });
   const add = (a: RF, b: RF): RF => ({ n: a.n.mul(b.d).add(b.n.mul(a.d)), d: a.d.mul(b.d) });
+  const hasVar = (e: any): boolean => e && typeof e === "object" && (e.kind === "var" || Object.values(e).some((c) => c && typeof c === "object" && hasVar(c)));
   const ipow = (r: RF, k: number): RF => { if (Math.abs(k) > 200) fail("exponent too large"); return k >= 0 ? { n: r.n.pow(k), d: r.d.pow(k) } : (() => { const q = inv(r); return { n: q.n.pow(-k), d: q.d.pow(-k) }; })(); };
   const gen = (base: Poly, mu: Mon, a: bigint): RF => {                      // [base^mu]^a
     const name = `[${base.toString()}^${monStr(mu)}]`; gens.set(name, { base, mu }); const g: RF = { n: Poly.v(name), d: Poly.one() };
@@ -51,7 +59,7 @@ export function build(e: MathExpr): Built {
     const rest = divExact(N, (() => { const q = new Poly(); q.t.set(Object.keys(M ?? {}).sort().map((v) => `${v}^${M![v]}`).join("*"), { c: ONE, m: M ?? {} }); return q; })())!;
     const R = normalise(rest); const c = rest.isConst() ? rest.constVal() : divExact(rest, R) ? divExact(rest, R)!.constVal() : ONE;
     for (const v of Object.keys(M ?? {})) if (M![v] > 0) factors.push([Poly.v(v), M![v]]);
-    if (!R.isConst()) factors.push([R, 1]);
+    if (!R.isConst()) for (const [F, k] of squarefreeDecomposition(R)) factors.push([F, k]);   // (a²+2ab+b²)^E = [(a+b)^E]²
     for (const [B, k] of factors) {
       const nm = B.t.size === 1 && B.t.values().next().value!.c.isOne() && Object.keys(B.t.values().next().value!.m).length === 1 && B.t.values().next().value!.m[B.vars()[0]] === 1 ? B.vars()[0] : null;
       const g0 = nm && nm.startsWith("[") ? { base: parseGenBase(nm, gens), mu: gens.get(nm)!.mu } : null;
@@ -78,8 +86,9 @@ export function build(e: MathExpr): Built {
         const E = rec(x.exp); const base = rec(x.base);
         if (!isFn(E)) fail("an exponent must be a polynomial (no division)");
         const EP = E.n.scale(ONE.div(E.d.constVal()));
-        if (EP.isConst()) { const k = EP.constVal(); if (!k.isInteger()) fail("non-integer exponent"); return ipow(base, Number(k.numBig)); }
+        if (EP.isConst()) { if (hasVar(x.exp)) need(base.n); const k = EP.constVal(); if (!k.isInteger()) fail("non-integer exponent"); return ipow(base, Number(k.numBig)); }
         for (const v of EP.vars()) expSyms.add(v);
+        need(base.n);                    // a power with a symbolic exponent is read as defined only for a non-zero base (the exponent's sign is unknown): the same on every line, as written
         let out = rfC(ONE);
         for (const { a, mu } of monomials(EP)) {
           if (Object.keys(mu).length === 0) { out = mul(out, ipow(base, Number(a))); continue; }
