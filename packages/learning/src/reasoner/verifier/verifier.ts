@@ -211,7 +211,7 @@ export function checkClaim(eq: string, claimed: string[] | "all-except-excluded"
 }
 /** Validate a complete reasoning trace against the ORIGINAL equation text: initial state, every step, and the final claim.
  *  states[0] must be the original equation with all required restrictions; effects[i] describes the step states[i] -> states[i+1]. */
-export function checkTrace(originalText: string, states: StateText[], effects: Effect[], final: { kind: "solution"; value: string } | { kind: "none" } | { kind: "identity" }):
+export function checkTrace(originalText: string, states: StateText[], effects: Effect[], final: { kind: "solution"; value: string } | { kind: "none" } | { kind: "identity" } | { kind: "state" }):
   { valid: boolean; problems: string[] } {
   const problems: string[] = [];
   let O: Analysed; try { O = analyse(originalText); } catch (e) { if (e instanceof Refusal) return { valid: false, problems: [`original unanalysable: ${e.code} ${e.message}`] }; throw e; }
@@ -222,7 +222,8 @@ export function checkTrace(originalText: string, states: StateText[], effects: E
   for (let i = 0; i + 1 < states.length; i++) { const r = checkStep(states[i], states[i + 1], effects[i] ?? "equivalence", originalText); if (!r.valid) problems.push(`step ${i + 1}: ${r.reasons.join(",")}${r.refusal ? " " + r.refusal : ""}`); }
   const truth = solution(O.f, O.required); const lastEx = toVals(states[states.length - 1].excluded);
   if (!sub(O.required, lastEx)) problems.push("final restrictions lose an original restriction");
-  if (final.kind === "identity") { if (truth.kind !== "all") problems.push("claimed identity but the solution set is not all-except-excluded"); }
+  if (final.kind === "state") { /* a goal state, not a claim: the steps and restrictions above are the whole obligation */ }
+  else if (final.kind === "identity") { if (truth.kind !== "all") problems.push("claimed identity but the solution set is not all-except-excluded"); }
   else if (final.kind === "none") { if (!isEmpty(truth)) problems.push("claimed no solution but the solution set is not empty"); }
   else {
     const c = toVals([final.value])[0]; const { l, r } = parseEquation(originalText); const a = evalAt(l, c), b = evalAt(r, c);

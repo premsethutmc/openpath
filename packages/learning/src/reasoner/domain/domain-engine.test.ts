@@ -7,7 +7,7 @@ test("removable singularity: candidate equals an excluded value and is rejected"
 });
 test("unique solution is verified in the original equation", () => {
   const r = solve("3/x=6"); assert.equal(r.class, "unique"); assert.deepEqual(r.solution, ["1/2"]);
-  assert.ok(r.steps.at(-1)!.rule === "domain.accept-candidate");
+  assert.ok(r.steps.at(-1)!.rule === "core.accept-candidate");
 });
 test("restricted identity is not 'all real numbers'", () => {
   const r = solve("1/(x-1)+1/(x+1)=2*x/(x^2-1)"); assert.equal(r.class, "identity-on-domain"); assert.deepEqual(r.restrictions, ["-1", "1"]);

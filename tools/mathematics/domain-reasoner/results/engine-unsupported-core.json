@@ -1,0 +1,32 @@
+{
+ "summary": {
+  "dataset": "unsupported",
+  "stage": "CORE",
+  "label": "core",
+  "sha256": "4301bfe43af1a17a88b28e2e227de181bb43ab08285b6f68841fa2125ec8b0ea",
+  "cases": 112,
+  "correct": 112,
+  "rate": 1,
+  "failuresByCategory": {},
+  "invalidStepsInTraces": 0,
+  "openObligations": 0,
+  "moveVerifyRejected": 0,
+  "movePreconditionRefused": 0,
+  "visited": {
+   "median": 0,
+   "p95": 0,
+   "worst": 0
+  },
+  "pathLength": {
+   "median": 0,
+   "p95": 0,
+   "worst": 0
+  },
+  "ms": {
+   "median": 0.19,
+   "p95": 4.27,
+   "worst": 12.63
+  }
+ },
+ "failures": []
+}
