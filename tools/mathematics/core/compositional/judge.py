@@ -14,7 +14,7 @@ def mk(s): return R.State(s['eq'], tuple(sorted(F(r) for r in s['restr'])))
 res = []
 for r in rows:
     t = tasks[r['id']]
-    base = {'id': r['id'], 'contender': r['contender'], 'family': t['family'], 'goal': t['goal'], 'reachable': t['reachable'], 'ms': r.get('ms'), 'visited': r.get('visited'), 'generated': r.get('generated')}
+    base = {'id': r['id'], 'contender': r['contender'], 'family': t['family'], 'goal': t['goal'], 'reachable': t['reachable'], 'depth': (t.get('props') or {}).get('shortest_len') if t['reachable'] else None, 'ms': r.get('ms'), 'visited': r.get('visited'), 'generated': r.get('generated')}
     if 'error' in r: res.append({**base, 'judged': 'error', 'detail': r['error']}); continue
     if not r['trace'] and not r['self_ok']:
         res.append({**base, 'judged': 'refused', 'why': r.get('why'), 'capped': r.get('capped')}); continue

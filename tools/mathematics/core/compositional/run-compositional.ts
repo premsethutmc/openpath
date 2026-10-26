@@ -17,7 +17,8 @@ if (SET === "tuning" || !existsSync(orderFile)) {
   for (const g of GOALS) { let best = -1, bo = orders[0]; for (const o of orders) { let ok = 0; for (const t of tuning.filter((t) => t.goal === g)) ok += C.runPriority(t.start, new Set(t.allowed), t.goal, o).ok ? 1 : 0; if (ok > best) { best = ok; bo = o; } } bestOrder[g] = bo; }
   if (k === 0) writeFileSync(orderFile, JSON.stringify(bestOrder, null, 1));
 } else Object.assign(bestOrder, JSON.parse(readFileSync(orderFile, "utf8")));
-const tasks = load(SET + ".json").filter((_, i) => i % n === k);
+let tasks = load(SET + ".json").filter((_, i) => i % n === k);
+if (process.env.ONLY) { const ids: string[] = JSON.parse(readFileSync(process.env.ONLY, "utf8")); const byId = new Map(tasks.concat(load(SET + ".json")).map((t) => [t.id, t])); tasks = ids.map((i) => byId.get(i)!); }   // supplemental workers: explicit id list, own output file
 const row = (t: any, name: string, r: any) => JSON.stringify({ id: t.id, contender: name, trace: r.trace, states: r.states, visited: r.visited, generated: r.generated, capped: r.capped, ms: Math.round(r.ms * 10) / 10, why: r.why ?? null, self_ok: r.ok });
 let i = 0; for (const t of tasks) {
   const a = new Set<string>(t.allowed); const lines: string[] = [];
