@@ -8,6 +8,8 @@
 import { evaluateWorking, normalizeLine, type Line, type WorkingEvaluation, type WorkingStep } from "./student.ts";
 import * as V from "../reasoner/verifier/verifier.ts";
 import { Refusal } from "../reasoner/outcomes.ts";
+import { isExactNumberProblem, assessNumberWorking, verifyNumberStep, type NumberAssessment, type NumberOptions } from "./number/index.ts";
+export type { NumberAssessment, NumberOptions };
 
 export type Outcome = "verified" | "invalid" | "ambiguous" | "unsupported" | "incomplete";
 export type Correctness = true | false | null;
@@ -20,11 +22,19 @@ export interface WorkingAssessment {
   steps: { index: number; from: string; to: string; status: WorkingStep["status"]; explanation: string }[];
   causes: string[];                    // candidate misconceptions for the first invalid step: candidates, not findings
   summary: string;
+  /** present when the problem was handled by the exact-number engine: errors, final-answer form and skill demonstration (kept apart from correctness) */
+  number?: NumberAssessment;
 }
 const OUTCOME: Record<WorkingEvaluation["status"], Outcome> = { "valid-complete": "verified", "valid-incomplete": "incomplete", invalid: "invalid", ambiguous: "ambiguous", unsupported: "unsupported" };
 
 /** Assess a whole working (problem + the student's lines). Never throws on bad input: an unreadable problem is `unsupported`. */
-export function assessWorking(problem: string, lines: Line[]): WorkingAssessment {
+export function assessWorking(problem: string, lines: Line[], opts: NumberOptions = {}): WorkingAssessment {
+  if (isExactNumberProblem(problem)) {
+    const a = assessNumberWorking(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)), opts);
+    return { outcome: a.outcome, correct: a.correct, advisory: true, firstInvalidStep: a.firstInvalidStep, invalidAt: a.firstInvalidStep === null ? null : "step",
+      steps: a.steps.map((s) => ({ index: s.index, from: s.from, to: s.to, status: (s.status === "ambiguous" ? "unsupported" : s.status) as WorkingStep["status"], explanation: s.explanation })),
+      causes: a.errors.map((m) => m.label), summary: a.summary, number: a };
+  }
   let e: WorkingEvaluation;
   try { e = evaluateWorking(problem, lines, { route: false, engine: false }); }
   catch (err) { return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: `not assessed: ${err instanceof Refusal ? err.code : "internal error"}` }; }
@@ -39,6 +49,7 @@ export type StepEffect = "equivalence" | "implication" | "invalid-loss" | "inval
 export interface StepVerdict { outcome: "verified" | "invalid" | "unsupported"; effect: StepEffect | null; correct: Correctness; detail: string }
 /** One step, in the context of the ORIGINAL problem. `verified` + effect "implication" means every old solution is kept but candidates were gained (an obligation). */
 export function verifyWorkingStep(problem: string, from: string, to: string): StepVerdict {
+  if (isExactNumberProblem(problem)) { const r = verifyNumberStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? "equivalence" : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }
   try {
     const n = (t: string) => normalizeLine(t, false);   // the same reading of student notation as assessWorking (a/2x is not guessed here: use assessWorking for ambiguity)
     const r = V.relateLines(n(from), n(to), n(problem));
