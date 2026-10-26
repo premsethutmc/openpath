@@ -44,11 +44,11 @@ const GLYPHS: [RegExp, string][] = [[/[−–—]/g, "-"], [/[×·]/g, "*"], [/�
 export function normalizeLine(raw: string, grouping = false): string {
   let s = raw.trim(); for (const [re, to] of GLYPHS) s = s.replace(re, to);
   s = s.replace(/(?<=[\d.)x]) +(?=[\dx(])/g, (m, off, str) => (/\d$/.test(str.slice(0, off)) && /^\d/.test(str.slice(off + m.length)) ? " " : "*")).replace(/ /g, (m, off, str) => (/\d$/.test(str.slice(0, off)) && /^\d/.test(str.slice(off + 1)) ? " " : ""));
-  if (grouping) s = s.replace(/\/(\d+(?:\.\d+)?)x/g, "/($1*x)");
+  if (grouping) { s = s.replace(/\/(\d+(?:\.\d+)?)x/g, "/($1*x)"); s = s.replace(/\/(\d+(?:\.\d+)?)(\((?:[^()]|\([^()]*\))*\))/g, "/($1*$2)"); }
   s = s.replace(/(\d|\))(?=x|\()/g, "$1*").replace(/x(?=\(|\d|x)/g, "x*").replace(/\)(?=\d|x)/g, ")*");
   return s;
 }
-const hasImplicitDivision = (raw: string) => /\/\d+(?:\.\d+)?x/.test(raw.replace(/\s+/g, ""));
+const hasImplicitDivision = (raw: string) => /\/\d+(?:\.\d+)?[x(]/.test(raw.replace(/\s+/g, ""));
 
 // ---------- exact descriptions of solution sets ----------
 const sortR = (xs: Rational[]) => xs.slice().sort((a, b) => (a.lt(b) ? -1 : a.gt(b) ? 1 : 0));
@@ -142,7 +142,8 @@ const lineOf = (l: Line): { eq: string; excluded?: string[] } => (typeof l === "
 function evaluateConvention(problem: string, lines: Line[], grouping: boolean, opts: { route: boolean }): { steps: WorkingStep[]; domain: Rational[]; refusal?: string } {
   const prob = normalizeLine(problem, grouping);
   let domain: Rational[]; try { domain = V.analyse(prob).required; } catch (e) { if (e instanceof Refusal) return { steps: [], domain: [], refusal: `${e.code}: ${e.message}` }; throw e; }
-  const parsed: Parsed[] = [{ raw: problem, text: prob }, ...lines.map((l) => { const x = lineOf(l); return { raw: x.eq, text: normalizeLine(x.eq, grouping), excluded: x.excluded }; })];
+  const stepLines = lines.length && parseClaimLine(lineOf(lines[lines.length - 1]).eq) ? lines.slice(0, -1) : lines;
+  const parsed: Parsed[] = [{ raw: problem, text: prob }, ...stepLines.map((l) => { const x = lineOf(l); return { raw: x.eq, text: normalizeLine(x.eq, grouping), excluded: x.excluded }; })];
   const steps: WorkingStep[] = []; let earlierInvalid = false;
   const excl = (p: Parsed): string[] => p.excluded ?? [...new Set([...domain.map(String), ...V.analyse(p.text).required.map(String)])];
   for (let i = 1; i < parsed.length; i++) {
@@ -188,7 +189,35 @@ function evaluateConvention(problem: string, lines: Line[], grouping: boolean, o
 }
 
 const SOLVED = /^x=(-?[\d./]+)$|^(-?[\d./]+)=x$/;
+/** A last line that states an answer in words or as alternatives rather than being an equation to check: "no solution", "all real numbers [except a, b]", "x=a or x=b". */
+type ClaimLine = { kind: "none" } | { kind: "all"; except: string[] } | { kind: "set"; values: string[] };
+export function parseClaimLine(raw: string): ClaimLine | null {
+  const t = raw.toLowerCase().replace(/[−–—]/g, "-").replace(/\s+/g, " ").trim();
+  if (/^(no solutions?|none|empty set|∅)$/.test(t)) return { kind: "none" };
+  const a = /^(all real numbers|all reals|every real number|any real number|identity)(?: (?:except|but not|excluding|apart from)(?: x ?(?:=|≠|!=))? ?(.*))?$/.exec(t);
+  if (a) { const ex = (a[2] ?? "").split(/,| and | or /).map((v) => v.replace(/^x ?(=|≠|!=) ?/, "").trim()).filter(Boolean); return { kind: "all", except: ex }; }
+  const parts = t.split(/ or |,|;/).map((q) => q.trim()).filter(Boolean);
+  if (parts.length > 1) { const vals = parts.map((q) => SOLVED.exec(q.replace(/\s/g, ""))).map((m) => (m ? m[1] ?? m[2] : null)); if (vals.every((v) => v !== null)) return { kind: "set", values: vals as string[] }; }
+  return null;
+}
+const ratOf = (c: string): Rational | null => { try { return evaluate(parseExpr(c), new Map()); } catch { return null; } };
 function finalClaim(problem: string, lastRaw: string, domain: Rational[], grouping: boolean): WorkingEvaluation["final"] | undefined {
+  const cl = parseClaimLine(lastRaw);
+  if (cl && cl.kind !== "none") {
+    const p = normalizeLine(problem, grouping);
+    if (cl.kind === "all") {
+      const ex = cl.except.map(ratOf); if (ex.some((v) => !v)) return undefined;
+      const sameSet = (a: Rational[], b: Rational[]) => a.length === b.length && a.every((v) => b.some((u) => u.eq(v)));
+      const ident = V.checkClaim(p, "all-except-excluded").valid; const okEx = sameSet(ex as Rational[], domain);
+      const claim = cl.except.length ? `all real numbers except ${cl.except.join(", ")}` : "all real numbers";
+      return { claim, verdict: ident && okEx ? "correct" : "incorrect", explanation: ident ? (okEx ? "every allowed x is a solution" : `every allowed x is a solution, but the excluded values are ${domain.length ? domain.map((d) => `x = ${d}`).join(", ") : "none"}, not as stated`) : "the equation is not true for every allowed x" };
+    }
+    const vals = cl.values.map(ratOf); if (vals.some((v) => !v)) return undefined;
+    const inDomain = (vals as Rational[]).filter((v) => !domain.some((d) => d.eq(v)));
+    const r = V.checkClaim(p, (vals as Rational[]).map(String));
+    const ext = inDomain.length !== vals.length;
+    return { claim: cl.values.map((v) => `x = ${v}`).join(" or "), verdict: r.valid && !ext ? "correct" : "incorrect", explanation: r.valid && !ext ? "these are exactly the solutions" : ext ? "one of the claimed values is excluded by the original domain" : `these are not exactly the solutions${Array.isArray(r.truth) ? `; the solution is ${r.truth.length ? r.truth.map((q) => `x = ${q}`).join(" or ") : "none"}` : ""}` };
+  }
   const t = normalizeLine(lastRaw, grouping).replace(/\s/g, "").toLowerCase();
   if (/^(no ?solution|nosolution|none|empty|∅)$/.test(t)) { const r = V.checkClaim(normalizeLine(problem, grouping), []); return { claim: "no solution", verdict: r.valid ? "correct" : "incorrect", explanation: r.valid ? "the equation indeed has no solution on its domain" : `the equation does have solutions: ${JSON.stringify(r.truth)}` }; }
   const m = SOLVED.exec(t); if (!m) return undefined;
