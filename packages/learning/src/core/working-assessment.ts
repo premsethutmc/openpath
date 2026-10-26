@@ -42,9 +42,15 @@ export interface WorkingAssessment {
 }
 const OUTCOME: Record<WorkingEvaluation["status"], Outcome> = { "valid-complete": "verified", "valid-incomplete": "incomplete", invalid: "invalid", ambiguous: "ambiguous", unsupported: "unsupported" };
 
-/** Assess a whole working (problem + the student's lines). Never throws on bad input: an unreadable problem is `unsupported`. */
+/** Options from untrusted callers: anything that is not a plain object is treated as absent, and a non-list `requiredSkills` is ignored. */
+const cleanOpts = (o: unknown): WorkingOptions => { if (!o || typeof o !== "object") return {}; const w = o as WorkingOptions; return { ...w, requiredSkills: Array.isArray(w.requiredSkills) ? w.requiredSkills.filter((x) => typeof x === "string") : undefined }; };
+const NOT_TEXT: WorkingAssessment = { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "the problem and every line must be text (unsupported, not wrong)" };
+/** Assess a whole working (problem + the student's lines). Never throws on bad input: input that is not text is `unsupported`. */
 export function assessWorking(problem: string, lines: Line[], opts: WorkingOptions = {}): WorkingAssessment {
-  if (typeof problem !== "string" || !Array.isArray(lines) || lines.some((l) => typeof l !== "string" && typeof (l as { eq?: unknown })?.eq !== "string")) return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: the input is not text (unsupported, not wrong)" };
+  let snap: Line[] | null = null;
+  try { if (typeof problem === "string" && Array.isArray(lines)) { const c = lines.map((l) => (typeof l === "string" ? l : { ...l, eq: (l as { eq: string }).eq })); if (c.every((l) => typeof l === "string" || typeof l.eq === "string")) snap = c; } } catch { snap = null; }   // read each line once: a hostile getter is also "not text"
+  if (!snap) return { ...NOT_TEXT, steps: [], causes: [] };
+  lines = snap; opts = cleanOpts(opts);
   if (!inputWithinLimits(problem, lines.map((l) => (typeof l === "string" ? l : l.eq)))) return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: the working exceeds the size limits (unsupported, not wrong)", resourceLimit: true };
   return bounded(() => assessWorkingBounded(problem, lines, opts));
 }
@@ -91,6 +97,8 @@ export type StepEffect = "equivalence" | "implication" | "invalid-loss" | "inval
 export interface StepVerdict { outcome: "verified" | "invalid" | "unsupported"; effect: StepEffect | null; correct: Correctness; detail: string }
 /** One step, in the context of the ORIGINAL problem. `verified` + effect "implication" means every old solution is kept but candidates were gained (an obligation). */
 export function verifyWorkingStep(problem: string, from: string, to: string): StepVerdict {
+  if (typeof problem !== "string" || typeof from !== "string" || typeof to !== "string") return { outcome: "unsupported", effect: null, correct: null, detail: "the problem and both lines must be text (unsupported, not wrong)" };
+  if (ambiguousText(problem) || ambiguousText(from) || ambiguousText(to)) return { outcome: "unsupported", effect: null, correct: null, detail: "the notation can be read in more than one way (e.g. x2, 1/2x): no claim is made; use assessWorking to see it reported as ambiguous" };
   try { return bounded(() => verifyWorkingStepInner(problem, from, to)); }
   catch (e) { if (e instanceof Refusal) return { outcome: "unsupported", effect: null, correct: null, detail: `${e.code === "SEARCH_LIMIT" ? "a computation limit was reached" : e.code} (unsupported, not wrong)` }; throw e; }
 }

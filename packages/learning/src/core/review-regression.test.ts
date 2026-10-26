@@ -63,3 +63,49 @@ test("D11: a single-step check honours the original problem's domain (a restored
   assert.equal(verifyWorkingStep("Simplify x+1", "x+1", "(x+1)(x-2)/(x-2)").outcome, "invalid");     // x != 2 is NOT in the original: still new
   assert.equal(verifyWorkingStep("Simplify a+b", "a+b", "(a+b)(a-2)/(a-2)").outcome, "invalid");
 });
+
+// ── second independent review (commits a8fcd27, b2c035b): confirmed defects and tests that did not exercise their fix ──
+import { setDefaultOps, bounded, budgetUsed, LIMITS } from "./budget.ts";
+import * as V from "../reasoner/verifier/verifier.ts";
+test("R1: ill-typed input never throws from the step API or from options (unsupported)", () => {
+  const bad: unknown[] = [null, undefined, 5, {}, [], true, NaN, () => 1];
+  for (const p of bad) for (const f of bad) for (const t of bad) assert.doesNotThrow(() => { const v = verifyWorkingStep(p as string, f as string, t as string); if (typeof p !== "string" || typeof f !== "string" || typeof t !== "string") assert.equal(v.outcome, "unsupported"); });
+  for (const o of [null, 5, "x", [], { requiredSkills: 5 }, { requiredSkills: "factorise" }, { form: 7 }]) assert.doesNotThrow(() => assessWorking("Expand (x+1)^2", ["x^2+2x+1"], o as never));
+  assert.equal(assessWorking("Expand (x+1)^2", ["x^2+2x+1"], { requiredSkills: 5 } as never).outcome, "verified");      // a bad option is ignored; the working is still decided
+  const hostile = { get eq(): string { throw new Error("boom"); } };
+  assert.equal(assessWorking("Expand (x+1)^2", [hostile as never]).outcome, "unsupported");
+});
+test("R2: declarations: null means no declarations (as undefined), not an unreadable input", () => {
+  const a = assessDerivation({ problem: "Simplify (x^2-1)/(x-1)", lines: ["x+1", "x ≠ 1"], declarations: null as never }), b = assessDerivation({ problem: "Simplify (x^2-1)/(x-1)", lines: ["x+1", "x ≠ 1"] });
+  assert.equal(a.mathematics, "correct"); assert.deepEqual([a.mathematics, a.outstandingObligations], [b.mathematics, b.outstandingObligations]);
+});
+test("R3: the single-step API also refuses to read ambiguous notation (x2) instead of guessing x*2", () => {
+  const v = verifyWorkingStep("Simplify x+x", "x+x", "x2");
+  assert.equal(v.outcome, "unsupported"); assert.match(v.detail, /more than one way/);
+  assert.equal(verifyWorkingStep("Simplify x+x", "x+x", "2x").outcome, "verified");      // the unambiguous spelling is unaffected
+  assert.equal(verifyWorkingStep("Simplify x+x", "x+x", "x^2").outcome, "invalid");
+});
+test("R4 (test strength): one derivation shares ONE budget; a budget that fits a single assessment cannot be spent again per prefix", () => {
+  const P = "Simplify (x^2-1)/(x-1)", L = "(x-1)(x+1)/(x-1)", many = [L, "x+1", "(x+1)", "1+x", "x+1", "x+1", "x+1", "1x+1"];
+  try {
+    setDefaultOps(100_000);
+    const one = assessWorking(P, [L]); assert.equal(one.resourceLimit ?? false, false);
+    const d = assessDerivation({ problem: P, lines: many }); assert.equal(d.resourceLimit, true); assert.equal(d.mathematics, "undetermined");      // fresh budgets per prefix would have decided it
+    setDefaultOps(LIMITS.ops);
+    assert.equal(assessDerivation({ problem: P, lines: many }).mathematics, "correct");      // with the real budget the same working is decided
+  } finally { setDefaultOps(LIMITS.ops); }
+});
+test("R5: NaN/negative size configuration cannot disable the line limit (the derivation guard is defence in depth: assessWorking enforces the same limit independently, so this test does not isolate the guard)", () => {
+  const lines = Array.from({ length: 45 }, () => "x+1");
+  for (const config of [{ maxLines: NaN }, { maxLines: Infinity, maxChars: NaN }, { maxLines: -1 }]) { const d = assessDerivation({ problem: "Simplify x+1", lines, config } as never); assert.equal(d.resourceLimit, true, JSON.stringify(config)); assert.equal(d.mathematics, "undetermined"); }
+});
+test("R6 (test strength): verifier arithmetic is metered by operand SIZE, not only by count (bigger coefficients cost more before the limit trips)", () => {
+  const cost = (c: string) => { try { bounded(() => V.relateLines(`(x+${c})^4*(x+2)=0`, `(x+${c})^4*(x+2)=0`, `(x+${c})^4*(x+2)=0`)); } catch { /* the limit tripping is the point */ } return budgetUsed(); };
+  const small = cost("3"), mid = cost("1000003"), big = cost("99999999999");
+  assert.ok(big > mid && mid > 0 && small > 0, `${small} ${mid} ${big}`);
+});
+test("R7: restoring an irrational restriction the original also has is not 'invalid' (valid in mathematics; the context-free API makes no claim); a genuinely new one is still invalid", () => {
+  const v = verifyWorkingStep("Simplify (x^2-2)/(x^2-2)", "1", "(x^2-2)/(x^2-2)");
+  assert.notEqual(v.outcome, "invalid"); assert.notEqual(v.correct, false);
+  assert.equal(verifyWorkingStep("Simplify x", "x", "x*(x^2-2)/(x^2-2)").outcome, "invalid");      // the original has no such restriction
+});
