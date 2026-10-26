@@ -1308,8 +1308,9 @@ def _dump(path, obj):
 def _code_hash():
     import hashlib
     h = hashlib.sha256()
-    for f in ('refimpl.py', 'gen_r2_sets.py'):
-        h.update(open(os.path.join(HERE, f), 'rb').read())
+    h.update(open(os.path.join(HERE, 'refimpl.py'), 'rb').read())
+    src = open(os.path.join(HERE, 'gen_r2_sets.py')).read()
+    h.update(src.split('def _dump(path, obj):')[0].encode())   # job code only (not assembly / main)
     return h.hexdigest()[:12]
 
 
@@ -1357,7 +1358,15 @@ def main(out_dir=HERE, procs=2, stage='all'):
             t = dict(t)
             t['id'] = f'A-{fam}-{counters[fam]:03d}'
             tasks.append(t)
-        for j, t in enumerate(unreach + unproven):
+        # an unproven task that an independent search (refimpl.bfs) does reach is dropped, not claimed
+        kept_unproven = []
+        for t in unproven:
+            R.clear_caches()
+            st0 = initial_state(t['start'])
+            rr = R.bfs(st0, {o for o in t['allowed'] if o != 'restrict'}, t['goal'], NODE_CAP, 8, orig=st0)
+            if not rr['found']:
+                kept_unproven.append(t)
+        for j, t in enumerate(unreach + kept_unproven):
             t = dict(t)
             t['id'] = f'A-{fam}-U{j + 1:03d}'
             tasks.append(t)

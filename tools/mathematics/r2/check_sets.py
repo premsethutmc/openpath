@@ -264,6 +264,7 @@ def init_worker(p2):
 
 
 def task_worker(t):
+    R.clear_caches()
     out = {'id': t['id'], 'family': t['family'], 'goal': t['goal'], 'reachable': t['reachable']}
     t_start = time.time()
     allowed = set(t['allowed'])
@@ -309,6 +310,7 @@ _POOL = None
 
 
 def _p2_scores(t):
+    R.clear_caches()
     return [int(R.run_priority(t['start'], set(t['allowed']), t['goal'], order)[0]) for order in _POOL]
 
 

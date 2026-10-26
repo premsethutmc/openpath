@@ -1,0 +1,2368 @@
+{
+ "meta": {
+  "generator": "tools/mathematics/r2/gen_r2_sets.py",
+  "node_cap": 20000,
+  "seed": 20260513,
+  "spec": "docs/milestones/R2_ACCEPTANCE_SPEC.md"
+ },
+ "tasks": [
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "combine-terms",
+    "cancel-common-factor",
+    "expand",
+    "add-sub-both-sides",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-001",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "move"
+    ],
+    "shortest_len": 4
+   },
+   "reachable": true,
+   "start": "-3/(x-2)=-3/(x-2)-x",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "expand",
+     "params": {}
+    },
+    {
+     "op": "combine-terms",
+     "params": {
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-002",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "den_both",
+     "scale",
+     "cancel"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "-2*x/((x + 1)*(x + 1)) + 3/((x + 1)*(x + 1)) = x/((x + 1)*(x + 1)) - (x - 2)/((x + 1)*(x + 1)*(x - 2))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "clear-denominators"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-003",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "add_both",
+     "scale",
+     "scale"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x*4.5/(x - 3) - 9/(x - 3) + 4.5 = 4.5*x/(x - 3) + 18/(x - 3) + 4.5",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "expand"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-004",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "den_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "x/((x + 2)*(x + 2)) = 0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "expand",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-005",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "partial",
+     "move",
+     "swap",
+     "split",
+     "cancel",
+     "scale"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "1 - 0.75 - 0.75/x = 0.25 + 0.25*x/((x - 1)*x)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 1,
+      "side": "R"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "expand"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-006",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "group",
+     "cancel",
+     "cancel"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "-2*(-1.5*x + 2.5)*(2*x - 8)*(x*2 + 2)/((2*x - 8)*(2*x + 2)) = 0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "clear-denominators",
+    "expand",
+    "collect-terms",
+    "divide-restricted-factor",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-007",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "swap",
+     "den_both",
+     "swap",
+     "split_frac",
+     "cancel"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "x/(x - 1) - (x + 1)*2/((x - 1)*(x + 1)) - 1/(x - 1) = 0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "expand",
+     "params": {}
+    },
+    {
+     "op": "collect-terms",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-008",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "den_both",
+     "scale"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "-x*2/((x-2)*(x-2))-4/((x-2)*(x-2))=0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "combine-terms",
+     "params": {
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "move-to-left",
+    "expand",
+    "collect-terms",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-009",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "swap",
+     "add_both",
+     "split",
+     "swap"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "-2*x + 2 + 3 + 2*x = 2*x",
+   "witness": [
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "collect-terms",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "cancel-common-factor",
+    "clear-denominators",
+    "mul-div-const",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-010",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "cancel"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "(2*x - 1)*x/(2*x - 1) = 0.5*(x - 2)/(x - 2)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "R"
+     }
+    },
+    {
+     "op": "accept-candidate",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "clear-denominators",
+    "divide-restricted-factor",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-011",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "cancel",
+     "den_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "x/(x - 3) - 5/(x - 3) - 2/((x - 4)*(x - 3)) = -2*(x*2 - 6)/((x - 4)*(2*x - 6)*(x - 3))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "collect-terms"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-012",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "group",
+     "cancel",
+     "swap",
+     "cancel",
+     "add_both",
+     "move"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "-(2*x+4)*x/(2*x+4)=3*(1/3*x+4/3)*(x+2)/(x+2)-4/x+4/x",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-013",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "-x*(x - 1)/(x - 1) + 4 - 5*x = -5*x",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "5*x"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-014",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "scale"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "16*x/(x + 2) + 16/(x + 2) = 8*x/(x + 2) - 12/(x + 2)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "clear-denominators",
+    "expand"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-015",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "swap",
+     "swap",
+     "move",
+     "cancel",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "4*x*x/(x*x) = x*x/x",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "cancel-common-factor",
+    "clear-denominators",
+    "expand",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-016",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "split",
+     "add_both",
+     "cancel",
+     "shuffle",
+     "scale"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "2+x*(4/3)-(2*x+2)*(10/3)/((x+1)*(2*x+2))-8/3=-10/3/(x+1)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-017",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "den_both",
+     "shuffle"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x/((x - 2)*(x + 1)) = 0.5/((x - 2)*(x + 1))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "expand",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-018",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "den_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "x*3/((x + 3)*(x + 1)) - 1/((x + 3)*(x + 1)) = 0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "expand",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "cancel-common-factor",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-019",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "den_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "2*x/(x - 4) + 5*(x + 1)/((x + 1)*(x - 4)) = 0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "combine-terms",
+     "params": {
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-020",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "scale",
+     "cancel",
+     "scale"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "2/3/((x + 3)*(x + 1)) + x/((x - 1)*(x + 3)) = (x + 3)/((x + 3)*(x + 3))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "R"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "cancel-common-factor",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-021",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "add_both",
+     "add_both",
+     "cancel",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "1/(x - 4) + x*(2*x - 8)/((x*2 - 8)*(x + 3)) + 3*x + 3/(x - 4) + 4*(x - 4)/(x - 4) = 1 + 3*x + 3/(x - 4) + 4",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "combine-terms",
+     "params": {
+      "side": "L"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "-(x + 3 + 0.5*x*(2*x - 8) + 3*x*(x + 3)*(x - 4) + 3*(x + 3) + 4*(x - 4)*(x + 3))/((x + 3)*(x - 4))"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-022",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "move",
+     "scale",
+     "add_both",
+     "scale",
+     "shuffle"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "30*x/x + 45/(x + 3) + 15/(x - 2) - 30 - 12/(x - 2) = 15/(x - 2) - 12/(x - 2)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "combine-terms",
+    "clear-denominators",
+    "collect-terms"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-023",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "scale",
+     "shuffle",
+     "add_both",
+     "add_both",
+     "split",
+     "add_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "-2*(x + 2)/(x - 3) + 2*x + 1 - 1/(x - 3) = -2*x + x*4 + 1 - 1/(x - 3)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "add-sub-both-sides",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-024",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "den_both"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "4*x/(x+2)+4/(x+2)=2*x*(2*x-6)/((2*x-6)*(x+2))-3/(x+2)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "cancel-common-factor",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-025",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "shuffle",
+     "shuffle",
+     "add_both"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x-4-2*x=-2*x",
+   "witness": [
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "2*x"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "collect-terms",
+    "add-sub-both-sides",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-026",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "add_both",
+     "move",
+     "cancel",
+     "swap"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "3*x - 1 + x*3 - 3*x = -(x*2 - 8)*(x - 4)/((x*2 - 8)*(x - 4)) + 3*x",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "R"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "-3*x"
+     }
+    },
+    {
+     "op": "collect-terms",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "cancel-common-factor",
+    "clear-denominators",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-027",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "scale",
+     "cancel",
+     "add_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "(x - 3)*(0.25*(x*3 - 1))/((x - 3)*(x - 3)) + 2/(x + 2) = 2/(x + 2)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "collect-terms",
+    "add-sub-both-sides",
+    "mul-div-const"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-028",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "cancel",
+     "cancel"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x + 4 + (x - 2)/(x - 2) = -x*(x - 3)/(x - 3) + 1",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-029",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "cancel"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x = (2*x + 6)*(0.5*(x + 3))/((x*2 + 6)*(x + 3))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "R"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-030",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "scale",
+     "add_both",
+     "swap",
+     "split",
+     "split_frac",
+     "den_both"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "9/(x - 2) + 5/(x*(x - 2)) = 6*x/(x - 2) + 6/(x - 2) - 12/(x - 2) + 4/(x*(x - 2)) + 1/(x*(x - 2))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "add-sub-both-sides",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-031",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "den_both",
+     "shuffle",
+     "scale",
+     "den_both",
+     "add_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "x*6*(x + 2)/((x + 2)*((x + 2)*(x - 2))*(x - 2)) - 3/(x + 2) = -3/(x + 2)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "3/(x + 2)"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "clear-denominators",
+    "expand",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "CLEARED",
+   "id": "T-032",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "add_both",
+     "move",
+     "move",
+     "scale"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "6*x - 10 + x*2 + 8/(x - 1) - 2*x - x*4 = 8/(x - 1)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "cancel-common-factor",
+    "clear-denominators"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-033",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "move",
+     "swap"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "x + 4 - x*(2*x - 4)/(2*x - 4) = 3",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "combine-terms",
+     "params": {
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "clear-denominators",
+    "expand",
+    "mul-div-const"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-034",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "group",
+     "shuffle",
+     "swap",
+     "den_both"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "0 = -(x + 1)*2/(x + 3)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "expand",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "expand",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-035",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "scale",
+     "add_both",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "0.5*(3*x + 5)/(x + 3) - (x + 1)/((x + 1)*(x + 3)) = -1/(x + 3)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 1,
+      "side": "L"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "1/(x + 3)"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "expand",
+    "divide-restricted-factor",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "ONE_FRACTION_ZERO",
+   "id": "T-036",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "shuffle",
+     "den_both",
+     "cancel"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "(x-3)*(2*x+4)/((x-2)*(x-2)*(x*2+4)) = 0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "cancel-common-factor",
+    "expand",
+    "add-sub-both-sides",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-037",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "shuffle",
+     "swap",
+     "scale",
+     "scale"
+    ],
+    "shortest_len": 4
+   },
+   "reachable": true,
+   "start": "-27*(x - 4)/(x - 4) = 9*x",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "27"
+     }
+    },
+    {
+     "op": "mul-div-const",
+     "params": {
+      "c": "-1/9"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "cancel-common-factor",
+    "collect-terms",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-038",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "cancel",
+     "split_frac"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "2*(x+1)/(x*(x+1))+3*x/x=4*x/(2*x+2)+4/(2*x+2)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "combine-terms",
+     "params": {
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "clear-denominators",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-039",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "cancel",
+     "den_both"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "x*(x + 3)/((x + 3)*(x + 3)) = -(x + 3)*2.5/((x + 3)*(x + 3))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "divide-restricted-factor",
+     "params": {
+      "a": "-3"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "clear-denominators",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-040",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "den_both",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "2/(x*((x + 3)*(x - 3))) + x*4/(x*(x*(x - 3))) = (x + 3)/((x + 3)*(x*(x - 3)))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 1,
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "R"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "cancel-common-factor",
+    "expand",
+    "collect-terms",
+    "mul-div-const"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-041",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "swap",
+     "cancel"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "4*x/x = -2*x - 4 + 4",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    },
+    {
+     "op": "collect-terms",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "add-sub-both-sides",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-042",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "shuffle",
+     "split"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x*(x + 2)/(x*(x + 2)) + 1/(x + 2) = 1 + 2",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "clear-denominators",
+    "collect-terms",
+    "add-sub-both-sides",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-043",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "scale",
+     "add_both"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "1.5*x/(x+3)-x*3=3/(x+3)-3*x",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "3*x*(x + 3)"
+     }
+    },
+    {
+     "op": "mul-div-const",
+     "params": {
+      "c": "2/3"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "move-to-left",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "EXPANDED_POLY",
+   "id": "T-044",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "scale",
+     "move"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "-10 = 4*x",
+   "witness": [
+    {
+     "op": "move-to-left",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "cancel-common-factor",
+    "clear-denominators",
+    "add-sub-both-sides",
+    "mul-div-const",
+    "divide-restricted-factor",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-045",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "swap",
+     "den_both",
+     "scale",
+     "den_both"
+    ],
+    "shortest_len": 4
+   },
+   "reachable": true,
+   "start": "-0.25/((x - 3)*(x - 3)) = 0.25*x/((x - 3)*(x - 3))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "0.25"
+     }
+    },
+    {
+     "op": "mul-div-const",
+     "params": {
+      "c": "-4"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "clear-denominators",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-046",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "add_both",
+     "scale",
+     "den_both",
+     "den_both"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "-x/((x + 1)*((x - 4)*(x - 4))) - 3/((x + 1)*((x - 4)*(x - 4))) = 1/((x - 4)*(x - 4)*(x + 1)) - 3/((x - 4)*(x - 4)*(x + 1))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "divide-restricted-factor",
+     "params": {
+      "a": "-1"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "cancel-common-factor",
+    "clear-denominators",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-047",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "cancel",
+     "split",
+     "cancel"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "(x - 2)*x/(x - 2) + 4 = 3 - 4 + (2*x - 4)*4/(2*x - 4)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 2,
+      "side": "R"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "-4"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "cancel-common-factor",
+    "mul-div-const"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-048",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "shuffle"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x*x/x=-3",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "expand",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-049",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "den_both",
+     "shuffle",
+     "den_both",
+     "cancel",
+     "scale"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "5*x*x/((x+3)*(x+3)*x)=-x*20/((x+3)*(x*(x+3)))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "mul-div-const",
+     "params": {
+      "c": "1/5"
+     }
+    },
+    {
+     "op": "divide-restricted-factor",
+     "params": {
+      "a": "0"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "move-to-left",
+    "combine-terms",
+    "cancel-common-factor",
+    "mul-div-const"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-050",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "den_both",
+     "cancel",
+     "partial"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "1 + 3/(x - 3) = (2*x - 6)*3/((x - 3)*(x*2 - 6))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "combine-terms",
+     "params": {
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "collect-terms",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-051",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "shuffle",
+     "cancel"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "(x+3)*x/(x+3) = -2.5",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "move-to-left",
+    "add-sub-both-sides",
+    "mul-div-const"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-052",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "scale",
+     "scale",
+     "scale",
+     "swap"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "-1.875 = 0.625*x",
+   "witness": [
+    {
+     "op": "move-to-left",
+     "params": {}
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "1.875"
+     }
+    },
+    {
+     "op": "mul-div-const",
+     "params": {
+      "c": "-8/5"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "clear-denominators",
+    "add-sub-both-sides",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-053",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "shuffle"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "3/(x + 1) + x = 3 + 3/(x + 1)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "-3"
+     }
+    },
+    {
+     "op": "divide-restricted-factor",
+     "params": {
+      "a": "-1"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "REDUCED",
+   "id": "T-054",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "split",
+     "add_both",
+     "split",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "2/(x - 2) + 3*x/x + 3 = 4 + 4 - (x - 2)*7/(x - 2) + 3",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 1,
+      "side": "L"
+     }
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 2,
+      "side": "R"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "clear-denominators",
+    "add-sub-both-sides",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-055",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "cancel",
+     "shuffle",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "(2*x + 4)*(x*(x*2 + 4))*(x - 4)/((2*x + 4)*(x*2 + 4)*(x - 4)) = 4",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    },
+    {
+     "op": "accept-candidate",
+     "params": {}
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "collect-terms",
+    "add-sub-both-sides",
+    "accept-candidate"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-056",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "split",
+     "shuffle",
+     "shuffle",
+     "den_both",
+     "add_both"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "1.5*x/(x - 1) - 0.5*x/(x - 1) + 4/(x - 1) = -4/(x - 1) + 4/(x - 1)",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "collect-terms",
+     "params": {}
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "-4"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "clear-denominators",
+    "expand",
+    "add-sub-both-sides",
+    "mul-div-const",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-057",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "shuffle",
+     "den_both",
+     "scale",
+     "scale"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "2*x/(x + 2) = 0",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "clear-denominators",
+     "params": {}
+    },
+    {
+     "op": "expand",
+     "params": {}
+    },
+    {
+     "op": "mul-div-const",
+     "params": {
+      "c": "1/2"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "combine-terms",
+    "cancel-common-factor",
+    "add-sub-both-sides"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-058",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "add_both",
+     "cancel"
+    ],
+    "shortest_len": 2
+   },
+   "reachable": true,
+   "start": "x - 3/(x + 3) = -1 - 3*(2*x + 4)/((x*2 + 4)*(x + 3))",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 1,
+      "side": "R"
+     }
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "3/(x + 3)"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-059",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "shuffle"
+    ],
+    "shortest_len": 1
+   },
+   "reachable": true,
+   "start": "x*(x+2)/(x+2)=-2.5",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "L"
+     }
+    }
+   ]
+  },
+  {
+   "allowed": [
+    "restrict",
+    "cancel-common-factor",
+    "clear-denominators",
+    "expand",
+    "add-sub-both-sides",
+    "divide-restricted-factor"
+   ],
+   "family": "tuning",
+   "goal": "SOLVE",
+   "id": "T-060",
+   "notes": "tuning task (used only to choose P2 orders)",
+   "props": {
+    "scramble": [
+     "cancel",
+     "cancel",
+     "add_both",
+     "group"
+    ],
+    "shortest_len": 3
+   },
+   "reachable": true,
+   "start": "-(-x + 1)*1 = -x*3*(x - 1)/((x - 1)*x) - 1",
+   "witness": [
+    {
+     "op": "restrict",
+     "params": {}
+    },
+    {
+     "op": "cancel-common-factor",
+     "params": {
+      "idx": 0,
+      "side": "R"
+     }
+    },
+    {
+     "op": "expand",
+     "params": {}
+    },
+    {
+     "op": "add-sub-both-sides",
+     "params": {
+      "term": "1"
+     }
+    }
+   ]
+  }
+ ]
+}
