@@ -32,7 +32,7 @@ function lex(s: string): Tok[] {
   out.push({ k: "end", v: "", sp });
   return out;
 }
-const lit = (raw: string): Node => {
+const lit = (raw: string): Extract<Node, { t: "num" }> => {
   const [a, b = ""] = raw.split(".");
   return { t: "num", q: q(BigInt((a || "0") + b), 10n ** BigInt(b.length)), dec: b.length > 0, raw };
 };

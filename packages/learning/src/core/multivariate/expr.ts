@@ -68,8 +68,8 @@ export function build(e: MathExpr): Built {
     if (!c.eq(ONE)) {
       const sign = c.lt(Rational.zero) ? -1n : 1n; if (sign < 0n) out = mul(out, gen(Poly.const(new Rational(-1)), mu, a));
       const pn = primeFactors(c.numBig), pd = primeFactors(c.denBig); if (!pn || !pd) fail("constant too large for a symbolic power");
-      for (const [p, e] of pn) out = mul(out, gen(Poly.const(new Rational(p)), mu, a * BigInt(e)));
-      for (const [p, e] of pd) out = mul(out, gen(Poly.const(new Rational(p)), mu, -a * BigInt(e)));
+      for (const [p, e] of pn!) out = mul(out, gen(Poly.const(new Rational(p)), mu, a * BigInt(e)));
+      for (const [p, e] of pd!) out = mul(out, gen(Poly.const(new Rational(p)), mu, -a * BigInt(e)));
     }
     return out;
   }

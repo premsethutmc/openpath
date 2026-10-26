@@ -146,5 +146,5 @@ function assessDerivationInner(input: DerivationInput): DerivationResult {
     objective: { formAchieved, equivalentToTarget: eqTarget, skillsDemonstrated: sub?.skills.demonstrated ?? [], skillsMissing: sub?.skills.missing ?? [] },
     completeness: { complete: mathematics === "correct" && gaps.length === 0, gaps },
     alternativeRouteSteps: hasRef ? own.filter((t) => (t.status === "valid" || t.status === "valid-with-obligation") && t.matchesReference === false).map((t) => t.index) : [],
-    causes: full.causes, laterLinesDoNotRepair: !(firstInvalid !== null && mathematics === "correct"), resourceLimit: full.resourceLimit === true, summary, advisory: true };
+    causes: full.causes, laterLinesDoNotRepair: !(firstInvalid !== null && mathematics === "correct"), resourceLimit: false, summary, advisory: true };   // a tripped limit returned early above
 }

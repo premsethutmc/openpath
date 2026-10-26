@@ -157,7 +157,7 @@ export function assessSymbolicWorking(problemText: string, lines: string[], opts
     const ref = prevOk ? prevText : probText;
     // each side is compared with its neighbour (a chain A = B = C claims every equality), the first side with the previous line
     const pairs: [string, string][] = [[ref, sides[0]], ...sides.slice(0, -1).map((s, j) => [s, sides[j + 1]] as [string, string])];
-    let worst: { rel: SymRelation; a: string; b: string } | null = null; let widened: Rational[] = []; let irrW = false; let narrowed: { r: Rational[]; irr: boolean } | null = null;
+    let worst: { rel: SymRelation; a: string; b: string } | null = null; let widened: Rational[] = []; let irrW = false; let narrowed = null as { r: Rational[]; irr: boolean } | null;
     for (const [a, b] of pairs) {
       const rel = guard(() => relateSymbolic(a, b));
       if ("refusal" in rel) { push("unsupported", `cannot be checked exactly (${rel.refusal})`); prevOk = false; prevText = sides[sides.length - 1]; prevShow = raw; return; }

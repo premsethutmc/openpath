@@ -94,9 +94,9 @@ const OPS: Op[] = [
     return withEq(c, { left: Expr.div(c.eq.left, lin(rr)), right: Expr.div(c.eq.right, lin(rr)) }, `divide both sides by (${printExpr(lin(rr))})`, a); } },
 ];
 const BASES: Record<Spec["outcome"], (r: () => number, spec: Spec) => Cand> = {
-  unique: (r, s) => { const v = new Rational(BigInt(s.solution ?? String(nz(r, -12, 12)))); return { eq: { left: X, right: Q(v) }, excluded: [], solution: v, kind: "unique", recipe: [`start from x = ${v}`], extraneous: false }; },
-  none: (r) => { const a = nz(r, -9, 9); let b = nz(r, -9, 9); if (b === a) b += 1; return { eq: { left: Q(a), right: Q(b) }, excluded: [], solution: null, kind: "none", recipe: [`start from the contradiction ${a} = ${b}`], extraneous: false }; },
-  "identity-on-domain": (r) => { const a = nz(r, -9, 9); return { eq: { left: Q(a), right: Q(a) }, excluded: [], solution: null, kind: "identity-on-domain", recipe: [`start from the identity ${a} = ${a}`], extraneous: false }; },
+  unique: (r: () => number, s: Spec) => { const v = new Rational(BigInt(s.solution ?? String(nz(r, -12, 12)))); return { eq: { left: X, right: Q(v) }, excluded: [], solution: v, kind: "unique", recipe: [`start from x = ${v}`], extraneous: false }; },
+  none: (r: () => number) => { const a = nz(r, -9, 9); let b = nz(r, -9, 9); if (b === a) b += 1; return { eq: { left: Q(a), right: Q(b) }, excluded: [], solution: null, kind: "none", recipe: [`start from the contradiction ${a} = ${b}`], extraneous: false }; },
+  "identity-on-domain": (r: () => number) => { const a = nz(r, -9, 9); return { eq: { left: Q(a), right: Q(a) }, excluded: [], solution: null, kind: "identity-on-domain", recipe: [`start from the identity ${a} = ${a}`], extraneous: false }; },
 } as never;
 const baseOf = (s: Spec): ((r: () => number, spec: Spec) => Cand) => (s.outcome === "none" ? BASES.none : BASES[s.outcome]);
 
