@@ -223,6 +223,8 @@ export function verifyMultivariateStep(problemText: string, from: string, to: st
   const a = A.text.split("=").pop()!.trim(), b = B.text.split("=")[0].trim(); const r = guard(() => relateMv(a, b)); if ("refusal" in r) return no(`cannot be checked exactly (${r.refusal})`);
   if (r.relation === "undecided") return { ...no("equality could not be decided exactly"), relation: "undecided" };
   if (r.relation === "not-identity") return { outcome: "invalid", correct: false, effect: "invalid", relation: "not-identity", detail: `differs at ${ptText(r.witness.differ)}${r.witness.agree ? `; equal only at particular values such as ${ptText(r.witness.agree)}` : ""}`, errors: causes(parseMv(a), b) };
-  if (!r.added.isConst()) return { outcome: "invalid", correct: false, effect: "invalid", relation: "identity", detail: `adds a restriction (${r.added} ≠ 0) the previous line did not have`, errors: [] };
+  // a restriction the new line adds is only being RESTORED when the original problem already excludes it
+  const pb0 = guard(() => build(parseMv(P.text))); const orig = "refusal" in pb0 ? null : domainPoly(pb0);
+  if (!r.added.isConst() && !(orig && lost(r.added, orig).isConst())) return { outcome: "invalid", correct: false, effect: "invalid", relation: "identity", detail: `adds a restriction (${r.added} ≠ 0) the previous line did not have and the original expression did not exclude`, errors: [] };
   return { outcome: "verified", correct: true, effect: r.dropped.isConst() ? "equivalence" : "implication", relation: "identity", detail: r.dropped.isConst() ? "identity on the same domain" : `identity, but the previous line is undefined where ${r.dropped} = 0: keep that restriction`, errors: [] };
 }

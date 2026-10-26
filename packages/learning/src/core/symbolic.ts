@@ -217,7 +217,10 @@ export function verifySymbolicStep(problemText: string, from: string, to: string
   const A = readLine(from, P.v), B = readLine(to, P.v); if ("err" in A || "err" in B || !A.text || !B.text) return no("a line cannot be read as one-variable algebra");
   const r = guard(() => relateSymbolic(A.text.split("=").pop()!.trim(), B.text.split("=")[0].trim())); if ("refusal" in r) return no(`cannot be checked exactly (${r.refusal})`);
   if (r.relation !== "identity") return { outcome: "invalid", correct: false, effect: "invalid", relation: r.relation, detail: r.relation === "at-values" ? `equal only at ${where(r.agreeAt)}, not an identity` : "not equal for any x", errors: nameCauses(A.text.split("=").pop()!.trim(), B.text.split("=")[0].trim()) };
-  if (r.added.length || r.addedIrrational) return { outcome: "invalid", correct: false, effect: "invalid", relation: "identity", detail: "adds a restriction the previous line did not have", errors: [] };
+  // a restriction the new line adds is only being RESTORED when the original problem already excludes it
+  const pa0 = guard(() => V.analyseExpression(normalizeLine(renameVar(P.text, P.v), false))); const orig0 = "refusal" in pa0 ? null : guard(() => V.restrictionsOf(pa0.cond).rats);
+  const restored = orig0 !== null && Array.isArray(orig0) && !r.addedIrrational && r.added.every((x) => orig0.some((o) => o.eq(x)));
+  if ((r.added.length || r.addedIrrational) && !restored) return { outcome: "invalid", correct: false, effect: "invalid", relation: "identity", detail: "adds a restriction the previous line did not have and the original expression did not exclude", errors: [] };
   const w = r.dropped.length || r.droppedIrrational;
   return { outcome: "verified", correct: true, effect: w ? "implication" : "equivalence", relation: "identity", detail: w ? `identity, but the previous line is undefined at x = ${showRats(r.dropped).join(", ")}${r.droppedIrrational ? " and some irrational values" : ""}: keep that restriction` : "identity on the same domain", errors: [] };
 }

@@ -56,3 +56,10 @@ test("D10 residual / D12 residual: x2 is ambiguous; ill-typed input is unsupport
   assert.equal(assessDerivation({ problem: "Expand (x+1)^2", lines: [null as unknown as string] }).mathematics, "undetermined");
   assert.equal(assessDerivation({ problem: "Expand (x+1)^2", lines: ["x^2+2x+1"], config: { maxLines: NaN } }).mathematics, "correct");
 });
+import { verifyWorkingStep } from "./working-assessment.ts";
+test("D11: a single-step check honours the original problem's domain (a restored restriction is not new)", () => {
+  assert.equal(verifyWorkingStep("Simplify (x^2-1)/(x-1)", "x+1", "(x+1)(x-1)/(x-1)").outcome, "verified");
+  assert.equal(verifyWorkingStep("Simplify (a^2-b^2)/(a-b)", "a+b", "(a+b)(a-b)/(a-b)").outcome, "verified");
+  assert.equal(verifyWorkingStep("Simplify x+1", "x+1", "(x+1)(x-2)/(x-2)").outcome, "invalid");     // x != 2 is NOT in the original: still new
+  assert.equal(verifyWorkingStep("Simplify a+b", "a+b", "(a+b)(a-2)/(a-2)").outcome, "invalid");
+});
