@@ -12,11 +12,13 @@ export type Expected =
   | { kind: "mixed"; q: Q }                       // simplest mixed form required
   | { kind: "dec"; q: Q }
   | { kind: "ratio"; a: bigint; b: bigint }
-  | { kind: "tuple"; items: string[] };            // an ordered list of the prompt's own fraction tokens, as the app writes it "(a, b, c)"
+  | { kind: "tuple"; items: string[] }
+  | { kind: "surd"; v: Q };                        // the positive square root of v, written √A/B (or exactly rational when v is a rational square)            // an ordered list of the prompt's own fraction tokens, as the app writes it "(a, b, c)"
 export interface Step { id: string; op: string; inputs: (number | string)[]; value: unknown }
 export interface FamilyExact {
   id: string;
-  expected(prompt: string): Expected | null;
+  /** `figure` is the picture/table shown with the question (learner-visible data), when the prompt refers to one. */
+  expected(prompt: string, figure?: any): Expected | null;
   /** null = steps are consistent; a string = the first false claim. Absent: only the final answer is checked. */
   steps?(prompt: string, steps: Step[], exp: Expected): string | null;
 }

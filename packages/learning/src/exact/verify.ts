@@ -10,15 +10,23 @@
  */
 import { pool, problemOf, FAMILIES } from "../families.ts";
 import { question, isCorrect } from "../content.ts";
-import { parseAnswer, add, q, fmtFrac, fmtMixed, eq, type Q } from "./rational.ts";
+import { parseAnswer, add, q, fmtFrac, fmtMixed, eq, gcdB, type Q } from "./rational.ts";
 import type { FamilyExact, Expected } from "./number-families.ts";
 
 export interface Failure { id: string; check: "A" | "B" | "C" | "D"; why: string }
 export interface Report { family: string; checked: number; failures: Failure[]; stepsChecked: boolean; mcChecked: number; ms: number }
 
-const qOf = (e: Expected): Q | null => (e.kind === "ratio" || e.kind === "tuple" ? null : e.q);
+const qOf = (e: Expected): Q | null => (e.kind === "ratio" || e.kind === "tuple" || e.kind === "surd" ? null : e.q);
+/** √(n/d) in simplest surd form: k√m/d' with m squarefree, or a rational when n/d is a rational square. */
+export function surdString(x: Q): string {
+  const N = x.n * x.d; let k = 1n, m = N;
+  for (let f = 2n; f * f <= m; f++) while (m % (f * f) === 0n) { m /= f * f; k *= f; }
+  const g = gcdB(k, x.d); const c = k / g, d = x.d / g;
+  if (m === 1n) return d === 1n ? `${c}` : `${c}/${d}`;
+  return `${c === 1n ? "" : c}√${m}${d === 1n ? "" : "/" + d}`;
+}
 const show = (e: Expected): string =>
-  e.kind === "tuple" ? `(${e.items.join(", ")})` : e.kind === "ratio" ? `${e.a}:${e.b}` : e.kind === "mixed" ? fmtMixed(e.q) : e.kind === "int" ? `${e.q.n}` : e.kind === "dec" ? decimalString(e.q) : fmtFrac(e.q);
+  e.kind === "surd" ? surdString(e.v) : e.kind === "tuple" ? `(${e.items.join(", ")})` : e.kind === "ratio" ? `${e.a}:${e.b}` : e.kind === "mixed" ? fmtMixed(e.q) : e.kind === "int" ? `${e.q.n}` : e.kind === "dec" ? decimalString(e.q) : fmtFrac(e.q);
 function decimalString(v: Q): string { // the exact terminating decimal, "" if it does not terminate within 12 places
   if (v.d === 1n) return `${v.n}`;
   for (let p = 1; p <= 12; p++) {
@@ -30,7 +38,14 @@ function decimalString(v: Q): string { // the exact terminating decimal, "" if i
   }
   return "";
 }
+const mul2 = (a: Q, b: Q) => q(a.n * b.n, a.d * b.d);
 const sameShown = (stored: string, e: Expected): string | null => {
+  if (e.kind === "surd") {
+    const m = stored.match(/^(\d+)?√(\d+)(?:\/(\d+))?$/); const r = m ? null : parseAnswer(stored);
+    const val = m ? q(BigInt(m[1] ?? 1) ** 2n * BigInt(m[2]), BigInt(m[3] ?? 1) ** 2n) : r ? mul2(r, r) : null;
+    if (!val || !eq(val, e.v)) return `stored ${stored} does not square to ${fmtFrac(e.v)}`;
+    return stored === show(e) ? null : `stored ${stored} is not the simplest surd form ${show(e)}`;
+  }
   if (e.kind === "tuple") return stored === show(e) ? null : `stored ${stored} ≠ ${show(e)}`;
   if (e.kind === "ratio") return stored === `${e.a}:${e.b}` ? null : `stored ${stored} ≠ ${e.a}:${e.b}`;
   const got = parseAnswer(stored); const want = e.q;
@@ -41,6 +56,7 @@ const sameShown = (stored: string, e: Expected): string | null => {
 };
 /** Responses the app must reject: exact near misses, built from the exact answer. */
 function wrongOnes(e: Expected, stored: string): string[] {
+  if (e.kind === "surd") { const m = stored.match(/^(.*?√)(\d+)(?:\/(\d+))?$/); return m ? [`${m[1]}${BigInt(m[2]) + 1n}${m[3] ? "/" + m[3] : ""}`, `${m[1]}${m[2]}/${BigInt(m[3] ?? 1) + 1n}`] : []; }
   if (e.kind === "tuple") { const it = e.items; return [it.slice().reverse(), ...it.slice(1).map((_, i) => { const c = it.slice(); [c[i], c[i + 1]] = [c[i + 1], c[i]]; return c; })].map((c) => `(${c.join(", ")})`).filter((x) => x !== stored); }
   if (e.kind === "ratio") return [`${e.a + 1n}:${e.b}`, `${e.a}:${e.b + 1n}`, `${e.b}:${e.a}`].filter((x) => x !== stored);
   const v = (e as { q: Q }).q;
@@ -53,11 +69,12 @@ function wrongOnes(e: Expected, stored: string): string[] {
   if (e.kind === "mixed" && v.d !== 1n) out.push(`${v.n}/${v.d}`);               // improper form: the question asks for the simplest mixed form
   return out.filter((x) => x !== stored);
 }
-export interface Item { id: string; prompt: string; answer: string; type: string; params: number[] }
+export interface Item { id: string; prompt: string; answer: string; type: string; params: number[]; figure?: unknown }
 /** All checks for one question; `steps` overrides the family's own worked steps (used by the mutation tests). */
 export function checkItem(fx: FamilyExact, p: Item, steps?: unknown[]): { failures: Failure[]; mc: boolean; steps: boolean } {
   const failures: Failure[] = []; let mc = false, stepsRan = false;
-  const e = fx.expected(p.prompt);
+  let e: Expected | null = null;
+  try { e = fx.expected(p.prompt, p.figure); } catch { e = null; }   // a question the checker cannot even read is a failure, never a pass
   if (!e) return { failures: [{ id: p.id, check: "A", why: "prompt not understood by the independent checker" }], mc, steps: stepsRan };
   const bad = sameShown(p.answer, e);
   if (bad) failures.push({ id: p.id, check: "A", why: bad });
@@ -73,14 +90,15 @@ export function checkItem(fx: FamilyExact, p: Item, steps?: unknown[]): { failur
       const m = problemOf(`${p.id}:mc`);
       if (m?.options) {
         mc = true;
-        const right = m.options.filter((o) => (e.kind === "tuple" ? o === show(e) : e.kind === "ratio" ? o === `${e.a}:${e.b}` : e.kind === "mixed" ? o === fmtMixed(e.q) : (() => { const v = parseAnswer(o); return !!v && eq(v, qOf(e)!); })()));
+        const right = m.options.filter((o) => (e.kind === "tuple" || e.kind === "surd" ? o === show(e) : e.kind === "ratio" ? o === `${e.a}:${e.b}` : e.kind === "mixed" ? o === fmtMixed(e.q) : (() => { const v = parseAnswer(o); return !!v && eq(v, qOf(e)!); })()));
         if (right.length !== 1) failures.push({ id: `${p.id}:mc`, check: "C", why: `${right.length} options equal the exact answer (${m.options.join(" | ")})` });
       }
     }
   }
   if (fx.steps) {
     stepsRan = true;
-    const why = fx.steps(p.prompt, (steps ?? FAMILIES.get(fx.id)!.solve(p.params).steps) as any, e);
+    let why: string | null;
+    try { why = fx.steps(p.prompt, (steps ?? FAMILIES.get(fx.id)!.solve(p.params).steps) as any, e); } catch { why = "steps unreadable"; }
     if (why) failures.push({ id: p.id, check: "D", why });
   }
   return { failures, mc, steps: stepsRan };
