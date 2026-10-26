@@ -61,9 +61,11 @@ function readLine(raw: string, v: string): Line | { err: string } {
   let depth = 0, cur = ""; const segs: string[] = [];
   for (const ch of s0.replace(/\b(?:and|for|where|when|provided|if|with)\b/gi, ",")) { if (ch === "(") depth++; if (ch === ")") depth--; if (depth === 0 && (ch === "," || ch === ";")) { segs.push(cur); cur = ""; } else cur += ch; }
   segs.push(cur);
+  let sawRestriction = false;
   for (const sg of segs.map((x) => x.trim()).filter(Boolean)) {
     const m = /^\(?\s*(.+?)\s*(?:≠|!=|=\/=)\s*(.+?)\s*\)?$/.exec(sg);
-    if (!m) { exprs.push(sg); continue; }
+    if (!m) { if (sawRestriction) return { err: "something follows a restriction that is not itself a restriction (a shorthand list such as 'x ≠ 1, 2' is not read)" }; exprs.push(sg); continue; }
+    sawRestriction = true;
     try { const r = V.solutionOf(`${normalizeLine(m[1], false)}=${normalizeLine(m[2], false)}`).sol; if (r.kind === "all") return { err: "a restriction that excludes every value" }; if (r.irr.length > 1) return { err: "a restriction with irrational excluded values cannot be stated as x ≠ a" }; stated.push(...r.rats); } catch (e) { if (e instanceof Refusal) return { err: `a restriction cannot be read (${e.message})` }; throw e; }
   }
   if (exprs.length > 1) return { err: "more than one expression on a line" };
@@ -159,7 +161,7 @@ export function assessSymbolicWorking(problemText: string, lines: string[], opts
       const rel = guard(() => relateSymbolic(a, b));
       if ("refusal" in rel) { push("unsupported", `cannot be checked exactly (${rel.refusal})`); prevOk = false; prevText = sides[sides.length - 1]; prevShow = raw; return; }
       if (rel.relation !== "identity") { worst = { rel, a, b }; break; }
-      widened = widened.concat(rel.dropped); irrW ||= rel.droppedIrrational; if (rel.added.length || rel.addedIrrational) narrowed = { r: rel.added, irr: rel.addedIrrational };
+      widened = widened.concat(rel.dropped); irrW ||= rel.droppedIrrational; if (rel.added.length || rel.addedIrrational) narrowed = { r: [...(narrowed?.r ?? []), ...rel.added], irr: (narrowed?.irr ?? false) || rel.addedIrrational };
     }
     const last = sides[sides.length - 1];
     if (worst) {

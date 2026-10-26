@@ -18,3 +18,4 @@ export function inputWithinLimits(problem: string, lines: string[]): boolean {
 /** Runs `f` inside a budget scope. The OUTERMOST scope resets the budget; nested calls share it. Outside any scope `spend` is a no-op, so a direct call to an
  *  inner function can never inherit an exhausted budget. The tripped flag stays readable until the next outermost scope starts. */
 export function bounded<T>(f: () => T): T { if (depth === 0) resetBudget(); depth++; try { return f(); } finally { depth--; } }
+export function budgetUsed(): number { return used; }

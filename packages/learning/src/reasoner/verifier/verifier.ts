@@ -73,19 +73,21 @@ function constInt(n: N): number | null { const v = constVal(n); if (!v || !v.isI
 type P = Rational[];
 const trim = (p: P): P => { let n = p.length; while (n > 0 && p[n - 1].isZero()) n--; return p.slice(0, n); };
 const deg = (p: P) => p.length - 1;
-const padd = (a: P, b: P): P => { const o: P = []; for (let i = 0; i < Math.max(a.length, b.length); i++) o.push((a[i] ?? Z).add(b[i] ?? Z)); return trim(o); };
+const padd = (a: P, b: P): P => { spend(16 * Math.max(a.length, b.length) + 1); const o: P = []; for (let i = 0; i < Math.max(a.length, b.length); i++) o.push((a[i] ?? Z).add(b[i] ?? Z)); return trim(o); };
 const pneg = (a: P): P => a.map((v) => v.neg());
 const psub = (a: P, b: P) => padd(a, pneg(b));
-const pmul = (a: P, b: P): P => { spend(a.length * b.length + 1); if (!a.length || !b.length) return []; const o: P = new Array(a.length + b.length - 1).fill(Z); a.forEach((u, i) => b.forEach((v, j) => { o[i + j] = o[i + j].add(u.mul(v)); })); return trim(o); };
+const pmul = (a: P, b: P): P => { spend(32 * a.length * b.length + 1); if (!a.length || !b.length) return []; const o: P = new Array(a.length + b.length - 1).fill(Z); a.forEach((u, i) => b.forEach((v, j) => { o[i + j] = o[i + j].add(u.mul(v)); })); return trim(o); };
 const ppow = (a: P, k: number): P => { let r: P = [ONE]; for (let i = 0; i < k; i++) r = pmul(r, a); return r; };
 const pscale = (a: P, k: Rational): P => trim(a.map((v) => v.mul(k)));
 const pdivmod = (a: P, b: P): { q: P; r: P } => { let r = a; const q: P = new Array(Math.max(0, a.length - b.length + 1)).fill(Z);
-  while (r.length >= b.length && r.length) { const k = r[r.length - 1].div(b[b.length - 1]), d = r.length - b.length; q[d] = k; r = psub(r, pmul(new Array(d).fill(Z).concat([k]), b)); } return { q: trim(q), r }; };
+  while (r.length >= b.length && r.length) { spend(8 * r.length + 1); const k = r[r.length - 1].div(b[b.length - 1]), d = r.length - b.length; q[d] = k; r = psub(r, pmul(new Array(d).fill(Z).concat([k]), b)); } return { q: trim(q), r }; };
 const gcdB = (a: bigint, b: bigint): bigint => { a = a < 0n ? -a : a; b = b < 0n ? -b : b; while (b) [a, b] = [b, a % b]; return a; };
 /** Integer primitive part with positive leading coefficient: the normal form used for gcds and comparisons. */
 function prim(p: P): P { if (!p.length) return p; let l = 1n; for (const c of p) l = (l * c.denBig) / gcdB(l, c.denBig);
   const ints = p.map((c) => (c.numBig * l) / c.denBig); let g = 0n; for (const v of ints) g = gcdB(g, v); if (p[p.length - 1].numBig < 0n) g = -g;
   return ints.map((v) => new Rational(v / g)); }
+/** both parts have integer coefficients with a common integer factor greater than 1 (e.g. (3x+6)/(3x+9)): not in lowest terms. Skipped when a coefficient is not an integer. */
+function commonNumericContent(a: P, b: P): boolean { const c = (p: P): bigint | null => { let g = 0n; for (const v of p) { if (v.denBig !== 1n) return null; g = gcdB(g, v.numBig); } return g === 0n ? null : g; }; const x = c(a), y = c(b); return x !== null && y !== null && gcdB(x, y) > 1n; }
 function pgcd(a: P, b: P): P { a = prim(a); b = prim(b); while (b.length) { const r = pdivmod(a, b).r; a = b; b = prim(r); } return a; }
 const pderiv = (a: P): P => trim(a.slice(1).map((v, i) => v.mul(new Rational(i + 1))));
 function pexact(a: P, b: P): P | null { const { q, r } = pdivmod(a, b); return r.length ? null : q; }
@@ -98,7 +100,7 @@ function rationalFactor(p: P): { roots: Rational[]; rest: P } {
   if (q.length <= 1) return { roots, rest: q };
   const ip = prim(q); const c0 = ip[0].numBig < 0n ? -ip[0].numBig : ip[0].numBig, an = ip[ip.length - 1].numBig;
   if (c0 > 10n ** 15n || an > 10n ** 15n) throw new Refusal("DOMAIN_UNRESOLVED", "coefficients too large for exact root search");
-  const divs = (n: bigint): bigint[] => { const o: bigint[] = []; for (let d = 1n; d * d <= n; d++) if (n % d === 0n) { o.push(d); if (d * d !== n) o.push(n / d); } return o; };
+  const divs = (n: bigint): bigint[] => { const o: bigint[] = []; for (let d = 1n; d * d <= n; d++) if (spend(1), true) if (n % d === 0n) { o.push(d); if (d * d !== n) o.push(n / d); } return o; };
   const A = divs(c0), B = divs(an); if (A.length * B.length > 200000) throw new Refusal("DOMAIN_UNRESOLVED", "too many rational-root candidates");
   const cands = new Map<string, Rational>(); for (const a of A) for (const b of B) { for (const s of [1n, -1n]) { const r = new Rational(s * a, b); cands.set(r.toString(), r); } }
   for (const r of [...cands.values()].sort((u, v) => (u.lt(v) ? -1 : u.gt(v) ? 1 : 0))) {
@@ -402,7 +404,7 @@ export function formFacts(text: string): FormFacts {
   // lowest terms: strip a leading minus, then either a single fraction of two fraction-free polynomial expressions, or a fraction-free expression
   const frFree = (n: N): boolean => n.t === "num" || n.t === "x" || (n.t === "neg" && frFree(n.a)) || (n.t === "bin" && n.op !== "/" && frFree(n.a) && frFree(n.b)) || (n.t === "bin" && n.op === "/" && noX(n.b) && frFree(n.a)) || (n.t === "pow" && frFree(n.a) && noX(n.e) && (constInt(n.e) ?? -1) >= 0);
   let top: N = tree; while (top.t === "neg") top = top.a;
-  const lowestTerms = frFree(tree) || (top.t === "bin" && top.op === "/" && frFree(top.a) && frFree(top.b) && hasX(top.b) && pgcd(build(top.a, []).n, build(top.b, []).n).length <= 1);
+  const lowestTerms = frFree(tree) || (top.t === "bin" && top.op === "/" && frFree(top.a) && frFree(top.b) && hasX(top.b) && pgcd(build(top.a, []).n, build(top.b, []).n).length <= 1 && !commonNumericContent(build(top.a, []).n, build(top.b, []).n));
   // factorised completely: a single product of a constant and primitive irreducible factors (each possibly to a positive power)
   let factorisedCompletely = false;
   if (addTerms(tree).length === 1) {

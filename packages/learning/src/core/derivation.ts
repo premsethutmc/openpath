@@ -59,12 +59,15 @@ export interface DerivationResult {
   summary: string; advisory: true;
 }
 
+/** a lost restriction at irrational values cannot be written as x ≠ a, so it stays open and visible */
+const IRR = "restriction at irrational values (cannot be stated as x ≠ a)";
 const norm = (s: string) => s.replace(/\s+/g, "").toLowerCase();
 const DEF = { maxLines: 40, maxChars: 400 };
 
 export function assessDerivation(input: DerivationInput): DerivationResult {
   const cfg = { ...DEF, ...(input.config ?? {}) };
   const decl = input.declarations ?? [];
+  const badDecl = decl.some((d) => !/(?:≠|!=|=\/=)/.test(d));
   const lines = [...decl, ...input.lines];
   const base = (extra: Partial<DerivationResult>): DerivationResult => ({
     mathematics: "undetermined", conditionality: "n/a", firstInvalidStep: null, firstUnsupportedStep: null, invalidAt: null, transitions: [], obligations: [], outstandingObligations: [],
@@ -72,8 +75,12 @@ export function assessDerivation(input: DerivationInput): DerivationResult {
     completeness: { complete: false, gaps: [] }, alternativeRouteSteps: [], causes: [], laterLinesDoNotRepair: true, resourceLimit: false, summary: "", advisory: true, ...extra });
   if (lines.length > cfg.maxLines || input.problem.length > cfg.maxChars || lines.some((l) => l.length > cfg.maxChars))
     return base({ resourceLimit: true, summary: "not assessed: the working exceeds the size limits (unsupported, not wrong)" });
+  if (badDecl) return base({ summary: "not assessed: a declaration is not a restriction (expected a form such as x ≠ 1)" });
+  const restrictionOnly = (l: string) => l.split(/,|;|\b(?:and|for|where|when|provided|if|with)\b/i).map((x) => x.trim()).filter(Boolean).every((x) => /(?:≠|!=|=\/=)/.test(x));
+  if (input.lines.every(restrictionOnly)) return base({ summary: "not assessed: no expression line to assess" });
   const opts: WorkingOptions = { form: input.objective?.form, requiredSkills: input.objective?.requiredSkills, requireDomain: cfg.requireDomain };
   const full = assessWorking(input.problem, lines, opts);
+  if (full.resourceLimit) return base({ resourceLimit: true, summary: "not assessed: a computation limit was reached (unsupported, not wrong)" });
   const sub = (full.symbolic ?? full.multivariate) as { steps: { status: string }[]; domain: { missing: string[]; stated: string[]; narrowed: string[] }; final: { form: string }; skills: { demonstrated: string[]; missing: string[] } } | undefined;
   // declarations are not student steps: a restriction-only line is "no-change" in the engines; keep the indices of the student's own lines
   const off = decl.length;
@@ -81,8 +88,10 @@ export function assessDerivation(input: DerivationInput): DerivationResult {
   const missingAfter: string[][] = []; const statedAfter: string[][] = [];
   for (let k = 1; k <= lines.length; k++) {
     const a = k === lines.length ? full : assessWorking(input.problem, lines.slice(0, k), opts);
-    const d = (a.symbolic ?? a.multivariate)?.domain;
-    missingAfter.push(d?.missing ?? []); statedAfter.push(d?.stated ?? []);
+    const d = (a.symbolic ?? a.multivariate)?.domain as { missing: string[]; stated: string[]; irrationalLost?: boolean; status?: string } | undefined;
+    // a prefix without domain information (an invalid or unreadable step) must not forgive an open obligation: keep the previous state
+    if (!d || d.status === "n/a") { missingAfter.push(missingAfter[k - 2] ?? []); statedAfter.push(statedAfter[k - 2] ?? []); continue; }
+    missingAfter.push([...d.missing, ...(d.irrationalLost ? [IRR] : [])]); statedAfter.push(d.stated);
   }
   const trans: Transition[] = []; const ledger: Obligation[] = []; let prevMissing: string[] = []; let prevStated: string[] = [];
   const refSet = new Set((input.objective?.referenceRoute ?? []).map(norm));
@@ -131,5 +140,5 @@ export function assessDerivation(input: DerivationInput): DerivationResult {
     objective: { formAchieved, equivalentToTarget: eqTarget, skillsDemonstrated: sub?.skills.demonstrated ?? [], skillsMissing: sub?.skills.missing ?? [] },
     completeness: { complete: mathematics === "correct" && gaps.length === 0, gaps },
     alternativeRouteSteps: hasRef ? own.filter((t) => (t.status === "valid" || t.status === "valid-with-obligation") && t.matchesReference === false).map((t) => t.index) : [],
-    causes: full.causes, laterLinesDoNotRepair: !(firstInvalid !== null && mathematics === "correct"), resourceLimit: false, summary, advisory: true };
+    causes: full.causes, laterLinesDoNotRepair: !(firstInvalid !== null && mathematics === "correct"), resourceLimit: full.resourceLimit === true, summary, advisory: true };
 }

@@ -41,20 +41,27 @@ export function readMvProblem(raw: string, allowSingle = false): MvProblem | nul
 }
 export const isMvProblem = (raw: string): boolean => readMvProblem(raw) !== null;
 interface Stated { text: string; q: Poly }
-interface Line { expr: string; text: string; stated: Stated[]; ambiguous: boolean }
+interface Line { expr: string; text: string; stated: Stated[]; ambiguous: boolean; shorthand?: boolean }
 const splitTop = (s: string): string[] => { const out: string[] = []; let d = 0, cur = ""; for (const ch of s) { if (ch === "(") d++; if (ch === ")") d--; if (d === 0 && (ch === "," || ch === ";")) { out.push(cur); cur = ""; } else cur += ch; } out.push(cur); return out; };
 function readLine(raw: string, allowed: Set<string>): Line | { err: string } {
   const body = raw.replace(FILLER, ",");
   if (/[a-zA-Z]{4,}/.test(body)) return { err: "contains a word, not algebra" };
-  const segs = splitTop(body).map((x) => x.trim()).filter(Boolean); const stated: Stated[] = []; const exprs: string[] = [];
+  // a short word next to algebra ("... ok", "ans x^2") is text, not the product of two letters: refuse the line rather than read it as o*k
+  const toks = body.trim().split(/\s+/); const opEnd = /[=≠!+\-−*×·/÷^(,;]$/, opStart = /^[=≠!+\-−*×·/÷^),;]/;
+  if (toks.length >= 2 && toks.some((t, i) => /^[A-Za-z]{2,}$/.test(t) && ((i > 0 && !opEnd.test(toks[i - 1]) && !opStart.test(t)) || (i < toks.length - 1 && !opStart.test(toks[i + 1]) && !opEnd.test(t))))) return { err: "contains a word, not algebra" };
+  const segs = splitTop(body).map((x) => x.trim()).filter(Boolean); const stated: Stated[] = []; const exprs: string[] = []; let sawRestriction = false;
   for (const sg of segs) {
     const m = /^\(?\s*(.+?)\s*(?:≠|!=|=\/=)\s*(.+?)\s*\)?$/.exec(sg);
     if (m) { try { const a = build(parseMv(m[1])), b = build(parseMv(m[2])); const q = normalise(a.rf.n.mul(b.rf.d).sub(b.rf.n.mul(a.rf.d))); stated.push({ text: `${m[1].trim()} ≠ ${m[2].trim()}`, q }); } catch (e) { if (e instanceof Refusal) return { err: `a restriction cannot be read (${e.message})` }; throw e; } }
-    else exprs.push(sg);
+    else { if (sawRestriction) return { err: "something follows a restriction that is not itself a restriction (a shorthand list such as 'x ≠ 1, 2' is not read)" }; exprs.push(sg); }
+    if (m) sawRestriction = true;
   }
+  // "x, y ≠ 0" / "a, c ≠ 0": a bare letter before a restriction on OTHER letters may be a list of restrictions, not an expression: not decided
+  // "x, y ≠ 0": a bare letter before a restriction on OTHER letters is read as an expression; if that is then not equal to the previous line the line could instead be a shorthand list of restrictions, so it is `ambiguous`, never `invalid`
+  const shorthand = exprs.length === 1 && stated.length > 0 && /^[A-Za-z]$/.test(exprs[0]) && stated.every((st) => !new RegExp(exprs[0]).test(st.text));
   if (exprs.length > 1) return { err: "more than one expression on a line" };
   const expr = exprs[0] ?? ""; void allowed;     // a letter that is not in the problem is allowed: it makes the line a different expression, which the exact comparison then decides
-  return { expr, text: expr, stated, ambiguous: ambiguousText(expr) };
+  return { expr, text: expr, stated, ambiguous: ambiguousText(expr), shorthand };
 }
 const ambiguousText = (expr: string): boolean => { const g = expr.replace(/[−–—]/g, "-").replace(/[÷∕⁄]/g, "/").replace(/\s+/g, ""); return /\/\d+(?:\.\d+)?[a-zA-Z(]/.test(g) || /[a-zA-Z0-9)]\/[a-zA-Z]\(|\/[a-zA-Z][a-zA-Z]/.test(g); };
 const guard = <T,>(f: () => T): T | { refusal: string } => { try { return f(); } catch (e) { if (e instanceof Refusal) return { refusal: `${e.code}: ${e.message}` }; throw e; } };
@@ -70,6 +77,8 @@ const divCount = (e: MathExpr): number => (e.kind === "div" ? 1 + divCount(e.lef
 const poly = (e: MathExpr): { n: Poly; ok: boolean } => { const r = build(e).rf; return { n: r.n, ok: r.d.isConst() }; };
 const key = (e: MathExpr): string => { try { const r = build(e).rf; if (r.d.isConst()) return normalise(r.n).toString(); } catch { /* fall through */ } return printExpr(e); };
 const sqRat = (c: Rational): boolean => { const f = (n: bigint) => { const x = BigInt(Math.round(Math.sqrt(Number(n < 0n ? -n : n)))); return x * x === (n < 0n ? -n : n); }; return f(c.numBig) && f(c.denBig); };
+/** both polynomials have integer coefficients with a common integer factor greater than 1 (not in lowest terms); skipped when a coefficient is not an integer */
+function numericContentCommon(a: Poly, b: Poly): boolean { const g2 = (x: bigint, y: bigint): bigint => { x = x < 0n ? -x : x; y = y < 0n ? -y : y; while (y) [x, y] = [y, x % y]; return x; }; const c = (p: Poly): bigint | null => { let g = 0n; for (const e of p.t.values()) { if (e.c.denBig !== 1n) return null; g = g2(g, e.c.numBig); } return g === 0n ? null : g; }; const x = c(a), y = c(b); return x !== null && y !== null && g2(x, y) > 1n; }
 export interface MvFacts { expandedShape: boolean; collected: boolean; factorisedCompletely: boolean | null; lowestTerms: boolean; powersCombined: boolean; rational: boolean }
 export function mvFacts(e: MathExpr): MvFacts {
   const terms = T.terms(e); const mons = terms.map((t) => { const r = build(t.t).rf; return r.d.isConst() && r.n.t.size === 1 ? [...r.n.t.keys()][0] : null; });
@@ -82,7 +91,7 @@ export function mvFacts(e: MathExpr): MvFacts {
   };
   walk(e);
   const tl = strip(e); let lowestTerms = true;
-  if (divCount(e) > 0) { if (tl.kind === "div" && divCount(tl.left) === 0 && divCount(tl.right) === 0) { const a = poly(tl.left), b = poly(tl.right); lowestTerms = a.ok && b.ok && gcd(a.n, b.n).isConst(); } else lowestTerms = false; }
+  if (divCount(e) > 0) { if (tl.kind === "div" && divCount(tl.left) === 0 && divCount(tl.right) === 0) { const a = poly(tl.left), b = poly(tl.right); lowestTerms = a.ok && b.ok && gcd(a.n, b.n).isConst() && !numericContentCommon(a.n, b.n); } else lowestTerms = false; }
   const rational = rest(e, (x) => x.kind === "div" && !build(x.right).rf.n.isConst());
   let fact: boolean | null = true;
   if (rational) fact = false; else { let nonConst = 0;
@@ -157,7 +166,7 @@ export function assessMultivariateWorking(problemText: string, lines: string[], 
       if (r.relation === "undecided") { push("unsupported", "the normal forms differ but no exact point separates them, so equality could not be decided", "undecided"); prevOk = false; prevText = last; prevShow = raw; return; }
       if (r.relation === "not-identity") {
         const cl = a === ref ? "the previous line" : a; const ag = r.witness.agree;
-        push("invalid", `not an identity: ${b} differs from ${cl} at ${ptText(r.witness.differ)}${ag ? `; they agree only at particular values such as ${ptText(ag)}` : ""}`, "not-identity", causes(parseMv(a), b), ag);
+        push(L.shorthand ? "ambiguous" : "invalid", `${L.shorthand ? "(this line may be a list of restrictions rather than an expression) " : ""}not an identity: ${b} differs from ${cl} at ${ptText(r.witness.differ)}${ag ? `; they agree only at particular values such as ${ptText(ag)}` : ""}`, "not-identity", causes(parseMv(a), b), ag);
         prevText = last; prevShow = raw; prevOk = false; return;
       }
       dropped = dropped.mul(r.dropped); added = added.mul(r.added);

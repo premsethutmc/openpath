@@ -49,7 +49,7 @@ export function assessWorking(problem: string, lines: Line[], opts: WorkingOptio
 function assessWorkingBounded(problem: string, lines: Line[], opts: WorkingOptions): WorkingAssessment {
   let r: WorkingAssessment;
   try { r = assessWorkingInner(problem, lines, opts); }
-  catch (e) { if (e instanceof Refusal && e.code === "SEARCH_LIMIT") return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: a computation limit was reached (unsupported, not wrong)", resourceLimit: true }; throw e; }
+  catch (e) { if (e instanceof Refusal) return { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: e.code === "SEARCH_LIMIT" ? "not assessed: a computation limit was reached (unsupported, not wrong)" : `not assessed: ${e.code} (unsupported, not wrong)`, ...(e.code === "SEARCH_LIMIT" ? { resourceLimit: true } : {}) }; throw e; }
   // if the limit was hit anywhere (even inside a check that swallows refusals, e.g. the form or skill check), nothing from this run is trusted
   return budgetTripped() ? { outcome: "unsupported", correct: null, advisory: true, firstInvalidStep: null, invalidAt: null, steps: [], causes: [], summary: "not assessed: a computation limit was reached (unsupported, not wrong)", resourceLimit: true } : r;
 }
@@ -89,7 +89,7 @@ export interface StepVerdict { outcome: "verified" | "invalid" | "unsupported"; 
 /** One step, in the context of the ORIGINAL problem. `verified` + effect "implication" means every old solution is kept but candidates were gained (an obligation). */
 export function verifyWorkingStep(problem: string, from: string, to: string): StepVerdict {
   try { return bounded(() => verifyWorkingStepInner(problem, from, to)); }
-  catch (e) { if (e instanceof Refusal && e.code === "SEARCH_LIMIT") return { outcome: "unsupported", effect: null, correct: null, detail: "a computation limit was reached (unsupported, not wrong)" }; throw e; }
+  catch (e) { if (e instanceof Refusal) return { outcome: "unsupported", effect: null, correct: null, detail: `${e.code === "SEARCH_LIMIT" ? "a computation limit was reached" : e.code} (unsupported, not wrong)` }; throw e; }
 }
 function verifyWorkingStepInner(problem: string, from: string, to: string): StepVerdict {
   if (isExactNumberProblem(problem)) { const r = verifyNumberStep(problem, from, to); return { outcome: r.outcome, effect: r.outcome === "verified" ? "equivalence" : r.outcome === "invalid" ? "invalid" : null, correct: r.correct, detail: r.detail + (r.errors.length ? ` (possible cause: ${r.errors.map((e) => e.label).join("; ")})` : "") }; }
