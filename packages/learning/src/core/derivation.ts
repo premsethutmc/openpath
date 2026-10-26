@@ -8,6 +8,7 @@
 //     restrictions mentioned), which is reported separately and never changes the validity verdict.
 // Advisory only: this module never produces a mark. A written answer is marked by an educator.
 import { assessWorking, verifyWorkingStep, type WorkingOptions } from "./working-assessment.ts";
+import { bounded, budgetTripped } from "./budget.ts";
 
 export type TransitionStatus = "valid" | "valid-with-obligation" | "no-change" | "invalid" | "unsupported";
 export interface Transition {
@@ -64,7 +65,11 @@ const IRR = "restriction at irrational values (cannot be stated as x ≠ a)";
 const norm = (s: string) => s.replace(/\s+/g, "").toLowerCase();
 const DEF = { maxLines: 40, maxChars: 400 };
 
+/** One shared budget (4 assessments' worth) for the whole derivation, so cost cannot multiply by the number of lines; if it trips, nothing from this run is trusted. */
 export function assessDerivation(input: DerivationInput): DerivationResult {
+  return bounded(() => { const r = assessDerivationInner(input); return budgetTripped() ? { ...r, mathematics: "undetermined" as const, conditionality: "n/a" as const, firstInvalidStep: null, firstUnsupportedStep: null, invalidAt: null, transitions: [], obligations: [], outstandingObligations: [], resourceLimit: true, summary: "not assessed: a computation limit was reached (unsupported, not wrong)", completeness: { complete: false, gaps: [] }, laterLinesDoNotRepair: true } : r; }, 4);
+}
+function assessDerivationInner(input: DerivationInput): DerivationResult {
   const cfg = { ...DEF, ...(input.config ?? {}) };
   const decl = input.declarations ?? [];
   const badDecl = decl.some((d) => !/(?:≠|!=|=\/=)/.test(d));

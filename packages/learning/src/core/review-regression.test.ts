@@ -37,3 +37,14 @@ test("D10: ambiguous problem or line text never gets a definite verdict", () => 
   for (const [p, l] of [["Simplify 1/2x", ["x/2"]], ["Simplify 1/2x", ["1/(2x)"]], ["Simplify 6/2(1+2)", ["9"]], ["Simplify 1/(x(x+1))", ["1/x(x+1)"]], ["Simplify 1/((x+1)(x+2))", ["1/(x+1)(x+2)"]]] as [string, string[]][]) { const a = A(p, l); assert.equal(a.outcome, "ambiguous", `${p} ${l}`); assert.equal(a.correct, null); }
   assert.equal(A("Simplify 1/(2x)", ["1/(2*x)"]).outcome, "verified");     // bracketed: unambiguous
 });
+import { assessDerivation } from "./derivation.ts";
+test("D15: coefficient blow-up in a two-letter gcd refuses quickly instead of running for minutes / gigabytes", () => {
+  const t = performance.now();
+  const a = A("((2x^2 - xy - y^2)(x^2 + y^2 + 1))/((2x^2 - xy - y^2)(x^2 - x*y - 2y^2))", ["((x^2 + y^2 + 1))/((x^8 - x*y - 2y^2))"]);
+  assert.ok(["unsupported", "invalid"].includes(a.outcome), a.outcome); assert.ok(performance.now() - t < 5000);
+});
+test("D3: a derivation shares one budget, so cost cannot multiply by the number of lines", () => {
+  const poly = "-2x^4 - 2x^3y - 3x^2y + x^2 + 2xy^3 - 4xy^2 + 4xy + 2y^4 - 5y^3 + 9y^2 - 8y + 6"; const t = performance.now();
+  const r = assessDerivation({ problem: `Factorise ${poly}`, lines: Array(40).fill(poly) });
+  assert.equal(r.resourceLimit, true); assert.equal(r.mathematics, "undetermined"); assert.ok(performance.now() - t < 8000);
+});

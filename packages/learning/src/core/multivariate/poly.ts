@@ -1,4 +1,4 @@
-import { spend } from "../budget.ts";
+import { spend, tripLimit } from "../budget.ts";
 import { Refusal } from "../../reasoner/outcomes.ts";
 // Sparse multivariate polynomials over Q (kernel Rational, BigInt inside) with exact division, GCD, squarefree part and irreducibility
 // certificates. Variables are strings. Nothing here samples or uses floats.
@@ -11,6 +11,9 @@ interface Term { c: Rational; m: Mon }
 const mkey = (m: Mon): string => Object.keys(m).filter((v) => m[v] > 0).sort().map((v) => `${v}^${m[v]}`).join("*");
 const clean = (m: Mon): Mon => { const o: Mon = {}; for (const v of Object.keys(m)) if (m[v] > 0) o[v] = m[v]; return o; };
 
+/** coefficient-size limit: gcd-style computations can blow coefficients up without bound; refuse (unsupported) instead of running for minutes */
+const MAX_BITS = 2048n;
+function bigCheck(c: Rational): void { const n = c.numBig < 0n ? -c.numBig : c.numBig; if (n >> MAX_BITS !== 0n || c.denBig >> MAX_BITS !== 0n) tripLimit("coefficient too large"); }
 export class Poly {
   readonly t: Map<string, Term>;
   constructor(t: Map<string, Term> = new Map()) { this.t = t; }
@@ -24,7 +27,7 @@ export class Poly {
   vars(): string[] { spend(this.t.size + 1); const s = new Set<string>(); for (const { m } of this.t.values()) for (const v of Object.keys(m)) s.add(v); return [...s].sort(); }
   deg(v: string): number { let d = 0; for (const { m } of this.t.values()) d = Math.max(d, m[v] ?? 0); return d; }
   totalDeg(): number { spend(this.t.size + 1); let d = 0; for (const { m } of this.t.values()) d = Math.max(d, Object.values(m).reduce((a, b) => a + b, 0)); return d; }
-  private add1(c: Rational, m: Mon) { const k = mkey(m); const e = this.t.get(k); if (!e) { if (!c.isZero()) this.t.set(k, { c, m: clean(m) }); } else { const n = e.c.add(c); if (n.isZero()) this.t.delete(k); else e.c = n; } }
+  private add1(c: Rational, m: Mon) { bigCheck(c); const k = mkey(m); const e = this.t.get(k); if (!e) { if (!c.isZero()) this.t.set(k, { c, m: clean(m) }); } else { const n = e.c.add(c); if (n.isZero()) this.t.delete(k); else e.c = n; } }
   add(o: Poly): Poly { spend(this.t.size + o.t.size + 1); const r = new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c, m: e.m }]))); for (const e of o.t.values()) r.add1(e.c, e.m); return r; }
   neg(): Poly { spend(this.t.size + 1); return new Poly(new Map([...this.t].map(([k, e]) => [k, { c: e.c.neg(), m: e.m }]))); }
   sub(o: Poly) { return this.add(o.neg()); }
