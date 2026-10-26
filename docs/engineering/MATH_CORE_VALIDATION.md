@@ -12,7 +12,7 @@ Scope: the symbolic / multivariate / symbolic-exponent engines, the derivation h
 
 | Gate | Result (denominators are actual counts) |
 |---|---|
-| Full suite `bun test packages/learning` | **763 pass, 0 fail** (30 files; 725 at the start of the cycle) |
+| Full suite `bun test packages/learning` | **770 pass, 0 fail** (30 files; 725 at the start of the cycle, 763 at `b2c035b`) |
 | Oracle, seed 1 / 2 / 3: valid cases | 1000/1000, 1000/1000, 1000/1000 agree; 0 false rejections |
 | Oracle: invalid cases | 966/1000, 960/1000, 970/1000 agree; **0 false acceptances**; rest not decided by the engine (refused whole case 33/34/25, step unsupported 1/6/5): counted separately, never as agreement |
 | Oracle: domain-sensitive | 527/527, 524/524, 526/526 agree (0 disagreements) |
@@ -105,6 +105,21 @@ A power with a symbolic exponent is read as defined only for a non-zero base (th
 | Low-medium | Pre-existing, outside this PR: the legacy equation evaluator judges 216 of 2,884 frozen transitions valid where the oracle says invalid (identical to the 0cb80a4 baseline; family `divide-by-expression-no-restriction`). Not changed here; it is advisory and educator-controlled. |
 | Low | Obligation ledger relabelling on an engine switch between prefixes (D8b); `verifyWorkingStep` cannot see restrictions stated on other lines; final residual fixes were not re-reviewed by a second agent. |
 
-## 10. Recommendation
+## 10. Second independent review (a8fcd27, b2c035b) and its disposition
+
+A second agent reviewed only those commits (about 2,000 probes; no verdict drift found on 468 hand-checked domain cases, budgets did not leak, `(x+1)^K/(x+2)^K` for K up to 200 took at most 0.57 s). Findings and what was done:
+
+| # | Class | Severity | Disposition |
+|---|---|---|---|
+| 1 | educator / ill-typed input | High | **Fixed**: `verifyWorkingStep`, null or non-object options, `requiredSkills: 5` and a throwing `eq` getter threw. Now `unsupported`, never an exception (test R1). |
+| 2 | educator integration | Medium | **Fixed**: `declarations: null` is treated as absent again (R2). |
+| 3 | resource limit | Medium | **Accepted, documented**: the shared 1x derivation budget makes a few decided derivations `undetermined` (`(x+9)^14/(x+9)^13`; cut-off k=14). Only decided to unsupported, never the opposite verdict; `assessWorking` still decides the same input. |
+| 4 | domain semantics | Medium | **Fixed**: `verifyWorkingStep(.., "x2")` is now `unsupported` (ambiguous) like every other path (R3). `x 2` reads as `x2` and is ambiguous (previously 2x); `(Q2)` in problem text makes the problem ambiguous. Accepted. |
+| 5 | domain semantics (pre-existing) | Medium | **Fixed**: restoring an irrational restriction that the original also has was `invalid`; it is now `unsupported` (no claim), a genuinely new irrational restriction stays `invalid` (R7). |
+| 6 | test quality | Medium | **Fixed**: three tests did not exercise their fix. Rewritten and mutation-checked: shared derivation budget (reverting 1x to 4x fails R4), size-weighted metering (constant weight fails R6). The NaN-configuration guard in `assessDerivation` is defence in depth (the same limit is enforced inside `assessWorking`), so R5 cannot isolate it; stated, not hidden. |
+
+Gate rerun after these changes: engine and derivation outputs for all 10,697 oracle cases (seeds 1 to 3) are identical to the previous run (0 differing cases); 770 tests pass. The fixes in this section were not reviewed by a third agent.
+
+## 11. Recommendation
 
 **MERGE READY** — no blocking correctness or compatibility finding remains open; all confirmed critical/high defects were fixed with regression fixtures and the affected gates re-run; limitations are listed above. This does not authorize merging or deployment: PR #81 stays a draft until the product owner approves.
