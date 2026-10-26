@@ -1,5 +1,61 @@
 {
  "summary": {
+  "byCategory": {
+   "A": {
+    "n": 150,
+    "statusAgree": 150,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 150
+   },
+   "B": {
+    "n": 350,
+    "statusAgree": 350,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 350
+   },
+   "C": {
+    "n": 70,
+    "statusAgree": 70,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 70
+   },
+   "D": {
+    "n": 50,
+    "statusAgree": 50,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 50
+   },
+   "E": {
+    "n": 40,
+    "statusAgree": 40,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 40
+   },
+   "F": {
+    "n": 40,
+    "statusAgree": 35,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 5,
+    "firstOk": 35
+   }
+  },
   "definitions": {
    "verdictAccuracy": "status equals oracle status / all tasks",
    "falseAcceptance": "evaluator says valid-complete|valid-incomplete where oracle says invalid|unsupported|ambiguous / oracle non-valid tasks",
@@ -145,6 +201,10 @@
   {
    "id": "F-0005",
    "family": "F",
+   "lines": [
+    "x^2-3=0"
+   ],
+   "problem": "-2*(x-3)+3=3*x-26",
    "expected": [
     "unsupported",
     null,
@@ -159,6 +219,10 @@
   {
    "id": "F-0013",
    "family": "F",
+   "lines": [
+    "x^2-6=0"
+   ],
+   "problem": "-1*(x+3)=-2",
    "expected": [
     "unsupported",
     null,
@@ -173,6 +237,11 @@
   {
    "id": "F-0021",
    "family": "F",
+   "lines": [
+    "x^2-36=-1(x-6)",
+    "x^2-3=0"
+   ],
+   "problem": "(x^2-36)/(x-6)=-1",
    "expected": [
     "unsupported",
     null,
@@ -187,6 +256,12 @@
   {
    "id": "F-0029",
    "family": "F",
+   "lines": [
+    "-7*x-14+7=5*x-67",
+    "-7*x-7=5*x-67",
+    "x^2=10"
+   ],
+   "problem": "-7*(x+2)+7=5*x-67",
    "expected": [
     "unsupported",
     null,
@@ -201,6 +276,13 @@
   {
    "id": "F-0037",
    "family": "F",
+   "lines": [
+    "5(x+4)=-7(x-5)",
+    "5x+20=-7x+35",
+    "5x+7x=-20+35",
+    "x^2-7=0"
+   ],
+   "problem": "5/(x-5)=-7/(x+4)",
    "expected": [
     "unsupported",
     null,

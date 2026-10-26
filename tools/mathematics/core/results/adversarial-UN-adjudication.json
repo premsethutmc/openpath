@@ -1,0 +1,98 @@
+[
+ {
+  "id": "H-UN-003",
+  "prev": "6*x+8=1",
+  "cur": "x^2 = 5",
+  "prev_set": "{-7/6}",
+  "cur_set": "{-sqrt(5), sqrt(5)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-008",
+  "prev": "5*x-(3/2)=-3",
+  "cur": "x^2=23",
+  "prev_set": "{-3/10}",
+  "cur_set": "{-sqrt(23), sqrt(23)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-013",
+  "prev": "x(x - 4) = 7x",
+  "cur": "x(x - 4) = 7",
+  "prev_set": "{0, 11}",
+  "cur_set": "{2 - sqrt(11), 2 + sqrt(11)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-016",
+  "prev": "x = 64 / 25",
+  "cur": "x^2 = 11",
+  "prev_set": "{64/25}",
+  "cur_set": "{-sqrt(11), sqrt(11)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-018",
+  "prev": "6*x=(-22/5)",
+  "cur": "x^2=7",
+  "prev_set": "{-11/15}",
+  "cur_set": "{-sqrt(7), sqrt(7)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-023",
+  "prev": "x(x-6)=6x",
+  "cur": "x(x-6)=6",
+  "prev_set": "{0, 12}",
+  "cur_set": "{3 - sqrt(15), 3 + sqrt(15)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-024",
+  "prev": "4*x-8=-9",
+  "cur": "x^2=13",
+  "prev_set": "{-1/4}",
+  "cur_set": "{-sqrt(13), sqrt(13)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-025",
+  "prev": "( - 5 / 2)x = ( - 9 / 5)",
+  "cur": "x^2 = 11",
+  "prev_set": "{18/25}",
+  "cur_set": "{-sqrt(11), sqrt(11)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-029",
+  "prev": "x=-13/2",
+  "cur": "x^2=7",
+  "prev_set": "{-13/2}",
+  "cur_set": "{-sqrt(7), sqrt(7)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-032",
+  "prev": "x(x - 2) = 4x",
+  "cur": "x(x - 2) = 4",
+  "prev_set": "{0, 6}",
+  "cur_set": "{1 - sqrt(5), 1 + sqrt(5)}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-036",
+  "prev": "x(x - 5) = 7x",
+  "cur": "x(x - 5) = 7",
+  "prev_set": "{0, 12}",
+  "cur_set": "{5/2 - sqrt(53)/2, 5/2 + sqrt(53)/2}",
+  "sympy_says_different": true
+ },
+ {
+  "id": "H-UN-041",
+  "prev": "4*x+5=-2",
+  "cur": "x^2 = 5",
+  "prev_set": "{-7/4}",
+  "cur_set": "{-sqrt(5), sqrt(5)}",
+  "sympy_says_different": true
+ }
+]

@@ -5,9 +5,9 @@
   "disagree": 0,
   "judgedValidWhileOracleSaysInvalid": 0,
   "judgedNotValidWhileOracleSaysValid": 0,
-  "oracleInvalidButImplicationFlagged": 235,
-  "medianMs": 0.64,
-  "p95Ms": 10.73
+  "oracleInvalidButImplicationFlagged": 232,
+  "medianMs": 0.67,
+  "p95Ms": 13.51
  },
  "byKind": {
   "multiply-by-expression-no-check": {

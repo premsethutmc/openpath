@@ -67,3 +67,17 @@ test("tight reading binds the whole juxtaposed run after a slash", () => {
   assert.equal(normalizeLine("3/2(x+1)(x+2)", true), "3/(2*(x+1)*(x+2))");
   assert.equal(normalizeLine("3/2(x+1)(x+2)", false), "3/2*(x+1)*(x+2)");
 });
+
+// ---- found by the held-out adversarial corpus (first pass): collapse to an identity, claims written with parentheses/spaces
+test("multiplying both sides by 0 collapses the equation to an identity: invalid, not an obligation", () => {
+  const r = evaluateWorking("8*x-6=10", ["0*(8*x-6)=0*10", "0=0", "x=2"], { route: false, engine: false });
+  assert.equal(r.status, "invalid"); assert.equal(r.firstInvalid, 1); assert.equal(r.steps[0].status, "invalid");
+});
+test("a final claim written as x = (25/36) or x = (-31/36) is recognised and checked (extraneous root accepted -> invalid)", () => {
+  const r = evaluateWorking("9*x+(3/4)=7", ["(9x+(3/4))^2=7^2", "9x+(3/4)=7 or 9x+(3/4)=-7", "x=(25/36) or x=(-31/36)"], { route: false, engine: false });
+  assert.equal(r.status, "invalid"); assert.equal(r.invalidAt, "final-claim");
+});
+test("a single claim with parentheses and a unicode minus is a final claim", () => {
+  const r = evaluateWorking("19*x-30=14", ["19x = 44", "x = (44 ÷ 19)"], { route: false, engine: false });
+  assert.equal(r.status, "valid-complete"); assert.equal(r.final?.verdict, "correct");
+});

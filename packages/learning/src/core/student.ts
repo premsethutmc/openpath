@@ -171,7 +171,9 @@ function evaluateConvention(problem: string, lines: Line[], grouping: boolean, o
       const dn = diffNote(before, after);
       // a step that SHRINKS the solution set is not an equivalence, but while an obligation is open (an earlier step admitted extra candidates) it is the legitimate discharge of that obligation
       // as long as it keeps every solution of the ORIGINAL problem; it never certifies anything by itself.
-      if (openObligation && !imp.valid && V.solSub(after, before) && V.solSub(origSol, after) && !eqv.reasons.some((r) => r !== "solution-set-changed")) {
+      // information destroyed: a finite solution set replaced by "every x" (multiplying both sides by 0, or by an expression that is 0 everywhere). Every old solution is kept, but nothing is left to check or narrow down.
+      if (after.kind === "all" && before.kind !== "all") { steps.push({ ...base, status: "invalid", reasons: [...eqv.reasons, "collapse-to-identity"], explanation: `this line is true for every allowed x, so it no longer says anything about the previous line (${describe(before)}); for example both sides were multiplied by 0`, misconceptions: [] }); earlierInvalid = true; continue; }
+      if (openObligation && before.kind === "set" && !imp.valid && V.solSub(after, before) && V.solSub(origSol, after) && !eqv.reasons.some((r) => r !== "solution-set-changed")) {
         if (V.solEq(origSol, after)) openObligation = false;
         const gone = dn && dn.lost.length ? dn.lost.map((v) => `x = ${v}`).join(", ") : "some candidates";
         const st2: WorkingStep = { ...base, status: "valid-discharge", reasons: eqv.reasons, explanation: `this line drops ${gone}; the earlier step had admitted extra candidates, and every solution of the original equation is kept`, misconceptions: [] };
@@ -203,7 +205,12 @@ function evaluateConvention(problem: string, lines: Line[], grouping: boolean, o
   return { steps, domain };
 }
 
-const SOLVED = /^x=(-?[\d./]+)$|^(-?[\d./]+)=x$/;
+/** "x = c" or "c = x" where c is any variable-free expression ("(25/36)", "- 7 / 6", "−8", "(39 ÷ 4)"): returns the exact value, else null. */
+function solvedValue(raw: string): Rational | null {
+  const n = normalizeLine(raw, false).replace(/\s/g, "").toLowerCase();
+  const m = /^x=(.+)$/.exec(n) ?? /^(.+)=x$/.exec(n); if (!m || /x/.test(m[1])) return null;
+  try { return evaluate(parseExpr(m[1]), new Map()); } catch { return null; }
+}
 /** A last line that states an answer in words or as alternatives rather than being an equation to check: "no solution", "all real numbers [except a, b]", "x=a or x=b". */
 type ClaimLine = { kind: "none" } | { kind: "all"; except: string[] } | { kind: "set"; values: string[] };
 export function parseClaimLine(raw: string): ClaimLine | null {
@@ -213,7 +220,7 @@ export function parseClaimLine(raw: string): ClaimLine | null {
   const a = /^(all real numbers|all reals|every real number|any real number|identity)(?: (?:except|but not|excluding|apart from)(?: x ?(?:=|≠|!=))? ?(.*))?$/.exec(t);
   if (a) { const ex = (a[2] ?? "").split(/,| and | or /).map((v) => v.replace(/^x ?(=|≠|!=) ?/, "").trim()).filter(Boolean); return { kind: "all", except: ex }; }
   const parts = t.split(/ or |,|;/).map((q) => q.trim()).filter(Boolean);
-  if (parts.length > 1) { const vals = parts.map((q) => SOLVED.exec(q.replace(/\s/g, ""))).map((m) => (m ? m[1] ?? m[2] : null)); if (vals.every((v) => v !== null)) return { kind: "set", values: vals as string[] }; }
+  if (parts.length > 1) { const vals = parts.map((q) => solvedValue(q)); if (vals.every((v) => v !== null)) return { kind: "set", values: (vals as Rational[]).map(String) }; }
   return null;
 }
 const ratOf = (c: string): Rational | null => { try { return evaluate(parseExpr(c), new Map()); } catch { return null; } };
@@ -236,8 +243,7 @@ function finalClaim(problem: string, lastRaw: string, domain: Rational[], groupi
   }
   const t = normalizeLine(lastRaw, grouping).replace(/\s/g, "").toLowerCase();
   if (/^(no ?solution|nosolution|none|empty|∅)$/.test(t)) { const r = V.checkClaim(normalizeLine(problem, grouping), []); return { claim: "no solution", verdict: r.valid ? "correct" : "incorrect", explanation: r.valid ? "the equation indeed has no solution on its domain" : `the equation does have solutions: ${JSON.stringify(r.truth)}` }; }
-  const m = SOLVED.exec(t); if (!m) return undefined;
-  const c = m[1] ?? m[2]; const v = (() => { try { return evaluate(parseExpr(c), new Map()); } catch { return null; } })(); if (!v) return undefined;
+  const v = solvedValue(lastRaw); if (!v) return undefined;
   const claim = `x = ${v}`;
   if (domain.some((d) => d.eq(v))) return { claim, verdict: "incorrect", explanation: `x = ${v} makes a denominator of the original equation zero, so it is not allowed (an extraneous candidate)` };
   const p = normalizeLine(problem, grouping); const r = V.checkClaim(p, [v.toString()]);
