@@ -17,8 +17,8 @@ export type TransferFamily = "triangle-angle-sum" | "isosceles-angle" | "similar
 export interface GeometryQuantityBinding { geometryId: string; quantity: "angle-degrees" | "segment-length"; expression: MathExpression }
 export interface CrossDomainTransfer { family: TransferFamily; geometryConclusion: { predicate: string; args: string[]; value?: unknown }; bindings: GeometryQuantityBinding[]; obligation: MathematicalObligation }
 export interface MixedProblem { domain: "mixed"; geometry: GeometryProblem; handoff?: AngleSumHandoff; transfer?: CrossDomainTransfer }
-export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:string;problem:M1Problem|M2Problem|CalculusProblem|CalculusMethodProblem;dependsOn:string[]}[] }
-export interface M2CrossDomainWorking { stages:{id:string;working:M1Step[]|M2Step[]|CalculusStep[]|CalculusMethodStep[]}[] }
+export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:string;problem:TextProblem|GeometryProblem|MixedProblem|M1Problem|M2Problem|CalculusProblem|CalculusMethodProblem|SymbolicProblem;dependsOn:string[]}[] }
+export interface M2CrossDomainWorking { stages:{id:string;working:string[]|M1Step[]|M2Step[]|CalculusStep[]|CalculusMethodStep[]|SymbolicStep[]|{steps:Record<string,unknown>[]} | {geometry:{steps:Record<string,unknown>[]};calculation:string[];domainConclusion?:{symbol:string;value:number}}}[] }
 export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | CalculusMethodProblem | SymbolicProblem | M2CrossDomainProblem;
 export type StudentWorking = string[] | M1Step[] | M2Step[] | CalculusStep[] | CalculusMethodStep[] | SymbolicStep[] | M2CrossDomainWorking | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
 export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; symbolicBudget?: SymbolicBudget }

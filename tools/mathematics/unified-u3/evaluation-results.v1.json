@@ -1,0 +1,248 @@
+{
+  "version": "unified-math-u3-evaluation@1",
+  "total": 400,
+  "matched": 380,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "firstInvalidStepMatches": 380,
+  "outcomes": {
+    "verified": 220,
+    "invalid": 100,
+    "missing-assumption": 35,
+    "unsupported": 30,
+    "resource-exhausted": 15
+  },
+  "areas": {
+    "cross-domain": 150,
+    "certificate-adversarial": 100,
+    "domain-assumption": 100,
+    "resource-unsupported": 50
+  },
+  "latencyMs": {
+    "p50": 0.10277500000000117,
+    "p95": 0.6743239999999986,
+    "p99": 1.8582649999999994
+  },
+  "mismatches": [
+    {
+      "id": "certificate-085",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-086",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-087",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-088",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-089",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-090",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-091",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-092",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-093",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "certificate-094",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-025",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-026",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-027",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-028",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-029",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-030",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-031",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-032",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-033",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    },
+    {
+      "id": "boundary-034",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      }
+    }
+  ]
+}

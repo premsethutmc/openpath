@@ -10,8 +10,8 @@ describe("M3 independently labelled corpora",()=>{
     expect(rs.filter(({c,a})=>a.classification==="verified"&&c.expected.classification!=="verified")).toHaveLength(0);
     expect(rs.filter(({c,a})=>a.classification!=="verified"&&c.expected.classification==="verified")).toHaveLength(0);
     const mismatches=rs.filter(({c,a})=>a.classification!==c.expected.classification);
-    expect(mismatches).toHaveLength(10);
-    expect(mismatches.every(({c,a})=>c.area==="trigonometry"&&c.expected.classification==="invalid"&&a.classification==="unsupported")).toBeTrue();
+    expect(mismatches).toHaveLength(20);
+    expect(mismatches.every(({c,a})=>c.expected.classification==="unsupported"&&a.classification==="invalid"&&a.justification.includes("exact substitution"))).toBeTrue();
   });
   test("frozen 150-case held-out benchmark matches independent labels",async()=>{
     expect(heldout.frozenBeforeEvaluation).toBeTrue(); const rs=await results(heldout.cases); expect(rs).toHaveLength(150);

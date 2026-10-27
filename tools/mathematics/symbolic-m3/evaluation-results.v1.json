@@ -3,146 +3,266 @@
   "independent": {
     "name": "independent",
     "total": 600,
-    "matched": 590,
+    "matched": 580,
     "falseAccept": 0,
     "falseReject": 0,
     "firstInvalidStep": {
-      "correct": 70,
+      "correct": 80,
       "total": 80
     },
     "outcomes": {
       "verified": 370,
-      "invalid": 70,
+      "invalid": 100,
       "resource-exhausted": 30,
-      "unsupported": 60,
       "incomplete": 30,
-      "missing-assumption": 40
+      "missing-assumption": 40,
+      "unsupported": 30
     },
     "latencyMs": {
-      "median": 0.1199009999999987,
-      "p95": 0.5085150000000027,
-      "p99": 0.9677569999999989,
-      "throughputPerSecond": 5919.899263836825
+      "median": 0.10485800000000722,
+      "p95": 0.4597009999999955,
+      "p99": 1.139724000000001,
+      "throughputPerSecond": 6131.8152648393325
     },
     "failures": [
       {
-        "id": "trigonometry-7",
+        "id": "trigonometry-8",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-17",
+        "id": "trigonometry-18",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-27",
+        "id": "trigonometry-28",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-37",
+        "id": "trigonometry-38",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-47",
+        "id": "trigonometry-48",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-57",
+        "id": "trigonometry-58",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-67",
+        "id": "trigonometry-68",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-77",
+        "id": "trigonometry-78",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-87",
+        "id": "trigonometry-88",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
-          "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       },
       {
-        "id": "trigonometry-97",
+        "id": "trigonometry-98",
         "expected": {
-          "classification": "invalid",
-          "firstInvalidStep": 0
+          "classification": "unsupported",
+          "firstInvalidStep": null
         },
         "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-8",
+        "expected": {
           "classification": "unsupported",
-          "firstInvalidStep": null,
-          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-18",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-28",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-38",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-48",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-58",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-68",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-78",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-88",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-98",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
         }
       }
     ]
@@ -164,10 +284,10 @@
       "unsupported": 25
     },
     "latencyMs": {
-      "median": 0.07683600000001434,
-      "p95": 0.15273000000001957,
-      "p99": 0.2217330000000004,
-      "throughputPerSecond": 11882.694044393687
+      "median": 0.08648099999999204,
+      "p95": 0.19248999999999228,
+      "p99": 0.29775800000001595,
+      "throughputPerSecond": 10063.478409108842
     },
     "failures": []
   }
