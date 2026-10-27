@@ -77,9 +77,11 @@ describe("E3 independent verification of complete algebra solutions", () => {
   test("extraneous roots from squaring are checked against the original equation", async () => {
     const bad = await run("sqrt(x + 2) = x", ["sqrt(x + 2) = x", "x + 2 = x^2", "x^2 - x - 2 = 0", "x = 2 or x = -1"]);
     expect(bad.classification).not.toBe("verified"); expect(bad.complete).not.toBe(true);
-    // the right root after squaring is still incomplete until the candidate check against the original equation is shown
+    // E4 policy change (candidate elimination): the right root after squaring is accepted when the exact checker proves that the dropped
+    // candidate fails the ORIGINAL equation and the final set equals the problem's solution set. The E3 rule (the student must write the check)
+    // remains available as the "shown" policy and is asserted in verification-closure-e4.test.ts.
     const good = await run("sqrt(x + 2) = x", ["sqrt(x + 2) = x", "x + 2 = x^2", "x^2 - x - 2 = 0", "x = 2"]);
-    expect(good.classification).toBe("incomplete"); expect(good.complete).not.toBe(true);
+    expect(good.classification).toBe("verified"); expect(good.acceptanceGate?.independentlyVerified).toBe(true);
   });
   test("cancellation may not erase a domain restriction", async () => {
     const a = await run("(x^2 - 1)/(x - 1) = x + 1", ["(x^2 - 1)/(x - 1) = x + 1", "x + 1 = x + 1", "this holds for all x"]);
@@ -152,6 +154,9 @@ describe("E3 the independent checker agrees with an exact oracle", () => {
       const p = parseNaturalWorking(nat(c.line)); if (p.classification !== "parsed") { abstain++; continue; }
       const r = checkAlgebraSubmission(c.problem, p), l = r.lines[0];
       if (!l || l.relation === "unsupported" || r.outcome === "unsupported" || r.outcome === "resource-exhausted") { abstain++; continue; }
+      // E4: the checker now decides cases whose critical points are irrational (quadratic surds). The E3 grid oracle behind this fuzz file only
+      // sees rational points, so it is blind to those roots; they are compared against the E4 irrational-aware oracle instead (verification-closure-e4.test.ts).
+      if (/sqrt\(/.test(JSON.stringify([r.problemSolutionSet, r.finalSolutionSet, l.solutionSet, l.detail]))) { abstain++; continue; }
       if (l.relation === map[c.relation]) agree++; else bad.push(`${c.problem} || ${c.line}`);
     }
     expect(bad).toEqual([]); expect(agree + abstain).toBe(cases.length); expect(agree / cases.length).toBeGreaterThan(0.75);

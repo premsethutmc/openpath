@@ -24,9 +24,19 @@ export const INDEPENDENT_CHECKER_CONTRACT = "openpath-independent-algebra-checke
 export const CHECKER_SCOPE = "single-variable rational-coefficient polynomial/rational equations and inequalities, |.|, one sqrt radicand, finite/interval solution sets, closed numeric statements, expression identity via U4; all critical points rational" as const;
 export const CHECKER_LIMITS = { maxDegree: 12, maxCriticalPoints: 64, maxNodes: 600, maxDigits: 80, maxDivisorTrial: 2_000_000 } as const;
 
+/**
+ * E4 policy. "implicit" (default): when a working lists a short finite candidate set (after squaring, clearing denominators, ...) and then
+ * keeps only the candidates that satisfy the ORIGINAL problem, the elimination is accepted because the exact partition has just proven every
+ * dropped candidate fails the original problem and the final set equals the problem's solution set. "shown" reproduces the stricter E3 rule that
+ * requires the student to write the check. The policy never affects soundness: final == problem solution set is required in both.
+ */
+export type CandidateEliminationPolicy = "implicit" | "shown";
+let candidatePolicy: CandidateEliminationPolicy = "implicit";
+export function withCandidateEliminationPolicy<T>(policy: CandidateEliminationPolicy, fn: () => T): T { const old = candidatePolicy; candidatePolicy = policy; try { return fn(); } finally { candidatePolicy = old; } }
 let degreeCap: number = CHECKER_LIMITS.maxDegree;
 class Unsupported extends Error {}
 class Exhausted extends Error {}
+class TwoRadicands extends Unsupported { constructor() { super("two different radicands"); } }
 
 /* ------------------------------------------------------------------ exact rationals */
 const babs = (x: bigint) => (x < 0n ? -x : x);
@@ -62,7 +72,7 @@ function readRat(s: string): Q {
 /* ------------------------------------------------------------------ radical extension  x + y*sqrt(r) */
 interface Ext { x: Q; y: Q; r: Q }
 const rat = (x: Q): Ext => ({ x, y: ZERO, r: ZERO });
-const commonR = (a: Ext, b: Ext): Q => { if (a.y.isZero()) return b.r; if (b.y.isZero() || a.r.eq(b.r)) return a.r; throw new Unsupported("two different radicands"); };
+const commonR = (a: Ext, b: Ext): Q => { if (a.y.isZero()) return b.r; if (b.y.isZero() || a.r.eq(b.r)) return a.r; throw new TwoRadicands(); };
 const eAdd = (a: Ext, b: Ext): Ext => ({ x: a.x.add(b.x), y: a.y.add(b.y), r: commonR(a, b) });
 const eNeg = (a: Ext): Ext => ({ x: a.x.neg(), y: a.y.neg(), r: a.r });
 const eMul = (a: Ext, b: Ext): Ext => { const r = commonR(a, b); return { x: a.x.mul(b.x).add(a.y.mul(b.y).mul(r)), y: a.x.mul(b.y).add(a.y.mul(b.x)), r }; };
@@ -77,6 +87,119 @@ function signExt(a: Ext): number {
   return a.x.mul(a.x).cmp(a.y.mul(a.y).mul(a.r)) > 0 ? sx : sy;
 }
 const eZero = (a: Ext) => a.x.isZero() && a.y.isZero();
+/** E4: points of the real line are elements x + y*sqrt(f) of ONE quadratic field (f squarefree as far as trial division can tell). */
+type Pt = Ext;
+const ptSub = (a: Pt, b: Pt): Pt => eAdd(a, eNeg(b));
+const ptCmp = (a: Pt, b: Pt): number => signExt(ptSub(a, b));
+const ptEq = (a: Pt, b: Pt): boolean => eZero(ptSub(a, b));
+function extText(a: Ext): string {
+  if (a.y.isZero()) return a.x.text();
+  const yAbs = a.y.sign() < 0 ? a.y.neg() : a.y, rad = `${yAbs.text()}*sqrt(${a.r.text()})`;
+  return a.x.isZero() ? `${a.y.sign() < 0 ? "-" : ""}${rad}` : `${a.x.text()} ${a.y.sign() < 0 ? "-" : "+"} ${rad}`;
+}
+function squarefreeSplit(n: bigint): { s: bigint; f: bigint } {
+  let s = 1n, f = n; if (f < 1n) throw new Unsupported("square root of a non-positive integer");
+  for (let p = 2n; p <= 100000n && p * p <= f; p += p === 2n ? 1n : 2n) { const pp = p * p; while (f % pp === 0n) { f /= pp; s *= p; } }
+  const t = isqrt(f); if (t * t === f) { s *= t; f = 1n; }
+  return { s, f };
+}
+/** principal square root of a rational v >= 0 as a (normalised) element of its own quadratic field */
+function sqrtQ(v: Q): Ext {
+  const t = sqrtExact(v); if (t) return rat(t);
+  const { s, f } = squarefreeSplit(v.n * v.d);
+  return { x: ZERO, y: new Q(s, v.d), r: new Q(f) };
+}
+/** principal square root of z (z >= 0) when it lies in z's own field Q(sqrt r); null otherwise (a nested radical) */
+function sqrtExt(z: Ext): Ext | null {
+  if (z.y.isZero()) return sqrtQ(z.x);
+  const N = z.x.mul(z.x).sub(z.y.mul(z.y).mul(z.r)), t = sqrtExact(N); if (!t) return null;
+  for (const sgn of [1, -1]) {
+    const c2 = z.x.add(t.mul(q(sgn))).div(q(2)), c = sqrtExact(c2); if (!c || c.isZero()) continue;
+    const w: Ext = { x: c, y: z.y.div(q(2).mul(c)), r: z.r };
+    if (eZero(eAdd(eMul(w, w), eNeg(z)))) return signExt(w) < 0 ? eNeg(w) : w;
+  }
+  return null;
+}
+function floorExt(a: Ext, k: bigint): bigint {
+  let lo = -(1n << 60n), hi = 1n << 60n; // largest m with m / 2^k <= a
+  while (lo < hi) { const mid = (lo + hi + 1n) >> 1n; if (signExt(eAdd(a, eNeg(rat(new Q(mid, 1n << k))))) >= 0) lo = mid; else hi = mid - 1n; }
+  return lo;
+}
+/** a rational strictly below (offset < 0) or above (offset > 0) the point, verified exactly */
+function outside(p: Pt, offset: bigint): Q {
+  const c = new Q(floorExt(p, 0n) + offset); if (offset < 0n ? ptCmp(rat(c), p) >= 0 : ptCmp(rat(c), p) <= 0) throw new Exhausted("critical point out of range");
+  return c;
+}
+function rationalBetween(a: Ext, b: Ext): Q {
+  for (let k = 0n; k <= 40n; k++) { const cand = new Q(floorExt(a, k) + 1n, 1n << k); if (ptCmp(rat(cand), a) > 0 && ptCmp(b, rat(cand)) > 0) return cand; }
+  throw new Exhausted("two critical points are too close to separate");
+}
+
+
+/* ------------------------------------------------------------------ E4: Q(sqrt f1, sqrt f2) at rational points
+ * Two different irrational radicals (for example sqrt(x+4) + sqrt(x) at x = 1) cannot live in the single-radical Ext. At a RATIONAL point
+ * both radicals are square roots of rationals, so the value is an exact element of a biquadratic field. Its sign is decided exactly by
+ * the tower rule  sign(P + Q*sqrt f2): equal signs win, otherwise compare P^2 with Q^2 f2 in Q(sqrt f1). No approximation anywhere.
+ */
+interface QF { c: [Q, Q, Q, Q]; f: [Q, Q] } // basis 1, sqrt f1, sqrt f2, sqrt f1 sqrt f2 ; f = 0 means absent (present radicals are packed first)
+const qfRat = (x: Q): QF => ({ c: [x, ZERO, ZERO, ZERO], f: [ZERO, ZERO] });
+function qfUnify(a: QF, b: QF): [QF, QF] {
+  const radicals: Q[] = []; for (const f of [...a.f, ...b.f]) if (!f.isZero() && !radicals.some((x) => x.eq(f))) radicals.push(f);
+  if (radicals.length > 2) throw new Unsupported("three or more distinct radicals");
+  const embed = (z: QF): QF => {
+    const pos = z.f.map((f) => (f.isZero() ? -1 : radicals.findIndex((x) => x.eq(f)))), c: [Q, Q, Q, Q] = [ZERO, ZERO, ZERO, ZERO];
+    for (let m = 0; m < 4; m++) { if (z.c[m].isZero()) continue; let nm = 0; if (m & 1) nm |= 1 << pos[0]; if (m & 2) nm |= 1 << pos[1]; c[nm] = c[nm].add(z.c[m]); }
+    return { c, f: [radicals[0] ?? ZERO, radicals[1] ?? ZERO] };
+  };
+  return [embed(a), embed(b)];
+}
+const qfAdd = (a0: QF, b0: QF): QF => { const [a, b] = qfUnify(a0, b0); return { c: a.c.map((x, i) => x.add(b.c[i])) as [Q, Q, Q, Q], f: a.f }; };
+const qfNeg = (a: QF): QF => ({ c: a.c.map((x) => x.neg()) as [Q, Q, Q, Q], f: a.f });
+function qfMul(a0: QF, b0: QF): QF {
+  const [a, b] = qfUnify(a0, b0), c: [Q, Q, Q, Q] = [ZERO, ZERO, ZERO, ZERO];
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
+    if (a.c[i].isZero() || b.c[j].isZero()) continue; let coef = a.c[i].mul(b.c[j]); const both = i & j;
+    if (both & 1) coef = coef.mul(a.f[0]); if (both & 2) coef = coef.mul(a.f[1]); c[i ^ j] = c[i ^ j].add(coef);
+  }
+  return { c, f: a.f };
+}
+const qfParts = (a: QF): { P: Ext; Q2: Ext; f2: Q } => ({ P: { x: a.c[0], y: a.c[1], r: a.f[0] }, Q2: { x: a.c[2], y: a.c[3], r: a.f[0] }, f2: a.f[1] });
+function qfSign(a: QF): number {
+  const { P, Q2, f2 } = qfParts(a), sP = signExt(P);
+  if (f2.isZero()) return sP;
+  const sQ = signExt(Q2); if (sP === 0) return sQ; if (sQ === 0) return sP; if (sP === sQ) return sP;
+  const w = eAdd(eMul(P, P), eNeg(eMul(eMul(Q2, Q2), rat(f2)))), sw = signExt(w);
+  return sw > 0 ? sP : sw < 0 ? sQ : 0;
+}
+function qfInv(a: QF): QF | null {
+  const { P, Q2, f2 } = qfParts(a);
+  if (f2.isZero()) { const i = eInv(P); return i ? { c: [i.x, i.y, ZERO, ZERO], f: a.f } : null; }
+  const w = eAdd(eMul(P, P), eNeg(eMul(eMul(Q2, Q2), rat(f2)))), wi = eInv(w); if (!wi) return null;
+  const p = eMul(P, wi), qq = eMul(eNeg(Q2), wi);
+  return { c: [p.x, p.y, qq.x, qq.y], f: a.f };
+}
+function qfSqrt(a: QF): QF {
+  const rationalOnly = a.c[1].isZero() && a.c[2].isZero() && a.c[3].isZero();
+  if (rationalOnly) { const t = sqrtQ(a.c[0]); return t.y.isZero() ? qfRat(t.x) : { c: [ZERO, t.y, ZERO, ZERO], f: [t.r, ZERO] }; }
+  if (a.f[1].isZero()) { const t = sqrtExt({ x: a.c[0], y: a.c[1], r: a.f[0] }); if (!t) throw new Unsupported("a nested radical outside the field"); return { c: [t.x, t.y, ZERO, ZERO], f: [t.y.isZero() ? ZERO : t.r, ZERO] }; }
+  throw new Unsupported("the square root of an element with two radicals");
+}
+function qfEval(e: Expr, v: Q, name: string): QF | null {
+  switch (e.kind) {
+    case "constant": return qfRat(readRat(e.value));
+    case "variable": if (e.name !== name) throw new Unsupported("second variable"); return qfRat(v);
+    case "add": { let acc = qfRat(ZERO); for (const t of e.terms) { const z = qfEval(t, v, name); if (!z) return null; acc = qfAdd(acc, z); } return acc; }
+    case "multiply": { let acc = qfRat(ONE); for (const t of e.factors) { const z = qfEval(t, v, name); if (!z) return null; acc = qfMul(acc, z); } return acc; }
+    case "power": {
+      if (!Number.isInteger(e.exponent) || Math.abs(e.exponent) > 12) throw new Unsupported("non-integer or large exponent");
+      let b = qfEval(e.base, v, name); if (!b) return null; if (e.exponent < 0) { b = qfInv(b); if (!b) return null; }
+      let acc = qfRat(ONE); for (let i = 0; i < Math.abs(e.exponent); i++) acc = qfMul(acc, b); return acc;
+    }
+    case "abs": { const z = qfEval(e.argument, v, name); if (!z) return null; return qfSign(z) < 0 ? qfNeg(z) : z; }
+    case "root": { const z = qfEval(e.radicand, v, name); if (!z) return null; if (qfSign(z) < 0) return null; return qfSqrt(z); }
+    default: throw new Unsupported(`${e.kind} is outside the checker scope`);
+  }
+}
 
 /* ------------------------------------------------------------------ polynomials and rational functions */
 type Poly = Q[];
@@ -172,11 +295,11 @@ function specials(e: Expr, abs = new Map<string, Expr>(), roots = new Map<string
 }
 const sumExpr = (l: Expr, r: Expr): Expr => ({ kind: "add", terms: [l, { kind: "multiply", factors: [{ kind: "constant", value: "-1" }, r] }] });
 
-/** Exact evaluation at a rational point; null = undefined there (pole, negative radicand). */
-function evalAt(e: Expr, v: Q, name: string): Ext | null {
+/** Exact evaluation at a point of the real-closed field Q(sqrt f); null = undefined there (pole, negative radicand). */
+function evalAt(e: Expr, v: Ext, name: string): Ext | null {
   switch (e.kind) {
     case "constant": return rat(readRat(e.value));
-    case "variable": if (e.name !== name) throw new Unsupported("second variable"); return rat(v);
+    case "variable": if (e.name !== name) throw new Unsupported("second variable"); return v;
     case "add": { let acc = rat(ZERO); for (const t of e.terms) { const z = evalAt(t, v, name); if (!z) return null; acc = eAdd(acc, z); } return acc; }
     case "multiply": { let acc = rat(ONE); for (const t of e.factors) { const z = evalAt(t, v, name); if (!z) return null; acc = eMul(acc, z); } return acc; }
     case "power": {
@@ -186,109 +309,145 @@ function evalAt(e: Expr, v: Q, name: string): Ext | null {
     }
     case "abs": { const z = evalAt(e.argument, v, name); if (!z) return null; return signExt(z) < 0 ? eNeg(z) : z; }
     case "root": {
-      const z = evalAt(e.radicand, v, name); if (!z) return null; if (!z.y.isZero()) throw new Unsupported("nested radicals");
-      if (z.x.sign() < 0) return null; const s = sqrtExact(z.x); return s ? rat(s) : { x: ZERO, y: ONE, r: z.x };
+      const z = evalAt(e.radicand, v, name); if (!z) return null;
+      if (signExt(z) < 0) return null;
+      const r = sqrtExt(z); if (!r) throw new Unsupported("a nested radical outside the single quadratic field");
+      return r;
     }
     default: throw new Unsupported(`${e.kind} is outside the checker scope`);
   }
 }
 
-/* ------- symbolic rational functions (used only to find critical points; truth is always decided by evalAt) */
-interface XRF { u: RF; v: RF }
-interface SymCtx { name: string; A: RF | null; sigma: Map<string, 1 | -1> }
-function toRF(e: Expr, c: SymCtx): XRF {
+/* ------- symbolic elements of Q(x)[sqrt A0, sqrt A1] (used only to find critical points; truth is always decided by evalAt) */
+interface SymCtx { name: string; rads: RF[]; sigma: Map<string, 1 | -1> }
+type XQ = Map<number, RF>; // bitmask of radicals -> coefficient
+const xPure = (r: RF): XQ => new Map([[0, r]]); // zero-valued entries are kept: their denominators still mark poles
+function xAdd(a: XQ, b: XQ): XQ { const r = new Map(a); for (const [m, c] of b) { const o = r.get(m); r.set(m, o ? rfAdd(o, c) : c); } return r; }
+function xMul(a: XQ, b: XQ, c: SymCtx): XQ {
+  let r: XQ = new Map();
+  for (const [m1, c1] of a) for (const [m2, c2] of b) { let coef = rfMul(c1, c2); const both = m1 & m2; for (let i = 0; i < c.rads.length; i++) if ((both >> i) & 1) coef = rfMul(coef, c.rads[i]); r = xAdd(r, new Map([[m1 ^ m2, coef]])); }
+  return r;
+}
+const xNeg = (a: XQ): XQ => new Map([...a].map(([m, c]) => [m, rfNeg(c)] as [number, RF]));
+const xIsPure = (a: XQ) => [...a].every(([m, c]) => m === 0 || rfIsZero(c));
+const xConj = (a: XQ, i: number): XQ => new Map([...a].map(([m, c]) => [m, (m >> i) & 1 ? rfNeg(c) : c] as [number, RF]));
+/** product of all sign-conjugates: a rational function whose zeros contain every real zero of the element */
+function xNorm(a: XQ, c: SymCtx): RF { let n = a; for (let i = 0; i < c.rads.length; i++) n = xMul(n, xConj(n, i), c); if (!xIsPure(n)) throw new Unsupported("norm is not rational"); return n.get(0) ?? rfConst(ZERO); }
+function toXQ(e: Expr, c: SymCtx): XQ {
   switch (e.kind) {
-    case "constant": return { u: rfConst(readRat(e.value)), v: rfConst(ZERO) };
-    case "variable": if (e.name !== c.name) throw new Unsupported("second variable"); return { u: { n: [ZERO, ONE], d: [ONE] }, v: rfConst(ZERO) };
-    case "add": return e.terms.map((t) => toRF(t, c)).reduce((a, b) => ({ u: rfAdd(a.u, b.u), v: rfAdd(a.v, b.v) }), { u: rfConst(ZERO), v: rfConst(ZERO) });
-    case "multiply": return e.factors.map((t) => toRF(t, c)).reduce((a, b) => {
-      if (!rfIsZero(a.v) && !rfIsZero(b.v) && !c.A) throw new Unsupported("radical without radicand");
-      const vv = !rfIsZero(a.v) && !rfIsZero(b.v) ? rfMul(rfMul(a.v, b.v), c.A!) : rfConst(ZERO);
-      return { u: rfAdd(rfMul(a.u, b.u), vv), v: rfAdd(rfMul(a.u, b.v), rfMul(a.v, b.u)) };
-    }, { u: rfConst(ONE), v: rfConst(ZERO) });
+    case "constant": return xPure(rfConst(readRat(e.value)));
+    case "variable": if (e.name !== c.name) throw new Unsupported("second variable"); return xPure({ n: [ZERO, ONE], d: [ONE] });
+    case "add": return e.terms.map((t) => toXQ(t, c)).reduce(xAdd, new Map() as XQ);
+    case "multiply": return e.factors.map((t) => toXQ(t, c)).reduce((a, b) => xMul(a, b, c), xPure(rfConst(ONE)));
     case "power": {
       if (!Number.isInteger(e.exponent) || Math.abs(e.exponent) > degreeCap) throw new Unsupported("non-integer or large exponent");
-      let b = toRF(e.base, c);
-      if (e.exponent < 0) { if (!rfIsZero(b.v)) throw new Unsupported("division by a radical"); b = { u: rfInv(b.u), v: rfConst(ZERO) }; }
-      let acc: XRF = { u: rfConst(ONE), v: rfConst(ZERO) };
-      for (let i = 0; i < Math.abs(e.exponent); i++) acc = { u: rfAdd(rfMul(acc.u, b.u), !rfIsZero(acc.v) && !rfIsZero(b.v) ? rfMul(rfMul(acc.v, b.v), c.A!) : rfConst(ZERO)), v: rfAdd(rfMul(acc.u, b.v), rfMul(acc.v, b.u)) };
-      return acc;
+      let b = toXQ(e.base, c);
+      if (e.exponent < 0) { if (!xIsPure(b)) throw new Unsupported("division by a radical"); b = xPure(rfInv(b.get(0) ?? rfConst(ZERO))); }
+      let acc = xPure(rfConst(ONE)); for (let i = 0; i < Math.abs(e.exponent); i++) acc = xMul(acc, b, c); return acc;
     }
-    case "abs": { const a = toRF(e.argument, c); if (!rfIsZero(a.v)) throw new Unsupported("absolute value of a radical"); const s = c.sigma.get(JSON.stringify(e.argument)) ?? 1; return { u: s === 1 ? a.u : rfNeg(a.u), v: rfConst(ZERO) }; }
+    case "abs": { const a = toXQ(e.argument, c); if (!xIsPure(a)) throw new Unsupported("absolute value of a radical"); const sg = c.sigma.get(JSON.stringify(e.argument)) ?? 1; return sg === 1 ? a : xNeg(a); }
     case "root": {
-      const a = toRF(e.radicand, c); if (!rfIsZero(a.v)) throw new Unsupported("nested radicals");
-      if (c.A && !rfEq(c.A, a.u)) throw new Unsupported("two different radicands"); c.A = a.u; return { u: rfConst(ZERO), v: rfConst(ONE) };
+      const a = toXQ(e.radicand, c); if (!xIsPure(a)) throw new Unsupported("nested radicals");
+      const r0 = a.get(0) ?? rfConst(ZERO); let i = c.rads.findIndex((x) => rfEq(x, r0));
+      if (i < 0) { if (c.rads.length >= 2) throw new Unsupported("more than two distinct radicands"); c.rads.push(r0); i = c.rads.length - 1; }
+      return new Map([[1 << i, rfConst(ONE)]]);
     }
     default: throw new Unsupported(`${e.kind} is outside the checker scope`);
   }
 }
-/** Rational critical points of an atom L ? R: roots and poles of every symbolic piece, over every sign pattern of the absolute values. */
-function criticalPoints(exprs: Expr[], name: string): Q[] {
+/** Real critical points of an atom L ? R: zeros and poles of every symbolic piece (via sign-conjugate norms), over every sign pattern of the absolute values. */
+function criticalPoints(exprs: Expr[], name: string): Pt[] {
   const absKeys = new Map<string, Expr>(), rootKeys = new Map<string, Expr>();
   exprs.forEach((e) => specials(e, absKeys, rootKeys));
-  if (absKeys.size + rootKeys.size > 2 || rootKeys.size > 1) throw new Unsupported("more than two absolute-value/root nodes");
+  if (absKeys.size + rootKeys.size > 3 || rootKeys.size > 2) throw new Unsupported("too many absolute-value/root nodes");
   const keys = [...absKeys.keys()], polys: Poly[] = [];
   for (let mask = 0; mask < 1 << keys.length; mask++) {
     const sigma = new Map<string, 1 | -1>(keys.map((k, i) => [k, (mask >> i) & 1 ? -1 : 1] as [string, 1 | -1]));
-    const ctx: SymCtx = { name, A: null, sigma };
-    const parts = exprs.map((e) => toRF(e, ctx));
+    const ctx: SymCtx = { name, rads: [], sigma };
+    const parts = exprs.map((e) => toXQ(e, ctx));
     const push = (r: RF) => { polys.push(r.n, r.d); };
     if (exprs.length === 2) {
-      const diff = { u: rfAdd(parts[0].u, rfNeg(parts[1].u)), v: rfAdd(parts[0].v, rfNeg(parts[1].v)) };
-      push(diff.u); push(diff.v);
-      if (ctx.A) { push(ctx.A); const z = rfAdd(rfMul(diff.u, diff.u), rfNeg(rfMul(rfMul(diff.v, diff.v), ctx.A))); push(z); }
+      const diff = xAdd(parts[0], xNeg(parts[1]));
+      push(xNorm(diff, ctx)); for (const c of ctx.rads) push(c);
+      for (const comp of diff.values()) polys.push(comp.d);
     }
   }
-  for (const a of absKeys.values()) { const ctx: SymCtx = { name, A: null, sigma: new Map() }; try { const r = toRF(a, ctx); polys.push(r.u.n, r.u.d); } catch (e) { if (!(e instanceof Unsupported)) throw e; } }
-  const pts: Q[] = [];
+  for (const a of absKeys.values()) { const ctx: SymCtx = { name, rads: [], sigma: new Map() }; try { const r = toXQ(a, ctx); if (xIsPure(r) && r.get(0)) { polys.push(r.get(0)!.n, r.get(0)!.d); } } catch (e) { if (!(e instanceof Unsupported)) throw e; } }
+  const pts: Pt[] = [];
   for (const p of polys) {
     const tp = trim(p); if (!tp.length || deg(tp) > CHECKER_LIMITS.maxDegree) { if (tp.length) throw new Exhausted("polynomial degree limit"); continue; }
-    const { roots, complete } = rationalRoots(tp); if (!complete) throw new Unsupported("an irrational or high-degree critical point");
-    for (const r of roots) if (!pts.some((x) => x.eq(r))) pts.push(r);
+    const { roots, complete } = realRootsExt(tp); if (!complete) throw new Unsupported("an irrational critical point of degree > 2 or in a second quadratic field");
+    for (const r of roots) if (!pts.some((x) => ptEq(x, r))) pts.push(r);
   }
   if (pts.length > CHECKER_LIMITS.maxCriticalPoints) throw new Exhausted("too many critical points");
   return pts;
+}
+function realRootsExt(p0: Poly): { roots: Ext[]; complete: boolean } {
+  const { roots, complete } = rationalRoots(p0), out: Ext[] = roots.map(rat);
+  if (complete) return { roots: out, complete: true };
+  let p = trim(p0); for (const r of roots) while (deg(p) > 0 && pEval(p, r).isZero()) p = pDivmod(p, [r.neg(), ONE]).quo;
+  if (deg(p) === 2) {
+    const disc = p[1].mul(p[1]).sub(q(4).mul(p[2]).mul(p[0]));
+    if (disc.sign() > 0 && !sqrtExact(disc)) {
+      const { s: sq, f } = squarefreeSplit(disc.n * disc.d), two = q(2).mul(p[2]), centre = p[1].neg().div(two), half = new Q(sq, disc.d).div(two);
+      return { roots: [...out, { x: centre, y: half, r: new Q(f) }, { x: centre, y: half.neg(), r: new Q(f) }], complete: true };
+    }
+  }
+  return { roots: out, complete: false };
 }
 
 /* ------------------------------------------------------------------ statements and solution sets */
 type Op = "=" | "<" | "<=" | ">" | ">=" | "!=";
 interface Stmt {
   kind: "atom" | "set" | "interval" | "all" | "closed";
-  text: string; critical: Q[]; holds: (v: Q) => boolean; defined: (v: Q) => boolean;
+  text: string; critical: Pt[]; holds: (v: Ext) => boolean; defined: (v: Ext) => boolean;
   atom?: { left: Expr; right: Expr; op: Op };
+  /** E4: this statement is the explicit claim "no solution" */
+  emptyClaim?: boolean;
 }
 const cmpHolds = (s: number, op: Op) => op === "=" ? s === 0 : op === "!=" ? s !== 0 : op === "<" ? s < 0 : op === "<=" ? s <= 0 : op === ">" ? s > 0 : s >= 0;
-function constantValue(e: Expr): Q { const z = evalAt(e, ZERO, "\u0000"); if (!z || !z.y.isZero()) throw new Unsupported("solution value is not an exact rational"); return z.x; }
+function constantValue(e: Expr): Q { const z = evalAt(e, rat(ZERO), "\u0000"); if (!z || !z.y.isZero()) throw new Unsupported("solution value is not an exact rational"); return z.x; }
+function constantPoint(e: Expr): Pt { const z = evalAt(e, rat(ZERO), "\u0000"); if (!z) throw new Unsupported("solution value is undefined"); return z; }
 function atomStmt(op: Op, left: Expr, right: Expr, name: string | null, text: string): Stmt {
   nodeCount(left); nodeCount(right);
   const vn = name ?? "\u0000";
   const critical = name ? criticalPoints([left, right], name) : [];
-  const diff = (v: Q) => { const l = evalAt(left, v, vn), r = evalAt(right, v, vn); return l && r ? eAdd(l, eNeg(r)) : null; };
+  // the sign of (left - right) at a point; at a RATIONAL point with two different irrational radicals the exact biquadratic tower is used
+  const signAt = (v: Ext): number | null => {
+    try { const l = evalAt(left, v, vn), r = evalAt(right, v, vn); return l && r ? signExt(eAdd(l, eNeg(r))) : null; }
+    catch (e) {
+      if (!(e instanceof TwoRadicands) || !v.y.isZero()) throw e;
+      const l = qfEval(left, v.x, vn), r = qfEval(right, v.x, vn); return l && r ? qfSign(qfAdd(l, qfNeg(r))) : null;
+    }
+  };
   return { kind: name ? "atom" : "closed", text, critical, atom: { left, right, op },
-    holds: (v) => { const d = diff(v); return d ? cmpHolds(signExt(d), op) : false; }, defined: (v) => diff(v) !== null };
+    holds: (v) => { const sg = signAt(v); return sg === null ? false : cmpHolds(sg, op); }, defined: (v) => signAt(v) !== null };
 }
 function stmtFromRelation(rel: NaturalRelation, name: string | null, text: string): Stmt {
   if (rel.kind === "equation") return atomStmt("=", rel.left, rel.right, name, text);
   if (rel.kind === "inequality") return atomStmt(rel.operator, rel.left, rel.right, name, text);
   if (rel.kind === "solution-set") {
     if (name !== null && rel.variable !== name) throw new Unsupported("solution set for a different variable");
-    const vals = rel.values.map(constantValue);
-    return { kind: "set", text, critical: vals, holds: (v) => vals.some((x) => x.eq(v)), defined: () => true };
+    const vals = rel.values.map(constantPoint);
+    return { kind: "set", text, critical: vals, holds: (v) => vals.some((x) => ptEq(x, v)), defined: () => true };
   }
   if (rel.kind === "interval") {
-    const lo = rel.lower ? constantValue(rel.lower) : null, hi = rel.upper ? constantValue(rel.upper) : null;
-    return { kind: "interval", text, critical: [lo, hi].filter((x): x is Q => !!x),
-      holds: (v) => (lo === null || (rel.includeLower ? v.cmp(lo) >= 0 : v.cmp(lo) > 0)) && (hi === null || (rel.includeUpper ? v.cmp(hi) <= 0 : v.cmp(hi) < 0)), defined: () => true };
+    const lo = rel.lower ? constantPoint(rel.lower) : null, hi = rel.upper ? constantPoint(rel.upper) : null;
+    return { kind: "interval", text, critical: [lo, hi].filter((x): x is Pt => !!x),
+      holds: (v) => (lo === null || (rel.includeLower ? ptCmp(v, lo) >= 0 : ptCmp(v, lo) > 0)) && (hi === null || (rel.includeUpper ? ptCmp(v, hi) <= 0 : ptCmp(v, hi) < 0)), defined: () => true };
   }
   throw new Unsupported(`${rel.kind} lines are outside the checker scope`);
 }
-interface Profile { points: Q[]; gaps: Q[]; membership: Map<Stmt, { gap: boolean[]; pt: boolean[] }>; undefinedAt: (s: Stmt) => boolean[] }
+interface Profile { points: Pt[]; gaps: Q[]; membership: Map<Stmt, { gap: boolean[]; pt: boolean[] }>; undefinedAt: (s: Stmt) => boolean[] }
 function profile(stmts: Stmt[]): Profile {
-  const points: Q[] = []; for (const s of stmts) for (const c of s.critical) if (!points.some((x) => x.eq(c))) points.push(c);
-  points.sort((a, b) => a.cmp(b)); if (points.length > CHECKER_LIMITS.maxCriticalPoints) throw new Exhausted("too many critical points");
-  const two = q(2), gaps: Q[] = points.length ? [points[0].sub(ONE), ...points.slice(1).map((p, i) => points[i].add(p).div(two)), points[points.length - 1].add(ONE)] : [ZERO];
+  const points: Pt[] = []; for (const s of stmts) for (const c of s.critical) if (!points.some((x) => ptEq(x, c))) points.push(c);
+  points.sort(ptCmp); if (points.length > CHECKER_LIMITS.maxCriticalPoints) throw new Exhausted("too many critical points");
+  const two = q(2), allRational = points.every((p) => p.y.isZero());
+  const gaps: Q[] = !points.length ? [ZERO]
+    : allRational ? [points[0].x.sub(ONE), ...points.slice(1).map((p, i) => points[i].x.add(p.x).div(two)), points[points.length - 1].x.add(ONE)]
+    : [outside(points[0], -1n), ...points.slice(1).map((p, i) => (points[i].y.isZero() && p.y.isZero() ? points[i].x.add(p.x).div(two) : rationalBetween(points[i], p))), outside(points[points.length - 1], 2n)];
   const membership = new Map<Stmt, { gap: boolean[]; pt: boolean[] }>();
-  for (const s of stmts) membership.set(s, { gap: gaps.map((g) => s.holds(g)), pt: points.map((p) => s.holds(p)) });
+  for (const s of stmts) membership.set(s, { gap: gaps.map((g) => s.holds(rat(g))), pt: points.map((p) => s.holds(p)) });
   return { points, gaps, membership, undefinedAt: (s) => points.map((p) => !s.defined(p)) };
 }
 type SetRelation = "equal" | "subset" | "superset" | "incomparable";
@@ -300,8 +459,8 @@ function relate(p: Profile, a: Stmt, b: Stmt): SetRelation {
 function describe(p: Profile, s: Stmt): string {
   const m = p.membership.get(s)!, P = p.points, n = P.length;
   if (!n) return m.gap[0] ? "all real numbers" : "no real solutions";
-  if (m.gap.every((x) => !x)) { const pts = P.filter((_, i) => m.pt[i]).map((x) => x.text()); return pts.length ? `{${pts.join(", ")}}` : "no real solutions"; }
-  if (m.gap.every((x) => x)) { const out = P.filter((_, i) => !m.pt[i]).map((x) => x.text()); return out.length ? `all real numbers except {${out.join(", ")}}` : "all real numbers"; }
+  if (m.gap.every((x) => !x)) { const pts = P.filter((_, i) => m.pt[i]).map((x) => extText(x)); return pts.length ? `{${pts.join(", ")}}` : "no real solutions"; }
+  if (m.gap.every((x) => x)) { const out = P.filter((_, i) => !m.pt[i]).map((x) => extText(x)); return out.length ? `all real numbers except {${out.join(", ")}}` : "all real numbers"; }
   // cells alternate gap0, pt0, gap1, pt1, ..., gapN; merge maximal runs of included cells
   const cells: { gap: boolean; idx: number; on: boolean }[] = [];
   for (let i = 0; i <= n; i++) { cells.push({ gap: true, idx: i, on: m.gap[i] }); if (i < n) cells.push({ gap: false, idx: i, on: m.pt[i] }); }
@@ -310,11 +469,11 @@ function describe(p: Profile, s: Stmt): string {
     if (!cells[k].on) { k++; continue; }
     let e = k; while (e + 1 < cells.length && cells[e + 1].on) e++;
     const first = cells[k], last = cells[e];
-    if (k === e && !first.gap) parts.push(`{${P[first.idx].text()}}`);
+    if (k === e && !first.gap) parts.push(`{${extText(P[first.idx])}}`);
     else {
       const lo = first.gap ? (first.idx === 0 ? null : P[first.idx - 1]) : P[first.idx], loClosed = !first.gap;
       const hi = last.gap ? (last.idx === n ? null : P[last.idx]) : P[last.idx], hiClosed = !last.gap;
-      parts.push(`${lo && loClosed ? "[" : "("}${lo ? lo.text() : "-inf"}, ${hi ? hi.text() : "inf"}${hi && hiClosed ? "]" : ")"}`);
+      parts.push(`${lo && loClosed ? "[" : "("}${lo ? extText(lo) : "-inf"}, ${hi ? extText(hi) : "inf"}${hi && hiClosed ? "]" : ")"}`);
     }
     k = e + 1;
   }
@@ -353,7 +512,7 @@ export function certify(before: Expr, after: Expr): { outcome: "verified" | "rej
   }
   return { outcome: res.outcome, restrictions: cert.restrictions, rules: res.checkedRules, digest: cert.replayDigest };
 }
-function rfOfPure(e: Expr, name: string): RF | null { try { const x = toRF(e, { name, A: null, sigma: new Map() }); return rfIsZero(x.v) ? x.u : null; } catch (err) { if (err instanceof Unsupported) return null; throw err; } }
+function rfOfPure(e: Expr, name: string): RF | null { try { const x = toXQ(e, { name, rads: [], sigma: new Map() }); return xIsPure(x) ? (x.get(0) ?? rfConst(ZERO)) : null; } catch (err) { if (err instanceof Unsupported) return null; throw err; } }
 const ORDER_OPS = ["<", "<=", ">", ">="];
 const REVERSED: Record<string, string> = { "<": ">", "<=": ">=", ">": "<", ">=": "<=" };
 /** U4 evidence for one step: an exact identity between the difference polynomials (equation / inequality steps) or a zero-product identity (equation -> solution list). */
@@ -369,7 +528,8 @@ export function u4StepEvidence(from: Stmt, to: Stmt, name: string): U4Evidence {
   };
   // equation -> "x = r1 or x = r2 ...": the product of the roots' factors is a constant multiple of the equation's polynomial
   if (to.kind === "set" && from.atom.op === "=" && deg(a.d) === 0) {
-    const roots = to.critical; let prod: Poly = [ONE]; for (const r of roots) prod = pmul(prod, [r.neg(), ONE]);
+    if (to.critical.some((r) => !r.y.isZero())) return none;
+    const roots = to.critical.map((r) => r.x); let prod: Poly = [ONE]; for (const r of roots) prod = pmul(prod, [r.neg(), ONE]);
     const h0 = tryDir(a.n, prod), h = h0 && deg(h0) === 0 ? [h0[0].div(a.d[0])] : null; // pf = (a.n / a.d), a.d is a nonzero constant here
     if (h && roots.length > 0) return run(pf, { kind: "multiply", factors: [polyExpr(h, name), polyExpr(prod, name)] } as Expr, h, "equal");
     return none;
@@ -397,15 +557,38 @@ export function u4StepEvidence(from: Stmt, to: Stmt, name: string): U4Evidence {
 }
 
 /* ------------------------------------------------------------------ line classification helpers */
+/** E4: an explicit claim that the equation has no real solution. It is judged as the exact empty solution set, never trusted. */
+const NO_SOLUTION_CLAIM = /^\s*(?:so\s+|hence\s+|therefore\s+|thus\s+)?(?:there\s+(?:is|are)\s+)?no\s+(?:real\s+)?solutions?\.?\s*$|^\s*(?:the\s+)?solution\s+set\s+is\s+(?:empty|\u2205)\.?\s*$|^\s*(?:x\s*\u2208\s*)?\u2205\s*$/i;
+/** E4: a stated method with no assertion ("Take square roots on both sides"). It carries no mathematical claim, so it can never be verified, and it is not a conclusion. */
+const PROCEDURAL_PROSE = /^\s*(?:now[,\s]+|then[,\s]+|next[,\s]+|first[,\s]+)?(?:we\s+(?:can|will|should|need\s+to|must)\s+)?(?:take|taking|divide|multiply|add|subtract|expand|factori[sz]e|factor|simplify|square|cancel|isolate|substitute|solve|apply|use|move|combine|cross[- ]multiply|rearrange|collect|clear|eliminate|complete\s+the\s+square)\b(?!.*(?:\bis\b|\bare\b|\bso\b|\btherefore\b|\bhence\b|\bthus\b|\bgives?\b|\bmeans?\b|\bequals?\b|\bbecause\b|\bsince\b|[=<>\d]))[^.]*\.?\s*$/i;
+/** E4: a function-value remark such as "f(x)=x^2 gives f(2)=f(-2)=4": each application is evaluated exactly; null when the line is not of this shape. */
+const FUNCTION_REMARK = /^\s*([A-Za-z])\s*\(\s*([A-Za-z])\s*\)\s*=\s*(.+?)\s+gives\s+(.+?)\s*$/i;
+function functionRemarkTruth(text: string): boolean | null {
+  const m = FUNCTION_REMARK.exec(text); if (!m) return null;
+  const body = parseNaturalWorking({ format: "natural", text: m[3] }), segments = m[4].split("=").map((x) => x.trim());
+  if (body.classification !== "parsed" || body.lines.length !== 1 || body.lines[0].relation.kind !== "expression" || segments.length < 2) return null;
+  const expr = body.lines[0].relation.expression, app = new RegExp(`^${m[1]}\\s*\\(\\s*(.+)\\s*\\)$`);
+  const value = (t: string): Ext | null => { const r = parseNaturalWorking({ format: "natural", text: t }); if (r.classification !== "parsed" || r.lines.length !== 1 || r.lines[0].relation.kind !== "expression") throw new Unsupported("unparseable value in a function remark"); return evalAt(r.lines[0].relation.expression, rat(ZERO), "\u0000"); };
+  const target = value(segments[segments.length - 1]); if (!target) throw new Unsupported("undefined value in a function remark");
+  let all = true;
+  for (const seg of segments.slice(0, -1)) {
+    const a = app.exec(seg); if (!a) return null;
+    const at = value(a[1]); if (!at) throw new Unsupported("undefined argument in a function remark");
+    const out = evalAt(expr, at, m[2]); if (!out) throw new Unsupported("the function is undefined at the argument");
+    if (!eZero(eAdd(out, eNeg(target)))) all = false;
+  }
+  return all;
+}
+const emptyClaimStmt = (text: string): Stmt => ({ kind: "set", text, critical: [], holds: () => false, defined: () => true, emptyClaim: true });
 const COMPLETENESS_CLAIM = /\b(?:the\s+)?(?:complete|full|entire|whole)\s+(?:solution|answer|set)\b|\bthis is (?:the )?(?:only|whole|entire|complete)\b|\ball (?:the )?solutions\b|\bthe only solution\b/i;
 const UNIVERSAL_CLAIM = /\b(?:holds|true|valid)\s+for\s+(?:all|every|any)\b|\bfor\s+(?:all|every|any)\s+(?:real\s+)?(?:x|values?|numbers?)\b|\bis an identity\b|\bidentity\b/i;
 export type CheckerStatus = "verified-valid" | "verified-invalid" | "incomplete" | "unsupported" | "inconclusive" | "resource-exhausted";
 export interface CheckedLine {
-  index: number; status: CheckerStatus; relation: "equivalent" | "narrowing" | "widening" | "incomparable" | "independent-true" | "independent-false" | "completeness-claim" | "universal-claim" | "unsupported" | "inconclusive" | "numeric-equal" | "numeric-different";
-  detail: string; solutionSet: string | null; evidence: { checker: "u4+exact-solution-set" | "exact-solution-set" | "exact-arithmetic" | "u4-identity"; u4: U4Evidence | null } | null;
+  index: number; status: CheckerStatus; relation: "equivalent" | "consequence" | "narrowing" | "widening" | "incomparable" | "independent-true" | "independent-false" | "completeness-claim" | "universal-claim" | "unsupported" | "inconclusive" | "numeric-equal" | "numeric-different";
+  detail: string; solutionSet: string | null; evidence: { checker: "u4+exact-solution-set" | "exact-solution-set" | "exact-arithmetic" | "u4-identity" | "exact-polynomial-identity" | "u4+exact-linear-system"; u4: U4Evidence | null } | null;
 }
 export interface AlgebraCheck {
-  contract: typeof INDEPENDENT_CHECKER_CONTRACT; scope: string; mode: "solution-set" | "numeric-value" | "expression-identity" | "none";
+  contract: typeof INDEPENDENT_CHECKER_CONTRACT; scope: string; mode: "solution-set" | "numeric-value" | "expression-identity" | "linear-system" | "evaluation" | "none";
   outcome: "verified" | "invalid" | "incomplete" | "missing-assumption" | "unsupported" | "resource-exhausted";
   /** "checker": the checker decides completeness; "native": it only vouches for step equivalence (expression problems) */
   completenessAuthority: "checker" | "native"; firstInvalidStep: number | null; lines: CheckedLine[];
@@ -417,6 +600,7 @@ function relationVars(r: NaturalRelation, set: Set<string>) {
   if (r.kind === "equation" || r.kind === "inequality") { variablesOf(r.left, set); variablesOf(r.right, set); }
   else if (r.kind === "expression") variablesOf(r.expression, set);
   else if (r.kind === "solution-set") set.add(r.variable); else if (r.kind === "interval" && r.variable) set.add(r.variable);
+  else if (r.kind === "conjunction") r.parts.forEach((p) => { variablesOf(p.left, set); variablesOf(p.right, set); });
 }
 const isIsolatedConstant = (e: Expr) => { try { variablesOf(e); return variablesOf(e).size === 0; } catch { return false; } };
 function isSolvedForm(rel: NaturalRelation, name: string): boolean {
@@ -433,6 +617,330 @@ const isProseExpression = (rel: NaturalRelation): boolean => {
   return [...names].some((n) => n.length > 1);
 };
 
+
+/* ================================================================== E4: exact multivariable engine
+ * Independent of math-core, the adapters and M3. Exact bigint-rational arithmetic only: no floating point anywhere.
+ *   - identifier splitting ("6uv" is 6*u*v) when every letter is a single-letter variable of the problem;
+ *   - sparse multivariate polynomials over Q (bounded terms / degree / variables);
+ *   - linear systems: every working line is checked to be an exact consequence of the ORIGINAL equations by exhibiting the
+ *     rational combination  line = sum c_j * E_j  and having the U4 kernel re-derive that identity; a line that is not a
+ *     consequence is refuted by an exact point of the solution space where it is false;
+ *   - expression identities and "evaluate when ..." by exact polynomial equality.
+ */
+type MPoly = Map<string, { c: Q; mono: [string, number][] }>;
+const MP_LIMITS = { maxTerms: 400, maxDegree: 12, maxVars: 6, maxEquations: 8, maxCombinationSize: 12 } as const;
+const mpKeyOf = (mono: [string, number][]) => mono.map(([n, e]) => `${n}^${e}`).join("*");
+const mpTerm = (c: Q, mono: [string, number][]): MPoly => { const m: MPoly = new Map(); if (!c.isZero()) m.set(mpKeyOf(mono), { c, mono }); return m; };
+function mpAdd(a: MPoly, b: MPoly): MPoly {
+  const r: MPoly = new Map(a);
+  for (const [k, t] of b) { const o = r.get(k); if (o) { const c = o.c.add(t.c); if (c.isZero()) r.delete(k); else r.set(k, { c, mono: t.mono }); } else r.set(k, t); }
+  if (r.size > MP_LIMITS.maxTerms) throw new Exhausted("too many polynomial terms"); return r;
+}
+function mpMul(a: MPoly, b: MPoly): MPoly {
+  const r: MPoly = new Map();
+  for (const x of a.values()) for (const y of b.values()) {
+    const e = new Map<string, number>(); for (const [n, k] of x.mono) e.set(n, k); for (const [n, k] of y.mono) e.set(n, (e.get(n) ?? 0) + k);
+    const mono = [...e.entries()].sort((p0, p1) => (p0[0] < p1[0] ? -1 : 1)) as [string, number][];
+    if (mono.reduce((acc, [, k]) => acc + k, 0) > MP_LIMITS.maxDegree) throw new Exhausted("polynomial degree limit");
+    const key = mpKeyOf(mono), o = r.get(key), c = x.c.mul(y.c).add(o ? o.c : ZERO);
+    if (c.isZero()) r.delete(key); else r.set(key, { c, mono });
+    if (r.size > MP_LIMITS.maxTerms) throw new Exhausted("too many polynomial terms");
+  }
+  return r;
+}
+const mpScale = (a: MPoly, k: Q): MPoly => { const r: MPoly = new Map(); if (k.isZero()) return r; for (const [key, t] of a) r.set(key, { c: t.c.mul(k), mono: t.mono }); return r; };
+const mpOne = (): MPoly => mpTerm(ONE, []);
+function mpPow(b: MPoly, n: number): MPoly { let acc = mpOne(); for (let i = 0; i < n; i++) acc = mpMul(acc, b); return acc; }
+function mpConstantOf(p: MPoly): Q | null { if (p.size === 0) return ZERO; if (p.size === 1) { const t = [...p.values()][0]; if (t.mono.length === 0) return t.c; } return null; }
+function mpFromExpr(e: Expr): MPoly {
+  switch (e.kind) {
+    case "constant": return mpTerm(readRat(e.value), []);
+    case "variable": return mpTerm(ONE, [[e.name, 1]]);
+    case "add": return e.terms.map(mpFromExpr).reduce(mpAdd, new Map() as MPoly);
+    case "multiply": return e.factors.map(mpFromExpr).reduce((a, b) => mpMul(a, b), mpOne());
+    case "power": {
+      if (!Number.isInteger(e.exponent) || Math.abs(e.exponent) > MP_LIMITS.maxDegree) throw new Unsupported("non-integer or large exponent");
+      const b = mpFromExpr(e.base);
+      if (e.exponent < 0) { const c = mpConstantOf(b); if (!c || c.isZero()) throw new Unsupported("division by a non-constant or by zero is outside the multivariable polynomial scope"); return mpPow(mpTerm(ONE.div(c), []), -e.exponent); }
+      return mpPow(b, e.exponent);
+    }
+    default: throw new Unsupported(`${e.kind} is outside the multivariable polynomial scope`);
+  }
+}
+const mpVars = (p: MPoly): string[] => [...new Set([...p.values()].flatMap((t) => t.mono.map(([n]) => n)))].sort();
+function mpEval(p: MPoly, env: Map<string, Q>): Q {
+  let acc = ZERO;
+  for (const t of p.values()) { let v = t.c; for (const [n, k] of t.mono) { const x = env.get(n); if (!x) throw new Unsupported(`no value for ${n}`); for (let i = 0; i < k; i++) v = v.mul(x); } acc = acc.add(v); }
+  return acc;
+}
+const mpEqual = (a: MPoly, b: MPoly) => mpAdd(a, mpScale(b, q(-1))).size === 0;
+
+/** "uv" -> u*v when every letter is a single-letter variable that appears in the working or the problem and "uv" is not itself a declared name. */
+function mapVariables(e: Expr, f: (name: string) => Expr): Expr {
+  switch (e.kind) {
+    case "variable": return f(e.name);
+    case "add": return { ...e, terms: e.terms.map((t) => mapVariables(t, f)) };
+    case "multiply": return { ...e, factors: e.factors.map((t) => mapVariables(t, f)) };
+    case "power": return { ...e, base: mapVariables(e.base, f) };
+    case "abs": return { ...e, argument: mapVariables(e.argument, f) };
+    case "root": return { ...e, radicand: mapVariables(e.radicand, f) };
+    default: return e;
+  }
+}
+function relationExprs(r: NaturalRelation): Expr[] {
+  if (r.kind === "equation" || r.kind === "inequality") return [r.left, r.right];
+  if (r.kind === "expression") return [r.expression];
+  if (r.kind === "conjunction") return r.parts.flatMap((p) => [p.left, p.right]);
+  if (r.kind === "solution-set") return r.values;
+  return [];
+}
+function mapRelation(r: NaturalRelation, f: (e: Expr) => Expr): NaturalRelation {
+  if (r.kind === "equation") return { ...r, left: f(r.left), right: f(r.right) };
+  if (r.kind === "inequality") return { ...r, left: f(r.left), right: f(r.right) };
+  if (r.kind === "expression") return { ...r, expression: f(r.expression) };
+  if (r.kind === "conjunction") return { ...r, parts: r.parts.map((p) => ({ ...p, left: f(p.left), right: f(p.right) })) };
+  if (r.kind === "solution-set") return { ...r, values: r.values.map(f) };
+  return r;
+}
+function splitIdentifiers(statementRel: NaturalRelation, rels: NaturalRelation[]): { statement: NaturalRelation; rels: NaturalRelation[] } {
+  const all = [statementRel, ...rels], single = new Set<string>();
+  const collect = (e: Expr) => { try { for (const n of variablesOf(e)) { if (n.length === 1) single.add(n); } } catch (err) { if (!(err instanceof Unsupported)) throw err; } };
+  for (const r of all) relationExprs(r).forEach(collect);
+  const f = (e: Expr): Expr => mapVariables(e, (n) => (n.length > 1 && /^[A-Za-z]+$/.test(n) && [...n].every((ch) => single.has(ch)) ? { kind: "multiply", factors: [...n].map((ch) => ({ kind: "variable", name: ch }) as Expr) } as Expr : { kind: "variable", name: n }));
+  return { statement: mapRelation(statementRel, f), rels: rels.map((r) => mapRelation(r, f)) };
+}
+
+/* ---- exact linear algebra over Q */
+/** A particular solution of A x = b (free variables 0), or null when inconsistent. */
+function solveLinear(A: Q[][], b: Q[]): Q[] | null {
+  const m = A.length, n = m ? A[0].length : 0, M = A.map((r, i) => [...r, b[i]]); const pivots: number[] = []; let row = 0;
+  for (let col = 0; col < n && row < m; col++) {
+    let pr = -1; for (let r = row; r < m; r++) if (!M[r][col].isZero()) { pr = r; break; }
+    if (pr < 0) continue; [M[row], M[pr]] = [M[pr], M[row]]; const inv = ONE.div(M[row][col]); M[row] = M[row].map((v) => v.mul(inv));
+    for (let r = 0; r < m; r++) if (r !== row && !M[r][col].isZero()) { const f = M[r][col]; M[r] = M[r].map((v, k) => v.sub(f.mul(M[row][k]))); }
+    pivots.push(col); row++;
+  }
+  for (let r = row; r < m; r++) if (!M[r][n].isZero()) return null;
+  const x = Array.from({ length: n }, () => ZERO); pivots.forEach((c, i) => { x[c] = M[i][n]; }); return x;
+}
+/** coefficients c with sum_j c_j rows_j = target (rows are [a_1..a_n, const]), or null */
+function combinationOf(rows: Q[][], target: Q[]): Q[] | null {
+  if (!rows.length) return target.every((v) => v.isZero()) ? [] : null;
+  const width = target.length, A = Array.from({ length: width }, (_, col) => rows.map((r) => r[col]));
+  return solveLinear(A, target);
+}
+const pointOf = (rows: Q[][], nvars: number): Q[] | null => rows.length ? solveLinear(rows.map((r) => r.slice(0, nvars)), rows.map((r) => r[nvars].neg())) : Array.from({ length: nvars }, () => ZERO);
+const rowExpr = (row: Q[], V: string[]): Expr => {
+  const terms: Expr[] = []; V.forEach((v, i) => { if (!row[i].isZero()) terms.push({ kind: "multiply", factors: [{ kind: "constant", value: row[i].text() }, { kind: "variable", name: v }] } as Expr); });
+  if (!row[V.length].isZero() || !terms.length) terms.push({ kind: "constant", value: row[V.length].text() }); return terms.length === 1 ? terms[0] : { kind: "add", terms };
+};
+const diffExpr = (l: Expr, r: Expr): Expr => sumExpr(l, r);
+function u4Replay(before: Expr, after: Expr): U4Evidence {
+  const c = certify(before, after);
+  return { outcome: c.outcome, multiplier: "linear-combination", direction: "equal", restrictions: c.restrictions, rules: c.rules, digest: c.digest };
+}
+const NO_SOLUTION_SYSTEM = NO_SOLUTION_CLAIM;
+const isBareVariable = (e: Expr) => e.kind === "variable";
+function isSolvedAtom(l: Expr, r: Expr): boolean {
+  const mentions = (e: Expr, n: string) => { try { return variablesOf(e).has(n); } catch { return true; } };
+  return (isBareVariable(l) && !mentions(r, (l as { name: string }).name)) || (isBareVariable(r) && !mentions(l, (r as { name: string }).name));
+}
+const MV_SCOPE = "E4 multivariable: rational-coefficient polynomial expressions, linear systems (consequence by exact combination of the original equations), evaluation at exact rational bindings" as const;
+const mvBase = (mode: AlgebraCheck["mode"], authority: AlgebraCheck["completenessAuthority"], lines: CheckedLine[], u4Steps: number, exactSteps: number, problemSet: string | null, finalSet: string | null) =>
+  ({ contract: INDEPENDENT_CHECKER_CONTRACT, scope: `${CHECKER_SCOPE}; ${MV_SCOPE}`, mode, completenessAuthority: authority, lines, problemSolutionSet: problemSet, finalSolutionSet: finalSet, restrictions: [] as string[], u4Steps, exactSteps });
+
+function describeAffine(rows: Q[][], V: string[]): string {
+  const pt = pointOf(rows, V.length); if (!pt) return "no solution";
+  const full = rows.length && solveLinear(rows.map((r) => r.slice(0, V.length)), rows.map((r) => r[V.length].neg())) !== null;
+  void full; const rank = affineRank(rows, V.length);
+  return rank === V.length ? `(${V.join(", ")}) = (${pt.map((x) => x.text()).join(", ")})` : `a solution set of dimension ${V.length - rank}`;
+}
+function affineRank(rows: Q[][], nvars: number): number {
+  const M = rows.map((r) => r.slice(0, nvars)); let rank = 0;
+  for (let col = 0; col < nvars && rank < M.length; col++) {
+    let pr = -1; for (let r = rank; r < M.length; r++) if (!M[r][col].isZero()) { pr = r; break; }
+    if (pr < 0) continue; [M[rank], M[pr]] = [M[pr], M[rank]]; for (let r = rank + 1; r < M.length; r++) if (!M[r][col].isZero()) { const f = M[r][col].div(M[rank][col]); M[r] = M[r].map((v, k) => v.sub(f.mul(M[rank][k]))); } rank++;
+  }
+  return rank;
+}
+
+function linearSystemMode(stmtRel: NaturalRelation & { kind: "conjunction" }, rels: NaturalRelation[], texts: string[], classOf: string[]): AlgebraCheck {
+  const eqPolys = stmtRel.parts.map((p) => mpFromExpr(diffExpr(p.left, p.right)));
+  const V = [...new Set(eqPolys.flatMap(mpVars))].sort();
+  if (V.length < 2 || V.length > MP_LIMITS.maxVars) throw new Unsupported("a linear system needs between two and six unknowns");
+  if (eqPolys.length > MP_LIMITS.maxEquations) throw new Exhausted("too many equations");
+  const rowsOf = (p: MPoly): Q[] | null => { const r = V.map(() => ZERO).concat([ZERO]); for (const t of p.values()) { if (!t.mono.length) { r[V.length] = t.c; continue; } if (t.mono.length > 1 || t.mono[0][1] !== 1) return null; const i = V.indexOf(t.mono[0][0]); if (i < 0) throw new Unsupported(`the variable ${t.mono[0][0]} is not an unknown of the problem`); r[i] = t.c; } return r; };
+  const S0 = eqPolys.map((p) => { const r = rowsOf(p); if (!r) throw new Unsupported("the system is not linear"); return r; });
+  const E: Expr[] = stmtRel.parts.map((p) => diffExpr(p.left, p.right));
+  const point0 = pointOf(S0, V.length), consistent = point0 !== null, problemDesc = describeAffine(S0, V);
+  const out: CheckedLine[] = []; let firstInvalid: number | null = null, unresolved: number | null = null, narrowingAt: number | null = null, u4Steps = 0, exactSteps = 0;
+  const lineRows: (Q[][] | "claim-none" | null)[] = []; const solvedLine: boolean[] = [];
+  const claimRefutation = (rows: Q[]): string => `the line ${rows.map((x) => x.text()).join(" ")} is not implied by the system`;
+  void claimRefutation;
+  rels.forEach((rel, i) => {
+    const push = (c: Omit<CheckedLine, "index">) => out.push({ index: i, ...c });
+    if (firstInvalid !== null || unresolved !== null) { lineRows.push(null); solvedLine.push(false); push({ status: "inconclusive", relation: "inconclusive", detail: firstInvalid !== null ? `depends on the invalid line ${firstInvalid + 1}` : `depends on the unverified line ${unresolved! + 1}`, solutionSet: null, evidence: null }); return; }
+    try {
+      if (NO_SOLUTION_SYSTEM.test(texts[i]) && (classOf[i] === "prose" || rel.kind === "expression")) {
+        lineRows.push("claim-none"); solvedLine.push(true); exactSteps++;
+        if (!consistent) {
+          const k = combinationOf(S0, [...V.map(() => ZERO), ONE]);
+          const ev = k ? u4Replay({ kind: "constant", value: "1" }, k.map((c, j) => ({ kind: "multiply", factors: [{ kind: "constant", value: c.text() }, E[j]] }) as Expr).reduce((a, b) => ({ kind: "add", terms: [a, b] }) as Expr)) : null;
+          if (ev && ev.outcome === "verified") u4Steps++;
+          push({ status: "verified-valid", relation: "completeness-claim", detail: "the system is inconsistent: the equations combine exactly to the contradiction 0 = 1", solutionSet: "no solution", evidence: { checker: "u4+exact-linear-system", u4: ev } });
+        } else { firstInvalid = i; push({ status: "verified-invalid", relation: "completeness-claim", detail: `the claim of no solution is false: the system has the solution ${problemDesc}`, solutionSet: "no solution", evidence: { checker: "exact-solution-set", u4: null } }); }
+        return;
+      }
+      if (classOf[i] === "prose") throw new Unsupported("prose that is not a recognised mathematical claim");
+      const atoms = rel.kind === "equation" ? [rel] : rel.kind === "conjunction" ? rel.parts : null;
+      if (!atoms) throw new Unsupported(`${rel.kind} lines are outside the linear-system scope`);
+      const rowsHere: Q[][] = []; let worst: "valid" | "partial" | "invalid" = "valid", detail = "", evidenceU4: U4Evidence | null = null, allU4 = true, equalToProblem = true;
+      for (const a of atoms) {
+        const d = diffExpr(a.left, a.right), p = mpFromExpr(d), r = rowsOf(p);
+        if (!r) throw new Unsupported("a nonlinear line is outside the linear-system scope");
+        rowsHere.push(r);
+        const k = combinationOf(S0, r);
+        if (k) {
+          const comb = k.map((c, j) => ({ kind: "multiply", factors: [{ kind: "constant", value: c.text() }, E[j]] }) as Expr);
+          const after: Expr = comb.length ? comb.reduce((x, y) => ({ kind: "add", terms: [x, y] }) as Expr) : { kind: "constant", value: "0" };
+          if (k.filter((c) => !c.isZero()).length > MP_LIMITS.maxCombinationSize) throw new Exhausted("combination too large");
+          const ev = u4Replay(d, after); evidenceU4 = ev;
+          if (ev.outcome === "verified") u4Steps++; else { allU4 = false; throw new Unsupported("the independent kernel could not re-derive the line as a combination of the equations"); }
+        } else if (!consistent) { worst = "invalid"; detail = "the system has no solution, and this line is not derived from the equations"; }
+        else {
+          const meets = solveLinear([...S0, r].map((x) => x.slice(0, V.length)), [...S0, r].map((x) => x[V.length].neg())) !== null;
+          if (meets) { if (worst === "valid") { worst = "partial"; detail = `this line holds for only some solutions of the system (it narrows the solution set ${problemDesc})`; } }
+          else { worst = "invalid"; const w = point0!; detail = `false for the solution ${V.map((v, j) => `${v} = ${w[j].text()}`).join(", ")} of the system (the line evaluates to ${r.slice(0, V.length).reduce((acc, c, j) => acc.add(c.mul(w[j])), r[V.length]).text()} instead of 0)`; }
+        }
+      }
+      if (worst === "valid") { equalToProblem = S0.every((r0) => combinationOf(rowsHere, r0) !== null); }
+      lineRows.push(rowsHere); solvedLine.push(atoms.every((a) => isSolvedAtom(a.left, a.right))); exactSteps += worst === "valid" ? 0 : 1;
+      if (worst === "invalid") { firstInvalid = i; push({ status: "verified-invalid", relation: "incomparable", detail, solutionSet: null, evidence: { checker: "exact-solution-set", u4: null } }); }
+      else if (worst === "partial") { narrowingAt = narrowingAt ?? i; push({ status: "incomplete", relation: "narrowing", detail, solutionSet: null, evidence: { checker: "exact-solution-set", u4: null } }); }
+      else push({ status: "verified-valid", relation: equalToProblem ? "equivalent" : "consequence", detail: equalToProblem ? "equivalent to the system" : "an exact combination of the original equations", solutionSet: null, evidence: { checker: allU4 && evidenceU4 ? "u4+exact-linear-system" : "exact-solution-set", u4: evidenceU4 } });
+    } catch (e) {
+      if (!(e instanceof Unsupported)) throw e;
+      lineRows.push(null); solvedLine.push(false); unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: e.message, solutionSet: null, evidence: null });
+    }
+  });
+  const base = mvBase("linear-system", "checker", out, u4Steps, exactSteps, problemDesc, null);
+  const fin = (outcome: AlgebraCheck["outcome"], firstInv: number | null, why: string, extra: string[] = [], finalSet: string | null = null): AlgebraCheck => ({ ...base, outcome, firstInvalidStep: firstInv, finalSolutionSet: finalSet, obligations: extra, justification: why });
+  if (firstInvalid !== null) return fin("invalid", firstInvalid, `line ${firstInvalid + 1}: ${out[firstInvalid].detail}`);
+  if (unresolved !== null) return fin("unsupported", null, `line ${unresolved + 1} cannot be verified independently: ${out[unresolved].detail}`, [`verify line ${unresolved + 1}`]);
+  if (narrowingAt !== null) return fin("incomplete", null, `line ${narrowingAt + 1}: ${out[narrowingAt].detail}`, ["a conclusion must describe the whole solution set"]);
+  if (!rels.length) return fin("incomplete", null, "no working was supplied", ["state the solution"]);
+  if (!consistent) {
+    const last = lineRows[rels.length - 1];
+    return last === "claim-none" ? fin("verified", null, "every line is an exact consequence of the system and the conclusion of no solution is exact", [], "no solution") : fin("incomplete", null, "the working does not conclude that the system has no solution", ["state that the system has no solution"]);
+  }
+  // conclusion = the trailing run of solved-form lines
+  let start = rels.length; while (start > 0 && solvedLine[start - 1] && Array.isArray(lineRows[start - 1])) start--;
+  if (start === rels.length) return fin("incomplete", null, "the working does not reach a stated solution", ["state the solution of the system"]);
+  const C = (lineRows.slice(start) as Q[][][]).flat();
+  const determines = S0.every((r0) => combinationOf(C, r0) !== null);
+  const finalSet = describeAffine(C, V);
+  if (!determines) return fin("incomplete", null, `the stated conclusion (${finalSet}) does not determine the full solution set (${problemDesc})`, ["state the complete solution of the system"], finalSet);
+  return fin("verified", null, `every line is an exact consequence of the system and the stated conclusion equals its solution set ${problemDesc}`, [], finalSet);
+}
+
+
+function isExpandedForm(e: Expr, monomials: number): boolean {
+  const term = (t: Expr): boolean => {
+    if (t.kind === "constant" || t.kind === "variable") return true;
+    if (t.kind === "multiply") return t.factors.every(term);
+    if (t.kind === "power") return Number.isInteger(t.exponent) && t.exponent >= 0 && (t.base.kind === "variable" || t.base.kind === "constant");
+    return false;
+  };
+  const flat = (x: Expr): Expr[] => (x.kind === "add" ? x.terms.flatMap(flat) : [x]);
+  const terms = flat(e);
+  return terms.every(term) && terms.length === Math.max(1, monomials);
+}
+function isPlainNumber(e: Expr): boolean {
+  let denominators = 0;
+  const ok = (t: Expr): boolean => {
+    if (t.kind === "constant") return true;
+    if (t.kind === "multiply") return t.factors.every(ok);
+    if (t.kind === "power" && t.exponent === -1 && t.base.kind === "constant") { denominators++; return true; }
+    return false;
+  };
+  return ok(e) && denominators <= 1;
+}
+function polynomialExpressionMode(expr0: Expr, verb: string | null, rels: NaturalRelation[], texts: string[], classOf: string[]): AlgebraCheck {
+  const P0 = mpFromExpr(expr0); nodeCount(expr0);
+  if (mpVars(P0).length > MP_LIMITS.maxVars) throw new Unsupported("too many variables");
+  const out: CheckedLine[] = []; let prev = expr0, bad: number | null = null, unresolved: number | null = null, u4Steps = 0, exactSteps = 0, last: Expr | null = null;
+  rels.forEach((rel, i) => {
+    const push = (c: Omit<CheckedLine, "index">) => out.push({ index: i, ...c });
+    if (bad !== null || unresolved !== null) { push({ status: "inconclusive", relation: "inconclusive", detail: "depends on an earlier unresolved line", solutionSet: null, evidence: null }); return; }
+    try {
+      if (classOf[i] === "prose" || rel.kind !== "expression") throw new Unsupported("not an expression line");
+      const next = rel.expression; nodeCount(next);
+      const P = mpFromExpr(next);
+      if (mpEqual(P, P0)) {
+        const c = certify(prev, next), viaU4 = c.outcome === "verified";
+        if (viaU4) u4Steps++; else exactSteps++;
+        push({ status: "verified-valid", relation: "equivalent", detail: "has exactly the same expanded polynomial as the problem", solutionSet: null, evidence: { checker: viaU4 ? "u4-identity" : "exact-polynomial-identity", u4: viaU4 ? { outcome: "verified", multiplier: "1", direction: "equal", restrictions: c.restrictions, rules: c.rules, digest: c.digest } : null } });
+        prev = next; last = next; return;
+      }
+      exactSteps++; bad = i;
+      const diff = mpAdd(P, mpScale(P0, q(-1)));
+      push({ status: "verified-invalid", relation: "incomparable", detail: `its expanded polynomial differs from the problem's (the difference has ${diff.size} nonzero term${diff.size === 1 ? "" : "s"})`, solutionSet: null, evidence: { checker: "exact-polynomial-identity", u4: null } });
+    } catch (e) { if (!(e instanceof Unsupported)) throw e; unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: e.message, solutionSet: null, evidence: null }); }
+  });
+  const authority = verb === "expand" ? "checker" as const : "native" as const;
+  const base = mvBase("expression-identity", authority, out, u4Steps, exactSteps, null, null);
+  if (bad !== null) return { ...base, outcome: "invalid", firstInvalidStep: bad, obligations: [], justification: `line ${bad + 1}: ${out[bad].detail}` };
+  if (unresolved !== null) return { ...base, outcome: "unsupported", firstInvalidStep: null, obligations: [`verify line ${unresolved + 1}`], justification: `line ${unresolved + 1} cannot be verified independently` };
+  if (authority === "checker") {
+    if (!last || !isExpandedForm(last, P0.size)) return { ...base, outcome: "incomplete", firstInvalidStep: null, obligations: ["write the result as a fully expanded polynomial with like terms combined"], justification: "every line is exact, but the final line is not a fully expanded polynomial" };
+    return { ...base, outcome: "verified", firstInvalidStep: null, obligations: [], justification: "every line has exactly the problem's polynomial and the final line is fully expanded" };
+  }
+  return { ...base, outcome: "verified", firstInvalidStep: null, obligations: [], justification: "every line has exactly the problem's polynomial (form completeness is judged natively)" };
+}
+
+function evaluationMode(expr0: Expr, bindings: Map<string, Q>, rels: NaturalRelation[], classOf: string[]): AlgebraCheck {
+  const P0 = mpFromExpr(expr0); nodeCount(expr0);
+  for (const v of mpVars(P0)) if (!bindings.has(v)) throw new Unsupported(`the problem does not give a value for ${v}`);
+  const V0 = mpEval(P0, bindings);
+  const out: CheckedLine[] = []; let bad: number | null = null, unresolved: number | null = null, u4Steps = 0, exactSteps = 0, last: Expr | null = null, prev = expr0;
+  rels.forEach((rel, i) => {
+    const push = (c: Omit<CheckedLine, "index">) => out.push({ index: i, ...c });
+    if (bad !== null || unresolved !== null) { push({ status: "inconclusive", relation: "inconclusive", detail: "depends on an earlier unresolved line", solutionSet: null, evidence: null }); return; }
+    try {
+      if (classOf[i] === "prose" || rel.kind !== "expression") throw new Unsupported("not an expression line");
+      const next = rel.expression; nodeCount(next); const P = mpFromExpr(next), vars = mpVars(P);
+      if (!vars.length) {
+        exactSteps++; last = next;
+        if (mpConstantOf(P)!.eq(V0)) push({ status: "verified-valid", relation: "numeric-equal", detail: `evaluates exactly to ${V0.text()}, the value of the problem`, solutionSet: null, evidence: { checker: "exact-arithmetic", u4: null } });
+        else { bad = i; push({ status: "verified-invalid", relation: "numeric-different", detail: `evaluates exactly to ${mpConstantOf(P)!.text()}, but the problem's value is ${V0.text()}`, solutionSet: null, evidence: { checker: "exact-arithmetic", u4: null } }); }
+        return;
+      }
+      if (mpEqual(P, P0)) {
+        const c = certify(prev, next), viaU4 = c.outcome === "verified"; if (viaU4) u4Steps++; else exactSteps++; last = next; prev = next;
+        push({ status: "verified-valid", relation: "equivalent", detail: "the same polynomial as the problem's expression", solutionSet: null, evidence: { checker: viaU4 ? "u4-identity" : "exact-polynomial-identity", u4: viaU4 ? { outcome: "verified", multiplier: "1", direction: "equal", restrictions: c.restrictions, rules: c.rules, digest: c.digest } : null } });
+        return;
+      }
+      for (const v of vars) if (!bindings.has(v)) throw new Unsupported(`the variable ${v} has no value in the problem`);
+      const val = mpEval(P, bindings); exactSteps++; last = null;
+      if (!val.eq(V0)) { bad = i; push({ status: "verified-invalid", relation: "numeric-different", detail: `with the given values this line is ${val.text()}, but the problem's value is ${V0.text()}`, solutionSet: null, evidence: { checker: "exact-arithmetic", u4: null } }); return; }
+      throw new Unsupported("a different expression with the same value; the rewriting is not justified by an exact identity");
+    } catch (e) { if (!(e instanceof Unsupported)) throw e; unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: e.message, solutionSet: null, evidence: null }); }
+  });
+  const base = mvBase("evaluation", "checker", out, u4Steps, exactSteps, V0.text(), null);
+  if (bad !== null) return { ...base, outcome: "invalid", firstInvalidStep: bad, obligations: [], justification: `line ${bad + 1}: ${out[bad].detail}` };
+  if (unresolved !== null) return { ...base, outcome: "unsupported", firstInvalidStep: null, obligations: [`verify line ${unresolved + 1}`], justification: `line ${unresolved + 1} cannot be verified independently` };
+  if (!rels.length) return { ...base, outcome: "incomplete", firstInvalidStep: null, obligations: ["evaluate the expression"], justification: "no working was supplied" };
+  const lastRel = rels[rels.length - 1];
+  if (lastRel.kind !== "expression" || !isPlainNumber(lastRel.expression)) return { ...base, outcome: "incomplete", firstInvalidStep: null, finalSolutionSet: null, obligations: ["finish the evaluation to a single number"], justification: "every line is exact, but the evaluation is not carried through to a single number" };
+  void last;
+  return { ...base, outcome: "verified", firstInvalidStep: null, finalSolutionSet: V0.text(), obligations: [], justification: `every line has the problem's exact value and the result ${V0.text()} is stated` };
+}
+function stripVerb(statement: string): { verb: string | null; body: string } {
+  const m = /^\s*(expand|factori[sz]e|factor|simplify|evaluate|compute|calculate|find the value of)\b[:\s]*(.*)$/i.exec(statement);
+  if (!m) return { verb: null, body: statement };
+  const v = m[1].toLowerCase(); return { verb: v.startsWith("factor") ? "factor" : v, body: m[2] };
+}
+
 /* ------------------------------------------------------------------ the checker */
 export function checkAlgebraSubmission(statement: string, parsed: NaturalParseResult): AlgebraCheck {
   try { return run(statement, parsed); }
@@ -444,22 +952,39 @@ export function checkAlgebraSubmission(statement: string, parsed: NaturalParseRe
 }
 function run(statement: string, parsed: NaturalParseResult): AlgebraCheck {
   if (parsed.classification !== "parsed" || !parsed.lines.length) return empty("unsupported", "the working could not be parsed");
-  const ps = parseNaturalWorking({ format: "natural", text: statement });
+  const { verb, body } = stripVerb(statement);
+  const whenM = /^(.*?)\s+(?:when|for|if|where|given(?:\s+that)?)\s+(.+)$/i.exec(body);
+  const ps = parseNaturalWorking({ format: "natural", text: whenM ? whenM[1] : body });
   if (ps.classification !== "parsed" || ps.lines.length !== 1) return empty("unsupported", "the problem statement is not a single parseable mathematical statement");
-  const rel0 = ps.lines[0].relation, lines = parsed.lines;
+  const split = splitIdentifiers(ps.lines[0].relation, parsed.lines.map((l) => l.relation));
+  const rel0 = split.statement, lines = parsed.lines.map((l, i) => ({ ...l, relation: split.rels[i] }));
+  const parsed2: NaturalParseResult = { ...parsed, lines };
   const names = new Set<string>(); relationVars(rel0, names); const classOf: string[] = lines.map((l) => (isProseExpression(l.relation) ? "prose" : "math"));
+  const texts = lines.map((l) => l.source.text);
+  if (whenM) {
+    if (rel0.kind !== "expression") throw new Unsupported("an evaluation problem needs an expression");
+    const bp = parseNaturalWorking({ format: "natural", text: whenM[2] });
+    if (bp.classification !== "parsed" || bp.lines.length !== 1) throw new Unsupported("the given values are not parseable");
+    const br = bp.lines[0].relation, atoms = br.kind === "equation" ? [br] : br.kind === "conjunction" ? br.parts : null;
+    if (!atoms) throw new Unsupported("the given values must be equations such as a = 2");
+    const bindings = new Map<string, Q>();
+    for (const a of atoms) { if (a.left.kind !== "variable") throw new Unsupported("a given value must be of the form variable = number"); const v = constantValue(a.right); if (bindings.has(a.left.name)) throw new Unsupported("a variable is given two values"); bindings.set(a.left.name, v); }
+    return evaluationMode(rel0.expression, bindings, lines.map((l) => l.relation), classOf);
+  }
+  if (rel0.kind === "conjunction") return linearSystemMode(rel0, lines.map((l) => l.relation), texts, classOf);
   lines.forEach((l, i) => { if (classOf[i] === "math") { try { relationVars(l.relation, names); } catch (e) { if (!(e instanceof Unsupported)) throw e; classOf[i] = "bad"; } } });
+  if (rel0.kind === "expression" && (names.size >= 2 || verb === "expand")) return polynomialExpressionMode(rel0.expression, verb, lines.map((l) => l.relation), texts, classOf);
   if (names.size > 1) throw new Unsupported("more than one variable");
   const name = names.size ? [...names][0] : null;
-  if (rel0.kind === "expression") return name === null ? numericMode(rel0.expression, parsed, classOf) : identityMode(rel0.expression, parsed, name, classOf);
-  if (rel0.kind === "equation" || rel0.kind === "inequality") return solutionMode(rel0, parsed, name, classOf);
+  if (rel0.kind === "expression") return name === null ? numericMode(rel0.expression, parsed2, classOf) : identityMode(rel0.expression, parsed2, name, classOf);
+  if (rel0.kind === "equation" || rel0.kind === "inequality") return solutionMode(rel0, parsed2, name, classOf);
   throw new Unsupported(`${rel0.kind} problems are outside the checker scope`);
 }
 
 function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: string | null, classOf: string[]): AlgebraCheck {
   if (name === null) throw new Unsupported("the problem statement has no variable");
   const stmt0 = stmtFromRelation(rel0, name, "problem"), lines = parsed.lines;
-  const out: CheckedLine[] = []; const chain: { stmt: Stmt; index: number; rel: NaturalRelation }[] = [];
+  const out: CheckedLine[] = []; const chain: { stmt: Stmt; index: number; rel: NaturalRelation; solved: boolean }[] = [];
   let prev = stmt0, prevRel: SetRelation | null = null; void prevRel;
   let unresolved: number | null = null, firstInvalid: number | null = null, narrowing = -1, widening = -1, falseCompleteness: number | null = null, missingAssumptionAt: number | null = null;
   const obligations: string[] = []; let u4Steps = 0, exactSteps = 0;
@@ -469,10 +994,12 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
   const built: (Stmt | { claim: "completeness" | "universal" } | { error: string } | { closed: boolean | null })[] = lines.map((l, i) => {
     if (COMPLETENESS_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { claim: "completeness" as const };
     if (UNIVERSAL_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { claim: "universal" as const };
+    if (NO_SOLUTION_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { ...emptyClaimStmt(text(i)) };
+    { let remark: boolean | null = null; try { remark = functionRemarkTruth(text(i)); } catch (e) { if (!(e instanceof Unsupported)) throw e; return { error: e.message }; } if (remark !== null) return { closed: remark }; }
     if (classOf[i] === "prose") return { error: "prose that is not a recognised mathematical claim" };
     try {
       const rel = l.relation; const vs = new Set<string>(); relationVars(rel, vs);
-      if (vs.size === 0 && (rel.kind === "equation" || rel.kind === "inequality")) { const s = stmtFromRelation(rel, null, text(i)); return { closed: s.defined(ZERO) ? s.holds(ZERO) : null }; }
+      if (vs.size === 0 && (rel.kind === "equation" || rel.kind === "inequality")) { const s = stmtFromRelation(rel, null, text(i)); return { closed: s.defined(rat(ZERO)) ? s.holds(rat(ZERO)) : null }; }
       return stmtFromRelation(rel, name, text(i));
     } catch (e) { if (e instanceof Unsupported) return { error: e.message }; throw e; }
   });
@@ -518,30 +1045,47 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
     if (u4 && u4.outcome === "rejected") { unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: "the independent U4 identity check rejected the derived algebraic relation; abstaining", solutionSet: desc(s), evidence: ev }); continue; }
     if (r === "equal") push({ status: "verified-valid", relation: "equivalent", detail: `equivalent to the previous statement: ${desc(s)}`, solutionSet: desc(s), evidence: ev });
     else if (r === "subset") { widening = widening < 0 ? i : widening; push({ status: "verified-valid", relation: "widening", detail: `follows from the previous statement but admits more values (${desc(s)}); candidates must be checked against the original problem`, solutionSet: desc(s), evidence: ev }); }
-    else if (r === "superset") { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that loses solutions: ${desc(prev)} became ${desc(s)}`, solutionSet: desc(s), evidence: ev }); }
+    else if (r === "superset") {
+      // E4: a reduction is classified exactly. Dropping a true solution is a loss (or an outright error when no solution survives);
+      // dropping only non-solutions is a justified candidate elimination when the previous set is a short finite list of candidates
+      // (the exact partition has just proven every dropped candidate fails the ORIGINAL problem) or when the dropped points are undefined in the original.
+      const Mp = prof.membership.get(prev)!, Ms = prof.membership.get(s)!, M0 = prof.membership.get(stmt0)!;
+      const cells = (m: { gap: boolean[]; pt: boolean[] }) => [...m.gap, ...m.pt];
+      const cp = cells(Mp), cs = cells(Ms), c0 = cells(M0);
+      const dropsSolution = cp.some((v, k) => v && !cs[k] && c0[k]), anySolution = c0.some(Boolean), keepsSolution = cs.some((v, k) => v && c0[k]);
+      const prevFinite = Mp.gap.every((v) => !v) && Mp.pt.filter(Boolean).length <= 8;
+      const droppedUndefined = cp.every((v, k) => !(v && !cs[k]) || (k >= Mp.gap.length && undefined0[k - Mp.gap.length]));
+      if (dropsSolution && anySolution && !keepsSolution) { firstInvalid = i; push({ status: "verified-invalid", relation: "narrowing", detail: `the step discards every solution of the original problem: ${desc(prev)} became ${desc(s)} but the problem's solution set is ${S0desc}`, solutionSet: desc(s), evidence: ev }); }
+      else if (dropsSolution) { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that loses solutions: ${desc(prev)} became ${desc(s)}`, solutionSet: desc(s), evidence: ev }); }
+      else if ((prevFinite || droppedUndefined) && candidatePolicy === "shown") { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that discards candidates (${desc(prev)} became ${desc(s)}) without showing the check against the original problem`, solutionSet: desc(s), evidence: ev }); }
+      else if (prevFinite || droppedUndefined) push({ status: "verified-valid", relation: "narrowing", detail: `eliminates candidates that the exact check shows are not solutions of the original problem (${desc(prev)} became ${desc(s)})`, solutionSet: desc(s), evidence: ev });
+      else { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `an unjustified jump from ${desc(prev)} to ${desc(s)}: the removed values are not shown to be non-solutions`, solutionSet: desc(s), evidence: ev }); }
+    }
     else { firstInvalid = i; push({ status: "verified-invalid", relation: "incomparable", detail: `neither follows from nor is equivalent to the previous statement (${desc(prev)} versus ${desc(s)})`, solutionSet: desc(s), evidence: ev }); }
-    if (firstInvalid === null) { chain.push({ stmt: s, index: i, rel: lines[i].relation }); prev = s; finalStmt = s; finalIndex = i; }
+    if (firstInvalid === null) { chain.push({ stmt: s, index: i, rel: lines[i].relation, solved: !!s.emptyClaim || isSolvedForm(lines[i].relation, name ?? "x") }); prev = s; finalStmt = s; finalIndex = i; }
   }
   void pending; void stmts;
-  const restrictions = prof.points.filter((_, k) => undefined0[k]).map((p) => `${name ?? "x"} != ${p.text()}`);
+  const restrictions = prof.points.filter((_, k) => undefined0[k]).map((p) => `${name ?? "x"} != ${extText(p)}`);
   const base = { contract: INDEPENDENT_CHECKER_CONTRACT, scope: CHECKER_SCOPE, mode: "solution-set" as const, completenessAuthority: "checker" as const, lines: out, problemSolutionSet: S0desc, restrictions, u4Steps, exactSteps };
   const result = (outcome: AlgebraCheck["outcome"], firstInv: number | null, why: string, extra: string[] = []): AlgebraCheck => ({ ...base, outcome, firstInvalidStep: firstInv, finalSolutionSet: finalStmt ? desc(finalStmt) : null, obligations: [...obligations, ...extra], justification: why });
   if (firstInvalid !== null) return result("invalid", firstInvalid, `line ${firstInvalid + 1}: ${out[firstInvalid].detail}`);
+  if (unresolved !== null && narrowing < 0 && lines.slice(unresolved).every((_, k) => PROCEDURAL_PROSE.test(text(unresolved! + k)) && (classOf[unresolved! + k] === "prose" || lines[unresolved! + k].relation.kind === "expression")) && (!chain.length || !chain[chain.length - 1].solved))
+    return result("incomplete", null, "the working describes a method but never states a result", ["state the result"]);
   if (unresolved !== null) return result("unsupported", null, `line ${unresolved + 1} cannot be verified independently: ${out[unresolved].detail}`, [`verify line ${unresolved + 1}`]);
   if (missingAssumptionAt !== null && falseCompleteness === null) return result("missing-assumption", null, `the conclusion ignores the domain restriction: ${restrictions.join(", ")}`, restrictions.map((r) => `state the restriction ${r}`));
   if (!finalStmt) return result("incomplete", null, "no mathematical conclusion about the variable was reached", ["state the solution"]);
   if (falseCompleteness !== null) return result("invalid", narrowing >= 0 ? narrowing : falseCompleteness, out[falseCompleteness].detail);
+  if (narrowing >= 0 || (candidatePolicy === "shown" && widening >= 0)) return result("incomplete", null, candidatePolicy === "shown" && widening >= 0 ? "the working widened the solution set (for example by squaring) and later removed candidates without showing the check against the original problem" : "a step lost solutions or jumped to a smaller set without justification", [candidatePolicy === "shown" && widening >= 0 ? "verify each candidate in the original problem" : "justify every solution-changing step"]);
+  if (!chain[chain.length - 1].solved) return result("incomplete", null, "the working is correct but the solution is not stated in solved form", ["state the solution explicitly"]);
   const rel = relate(prof, finalStmt, stmt0);
   if (rel === "incomparable") return result("invalid", finalIndex, `the final statement (${desc(finalStmt)}) is not related to the problem's solution set (${S0desc})`);
   if (rel === "superset") return result("invalid", finalIndex, `the final statement (${desc(finalStmt)}) includes values that are not solutions; the problem's solution set is ${S0desc}`);
   if (rel === "subset") return result("incomplete", null, `the conclusion (${desc(finalStmt)}) omits solutions: the problem's solution set is ${S0desc}`, [`include the remaining solutions: ${S0desc}`]);
-  if (narrowing >= 0 || widening >= 0) return result("incomplete", null, widening >= 0 ? "the working widened the solution set (for example by squaring) and later removed candidates without showing the check against the original problem" : "a step lost solutions that were later recovered without justification", [widening >= 0 ? "verify each candidate in the original problem" : "justify every solution-changing step"]);
-  if (!isSolvedForm(chain[chain.length - 1].rel, name ?? "x")) return result("incomplete", null, "the working is correct but the solution is not stated in solved form", ["state the solution explicitly"]);
-  return result("verified", null, `every line is exact-equivalent to the problem and the solution set ${S0desc} is stated`);
+  return result("verified", null, `every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set ${S0desc} is stated`);
 }
 
 function numericMode(expr: Expr, parsed: NaturalParseResult, classOf: string[]): AlgebraCheck {
-  const v0 = evalAt(expr, ZERO, "\u0000"); if (!v0) throw new Unsupported("the problem expression is undefined");
+  const v0 = evalAt(expr, rat(ZERO), "\u0000"); if (!v0) throw new Unsupported("the problem expression is undefined");
   const out: CheckedLine[] = []; let bad: number | null = null, unresolved: number | null = null; let last: Ext | null = null; let lastKind: string = ""; let exact = 0;
   parsed.lines.forEach((l, i) => {
     const push = (c: Omit<CheckedLine, "index">) => out.push({ index: i, ...c });
@@ -549,9 +1093,9 @@ function numericMode(expr: Expr, parsed: NaturalParseResult, classOf: string[]):
     try {
       if (classOf[i] === "prose") throw new Unsupported("prose that is not a recognised mathematical claim");
       const rel = l.relation, ev = { checker: "exact-arithmetic" as const, u4: null };
-      if (rel.kind === "expression") { const z = evalAt(rel.expression, ZERO, "\u0000"); if (!z) throw new Unsupported("undefined value"); exact++; last = z; lastKind = rel.expression.kind;
+      if (rel.kind === "expression") { const z = evalAt(rel.expression, rat(ZERO), "\u0000"); if (!z) throw new Unsupported("undefined value"); exact++; last = z; lastKind = rel.expression.kind;
         if (eZero(eAdd(z, eNeg(v0)))) push({ status: "verified-valid", relation: "numeric-equal", detail: "has exactly the same value as the problem", solutionSet: null, evidence: ev }); else { bad = i; push({ status: "verified-invalid", relation: "numeric-different", detail: "its exact value differs from the problem's value", solutionSet: null, evidence: ev }); } return; }
-      if (rel.kind === "equation") { const a = evalAt(rel.left, ZERO, "\u0000"), b = evalAt(rel.right, ZERO, "\u0000"); if (!a || !b) throw new Unsupported("undefined value"); exact++;
+      if (rel.kind === "equation") { const a = evalAt(rel.left, rat(ZERO), "\u0000"), b = evalAt(rel.right, rat(ZERO), "\u0000"); if (!a || !b) throw new Unsupported("undefined value"); exact++;
         const ok = eZero(eAdd(a, eNeg(b))), same = eZero(eAdd(a, eNeg(v0))); last = b; lastKind = rel.right.kind;
         if (ok && same) push({ status: "verified-valid", relation: "numeric-equal", detail: "a true equality that preserves the problem's value", solutionSet: null, evidence: ev }); else { bad = i; push({ status: "verified-invalid", relation: "numeric-different", detail: ok ? "a true equality, but not about the problem's value" : "the two sides are not exactly equal", solutionSet: null, evidence: ev }); } return; }
       throw new Unsupported(`${rel.kind} lines are outside the checker scope`);
@@ -575,7 +1119,7 @@ function identityMode(expr: Expr, parsed: NaturalParseResult, name: string, clas
       const c = certify(prev, next);
       if (c.outcome === "verified") { u4Steps++; push({ status: "verified-valid", relation: "equivalent", detail: "U4 verifies the exact rational identity with the previous expression", solutionSet: null, evidence: { checker: "u4-identity", u4: { outcome: "verified", multiplier: "1", direction: "equal", restrictions: c.restrictions, rules: c.rules, digest: c.digest } } }); prev = next; return; }
       // a concrete exact counterexample at a defined rational point is an independent refutation
-      for (const t of [0, 1, -1, 2, 3, -2, 5].map(q)) { const a = evalAt(prev, t, name), b = evalAt(next, t, name); if (a && b && !eZero(eAdd(a, eNeg(b)))) { bad = i; push({ status: "verified-invalid", relation: "incomparable", detail: `the expressions differ at ${name} = ${t.text()}`, solutionSet: null, evidence: { checker: "exact-arithmetic", u4: null } }); return; } }
+      for (const t of [0, 1, -1, 2, 3, -2, 5].map((n) => rat(q(n)))) { const a = evalAt(prev, t, name), b = evalAt(next, t, name); if (a && b && !eZero(eAdd(a, eNeg(b)))) { bad = i; push({ status: "verified-invalid", relation: "incomparable", detail: `the expressions differ at ${name} = ${t.x.text()}`, solutionSet: null, evidence: { checker: "exact-arithmetic", u4: null } }); return; } }
       throw new Unsupported("the independent kernel cannot decide this expression equivalence");
     } catch (e) { if (!(e instanceof Unsupported)) throw e; unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: e.message, solutionSet: null, evidence: null }); }
   });
