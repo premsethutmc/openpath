@@ -21,3 +21,5 @@ export * from "./calculus-core";
 export * from "./calculus-methods";
 
 export * from "./symbolic-equivalence";
+
+export * from "./proof-kernel.ts";
