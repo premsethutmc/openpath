@@ -24,3 +24,5 @@ export * from "./symbolic-equivalence";
 
 export * from "./proof-kernel.ts";
 export * from "./probability-statistics.ts";
+export * from "./linear-algebra.ts";
+export * from "./linear-algebra-kernel.ts";
