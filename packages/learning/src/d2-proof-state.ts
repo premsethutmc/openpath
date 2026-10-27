@@ -14,6 +14,8 @@ export interface D2EstablishedFact {
   mathematicalEvidence: unknown;
   reasonerVersions: string[];
   independentlyVerified: true;
+  /** E2: identity, order and status of every submitted line this fact rests on (empty for typed, non-natural stages). */
+  sourceLines: { id: string; line: number; status: string }[];
 }
 
 export interface D2ProofStateSnapshot {
@@ -51,6 +53,10 @@ export class D2ProofState {
     if (!assessment.reasoners.length || assessment.steps.some((step) => step.classification !== "verified")) {
       return [`stage ${stageId} lacks independently checked step evidence`];
     }
+    const account = (assessment.domainPayload as { lineAccount?: { records: { id: string; line: number; status: string; premiseEligible: boolean }[]; unaccounted: string[]; violations: string[]; orderPreserved: boolean } } | null)?.lineAccount;
+    if (account && (account.unaccounted.length || account.violations.length || !account.orderPreserved || account.records.some((r) => !r.premiseEligible))) {
+      return [`stage ${stageId} rests on submitted lines that are not all verified premises`];
+    }
     const reasonerVersions = assessment.reasoners.map((reasoner) => `${reasoner.id}@${reasoner.version}`);
     this.facts.set(stageId, {
       stageId,
@@ -63,6 +69,7 @@ export class D2ProofState {
       mathematicalEvidence: assessment.domainPayload,
       reasonerVersions,
       independentlyVerified: true,
+      sourceLines: (account?.records ?? []).map((r) => ({ id: r.id, line: r.line, status: r.status })),
     });
     for (const dependency of dependencies) this.edges.push({ from: dependency, to: stageId });
     return [];

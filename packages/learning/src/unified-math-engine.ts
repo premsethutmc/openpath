@@ -1,5 +1,5 @@
 /** Unified mathematics assessment U1. Thin dispatch only; native engines remain authoritative. */
-import { assessWorking, type WorkingOptions } from "./core/working-assessment.ts";
+import { assessWorking, verifyWorkingStep, type WorkingOptions } from "./core/working-assessment.ts";
 import { requestGeometryWorker, GeometryTransportError, type GeometryFailureCode } from "./geometry-worker.ts";
 import { MATHEMATICAL_OBLIGATION_CONTRACT, constant, statementText, symbol, validateObligation, type MathExpression, type MathematicalObligation, type MathematicalStatement } from "./mathematical-obligations.ts";
 import { assessDomainWorking, M1_CONTRACT, type M1Problem, type M1Step } from "./domains-m1.ts";
@@ -13,7 +13,10 @@ import { assessComplex, COMPLEX_B3_CONTRACT, type ComplexProblem, type ComplexSt
 import { D2_MAX_STAGES, D2_PROOF_STATE_VERSION, D2ProofState } from "./d2-proof-state.ts";
 import { D3_BINDING_CONTRACT, MathematicalBindingStore, type D3Problem, type D3Working } from "./cross-domain-bindings.ts";
 import { NATURAL_WORKING_CONTRACT, equationAsExpression, naturalRestrictionKeys, parseNaturalWorking, type NaturalWorkingInput, type SourceLocation } from "./natural-working.ts";
-import { NATURAL_ADAPTER_CONTRACT, adaptNaturalWorking } from "./natural-domain-adapters.ts";
+import { NATURAL_ADAPTER_CONTRACT, adaptNaturalWorking, type NaturalAdapterResult } from "./natural-domain-adapters.ts";
+import { buildLineAccount, resolveVerdict, unparsedLineAccount, validateAccounts, type AccountEntry, type LineAccount, type LineStatus, type StepClassification } from "./proof-integrity.ts";
+import { bindClaims } from "./claim-binding.ts";
+import type { NaturalParseResult } from "./natural-working.ts";
 
 export const UNIFIED_MATH_CONTRACT = "openpath-unified-math-assessment@1" as const;
 export type Classification = "verified" | "invalid" | "incomplete" | "missing-assumption" | "unsupported" | "contradictory" | "resource-exhausted" | "malformed" | "ambiguous";
@@ -111,25 +114,74 @@ function missingTransferAssumptions(problem: MixedProblem, transfer: CrossDomain
   return [];
 }
 
+
+const NATURAL_PARSER_ID={id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT};
+const lineClass=(status:LineStatus):Classification=>status==="verified-valid"?"verified":status==="verified-invalid"?"invalid":status==="incomplete"?"incomplete":status==="inconclusive"?"unsupported":status;
+function unresolvedSteps(parsed:NaturalParseResult,why:string,classification:Classification,unaccounted?:number[]):AssessmentStep[]{return parsed.lines.map((line,index)=>({index,classification:classification==="verified"||classification==="invalid"?"unsupported":unaccounted&&!unaccounted.includes(index)?"unsupported":classification,justification:unaccounted&&!unaccounted.includes(index)?`line ${line.source.line} was not certified: the submission cannot be certified while other lines are unverified`:`line ${line.source.line} was not verified: ${why}`,reasoner:"natural-working-parser",dependencies:index?[index-1]:["problem"],source:line.source}))}
+function stepsFromAccount(parsed:NaturalParseResult,account:LineAccount,assessed?:AssessmentEnvelope):AssessmentStep[]{return account.records.map((r,index)=>({index,classification:lineClass(r.status),justification:r.reason,reasoner:r.role==="claim-step"&&r.stepIndex!==null?assessed?.steps[r.stepIndex]?.reasoner??"unverified":r.role==="given-matched"?"natural-adapter:typed-match":"unverified",dependencies:r.dependencies.length?r.dependencies:["problem"],source:parsed.lines[index].source}))}
+
+/** Text (algebra) route: math-core judges every submitted line; certification additionally requires 1:1 line accounting. */
+/** A step that only loses solutions is a valid-but-incomplete narrowing, not a false statement (E2 completeness rule). */
+function refineLoss(statement:string,lines:string[],assessed:AssessmentEnvelope):AssessmentEnvelope{
+  if(assessed.classification!=="invalid"||assessed.domain==="arithmetic")return assessed;
+  const steps=assessed.steps.map(step=>({...step}));let loss=false,firstBad=-1;const lost:string[]=[];
+  const completeness=/\b(?:the\s+)?(?:complete|full|entire|whole)\s+(?:solution|answer|set)\b|\bthis is (?:the )?(?:only|whole|entire|complete)\b|\ball (?:the )?solutions\b|\bthe only solution\b/i;
+  for(let i=1;i<steps.length&&i<lines.length;i++){if(steps[i].classification!=="invalid")continue;const v=verifyWorkingStep(statement,lines[i-1],lines[i]);
+    if(v.effect==="invalid-loss"&&!lines.slice(i+1).some(l=>completeness.test(l))){loss=true;lost.push(`line ${i+1}: ${v.detail}`);steps[i]={...steps[i],classification:"incomplete",justification:`valid but incomplete narrowing: ${v.detail}`}}else if(firstBad<0)firstBad=i}
+  if(!loss)return assessed;
+  if(firstBad>=0)return{...assessed,steps,firstInvalidStep:firstBad,justification:`line ${firstBad+1} is not an equivalent step`};
+  return{...assessed,classification:"incomplete",correct:null,complete:false,firstInvalidStep:null,steps,justification:"every step is valid, but the working narrows the solution set and does not account for all solutions",outstandingObligations:[...assessed.outstandingObligations,...lost]}}
+
+function gateTextRoute(domain:AssessmentEnvelope["domain"],parsed:NaturalParseResult,assessed0:AssessmentEnvelope,input:NaturalWorkingInput,statement?:string):AssessmentEnvelope{
+  const assessed=statement?refineLoss(statement,parsed.lines.map(l=>l.source.text),assessed0):assessed0;
+  const finalClaimInvalid=assessed.classification==="invalid"&&assessed.firstInvalidStep===null&&(assessed.domainPayload as {invalidAt?:string}|null)?.invalidAt==="final-claim"&&assessed.steps.length===parsed.lines.length;
+  const accounts:AccountEntry[]=parsed.lines.map((l,i)=>({lineId:l.id,role:"claim-step" as const,stepIndex:i,dependsOn:i?[parsed.lines[i-1].id]:[]}));
+  const violations:string[]=[];if(assessed.steps.length>parsed.lines.length)violations.push(`reasoner returned ${assessed.steps.length} steps for ${parsed.lines.length} lines`);
+  const outcomes=parsed.lines.map((_,i)=>assessed.steps[i]?{classification:(finalClaimInvalid&&i===parsed.lines.length-1?"invalid":assessed.steps[i].classification) as StepClassification,justification:finalClaimInvalid&&i===parsed.lines.length-1?`the final claim is not a valid solution: ${assessed.justification}`:assessed.steps[i].justification}:undefined);
+  const account=buildLineAccount(parsed,accounts,outcomes,input.text,violations);
+  let result:AssessmentEnvelope={...assessed,firstInvalidStep:finalClaimInvalid?parsed.lines.length-1:assessed.firstInvalidStep,steps:assessed.steps.map((step,index)=>({...step,classification:finalClaimInvalid&&index===parsed.lines.length-1?"invalid":step.classification,source:parsed.lines[index]?.source})),reasoners:[NATURAL_PARSER_ID,...assessed.reasoners],domainPayload:{naturalInput:parsed,assessment:assessed.domainPayload,lineAccount:account}};
+  if(assessed.classification==="verified"){
+    const verdict=resolveVerdict(account,assessed.complete,[]);
+    if(verdict.classification!=="verified")result={...result,classification:verdict.classification,correct:verdict.correct,complete:false,firstInvalidStep:verdict.firstInvalidStep,justification:verdict.justification,outstandingObligations:[...result.outstandingObligations,...verdict.obligations],steps:stepsFromAccount(parsed,account,assessed)}
+  }
+  return result}
+
+/** Adapter route: re-validate the adapter's line accounts, judge every claim, bind certificates, and derive the verdict from the per-line account. */
+async function assessConverted(problem:MathematicalProblem,domain:AssessmentEnvelope["domain"],parsed:NaturalParseResult,adapted:Extract<NaturalAdapterResult,{outcome:"converted"}>,input:NaturalWorkingInput,options:AssessOptions):Promise<AssessmentEnvelope>{
+  const reasoners=[NATURAL_PARSER_ID,{id:`natural-adapter:${adapted.evidence.adapter}`,version:NATURAL_ADAPTER_CONTRACT}];
+  const stepCount=Array.isArray(adapted.working)?adapted.working.length:-1;
+  const violations=validateAccounts(parsed,adapted.accounts,stepCount,adapted.sourceMap);
+  if(violations.length){const account=buildLineAccount(parsed,[],[],input.text,violations);return{...malformed(domain,violations[0]),classification:"unsupported",steps:unresolvedSteps(parsed,violations[0],"unsupported"),outstandingObligations:violations,reasoners,domainPayload:{naturalInput:parsed,conversion:adapted.evidence,lineAccount:account}}}
+  const assessed=await assessMathematicalWorking(adapted.problem as MathematicalProblem,adapted.working as StudentWorking,options);
+  const claimCount=adapted.accounts.filter(a=>a.role==="claim-step").length;
+  const outcomes=Array.from({length:claimCount},(_,k)=>assessed.steps[k]?{classification:assessed.steps[k].classification as StepClassification,justification:assessed.steps[k].justification}:undefined);
+  const extra:string[]=assessed.steps.length>claimCount?[`reasoner returned ${assessed.steps.length} steps for ${claimCount} claims`]:[];
+  extra.push(...bindClaims(parsed,adapted,assessed));
+  const account=buildLineAccount(parsed,adapted.accounts,outcomes,input.text,extra);
+  const nativeComplete=assessed.classification==="verified"&&assessed.complete;
+  let verdict=resolveVerdict(account,nativeComplete,adapted.obligations);
+  if(verdict.classification==="incomplete"&&!nativeComplete&&["missing-assumption","resource-exhausted","contradictory","unsupported","ambiguous","malformed"].includes(assessed.classification)&&!account.records.some(r=>r.status!=="verified-valid"))verdict={...verdict,classification:assessed.classification,justification:assessed.justification,obligations:[...verdict.obligations,...assessed.outstandingObligations]};
+  const steps=stepsFromAccount(parsed,account,assessed);
+  return{...assessed,domain,classification:verdict.classification,correct:verdict.correct,complete:verdict.complete,firstInvalidStep:verdict.firstInvalidStep,steps,proofDependencies:steps.map(s=>s.dependencies),
+    outstandingObligations:[...new Set([...assessed.outstandingObligations,...verdict.obligations])],justification:verdict.justification,reasoners:[...reasoners,...assessed.reasoners],
+    domainPayload:{naturalInput:parsed,conversion:adapted.evidence,assessment:assessed.domainPayload,lineAccount:account}}}
+
 export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   if (!problem || typeof problem !== "object" || !("domain" in problem || "statement" in problem)) return malformed("algebra", "problem must be a typed mathematical problem");
   if(studentWorking&&!Array.isArray(studentWorking)&&"format" in studentWorking&&"text" in studentWorking){
     const parsed=parseNaturalWorking(studentWorking as NaturalWorkingInput),domain=(problem.domain==="symbolic"?"symbolic":problem.domain==="auto"||problem.domain==="arithmetic"||problem.domain==="algebra"||!("domain" in problem)?"algebra":problem.domain) as AssessmentEnvelope["domain"];
-    if(parsed.classification!=="parsed"){return{...malformed(domain,parsed.message),classification:parsed.classification,domainPayload:{naturalInput:parsed},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT}]}}
+    if(parsed.classification!=="parsed"){const lineAccount=unparsedLineAccount(studentWorking as NaturalWorkingInput,parseNaturalWorking);return{...malformed(domain,parsed.message),classification:parsed.classification,steps:lineAccount.records.map((r,index)=>({index,classification:lineClass(r.status),justification:r.reason,reasoner:"natural-working-parser",dependencies:["problem"],source:{line:r.line,start:r.span.start,end:r.span.end,text:r.text}})),domainPayload:{naturalInput:parsed,lineAccount},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT}]}}
     let assessed:AssessmentEnvelope;
     if("statement" in problem){assessed=textAssessment(problem,parsed.lines.map(x=>x.source.text),options);const square=problem.statement.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)\^2=(\d+)$/),single=parsed.lines.length===1?parsed.lines[0].source.text.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)=(-?\d+)$/):null;if(assessed.classification==="invalid"&&square&&single&&square[1]===single[1]&&Number(single[2])**2===Number(square[2])&&Number(square[2])>0)assessed={...assessed,classification:"incomplete",correct:null,complete:false,firstInvalidStep:null,justification:"one square-root branch is valid, but the opposite root is still required",outstandingObligations:[`include both ${square[1]} = ${Math.abs(Number(single[2]))} and ${square[1]} = ${-Math.abs(Number(single[2]))}`],steps:assessed.steps.map(step=>({...step,classification:"verified",justification:"this is one valid solution branch"}))}}
     else if(problem.domain==="symbolic"){
       const adapted=adaptNaturalWorking(problem,parsed);
-      if(adapted.outcome==="converted"){
-        assessed=await assessMathematicalWorking(adapted.problem as MathematicalProblem,adapted.working as StudentWorking,options);
-        return{...assessed,domain,steps:assessed.steps.map((step,index)=>({...step,source:adapted.sourceMap[index]})),reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT},{id:`natural-adapter:${adapted.evidence.adapter}`,version:NATURAL_ADAPTER_CONTRACT},...assessed.reasoners],domainPayload:{naturalInput:parsed,conversion:adapted.evidence,assessment:assessed.domainPayload}};
-      }
-      if(adapted.outcome!=="unsupported")return{...malformed(domain,adapted.message),classification:adapted.outcome==="missing-assumption"?"missing-assumption":adapted.outcome==="ambiguous"?"ambiguous":adapted.outcome==="resource-exhausted"?"resource-exhausted":"unsupported",outstandingObligations:adapted.obligations??[adapted.message],domainPayload:{naturalInput:parsed,conversion:adapted},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT},{id:"natural-domain-adapter",version:NATURAL_ADAPTER_CONTRACT}]};
+      if(adapted.outcome==="converted")return assessConverted(problem,domain,parsed,adapted,studentWorking as NaturalWorkingInput,options);
+      if(adapted.outcome!=="unsupported"&&adapted.outcome!=="partial")return{...malformed(domain,adapted.message),classification:adapted.outcome==="missing-assumption"?"missing-assumption":adapted.outcome==="ambiguous"?"ambiguous":adapted.outcome==="resource-exhausted"?"resource-exhausted":"unsupported",outstandingObligations:adapted.obligations??[adapted.message],domainPayload:{naturalInput:parsed,conversion:adapted},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT},{id:"natural-domain-adapter",version:NATURAL_ADAPTER_CONTRACT}]};
       const unsupported=parsed.lines.find(line=>!["expression","equation"].includes(line.relation.kind));if(unsupported)return{...malformed(domain,`line ${unsupported.source.line} has no lossless symbolic adapter`),classification:"unsupported",domainPayload:{naturalInput:parsed},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT}]};
       const steps:SymbolicStep[]=parsed.lines.map((line,index)=>({id:line.id,expression:line.relation.kind==="equation"?equationAsExpression(line.relation):line.relation.expression,dependencies:index?[parsed.lines[index-1].id]:undefined,...(line.restrictions?.length?{carriedRestrictions:naturalRestrictionKeys(line)}:{})}));
       assessed=await assessMathematicalWorking(problem,steps,options);
-    }else{const adapted=adaptNaturalWorking(problem,parsed);if(adapted.outcome!=="converted"){const classification:Classification=adapted.outcome==="missing-assumption"?"missing-assumption":adapted.outcome==="ambiguous"?"ambiguous":adapted.outcome==="resource-exhausted"?"resource-exhausted":"unsupported";return{...malformed(domain,adapted.message),classification,outstandingObligations:adapted.obligations??[adapted.message],domainPayload:{naturalInput:parsed,conversion:adapted},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT},{id:"natural-domain-adapter",version:NATURAL_ADAPTER_CONTRACT}]}}assessed=await assessMathematicalWorking(adapted.problem as MathematicalProblem,adapted.working as StudentWorking,options);return{...assessed,domain,steps:assessed.steps.map((step,index)=>({...step,source:adapted.sourceMap[index]})),reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT},{id:`natural-adapter:${adapted.evidence.adapter}`,version:NATURAL_ADAPTER_CONTRACT},...assessed.reasoners],domainPayload:{naturalInput:parsed,conversion:adapted.evidence,assessment:assessed.domainPayload}}}
-    return{...assessed,steps:assessed.steps.map((step,index)=>({...step,source:parsed.lines[index]?.source})),reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT},...assessed.reasoners],domainPayload:{naturalInput:parsed,assessment:assessed.domainPayload}};
+    }else{const adapted=adaptNaturalWorking(problem,parsed);if(adapted.outcome!=="converted"){const classification:Classification=adapted.outcome==="missing-assumption"?"missing-assumption":adapted.outcome==="ambiguous"?"ambiguous":adapted.outcome==="resource-exhausted"?"resource-exhausted":"unsupported";return{...malformed(domain,adapted.message),classification,outstandingObligations:adapted.obligations??[adapted.message],steps:unresolvedSteps(parsed,adapted.message,classification,"unaccounted"in adapted?adapted.unaccounted:undefined),domainPayload:{naturalInput:parsed,conversion:adapted,lineAccount:buildLineAccount(parsed,[],[],(studentWorking as NaturalWorkingInput).text,[adapted.message],"unaccounted"in adapted?adapted.unaccounted:undefined)},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT},{id:"natural-domain-adapter",version:NATURAL_ADAPTER_CONTRACT}]}}return assessConverted(problem,domain,parsed,adapted,studentWorking as NaturalWorkingInput,options)}
+    return gateTextRoute(domain,parsed,assessed,studentWorking as NaturalWorkingInput,"statement" in problem?problem.statement:undefined);
   }
   if (problem.domain === "d3-cross-domain") {
     if (!studentWorking || Array.isArray(studentWorking) || !("stages" in studentWorking) || !Array.isArray(studentWorking.stages)) return malformed("d3-cross-domain","typed binding working must contain stages");

@@ -60,6 +60,8 @@ export class MathematicalBindingStore{
     const natural=!Array.isArray(working)&&working&&typeof working==="object"&&"format"in working&&["$natural","$conversion"].includes(declaration.source.workingPath[0]),parsedLines=natural?(assessment.domainPayload as any)?.naturalInput?.lines:undefined,naturalLine=natural?parsedLines?.findIndex((line:any)=>line.id===declaration.source.proofStepId):null,index=naturalLine??Number(declaration.source.workingPath[0]);
     const submitted=natural?parsedLines?.[index]:Array.isArray(working)?(working as any[])[index]:undefined;
     const verified=natural?assessment.steps.some(step=>step.classification==="verified"&&step.source?.line===submitted?.source?.line):assessment.steps.find(step=>step.index===index)?.classification==="verified";
+    const account=(assessment.domainPayload as any)?.lineAccount;const exportedRecord=natural&&account?account.records.find((r:any)=>r.id===declaration.source.proofStepId):undefined;
+    if(natural&&account&&(!exportedRecord||!exportedRecord.premiseEligible||account.unaccounted.length||account.violations.length))return{classification:"invalid",explanation:"binding source line is not a verified premise of a fully accounted proof"};
     const submittedId=submitted?.id??`$index:${index}`;
     if(!submitted||submittedId!==declaration.source.proofStepId||!verified)return{classification:"invalid",explanation:"binding source is not a verified proof step"};
     const missing=[...declaration.assumptions,...declaration.domainRestrictions].filter(item=>!assessment.domainRestrictions.includes(item));

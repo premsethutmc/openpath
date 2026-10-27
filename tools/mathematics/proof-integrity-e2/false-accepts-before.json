@@ -1,0 +1,952 @@
+[
+ {
+  "id": "e1-091",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "working": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1(1) + 2",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1(1) + 2"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-093",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "working": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-094",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "5",
+     "4",
+     "1"
+    ]
+   },
+   "input": "4"
+  },
+  "working": "f(x) = x^2 + 4x + 5\nf(4) = 4^2 + 4(4) + 5",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 4x + 5"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(4) = 4^2 + 4(4) + 5"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-097",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "3",
+     "2",
+     "1"
+    ]
+   },
+   "input": "2"
+  },
+  "working": "f(x) = x^2 + 2x + 3\nf(2) = 2^2 + 2(2) + 3",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 2x + 3"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(2) = 2^2 + 2(2) + 3"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-114",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "5",
+     "4",
+     "1"
+    ]
+   },
+   "input": "4"
+  },
+  "working": "f(x) = x^2 + 4x + 5\nf(4) = 4^2 + 4(4) + 5",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 4x + 5"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(4) = 4^2 + 4(4) + 5"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-116",
+  "area": "functions-trigonometry-logarithms",
+  "category": "mathematical-error",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "working": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1 + 2\nf(1) = 4",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1 + 2"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "f(1) = 4"
+   }
+  ],
+  "linesRetained": [
+   3
+  ],
+  "linesDiscarded": [
+   1,
+   2
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-123",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "working": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-133",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "working": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-143",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "working": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-151",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "working": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1(1) + 2",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1(1) + 2"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-158",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "working": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-446",
+  "area": "complex-polynomial-roots",
+  "category": "mathematical-error",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "1",
+     "im": "1"
+    }
+   }
+  },
+  "working": "z = 1 + 1i\n|z| = 1+1\n|z| = 2",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:complex-modulus",
+    "complex-polynomial:b3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "z = 1 + 1i"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "|z| = 1+1"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "|z| = 2"
+   }
+  ],
+  "linesRetained": [
+   3
+  ],
+  "linesDiscarded": [
+   1,
+   2
+  ],
+  "adapter": "complex-modulus",
+  "certificates": 0,
+  "adapterChecks": [
+   "Cartesian real and imaginary parts retained",
+   "complex value matches typed problem",
+   "written nonnegative modulus represented exactly"
+  ]
+ },
+ {
+  "id": "e1-126",
+  "area": "functions-trigonometry-logarithms",
+  "category": "mathematical-error",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "working": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1 + 2\nf(1) = 4",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1 + 2"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "f(1) = 4"
+   }
+  ],
+  "linesRetained": [
+   3
+  ],
+  "linesDiscarded": [
+   1,
+   2
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-131",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "working": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1(1) + 2",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1(1) + 2"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-134",
+  "area": "functions-trigonometry-logarithms",
+  "category": "incomplete",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "5",
+     "4",
+     "1"
+    ]
+   },
+   "input": "4"
+  },
+  "working": "f(x) = x^2 + 4x + 5\nf(4) = 4^2 + 4(4) + 5",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 4x + 5"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(4) = 4^2 + 4(4) + 5"
+   }
+  ],
+  "linesRetained": [
+   2
+  ],
+  "linesDiscarded": [
+   1
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ },
+ {
+  "id": "e1-141",
+  "area": "functions-trigonometry-logarithms",
+  "category": "mathematical-error",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "working": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1 + 2\nf(1) = 4",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actual": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1 + 2"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "f(1) = 4"
+   }
+  ],
+  "linesRetained": [
+   3
+  ],
+  "linesDiscarded": [
+   1,
+   2
+  ],
+  "adapter": "function-evaluation",
+  "certificates": 1,
+  "adapterChecks": [
+   "function definition matches typed polynomial",
+   "argument resolved from an exact prior binding",
+   "result remains an exact Expr"
+  ]
+ }
+]
