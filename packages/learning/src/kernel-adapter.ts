@@ -777,10 +777,11 @@ function adaptComparison(
   j: Extract<Justification, { rule: "comparison" }>,
   state: MathState,
 ): AdaptResult {
-  const left = typeof j.left === "number" ? j.left : Number(j.left);
-  const right = typeof j.right === "number" ? j.right : Number(j.right);
-
-  const transformation = registry.applyRule(state, "comparison.ordering", { left, right });
+  // Pass the values through as written ("2/5" stays a fraction) together with the relation the solver claims,
+  // so the kernel checks that claim exactly instead of comparing Number("2/5") = NaN.
+  const transformation = registry.applyRule(state, "comparison.ordering", {
+    left: j.left, right: j.right, claimed: j.relation,
+  });
 
   const explanation: RuleExplanation = {
     principle: "Comparison",
