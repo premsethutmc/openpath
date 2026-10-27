@@ -62,7 +62,7 @@ export const stepToLineStatus = (c: StepClassification | undefined): LineStatus 
 export function formattingOnlyLines(text: string): { line: number; text: string }[] {
   const rows = String(text ?? "").replace(/\r\n?/g, "\n").split("\n");
   const out: { line: number; text: string }[] = [];
-  rows.forEach((row, index) => { if (!row.trim() || /^\s*(?:\d+[.)])\s*$/.test(row)) out.push({ line: index + 1, text: row }); });
+  rows.forEach((row, index) => { if (!row.trim() || /^\s*(?:\d+[.)])\s*$/.test(row) || /^\s*(?:\\\[|\\\]|\$\$|\[|\]|\\begin\{[A-Za-z*]+\}|\\end\{[A-Za-z*]+\})\s*$/.test(row)) out.push({ line: index + 1, text: row }); });
   return out;
 }
 

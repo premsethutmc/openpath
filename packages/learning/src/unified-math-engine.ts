@@ -18,6 +18,8 @@ import { buildLineAccount, resolveVerdict, unparsedLineAccount, validateAccounts
 import { bindClaimsDetailed, replaySymbolicSteps } from "./claim-binding.ts";
 import { ACCEPTANCE_GATE_CONTRACT, checkerStatusToStep, checkerSummary, evidenceFromCheck, reconcileAlgebra, type AcceptanceGateRecord, type BindingEvidence, type GateEvidenceItem, type GateLevel } from "./acceptance-gate.ts";
 import { checkAlgebraSubmission } from "./independent-checker.ts";
+import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geocalc-e5.ts";
+import { polyAntiderivative, polyOf, polyToExpr } from "./calculus-binder-e5.ts";
 import type { NaturalParseResult } from "./natural-working.ts";
 
 export const UNIFIED_MATH_CONTRACT = "openpath-unified-math-assessment@1" as const;
@@ -168,7 +170,89 @@ async function assessConverted(problem:MathematicalProblem,domain:AssessmentEnve
     outstandingObligations:[...new Set([...assessed.outstandingObligations,...verdict.obligations])],justification:verdict.justification,reasoners:[...reasoners,...assessed.reasoners],
     domainPayload:{naturalInput:parsed,conversion:adapted.evidence,assessment:assessed.domainPayload,lineAccount:account,bindingEvidence:binding.evidence}}}
 
+
+/**
+ * Destination-reasoner cross-check for the E5 route. The independent binders already hold the evidence; the destination reasoners
+ * (geometry-reasoner G2-G4 and calculus-core C1-C3) can only VETO an acceptance by contradicting it. A destination that cannot decide is recorded, not trusted.
+ */
+async function e5DestinationCheck(problem: MathematicalProblem, input: NaturalWorkingInput, plan: E5Plan, classification: Classification, options: AssessOptions): Promise<{ note: string; contradicts: boolean } | null> {
+  void input;
+  if (classification !== "verified") return null;
+  try {
+    if (plan.domain === "geometry" && plan.geometry) {
+      const steps = plan.geometry.steps.filter((s) => s.statement.predicate !== "angle_measure");
+      if (!steps.length) return { note: "geometry-reasoner: no relational step to cross-check", contradicts: false };
+      const native = await runGeometry({ domain: "geometry", problem: plan.geometry.problem as unknown as Record<string, unknown> }, steps.map((s) => ({ id: s.id, statement: s.statement, cited_step_ids: [] })), options);
+      const verdicts = native.steps.map((s) => s.status);
+      const bad = verdicts.find((v) => v === "invalid" || v === "missing_assumption");
+      if (bad) return { note: `geometry-reasoner reports ${bad} for a step the independent check accepted`, contradicts: true };
+      return { note: `geometry-reasoner: ${verdicts.filter((v) => v === "verified").length}/${verdicts.length} relational steps verified, others undecided`, contradicts: false };
+    }
+    if (plan.domain === "calculus" && plan.final) {
+      const cp = problem as CalculusProblem; const v = "variable" in cp ? cp.variable : "x";
+      // The core's normal form does not expand products, so for derivative/antiderivative claims its rejection is recorded but cannot veto.
+      if (cp.task === "derivative" || cp.task === "indefinite-integral") {
+        const r = assessCalculusWorking(cp, [{ id: "e5-final", rule: "e5-final-claim", claim: plan.final }]);
+        return { note: `calculus-core: ${r.classification}${r.classification === "invalid" ? " (its normal form does not expand products; the exact U4 evidence stands)" : ""}`, contradicts: false };
+      }
+      if (cp.task === "definite-integral" && plan.final.kind === "value") {
+        const p = polyOf(cp.integrand, v); if (!p) return { note: "calculus-core: not run (non-polynomial integrand)", contradicts: false };
+        const F = polyToExpr(polyAntiderivative(p), v);
+        const antiderivative = assessCalculusWorking(cp, [{ id: "F", rule: "antiderivative", claim: { kind: "expression", value: F } }]);
+        if (antiderivative.classification !== "verified") return { note: "calculus-core: could not confirm the antiderivative in its normal form (undecided)", contradicts: false };
+        const r = assessCalculusWorking(cp, [{ id: "F", rule: "antiderivative", claim: { kind: "expression", value: F } }, { id: "value", rule: "fundamental-theorem", claim: plan.final, dependencies: ["F"] }]);
+        return r.classification === "invalid" ? { note: "calculus-core contradicts the independently verified value", contradicts: true } : { note: `calculus-core: ${r.classification}`, contradicts: false };
+      }
+      const r = assessCalculusWorking(cp, [{ id: "e5-final", rule: "e5-final-claim", claim: plan.final }]);
+      if (r.classification === "invalid") return { note: "calculus-core contradicts the independently verified final claim", contradicts: true };
+      return { note: `calculus-core: ${r.classification}`, contradicts: false };
+    }
+  } catch { return { note: "destination reasoner unavailable; independent evidence stands", contradicts: false }; }
+  return null;
+}
+/**
+ * E5 route: natural geometry/calculus working (degree signs, angle notation, Leibniz/prime notation, integrals, limits, coordinates).
+ * The proposer (natural-geocalc-e5) only translates notation into typed claims; every claim is judged by the independent binders,
+ * the per-line account is built by the same proof-integrity code as every other route, and the E3 gate re-checks the evidence.
+ */
+const E5_DEFINITE: Classification[] = ["verified", "invalid", "incomplete", "missing-assumption"];
+async function assessE5Route(problem: MathematicalProblem, input: NaturalWorkingInput, options: AssessOptions): Promise<AssessmentEnvelope | null> {
+  const domain = (problem as { domain: "geometry" | "calculus" }).domain;
+  const plan = planGeoCalcE5(problem, input);
+  if (!plan) return null;
+  const reasoners = [{ id: "natural-geocalc-e5", version: GEOCALC_E5_CONTRACT }];
+  if ("refused" in plan) { const lineAccount = unparsedLineAccount(input, parseNaturalWorking); return { ...malformed(domain, plan.refused), classification: plan.resource ? "resource-exhausted" : "unsupported", steps: lineAccount.records.map((r, index) => ({ index, classification: lineClass(r.status), justification: r.reason, reasoner: "natural-geocalc-e5", dependencies: ["problem"], source: { line: r.line, start: r.span.start, end: r.span.end, text: r.text } })), domainPayload: { lineAccount }, reasoners }; }
+  const extra: string[] = [];
+  const account = buildLineAccount(plan.parsed, plan.accounts, plan.outcomes, input.text, extra);
+  let verdict = resolveVerdict(account, plan.nativeComplete, plan.obligations);
+  let classification: Classification = verdict.classification as Classification;
+  if (classification === "incomplete" && plan.terminal === "missing-assumption") classification = "missing-assumption";
+  const destination = await e5DestinationCheck(problem, input, plan, classification, options);
+  let notes = [...plan.notes];
+  if (destination) { notes.push(destination.note); if (classification === "verified" && destination.contradicts) { classification = "unsupported"; verdict = { ...verdict, classification: "unsupported", correct: null, complete: false, justification: `the destination reasoner contradicts the independent check (${destination.note}); nothing is accepted`, obligations: [destination.note] }; } }
+  const steps = stepsFromAccount(plan.parsed, account);
+  return { contractVersion: UNIFIED_MATH_CONTRACT, domain, classification, correct: classification === "verified" ? true : classification === "invalid" ? false : null, complete: classification === "verified", firstInvalidStep: classification === "invalid" ? verdict.firstInvalidStep : null,
+    steps, proofDependencies: steps.map((s) => s.dependencies), domainRestrictions: plan.restrictions, outstandingObligations: classification === "verified" ? [] : verdict.obligations, skills: [`${domain}.natural-e5.${plan.family}`], reasoners,
+    justification: classification === "missing-assumption" ? verdict.obligations[0] ?? "an assumption is missing" : verdict.justification,
+    domainPayload: { naturalInput: plan.parsed, conversion: { contractVersion: NATURAL_ADAPTER_CONTRACT, adapter: `natural-geocalc-e5:${plan.family}`, sourceLines: plan.parsed.lines.map((l) => l.source.line), checks: notes, assumptions: [], restrictions: plan.restrictions.map(String), obligations: classification === "verified" ? [] : verdict.obligations, matchedLines: plan.parsed.lines.map((l) => l.source.line), accounts: plan.accounts, outputs: {} }, lineAccount: account, bindingEvidence: plan.evidence, e5: { contract: GEOCALC_E5_CONTRACT, family: plan.family, destination: plan.destination, notes } } };
+}
 async function assessCandidate(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
+  if (problem && typeof problem === "object" && "domain" in problem && (problem.domain === "geometry" || problem.domain === "calculus") && studentWorking && !Array.isArray(studentWorking) && "format" in studentWorking && "text" in studentWorking) {
+    // Precedence: an existing definite verdict of the established route is kept (D1-D8 behaviour is not re-labelled). The E5 route is
+    // consulted for every geometry/calculus submission; it supplies the verdict unless the established route already verified (then the established
+    // evidence is kept when E5 agrees) and it vetoes an acceptance it independently contradicts (the veto can only downgrade, never certify).
+    const base = await assessCandidateBase(problem, studentWorking, options);
+    const e5 = await assessE5Route(problem, studentWorking as NaturalWorkingInput, options);
+    if (!e5 || !E5_DEFINITE.includes(e5.classification)) return base;
+    if (base.classification === "verified") return e5.classification === "verified" ? base : e5;
+    // D5 contract: a missing integration constant is reported as `invalid` by the established route; E5 would call it a missing assumption.
+    // Both are non-accepting; the established class is kept so D1-D8 behaviour is not re-labelled.
+    if (base.classification === "invalid" && e5.classification === "missing-assumption" && (problem as { task?: string }).task === "indefinite-integral") return base;
+    return e5;
+  }
+  return assessCandidateBase(problem, studentWorking, options);
+}
+async function assessCandidateBase(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   if (!problem || typeof problem !== "object" || !("domain" in problem || "statement" in problem)) return malformed("algebra", "problem must be a typed mathematical problem");
   if(studentWorking&&!Array.isArray(studentWorking)&&"format" in studentWorking&&"text" in studentWorking){
     const parsed=parseNaturalWorking(studentWorking as NaturalWorkingInput),domain=(problem.domain==="symbolic"?"symbolic":problem.domain==="auto"||problem.domain==="arithmetic"||problem.domain==="algebra"||!("domain" in problem)?"algebra":problem.domain) as AssessmentEnvelope["domain"];

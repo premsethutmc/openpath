@@ -20,7 +20,7 @@ export type GateRoute = "algebra-text" | "adapter-converted" | "structured-typed
 export type GateLevel = "u4-kernel" | "independent-exact-checker" | "claim-recheck+destination-reasoner" | "domain-reasoner" | "none";
 export type GateSource = "agreement" | "checker-authority" | "downgraded-no-independent-evidence" | "downgraded-unresolved-lines" | "conflict" | "candidate-unchanged";
 export interface GateEvidenceItem { line: number | null; claim: string; checker: string; scope: string; outcome: string; digest?: string | null }
-export interface BindingEvidence { lineId: string; line: number; claim: string; checker: "u4-kernel" | "independent-ir-evaluator" | "independent-polynomial-identity"; destination: string; scope: string; outcome: "verified" | "mismatch" | "not-covered"; detail: string; digest?: string | null }
+export interface BindingEvidence { lineId: string; line: number; claim: string; checker: "u4-kernel" | "independent-ir-evaluator" | "independent-polynomial-identity" | "e5-independent-geocalc"; destination: string; scope: string; outcome: "verified" | "mismatch" | "not-covered"; detail: string; digest?: string | null }
 export interface AcceptanceGateRecord {
   contract: typeof ACCEPTANCE_GATE_CONTRACT; route: GateRoute; candidateClassification: string; verdict: string;
   independentlyVerified: boolean; level: GateLevel; source: GateSource; evidence: GateEvidenceItem[]; obligations: string[]; reconciliation: string;

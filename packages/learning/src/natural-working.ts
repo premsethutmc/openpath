@@ -13,7 +13,7 @@ export type NaturalRelation=
  |{kind:"conjunction";parts:{kind:"equation";left:Expr;right:Expr}[]}
  |{kind:"interval";variable?:string;lower:Expr|null;upper:Expr|null;includeLower:boolean;includeUpper:boolean}
  |NaturalDerivativeNotation|NaturalFunctionNotation
- |{kind:"integral"|"vector"|"matrix"|"geometry"|"probability";notation:string};
+ |{kind:"integral"|"vector"|"matrix"|"geometry"|"probability"|"calculus";notation:string};
 export interface NaturalParsedLine { id:string; source:SourceLocation; relation:NaturalRelation; restrictions?:NaturalRelation[] }
 export interface NaturalParseResult { contractVersion:typeof NATURAL_WORKING_CONTRACT;classification:"parsed"|"ambiguous"|"malformed"|"unsupported"|"resource-exhausted";lines:NaturalParsedLine[];alternatives?:string[];message:string;error?:SourceLocation;resourceUsage:{characters:number;lines:number;tokens:number;depth:number} }
 

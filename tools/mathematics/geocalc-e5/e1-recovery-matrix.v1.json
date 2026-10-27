@@ -1,0 +1,40 @@
+{
+ "transitions": [
+  {
+   "from": "unsupported",
+   "to": "invalid",
+   "vsReference": "correct",
+   "n": 20
+  },
+  {
+   "from": "unsupported",
+   "to": "verified",
+   "vsReference": "correct",
+   "n": 52
+  },
+  {
+   "from": "ambiguous",
+   "to": "verified",
+   "vsReference": "correct",
+   "n": 24
+  },
+  {
+   "from": "malformed",
+   "to": "invalid",
+   "vsReference": "wrong",
+   "n": 2
+  },
+  {
+   "from": "ambiguous",
+   "to": "unsupported",
+   "vsReference": "wrong",
+   "n": 6
+  },
+  {
+   "from": "unsupported",
+   "to": "incomplete",
+   "vsReference": "correct",
+   "n": 13
+  }
+ ]
+}
