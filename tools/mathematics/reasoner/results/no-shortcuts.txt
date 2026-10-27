@@ -1,0 +1,7 @@
+PASS planner imports only the kernel and expr-text
+PASS expr-text imports only the kernel
+PASS no file/JSON/process/network/SymPy use in planner sources
+PASS generator does not import the planner
+PASS plan() takes the equation text only
+PASS no frozen equation text appears in planner sources (1476 equations)
+PASS no table of answers (no long numeric literal lists)

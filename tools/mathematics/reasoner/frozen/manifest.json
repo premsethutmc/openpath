@@ -1,0 +1,30 @@
+{
+ "seed": 20261025,
+ "sympy": "1.14.0",
+ "files": {
+  "smoke20.json": {
+   "count": 20,
+   "sha256": "583f9f50bca03e31feacd0e8cd75d8715a5c3c81d8a48e78bc48495d8fba02a0",
+   "classes": {
+    "unique": 20
+   }
+  },
+  "seeded500.json": {
+   "count": 500,
+   "sha256": "77d496e1864cdba8e5152f1d4d0b06d1243ce37f3198eb06d4f03dfa8ab803ec",
+   "classes": {
+    "unique": 500
+   }
+  },
+  "edge50.json": {
+   "count": 56,
+   "sha256": "ace50253407547595209356ac367deb5832fdf29984c91bd5b16f02e4e219f1b",
+   "classes": {
+    "identity": 11,
+    "no-solution": 25,
+    "unsupported-nonlinear": 10,
+    "unsupported-variable-denominator": 10
+   }
+  }
+ }
+}
