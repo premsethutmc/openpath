@@ -1,0 +1,3606 @@
+{
+  "version": "math-reasoning-depth-d1@1",
+  "frozenPrefixCount": 100,
+  "cases": [
+    {
+      "id": "d1-alternative-algebra-00",
+      "category": "alternative-algebra",
+      "parameter": 1,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-01",
+      "category": "alternative-algebra",
+      "parameter": 2,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-02",
+      "category": "alternative-algebra",
+      "parameter": 3,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-03",
+      "category": "alternative-algebra",
+      "parameter": 4,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-04",
+      "category": "alternative-algebra",
+      "parameter": 5,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-05",
+      "category": "alternative-algebra",
+      "parameter": 6,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-06",
+      "category": "alternative-algebra",
+      "parameter": 7,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-07",
+      "category": "alternative-algebra",
+      "parameter": 8,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-08",
+      "category": "alternative-algebra",
+      "parameter": 9,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-09",
+      "category": "alternative-algebra",
+      "parameter": 10,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-10",
+      "category": "alternative-algebra",
+      "parameter": 11,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-11",
+      "category": "alternative-algebra",
+      "parameter": 12,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-12",
+      "category": "alternative-algebra",
+      "parameter": 13,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-13",
+      "category": "alternative-algebra",
+      "parameter": 14,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-14",
+      "category": "alternative-algebra",
+      "parameter": 15,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-15",
+      "category": "alternative-algebra",
+      "parameter": 16,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-16",
+      "category": "alternative-algebra",
+      "parameter": 17,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-17",
+      "category": "alternative-algebra",
+      "parameter": 18,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-18",
+      "category": "alternative-algebra",
+      "parameter": 19,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-19",
+      "category": "alternative-algebra",
+      "parameter": 20,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-20",
+      "category": "alternative-algebra",
+      "parameter": 21,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-21",
+      "category": "alternative-algebra",
+      "parameter": 22,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-22",
+      "category": "alternative-algebra",
+      "parameter": 23,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-23",
+      "category": "alternative-algebra",
+      "parameter": 24,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-24",
+      "category": "alternative-algebra",
+      "parameter": 25,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-25",
+      "category": "alternative-algebra",
+      "parameter": 26,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-26",
+      "category": "alternative-algebra",
+      "parameter": 27,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-27",
+      "category": "alternative-algebra",
+      "parameter": 28,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-28",
+      "category": "alternative-algebra",
+      "parameter": 29,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-29",
+      "category": "alternative-algebra",
+      "parameter": 30,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-30",
+      "category": "alternative-algebra",
+      "parameter": 31,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-31",
+      "category": "alternative-algebra",
+      "parameter": 32,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-32",
+      "category": "alternative-algebra",
+      "parameter": 33,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-33",
+      "category": "alternative-algebra",
+      "parameter": 34,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-34",
+      "category": "alternative-algebra",
+      "parameter": 35,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-35",
+      "category": "alternative-algebra",
+      "parameter": 36,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-36",
+      "category": "alternative-algebra",
+      "parameter": 37,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-37",
+      "category": "alternative-algebra",
+      "parameter": 38,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-38",
+      "category": "alternative-algebra",
+      "parameter": 39,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-39",
+      "category": "alternative-algebra",
+      "parameter": 40,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-40",
+      "category": "alternative-algebra",
+      "parameter": 41,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-41",
+      "category": "alternative-algebra",
+      "parameter": 42,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-42",
+      "category": "alternative-algebra",
+      "parameter": 43,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-43",
+      "category": "alternative-algebra",
+      "parameter": 44,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-44",
+      "category": "alternative-algebra",
+      "parameter": 45,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-45",
+      "category": "alternative-algebra",
+      "parameter": 46,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-46",
+      "category": "alternative-algebra",
+      "parameter": 47,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-47",
+      "category": "alternative-algebra",
+      "parameter": 48,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-48",
+      "category": "alternative-algebra",
+      "parameter": 49,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-49",
+      "category": "alternative-algebra",
+      "parameter": 50,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-50",
+      "category": "alternative-algebra",
+      "parameter": 51,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-51",
+      "category": "alternative-algebra",
+      "parameter": 52,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-52",
+      "category": "alternative-algebra",
+      "parameter": 53,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-53",
+      "category": "alternative-algebra",
+      "parameter": 54,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-54",
+      "category": "alternative-algebra",
+      "parameter": 55,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-55",
+      "category": "alternative-algebra",
+      "parameter": 56,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-56",
+      "category": "alternative-algebra",
+      "parameter": 57,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-57",
+      "category": "alternative-algebra",
+      "parameter": 58,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-58",
+      "category": "alternative-algebra",
+      "parameter": 59,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-alternative-algebra-59",
+      "category": "alternative-algebra",
+      "parameter": 60,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-00",
+      "category": "trig-log",
+      "parameter": 1,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-01",
+      "category": "trig-log",
+      "parameter": 2,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-02",
+      "category": "trig-log",
+      "parameter": 3,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-03",
+      "category": "trig-log",
+      "parameter": 4,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-04",
+      "category": "trig-log",
+      "parameter": 5,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-05",
+      "category": "trig-log",
+      "parameter": 6,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-06",
+      "category": "trig-log",
+      "parameter": 7,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-07",
+      "category": "trig-log",
+      "parameter": 8,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-08",
+      "category": "trig-log",
+      "parameter": 9,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-09",
+      "category": "trig-log",
+      "parameter": 10,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-10",
+      "category": "trig-log",
+      "parameter": 11,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-11",
+      "category": "trig-log",
+      "parameter": 12,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-12",
+      "category": "trig-log",
+      "parameter": 13,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-13",
+      "category": "trig-log",
+      "parameter": 14,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-14",
+      "category": "trig-log",
+      "parameter": 15,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-15",
+      "category": "trig-log",
+      "parameter": 16,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-16",
+      "category": "trig-log",
+      "parameter": 17,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-17",
+      "category": "trig-log",
+      "parameter": 18,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-18",
+      "category": "trig-log",
+      "parameter": 19,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-19",
+      "category": "trig-log",
+      "parameter": 20,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-20",
+      "category": "trig-log",
+      "parameter": 21,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-21",
+      "category": "trig-log",
+      "parameter": 22,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-22",
+      "category": "trig-log",
+      "parameter": 23,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-23",
+      "category": "trig-log",
+      "parameter": 24,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-24",
+      "category": "trig-log",
+      "parameter": 25,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-25",
+      "category": "trig-log",
+      "parameter": 26,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-26",
+      "category": "trig-log",
+      "parameter": 27,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-27",
+      "category": "trig-log",
+      "parameter": 28,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-28",
+      "category": "trig-log",
+      "parameter": 29,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-29",
+      "category": "trig-log",
+      "parameter": 30,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-30",
+      "category": "trig-log",
+      "parameter": 31,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-31",
+      "category": "trig-log",
+      "parameter": 32,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-32",
+      "category": "trig-log",
+      "parameter": 33,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-33",
+      "category": "trig-log",
+      "parameter": 34,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-34",
+      "category": "trig-log",
+      "parameter": 35,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-35",
+      "category": "trig-log",
+      "parameter": 36,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-36",
+      "category": "trig-log",
+      "parameter": 37,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-37",
+      "category": "trig-log",
+      "parameter": 38,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-38",
+      "category": "trig-log",
+      "parameter": 39,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-39",
+      "category": "trig-log",
+      "parameter": 40,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": true,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-40",
+      "category": "trig-log",
+      "parameter": 41,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-41",
+      "category": "trig-log",
+      "parameter": 42,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-42",
+      "category": "trig-log",
+      "parameter": 43,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-43",
+      "category": "trig-log",
+      "parameter": 44,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-44",
+      "category": "trig-log",
+      "parameter": 45,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-45",
+      "category": "trig-log",
+      "parameter": 46,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-46",
+      "category": "trig-log",
+      "parameter": 47,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-47",
+      "category": "trig-log",
+      "parameter": 48,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-48",
+      "category": "trig-log",
+      "parameter": 49,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-49",
+      "category": "trig-log",
+      "parameter": 50,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-50",
+      "category": "trig-log",
+      "parameter": 51,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-51",
+      "category": "trig-log",
+      "parameter": 52,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-52",
+      "category": "trig-log",
+      "parameter": 53,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-53",
+      "category": "trig-log",
+      "parameter": 54,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-54",
+      "category": "trig-log",
+      "parameter": 55,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-55",
+      "category": "trig-log",
+      "parameter": 56,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-56",
+      "category": "trig-log",
+      "parameter": 57,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-57",
+      "category": "trig-log",
+      "parameter": 58,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-58",
+      "category": "trig-log",
+      "parameter": 59,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-trig-log-59",
+      "category": "trig-log",
+      "parameter": 60,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-00",
+      "category": "radical-equation",
+      "parameter": 1,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-01",
+      "category": "radical-equation",
+      "parameter": 2,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-02",
+      "category": "radical-equation",
+      "parameter": 3,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-03",
+      "category": "radical-equation",
+      "parameter": 4,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-04",
+      "category": "radical-equation",
+      "parameter": 5,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-05",
+      "category": "radical-equation",
+      "parameter": 6,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-06",
+      "category": "radical-equation",
+      "parameter": 7,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-07",
+      "category": "radical-equation",
+      "parameter": 8,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-08",
+      "category": "radical-equation",
+      "parameter": 9,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-09",
+      "category": "radical-equation",
+      "parameter": 10,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-10",
+      "category": "radical-equation",
+      "parameter": 11,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-11",
+      "category": "radical-equation",
+      "parameter": 12,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-12",
+      "category": "radical-equation",
+      "parameter": 13,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-13",
+      "category": "radical-equation",
+      "parameter": 14,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-14",
+      "category": "radical-equation",
+      "parameter": 15,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-15",
+      "category": "radical-equation",
+      "parameter": 16,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-16",
+      "category": "radical-equation",
+      "parameter": 17,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-17",
+      "category": "radical-equation",
+      "parameter": 18,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-18",
+      "category": "radical-equation",
+      "parameter": 19,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-19",
+      "category": "radical-equation",
+      "parameter": 20,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-20",
+      "category": "radical-equation",
+      "parameter": 21,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-21",
+      "category": "radical-equation",
+      "parameter": 22,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-22",
+      "category": "radical-equation",
+      "parameter": 23,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-23",
+      "category": "radical-equation",
+      "parameter": 24,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-24",
+      "category": "radical-equation",
+      "parameter": 25,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-25",
+      "category": "radical-equation",
+      "parameter": 26,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-26",
+      "category": "radical-equation",
+      "parameter": 27,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-27",
+      "category": "radical-equation",
+      "parameter": 28,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-28",
+      "category": "radical-equation",
+      "parameter": 29,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-29",
+      "category": "radical-equation",
+      "parameter": 30,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-30",
+      "category": "radical-equation",
+      "parameter": 31,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-31",
+      "category": "radical-equation",
+      "parameter": 32,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-32",
+      "category": "radical-equation",
+      "parameter": 33,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-33",
+      "category": "radical-equation",
+      "parameter": 34,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-34",
+      "category": "radical-equation",
+      "parameter": 35,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-35",
+      "category": "radical-equation",
+      "parameter": 36,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-36",
+      "category": "radical-equation",
+      "parameter": 37,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-37",
+      "category": "radical-equation",
+      "parameter": 38,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-38",
+      "category": "radical-equation",
+      "parameter": 39,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-39",
+      "category": "radical-equation",
+      "parameter": 40,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-40",
+      "category": "radical-equation",
+      "parameter": 41,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-41",
+      "category": "radical-equation",
+      "parameter": 42,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-42",
+      "category": "radical-equation",
+      "parameter": 43,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-43",
+      "category": "radical-equation",
+      "parameter": 44,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-44",
+      "category": "radical-equation",
+      "parameter": 45,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-45",
+      "category": "radical-equation",
+      "parameter": 46,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-46",
+      "category": "radical-equation",
+      "parameter": 47,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-47",
+      "category": "radical-equation",
+      "parameter": 48,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-48",
+      "category": "radical-equation",
+      "parameter": 49,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-49",
+      "category": "radical-equation",
+      "parameter": 50,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-50",
+      "category": "radical-equation",
+      "parameter": 51,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-51",
+      "category": "radical-equation",
+      "parameter": 52,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-52",
+      "category": "radical-equation",
+      "parameter": 53,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-53",
+      "category": "radical-equation",
+      "parameter": 54,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-54",
+      "category": "radical-equation",
+      "parameter": 55,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-55",
+      "category": "radical-equation",
+      "parameter": 56,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-56",
+      "category": "radical-equation",
+      "parameter": 57,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-57",
+      "category": "radical-equation",
+      "parameter": 58,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-58",
+      "category": "radical-equation",
+      "parameter": 59,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-radical-equation-59",
+      "category": "radical-equation",
+      "parameter": 60,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-00",
+      "category": "calculus-transform",
+      "parameter": 1,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-01",
+      "category": "calculus-transform",
+      "parameter": 2,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-02",
+      "category": "calculus-transform",
+      "parameter": 3,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-03",
+      "category": "calculus-transform",
+      "parameter": 4,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-04",
+      "category": "calculus-transform",
+      "parameter": 5,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-05",
+      "category": "calculus-transform",
+      "parameter": 6,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-06",
+      "category": "calculus-transform",
+      "parameter": 7,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-07",
+      "category": "calculus-transform",
+      "parameter": 8,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-08",
+      "category": "calculus-transform",
+      "parameter": 9,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-09",
+      "category": "calculus-transform",
+      "parameter": 10,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-10",
+      "category": "calculus-transform",
+      "parameter": 11,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-11",
+      "category": "calculus-transform",
+      "parameter": 12,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-12",
+      "category": "calculus-transform",
+      "parameter": 13,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-13",
+      "category": "calculus-transform",
+      "parameter": 14,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-14",
+      "category": "calculus-transform",
+      "parameter": 15,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-15",
+      "category": "calculus-transform",
+      "parameter": 16,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-16",
+      "category": "calculus-transform",
+      "parameter": 17,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-17",
+      "category": "calculus-transform",
+      "parameter": 18,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-18",
+      "category": "calculus-transform",
+      "parameter": 19,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-19",
+      "category": "calculus-transform",
+      "parameter": 20,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-20",
+      "category": "calculus-transform",
+      "parameter": 21,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-21",
+      "category": "calculus-transform",
+      "parameter": 22,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-22",
+      "category": "calculus-transform",
+      "parameter": 23,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-23",
+      "category": "calculus-transform",
+      "parameter": 24,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-24",
+      "category": "calculus-transform",
+      "parameter": 25,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-25",
+      "category": "calculus-transform",
+      "parameter": 26,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-26",
+      "category": "calculus-transform",
+      "parameter": 27,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-27",
+      "category": "calculus-transform",
+      "parameter": 28,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-28",
+      "category": "calculus-transform",
+      "parameter": 29,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-29",
+      "category": "calculus-transform",
+      "parameter": 30,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-30",
+      "category": "calculus-transform",
+      "parameter": 31,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-31",
+      "category": "calculus-transform",
+      "parameter": 32,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-32",
+      "category": "calculus-transform",
+      "parameter": 33,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-33",
+      "category": "calculus-transform",
+      "parameter": 34,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-34",
+      "category": "calculus-transform",
+      "parameter": 35,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-35",
+      "category": "calculus-transform",
+      "parameter": 36,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-36",
+      "category": "calculus-transform",
+      "parameter": 37,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-37",
+      "category": "calculus-transform",
+      "parameter": 38,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-38",
+      "category": "calculus-transform",
+      "parameter": 39,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-39",
+      "category": "calculus-transform",
+      "parameter": 40,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-40",
+      "category": "calculus-transform",
+      "parameter": 41,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-41",
+      "category": "calculus-transform",
+      "parameter": 42,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-42",
+      "category": "calculus-transform",
+      "parameter": 43,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-43",
+      "category": "calculus-transform",
+      "parameter": 44,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-44",
+      "category": "calculus-transform",
+      "parameter": 45,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-45",
+      "category": "calculus-transform",
+      "parameter": 46,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-46",
+      "category": "calculus-transform",
+      "parameter": 47,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-47",
+      "category": "calculus-transform",
+      "parameter": 48,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-48",
+      "category": "calculus-transform",
+      "parameter": 49,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-49",
+      "category": "calculus-transform",
+      "parameter": 50,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-50",
+      "category": "calculus-transform",
+      "parameter": 51,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-51",
+      "category": "calculus-transform",
+      "parameter": 52,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-52",
+      "category": "calculus-transform",
+      "parameter": 53,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-53",
+      "category": "calculus-transform",
+      "parameter": 54,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-54",
+      "category": "calculus-transform",
+      "parameter": 55,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-55",
+      "category": "calculus-transform",
+      "parameter": 56,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-56",
+      "category": "calculus-transform",
+      "parameter": 57,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-57",
+      "category": "calculus-transform",
+      "parameter": 58,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-58",
+      "category": "calculus-transform",
+      "parameter": 59,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-calculus-transform-59",
+      "category": "calculus-transform",
+      "parameter": 60,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-00",
+      "category": "cross-domain",
+      "parameter": 1,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-01",
+      "category": "cross-domain",
+      "parameter": 2,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-02",
+      "category": "cross-domain",
+      "parameter": 3,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-03",
+      "category": "cross-domain",
+      "parameter": 4,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-04",
+      "category": "cross-domain",
+      "parameter": 5,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-05",
+      "category": "cross-domain",
+      "parameter": 6,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-06",
+      "category": "cross-domain",
+      "parameter": 7,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-07",
+      "category": "cross-domain",
+      "parameter": 8,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-08",
+      "category": "cross-domain",
+      "parameter": 9,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-09",
+      "category": "cross-domain",
+      "parameter": 10,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-10",
+      "category": "cross-domain",
+      "parameter": 11,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-11",
+      "category": "cross-domain",
+      "parameter": 12,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-12",
+      "category": "cross-domain",
+      "parameter": 13,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-13",
+      "category": "cross-domain",
+      "parameter": 14,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-14",
+      "category": "cross-domain",
+      "parameter": 15,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-15",
+      "category": "cross-domain",
+      "parameter": 16,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-16",
+      "category": "cross-domain",
+      "parameter": 17,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-17",
+      "category": "cross-domain",
+      "parameter": 18,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-18",
+      "category": "cross-domain",
+      "parameter": 19,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-19",
+      "category": "cross-domain",
+      "parameter": 20,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-20",
+      "category": "cross-domain",
+      "parameter": 21,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-21",
+      "category": "cross-domain",
+      "parameter": 22,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-22",
+      "category": "cross-domain",
+      "parameter": 23,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-23",
+      "category": "cross-domain",
+      "parameter": 24,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-24",
+      "category": "cross-domain",
+      "parameter": 25,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-25",
+      "category": "cross-domain",
+      "parameter": 26,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-26",
+      "category": "cross-domain",
+      "parameter": 27,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-27",
+      "category": "cross-domain",
+      "parameter": 28,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-28",
+      "category": "cross-domain",
+      "parameter": 29,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-29",
+      "category": "cross-domain",
+      "parameter": 30,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-30",
+      "category": "cross-domain",
+      "parameter": 31,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-31",
+      "category": "cross-domain",
+      "parameter": 32,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-32",
+      "category": "cross-domain",
+      "parameter": 33,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-33",
+      "category": "cross-domain",
+      "parameter": 34,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-34",
+      "category": "cross-domain",
+      "parameter": 35,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-35",
+      "category": "cross-domain",
+      "parameter": 36,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-36",
+      "category": "cross-domain",
+      "parameter": 37,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-37",
+      "category": "cross-domain",
+      "parameter": 38,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-38",
+      "category": "cross-domain",
+      "parameter": 39,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-39",
+      "category": "cross-domain",
+      "parameter": 40,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-40",
+      "category": "cross-domain",
+      "parameter": 41,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-41",
+      "category": "cross-domain",
+      "parameter": 42,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-42",
+      "category": "cross-domain",
+      "parameter": 43,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-43",
+      "category": "cross-domain",
+      "parameter": 44,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-44",
+      "category": "cross-domain",
+      "parameter": 45,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-45",
+      "category": "cross-domain",
+      "parameter": 46,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-46",
+      "category": "cross-domain",
+      "parameter": 47,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-47",
+      "category": "cross-domain",
+      "parameter": 48,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-48",
+      "category": "cross-domain",
+      "parameter": 49,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-49",
+      "category": "cross-domain",
+      "parameter": 50,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-50",
+      "category": "cross-domain",
+      "parameter": 51,
+      "mode": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-51",
+      "category": "cross-domain",
+      "parameter": 52,
+      "mode": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-52",
+      "category": "cross-domain",
+      "parameter": 53,
+      "mode": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-53",
+      "category": "cross-domain",
+      "parameter": 54,
+      "mode": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-54",
+      "category": "cross-domain",
+      "parameter": 55,
+      "mode": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-55",
+      "category": "cross-domain",
+      "parameter": 56,
+      "mode": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-56",
+      "category": "cross-domain",
+      "parameter": 57,
+      "mode": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-57",
+      "category": "cross-domain",
+      "parameter": 58,
+      "mode": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-58",
+      "category": "cross-domain",
+      "parameter": 59,
+      "mode": 8,
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    },
+    {
+      "id": "d1-cross-domain-59",
+      "category": "cross-domain",
+      "parameter": 60,
+      "mode": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "frozenBeforeFinalTuning": false,
+      "oracle": "independently authored exact algebra/domain derivation and earliest-line label"
+    }
+  ]
+}
