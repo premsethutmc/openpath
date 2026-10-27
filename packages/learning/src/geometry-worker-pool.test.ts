@@ -1,4 +1,4 @@
-import {afterEach,describe,expect,test} from "bun:test";
+import {afterEach,beforeEach,describe,expect,test} from "bun:test";
 import {readFileSync} from "node:fs";
 import {assessMathematicalWorking,type MathematicalProblem,type StudentWorking} from "./unified-math-engine.ts";
 import {geometryWorkerDiagnostics,shutdownGeometryWorkerPools,terminateGeometryWorker} from "./geometry-worker.ts";
@@ -7,9 +7,15 @@ const cases=(JSON.parse(readFileSync("tools/mathematics/unified-u2/independent-c
 const source=cases.find(x=>x.id==="u2-angle-00")!;
 const clone=<T>(x:T):T=>JSON.parse(JSON.stringify(x));
 const configured=(problem:MathematicalProblem,working:StudentWorking,extra:Record<string,unknown>={})=>assessMathematicalWorking(problem,working,{geometryWorkerCount:2,geometryQueueLimit:128,...extra});
+// E3: bun runs every test file in one process and the geometry pools are process-global; without a clean start the counters include other files' work (observed completed=204 in the full run, 100 in isolation).
+beforeEach(async()=>{await shutdownGeometryWorkerPools(100);});
 afterEach(async()=>{delete process.env.OPENPATH_GEOMETRY_TEST_DELAY_ID;delete process.env.OPENPATH_GEOMETRY_TEST_DELAY_MS;await shutdownGeometryWorkerPools(100);});
 
 describe("bounded geometry worker pool",()=>{
+ test("pool diagnostics belong to one pool lifetime (no leakage from earlier users of the process)",async()=>{
+  await configured(source.problem,source.working);await configured(source.problem,source.working);await shutdownGeometryWorkerPools(100);
+  await configured(source.problem,source.working);const d=geometryWorkerDiagnostics(root,"python3",{workerCount:2,maxQueue:128});expect(d.completed).toBe(1);expect(d.workerStarts).toBeLessThanOrEqual(2);
+ });
  test("100 concurrent assessments preserve U2 mathematical verdicts",async()=>{
   const results=await Promise.all(Array.from({length:100},()=>configured(source.problem,source.working)));
   expect(results.every(x=>x.classification==="verified")).toBe(true);
