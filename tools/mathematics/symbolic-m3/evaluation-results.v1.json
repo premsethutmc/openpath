@@ -1,0 +1,174 @@
+{
+  "version": "symbolic-m3-evaluation@1",
+  "independent": {
+    "name": "independent",
+    "total": 600,
+    "matched": 590,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "firstInvalidStep": {
+      "correct": 70,
+      "total": 80
+    },
+    "outcomes": {
+      "verified": 370,
+      "invalid": 70,
+      "resource-exhausted": 30,
+      "unsupported": 60,
+      "incomplete": 30,
+      "missing-assumption": 40
+    },
+    "latencyMs": {
+      "median": 0.1199009999999987,
+      "p95": 0.5085150000000027,
+      "p99": 0.9677569999999989,
+      "throughputPerSecond": 5919.899263836825
+    },
+    "failures": [
+      {
+        "id": "trigonometry-7",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-17",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-27",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-37",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-47",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-57",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-67",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-77",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-87",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      },
+      {
+        "id": "trigonometry-97",
+        "expected": {
+          "classification": "invalid",
+          "firstInvalidStep": 0
+        },
+        "actual": {
+          "classification": "unsupported",
+          "firstInvalidStep": null,
+          "justification": "step 1: no bounded exact strategy proved or refuted this transformation"
+        }
+      }
+    ]
+  },
+  "heldout": {
+    "name": "heldout",
+    "total": 150,
+    "matched": 150,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "firstInvalidStep": {
+      "correct": 25,
+      "total": 25
+    },
+    "outcomes": {
+      "verified": 75,
+      "missing-assumption": 25,
+      "invalid": 25,
+      "unsupported": 25
+    },
+    "latencyMs": {
+      "median": 0.07683600000001434,
+      "p95": 0.15273000000001957,
+      "p99": 0.2217330000000004,
+      "throughputPerSecond": 11882.694044393687
+    },
+    "failures": []
+  }
+}

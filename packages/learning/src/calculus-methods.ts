@@ -1,4 +1,6 @@
-import{derivative,equivalentCalculusExpressions as eq,evaluateCalculusExpression as ev,normalizeCalculusExpression as norm,type Expr,type LimitValue,type Rat}from"./calculus-core.ts";
+import{derivative,evaluateCalculusExpression as ev,normalizeCalculusExpression as norm,type Expr,type LimitValue,type Rat}from"./calculus-core.ts";
+import{verifySymbolicTransformation}from"./symbolic-equivalence.ts";
+const eq=(a:Expr,b:Expr)=>verifySymbolicTransformation(a,b,[],{purpose:"calculus"}).outcome==="equivalent";
 export const CALCULUS_METHODS_CONTRACT="openpath-calculus-methods@1" as const;
 export type CalculusMethodProblem=
  |{domain:"calculus";task:"substitution";integrand:Expr;variable:string;definite?:{lower:Rat;upper:Rat}}

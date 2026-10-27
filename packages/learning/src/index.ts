@@ -19,3 +19,5 @@ export * from "./domains-m2";
 export * from "./calculus-core";
 
 export * from "./calculus-methods";
+
+export * from "./symbolic-equivalence";

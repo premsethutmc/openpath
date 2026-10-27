@@ -6,6 +6,7 @@ import { assessDomainWorking, M1_CONTRACT, type M1Problem, type M1Step } from ".
 import { assessM2Working, M2_CONTRACT, type M2Problem, type M2Step } from "./domains-m2.ts";
 import { assessCalculusWorking, CALCULUS_CONTRACT, type CalculusProblem, type CalculusStep } from "./calculus-core.ts";
 import { assessCalculusMethodWorking, CALCULUS_METHODS_CONTRACT, type CalculusMethodProblem, type CalculusMethodStep } from "./calculus-methods.ts";
+import { assessSymbolicWorking, SYMBOLIC_EQUIVALENCE_CONTRACT, type SymbolicBudget, type SymbolicProblem, type SymbolicStep } from "./symbolic-equivalence.ts";
 
 export const UNIFIED_MATH_CONTRACT = "openpath-unified-math-assessment@1" as const;
 export type Classification = "verified" | "invalid" | "incomplete" | "missing-assumption" | "unsupported" | "contradictory" | "resource-exhausted" | "malformed" | "ambiguous";
@@ -18,11 +19,11 @@ export interface CrossDomainTransfer { family: TransferFamily; geometryConclusio
 export interface MixedProblem { domain: "mixed"; geometry: GeometryProblem; handoff?: AngleSumHandoff; transfer?: CrossDomainTransfer }
 export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:string;problem:M1Problem|M2Problem|CalculusProblem|CalculusMethodProblem;dependsOn:string[]}[] }
 export interface M2CrossDomainWorking { stages:{id:string;working:M1Step[]|M2Step[]|CalculusStep[]|CalculusMethodStep[]}[] }
-export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | CalculusMethodProblem | M2CrossDomainProblem;
-export type StudentWorking = string[] | M1Step[] | M2Step[] | CalculusStep[] | CalculusMethodStep[] | M2CrossDomainWorking | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
-export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal }
+export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | CalculusMethodProblem | SymbolicProblem | M2CrossDomainProblem;
+export type StudentWorking = string[] | M1Step[] | M2Step[] | CalculusStep[] | CalculusMethodStep[] | SymbolicStep[] | M2CrossDomainWorking | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
+export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; symbolicBudget?: SymbolicBudget }
 export interface AssessmentStep { index: number; classification: Classification; justification: string; reasoner: string; dependencies: unknown[] }
-export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode }
+export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus" | "symbolic"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode }
 type GeometryNative = { outcome: string; correct: boolean | null; firstInvalidStep: number | null; steps: { index: number; status: string; explanation: string }[]; summary: string; resourceLimit: boolean; geometry: { native_verdicts: string[]; proof_dependencies: unknown[]; mathematical_dependencies: unknown[]; unresolved_obligations: string[]; skill_ids: string[]; resource_limit_reached: boolean } };
 
 const malformed = (domain: AssessmentEnvelope["domain"], why: string): AssessmentEnvelope => ({ contractVersion: UNIFIED_MATH_CONTRACT, domain, classification: "malformed", correct: null, complete: false, firstInvalidStep: null, steps: [], proofDependencies: [], domainRestrictions: [], outstandingObligations: [why], skills: [], reasoners: [{ id: "unified-dispatch", version: "u1" }], justification: why, domainPayload: null });
@@ -105,6 +106,11 @@ function missingTransferAssumptions(problem: MixedProblem, transfer: CrossDomain
 
 export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   if (!problem || typeof problem !== "object" || !("domain" in problem || "statement" in problem)) return malformed("algebra", "problem must be a typed mathematical problem");
+  if (problem.domain === "symbolic") {
+    if (!Array.isArray(studentWorking) || studentWorking.some(x=>!x||typeof x!=="object")) return malformed("symbolic","symbolic working must contain structured steps");
+    const native=assessSymbolicWorking(problem,studentWorking as SymbolicStep[],options.symbolicBudget);
+    return {contractVersion:UNIFIED_MATH_CONTRACT,domain:"symbolic",classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"symbolic:m3",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"symbolic:m3",version:SYMBOLIC_EQUIVALENCE_CONTRACT}],justification:native.justification,domainPayload:native};
+  }
   if (problem.domain === "m2-cross-domain") {
     if (!studentWorking || Array.isArray(studentWorking) || !("stages" in studentWorking) || !Array.isArray(studentWorking.stages)) return malformed("m2-cross-domain","cross-domain working must contain structured stages");
     if (!Array.isArray(problem.stages) || problem.stages.length===0 || problem.stages.length>16) return {...malformed("m2-cross-domain","cross-domain proof requires 1 to 16 stages"),classification:problem.stages?.length>16?"resource-exhausted":"malformed"};
