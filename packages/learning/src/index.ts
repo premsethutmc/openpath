@@ -13,3 +13,4 @@ export * from "./tiles";
 export * from "./session";
 export * from "./unified-math-engine";
 export * from "./mathematical-obligations";
+export * from "./domains-m1";
