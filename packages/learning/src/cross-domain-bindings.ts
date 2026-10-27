@@ -56,15 +56,15 @@ export class MathematicalBindingStore{
   export(stageId:string,declaration:BindingExport,working:StudentWorking,assessment:AssessmentEnvelope,dependencies:string[]):BindingFailure|null{
     if(this.bindings.size>=D3_MAX_BINDINGS)return{classification:"resource-exhausted",explanation:"binding count exceeds the bounded limit"};
     if(!declaration.id||this.bindings.has(declaration.id))return{classification:"invalid",explanation:"binding identifiers must be unique"};
-    const index=Number(declaration.source.workingPath[0]);
-    const submitted=Array.isArray(working)?(working as any[])[index]:undefined;
-    const verified=assessment.steps.find(step=>step.index===index)?.classification==="verified";
+    const natural=!Array.isArray(working)&&working&&typeof working==="object"&&"format"in working&&["$natural","$conversion"].includes(declaration.source.workingPath[0]),parsedLines=natural?(assessment.domainPayload as any)?.naturalInput?.lines:undefined,naturalLine=natural?parsedLines?.findIndex((line:any)=>line.id===declaration.source.proofStepId):null,index=naturalLine??Number(declaration.source.workingPath[0]);
+    const submitted=natural?parsedLines?.[index]:Array.isArray(working)?(working as any[])[index]:undefined;
+    const verified=natural?assessment.steps.some(step=>step.classification==="verified"&&step.source?.line===submitted?.source?.line):assessment.steps.find(step=>step.index===index)?.classification==="verified";
     const submittedId=submitted?.id??`$index:${index}`;
     if(!submitted||submittedId!==declaration.source.proofStepId||!verified)return{classification:"invalid",explanation:"binding source is not a verified proof step"};
     const missing=[...declaration.assumptions,...declaration.domainRestrictions].filter(item=>!assessment.domainRestrictions.includes(item));
     if(missing.length)return{classification:"missing-assumption",explanation:`source proof does not establish ${missing.join(", ")}`};
     if(declaration.outstandingObligations.length||assessment.outstandingObligations.length)return{classification:"missing-assumption",explanation:"conditional binding retains unresolved obligations"};
-    const raw=pathValue(working,declaration.source.workingPath),value=normalize(declaration.mathematicalType,raw);
+    const naturalRoot=declaration.source.workingPath[0]==="$conversion"?(assessment.domainPayload as any)?.conversion:parsedLines,raw=natural?pathValue(naturalRoot,declaration.source.workingPath.slice(1)):pathValue(working,declaration.source.workingPath),value=normalize(declaration.mathematicalType,raw);
     if(!value)return{classification:"unsupported",explanation:`source value cannot be represented as ${declaration.mathematicalType}`};
     this.bindings.set(declaration.id,{contractVersion:D3_BINDING_CONTRACT,id:declaration.id,mathematicalType:declaration.mathematicalType,symbol:{...declaration.symbol},value,sourceStageId:stageId,sourceProofStepId:declaration.source.proofStepId,assumptions:[...declaration.assumptions],domainRestrictions:[...new Set([...assessment.domainRestrictions,...declaration.domainRestrictions])],dependencies:[...dependencies],outstandingObligations:[],proofVerificationStatus:"verified",verification:{kernel:D3_BINDING_KERNEL,rule:"verified-source-substitution"}});return null;
   }

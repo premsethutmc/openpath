@@ -1,0 +1,3488 @@
+{
+  "summary": {
+    "total": 300,
+    "classifications": {
+      "verified": 200,
+      "incomplete": 20,
+      "unsupported": 50,
+      "ambiguous": 10,
+      "malformed": 20
+    },
+    "previouslyVerifiedStillVerified": 60,
+    "previouslyUnsupportedNowVerified": 140,
+    "previouslyUnsupportedStillUnsupported": 50,
+    "falseAcceptances": 0,
+    "newlyVerifiedByAdapter": {
+      "function-evaluation": 20,
+      "calculus-derivative": 20,
+      "calculus-integral": 20,
+      "linear-vector": 20,
+      "probability-complement": 15,
+      "statistics-mean": 15,
+      "linear-determinant": 15,
+      "complex-modulus": 15
+    }
+  },
+  "results": [
+    {
+      "id": "d4-algebra-equations-000",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-001",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-002",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-003",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-004",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-005",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-006",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-007",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-008",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-009",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-010",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-011",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-012",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-013",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-014",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-015",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-016",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-017",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-018",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-019",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-020",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-021",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-022",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-023",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-024",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-025",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-026",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-027",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-028",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-029",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-030",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-031",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-032",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-033",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-034",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-035",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-036",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-037",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-038",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-039",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-040",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-041",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-042",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-043",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-044",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-045",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-046",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-047",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-048",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-049",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-050",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-051",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-052",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-053",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-054",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-055",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-056",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-057",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation",
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-058",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:symbolic"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-algebra-equations-059",
+      "previous": "incomplete",
+      "classification": "incomplete",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "math-core:equation"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-000",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-001",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-002",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-003",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-004",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-005",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-006",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-007",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-008",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-009",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-010",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-011",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-012",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-013",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-014",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-015",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-016",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-017",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-018",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-019",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-020",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-021",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-022",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-023",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-024",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-025",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-026",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-027",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-028",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-029",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-030",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-031",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-032",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-033",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-034",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-035",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-036",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-037",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-038",
+      "previous": "verified",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-trigonometry-functions-039",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "destinationReasoner": "symbolic:m3",
+      "kernelEvidence": [
+        "symbolic:m3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-000",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-001",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-002",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-003",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-004",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-005",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-006",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-007",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-008",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-009",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-010",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-011",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-012",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-013",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-014",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-015",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-016",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-017",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-018",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-019",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-020",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-021",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-022",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-023",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-024",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-025",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-026",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-027",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-028",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-029",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-030",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-031",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-032",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-033",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-034",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-035",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-036",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-037",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-038",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-calculus-039",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-integral",
+      "destinationReasoner": "calculus:exact",
+      "kernelEvidence": [
+        "calculus:exact"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-000",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-001",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-002",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-003",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-004",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-005",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-006",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-007",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-008",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-009",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-010",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-011",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-012",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-013",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-014",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-015",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-016",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-017",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-018",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-019",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-020",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-021",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-022",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-023",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-024",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-025",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-026",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-027",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-028",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-029",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-030",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-031",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-032",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-033",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-034",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-035",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-036",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-037",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-038",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-geometry-vectors-039",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-000",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-001",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-002",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-003",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-004",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-005",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-006",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-007",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-008",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-009",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-010",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-011",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-012",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-013",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-014",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-015",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-016",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-017",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-018",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-019",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-020",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-021",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-022",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-023",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-024",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-025",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-026",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-027",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-028",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-probability-statistics-029",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "statistics-mean",
+      "destinationReasoner": "probability-statistics:b1",
+      "kernelEvidence": [
+        "probability-statistics:b1"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-000",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-001",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-002",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-003",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-004",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-005",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-006",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-007",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-008",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-009",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-010",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-011",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-012",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-013",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-014",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-015",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-016",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-017",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-018",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-019",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-020",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-021",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-022",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-023",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-024",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-025",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-026",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-027",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-028",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "destinationReasoner": "linear-algebra:b2",
+      "kernelEvidence": [
+        "linear-algebra:b2"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-matrices-complex-029",
+      "previous": "unsupported",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "complex-modulus",
+      "destinationReasoner": "complex-polynomial:b3",
+      "kernelEvidence": [
+        "complex-polynomial:b3"
+      ],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-000",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-001",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-002",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-003",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-004",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-005",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-006",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-007",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-008",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-009",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-010",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-011",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-012",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-013",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-014",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-015",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-016",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-017",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-018",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-019",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-020",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-021",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-022",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-023",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-024",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-025",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-026",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-027",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-028",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-mixed-domain-029",
+      "previous": "unsupported",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": "natural-domain-adapter",
+      "kernelEvidence": [],
+      "parseClassification": "parsed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-000",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-001",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-002",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-003",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-004",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-005",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-006",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-007",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-008",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-009",
+      "previous": "ambiguous",
+      "classification": "ambiguous",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "ambiguous"
+    },
+    {
+      "id": "d4-ambiguous-malformed-010",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-011",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-012",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-013",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-014",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-015",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-016",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-017",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-018",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-019",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-020",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-021",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-022",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-023",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-024",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-025",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-026",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-027",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-028",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    },
+    {
+      "id": "d4-ambiguous-malformed-029",
+      "previous": "malformed",
+      "classification": "malformed",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "destinationReasoner": null,
+      "kernelEvidence": [],
+      "parseClassification": "malformed"
+    }
+  ]
+}
