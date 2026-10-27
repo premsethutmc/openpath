@@ -1,0 +1,4466 @@
+{
+  "schema": "openpath-canonical-ir-adversarial@1",
+  "frozenBeforeExecution": true,
+  "cases": [
+    {
+      "id": "d8-adv-changed-derivative-order-00",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-01",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-02",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-03",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-04",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-05",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-06",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-07",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-08",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-derivative-order-09",
+      "category": "changed-derivative-order",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 2,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-00",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-01",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-02",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-03",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-04",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-05",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-06",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-07",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-08",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-changed-variable-09",
+      "category": "changed-variable",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "x",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "x"
+          }
+        }
+      },
+      "right": {
+        "mathematicalType": "natural-relation",
+        "value": {
+          "kind": "derivative",
+          "notation": "ignored",
+          "functionName": "f",
+          "dependent": "f",
+          "variable": "t",
+          "order": 1,
+          "partial": false,
+          "result": {
+            "kind": "variable",
+            "name": "t"
+          }
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-00",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-01",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-02",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-03",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-04",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-05",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-06",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-07",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-08",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-variable-capture-09",
+      "category": "variable-capture",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-00",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-01",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-02",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-03",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-04",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-05",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-06",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-07",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-08",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-free-substitution-09",
+      "category": "free-substitution",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "y"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-00",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-01",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-02",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-03",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-04",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-05",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-06",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-07",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-08",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-missing-exclusion-09",
+      "category": "missing-exclusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-00",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-01",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-02",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-03",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-04",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-05",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-06",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-07",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-08",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-real-complex-domain-09",
+      "category": "real-complex-domain",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "assumptions": [
+          "complex:x"
+        ],
+        "domainRestrictions": [
+          "nonzero:x"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-00",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-01",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-02",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-03",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-04",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-05",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-06",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-07",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-08",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-principal-branch-09",
+      "category": "principal-branch",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "principal"
+        }
+      },
+      "right": {
+        "mathematicalType": "complex-expression",
+        "value": {
+          "operation": "sqrt",
+          "argument": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "branch": "multivalued"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-00",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-01",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-02",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-03",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-04",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-05",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-06",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-07",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-08",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-matrix-dimensions-09",
+      "category": "matrix-dimensions",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "rows": 2,
+          "columns": 2
+        }
+      },
+      "right": {
+        "mathematicalType": "matrix",
+        "value": {
+          "kind": "matrix",
+          "value": [
+            [
+              "1",
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1",
+              "0"
+            ]
+          ],
+          "rows": 2,
+          "columns": 3
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-00",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-01",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-02",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-03",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-04",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-05",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-06",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-07",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-08",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-probability-assumption-09",
+      "category": "probability-assumption",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": [
+          "independent:A,B"
+        ]
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2",
+        "assumptions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-00",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-01",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-02",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-03",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-04",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-05",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-06",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-07",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-08",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-altered-dependencies-09",
+      "category": "altered-dependencies",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-00",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-01",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-02",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-03",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-04",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-05",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-06",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-07",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-08",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-forged-verification-09",
+      "category": "forged-verification",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-00",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-01",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-02",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-03",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-04",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-05",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-06",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-07",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-08",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-serialization-collision-09",
+      "category": "serialization-collision",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b,c",
+          "d": "e"
+        }
+      },
+      "right": {
+        "mathematicalType": "metadata",
+        "value": {
+          "a": "b",
+          "c,d": "e"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-source-separation-00",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-01",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-02",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-03",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-04",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-05",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-06",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-07",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-08",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-source-separation-09",
+      "category": "source-separation",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 1
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "variable",
+          "name": "x"
+        },
+        "source": {
+          "line": 99
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-adv-unverified-binding-00",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-01",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-02",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-03",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-04",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-05",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-06",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-07",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-08",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-unverified-binding-09",
+      "category": "unverified-binding",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "p"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-00",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-01",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-02",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-03",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-04",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-05",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-06",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-07",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-08",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-adv-type-confusion-09",
+      "category": "type-confusion",
+      "provenance": "independently authored before execution",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1/2"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "1/2"
+      },
+      "expectedSameIdentity": false
+    }
+  ]
+}

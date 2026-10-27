@@ -1,4 +1,5 @@
 import type { AssessmentEnvelope, MathematicalProblem, StudentWorking } from "./unified-math-engine";
+import { canonicalizeMathematicalObject } from "./canonical-math-ir";
 
 export const D3_BINDING_CONTRACT = "openpath-mathematical-binding@1" as const;
 export const D3_BINDING_KERNEL = "openpath-proof-kernel-binding@1" as const;
@@ -15,7 +16,7 @@ export interface BindingReference { kind: "binding-reference"; bindingId: string
 export interface D3Stage { id: string; problem: MathematicalProblem; dependsOn: string[]; exports?: BindingExport[]; imports?: BindingImport[] }
 export interface D3Problem { domain: "d3-cross-domain"; stages: D3Stage[] }
 export interface D3Working { stages: { id: string; working: StudentWorking }[] }
-export interface MathematicalBinding { contractVersion: typeof D3_BINDING_CONTRACT; id: string; mathematicalType: BindingType; symbol: SymbolIdentity; value: unknown; sourceStageId: string; sourceProofStepId: string; assumptions: string[]; domainRestrictions: string[]; dependencies: string[]; outstandingObligations: string[]; proofVerificationStatus: "verified"; verification:{kernel:typeof D3_BINDING_KERNEL;rule:"verified-source-substitution"} }
+export interface MathematicalBinding { contractVersion: typeof D3_BINDING_CONTRACT; id: string; mathematicalType: BindingType; symbol: SymbolIdentity; value: unknown; sourceStageId: string; sourceProofStepId: string; assumptions: string[]; domainRestrictions: string[]; dependencies: string[]; outstandingObligations: string[]; proofVerificationStatus: "verified"; semanticIdentity:string; verification:{kernel:typeof D3_BINDING_KERNEL;rule:"verified-source-substitution"} }
 export interface BindingFailure { classification: "invalid" | "missing-assumption" | "unsupported" | "resource-exhausted"; explanation: string }
 
 const exactString=(value:unknown):string|null=>typeof value==="string"&&/^-?\d+(?:\/\d+)?$/.test(value)?value:typeof value==="number"&&Number.isSafeInteger(value)?String(value):null;
@@ -66,7 +67,8 @@ export class MathematicalBindingStore{
     if(declaration.outstandingObligations.length||assessment.outstandingObligations.length)return{classification:"missing-assumption",explanation:"conditional binding retains unresolved obligations"};
     const naturalRoot=declaration.source.workingPath[0]==="$conversion"?(assessment.domainPayload as any)?.conversion:parsedLines,raw=natural?pathValue(naturalRoot,declaration.source.workingPath.slice(1)):pathValue(working,declaration.source.workingPath),value=normalize(declaration.mathematicalType,raw);
     if(!value)return{classification:"unsupported",explanation:`source value cannot be represented as ${declaration.mathematicalType}`};
-    this.bindings.set(declaration.id,{contractVersion:D3_BINDING_CONTRACT,id:declaration.id,mathematicalType:declaration.mathematicalType,symbol:{...declaration.symbol},value,sourceStageId:stageId,sourceProofStepId:declaration.source.proofStepId,assumptions:[...declaration.assumptions],domainRestrictions:[...new Set([...assessment.domainRestrictions,...declaration.domainRestrictions])],dependencies:[...dependencies],outstandingObligations:[],proofVerificationStatus:"verified",verification:{kernel:D3_BINDING_KERNEL,rule:"verified-source-substitution"}});return null;
+    let semanticIdentity:string;try{semanticIdentity=canonicalizeMathematicalObject({mathematicalType:declaration.mathematicalType,value,symbol:declaration.symbol,assumptions:declaration.assumptions,domainRestrictions:[...assessment.domainRestrictions,...declaration.domainRestrictions],outstandingObligations:[],dependencies,verificationStatus:"verified"}).semanticIdentity}catch(error){return{classification:error instanceof Error&&error.message.includes("budget")?"resource-exhausted":"unsupported",explanation:error instanceof Error?error.message:"binding cannot be canonicalized"}}
+    this.bindings.set(declaration.id,{contractVersion:D3_BINDING_CONTRACT,id:declaration.id,mathematicalType:declaration.mathematicalType,symbol:{...declaration.symbol},value,sourceStageId:stageId,sourceProofStepId:declaration.source.proofStepId,assumptions:[...declaration.assumptions],domainRestrictions:[...new Set([...assessment.domainRestrictions,...declaration.domainRestrictions])],dependencies:[...dependencies],outstandingObligations:[],proofVerificationStatus:"verified",semanticIdentity,verification:{kernel:D3_BINDING_KERNEL,rule:"verified-source-substitution"}});return null;
   }
 
   resolve(problem:MathematicalProblem,imports:BindingImport[]):{problem?:MathematicalProblem;failure?:BindingFailure;used:string[]}{
