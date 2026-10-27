@@ -10,14 +10,19 @@ from .synthetic import SyntheticReasoner
 from .verify import verify_geometry_step,verify_submitted_proof
 
 def _fact(x:dict,status="given"):return Fact(x["predicate"],tuple(x.get("args",())),x.get("value"),status)
+def _resource_refusal(reason:str)->dict[str,Any]:
+    return {"outcome":"unsupported","correct":None,"advisory":True,"firstInvalidStep":None,"steps":[],"causes":[],"summary":reason,"resourceLimit":True,"geometry":{"schema_version":"openpath-geometry-extension@1","native_verdicts":[],"proof_dependencies":[],"mathematical_dependencies":[],"unresolved_obligations":[reason],"verification_scopes":[],"skill_ids":[],"resource_limit_reached":True}}
 def assess_unified(request:dict[str,Any])->dict[str,Any]:
     if not isinstance(request,dict) or request.get("domain")!="geometry":
         return {"outcome":"unsupported","correct":None,"advisory":True,"firstInvalidStep":None,"steps":[],"causes":[],"summary":"domain is not available through the geometry integration adapter","resourceLimit":False,"geometry":{"schema_version":"openpath-geometry-extension@1","native_verdicts":[],"proof_dependencies":[],"mathematical_dependencies":[],"unresolved_obligations":["supported domain: geometry"],"verification_scopes":[],"skill_ids":[],"resource_limit_reached":False}}
     try:
         raw=request["problem"]
+        submitted=request.get("steps",[])
+        if len(submitted)>2048:return _resource_refusal("proof exceeds the 2048-step execution limit")
+        if sum(len(x.get("cited_step_ids",())) for x in submitted)>8192:return _resource_refusal("proof dependency graph exceeds the 8192-edge execution limit")
         objects={x["id"]:GeometryObject.make(x["id"],x["kind"],**x.get("data",{})) for x in raw.get("objects",[])}
         problem=GeometryProblem(raw["id"],objects,[_fact(x) for x in raw.get("facts",[])],set(raw.get("conditions",[])),_fact(raw["goal"]) if raw.get("goal") else None,raw.get("skill","geometry.reasoning"))
-        steps=[SubmittedProofStep(x["id"],_fact(x["statement"],"assumed"),tuple(x.get("cited_step_ids",())),x.get("cited_theorem")) for x in request.get("steps",[])]
+        steps=[SubmittedProofStep(x["id"],_fact(x["statement"],"assumed"),tuple(x.get("cited_step_ids",())),x.get("cited_theorem")) for x in submitted]
         budget=request.get("resource_budget",{}); max_apps=int(budget.get("max_rule_applications",10000))
         if max_apps<1:
             goal=problem.goal or Fact("unsupported_goal",())

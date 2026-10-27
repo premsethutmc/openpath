@@ -21,7 +21,7 @@ describe("unified mathematics engine U2", () => {
     expect({falseAcceptances,falseRejections,firstMatches}).toEqual({falseAcceptances:0,falseRejections:0,firstMatches:250});
   },30_000);
 
-  test("repeated and concurrent requests reuse one persistent worker", async () => {
+  test("repeated and concurrent requests reuse the bounded persistent pool", async () => {
     stopGeometryWorkers();
     const before=await healthGeometryWorker(root) as {pid:number};
     const sample=fixture.cases.find((x)=>x.id==="u2-angle-00")!;
@@ -29,7 +29,7 @@ describe("unified mathematics engine U2", () => {
     const after=await healthGeometryWorker(root) as {pid:number};
     expect(results.every((x)=>x.classification==="verified")).toBe(true);
     expect(after.pid).toBe(before.pid);
-    expect(geometryWorkerDiagnostics(root).starts).toBe(1);
+    expect(geometryWorkerDiagnostics(root).starts).toBe(2);
   });
 
   test("worker termination and timeout fail closed and recover", async () => {

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
 from typing import Any
 from .unified_api import assess_unified
 
@@ -39,6 +40,10 @@ def _handle(message: object) -> dict[str, Any]:
     if operation != "assess": return _response(request_id, ok=False, error="unsupported operation")
     payload = message.get("payload")
     if not isinstance(payload, dict): return _response(request_id, ok=False, error="payload must be an object")
+    # Operator-controlled fault injection for transport tests. Student input cannot enable it.
+    delayed_id=os.environ.get("OPENPATH_GEOMETRY_TEST_DELAY_ID")
+    if delayed_id and payload.get("problem",{}).get("id")==delayed_id:
+        time.sleep(min(5.0,max(0.0,float(os.environ.get("OPENPATH_GEOMETRY_TEST_DELAY_MS","0"))/1000)))
     return _response(request_id, ok=True, result=assess_unified(payload))
 
 def main() -> None:
