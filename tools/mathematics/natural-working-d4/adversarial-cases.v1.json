@@ -1,0 +1,905 @@
+{
+  "schema": "openpath-natural-working-adversarial@1",
+  "cases": [
+    {
+      "id": "d4-adv-ambiguous-division-00",
+      "category": "ambiguous-division",
+      "raw": "1/2x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-01",
+      "category": "ambiguous-division",
+      "raw": "2/3x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-02",
+      "category": "ambiguous-division",
+      "raw": "3/4x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-03",
+      "category": "ambiguous-division",
+      "raw": "4/5x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-04",
+      "category": "ambiguous-division",
+      "raw": "5/6x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-05",
+      "category": "ambiguous-division",
+      "raw": "6/7x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-06",
+      "category": "ambiguous-division",
+      "raw": "7/8x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-07",
+      "category": "ambiguous-division",
+      "raw": "8/9x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-08",
+      "category": "ambiguous-division",
+      "raw": "9/10x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-ambiguous-division-09",
+      "category": "ambiguous-division",
+      "raw": "10/11x = 1",
+      "expectedParseClassification": "ambiguous",
+      "expectedMathematicalVerdict": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-00",
+      "category": "missing-parenthesis",
+      "raw": "(x+1 = 2",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-01",
+      "category": "missing-parenthesis",
+      "raw": "(x+2 = 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-02",
+      "category": "missing-parenthesis",
+      "raw": "(x+3 = 4",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-03",
+      "category": "missing-parenthesis",
+      "raw": "(x+4 = 5",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-04",
+      "category": "missing-parenthesis",
+      "raw": "(x+5 = 6",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-05",
+      "category": "missing-parenthesis",
+      "raw": "(x+6 = 7",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-06",
+      "category": "missing-parenthesis",
+      "raw": "(x+7 = 8",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-07",
+      "category": "missing-parenthesis",
+      "raw": "(x+8 = 9",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-08",
+      "category": "missing-parenthesis",
+      "raw": "(x+9 = 10",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-parenthesis-09",
+      "category": "missing-parenthesis",
+      "raw": "(x+10 = 11",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-00",
+      "category": "precedence",
+      "raw": "x + 2*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-01",
+      "category": "precedence",
+      "raw": "x + 3*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-02",
+      "category": "precedence",
+      "raw": "x + 4*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-03",
+      "category": "precedence",
+      "raw": "x + 5*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-04",
+      "category": "precedence",
+      "raw": "x + 6*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-05",
+      "category": "precedence",
+      "raw": "x + 7*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-06",
+      "category": "precedence",
+      "raw": "x + 8*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-07",
+      "category": "precedence",
+      "raw": "x + 9*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-08",
+      "category": "precedence",
+      "raw": "x + 10*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-precedence-09",
+      "category": "precedence",
+      "raw": "x + 11*y^2 = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-00",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-01",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-02",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-03",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-04",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-05",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-06",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-07",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-08",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-malformed-latex-09",
+      "category": "malformed-latex",
+      "raw": "\\frac{x+1}{",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-00",
+      "category": "scoped-symbol",
+      "raw": "x_0 = 0\nx_0 + 1 = 1",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-01",
+      "category": "scoped-symbol",
+      "raw": "x_1 = 1\nx_1 + 1 = 2",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-02",
+      "category": "scoped-symbol",
+      "raw": "x_2 = 2\nx_2 + 1 = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-03",
+      "category": "scoped-symbol",
+      "raw": "x_3 = 3\nx_3 + 1 = 4",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-04",
+      "category": "scoped-symbol",
+      "raw": "x_4 = 4\nx_4 + 1 = 5",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-05",
+      "category": "scoped-symbol",
+      "raw": "x_5 = 5\nx_5 + 1 = 6",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-06",
+      "category": "scoped-symbol",
+      "raw": "x_6 = 6\nx_6 + 1 = 7",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-07",
+      "category": "scoped-symbol",
+      "raw": "x_7 = 7\nx_7 + 1 = 8",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-08",
+      "category": "scoped-symbol",
+      "raw": "x_8 = 8\nx_8 + 1 = 9",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-scoped-symbol-09",
+      "category": "scoped-symbol",
+      "raw": "x_9 = 9\nx_9 + 1 = 10",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-00",
+      "category": "invalid-chain",
+      "raw": "x + 1 = 3\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-01",
+      "category": "invalid-chain",
+      "raw": "x + 2 = 4\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-02",
+      "category": "invalid-chain",
+      "raw": "x + 3 = 5\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-03",
+      "category": "invalid-chain",
+      "raw": "x + 4 = 6\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-04",
+      "category": "invalid-chain",
+      "raw": "x + 5 = 7\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-05",
+      "category": "invalid-chain",
+      "raw": "x + 6 = 8\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-06",
+      "category": "invalid-chain",
+      "raw": "x + 7 = 9\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-07",
+      "category": "invalid-chain",
+      "raw": "x + 8 = 10\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-08",
+      "category": "invalid-chain",
+      "raw": "x + 9 = 11\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-chain-09",
+      "category": "invalid-chain",
+      "raw": "x + 10 = 12\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-00",
+      "category": "missing-branch",
+      "raw": "x^2 = 1\nx = 1",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-01",
+      "category": "missing-branch",
+      "raw": "x^2 = 4\nx = 2",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-02",
+      "category": "missing-branch",
+      "raw": "x^2 = 9\nx = 3",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-03",
+      "category": "missing-branch",
+      "raw": "x^2 = 16\nx = 4",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-04",
+      "category": "missing-branch",
+      "raw": "x^2 = 25\nx = 5",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-05",
+      "category": "missing-branch",
+      "raw": "x^2 = 36\nx = 6",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-06",
+      "category": "missing-branch",
+      "raw": "x^2 = 49\nx = 7",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-07",
+      "category": "missing-branch",
+      "raw": "x^2 = 64\nx = 8",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-08",
+      "category": "missing-branch",
+      "raw": "x^2 = 81\nx = 9",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-missing-branch-09",
+      "category": "missing-branch",
+      "raw": "x^2 = 100\nx = 10",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "incomplete",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-00",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-01",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-02",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-03",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-04",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-05",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-06",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-07",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-08",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-invalid-restriction-09",
+      "category": "invalid-restriction",
+      "raw": "x != 0\nx/x = 0",
+      "expectedParseClassification": "parsed",
+      "expectedMathematicalVerdict": "invalid",
+      "expectedFirstInvalidStep": 1,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-00",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-01",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-02",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-03",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-04",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-05",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-06",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-07",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-08",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-conflicting-notation-09",
+      "category": "conflicting-notation",
+      "raw": "x = \u2264 3",
+      "expectedParseClassification": "malformed",
+      "expectedMathematicalVerdict": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-00",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-01",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-02",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-03",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-04",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-05",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-06",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-07",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-08",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    },
+    {
+      "id": "d4-adv-resource-09",
+      "category": "resource",
+      "raw": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))",
+      "expectedParseClassification": "resource-exhausted",
+      "expectedMathematicalVerdict": "resource-exhausted",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adversarial execution"
+    }
+  ]
+}
