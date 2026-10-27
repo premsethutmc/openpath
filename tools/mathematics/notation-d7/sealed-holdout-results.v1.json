@@ -1,0 +1,1085 @@
+{
+  "summary": {
+    "total": 75,
+    "parseClassMatches": 75,
+    "typedInterpretationMatches": 61,
+    "assessed": 30,
+    "assessmentMatches": 30,
+    "falseMathematicalAcceptances": 0,
+    "falseMathematicalRejections": 0,
+    "parseP50Ms": 0.03420200000000051,
+    "parseP95Ms": 0.2183379999999957,
+    "assessmentP50Ms": 0.0929000000000002,
+    "assessmentP95Ms": 0.4265919999999994,
+    "byCategory": {
+      "derivative": {
+        "total": 18,
+        "parse": 18,
+        "typed": 8,
+        "assessment": 18
+      },
+      "function": {
+        "total": 12,
+        "parse": 12,
+        "typed": 8,
+        "assessment": 0
+      },
+      "implicit": {
+        "total": 12,
+        "parse": 12,
+        "typed": 12,
+        "assessment": 0
+      },
+      "equivalence": {
+        "total": 12,
+        "parse": 12,
+        "typed": 12,
+        "assessment": 0
+      },
+      "multiline": {
+        "total": 9,
+        "parse": 9,
+        "typed": 9,
+        "assessment": 9
+      },
+      "adversarial": {
+        "total": 12,
+        "parse": 12,
+        "typed": 12,
+        "assessment": 3
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "d7-derivative-042",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 2.5487240000000035,
+      "assessmentMs": 5.275157999999998,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-043",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.03928900000000368,
+      "assessmentMs": 0.4265919999999994,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-044",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.050916999999998325,
+      "assessmentMs": 0.25445300000000515,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-045",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.18350599999999417,
+      "assessmentMs": 0.18368599999999446,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-046",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.04500799999999572,
+      "assessmentMs": 0.3016940000000048,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-047",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.05389100000000013,
+      "assessmentMs": 0.2735010000000031,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-048",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.06896400000000114,
+      "assessmentMs": 0.2816139999999976,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-049",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.038698000000003674,
+      "assessmentMs": 0.1924589999999995,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-050",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.13398199999999605,
+      "assessmentMs": 0.09098700000000548,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-051",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0557540000000003,
+      "assessmentMs": 0.021332000000001017,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-052",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.013921000000003403,
+      "assessmentMs": 0.014901999999999305,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-053",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.10463800000000134,
+      "assessmentMs": 0.04405599999999765,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-054",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.021341999999997086,
+      "assessmentMs": 0.024957999999998037,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-055",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.018027000000003568,
+      "assessmentMs": 0.019370000000002108,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-056",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.034390999999999394,
+      "assessmentMs": 0.02726099999999576,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-057",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.02063100000000162,
+      "assessmentMs": 0.023345999999996536,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-058",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.046029000000004316,
+      "assessmentMs": 0.043735999999995556,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-059",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "unsupported",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.02903400000000289,
+      "assessmentMs": 0.05987000000000364,
+      "error": null
+    },
+    {
+      "id": "d7-function-028",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.2183379999999957,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-029",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.09946000000000055,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-030",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.06059100000000228,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-031",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.009784999999993715,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-032",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.03660500000000155,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-033",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.007961999999999136,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-034",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.008372999999998854,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-035",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.007049999999999557,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-036",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.005969000000000335,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-037",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006980999999996129,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-038",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.0062890000000024315,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-function-039",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006068999999996549,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-028",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.3359049999999968,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-029",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.06549799999999806,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-030",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.05220899999999773,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-031",
+      "category": "implicit",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.013049000000002309,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 4,
+        "text": "1/2t"
+      }
+    },
+    {
+      "id": "d7-implicit-032",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.032538999999999874,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-033",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.035884000000002914,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-034",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.05579399999999879,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-035",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02817299999999534,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-036",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.026659999999999684,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-037",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.01948900000000009,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-038",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.03420200000000051,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-039",
+      "category": "implicit",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.005068000000001405,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 4,
+        "text": "1/2x"
+      }
+    },
+    {
+      "id": "d7-equivalence-028",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.34624099999999913,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-029",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.054111999999996385,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-030",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0493539999999939,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-031",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.04568899999999587,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-032",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.13988099999999548,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-033",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.06986500000000007,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-034",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.03165799999999308,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-035",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.021853000000000122,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-036",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0220639999999932,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-037",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.01758599999999433,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-038",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.023225000000003604,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-039",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02530800000000255,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-021",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.04687099999999589,
+      "assessmentMs": 0.14906400000000275,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-022",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.023665999999998633,
+      "assessmentMs": 0.15486299999999886,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-023",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.0479219999999998,
+      "assessmentMs": 0.1866810000000001,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-024",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.03341100000000097,
+      "assessmentMs": 0.08001000000000147,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-025",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.018177000000001442,
+      "assessmentMs": 0.06808199999999687,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-026",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.027973000000002912,
+      "assessmentMs": 0.08067199999999985,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-027",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.04950500000000346,
+      "assessmentMs": 0.10277500000000117,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-028",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.0486930000000001,
+      "assessmentMs": 0.085448999999997,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-029",
+      "category": "multiline",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.02365599999999546,
+      "assessmentMs": 0.09333099999999916,
+      "error": null
+    },
+    {
+      "id": "d7-adversarial-028",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0074709999999953425,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/2x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-029",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.040590999999999156,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-030",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.08557799999999816,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-031",
+      "category": "adversarial",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.023254999999998915,
+      "assessmentMs": 0.0929000000000002,
+      "error": null
+    },
+    {
+      "id": "d7-adversarial-032",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.005026999999998338,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/6x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-033",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02525800000000089,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-034",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.06851300000000293,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-035",
+      "category": "adversarial",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.018146999999999025,
+      "assessmentMs": 0.13434200000000374,
+      "error": null
+    },
+    {
+      "id": "d7-adversarial-036",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0062890000000024315,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/3x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-037",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.014842999999999051,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-038",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.08170299999999742,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-039",
+      "category": "adversarial",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": {
+        "actual": "invalid",
+        "expected": "invalid",
+        "match": true,
+        "firstInvalidStep": 0
+      },
+      "parseMs": 0.039489000000003216,
+      "assessmentMs": 0.11813799999999475,
+      "error": null
+    }
+  ]
+}

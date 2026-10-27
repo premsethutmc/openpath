@@ -1,0 +1,171 @@
+{
+  "rootCause": "function-symbol handling in special derivative detection and the calculus adapter was hard-coded to f-prime",
+  "cases": [
+    {
+      "id": "d6-hold-derivative-000",
+      "input": "g'(t)=3t^2",
+      "tokenization": "not reached: D6 special-notation detector only recognizes f-prime",
+      "parseResult": {
+        "contractVersion": "openpath-natural-math-input@1",
+        "classification": "unsupported",
+        "lines": [],
+        "message": "unsupported character ''' at 1",
+        "resourceUsage": {
+          "characters": 10,
+          "lines": 1,
+          "tokens": 0,
+          "depth": 0
+        },
+        "error": {
+          "line": 1,
+          "start": 0,
+          "end": 10,
+          "text": "g'(t)=3t^2"
+        }
+      },
+      "expectedTypedIR": {
+        "kind": "derivative",
+        "functionName": "g",
+        "dependent": "g",
+        "variable": "t",
+        "order": 1,
+        "partial": false,
+        "result": null
+      },
+      "actualFailure": "unsupported",
+      "expectedReasoner": "calculus-core"
+    },
+    {
+      "id": "d6-hold-derivative-001",
+      "input": "g'(t)=4t^3",
+      "tokenization": "not reached: D6 special-notation detector only recognizes f-prime",
+      "parseResult": {
+        "contractVersion": "openpath-natural-math-input@1",
+        "classification": "unsupported",
+        "lines": [],
+        "message": "unsupported character ''' at 1",
+        "resourceUsage": {
+          "characters": 10,
+          "lines": 1,
+          "tokens": 0,
+          "depth": 0
+        },
+        "error": {
+          "line": 1,
+          "start": 0,
+          "end": 10,
+          "text": "g'(t)=4t^3"
+        }
+      },
+      "expectedTypedIR": {
+        "kind": "derivative",
+        "functionName": "g",
+        "dependent": "g",
+        "variable": "t",
+        "order": 1,
+        "partial": false
+      },
+      "actualFailure": "unsupported",
+      "expectedReasoner": "calculus-core"
+    },
+    {
+      "id": "d6-hold-derivative-002",
+      "input": "g'(t)=5t^4",
+      "tokenization": "not reached: D6 special-notation detector only recognizes f-prime",
+      "parseResult": {
+        "contractVersion": "openpath-natural-math-input@1",
+        "classification": "unsupported",
+        "lines": [],
+        "message": "unsupported character ''' at 1",
+        "resourceUsage": {
+          "characters": 10,
+          "lines": 1,
+          "tokens": 0,
+          "depth": 0
+        },
+        "error": {
+          "line": 1,
+          "start": 0,
+          "end": 10,
+          "text": "g'(t)=5t^4"
+        }
+      },
+      "expectedTypedIR": {
+        "kind": "derivative",
+        "functionName": "g",
+        "dependent": "g",
+        "variable": "t",
+        "order": 1,
+        "partial": false
+      },
+      "actualFailure": "unsupported",
+      "expectedReasoner": "calculus-core"
+    },
+    {
+      "id": "d6-hold-derivative-003",
+      "input": "g'(t)=6t^5",
+      "tokenization": "not reached: D6 special-notation detector only recognizes f-prime",
+      "parseResult": {
+        "contractVersion": "openpath-natural-math-input@1",
+        "classification": "unsupported",
+        "lines": [],
+        "message": "unsupported character ''' at 1",
+        "resourceUsage": {
+          "characters": 10,
+          "lines": 1,
+          "tokens": 0,
+          "depth": 0
+        },
+        "error": {
+          "line": 1,
+          "start": 0,
+          "end": 10,
+          "text": "g'(t)=6t^5"
+        }
+      },
+      "expectedTypedIR": {
+        "kind": "derivative",
+        "functionName": "g",
+        "dependent": "g",
+        "variable": "t",
+        "order": 1,
+        "partial": false
+      },
+      "actualFailure": "unsupported",
+      "expectedReasoner": "calculus-core"
+    },
+    {
+      "id": "d6-hold-derivative-004",
+      "input": "g'(t)=7t^6",
+      "tokenization": "not reached: D6 special-notation detector only recognizes f-prime",
+      "parseResult": {
+        "contractVersion": "openpath-natural-math-input@1",
+        "classification": "unsupported",
+        "lines": [],
+        "message": "unsupported character ''' at 1",
+        "resourceUsage": {
+          "characters": 10,
+          "lines": 1,
+          "tokens": 0,
+          "depth": 0
+        },
+        "error": {
+          "line": 1,
+          "start": 0,
+          "end": 10,
+          "text": "g'(t)=7t^6"
+        }
+      },
+      "expectedTypedIR": {
+        "kind": "derivative",
+        "functionName": "g",
+        "dependent": "g",
+        "variable": "t",
+        "order": 1,
+        "partial": false
+      },
+      "actualFailure": "unsupported",
+      "expectedReasoner": "calculus-core"
+    }
+  ]
+}

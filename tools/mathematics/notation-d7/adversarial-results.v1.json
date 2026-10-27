@@ -1,0 +1,822 @@
+{
+  "summary": {
+    "total": 100,
+    "falseMathematicalAcceptances": 0,
+    "byParse": {
+      "parsed": 40,
+      "malformed": 30,
+      "ambiguous": 10,
+      "unsupported": 10,
+      "resource-exhausted": 10
+    },
+    "byAssessment": {
+      "unsupported": 20,
+      "malformed": 20,
+      "ambiguous": 10,
+      "invalid": 20,
+      "null": 30
+    }
+  },
+  "results": [
+    {
+      "id": "d7-adv-incorrect-order-00",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-01",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-02",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-03",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-04",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-05",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-06",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-07",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-08",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-incorrect-order-09",
+      "category": "incorrect-order",
+      "parse": "parsed",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-00",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-01",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-02",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-03",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-04",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-05",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-06",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-07",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-08",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-conflicting-order-09",
+      "category": "conflicting-order",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-00",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-01",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-02",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-03",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-04",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-05",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-06",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-07",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-08",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-missing-parenthesis-09",
+      "category": "missing-parenthesis",
+      "parse": "malformed",
+      "assessment": "malformed",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-00",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-01",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-02",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-03",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-04",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-05",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-06",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-07",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-08",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-ambiguous-division-09",
+      "category": "ambiguous-division",
+      "parse": "ambiguous",
+      "assessment": "ambiguous",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-00",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-01",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-02",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-03",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-04",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-05",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-06",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-07",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-08",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unary-precedence-09",
+      "category": "unary-precedence",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-00",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-01",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-02",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-03",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-04",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-05",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-06",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-07",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-08",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-nested-functions-09",
+      "category": "nested-functions",
+      "parse": "parsed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-00",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-01",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-02",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-03",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-04",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-05",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-06",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-07",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-08",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-malformed-latex-09",
+      "category": "malformed-latex",
+      "parse": "malformed",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-00",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-01",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-02",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-03",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-04",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-05",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-06",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-07",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-08",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-unicode-double-prime-09",
+      "category": "unicode-double-prime",
+      "parse": "unsupported",
+      "assessment": "unsupported",
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-00",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-01",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-02",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-03",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-04",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-05",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-06",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-07",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-08",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-symbol-shadowing-09",
+      "category": "symbol-shadowing",
+      "parse": "parsed",
+      "assessment": "invalid",
+      "firstInvalidStep": 0,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-00",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-01",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-02",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-03",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-04",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-05",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-06",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-07",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-08",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    },
+    {
+      "id": "d7-adv-excessive-depth-09",
+      "category": "excessive-depth",
+      "parse": "resource-exhausted",
+      "assessment": null,
+      "firstInvalidStep": null,
+      "falseAcceptance": false
+    }
+  ]
+}
