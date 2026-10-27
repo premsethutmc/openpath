@@ -1,0 +1,23 @@
+{
+ "dev": {
+  "cases": 206,
+  "greedyCorrect": 206,
+  "rate": 1,
+  "failedIds": [],
+  "failedByGot": {}
+ },
+ "eval": {
+  "cases": 400,
+  "greedyCorrect": 400,
+  "rate": 1,
+  "failedIds": [],
+  "failedByGot": {}
+ },
+ "holdout": {
+  "cases": 300,
+  "greedyCorrect": 300,
+  "rate": 1,
+  "failedIds": [],
+  "failedByGot": {}
+ }
+}

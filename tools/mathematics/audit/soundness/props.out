@@ -1,0 +1,15 @@
+{
+ "counts": {
+  "rationalRoots": 298,
+  "squarefree": 298,
+  "splitLinear": 167,
+  "divmod-identity": 298,
+  "divmod-degree": 298,
+  "gcd": 298,
+  "reduce-cross": 298,
+  "ratfun-add": 280,
+  "splitLinear-null-with-quad": 131
+ },
+ "failures": 0,
+ "firstFailures": []
+}
