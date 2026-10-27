@@ -1,0 +1,53 @@
+{
+  "version": "calculus-c3-results@1",
+  "cases": 500,
+  "areas": {
+    "substitution": {
+      "cases": 120,
+      "matches": 120,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 120
+    },
+    "parts": {
+      "cases": 100,
+      "matches": 100,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 100
+    },
+    "partial-fractions": {
+      "cases": 100,
+      "matches": 100,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 100
+    },
+    "lhopital": {
+      "cases": 80,
+      "matches": 80,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 80
+    },
+    "piecewise-improper": {
+      "cases": 100,
+      "matches": 100,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 100
+    }
+  },
+  "totals": {
+    "matches": 500,
+    "falseAcceptances": 0,
+    "falseRejections": 0,
+    "firstInvalidMatches": 500
+  },
+  "latencyMs": {
+    "p50": 0.0370060000000052,
+    "p95": 0.15728700000000373,
+    "p99": 0.42442899999999995,
+    "max": 3.5461259999999974
+  }
+}

@@ -5,6 +5,7 @@ import { MATHEMATICAL_OBLIGATION_CONTRACT, constant, statementText, symbol, vali
 import { assessDomainWorking, M1_CONTRACT, type M1Problem, type M1Step } from "./domains-m1.ts";
 import { assessM2Working, M2_CONTRACT, type M2Problem, type M2Step } from "./domains-m2.ts";
 import { assessCalculusWorking, CALCULUS_CONTRACT, type CalculusProblem, type CalculusStep } from "./calculus-core.ts";
+import { assessCalculusMethodWorking, CALCULUS_METHODS_CONTRACT, type CalculusMethodProblem, type CalculusMethodStep } from "./calculus-methods.ts";
 
 export const UNIFIED_MATH_CONTRACT = "openpath-unified-math-assessment@1" as const;
 export type Classification = "verified" | "invalid" | "incomplete" | "missing-assumption" | "unsupported" | "contradictory" | "resource-exhausted" | "malformed" | "ambiguous";
@@ -15,10 +16,10 @@ export type TransferFamily = "triangle-angle-sum" | "isosceles-angle" | "similar
 export interface GeometryQuantityBinding { geometryId: string; quantity: "angle-degrees" | "segment-length"; expression: MathExpression }
 export interface CrossDomainTransfer { family: TransferFamily; geometryConclusion: { predicate: string; args: string[]; value?: unknown }; bindings: GeometryQuantityBinding[]; obligation: MathematicalObligation }
 export interface MixedProblem { domain: "mixed"; geometry: GeometryProblem; handoff?: AngleSumHandoff; transfer?: CrossDomainTransfer }
-export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:string;problem:M1Problem|M2Problem|CalculusProblem;dependsOn:string[]}[] }
-export interface M2CrossDomainWorking { stages:{id:string;working:M1Step[]|M2Step[]|CalculusStep[]}[] }
-export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | M2CrossDomainProblem;
-export type StudentWorking = string[] | M1Step[] | M2Step[] | CalculusStep[] | M2CrossDomainWorking | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
+export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:string;problem:M1Problem|M2Problem|CalculusProblem|CalculusMethodProblem;dependsOn:string[]}[] }
+export interface M2CrossDomainWorking { stages:{id:string;working:M1Step[]|M2Step[]|CalculusStep[]|CalculusMethodStep[]}[] }
+export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | CalculusMethodProblem | M2CrossDomainProblem;
+export type StudentWorking = string[] | M1Step[] | M2Step[] | CalculusStep[] | CalculusMethodStep[] | M2CrossDomainWorking | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
 export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal }
 export interface AssessmentStep { index: number; classification: Classification; justification: string; reasoner: string; dependencies: unknown[] }
 export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode }
@@ -127,6 +128,11 @@ export async function assessMathematicalWorking(problem: MathematicalProblem, st
     if (!Array.isArray(studentWorking) || studentWorking.some(x=>!x||typeof x!=="object")) return malformed((problem as M2Problem).domain,"M2 working must contain structured mathematical steps");
     const native=assessM2Working(problem as M2Problem,studentWorking as M2Step[]);
     return {contractVersion:UNIFIED_MATH_CONTRACT,domain:native.domain,classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"math-domains-m2",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"math-domains-m2",version:M2_CONTRACT}],justification:native.justification,domainPayload:native};
+  }
+  if ((problem as any).domain === "calculus" && ["substitution","integration-by-parts","partial-fractions","lhopital","piecewise-integral","improper-family"].includes((problem as any).task)) {
+    if (!Array.isArray(studentWorking) || studentWorking.some(x=>!x||typeof x!=="object")) return malformed("calculus","calculus-method working must contain structured steps");
+    const native=assessCalculusMethodWorking(problem as CalculusMethodProblem,studentWorking as CalculusMethodStep[]);
+    return {contractVersion:UNIFIED_MATH_CONTRACT,domain:"calculus",classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"calculus:methods",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"calculus:methods",version:CALCULUS_METHODS_CONTRACT}],justification:native.justification,domainPayload:native};
   }
   if ((problem as any).domain === "calculus") {
     if (!Array.isArray(studentWorking) || studentWorking.some(x=>!x||typeof x!=="object")) return malformed("calculus","calculus working must contain structured mathematical steps");
