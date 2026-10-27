@@ -18,7 +18,7 @@ import type { Module, Question, Screen } from "./content";
 function makeProblem(family: string, params: number[]): Problem {
   const def = FAMILIES.get(family)!;
   const { steps, answer } = def.solve(params);
-  return { family, params, steps, answer: String(answer), prompt: `Solve for x`, bugs: [], figure: undefined };
+  return { family, id: `${family}:${params.join(",")}`, params, competency: def.competency, skill: def.competency, form: "typed", type: def.type, steps, answer: String(answer), prompt: `Solve for x`, bugs: [] };
 }
 
 function makeModule(family: string, title: string): Module {
