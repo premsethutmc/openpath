@@ -1,0 +1,40 @@
+# Symbolic algebra in the unified core
+
+One-variable polynomial and rational expressions: expand, collect, factorise, simplify, rational simplification. Advisory only: educators mark written work.
+
+**Design.** No second engine. The independent verifier (`reasoner/verifier/verifier.ts`) gained an expression layer on its existing parser and rational-function builder: `analyseExpression`, `relateExpressions` (identical / conditional / never, plus domain dropped/added), `irreducible` (rational roots + Kronecker, refuses when too large), `formFacts`. `core/symbolic.ts` sequences it over a student's lines; `core/expression-errors.ts` names causes with the same single-fault, rewrite-at-a-node approach as `misconceptions.ts`. Routing: `assessWorking` / `verifyWorkingStep` take a no-`=` one-variable problem after the number engine; equations are untouched.
+
+**Judgement.** A line is an identity with the previous line iff the exact cross-product difference is the zero polynomial (BigInt rationals, no sampling). Chains `A = B = C` claim every link. Four separate results: correctness (`outcome`/`correct`), required skills (`skills`), final form (`final`, option `form`), domain obligations (`domain`, option `requireDomain`). Refusals are `unsupported`/`ambiguous` with `correct: null`.
+
+**Identity vs value.** `relateSymbolic` returns `identity`, `at-values` (with the exact x where they agree, e.g. `(x+1)^2` vs `x^2+1` agree only at 0) or `never`.
+
+**Domain (revised, see "Domain semantics" below).** Cancelling (x²−1)/(x−1) to x+1 is a valid identity but widens the domain: the step is `valid-with-obligation`, `domain.missing` lists x = 1 until the student states `x ≠ 1` (on the line or its own line). With `requireDomain` an unstated loss makes the outcome `incomplete`. A line that adds a restriction the previous one lacked is invalid.
+
+**Limits.** One variable (any single letter, renamed to x); no functions, roots, or x in exponents; integer exponents ≤ 1000; irrational restrictions are flagged, not stated; Kronecker factor search is capped, so exotic high-degree irreducibility claims return `unsupported`/not-factorised rather than a guess; skill detectors are structural (a skill is "shown" when a line performs that transformation); cause naming covers single faults only and is a candidate, never a finding; `a/2x` style lines are `ambiguous`.
+
+**Measured.** 11 tests (adversarial cancellations, exponent errors, domain, separation of judgements, refusals, routing); 300 random expansion assessments against a naive polynomial multiplier: 150/150 correct verified, 150/150 perturbed invalid, mean ≈1 ms, worst pair ≈13 ms; 60 held-out pairs vs vendored SymPy (`cancel`/`solve`): 60/60 same relation. Full learning package: 716 pass, 0 fail.
+
+## Domain semantics (both engines)
+A restriction is judged against the ORIGINAL expression and the step's meaning, never by where it first appears:
+1. *Implied by the original expression* (`domain.implied`): stating it is redundant, never wrong, on any line.
+2. *Carried forward by the student*: a statement (on the line or on its own line) stays in force for later lines and discharges an obligation.
+3. *Newly introduced*: a line undefined where the previous line was defined. If the original already excluded those values it is only being restored (valid). If the student states them it is a **conditional step** (`valid-with-obligation`: excluded by the student, not by the problem). Unstated, it changes the expression: `invalid`. A stated restriction that neither the original nor any written line needs is reported in `domain.narrowed` (status `narrowed`): the algebra is not called wrong, but inputs the problem allows were excluded; with `requireDomain` the outcome is `incomplete`.
+4. *Proof obligations from cancelling*: the loss is `valid-with-obligation` until stated; `domain.missing` lists what is still unstated.
+
+## Multivariate, parameters, symbolic exponents (`core/multivariate/`)
+Any number of letters (parameters are letters), or one letter with a symbolic exponent. Same contract and four separate judgements. Reuses the existing parser (`parseExpr(text, true)`, an opt-in flag; all other callers unchanged), `tactics.ts` and `MalRule`-style cause naming (`expression-errors.ts`), the verifier's univariate irreducibility, and the domain model (restriction = hypersurface "p ≠ 0"; losses/gains are `a / gcd(a, b)` of squarefree parts). The one-variable engine and verifier are untouched in behaviour.
+- `poly.ts`: sparse polynomials over Q, exact division, multivariate GCD (primitive pseudo-remainder sequence), radical, irreducibility certificates.
+- `expr.ts`: MathExpr → exact rational function. Symbolic exponents via generators (`x^(n+1) = x·[x^n]`, `[x^n][x^m] = [x^(n+m)]`, `(x^n)^m = [x^(nm)]`, `(xy)^n = [x^n][y^n]`, `2^n` by primes), assumption reported: positive bases or integer exponents.
+- Decision rule: identical normal form ⇒ identity (exact). Otherwise a non-identity is claimed only from an **exact witness point** (both lines defined, values differ), reported with a point where they agree if one exists ("equal only at x = 0, y = 0"). If neither exists the line is `unsupported`, never a guess.
+- Form "factorised completely" needs each factor certified irreducible: certified by linear-and-primitive, homogeneous dehomogenisation, or specialisation; certified reducible by common monomial, repeated factor, square discriminant, rational root of the dehomogenised form. Otherwise `final.form = "undecided"` (outcome `incomplete`, `correct: null`).
+
+**Limitations.** Exponents must be polynomials with integer coefficients in letters (no `x^(1/2)`, no functions); no equations; exact witness search is bounded (small integer grid + 400 pseudo-random points); irreducibility of high-degree non-homogeneous multivariate factors may be undecided; opaque bases (e.g. `(x²−1)^n` vs `(x−1)^n(x+1)^n`) are not identified by the normal form, so such a pair is `unsupported` (never "wrong"); losses are reported as one polynomial (not split into irreducible components); real-vacuity of a lost factor is recognised only for sums of even powers with positive coefficients (`x²+y²+1`).
+
+**Evidence.** 9 multivariate tests + domain-semantics tests (suite total 725 pass, 0 fail). Random 3-letter products, 120 correct/perturbed pairs against a naive multiplier written in the test: all right ones verified, all perturbed ones invalid. One-off SymPy cross-check (not in the suite), 240 pairs across expansions, factorisations, cancellations, rational sums, symbolic exponents: 240/240 same identity / not-identity verdict. Latency: random 3-letter expansions mean ≈4 ms per assessment, worst pair ≈60 ms; typical cancellation/exponent cases 1–20 ms.
+
+## Amendments from the validation cycle (supersede the statements above where they differ)
+- Refusals of every kind (including `DOMAIN_UNRESOLVED`) are `unsupported`; the public API never throws on bad or ill-typed input. Resource limits (`core/budget.ts`) also give `unsupported` with `resourceLimit: true`.
+- "A line that adds a restriction the previous one lacked is invalid" is replaced by the Domain semantics section (restored → valid; student-stated → conditional; unstated → invalid). `verifyWorkingStep` honours the original problem's domain; it cannot see restrictions stated on other lines.
+- "Lowest terms" includes a common integer factor of integer-coefficient parts.
+- Ambiguous text (`1/2x`, `6/2(1+2)`, `1/x(x+1)`, `x2`) is `ambiguous` for every engine, in the problem and in lines. Verb forms such as "Write … in lowest terms" are not read (use `opts.form`).
+- Test totals and measurements in this document are superseded by `MATH_CORE_VALIDATION.md`.

@@ -1,0 +1,222 @@
+[
+ {
+  "id": "m00",
+  "ms": 38.499104999999986,
+  "visited": 10,
+  "generated": 12,
+  "duplicates": 1,
+  "depth": 6,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 6
+ },
+ {
+  "id": "m01",
+  "ms": 13.201801000000046,
+  "visited": 8,
+  "generated": 10,
+  "duplicates": 1,
+  "depth": 4,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 4
+ },
+ {
+  "id": "m02",
+  "ms": 31.937311999999963,
+  "visited": 15,
+  "generated": 25,
+  "duplicates": 1,
+  "depth": 6,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 6
+ },
+ {
+  "id": "m03",
+  "ms": 11.972258000000068,
+  "visited": 9,
+  "generated": 11,
+  "duplicates": 1,
+  "depth": 5,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 5
+ },
+ {
+  "id": "m04",
+  "ms": 43.89520500000003,
+  "visited": 38,
+  "generated": 52,
+  "duplicates": 9,
+  "depth": 10,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 10
+ },
+ {
+  "id": "m05",
+  "ms": 11.556005000000027,
+  "visited": 11,
+  "generated": 13,
+  "duplicates": 1,
+  "depth": 6,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 6
+ },
+ {
+  "id": "m06",
+  "ms": 34.31571699999995,
+  "visited": 35,
+  "generated": 47,
+  "duplicates": 10,
+  "depth": 9,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 9
+ },
+ {
+  "id": "m07",
+  "ms": 5.910696999999914,
+  "visited": 3,
+  "generated": 3,
+  "duplicates": 0,
+  "depth": 3,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 3
+ },
+ {
+  "id": "m08",
+  "ms": 38.09343000000001,
+  "visited": 38,
+  "generated": 52,
+  "duplicates": 9,
+  "depth": 10,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 10
+ },
+ {
+  "id": "m09",
+  "ms": 26.237745000000018,
+  "visited": 17,
+  "generated": 28,
+  "duplicates": 2,
+  "depth": 6,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 6
+ },
+ {
+  "id": "m10",
+  "ms": 23.267479000000094,
+  "visited": 17,
+  "generated": 20,
+  "duplicates": 2,
+  "depth": 8,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 8
+ },
+ {
+  "id": "m11",
+  "ms": 11.637216999999964,
+  "visited": 10,
+  "generated": 13,
+  "duplicates": 1,
+  "depth": 4,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 4
+ },
+ {
+  "id": "m12",
+  "ms": 17.146429000000012,
+  "visited": 16,
+  "generated": 23,
+  "duplicates": 1,
+  "depth": 6,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 6
+ },
+ {
+  "id": "m13",
+  "ms": 1.4769720000000461,
+  "visited": 3,
+  "generated": 3,
+  "duplicates": 0,
+  "depth": 3,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 3
+ },
+ {
+  "id": "m14",
+  "ms": 27.977070000000026,
+  "visited": 13,
+  "generated": 15,
+  "duplicates": 1,
+  "depth": 8,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 8
+ },
+ {
+  "id": "m15",
+  "ms": 27.055822000000035,
+  "visited": 15,
+  "generated": 18,
+  "duplicates": 2,
+  "depth": 8,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 8
+ },
+ {
+  "id": "m16",
+  "ms": 22.500580000000014,
+  "visited": 38,
+  "generated": 52,
+  "duplicates": 9,
+  "depth": 10,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 10
+ },
+ {
+  "id": "m17",
+  "ms": 5.215823,
+  "visited": 8,
+  "generated": 10,
+  "duplicates": 1,
+  "depth": 4,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 4
+ },
+ {
+  "id": "m18",
+  "ms": 22.886687999999936,
+  "visited": 35,
+  "generated": 48,
+  "duplicates": 8,
+  "depth": 8,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 8
+ },
+ {
+  "id": "m19",
+  "ms": 15.573323000000073,
+  "visited": 31,
+  "generated": 44,
+  "duplicates": 8,
+  "depth": 6,
+  "capped": false,
+  "outcome": "solved",
+  "pathLength": 6
+ }
+]
