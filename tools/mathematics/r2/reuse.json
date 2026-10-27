@@ -1,0 +1,4391 @@
+{
+ "meta": {
+  "generator": "tools/mathematics/r2/gen_r2_sets.py",
+  "node_cap": 20000,
+  "seed": 20260513,
+  "spec": "docs/milestones/R2_ACCEPTANCE_SPEC.md"
+ },
+ "pairs": [
+  {
+   "id": "B-001",
+   "k051": {
+    "expected_eq": "x = 2",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/4"
+    },
+    "restrictions": [],
+    "start": "4*x = 8",
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x = 8",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/4"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 2",
+    "expected_restrictions": [
+     "-2",
+     "3"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/4"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-x^2"
+      }
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "4"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "4*x/((x+2)*(x-3))+1/(x-3)+1=8/((x+2)*(x-3))+(x+2)/((x-3)*(x+2))+1",
+    "state_before": {
+     "eq": "4*x = 8",
+     "restrictions": [
+      "-2",
+      "3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x/((x+2)*(x-3))+1/(x-3)+1=8/((x+2)*(x-3))+(x+2)/((x-3)*(x+2))+1",
+     "witness": null
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-002",
+   "k051": {
+    "expected_eq": "x = -2",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/3"
+    },
+    "restrictions": [],
+    "start": "3*x = -6",
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*x = -6",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/3"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = -2",
+    "expected_restrictions": [
+     "-2"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/3"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-9*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "12*x/((x + 2)*(x + 2)) = -6/((x + 2)*(x + 2)) + x*9/((x + 2)*(x + 2))",
+    "state_before": {
+     "eq": "3*x = -6",
+     "restrictions": [
+      "-2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "12*x/((x + 2)*(x + 2)) = -6/((x + 2)*(x + 2)) + x*9/((x + 2)*(x + 2))",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "divide-restricted-factor",
+       "params": {
+        "a": "-2"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-003",
+   "k051": {
+    "expected_eq": "x = -1",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1/2"
+    },
+    "restrictions": [],
+    "start": "-2*x = 2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x = 2",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1/2"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = -1",
+    "expected_restrictions": [
+     "1"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1/2"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-2*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "1"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "-1/(x-1)=2*x/(x-1)+1/(x-1)",
+    "state_before": {
+     "eq": "-2*x = 2",
+     "restrictions": [
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-1/(x-1)=2*x/(x-1)+1/(x-1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-004",
+   "k051": {
+    "expected_eq": "x = 4",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/4"
+    },
+    "restrictions": [],
+    "start": "4*x = 16",
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x = 16",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/4"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 4",
+    "expected_restrictions": [
+     "4"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/4"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-2*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "8"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "8*x/((x - 4)*(x - 4)) + 2/(x - 4) - 4*x/((x - 4)*(x - 4)) = 2/(x - 4) + 16/((x - 4)*(x - 4))",
+    "state_before": {
+     "eq": "4*x = 16",
+     "restrictions": [
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "8*x/((x - 4)*(x - 4)) + 2/(x - 4) - 4*x/((x - 4)*(x - 4)) = 2/(x - 4) + 16/((x - 4)*(x - 4))",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "divide-restricted-factor",
+       "params": {
+        "a": "4"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-005",
+   "k051": {
+    "expected_eq": "x = -1",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/4"
+    },
+    "restrictions": [],
+    "start": "4*x = -4",
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x = -4",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/4"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = -1",
+    "expected_restrictions": [
+     "2"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/4"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "4*x/((x - 2)*(x - 2)) = -4/((x - 2)*(x - 2))",
+    "state_before": {
+     "eq": "4*x = -4",
+     "restrictions": [
+      "2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x/((x - 2)*(x - 2)) = -4/((x - 2)*(x - 2))",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/4"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-006",
+   "k051": {
+    "expected_eq": "x = 1.5",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "2"
+    },
+    "restrictions": [],
+    "start": "0.5*x = 0.75",
+    "task": {
+     "goal": "SOLVE",
+     "start": "0.5*x = 0.75",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "2"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 1.5",
+    "expected_restrictions": [
+     "3/2"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "2"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-4*x^2"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "--6.5*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "0.5"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "-1/(2*x - 3) + x*4 = 2.5/(2*x - 3) - 1/(2*x - 3) - 1/(2*x - 3) - x/(x*2 - 3) + 4*x",
+    "state_before": {
+     "eq": "0.5*x = 0.75",
+     "restrictions": [
+      "3/2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-1/(2*x - 3) + x*4 = 2.5/(2*x - 3) - 1/(2*x - 3) - 1/(2*x - 3) - x/(x*2 - 3) + 4*x",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "divide-restricted-factor",
+       "params": {
+        "a": "3/2"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-007",
+   "k051": {
+    "expected_eq": "x = 1",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1"
+    },
+    "restrictions": [],
+    "start": "-x = -1",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-x = -1",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 1",
+    "expected_restrictions": [
+     "4"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-2"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "-x/(x - 4) + 2/(x - 4) = -1/(x - 4) + 2/(x - 4)",
+    "state_before": {
+     "eq": "-x = -1",
+     "restrictions": [
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-x/(x - 4) + 2/(x - 4) = -1/(x - 4) + 2/(x - 4)",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-2"
+       }
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-008",
+   "k051": {
+    "expected_eq": "x = 1.5",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-2/3"
+    },
+    "restrictions": [],
+    "start": "-1.5*x = -2.25",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-1.5*x = -2.25",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-2/3"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 1.5",
+    "expected_restrictions": [
+     "-3",
+     "-1"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-2/3"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-1.5*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-6.25"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "6.25/((x+3)*(x+1))=1.5*x/((x+1)*(x+3))+4/((x+1)*(x+3))",
+    "state_before": {
+     "eq": "-1.5*x = -2.25",
+     "restrictions": [
+      "-3",
+      "-1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "6.25/((x+3)*(x+1))=1.5*x/((x+1)*(x+3))+4/((x+1)*(x+3))",
+     "witness": null
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-009",
+   "k051": {
+    "expected_eq": "x = -2.5",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1/2"
+    },
+    "restrictions": [],
+    "start": "-2*x = 5",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x = 5",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1/2"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = -2.5",
+    "expected_restrictions": [
+     "1"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1/2"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "--3*x^2"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "--7*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-10"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "-2*x/(x - 1) - 10 - 3*x = 5/(x - 1) - 4 - 6 - 3*x",
+    "state_before": {
+     "eq": "-2*x = 5",
+     "restrictions": [
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x/(x - 1) - 10 - 3*x = 5/(x - 1) - 4 - 6 - 3*x",
+     "witness": null
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-010",
+   "k051": {
+    "expected_eq": "x = 0",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/6"
+    },
+    "restrictions": [],
+    "start": "6*x = 0",
+    "task": {
+     "goal": "SOLVE",
+     "start": "6*x = 0",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/6"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 0",
+    "expected_restrictions": [
+     "-3"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/6"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-24*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "30*x/(x + 3) = 24*x/(x + 3)",
+    "state_before": {
+     "eq": "6*x = 0",
+     "restrictions": [
+      "-3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "30*x/(x + 3) = 24*x/(x + 3)",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "collect-terms",
+       "params": {}
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/6"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-011",
+   "k051": {
+    "expected_eq": "x = 0.5",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/3"
+    },
+    "restrictions": [],
+    "start": "3*x = 1.5",
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*x = 1.5",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/3"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 0.5",
+    "expected_restrictions": [
+     "-3"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "1/3"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-9*x^2"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-27*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "3*x/(x + 3) + 9*x = 1.5/(x + 3) + 9*x",
+    "state_before": {
+     "eq": "3*x = 1.5",
+     "restrictions": [
+      "-3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*x/(x + 3) + 9*x = 1.5/(x + 3) + 9*x",
+     "witness": null
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-012",
+   "k051": {
+    "expected_eq": "x = 0",
+    "expected_restrictions": [],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1"
+    },
+    "restrictions": [],
+    "start": "-x = 0",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-x = 0",
+     "witness": [
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 0",
+    "expected_restrictions": [
+     "0"
+    ],
+    "op": "mul-div-const",
+    "params": {
+     "c": "-1"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "add-sub-both-sides",
+      "params": {
+       "term": "-6*x"
+      }
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "5 = x/x + 5 + 1 - 1",
+    "state_before": {
+     "eq": "-x = 0",
+     "restrictions": [
+      "0"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "5 = x/x + 5 + 1 - 1",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule mul-div-const must be served by one implementation in both settings",
+   "rule": "mul-div-const"
+  },
+  {
+   "id": "B-013",
+   "k051": {
+    "expected_eq": "x^2 + 3*x = 0",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "5"
+    },
+    "restrictions": [],
+    "start": "x^2 + 3*x - 5 = -5",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 + 3*x - 5 = -5",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 + 3*x = 0",
+    "expected_restrictions": [
+     "0"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "5"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "-x/x + 2*x/x - 5/(x*x) + 3/x = -5/(x*x)",
+    "state_before": {
+     "eq": "x^2 + 3*x - 5 = -5",
+     "restrictions": [
+      "0"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-x/x + 2*x/x - 5/(x*x) + 3/x = -5/(x*x)",
+     "witness": null
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-014",
+   "k051": {
+    "expected_eq": "-2*x^2 - 3*x = -3*x^2 - 3*x + 1",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "1"
+    },
+    "restrictions": [],
+    "start": "-2*x^2 - 3*x - 1 = -3*x^2 - 3*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x^2 - 3*x - 1 = -3*x^2 - 3*x",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-2*x^2 - 3*x = -3*x^2 - 3*x + 1",
+    "expected_restrictions": [
+     "-1"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "1"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "x - 3*x - 1 = -3*x*(x + 1)/(x + 1)",
+    "state_before": {
+     "eq": "-2*x^2 - 3*x - 1 = -3*x^2 - 3*x",
+     "restrictions": [
+      "-1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x - 3*x - 1 = -3*x*(x + 1)/(x + 1)",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "3*x"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "1"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-015",
+   "k051": {
+    "expected_eq": "x^2 + 4*x = -4*x - 15 - 1",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-1"
+    },
+    "restrictions": [],
+    "start": "x^2 + 4*x + 1 = -4*x - 15",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 + 4*x + 1 = -4*x - 15",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 + 4*x = -4*x - 15 - 1",
+    "expected_restrictions": [
+     "-4"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-1"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "2*x/(x+4)-x/(x+4)+1/((x+4)*(x+4))=-4/(x+4)+1/((x+4)*(x+4))",
+    "state_before": {
+     "eq": "x^2 + 4*x + 1 = -4*x - 15",
+     "restrictions": [
+      "-4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "2*x/(x+4)-x/(x+4)+1/((x+4)*(x+4))=-4/(x+4)+1/((x+4)*(x+4))",
+     "witness": null
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-016",
+   "k051": {
+    "expected_eq": "x^2 - 8*x = -3.5*x + 14 - 16",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-16"
+    },
+    "restrictions": [],
+    "start": "x^2 - 8*x + 16 = -3.5*x + 14",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 - 8*x + 16 = -3.5*x + 14",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 - 8*x = -3.5*x + 14 - 16",
+    "expected_restrictions": [
+     "4"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-16"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "x*(2*x - 8)/(x*2 - 8) - 4 = 0.5 - 4",
+    "state_before": {
+     "eq": "x^2 - 8*x + 16 = -3.5*x + 14",
+     "restrictions": [
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(2*x - 8)/(x*2 - 8) - 4 = 0.5 - 4",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "4"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-017",
+   "k051": {
+    "expected_eq": "-2.5*x = x^2 - 2*x - 5",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-5"
+    },
+    "restrictions": [],
+    "start": "-2.5*x + 5 = x^2 - 2*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2.5*x + 5 = x^2 - 2*x",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-2.5*x = x^2 - 2*x - 5",
+    "expected_restrictions": [
+     "2"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-5"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "-2.5*(x - 2)/((x - 2)*(x - 2)) = x/(x - 2)",
+    "state_before": {
+     "eq": "-2.5*x + 5 = x^2 - 2*x",
+     "restrictions": [
+      "2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2.5*(x - 2)/((x - 2)*(x - 2)) = x/(x - 2)",
+     "witness": null
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-018",
+   "k051": {
+    "expected_eq": "5*x = x^2 - x + 5",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "5"
+    },
+    "restrictions": [],
+    "start": "5*x - 5 = x^2 - x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "5*x - 5 = x^2 - x",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "5*x = x^2 - x + 5",
+    "expected_restrictions": [
+     "1"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "5"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "(x-1)*5/((x-1)*(x-1))+5/(x-1)-5*(2*x-2)/((x-1)*(2*x-2))=x/(x-1)",
+    "state_before": {
+     "eq": "5*x - 5 = x^2 - x",
+     "restrictions": [
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "(x-1)*5/((x-1)*(x-1))+5/(x-1)-5*(2*x-2)/((x-1)*(2*x-2))=x/(x-1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-019",
+   "k051": {
+    "expected_eq": "4*x = 3*x + 8 - 6",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-6"
+    },
+    "restrictions": [],
+    "start": "4*x + 6 = 3*x + 8",
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x + 6 = 3*x + 8",
+     "witness": [
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-6"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-3*x"
+       }
+      },
+      {
+       "op": "collect-terms",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "4*x = 3*x + 8 - 6",
+    "expected_restrictions": [
+     "-2"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-6"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "x/(x+2)+3=1/(x+2)+1/(x+2)+3",
+    "state_before": {
+     "eq": "4*x + 6 = 3*x + 8",
+     "restrictions": [
+      "-2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x+2)+3=1/(x+2)+1/(x+2)+3",
+     "witness": [
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-3"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-020",
+   "k051": {
+    "expected_eq": "x^2 + 3*x = -2.5*x - 5.5 - 2",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-2"
+    },
+    "restrictions": [],
+    "start": "x^2 + 3*x + 2 = -2.5*x - 5.5",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 + 3*x + 2 = -2.5*x - 5.5",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 + 3*x = -2.5*x - 5.5 - 2",
+    "expected_restrictions": [
+     "-3"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-2"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "2/((x + 3)*(x + 3)) + x/(x + 3) = 2/((x + 3)*(x + 3)) - 2.5/(x + 3)",
+    "state_before": {
+     "eq": "x^2 + 3*x + 2 = -2.5*x - 5.5",
+     "restrictions": [
+      "-3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "2/((x + 3)*(x + 3)) + x/(x + 3) = 2/((x + 3)*(x + 3)) - 2.5/(x + 3)",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-2"
+       }
+      },
+      {
+       "op": "divide-restricted-factor",
+       "params": {
+        "a": "-3"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-021",
+   "k051": {
+    "expected_eq": "-3*x^2 + 8*x = x^3 - 3*x^2 - 5*x + 4 - 16",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-16"
+    },
+    "restrictions": [],
+    "start": "-3*x^2 + 8*x + 16 = x^3 - 3*x^2 - 5*x + 4",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-3*x^2 + 8*x + 16 = x^3 - 3*x^2 - 5*x + 4",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-3*x^2 + 8*x = x^3 - 3*x^2 - 5*x + 4 - 16",
+    "expected_restrictions": [
+     "-1",
+     "4"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "-16"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "-3*(x - 4)/(x - 4) - 1/(x + 1) = x - 1/(x + 1)",
+    "state_before": {
+     "eq": "-3*x^2 + 8*x + 16 = x^3 - 3*x^2 - 5*x + 4",
+     "restrictions": [
+      "-1",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-3*(x - 4)/(x - 4) - 1/(x + 1) = x - 1/(x + 1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-022",
+   "k051": {
+    "expected_eq": "x^3 - 12*x^2 + 45*x = -7*x^2 + 47*x - 78 + 54",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "54"
+    },
+    "restrictions": [],
+    "start": "x^3 - 12*x^2 + 45*x - 54 = -7*x^2 + 47*x - 78",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^3 - 12*x^2 + 45*x - 54 = -7*x^2 + 47*x - 78",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^3 - 12*x^2 + 45*x = -7*x^2 + 47*x - 78 + 54",
+    "expected_restrictions": [
+     "3",
+     "4"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "54"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "(x - 3)*(x*(x - 4))/((x - 4)*(x - 3)) - 5 + 3/(x - 4) - 5/(x - 4) = -2*(2*x - 8)/(x*2 - 8) - 5 + 3/(x - 4) - 5/(x - 4)",
+    "state_before": {
+     "eq": "x^3 - 12*x^2 + 45*x - 54 = -7*x^2 + 47*x - 78",
+     "restrictions": [
+      "3",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "(x - 3)*(x*(x - 4))/((x - 4)*(x - 3)) - 5 + 3/(x - 4) - 5/(x - 4) = -2*(2*x - 8)/(x*2 - 8) - 5 + 3/(x - 4) - 5/(x - 4)",
+     "witness": null
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-023",
+   "k051": {
+    "expected_eq": "-x^3 - 6*x^2 - 9*x = -2*x^3 - 8*x^2 - 10*x",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "4"
+    },
+    "restrictions": [],
+    "start": "-x^3 - 6*x^2 - 9*x - 4 = -2*x^3 - 8*x^2 - 10*x - 4",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-x^3 - 6*x^2 - 9*x - 4 = -2*x^3 - 8*x^2 - 10*x - 4",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-x^3 - 6*x^2 - 9*x = -2*x^3 - 8*x^2 - 10*x",
+    "expected_restrictions": [
+     "-1"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "4"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "x*(x + 1)*(x + 1)/((x + 1)*(x + 1)) - 2*x - 4 = -2*x - 4",
+    "state_before": {
+     "eq": "-x^3 - 6*x^2 - 9*x - 4 = -2*x^3 - 8*x^2 - 10*x - 4",
+     "restrictions": [
+      "-1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x + 1)*(x + 1)/((x + 1)*(x + 1)) - 2*x - 4 = -2*x - 4",
+     "witness": [
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "combine-terms",
+       "params": {
+        "side": "L"
+       }
+      },
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-024",
+   "k051": {
+    "expected_eq": "3*x^3 - 9*x^2 - 7*x = 15*x^2 - 40*x - 80 + 20",
+    "expected_restrictions": [],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "20"
+    },
+    "restrictions": [],
+    "start": "3*x^3 - 9*x^2 - 7*x - 20 = 15*x^2 - 40*x - 80",
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*x^3 - 9*x^2 - 7*x - 20 = 15*x^2 - 40*x - 80",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "3*x^3 - 9*x^2 - 7*x = 15*x^2 - 40*x - 80 + 20",
+    "expected_restrictions": [
+     "-1",
+     "4"
+    ],
+    "op": "add-sub-both-sides",
+    "params": {
+     "term": "20"
+    },
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     },
+     {
+      "op": "collect-terms",
+      "params": {}
+     }
+    ],
+    "start": "3*x*(2*x - 8)/(2*x - 8) + 5/(x + 1) = 15 + 5/(x + 1)",
+    "state_before": {
+     "eq": "3*x^3 - 9*x^2 - 7*x - 20 = 15*x^2 - 40*x - 80",
+     "restrictions": [
+      "-1",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*x*(2*x - 8)/(2*x - 8) + 5/(x + 1) = 15 + 5/(x + 1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule add-sub-both-sides must be served by one implementation in both settings",
+   "rule": "add-sub-both-sides"
+  },
+  {
+   "id": "B-025",
+   "k051": {
+    "expected_eq": "1/3*x^2 - 2/3*x = -2/3*x + 4/3",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "5/6*x^2 - 5/3*x - 0.5*x^2 + x = -2/3*x + 4/3",
+    "task": {
+     "goal": "SOLVE",
+     "start": "5/6*x^2 - 5/3*x - 0.5*x^2 + x = -2/3*x + 4/3",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "1/3*x^2 - 2/3*x = -2/3*x + 4/3",
+    "expected_restrictions": [
+     "2"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "5/6*x*(x - 2)/(x - 2) - 0.5*x = -(x - 2)*(2/3)/(x - 2)",
+    "state_before": {
+     "eq": "5/6*x^2 - 5/3*x - 0.5*x^2 + x = -2/3*x + 4/3",
+     "restrictions": [
+      "2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "5/6*x*(x - 2)/(x - 2) - 0.5*x = -(x - 2)*(2/3)/(x - 2)",
+     "witness": null
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-026",
+   "k051": {
+    "expected_eq": "12*x^3 - 22*x^2 - 14*x + 20 = 10*x^3 - 10*x^2 - 20*x",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "-10*x^2 - 10*x + 20*x + 20 + 10*x^3 - 20*x^2 + 10*x^2 - 20*x + 2*x^3 - 4*x^2 + 2*x^2 - 4*x = 10*x^3 - 20*x^2 + 10*x^2 - 20*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-10*x^2 - 10*x + 20*x + 20 + 10*x^3 - 20*x^2 + 10*x^2 - 20*x + 2*x^3 - 4*x^2 + 2*x^2 - 4*x = 10*x^3 - 20*x^2 + 10*x^2 - 20*x",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "12*x^3 - 22*x^2 - 14*x + 20 = 10*x^3 - 10*x^2 - 20*x",
+    "expected_restrictions": [
+     "-1",
+     "2"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "-(x - 2)*10/(x - 2) + 10*x + 2*x = (x + 1)*(10*x)/(x + 1)",
+    "state_before": {
+     "eq": "-10*x^2 - 10*x + 20*x + 20 + 10*x^3 - 20*x^2 + 10*x^2 - 20*x + 2*x^3 - 4*x^2 + 2*x^2 - 4*x = 10*x^3 - 20*x^2 + 10*x^2 - 20*x",
+     "restrictions": [
+      "-1",
+      "2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-(x - 2)*10/(x - 2) + 10*x + 2*x = (x + 1)*(10*x)/(x + 1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-027",
+   "k051": {
+    "expected_eq": "x^3 - 3*x^2 - 12*x + 32 = 6*x^2 - 36*x + 48",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "x^3 - 4*x^2 - x^2 + 4*x + 2*x^2 - 8*x - 8*x + 32 = 4*x^2 - 4*x - 16*x + 16 + 2*x^2 - 8*x - 8*x + 32",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^3 - 4*x^2 - x^2 + 4*x + 2*x^2 - 8*x - 8*x + 32 = 4*x^2 - 4*x - 16*x + 16 + 2*x^2 - 8*x - 8*x + 32",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^3 - 3*x^2 - 12*x + 32 = 6*x^2 - 36*x + 48",
+    "expected_restrictions": [
+     "1",
+     "4"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "x/(x - 4) + 2/(x - 1) = 4*(x - 4)/((x - 4)*(x - 4)) + 2/(x - 1)",
+    "state_before": {
+     "eq": "x^3 - 4*x^2 - x^2 + 4*x + 2*x^2 - 8*x - 8*x + 32 = 4*x^2 - 4*x - 16*x + 16 + 2*x^2 - 8*x - 8*x + 32",
+     "restrictions": [
+      "1",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x - 4) + 2/(x - 1) = 4*(x - 4)/((x - 4)*(x - 4)) + 2/(x - 1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-028",
+   "k051": {
+    "expected_eq": "x = 0",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "x = 3*x - 3*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x = 3*x - 3*x",
+     "witness": [
+      {
+       "op": "collect-terms",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x = 0",
+    "expected_restrictions": [
+     "0"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x/(x*x)=3/x-3/x",
+    "state_before": {
+     "eq": "x = 3*x - 3*x",
+     "restrictions": [
+      "0"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x*x)=3/x-3/x",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-029",
+   "k051": {
+    "expected_eq": "-2*x + 2 = 4",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "-2*x + 1 + 1 = 2 + 2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x + 1 + 1 = 2 + 2",
+     "witness": [
+      {
+       "op": "collect-terms",
+       "params": {}
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-2"
+       }
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1/2"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "-2*x + 2 = 4",
+    "expected_restrictions": [
+     "1"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "-2*x/((x-1)*(x-1))+1/((x-1)*(x-1))+1/((x-1)*(x-1)) = 2/((x-1)*(x-1))+2/((x-1)*(x-1))",
+    "state_before": {
+     "eq": "-2*x + 1 + 1 = 2 + 2",
+     "restrictions": [
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x/((x-1)*(x-1))+1/((x-1)*(x-1))+1/((x-1)*(x-1)) = 2/((x-1)*(x-1))+2/((x-1)*(x-1))",
+     "witness": null
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-030",
+   "k051": {
+    "expected_eq": "3*x^2 - 2*x = 2*x^2 - x",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "x^2 + 2*x^2 - 2*x = x + 2*x^2 - 2*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 + 2*x^2 - 2*x = x + 2*x^2 - 2*x",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "3*x^2 - 2*x = 2*x^2 - x",
+    "expected_restrictions": [
+     "0",
+     "1"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "x/((x-1)*x)+2/x = x/((x-1)*x*x)+2/x",
+    "state_before": {
+     "eq": "x^2 + 2*x^2 - 2*x = x + 2*x^2 - 2*x",
+     "restrictions": [
+      "0",
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/((x-1)*x)+2/x = x/((x-1)*x*x)+2/x",
+     "witness": null
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-031",
+   "k051": {
+    "expected_eq": "-5*x^2 - 4*x + 10 = -5*x^2 - 5*x + 11",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "x - 1 + 1 - 5*x^2 + 5*x - 10*x + 10 = 1 - 5*x^2 + 5*x - 10*x + 10",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x - 1 + 1 - 5*x^2 + 5*x - 10*x + 10 = 1 - 5*x^2 + 5*x - 10*x + 10",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-5*x^2 - 4*x + 10 = -5*x^2 - 5*x + 11",
+    "expected_restrictions": [
+     "-2",
+     "1"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "1/(x + 2) + 1/((x - 1)*(x + 2)) - 5 = 1/((x - 1)*(x + 2)) - 5",
+    "state_before": {
+     "eq": "x - 1 + 1 - 5*x^2 + 5*x - 10*x + 10 = 1 - 5*x^2 + 5*x - 10*x + 10",
+     "restrictions": [
+      "-2",
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "1/(x + 2) + 1/((x - 1)*(x + 2)) - 5 = 1/((x - 1)*(x + 2)) - 5",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "divide-restricted-factor",
+       "params": {
+        "a": "1"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-032",
+   "k051": {
+    "expected_eq": "2/3*x^3 - 10/3*x^2 + 2*x + 8/3 = 2/3*x^2 - 4*x + 16/3",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "2/3*x^3 - 2/3*x^2 - 8/3*x^2 + 8/3*x - 2/3*x + 8/3 = -5/6*x^2 + 10/3*x + 5/6*x - 10/3 + 1.5*x^2 - 6*x - 1.5*x + 6 - 2/3*x + 8/3",
+    "task": {
+     "goal": "SOLVE",
+     "start": "2/3*x^3 - 2/3*x^2 - 8/3*x^2 + 8/3*x - 2/3*x + 8/3 = -5/6*x^2 + 10/3*x + 5/6*x - 10/3 + 1.5*x^2 - 6*x - 1.5*x + 6 - 2/3*x + 8/3",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "2/3*x^3 - 10/3*x^2 + 2*x + 8/3 = 2/3*x^2 - 4*x + 16/3",
+    "expected_restrictions": [
+     "1",
+     "4"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "2/3*x*(2*x - 8)/(x*2 - 8) - 2/3/(x - 1) = -5/6 + 1.5 - 2/3/(x - 1)",
+    "state_before": {
+     "eq": "2/3*x^3 - 2/3*x^2 - 8/3*x^2 + 8/3*x - 2/3*x + 8/3 = -5/6*x^2 + 10/3*x + 5/6*x - 10/3 + 1.5*x^2 - 6*x - 1.5*x + 6 - 2/3*x + 8/3",
+     "restrictions": [
+      "1",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "2/3*x*(2*x - 8)/(x*2 - 8) - 2/3/(x - 1) = -5/6 + 1.5 - 2/3/(x - 1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-033",
+   "k051": {
+    "expected_eq": "-x + 7 = 5",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "2 + 2 + 3 - x = 1 + 1 + 3",
+    "task": {
+     "goal": "SOLVE",
+     "start": "2 + 2 + 3 - x = 1 + 1 + 3",
+     "witness": [
+      {
+       "op": "collect-terms",
+       "params": {}
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-7"
+       }
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "-x + 7 = 5",
+    "expected_restrictions": [
+     "3"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "2/(x - 3) + 2/(x - 3) + 3/(x - 3) - x/(x - 3) = 1/(x - 3) + 1/(x - 3) + 3/(x - 3)",
+    "state_before": {
+     "eq": "2 + 2 + 3 - x = 1 + 1 + 3",
+     "restrictions": [
+      "3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "2/(x - 3) + 2/(x - 3) + 3/(x - 3) - x/(x - 3) = 1/(x - 3) + 1/(x - 3) + 3/(x - 3)",
+     "witness": null
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-034",
+   "k051": {
+    "expected_eq": "x^2 + x = 4*x + 4",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "x^2 + x = 2*x + 2 + 2*x + 2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 + x = 2*x + 2 + 2*x + 2",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 + x = 4*x + 4",
+    "expected_restrictions": [
+     "-1"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "x*(x + 1)/((x + 1)*(x + 1)) = 2/(x + 1) + 2/(x + 1)",
+    "state_before": {
+     "eq": "x^2 + x = 2*x + 2 + 2*x + 2",
+     "restrictions": [
+      "-1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x + 1)/((x + 1)*(x + 1)) = 2/(x + 1) + 2/(x + 1)",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-035",
+   "k051": {
+    "expected_eq": "-2*x^4 + 4*x^3 + 16*x^2 = 6*x^3 - 12*x^2 - 48*x",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "-2*x^4 + 8*x^3 - 4*x^3 + 16*x^2 = 6*x^3 - 24*x^2 + 12*x^2 - 48*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x^4 + 8*x^3 - 4*x^3 + 16*x^2 = 6*x^3 - 24*x^2 + 12*x^2 - 48*x",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-2*x^4 + 4*x^3 + 16*x^2 = 6*x^3 - 12*x^2 - 48*x",
+    "expected_restrictions": [
+     "-2",
+     "0",
+     "4"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "-2*x*(2*x + 4)*(2*x - 8)*x/((2*x + 4)*(x + 2)*(2*x - 8)*(x - 4)*x) = 6/((x + 2)*(x - 4))",
+    "state_before": {
+     "eq": "-2*x^4 + 8*x^3 - 4*x^3 + 16*x^2 = 6*x^3 - 24*x^2 + 12*x^2 - 48*x",
+     "restrictions": [
+      "-2",
+      "0",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x*(2*x + 4)*(2*x - 8)*x/((2*x + 4)*(x + 2)*(2*x - 8)*(x - 4)*x) = 6/((x + 2)*(x - 4))",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-1/2"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-036",
+   "k051": {
+    "expected_eq": "x^2 + 2*x = 2*x + 4",
+    "expected_restrictions": [],
+    "op": "collect-terms",
+    "params": {},
+    "restrictions": [],
+    "start": "x^2 + 2*x = x + 2 + x + 2 + 2*x^3 + 4*x^2 + 4*x^2 + 8*x - 2*x^3 - 4*x^2 - 4*x^2 - 8*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 + 2*x = x + 2 + x + 2 + 2*x^3 + 4*x^2 + 4*x^2 + 8*x - 2*x^3 - 4*x^2 - 4*x^2 - 8*x",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 + 2*x = 2*x + 4",
+    "expected_restrictions": [
+     "-2"
+    ],
+    "op": "collect-terms",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     },
+     {
+      "op": "expand",
+      "params": {}
+     }
+    ],
+    "start": "x/(x + 2) = 1/(x + 2) + (x + 2)/((x + 2)*(x + 2)) + 2*x*(2*x + 4)/(2*x + 4) - x*2",
+    "state_before": {
+     "eq": "x^2 + 2*x = x + 2 + x + 2 + 2*x^3 + 4*x^2 + 4*x^2 + 8*x - 2*x^3 - 4*x^2 - 4*x^2 - 8*x",
+     "restrictions": [
+      "-2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x + 2) = 1/(x + 2) + (x + 2)/((x + 2)*(x + 2)) + 2*x*(2*x + 4)/(2*x + 4) - x*2",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "divide-restricted-factor",
+       "params": {
+        "a": "-2"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule collect-terms must be served by one implementation in both settings",
+   "rule": "collect-terms"
+  },
+  {
+   "id": "B-037",
+   "k051": {
+    "expected_eq": "4*x^2 - 16*x - 8*x + 32 + 4*x^2 - 16*x - 8*x + 32 - x^2 + 4*x + 2*x - 8 - 5*x + 20 = x^3 - 4*x^2 - 2*x^2 + 8*x + 4*x^2 - 16*x - 8*x + 32 - x^2 + 2*x + 4*x - 8 - x + 4 - 4*x + 16",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "4*(x - 2)*(x - 4) + 4*(x - 2)*(x - 4) - (x - 2)*(x - 4) - 5*(x - 4) = x*(x - 2)*(x - 4) + 4*(x - 2)*(x - 4) - (x - 4)*(x - 2) - (x - 4) - 4*(x - 4)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*(x - 2)*(x - 4) + 4*(x - 2)*(x - 4) - (x - 2)*(x - 4) - 5*(x - 4) = x*(x - 2)*(x - 4) + 4*(x - 2)*(x - 4) - (x - 4)*(x - 2) - (x - 4) - 4*(x - 4)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "4*x^2 - 16*x - 8*x + 32 + 4*x^2 - 16*x - 8*x + 32 - x^2 + 4*x + 2*x - 8 - 5*x + 20 = x^3 - 4*x^2 - 2*x^2 + 8*x + 4*x^2 - 16*x - 8*x + 32 - x^2 + 2*x + 4*x - 8 - x + 4 - 4*x + 16",
+    "expected_restrictions": [
+     "2",
+     "4"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "4 + 4 - 1 - 5/(x - 2) = x + 4 - (x - 4)/(x - 4) - 1/(x - 2) - 4/(x - 2)",
+    "state_before": {
+     "eq": "4*(x - 2)*(x - 4) + 4*(x - 2)*(x - 4) - (x - 2)*(x - 4) - 5*(x - 4) = x*(x - 2)*(x - 4) + 4*(x - 2)*(x - 4) - (x - 4)*(x - 2) - (x - 4) - 4*(x - 4)",
+     "restrictions": [
+      "2",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "4 + 4 - 1 - 5/(x - 2) = x + 4 - (x - 4)/(x - 4) - 1/(x - 2) - 4/(x - 2)",
+     "witness": null
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-038",
+   "k051": {
+    "expected_eq": "x^2 - x + 2*x^3 - 2*x^2 - 2*x^2 + 2*x + x^3 - x^2 - x^2 + x = x - 1 + 2*x^3 - 2*x^2 - 2*x^2 + 2*x + x^3 - x^2 - x^2 + x",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "x*(x - 1) + 2*x*(x - 1)^2 + x*(x - 1)^2 = 0.5*(2*x - 2) + 2*x*(x - 1)^2 + x*(x - 1)^2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x - 1) + 2*x*(x - 1)^2 + x*(x - 1)^2 = 0.5*(2*x - 2) + 2*x*(x - 1)^2 + x*(x - 1)^2",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 - x + 2*x^3 - 2*x^2 - 2*x^2 + 2*x + x^3 - x^2 - x^2 + x = x - 1 + 2*x^3 - 2*x^2 - 2*x^2 + 2*x + x^3 - x^2 - x^2 + x",
+    "expected_restrictions": [
+     "1"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x/(x-1)+2*x+x = (2*x-2)/((x-1)*(2*x-2))+2*x+x",
+    "state_before": {
+     "eq": "x*(x - 1) + 2*x*(x - 1)^2 + x*(x - 1)^2 = 0.5*(2*x - 2) + 2*x*(x - 1)^2 + x*(x - 1)^2",
+     "restrictions": [
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x-1)+2*x+x = (2*x-2)/((x-1)*(2*x-2))+2*x+x",
+     "witness": null
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-039",
+   "k051": {
+    "expected_eq": "0.5*x^2 + x - x - 2 = x^3 + 2*x^2 - 2*x^2 - 4*x",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "0.5*(x - 2)*(x + 2) = 0.25*(x*2 - 4)*x*(x*2 + 4)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "0.5*(x - 2)*(x + 2) = 0.25*(x*2 - 4)*x*(x*2 + 4)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "0.5*x^2 + x - x - 2 = x^3 + 2*x^2 - 2*x^2 - 4*x",
+    "expected_restrictions": [
+     "-2",
+     "2"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "0.5*(x-2)/((x+2)*(x-2)*(x-2))=(x*2-4)*(x*(x*2+4))/((x*2-4)*((2*x+4)*(x+2)*(x-2)))",
+    "state_before": {
+     "eq": "0.5*(x - 2)*(x + 2) = 0.25*(x*2 - 4)*x*(x*2 + 4)",
+     "restrictions": [
+      "-2",
+      "2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "0.5*(x-2)/((x+2)*(x-2)*(x-2))=(x*2-4)*(x*(x*2+4))/((x*2-4)*((2*x+4)*(x+2)*(x-2)))",
+     "witness": null
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-040",
+   "k051": {
+    "expected_eq": "x^3 - 4*x^2 - x^2 + 4*x - 3*x^2 + 3*x + 12*x - 12 + 5*x^3 - 20*x^2 - 20*x^2 + 80*x - 5*x^2 + 20*x + 20*x - 80 = -3*x^2 + 12*x + 3*x - 12 - 3*x^2 + 12*x + 3*x - 12 + 5*x^3 - 20*x^2 - 20*x^2 + 80*x - 5*x^2 + 20*x + 20*x - 80",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "x*(x - 1)*(x - 4) - 3*(x - 4)*(x - 1) + 5*(x - 1)*(x - 4)^2 = -3*(x - 1)*(x - 4) - 3*(x - 1)*(x - 4) + 5*(x - 1)*(x - 4)^2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x - 1)*(x - 4) - 3*(x - 4)*(x - 1) + 5*(x - 1)*(x - 4)^2 = -3*(x - 1)*(x - 4) - 3*(x - 1)*(x - 4) + 5*(x - 1)*(x - 4)^2",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^3 - 4*x^2 - x^2 + 4*x - 3*x^2 + 3*x + 12*x - 12 + 5*x^3 - 20*x^2 - 20*x^2 + 80*x - 5*x^2 + 20*x + 20*x - 80 = -3*x^2 + 12*x + 3*x - 12 - 3*x^2 + 12*x + 3*x - 12 + 5*x^3 - 20*x^2 - 20*x^2 + 80*x - 5*x^2 + 20*x + 20*x - 80",
+    "expected_restrictions": [
+     "1",
+     "4"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x/(x - 4) - 3*(x - 4)/((x - 4)*(x - 4)) + 5 = -3/(x - 4) - 3*(x - 1)/((x - 1)*(x - 4)) + 5",
+    "state_before": {
+     "eq": "x*(x - 1)*(x - 4) - 3*(x - 4)*(x - 1) + 5*(x - 1)*(x - 4)^2 = -3*(x - 1)*(x - 4) - 3*(x - 1)*(x - 4) + 5*(x - 1)*(x - 4)^2",
+     "restrictions": [
+      "1",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x - 4) - 3*(x - 4)/((x - 4)*(x - 4)) + 5 = -3/(x - 4) - 3*(x - 1)/((x - 1)*(x - 4)) + 5",
+     "witness": null
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-041",
+   "k051": {
+    "expected_eq": "3*x + 6 + x^2 + 2*x = 3*x + 6 - 4*x - 8",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "3*(x + 2) + x*(x + 2) = 3*(x + 2) - 4*(x + 2)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*(x + 2) + x*(x + 2) = 3*(x + 2) - 4*(x + 2)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "3*x + 6 + x^2 + 2*x = 3*x + 6 - 4*x - 8",
+    "expected_restrictions": [
+     "-2"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "3 + x = 3 - 4*(x + 2)/(x + 2)",
+    "state_before": {
+     "eq": "3*(x + 2) + x*(x + 2) = 3*(x + 2) - 4*(x + 2)",
+     "restrictions": [
+      "-2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "3 + x = 3 - 4*(x + 2)/(x + 2)",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 1,
+        "side": "R"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-3"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-042",
+   "k051": {
+    "expected_eq": "x^5 - x^4 - x^4 + x^3 - 2*x^3 + 2*x^2 = -x^4 + x^3 + x^3 - x^2 - 2*x^3 + 2*x^2",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "x*x*x*(x - 1)^2 - 2*(x - 1)*x^2 = -x^2*(x - 1)^2 - 2*x^2*(x - 1)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*x*x*(x - 1)^2 - 2*(x - 1)*x^2 = -x^2*(x - 1)^2 - 2*x^2*(x - 1)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^5 - x^4 - x^4 + x^3 - 2*x^3 + 2*x^2 = -x^4 + x^3 + x^3 - x^2 - 2*x^3 + 2*x^2",
+    "expected_restrictions": [
+     "0",
+     "1"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x*x*x/(x*x)-2*(x-1)/((x-1)*(x-1)) = -1-2/(x-1)",
+    "state_before": {
+     "eq": "x*x*x*(x - 1)^2 - 2*(x - 1)*x^2 = -x^2*(x - 1)^2 - 2*x^2*(x - 1)",
+     "restrictions": [
+      "0",
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*x*x/(x*x)-2*(x-1)/((x-1)*(x-1)) = -1-2/(x-1)",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 1,
+        "side": "L"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "2/(x - 1)"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-043",
+   "k051": {
+    "expected_eq": "x^3 - 3*x^2 + 3*x^2 - 9*x - 5*x^2 + 15*x - 15*x + 45 - 5*x - 15 = 5*x^2 - 15*x + 15*x - 45 + 0.5*x^2 - 1.5*x + 1.5*x - 4.5 - 5.5*x^2 + 16.5*x - 16.5*x + 49.5 - 5*x - 15",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "0.5*x*(2*x + 6)*(x - 3) - 5*(x + 3)*(x - 3) - 5*(x + 3) = 5*(x + 3)*(x - 3) + 0.5*(x + 3)*(x - 3) - 5.5*(x + 3)*(x - 3) - 5*(x + 3)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "0.5*x*(2*x + 6)*(x - 3) - 5*(x + 3)*(x - 3) - 5*(x + 3) = 5*(x + 3)*(x - 3) + 0.5*(x + 3)*(x - 3) - 5.5*(x + 3)*(x - 3) - 5*(x + 3)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^3 - 3*x^2 + 3*x^2 - 9*x - 5*x^2 + 15*x - 15*x + 45 - 5*x - 15 = 5*x^2 - 15*x + 15*x - 45 + 0.5*x^2 - 1.5*x + 1.5*x - 4.5 - 5.5*x^2 + 16.5*x - 16.5*x + 49.5 - 5*x - 15",
+    "expected_restrictions": [
+     "-3",
+     "3"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x*(2*x+6)/(2*x+6)-5-5/(x-3)=5+0.5-5.5-5/(x-3)",
+    "state_before": {
+     "eq": "0.5*x*(2*x + 6)*(x - 3) - 5*(x + 3)*(x - 3) - 5*(x + 3) = 5*(x + 3)*(x - 3) + 0.5*(x + 3)*(x - 3) - 5.5*(x + 3)*(x - 3) - 5*(x + 3)",
+     "restrictions": [
+      "-3",
+      "3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(2*x+6)/(2*x+6)-5-5/(x-3)=5+0.5-5.5-5/(x-3)",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "5"
+       }
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "5/(x - 3)"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-044",
+   "k051": {
+    "expected_eq": "-3*x^2 - 9*x + 12*x + 36 - 0.5*x^3 + 2*x^2 - 1.5*x^2 + 6*x = 0.5*x^3 - 2*x^2 + 1.5*x^2 - 6*x",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "-0.75*(x*2 - 8)*(2*x + 6) - 0.5*x*(x + 3)*(x - 4) = 0.5*x*(x + 3)*(x - 4)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-0.75*(x*2 - 8)*(2*x + 6) - 0.5*x*(x + 3)*(x - 4) = 0.5*x*(x + 3)*(x - 4)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-3*x^2 - 9*x + 12*x + 36 - 0.5*x^3 + 2*x^2 - 1.5*x^2 + 6*x = 0.5*x^3 - 2*x^2 + 1.5*x^2 - 6*x",
+    "expected_restrictions": [
+     "-3",
+     "4"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "-3*(x*2 - 8)*(2*x + 6)/((2*x - 8)*(x + 3)*(x*2 + 6)) - 0.5*x/(x + 3) = x*0.5/(x + 3)",
+    "state_before": {
+     "eq": "-0.75*(x*2 - 8)*(2*x + 6) - 0.5*x*(x + 3)*(x - 4) = 0.5*x*(x + 3)*(x - 4)",
+     "restrictions": [
+      "-3",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-3*(x*2 - 8)*(2*x + 6)/((2*x - 8)*(x + 3)*(x*2 + 6)) - 0.5*x/(x + 3) = x*0.5/(x + 3)",
+     "witness": [
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "combine-terms",
+       "params": {
+        "side": "L"
+       }
+      },
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-045",
+   "k051": {
+    "expected_eq": "3*x^3 - 6*x^2 - 3*x^2 + 6*x - 15*x^2 + 30*x + 15*x - 30 = 3*x^2 - 3*x - 6*x + 6 - 15*x^2 + 30*x + 15*x - 30",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "3*x*(x - 1)*(x - 2) - 15*(x - 1)*(x - 2) = 1.5*(x - 2)*(2*x - 2) - 15*(x - 1)*(x - 2)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*x*(x - 1)*(x - 2) - 15*(x - 1)*(x - 2) = 1.5*(x - 2)*(2*x - 2) - 15*(x - 1)*(x - 2)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "3*x^3 - 6*x^2 - 3*x^2 + 6*x - 15*x^2 + 30*x + 15*x - 30 = 3*x^2 - 3*x - 6*x + 6 - 15*x^2 + 30*x + 15*x - 30",
+    "expected_restrictions": [
+     "1",
+     "2"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "3*x/(x-2)-15/(x-2)=3*(x-2)*(2*x-2)/((x-2)*((2*x-2)*(x-2)))-15/(x-2)",
+    "state_before": {
+     "eq": "3*x*(x - 1)*(x - 2) - 15*(x - 1)*(x - 2) = 1.5*(x - 2)*(2*x - 2) - 15*(x - 1)*(x - 2)",
+     "restrictions": [
+      "1",
+      "2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "3*x/(x-2)-15/(x-2)=3*(x-2)*(2*x-2)/((x-2)*((2*x-2)*(x-2)))-15/(x-2)",
+     "witness": null
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-046",
+   "k051": {
+    "expected_eq": "0.5*x^3 - x^2 - x^2 + 2*x = -1.25*x^2 + 2.5*x + 2.5*x - 5",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "0.25*x*(2*x - 4)*(x - 2) = -1.25*(x - 2)^2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "0.25*x*(2*x - 4)*(x - 2) = -1.25*(x - 2)^2",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "0.5*x^3 - x^2 - x^2 + 2*x = -1.25*x^2 + 2.5*x + 2.5*x - 5",
+    "expected_restrictions": [
+     "2"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "0.5*x*(2*x - 4)*(x - 2)/((2*x - 4)*(x - 2)) = -1.25",
+    "state_before": {
+     "eq": "0.25*x*(2*x - 4)*(x - 2) = -1.25*(x - 2)^2",
+     "restrictions": [
+      "2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "0.5*x*(2*x - 4)*(x - 2)/((2*x - 4)*(x - 2)) = -1.25",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "2"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-047",
+   "k051": {
+    "expected_eq": "x^2 - x + x - 1 + x + 1 = -x - 1",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "x*(x - 1) + (x - 1) + (x + 1) = -(x + 1)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x - 1) + (x - 1) + (x + 1) = -(x + 1)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 - x + x - 1 + x + 1 = -x - 1",
+    "expected_restrictions": [
+     "-1",
+     "1"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x/(x + 1) + 1/(x + 1) + 1/(x - 1) = -1/(x - 1)",
+    "state_before": {
+     "eq": "x*(x - 1) + (x - 1) + (x + 1) = -(x + 1)",
+     "restrictions": [
+      "-1",
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x + 1) + 1/(x + 1) + 1/(x - 1) = -1/(x - 1)",
+     "witness": null
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-048",
+   "k051": {
+    "expected_eq": "x^2 - 3*x = 3*x - 9",
+    "expected_restrictions": [],
+    "op": "expand",
+    "params": {},
+    "restrictions": [],
+    "start": "x*(x - 3) = 3*(x - 3)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x - 3) = 3*(x - 3)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 - 3*x = 3*x - 9",
+    "expected_restrictions": [
+     "-1",
+     "3"
+    ],
+    "op": "expand",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x/((x + 1)*(x - 3)) = 3*(x - 3)/((x - 3)*(x - 3)*(x + 1))",
+    "state_before": {
+     "eq": "x*(x - 3) = 3*(x - 3)",
+     "restrictions": [
+      "-1",
+      "3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/((x + 1)*(x - 3)) = 3*(x - 3)/((x - 3)*(x - 3)*(x + 1))",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "accept-candidate",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "notes": "the rule expand must be served by one implementation in both settings",
+   "rule": "expand"
+  },
+  {
+   "id": "B-049",
+   "k051": {
+    "expected_eq": "-3*x - 10*x + x*(x - 3) - (-8 - 10*x - x + x*(x - 3)) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "-3*x - 10*x + x*(x - 3) = -8 - 10*x - x + x*(x - 3)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-3*x - 10*x + x*(x - 3) = -8 - 10*x - x + x*(x - 3)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-3*x - 10*x + x*(x - 3) - (-8 - 10*x - x + x*(x - 3)) = 0",
+    "expected_restrictions": [
+     "3"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "-3*x/(x - 3) - x*10/(x - 3) + x = -8/(x - 3) - 10*x/(x - 3) - x/(x - 3) + x",
+    "state_before": {
+     "eq": "-3*x - 10*x + x*(x - 3) = -8 - 10*x - x + x*(x - 3)",
+     "restrictions": [
+      "3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-3*x/(x - 3) - x*10/(x - 3) + x = -8/(x - 3) - 10*x/(x - 3) - x/(x - 3) + x",
+     "witness": null
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-050",
+   "k051": {
+    "expected_eq": "-2.5*x*(x + 1)*(x - 1) - -5*(x*2 - 2)*(x + 1) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "-2.5*x*(x + 1)*(x - 1) = -5*(x*2 - 2)*(x + 1)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2.5*x*(x + 1)*(x - 1) = -5*(x*2 - 2)*(x + 1)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-2.5*x*(x + 1)*(x - 1) - -5*(x*2 - 2)*(x + 1) = 0",
+    "expected_restrictions": [
+     "-1",
+     "1"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "-2.5*x = -(x*2-2)*((x+1)*10)/((x+1)*(x*2-2))",
+    "state_before": {
+     "eq": "-2.5*x*(x + 1)*(x - 1) = -5*(x*2 - 2)*(x + 1)",
+     "restrictions": [
+      "-1",
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2.5*x = -(x*2-2)*((x+1)*10)/((x+1)*(x*2-2))",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "-2/5"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-051",
+   "k051": {
+    "expected_eq": "-3*(x - 4) + 1 + 1 - (x*(x - 4) + 2) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "-3*(x - 4) + 1 + 1 = x*(x - 4) + 2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-3*(x - 4) + 1 + 1 = x*(x - 4) + 2",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-3*(x - 4) + 1 + 1 - (x*(x - 4) + 2) = 0",
+    "expected_restrictions": [
+     "4"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "-3 + 1/(x - 4) + 1/(x - 4) = x + 2/(x - 4)",
+    "state_before": {
+     "eq": "-3*(x - 4) + 1 + 1 = x*(x - 4) + 2",
+     "restrictions": [
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-3 + 1/(x - 4) + 1/(x - 4) = x + 2/(x - 4)",
+     "witness": null
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-052",
+   "k051": {
+    "expected_eq": "x^2 - 4*x - -2*(x - 4) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "x^2 - 4*x = -2*(x - 4)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x^2 - 4*x = -2*(x - 4)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x^2 - 4*x - -2*(x - 4) = 0",
+    "expected_restrictions": [
+     "2",
+     "4"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "2*x^2/((x*2 - 8)*(x - 2)) - 8*x/((2*x - 8)*(x - 2)) = -2/(x - 2)",
+    "state_before": {
+     "eq": "x^2 - 4*x = -2*(x - 4)",
+     "restrictions": [
+      "2",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "2*x^2/((x*2 - 8)*(x - 2)) - 8*x/((2*x - 8)*(x - 2)) = -2/(x - 2)",
+     "witness": [
+      {
+       "op": "combine-terms",
+       "params": {
+        "side": "L"
+       }
+      },
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-053",
+   "k051": {
+    "expected_eq": "2/3*x*(x - 4) - -2/3*(x - 4) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "2/3*x*(x - 4) = -2/3*(x - 4)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "2/3*x*(x - 4) = -2/3*(x - 4)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "2/3*x*(x - 4) - -2/3*(x - 4) = 0",
+    "expected_restrictions": [
+     "2",
+     "4"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "2/3*x/((x - 4)*(x - 2)*(x - 2)) = -(x - 4)*(2/3)/((x - 2)*((x - 4)*((x - 2)*(x - 4))))",
+    "state_before": {
+     "eq": "2/3*x*(x - 4) = -2/3*(x - 4)",
+     "restrictions": [
+      "2",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "2/3*x/((x - 4)*(x - 2)*(x - 2)) = -(x - 4)*(2/3)/((x - 2)*((x - 4)*((x - 2)*(x - 4))))",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "3/2"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-054",
+   "k051": {
+    "expected_eq": "x*(x - 4) - 4*(x - 4) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "x*(x - 4) = 4*(x - 4)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x - 4) = 4*(x - 4)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x*(x - 4) - 4*(x - 4) = 0",
+    "expected_restrictions": [
+     "-2",
+     "0",
+     "4"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "1/(x*(x+2))=(x-4)*4/((x+2)*(x*x)*(x-4))",
+    "state_before": {
+     "eq": "x*(x - 4) = 4*(x - 4)",
+     "restrictions": [
+      "-2",
+      "0",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "1/(x*(x+2))=(x-4)*4/((x+2)*(x*x)*(x-4))",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "accept-candidate",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-055",
+   "k051": {
+    "expected_eq": "x*(x - 1)*(x + 3) - 4*(x + 3)*(x - 1) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "x*(x - 1)*(x + 3) = 4*(x + 3)*(x - 1)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x - 1)*(x + 3) = 4*(x + 3)*(x - 1)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "x*(x - 1)*(x + 3) - 4*(x + 3)*(x - 1) = 0",
+    "expected_restrictions": [
+     "-3",
+     "1"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x*(x - 1)/((x - 1)*(x - 1)) = 4*(x + 3)/((x - 1)*(x + 3))",
+    "state_before": {
+     "eq": "x*(x - 1)*(x + 3) = 4*(x + 3)*(x - 1)",
+     "restrictions": [
+      "-3",
+      "1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*(x - 1)/((x - 1)*(x - 1)) = 4*(x + 3)/((x - 1)*(x + 3))",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-056",
+   "k051": {
+    "expected_eq": "x + 3*x + 1 - 3*x = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "x + 3*x + 1 = 3*x",
+    "task": {
+     "goal": "SOLVE",
+     "start": "x + 3*x + 1 = 3*x",
+     "witness": [
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "collect-terms",
+       "params": {}
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-1"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "x + 3*x + 1 - 3*x = 0",
+    "expected_restrictions": [
+     "-1"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x/(x+1)+3*x/(x+1)+1/(x+1)=3*x/(x+1)",
+    "state_before": {
+     "eq": "x + 3*x + 1 = 3*x",
+     "restrictions": [
+      "-1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x/(x+1)+3*x/(x+1)+1/(x+1)=3*x/(x+1)",
+     "witness": [
+      {
+       "op": "move-to-left",
+       "params": {}
+      },
+      {
+       "op": "combine-terms",
+       "params": {
+        "side": "L"
+       }
+      },
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-057",
+   "k051": {
+    "expected_eq": "1.5*x*(2*x - 8) - (-9*(x - 4) + 12*(x - 4)) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "1.5*x*(2*x - 8) = -9*(x - 4) + 12*(x - 4)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "1.5*x*(2*x - 8) = -9*(x - 4) + 12*(x - 4)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "1.5*x*(2*x - 8) - (-9*(x - 4) + 12*(x - 4)) = 0",
+    "expected_restrictions": [
+     "-1",
+     "4"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "x*3*(2*x-8)/((2*x-8)*(x+1)) = -9/(x+1)+12/(x+1)",
+    "state_before": {
+     "eq": "1.5*x*(2*x - 8) = -9*(x - 4) + 12*(x - 4)",
+     "restrictions": [
+      "-1",
+      "4"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "x*3*(2*x-8)/((2*x-8)*(x+1)) = -9/(x+1)+12/(x+1)",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "L"
+       }
+      },
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/3"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-058",
+   "k051": {
+    "expected_eq": "4*x + (x + 2) - (2 + (x + 2)) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "4*x + (x + 2) = 2 + (x + 2)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x + (x + 2) = 2 + (x + 2)",
+     "witness": [
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-(x + 2)"
+       }
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/4"
+       }
+      }
+     ]
+    }
+   },
+   "k052": {
+    "expected_eq": "4*x + (x + 2) - (2 + (x + 2)) = 0",
+    "expected_restrictions": [
+     "-2"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "4*x/(x + 2) + 1 = 2/(x + 2) + 1",
+    "state_before": {
+     "eq": "4*x + (x + 2) = 2 + (x + 2)",
+     "restrictions": [
+      "-2"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "4*x/(x + 2) + 1 = 2/(x + 2) + 1",
+     "witness": [
+      {
+       "op": "clear-denominators",
+       "params": {}
+      },
+      {
+       "op": "add-sub-both-sides",
+       "params": {
+        "term": "-(x + 2)"
+       }
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "1/4"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-059",
+   "k051": {
+    "expected_eq": "-2*x*(x + 1) - 2*(x + 1)^2 - -2*(x + 1)^2 = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "-2*x*(x + 1) - 2*(x + 1)^2 = -2*(x + 1)^2",
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x*(x + 1) - 2*(x + 1)^2 = -2*(x + 1)^2",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "-2*x*(x + 1) - 2*(x + 1)^2 - -2*(x + 1)^2 = 0",
+    "expected_restrictions": [
+     "-2",
+     "-1"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "-2*x*(x + 1)/((x + 1)*(x + 1)*(x + 2)) - 2/(x + 2) = -2/(x + 2)",
+    "state_before": {
+     "eq": "-2*x*(x + 1) - 2*(x + 1)^2 = -2*(x + 1)^2",
+     "restrictions": [
+      "-2",
+      "-1"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "-2*x*(x + 1)/((x + 1)*(x + 1)*(x + 2)) - 2/(x + 2) = -2/(x + 2)",
+     "witness": null
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  },
+  {
+   "id": "B-060",
+   "k051": {
+    "expected_eq": "10/3*x*(x - 3) - 3*x*(x - 3) - -1/6*(2*x - 6) = 0",
+    "expected_restrictions": [],
+    "op": "move-to-left",
+    "params": {},
+    "restrictions": [],
+    "start": "10/3*x*(x - 3) - 3*x*(x - 3) = -1/6*(2*x - 6)",
+    "task": {
+     "goal": "SOLVE",
+     "start": "10/3*x*(x - 3) - 3*x*(x - 3) = -1/6*(2*x - 6)",
+     "witness": null
+    }
+   },
+   "k052": {
+    "expected_eq": "10/3*x*(x - 3) - 3*x*(x - 3) - -1/6*(2*x - 6) = 0",
+    "expected_restrictions": [
+     "3"
+    ],
+    "op": "move-to-left",
+    "params": {},
+    "prefix": [
+     {
+      "op": "restrict",
+      "params": {}
+     },
+     {
+      "op": "clear-denominators",
+      "params": {}
+     }
+    ],
+    "start": "10/3*x-3*x=-1/3*(2*x-6)/(x*2-6)",
+    "state_before": {
+     "eq": "10/3*x*(x - 3) - 3*x*(x - 3) = -1/6*(2*x - 6)",
+     "restrictions": [
+      "3"
+     ]
+    },
+    "task": {
+     "goal": "SOLVE",
+     "start": "10/3*x-3*x=-1/3*(2*x-6)/(x*2-6)",
+     "witness": [
+      {
+       "op": "cancel-common-factor",
+       "params": {
+        "idx": 0,
+        "side": "R"
+       }
+      },
+      {
+       "op": "collect-terms",
+       "params": {}
+      },
+      {
+       "op": "mul-div-const",
+       "params": {
+        "c": "3"
+       }
+      }
+     ]
+    }
+   },
+   "notes": "the rule move-to-left must be served by one implementation in both settings",
+   "rule": "move-to-left"
+  }
+ ]
+}

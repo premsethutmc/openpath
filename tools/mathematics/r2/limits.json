@@ -1,0 +1,1420 @@
+{
+ "meta": {
+  "generator": "tools/mathematics/r2/gen_r2_sets.py",
+  "node_cap": 20000,
+  "seed": 20260513,
+  "spec": "docs/milestones/R2_ACCEPTANCE_SPEC.md"
+ },
+ "tasks": [
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-001",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "2*x + 3 = ",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-002",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "= 5",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-003",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "2*x + 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-004",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "(x + 1 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-005",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x + 1) = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-006",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "2x + 1 = 5",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-007",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "3(x + 1) = 9",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-008",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x = = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-009",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "2*x + * 3 = 7",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-010",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x^ = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-011",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1..5*x = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-012",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x 2 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-013",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x(x + 1) = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "malformed",
+   "expected": {
+    "codes": [
+     "PARSE_ERROR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-014",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "2*x + 3 = 7 = 7",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-015",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "sqrt(x) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-016",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "abs(x) = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-017",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x**2 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-018",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x != 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-019",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x % 2 = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-020",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "sin(x) = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-021",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "log(x) = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-022",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x < 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-023",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x >= 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_OPERATOR"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-024",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "|x| = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-025",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "2^x = 8",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-026",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x^0.5 = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-027",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x^(1/2) = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-028",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "y + x = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "unsupported",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-029",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x^x = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-030",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1/(x - x) = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-031",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "0^0 + x = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-032",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x/(x - x) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-033",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1/0 = x",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-034",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1/(x^2 - 2) = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-035",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1/(x^2 - 3*x + 1) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-036",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x/(x^3 - 2) = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-037",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "2/(x - 1) + 1/(x^2 - 5) = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-038",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "(x + 1)^(-1) + 1/(0*x) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "domain-unresolved",
+   "expected": {
+    "codes": [
+     "DOMAIN_UNRESOLVED"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-039",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x^(-1) = 1/(x - x)",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "-55555/864197532"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-040",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "123456789*x = 987654321*x + 55555",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "1/500000000000"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-041",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1000000000000*x + 1 = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "3000000"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-042",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "0.000001*x = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "2/1000000007"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-043",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1/(1000000007*x - 1) = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": []
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-044",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "999999999999*x/(x - 1) = 999999999999",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "1/12345678901234567890"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-045",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "12345678901234567890*x = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "1/33333"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-046",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "x/(100000*x - 3) + 7 = 8",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "49382716054938271604"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-047",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "98765432109876543210/(x + 1) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "-555555555055/2"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-048",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "3*x - 123456789012 = 7*x + 987654321098",
+   "time_limit_s": 5
+  },
+  {
+   "category": "large-coefficients",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "-1/2"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-049",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "(2*x + 1)/(1000003*x + 7) = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "3"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-050",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "((((((((((x)))))))))) + 1 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "3"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-051",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "(((((((((((((((((((((((((x))))))))))))))))))))))))) + 1 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "3"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-052",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "((((((((((((((((((((((((((((((((((((((((((((((((((x)))))))))))))))))))))))))))))))))))))))))))))))))) + 1 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "acceptable_refusals": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "3"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-053",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((x)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) + 1 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "codes": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-054",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((x)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) + 1 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "codes": [
+     "SEARCH_LIMIT",
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-055",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((x)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))) + 1 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION",
+     "DOMAIN_UNRESOLVED",
+     "SEARCH_LIMIT"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "-4/3"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-056",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "1/(1 + 1/(1 + 1/(x + 1))) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "deep-nesting",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION",
+     "SEARCH_LIMIT"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "3"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-057",
+   "node_limit": 20000,
+   "notes": "",
+   "text": "------------------------------------------------------------x = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "-1"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-058",
+   "node_limit": 20000,
+   "notes": "three distinct denominator factors, reduced numerator degree 1 (in scope)",
+   "text": "1/(x - 1) - 3/(x - 2) + 2/(x - 3) = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": []
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-059",
+   "node_limit": 20000,
+   "notes": "four distinct denominator factors (outside the boundary)",
+   "text": "1/(x - 1) - 2/(x - 2) + 2/(x - 3) - 1/(x - 4) = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "1/2",
+      "2"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-060",
+   "node_limit": 20000,
+   "notes": "repeated factor",
+   "text": "1/(x - 1)^2 + 1/(x - 1) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-061",
+   "node_limit": 20000,
+   "notes": "multiplicity three",
+   "text": "1/(x - 1)^3 = 2/(x - 1)",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "2"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-062",
+   "node_limit": 20000,
+   "notes": "removable singularity, reduced degree 1",
+   "text": "(x^2 - 1)/(x - 1) = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": []
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-063",
+   "node_limit": 20000,
+   "notes": "removable singularity whose cancelled solution is restricted",
+   "text": "(x^2 - 1)/(x - 1) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "2"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-064",
+   "node_limit": 20000,
+   "notes": "common factor, reduced degree 2 with double root",
+   "text": "(x - 2)*(x + 1) = (x - 2)*3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "-2",
+      "2"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-065",
+   "node_limit": 20000,
+   "notes": "degree 2, two rational roots (outside)",
+   "text": "x^2 = 4",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "codes": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "refuse"
+   },
+   "goal": "SOLVE",
+   "id": "C-066",
+   "node_limit": 20000,
+   "notes": "degree 2, irrational roots",
+   "text": "x^2 = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": []
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-067",
+   "node_limit": 20000,
+   "notes": "degree 2, no real roots",
+   "text": "x^2 + 1 = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "acceptable_refusals": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "kind": "either",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "2"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-068",
+   "node_limit": 20000,
+   "notes": "cubic",
+   "text": "x^3 = 8",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "excluded": [
+      "-1"
+     ],
+     "kind": "all"
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-069",
+   "node_limit": 20000,
+   "notes": "identity on the domain",
+   "text": "(x + 1)/(x + 1) = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "excluded": [
+      "1"
+     ],
+     "kind": "all"
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-070",
+   "node_limit": 20000,
+   "notes": "extraneous root equals restriction (no solution)",
+   "text": "x/(x - 1) = 1 + 1/(x - 1)",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "excluded": [
+      "1"
+     ],
+     "kind": "all"
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-071",
+   "node_limit": 20000,
+   "notes": "identity except x = 1",
+   "text": "x/(x - 1) - 1/(x - 1) = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": []
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-072",
+   "node_limit": 20000,
+   "notes": "no solution",
+   "text": "2*x + 1 = 2*x + 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "excluded": [],
+     "kind": "all"
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-073",
+   "node_limit": 20000,
+   "notes": "identity",
+   "text": "x = x",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "excluded": [
+      "0"
+     ],
+     "kind": "all"
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-074",
+   "node_limit": 20000,
+   "notes": "identity with restriction",
+   "text": "1/x = 1/x",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": []
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-075",
+   "node_limit": 20000,
+   "notes": "proportional denominators",
+   "text": "1/(2*x - 4) = 3/(x - 2)",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "excluded": [],
+     "kind": "all"
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-076",
+   "node_limit": 20000,
+   "notes": "zero coefficient identity",
+   "text": "0*x = 0",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "excluded": [
+      "0"
+     ],
+     "kind": "all"
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-077",
+   "node_limit": 20000,
+   "notes": "zero power base restricted",
+   "text": "x^0 = 1",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": []
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-078",
+   "node_limit": 20000,
+   "notes": "zero-power base x - 3",
+   "text": "(x - 3)^0 * x = 3",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "0"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-079",
+   "node_limit": 20000,
+   "notes": "fractional root",
+   "text": "1/(x + 1/2) = 2",
+   "time_limit_s": 5
+  },
+  {
+   "category": "near-boundary",
+   "expected": {
+    "kind": "answer",
+    "solution": {
+     "irrational_part": false,
+     "kind": "finite",
+     "solutions": [
+      "3/4"
+     ]
+    }
+   },
+   "goal": "SOLVE",
+   "id": "C-080",
+   "node_limit": 20000,
+   "notes": "decimal restriction",
+   "text": "x/(x - 0.5) = 3",
+   "time_limit_s": 5
+  }
+ ]
+}
