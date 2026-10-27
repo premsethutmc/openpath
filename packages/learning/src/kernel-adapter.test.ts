@@ -23,11 +23,12 @@ function makeProblem(
     competency: `test.${family}`,
     skill: `test.${family}`,
     form: "typed",
+    prompt: "",
+    type: "integer",
     steps,
-    answer,
+    answer: String(answer),
     bugs: [],
-    figure: null,
-  } as Problem;
+  };
 }
 
 function makeStep(
