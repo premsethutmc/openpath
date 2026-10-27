@@ -20,3 +20,5 @@ The public experiment boundary is `verify_geometry_step(problem, known_facts, st
 `geometry_reasoner/assessment_contract.py` records the proposed domain-neutral boundary for later comparison with the algebra workstream. It is not wired to learner records or educator marking.
 
 The Phase G2 soundness findings, supported boundary, 540-case results, risks, and recommendation are in [`docs/research/GEOMETRY_CORE_G2_REPORT.md`](../../docs/research/GEOMETRY_CORE_G2_REPORT.md).
+
+Complete structured-proof validation and the G3 decision are in [`docs/research/GEOMETRY_CORE_G3_VALIDATION.md`](../../docs/research/GEOMETRY_CORE_G3_VALIDATION.md).

@@ -4,7 +4,7 @@ from dataclasses import replace
 from typing import Iterable
 
 from .algebraic import AlgebraicVerifier
-from .model import Fact, GeometryProblem, ProofAssessment, VerificationResult, condition_nondegenerate
+from .model import Fact, GeometryProblem, ProofAssessment, SubmittedProofStep, VerificationResult, condition_nondegenerate
 from .synthetic import SyntheticReasoner
 
 
@@ -61,6 +61,8 @@ def verify_geometry_step(
     state = synthetic.close(problem, extra)
     if state.inconsistent:
         return VerificationResult("unsupported", student_step.as_status("unsupported"), None, (), (), (), ("consistent premises",), "The supplied premises are inconsistent; explosion is forbidden and no conclusion is inferred.")
+    if state.malformed:
+        return VerificationResult("unsupported", student_step.as_status("unsupported"), None, (), (), (), ("well-formed geometry input",), "Malformed geometric data stopped deduction safely.")
     established = state.facts.get(student_step.key)
     if established:
         proof = state.proofs.get(student_step.key)
@@ -103,3 +105,44 @@ def verify_student_proof(problem: GeometryProblem, student_steps: Iterable[Fact]
     obligations = tuple(dict.fromkeys(x for r in results for x in (*r.missing_assumptions, *r.unsupported_conditions)))
     route = tuple(r.theorem or "given" for r in results if r.verdict == "verified")
     return ProofAssessment(tuple(results), valid, complete, goal, first_invalid, unsupported, obligations, (route,) if route else ())
+
+
+def verify_submitted_proof(problem: GeometryProblem, steps: Iterable[SubmittedProofStep], *, algebraic: AlgebraicVerifier | None = None) -> ProofAssessment:
+    """Verify an ordered student proof and its explicit citation graph.
+
+    Future, unknown, self, duplicate, and circular references fail at the first offending
+    step. A subsequent correct statement cannot repair that proof failure.
+    """
+    submitted = tuple(steps)
+    ids = [step.id for step in submitted]
+    duplicate_ids = {x for x in ids if ids.count(x) > 1}
+    positions = {step_id: i for i, step_id in enumerate(ids)}
+    by_id = {step.id: step for step in submitted}
+    accepted: list[Fact] = []
+    results: list[VerificationResult] = []
+    graph: list[tuple[str, tuple[str, ...]]] = []
+    for index, step in enumerate(submitted):
+        graph.append((step.id, step.cited_step_ids))
+        bad = tuple(ref for ref in step.cited_step_ids if ref not in positions or positions[ref] >= index)
+        if step.id in duplicate_ids or bad:
+            reason = "duplicate step identifier" if step.id in duplicate_ids else "forward, self, or unknown proof dependency"
+            results.append(VerificationResult("invalid", step.statement, None, (), (), (), tuple(f"step:{x}" for x in bad), f"Invalid proof graph: {reason}."))
+            continue
+        result = verify_geometry_step(problem, accepted, step.statement, algebraic=algebraic)
+        if result.verdict == "verified" and step.cited_theorem and result.theorem != step.cited_theorem:
+            result = VerificationResult("invalid", step.statement, result.theorem, result.premises, result.proof_dependencies, (), (), f"The cited theorem {step.cited_theorem} does not justify this step; the established route uses {result.theorem}.")
+        if result.verdict == "verified" and step.cited_step_ids:
+            relevant = set(result.proof_dependencies)
+            irrelevant = tuple(ref for ref in step.cited_step_ids if by_id[ref].statement.key not in relevant)
+            if irrelevant:
+                result = VerificationResult("invalid", step.statement, result.theorem, result.premises, result.proof_dependencies, (), tuple(f"irrelevant-step:{x}" for x in irrelevant), "The cited proof steps are not premises of the stated justification.")
+        results.append(result)
+        if result.verdict == "verified": accepted.append(step.statement.as_status("derived", result.theorem))
+    goal = verify_geometry_step(problem, accepted, problem.goal or Fact("unsupported_goal", ()), algebraic=algebraic)
+    valid = all(r.verdict == "verified" for r in results)
+    complete = valid and bool(results) and problem.goal is not None and results[-1].statement.key == problem.goal.key
+    first = next((i for i, r in enumerate(results) if r.verdict != "verified"), None)
+    unsupported = tuple(i for i, r in enumerate(results) if r.verdict == "unsupported")
+    obligations = tuple(dict.fromkeys(x for r in results for x in (*r.missing_assumptions, *r.unsupported_conditions)))
+    route = tuple(r.theorem or "given" for r in results if r.verdict == "verified")
+    return ProofAssessment(tuple(results), valid, complete, goal, first, unsupported, obligations, (route,) if route else (), tuple(graph))

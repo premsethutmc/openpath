@@ -39,6 +39,8 @@ class MathematicalVerification:
     unresolved_obligations: tuple[str, ...] = ()
     verification_scope: Literal["universal", "problem_instance", "none"] = "none"
     resource_limit_reached: bool = False
+    proof_status: Literal["not_applicable", "complete", "incomplete"] = "not_applicable"
+    first_invalid_step: int | None = None
 
 
 @dataclass(frozen=True)

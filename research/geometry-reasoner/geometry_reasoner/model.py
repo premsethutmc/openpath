@@ -103,6 +103,15 @@ class ProofAssessment:
     unsupported_steps: tuple[int, ...] = ()
     unresolved_obligations: tuple[str, ...] = ()
     alternative_routes: tuple[tuple[str, ...], ...] = ()
+    dependency_graph: tuple[tuple[str, tuple[str, ...]], ...] = ()
+
+
+@dataclass(frozen=True)
+class SubmittedProofStep:
+    id: str
+    statement: Fact
+    cited_step_ids: tuple[str, ...] = ()
+    cited_theorem: str | None = None
 
 
 def condition_distinct(a: str, b: str) -> str:

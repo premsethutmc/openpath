@@ -26,6 +26,7 @@ class KnowledgeState:
         self.proofs: dict[tuple, Proof] = {}
         self.alternative_proofs: dict[tuple, list[Proof]] = {}
         self.inconsistent = False
+        self.malformed = False
         self.resource_limit_reached = False
         self.rule_applications = 0
         for fact in [*problem.facts, *extra]:
@@ -274,12 +275,16 @@ class SyntheticReasoner:
         for _ in range(self.max_rounds):
             changed = False
             for rule in self.rules:
-                for fact, premises, conditions in rule.apply(state):
-                    state.rule_applications += 1
-                    if state.rule_applications > self.max_rule_applications:
-                        state.resource_limit_reached = True
-                        return state
-                    changed |= state.add(fact, rule, tuple(premises), tuple(conditions))
+                try:
+                    for fact, premises, conditions in rule.apply(state):
+                        state.rule_applications += 1
+                        if state.rule_applications > self.max_rule_applications:
+                            state.resource_limit_reached = True
+                            return state
+                        changed |= state.add(fact, rule, tuple(premises), tuple(conditions))
+                except (IndexError, KeyError, TypeError, ValueError, ZeroDivisionError):
+                    state.malformed = True
+                    return state
             if not changed:
                 return state
         state.resource_limit_reached = True
