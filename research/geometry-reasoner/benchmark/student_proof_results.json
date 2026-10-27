@@ -5,7 +5,7 @@
   "first_invalid_step_correct": 90,
   "false_acceptance": 0,
   "false_rejection": 0,
-  "elapsed_seconds": 0.011496,
+  "elapsed_seconds": 0.01208,
   "categories": {
     "alternative-valid-route": 10,
     "circular-proof": 10,

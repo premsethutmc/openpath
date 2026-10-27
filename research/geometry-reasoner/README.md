@@ -22,3 +22,5 @@ The public experiment boundary is `verify_geometry_step(problem, known_facts, st
 The Phase G2 soundness findings, supported boundary, 540-case results, risks, and recommendation are in [`docs/research/GEOMETRY_CORE_G2_REPORT.md`](../../docs/research/GEOMETRY_CORE_G2_REPORT.md).
 
 Complete structured-proof validation and the G3 decision are in [`docs/research/GEOMETRY_CORE_G3_VALIDATION.md`](../../docs/research/GEOMETRY_CORE_G3_VALIDATION.md).
+
+Directed geometry semantics, construction verification, the licensed external corpus, actual math-core contract comparison, and the G4 integration decision are in [`docs/research/GEOMETRY_CORE_G4_REPORT.md`](../../docs/research/GEOMETRY_CORE_G4_REPORT.md).
