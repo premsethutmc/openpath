@@ -1,11 +1,20 @@
 // Text <-> MathExpr for the reasoner. Grammar: x, integers/decimals, + - * / ^, brackets, explicit *.
 import { Rational, parseRational, Expr, type MathExpr } from "../math-kernel.ts";
+import { Refusal } from "./outcomes.ts";
 
+const FUNCS = new Set(["sqrt", "abs", "ln", "log", "exp", "sin", "cos", "tan", "floor", "ceil", "min", "max"]);
 export function parseExpr(src: string): MathExpr {
+  if (/[0-9.]\s+[0-9.]/.test(src)) throw new Refusal("PARSE_ERROR", `whitespace inside a number in "${src}"`);   // "1 0" is not 10 (R1)
   const s = src.replace(/\s+/g, "");
+  { let d = 0, maxd = 0; for (const ch of s) { if (ch === "(") { d++; maxd = Math.max(maxd, d); } else if (ch === ")" && --d < 0) break; }
+    if (d !== 0) throw new Refusal("PARSE_ERROR", `unbalanced brackets in input of length ${src.length}`);
+    if (maxd > 150) throw new Refusal("UNSUPPORTED_EXPRESSION", "brackets nested too deeply"); }   // no stack overflow on hostile input (R1)
   let i = 0;
   const peek = () => s[i];
-  const fail = (m: string): never => { throw new Error(`parse error at ${i} in "${src}": ${m}`); };
+  const fail = (m: string): never => {
+    const c = s[i] ?? ""; if (c && "!|%√".includes(c)) throw new Refusal("UNSUPPORTED_OPERATOR", `operator ${c} in "${src}"`);
+    throw new Refusal("PARSE_ERROR", `parse error at ${i} in "${src}": ${m}`);
+  };
   function sum(): MathExpr {
     let l = prod();
     while (peek() === "+" || peek() === "-") {
@@ -36,7 +45,8 @@ export function parseExpr(src: string): MathExpr {
   function atom(): MathExpr {
     const c = peek();
     if (c === "(") { i++; const e = sum(); if (s[i++] !== ")") fail("expected )"); return e; }
-    if (c === "x") { i++; return Expr.var("x"); }
+    if (c === "x" && !/^[a-zA-Z]/.test(s[i + 1] ?? "")) { i++; return Expr.var("x"); }
+    if (c && /[a-zA-Z]/.test(c)) { const w = /^[a-zA-Z]+/.exec(s.slice(i))![0]; if (FUNCS.has(w.toLowerCase())) throw new Refusal("UNSUPPORTED_OPERATOR", `function ${w} in "${src}"`); return fail(`unknown symbol ${w}`); }
     const m = /^\d+(\.\d+)?/.exec(s.slice(i));
     if (!m) return fail("unexpected token");
     i += m[0].length;

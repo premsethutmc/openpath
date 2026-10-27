@@ -12,7 +12,12 @@ from sympy import (symbols, Eq, S, Rational, Poly, Add, Mul, Pow, FiniteSet, Com
                    fraction, lcm, factor_list, sympify, expand, Integer)
 from sympy.parsing.sympy_parser import parse_expr, standard_transformations, convert_xor
 x = symbols('x'); TR = standard_transformations + (convert_xor,)
-def _p(s, evaluate): return parse_expr(s, local_dict={'x': x}, transformations=TR, evaluate=evaluate)
+_DEC = re.compile(r'(\d+)\.(\d+)')
+def _exact(s):
+    """R1: decimal literals are exact rationals (0.001 = 1/1000), never floats. Anything the engine grammar rejects is rejected here too."""
+    if re.search(r'\d\s+\d', s) or re.search(r'\d[eE][+-]?\d', s) or re.search(r'[A-Za-wyzA-Z]', s) or re.search(r'(^|[^\d])\.\d', s): raise OutOfOracle('syntax outside the grammar')
+    return _DEC.sub(lambda m: '(%d/%d)' % (int(m.group(1) + m.group(2)), 10 ** len(m.group(2))), s)
+def _p(s, evaluate): return parse_expr(_exact(s), local_dict={'x': x}, transformations=TR, evaluate=evaluate)
 
 class OutOfOracle(Exception): pass
 ORDER = ['no-variable-denominator', 'denominator-outside-boundary', 'numerator-outside-boundary', 'reduced-degree>=2']

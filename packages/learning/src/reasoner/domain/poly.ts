@@ -2,8 +2,9 @@
 // Deliberately small: arithmetic, division with remainder, gcd, rational roots, splitting into linear factors.
 // This is the only new mathematical machinery in K05.2. Every operation is exact; there is no sampling and no floating point.
 import { Rational, Expr, type MathExpr } from "../../math-kernel.ts";
+import { Refusal } from "../outcomes.ts";
 
-export class OutsideBoundary extends Error {}
+export class OutsideBoundary extends Refusal { constructor(detail: string, reasons: string[] = []) { super("DOMAIN_UNRESOLVED", detail, reasons); this.name = "OutsideBoundary"; } }
 const Z = Rational.zero, ONE = Rational.one;
 const absBig = (a: bigint) => (a < 0n ? -a : a);
 const gcdBig = (a: bigint, b: bigint): bigint => { a = absBig(a); b = absBig(b); while (b) [a, b] = [b, a % b]; return a; };
@@ -74,7 +75,9 @@ export class Poly {
     if (lo > 0) out.push(Z);
     const a0 = absBig(a[lo]), an = absBig(a[a.length - 1]);
     if (a0 > COEFF_LIMIT || an > COEFF_LIMIT) throw new OutsideBoundary("coefficients beyond the stated boundary");
-    for (const p of divisors(a0)) for (const q of divisors(an)) {
+    const da = divisors(a0), db = divisors(an);
+    if (da.length * db.length > 200000) throw new OutsideBoundary("too many rational-root candidates to test exactly");   // R1: bounds the work (audit S5)
+    for (const p of da) for (const q of db) {
       if (gcdBig(p, q) !== 1n) continue;
       for (const s of [1n, -1n]) { const r = new Rational(s * p, q); if (this.eval(r).isZero()) out.push(r); }
     }
@@ -142,8 +145,8 @@ export class RatFun {
       case "pow": {
         const b = RatFun.fromExpr(e.base), ex = RatFun.fromExpr(e.exp);
         if (!b || !ex || !ex.isPolynomial()) return null;
-        const k = ex.reduce(); if (k.n.degree > 0 || !k.n.c[0]?.isInteger()) return null;
-        const m = k.n.c[0].num; if (Math.abs(m) > 12) return null;
+        const k = ex.reduce(); if (k.n.degree > 0 || (!k.n.isZero() && !k.n.c[0].isInteger())) return null;
+        const m = k.n.isZero() ? 0 : k.n.c[0].num; if (Math.abs(m) > 12) return null;   // R1: an exponent of 0 is the zero polynomial
         let r = new RatFun(Poly.one, Poly.one); for (let i = 0; i < Math.abs(m); i++) r = r.mul(b);
         return m >= 0 ? r : new RatFun(Poly.one, Poly.one).div(r);
       }
