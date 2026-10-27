@@ -11,3 +11,4 @@ export * from "./plan";
 export * from "./records";
 export * from "./tiles";
 export * from "./session";
+export * from "./domains-m1";
