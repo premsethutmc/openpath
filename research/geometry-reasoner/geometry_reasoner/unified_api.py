@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict
 import json
 from typing import Any
+import sys
 from .integration_adapter import adapt_geometry_assessment
 from .model import Fact,GeometryObject,GeometryProblem,ProofAssessment,SubmittedProofStep
 from .synthetic import SyntheticReasoner
@@ -26,3 +27,10 @@ def assess_unified(request:dict[str,Any])->dict[str,Any]:
         return json.loads(json.dumps(asdict(adapt_geometry_assessment(assessment,(problem.skill,))),default=str))
     except (KeyError,TypeError,ValueError,OverflowError):
         return {"outcome":"unsupported","correct":None,"advisory":True,"firstInvalidStep":None,"steps":[],"causes":[],"summary":"malformed structured geometry request","resourceLimit":False,"geometry":{"schema_version":"openpath-geometry-extension@1","native_verdicts":[],"proof_dependencies":[],"mathematical_dependencies":[],"unresolved_obligations":["well-formed geometry request"],"verification_scopes":[],"skill_ids":[],"resource_limit_reached":False}}
+
+def main()->None:
+    try: request=json.load(sys.stdin)
+    except (json.JSONDecodeError,UnicodeDecodeError): request={}
+    json.dump(assess_unified(request),sys.stdout,separators=(",",":"),default=str)
+
+if __name__=="__main__": main()
