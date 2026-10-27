@@ -23,3 +23,4 @@ export * from "./calculus-methods";
 export * from "./symbolic-equivalence";
 
 export * from "./proof-kernel.ts";
+export * from "./probability-statistics.ts";
