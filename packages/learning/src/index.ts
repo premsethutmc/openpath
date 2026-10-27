@@ -15,3 +15,5 @@ export * from "./unified-math-engine";
 export * from "./mathematical-obligations";
 export * from "./domains-m1";
 export * from "./domains-m2";
+
+export * from "./calculus-core";
