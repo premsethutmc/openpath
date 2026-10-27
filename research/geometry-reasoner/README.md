@@ -11,8 +11,12 @@ The committed benchmark is regenerated with:
 
 ```bash
 python3 benchmark/generate.py
+python3 benchmark/generate_hardening.py
+PYTHONPATH=. python3 benchmark/evaluate.py
 ```
 
 The public experiment boundary is `verify_geometry_step(problem, known_facts, student_step)`. A conclusion can be verified, invalid because established facts contradict it, blocked by a named missing assumption, or unsupported by the prototype. Unsupported is never converted into false.
 
 `geometry_reasoner/assessment_contract.py` records the proposed domain-neutral boundary for later comparison with the algebra workstream. It is not wired to learner records or educator marking.
+
+The Phase G2 soundness findings, supported boundary, 540-case results, risks, and recommendation are in [`docs/research/GEOMETRY_CORE_G2_REPORT.md`](../../docs/research/GEOMETRY_CORE_G2_REPORT.md).

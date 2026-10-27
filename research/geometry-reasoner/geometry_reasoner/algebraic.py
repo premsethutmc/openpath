@@ -1,8 +1,18 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 from fractions import Fraction
+from typing import Literal
 
-from .model import Fact, GeometryObject, GeometryProblem, VerificationResult, condition_distinct
+from .model import Fact, GeometryProblem, VerificationResult, condition_distinct
+
+
+@dataclass(frozen=True)
+class AlgebraicCheck:
+    classification: Literal["verified_for_instance", "exact_counterexample", "conditional", "unsupported"]
+    statement: Fact
+    missing_conditions: tuple[str, ...] = ()
+    explanation: str = ""
 
 
 def _point(problem: GeometryProblem, id: str):
@@ -31,21 +41,27 @@ def _sq(v): return v[0] * v[0] + v[1] * v[1]
 class AlgebraicVerifier:
     """Exact rational coordinate checks for selected proof obligations; no numeric tolerances or diagram guesses."""
 
-    supported = {"collinear", "parallel", "perpendicular", "equal_length", "equal_angle", "incidence", "congruent", "similar"}
+    supported = {"collinear", "parallel", "perpendicular", "equal_length", "equal_angle", "incidence", "congruent", "similar", "midpoint", "distance_squared", "slope"}
 
-    def verify(self, problem: GeometryProblem, statement: Fact) -> VerificationResult:
+    def check(self, problem: GeometryProblem, statement: Fact) -> AlgebraicCheck:
+        """Check one fully specified coordinate instance. This is not a universal proof."""
         if statement.predicate not in self.supported:
-            return self._result("unsupported", statement, "No coordinate translation exists for this relation.")
+            return AlgebraicCheck("unsupported", statement, explanation="No coordinate translation exists for this relation.")
         try:
             value, missing = self._evaluate(problem, statement)
-        except (KeyError, IndexError, ZeroDivisionError):
-            return self._result("unsupported", statement, "The coordinate model is incomplete for this obligation.")
+        except (KeyError, IndexError, ZeroDivisionError, TypeError):
+            return AlgebraicCheck("unsupported", statement, explanation="The coordinate model is incomplete for this obligation.")
         if missing:
-            return VerificationResult("missing_assumption", statement, "coordinate-invariant", (), (), tuple(missing), (), "Exact coordinate verification needs nondegenerate, distinct defining points.", strategy="algebraic")
-        return self._result("verified" if value else "invalid", statement, "The exact coordinate invariant is zero/equal as required." if value else "The exact coordinate invariant contradicts the proposed conclusion.")
+            return AlgebraicCheck("conditional", statement, tuple(missing), "Exact evaluation requires the listed nondegeneracy conditions.")
+        return AlgebraicCheck("verified_for_instance" if value else "exact_counterexample", statement, explanation="Exact rational coordinate invariants were evaluated for this problem instance.")
+
+    def verify(self, problem: GeometryProblem, statement: Fact) -> VerificationResult:
+        check = self.check(problem, statement)
+        verdict = {"verified_for_instance": "verified", "exact_counterexample": "invalid", "conditional": "missing_assumption", "unsupported": "unsupported"}[check.classification]
+        return VerificationResult(verdict, statement, "coordinate-invariant" if verdict != "unsupported" else None, (), (), check.missing_conditions, (), check.explanation, strategy="algebraic", verification_scope="problem_instance" if verdict in {"verified", "invalid"} else "none")
 
     def _result(self, verdict, statement, explanation):
-        return VerificationResult(verdict, statement, "coordinate-invariant" if verdict != "unsupported" else None, (), (), (), (), explanation, strategy="algebraic")
+        return VerificationResult(verdict, statement, "coordinate-invariant" if verdict != "unsupported" else None, (), (), (), (), explanation, strategy="algebraic", verification_scope="problem_instance")
 
     def _evaluate(self, problem: GeometryProblem, fact: Fact):
         p, a = fact.predicate, fact.args
@@ -69,6 +85,21 @@ class AlgebraicVerifier:
             if not point or not ends or not ends[0] or not ends[1]: return False, ["point and line coordinates"]
             A, B = ends
             return (B[0]-A[0])*(point[1]-A[1]) == (B[1]-A[1])*(point[0]-A[0]), missing
+        if p == "midpoint":
+            M, A, B = (_point(problem, x) for x in a)
+            if None in (M, A, B): return False, ["coordinates for midpoint and endpoints"]
+            if A == B: missing.append(condition_distinct(a[1], a[2]))
+            return 2*M[0] == A[0]+B[0] and 2*M[1] == A[1]+B[1], missing
+        if p == "distance_squared":
+            A, B = (_point(problem, x) for x in a)
+            if None in (A, B): return False, ["coordinates for both points"]
+            return (B[0]-A[0])**2 + (B[1]-A[1])**2 == fact.value, missing
+        if p == "slope":
+            A, B = (_point(problem, x) for x in a)
+            if None in (A, B): return False, ["coordinates for both points"]
+            if A == B: missing.append(condition_distinct(a[0], a[1]))
+            if B[0] == A[0]: return fact.value == "undefined", missing
+            return (B[1]-A[1]) == Fraction(fact.value) * (B[0]-A[0]), missing
         if p == "equal_angle":
             vectors = []
             for angle_id in a:

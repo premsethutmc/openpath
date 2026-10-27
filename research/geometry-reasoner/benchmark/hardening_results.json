@@ -1,0 +1,134 @@
+{
+  "benchmark": "school-geometry-hardening@2",
+  "cases": 540,
+  "elapsed_seconds": 0.047747,
+  "cases_per_second": 11309.6,
+  "families": {
+    "circle-centre-angle": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "circle-same-segment": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "coordinate-midpoint": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "degenerate": {
+      "cases": 8,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "inconsistent-premises": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "incorrect-conclusion": {
+      "cases": 10,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "isosceles": {
+      "cases": 18,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "missing-assumption": {
+      "cases": 12,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "outside-coverage": {
+      "cases": 10,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "parallel-lines": {
+      "cases": 18,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "polygon-angle-sum": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "pythagorean": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "quadrilateral-parallelogram": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "straight-line": {
+      "cases": 18,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "triangle-congruence": {
+      "cases": 20,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "triangle-inequality": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "triangle-similarity": {
+      "cases": 14,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "triangle-sum": {
+      "cases": 22,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "valid-incomplete-multistep": {
+      "cases": 40,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "valid-incomplete-proof": {
+      "cases": 12,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    },
+    "vertical-opposite": {
+      "cases": 18,
+      "false_acceptance": 0,
+      "false_rejection": 0,
+      "mismatch": 0
+    }
+  }
+}

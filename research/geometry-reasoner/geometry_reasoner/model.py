@@ -89,6 +89,8 @@ class VerificationResult:
     explanation: str
     candidate_misconception: str | None = None
     strategy: Literal["synthetic", "algebraic", "hybrid"] = "synthetic"
+    verification_scope: Literal["universal", "problem_instance", "none"] = "universal"
+    resource_limit_reached: bool = False
 
 
 @dataclass(frozen=True)
@@ -97,6 +99,10 @@ class ProofAssessment:
     valid: bool
     complete: bool
     goal: VerificationResult
+    first_invalid_step: int | None = None
+    unsupported_steps: tuple[int, ...] = ()
+    unresolved_obligations: tuple[str, ...] = ()
+    alternative_routes: tuple[tuple[str, ...], ...] = ()
 
 
 def condition_distinct(a: str, b: str) -> str:

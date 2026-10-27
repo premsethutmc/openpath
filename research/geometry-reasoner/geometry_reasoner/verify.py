@@ -59,6 +59,8 @@ def verify_geometry_step(
     synthetic = synthetic or SyntheticReasoner()
     extra = tuple(known_facts)
     state = synthetic.close(problem, extra)
+    if state.inconsistent:
+        return VerificationResult("unsupported", student_step.as_status("unsupported"), None, (), (), (), ("consistent premises",), "The supplied premises are inconsistent; explosion is forbidden and no conclusion is inferred.")
     established = state.facts.get(student_step.key)
     if established:
         proof = state.proofs.get(student_step.key)
@@ -67,6 +69,8 @@ def verify_geometry_step(
             proof.premises if proof else (established,), proof.dependencies if proof else (established.key,), (), (),
             proof.explanation if proof else "The statement is explicitly established by the problem.",
         )
+    if state.resource_limit_reached:
+        return VerificationResult("unsupported", student_step.as_status("unsupported"), None, (), (), (), ("reasoning resource limit",), "The bounded reasoner stopped safely before establishing this statement.", resource_limit_reached=True)
     contradiction = _contradiction(student_step, state.facts.values())
     if contradiction:
         fact, explanation = contradiction
@@ -94,4 +98,8 @@ def verify_student_proof(problem: GeometryProblem, student_steps: Iterable[Fact]
     valid = all(result.verdict == "verified" for result in results)
     # Completeness concerns the submitted proof, not whether the engine can silently finish it from the givens.
     complete = valid and bool(results) and problem.goal is not None and results[-1].statement.key == problem.goal.key and goal.verdict == "verified"
-    return ProofAssessment(tuple(results), valid, complete, goal)
+    first_invalid = next((i for i, r in enumerate(results) if r.verdict != "verified"), None)
+    unsupported = tuple(i for i, r in enumerate(results) if r.verdict == "unsupported")
+    obligations = tuple(dict.fromkeys(x for r in results for x in (*r.missing_assumptions, *r.unsupported_conditions)))
+    route = tuple(r.theorem or "given" for r in results if r.verdict == "verified")
+    return ProofAssessment(tuple(results), valid, complete, goal, first_invalid, unsupported, obligations, (route,) if route else ())

@@ -7,19 +7,24 @@ from typing import Any, Literal, Protocol
 
 @dataclass(frozen=True)
 class MathematicalStatement:
+    """Domain-neutral semantic statement; rendering text is deliberately excluded."""
+    schema_version: str
     domain: str
     relation: str
     operands: tuple[str, ...]
     value: Any = None
+    qualifiers: tuple[tuple[str, Any], ...] = ()
 
 
 @dataclass(frozen=True)
 class ProofObligation:
+    contract_version: str
     problem_id: str
     assumptions: tuple[MathematicalStatement, ...]
     known: tuple[MathematicalStatement, ...]
     proposed: MathematicalStatement
     conditions: tuple[str, ...]
+    resource_budget: tuple[tuple[str, int], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -30,6 +35,10 @@ class MathematicalVerification:
     missing_conditions: tuple[str, ...]
     explanation: str
     verifier_version: str
+    proof_dependencies: tuple[str, ...] = ()
+    unresolved_obligations: tuple[str, ...] = ()
+    verification_scope: Literal["universal", "problem_instance", "none"] = "none"
+    resource_limit_reached: bool = False
 
 
 @dataclass(frozen=True)
@@ -43,6 +52,8 @@ class StepEvidence:
     input_method: str
     assistance: tuple[str, ...]
     provisional: bool
+    sequence_index: int = 0
+    prerequisite_skill_ids: tuple[str, ...] = ()
 
 
 class MathematicalStepVerifier(Protocol):
