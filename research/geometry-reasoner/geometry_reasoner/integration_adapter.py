@@ -18,6 +18,7 @@ class GeometryExtension:
     schema_version:str
     native_verdicts:tuple[str,...]
     proof_dependencies:tuple[tuple[str,tuple[str,...]],...]
+    mathematical_dependencies:tuple[tuple[tuple[str,tuple[str,...],object],...],...]
     unresolved_obligations:tuple[str,...]
     verification_scopes:tuple[str,...]
     skill_ids:tuple[str,...]
@@ -42,5 +43,5 @@ def adapt_geometry_assessment(a:ProofAssessment,skill_ids:tuple[str,...]=())->Un
     else: outcome="unsupported" # missing_assumption is retained natively below
     correct=True if outcome=="verified" else False if outcome=="invalid" else None
     status=lambda v: "verified" if v=="verified" else "invalid" if v=="invalid" else "unsupported"
-    ext=GeometryExtension("openpath-geometry-extension@1",tuple(x.verdict for x in a.steps),a.dependency_graph,a.unresolved_obligations,tuple(x.verification_scope for x in a.steps),skill_ids,resource)
+    ext=GeometryExtension(schema_version="openpath-geometry-extension@1",native_verdicts=tuple(x.verdict for x in a.steps),proof_dependencies=a.dependency_graph,mathematical_dependencies=tuple(x.proof_dependencies for x in a.steps),unresolved_obligations=a.unresolved_obligations,verification_scopes=tuple(x.verification_scope for x in a.steps),skill_ids=skill_ids,resource_limit_reached=resource)
     return UnifiedAssessment(outcome,correct,True,a.first_invalid_step,tuple(UnifiedStep(i,status(x.verdict),x.explanation) for i,x in enumerate(a.steps)),(),f"geometry proof is {outcome}",resource,ext)
