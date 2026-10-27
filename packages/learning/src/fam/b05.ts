@@ -1414,7 +1414,7 @@ export const B05: Def[] = [
       steps: [
         { id: "lakhs", op: "place", competency: LARGE, inputs: [L, 100000], value: L * 100000, justification: { rule: "positional-value" as const, digit: L, placeValue: 100000, placeName: "lakhs" } },
         { id: "thousands", op: "place", competency: THOU, inputs: [T, 1000], value: T * 1000, justification: { rule: "positional-value" as const, digit: T, placeValue: 1000, placeName: "thousands" } },
-        { id: "rest", op: "place", competency: PV, inputs: [H, REST[r]], value: H * 100 + REST[r], justification: { rule: "positional-value" as const, digit: H, placeValue: 100, placeName: "hundreds" } },
+        { id: "rest", op: "place", competency: PV, inputs: [H, REST[r]], value: H * 100 + REST[r], justification: { rule: "positional-value" as const, digit: H, placeValue: 100, placeName: "hundreds", plus: REST[r] } },
       ],
       answer: L * 100000 + T * 1000 + H * 100 + REST[r],
     }),

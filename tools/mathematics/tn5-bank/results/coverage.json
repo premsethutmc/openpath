@@ -1,0 +1,635 @@
+{
+ "release": "tn-samacheer-mathematics-grade-5",
+ "requirements": 61,
+ "unmapped": [],
+ "requirementsList": [
+  {
+   "id": "tn-g05-t1-c02-o03",
+   "text": "Add and subtract large numbers with regrouping.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.addition-regroup",
+    "MATH.number.multi-digit-add-subtract",
+    "MATH.number.subtraction-regroup"
+   ],
+   "families": 10,
+   "problems": 4184
+  },
+  {
+   "id": "tn-g05-t1-c02-o01",
+   "text": "Read, write and expand numbers beyond 10,000 using a place-value chart and comma grouping.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.large-numbers"
+   ],
+   "families": 3,
+   "problems": 1300
+  },
+  {
+   "id": "tn-g05-t1-c02-o02",
+   "text": "Compare large numbers and arrange them in ascending or descending order.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.compare-numbers",
+    "MATH.number.large-numbers"
+   ],
+   "families": 11,
+   "problems": 3410
+  },
+  {
+   "id": "tn-g05-t1-c02-o04",
+   "text": "Multiply a 3-digit number by a 2-digit number.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.multi-multiplication"
+   ],
+   "families": 4,
+   "problems": 1700
+  },
+  {
+   "id": "tn-g05-t1-c02-o05",
+   "text": "Divide a 4-digit number by a 2-digit number using the division algorithm, and check with quotient x divisor + remainder.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.division-remainders",
+    "MATH.number.long-division"
+   ],
+   "families": 6,
+   "problems": 2590
+  },
+  {
+   "id": "tn-g05-t2-c02-o03",
+   "text": "Find the LCM of small numbers and use it in everyday problems.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.hcf-lcm"
+   ],
+   "families": 6,
+   "problems": 2013
+  },
+  {
+   "id": "tn-g05-t2-c02-o04",
+   "text": "Recognise square numbers as products of a number with itself.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.figurate-numbers"
+   ],
+   "families": 3,
+   "problems": 381
+  },
+  {
+   "id": "tn-g05-t2-c02-o01",
+   "text": "Find the factors and multiples of a number.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.factors-multiples"
+   ],
+   "families": 3,
+   "problems": 560
+  },
+  {
+   "id": "tn-g05-t2-c02-o02",
+   "text": "Classify numbers as prime or composite.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.primes"
+   ],
+   "families": 2,
+   "problems": 793
+  },
+  {
+   "id": "tn-g05-t2-c05-o02",
+   "text": "Relate distance travelled to time taken, and compare speeds as distance per unit time.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.time-speed-intro"
+   ],
+   "families": 2,
+   "problems": 1190
+  },
+  {
+   "id": "tn-g05-t2-c05-o03",
+   "text": "Work out cost from distance at a fixed rate (e.g. fare per km).",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.unit-rate"
+   ],
+   "families": 4,
+   "problems": 1453
+  },
+  {
+   "id": "tn-g05-t2-c05-o01",
+   "text": "Compare and solve everyday problems that combine time, money and distance.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.reasoning.multi-step"
+   ],
+   "families": 6,
+   "problems": 2020
+  },
+  {
+   "id": "tn-g05-t2-c05-o05",
+   "text": "Write their own word problems combining time, money and distance.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.reasoning.operation-choice"
+   ],
+   "families": 3,
+   "problems": 1008
+  },
+  {
+   "id": "tn-g05-t2-c05-o04",
+   "text": "Find a fraction of a length, a time or an amount of money (e.g. 3/4 of an hour).",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.fraction-of-collection"
+   ],
+   "families": 2,
+   "problems": 471
+  },
+  {
+   "id": "tn-g05-t3-c02-o01",
+   "text": "Round numbers to estimate results, then judge whether an exact answer is reasonable.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.rounding",
+    "MATH.reasoning.estimate-check"
+   ],
+   "families": 11,
+   "problems": 4215
+  },
+  {
+   "id": "tn-g05-t3-c02-o02",
+   "text": "Order numbers or items systematically by a stated rule.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.compare-numbers",
+    "MATH.reasoning.systematic-enumeration"
+   ],
+   "families": 11,
+   "problems": 2384
+  },
+  {
+   "id": "tn-g05-t3-c05-o01",
+   "text": "Add and subtract money amounts in rupees and paise.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.money-decimals",
+    "MATH.number.decimal-operations"
+   ],
+   "families": 8,
+   "problems": 3040
+  },
+  {
+   "id": "tn-g05-t3-c05-o02",
+   "text": "Multiply and divide money amounts to find total costs or cost per item.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.money-decimals",
+    "MATH.number.unit-rate"
+   ],
+   "families": 9,
+   "problems": 3093
+  },
+  {
+   "id": "tn-g05-t3-c05-o03",
+   "text": "Use cost vocabulary (cheap, expensive, affordable) to compare prices and make sensible buying choices.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.reasoning.operation-choice"
+   ],
+   "families": 3,
+   "problems": 1008
+  },
+  {
+   "id": "tn-g05-t3-c06-o03",
+   "text": "Compare fractions that share a denominator or a numerator.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.fraction-comparison"
+   ],
+   "families": 5,
+   "problems": 1713
+  },
+  {
+   "id": "tn-g05-t3-c06-o01",
+   "text": "Classify fractions as proper, improper or mixed, and convert between improper fractions and mixed numbers.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.mixed-fractions"
+   ],
+   "families": 4,
+   "problems": 852
+  },
+  {
+   "id": "tn-g05-t3-c06-o02",
+   "text": "Make equivalent fractions and tell like fractions from unlike ones.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.equivalent-fractions",
+    "MLY.frac.scale"
+   ],
+   "families": 4,
+   "problems": 1177
+  },
+  {
+   "id": "tn-g05-t3-c06-o04",
+   "text": "Add and subtract like fractions.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.fraction-add-like"
+   ],
+   "families": 1,
+   "problems": 825
+  },
+  {
+   "id": "tn-g05-t3-c06-o05",
+   "text": "Multiply a fraction by a 1-digit whole number.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.fraction-multiply"
+   ],
+   "families": 2,
+   "problems": 928
+  },
+  {
+   "id": "tn-g05-t3-c06-o06",
+   "text": "Write tenths and hundredths as decimals and the other way round.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.decimal-tenths"
+   ],
+   "families": 5,
+   "problems": 1523
+  },
+  {
+   "id": "tn-g05-t1-c03-o01",
+   "text": "Extend patterns made of shapes and state their rule.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.pattern-rules"
+   ],
+   "families": 4,
+   "problems": 1166
+  },
+  {
+   "id": "tn-g05-t1-c03-o02",
+   "text": "Recognise and continue square and triangular numbers from dot arrangements.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.figurate-numbers"
+   ],
+   "families": 3,
+   "problems": 381
+  },
+  {
+   "id": "tn-g05-t1-c03-o03",
+   "text": "Explain that the gap between consecutive square numbers is an odd number.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.figurate-numbers"
+   ],
+   "families": 3,
+   "problems": 381
+  },
+  {
+   "id": "tn-g05-t2-c03-o01",
+   "text": "Make and continue patterns by turning shapes through given angles.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.repeating-patterns",
+    "MATH.geometry.transformations"
+   ],
+   "families": 5,
+   "problems": 1728
+  },
+  {
+   "id": "tn-g05-t2-c03-o02",
+   "text": "Find and describe the rule in a pattern of letters or words.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.pattern-rules"
+   ],
+   "families": 4,
+   "problems": 1166
+  },
+  {
+   "id": "tn-g05-t3-c04-o01",
+   "text": "Decide whether two number expressions are equal and fill in missing numbers to make them balance.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.equality-inequality",
+    "MATH.algebra.missing-number"
+   ],
+   "families": 5,
+   "problems": 1780
+  },
+  {
+   "id": "tn-g05-t3-c04-o02",
+   "text": "Compare two expressions with <, > or = without necessarily working them out in full.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.equality-inequality",
+    "MATH.number.compare-numbers"
+   ],
+   "families": 10,
+   "problems": 2910
+  },
+  {
+   "id": "tn-g05-t3-c04-o03",
+   "text": "Use a letter for an unknown or varying number in a simple rule.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.expressions-intro"
+   ],
+   "families": 2,
+   "problems": 222
+  },
+  {
+   "id": "tn-g05-t1-c01-o01",
+   "text": "Draw solid shapes on paper from their 2-D outlines.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.geometry.solid-views"
+   ],
+   "families": 1,
+   "problems": 192
+  },
+  {
+   "id": "tn-g05-t1-c01-o03",
+   "text": "Recognise and draw reflections of 2-D shapes, and spot symmetry in 3-D shapes.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.geometry.symmetry-lines",
+    "MATH.geometry.transformations"
+   ],
+   "families": 6,
+   "problems": 2244
+  },
+  {
+   "id": "tn-g05-t1-c01-o02",
+   "text": "Recognise rotations (turns) of familiar 2-D shapes.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.geometry.transformations"
+   ],
+   "families": 2,
+   "problems": 800
+  },
+  {
+   "id": "tn-g05-t1-c01-o04",
+   "text": "Match cubes, cylinders and cones to their nets and build them.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.geometry.nets"
+   ],
+   "families": 5,
+   "problems": 847
+  },
+  {
+   "id": "tn-g05-t1-c01-o05",
+   "text": "Recognise angles and tell right, acute and obtuse angles apart.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.geometry.angles-intro"
+   ],
+   "families": 5,
+   "problems": 1124
+  },
+  {
+   "id": "tn-g05-t2-c01-o01",
+   "text": "Recognise complementary and supplementary angle pairs and find a missing angle.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.geometry.angle-pairs"
+   ],
+   "families": 2,
+   "problems": 520
+  },
+  {
+   "id": "tn-g05-t2-c01-o02",
+   "text": "Explore fractal-like patterns made by repeating a shape rule at smaller scales.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.algebra.growing-patterns",
+    "MATH.geometry.fractal-iteration"
+   ],
+   "families": 3,
+   "problems": 536
+  },
+  {
+   "id": "tn-g05-t2-c06-o01",
+   "text": "Represent a real situation with a simple model (diagram, map or table) and use it to answer questions.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.geometry.maps-directions",
+    "MATH.reasoning.model-selection"
+   ],
+   "families": 7,
+   "problems": 1878
+  },
+  {
+   "id": "tn-g05-t1-c04-o01",
+   "text": "Convert between km, m, cm and mm.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.unit-conversions"
+   ],
+   "families": 7,
+   "problems": 2089
+  },
+  {
+   "id": "tn-g05-t1-c04-o02",
+   "text": "Add, subtract, multiply and divide lengths given in mixed units, including word problems.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.compute-with-measures"
+   ],
+   "families": 3,
+   "problems": 1250
+  },
+  {
+   "id": "tn-g05-t1-c05-o01",
+   "text": "Convert between 12-hour times and railway (24-hour) times.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.24-hour-clock"
+   ],
+   "families": 4,
+   "problems": 1132
+  },
+  {
+   "id": "tn-g05-t1-c05-o02",
+   "text": "Find time intervals by adding and subtracting hours and minutes.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.elapsed-time"
+   ],
+   "families": 4,
+   "problems": 1611
+  },
+  {
+   "id": "tn-g05-t2-c04-o01",
+   "text": "Convert weights between kg and g, and capacities between L and mL.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.unit-conversions"
+   ],
+   "families": 7,
+   "problems": 2089
+  },
+  {
+   "id": "tn-g05-t2-c04-o02",
+   "text": "Add, subtract, multiply and divide weights given in mixed units.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.compute-with-measures"
+   ],
+   "families": 3,
+   "problems": 1250
+  },
+  {
+   "id": "tn-g05-t2-c04-o03",
+   "text": "Add, subtract, multiply and divide capacities given in mixed units.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.compute-with-measures"
+   ],
+   "families": 3,
+   "problems": 1250
+  },
+  {
+   "id": "tn-g05-t3-c01-o01",
+   "text": "Calculate the perimeter of rectangles and squares.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.rectangle-perimeter"
+   ],
+   "families": 2,
+   "problems": 590
+  },
+  {
+   "id": "tn-g05-t3-c01-o03",
+   "text": "Tell perimeter and area apart, and choose the right one in a problem.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.area-squares",
+    "MATH.measurement.perimeter-intro"
+   ],
+   "families": 6,
+   "problems": 1513
+  },
+  {
+   "id": "tn-g05-t3-c01-o02",
+   "text": "Calculate the area of rectangles and squares in square units.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.rectangle-area"
+   ],
+   "families": 1,
+   "problems": 121
+  },
+  {
+   "id": "tn-g05-t3-c03-o01",
+   "text": "Compare the volumes of solids using informal units.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.volume-cubes"
+   ],
+   "families": 3,
+   "problems": 856
+  },
+  {
+   "id": "tn-g05-t3-c03-o03",
+   "text": "Find the volume of an object from the rise in water level (displacement).",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.capacity",
+    "MATH.measurement.volume-cubes"
+   ],
+   "families": 6,
+   "problems": 1650
+  },
+  {
+   "id": "tn-g05-t3-c03-o02",
+   "text": "Find the volume of a solid by counting unit cubes.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.measurement.volume-cubes"
+   ],
+   "families": 3,
+   "problems": 856
+  },
+  {
+   "id": "tn-g05-t1-c06-o01",
+   "text": "List all possibilities in an organised way.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.reasoning.systematic-enumeration"
+   ],
+   "families": 3,
+   "problems": 274
+  },
+  {
+   "id": "tn-g05-t1-c06-o02",
+   "text": "Record data with two categories in a table.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.statistics.tables"
+   ],
+   "families": 4,
+   "problems": 1286
+  },
+  {
+   "id": "tn-g05-t1-c06-o03",
+   "text": "Read and draw pictographs that use a key.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.statistics.pictographs"
+   ],
+   "families": 4,
+   "problems": 1200
+  },
+  {
+   "id": "tn-g05-t1-c06-o04",
+   "text": "Draw and interpret bar graphs, including ones with a scale.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.statistics.bar-charts",
+    "MATH.statistics.scaled-bars"
+   ],
+   "families": 3,
+   "problems": 1144
+  },
+  {
+   "id": "tn-g05-t3-c07-o01",
+   "text": "Break a larger problem into smaller known steps and solve it step by step.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.reasoning.multi-step"
+   ],
+   "families": 6,
+   "problems": 2020
+  },
+  {
+   "id": "tn-g05-t3-c07-o02",
+   "text": "Compare different ways of solving a task and pick an efficient one.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.reasoning.multi-step"
+   ],
+   "families": 6,
+   "problems": 2020
+  },
+  {
+   "id": "tn-g05-t3-c07-o03",
+   "text": "Use factors in a game setting to spot numbers that share factors.",
+   "verdict": "clear",
+   "competencies": [
+    "MATH.number.factors-multiples"
+   ],
+   "families": 3,
+   "problems": 560
+  }
+ ]
+}

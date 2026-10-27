@@ -1,0 +1,985 @@
+{
+ "release": "tn-samacheer-mathematics-grade-5",
+ "engine": "kernel@a43be6abeecd",
+ "competencies": 58,
+ "families": 192,
+ "problems": 61343,
+ "labels": {
+  "kernel-verified": 61343,
+  "partial": 0,
+  "answer-verified": 0
+ },
+ "weakerBasis": {
+  "figureConsistentItems": 6846,
+  "conventionItems": 2393,
+  "figureConsistentSteps": 9311,
+  "conventionSteps": 2793
+ },
+ "sha256": "e24392f643ee4982467192f1a41a2757cfcf8deddacd3650269f2c65b5a4ce9a",
+ "bytes": 71515488,
+ "uncheckedStepTypes": 0,
+ "uncheckedSteps": [],
+ "depthShortfalls": [],
+ "perFamily": {
+  "aabig": {
+   "kernel-verified": 90,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aacmp": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aadigmax": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aagrp": {
+   "kernel-verified": 243,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aanext": {
+   "kernel-verified": 294,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aaordn": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aaordx": {
+   "kernel-verified": 394,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aapatn": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aapatu": {
+   "kernel-verified": 228,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aasign": {
+   "kernel-verified": 189,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aaweave": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abcup": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abcupord": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abdir": {
+   "kernel-verified": 104,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abdisp": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abgrid": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abjug": {
+   "kernel-verified": 94,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abmove": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abroute": {
+   "kernel-verified": 174,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "abseat": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acbalance": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acbill": {
+   "kernel-verified": 240,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "accal": {
+   "kernel-verified": 411,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "accmpx": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acelapsed": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acelhm": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acfacts": {
+   "kernel-verified": 280,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acgrow": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acmissing": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acmoneyadd": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acmoneymul": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acp2r": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acpaise": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acpict": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acpicthalf": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acpictmore": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acpicttab": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acplace": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acsticks": {
+   "kernel-verified": 84,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acstory": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acstory4": {
+   "kernel-verified": 320,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acstory9": {
+   "kernel-verified": 288,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acsub2": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acsub3": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "acsubn": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "actrain": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adbar": {
+   "kernel-verified": 448,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adbartf": {
+   "kernel-verified": 336,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adcol3": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adcolx": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "addr": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adest": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adestchk": {
+   "kernel-verified": 249,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adestcost": {
+   "kernel-verified": 120,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfcmp": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfcmpu": {
+   "kernel-verified": 287,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfcol": {
+   "kernel-verified": 349,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfmeas": {
+   "kernel-verified": 122,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfnl": {
+   "kernel-verified": 126,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adford": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adfordu": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "admental": {
+   "kernel-verified": 384,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "admper": {
+   "kernel-verified": 178,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adperim": {
+   "kernel-verified": 178,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adpreg": {
+   "kernel-verified": 288,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adrec": {
+   "kernel-verified": 216,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adtally": {
+   "kernel-verified": 270,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adtwo": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "advenn": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "adwtcap": {
+   "kernel-verified": 159,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeadd3": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeaddn": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeampm": {
+   "kernel-verified": 288,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeang": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeangk": {
+   "kernel-verified": 142,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aearea": {
+   "kernel-verified": 99,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aearms": {
+   "kernel-verified": 145,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aebig": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aecf": {
+   "kernel-verified": 230,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aechk": {
+   "kernel-verified": 693,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aecmp": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aecol4": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aecons": {
+   "kernel-verified": 240,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeconv": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeconvd": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeconvu": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedec": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedecc": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedfr": {
+   "kernel-verified": 119,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedigsym": {
+   "kernel-verified": 347,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedivm": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedord": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedpv": {
+   "kernel-verified": 404,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedrip": {
+   "kernel-verified": 120,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aedsym": {
+   "kernel-verified": 146,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeel24": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeest": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeestp": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeftin": {
+   "kernel-verified": 138,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aehund": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeind": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeirr": {
+   "kernel-verified": 370,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aematch": {
+   "kernel-verified": 200,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aemirror": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aemix": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aemulm": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aenumf": {
+   "kernel-verified": 600,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeparts": {
+   "kernel-verified": 90,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aepat": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeperar": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aerdec": {
+   "kernel-verified": 594,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aerefl": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aerev": {
+   "kernel-verified": 126,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aernd": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeround": {
+   "kernel-verified": 450,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aertang": {
+   "kernel-verified": 305,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeshop": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aesym": {
+   "kernel-verified": 551,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aet12": {
+   "kernel-verified": 156,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aet24": {
+   "kernel-verified": 288,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aetab": {
+   "kernel-verified": 600,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aetrans": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aetrip": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aeturn": {
+   "kernel-verified": 132,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aewcmp": {
+   "kernel-verified": 281,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afbar": {
+   "kernel-verified": 360,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afcount": {
+   "kernel-verified": 100,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afcross": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afcube": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afdigits": {
+   "kernel-verified": 90,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "affig": {
+   "kernel-verified": 98,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "affigrel": {
+   "kernel-verified": 94,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "affrac": {
+   "kernel-verified": 152,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "affrule": {
+   "kernel-verified": 189,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afhidden": {
+   "kernel-verified": 84,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afletter": {
+   "kernel-verified": 132,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afmatch": {
+   "kernel-verified": 90,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afnet": {
+   "kernel-verified": 87,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afpaint": {
+   "kernel-verified": 84,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afpair": {
+   "kernel-verified": 220,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afsolid": {
+   "kernel-verified": 96,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "afview": {
+   "kernel-verified": 180,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agclass": {
+   "kernel-verified": 191,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agcomf": {
+   "kernel-verified": 163,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agcop": {
+   "kernel-verified": 160,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agdec": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agfac": {
+   "kernel-verified": 97,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aghcf3": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aghlp": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aghlw": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agimp": {
+   "kernel-verified": 279,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agjump": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aglcm": {
+   "kernel-verified": 253,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aglcm3": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agmeas": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agmix": {
+   "kernel-verified": 279,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agnl": {
+   "kernel-verified": 103,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agprime": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agptest": {
+   "kernel-verified": 393,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agrupee": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agspd": {
+   "kernel-verified": 790,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "agspdc": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "aisolid": {
+   "kernel-verified": 192,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ajbest": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ajfare": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ajrate": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ajwork": {
+   "kernel-verified": 253,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "anpair": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "anquad": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avdfact": {
+   "kernel-verified": 90,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avdiv": {
+   "kernel-verified": 500,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avfence": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avfold": {
+   "kernel-verified": 112,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avfwq": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avlat": {
+   "kernel-verified": 320,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avlike": {
+   "kernel-verified": 300,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avlow": {
+   "kernel-verified": 360,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avmdiv": {
+   "kernel-verified": 360,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avpest": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avpp": {
+   "kernel-verified": 420,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avrsub": {
+   "kernel-verified": 400,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avstrat": {
+   "kernel-verified": 320,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "avvcmp": {
+   "kernel-verified": 360,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "divr": {
+   "kernel-verified": 536,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "eqfrac": {
+   "kernel-verified": 405,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "fadd": {
+   "kernel-verified": 825,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "fmulw": {
+   "kernel-verified": 528,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "ldiv": {
+   "kernel-verified": 704,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "mmul": {
+   "kernel-verified": 640,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "rect": {
+   "kernel-verified": 121,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "rperim": {
+   "kernel-verified": 190,
+   "partial": 0,
+   "answer-verified": 0
+  },
+  "vol": {
+   "kernel-verified": 196,
+   "partial": 0,
+   "answer-verified": 0
+  }
+ }
+}

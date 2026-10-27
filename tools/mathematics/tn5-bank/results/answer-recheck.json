@@ -1,0 +1,888 @@
+{
+ "seed": 20261025,
+ "sympy": "1.14.0",
+ "bankItems": 61343,
+ "summary": {
+  "sampled": 14775,
+  "rederived": 11200,
+  "disagree": 0,
+  "not_rederivable_from_text": 3575,
+  "parse_error": 0,
+  "randomSampleSize": 10000,
+  "perFamilySample": 30,
+  "familiesWithZeroRederivable": [
+   "aabig",
+   "abcup",
+   "abcupord",
+   "abdir",
+   "abgrid",
+   "abjug",
+   "abseat",
+   "acbill",
+   "acelapsed",
+   "acgrow",
+   "acpict",
+   "acpicthalf",
+   "acpictmore",
+   "acpicttab",
+   "acstory",
+   "acstory4",
+   "acstory9",
+   "adbar",
+   "adbartf",
+   "adestchk",
+   "admper",
+   "adperim",
+   "adrec",
+   "adtally",
+   "adtwo",
+   "advenn",
+   "aearms",
+   "aechk",
+   "aedigsym",
+   "aedsym",
+   "aeirr",
+   "aematch",
+   "aemirror",
+   "aertang",
+   "aesym",
+   "aetab",
+   "afbar",
+   "afcube",
+   "afmatch",
+   "afnet",
+   "afview",
+   "agspdc"
+  ],
+  "familiesWithFewerThan20Rederived": [
+   "aeangk",
+   "aisolid"
+  ]
+ },
+ "randomSample": {
+  "sampled": 10000,
+  "rederived": 7618,
+  "disagree": 0
+ },
+ "selfTestCorruptedAnswers": {
+  "total": 11200,
+  "detected": 11200
+ },
+ "byRule": {
+  "r_compare_numbers": 356,
+  "r_digits": 73,
+  "r_next": 52,
+  "r_batch3": 773,
+  "r_order": 438,
+  "r_patterns": 459,
+  "r_sign": 226,
+  "r_words_vol": 672,
+  "r_misc": 2037,
+  "r_box": 270,
+  "r_time": 471,
+  "r_facts": 101,
+  "r_arith": 1703,
+  "r_money": 289,
+  "r_exprs": 385,
+  "r_estimate": 361,
+  "r_batch4": 359,
+  "r_fractions": 423,
+  "r_units": 559,
+  "r_place": 113,
+  "r_words": 82,
+  "r_round": 231,
+  "r_hcf_lcm": 579,
+  "r_hlw": 89,
+  "r_meas": 99
+ },
+ "perFamily": {
+  "aabig": {
+   "sampled": 40,
+   "not_rederivable_from_text": 40
+  },
+  "aacmp": {
+   "sampled": 68,
+   "rederived": 68
+  },
+  "aadigmax": {
+   "sampled": 73,
+   "rederived": 73
+  },
+  "aagrp": {
+   "sampled": 62,
+   "rederived": 20,
+   "not_rederivable_from_text": 42
+  },
+  "aanext": {
+   "sampled": 80,
+   "rederived": 80
+  },
+  "aaordn": {
+   "sampled": 76,
+   "rederived": 76
+  },
+  "aaordx": {
+   "sampled": 92,
+   "rederived": 50,
+   "not_rederivable_from_text": 42
+  },
+  "aapatn": {
+   "sampled": 92,
+   "rederived": 92
+  },
+  "aapatu": {
+   "sampled": 59,
+   "rederived": 59
+  },
+  "aasign": {
+   "sampled": 60,
+   "rederived": 60
+  },
+  "aaweave": {
+   "sampled": 63,
+   "not_rederivable_from_text": 22,
+   "rederived": 41
+  },
+  "abcup": {
+   "sampled": 90,
+   "not_rederivable_from_text": 90
+  },
+  "abcupord": {
+   "sampled": 78,
+   "not_rederivable_from_text": 78
+  },
+  "abdir": {
+   "sampled": 43,
+   "not_rederivable_from_text": 43
+  },
+  "abdisp": {
+   "sampled": 74,
+   "rederived": 50,
+   "not_rederivable_from_text": 24
+  },
+  "abgrid": {
+   "sampled": 58,
+   "not_rederivable_from_text": 58
+  },
+  "abjug": {
+   "sampled": 37,
+   "not_rederivable_from_text": 37
+  },
+  "abmove": {
+   "sampled": 77,
+   "rederived": 77
+  },
+  "abroute": {
+   "sampled": 62,
+   "rederived": 38,
+   "not_rederivable_from_text": 24
+  },
+  "abseat": {
+   "sampled": 81,
+   "not_rederivable_from_text": 81
+  },
+  "acbalance": {
+   "sampled": 91,
+   "rederived": 91
+  },
+  "acbill": {
+   "sampled": 64,
+   "not_rederivable_from_text": 64
+  },
+  "accal": {
+   "sampled": 102,
+   "not_rederivable_from_text": 19,
+   "rederived": 83
+  },
+  "accmpx": {
+   "sampled": 97,
+   "rederived": 97
+  },
+  "acelapsed": {
+   "sampled": 94,
+   "not_rederivable_from_text": 94
+  },
+  "acelhm": {
+   "sampled": 86,
+   "rederived": 86
+  },
+  "acfacts": {
+   "sampled": 73,
+   "rederived": 62,
+   "not_rederivable_from_text": 11
+  },
+  "acgrow": {
+   "sampled": 78,
+   "not_rederivable_from_text": 78
+  },
+  "acmissing": {
+   "sampled": 91,
+   "rederived": 91
+  },
+  "acmoneyadd": {
+   "sampled": 90,
+   "rederived": 90
+  },
+  "acmoneymul": {
+   "sampled": 94,
+   "rederived": 94
+  },
+  "acp2r": {
+   "sampled": 84,
+   "rederived": 84
+  },
+  "acpaise": {
+   "sampled": 70,
+   "rederived": 70
+  },
+  "acpict": {
+   "sampled": 69,
+   "not_rederivable_from_text": 69
+  },
+  "acpicthalf": {
+   "sampled": 71,
+   "not_rederivable_from_text": 71
+  },
+  "acpictmore": {
+   "sampled": 66,
+   "not_rederivable_from_text": 66
+  },
+  "acpicttab": {
+   "sampled": 73,
+   "not_rederivable_from_text": 73
+  },
+  "acplace": {
+   "sampled": 61,
+   "rederived": 61
+  },
+  "acsticks": {
+   "sampled": 39,
+   "rederived": 39
+  },
+  "acstory": {
+   "sampled": 99,
+   "not_rederivable_from_text": 99
+  },
+  "acstory4": {
+   "sampled": 72,
+   "not_rederivable_from_text": 72
+  },
+  "acstory9": {
+   "sampled": 73,
+   "not_rederivable_from_text": 73
+  },
+  "acsub2": {
+   "sampled": 96,
+   "rederived": 96
+  },
+  "acsub3": {
+   "sampled": 101,
+   "rederived": 101
+  },
+  "acsubn": {
+   "sampled": 72,
+   "rederived": 72
+  },
+  "actrain": {
+   "sampled": 88,
+   "rederived": 47,
+   "not_rederivable_from_text": 41
+  },
+  "adbar": {
+   "sampled": 92,
+   "not_rederivable_from_text": 92
+  },
+  "adbartf": {
+   "sampled": 77,
+   "not_rederivable_from_text": 77
+  },
+  "adcol3": {
+   "sampled": 106,
+   "rederived": 106
+  },
+  "adcolx": {
+   "sampled": 110,
+   "rederived": 110
+  },
+  "addr": {
+   "sampled": 85,
+   "rederived": 85
+  },
+  "adest": {
+   "sampled": 92,
+   "rederived": 92
+  },
+  "adestchk": {
+   "sampled": 72,
+   "not_rederivable_from_text": 72
+  },
+  "adestcost": {
+   "sampled": 45,
+   "rederived": 45
+  },
+  "adfcmp": {
+   "sampled": 121,
+   "rederived": 121
+  },
+  "adfcmpu": {
+   "sampled": 73,
+   "rederived": 73
+  },
+  "adfcol": {
+   "sampled": 79,
+   "rederived": 79
+  },
+  "adfmeas": {
+   "sampled": 44,
+   "rederived": 44
+  },
+  "adfnl": {
+   "sampled": 41,
+   "rederived": 41
+  },
+  "adford": {
+   "sampled": 86,
+   "rederived": 86
+  },
+  "adfordu": {
+   "sampled": 79,
+   "rederived": 79
+  },
+  "admental": {
+   "sampled": 91,
+   "rederived": 91
+  },
+  "admper": {
+   "sampled": 59,
+   "not_rederivable_from_text": 59
+  },
+  "adperim": {
+   "sampled": 48,
+   "not_rederivable_from_text": 48
+  },
+  "adpreg": {
+   "sampled": 72,
+   "rederived": 62,
+   "not_rederivable_from_text": 10
+  },
+  "adrec": {
+   "sampled": 67,
+   "not_rederivable_from_text": 67
+  },
+  "adtally": {
+   "sampled": 67,
+   "not_rederivable_from_text": 67
+  },
+  "adtwo": {
+   "sampled": 91,
+   "not_rederivable_from_text": 91
+  },
+  "advenn": {
+   "sampled": 91,
+   "not_rederivable_from_text": 91
+  },
+  "adwtcap": {
+   "sampled": 50,
+   "rederived": 50
+  },
+  "aeadd3": {
+   "sampled": 85,
+   "rederived": 85
+  },
+  "aeaddn": {
+   "sampled": 112,
+   "rederived": 112
+  },
+  "aeampm": {
+   "sampled": 57,
+   "rederived": 57
+  },
+  "aeang": {
+   "sampled": 101,
+   "rederived": 101
+  },
+  "aeangk": {
+   "sampled": 44,
+   "rederived": 19,
+   "not_rederivable_from_text": 25
+  },
+  "aearea": {
+   "sampled": 38,
+   "rederived": 38
+  },
+  "aearms": {
+   "sampled": 49,
+   "not_rederivable_from_text": 49
+  },
+  "aebig": {
+   "sampled": 75,
+   "rederived": 75
+  },
+  "aecf": {
+   "sampled": 55,
+   "rederived": 55
+  },
+  "aechk": {
+   "sampled": 131,
+   "not_rederivable_from_text": 131
+  },
+  "aecmp": {
+   "sampled": 66,
+   "rederived": 66
+  },
+  "aecol4": {
+   "sampled": 96,
+   "rederived": 96
+  },
+  "aecons": {
+   "sampled": 65,
+   "rederived": 65
+  },
+  "aeconv": {
+   "sampled": 89,
+   "rederived": 89
+  },
+  "aeconvd": {
+   "sampled": 96,
+   "rederived": 96
+  },
+  "aeconvu": {
+   "sampled": 98,
+   "rederived": 98
+  },
+  "aedec": {
+   "sampled": 96,
+   "rederived": 96
+  },
+  "aedecc": {
+   "sampled": 74,
+   "rederived": 74
+  },
+  "aedfr": {
+   "sampled": 41,
+   "rederived": 41
+  },
+  "aedigsym": {
+   "sampled": 78,
+   "not_rederivable_from_text": 78
+  },
+  "aedivm": {
+   "sampled": 93,
+   "rederived": 93
+  },
+  "aedord": {
+   "sampled": 81,
+   "rederived": 81
+  },
+  "aedpv": {
+   "sampled": 89,
+   "rederived": 89
+  },
+  "aedrip": {
+   "sampled": 41,
+   "rederived": 41
+  },
+  "aedsym": {
+   "sampled": 47,
+   "not_rederivable_from_text": 47
+  },
+  "aeel24": {
+   "sampled": 71,
+   "rederived": 71
+  },
+  "aeest": {
+   "sampled": 85,
+   "rederived": 85
+  },
+  "aeestp": {
+   "sampled": 96,
+   "rederived": 96
+  },
+  "aeftin": {
+   "sampled": 52,
+   "rederived": 28,
+   "not_rederivable_from_text": 24
+  },
+  "aehund": {
+   "sampled": 89,
+   "rederived": 89
+  },
+  "aeind": {
+   "sampled": 82,
+   "rederived": 82
+  },
+  "aeirr": {
+   "sampled": 82,
+   "not_rederivable_from_text": 82
+  },
+  "aematch": {
+   "sampled": 60,
+   "not_rederivable_from_text": 60
+  },
+  "aemirror": {
+   "sampled": 97,
+   "not_rederivable_from_text": 97
+  },
+  "aemix": {
+   "sampled": 96,
+   "rederived": 96
+  },
+  "aemulm": {
+   "sampled": 83,
+   "rederived": 83
+  },
+  "aenumf": {
+   "sampled": 130,
+   "rederived": 84,
+   "not_rederivable_from_text": 46
+  },
+  "aeparts": {
+   "sampled": 40,
+   "rederived": 40
+  },
+  "aepat": {
+   "sampled": 86,
+   "rederived": 86
+  },
+  "aeperar": {
+   "sampled": 81,
+   "rederived": 81
+  },
+  "aerdec": {
+   "sampled": 127,
+   "rederived": 127
+  },
+  "aerefl": {
+   "sampled": 88,
+   "rederived": 88
+  },
+  "aerev": {
+   "sampled": 47,
+   "rederived": 43,
+   "not_rederivable_from_text": 4
+  },
+  "aernd": {
+   "sampled": 72,
+   "rederived": 44,
+   "not_rederivable_from_text": 28
+  },
+  "aeround": {
+   "sampled": 104,
+   "rederived": 104
+  },
+  "aertang": {
+   "sampled": 75,
+   "not_rederivable_from_text": 75
+  },
+  "aeshop": {
+   "sampled": 88,
+   "rederived": 88
+  },
+  "aesym": {
+   "sampled": 112,
+   "not_rederivable_from_text": 112
+  },
+  "aet12": {
+   "sampled": 55,
+   "rederived": 55
+  },
+  "aet24": {
+   "sampled": 77,
+   "rederived": 77
+  },
+  "aetab": {
+   "sampled": 135,
+   "not_rederivable_from_text": 135
+  },
+  "aetrans": {
+   "sampled": 99,
+   "rederived": 99
+  },
+  "aetrip": {
+   "sampled": 90,
+   "rederived": 90
+  },
+  "aeturn": {
+   "sampled": 50,
+   "rederived": 50
+  },
+  "aewcmp": {
+   "sampled": 69,
+   "rederived": 69
+  },
+  "afbar": {
+   "sampled": 103,
+   "not_rederivable_from_text": 103
+  },
+  "afcount": {
+   "sampled": 42,
+   "rederived": 42
+  },
+  "afcross": {
+   "sampled": 78,
+   "rederived": 78
+  },
+  "afcube": {
+   "sampled": 102,
+   "not_rederivable_from_text": 102
+  },
+  "afdigits": {
+   "sampled": 39,
+   "rederived": 39
+  },
+  "affig": {
+   "sampled": 38,
+   "rederived": 38
+  },
+  "affigrel": {
+   "sampled": 40,
+   "rederived": 40
+  },
+  "affrac": {
+   "sampled": 50,
+   "rederived": 50
+  },
+  "affrule": {
+   "sampled": 55,
+   "rederived": 55
+  },
+  "afhidden": {
+   "sampled": 37,
+   "rederived": 37
+  },
+  "afletter": {
+   "sampled": 42,
+   "rederived": 42
+  },
+  "afmatch": {
+   "sampled": 37,
+   "not_rederivable_from_text": 37
+  },
+  "afnet": {
+   "sampled": 36,
+   "not_rederivable_from_text": 36
+  },
+  "afpaint": {
+   "sampled": 34,
+   "rederived": 26,
+   "not_rederivable_from_text": 8
+  },
+  "afpair": {
+   "sampled": 55,
+   "rederived": 55
+  },
+  "afsolid": {
+   "sampled": 40,
+   "not_rederivable_from_text": 20,
+   "rederived": 20
+  },
+  "afview": {
+   "sampled": 67,
+   "not_rederivable_from_text": 67
+  },
+  "agclass": {
+   "sampled": 56,
+   "rederived": 56
+  },
+  "agcomf": {
+   "sampled": 53,
+   "rederived": 53
+  },
+  "agcop": {
+   "sampled": 52,
+   "rederived": 52
+  },
+  "agdec": {
+   "sampled": 105,
+   "rederived": 105
+  },
+  "agfac": {
+   "sampled": 45,
+   "rederived": 45
+  },
+  "aghcf3": {
+   "sampled": 85,
+   "rederived": 85
+  },
+  "aghlp": {
+   "sampled": 90,
+   "rederived": 90
+  },
+  "aghlw": {
+   "sampled": 89,
+   "rederived": 89
+  },
+  "agimp": {
+   "sampled": 73,
+   "rederived": 73
+  },
+  "agjump": {
+   "sampled": 71,
+   "rederived": 71
+  },
+  "aglcm": {
+   "sampled": 71,
+   "rederived": 71
+  },
+  "aglcm3": {
+   "sampled": 91,
+   "rederived": 91
+  },
+  "agmeas": {
+   "sampled": 99,
+   "rederived": 99
+  },
+  "agmix": {
+   "sampled": 69,
+   "rederived": 69
+  },
+  "agnl": {
+   "sampled": 44,
+   "rederived": 44
+  },
+  "agprime": {
+   "sampled": 92,
+   "rederived": 92
+  },
+  "agptest": {
+   "sampled": 79,
+   "rederived": 79
+  },
+  "agrupee": {
+   "sampled": 107,
+   "rederived": 107
+  },
+  "agspd": {
+   "sampled": 171,
+   "rederived": 171
+  },
+  "agspdc": {
+   "sampled": 85,
+   "not_rederivable_from_text": 85
+  },
+  "aisolid": {
+   "sampled": 54,
+   "not_rederivable_from_text": 37,
+   "rederived": 17
+  },
+  "ajbest": {
+   "sampled": 97,
+   "rederived": 97
+  },
+  "ajfare": {
+   "sampled": 80,
+   "rederived": 78,
+   "not_rederivable_from_text": 2
+  },
+  "ajrate": {
+   "sampled": 89,
+   "rederived": 89
+  },
+  "ajwork": {
+   "sampled": 66,
+   "rederived": 66
+  },
+  "anpair": {
+   "sampled": 92,
+   "rederived": 92
+  },
+  "anquad": {
+   "sampled": 81,
+   "rederived": 81
+  },
+  "avdfact": {
+   "sampled": 39,
+   "rederived": 39
+  },
+  "avdiv": {
+   "sampled": 97,
+   "rederived": 97
+  },
+  "avfence": {
+   "sampled": 102,
+   "rederived": 102
+  },
+  "avfold": {
+   "sampled": 43,
+   "rederived": 43
+  },
+  "avfwq": {
+   "sampled": 92,
+   "rederived": 92
+  },
+  "avlat": {
+   "sampled": 72,
+   "rederived": 72
+  },
+  "avlike": {
+   "sampled": 74,
+   "rederived": 74
+  },
+  "avlow": {
+   "sampled": 88,
+   "rederived": 88
+  },
+  "avmdiv": {
+   "sampled": 85,
+   "rederived": 85
+  },
+  "avpest": {
+   "sampled": 88,
+   "rederived": 88
+  },
+  "avpp": {
+   "sampled": 89,
+   "rederived": 89
+  },
+  "avrsub": {
+   "sampled": 92,
+   "rederived": 92
+  },
+  "avstrat": {
+   "sampled": 67,
+   "rederived": 67
+  },
+  "avvcmp": {
+   "sampled": 82,
+   "rederived": 82
+  },
+  "divr": {
+   "sampled": 97,
+   "rederived": 97
+  },
+  "eqfrac": {
+   "sampled": 88,
+   "rederived": 88
+  },
+  "fadd": {
+   "sampled": 170,
+   "rederived": 170
+  },
+  "fmulw": {
+   "sampled": 111,
+   "rederived": 111
+  },
+  "ldiv": {
+   "sampled": 142,
+   "rederived": 142
+  },
+  "mmul": {
+   "sampled": 115,
+   "rederived": 115
+  },
+  "rect": {
+   "sampled": 42,
+   "rederived": 42
+  },
+  "rperim": {
+   "sampled": 51,
+   "rederived": 51
+  },
+  "vol": {
+   "sampled": 56,
+   "rederived": 56
+  }
+ },
+ "disagreements": [],
+ "parseErrors": []
+}

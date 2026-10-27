@@ -164,7 +164,7 @@ export const B07: Def[] = [
     variants: () => [],
     explain: (st) => (st.id === "total" ? `${st.inputs[0]} ${st.inputs[2]} are covered in ${st.inputs[1]} equal ${st.inputs[3]}` : `Share it equally: ${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value} in each one`),
     domain: [[12, 90], [2, 6], [0, 1]],
-    cap: 400,
+    cap: 1000,
     difficulty: ([s, t]) => (s % 10 === 0 && t <= 3 ? 1 : s * t <= 250 ? 2 : 3),
     // only the start and the whole distance: ticks or jumps at each hour would show the answer
     figure: ([s, t]) => ({ type: "numberline", from: 0, to: s * t, step: s * t }),

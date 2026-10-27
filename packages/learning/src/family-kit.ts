@@ -62,6 +62,8 @@ export type Justification =
       placeValue: number;
       /** The name of the position (e.g. "lakhs", "hundreds"). */
       placeName: string;
+      /** When the step's value also includes the number formed by the lower places, that number (value = digit × placeValue + plus). */
+      plus?: number;
     }
   | {
       /** Adding quantities that measure the same attribute (like-denomination fractions, perimeter sides). */

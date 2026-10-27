@@ -1,0 +1,3277 @@
+{
+ "release": "tn-samacheer-mathematics-grade-5",
+ "note": "Simulated learners test system behaviour only (never educational effectiveness). Mastery is the engine's status 'verified', reachable only with the test-only review fixture (provisional content is otherwise held by the content gate).",
+ "summary": [
+  {
+   "id": 1,
+   "learner": "learner-01",
+   "title": "Steady correct learner: mastery only after varied evidence and a passed delayed check",
+   "steps": 19,
+   "items": 14,
+   "refusals": 0,
+   "final": {
+    "MATH.algebra.expressions-intro": "independent, delayed check passed",
+    "MATH.number.rounding": "verified (mastery claimed), delayed check passed"
+   },
+   "checksPassed": 12,
+   "checksFailed": 0
+  },
+  {
+   "id": 2,
+   "learner": "learner-02",
+   "title": "Recurring wrong-answer pattern (count-lines), remediation, recovery",
+   "steps": 9,
+   "items": 6,
+   "refusals": 0,
+   "final": {
+    "MATH.statistics.scaled-bars": "independent, delayed check scheduled"
+   },
+   "checksPassed": 15,
+   "checksFailed": 0
+  },
+  {
+   "id": 3,
+   "learner": "learner-03",
+   "title": "Only watches and reads: must not reach mastery",
+   "steps": 8,
+   "items": 3,
+   "refusals": 0,
+   "final": {
+    "MATH.number.rounding": "exposure, delayed check none"
+   },
+   "checksPassed": 10,
+   "checksFailed": 0
+  },
+  {
+   "id": 4,
+   "learner": "learner-04",
+   "title": "One lucky correct answer: must not claim mastery",
+   "steps": 6,
+   "items": 3,
+   "refusals": 0,
+   "final": {
+    "MATH.number.rounding": "guided, delayed check none"
+   },
+   "checksPassed": 8,
+   "checksFailed": 0
+  },
+  {
+   "id": 5,
+   "learner": "learner-05",
+   "title": "Fails the delayed check: competency returns for review",
+   "steps": 18,
+   "items": 12,
+   "refusals": 0,
+   "final": {
+    "MATH.number.rounding": "review, delayed check failed"
+   },
+   "checksPassed": 9,
+   "checksFailed": 0
+  },
+  {
+   "id": 6,
+   "learner": "learner-06",
+   "title": "Guessing learner on multiple choice",
+   "steps": 24,
+   "items": 20,
+   "refusals": 0,
+   "final": {
+    "MATH.number.rounding": "review, delayed check failed"
+   },
+   "checksPassed": 7,
+   "checksFailed": 0
+  },
+  {
+   "id": 7,
+   "learner": "learner-07",
+   "title": "High ability, starting at difficulty 3",
+   "steps": 9,
+   "items": 7,
+   "refusals": 0,
+   "final": {
+    "MATH.number.rounding": "verified (mastery claimed), delayed check passed"
+   },
+   "checksPassed": 9,
+   "checksFailed": 0
+  },
+  {
+   "id": 8,
+   "learner": "learner-08",
+   "title": "Struggling learner staying at difficulty 1",
+   "steps": 21,
+   "items": 16,
+   "refusals": 0,
+   "final": {
+    "MATH.number.rounding": "independent, delayed check scheduled"
+   },
+   "checksPassed": 8,
+   "checksFailed": 0
+  },
+  {
+   "id": 9,
+   "learner": "learner-09",
+   "title": "Two competencies interleaved",
+   "steps": 20,
+   "items": 15,
+   "refusals": 0,
+   "final": {
+    "MATH.algebra.equality-inequality": "verified (mastery claimed), delayed check passed",
+    "MATH.number.rounding": "verified (mastery claimed), delayed check passed"
+   },
+   "checksPassed": 12,
+   "checksFailed": 0
+  },
+  {
+   "id": 10,
+   "learner": "learner-10",
+   "title": "Learner who exhausts a band: the bank still serves or says so",
+   "steps": 31,
+   "items": 28,
+   "refusals": 2,
+   "final": {
+    "MATH.measurement.rectangle-area": "independent, delayed check scheduled",
+    "MATH.reasoning.systematic-enumeration": "independent, delayed check scheduled"
+   },
+   "checksPassed": 10,
+   "checksFailed": 0
+  }
+ ],
+ "failedChecks": [],
+ "journeys": [
+  {
+   "id": 1,
+   "learner": "learner-01",
+   "title": "Steady correct learner: mastery only after varied evidence and a passed delayed check",
+   "competencies": [
+    "MATH.algebra.expressions-intro",
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,48,12,1",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "40",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 3,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 4,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeestp:0,16,21",
+     "phase": "practice",
+     "band": 2,
+     "format": "typed",
+     "activity": "practice",
+     "response": "400",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 5,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,4",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "B",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 6,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aerdec:1,12",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "39.6",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 7,
+     "day": 4,
+     "session": 3,
+     "kind": "wait",
+     "note": "3 day(s) pass"
+    },
+    {
+     "n": 8,
+     "day": 8,
+     "session": 4,
+     "kind": "wait",
+     "note": "4 day(s) pass"
+    },
+    {
+     "n": 9,
+     "day": 8,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:0,5",
+     "phase": "retention",
+     "band": 3,
+     "format": "choice",
+     "activity": "retention",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 10,
+     "day": 8,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aernd:3,6",
+     "phase": "retention",
+     "band": 1,
+     "format": "typed",
+     "activity": "retention",
+     "response": "34000",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 11,
+     "day": 8,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.algebra.expressions-intro",
+     "item": "gen:afletter:0,5,1",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "n + 5",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 12,
+     "day": 8,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.algebra.expressions-intro",
+     "item": "gen:afmatch:2,1,0",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "2n + 1",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 13,
+     "day": 9,
+     "session": 5,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 14,
+     "day": 9,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.algebra.expressions-intro",
+     "item": "gen:afletter:0,2,1",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "m + 2",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 15,
+     "day": 9,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.algebra.expressions-intro",
+     "item": "gen:afmatch:2,0,0",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "2n",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 16,
+     "day": 9,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.algebra.expressions-intro",
+     "item": "gen:afletter:0,3,1",
+     "phase": "check",
+     "band": 1,
+     "format": "typed",
+     "activity": "check",
+     "response": "k + 3",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 17,
+     "day": 15,
+     "session": 6,
+     "kind": "wait",
+     "note": "6 day(s) pass"
+    },
+    {
+     "n": 18,
+     "day": 15,
+     "session": 6,
+     "kind": "attempt",
+     "competency": "MATH.algebra.expressions-intro",
+     "item": "gen:afmatch:2,2,0",
+     "phase": "retention",
+     "band": 2,
+     "format": "typed",
+     "activity": "retention",
+     "response": "2n + 2",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 19,
+     "day": 15,
+     "session": 6,
+     "kind": "attempt",
+     "competency": "MATH.algebra.expressions-intro",
+     "item": "gen:afletter:0,8,1",
+     "phase": "retention",
+     "band": 1,
+     "format": "typed",
+     "activity": "retention",
+     "response": "k + 8",
+     "right": true,
+     "hints": 0
+    }
+   ],
+   "stepsTaken": 19,
+   "itemsServed": [
+    "gen:aechk:2,1",
+    "gen:aeest:1,48,12,1",
+    "gen:aeestp:0,16,21",
+    "gen:aechk:2,4",
+    "gen:aerdec:1,12",
+    "gen:aechk:0,5",
+    "gen:aernd:3,6",
+    "gen:afletter:0,5,1",
+    "gen:afmatch:2,1,0",
+    "gen:afletter:0,2,1",
+    "gen:afmatch:2,0,0",
+    "gen:afletter:0,3,1",
+    "gen:afmatch:2,2,0",
+    "gen:afletter:0,8,1"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.algebra.expressions-intro": {
+     "status": "independent",
+     "retention": "passed",
+     "independent": {
+      "right": 7,
+      "total": 7
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "learning",
+     "masteryClaimed": false
+    },
+    "MATH.number.rounding": {
+     "status": "verified",
+     "retention": "passed",
+     "independent": {
+      "right": 7,
+      "total": 7
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "verified",
+     "masteryClaimed": true
+    }
+   },
+   "checks": [
+    {
+     "name": "shown on their own after varied answers, but not yet a mastery claim",
+     "ok": true,
+     "detail": "independent"
+    },
+    {
+     "name": "the delayed check is scheduled a week after independent success",
+     "ok": true
+    },
+    {
+     "name": "three days later the delayed check is still not due (no claim)",
+     "ok": true
+    },
+    {
+     "name": "the plan asks for the delayed check when it is due",
+     "ok": true,
+     "detail": "retention MATH.number.rounding"
+    },
+    {
+     "name": "verified only after the delayed check is passed",
+     "ok": true
+    },
+    {
+     "name": "without educator-reviewed content the same records are not a mastery claim",
+     "ok": true,
+     "detail": "independent"
+    },
+    {
+     "name": "control: one answer format only, delayed check passed: not a mastery claim",
+     "ok": true,
+     "detail": "independent/not_demonstrated"
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    },
+    {
+     "name": "number.rounding: a mastery claim rests on varied evidence and a passed delayed check",
+     "ok": true,
+     "detail": "types choice,integer,fraction, delayed 2"
+    }
+   ],
+   "findings": [
+    "Single-format skills cannot be verified from the bank: the shared engine needs two answer formats. algebra.expressions-intro has one answer type in the bank, so its delayed check passes (passed) yet its status stays independent."
+   ]
+  },
+  {
+   "id": 2,
+   "learner": "learner-02",
+   "title": "Recurring wrong-answer pattern (count-lines), remediation, recovery",
+   "competencies": [
+    "MATH.statistics.scaled-bars"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.statistics.scaled-bars",
+     "item": "gen:afbar:0,0,1",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "7",
+     "right": false,
+     "hints": 0,
+     "bug": "count-lines"
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.statistics.scaled-bars",
+     "item": "gen:afbar:0,0,4",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "9",
+     "right": false,
+     "hints": 0,
+     "bug": "count-lines"
+    },
+    {
+     "n": 3,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.statistics.scaled-bars",
+     "item": "gen:afbar:0,0,5",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "3",
+     "right": false,
+     "hints": 0,
+     "bug": "count-lines"
+    },
+    {
+     "n": 4,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 5,
+     "day": 1,
+     "session": 2,
+     "kind": "teach",
+     "competency": "MATH.statistics.scaled-bars",
+     "note": "strategy spot_the_mistake (for a conceptual misunderstanding)"
+    },
+    {
+     "n": 6,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.statistics.scaled-bars",
+     "item": "gen:afbar:0,0,6",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "guided",
+     "response": "2",
+     "right": true,
+     "hints": 1
+    },
+    {
+     "n": 7,
+     "day": 2,
+     "session": 3,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 8,
+     "day": 2,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.statistics.scaled-bars",
+     "item": "gen:afbar:0,0,2",
+     "phase": "check",
+     "band": 1,
+     "format": "typed",
+     "activity": "check",
+     "response": "16",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 9,
+     "day": 2,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.statistics.scaled-bars",
+     "item": "gen:afbar:0,0,7",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "8",
+     "right": true,
+     "hints": 0
+    }
+   ],
+   "stepsTaken": 9,
+   "itemsServed": [
+    "gen:afbar:0,0,1",
+    "gen:afbar:0,0,4",
+    "gen:afbar:0,0,5",
+    "gen:afbar:0,0,6",
+    "gen:afbar:0,0,2",
+    "gen:afbar:0,0,7"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.statistics.scaled-bars": {
+     "status": "independent",
+     "retention": "scheduled",
+     "independent": {
+      "right": 2,
+      "total": 5
+     },
+     "assisted": {
+      "right": 1,
+      "total": 1
+     },
+     "engine": "learning",
+     "masteryClaimed": false
+    }
+   },
+   "checks": [
+    {
+     "name": "wrong answer 1 is the one the misunderstanding predicts",
+     "ok": true
+    },
+    {
+     "name": "wrong answer 2 is the one the misunderstanding predicts",
+     "ok": true
+    },
+    {
+     "name": "wrong answer 3 is the one the misunderstanding predicts",
+     "ok": true
+    },
+    {
+     "name": "the same misunderstanding showed on at least three different problems",
+     "ok": true,
+     "detail": "3"
+    },
+    {
+     "name": "the diagnosis is established only after it recurs, and names the misunderstanding",
+     "ok": true,
+     "detail": "established count-lines"
+    },
+    {
+     "name": "the diagnosis leads to teaching that skill",
+     "ok": true,
+     "detail": "teach MATH.statistics.scaled-bars"
+    },
+    {
+     "name": "before remediation the skill is not shown on its own",
+     "ok": true,
+     "detail": "exposure"
+    },
+    {
+     "name": "guided help counts as help, not independent work",
+     "ok": true
+    },
+    {
+     "name": "after remediation the skill is shown on their own",
+     "ok": true,
+     "detail": "independent"
+    },
+    {
+     "name": "recovered on problems where the old misunderstanding would have shown",
+     "ok": true,
+     "detail": "2"
+    },
+    {
+     "name": "recovery is progress, not a mastery claim (delayed check pending)",
+     "ok": true
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    }
+   ],
+   "findings": []
+  },
+  {
+   "id": 3,
+   "learner": "learner-03",
+   "title": "Only watches and reads: must not reach mastery",
+   "competencies": [
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "teach",
+     "competency": "MATH.number.rounding",
+     "note": "strategy worked_steps"
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "view",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:1,0",
+     "phase": "practice",
+     "band": 1,
+     "format": "choice"
+    },
+    {
+     "n": 3,
+     "day": 0,
+     "session": 1,
+     "kind": "view",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,48,12,1",
+     "phase": "check",
+     "band": 2,
+     "format": "typed"
+    },
+    {
+     "n": 4,
+     "day": 2,
+     "session": 2,
+     "kind": "wait",
+     "note": "2 day(s) pass"
+    },
+    {
+     "n": 5,
+     "day": 2,
+     "session": 2,
+     "kind": "teach",
+     "competency": "MATH.number.rounding",
+     "note": "strategy hill"
+    },
+    {
+     "n": 6,
+     "day": 2,
+     "session": 2,
+     "kind": "view",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeestp:0,16,21",
+     "phase": "practice",
+     "band": 2,
+     "format": "typed"
+    },
+    {
+     "n": 7,
+     "day": 32,
+     "session": 3,
+     "kind": "wait",
+     "note": "30 day(s) pass"
+    },
+    {
+     "n": 8,
+     "day": 92,
+     "session": 4,
+     "kind": "wait",
+     "note": "60 day(s) pass"
+    }
+   ],
+   "stepsTaken": 8,
+   "itemsServed": [
+    "gen:aechk:1,0",
+    "gen:aeest:1,48,12,1",
+    "gen:aeestp:0,16,21"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.number.rounding": {
+     "status": "exposure",
+     "retention": "none",
+     "independent": {
+      "right": 0,
+      "total": 0
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "unavailable",
+     "masteryClaimed": false
+    }
+   },
+   "checks": [
+    {
+     "name": "no attempts were recorded",
+     "ok": true
+    },
+    {
+     "name": "watching is exposure, never shown on their own, never verified",
+     "ok": true,
+     "detail": "exposure"
+    },
+    {
+     "name": "no delayed check is ever scheduled from watching",
+     "ok": true
+    },
+    {
+     "name": "the plan carries on with the skill (asks them to try it)",
+     "ok": true,
+     "detail": "continue MATH.number.rounding"
+    },
+    {
+     "name": "two months later still no mastery",
+     "ok": true
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    },
+    {
+     "name": "number.rounding: no attempts, no mastery claim",
+     "ok": true
+    }
+   ],
+   "findings": []
+  },
+  {
+   "id": 4,
+   "learner": "learner-04",
+   "title": "One lucky correct answer: must not claim mastery",
+   "competencies": [
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,2",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "D",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 2,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 3,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,4",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "A",
+     "right": false,
+     "hints": 0,
+     "bug": "zeros-short"
+    },
+    {
+     "n": 4,
+     "day": 2,
+     "session": 3,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 5,
+     "day": 2,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "B",
+     "right": false,
+     "hints": 0,
+     "bug": "zeros-short"
+    },
+    {
+     "n": 6,
+     "day": 32,
+     "session": 4,
+     "kind": "wait",
+     "note": "30 day(s) pass"
+    }
+   ],
+   "stepsTaken": 6,
+   "itemsServed": [
+    "gen:aechk:2,2",
+    "gen:aechk:2,4",
+    "gen:aechk:2,1"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.number.rounding": {
+     "status": "guided",
+     "retention": "none",
+     "independent": {
+      "right": 1,
+      "total": 3
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "learning",
+     "masteryClaimed": false
+    }
+   },
+   "checks": [
+    {
+     "name": "one correct answer is not shown on their own",
+     "ok": true,
+     "detail": "guided"
+    },
+    {
+     "name": "one correct answer schedules no delayed check",
+     "ok": true
+    },
+    {
+     "name": "after more answers that are not right, still not shown and no claim",
+     "ok": true,
+     "detail": "guided {\"right\":1,\"total\":3}"
+    },
+    {
+     "name": "the plan keeps the skill in progress",
+     "ok": true
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    }
+   ],
+   "findings": []
+  },
+  {
+   "id": 5,
+   "learner": "learner-05",
+   "title": "Fails the delayed check: competency returns for review",
+   "competencies": [
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,48,12,1",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "40",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 3,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 4,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeestp:0,16,21",
+     "phase": "practice",
+     "band": 2,
+     "format": "typed",
+     "activity": "practice",
+     "response": "400",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 5,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,4",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "B",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 6,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aerdec:1,12",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "39.6",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 7,
+     "day": 8,
+     "session": 3,
+     "kind": "wait",
+     "note": "7 day(s) pass"
+    },
+    {
+     "n": 8,
+     "day": 8,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,0",
+     "phase": "retention",
+     "band": 2,
+     "format": "choice",
+     "activity": "retention",
+     "response": "B",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 9,
+     "day": 8,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aernd:4,6",
+     "phase": "retention",
+     "band": 2,
+     "format": "typed",
+     "activity": "retention",
+     "response": "200000",
+     "right": false,
+     "hints": 0,
+     "bug": "wrong-place"
+    },
+    {
+     "n": 10,
+     "day": 9,
+     "session": 4,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 11,
+     "day": 9,
+     "session": 4,
+     "kind": "teach",
+     "competency": "MATH.number.rounding",
+     "note": "strategy worked_steps"
+    },
+    {
+     "n": 12,
+     "day": 9,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeround:2,110",
+     "phase": "practice",
+     "band": 2,
+     "format": "typed",
+     "activity": "guided",
+     "response": "100",
+     "right": true,
+     "hints": 1
+    },
+    {
+     "n": 13,
+     "day": 10,
+     "session": 5,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 14,
+     "day": 10,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:avpest:1665,46",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "100000",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 15,
+     "day": 10,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,5",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 16,
+     "day": 19,
+     "session": 6,
+     "kind": "wait",
+     "note": "9 day(s) pass"
+    },
+    {
+     "n": 17,
+     "day": 19,
+     "session": 6,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,29,11,1",
+     "phase": "retention",
+     "band": 2,
+     "format": "typed",
+     "activity": "retention",
+     "response": "20",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 18,
+     "day": 19,
+     "session": 6,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,12",
+     "phase": "retention",
+     "band": 2,
+     "format": "choice",
+     "activity": "retention",
+     "response": "C",
+     "right": true,
+     "hints": 0
+    }
+   ],
+   "stepsTaken": 18,
+   "itemsServed": [
+    "gen:aechk:2,1",
+    "gen:aeest:1,48,12,1",
+    "gen:aeestp:0,16,21",
+    "gen:aechk:2,4",
+    "gen:aerdec:1,12",
+    "gen:aechk:2,0",
+    "gen:aernd:4,6",
+    "gen:aeround:2,110",
+    "gen:avpest:1665,46",
+    "gen:aechk:2,5",
+    "gen:aeest:1,29,11,1",
+    "gen:aechk:2,12"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.number.rounding": {
+     "status": "review",
+     "retention": "failed",
+     "independent": {
+      "right": 10,
+      "total": 11
+     },
+     "assisted": {
+      "right": 1,
+      "total": 1
+     },
+     "engine": "verified",
+     "masteryClaimed": false
+    }
+   },
+   "checks": [
+    {
+     "name": "the delayed check is due",
+     "ok": true
+    },
+    {
+     "name": "a missed delayed check is recorded as failed",
+     "ok": true,
+     "detail": "failed"
+    },
+    {
+     "name": "the skill returns for review, not verified",
+     "ok": true,
+     "detail": "review"
+    },
+    {
+     "name": "the plan sends the learner back to review this skill",
+     "ok": true,
+     "detail": "review MATH.number.rounding"
+    },
+    {
+     "name": "fresh right answers later do not by themselves clear the missed check into a claim",
+     "ok": true,
+     "detail": "review"
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    }
+   ],
+   "findings": [
+    "After a failed delayed check the skill stays in review for good: skillEvidence (evidence.ts) counts every retention answer given after the due time, and any wrong one fails the check for good, so no later delayed check can pass and verification cannot be reached again. The product rule (returns for review) holds; a path back (a new delayed check after relearning) does not exist yet."
+   ]
+  },
+  {
+   "id": 6,
+   "learner": "learner-06",
+   "title": "Guessing learner on multiple choice",
+   "competencies": [
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "B",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,2",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "A",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 3,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,4",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "D",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 4,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,5",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "D",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 5,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,3",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "D",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 6,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,6",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "D",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 7,
+     "day": 2,
+     "session": 2,
+     "kind": "wait",
+     "note": "2 day(s) pass"
+    },
+    {
+     "n": 8,
+     "day": 2,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,27",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "A",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 9,
+     "day": 2,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,8",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "B",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 10,
+     "day": 2,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,7",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "B",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 11,
+     "day": 2,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,10",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "B",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 12,
+     "day": 2,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,9",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "B",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 13,
+     "day": 2,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,11",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "D",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 14,
+     "day": 4,
+     "session": 3,
+     "kind": "wait",
+     "note": "2 day(s) pass"
+    },
+    {
+     "n": 15,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,47",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 16,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,14",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "C",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 17,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,13",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "D",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 18,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,16",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "C",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 19,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,15",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "A",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 20,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,17",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "C",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 21,
+     "day": 6,
+     "session": 4,
+     "kind": "wait",
+     "note": "2 day(s) pass"
+    },
+    {
+     "n": 22,
+     "day": 9,
+     "session": 5,
+     "kind": "wait",
+     "note": "3 day(s) pass"
+    },
+    {
+     "n": 23,
+     "day": 9,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,0",
+     "phase": "retention",
+     "band": 2,
+     "format": "choice",
+     "activity": "retention",
+     "response": "A",
+     "right": false,
+     "hints": 0
+    },
+    {
+     "n": 24,
+     "day": 9,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,12",
+     "phase": "retention",
+     "band": 2,
+     "format": "choice",
+     "activity": "retention",
+     "response": "D",
+     "right": false,
+     "hints": 0
+    }
+   ],
+   "stepsTaken": 24,
+   "itemsServed": [
+    "gen:aechk:2,1",
+    "gen:aechk:2,2",
+    "gen:aechk:2,4",
+    "gen:aechk:2,5",
+    "gen:aechk:2,3",
+    "gen:aechk:2,6",
+    "gen:aechk:2,27",
+    "gen:aechk:2,8",
+    "gen:aechk:2,7",
+    "gen:aechk:2,10",
+    "gen:aechk:2,9",
+    "gen:aechk:2,11",
+    "gen:aechk:2,47",
+    "gen:aechk:2,14",
+    "gen:aechk:2,13",
+    "gen:aechk:2,16",
+    "gen:aechk:2,15",
+    "gen:aechk:2,17",
+    "gen:aechk:2,0",
+    "gen:aechk:2,12"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.number.rounding": {
+     "status": "review",
+     "retention": "failed",
+     "independent": {
+      "right": 5,
+      "total": 20
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "learning",
+     "masteryClaimed": false
+    }
+   },
+   "checks": [
+    {
+     "name": "the guesses were multiple choice only",
+     "ok": true
+    },
+    {
+     "name": "guessing is not a mastery claim",
+     "ok": true,
+     "detail": "review (5 of 20 right by chance)"
+    },
+    {
+     "name": "across 24 guessing learners, none is ever a mastery claim",
+     "ok": true,
+     "detail": "0 claims"
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    }
+   ],
+   "findings": [
+    "Guessing on multiple choice (24 seeded learners, 18 questions each): 7 reached \"shown on their own\" by chance before any delayed check; 0 reached a mastery claim (the shared engine needs two answer formats and a passed delayed check)."
+   ]
+  },
+  {
+   "id": 7,
+   "learner": "learner-07",
+   "title": "High ability, starting at difficulty 3",
+   "competencies": [
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:0,30",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:2,38,28,1",
+     "phase": "check",
+     "band": 3,
+     "format": "typed",
+     "activity": "check",
+     "response": "100",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 3,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 4,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeestp:1,108,31",
+     "phase": "practice",
+     "band": 3,
+     "format": "typed",
+     "activity": "practice",
+     "response": "3000",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 5,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:0,0",
+     "phase": "practice",
+     "band": 3,
+     "format": "choice",
+     "activity": "practice",
+     "response": "C",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 6,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aerdec:2,6",
+     "phase": "check",
+     "band": 3,
+     "format": "typed",
+     "activity": "check",
+     "response": "25.96",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 7,
+     "day": 8,
+     "session": 3,
+     "kind": "wait",
+     "note": "7 day(s) pass"
+    },
+    {
+     "n": 8,
+     "day": 8,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:0,5",
+     "phase": "retention",
+     "band": 3,
+     "format": "choice",
+     "activity": "retention",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 9,
+     "day": 8,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aernd:6,0",
+     "phase": "retention",
+     "band": 3,
+     "format": "typed",
+     "activity": "retention",
+     "response": "48000000",
+     "right": true,
+     "hints": 0
+    }
+   ],
+   "stepsTaken": 9,
+   "itemsServed": [
+    "gen:aechk:0,30",
+    "gen:aeest:2,38,28,1",
+    "gen:aeestp:1,108,31",
+    "gen:aechk:0,0",
+    "gen:aerdec:2,6",
+    "gen:aechk:0,5",
+    "gen:aernd:6,0"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.number.rounding": {
+     "status": "verified",
+     "retention": "passed",
+     "independent": {
+      "right": 7,
+      "total": 7
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "verified",
+     "masteryClaimed": true
+    }
+   },
+   "checks": [
+    {
+     "name": "every question served from the start is difficulty 3",
+     "ok": true
+    },
+    {
+     "name": "shown on their own from the first visits, no teaching needed",
+     "ok": true,
+     "detail": "independent"
+    },
+    {
+     "name": "not yet a claim until the delayed check",
+     "ok": true
+    },
+    {
+     "name": "verified after a passed delayed check, with difficulty 3 retention questions",
+     "ok": true
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    },
+    {
+     "name": "number.rounding: a mastery claim rests on varied evidence and a passed delayed check",
+     "ok": true,
+     "detail": "types choice,integer,fraction, delayed 2"
+    }
+   ],
+   "findings": []
+  },
+  {
+   "id": 8,
+   "learner": "learner-08",
+   "title": "Struggling learner staying at difficulty 1",
+   "competencies": [
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:1,22",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "D",
+     "right": false,
+     "hints": 0,
+     "bug": "big-means-exact"
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,12,67,0",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "79",
+     "right": false,
+     "hints": 0,
+     "bug": "exact"
+    },
+    {
+     "n": 3,
+     "day": 0,
+     "session": 1,
+     "kind": "teach",
+     "competency": "MATH.number.rounding",
+     "note": "strategy worked_steps"
+    },
+    {
+     "n": 4,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeestp:0,22,61",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "guided",
+     "response": "1200",
+     "right": true,
+     "hints": 1
+    },
+    {
+     "n": 5,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aerdec:0,0",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "27",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 6,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 7,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aernd:3,13",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "47000",
+     "right": false,
+     "hints": 0,
+     "bug": "always-down"
+    },
+    {
+     "n": 8,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeround:1,206",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "210",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 9,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:avpest:1006,61",
+     "phase": "check",
+     "band": 1,
+     "format": "typed",
+     "activity": "check",
+     "response": "6000",
+     "right": false,
+     "hints": 0,
+     "bug": "zero-lost"
+    },
+    {
+     "n": 10,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:1,0",
+     "phase": "practice",
+     "band": 1,
+     "format": "choice",
+     "activity": "practice",
+     "response": "C",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 11,
+     "day": 2,
+     "session": 3,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 12,
+     "day": 2,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,12,92,0",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "100",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 13,
+     "day": 2,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeestp:0,24,62",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "1488",
+     "right": false,
+     "hints": 0,
+     "bug": "exact"
+    },
+    {
+     "n": 14,
+     "day": 2,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aerdec:0,2",
+     "phase": "check",
+     "band": 1,
+     "format": "typed",
+     "activity": "check",
+     "response": "22",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 15,
+     "day": 2,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aernd:3,2",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "40000",
+     "right": false,
+     "hints": 0,
+     "bug": "wrong-place"
+    },
+    {
+     "n": 16,
+     "day": 3,
+     "session": 4,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 17,
+     "day": 3,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeround:1,231",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "240",
+     "right": false,
+     "hints": 0,
+     "bug": "always-up"
+    },
+    {
+     "n": 18,
+     "day": 3,
+     "session": 4,
+     "kind": "teach",
+     "competency": "MATH.number.rounding",
+     "note": "strategy hill"
+    },
+    {
+     "n": 19,
+     "day": 3,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:avpest:1026,52",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "guided",
+     "response": "50000",
+     "right": true,
+     "hints": 1
+    },
+    {
+     "n": 20,
+     "day": 3,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:1,2",
+     "phase": "check",
+     "band": 1,
+     "format": "choice",
+     "activity": "check",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 21,
+     "day": 3,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,13,83,0",
+     "phase": "practice",
+     "band": 1,
+     "format": "typed",
+     "activity": "practice",
+     "response": "90",
+     "right": true,
+     "hints": 0
+    }
+   ],
+   "stepsTaken": 21,
+   "itemsServed": [
+    "gen:aechk:1,22",
+    "gen:aeest:1,12,67,0",
+    "gen:aeestp:0,22,61",
+    "gen:aerdec:0,0",
+    "gen:aernd:3,13",
+    "gen:aeround:1,206",
+    "gen:avpest:1006,61",
+    "gen:aechk:1,0",
+    "gen:aeest:1,12,92,0",
+    "gen:aeestp:0,24,62",
+    "gen:aerdec:0,2",
+    "gen:aernd:3,2",
+    "gen:aeround:1,231",
+    "gen:avpest:1026,52",
+    "gen:aechk:1,2",
+    "gen:aeest:1,13,83,0"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.number.rounding": {
+     "status": "independent",
+     "retention": "scheduled",
+     "independent": {
+      "right": 7,
+      "total": 14
+     },
+     "assisted": {
+      "right": 2,
+      "total": 2
+     },
+     "engine": "demonstrated",
+     "masteryClaimed": false
+    }
+   },
+   "checks": [
+    {
+     "name": "every question stayed at difficulty 1",
+     "ok": true
+    },
+    {
+     "name": "wrong answers were met with teaching",
+     "ok": true
+    },
+    {
+     "name": "no mastery claim, and no delayed check without independent success",
+     "ok": true,
+     "detail": "independent/scheduled"
+    },
+    {
+     "name": "the bank never ran dry for the struggling learner",
+     "ok": true
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    }
+   ],
+   "findings": []
+  },
+  {
+   "id": 9,
+   "learner": "learner-09",
+   "title": "Two competencies interleaved",
+   "competencies": [
+    "MATH.algebra.equality-inequality",
+    "MATH.number.rounding"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeest:1,48,12,1",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "40",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 3,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 4,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aeestp:0,16,21",
+     "phase": "practice",
+     "band": 2,
+     "format": "typed",
+     "activity": "practice",
+     "response": "400",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 5,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,4",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "B",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 6,
+     "day": 4,
+     "session": 3,
+     "kind": "wait",
+     "note": "3 day(s) pass"
+    },
+    {
+     "n": 7,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.algebra.equality-inequality",
+     "item": "gen:accmpx:0,2,0,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "choice",
+     "activity": "diagnostic",
+     "response": "B",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 8,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,2",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "D",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 9,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.algebra.equality-inequality",
+     "item": "gen:acbalance:0,7,19,8",
+     "phase": "check",
+     "band": 2,
+     "format": "typed",
+     "activity": "check",
+     "response": "18",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 10,
+     "day": 4,
+     "session": 3,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aerdec:1,0",
+     "phase": "practice",
+     "band": 2,
+     "format": "typed",
+     "activity": "practice",
+     "response": "27",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 11,
+     "day": 5,
+     "session": 4,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 12,
+     "day": 5,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.algebra.equality-inequality",
+     "item": "gen:acbalance:0,7,19,4",
+     "phase": "practice",
+     "band": 2,
+     "format": "typed",
+     "activity": "practice",
+     "response": "22",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 13,
+     "day": 5,
+     "session": 4,
+     "kind": "attempt",
+     "competency": "MATH.algebra.equality-inequality",
+     "item": "gen:accmpx:0,0,-3,0",
+     "phase": "practice",
+     "band": 2,
+     "format": "choice",
+     "activity": "practice",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 14,
+     "day": 8,
+     "session": 5,
+     "kind": "wait",
+     "note": "3 day(s) pass"
+    },
+    {
+     "n": 15,
+     "day": 8,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.algebra.equality-inequality",
+     "item": "gen:accmpx:0,1,2,-3",
+     "phase": "check",
+     "band": 2,
+     "format": "choice",
+     "activity": "check",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 16,
+     "day": 8,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aechk:2,0",
+     "phase": "retention",
+     "band": 2,
+     "format": "choice",
+     "activity": "retention",
+     "response": "B",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 17,
+     "day": 8,
+     "session": 5,
+     "kind": "attempt",
+     "competency": "MATH.number.rounding",
+     "item": "gen:aernd:4,6",
+     "phase": "retention",
+     "band": 2,
+     "format": "typed",
+     "activity": "retention",
+     "response": "180000",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 18,
+     "day": 12,
+     "session": 6,
+     "kind": "wait",
+     "note": "4 day(s) pass"
+    },
+    {
+     "n": 19,
+     "day": 12,
+     "session": 6,
+     "kind": "attempt",
+     "competency": "MATH.algebra.equality-inequality",
+     "item": "gen:accmpx:0,0,-3,3",
+     "phase": "retention",
+     "band": 2,
+     "format": "choice",
+     "activity": "retention",
+     "response": "A",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 20,
+     "day": 12,
+     "session": 6,
+     "kind": "attempt",
+     "competency": "MATH.algebra.equality-inequality",
+     "item": "gen:acbalance:0,9,12,18",
+     "phase": "retention",
+     "band": 2,
+     "format": "typed",
+     "activity": "retention",
+     "response": "3",
+     "right": true,
+     "hints": 0
+    }
+   ],
+   "stepsTaken": 20,
+   "itemsServed": [
+    "gen:aechk:2,1",
+    "gen:aeest:1,48,12,1",
+    "gen:aeestp:0,16,21",
+    "gen:aechk:2,4",
+    "gen:accmpx:0,2,0,1",
+    "gen:aechk:2,2",
+    "gen:acbalance:0,7,19,8",
+    "gen:aerdec:1,0",
+    "gen:acbalance:0,7,19,4",
+    "gen:accmpx:0,0,-3,0",
+    "gen:accmpx:0,1,2,-3",
+    "gen:aechk:2,0",
+    "gen:aernd:4,6",
+    "gen:accmpx:0,0,-3,3",
+    "gen:acbalance:0,9,12,18"
+   ],
+   "refusals": [],
+   "missedItemLog": [],
+   "final": {
+    "MATH.algebra.equality-inequality": {
+     "status": "verified",
+     "retention": "passed",
+     "independent": {
+      "right": 7,
+      "total": 7
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "verified",
+     "masteryClaimed": true
+    },
+    "MATH.number.rounding": {
+     "status": "verified",
+     "retention": "passed",
+     "independent": {
+      "right": 8,
+      "total": 8
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "verified",
+     "masteryClaimed": true
+    }
+   },
+   "checks": [
+    {
+     "name": "each skill's evidence counts only its own answers",
+     "ok": true,
+     "detail": "6/6 4/4"
+    },
+    {
+     "name": "the two skills have their own delayed checks, on different dates",
+     "ok": true
+    },
+    {
+     "name": "the plan asks for the delayed check that is due first, not the other",
+     "ok": true,
+     "detail": "retention MATH.number.rounding; B scheduled"
+    },
+    {
+     "name": "passing one delayed check does not verify the other skill",
+     "ok": true
+    },
+    {
+     "name": "then the other is asked",
+     "ok": true
+    },
+    {
+     "name": "both verified, each after its own delayed check",
+     "ok": true
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    },
+    {
+     "name": "number.rounding: a mastery claim rests on varied evidence and a passed delayed check",
+     "ok": true,
+     "detail": "types choice,integer,fraction, delayed 2"
+    },
+    {
+     "name": "algebra.equality-inequality: a mastery claim rests on varied evidence and a passed delayed check",
+     "ok": true,
+     "detail": "types choice,integer, delayed 2"
+    }
+   ],
+   "findings": []
+  },
+  {
+   "id": 10,
+   "learner": "learner-10",
+   "title": "Learner who exhausts a band: the bank still serves or says so",
+   "competencies": [
+    "MATH.measurement.rectangle-area",
+    "MATH.reasoning.systematic-enumeration"
+   ],
+   "steps": [
+    {
+     "n": 1,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.measurement.rectangle-area",
+     "item": "gen:rect:5,6",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "30",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 2,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.measurement.rectangle-area",
+     "item": "gen:rect:6,3",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "18",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 3,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.measurement.rectangle-area",
+     "item": "gen:rect:10,2",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "20",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 4,
+     "day": 0,
+     "session": 1,
+     "kind": "refused",
+     "competency": "MATH.measurement.rectangle-area",
+     "phase": "diagnostic",
+     "band": 1,
+     "note": "band-exhausted: You have been through every stored question at level 1 for this skill. There are still questions at level 2 and 3; carry on there, or come back later."
+    },
+    {
+     "n": 5,
+     "day": 0,
+     "session": 1,
+     "kind": "attempt",
+     "competency": "MATH.measurement.rectangle-area",
+     "item": "gen:rect:6,10",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "60",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 6,
+     "day": 1,
+     "session": 2,
+     "kind": "wait",
+     "note": "1 day(s) pass"
+    },
+    {
+     "n": 7,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:2,6,1",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "12",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 8,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:2,2,0,0,2",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "2",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 9,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:0,2,4",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "30",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 10,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:3,5,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "15",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 11,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:2,2,1,1,2",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "2",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 12,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:0,4,4",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "100",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 13,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:3,6,2",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "36",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 14,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:2,3,1,0,2",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "8",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 15,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:1,3,6",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "32",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 16,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:5,2,4",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "40",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 17,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:3,2,0,0,1",
+     "phase": "diagnostic",
+     "band": 1,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "6",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 18,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:1,5,8",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "100",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 19,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:5,6,4",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "120",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 20,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:3,3,1,1,0",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "18",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 21,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:1,7,8",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "168",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 22,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:6,3,2",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "36",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 23,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:4,3,0,1,0",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "18",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 24,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:2,6,0",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "28",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 25,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:6,4,1",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "24",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 26,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:5,2,0,1,2",
+     "phase": "diagnostic",
+     "band": 2,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "16",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 27,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:3,2,1",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "12",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 28,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afcount:6,5,4",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "120",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 29,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afdigits:5,3,1,1,2",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "100",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 30,
+     "day": 1,
+     "session": 2,
+     "kind": "attempt",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "item": "gen:afhidden:3,7,2",
+     "phase": "diagnostic",
+     "band": 3,
+     "format": "typed",
+     "activity": "diagnostic",
+     "response": "108",
+     "right": true,
+     "hints": 0
+    },
+    {
+     "n": 31,
+     "day": 1,
+     "session": 2,
+     "kind": "refused",
+     "competency": "MATH.reasoning.systematic-enumeration",
+     "phase": "diagnostic",
+     "note": "band-exhausted: You have been through every stored question of this kind for this skill. A teacher or parent can go through it with you; nothing is repeated as new evidence."
+    }
+   ],
+   "stepsTaken": 31,
+   "itemsServed": [
+    "gen:rect:5,6",
+    "gen:rect:6,3",
+    "gen:rect:10,2",
+    "gen:rect:6,10",
+    "gen:afcount:2,6,1",
+    "gen:afdigits:2,2,0,0,2",
+    "gen:afhidden:0,2,4",
+    "gen:afcount:3,5,1",
+    "gen:afdigits:2,2,1,1,2",
+    "gen:afhidden:0,4,4",
+    "gen:afcount:3,6,2",
+    "gen:afdigits:2,3,1,0,2",
+    "gen:afhidden:1,3,6",
+    "gen:afcount:5,2,4",
+    "gen:afdigits:3,2,0,0,1",
+    "gen:afhidden:1,5,8",
+    "gen:afcount:5,6,4",
+    "gen:afdigits:3,3,1,1,0",
+    "gen:afhidden:1,7,8",
+    "gen:afcount:6,3,2",
+    "gen:afdigits:4,3,0,1,0",
+    "gen:afhidden:2,6,0",
+    "gen:afcount:6,4,1",
+    "gen:afdigits:5,2,0,1,2",
+    "gen:afhidden:3,2,1",
+    "gen:afcount:6,5,4",
+    "gen:afdigits:5,3,1,1,2",
+    "gen:afhidden:3,7,2"
+   ],
+   "refusals": [
+    {
+     "kind": "band-exhausted",
+     "reason": "You have been through every stored question at level 1 for this skill. There are still questions at level 2 and 3; carry on there, or come back later."
+    },
+    {
+     "kind": "band-exhausted",
+     "reason": "You have been through every stored question of this kind for this skill. A teacher or parent can go through it with you; nothing is repeated as new evidence."
+    }
+   ],
+   "missedItemLog": [
+    {
+     "at": "2026-09-01T09:00:01.000Z",
+     "kind": "band-exhausted",
+     "request": {
+      "competency": "MATH.measurement.rectangle-area",
+      "difficulty": 1,
+      "phase": "diagnostic",
+      "excluded": 3
+     },
+     "reason": "You have been through every stored question at level 1 for this skill. There are still questions at level 2 and 3; carry on there, or come back later."
+    },
+    {
+     "at": "2026-09-01T09:00:02.000Z",
+     "kind": "band-exhausted",
+     "request": {
+      "competency": "MATH.reasoning.systematic-enumeration",
+      "phase": "diagnostic",
+      "excluded": 28
+     },
+     "reason": "You have been through every stored question of this kind for this skill. A teacher or parent can go through it with you; nothing is repeated as new evidence."
+    }
+   ],
+   "final": {
+    "MATH.measurement.rectangle-area": {
+     "status": "independent",
+     "retention": "scheduled",
+     "independent": {
+      "right": 4,
+      "total": 4
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "learning",
+     "masteryClaimed": false
+    },
+    "MATH.reasoning.systematic-enumeration": {
+     "status": "independent",
+     "retention": "scheduled",
+     "independent": {
+      "right": 24,
+      "total": 24
+     },
+     "assisted": {
+      "right": 0,
+      "total": 0
+     },
+     "engine": "learning",
+     "masteryClaimed": false
+    }
+   },
+   "checks": [
+    {
+     "name": "every item of the band was served exactly once",
+     "ok": true
+    },
+    {
+     "name": "the exhausted band gives a clear failure, not an unexplained one",
+     "ok": true,
+     "detail": "You have been through every stored question at level 1 for this skill. There are still questions at level 2 and 3; carry on there, or come back later."
+    },
+    {
+     "name": "the failure is in the missed-item log",
+     "ok": true
+    },
+    {
+     "name": "the next band still serves",
+     "ok": true
+    },
+    {
+     "name": "a whole kind of question served in full, then a clear failure (a teacher or parent is suggested)",
+     "ok": true,
+     "detail": "You have been through every stored question of this kind for this skill. A teacher or parent can go through it with you; nothing is repeated as new evidence."
+    },
+    {
+     "name": "both failures logged, with no learner text",
+     "ok": true
+    },
+    {
+     "name": "no request hit a missing item unexpectedly",
+     "ok": true
+    },
+    {
+     "name": "no item served twice in the same phase",
+     "ok": true
+    },
+    {
+     "name": "every item answered was served by the bank (nothing generated)",
+     "ok": true
+    },
+    {
+     "name": "pseudonymous learner record (no names or birth dates)",
+     "ok": true
+    }
+   ],
+   "findings": []
+  }
+ ]
+}
