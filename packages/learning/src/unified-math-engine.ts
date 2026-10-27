@@ -2,6 +2,7 @@
 import { assessWorking, type WorkingOptions } from "./core/working-assessment.ts";
 import { requestGeometryWorker, GeometryTransportError, type GeometryFailureCode } from "./geometry-worker.ts";
 import { MATHEMATICAL_OBLIGATION_CONTRACT, constant, statementText, symbol, validateObligation, type MathExpression, type MathematicalObligation, type MathematicalStatement } from "./mathematical-obligations.ts";
+import { assessDomainWorking, M1_CONTRACT, type M1Problem, type M1Step } from "./domains-m1.ts";
 
 export const UNIFIED_MATH_CONTRACT = "openpath-unified-math-assessment@1" as const;
 export type Classification = "verified" | "invalid" | "incomplete" | "missing-assumption" | "unsupported" | "contradictory" | "resource-exhausted" | "malformed" | "ambiguous";
@@ -12,11 +13,11 @@ export type TransferFamily = "triangle-angle-sum" | "isosceles-angle" | "similar
 export interface GeometryQuantityBinding { geometryId: string; quantity: "angle-degrees" | "segment-length"; expression: MathExpression }
 export interface CrossDomainTransfer { family: TransferFamily; geometryConclusion: { predicate: string; args: string[]; value?: unknown }; bindings: GeometryQuantityBinding[]; obligation: MathematicalObligation }
 export interface MixedProblem { domain: "mixed"; geometry: GeometryProblem; handoff?: AngleSumHandoff; transfer?: CrossDomainTransfer }
-export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem;
-export type StudentWorking = string[] | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
+export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem;
+export type StudentWorking = string[] | M1Step[] | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
 export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal }
 export interface AssessmentStep { index: number; classification: Classification; justification: string; reasoner: string; dependencies: unknown[] }
-export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode }
+export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | M1Problem["domain"]; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode }
 type GeometryNative = { outcome: string; correct: boolean | null; firstInvalidStep: number | null; steps: { index: number; status: string; explanation: string }[]; summary: string; resourceLimit: boolean; geometry: { native_verdicts: string[]; proof_dependencies: unknown[]; mathematical_dependencies: unknown[]; unresolved_obligations: string[]; skill_ids: string[]; resource_limit_reached: boolean } };
 
 const malformed = (domain: AssessmentEnvelope["domain"], why: string): AssessmentEnvelope => ({ contractVersion: UNIFIED_MATH_CONTRACT, domain, classification: "malformed", correct: null, complete: false, firstInvalidStep: null, steps: [], proofDependencies: [], domainRestrictions: [], outstandingObligations: [why], skills: [], reasoners: [{ id: "unified-dispatch", version: "u1" }], justification: why, domainPayload: null });
@@ -99,6 +100,11 @@ function missingTransferAssumptions(problem: MixedProblem, transfer: CrossDomain
 
 export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   if (!problem || typeof problem !== "object" || !("domain" in problem || "statement" in problem)) return malformed("algebra", "problem must be a typed mathematical problem");
+  if (["inequality","quadratic","function","coordinate"].includes((problem as any).domain)) {
+    if (!Array.isArray(studentWorking) || studentWorking.some(x=>!x||typeof x!=="object")) return malformed((problem as M1Problem).domain,"M1 working must contain structured mathematical steps");
+    const native=assessDomainWorking(problem as M1Problem,studentWorking as M1Step[]);
+    return {contractVersion:UNIFIED_MATH_CONTRACT,domain:native.domain,classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"math-domains-m1",dependencies:s.index?[s.index-1]:["problem"]})),proofDependencies:native.steps.map(s=>s.index?[s.index-1]:["problem"]),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"math-domains-m1",version:M1_CONTRACT}],justification:native.justification,domainPayload:native};
+  }
   if (problem.domain === "geometry") {
     if (!studentWorking || Array.isArray(studentWorking) || !("steps" in studentWorking) || !Array.isArray(studentWorking.steps)) return malformed("geometry", "geometry working must contain structured steps");
     try { return geometryEnvelope(await runGeometry(problem, studentWorking.steps, options)); } catch (error) { return { ...malformed("geometry", "geometry transport failed safely"), classification: "unsupported", failureKind: "transport", infrastructureFailure: error instanceof GeometryTransportError ? error.code : "transport", domainPayload: { transportError: error instanceof Error ? error.message : "geometry worker failure" } }; }
