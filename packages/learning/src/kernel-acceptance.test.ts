@@ -18,13 +18,19 @@ import { FAMILIES } from "./families";
 import type { Problem, Step, Justification } from "./family-kit";
 import type { Module, Screen } from "./content";
 
+/** A solved family as a complete, correctly typed Problem: the fields the production builder sets, from `solve`'s steps and answer; `over` replaces any of them. */
+function solvedProblem(def: NonNullable<ReturnType<typeof FAMILIES.get>>, params: number[], over: Partial<Problem> = {}): Problem {
+  const s = def.solve(params);
+  return { family: def.id, id: `${def.id}:${params.join(",")}`, params, competency: def.competency, skill: def.competency, form: "typed", prompt: "Solve", type: def.type, answer: String(s.answer), steps: s.steps, bugs: [], ...over };
+}
+
 // ── Helpers ──
 
 function makeProblem(
   family: string, params: number[], steps: Step[], answer: number | string = 0,
 ): Problem {
   return { family, id: `${family}:${params.join(",")}`, params, competency: `test.${family}`,
-    skill: `test.${family}`, form: "typed", steps, answer, bugs: [], figure: null } as Problem;
+    skill: `test.${family}`, form: "typed", prompt: "", type: "integer", steps, answer: String(answer), bugs: [] };
 }
 
 function makeStep(id: string, op: string, inputs: (number|string)[], value: number|string, j?: Justification): Step {
@@ -445,12 +451,7 @@ describe("acceptance: full pipeline integration", () => {
 /** Build a full TeachingPresentation through the real pipeline, same as the app. */
 function buildPresentation(familyId: string, params: number[]): TeachingPresentation {
   const def = FAMILIES.get(familyId)!;
-  const problem = def.solve(params);
-  problem.family = familyId;
-  problem.params = params;
-  problem.bugs = problem.bugs ?? def.bugs?.(params) ?? [];
-  problem.answer = String(problem.answer);
-  problem.prompt = problem.prompt ?? "Solve";
+  const problem = solvedProblem(def, params, { bugs: def.bugs(params), prompt: "Solve" });
   const module = {
     competency: def.competency, id: `m-${familyId}`, title: def.title,
     pool: { family: familyId, level: 1 }, screens: [], pools: [],
@@ -507,11 +508,7 @@ describe("acceptance: learner-facing output correctness", () => {
 
       // 5. Validation passes (math is correct)
       const def = FAMILIES.get(family)!;
-      const problem = def.solve(params);
-      problem.family = family;
-      problem.params = params;
-      problem.bugs = problem.bugs ?? [];
-      problem.answer = String(problem.answer);
+      const problem = solvedProblem(def, params, { bugs: def.bugs(params) });
       const errors = validateTeachingPresentation(problem, pres);
       assert.deepEqual(errors, [], `validation errors: ${errors.join("; ")}`);
     });
@@ -537,10 +534,7 @@ describe("acceptance: learner-facing output correctness", () => {
 
   it("before/after states are consistent across steps", () => {
     const def = FAMILIES.get("lin")!;
-    const problem = def.solve([3, 7, 4]);
-    problem.family = "lin";
-    problem.params = [3, 7, 4];
-    problem.answer = "4";
+    const problem = solvedProblem(def, [3, 7, 4], { answer: "4" });
 
     const adapted = adaptProblem(problem);
     assert.equal(adapted.fullyAdapted, true);
@@ -624,11 +618,7 @@ describe("acceptance: mathematical consistency verification", () => {
 
     // Re-adapt to get the authoritative records
     const def = FAMILIES.get("lin")!;
-    const problem = def.solve([3, 7, 4]);
-    problem.family = "lin";
-    problem.params = [3, 7, 4];
-    problem.answer = "4";
-    problem.bugs = [];
+    const problem = solvedProblem(def, [3, 7, 4], { answer: "4", bugs: [] });
     const adapted = adaptProblem(problem);
     const kSteps = kernelWorkedSteps(adapted);
 
@@ -657,11 +647,7 @@ describe("acceptance: mathematical consistency verification", () => {
     }};
 
     const def = FAMILIES.get("lin")!;
-    const problem = def.solve([3, 7, 4]);
-    problem.family = "lin";
-    problem.params = [3, 7, 4];
-    problem.answer = "4";
-    problem.bugs = [];
+    const problem = solvedProblem(def, [3, 7, 4], { answer: "4", bugs: [] });
 
     const errors = validateTeachingPresentation(problem, tampered);
     assert.ok(errors.some((e) => e.includes("expression") && e.includes("WRONG")),
@@ -678,11 +664,7 @@ describe("acceptance: mathematical consistency verification", () => {
     }};
 
     const def = FAMILIES.get("eqfrac")!;
-    const problem = def.solve([2, 3, 9]);
-    problem.family = "eqfrac";
-    problem.params = [2, 3, 9];
-    problem.answer = String(problem.answer);
-    problem.bugs = [];
+    const problem = solvedProblem(def, [2, 3, 9], { bugs: [] });
 
     const errors = validateTeachingPresentation(problem, tampered);
     assert.ok(errors.some((e) => e.includes("before-state")),
@@ -699,11 +681,7 @@ describe("acceptance: mathematical consistency verification", () => {
     }};
 
     const def = FAMILIES.get("rect")!;
-    const problem = def.solve([5, 3]);
-    problem.family = "rect";
-    problem.params = [5, 3];
-    problem.answer = String(problem.answer);
-    problem.bugs = [];
+    const problem = solvedProblem(def, [5, 3], { bugs: [] });
 
     const errors = validateTeachingPresentation(problem, tampered);
     assert.ok(errors.some((e) => e.includes("principle")),
@@ -722,11 +700,7 @@ describe("acceptance: mathematical consistency verification", () => {
       const pres = buildPresentation(family, params);
       if (pres.teachingSource !== "kernel") continue; // skip compatibility
       const def = FAMILIES.get(family)!;
-      const problem = def.solve(params);
-      problem.family = family;
-      problem.params = params;
-      problem.answer = String(problem.answer);
-      problem.bugs = [];
+      const problem = solvedProblem(def, params, { bugs: [] });
       const errors = validateTeachingPresentation(problem, pres);
       assert.deepEqual(errors, [], `${family}(${params}): ${errors.join("; ")}`);
     }

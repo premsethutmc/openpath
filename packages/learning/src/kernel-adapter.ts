@@ -258,15 +258,28 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
   ["multiply", {
     ruleId: "arithmetic.multiplicative-composition",
     principle: "Multiplication: combining equal groups",
-    buildExpr: ([a, b]) => Expr.mul(Expr.num(a), Expr.num(b)),
-    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] * inputs[1] - result) < 1e-9,
-    evidence: ([a, b], r) => `${a} × ${b} = ${r}`,
+    buildExpr: (inputs) => inputs.length === 2
+      ? Expr.mul(Expr.num(inputs[0]), Expr.num(inputs[1]))
+      : inputs.reduce((e, v, i) => i === 0 ? Expr.num(v) : Expr.mul(e, Expr.num(v)), Expr.num(0) as MathExpr),
+    verify: (inputs, result) => {
+      if (inputs.length < 2) return false;
+      const product = inputs.reduce((p, x) => p * x, 1);
+      return Math.abs(product - result) < 1e-9 ||
+        (Math.abs(result) > 1 && Math.abs((product - result) / result) < 1e-9);
+    },
+    evidence: (inputs, r) => `${inputs.join(" × ")} = ${r}`,
   }],
   ["divide", {
     ruleId: "arithmetic.multiplicative-composition",
     principle: "Division: splitting into equal parts",
     buildExpr: ([a, b]) => Expr.div(Expr.num(a), Expr.num(b)),
-    verify: (inputs, result) => inputs.length >= 2 && inputs[1] !== 0 && Math.abs(inputs[0] / inputs[1] - result) < 1e-9,
+    verify: (inputs, result) => {
+      if (inputs.length < 2 || inputs[1] === 0) return false;
+      // Exact division only — integer quotient is a different operation
+      // and the divide op does not carry information distinguishing them
+      const exact = inputs[0] / inputs[1];
+      return Math.abs(exact - result) < 1e-9;
+    },
     evidence: ([a, b], r) => `${a} ÷ ${b} = ${r}`,
   }],
   ["square", {
@@ -342,7 +355,11 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
     ruleId: "arithmetic.additive-composition",
     principle: "Regrouping: carrying or borrowing",
     buildExpr: ([a, b]) => Expr.add(Expr.num(a), Expr.num(b)),
-    verify: (inputs, result) => inputs.length >= 2 && Math.abs(inputs[0] + inputs[1] - result) < 1e-9,
+    verify: (inputs, result) => {
+      if (inputs.length < 2) return false;
+      const sum = inputs.reduce((s, x) => s + x, 0);
+      return Math.abs(sum - result) < 1e-9;
+    },
     evidence: (inputs, r) => `Regroup: ${inputs.join(", ")} → ${r}`,
   }],
   ["count on", {
@@ -385,13 +402,62 @@ const OP_RULE_MAP = new Map<string, OpMapping>([
     evidence: (inputs, r) => `mean(${inputs.join(", ")}) = ${r}`,
   }],
 
+  // ── Rounding operations ──────────────────────────────────────────────────────────
+  // Rounding is independently verifiable: round(value, place) = Math.round(value/place)*place
+  ["round", {
+    ruleId: "arithmetic.evaluate",
+    principle: "Rounding to a given place value",
+    buildExpr: ([a]) => Expr.num(a),
+    verify: (inputs, result) => {
+      // Require explicit place value — do not infer precision from the answer
+      if (inputs.length < 2 || inputs[1] <= 0) return false;
+      const value = inputs[0];
+      const place = inputs[1];
+      return Math.abs(Math.round(value / place) * place - result) < 1e-9;
+    },
+    evidence: (inputs, r) => {
+      return `round(${inputs[0]}, to nearest ${inputs[1]}) = ${r}`;
+    },
+  }],
+
+  // ── convert removed from verification ──────────────────────────────────────────────
+  // Convert verifies arithmetic (a × b = r) but not that the conversion factor is
+  // correct for the claimed unit conversion. Without source/target units, dimension
+  // compatibility cannot be validated. Retained in compatibility mode.
+
   // ── No unverified mappings below this line ─────────────────────────────────────────
   // Operations like integrate, differentiate, factorise, solve, classify,
-  // substitute, simplify, convert, expand, reduce, evaluate, count, read,
+  // substitute, simplify, expand, reduce, evaluate, count, read, convert,
   // write, compare, sort, order, place, etc. are NOT mapped because the
   // kernel cannot independently verify their results from (inputs, output)
   // alone. They remain in compatibility mode: valid teaching, no kernel label.
 ]);
+
+/**
+ * Parse a numeric value from a number or string, including fraction notation.
+ * Handles: 42, "3.14", "22/7", "1/3", "55/4".
+ * Returns null if the value cannot be parsed as a finite number.
+ */
+export function parseNumeric(v: unknown): number | null {
+  if (typeof v === "number") return isFinite(v) ? v : null;
+  if (typeof v !== "string") return null;
+  const s = v.trim();
+  if (s === "") return null;
+  // Try direct number parse first
+  const direct = Number(s);
+  if (!isNaN(direct) && isFinite(direct)) return direct;
+  // Try fraction: "22/7", "1/3", "55/4"
+  // Only match pure numeric fractions — reject anything with letters/symbols
+  const match = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+  if (match) {
+    const num = Number(match[1]);
+    const den = Number(match[2]);
+    if (!isNaN(num) && !isNaN(den) && den !== 0 && isFinite(num / den)) {
+      return num / den;
+    }
+  }
+  return null;
+}
 
 /**
  * Attempt op-based adaptation for a step without explicit justification.
@@ -406,17 +472,17 @@ function adaptFromOp(step: Step, state: MathState): AdaptedStep | null {
   const mapping = OP_RULE_MAP.get(step.op);
   if (!mapping) return null;
 
-  // Parse inputs: accept both numbers and string-encoded numbers
+  // Parse inputs: accept numbers, string-encoded numbers, and fraction strings
   const numInputs: number[] = [];
   for (const i of step.inputs || []) {
-    if (typeof i === "number") numInputs.push(i);
-    else if (typeof i === "string") {
-      const n = Number(i);
-      if (!isNaN(n)) numInputs.push(n);
-    }
+    const parsed = parseNumeric(i);
+    if (parsed !== null) numInputs.push(parsed);
   }
-  const result = typeof step.value === "number" ? step.value :
-    typeof step.value === "string" ? Number(step.value) : NaN;
+  // Parse result: also accept fraction strings like "1/4"
+  const result = (() => {
+    const p = parseNumeric(step.value);
+    return p !== null ? p : NaN;
+  })();
 
   // Every mapped op MUST pass its verify function.
   // There is no graceful degradation — failed verification means not adapted.

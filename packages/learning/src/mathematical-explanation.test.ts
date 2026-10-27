@@ -18,7 +18,13 @@ import { test } from "node:test";
 import { FAMILIES } from "./families";
 import { teachingPresentationFrom, EXPLICIT_TEACHING_FAMILIES } from "./teaching-presentation";
 import type { Module, Screen, Question } from "./content";
-import type { Justification, Step } from "./family-kit";
+import type { Justification, Problem, Step } from "./family-kit";
+
+/** A solved family as a complete, correctly typed Problem: the fields the production builder sets, from `solve`'s steps and answer; `over` replaces any of them. */
+function solvedProblem(def: NonNullable<ReturnType<typeof FAMILIES.get>>, params: number[], over: Partial<Problem> = {}): Problem {
+  const s = def.solve(params);
+  return { family: def.id, id: `${def.id}:${params.join(",")}`, params, competency: def.competency, skill: def.competency, form: "typed", prompt: "Solve", type: def.type, answer: String(s.answer), steps: s.steps, bugs: [], ...over };
+}
 
 /** Solve a family and return its raw steps with justifications. */
 function solveFamily(familyId: string, params: number[]): { steps: Step[]; answer: number | number[] | string } {
@@ -29,12 +35,7 @@ function solveFamily(familyId: string, params: number[]): { steps: Step[]; answe
 /** Build a presentation to exercise the rendering path. */
 function presentationFor(familyId: string, params: number[]) {
   const family = FAMILIES.get(familyId)!;
-  const problem = family.solve(params);
-  problem.family = familyId;
-  problem.params = params;
-  problem.bugs = problem.bugs ?? family.bugs?.(params) ?? [];
-  problem.answer = String(problem.answer);
-  problem.prompt = problem.prompt ?? `Solve: ${problem.answer}`;
+  const problem = solvedProblem(family, params, { bugs: family.bugs(params), prompt: `Solve: ${String(family.solve(params).answer)}` });
   const module: Module = {
     competency: family.competency,
     title: family.title,
@@ -42,10 +43,13 @@ function presentationFor(familyId: string, params: number[]) {
     diagnostics: [],
     strategies: [],
     practice: [],
-    pool: { family: familyId, domain: family.domain ?? [], keep: family.keep },
+    transfer: [],
+    retention: [],
+    probes: [],
+    pool: { family: familyId, version: "test" },
   };
   const screen: Screen = module.chapter[0];
-  const question: Question = { id: "test-q", prompt: problem.prompt, competency: family.competency, answers: [problem.answer] };
+  const question: Question = { id: "test-q", competency: family.competency, skill: family.competency, role: "practice", type: problem.type, prompt: problem.prompt, answer: problem.answer, solution: "", difficulty: 1, source: "test", licence: "test", review: "provisional" };
   return teachingPresentationFrom({ module, screen, problem, question, practiceIds: ["test-q"] });
 }
 
