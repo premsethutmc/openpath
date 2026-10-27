@@ -29,3 +29,4 @@ export * from "./linear-algebra-kernel.ts";
 export * from "./complex-polynomial.ts";
 export * from "./complex-kernel.ts";
 export * from "./d2-proof-state.ts";
+export * from "./cross-domain-bindings.ts";

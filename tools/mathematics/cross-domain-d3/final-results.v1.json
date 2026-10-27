@@ -1,0 +1,2116 @@
+{
+  "version": "openpath-d3-final@1",
+  "benchmarkSha256": "f1c9d49bf151287cb435064a3a779c8d51e266075804473c127e7a6f17073c9e",
+  "total": 150,
+  "exactMatches": 150,
+  "validTransfers": 60,
+  "validAccepted": 60,
+  "newlyAcceptedValidTransfers": 60,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "firstInvalidStepMatches": 55,
+  "invalidCases": 55,
+  "proofVerifiedBindings": 105,
+  "rows": [
+    {
+      "id": "d3-000",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-001",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-002",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-003",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-004",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-005",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-006",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-007",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-008",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-009",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-010",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-011",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-012",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-013",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-014",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-015",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-016",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-017",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-018",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-019",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-020",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-021",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-022",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-023",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-024",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-025",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-026",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-027",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-028",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-029",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-030",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-031",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-032",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-033",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-034",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-035",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-036",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-037",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-038",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-039",
+      "mode": "valid-reference",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-040",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-041",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-042",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-043",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-044",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-045",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-046",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-047",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-048",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-049",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-050",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-051",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-052",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-053",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-054",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-055",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-056",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-057",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-058",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-059",
+      "mode": "valid-alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-060",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-061",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-062",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-063",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-064",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-065",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-066",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-067",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-068",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-069",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-070",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-071",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-072",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-073",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-074",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-075",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-076",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-077",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-078",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-079",
+      "mode": "invalid-type",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-080",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-081",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-082",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-083",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-084",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-085",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-086",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-087",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-088",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-089",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-090",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-091",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-092",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-093",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-094",
+      "mode": "missing-assumption",
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-095",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-096",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-097",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-098",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-099",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-100",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-101",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-102",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-103",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-104",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-105",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-106",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-107",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-108",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-109",
+      "mode": "wrong-scope",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-110",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-111",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-112",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-113",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-114",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-115",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-116",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-117",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-118",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-119",
+      "mode": "domain-mismatch",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "verifiedBindingCount": 1,
+      "match": true
+    },
+    {
+      "id": "d3-120",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-121",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-122",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-123",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-124",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-125",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-126",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-127",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-128",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-129",
+      "mode": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-130",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-131",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-132",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-133",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-134",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-135",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-136",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-137",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-138",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-139",
+      "mode": "unverified-source",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-140",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-141",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-142",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-143",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-144",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-145",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-146",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-147",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-148",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    },
+    {
+      "id": "d3-149",
+      "mode": "resource-exhausted",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "verifiedBindingCount": 0,
+      "match": true
+    }
+  ]
+}
