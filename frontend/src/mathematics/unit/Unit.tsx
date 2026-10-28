@@ -592,7 +592,7 @@ function Inputs({ q, values, setValues, disabled }: { q: UnitQuestion; values: s
             <span>{label}</span>
             <span className="number">
               <button type="button" className="sign" disabled={disabled} aria-label={`Make ${label} ${negative ? "positive" : "negative"}`} onClick={() => set(i, negative ? v.slice(1) : `−${v}`)}>±</button>
-              <input inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={v} disabled={disabled} onChange={(e) => set(i, e.target.value.replace(/[^0-9/−-]/g, "").replace(/-/g, "−"))} placeholder={q.type === "integer" ? "e.g. 12" : "e.g. −5/2"} aria-label={label} />
+              <input inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={v} disabled={disabled} onChange={(e) => set(i, e.target.value.replace(q.type === "integer" ? /[^0-9.−-]/g : /[^0-9/−-]/g, "").replace(/-/g, "−"))} placeholder={q.type === "integer" ? "e.g. 12" : "e.g. −5/2"} aria-label={label} />
             </span>
           </label>
         );

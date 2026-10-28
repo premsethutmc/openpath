@@ -27,6 +27,7 @@
 import spec from "../../../content/mathematics/programs/completing-the-square.v1.json";
 import { indexContent, scoreCode } from "../../english-core/src/content";
 import type { AssistedResponseEvent, EvidenceEvent, EvidenceUse, HintEvent, Item } from "../../english-core/src/types";
+import { canonicalInteger, joinParts } from "../../learning/src/answer-core";
 import { sharedProfile } from "./canonical";
 import { mathematicsLedger } from "./registration";
 
@@ -228,7 +229,7 @@ const show = ([n, d]: [number, number]) => (d === 1 ? String(n) : `${n}/${d}`);
 export function normalise(q: UnitQuestion, raw: string): string | null {
   const t = raw.trim().replace(/−/g, "-");
   if (q.type === "choice") return /^[A-D]$/i.test(t) ? t.toUpperCase() : null;
-  if (q.type === "integer") return /^[+-]?\d{1,9}(\.\d{0,9})?$/.test(t) ? String(Number(t)) : null;
+  if (q.type === "integer") return canonicalInteger(t);
   if (q.type === "fraction") {
     const r = rational(t);
     return r && show(r);
@@ -237,8 +238,7 @@ export function normalise(q: UnitQuestion, raw: string): string | null {
   if (parts.length !== (q.fields?.length ?? 0)) return null;
   const values = parts.map(rational);
   if (values.some((v) => !v)) return null;
-  const sorted = q.unordered ? [...(values as [number, number][])].sort((a, b) => a[0] / a[1] - b[0] / b[1]) : (values as [number, number][]);
-  return sorted.map(show).join(",");
+  return joinParts((values as [number, number][]).map((v) => ({ show: show(v), value: v[0] / v[1] })), !!q.unordered);
 }
 export const isCorrect = (q: UnitQuestion, raw: string) => normalise(q, raw) !== null && normalise(q, raw) === normalise(q, q.answer);
 

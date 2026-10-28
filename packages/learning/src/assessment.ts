@@ -11,6 +11,7 @@
  */
 import { assessAnswerFirst, type AnswerFirstAssessment } from "./answer-first.ts";
 import { problemOf } from "./families.ts";
+import { CLOSED_ARITHMETIC_FAMILIES, closedExpression } from "./closed-arithmetic.ts";
 import type { Problem } from "./family-kit.ts";
 import type { AnswerType } from "./answer-types.ts";
 
@@ -50,6 +51,9 @@ export const STATEMENTS: Record<string, Shape> = {
   quad: { kind: "set", variable: "x", assumptions: ["x real", "both roots required"], statement: ([p, q]) => `x^2${sg(p)}${Math.abs(p)}x${sg(q)}${Math.abs(q)}=0`, numbers: ([p, q]) => [p, q] },
   meet: { kind: "set", variable: "x", assumptions: ["x real (the question lists the whole-number meeting points in −4…4; the equation has no other real solutions)", "both required"], statement: ([m, c]) => `x^2=${m}x${sg(c)}${Math.abs(c)}`, numbers: ([m, c]) => [m, c] },
 };
+/** a numeric value whose statement is the expression the prompt shows (closed-arithmetic.ts) */
+const PROMPT_VALUE: Shape = { kind: "value", variable: null, assumptions: ["value of the closed numeric expression shown"], statement: () => "", numbers: () => [] };
+const shapeOf = (c: AssessmentContract): Shape | undefined => STATEMENTS[c.questionId.split(":")[1]] ?? (c.capability === "exact-arithmetic" ? PROMPT_VALUE : undefined);
 const SUPER: Record<string, string> = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9" };
 const digitsOf = (s: string) => (s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, (c) => ` ${SUPER[c]} `).match(/\d+/g) ?? []).map(Number);
 
@@ -102,7 +106,9 @@ export function contractOfProblem(pr: Problem, questionId: string): AssessmentCo
   if (pr.type === "written") return { ...base, problem: null, expected: { stored: pr.answer, display: pr.answer, values: [] }, variable: null, assumptions: [], mode: "method-required", capability: "educator", verification: "human", reason: "written answers are marked by an educator" };
   if (!exp) return { ...base, problem: null, expected: { stored: pr.answer, display: pr.answer, values: [] }, variable: null, assumptions: [], capability: "none", verification: "held", reason: "the stored choice does not name an option" };
   const expected = { stored: pr.answer, ...exp };
-  const shape = STATEMENTS[pr.family];
+  const prompted = !STATEMENTS[pr.family] && CLOSED_ARITHMETIC_FAMILIES.has(pr.family) ? closedExpression(pr.prompt) : null;
+  const shape = STATEMENTS[pr.family] ?? (prompted ? { ...PROMPT_VALUE, statement: () => prompted } : undefined);
+  const promptDerived = !STATEMENTS[pr.family] && !!shape;
   if (!shape) return { ...base, problem: null, expected, variable: null, assumptions: [], capability: "none", verification: "legacy", reason: `no independent kernel for family ${pr.family}; the generator's answer is the only authority` };
   const statement = shape.statement(pr.params), problem = { domain: "algebra" as const, statement };
   const held = (reason: string, wrong: string[] = []): AssessmentContract => ({ ...base, problem, expected, variable: shape.variable, assumptions: shape.assumptions, capability: shape.kind === "value" ? "exact-arithmetic" : "exact-solution-set", verification: "held", reason, checkedWrong: wrong });
@@ -111,6 +117,8 @@ export function contractOfProblem(pr: Problem, questionId: string): AssessmentCo
   const pool = [...shown];
   for (const n of need) { if (n === 1) continue; /* an implicit coefficient 1 is not written */ const i = pool.indexOf(n); if (i < 0) return held(`the independent statement ${statement} uses ${n}, which the prompt does not show`); pool.splice(i, 1); }
   const good = answerText(shape.kind, shape.variable, exp.display);
+  // a prompt-derived rule never makes a question worse than before: an answer it cannot read keeps the legacy comparison
+  if (!good.ok && promptDerived) return { ...base, problem: null, expected, variable: null, assumptions: [], capability: "none", verification: "legacy", reason: `stored answer "${exp.display}" is not a plain number; legacy comparison kept` };
   if (!good.ok) return held(`the stored answer "${exp.display}" is not readable (${good.why})`);
   const r = kernel(shape, statement, good);
   if (!r || r.answer.credit !== true) return held(`the independent checker does not confirm the stored answer: ${r?.answer.reason ?? "unreadable"}`);
@@ -177,11 +185,12 @@ export function assessSubmission(c: AssessmentContract | null, s: Submission): A
     if (legacy === null) return pending({ source: "legacy" }, "This answer could not be checked automatically. It is saved and has not been marked wrong.", null, true);
     return done({ credit: legacy, evidence: ev({ answerCorrect: legacy, source: "legacy" }, asked), feedback: { kind: legacy ? "correct" : "incorrect", message: legacy ? "Correct." : "Not quite." }, clarification: null });
   }
-  const shape = STATEMENTS[c.questionId.split(":")[1]];
+  const shape = shapeOf(c)!;
   let response = s.response;
   if (c.answerType === "choice") { const i = response.trim().toUpperCase().charCodeAt(0) - 65; const o = response.trim().length === 1 ? (problemOf(c.questionId)?.options ?? [])[i] : undefined; if (o === undefined) return pending({}, "Choose one of the options.", asked ? null : { kind: "answer-field", prompt: "Choose one of the options." }, asked > 0); response = o; }
   const ans = answerText(shape.kind, c.variable, response);
   const readHint = c.answerType === "integer" || shape.kind === "value" ? "a number" : shape.kind === "set" ? "the solutions as numbers separated by commas" : "a number";
+  if (!ans.ok && legacy !== null && shape === PROMPT_VALUE && /^[\d\s./+\-−]+$/.test(response)) return done({ credit: legacy, evidence: ev({ answerCorrect: legacy, source: "legacy" }, asked), feedback: { kind: legacy ? "correct" : "incorrect", message: legacy ? "Correct." : "Not quite." }, clarification: null });
   if (!ans.ok) return pending({}, `Your answer could not be read as ${readHint}. It has not been marked wrong.`, asked ? null : { kind: "answer-field", prompt: `Type just your final answer in the answer box, as ${readHint}.` }, asked > 0);
   const normalised = c.answerType === "choice" ? undefined : ans.values.join(", ");
   const lines = (s.working ?? []).filter((l) => l.trim());

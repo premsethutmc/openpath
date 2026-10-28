@@ -3,6 +3,7 @@
  * Marking is deterministic and checks mathematical equivalence (packages/mathematics/src/answers.ts): 2/4 = 1/2,
  * "x^2+2x" = "2x + x^2", "2, -1" = "-1,2" for sets.
  */
+import { canonicalInteger, unbrace } from "./answer-core";
 import data from "../../../content/learning/modules.v1.json";
 import problemsData from "../../../content/learning/problems.v1.json";
 import goalsData from "../../../content/learning/goals.v1.json";
@@ -197,11 +198,11 @@ export function canonical(q: Pick<Question, "type"> & { answer?: string }, raw: 
   try {
     if (q.type === "choice") return /^[A-D]$/i.test(t) ? t.toUpperCase() : null;
     // an exact whole number may be typed with a zero decimal part ("5.0" is 5); "5.5" is a different value, not a misspelling
-    if (q.type === "integer") return /^[+-]?\d{1,9}(\.\d{0,9})?$/.test(t) ? String(Number(t)) : null;
+    if (q.type === "integer") return canonicalInteger(t);
     if (q.type === "fraction") return show(parseNumber(t));
     if (q.type === "polynomial") return polynomial(t);
     // an unordered set may be written with its braces: {1, 2} is 1, 2
-    const body = q.type === "set" ? t.replace(/^\{([^{}]*)\}$/, "$1") : t;
+    const body = q.type === "set" ? unbrace(t) : t;
     const parts = body.split(",").map((x) => show(parseNumber(x.trim())));
     return new Set(parts).size === parts.length ? [...parts].sort().join(",") : null;
   } catch {

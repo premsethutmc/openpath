@@ -25,7 +25,7 @@ describe("contract: independent validation before a question may be used", () =>
     expect(contractOfProblem({ ...q, prompt: "Solve x² − 5x + 7 = 0." }, "bad").verification).toBe("held");           // statement not the question shown
   });
   test("families without a kernel are reported as legacy, written answers as educator-marked", () => {
-    const other = [...["rect", "fadd", "pct", "root"]].map((f) => pool(f).items[0]).filter(Boolean);
+    const other = [...["rect", "pct", "root", "avfexp"]].map((f) => pool(f).items[0]).filter(Boolean);
     expect(other.length).toBeGreaterThan(0);
     for (const q of other) expect(contractFor(q.id)!.verification).toBe("legacy");
     expect(legacyContract({ id: "w", type: "written", answer: "", prompt: "Explain" }).verification).toBe("human");
