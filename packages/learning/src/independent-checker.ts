@@ -952,7 +952,10 @@ export function checkAlgebraSubmission(statement: string, parsed: NaturalParseRe
 }
 function run(statement: string, parsed: NaturalParseResult): AlgebraCheck {
   if (parsed.classification !== "parsed" || !parsed.lines.length) return empty("unsupported", "the working could not be parsed");
-  const { verb, body } = stripVerb(statement);
+  const { verb, body: body0 } = stripVerb(statement);
+  // E7 repair C: where a condition is written must not change what it means: leading inequality-only conditions ("x>2, x^2=16") are moved behind the equation they restrict
+  const lead = /^((?:[^,=<>≤≥]*[<>≤≥][^,=<>≤≥]*,\s*)+)([^<>≤≥]*=[^<>≤≥]*)$/.exec(body0);
+  const body = lead ? `${lead[2].trim()}, ${lead[1].trim().replace(/,$/, "")}` : body0;
   const whenM = /^(.*?)\s+(?:when|for|if|where|given(?:\s+that)?)\s+(.+)$/i.exec(body);
   const ps = parseNaturalWorking({ format: "natural", text: whenM ? whenM[1] : body });
   if (ps.classification !== "parsed" || ps.lines.length !== 1) return empty("unsupported", "the problem statement is not a single parseable mathematical statement");
@@ -961,7 +964,18 @@ function run(statement: string, parsed: NaturalParseResult): AlgebraCheck {
   const parsed2: NaturalParseResult = { ...parsed, lines };
   const names = new Set<string>(); relationVars(rel0, names); const classOf: string[] = lines.map((l) => (isProseExpression(l.relation) ? "prose" : "math"));
   const texts = lines.map((l) => l.source.text);
-  if (whenM) {
+  // E7 repair C: premises are part of the problem wherever they are written (", x<0" after the equation, "where/for/given x<0" after it, or none). They are collected once, here, for every mode.
+  const premises: NaturalRelation[] = [...(ps.lines[0].restrictions ?? [])];
+  const solveProblem = rel0.kind === "equation" || rel0.kind === "inequality";
+  if (whenM && solveProblem) {
+    const pp = parseNaturalWorking({ format: "natural", text: whenM[2] });
+    if (pp.classification !== "parsed" || pp.lines.length !== 1) throw new Unsupported("the condition attached to the problem is not parseable");
+    const pr = pp.lines[0].relation, atoms = pr.kind === "conjunction" ? pr.parts : [pr];
+    if (!atoms.every((a) => a.kind === "equation" || a.kind === "inequality")) throw new Unsupported("the condition attached to the problem must be equations or inequalities");
+    premises.push(...atoms, ...(pp.lines[0].restrictions ?? []));
+  }
+  if (premises.length && !(solveProblem && rel0.kind !== "conjunction")) throw new Unsupported("a condition attached to this kind of problem is not supported (it is not silently ignored)");
+  if (whenM && !solveProblem) {
     if (rel0.kind !== "expression") throw new Unsupported("an evaluation problem needs an expression");
     const bp = parseNaturalWorking({ format: "natural", text: whenM[2] });
     if (bp.classification !== "parsed" || bp.lines.length !== 1) throw new Unsupported("the given values are not parseable");
@@ -977,13 +991,24 @@ function run(statement: string, parsed: NaturalParseResult): AlgebraCheck {
   if (names.size > 1) throw new Unsupported("more than one variable");
   const name = names.size ? [...names][0] : null;
   if (rel0.kind === "expression") return name === null ? numericMode(rel0.expression, parsed2, classOf) : identityMode(rel0.expression, parsed2, name, classOf);
-  if (rel0.kind === "equation" || rel0.kind === "inequality") return solutionMode(rel0, parsed2, name, classOf);
+  if (rel0.kind === "equation" || rel0.kind === "inequality") return solutionMode(rel0, parsed2, name, classOf, premises);
   throw new Unsupported(`${rel0.kind} problems are outside the checker scope`);
 }
 
-function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: string | null, classOf: string[]): AlgebraCheck {
+/** E7 repair C: the problem's solution set is the relation's solutions that also satisfy every premise (task-imposed conditions, wherever they were written) */
+function withPremises(base: Stmt, premises: Stmt[], text: string): Stmt {
+  if (!premises.length) return base;
+  const all = [base, ...premises];
+  return { kind: "set", text, critical: all.flatMap((x) => x.critical), holds: (v) => all.every((x) => x.holds(v)), defined: (v) => all.every((x) => x.defined(v)) };
+}
+function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: string | null, classOf: string[], premiseRels: NaturalRelation[] = []): AlgebraCheck {
   if (name === null) throw new Unsupported("the problem statement has no variable");
-  const stmt0 = stmtFromRelation(rel0, name, "problem"), lines = parsed.lines;
+  const premiseStmts = premiseRels.map((pr) => { const vs = new Set<string>(); relationVars(pr, vs); if ([...vs].some((n) => n !== name)) throw new Unsupported("a condition mentions a variable other than the one being solved"); return stmtFromRelation(pr, name, "premise"); });
+  if (premiseStmts.length) { // contradictory premises: no value satisfies them, so there is nothing to solve under them
+    const pf = profile(premiseStmts), only = pf.membership; if (premiseStmts.every((x) => x) && ![...pf.gaps.keys(), ...pf.points.keys()].some((k) => premiseStmts.every((x) => (k < pf.gaps.length ? x.holds(rat(pf.gaps[k])) : x.holds(pf.points[k - pf.gaps.length]))))) throw new Unsupported("the stated conditions contradict each other");
+    void only;
+  }
+  const stmt0 = withPremises(stmtFromRelation(rel0, name, "problem"), premiseStmts, "problem with its conditions"), lines = parsed.lines;
   const out: CheckedLine[] = []; const chain: { stmt: Stmt; index: number; rel: NaturalRelation; solved: boolean }[] = [];
   let prev = stmt0, prevRel: SetRelation | null = null; void prevRel;
   let unresolved: number | null = null, firstInvalid: number | null = null, narrowing = -1, widening = -1, falseCompleteness: number | null = null, missingAssumptionAt: number | null = null;

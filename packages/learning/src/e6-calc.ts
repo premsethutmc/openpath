@@ -611,10 +611,7 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
     // every non-integral, constant-free member of a chain that states an integral lacks the constant of integration
     const constantless = members.some((m, k) => !hasNode(m, (x) => x.t === "I") && !hasNode(m, (x) => x.t === "C") && k > 0);
     // domain rule: ln(p) without |.| silently assumes p > 0
-    const logs = plainLogArgs(last).concat(plainLogArgs(lastVal)).filter((a) => !visiblyPositive(a) && !(a.t === "pow" && a.a.t === "s") && hasVar(a, v));
-    const logReqs: Req[] = [];
-    for (const a of logs) { const rr = guard(() => domainReqs(fn("ln", a), v)); if (!isJudge(rr)) for (const r of rr) if (r.kind === "positive" && !implied.has(r.key)) logReqs.push(r); }
-    const posOfIntegrand = logReqs.filter((r) => !satisfied(r, env.stated, env.dom.components));
+    const posOfIntegrand = logDomainGaps([last, lastVal], v, implied, env.stated, env.dom.components);
     if (posOfIntegrand.length && closed) {
       const hard = posOfIntegrand.filter((r) => !r.stateable);
       if (hard.length) { b.add(i, uns("the logarithm's domain cannot be stated in supported notation")); return; }
@@ -633,6 +630,46 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
   return finish(parsed, b, { domain: "calculus", family: "indefinite-integral", nativeComplete: complete, obligations: complete ? [] : [why], notes, finalValue: complete ? { kind: "expression", text: finalText } : null });
 }
 
+/** E7 repair B: THE log-domain rule, shared by the natural chain and the typed gate. ln(p) without |.| silently assumes p > 0: every such requirement the integrand's own domain does not imply and the task/stated restrictions do not discharge. */
+function logDomainGaps(vals: A[], v: string, implied: Set<string>, stated: Stated[], components: Stated[][] | null): Req[] {
+  const logs = vals.flatMap((x) => plainLogArgs(x)).filter((a) => !visiblyPositive(a) && !(a.t === "pow" && a.a.t === "s") && hasVar(a, v));
+  const reqs: Req[] = [];
+  for (const a of logs) { const rr = guard(() => domainReqs(fn("ln", a), v)); if (!isJudge(rr)) for (const r of rr) if (r.kind === "positive" && !implied.has(r.key)) reqs.push(r); }
+  return reqs.filter((r) => !satisfied(r, stated, components));
+}
+/** E7 repair B: THE continuity screen for the fundamental theorem (exact rational grid; a hit only ever rejects), shared by the natural chain and the typed gate */
+function singularOnInterval(f: A, v: string, a: number, z: number): boolean {
+  const N0 = 2520;
+  for (let k = 0; k <= N0; k++) { const x = a + ((z - a) * k) / N0; let y: number; try { y = evalNum(f, { [v]: x }); } catch { return true; } if (!Number.isFinite(y) || Math.abs(y) > 1e9) return true; }
+  return false;
+}
+export interface TypedDomainGap { kind: "missing-assumption" | "unsupported"; reason: string }
+/**
+ * E7 repair B: the typed calculus route enforces the same domain semantics as the natural route, with the same functions. `claims` are the expression claims of the submitted typed steps.
+ * Returns the gap that forbids a verified verdict, or null when the typed work respects the task's domain.
+ */
+export function typedCalculusDomainGap(problem: CalculusProblem, claims: Expr[]): TypedDomainGap | null {
+  const v = (problem as { variable?: string }).variable ?? "x", notes: string[] = [];
+  let dom: TaskDom; try { dom = taskDomOf(buildProofContext(problem), v, notes); } catch { return { kind: "unsupported", reason: "the task's domain could not be read, so the work cannot be certified against it" }; }
+  try {
+    if (problem.task === "definite-integral") {
+      if (problem.improper) return null;
+      const g0 = signResolve(fromExpr(problem.integrand), v, dom.stated, dom.components);
+      const lo = evalNum(parseExpression(String(problem.lower), { fnNames: new Set(), variable: v }), {}), hi = evalNum(parseExpression(String(problem.upper), { fnNames: new Set(), variable: v }), {});
+      if (singularOnInterval(g0, v, lo, hi)) return { kind: "unsupported", reason: "the integrand is not continuous on the interval, so the fundamental theorem does not apply directly (treat the discontinuity as an improper integral)" };
+      for (const c of claims) if (singularOnInterval(fromExpr(c), v, lo, hi)) return { kind: "unsupported", reason: "the antiderivative is not defined on the whole interval" };
+      return null;
+    }
+    if (problem.task === "indefinite-integral") {
+      const implied = impliedOf(fromExpr(problem.integrand), v);
+      const gaps = logDomainGaps(claims.map(fromExpr), v, implied, dom.stated, dom.components);
+      if (gaps.length) return gaps.some((r) => !r.stateable) ? { kind: "unsupported", reason: "the logarithm's domain cannot be stated in supported notation" } : { kind: "missing-assumption", reason: `state the domain ${gaps.map((r) => r.text).join(", ")} (a logarithm without absolute value assumes it)` };
+      return null;
+    }
+  } catch { return problem.task === "definite-integral" ? { kind: "unsupported", reason: "continuity of the integrand on the interval could not be established" } : null; }
+  return null;
+}
+
 // ---------------------------------------------------------------------------------------------- definite integral
 function boundQ(a: A | undefined): Q | null { return a ? constQ(a) : null; }
 function constOnly(a: A): boolean { return !hasNode(a, (x) => x.t === "s"); }
@@ -645,12 +682,7 @@ function definite(problem: Extract<CalculusProblem, { task: "definite-integral" 
   const implied = impliedOf(g0, v);
   const c = { conclusions: [] as { i: number; s: ReturnType<typeof readStatement> }[] };
   // the integrand must be continuous on [lo, hi] for the fundamental theorem; screened on an exact rational grid (a hit only ever rejects)
-  const singular = (f: A, a: number, z: number): boolean => {
-    const N0 = 2520;
-    for (let k = 0; k <= N0; k++) { const x = a + ((z - a) * k) / N0; let y: number; try { y = evalNum(f, { [v]: x }); } catch { return true; } if (!Number.isFinite(y) || Math.abs(y) > 1e9) return true; }
-    return false;
-  };
-  const isSingular = guard(() => singular(g0, lo0, hi0));
+  const isSingular = guard(() => singularOnInterval(g0, v, lo0, hi0));
   if (isJudge(isSingular)) { fillRest(rows, b, isSingular.reason, isSingular.status); return finish(parsed, b, { domain: "calculus", family: "definite-integral", nativeComplete: false, obligations: [isSingular.reason], notes }); }
   if (isSingular) { fillRest(rows, b, "the integrand is not continuous on the interval, so the fundamental theorem does not apply directly"); return finish(parsed, b, { domain: "calculus", family: "definite-integral", nativeComplete: false, obligations: ["treat the discontinuity as an improper integral"], notes }); }
   let trueValue: A | null = null; let valueKnown = false; let finalOk = false; let finalText = ""; let finalRow = -1;
@@ -681,7 +713,7 @@ function definite(problem: Extract<CalculusProblem, { task: "definite-integral" 
         const rel = guard(() => relate(dF, g0, v, env, false)); if (isJudge(rel)) { b.add(i, rel); return; }
         if (rel.status === "different") { b.add(i, bad("the bracketed function is not an antiderivative of the integrand")); return; }
         if (rel.status === "unproven") { b.add(i, uns(rel.note)); return; }
-        if (singular(F, lo0, hi0)) { b.add(i, uns("the antiderivative is not defined on the whole interval")); return; }
+        if (singularOnInterval(F, v, lo0, hi0)) { b.add(i, uns("the antiderivative is not defined on the whole interval")); return; }
         const val = add(substitute(F, v, hiA), neg(substitute(F, v, loA)));
         if (!valueKnown) { trueValue = val; valueKnown = true; }
         vals.push({ kind: "const", a: val }); evSeen = true; continue;

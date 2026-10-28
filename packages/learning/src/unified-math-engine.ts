@@ -6,6 +6,7 @@ import { requestGeometryWorker, GeometryTransportError, type GeometryFailureCode
 import { MATHEMATICAL_OBLIGATION_CONTRACT, constant, statementText, symbol, validateObligation, type MathExpression, type MathematicalObligation, type MathematicalStatement } from "./mathematical-obligations.ts";
 import { assessDomainWorking, M1_CONTRACT, type M1Problem, type M1Step } from "./domains-m1.ts";
 import { assessM2Working, M2_CONTRACT, type M2Problem, type M2Step } from "./domains-m2.ts";
+import { typedCalculusDomainGap } from "./e6-calc.ts";
 import { assessCalculusWorking, CALCULUS_CONTRACT, type CalculusProblem, type CalculusStep } from "./calculus-core.ts";
 import { assessCalculusMethodWorking, CALCULUS_METHODS_CONTRACT, type CalculusMethodProblem, type CalculusMethodStep } from "./calculus-methods.ts";
 import { assessSymbolicWorking, SYMBOLIC_EQUIVALENCE_CONTRACT, type SymbolicBudget, type SymbolicProblem, type SymbolicStep } from "./symbolic-equivalence.ts";
@@ -381,7 +382,10 @@ async function assessCandidateBase(problem: MathematicalProblem, studentWorking:
   }
   if ((problem as any).domain === "calculus") {
     if (!Array.isArray(studentWorking) || studentWorking.some(x=>!x||typeof x!=="object")) return malformed("calculus","calculus working must contain structured mathematical steps");
-    const native=assessCalculusWorking(problem as CalculusProblem,studentWorking as CalculusStep[]);
+    const native0=assessCalculusWorking(problem as CalculusProblem,studentWorking as CalculusStep[]);
+    // E7 repair B: the typed route is held to the same domain semantics as the natural route (same functions): a verified typed result that ignores the task's domain is withdrawn
+    const gap=native0.classification==="verified"?typedCalculusDomainGap(problem as CalculusProblem,(studentWorking as CalculusStep[]).flatMap(s=>s.claim?.kind==="expression"?[s.claim.value]:[])):null;
+    const native=gap?{...native0,classification:gap.kind as never,correct:null as never,complete:false,outstandingObligations:[...native0.outstandingObligations,gap.reason],justification:`domain: ${gap.reason}; `+native0.justification,steps:native0.steps.map(s=>s.classification==="verified"?{...s,classification:gap.kind as never}:s)}:native0;
     return {contractVersion:UNIFIED_MATH_CONTRACT,domain:"calculus",classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"calculus:exact",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"calculus:exact",version:CALCULUS_CONTRACT}],justification:native.justification,domainPayload:native};
   }
   if (problem.domain === "geometry") {

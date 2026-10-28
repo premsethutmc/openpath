@@ -80,17 +80,35 @@ function impliedOf(problem: unknown, v: string | null): ContextItem[] {
   return out;
 }
 
+/**
+ * E7 repair C: a statement problem ("2x = 6, x < 0", "x^2 = 16 where x > 0") carries its premises and its variable in the text. They are read here, once, into the same
+ * immutable context a typed problem has, so that a premise means the same wherever it is written and a student assumption about the problem's own variable is not an "unrelated quantity".
+ */
+function statementPremises(statement: string): { restrictions: string[]; letters: string[] } {
+  const body = statement.replace(/^\s*(?:solve|find|determine|simplify|evaluate|compute|calculate)\b/i, "").replace(/\b(?:such that|given that|provided that|where|when|for|if|given|with)\b/gi, ",");
+  const REL = /^\s*([a-z])\s*(<=|>=|!=|<|>|≤|≥|≠)\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)\s*$/, REV = /^\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)\s*(<=|>=|!=|<|>|≤|≥|≠)\s*([a-z])\s*$/;
+  const FLIP: Record<string, string> = { "<": ">", ">": "<", "<=": ">=", ">=": "<=", "≤": "≥", "≥": "≤", "!=": "!=", "≠": "≠" };
+  const restrictions: string[] = [], letters = new Set<string>();
+  for (const part of body.split(/,|;|\band\b/i)) {
+    if (!/[=<>≤≥≠]/.test(part)) continue;
+    for (const m of part.replace(/[A-Za-z]{2,}/g, " ").match(/(?<![A-Za-z])[a-z](?![A-Za-z])/g) ?? []) letters.add(m);
+    const a = REL.exec(part), b = REV.exec(part);
+    if (a) restrictions.push(`${a[1]} ${a[2]} ${a[3]}`); else if (b) restrictions.push(`${b[3]} ${FLIP[b[2]]} ${b[1]}`);
+  }
+  return { restrictions, letters: [...letters] };
+}
 // ------------------------------------------------------------------------------------------------ construction
 export function buildProofContext(problem: unknown): ProofContext {
   const p = (problem && typeof problem === "object" ? problem : {}) as { restrictions?: unknown; domainComponents?: unknown; assumptions?: unknown; coefficientDomain?: unknown; variable?: unknown; data?: unknown };
   const premises: ContextItem[] = []; flatten(p.data, "data", premises);
-  const restrictions = (Array.isArray(p.restrictions) ? p.restrictions : []).filter((s): s is string => typeof s === "string");
+  const stated = typeof (p as { statement?: unknown }).statement === "string" ? statementPremises((p as { statement: string }).statement) : { restrictions: [] as string[], letters: [] as string[] };
+  const restrictions = [...new Set([...(Array.isArray(p.restrictions) ? p.restrictions : []).filter((s): s is string => typeof s === "string"), ...stated.restrictions])];
   const branches = Array.isArray(p.domainComponents) && p.domainComponents.length ? p.domainComponents.filter((s): s is string => typeof s === "string") : null;
   const assumptions = [...new Set([...(Array.isArray(p.assumptions) ? p.assumptions.filter((s): s is string => typeof s === "string") : []), ...(p.coefficientDomain === "real" ? ["real-coefficients"] : [])])].sort();
   const v = typeof p.variable === "string" ? p.variable : null;
   const unreadable = [...restrictions, ...(branches ?? [])].filter((s) => !parseConstraints(s));
   const implied = impliedOf(problem, v);
-  const vars = new Set<string>(v ? [v] : []);
+  const vars = new Set<string>(v ? [v] : stated.letters);
   for (const s of [...restrictions, ...(branches ?? []), ...implied.map((i) => i.text)]) for (const c of parseConstraints(s) ?? []) vars.add(c.v);
   const taskPart = { premises: premises.map((i) => i.text), restrictions, branches, assumptions, implied: implied.map((i) => i.text) };
   return deepFreeze({ contract: PROOF_CONTEXT_CONTRACT, digest: sha(taskPart), premises, restrictions, branches, assumptions, implied, proved: [], student: [], unresolved: [], unreadable, variables: [...vars].sort() });
