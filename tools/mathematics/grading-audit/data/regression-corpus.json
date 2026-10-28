@@ -1,0 +1,398 @@
+[
+ {
+  "id": "gen:adexp:1,4,0,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "1406",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:1,4,0,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "1407",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:1,4,0,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:adexp:2,0,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "2098",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:2,0,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "2099",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:2,0,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:adexp:3,1,0,7:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "3107",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:3,1,0,7:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "3108",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:3,1,0,7:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:adexp:4,1,5,1:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "4151",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:4,1,5,1:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "4152",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:4,1,5,1:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:adexp:4,9,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "4998",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:4,9,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "4999",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:4,9,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:adexp:5,8,3,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "5836",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:5,8,3,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "5837",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:5,8,3,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:adexp:6,5,9,3:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "6593",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:6,5,9,3:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "6594",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:6,5,9,3:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:adexp:7,4,8,1:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "7481",
+  "expect": true
+ },
+ {
+  "id": "gen:adexp:7,4,8,1:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "7482",
+  "expect": false
+ },
+ {
+  "id": "gen:adexp:7,4,8,1:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:aiintx:1,-9,-3,-32,-2:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "11",
+  "expect": true
+ },
+ {
+  "id": "gen:aiintx:1,-9,-3,-32,-2:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "12",
+  "expect": false
+ },
+ {
+  "id": "gen:aiintx:1,-9,-3,-32,-2:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:aiintx:1,-7,8,18,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "-59",
+  "expect": true
+ },
+ {
+  "id": "gen:aiintx:1,-7,8,18,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "-58",
+  "expect": false
+ },
+ {
+  "id": "gen:aiintx:1,-7,8,18,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:aiintx:1,-4,-7,-24,-8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "25",
+  "expect": true
+ },
+ {
+  "id": "gen:aiintx:1,-4,-7,-24,-8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "26",
+  "expect": false
+ },
+ {
+  "id": "gen:aiintx:1,-4,-7,-24,-8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:aiintx:1,-2,2,30,-5:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "2",
+  "expect": true
+ },
+ {
+  "id": "gen:aiintx:1,-2,2,30,-5:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "3",
+  "expect": false
+ },
+ {
+  "id": "gen:aiintx:1,-2,2,30,-5:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:aiintx:1,3,-3,-48,-3:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "-25",
+  "expect": true
+ },
+ {
+  "id": "gen:aiintx:1,3,-3,-48,-3:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "-24",
+  "expect": false
+ },
+ {
+  "id": "gen:aiintx:1,3,-3,-48,-3:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:aiintx:1,7,-4,36,-9:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "-24",
+  "expect": true
+ },
+ {
+  "id": "gen:aiintx:1,7,-4,36,-9:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "-23",
+  "expect": false
+ },
+ {
+  "id": "gen:aiintx:1,7,-4,36,-9:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:1,3,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "92",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:1,3,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "93",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:1,3,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:5,5,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "105",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:5,5,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "106",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:5,5,6:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:12,6,24:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "1944",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:12,6,24:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "1945",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:12,6,24:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:18,3,5:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "120",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:18,3,5:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "121",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:18,3,5:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:21,1,12:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "318",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:21,1,12:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "319",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:21,1,12:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:26,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "460",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:26,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "461",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:26,9,8:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:31,-1,7:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "196",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:31,-1,7:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "197",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:31,-1,7:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ },
+ {
+  "id": "gen:auaps:35,9,12:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "1014",
+  "expect": true
+ },
+ {
+  "id": "gen:auaps:35,9,12:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "1015",
+  "expect": false
+ },
+ {
+  "id": "gen:auaps:35,9,12:w",
+  "defect": "G1 word form held (correct answer never credited)",
+  "response": "???",
+  "expect": null
+ }
+]

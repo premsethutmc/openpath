@@ -39,10 +39,10 @@ WRITTEN_LIMIT = 16000  # a written answer, or a drawing with its note (draw@1; f
 RETENTION_DELAY = timedelta(days=7)
 INDEPENDENT_MIN = 2
 INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
-NUMBER = r'[+-]?\d{1,9}(?:\.\d{0,9})?'  # a whole number may be typed with a zero decimal part (the app's canonical)
-RATIONAL = r'[+-]?\d{1,9}(?:\.\d{1,6})?(?:/[+-]?\d{1,9})?'
+NUMBER = r'[+-]?\d{1,30}(?:\.\d{0,30})?'  # a whole number may be typed with a zero decimal part (the app's canonical)
+RATIONAL = r'[+-]?\d{1,30}(?:\.\d{1,30})?(?:/[+-]?\d{1,30})?'
 # mixed@1: a mixed number "3 1/2" is 3 + 1/2 ("-3 1/2" is -(3 + 1/2)), never 31/2 (packages/mathematics answers.ts)
-MIXED = r'([+-]?)(\d{1,9})\s+(\d{1,9})/(\d{1,9})'
+MIXED = r'([+-]?)(\d{1,30})\s+(\d{1,30})/(\d{1,30})'
 
 
 def _rational(t):

@@ -1,7 +1,7 @@
 {
  "version": 1,
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "fa3e62ebf35e2c52a314bb8f6a0491621f1b589cad68d918b8337dcf1baaeac3",
+ "sha256": "2adf62865c8b07f30423171ffaf514d9e73814feaa071f12aa35c1339b3ec2a4",
  "inputs": {
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
   "content/learning/competency-expansion.v1.json": "4598b09ddd9a798a5fff55d870c4a83ec6e771ffa922403c0d41e8df49587c42",
@@ -10,7 +10,7 @@
   "content/mathematics/graphs/prerequisites.v1.1.json": "e49e1715db4d1f6e39444100e7a654055c0acaf9eab117e364533c8246f9ac1c",
   "packages/learning/src/answer-first.ts": "5a85e3748aed1b8085f7edf2a2b57c5f71580475836c42180d684b7a237c93cd",
   "packages/learning/src/answer-types.ts": "ab7e36efdd8d1ec1f0ee0f352e93bfb9c504d08e2189ffdc1803a659f7c07b58",
-  "packages/learning/src/assessment.ts": "97530b69a01514c8284871cff7fc9447b06a3e4d41a556fa872075d453d11c89",
+  "packages/learning/src/assessment.ts": "72b2e3f1bc02e9f15c9bb908b7b15ce55ea221f6807f1acb6647f3ef47a234e0",
   "packages/learning/src/calculus-core.ts": "3c609d0c24963be5f93a6be389c32d3eec504a42d27b34efe60f5dcd7e6d0d38",
   "packages/learning/src/complex-kernel.ts": "39814574f8b64f645df3ad8638686dd1aacb37e4d057aa723960a6a33e6a3b47",
   "packages/learning/src/digest.ts": "7fe843b17d1ba61811de2dd7b936de8def4c9ddf62ba270643a856a5bae9847f",
