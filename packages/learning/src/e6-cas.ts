@@ -251,6 +251,8 @@ function nfFn(a: Extract<A, { t: "fn" }>, ctx: Ctx, depth: number): RF {
   if (f === "atan" || f === "arctan") { const arg = nf(a.a, ctx, depth + 1); const idx = atomIndex(ctx, "atan", arg); return rfOfPoly(pv(`T${idx}`)); }
   throw new Unsupported(`function ${f} is outside the exact kernel`);
 }
+/** drop zero-exponent entries (x^0) so polynomials built by the factoriser compare equal to ones built by the evaluator */
+function pClean(a: Poly): Poly { const r = pZero(); for (const t of a.m.values()) { const mono = t.mono.filter(([, k]) => k !== 0) as Mono; const k = mkey(mono); const o = r.m.get(k); if (o) { const c = qadd(o.c, t.c); if (qiszero(c)) r.m.delete(k); else r.m.set(k, { mono, c }); } else r.m.set(k, { mono, c: t.c }); } return r; }
 function nfSqrt(arg: A, ctx: Ctx, depth: number): RF {
   const r = nf(arg, ctx, depth + 1);
   if (pIsConst(r.n) && pIsConst(r.d)) {
@@ -265,6 +267,18 @@ function nfSqrt(arg: A, ctx: Ctx, depth: number): RF {
     // sqrt(N/D) is only read when D is a perfect square of a polynomial times a positive constant (so no sign ambiguity)
     throw new Unsupported("square root of a non-polynomial radicand");
   }
+  // sqrt(a·b) = sqrt(a)·sqrt(b) holds only where a, b ≥ 0: a radicand that factors over the rationals is split into one radical per factor and
+  // the domain bookkeeping (as for logarithms) records the factors, so the identity is accepted exactly where each factor is non-negative
+  const fx = factorPolyX(r.n, ctx.v);
+  if (fx && fx.factors.length >= 1 && fx.factors.every((f) => f.e === 1) && qsign(fx.c) > 0 && exactRoot(fx.c, 2) && qsign(pConst(r.d)) > 0 && exactRoot(pConst(r.d), 2) && fx.factors.every((f) => !pIsConst(f.p))) {
+    let out = rfc(exactRoot(fx.c, 2)!);
+    for (const f of fx.factors) {
+      const cp = pClean(f.p); const fr: RF = { n: cp, d: pc(ONE) }; const ai = atomIndex(ctx, "sqrt", fr); const nm = `Q${ai}`; ctx.atoms[ai].vars = [nm]; ctx.rel.set(nm, cp);
+      out = rfMul(out, rfOfPoly(pv(nm)));
+    }
+    ctx.logs.push({ arg: r.n, factors: fx.factors.map((f) => ({ p: f.p, e: 1 })) });
+    return rfMul(out, rfc(qdiv(ONE, exactRoot(pConst(r.d), 2)!)));
+  }
   const idx = atomIndex(ctx, "sqrt", r); const name = `Q${idx}`; ctx.atoms[idx].vars = [name];
   ctx.rel.set(name, pScale(r.n, qdiv(ONE, pConst(r.d))));
   // the radical of a square is |.|, never the base itself: no collapse is attempted
@@ -272,7 +286,7 @@ function nfSqrt(arg: A, ctx: Ctx, depth: number): RF {
 }
 function nfExp(arg: A, ctx: Ctx, depth: number): RF {
   // exp(ln u) = u (u > 0 on the domain of the left side)
-  if (arg.t === "fn" && arg.f === "ln") return nf(arg.a, ctx, depth + 1);
+  if (arg.t === "fn" && arg.f === "ln") { nf(arg, ctx, depth + 1); /* record the logarithm so its domain is part of the expression's domain */ return nf(arg.a, ctx, depth + 1); }
   const r = nf(arg, ctx, depth + 1);
   const lin = argLin(r, ctx.v);
   if (lin && qiszero(lin.c0pi)) {
@@ -325,7 +339,7 @@ function factorPolyX(p: Poly, v: string): { c: Q; factors: { p: Poly; e: number 
     // divide by (qd x - pn)
     const [pn, qd] = found; const n = ints.length - 1; const quo: bigint[] = new Array(n).fill(0n); let rem = ints[n];
     for (let i = n - 1; i >= 0; i--) { quo[i] = rem / qd; rem = ints[i] + quo[i] * pn; }
-    const lin: Poly = pAdd(pScale(pv(v), q(qd)), pc(q(-pn)));
+    const lin: Poly = pAdd(pScale(pv(v), q(qd)), pScale(pv(v, 0), q(-pn))); // same key shape as the residual factor built from coefficients
     const ex = factors.find((f) => pEq(f.p, lin)); if (ex) ex.e++; else factors.push({ p: lin, e: 1 });
     ints = quo; if (ints[ints.length - 1] < 0n) { ints = ints.map((c) => -c); content = qneg(content); }
     let g2 = 0n; for (const c of ints) g2 = bgcd(g2, c); if (g2 > 1n) { ints = ints.map((c) => c / g2); content = qmul(content, q(g2)); }
@@ -362,9 +376,14 @@ function nfLn(arg: A, ctx: Ctx, depth: number, absMode = false): RF {
   const parts: { poly: Poly; sign: 1 | -1 }[] = [{ poly: r.n, sign: 1 }, { poly: r.d, sign: -1 }];
   let out = rfc(Z);
   const logRec: { p: Poly; e: number }[] = [];
+  // a negative constant part (the -2 in x/(-2)) flips the sign of the argument: it must be carried into the factor whose sign it changes
+  let carriedNeg = false;
+  for (const { poly } of parts) if (pIsConst(poly) && !pIsZero(poly) && qsign(pConst(poly)) < 0) carriedNeg = !carriedNeg;
+  if (carriedNeg && parts.every((x) => pIsConst(x.poly) && !pIsZero(x.poly))) throw new Unsupported("logarithm of a negative constant has no real value");
+  let carriedUsed = false;
   for (const { poly, sign } of parts) {
     if (pIsConst(poly) && !pIsZero(poly)) {
-      const c = pConst(poly); if (qsign(c) < 0) { out = rfAdd(out, rfc(Z)); }
+      const c = pConst(poly);
       const a = c.n < 0n ? -c.n : c.n, b = c.d;
       for (const [num, s2] of [[a, 1], [b, -1]] as [bigint, number][]) { const pf = primeFactors(num); if (!pf) throw new Unsupported("constant too large for ln"); for (const [pr, e] of pf) out = rfAdd(out, rfMul(rfc(q(sign * s2 * e)), rfOfPoly(pv(`P${pr}`)))); }
       continue;
@@ -373,7 +392,11 @@ function nfLn(arg: A, ctx: Ctx, depth: number, absMode = false): RF {
     if (fx) {
       const c = fx.c; const a = c.n < 0n ? -c.n : c.n;
       if (a !== 1n || c.d !== 1n) { for (const [num, s2] of [[a, 1], [c.d, -1]] as [bigint, number][]) { const pf = primeFactors(num); if (!pf) throw new Unsupported("constant too large for ln"); for (const [pr, e] of pf) out = rfAdd(out, rfMul(rfc(q(sign * s2 * e)), rfOfPoly(pv(`P${pr}`)))); } }
-      for (const f of fx.factors) { const key = pKey(f.p); out = rfAdd(out, rfMul(rfc(q(sign * f.e)), rfOfPoly(pv(`L[${key}]`)))); logRec.push({ p: f.p, e: sign * f.e }); }
+      // the sign of the content belongs to the argument's domain: ln(-x) needs -x > 0, not x > 0
+      let facs = fx.factors;
+      const negHere = (qsign(c) < 0) !== (carriedNeg && !carriedUsed); if (carriedNeg) carriedUsed = true;
+      if (negHere) { const i = facs.findIndex((f) => f.e % 2 !== 0); if (i < 0) throw new Unsupported("logarithm of a negative-definite expression"); facs = facs.map((f, j) => (j === i ? { p: pNeg(f.p), e: f.e } : f)); }
+      for (const f of facs) { const k1 = pKey(f.p), k2 = pKey(pNeg(f.p)); const key = k1 < k2 ? k1 : k2; /* sign-canonical symbol: ln|p| */ out = rfAdd(out, rfMul(rfc(q(sign * f.e)), rfOfPoly(pv(`L[${key}]`)))); logRec.push({ p: f.p, e: sign * f.e }); }
       continue;
     }
     // polynomial involving generators: one atom keyed by its normal form
@@ -454,7 +477,7 @@ function piMultiple(r: Q, ctx: Ctx): [RF, RF] {
 }
 
 // ================================================================================================ public helpers
-export interface Req { kind: "nonzero" | "positive"; key: string; at?: Q; lin?: { a: Q; b: Q }; stateable: boolean; text: string }
+export interface Req { kind: "nonzero" | "positive"; key: string; at?: Q; lin?: { a: Q; b: Q }; stateable: boolean; text: string; allOf?: string[] }
 export type EqStatus = "equal" | "different" | "unproven";
 export interface EqResult { status: EqStatus; reqs: Req[]; note: string; lawLogs: boolean }
 
@@ -487,11 +510,29 @@ function reqFromDenoms(ds0: Poly[], ctx: Ctx): Req[] {
 }
 function logKeys(logs: Ctx["logs"], ctx: Ctx): Map<string, Req> {
   const m = new Map<string, Req>();
-  for (const l of logs) for (const f of l.factors) {
-    const co = coeffsIn(f.p, ctx.v); const key = `pos:${pKey(f.p)}`;
-    if (co && co.length === 3 && qsign(co[2]) > 0 && qsign(qsub(qmul(co[1], co[1]), qmul(q(4), qmul(co[2], co[0])))) < 0) continue; // positive-definite quadratic
-    if (co && co.length === 2) m.set(key, { kind: "positive", key, lin: { a: co[1], b: co[0] }, stateable: true, text: `${linText(co)} > 0` });
-    else m.set(key, { kind: "positive", key, stateable: false, text: `${pKey(f.p)} > 0` });
+  const posDef = (co: Q[] | null) => !!co && co.length === 3 && qsign(co[2]) > 0 && qsign(qsub(qmul(co[1], co[1]), qmul(q(4), qmul(co[2], co[0])))) < 0;
+  for (const l of logs) {
+    const odd: { p: Poly; e: number }[] = [];
+    for (const f of l.factors) {
+      const co = coeffsIn(f.p, ctx.v);
+      if (posDef(co)) continue; // positive-definite quadratic: always positive
+      if (f.e % 2 === 0) { // an even power inside a logarithm (ln(x^2)) only needs the base to be non-zero, never positive
+        if (co && co.length === 2) { const root = qneg(qdiv(co[0], co[1])); const nk = `lin:${qtext(root)}`; if (!m.has(nk) && !m.has(`pos:${pKey(f.p)}`)) m.set(nk, { kind: "nonzero", key: nk, at: root, stateable: true, text: `${ctx.v} ≠ ${qtext(root)}` }); }
+        else if (!m.has(`poly:${pKey(f.p)}`)) m.set(`poly:${pKey(f.p)}`, { kind: "nonzero", key: `poly:${pKey(f.p)}`, stateable: false, text: `${pKey(f.p)} ≠ 0` });
+        continue;
+      }
+      odd.push(f);
+    }
+    if (odd.length >= 2) { // several sign-carrying factors: the domain is "product > 0", which the factors being individually positive would imply but not equal
+      const keys = odd.map((f) => `pos:${pKey(f.p)}`); const key = `prod:${keys.slice().sort().join("*")}`;
+      m.set(key, { kind: "positive", key, stateable: false, text: `${odd.map((f) => `(${pKey(f.p)})`).join("·")} > 0`, allOf: keys });
+      continue;
+    }
+    for (const f of odd) {
+      const co = coeffsIn(f.p, ctx.v); const key = `pos:${pKey(f.p)}`;
+      if (co && co.length === 2) m.set(key, { kind: "positive", key, lin: { a: co[1], b: co[0] }, stateable: true, text: `${linText(co)} > 0` });
+      else m.set(key, { kind: "positive", key, stateable: false, text: `${pKey(f.p)} > 0` });
+    }
   }
   return m;
 }
@@ -516,7 +557,13 @@ export function compareExpr(x: A, y: A, v: string, ctxOverride?: Ctx): EqResult 
     lawLogs = true;
     for (const [k, r] of [...pa, ...pb]) if (!reqs.some((q2) => q2.key === k) && !allVisiblyPositive(x, y, r, ctx)) reqs.push(r);
   }
-  if (pIsZero(zero)) return { status: "equal", reqs, note: "formal identity in the exact kernel", lawLogs };
+  if (pIsZero(zero)) { const have = new Set(reqs.map((r) => r.key)); for (let k = reqs.length - 1; k >= 0; k--) if (reqs[k].allOf && reqs[k].allOf!.every((x) => have.has(x))) reqs.splice(k, 1); }
+  if (pIsZero(zero)) {
+    // opposite-orientation positivity requirements with an empty intersection (x > 0 and -x > 0) can never be stated honestly: the identity holds only vacuously
+    const lins = reqs.filter((r) => r.kind === "positive" && r.lin);
+    for (const r1 of lins) for (const r2 of lins) if (r1 !== r2 && qsign(r1.lin!.a) > 0 && qsign(r2.lin!.a) < 0 && qsign(qsub(qneg(qdiv(r1.lin!.b, r1.lin!.a)), qneg(qdiv(r2.lin!.b, r2.lin!.a)))) >= 0) { r1.stateable = false; r2.stateable = false; }
+    return { status: "equal", reqs, note: "formal identity in the exact kernel", lawLogs };
+  }
   const num = numericDisagree(x, y, v);
   if (num === "differ") return { status: "different", reqs: [], note: "the sides differ (exact identity fails and sampling confirms)", lawLogs };
   return { status: "unproven", reqs: [], note: "the exact kernel could not prove equality and no disagreement was exhibited", lawLogs };

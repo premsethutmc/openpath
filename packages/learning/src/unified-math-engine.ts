@@ -267,6 +267,8 @@ function mergeE6(prior: AssessmentEnvelope, e6: AssessmentEnvelope | null, probl
   if (!e6) return prior;
   if (!E6_DEFINITE.includes(e6.classification)) return (NON_DEFINITE(prior.classification) && prior.classification !== "resource-exhausted") || (prior.classification === "verified" && e6.classification === "ambiguous") ? e6 : prior;
   if (prior.classification === "verified") return e6.classification === "verified" ? prior : e6;
+  // E6-R: an earlier route that found every line true but not finished (its final-form grammar is narrower) is completed by the independent exact route
+  if (prior.classification === "incomplete" && e6.classification === "verified") return e6;
   if (NON_DEFINITE(prior.classification)) return prior.classification === "resource-exhausted" ? prior : e6;
   // D5 contract revision (E6): a missing integration constant is `missing-assumption`; the earlier `invalid` label is kept only in the historical regression record.
   if (prior.classification === "invalid" && e6.classification === "missing-assumption" && (problem as { task?: string }).task === "indefinite-integral") return e6;

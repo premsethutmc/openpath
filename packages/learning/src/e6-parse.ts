@@ -77,6 +77,8 @@ export function normalize(raw: string): string {
   s = s.replace(/√\s*\(/g, "sqrt(").replace(/√\s*([A-Za-z0-9.]+)/g, "sqrt($1)").replace(/π/g, "pi").replace(/−|–|—/g, "-").replace(/[×·⋅∙]/g, "*").replace(/÷/g, "/")
     .replace(/[′’´]/g, "'").replace(/≠/g, "!=").replace(/≤/g, "<=").replace(/≥/g, ">=").replace(/→|⟶|⟹/g, "->").replace(/⁄/g, "/").replace(/\bDNE\b/g, "dne");
   s = s.replace(/\^\(\s*(-?\d+)\s*\)/g, "^$1");
+  // a one-sided marker attached to the limit point (`x->2+ (…)`, `x→1- …`) is kept as a marker; a spaced sign (`x->2 + 1/x`) stays arithmetic
+  s = s.replace(/(->\s*[-+]?[A-Za-z0-9.\/]*[A-Za-z0-9])([+-])(?=[ (]|$)/g, "$1^$2");
   return s.replace(/[ \t]+/g, " ").trim();
 }
 
@@ -246,6 +248,7 @@ class Parser {
     if (this.isOp("^")) { this.i++; if (this.isOp("-")) { this.i++; power = neg(this.primary(false)); } else power = this.primary(false); }
     let arg: A;
     if (this.isOp("(")) { this.i++; arg = this.expr(); this.expect(")"); }
+    else if (this.isOp("|")) arg = this.primary(false); // ln|x|: the bars delimit an absolute value
     else {
       const x = this.pk();
       if (x && x.k === "id" && x.v.length === 1 && !this.isOp("(", 1)) { this.i++; arg = S(x.v); }

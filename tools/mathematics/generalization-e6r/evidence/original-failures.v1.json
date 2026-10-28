@@ -1,0 +1,386 @@
+[
+ {
+  "partition": "sealed",
+  "caseId": "e6-124",
+  "family": "one-sided-right-infinite",
+  "problem": {
+   "approach": "2",
+   "domain": "calculus",
+   "expression": {
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "2"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      "exponent": -1,
+      "kind": "power"
+     }
+    ],
+    "kind": "multiply"
+   },
+   "side": "right",
+   "task": "limit",
+   "variable": "x"
+  },
+  "studentWorking": "lim x->2+ (1/(x - 2)) = ∞",
+  "reference": "verified",
+  "engine": {
+   "classification": "invalid",
+   "reasoners": [
+    {
+     "id": "natural-generalization-e6",
+     "version": "openpath-natural-generalization-e6@1"
+    }
+   ],
+   "justification": "line 1 is mathematically invalid"
+  },
+  "entryPoint": "assessMathematicalWorking → assessCandidate → assessE5Route + assessE6Route → planGeneralizationE6 → planCalculusE6 → mergeE6",
+  "e6Trace": [
+   {
+    "line": 0,
+    "text": "lim x->2+ (1/(x - 2)) = ∞",
+    "classification": "invalid",
+    "why": "this limit is taken at a different point or from a different side than the posed limit"
+   }
+  ]
+ },
+ {
+  "partition": "sealed",
+  "caseId": "e6-126",
+  "family": "two-sided-dne",
+  "problem": {
+   "approach": "1",
+   "domain": "calculus",
+   "expression": {
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "1"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      "exponent": -1,
+      "kind": "power"
+     }
+    ],
+    "kind": "multiply"
+   },
+   "side": "both",
+   "task": "limit",
+   "variable": "x"
+  },
+  "studentWorking": "lim_(x→1+) (1/(x - 1)) = ∞\nlim_(x→1-) (1/(x - 1)) = -∞\nlim_(x→1) (1/(x - 1)) = does not exist",
+  "reference": "verified",
+  "engine": {
+   "classification": "invalid",
+   "reasoners": [
+    {
+     "id": "natural-generalization-e6",
+     "version": "openpath-natural-generalization-e6@1"
+    }
+   ],
+   "justification": "line 1 is mathematically invalid"
+  },
+  "entryPoint": "assessMathematicalWorking → assessCandidate → assessE5Route + assessE6Route → planGeneralizationE6 → planCalculusE6 → mergeE6",
+  "e6Trace": [
+   {
+    "line": 0,
+    "text": "lim_(x→1+) (1/(x - 1)) = ∞",
+    "classification": "invalid",
+    "why": "this limit is taken at a different point or from a different side than the posed limit"
+   },
+   {
+    "line": 1,
+    "text": "lim_(x→1-) (1/(x - 1)) = -∞",
+    "classification": "invalid",
+    "why": "this limit is taken at a different point or from a different side than the posed limit"
+   },
+   {
+    "line": 2,
+    "text": "lim_(x→1) (1/(x - 1)) = does not exist",
+    "classification": "verified",
+    "why": "sentence without a mathematical claim to verify (preserved, not relied upon)"
+   }
+  ]
+ },
+ {
+  "partition": "sealed",
+  "caseId": "e6-204",
+  "family": "ambiguous-comma-event",
+  "problem": {
+   "area": "probability",
+   "assumptions": [
+    "independent"
+   ],
+   "data": {
+    "pa": "1/2",
+    "pb": "1/3"
+   },
+   "domain": "probability-statistics",
+   "task": "independent-intersection"
+  },
+  "studentWorking": "P(A, B) = 1/6",
+  "reference": "ambiguous",
+  "engine": {
+   "classification": "verified",
+   "reasoners": [
+    {
+     "id": "natural-generalization-e6",
+     "version": "openpath-natural-generalization-e6@1"
+    }
+   ],
+   "justification": "all 1 submitted line(s) are accounted for and verified"
+  },
+  "entryPoint": "assessMathematicalWorking → assessCandidate → assessE5Route + assessE6Route → planGeneralizationE6 → planNumbersE6 → mergeE6",
+  "e6Trace": [
+   {
+    "line": 0,
+    "text": "P(A, B) = 1/6",
+    "classification": "verified",
+    "why": "single value"
+   }
+  ]
+ },
+ {
+  "partition": "sealed",
+  "caseId": "e6-220",
+  "family": "quadratic-roots-negative-disc",
+  "problem": {
+   "area": "polynomial",
+   "coefficientDomain": "complex",
+   "data": {
+    "coefficients": [
+     "1",
+     "4",
+     "13"
+    ]
+   },
+   "domain": "complex-polynomial",
+   "task": "quadratic-roots"
+  },
+  "studentWorking": "D = 4^{2} - 4 \\cdot 1 \\cdot 13\nD = 16 - 52 = -36\n\\frac{-4 + \\sqrt{-36}}{2} = \\frac{-4 + 6i}{2} = -2 + 3i",
+  "reference": "verified",
+  "engine": {
+   "classification": "incomplete",
+   "reasoners": [
+    {
+     "id": "natural-generalization-e6",
+     "version": "openpath-natural-generalization-e6@1"
+    }
+   ],
+   "justification": "give every solution as a reduced numeral"
+  },
+  "entryPoint": "assessMathematicalWorking → assessCandidate → assessE5Route + assessE6Route → planGeneralizationE6 → planNumbersE6 → mergeE6",
+  "e6Trace": [
+   {
+    "line": 0,
+    "text": "D = 4^{2} - 4 \\cdot 1 \\cdot 13",
+    "classification": "verified",
+    "why": "single value"
+   },
+   {
+    "line": 1,
+    "text": "D = 16 - 52 = -36",
+    "classification": "verified",
+    "why": "the two members are exactly equal"
+   },
+   {
+    "line": 2,
+    "text": "\\frac{-4 + \\sqrt{-36}}{2} = \\frac{-4 + 6i}{2} = -2 + 3i",
+    "classification": "incomplete",
+    "why": "give every solution as a reduced numeral"
+   }
+  ]
+ },
+ {
+  "partition": "sealed",
+  "caseId": "e6-263",
+  "family": "combine-logs-no-domain",
+  "problem": {
+   "domain": "calculus",
+   "expression": {
+    "kind": "add",
+    "terms": [
+     {
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "kind": "log"
+     },
+     {
+      "argument": {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2,
+       "kind": "power"
+      },
+      "kind": "log"
+     }
+    ]
+   },
+   "task": "derivative",
+   "variable": "x"
+  },
+  "studentWorking": "ln(x) + ln(x^2) = ln(x^3)\nd/dx[ln(x) + ln(x^2)] = 3/x",
+  "reference": "missing-assumption",
+  "engine": {
+   "classification": "verified",
+   "reasoners": [
+    {
+     "id": "natural-generalization-e6",
+     "version": "openpath-natural-generalization-e6@1"
+    }
+   ],
+   "justification": "all 2 submitted line(s) are accounted for and verified"
+  },
+  "entryPoint": "assessMathematicalWorking → assessCandidate → assessE5Route + assessE6Route → planGeneralizationE6 → planCalculusE6 → mergeE6",
+  "e6Trace": [
+   {
+    "line": 0,
+    "text": "ln(x) + ln(x^2) = ln(x^3)",
+    "classification": "verified",
+    "why": "members are equal (formal identity)"
+   },
+   {
+    "line": 1,
+    "text": "d/dx[ln(x) + ln(x^2)] = 3/x",
+    "classification": "verified",
+    "why": "members are equal (formal identity)"
+   }
+  ]
+ },
+ {
+  "partition": "validation",
+  "caseId": "e6-213",
+  "family": "conjugate-product-alt",
+  "problem": {
+   "area": "arithmetic",
+   "data": {
+    "a": {
+     "im": "2",
+     "re": "1"
+    },
+    "b": {
+     "im": "-1",
+     "re": "3"
+    }
+   },
+   "domain": "complex-polynomial",
+   "task": "multiply"
+  },
+  "studentWorking": "conj((1 + 2*i)*(3 - i)) = conj(1 + 2*i)*conj(3 - i) = (1 - 2*i)*(3 + i) = 3 + i - 6*i - 2*i^2 = 5 - 5*i",
+  "reference": "verified",
+  "engine": {
+   "classification": "invalid",
+   "reasoners": [
+    {
+     "id": "natural-generalization-e6",
+     "version": "openpath-natural-generalization-e6@1"
+    }
+   ],
+   "justification": "line 1 is mathematically invalid"
+  },
+  "entryPoint": "assessMathematicalWorking → assessCandidate → assessE5Route + assessE6Route → planGeneralizationE6 → planNumbersE6 → mergeE6",
+  "e6Trace": [
+   {
+    "line": 0,
+    "text": "conj((1 + 2*i)*(3 - i)) = conj(1 + 2*i)*conj(3 - i) = (1 - 2*i)*(3 + i) = 3 + i - 6*i - 2*i^2 = 5 - 5*i",
+    "classification": "invalid",
+    "why": "the chain ends at 5-5i, but the requested quantity is 5+5i"
+   }
+  ]
+ },
+ {
+  "partition": "validation",
+  "caseId": "e6-288",
+  "family": "modulus-of-root",
+  "problem": {
+   "area": "polynomial",
+   "assumptions": [
+    "real-coefficients"
+   ],
+   "coefficientDomain": "complex",
+   "data": {
+    "coefficients": [
+     "1",
+     "-6",
+     "25"
+    ],
+    "root": {
+     "im": "4",
+     "re": "3"
+    }
+   },
+   "domain": "complex-polynomial",
+   "task": "verify-root"
+  },
+  "studentWorking": "|3 + 4i| = √(9 + 16) = √(25) = 5",
+  "reference": "verified",
+  "engine": {
+   "classification": "invalid",
+   "reasoners": [
+    {
+     "id": "natural-generalization-e6",
+     "version": "openpath-natural-generalization-e6@1"
+    }
+   ],
+   "justification": "line 1 is mathematically invalid"
+  },
+  "entryPoint": "assessMathematicalWorking → assessCandidate → assessE5Route + assessE6Route → planGeneralizationE6 → planNumbersE6 → mergeE6",
+  "e6Trace": [
+   {
+    "line": 0,
+    "text": "|3 + 4i| = √(9 + 16) = √(25) = 5",
+    "classification": "invalid",
+    "why": "the chain ends at 5, but the requested quantity is 0"
+   }
+  ]
+ }
+]

@@ -1,0 +1,5 @@
+Code frozen before the fresh holdout was scored.
+frozenAt: 2026-10-28T02:55:25Z
+baseCommit: 9ac079e
+repairedTreeDiffSha256 (git diff 9ac079e -- packages tools/mathematics/generalization-e6 tools/mathematics/generalization-e6r, taken before scoring): 4c9b52adc23f0a213ce0e15719d208b0eb7207631f5a05c01ef8b74bab9dfa95
+holdoutSha256: b55c4ac46eeb02754f883ae778571985ca0ea5a7094dc400d2eabb3f33c08f78 (holdout-cases.v1.json, mode 444, authored outside this repository by an independent agent that never ran the verifier; the implementer did not read its cases or labels before scoring)

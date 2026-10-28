@@ -20,9 +20,14 @@ else if(part==="e3dev"||part==="e3sealed")cases=load(E3,part==="e3dev"?"dev-case
 else if(part==="e4dev"||part==="e4sealed")cases=load(E4,part==="e4dev"?"dev-cases.v1.json":"sealed-cases.v1.json",frozenOf("FROZEN_SHA256",E4));
 else if(part==="e5dev"||part==="e5sealed"){cases=load(GEO,part==="e5dev"?"dev-cases.v1.json":"sealed-cases.v1.json",frozenOf("FROZEN_SHA256",GEO))}
 else if(part==="e5sealedadj"){cases=load(GEO,"sealed-cases.v1.json",frozenOf("FROZEN_SHA256",GEO));overlay=Object.fromEntries(JSON.parse(readFileSync(GEO+"e5-adjudication-overlay.v1.json","utf8")).adjudications.map((a:any)=>[a.caseId??a.id,a]))}
-else if(part==="e6dev"||part==="e6val"||part==="e6sealed"){const nm={e6dev:"dev",e6val:"validation",e6sealed:"sealed"}[part]!;const f=`${nm}-cases.v1.json`;const h=readFileSync(here+`FROZEN_SHA256.${nm}`,"utf8").trim();if(sha(here+f)!==h)throw Error(`${f} hash mismatch`);cases=JSON.parse(readFileSync(here+f,"utf8")).cases.map((c:any)=>({...c,id:c.caseId,partition:nm}));
+else if(part==="e6dev"||part==="e6val"||part==="e6sealed"){const nm={e6dev:"dev",e6val:"validation",e6sealed:"sealed"}[part]!;const f=`${nm}-cases.v1.json`;const h=readFileSync(here+`FROZEN_SHA256.${nm}`,"utf8").trim();if(sha(here+f)!==h)throw Error(`${f} hash mismatch`);cases=JSON.parse(readFileSync(here+f,"utf8")).cases.map((c:any)=>({...c,id:c.caseId,partition:nm}));if(process.env.E6R_OVERLAY){overlay=Object.fromEntries(JSON.parse(readFileSync(here+"../generalization-e6r/adjudication/e6-adjudication-overlay.v1.json","utf8")).adjudications.map((a:any)=>[a.caseId,a]))}
   if(part==="e6sealed"&&!process.env.E6_SEALED_OVERRIDE){const lock=here+"results/sealed-run.lock";try{readFileSync(lock);throw Error("E6 sealed holdout already run once")}catch(e:any){if(String(e).includes("already run"))throw e}writeFileSync(lock,new Date().toISOString()+" "+label+"\n")}
   if(part==="e6val"){const lf=here+"results/validation-use-log.json";const L=JSON.parse(readFileSync(lf,"utf8"));L.uses.push({at:new Date().toISOString(),label});writeFileSync(lf,JSON.stringify(L,null,1))}}
+else if(part==="r6holdout"){const H=process.env.E6R_HOLDOUT_DIR??"/home/claude/e6r-holdout/";const f="holdout-cases.v1.json";const h=readFileSync(H+"FROZEN_SHA256","utf8").trim().split(/\s+/)[0];if(sha(H+f)!==h)throw Error("holdout hash mismatch");
+  const lock=(process.env.E6R_RESULTS_DIR??"/home/claude/e6r-holdout-results/")+"scored.lock";if(!process.env.E6R_ALLOW_REPEAT){try{readFileSync(lock);throw Error("the fresh holdout has already been scored once")}catch(e:any){if(String(e).includes("already been scored"))throw e}}
+  (await import("node:fs")).mkdirSync(process.env.E6R_RESULTS_DIR??"/home/claude/e6r-holdout-results/",{recursive:true});writeFileSync(lock,new Date().toISOString()+" "+label+" "+h+"\n");
+  cases=JSON.parse(readFileSync(H+f,"utf8")).cases.map((c:any)=>({...c,id:c.caseId,partition:"r6holdout"}));
+  if(process.env.E6R_OVERLAY_HOLDOUT){overlay=Object.fromEntries(JSON.parse(readFileSync(process.env.E6R_OVERLAY_HOLDOUT,"utf8")).adjudications.map((a:any)=>[a.caseId,a]))}}
 else if(/^fuzz\d+$/.test(part))cases=JSON.parse(readFileSync(here+`fuzz/fuzz-seed${part.slice(4)}.json`,"utf8")).cases;
 else throw Error("partition");
 const pct=(xs:number[],p:number)=>{const a=[...xs].sort((x,y)=>x-y);return a.length?a[Math.min(a.length-1,Math.floor((a.length-1)*p))]:0};
@@ -46,7 +51,8 @@ for(const c of cases){
     falseRejection:refCls==="verified"&&["invalid","incomplete","missing-assumption"].includes(a.classification),
     correctlyVerified:verified&&refCls==="verified",
     correctlyInvalid:refCls==="invalid"&&a.classification==="invalid",
-    exact:a.classification===refCls||(refCls==="unsupported"&&a.classification==="resource-exhausted"),
+    exact:a.classification===refCls,
+    resourceExhausted:a.classification==="resource-exhausted",
     assessed:VALID_CLS.includes(a.classification),
     firstInvalidMatch:refCls==="invalid"?(a.classification==="invalid"&&(acceptable.length?acceptable.includes(fi as number):fi===null)):null,
     alternativeAccepted:ref.alternativeMethodValid===true?verified:null,
@@ -65,13 +71,14 @@ const summary={label,partition:part,codeDigest,cases:out.length,
   correctlyInvalid:n(r=>r.metrics.correctlyInvalid),referenceInvalid:n(r=>r.reference.classification==="invalid"),exactVerdicts:n(r=>r.metrics.exact),
   engineClassCounts:Object.fromEntries([...new Set(out.map(r=>r.engine.classification))].map(k=>[k,cls(k)])),
   assessed:n(r=>r.metrics.assessed),assessedCorrect:n(r=>r.metrics.assessed&&r.metrics.exact),assessmentCoverage:n(r=>r.metrics.assessed)/out.length,correctAssessmentCoverage:n(r=>r.metrics.assessed&&r.metrics.exact)/out.length,
-  abstentions:n(r=>!r.metrics.assessed),unaccountedAcceptances:n(r=>r.metrics.unaccountedAcceptance),
+  abstentions:n(r=>!r.metrics.assessed),resourceExhausted:n(r=>r.metrics.resourceExhausted),exactUnderE6ResourceMapping:n(r=>r.metrics.exact||(r.reference.classification==="unsupported"&&r.metrics.resourceExhausted)),unaccountedAcceptances:n(r=>r.metrics.unaccountedAcceptance),
   firstInvalidExact:ratio(r=>r.metrics.firstInvalidMatch),alternativeAccepted:ratio(r=>r.metrics.alternativeAccepted),restrictionDetected:ratio(r=>r.metrics.restrictionDetected),
   branchDetected:ratio(r=>r.metrics.branchDetected),defectiveRestrictionBranchSafe:ratio(r=>r.metrics.safeOnDefective),
   verifiedTotal:cls("verified"),independentlyVerified:n(r=>r.metrics.independentlyVerified===true),independentVerificationCoverage:cls("verified")?n(r=>r.metrics.independentlyVerified===true)/cls("verified"):null,
   thrown:n(r=>!!r.metrics.thrown),maxRssMB:Math.round(process.resourceUsage().maxRSS/1024),slowest:[...out].sort((a,b)=>b.ms-a.ms).slice(0,5).map(r=>({id:r.id,ms:Math.round(r.ms*10)/10})),latencyMs:{p50:pct(lat,.5),p95:pct(lat,.95),p99:pct(lat,.99),max:Math.max(...lat)},
   byFamily:Object.fromEntries([...new Set(out.map(r=>String(r.family??r.area).split('/')[0]))].map(k=>[k,{n:n(r=>String(r.family??r.area).split('/')[0]===k),assessed:n(r=>String(r.family??r.area).split('/')[0]===k&&r.metrics.assessed),exact:n(r=>String(r.family??r.area).split('/')[0]===k&&r.metrics.exact),falseAccept:n(r=>String(r.family??r.area).split('/')[0]===k&&r.metrics.falseAcceptance)}])),
   byCategory:Object.fromEntries([...new Set(out.map(r=>r.category))].map(k=>[k,{n:n(r=>r.category===k),falseAccept:n(r=>r.category===k&&r.metrics.falseAcceptance),falseReject:n(r=>r.category===k&&r.metrics.falseRejection),verified:n(r=>r.category===k&&r.engine.classification==="verified"),exact:n(r=>r.category===k&&r.metrics.exact)}]))};
-writeFileSync(here+`results/${part}-${label}.json`,JSON.stringify({summary,cases:out},null,1));
+writeFileSync(part==="r6holdout"?(process.env.E6R_RESULTS_DIR??"/home/claude/e6r-holdout-results/")+`r6holdout-${label}.json`:here+`results/${part}-${label}.json`,JSON.stringify({summary,cases:out},null,1));
+if(part==="r6holdout"&&!process.env.E6R_PRINT_CASES){const {cases:_c,byFamily:_f,slowest:_s,...agg}={...summary,cases:0} as any;console.log(JSON.stringify(agg));process.exit(0)}
 console.log(JSON.stringify(summary));
 process.exit(0);

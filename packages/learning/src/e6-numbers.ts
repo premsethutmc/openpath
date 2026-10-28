@@ -11,8 +11,8 @@
  */
 import { NotationError, normalize, splitEquals } from "./e6-parse.ts";
 import { Budget, Unsupported } from "./e6-cas.ts";
-import { Overflow, q, qadd, qdiv, qeq, qiszero, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
-import { Builder, bad, finish, isProse, missing, ok, readStatement, syntheticParse, uns, worst, type E6Plan, type Judge, type Row } from "./e6-common.ts";
+import { Overflow, q, qadd, qcmp, qdiv, qeq, qiszero, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
+import { Builder, bad, finish, incomplete, isProse, missing, ok, readStatement, syntheticParse, uns, worst, type E6Plan, type Judge, type Row } from "./e6-common.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 
 // ================================================================================================ Gaussian rationals
@@ -204,6 +204,18 @@ export function evalN(a: NAst, env: Map<string, Cx>, depth = 0): Cx {
   }
 }
 const symsOf = (a: NAst, out = new Set<string>()): Set<string> => { switch (a.t) { case "sym": out.add(a.name); break; case "neg": case "fact": case "abs": symsOf(a.a, out); break; case "bin": symsOf(a.a, out); symsOf(a.b, out); break; case "call": a.args.forEach((x) => symsOf(x, out)); break; default: break; } return out; };
+/** a product of two or more equal probability-sized factors (6/10 · 6/10): the same draw repeated, which is only a model of sampling with replacement / independent trials */
+function repeatedFactors(a: NAst): boolean {
+  // flatten the left-associated chain  a / b * c / d ...  into factors: a "*" starts a new factor, a "/" divides the current one
+  const spine: { op: string; x: NAst }[] = []; let cur = a;
+  while (cur.t === "bin" && (cur.op === "*" || cur.op === "/")) { spine.unshift({ op: cur.op, x: cur.b }); cur = cur.a; }
+  const fs: (Q | null)[] = []; const val = (x: NAst): Q | null => { if (symsOf(x).size) return null; try { const v = evalN(x, new Map()); return qiszero(v.im) ? v.re : null; } catch { return null; } };
+  fs.push(val(cur));
+  for (const { op, x } of spine) { const v = val(x); if (op === "*") fs.push(v); else { const c = fs[fs.length - 1]; fs[fs.length - 1] = c && v && !qiszero(v) ? qdiv(c, v) : null; } }
+  if (fs.length < 2) return false;
+  const vals = fs.filter((v): v is Q => !!v && qsign(v) > 0 && qcmp(v, ONE) < 0);
+  return vals.some((x, i) => vals.some((y, j) => i < j && qeq(x, y)));
+}
 const litsOf = (a: NAst, out: Q[] = []): Q[] => { if (a.t !== "num" && !symsOf(a).size) { try { const v = evalN(a, new Map()); if (qiszero(v.im)) out.push(v.re); } catch { /* not a closed numeral */ } } switch (a.t) { case "num": out.push(a.v); break; case "neg": case "fact": case "abs": litsOf(a.a, out); break; case "bin": litsOf(a.a, out); litsOf(a.b, out); break; case "call": a.args.forEach((x) => litsOf(x, out)); break; default: break; } return out; };
 
 // canonical numeral: a single reduced real, or a reduced a + bi
@@ -219,6 +231,15 @@ function isReducedNumeral(a: NAst): Q | null {
   return null;
 }
 export function canonicalValue(a: NAst): Cx | null {
+  // (a + bi)/c with whole a, b, c > 1 and no common factor: a single fraction over the whole complex number is a reduced form
+  { let neg = false, cur = a; while (cur.t === "neg") { neg = !neg; cur = cur.a; }
+    if (cur.t === "bin" && cur.op === "/") {
+      const dn = isReducedNumeral(cur.b), num = cur.a.t === "bin" && (cur.a.op === "+" || cur.a.op === "-") ? canonicalValue(cur.a) : null;
+      if (dn && dn.d === 1n && dn.n > 1n && num && num.re.d === 1n && num.im.d === 1n && !qiszero(num.im) && !qiszero(num.re)) {
+        const gcd = (x: bigint, y: bigint): bigint => { x = x < 0n ? -x : x; y = y < 0n ? -y : y; while (y) [x, y] = [y, x % y]; return x; };
+        if (gcd(gcd(num.re.n, num.im.n), dn.n) === 1n) { const s = neg ? -1n : 1n; return cx(q(s * num.re.n, dn.n), q(s * num.im.n, dn.n)); }
+      }
+    } }
   const terms: NAst[] = []; const flat = (x: NAst, sign: 1 | -1) => { if (x.t === "bin" && x.op === "+") { flat(x.a, sign); flat(x.b, sign); } else if (x.t === "bin" && x.op === "-") { flat(x.a, sign); flat(x.b, sign === 1 ? -1 : 1); } else terms.push(sign === 1 ? x : { t: "neg", a: x }); };
   flat(a, 1);
   if (terms.length > 2) return null;
@@ -251,7 +272,9 @@ interface Spec {
   mustMentionAny?: boolean;
   unsupported?: string;
   given: Cx[];             // the problem's own data values, so a restatement of a datum is not mistaken for an answer
-  answerLike?: RegExp;     // label names that are always answers even when the value equals a datum
+  answerLike?: RegExp;
+  noRealRoots?: boolean;   // the posed number domain is the reals and the quadratic has none
+  realRootExists?: boolean;     // label names that are always answers even when the value equals a datum
   family: string;
 }
 const qv = (x: unknown): Q => { if (typeof x === "number") { if (!Number.isInteger(x)) throw new Unsupported("non-integer number datum"); return q(BigInt(x)); } const s = String(x).trim(); const m = /^([+-]?\d+)(?:\/(\d+))?$/.exec(s); if (m) return q(BigInt(m[1]), BigInt(m[2] ?? "1")); const d = /^([+-]?)(\d+)\.(\d+)$/.exec(s); if (d) return qdiv(q(BigInt(d[1] + d[2] + d[3])), q(10n ** BigInt(d[3].length))); throw new Unsupported(`datum ${s} is not an exact rational`); };
@@ -360,7 +383,9 @@ function specOf(p: NumProblem): Spec {
       if (coefs.length !== 3) throw new Unsupported("not a quadratic");
       const [a, b, c] = coefs; const disc = csub(cmul(b, b), cmul(cx(q(4)), cmul(a, c))); const s = csqrt(disc);
       const r1 = cdiv(cadd(cneg(b), s), cmul(cx(q(2)), a)), r2 = cdiv(csub(cneg(b), s), cmul(cx(q(2)), a));
-      return base(ceq(r1, r2) ? [r1] : [r1, r2], { setValued: true, aux: true, labels: /^(?:x|z|roots?|solutions?|x_?[12]|z_?[12]|answer)$/i });
+      const nonReal = !qiszero(r1.im) || !qiszero(r2.im);
+      if (nonReal && d.numberDomain !== "complex" && p.coefficientDomain === "real" && !(p.assumptions ?? []).includes("complex-roots")) return base([], { setValued: true, aux: true, noRealRoots: true, labels: /^(?:x|z|roots?|solutions?|x_?[12]|z_?[12]|answer)$/i });
+      return base(ceq(r1, r2) ? [r1] : [r1, r2], { setValued: true, aux: true, realRootExists: !nonReal, labels: /^(?:x|z|roots?|solutions?|x_?[12]|z_?[12]|answer)$/i });
     }
     case "principal-argument": return base([], { unsupported: "principal arguments are irrational multiples of pi, outside the exact number-chain binder" });
     case "complex-log": return base([], { unsupported: "complex logarithms are multi-valued and outside the exact number-chain binder" });
@@ -402,12 +427,29 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
   const stated = new Set<string>(), negated = new Set<string>();
   const provided = new Set<string>(problem.assumptions ?? []);
   if (problem.coefficientDomain === "real") provided.add("real-coefficients");
-  const found: Cx[] = []; let finalRow = -1; let sawAnswerClaim = false;
+  const found: Cx[] = []; let finalRow = -1; let sawAnswerClaim = false; let sawNoReal = false; let needReplacement = false;
   rows.forEach((row, i) => {
     const st = readStatement(row.plain);
     st.assumptions.forEach((x) => stated.add(x)); st.negated.forEach((x) => negated.add(x));
+    // counting notation carries its own convention: C(n,r) / binom / nCr count unordered selections, P(n,r) with numeric arguments / nPr ordered arrangements
+    if (/(?:^|[^A-Za-z])C\s*\(\s*\d+\s*,\s*\d+\s*\)|\\binom|\b\d+\s*C\s*\d+\b|\bn?Cr\b/.test(row.plain)) stated.add("unordered");
+    if (/(?:^|[^A-Za-z])P\s*\(\s*\d+\s*,\s*\d+\s*\)|\b\d+\s*P\s*\d+\b|\bn?Pr\b/.test(row.plain)) stated.add("ordered");
+    if (/\bno\s+real\s+(?:roots?|solutions?|zeros?)\b|\b(?:has|have)\s+no\s+real\b|\bnot\s+have\s+any\s+real\b/i.test(row.plain)) {
+      if (spec.noRealRoots) { b.add(i, ok("the discriminant is negative, so there are no real roots", "exact discriminant sign")); sawNoReal = true; finalRow = i; return; }
+      if (spec.realRootExists) { b.add(i, bad("the quadratic has real roots")); return; }
+    }
     if (isProse(row.plain)) { b.add(i, ok("sentence without a numeric claim to verify (preserved, not relied upon)", "non-mathematical sentence preserved")); return; }
-    const texts = splitEquals(normalize(row.plain));
+    // `P(A, B)`: a comma list inside a probability bracket is read as the joint event only when the typed task is itself a joint/intersection task
+    // and the bracket is a plain list of events; anywhere else the reading (joint, ordered outcome, conditional shorthand) is not licensed.
+    let plainRow = normalize(row.plain);
+    { const re = /\b(?:P|Pr)\s*\(([^()]*,[^()]*)\)/g; let m: RegExpExecArray | null;
+      while ((m = re.exec(plainRow))) {
+        if (m[1].split(",").every((e2) => /^\s*\d+\s*$/.test(e2))) continue; // P(n, r) with numeric arguments is the permutation count, not an event list
+        const authorised = problem.task === "independent-intersection" && !/[|<>=]/.test(m[1]) && m[1].split(",").every((e2) => /^\s*[A-Za-z]\w*\s*$/.test(e2));
+        if (!authorised) { b.add(i, { status: "ambiguous", reason: `the comma list in ${m[0]} could mean a joint event, an ordered outcome or a conditional; this task does not license one reading` }); return; }
+      }
+      plainRow = plainRow.replace(re, (_s, inner: string) => `P(${inner.split(",").map((e2) => e2.trim()).join("∩")})`); }
+    const texts = splitEquals(plainRow);
     if (texts.length === 1) { b.add(i, uns("a line must state an equality; a bare expression is not a derivation step")); return; }
     // label: a bare symbol (bound or not), or words / a bracketed moment such as Var(X)
     let label: string | null = null; let from = 0;
@@ -421,8 +463,13 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
       }
     }
     const members: NAst[] = [];
+    // a closing sign statement (`… = -36 < 0`) is checked against the exact value of the member before it
+    let signRel: { op: string; rhs: NAst } | null = null;
     try {
-      for (let k = from; k < texts.length; k++) members.push(readNumber(texts[k]));
+      for (let k = from; k < texts.length; k++) {
+        const sm = k === texts.length - 1 && texts.length - from >= 2 ? /^(.*?)\s*(<=|>=|<|>)\s*(-?[\d\/. ]+)$/.exec(texts[k]) : null;
+        if (sm) { members.push(readNumber(sm[1])); signRel = { op: sm[2], rhs: readNumber(sm[3]) }; } else members.push(readNumber(texts[k]));
+      }
     } catch (e) {
       if (e instanceof NotationError) { b.add(i, { status: e.kind === "ambiguous" ? "ambiguous" : e.kind === "unsupported" ? "unsupported" : "malformed", reason: e.message }); return; }
       throw e;
@@ -448,6 +495,11 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
       throw e;
     }
     const js: Judge[] = [];
+    if (signRel) {
+      const lv = vals[vals.length - 1]; let rv: Cx | null = null; try { rv = evalN(signRel.rhs, env); } catch { rv = null; }
+      if (!rv || !qiszero(lv.im) || !qiszero(rv.im)) js.push(uns("an inequality between non-real numbers is not an ordered comparison"));
+      else { const sg = qsign(qsub(lv.re, rv.re)); const holds = signRel.op === "<" ? sg < 0 : signRel.op === ">" ? sg > 0 : signRel.op === "<=" ? sg <= 0 : sg >= 0; js.push(holds ? ok("the stated inequality holds for the exact value", "exact rational comparison", digestOf([cxText(lv), signRel.op, cxText(rv)])) : bad(`${cxText(lv)} ${signRel.op} ${cxText(rv)} is false`)); }
+    }
     for (let k = 0; k + 1 < vals.length; k++) js.push(ceq(vals[k], vals[k + 1]) ? ok("the two members are exactly equal", "exact Gaussian-rational arithmetic", digestOf([cxText(vals[k]), cxText(vals[k + 1])])) : bad(`the members are not equal: ${cxText(vals[k])} ≠ ${cxText(vals[k + 1])}`));
     let j: Judge = js.length ? worst(js) : ok("single value", "exact arithmetic");
     const lastAst = members[members.length - 1]; const lastVal = vals[vals.length - 1];
@@ -458,14 +510,16 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
     if (label !== null) {
       const dataVal = env.get(label) ?? env.get(label.replace(/\s+/g, ""));
       const isGiven = spec.given.some((g) => ceq(g, vals[0]));
-      if (dataVal) { if (!ceq(dataVal, vals[0])) j = bad(`${label} is ${cxText(dataVal)}, not ${cxText(vals[0])}`); }
+      if (!dataVal && spec.noRealRoots && answerRe.test(label)) { if (j.status === "valid") j = bad(`${cxText(vals[0])} is not a real number, so it is not a root over the real numbers`); }
+      else if (dataVal) { if (!ceq(dataVal, vals[0])) j = bad(`${label} is ${cxText(dataVal)}, not ${cxText(vals[0])}`); }
       else if (answerRe.test(label) && !(isGiven && !spec.truth.some((t2) => ceq(t2, vals[0])) && !spec.answerLike?.test(label))) {
         if (j.status === "valid" && !spec.truth.some((t2) => ceq(t2, vals[0]))) j = bad(`${texts[0].trim()} is ${cxText(spec.truth[0])}, not ${cxText(vals[0])}`);
-        else if (j.status === "valid") { sawAnswerClaim = true; if (/^[A-Za-z]+$/.test(label) || /^P\(/.test(label)) { try { env.set(label, vals[vals.length - 1]); } catch { /* ignore */ } } }
+        else if (j.status === "valid") { sawAnswerClaim = true; if (!spec.setValued && (/^[A-Za-z]+$/.test(label) || /^P\(/.test(label))) { try { env.set(label, vals[vals.length - 1]); } catch { /* ignore */ } } }
       } else if (j.status === "valid") { try { env.set(label, vals[vals.length - 1]); } catch { /* ignore */ } }
     } else if (j.status === "valid" && canon && i === rows.length - 1 && !spec.truth.some((t2) => ceq(t2, lastVal)) && !spec.aux) {
-      j = bad(`the chain ends at ${cxText(lastVal)}, but the requested quantity is ${cxText(spec.truth[0])}`);
+      j = incomplete(`these lines are true, but the chain ends at ${cxText(lastVal)}, not at the requested quantity ${cxText(spec.truth[0])}; state the requested quantity`);
     }
+    if (spec.family === "finite" && members.length && repeatedFactors(members[0])) needReplacement = true;
     // method evidence: the first formula must visibly use the weights/probabilities (guards against numeric coincidences)
     if (j.status === "valid" && spec.mustMention && spec.mustMention.length) {
       const first = members[0]; const lits = litsOf(first);
@@ -476,10 +530,11 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
   });
   // assumptions the method needs
   const allValid = b.records.every((r) => r?.judge.status === "valid");
-  const unmetAssumptions = spec.needs.filter((a) => !provided.has(a) && !stated.has(a) && !(a === "unordered" && stated.has("ordered") === false && false));
+  const unmetAssumptions = [...spec.needs, ...(needReplacement && !provided.has("with-replacement") && !provided.has("independent") && !stated.has("with-replacement") && !stated.has("independent") ? ["with-replacement"] : [])].filter((a) => !provided.has(a) && !stated.has(a) && !(a === "unordered" && stated.has("ordered") === false && false));
   const contradicted = spec.needs.filter((a) => negated.has(a));
   let complete = allValid && finalRow === rows.length - 1 && sawAnswerClaim;
-  if (spec.setValued) complete = allValid && spec.truth.every((t) => found.some((f) => ceq(f, t))) && finalRow >= 0 && rows.length - 1 === Math.max(...b.records.map((r, i) => (r?.judge.status === "valid" ? i : -1)));
+  if (spec.noRealRoots) complete = allValid && sawNoReal && finalRow === rows.length - 1;
+  else if (spec.setValued) complete = allValid && spec.truth.every((t) => found.some((f) => ceq(f, t))) && finalRow >= 0 && rows.length - 1 === Math.max(...b.records.map((r, i) => (r?.judge.status === "valid" ? i : -1)));
   const notes: string[] = [];
   if (contradicted.length && allValid) { const last = rows.length - 1; b.records[last] = { ...b.records[last], judge: bad(`the working states that ${contradicted[0]} does not hold, but the method needs it`), evidence: null }; complete = false; }
   else if (unmetAssumptions.length && allValid) {
@@ -488,7 +543,7 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
     if (r) b.records[target] = { ...r, judge: missing(`state the assumption ${unmetAssumptions.join(", ")} before relying on this method`), evidence: null };
     complete = false;
   }
-  const why = spec.setValued ? "give every solution as a reduced numeral" : "finish with the requested quantity as a single reduced number";
+  const why = spec.noRealRoots ? "state that there are no real roots" : spec.setValued ? "give every solution as a reduced numeral" : "finish with the requested quantity as a single reduced number";
   if (allValid && !complete && !unmetAssumptions.length && !contradicted.length) { const last = rows.length - 1; const r = b.records[last]; if (r && r.judge.status === "valid") b.records[last] = { ...r, judge: { status: "incomplete", reason: why }, evidence: null }; }
   void NAMES_PRIME; void ident; void qtext;
   return finish(parsed, b, { domain: problem.domain, family: problem.task, nativeComplete: complete && !unmetAssumptions.length && !contradicted.length, obligations: complete && !unmetAssumptions.length ? [] : unmetAssumptions.length ? [`state the assumption ${unmetAssumptions.join(", ")}`] : [why], notes, finalValue: complete ? { kind: "numeric", text: spec.truth.map(cxText).join(" , ") } : null });

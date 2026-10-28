@@ -5,7 +5,7 @@
  * independent exact kernels (e6-cas formal identities with derived restrictions, e6-series Laurent limits). The kernels never accept on a float
  * agreement: a float may only confirm a rejection. Anything the kernels cannot decide is `unsupported`, never accepted.
  */
-import { NotationError, parseExpression, splitEquals, N, S, add, mul, div, neg, pw, fn, type A } from "./e6-parse.ts";
+import { NotationError, normalize, parseExpression, splitEquals, N, S, add, mul, div, neg, pw, fn, type A } from "./e6-parse.ts";
 import { Ambiguity, Budget, Unsupported, compareExpr, d6, domainReqs, evalNum, hasVar, plainLogArgs, substitute, visiblyPositive, type Req } from "./e6-cas.ts";
 import { limitOf, constantValue, type LimV } from "./e6-series.ts";
 import { Builder, bad, incomplete, isProse, missing, ok, readStatement, uns, worst, finish, type E6Plan, type Judge, type Row, syntheticParse } from "./e6-common.ts";
@@ -89,7 +89,9 @@ function subNodesAll(a: A, out: A[] = []): A[] {
 // ================================================================================================ restrictions the student states
 export interface Stated { op: ">" | ">=" | "<" | "<=" | "!="; bound: Q }
 const REL = /^\s*([A-Za-z])\s*(!=|>=|<=|>|<)\s*(-?\s*\d+(?:\.\d+)?(?:\s*\/\s*\d+)?)\s*$/;
-export function readRestrictions(plain: string, v: string): Stated[] | null {
+const LEAD_IN = /^(?:assume|assuming|suppose|let|for|when|if|given|where|on|since|take|restrict(?:ing)? to|provided)\b[\s:]*/i;
+export function readRestrictions(plain0: string, v: string): Stated[] | null {
+  const plain = plain0.trim().replace(LEAD_IN, "").replace(/[\s:;,]+$/, "").replace(/\.+$/, "").trim();
   const parts = plain.split(/\s*(?:,|;|\band\b|\bor\b)\s*/).filter((p) => p.trim());
   if (!parts.length) return null;
   const out: Stated[] = [];
@@ -117,12 +119,59 @@ function satisfied(r: Req, stated: Stated[]): boolean {
 // ================================================================================================ environment
 export class Unbound extends Error {}
 interface Fdef { param: string; body: A }
+// ---------------------------------------------------------------------------------------------- typed task restrictions and square-root branches
+/** restrictions supplied by the typed problem (`restrictions`, `domainComponents`), read once per plan; they behave as stated and carried-forward */
+let TASK_STATED: Stated[] = [];
+function polyCoeffs(a: A, v: string): Q[] | null {
+  const mulP = (x: Q[], y: Q[]): Q[] => { const o: Q[] = new Array(x.length + y.length - 1).fill(Z); x.forEach((xi, i) => y.forEach((yj, j) => { o[i + j] = qadd(o[i + j], qmul(xi, yj)); })); return o; };
+  const go = (x: A): Q[] | null => {
+    switch (x.t) {
+      case "n": return [x.v];
+      case "s": return x.name === v ? [Z, ONE] : null;
+      case "neg": { const r = go(x.a); return r ? r.map(qneg) : null; }
+      case "add": { let acc: Q[] = [Z]; for (const y of x.xs) { const r = go(y); if (!r) return null; const n = Math.max(acc.length, r.length); acc = Array.from({ length: n }, (_, i) => qadd(acc[i] ?? Z, r[i] ?? Z)); } return acc; }
+      case "mul": { let acc: Q[] = [ONE]; for (const y of x.xs) { const r = go(y); if (!r) return null; acc = mulP(acc, r); } return acc; }
+      case "pow": { const k = constQ(x.b); if (!k || k.d !== 1n || k.n < 0n || k.n > 8n) return null; const r = go(x.a); if (!r) return null; let acc: Q[] = [ONE]; for (let i = 0n; i < k.n; i++) acc = mulP(acc, r); return acc; }
+      default: return null;
+    }
+  };
+  const c = go(a); if (!c) return null; const cs = c.slice(); while (cs.length > 1 && qsign(cs[cs.length - 1]) === 0) cs.pop(); return cs;
+}
+const exactSqrtQ = (x: Q): Q | null => { if (qsign(x) < 0) return null; const rt = (n: bigint): bigint | null => { let lo = 0n, hi = n < 2n ? n : BigInt(Math.ceil(Math.sqrt(Number(n)))) + 2n; while (lo <= hi) { const mid = (lo + hi) / 2n; const sq = mid * mid; if (sq === n) return mid; if (sq < n) lo = mid + 1n; else hi = mid - 1n; } return null; }; const a = rt(x.n), b = rt(x.d); return a !== null && b !== null ? q(a, b) : null; };
+/** sqrt(L^2) for a linear L whose sign the restrictions decide becomes ±L; anything else is left for the exact kernel (which will not equate it with a signed expression) */
+function signResolve(a: A, v: string, stated: Stated[]): A {
+  const r = (x: A) => signResolve(x, v, stated);
+  switch (a.t) {
+    case "neg": return { t: "neg", a: r(a.a) };
+    case "add": return { t: "add", xs: a.xs.map(r) };
+    case "mul": return { t: "mul", xs: a.xs.map(r) };
+    case "div": return { t: "div", a: r(a.a), b: r(a.b) };
+    case "pow": return { t: "pow", a: r(a.a), b: r(a.b) };
+    case "fn": {
+      const arg = r(a.a);
+      if (a.f === "sqrt") {
+        const c = polyCoeffs(arg, v);
+        if (c && c.length === 3 && qsign(c[2]) > 0) {
+          const rc = exactSqrtQ(c[2]);
+          if (rc && qeq(qmul(c[1], c[1]), qmul(q(4n), qmul(c[2], c[0])))) {
+            const lin = { a: rc, b: qdiv(c[1], qmul(q(2n), rc)) }; // L = rc*x + c1/(2 rc)
+            const L: A = { t: "add", xs: [{ t: "mul", xs: [{ t: "n", v: lin.a }, { t: "s", name: v }] }, { t: "n", v: lin.b }] };
+            if (satisfied({ kind: "positive", key: "sgn+", lin, stateable: true, text: "" }, stated)) return L;
+            if (satisfied({ kind: "positive", key: "sgn-", lin: { a: qneg(lin.a), b: qneg(lin.b) }, stateable: true, text: "" }, stated)) return { t: "neg", a: L };
+          }
+        }
+      }
+      return { t: "fn", f: a.f, a: arg };
+    }
+    default: return a;
+  }
+}
 class Env {
   defs = new Map<string, A>();
   fdefs = new Map<string, Fdef>();
   dvs = new Map<string, A>();
   est: A[] = [];
-  stated: Stated[] = [];
+  stated: Stated[] = [...TASK_STATED];
   ov: Record<string, A> = {};
   nI = 0;
   hasI = false;
@@ -149,7 +198,7 @@ function resolve(a: A, env: Env, depth = 0, bound: Set<string> = new Set()): A {
     case "mul": return { t: "mul", xs: a.xs.map(r) };
     case "div": return { t: "div", a: r(a.a), b: r(a.b) };
     case "pow": return { t: "pow", a: r(a.a), b: r(a.b) };
-    case "fn": return { t: "fn", f: a.f, a: r(a.a) };
+    case "fn": { const inner = r(a.a); return a.f === "sqrt" ? signResolve({ t: "fn", f: "sqrt", a: inner }, env.v, env.stated) : { t: "fn", f: a.f, a: inner }; }
     case "call": {
       const f = lookupFn(a.name, env);
       if (!f || a.args.length !== 1) throw new Unbound(a.name);
@@ -205,7 +254,7 @@ function relate(x: A, y: A, v: string, env: Env, viaDerivative: boolean): Rel {
 function unmet(reqs: Req[], env: Env, implied: Set<string>, exempt?: Q): { stateable: Req[]; hard: Req[] } {
   const stateable: Req[] = [], hard: Req[] = [];
   for (const r of reqs) {
-    if (implied.has(r.key)) continue;
+    if (implied.has(r.key) || (r.allOf && r.allOf.every((k) => implied.has(k)))) continue;
     if (exempt && r.kind === "nonzero" && r.at !== undefined && qeq(r.at, exempt)) continue;
     if (r.stateable) { if (!satisfied(r, env.stated)) stateable.push(r); } else hard.push(r);
   }
@@ -229,6 +278,11 @@ function readItem(row: Row, env: Env, fnNames: Set<string>, variable: string): I
   const plain = row.plain;
   const rs = readRestrictions(plain, variable);
   if (rs && !/=\s*[^=<>!]/.test(plain.replace(/(?:!=|>=|<=)/g, ""))) return { kind: "restriction", stated: rs };
+  { // "For x > 1: <claim>" states a restriction and makes a claim on the same line
+    const m = /^(?:for|when|if|on|assuming|assume|suppose|where|given)\b([^:]+):\s*(\S.*)$/i.exec(plain);
+    const head = m ? readRestrictions(m[1], variable) : null;
+    if (m && head && !isProse(m[2])) { env.stated.push(...head); return readItem({ ...row, plain: m[2].trim() }, env, fnNames, variable); }
+  }
   if (isProse(plain)) return { kind: "prose", row };
   const texts = splitEquals(plain);
   if (texts.length < 1 || texts.some((t) => !t.trim())) return { kind: "bad", judge: { status: "malformed", reason: "an empty part around an equals sign" } };
@@ -260,7 +314,8 @@ const finalForm = (a: A): boolean => {
     if (cur.t === "mul") { let c = ONE; let g: A | null = null; for (const f of cur.xs) { const k = coefOf(f); if (!k) return null; if (k.g) { if (g) return null; g = k.g; } else { if (f.t !== "n" && f.t !== "div") return null; c = qmul(c, k.c); } } if (cur.xs.filter((f) => f.t === "n").length > 1) return null; return { c: qmul(c, q(sign)), g }; }
     if (cur.t === "pi" || cur.t === "e") return { c: q(sign), g: cur };
     if (cur.t === "fn" && (cur.f === "ln" || cur.f === "sqrt") && cur.a.t === "n" && cur.a.v.d === 1n && cur.a.v.n >= 2n) return { c: q(sign), g: cur };
-    if (cur.t === "pow" && cur.a.t === "e" && cur.b.t === "n") return { c: q(sign), g: cur };
+    if (cur.t === "pow" && cur.a.t === "e" && (cur.b.t === "n" || (cur.b.t === "neg" && cur.b.a.t === "n"))) return { c: q(sign), g: cur };
+    if (cur.t === "fn" && cur.f === "exp" && (cur.a.t === "n" || (cur.a.t === "neg" && cur.a.a.t === "n"))) return { c: q(sign), g: cur };
     if (cur.t === "s" && cur.name === "i") return { c: q(sign), g: cur };
     return null;
   };
@@ -292,6 +347,10 @@ export function planCalculusE6(problem: CalculusProblem, rows: Row[]): E6Plan {
   const notes: string[] = [];
   const v = (problem as { variable?: string }).variable ?? "x";
   const fnNames = preScanFns(rows, v);
+  TASK_STATED = [];
+  for (const s of [...(((problem as { restrictions?: unknown }).restrictions as string[] | undefined) ?? []), ...(((problem as { domainComponents?: unknown }).domainComponents as string[] | undefined) ?? [])]) {
+    try { const rs = typeof s === "string" ? readRestrictions(normalize(s), v) : null; if (rs) TASK_STATED.push(...rs); } catch { /* an unreadable typed restriction is simply not used (the working then has to state it) */ }
+  }
   try {
     switch (problem.task as TaskKind) {
       case "derivative": return derivative(problem as never, rows, parsed, b, notes, v, fnNames);
@@ -400,12 +459,10 @@ const dvDefinition = (members: A[], env: Env, v: string): Judge | null => {
 
 // ---------------------------------------------------------------------------------------------- derivative
 function derivative(problem: Extract<CalculusProblem, { task: "derivative" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
-  const order = problem.order ?? 1; const f0 = fromExpr(problem.expression);
+  const order = problem.order ?? 1; const f0 = signResolve(fromExpr(problem.expression), v, TASK_STATED);
   const env = new Env(v, f0); env.est.push(f0);
   let truth: A; try { truth = f0; for (let i = 0; i < order; i++) truth = d6(truth, v); } catch (e) { const g = guard(() => { throw e; }); fillRest(rows, b, isJudge(g) ? g.reason : "outside the differentiation rules", isJudge(g) ? g.status : "unsupported"); return finish(parsed, b, { domain: "calculus", family: "derivative", nativeComplete: false, obligations: ["the posed function is outside the exact differentiation rules"], notes }); }
   const implied = impliedOf(f0, v);
-  // a cancelled factor is a restriction the working must state, even when the posed function happens to exclude the same point
-  { try { for (const r of domainReqs(f0, v)) if (r.kind === "nonzero") implied.delete(r.key); } catch { /* keep implied set */ } }
   const c = { conclusions: [] as { i: number; s: ReturnType<typeof readStatement> }[] };
   let finalOk = false, finalClosed = false; let finalText = ""; let finalRow = -1;
   rows.forEach((row, i) => {
@@ -491,7 +548,7 @@ function chain(members: A[], env: Env, v: string, implied: Set<string>, opts: { 
 
 // ---------------------------------------------------------------------------------------------- indefinite integral
 function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integral" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
-  const g0 = fromExpr(problem.integrand);
+  const g0 = signResolve(fromExpr(problem.integrand), v, TASK_STATED);
   const env = new Env(v, null); env.est.push(g0);
   const implied = impliedOf(g0, v);
   const c = { conclusions: [] as { i: number; s: ReturnType<typeof readStatement> }[] };
@@ -538,7 +595,7 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
       if (hard.length) { b.add(i, uns("the logarithm's domain cannot be stated in supported notation")); return; }
       b.add(i, missing(`state the domain ${posOfIntegrand.map((r) => r.text).join(", ")} (a logarithm without absolute value assumes it)`)); return;
     }
-    if (closed && !lastHasC || (constantless && closed)) { b.add(i, missing("the constant of integration + C is missing")); return; }
+    if (closed && !lastHasC) { b.add(i, missing("the constant of integration + C is missing")); return; }
     if (closed && lastHasC) { finalOk = true; finalClosed = true; finalHasC = true; finalText = row.raw; finalRow = i; }
     else if (!closed && !lastHasI) { finalOk = true; finalClosed = false; }
     b.add(i, j.judge);
@@ -556,7 +613,7 @@ function boundQ(a: A | undefined): Q | null { return a ? constQ(a) : null; }
 function constOnly(a: A): boolean { return !hasNode(a, (x) => x.t === "s"); }
 function definite(problem: Extract<CalculusProblem, { task: "definite-integral" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
   if (problem.improper) { fillRest(rows, b, "improper integrals are outside the exact definite-integral binder"); return finish(parsed, b, { domain: "calculus", family: "definite-integral", nativeComplete: false, obligations: ["improper integrals are not supported by this binder"], notes }); }
-  const g0 = fromExpr(problem.integrand);
+  const g0 = signResolve(fromExpr(problem.integrand), v, TASK_STATED);
   const loA = parseExpression(String(problem.lower), { fnNames: new Set(), variable: v }), hiA = parseExpression(String(problem.upper), { fnNames: new Set(), variable: v });
   const lo0 = evalNum(loA, {}), hi0 = evalNum(hiA, {});
   const env = new Env(v, null); env.est.push(g0);
@@ -666,7 +723,7 @@ function limValueOf(m: Extract<A, { t: "LIM" }>, env: Env, v: string): { val: Li
   return { val, inner, pt };
 }
 function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
-  const f0 = fromExpr(problem.expression); const pt0 = ptOf(problem.approach); const side0 = problem.side ?? "both";
+  const f0 = signResolve(fromExpr(problem.expression), v, TASK_STATED); const pt0 = ptOf(problem.approach); const side0 = problem.side ?? "both";
   const env = new Env(v, f0); env.est.push(f0);
   const truth = guard(() => limitOf(f0, v, pt0, side0));
   if (isJudge(truth)) { fillRest(rows, b, truth.reason, truth.status); return finish(parsed, b, { domain: "calculus", family: "limit", nativeComplete: false, obligations: [truth.reason], notes }); }
@@ -688,11 +745,13 @@ function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: R
     for (const m of members) {
       if (m.t === "LIM") {
         const r = limValueOf(m, env, v); if (isJudge(r)) { b.add(i, r); return; }
-        const sameApproach = m.v === v && (r.pt === pt0 || (typeof r.pt !== "string" && typeof pt0 !== "string" && qeq(r.pt, pt0))) && m.side === side0;
+        const sameApproach = m.v === v && (r.pt === pt0 || (typeof r.pt !== "string" && typeof pt0 !== "string" && qeq(r.pt, pt0)));
+        // the point must be the posed one; a one-sided (or two-sided) limit of the same function at that point is a legitimate lemma whose value is evaluated on its own side
         if (m.v !== v) { b.add(i, uns("limits in a variable other than the problem variable are not supported")); return; }
-        if (!sameApproach) { b.add(i, bad("this limit is taken at a different point or from a different side than the posed limit")); return; }
+        if (!sameApproach) { b.add(i, bad("this limit is taken at a different point than the posed limit")); return; }
         vals.push({ kind: "lim", ...r }); continue;
       }
+      if (m.t === "neg" && m.a.t === "V" && m.a.k === "inf") { vals.push({ kind: "special", val: { kind: "inf", sign: -1 } }); continue; }
       if (m.t === "V") { vals.push({ kind: "special", val: m.k === "dne" ? { kind: "dne" } : { kind: "inf", sign: m.k === "inf" ? 1 : -1 } }); continue; }
       const r = guard(() => resolve(m, env)); if (isJudge(r)) { b.add(i, r); return; }
       if (constOnly(r)) {

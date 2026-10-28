@@ -1,0 +1,368 @@
+{
+ "source": "verdicts produced by a blind adjudicator agent that was given only the typed problem and the working (no reference label, no engine output)",
+ "cases": [
+  {
+   "caseId": "d1",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "log",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      {
+       "kind": "log",
+       "argument": {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "text": "ln(x) + ln(3x) = ln(3x^2)\nd/dx[ln(x) + ln(3x)] = 2/x",
+   "blindVerdict": "verified"
+  },
+  {
+   "caseId": "d2",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "log",
+     "argument": {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 2
+     }
+    },
+    "variable": "x"
+   },
+   "text": "ln(x^2) = 2 ln(x)\nd/dx[ln(x^2)] = 2/x",
+   "blindVerdict": "missing-assumption"
+  },
+  {
+   "caseId": "d3",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "log",
+     "argument": {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 2
+     }
+    },
+    "variable": "x"
+   },
+   "text": "ln(x^2) = 2 ln|x|\nd/dx[ln(x^2)] = 2/x",
+   "blindVerdict": "verified"
+  },
+  {
+   "caseId": "d4",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "root",
+     "index": 2,
+     "radicand": {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 2
+     }
+    },
+    "variable": "x"
+   },
+   "text": "sqrt(x^2) = x\nd/dx[sqrt(x^2)] = 1",
+   "blindVerdict": "invalid"
+  },
+  {
+   "caseId": "d5",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "log",
+       "argument": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "-1"
+         }
+        ]
+       }
+      },
+      {
+       "kind": "log",
+       "argument": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "text": "ln(x - 1) + ln(x + 1) = ln(x^2 - 1)\nd/dx[ln(x - 1) + ln(x + 1)] = 2x/(x^2 - 1)",
+   "blindVerdict": "verified"
+  },
+  {
+   "caseId": "d6",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "log",
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "constant",
+        "value": "-1"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "text": "ln(x^2 - 1) = ln(x - 1) + ln(x + 1)\nd/dx[ln(x^2 - 1)] = 1/(x - 1) + 1/(x + 1)",
+   "blindVerdict": "missing-assumption"
+  },
+  {
+   "caseId": "d7",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "log",
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "constant",
+        "value": "-1"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "text": "For x > 1: ln(x^2 - 1) = ln(x - 1) + ln(x + 1)\nd/dx[ln(x^2 - 1)] = 1/(x - 1) + 1/(x + 1)",
+   "blindVerdict": "verified"
+  },
+  {
+   "caseId": "d8",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "constant",
+         "value": "-9"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "-3"
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "text": "f(x) = (x^2 - 9)/(x - 3)\nf = (x - 3)(x + 3)/(x - 3) = x + 3\nf'(x) = 1",
+   "blindVerdict": "verified"
+  },
+  {
+   "caseId": "d9",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": -1
+    },
+    "variable": "x"
+   },
+   "text": "\u222b 1/x dx = ln(x) + C",
+   "blindVerdict": "missing-assumption"
+  },
+  {
+   "caseId": "d10",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": -1
+    },
+    "variable": "x"
+   },
+   "text": "\u222b 1/x dx = ln|x| + C",
+   "blindVerdict": "verified"
+  },
+  {
+   "caseId": "d11",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": -1
+    },
+    "variable": "x"
+   },
+   "text": "Assume x > 0.\n\u222b 1/x dx = ln(x) + C",
+   "blindVerdict": "verified"
+  },
+  {
+   "caseId": "d12",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "constant",
+         "value": "-4"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "-2"
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "2",
+    "side": "both"
+   },
+   "text": "(x^2 - 4)/(x - 2) = (x - 2)(x + 2)/(x - 2) = x + 2\nlim_(x\u21922) (x^2 - 4)/(x - 2) = lim_(x\u21922) (x + 2) = 4",
+   "blindVerdict": "verified"
+  }
+ ]
+}
