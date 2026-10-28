@@ -1,0 +1,517 @@
+[
+ {
+  "id": "e5-sealed-007",
+  "referenceLabel": "invalid",
+  "referenceUsedAsTruth": false,
+  "contested": false,
+  "independentMathematics": "AB = CA gives B = C (base angles); 20 + 2B = 180 gives B = 80. Every stated claim is true and follows from the stated facts; the goal is B = 80.",
+  "finalVerdict": "verified",
+  "decidedBy": "accepted-by-obligations",
+  "routes": [
+   {
+    "route": "e5",
+    "reported": "verified",
+    "role": "accepted",
+    "reason": "its answer obligation is proven and nothing on its cone is open"
+   },
+   {
+    "route": "base",
+    "reported": "unsupported",
+    "role": "abstains",
+    "reason": "could not read or decide the working"
+   }
+  ],
+  "mechanisms": {
+   "e5-independent-geocalc": 4
+  },
+  "integrity": {
+   "provenDerivations": 4,
+   "attributed": 4,
+   "unattributed": 0
+  },
+  "obligations": [
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 1,
+    "claim": "B = C",
+    "mechanism": "e5-independent-geocalc",
+    "reason": "follows from the stated facts"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 1,
+    "claim": "B = C",
+    "mechanism": "grounding",
+    "reason": "grounded in task-premise:task-angles-and-sides"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 2,
+    "claim": "+ B + C = 180°",
+    "mechanism": "e5-independent-geocalc",
+    "reason": "follows from the stated facts"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 2,
+    "claim": "+ B + C = 180°",
+    "mechanism": "grounding",
+    "reason": "grounded in task-premise:task-angles-and-sides"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 3,
+    "claim": "20° + 2B = 180°",
+    "mechanism": "e5-independent-geocalc",
+    "reason": "follows from the stated facts"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 3,
+    "claim": "20° + 2B = 180°",
+    "mechanism": "grounding",
+    "reason": "grounded in task-premise:20, derived-fact:2, task-premise:task-angles-and-sides"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 4,
+    "claim": "B = 80°",
+    "mechanism": "e5-independent-geocalc",
+    "reason": "follows from the stated facts"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 4,
+    "claim": "B = 80°",
+    "mechanism": "grounding",
+    "reason": "grounded in task-premise:80, task-premise:task-angles-and-sides"
+   },
+   {
+    "kind": "answer",
+    "status": "proven",
+    "line": 4,
+    "claim": "B = 80°",
+    "mechanism": "completeness",
+    "reason": "the final claim is proven and grounded and the route's completeness authority confirms it states the requested quantity"
+   }
+  ],
+  "taskRestrictions": {
+   "premises": 0,
+   "restrictions": [],
+   "domainBranches": null,
+   "assumptions": [],
+   "impliedRestrictions": [],
+   "unreadable": []
+  }
+ },
+ {
+  "id": "e6-204",
+  "referenceLabel": "ambiguous",
+  "referenceUsedAsTruth": false,
+  "contested": false,
+  "independentMathematics": "A and B are stated independent (a task assumption); P(A,B) = (1/2)(1/3) = 1/6. A concise answer; no further step is required.",
+  "finalVerdict": "verified",
+  "decidedBy": "accepted-by-obligations",
+  "routes": [
+   {
+    "route": "e6",
+    "reported": "verified",
+    "role": "accepted",
+    "reason": "its answer obligation is proven and nothing on its cone is open"
+   },
+   {
+    "route": "base",
+    "reported": "unsupported",
+    "role": "abstains",
+    "reason": "could not read or decide the working"
+   }
+  ],
+  "mechanisms": {
+   "e6-independent-exact": 1
+  },
+  "integrity": {
+   "provenDerivations": 1,
+   "attributed": 1,
+   "unattributed": 0
+  },
+  "obligations": [
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 1,
+    "claim": "P(A, B) = 1/6",
+    "mechanism": "e6-independent-exact",
+    "reason": "single value"
+   },
+   {
+    "kind": "answer",
+    "status": "proven",
+    "line": 1,
+    "claim": "P(A, B) = 1/6",
+    "mechanism": "completeness",
+    "reason": "the final claim is proven and the route's completeness authority confirms it states the requested quantity"
+   }
+  ],
+  "taskRestrictions": {
+   "premises": 2,
+   "restrictions": [],
+   "domainBranches": null,
+   "assumptions": [
+    "independent"
+   ],
+   "impliedRestrictions": [],
+   "unreadable": []
+  }
+ },
+ {
+  "id": "e6-263",
+  "referenceLabel": "missing-assumption",
+  "referenceUsedAsTruth": false,
+  "contested": false,
+  "independentMathematics": "The posed function contains ln(x), so x > 0 is implied by the task; there ln(x) + ln(x^2) = 3 ln(x) and the derivative is 3/x.",
+  "finalVerdict": "verified",
+  "decidedBy": "accepted-by-obligations",
+  "routes": [
+   {
+    "route": "e6",
+    "reported": "verified",
+    "role": "accepted",
+    "reason": "its answer obligation is proven and nothing on its cone is open"
+   },
+   {
+    "route": "base",
+    "reported": "ambiguous",
+    "role": "abstains",
+    "reason": "the generic text route does not read this task's notation, while a specialised route did; its ambiguity is not an objection"
+   },
+   {
+    "route": "e5",
+    "reported": "unsupported",
+    "role": "abstains",
+    "reason": "could not read or decide the working"
+   }
+  ],
+  "mechanisms": {
+   "e6-independent-exact": 2
+  },
+  "integrity": {
+   "provenDerivations": 2,
+   "attributed": 2,
+   "unattributed": 0
+  },
+  "obligations": [
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 1,
+    "claim": "ln(x) + ln(x^2) = ln(x^3)",
+    "mechanism": "e6-independent-exact",
+    "reason": "members are equal (formal identity)"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 1,
+    "claim": "ln(x) + ln(x^2) = ln(x^3)",
+    "mechanism": "grounding",
+    "reason": "connected to the posed function by an exact identity"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 2,
+    "claim": "d/dx[ln(x) + ln(x^2)] = 3/x",
+    "mechanism": "e6-independent-exact",
+    "reason": "members are equal (formal identity)"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 2,
+    "claim": "d/dx[ln(x) + ln(x^2)] = 3/x",
+    "mechanism": "grounding",
+    "reason": "connected to the posed function by an exact identity"
+   },
+   {
+    "kind": "answer",
+    "status": "proven",
+    "line": 2,
+    "claim": "d/dx[ln(x) + ln(x^2)] = 3/x",
+    "mechanism": "completeness",
+    "reason": "the final claim is proven and grounded and the route's completeness authority confirms it states the requested quantity"
+   }
+  ],
+  "taskRestrictions": {
+   "premises": 0,
+   "restrictions": [],
+   "domainBranches": null,
+   "assumptions": [],
+   "impliedRestrictions": [
+    "x > 0",
+    "the argument of log must be positive (not a one-variable linear condition: carried as a kernel-derived restriction)"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "id": "e6-251",
+  "referenceLabel": "missing-assumption",
+  "referenceUsedAsTruth": false,
+  "contested": true,
+  "independentMathematics": "CONTESTED. f(x) = (x^2-4)/(x-2) carries x != 2 in the posed function; f = x + 2 and f' = 1 hold for x != 2. Whether the answer must restate x != 2 is exactly what the two independent adjudicators disagree on (A: verified, B: missing-assumption); it is not decided here.",
+  "finalVerdict": "verified",
+  "decidedBy": "accepted-by-obligations",
+  "routes": [
+   {
+    "route": "e5",
+    "reported": "verified",
+    "role": "accepted",
+    "reason": "its answer obligation is proven and nothing on its cone is open"
+   },
+   {
+    "route": "e6",
+    "reported": "verified",
+    "role": "agrees",
+    "reason": "independently reached the same acceptance"
+   },
+   {
+    "route": "base",
+    "reported": "unsupported",
+    "role": "abstains",
+    "reason": "could not read or decide the working"
+   }
+  ],
+  "mechanisms": {
+   "u4-kernel": 3
+  },
+  "integrity": {
+   "provenDerivations": 3,
+   "attributed": 3,
+   "unattributed": 0
+  },
+  "obligations": [
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 1,
+    "claim": "f(x) = (x² - 4)/(x - 2)",
+    "mechanism": "u4-kernel",
+    "reason": "rewriting the function: verified by the exact kernel (restrictions nonzero:{\"kind\":\"add\",\"terms\":[{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"constant\",\"value\":\"2\"}]},{\"kind\":\"variable\",\"name\":\"x\"}]}, nonzero:{\"kind\":\"add\",\"terms\":[{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"constant\",\"value\":\"2\"}]},{\"kind\":\"variable\",\"name\":\"x\"}]})"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 1,
+    "claim": "f(x) = (x² - 4)/(x - 2)",
+    "mechanism": "grounding",
+    "reason": "the route accepts a calculus line only after connecting it to the posed expression (function, integrand, integral or limit)"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 2,
+    "claim": "f = (x - 2) · (x + 2)/(x - 2) = x + 2",
+    "mechanism": "u4-kernel",
+    "reason": "rewriting the function: verified by the exact kernel (restrictions nonzero:{\"kind\":\"add\",\"terms\":[{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"constant\",\"value\":\"2\"}]},{\"kind\":\"variable\",\"name\":\"x\"}]}, nonzero:{\"kind\":\"add\",\"terms\":[{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"constant\",\"value\":\"2\"}]},{\"kind\":\"variable\",\"name\":\"x\"}]})"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 2,
+    "claim": "f = (x - 2) · (x + 2)/(x - 2) = x + 2",
+    "mechanism": "grounding",
+    "reason": "the route accepts a calculus line only after connecting it to the posed expression (function, integrand, integral or limit)"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 3,
+    "claim": "f'(x) = 1",
+    "mechanism": "u4-kernel",
+    "reason": "derivative of order 1: verified by the exact kernel (restrictions nonzero:{\"kind\":\"add\",\"terms\":[{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"constant\",\"value\":\"2\"}]},{\"kind\":\"variable\",\"name\":\"x\"}]}, nonzero:{\"kind\":\"add\",\"terms\":[{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"constant\",\"value\":\"2\"}]},{\"kind\":\"variable\",\"name\":\"x\"}]})"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 3,
+    "claim": "f'(x) = 1",
+    "mechanism": "grounding",
+    "reason": "the route accepts a calculus line only after connecting it to the posed expression (function, integrand, integral or limit)"
+   },
+   {
+    "kind": "answer",
+    "status": "proven",
+    "line": 3,
+    "claim": "f'(x) = 1",
+    "mechanism": "completeness",
+    "reason": "the final claim is proven and grounded and the route's completeness authority confirms it states the requested quantity"
+   }
+  ],
+  "taskRestrictions": {
+   "premises": 0,
+   "restrictions": [],
+   "domainBranches": null,
+   "assumptions": [],
+   "impliedRestrictions": [
+    "x != 2"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "id": "r6-194",
+  "referenceLabel": "ambiguous",
+  "referenceUsedAsTruth": false,
+  "contested": false,
+  "independentMathematics": "Independence is a task assumption and the student restates P(A), P(B); P(A,B) = (1/3)(1/2) = 1/6.",
+  "finalVerdict": "verified",
+  "decidedBy": "accepted-by-obligations",
+  "routes": [
+   {
+    "route": "e6",
+    "reported": "verified",
+    "role": "accepted",
+    "reason": "its answer obligation is proven and nothing on its cone is open"
+   },
+   {
+    "route": "base",
+    "reported": "malformed",
+    "role": "abstains",
+    "reason": "could not read or decide the working"
+   }
+  ],
+  "mechanisms": {
+   "e6-independent-exact": 3
+  },
+  "integrity": {
+   "provenDerivations": 3,
+   "attributed": 3,
+   "unattributed": 0
+  },
+  "obligations": [
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 1,
+    "claim": "P(A) = 1/3",
+    "mechanism": "e6-independent-exact",
+    "reason": "single value"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 1,
+    "claim": "P(B) = 1/2",
+    "mechanism": "e6-independent-exact",
+    "reason": "single value"
+   },
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 2,
+    "claim": "P(A,B) = 1/3 * 1/2 = 1/6",
+    "mechanism": "e6-independent-exact",
+    "reason": "the two members are exactly equal"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 2,
+    "claim": "P(A,B) = 1/3 * 1/2 = 1/6",
+    "mechanism": "grounding",
+    "reason": "grounded in derived-fact:line-1"
+   },
+   {
+    "kind": "answer",
+    "status": "proven",
+    "line": 2,
+    "claim": "P(A,B) = 1/3 * 1/2 = 1/6",
+    "mechanism": "completeness",
+    "reason": "the final claim is proven and grounded and the route's completeness authority confirms it states the requested quantity"
+   }
+  ],
+  "taskRestrictions": {
+   "premises": 2,
+   "restrictions": [],
+   "domainBranches": null,
+   "assumptions": [
+    "independent"
+   ],
+   "impliedRestrictions": [],
+   "unreadable": []
+  }
+ },
+ {
+  "id": "r6-220",
+  "referenceLabel": "missing-assumption",
+  "referenceUsedAsTruth": false,
+  "contested": false,
+  "independentMathematics": "The task poses a binomial variance with n = 10, p = 3/10; Var = np(1-p) = 10(3/10)(7/10) = 21/10. Both factors come from the posed data.",
+  "finalVerdict": "verified",
+  "decidedBy": "accepted-by-obligations",
+  "routes": [
+   {
+    "route": "e6",
+    "reported": "verified",
+    "role": "accepted",
+    "reason": "its answer obligation is proven and nothing on its cone is open"
+   },
+   {
+    "route": "base",
+    "reported": "unsupported",
+    "role": "abstains",
+    "reason": "could not read or decide the working"
+   }
+  ],
+  "mechanisms": {
+   "e6-independent-exact": 1
+  },
+  "integrity": {
+   "provenDerivations": 1,
+   "attributed": 1,
+   "unattributed": 0
+  },
+  "obligations": [
+   {
+    "kind": "derivation",
+    "status": "proven",
+    "line": 1,
+    "claim": "Var(X) = 10(3/10)*(7/10) = 21/10",
+    "mechanism": "e6-independent-exact",
+    "reason": "the two members are exactly equal"
+   },
+   {
+    "kind": "grounding",
+    "status": "proven",
+    "line": 1,
+    "claim": "Var(X) = 10(3/10)*(7/10) = 21/10",
+    "mechanism": "grounding",
+    "reason": "grounded in task-premise:data.n, task-premise:data.p, derived-fact:1 - data.p"
+   },
+   {
+    "kind": "answer",
+    "status": "proven",
+    "line": 1,
+    "claim": "Var(X) = 10(3/10)*(7/10) = 21/10",
+    "mechanism": "completeness",
+    "reason": "the final claim is proven and grounded and the route's completeness authority confirms it states the requested quantity"
+   }
+  ],
+  "taskRestrictions": {
+   "premises": 2,
+   "restrictions": [],
+   "domainBranches": null,
+   "assumptions": [],
+   "impliedRestrictions": [],
+   "unreadable": []
+  }
+ }
+]

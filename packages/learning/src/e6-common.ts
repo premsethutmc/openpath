@@ -9,20 +9,24 @@ import type { BindingEvidence } from "./acceptance-gate.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 import { normalize, splitEquals } from "./e6-parse.ts";
 import { extractLedger } from "./claim-ledger.ts";
-import type { Grounding } from "./claim-grounding.ts";
+import { GROUNDING_CONTRACT, type Grounding } from "./claim-grounding.ts";
 
 export const GENERALIZATION_E6_CONTRACT = "openpath-natural-generalization-e6@1" as const;
 export const LIMITS = { characters: 8192, lines: 64, members: 10 } as const;
 export const E6_CHECKER = "e6-independent-exact" as const;
 
 export type JS = "valid" | "invalid" | "unsupported" | "missing-assumption" | "incomplete" | "ambiguous" | "malformed" | "resource-exhausted";
-export interface Judge { status: JS; reason: string; scope?: string; digest?: string | null; /** the line carries no mathematical claim: it earns NO verification credit and produces no evidence */ nonMath?: boolean; /** E7: provenance of the claim (task premises / derived facts it rests on) */ grounding?: Grounding }
+export interface Judge { status: JS; reason: string; /** E7 Phase 6: the line is correct on its own but unrelated to the task (grounding unresolved, not invalid) */ offTask?: boolean; scope?: string; digest?: string | null; /** the line carries no mathematical claim: it earns NO verification credit and produces no evidence */ nonMath?: boolean; /** E7: provenance of the claim (task premises / derived facts it rests on) */ grounding?: Grounding }
 export const ok = (reason: string, scope = "independent exact check", digest?: string | null): Judge => ({ status: "valid", reason, scope, digest: digest ?? null });
 export const nonMath = (reason: string): Judge => ({ status: "valid", reason, scope: "non-mathematical", digest: null, nonMath: true });
 export const bad = (reason: string): Judge => ({ status: "invalid", reason });
 export const uns = (reason: string): Judge => ({ status: "unsupported", reason });
 export const missing = (reason: string): Judge => ({ status: "missing-assumption", reason });
 export const incomplete = (reason: string): Judge => ({ status: "incomplete", reason });
+/** E7 Phase 6: a line that is internally correct but is not about the posed task. It is neither a proof of the task (not credited) nor a claim that the mathematics is false (never `invalid`). */
+/** E7 Phase 6: the relevance of a symbolic line is its anchoring: some member is exactly the posed expression, an established form of it, or what the posed operation yields from one. */
+export const anchored = (reason: string): Grounding => ({ contract: GROUNDING_CONTRACT, sources: [{ kind: "task-premise", ref: "posed-expression", by: "symbol", trivial: false }], relevant: true, reason });
+export const offTask = (reason: string): Judge => ({ status: "incomplete", reason: `${reason}; the line itself is internally correct, but it is not about the posed task`, offTask: true });
 const PRI: JS[] = ["invalid", "resource-exhausted", "ambiguous", "malformed", "unsupported", "missing-assumption", "incomplete", "valid"];
 export function worst(xs: Judge[]): Judge {
   for (const st of PRI) { const j = xs.find((x) => x.status === st); if (j) return st === "valid" ? { ...j, digest: digestOf(xs.map((x) => x.digest ?? j.reason)) } : j; }
@@ -88,6 +92,8 @@ export interface E6Plan {
   diagnostics: { lines: number; judged: Record<string, number> };
   /** E7 Phase 4: the grounding the checker computed for each line, whatever its verdict (a rejected line's sources are still context) */
   grounded?: { line: number; grounding: import("./claim-grounding.ts").Grounding }[];
+  /** E7 Phase 6: source lines that are internally correct but not about the task (never credited, never blocking by themselves) */
+  offTaskLines?: number[];
 }
 export function finish(parsed: NaturalParseResult, b: Builder, args: { domain: string; family: string; nativeComplete: boolean; obligations: string[]; notes: string[]; restrictions?: string[]; finalValue?: E6Plan["finalValue"] }): E6Plan {
   const accounts: AccountEntry[] = parsed.lines.map((l, i) => (b.records[i]?.judge.nonMath ? { lineId: l.id, role: "non-mathematical" as const, dependsOn: b.records[i]?.dependsOn ?? [] } : { lineId: l.id, role: "claim-step" as const, stepIndex: i, dependsOn: b.records[i]?.dependsOn ?? [] }));
@@ -96,7 +102,7 @@ export function finish(parsed: NaturalParseResult, b: Builder, args: { domain: s
   const only = (s: JS) => statuses.includes(s) && !statuses.some((x) => x === "invalid" || x === "unsupported" || x === "ambiguous" || x === "malformed" || x === "resource-exhausted" || x === undefined);
   const terminal = only("missing-assumption") ? "missing-assumption" : null;
   const judged: Record<string, number> = {}; for (const s of statuses) judged[s ?? "none"] = (judged[s ?? "none"] ?? 0) + 1;
-  return { grounded: b.records.flatMap((r, i) => (r?.judge.grounding ? [{ line: parsed.lines[i].source.line, grounding: r.judge.grounding }] : [])), parsed, accounts, outcomes, evidence: b.records.flatMap((r) => (r?.evidence ? [r.evidence] : [])), nativeComplete: args.nativeComplete, obligations: args.obligations, terminal, domain: args.domain, family: args.family, destination: b.destination, notes: args.notes, restrictions: args.restrictions ?? [], finalValue: args.finalValue ?? null, diagnostics: { lines: parsed.lines.length, judged } };
+  return { offTaskLines: b.records.flatMap((r, i) => (r?.judge.offTask ? [parsed.lines[i].source.line] : [])), grounded: b.records.flatMap((r, i) => (r?.judge.grounding ? [{ line: parsed.lines[i].source.line, grounding: r.judge.grounding }] : r?.judge.offTask ? [{ line: parsed.lines[i].source.line, grounding: { contract: GROUNDING_CONTRACT, sources: [], relevant: false, reason: r.judge.reason } }] : [])), parsed, accounts, outcomes, evidence: b.records.flatMap((r) => (r?.evidence ? [r.evidence] : [])), nativeComplete: args.nativeComplete, obligations: args.obligations, terminal, domain: args.domain, family: args.family, destination: b.destination, notes: args.notes, restrictions: args.restrictions ?? [], finalValue: args.finalValue ?? null, diagnostics: { lines: parsed.lines.length, judged } };
 }
 
 // ================================================================================================ prose understanding

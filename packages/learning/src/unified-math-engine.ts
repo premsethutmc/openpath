@@ -1,4 +1,6 @@
 /** Unified mathematics assessment U1. Thin dispatch only; native engines remain authoritative. */
+import type { ObligationSet } from "./proof-obligations.ts";
+import { adjudicate, structuredObligations, obligationsOf, type RouteReport, type CertificationRecord } from "./certification-authority.ts";
 import { assessWorking, verifyWorkingStep, type WorkingOptions } from "./core/working-assessment.ts";
 import { requestGeometryWorker, GeometryTransportError, type GeometryFailureCode } from "./geometry-worker.ts";
 import { MATHEMATICAL_OBLIGATION_CONTRACT, constant, statementText, symbol, validateObligation, type MathExpression, type MathematicalObligation, type MathematicalStatement } from "./mathematical-obligations.ts";
@@ -40,9 +42,9 @@ export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:str
 export interface M2CrossDomainWorking { stages:{id:string;working:string[]|M1Step[]|M2Step[]|CalculusStep[]|CalculusMethodStep[]|SymbolicStep[]|B1Step[]|LAStep[]|ComplexStep[]|{steps:Record<string,unknown>[]} | {geometry:{steps:Record<string,unknown>[]};calculation:string[];domainConclusion?:{symbol:string;value:number}}}[] }
 export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | CalculusMethodProblem | SymbolicProblem | B1Problem | LAProblem | ComplexProblem | M2CrossDomainProblem | D3Problem;
 export type StudentWorking = string[] | NaturalWorkingInput | M1Step[] | M2Step[] | CalculusStep[] | CalculusMethodStep[] | SymbolicStep[] | B1Step[] | LAStep[] | ComplexStep[] | M2CrossDomainWorking | D3Working | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
-export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; proofContext?: ProofContext; symbolicBudget?: SymbolicBudget; maxCrossDomainStages?: number }
+export interface AssessOptions extends WorkingOptions { /** E7 Phase 6: internal; the working is already the task-relevant part of a submission, do not exclude side claims again */ sideClaimsExcluded?: boolean; maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; proofContext?: ProofContext; symbolicBudget?: SymbolicBudget; maxCrossDomainStages?: number }
 export interface AssessmentStep { index: number; classification: Classification; justification: string; reasoner: string; dependencies: unknown[]; source?:SourceLocation }
-export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | "d3-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus" | "symbolic" | "probability-statistics" | "linear-algebra" | "complex-polynomial"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode; /** E3: the mandatory final gate record; present on every envelope returned by assessMathematicalWorking */ acceptanceGate?: AcceptanceGateRecord }
+export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | "d3-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus" | "symbolic" | "probability-statistics" | "linear-algebra" | "complex-polynomial"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode; /** E3: the mandatory final gate record; present on every envelope returned by assessMathematicalWorking */ acceptanceGate?: AcceptanceGateRecord; /** E7 Phase 6: proof obligations of a typed (structured) submission (natural-text routes carry them in domainPayload.proofObligations) */ proofObligations?: ObligationSet; /** E7 Phase 6: how the single certification authority reached the final verdict */ certification?: CertificationRecord }
 type GeometryNative = { outcome: string; correct: boolean | null; firstInvalidStep: number | null; steps: { index: number; status: string; explanation: string }[]; summary: string; resourceLimit: boolean; geometry: { native_verdicts: string[]; proof_dependencies: unknown[]; mathematical_dependencies: unknown[]; unresolved_obligations: string[]; skill_ids: string[]; resource_limit_reached: boolean } };
 
 const malformed = (domain: AssessmentEnvelope["domain"], why: string): AssessmentEnvelope => ({ contractVersion: UNIFIED_MATH_CONTRACT, domain, classification: "malformed", correct: null, complete: false, firstInvalidStep: null, steps: [], proofDependencies: [], domainRestrictions: [], outstandingObligations: [why], skills: [], reasoners: [{ id: "unified-dispatch", version: "u1" }], justification: why, domainPayload: null });
@@ -239,7 +241,7 @@ async function assessE5Route(problem: MathematicalProblem, input: NaturalWorking
   return { contractVersion: UNIFIED_MATH_CONTRACT, domain, classification, correct: classification === "verified" ? true : classification === "invalid" ? false : null, complete: classification === "verified", firstInvalidStep: classification === "invalid" ? verdict.firstInvalidStep : null,
     steps, proofDependencies: steps.map((s) => s.dependencies), domainRestrictions: plan.restrictions, outstandingObligations: classification === "verified" ? [] : verdict.obligations, skills: [`${domain}.natural-e5.${plan.family}`], reasoners,
     justification: classification === "missing-assumption" ? verdict.obligations[0] ?? "an assumption is missing" : verdict.justification,
-    domainPayload: { naturalInput: plan.parsed, conversion: { contractVersion: NATURAL_ADAPTER_CONTRACT, adapter: `natural-geocalc-e5:${plan.family}`, sourceLines: plan.parsed.lines.map((l) => l.source.line), checks: notes, assumptions: [], restrictions: plan.restrictions.map(String), obligations: classification === "verified" ? [] : verdict.obligations, matchedLines: plan.parsed.lines.map((l) => l.source.line), accounts: plan.accounts, outputs: {} }, lineAccount: account, bindingEvidence: plan.evidence, e5: { contract: GEOCALC_E5_CONTRACT, family: plan.family, destination: plan.destination, notes } } };
+    domainPayload: { groundedLines: plan.grounded ?? [], offTaskLines: plan.offTaskLines ?? [], naturalInput: plan.parsed, conversion: { contractVersion: NATURAL_ADAPTER_CONTRACT, adapter: `natural-geocalc-e5:${plan.family}`, sourceLines: plan.parsed.lines.map((l) => l.source.line), checks: notes, assumptions: [], restrictions: plan.restrictions.map(String), obligations: classification === "verified" ? [] : verdict.obligations, matchedLines: plan.parsed.lines.map((l) => l.source.line), accounts: plan.accounts, outputs: {} }, lineAccount: account, bindingEvidence: plan.evidence, e5: { contract: GEOCALC_E5_CONTRACT, family: plan.family, destination: plan.destination, notes } } };
 }
 
 /**
@@ -263,23 +265,9 @@ async function assessE6Route(problem: MathematicalProblem, input: NaturalWorking
   return { contractVersion: UNIFIED_MATH_CONTRACT, domain, classification, correct: classification === "verified" ? true : classification === "invalid" ? false : null, complete: classification === "verified", firstInvalidStep: classification === "invalid" ? verdict.firstInvalidStep : null,
     steps, proofDependencies: steps.map((s) => s.dependencies), domainRestrictions: plan.restrictions, outstandingObligations: classification === "verified" ? [] : verdict.obligations, skills: [`${domain}.natural-e6.${plan.family}`], reasoners,
     justification: classification === "missing-assumption" ? verdict.obligations[0] ?? "an assumption is missing" : verdict.justification,
-    domainPayload: { groundedLines: plan.grounded, naturalInput: plan.parsed, conversion: { contractVersion: NATURAL_ADAPTER_CONTRACT, adapter: `natural-generalization-e6:${plan.family}`, sourceLines: plan.parsed.lines.map((l) => l.source.line), checks: plan.notes, assumptions: [], restrictions: plan.restrictions.map(String), obligations: classification === "verified" ? [] : verdict.obligations, matchedLines: plan.parsed.lines.map((l) => l.source.line), accounts: plan.accounts, outputs: {} }, lineAccount: account, bindingEvidence: plan.evidence, e6: { contract: GENERALIZATION_E6_CONTRACT, family: plan.family, destination: plan.destination, notes: plan.notes, diagnostics: plan.diagnostics, finalValue: plan.finalValue ?? null } } };
+    domainPayload: { groundedLines: plan.grounded, offTaskLines: plan.offTaskLines ?? [], naturalInput: plan.parsed, conversion: { contractVersion: NATURAL_ADAPTER_CONTRACT, adapter: `natural-generalization-e6:${plan.family}`, sourceLines: plan.parsed.lines.map((l) => l.source.line), checks: plan.notes, assumptions: [], restrictions: plan.restrictions.map(String), obligations: classification === "verified" ? [] : verdict.obligations, matchedLines: plan.parsed.lines.map((l) => l.source.line), accounts: plan.accounts, outputs: {} }, lineAccount: account, bindingEvidence: plan.evidence, e6: { contract: GENERALIZATION_E6_CONTRACT, family: plan.family, destination: plan.destination, notes: plan.notes, diagnostics: plan.diagnostics, finalValue: plan.finalValue ?? null } } };
 }
-const NON_DEFINITE = (c: Classification) => !E6_DEFINITE.includes(c);
-/** E6 may complete a verdict the established routes could not reach, may veto an acceptance it independently contradicts, and may refine a non-definite verdict; it never overrides a definite rejection into an acceptance. */
-function mergeE6(prior: AssessmentEnvelope, e6: AssessmentEnvelope | null, problem: MathematicalProblem): AssessmentEnvelope {
-  if (!e6) return prior;
-  if (!E6_DEFINITE.includes(e6.classification)) return (NON_DEFINITE(prior.classification) && prior.classification !== "resource-exhausted") || (prior.classification === "verified" && e6.classification === "ambiguous") ? e6 : prior;
-  if (prior.classification === "verified") return e6.classification === "verified" ? prior : e6;
-  // E6-R: an earlier route that found every line true but not finished (its final-form grammar is narrower) is completed by the independent exact route
-  if (prior.classification === "incomplete" && e6.classification === "verified") return e6;
-  if (NON_DEFINITE(prior.classification)) return prior.classification === "resource-exhausted" ? prior : e6;
-  // D5 contract revision (E6): a missing integration constant is `missing-assumption`; the earlier `invalid` label is kept only in the historical regression record.
-  if (prior.classification === "invalid" && e6.classification === "missing-assumption" && (problem as { task?: string }).task === "indefinite-integral") return e6;
-  if (e6.classification === "invalid" && prior.classification !== "invalid") return e6;
-  return prior;
-}
-async function assessCandidate(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
+async function collectReports(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<RouteReport[]> {
   if (problem && typeof problem === "object" && "domain" in problem && (problem.domain === "geometry" || problem.domain === "calculus" || problem.domain === "probability-statistics" || problem.domain === "complex-polynomial") && studentWorking && !Array.isArray(studentWorking) && "format" in studentWorking && "text" in studentWorking) {
     // Precedence: an existing definite verdict of the established route is kept (D1-D8 behaviour is not re-labelled). The E5 route is
     // consulted for every geometry/calculus submission; it supplies the verdict unless the established route already verified (then the established
@@ -290,21 +278,17 @@ async function assessCandidate(problem: MathematicalProblem, studentWorking: Stu
     const uses: RouteUse[] = [routeUse(ctx, "base-algebra")];
     const base = await assessCandidateBase(problem, studentWorking, options);
     const e5 = problem.domain === "geometry" || problem.domain === "calculus" ? await assessE5Route(problem, studentWorking as NaturalWorkingInput, options) : null;
-    if (e5) uses.push(routeUse(ctx, "e5-geocalc"));
-    const stage = (() => {
-      if (!e5 || !E5_DEFINITE.includes(e5.classification)) return base;
-      if (base.classification === "verified") return e5.classification === "verified" ? base : e5;
-      // D5 contract (E5): both labels for a missing constant are non-accepting; E6 revises the label below.
-      if (base.classification === "invalid" && e5.classification === "missing-assumption" && (problem as { task?: string }).task === "indefinite-integral") return base;
-      return e5;
-    })();
+    if (e5) uses.push({ ...routeUse(ctx, "e5-geocalc"), grounded: (e5.domainPayload as { groundedLines?: RouteUse["grounded"] } | undefined)?.groundedLines });
     const e6 = await assessE6Route(problem, studentWorking as NaturalWorkingInput, options);
     if (e6) { const e6notes = ((e6.domainPayload as { conversion?: { checks?: string[] } } | undefined)?.conversion?.checks ?? []).filter((n) => /could not be read by the exact calculus route/.test(n)); uses.push({ ...routeUse(ctx, problem.domain === "calculus" ? "e6-calculus" : "e6-numbers", e6notes), grounded: (e6.domainPayload as { groundedLines?: RouteUse["grounded"] } | undefined)?.groundedLines }); }
-    const merged = mergeE6(stage, e6, problem);
-    return { ...merged, domainPayload: { ...(merged.domainPayload && typeof merged.domainPayload === "object" ? merged.domainPayload : {}), proofContextUse: uses } };
+    // D5 contract (historical): a missing integration constant is `missing-assumption`; the authority keeps that revision (certification-authority.ts, rule missing-constant-contract).
+    // E7 Phase 6: routes only REPORT. No precedence is applied here; the certification authority decides from the obligations of every report.
+    const withUse = (env: AssessmentEnvelope): AssessmentEnvelope => ({ ...env, domainPayload: { ...(env.domainPayload && typeof env.domainPayload === "object" ? env.domainPayload : {}), proofContextUse: uses } });
+    return [{ route: "base", env: withUse(base) }, ...(e5 ? [{ route: "e5", env: withUse(e5) }] : []), ...(e6 ? [{ route: "e6", env: withUse(e6) }] : [])];
   }
-  return assessCandidateBase(problem, studentWorking, options);
+  return [{ route: "base", env: await assessCandidateBase(problem, studentWorking, options) }];
 }
+async function assessCandidate(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> { return (await collectReports(problem, studentWorking, options))[0].env; }
 async function assessCandidateBase(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   if (!problem || typeof problem !== "object" || !("domain" in problem || "statement" in problem)) return malformed("algebra", "problem must be a typed mathematical problem");
   if(studentWorking&&!Array.isArray(studentWorking)&&"format" in studentWorking&&"text" in studentWorking){
@@ -478,7 +462,8 @@ function gateConverted(cand: AssessmentEnvelope, payload: { lineAccount?: LineAc
   return { ...cand, acceptanceGate: gateRecord("adapter-converted", cand, { verdict: "verified", independentlyVerified: true, level, source: "agreement", evidence, reconciliation: "every claim-step is bound to its source line and independently re-verified" }) };
 }
 function gateStructured(cand: AssessmentEnvelope): AssessmentEnvelope {
-  const evidence: GateEvidenceItem[] = [{ line: null, claim: "all typed steps", checker: [...new Set(cand.reasoners.map((r) => r.id))].join("+"), scope: "typed domain reasoner (exact arithmetic); no natural-language adapter in the path", outcome: cand.classification }];
+  // E7 Phase 6: per-step evidence (the reasoner that judged each step), not one aggregate label; the certification boundary attributes each to a registered mechanism
+  const evidence: GateEvidenceItem[] = cand.steps.map((st, i) => ({ line: i + 1, claim: `typed step ${i + 1}`, checker: st.reasoner, scope: "typed domain reasoner judged the step against the typed problem object; no natural-language adapter in the path", outcome: st.classification === "verified" ? "verified" : st.classification }));
   if (cand.classification !== "verified") return { ...cand, acceptanceGate: gateRecord("structured-typed", cand, { evidence, reconciliation: "the candidate did not accept" }) };
   const bad = cand.steps.find((s) => s.classification !== "verified");
   if (bad) return withdrawAcceptance(cand, "structured-typed", "downgraded-unresolved-lines", `step ${bad.index + 1} is ${bad.classification}, so the solution cannot be certified`, evidence);
@@ -504,8 +489,23 @@ function applyAcceptanceGate(problem: MathematicalProblem, working: StudentWorki
  * E7 claim accounting. The ledger is built from the raw text, independently of every parser, and each claim must be covered by a verified,
  * credited record. This step can withdraw an acceptance (or report a demonstrably contradicted submission as invalid); it never grants one.
  */
-function certifyClaims(problem: MathematicalProblem, working: StudentWorking, cand: AssessmentEnvelope): AssessmentEnvelope {
-  if (!isNaturalInput(working)) return cand;
+/** one grounding per line across routes; if any route found a line unrelated to the task, it is unrelated */
+function mergeGrounded(all: NonNullable<RouteUse["grounded"]>): NonNullable<RouteUse["grounded"]> {
+  const by = new Map<number, NonNullable<RouteUse["grounded"]>[number]>();
+  for (const g of all) { const prev = by.get(g.line); if (!prev || (prev.grounding.relevant && !g.grounding.relevant)) by.set(g.line, g); }
+  return [...by.values()];
+}
+function certifyClaims(problem: MathematicalProblem, working0: StudentWorking, cand: AssessmentEnvelope): AssessmentEnvelope {
+  const textProblem = !!problem && typeof problem === "object" && "statement" in problem && typeof (problem as { statement: unknown }).statement === "string";
+  const asText = textProblem && Array.isArray(working0) && working0.length > 0 && working0.every((x) => typeof x === "string");
+  if (!isNaturalInput(working0) && !asText) {
+    // E7 Phase 6: typed (structured) steps produce the same obligation kinds as natural text, with the typed domain reasoner as the registered mechanism
+    const so = structuredObligations(cand);
+    const tagged = { ...cand, proofObligations: so };
+    if (cand.classification === "verified" && so.blocking.length) { const o = so.blocking[0]; return { ...withdrawAcceptance(tagged, "structured-typed", "downgraded-unresolved-lines", `proof obligation ${o.id} (${o.kind}, ${o.claim || "answer"}) is ${o.status}: ${o.reason}`, cand.acceptanceGate?.evidence ?? []), proofObligations: so }; }
+    return tagged;
+  }
+  const working: NaturalWorkingInput = isNaturalInput(working0) ? working0 : { format: "natural", text: (working0 as string[]).join("\n") } as NaturalWorkingInput;
   const payload = (cand.domainPayload && typeof cand.domainPayload === "object" ? cand.domainPayload : {}) as { lineAccount?: LineAccount };
   const records: CoverageRecord[] = payload.lineAccount
     ? payload.lineAccount.records.map((r) => ({ line: r.line, start: r.span.start, end: r.span.end, verified: r.status === "verified-valid" || r.status === "not-mathematical", credited: r.role === "claim-step" || r.role === "given-matched", reason: r.reason }))
@@ -526,7 +526,7 @@ function certifyClaims(problem: MathematicalProblem, working: StudentWorking, ca
   const obs: ObligationSet = buildObligations({
     text: working.text, claims: lv.ledger.claims.map((c) => ({ line: c.line, start: c.start, end: c.end, text: c.text, kind: c.kind, outcome: c.outcome, reason: c.reason })), relations: lv.relations,
     records: payload.lineAccount ? payload.lineAccount.records.map((r) => ({ role: r.role, text: r.text, id: r.id, line: r.line, span: r.span, status: r.status, dependencies: r.dependencies, premiseEligible: r.premiseEligible, reason: r.reason })) : [],
-    evidence: cand.acceptanceGate?.evidence ?? [], grounded: uses.flatMap((u) => u.grounded ?? []),
+    evidence: cand.acceptanceGate?.evidence ?? [], reasoners: cand.reasoners.map((r) => r.id), grounded: mergeGrounded(uses.flatMap((u) => u.grounded ?? [])),
     verdict: { classification: cand.classification, complete: cand.complete, independentlyVerified: cand.acceptanceGate?.independentlyVerified ?? false, route: cand.acceptanceGate?.route ?? "natural-other", justification: cand.justification },
   });
   const finalCtx = withUnresolved(
@@ -553,8 +553,31 @@ function certifyClaims(problem: MathematicalProblem, working: StudentWorking, ca
   const why = `claim accounting: ${lv.blocking.length} recognized claim(s) are not proven (line ${lv.blocking[0].line}: ${lv.blocking[0].reason})`;
   return withLedger(withdrawAcceptance(cand, (cand.acceptanceGate?.route ?? "natural-other") as AcceptanceGateRecord["route"], "downgraded-unresolved-lines", why, cand.acceptanceGate?.evidence ?? []));
 }
-export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
-  const candidate = await assessCandidate(problem, studentWorking, options);
-  try { return certifyClaims(problem, studentWorking, applyAcceptanceGate(problem, studentWorking, candidate)); }
-  catch (e) { return withdrawAcceptance(candidate, "natural-other", "downgraded-no-independent-evidence", `the acceptance gate could not complete (${e instanceof Error ? e.message : "error"}); nothing is accepted`); }
+export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking0: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
+  // E7 Phase 6: a list of text lines for a statement problem is the same input as natural text; it takes the same route, so it gets the same obligations
+  const studentWorking: StudentWorking = !!problem && typeof problem === "object" && "statement" in problem && typeof (problem as { statement: unknown }).statement === "string" && Array.isArray(studentWorking0) && studentWorking0.length > 0 && studentWorking0.every((x) => typeof x === "string")
+    ? ({ format: "natural", text: (studentWorking0 as string[]).join("\n") } as NaturalWorkingInput) : studentWorking0;
+  const reports = await collectReports(problem, studentWorking, options);
+  try {
+    // E7 Phase 6: every route's report passes the same gate and claim/obligation certification; ONE authority then decides from the obligations.
+    const certified = reports.map((r) => ({ route: r.route, env: certifyClaims(problem, studentWorking, applyAcceptanceGate(problem, studentWorking, r.env)) }));
+    const final = adjudicate(certified, problem);
+    // E7 Phase 6: lines that are internally correct but not about the task are side claims. They are never credited and never used; the rest of the
+    // working is assessed again as its own submission, and only a complete verification of that remainder can certify (the side claims stay reported, unproven).
+    if (final.classification !== "verified" && !options.sideClaimsExcluded && isNaturalInput(studentWorking)) {
+      const side = [...new Set(certified.flatMap((r) => ((r.env.domainPayload as { offTaskLines?: number[] } | undefined)?.offTaskLines ?? [])))];
+      const lines = studentWorking.text.split("\n");
+      if (side.length && side.length < lines.filter((l) => l.trim()).length) {
+        const kept = lines.filter((_, i) => !side.includes(i + 1)), removed = side.filter((n) => lines[n - 1] !== undefined).map((n) => ({ line: n, text: lines[n - 1].trim() }));
+        const again = await assessMathematicalWorking(problem, { ...studentWorking, text: kept.join("\n") } as NaturalWorkingInput, { ...options, sideClaimsExcluded: true });
+        if (again.classification === "verified" && again.certification) {
+          const pl = (again.domainPayload && typeof again.domainPayload === "object" ? again.domainPayload : {}) as { claimLedger?: { contract: string; claims: unknown[] } };
+          const ledger = pl.claimLedger ? { ...pl.claimLedger, claims: [...pl.claimLedger.claims, ...removed.map((r) => ({ line: r.line, kind: "relation", text: r.text, outcome: "unresolved", reason: "internally correct, but not about the posed task; not used and not credited", provenance: "side-claim" }))] } : undefined;
+          return { ...again, domainPayload: { ...pl, ...(ledger ? { claimLedger: ledger } : {}) }, certification: { ...again.certification, rule: "side-claims-excluded", sideClaims: removed.map((r) => ({ ...r, status: "unproven", reason: "internally correct, but not about the posed task; not used and not credited" })) } };
+        }
+      }
+    }
+    return final;
+  }
+  catch (e) { return withdrawAcceptance(reports[0].env, "natural-other", "downgraded-no-independent-evidence", `the acceptance gate could not complete (${e instanceof Error ? e.message : "error"}); nothing is accepted`); }
 }

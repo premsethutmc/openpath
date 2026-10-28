@@ -11,7 +11,7 @@ import { Overflow, Z, ONE, q, qadd, qdiv, qeq, qiszero, qmul, qneg, qsub, qtext,
 import type { Expr } from "./calculus-core.ts";
 
 export type JudgeStatus = "valid" | "invalid" | "unsupported" | "missing-assumption" | "incomplete";
-export interface Judge { status: JudgeStatus; reason: string; scope?: string; digest?: string | null }
+export interface Judge { status: JudgeStatus; reason: string; scope?: string; digest?: string | null; /** E7 Phase 6: correct on its own but not about the task */ offTask?: boolean; /** E7 Phase 6: why the line is about the task (anchoring recorded by the route that checked it) */ grounding?: import("./claim-grounding.ts").Grounding }
 export const digestOf = (x: unknown): string => createHash("sha256").update(JSON.stringify(x, (_k, v) => (typeof v === "bigint" ? v.toString() : v instanceof Map ? [...v] : v))).digest("hex");
 
 export interface GFact { predicate: string; args: string[]; value?: unknown }

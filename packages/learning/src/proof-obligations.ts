@@ -14,13 +14,14 @@
  * Only `proven` obligations whose dependencies are proven enter the proved-fact context; unresolved, unsupported and disproven ones never do.
  */
 import { canonicalizeMathematicalObject, type CanonicalMathematicalObject } from "./canonical-math-ir.ts";
+import { attribute, type Provenance } from "./evidence-provenance.ts";
 
 export const PROOF_OBLIGATION_CONTRACT = "openpath-proof-obligation@1" as const;
 export type ObligationKind = "derivation" | "grounding" | "domain" | "answer";
 export type ObligationStatus = "proven" | "disproven" | "unresolved" | "unsupported";
 export interface ProofObligation {
   id: string; kind: ObligationKind; line: number | null; claim: string; statement: string; status: ObligationStatus; reason: string;
-  evidence: { checker: string; scope: string; digest: string | null; detail: string } | null;
+  evidence: { checker: string; scope: string; digest: string | null; detail: string; /** E7 Phase 6: the registered mechanism / kernel that established the claim (never inferred from the label alone) */ mechanism: string | null; kernel: string | null; trusted: boolean } | null;
   dependsOn: string[]; conditionalOn: string[];
   /** the route certifies this claim only in aggregate (no per-claim evidence exists for the route): reported, never counted as proof */
   aggregateOnly?: boolean;
@@ -34,12 +35,19 @@ export interface ObligationInput {
   evidence: { line: number | null; claim: string; checker: string; scope: string; outcome: string; digest?: string | null }[];
   grounded: { line: number; grounding: { required?: boolean; relevant: boolean; reason: string; sources: { kind: string; ref: string }[] } }[];
   verdict: { classification: string; complete: boolean; independentlyVerified: boolean; route: string; justification: string };
+  /** reasoner ids that took part in the assessment: evidence attribution requires the producing route to be among them */
+  reasoners?: string[];
 }
 export interface ObligationSet { contract: typeof PROOF_OBLIGATION_CONTRACT; obligations: ProofObligation[]; proved: { ref: string; text: string }[]; summary: { total: number; proven: number; disproven: number; unresolved: number; unsupported: number; aggregateOnly: number }; blocking: ProofObligation[] }
 
 const SCOPE_CLAIM = /\b(?:for\s+(?:all|every|any|each)\s+(?:real\s+)?(?:\w+\b|number)|everywhere|on\s+the\s+(?:whole|entire)\s+(?:domain|real\s+line)|holds\s+always|in\s+general)\b/i;
 
-function make(id: string, kind: ObligationKind, line: number | null, claim: string, statement: string, status: ObligationStatus, reason: string, evidence: ProofObligation["evidence"], dependsOn: string[], conditionalOn: string[], aggregateOnly = false): ProofObligation {
+export function internalEv(checker: string, scope: string, digest: string | null, detail: string): NonNullable<ProofObligation["evidence"]> {
+  const pv = attribute(checker, "natural-other", []);
+  return { checker, scope, digest, detail, mechanism: pv.mechanism, kernel: pv.kernel, trusted: pv.trusted };
+}
+
+export function make(id: string, kind: ObligationKind, line: number | null, claim: string, statement: string, status: ObligationStatus, reason: string, evidence: ProofObligation["evidence"], dependsOn: string[], conditionalOn: string[], aggregateOnly = false): ProofObligation {
   const canonical = canonicalizeMathematicalObject({
     mathematicalType: "proof-obligation", value: { kind, line, claim },
     dependencies: dependsOn, assumptions: conditionalOn,
@@ -63,7 +71,7 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
     if (c.kind === "assumption") {
       const rel = inp.relations.find((r) => r.line === c.line && r.text === c.text);
       const st: ObligationStatus = c.outcome === "proven" ? "proven" : c.outcome === "disproven" ? "disproven" : c.outcome === "unresolved" ? "unresolved" : "unsupported";
-      out.push(make(`ob:${out.length}`, "domain", c.line, c.text, `the student assumption "${c.text}" is compatible with the task and does not silently change it`, st, rel?.obligation ?? c.reason, st === "proven" ? { checker: "proof-context", scope: "classification against the immutable task domain (branches kept as alternatives)", digest: null, detail: c.reason } : null, [], []));
+      out.push(make(`ob:${out.length}`, "domain", c.line, c.text, `the student assumption "${c.text}" is compatible with the task and does not silently change it`, st, rel?.obligation ?? c.reason, st === "proven" ? internalEv("proof-context", "classification against the immutable task domain (branches kept as alternatives)", null, c.reason) : null, [], []));
       continue;
     }
     const rec = inp.records.find((r) => r.line === c.line && r.span.start < c.end && c.start < r.span.end) ?? inp.records.find((r) => r.line === c.line);
@@ -77,10 +85,14 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
       if (c.outcome === "disproven" && rs !== "verified-invalid") { const first = inp.records.find((r) => r.status === "verified-invalid"); if (first && first.line < c.line) { status = "unresolved"; reason = `it comes after line ${first.line}, which is disproven; this line was not independently checked`; } }
     }
     else {
-      if (rec?.role === "given-matched" && rec.status === "verified-valid") { status = "proven"; evidence = { checker: "problem-data-match", scope: rec.reason || "the line restates the typed task data", digest: null, detail: "restates a task premise (matched to the problem's canonical data)" }; }
+      if (rec?.role === "given-matched" && rec.status === "verified-valid") { status = "proven"; evidence = internalEv("problem-data-match", rec.reason || "the line restates the typed task data", null, "restates a task premise (matched to the problem's canonical data)"); }
       const ev = status === "proven" ? undefined : inp.evidence.find((e) => e.line === c.line && (e.outcome === "verified" || e.outcome === "verified-valid"));
       if (status === "proven") { /* discharged by matching the task's own data */ }
-      else if (ev) { status = "proven"; evidence = { checker: ev.checker, scope: ev.scope, digest: ev.digest ?? null, detail: ev.claim }; }
+      else if (ev) {
+        const pv: Provenance = attribute(ev.checker, inp.verdict.route, inp.reasoners ?? []);
+        if (pv.trusted && (pv.kind !== "internal")) { status = "proven"; evidence = { checker: ev.checker, scope: ev.scope, digest: ev.digest ?? null, detail: ev.claim, mechanism: pv.mechanism, kernel: pv.kernel, trusted: true }; }
+        else { status = "unsupported"; reason = `the evidence for this line is not attributable to a trusted mathematical mechanism: ${pv.reason}`; }
+      }
       else if (perClaim) { status = "unsupported"; reason = "the route reports this line verified but recorded no independent per-claim evidence for it"; }
       else { status = "unsupported"; aggregate = true; reason = "the route certifies this submission in aggregate only; no per-claim evidence exists for this claim"; }
     }
@@ -94,7 +106,7 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
       const gdeps = g.sources.filter((s) => s.kind === "derived-fact" && /^line-\d+$/.test(s.ref)).map((s) => byLineDeriv.get(Number(s.ref.slice(5)))).filter((x): x is ProofObligation => !!x);
       const gbad = gdeps.find((d) => d.status !== "proven");
       const gs: ObligationStatus = !g.relevant ? "unresolved" : gbad ? "unresolved" : "proven";
-      out.push(make(`ob:${out.length}`, "grounding", c.line, c.text, `"${c.text}" is about the task: its numbers and symbols come from the premises or from proved facts`, gs, !g.relevant ? g.reason : gbad ? `it rests on ${gbad.id}, which is ${gbad.status}` : g.reason, gs === "proven" ? { checker: "grounding", scope: "claim-grounding@1 over the task premises and proved facts", digest: null, detail: g.reason } : null, [o.id, ...gdeps.map((d) => d.id)], cond));
+      out.push(make(`ob:${out.length}`, "grounding", c.line, c.text, `"${c.text}" is about the task: its numbers and symbols come from the premises or from proved facts`, gs, !g.relevant ? g.reason : gbad ? `it rests on ${gbad.id}, which is ${gbad.status}` : g.reason, gs === "proven" ? internalEv("grounding", "claim-grounding@1 over the task premises and proved facts", null, g.reason) : null, [o.id, ...gdeps.map((d) => d.id)], cond));
     }
   }
   // a student claim about the WHOLE domain after a disclosed narrowing is not covered by the conditional derivation
@@ -109,7 +121,12 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
   const v = inp.verdict;
   const ansStatus: ObligationStatus = v.classification !== "verified" ? (v.classification === "invalid" ? "disproven" : "unresolved") : last && last.status === "proven" && (!lastG || lastG.status === "proven") && v.complete ? "proven" : (last?.aggregateOnly ? "unsupported" : "unresolved");
   out.push(make(`ob:${out.length}`, "answer", last?.line ?? null, last?.claim ?? "", "the conclusion states the requested quantity, derived from the task", ansStatus, v.classification === "verified" ? (ansStatus === "proven" ? "the final claim is proven" + (lastG ? " and grounded" : "") + " and the route's completeness authority confirms it states the requested quantity" : "the final claim's obligations are not all proven") : v.justification,
-    ansStatus === "proven" ? { checker: v.route, scope: "completeness authority of the accepting route over the final proven claim", digest: last?.evidence?.digest ?? null, detail: v.justification } : null, last ? [last.id, ...(lastG ? [lastG.id] : [])] : [], last?.conditionalOn ?? []));
+    ansStatus === "proven" ? internalEv("completeness", "completeness authority of the accepting route over the final proven claim", last?.evidence?.digest ?? null, `${v.route}: ${v.justification}`) : null, last ? [last.id, ...(lastG ? [lastG.id] : [])] : [], last?.conditionalOn ?? []));
+  return assemble(out);
+}
+
+/** proved facts, summary and the answer's dependency cone for an assembled obligation list (the last obligation is the answer) */
+export function assemble(out: ProofObligation[]): ObligationSet {
   const proved: { ref: string; text: string }[] = [];
   for (const o of out) if (o.kind === "derivation" && o.status === "proven") {
     const g = out.find((x) => x.kind === "grounding" && x.line === o.line);

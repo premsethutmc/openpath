@@ -9,7 +9,7 @@ import { buildProofContext, type ProofContext } from "./proof-context.ts";
 import { NotationError, normalize, parseExpression, splitEquals, N, S, add, mul, div, neg, pw, fn, type A } from "./e6-parse.ts";
 import { Ambiguity, Budget, Unsupported, compareExpr, d6, domainReqs, evalNum, hasVar, plainLogArgs, substitute, visiblyPositive, type Req } from "./e6-cas.ts";
 import { limitOf, constantValue, type LimV } from "./e6-series.ts";
-import { Builder, bad, incomplete, isProse, proseJudge, nonMath, missing, ok, readStatement, uns, worst, finish, type E6Plan, type Judge, type Row, syntheticParse } from "./e6-common.ts";
+import { Builder, bad, incomplete, isProse, proseJudge, nonMath, missing, ok, offTask, anchored, readStatement, uns, worst, finish, type E6Plan, type Judge, type Row, syntheticParse } from "./e6-common.ts";
 import type { CalculusProblem, Expr } from "./calculus-core.ts";
 import { Overflow, q, qadd, qdiv, qeq, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
@@ -264,6 +264,14 @@ function unmet(reqs: Req[], env: Env, implied: Set<string>, exempt?: Q): { state
   }
   return { stateable, hard };
 }
+/** E7 Phase 6: a value is anchored when it equals an established form of the task, or a part of one (a rewritten numerator is a step of the posed function) */
+function anchoredIn(val: A, env: Env, v: string): boolean {
+  for (const e of env.est) for (const sub of [e, ...subNodes(e)]) {
+    if (sub.t === "n" || nodeCount(sub) > 40) continue;
+    const r = guard(() => relate(sub, val, v, env, false)); if (!isJudge(r) && r.status === "equal") return true;
+  }
+  return false;
+}
 function guard<T>(f: () => T): T | Judge {
   try { return f(); } catch (e) {
     if (e instanceof Unbound) return uns(`the symbol ${e.message} is not bound to the problem or to an earlier definition`);
@@ -485,8 +493,13 @@ function derivative(problem: Extract<CalculusProblem, { task: "derivative" }>, r
     const dj = differentialLine(members, env, v); if (dj) { b.add(i, dj); return; }
     const def = definitionLine(members, env, { kind: "fn-or-integrand", expr: f0 }, v);
     if (def && def !== "chain") { b.add(i, def); return; }
-    const j = chain(members, env, v, implied, { derivativeOperandCheck: true });
+    let j = chain(members, env, v, implied, { derivativeOperandCheck: true });
     if (j.judge.status === "valid") {
+      // E7 Phase 6: a true identity that is neither connected to the posed function nor yields its derivative is a side claim, not a step of this derivation
+      const hasOp = members.some((m) => m.t === "D");
+      const isAnchored = hasOp || j.values.some((val) => anchoredIn(val, env, v) || (() => { const r = guard(() => relate(val, truth, v, env, false)); return !isJudge(r) && r.status === "equal"; })());
+      if (!isAnchored) { b.add(i, offTask("this identity is not connected to the posed function")); return; }
+      j = { ...j, judge: { ...j.judge, grounding: anchored("connected to the posed function by an exact identity") } };
       const last = members[members.length - 1];
       for (const val of j.values) if (env.est.length < 64) env.est.push(val);
       const lv = j.values[j.values.length - 1];
@@ -525,6 +538,7 @@ function chain(members: A[], env: Env, v: string, implied: Set<string>, opts: { 
   });
   if (isJudge(g)) return { judge: g, values: [] };
   const vals = g; const viaDeriv = Object.keys(env.ov).some((k) => vals.some((x) => hasNode(x, (n) => n.t === "s" && n.name === k)));
+  let offTaskNote: string | null = null;
   // operand binding of an explicit derivative operator
   if (opts.derivativeOperandCheck) {
     for (const m of members) if (m.t === "D" && !(m.of.t === "s")) {
@@ -539,7 +553,7 @@ function chain(members: A[], env: Env, v: string, implied: Set<string>, opts: { 
         }
         if (connected) break;
       }
-      if (!connected) return { judge: unknown ?? bad("this line differentiates an expression that is neither the posed function nor part of it"), values: [] };
+      if (!connected) { if (unknown) return { judge: unknown, values: [] }; offTaskNote = "this line differentiates an expression that is neither the posed function nor part of it"; }
     }
   }
   const js: Judge[] = [];
@@ -552,7 +566,8 @@ function chain(members: A[], env: Env, v: string, implied: Set<string>, opts: { 
     if (um.stateable.length) { js.push(missing(`state the restriction ${um.stateable.map((r) => r.text).join(", ")} before relying on this step`)); continue; }
     js.push(ok("members are equal (formal identity)", "exact formal identity in the independent kernel", digestOf([jsonOf(vals[k]), jsonOf(vals[k + 1])])));
   }
-  return { judge: js.length ? worst(js) : uns("nothing to compare"), values: vals };
+  const jf = js.length ? worst(js) : uns("nothing to compare");
+  return { judge: offTaskNote && jf.status === "valid" ? offTask(offTaskNote) : jf, values: offTaskNote && jf.status === "valid" ? [] : vals };
 }
 
 // ---------------------------------------------------------------------------------------------- indefinite integral
@@ -575,9 +590,10 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
       // plain algebra on the integrand (partial fractions, rewriting): function equality, must connect to an established form
       const j = chain(members, env, v, implied, {});
       if (j.judge.status === "valid") {
-        const connected = j.values.some((val) => env.est.some((e) => { const r = guard(() => relate(e, val, v, env, false)); return !isJudge(r) && r.status === "equal"; }));
-        if (!connected) { b.add(i, uns("this rewriting is not connected to the integrand or to an earlier form")); return; }
+        const connected = j.values.some((val) => anchoredIn(val, env, v));
+        if (!connected) { b.add(i, offTask("this rewriting is not connected to the integrand or to an earlier form")); return; }
         j.values.forEach((val) => env.est.push(val));
+        b.add(i, { ...j.judge, grounding: anchored("connected to the posed integrand or an established form by an exact identity") }); return;
       }
       b.add(i, j.judge); return;
     }
@@ -587,7 +603,7 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
     // the chain must be an antiderivative statement about the posed integrand (or an established equivalent)
     const dFirst = guard(() => d6(j.values[0], v, 0, env.ov)); if (isJudge(dFirst)) { b.add(i, dFirst); return; }
     const connected = env.est.some((e) => { const r = guard(() => relate(e, dFirst, v, env, false)); return !isJudge(r) && r.status === "equal"; });
-    if (!connected) { b.add(i, bad("this line integrates something other than the posed integrand")); return; }
+    if (!connected) { b.add(i, offTask("this line integrates something other than the posed integrand")); return; }
     const last = members[members.length - 1], lastVal = j.values[j.values.length - 1];
     const lastHasI = hasNode(last, (x) => x.t === "I");
     const lastHasC = hasNode(last, (x) => x.t === "C");
@@ -607,7 +623,7 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
     if (closed && !lastHasC) { b.add(i, missing("the constant of integration + C is missing")); return; }
     if (closed && lastHasC) { finalOk = true; finalClosed = true; finalHasC = true; finalText = row.raw; finalRow = i; }
     else if (!closed && !lastHasI) { finalOk = true; finalClosed = false; }
-    b.add(i, j.judge);
+    b.add(i, j.judge.status === "valid" ? { ...j.judge, grounding: anchored("connected to the posed integrand by an exact identity (its derivative is the posed integrand)") } : j.judge);
   });
   fillRest(rows, b, "verification stopped before this line was checked");
   const allValid = b.records.every((r) => r?.judge.status === "valid");
@@ -703,7 +719,7 @@ function definite(problem: Extract<CalculusProblem, { task: "definite-integral" 
         if (!isJudge(rel) && rel.status === "equal") { finalOk = true; finalText = row.raw; finalRow = i; } else finalOk = false;
       } else finalOk = false;
     }
-    b.add(i, j);
+    b.add(i, j.status === "valid" ? { ...j, grounding: anchored("connected to the posed definite integral (same integrand and bounds, or its verified value)") } : j);
   });
   fillRest(rows, b, "verification stopped before this line was checked");
   const allValid = b.records.every((r) => r?.judge.status === "valid");
@@ -740,7 +756,10 @@ function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: R
   const exempt = pt0 !== "inf" && pt0 !== "-inf" ? pt0 : undefined;
   const implied = impliedOf(f0, v);
   let finalOk = false, finalText = ""; let connectedToProblem = false; let dneSaid = false; let finalRow = -1;
+  // E7 Phase 6: values and forms the working has tied to the posed limit; a line that touches none of them and is not a limit of the posed function is a side claim
+  const estConsts: Q[] = truth.kind === "finite" ? [truth.value] : []; const estFns: A[] = [f0];
   rows.forEach((row, i) => {
+    let foreign: string | null = null;
     const item = readItem(row, env, fnNames, v);
     if (item.kind === "prose") { const s = readStatement(item.row.plain); if (s.limitStatement === "dne") dneSaid = true; }
     if (commonLine(item, i, b, env, c)) { if (item.kind === "prose" && readStatement(item.row.plain).limitStatement === "dne") { finalOk = truth.kind === "dne"; finalText = row.raw; finalRow = i;
@@ -757,7 +776,7 @@ function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: R
         const sameApproach = m.v === v && (r.pt === pt0 || (typeof r.pt !== "string" && typeof pt0 !== "string" && qeq(r.pt, pt0)));
         // the point must be the posed one; a one-sided (or two-sided) limit of the same function at that point is a legitimate lemma whose value is evaluated on its own side
         if (m.v !== v) { b.add(i, uns("limits in a variable other than the problem variable are not supported")); return; }
-        if (!sameApproach) { b.add(i, bad("this limit is taken at a different point than the posed limit")); return; }
+        if (!sameApproach) foreign = "this limit is taken at a different point than the posed limit";
         vals.push({ kind: "lim", ...r }); continue;
       }
       if (m.t === "neg" && m.a.t === "V" && m.a.k === "inf") { vals.push({ kind: "special", val: { kind: "inf", sign: -1 } }); continue; }
@@ -816,14 +835,20 @@ function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: R
     const j = js.length ? worst(js) : uns("nothing to compare");
     if (j.status === "valid") {
       const first = vals[0];
-      if (first.kind === "lim" && !connectedToProblem) { const r0 = guard(() => relate(first.inner, f0, v, env, false)); if (!isJudge(r0) && r0.status === "equal") connectedToProblem = true; else { const eqLim = limEq(first.val, truth); if (!eqLim) { b.add(i, bad("this limit is not the posed limit")); return; } connectedToProblem = true; } }
+      if (foreign) { b.add(i, offTask(foreign)); return; }
+      if (first.kind === "lim" && !connectedToProblem) { const r0 = guard(() => relate(first.inner, f0, v, env, false)); if (!isJudge(r0) && r0.status === "equal") connectedToProblem = true; else { const eqLim = limEq(first.val, truth); if (!eqLim) { b.add(i, offTask("this limit is not the posed limit")); return; } connectedToProblem = true; } }
+      if (!vals.some((x) => x.kind === "lim" || x.kind === "special")) {
+        const anchoredLine = vals.some((x) => (x.kind === "const" && x.q !== null && estConsts.some((c) => qeq(c, x.q!))) || (x.kind === "fn" && (anchoredIn(x.a, env, v) || estFns.some((e) => { const r = guard(() => relate(e, x.a, v, env, false)); return !isJudge(r) && r.status === "equal"; }))));
+        if (!anchoredLine) { b.add(i, offTask("this identity is not connected to the posed limit")); return; }
+      }
+      for (const x of vals) { if (x.kind === "const" && x.q) estConsts.push(x.q); else if (x.kind === "fn" && estFns.length < 32) estFns.push(x.a); else if (x.kind === "lim" && x.val.kind === "finite") estConsts.push(x.val.value); }
       if (first.kind === "lim" && connectedToProblem === false) connectedToProblem = true;
       const last = vals[vals.length - 1]; const lastM = members[members.length - 1];
       const lv = last.kind === "lim" ? null : last.kind === "special" ? last.val : last.kind === "const" && last.q ? ({ kind: "finite", value: last.q } as LimV) : null;
       const closedForm = last.kind === "special" || (last.kind === "const" && finalForm(lastM));
       finalOk = !!lv && closedForm && limEq(lv, truth) && connectedToProblem; if (finalOk) { finalText = row.raw; finalRow = i; }
     }
-    b.add(i, j);
+    b.add(i, j.status === "valid" ? { ...j, grounding: anchored("connected to the posed limit by an exact identity or value") } : j);
   });
   fillRest(rows, b, "verification stopped before this line was checked");
   const allValid = b.records.every((r) => r?.judge.status === "valid");

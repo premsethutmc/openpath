@@ -17,12 +17,15 @@ import {
   compilePremises, coordTruth, digestOf, judgeAngleEquation, judgeCongruence, judgeCoordinate, linOf, pointsOf, ruleOf, segmentEnds, trianglesOf, truthOfLineRelation,
   type CoordSubject, type GProblem, type Judge, type JudgeStatus, type Lin, type Premise,
 } from "./geometry-binder-e5.ts";
+import { assessRelevance, type Grounding, type GroundingSource } from "./claim-grounding.ts";
 import { d5, dk, judgeIdentity, limitTruth, polyDefinite, polyOf, type LimitTarget } from "./calculus-binder-e5.ts";
 
 export const GEOCALC_E5_CONTRACT = "openpath-geometry-calculus-natural-e5@1" as const;
 const LIMITS = { characters: 8192, lines: 64, members: 8 };
 
 export interface E5Plan {
+  /** E7 Phase 6: anchoring recorded per line, and the lines that are correct but not about the task */
+  grounded?: { line: number; grounding: import("./claim-grounding.ts").Grounding }[]; offTaskLines?: number[];
   parsed: NaturalParseResult;
   accounts: AccountEntry[];
   outcomes: (StepOutcome | undefined)[];
@@ -134,7 +137,7 @@ function finish(parsed: NaturalParseResult, b: Builder, args: { domain: "geometr
   const outcomes: (StepOutcome | undefined)[] = parsed.lines.map((_, i) => { const r = b.records[i]; return r ? { classification: toStepClass(r.judge.status), justification: r.judge.reason } : undefined; });
   const statuses = b.records.map((r) => r?.judge.status);
   const terminal = statuses.includes("missing-assumption") && !statuses.some((s) => s === "invalid" || s === "unsupported" || s === undefined) ? "missing-assumption" : null;
-  return { parsed, accounts, outcomes, evidence: b.records.flatMap((r) => (r?.evidence ? [r.evidence] : [])), nativeComplete: args.nativeComplete, obligations: args.obligations, terminal, domain: args.domain, family: args.family, destination: b.destination, notes: args.notes, restrictions: args.restrictions ?? [], ...(args.final ? { final: args.final } : {}), ...(args.geometry ? { geometry: args.geometry } : {}) };
+  return { offTaskLines: b.records.flatMap((r, i) => (r?.judge.offTask ? [parsed.lines[i].source.line] : [])), grounded: b.records.flatMap((r, i) => (r?.judge.grounding ? [{ line: parsed.lines[i].source.line, grounding: r.judge.grounding }] : r?.judge.offTask ? [{ line: parsed.lines[i].source.line, grounding: { contract: "openpath-claim-grounding@1" as const, sources: [], relevant: false, reason: r.judge.reason } }] : [])), parsed, accounts, outcomes, evidence: b.records.flatMap((r) => (r?.evidence ? [r.evidence] : [])), nativeComplete: args.nativeComplete, obligations: args.obligations, terminal, domain: args.domain, family: args.family, destination: b.destination, notes: args.notes, restrictions: args.restrictions ?? [], ...(args.final ? { final: args.final } : {}), ...(args.geometry ? { geometry: args.geometry } : {}) };
 }
 
 // ================================================================================================ GEOMETRY
@@ -149,6 +152,35 @@ function extractReason(s: string): { body: string; reason: string | null } {
   return { body: s, reason: null };
 }
 function renameLin(l: Lin, f: (n: string) => string): Lin { const out: Lin = new Map(); for (const [k, v] of l) { const n = k ? f(k) : k; out.set(n, out.has(n) ? qadd(out.get(n)!, v) : v); } return out; }
+
+/**
+ * E7 Phase 6: task relevance of a numeric geometry line. Validity is the binder's; this decides only whether the numbers of a TRUE line come from the task
+ * (its facts, goal and coordinates), from numbers already established in the working, from a fixed geometric constant, or from one arithmetic step on those. A number
+ * that comes from nowhere (`angle C = 100 - 30 = 70`) leaves the derivation ungrounded even though every equality in it is true.
+ */
+const GEOMETRIC_CONSTANTS = new Set(["180", "360", "90"]);
+function numericGrounding(text: string, task: Set<string>, established: Set<string>, taskSymbol: boolean): Grounding {
+  const toks = [...new Set((text.match(/\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x))))];
+  const pool = [...new Set([...task, ...established])].map(Number).filter((x) => Number.isFinite(x));
+  const oneStep = (n: number) => pool.some((a) => pool.some((b) => Math.abs(a + b - n) < 1e-9 || Math.abs(a - b - n) < 1e-9 || Math.abs(a * b - n) < 1e-9 || (b !== 0 && Math.abs(a / b - n) < 1e-9)));
+  const sources: GroundingSource[] = [];
+  for (const t of toks) {
+    const n = Number(t), trivial = Math.abs(n) <= 2;
+    if (GEOMETRIC_CONSTANTS.has(t)) continue;
+    if (task.has(t)) sources.push({ kind: "task-premise", ref: t, by: "value", trivial });
+    else if (established.has(t)) sources.push({ kind: "derived-fact", ref: t, by: "value", trivial });
+    else if (trivial || oneStep(n)) sources.push({ kind: "derived-fact", ref: t, by: "value", trivial: true, derived: !trivial });
+    else sources.push({ kind: "free-literal", ref: t, by: "value", trivial: false });
+  }
+  if (taskSymbol) sources.push({ kind: "task-premise", ref: "task-angles-and-sides", by: "symbol", trivial: false });
+  return assessRelevance(sources);
+}
+const numbersOfProblem = (p: GProblem): Set<string> => {
+  const out = new Set<string>(); const add = (x: unknown) => { if (typeof x === "number" || (typeof x === "string" && /^-?\d+(?:\.\d+)?$/.test(x))) out.add(String(Math.abs(Number(x)))); };
+  for (const f of p.facts ?? []) add(f.value); add(p.goal?.value);
+  for (const o of p.objects ?? []) for (const v of Object.values(o.data ?? {})) if (typeof v === "number" || typeof v === "string") add(v);
+  return out;
+};
 
 function planGeometry(p: GProblem, rows: RawLine[]): E5Plan | null {
   if (!Array.isArray(p?.objects) || !Array.isArray(p?.facts)) return null;
@@ -167,7 +199,7 @@ function planGeometry(p: GProblem, rows: RawLine[]): E5Plan | null {
   const establishedAngles: [string, string][] = p.facts.filter((f) => f.predicate === "equal_angle" && f.args.length === 2).map((f) => [f.args[0], f.args[1]]);
   const sideNames = new Set<string>([...trianglesOf(p).flatMap((t) => t.sides), ...establishedSides.flat()]);
   const goal = p.goal; let goalEstablished = false; const notes: string[] = []; const slopeLines = new Map<string, number>();
-  const finalOk = { value: false };
+  const finalOk = { value: false }; const establishedNums = new Set<string>();
   const gsteps: NonNullable<E5Plan["geometry"]>["steps"] = [];
   const gproblem: GProblem = { ...p, objects: p.objects.map((o) => (o.kind === "triangle" && !(o.data && Object.keys(o.data).length) && /^[A-Z]{3}$/.test(o.id) ? { ...o, data: { angles: o.id.split(""), sides: [o.id[0] + o.id[1], o.id[1] + o.id[2], o.id[2] + o.id[0]] } } : o)) };
 
@@ -214,6 +246,24 @@ function planGeometry(p: GProblem, rows: RawLine[]): E5Plan | null {
           if (a && a3) { establishedAngles.push([a, a3]); gsteps.push({ id: `s${index}_${i}`, statement: { predicate: "equal_angle", args: [a, a3] }, cited_step_ids: [], line: index }); }
           if (a && c && c.d === 1n && goal?.predicate !== "never") gsteps.push({ id: `s${index}_${i}m`, statement: { predicate: "angle_measure", args: [a], value: Number(c.n) }, cited_step_ids: [], line: index });
         }
+        // E7 Phase 6: a calculation chain `angle C = 180 - 110 = 70` states the goal angle first and the requested value last; the value is what answers the problem
+        if (goal?.predicate === "angle_measure" && goal.args.length === 1 && lins.length >= 3) {
+          const gv = qread(String(goal.value)); const ks = (x: Lin) => [...x.keys()].filter((k) => k && !qiszero(x.get(k)!));
+          const first = lins[0], lastL = lins[lins.length - 1]; const k0 = ks(first);
+          const isGoalAngle = k0.length === 1 && k0[0] === goal.args[0] && qeq(first.get(k0[0])!, ONE) && qiszero(first.get("") ?? Z);
+          const cl = ks(lastL).length === 0 ? (lastL.get("") ?? Z) : null;
+          if (gv && isGoalAngle && cl && qeq(cl, gv) && canonicalNumeral(members[members.length - 1].replace(/°|degrees?|\\circ|\^\{?\\circ\}?/g, "").trim())) goalEstablished = true;
+        }
+      }
+      if (j.status === "valid") {
+        // E7 Phase 6: an equation of pure numbers that uses no number of the task is a true side claim, not a step of this problem
+        const taskNums = numbersOfProblem(p);
+        const taskSymbol = lins.some((l) => [...l.keys()].some((k) => k && !qiszero(l.get(k)!) && known.has(k)));
+        const nums = (body.match(/\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x)));
+        if (!taskSymbol && !nums.some((x) => taskNums.has(x) || establishedNums.has(x))) { b.add(index, { status: "incomplete", reason: "this arithmetic uses no number of the task; the line is internally correct, but it is not about the posed problem", offTask: true }, "prev", "e5-independent-geocalc"); return; }
+        const g = numericGrounding(body, taskNums, establishedNums, taskSymbol);
+        for (const x of nums) establishedNums.add(x);
+        b.add(index, { ...j, grounding: g }, "prev", "e5-independent-geocalc"); return;
       }
       b.add(index, j, "prev", "e5-independent-geocalc");
     } catch (err) {
@@ -268,6 +318,11 @@ function planGeometry(p: GProblem, rows: RawLine[]): E5Plan | null {
       const canonical = subject.kind === "point" ? exprs[exprs.length - 1].every((_, i) => canonicalNumeral(last.replace(/^\(|\)$/g, "").split(",")[i] ?? "")) : subject.kind === "dist" || subject.kind === "dist2" ? canonicalSurd(last) : canonicalNumeral(last);
       if (canonical && matchesCoordGoal(subject, exprs[exprs.length - 1])) finalOk.value = true;
       if (canonical && matchesCoordGoal(subject, exprs[exprs.length - 1])) goalEstablished = true;
+    }
+    if (j.status === "valid") {
+      const taskNums = numbersOfProblem(p); const g = numericGrounding(s0, taskNums, establishedNums, true);
+      for (const x of s0.match(/\d+(?:\.\d+)?/g) ?? []) establishedNums.add(String(Number(x)));
+      add({ ...j, grounding: g }); return;
     }
     add(j);
   }
@@ -401,7 +456,7 @@ function endPlan(problem: CalculusProblem, c: Ctx, complete: boolean, obligation
   }
   return finish(parsed, b, { domain: "calculus", family: problem.task, nativeComplete: complete, obligations, notes: c.notes, restrictions, ...(final && complete ? { final } : {}) });
 }
-const addJ = (c: Ctx, i: number, j: Judge, deps: number[] | "prev" = "prev") => c.b.add(i, j, deps, j.scope?.includes("U4") ? U4 : IND);
+const addJ = (c: Ctx, i: number, j0: Judge, deps: number[] | "prev" = "prev") => { const j: Judge = j0.status === "valid" && !j0.grounding ? { ...j0, grounding: { contract: "openpath-claim-grounding@1", sources: [{ kind: "task-premise", ref: "posed-expression", by: "symbol", trivial: false }], relevant: true, reason: "the route accepts a calculus line only after connecting it to the posed expression (function, integrand, integral or limit)" } } : j0; return c.b.add(i, j, deps, j.scope?.includes("U4") ? U4 : IND); };
 
 // ---------------------------------------------------------------------------------------------- derivative
 function calcDerivative(problem: Extract<CalculusProblem, { task: "derivative" }>, rows: RawLine[], parsed: NaturalParseResult, b: Builder, notes: string[]): E5Plan {
