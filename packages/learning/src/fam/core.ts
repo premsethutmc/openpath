@@ -4,6 +4,7 @@
  * differentiating a trigonometric product (expression answer). Written by OpenPath; CC0.
  */
 import type { Bug, Def } from "../family-kit";
+import { m2Object } from "../typed-contract.ts";
 import { evaluate, parse } from "../answer-types";
 
 const COUNT = "MATH.number.count-objects";
@@ -135,6 +136,7 @@ export const CORE: Def[] = [
   },
   {
     id: "surd",
+    contract: { kind: "typed", typed: ([n]) => m2Object({ domain: "radical", task: "sqrt", radicand: n }) },
     arity: 1,
     title: "Simplifying a square root",
     competency: SURD,

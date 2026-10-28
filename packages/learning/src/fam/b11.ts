@@ -8,6 +8,7 @@
  * mode and the mean of a frequency table; reading histograms. Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
+import { b1Object, m2Object } from "../typed-contract.ts";
 import { gcd, near, neg, sup } from "../family-kit";
 
 const SCI = "MATH.number.scientific-notation";
@@ -471,6 +472,7 @@ export const B11: Def[] = [
   // ============================================================ square roots by prime factorisation
   {
     id: "aksqf",
+    contract: { kind: "typed", typed: ([d, n]) => (d ? null : m2Object({ domain: "radical", task: "sqrt", radicand: n * n })) },
     arity: 2,
     title: "Square root of a larger perfect square or decimal",
     competency: SQ,
@@ -1725,6 +1727,7 @@ export const B11: Def[] = [
   // ============================================================ median
   {
     id: "akmed",
+    contract: { kind: "typed", typed: ([s, n]) => b1Object("statistics", "median", { values: medData(s, n) }) },
     arity: 2,
     title: "Finding the median",
     competency: MED,
@@ -1782,6 +1785,7 @@ export const B11: Def[] = [
   // ============================================================ mode
   {
     id: "akmode",
+    contract: { kind: "typed", typed: ([s]) => b1Object("statistics", "mode", { values: modeData(s).xs }) },
     arity: 1,
     title: "Finding the mode",
     competency: MED,

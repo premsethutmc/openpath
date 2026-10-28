@@ -15,6 +15,7 @@ from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
+from .kernel_grader import kernel_decision
 from .learning_families import exposure, generated
 from .models import PupilEvent
 
@@ -177,19 +178,32 @@ def _assessment_ok(a, q, response=None):
 
 
 def _authoritative(event, q, readable):
-    """The server's decision about one answer, from the stored answer and nothing the client claims (the python mirror of the app's
-    legacy comparison). An answer the server cannot read is saved and left undecided (never wrong); a readable one is decided
-    here whatever the client said. Written answers stay with the educator."""
+    """The server's decision about one answer, and nothing the client claims. Where the trusted exact grader (kernel_grader) has verified
+    the question, its verdict decides (correct, incorrect, or undecided); everywhere else the stored answer decides (the python mirror of
+    the app's legacy comparison) and the result is labelled `legacy`, whatever the browser called it. An answer neither route can read is
+    saved and left undecided (never wrong). Written answers stay with the educator."""
     a = event.get('assessment')
     if q['type'] in HUMAN:
         return None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'}
+    base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'clarificationRequired': False, 'firstError': None}
+    k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working')) if q.get('role') == 'generated' else None
+    if k is not None:
+        ok = k['credit']
+        return {**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': 'kernel'}
     if readable:
         if a is None:
             return None
         ok = right(q, event['response'])
-        return {**a, 'answerCorrect': ok, 'unresolved': False, 'firstError': None if ok else a['firstError'], 'source': a['source'] if a['source'] in ('kernel', 'legacy') else 'legacy'}
-    base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'source': 'legacy'}
-    return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': True, 'unresolved': True, 'source': base['source'] if base['source'] in ('kernel', 'legacy') else 'legacy'}
+        return {**a, 'answerCorrect': ok, 'unresolved': False, 'firstError': None if ok else a['firstError'], 'source': 'legacy'}
+    return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': True, 'unresolved': True, 'source': 'legacy'}
+
+
+def credited(q, event):
+    """Whether a stored attempt earned answer credit: the server's own kernel verdict when the trusted grader decided it, otherwise the stored-answer comparison."""
+    a = event.get('assessment') or {}
+    if a.get('source') == 'kernel':
+        return a.get('answerCorrect') is True
+    return right(q, event.get('response', ''))
 
 
 def independent_at(prior, competency, marks=None):
@@ -214,7 +228,7 @@ def independent_at(prior, competency, marks=None):
         n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue
-        ok = marks.get(e.get('id')) == 'correct' if q['type'] in HUMAN else right(q, e.get('response', ''))
+        ok = marks.get(e.get('id')) == 'correct' if q['type'] in HUMAN else credited(q, e)
         if ok:
             distinct.add(e['questionId'])
             if len(distinct) >= INDEPENDENT_MIN:
@@ -444,7 +458,7 @@ def _study_session(event, prior, pupil, c):
         q = c['questions'].get(a['questionId']) or generated(a['questionId'])
         if q['type'] in HUMAN and a['id'] not in marks:
             pending.append(a['id'])
-        elif (marks.get(a['id']) == 'correct' if q['type'] in HUMAN else right(q, a['response'])):
+        elif (marks.get(a['id']) == 'correct' if q['type'] in HUMAN else credited(q, a)):
             correct.append(a['id'])
         else:
             incorrect.append(a['id'])

@@ -10,6 +10,7 @@ from django.utils import timezone
 from rest_framework.test import APIClient
 
 from .learning import content, hash_of
+from .learning_families import generated
 from .tests import PASSWORD, FamilyTestCase
 
 ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
@@ -293,3 +294,100 @@ class PlatformTests(LearningBase):
         sci['id'] = 'unsupported-mapped'
         sci['hash'] = hash_of({**sci, 'hash': ''})
         self.assertEqual(self.save(self.rec('curriculum', release=sci)).status_code, 400)
+
+
+class KernelAuthorityTests(LearningBase):
+    """The server decides with the trusted exact grader (kernel_grader) where it has verified the question, from the question id and the response alone;
+    elsewhere the stored answer decides and the result is labelled legacy. Needs Node and grader/grader.mjs (otherwise every case below is the legacy route)."""
+    KEYS = dict(policy='assessment@1', methodExamined=False, derivationVerified=False, firstError=None, clarificationRequired=False, aiFallbackUsed=False)
+    DET = ('gen:det2:-3,1,1,1', 'MATH.algebra.determinants', '-4')          # the determinant of [[-3, 1], [1, 1]]
+    MEAN = ('gen:mean4:1,2,3,6', 'MATH.statistics.averages-intro', '3')     # the mean of 1, 2, 3 and 6
+
+    def go(self, spec, response, assessment=None, rid=None, working=None):
+        qid, comp, _ = spec
+        self.serial += 1
+        extra = {} if assessment is None else {'assessment': assessment}
+        if working is not None:
+            extra['working'] = working
+        r = self.save(self.rec('attempt', questionId=qid, response=response, activity='diagnostic', hints=0, solution=False, competency=comp, id=rid or f'k{self.serial}', **extra))
+        return r
+
+    def stored(self, rid):
+        return next(e for e in self.records() if e['id'] == rid)['assessment']
+
+    def test_the_kernel_decides_correct_equivalent_and_incorrect(self):
+        self.save(self.enrol())
+        self.assertEqual(self.go(self.DET, '-4', rid='c').status_code, 201)
+        self.assertEqual((self.stored('c')['answerCorrect'], self.stored('c')['source']), (True, 'kernel'))
+        self.go(self.MEAN, '6/2', rid='eq')     # equal to 3, a form the stored-answer comparison does not read as the integer 3
+        self.assertEqual((self.stored('eq')['answerCorrect'], self.stored('eq')['source']), (True, 'kernel'))
+        self.go(self.DET, '-5', rid='w')
+        self.assertEqual((self.stored('w')['answerCorrect'], self.stored('w')['unresolved'], self.stored('w')['source']), (False, False, 'kernel'))
+
+    def test_working_never_changes_the_answers_credit(self):
+        self.save(self.enrol())
+        self.go(self.DET, '-4', rid='a', working=['-3 + 1 = 7', 'so -4'])
+        self.go(self.DET, '-5', rid='b', working=['-3 - 1 = -4'])
+        self.assertIs(self.stored('a')['answerCorrect'], True)
+        self.assertIs(self.stored('b')['answerCorrect'], False)
+
+    def test_forged_browser_verdicts_change_nothing(self):
+        self.save(self.enrol())
+        claim = dict(self.KEYS, answerCorrect=True, unresolved=False, source='kernel')
+        self.go(self.DET, '-5', claim, rid='f1')                                              # wrong answer claimed correct
+        self.go(self.DET, '-4', dict(claim, answerCorrect=False), rid='f2')                   # right answer claimed wrong
+        self.go(self.DET, '-5', dict(claim, answerCorrect=None, unresolved=True, clarificationRequired=True), rid='f3')   # wrong answer parked as unresolved
+        self.go(self.DET, '-4', dict(claim, answerCorrect=None, unresolved=True, clarificationRequired=True), rid='f4')   # right answer parked
+        self.assertEqual([self.stored(i)['answerCorrect'] for i in ('f1', 'f2', 'f3', 'f4')], [False, True, False, True])
+        self.assertEqual([self.stored(i)['unresolved'] for i in ('f1', 'f2', 'f3', 'f4')], [False, False, False, False])
+
+    def test_unreadable_and_unsupported_answers_are_undecided_not_wrong(self):
+        self.save(self.enrol())
+        for rid, text in [('u1', 'abc'), ('u2', '1/0'), ('u3', '[[1,2],[3]]'), ('u4', '2..3')]:
+            self.assertEqual(self.go(self.DET, text, rid=rid).status_code, 201, text)
+            a = self.stored(rid)
+            self.assertEqual((a['answerCorrect'], a['unresolved']), (None, True), text)
+
+    def test_repeated_submissions_each_get_the_same_verdict(self):
+        self.save(self.enrol())
+        for i in range(3):
+            self.go(self.MEAN, '6/2', rid=f'r{i}')
+        self.assertEqual([self.stored(f'r{i}')['answerCorrect'] for i in range(3)], [True, True, True])
+
+    def test_mastery_replay_uses_the_servers_verdict(self):
+        from .learning import credited
+        self.save(self.enrol())
+        self.go(self.MEAN, '6/2', rid='m1')
+        ev = next(e for e in self.records() if e['id'] == 'm1')
+        q = generated(self.MEAN[0])
+        self.assertIs(credited(q, ev), True)                                    # replay agrees with the stored kernel verdict
+        self.assertIs(credited(q, {**ev, 'assessment': {**ev['assessment'], 'source': 'legacy'}}), False)   # without it, the stored-answer comparison would refuse "6/2"
+
+    def test_a_missing_or_tampered_grader_falls_back_to_the_labelled_legacy_route(self):
+        import os
+        import shutil
+        import tempfile
+        from unittest import mock
+        from . import kernel_grader
+        self.save(self.enrol())
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER': 'off'}):
+            self.go(self.MEAN, '6/2', rid='off')
+        self.assertEqual((self.stored('off')['answerCorrect'], self.stored('off')['source']), (False, 'legacy'))
+        with tempfile.TemporaryDirectory() as d:
+            bad = shutil.copy(kernel_grader.BUNDLE, os.path.join(d, 'grader.mjs'))
+            shutil.copy(kernel_grader.MANIFEST, os.path.join(d, 'grader.manifest.json'))
+            with open(bad, 'a') as f:
+                f.write('\n// tampered\n')
+            kernel_grader.bundle_intact.cache_clear()
+            with mock.patch.object(kernel_grader, 'BUNDLE', type(kernel_grader.BUNDLE)(bad)), mock.patch.object(kernel_grader, 'MANIFEST', type(kernel_grader.MANIFEST)(os.path.join(d, 'grader.manifest.json'))):
+                self.go(self.MEAN, '6/2', rid='bad')
+        kernel_grader.bundle_intact.cache_clear()
+        self.assertEqual((self.stored('bad')['answerCorrect'], self.stored('bad')['source']), (False, 'legacy'))
+
+    def test_a_family_without_a_verified_contract_is_labelled_legacy_whatever_the_browser_says(self):
+        self.save(self.enrol())
+        claim = dict(self.KEYS, answerCorrect=True, unresolved=False, source='kernel')
+        r = self.save(self.rec('attempt', questionId='gen:rect:3,4', response='12', activity='diagnostic', hints=0, solution=False, competency=generated('gen:rect:3,4')['competency'], assessment=claim, id='lg'))
+        self.assertEqual(r.status_code, 201)
+        a = self.stored('lg')
+        self.assertEqual((a['answerCorrect'], a['source']), (True, 'legacy'))

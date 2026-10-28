@@ -10,6 +10,7 @@
  * coordinate checks (perpendicularity, Lagrange's identity, collinearity).
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
+import { b1Object, laObject, m2Object } from "../typed-contract.ts";
 import { fmt, gcd, near, neg, simpson, sup } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
@@ -802,6 +803,7 @@ export const B20: Def[] = [
   // ======================================================== independent events
   {
     id: "atindu",
+    contract: { kind: "typed", typed: ([a, b, k]) => (k === 0 ? b1Object("probability", "independent-intersection", { pa: `${a}/10`, pb: `${b}/10` }, ["independent"]) : null) },
     arity: 3,
     title: "Probabilities of independent events",
     competency: IND,
@@ -922,6 +924,7 @@ export const B20: Def[] = [
   // ======================================================== discrete random variables
   {
     id: "atrvmean",
+    contract: { kind: "typed", typed: (p) => { const { xs, w, T } = rvData(p); return b1Object("distribution", "pmf-mean", { values: xs, probabilities: w.map((v) => `${v}/${T}`) }); } },
     arity: 5,
     title: "Mean of a discrete random variable",
     competency: RV,
@@ -971,6 +974,7 @@ export const B20: Def[] = [
   },
   {
     id: "atrvvar",
+    contract: { kind: "typed", typed: (p) => { const { xs, w, T } = rvData(p); return b1Object("distribution", "pmf-variance", { values: xs, probabilities: w.map((v) => `${v}/${T}`) }); } },
     arity: 5,
     title: "Variance of a discrete random variable",
     competency: RV,
@@ -1274,6 +1278,7 @@ export const B20: Def[] = [
   // ======================================================== dispersion
   {
     id: "atvar",
+    contract: { kind: "typed", typed: (p) => { const { xs, f } = varData(p); return b1Object("statistics", "population-variance", { values: xs.flatMap((x, i) => new Array(f[i]).fill(x)) }, ["population"]); } },
     arity: 7,
     title: "Variance of a frequency distribution",
     competency: DISP,
@@ -1329,6 +1334,7 @@ export const B20: Def[] = [
   },
   {
     id: "atsd",
+    contract: { kind: "typed", typed: (p) => b1Object("statistics", "population-standard-deviation", { values: p }, ["population"]) },
     arity: 6,
     title: "Standard deviation of raw data (exact)",
     competency: DISP,
@@ -1791,6 +1797,7 @@ export const B20: Def[] = [
   // ======================================================== trigonometric functions
   {
     id: "atval",
+    contract: { kind: "typed", typed: ([f, m]) => (f < 3 ? m2Object({ domain: "trigonometry", task: "value", fn: (["sin", "cos", "tan"] as const)[f], degrees: 15 * m }) : null) },
     arity: 2,
     title: "Trigonometric functions of any angle",
     competency: TF,
@@ -2342,6 +2349,7 @@ export const B20: Def[] = [
   },
   {
     id: "atmag",
+    contract: { kind: "typed", typed: (x) => laObject("vector", "distance", { a: x.slice(0, 3), b: x.slice(3) }) },
     arity: 6,
     title: "Magnitude of the vector joining two points",
     competency: VA,
@@ -2503,6 +2511,7 @@ export const B20: Def[] = [
   // ======================================================== dot and cross products
   {
     id: "atang",
+    contract: { kind: "typed", typed: (x) => laObject("vector", "angle-cosine", { a: x.slice(0, 3), b: x.slice(3) }) },
     arity: 6,
     title: "The angle between two vectors (cos θ)",
     competency: VP,
@@ -2611,6 +2620,7 @@ export const B20: Def[] = [
   },
   {
     id: "atcross",
+    contract: { kind: "typed", typed: (x) => laObject("vector", "cross", { a: x.slice(0, 3), b: x.slice(3) }) },
     arity: 6,
     title: "The cross product in components",
     competency: VP,

@@ -13,6 +13,7 @@ import { assessAnswerFirst, type AnswerFirstAssessment } from "./answer-first.ts
 import { FAMILIES, problemOf } from "./families.ts";
 import type { GeneratorContract, Problem } from "./family-kit.ts";
 import type { AnswerType } from "./answer-types.ts";
+import { judgeTyped, objectValues, shownValues, typedCapability, type TypedObject } from "./typed-contract.ts";
 
 export const ASSESSMENT_CONTRACT = "openpath-assessment@1" as const;
 export const ASSESSMENT_POLICY = "assessment@1" as const;
@@ -24,14 +25,14 @@ export interface AssessmentContract {
   questionId: string;
   prompt: string;
   /** the statement handed to the exact checker (null: no independent kernel for this family) */
-  problem: { domain: "algebra"; statement: string } | null;
+  problem: { domain: "algebra"; statement: string } | { domain: "typed"; object: TypedObject } | null;
   answerType: AnswerType;
   /** the expected answer as the question stores it, and in the form the student is shown */
   expected: { stored: string; display: string; values: string[] };
   variable: string | null;
   assumptions: string[];
   mode: AssessmentMode;
-  capability: "exact-solution-set" | "exact-arithmetic" | "educator" | "none";
+  capability: "exact-solution-set" | "exact-arithmetic" | "typed-kernel" | "educator" | "none";
   /** how the checker reads answers: a value, the solution of an equation, or all its solutions (null: no kernel) */
   kind?: GeneratorContract["kind"] | null;
   reference: { steps: string[]; evidence: string };
@@ -41,15 +42,17 @@ export interface AssessmentContract {
   checkedWrong: string[];
 }
 
-type Shape = { kind: GeneratorContract["kind"]; variable: string | null; assumptions: string[]; statement: string; numbers: number[] | null };
+type Shape = { kind: GeneratorContract["kind"]; variable: string | null; assumptions: string[]; statement: string; numbers: number[] | null; typed?: TypedObject };
 const sg = (n: number) => (n < 0 ? "-" : "+");
 /** display glyphs a generator may use in its statement; the checker reads plain ASCII */
 const ascii = (s: string) => s.replace(/[−–]/g, "-").replace(/×/g, "*").replace(/÷/g, "/");
 /** the generator-owned contract of a family, applied to one set of parameters (null: the family has none, or none for this question) */
 function shapeOfProblem(pr: Problem): Shape | null {
   const c = FAMILIES.get(pr.family)?.contract;
-  const raw = c?.statement(pr.params);
-  if (!c || !raw) return null;
+  if (!c) return null;
+  if (c.kind === "typed") { const object = c.typed?.(pr.params) ?? null; return object ? { kind: "typed", variable: null, assumptions: [], statement: "", numbers: c.numbers ? c.numbers(pr.params) : null, typed: object } : null; }
+  const raw = c.statement?.(pr.params);
+  if (!raw) return null;
   return { kind: c.kind, variable: c.variable ?? (c.kind === "value" ? null : "x"), assumptions: c.assumptions ?? [], statement: ascii(raw), numbers: c.numbers ? c.numbers(pr.params) : null };
 }
 const SUPER: Record<string, string> = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9" };
@@ -106,6 +109,7 @@ export function contractOfProblem(pr: Problem, questionId: string): AssessmentCo
   const expected = { stored: pr.answer, ...exp };
   const shape = shapeOfProblem(pr);
   if (!shape) return { ...base, problem: null, expected, variable: null, assumptions: [], capability: "none", verification: "legacy", reason: FAMILIES.get(pr.family)?.contract ? `family ${pr.family} gives no statement for these parameters; the generator's answer is the only authority` : `no generator contract for family ${pr.family}; the generator's answer is the only authority` };
+  if (shape.typed) return typedContract(pr, base, expected, exp, shape.typed, shape.numbers);
   const statement = shape.statement, problem = { domain: "algebra" as const, statement };
   const held = (reason: string, wrong: string[] = []): AssessmentContract => ({ ...base, problem, expected, variable: shape.variable, assumptions: shape.assumptions, kind: shape.kind, capability: shape.kind === "value" ? "exact-arithmetic" : "exact-solution-set", verification: "held", reason, checkedWrong: wrong });
   // the statement must be the one the student is shown: every number in it appears in the prompt (commas inside a number, as in 1,23,456, are grouping)
@@ -128,6 +132,27 @@ export function contractOfProblem(pr: Problem, questionId: string): AssessmentCo
     judged.push(w);
   }
   return { ...base, problem, expected, variable: shape.variable, assumptions: shape.assumptions, kind: shape.kind, capability: shape.kind === "value" ? "exact-arithmetic" : "exact-solution-set", verification: "verified", reason: "independent exact checker reproduces the expected answer and credits no known wrong answer", reference: { steps: base.reference.steps, evidence: `exact checker: ${good.text} confirmed for ${statement}` }, checkedWrong: judged };
+}
+/** the typed-kernel route: the kernel computes the expected value from the generator's object, must reproduce the stored answer, and must not credit a known wrong answer */
+function typedContract(pr: Problem, base: Omit<AssessmentContract, "problem" | "expected" | "variable" | "assumptions" | "capability" | "verification" | "reason">, expected: AssessmentContract["expected"], exp: { display: string; values: string[] }, object: TypedObject, numbers: number[] | null): AssessmentContract {
+  const id = typedCapability(object).id, mk = (verification: Verification, reason: string, checkedWrong: string[] = []): AssessmentContract =>
+    ({ ...base, problem: verification === "legacy" ? null : { domain: "typed", object }, expected, variable: null, assumptions: [], kind: verification === "legacy" ? null : "typed", capability: verification === "legacy" ? "none" : "typed-kernel", verification, reason, checkedWrong });
+  // the object must be the one the student is shown: every number it carries (other than 0 and 1) appears in the prompt
+  const shown = shownValues(`${pr.prompt} ${pr.figure ? JSON.stringify(pr.figure).replace(/,/g, " ") : ""}`);
+  const missing = numbers ? numbers.map(Math.abs).filter((n) => n > 1).map(String).find((n) => !shown.has(n)) : objectValues(object).find((n) => !shown.has(n));
+  if (missing !== undefined) return mk("held", `the typed object uses ${missing}, which the prompt does not show`);
+  const v = judgeTyped(object, exp.display);
+  if (v === "unread") return mk("legacy", `stored answer "${exp.display}" is not in a form the ${id} reader accepts; legacy comparison kept`);
+  if (v === "unsupported") return mk("legacy", `the ${id} kernel cannot judge this object (unsupported); legacy comparison kept`);
+  if (v !== "verified") return mk("held", `the ${id} kernel does not confirm the stored answer`);
+  const judged: string[] = [];
+  for (const w of wrongCandidates(pr, exp.values)) {
+    const wv = judgeTyped(object, w);
+    if (wv === "unread") continue;
+    if (wv === "verified") return mk("held", `the ${id} kernel also credits the known wrong answer "${w}"`, judged);
+    judged.push(w);
+  }
+  return { ...mk("verified", `the ${id} kernel reproduces the expected answer from the generator's object and credits no known wrong answer`, judged), reference: { steps: fmtSteps(pr), evidence: `typed ${id} kernel (independent exact computation)` } };
 }
 /** an authored (non-generated) question: no independent kernel, so the stored answer is the only authority (reported as legacy), or an educator marks it */
 export const legacyContract = (q: { id: string; type: AnswerType; answer: string; prompt: string }): AssessmentContract =>
@@ -182,16 +207,29 @@ export function assessSubmission(c: AssessmentContract | null, s: Submission): A
     if (legacy === null) return pending({ source: "legacy" }, "This answer could not be checked automatically. It is saved and has not been marked wrong.", null, true);
     return done({ credit: legacy, evidence: ev({ answerCorrect: legacy, source: "legacy" }, asked), feedback: { kind: legacy ? "correct" : "incorrect", message: legacy ? "Correct." : "Not quite." }, clarification: null });
   }
-  const kind = c.kind ?? "value";
+  const kind = (c.kind ?? "value") as Exclude<GeneratorContract["kind"], "typed">;
   let response = s.response;
   if (c.answerType === "choice") { const i = response.trim().toUpperCase().charCodeAt(0) - 65; const o = response.trim().length === 1 ? (problemOf(c.questionId)?.options ?? [])[i] : undefined; if (o === undefined) return pending({}, "Choose one of the options.", asked ? null : { kind: "answer-field", prompt: "Choose one of the options." }, asked > 0); response = o; }
-  const ans = answerText(kind, c.variable, response);
+  if (c.problem?.domain === "typed") {
+    // the typed-kernel route: the answer is read into the kernel's own kind of value (never guessed), then the kernel decides; working is not read
+    const hint = "in the form shown in the question", verdict = judgeTyped(c.problem.object, response);
+    if (verdict === "unread") return pending({}, `Your answer could not be read ${hint}. It has not been marked wrong.`, asked ? null : { kind: "answer-field", prompt: `Type just your final answer in the answer box, ${hint}.` }, asked > 0);
+    const kc = verdict === "verified" ? true : verdict === "rejected" ? false : null;
+    if (kc === null) return pending({}, "This answer could not be checked automatically. It is saved and has not been marked wrong.", null, asked > 0);
+    // the record keeps the stored plain form of a correct answer, so the stored-answer comparison and every replay agree with this decision
+    const normalised = kc ? c.expected.stored : undefined;
+    if (legacy !== null && legacy !== kc) return { ...pending({ source: "disagreement", answerCorrect: null }, "This answer is being double-checked. It is saved and has not been marked wrong.", null, false), normalised };
+    return kc
+      ? done({ credit: true, evidence: ev({ answerCorrect: true }, asked), feedback: { kind: "correct", message: "Correct. (Your working was not checked.)" }, clarification: null, normalised })
+      : done({ credit: false, evidence: ev({ answerCorrect: false }, asked), feedback: { kind: "incorrect", message: "Not quite." }, clarification: (s.working ?? []).some((l) => l.trim()) ? null : { kind: "show-step", prompt: "Want to find where it went wrong? Show one step of your working." } });
+  }
+  const ans = answerText(kind as "value" | "var" | "set", c.variable, response);
   const readHint = c.answerType === "integer" || kind === "value" ? "a number" : kind === "set" ? "the solutions as numbers separated by commas" : "a number";
   if (!ans.ok && legacy !== null && kind === "value" && /^[\d\s./+\-−]+$/.test(response)) return done({ credit: legacy, evidence: ev({ answerCorrect: legacy, source: "legacy" }, asked), feedback: { kind: legacy ? "correct" : "incorrect", message: legacy ? "Correct." : "Not quite." }, clarification: null });
   if (!ans.ok) return pending({}, `Your answer could not be read as ${readHint}. It has not been marked wrong.`, asked ? null : { kind: "answer-field", prompt: `Type just your final answer in the answer box, as ${readHint}.` }, asked > 0);
   const normalised = c.answerType === "choice" ? undefined : ans.values.join(", ");
   const lines = (s.working ?? []).filter((l) => l.trim());
-  const r: AnswerFirstAssessment | null = kernel(kind, c.problem!.statement, ans, lines);
+  const r: AnswerFirstAssessment | null = kernel(kind, (c.problem as { statement: string }).statement, ans, lines);
   const kc = r?.answer.credit ?? null;
   if (kc === null) return pending({}, "This answer could not be checked automatically. It is saved and has not been marked wrong.", asked ? null : { kind: "interpretation", prompt: "Write one line showing how you got your answer (or the equation you solved), then check again." }, asked > 0);
   if (legacy !== null && legacy !== kc) return { ...pending({ source: "disagreement", answerCorrect: null }, "This answer is being double-checked. It is saved and has not been marked wrong.", null, false), normalised };

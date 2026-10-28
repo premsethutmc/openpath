@@ -6,6 +6,7 @@
  * rank. Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
+import { laObject } from "../typed-contract.ts";
 import { gcd, near, sup } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
@@ -2010,6 +2011,7 @@ export const B16: Def[] = [
   // ================================================================ matrices
   {
     id: "apmmul",
+    contract: { kind: "typed", typed: (p) => laObject("matrix", "multiply", { a: m2(p), b: m2(p, 4) }) },
     arity: 8,
     title: "Multiplying two 2 × 2 matrices",
     competency: MAT,
@@ -2117,6 +2119,7 @@ export const B16: Def[] = [
   },
   {
     id: "apmcost",
+    contract: { kind: "typed", typed: (p) => laObject("matrix", "multiply", { a: [p.slice(0, 3), p.slice(3, 6)], b: costP(p) }) },
     arity: 9,
     title: "A matrix product as a total bill",
     competency: MAT,
@@ -2178,6 +2181,7 @@ export const B16: Def[] = [
   // ================================================================ systems by matrices
   {
     id: "apsys3",
+    contract: { kind: "typed", typed: (p) => laObject("system", "solve", { a: m3(p), b: sys3B(p) }) },
     arity: 12,
     title: "Solving three equations by X = A⁻¹B",
     competency: MSYS,
@@ -2237,6 +2241,7 @@ export const B16: Def[] = [
   },
   {
     id: "apsys2",
+    contract: { kind: "typed", typed: ([a, b, c, d, x, y]) => laObject("system", "solve", { a: [[a, b], [c, d]], b: [a * x + b * y, c * x + d * y] }) },
     arity: 6,
     title: "Solving two equations with an inverse matrix",
     competency: MSYS,
@@ -2699,6 +2704,7 @@ export const B16: Def[] = [
   // ================================================================ adjoint and inverse
   {
     id: "apinv2",
+    contract: { kind: "typed", typed: ([a, b, c, d]) => laObject("matrix", "inverse", { a: [[a, b], [c, d]] }) },
     arity: 4,
     title: "The inverse of a 2 × 2 matrix",
     competency: ADJ,
@@ -2796,6 +2802,7 @@ export const B16: Def[] = [
   // ================================================================ rank
   {
     id: "aprank",
+    contract: { kind: "typed", typed: ([r, seed]) => laObject("matrix", "rank", { a: rankRows(r, seed) }) },
     arity: 2,
     title: "The rank of a 3 × 4 matrix",
     competency: RANK,
@@ -3318,6 +3325,7 @@ const NEW16: Def[] = [
   },
   {
     id: "apmmod",
+    contract: { kind: "typed", typed: (p) => laObject("matrix", "multiply", { a: [p.slice(0, 3), p.slice(3, 6)], b: MMR[p[7]] }) },
     arity: 8,
     title: "Modelling a situation with a matrix product",
     competency: MAT,
@@ -3372,6 +3380,7 @@ const NEW16: Def[] = [
   // ================================================================ gap@1: systems in words, LP cases, approximations, transformations, codes, Gauss–Jordan
   {
     id: "apsysw",
+    contract: { kind: "typed", typed: (p) => laObject("system", "solve", { a: sysA(p[5]), b: sysA(p[5]).map((r) => r[0] * p[0] + r[1] * p[1] + r[2] * p[2]) }) },
     arity: 6,
     title: "Word problems with three unknowns, solved by the inverse, Cramer's rule or Gaussian elimination",
     competency: MSYS,
@@ -3726,6 +3735,7 @@ const NEW16: Def[] = [
   },
   {
     id: "apgj3",
+    contract: { kind: "typed", typed: ([s]) => laObject("matrix", "inverse", { a: gjA(s) }) },
     arity: 1,
     title: "The inverse of a 3 × 3 matrix by the Gauss–Jordan method",
     competency: RANK,

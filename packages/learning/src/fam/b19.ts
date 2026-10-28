@@ -6,6 +6,7 @@
  * Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
+import { b1Object, complexObject, laObject } from "../typed-contract.ts";
 import { gcd, sup } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
@@ -960,6 +961,7 @@ function tcN([kind, m, p, q]: number[]) {
 
 const asdist3: Def = {
   id: "asdist3",
+  contract: { kind: "typed", typed: (p) => laObject("vector", "distance", { a: p.slice(0, 3), b: p.slice(3) }) },
   arity: 6,
   title: "The distance between two points in space",
   competency: SPC,
@@ -1800,6 +1802,7 @@ function imgP(p: number[]) {
 const pairT = (re: R, im: R) => tup([rs(re), rs(im)]);
 const ascop: Def = {
   id: "ascop",
+  contract: { kind: "typed", typed: ([a, b, c, d, op]) => complexObject("arithmetic", op ? "divide" : "multiply", { a: { re: a, im: b }, b: { re: c, im: d } }) },
   arity: 5,
   title: "Multiplying and dividing complex numbers",
   competency: CX,
@@ -2900,6 +2903,7 @@ const ascinvOk = ([a, b, c, d, op]: number[]) => {
 };
 const ascinv: Def = {
   id: "ascinv",
+  contract: { kind: "typed", typed: ([a, b, c, d, op]) => complexObject("arithmetic", ["add", "subtract", "reciprocal"][op], op === 2 ? { a: { re: a, im: b } } : { a: { re: a, im: b }, b: { re: c, im: d } }) },
   arity: 5,
   title: "Adding and subtracting complex numbers, and the multiplicative inverse",
   competency: CX,
@@ -3664,6 +3668,7 @@ const asbernOk = ([kind, a, d, u, v]: number[]) => {
 };
 const asbern: Def = {
   id: "asbern",
+  contract: { kind: "typed", typed: ([kind, a, d, u, v]) => kind === 0 ? b1Object("distribution", "bernoulli-mean", { p: `${a}/${d}` }) : kind === 1 ? b1Object("distribution", "bernoulli-variance", { p: `${a}/${d}` }) : kind === 2 ? b1Object("distribution", "pmf-mean", { values: [u, v], probabilities: [`${a}/${d}`, `${d - a}/${d}`] }) : kind === 3 ? b1Object("distribution", "pmf-variance", { values: [u, v], probabilities: [`${a}/${d}`, `${d - a}/${d}`] }) : null },
   arity: 5,
   title: "One-point, two-point and Bernoulli distributions",
   competency: BIN,

@@ -190,10 +190,14 @@ export interface TeachAlternative {
   visual?: (p: number[]) => Visual | null;
 }
 /** What the exact checker needs to verify this family's answers, from the generated parameters (never recovered from the prompt text). A family opts in; null from `statement` leaves that question on the legacy comparison. */
+import type { TypedObject } from "./typed-contract.ts";
 export interface GeneratorContract {
-  /** value: a number; var: the solution of an equation in `variable`; set: all solutions of an equation in `variable` */
-  kind: "value" | "var" | "set";
-  statement: (p: number[]) => string | null;
+  /** value: a number; var: the solution of an equation in `variable`; set: all solutions of an equation in `variable`; typed: a structured object for an existing typed kernel (see `typed`) */
+  kind: "value" | "var" | "set" | "typed";
+  /** the algebra statement for the answer-first checker (value / var / set) */
+  statement?: (p: number[]) => string | null;
+  /** the mathematical object itself, from the parameters, for an existing typed kernel (typed-contract.ts); null leaves that question on the legacy comparison */
+  typed?: (p: number[]) => TypedObject | null;
   variable?: string;
   assumptions?: string[];
   /** the numbers the student is shown that the statement uses; default: the digits of the statement */

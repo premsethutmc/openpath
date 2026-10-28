@@ -7,6 +7,7 @@
  * Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value, Visual } from "../family-kit";
+import { b1Object, m2Object } from "../typed-contract.ts";
 import { fmt, gcd, near, sup, xp } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
@@ -1346,6 +1347,7 @@ export const B15: Def[] = [
   // ============================================================ permutations and combinations
   {
     id: "aonpr",
+    contract: { kind: "typed", typed: ([n, r]) => b1Object("combinatorics", "permutation", { n, r }, ["ordered"]) },
     arity: 2,
     title: "Permutations of r out of n distinct objects",
     competency: PERM,
@@ -1386,6 +1388,7 @@ export const B15: Def[] = [
   },
   {
     id: "aoncr",
+    contract: { kind: "typed", typed: ([n, r]) => b1Object("combinatorics", "combination", { n, r }, ["unordered"]) },
     arity: 2,
     title: "Combinations: choosing r out of n",
     competency: PERM,
@@ -1684,6 +1687,7 @@ export const B15: Def[] = [
   // ============================================================ geometric progressions
   {
     id: "aogp",
+    contract: { kind: "typed", typed: ([a, r, n]) => m2Object({ domain: "sequence-series", task: "gp-term", first: String(a), ratio: String(r), n }), numbers: ([a, r, n]) => [a, a * r, n] },
     arity: 3,
     title: "The nth term of a geometric progression",
     competency: GP,
@@ -1726,6 +1730,7 @@ export const B15: Def[] = [
   },
   {
     id: "aogpsum",
+    contract: { kind: "typed", typed: ([a, r, n]) => m2Object({ domain: "sequence-series", task: "gp-sum", first: String(a), ratio: String(r), n }), numbers: ([a, r, n]) => [a, a * r, n] },
     arity: 3,
     title: "The sum of the first n terms of a GP",
     competency: GP,
@@ -1772,6 +1777,7 @@ export const B15: Def[] = [
   },
   {
     id: "aogpinf",
+    contract: { kind: "typed", typed: ([a, p, q]) => m2Object({ domain: "sequence-series", task: "infinite-gp", first: String(a), ratio: `${p}/${q}` }), numbers: ([a]) => [a] },
     arity: 3,
     title: "The sum to infinity of a geometric series",
     competency: GP,
@@ -3816,6 +3822,7 @@ const NEW15: Def[] = [
   // ============================================================ factorial notation
   {
     id: "aofact",
+    contract: { kind: "typed", typed: ([q, n, m]) => (q === 2 ? b1Object("combinatorics", "combination", { n, r: m }, ["unordered"]) : null) },
     arity: 3,
     title: "Evaluating and simplifying expressions with factorials",
     competency: PERM,

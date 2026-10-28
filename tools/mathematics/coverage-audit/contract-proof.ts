@@ -15,9 +15,9 @@ const same = (a: Q, b: Q) => a.n === b.n && a.d === b.d;
 const showFrac = (q: Q) => (q.d === 1n ? String(q.n) : `${q.n}/${q.d}`);
 const dec = (q: Q): string | null => { let d = q.d, k = 0; while (d % 10n === 0n) { d /= 10n; k++; } let tw = 0, fi = 0; while (d % 2n === 0n) { d /= 2n; tw++; } while (d % 5n === 0n) { d /= 5n; fi++; } if (d !== 1n) return null; const p = k + Math.max(tw, fi); const sc = (q.n * 10n ** BigInt(p)) / q.d; const s = (sc < 0n ? -sc : sc).toString().padStart(p + 1, "0"); return (q.n < 0n ? "-" : "") + (p ? s.slice(0, -p) + "." + s.slice(-p) : s); };
 const N = Number(process.argv[3] ?? 40), cats = ["correct", "equivalent", "wrong", "boundary", "unreadable"], tally: Record<string, number[]> = Object.fromEntries(cats.map((c) => [c, [0, 0]]));
-const lat: number[] = [], failures: string[] = [], rows: any[] = []; let falseAcc = 0, falseRej = 0;
+const dump: any[] = []; const lat: number[] = [], failures: string[] = [], rows: any[] = []; let falseAcc = 0, falseRej = 0;
 for (const [fam, def] of FAMILIES) {
-  if (!def.contract) continue; const kind = def.contract.kind;
+  if (!def.contract || def.contract.kind === "typed") continue; const kind = def.contract.kind;
   const items = pool(fam).items.filter((i) => !i.id.endsWith(":mc")), step = Math.max(1, Math.floor(items.length / N));
   const r = { family: fam, kind, sampled: 0, verified: 0, legacy: 0, checks: 0, passed: 0 };
   for (let i = 0; i < items.length && r.sampled < N; i += step) {
@@ -25,7 +25,7 @@ for (const [fam, def] of FAMILIES) {
     if (c.verification !== "verified") { r.legacy++; continue; } r.verified++;
     const els = pr.answer.split(/\s*,\s*/).map(parse); if (els.some((e) => !e)) continue; const vals = els as Q[];
     const t = (cat: string, resp: string, want: boolean | null) => { const t0 = performance.now(); const a = decide(id, resp); lat.push(performance.now() - t0);
-      const ok = a.credit === want && a.evidence.source === "kernel"; tally[cat][0]++; r.checks++; if (ok) { tally[cat][1]++; r.passed++; } else { if (want === false && a.credit === true) falseAcc++; if (want === true && a.credit === false) falseRej++; if (failures.length < 300) failures.push(`${fam} ${cat} ${id} "${resp}" want ${want} got ${a.credit}/${a.evidence.source}`); } };
+      dump.push({ id, fam, cat, type: pr.type, stored: pr.answer, response: resp, want, kernel: a.credit, working: false }); const ok = a.credit === want && a.evidence.source === "kernel"; tally[cat][0]++; r.checks++; if (ok) { tally[cat][1]++; r.passed++; } else { if (want === false && a.credit === true) falseAcc++; if (want === true && a.credit === false) falseRej++; if (failures.length < 300) failures.push(`${fam} ${cat} ${id} "${resp}" want ${want} got ${a.credit}/${a.evidence.source}`); } };
     const single = vals.length === 1, v = vals[0];
     t("correct", pr.answer, true);
     if (kind === "value") {
@@ -50,4 +50,5 @@ for (const [fam, def] of FAMILIES) {
 lat.sort((a, b) => a - b); const pct = (p: number) => +(lat[Math.floor(lat.length * p)] ?? 0).toFixed(3);
 const sum = { families: rows.length, byKind: Object.fromEntries(["value", "var", "set"].map((k) => [k, rows.filter((r) => r.kind === k).length])), questionsTried: rows.reduce((a, r) => a + r.sampled, 0), verifiedTried: rows.reduce((a, r) => a + r.verified, 0), legacyTried: rows.reduce((a, r) => a + r.legacy, 0), tally, falseAcceptances: falseAcc, falseRejections: falseRej, latencyMs: { p50: pct(0.5), p95: pct(0.95), p99: pct(0.99) }, failures };
 writeFileSync(process.argv[2], JSON.stringify({ summary: sum, rows }));
+if (process.argv[4]) writeFileSync(process.argv[4], JSON.stringify(dump));
 console.log(JSON.stringify({ ...sum, failures: failures.slice(0, 25) }));

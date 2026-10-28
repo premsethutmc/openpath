@@ -14,6 +14,7 @@
  * Anything else is UNSUPPORTED: `parseProblem` says so, with a reason, and nothing downstream guesses.
  */
 import { graph } from "./graph";
+import { b1Object, laObject, m2Object } from "./typed-contract.ts";
 import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { DOMAIN_FAMILIES } from "./fam";
 
@@ -786,6 +787,7 @@ const F: Def[] = [
   },
   {
     id: "mean4",
+    contract: { kind: "typed", typed: (v) => b1Object("statistics", "mean", { values: v }) },
     arity: 4,
     title: "The mean of four numbers",
     competency: "MATH.statistics.averages-intro",
@@ -828,6 +830,7 @@ const F: Def[] = [
   },
   {
     id: "root",
+    contract: { kind: "typed", typed: ([n]) => m2Object({ domain: "radical", task: "sqrt", radicand: n * n }) },
     arity: 1,
     title: "The square root of a perfect square",
     competency: "MATH.number.square-roots",
@@ -970,6 +973,7 @@ const F: Def[] = [
   },
   {
     id: "apn",
+    contract: { kind: "typed", typed: ([a, d, n]) => m2Object({ domain: "sequence-series", task: "ap-term", first: String(a), difference: String(d), n }), numbers: ([a, d, n]) => [a, a + d, n] },
     arity: 3,
     title: "The nth term of an arithmetic progression",
     competency: "MATH.algebra.arithmetic-sequences",
@@ -1080,6 +1084,7 @@ const F: Def[] = [
   },
   {
     id: "det2",
+    contract: { kind: "typed", typed: ([a, b, c, d]) => laObject("determinant", "determinant", { a: [[a, b], [c, d]] }) },
     arity: 4,
     title: "A 2 × 2 determinant",
     competency: "MATH.algebra.determinants",

@@ -12,6 +12,7 @@
  * multiplying back to the identity). Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value, Visual } from "../family-kit";
+import { laObject, m2Object } from "../typed-contract.ts";
 import { fmt, gcd, simpson, near, sup, signed } from "../family-kit";
 import { evaluate, parse, type Node } from "../answer-types";
 
@@ -651,6 +652,7 @@ const auapk = F({
 const apsSum = ([a, d, n]: number[]) => (n * (2 * a + (n - 1) * d)) / 2;
 const auaps = F({
   id: "auaps",
+  contract: { kind: "typed", typed: ([a, d, n]) => m2Object({ domain: "sequence-series", task: "ap-sum", first: String(a), difference: String(d), n }), numbers: ([a, d, n]) => [a, a + d, n] },
   arity: 3,
   title: "The sum of the first n terms of an AP",
   competency: AP,
@@ -2195,6 +2197,7 @@ const audel = F({
 /** [k, e1, …, e9]: k = 0 |A| for a 3 × 3 matrix; k = 1 |AB| for 2 × 2 matrices A = (e1 … e4), B = (e5 … e8). */
 const audt3 = F({
   id: "audt3",
+  contract: { kind: "typed", typed: ([k, ...e]) => (k === 0 ? laObject("determinant", "determinant", { a: rows3(e) }) : null) },
   arity: 10,
   title: "Determinants of order 3, and the determinant of a product",
   competency: DET,
@@ -2418,6 +2421,7 @@ function adj3(m: number[][]): number[][] {
 const matR = (m: number[][], d: number) => `[[${m.map((r) => r.map((x) => rat(x, d)).join(", ")).join("], [")}]]`;
 const auinv = F({
   id: "auinv",
+  contract: { kind: "typed", typed: (e) => laObject("matrix", "inverse", { a: rows3(e) }) },
   arity: 9,
   title: "The inverse of a 3 × 3 matrix",
   competency: DET,

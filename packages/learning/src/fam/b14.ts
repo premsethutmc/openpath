@@ -6,6 +6,7 @@
  * trigonometric identities, and the ratios of standard and complementary angles. Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value, Visual } from "../family-kit";
+import { b1Object } from "../typed-contract.ts";
 import { fmt, gcd } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
@@ -873,6 +874,7 @@ export const B14: Def[] = [
   // ============================================================== MATH.probability.complements
   {
     id: "ancomp",
+    contract: { kind: "typed", typed: ([m, a, c, d]) => (m === 0 ? b1Object("probability", "complement", { pa: `${a}/${d}` }) : null) },
     arity: 4,
     title: "Complementary and exhaustive events",
     competency: COMP,
@@ -932,6 +934,7 @@ export const B14: Def[] = [
   },
   {
     id: "anunion",
+    contract: { kind: "typed", typed: ([x, y, z, d]) => b1Object("probability", "union", { pa: `${x}/${d}`, pb: `${y}/${d}`, pab: `${z}/${d}` }) },
     arity: 4,
     title: "The addition rule P(A or B)",
     competency: COMP,
@@ -1324,6 +1327,7 @@ export const B14: Def[] = [
   },
   {
     id: "anumean",
+    contract: { kind: "typed", typed: (p) => { const { xs, fs } = umean(p); return b1Object("statistics", "grouped-mean", { values: xs, frequencies: fs }); } },
     arity: 3,
     title: "Mean of an ungrouped frequency distribution",
     competency: GD,
@@ -1499,6 +1503,7 @@ export const B14: Def[] = [
   // ============================================================== MATH.statistics.weighted-mean
   {
     id: "anwmean",
+    contract: { kind: "typed", typed: ([n1, m1, n2, m2]) => b1Object("statistics", "weighted-mean", { values: [m1, m2], frequencies: [n1, n2] }) },
     arity: 4,
     title: "The combined mean of two groups",
     competency: WM,

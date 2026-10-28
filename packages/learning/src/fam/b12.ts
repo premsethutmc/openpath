@@ -7,6 +7,7 @@
  * and circle theorems (angles, chords, which theorem justifies a step). Written by OpenPath; CC0.
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
+import { laObject } from "../typed-contract.ts";
 import { fmt, gcd, near, sup } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 
@@ -814,6 +815,7 @@ export const B12: Def[] = [
   // ============================================================ pairs of linear equations
   {
     id: "alsys",
+    contract: { kind: "typed", typed: ([a1, b1, a2, b2, x, y]) => laObject("system", "solve", { a: [[a1, b1], [a2, b2]], b: [a1 * x + b1 * y, a2 * x + b2 * y] }) },
     arity: 6,
     title: "Solving a pair of linear equations",
     competency: SYS,
@@ -871,6 +873,7 @@ export const B12: Def[] = [
   },
   {
     id: "alsysw",
+    contract: { kind: "typed", typed: ([a1, b1, a2, b2, x, j]) => laObject("system", "solve", { a: [[a1, b1], [a2, b2]], b: [a1 * x + b1 * 5 * j, a2 * x + b2 * 5 * j] }) },
     arity: 6,
     title: "A pair of linear equations from a shopping problem",
     competency: SYS,
@@ -972,6 +975,7 @@ export const B12: Def[] = [
   },
   {
     id: "al3sys",
+    contract: { kind: "typed", typed: ([k, x, y, z]) => laObject("system", "solve", { a: M3[k], b: M3[k].map((r) => r[0] * x + r[1] * y + r[2] * z) }) },
     arity: 4,
     title: "Solving three linear equations in three variables",
     competency: SYS3,

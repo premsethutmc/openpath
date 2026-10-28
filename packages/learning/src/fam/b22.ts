@@ -15,6 +15,7 @@
  * search, substitution back, enumeration of outcomes, or cross-multiplication.
  */
 import type { Bug, Def, Step, Value, Visual } from "../family-kit";
+import { b1Object } from "../typed-contract.ts";
 import { EXP, MT, factSlip, fmt, gcd, near, neg, show, sup } from "../family-kit";
 
 const DR = "MATH.number.division-remainders";
@@ -2120,6 +2121,7 @@ const P3: Def[] = [
   },
   {
     id: "avfmed",
+    contract: { kind: "typed", typed: ([x0, ...f]) => b1Object("statistics", "median", { values: f.flatMap((n, i) => new Array(n).fill(x0 + i)) }) },
     arity: 6,
     title: "The median of data in a frequency table",
     competency: MED,
@@ -2174,6 +2176,7 @@ const P3: Def[] = [
   },
   {
     id: "avcond",
+    contract: { kind: "typed", typed: ([u, v, mode]) => (mode === 0 ? b1Object("probability", "conditional", { pab: `${u}/20`, pb: `${v}/20` }) : null) },
     arity: 3,
     title: "Conditional probability from P(A ∩ B) and P(B)",
     competency: COND,

@@ -53,7 +53,7 @@ export type Plan = { allowed: true; request: FallbackRequest; estimate: { inputT
 export function planFallback(cfg: FallbackConfig, usage: Usage, contract: AssessmentContract, a: Assessment, sub: { response: string; working?: readonly string[] }): Plan {
   if (cfg.provider === "none") return { allowed: false, reason: "fallback disabled" };
   if (!a.fallbackEligible) return { allowed: false, reason: a.credit !== null ? "already decided deterministically" : "the student clarification has not been offered yet" };
-  if (!contract.problem) return { allowed: false, reason: "no checkable statement for this question" };
+  if (!contract.problem || contract.problem.domain === "typed") return { allowed: false, reason: "no checkable statement for this question" };
   const req: FallbackRequest = { task: a.evidence.firstError ? "explain" : "interpret", statement: contract.problem.statement, studentAnswer: sub.response.slice(0, 300), studentWorking: (sub.working ?? []).slice(0, 8).map((l) => l.slice(0, 80)) };
   const inputTokens = estimateTokens(req);
   if (inputTokens > cfg.maxInputTokens) return { allowed: false, reason: "request larger than the input ceiling" };
@@ -81,7 +81,7 @@ export function settle(contract: AssessmentContract, a: Assessment, proposals: F
   const usable: FallbackProposal[] = [], discarded: Settled["discarded"] = []; let confirmation: Settled["confirmation"] = null;
   for (const p of proposals) {
     if (p.kind === "interpretation" || p.kind === "candidate-solution") {
-      const text = p.kind === "interpretation" ? p.reading : p.answer, r = contract.kind && contract.verification === "verified" ? answerText(contract.kind, contract.variable, text) : null;
+      const text = p.kind === "interpretation" ? p.reading : p.answer, r = contract.kind && contract.kind !== "typed" && contract.verification === "verified" ? answerText(contract.kind, contract.variable, text) : null;
       if (!r || !r.ok) { discarded.push({ proposal: p, why: "not a plain answer the checker can read" }); continue; }
       if (!confirmation) confirmation = { prompt: `Did you mean ${r.text.replace(/ or /g, " and ")}?`, answer: r.values.join(", ") };
       usable.push(p);
