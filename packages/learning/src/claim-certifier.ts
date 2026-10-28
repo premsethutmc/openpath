@@ -69,14 +69,15 @@ export function contradictsTask(student: Constraint[], dom: TaskDomain): boolean
   return base.every((comp) => emptyConjunction([...dom.conjunction, ...comp, ...student]));
 }
 
-export interface LedgerVerdict { ledger: ClaimLedger; blocking: LedgerClaim[]; disproven: LedgerClaim[]; unfinished: { line: number; text: string }[]; summary: { line: number; text: string; kind: string; outcome: string; reason: string }[] }
+export interface LedgerVerdict { relations: { line: number; text: string; relation: string; coveredBranches: number[] | null; obligation: string | null }[]; ledger: ClaimLedger; blocking: LedgerClaim[]; disproven: LedgerClaim[]; unfinished: { line: number; text: string }[]; summary: { line: number; text: string; kind: string; outcome: string; reason: string }[] }
 /** Account every claim of the submission against the records a route produced. */
-export function evaluateLedger(problem: unknown, text: unknown, records: CoverageRecord[]): LedgerVerdict {
+export type RelateFn = (cs: Constraint[], text: string) => { relation: "restates" | "implied" | "narrows" | "contradicts" | "new-quantity" | "undecided"; coveredBranches: number[] | null; obligation: string | null; blocking?: boolean };
+export function evaluateLedger(problem: unknown, text: unknown, records: CoverageRecord[], relate?: RelateFn): LedgerVerdict {
   const ledger = extractLedger(text);
   // an "assumption" that is not a numeric restriction is an ordinary claim and must be checked like one
   for (const c of ledger.claims) if (c.kind === "assumption" && !c.names && !parseConstraints(c.text)) c.kind = "relation";
   const { blocking } = accountForLedger(ledger, records);
-  const dom = taskDomain(problem); const disproven: LedgerClaim[] = []; const still: LedgerClaim[] = [];
+  const dom = taskDomain(problem); const disproven: LedgerClaim[] = []; const still: LedgerClaim[] = []; const relations: LedgerVerdict["relations"] = [];
   for (const c of ledger.claims) {
     if (c.kind !== "assumption") continue;
     if (c.names) { // a named modelling assumption: carried as a premise with its provenance; denying a task-supplied assumption is a contradiction
@@ -88,6 +89,14 @@ export function evaluateLedger(problem: unknown, text: unknown, records: Coverag
       continue;
     }
     const cs = parseConstraints(c.text);
+    if (cs && relate) { // E7 Phase 4: classified against the immutable proof context; domain branches stay alternatives
+      const rel = relate(cs, c.text);
+      relations.push({ line: c.line, text: c.text, ...rel });
+      if (rel.relation === "contradicts") { c.outcome = "disproven"; c.reason = `the assumed condition "${c.text}" contradicts the task domain on every branch (task restrictions are immutable; a student assumption cannot replace them)`; disproven.push(c); }
+      else if (rel.relation === "narrows" && rel.blocking !== false) { c.outcome = "unresolved"; c.reason = rel.obligation ?? "a student assumption narrows the task"; still.push(c); }
+      else { c.outcome = "proven"; c.reason = rel.relation === "narrows" ? "disclosed scoping assumption over a task with no stated domain (provenance: student-stated); the result is scoped to it" : rel.relation === "new-quantity" ? "student-introduced quantity, unrelated to the task variables (provenance: student-stated, not a task fact)" : "restates or follows from the task domain (provenance: task-supplied / implied by the task)"; }
+      continue;
+    }
     if (cs && contradictsTask(cs, dom)) { c.outcome = "disproven"; c.reason = `the assumed condition "${c.text}" contradicts the task restriction (task restrictions are immutable; a student assumption cannot replace them)`; disproven.push(c); }
     else if (cs) { c.outcome = "proven"; c.reason = "student-stated premise, compatible with the task restrictions (provenance: student-stated, not a task fact)"; }
     else { c.outcome = "unresolved"; c.reason = "a student-stated condition that is not a numeric one-variable restriction: compatibility with the task is not decided"; still.push(c); }
@@ -96,5 +105,5 @@ export function evaluateLedger(problem: unknown, text: unknown, records: Coverag
   const UNFINISHED = /\b(?:still\s+to|to\s+be\s+(?:combined|simplified|completed|finished|done)|not\s+(?:yet\s+)?(?:simplified|finished|complete|done)|remains?\s+to|left\s+to|need(?:s)?\s+to\s+(?:simplify|finish|combine|complete)|unfinished|incomplete|to\s+do|todo|work\s+in\s+progress)\b/i;
   const unfinished = ledger.lines.flatMap((l) => l.residue.filter((r) => UNFINISHED.test(r.text)).map((r) => ({ line: l.line, text: r.text })));
   const all = [...blocking.filter((c) => c.kind !== "assumption"), ...still];
-  return { ledger, blocking: all, disproven, unfinished, summary: ledger.claims.map((c) => ({ line: c.line, text: c.text, kind: c.kind, outcome: c.outcome, reason: c.reason })) };
+  return { relations, ledger, blocking: all, disproven, unfinished, summary: ledger.claims.map((c) => ({ line: c.line, text: c.text, kind: c.kind, outcome: c.outcome, reason: c.reason })) };
 }

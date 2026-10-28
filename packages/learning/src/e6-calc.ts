@@ -5,6 +5,7 @@
  * independent exact kernels (e6-cas formal identities with derived restrictions, e6-series Laurent limits). The kernels never accept on a float
  * agreement: a float may only confirm a rejection. Anything the kernels cannot decide is `unsupported`, never accepted.
  */
+import { buildProofContext, type ProofContext } from "./proof-context.ts";
 import { NotationError, normalize, parseExpression, splitEquals, N, S, add, mul, div, neg, pw, fn, type A } from "./e6-parse.ts";
 import { Ambiguity, Budget, Unsupported, compareExpr, d6, domainReqs, evalNum, hasVar, plainLogArgs, substitute, visiblyPositive, type Req } from "./e6-cas.ts";
 import { limitOf, constantValue, type LimV } from "./e6-series.ts";
@@ -104,8 +105,9 @@ export function readRestrictions(plain0: string, v: string): Stated[] | null {
   return out;
 }
 /** E7: the task domain is `restrictions` AND (component_1 OR component_2 ...). A requirement is met only when it holds on EVERY component. */
-let TASK_COMPONENTS: Stated[][] | null = null;
-function satisfied(r: Req, stated: Stated[]): boolean { return TASK_COMPONENTS ? TASK_COMPONENTS.every((comp) => satisfiedIn(r, [...stated, ...comp])) : satisfiedIn(r, stated); }
+/** E7 Phase 4: the task domain as the proof context gives it, read for THIS plan only (no module state). `components` are alternatives. */
+export interface TaskDom { stated: Stated[]; components: Stated[][] | null }
+function satisfied(r: Req, stated: Stated[], components: Stated[][] | null): boolean { return components ? components.every((comp) => satisfiedIn(r, [...stated, ...comp])) : satisfiedIn(r, stated); }
 function satisfiedIn(r: Req, stated: Stated[]): boolean {
   if (r.kind === "nonzero" && r.at !== undefined) {
     const t = r.at;
@@ -124,7 +126,6 @@ export class Unbound extends Error {}
 interface Fdef { param: string; body: A }
 // ---------------------------------------------------------------------------------------------- typed task restrictions and square-root branches
 /** restrictions supplied by the typed problem (`restrictions`, `domainComponents`), read once per plan; they behave as stated and carried-forward */
-let TASK_STATED: Stated[] = [];
 function polyCoeffs(a: A, v: string): Q[] | null {
   const mulP = (x: Q[], y: Q[]): Q[] => { const o: Q[] = new Array(x.length + y.length - 1).fill(Z); x.forEach((xi, i) => y.forEach((yj, j) => { o[i + j] = qadd(o[i + j], qmul(xi, yj)); })); return o; };
   const go = (x: A): Q[] | null => {
@@ -142,8 +143,8 @@ function polyCoeffs(a: A, v: string): Q[] | null {
 }
 const exactSqrtQ = (x: Q): Q | null => { if (qsign(x) < 0) return null; const rt = (n: bigint): bigint | null => { let lo = 0n, hi = n < 2n ? n : BigInt(Math.ceil(Math.sqrt(Number(n)))) + 2n; while (lo <= hi) { const mid = (lo + hi) / 2n; const sq = mid * mid; if (sq === n) return mid; if (sq < n) lo = mid + 1n; else hi = mid - 1n; } return null; }; const a = rt(x.n), b = rt(x.d); return a !== null && b !== null ? q(a, b) : null; };
 /** sqrt(L^2) for a linear L whose sign the restrictions decide becomes ±L; anything else is left for the exact kernel (which will not equate it with a signed expression) */
-function signResolve(a: A, v: string, stated: Stated[]): A {
-  const r = (x: A) => signResolve(x, v, stated);
+function signResolve(a: A, v: string, stated: Stated[], components: Stated[][] | null): A {
+  const r = (x: A) => signResolve(x, v, stated, components);
   switch (a.t) {
     case "neg": return { t: "neg", a: r(a.a) };
     case "add": return { t: "add", xs: a.xs.map(r) };
@@ -159,8 +160,8 @@ function signResolve(a: A, v: string, stated: Stated[]): A {
           if (rc && qeq(qmul(c[1], c[1]), qmul(q(4n), qmul(c[2], c[0])))) {
             const lin = { a: rc, b: qdiv(c[1], qmul(q(2n), rc)) }; // L = rc*x + c1/(2 rc)
             const L: A = { t: "add", xs: [{ t: "mul", xs: [{ t: "n", v: lin.a }, { t: "s", name: v }] }, { t: "n", v: lin.b }] };
-            if (satisfied({ kind: "positive", key: "sgn+", lin, stateable: true, text: "" }, stated)) return L;
-            if (satisfied({ kind: "positive", key: "sgn-", lin: { a: qneg(lin.a), b: qneg(lin.b) }, stateable: true, text: "" }, stated)) return { t: "neg", a: L };
+            if (satisfied({ kind: "positive", key: "sgn+", lin, stateable: true, text: "" }, stated, components)) return L;
+            if (satisfied({ kind: "positive", key: "sgn-", lin: { a: qneg(lin.a), b: qneg(lin.b) }, stateable: true, text: "" }, stated, components)) return { t: "neg", a: L };
           }
         }
       }
@@ -174,11 +175,11 @@ class Env {
   fdefs = new Map<string, Fdef>();
   dvs = new Map<string, A>();
   est: A[] = [];
-  stated: Stated[] = [...TASK_STATED];
+  stated: Stated[];
   ov: Record<string, A> = {};
   nI = 0;
   hasI = false;
-  constructor(readonly v: string, readonly problemFn: A | null) {}
+  constructor(readonly v: string, readonly problemFn: A | null, readonly dom: TaskDom) { this.stated = [...dom.stated]; }
 }
 const CONVENTION_FN = new Set(["f", "g", "h", "y", "r"]);
 
@@ -201,7 +202,7 @@ function resolve(a: A, env: Env, depth = 0, bound: Set<string> = new Set()): A {
     case "mul": return { t: "mul", xs: a.xs.map(r) };
     case "div": return { t: "div", a: r(a.a), b: r(a.b) };
     case "pow": return { t: "pow", a: r(a.a), b: r(a.b) };
-    case "fn": { const inner = r(a.a); return a.f === "sqrt" ? signResolve({ t: "fn", f: "sqrt", a: inner }, env.v, env.stated) : { t: "fn", f: a.f, a: inner }; }
+    case "fn": { const inner = r(a.a); return a.f === "sqrt" ? signResolve({ t: "fn", f: "sqrt", a: inner }, env.v, env.stated, env.dom.components) : { t: "fn", f: a.f, a: inner }; }
     case "call": {
       const f = lookupFn(a.name, env);
       if (!f || a.args.length !== 1) throw new Unbound(a.name);
@@ -259,7 +260,7 @@ function unmet(reqs: Req[], env: Env, implied: Set<string>, exempt?: Q): { state
   for (const r of reqs) {
     if (implied.has(r.key) || (r.allOf && r.allOf.every((k) => implied.has(k)))) continue;
     if (exempt && r.kind === "nonzero" && r.at !== undefined && qeq(r.at, exempt)) continue;
-    if (r.stateable) { if (!satisfied(r, env.stated)) stateable.push(r); } else hard.push(r);
+    if (r.stateable) { if (!satisfied(r, env.stated, env.dom.components)) stateable.push(r); } else hard.push(r);
   }
   return { stateable, hard };
 }
@@ -344,26 +345,28 @@ type TaskKind = "derivative" | "indefinite-integral" | "definite-integral" | "li
 const SUPPORTED_TASKS = new Set<string>(["derivative", "indefinite-integral", "definite-integral", "limit", "continuity", "differentiability"]);
 export const supportsCalc = (p: CalculusProblem): boolean => SUPPORTED_TASKS.has(p.task);
 
-export function planCalculusE6(problem: CalculusProblem, rows: Row[]): E6Plan {
+/** The task domain from the proof context. Restrictions stay a conjunction; domain components stay alternatives. What cannot be read is reported, never dropped silently. */
+function taskDomOf(ctx: ProofContext, v: string, notes: string[]): TaskDom {
+  const read = (s: string): Stated[] | null => { try { return readRestrictions(normalize(s), v); } catch { return null; } };
+  const stated: Stated[] = []; let components: Stated[][] | null = null;
+  for (const s of ctx.restrictions) { const rs = read(s); if (rs) stated.push(...rs); else notes.push(`task restriction "${s}" could not be read by the exact calculus route; the working must state what it needs`); }
+  for (const s of ctx.branches ?? []) { const rs = read(s); if (rs) (components ??= []).push(rs); else notes.push(`task domain component "${s}" could not be read by the exact calculus route and is not used`); }
+  return { stated, components };
+}
+export function planCalculusE6(problem: CalculusProblem, rows: Row[], ctx: ProofContext = buildProofContext(problem)): E6Plan {
   const parsed = syntheticParse(rows, "calculus");
   const b = new Builder(parsed, "e6 exact kernels (formal identity with derived restrictions; Laurent-series limits)");
   const notes: string[] = [];
   const v = (problem as { variable?: string }).variable ?? "x";
   const fnNames = preScanFns(rows, v);
-  TASK_STATED = []; TASK_COMPONENTS = null;
-  for (const s of ((problem as { restrictions?: unknown }).restrictions as string[] | undefined) ?? []) {
-    try { const rs = typeof s === "string" ? readRestrictions(normalize(s), v) : null; if (rs) TASK_STATED.push(...rs); } catch { /* an unreadable typed restriction is simply not used (the working then has to state it) */ }
-  }
-  for (const s of ((problem as { domainComponents?: unknown }).domainComponents as string[] | undefined) ?? []) {
-    try { const rs = typeof s === "string" ? readRestrictions(normalize(s), v) : null; if (rs) (TASK_COMPONENTS ??= []).push(rs); } catch { /* unreadable component: ignored */ }
-  }
+  const dom = taskDomOf(ctx, v, notes);
   try {
     switch (problem.task as TaskKind) {
-      case "derivative": return derivative(problem as never, rows, parsed, b, notes, v, fnNames);
-      case "indefinite-integral": return indefinite(problem as never, rows, parsed, b, notes, v, fnNames);
-      case "definite-integral": return definite(problem as never, rows, parsed, b, notes, v, fnNames);
-      case "limit": return limitTask(problem as never, rows, parsed, b, notes, v, fnNames);
-      case "continuity": case "differentiability": return continuity(problem as never, rows, parsed, b, notes, v, fnNames);
+      case "derivative": return derivative(problem as never, rows, parsed, b, notes, v, fnNames, dom);
+      case "indefinite-integral": return indefinite(problem as never, rows, parsed, b, notes, v, fnNames, dom);
+      case "definite-integral": return definite(problem as never, rows, parsed, b, notes, v, fnNames, dom);
+      case "limit": return limitTask(problem as never, rows, parsed, b, notes, v, fnNames, dom);
+      case "continuity": case "differentiability": return continuity(problem as never, rows, parsed, b, notes, v, fnNames, dom);
     }
   } catch (e) {
     if (e instanceof Budget || e instanceof Overflow) { rows.forEach((_, i) => { if (!b.records[i]) b.add(i, { status: "resource-exhausted", reason: "a resource bound was reached" }); }); return finish(parsed, b, { domain: "calculus", family: problem.task, nativeComplete: false, obligations: ["resource bound reached"], notes }); }
@@ -464,9 +467,9 @@ const dvDefinition = (members: A[], env: Env, v: string): Judge | null => {
 };
 
 // ---------------------------------------------------------------------------------------------- derivative
-function derivative(problem: Extract<CalculusProblem, { task: "derivative" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
-  const order = problem.order ?? 1; const f0 = signResolve(fromExpr(problem.expression), v, TASK_STATED);
-  const env = new Env(v, f0); env.est.push(f0);
+function derivative(problem: Extract<CalculusProblem, { task: "derivative" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>, dom: TaskDom): E6Plan {
+  const order = problem.order ?? 1; const f0 = signResolve(fromExpr(problem.expression), v, dom.stated, dom.components);
+  const env = new Env(v, f0, dom); env.est.push(f0);
   let truth: A; try { truth = f0; for (let i = 0; i < order; i++) truth = d6(truth, v); } catch (e) { const g = guard(() => { throw e; }); fillRest(rows, b, isJudge(g) ? g.reason : "outside the differentiation rules", isJudge(g) ? g.status : "unsupported"); return finish(parsed, b, { domain: "calculus", family: "derivative", nativeComplete: false, obligations: ["the posed function is outside the exact differentiation rules"], notes }); }
   const implied = impliedOf(f0, v);
   const c = { conclusions: [] as { i: number; s: ReturnType<typeof readStatement> }[] };
@@ -553,9 +556,9 @@ function chain(members: A[], env: Env, v: string, implied: Set<string>, opts: { 
 }
 
 // ---------------------------------------------------------------------------------------------- indefinite integral
-function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integral" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
-  const g0 = signResolve(fromExpr(problem.integrand), v, TASK_STATED);
-  const env = new Env(v, null); env.est.push(g0);
+function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integral" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>, dom: TaskDom): E6Plan {
+  const g0 = signResolve(fromExpr(problem.integrand), v, dom.stated, dom.components);
+  const env = new Env(v, null, dom); env.est.push(g0);
   const implied = impliedOf(g0, v);
   const c = { conclusions: [] as { i: number; s: ReturnType<typeof readStatement> }[] };
   let finalOk = false, finalClosed = false, finalHasC = false; let finalText = ""; let finalRow = -1;
@@ -595,7 +598,7 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
     const logs = plainLogArgs(last).concat(plainLogArgs(lastVal)).filter((a) => !visiblyPositive(a) && !(a.t === "pow" && a.a.t === "s") && hasVar(a, v));
     const logReqs: Req[] = [];
     for (const a of logs) { const rr = guard(() => domainReqs(fn("ln", a), v)); if (!isJudge(rr)) for (const r of rr) if (r.kind === "positive" && !implied.has(r.key)) logReqs.push(r); }
-    const posOfIntegrand = logReqs.filter((r) => !satisfied(r, env.stated));
+    const posOfIntegrand = logReqs.filter((r) => !satisfied(r, env.stated, env.dom.components));
     if (posOfIntegrand.length && closed) {
       const hard = posOfIntegrand.filter((r) => !r.stateable);
       if (hard.length) { b.add(i, uns("the logarithm's domain cannot be stated in supported notation")); return; }
@@ -617,12 +620,12 @@ function indefinite(problem: Extract<CalculusProblem, { task: "indefinite-integr
 // ---------------------------------------------------------------------------------------------- definite integral
 function boundQ(a: A | undefined): Q | null { return a ? constQ(a) : null; }
 function constOnly(a: A): boolean { return !hasNode(a, (x) => x.t === "s"); }
-function definite(problem: Extract<CalculusProblem, { task: "definite-integral" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
+function definite(problem: Extract<CalculusProblem, { task: "definite-integral" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>, dom: TaskDom): E6Plan {
   if (problem.improper) { fillRest(rows, b, "improper integrals are outside the exact definite-integral binder"); return finish(parsed, b, { domain: "calculus", family: "definite-integral", nativeComplete: false, obligations: ["improper integrals are not supported by this binder"], notes }); }
-  const g0 = signResolve(fromExpr(problem.integrand), v, TASK_STATED);
+  const g0 = signResolve(fromExpr(problem.integrand), v, dom.stated, dom.components);
   const loA = parseExpression(String(problem.lower), { fnNames: new Set(), variable: v }), hiA = parseExpression(String(problem.upper), { fnNames: new Set(), variable: v });
   const lo0 = evalNum(loA, {}), hi0 = evalNum(hiA, {});
-  const env = new Env(v, null); env.est.push(g0);
+  const env = new Env(v, null, dom); env.est.push(g0);
   const implied = impliedOf(g0, v);
   const c = { conclusions: [] as { i: number; s: ReturnType<typeof readStatement> }[] };
   // the integrand must be continuous on [lo, hi] for the fundamental theorem; screened on an exact rational grid (a hit only ever rejects)
@@ -728,9 +731,9 @@ function limValueOf(m: Extract<A, { t: "LIM" }>, env: Env, v: string): { val: Li
   const val = guard(() => limitOf(inner, w, pt, m.side)); if (isJudge(val)) return val;
   return { val, inner, pt };
 }
-function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
-  const f0 = signResolve(fromExpr(problem.expression), v, TASK_STATED); const pt0 = ptOf(problem.approach); const side0 = problem.side ?? "both";
-  const env = new Env(v, f0); env.est.push(f0);
+function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>, dom: TaskDom): E6Plan {
+  const f0 = signResolve(fromExpr(problem.expression), v, dom.stated, dom.components); const pt0 = ptOf(problem.approach); const side0 = problem.side ?? "both";
+  const env = new Env(v, f0, dom); env.est.push(f0);
   const truth = guard(() => limitOf(f0, v, pt0, side0));
   if (isJudge(truth)) { fillRest(rows, b, truth.reason, truth.status); return finish(parsed, b, { domain: "calculus", family: "limit", nativeComplete: false, obligations: [truth.reason], notes }); }
   const c = { conclusions: [] as { i: number; s: ReturnType<typeof readStatement> }[] };
@@ -832,11 +835,11 @@ function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: R
 }
 
 // ---------------------------------------------------------------------------------------------- continuity / differentiability
-function continuity(problem: Extract<CalculusProblem, { task: "continuity" | "differentiability" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>): E6Plan {
+function continuity(problem: Extract<CalculusProblem, { task: "continuity" | "differentiability" }>, rows: Row[], parsed: ReturnType<typeof syntheticParse>, b: Builder, notes: string[], v: string, fnNames: Set<string>, dom: TaskDom): E6Plan {
   const left = fromExpr(problem.left), right = fromExpr(problem.right); const p = qOf(problem.point);
   const pA: A = { t: "n", v: p };
   const diff = problem.task === "differentiability";
-  const env = new Env(v, null);
+  const env = new Env(v, null, dom);
   const at = (f: A): Q | null | Judge => guard(() => { const r = limitOf(f, v, p, "both"); return r.kind === "finite" ? r.value : null; });
   const L = at(left), R = at(right);
   const dl = guard(() => d6(left, v)), dr = guard(() => d6(right, v));

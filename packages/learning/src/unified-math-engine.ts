@@ -21,6 +21,7 @@ import { bindClaimsDetailed, replaySymbolicSteps } from "./claim-binding.ts";
 import { ACCEPTANCE_GATE_CONTRACT, checkerStatusToStep, checkerSummary, evidenceFromCheck, reconcileAlgebra, type AcceptanceGateRecord, type BindingEvidence, type GateEvidenceItem, type GateLevel } from "./acceptance-gate.ts";
 import { checkAlgebraSubmission } from "./independent-checker.ts";
 import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geocalc-e5.ts";
+import { buildProofContext, relateStudentRestriction, routeUse, withProved, withStudent, withUnresolved, type ProofContext, type RouteUse } from "./proof-context.ts";
 import { GENERALIZATION_E6_CONTRACT, planGeneralizationE6 } from "./natural-generalization-e6.ts";
 import { polyAntiderivative, polyOf, polyToExpr } from "./calculus-binder-e5.ts";
 import type { NaturalParseResult } from "./natural-working.ts";
@@ -38,7 +39,7 @@ export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:str
 export interface M2CrossDomainWorking { stages:{id:string;working:string[]|M1Step[]|M2Step[]|CalculusStep[]|CalculusMethodStep[]|SymbolicStep[]|B1Step[]|LAStep[]|ComplexStep[]|{steps:Record<string,unknown>[]} | {geometry:{steps:Record<string,unknown>[]};calculation:string[];domainConclusion?:{symbol:string;value:number}}}[] }
 export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | CalculusMethodProblem | SymbolicProblem | B1Problem | LAProblem | ComplexProblem | M2CrossDomainProblem | D3Problem;
 export type StudentWorking = string[] | NaturalWorkingInput | M1Step[] | M2Step[] | CalculusStep[] | CalculusMethodStep[] | SymbolicStep[] | B1Step[] | LAStep[] | ComplexStep[] | M2CrossDomainWorking | D3Working | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
-export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; symbolicBudget?: SymbolicBudget; maxCrossDomainStages?: number }
+export interface AssessOptions extends WorkingOptions { maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; proofContext?: ProofContext; symbolicBudget?: SymbolicBudget; maxCrossDomainStages?: number }
 export interface AssessmentStep { index: number; classification: Classification; justification: string; reasoner: string; dependencies: unknown[]; source?:SourceLocation }
 export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | "d3-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus" | "symbolic" | "probability-statistics" | "linear-algebra" | "complex-polynomial"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode; /** E3: the mandatory final gate record; present on every envelope returned by assessMathematicalWorking */ acceptanceGate?: AcceptanceGateRecord }
 type GeometryNative = { outcome: string; correct: boolean | null; firstInvalidStep: number | null; steps: { index: number; status: string; explanation: string }[]; summary: string; resourceLimit: boolean; geometry: { native_verdicts: string[]; proof_dependencies: unknown[]; mathematical_dependencies: unknown[]; unresolved_obligations: string[]; skill_ids: string[]; resource_limit_reached: boolean } };
@@ -247,9 +248,9 @@ async function assessE5Route(problem: MathematicalProblem, input: NaturalWorking
  */
 const E6_DEFINITE: Classification[] = ["verified", "invalid", "incomplete", "missing-assumption"];
 async function assessE6Route(problem: MathematicalProblem, input: NaturalWorkingInput, options: AssessOptions): Promise<AssessmentEnvelope | null> {
-  void options;
   const domain = (problem as { domain: string }).domain as AssessmentEnvelope["domain"];
-  const plan = planGeneralizationE6(problem, input);
+  const ctx = options.proofContext ?? buildProofContext(problem);
+  const plan = planGeneralizationE6(problem, input, ctx);
   if (!plan) return null;
   const reasoners = [{ id: "natural-generalization-e6", version: GENERALIZATION_E6_CONTRACT }];
   if ("refused" in plan) { const lineAccount = unparsedLineAccount(input, parseNaturalWorking); return { ...malformed(domain, plan.refused), classification: plan.resource ? "resource-exhausted" : "unsupported", steps: lineAccount.records.map((r, index) => ({ index, classification: lineClass(r.status), justification: r.reason, reasoner: "natural-generalization-e6", dependencies: ["problem"], source: { line: r.line, start: r.span.start, end: r.span.end, text: r.text } })), domainPayload: { lineAccount }, reasoners }; }
@@ -261,7 +262,7 @@ async function assessE6Route(problem: MathematicalProblem, input: NaturalWorking
   return { contractVersion: UNIFIED_MATH_CONTRACT, domain, classification, correct: classification === "verified" ? true : classification === "invalid" ? false : null, complete: classification === "verified", firstInvalidStep: classification === "invalid" ? verdict.firstInvalidStep : null,
     steps, proofDependencies: steps.map((s) => s.dependencies), domainRestrictions: plan.restrictions, outstandingObligations: classification === "verified" ? [] : verdict.obligations, skills: [`${domain}.natural-e6.${plan.family}`], reasoners,
     justification: classification === "missing-assumption" ? verdict.obligations[0] ?? "an assumption is missing" : verdict.justification,
-    domainPayload: { naturalInput: plan.parsed, conversion: { contractVersion: NATURAL_ADAPTER_CONTRACT, adapter: `natural-generalization-e6:${plan.family}`, sourceLines: plan.parsed.lines.map((l) => l.source.line), checks: plan.notes, assumptions: [], restrictions: plan.restrictions.map(String), obligations: classification === "verified" ? [] : verdict.obligations, matchedLines: plan.parsed.lines.map((l) => l.source.line), accounts: plan.accounts, outputs: {} }, lineAccount: account, bindingEvidence: plan.evidence, e6: { contract: GENERALIZATION_E6_CONTRACT, family: plan.family, destination: plan.destination, notes: plan.notes, diagnostics: plan.diagnostics, finalValue: plan.finalValue ?? null } } };
+    domainPayload: { groundedLines: plan.grounded, naturalInput: plan.parsed, conversion: { contractVersion: NATURAL_ADAPTER_CONTRACT, adapter: `natural-generalization-e6:${plan.family}`, sourceLines: plan.parsed.lines.map((l) => l.source.line), checks: plan.notes, assumptions: [], restrictions: plan.restrictions.map(String), obligations: classification === "verified" ? [] : verdict.obligations, matchedLines: plan.parsed.lines.map((l) => l.source.line), accounts: plan.accounts, outputs: {} }, lineAccount: account, bindingEvidence: plan.evidence, e6: { contract: GENERALIZATION_E6_CONTRACT, family: plan.family, destination: plan.destination, notes: plan.notes, diagnostics: plan.diagnostics, finalValue: plan.finalValue ?? null } } };
 }
 const NON_DEFINITE = (c: Classification) => !E6_DEFINITE.includes(c);
 /** E6 may complete a verdict the established routes could not reach, may veto an acceptance it independently contradicts, and may refine a non-definite verdict; it never overrides a definite rejection into an acceptance. */
@@ -282,8 +283,13 @@ async function assessCandidate(problem: MathematicalProblem, studentWorking: Stu
     // Precedence: an existing definite verdict of the established route is kept (D1-D8 behaviour is not re-labelled). The E5 route is
     // consulted for every geometry/calculus submission; it supplies the verdict unless the established route already verified (then the established
     // evidence is kept when E5 agrees) and it vetoes an acceptance it independently contradicts (the veto can only downgrade, never certify).
+    // E7 Phase 4: ONE immutable proof context for every route. A route that cannot consume part of it says so (RouteUse); nothing is dropped silently.
+    const ctx = options.proofContext ?? buildProofContext(problem);
+    options = { ...options, proofContext: ctx };
+    const uses: RouteUse[] = [routeUse(ctx, "base-algebra")];
     const base = await assessCandidateBase(problem, studentWorking, options);
     const e5 = problem.domain === "geometry" || problem.domain === "calculus" ? await assessE5Route(problem, studentWorking as NaturalWorkingInput, options) : null;
+    if (e5) uses.push(routeUse(ctx, "e5-geocalc"));
     const stage = (() => {
       if (!e5 || !E5_DEFINITE.includes(e5.classification)) return base;
       if (base.classification === "verified") return e5.classification === "verified" ? base : e5;
@@ -291,7 +297,10 @@ async function assessCandidate(problem: MathematicalProblem, studentWorking: Stu
       if (base.classification === "invalid" && e5.classification === "missing-assumption" && (problem as { task?: string }).task === "indefinite-integral") return base;
       return e5;
     })();
-    return mergeE6(stage, await assessE6Route(problem, studentWorking as NaturalWorkingInput, options), problem);
+    const e6 = await assessE6Route(problem, studentWorking as NaturalWorkingInput, options);
+    if (e6) { const e6notes = ((e6.domainPayload as { conversion?: { checks?: string[] } } | undefined)?.conversion?.checks ?? []).filter((n) => /could not be read by the exact calculus route/.test(n)); uses.push({ ...routeUse(ctx, problem.domain === "calculus" ? "e6-calculus" : "e6-numbers", e6notes), grounded: (e6.domainPayload as { groundedLines?: RouteUse["grounded"] } | undefined)?.groundedLines }); }
+    const merged = mergeE6(stage, e6, problem);
+    return { ...merged, domainPayload: { ...(merged.domainPayload && typeof merged.domainPayload === "object" ? merged.domainPayload : {}), proofContextUse: uses } };
   }
   return assessCandidateBase(problem, studentWorking, options);
 }
@@ -500,7 +509,8 @@ function certifyClaims(problem: MathematicalProblem, working: StudentWorking, ca
   const records: CoverageRecord[] = payload.lineAccount
     ? payload.lineAccount.records.map((r) => ({ line: r.line, start: r.span.start, end: r.span.end, verified: r.status === "verified-valid" || r.status === "not-mathematical", credited: r.role === "claim-step" || r.role === "given-matched", reason: r.reason }))
     : cand.steps.filter((s) => s.source).map((s) => ({ line: s.source!.line, start: s.source!.start, end: s.source!.end, verified: s.classification === "verified", credited: true, reason: s.justification }));
-  const lv = evaluateLedger(problem, working.text, records);
+  const ctx0 = buildProofContext(problem);
+  const lv = evaluateLedger(problem, working.text, records, (cs, t) => relateStudentRestriction(ctx0, cs, t));
   // E7 Phase 3: provenance of each claim. It is read from the grounding the checker recorded; a claim without recorded grounding is only "unrecorded" (never promoted)
   const evid = ((cand.domainPayload && typeof cand.domainPayload === "object" ? (cand.domainPayload as { bindingEvidence?: BindingEvidence[] }).bindingEvidence : undefined) ?? []);
   const provenance = lv.summary.map((c) => {
@@ -509,7 +519,15 @@ function certifyClaims(problem: MathematicalProblem, working: StudentWorking, ca
     if (c.outcome !== "proven") return { ...c, provenance: "unsupported" };
     return g ? { ...c, provenance: g.relevant ? "derived-from-task" : "ungrounded", grounding: { relevant: g.relevant, reason: g.reason, sources: g.sources.map((x) => `${x.kind}:${x.ref}`) } } : { ...c, provenance: "unrecorded" };
   });
-  const withLedger = (c: AssessmentEnvelope): AssessmentEnvelope => ({ ...c, domainPayload: { ...(c.domainPayload && typeof c.domainPayload === "object" ? c.domainPayload : {}), claimLedger: { contract: CLAIM_LEDGER_CONTRACT, claims: provenance } } });
+  // E7 Phase 4: the certification boundary re-checks that every route saw the SAME context and reports what the context holds with provenance kinds kept apart
+  const uses = ((cand.domainPayload as { proofContextUse?: RouteUse[] } | undefined)?.proofContextUse) ?? [];
+  const finalCtx = withUnresolved(
+    withStudent(withProved(ctx0, evid.filter((e) => e.grounding?.relevant).map((e) => ({ ref: `line-${e.line}`, text: e.claim }))), lv.relations.map((r) => ({ text: r.text, line: r.line, relation: r.relation as never, coveredBranches: r.coveredBranches, obligation: r.obligation }))),
+    uses.flatMap((u) => u.grounded ?? []).flatMap((e) => e.grounding.sources.filter((x) => x.kind === "student-assumption").map((x) => ({ text: `the working relies on the quantity ${x.ref}; nothing in the task supplies it, so it is a missing scenario premise, not evidence`, origin: `line-${e.line}` }))));
+  const ctxReport = { contract: finalCtx.contract, taskDigest: finalCtx.digest, routesShareContext: uses.every((u) => u.contextDigest === finalCtx.digest), routes: uses,
+    task: { premises: finalCtx.premises.length, restrictions: finalCtx.restrictions, domainBranches: finalCtx.branches, assumptions: finalCtx.assumptions, impliedRestrictions: finalCtx.implied.map((i) => i.text), unreadable: finalCtx.unreadable },
+    provedFacts: finalCtx.proved.map((i) => ({ origin: i.origin, text: i.text })), studentAssumptions: finalCtx.student, unresolvedPremises: finalCtx.unresolved.map((i) => ({ origin: i.origin, text: i.text })) };
+  const withLedger = (c: AssessmentEnvelope): AssessmentEnvelope => ({ ...c, domainPayload: { ...(c.domainPayload && typeof c.domainPayload === "object" ? c.domainPayload : {}), claimLedger: { contract: CLAIM_LEDGER_CONTRACT, claims: provenance }, proofContext: ctxReport } });
   if (lv.disproven.length && ["verified", "incomplete", "missing-assumption"].includes(cand.classification)) {
     const c = lv.disproven[0], idx = Math.max(0, cand.steps.findIndex((s) => s.source?.line === c.line));
     const steps = cand.steps.map((s, k) => (k === idx ? { ...s, classification: "invalid" as Classification, justification: c.reason } : s));

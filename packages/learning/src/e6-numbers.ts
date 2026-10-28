@@ -457,7 +457,7 @@ function sourcesOf(first: NAst, env: Map<string, Cx>, dataSyms: Set<string>, rel
         if (a.t === "num") { // only a plain numeral is matched against the premises: a compound sub-expression that happens to equal a datum proves nothing
           const pr = premises.find((x) => ceq(x.value, v!) || ceq(x.value, cnegV(v!)));
           const st = !pr ? stated.find((x) => ceq(x.value, v!)) : undefined;
-          if (st) { out.push({ kind: "student-assumption", ref: st.ref, by: "value", trivial: trivialValue(v!) }); return; }
+          if (st) { out.push({ kind: "student-assumption", ref: `${cxText(v!)} ${st.ref}`, by: "value", trivial: trivialValue(v!) }); return; }
           const one = !pr && !trivialValue(v!) ? oneStep(v!, premises) : null;
           if (one) { out.push({ kind: "derived-fact", ref: one, by: "value", trivial: false, derived: true }); return; }
           out.push(pr ? { kind: "task-premise", ref: pr.key, by: "value", trivial: trivialValue(v) } : { kind: "free-literal", ref: cxText(v), by: "value", trivial: trivialValue(v) });
@@ -609,6 +609,7 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
       ? `this calculation reaches the right value, but nothing in it comes from the problem's data or from an earlier verified result (${grounding.reason}); its relevance to the requested quantity is not established, so show how the quantity follows from the givens`
       : `this line names "${label}", which is not the requested quantity; state the requested quantity by name`);
     if (j.status === "valid" && canon) { found.push(lastVal); if (spec.truth.some((t) => ceq(t, lastVal))) { sawAnswerClaim = true; finalRow = i; } }
+    if (j.status !== "valid") j = { ...j, grounding };
     if (j.status === "valid") { j = { ...j, grounding }; if (grounding.relevant) { vals.forEach((v) => established.push({ ref: `line-${i + 1}`, value: v })); if (label !== null) relevantDefs.add(label); } }
     b.add(i, j);
   });

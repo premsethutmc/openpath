@@ -86,6 +86,8 @@ export interface E6Plan {
   finalValue?: { kind: "expression" | "value" | "limit" | "boolean" | "numeric"; text: string } | null;
   /** evidence about how many lines were rejected/abstained for diagnostics */
   diagnostics: { lines: number; judged: Record<string, number> };
+  /** E7 Phase 4: the grounding the checker computed for each line, whatever its verdict (a rejected line's sources are still context) */
+  grounded?: { line: number; grounding: import("./claim-grounding.ts").Grounding }[];
 }
 export function finish(parsed: NaturalParseResult, b: Builder, args: { domain: string; family: string; nativeComplete: boolean; obligations: string[]; notes: string[]; restrictions?: string[]; finalValue?: E6Plan["finalValue"] }): E6Plan {
   const accounts: AccountEntry[] = parsed.lines.map((l, i) => (b.records[i]?.judge.nonMath ? { lineId: l.id, role: "non-mathematical" as const, dependsOn: b.records[i]?.dependsOn ?? [] } : { lineId: l.id, role: "claim-step" as const, stepIndex: i, dependsOn: b.records[i]?.dependsOn ?? [] }));
@@ -94,7 +96,7 @@ export function finish(parsed: NaturalParseResult, b: Builder, args: { domain: s
   const only = (s: JS) => statuses.includes(s) && !statuses.some((x) => x === "invalid" || x === "unsupported" || x === "ambiguous" || x === "malformed" || x === "resource-exhausted" || x === undefined);
   const terminal = only("missing-assumption") ? "missing-assumption" : null;
   const judged: Record<string, number> = {}; for (const s of statuses) judged[s ?? "none"] = (judged[s ?? "none"] ?? 0) + 1;
-  return { parsed, accounts, outcomes, evidence: b.records.flatMap((r) => (r?.evidence ? [r.evidence] : [])), nativeComplete: args.nativeComplete, obligations: args.obligations, terminal, domain: args.domain, family: args.family, destination: b.destination, notes: args.notes, restrictions: args.restrictions ?? [], finalValue: args.finalValue ?? null, diagnostics: { lines: parsed.lines.length, judged } };
+  return { grounded: b.records.flatMap((r, i) => (r?.judge.grounding ? [{ line: parsed.lines[i].source.line, grounding: r.judge.grounding }] : [])), parsed, accounts, outcomes, evidence: b.records.flatMap((r) => (r?.evidence ? [r.evidence] : [])), nativeComplete: args.nativeComplete, obligations: args.obligations, terminal, domain: args.domain, family: args.family, destination: b.destination, notes: args.notes, restrictions: args.restrictions ?? [], finalValue: args.finalValue ?? null, diagnostics: { lines: parsed.lines.length, judged } };
 }
 
 // ================================================================================================ prose understanding

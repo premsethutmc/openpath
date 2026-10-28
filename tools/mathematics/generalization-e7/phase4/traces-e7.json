@@ -1,0 +1,461 @@
+[
+ {
+  "kind": "contradiction",
+  "name": "student x>0 against task restriction x<0",
+  "classification": "invalid",
+  "why": "line 1: the assumed condition \"x > 0\" contradicts the task domain on every branch (task restrictions are immutable; a student assumption cannot replac",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": "the established algebra/U4 route does not read task restrictions or domain components"
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [
+      "restrictions"
+     ],
+     "limitation": null
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "restrictions",
+      "implied"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [
+    {
+     "text": "x > 0",
+     "relation": "contradicts"
+    }
+   ],
+   "unresolved": [],
+   "implied": [
+    "x != 0"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "contradiction",
+  "name": "student x<1 against the implied domain of ln(x-1)",
+  "classification": "invalid",
+  "why": "line 1: the assumed condition \"x < 1\" contradicts the task domain on every branch (task restrictions are immutable; a student assumption cannot replac",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "implied"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [
+    {
+     "text": "x < 1",
+     "relation": "contradicts"
+    }
+   ],
+   "unresolved": [],
+   "implied": [
+    "x > 1"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "disjoint-domain",
+  "name": "student x>0 against task alternatives x<0 | x>0",
+  "classification": "unsupported",
+  "why": "acceptance withdrawn: claim accounting: 1 recognized claim(s) are not proven (line 1: the assumption \"x > 0\" is not part of the task and narrows its d",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": "the established algebra/U4 route does not read task restrictions or domain components"
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [],
+     "limitation": "the E5 calculus kernel flattens domain components into one flat restriction list: alternatives are not represented as alternatives"
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "branches",
+      "implied"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [
+    {
+     "text": "x > 0",
+     "relation": "narrows"
+    }
+   ],
+   "unresolved": [],
+   "implied": [
+    "x != 0"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "disjoint-domain",
+  "name": "no student assumption, both alternatives kept",
+  "classification": "verified",
+  "why": "all 1 submitted line(s) are accounted for and verified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": "the established algebra/U4 route does not read task restrictions or domain components"
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [],
+     "limitation": "the E5 calculus kernel flattens domain components into one flat restriction list: alternatives are not represented as alternatives"
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "branches",
+      "implied"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [],
+   "unresolved": [],
+   "implied": [
+    "x != 0"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "implied",
+  "name": "student restates the implied restriction x>1",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "implied"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [],
+   "unresolved": [],
+   "implied": [
+    "x > 1"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "new-quantity",
+  "name": "student introduces k>0 unrelated to x",
+  "classification": "malformed",
+  "why": "line(s) 1 could not be verified (malformed); the submission cannot be certified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "implied"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [
+    {
+     "text": "k > 0",
+     "relation": "new-quantity"
+    }
+   ],
+   "unresolved": [],
+   "implied": [
+    "x != 0"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "scoping",
+  "name": "task with no stated domain, student scopes to x>0",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [],
+     "limitation": null
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "implied"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [
+    {
+     "text": "x > 0",
+     "relation": "narrows"
+    }
+   ],
+   "unresolved": [],
+   "implied": [
+    "x != 0"
+   ],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "missing-scenario",
+  "name": "scenario quantities exist only in the working",
+  "classification": "incomplete",
+  "why": "finish with the requested quantity as a single reduced number",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [
+      "premises"
+     ],
+     "limitation": null
+    },
+    {
+     "route": "e6-numbers",
+     "consumed": [
+      "premises",
+      "assumptions"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [],
+   "unresolved": [
+    "the working relies on the quantity 4 stated in line 1; nothing in the "
+   ],
+   "implied": [],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "missing-scenario",
+  "name": "only the expected value is given",
+  "classification": "unsupported",
+  "why": "line(s) 1 could not be verified (unsupported); the submission cannot be certified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [
+      "premises"
+     ],
+     "limitation": null
+    },
+    {
+     "route": "e6-numbers",
+     "consumed": [
+      "premises",
+      "assumptions"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [],
+   "unresolved": [],
+   "implied": [],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "unreadable-restriction",
+  "name": "typed restriction no route can read",
+  "classification": "verified",
+  "why": "all 1 submitted line(s) are accounted for and verified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [],
+     "limitation": "the established algebra/U4 route does not read task restrictions or domain components"
+    },
+    {
+     "route": "e5-geocalc",
+     "consumed": [
+      "restrictions"
+     ],
+     "limitation": null
+    },
+    {
+     "route": "e6-calculus",
+     "consumed": [
+      "restrictions",
+      "implied"
+     ],
+     "limitation": "unreadable by this route: task restriction \"x is a prime\" could not be read by the exact calculus route; the working must state what it needs"
+    }
+   ],
+   "student": [],
+   "unresolved": [],
+   "implied": [
+    "x != 0"
+   ],
+   "unreadable": [
+    "x is a prime"
+   ]
+  }
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta by c/a under a stated real-coefficient assumption",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [
+      "premises"
+     ],
+     "limitation": null
+    },
+    {
+     "route": "e6-numbers",
+     "consumed": [
+      "premises",
+      "assumptions"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [],
+   "unresolved": [],
+   "implied": [],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta by roots",
+  "classification": "verified",
+  "why": "all 3 submitted line(s) are accounted for and verified",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [
+      "premises"
+     ],
+     "limitation": null
+    },
+    {
+     "route": "e6-numbers",
+     "consumed": [
+      "premises",
+      "assumptions"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [],
+   "unresolved": [],
+   "implied": [],
+   "unreadable": []
+  }
+ },
+ {
+  "kind": "false-accept-guard",
+  "name": "Vieta unrelated arithmetic under the same assumption",
+  "classification": "incomplete",
+  "why": "finish with the requested quantity as a single reduced number",
+  "context": {
+   "sameDigestInAllRoutes": true,
+   "routes": [
+    {
+     "route": "base-algebra",
+     "consumed": [
+      "premises"
+     ],
+     "limitation": null
+    },
+    {
+     "route": "e6-numbers",
+     "consumed": [
+      "premises",
+      "assumptions"
+     ],
+     "limitation": null
+    }
+   ],
+   "student": [],
+   "unresolved": [],
+   "implied": [],
+   "unreadable": []
+  }
+ }
+]
