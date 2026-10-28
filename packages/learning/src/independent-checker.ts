@@ -35,8 +35,8 @@ export type CandidateEliminationPolicy = "implicit" | "shown";
 let candidatePolicy: CandidateEliminationPolicy = "implicit";
 export function withCandidateEliminationPolicy<T>(policy: CandidateEliminationPolicy, fn: () => T): T { const old = candidatePolicy; candidatePolicy = policy; try { return fn(); } finally { candidatePolicy = old; } }
 let degreeCap: number = CHECKER_LIMITS.maxDegree;
-class Unsupported extends Error {}
-class Exhausted extends Error {}
+export class Unsupported extends Error {}
+export class Exhausted extends Error {}
 class TwoRadicands extends Unsupported { constructor() { super("two different radicands"); } }
 
 /* ------------------------------------------------------------------ exact rationals */
@@ -1004,6 +1004,23 @@ function withPremises(base: Stmt, premises: Stmt[], text: string): Stmt {
   const all = [base, ...premises];
   return { kind: "set", text, critical: all.flatMap((x) => x.critical), holds: (v) => all.every((x) => x.holds(v)), defined: (v) => all.every((x) => x.defined(v)) };
 }
+type BuiltLine = Stmt | { claim: "completeness" | "universal" } | { error: string } | { closed: boolean | null };
+/** each written line as a statement the profile can compare (shared by the full checker and the answer-first workflow) */
+function builtLines(lines: NaturalParseResult["lines"], classOf: string[], name: string | null): BuiltLine[] {
+  const text = (i: number) => lines[i].source.text;
+  return lines.map((l, i) => {
+    if (COMPLETENESS_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { claim: "completeness" as const };
+    if (UNIVERSAL_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { claim: "universal" as const };
+    if (NO_SOLUTION_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { ...emptyClaimStmt(text(i)) };
+    { let remark: boolean | null = null; try { remark = functionRemarkTruth(text(i)); } catch (e) { if (!(e instanceof Unsupported)) throw e; return { error: e.message }; } if (remark !== null) return { closed: remark }; }
+    if (classOf[i] === "prose") return { error: "prose that is not a recognised mathematical claim" };
+    try {
+      const rel = l.relation; const vs = new Set<string>(); relationVars(rel, vs);
+      if (vs.size === 0 && (rel.kind === "equation" || rel.kind === "inequality")) { const s = stmtFromRelation(rel, null, text(i)); return { closed: s.defined(rat(ZERO)) ? s.holds(rat(ZERO)) : null }; }
+      return stmtFromRelation(rel, name, text(i));
+    } catch (e) { if (e instanceof Unsupported) return { error: e.message }; throw e; }
+  });
+}
 function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: string | null, classOf: string[], premiseRels: NaturalRelation[] = []): AlgebraCheck {
   if (name === null) throw new Unsupported("the problem statement has no variable");
   const premiseStmts = premiseRels.map((pr) => { const vs = new Set<string>(); relationVars(pr, vs); if ([...vs].some((n) => n !== name)) throw new Unsupported("a condition mentions a variable other than the one being solved"); return stmtFromRelation(pr, name, "premise"); });
@@ -1019,18 +1036,7 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
   const stmts: Stmt[] = [stmt0]; const pending: { index: number; stmt: Stmt; from: Stmt; kind: "chain" }[] = [];
   const text = (i: number) => lines[i].source.text;
   // build statements first (profile needs all critical points)
-  const built: (Stmt | { claim: "completeness" | "universal" } | { error: string } | { closed: boolean | null })[] = lines.map((l, i) => {
-    if (COMPLETENESS_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { claim: "completeness" as const };
-    if (UNIVERSAL_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { claim: "universal" as const };
-    if (NO_SOLUTION_CLAIM.test(text(i)) && (classOf[i] === "prose" || l.relation.kind === "expression")) return { ...emptyClaimStmt(text(i)) };
-    { let remark: boolean | null = null; try { remark = functionRemarkTruth(text(i)); } catch (e) { if (!(e instanceof Unsupported)) throw e; return { error: e.message }; } if (remark !== null) return { closed: remark }; }
-    if (classOf[i] === "prose") return { error: "prose that is not a recognised mathematical claim" };
-    try {
-      const rel = l.relation; const vs = new Set<string>(); relationVars(rel, vs);
-      if (vs.size === 0 && (rel.kind === "equation" || rel.kind === "inequality")) { const s = stmtFromRelation(rel, null, text(i)); return { closed: s.defined(rat(ZERO)) ? s.holds(rat(ZERO)) : null }; }
-      return stmtFromRelation(rel, name, text(i));
-    } catch (e) { if (e instanceof Unsupported) return { error: e.message }; throw e; }
-  });
+  const built = builtLines(lines, classOf, name);
   const ALL: Stmt = { kind: "all", text: "all real numbers", critical: [], holds: () => true, defined: () => true };
   stmts.push(ALL);
   for (const b of built) if ("kind" in b) stmts.push(b);
@@ -1155,4 +1161,199 @@ function identityMode(expr: Expr, parsed: NaturalParseResult, name: string, clas
   if (bad !== null) return { ...base, outcome: "invalid", firstInvalidStep: bad, obligations: [], justification: `line ${bad + 1}: ${out[bad].detail}` };
   if (unresolved !== null) return { ...base, outcome: "unsupported", firstInvalidStep: null, obligations: [`verify line ${unresolved + 1}`], justification: `line ${unresolved + 1} cannot be verified independently` };
   return { ...base, outcome: "verified", firstInvalidStep: null, obligations: [], justification: "U4 verifies every expression step (form completeness is judged natively)" };
+}
+
+/* ================================================================================================ ANSWER-FIRST (E7 follow-on)
+ * The same kernels, used in a different order: (1) is the FINAL STATED ANSWER the problem's exact solution set? (2) only if it is not, which written transition is the
+ * earliest one that is demonstrably invalid, judged against the line the student actually wrote before it (so a correct step after a mistake stays locally valid)?
+ * (3) what is the smallest exact difference at that transition? Nothing here certifies a derivation; answer correctness, local validity and diagnosis stay separate.
+ */
+export interface AfTransition {
+  index: number; from: string; to: string;
+  status: "equivalent" | "implied" | "narrowing" | "invalid" | "closed-true" | "closed-false" | "unsupported" | "inconclusive";
+  /** "implied": follows from the previous line but admits more values (a one-way step such as squaring); "narrowing": valid reduction that discards values */
+  detail: string; keepsOriginalSolutions: boolean | null; diagnosis: AfDiagnosis | null;
+}
+export interface AfDiagnosis { kind: "arithmetic-evaluation" | "unbalanced-operation" | "solution-set-change"; location: string; evidence: string[]; explanation: string; confidence: "exact" | "set-level" }
+export interface AfAnswer { status: "correct" | "incorrect" | "incomplete" | "unresolved"; reason: string; finalText: string | null; finalSet: string | null; expectedSet: string | null; extraneous: string[]; missing: string[]; restrictions: string[] }
+export interface AfResult { family: "solution-set"; answer: AfAnswer; transitions: AfTransition[] | null; firstInvalid: number | null; checks: number; /** index of the line read as the final answer */ finalIndex: number | null }
+
+function show(e: Expr): string {
+  const par = (x: Expr) => (x.kind === "add" || x.kind === "multiply" ? `(${show(x)})` : show(x));
+  switch (e.kind) {
+    case "constant": return e.value; case "pi": return "pi"; case "variable": return e.name;
+    case "add": return e.terms.map((t, i) => { if (t.kind === "multiply" && t.factors.length >= 2 && t.factors[0].kind === "constant" && Number(t.factors[0].value) < 0) { const rest = t.factors.slice(1), neg = t.factors[0].value === "-1" ? "" : `${-Number(t.factors[0].value)}*`; return `${i ? " - " : "-"}${neg}${rest.map(par).join("*")}`; } if (t.kind === "constant" && Number(t.value) < 0 && i) return ` - ${-Number(t.value)}`; return (i ? " + " : "") + show(t); }).join("");
+    case "multiply": { if (e.factors.length >= 2 && e.factors[0].kind === "constant" && e.factors[0].value === "-1") return `-${e.factors.slice(1).map(par).join("*")}`; return e.factors.map(par).join("*"); }
+    case "power": return `${par(e.base)}^${e.exponent}`;
+    case "root": return e.index === 2 ? `sqrt(${show(e.radicand)})` : `root(${show(e.radicand)}, ${e.index})`;
+    case "abs": return `|${show(e.argument)}|`;
+    default: return `${e.kind}(${show((e as { argument: Expr }).argument)})`;
+  }
+}
+const same = (a: Expr, b: Expr) => JSON.stringify(a) === JSON.stringify(b);
+const isClosed = (e: Expr) => { try { return variablesOf(e).size === 0; } catch { return false; } };
+function closedValue(e: Expr): Q | null { try { if (!isClosed(e)) return null; const z = evalAt(e, rat(ZERO), "\u0000"); return z && z.y.isZero() ? z.x : null; } catch { return null; } }
+/** the smallest pair of corresponding subexpressions that differ (descends while exactly one child differs) */
+function smallestDiff(a: Expr, b: Expr): [Expr, Expr] | null {
+  if (same(a, b)) return null;
+  if (a.kind === b.kind) {
+    const kids = (x: Expr): Expr[] | null => (x.kind === "add" ? x.terms : x.kind === "multiply" ? x.factors : x.kind === "power" ? [x.base] : x.kind === "root" ? [x.radicand] : "argument" in x ? [(x as { argument: Expr }).argument] : null);
+    const ka = kids(a), kb = kids(b);
+    if (ka && kb && ka.length === kb.length && (a.kind !== "power" || (a as { exponent: number }).exponent === (b as { exponent: number }).exponent)) { const d = ka.map((x, i) => (same(x, kb[i]) ? -1 : i)).filter((i) => i >= 0); if (d.length === 1) return smallestDiff(ka[d[0]], kb[d[0]]); }
+  }
+  return [a, b];
+}
+/** coefficients c0..c3 of an expression that is a polynomial of degree <= 3 in `name` (exact, from point values), else null */
+function polyCoeffs(e: Expr, name: string): Q[] | null {
+  try {
+    const v = [0, 1, 2, 3, 4, 5].map((k) => { const z = evalAt(e, rat(q(k)), name); return z && z.y.isZero() ? z.x : null; }); if (v.some((x) => x === null)) return null;
+    const y = v as Q[]; const c: Q[] = []; // Newton forward differences on 0..3, verified at 4 and 5
+    const d0 = y[0], d1 = y[1].sub(y[0]), d2 = y[2].sub(y[1].mul(q(2))).add(y[0]), d3 = y[3].sub(y[2].mul(q(3))).add(y[1].mul(q(3))).sub(y[0]);
+    c[3] = d3.div(q(6)); c[2] = d2.div(q(2)).sub(c[3].mul(q(3))); c[1] = d1.sub(c[2]).sub(c[3]); c[0] = d0;
+    for (const k of [4, 5]) { let acc = ZERO; for (let i = 3; i >= 0; i--) acc = acc.mul(q(k)).add(c[i]); if (!acc.eq(y[k])) return null; }
+    return c;
+  } catch { return null; }
+}
+const isConstPoly = (c: Q[]) => c.slice(1).every((x) => x.isZero());
+const displayedOp = (side: Expr, base: Expr): { op: "+" | "*"; operand: Expr } | null => {
+  if (side.kind === "add" && side.terms.length === 2) for (const [i, j] of [[0, 1], [1, 0]]) if (same(side.terms[i], base)) return { op: "+", operand: side.terms[j] };
+  if (side.kind === "multiply" && side.factors.length === 2) for (const [i, j] of [[0, 1], [1, 0]]) if (same(side.factors[i], base)) return { op: "*", operand: side.factors[j] };
+  return null;
+};
+
+/** The smallest exact mathematical difference between two adjacent written equations, or null when none can be established (nothing is invented). */
+export function diagnoseTransition(prev: NaturalRelation, next: NaturalRelation, name: string | null, solution: Pt | null): AfDiagnosis | null {
+  if (prev.kind !== "equation" || next.kind !== "equation") return null;
+  const evid: string[] = [];
+  if (solution && name) { try { const L = evalAt(next.left, solution, name), R = evalAt(next.right, solution, name); if (L && R) evid.push(`at the original solution ${name} = ${extText(solution)} this line gives ${extText(L)} on the left and ${extText(R)} on the right`); } catch { /* evidence only */ } }
+  const dl = smallestDiff(prev.left, next.left), dr = smallestDiff(prev.right, next.right);
+  // 1. one side unchanged, the other differs only inside a closed arithmetic subexpression: the written value is not the value of the expression it replaced
+  if ((dl === null) !== (dr === null)) {
+    const [a, b] = (dl ?? dr)!, va = closedValue(a), vb = closedValue(b), side = dl ? "left" : "right";
+    if (va && vb && !va.eq(vb)) return { kind: "arithmetic-evaluation", location: `${side} side: ${show(a)} → ${show(b)}`, evidence: [`${show(a)} = ${va.text()}`, `${show(b)} = ${vb.text()}`, ...evid], explanation: `${show(a)} evaluates to ${va.text()}, not ${vb.text()}`, confidence: "exact" };
+  }
+  if (dl === null && dr === null) return null;
+  // 2. both sides changed: the same operation must act on both sides
+  if (!name) return null;
+  const L1 = polyCoeffs(prev.left, name), R1 = polyCoeffs(prev.right, name), L2 = polyCoeffs(next.left, name), R2 = polyCoeffs(next.right, name);
+  if (!L1 || !R1 || !L2 || !R2) return null;
+  const sub = (a: Q[], b: Q[]) => a.map((x, i) => x.sub(b[i]));
+  const dL = sub(L2, L1), dR = sub(R2, R1);
+  if (isConstPoly(dL) && isConstPoly(dR) && !dL[0].eq(dR[0])) {
+    // an add/subtract of a constant: the left shows c_L, the right c_R. The side that DISPLAYS the operation (19 - 5) carries the claim; the other side shows what was done.
+    const disp = displayedOp(next.right, prev.right) ?? displayedOp(next.left, prev.left), onRight = !!displayedOp(next.right, prev.right);
+    const claimed = onRight ? dR[0] : dL[0], implied = onRight ? dL[0] : dR[0], otherName = onRight ? "left" : "right", dispName = onRight ? "right" : "left";
+    const prevDisp = onRight ? prev.right : prev.left, expected = closedValue(prevDisp) ? closedValue(prevDisp)!.add(implied) : null;
+    const opText = (c: Q) => (c.sign() < 0 ? `subtracting ${c.neg().text()}` : `adding ${c.text()}`);
+    void disp;
+    return { kind: "unbalanced-operation", location: `${dispName} side: ${show(prevDisp)} → ${show(onRight ? next.right : next.left)}`, evidence: [`the ${otherName} side changes by ${implied.text()} (${show(onRight ? prev.left : prev.right)} → ${show(onRight ? next.left : next.right)})`, `the ${dispName} side changes by ${claimed.text()}`, ...(expected ? [`the ${dispName} side should be ${show(prevDisp)} ${implied.sign() < 0 ? "-" : "+"} ${(implied.sign() < 0 ? implied.neg() : implied).text()} = ${expected.text()}`] : []), ...evid], explanation: `the ${otherName} side shows ${opText(implied)}, but the ${dispName} side shows ${opText(claimed)}; the same constant must be applied to both sides`, confidence: "exact" };
+  }
+  const nz = (c: Q[]) => c.findIndex((x) => !x.isZero());
+  const kL = nz(L1) >= 0 && nz(L1) === nz(L2) ? L2[nz(L1)].div(L1[nz(L1)]) : null, kR = nz(R1) >= 0 && nz(R1) === nz(R2) ? R2[nz(R1)].div(R1[nz(R1)]) : null;
+  if (kL && kR && L1.every((x, i) => L2[i].eq(x.mul(kL))) && R1.every((x, i) => R2[i].eq(x.mul(kR))) && !kL.eq(kR)) return { kind: "unbalanced-operation", location: `both sides: ${show(prev.left)} = ${show(prev.right)} → ${show(next.left)} = ${show(next.right)}`, evidence: [`the left side is multiplied by ${kL.text()}`, `the right side is multiplied by ${kR.text()}`, ...evid], explanation: `the left side is multiplied by ${kL.text()} but the right side by ${kR.text()}; both sides must be multiplied by the same number`, confidence: "exact" };
+  return null;
+}
+
+/** question-level reference parse, reused across the many submissions of one question */
+const parseCache = new Map<string, NaturalParseResult>();
+function cachedParse(text: string): NaturalParseResult { let r = parseCache.get(text); if (!r) { r = parseNaturalWorking({ format: "natural", text }); if (parseCache.size > 512) parseCache.clear(); parseCache.set(text, r); } return r; }
+/** A: the final stated answer against the exact solution set of the problem. T (optional): written transitions, judged locally against the previous written line. */
+export function answerFirstSolutionSet(statement: string, parsed: NaturalParseResult, withTransitions: boolean): AfResult {
+  let checks = 0;
+  const { body: body0 } = stripVerb(statement);
+  const lead = /^((?:[^,=<>≤≥]*[<>≤≥][^,=<>≤≥]*,\s*)+)([^<>≤≥]*=[^<>≤≥]*)$/.exec(body0), body = lead ? `${lead[2].trim()}, ${lead[1].trim().replace(/,$/, "")}` : body0;
+  const whenM = /^(.*?)\s+(?:when|for|if|where|given(?:\s+that)?)\s+(.+)$/i.exec(body);
+  const ps = cachedParse(whenM ? whenM[1] : body);
+  if (ps.classification !== "parsed" || ps.lines.length !== 1) throw new Unsupported("the problem statement is not a single parseable mathematical statement");
+  const rel0 = ps.lines[0].relation;
+  if (rel0.kind !== "equation" && rel0.kind !== "inequality") throw new Unsupported(`${rel0.kind} problems have no solution-set answer`);
+  const premises: NaturalRelation[] = [...(ps.lines[0].restrictions ?? [])];
+  if (whenM) { const pp = cachedParse(whenM[2]); if (pp.classification !== "parsed" || pp.lines.length !== 1) throw new Unsupported("the condition attached to the problem is not parseable"); const pr = pp.lines[0].relation; if (pr.kind !== "equation" && pr.kind !== "inequality") throw new Unsupported("the condition must be an equation or inequality"); premises.push(pr, ...(pp.lines[0].restrictions ?? [])); }
+  const names = new Set<string>(); relationVars(rel0, names); if (names.size !== 1) throw new Unsupported("the problem must have exactly one variable"); const name = [...names][0];
+  const lines = parsed.lines, text = (i: number) => lines[i].source.text;
+  for (const [src, l] of [[whenM ? whenM[1] : body, ps.lines[0]] as const, ...lines.map((l) => [l.source.text, l] as const)]) { const loss = parseFidelityLoss(src, l); if (loss) throw new Unsupported(`parse fidelity: ${loss}`); }
+  const premiseStmts = premises.map((pr) => stmtFromRelation(pr, name, "premise"));
+  const stmt0 = withPremises(stmtFromRelation(rel0, name, "problem"), premiseStmts, "problem with its conditions");
+  const classOf = lines.map((l) => (isProseExpression(l.relation) ? "prose" : "math"));
+  // the final stated answer: the last line that is a statement about the variable
+  let fin = -1; for (let i = lines.length - 1; i >= 0; i--) { const k = lines[i].relation.kind; if (classOf[i] !== "math") continue; if (k === "equation" || k === "inequality" || k === "solution-set" || k === "interval") { const vs = new Set<string>(); relationVars(lines[i].relation, vs); if (vs.size === 1 && vs.has(name)) { fin = i; break; } } }
+  const ALL: Stmt = { kind: "all", text: "all real numbers", critical: [], holds: () => true, defined: () => true };
+  const answer = (a: Partial<AfAnswer> & Pick<AfAnswer, "status" | "reason">): AfAnswer => ({ finalText: fin >= 0 ? text(fin) : null, finalSet: null, expectedSet: null, extraneous: [], missing: [], restrictions: [], ...a });
+  // a concluding statement of "no solution" / "true for all real numbers" is itself the answer (it may follow rejected candidates)
+  let claimStmt: Stmt | null = null;
+  { let lastNb = lines.length - 1; for (let i = lines.length - 1; i >= 0; i--) { if (!text(i).trim()) continue; lastNb = i; break; }
+    const t = lines[lastNb] ? text(lastNb) : "", asClaim = lines[lastNb] && (classOf[lastNb] === "prose" || lines[lastNb].relation.kind === "expression");
+    if (asClaim && NO_SOLUTION_CLAIM.test(t)) { claimStmt = emptyClaimStmt(t); fin = lastNb; } else if (asClaim && UNIVERSAL_CLAIM.test(t)) { claimStmt = ALL; fin = lastNb; } }
+  const finalStmt = claimStmt ?? (fin >= 0 ? stmtFromRelation(lines[fin].relation, name, text(fin)) : null);
+  const built = withTransitions ? builtLines(lines, classOf, name) : null;
+  const stmts: Stmt[] = [stmt0, ALL, ...(finalStmt ? [finalStmt] : []), ...(built ?? []).filter((b): b is Stmt => "kind" in b && b !== finalStmt)];
+  const prof = profile(stmts); checks++;
+  const desc = (s: Stmt) => describe(prof, s), S0 = desc(stmt0), M0 = prof.membership.get(stmt0)!, undef = prof.undefinedAt(stmt0);
+  const restrictions = prof.points.filter((_, k) => undef[k]).map((p) => `${name} != ${extText(p)}`);
+  let ans: AfAnswer;
+  if (!finalStmt) ans = answer({ status: "unresolved", reason: "no statement about the variable was found to read as the final answer", expectedSet: S0, restrictions });
+  else if (!claimStmt && !isSolvedForm(lines[fin].relation, name)) ans = answer({ status: "incomplete", reason: "the last statement is not a solution in solved form", finalSet: desc(finalStmt), expectedSet: S0, restrictions });
+  else {
+    const r = relate(prof, finalStmt, stmt0), Mf = prof.membership.get(finalStmt)!; checks++;
+    const cells = (m: { gap: boolean[]; pt: boolean[] }) => [...m.gap, ...m.pt], cf = cells(Mf), c0 = cells(M0);
+    const ptName = (k: number) => extText(prof.points[k]);
+    const extraneous = prof.points.map((_, k) => k).filter((k) => Mf.pt[k] && !M0.pt[k]).map(ptName), missing = prof.points.map((_, k) => k).filter((k) => !Mf.pt[k] && M0.pt[k]).map(ptName);
+    const onlyExcluded = r === "superset" && cf.some((v, k) => v && !c0[k]) && prof.points.every((_, k) => !(Mf.pt[k] && !M0.pt[k]) || undef[k]);
+    if (r === "equal") ans = answer({ status: "correct", reason: `the stated solution ${desc(finalStmt)} is exactly the problem's solution set`, finalSet: desc(finalStmt), expectedSet: S0, restrictions });
+    else if (r === "subset") ans = answer({ status: "incomplete", reason: `the stated solution ${desc(finalStmt)} omits solutions: the problem's solution set is ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, missing, restrictions });
+    else ans = answer({ status: "incorrect", reason: r === "superset" ? `the stated solution ${desc(finalStmt)} includes values that are not solutions${onlyExcluded ? " (excluded by the domain)" : ""}; the problem's solution set is ${S0}` : `the stated solution ${desc(finalStmt)} is not the problem's solution set ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, extraneous, missing, restrictions });
+  }
+  if (!withTransitions) return { family: "solution-set", answer: ans, transitions: null, firstInvalid: null, checks, finalIndex: fin >= 0 ? fin : null };
+  // T: local validity of every written transition against the previous written line (the original problem for the first)
+  const sol = prof.points.find((_, k) => M0.pt[k]) ?? null; // one exact solution, for the evidence line
+  const transitions: AfTransition[] = []; let prevStmt: Stmt = stmt0, prevRel: NaturalRelation = rel0, prevText = statement, firstInvalid: number | null = null;
+  const pushT = (t: AfTransition) => { transitions.push(t); if (t.status === "invalid" && firstInvalid === null) firstInvalid = t.index; };
+  lines.forEach((l, i) => {
+    const b = built![i], from = prevText, to = text(i);
+    if ("error" in b) { pushT({ index: i, from, to, status: "unsupported", detail: b.error, keepsOriginalSolutions: null, diagnosis: null }); return; }
+    if ("claim" in b) { pushT({ index: i, from, to, status: "unsupported", detail: "a completeness or universality claim is not a transition", keepsOriginalSolutions: null, diagnosis: null }); return; }
+    if ("closed" in b) { checks++; pushT({ index: i, from, to, status: b.closed === false ? "closed-false" : b.closed === true ? "closed-true" : "unsupported", detail: b.closed === false ? "a closed numeric statement that is exactly false" : b.closed === true ? "a closed numeric statement that is exactly true" : "a closed statement that is undefined", keepsOriginalSolutions: null, diagnosis: null }); if (b.closed === false && firstInvalid === null) firstInvalid = i; return; }
+    const s = b as Stmt, r = relate(prof, prevStmt, s); checks++;
+    const Ms = prof.membership.get(s)!, keeps = [...Ms.gap.map((v, k) => !M0.gap[k] || v), ...Ms.pt.map((v, k) => !M0.pt[k] || v)].every(Boolean);
+    const Mp = prof.membership.get(prevStmt)!;
+    const dropsSolution = [...Mp.gap.map((v, k) => v && M0.gap[k] && !Ms.gap[k]), ...Mp.pt.map((v, k) => v && M0.pt[k] && !Ms.pt[k])].some(Boolean);
+    let status: AfTransition["status"], detail: string;
+    if (r === "equal") { status = "equivalent"; detail = "equivalent to the previous line (same solution set)"; }
+    else if (r === "subset") { status = "implied"; detail = `follows from the previous line but admits more values (${desc(s)}): a one-way step, so candidates must later be checked against the original`; }
+    else if (r === "superset" && !dropsSolution) { status = "narrowing"; detail = `a reduction of the previous line that discards only non-solutions of the original (${desc(prevStmt)} → ${desc(s)})`; }
+    else if (r === "superset") { status = "invalid"; detail = `the step discards a solution of the original: ${desc(prevStmt)} became ${desc(s)}`; }
+    else { status = "invalid"; detail = `neither equivalent to nor implied by the previous line (${desc(prevStmt)} versus ${desc(s)})`; }
+    const diagnosis = status === "invalid" ? (diagnoseTransition(prevRel, l.relation, name, sol) ?? { kind: "solution-set-change" as const, location: `${from} → ${to}`, evidence: [`previous line: ${desc(prevStmt)}`, `this line: ${desc(s)}`], explanation: "the solution set changed, but the exact difference between the two lines could not be pinned to a single operation", confidence: "set-level" as const }) : null;
+    pushT({ index: i, from, to, status, detail, keepsOriginalSolutions: keeps, diagnosis });
+    prevStmt = s; prevRel = l.relation; prevText = to;
+  });
+  return { family: "solution-set", answer: ans, transitions, firstInvalid, checks, finalIndex: fin >= 0 ? fin : null };
+}
+
+/** Numeric-evaluation problems (`2 + 3*4`): the answer is the exact value; a transition is valid when the line's value equals the previous line's value. */
+export interface AfNumericResult { family: "arithmetic"; answer: AfAnswer; transitions: AfTransition[] | null; firstInvalid: number | null; checks: number; finalIndex: number | null }
+export function answerFirstNumeric(statement: string, parsed: NaturalParseResult, withTransitions: boolean): AfNumericResult {
+  const { body } = stripVerb(statement), ps = parseNaturalWorking({ format: "natural", text: body });
+  if (ps.classification !== "parsed" || ps.lines.length !== 1 || ps.lines[0].relation.kind !== "expression") throw new Unsupported("not a numeric expression problem");
+  const e0 = ps.lines[0].relation.expression, v0 = closedValue(e0); if (!v0) throw new Unsupported("the problem is not a closed exact numeric expression");
+  const lines = parsed.lines; let checks = 1;
+  for (const [src, l] of lines.map((l) => [l.source.text, l] as const)) { const loss = parseFidelityLoss(src, l); if (loss) throw new Unsupported(`parse fidelity: ${loss}`); }
+  // the value a line states: an expression is its own value; `a = b` states the value of b (its own truth is a separate transition check)
+  const stated = (r: NaturalRelation): { value: Q | null; exprs: Expr[] } => r.kind === "expression" ? { value: closedValue(r.expression), exprs: [r.expression] } : r.kind === "equation" && isClosed(r.left) && isClosed(r.right) ? { value: closedValue(r.right), exprs: [r.left, r.right] } : { value: null, exprs: [] };
+  let fin = -1; for (let i = lines.length - 1; i >= 0; i--) if (stated(lines[i].relation).value) { fin = i; break; }
+  const fv = fin >= 0 ? stated(lines[fin].relation).value : null;
+  const answer: AfAnswer = fv ? (fv.eq(v0) ? { status: "correct", reason: `the stated value ${fv.text()} equals the exact value of the expression`, finalText: lines[fin].source.text, finalSet: fv.text(), expectedSet: v0.text(), extraneous: [], missing: [], restrictions: [] } : { status: "incorrect", reason: `the stated value ${fv.text()} is not the exact value ${v0.text()}`, finalText: lines[fin].source.text, finalSet: fv.text(), expectedSet: v0.text(), extraneous: [], missing: [], restrictions: [] }) : { status: "unresolved", reason: "no closed numeric value was stated", finalText: null, finalSet: null, expectedSet: v0.text(), extraneous: [], missing: [], restrictions: [] };
+  if (!withTransitions) return { family: "arithmetic", answer, transitions: null, firstInvalid: null, checks, finalIndex: fin >= 0 ? fin : null };
+  const transitions: AfTransition[] = []; let firstInvalid: number | null = null, prevE: Expr = e0, prevV: Q = v0, prevText = statement;
+  lines.forEach((l, i) => {
+    const to = l.source.text, st = stated(l.relation); checks++;
+    if (!st.exprs.length || !st.value) { transitions.push({ index: i, from: prevText, to, status: "unsupported", detail: "not a closed numeric statement", keepsOriginalSolutions: null, diagnosis: null }); return; }
+    let diag: AfDiagnosis | null = null, status: AfTransition["status"] = "equivalent", detail = "has the same exact value as the previous line";
+    if (l.relation.kind === "equation") { const a = closedValue(l.relation.left)!, b = closedValue(l.relation.right)!; if (!a.eq(b)) { status = "invalid"; detail = "the two sides of this equality are not equal"; const d = smallestDiff(l.relation.left, l.relation.right); diag = { kind: "arithmetic-evaluation", location: `${show(l.relation.left)} = ${show(l.relation.right)}`, evidence: [`${show(l.relation.left)} = ${a.text()}`, `${show(l.relation.right)} = ${b.text()}`], explanation: `${show(l.relation.left)} evaluates to ${a.text()}, not ${b.text()}`, confidence: "exact" }; void d; } }
+    if (status !== "invalid" && !st.value.eq(prevV)) { status = "invalid"; detail = `the value changed from ${prevV.text()} to ${st.value.text()}`; const dd = smallestDiff(prevE, st.exprs[0]); const da = dd ? closedValue(dd[0]) : null, db = dd ? closedValue(dd[1]) : null; diag = dd && da && db && !da.eq(db) ? { kind: "arithmetic-evaluation", location: `${show(dd[0])} → ${show(dd[1])}`, evidence: [`${show(dd[0])} = ${da.text()}`, `${show(dd[1])} = ${db.text()}`], explanation: `${show(dd[0])} evaluates to ${da.text()}, not ${db.text()}`, confidence: "exact" } : { kind: "solution-set-change", location: `${prevText} → ${to}`, evidence: [`previous value ${prevV.text()}`, `this line's value ${st.value.text()}`], explanation: "the value changed, but the difference could not be localised to one subexpression", confidence: "set-level" }; }
+    transitions.push({ index: i, from: prevText, to, status, detail, keepsOriginalSolutions: null, diagnosis: diag });
+    if (status === "invalid" && firstInvalid === null) firstInvalid = i;
+    prevE = st.exprs[0]; prevV = st.value; prevText = to;
+  });
+  return { family: "arithmetic", answer, transitions, firstInvalid, checks, finalIndex: fin >= 0 ? fin : null };
 }

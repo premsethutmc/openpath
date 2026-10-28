@@ -36,7 +36,7 @@ export interface ObligationInput {
   evidence: { line: number | null; claim: string; checker: string; scope: string; outcome: string; digest?: string | null; claimIdentity?: string | null; premises?: string | null }[];
   /** digest of the task premises the certifier computed itself from the problem (evidence produced under other premises is not evidence) */
   taskDigest?: string | null;
-  grounded: { line: number; grounding: { required?: boolean; relevant: boolean; reason: string; sources: { kind: string; ref: string }[] } }[];
+  grounded: { line: number; grounding: { required?: boolean; relevant: boolean; reason: string; sources: { kind: string; ref: string; derived?: boolean }[] } }[];
   verdict: { classification: string; complete: boolean; independentlyVerified: boolean; route: string; justification: string };
   /** reasoner ids that took part in the assessment: evidence attribution requires the producing route to be among them */
   reasoners?: string[];
@@ -105,7 +105,13 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
     }
     const bad = deps.find((d) => d.status !== "proven");
     // E7 repair D: a claim that rests on a premise line which is not about the task (an ungrounded line) inherits that gap; a derivation is only as grounded as what it rests on
-    const gbadDep = deps.map((d) => out.find((x) => x.kind === "grounding" && x.line === d.line)).find((x) => x && x.status !== "proven" && inp.grounded.some((gg) => gg.line === x.line && !gg.grounding.relevant && gg.grounding.sources.some((q) => q.kind === "task-premise" || q.kind === "derived-fact"))); // a line wholly unrelated to the task is a side claim, not a premise of what follows
+    const numeralsIn = (t: string) => new Set((t.match(/(?<![A-Za-z])\d+(?:\.\d+)?/g) ?? []).map((m) => String(Number(m))));
+    const claimNums = numeralsIn(c.text), ownTask = new Set((inp.grounded.find((gg) => gg.line === c.line)?.grounding.sources ?? []).filter((q) => q.kind === "task-premise").map((q) => String(Number(q.ref))));
+    // a line inherits the gap of an ungrounded line only if it USES what that line introduced (a number the line made up or derived that the task does not itself supply); an unrelated true remark placed before it is not a premise of it
+    const letters = (t: string) => new Set((t.match(/(?<![A-Za-z])[A-Za-z](?![A-Za-z])/g) ?? []));
+    const sharesSymbol = (line: number) => { const lt = allClaims.filter((k) => k.line === line).map((k) => k.text).join(" "), lv = letters(lt), cv = letters(c.text); return [...lv].some((v) => cv.has(v)); }; // a line about the variable the claim is about is part of the chain
+    const usesIt = (line: number) => sharesSymbol(line) || (inp.grounded.find((gg) => gg.line === line)?.grounding.sources ?? []).some((q) => (q.kind === "free-literal" || (q.kind === "derived-fact" && (q as { derived?: boolean }).derived)) && claimNums.has(String(Number(q.ref))) && !ownTask.has(String(Number(q.ref))));
+    const gbadDep = deps.map((d) => out.find((x) => x.kind === "grounding" && x.line === d.line)).find((x) => x && x.status !== "proven" && usesIt(x.line) && inp.grounded.some((gg) => gg.line === x.line && !gg.grounding.relevant && gg.grounding.sources.some((q) => q.kind === "task-premise" || q.kind === "derived-fact"))); // a line wholly unrelated to the task is a side claim, not a premise of what follows
     if (status === "proven" && bad) { status = "unresolved"; reason = `it depends on ${bad.id} (line ${bad.line}), which is ${bad.status}`; evidence = null; }
     else if (status === "proven" && gbadDep) { status = "unresolved"; reason = `it rests on line ${gbadDep.line}, whose numbers are not shown to come from the task (${gbadDep.reason})`; evidence = null; }
     const o = make(`ob:${out.length}`, "derivation", c.line, c.text, `"${c.text}" follows from the task premises and the facts already proved by a justified transformation`, status, reason, evidence, deps.map((d) => d.id), cond, aggregate);

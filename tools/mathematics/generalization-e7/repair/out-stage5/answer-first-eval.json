@@ -1,0 +1,56 @@
+{
+ "algebraCases": 406,
+ "verdict": {
+  "correct": 223,
+  "incorrectOrIncomplete": 128,
+  "unresolved": 0,
+  "unsupported": 55,
+  "unsupportedOrUnresolvedRate": "13.5%"
+ },
+ "vsReference": {
+  "refVerified": 153,
+  "creditedCorrect": 125,
+  "wronglyIncorrect": 0,
+  "wronglyIncorrectIds": [],
+  "refInvalid": 147,
+  "refInvalidButAnswerCorrect": 78
+ },
+ "localisation": {
+  "mutatedRuns": 514,
+  "answerUnchangedByMutation": 360,
+  "diagnosed": 3,
+  "unestablished": 151,
+  "wrongAnswerNoFirstError": 0,
+  "firstErrorExactLine": 3,
+  "wrongLine": 0,
+  "accuracyAmongDiagnosed": "100.0%",
+  "exactEvidence": 3,
+  "misses": []
+ },
+ "vsLabelledFirstError": {
+  "referenceInvalidWithLabel": 147,
+  "answerCreditedCorrect": 78,
+  "answerUnestablished": 20,
+  "answerIncorrect": 49,
+  "noFirstErrorFound": 0,
+  "exactLine": 49,
+  "otherAcceptableLine": 0,
+  "wrongLine": 0,
+  "exactLineRate": "100.0%",
+  "misses": [],
+  "localRelationAgreement": "100.0%",
+  "relationsCompared": 88,
+  "disagreements": []
+ },
+ "latencyMs": {
+  "answerOnly": {
+   "p50": "0.35",
+   "p95": "2.79",
+   "meanChecks": "1.67"
+  },
+  "withDiagnosis": {
+   "p50": "0.36",
+   "p95": "2.09"
+  }
+ }
+}
