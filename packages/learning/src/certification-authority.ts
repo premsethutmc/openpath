@@ -18,6 +18,7 @@
 import type { AssessmentEnvelope, Classification } from "./unified-math-engine.ts";
 import { assemble, internalEv, make, type ObligationSet, type ProofObligation } from "./proof-obligations.ts";
 import { attribute, MECHANISMS } from "./evidence-provenance.ts";
+import { typedIdentities } from "./evidence-binding.ts";
 
 export const CERTIFICATION_AUTHORITY_CONTRACT = "openpath-certification-authority@1" as const;
 
@@ -36,8 +37,11 @@ const DEFINITE: Classification[] = ["verified", "invalid", "incomplete", "missin
 export const obligationsOf = (env: AssessmentEnvelope): ObligationSet | undefined => env.proofObligations ?? (env.domainPayload as { proofObligations?: ObligationSet } | undefined)?.proofObligations;
 
 /** Typed (structured) steps get the same obligation kinds as natural text. The evidence is the typed domain reasoner that judged each step against the typed problem object. */
-export function structuredObligations(cand: AssessmentEnvelope): ObligationSet {
+/** E7 repair A: typed evidence is bound to the SUBMITTED step: the certifier recomputes each step's identity from (typed problem, submitted step) and compares it with the identity the gate stamped on the evidence; ctx absent / misaligned / mismatched ⇒ not bound ⇒ not proven */
+export function structuredObligations(cand: AssessmentEnvelope, ctx?: { problem: unknown; working: unknown }): ObligationSet {
   const out: ProofObligation[] = []; const reasoners = cand.reasoners.map((r) => r.id);
+  const ids = ctx ? typedIdentities(ctx.problem, ctx.working, cand.steps.length) : null;
+  const gateEv = cand.acceptanceGate?.evidence ?? [];
   const stepObs: (ProofObligation | undefined)[] = [];
   cand.steps.forEach((s, i) => {
     const line = i + 1, claim = `typed step ${line}`;
@@ -45,11 +49,13 @@ export function structuredObligations(cand: AssessmentEnvelope): ObligationSet {
     const deps = (s.dependencies ?? []).map((d) => (typeof d === "number" ? d : typeof d === "string" && /^s\d+$/.test(d) ? Number(d.slice(1)) : -1)).filter((k) => k >= 0 && k < i).map((k) => stepObs[k]).filter((x): x is ProofObligation => !!x);
     let status: ProofObligation["status"], reason = s.justification, evidence: ProofObligation["evidence"] = null;
     if (s.classification === "verified") {
-      if (pv.trusted && pv.kind === "typed-domain-reasoner") { status = "proven"; evidence = { checker: s.reasoner, scope: "typed domain reasoner judged the step against the typed problem object", digest: null, detail: s.justification, mechanism: pv.mechanism, kernel: pv.kernel, trusted: true }; }
+      const stamped = gateEv.find((g) => g.line === line)?.claimIdentity, boundOk = !!ids && ids.aligned !== false && !!stamped && stamped === ids.identities[i];
+      if (pv.trusted && pv.kind === "typed-domain-reasoner" && !boundOk) { status = "unsupported"; reason = "the step's evidence does not establish the submitted step (claim identity absent, mismatched or the reasoner's steps are not aligned with the submission)"; }
+      else if (pv.trusted && pv.kind === "typed-domain-reasoner") { status = "proven"; evidence = { checker: s.reasoner, scope: "typed domain reasoner judged the step against the typed problem object", digest: null, detail: s.justification, mechanism: pv.mechanism, kernel: pv.kernel, trusted: true, bound: true }; }
       else { status = "unsupported"; reason = `the step is reported verified, but its reasoner is not a registered typed mechanism: ${pv.reason}`; }
     } else status = s.classification === "invalid" ? "disproven" : s.classification === "incomplete" || s.classification === "missing-assumption" ? "unresolved" : "unsupported";
     const bad = deps.find((d) => d.status !== "proven");
-    if (status === "proven" && bad) { status = "unresolved"; reason = `it depends on ${bad.id}, which is ${bad.status}`; evidence = null; }
+    if ((status === "proven" || (s.classification === "verified" && pv.trusted && status === "unsupported" && !!bad)) && bad) { status = "unresolved"; reason = `it depends on ${bad.id}, which is ${bad.status}`; evidence = null; }
     const o = make(`ob:${out.length}`, "derivation", line, claim, `${claim} follows from the typed problem by its domain reasoner`, status, reason, evidence, deps.map((d) => d.id), []);
     out.push(o); stepObs[i] = o;
     // grounding for typed input is structural: the typed reasoner binds each step to the problem object; it holds exactly when that derivation is proven by a registered typed mechanism
@@ -93,7 +99,7 @@ export function standsOnObligations(env: AssessmentEnvelope): { ok: boolean; why
   const ans = o.obligations[o.obligations.length - 1];
   if (!ans || ans.kind !== "answer" || ans.status !== "proven") return { ok: false, why: "the answer obligation is not proven" };
   if (o.blocking.length) return { ok: false, why: `obligation ${o.blocking[0].id} is ${o.blocking[0].status}` };
-  const bad = o.obligations.find((x) => x.kind === "derivation" && x.status === "proven" && !(x.evidence?.trusted && x.evidence.mechanism && MECHANISMS[x.evidence.mechanism]));
+  const bad = o.obligations.find((x) => x.kind === "derivation" && x.status === "proven" && !(x.evidence?.trusted && x.evidence.mechanism && MECHANISMS[x.evidence.mechanism] && (MECHANISMS[x.evidence.mechanism].kind === "task-data" || x.evidence.bound === true)));
   if (bad) return { ok: false, why: `the proof of ${bad.id} names no registered mathematical mechanism` };
   return { ok: true, why: "" };
 }

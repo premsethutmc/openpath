@@ -24,6 +24,8 @@ import { ACCEPTANCE_GATE_CONTRACT, checkerStatusToStep, checkerSummary, evidence
 import { checkAlgebraSubmission } from "./independent-checker.ts";
 import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geocalc-e5.ts";
 import { buildObligations, type ObligationSet } from "./proof-obligations.ts";
+import { typedIdentities } from "./evidence-binding.ts";
+import { MECHANISMS } from "./evidence-provenance.ts";
 import { buildProofContext, relateStudentRestriction, routeUse, withProved, withStudent, withUnresolved, type ProofContext, type RouteUse } from "./proof-context.ts";
 import { GENERALIZATION_E6_CONTRACT, planGeneralizationE6 } from "./natural-generalization-e6.ts";
 import { polyAntiderivative, polyOf, polyToExpr } from "./calculus-binder-e5.ts";
@@ -425,7 +427,7 @@ function withdrawAcceptance(cand: AssessmentEnvelope, route: AcceptanceGateRecor
 function gateAlgebraText(statement: string, parsed: NaturalParseResult, rawText: string, cand: AssessmentEnvelope): AssessmentEnvelope {
   if (parsed.classification !== "parsed") return cand.classification === "verified" ? withdrawAcceptance(cand, "algebra-text", "downgraded-no-independent-evidence", "the working could not be parsed for independent verification") : { ...cand, acceptanceGate: gateRecord("algebra-text", cand, { reconciliation: "the working is not parsed; nothing is accepted" }) };
   const check = checkAlgebraSubmission(statement, parsed), dec = reconcileAlgebra(cand.classification, check);
-  const evidence = evidenceFromCheck(check), summary = checkerSummary(check);
+  const evidence = evidenceFromCheck(check, parsed.lines.map((l) => l.source.text)), summary = checkerSummary(check);
   const allU4 = evidence.length > 0 && evidence.every((e) => e.checker === "u4+exact-solution-set" || e.checker === "u4-identity" || e.checker === "exact-arithmetic");
   const level: GateLevel = dec.classification === "verified" ? (allU4 && check.u4Steps > 0 && check.exactSteps === 0 ? "u4-kernel" : "independent-exact-checker") : "none";
   const record = gateRecord("algebra-text", cand, { verdict: dec.classification, independentlyVerified: dec.classification === "verified", level, source: dec.source, evidence, obligations: check.obligations, reconciliation: dec.why, checker: summary });
@@ -461,9 +463,10 @@ function gateConverted(cand: AssessmentEnvelope, payload: { lineAccount?: LineAc
   const level: GateLevel = ev.every((e) => e.checker === "u4-kernel") ? "u4-kernel" : "claim-recheck+destination-reasoner";
   return { ...cand, acceptanceGate: gateRecord("adapter-converted", cand, { verdict: "verified", independentlyVerified: true, level, source: "agreement", evidence, reconciliation: "every claim-step is bound to its source line and independently re-verified" }) };
 }
-function gateStructured(cand: AssessmentEnvelope): AssessmentEnvelope {
+function gateStructured(cand: AssessmentEnvelope, problem: unknown, working: unknown): AssessmentEnvelope {
   // E7 Phase 6: per-step evidence (the reasoner that judged each step), not one aggregate label; the certification boundary attributes each to a registered mechanism
-  const evidence: GateEvidenceItem[] = cand.steps.map((st, i) => ({ line: i + 1, claim: `typed step ${i + 1}`, checker: st.reasoner, scope: "typed domain reasoner judged the step against the typed problem object; no natural-language adapter in the path", outcome: st.classification === "verified" ? "verified" : st.classification }));
+  const ids = typedIdentities(problem, working, cand.steps.length);
+  const evidence: GateEvidenceItem[] = cand.steps.map((st, i) => ({ line: i + 1, claimIdentity: ids.aligned === false ? null : ids.identities[i], claim: `typed step ${i + 1}`, checker: st.reasoner, scope: "typed domain reasoner judged the step against the typed problem object; no natural-language adapter in the path", outcome: st.classification === "verified" ? "verified" : st.classification }));
   if (cand.classification !== "verified") return { ...cand, acceptanceGate: gateRecord("structured-typed", cand, { evidence, reconciliation: "the candidate did not accept" }) };
   const bad = cand.steps.find((s) => s.classification !== "verified");
   if (bad) return withdrawAcceptance(cand, "structured-typed", "downgraded-unresolved-lines", `step ${bad.index + 1} is ${bad.classification}, so the solution cannot be certified`, evidence);
@@ -483,7 +486,7 @@ function applyAcceptanceGate(problem: MathematicalProblem, working: StudentWorki
     const text = (working as string[]).join("\n");
     return gateAlgebraText((problem as { statement: string }).statement, parseNaturalWorking({ format: "natural", text }), text, cand);
   }
-  return gateStructured(cand);
+  return gateStructured(cand, problem, working);
 }
 /**
  * E7 claim accounting. The ledger is built from the raw text, independently of every parser, and each claim must be covered by a verified,
@@ -495,12 +498,17 @@ function mergeGrounded(all: NonNullable<RouteUse["grounded"]>): NonNullable<Rout
   for (const g of all) { const prev = by.get(g.line); if (!prev || (prev.grounding.relevant && !g.grounding.relevant)) by.set(g.line, g); }
   return [...by.values()];
 }
+/** the context digest the producing route itself recorded (the certifier compares it with the digest it computes from the problem); null when the route recorded none */
+function producerContext(checker: string, uses: RouteUse[]): string | null {
+  const m = MECHANISMS[checker]; const want = m?.reasoners.includes("natural-geocalc-e5") ? ["e5-geocalc"] : m?.reasoners.includes("natural-generalization-e6") ? ["e6-calculus", "e6-numbers"] : ["base-algebra"];
+  return uses.find((u) => want.includes(u.route))?.contextDigest ?? null;
+}
 function certifyClaims(problem: MathematicalProblem, working0: StudentWorking, cand: AssessmentEnvelope): AssessmentEnvelope {
   const textProblem = !!problem && typeof problem === "object" && "statement" in problem && typeof (problem as { statement: unknown }).statement === "string";
   const asText = textProblem && Array.isArray(working0) && working0.length > 0 && working0.every((x) => typeof x === "string");
   if (!isNaturalInput(working0) && !asText) {
     // E7 Phase 6: typed (structured) steps produce the same obligation kinds as natural text, with the typed domain reasoner as the registered mechanism
-    const so = structuredObligations(cand);
+    const so = structuredObligations(cand, { problem, working: working0 });
     const tagged = { ...cand, proofObligations: so };
     if (cand.classification === "verified" && so.blocking.length) { const o = so.blocking[0]; return { ...withdrawAcceptance(tagged, "structured-typed", "downgraded-unresolved-lines", `proof obligation ${o.id} (${o.kind}, ${o.claim || "answer"}) is ${o.status}: ${o.reason}`, cand.acceptanceGate?.evidence ?? []), proofObligations: so }; }
     return tagged;
@@ -526,7 +534,7 @@ function certifyClaims(problem: MathematicalProblem, working0: StudentWorking, c
   const obs: ObligationSet = buildObligations({
     text: working.text, claims: lv.ledger.claims.map((c) => ({ line: c.line, start: c.start, end: c.end, text: c.text, kind: c.kind, outcome: c.outcome, reason: c.reason })), relations: lv.relations,
     records: payload.lineAccount ? payload.lineAccount.records.map((r) => ({ role: r.role, text: r.text, id: r.id, line: r.line, span: r.span, status: r.status, dependencies: r.dependencies, premiseEligible: r.premiseEligible, reason: r.reason })) : [],
-    evidence: cand.acceptanceGate?.evidence ?? [], reasoners: cand.reasoners.map((r) => r.id), grounded: mergeGrounded(uses.flatMap((u) => u.grounded ?? [])),
+    evidence: (cand.acceptanceGate?.evidence ?? []).map((e) => ({ ...e, premises: e.premises ?? producerContext(e.checker, uses) })), taskDigest: ctx0.digest, reasoners: cand.reasoners.map((r) => r.id), grounded: mergeGrounded(uses.flatMap((u) => u.grounded ?? [])),
     verdict: { classification: cand.classification, complete: cand.complete, independentlyVerified: cand.acceptanceGate?.independentlyVerified ?? false, route: cand.acceptanceGate?.route ?? "natural-other", justification: cand.justification },
   });
   const finalCtx = withUnresolved(

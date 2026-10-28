@@ -30,7 +30,7 @@ export interface ClaimLedger { contract: typeof CLAIM_LEDGER_CONTRACT; lines: Le
 const REL = /(?:<=|>=|!=|==|[=≠<>≤≥≈≡])/;
 const REL_G = /(?:<=|>=|!=|==|[=≠<>≤≥≈≡])/g;
 /** words that belong to mathematical notation rather than to prose */
-const MATH_WORDS = new Set(["sin", "cos", "tan", "cot", "sec", "csc", "sinh", "cosh", "tanh", "ln", "log", "exp", "sqrt", "abs", "pi", "lim", "int", "dx", "dy", "du", "dv", "dt", "conj", "arctan", "arcsin", "arccos", "atan", "inf", "infty", "mod", "arg", "det", "max", "min", "gcd", "lcm", "re", "im", "var", "cov", "sd", "mu", "sigma", "binom", "choose", "nCr", "nPr", "Var", "SD", "Pr", "Cov", "E", "Re", "Im", "Arg", "cis", "i", "e"]);
+const MATH_WORDS = new Set(["sin", "cos", "tan", "cot", "sec", "csc", "sinh", "cosh", "tanh", "ln", "log", "exp", "sqrt", "abs", "pi", "lim", "int", "dx", "dy", "du", "dv", "dt", "conj", "arctan", "arcsin", "arccos", "atan", "inf", "infty", "infinity", "mod", "arg", "det", "max", "min", "gcd", "lcm", "re", "im", "var", "cov", "sd", "mu", "sigma", "binom", "choose", "nCr", "nPr", "Var", "SD", "Pr", "Cov", "E", "Re", "Im", "Arg", "cis", "i", "e"]);
 const COPULA = /^(?:is|are|equals?|equal|gives?|giving|becomes?|yields?|converges?|approaches|tends|diverges|was|were)$/i;
 const QUALITATIVE = /\b(?:continuous|discontinuous|differentiable|converges?|diverges?|does\s+not\s+exist|dne)\b/i;
 /** a copula or auxiliary followed (anywhere in the sentence) by a mathematical predicate: "the function is even", "the polynomial has no real roots", "x is positive" */
@@ -77,7 +77,8 @@ const stripEvents = (s: string) => s.replace(/\b(?:P|Pr|n|E|Var|SD|sd|Cov)\s*[(\
 /** a token that carries no sentence word: only symbols, numbers, single letters and recognised function names */
 function mathy(t: string): boolean {
   // LaTeX control sequences (\\frac, \\cdot, \\left ...) are notation, not sentence words
-  const residue = (stripEvents(t.replace(/\\[A-Za-z]+/g, " ")).match(/[A-Za-z]{2,}/g) ?? []).filter((w) => !MATH_WORDS.has(w) && !MATH_WORDS.has(w.toLowerCase()) && !/^d[a-zA-Z]$/.test(w));
+  // E7 repair E: geometric object names after an angle/triangle sign (∠BOD, m∠ABC, △ABC) are notation, not sentence words
+  const residue = (stripEvents(t.replace(/\\[A-Za-z]+/g, " ").replace(/m?[∠△▵⊿]\s*[A-Za-z]{1,4}/g, " ")).match(/[A-Za-z]{2,}/g) ?? []).filter((w) => !MATH_WORDS.has(w) && !MATH_WORDS.has(w.toLowerCase()) && !/^d[a-zA-Z]$/.test(w));
   // single letters glued to digits/operators are fine; a run of letters such as "roots" is a word
   return residue.length === 0;
 }
@@ -92,7 +93,12 @@ export function extractLine(line: number, s0: string, base: number, original: st
   const claims: LedgerClaim[] = [];
   const kinds = toks.map((t, i) => {
     const prevOp = i > 0 && hasRel(toks[i - 1].text), nextOp = i + 1 < toks.length && hasRel(toks[i + 1].text);
-    if (/^[aAI]$/.test(t.text)) return prevOp || nextOp ? "m" : "w";
+    // E7 repair E: a lone A/a/I beside any operator is a variable ("A + B + C = 180"), not an article/pronoun
+    const opTok = (u?: Tok) => !!u && /^[+\-*/^×÷−·]+$/.test(u.text);
+    if (/^[aAI]$/.test(t.text)) return /^(?:angle|angles|triangle|segment|arc|ray|side)$/i.test(toks[i - 1]?.text ?? "") || prevOp || nextOp || opTok(toks[i - 1]) || opTok(toks[i + 1]) ? "m" : "w";
+    // E7 repair E: point/segment/angle names (AB, DBC) beside an operator, and a geometric noun directly before such a name ("angle DBC"), are notation
+    if (/^[A-Z]{2,4}$/.test(t.text) && (/^(?:angle|angles|triangle|segment|arc|ray|side)$/i.test(toks[i - 1]?.text ?? "") || prevOp || nextOp || opTok(toks[i - 1]) || opTok(toks[i + 1]))) return "m";
+    if (/^(?:angle|angles|triangle|segment|arc|ray|side)$/i.test(t.text) && /^(?:[A-Z]{1,4}|[a-z])$/.test(toks[i + 1]?.text ?? "") && (prevOp || opTok(toks[i - 1]) || hasRel(toks[i + 2]?.text ?? "") || opTok(toks[i + 2]) || (i === 0 || toks[i - 1].brk))) return "m";
     return mathy(t.text) ? "m" : "w";
   });
   const claimSpans: [number, number][] = []; // token index ranges

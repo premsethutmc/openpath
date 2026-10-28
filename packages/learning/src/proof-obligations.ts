@@ -15,13 +15,14 @@
  */
 import { canonicalizeMathematicalObject, type CanonicalMathematicalObject } from "./canonical-math-ir.ts";
 import { attribute, type Provenance } from "./evidence-provenance.ts";
+import { evidenceBinds, claimIdentity } from "./evidence-binding.ts";
 
 export const PROOF_OBLIGATION_CONTRACT = "openpath-proof-obligation@1" as const;
 export type ObligationKind = "derivation" | "grounding" | "domain" | "answer";
 export type ObligationStatus = "proven" | "disproven" | "unresolved" | "unsupported";
 export interface ProofObligation {
   id: string; kind: ObligationKind; line: number | null; claim: string; statement: string; status: ObligationStatus; reason: string;
-  evidence: { checker: string; scope: string; digest: string | null; detail: string; /** E7 Phase 6: the registered mechanism / kernel that established the claim (never inferred from the label alone) */ mechanism: string | null; kernel: string | null; trusted: boolean } | null;
+  evidence: { checker: string; scope: string; digest: string | null; detail: string; /** E7 Phase 6: the registered mechanism / kernel that established the claim (never inferred from the label alone) */ mechanism: string | null; kernel: string | null; trusted: boolean; /** E7 repair A: the evidence was checked to establish THIS claim (identity / contained claim text) under the certifier's premises; absent for internal (context) evidence */ bound?: boolean; claimIdentity?: string | null } | null;
   dependsOn: string[]; conditionalOn: string[];
   /** the route certifies this claim only in aggregate (no per-claim evidence exists for the route): reported, never counted as proof */
   aggregateOnly?: boolean;
@@ -32,7 +33,9 @@ export interface ObligationInput {
   claims: { line: number; start: number; end: number; text: string; kind: string; outcome: string; reason: string }[];
   relations: { line: number; text: string; relation: string; obligation: string | null; blocking?: boolean }[];
   records: { role?: string; text?: string; id: string; line: number; span: { start: number; end: number }; status: string; dependencies: string[]; premiseEligible: boolean; reason: string }[];
-  evidence: { line: number | null; claim: string; checker: string; scope: string; outcome: string; digest?: string | null }[];
+  evidence: { line: number | null; claim: string; checker: string; scope: string; outcome: string; digest?: string | null; claimIdentity?: string | null; premises?: string | null }[];
+  /** digest of the task premises the certifier computed itself from the problem (evidence produced under other premises is not evidence) */
+  taskDigest?: string | null;
   grounded: { line: number; grounding: { required?: boolean; relevant: boolean; reason: string; sources: { kind: string; ref: string }[] } }[];
   verdict: { classification: string; complete: boolean; independentlyVerified: boolean; route: string; justification: string };
   /** reasoner ids that took part in the assessment: evidence attribution requires the producing route to be among them */
@@ -86,13 +89,17 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
     }
     else {
       if (rec?.role === "given-matched" && rec.status === "verified-valid") { status = "proven"; evidence = internalEv("problem-data-match", rec.reason || "the line restates the typed task data", null, "restates a task premise (matched to the problem's canonical data)"); }
-      const ev = status === "proven" ? undefined : inp.evidence.find((e) => e.line === c.line && (e.outcome === "verified" || e.outcome === "verified-valid"));
+      const onLine = status === "proven" ? [] : inp.evidence.filter((e) => e.line === c.line && (e.outcome === "verified" || e.outcome === "verified-valid"));
+      // E7 repair A: evidence is bound to the CLAIM, not to its line number: it must establish this claim under the certifier's premises
+      let ev: (typeof onLine)[number] | undefined, bindWhy = "";
+      for (const e of onLine) { const b = evidenceBinds(e, c.text, inp.taskDigest); if (b.ok) { ev = e; break; } bindWhy ||= b.reason; }
       if (status === "proven") { /* discharged by matching the task's own data */ }
       else if (ev) {
         const pv: Provenance = attribute(ev.checker, inp.verdict.route, inp.reasoners ?? []);
-        if (pv.trusted && (pv.kind !== "internal")) { status = "proven"; evidence = { checker: ev.checker, scope: ev.scope, digest: ev.digest ?? null, detail: ev.claim, mechanism: pv.mechanism, kernel: pv.kernel, trusted: true }; }
+        if (pv.trusted && (pv.kind !== "internal")) { status = "proven"; evidence = { checker: ev.checker, scope: ev.scope, digest: ev.digest ?? null, detail: ev.claim, mechanism: pv.mechanism, kernel: pv.kernel, trusted: true, bound: true, claimIdentity: ev.claimIdentity ?? claimIdentity(c.text) }; }
         else { status = "unsupported"; reason = `the evidence for this line is not attributable to a trusted mathematical mechanism: ${pv.reason}`; }
       }
+      else if (onLine.length) { status = "unsupported"; reason = `evidence exists on this line but does not establish this claim: ${bindWhy}`; }
       else if (perClaim) { status = "unsupported"; reason = "the route reports this line verified but recorded no independent per-claim evidence for it"; }
       else { status = "unsupported"; aggregate = true; reason = "the route certifies this submission in aggregate only; no per-claim evidence exists for this claim"; }
     }
