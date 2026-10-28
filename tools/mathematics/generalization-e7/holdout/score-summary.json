@@ -1,0 +1,639 @@
+{
+ "commit": "5d0a7b4f72a30f30da86708a3e6568131e455281",
+ "n": 678,
+ "all": {
+  "n": 678,
+  "exact": 228,
+  "exactPct": 33.6,
+  "acceptableAlt": 4,
+  "falseAcceptances": 5,
+  "falseRejections": 215,
+  "falseRejectionsAsInvalid": 18,
+  "engineUnsupported": 272,
+  "engineUnsupportedWhereExpVerified": 119,
+  "errors": 0,
+  "verifiedExpVerified": 83,
+  "expVerified": 298
+ },
+ "contestedLabelCount": 21,
+ "uncontested": {
+  "n": 657,
+  "exact": 219,
+  "exactPct": 33.3,
+  "acceptableAlt": 4,
+  "falseAcceptances": 4,
+  "falseRejections": 214,
+  "falseRejectionsAsInvalid": 18,
+  "engineUnsupported": 263,
+  "engineUnsupportedWhereExpVerified": 118,
+  "errors": 0,
+  "verifiedExpVerified": 82,
+  "expVerified": 296
+ },
+ "contested": {
+  "n": 21,
+  "exact": 9,
+  "exactPct": 42.9,
+  "acceptableAlt": 0,
+  "falseAcceptances": 1,
+  "falseRejections": 1,
+  "falseRejectionsAsInvalid": 0,
+  "engineUnsupported": 9,
+  "engineUnsupportedWhereExpVerified": 1,
+  "errors": 0,
+  "verifiedExpVerified": 1,
+  "expVerified": 2
+ },
+ "byCat": {
+  "algebra-equations": {
+   "n": 85,
+   "exact": 38,
+   "exactPct": 44.7,
+   "acceptableAlt": 0,
+   "falseAcceptances": 1,
+   "falseRejections": 27,
+   "falseRejectionsAsInvalid": 0,
+   "engineUnsupported": 20,
+   "engineUnsupportedWhereExpVerified": 11,
+   "errors": 0,
+   "verifiedExpVerified": 12,
+   "expVerified": 39
+  },
+  "algebra-expressions": {
+   "n": 81,
+   "exact": 10,
+   "exactPct": 12.3,
+   "acceptableAlt": 0,
+   "falseAcceptances": 0,
+   "falseRejections": 32,
+   "falseRejectionsAsInvalid": 0,
+   "engineUnsupported": 41,
+   "engineUnsupportedWhereExpVerified": 18,
+   "errors": 0,
+   "verifiedExpVerified": 0,
+   "expVerified": 32
+  },
+  "calculus-derivative": {
+   "n": 81,
+   "exact": 48,
+   "exactPct": 59.3,
+   "acceptableAlt": 3,
+   "falseAcceptances": 0,
+   "falseRejections": 15,
+   "falseRejectionsAsInvalid": 2,
+   "engineUnsupported": 19,
+   "engineUnsupportedWhereExpVerified": 6,
+   "errors": 0,
+   "verifiedExpVerified": 20,
+   "expVerified": 35
+  },
+  "calculus-integral": {
+   "n": 78,
+   "exact": 12,
+   "exactPct": 15.4,
+   "acceptableAlt": 0,
+   "falseAcceptances": 0,
+   "falseRejections": 29,
+   "falseRejectionsAsInvalid": 1,
+   "engineUnsupported": 41,
+   "engineUnsupportedWhereExpVerified": 16,
+   "errors": 0,
+   "verifiedExpVerified": 4,
+   "expVerified": 33
+  },
+  "calculus-limits-series": {
+   "n": 70,
+   "exact": 7,
+   "exactPct": 10,
+   "acceptableAlt": 0,
+   "falseAcceptances": 0,
+   "falseRejections": 29,
+   "falseRejectionsAsInvalid": 0,
+   "engineUnsupported": 56,
+   "engineUnsupportedWhereExpVerified": 23,
+   "errors": 0,
+   "verifiedExpVerified": 1,
+   "expVerified": 30
+  },
+  "other-domains": {
+   "n": 100,
+   "exact": 21,
+   "exactPct": 21,
+   "acceptableAlt": 0,
+   "falseAcceptances": 0,
+   "falseRejections": 33,
+   "falseRejectionsAsInvalid": 3,
+   "engineUnsupported": 42,
+   "engineUnsupportedWhereExpVerified": 16,
+   "errors": 0,
+   "verifiedExpVerified": 7,
+   "expVerified": 40
+  },
+  "geometry": {
+   "n": 83,
+   "exact": 38,
+   "exactPct": 45.8,
+   "acceptableAlt": 0,
+   "falseAcceptances": 2,
+   "falseRejections": 23,
+   "falseRejectionsAsInvalid": 3,
+   "engineUnsupported": 34,
+   "engineUnsupportedWhereExpVerified": 18,
+   "errors": 0,
+   "verifiedExpVerified": 13,
+   "expVerified": 36
+  },
+  "typed-routes": {
+   "n": 100,
+   "exact": 54,
+   "exactPct": 54,
+   "acceptableAlt": 1,
+   "falseAcceptances": 2,
+   "falseRejections": 27,
+   "falseRejectionsAsInvalid": 9,
+   "engineUnsupported": 19,
+   "engineUnsupportedWhereExpVerified": 11,
+   "errors": 0,
+   "verifiedExpVerified": 26,
+   "expVerified": 53
+  }
+ },
+ "byTag": {
+  "algA": {
+   "n": 85,
+   "FA": 1,
+   "FR": 27,
+   "exact": 38
+  },
+  "concise": {
+   "n": 44,
+   "FA": 0,
+   "FR": 23,
+   "exact": 21
+  },
+  "method": {
+   "n": 8,
+   "FA": 0,
+   "FR": 8,
+   "exact": 0
+  },
+  "conditional": {
+   "n": 37,
+   "FA": 0,
+   "FR": 19,
+   "exact": 4
+  },
+  "side-claim": {
+   "n": 53,
+   "FA": 0,
+   "FR": 21,
+   "exact": 15
+  },
+  "extraneous": {
+   "n": 10,
+   "FA": 0,
+   "FR": 2,
+   "exact": 3
+  },
+  "dependent": {
+   "n": 18,
+   "FA": 0,
+   "FR": 0,
+   "exact": 8
+  },
+  "coincidence": {
+   "n": 26,
+   "FA": 2,
+   "FR": 0,
+   "exact": 8
+  },
+  "unsupported": {
+   "n": 7,
+   "FA": 0,
+   "FR": 0,
+   "exact": 6
+  },
+  "expand": {
+   "n": 5,
+   "FA": 0,
+   "FR": 1,
+   "exact": 2
+  },
+  "different-method": {
+   "n": 12,
+   "FA": 0,
+   "FR": 8,
+   "exact": 4
+  },
+  "factor": {
+   "n": 6,
+   "FA": 0,
+   "FR": 4,
+   "exact": 1
+  },
+  "system": {
+   "n": 6,
+   "FA": 0,
+   "FR": 4,
+   "exact": 0
+  },
+  "rational": {
+   "n": 7,
+   "FA": 0,
+   "FR": 3,
+   "exact": 2
+  },
+  "domain": {
+   "n": 16,
+   "FA": 1,
+   "FR": 2,
+   "exact": 3
+  },
+  "log": {
+   "n": 9,
+   "FA": 0,
+   "FR": 4,
+   "exact": 0
+  },
+  "surd": {
+   "n": 4,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "word": {
+   "n": 5,
+   "FA": 0,
+   "FR": 3,
+   "exact": 0
+  },
+  "cases": {
+   "n": 4,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "inequality": {
+   "n": 5,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "forged": {
+   "n": 8,
+   "FA": 0,
+   "FR": 0,
+   "exact": 0
+  },
+  "wrong-rule": {
+   "n": 6,
+   "FA": 0,
+   "FR": 0,
+   "exact": 1
+  },
+  "sign": {
+   "n": 8,
+   "FA": 0,
+   "FR": 0,
+   "exact": 4
+  },
+  "domain-implied": {
+   "n": 4,
+   "FA": 0,
+   "FR": 0,
+   "exact": 4
+  },
+  "chain-omission": {
+   "n": 8,
+   "FA": 0,
+   "FR": 0,
+   "exact": 7
+  },
+  "forged-rewrite": {
+   "n": 4,
+   "FA": 0,
+   "FR": 0,
+   "exact": 4
+  },
+  "alt-route": {
+   "n": 6,
+   "FA": 0,
+   "FR": 5,
+   "exact": 1
+  },
+  "chain-factor": {
+   "n": 5,
+   "FA": 0,
+   "FR": 0,
+   "exact": 1
+  },
+  "divergence": {
+   "n": 4,
+   "FA": 0,
+   "FR": 0,
+   "exact": 0
+  },
+  "no-constant": {
+   "n": 4,
+   "FA": 0,
+   "FR": 0,
+   "exact": 1
+  },
+  "abs-value": {
+   "n": 5,
+   "FA": 0,
+   "FR": 0,
+   "exact": 0
+  },
+  "stops-early": {
+   "n": 7,
+   "FA": 0,
+   "FR": 0,
+   "exact": 1
+  },
+  "infinity": {
+   "n": 5,
+   "FA": 0,
+   "FR": 3,
+   "exact": 0
+  },
+  "one-sided": {
+   "n": 5,
+   "FA": 0,
+   "FR": 3,
+   "exact": 0
+  },
+  "taylor": {
+   "n": 4,
+   "FA": 0,
+   "FR": 1,
+   "exact": 0
+  },
+  "squeeze": {
+   "n": 5,
+   "FA": 0,
+   "FR": 4,
+   "exact": 0
+  },
+  "epsilon-delta": {
+   "n": 6,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "wrong-theorem": {
+   "n": 13,
+   "FA": 0,
+   "FR": 0,
+   "exact": 8
+  },
+  "probability": {
+   "n": 29,
+   "FA": 0,
+   "FR": 7,
+   "exact": 17
+  },
+  "complement": {
+   "n": 4,
+   "FA": 0,
+   "FR": 1,
+   "exact": 2
+  },
+  "wrong-formula": {
+   "n": 18,
+   "FA": 0,
+   "FR": 0,
+   "exact": 3
+  },
+  "incomplete": {
+   "n": 6,
+   "FA": 0,
+   "FR": 0,
+   "exact": 2
+  },
+  "alt-method": {
+   "n": 16,
+   "FA": 0,
+   "FR": 16,
+   "exact": 0
+  },
+  "linear-algebra": {
+   "n": 18,
+   "FA": 0,
+   "FR": 6,
+   "exact": 5
+  },
+  "determinant": {
+   "n": 5,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "complex": {
+   "n": 21,
+   "FA": 0,
+   "FR": 5,
+   "exact": 11
+  },
+  "trig": {
+   "n": 16,
+   "FA": 0,
+   "FR": 5,
+   "exact": 1
+  },
+  "equation": {
+   "n": 7,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "value": {
+   "n": 4,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "identity": {
+   "n": 4,
+   "FA": 0,
+   "FR": 1,
+   "exact": 0
+  },
+  "explog": {
+   "n": 12,
+   "FA": 0,
+   "FR": 4,
+   "exact": 0
+  },
+  "exponential": {
+   "n": 5,
+   "FA": 0,
+   "FR": 2,
+   "exact": 0
+  },
+  "seq": {
+   "n": 12,
+   "FA": 0,
+   "FR": 5,
+   "exact": 1
+  },
+  "radical": {
+   "n": 9,
+   "FA": 0,
+   "FR": 3,
+   "exact": 0
+  },
+  "valid": {
+   "n": 31,
+   "FA": 0,
+   "FR": 18,
+   "exact": 13
+  },
+  "reordered": {
+   "n": 5,
+   "FA": 0,
+   "FR": 5,
+   "exact": 0
+  },
+  "stop-early": {
+   "n": 8,
+   "FA": 0,
+   "FR": 0,
+   "exact": 4
+  },
+  "bad-step": {
+   "n": 6,
+   "FA": 0,
+   "FR": 0,
+   "exact": 4
+  },
+  "missing-justification": {
+   "n": 4,
+   "FA": 0,
+   "FR": 0,
+   "exact": 2
+  },
+  "route-equivalence": {
+   "n": 30,
+   "FA": 0,
+   "FR": 9,
+   "exact": 13
+  },
+  "typed": {
+   "n": 70,
+   "FA": 2,
+   "FR": 19,
+   "exact": 40
+  },
+  "text": {
+   "n": 10,
+   "FA": 0,
+   "FR": 5,
+   "exact": 2
+  },
+  "text-lines": {
+   "n": 15,
+   "FA": 0,
+   "FR": 3,
+   "exact": 9
+  },
+  "natural": {
+   "n": 5,
+   "FA": 0,
+   "FR": 0,
+   "exact": 3
+  },
+  "dropped-branch": {
+   "n": 4,
+   "FA": 0,
+   "FR": 0,
+   "exact": 0
+  },
+  "typed-relevance": {
+   "n": 5,
+   "FA": 0,
+   "FR": 1,
+   "exact": 3
+  },
+  "symbolic": {
+   "n": 5,
+   "FA": 0,
+   "FR": 1,
+   "exact": 4
+  },
+  "geometry": {
+   "n": 4,
+   "FA": 0,
+   "FR": 1,
+   "exact": 0
+  }
+ },
+ "confusion": {
+  "verified->verified": 83,
+  "verified->unsupported": 119,
+  "verified->malformed": 61,
+  "verified->incomplete": 4,
+  "invalid->invalid": 89,
+  "invalid->incomplete": 6,
+  "invalid->malformed": 37,
+  "invalid->verified": 2,
+  "invalid->unsupported": 78,
+  "missing-assumption->unsupported": 26,
+  "missing-assumption->malformed": 8,
+  "incomplete->incomplete": 34,
+  "incomplete->malformed": 10,
+  "ambiguous->ambiguous": 4,
+  "unsupported->unsupported": 10,
+  "incomplete->unsupported": 36,
+  "unsupported->malformed": 1,
+  "verified->ambiguous": 9,
+  "verified->invalid": 18,
+  "missing-assumption->missing-assumption": 8,
+  "missing-assumption->invalid": 4,
+  "missing-assumption->incomplete": 5,
+  "incomplete->invalid": 1,
+  "ambiguous->unsupported": 3,
+  "invalid->ambiguous": 4,
+  "missing-assumption->ambiguous": 5,
+  "incomplete->verified": 2,
+  "verified->missing-assumption": 4,
+  "invalid->missing-assumption": 3,
+  "incomplete->missing-assumption": 2,
+  "ambiguous->invalid": 1,
+  "missing-assumption->verified": 1
+ },
+ "provenance": {
+  "verified": 88,
+  "failures": 0,
+  "failureIds": [],
+  "mechanismsUsed": {
+   "u4+exact-solution-set": 18,
+   "u4-kernel": 12,
+   "e6-independent-exact": 21,
+   "e5-independent-geocalc": 15,
+   "calculus:exact": 11,
+   "symbolic:m3": 2,
+   "linear-algebra:b2": 3,
+   "probability-statistics:b1": 3,
+   "complex-polynomial:b3": 3
+  },
+  "certificationRules": {
+   "single-route": 317,
+   "accepted-by-obligations": 47,
+   "no-route-decided": 196,
+   "ambiguous-reading": 16,
+   "disproven-claim": 63,
+   "open-obligations": 36,
+   "side-claims-excluded": 1,
+   "kernel-contradiction": 1,
+   "missing-constant-contract": 1
+  }
+ },
+ "perf": {
+  "p50": 1.23,
+  "p95": 10.81,
+  "p99": 22.41,
+  "max": 179.43,
+  "totalSec": 2
+ }
+}
