@@ -21,6 +21,7 @@ import { bindClaimsDetailed, replaySymbolicSteps } from "./claim-binding.ts";
 import { ACCEPTANCE_GATE_CONTRACT, checkerStatusToStep, checkerSummary, evidenceFromCheck, reconcileAlgebra, type AcceptanceGateRecord, type BindingEvidence, type GateEvidenceItem, type GateLevel } from "./acceptance-gate.ts";
 import { checkAlgebraSubmission } from "./independent-checker.ts";
 import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geocalc-e5.ts";
+import { buildObligations, type ObligationSet } from "./proof-obligations.ts";
 import { buildProofContext, relateStudentRestriction, routeUse, withProved, withStudent, withUnresolved, type ProofContext, type RouteUse } from "./proof-context.ts";
 import { GENERALIZATION_E6_CONTRACT, planGeneralizationE6 } from "./natural-generalization-e6.ts";
 import { polyAntiderivative, polyOf, polyToExpr } from "./calculus-binder-e5.ts";
@@ -521,13 +522,20 @@ function certifyClaims(problem: MathematicalProblem, working: StudentWorking, ca
   });
   // E7 Phase 4: the certification boundary re-checks that every route saw the SAME context and reports what the context holds with provenance kinds kept apart
   const uses = ((cand.domainPayload as { proofContextUse?: RouteUse[] } | undefined)?.proofContextUse) ?? [];
+  // E7 Phase 5: per-claim obligations. Only fully proven (and grounded) claims become proved facts; unsupported / unresolved / disproven ones never do.
+  const obs: ObligationSet = buildObligations({
+    text: working.text, claims: lv.ledger.claims.map((c) => ({ line: c.line, start: c.start, end: c.end, text: c.text, kind: c.kind, outcome: c.outcome, reason: c.reason })), relations: lv.relations,
+    records: payload.lineAccount ? payload.lineAccount.records.map((r) => ({ role: r.role, text: r.text, id: r.id, line: r.line, span: r.span, status: r.status, dependencies: r.dependencies, premiseEligible: r.premiseEligible, reason: r.reason })) : [],
+    evidence: cand.acceptanceGate?.evidence ?? [], grounded: uses.flatMap((u) => u.grounded ?? []),
+    verdict: { classification: cand.classification, complete: cand.complete, independentlyVerified: cand.acceptanceGate?.independentlyVerified ?? false, route: cand.acceptanceGate?.route ?? "natural-other", justification: cand.justification },
+  });
   const finalCtx = withUnresolved(
-    withStudent(withProved(ctx0, evid.filter((e) => e.grounding?.relevant).map((e) => ({ ref: `line-${e.line}`, text: e.claim }))), lv.relations.map((r) => ({ text: r.text, line: r.line, relation: r.relation as never, coveredBranches: r.coveredBranches, obligation: r.obligation }))),
+    withStudent(withProved(ctx0, obs.proved), lv.relations.map((r) => ({ text: r.text, line: r.line, relation: r.relation as never, coveredBranches: r.coveredBranches, obligation: r.obligation }))),
     uses.flatMap((u) => u.grounded ?? []).flatMap((e) => e.grounding.sources.filter((x) => x.kind === "student-assumption").map((x) => ({ text: `the working relies on the quantity ${x.ref}; nothing in the task supplies it, so it is a missing scenario premise, not evidence`, origin: `line-${e.line}` }))));
   const ctxReport = { contract: finalCtx.contract, taskDigest: finalCtx.digest, routesShareContext: uses.every((u) => u.contextDigest === finalCtx.digest), routes: uses,
     task: { premises: finalCtx.premises.length, restrictions: finalCtx.restrictions, domainBranches: finalCtx.branches, assumptions: finalCtx.assumptions, impliedRestrictions: finalCtx.implied.map((i) => i.text), unreadable: finalCtx.unreadable },
     provedFacts: finalCtx.proved.map((i) => ({ origin: i.origin, text: i.text })), studentAssumptions: finalCtx.student, unresolvedPremises: finalCtx.unresolved.map((i) => ({ origin: i.origin, text: i.text })) };
-  const withLedger = (c: AssessmentEnvelope): AssessmentEnvelope => ({ ...c, domainPayload: { ...(c.domainPayload && typeof c.domainPayload === "object" ? c.domainPayload : {}), claimLedger: { contract: CLAIM_LEDGER_CONTRACT, claims: provenance }, proofContext: ctxReport } });
+  const withLedger = (c: AssessmentEnvelope): AssessmentEnvelope => ({ ...c, domainPayload: { ...(c.domainPayload && typeof c.domainPayload === "object" ? c.domainPayload : {}), claimLedger: { contract: CLAIM_LEDGER_CONTRACT, claims: provenance }, proofContext: ctxReport, proofObligations: obs } });
   if (lv.disproven.length && ["verified", "incomplete", "missing-assumption"].includes(cand.classification)) {
     const c = lv.disproven[0], idx = Math.max(0, cand.steps.findIndex((s) => s.source?.line === c.line));
     const steps = cand.steps.map((s, k) => (k === idx ? { ...s, classification: "invalid" as Classification, justification: c.reason } : s));
@@ -536,6 +544,10 @@ function certifyClaims(problem: MathematicalProblem, working: StudentWorking, ca
   if (cand.classification === "verified" && lv.unfinished.length && !lv.blocking.length) {
     const u = lv.unfinished[0], why = `line ${u.line} states that the working is unfinished ("${u.text}")`;
     return withLedger({ ...cand, classification: "incomplete", correct: null, complete: false, justification: why, outstandingObligations: [...cand.outstandingObligations, why], acceptanceGate: cand.acceptanceGate ? { ...cand.acceptanceGate, verdict: "incomplete", obligations: [why] } : cand.acceptanceGate });
+  }
+  if (cand.classification === "verified" && !lv.blocking.length && obs.blocking.length) {
+    const o = obs.blocking[0], why = `proof obligation ${o.id} (${o.kind}, line ${o.line ?? "-"}) is ${o.status}: ${o.reason}`;
+    return withLedger(withdrawAcceptance(cand, (cand.acceptanceGate?.route ?? "natural-other") as AcceptanceGateRecord["route"], "downgraded-unresolved-lines", why, cand.acceptanceGate?.evidence ?? []));
   }
   if (cand.classification !== "verified" || !lv.blocking.length) return withLedger(cand);
   const why = `claim accounting: ${lv.blocking.length} recognized claim(s) are not proven (line ${lv.blocking[0].line}: ${lv.blocking[0].reason})`;

@@ -273,6 +273,7 @@ interface Spec {
   mustMentionAny?: boolean;
   unsupported?: string;
   datumResult?: Cx;          // E7: the quantity the task's own data states directly (a chain that ends by restating it is anchored to the data)
+  facts?: Cx[];              // E7 Phase 5: task quantities the kernel computes from the premises BEFORE the answer (the discriminant): a calculation that reproduces one is about the task
   witness?: (v: Cx) => boolean; // E7: a value that provably satisfies the task's own condition (e.g. a root of the task polynomial)
   given: Cx[];             // the problem's own data values, so a restatement of a datum is not mistaken for an answer
   answerLike?: RegExp;
@@ -387,8 +388,8 @@ function specOf(p: NumProblem): Spec {
       const [a, b, c] = coefs; const disc = csub(cmul(b, b), cmul(cx(q(4)), cmul(a, c))); const s = csqrt(disc);
       const r1 = cdiv(cadd(cneg(b), s), cmul(cx(q(2)), a)), r2 = cdiv(csub(cneg(b), s), cmul(cx(q(2)), a));
       const nonReal = !qiszero(r1.im) || !qiszero(r2.im);
-      if (nonReal && d.numberDomain !== "complex" && p.coefficientDomain === "real" && !(p.assumptions ?? []).includes("complex-roots")) return base([], { setValued: true, aux: true, noRealRoots: true, labels: /^(?:x|z|roots?|solutions?|x_?[12]|z_?[12]|answer)$/i });
-      return base(ceq(r1, r2) ? [r1] : [r1, r2], { setValued: true, aux: true, realRootExists: !nonReal, labels: /^(?:x|z|roots?|solutions?|x_?[12]|z_?[12]|answer)$/i });
+      if (nonReal && d.numberDomain !== "complex" && p.coefficientDomain === "real" && !(p.assumptions ?? []).includes("complex-roots")) return base([], { facts: [disc], setValued: true, aux: true, noRealRoots: true, labels: /^(?:x|z|roots?|solutions?|x_?[12]|z_?[12]|answer)$/i });
+      return base(ceq(r1, r2) ? [r1] : [r1, r2], { facts: [disc], witness: (w) => { const r = polyAt(coefs, w); return qiszero(r.re) && qiszero(r.im); }, setValued: true, aux: true, realRootExists: !nonReal, labels: /^(?:x|z|roots?|solutions?|x_?[12]|z_?[12]|answer)$/i });
     }
     case "principal-argument": return base([], { unsupported: "principal arguments are irrational multiples of pi, outside the exact number-chain binder" });
     case "complex-log": return base([], { unsupported: "complex logarithms are multi-valued and outside the exact number-chain binder" });
@@ -432,16 +433,32 @@ const cconjV = (v: Cx): Cx => cx(v.re, qsub(Z, v.im));
 const cnegV = (v: Cx): Cx => cx(qsub(Z, v.re), qsub(Z, v.im));
 /** where the numbers and symbols of a derivation's starting expression come from: task premises, earlier relevant lines, or nowhere */
 /** a number that is one arithmetic step (+ − × ÷) away from two task premises is explained by them (e.g. 8 − 3 = 5 from 8 and 3) */
-function oneStep(v: Cx, premises: { key: string; value: Cx }[]): string | null {
-  for (const a of premises) for (const b of premises) {
-    if (a.key === b.key) continue; // two DIFFERENT premises: x+x or x*x of one datum would explain almost any number
+function oneStep(v: Cx, premises: { key: string; value: Cx }[], established: { ref: string; value: Cx }[] = []): string | null {
+  // an offset of a datum by a unit step (n-1, n-2, n+1: descending factors, complements, off-by-one counts) and an exact square root of a datum or earlier result
+  const base = [...premises.map((p) => ({ key: p.key, value: p.value })), ...established.map((e) => ({ key: e.ref, value: e.value }))];
+  for (const a of base) {
+    for (const d of [1, 2]) for (const sg of [1, -1]) { const t = cadd(a.value, cx(q(sg * d))); if (ceq(t, v)) return `${a.key} ${sg > 0 ? "+" : "-"} ${d}`; }
+    for (const sv of [a.value, cneg(a.value)]) { let r: Cx | null = null; try { r = csqrt(sv); } catch { r = null; } if (r && (ceq(r, v) || ceq(cneg(r), v))) return `square root of ${a.key}`; }
+  }
+  return oneStepPair(v, premises);
+}
+function oneStepPair(v: Cx, premises: { key: string; value: Cx }[]): string | null {
+  const real = premises.filter((p) => qiszero(p.value.im));
+  // a monomial of degree <= 3 in the data times a small constant (b^2, 4ac, 2a): it is how data enter a formula, so such a number is EXPLAINED by the data (it never relates the calculation to the task by itself)
+  const factors = [{ key: "1", value: cx(q(1)) }, ...real];
+  for (const k of [1, 2, 4]) for (const a of factors) for (const b of factors) for (const c of factors) {
+    const m = cmul(cmul(cmul(cx(q(k)), a.value), b.value), c.value);
+    if (ceq(m, v) || ceq(m, cneg(v))) return `${k === 1 ? "" : k + "*"}${[a, b, c].filter((x) => x.key !== "1").map((x) => x.key).join("*") || "1"}`;
+  }
+  for (const a of real) for (const b of real) {
+    if (a.key === b.key) continue; // two DIFFERENT premises
     const hit = (r: Cx | null, op: string) => (r && ceq(r, v) ? `${a.key} ${op} ${b.key}` : null);
-    const r = hit(cadd(a.value, b.value), "+") ?? hit(csub(a.value, b.value), "-") ?? hit(cmul(a.value, b.value), "*") ?? (b.value.re.n !== 0n || b.value.im.n !== 0n ? hit(cdiv(a.value, b.value), "/") : null);
+    const r = hit(cadd(a.value, b.value), "+") ?? hit(csub(a.value, b.value), "-") ?? (b.value.re.n !== 0n ? hit(cdiv(a.value, b.value), "/") : null);
     if (r) return r;
   }
   return null;
 }
-function sourcesOf(first: NAst, env: Map<string, Cx>, dataSyms: Set<string>, relevantDefs: Set<string>, premises: { key: string; value: Cx }[], established: { ref: string; value: Cx }[], witness?: (v: Cx) => boolean, stated: { ref: string; value: Cx }[] = []): GroundingSource[] {
+function sourcesOf(first: NAst, env: Map<string, Cx>, dataSyms: Set<string>, relevantDefs: Set<string>, premises: { key: string; value: Cx }[], established: { ref: string; value: Cx }[], witness?: (v: Cx) => boolean, stated: { ref: string; value: Cx }[] = [], facts: Cx[] = []): GroundingSource[] {
   const out: GroundingSource[] = [];
   const walk = (a: NAst): void => {
     if (a.t === "i") return;
@@ -449,16 +466,24 @@ function sourcesOf(first: NAst, env: Map<string, Cx>, dataSyms: Set<string>, rel
     if (symsOf(a).size === 0) {
       let v: Cx | null = null; try { v = evalN(a, new Map()); } catch { v = null; }
       if (v) {
+        if (!trivialValue(v) && facts.some((f) => ceq(f, v))) { out.push({ kind: "derived-fact", ref: "a quantity the kernel computes from the task premises", by: "value", trivial: false }); return; }
         if (witness && !trivialValue(v) && witness(v)) { out.push({ kind: "derived-fact", ref: "satisfies the task's own polynomial", by: "value", trivial: false }); return; }
         const est = established.find((e) => ceq(e.value, v!)); // any closed sub-expression may restate an earlier derived fact
         if (est) { out.push({ kind: "derived-fact", ref: est.ref, by: "value", trivial: trivialValue(v) }); return; }
         const whole = !qiszero(v.im) ? premises.find((x) => ceq(x.value, v!) || ceq(x.value, cconjV(v!))) : undefined; // a complex closed form equal to a complex datum is a restatement of it
         if (whole) { out.push({ kind: "task-premise", ref: whole.key, by: "value", trivial: false }); return; }
+        // a closed form that evaluates to a task datum which is a non-integer rational, or an integer of size >= 10, reproduces that datum (10^4, C(8,2), 1/4): a coincidence is unlikely at that size.
+        // 1 - p for a rational probability p is the complement of a datum (derived).
+        const big = (x: Cx) => qiszero(x.im) && (x.re.d !== 1n || (x.re.n >= 10n || x.re.n <= -10n));
+        const cm = a.t !== "num" ? premises.find((x) => big(x.value) && ceq(x.value, v!)) : undefined;
+        if (cm) { out.push({ kind: "task-premise", ref: cm.key, by: "value", trivial: false }); return; }
+        const comp = a.t !== "num" && qiszero(v.im) && v.re.d !== 1n ? premises.find((x) => qiszero(x.value.im) && x.value.re.d !== 1n && ceq(csub(cx(q(1)), x.value), v!)) : undefined;
+        if (comp) { out.push({ kind: "derived-fact", ref: `1 - ${comp.key}`, by: "value", trivial: false, derived: true }); return; }
         if (a.t === "num") { // only a plain numeral is matched against the premises: a compound sub-expression that happens to equal a datum proves nothing
           const pr = premises.find((x) => ceq(x.value, v!) || ceq(x.value, cnegV(v!)));
           const st = !pr ? stated.find((x) => ceq(x.value, v!)) : undefined;
           if (st) { out.push({ kind: "student-assumption", ref: `${cxText(v!)} ${st.ref}`, by: "value", trivial: trivialValue(v!) }); return; }
-          const one = !pr && !trivialValue(v!) ? oneStep(v!, premises) : null;
+          const one = !pr && !trivialValue(v!) ? oneStep(v!, premises, established) : null;
           if (one) { out.push({ kind: "derived-fact", ref: one, by: "value", trivial: false, derived: true }); return; }
           out.push(pr ? { kind: "task-premise", ref: pr.key, by: "value", trivial: trivialValue(v) } : { kind: "free-literal", ref: cxText(v), by: "value", trivial: trivialValue(v) });
           return;
@@ -598,17 +623,18 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
     }
     // E7: a numeric match is not an answer. The line must name the requested quantity (or be unlabelled / a bare variable); a value merely equal to the truth under an unrelated label proves nothing.
     const labelRaw = (texts[0] ?? "").trim(), taskWords = new Set(String(spec.family).toLowerCase().split(/[^a-z]+/).filter((w) => w.length > 2)), labelWords = (labelRaw.toLowerCase().match(/[a-z]{3,}/g) ?? []).filter((w) => !["the", "of", "and", "for", "var", "cov", "sin", "cos", "tan", "log", "exp", "sqrt", "abs"].includes(w));
-    const srcs = sourcesOf(members[0], env, dataSyms, relevantDefs, premises, established, spec.witness, rows.slice(0, i).flatMap((r, k) => (b.records[k]?.judge.nonMath ? (r.plain.match(/\d+(?:\.\d+)?/g) ?? []).flatMap((t) => { try { return [{ ref: `stated in line ${k + 1}`, value: cv(t) }]; } catch { return []; } }) : [])));
+    const srcs = sourcesOf(members[0], env, dataSyms, relevantDefs, premises, established, spec.witness, rows.slice(0, i).flatMap((r, k) => (b.records[k]?.judge.nonMath ? (r.plain.match(/\d+(?:\.\d+)?/g) ?? []).flatMap((t) => { try { return [{ ref: `stated in line ${k + 1}`, value: cv(t) }]; } catch { return []; } }) : [])), spec.facts);
     if (spec.datumResult && members.length > 1) { let lv: Cx | null = null; try { lv = symsOf(members[members.length - 1]).size === 0 ? evalN(members[members.length - 1], new Map()) : null; } catch { lv = null; } if (lv && ceq(lv, spec.datumResult)) srcs.push({ kind: "task-premise", ref: "the probability stated by the task data", by: "value", trivial: false }); }
     let grounding = assessRelevance(srcs);
     // a chain that passes THROUGH a step built only from the task's data (e.g. 48/120 for a task whose data are 48 and 120) is anchored to the task by that step; the final member is excluded because it is the answer itself
-    if (!grounding.relevant && members.length >= 3) for (let k = 1; k < members.length - 1 && !grounding.relevant; k++) { const g2 = assessRelevance(sourcesOf(members[k], env, dataSyms, relevantDefs, premises, established, spec.witness)); if (g2.relevant && g2.sources.some((x) => x.by === "value" && !x.trivial && !x.derived)) grounding = { ...g2, reason: `an intermediate step is built from the task data (${g2.reason}) and the chain is verified equal across it` }; }
+    if (!grounding.relevant && members.length >= 3) for (let k = 1; k < members.length - 1 && !grounding.relevant; k++) { const g2 = assessRelevance(sourcesOf(members[k], env, dataSyms, relevantDefs, premises, established, spec.witness, [], spec.facts)); if (g2.relevant && g2.sources.some((x) => x.by === "value" && !x.trivial && !x.derived)) grounding = { ...g2, reason: `an intermediate step is built from the task data (${g2.reason}) and the chain is verified equal across it` }; }
     const labelBound = label !== null && (answerRe.test(label) || answerRe.test(labelRaw) || (label !== null && ANSWER_WORD.test(label.trim())) || (label !== null && /^[A-Za-z][0-9]?$/.test(label.trim()) && !env.has(label)) || (labelWords.length === 0 || labelWords.every((w) => taskWords.has(w) || w === "roots" || w === "root" || w === "value")));
-    const answerBound = label === null ? grounding.relevant : labelBound; // E7: an unlabelled calculation must come from the task; a labelled one is bound by its label (the method's own steps, e.g. descending factors or a square root, are not premises)
+    const answerBound = label === null ? grounding.relevant : members.length > 1 ? labelBound && grounding.relevant : labelBound; // E7 Phase 5: a SHOWN derivation must itself be justified from the task, whatever it is labelled; a bare `label = value` is an answer statement judged against the kernel's own value
     if (j.status === "valid" && canon && !answerBound && spec.truth.some((t) => ceq(t, lastVal))) j = incomplete(label === null || labelBound
       ? `this calculation reaches the right value, but nothing in it comes from the problem's data or from an earlier verified result (${grounding.reason}); its relevance to the requested quantity is not established, so show how the quantity follows from the givens`
       : `this line names "${label}", which is not the requested quantity; state the requested quantity by name`);
     if (j.status === "valid" && canon) { found.push(lastVal); if (spec.truth.some((t) => ceq(t, lastVal))) { sawAnswerClaim = true; finalRow = i; } }
+    grounding = { ...grounding, required: label === null || members.length > 1 };
     if (j.status !== "valid") j = { ...j, grounding };
     if (j.status === "valid") { j = { ...j, grounding }; if (grounding.relevant) { vals.forEach((v) => established.push({ ref: `line-${i + 1}`, value: v })); if (label !== null) relevantDefs.add(label); } }
     b.add(i, j);

@@ -14,7 +14,7 @@ const S: [string, string, any, string[]][] = [
   ["irrelevant", "Vieta product: student-chosen numbers in prose", VP, ["Let the numbers be 10 and 4", "10/4 = 5/2"]],
   ["irrelevant", "mean: 20/4 = 5", MEAN, ["20/4 = 5"]],
   ["irrelevant", "mean: (9+9+7)/5 = 5", MEAN, ["(9+9+7)/5 = 5"]],
-  ["irrelevant", "finite probability: 6/16 = 3/8", FIN, ["6/16 = 3/8"]],
+  ["irrelevant", "finite probability: 15/40 = 3/8", FIN, ["15/40 = 3/8"]],
   // wrong quantity, right number
   ["wrong-quantity", "Vieta product: sum of roots = 5/2", VP, ["sum of roots = 5/2"]],
   ["wrong-quantity", "Vieta sum: product of roots = 3", VS, ["product of roots = 3"]],

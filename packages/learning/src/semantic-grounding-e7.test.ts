@@ -18,7 +18,7 @@ describe("E7 Phase 3: correct but irrelevant arithmetic never certifies the task
     ["Vieta: student-chosen numbers introduced in prose", VP, ["Let the numbers be 10 and 4", "10/4 = 5/2"]],
     ["Vieta: the right value under the wrong quantity", VP, ["sum of roots = 5/2"]],
     ["mean: 20/4 = 5", MEAN, ["20/4 = 5"]],
-    ["finite probability: 6/16 = 3/8", FIN, ["6/16 = 3/8"]],
+    ["finite probability: 15/40 = 3/8", FIN, ["15/40 = 3/8"]],
     ["Vieta sum: a sum of unrelated numbers", VS, ["9/3 = 3"]],
   ];
   for (const [name, p, w] of irrelevant) test(name, async () => expect(await cls(p, w)).not.toBe("verified"));

@@ -14,7 +14,7 @@ import { canonicalizeMathematicalObject, type CanonicalMathematicalObject } from
 export const GROUNDING_CONTRACT = "openpath-claim-grounding@1" as const;
 export type SourceKind = "task-premise" | "derived-fact" | "student-assumption" | "free-literal";
 export interface GroundingSource { kind: SourceKind; ref: string; by: "symbol" | "value"; /** explained by one arithmetic step from task premises, not a premise itself */ derived?: boolean; /** a value such as 0, 1, 2: it matches too many things to relate a claim to the task by itself */ trivial: boolean }
-export interface Grounding { contract: typeof GROUNDING_CONTRACT; sources: GroundingSource[]; relevant: boolean; reason: string }
+export interface Grounding { contract: typeof GROUNDING_CONTRACT; sources: GroundingSource[]; relevant: boolean; reason: string; /** false for a bare `label = value` answer statement, which is judged against the kernel's own value instead of being derived */ required?: boolean }
 
 /**
  * Relevance of a derivation to the task. It is established by (a) a symbol bound to a task premise or to an earlier derived fact, or
