@@ -501,7 +501,15 @@ function certifyClaims(problem: MathematicalProblem, working: StudentWorking, ca
     ? payload.lineAccount.records.map((r) => ({ line: r.line, start: r.span.start, end: r.span.end, verified: r.status === "verified-valid" || r.status === "not-mathematical", credited: r.role === "claim-step" || r.role === "given-matched", reason: r.reason }))
     : cand.steps.filter((s) => s.source).map((s) => ({ line: s.source!.line, start: s.source!.start, end: s.source!.end, verified: s.classification === "verified", credited: true, reason: s.justification }));
   const lv = evaluateLedger(problem, working.text, records);
-  const withLedger = (c: AssessmentEnvelope): AssessmentEnvelope => ({ ...c, domainPayload: { ...(c.domainPayload && typeof c.domainPayload === "object" ? c.domainPayload : {}), claimLedger: { contract: CLAIM_LEDGER_CONTRACT, claims: lv.summary } } });
+  // E7 Phase 3: provenance of each claim. It is read from the grounding the checker recorded; a claim without recorded grounding is only "unrecorded" (never promoted)
+  const evid = ((cand.domainPayload && typeof cand.domainPayload === "object" ? (cand.domainPayload as { bindingEvidence?: BindingEvidence[] }).bindingEvidence : undefined) ?? []);
+  const provenance = lv.summary.map((c) => {
+    if (c.kind === "assumption") return { ...c, provenance: /task-supplied/.test(c.reason) ? "task-premise" : c.outcome === "proven" ? "student-assumption" : "unresolved" };
+    const g = evid.find((e) => e.line === c.line && e.grounding)?.grounding;
+    if (c.outcome !== "proven") return { ...c, provenance: "unsupported" };
+    return g ? { ...c, provenance: g.relevant ? "derived-from-task" : "ungrounded", grounding: { relevant: g.relevant, reason: g.reason, sources: g.sources.map((x) => `${x.kind}:${x.ref}`) } } : { ...c, provenance: "unrecorded" };
+  });
+  const withLedger = (c: AssessmentEnvelope): AssessmentEnvelope => ({ ...c, domainPayload: { ...(c.domainPayload && typeof c.domainPayload === "object" ? c.domainPayload : {}), claimLedger: { contract: CLAIM_LEDGER_CONTRACT, claims: provenance } } });
   if (lv.disproven.length && ["verified", "incomplete", "missing-assumption"].includes(cand.classification)) {
     const c = lv.disproven[0], idx = Math.max(0, cand.steps.findIndex((s) => s.source?.line === c.line));
     const steps = cand.steps.map((s, k) => (k === idx ? { ...s, classification: "invalid" as Classification, justification: c.reason } : s));

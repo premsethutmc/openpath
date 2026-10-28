@@ -9,13 +9,14 @@ import type { BindingEvidence } from "./acceptance-gate.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 import { normalize, splitEquals } from "./e6-parse.ts";
 import { extractLedger } from "./claim-ledger.ts";
+import type { Grounding } from "./claim-grounding.ts";
 
 export const GENERALIZATION_E6_CONTRACT = "openpath-natural-generalization-e6@1" as const;
 export const LIMITS = { characters: 8192, lines: 64, members: 10 } as const;
 export const E6_CHECKER = "e6-independent-exact" as const;
 
 export type JS = "valid" | "invalid" | "unsupported" | "missing-assumption" | "incomplete" | "ambiguous" | "malformed" | "resource-exhausted";
-export interface Judge { status: JS; reason: string; scope?: string; digest?: string | null; /** the line carries no mathematical claim: it earns NO verification credit and produces no evidence */ nonMath?: boolean }
+export interface Judge { status: JS; reason: string; scope?: string; digest?: string | null; /** the line carries no mathematical claim: it earns NO verification credit and produces no evidence */ nonMath?: boolean; /** E7: provenance of the claim (task premises / derived facts it rests on) */ grounding?: Grounding }
 export const ok = (reason: string, scope = "independent exact check", digest?: string | null): Judge => ({ status: "valid", reason, scope, digest: digest ?? null });
 export const nonMath = (reason: string): Judge => ({ status: "valid", reason, scope: "non-mathematical", digest: null, nonMath: true });
 export const bad = (reason: string): Judge => ({ status: "invalid", reason });
@@ -67,7 +68,7 @@ export class Builder {
     const line = this.parsed.lines[index];
     const deps = dependsOn === "prev" ? (index ? [this.parsed.lines[index - 1].id] : []) : dependsOn.map((i) => this.parsed.lines[i].id);
     const evidence: BindingEvidence | null = judge.status === "valid" && !judge.nonMath
-      ? { lineId: line.id, line: line.source.line, claim: line.source.text, checker: E6_CHECKER, destination: this.destination, scope: judge.scope ?? "independent exact check", outcome: "verified", detail: judge.reason, digest: judge.digest ?? digestOf([line.source.text, judge.reason]) }
+      ? { lineId: line.id, line: line.source.line, claim: line.source.text, checker: E6_CHECKER, destination: this.destination, scope: judge.scope ?? "independent exact check", outcome: "verified", detail: judge.reason, digest: judge.digest ?? digestOf([line.source.text, judge.reason]), ...(judge.grounding ? { grounding: judge.grounding } : {}) }
       : null;
     this.records[index] = { id: line.id, judge, dependsOn: deps, evidence };
   }
