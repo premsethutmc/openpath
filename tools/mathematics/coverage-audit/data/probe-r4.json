@@ -1,0 +1,673 @@
+{
+ "integer": {
+  "families": [
+   "pow",
+   "afsolid",
+   "mul",
+   "ahiso",
+   "cint",
+   "addr",
+   "aasolid",
+   "aostd"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:spaces": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:trailing .0": {
+    "n": 40,
+    "credited": 10,
+    "rejected": 30,
+    "undecided": 0,
+    "examples": [
+     "afsolid: How many faces does a triangular prism have? | \"5.0\" stored \"5\" -> false",
+     "afsolid: A solid with flat faces has 8 faces and 18 edges. Using Eule | \"12.0\" stored \"12\" -> false"
+    ]
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:sign flip": {
+    "n": 40,
+    "credited": 1,
+    "rejected": 39,
+    "undecided": 0,
+    "examples": [
+     "aostd: [x] denotes the greatest integer less than or equal to x. Fi | \"-0\" stored \"0\" -> true"
+    ]
+   },
+   "unreadable": {
+    "n": 80,
+    "credited": 0,
+    "rejected": 60,
+    "undecided": 20,
+    "examples": []
+   }
+  }
+ },
+ "fraction": {
+  "families": [
+   "fadd",
+   "faddu",
+   "acmoneyadd",
+   "adfcmp",
+   "agrupee",
+   "aleval",
+   "ajinv",
+   "anbag"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:spaces": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:sign flip": {
+    "n": 40,
+    "credited": 1,
+    "rejected": 39,
+    "undecided": 0,
+    "examples": [
+     "aleval: Find the value of p(x) = x² − 4x + 3 at x = 1, that is, p(1) | \"-0\" stored \"0\" -> true"
+    ]
+   },
+   "alt:unreduced fraction (policy may reject)": {
+    "n": 26,
+    "credited": 26,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 80,
+    "credited": 0,
+    "rejected": 80,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:decimal form": {
+    "n": 10,
+    "credited": 10,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:same decimal": {
+    "n": 5,
+    "credited": 5,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "mixed": {
+  "families": [
+   "agmix",
+   "avfas",
+   "agpfrac",
+   "avlow",
+   "ajrstd"
+  ],
+  "tally": {
+   "stored": {
+    "n": 25,
+    "credited": 25,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 25,
+    "credited": 0,
+    "rejected": 25,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 50,
+    "credited": 0,
+    "rejected": 50,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "ratio": {
+  "families": [
+   "ajrat",
+   "aurat",
+   "amceva"
+  ],
+  "tally": {
+   "stored": {
+    "n": 15,
+    "credited": 15,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:spaced colon": {
+    "n": 15,
+    "credited": 15,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:slash ratio (policy)": {
+    "n": 15,
+    "credited": 0,
+    "rejected": 15,
+    "undecided": 0,
+    "examples": [
+     "ajrat: Write the ratio 12 : 24 in its simplest form. | \"1/2\" stored \"1:2\" -> false",
+     "ajrat: Write the ratio 39 : 143 in its simplest form. | \"3/11\" stored \"3:11\" -> false"
+    ]
+   },
+   "boundary-wrong:reversed ratio": {
+    "n": 15,
+    "credited": 1,
+    "rejected": 14,
+    "undecided": 0,
+    "examples": [
+     "amceva: In ΔABC, the lines AD, BE and CF meet at one point, with D o | \"1:1\" stored \"1:1\" -> true"
+    ]
+   },
+   "unreadable": {
+    "n": 30,
+    "credited": 0,
+    "rejected": 30,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "exact": {
+  "families": [
+   "surd",
+   "aedec",
+   "afmatch",
+   "amcshape",
+   "ampyrs",
+   "aologlaw",
+   "aiwheel",
+   "alchord"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:sqrt()/pi spelling": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:explicit *": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:sign flip": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 80,
+    "credited": 0,
+    "rejected": 80,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "tuple": {
+  "families": [
+   "aaorder",
+   "acelhm",
+   "adfordu",
+   "addur",
+   "aet24",
+   "aplpopt",
+   "aetrans",
+   "alrop"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:no brackets, no spaces": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:spaced brackets": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:reversed order": {
+    "n": 39,
+    "credited": 0,
+    "rejected": 39,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 80,
+    "credited": 0,
+    "rejected": 80,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "set": {
+  "families": [
+   "meet",
+   "quad",
+   "ajzero",
+   "approg",
+   "aeeven",
+   "aeineqz",
+   "agprime",
+   "agcomf"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:reordered": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:one element missing": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:extra element": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:braces": {
+    "n": 40,
+    "credited": 10,
+    "rejected": 30,
+    "undecided": 0,
+    "examples": [
+     "ajzero: Find the zeros of p(x) = x² − 16x + 63 by factorising. Type  | \"{7, 9}\" stored \"7,9\" -> false",
+     "ajzero: Find the zeros of p(x) = 8x² − 14x + 3 by factorising. Type  | \"{1/4, 3/2}\" stored \"1/4,3/2\" -> false"
+    ]
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 80,
+    "credited": 0,
+    "rejected": 60,
+    "undecided": 20,
+    "examples": []
+   }
+  }
+ },
+ "roots": {
+  "families": [
+   "armvt",
+   "apconj",
+   "atprinc",
+   "auqf"
+  ],
+  "tally": {
+   "stored": {
+    "n": 20,
+    "credited": 20,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:braces": {
+    "n": 20,
+    "credited": 20,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 20,
+    "credited": 0,
+    "rejected": 20,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:reordered": {
+    "n": 14,
+    "credited": 14,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:one element missing": {
+    "n": 14,
+    "credited": 0,
+    "rejected": 14,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:extra element": {
+    "n": 14,
+    "credited": 0,
+    "rejected": 14,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "interval": {
+  "families": [
+   "aorange",
+   "aoqin",
+   "lineq",
+   "aonlread",
+   "apintop",
+   "aqmono",
+   "armono",
+   "aodkr"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:spaces": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "boundary-wrong:closure flipped": {
+    "n": 40,
+    "credited": 3,
+    "rejected": 37,
+    "undecided": 0,
+    "examples": [
+     "aorange: Find the range of f : ℝ → ℝ, f(x) = −3x² − 36x − 108. Write  | \"[−∞, 0]\" stored \"(−∞, 0]\" -> true",
+     "aorange: Find the range of f : ℝ → ℝ, f(x) = −2x² + 8x − 3. Write it  | \"[−∞, 5]\" stored \"(−∞, 5]\" -> true"
+    ]
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 80,
+    "credited": 0,
+    "rejected": 80,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:interval notation for inequality": {
+    "n": 5,
+    "credited": 5,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "matrix": {
+  "families": [
+   "apmmul",
+   "aqtrab",
+   "apgj3",
+   "apinv2",
+   "auinv"
+  ],
+  "tally": {
+   "stored": {
+    "n": 25,
+    "credited": 25,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:no spaces": {
+    "n": 25,
+    "credited": 25,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 25,
+    "credited": 0,
+    "rejected": 25,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 50,
+    "credited": 0,
+    "rejected": 50,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "expression": {
+  "families": [
+   "apinvf",
+   "aqsep",
+   "aqfp",
+   "arlhop",
+   "asarg",
+   "dprod",
+   "argamma",
+   "armix"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:no spaces": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:explicit *": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 80,
+    "credited": 0,
+    "rejected": 80,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "antiderivative": {
+  "families": [
+   "aopfint",
+   "arpfint",
+   "aupfr",
+   "austd"
+  ],
+  "tally": {
+   "stored": {
+    "n": 20,
+    "credited": 20,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:without + C": {
+    "n": 20,
+    "credited": 20,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "alt:other constant": {
+    "n": 20,
+    "credited": 20,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 20,
+    "credited": 0,
+    "rejected": 20,
+    "undecided": 0,
+    "examples": []
+   },
+   "unreadable": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ },
+ "choice": {
+  "families": [
+   "aasenadd",
+   "aabig",
+   "al3cons",
+   "ajcrcmp",
+   "amterm",
+   "aawhere",
+   "amreason",
+   "acparl"
+  ],
+  "tally": {
+   "stored": {
+    "n": 40,
+    "credited": 40,
+    "rejected": 0,
+    "undecided": 0,
+    "examples": []
+   },
+   "wrong": {
+    "n": 40,
+    "credited": 0,
+    "rejected": 40,
+    "undecided": 0,
+    "examples": []
+   }
+  }
+ }
+}
