@@ -15,6 +15,8 @@ import type { SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
 import { familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
+import { decide } from "../../../packages/learning/src/session";
+import type { Assessment } from "../../../packages/learning/src/assessment";
 import { checkWorking, canCheckWorking } from "../../../packages/learning/src/working";
 import { Icon } from "./icons";
 import type { LearnerRecords, LearningActivity } from "../../../packages/learning/src/records";
@@ -27,7 +29,7 @@ export interface Ctx {
   now: number;
   session: string;
   saving: boolean;
-  answer: (qid: string, response: string, activity: LearningActivity, o?: { hints?: number; context?: string; working?: string[] }) => Promise<boolean>;
+  answer: (qid: string, response: string, activity: LearningActivity, o?: { hints?: number; context?: string; working?: string[]; clarifications?: number }) => Promise<boolean>;
   teach: (competency: string, strategy: string, rule: string) => Promise<boolean>;
 }
 export const STATUS_WORD: Record<SkillEvidence["status"], string> = {
@@ -63,6 +65,8 @@ export interface Fb {
   right: boolean;
   working?: string[];
   activity?: LearningActivity;
+  /** assessment@1: the decision behind `right`. credit null = undecided: the answer is saved, not marked wrong, and not counted either way. */
+  assessment?: Assessment;
 }
 
 const ANSWER_LABEL: Record<string, string> = {
@@ -128,14 +132,18 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry }: { fb: Fb; 
         <div className="actions sticky"><button className="primary" onClick={onNext}>{label}</button></div>
       </div>
     );
-  const says = fb.right ? null : misconceptionOf(q, fb.response)?.says;
+  const undecided = fb.assessment ? fb.assessment.credit === null : false;
+  const says = fb.right || undecided ? null : misconceptionOf(q, fb.response)?.says;
   const fam = fb.working?.length ? familyOf(fb.qid) : null;
   const check = fam ? checkWorking(problemOf(fam)!, fb.working!) : null;
   return (
     <div className="stack enter">
-      <div className={`feedback ${fb.right ? "good" : "bad"}`} role="status">
-        <strong>{fb.right ? "Right." : "Not this time."}</strong>
+      <div className={`feedback ${undecided ? "" : fb.right ? "good" : "bad"}`} role="status">
+        <strong>{undecided ? "Saved, not marked." : fb.right ? "Right." : "Not this time."}</strong>
+        {undecided && <p>{fb.assessment!.feedback.message}</p>}
+        {!undecided && fb.assessment?.evidence.firstError && <p>{fb.assessment.feedback.message}</p>}
         {says && <p>{says}</p>}
+        {fb.assessment?.clarification?.kind === "show-step" && !fb.working?.length && <p className="small muted">{fb.assessment.clarification.prompt}</p>}
         {(!onRetry || fb.right) && <p>{q.solution}</p>}
         {onRetry && !fb.right && <><p>Your answer and working are saved. A wrong answer alone does not tell us why.</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
       </div>
@@ -159,6 +167,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [hint, setHint] = useResume(resumeKey && `${resumeKey}:hint`, showHint);
   const [working, setWorking] = useResume(resumeKey && `${resumeKey}:working`, previous?.working?.join("\n") ?? "");
   const [workingOpen,setWorkingOpen] = useResume(resumeKey && `${resumeKey}:working-open`, !!working);
+  const [asked, setAsked] = useState(0);
+  const [clarify, setClarify] = useState<string | null>(null);
   const fam = familyOf(qid);
   const workable = !!fam && canCheckWorking(problemOf(fam)!);
   return (
@@ -168,6 +178,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       <p className="prompt">{q.prompt}</p>
       {q.figure && <Figure v={q.figure} />}
       <AnswerInput q={q} value={value} setValue={setValue} disabled={ctx.saving} />
+      {clarify && <p className="small" role="status">{clarify}</p>}
       {workable && (
         <details className="working" open={workingOpen} onToggle={e=>setWorkingOpen(e.currentTarget.open)}>
           <summary>Show your working (optional)</summary>
@@ -183,8 +194,13 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           disabled={!value.trim() || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
           onClick={async () => {
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
-            const ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}) });
-            if (ok) onAnswered?.({ qid, response: value, activity, right: isCorrect(q, value), ...(lines.length ? { working: lines } : {}) });
+            // one decision per submission (assessment@1): the answer box is graded first; an unreadable answer gets ONE short clarification, then it is saved as undecided
+            const a = needsMarking(q) ? null : decide(qid, value, lines, asked);
+            const ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) });
+            if (!ok) return;
+            if (a?.clarification && a.credit === null && a.feedback.kind === "clarify") { setAsked(asked + 1); setClarify(a.clarification.prompt); return; }
+            setClarify(null);
+            onAnswered?.({ qid, response: value, activity, right: a ? a.credit === true : isCorrect(q, value), ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
           }}
         >
           {ctx.saving ? "Saving…" : "Check"}
