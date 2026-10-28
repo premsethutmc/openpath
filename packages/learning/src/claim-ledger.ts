@@ -187,7 +187,7 @@ export function extractLedger(text: unknown): ClaimLedger {
   if (typeof text === "string") {
     text.replace(/\r\n?/g, "\n").split("\n").forEach((original, index) => {
       if (FORMATTING.test(original)) return;
-      const trimmed = original.replace(/^\s*(?:\d+[.)])\s*/, "").trim(); if (!trimmed) return;
+      const trimmed = original.replace(/^\s*(?:\d+\)\s*|\d+\.(?:\s+|$))/, "").trim(); if (!trimmed) return;
       const base = original.indexOf(trimmed);
       const ll = extractLine(index + 1, trimmed, base, original); lines.push(ll); claims.push(...ll.claims);
     });

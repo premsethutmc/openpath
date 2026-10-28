@@ -95,7 +95,7 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
       for (const e of onLine) { const b = evidenceBinds(e, c.text, inp.taskDigest); if (b.ok) { ev = e; break; } bindWhy ||= b.reason; }
       if (status === "proven") { /* discharged by matching the task's own data */ }
       else if (ev) {
-        const pv: Provenance = attribute(ev.checker, inp.verdict.route, inp.reasoners ?? []);
+        const pv: Provenance = attribute(ev.checker, inp.verdict.route, inp.reasoners ?? [], c.text);
         if (pv.trusted && (pv.kind !== "internal")) { status = "proven"; evidence = { checker: ev.checker, scope: ev.scope, digest: ev.digest ?? null, detail: ev.claim, mechanism: pv.mechanism, kernel: pv.kernel, trusted: true, bound: true, claimIdentity: ev.claimIdentity ?? claimIdentity(c.text) }; }
         else { status = "unsupported"; reason = `the evidence for this line is not attributable to a trusted mathematical mechanism: ${pv.reason}`; }
       }

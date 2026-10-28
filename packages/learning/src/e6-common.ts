@@ -41,7 +41,7 @@ export function prepareRows(text: unknown): Row[] | { error: string; resource?: 
   const out: Row[] = []; const rows = text.replace(/\r\n?/g, "\n").split("\n");
   rows.forEach((original, index) => {
     if (/^\s*(?:\$\$|\\\[|\\\]|\\begin\{[^}]*\}|\\end\{[^}]*\}|-{3,}|={3,})\s*$/.test(original)) return;
-    const trimmed = original.replace(/^\s*(?:\d+[.)])\s*/, "").trim(); if (!trimmed) return;
+    const trimmed = original.replace(/^\s*(?:\d+\)\s*|\d+\.(?:\s+|$))/, "").trim(); if (!trimmed) return;
     const start = original.indexOf(trimmed);
     out.push({ source: { line: index + 1, start, end: start + trimmed.length, text: original }, raw: trimmed, plain: "", index: out.length });
   });
@@ -68,8 +68,12 @@ export function prepareRows(text: unknown): Row[] | { error: string; resource?: 
 export class Builder {
   readonly records: { id: string; judge: Judge; dependsOn: string[]; evidence: BindingEvidence | null }[] = [];
   constructor(readonly parsed: NaturalParseResult, readonly destination: string) {}
-  add(index: number, judge: Judge, dependsOn: number[] | "prev" = "prev"): void {
+  add(index: number, judge0: Judge, dependsOn: number[] | "prev" = "prev"): void {
     const line = this.parsed.lines[index];
+    // E7 repair E: a refutation is trusted only if the whole line was interpreted. When the interpreted span leaves out mathematical content of the line (numerals, operators: `from 1 to 2`),
+    // the judgment concerns a different expression, so it is unsupported, never invalid.
+    let judge = judge0;
+    if (judge0.status === "invalid" && line.source.text) { const t = line.source.text, residue = (t.slice(0, line.source.start).replace(/^\s*(?:\d+\)|\d+\.)\s*/, "").split(/[.;:!?,]\s/).pop()! + " " + t.slice(line.source.end).split(/[;:!?]|,\s|\.\s/)[0]); /* only the clause the claim sits in: a hypothesis in another sentence is context, not part of the claim */ const rs = residue.replace(/\b(?:or|and)\b[\s\S]*$/i, "").replace(/^[\s\S]*\b(?:or|and)\b/i, ""); /* a further alternative or conjunct does not change the meaning of the claim that was read */ if (/\d|[=+*^<>]/.test(rs) && residue.trim().length > 0) judge = uns(`only part of this line was interpreted (the rest, "${residue.trim().slice(0, 30)}", was not), so the refutation does not concern what was written: ${judge0.reason}`); }
     const deps = dependsOn === "prev" ? (index ? [this.parsed.lines[index - 1].id] : []) : dependsOn.map((i) => this.parsed.lines[i].id);
     const evidence: BindingEvidence | null = judge.status === "valid" && !judge.nonMath
       ? { lineId: line.id, line: line.source.line, claim: line.source.text, checker: E6_CHECKER, destination: this.destination, scope: judge.scope ?? "independent exact check", outcome: "verified", detail: judge.reason, digest: judge.digest ?? digestOf([line.source.text, judge.reason]), ...(judge.grounding ? { grounding: judge.grounding } : {}) }

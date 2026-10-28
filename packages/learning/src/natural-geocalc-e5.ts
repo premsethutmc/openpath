@@ -80,7 +80,7 @@ function prepareLines(input: NaturalWorkingInput): RawLine[] | { error: string; 
   const out: RawLine[] = []; const rows = text.replace(/\r\n?/g, "\n").split("\n");
   rows.forEach((original, index) => {
     if (isDelimiterRow(original)) return;
-    const trimmed = original.replace(/^\s*(?:\d+[.)])\s*/, "").trim(); if (!trimmed) return;
+    const trimmed = original.replace(/^\s*(?:\d+\)\s*|\d+\.(?:\s+|$))/, "").trim(); if (!trimmed) return;
     const start = original.indexOf(trimmed);
     out.push({ source: { line: index + 1, start, end: start + trimmed.length, text: original }, plain: latexToPlain(trimmed) });
   });

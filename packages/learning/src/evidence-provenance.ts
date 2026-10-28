@@ -20,9 +20,20 @@ export interface Mechanism {
   reasoners: string[];
   /** internal mechanisms may establish context / grounding obligations only, never a mathematical derivation */
   mayDischargeDerivation: boolean;
+  /** E7 repair F: the claim families this mechanism can establish (undefined = no family restriction is declared). A claim of a family outside the list is never proven by it. */
+  families?: ClaimFamily[];
+}
+export type ClaimFamily = "algebra" | "calculus" | "geometry" | "probability";
+/** coarse family of a claim by its notation; "algebra" is the default and is the only family that carries no distinguishing notation */
+export function claimFamily(text: string): ClaimFamily {
+  if (/∫|\\int|\bd\/d[a-z]|\blim(?![a-z])|\bint_|[a-z]'\(|\bd[a-z]\/d[a-z]/i.test(text)) return "calculus";
+  if (/∠|△|\bangle\b|\btriangle\b|\bsegment\b|\bparallel\b|\bperpendicular\b|\bAB\b.*=/.test(text)) return "geometry";
+  if (/\bP\s*\(|\bE\s*\[|\bVar\s*\(/.test(text)) return "probability";
+  return "algebra";
 }
 
-const M = (id: string, kind: MechanismKind, kernel: string, routes: string[], reasoners: string[], mayDischargeDerivation = true): [string, Mechanism] => [id, { id, kind, kernel, routes, reasoners, mayDischargeDerivation }];
+const M = (id: string, kind: MechanismKind, kernel: string, routes: string[], reasoners: string[], mayDischargeDerivation = true, families?: ClaimFamily[]): [string, Mechanism] => [id, { id, kind, kernel, routes, reasoners, mayDischargeDerivation, families }];
+const ALG: ClaimFamily[] = ["algebra"];
 const NAT = ["adapter-converted", "algebra-text", "natural-other"];
 const TYPED = ["structured-typed"];
 
@@ -30,14 +41,14 @@ export const MECHANISMS: Record<string, Mechanism> = Object.fromEntries([
   M("u4-kernel", "exact-kernel", "U4 symbolic-equivalence kernel", ["adapter-converted", "algebra-text"], []),
   M("independent-ir-evaluator", "exact-kernel", "canonical-IR independent evaluator (claim-binding)", ["adapter-converted"], []),
   M("independent-polynomial-identity", "exact-kernel", "exact polynomial identity (claim-binding)", ["adapter-converted"], []),
-  M("e5-independent-geocalc", "exact-kernel", "E5 exact geometry/calculus binders", NAT, ["natural-geocalc-e5"]),
+  M("e5-independent-geocalc", "exact-kernel", "E5 exact geometry/calculus binders", NAT, ["natural-geocalc-e5"], true, ["geometry", "calculus", "algebra"]),
   M("e6-independent-exact", "exact-kernel", "E6 exact CAS and series kernels", NAT, ["natural-generalization-e6"]),
-  M("u4+exact-solution-set", "exact-kernel", "independent algebra checker (U4 + exact solution set)", ["algebra-text"], []),
-  M("u4+exact-linear-system", "exact-kernel", "independent algebra checker (U4 + exact linear system)", ["algebra-text"], []),
-  M("u4-identity", "exact-kernel", "independent algebra checker (U4 identity)", ["algebra-text"], []),
-  M("exact-arithmetic", "exact-kernel", "independent algebra checker (exact rational arithmetic)", ["algebra-text"], []),
-  M("exact-polynomial-identity", "exact-kernel", "independent algebra checker (exact polynomial identity)", ["algebra-text"], []),
-  M("exact-solution-set", "exact-kernel", "independent algebra checker (exact solution set)", ["algebra-text"], []),
+  M("u4+exact-solution-set", "exact-kernel", "independent algebra checker (U4 + exact solution set)", ["algebra-text"], [], true, ALG),
+  M("u4+exact-linear-system", "exact-kernel", "independent algebra checker (U4 + exact linear system)", ["algebra-text"], [], true, ALG),
+  M("u4-identity", "exact-kernel", "independent algebra checker (U4 identity)", ["algebra-text"], [], true, ALG),
+  M("exact-arithmetic", "exact-kernel", "independent algebra checker (exact rational arithmetic)", ["algebra-text"], [], true, ALG),
+  M("exact-polynomial-identity", "exact-kernel", "independent algebra checker (exact polynomial identity)", ["algebra-text"], [], true, ALG),
+  M("exact-solution-set", "exact-kernel", "independent algebra checker (exact solution set)", ["algebra-text"], [], true, ALG),
   // typed (structured) inputs: the typed domain reasoner that judged the step against the typed problem object
   ...["symbolic:m3", "calculus:exact", "calculus:methods", "geometry:synthetic", "math-core:equation", "math-core:number", "math-core:symbolic", "math-core:multivariate", "complex-polynomial:b3", "linear-algebra:b2", "probability-statistics:b1", "math-domains-m1", "math-domains-m2"]
     .map((id) => M(id, "typed-domain-reasoner", `typed domain reasoner ${id}`, TYPED, [id])),
@@ -53,9 +64,10 @@ export const MECHANISMS: Record<string, Mechanism> = Object.fromEntries([
 export interface Provenance { mechanism: string | null; kernel: string | null; kind: MechanismKind | "unregistered"; trusted: boolean; reason: string }
 
 /** Attribute an evidence label. `route` is the gate route that carried it; `reasoners` are the reasoner ids present in the assessment. */
-export function attribute(checker: string, route: string, reasoners: readonly string[]): Provenance {
+export function attribute(checker: string, route: string, reasoners: readonly string[], claim?: string): Provenance {
   const m = MECHANISMS[checker];
   if (!m) return { mechanism: null, kernel: null, kind: "unregistered", trusted: false, reason: `"${checker}" is not a registered mathematical mechanism; a route-provided label is not evidence` };
+  if (claim !== undefined && m.families && !m.families.includes(claimFamily(claim))) return { mechanism: m.id, kernel: m.kernel, kind: m.kind, trusted: false, reason: `mechanism ${m.id} declares ${m.families.join("/")} claims only; this is a ${claimFamily(claim)} claim, outside its capability` };
   if (!m.routes.includes(route)) return { mechanism: m.id, kernel: m.kernel, kind: m.kind, trusted: false, reason: `mechanism ${m.id} is not a producer on the ${route} route` };
   if (m.reasoners.length && !m.reasoners.some((r) => reasoners.includes(r))) return { mechanism: m.id, kernel: m.kernel, kind: m.kind, trusted: false, reason: `mechanism ${m.id} requires ${m.reasoners.join(" or ")}, which did not take part in this assessment` };
   return { mechanism: m.id, kernel: m.kernel, kind: m.kind, trusted: true, reason: `established by ${m.kernel}` };

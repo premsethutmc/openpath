@@ -43,6 +43,8 @@ const SUB: Record<string, string> = { "₀": "0", "₁": "1", "₂": "2", "₃":
 /** text -> plain ASCII-ish syntax understood by the tokenizer. */
 export function normalize(raw: string): string {
   let s = raw.trim();
+  // E7 repair E: evaluation written in words is the same object as the bracket notation the parser already supports: `[F] from a to b` = `[F]_a^b`
+  s = s.replace(/(\[[^\[\]]+\]|\([^()]+\))\s*(?:evaluated\s+)?(?:from|between)\s+(?:x\s*=\s*)?(-?[A-Za-z0-9.π∞]+)\s+(?:to|and)\s+(?:x\s*=\s*)?(-?[A-Za-z0-9.π∞]+)/gi, (_m, f, lo, hi) => `${f.startsWith("(") ? "[" + f.slice(1, -1) + "]" : f}_${lo}^${hi}`);
   s = s.replace(/^\s*(?:\$\$|\$|\\\[|\\\()\s*/, "").replace(/\s*(?:\$\$|\$|\\\]|\\\))\s*$/, "");
   s = s.replace(/\\left|\\right|\\big|\\Big|\\bigg|\\displaystyle/g, "").replace(/\\(?:!|,|;|:|quad|qquad)/g, " ").replace(/\\ /g, " ")
     .replace(/\\mathrm\{d\}/g, "d").replace(/\\text\{([^}]*)\}/g, "$1").replace(/\\operatorname\{([^}]*)\}/g, "$1");
@@ -221,6 +223,10 @@ class Parser {
     this.i++;
     const pieces = splitRun(run, this.h, stopAtDiff);
     if (pieces.length === 1) return this.symbolOrCall(pieces[0]);
+    // E7 repair E: four or more different letters that are not functions are a word of the student's prose (from, between, evaluated), not a product of variables; reading it as one would
+    // turn the sentence into a different expression and the verdict would be about that expression
+    const before = this.t[this.i - 2]; // only a word that FOLLOWS a finished expression (`] from`, `) evaluated`, `2 and`): a leading word is a label the callers already handle
+    if (before && ((before.k === "op" && (before.v === ")" || before.v === "]")) || before.k === "n") && run.length >= 4 && pieces.every((p) => p.length === 1) && new Set(pieces).size >= 4) throw new NotationError(`"${run}" is a word, not a product of variables`, "unsupported");
     // run like "xe" or "xsin": rewrite the token stream
     const rest: Tok[] = []; pieces.forEach((p, idx) => { if (idx) rest.push({ k: "op", v: "*" }); rest.push({ k: "id", v: p }); });
     this.t.splice(this.i - 1, 1, ...rest); this.i -= 1;
@@ -267,7 +273,11 @@ class Parser {
     if (this.isOp("^")) { this.i++; k = Number(this.eat().v); }
     let body: A;
     if (this.isOp("[")) { this.i++; body = this.expr(); this.expect("]"); }
-    else body = this.power(false);
+    else {
+      body = this.power(false);
+      // E7 repair E: `d/dx 1/x` can be read (d/dx 1)/x or d/dx (1/x); an unbracketed operand that a * or / continues is not decided by this parser, so no verdict may be built on either reading
+      if (this.isOp("/") || this.isOp("*")) throw new NotationError("the extent of d/dx is not bracketed (d/dx 1/x): write d/dx(1/x)", "ambiguous");
+    }
     return { t: "D", of: body, v, k };
   }
   integral(): A {

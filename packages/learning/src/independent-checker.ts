@@ -15,6 +15,7 @@
  * interval and "holds for all x" claims; closed numeric statements; expression-equivalence via U4. Everything else is
  * "unsupported" and can never be certified here.
  */
+import { parseFidelityLoss } from "./parse-fidelity.ts";
 import { createHash } from "node:crypto";
 import type { Expr } from "./calculus-core";
 import { checkSymbolicCertificate, type KernelCertificate } from "./proof-kernel.ts";
@@ -959,6 +960,8 @@ function run(statement: string, parsed: NaturalParseResult): AlgebraCheck {
   const whenM = /^(.*?)\s+(?:when|for|if|where|given(?:\s+that)?)\s+(.+)$/i.exec(body);
   const ps = parseNaturalWorking({ format: "natural", text: whenM ? whenM[1] : body });
   if (ps.classification !== "parsed" || ps.lines.length !== 1) return empty("unsupported", "the problem statement is not a single parseable mathematical statement");
+  // E7 repair E: a numeral the parser dropped means the verdict would concern a different expression: that is unsupported, never invalid
+  for (const [src, rel] of [[whenM ? whenM[1] : body, ps.lines[0]] as const, ...parsed.lines.map((l) => [l.source.text, l] as const)]) { const loss = parseFidelityLoss(src, rel); if (loss) throw new Unsupported(`parse fidelity: ${loss}`); }
   const split = splitIdentifiers(ps.lines[0].relation, parsed.lines.map((l) => l.relation));
   const rel0 = split.statement, lines = parsed.lines.map((l, i) => ({ ...l, relation: split.rels[i] }));
   const parsed2: NaturalParseResult = { ...parsed, lines };
