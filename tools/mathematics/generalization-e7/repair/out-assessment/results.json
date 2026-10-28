@@ -77,21 +77,21 @@
  },
  "latencyMs": {
   "kernelPath": {
-   "p50": 0.091,
-   "p95": 0.692,
-   "p99": 1.503,
+   "p50": 0.11,
+   "p95": 0.756,
+   "p99": 1.802,
    "n": 16996
   },
   "legacyPath": {
-   "p50": 0.033,
-   "p95": 0.148,
+   "p50": 0.031,
+   "p95": 0.247,
    "n": 477
   }
  },
  "legacyFamilies": {
   "questions": 477,
-  "verified": 0,
-  "legacy": 477,
+  "verified": 60,
+  "legacy": 417,
   "held": 0,
   "human": 0,
   "families": [
