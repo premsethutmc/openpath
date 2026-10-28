@@ -1,0 +1,8 @@
+data/samples.jsonl
+data/oracle/
+data/client/
+data/backend/
+data/backend-grader-off/
+**/__pycache__/
+data/results/findings.jsonl
+data/results-grader-off/findings.jsonl

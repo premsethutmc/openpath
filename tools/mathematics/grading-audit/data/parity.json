@@ -1,0 +1,17 @@
+{
+ "totals": {
+  "families": 1080,
+  "compared": 855926,
+  "mismatch": 0,
+  "missingOnServer": 0,
+  "extraOnServer": 0,
+  "typeMismatch": 0,
+  "expandedMismatch": 0,
+  "forms": {
+   "typed": 341483,
+   "mc": 284170,
+   "word": 230273
+  }
+ },
+ "examples": []
+}

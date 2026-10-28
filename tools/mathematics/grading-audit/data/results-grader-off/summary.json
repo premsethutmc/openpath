@@ -1,0 +1,813 @@
+{
+ "cases": 308568,
+ "truths": {
+  "equivalent": 53246,
+  "wrong": 112499,
+  "malformed": 109124,
+  "form-variant": 33077,
+  "approximation": 545,
+  "ambiguous": 77
+ },
+ "totals": {
+  "client": {
+   "OK": 293229,
+   "UNRESOLVED_ON_FORM": 11665,
+   "INVALID_MARKED_INCORRECT": 2785,
+   "UNRESOLVED_ON_CORRECT": 294,
+   "FORM_VIOLATION_ACCEPTED": 238,
+   "FALSE_ACCEPTANCE": 259,
+   "FORM_POLICY_REJECTION": 15,
+   "FALSE_REJECTION": 6,
+   "AMBIGUITY_CREDITED": 77
+  },
+  "backend": {
+   "OK": 292570,
+   "UNRESOLVED_ON_FORM": 11927,
+   "INVALID_MARKED_INCORRECT": 3202,
+   "FORM_POLICY_REJECTION": 343,
+   "FORM_VIOLATION_ACCEPTED": 238,
+   "UNRESOLVED_ON_CORRECT": 88,
+   "FALSE_ACCEPTANCE": 64,
+   "REFUSED_FORM-VARIANT": 43,
+   "REFUSED_WRONG": 10,
+   "FALSE_REJECTION": 6,
+   "AMBIGUITY_CREDITED": 77
+  }
+ },
+ "byTruth": {
+  "client": {
+   "equivalent": {
+    "OK": 52946,
+    "UNRESOLVED_ON_CORRECT": 294,
+    "FALSE_REJECTION": 6
+   },
+   "wrong": {
+    "OK": 112470,
+    "FALSE_ACCEPTANCE": 29
+   },
+   "malformed": {
+    "OK": 106109,
+    "INVALID_MARKED_INCORRECT": 2785,
+    "FALSE_ACCEPTANCE": 230
+   },
+   "form-variant": {
+    "OK": 21159,
+    "UNRESOLVED_ON_FORM": 11665,
+    "FORM_VIOLATION_ACCEPTED": 238,
+    "FORM_POLICY_REJECTION": 15
+   },
+   "approximation": {
+    "OK": 545
+   },
+   "ambiguous": {
+    "AMBIGUITY_CREDITED": 77
+   }
+  },
+  "backend": {
+   "equivalent": {
+    "OK": 53152,
+    "UNRESOLVED_ON_CORRECT": 88,
+    "FALSE_REJECTION": 6
+   },
+   "wrong": {
+    "OK": 112489,
+    "REFUSED_WRONG": 10
+   },
+   "malformed": {
+    "OK": 105858,
+    "INVALID_MARKED_INCORRECT": 3202,
+    "FALSE_ACCEPTANCE": 64
+   },
+   "form-variant": {
+    "UNRESOLVED_ON_FORM": 11927,
+    "OK": 20526,
+    "FORM_POLICY_REJECTION": 343,
+    "FORM_VIOLATION_ACCEPTED": 238,
+    "REFUSED_FORM-VARIANT": 43
+   },
+   "approximation": {
+    "OK": 545
+   },
+   "ambiguous": {
+    "AMBIGUITY_CREDITED": 77
+   }
+  }
+ },
+ "byType": {
+  "client": {
+   "integer": {
+    "OK": 97372,
+    "UNRESOLVED_ON_FORM": 5334,
+    "UNRESOLVED_ON_CORRECT": 114,
+    "INVALID_MARKED_INCORRECT": 37,
+    "FALSE_ACCEPTANCE": 115
+   },
+   "choice": {
+    "OK": 69058,
+    "UNRESOLVED_ON_FORM": 4922,
+    "INVALID_MARKED_INCORRECT": 772
+   },
+   "tuple": {
+    "OK": 28874
+   },
+   "fraction": {
+    "OK": 39489,
+    "UNRESOLVED_ON_FORM": 69,
+    "FORM_VIOLATION_ACCEPTED": 59,
+    "INVALID_MARKED_INCORRECT": 20,
+    "UNRESOLVED_ON_CORRECT": 31,
+    "FALSE_ACCEPTANCE": 26
+   },
+   "exact": {
+    "OK": 31893,
+    "INVALID_MARKED_INCORRECT": 1231,
+    "UNRESOLVED_ON_FORM": 472,
+    "FALSE_REJECTION": 6,
+    "FORM_VIOLATION_ACCEPTED": 26,
+    "AMBIGUITY_CREDITED": 30,
+    "UNRESOLVED_ON_CORRECT": 61,
+    "FALSE_ACCEPTANCE": 54
+   },
+   "set": {
+    "OK": 6742,
+    "UNRESOLVED_ON_FORM": 607
+   },
+   "interval": {
+    "OK": 3903,
+    "INVALID_MARKED_INCORRECT": 41,
+    "FORM_VIOLATION_ACCEPTED": 153,
+    "UNRESOLVED_ON_CORRECT": 64,
+    "FALSE_ACCEPTANCE": 64
+   },
+   "mixed": {
+    "OK": 1992,
+    "FORM_POLICY_REJECTION": 15
+   },
+   "ratio": {
+    "OK": 631,
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "antiderivative": {
+    "OK": 2296,
+    "INVALID_MARKED_INCORRECT": 123,
+    "AMBIGUITY_CREDITED": 22,
+    "UNRESOLVED_ON_CORRECT": 24
+   },
+   "matrix": {
+    "OK": 2776,
+    "UNRESOLVED_ON_FORM": 153
+   },
+   "roots": {
+    "OK": 1337,
+    "UNRESOLVED_ON_FORM": 66
+   },
+   "expression": {
+    "OK": 6866,
+    "INVALID_MARKED_INCORRECT": 561,
+    "AMBIGUITY_CREDITED": 25
+   }
+  },
+  "backend": {
+   "integer": {
+    "OK": 97020,
+    "UNRESOLVED_ON_FORM": 5952
+   },
+   "choice": {
+    "OK": 69043,
+    "UNRESOLVED_ON_FORM": 4879,
+    "INVALID_MARKED_INCORRECT": 777,
+    "REFUSED_FORM-VARIANT": 43,
+    "REFUSED_WRONG": 10
+   },
+   "tuple": {
+    "OK": 28874
+   },
+   "fraction": {
+    "OK": 39629,
+    "FORM_VIOLATION_ACCEPTED": 59,
+    "UNRESOLVED_ON_FORM": 6
+   },
+   "exact": {
+    "OK": 31896,
+    "INVALID_MARKED_INCORRECT": 1343,
+    "UNRESOLVED_ON_FORM": 472,
+    "FALSE_REJECTION": 6,
+    "FORM_VIOLATION_ACCEPTED": 26,
+    "AMBIGUITY_CREDITED": 30
+   },
+   "set": {
+    "OK": 6307,
+    "INVALID_MARKED_INCORRECT": 357,
+    "FORM_POLICY_REJECTION": 328,
+    "UNRESOLVED_ON_FORM": 357
+   },
+   "interval": {
+    "OK": 3903,
+    "INVALID_MARKED_INCORRECT": 41,
+    "FORM_VIOLATION_ACCEPTED": 153,
+    "UNRESOLVED_ON_CORRECT": 64,
+    "FALSE_ACCEPTANCE": 64
+   },
+   "mixed": {
+    "OK": 1992,
+    "FORM_POLICY_REJECTION": 15
+   },
+   "ratio": {
+    "OK": 631,
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "antiderivative": {
+    "OK": 2296,
+    "INVALID_MARKED_INCORRECT": 123,
+    "AMBIGUITY_CREDITED": 22,
+    "UNRESOLVED_ON_CORRECT": 24
+   },
+   "matrix": {
+    "OK": 2776,
+    "UNRESOLVED_ON_FORM": 153
+   },
+   "roots": {
+    "OK": 1337,
+    "UNRESOLVED_ON_FORM": 66
+   },
+   "expression": {
+    "OK": 6866,
+    "INVALID_MARKED_INCORRECT": 561,
+    "AMBIGUITY_CREDITED": 25
+   }
+  }
+ },
+ "byTag": {
+  "client": {
+   "stored": {
+    "OK": 18736,
+    "UNRESOLVED_ON_CORRECT": 5
+   },
+   "first-number-plus-one": {
+    "OK": 12885,
+    "INVALID_MARKED_INCORRECT": 13
+   },
+   "sign-flip": {
+    "OK": 10524
+   },
+   "dangling-operator": {
+    "OK": 12819,
+    "FALSE_ACCEPTANCE": 99
+   },
+   "unbalanced-bracket": {
+    "OK": 12918
+   },
+   "question-mark": {
+    "OK": 12918
+   },
+   "division-by-zero": {
+    "OK": 12381,
+    "INVALID_MARKED_INCORRECT": 537
+   },
+   "letters": {
+    "OK": 11540,
+    "INVALID_MARKED_INCORRECT": 1378
+   },
+   "blank": {
+    "OK": 18741
+   },
+   "predicted-misconception": {
+    "OK": 25180
+   },
+   "correct-with-wrong-working": {
+    "OK": 18736,
+    "UNRESOLVED_ON_CORRECT": 5
+   },
+   "wrong-with-plausible-working": {
+    "OK": 18708,
+    "INVALID_MARKED_INCORRECT": 13
+   },
+   "unreduced-fraction": {
+    "OK": 3666,
+    "UNRESOLVED_ON_FORM": 5329,
+    "FORM_POLICY_REJECTION": 15,
+    "FORM_VIOLATION_ACCEPTED": 57
+   },
+   "trailing-zero": {
+    "OK": 7184,
+    "UNRESOLVED_ON_FORM": 5,
+    "FORM_VIOLATION_ACCEPTED": 8
+   },
+   "explicit-plus": {
+    "OK": 6725,
+    "UNRESOLVED_ON_CORRECT": 137
+   },
+   "times-ten": {
+    "OK": 8777
+   },
+   "digits-split": {
+    "OK": 5633,
+    "INVALID_MARKED_INCORRECT": 57,
+    "FALSE_ACCEPTANCE": 96
+   },
+   "lowercase-letter": {
+    "OK": 5823
+   },
+   "other-option": {
+    "OK": 16548
+   },
+   "no-such-option": {
+    "OK": 5051,
+    "INVALID_MARKED_INCORRECT": 772
+   },
+   "invalid-letter": {
+    "OK": 5823
+   },
+   "option-text-correct": {
+    "OK": 887,
+    "UNRESOLVED_ON_FORM": 4922
+   },
+   "option-text-wrong": {
+    "OK": 5811
+   },
+   "two-letters": {
+    "OK": 5823
+   },
+   "no-spaces": {
+    "OK": 2855
+   },
+   "extra-spaces": {
+    "OK": 2280
+   },
+   "last-number-plus-one": {
+    "OK": 4663,
+    "INVALID_MARKED_INCORRECT": 15
+   },
+   "parentheses-toggled": {
+    "OK": 1542
+   },
+   "missing-component": {
+    "OK": 1542
+   },
+   "first-two-swapped": {
+    "OK": 503
+   },
+   "reversed": {
+    "OK": 1021
+   },
+   "improper-fraction": {
+    "OK": 671
+   },
+   "mixed-number": {
+    "OK": 938,
+    "UNRESOLVED_ON_FORM": 69
+   },
+   "reciprocal": {
+    "OK": 2426
+   },
+   "half": {
+    "OK": 1868
+   },
+   "decimal": {
+    "OK": 566,
+    "FORM_VIOLATION_ACCEPTED": 8
+   },
+   "one-plus": {
+    "OK": 685
+   },
+   "reordered": {
+    "OK": 366
+   },
+   "missing-one": {
+    "OK": 322
+   },
+   "duplicate": {
+    "UNRESOLVED_ON_FORM": 289,
+    "OK": 77
+   },
+   "braces": {
+    "OK": 423
+   },
+   "x-equals-or": {
+    "UNRESOLVED_ON_FORM": 384,
+    "OK": 39
+   },
+   "extra-one": {
+    "OK": 423
+   },
+   "space-separated": {
+    "OK": 366
+   },
+   "ascii-glyphs": {
+    "OK": 2103,
+    "FALSE_REJECTION": 4,
+    "UNRESOLVED_ON_CORRECT": 83
+   },
+   "left-closure-flipped": {
+    "OK": 110
+   },
+   "right-closure-flipped": {
+    "OK": 111
+   },
+   "as-inequality": {
+    "FORM_VIOLATION_ACCEPTED": 109,
+    "OK": 23
+   },
+   "U-for-union": {
+    "OK": 39
+   },
+   "or-for-union": {
+    "FORM_VIOLATION_ACCEPTED": 32,
+    "OK": 7
+   },
+   "oo-for-infinity": {
+    "UNRESOLVED_ON_CORRECT": 64
+   },
+   "closed-at-infinity": {
+    "FALSE_ACCEPTANCE": 64
+   },
+   "equation-equals-zero": {
+    "UNRESOLVED_ON_FORM": 472,
+    "OK": 3
+   },
+   "derivative-instead": {
+    "OK": 788
+   },
+   "doubled": {
+    "OK": 735
+   },
+   "factored": {
+    "OK": 317,
+    "FORM_VIOLATION_ACCEPTED": 12
+   },
+   "sympy-rendering": {
+    "OK": 324,
+    "FALSE_REJECTION": 2
+   },
+   "unsimplified": {
+    "OK": 41
+   },
+   "as-fraction": {
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "decimal-approximation": {
+    "OK": 545
+   },
+   "expanded": {
+    "OK": 84
+   },
+   "as-interval": {
+    "OK": 12,
+    "FORM_VIOLATION_ACCEPTED": 12
+   },
+   "direction-flipped": {
+    "OK": 9
+   },
+   "reversed-sides": {
+    "OK": 24
+   },
+   "with-constant": {
+    "OK": 12
+   },
+   "log-ln-spelling": {
+    "OK": 77
+   },
+   "transpose": {
+    "OK": 113
+   },
+   "semicolon-rows": {
+    "UNRESOLVED_ON_FORM": 153,
+    "OK": 6
+   },
+   "reciprocal-juxtaposition": {
+    "AMBIGUITY_CREDITED": 77
+   },
+   "no-constant": {
+    "OK": 111
+   },
+   "other-constant": {
+    "OK": 111
+   },
+   "other-constant-letter": {
+    "OK": 111
+   }
+  },
+  "backend": {
+   "stored": {
+    "OK": 18741
+   },
+   "first-number-plus-one": {
+    "OK": 12885,
+    "INVALID_MARKED_INCORRECT": 13
+   },
+   "sign-flip": {
+    "OK": 10524
+   },
+   "dangling-operator": {
+    "OK": 12918
+   },
+   "unbalanced-bracket": {
+    "OK": 12918
+   },
+   "question-mark": {
+    "OK": 12918
+   },
+   "division-by-zero": {
+    "OK": 12024,
+    "INVALID_MARKED_INCORRECT": 894
+   },
+   "letters": {
+    "OK": 11428,
+    "INVALID_MARKED_INCORRECT": 1490
+   },
+   "blank": {
+    "OK": 18741
+   },
+   "predicted-misconception": {
+    "OK": 25180
+   },
+   "correct-with-wrong-working": {
+    "OK": 18741
+   },
+   "wrong-with-plausible-working": {
+    "OK": 18708,
+    "INVALID_MARKED_INCORRECT": 13
+   },
+   "unreduced-fraction": {
+    "UNRESOLVED_ON_FORM": 5953,
+    "OK": 3042,
+    "FORM_POLICY_REJECTION": 15,
+    "FORM_VIOLATION_ACCEPTED": 57
+   },
+   "trailing-zero": {
+    "OK": 7189,
+    "FORM_VIOLATION_ACCEPTED": 8
+   },
+   "explicit-plus": {
+    "OK": 6862
+   },
+   "times-ten": {
+    "OK": 8777
+   },
+   "digits-split": {
+    "OK": 5786
+   },
+   "lowercase-letter": {
+    "OK": 5823
+   },
+   "other-option": {
+    "OK": 16548
+   },
+   "no-such-option": {
+    "OK": 5046,
+    "INVALID_MARKED_INCORRECT": 777
+   },
+   "invalid-letter": {
+    "OK": 5823
+   },
+   "option-text-correct": {
+    "OK": 887,
+    "UNRESOLVED_ON_FORM": 4879,
+    "REFUSED_FORM-VARIANT": 43
+   },
+   "option-text-wrong": {
+    "OK": 5801,
+    "REFUSED_WRONG": 10
+   },
+   "two-letters": {
+    "OK": 5823
+   },
+   "no-spaces": {
+    "OK": 2855
+   },
+   "extra-spaces": {
+    "OK": 2280
+   },
+   "last-number-plus-one": {
+    "OK": 4663,
+    "INVALID_MARKED_INCORRECT": 15
+   },
+   "parentheses-toggled": {
+    "OK": 1542
+   },
+   "missing-component": {
+    "OK": 1542
+   },
+   "first-two-swapped": {
+    "OK": 503
+   },
+   "reversed": {
+    "OK": 1021
+   },
+   "improper-fraction": {
+    "OK": 671
+   },
+   "mixed-number": {
+    "OK": 1007
+   },
+   "reciprocal": {
+    "OK": 2426
+   },
+   "half": {
+    "OK": 1868
+   },
+   "decimal": {
+    "OK": 561,
+    "FORM_VIOLATION_ACCEPTED": 8,
+    "UNRESOLVED_ON_FORM": 5
+   },
+   "one-plus": {
+    "OK": 685
+   },
+   "reordered": {
+    "OK": 366
+   },
+   "missing-one": {
+    "OK": 322
+   },
+   "duplicate": {
+    "FORM_POLICY_REJECTION": 328,
+    "OK": 38
+   },
+   "braces": {
+    "OK": 423
+   },
+   "x-equals-or": {
+    "UNRESOLVED_ON_FORM": 423
+   },
+   "extra-one": {
+    "OK": 423
+   },
+   "space-separated": {
+    "OK": 366
+   },
+   "ascii-glyphs": {
+    "OK": 2162,
+    "FALSE_REJECTION": 4,
+    "UNRESOLVED_ON_CORRECT": 24
+   },
+   "left-closure-flipped": {
+    "OK": 110
+   },
+   "right-closure-flipped": {
+    "OK": 111
+   },
+   "as-inequality": {
+    "FORM_VIOLATION_ACCEPTED": 109,
+    "OK": 23
+   },
+   "U-for-union": {
+    "OK": 39
+   },
+   "or-for-union": {
+    "FORM_VIOLATION_ACCEPTED": 32,
+    "OK": 7
+   },
+   "oo-for-infinity": {
+    "UNRESOLVED_ON_CORRECT": 64
+   },
+   "closed-at-infinity": {
+    "FALSE_ACCEPTANCE": 64
+   },
+   "equation-equals-zero": {
+    "UNRESOLVED_ON_FORM": 472,
+    "OK": 3
+   },
+   "derivative-instead": {
+    "OK": 788
+   },
+   "doubled": {
+    "OK": 735
+   },
+   "factored": {
+    "OK": 317,
+    "FORM_VIOLATION_ACCEPTED": 12
+   },
+   "sympy-rendering": {
+    "OK": 324,
+    "FALSE_REJECTION": 2
+   },
+   "unsimplified": {
+    "OK": 41
+   },
+   "as-fraction": {
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "decimal-approximation": {
+    "OK": 545
+   },
+   "expanded": {
+    "OK": 84
+   },
+   "as-interval": {
+    "OK": 12,
+    "FORM_VIOLATION_ACCEPTED": 12
+   },
+   "direction-flipped": {
+    "OK": 9
+   },
+   "reversed-sides": {
+    "OK": 24
+   },
+   "with-constant": {
+    "OK": 12
+   },
+   "log-ln-spelling": {
+    "OK": 77
+   },
+   "transpose": {
+    "OK": 113
+   },
+   "semicolon-rows": {
+    "UNRESOLVED_ON_FORM": 153,
+    "OK": 6
+   },
+   "reciprocal-juxtaposition": {
+    "AMBIGUITY_CREDITED": 77
+   },
+   "no-constant": {
+    "OK": 111
+   },
+   "other-constant": {
+    "OK": 111
+   },
+   "other-constant-letter": {
+    "OK": 111
+   }
+  }
+ },
+ "clientBackendDisagreements": [
+  {
+   "client": "incorrect",
+   "backend": "unresolved",
+   "clientSource": "legacy",
+   "backendSource": "legacy",
+   "n": 922
+  },
+  {
+   "client": "correct",
+   "backend": "unresolved",
+   "clientSource": "kernel",
+   "backendSource": "legacy",
+   "n": 857
+  },
+  {
+   "client": "unresolved",
+   "backend": "incorrect",
+   "clientSource": "legacy",
+   "backendSource": "legacy",
+   "n": 736
+  },
+  {
+   "client": "incorrect",
+   "backend": "unresolved",
+   "clientSource": "kernel",
+   "backendSource": "legacy",
+   "n": 329
+  },
+  {
+   "client": "unresolved",
+   "backend": "incorrect",
+   "clientSource": "kernel",
+   "backendSource": "legacy",
+   "n": 279
+  },
+  {
+   "client": "unresolved",
+   "backend": "correct",
+   "clientSource": "kernel",
+   "backendSource": "legacy",
+   "n": 198
+  },
+  {
+   "client": "unresolved",
+   "backend": "correct",
+   "clientSource": "disagreement",
+   "backendSource": "legacy",
+   "n": 62
+  },
+  {
+   "client": "correct",
+   "backend": "incorrect",
+   "clientSource": "kernel",
+   "backendSource": "legacy",
+   "n": 39
+  },
+  {
+   "client": "unresolved",
+   "backend": "incorrect",
+   "clientSource": "held",
+   "backendSource": "legacy",
+   "n": 33
+  },
+  {
+   "client": "unresolved",
+   "backend": "correct",
+   "clientSource": "held",
+   "backendSource": "legacy",
+   "n": 20
+  },
+  {
+   "client": "correct",
+   "backend": "unresolved",
+   "clientSource": "legacy",
+   "backendSource": "legacy",
+   "n": 6
+  }
+ ]
+}
