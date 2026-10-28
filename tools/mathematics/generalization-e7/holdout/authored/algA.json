@@ -1,0 +1,1178 @@
+[
+ {
+  "id": "h7-algA-001",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "concise"
+  ],
+  "p": {
+   "alg": "2x+3=11"
+  },
+  "w": "2x=8\nx=4",
+  "exp": "verified",
+  "why": "Subtract 3 then halve is valid."
+ },
+ {
+  "id": "h7-algA-002",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "3(x-2)=2x+5"
+  },
+  "w": "3x-6=2x+5\nx=11",
+  "exp": "verified",
+  "why": "Expand and collect: x=11."
+ },
+ {
+  "id": "h7-algA-003",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x^2-5x+6=0"
+  },
+  "w": "(x-2)(x-3)=0\nx=2 or x=3",
+  "exp": "verified",
+  "why": "Correct factorisation and zero-product rule."
+ },
+ {
+  "id": "h7-algA-004",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "x^2+6x+4=0"
+  },
+  "w": "(x+3)^2=5\nx+3=±sqrt(5)\nx=-3±sqrt(5)",
+  "exp": "verified",
+  "why": "Completing the square: x^2+6x+9=5 is equivalent; both signs kept."
+ },
+ {
+  "id": "h7-algA-005",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "2x^2-3x-5=0"
+  },
+  "w": "disc = 9+40 = 49\nx = (3±7)/4\nx = 5/2 or x = -1",
+  "exp": "verified",
+  "why": "Quadratic formula with discriminant 49 gives 5/2 and -1."
+ },
+ {
+  "id": "h7-algA-006",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "concise"
+  ],
+  "p": {
+   "alg": "x^2=49"
+  },
+  "w": "x=±7",
+  "exp": "verified",
+  "why": "Both square roots of 49."
+ },
+ {
+  "id": "h7-algA-007",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(x^2-9)/(x-3)=6"
+  },
+  "w": "x≠3\n(x^2-9)/(x-3)=x+3\nx+3=6\nx=3, which is excluded, so there is no solution",
+  "exp": "verified",
+  "why": "Cancellation justified by x≠3; the only candidate is excluded."
+ },
+ {
+  "id": "h7-algA-008",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "sqrt(x+2)=x"
+  },
+  "w": "x+2=x^2\n(x-2)(x+1)=0\nx=2 or x=-1\ncheck x=-1: sqrt(1)=1≠-1, rejected\nx=2: sqrt(4)=2 ok\nso x=2",
+  "exp": "verified",
+  "why": "Squaring then checking removes extraneous x=-1."
+ },
+ {
+  "id": "h7-algA-009",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "|2x-1|=5"
+  },
+  "w": "2x-1=5 or 2x-1=-5\nx=3 or x=-2",
+  "exp": "verified",
+  "why": "Both branches of absolute value."
+ },
+ {
+  "id": "h7-algA-010",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "-2x+3>7"
+  },
+  "w": "-2x>4\nx<-2",
+  "exp": "verified",
+  "why": "Dividing by -2 reverses the inequality."
+ },
+ {
+  "id": "h7-algA-011",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x^2-4x-5<0"
+  },
+  "w": "(x-5)(x+1)<0\n-1<x<5",
+  "exp": "verified",
+  "why": "Product negative between the roots."
+ },
+ {
+  "id": "h7-algA-012",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "concise"
+  ],
+  "p": {
+   "alg": "|x-3|<2"
+  },
+  "w": "-2<x-3<2\n1<x<5",
+  "exp": "verified",
+  "why": "Standard absolute-value inequality."
+ },
+ {
+  "id": "h7-algA-013",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "1/x+1/(x+1)=1"
+  },
+  "w": "x≠0 and x≠-1\nmultiply by x(x+1): 2x+1=x^2+x\nx^2-x-1=0\nx=(1±sqrt(5))/2\nboth values differ from 0 and -1",
+  "exp": "verified",
+  "why": "Restrictions stated, quadratic correct, roots admissible."
+ },
+ {
+  "id": "h7-algA-014",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "x^2-4x-12=0"
+  },
+  "w": "x^2-4x=12\n(x-2)^2=16\nx-2=±4\nx=6 or x=-2",
+  "exp": "verified",
+  "why": "Completing the square with both signs."
+ },
+ {
+  "id": "h7-algA-015",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "concise"
+  ],
+  "p": {
+   "alg": "5x-7=3x+9"
+  },
+  "w": "x=8",
+  "exp": "verified",
+  "why": "2x=16 so x=8."
+ },
+ {
+  "id": "h7-algA-016",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "x^4-5x^2+4=0"
+  },
+  "w": "let u=x^2: u^2-5u+4=0\n(u-1)(u-4)=0\nu=1 or u=4\nx=±1 or x=±2",
+  "exp": "verified",
+  "why": "Quadratic in x^2; all four real roots."
+ },
+ {
+  "id": "h7-algA-017",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "concise"
+  ],
+  "p": {
+   "alg": "(x-1)(x-4)=0"
+  },
+  "w": "x=1 or x=4",
+  "exp": "verified",
+  "why": "Zero-product rule."
+ },
+ {
+  "id": "h7-algA-018",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "x^3-x^2-4x+4=0"
+  },
+  "w": "x^2(x-1)-4(x-1)=0\n(x-1)(x-2)(x+2)=0\nx=1, 2 or -2",
+  "exp": "verified",
+  "why": "Factor by grouping; roots 1,2,-2."
+ },
+ {
+  "id": "h7-algA-019",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "sqrt(2x+3)=3"
+  },
+  "w": "2x+3=9\nx=3\ncheck: sqrt(9)=3",
+  "exp": "verified",
+  "why": "Square and verify."
+ },
+ {
+  "id": "h7-algA-020",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "concise"
+  ],
+  "p": {
+   "alg": "3x-5<=10"
+  },
+  "w": "3x<=15\nx<=5",
+  "exp": "verified",
+  "why": "Positive divisor keeps direction."
+ },
+ {
+  "id": "h7-algA-021",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x/3+x/6=2"
+  },
+  "w": "multiply by 6: 2x+x=12\n3x=12\nx=4",
+  "exp": "verified",
+  "why": "Clearing denominators."
+ },
+ {
+  "id": "h7-algA-022",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "|x+1|=|2x-3|"
+  },
+  "w": "square both sides: (x+1)^2=(2x-3)^2\n3x^2-14x+8=0\n(3x-2)(x-4)=0\nx=2/3 or x=4",
+  "exp": "verified",
+  "why": "For |a|=|b| squaring is an equivalence; roots correct."
+ },
+ {
+  "id": "h7-algA-023",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(x+2)/(x-1)=3"
+  },
+  "w": "x≠1\nx+2=3x-3\n5=2x\nx=5/2",
+  "exp": "verified",
+  "why": "Valid multiplication with x≠1; 5/2≠1."
+ },
+ {
+  "id": "h7-algA-024",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "x^2-2x-1=0"
+  },
+  "w": "x=(2±sqrt(4+4))/2=(2±2sqrt(2))/2=1±sqrt(2)",
+  "exp": "verified",
+  "why": "Quadratic formula simplified."
+ },
+ {
+  "id": "h7-algA-025",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x^2-x-6>=0"
+  },
+  "w": "(x-3)(x+2)>=0\nx<=-2 or x>=3",
+  "exp": "verified",
+  "why": "Upward parabola nonnegative outside roots."
+ },
+ {
+  "id": "h7-algA-026",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(x-1)/(x+2)>0"
+  },
+  "w": "for x≠-2 the sign of (x-1)/(x+2) equals the sign of (x-1)(x+2)\n(x-1)(x+2)>0\nx<-2 or x>1",
+  "exp": "verified",
+  "why": "Quotient and product have equal sign; solution set correct."
+ },
+ {
+  "id": "h7-algA-027",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "3(2x-1)-2(x+4)=5x"
+  },
+  "w": "6x-3-2x-8=5x\n4x-11=5x\nx=-11",
+  "exp": "verified",
+  "why": "Expand and collect."
+ },
+ {
+  "id": "h7-algA-028",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x/2-1/3=5/6"
+  },
+  "w": "3x-2=5\nx=7/3",
+  "exp": "verified",
+  "why": "Multiply by 6."
+ },
+ {
+  "id": "h7-algA-029",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(2x-1)/3<=x+1"
+  },
+  "w": "2x-1<=3x+3\n-4<=x\nx>=-4",
+  "exp": "verified",
+  "why": "Multiply by positive 3; reading right."
+ },
+ {
+  "id": "h7-algA-030",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "5-2x<=9"
+  },
+  "w": "-2x<=4\nx>=-2",
+  "exp": "verified",
+  "why": "Divide by -2 reverses."
+ },
+ {
+  "id": "h7-algA-031",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "sqrt(x+1)+1=x"
+  },
+  "w": "sqrt(x+1)=x-1\nx+1=x^2-2x+1\nx(x-3)=0\nx=0: 1+1=2≠0 rejected\nx=3: 2+1=3 ok\nx=3",
+  "exp": "verified",
+  "why": "Isolate, square, check."
+ },
+ {
+  "id": "h7-algA-032",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(x^2+1)(x-3)=2(x^2+1)"
+  },
+  "w": "x^2+1>0 for all real x, so divide by it\nx-3=2\nx=5",
+  "exp": "verified",
+  "why": "Divisor shown nonzero."
+ },
+ {
+  "id": "h7-algA-033",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "p": {
+   "alg": "x^2-3x-4>0"
+  },
+  "w": "x^2-3x-4=(x-4)(x+1)\nparabola opens upward so it is positive outside the roots\nx<-1 or x>4",
+  "exp": "verified",
+  "why": "Correct sign analysis."
+ },
+ {
+  "id": "h7-algA-034",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "|2x+1|>=3"
+  },
+  "w": "2x+1>=3 or 2x+1<=-3\nx>=1 or x<=-2",
+  "exp": "verified",
+  "why": "Correct two-ray split."
+ },
+ {
+  "id": "h7-algA-035",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "p": {
+   "alg": "|x+1|=2x"
+  },
+  "w": "case x+1>=0: x+1=2x gives x=1, valid since 1>=-1\ncase x+1<0: -(x+1)=2x gives x=-1/3, but -1/3 is not < -1, rejected\nx=1",
+  "exp": "verified",
+  "why": "Case split with admissibility checks."
+ },
+ {
+  "id": "h7-algA-036",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "1/x+1/3=1/2"
+  },
+  "w": "1/x=1/2-1/3=1/6\nx=6",
+  "exp": "verified",
+  "why": "Reciprocal of 1/6."
+ },
+ {
+  "id": "h7-algA-037",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "p": {
+   "alg": "x^2-9=0"
+  },
+  "w": "(x-3)(x+3)=0\nx=3 or x=-3\nNote that 3^2=9 and 7 is prime.",
+  "exp": "verified",
+  "why": "Solution complete; the extra remark is true and harmless."
+ },
+ {
+  "id": "h7-algA-038",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "p": {
+   "alg": "4x=20"
+  },
+  "w": "x=5\nAlso 2+2=4.",
+  "exp": "verified",
+  "why": "Correct solution plus a true irrelevant line."
+ },
+ {
+  "id": "h7-algA-039",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "p": {
+   "alg": "2x-6=0"
+  },
+  "w": "2x=6\nx=3\nIncidentally 3 is odd.",
+  "exp": "verified",
+  "why": "Correct solution; side line true."
+ },
+ {
+  "id": "h7-algA-040",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "3x+2=5x-6"
+  },
+  "w": "3x-5x=-6-2\n-2x=-8\nx=-4",
+  "exp": "invalid",
+  "why": "-8/-2 = 4, not -4: sign error."
+ },
+ {
+  "id": "h7-algA-041",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "cancellation"
+  ],
+  "p": {
+   "alg": "x^2-4x=x"
+  },
+  "w": "x-4=1\nx=5",
+  "exp": "invalid",
+  "alt": [
+   "missing-assumption"
+  ],
+  "why": "Dividing by x loses root x=0; claimed solution set {5} is wrong."
+ },
+ {
+  "id": "h7-algA-042",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "extraneous"
+  ],
+  "p": {
+   "alg": "sqrt(x+6)=x"
+  },
+  "w": "x+6=x^2\n(x-3)(x+2)=0\nx=3 or x=-2",
+  "exp": "invalid",
+  "why": "x=-2 is extraneous: sqrt(4)=2≠-2."
+ },
+ {
+  "id": "h7-algA-043",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "dropped-pm"
+  ],
+  "p": {
+   "alg": "(x-3)^2=16"
+  },
+  "w": "x-3=4\nx=7",
+  "exp": "invalid",
+  "why": "Dropped x-3=-4, so x=-1 is lost."
+ },
+ {
+  "id": "h7-algA-044",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "inequality-sign"
+  ],
+  "p": {
+   "alg": "-3x<12"
+  },
+  "w": "x<-4",
+  "exp": "invalid",
+  "why": "Dividing by -3 must reverse: x>-4."
+ },
+ {
+  "id": "h7-algA-045",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "solution-set"
+  ],
+  "p": {
+   "alg": "x^2>9"
+  },
+  "w": "x>3",
+  "exp": "invalid",
+  "why": "Solution set is x<-3 or x>3."
+ },
+ {
+  "id": "h7-algA-046",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "solution-set"
+  ],
+  "p": {
+   "alg": "x^2-x-6<0"
+  },
+  "w": "(x-3)(x+2)<0\nx<3 or x>-2",
+  "exp": "invalid",
+  "why": "Should be -2<x<3 (and, not or); 'or' gives all reals."
+ },
+ {
+  "id": "h7-algA-047",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(x+1)^2=4"
+  },
+  "w": "x^2+1=4\nx^2=3\nx=±sqrt(3)",
+  "exp": "invalid",
+  "why": "(x+1)^2≠x^2+1; forged expansion."
+ },
+ {
+  "id": "h7-algA-048",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "correct-final"
+  ],
+  "p": {
+   "alg": "4x-8=0"
+  },
+  "w": "4x=8\nx=8-6\nx=2",
+  "exp": "invalid",
+  "why": "x=8-6 is false as a step (4x=8 gives x=8/4) though result 2 is right."
+ },
+ {
+  "id": "h7-algA-049",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "|x-2|=-3"
+  },
+  "w": "x-2=3 or x-2=-3\nx=5 or x=-1",
+  "exp": "invalid",
+  "why": "An absolute value cannot be -3; neither value satisfies it."
+ },
+ {
+  "id": "h7-algA-050",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "extraneous"
+  ],
+  "p": {
+   "alg": "sqrt(x+1)+1=x"
+  },
+  "w": "sqrt(x+1)=x-1\nx+1=x^2-2x+1\nx(x-3)=0\nx=0 or x=3",
+  "exp": "invalid",
+  "why": "x=0 is extraneous: 1+1≠0."
+ },
+ {
+  "id": "h7-algA-051",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "sqrt(x^2+16)=5"
+  },
+  "w": "x+4=5\nx=1",
+  "exp": "invalid",
+  "why": "sqrt(x^2+16)≠x+4; true solutions are x=±3."
+ },
+ {
+  "id": "h7-algA-052",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "1/x+1/3=1/2"
+  },
+  "w": "x+3=2\nx=-1",
+  "exp": "invalid",
+  "why": "1/x+1/3 is not 1/(x+3); x=-1 gives -2/3≠1/2."
+ },
+ {
+  "id": "h7-algA-053",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(x+1)/2=(x-1)/3"
+  },
+  "w": "3x+1=2x-1\nx=-2",
+  "exp": "invalid",
+  "why": "Cross-multiplying gives 3x+3=2x-2; line is false."
+ },
+ {
+  "id": "h7-algA-054",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x^2+4x-5=0"
+  },
+  "w": "x=(-4±sqrt(16-20))/2",
+  "exp": "invalid",
+  "why": "Discriminant is 16+20=36, sign error."
+ },
+ {
+  "id": "h7-algA-055",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x^2+6x=7"
+  },
+  "w": "(x+3)^2=7\nx=-3±sqrt(7)",
+  "exp": "invalid",
+  "why": "Completing the square requires adding 9: (x+3)^2=16."
+ },
+ {
+  "id": "h7-algA-056",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "|2x-3|>5"
+  },
+  "w": "2x-3>5 and 2x-3<-5\nx>4 and x<-1",
+  "exp": "invalid",
+  "why": "Should be 'or'; 'and' yields an empty set, wrong claim."
+ },
+ {
+  "id": "h7-algA-057",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "divide-by-zero"
+  ],
+  "p": {
+   "alg": "x-2=0"
+  },
+  "w": "x=2\nx^2=2x\nx^2-4=2x-4\n(x+2)(x-2)=2(x-2)\nx+2=2\nx=0",
+  "exp": "invalid",
+  "why": "Divides by x-2=0, producing false x=0."
+ },
+ {
+  "id": "h7-algA-058",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "(x-1)(x+2)=4"
+  },
+  "w": "x-1=4 or x+2=4\nx=5 or x=2",
+  "exp": "invalid",
+  "why": "Zero-product rule misused for a nonzero product."
+ },
+ {
+  "id": "h7-algA-059",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "divide-by-zero"
+  ],
+  "p": {
+   "alg": "x/(x-2)=2/(x-2)"
+  },
+  "w": "x=2",
+  "exp": "invalid",
+  "why": "x=2 makes both sides undefined; there is no solution."
+ },
+ {
+  "id": "h7-algA-060",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "dependent"
+  ],
+  "p": {
+   "alg": "x^2-5x+6=0"
+  },
+  "w": "(x-1)(x-6)=0\nx=1 or x=6",
+  "exp": "invalid",
+  "why": "(x-1)(x-6)=x^2-7x+6, wrong factorisation; later line depends on it."
+ },
+ {
+  "id": "h7-algA-061",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "dependent"
+  ],
+  "p": {
+   "alg": "x^2=4x"
+  },
+  "w": "x^2-4x=0\nx(x-4)=0\nx≠0 from the first line\nx=4",
+  "exp": "invalid",
+  "why": "Claim x≠0 is unsupported (x=0 satisfies the equation)."
+ },
+ {
+  "id": "h7-algA-062",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "p": {
+   "alg": "2x+6=14"
+  },
+  "w": "x=4\nSince 4^2=18, the answer is clean.",
+  "exp": "invalid",
+  "why": "Solution right but side line 4^2=18 is false."
+ },
+ {
+  "id": "h7-algA-063",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "p": {
+   "alg": "x^2-2x+1=0"
+  },
+  "w": "(x-1)^2=0\nx=1\nThe discriminant of x^2+2x+1 is 4.",
+  "exp": "invalid",
+  "why": "Irrelevant false statement: that discriminant is 0."
+ },
+ {
+  "id": "h7-algA-064",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "p": {
+   "alg": "|x+1|=2x"
+  },
+  "w": "assume x+1<0, so |x+1|=x+1\nx+1=2x\nx=1",
+  "exp": "invalid",
+  "why": "Under x+1<0 the absolute value equals -(x+1); false case line."
+ },
+ {
+  "id": "h7-algA-065",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "1/x+1/(x+1)=1"
+  },
+  "w": "multiply both sides by x(x+1): 2x+1=x^2+x\nx^2-x-1=0\nx=(1±sqrt(5))/2",
+  "exp": "missing-assumption",
+  "why": "Multiplying by x(x+1) needs x≠0,-1, never stated."
+ },
+ {
+  "id": "h7-algA-066",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "p": {
+   "alg": "(x-2)(x+1)=(x-2)(2x-5)"
+  },
+  "w": "assume x≠2 and divide by x-2: x+1=2x-5\nx=6",
+  "exp": "missing-assumption",
+  "why": "Case x=2 (a real solution) is not treated."
+ },
+ {
+  "id": "h7-algA-067",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "p": {
+   "alg": "(x+1)/(x-1)>2"
+  },
+  "w": "assume x>1 so x-1>0\nx+1>2x-2\nx<3\nhence 1<x<3",
+  "exp": "missing-assumption",
+  "why": "Case x<1 is never examined (needed to show no solutions there)."
+ },
+ {
+  "id": "h7-algA-068",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "p": {
+   "alg": "|2x+1|=x+4"
+  },
+  "w": "case 2x+1>=0: 2x+1=x+4\nx=3",
+  "exp": "missing-assumption",
+  "why": "Other branch (x=-5/3) omitted; case work incomplete."
+ },
+ {
+  "id": "h7-algA-069",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "p": {
+   "alg": "x^2=3x"
+  },
+  "w": "for x≠0 divide by x: x=3",
+  "exp": "missing-assumption",
+  "why": "Case x=0 left unaddressed."
+ },
+ {
+  "id": "h7-algA-070",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "dropped-pm"
+  ],
+  "p": {
+   "alg": "x^2-9=0"
+  },
+  "w": "x^2=9\nx=3",
+  "exp": "invalid",
+  "why": "Dropped x=-3; final answer wrong."
+ },
+ {
+  "id": "h7-algA-071",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "2x+3=11"
+  },
+  "w": "2x=8",
+  "exp": "incomplete",
+  "why": "Correct but stops before x."
+ },
+ {
+  "id": "h7-algA-072",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x^2-7x+12=0"
+  },
+  "w": "(x-3)(x-4)=0",
+  "exp": "incomplete",
+  "why": "True factorisation, roots not stated."
+ },
+ {
+  "id": "h7-algA-073",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "5x=20"
+  },
+  "w": "5x=20",
+  "exp": "incomplete",
+  "why": "Only restates the equation."
+ },
+ {
+  "id": "h7-algA-074",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "sqrt(x+2)=x"
+  },
+  "w": "x+2=x^2\nx^2-x-2=0",
+  "exp": "incomplete",
+  "why": "True consequences but no solution reached."
+ },
+ {
+  "id": "h7-algA-075",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "|3x-2|=4"
+  },
+  "w": "3x-2=4 or 3x-2=-4",
+  "exp": "incomplete",
+  "why": "Branches stated, never solved."
+ },
+ {
+  "id": "h7-algA-076",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "2x-1>5"
+  },
+  "w": "2x>6",
+  "exp": "incomplete",
+  "why": "Stops before isolating x."
+ },
+ {
+  "id": "h7-algA-077",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA"
+  ],
+  "p": {
+   "alg": "x^2+8x+3=0"
+  },
+  "w": "x^2+8x=-3\n(x+4)^2=13",
+  "exp": "incomplete",
+  "why": "Correct completed square, roots not stated."
+ },
+ {
+  "id": "h7-algA-078",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "coincidence"
+  ],
+  "p": {
+   "alg": "7x-3=25"
+  },
+  "w": "28=7*4\nx=4",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "why": "28 appears from nowhere (25+3 never shown); true arithmetic with unexplained constant."
+ },
+ {
+  "id": "h7-algA-079",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "coincidence",
+   "solution-set"
+  ],
+  "p": {
+   "alg": "x^2+x-12=0"
+  },
+  "w": "3^2+3=12\nso x=3",
+  "exp": "invalid",
+  "why": "Substitution shows 3 is a root but not the full set; -4 is also a root."
+ },
+ {
+  "id": "h7-algA-080",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "p": {
+   "alg": "5x-10=0"
+  },
+  "w": "10/2=5\n3^2=9",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "why": "Only irrelevant true calculations; x never found."
+ },
+ {
+  "id": "h7-algA-081",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "coincidence"
+  ],
+  "p": {
+   "alg": "3x-4=8"
+  },
+  "w": "12/3=4\nx=4",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "why": "12 introduced without derivation from 8 and 4; correct number reached via ungrounded route."
+ },
+ {
+  "id": "h7-algA-082",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "ambiguous"
+  ],
+  "p": {
+   "alg": "1/2x=4"
+  },
+  "w": "x=8",
+  "exp": "ambiguous",
+  "alt": [
+   "invalid"
+  ],
+  "why": "1/2x reads as (1/2)x giving 8, or 1/(2x) giving 1/8."
+ },
+ {
+  "id": "h7-algA-083",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "ambiguous"
+  ],
+  "p": {
+   "alg": "1/2x=4"
+  },
+  "w": "x=1/8",
+  "exp": "ambiguous",
+  "alt": [
+   "invalid"
+  ],
+  "why": "Reading 1/(2x) gives 1/8 but (1/2)x gives 8."
+ },
+ {
+  "id": "h7-algA-084",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "unsupported"
+  ],
+  "p": {
+   "alg": "x^5-x-1=0"
+  },
+  "w": "x≈1.1673",
+  "exp": "unsupported",
+  "alt": [
+   "incomplete"
+  ],
+  "why": "Quintic has no radical closed form; numeric root only."
+ },
+ {
+  "id": "h7-algA-085",
+  "cat": "algebra-equations",
+  "tags": [
+   "algA",
+   "unsupported"
+  ],
+  "p": {
+   "alg": "x^3-3x+1=0"
+  },
+  "w": "x=2cos(40°)",
+  "exp": "unsupported",
+  "alt": [
+   "incomplete"
+  ],
+  "why": "Casus irreducibilis; trigonometric form is outside an exact algebraic checker."
+ }
+]
