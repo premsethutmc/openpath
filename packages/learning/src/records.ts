@@ -16,11 +16,23 @@ interface Base {
   learnerId: string;
   sessionId: string;
 }
+/** assessment@1: what the authoritative assessment decided, kept apart (a correct answer is not method mastery; unresolved is not incorrect) */
+export interface AttemptAssessment {
+  policy: "assessment@1";
+  answerCorrect: boolean | null;
+  methodExamined: boolean;
+  derivationVerified: boolean;
+  firstError: null | { transition: number; from: string; to: string; kind: string; explanation: string };
+  clarificationRequired: boolean;
+  aiFallbackUsed: boolean;
+  unresolved: boolean;
+  source: "kernel" | "legacy" | "educator" | "held" | "disagreement";
+}
 export type LearningRecord =
   | (Base & { record: "enrol"; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "goal"; pathway: string; targetYear?: number; active: boolean })
   | (Base & { record: "curriculum"; release: CurriculumRelease })
-  | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[] })
+  | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[]; assessment?: AttemptAssessment })
   | (Base & { record: "teach"; rule: string; strategy: string; competency: string })
   | (Base & { record: "topic_session"; academicYear: string; stage: "diagnostic" | "plan"; target: string; minutes?: 15 | 30 | 60; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "study_session"; planId:string; revision:number; phase:"start"|"active"|"ended"; time:StudyTime; advice?:StudyAdvice; summary?:StudySummary })
@@ -52,6 +64,7 @@ export interface PendingWritten {
   text: string;
   competency: string;
 }
+export const UNRESOLVED_CAP = 2;
 export interface LearnerRecords {
   enrolments: { at: string; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } }[];
   goals: Map<string, { pathway: string; targetYear?: number; since: string }>;
@@ -62,13 +75,15 @@ export interface LearnerRecords {
   sessions: Record<string, string>;
   /** written@1: written answers not yet marked. */
   pending: PendingWritten[];
+  /** assessment@1: submissions the assessment could not decide. They are not attempts: no credit either way, no effect on mastery or on the attempt number. */
+  unresolved: { id: string; at: string; questionId: string; assessment: AttemptAssessment }[];
 }
 
 export function readRecords(learnerId: string, events: readonly { kind: string }[], marks: readonly WrittenMark[] = []): LearnerRecords {
-  const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], sessions: {}, pending: [] };
+  const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], sessions: {}, pending: [], unresolved: [] };
   const markOf = new Map(marks.map((m) => [m.attemptId, m]));
   const seen = new Set<string>();
-  const count = new Map<string, number>();
+  const count = new Map<string, number>(), held = new Map<string, number>();
   for (const raw of events) {
     if (raw.kind !== "learning_record") continue;
     const r = raw as LearningRecord;
@@ -81,6 +96,8 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
       else out.goals.delete(r.pathway);
     } else if (r.record === "curriculum") out.curricula.set(`${r.release.id}@${r.release.version}#${r.release.hash}`, r.release);
     else if (r.record === "attempt" && isWritten(r.questionId) && !markOf.has(r.id)) out.pending.push({ id: r.id, at: r.at, questionId: r.questionId, text: r.response, competency: r.competency });
+    // at most UNRESOLVED_CAP undecided submissions per problem sit outside the attempts: a learner cannot park wrong answers as "unresolved" to avoid the demotion rule
+    else if (r.record === "attempt" && isQuestion(r.questionId) && r.assessment?.unresolved === true && held.set(exposureKey(r.questionId), (held.get(exposureKey(r.questionId)) ?? 0) + 1).get(exposureKey(r.questionId))! <= UNRESOLVED_CAP) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment });
     else if (r.record === "attempt" && isQuestion(r.questionId)) {
       // the same problem in another answer format is the same exposure: a second sight is never fresh evidence
       const key = exposureKey(r.questionId);

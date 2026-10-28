@@ -211,6 +211,27 @@ class GeneratedQuestionTests(LearningBase):
             self.serial += 1
 
 
+class AssessmentEvidenceTests(LearningBase):
+    """assessment@1: the separate results of one submission are stored with the attempt, and cannot overstate the learner's standing."""
+    KEYS = dict(policy='assessment@1', methodExamined=False, derivationVerified=False, firstError=None, clarificationRequired=False, aiFallbackUsed=False)
+
+    def attempt_with(self, response, assessment):
+        return self.rec('attempt', questionId='gen:lin:3,5,4', response=response, activity='diagnostic', hints=0, solution=False, competency='MATH.algebra.linear-equations', assessment=assessment)
+
+    def test_decided_and_undecided_results_are_kept_and_overstatements_refused(self):
+        self.save(self.enrol())
+        right = dict(self.KEYS, answerCorrect=True, unresolved=False, source='kernel')
+        self.assertEqual(self.save(self.attempt_with('4', right)).status_code, 201)
+        undecided = dict(self.KEYS, answerCorrect=None, unresolved=True, source='kernel', clarificationRequired=True)
+        self.assertEqual(self.save(self.attempt_with('four-ish', undecided) | {'id': 'u1'}).status_code, 201)
+        for bad in [dict(right, answerCorrect=False, source='kernel') | {'unresolved': True},    # undecided but carrying a verdict
+                    dict(right, aiFallbackUsed=True), dict(right, derivationVerified=True), dict(right, extra=1), dict(right, source='guess')]:
+            self.serial += 1
+            self.assertEqual(self.save(self.attempt_with('4', bad) | {'id': f'b{self.serial}'}).status_code, 400, bad)
+        self.serial += 1
+        self.assertEqual(self.save(self.attempt_with('5', right) | {'id': f'c{self.serial}'}).status_code, 400)    # claims "correct" for a wrong answer
+
+
 class PlatformTests(LearningBase):
     """The platform directive: synthesised modules, multiple-choice generated questions, nested curricula."""
 

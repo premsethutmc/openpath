@@ -33,11 +33,19 @@ const none = (reason: string, status: "unresolved" | "unsupported", t0: number):
 /**
  * @param problem  `{ domain: "algebra", statement }` (equations, inequalities, rational/radical equations, numeric expressions)
  * @param working  `{ format: "natural" | "latex", text }`; other domains are reported unsupported, not forced into solution-set comparison
+ * @param opts.finalAnswer  the explicit final answer, already in statement form ("x = 4", "x = 2 or x = 3", "56"); appended as the last line. Without working, only the verdict is produced (nothing to localise).
  * @param opts.diagnose  false = answer verdict only; default true = diagnose only when the answer is not correct (a correct answer is never analysed); "always" = also report the written transitions of a correct answer (optional, never part of the credit decision)
  */
-export function assessAnswerFirst(problem: unknown, working: unknown, opts: { diagnose?: boolean | "always" } = {}): AnswerFirstAssessment {
+export function assessAnswerFirst(problem: unknown, working: unknown, opts: { diagnose?: boolean | "always"; finalAnswer?: string } = {}): AnswerFirstAssessment {
   const t0 = performance.now();
-  const p = problem as { domain?: string; statement?: string; task?: string } | null, w = working as { format?: string; text?: string } | null;
+  const p = problem as { domain?: string; statement?: string; task?: string } | null;
+  let w = working as { format?: string; text?: string } | null;
+  // an explicit final answer (the answer field) is the final line; it is never inferred from the working, and a missing working is not an error
+  if (typeof opts.finalAnswer === "string" && opts.finalAnswer.trim()) {
+    const prior = w && typeof w.text === "string" && w.text.trim() && (w.format === "natural" || w.format === "latex") ? w : null;
+    w = { format: prior?.format ?? "natural", text: prior ? `${prior.text.replace(/\s+$/, "")}\n${opts.finalAnswer.trim()}` : opts.finalAnswer.trim() };
+    if (!prior) opts = { ...opts, diagnose: false };
+  }
   if (!p || p.domain !== "algebra" || typeof p.statement !== "string") return none("answer-first grading is implemented for algebra statements (solution sets and numeric values); other domains keep their own invariant-based assessment", "unsupported", t0);
   if (!w || typeof w.text !== "string" || !(w.format === "natural" || w.format === "latex")) return none("natural-text working is required", "unsupported", t0);
   let parsed = parseNaturalWorking({ format: w.format, text: w.text });

@@ -24,7 +24,7 @@ RECORDS = {
     'enrol': {'grade', 'academicYear', 'curriculum'},
     'goal': {'pathway', 'active', 'targetYear'},
     'curriculum': {'release'},
-    'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working'},
+    'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working', 'assessment'},
     'teach': {'rule', 'strategy', 'competency'},
     'skip': {'target'},
     'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
@@ -147,13 +147,38 @@ def right(q, response):
     return c is not None and c == canonical(q['type'], q['answer'])
 
 
+UNRESOLVED_CAP = 2  # the app's records.ts UNRESOLVED_CAP: undecided submissions per problem that sit outside the attempts
+ASSESSMENT_KEYS = {'policy', 'answerCorrect', 'methodExamined', 'derivationVerified', 'firstError', 'clarificationRequired', 'aiFallbackUsed', 'unresolved', 'source'}
+ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement'}
+
+
+def _assessment_ok(a, q, response):
+    """assessment@1: the separate results of one submission. The server cannot re-run the exact checker, so it admits only what cannot overstate the learner's standing:
+    a decided answer may not claim more than the stored answer allows (a claim of 'correct' must match), an undecided one carries no verdict, and no derivation or AI check is claimed."""
+    if not isinstance(a, dict) or set(a) != ASSESSMENT_KEYS or a['policy'] != 'assessment@1' or a['source'] not in ASSESSMENT_SOURCES:
+        return False
+    if any(type(a[k]) is not bool for k in ('methodExamined', 'derivationVerified', 'clarificationRequired', 'aiFallbackUsed', 'unresolved')):
+        return False
+    if a['derivationVerified'] or a['aiFallbackUsed'] or a['answerCorrect'] not in (True, False, None):
+        return False
+    fe = a['firstError']
+    if fe is not None and not (isinstance(fe, dict) and set(fe) == {'transition', 'from', 'to', 'kind', 'explanation'} and type(fe['transition']) is int
+                               and all(isinstance(fe[k], str) and len(fe[k]) <= 240 for k in ('from', 'to', 'kind', 'explanation'))):
+        return False
+    if a['unresolved']:
+        return a['answerCorrect'] is None and fe is None and a['source'] != 'educator' and q['type'] not in HUMAN
+    if q['type'] in HUMAN:
+        return a['source'] == 'educator' and a['answerCorrect'] is None
+    return a['source'] in ('kernel', 'legacy') and (a['answerCorrect'] is not True or right(q, response)) and (fe is None or a['answerCorrect'] is False)
+
+
 def independent_at(prior, competency, marks=None):
     """When independent success on this competency was first shown (the app's skillEvidence.independentAt). A written
     answer counts only once an educator has marked it correct (marks: attempt id -> verdict); unmarked, it is not
     yet evidence of anything."""
     qs = content()['questions']
     marks = marks or {}
-    seen, distinct = {}, set()
+    seen, distinct, held = {}, set(), {}
     for e in prior:
         if e.get('record') == 'attempt' and (qs.get(e.get('questionId')) or {}).get('type') in HUMAN and e.get('id') not in marks:
             continue
@@ -162,6 +187,10 @@ def independent_at(prior, competency, marks=None):
             continue
         # one exposure per problem, whichever answer format (the app's families.ts exposureKey; distinct@1)
         key = exposure(e['questionId'])
+        if (e.get('assessment') or {}).get('unresolved') is True:
+            held[key] = held.get(key, 0) + 1
+            if held[key] <= UNRESOLVED_CAP:
+                continue  # undecided: not an attempt (the app's readRecords)
         n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue
@@ -322,6 +351,8 @@ def checked_learning(event, pupil):
                 _reject('Open this study session before recording answers; a completed summary is final.')
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')
+        if 'assessment' in event and not _assessment_ok(event['assessment'], q, event['response']):
+            _reject('The assessment result does not match the answer.')
         w = event.get('working', [])
         if not isinstance(w, list) or len(w) > 8 or not all(isinstance(x, str) and len(x) <= 80 for x in w):
             _reject('Working is at most 8 lines of 80 characters.')
