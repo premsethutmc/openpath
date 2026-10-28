@@ -2,7 +2,7 @@ import type {StudyAdvice} from '../../../packages/learning/src/study-session';
 import {useRef,useState,useEffect} from 'react';
 import {useStudyTime,type SaveStudy} from './useStudyTime';
 import {studyAdvice} from './study-summary';
-import {isCorrect,question} from '../../../packages/learning/src/content';
+import {creditOf} from '../../../packages/learning/src/grade';
 import type {StudyRecord} from '../../../packages/learning/src/session';
 import type {CurriculumRelease} from '../../../packages/learning/src/curriculum';
 /** Executes a saved planner queue using existing lessons, module decisions and keyboard question controls. */
@@ -40,7 +40,7 @@ export function StudySession({plan,ctx,resumeKey,onBack,planId,learner,release,l
  const finish=()=>timer.finish(studyAdvice(planId,release,ctx,initialGaps));
  useEffect(()=>{if(finishAfterStep&&!ctx.saving){setFinishAfterStep(false);void finish();}},[finishAfterStep,ctx.saving,ctx.records]);
  const studyCtx:Ctx={...ctx,saving:ctx.saving||!timer.ready||timer.ending||timer.closing||finishAfterStep,
-  answer:async(qid,response,activity,o)=>{const ok=await ctx.answer(qid,response,activity,{...o,context:`study:${planId}`});if(ok&&finishCurrent&&isCorrect(question(qid),response))setFinishAfterStep(true);return ok;},
+  answer:async(qid,response,activity,o)=>{const ok=await ctx.answer(qid,response,activity,{...o,context:`study:${planId}`});if(ok&&finishCurrent&&creditOf(qid,response)===true)setFinishAfterStep(true);return ok;},
   teach:async(...args)=>{const ok=await ctx.teach(...args);if(ok&&finishCurrent)setFinishAfterStep(true);return ok;}};
 
  // Freeze the selected planner recommendations for this saved session. Practice must not rewrite its queue.

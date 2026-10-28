@@ -38,7 +38,7 @@ WRITTEN_LIMIT = 16000  # a written answer, or a drawing with its note (draw@1; f
 RETENTION_DELAY = timedelta(days=7)
 INDEPENDENT_MIN = 2
 INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
-NUMBER = r'[+-]?\d{1,9}'
+NUMBER = r'[+-]?\d{1,9}(?:\.\d{0,9})?'  # a whole number may be typed with a zero decimal part (the app's canonical)
 RATIONAL = r'[+-]?\d{1,9}(?:\.\d{1,6})?(?:/[+-]?\d{1,9})?'
 # mixed@1: a mixed number "3 1/2" is 3 + 1/2 ("-3 1/2" is -(3 + 1/2)), never 31/2 (packages/mathematics answers.ts)
 MIXED = r'([+-]?)(\d{1,9})\s+(\d{1,9})/(\d{1,9})'
@@ -114,6 +114,12 @@ def server_now(pupil):
     return now
 
 
+def _unbrace(t):
+    """An unordered set may be written with its braces: {1, 2} is 1, 2 (the app's canonical)."""
+    m = re.fullmatch(r'\{([^{}]*)\}', t)
+    return m.group(1) if m else t
+
+
 def canonical(kind, raw):
     """The answer's canonical form (the app's `canonical`), or None if it is not one of this kind. answers@2 types
     (answer_types.py): exact types have a canonical form; sampled types are compared in `right`; written: none."""
@@ -124,11 +130,14 @@ def canonical(kind, raw):
         if kind == 'choice':
             return t.upper() if t.upper() in {'A', 'B', 'C', 'D'} else None
         if kind == 'integer':
-            return str(int(t)) if re.fullmatch(NUMBER, t, flags=re.ASCII) else None
+            if not re.fullmatch(NUMBER, t, flags=re.ASCII):
+                return None
+            v = Fraction(t)
+            return str(v.numerator) if v.denominator == 1 else str(v)
         if kind == 'fraction':
             return str(_rational(t))
         if kind == 'set':
-            parts = [Fraction(p.strip()) for p in t.split(',')]
+            parts = [Fraction(p.strip()) for p in _unbrace(t).split(',')]
             return ','.join(sorted(str(p) for p in parts)) if len(set(parts)) == len(parts) else None
     except (ValueError, ZeroDivisionError):
         return None
@@ -152,9 +161,10 @@ ASSESSMENT_KEYS = {'policy', 'answerCorrect', 'methodExamined', 'derivationVerif
 ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement'}
 
 
-def _assessment_ok(a, q, response):
-    """assessment@1: the separate results of one submission. The server cannot re-run the exact checker, so it admits only what cannot overstate the learner's standing:
-    a decided answer may not claim more than the stored answer allows (a claim of 'correct' must match), an undecided one carries no verdict, and no derivation or AI check is claimed."""
+def _assessment_ok(a, q, response=None):
+    """assessment@1, SHAPE only. What the client says about its own grading is advisory: it may carry diagnosis text and the
+    step offers it showed, but it cannot carry a verdict the server has not made (`_authoritative` overwrites answerCorrect and
+    unresolved from the stored answer), and it may not claim a derivation check or AI use."""
     if not isinstance(a, dict) or set(a) != ASSESSMENT_KEYS or a['policy'] != 'assessment@1' or a['source'] not in ASSESSMENT_SOURCES:
         return False
     if any(type(a[k]) is not bool for k in ('methodExamined', 'derivationVerified', 'clarificationRequired', 'aiFallbackUsed', 'unresolved')):
@@ -162,14 +172,24 @@ def _assessment_ok(a, q, response):
     if a['derivationVerified'] or a['aiFallbackUsed'] or a['answerCorrect'] not in (True, False, None):
         return False
     fe = a['firstError']
-    if fe is not None and not (isinstance(fe, dict) and set(fe) == {'transition', 'from', 'to', 'kind', 'explanation'} and type(fe['transition']) is int
-                               and all(isinstance(fe[k], str) and len(fe[k]) <= 240 for k in ('from', 'to', 'kind', 'explanation'))):
-        return False
-    if a['unresolved']:
-        return a['answerCorrect'] is None and fe is None and a['source'] != 'educator' and q['type'] not in HUMAN
+    return fe is None or (isinstance(fe, dict) and set(fe) == {'transition', 'from', 'to', 'kind', 'explanation'} and type(fe['transition']) is int
+                          and all(isinstance(fe[k], str) and len(fe[k]) <= 240 for k in ('from', 'to', 'kind', 'explanation')))
+
+
+def _authoritative(event, q, readable):
+    """The server's decision about one answer, from the stored answer and nothing the client claims (the python mirror of the app's
+    legacy comparison). An answer the server cannot read is saved and left undecided (never wrong); a readable one is decided
+    here whatever the client said. Written answers stay with the educator."""
+    a = event.get('assessment')
     if q['type'] in HUMAN:
-        return a['source'] == 'educator' and a['answerCorrect'] is None
-    return a['source'] in ('kernel', 'legacy') and (a['answerCorrect'] is not True or right(q, response)) and (fe is None or a['answerCorrect'] is False)
+        return None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'}
+    if readable:
+        if a is None:
+            return None
+        ok = right(q, event['response'])
+        return {**a, 'answerCorrect': ok, 'unresolved': False, 'firstError': None if ok else a['firstError'], 'source': a['source'] if a['source'] in ('kernel', 'legacy') else 'legacy'}
+    base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'source': 'legacy'}
+    return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': True, 'unresolved': True, 'source': base['source'] if base['source'] in ('kernel', 'legacy') else 'legacy'}
 
 
 def independent_at(prior, competency, marks=None):
@@ -229,7 +249,7 @@ def _answer_ok(kind, raw):
     if kind == 'fraction':
         return (re.fullmatch(RATIONAL, t, flags=re.ASCII) is not None or re.fullmatch(MIXED, t, flags=re.ASCII) is not None) and not re.search(r'/[+-]?0+$', t)
     if kind == 'set':
-        parts = [p.strip() for p in t.split(',')]
+        parts = [p.strip() for p in _unbrace(t).split(',')]
         return 0 < len(parts) <= 30 and all(re.fullmatch(RATIONAL, p, flags=re.ASCII) for p in parts)
     if kind == 'polynomial':
         return re.fullmatch(r'[0-9x+\-*^() /.²³]{1,60}', t) is not None
@@ -342,8 +362,9 @@ def checked_learning(event, pupil):
             _reject('Unknown activity.')
         if type(event.get('hints')) is not int or not 0 <= event['hints'] <= 5 or type(event.get('solution')) is not bool:
             _reject('Hints and solutions are recorded as given.')
-        if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or not _answer_ok(q['type'], event['response']):
-            _reject('That answer is not in the form this question asks for.')
+        if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or not event['response'].strip():
+            _reject('That answer is too long, or empty.')
+        readable = _answer_ok(q['type'], event['response'])  # not readable: saved undecided below, never recorded as wrong
         if isinstance(event.get('context'), str) and event['context'].startswith('study:'):
             plan_id = event['context'][6:]
             visits = [e for e in prior if e.get('record') == 'study_session' and e.get('planId') == plan_id]
@@ -351,8 +372,11 @@ def checked_learning(event, pupil):
                 _reject('Open this study session before recording answers; a completed summary is final.')
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')
-        if 'assessment' in event and not _assessment_ok(event['assessment'], q, event['response']):
-            _reject('The assessment result does not match the answer.')
+        if 'assessment' in event and not _assessment_ok(event['assessment'], q):
+            _reject('The assessment result is malformed.')
+        decided = _authoritative(event, q, readable)
+        if decided is not None:
+            event = {**event, 'assessment': decided}
         w = event.get('working', [])
         if not isinstance(w, list) or len(w) > 8 or not all(isinstance(x, str) and len(x) <= 80 for x in w):
             _reject('Working is at most 8 lines of 80 characters.')

@@ -55,7 +55,7 @@ describe("decision: answer first, explicit answer, no guessing", () => {
   test("incomplete solution set is not credited but is described as incomplete", () => { const a = decide(quad, "2"); expect(a.credit).toBe(false); expect(a.feedback.kind).toBe("incomplete"); });
   test("alternative forms are accepted and recorded in plain form", () => {
     for (const r of ["x = 2 or x = 3", "{3, 2}", "2 and 3", "x=2, x=3"]) { const a = decide(quad, r); expect(a.credit).toBe(true); }
-    expect(decide(quad, "x=2, x=3").recordAs).toBe("2, 3"); expect(decide(lin, "4.0").recordAs).toBe("4");
+    expect(decide(quad, "x=2, x=3").recordAs).toBe("2, 3"); expect(decide(lin, "x = 4").recordAs).toBe("4"); expect(decide(lin, "4.0").credit).toBe(true); expect(decide(lin, "4.0").recordAs).toBeUndefined();
   });
   test("unreadable answer: unresolved, never incorrect; one clarification, then pending and fallback-eligible", () => {
     const a1 = decide(lin, "four-ish"); expect(a1.credit).toBeNull(); expect(a1.evidence).toMatchObject({ unresolved: true, answerCorrect: null, clarificationRequired: true }); expect(a1.clarification?.kind).toBe("answer-field"); expect(a1.fallbackEligible).toBe(false);

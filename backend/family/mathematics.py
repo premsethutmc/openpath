@@ -79,7 +79,7 @@ def checked_activity(event, pupil):
         if event['response'].strip().upper() not in {'A', 'B', 'C', 'D'}:
             raise ValidationError({'event': 'Choose one of A, B, C or D.'})
     elif event['action'] == 'answer' and kind == 'integer':
-        if not re.fullmatch('[+-]?\\d{1,9}', event['response'].strip().replace('−', '-'), flags=re.ASCII):
+        if not re.fullmatch('[+-]?\\d{1,9}(?:\\.\\d{0,9})?', event['response'].strip().replace('−', '-'), flags=re.ASCII):
             raise ValidationError({'event': 'Enter a whole number (an integer).'})
     elif event['action'] == 'answer' and kind in {'fraction', 'values'}:
         q = next(x for x in spec['questions'] if x['id'] == event['questionId'])

@@ -6,7 +6,7 @@
  * of the task premises it was produced under. The certifier recomputes both from the submission and the problem; anything that does not match is not evidence for the claim.
  * No mathematics is evaluated here and nothing is parsed: identity is a content address, so it cannot be fooled by a parser's reading.
  */
-import { createHash } from "node:crypto";
+import { sha256Hex } from "./digest.ts";
 
 export const EVIDENCE_BINDING_CONTRACT = "openpath-evidence-binding@1" as const;
 
@@ -17,7 +17,7 @@ export function normalizeClaim(text: string): string {
   s = s.replace(/^\s*\d+[.)]\s+/, "").replace(/[−–—×·⋅÷≠≤≥√∠°π’]/g, (c) => SYM[c] ?? c);
   return s.toLowerCase().replace(/\s+/g, "").replace(/[.;]+$/, "");
 }
-const sha = (x: string) => createHash("sha256").update(x).digest("hex").slice(0, 16);
+const sha = (x: string) => sha256Hex(x).slice(0, 16);
 export const claimIdentity = (text: string): string => sha("claim:" + normalizeClaim(text));
 /** identity of a submitted typed object (step, problem): canonical JSON with sorted keys; ids/labels of the step are part of what was submitted */
 export function objectIdentity(x: unknown): string {

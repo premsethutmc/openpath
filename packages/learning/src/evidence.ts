@@ -16,7 +16,8 @@ import type { AssistedResponseEvent, EvidenceEvent, HintEvent, Item } from "../.
 import { sharedProfile } from "../../mathematics/src/canonical";
 import type { GraphVersion } from "../../mathematics/src/prerequisites";
 import { mathematicsLedger } from "../../mathematics/src/registration";
-import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
+import { creditOf } from "./grade";
+import { canonical, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
@@ -154,7 +155,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // micro-skill, never for showing the whole skill on your own
   const micro = !!graph.byId.get(id)?.partOf;
   const ind = mine.filter((a) => independentAttempt(a) && (micro || a.activity !== "probe"));
-  const right = (a: Attempt) => isCorrect(question(a.questionId), a.response);
+  const right = (a: Attempt) => creditOf(a.questionId, a.response) === true;
   const distinctRight = new Set<string>();
   let independentAt: string | null = null;
   for (const a of ind) {
@@ -222,4 +223,4 @@ export function evidenceFor(learnerId: string, records: LearnerRecords, now: num
   };
   return { ledger, get };
 }
-export const rightAnswer = (a: Attempt) => isCorrect(question(a.questionId), a.response);
+export const rightAnswer = (a: Attempt) => creditOf(a.questionId, a.response) === true;

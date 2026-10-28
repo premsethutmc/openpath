@@ -216,21 +216,44 @@ class AssessmentEvidenceTests(LearningBase):
     KEYS = dict(policy='assessment@1', methodExamined=False, derivationVerified=False, firstError=None, clarificationRequired=False, aiFallbackUsed=False)
 
     def attempt_with(self, response, assessment):
+        if assessment is None:
+            return {k: v for k, v in self.attempt_with(response, {}).items() if k != 'assessment'}
         return self.rec('attempt', questionId='gen:lin:3,5,4', response=response, activity='diagnostic', hints=0, solution=False, competency='MATH.algebra.linear-equations', assessment=assessment)
 
-    def test_decided_and_undecided_results_are_kept_and_overstatements_refused(self):
+    def stored(self, rid):
+        return next(e for e in self.records() if e['id'] == rid)
+
+    def test_malformed_or_overstated_evidence_is_refused(self):
         self.save(self.enrol())
         right = dict(self.KEYS, answerCorrect=True, unresolved=False, source='kernel')
-        self.assertEqual(self.save(self.attempt_with('4', right)).status_code, 201)
-        undecided = dict(self.KEYS, answerCorrect=None, unresolved=True, source='kernel', clarificationRequired=True)
-        self.assertEqual(self.save(self.attempt_with('four-ish', undecided) | {'id': 'u1'}).status_code, 201)
-        for bad in [dict(right, answerCorrect=False, source='kernel') | {'unresolved': True},    # undecided but carrying a verdict
-                    dict(right, aiFallbackUsed=True), dict(right, derivationVerified=True), dict(right, extra=1), dict(right, source='guess')]:
+        for bad in [dict(right, aiFallbackUsed=True), dict(right, derivationVerified=True), dict(right, extra=1), dict(right, source='guess'), dict(right, answerCorrect='yes')]:
             self.serial += 1
             self.assertEqual(self.save(self.attempt_with('4', bad) | {'id': f'b{self.serial}'}).status_code, 400, bad)
-        self.serial += 1
-        self.assertEqual(self.save(self.attempt_with('5', right) | {'id': f'c{self.serial}'}).status_code, 400)    # claims "correct" for a wrong answer
 
+    def test_the_server_decides_correctness_whatever_the_browser_claims(self):
+        self.save(self.enrol())
+        right = dict(self.KEYS, answerCorrect=True, unresolved=False, source='kernel')
+        self.assertEqual(self.save(self.attempt_with('4', right) | {'id': 'ok'}).status_code, 201)
+        self.assertIs(self.stored('ok')['assessment']['answerCorrect'], True)
+        # a wrong answer that claims "correct" is stored as incorrect, not refused and not credited
+        self.assertEqual(self.save(self.attempt_with('5', right) | {'id': 'forged'}).status_code, 201)
+        self.assertIs(self.stored('forged')['assessment']['answerCorrect'], False)
+        # a wrong, readable answer parked as "unresolved" is decided by the server
+        parked = dict(self.KEYS, answerCorrect=None, unresolved=True, source='kernel', clarificationRequired=True)
+        self.assertEqual(self.save(self.attempt_with('5', parked) | {'id': 'parked'}).status_code, 201)
+        self.assertEqual((self.stored('parked')['assessment']['answerCorrect'], self.stored('parked')['assessment']['unresolved']), (False, False))
+        # a right answer claimed "incorrect" is stored as correct
+        self.assertEqual(self.save(self.attempt_with('4', dict(right, answerCorrect=False)) | {'id': 'denied'}).status_code, 201)
+        self.assertIs(self.stored('denied')['assessment']['answerCorrect'], True)
+
+    def test_an_unreadable_answer_is_saved_undecided_never_wrong(self):
+        self.save(self.enrol())
+        for rid, text in [('u1', 'four-ish'), ('u2', 'x = ?')]:
+            r = self.save(self.attempt_with(text, None) | {'id': rid})   # even with no evidence attached
+            self.assertEqual(r.status_code, 201, text)
+            a = self.stored(rid)['assessment']
+            self.assertEqual((a['unresolved'], a['answerCorrect'], a['clarificationRequired']), (True, None, True), text)
+        self.assertEqual(self.save(self.attempt_with('4.0', None) | {'id': 'dec'}).status_code, 201)   # "4.0" is the number 4: readable
 
 class PlatformTests(LearningBase):
     """The platform directive: synthesised modules, multiple-choice generated questions, nested curricula."""
@@ -247,7 +270,7 @@ class PlatformTests(LearningBase):
         self.save(self.enrol())
         ok = self.rec('attempt', questionId='gen:subst:0,2,1,2:mc', response='C', activity='practice', hints=0, solution=False, competency='MATH.calculus.integration-methods')
         self.assertEqual(self.save(ok).status_code, 201)
-        for bad in [ok | {'response': '124/3'}, ok | {'response': 'E'}, ok | {'questionId': 'gen:mul:7,8:mc'}, ok | {'competency': 'MATH.calculus.definite-integrals'}]:
+        for bad in [ok | {'questionId': 'gen:mul:7,8:mc'}, ok | {'competency': 'MATH.calculus.definite-integrals'}]:
             self.assertEqual(self.save(bad | {'id': f'x{self.serial}'}).status_code, 400, bad)
             self.serial += 1
 

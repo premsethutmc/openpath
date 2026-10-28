@@ -8,7 +8,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Figure } from "../year/Figure";
 import { Api } from "../english/logic/account";
-import { isCorrect, misconceptionOf, modules, moduleOrigin, question } from "../../../packages/learning/src/content";
+import { creditOf } from "../../../packages/learning/src/grade";
+import { misconceptionOf, modules, moduleOrigin, question } from "../../../packages/learning/src/content";
 import { competencyCoverage, MATRIX_LABEL, matrixOf, type CompetencyCoverage, type MatrixStatus } from "../../../packages/learning/src/coverage";
 import { allReleases } from "../../../packages/learning/src/curricula";
 import { allOutcomesOf, assigned } from "../../../packages/learning/src/curriculum";
@@ -291,7 +292,7 @@ function TryQuestion({ qid }: { qid: string }) {
       <p className="prompt">{q.prompt}</p>
       {q.figure && <Figure v={q.figure} />}
       <AnswerInput q={q} value={value} setValue={(x) => { setValue(x); setChecked(null); }} disabled={false} />
-      <div className="actions"><button className="secondary" disabled={!value.trim()} onClick={() => setChecked(isCorrect(q, value))}>Check</button></div>
+      <div className="actions"><button className="secondary" disabled={!value.trim()} onClick={() => setChecked(creditOf(q.id, value) === true)}>Check</button></div>
       {checked !== null && (
         <div role="status" className={checked ? "right" : "wrong"}>
           <b>{checked ? "Right." : "Not right."}</b> Answer: {q.type === "choice" ? `${q.answer} (${q.options!["ABCD".indexOf(q.answer)]})` : q.answer}. {says ? `A learner giving this answer: ${says}` : !checked ? "No written explanation predicts this answer." : ""}

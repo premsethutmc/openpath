@@ -11,7 +11,7 @@
  * The task domain is `restrictions AND (branch_1 OR branch_2 ...)`. Branches stay alternatives: a statement about the domain must hold on EVERY
  * branch, and a student restriction that fits only some branches is a narrowing, not a restatement.
  */
-import { createHash } from "node:crypto";
+import { sha256Hex } from "./digest.ts";
 import { emptyConjunction, parseConstraints, type Constraint } from "./claim-certifier.ts";
 
 export const PROOF_CONTEXT_CONTRACT = "openpath-proof-context@1" as const;
@@ -38,7 +38,7 @@ export interface ProofContext {
 }
 
 const deepFreeze = <T>(x: T): T => { if (x && typeof x === "object" && !Object.isFrozen(x)) { Object.freeze(x); for (const v of Object.values(x as object)) deepFreeze(v); } return x; };
-const sha = (x: unknown) => createHash("sha256").update(JSON.stringify(x)).digest("hex").slice(0, 16);
+const sha = (x: unknown) => sha256Hex(JSON.stringify(x)).slice(0, 16);
 
 function flatten(d: unknown, key: string, out: ContextItem[]): void {
   if (d === null || d === undefined) return;

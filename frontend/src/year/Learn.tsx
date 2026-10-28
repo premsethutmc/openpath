@@ -10,7 +10,8 @@ import { SketchPad } from "./SketchPad";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
 import { needsMarking } from "../../../packages/learning/src/content";
-import { isCorrect, misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
+import { creditOf } from "../../../packages/learning/src/grade";
+import { misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import type { SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
@@ -200,7 +201,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
             if (!ok) return;
             if (a?.clarification && a.credit === null && a.feedback.kind === "clarify") { setAsked(asked + 1); setClarify(a.clarification.prompt); return; }
             setClarify(null);
-            onAnswered?.({ qid, response: value, activity, right: a ? a.credit === true : isCorrect(q, value), ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
+            onAnswered?.({ qid, response: value, activity, right: a ? a.credit === true : creditOf(qid, value) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
           }}
         >
           {ctx.saving ? "Saving…" : "Check"}
@@ -404,7 +405,7 @@ export function Single({ qid, ctx, onExit, heading, note }: { qid: string; ctx: 
       {note && <p className="why">{note}</p>}
       {fb ? <Feedback fb={fb} onNext={onExit} label="Back to the year" /> : done ? (
         <>
-          <div className={`feedback ${isCorrect(question(qid), done.response) ? "good" : "bad"}`}><strong>Answered: {done.response}</strong><p>{question(qid).solution}</p></div>
+          <div className={`feedback ${creditOf(qid, done.response) === true ? "good" : "bad"}`}><strong>Answered: {done.response}</strong><p>{question(qid).solution}</p></div>
           <button className="secondary wide" onClick={onExit}>Back to the year</button>
         </>
       ) : <Ask qid={qid} activity="challenge" ctx={ctx} onAnswered={setFb} />}

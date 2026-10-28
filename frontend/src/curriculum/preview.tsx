@@ -5,7 +5,8 @@
  * shows the rubric.
  */
 import { useState } from "react";
-import { isCorrect, question } from "../../../packages/learning/src/content";
+import { creditOf } from "../../../packages/learning/src/grade";
+import { question } from "../../../packages/learning/src/content";
 import { writtenTask } from "../../../packages/learning/src/written";
 import { AnswerInput } from "../year/Learn";
 import { Figure } from "../year/Figure";
@@ -42,7 +43,7 @@ export function Preview({ ids, label }: { ids: string[]; label: string }) {
           </ul>
         </details>
       ) : (
-        <button type="button" className="secondary" disabled={!value.trim()} onClick={() => setChecked(isCorrect(q, value))}>
+        <button type="button" className="secondary" disabled={!value.trim()} onClick={() => setChecked(creditOf(q.id, value) === true)}>
           Check (preview)
         </button>
       )}

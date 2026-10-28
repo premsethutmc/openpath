@@ -16,7 +16,7 @@
  * "unsupported" and can never be certified here.
  */
 import { parseFidelityLoss } from "./parse-fidelity.ts";
-import { createHash } from "node:crypto";
+import { sha256Hex } from "./digest.ts";
 import type { Expr } from "./calculus-core";
 import { checkSymbolicCertificate, type KernelCertificate } from "./proof-kernel.ts";
 import { parseNaturalWorking, type NaturalParseResult, type NaturalRelation } from "./natural-working.ts";
@@ -503,13 +503,13 @@ function polynomialIdentity(before: Expr, after: Expr): boolean | null {
 export function certify(before: Expr, after: Expr): { outcome: "verified" | "rejected" | "unsupported"; restrictions: string[]; rules: string[]; digest: string; via?: "independent-polynomial-identity" } {
   const make = (restrictions: string[]): KernelCertificate => {
     const body = { strategy: "rational-normal-form", sourceCanonical: JSON.stringify(before), targetCanonical: JSON.stringify(after), rules: [] as string[], assumptions: [], restrictions, obligations: [] as string[] };
-    return { ...body, replayDigest: createHash("sha256").update(JSON.stringify(body)).digest("hex") } as KernelCertificate;
+    return { ...body, replayDigest: sha256Hex(JSON.stringify(body)) } as KernelCertificate;
   };
   let cert = make([]), res = checkSymbolicCertificate(cert, before, after, [], []);
   if (res.outcome === "unsupported" && res.obligations.length) { cert = make(res.obligations); res = checkSymbolicCertificate(cert, before, after, [], res.obligations); }
   if (res.outcome === "unsupported") {
     const id = polynomialIdentity(before, after);
-    if (id !== null) return { outcome: id ? "verified" : "rejected", restrictions: [], rules: ["independent-polynomial-identity"], digest: createHash("sha256").update(JSON.stringify([before, after])).digest("hex"), via: "independent-polynomial-identity" };
+    if (id !== null) return { outcome: id ? "verified" : "rejected", restrictions: [], rules: ["independent-polynomial-identity"], digest: sha256Hex(JSON.stringify([before, after])), via: "independent-polynomial-identity" };
   }
   return { outcome: res.outcome, restrictions: cert.restrictions, rules: res.checkedRules, digest: cert.replayDigest };
 }

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { isCorrect, misconceptionOf, moduleFor, question } from "../../../packages/learning/src/content";
+import { creditOf } from "../../../packages/learning/src/grade";
+import { misconceptionOf, moduleFor, question } from "../../../packages/learning/src/content";
 import { familyOf } from "../../../packages/learning/src/intervention";
 import { problemOf } from "../../../packages/learning/src/families";
 import { canCheckWorking, checkWorking } from "../../../packages/learning/src/working";
@@ -56,7 +57,7 @@ export function PreviewExperience({ release, competency, home, back }: { release
         <div className={result === "wrong" ? "answer-area has-error" : "answer-area"}>
           <AnswerInput q={q} value={answer} setValue={(value) => { setAnswer(value); setResult(null); }} disabled={false} />
           <label className="working-area">Your working (optional)<textarea aria-label="Your working" rows={3} value={working} onChange={(event) => setWorking(event.target.value)} placeholder={workable ? "Write one step per line" : "Use this space for your steps"} /></label>
-          {!result ? <button className="primary check-answer" type="button" disabled={!answer.trim()} onClick={() => setResult(isCorrect(q, answer) ? "right" : "wrong")}>Check answer</button> : null}
+          {!result ? <button className="primary check-answer" type="button" disabled={!answer.trim()} onClick={() => setResult(creditOf(q.id, answer) === true ? "right" : "wrong")}>Check answer</button> : null}
         </div>
         {workingResult ? <aside className={`working-feedback ${workingResult.valid ? "right" : "wrong"}`}><strong>Your working</strong><p>{workingResult.note}</p></aside> : null}
         {hint ? <aside className="practice-hint"><strong>A little help</strong><p>{q.hint ?? focusedIdea ?? "Look back at the worked example and take one step at a time."}</p></aside> : null}

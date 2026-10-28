@@ -228,7 +228,7 @@ const show = ([n, d]: [number, number]) => (d === 1 ? String(n) : `${n}/${d}`);
 export function normalise(q: UnitQuestion, raw: string): string | null {
   const t = raw.trim().replace(/−/g, "-");
   if (q.type === "choice") return /^[A-D]$/i.test(t) ? t.toUpperCase() : null;
-  if (q.type === "integer") return /^[+-]?\d{1,9}$/.test(t) ? String(Number(t)) : null;
+  if (q.type === "integer") return /^[+-]?\d{1,9}(\.\d{0,9})?$/.test(t) ? String(Number(t)) : null;
   if (q.type === "fraction") {
     const r = rational(t);
     return r && show(r);

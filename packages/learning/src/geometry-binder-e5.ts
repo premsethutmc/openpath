@@ -6,13 +6,13 @@
  *  - congruence claims: criterion table + established equalities.
  * Nothing here reads the student's text; the proposer (natural-geocalc-e5.ts) translates notation into the claim types below.
  */
-import { createHash } from "node:crypto";
+import { sha256Hex } from "./digest.ts";
 import { Overflow, Z, ONE, q, qadd, qdiv, qeq, qiszero, qmul, qneg, qsub, qtext, type Q, type Surd, evalSurd, sEq, sRat, surd, sText, squarefree } from "./exact-e5.ts";
 import type { Expr } from "./calculus-core.ts";
 
 export type JudgeStatus = "valid" | "invalid" | "unsupported" | "missing-assumption" | "incomplete";
 export interface Judge { status: JudgeStatus; reason: string; scope?: string; digest?: string | null; /** E7 Phase 6: correct on its own but not about the task */ offTask?: boolean; /** E7 Phase 6: why the line is about the task (anchoring recorded by the route that checked it) */ grounding?: import("./claim-grounding.ts").Grounding }
-export const digestOf = (x: unknown): string => createHash("sha256").update(JSON.stringify(x, (_k, v) => (typeof v === "bigint" ? v.toString() : v instanceof Map ? [...v] : v))).digest("hex");
+export const digestOf = (x: unknown): string => sha256Hex(JSON.stringify(x, (_k, v) => (typeof v === "bigint" ? v.toString() : v instanceof Map ? [...v] : v)));
 
 export interface GFact { predicate: string; args: string[]; value?: unknown }
 export interface GObject { id: string; kind: string; data?: Record<string, unknown> }
