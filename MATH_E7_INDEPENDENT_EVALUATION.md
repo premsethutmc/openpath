@@ -42,7 +42,7 @@ Per category (n / exact / FA / FR): algebra-equations 85/38/1/27; algebra-expres
 | calculus / geometry grounding (side-claim 53, calculus+geometry sets) | 53 | 0 FA; 21 false rejections (valid work with an extra true line not accepted) |
 | unsupported dependent claims (`dependent`) | 18 | **0 FA**, 0 FR, 8 exact |
 | irrelevant side claims | 53 | 0 FA, 15 exact |
-Route equivalence (30 paired typed/text-line vs natural cases): 13 exact; no pair where the typed route accepted something its natural twin rejected.
+Route equivalence (30 paired typed/text-line vs natural cases): 13 exact; the engine's verdict differs within 7 of 15 pairs (route inconsistency, mostly coverage), but in no pair did one route verify work that the label marks non-verified while the twin did not.
 
 ## 5. Evidence provenance, performance, scope
 - **Provenance failures: 0** of 88 verified results (every verified result has proven derivations, 0 unattributed, registered mechanisms only: see `score-summary.json`).
@@ -53,7 +53,7 @@ Route equivalence (30 paired typed/text-line vs natural cases): 13 exact; no pai
 - **Valid work called false (18 `invalid`)**: 8 typed claims whose `rule` names a method (substitution, integration by parts, fundamental theorem, odd-function symmetry, chain rule) are judged by the rule-form kernel and rejected although the claimed result is right; `f'(x)=6(2x−1)^2 ⏎ At x=1 this value is 6` (an evaluation side line); piecewise `|x|` case analysis; `[x^3/3] from 0 to 3 = 9`; `10C4` evaluation; two linear-pair/vertical angle chains (geo-047/059); complex quotient with `let`. These are the most serious false rejections because they assert falsehood.
 
 ## 6. Decision evidence — can E7 close?
-Targets of the plan: zero confirmed false acceptances, ≥90% exact. Observed: **4 confirmed false acceptances, 33.6% exact (upper bound ≈ 36% if every contested case went the engine's way)**. The integrity of what *is* verified is good (94.3% precision, 0 provenance failures, 0 verified-without-obligation, dependent claims and side claims 0 FA), but E7 cannot be closed: 
+Targets of the plan: zero confirmed false acceptances, ≥90% exact. Observed: **4 confirmed false acceptances, 33.6% exact (at most 35.4% even if every contested case went the engine's way)**. The integrity of what *is* verified is good (94.3% precision, 0 provenance failures, 0 verified-without-obligation, dependent claims and side claims 0 FA), but E7 cannot be closed: 
 1. **Integrity defect requiring correction:** one-step/coincidence grounding (geo-012/013, algA-048) — the open Phase 6 bypass #1, now confirmed; plus `ln x + C` domain acceptance (typed-045).
 2. **Integrity-adjacent defect:** rule-form kernels return `invalid` (a claim of falsehood) for correct typed claims carrying a method name; in Phase 6 this was treated as non-justification only when another kernel verified.
 3. **Coverage defect (largest):** parser/notation scope rejects about 60% of valid, differently-phrased work as `unsupported`/`malformed`; that is the cause of the exact-match shortfall, not the certification logic.
