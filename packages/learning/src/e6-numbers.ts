@@ -12,7 +12,7 @@
 import { NotationError, normalize, splitEquals } from "./e6-parse.ts";
 import { Budget, Unsupported } from "./e6-cas.ts";
 import { Overflow, q, qadd, qcmp, qdiv, qeq, qiszero, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
-import { Builder, bad, finish, incomplete, isProse, missing, ok, readStatement, syntheticParse, uns, worst, type E6Plan, type Judge, type Row } from "./e6-common.ts";
+import { Builder, bad, finish, incomplete, isProse, proseJudge, missing, ok, readStatement, syntheticParse, uns, worst, type E6Plan, type Judge, type Row } from "./e6-common.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 
 // ================================================================================================ Gaussian rationals
@@ -396,6 +396,7 @@ function specOf(p: NumProblem): Spec {
 function decimalOfText(s: string): Q { return qv(s); }
 
 // ================================================================================================ planner
+const ANSWER_WORD = /^(?:ans(?:wer)?|result|final(?:\s+answer)?|solution|value|the\s+answer|therefore|thus|hence|so)$/i;
 const COMPLEMENT_NAME = /^P\((?:no|not|none|neither|non)|'\)$|\^c\)$|complement/i;
 const NAMES_PRIME = new Set(["x", "y", "z", "w"]);
 function aliasData(spec: Spec, p: NumProblem): Map<string, Cx> {
@@ -434,11 +435,13 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
     // counting notation carries its own convention: C(n,r) / binom / nCr count unordered selections, P(n,r) with numeric arguments / nPr ordered arrangements
     if (/(?:^|[^A-Za-z])C\s*\(\s*\d+\s*,\s*\d+\s*\)|\\binom|\b\d+\s*C\s*\d+\b|\bn?Cr\b/.test(row.plain)) stated.add("unordered");
     if (/(?:^|[^A-Za-z])P\s*\(\s*\d+\s*,\s*\d+\s*\)|\b\d+\s*P\s*\d+\b|\bn?Pr\b/.test(row.plain)) stated.add("ordered");
-    if (/\bno\s+real\s+(?:roots?|solutions?|zeros?)\b|\b(?:has|have)\s+no\s+real\b|\bnot\s+have\s+any\s+real\b/i.test(row.plain)) {
+    // E7: the discriminant check credits ONLY a sentence that says nothing else (a compound sentence carries further claims that this check does not examine)
+    const NO_REAL_ONLY = (t: string) => (t.toLowerCase().match(/[a-z]{2,}/g) ?? []).every((w) => ["discriminant", "negative", "so", "there", "are", "is", "the", "this", "that", "polynomial", "quadratic", "equation", "has", "have", "had", "no", "real", "roots", "root", "solutions", "solution", "zeros", "zero", "hence", "thus", "therefore", "because", "since", "which", "means", "any", "not", "note", "it", "its", "so", "as", "d", "disc", "delta", "over", "numbers", "number", "x", "p", "f", "of", "a", "an", "to", "in", "we", "get", "gives", "i"].includes(w));
+    if (/\bno\s+real\s+(?:roots?|solutions?|zeros?)\b|\b(?:has|have)\s+no\s+real\b|\bnot\s+have\s+any\s+real\b/i.test(row.plain) && NO_REAL_ONLY(row.plain)) {
       if (spec.noRealRoots) { b.add(i, ok("the discriminant is negative, so there are no real roots", "exact discriminant sign")); sawNoReal = true; finalRow = i; return; }
       if (spec.realRootExists) { b.add(i, bad("the quadratic has real roots")); return; }
     }
-    if (isProse(row.plain)) { b.add(i, ok("sentence without a numeric claim to verify (preserved, not relied upon)", "non-mathematical sentence preserved")); return; }
+    if (isProse(row.plain)) { b.add(i, proseJudge(row)); return; }
     // `P(A, B)`: a comma list inside a probability bracket is read as the joint event only when the typed task is itself a joint/intersection task
     // and the bracket is a plain list of events; anywhere else the reading (joint, ordered outcome, conditional shorthand) is not licensed.
     let plainRow = normalize(row.plain);
@@ -475,11 +478,14 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
       throw e;
     }
     if (!members.length) { b.add(i, uns("nothing to evaluate after the label")); return; }
-    // a complement event named only inside the line (`1 - P(no head)`) is solved from the numeric member that follows, never trusted on its own
-    for (let k = 0; k < members.length; k++) {
-      const m = members[k];
-      if (m.t === "bin" && m.op === "-" && m.a.t === "num" && qeq(m.a.v, ONE) && m.b.t === "sym" && !env.has(m.b.name) && COMPLEMENT_NAME.test(m.b.name)) {
-        for (let k2 = k + 1; k2 < members.length; k2++) { try { const v2 = evalN(members[k2], env); if (qiszero(v2.im)) { env.set(m.b.name, cx(qsub(ONE, v2.re))); break; } } catch { /* try the next member */ } }
+    // E7: a complement event is bound ONLY by structural substitution inside the chain (`1 - P(no head)` followed by `1 - (1/2)^3` replaces the event by the power) and
+    // only when the premises license that form (independence / replacement). It is never back-solved from the claimed result, which would assume the conclusion.
+    for (let k = 0; k + 1 < members.length; k++) {
+      const m = members[k], nx = members[k + 1];
+      if (m.t === "bin" && m.op === "-" && m.a.t === "num" && qeq(m.a.v, ONE) && m.b.t === "sym" && !env.has(m.b.name) && COMPLEMENT_NAME.test(m.b.name)
+        && nx.t === "bin" && nx.op === "-" && nx.a.t === "num" && qeq(nx.a.v, ONE) && (nx.b.t === "bin" && nx.b.op === "^" || repeatedFactors(nx.b))
+        && (provided.has("independent") || stated.has("independent") || provided.has("with-replacement") || stated.has("with-replacement"))) {
+        try { env.set(m.b.name, evalN(nx.b, env)); } catch { /* left unbound: the line then asks for the missing binding */ }
       }
     }
     // evaluate
@@ -487,7 +493,7 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
     try {
       for (const m of members) vals.push(evalN(m, env));
     } catch (e) {
-      if (e instanceof UnboundSym) { b.add(i, uns(`the symbol ${e.message} is not bound to the problem data or to an earlier definition`)); return; }
+      if (e instanceof UnboundSym) { b.add(i, COMPLEMENT_NAME.test(e.message) ? missing(`the event ${e.message} is not bound to the supplied premises: state its value or the assumption it follows from before relying on it`) : uns(`the symbol ${e.message} is not bound to the problem data or to an earlier definition`)); return; }
       if (e instanceof DivZero) { b.add(i, bad("this line divides by zero")); return; }
       if (e instanceof Unsupported) { b.add(i, uns(e.message)); return; }
       if (e instanceof Budget || e instanceof Overflow) { b.add(i, { status: "resource-exhausted", reason: "a resource bound was reached" }); return; }
@@ -525,6 +531,10 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
       const first = members[0]; const lits = litsOf(first);
       if (lits.length && !spec.mustMention.some((w) => lits.some((x) => qeq(x, w)))) j = bad("this working does not use the given probabilities as weights, so reaching the right number is a coincidence of the method");
     }
+    // E7: a numeric match is not an answer. The line must name the requested quantity (or be unlabelled / a bare variable); a value merely equal to the truth under an unrelated label proves nothing.
+    const labelRaw = (texts[0] ?? "").trim(), taskWords = new Set(String(spec.family).toLowerCase().split(/[^a-z]+/).filter((w) => w.length > 2)), labelWords = (labelRaw.toLowerCase().match(/[a-z]{3,}/g) ?? []).filter((w) => !["the", "of", "and", "for", "var", "cov", "sin", "cos", "tan", "log", "exp", "sqrt", "abs"].includes(w));
+    const answerBound = label === null || answerRe.test(label) || answerRe.test(labelRaw) || ANSWER_WORD.test(label.trim()) || (/^[A-Za-z][0-9]?$/.test(label.trim()) && !env.has(label)) || (labelWords.length === 0 || labelWords.every((w) => taskWords.has(w) || w === "roots" || w === "root" || w === "value"));
+    if (j.status === "valid" && canon && !answerBound && spec.truth.some((t) => ceq(t, lastVal))) j = incomplete(`this line names "${label}", which is not the requested quantity; state the requested quantity by name`);
     if (j.status === "valid" && canon) { found.push(lastVal); if (spec.truth.some((t) => ceq(t, lastVal))) { sawAnswerClaim = true; finalRow = i; } }
     b.add(i, j);
   });

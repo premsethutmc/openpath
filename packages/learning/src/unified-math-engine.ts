@@ -14,6 +14,8 @@ import { D2_MAX_STAGES, D2_PROOF_STATE_VERSION, D2ProofState } from "./d2-proof-
 import { D3_BINDING_CONTRACT, MathematicalBindingStore, type D3Problem, type D3Working } from "./cross-domain-bindings.ts";
 import { NATURAL_WORKING_CONTRACT, equationAsExpression, naturalRestrictionKeys, parseNaturalWorking, type NaturalWorkingInput, type SourceLocation } from "./natural-working.ts";
 import { NATURAL_ADAPTER_CONTRACT, adaptNaturalWorking, type NaturalAdapterResult } from "./natural-domain-adapters.ts";
+import { evaluateLedger } from "./claim-certifier.ts";
+import { CLAIM_LEDGER_CONTRACT, type CoverageRecord } from "./claim-ledger.ts";
 import { buildLineAccount, resolveVerdict, unparsedLineAccount, validateAccounts, type AccountEntry, type LineAccount, type LineStatus, type StepClassification } from "./proof-integrity.ts";
 import { bindClaimsDetailed, replaySymbolicSteps } from "./claim-binding.ts";
 import { ACCEPTANCE_GATE_CONTRACT, checkerStatusToStep, checkerSummary, evidenceFromCheck, reconcileAlgebra, type AcceptanceGateRecord, type BindingEvidence, type GateEvidenceItem, type GateLevel } from "./acceptance-gate.ts";
@@ -121,7 +123,7 @@ function missingTransferAssumptions(problem: MixedProblem, transfer: CrossDomain
 
 
 const NATURAL_PARSER_ID={id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT};
-const lineClass=(status:LineStatus):Classification=>status==="verified-valid"?"verified":status==="verified-invalid"?"invalid":status==="incomplete"?"incomplete":status==="inconclusive"?"unsupported":status;
+const lineClass=(status:LineStatus):Classification=>status==="verified-valid"||status==="not-mathematical"?"verified":status==="verified-invalid"?"invalid":status==="incomplete"?"incomplete":status==="inconclusive"?"unsupported":status;
 function unresolvedSteps(parsed:NaturalParseResult,why:string,classification:Classification,unaccounted?:number[]):AssessmentStep[]{return parsed.lines.map((line,index)=>({index,classification:classification==="verified"||classification==="invalid"?"unsupported":unaccounted&&!unaccounted.includes(index)?"unsupported":classification,justification:unaccounted&&!unaccounted.includes(index)?`line ${line.source.line} was not certified: the submission cannot be certified while other lines are unverified`:`line ${line.source.line} was not verified: ${why}`,reasoner:"natural-working-parser",dependencies:index?[index-1]:["problem"],source:line.source}))}
 function stepsFromAccount(parsed:NaturalParseResult,account:LineAccount,assessed?:AssessmentEnvelope):AssessmentStep[]{return account.records.map((r,index)=>({index,classification:lineClass(r.status),justification:r.reason,reasoner:r.role==="claim-step"&&r.stepIndex!==null?assessed?.steps[r.stepIndex]?.reasoner??"unverified":r.role==="given-matched"?"natural-adapter:typed-match":"unverified",dependencies:r.dependencies.length?r.dependencies:["problem"],source:parsed.lines[index].source}))}
 
@@ -457,7 +459,7 @@ function gateConverted(cand: AssessmentEnvelope, payload: { lineAccount?: LineAc
   else {
     if (account.violations.length) problems.push(`account violations: ${account.violations.join("; ")}`);
     if (account.unaccounted.length) problems.push("unaccounted lines");
-    const unresolved = account.records.filter((r) => r.status !== "verified-valid"); if (unresolved.length) problems.push(`line ${unresolved[0].line} is ${unresolved[0].status}`);
+    const unresolved = account.records.filter((r) => r.status !== "verified-valid" && r.status !== "not-mathematical"); if (unresolved.length) problems.push(`line ${unresolved[0].line} is ${unresolved[0].status}`);
     if (!claims.length) problems.push("no claim-step was produced");
     for (const r of claims) if (!ev.some((e) => e.lineId === r.id && e.outcome === "verified")) problems.push(`line ${r.line} has no independently verified binding evidence`);
   }
@@ -488,8 +490,33 @@ function applyAcceptanceGate(problem: MathematicalProblem, working: StudentWorki
   }
   return gateStructured(cand);
 }
+/**
+ * E7 claim accounting. The ledger is built from the raw text, independently of every parser, and each claim must be covered by a verified,
+ * credited record. This step can withdraw an acceptance (or report a demonstrably contradicted submission as invalid); it never grants one.
+ */
+function certifyClaims(problem: MathematicalProblem, working: StudentWorking, cand: AssessmentEnvelope): AssessmentEnvelope {
+  if (!isNaturalInput(working)) return cand;
+  const payload = (cand.domainPayload && typeof cand.domainPayload === "object" ? cand.domainPayload : {}) as { lineAccount?: LineAccount };
+  const records: CoverageRecord[] = payload.lineAccount
+    ? payload.lineAccount.records.map((r) => ({ line: r.line, start: r.span.start, end: r.span.end, verified: r.status === "verified-valid" || r.status === "not-mathematical", credited: r.role === "claim-step" || r.role === "given-matched", reason: r.reason }))
+    : cand.steps.filter((s) => s.source).map((s) => ({ line: s.source!.line, start: s.source!.start, end: s.source!.end, verified: s.classification === "verified", credited: true, reason: s.justification }));
+  const lv = evaluateLedger(problem, working.text, records);
+  const withLedger = (c: AssessmentEnvelope): AssessmentEnvelope => ({ ...c, domainPayload: { ...(c.domainPayload && typeof c.domainPayload === "object" ? c.domainPayload : {}), claimLedger: { contract: CLAIM_LEDGER_CONTRACT, claims: lv.summary } } });
+  if (lv.disproven.length && ["verified", "incomplete", "missing-assumption"].includes(cand.classification)) {
+    const c = lv.disproven[0], idx = Math.max(0, cand.steps.findIndex((s) => s.source?.line === c.line));
+    const steps = cand.steps.map((s, k) => (k === idx ? { ...s, classification: "invalid" as Classification, justification: c.reason } : s));
+    return withLedger({ ...cand, classification: "invalid", correct: false, complete: false, firstInvalidStep: idx, steps, justification: `line ${c.line}: ${c.reason}`, outstandingObligations: [...cand.outstandingObligations, c.reason], acceptanceGate: cand.acceptanceGate ? { ...cand.acceptanceGate, verdict: "invalid", obligations: [c.reason] } : cand.acceptanceGate });
+  }
+  if (cand.classification === "verified" && lv.unfinished.length && !lv.blocking.length) {
+    const u = lv.unfinished[0], why = `line ${u.line} states that the working is unfinished ("${u.text}")`;
+    return withLedger({ ...cand, classification: "incomplete", correct: null, complete: false, justification: why, outstandingObligations: [...cand.outstandingObligations, why], acceptanceGate: cand.acceptanceGate ? { ...cand.acceptanceGate, verdict: "incomplete", obligations: [why] } : cand.acceptanceGate });
+  }
+  if (cand.classification !== "verified" || !lv.blocking.length) return withLedger(cand);
+  const why = `claim accounting: ${lv.blocking.length} recognized claim(s) are not proven (line ${lv.blocking[0].line}: ${lv.blocking[0].reason})`;
+  return withLedger(withdrawAcceptance(cand, (cand.acceptanceGate?.route ?? "natural-other") as AcceptanceGateRecord["route"], "downgraded-unresolved-lines", why, cand.acceptanceGate?.evidence ?? []));
+}
 export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   const candidate = await assessCandidate(problem, studentWorking, options);
-  try { return applyAcceptanceGate(problem, studentWorking, candidate); }
+  try { return certifyClaims(problem, studentWorking, applyAcceptanceGate(problem, studentWorking, candidate)); }
   catch (e) { return withdrawAcceptance(candidate, "natural-other", "downgraded-no-independent-evidence", `the acceptance gate could not complete (${e instanceof Error ? e.message : "error"}); nothing is accepted`); }
 }

@@ -1,0 +1,133 @@
+{
+ "engine": "/home/claude/e6r",
+ "rows": [
+  {
+   "bypass": "1 prose is proof",
+   "name": "s6-217 forged identity",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "s6-226 forged symmetry",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "s6-238 forged Vieta formula",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "false limit sentence",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "false arithmetic in prose",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "derivative sentence, wrong",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "2 label-agnostic answer",
+   "name": "sum of roots = 5/2 (product task)",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "2 label-agnostic answer",
+   "name": "banana = 5/2",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "3 back-solved event",
+   "name": "s6-182",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "3 back-solved event",
+   "name": "unfamiliar: tails",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "4 student assumption vs task",
+   "name": "Assume x>0 under x<0",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 3 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "6 shared blind spot",
+   "name": "s6-299 disjoint domain components",
+   "verdict": "verified",
+   "ok": false,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "control",
+   "name": "valid: direct",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "control",
+   "name": "valid: prose + true identity",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "control",
+   "name": "valid: compatible student assumption",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 3 submitted line(s) are accounted for and verified",
+   "ledger": null
+  },
+  {
+   "bypass": "control",
+   "name": "valid: Vieta labelled",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": null
+  }
+ ]
+}

@@ -8,14 +8,16 @@ import type { AccountEntry, StepClassification, StepOutcome } from "./proof-inte
 import type { BindingEvidence } from "./acceptance-gate.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 import { normalize, splitEquals } from "./e6-parse.ts";
+import { extractLedger } from "./claim-ledger.ts";
 
 export const GENERALIZATION_E6_CONTRACT = "openpath-natural-generalization-e6@1" as const;
 export const LIMITS = { characters: 8192, lines: 64, members: 10 } as const;
 export const E6_CHECKER = "e6-independent-exact" as const;
 
 export type JS = "valid" | "invalid" | "unsupported" | "missing-assumption" | "incomplete" | "ambiguous" | "malformed" | "resource-exhausted";
-export interface Judge { status: JS; reason: string; scope?: string; digest?: string | null }
+export interface Judge { status: JS; reason: string; scope?: string; digest?: string | null; /** the line carries no mathematical claim: it earns NO verification credit and produces no evidence */ nonMath?: boolean }
 export const ok = (reason: string, scope = "independent exact check", digest?: string | null): Judge => ({ status: "valid", reason, scope, digest: digest ?? null });
+export const nonMath = (reason: string): Judge => ({ status: "valid", reason, scope: "non-mathematical", digest: null, nonMath: true });
 export const bad = (reason: string): Judge => ({ status: "invalid", reason });
 export const uns = (reason: string): Judge => ({ status: "unsupported", reason });
 export const missing = (reason: string): Judge => ({ status: "missing-assumption", reason });
@@ -27,7 +29,7 @@ export function worst(xs: Judge[]): Judge {
 }
 const toStepClass = (s: JS): StepClassification => (s === "valid" ? "verified" : s === "missing-assumption" || s === "incomplete" ? "incomplete" : s);
 
-export interface Row { source: SourceLocation; raw: string; plain: string; index: number }
+export interface Row { source: SourceLocation; raw: string; plain: string; index: number; /** a recognized mathematical statement that is not in relation form (found by the claim ledger) */ verbal?: boolean }
 export function prepareRows(text: unknown): Row[] | { error: string; resource?: boolean } {
   if (typeof text !== "string") return { error: "natural input requires a text string" };
   if (text.length > LIMITS.characters) return { error: `input exceeds ${LIMITS.characters} characters`, resource: true };
@@ -41,6 +43,16 @@ export function prepareRows(text: unknown): Row[] | { error: string; resource?: 
   if (out.length > LIMITS.lines) return { error: `more than ${LIMITS.lines} lines`, resource: true };
   if (!out.length) return { error: "no working was submitted" };
   for (const r of out) r.plain = normalize(r.raw);
+  // E7 claim ledger: a sentence that carries mathematical claims is never skipped as prose. Each claim becomes its own row with its own source span,
+  // so a claim embedded in prose is judged (relations) or refused (statements that cannot be interpreted) instead of being preserved unexamined.
+  { const ledger = extractLedger(text); const byLine = new Map(ledger.lines.map((l) => [l.line, l])); const expanded: Row[] = [];
+    for (const r of out) {
+      const ll = byLine.get(r.source.line);
+      if (ll && ll.claims.length && isProse(r.plain)) for (const c of ll.claims) expanded.push({ source: { line: r.source.line, start: c.start, end: c.end, text: r.source.text }, raw: c.text, plain: normalize(c.text), index: 0, verbal: c.kind === "assertion" });
+      else expanded.push(r);
+    }
+    if (expanded.length > LIMITS.lines) return { error: `more than ${LIMITS.lines} claims`, resource: true };
+    out.length = 0; expanded.forEach((r, i) => { r.index = i; out.push(r); }); }
   // a row that begins with "=" continues the previous row's last member (the line itself stays a separate, accounted row)
   for (let i = 1; i < out.length; i++) {
     if (/^=(?!=)/.test(out[i].plain) && out[i - 1].plain.includes("=")) { const parts = splitEquals(out[i - 1].plain); const last = parts[parts.length - 1]; if (last && last.trim()) out[i].plain = `${last.trim()} ${out[i].plain}`; }
@@ -54,7 +66,7 @@ export class Builder {
   add(index: number, judge: Judge, dependsOn: number[] | "prev" = "prev"): void {
     const line = this.parsed.lines[index];
     const deps = dependsOn === "prev" ? (index ? [this.parsed.lines[index - 1].id] : []) : dependsOn.map((i) => this.parsed.lines[i].id);
-    const evidence: BindingEvidence | null = judge.status === "valid"
+    const evidence: BindingEvidence | null = judge.status === "valid" && !judge.nonMath
       ? { lineId: line.id, line: line.source.line, claim: line.source.text, checker: E6_CHECKER, destination: this.destination, scope: judge.scope ?? "independent exact check", outcome: "verified", detail: judge.reason, digest: judge.digest ?? digestOf([line.source.text, judge.reason]) }
       : null;
     this.records[index] = { id: line.id, judge, dependsOn: deps, evidence };
@@ -75,7 +87,7 @@ export interface E6Plan {
   diagnostics: { lines: number; judged: Record<string, number> };
 }
 export function finish(parsed: NaturalParseResult, b: Builder, args: { domain: string; family: string; nativeComplete: boolean; obligations: string[]; notes: string[]; restrictions?: string[]; finalValue?: E6Plan["finalValue"] }): E6Plan {
-  const accounts: AccountEntry[] = parsed.lines.map((l, i) => ({ lineId: l.id, role: "claim-step" as const, stepIndex: i, dependsOn: b.records[i]?.dependsOn ?? [] }));
+  const accounts: AccountEntry[] = parsed.lines.map((l, i) => (b.records[i]?.judge.nonMath ? { lineId: l.id, role: "non-mathematical" as const, dependsOn: b.records[i]?.dependsOn ?? [] } : { lineId: l.id, role: "claim-step" as const, stepIndex: i, dependsOn: b.records[i]?.dependsOn ?? [] }));
   const outcomes: (StepOutcome | undefined)[] = parsed.lines.map((_, i) => { const r = b.records[i]; return r ? { classification: toStepClass(r.judge.status), justification: r.judge.reason } : undefined; });
   const statuses = b.records.map((r) => r?.judge.status);
   const only = (s: JS) => statuses.includes(s) && !statuses.some((x) => x === "invalid" || x === "unsupported" || x === "ambiguous" || x === "malformed" || x === "resource-exhausted" || x === undefined);
@@ -127,4 +139,12 @@ export function planUnsupported(rows: Row[], domain: string, family: string, rea
   const parsed = syntheticParse(rows, domain); const b = new Builder(parsed, "no E6 binder");
   rows.forEach((_, i) => b.add(i, { status: "unsupported", reason }));
   return finish(parsed, b, { domain, family, nativeComplete: false, obligations: [reason], notes: [reason] });
+}
+
+/** The only judgement a prose row can receive. It never carries evidence: classification as prose is not proof. */
+export function proseJudge(row: Row): Judge {
+  if (!row.verbal) return nonMath("sentence without a mathematical claim: preserved, earns no verification credit");
+  const s = readStatement(row.plain);
+  if (s.conclusion || s.limitStatement) return nonMath("qualitative conclusion: credited only by a family check against the computed truth");
+  return uns("a recognizable mathematical statement could not be interpreted into a checkable claim");
 }

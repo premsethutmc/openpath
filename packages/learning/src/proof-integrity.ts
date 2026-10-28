@@ -13,12 +13,12 @@ import type { NaturalParseResult, NaturalParsedLine, SourceLocation } from "./na
 export const LINE_ACCOUNT_CONTRACT = "openpath-line-account@1" as const;
 export const INTEGRITY_LIMITS = { lines: 64, dependenciesPerLine: 64, certificates: 128 } as const;
 
-export type LineStatus = "verified-valid" | "verified-invalid" | "incomplete" | "unsupported" | "ambiguous" | "malformed" | "inconclusive" | "resource-exhausted";
+export type LineStatus = "not-mathematical" | "verified-valid" | "verified-invalid" | "incomplete" | "unsupported" | "ambiguous" | "malformed" | "inconclusive" | "resource-exhausted";
 export type LineRole = "given-matched" | "claim-step" | "non-mathematical" | "unaccounted";
 export type StepClassification = "verified" | "invalid" | "incomplete" | "missing-assumption" | "unsupported" | "contradictory" | "resource-exhausted" | "malformed" | "ambiguous";
 
 /** Declared by an adapter: how one parsed line was consumed. */
-export interface AccountEntry { lineId: string; role: "given-matched" | "claim-step"; stepIndex?: number; dependsOn?: string[] }
+export interface AccountEntry { lineId: string; role: "given-matched" | "claim-step" | "non-mathematical"; stepIndex?: number; dependsOn?: string[] }
 
 export interface LineRecord {
   id: string;
@@ -116,6 +116,7 @@ export function buildLineAccount(parsed: NaturalParseResult, accounts: AccountEn
     const entry = entryById.get(line.id);
     let status: LineStatus, reason: string, role: LineRole, stepIndex: number | null = null;
     if (!entry) { const named = unaccountedIndexes?.includes(index); status = named ? "unsupported" : "inconclusive"; reason = named ? "no verifier accounts for this line, so it is preserved as unsupported" : "line was not certified because other lines are unverified"; role = "unaccounted"; }
+    else if (entry.role === "non-mathematical") { status = "not-mathematical"; reason = "sentence without a mathematical claim: preserved, earns no verification credit and is never evidence"; role = "non-mathematical"; }
     else if (entry.role === "given-matched") { status = "verified-valid"; reason = "matches the typed problem data exactly"; role = "given-matched"; }
     else {
       role = "claim-step"; stepIndex = entry.stepIndex ?? null;
@@ -124,7 +125,7 @@ export function buildLineAccount(parsed: NaturalParseResult, accounts: AccountEn
       else { status = stepToLineStatus(outcome.classification); reason = outcome.justification; }
     }
     const dependencies = entry?.dependsOn ?? (prior.length ? [prior[prior.length - 1]] : []);
-    const premise = status === "verified-valid" && dependencies.every((d) => eligible.get(d) === true);
+    const premise = (status === "verified-valid" || status === "not-mathematical") && dependencies.every((d) => eligible.get(d) === true);
     eligible.set(line.id, premise);
     if (status === "verified-invalid" && firstInvalid === null) { firstInvalid = index; }
     if (status !== "verified-valid" && status !== "verified-invalid" && firstInvalid === null && firstUnresolvedBefore === null) firstUnresolvedBefore = index;
@@ -140,7 +141,7 @@ export function buildLineAccount(parsed: NaturalParseResult, accounts: AccountEn
   }
   return { contract: LINE_ACCOUNT_CONTRACT, mathematicalLines: parsed.lines.length, formattingOnly: formattingOnlyLines(rawText),
     consumed: records.filter((r) => r.role !== "unaccounted").map((r) => r.id), produced: records.filter((r) => r.role === "claim-step").map((r) => r.id), unaccounted,
-    orderPreserved: records.every((r, i) => !i || r.line > records[i - 1].line), records, statuses: Object.fromEntries(records.map((r) => [r.id, r.status])),
+    orderPreserved: records.every((r, i) => !i || r.line > records[i - 1].line || (r.line === records[i - 1].line && r.span.start >= records[i - 1].span.end)), records, statuses: Object.fromEntries(records.map((r) => [r.id, r.status])),
     firstVerifiedInvalidLine: firstInvalid, firstInvalidLocalization: localization, limitation, violations: extraViolations };
 }
 
@@ -149,8 +150,8 @@ export interface IntegrityVerdict { classification: StepClassification; correct:
 /** Maps a complete line account to the only verdicts it can support. */
 export function resolveVerdict(account: LineAccount, nativeComplete: boolean, adapterObligations: string[]): IntegrityVerdict {
   const rs = account.records, bad = rs.filter((r) => r.status === "verified-invalid");
-  const unresolved = rs.filter((r) => !["verified-valid", "verified-invalid", "incomplete"].includes(r.status));
-  const nonValid = rs.filter((r) => r.status !== "verified-valid");
+  const unresolved = rs.filter((r) => !["verified-valid", "verified-invalid", "incomplete", "not-mathematical"].includes(r.status));
+  const nonValid = rs.filter((r) => r.status !== "verified-valid" && r.status !== "not-mathematical");
   const lines = (xs: LineRecord[]) => xs.map((r) => r.line).join(", ");
   if (account.violations.length) return { classification: "unsupported", correct: null, complete: false, firstInvalidStep: null, justification: `proof-integrity violation: ${account.violations[0]}`, obligations: account.violations };
   if (bad.length) {

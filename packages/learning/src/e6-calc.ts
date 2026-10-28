@@ -8,7 +8,7 @@
 import { NotationError, normalize, parseExpression, splitEquals, N, S, add, mul, div, neg, pw, fn, type A } from "./e6-parse.ts";
 import { Ambiguity, Budget, Unsupported, compareExpr, d6, domainReqs, evalNum, hasVar, plainLogArgs, substitute, visiblyPositive, type Req } from "./e6-cas.ts";
 import { limitOf, constantValue, type LimV } from "./e6-series.ts";
-import { Builder, bad, incomplete, isProse, missing, ok, readStatement, uns, worst, finish, type E6Plan, type Judge, type Row, syntheticParse } from "./e6-common.ts";
+import { Builder, bad, incomplete, isProse, proseJudge, nonMath, missing, ok, readStatement, uns, worst, finish, type E6Plan, type Judge, type Row, syntheticParse } from "./e6-common.ts";
 import type { CalculusProblem, Expr } from "./calculus-core.ts";
 import { Overflow, q, qadd, qdiv, qeq, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
@@ -103,7 +103,10 @@ export function readRestrictions(plain0: string, v: string): Stated[] | null {
   }
   return out;
 }
-function satisfied(r: Req, stated: Stated[]): boolean {
+/** E7: the task domain is `restrictions` AND (component_1 OR component_2 ...). A requirement is met only when it holds on EVERY component. */
+let TASK_COMPONENTS: Stated[][] | null = null;
+function satisfied(r: Req, stated: Stated[]): boolean { return TASK_COMPONENTS ? TASK_COMPONENTS.every((comp) => satisfiedIn(r, [...stated, ...comp])) : satisfiedIn(r, stated); }
+function satisfiedIn(r: Req, stated: Stated[]): boolean {
   if (r.kind === "nonzero" && r.at !== undefined) {
     const t = r.at;
     return stated.some((s) => (s.op === "!=" && sameQ(s.bound, t)) || (s.op === ">" && qsign(qsub(s.bound, t)) >= 0) || (s.op === "<" && qsign(qsub(s.bound, t)) <= 0) || (s.op === ">=" && qsign(qsub(s.bound, t)) > 0) || (s.op === "<=" && qsign(qsub(s.bound, t)) < 0));
@@ -347,9 +350,12 @@ export function planCalculusE6(problem: CalculusProblem, rows: Row[]): E6Plan {
   const notes: string[] = [];
   const v = (problem as { variable?: string }).variable ?? "x";
   const fnNames = preScanFns(rows, v);
-  TASK_STATED = [];
-  for (const s of [...(((problem as { restrictions?: unknown }).restrictions as string[] | undefined) ?? []), ...(((problem as { domainComponents?: unknown }).domainComponents as string[] | undefined) ?? [])]) {
+  TASK_STATED = []; TASK_COMPONENTS = null;
+  for (const s of ((problem as { restrictions?: unknown }).restrictions as string[] | undefined) ?? []) {
     try { const rs = typeof s === "string" ? readRestrictions(normalize(s), v) : null; if (rs) TASK_STATED.push(...rs); } catch { /* an unreadable typed restriction is simply not used (the working then has to state it) */ }
+  }
+  for (const s of ((problem as { domainComponents?: unknown }).domainComponents as string[] | undefined) ?? []) {
+    try { const rs = typeof s === "string" ? readRestrictions(normalize(s), v) : null; if (rs) (TASK_COMPONENTS ??= []).push(rs); } catch { /* unreadable component: ignored */ }
   }
   try {
     switch (problem.task as TaskKind) {
@@ -372,7 +378,7 @@ function fillRest(rows: Row[], b: Builder, reason: string, status: Judge["status
 function commonLine(item: Item, i: number, b: Builder, env: Env, c: { conclusions: { i: number; s: ReturnType<typeof readStatement> }[] }): boolean {
   if (item.kind === "bad") { b.add(i, item.judge); return true; }
   if (item.kind === "restriction") { env.stated.push(...item.stated); b.add(i, ok("restriction recorded as a stated assumption (carries no claim of its own)", "restriction statement preserved")); return true; }
-  if (item.kind === "prose") { const s = readStatement(item.row.plain); c.conclusions.push({ i, s }); b.add(i, ok("sentence without a mathematical claim to verify (preserved, not relied upon)", "non-mathematical sentence preserved")); return true; }
+  if (item.kind === "prose") { const s = readStatement(item.row.plain); c.conclusions.push({ i, s }); b.add(i, proseJudge(item.row)); return true; }
   return false;
 }
 const lone = (members: A[]) => members.length === 1;
@@ -736,7 +742,7 @@ function limitTask(problem: Extract<CalculusProblem, { task: "limit" }>, rows: R
     if (item.kind === "prose") { const s = readStatement(item.row.plain); if (s.limitStatement === "dne") dneSaid = true; }
     if (commonLine(item, i, b, env, c)) { if (item.kind === "prose" && readStatement(item.row.plain).limitStatement === "dne") { finalOk = truth.kind === "dne"; finalText = row.raw; finalRow = i;
       { const head = item.row.plain.replace(/\b(?:does\s+not\s+exist|dne|diverges?)\b.*$/i, "").replace(/\b(?:so|thus|hence|therefore|the limit)\b/gi, "").trim();
-        if (/^lim/i.test(head)) { const it = readItem({ ...row, plain: head }, env, fnNames, v); if (it.kind === "math" && it.members.length === 1 && it.members[0].t === "LIM") { const m0 = it.members[0]; const r = limValueOf(m0, env, v); if (!isJudge(r) && m0.v === v && m0.side === side0 && (r.pt === pt0 || (typeof r.pt !== "string" && typeof pt0 !== "string" && qeq(r.pt, pt0)))) { const r0 = guard(() => relate(r.inner, f0, v, env, false)); if (!isJudge(r0) && r0.status === "equal") connectedToProblem = true; } } } } if (truth.kind !== "dne") b.add(i, bad("the limit does exist")); } return; }
+        if (/^lim/i.test(head)) { const it = readItem({ ...row, plain: head }, env, fnNames, v); if (it.kind === "math" && it.members.length === 1 && it.members[0].t === "LIM") { const m0 = it.members[0]; const r = limValueOf(m0, env, v); if (!isJudge(r) && m0.v === v && m0.side === side0 && (r.pt === pt0 || (typeof r.pt !== "string" && typeof pt0 !== "string" && qeq(r.pt, pt0)))) { const r0 = guard(() => relate(r.inner, f0, v, env, false)); if (!isJudge(r0) && r0.status === "equal") connectedToProblem = true; } } } } b.add(i, truth.kind !== "dne" ? bad("the limit does exist") : ok("the stated non-existence agrees with the exactly computed one-sided limits", "conclusion checked against exact limit behaviour")); } return; }
     const members = (item as Extract<Item, { kind: "math" }>).members;
     if (members.length === 1) { b.add(i, uns("a line must state an equality; a bare expression is not a derivation step")); return; }
     const def = definitionLine(members, env, null, v); if (def && def !== "chain") { b.add(i, def); return; }
@@ -852,7 +858,7 @@ function continuity(problem: Extract<CalculusProblem, { task: "continuity" | "di
         if (s.conclusion.positive !== truthBool) { b.add(i, bad(`the conclusion is wrong: the function ${truthBool ? "is" : "is not"} ${want} at ${problem.point}`)); return; }
         b.add(i, ok("conclusion agrees with the exactly computed one-sided values", "conclusion checked against exact one-sided values", digestOf([qtext(L), qtext(R)]))); return;
       }
-      b.add(i, ok("sentence without a mathematical claim to verify (preserved, not relied upon)", "non-mathematical sentence preserved")); return;
+      b.add(i, proseJudge(item.row)); return;
     }
     if (commonLine(item, i, b, env, c)) return;
     const members = (item as Extract<Item, { kind: "math" }>).members;
