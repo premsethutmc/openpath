@@ -25,6 +25,7 @@ export { show, neighbours, factId, type Bug, type Problem, type Step, type Value
 const F: Def[] = [
   {
     id: "mul",
+    contract: { kind: "value", statement: ([a, b]) => `${a}*${b}`, assumptions: ["whole-number product"], numbers: ([a, b]) => [a, b] },
     arity: 2,
     title: "A multiplication fact",
     competency: MT,
@@ -109,6 +110,7 @@ const F: Def[] = [
   },
   {
     id: "fadd",
+    contract: { kind: "value", statement: ([a, b, n, s]) => `${a}/${n}${s > 0 ? "+" : "-"}${b}/${n}` },
     arity: 4,
     title: "Adding or subtracting like fractions",
     competency: "MATH.number.fraction-add-like",
@@ -167,6 +169,7 @@ const F: Def[] = [
   },
   {
     id: "quad",
+    contract: { kind: "set", statement: ([p, q]) => `x^2${p < 0 ? "-" : "+"}${Math.abs(p)}x${q < 0 ? "-" : "+"}${Math.abs(q)}=0`, variable: "x", assumptions: ["x real", "both roots required"], numbers: ([p, q]) => [p, q] },
     arity: 2,
     title: "A quadratic equation with whole-number roots",
     competency: "MATH.algebra.quadratics",
@@ -207,6 +210,7 @@ const F: Def[] = [
   },
   {
     id: "linev",
+    contract: { kind: "value", statement: ([m, c, t]) => `${m}*${t < 0 ? `(${t})` : t}${c < 0 ? "-" : "+"}${Math.abs(c)}`, assumptions: ["value of y at the given x"], numbers: ([m, c, t]) => [m, c, t] },
     arity: 3,
     title: "A value on a straight line",
     competency: "MATH.algebra.variables",
@@ -229,6 +233,7 @@ const F: Def[] = [
   },
   {
     id: "meet",
+    contract: { kind: "set", statement: ([m, c]) => `x^2=${m}x${c < 0 ? "-" : "+"}${Math.abs(c)}`, variable: "x", assumptions: ["x real (the question lists the whole-number meeting points in −4…4; the equation has no other real solutions)", "both required"], numbers: ([m, c]) => [m, c] },
     arity: 2,
     title: "Where a line meets y = x², by trying whole numbers",
     competency: "MATH.algebra.linear-equations",
@@ -326,6 +331,7 @@ const F: Def[] = [
 
   {
     id: "pow",
+    contract: { kind: "value", statement: ([a, n]) => `${a}^${n}`, assumptions: ["whole-number power"], numbers: ([a, n]) => [a, n] },
     arity: 2,
     title: "A power of a whole number",
     competency: EXP,
@@ -574,6 +580,7 @@ const F: Def[] = [
   },
   {
     id: "mmul",
+    contract: { kind: "value", statement: ([a, b]) => `${a}*${b}` },
     arity: 2,
     title: "Multiplying a two-digit number by a one-digit number",
     competency: "MATH.number.multi-multiplication",
@@ -639,6 +646,7 @@ const F: Def[] = [
   },
   {
     id: "ldiv",
+    contract: { kind: "value", statement: ([q, d]) => `${q * d}/${d}` },
     arity: 2,
     title: "Dividing a number exactly",
     competency: "MATH.number.long-division",
@@ -673,6 +681,7 @@ const F: Def[] = [
   },
   {
     id: "fmulw",
+    contract: { kind: "value", statement: ([a, b, k]) => `${k}*${a}/${b}` },
     arity: 3,
     title: "A fraction times a whole number",
     competency: "MATH.number.fraction-multiply",
@@ -701,6 +710,7 @@ const F: Def[] = [
   },
   {
     id: "faddu",
+    contract: { kind: "value", statement: ([a, b, c, d]) => `${a}/${b}+${c}/${d}` },
     arity: 4,
     title: "Adding fractions with different denominators",
     competency: "MATH.number.fraction-add",
@@ -869,6 +879,7 @@ const F: Def[] = [
   },
   {
     id: "lin",
+    contract: { kind: "var", statement: ([a, b, x]) => `${a}x+${b}=${a * x + b}`, variable: "x", assumptions: ["x real"], numbers: ([a, b, x]) => [a, b, a * x + b] },
     arity: 3,
     title: "Solving ax + b = c",
     competency: "MATH.algebra.linear-equations",

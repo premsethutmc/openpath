@@ -1085,6 +1085,7 @@ export const B15: Def[] = [
   // ============================================================ absolute value
   {
     id: "aoabseq",
+    contract: { kind: "set", statement: ([a, b, c]) => `|${lin(a, b)}|=${c}`, variable: "x" },
     arity: 3,
     title: "Solving |ax + b| = c",
     competency: ABS,

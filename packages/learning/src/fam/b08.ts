@@ -142,6 +142,7 @@ export const B08: Def[] = [
   // ------------------------------------------------------------ Grade 6: one-step equations
   {
     id: "ahone",
+    contract: { kind: "var", statement: (p) => { const e = oneStep(p); return `${e.lhs}=${e.b}`; }, variable: "x" },
     arity: 3,
     title: "Solving a one-step equation",
     competency: LINI,
@@ -783,6 +784,7 @@ export const B08: Def[] = [
   // ------------------------------------------------------------ Grade 8: equations with rational coefficients
   {
     id: "ahfrac",
+    contract: { kind: "var", statement: ([a, b, k, s]) => { const x = (k * a * b) / gcd(a, b); return `x/${a}${s ? "-" : "+"}x/${b}=${s ? x / a - x / b : x / a + x / b}`; }, variable: "x" },
     arity: 4,
     title: "An equation with fractions of x",
     competency: LRAT,
@@ -850,6 +852,7 @@ export const B08: Def[] = [
   },
   {
     id: "ahboth",
+    contract: { kind: "var", statement: ([a, b, c, d]) => `${poly([[a, "x"], [b, ""]])}=${poly([[c, "x"], [d, ""]])}`, variable: "x" },
     arity: 4,
     title: "An equation with x on both sides",
     competency: LRAT,

@@ -75,6 +75,7 @@ export const CORE: Def[] = [
   },
   {
     id: "addr",
+    contract: { kind: "value", statement: ([a, b]) => `${a}+${b}` },
     arity: 2,
     title: "Adding two-digit numbers with regrouping",
     competency: ADDR,

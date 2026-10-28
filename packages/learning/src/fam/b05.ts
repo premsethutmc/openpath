@@ -1506,6 +1506,7 @@ export const B05: Def[] = [
   // ============================================================ × and ÷ by 10, 100, 1000
   {
     id: "aep10",
+    contract: { kind: "value", statement: ([op, k, m]) => (op === 0 ? `${m}*${10 ** k}` : `${m * 10 ** k}/${10 ** k}`) },
     arity: 3,
     title: "Multiplying and dividing by 10, 100 and 1000",
     competency: P10,
@@ -1573,6 +1574,7 @@ export const B05: Def[] = [
   },
   {
     id: "aemult",
+    contract: { kind: "value", statement: ([a, d, k]) => `${a}*${d * 10 ** k}` },
     arity: 3,
     title: "Multiplying by a multiple of 10 or 100",
     competency: P10,
@@ -3992,6 +3994,7 @@ B05.push(...MEAS_MORE);
 const MIX_MORE: Def[] = [
   {
     id: "aediv0",
+    contract: { kind: "value", statement: ([d, q, k]) => `${d * q * 10 ** k}/${d}` },
     arity: 3,
     title: "Dividing a multiple of 10, 100 or 1000 by a one-digit number",
     competency: P10,
@@ -4884,6 +4887,7 @@ const pvAdd = (a: number, b: number): Visual => {
 const CORE_MORE: Def[] = [
   {
     id: "aeaddn",
+    contract: { kind: "value", statement: ([, a, b]) => `${a}+${b}` },
     arity: 3,
     title: "Adding two-digit numbers without regrouping, and totals up to 200",
     competency: ADDR,
@@ -4946,6 +4950,7 @@ const CORE_MORE: Def[] = [
   },
   {
     id: "aeadd3",
+    contract: { kind: "value", statement: ([a, b]) => `${a}+${b}` },
     arity: 2,
     title: "Adding three-digit numbers without regrouping",
     competency: ADDSUB,

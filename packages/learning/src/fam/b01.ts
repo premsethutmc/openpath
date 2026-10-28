@@ -1402,6 +1402,7 @@ export const B01: Def[] = [
   // ================================================================ MATH.number.addition
   {
     id: "aaadd",
+    contract: { kind: "value", statement: ([a, b]) => `${a}+${b}` },
     arity: 2,
     title: "Adding two numbers with a total up to 20",
     competency: ADD,
@@ -1848,6 +1849,7 @@ export const B01: Def[] = [
   // ================================================================ MATH.number.subtraction
   {
     id: "aasub",
+    contract: { kind: "value", statement: ([a, b]) => `${a}-${b}` },
     arity: 2,
     title: "Taking away within 20",
     competency: SUB,
@@ -1934,6 +1936,7 @@ export const B01: Def[] = [
   // ================================================================ MATH.number.zero
   {
     id: "aazero",
+    contract: { kind: "value", statement: ([kind, a]) => [`${a}+0`, `0+${a}`, `${a}-0`, `${a}-${a}`][kind] },
     arity: 2,
     title: "Adding and taking away 0 (and taking away all)",
     competency: ZERO,
@@ -3815,6 +3818,7 @@ const GAP01: Def[] = [
   // ================================================================ MATH.number.zero: multiplying by 1 and by 0
   {
     id: "aamul01",
+    contract: { kind: "value", statement: ([kind, n]) => (kind < 4 ? [`${n}*1`, `1*${n}`, `${n}*0`, `0*${n}`][kind] : null) },
     arity: 2,
     title: "Multiplying by 1 and by 0",
     competency: ZERO,

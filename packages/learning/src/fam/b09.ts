@@ -1490,6 +1490,7 @@ export const B09: Def[] = [
   // ================================================================ decimals
   {
     id: "aidmul",
+    contract: { kind: "value", statement: ([m, a, n, b]) => `${D(m, 10 ** a)}*${D(n, 10 ** b)}` },
     arity: 4,
     title: "Multiplying decimals",
     competency: DEC,
@@ -1527,6 +1528,7 @@ export const B09: Def[] = [
   },
   {
     id: "aiddiv",
+    contract: { kind: "value", statement: ([m, a, n, b]) => `${D(m * n, 10 ** (a + b))}/${D(n, 10 ** b)}` },
     arity: 4,
     title: "Dividing decimals",
     competency: DEC,
@@ -1568,6 +1570,7 @@ export const B09: Def[] = [
   },
   {
     id: "aidp10",
+    contract: { kind: "value", statement: ([m, a, k, o]) => `${D(m, 10 ** a)}${o ? "/" : "*"}${10 ** k}` },
     arity: 4,
     title: "Multiplying and dividing decimals by 10, 100 and 1000",
     competency: DEC,
@@ -1612,6 +1615,7 @@ export const B09: Def[] = [
   // ================================================================ fractions
   {
     id: "aifmul",
+    contract: { kind: "value", statement: ([w, a, b, c, d]) => `${w ? `(${w}+${a}/${b})` : `${a}/${b}`}*${c}/${d}` },
     arity: 5,
     title: "Multiplying fractions and mixed numbers",
     competency: FRP,
@@ -1693,6 +1697,7 @@ export const B09: Def[] = [
   // ================================================================ integers
   {
     id: "aiint",
+    contract: { kind: "value", statement: ([a, b, o]) => `${a < 0 ? `(${a})` : a}${o ? "-" : "+"}${b < 0 ? `(${b})` : b}` },
     arity: 3,
     title: "Adding and subtracting integers",
     competency: INTA,
@@ -2156,6 +2161,7 @@ B09.push(
   // ================================================================ integer expressions and context problems
   {
     id: "aiintx",
+    contract: { kind: "value", statement: (p) => (p[0] <= 1 ? ixText(p) : null) },
     arity: 5,
     title: "Expressions and stories with several integer operations",
     competency: IMUL,

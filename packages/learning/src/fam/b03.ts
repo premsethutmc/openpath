@@ -67,6 +67,7 @@ export const B03: Def[] = [
   // ------------------------------------------------------------------ mental arithmetic
   {
     id: "acaddten",
+    contract: { kind: "value", statement: ([a, k, u, op]) => `${a}${op ? "-" : "+"}${k * (u ? 100 : 10)}` },
     arity: 4,
     title: "Adding and taking away tens or hundreds in your head",
     competency: MENTAL,
@@ -147,6 +148,7 @@ export const B03: Def[] = [
   },
   {
     id: "acpart",
+    contract: { kind: "value", statement: ([a, b]) => `${a}*${b}` },
     arity: 2,
     title: "Multiplying in your head by splitting into tens and ones",
     competency: MENTAL,
@@ -457,6 +459,7 @@ export const B03: Def[] = [
   // ------------------------------------------------------------------ subtraction with regrouping
   {
     id: "acsub2",
+    contract: { kind: "value", statement: ([a, b]) => `${a}-${b}` },
     arity: 2,
     title: "Subtracting two-digit numbers with regrouping",
     competency: SUBR,
@@ -513,6 +516,7 @@ export const B03: Def[] = [
   },
   {
     id: "acsub3",
+    contract: { kind: "value", statement: ([a, b]) => `${a}-${b}` },
     arity: 2,
     title: "Subtracting three-digit numbers with regrouping",
     competency: SUBR,
@@ -1583,6 +1587,7 @@ export const B03: Def[] = [
   },
   {
     id: "acsubn",
+    contract: { kind: "value", statement: ([a, b]) => `${a}-${b}` },
     arity: 2,
     title: "Subtracting two-digit numbers without regrouping",
     competency: SUBR,

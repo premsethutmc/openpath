@@ -1299,6 +1299,7 @@ const P2: Def[] = [
   },
   {
     id: "avzero",
+    contract: { kind: "value", statement: ([a, m, k, f]) => (f === 0 ? `${a}^${m}/${a}^${m}` : f === 1 ? `${k}*${a}^0` : f === 2 ? `${a}^0+${k}^0` : f === 3 ? `${a}^${m}*${a}^0` : `(${k}*${a})^0`) },
     arity: 4,
     title: "The zero exponent",
     competency: EXP,

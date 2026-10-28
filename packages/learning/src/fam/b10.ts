@@ -210,6 +210,7 @@ export const B10: Def[] = [
   },
   {
     id: "ajbrk",
+    contract: { kind: "value", statement: ([a, b, c, s]) => `${a}-(${b}${s ? "+" : "-"}${c})` },
     arity: 4,
     title: "Removing brackets after a minus sign",
     competency: OPP,
@@ -817,6 +818,7 @@ export const B10: Def[] = [
   // ------------------------------------------------------------------ integer multiplication
   {
     id: "ajimul",
+    contract: { kind: "value", statement: ([a, b]) => `${a}*${b < 0 ? `(${b})` : b}` },
     arity: 2,
     title: "Multiplying integers",
     competency: IMUL,
@@ -1171,6 +1173,7 @@ export const B10: Def[] = [
   // ------------------------------------------------------------------ rational numbers
   {
     id: "ajrq",
+    contract: { kind: "value", statement: ([a, b, c, d, o]) => `(${a}/${b}) ${OPS[o]} (${c}/${d})` },
     arity: 5,
     title: "Adding, subtracting, multiplying and dividing rational numbers",
     competency: RQ,
@@ -2259,6 +2262,7 @@ export const B10: Def[] = [
   // ------------------------------------------------------------------ dividing integers
   {
     id: "ajidiv",
+    contract: { kind: "value", statement: ([q, d]) => `${q * d}/${d < 0 ? `(${d})` : d}` },
     arity: 2,
     title: "Dividing integers",
     competency: IMUL,

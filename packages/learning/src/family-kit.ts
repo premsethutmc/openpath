@@ -189,6 +189,17 @@ export interface TeachAlternative {
   /** A picture for this way of explaining, for a worked example's parameters. */
   visual?: (p: number[]) => Visual | null;
 }
+/** What the exact checker needs to verify this family's answers, from the generated parameters (never recovered from the prompt text). A family opts in; null from `statement` leaves that question on the legacy comparison. */
+export interface GeneratorContract {
+  /** value: a number; var: the solution of an equation in `variable`; set: all solutions of an equation in `variable` */
+  kind: "value" | "var" | "set";
+  statement: (p: number[]) => string | null;
+  variable?: string;
+  assumptions?: string[];
+  /** the numbers the student is shown that the statement uses; default: the digits of the statement */
+  numbers?: (p: number[]) => number[];
+}
+
 export type Def = {
   id: string;
   /** How many parameters a stored id carries. */
@@ -200,6 +211,8 @@ export type Def = {
   type: Problem["type"];
   /** The family also has a multiple-choice form ("gen:<family>:<params>:mc"): mal-rule answers as the options. */
   mc?: boolean;
+  /** The checker's statement for this family, from its parameters (optional). */
+  contract?: GeneratorContract;
   /** Read the parameters from written text; null if the text is not this family. */
   parse: (t: string) => number[] | null;
   /** Reject parameters outside what the family supports (a reason), or accept (null). */

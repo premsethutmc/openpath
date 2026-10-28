@@ -9,7 +9,7 @@
  *    A proposed reading of the student's input is only an offer: the student confirms it ("Did you mean x = 4?") and the confirmed answer is graded by the kernel.
  * The provider settings mirror the existing essay client (backend/evaluation/llm.py: OPENPATH_LLM_*) so one operator-side configuration serves both.
  */
-import { answerText, assessSubmission, STATEMENTS, type Assessment, type AssessmentContract } from "./assessment.ts";
+import { answerText, assessSubmission, type Assessment, type AssessmentContract } from "./assessment.ts";
 
 export interface FallbackConfig {
   provider: "none" | "fixture" | "anthropic" | "openai_compatible";
@@ -78,11 +78,10 @@ export interface Settled { assessment: Assessment; usable: FallbackProposal[]; d
  *  error-source / explanation          → usable only if it names the first error the kernel already confirmed (otherwise discarded)
  */
 export function settle(contract: AssessmentContract, a: Assessment, proposals: FallbackProposal[]): Settled {
-  const shape = STATEMENTS[contract.questionId.split(":")[1]];
   const usable: FallbackProposal[] = [], discarded: Settled["discarded"] = []; let confirmation: Settled["confirmation"] = null;
   for (const p of proposals) {
     if (p.kind === "interpretation" || p.kind === "candidate-solution") {
-      const text = p.kind === "interpretation" ? p.reading : p.answer, r = shape && contract.verification === "verified" ? answerText(shape.kind, contract.variable, text) : null;
+      const text = p.kind === "interpretation" ? p.reading : p.answer, r = contract.kind && contract.verification === "verified" ? answerText(contract.kind, contract.variable, text) : null;
       if (!r || !r.ok) { discarded.push({ proposal: p, why: "not a plain answer the checker can read" }); continue; }
       if (!confirmation) confirmation = { prompt: `Did you mean ${r.text.replace(/ or /g, " and ")}?`, answer: r.values.join(", ") };
       usable.push(p);

@@ -783,6 +783,7 @@ export const B04: Def[] = [
   // ============================================================ three-digit addition and subtraction
   {
     id: "adcol3",
+    contract: { kind: "value", statement: ([a, b, op]) => `${a}${op ? "-" : "+"}${b}` },
     arity: 3,
     title: "Adding and subtracting three-digit numbers with regrouping",
     competency: MDAS,
@@ -894,6 +895,7 @@ export const B04: Def[] = [
   // ============================================================ thousands
   {
     id: "adexp",
+    contract: { kind: "value", statement: ([th, h, t, o]) => (th === 0 ? null : [th * 1000, h * 100, t * 10, o].filter((x) => x > 0).join("+")) },
     arity: 4,
     title: "Writing a number from its place-value parts",
     competency: TH,
@@ -1772,6 +1774,7 @@ export const B04: Def[] = [
   },
   {
     id: "adcolx",
+    contract: { kind: "value", statement: (p) => { const [a, b] = colxNums(p); return `${a}${p[2] ? "-" : "+"}${b}`; } },
     arity: 3,
     title: "Column addition and subtraction from three to five digits, with and without regrouping",
     competency: MDAS,

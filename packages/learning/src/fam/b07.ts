@@ -236,6 +236,7 @@ export const B07: Def[] = [
   // ================================================================ decimals: add and subtract
   {
     id: "agdec",
+    contract: { kind: "value", statement: ([x, y, op]) => `${dec(x, 1)}${op ? "-" : "+"}${dec(y, 2)}` },
     arity: 3,
     title: "Adding and subtracting decimals with different places",
     competency: DEC,
@@ -804,6 +805,7 @@ export const B07: Def[] = [
   // ================================================================ order of operations
   {
     id: "agbod",
+    contract: { kind: "value", statement: ([f, a, b, c]) => FORMS[f].ascii(a, b, c) },
     arity: 4,
     title: "Order of operations with brackets",
     competency: OOO,
