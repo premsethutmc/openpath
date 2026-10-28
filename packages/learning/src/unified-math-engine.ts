@@ -7,7 +7,8 @@ import { MATHEMATICAL_OBLIGATION_CONTRACT, constant, statementText, symbol, vali
 import { assessDomainWorking, M1_CONTRACT, type M1Problem, type M1Step } from "./domains-m1.ts";
 import { assessM2Working, M2_CONTRACT, type M2Problem, type M2Step } from "./domains-m2.ts";
 import { typedCalculusDomainGap } from "./e6-calc.ts";
-import { assessCalculusWorking, CALCULUS_CONTRACT, type CalculusProblem, type CalculusStep } from "./calculus-core.ts";
+import { assessCalculusWorking, CALCULUS_CONTRACT, type CalculusProblem, type CalculusStep, type Expr } from "./calculus-core.ts";
+import { ruleLabelVerdict } from "./rule-labels.ts";
 import { assessCalculusMethodWorking, CALCULUS_METHODS_CONTRACT, type CalculusMethodProblem, type CalculusMethodStep } from "./calculus-methods.ts";
 import { assessSymbolicWorking, SYMBOLIC_EQUIVALENCE_CONTRACT, type SymbolicBudget, type SymbolicProblem, type SymbolicStep } from "./symbolic-equivalence.ts";
 import { assessProbabilityStatistics, PROBABILITY_B1_CONTRACT, type B1Problem, type B1Step } from "./probability-statistics.ts";
@@ -22,10 +23,11 @@ import { CLAIM_LEDGER_CONTRACT, type CoverageRecord } from "./claim-ledger.ts";
 import { buildLineAccount, resolveVerdict, unparsedLineAccount, validateAccounts, type AccountEntry, type LineAccount, type LineStatus, type StepClassification } from "./proof-integrity.ts";
 import { bindClaimsDetailed, replaySymbolicSteps } from "./claim-binding.ts";
 import { ACCEPTANCE_GATE_CONTRACT, checkerStatusToStep, checkerSummary, evidenceFromCheck, reconcileAlgebra, type AcceptanceGateRecord, type BindingEvidence, type GateEvidenceItem, type GateLevel } from "./acceptance-gate.ts";
-import { checkAlgebraSubmission } from "./independent-checker.ts";
+import { checkAlgebraSubmission, type AlgebraCheck } from "./independent-checker.ts";
 import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geocalc-e5.ts";
 import { buildObligations, type ObligationSet } from "./proof-obligations.ts";
 import { typedIdentities } from "./evidence-binding.ts";
+import { assessRelevance, literalProvenance, polynomialKey, previousClosure } from "./claim-grounding.ts";
 import { MECHANISMS } from "./evidence-provenance.ts";
 import { buildProofContext, relateStudentRestriction, routeUse, withProved, withStudent, withUnresolved, type ProofContext, type RouteUse } from "./proof-context.ts";
 import { GENERALIZATION_E6_CONTRACT, planGeneralizationE6 } from "./natural-generalization-e6.ts";
@@ -385,8 +387,13 @@ async function assessCandidateBase(problem: MathematicalProblem, studentWorking:
     const native0=assessCalculusWorking(problem as CalculusProblem,studentWorking as CalculusStep[]);
     // E7 repair B: the typed route is held to the same domain semantics as the natural route (same functions): a verified typed result that ignores the task's domain is withdrawn
     const gap=native0.classification==="verified"?typedCalculusDomainGap(problem as CalculusProblem,(studentWorking as CalculusStep[]).flatMap(s=>s.claim?.kind==="expression"?[s.claim.value]:[])):null;
-    const native=gap?{...native0,classification:gap.kind as never,correct:null as never,complete:false,outstandingObligations:[...native0.outstandingObligations,gap.reason],justification:`domain: ${gap.reason}; `+native0.justification,steps:native0.steps.map(s=>s.classification==="verified"?{...s,classification:gap.kind as never}:s)}:native0;
-    return {contractVersion:UNIFIED_MATH_CONTRACT,domain:"calculus",classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"calculus:exact",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"calculus:exact",version:CALCULUS_CONTRACT}],justification:native.justification,domainPayload:native};
+    // E7 repair D: the cited rule is a claim of its own; a verified derivative step whose rule cannot apply to the expression it is applied to is a false statement in the work
+    const lbl:{index:number;label:string;verdict:string}[]=[];
+    if((problem as any).task==="derivative"){(studentWorking as CalculusStep[]).forEach((st,i)=>{const inp=st.input??(i===0?(problem as CalculusProblem & {expression:Expr}).expression:undefined);if(inp&&typeof st.rule==="string"&&st.rule.trim()){lbl.push({index:i,label:st.rule,verdict:ruleLabelVerdict(st.rule,inp,(problem as any).variable??"x")})}})}
+    const wrong=lbl.find(x=>x.verdict==="contradicted"&&native0.steps[x.index]?.classification==="verified");
+    const native1=wrong?{...native0,classification:"invalid" as never,correct:false as never,complete:false,firstInvalidStep:wrong.index as never,justification:`the cited rule "${wrong.label}" does not apply to this step's expression, although the result is correct; `+native0.justification,steps:native0.steps.map(s=>s.index===wrong.index?{...s,classification:"invalid" as never,justification:`the cited rule "${wrong.label}" cannot produce this step from its input`}:s)}:native0;
+    const native=gap?{...native1,classification:gap.kind as never,correct:null as never,complete:false,outstandingObligations:[...native0.outstandingObligations,gap.reason],justification:`domain: ${gap.reason}; `+native0.justification,steps:native0.steps.map(s=>s.classification==="verified"?{...s,classification:gap.kind as never}:s)}:native1;
+    return {contractVersion:UNIFIED_MATH_CONTRACT,domain:"calculus",classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"calculus:exact",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"calculus:exact",version:CALCULUS_CONTRACT}],justification:native.justification,domainPayload:{...native,ruleLabels:lbl.map(x=>({...x,certified:x.verdict==="applies"?"applies":x.verdict==="unrecognised"?"uncertified":"contradicted"}))}};
   }
   if (problem.domain === "geometry") {
     if (!studentWorking || Array.isArray(studentWorking) || !("steps" in studentWorking) || !Array.isArray(studentWorking.steps)) return malformed("geometry", "geometry working must contain structured steps");
@@ -428,6 +435,29 @@ const gateRecord = (route: AcceptanceGateRecord["route"], cand: AssessmentEnvelo
 function withdrawAcceptance(cand: AssessmentEnvelope, route: AcceptanceGateRecord["route"], source: AcceptanceGateRecord["source"], why: string, evidence: GateEvidenceItem[] = [], checker: AcceptanceGateRecord["checker"] = null): AssessmentEnvelope {
   return { ...cand, classification: "unsupported", correct: null, complete: false, justification: `acceptance withdrawn: ${why}`, outstandingObligations: [...cand.outstandingObligations, why], acceptanceGate: gateRecord(route, cand, { verdict: "unsupported", source, evidence, obligations: [why], reconciliation: why, checker }) };
 }
+/**
+ * E7 repair D (algebra lines): validity of a step is the checker's (equivalence / candidate elimination); whether the line is DERIVED from the task or the line before it is decided here
+ * by the shared literal-provenance rule: every number it writes comes from the statement, from an earlier accepted line, from what the previous line computes, from a balance operation
+ * applied to both sides, or from a computation the line itself shows. `x = 8 - 6` after `4x = 8` introduces 6 from nowhere, whatever its value.
+ */
+function algebraGroundings(statement: string, parsed: NaturalParseResult, check: AlgebraCheck): NonNullable<RouteUse["grounded"]> {
+  const nums = (t: string) => (t.match(/(?<![A-Za-z])\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x)));
+  const task = new Set(nums(statement)), established = new Set<string>(), out: NonNullable<RouteUse["grounded"]> = [];
+  const pool: string[] = [statement]; let prevLine = 0;
+  parsed.lines.forEach((l, i) => {
+    const text = l.source.text, st = check.lines[i]?.status;
+    if (st === "verified-valid") {
+      // a line that is the same polynomial statement as the line before it (expanded, factored, collected, sides swapped) is an exact rewrite: the identity certifies its numbers
+      const key = polynomialKey(text), rewrite = !!key && key !== "0" && polynomialKey(pool[pool.length - 1]) === key && !/(?<![A-Za-z^.\d])\d+(?:\.\d+)?\s*[+\-*/]\s*\d+(?:\.\d+)?(?![A-Za-z(\d^.])/.test(text.replace(/\d+\s*\/\s*\d+/g, "q")); // an exact rewrite certifies a numeral only in the form it is written in: a pure-number computation inside it (69 − 54) is a claim of its own
+      const derived = new Set<string>(), sources = rewrite ? [] : literalProvenance(text, { task, established, licensed: new Set([...(pool.some((x) => /sqrt|√|\^\s*\(?1\/2/i.test(x)) ? ["2"] : []), ...(pool.some((x) => /cbrt|∛/i.test(x)) ? ["3"] : [])]), previous: previousClosure(pool) }, derived); // squaring (cubing) is the inverse of a root the working has written
+      sources.push(prevLine ? { kind: "derived-fact", ref: `line-${prevLine}`, by: "symbol", trivial: false } : { kind: "task-premise", ref: "the statement", by: "symbol", trivial: false });
+      const g = assessRelevance(sources);
+      out.push({ line: l.source.line, grounding: g });
+      if (g.relevant) { for (const x of [...nums(text), ...derived]) established.add(x); pool.push(text); prevLine = l.source.line; }
+    }
+  });
+  return out;
+}
 function gateAlgebraText(statement: string, parsed: NaturalParseResult, rawText: string, cand: AssessmentEnvelope): AssessmentEnvelope {
   if (parsed.classification !== "parsed") return cand.classification === "verified" ? withdrawAcceptance(cand, "algebra-text", "downgraded-no-independent-evidence", "the working could not be parsed for independent verification") : { ...cand, acceptanceGate: gateRecord("algebra-text", cand, { reconciliation: "the working is not parsed; nothing is accepted" }) };
   const check = checkAlgebraSubmission(statement, parsed), dec = reconcileAlgebra(cand.classification, check);
@@ -436,7 +466,7 @@ function gateAlgebraText(statement: string, parsed: NaturalParseResult, rawText:
   const level: GateLevel = dec.classification === "verified" ? (allU4 && check.u4Steps > 0 && check.exactSteps === 0 ? "u4-kernel" : "independent-exact-checker") : "none";
   const record = gateRecord("algebra-text", cand, { verdict: dec.classification, independentlyVerified: dec.classification === "verified", level, source: dec.source, evidence, obligations: check.obligations, reconciliation: dec.why, checker: summary });
   if (!dec.adoptChecker) {
-    if (dec.classification === cand.classification) return { ...cand, acceptanceGate: record };
+    if (dec.classification === cand.classification) return { ...cand, acceptanceGate: record, domainPayload: { ...(cand.domainPayload && typeof cand.domainPayload === "object" ? cand.domainPayload : {}), groundedLines: algebraGroundings(statement, parsed, check) } };
     return { ...cand, classification: dec.classification as Classification, correct: null, complete: false, justification: `acceptance withdrawn: ${dec.why}`, outstandingObligations: [...cand.outstandingObligations, dec.why], acceptanceGate: record };
   }
   const accounts: AccountEntry[] = parsed.lines.map((l, i) => ({ lineId: l.id, role: "claim-step" as const, stepIndex: i, dependsOn: i ? [parsed.lines[i - 1].id] : [] }));
@@ -446,7 +476,7 @@ function gateAlgebraText(statement: string, parsed: NaturalParseResult, rawText:
   const cls = dec.classification as Classification, payload = (cand.domainPayload && typeof cand.domainPayload === "object" ? cand.domainPayload : {}) as Record<string, unknown>;
   return { ...cand, classification: cls, correct: cls === "verified" ? true : cls === "invalid" ? false : null, complete: cls === "verified", firstInvalidStep: check.firstInvalidStep, steps, proofDependencies: steps.map((s) => s.dependencies),
     domainRestrictions: [...new Set([...cand.domainRestrictions, ...check.restrictions])], outstandingObligations: check.obligations, justification: check.justification,
-    reasoners: [...cand.reasoners, { id: "independent-checker", version: INDEPENDENT_CHECKER_VERSION }], domainPayload: { ...payload, naturalInput: parsed, lineAccount: account, independentCheck: check }, acceptanceGate: record };
+    reasoners: [...cand.reasoners, { id: "independent-checker", version: INDEPENDENT_CHECKER_VERSION }], domainPayload: { ...payload, naturalInput: parsed, lineAccount: account, independentCheck: check, groundedLines: algebraGroundings(statement, parsed, check) }, acceptanceGate: record };
 }
 const INDEPENDENT_CHECKER_VERSION = "openpath-independent-algebra-checker@1";
 function gateConverted(cand: AssessmentEnvelope, payload: { lineAccount?: LineAccount; bindingEvidence?: BindingEvidence[] }): AssessmentEnvelope {
@@ -538,7 +568,7 @@ function certifyClaims(problem: MathematicalProblem, working0: StudentWorking, c
   const obs: ObligationSet = buildObligations({
     text: working.text, claims: lv.ledger.claims.map((c) => ({ line: c.line, start: c.start, end: c.end, text: c.text, kind: c.kind, outcome: c.outcome, reason: c.reason })), relations: lv.relations,
     records: payload.lineAccount ? payload.lineAccount.records.map((r) => ({ role: r.role, text: r.text, id: r.id, line: r.line, span: r.span, status: r.status, dependencies: r.dependencies, premiseEligible: r.premiseEligible, reason: r.reason })) : [],
-    evidence: (cand.acceptanceGate?.evidence ?? []).map((e) => ({ ...e, premises: e.premises ?? producerContext(e.checker, uses) })), taskDigest: ctx0.digest, reasoners: cand.reasoners.map((r) => r.id), grounded: mergeGrounded(uses.flatMap((u) => u.grounded ?? [])),
+    evidence: (cand.acceptanceGate?.evidence ?? []).map((e) => ({ ...e, premises: e.premises ?? producerContext(e.checker, uses) })), taskDigest: ctx0.digest, reasoners: cand.reasoners.map((r) => r.id), grounded: mergeGrounded([...uses.flatMap((u) => u.grounded ?? []), ...(((cand.domainPayload as { groundedLines?: RouteUse["grounded"] } | undefined)?.groundedLines) ?? [])]),
     verdict: { classification: cand.classification, complete: cand.complete, independentlyVerified: cand.acceptanceGate?.independentlyVerified ?? false, route: cand.acceptanceGate?.route ?? "natural-other", justification: cand.justification },
   });
   const finalCtx = withUnresolved(

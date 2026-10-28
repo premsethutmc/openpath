@@ -104,7 +104,10 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
       else { status = "unsupported"; aggregate = true; reason = "the route certifies this submission in aggregate only; no per-claim evidence exists for this claim"; }
     }
     const bad = deps.find((d) => d.status !== "proven");
+    // E7 repair D: a claim that rests on a premise line which is not about the task (an ungrounded line) inherits that gap; a derivation is only as grounded as what it rests on
+    const gbadDep = deps.map((d) => out.find((x) => x.kind === "grounding" && x.line === d.line)).find((x) => x && x.status !== "proven" && inp.grounded.some((gg) => gg.line === x.line && !gg.grounding.relevant && gg.grounding.sources.some((q) => q.kind === "task-premise" || q.kind === "derived-fact"))); // a line wholly unrelated to the task is a side claim, not a premise of what follows
     if (status === "proven" && bad) { status = "unresolved"; reason = `it depends on ${bad.id} (line ${bad.line}), which is ${bad.status}`; evidence = null; }
+    else if (status === "proven" && gbadDep) { status = "unresolved"; reason = `it rests on line ${gbadDep.line}, whose numbers are not shown to come from the task (${gbadDep.reason})`; evidence = null; }
     const o = make(`ob:${out.length}`, "derivation", c.line, c.text, `"${c.text}" follows from the task premises and the facts already proved by a justified transformation`, status, reason, evidence, deps.map((d) => d.id), cond, aggregate);
     out.push(o); byLineDeriv.set(c.line, o); if (rec) byRecordDeriv.set(rec.id, o);
     // grounding: only where a route computed it (the exact number-chain checker); its sources on earlier lines are dependencies

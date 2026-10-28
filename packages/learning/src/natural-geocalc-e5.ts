@@ -17,7 +17,7 @@ import {
   compilePremises, coordTruth, digestOf, judgeAngleEquation, judgeCongruence, judgeCoordinate, linOf, pointsOf, ruleOf, segmentEnds, trianglesOf, truthOfLineRelation,
   type CoordSubject, type GProblem, type Judge, type JudgeStatus, type Lin, type Premise,
 } from "./geometry-binder-e5.ts";
-import { assessRelevance, type Grounding, type GroundingSource } from "./claim-grounding.ts";
+import { assessRelevance, literalProvenance, previousClosure, type Grounding, type GroundingSource } from "./claim-grounding.ts";
 import { d5, dk, judgeIdentity, limitTruth, polyDefinite, polyOf, type LimitTarget } from "./calculus-binder-e5.ts";
 
 export const GEOCALC_E5_CONTRACT = "openpath-geometry-calculus-natural-e5@1" as const;
@@ -159,25 +159,22 @@ function renameLin(l: Lin, f: (n: string) => string): Lin { const out: Lin = new
  * that comes from nowhere (`angle C = 100 - 30 = 70`) leaves the derivation ungrounded even though every equality in it is true.
  */
 const GEOMETRIC_CONSTANTS = new Set(["180", "360", "90"]);
-function numericGrounding(text: string, task: Set<string>, established: Set<string>, taskSymbol: boolean): Grounding {
-  const toks = [...new Set((text.match(/\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x))))];
-  const pool = [...new Set([...task, ...established])].map(Number).filter((x) => Number.isFinite(x));
-  const oneStep = (n: number) => pool.some((a) => pool.some((b) => Math.abs(a + b - n) < 1e-9 || Math.abs(a - b - n) < 1e-9 || Math.abs(a * b - n) < 1e-9 || (b !== 0 && Math.abs(a / b - n) < 1e-9)));
-  const sources: GroundingSource[] = [];
-  for (const t of toks) {
-    const n = Number(t), trivial = Math.abs(n) <= 2;
-    if (GEOMETRIC_CONSTANTS.has(t)) continue;
-    if (task.has(t)) sources.push({ kind: "task-premise", ref: t, by: "value", trivial });
-    else if (established.has(t)) sources.push({ kind: "derived-fact", ref: t, by: "value", trivial });
-    else if (trivial || oneStep(n)) sources.push({ kind: "derived-fact", ref: t, by: "value", trivial: true, derived: !trivial });
-    else sources.push({ kind: "free-literal", ref: t, by: "value", trivial: false });
+const numKeyOf = (n: number): string => (Number.isInteger(n) ? String(n) : String(+n.toFixed(9)));
+function numericGrounding(text: string, task: Set<string>, established: Set<string>, taskSymbol: boolean, p: GProblem, derivedOut?: Set<string>, prior: string[] = []): Grounding {
+  // E7 repair D: the shared literal-provenance rule (claim-grounding.ts). The answer the task asks for is not task data; small values are not free; "one step from some two numbers" is not an explanation.
+  const licensed = new Set(GEOMETRIC_CONSTANTS); if ((p.facts ?? []).some((f) => /equal|isosceles|bisect|midpoint|congruent|symmetr|median/i.test(f.predicate)) || isCoordinateProblem(p)) licensed.add("2"); // 2: the exponent/denominator of the distance, slope and midpoint formulas
+  if (isCoordinateProblem(p)) { // the distance/slope/midpoint formulas' own intermediates over pairs of the task's points: differences, their squares, sum of squares, coordinate sums
+    const nq = (v: { n: bigint; d: bigint }): number => Number(v.n) / Number(v.d), pts = [...pointsOf(p).values()].map((v) => ({ x: nq(v.x), y: nq(v.y) })); const add = (n: number) => { if (Number.isFinite(n)) licensed.add(numKeyOf(Math.abs(n))); };
+    for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) { const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y; add(dx); add(dy); add(dx * dx); add(dy * dy); add(dx * dx + dy * dy); add(pts[i].x + pts[j].x); add(pts[i].y + pts[j].y); }
   }
+  const named = new Map<string, number>(); for (const f of p.facts ?? []) if ((f.predicate === "angle_measure" || f.predicate === "segment_length") && f.args.length === 1 && Number.isFinite(Number(f.value))) named.set(f.args[0], Number(f.value));
+  const sources: GroundingSource[] = literalProvenance(text, { task, established, licensed, named, previous: previousClosure(prior) }, derivedOut);
   if (taskSymbol) sources.push({ kind: "task-premise", ref: "task-angles-and-sides", by: "symbol", trivial: false });
   return assessRelevance(sources);
 }
 const numbersOfProblem = (p: GProblem): Set<string> => {
   const out = new Set<string>(); const add = (x: unknown) => { if (typeof x === "number" || (typeof x === "string" && /^-?\d+(?:\.\d+)?$/.test(x))) out.add(String(Math.abs(Number(x)))); };
-  for (const f of p.facts ?? []) add(f.value); add(p.goal?.value);
+  for (const f of p.facts ?? []) add(f.value); /* the goal's value is the answer sought, not task data */
   for (const o of p.objects ?? []) for (const v of Object.values(o.data ?? {})) if (typeof v === "number" || typeof v === "string") add(v);
   return out;
 };
@@ -261,8 +258,8 @@ function planGeometry(p: GProblem, rows: RawLine[]): E5Plan | null {
         const taskSymbol = lins.some((l) => [...l.keys()].some((k) => k && !qiszero(l.get(k)!) && known.has(k)));
         const nums = (body.match(/\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x)));
         if (!taskSymbol && !nums.some((x) => taskNums.has(x) || establishedNums.has(x))) { b.add(index, { status: "incomplete", reason: "this arithmetic uses no number of the task; the line is internally correct, but it is not about the posed problem", offTask: true }, "prev", "e5-independent-geocalc"); return; }
-        const g = numericGrounding(body, taskNums, establishedNums, taskSymbol);
-        for (const x of nums) establishedNums.add(x);
+        const derived = new Set<string>(), g = numericGrounding(body, taskNums, establishedNums, taskSymbol, p, derived, rows.slice(0, index).map((q) => q.plain));
+        if (g.relevant) for (const x of [...nums, ...derived]) establishedNums.add(x); // only a grounded line establishes numbers
         b.add(index, { ...j, grounding: g }, "prev", "e5-independent-geocalc"); return;
       }
       b.add(index, j, "prev", "e5-independent-geocalc");
@@ -320,8 +317,8 @@ function planGeometry(p: GProblem, rows: RawLine[]): E5Plan | null {
       if (canonical && matchesCoordGoal(subject, exprs[exprs.length - 1])) goalEstablished = true;
     }
     if (j.status === "valid") {
-      const taskNums = numbersOfProblem(p); const g = numericGrounding(s0, taskNums, establishedNums, true);
-      for (const x of s0.match(/\d+(?:\.\d+)?/g) ?? []) establishedNums.add(String(Number(x)));
+      const taskNums = numbersOfProblem(p); const derived = new Set<string>(), g = numericGrounding(s0, taskNums, establishedNums, true, p, derived, rows.slice(0, index).map((q) => q.plain));
+      if (g.relevant) for (const x of [...(s0.match(/\d+(?:\.\d+)?/g) ?? []).map((y) => String(Number(y))), ...derived]) establishedNums.add(x);
       add({ ...j, grounding: g }); return;
     }
     add(j);

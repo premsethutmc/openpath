@@ -12,7 +12,7 @@
 import { NotationError, normalize, splitEquals } from "./e6-parse.ts";
 import { Budget, Unsupported } from "./e6-cas.ts";
 import { Overflow, q, qadd, qcmp, qdiv, qeq, qiszero, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
-import { assessRelevance, type GroundingSource } from "./claim-grounding.ts";
+import { assessRelevance, literalProvenance, previousClosure, type GroundingSource } from "./claim-grounding.ts";
 import { Builder, bad, finish, incomplete, isProse, proseJudge, missing, ok, readStatement, syntheticParse, uns, worst, type E6Plan, type Judge, type Row } from "./e6-common.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 
@@ -437,7 +437,7 @@ function oneStep(v: Cx, premises: { key: string; value: Cx }[], established: { r
   // an offset of a datum by a unit step (n-1, n-2, n+1: descending factors, complements, off-by-one counts) and an exact square root of a datum or earlier result
   const base = [...premises.map((p) => ({ key: p.key, value: p.value })), ...established.map((e) => ({ key: e.ref, value: e.value }))];
   for (const a of base) {
-    for (const d of [1, 2]) for (const sg of [1, -1]) { const t = cadd(a.value, cx(q(sg * d))); if (ceq(t, v)) return `${a.key} ${sg > 0 ? "+" : "-"} ${d}`; }
+    for (const d of [1, 2]) for (const sg of [1, -1]) { if (sg > 0 && d > 1) continue; /* descending factors n-1, n-2 and the successor n+1 are formula shapes; n+2 is not */ const t = cadd(a.value, cx(q(sg * d))); if (ceq(t, v)) return `${a.key} ${sg > 0 ? "+" : "-"} ${d}`; }
     for (const sv of [a.value, cneg(a.value)]) { let r: Cx | null = null; try { r = csqrt(sv); } catch { r = null; } if (r && (ceq(r, v) || ceq(cneg(r), v))) return `square root of ${a.key}`; }
   }
   return oneStepPair(v, premises);
@@ -457,6 +457,16 @@ function oneStepPair(v: Cx, premises: { key: string; value: Cx }[]): string | nu
     if (r) return r;
   }
   return null;
+}
+/** E7 repair D: the numerals a derivation may compute with from an expression it has already written: the exact value of each of its sub-expressions and one operation between two of them */
+function memberClosure(m: NAst, env: Map<string, Cx>): Set<string> {
+  const vals: Cx[] = [];
+  const walk = (a: NAst): void => { try { vals.push(evalN(a, env)); } catch { /* not evaluable here */ } switch (a.t) { case "neg": case "fact": case "abs": walk(a.a); break; case "bin": walk(a.a); walk(a.b); break; case "call": a.args.forEach(walk); break; default: break; } };
+  walk(m);
+  const out = new Set<string>(); const nums = (v: Cx) => { for (const x of cxText(v).match(/\d+(?:\.\d+)?/g) ?? []) out.add(String(Number(x))); };
+  const vs = vals.slice(0, 16);
+  for (const a of vs) { nums(a); for (const b of vs) { nums(cadd(a, b)); nums(csub(a, b)); nums(cmul(a, b)); if (!cis0(b)) { try { nums(cdiv(a, b)); } catch { /* ignore */ } } } }
+  return out;
 }
 function sourcesOf(first: NAst, env: Map<string, Cx>, dataSyms: Set<string>, relevantDefs: Set<string>, premises: { key: string; value: Cx }[], established: { ref: string; value: Cx }[], witness?: (v: Cx) => boolean, stated: { ref: string; value: Cx }[] = [], facts: Cx[] = []): GroundingSource[] {
   const out: GroundingSource[] = [];
@@ -478,7 +488,11 @@ function sourcesOf(first: NAst, env: Map<string, Cx>, dataSyms: Set<string>, rel
         const cm = a.t !== "num" ? premises.find((x) => big(x.value) && ceq(x.value, v!)) : undefined;
         if (cm) { out.push({ kind: "task-premise", ref: cm.key, by: "value", trivial: false }); return; }
         const comp = a.t !== "num" && qiszero(v.im) && v.re.d !== 1n ? premises.find((x) => qiszero(x.value.im) && x.value.re.d !== 1n && ceq(csub(cx(q(1)), x.value), v!)) : undefined;
-        if (comp) { out.push({ kind: "derived-fact", ref: `1 - ${comp.key}`, by: "value", trivial: false, derived: true }); return; }
+        if (comp) { // E7 repair D: a compound expression that merely EQUALS a complement is not explained by it (its parts are examined) — except the complement written in its one canonical form, a reduced fraction p'/q' (5/6 for 1 − 1/6), which IS the complement
+          out.push({ kind: "derived-fact", ref: `1 - ${comp.key}`, by: "value", trivial: false, derived: true });
+          const lit = (x: NAst): bigint | null => (x.t === "num" ? ((): bigint | null => { try { const c = evalN(x, new Map()); return c.re.d === 1n ? c.re.n : null; } catch { return null; } })() : null);
+          if (a.t === "bin" && a.op === "/" && lit(a.a) === v.re.n && lit(a.b) === v.re.d) return;
+        }
         if (a.t === "num") { // only a plain numeral is matched against the premises: a compound sub-expression that happens to equal a datum proves nothing
           const pr = premises.find((x) => ceq(x.value, v!) || ceq(x.value, cnegV(v!)));
           const st = !pr ? stated.find((x) => ceq(x.value, v!)) : undefined;
@@ -628,6 +642,20 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
     let grounding = assessRelevance(srcs);
     // a chain that passes THROUGH a step built only from the task's data (e.g. 48/120 for a task whose data are 48 and 120) is anchored to the task by that step; the final member is excluded because it is the answer itself
     if (!grounding.relevant && members.length >= 3) for (let k = 1; k < members.length - 1 && !grounding.relevant; k++) { const g2 = assessRelevance(sourcesOf(members[k], env, dataSyms, relevantDefs, premises, established, spec.witness, [], spec.facts)); if (g2.relevant && g2.sources.some((x) => x.by === "value" && !x.trivial && !x.derived)) grounding = { ...g2, reason: `an intermediate step is built from the task data (${g2.reason}) and the chain is verified equal across it` }; }
+    // a verified chain that COMPUTES a task datum (3! = 6 for a task whose total is 6) is anchored to the task by the datum it reproduces; the datum is task data, never the requested answer
+    if (!grounding.relevant && j.status === "valid" && members.length >= 2) { const lastM = members[members.length - 1], dv = lastM.t === "num" ? (() => { try { return evalN(lastM, new Map()); } catch { return null; } })() : null; const hit = dv && !trivialValue(dv) ? premises.find((x) => ceq(x.value, dv)) : undefined; if (hit && !spec.truth.some((t) => ceq(t, dv!))) grounding = assessRelevance([{ kind: "task-premise", ref: hit.key, by: "value", trivial: false }]); }
+    // E7 repair D (S3): every member after the first is derived from the member before it. A number it writes must come from the task data, from an earlier accepted line, from what the chain
+    // before it contains or directly computes, or from a computation the member itself shows; "the right value" does not explain a numeral the chain never produced (100/300 = 1/3).
+    if (grounding.relevant && members.length > 1) {
+      const numerals = (t: string) => (t.match(/(?<![A-Za-z])\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x)));
+      const task = new Set<string>(premises.flatMap((p) => numerals(cxText(p.value)))), est = new Set<string>([...established.flatMap((e) => numerals(cxText(e.value))), ...numerals(texts[from])]);
+      // what the chain so far visibly computes with: the exact values of every sub-expression of the members before the last, and one operation between two of them (so (3+i)(3-i) = 10 is visible in (3+i)/2 * (3-i)/2)
+      const visible = new Set<string>(previousClosure([texts[from], ...rows.slice(0, i).map((r) => r.plain), ...premises.map((p) => cxText(p.value))]));
+      for (const m of members.slice(0, -1)) for (const x of memberClosure(m, env)) visible.add(x);
+      const tail = texts.slice(from + 1).join(" = ");
+      const free = literalProvenance(tail, { task, established: est, licensed: new Set(), previous: visible }).filter((x) => x.kind === "free-literal");
+      if (free.length) grounding = { ...grounding, relevant: false, reason: `the number${free.length > 1 ? "s" : ""} ${[...new Set(free.map((x) => x.ref))].slice(0, 4).join(", ")} in a later step of this chain come${free.length > 1 ? "" : "s"} from neither the task data, an earlier verified result nor the step before it` };
+    }
     const labelBound = label !== null && (answerRe.test(label) || answerRe.test(labelRaw) || (label !== null && ANSWER_WORD.test(label.trim())) || (label !== null && /^[A-Za-z][0-9]?$/.test(label.trim()) && !env.has(label)) || (labelWords.length === 0 || labelWords.every((w) => taskWords.has(w) || w === "roots" || w === "root" || w === "value")));
     const answerBound = label === null ? grounding.relevant : members.length > 1 ? labelBound && grounding.relevant : labelBound; // E7 Phase 5: a SHOWN derivation must itself be justified from the task, whatever it is labelled; a bare `label = value` is an answer statement judged against the kernel's own value
     if (j.status === "valid" && canon && !answerBound && spec.truth.some((t) => ceq(t, lastVal))) j = incomplete(label === null || labelBound
