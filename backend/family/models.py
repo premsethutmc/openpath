@@ -42,6 +42,15 @@ class Pupil(models.Model):
         return f"pupil {self.pk}"
 
 
+class _AppendOnlyQuerySet(models.QuerySet):
+    """grading decisions only: PupilEvent bodies may still be rewritten by the parent-requested privacy scrub (views.PupilScrubView)"""
+    def update(self, **kwargs):
+        raise ValueError("append-only records cannot be updated")
+
+    def bulk_update(self, *args, **kwargs):
+        raise ValueError("append-only records cannot be updated")
+
+
 class PupilEvent(models.Model):
     pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="events")
     subject = models.CharField(max_length=24, choices=SUBJECTS)
@@ -282,9 +291,17 @@ class GradingDecisionRecord(models.Model):
     decided_at = models.DateTimeField()
     body = models.JSONField()
 
+    objects = _AppendOnlyQuerySet.as_manager()
+
     class Meta:
         ordering = ["pupil", "subject", "decided_at", "id"]
         indexes = [models.Index(fields=["pupil", "subject", "attempt_id"], name="grading_decision_attempt")]
+        constraints = [
+            # one original decision per attempt, and at most one decision superseding any decision: a retried or concurrent regrade can
+            # never leave two authoritative outcomes for one answer (release check B)
+            models.UniqueConstraint(fields=["pupil", "subject", "attempt_id"], condition=models.Q(supersedes=""), name="one_original_decision_per_attempt"),
+            models.UniqueConstraint(fields=["supersedes"], condition=~models.Q(supersedes=""), name="one_successor_per_decision"),
+        ]
 
     def save(self, *args, **kwargs):
         if not self._state.adding:

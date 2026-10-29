@@ -26,11 +26,12 @@ const FAMS = [...new Set(Q.map((id) => id.split(":")[1]))];
 
 const LONG = 900_000;
 describe("registry", () => {
-  test("lists the 951 word-form presentations found by the audit (D09) and the 20 aqd2 presentations whose stored answer the strict parser reads two ways (D18)", () => {
-    expect(Q.length).toBe(971);
-    expect(FAMS.sort()).toEqual(["adexp", "aiintx", "aqd2", "auaps"]);
-    expect(Q.filter((id) => !id.startsWith("gen:aqd2:")).every((id) => id.endsWith(":w"))).toBe(true);
+  test("lists the 951 word-form presentations found by the audit (D09), the 20 aqd2 presentations whose stored answer the strict parser reads two ways (D18), and the 41 invalid aofclass questions (manual, PR #83 handoff)", () => {
+    expect(Q.length).toBe(1012);
+    expect(FAMS.sort()).toEqual(["adexp", "aiintx", "aofclass", "aqd2", "auaps"]);
+    expect(Q.filter((id) => !id.startsWith("gen:aqd2:") && !id.startsWith("gen:aofclass:")).every((id) => id.endsWith(":w"))).toBe(true);
     expect(Q.filter((id) => id.startsWith("gen:aqd2:")).length).toBe(20);
+    expect(Q.filter((id) => id.startsWith("gen:aofclass:")).map((id) => statusEntry(id)!.reason)).toEqual(Array(41).fill("invalid-question"));
   }, LONG);
   test("is current: every held contract is quarantined, every other entry is a contract@2 inconsistency, and a sample finds no unlisted inconsistency", () => {
     const held = new Set<string>();

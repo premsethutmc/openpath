@@ -8,7 +8,7 @@
  * timed section's score uses the official JEE Main 2026 marking (+4 / −1 / 0): a practice score, not a readiness claim.
  */
 import spec from "../../../content/mathematics/programs/jee-quadratics.v1.json";
-import { indexContent } from "../../english-core/src/content";
+import { indexContent, scoreCode } from "../../english-core/src/content";
 import { programDecision } from "./program-grading";
 import type { EvidenceEvent, Item } from "../../english-core/src/types";
 import { sharedProfile } from "./canonical";
@@ -120,7 +120,7 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
       const text = normalise(q, ev.response ?? "");
       if (text === null) continue;
       // stage 9 (D14): THE grading decision; an unresolved answer is not an answer (P1)
-      const decision = programDecision(`program:${spec.id}:${q.id}`, ev.response ?? "", (ev as { decision?: unknown }).decision);
+      const decision = programDecision(`program:${spec.id}:${q.id}`, ev.response ?? "", (ev as { decision?: unknown }).decision, () => scoreCode(nativeItem(q), { kind: "typed", text: `${q.type}:${text}` }).correct);
       if (decision.verdict === "unresolved") continue;
       const correct = decision.verdict === "correct";
       const item = nativeItem(q);

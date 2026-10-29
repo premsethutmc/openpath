@@ -1,5 +1,5 @@
 import lesson from "../../../content/mathematics/programs/equivalent-fractions.v2.json";
-import { indexContent } from "../../english-core/src/content";
+import { indexContent, scoreCode } from "../../english-core/src/content";
 import { programDecision } from "./program-grading";
 import type { Item, EvidenceEvent } from "../../english-core/src/types";
 import { mathematicsLedger } from "./registration";
@@ -144,7 +144,8 @@ export function replay(
         throw new Error("Question does not belong to stage");
       const item = questionItem(ev.questionId!);
       // stage 9 (D14): THE grading decision; an unresolved answer is not an answer (P1) and changes nothing
-      const decision = programDecision(`program:${lesson.id}:${ev.questionId}`, ev.response ?? "", (ev as { decision?: unknown }).decision);
+      const earlier = () => { try { return scoreCode(item, { kind: "typed", text: answerKey(ev.questionId!, ev.response ?? "") }).correct; } catch { return null; } };
+      const decision = programDecision(`program:${lesson.id}:${ev.questionId}`, ev.response ?? "", (ev as { decision?: unknown }).decision, earlier);
       if (decision.verdict === "unresolved") continue;
       const correct = decision.verdict === "correct";
       let text: string;

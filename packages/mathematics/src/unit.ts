@@ -25,7 +25,7 @@
  * an upgrade never erases history. See docs/mathematics/CONTENT_VERSIONING.md.
  */
 import spec from "../../../content/mathematics/programs/completing-the-square.v1.json";
-import { indexContent } from "../../english-core/src/content";
+import { indexContent, scoreCode } from "../../english-core/src/content";
 import { programDecision } from "./program-grading";
 import type { AssistedResponseEvent, EvidenceEvent, EvidenceUse, HintEvent, Item } from "../../english-core/src/types";
 import { canonicalInteger, joinParts } from "../../learning/src/answer-core";
@@ -344,7 +344,7 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
     }
     if (ev.action === "answer" && known && state.answers[qid]) {
       const text = normalise(question(qid), ev.response ?? "");
-      const d = text === null ? null : programDecision(`program:${spec.id}:${qid}`, ev.response ?? "", (ev as { decision?: unknown }).decision);
+      const d = text === null ? null : programDecision(`program:${spec.id}:${qid}`, ev.response ?? "", (ev as { decision?: unknown }).decision, () => text === normalise(question(qid), question(qid).answer));
       if (text !== null && d && d.verdict !== "unresolved") state.attempts.push({ questionId: qid, response: text, correct: d.verdict === "correct", at: ev.at });
     }
     if (ev.action === "answer" && known && !state.answers[qid]) {
@@ -352,7 +352,7 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
       const text = normalise(q, ev.response ?? "");
       if (text === null) continue;
       // stage 9 (D14): THE grading decision; an unresolved answer is not an answer (P1) and changes nothing
-      const decision = programDecision(`program:${spec.id}:${qid}`, ev.response ?? "", (ev as { decision?: unknown }).decision);
+      const decision = programDecision(`program:${spec.id}:${qid}`, ev.response ?? "", (ev as { decision?: unknown }).decision, () => scoreCode(nativeItem(q), { kind: "typed", text: `${q.type}:${text}` }).correct);
       if (decision.verdict === "unresolved") continue;
       const correct = decision.verdict === "correct";
       const item = nativeItem(q);

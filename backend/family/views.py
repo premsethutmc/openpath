@@ -386,6 +386,10 @@ class PupilEventsView(AccountBase):
             # alongside, keyed by attempt id, and the app's replay uses it (UNIFIED_GRADING_ARCHITECTURE.md §9)
             from .decisions import latest
 
+            from .learning import grading_mode
+
+            # which policy is authoritative, so the app shows that result and never a conflicting preview (release preparation, check A)
+            out["gradingMode"] = grading_mode()
             stored = {b.get("id"): (b.get("decision") or {}).get("decisionId") for b in bodies if b.get("record") == "attempt"}
             out["decisions"] = {k: d for k, d in latest(pupil, subject).items() if k in stored and stored[k] != d.get("decisionId")}
         return Response(out)

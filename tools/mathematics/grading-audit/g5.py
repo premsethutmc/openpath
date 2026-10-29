@@ -40,9 +40,12 @@ for f in sorted(os.listdir(src_o)):
             diffs[k] += 1
             truth = c['truth']
             want = GOOD.get(truth)
-            better = 'unified agrees with the oracle' if want == ub['verdict'] else 'earlier agrees with the oracle' if want == lb['verdict'] else 'neither/form-dependent'
+            if truth == 'form-variant':
+                # an equal value in another form: incorrect only when the question states a form the answer violates (P2)
+                want = 'incorrect' if c.get('violates') else 'correct'
+            better = 'unified agrees with the oracle' if want == ub['verdict'] else 'earlier agrees with the oracle' if want == lb['verdict'] else 'neither agrees with the oracle'
             oracle_side[(k, better)] += 1
-            if k in INVESTIGATE or better == 'earlier agrees with the oracle':
+            if k in INVESTIGATE or better != 'unified agrees with the oracle':
                 rows.append({'qid': q['qid'], 'stored': q['answer'], 'response': c['response'], 'truth': truth, 'earlier': lb['verdict'], 'unified': ub['verdict'],
                              'reason': ub.get('reason'), 'class': k, 'oracle': better})
 summary = {'cases': cases, 'different': sum(diffs.values()), 'differences': dict(diffs), 'toInvestigate': sum(n for k, n in diffs.items() if k in INVESTIGATE),

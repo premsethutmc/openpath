@@ -12,7 +12,7 @@ import { writtenTask } from "../../../packages/learning/src/written";
 import { needsMarking } from "../../../packages/learning/src/content";
 import { creditOf } from "../../../packages/learning/src/grade";
 import { misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
-import type { SkillEvidence } from "../../../packages/learning/src/evidence";
+import { rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
 import { familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
@@ -20,7 +20,8 @@ import { decide } from "../../../packages/learning/src/session";
 import type { Assessment } from "../../../packages/learning/src/assessment";
 import { checkWorking, canCheckWorking } from "../../../packages/learning/src/working";
 import { Icon } from "./icons";
-import type { LearnerRecords, LearningActivity } from "../../../packages/learning/src/records";
+import type { LearnerRecords, LearningActivity, ServerDecision } from "../../../packages/learning/src/records";
+import { authoritativeView } from "../../../packages/learning/src/grading/view";
 import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
 
@@ -34,6 +35,8 @@ export interface Ctx {
   saving: boolean;
   answer: (qid: string, response: string, activity: LearningActivity, o?: { hints?: number; context?: string; working?: string[]; clarifications?: number }) => Promise<boolean>;
   teach: (competency: string, strategy: string, rule: string) => Promise<boolean>;
+  /** the server's recorded decision for the answer just saved (authoritative); null when the server recorded none */
+  recorded?: () => ServerDecision | null;
 }
 export const STATUS_WORD: Record<SkillEvidence["status"], string> = {
   verified: "Verified",
@@ -211,9 +214,11 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           onClick={async () => {
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
             // one decision per submission (assessment@1): the answer box is graded first; an unreadable answer gets ONE short clarification, then it is saved as undecided
-            const a = needsMarking(q) ? null : decide(qid, value, lines, asked);
+            const preview = needsMarking(q) ? null : decide(qid, value, lines, asked);
             const ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) });
             if (!ok) return;
+            // release check A: show the server's recorded decision, never a conflicting preview of the unified grader
+            const a = authoritativeView(preview, ctx.recorded?.() ?? null);
             if (a?.clarification && a.credit === null && a.feedback.kind === "clarify") { setAsked(asked + 1); setClarify(a.clarification.prompt); return; }
             setClarify(null);
             onAnswered?.({ qid, response: value, activity, right: a ? a.credit === true : creditOf(qid, value) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
@@ -420,7 +425,7 @@ export function Single({ qid, ctx, onExit, heading, note }: { qid: string; ctx: 
       {note && <p className="why">{note}</p>}
       {fb ? <Feedback fb={fb} onNext={onExit} label="Back to the year" /> : done ? (
         <>
-          <div className={`feedback ${creditOf(qid, done.response) === true ? "good" : "bad"}`}><strong>Answered: {done.response}</strong><p>{question(qid).solution}</p></div>
+          <div className={`feedback ${rightAnswer(done) ? "good" : "bad"}`}><strong>Answered: {done.response}</strong><p>{question(qid).solution}</p></div>
           <button className="secondary wide" onClick={onExit}>Back to the year</button>
         </>
       ) : <Ask qid={qid} activity="challenge" ctx={ctx} onAnswered={setFb} />}

@@ -5,6 +5,7 @@ again with the (now healthy) trusted grader, and the new decision is APPENDED wi
 deleted. If the grader still cannot run, nothing is written. `--dry-run` reports what would be appended.
 """
 from django.core.management.base import BaseCommand
+from django.db import IntegrityError, transaction
 from django.utils import timezone
 
 from family import decisions, kernel_grader
@@ -22,7 +23,7 @@ class Command(BaseCommand):
         if not kernel_grader.enabled():
             self.stdout.write("the trusted grader is not runnable: nothing regraded")
             return
-        done = still = 0
+        done = still = raced = 0
         for pupil in Pupil.objects.filter(pk__in=GradingDecisionRecord.objects.filter(reason="unresolved.infrastructure").values("pupil")):
             cur = decisions.latest(pupil)
             events = {b.get("id"): b for b in PupilEvent.objects.filter(pupil=pupil, subject="mathematics", kind="learning_record").values_list("body", flat=True)}
@@ -37,7 +38,12 @@ class Command(BaseCommand):
                     still += 1
                     continue
                 new = {**new, "supersedes": d["decisionId"], "regrade": {"reason": "infrastructure-recovered", "approvedBy": "policy: automatic (§9)"}}
-                done += 1
                 if not dry_run:
-                    decisions.record(pupil, "mathematics", new, now)
-        self.stdout.write(f"{'would append' if dry_run else 'appended'} {done} superseding decisions; {still} still unresolved (grader failure)")
+                    try:
+                        with transaction.atomic():
+                            decisions.record(pupil, "mathematics", new, now)
+                    except IntegrityError:
+                        raced += 1  # another run already superseded it: one successor per decision (never two outcomes)
+                        continue
+                done += 1
+        self.stdout.write(f"{'would append' if dry_run else 'appended'} {done} superseding decisions; {still} still unresolved (grader failure); {raced} already superseded")

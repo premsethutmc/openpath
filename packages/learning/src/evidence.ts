@@ -16,8 +16,9 @@ import type { AssistedResponseEvent, EvidenceEvent, HintEvent, Item } from "../.
 import { sharedProfile } from "../../mathematics/src/canonical";
 import type { GraphVersion } from "../../mathematics/src/prerequisites";
 import { mathematicsLedger } from "../../mathematics/src/registration";
+import { unifiedAuthoritative } from "./grading/mode";
 import { creditOf } from "./grade";
-import { canonical, moduleFor, question, questions, problems, type Question } from "./content";
+import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
@@ -223,5 +224,8 @@ export function evidenceFor(learnerId: string, records: LearnerRecords, now: num
   };
   return { ledger, get };
 }
-/** stage 7 (D11): the recorded credit; only a historical record without one (or an attempt not read from records, e.g. a simulation) is compared again */
-export const rightAnswer = (a: Attempt) => (a.credit !== undefined ? a.credit : creditOf(a.questionId, a.response) === true);
+/** stage 7 (D11): the recorded credit (the server's decision, else the assessment recorded with the attempt). Only a record with no recorded
+ *  verdict at all (or an attempt not read from records, e.g. a simulation) is compared again: with the earlier comparison while the unified
+ *  grader is not authoritative (shadow / legacy), so historical outcomes are never reinterpreted by the new grader before the switch. */
+export const rightAnswer = (a: Attempt) => (a.credit !== undefined ? a.credit : unifiedAuthoritative() ? creditOf(a.questionId, a.response) === true : earlierCorrect(a.questionId, a.response));
+const earlierCorrect = (qid: string, response: string) => { try { return isCorrect(question(qid), response); } catch { return false; } };

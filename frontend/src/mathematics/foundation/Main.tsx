@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { setGradingMode } from "../../../../packages/learning/src/grading/mode";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../../english/logic/account";
 import {
@@ -27,11 +28,12 @@ class Repo {
     this.learnerId = learnerId;
   }
   async load() {
-    const r = await api.request<{ count: number; events: Receipt[] }>(
+    const r = await api.request<{ count: number; events: Receipt[]; gradingMode?: string }>(
       "GET",
       `/pupils/${this.learnerId}/events/?subject=mathematics`,
     );
     this.count = r.count;
+    setGradingMode(r.gradingMode); // the server says which grading is authoritative; the engine shows that one
     return r.events;
   }
   append(event: FoundationActivity) {

@@ -1,4 +1,5 @@
 import { Api } from "../../english/logic/account";
+import { setGradingMode } from "../../../../packages/learning/src/grading/mode";
 import { type MathActivity } from "../../../../packages/mathematics/src/fractions-program";
 /** Existing account/CSRF/session transport and pupil event endpoint; one atomic activity receipt per append. */
 export class MathematicsRepo {
@@ -14,8 +15,10 @@ export class MathematicsRepo {
     const result = await this.api.request<{
       count: number;
       events: MathActivity[];
+      gradingMode?: string;
     }>("GET", `/pupils/${this.learnerId}/events/?subject=mathematics`);
     this.count = result.count;
+    setGradingMode(result.gradingMode); // the server says which grading is authoritative; the engine shows that one
     return result.events.filter(e => e.kind === "math_activity");
   }
   append(event: MathActivity): Promise<MathActivity[]> {

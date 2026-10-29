@@ -3,7 +3,7 @@ import {
   replay as historicalReplay,
   type MathActivity,
 } from "../fractions-program";
-import { indexContent } from "../../../english-core/src/content";
+import { indexContent, scoreCode } from "../../../english-core/src/content";
 import { programDecision } from "../program-grading";
 import type { Item, EvidenceEvent } from "../../../english-core/src/types";
 import { parseNumber, show } from "../answers";
@@ -75,7 +75,9 @@ export function itemFor(p: Program, q: Question): Item & { kind: "code" } {
 }
 /** stage 9 (D14): THE grading decision (the server's recorded one when the event carries it); an unreadable answer is unresolved, never wrong */
 export function evaluate(p: Program, q: Question, response: string, recorded?: unknown) {
-  const d = programDecision(`foundation:${p.id}:${q.id}`, response, recorded);
+  // the earlier marking (shadow / legacy mode): unreadable -> not decided (the earlier route refused it), otherwise scoreCode
+  const earlier = () => { try { parseNumber(response); } catch { return null; } return scoreCode(itemFor(p, q), { kind: "typed", text: numeric(response) }).correct; };
+  const d = programDecision(`foundation:${p.id}:${q.id}`, response, recorded, earlier);
   if (d.verdict === "unresolved")
     return { correct: false, unresolved: true, message: "Enter a number or fraction with a nonzero denominator. Your answer has not been marked wrong." };
   try {

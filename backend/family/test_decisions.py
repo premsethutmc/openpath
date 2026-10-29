@@ -108,3 +108,33 @@ class DecisionRecordTests(LearningBase):
         row = rep['records'][0]
         self.assertEqual((row['attemptId'], row['original'], row['reconstructed']), ('old', 'none-recorded', 'correct'))
         self.assertIn('no recorded assessment', row['missingContext'])
+
+
+class DryRunReadOnlyTests(LearningBase):
+    """release check E: reconstruct_decisions --dry-run cannot write, even if something it calls tries to"""
+
+    def test_a_write_attempted_during_the_dry_run_is_refused_and_nothing_changes(self):
+        from datetime import datetime, timezone as tz
+        from .management.commands import reconstruct_decisions as rd
+        self.save(self.enrol())
+        pupil = Pupil.objects.get(pk=self.pupil_id)
+        seq = PupilEvent.objects.filter(pupil=pupil).count()
+        old = {'kind': 'learning_record', 'id': 'old', 'at': '2026-09-01T00:00:00Z', 'learnerId': self.pupil_id, 'sessionId': f'learn:{self.pupil_id}:visit',
+               'record': 'attempt', 'questionId': 'gen:mean4:1,2,3,6', 'response': '3', 'activity': 'diagnostic', 'hints': 0, 'solution': False, 'competency': 'MATH.statistics.averages-intro'}
+        PupilEvent.objects.create(pupil=pupil, subject='mathematics', seq=seq, kind='learning_record', occurred_at=datetime(2026, 9, 1, tzinfo=tz.utc), body=old)
+        counts = (PupilEvent.objects.count(), GradingDecisionRecord.objects.count())
+        real = rd._decide
+
+        def writing_decide(e, q, now=None):
+            decisions.record(pupil, 'mathematics', {**real(e, q, now)[1], 'decisionId': 'sneaky', 'attemptId': 'old'}, datetime(2026, 9, 1, tzinfo=tz.utc))
+            return real(e, q, now)
+        from unittest import mock
+        with mock.patch.object(rd, '_decide', writing_decide), self.assertRaises(rd.ReadOnlyViolation):
+            call_command('reconstruct_decisions', '--dry-run', '--pupil', self.pupil_id, stdout=io.StringIO())
+        self.assertEqual((PupilEvent.objects.count(), GradingDecisionRecord.objects.count()), counts)
+        # and the normal dry run reports with its guards on
+        with tempfile.NamedTemporaryFile(suffix='.json') as f:
+            call_command('reconstruct_decisions', '--dry-run', '--pupil', self.pupil_id, '--out', f.name, stdout=io.StringIO())
+            rep = json.load(open(f.name))
+        self.assertEqual(rep['readOnlyGuards'], {'session': 'sqlite', 'statementFilter': True, 'rollback': True})
+        self.assertEqual((PupilEvent.objects.count(), GradingDecisionRecord.objects.count()), counts)
