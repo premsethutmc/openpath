@@ -166,9 +166,11 @@ def armvlim(q):
     m = re.search(r'Evaluate lim \(\(x, y\) → \((−?\d+), (−?\d+)\)\) of (.+)$', q['prompt'])
     a, b = num(m.group(1)), num(m.group(2)); f = E(m.group(3).rstrip('.'))
     s = sp.Symbol('s', positive=True)
-    vals = [sp.limit(f.subs({x: a + s, y: b + s * k_ }, simultaneous=True), s, 0) for k_ in (1, -2, sp.Rational(1, 3))]
-    vals.append(sp.limit(f.subs({x: a + s, y: b + s**2}, simultaneous=True), s, 0))
-    assert all(sp.simplify(v - vals[0]) == 0 for v in vals), vals
+    vals = [sp.limit(sp.cancel(sp.together(f.subs({x: a + s, y: b + s * k_ }, simultaneous=True))), s, 0) for k_ in (1, -2, sp.Rational(1, 3))]
+    vals.append(sp.limit(sp.cancel(sp.together(f.subs({x: a + s, y: b + s**2}, simultaneous=True))), s, 0))
+    # a path lying inside the excluded set (denominator identically 0 along it) gives nan and is not an admissible approach
+    vals = [v for v in vals if v != sp.nan]
+    assert len(vals) >= 3 and all(sp.simplify(v - vals[0]) == 0 for v in vals), vals
     return Expect(str(vals[0]))
 
 

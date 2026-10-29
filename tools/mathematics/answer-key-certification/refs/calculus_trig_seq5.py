@@ -108,6 +108,18 @@ def _limit_origin(g_text_fn):
         vals[r] = (min(vs), max(vs))
     (a1, b1), (a2, b2), (a3, b3) = vals[mp.mpf('1e-3')], vals[mp.mpf('1e-5')], vals[mp.mpf('1e-7')]
     spread = b3 - a3
+    # curved paths x = c*y^k and y = c*x^k (circles miss thin cusps such as x = y^2)
+    cv = []
+    t = mp.mpf('1e-7')
+    for c in (1, -1, 2, -2, mp.mpf(1) / 2, -mp.mpf(1) / 2):
+        for k in (2, 3):
+            for tt in (t, -t):
+                try:
+                    cv.append(g_text_fn(c * tt ** k, tt)); cv.append(g_text_fn(tt, c * tt ** k))
+                except ZeroDivisionError:
+                    pass
+    if cv:
+        spread = max(spread, max(cv + [b3]) - min(cv + [a3]))
     if spread < mp.mpf('1e-4'):
         return 'exists', (a3 + b3) / 2
     return 'dne', spread

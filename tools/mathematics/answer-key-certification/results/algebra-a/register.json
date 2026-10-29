@@ -1,0 +1,111 @@
+[
+ {
+  "family": "ahcube",
+  "class": "form",
+  "severity": "low",
+  "questionIds": [
+   "gen:ahcube:2,-6,1,5,2",
+   "gen:ahcube:2,-6,1,5,3",
+   "gen:ahcube:2,-5,2,3,2",
+   "gen:ahcube:2,-5,2,3,3",
+   "gen:ahcube:2,-4,-2,6,2",
+   "gen:ahcube:2,-4,-2,6,3",
+   "gen:ahcube:2,-4,-1,5,2",
+   "gen:ahcube:2,-4,-1,5,3",
+   "gen:ahcube:2,-3,-1,4,2",
+   "gen:ahcube:2,-3,1,2,2",
+   "gen:ahcube:2,-3,1,2,3",
+   "gen:ahcube:2,-2,-1,3,2",
+   "gen:ahcube:2,-2,-1,3,3"
+  ],
+  "affectedCount": 13,
+  "exampleId": "gen:ahcube:2,-6,1,5,2",
+  "params": [
+   2,
+   -6,
+   1,
+   5,
+   2
+  ],
+  "prompt": "Expand (x − 6)(x + 1)(x + 5) using (x + a)(x + b)(x + c) = x³ + (a + b + c)x² + (ab + bc + ca)x + abc. (x − 6)(x + 1)(x + 5) = x³ + 0x² + □x − 30. What number goes in the box? (It may be negative.)",
+  "stored": "-31",
+  "derived": "-31",
+  "method": "box found by comparing coefficients of the SymPy-expanded (x - 6)(x + 1)(x + 5); stored answer is mathematically correct",
+  "explanation": "The answer is correct, but the displayed expansion keeps a vanishing term: \"x³ + 0x² + □x − 30\". A zero coefficient is not written in a simplified expansion, and a learner can be misled into thinking the 0x² slot is part of the task. The same text appears in the word form of the same 13 questions (word wording \"(x − 6)(x + 1)(x + 5) = x³ + 0x² + □x − 30\").",
+  "proposedFix": "When the coefficient of a displayed term is 0 and that term is not the box, leave the term out of the displayed expansion (x³ + □x − 30); keep it only when it is the box (whose answer is then 0)."
+ },
+ {
+  "family": "above",
+  "class": "form",
+  "severity": "low",
+  "questionIds": [
+   "gen:above:1,0,-3",
+   "gen:above:1,0,-2",
+   "gen:above:1,0,-1",
+   "gen:above:1,0,2",
+   "gen:above:1,0,3",
+   "gen:above:2,0,-3",
+   "gen:above:2,0,-2",
+   "gen:above:2,0,-1",
+   "gen:above:2,0,1",
+   "gen:above:2,0,3",
+   "gen:above:3,0,-3",
+   "gen:above:3,0,-2",
+   "gen:above:3,0,-1",
+   "gen:above:3,0,1",
+   "gen:above:3,0,2"
+  ],
+  "affectedCount": 15,
+  "exampleId": "gen:above:1,0,-3",
+  "params": [
+   1,
+   0,
+   -3
+  ],
+  "prompt": "At x = −3, which graph is higher: y = x + 0 or y = x²?",
+  "stored": "B",
+  "derived": "B",
+  "method": "both graphs evaluated at the given x; option naming the higher graph is the keyed one for all 215 questions",
+  "explanation": "The keyed answer is correct. The line with intercept 0 is written \"y = x + 0\" instead of \"y = x\" (the same for y = 2x + 0, ...); a zero constant is not written in a line equation.",
+  "proposedFix": "Render the line without the \"+ 0\" when the intercept is 0."
+ },
+ {
+  "family": "alcomp",
+  "class": "form",
+  "severity": "low",
+  "questionIds": [
+   "gen:alcomp:-4,-6,0,-1,0",
+   "gen:alcomp:-4,4,0,1,0",
+   "gen:alcomp:-3,-3,0,3,0",
+   "gen:alcomp:-3,2,0,3,0",
+   "gen:alcomp:-3,3,0,2,0",
+   "gen:alcomp:-3,5,0,2,0",
+   "gen:alcomp:-2,4,0,-2,0",
+   "gen:alcomp:-1,-5,0,-2,0",
+   "gen:alcomp:-1,2,0,1,0",
+   "gen:alcomp:-1,6,0,1,0",
+   "gen:alcomp:1,-6,0,0,0",
+   "gen:alcomp:1,0,0,2,0",
+   "gen:alcomp:2,-2,0,-1,0",
+   "gen:alcomp:2,4,0,-1,0",
+   "gen:alcomp:3,-6,0,1,0",
+   "gen:alcomp:3,-2,0,1,0",
+   "gen:alcomp:4,-5,0,1,0"
+  ],
+  "affectedCount": 17,
+  "exampleId": "gen:alcomp:-4,-6,0,-1,0",
+  "params": [
+   -4,
+   -6,
+   0,
+   -1,
+   0
+  ],
+  "prompt": "In a factory, machine G changes a setting x into x² + 0, and machine F changes a number y into −4y − 6. A setting of −1 is fed into G, and G's output is fed straight into F. What number comes out of F?",
+  "stored": "-10",
+  "derived": "-10",
+  "method": "f and g substituted in the stated order for every released question (the typed form is exact for all 400)",
+  "explanation": "Word form only: the machine for g(x) = x² is described as \"changes a setting x into x² + 0\" (zero constant term printed). The typed form of the same question is \"g(x) = x²\". The answer is correct.",
+  "proposedFix": "Drop the \"+ 0\" in the word rendering of g when the constant is 0."
+ }
+]
