@@ -244,11 +244,25 @@ def artaylor(q):
     return Expect(str(sp.diff(f, x, n).subs(x, a) / sp.factorial(n)))
 
 
-@ref('arwallis', method='SymPy exact definite integral of the stated trigonometric power product', coverage='exhaustive')
+@ref('arwallis', method='integrand sin^m cos^n rewritten as a Laurent polynomial in z=e^{ix} (binomial expansion), integrated term by term exactly over [0,top]', coverage='exhaustive')
 def arwallis(q):
     m = re.search(r'Evaluate ∫ from 0 to (π/2|π) of (.+) dx\.', q['prompt'])
     top = sp.pi / 2 if m.group(1) == 'π/2' else sp.pi
-    return Expect(str(sp.integrate(E(m.group(2)), (x, 0, top))))
+    sup = {'²': 2, '³': 3, '⁴': 4, '⁵': 5, '⁶': 6, '⁷': 7, '⁸': 8}
+    def pw(name):
+        mm = re.search(name + r'([²³⁴⁵⁶⁷⁸]?) ?x', m.group(2))
+        return 0 if not mm else (sup.get(mm.group(1), 1))
+    a, b = pw('sin'), pw('cos')
+    z = sp.Symbol('z')
+    expr = sp.expand(((z - 1/z) / (2*sp.I))**a * ((z + 1/z) / 2)**b)
+    tot = 0
+    for term in sp.Add.make_args(expr):
+        c, k = term.as_coeff_exponent(z)
+        if k == 0:
+            tot += c * top
+        else:
+            tot += c * (sp.exp(sp.I*k*top) - 1) / (sp.I*k)
+    return Expect(str(sp.nsimplify(sp.simplify(tot))))
 
 
 @ref('audbe', method='SymPy exact definite integral of the stated product', coverage='exhaustive')
