@@ -247,7 +247,7 @@ def _box(q, lhs_src, eq_src):
     """solve for the box by comparing polynomial coefficients"""
     k = sp.Symbol('k')
     lhs = ex(lhs_src)
-    rhs = ex(eq_src.replace('□', 'k'))
+    rhs = ex(re.sub(r'\s*[+-]\s*0[a-z][²³]?(?![\w])', '', eq_src).replace('□', 'k'))
     gens = sorted((lhs.free_symbols | rhs.free_symbols) - {k}, key=lambda s: s.name)
     diff = sp.expand(lhs - rhs)
     P = sp.Poly(diff, *gens)

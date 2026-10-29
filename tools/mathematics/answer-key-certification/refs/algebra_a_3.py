@@ -628,7 +628,7 @@ def ajfsq(q):
     tpl = form.replace('ax', 'A*x').replace('by', 'B*y').replace('c(', 'A*(')
     tpl = re.sub(r'([+−-]) b\)', lambda mm: ('+' if mm.group(1) == '+' else '-') + ' B)', tpl)
     tpl = tpl.replace('−', '-').replace('²', '**2')
-    tpl = tpl.replace('(x + b)', '(x + B)').replace('(x - b)', '(x - B)')
+    tpl = tpl.replace('(x + b)', '(x + B)').replace('(x - b)', '(x - B)').replace(')(', ')*(')
     Aa, Bb = sp.symbols('A B')
     sols = []
     for av in range(1, 25):
