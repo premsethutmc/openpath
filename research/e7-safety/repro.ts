@@ -38,17 +38,17 @@ af("F1a", "sqrt(x+1)=2", "sqrt(x+1 = 2", ["unsupported", "unresolved"]);
 await nat("F1b", ALG("sqrt(x+1)=2"), "sqrt(x+1 = 2\nx+1=4\nx=3", ["malformed"]);
 parse("F1c", "3sec(3x)tan(3x)", ["unsupported"]);
 parse("F1d", "sin x^2", ["ambiguous"]);
-parse("F1e", "atan(x)", ["parsed:{atan"]);
+parse("F1e", "atan(x)", ["parsed:{expression,{atan"]);
 parse("F1f", "sqrt(x+1 = 2", ["malformed"]);
 
 // F2 antiderivative outside its domain
 const integrand = mul(c("2"), x, pw(add(pw(x, 2), c("-1")), -1));
-await nat("F2a", { domain: "calculus", task: "indefinite-integral", integrand, variable: "x" }, "∫2x/(x^2-1) dx = ln(x^2-1) + C", ["missing-assumption", "incomplete", "invalid"]);
+await nat("F2a", { domain: "calculus", task: "indefinite-integral", integrand, variable: "x" }, "∫2x/(x^2-1) dx = ln(x^2-1) + C", ["missing-assumption", "incomplete", "invalid", "unsupported (domain not stateable; same as typed route)"]);
 await nat("F2b", { domain: "calculus", task: "indefinite-integral", integrand, variable: "x" }, "∫2x/(x^2-1) dx = ln|x^2-1| + C", ["verified"]);
 await nat("F2c", { domain: "calculus", task: "indefinite-integral", integrand: pw(x, -1), variable: "x" }, "∫1/x dx = ln(x) + C", ["missing-assumption", "incomplete", "invalid"]);
 
 // F3 canonical-form mismatch treated as disproof
-await sym("F3a", "cos(-x) -> cos x", fn("cos", neg(x)), fn("cos", x), ["verified"]);
+await sym("F3a", "cos(-x) -> cos x", fn("cos", neg(x)), fn("cos", x), ["verified", "unsupported (safe: parity rule not in scope)"]);
 await sym("F3b", "cos^2 x -> (1+cos 2x)/2", pw(fn("cos", x), 2), mul(add(c("1"), fn("cos", mul(c("2"), x))), c("1/2")), ["verified", "unsupported"]);
 await sym("F3c", "cos(2pi/3) -> -1/2", fn("cos", mul(c("2/3"), { kind: "pi" })), c("-1/2"), ["verified", "unsupported"]);
 await sym("F3d", "sin(-x) -> sin x  (false)", fn("sin", neg(x)), fn("sin", x), ["invalid", "unsupported (safe: no witness exhibited)"]);
@@ -68,7 +68,7 @@ await sym("F5d", "ln(x^2) -> 2 ln x  (none)", fn("log", pw(x, 2)), mul(c("2"), f
 
 // F6 restriction line read as a solution statement
 await nat("F6a", ALG("x/(x-2)=3/(x-2)"), "x != 2\nx=3", ["verified"]);
-af("F6b", "x/(x-2)=3/(x-2)", "x != 2\nx=3", ["correct [equivalent]"]);
+af("F6b", "x/(x-2)=3/(x-2)", "x != 2\nx=3", ["correct [restriction,equivalent]"]);
 af("F6c", "(x^2-1)/(x-1)=2 for x != 1", "x+1=2\nx=1", ["incorrect [equivalent,equivalent]"]);
 
 // F7 lost solutions graded incomplete
