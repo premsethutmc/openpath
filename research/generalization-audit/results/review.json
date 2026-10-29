@@ -1,0 +1,902 @@
+{
+ "ADV-0105": {
+  "class": "G",
+  "secondary": "B",
+  "finding": "correct result, wrongly cited rule; natural-text routes do not read cited reasons, so the work is verified"
+ },
+ "CAL-0020": {
+  "class": "G",
+  "secondary": "B",
+  "finding": "correct result, wrongly cited rule; natural-text routes do not read cited reasons, so the work is verified"
+ },
+ "CAL-0056": {
+  "class": "G",
+  "secondary": "B",
+  "finding": "correct result, wrongly cited rule; natural-text routes do not read cited reasons, so the work is verified"
+ },
+ "CAL-0099": {
+  "class": "G",
+  "secondary": "B",
+  "finding": "correct result, wrongly cited rule; natural-text routes do not read cited reasons, so the work is verified"
+ },
+ "CAL-0104": {
+  "class": "G",
+  "secondary": "B",
+  "finding": "correct result, wrongly cited rule; natural-text routes do not read cited reasons, so the work is verified"
+ },
+ "CAL-0154": {
+  "class": "G",
+  "secondary": "B",
+  "finding": "correct result, wrongly cited rule; natural-text routes do not read cited reasons, so the work is verified"
+ },
+ "PRF-0172": {
+  "class": "G",
+  "secondary": "B",
+  "finding": "correct result, wrongly cited rule; natural-text routes do not read cited reasons, so the work is verified"
+ },
+ "ADV-0327": {
+  "class": "A",
+  "secondary": "",
+  "finding": "unbalanced bracket 'sqrt(x+1 = 2' silently repaired to sqrt(x+1)=2 and the transition accepted"
+ },
+ "CAL-0131": {
+  "class": "E",
+  "secondary": "",
+  "finding": "ln(x^2-1)+C accepted as an antiderivative of 2x/(x^2-1) although it is undefined on (-1,1), part of the integrand's domain"
+ },
+ "ALG-0178": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "ALG-0189": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "ALG-0205": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "ALG-0221": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "DOM-0193": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "DOM-0207": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "DOM-0209": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "DOM-0211": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "E7's own justification records that the final line is defined where the problem was not and the restriction is unstated, yet returns verified"
+ },
+ "DOM-0159": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "denominators cleared with no stated exclusion; answer correct; verified"
+ },
+ "DOM-0171": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "denominators cleared with no stated exclusion; answer correct; verified"
+ },
+ "EQN-0200": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "denominators cleared with no stated exclusion; answer correct; verified"
+ },
+ "PRF-0033": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "denominators cleared with no stated exclusion; answer correct; verified"
+ },
+ "PRF-0043": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "denominators cleared with no stated exclusion; answer correct; verified"
+ },
+ "EQN-0203": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "candidate dropped without any visible check; E7 credits its own exact elimination ('proven candidate elimination')"
+ },
+ "PRF-0036": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "candidate dropped without any visible check; E7 credits its own exact elimination ('proven candidate elimination')"
+ },
+ "DOM-0189": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "candidate dropped without any visible check; E7 credits its own exact elimination ('proven candidate elimination')"
+ },
+ "EQN-0154": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "candidate dropped without any visible check; E7 credits its own exact elimination ('proven candidate elimination')"
+ },
+ "PRF-0072": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "candidate dropped without any visible check; E7 credits its own exact elimination ('proven candidate elimination')"
+ },
+ "ALG-0042": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0049": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0060": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0079": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0081": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0086": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0098": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0110": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0112": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0117": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0119": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "DOM-0007": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "DOM-0009": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "DOM-0028": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "DOM-0036": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "MUL-0009": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "MUL-0017": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "MUL-0027": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "MUL-0060": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ADV-0274": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "symbolic route reports 'target changes the domain' for an identical domain (numeric reciprocals, roots of constants, nested powers, factored polynomials); form-dependent"
+ },
+ "ALG-0057": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "ALG-0091": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "ALG-0104": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "ALG-0109": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "DOM-0006": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "DOM-0014": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "DOM-0027": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "DOM-0032": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "FUN-0011": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "FUN-0028": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "FUN-0032": {
+  "class": "E",
+  "secondary": "B",
+  "finding": "restriction supplied as an assumption, yet the symbolic route still reports a domain change"
+ },
+ "ADV-0073": {
+  "class": "E",
+  "secondary": "",
+  "finding": "interval assumptions (0<x<pi/2, x>0) not used to discharge poles / absolute values"
+ },
+ "DOM-0147": {
+  "class": "E",
+  "secondary": "",
+  "finding": "interval assumptions (0<x<pi/2, x>0) not used to discharge poles / absolute values"
+ },
+ "DOM-0153": {
+  "class": "E",
+  "secondary": "",
+  "finding": "interval assumptions (0<x<pi/2, x>0) not used to discharge poles / absolute values"
+ },
+ "TRG-0094": {
+  "class": "E",
+  "secondary": "",
+  "finding": "interval assumptions (0<x<pi/2, x>0) not used to discharge poles / absolute values"
+ },
+ "FUN-0085": {
+  "class": "E",
+  "secondary": "",
+  "finding": "interval assumptions (0<x<pi/2, x>0) not used to discharge poles / absolute values"
+ },
+ "DOM-0058": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "DOM-0066": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "DOM-0071": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "DOM-0072": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "DOM-0076": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "FUN-0104": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "FUN-0106": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "FUN-0108": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "FUN-0109": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "FUN-0118": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "ADV-0301": {
+  "class": "E",
+  "secondary": "",
+  "finding": "log identity on a domain where it holds (positivity assumed or implied) still requires 'stated obligations'"
+ },
+ "MUL-0061": {
+  "class": "E",
+  "secondary": "F",
+  "finding": "|a+b| -> a+b etc. with a>0, b>0 assumed: assumptions are not composed to establish nonnegativity"
+ },
+ "MUL-0062": {
+  "class": "E",
+  "secondary": "F",
+  "finding": "|a+b| -> a+b etc. with a>0, b>0 assumed: assumptions are not composed to establish nonnegativity"
+ },
+ "MUL-0064": {
+  "class": "E",
+  "secondary": "F",
+  "finding": "|a+b| -> a+b etc. with a>0, b>0 assumed: assumptions are not composed to establish nonnegativity"
+ },
+ "TRG-0032": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "TRG-0038": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "TRG-0051": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "TRG-0072": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "TRG-0076": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "TRG-0108": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "FUN-0061": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "FUN-0069": {
+  "class": "D",
+  "secondary": "",
+  "finding": "true trigonometric identity reported INVALID because rational-polynomial normal forms differ (e.g. cos(-x) -> cos x, cos(2pi/3) -> -1/2)"
+ },
+ "DOM-0160": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "DOM-0172": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "EQN-0199": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "EQN-0204": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "FUN-0145": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "FUN-0147": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "PRF-0032": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "PRF-0042": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "PRF-0044": {
+  "class": "E",
+  "secondary": "",
+  "finding": "a stated restriction line 'x != a' is treated as a statement in the solution chain, so the next line 'loses solutions'"
+ },
+ "EQN-0221": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a derived contradiction (5=6, hence no solution) is judged as a false claim"
+ },
+ "CAL-0061": {
+  "class": "A",
+  "secondary": "",
+  "finding": "'sec' is not a known function: parsed as the variable 'sec' times (3x)^2, then the correct derivative is called invalid"
+ },
+ "DOM-0214": {
+  "class": "A",
+  "secondary": "",
+  "finding": "'cbrt' parsed as a variable; correct arithmetic called invalid ('differ at cbrt = 0')"
+ },
+ "LIM-0007": {
+  "class": "A",
+  "secondary": "",
+  "finding": "final limit stated with '\u2192' or as a computation is not recognised ('state the value of the limit')"
+ },
+ "LIM-0012": {
+  "class": "A",
+  "secondary": "",
+  "finding": "final limit stated with '\u2192' or as a computation is not recognised ('state the value of the limit')"
+ },
+ "LIM-0048": {
+  "class": "A",
+  "secondary": "",
+  "finding": "final limit stated with '\u2192' or as a computation is not recognised ('state the value of the limit')"
+ },
+ "LIM-0056": {
+  "class": "A",
+  "secondary": "",
+  "finding": "final limit stated with '\u2192' or as a computation is not recognised ('state the value of the limit')"
+ },
+ "LIM-0057": {
+  "class": "A",
+  "secondary": "",
+  "finding": "final limit stated with '\u2192' or as a computation is not recognised ('state the value of the limit')"
+ },
+ "LIM-0060": {
+  "class": "A",
+  "secondary": "",
+  "finding": "final limit stated with '\u2192' or as a computation is not recognised ('state the value of the limit')"
+ },
+ "LIM-0063": {
+  "class": "A",
+  "secondary": "",
+  "finding": "final limit stated with '\u2192' or as a computation is not recognised ('state the value of the limit')"
+ },
+ "PRF-0181": {
+  "class": "A",
+  "secondary": "",
+  "finding": "'by the chain rule: 3e^(3x)' \u2014 the colon label hides the answer"
+ },
+ "PRF-0030": {
+  "class": "A",
+  "secondary": "B",
+  "finding": "'this holds for every real x' (all-reals conclusion) not recognised as a solved form"
+ },
+ "CAL-0141": {
+  "class": "B",
+  "secondary": "F",
+  "finding": "integration by parts: 'u = x, v = sin(x)' binding line unrepresentable; the '= \u2026' continuation is then compared with v and called invalid"
+ },
+ "CAL-0148": {
+  "class": "B",
+  "secondary": "F",
+  "finding": "integration by parts: 'u = x, v = sin(x)' binding line unrepresentable; the '= \u2026' continuation is then compared with v and called invalid"
+ },
+ "CAL-0153": {
+  "class": "B",
+  "secondary": "F",
+  "finding": "integration by parts: 'u = x, v = sin(x)' binding line unrepresentable; the '= \u2026' continuation is then compared with v and called invalid"
+ },
+ "CAL-0200": {
+  "class": "B",
+  "secondary": "",
+  "finding": "auxiliary derivative u' = \u2026 is compared with f' and called invalid"
+ },
+ "CAL-0080": {
+  "class": "B",
+  "secondary": "",
+  "finding": "conditional derivative 'x/|x| for x != 0; not differentiable at 0' not representable as an answer"
+ },
+ "ADV-0231": {
+  "class": "E",
+  "secondary": "",
+  "finding": "case condition (x -> -oo so |x| = -x) not carried; the division step is called invalid"
+ },
+ "ADV-0003": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "ADV-0014": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "ADV-0070": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "ADV-0087": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "ALG-0126": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0004": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0016": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0021": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0024": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0031": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0057": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0062": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0064": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0065": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0067": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0070": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0080": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0103": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0112": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0134": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0146": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "DOM-0151": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "FUN-0015": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "FUN-0057": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "FUN-0083": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "FUN-0093": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "FUN-0103": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "FUN-0105": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "FUN-0107": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "MUL-0065": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "TRG-0090": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "TRG-0091": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "TRG-0097": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "TRG-0099": {
+  "class": "G",
+  "secondary": "E",
+  "finding": "invalid rewrite (values differ or the domain narrows) reported as 'needs an assumption' rather than invalid; not an acceptance"
+ },
+ "ADV-0040": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "ADV-0045": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "DOM-0173": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "EQN-0168": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "EQN-0220": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "FUN-0141": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "FUN-0146": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "INE-0128": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "INE-0134": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0020": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0031": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0045": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0064": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0107": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0145": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0159": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0160": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "PRF-0167": {
+  "class": "D",
+  "secondary": "",
+  "finding": "a working that loses solutions (wrong final answer) is classified 'incomplete' instead of invalid"
+ },
+ "DOM-0045": {
+  "class": "E",
+  "secondary": "",
+  "finding": "answer-first transition diagnosis ignores the stated premise ('for x != 1', 'for x < 0') and reports a one-way step"
+ },
+ "EQN-0123": {
+  "class": "E",
+  "secondary": "",
+  "finding": "answer-first transition diagnosis ignores the stated premise ('for x != 1', 'for x < 0') and reports a one-way step"
+ },
+ "INE-0013": {
+  "class": "E",
+  "secondary": "",
+  "finding": "answer-first transition diagnosis ignores the stated premise ('for x != 1', 'for x < 0') and reports a one-way step"
+ },
+ "INE-0030": {
+  "class": "E",
+  "secondary": "",
+  "finding": "answer-first transition diagnosis ignores the stated premise ('for x != 1', 'for x < 0') and reports a one-way step"
+ },
+ "INE-0037": {
+  "class": "E",
+  "secondary": "",
+  "finding": "answer-first transition diagnosis ignores the stated premise ('for x != 1', 'for x < 0') and reports a one-way step"
+ },
+ "LIM-0059": {
+  "class": "A",
+  "secondary": "",
+  "finding": "wrong limit stated with '\u2192' is not read; reported incomplete instead of invalid"
+ },
+ "LIM-0062": {
+  "class": "A",
+  "secondary": "",
+  "finding": "wrong limit stated with '\u2192' is not read; reported incomplete instead of invalid"
+ },
+ "LIM-0064": {
+  "class": "A",
+  "secondary": "",
+  "finding": "wrong limit stated with '\u2192' is not read; reported incomplete instead of invalid"
+ },
+ "LIM-0072": {
+  "class": "A",
+  "secondary": "",
+  "finding": "wrong limit stated with '\u2192' is not read; reported incomplete instead of invalid"
+ },
+ "LIM-0103": {
+  "class": "A",
+  "secondary": "",
+  "finding": "wrong limit stated with '\u2192' is not read; reported incomplete instead of invalid"
+ },
+ "CAL-0197": {
+  "class": "A",
+  "secondary": "",
+  "finding": "prose 'times the derivative of sin(x)' misread; an unfinished line is called invalid"
+ },
+ "PRF-0195": {
+  "class": "B",
+  "secondary": "",
+  "finding": "auxiliary u', v' lines compared with f'; unfinished work called invalid"
+ },
+ "ADV-0089": {
+  "class": "G",
+  "secondary": "",
+  "finding": "wrong cited identity ln(x^2)=2ln x 'for all x': E7 reports missing-assumption, which names the actual flaw; label expects invalid"
+ },
+ "ADV-0090": {
+  "class": "G",
+  "secondary": "",
+  "finding": "wrong cited identity ln(x^2)=2ln x 'for all x': E7 reports missing-assumption, which names the actual flaw; label expects invalid"
+ },
+ "CAL-0060": {
+  "class": "G",
+  "secondary": "",
+  "finding": "wrong cited identity ln(x^2)=2ln x 'for all x': E7 reports missing-assumption, which names the actual flaw; label expects invalid"
+ },
+ "CAL-0082": {
+  "class": "I",
+  "secondary": "",
+  "finding": "ORACLE/LABEL DEFECT: 'f'(x) = 2' for |2x| is false for x<0, so invalid is correct; label insufficient-information. Corrected in r2"
+ }
+}

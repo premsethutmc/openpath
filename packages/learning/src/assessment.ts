@@ -102,6 +102,16 @@ function wrongCandidates(pr: Problem, exp: string[]): string[] {
 export const contractFor = (questionId: string): AssessmentContract | null => { const pr = problemOf(questionId); return pr ? contractOfProblem(pr, questionId) : null; };
 /** validates any problem object (also a deliberately corrupted one: a generator defect must come out "held") */
 export function contractOfProblem(pr: Problem, questionId: string): AssessmentContract {
+  const c = buildContract(pr, questionId);
+  // A word form ("…:w") shows the same mathematics in an everyday wording, so a derived number of the statement (the 20 of 1000 + 100 + 20 + 4) is
+  // legitimately not printed. The number guard then cannot confirm the statement, which is not a generator disagreement: the question keeps the
+  // legacy comparison of its stored answer (identical to the typed form's, audited for every released question) instead of being held, and held is
+  // not reached by a correct answer that can never be credited (grading audit, defect G1).
+  if (c.verification === "held" && questionId.endsWith(":w") && /which the prompt does not show/.test(c.reason))
+    return { ...c, problem: null, kind: null, variable: null, assumptions: [], capability: "none", verification: "legacy", reason: `word form: the guard cannot confirm the statement against the reworded prompt; legacy comparison kept (${c.reason})` };
+  return c;
+}
+function buildContract(pr: Problem, questionId: string): AssessmentContract {
   const exp = expectedOf(pr);
   const base = { contract: ASSESSMENT_CONTRACT, questionId, prompt: pr.prompt, answerType: pr.type, mode: "answer-only" as AssessmentMode, reference: { steps: fmtSteps(pr), evidence: "generator worked solution (not independent)" }, checkedWrong: [] as string[] };
   if (pr.type === "written") return { ...base, problem: null, expected: { stored: pr.answer, display: pr.answer, values: [] }, variable: null, assumptions: [], mode: "method-required", capability: "educator", verification: "human", reason: "written answers are marked by an educator" };

@@ -13,10 +13,10 @@ from fractions import Fraction
 from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
 
 WRITTEN_LIMIT = 16000  # kept equal to learning.WRITTEN_LIMIT (a test checks)
-NUMBER = r'[+-]?\d{1,9}(?:\.\d{0,9})?'  # a whole number may be typed with a zero decimal part (the app's canonical)
-RATIONAL = r'[+-]?\d{1,9}(?:\.\d{1,6})?(?:/[+-]?\d{1,9})?'
+NUMBER = r'[+-]?\d{1,30}(?:\.\d{0,30})?'  # a whole number may be typed with a zero decimal part (the app's canonical)
+RATIONAL = r'[+-]?\d{1,30}(?:\.\d{1,30})?(?:/[+-]?\d{1,30})?'
 # mixed@1: a mixed number "3 1/2" is 3 + 1/2 ("-3 1/2" is -(3 + 1/2)), never 31/2 (packages/mathematics answers.ts)
-MIXED = r'([+-]?)(\d{1,9})\s+(\d{1,9})/(\d{1,9})'
+MIXED = r'([+-]?)(\d{1,30})\s+(\d{1,30})/(\d{1,30})'
 
 
 def _rational(t):
