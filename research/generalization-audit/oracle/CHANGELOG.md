@@ -10,3 +10,12 @@
    the domain include nonnegative/nonpositive (FUN-0173).
 Author labels were not changed by these fixes; the [oracle-dispute] notes in those cases' explanations record the
 history.
+4. Expression chains: a domain widening is accepted only if the stated restrictions actually exclude the gained
+   points (DOM-0197: "x != 0" stated, "x != 1" also needed); an unrepresentable restriction makes the case uncertified.
+5. Solve tasks: a final solved statement listing values outside the task domain is an error (TRG-0190: x = 2π for
+   x ∈ [0, 2π)), unless the working shows a check/rejection.
+6. Trigonometric solution sets: SymPy `solveset` was found to (a) drop roots on bounded intervals (TRG-0168:
+   1 − 2sin²x = sin x lost 3π/2) and (b) return a single period for sin(x) ≠ 0 over all reals. The oracle now refuses
+   to certify trigonometric sets over unbounded domains, and on bounded domains cross-checks every finite set by
+   dense numeric root search and every relation by sampled membership; any disagreement => uncertified. Numeric
+   checks are used only to refuse, never to certify.

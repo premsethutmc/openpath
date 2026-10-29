@@ -154,6 +154,11 @@ def certify_solve(task, assumptions, olines, raw_text):
             prev_ne = ne
         if scope is None:
             final = (st, S)
+            if st is not None and _solved(st, x):
+                SR = _set(st, x, R)
+                outside = diff_set(SR, D) if SR is not None else None
+                if outside is not None and is_empty(outside) is False and not CHECK_WORDS.search(raw_text):
+                    facts["errors"].append((i, f"stated answer includes values outside the task domain: {outside}"))
     if final is None:
         facts["final"] = None
         verdict = "invalid" if facts["errors"] else "incomplete"
@@ -246,7 +251,7 @@ def certify_expression_chain(task, assumptions, olines):
     x = syms[0] if len(syms) == 1 else None
     D = _domain(assumptions, ctx, x) if x is not None else R
     chain = [(start, c0, task["start"])]
-    errors, widened = [], False
+    errors, widened, unrep_restriction = [], False, False
     for i, ol in enumerate(olines):
         if ol is None:
             continue
@@ -265,6 +270,8 @@ def certify_expression_chain(task, assumptions, olines):
                 S = statement_set(parse_statement(ol[9:], ctx), x, R)
                 if S is not None:
                     D = sp.Intersection(D, S)  # a stated restriction narrows the domain for the following links
+                else:
+                    unrep_restriction = True
             continue
         st = parse_statement(ol, ctx)
         e = st.exprs[0]
@@ -293,8 +300,12 @@ def certify_expression_chain(task, assumptions, olines):
     facts["form"] = form
     if form is not True:
         return {"verdict": "incomplete", "certified": True, "facts": facts, "evidence": f"form: {form}"}
-    if widened and not restricted:
-        return {"verdict": "missing-assumption", "certified": True, "facts": facts, "evidence": "domain widened, restriction unstated"}
+    # single variable: links were judged on the domain narrowed by every stated restriction, so a remaining widening
+    # means the stated restrictions do not cover the excluded values (e.g. x != 0 stated, x != 1 also needed)
+    if widened and unrep_restriction:
+        return {"verdict": None, "certified": False, "facts": facts, "evidence": "a stated restriction could not be represented; its coverage is undecided"}
+    if widened and (x is not None or not restricted):
+        return {"verdict": "missing-assumption", "certified": True, "facts": facts, "evidence": "domain widened, restriction unstated or insufficient"}
     return {"verdict": "verified", "certified": True, "facts": facts, "evidence": "exact identity chain"}
 
 

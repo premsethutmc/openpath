@@ -393,17 +393,17 @@ W(C, "cancelling with the restriction and rejecting the hole", "excluded-value o
 W(C, "LCD clearing yields only an excluded candidate", "restriction carried through several lines",
   {"type": S, "statement": "1/(x-1)+1/(x+1)=2/(x^2-1)"},
   ["x != 1 and x != -1", "(x+1)+(x-1)=2", "2x=2", "x=1", "x=1 is excluded: no solution"], "valid-implication", answer="no solution",
-  pair="dom-w-rat4", complexity=3, why="restriction stated first and applied at the end",
+  pair="dom-w-rat4", complexity=3, composition=True, why="restriction stated first and applied at the end",
   oracle_lines=["restrict: x != 1 and x != -1", "(x+1)+(x-1)=2", "2x=2", "x=1", "empty"])
 W(C, "LCD clearing yields only an excluded candidate", "restriction carried through several lines",
   {"type": S, "statement": "1/(x-1)+1/(x+1)=2/(x^2-1)"}, ["(x+1)+(x-1)=2", "2x=2", "x=1"], "invalid", answer="no solution",
-  pair="dom-w-rat4", complexity=3, why="x=1 makes x-1 and x^2-1 zero; the true solution set is empty")
+  pair="dom-w-rat4", complexity=3, composition=True, why="x=1 makes x-1 and x^2-1 zero; the true solution set is empty")
 W(C, "clearing (x-3) produces the excluded value", "excluded-value obligation", {"type": S, "statement": "x/(x-3)=3/(x-3)+2"},
   ["x=3+2(x-3)", "x=2x-3", "x=3"], "invalid", answer="no solution", pair="dom-w-rat5", complexity=2, why="x=3 is excluded")
 W(C, "clearing (x-3) with the restriction carried", "restriction carried through several lines",
   {"type": S, "statement": "x/(x-3)=3/(x-3)+2"},
   ["x != 3", "x=3+2(x-3)", "x=2x-3", "x=3", "this is excluded, so no solution"], "valid-implication", answer="no solution",
-  pair="dom-w-rat5", complexity=3, why="the restriction stated on line 1 rejects the only candidate",
+  pair="dom-w-rat5", complexity=3, composition=True, why="the restriction stated on line 1 rejects the only candidate",
   oracle_lines=["restrict: x != 3", "x=3+2(x-3)", "x=2x-3", "x=3", "empty"])
 W(C, "zero numerator that is also a pole", "excluded-value obligation", {"type": S, "statement": "(x^2-3x)/(x-3)=0"},
   ["x(x-3)=0", "x=0 or x=3"], "invalid", answer="x=0", pair="dom-w-rat6", why="x=3 is excluded; only x=0 solves")
@@ -427,13 +427,13 @@ W(C, "factoring instead of dividing keeps x = 0", "solution-set preservation und
 # log equations
 W(C, "combining logs then checking the domain", "domain check after widening", {"type": S, "statement": "ln(x)+ln(x-2)=ln(3)"},
   ["ln(x(x-2))=ln(3)", "x^2-2x-3=0", "x=3 or x=-1", "reject x=-1 since ln(-1) is undefined", "x=3"], "valid-implication", answer="x=3",
-  pair="dom-w-log1", complexity=3, why="the product law widens the domain; the extraneous candidate is checked and rejected",
+  pair="dom-w-log1", complexity=3, composition=True, why="the product law widens the domain; the extraneous candidate is checked and rejected",
   oracle_lines=["ln(x(x-2))=ln(3)", "x^2-2x-3=0", "x=3 or x=-1", None, "x=3"])
 W(C, "combining logs and keeping an out-of-domain root", "domain check after widening",
   {"type": S, "statement": "ln(x)+ln(x-2)=ln(3)"}, ["ln(x(x-2))=ln(3)", "x^2-2x-3=0", "x=3 or x=-1"], "invalid", answer="x=3",
-  pair="dom-w-log1", complexity=3, why="x=-1 is not in the domain of ln(x)")
+  pair="dom-w-log1", complexity=3, composition=True, why="x=-1 is not in the domain of ln(x)")
 W(C, "dropping an out-of-domain root silently", "domain check after widening", {"type": S, "statement": "ln(x)+ln(x-2)=ln(3)"},
-  ["ln(x(x-2))=ln(3)", "x^2-2x-3=0", "x=3 or x=-1", "x=3"], "domain-violation", answer="x=3", pair="dom-w-log1", complexity=3,
+  ["ln(x(x-2))=ln(3)", "x^2-2x-3=0", "x=3 or x=-1", "x=3"], "domain-violation", answer="x=3", pair="dom-w-log1", complexity=3, composition=True,
   why="final answer correct but -1 is dropped with no stated reason or check")
 W(C, "replacing 2ln x by ln(x^2) admits a negative root", "domain check after widening", {"type": S, "statement": "2ln(x)=ln(9)"},
   ["ln(x^2)=ln(9)", "x^2=9", "x=3 or x=-3"], "invalid", answer="x=3", pair="dom-w-log2", why="x=-3 is outside the domain of ln x")
@@ -448,15 +448,15 @@ W(C, "ln(x^2) = ln 9 solved without narrowing", "solution-set preservation (narr
 W(C, "quotient law produces an out-of-domain candidate", "domain check after widening",
   {"type": S, "statement": "ln(x-1)-ln(x+1)=ln(2)"},
   ["ln(x-1)=ln(2)+ln(x+1)", "ln(x-1)=ln(2x+2)", "x-1=2x+2", "x=-3", "check: ln(-4) is undefined, so reject", "no solution"],
-  "valid-implication", answer="no solution", pair="dom-w-log4", complexity=3,
+  "valid-implication", answer="no solution", pair="dom-w-log4", complexity=3, composition=True,
   why="dropping the logs widens the domain; the only candidate fails the domain check",
   oracle_lines=["ln(x-1)=ln(2)+ln(x+1)", "ln(x-1)=ln(2x+2)", "x-1=2x+2", "x=-3", None, "empty"])
 W(C, "quotient law produces an out-of-domain candidate", "domain check after widening",
   {"type": S, "statement": "ln(x-1)-ln(x+1)=ln(2)"}, ["ln(x-1)=ln(2)+ln(x+1)", "ln(x-1)=ln(2x+2)", "x-1=2x+2", "x=-3"], "invalid",
-  answer="no solution", pair="dom-w-log4", complexity=3, why="x=-3 makes ln(x-1) undefined")
+  answer="no solution", pair="dom-w-log4", complexity=3, composition=True, why="x=-3 makes ln(x-1) undefined")
 W(C, "log product law with a domain check", "domain check after widening", {"type": S, "statement": "ln(x)+ln(x+21)=ln(100)"},
   ["ln(x(x+21))=ln(100)", "x^2+21x-100=0", "(x+25)(x-4)=0", "x=-25 or x=4", "reject x=-25 (log of a negative)", "x=4"],
-  "valid-implication", answer="x=4", complexity=4, difficulty="hard",
+  "valid-implication", answer="x=4", complexity=4, composition=True, difficulty="hard",
   why="x(x+21)=100 gives -25 and 4; -25 is outside the domain",
   oracle_lines=["ln(x(x+21))=ln(100)", "x^2+21x-100=0", "(x+25)(x-4)=0", "x=-25 or x=4", None, "x=4"])
 W(C, "domain of a sum of roots is empty", "domain-first reasoning", {"type": S, "statement": "sqrt(x-4)+sqrt(2-x)=1"},
@@ -467,13 +467,13 @@ W(C, "domain of a sum of roots is empty", "domain-first reasoning", {"type": S, 
   why="at x=4 the term sqrt(2-4) is undefined", oracle_lines=[None, "x=4"])
 W(C, "merging square roots then squaring", "domain check after widening", {"type": S, "statement": "sqrt(x)sqrt(x-3)=2"},
   ["x(x-3)=4", "x^2-3x-4=0", "x=4 or x=-1", "check x=-1: sqrt(-1) undefined, reject", "x=4"], "valid-implication", answer="x=4",
-  pair="dom-w-sqprod", complexity=3, why="squaring widens; -1 rejected by the check",
+  pair="dom-w-sqprod", complexity=3, composition=True, why="squaring widens; -1 rejected by the check",
   oracle_lines=["x(x-3)=4", "x^2-3x-4=0", "x=4 or x=-1", None, "x=4"])
 W(C, "merging square roots then squaring", "domain check after widening", {"type": S, "statement": "sqrt(x)sqrt(x-3)=2"},
-  ["x(x-3)=4", "x^2-3x-4=0", "x=4 or x=-1"], "invalid", answer="x=4", pair="dom-w-sqprod", complexity=3,
+  ["x(x-3)=4", "x^2-3x-4=0", "x=4 or x=-1"], "invalid", answer="x=4", pair="dom-w-sqprod", complexity=3, composition=True,
   why="x=-1 makes sqrt(x) undefined")
 W(C, "merging square roots then squaring", "domain check after widening", {"type": S, "statement": "sqrt(x)sqrt(x-3)=2"},
-  ["x(x-3)=4", "x^2-3x-4=0", "x=4 or x=-1", "x=4"], "domain-violation", answer="x=4", pair="dom-w-sqprod", complexity=3,
+  ["x(x-3)=4", "x^2-3x-4=0", "x=4 or x=-1", "x=4"], "domain-violation", answer="x=4", pair="dom-w-sqprod", complexity=3, composition=True,
   why="correct final answer but the candidate -1 is dropped without a stated check")
 W(C, "tan-cos product equation with an excluded candidate", "excluded-value obligation",
   {"type": S, "statement": "tan(x)cos(x)=1"}, ["sin(x)=1", "x=pi/2"], "invalid", answer="no solution", assumptions=["0 <= x", "x < 2*pi"],
@@ -536,15 +536,15 @@ W(C, "compound fraction cancellation", "restriction carried through several line
 W(C, "division of fractions over several lines", "restriction carried through several lines",
   {"type": SIM, "start": "((x+1)/(x-1))/((x+1)/(x+2))"},
   ["((x+1)/(x-1))((x+2)/(x+1))", "(x+1)(x+2)/((x-1)(x+1))", "(x+2)/(x-1)"], "domain-violation", answer="(x+2)/(x-1), x != -1, -2",
-  pair="dom-w-s8", complexity=3, difficulty="hard", why="the hidden exclusions x=-2 and x=-1 disappear without being stated")
+  pair="dom-w-s8", complexity=3, composition=True, difficulty="hard", why="the hidden exclusions x=-2 and x=-1 disappear without being stated")
 W(C, "division of fractions over several lines", "restriction carried through several lines",
   {"type": SIM, "start": "((x+1)/(x-1))/((x+1)/(x+2))"},
   ["x != 1, x != -2 and x != -1", "((x+1)/(x-1))((x+2)/(x+1))", "(x+1)(x+2)/((x-1)(x+1))", "(x+2)/(x-1)"], "valid-equivalence",
-  answer="(x+2)/(x-1), x != -1, -2", pair="dom-w-s8", complexity=4, difficulty="hard", why="all three exclusions stated first",
+  answer="(x+2)/(x-1), x != -1, -2", pair="dom-w-s8", complexity=4, composition=True, difficulty="hard", why="all three exclusions stated first",
   oracle_lines=["restrict: x != 1 and x != -2 and x != -1", "((x+1)/(x-1))((x+2)/(x+1))", "(x+1)(x+2)/((x-1)(x+1))", "(x+2)/(x-1)"])
 W(C, "product of rational expressions cancels to a constant", "restriction carried through several lines",
   {"type": SIM, "start": "((x^2-1)/(x^2-x))(x/(x+1))"}, ["((x-1)(x+1)/(x(x-1)))(x/(x+1))", "1"], "domain-violation",
-  answer="1, x != 0, 1, -1", complexity=3, difficulty="hard", why="the start is undefined at 0, 1 and -1; the constant 1 is not")
+  answer="1, x != 0, 1, -1", complexity=3, composition=True, difficulty="hard", why="the start is undefined at 0, 1 and -1; the constant 1 is not")
 W(C, "conjugate cancellation with the root excluded", "excluded-value obligation", {"type": SIM, "start": "(x-4)/(sqrt(x)-2)"},
   ["(sqrt(x)-2)(sqrt(x)+2)/(sqrt(x)-2)", "sqrt(x)+2"], "domain-violation", answer="sqrt(x)+2, x != 4", pair="dom-w-s9",
   why="x=4 excluded originally; result is defined there")

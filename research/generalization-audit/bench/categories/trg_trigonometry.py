@@ -316,13 +316,12 @@ ts("tan x = 0 iff sin x = 0 (tan defined where sin = 0)", "quotient identity in 
    "valid-equivalence", assumptions=I2, why="at sin x = 0, cos x = +-1 so tan is defined")
 ts("sin x / cos x = 1 to sin x = cos x", "clearing a trig denominator", "sin(x)/cos(x)=1", "sin(x)=cos(x)", "valid-equivalence",
    assumptions=I2, why="sin = cos cannot hold where cos = 0")
-ts("quadratic in cos x: factoring", SSI, "2cos(x)^2-cos(x)-1=0", "(2cos(x)+1)(cos(x)-1)=0", "valid-equivalence", assumptions=I2,
-   why="polynomial identity in cos x",
-   pair="trg-eq-h")
-ts("quadratic in cos x: reading off solutions", SSI, "(2cos(x)+1)(cos(x)-1)=0", "x=0 or x=2pi/3 or x=4pi/3", "valid-equivalence",
-   assumptions=I2, why="cos x = 1 gives 0; cos x = -1/2 gives 2pi/3, 4pi/3", pair="trg-eq-h")
-ts("cos x = 1 without an interval", "periodic solution set", "cos(x)=1", "x=0", "invalid",
-   why="x = 2pi also solves cos x = 1. Uncertified: the oracle does not compute periodic solution sets over all reals")
+ts("quadratic in cos x: factoring", SSI, "2cos(x)^2-3cos(x)+1=0", "(2cos(x)-1)(cos(x)-1)=0", "valid-equivalence", assumptions=I2,
+   why="polynomial identity in cos x", pair="trg-eq-h")
+ts("quadratic in cos x: reading off solutions", SSI, "(2cos(x)-1)(cos(x)-1)=0", "x=0 or x=pi/3 or x=5pi/3", "valid-equivalence",
+   assumptions=I2, why="cos x = 1 gives 0; cos x = 1/2 gives pi/3, 5pi/3", pair="trg-eq-h")
+ts("quadratic in cos x: the cos x = 1 branch forgotten", SSI, "(2cos(x)-1)(cos(x)-1)=0", "x=pi/3 or x=5pi/3", "invalid",
+   assumptions=I2, why="x = 0 (cos x = 1) is lost", pair="trg-eq-h")
 ts("tan x = sin x / cos x as an equation holds wherever tan is defined", "quotient identity in an equation", "tan(x)=sin(x)/cos(x)",
    "x=x", "valid-implication", why="prev holds exactly where cos x != 0; x = x holds for all x", notation="unfamiliar")
 
@@ -336,9 +335,9 @@ wk("show-that with Pythagoras", "show-that chain", {"type": SH, "start": "sin(x)
 wk("show-that with a sign error", "show-that chain", {"type": SH, "start": "sin(x)tan(x)+cos(x)", "target": "sec(x)"},
    ["sin(x)^2/cos(x)+cos(x)", "(sin(x)^2-cos(x)^2)/cos(x)", "1/cos(x)", "sec(x)"], "invalid", answer="sec x", complexity=4,
    pair="trg-w-sh1", why="line 2 subtracts cos^2 instead of adding; at x=0 it gives -1 vs 1")
-wk("show-that stops before the target", "show-that chain", {"type": SH, "start": "sin(x)tan(x)+cos(x)", "target": "sec(x)"},
-   ["sin(x)^2/cos(x)+cos(x)", "(sin(x)^2+cos(x)^2)/cos(x)"], "incomplete", answer="sec x", complexity=2, pair="trg-w-sh1",
-   why="every line is correct but the target sec x is never reached")
+wk("simplification stops with a common factor left", "task completion", {"type": "simplify", "start": "sin(2x)/sin(x)"},
+   ["2sin(x)cos(x)/sin(x)"], "incomplete", answer="2cos x, sin x != 0", pair="trg-w-s1",
+   why="the line is a correct identity (same domain) but the common factor sin x has not been cancelled")
 wk("difference of fourth powers", "show-that chain", {"type": SH, "start": "cos(x)^4-sin(x)^4", "target": "cos(2x)"},
    ["(cos(x)^2-sin(x)^2)(cos(x)^2+sin(x)^2)", "cos(x)^2-sin(x)^2", "cos(2x)"], "valid-equivalence", answer="cos 2x", complexity=3,
    composition=True, pair="trg-w-sh2", why="factor, Pythagoras, double angle")
@@ -402,19 +401,18 @@ wk("show-that justified by the wrong identity", "cited identity", {"type": SH, "
 
 # solve workings on intervals
 SV = "solve"
-wk("solving a quadratic in cos x on [0, 2pi)", SSI, {"type": SV, "statement": "2cos(x)^2-cos(x)-1=0"},
-   ["(2cos(x)+1)(cos(x)-1)=0", "cos(x)=-1/2 or cos(x)=1", "x=2pi/3 or x=4pi/3 or x=0"], "valid-equivalence", assumptions=I2,
-   answer="x = 0, 2pi/3, 4pi/3", complexity=3, pair="trg-w-q1",
-   why="each line has the solution set {0, 2pi/3, 4pi/3} on [0, 2pi). [oracle-dispute] SymPy's solveset on this interval "
-       "returns only {0}, missing 2pi/3 and 4pi/3 (cos(2pi/3) = -1/2 exactly), so the oracle reports this correct working as invalid")
-wk("solving a quadratic in cos x: one solution missed", SSI, {"type": SV, "statement": "2cos(x)^2-cos(x)-1=0"},
-   ["(2cos(x)+1)(cos(x)-1)=0", "cos(x)=-1/2 or cos(x)=1", "x=2pi/3 or x=0"], "invalid", assumptions=I2,
-   answer="x = 0, 2pi/3, 4pi/3", complexity=3, pair="trg-w-q1", why="4pi/3 (cos = -1/2) is lost")
+wk("solving a quadratic in cos x on [0, 2pi)", SSI, {"type": SV, "statement": "2cos(x)^2-3cos(x)+1=0"},
+   ["(2cos(x)-1)(cos(x)-1)=0", "cos(x)=1/2 or cos(x)=1", "x=0, pi/3 or 5pi/3"], "valid-equivalence", assumptions=I2,
+   answer="x = 0, pi/3, 5pi/3", complexity=3, pair="trg-w-q1", why="each line has the solution set {0, pi/3, 5pi/3} on [0, 2pi)")
+wk("solving a quadratic in cos x: one solution missed", SSI, {"type": SV, "statement": "2cos(x)^2-3cos(x)+1=0"},
+   ["(2cos(x)-1)(cos(x)-1)=0", "cos(x)=1/2 or cos(x)=1", "x=pi/3 or x=0"], "invalid", assumptions=I2,
+   answer="x = 0, pi/3, 5pi/3", complexity=3, pair="trg-w-q1", why="5pi/3 (cos = 1/2, fourth quadrant) is lost")
 wk("quadratic in sin x via a double angle", SSI, {"type": SV, "statement": "cos(2x)=sin(x)"},
    ["1-2sin(x)^2=sin(x)", "2sin(x)^2+sin(x)-1=0", "(2sin(x)-1)(sin(x)+1)=0", "x=pi/6, 5pi/6 or 3pi/2"], "valid-equivalence",
    assumptions=I2, answer="x = pi/6, 5pi/6, 3pi/2", complexity=4, composition=True, pair="trg-w-q2",
-   why="double angle, then a quadratic in sin x; sin x = 1/2 or -1. [oracle-dispute] the oracle's per-line solveset drops 3pi/2 "
-       "for the polynomial-in-sin lines although sin(3pi/2) = -1 satisfies them exactly")
+   why="double angle, then a quadratic in sin x; sin x = 1/2 or -1. [oracle-dispute] SymPy solveset (used per line) returns "
+       "{pi/6, 5pi/6} for 1-2sin(x)^2=sin(x) on [0,2pi), dropping 3pi/2 although sin(3pi/2) = -1 satisfies it exactly, so the "
+       "oracle reports a lost solution in a correct working")
 wk("quadratic in sin x via the wrong double angle", SSI, {"type": SV, "statement": "cos(2x)=sin(x)"},
    ["2sin(x)^2-1=sin(x)", "2sin(x)^2-sin(x)-1=0", "(2sin(x)+1)(sin(x)-1)=0", "x=pi/2, 7pi/6 or 11pi/6"], "invalid",
    assumptions=I2, answer="x = pi/6, 5pi/6, 3pi/2", complexity=4, composition=True, pair="trg-w-q2",
@@ -462,16 +460,16 @@ wk("tan equation on [0, pi)", SSI, {"type": SV, "statement": "tan(x)=1"}, ["x=pi
 wk("unbracketed sin^2 notation in an equation", SSI, {"type": SV, "statement": "sin(x)=sin^2 x"}, ["x=0, pi, pi/2"], "valid-equivalence",
    assumptions=I2, answer="x = 0, pi/2, pi", notation="unfamiliar", why="sin x (1 - sin x) = 0")
 wk("excluded candidate in a trig rational equation", "excluded values in trig equations", {"type": SV, "statement": "sin(x)/(1+cos(x))=0"},
-   ["sin(x)=0", "x=0, pi or 2pi"], "invalid", assumptions=["0 <= x", "x <= 2*pi"], answer="x = 0, 2pi", pair="trg-w-exc",
+   ["sin(x)=0", "x=0 or x=pi"], "invalid", assumptions=I2, answer="x = 0", pair="trg-w-exc",
    why="at x = pi the denominator 1 + cos pi = 0, so pi is excluded")
 wk("excluded candidate in a trig rational equation, rejected", "excluded values in trig equations",
    {"type": SV, "statement": "sin(x)/(1+cos(x))=0"},
-   ["sin(x)=0", "x=0, pi or 2pi", "reject pi: 1+cos(pi)=0", "x=0 or x=2pi"], "valid-implication",
-   assumptions=["0 <= x", "x <= 2*pi"], answer="x = 0, 2pi", pair="trg-w-exc", complexity=3,
+   ["sin(x)=0", "x=0 or x=pi", "reject pi: 1+cos(pi)=0", "x=0"], "valid-implication",
+   assumptions=I2, answer="x = 0", pair="trg-w-exc", complexity=3,
    why="the excluded candidate is checked and rejected",
-   oracle_lines=["sin(x)=0", "x=0, pi or 2pi", None, "x=0 or x=2pi"])
+   oracle_lines=["sin(x)=0", "x=0 or x=pi", None, "x=0"])
 wk("excluded candidate dropped silently", "excluded values in trig equations", {"type": SV, "statement": "sin(x)/(1+cos(x))=0"},
-   ["sin(x)=0", "x=0, pi or 2pi", "x=0 or x=2pi"], "domain-violation", assumptions=["0 <= x", "x <= 2*pi"], answer="x = 0, 2pi",
+   ["sin(x)=0", "x=0 or x=pi", "x=0"], "domain-violation", assumptions=I2, answer="x = 0",
    pair="trg-w-exc", complexity=3, why="correct answer, but pi is dropped without any stated reason")
 wk("periodic general solution without an interval", "periodic solution set", {"type": SV, "statement": "sin(x)=1/2"},
    ["x=pi/6 or x=5pi/6"], "invalid", answer="x = pi/6 + 2k pi or 5pi/6 + 2k pi",
@@ -479,4 +477,6 @@ wk("periodic general solution without an interval", "periodic solution set", {"t
 wk("interval endpoint included", SSI, {"type": SV, "statement": "sin(x)=0"}, ["x=0, pi or 2pi"], "valid-equivalence",
    assumptions=["0 <= x", "x <= 2*pi"], answer="x = 0, pi, 2pi", pair="trg-w-end", difficulty="easy", why="closed interval includes 2pi")
 wk("interval endpoint wrongly included", SSI, {"type": SV, "statement": "sin(x)=0"}, ["x=0, pi or 2pi"], "invalid",
-   assumptions=["0 <= x", "x < 2*pi"], answer="x = 0, pi", pair="trg-w-end", difficulty="easy", why="2pi is outside [0, 2pi)")
+   assumptions=["0 <= x", "x < 2*pi"], answer="x = 0, pi", pair="trg-w-end", difficulty="easy",
+   why="2pi is outside [0, 2pi), so the stated answer set is wrong. [oracle-dispute] the oracle intersects every line with the "
+       "assumed interval before comparing, so a listed out-of-interval value is silently discarded and the working is verified")

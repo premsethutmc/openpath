@@ -206,7 +206,86 @@ def relation_set(a, op, b, x, D):
     if rel is sp.false:
         return sp.S.EmptySet
     s = limited(lambda: sp.solveset(rel, x, D), 3.0)
-    return None if bad_set(s) else s
+    if bad_set(s):
+        return None
+    TRIG = (sp.sin, sp.cos, sp.tan, sp.sec, sp.csc, sp.cot)
+    if (a - b).has(*TRIG):
+        try:
+            bounded = D.inf.is_finite and D.sup.is_finite
+        except AttributeError:
+            bounded = False
+        if not bounded:
+            return None  # periodic solution sets over unbounded domains: SymPy returns truncated sets; refuse
+        if not _sample_membership_agrees(rel, x, D, s):
+            return None
+    if op == "=" and (a - b).has(sp.sin, sp.cos, sp.tan, sp.sec, sp.csc, sp.cot, sp.exp, sp.log) and isinstance(s, sp.FiniteSet):
+        if not _numeric_roots_covered(a - b, x, D, s):
+            return None  # SymPy's solveset is known to drop roots of some trigonometric equations: refuse to certify
+    return s
+
+
+def _sample_membership_agrees(rel, x, D, S, n=600):
+    """Refuse certification when the computed set disagrees with the relation's numeric truth at sample points of D
+    (points within 1e-6 of a boundary are skipped)."""
+    import mpmath
+    lo, hi = float(D.inf), float(D.sup)
+    f = sp.lambdify(x, rel.lhs - rel.rhs, "mpmath")
+    for k in range(1, n):
+        t = lo + (hi - lo) * k / n
+        try:
+            v = f(t)
+        except Exception:  # noqa: BLE001
+            continue
+        if abs(mpmath.im(v)) > 1e-12 or abs(mpmath.re(v)) < 1e-6:
+            continue
+        v = float(mpmath.re(v))
+        truth = {"Unequality": v != 0, "StrictLessThan": v < 0, "StrictGreaterThan": v > 0, "LessThan": v <= 0, "GreaterThan": v >= 0, "Equality": False}.get(type(rel).__name__)
+        if truth is None:
+            continue
+        inD = D.contains(sp.Float(t)) is sp.true
+        if not inD:
+            continue
+        member = S.contains(sp.Float(t))
+        if member in (sp.true, sp.false) and bool(member) != truth:
+            return False
+    return True
+
+
+def _numeric_roots_covered(f, x, D, S):
+    """Corroboration of a finite transcendental solution set on a bounded domain: every approximate root found by
+    dense sampling must be close to a member of S. Used only to REFUSE certification, never to establish a set."""
+    import mpmath
+    try:
+        lo, hi = float(D.inf), float(D.sup)
+    except (TypeError, ValueError, AttributeError):
+        return True  # unbounded: not checked here
+    if not (mpmath.isfinite(lo) and mpmath.isfinite(hi)):
+        return True
+    g = sp.lambdify(x, f, "mpmath")
+    n = 4000
+    xs = [lo + (hi - lo) * k / n for k in range(n + 1)]
+    vals = []
+    for t in xs:
+        try:
+            v = g(t)
+            vals.append(float(mpmath.re(v)) if abs(mpmath.im(v)) < 1e-12 else None)
+        except Exception:  # noqa: BLE001
+            vals.append(None)
+    sols = [float(v) for v in S]
+    approx = []
+    for k in range(n):
+        a, b = vals[k], vals[k + 1]
+        if a is None or b is None:
+            continue
+        if a == 0 or (a * b < 0 and min(abs(a), abs(b)) < 0.1):  # a sign change across a pole is not a root
+            approx.append(xs[k])
+        elif 0 < k and vals[k - 1] is not None and abs(a) < 1e-6 and abs(a) <= abs(vals[k - 1]) and abs(a) <= abs(b):
+            approx.append(xs[k])
+    tol = 2 * (hi - lo) / n + 1e-9
+    for r in approx:
+        if lo + tol < r < hi - tol and not any(abs(r - z) <= tol for z in sols):
+            return False
+    return True
 
 
 def statement_set(st: Statement, x, D):
