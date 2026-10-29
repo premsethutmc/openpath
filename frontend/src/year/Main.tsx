@@ -76,7 +76,7 @@ type View =
   | { name: "setup"; sameYear?: boolean }
   | { name: "tile"; path: string[] }
   | { name: "topic-diagnostic"; competency: string; back: View }
-  | { name: "curriculum-practice"; competency: string; back: View }
+  | { name: "curriculum-practice"; competency: string; back: View; stage?: "teaching" | "practice" }
   | { name: "module"; competency: string; back: View }
   | { name: "stuck"; qid: string }
   | { name: "single"; qid: string; heading: string; note?: string }
@@ -154,7 +154,10 @@ function App() {
     const want = wanted.current;
     if (!want || !st?.release || !moduleFor(want)) return;
     wanted.current = null;
-    if (new URLSearchParams(location.search).get("practice") === "curriculum") setView({name:"curriculum-practice",competency:want,back:{name:"year"}});
+    const stage = new URLSearchParams(location.search).get("stage");
+    // a stage chosen on the lesson page applies once: a reload resumes the lesson where it was left
+    if (stage) { const u = new URL(location.href); u.searchParams.delete("stage"); history.replaceState(history.state, "", u); }
+    if (new URLSearchParams(location.search).get("practice") === "curriculum") setView({name:"curriculum-practice",competency:want,back:{name:"year"},stage:stage==="practice"?"practice":stage==="learn"?"teaching":undefined});
     else if (new URLSearchParams(location.search).get("diagnostic") === "topic" && st.enrolment?.grade === 7) setView({name:"topic-diagnostic",competency:want,back:{name:"year"}});
     else setView({name:"module",competency:want,back:{name:"year"}});
   }, [st?.release]);
@@ -281,7 +284,9 @@ function App() {
           key={`${learner}:${release.hash}:${view.competency}`}
           competency={view.competency} ctx={ctx}
           resumeKey={`openpath.curriculum-practice@1:${learner}:${st.enrolment.academicYear}:${release.hash}:${view.competency}`}
-          back={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner#c=${encodeURIComponent(view.competency)}`}
+          back={`/curriculum/?learner=${encodeURIComponent(learner)}#c=${encodeURIComponent(view.competency)}`}
+          initialStage={view.stage}
+          onAssess={() => setView({ name: "module", competency: view.competency, back: { name: "curriculum-practice", competency: view.competency, back: view.back } })}
         />
       </Shell>
     );

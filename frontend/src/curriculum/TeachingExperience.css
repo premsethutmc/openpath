@@ -125,3 +125,15 @@
 .geometry-visual text { fill: #292536; font: 600 16px Georgia,"Times New Roman",serif; }
 .geometry-visual figcaption { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 .teaching-support-note { padding: 10px 12px; border-left: 3px solid #aaa0dc; background: #f5f2fb; color: #5d5866; font-size: .86rem; }
+
+/* Lesson stages (Learn → Practice → Assessment): always visible under the lesson bar, large enough to tap. */
+.lesson-stages { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 10px 0 2px; padding: 0; counter-reset: none; }
+.lesson-stages button { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; min-height: 44px; padding: 0 6px; border: 1px solid #e0dbd2; border-radius: 8px; background: #fffefa; color: #4f4a43; font: 700 .86rem/1.1 Inter, system-ui, sans-serif; cursor: pointer; }
+.lesson-stages button span { display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: #efebe4; font-size: .72rem; }
+.lesson-stages li.here button { border-color: #6954c8; background: #f1eeff; color: #3f32a0; }
+.lesson-stages li.here button span { background: #6954c8; color: #fff; }
+.lesson-stages button:disabled { opacity: .55; cursor: default; }
+.practice-open .lesson-stages { width: min(100% - 28px, 620px); margin-inline: auto; }
+.practice-done { display: grid; gap: 10px; }
+.practice-done .primary { width: 100%; min-height: 50px; border: 0; }
+.teaching-nav a, .teaching-nav button { white-space: nowrap; }

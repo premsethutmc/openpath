@@ -19,7 +19,7 @@ function problemFromScreen(screen: Screen): FamilyProblem | null {
   return parsed?.supported ? parsed.problem : null;
 }
 
-function TeachingBlock({ module, screen, index, total, problem, q, practiceIds, resumeKey }: {
+function TeachingBlock({ module, screen, index, total, problem, q, practiceIds, resumeKey, repeatsHeading = false }: {
   module: NonNullable<ReturnType<typeof moduleFor>>;
   screen: Screen;
   index: number;
@@ -28,17 +28,20 @@ function TeachingBlock({ module, screen, index, total, problem, q, practiceIds, 
   q: Question | null;
   practiceIds: string[];
   resumeKey?: string;
+  /** the page heading already says this block's title (the idea is the lesson): not repeated */
+  repeatsHeading?: boolean;
 }) {
   const ownProblem = problem ?? problemFromScreen(screen);
   const presentation: TeachingPresentation | null = ownProblem ? teachingPresentationFrom({ module, screen, problem: ownProblem, question: q, practiceIds }) : null;
   const worked = presentation?.workedExample ?? null;
   const visual = presentation?.visual ? <TeachingVisualRenderer visual={presentation.visual} /> : null;
-  return <section className="teaching-block">
+  return <section className="teaching-block" data-unsupported={worked ? undefined : presentation?.unsupportedReason ?? "no worked example"}>
     <div className="teaching-step"><p className="teaching-label">{index === 0 ? "The idea" : `Example ${index}`}</p>{index > 0 ? <span>{index} of {Math.max(1, total - 1)}</span> : null}</div>
-    <h3>{screen.title}</h3>
+    {repeatsHeading ? null : <h3>{screen.title}</h3>}
     {displayedLines(screen).map((line, i) => <p key={i}>{line}</p>)}
     {visual ?? (screen.widget ? <Figure v={screen.widget} /> : null)}
-    {worked ? <ProgressiveWorkedExample example={worked} storageKey={resumeKey && `${resumeKey}:example:${index}`} /> : <p className="teaching-support-note">{presentation?.unsupportedReason ?? "A checked worked example is not available for this concept yet."}</p>}
+    {/* a block without a checked worked example shows its explanation only; why is kept for diagnostics, not shown to learners */}
+    {worked ? <ProgressiveWorkedExample example={worked} storageKey={resumeKey && `${resumeKey}:example:${index}`} /> : null}
   </section>;
 }
 
@@ -79,13 +82,18 @@ export function TeachingContent({ competency, topic, onPractice, resumeKey }: { 
   const primaryId = exampleId && exampleProblem && scope?.accepts(exampleProblem) ? exampleId : practice[0];
   const primaryQ = primaryId ? question(primaryId) : null;
   const primaryProblem = primaryQ ? problemOf(primaryQ.id) : null;
+  const heading = scope?.title ?? module?.title ?? topic.name;
+  const intro = scope?.introduction ?? topic.description;
+  const first = teaching[0];
+  // the first block is the idea itself: when it says exactly what the page heading and introduction say, say it once
+  const introRepeats = !!first && !!intro && displayedLines(first).join(" ").trim() === intro.trim();
   return <main className="teaching-page">
     <header className="teaching-head">
       <p className="teaching-crumb">{topic.breadcrumb}</p>
-      <h2>{scope?.title ?? module?.title ?? topic.name}</h2>
-      <p className="teaching-intro">{scope?.introduction ?? topic.description}</p>
+      <h2>{heading}</h2>
+      {intro && !introRepeats ? <p className="teaching-intro">{intro}</p> : null}
     </header>
-    {module && teaching.length ? teaching.map((screen, i) => <TeachingBlock key={`${competency}-${screen.title}-${i}`} module={module} screen={screen} index={i} total={teaching.length} problem={i === 0 ? primaryProblem : null} q={i === 0 ? primaryQ : null} practiceIds={practice} resumeKey={resumeKey} />) : <section className="teaching-block unavailable"><h3>Teaching is being prepared</h3><p>This topic does not yet have suitable teaching content.</p></section>}
+    {module && teaching.length ? teaching.map((screen, i) => <TeachingBlock key={`${competency}-${screen.title}-${i}`} module={module} screen={screen} index={i} total={teaching.length} problem={i === 0 ? primaryProblem : null} q={i === 0 ? primaryQ : null} practiceIds={practice} resumeKey={resumeKey} repeatsHeading={i === 0 && screen.title === heading} />) : <section className="teaching-block unavailable"><h3>Teaching is being prepared</h3><p>This topic does not yet have suitable teaching content.</p></section>}
     <section className="practice-invitation">
       <h3>Ready to try it?</h3>
       <p>Work through one question at a time. You can return to this explanation whenever you need it.</p>

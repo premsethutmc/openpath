@@ -75,6 +75,9 @@ for (const width of [360, 393]) for (const sample of cases) test(`${width}px ${s
     await page.getByRole("heading", { name: `Grade ${sample.grade} Mathematics`, exact: true }).waitFor();
     await page.getByText(/Loading .*evidence/).waitFor({ state: "detached" });
     for (const node of path) await page.locator(".tiles > li").filter({ has: page.locator(".tile-title", { hasText: node.title }) }).getByRole("button").first().click();
+    // the skill opens its lesson page: one clear first action, Learn → Practice → Assessment, no engineering detail
+    await page.getByRole("article", { name: "Lesson" }).waitFor();
+    await page.getByRole("link", { name: "Start learning", exact: true }).click();
 
     await page.getByRole("article", { name: "Mathematics teaching and practice" }).waitFor();
     assert.ok(await page.locator(".pair-visual, .movement-line").first().isVisible());
