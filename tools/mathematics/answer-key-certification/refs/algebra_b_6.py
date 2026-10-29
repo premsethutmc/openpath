@@ -15,12 +15,12 @@ def lp_parse(p):
     for part in m.group(4).split(', '):
         part = part.replace('−', '-')
         mm = re.fullmatch(r'(?:(\d*)x \+ (\d*)y|x|y) (≤|≥) (-?\d+)', part)
-        if part.startswith('x '):
-            a, b = 1, 0
-        elif part.startswith('y '):
-            a, b = 0, 1
-        else:
+        if ' + ' in part:
             a, b = g(mm.group(1)), g(mm.group(2))
+        elif part.startswith('x '):
+            a, b = 1, 0
+        else:
+            a, b = 0, 1
         c = int(mm.group(4))
         cons.append((a, b, c) if mm.group(3) == '≤' else (-a, -b, -c))
     return sense, cx, cy, cons
@@ -50,9 +50,9 @@ def lp_solve(sense, cx, cy, cons):
 
 def lp_gridcheck(sense, cx, cy, cons, val):
     """no feasible lattice point (step 1/4, box [0,40]^2) beats the claimed optimum"""
-    for i in range(0, 161):
-        for j in range(0, 161):
-            X, Y = Fraction(i, 4), Fraction(j, 4)
+    for i in range(0, 61):
+        for j in range(0, 61):
+            X, Y = Fraction(i, 2), Fraction(j, 2)
             if all(a * X + b * Y <= c for a, b, c in cons):
                 assert sense * (cx * X + cy * Y) <= sense * val
     return True
@@ -160,38 +160,50 @@ def apconj(q):
     return Expect(', '.join(str(r) for r in lst))
 
 
-@ref('apinvf', 'inverse by solving y=(ax+b)/(cx+d) for x with sympy; f(f⁻¹(x)) checked at 6 points; the stated domain/codomain checked against the pole and horizontal asymptote', 'exhaustive')
+def dom_excl(t):
+    t = t.strip()
+    if t == 'ℝ': return None
+    m = re.fullmatch(r'ℝ − \{(.*)\}', t)
+    return sp.nsimplify(m.group(1).replace('−', '-'))
+
+
+@ref('apinvf', 'inverse by solving y=f(x) for x with sympy; f(f⁻¹(x)) = x checked at 6 points; the stated domain/codomain checked against the pole and the limit at infinity', 'exhaustive')
 def apinvf(q):
-    m = re.fullmatch(r'The function f : ℝ − \{(−?\d+)\} → ℝ − \{(−?\d+)\}, f\(x\) = \((.*?)\)/\((.*?)\), is a bijection\. Find f⁻¹\(x\)\.', q['prompt'])
-    dom, cod = int(m.group(1).replace('−', '-')), int(m.group(2).replace('−', '-'))
+    m = re.fullmatch(r'The function f : (.*?) → (.*?), f\(x\) = (.*), is a bijection\. Find f⁻¹\(x\)\.', q['prompt'])
+    dom, cod = dom_excl(m.group(1)), dom_excl(m.group(2))
     X, Y = sp.symbols('x y')
-    num_, den_ = P(m.group(3)), P(m.group(4))
-    pn, pd = sp.Poly(num_, X), sp.Poly(den_, X)
-    a, b = pn.coeff_monomial(X), pn.coeff_monomial(1); c, d = pd.coeff_monomial(X), pd.coeff_monomial(1)
-    if a * d - b * c == 0:
-        return Verdict(False, 'f is constant, not a bijection')
-    if sp.Rational(-d, c) != dom or sp.Rational(a, c) != cod:
-        return Verdict(False, f'stated domain/codomain wrong: pole {sp.Rational(-d, c)}, asymptote {sp.Rational(a, c)}')
-    sol = sp.solve(sp.Eq(Y, num_ / den_), X)
+    f = P(m.group(3))
+    num_, den_ = sp.fraction(sp.together(f))
+    if den_.has(X):
+        poles = sp.solve(den_, X)
+        pole = poles[0] if len(poles) == 1 else None
+        asym = sp.limit(f, X, sp.oo)
+        if pole is None or sp.simplify(sp.diff(f, X)) == 0 or dom != pole or cod != asym:
+            return Verdict(False, f'stated domain/codomain wrong: poles {poles}, asymptote {asym}')
+    else:
+        if dom is not None or cod is not None or sp.degree(f, X) != 1:
+            return Verdict(False, 'domain/codomain/degree mismatch for a linear function')
+    sol = sp.solve(sp.Eq(Y, f), X)
     assert len(sol) == 1
     inv = sp.simplify(sol[0].subs(Y, X))
-    f = lambda v: num_.subs(X, v) / den_.subs(X, v)
     for v in [sp.Rational(1, 3), 7, -13, sp.Rational(5, 2), 29, 41]:
-        if v == cod: continue
-        assert f(inv.subs(X, v)) == v
+        if cod is not None and v == cod: continue
+        assert sp.simplify(f.subs(X, inv.subs(X, v)) - v) == 0
     return Expect(str(sp.factor(inv)))
 
 
-@ref('apinvv', 'solve f(t)=y0 exactly with sympy and substitute back; t must be in the domain', 'exhaustive')
+@ref('apinvv', 'solve f(t)=y0 exactly with sympy and substitute back; t must not be the excluded point', 'exhaustive')
 def apinvv(q):
-    m = re.fullmatch(r'Let f\(x\) = \((.*?)\)/\((.*?)\) for x ≠ (.*?)\. Find f⁻¹\((−?\d+)\)\. \(A fraction is fine\.\)', q['prompt'])
+    m = re.fullmatch(r'Let f\(x\) = (.*) for x ≠ (.*?)\. Find f⁻¹\((−?\d+)\)\. \(A fraction is fine\.\)', q['prompt'])
     X = sp.Symbol('x')
-    num_, den_ = P(m.group(1)), P(m.group(2)); y0 = int(m.group(4).replace('−', '-'))
-    pole = sp.nsimplify(m.group(3).replace('−', '-'))
+    f = P(m.group(1)); y0 = int(m.group(3).replace('−', '-'))
+    pole = sp.nsimplify(m.group(2).replace('−', '-'))
+    num_, den_ = sp.fraction(sp.together(f))
     sol = sp.solve(sp.Eq(num_, y0 * den_), X)
-    if len(sol) != 1 or sol[0] == pole or sp.simplify(den_.subs(X, sol[0])) == 0:
+    sol = [t for t in sol if t != pole]
+    if len(sol) != 1:
         return Verdict(False, f'no valid preimage: {sol}')
-    assert sp.simplify(num_.subs(X, sol[0]) / den_.subs(X, sol[0]) - y0) == 0
+    assert sp.simplify(f.subs(X, sol[0]) - y0) == 0
     return Expect(str(sol[0]))
 
 

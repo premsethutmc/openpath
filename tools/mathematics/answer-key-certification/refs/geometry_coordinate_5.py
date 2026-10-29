@@ -119,10 +119,7 @@ def astanc(q):
     m = re.search(r'line y = (.*?) is a tangent to the (\w+) (.+?)\.$', p)
     line = m.group(1)
     c_ = sp.Symbol('c')
-    L = expr(line.replace('c', 'c_')) if False else sp.sympify(line.replace('−', '-').replace('x', '*x') if False else line)
-    mexp = None
-    # slope of the line  y = m x + c   or  y = c
-    lhs = sp.sympify(re.sub(r'(\d)x', r'\1*x', line.replace('-', '-')), locals={'x': X, 'c': c_})
+    lhs = expr(line)
     conic = analyse(m.group(3))
     F = conic['e'].subs(Y, lhs)
     Pl = sp.Poly(sp.expand(F), X)

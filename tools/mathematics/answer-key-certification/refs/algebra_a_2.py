@@ -118,32 +118,30 @@ def affigrel(q):
 @ref('afletter', 'the machine steps applied in order to a symbol with SymPy', 'exhaustive')
 def afletter(q):
     p = q['prompt']
-    var = re.search(r'put in is (\w)\.', p).group(1)
-    v = sp.Symbol(var)
-    body = re.search(r'machine (.+?) any number put in(.*?)\. The number', p)
-    text = body.group(0)
-    e = v
-    steps = re.split(r', then ', re.sub(r'^machine ', '', body.group(1) + body.group(2)).replace('The number', ''))
-    # normalise: verbs with "any number put in" removed
-    t = re.sub(r' any number put in', '', body.group(1) + body.group(2) + ' ') if False else None
-    sent = text.replace('A number machine ', '').replace(' any number put in', '').split('. The number')[0]
-    sent = sent.replace(' by', ' by')
-    for part in re.split(r', then ', sent):
+    var = sp.Symbol(re.search(r'put in is (\w)\.', p).group(1))
+    body = re.search(r'A number machine (.+?)\. The number put in', p).group(1)
+    e = var
+    for i, part in enumerate(body.split(', then ')):
         part = part.strip()
+        if i == 0:
+            part = re.sub(r'^adds (\d+) to any number put in$', r'adds \1', part)
+            part = re.sub(r'^takes (\d+) away from any number put in$', r'takes \1 away', part)
+            part = re.sub(r'^multiplies any number put in by (\d+)$', r'multiplies by \1', part)
+            part = re.sub(r'^divides any number put in by (\d+)$', r'divides by \1', part)
         m = re.fullmatch(r'adds (\d+)', part)
         if m:
             e = e + int(m.group(1)); continue
-        m = re.fullmatch(r'takes (\d+) away from', part) or re.fullmatch(r'takes (\d+) away', part) or re.fullmatch(r'subtracts (\d+)', part)
+        m = re.fullmatch(r'takes (\d+) away', part)
         if m:
             e = e - int(m.group(1)); continue
-        m = re.fullmatch(r'multiplies by (\d+)', part) or re.fullmatch(r'multiplies (\d+)', part)
+        m = re.fullmatch(r'multiplies by (\d+)', part)
         if m:
             e = e * int(m.group(1)); continue
         m = re.fullmatch(r'divides by (\d+)', part)
         if m:
             e = e / int(m.group(1)); continue
         return Unsupported('step not recognised: ' + part)
-    return Expect(str(sp.expand(e)).replace('**', '^'))
+    return Expect(str(sp.expand(e)))
 
 
 @ref('afmatch', 'linear rule fitted exactly through the four tabulated points (all four must be collinear)', 'exhaustive')
@@ -263,11 +261,13 @@ def _box(q, lhs_src, eq_src):
 
 
 def _box_sentence(q):
-    sents = [t for t in re.split(r'(?<=[\)\dxyz²³])\. ', U(q['prompt'])) if '□' in t and ' = ' in t]
-    if len(sents) != 1:
+    t = U(q['prompt'])
+    if '□' not in t:
         return None
-    t = sents[0].rstrip('.')
     t = t.split(' What number')[0].rstrip('. ')
+    t = t.rsplit('. ', 1)[-1]
+    if ' = ' not in t:
+        return None
     return t.split(' = ', 1)
 
 
@@ -359,7 +359,7 @@ def ahsub(q):
 
 @ref('ahmatch', 'linear rule fitted exactly through the four stated values', 'exhaustive')
 def ahmatch(q):
-    v = [int(t) for t in re.search(r'uses ([\d, and]+) (?:matchsticks|square tiles|\w+)', q['prompt']).group(1).replace(' and', '').split(',')]
+    v = [int(t) for t in re.search(r'uses ([\d, and]+) (?:matchsticks|square tiles|\w+)', q['prompt']).group(1).replace(' and', ',').split(',')]
     d = {v[i + 1] - v[i] for i in range(len(v) - 1)}
     if len(d) != 1:
         return Ambiguous('not linear')

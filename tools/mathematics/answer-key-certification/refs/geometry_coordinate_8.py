@@ -404,15 +404,18 @@ def airatio(q):
     return Unsupported('unknown unit')
 
 
-@ref('awcen', method='triangle built from coordinates; medians intersected exactly; AG measured as a fraction of AD')
+@ref('awcen', method='triangle built from exact coordinates; medians intersected exactly; AG/AD and GD/AD read off, then the asked length scaled from the given one')
 def awcen(q):
-    ad = R(re.search(r'AD = (\d+(?:\.\d+)?) cm', q['prompt']).group(1))
+    p = q['prompt']
     A, B, C = (sp.Integer(0), sp.Integer(6)), (sp.Integer(-3), sp.Integer(0)), (sp.Integer(5), sp.Integer(0))
     D = ((B[0] + C[0]) / 2, (B[1] + C[1]) / 2)
     E = ((A[0] + C[0]) / 2, (A[1] + C[1]) / 2)
     s, t = sp.symbols('s t')
     sol = sp.solve([A[0] + s * (D[0] - A[0]) - B[0] - t * (E[0] - B[0]), A[1] + s * (D[1] - A[1]) - B[1] - t * (E[1] - B[1])], [s, t])
-    return Expect(dec(ad * sol[s]))
+    frac = {'AD': sp.Integer(1), 'AG': sol[s], 'GD': 1 - sol[s]}
+    g = re.search(r'If (AD|AG|GD) = (\d+(?:\.\d+)?) cm, find (AD|AG|GD)', p)
+    k = R(g.group(2)) / frac[g.group(1)]
+    return Expect(dec(k * frac[g.group(3)]))
 
 
 @ref('amceva', method='exact coordinates: place D,E from the stated ratios (internal or external), intersect the cevians (Ceva) or join D,E (Menelaus) with AB and read AF:FB')

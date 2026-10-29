@@ -24,10 +24,10 @@ def mtext(M):
 def apmcon(q):
     m = re.fullmatch(r'Construct the (\d+) × (\d+) matrix A = \[aᵢⱼ\] whose elements are given by aᵢⱼ = (.*?)(, and write its transpose Aᵀ)?\. Write (?:A|Aᵀ) as .*', q['prompt'])
     r, c = int(m.group(1)), int(m.group(2))
-    rule = clean(m.group(3)).replace(' ', '')
-    rule = re.sub(r'(\d)([ij])', r'\1*\2', rule).replace('ij', 'i*j')
-    f = eval('lambda i, j: ' + rule)
-    A = [[f(i, j) for j in range(1, c + 1)] for i in range(1, r + 1)]
+    I_, J_ = sp.symbols('i j')
+    rule = re.sub(r'\|([^|]+)\|', r'Abs(\1)', m.group(3))
+    ex = P(rule, i=I_, j=J_, Abs=sp.Abs)
+    A = [[ex.subs({I_: i, J_: j}) for j in range(1, c + 1)] for i in range(1, r + 1)]
     if m.group(4):
         A = [[A[i][j] for i in range(r)] for j in range(c)]
     return Expect('[' + ', '.join('[' + ', '.join(str(v) for v in row) + ']' for row in A) + ']')

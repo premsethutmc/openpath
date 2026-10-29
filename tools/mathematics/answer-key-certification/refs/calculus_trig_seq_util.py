@@ -278,7 +278,24 @@ def value_pred(q, value, rationalise=False):
             return False, 'not a single value'
         if not mp_close(v, value):
             return False, f'value differs: stored {text!r} = {sp.N(v, 15)} vs derived {sp.N(value, 15)}'
-        if rationalise and re.search(r'/\s*(?:\([^)]*√|[^()\s]*√)', text.replace(' ', '')) and not re.search(r'√\d+\)?/\d+$', text):
+        if rationalise and _radical_denominator(text):
             return False, f'FORM: denominator of {text!r} still contains a root'
         return True, 'value matches'
     return pred
+
+
+def _radical_denominator(text):
+    t = text.replace(' ', '')
+    for m in re.finditer(r'/', t):
+        i = m.end()
+        if i < len(t) and t[i] == '(':
+            j = _balanced(t, i); den = t[i:j]
+        else:
+            mm = re.match(r'[^+\-−*/()]*', t[i:]); den = mm.group(0)
+        if '√' in den or 'sqrt' in den:
+            return True
+    return False
+
+
+def exact_verdict(q, value, rationalise=False):
+    return verdict_mc(q, value_pred(q, value, rationalise))
