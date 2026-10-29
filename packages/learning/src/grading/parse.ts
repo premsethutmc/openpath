@@ -21,7 +21,7 @@ export type ParseResult =
   | { status: "invalid"; reason: InvalidReason; detail: string }
   | { status: "ambiguous"; readings: [string, string]; detail: string };
 /** what was written, for form checks (§4.3): kept separate from the value */
-export interface Notation { /** a sum of monomials: no bracketed sum multiplied, divided or raised to a power (function brackets do not count) */ expanded: boolean; mixedNumber: boolean; decimal: boolean; fraction: boolean; inequality: boolean; braces: boolean; parentheses: boolean; equation: boolean; constant: boolean; groupingCommas: boolean }
+export interface Notation { /** radicands written under √ (as text), whether any √ stands in a denominator, and whether a written numeric fraction is not in lowest terms */ surds: string[]; surdInDenominator: boolean; /** pieces of a set joined by the word "or" (not ∪) */ orJoin: boolean; unreducedFraction: boolean; /** a sum of monomials: no bracketed sum multiplied, divided or raised to a power (function brackets do not count) */ expanded: boolean; mixedNumber: boolean; decimal: boolean; fraction: boolean; inequality: boolean; braces: boolean; parentheses: boolean; equation: boolean; constant: boolean; groupingCommas: boolean }
 
 /** the semantics of a question's answer from its stored type and answer (stage 2: before contract@2 carries it explicitly) */
 export function semanticsOf(q: { type: string; answer: string; options?: readonly string[] | null }): Semantics {
@@ -47,7 +47,7 @@ class Invalid extends Error { constructor(public reason: InvalidReason, public d
 class Ambiguous extends Error { constructor(public readings: [string, string], public detail: string) { super(detail); } }
 const fail = (reason: InvalidReason, detail: string): never => { throw new Invalid(reason, detail); };
 
-const blankNotation = (): Notation => ({ expanded: true, mixedNumber: false, decimal: false, fraction: false, inequality: false, braces: false, parentheses: false, equation: false, constant: false, groupingCommas: false });
+const blankNotation = (): Notation => ({ orJoin: false, surds: [], surdInDenominator: false, unreducedFraction: false, expanded: true, mixedNumber: false, decimal: false, fraction: false, inequality: false, braces: false, parentheses: false, equation: false, constant: false, groupingCommas: false });
 const MAX = 300;
 
 // ---------------------------------------------------------------------------------------------------------------- tokens
@@ -156,6 +156,25 @@ export function isExpanded(n: Node): boolean {
     return !isSum(v);
   };
   return factor(u);
+}
+/** what a written exact value looks like (form@2 facts): the radicands, a √ in a denominator, an unreduced numeric fraction */
+function writtenFacts(n: Node, out: Notation, inDen = false): void {
+  const hasSqrt = (x: Node): boolean => x.k === "sqrt" || (x.k === "group" || x.k === "neg" || x.k === "abs" ? hasSqrt(x.a) : x.k === "bin" ? hasSqrt(x.a) || hasSqrt(x.b) : x.k === "fn" ? hasSqrt(x.a) : false);
+  switch (n.k) {
+    case "sqrt": out.surds.push(show(unwrapG(n.a)).replace(/^\((.*)\)$/, "$1")); if (inDen) out.surdInDenominator = true; writtenFacts(n.a, out, inDen); return;
+    case "group": case "neg": case "abs": writtenFacts(n.a, out, inDen); return;
+    case "fn": writtenFacts(n.a, out, false); return;
+    case "bin":
+      if (n.op === "/") {
+        const a = unwrapG(n.a), b = unwrapG(n.b);
+        if (a.k === "num" && b.k === "num") out.fraction = true;
+        if (a.k === "num" && b.k === "num" && !/\./.test(a.v + b.v)) { const x = BigInt(a.v), y = BigInt(b.v); let g = x, h = y; while (h) [g, h] = [h, g % h]; if (y === 1n || g !== 1n) out.unreducedFraction = true; }
+        if (hasSqrt(n.b)) out.surdInDenominator = true;
+        writtenFacts(n.a, out, inDen); writtenFacts(n.b, out, true); return;
+      }
+      writtenFacts(n.a, out, inDen); writtenFacts(n.b, out, inDen); return;
+    default: return;
+  }
 }
 /** a compact human form for clarification prompts */
 const human = (n: Node): string => show(n).replace(/\*/g, "").replace(/^\((.*)\)$/, "$1");
@@ -415,11 +434,13 @@ const unwrap = (toks: Tok[], open: Tok["t"], close: Tok["t"]): Tok[] | null => {
 };
 const textOf = (toks: Tok[]) => toks.map((t) => (t.sp ? " " : "") + ("v" in t ? t.v : t.t === "pi" ? "π" : t.t === "e" ? "e" : t.t === "sqrt" ? "√" : t.t === "inf" ? "∞" : t.t === "cup" ? "∪" : t.t)).join("").trim();
 /** a single exact value (no letters): √, π, fractions, decimals */
-const exactValue = (toks: Tok[], n: Notation): string => {
+const exactValue = (toks: Tok[], n: Notation, mixed = false): string => {
   if (toks.length === 0) fail("empty", "an empty item");
+  if (mixed && /^-?\s*\d+\s+\d+\s*\/\s*\d+$/.test(textOf(toks))) return rationalValue(parseRational(textOf(toks), true, n));
   const x = parseExpr(toks, { letters: false });
   if (/\./.test(textOf(toks))) n.decimal = true;
   n.expanded = n.expanded && isExpanded(x.node);
+  writtenFacts(x.node, n);
   const v = exactOf(x.node);
   return v ? printExact(v) : show(x.node);
 };
@@ -554,7 +575,7 @@ function parseRealSubset(toks: Tok[], n: Notation): string {
     const t = toks[k];
     if (t.t === "(" || t.t === "[") depth++;
     if (t.t === ")" || t.t === "]") depth--;
-    if (depth === 0 && (t.t === "cup" || (t.t === "var" && (t.v === "U" || t.v === "#or")))) { pieces.push([]); continue; }
+    if (depth === 0 && (t.t === "cup" || (t.t === "var" && (t.v === "U" || t.v === "#or")))) { if (t.t === "var" && t.v === "#or") n.orJoin = true; pieces.push([]); continue; }
     pieces[pieces.length - 1].push(t);
   }
   if (pieces.some((p) => !p.length)) fail("syntax", "an empty part of the answer");
@@ -660,7 +681,7 @@ export function parseResponse(sem: Semantics, raw: string): ParseResult {
     if (last.t === "op" && !(sem.kind === "real-subset")) fail("trailing-operator", `"${last.v}" has nothing after it`);
     let canonical: string;
     switch (sem.kind) {
-      case "exact-real": canonical = exactValue(toks, n); break;
+      case "exact-real": canonical = exactValue(toks, n, sem.mixed); break;
       case "expression": case "antiderivative": canonical = parseExpressionAnswer(toks, sem, n); break;
       case "solution-set": canonical = parseList(toks, { ...sem, mixed: false }, n); break;
       case "roots": case "tuple": canonical = parseList(toks, sem, n); break;

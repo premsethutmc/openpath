@@ -16,18 +16,21 @@ import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { contractFor } from "../src/assessment";
 import { FAMILIES, pool, problemOf } from "../src/families";
+import { contractV2 } from "../src/grading/contract";
 
 const MANUAL: { id: string; reason: string; detail: string; since: string; evidence: string }[] = [];
 
 const entries: { id: string; status: "quarantined"; reason: string; detail: string; since: string; evidence: string }[] = [];
 for (const [fam, def] of FAMILIES) {
-  if (!def.contract) continue; // only a contract can disagree with its own question
   for (const q of pool(fam).items) {
     for (const sfx of ["", ":mc", ":w"]) {
       const id = q.id + sfx;
       if (sfx && !problemOf(id)) continue;
       const c = contractFor(id);
-      if (c?.verification === "held") entries.push({ id, status: "quarantined", reason: "contract-inconsistency", detail: c.reason, since: "2026-10-29", evidence: "MATH_CURRICULUM_GRADING_AUDIT_REPORT.md D09" });
+      if (c?.verification === "held") { entries.push({ id, status: "quarantined", reason: "contract-inconsistency", detail: c.reason, since: "2026-10-29", evidence: "MATH_CURRICULUM_GRADING_AUDIT_REPORT.md D09" }); continue; }
+      // contract@2: the stored answer is not readable by the strict parser, or does not satisfy its own stated form
+      const v2 = contractV2(id);
+      if (v2.inconsistencies.length) entries.push({ id, status: "quarantined", reason: "contract-inconsistency", detail: v2.inconsistencies.join("; "), since: "2026-10-29", evidence: "contract@2 build (Phase C stage 3; D18)" });
     }
   }
 }

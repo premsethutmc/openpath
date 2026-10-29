@@ -31528,7 +31528,7 @@
    "competency": "MATH.calculus.higher-derivatives",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "9ff756d8",
+   "contentHash": "33435a28",
    "state": "draft",
    "history": [
     {
@@ -31553,6 +31553,22 @@
      "role": "engineer",
      "at": "2026-10-20T09:28:27.196Z",
      "contentHash": "9ff756d8",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-29T04:51:07.474Z",
+     "contentHash": "42201669",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-29T05:01:51.284Z",
+     "contentHash": "33435a28",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

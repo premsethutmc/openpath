@@ -10,8 +10,8 @@ import { examplesFor } from "./syntax.ts";
 
 export type Read = { ok: true; canonical: string; value: string; semantics: Semantics; parse: Extract<ParseResult, { status: "parsed" }> } | { ok: false; semantics: Semantics; parse: Exclude<ParseResult, { status: "parsed" }> };
 
-export function readResponse(q: { type: string; answer: string; options?: readonly string[] | null }, response: string, variable: string | null = null): Read {
-  const semantics = { ...semanticsOf(q), variable };
+export function readResponse(q: { type: string; answer: string; options?: readonly string[] | null }, response: string, variable: string | null = null, sem?: Semantics): Read {
+  const semantics = sem ?? { ...semanticsOf(q), variable };
   const parse = parseResponse(semantics, response);
   return parse.status === "parsed" ? { ok: true, canonical: parse.canonical, value: parse.value, semantics, parse } : { ok: false, semantics, parse };
 }

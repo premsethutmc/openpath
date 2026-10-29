@@ -55793,13 +55793,13 @@
         "Differentiate once (product and chain rules), simplify, then differentiate the result again; collect like terms at the end."
        ],
        "math": [
-        "If y = 3xeˣ, find d²y/dx².",
-        "dy/dx = 3e^x(x + 1)",
-        "Differentiate again: d²y/dx² = 3e^x(x + 2)"
+        "If y = e^(−x) cos x, find d²y/dx².",
+        "dy/dx = e^(−x)(−cos(x) − sin(x))",
+        "Differentiate again: d²y/dx² = e^(−x)(2sin(x))"
        ]
       }
      ],
-     "guided": "gen:aqd2:3,1,2",
+     "guided": "gen:aqd2:3,2,3",
      "check": "gen:aqd2:2,3,2"
     },
     {
@@ -55815,13 +55815,13 @@
         "Write dy/dx = eᵃˣ(…), then differentiate the bracket and the eᵃˣ again."
        ],
        "math": [
-        "If y = 4xeˣ, find d²y/dx².",
-        "dy/dx = 4e^x(x + 1)",
-        "Differentiate again: d²y/dx² = 4e^x(x + 2)"
+        "If y = 4xe^(2x), find d²y/dx².",
+        "dy/dx = 4e^(2x)(2x + 1)",
+        "Differentiate again: d²y/dx² = 4e^(2x)(4x + 4)"
        ]
       }
      ],
-     "guided": "gen:aqd2:4,-1,1",
+     "guided": "gen:aqd2:2,5,3",
      "check": "gen:aqd2:2,3,3:mc"
     },
     {
@@ -55842,8 +55842,8 @@
        ]
       }
      ],
-     "guided": "gen:aqd2:3,2,3",
-     "check": "gen:aqd2:3,1,1:mc"
+     "guided": "gen:aqd2:2,5,1",
+     "check": "gen:aqd2:4,-1,3:mc"
     },
     {
      "id": "check_what_it_uses",
@@ -55859,18 +55859,18 @@
        ]
       }
      ],
-     "guided": "gen:aqd2:3,2,4",
-     "check": "gen:aqd2:4,-1,3"
+     "guided": "gen:aqd2:1,5,4",
+     "check": "gen:aqd2:4,-1,2"
     }
    ],
    "practice": [
-    "gen:aqd2:2,5,3",
-    "gen:aqd2:2,5,1:mc",
-    "gen:aqd2:1,5,4",
+    "gen:aqd2:1,5,1",
+    "gen:aqd2:3,1,2:mc",
+    "gen:aqd2:0,3,3",
     "gen:aqd2rel:2,3,0"
    ],
    "transfer": [
-    "gen:aqd2:1,5,1:w"
+    "gen:aqd2:0,3,1:w"
    ],
    "retention": [
     "gen:aqd2:3,2,1",
@@ -55907,7 +55907,7 @@
     "examples": [
      "gen:aqd2:3,-1,3",
      "gen:aqd2:2,3,1",
-     "gen:aqd2:3,1,3"
+     "gen:aqd2:4,-1,1"
     ]
    }
   },

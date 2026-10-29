@@ -7,6 +7,7 @@ import { describe, expect, test } from "bun:test";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { contractFor } from "./assessment.ts";
+import { contractV2 } from "./grading/contract.ts";
 import { moduleFor, modules, poolFamilies, question, quarantinedFromModules, withoutQuarantined } from "./content.ts";
 import { FAMILIES, inPool, phasePool, pool, problemOf, variantsOf, type Phase } from "./families.ts";
 import { decide, creditOf } from "./grade.ts";
@@ -25,19 +26,23 @@ const FAMS = [...new Set(Q.map((id) => id.split(":")[1]))];
 
 const LONG = 900_000;
 describe("registry", () => {
-  test("lists exactly the 951 word-form presentations found by the audit (D09)", () => {
-    expect(Q.length).toBe(951);
-    expect(FAMS.sort()).toEqual(["adexp", "aiintx", "auaps"]);
-    expect(Q.every((id) => id.endsWith(":w"))).toBe(true);
+  test("lists the 951 word-form presentations found by the audit (D09) and the 20 aqd2 presentations whose stored answer the strict parser reads two ways (D18)", () => {
+    expect(Q.length).toBe(971);
+    expect(FAMS.sort()).toEqual(["adexp", "aiintx", "aqd2", "auaps"]);
+    expect(Q.filter((id) => !id.startsWith("gen:aqd2:")).every((id) => id.endsWith(":w"))).toBe(true);
+    expect(Q.filter((id) => id.startsWith("gen:aqd2:")).length).toBe(20);
   }, LONG);
-  test("is current: every held contract is quarantined and every entry is a held contract or a reviewed manual entry", () => {
+  test("is current: every held contract is quarantined, every other entry is a contract@2 inconsistency, and a sample finds no unlisted inconsistency", () => {
     const held = new Set<string>();
     for (const [fam, def] of FAMILIES) {
       if (!def.contract) continue;
       for (const q of pool(fam).items) for (const s of ["", ":mc", ":w"]) { const id = q.id + s; if ((!s || problemOf(id)) && contractFor(id)?.verification === "held") held.add(id); }
     }
     expect([...held].filter((id) => !quarantined(id))).toEqual([]);
-    expect(Q.filter((id) => !held.has(id) && statusEntry(id)!.evidence.indexOf("manual") < 0)).toEqual([]);
+    expect(Q.filter((id) => !held.has(id) && !contractV2(id).inconsistencies.length && statusEntry(id)!.evidence.indexOf("manual") < 0)).toEqual([]);
+    const missed: string[] = [];
+    for (const [fam] of FAMILIES) { const it = pool(fam).items; for (let i = 0; i < it.length; i += Math.max(1, Math.floor(it.length / 8))) for (const s of ["", ":w"]) { const id = it[i].id + s; if ((!s || problemOf(id)) && contractV2(id).inconsistencies.length && !quarantined(id)) missed.push(id); } }
+    expect(missed).toEqual([]);
   }, LONG);
   test("definitions are kept: every quarantined question still builds and keeps its answer", () => {
     for (const id of Q) expect(problemOf(id)?.id).toBe(id);
@@ -65,8 +70,14 @@ describe("selectors never return a quarantined question", () => {
     expect(f.transfer).toEqual(m.transfer);
     quarantinedFromModules.length = 0;
   }, LONG);
+  test("a typed form derived from a selectable multiple-choice id is checked again (typed aqd2 is quarantined, its :mc form is not)", () => {
+    const typed = Q.filter((x) => x.startsWith("gen:aqd2:") && !x.endsWith(":w"));
+    expect(typed.length).toBeGreaterThan(0);
+    for (const m of modules.filter((x) => poolFamilies(x).includes("aqd2"))) expect(Object.values(moduleQuestions(m)).flat().filter((x) => typeof x === "string" && quarantined(x))).toEqual([]);
+  }, LONG);
   test("variants (recovery / investigate) of every quarantined problem's typed form", () => {
     for (const id of Q.filter((_, i) => i % 7 === 0)) expect(variantsOf(problemOf(id.replace(/:w$/, ""))!).map((v) => v.id).filter(quarantined)).toEqual([]);
+    for (const id of Q.filter((x) => x.startsWith("gen:aqd2:") && !x.endsWith(":w"))) expect(phasePool("aqd2", "practice").concat(phasePool("aqd2", "check"), phasePool("aqd2", "diagnostic"), phasePool("aqd2", "retention"))).not.toContain(id);
   }, LONG);
   test("next unseen question from the pool, every phase, for the affected modules", () => {
     const empty = readRecords("L", []);

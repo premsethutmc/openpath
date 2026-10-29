@@ -53,6 +53,9 @@ FORM_RULES = [
 def form_rules(prompt, expanded):
     p = (prompt or '').lower()
     rules = [name for name, rx in FORM_RULES if re.search(rx, p)]
+    # "in interval notation (or as an inequality in x)" permits both notations: no notation requirement
+    if re.search(r'interval notation \(or as an inequality', p):
+        rules = [r for r in rules if r not in ('interval-notation', 'inequality-form')]
     if expanded and 'expanded' not in rules:
         rules.append('expanded')
     return rules
@@ -692,7 +695,7 @@ def numeric_form(text):
     return 'other'
 
 
-FORM_VIOLATES = {'mixed': {'improper'}, 'improper-mixed': {'reduced', 'mixed-number', 'improper'}, 'unreduced-ratio': {'reduced'}, 'fraction': {'mixed-number'}, 'unreduced-fraction': {'reduced', 'mixed-number'},
+FORM_VIOLATES = {'mixed': {'improper', 'decimal'}, 'improper-mixed': {'reduced', 'mixed-number', 'improper', 'decimal'}, 'unreduced-ratio': {'reduced'}, 'fraction': {'mixed-number', 'decimal'}, 'unreduced-fraction': {'reduced', 'mixed-number', 'decimal'},
                  'decimal': {'reduced', 'mixed-number', 'improper'}, 'integer': set()}
 
 

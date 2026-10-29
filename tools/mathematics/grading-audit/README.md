@@ -38,3 +38,14 @@ independently established only for questions with a verified generator contract.
 
 `backend/vendor-deps.sh` clones the exact pinned versions from `backend/requirements.txt` (and SymPy 1.14.0 / mpmath 1.3.0 for
 the oracle) from GitHub release tags into `~/.cache/openpath-vendor` and prints the `PYTHONPATH`. Use it where PyPI is unreachable.
+
+## Oracle change log
+
+Every change to the oracle's reading of prompts or answers is listed here, with the reason. A change is made only when the oracle
+misreads mathematics or an instruction, never to make a production verdict pass.
+
+| Date | Change | Reason |
+|---|---|---|
+| 2026-10-28 | reader: `xlogx`, `sec x tan x`, exact decimals, mixed numbers inside lists, `or`/`and` words | Phase A: oracle misread these (checked against hand fixtures) |
+| 2026-10-29 | form rules: "interval notation (or as an inequality in x)" permits both notations | the instruction explicitly allows an inequality; the oracle treated it as a requirement |
+| 2026-10-29 | form rules: "as a decimal" is violated by a fraction or mixed number | the oracle listed decimals as violating fraction rules but not the reverse |

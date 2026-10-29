@@ -192,6 +192,8 @@ export interface Assessment {
   recordAs?: string;
   /** set when the response is not (yet) an answer: the strict parser's reason (grading/parse.ts) */
   unreadable?: { reason: string; detail: string };
+  /** the required-form check (grading/contract.ts applyForms), when the question states a form */
+  form?: { rule: string; result: "satisfied" | "violated" | "undeterminable" };
   ms: number;
 }
 export interface Submission { response: string; working?: readonly string[]; legacyCorrect?: boolean | null; clarifications?: number }
