@@ -124,7 +124,7 @@ def aubin(q):
 
 @ref('audk', 'triangle area by the shoelace determinant solved for k with sympy (both signs), cross-checked with Heron on the solutions', 'exhaustive')
 def audk(q):
-    m = re.fullmatch(r'The area of the triangle with vertices \((.*?), (.*?)\), \((.*?), (.*?)\) and \(k, (.*?)\) is (\d+) square units\. Using determinants, find the possible values of k \(fractions are fine\)\.', q['prompt'])
+    m = re.fullmatch(r'The area of the triangle with vertices \((.*?), (.*?)\), \((.*?), (.*?)\) and \(k, (.*?)\) is (\d+) square units?\. Using determinants, find the possible values of k \(fractions are fine\)\.', q['prompt'])
     x1, y1, x2, y2, y3 = [int(m.group(i).replace('−', '-')) for i in (1, 2, 3, 4, 5)]; A = int(m.group(6))
     D = sp.Matrix([[x1, y1, 1], [x2, y2, 1], [K_, y3, 1]]).det()
     sols = sorted(set(sp.solve(sp.Eq(D ** 2, (2 * A) ** 2), K_)), key=float)
@@ -244,15 +244,16 @@ def auqwp(q):
     return Expect(str(sol[0]))
 
 
-@ref('auvexp', 'the phrase parsed to an expression with sympy and compared as an expression', 'exhaustive')
+@ref('auvexp', 'the phrase parsed to an expression with sympy (in the question\'s own variable) and compared as an expression', 'exhaustive')
 def auvexp(q):
     s = re.search(r'“(.*)”', q['prompt']).group(1)
-    x = X_
-    pats = [(r'(\d+) more than (\d+) times x', lambda a, b: b * x + a), (r'(\d+) less than (\d+) times x', lambda a, b: b * x - a),
-            (r'(\d+) times the sum of x and (\d+)', lambda b, a: b * (x + a)), (r'(\d+) times the number you get when (\d+) is subtracted from x', lambda b, a: b * (x - a)),
-            (r'x divided by (\d+), then increased by (\d+)', lambda b, a: x / b + a)]
+    v = re.search(r'using (\w), for', q['prompt']).group(1)
+    x = sp.Symbol(v)
+    pats = [(r'(\d+) more than (\d+) times V', lambda a, b: b * x + a), (r'(\d+) less than (\d+) times V', lambda a, b: b * x - a),
+            (r'(\d+) times the sum of V and (\d+)', lambda b, a: b * (x + a)), (r'(\d+) times the number you get when (\d+) is subtracted from V', lambda b, a: b * (x - a)),
+            (r'V divided by (\d+), then increased by (\d+)', lambda b, a: x / b + a)]
     for pat, fn in pats:
-        m = re.fullmatch(pat, s)
+        m = re.fullmatch(pat.replace('V', v), s)
         if m: return Expect(str(sp.expand(fn(*map(int, m.groups())))))
     return Unsupported('auvexp phrase ' + s)
 

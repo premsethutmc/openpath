@@ -187,8 +187,8 @@ def aochb(q):
 
 @ref('aocomm', 'enumeration of all committees (combinations) with the stated condition', 'exhaustive')
 def aocomm(q):
-    m = re.search(r'committee of (\d+) is to be chosen from (\d+) men and (\d+) women.*exactly (\d+) (women|men)', q['prompt'])
+    m = re.search(r'committee of (\d+) is to be chosen from (\d+) men and (\d+) women.*exactly (\d+) (women|woman|men|man)', q['prompt'])
     k_, nm, nw, e, who = int(m.group(1)), int(m.group(2)), int(m.group(3)), int(m.group(4)), m.group(5)
     people = [('m', i) for i in range(nm)] + [('w', i) for i in range(nw)]
-    cnt = sum(1 for c in itertools.combinations(people, k_) if sum(1 for g, _ in c if g == ('w' if who == 'women' else 'm')) == e)
+    cnt = sum(1 for c in itertools.combinations(people, k_) if sum(1 for g, _ in c if g == ('w' if who.startswith('wom') else 'm')) == e)
     return Expect(str(cnt))

@@ -35,13 +35,18 @@ def to_fraction(v, tol=1e-30):
 
 @ref('approg', 'all roots of the cubic (sympy exact roots); premise that they form an AP is checked', 'exhaustive')
 def approg(q):
-    m = re.fullmatch(r'The roots of (.*) = 0 are in arithmetic progression\. Solve the equation\..*', q['prompt'])
+    m = re.fullmatch(r'The roots of (.*) = 0 are in (arithmetic|geometric) progression\. Solve the equation\..*', q['prompt'])
     rs = sp.roots(poly_of(m.group(1)))
     lst = sorted([r for r, mult in rs.items() for _ in range(mult)], key=lambda v: float(sp.re(v)))
     if len(lst) != 3 or any(not r.is_real for r in lst):
         return Ambiguous(f'roots {lst}')
-    if sp.simplify((lst[1] - lst[0]) - (lst[2] - lst[1])) != 0:
-        return Verdict(False, f'roots {lst} are not in AP')
+    import itertools as it
+    if m.group(2) == 'arithmetic':
+        ok = any(sp.simplify((b - a) - (c - b)) == 0 for a, b, c in it.permutations(lst))
+    else:
+        ok = any(sp.simplify(b * b - a * c) == 0 and b != 0 for a, b, c in it.permutations(lst))
+    if not ok:
+        return Verdict(False, f'roots {lst} are not in {m.group(2)} progression (in any order)')
     return Expect(fmt_roots(sorted(set(lst), key=float)))
 
 
@@ -90,10 +95,10 @@ def apvbox(q):
     p = q['prompt']
     m = re.search(r'are the three roots of (.*) = 0\.', p)
     poly = poly_of(m.group(1))
-    rs = poly.nroots(n=60, maxsteps=500)
-    if any(abs(sp.im(r)) > 1e-25 or sp.re(r) <= 0 for r in rs):
-        return Verdict(False, f'roots {rs} are not all positive real numbers: not a box')
-    l, b, h = [sp.re(r) for r in rs]
+    rr = sp.real_roots(poly)
+    if len(rr) != 3 or any(r <= 0 for r in rr):
+        return Verdict(False, f'real roots {rr}: not three positive real numbers, not a box')
+    l, b, h = [sp.N(r, 60) for r in rr]
     if 'surface area' in p: v = 2 * (l * b + b * h + h * l)
     elif 'edges' in p: v = 4 * (l + b + h)
     elif 'volume' in p: v = l * b * h

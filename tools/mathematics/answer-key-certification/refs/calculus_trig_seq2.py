@@ -256,3 +256,16 @@ def audbe(q):
     m = re.search(r'Evaluate ∫ from (\d+) to (π/2|π|\d+) of (.+) dx\. Give the exact value', q['prompt'])
     lo = int(m.group(1)); hi = {'π/2': sp.pi / 2, 'π': sp.pi}.get(m.group(2)) or int(m.group(2))
     return Expect(str(sp.integrate(E(m.group(3)), (x, lo, hi))))
+
+
+@ref('arvolrev', method='disc method with SymPy integration: pi * int y^2 dx about the x-axis; about the y-axis pi * int x(y)^2 dy with x(y) the non-negative inverse branch', coverage='exhaustive')
+def arvolrev(q):
+    p = q['prompt']
+    m = re.search(r'bounded by y = (.+?), the x-axis and the line x = (\d+) is rotated through 360° about the x-axis', p)
+    if m:
+        return Expect(str(sp.integrate(sp.pi * E(m.group(1))**2, (x, 0, int(m.group(2))))))
+    m = re.search(r'bounded by y = (.+?) \(x ≥ 0\), the y-axis and the line y = (\d+) is rotated through 360° about the y-axis', p)
+    f = E(m.group(1)); h = int(m.group(2))
+    xs = [s for s in sp.solve(sp.Eq(f, y), x) if s.subs(y, 1).is_real and s.subs(y, 1) > 0]
+    assert len(xs) == 1
+    return Expect(str(sp.integrate(sp.pi * xs[0]**2, (y, 0, h))))

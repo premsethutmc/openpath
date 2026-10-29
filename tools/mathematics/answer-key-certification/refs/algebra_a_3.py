@@ -604,7 +604,13 @@ def ajfspl(q):
     m = re.search(r'Write it as \((\d*)x \+ □\)\((\d*)x \+ □\)', p)
     a = int(m.group(1) or 1)
     b = int(m.group(2) or 1)
-    sol = [(u, v) for u in range(-300, 301) for v in range(-300, 301) if _pmul([u, a], [v, b]) == [C0, C1, C2]]
+    sol = []
+    for u in range(-400, 401):
+        # coefficient of x: a*v + b*u = C1  ->  v integer; then the whole product is compared
+        if (C1 - b * u) % a == 0:
+            v = (C1 - b * u) // a
+            if _pmul([u, a], [v, b]) == [C0, C1, C2]:
+                sol.append((u, v))
     if len(sol) != 1:
         return Ambiguous(str(sol))
     return Expect(tup(sol[0]))

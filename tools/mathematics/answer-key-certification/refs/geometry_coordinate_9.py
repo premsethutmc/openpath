@@ -96,10 +96,10 @@ SOLID_CLS = {'a ball': 'sphere', 'a battery': 'cylinder', 'a birthday cap': 'con
              'a drum': 'cylinder', 'a duster': 'cuboid', 'a globe': 'sphere', 'a laddu': 'sphere', 'a marble': 'sphere', 'a matchbox': 'cuboid', 'a mehndi cone': 'cone',
              'a paneer cube': 'cube', 'a pencil box': 'cuboid', 'a pipe': 'cylinder', 'a tin of oil': 'cylinder', 'a traffic cone': 'cone', 'an ice cube': 'cube',
              'an ice-cream cone': 'cone', 'an orange': 'sphere'}
-SOLID_ALT = {'a tin of oil': ['cylinder', 'cuboid'], 'a pencil box': ['cuboid', 'cylinder'], 'a battery': ['cylinder', 'cuboid']}
+SOLID_ALT = {'a tin of oil': ['cylinder', 'cuboid'], 'a pencil box': ['cuboid', 'cylinder']}
 
 
-@ref('aasolid', method='independent object->solid dictionary (everyday shapes); count of the asked solid among the listed things; answers that change under a plausible alternative reading of an everyday object (oil tin, pencil box, battery) are flagged ambiguous')
+@ref('aasolid', method='independent object->solid dictionary (everyday shapes); count of the asked solid among the listed things; answers that change under a plausible alternative reading of an everyday object (oil tin, pencil box) are flagged ambiguous')
 def aasolid(q):
     p = q['prompt']
     things = re.split(r', (?:and )?', re.search(r'Here are some things: (.+?)\. How many', p).group(1))
