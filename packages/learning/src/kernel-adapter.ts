@@ -22,7 +22,7 @@
 
 import type { Problem, Step, Justification } from "./family-kit";
 import {
-  Rational, Expr, evaluate, simplify, renderExpr, renderStatement,
+  Rational, Expr, evaluate, simplify, renderExpr, renderStatement, verifyStatement,
   createState, createDefaultRegistry, cloneState,
   type MathExpr, type MathState, type Transformation, type RuleRegistry, type RuleExplanation,
 } from "./math-kernel";
@@ -51,6 +51,11 @@ export interface AdaptedProblem {
   steps: AdaptedStep[];
   /** Whether all steps were fully adapted. */
   fullyAdapted: boolean;
+  /**
+   * The relation the solution starts from, stated and instantiated before the first transformation (for example the product rule
+   * n(A × B) = n(A) × n(B) with the known sizes substituted). Every instantiated statement is checked against the kernel's bindings.
+   */
+  setup: KernelWorkedStep[];
 }
 
 // ════════════════════════════════════════════════════════════════════════════════
@@ -80,7 +85,27 @@ export function adaptProblem(problem: Problem): AdaptedProblem {
     initialState,
     steps: adaptedSteps,
     fullyAdapted: adaptedSteps.every((s) => s.adapted),
+    setup: relationSetup(problem, initialState),
   };
+}
+
+/**
+ * The stated relation and its instantiation, for families whose solution inverts a known relation. Each instantiated statement must
+ * hold under the initial state's bindings; otherwise the problem's mathematics is invalid and adaptation fails.
+ */
+function relationSetup(problem: Problem, state: MathState): KernelWorkedStep[] {
+  if (problem.family === "aocart" && problem.params[2] === 2) {
+    const [m, n] = problem.params;
+    const law = "n(A × B) = n(A) × n(B)";
+    const instance = state.statements[0];
+    if (!instance || !verifyStatement(instance, state.bindings)) throw new Error(`aocart: ${m * n} = ${m} × n(B) does not hold for n(B) = ${n}`);
+    const substituted = `${m * n} = ${m} × n(B)`;
+    return [
+      { expression: law, explanation: "Every choice from A pairs with every choice from B, so the number of ordered pairs is the product of the two set sizes.", before: "", after: law, principle: "Product counting" },
+      { expression: substituted, explanation: `Put the known sizes into the product rule: A × B has ${m * n} ordered pairs and A has ${m} elements.`, before: law, after: substituted, principle: "Substitution" },
+    ];
+  }
+  return [];
 }
 
 /**
@@ -177,6 +202,16 @@ function buildInitialState(problem: Problem): MathState {
         state.expressions.set("addend", Expr.num(b));
         state.expressions.set("sum", Expr.add(Expr.num(a), Expr.num(b)));
       }
+      break;
+    }
+    // Cartesian product, finding n(B): the product rule with the known sizes, n(A × B) = n(A) × n(B)
+    case "aocart": {
+      const [m, n, mode] = problem.params;
+      if (mode === 2) {
+        state.statements.push({ left: Expr.num(m * n), relation: "=", right: Expr.mul(Expr.num(m), Expr.var("n(B)")) });
+        state.bindings.set("n(B)", new Rational(n));
+      }
+      state.expressions.set("answer", Expr.num(typeof problem.answer === "string" ? Number(problem.answer) || 0 : 0));
       break;
     }
     default:
@@ -965,7 +1000,8 @@ export interface KernelWorkedStep {
  * Consumes kernel transformations to produce teaching content.
  */
 export function kernelWorkedSteps(adapted: AdaptedProblem): KernelWorkedStep[] {
-  return adapted.steps
+  // the stated relation and its kernel-checked instantiation come first, then the transformations
+  return [...adapted.setup, ...adapted.steps
     .filter((s) => s.explanation !== null)
     .map((s) => {
       const exp = s.explanation!;
@@ -976,7 +1012,7 @@ export function kernelWorkedSteps(adapted: AdaptedProblem): KernelWorkedStep[] {
         after: exp.afterText,
         principle: exp.principle,
       };
-    });
+    })];
 }
 
 /**
