@@ -109,6 +109,12 @@ describe("I4 assumptions and restrictions are propagated", () => {
     expect(await sym(fn("abs", add(x, y)), add(x, y), [P(x), P(y)])).toBe("verified");
     expect(await sym(fn("abs", add(x, y)), add(x, y), [P(x)])).not.toBe("verified");
   });
+  test("composition: a linear order assumption (x > 1) licenses the log laws that need x > 0 and x - 1 > 0; x > -1 does not", async () => {
+    const lnProd = fn("log", mul(x, add(x, c("-1")))), split = add(fn("log", x), fn("log", add(x, c("-1"))));
+    expect(await sym(lnProd, split, [P(add(x, c("-1")))])).toBe("verified");
+    expect(await sym(lnProd, split, [P(add(x, c("1")))])).not.toBe("verified");
+    expect(await sym(fn("abs", add(mul(c("2"), x), c("-1"))), add(mul(c("2"), x), c("-1")), [P(add(x, c("-1")))])).toBe("verified");
+  });
   test("an antiderivative must be defined on the integrand's domain (natural E5 route)", async () => {
     const g = mul(c("2"), x, pw(add(pw(x, 2), c("-1")), -1));
     expect(await integral(g, "∫2x/(x^2-1) dx = ln(x^2-1) + C")).not.toBe("verified");

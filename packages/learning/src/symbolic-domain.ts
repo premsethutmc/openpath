@@ -42,6 +42,7 @@ export function entails(kind: string, x: Expr, a: Assumption[], depth = 0): bool
   if (depth > 12) return false;
   const k = key(x), r = (kd: string, y: Expr) => entails(kd, y, a, depth + 1);
   if (a.some((z) => key(z.expression) === k && (z.kind === kind || (kind === "nonnegative" || kind === "nonzero") && z.kind === "positive"))) return true;
+  if (kind !== "real" && kind !== "integer" && linearlyEntailed(kind, x, a)) return true;
   const v = closedValue(x);
   if (v) return kind === "positive" ? v.gt(Rational.zero) : kind === "nonnegative" ? !v.lt(Rational.zero) : kind === "nonzero" ? !v.isZero() : false;
   if (kind === "positive") {
@@ -70,6 +71,23 @@ export function entails(kind: string, x: Expr, a: Assumption[], depth = 0): bool
     if (x.kind === "abs") return r("nonzero", x.argument);
     const by = a.filter((z) => z.kind === "nonzero" || z.kind === "positive").map((z) => z.expression);
     return by.length > 0 && nonzeroEntailed(x, by);
+  }
+  return false;
+}
+
+/** linear order facts: L > 0 (≥ 0, ≠ 0) follows from one linear assumption A > 0 or A ≥ 0 when L = c·A + d with c > 0 and d ≥ 0 (d > 0 when A is only ≥ 0) */
+function linearlyEntailed(kind: string, x: Expr, a: Assumption[]): boolean {
+  const lin = (e: Expr): Poly | null => { try { const z = exprRational(e); if (!z || !z.d.isConst() || z.d.isZero() || z.n.totalDeg() > 1 || z.n.vars().some((n) => n.startsWith("@"))) return null; return z.n.scale(Rational.one.div(z.d.constVal())); } catch { return null; } };
+  const L = lin(x); if (!L || L.isConst()) return false;
+  for (const z of a) {
+    if (z.kind !== "positive" && z.kind !== "nonnegative") continue;
+    const A = lin(z.expression); if (!A || A.isConst()) continue;
+    const vs = A.vars(), lead = vs[0], ca = A.coeffs(lead)[1]?.constVal(), cl = L.coeffs(lead)[1]?.constVal();
+    if (!ca || !cl || ca.isZero()) continue;
+    const c = cl.div(ca); if (!c.gt(Rational.zero)) continue;
+    const d = L.sub(A.scale(c)); if (!d.isConst()) continue;
+    const dv = d.constVal(), strict = z.kind === "positive";
+    if (kind === "nonnegative" ? !dv.lt(Rational.zero) : strict ? !dv.lt(Rational.zero) : dv.gt(Rational.zero)) return true;
   }
   return false;
 }
