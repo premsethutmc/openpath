@@ -47,3 +47,45 @@ def fmt_set(xs):
 
 def sgn(x):
     return str(x).replace('-', '−') if False else str(x)
+
+
+# ---------- shared parsers (statement text -> python objects) ----------
+import itertools as _it
+import sympy as _sp
+from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application, convert_xor
+
+_TR = standard_transformations + (implicit_multiplication_application, convert_xor)
+_SUPS = {'²': '**2', '³': '**3', '⁴': '**4', '¹': '**1', '⁵': '**5', '⁶': '**6'}
+
+
+def clean(s):
+    s = s.replace('−', '-').replace('×', '*').replace('·', '*').replace('÷', '/').replace('⋅', '*')
+    for k, v in _SUPS.items():
+        s = s.replace(k, v)
+    return s
+
+
+def P(s, **loc):
+    """parse a school-notation algebraic string with sympy (implicit multiplication allowed)"""
+    return parse_expr(clean(s), transformations=_TR, local_dict={k: _sp.Symbol(k) for k in 'xyzabcdkmnpqt'} | loc)
+
+
+def isprime(n):
+    return n > 1 and all(n % d for d in range(2, int(n ** 0.5) + 1))
+
+
+def natset(cond, hi=400, lo=1):
+    return {x for x in range(lo, hi) if cond(x)}
+
+
+def builder_to_pred(cond):
+    """cond like 'x is a factor of 12', 'x is even and x ≤ 8', '1 < x < 5', 'x² < 10', '2x − 1 < 10' -> python predicate"""
+    c = cond
+    c = re.sub(r'x is a factor of (\d+)', r'(\1 % x == 0)', c)
+    c = re.sub(r'x is a multiple of (\d+)', r'(x % \1 == 0)', c)
+    c = c.replace('x is even', '(x % 2 == 0)').replace('x is odd', '(x % 2 == 1)').replace('x is prime', 'isprime(x)').replace('x is a prime number', 'isprime(x)')
+    c = c.replace('≤', '<=').replace('≥', '>=').replace('≠', '!=')
+    c = clean(c)
+    c = re.sub(r'(?<![\w)*])(\d+)x', r'\1*x', c)
+    c = re.sub(r'(?<![<>=!])=(?!=)', '==', c)
+    return eval('lambda x: (' + c + ')', {'isprime': isprime})

@@ -118,7 +118,7 @@ def ajd99(q):
 
 @ref('ajeqr', 'solve the proportion by cross-multiplication with Fractions, then verify by cross products')
 def ajeqr(q):
-    p = q['prompt'].split(': ')[1].split('.')[0]
+    p = re.search(r'box: (.*?)\.', q['prompt'])[1]
     m = re.fullmatch(r'(\d+) : (\d+) = (\d+|□) : (\d+|□)', p)
     a, b, c, d = m.groups()
     if c == '□':

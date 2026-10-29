@@ -46,7 +46,8 @@ def unlabelled(s, dim=None):
 
 
 def expr(s):
-    return parse_expr(U(s).replace('^', '**'), local_dict={'x': x, 'y': y, 'z': z}, transformations=standard_transformations + (implicit_multiplication_application,))
+    t = re.sub(r'√\s*(\d+)', r'sqrt(\1)', U(s)).replace('^', '**').replace('xy', 'x*y').replace('yz', 'y*z').replace('xz', 'x*z')
+    return parse_expr(t, local_dict={'x': x, 'y': y, 'z': z}, transformations=standard_transformations + (implicit_multiplication_application,))
 
 
 def eqn(s):

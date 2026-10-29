@@ -49,8 +49,8 @@ def Q(v):
 
 
 def ivl_text(lo, lc, hi, hc):
-    a = '-oo' if lo is None else fs(lo)
-    b = 'oo' if hi is None else fs(hi)
+    a = '-∞' if lo is None else fs(lo)
+    b = '∞' if hi is None else fs(hi)
     return f"{'[' if lc else '('}{a}, {b}{']' if hc else ')'}"
 
 

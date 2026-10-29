@@ -15,12 +15,11 @@ def aofund(q):
         return Expect(str(sum(1 for _ in itertools.product(range(a), range(b), range(c)))))
     if 'codes' in p:
         k, n = ints(p)[0], ints(p)[2]
-        rep = 'may be repeated' in p
+        rep = 'if digits may be repeated' in p
         assert rep or 'no digit may be repeated' in p
         gen = itertools.product(range(n), repeat=k) if rep else itertools.permutations(range(n), k)
         return Expect(str(sum(1 for _ in gen)))
     if 'roads' in p or 'road' in p:
-        a, b, c = ints(p)[0], ints(p)[2], ints(p)[4]  # X->Y, Y->Z, X->Z (skip the town letters: no digits in them)
         a, b, c = [int(x) for x in re.findall(r'(\d+) roads? ', p)]
         routes = [('xy', i, 'yz', j) for i in range(a) for j in range(b)] + [('xz', k) for k in range(c)]
         return Expect(str(len(routes)))
@@ -142,22 +141,22 @@ def aonpr(q):
 def aoncrp(q):
     p = q['prompt']
     S = '⁰¹²³⁴⁵⁶⁷⁸⁹'
-    if re.match(r'If ⁿC[₀-₉]+ = ⁿC[₀-₉]+, find n', p):
-        a, b = [_sc(x) for x in re.findall(r'ⁿC([₀-₉]+)', p)]
+    if re.match(r'If ⁿC[₀₁₂₃₄₅₆₇₈₉]+ = ⁿC[₀₁₂₃₄₅₆₇₈₉]+, find n', p):
+        a, b = [_sc(x) for x in re.findall(r'ⁿC([₀₁₂₃₄₅₆₇₈₉]+)', p)]
         sol = [n for n in range(max(a, b), 400) if C_(n, a) == C_(n, b)]
         return Expect(', '.join(map(str, sol)))
-    m = re.match(r'If ⁿC([₀-₉]+) = (\d+), find n', p)
+    m = re.match(r'If ⁿC([₀₁₂₃₄₅₆₇₈₉]+) = (\d+), find n', p)
     if m:
         r, v = _sc(m.group(1)), int(m.group(2))
         sol = [n for n in range(r, 400) if C_(n, r) == v]
         return Expect(', '.join(map(str, sol)))
-    m = re.match(r'For some r, ([⁰-⁹]+)Pᵣ = (\d+) and ([⁰-⁹]+)Cᵣ = (\d+)\. Find r', p)
+    m = re.match(r'For some r, ([⁰¹²³⁴⁵⁶⁷⁸⁹]+)Pᵣ = (\d+) and ([⁰¹²³⁴⁵⁶⁷⁸⁹]+)Cᵣ = (\d+)\. Find r', p)
     if m:
         n = _sc(m.group(1))
         pv, cv = int(m.group(2)), int(m.group(4))
         sol = [r for r in range(0, n + 1) if P_(n, r) == pv and C_(n, r) == cv]
         return Expect(', '.join(map(str, sol)))
-    m = re.match(r'Find ([⁰-⁹]+)C([₀-₉]+) \+ ([⁰-⁹]+)C([₀-₉]+)', p)
+    m = re.match(r'Find ([⁰¹²³⁴⁵⁶⁷⁸⁹]+)C([₀₁₂₃₄₅₆₇₈₉]+) \+ ([⁰¹²³⁴⁵⁶⁷⁸⁹]+)C([₀₁₂₃₄₅₆₇₈₉]+)', p)
     if m:
         return Expect(str(C_(_sc(m.group(1)), _sc(m.group(2))) + C_(_sc(m.group(3)), _sc(m.group(4)))))
     return Unsupported('unrecognised aoncrp template: ' + p[:60])
@@ -182,14 +181,14 @@ def aopas(q):
         if given != rows[n]:
             return Verdict(False, f'row stated in the prompt is wrong: {given} vs {rows[n]}')
         return Expect(str(rows[n + 1][int(m.group(4))]))
-    m = re.match(r"Row (\d+) of Pascal's triangle is ([\d, ]+)\. Use it to find the coefficient of (.+?) in the expansion of \(a \+ b\)([⁰-⁹]+)", p)
+    m = re.match(r"Row (\d+) of Pascal's triangle is ([\d, ]+)\. Use it to find the coefficient of (.+?) in the expansion of \(a \+ b\)([⁰¹²³⁴⁵⁶⁷⁸⁹]+)", p)
     if m:
         n = _sc(m.group(4))
         given = [int(x) for x in m.group(2).split(',')]
         if given != pascal_rows(n)[n] or int(m.group(1)) != n:
             return Verdict(False, 'row stated in prompt wrong')
         term = m.group(3)
-        ea = re.search(r'a([⁰-⁹]*)', term); eb = re.search(r'b([⁰-⁹]*)', term)
+        ea = re.search(r'a([⁰¹²³⁴⁵⁶⁷⁸⁹]*)', term); eb = re.search(r'b([⁰¹²³⁴⁵⁶⁷⁸⁹]*)', term)
         ia = _sc(ea.group(1)) if ea and ea.group(1) else (1 if ea else 0)
         ib = _sc(eb.group(1)) if eb and eb.group(1) else (1 if eb else 0)
         assert ia + ib == n
