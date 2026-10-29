@@ -85,7 +85,11 @@ def aultab(q):
         left = [(h, v) for h, v in zip(head, vals) if h < a]; right = [(h, v) for h, v in zip(head, vals) if h > a]
         lv = max(left)[1]; rv = min(right)[1]
         est = (lv + rv) / 2
-        assert abs(lv - rv) < 0.5, (lv, rv)
+        # linear extrapolation to x = a from the two nearest points on each side must agree
+        L = sorted(left)[-2:]; R = sorted(right)[:2]
+        el = L[1][1] + (L[1][1] - L[0][1]) * (a - L[1][0]) / (L[1][0] - L[0][0])
+        er = R[0][1] - (R[1][1] - R[0][1]) * (R[0][0] - a) / (R[1][0] - R[0][0])
+        assert abs(el - er) < 0.01 * max(1, abs(est)), (el, er)
         r = round(est)
         assert abs(est - r) < 0.01, est
         return Expect(str(r))
