@@ -160,7 +160,7 @@ def right(q, response):
 
 UNRESOLVED_CAP = 2  # the app's records.ts UNRESOLVED_CAP: undecided submissions per problem that sit outside the attempts
 ASSESSMENT_KEYS = {'policy', 'answerCorrect', 'methodExamined', 'derivationVerified', 'firstError', 'clarificationRequired', 'aiFallbackUsed', 'unresolved', 'source'}
-ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement'}
+ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement', 'parser'}
 
 
 def _assessment_ok(a, q, response=None):

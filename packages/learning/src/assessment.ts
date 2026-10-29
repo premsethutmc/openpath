@@ -173,7 +173,7 @@ export interface AssessmentEvidence {
   clarificationRequired: boolean;
   aiFallbackUsed: boolean;
   unresolved: boolean;
-  source: "kernel" | "legacy" | "educator" | "held" | "disagreement";
+  source: "kernel" | "legacy" | "educator" | "held" | "disagreement" | "parser";
 }
 export interface Clarification { kind: "answer-field" | "interpretation" | "show-step"; prompt: string }
 export interface Assessment {
@@ -190,6 +190,8 @@ export interface Assessment {
   normalised?: string;
   /** set only when the learner's own form was mathematically right but not one the stored-answer comparison reads: the record keeps this plain form so every replay agrees */
   recordAs?: string;
+  /** set when the response is not (yet) an answer: the strict parser's reason (grading/parse.ts) */
+  unreadable?: { reason: string; detail: string };
   ms: number;
 }
 export interface Submission { response: string; working?: readonly string[]; legacyCorrect?: boolean | null; clarifications?: number }

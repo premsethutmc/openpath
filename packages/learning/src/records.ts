@@ -28,7 +28,7 @@ export interface AttemptAssessment {
   clarificationRequired: boolean;
   aiFallbackUsed: boolean;
   unresolved: boolean;
-  source: "kernel" | "legacy" | "educator" | "held" | "disagreement";
+  source: "kernel" | "legacy" | "educator" | "held" | "disagreement" | "parser";
 }
 export type LearningRecord =
   | (Base & { record: "enrol"; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } })

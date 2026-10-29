@@ -8,6 +8,8 @@
  */
 import { assessSubmission, contractFor } from "./assessment.ts";
 import { quarantined } from "./question-status.ts";
+import { problemOf } from "./families.ts";
+import { notAnAnswer, readResponse } from "./grading/read.ts";
 
 export const SERVER_GRADER_VERSION = 1 as const;
 export interface GraderRequest { id: string; response: string; working?: string[] }
@@ -24,8 +26,12 @@ export function gradeRequest(r: GraderRequest): GraderReply {
   try { c = contractFor(r.id); } catch { return none("unknown", "the contract could not be built"); }
   if (!c) return none("unknown", "not a generated question");
   if (c.verification !== "verified") return none(c.verification, c.reason, c.expected.stored, c.capability);
+  // grading-policy@1: the same strict parser as the app; a response that is not an answer is undecided, never wrong
+  const pr = problemOf(r.id);
+  const rd = readResponse({ type: c.answerType, answer: c.expected.stored, options: pr?.options }, r.response, c.variable);
+  if (!rd.ok) return { v: SERVER_GRADER_VERSION, id: r.id, verification: "verified", credit: null, expected: c.expected.stored, capability: c.capability, reason: notAnAnswer(rd).feedback.message, ms: ms() };
   // the stored-answer comparison is NOT passed in: the verdict is the kernel's alone
-  const a = assessSubmission(c, { response: r.response, working, legacyCorrect: null });
+  const a = assessSubmission(c, { response: rd.value, working, legacyCorrect: null });
   return { v: SERVER_GRADER_VERSION, id: r.id, verification: "verified", credit: a.credit, expected: c.expected.stored, capability: c.capability, reason: a.feedback.message, ms: ms() };
 }
 

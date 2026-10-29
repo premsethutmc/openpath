@@ -21,6 +21,8 @@ import type { Assessment } from "../../../packages/learning/src/assessment";
 import { checkWorking, canCheckWorking } from "../../../packages/learning/src/working";
 import { Icon } from "./icons";
 import type { LearnerRecords, LearningActivity } from "../../../packages/learning/src/records";
+import { semanticsOf } from "../../../packages/learning/src/grading/parse";
+import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
 
 export const LETTERS = ["A", "B", "C", "D"];
 
@@ -85,9 +87,21 @@ const ANSWER_LABEL: Record<string, string> = {
   expression: "Your answer (an expression: sin, cos, ln, e^x, ^ for powers)",
   antiderivative: "Your answer (+ C may be written or not)",
 };
-const ANSWER_EXAMPLE: Record<string, string> = { fraction: "e.g. 3/4", set: "e.g. 2, 5", exact: "e.g. 2√3", roots: "e.g. 2, −3", tuple: "e.g. (3, −2)", matrix: "e.g. [[1, 0], [0, 1]]", interval: "e.g. x > 3", ratio: "e.g. 3:4", expression: "e.g. 2x cos(x^2)", antiderivative: "e.g. x^3/3 + C", polynomial: "e.g. x^2 + 2x" };
+/** How to type an answer: examples generated from the strict parser's own accepted syntax (grading/syntax.ts; each is tested to parse as shown). */
+function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
+  const sem = semanticsOf({ type: q.type, answer: q.answer ?? "" });
+  const g = SYNTAX.find((x) => x.kind === sem.kind);
+  if (!g) return null;
+  return (
+    <details className="syntax-help">
+      <summary>How to type it</summary>
+      <p>Accepted: {examplesFor(sem).map((e, i) => <span key={i}>{i ? ", " : ""}<code>{e}</code></span>)}</p>
+      {g.notAccepted.length > 0 && <p>Not accepted: {g.notAccepted.map((x, i) => <span key={i}>{i ? "; " : ""}<code>{x.text}</code> ({x.why})</span>)}</p>}
+    </details>
+  );
+}
 /** An answer box for any question type. */
-export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options"> & { id?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
+export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options"> & { id?: string; answer?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
   if (q.type === "choice")
     return (
       <div className="options" role="radiogroup" aria-label="Choose one answer">
@@ -115,7 +129,8 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
   return (
     <label className="field">
       {label}
-      <input aria-label="Your answer" inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} placeholder={ANSWER_EXAMPLE[q.type] ?? "e.g. 12"} />
+      <input aria-label="Your answer" inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} placeholder={`e.g. ${examplesFor(semanticsOf({ type: q.type, answer: q.answer ?? "" }))[0] ?? "12"}`} />
+      <SyntaxHelp q={q} />
     </label>
   );
 }
