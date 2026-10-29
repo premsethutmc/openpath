@@ -381,7 +381,10 @@ class KernelAuthorityTests(LearningBase):
         ev = next(e for e in self.records() if e['id'] == 'm1')
         q = generated(self.MEAN[0])
         self.assertIs(credited(q, ev), True)                                    # replay agrees with the stored kernel verdict
-        self.assertIs(credited(q, {**ev, 'assessment': {**ev['assessment'], 'source': 'legacy'}}), False)   # without it, the stored-answer comparison would refuse "6/2"
+        # stage 7 (D11): replay reads the recorded decision; relabelling the assessment changes nothing
+        self.assertIs(credited(q, {**ev, 'assessment': {**ev['assessment'], 'source': 'legacy'}}), True)
+        # only a historical record with no recorded verdict at all is compared again (the stored-answer comparison refuses "6/2")
+        self.assertIs(credited(q, {k: v for k, v in ev.items() if k not in ('decision', 'assessment')}), False)
 
     def test_a_refused_grader_reply_is_a_contract_inconsistency_not_a_verdict(self):
         # the grader runs but its reply is refused (e.g. its stored answer differs from this server's): unresolved, source "held"

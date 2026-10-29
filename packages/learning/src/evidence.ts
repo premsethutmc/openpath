@@ -155,7 +155,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // micro-skill, never for showing the whole skill on your own
   const micro = !!graph.byId.get(id)?.partOf;
   const ind = mine.filter((a) => independentAttempt(a) && (micro || a.activity !== "probe"));
-  const right = (a: Attempt) => creditOf(a.questionId, a.response) === true;
+  const right = rightAnswer;
   const distinctRight = new Set<string>();
   let independentAt: string | null = null;
   for (const a of ind) {
@@ -223,4 +223,5 @@ export function evidenceFor(learnerId: string, records: LearnerRecords, now: num
   };
   return { ledger, get };
 }
-export const rightAnswer = (a: Attempt) => creditOf(a.questionId, a.response) === true;
+/** stage 7 (D11): the recorded credit; only a historical record without one (or an attempt not read from records, e.g. a simulation) is compared again */
+export const rightAnswer = (a: Attempt) => (a.credit !== undefined ? a.credit : creditOf(a.questionId, a.response) === true);

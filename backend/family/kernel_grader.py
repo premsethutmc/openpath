@@ -77,7 +77,18 @@ def grader_decision(question_id, response, stored_answer, working=None):
     out = run([{'id': question_id, 'response': response, 'working': w}])
     if out is None or not _reply_ok(out[0], question_id, stored_answer):
         return None
-    return {k: out[0][k] for k in ('credit', 'source', 'reason', 'verdict')}
+    d = {k: out[0][k] for k in ('credit', 'source', 'reason', 'verdict')}
+    if isinstance(out[0].get('decision'), dict):
+        d['decision'] = out[0]['decision']
+    return d
+
+
+def bundle_sha256():
+    """the sha256 of the grader bundle (as recorded in its manifest), or None"""
+    try:
+        return json.loads(MANIFEST.read_text())['sha256']
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
 
 
 def kernel_decision(question_id, response, stored_answer, working=None):

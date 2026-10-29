@@ -21,7 +21,7 @@ import { reviewFixtureActive, useReviewFixture } from "../../../packages/learnin
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
-import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
+import { withDecisions, type LearningActivity, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { learnerState, make, type StudyRecord, type StudyUpdate } from "../../../packages/learning/src/session";
 import { writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
 import { isDrawing, SketchView } from "./SketchPad";
@@ -51,9 +51,10 @@ class Repo {
     this.learner = learner;
   }
   async load() {
-    const r = await api.request<{ count: number; events: { kind: string }[] }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
+    const r = await api.request<{ count: number; events: { kind: string }[]; decisions?: Record<string, ServerDecision> }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
     this.count = r.count;
-    return r.events;
+    // stage 7: a regrade appends a superseding decision on the server; replay uses it in place of the one inside the stored attempt
+    return withDecisions(r.events, r.decisions);
   }
   append(event: LearningRecord) {
     const work = this.queue.then(async () => {

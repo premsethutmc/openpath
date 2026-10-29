@@ -49,7 +49,9 @@ class KernelGraderTests(unittest.TestCase):
 
     def test_unknown_questions_are_not_answered(self):
         # grading-policy@1 (stage 4): every KNOWN question is decided by the trusted grader (a non-kernel family by a value verifier)
-        self.assertEqual(kg.kernel_decision('gen:rect:3,4', '12', '12'), {'credit': True, 'source': 'verifier', 'reason': 'correct.equal', 'verdict': 'correct'})
+        d = kg.kernel_decision('gen:rect:3,4', '12', '12')
+        self.assertEqual({k: d[k] for k in ('credit', 'source', 'reason', 'verdict')}, {'credit': True, 'source': 'verifier', 'reason': 'correct.equal', 'verdict': 'correct'})
+        self.assertEqual((d['decision']['schema'], d['decision']['verdict']), ('grading-decision@1', 'correct'))
         self.assertIsNone(kg.kernel_decision('q-not-generated', '12', '12'))
         self.assertIsNone(kg.kernel_decision('gen:nosuchfamily:1,2', '3', '3'))
         self.assertIsNone(kg.kernel_decision('gen:det2:1,1,1', '0', '0'))          # wrong parameter count

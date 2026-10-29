@@ -15,6 +15,7 @@ from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
+from . import decisions
 from .kernel_grader import enabled as grader_enabled, kernel_decision
 from .question_status import quarantined
 from .learning_families import exposure, generated
@@ -179,39 +180,47 @@ def _assessment_ok(a, q, response=None):
 
 
 def _authoritative(event, q, readable):
-    """The server's decision about one answer, and nothing the client claims. Where the trusted exact grader (kernel_grader) has verified
-    the question, its verdict decides (correct, incorrect, or undecided); everywhere else the stored answer decides (the python mirror of
-    the app's legacy comparison) and the result is labelled `legacy`, whatever the browser called it. An answer neither route can read is
-    saved and left undecided (never wrong). Written answers stay with the educator.
-    grading-policy@1 (Phase C): the trusted grader decides every known question; there is no stored-answer fallback (see below)."""
+    """The server's assessment@1 for one answer (the decision's compatibility view); see _decide."""
+    return _decide(event, q)[0]
+
+
+def _decide(event, q, now=None):
+    """The server's decision about one answer, and nothing the client claims: (assessment@1 view, grading-decision@1).
+    grading-policy@1 (Phase C): the trusted grader runs THE decision (the app's own code) for every known question and its verdict is
+    recorded as is. There is no stored-answer fallback (UNIFIED_GRADING_ARCHITECTURE.md §11, D12): the grader not runnable (missing,
+    tampered, disabled, timed out, crashed) -> unresolved, source "infrastructure"; a reply refused because the grader's stored answer
+    differs from this server's (parity: a contract inconsistency) -> unresolved, source "held". A quarantined question gets no grade;
+    written answers stay with the educator. Unresolved is never incorrect, never credited, never an attempt; the answer is kept."""
     a = event.get('assessment')
     if quarantined(event.get('questionId')):
         # question-status@1: no authoritative grade for a quarantined question, whatever the browser sent; the answer is kept
         base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False}
-        return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': 'held'}
+        return ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': 'held'},
+                decisions.build(event, failure='quarantined', now=now))
     if q['type'] in HUMAN:
-        return None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'}
+        return (None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'},
+                decisions.build(event, educator=True, now=now))
     base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'clarificationRequired': False, 'firstError': None}
-    # grading-policy@1: the trusted grader runs THE decision (the app's own code) for every known question; its verdict is recorded as is
     k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working'))
     if k is not None:
         ok = k['credit']
-        return {**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': k['source']}
-    # grading-policy@1 failure semantics (UNIFIED_GRADING_ARCHITECTURE.md §11, D12): no other comparison is substituted. The grader not
-    # runnable (missing, tampered, disabled, timed out, crashed) -> unresolved, source "infrastructure"; a reply refused because the
-    # grader's stored answer differs from this server's (parity: a contract inconsistency) -> unresolved, source "held". Never incorrect,
-    # never credited, never an attempt; the answer is kept for a later grading.
+        return ({**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': k['source']},
+                decisions.build(event, grader=k, now=now))
     source = 'held' if grader_enabled() else 'infrastructure'
-    return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source}
+    return ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source},
+            decisions.build(event, failure=source, now=now))
 
 
 def credited(q, event):
-    """Whether a stored attempt earned answer credit: the server's own kernel verdict when the trusted grader decided it, otherwise the stored-answer comparison."""
-    a = event.get('assessment') or {}
+    """Whether a stored attempt earned answer credit, from its RECORDED verdict (UNIFIED_GRADING_ARCHITECTURE.md §9, D11): the server's
+    grading decision, else the assessment this server recorded with it. Only a record with no recorded verdict at all (saved before the
+    server recorded assessments) is compared again, with the stored-answer comparison it was graded by; the reconstruction dry run
+    reports those."""
     if quarantined(event.get('questionId')):
         return False
-    if a.get('source') in GRADER_SOURCES:
-        return a.get('answerCorrect') is True
+    v = decisions.verdict_of(event)
+    if v is not None:
+        return v == 'correct'
     return right(q, event.get('response', ''))
 
 
@@ -232,7 +241,7 @@ def independent_at(prior, competency, marks=None):
         key = exposure(e['questionId'])
         if quarantined(e['questionId']):
             continue  # question-status@1: never an attempt, never evidence
-        if (e.get('assessment') or {}).get('unresolved') is True:
+        if decisions.verdict_of(e) == 'unresolved':
             continue  # undecided (set by this server, never by the browser): not an attempt, however many (approved policy P1, D16)
         n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
@@ -342,7 +351,7 @@ def checked_learning(event, pupil):
         _reject('A learning record needs an id.')
     if not isinstance(event.get('sessionId'), str) or not event['sessionId'].startswith(f'learn:{pupil.pk}:') or len(event['sessionId']) > 160:
         _reject('A learning visit must belong to this learner.')
-    prior = [e for e in PupilEvent.objects.filter(pupil=pupil, subject='mathematics', kind='learning_record').values_list('body', flat=True)]
+    prior = decisions.effective(pupil, PupilEvent.objects.filter(pupil=pupil, subject='mathematics', kind='learning_record').order_by('seq').values_list('body', flat=True))
     if any(e.get('id') == event['id'] for e in prior):
         _reject('This activity ID already exists. Reload to confirm a retry.')
     now = server_now(pupil)
@@ -397,9 +406,11 @@ def checked_learning(event, pupil):
             _reject('Invalid context.')
         if 'assessment' in event and not _assessment_ok(event['assessment'], q):
             _reject('The assessment result is malformed.')
-        decided = _authoritative(event, q, readable)
+        decided, decision = _decide(event, q, now)
         if decided is not None:
             event = {**event, 'assessment': decided}
+        # grading-decision@1 (stage 7): the server's decision is kept in the immutable event body and appended to the decision log (views.py)
+        event = {**event, 'decision': decision}
         w = event.get('working', [])
         if not isinstance(w, list) or len(w) > 8 or not all(isinstance(x, str) and len(x) <= 80 for x in w):
             _reject('Working is at most 8 lines of 80 characters.')
@@ -465,8 +476,8 @@ def _study_session(event, prior, pupil, c):
     correct, incorrect, pending = [], [], []
     for a in attempts:
         q = c['questions'].get(a['questionId']) or generated(a['questionId'])
-        if quarantined(a['questionId']):
-            continue  # question-status@1: neither correct nor incorrect (kept in attemptIds as answered)
+        if quarantined(a['questionId']) or decisions.verdict_of(a) == 'unresolved':
+            continue  # question-status@1 and approved policy P1 (D19): neither correct nor incorrect (kept in attemptIds as answered)
         if q['type'] in HUMAN and a['id'] not in marks:
             pending.append(a['id'])
         elif (marks.get(a['id']) == 'correct' if q['type'] in HUMAN else credited(q, a)):

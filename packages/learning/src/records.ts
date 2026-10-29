@@ -34,11 +34,21 @@ export type LearningRecord =
   | (Base & { record: "enrol"; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "goal"; pathway: string; targetYear?: number; active: boolean })
   | (Base & { record: "curriculum"; release: CurriculumRelease })
-  | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[]; assessment?: AttemptAssessment })
+  | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[]; assessment?: AttemptAssessment; decision?: ServerDecision })
   | (Base & { record: "teach"; rule: string; strategy: string; competency: string })
   | (Base & { record: "topic_session"; academicYear: string; stage: "diagnostic" | "plan"; target: string; minutes?: 15 | 30 | 60; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "study_session"; planId:string; revision:number; phase:"start"|"active"|"ended"; time:StudyTime; advice?:StudyAdvice; summary?:StudySummary })
   | (Base & { record: "skip"; target: string });
+
+/** grading-decision@1 as the SERVER recorded it (stage 7). Only the server adds it (a browser that sends one is refused), so it is the
+ *  recorded, authoritative verdict replay reads (D11); a later superseding decision (a regrade) is merged in by the loader. */
+export interface ServerDecision { schema: "grading-decision@1"; decisionId: string; decidedBy: "server"; verdict: "correct" | "incorrect" | "unresolved" | "pending-educator"; reason: string; supersedes?: string; [k: string]: unknown }
+const serverVerdict = (r: { decision?: ServerDecision }) => (r.decision && r.decision.schema === "grading-decision@1" && r.decision.decidedBy === "server" ? r.decision.verdict : null);
+/** the events with the server's superseding decisions (GET .../events "decisions": attempt id -> decision) put in place of the recorded one */
+export function withDecisions<E extends { kind: string }>(events: readonly E[], latest: Record<string, ServerDecision> | undefined): E[] {
+  if (!latest || !Object.keys(latest).length) return [...events];
+  return events.map((e) => { const r = e as unknown as { record?: string; id?: string }; return r.record === "attempt" && r.id && latest[r.id] ? ({ ...e, decision: latest[r.id] } as E) : e; });
+}
 
 export interface Attempt {
   id: string;
@@ -57,6 +67,9 @@ export interface Attempt {
   working?: string[];
   /** written@1: the learner's written answer and the educator's mark (the response is then the mark, never the text). */
   written?: { text: string; mark: WrittenMark };
+  /** the answer credit as RECORDED (stage 7, D11): the server's decision, or the educator's mark. Absent only for a record saved before the
+   *  server recorded decisions; evidence.ts then compares it again (decision 3: historical records are not reconstructed yet). */
+  credit?: boolean;
 }
 /** A written answer waiting for an educator's mark: kept, shown, and not evidence of anything. */
 export interface PendingWritten {
@@ -101,8 +114,9 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
     // attempt, so a wrong answer cannot be parked as "unresolved"). Approved policy P1 (2026-10-29, D16): every undecided submission sits
     // outside the attempts, however many are sent; abuse is limited by the server's request throttle, not by assessment.
     // question-status@1: an answer to a quarantined question is kept, but is never an attempt or mastery evidence, however many are sent
+    else if (r.record === "attempt" && isQuestion(r.questionId) && serverVerdict(r) === "unresolved") out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment as AttemptAssessment });
     else if (r.record === "attempt" && quarantined(r.questionId)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment as AttemptAssessment });
-    else if (r.record === "attempt" && isQuestion(r.questionId) && r.assessment?.unresolved === true && (r.assessment.source === "infrastructure" || creditOf(r.questionId, r.response) === null)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment });
+    else if (r.record === "attempt" && isQuestion(r.questionId) && serverVerdict(r) === null && r.assessment?.unresolved === true && (r.assessment.source === "infrastructure" || creditOf(r.questionId, r.response) === null)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment });
     else if (r.record === "attempt" && isQuestion(r.questionId)) {
       // the same problem in another answer format is the same exposure: a second sight is never fresh evidence
       const key = exposureKey(r.questionId);
@@ -111,7 +125,7 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
       const mark = isWritten(r.questionId) ? markOf.get(r.id) : undefined;
       // a marked written answer enters the engine as the educator's mark, never as the learner's own text
       const response = mark ? (mark.verdict === "correct" ? MARKED_RIGHT : MARKED_NOT) : r.response;
-      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response, activity: r.activity, hints: r.hints, solution: r.solution, competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}), ...(mark ? { written: { text: r.response, mark } } : {}) });
+      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response, activity: r.activity, hints: r.hints, solution: r.solution, competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}), ...(mark ? { written: { text: r.response, mark } } : {}), ...(mark ? { credit: mark.verdict === "correct" } : serverVerdict(r) === "correct" || serverVerdict(r) === "incorrect" ? { credit: serverVerdict(r) === "correct" } : {}) });
     } else if (r.record === "teach") out.teaching.push({ at: r.at, rule: r.rule, strategy: r.strategy, competency: r.competency, session: r.sessionId });
     else if (r.record === "skip") out.skips.push({ at: r.at, target: r.target });
   }

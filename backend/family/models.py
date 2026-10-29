@@ -261,3 +261,32 @@ class WritingDraft(models.Model):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=['pupil', 'problem_key'], name='unique_pupil_writing_problem')]
+
+
+# ---------------------------------------------------------------- grading decisions (grading-decision@1)
+
+
+class GradingDecisionRecord(models.Model):
+    """One authoritative grading decision about one stored attempt (UNIFIED_GRADING_ARCHITECTURE.md §7, §9). Append-only: a decision is
+    never changed. A later decision about the same attempt names the one it supersedes (an automatic regrade of an infrastructure
+    failure, or an approved, reported batch); replay uses the latest that nothing supersedes. The same decision is also kept inside the
+    attempt event body, which is itself immutable."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="grading_decisions")
+    subject = models.CharField(max_length=24, choices=SUBJECTS)
+    attempt_id = models.CharField(max_length=100)
+    decision_id = models.CharField(max_length=40, unique=True)
+    supersedes = models.CharField(max_length=40, blank=True, default="")
+    reason = models.CharField(max_length=60)
+    verdict = models.CharField(max_length=20)
+    decided_at = models.DateTimeField()
+    body = models.JSONField()
+
+    class Meta:
+        ordering = ["pupil", "subject", "decided_at", "id"]
+        indexes = [models.Index(fields=["pupil", "subject", "attempt_id"], name="grading_decision_attempt")]
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValueError("grading decisions are append-only")
+        super().save(*args, **kwargs)
