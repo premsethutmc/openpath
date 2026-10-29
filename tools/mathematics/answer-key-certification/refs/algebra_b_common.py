@@ -62,6 +62,7 @@ def clean(s):
     s = s.replace('−', '-').replace('×', '*').replace('·', '*').replace('÷', '/').replace('⋅', '*')
     for k, v in _SUPS.items():
         s = s.replace(k, v)
+    s = re.sub(r'(?<![\w.])0x', '0*x', s)
     return s
 
 

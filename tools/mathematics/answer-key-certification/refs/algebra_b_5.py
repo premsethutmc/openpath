@@ -62,7 +62,7 @@ def aopfq(q):
 @ref('aopfint', 'integrand decomposed with sympy apart; antiderivative assembled term by term (c·log|x−a|), differentiated back and compared to the integrand at 8 points', 'exhaustive')
 def aopfint(q):
     m = re.match(r'Find ∫ (.*?) dx by first', q['prompt'])
-    f = P(m.group(1)); X = sp.Symbol('x')
+    X = sp.Symbol('x', real=True); f = P(m.group(1), x=X)
     parts = sp.apart(f, X)
     F = 0
     for term in sp.Add.make_args(parts):

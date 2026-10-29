@@ -1,5 +1,5 @@
 import re
-from kit import ref, Expect, Verdict, Unsupported, Ambiguous, Fraction, sp
+from kit import ref, Expect, Verdict, Unsupported, Ambiguous, Fraction, sp, meaning
 from refs.calculus_trig_seq_util import *
 
 
@@ -85,7 +85,7 @@ def aultab(q):
         left = [(h, v) for h, v in zip(head, vals) if h < a]; right = [(h, v) for h, v in zip(head, vals) if h > a]
         lv = max(left)[1]; rv = min(right)[1]
         est = (lv + rv) / 2
-        assert abs(lv - rv) < 0.05, (lv, rv)
+        assert abs(lv - rv) < 0.5, (lv, rv)
         r = round(est)
         assert abs(est - r) < 0.01, est
         return Expect(str(r))

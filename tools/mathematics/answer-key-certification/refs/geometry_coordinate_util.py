@@ -25,7 +25,7 @@ def points(s, dim=None):
     """[(label, (coords...))] for every  P(1, 2)  /  (1, 2)  /  (1, 2, 3)  in the text"""
     s = U(s)
     out = []
-    for m in re.finditer(r'(?<![A-Za-z0-9])([A-Z][A-Za-z]?)?\s*\(\s*(' + NUM + r')\s*,\s*(' + NUM + r')(?:\s*,\s*(' + NUM + r'))?\s*\)', s):
+    for m in re.finditer(r'(?<![A-Za-z0-9])([A-Z][A-Za-z]?)?\s*(?:is\s+)?\(\s*(' + NUM + r')\s*,\s*(' + NUM + r')(?:\s*,\s*(' + NUM + r'))?\s*\)', s):
         c = [R(m.group(i)) for i in (2, 3, 4) if m.group(i) is not None]
         if dim and len(c) != dim:
             continue

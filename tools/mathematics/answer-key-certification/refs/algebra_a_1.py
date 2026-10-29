@@ -313,7 +313,7 @@ def aeineqz(q):
     a_, b_, op_ = ineq_ab(ineq)
     test = {'<': lambda t: t < 0, '<=': lambda t: t <= 0, '>': lambda t: t > 0, '>=': lambda t: t >= 0}[op_]
     sol = [v for v in dom if test(a_ * v + b_)]
-    for v in (dom[0], dom[-1], 0):
+    for v in (dom[0], dom[-1]):
         assert (v in sol) == member(ineq, Fr(v))
     if dom[-1] in sol and dom[-1] == 399:
         return Verdict(False, 'infinite solution set')

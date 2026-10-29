@@ -189,7 +189,7 @@ def aqfp(q):
 @ref('aqhom', method='substitute the stored y(x) into the ODE and initial condition (numeric residual, SymPy diff); IVP uniqueness by Picard', coverage='exhaustive')
 def aqhom(q):
     m = re.search(r'dy/dx = (.+?), x > (−?\d+), given that y = (−?\d+) when x = (−?\d+)\.', q['prompt'])
-    return ode_check(q['answer'], E(m.group(1)), m.group(4), m.group(3))
+    return verdict_mc(q, ode_pred(E(m.group(1)), m.group(4), m.group(3)))
 
 
 @ref('aqivp', method='FTC: value = initial value + integral of the rate between the given point and the target (SymPy)', coverage='exhaustive')
@@ -245,7 +245,7 @@ def _linear_lhs(lhs_text):
 def aqlinde(q):
     m = re.search(r'dy/dx \+ (.+?) = (.+?), x > 0, given that y = (−?\d+) when x = (−?\d+)\.', q['prompt'])
     rhs = E(m.group(2)) - E(m.group(1))     # y' = Q - P*y
-    return ode_check(q['answer'], rhs, m.group(4), m.group(3))
+    return verdict_mc(q, ode_pred(rhs, m.group(4), m.group(3)))
 
 
 @ref('aqmono', method='sign of f\' via SymPy solveset on the inequality f\'>0 / f\'<0', coverage='exhaustive')
@@ -306,13 +306,13 @@ def aqrr(q):
 @ref('aqsep', method='substitute the stored y(x) into dy/dx = g(x) y and the initial condition (numeric residual, SymPy diff); IVP uniqueness', coverage='exhaustive')
 def aqsep(q):
     m = re.search(r'dy/dx = (.+?), (?:x > (−?\d+), )?given that y = (−?\d+) when x = (−?\d+)\.', q['prompt'])
-    return ode_check(q['answer'], E(m.group(1)), m.group(4), m.group(3))
+    return verdict_mc(q, ode_pred(E(m.group(1)), m.group(4), m.group(3)))
 
 
 @ref('aqsubsep', method='substitute the stored y(x) into the stated ODE and initial condition (numeric residual, SymPy diff)', coverage='exhaustive')
 def aqsubsep(q):
     m = re.search(r'Solve dy/dx = (.+?), given that y = (−?\d+) when x = (−?\d+),', q['prompt'])
-    return ode_check(q['answer'], E(m.group(1)), m.group(3), m.group(2), offsets=(Fraction(1, 100), Fraction(1, 50), Fraction(1, 25), Fraction(1, 10), Fraction(1, 5)))
+    return verdict_mc(q, ode_pred(E(m.group(1)), m.group(3), m.group(2), offsets=[sp.Rational(1, 100), sp.Rational(1, 50), sp.Rational(1, 25), sp.Rational(1, 10), sp.Rational(1, 5)]))
 
 
 @ref('aqtann', method='tangent/normal from the SymPy derivative at the point; angle: tan(theta) = |(m1-m2)/(1+m1 m2)| from the two derivatives', coverage='exhaustive')

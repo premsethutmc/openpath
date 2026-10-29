@@ -215,3 +215,70 @@ def antideriv_pred(integrand, domain=None):
                 return False, f'log of {arg} without absolute value but the argument is not positive on the domain'
         return True, 'derivative equals integrand'
     return pred
+
+
+def deg(s):
+    """rewrite 'sin² 45°', 'cosec(30°)', 'tan 60°' ... so that mathtext can read it: degrees -> radians, exponent after the name"""
+    s = s.replace('cosec', 'csc')
+    s = re.sub(r'(sin|cos|tan|cot|sec|csc)([²³]?)\s*(?:\(\s*(−?\d+(?:\.\d+)?)\s*°\s*\)|(−?\d+(?:\.\d+)?)\s*°)',
+               lambda m: f"(({m.group(1)}(({m.group(3) or m.group(4)})*pi/180)))" + (f"**{m.group(2).translate(SUP)}" if m.group(2) else ''), s)
+    s = s.replace('−', '-').replace('÷', '/').replace('×', '*')
+    return s
+
+
+def _balanced(text, i):
+    """index just after the bracketed argument starting at text[i] == '('"""
+    d = 0
+    for j in range(i, len(text)):
+        d += text[j] == '('
+        d -= text[j] == ')'
+        if d == 0:
+            return j + 1
+    raise ValueError('unbalanced')
+
+
+def inv_trig(s):
+    """read 'sin⁻¹(...)' / 'tan⁻¹ 3' etc. with the standard principal branches:
+    sin⁻¹ [-pi/2,pi/2], cos⁻¹ [0,pi], tan⁻¹ (-pi/2,pi/2), cot⁻¹ (0,pi), sec⁻¹ [0,pi]-{pi/2}, cosec⁻¹ [-pi/2,pi/2]-{0}"""
+    s = s.replace('cosec⁻¹', 'csc⁻¹')
+    while True:
+        m = re.search(r'(sin|cos|tan|cot|sec|csc)⁻¹\s*', s)
+        if not m:
+            break
+        i = m.end()
+        if s[i] == '(':
+            j = _balanced(s, i); arg = s[i:j]
+        else:
+            mm = re.match(r'[−-]?\d+(?:/\d+)?(?:√\d+)?', s[i:])
+            arg = '(' + mm.group(0) + ')'; j = i + len(mm.group(0))
+        name = m.group(1)
+        rep = {'sin': f'arcsin{arg}', 'cos': f'arccos{arg}', 'tan': f'arctan{arg}', 'cot': f'(pi/2-arctan{arg})',
+               'sec': f'arccos(1/{arg})', 'csc': f'arcsin(1/{arg})'}[name]
+        s = s[:m.start()] + ' ' + rep + ' ' + s[j:]
+    return s
+
+
+def mp_close(a, b, tol=1e-25):
+    try:
+        return abs(complex(sp.N(a - b, 60))) < tol
+    except Exception:  # noqa: BLE001
+        return False
+
+
+def value_pred(q, value, rationalise=False):
+    """pred(text): text denotes the number `value` (oracle reader, 60-digit numeric), optionally with a rationalised denominator"""
+    from kit import oracle, context
+
+    def pred(text):
+        try:
+            v = oracle.meaning(q['type'], text, context(q))
+        except Exception as ex:  # noqa: BLE001
+            return False, f'unreadable {text!r}: {ex}'
+        if isinstance(v, list):
+            return False, 'not a single value'
+        if not mp_close(v, value):
+            return False, f'value differs: stored {text!r} = {sp.N(v, 15)} vs derived {sp.N(value, 15)}'
+        if rationalise and re.search(r'/\s*(?:\([^)]*√|[^()\s]*√)', text.replace(' ', '')) and not re.search(r'√\d+\)?/\d+$', text):
+            return False, f'FORM: denominator of {text!r} still contains a root'
+        return True, 'value matches'
+    return pred

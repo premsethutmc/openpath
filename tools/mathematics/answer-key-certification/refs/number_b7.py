@@ -131,7 +131,7 @@ def avexpn(q):
     p = q['prompt']
     m = re.match(r'Write (.*?) in exponential form, as (.*?)\. Give', p)
     factors = [t.strip() for t in m[1].split('×')]
-    bases = re.findall(r'(\w)\^□', m[2])
+    bases = re.findall(r'(\w+)\^□', m[2])
     assert set(factors) <= set(bases)
     return Expect('(' + ', '.join(str(factors.count(b)) for b in bases) + ')')
 
@@ -167,12 +167,11 @@ def avfexp(q):
         assert r is not None
         v = F(r) ** a
         return Expect(txt(v))
-    m = re.match(r'Write (?:(∛|∜)|(\d)?√)\(x(²|³)?\) in index form as xᵏ', p) or re.match(r'Write (∛|∜|[⁵⁶⁷]?√)\(x([²³])?\) in index form', p)
-    m = re.match(r'Write ([∛∜]|[⁰-⁹]?√)\(x([²³])?\) in index form', p)
+    m = re.match(r'Write ([∛∜]|[' + ''.join(SUP) + r']?√)\(x([' + ''.join(SUP) + r']+)?\) in index form', p)
     rt = {'√': 2, '∛': 3, '∜': 4}
     s = m[1]
     n = rt.get(s) or int(''.join(SUP[c] for c in s[:-1]))
-    e = int(SUP[m[2]]) if m[2] else 1
+    e = int(''.join(SUP[c] for c in m[2])) if m[2] else 1
     return Expect(txt(F(e, n)))
 
 
@@ -432,3 +431,28 @@ UNS = {
     'avlike': 'type choice: the candidate pairs A-D are not in the prompt or export; the key letter cannot be mapped to a pair',
     'avprop': 'type choice: options A-D are not in the prompt or export; the key letter cannot be mapped to yes/no (or any other reading)',
 }
+
+
+@ref('ajb10', 'positional expansion sum(d_i * b^i), digit validity checked')
+def ajb10(q):
+    m = re.match(r'The numeral (\d+) is written in base (\d+)\. What is its value in base ten\?', q['prompt'])
+    s, b = m[1], int(m[2])
+    assert all(int(c) < b for c in s)
+    v = 0
+    for i, c in enumerate(reversed(s)):
+        v += int(c) * b ** i
+    return Expect(str(v))
+
+
+@ref('ajbase', 'repeated division by the base collecting remainders, verified by converting back')
+def ajbase(q):
+    m = re.match(r'Write the base-ten number (\d+) in base (\d+)\. Type the digits of the base-(\d+) numeral\.', q['prompt'])
+    n, b = int(m[1]), int(m[2])
+    assert int(m[3]) == b
+    ds, k = [], n
+    while k:
+        k, r = divmod(k, b)
+        ds.append(r)
+    s = ''.join(str(d) for d in reversed(ds)) or '0'
+    assert sum(int(c) * b ** i for i, c in enumerate(reversed(s))) == n
+    return Expect(s)
