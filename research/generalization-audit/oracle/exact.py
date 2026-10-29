@@ -472,11 +472,25 @@ def find_value_counterexample(d, conds, x, D):
     return None
 
 
+def _norm_conds(cs):
+    """Normalise domain conditions: a product is nonzero iff every irreducible factor is nonzero."""
+    out = set()
+    for k, e in cs:
+        if k == "ne0":
+            fl = sp.factor_list(sp.factor(e))[1] if e.free_symbols else []
+            for f, _m in fl:
+                out.add(("ne0", sp.factor(f)))
+            if not e.free_symbols and e == 0:
+                out.add(("ne0", e))
+        else:
+            out.add((k, sp.factor(e)))
+    return out
+
+
 def multi_expression_relation(e1, c1, e2, c2, syms) -> TransitionResult:
     d = e1 - e2
     if zero_test(d):
-        k1 = {(k, sp.factor(e)) for k, e in c1}
-        k2 = {(k, sp.factor(e)) for k, e in c2}
+        k1, k2 = _norm_conds(c1), _norm_conds(c2)
         if k1 == k2:
             return TransitionResult("equivalent", "expression", "exact identity, identical domain conditions", evidence=["zero-test"])
         if k2 <= k1:

@@ -19,3 +19,6 @@ history.
    to certify trigonometric sets over unbounded domains, and on bounded domains cross-checks every finite set by
    dense numeric root search and every relation by sampled membership; any disagreement => uncertified. Numeric
    checks are used only to refuse, never to certify.
+7. Multivariable expressions: domain conditions are compared after splitting nonzero products into irreducible
+   factors (MUL-0060: ab ≠ 0 ⇔ a ≠ 0 ∧ b ≠ 0). Systems: a final line listing complete solution tuples joined by
+   "or" is compared as a solution set (MUL-0160).

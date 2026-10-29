@@ -216,6 +216,21 @@ def certify_system(task, olines):
             final = st
     if errors:
         return {"verdict": "invalid", "certified": True, "facts": {"errors": errors}, "evidence": str(sol)}
+    # a final line listing complete solution tuples ('x=0, y=3 or x=1, y=2') is compared as a set of solutions
+    last = next((ol for ol in reversed(olines) if ol and not ol.startswith("claim:")), None)
+    if last is not None:
+        st = parse_statement(last, ctx)
+        alts = st.parts if st.kind == "or" else [st]
+        tuples = []
+        for p in alts:
+            d = {}
+            for q in (p.parts if p.kind == "and" else [p]):
+                if q.kind == "rel" and q.ops == ["="] and q.exprs[0].is_Symbol and not q.exprs[1].free_symbols:
+                    d[q.exprs[0]] = q.exprs[1]
+            tuples.append(d)
+        if all(set(d) == set(syms) for d in tuples) and len(tuples) > 1:
+            same = sorted(map(str, [dict(sorted(d.items(), key=str)) for d in tuples])) == sorted(map(str, [dict(sorted(s.items(), key=str)) for s in sol]))
+            return {"verdict": "verified" if same else "invalid", "certified": True, "facts": {"solution": str(sol)}, "evidence": str(sol)}
     # every variable must be pinned by the concluding lines (all '=' lines with a single variable on the left)
     pinned = set()
     for ol in olines:
