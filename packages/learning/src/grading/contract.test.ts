@@ -1,6 +1,7 @@
 /**
  * Stage 3 acceptance: contract openpath-assessment@2 and required-form enforcement (approved policy P2).
  */
+import { formCertified } from "./certify.ts";
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { FAMILIES, pool, problemOf } from "../families.ts";
@@ -17,7 +18,9 @@ const verdict = (id: string, r: string) => { const a = decide(id, r); return { c
 describe("contract@2", () => {
   test("is built from the definition, versioned and identified by its hash", () => {
     const id = first("aifdiv"), c = contractV2(id);
-    expect(c).toMatchObject({ schema: CONTRACT_SCHEMA, questionId: id, source: { kind: "generator", family: "aifdiv" }, semantics: { kind: "rational", mixed: true }, status: "provisional", keyAuthority: "generator-only" });
+    expect(c).toMatchObject({ schema: CONTRACT_SCHEMA, questionId: id, source: { kind: "generator", family: "aifdiv" }, semantics: { kind: "rational", mixed: true }, keyAuthority: "generator-only" });
+    // stage 5: the status follows the certification registry (audit evidence), and is not part of the contract's meaning or hash
+    expect(c.status).toBe(formCertified(id) ? "certified" : "provisional");
     expect(c.contractHash).toMatch(/^[0-9a-f]{64}$/);
     expect(contractV2(first("aogp")).keyAuthority).toBe("independent-kernel");
     expect(contractV2("gen:adexp:9,8,5,7:w").status).toBe("quarantined");

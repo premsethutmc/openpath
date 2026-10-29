@@ -15,7 +15,7 @@ from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
-from .kernel_grader import kernel_decision
+from .kernel_grader import enabled as grader_enabled, kernel_decision
 from .question_status import quarantined
 from .learning_families import exposure, generated
 from .models import PupilEvent
@@ -158,9 +158,9 @@ def right(q, response):
     return c is not None and c == canonical(q['type'], q['answer'])
 
 
-UNRESOLVED_CAP = 2  # the app's records.ts UNRESOLVED_CAP: undecided submissions per problem that sit outside the attempts
 ASSESSMENT_KEYS = {'policy', 'answerCorrect', 'methodExamined', 'derivationVerified', 'firstError', 'clarificationRequired', 'aiFallbackUsed', 'unresolved', 'source'}
-ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement', 'parser'}
+ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement', 'parser', 'verifier', 'infrastructure'}
+GRADER_SOURCES = {'kernel', 'verifier', 'parser', 'held'}  # decided by the trusted grader (grading/decision.ts): the record carries the verdict
 
 
 def _assessment_ok(a, q, response=None):
@@ -182,7 +182,8 @@ def _authoritative(event, q, readable):
     """The server's decision about one answer, and nothing the client claims. Where the trusted exact grader (kernel_grader) has verified
     the question, its verdict decides (correct, incorrect, or undecided); everywhere else the stored answer decides (the python mirror of
     the app's legacy comparison) and the result is labelled `legacy`, whatever the browser called it. An answer neither route can read is
-    saved and left undecided (never wrong). Written answers stay with the educator."""
+    saved and left undecided (never wrong). Written answers stay with the educator.
+    grading-policy@1 (Phase C): the trusted grader decides every known question; there is no stored-answer fallback (see below)."""
     a = event.get('assessment')
     if quarantined(event.get('questionId')):
         # question-status@1: no authoritative grade for a quarantined question, whatever the browser sent; the answer is kept
@@ -191,16 +192,17 @@ def _authoritative(event, q, readable):
     if q['type'] in HUMAN:
         return None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'}
     base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'clarificationRequired': False, 'firstError': None}
-    k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working')) if q.get('role') == 'generated' else None
+    # grading-policy@1: the trusted grader runs THE decision (the app's own code) for every known question; its verdict is recorded as is
+    k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working'))
     if k is not None:
         ok = k['credit']
-        return {**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': 'kernel'}
-    if readable:
-        if a is None:
-            return None
-        ok = right(q, event['response'])
-        return {**a, 'answerCorrect': ok, 'unresolved': False, 'firstError': None if ok else a['firstError'], 'source': 'legacy'}
-    return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': True, 'unresolved': True, 'source': 'legacy'}
+        return {**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': k['source']}
+    # grading-policy@1 failure semantics (UNIFIED_GRADING_ARCHITECTURE.md §11, D12): no other comparison is substituted. The grader not
+    # runnable (missing, tampered, disabled, timed out, crashed) -> unresolved, source "infrastructure"; a reply refused because the
+    # grader's stored answer differs from this server's (parity: a contract inconsistency) -> unresolved, source "held". Never incorrect,
+    # never credited, never an attempt; the answer is kept for a later grading.
+    source = 'held' if grader_enabled() else 'infrastructure'
+    return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source}
 
 
 def credited(q, event):
@@ -208,7 +210,7 @@ def credited(q, event):
     a = event.get('assessment') or {}
     if quarantined(event.get('questionId')):
         return False
-    if a.get('source') == 'kernel':
+    if a.get('source') in GRADER_SOURCES:
         return a.get('answerCorrect') is True
     return right(q, event.get('response', ''))
 
@@ -219,7 +221,7 @@ def independent_at(prior, competency, marks=None):
     yet evidence of anything."""
     qs = content()['questions']
     marks = marks or {}
-    seen, distinct, held = {}, set(), {}
+    seen, distinct = {}, set()
     for e in prior:
         if e.get('record') == 'attempt' and (qs.get(e.get('questionId')) or {}).get('type') in HUMAN and e.get('id') not in marks:
             continue
@@ -231,9 +233,7 @@ def independent_at(prior, competency, marks=None):
         if quarantined(e['questionId']):
             continue  # question-status@1: never an attempt, never evidence
         if (e.get('assessment') or {}).get('unresolved') is True:
-            held[key] = held.get(key, 0) + 1
-            if held[key] <= UNRESOLVED_CAP:
-                continue  # undecided: not an attempt (the app's readRecords)
+            continue  # undecided (set by this server, never by the browser): not an attempt, however many (approved policy P1, D16)
         n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue

@@ -9,6 +9,7 @@ import { question } from "../content.ts";
 import { problemOf } from "../families.ts";
 import { sha256Hex } from "../digest.ts";
 import { quarantined } from "../question-status.ts";
+import { formCertified } from "./certify.ts";
 import { declaredRules, FORM_INSTRUCTIONS, FORM_RULES_HASH, judgeForm, MIXED_PERMITTED, statedRules, type FormRule, type FormRuleId } from "./forms.ts";
 import { parseResponse, semanticsOf, PARSER_VERSION, type ParseResult, type Semantics } from "./parse.ts";
 import type { Assessment } from "../assessment.ts";
@@ -66,16 +67,17 @@ export function contractV2(qid: string): ContractV2 {
       for (const f of form) if (judgeForm(f.rule, semantics.kind, p) === "violated") inconsistencies.push(`the stored answer "${q.answer}" does not satisfy its own form rule ${f.rule}`);
     } else inconsistencies.push(`the stored answer "${q.answer}" is not read by the strict parser (${p.status === "ambiguous" ? "ambiguous" : p.reason})`);
   }
-  const status: QuestionStatus = quarantined(qid) ? "quarantined" : q.type === "written" ? "educator" : "provisional";
+  // status is the question's standing (registry facts), not part of what the contract means: it is kept out of the contract hash
+  const status: QuestionStatus = quarantined(qid) ? "quarantined" : q.type === "written" ? "educator" : formCertified(qid) ? "certified" : "provisional";
   const body = {
     schema: CONTRACT_SCHEMA, questionId: qid, builder: CONTRACT_BUILDER, parser: PARSER_VERSION, formRulesHash: FORM_RULES_HASH,
     source: { kind: pr ? ("generator" as const) : ("authored" as const), family, params: pr?.params ?? null },
     semantics, expected: { stored: q.answer, canonical, value }, domain: { variable: v1.variable, assumptions: v1.assumptions },
     form, undeterminable, mode: q.type === "written" ? ("educator" as const) : ("answer-only" as const),
     keyAuthority: v1.verification === "verified" ? ("independent-kernel" as const) : q.type === "written" ? ("educator" as const) : ("generator-only" as const),
-    status, inconsistencies, v1: { verification: v1.verification, capability: v1.capability, reason: v1.reason },
+    inconsistencies, v1: { verification: v1.verification, capability: v1.capability, reason: v1.reason },
   };
-  const c: ContractV2 = { ...body, contractHash: sha256Hex(JSON.stringify(body)) };
+  const c: ContractV2 = { ...body, status, contractHash: sha256Hex(JSON.stringify(body)) };
   cache.set(qid, c);
   return c;
 }

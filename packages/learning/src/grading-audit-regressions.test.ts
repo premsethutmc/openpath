@@ -61,7 +61,7 @@ describe("defects (test = fixed in Phase C; test.failing = still open, flip when
   // a learner who copies the displayed form is asked to clarify. Fix: the generator writes e^(x)(…) or e^x·(…).
   test.failing("D18 the stored aqd2 notation is unambiguous", () => { const id = pool("aqd2").items.find((p) => /^e\^x\(/.test(p.answer))!.id; expect(decide(id, problemOf(id)!.answer).credit).toBe(true); });
   // D16 (approved policy 1, 2026-10-29): an unreadable submission never consumes an assessed attempt, however many are sent (abuse is rate-limited elsewhere)
-  test.failing("D16 four unreadable submissions create no attempt", () => {
+  test("D16 four unreadable submissions create no attempt (fixed in stage 6)", () => {
     const at = (n: number) => ({ learnerId: "L", sessionId: "S", at: new Date(Date.UTC(2026, 9, 1, 9, n)).toISOString() });
     const rr = readRecords("L", [0, 1, 2, 3].map((n) => make.attempt(at(n), "gen:lin:3,5,4", "four-ish", "practice")));
     expect(rr.attempts.length).toBe(0);

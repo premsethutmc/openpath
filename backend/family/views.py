@@ -36,7 +36,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.exceptions import APIException, Throttled, ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.throttling import ScopedRateThrottle
+from rest_framework.throttling import ScopedRateThrottle, SimpleRateThrottle
 from rest_framework.views import APIView
 
 from .models import ACTIVE_SUBJECTS, Pupil, PupilEvent
@@ -363,8 +363,18 @@ class PupilView(AccountBase):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class PupilEventWriteThrottle(SimpleRateThrottle):
+    """Approved policy P1 (2026-10-29): unreadable answers never cost an attempt, so repeated submissions are limited here, by request
+    rate per pupil (OPENPATH_EVENT_RATE), never by assessment. Reading the ledger is not limited."""
+    scope = "pupil-events"
+
+    def get_cache_key(self, request, view):
+        return None if request.method != "POST" else self.cache_format % {"scope": self.scope, "ident": view.kwargs.get("pupil_id")}
+
+
 class PupilEventsView(AccountBase):
     """A pupil's ledger for one subject: read it in order, append one event, or fill an empty one (an import)."""
+    throttle_classes = [PupilEventWriteThrottle]
 
     def get(self, request, pupil_id):
         pupil = _owned(request, pupil_id)

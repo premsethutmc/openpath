@@ -1,6 +1,6 @@
 // Grading audit, step 3: production verdicts from the app's own grading code, in process, for every oracle candidate.
 //   client : grade.ts decide()            — what the app shows and records (the browser route)
-//   kernel : server-grader.ts gradeRequest — what the trusted Node grader returns to Django (the bundle is checked for parity separately)
+//   kernel : server-grader.ts gradeRequest — the trusted grader's reply to Django (verdict, reason, verifier; the bundle is checked for parity separately)
 // Usage: bun run-client.ts data/oracle data/client   (resumable: a family whose output exists is skipped)
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -25,7 +25,7 @@ for (const f of files) {
       } catch (e) { client = { error: String((e as Error).message).slice(0, 200) }; }
       try {
         const k = gradeRequest({ id: q.qid, response: c.response, working: c.working });
-        kernel = { verification: k.verification, credit: k.credit, capability: k.capability };
+        kernel = { credit: k.credit, verdict: k.verdict, reason: k.reason, source: k.source, verifier: k.decision?.verifier ?? null, certified: k.decision?.certified ?? null };
       } catch (e) { kernel = { error: String((e as Error).message).slice(0, 200) }; }
       rows.push({ qid: q.qid, response: c.response, working: c.working, client, kernel });
       n++;

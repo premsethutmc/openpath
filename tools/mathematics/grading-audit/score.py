@@ -84,7 +84,7 @@ for f in sorted(os.listdir(src_o)):
     fam = {'family': o['family'], 'questions': len(o['questions']), 'cases': 0, 'unverified': 0, 'client': Counter(), 'backend': Counter(),
            'disagreements': 0, 'types': sorted({q['type'] for q in o['questions']}), 'forms': sorted({q['form'] for q in o['questions']}),
            'formRules': sorted({r for q in o['questions'] for r in q['formRules']}), 'storedUnreadableByOracle': sum(1 for q in o['questions'] if not q['storedReadable']),
-           'acceptedEqualForms': Counter(), 'rejectedEqualForms': Counter(), 'unresolvedEqualForms': Counter()}
+           'acceptedEqualForms': Counter(), 'rejectedEqualForms': Counter(), 'unresolvedEqualForms': Counter(), 'verifiers': Counter()}
     for q in o['questions']:
         for cand in q['candidates']:
             cr, br = c[i], b[i]
@@ -92,6 +92,9 @@ for f in sorted(os.listdir(src_o)):
             assert cr['qid'] == q['qid'] == br['qid'] and cr['response'] == cand['response'] == br['response'], (f, i)
             truths[cand['truth']] += 1
             fam['cases'] += 1
+            kv = cr.get('kernel', {})
+            if kv.get('verdict') in ('correct', 'incorrect') and kv.get('verifier'):
+                fam['verifiers'][f"{q['form']}:{kv['verifier']}"] += 1
             vc, vb = v_client(cr['client']), v_backend(br['backend'])
             oc, ob = outcome(cand['truth'], cand['violates'], vc), outcome(cand['truth'], cand['violates'], vb)
             if cand['truth'] == 'unverified':
@@ -115,9 +118,9 @@ for f in sorted(os.listdir(src_o)):
                                  'working': cand['working'], 'tag': cand['tag'], 'truth': cand['truth'], 'invalid': cand.get('invalid'), 'basis': cand['basis'], 'violates': cand['violates'],
                                  'client': {'verdict': vc, 'outcome': oc, 'source': cr['client'].get('source')},
                                  'backend': {'verdict': vb, 'outcome': ob, 'source': br['backend'].get('source'), 'readable': br['backend'].get('readable')},
-                                 'kernel': cr.get('kernel', {}).get('verification')})
+                                 'grader': {k: cr.get('kernel', {}).get(k) for k in ('verdict', 'reason', 'verifier')}})
     assert i == len(c) == len(b)
-    for k in ('client', 'backend', 'acceptedEqualForms', 'rejectedEqualForms', 'unresolvedEqualForms'):
+    for k in ('client', 'backend', 'acceptedEqualForms', 'rejectedEqualForms', 'unresolvedEqualForms', 'verifiers'):
         fam[k] = dict(fam[k])
     families.append(fam)
 

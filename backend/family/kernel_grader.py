@@ -1,9 +1,9 @@
-"""The server's use of the trusted exact grader (the TypeScript assessment package, bundled to grader/grader.mjs and run by Node).
+"""The server's use of the trusted grader (the TypeScript grading package, bundled to grader/grader.mjs and run by Node).
 
-The browser's verdict is never an input: the grader is given a question id, the student's response and permitted working, and
-rebuilds the question's contract from the generator's own definition. This module answers only for questions the grader reports
-as `verified`, and only when the grader's expected answer is exactly the answer this server stores for the question; in every
-other case it returns None and the caller keeps its stored-answer comparison and labels it `legacy`.
+The browser's verdict is never an input: the grader is given a question id, the student's response and permitted working, rebuilds the
+question's contract from its own definition and runs THE grading decision (grading/decision.ts), the same code the app runs. It answers
+for every known question (generated or authored). This module accepts a reply only when the grader's stored answer is exactly the answer
+this server stores for the question (parity); otherwise, or when the grader cannot run, it returns None (the caller's failure path).
 
 Standard library only (no Django), so it can be tested on its own.
 """
@@ -18,7 +18,8 @@ from pathlib import Path
 
 BUNDLE = Path(__file__).resolve().parent / 'grader' / 'grader.mjs'
 MANIFEST = BUNDLE.with_name('grader.manifest.json')
-QUESTION_ID = re.compile(r'^gen:[a-z0-9]+:-?\d+(?:,-?\d+)*(?::mc|:w)?$')
+QUESTION_ID = re.compile(r'^(?:gen:[a-z0-9]+:-?\d+(?:,-?\d+)*(?::mc|:w)?|[a-z][a-z0-9]*(?:[-.][a-z0-9]+){0,6})$')
+SOURCES = {'kernel', 'verifier', 'parser', 'held', 'educator'}
 
 
 def _timeout():
@@ -59,18 +60,26 @@ def run(requests):
 
 
 def _reply_ok(reply, question_id, stored_answer):
-    return (isinstance(reply, dict) and reply.get('v') == 1 and reply.get('id') == question_id and reply.get('verification') == 'verified'
+    return (isinstance(reply, dict) and reply.get('v') == 2 and reply.get('id') == question_id and reply.get('known') is True
             and reply.get('credit') in (True, False, None) and isinstance(reply.get('credit'), (bool, type(None)))
-            and reply.get('expected') == stored_answer and isinstance(reply.get('capability'), str))
+            and reply.get('expected') == stored_answer and reply.get('source') in SOURCES
+            and reply.get('verdict') in ('correct', 'incorrect', 'unresolved', 'pending-educator')
+            and (reply['verdict'] == 'correct') == (reply['credit'] is True) and (reply['verdict'] == 'incorrect') == (reply['credit'] is False)
+            and isinstance(reply.get('reason'), str))
 
 
-def kernel_decision(question_id, response, stored_answer, working=None):
-    """{'credit': True|False|None, 'capability': str} when the trusted grader verified this question and decided it; otherwise None.
-    credit None = the grader could not establish the answer (unreadable or unsupported form): undecided, never wrong."""
+def grader_decision(question_id, response, stored_answer, working=None):
+    """{'credit': True|False|None, 'source': str, 'reason': str, 'verdict': str} from the trusted grader, or None if it could not decide here
+    (not runnable, failed, or its stored answer differs from this server's). credit None = undecided (never wrong)."""
     if not isinstance(question_id, str) or not QUESTION_ID.match(question_id) or not isinstance(response, str):
         return None
     w = [x for x in (working or []) if isinstance(x, str)][:8]
     out = run([{'id': question_id, 'response': response, 'working': w}])
     if out is None or not _reply_ok(out[0], question_id, stored_answer):
         return None
-    return {'credit': out[0]['credit'], 'capability': out[0]['capability']}
+    return {k: out[0][k] for k in ('credit', 'source', 'reason', 'verdict')}
+
+
+def kernel_decision(question_id, response, stored_answer, working=None):
+    """Compatibility name (assessment@1 callers): the trusted grader's decision, now for every known question."""
+    return grader_decision(question_id, response, stored_answer, working)

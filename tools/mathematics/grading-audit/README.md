@@ -16,6 +16,7 @@ tools/mathematics/grading-audit/run-audit.sh      # from the repository root; re
 | client | `run-client.ts` | `data/client/` (ignored) | `grade.ts decide` (what the app shows and records) and `server-grader.ts gradeRequest` in process |
 | backend | `run-backend.py` | `data/backend/` (ignored) | the real Django code path (`_answer_ok`, `_authoritative`, `credited`) with the real integrity-checked Node bundle, batched; `OPENPATH_GRADER=off` measures the fallback |
 | score | `score.py` | `data/results/` | joins truth and verdicts; outcome classes are never added together |
+| certify | `certify.py` (`CERTIFY=1`) | `content/learning/grading-certifications.v1.json` | per family × form × verifier, only with zero blocking findings on both routes (GRADING_CERTIFICATION_REPORT.md) |
 | inventory | `family-meta.ts`, `policies.ts`, `inventory.py` | `data/family-meta.json`, `data/question-policies.json`, `data/inventory.json` | the 15 facts per family and the policy of every released presentation |
 
 Each family is one file per stage, written atomically; a stage skips families already present, so an interrupted run resumes.

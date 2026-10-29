@@ -173,7 +173,7 @@ export interface AssessmentEvidence {
   clarificationRequired: boolean;
   aiFallbackUsed: boolean;
   unresolved: boolean;
-  source: "kernel" | "legacy" | "educator" | "held" | "disagreement" | "parser";
+  source: "kernel" | "legacy" | "educator" | "held" | "disagreement" | "parser" | "verifier" | "infrastructure";
 }
 export interface Clarification { kind: "answer-field" | "interpretation" | "show-step"; prompt: string }
 export interface Assessment {

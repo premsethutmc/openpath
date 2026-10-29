@@ -44,14 +44,14 @@ def batch_kernel(reqs):
 
 
 def fake_kernel_decision(question_id, response, stored_answer, working=None):
-    """kernel_decision with the reply taken from the batch (same id regex, same reply check)"""
+    """kernel_grader.grader_decision with the reply taken from the batch (same id regex, same reply check)"""
     if not isinstance(question_id, str) or not kernel_grader.QUESTION_ID.match(question_id) or not isinstance(response, str):
         return None
     w = [x for x in (working or []) if isinstance(x, str)][:8]
     o = cache.get((question_id, response, tuple(w)))
     if o is None or not kernel_grader._reply_ok(o, question_id, stored_answer):
         return None
-    return {'credit': o['credit'], 'capability': o['capability']}
+    return {k: o[k] for k in ('credit', 'source', 'reason', 'verdict')}
 
 
 if not OFF:
@@ -63,7 +63,7 @@ for f in sorted(os.listdir(src)):
     if not f.endswith('.json') or os.path.exists(out):
         continue
     fam = json.load(open(os.path.join(src, f)))
-    reqs = [{'id': q['qid'], 'response': c['response'], 'working': c['working']} for q in fam['questions'] if q['qid'] in verified for c in q['candidates']]
+    reqs = [{'id': q['qid'], 'response': c['response'], 'working': c['working']} for q in fam['questions'] for c in q['candidates']]
     if not OFF:
         batch_kernel(reqs)
     rows = []

@@ -32,13 +32,13 @@ class Controls(SimpleTestCase):
 
 
 class OpenDefects(SimpleTestCase):
-    @unittest.expectedFailure
-    def test_D01_division_by_zero_in_a_set_is_unresolved(self):
+    def test_D01_division_by_zero_in_a_set_is_unresolved(self):  # fixed in stage 4 (the server runs the strict parser)
         self.assertIsNone(verdict('gen:aeeven:0', '1/0'))  # the app leaves it unresolved; the server marks it incorrect
 
-    @unittest.expectedFailure
     def test_D01_a_repeated_element_is_decided_as_the_app_decides(self):
-        self.assertIsNone(verdict('gen:aeeven:0', '12, 28, 194, 310, 12'))  # the app: unresolved; the server: incorrect
+        # fixed in stage 4. Expected value revised from None (the app's Phase A verdict) to True: under approved policy P2 a set written with a
+        # repeated element is the same set, and no form rule of this question forbids it; the server and the app now give that one verdict
+        self.assertIs(verdict('gen:aeeven:0', '12, 28, 194, 310, 12'), True)
 
     def test_D09_a_held_question_is_not_credited_by_the_legacy_fallback(self):  # fixed in Phase C stage 1 (question-status@1)
         self.assertIsNone(verdict('gen:adexp:9,8,5,7:w', '9857'))  # the app never decides a held question; the server credits it

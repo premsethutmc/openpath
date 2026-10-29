@@ -6,6 +6,9 @@ import { readRecords } from "./records.ts";
 import { evidenceFor, rightAnswer } from "./evidence.ts";
 import { question } from "./content.ts";
 import { pool } from "./families.ts";
+import { grade } from "./grading/decision.ts";
+import { certified } from "./grading/certify.ts";
+import { gradeRequest } from "./server-grader.ts";
 
 const ctx = (n = 0) => ({ learnerId: "L", sessionId: "S", at: new Date(Date.UTC(2026, 9, 1, 9, n)).toISOString() });
 const lin = "gen:lin:3,5,4", quad = "gen:quad:-5,6", Q = "MATH.algebra.linear-equations";
@@ -21,8 +24,8 @@ describe("numeric equivalence (shared answer semantics, not string exceptions)",
     expect(credit(legacy, "4")).toBe(true); expect(credit(legacy, "4.0")).toBe(true); expect(credit(legacy, "4.5")).toBe(false);
   });
   test("the stored record keeps a form the server can read", () => {
-    expect(attemptOf(lin, "4.0").response).toBe("4.0");     // the server reads 4.0 as 4
-    expect(attemptOf(lin, "x = 4").response).toBe("4");     // plain form recorded
+    // grading-policy@1 (stage 4): the record keeps what the learner wrote, and the trusted server grader (the same decision) reads it
+    for (const r of ["4.0", "x = 4"]) { expect(attemptOf(lin, r).response).toBe(r); expect(gradeRequest({ id: lin, response: r })).toMatchObject({ credit: true, verdict: "correct" }); }
   });
 });
 
@@ -95,7 +98,12 @@ describe("forged client claims do not change the grade (replay recomputes from t
 describe("legacy pathway is labelled, not presented as verified", () => {
   test("a family without a kernel decides on the stored answer and says so", () => {
     const id = firstOf("rect"), a = decide(id, question(id).answer);
-    expect(a.credit).toBe(true); expect(a.evidence.source).toBe("legacy"); expect(attemptOf(id, "4").assessment.source).toBe("legacy");
+    // grading-policy@1 (stage 4): a non-kernel question is decided by a value verifier on the parsed answer and labelled as such: never "kernel",
+    // and its contract says provisional (not certified) with a generator-only answer key
+    expect(a.credit).toBe(true); expect(a.evidence.source).toBe("verifier"); expect(attemptOf(id, "4").assessment.source).toBe("verifier");
+    // stage 5: certified only through audit evidence for this family, form and verifier (decision 1); the key stays generator-only
+    const d = grade(id, question(id).answer).decision;
+    expect(d.certified).toBe(certified(id, d.verifier)); expect(d.contract).toMatchObject({ status: d.certified ? "certified" : "provisional", keyAuthority: "generator-only" });
     expect(decide(lin, "4").evidence.source).toBe("kernel");
   });
 });

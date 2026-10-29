@@ -78,9 +78,6 @@ class LearningRecordTests(LearningBase):
             self.attempt('eq-d1', '2', activity='graded'),
             self.attempt('eq-d1', '2') | {'hints': -1},
             self.attempt('eq-d1', 'x' * 81),
-            self.attempt('eq-d1', 'two'),
-            self.attempt('eq-p2', 'E'),
-            self.attempt('fa-d1', '5/0'),
             self.rec('teach', competency='MATH.number.equivalent-fractions', strategy='invented', rule='x'),
             self.enrol(grade=13),
             self.rec('enrol', grade=4, academicYear='2026-27', curriculum={'id': G4['id'], 'version': G4['version'], 'hash': '00000000'}),
@@ -88,6 +85,29 @@ class LearningRecordTests(LearningBase):
         for e in bad:
             self.assertEqual(self.save(e).status_code, 400, e)
         self.assertEqual(self.records(), [])
+
+    def test_unreadable_answers_are_kept_unresolved_and_are_not_attempts(self):
+        # approved policy P1 (2026-10-29), replacing the earlier "refused with 400": an unreadable answer is saved, unresolved, never
+        # incorrect, never credited and never an attempt, however many are sent (abuse is limited by request throttling, not by assessment)
+        self.save(self.enrol())
+        for qid, response in [('eq-d1', 'two'), ('eq-p2', 'E'), ('fa-d1', '5/0'), ('eq-d1', 'two'), ('eq-d1', 'two')]:
+            self.assertEqual(self.save(self.attempt(qid, response)).status_code, 201, (qid, response))
+        saved = [e for e in self.records() if e.get('record') == 'attempt']
+        self.assertEqual(len(saved), 5)
+        for e in saved:
+            self.assertEqual((e['assessment']['unresolved'], e['assessment']['answerCorrect']), (True, None), e['response'])
+        from .learning import independent_at
+        self.assertIsNone(independent_at([e for e in self.records()], 'MATH.number.equivalent-fractions'))
+
+    def test_repeated_submissions_are_limited_by_request_rate_not_by_assessment(self):
+        from django.core.cache import cache
+        from unittest import mock
+        cache.clear()
+        self.save(self.enrol())
+        with mock.patch('family.views.PupilEventWriteThrottle.get_rate', return_value='3/hour'):
+            codes = [self.save(self.attempt('eq-d1', 'two')).status_code for _ in range(3)]
+        cache.clear()
+        self.assertEqual(codes, [201, 201, 429])  # the enrolment was the first write of the hour
 
     def test_answers_in_each_form(self):
         self.save(self.enrol())
@@ -207,7 +227,7 @@ class GeneratedQuestionTests(LearningBase):
         self.save(self.enrol())
         ok = self.rec('attempt', questionId='gen:cint:2,9,6', response='54', activity='diagnostic', hints=0, solution=False, competency='MATH.calculus.definite-integrals', context='investigate:gen:cint:2,9,6')
         self.assertEqual(self.save(ok).status_code, 201)
-        for bad in [ok | {'questionId': 'gen:cint:9,2,6'}, ok | {'competency': 'MATH.number.multiplication-tables'}, ok | {'questionId': 'gen:mul:7,8,9'}, ok | {'response': 'fifty'}]:
+        for bad in [ok | {'questionId': 'gen:cint:9,2,6'}, ok | {'competency': 'MATH.number.multiplication-tables'}, ok | {'questionId': 'gen:mul:7,8,9'}]:
             self.assertEqual(self.save(bad | {'id': f'x{self.serial}'}).status_code, 400, bad)
             self.serial += 1
 
@@ -363,7 +383,17 @@ class KernelAuthorityTests(LearningBase):
         self.assertIs(credited(q, ev), True)                                    # replay agrees with the stored kernel verdict
         self.assertIs(credited(q, {**ev, 'assessment': {**ev['assessment'], 'source': 'legacy'}}), False)   # without it, the stored-answer comparison would refuse "6/2"
 
-    def test_a_missing_or_tampered_grader_falls_back_to_the_labelled_legacy_route(self):
+    def test_a_refused_grader_reply_is_a_contract_inconsistency_not_a_verdict(self):
+        # the grader runs but its reply is refused (e.g. its stored answer differs from this server's): unresolved, source "held"
+        from unittest import mock
+        self.save(self.enrol())
+        with mock.patch('family.learning.kernel_decision', return_value=None):
+            self.go(self.MEAN, '3', rid='par')
+        self.assertEqual((self.stored('par')['answerCorrect'], self.stored('par')['unresolved'], self.stored('par')['source']), (None, True, 'held'))
+
+    def test_a_missing_or_tampered_grader_leaves_the_answer_unresolved(self):
+        # updated for the approved failure semantics (UNIFIED_GRADING_ARCHITECTURE.md §11, D12): no comparison is substituted when the trusted
+        # grader cannot run; the answer is kept unresolved (source "infrastructure"), never incorrect, never an attempt
         import os
         import shutil
         import tempfile
@@ -372,7 +402,7 @@ class KernelAuthorityTests(LearningBase):
         self.save(self.enrol())
         with mock.patch.dict(os.environ, {'OPENPATH_GRADER': 'off'}):
             self.go(self.MEAN, '6/2', rid='off')
-        self.assertEqual((self.stored('off')['answerCorrect'], self.stored('off')['source']), (False, 'legacy'))
+        self.assertEqual((self.stored('off')['answerCorrect'], self.stored('off')['unresolved'], self.stored('off')['source']), (None, True, 'infrastructure'))
         with tempfile.TemporaryDirectory() as d:
             bad = shutil.copy(kernel_grader.BUNDLE, os.path.join(d, 'grader.mjs'))
             shutil.copy(kernel_grader.MANIFEST, os.path.join(d, 'grader.manifest.json'))
@@ -382,7 +412,9 @@ class KernelAuthorityTests(LearningBase):
             with mock.patch.object(kernel_grader, 'BUNDLE', type(kernel_grader.BUNDLE)(bad)), mock.patch.object(kernel_grader, 'MANIFEST', type(kernel_grader.MANIFEST)(os.path.join(d, 'grader.manifest.json'))):
                 self.go(self.MEAN, '6/2', rid='bad')
         kernel_grader.bundle_intact.cache_clear()
-        self.assertEqual((self.stored('bad')['answerCorrect'], self.stored('bad')['source']), (False, 'legacy'))
+        self.assertEqual((self.stored('bad')['answerCorrect'], self.stored('bad')['unresolved'], self.stored('bad')['source']), (None, True, 'infrastructure'))
+        from .learning import independent_at
+        self.assertIsNone(independent_at(self.records(), generated(self.MEAN[0])['competency']))  # neither is evidence
 
     def test_a_family_without_a_verified_contract_is_labelled_legacy_whatever_the_browser_says(self):
         self.save(self.enrol())
@@ -390,7 +422,8 @@ class KernelAuthorityTests(LearningBase):
         r = self.save(self.rec('attempt', questionId='gen:rect:3,4', response='12', activity='diagnostic', hints=0, solution=False, competency=generated('gen:rect:3,4')['competency'], assessment=claim, id='lg'))
         self.assertEqual(r.status_code, 201)
         a = self.stored('lg')
-        self.assertEqual((a['answerCorrect'], a['source']), (True, 'legacy'))
+        # grading-policy@1 (stage 4): decided by the trusted grader's value verifier, never labelled with the browser's "kernel" claim
+        self.assertEqual((a['answerCorrect'], a['source']), (True, 'verifier'))
 
 
 class QuarantineTests(LearningBase):

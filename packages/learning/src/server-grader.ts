@@ -1,39 +1,30 @@
 /**
  * The trusted server-side grader. It receives ONLY a question id, the student's response and permitted working (JSON on stdin); the contract
- * (expected answer, kernel object, domain restrictions) is rebuilt here from the generator's own definition, never taken from the request.
- * It answers for questions whose contract is `verified` and says so explicitly; for everything else it reports the route (legacy / held / human)
- * and decides nothing, so the caller keeps its stored-answer comparison and labels it legacy.
+ * (expected answer, kernel object, form rules, status) is rebuilt here from the question's own definition, never taken from the request.
+ * It runs THE grading decision (grading/decision.ts grade), the same function as the app, for every known question: authored or generated,
+ * kernel-verified or not. Django records its verdict; it never substitutes another comparison while this grader is available.
  *   in : {"id": "gen:det2:2,5,3,5", "response": "-5", "working": ["..."]}  (or an array of these)
- *   out: {"v":1,"id":...,"verification":"verified"|"legacy"|"held"|"human","credit":true|false|null,"expected":"<stored answer>","capability":"typed-kernel"|...,"reason":"...","ms":0.1}
+ *   out: {"v":2,"id":...,"known":true,"credit":true|false|null,"verdict":"correct"|"incorrect"|"unresolved"|"pending-educator","reason":"<reason code>",
+ *         "source":"kernel"|"verifier"|"parser"|"held"|"educator","expected":"<stored answer>","decision":{grading-decision@1},"ms":0.1}
  */
-import { assessSubmission, contractFor } from "./assessment.ts";
-import { quarantined } from "./question-status.ts";
-import { problemOf } from "./families.ts";
-import { notAnAnswer, readResponse } from "./grading/read.ts";
-import { applyForms, contractV2 } from "./grading/contract.ts";
+import { isQuestion, question } from "./content.ts";
+import { grade, type GradingDecision } from "./grading/decision.ts";
 
-export const SERVER_GRADER_VERSION = 1 as const;
+export const SERVER_GRADER_VERSION = 2 as const;
 export interface GraderRequest { id: string; response: string; working?: string[] }
-export interface GraderReply { v: typeof SERVER_GRADER_VERSION; id: string; verification: "verified" | "legacy" | "held" | "human" | "unknown"; credit: boolean | null; expected: string | null; capability: string; reason: string; ms: number }
+/** credit: the decision (true / false / null = undecided); expected: the stored answer (Django checks it equals its own); decision: the full record */
+export interface GraderReply { v: typeof SERVER_GRADER_VERSION; id: string; known: boolean; credit: boolean | null; verdict: GradingDecision["verdict"] | "unknown"; reason: string; source: "kernel" | "verifier" | "parser" | "held" | "educator" | "unknown"; expected: string | null; decision: GradingDecision | null; ms: number }
 
+const sourceOf = (d: GradingDecision): GraderReply["source"] => (d.reason === "unresolved.quarantined" || d.reason === "unresolved.contract-inconsistency" ? "held" : d.reason === "pending-educator" ? "educator" : d.reason === "unresolved.invalid-response" || d.reason === "unresolved.ambiguous" ? "parser" : d.verifier?.startsWith("kernel:") ? "kernel" : "verifier");
 export function gradeRequest(r: GraderRequest): GraderReply {
   const t0 = performance.now(), ms = () => +(performance.now() - t0).toFixed(3);
-  const none = (verification: GraderReply["verification"], reason: string, expected: string | null = null, capability = "none"): GraderReply => ({ v: SERVER_GRADER_VERSION, id: String(r?.id ?? ""), verification, credit: null, expected, capability, reason, ms: ms() });
-  if (!r || typeof r.id !== "string" || typeof r.response !== "string" || r.response.length > 400) return none("unknown", "malformed request");
+  const unknown = (reason: string): GraderReply => ({ v: SERVER_GRADER_VERSION, id: String(r?.id ?? ""), known: false, credit: null, verdict: "unknown", reason, source: "unknown", expected: null, decision: null, ms: ms() });
+  if (!r || typeof r.id !== "string" || typeof r.response !== "string" || r.response.length > 4000) return unknown("malformed request");
+  if (!isQuestion(r.id)) return unknown("not a known question");
   const working = Array.isArray(r.working) ? r.working.filter((l) => typeof l === "string").slice(0, 8).map((l) => l.slice(0, 80)) : [];
-  // question-status@1: a quarantined question is reported as held and decided by no one (the server records it unresolved)
-  if (quarantined(r.id)) return none("held", "quarantined (question-status@1)");
-  let c;
-  try { c = contractFor(r.id); } catch { return none("unknown", "the contract could not be built"); }
-  if (!c) return none("unknown", "not a generated question");
-  if (c.verification !== "verified") return none(c.verification, c.reason, c.expected.stored, c.capability);
-  // grading-policy@1: the same strict parser as the app; a response that is not an answer is undecided, never wrong
-  const pr = problemOf(r.id), v2 = contractV2(r.id);
-  const rd = readResponse({ type: c.answerType, answer: c.expected.stored, options: pr?.options }, r.response, c.variable, v2.semantics);
-  if (!rd.ok) return { v: SERVER_GRADER_VERSION, id: r.id, verification: "verified", credit: null, expected: c.expected.stored, capability: c.capability, reason: notAnAnswer(rd).feedback.message, ms: ms() };
-  // the stored-answer comparison is NOT passed in: the verdict is the kernel's alone; then the required forms (the same rule as the app)
-  const a = applyForms(v2, rd.parse, assessSubmission(c, { response: rd.value, working, legacyCorrect: null }));
-  return { v: SERVER_GRADER_VERSION, id: r.id, verification: "verified", credit: a.credit, expected: c.expected.stored, capability: c.capability, reason: a.feedback.message, ms: ms() };
+  let g;
+  try { g = grade(r.id, r.response, working); } catch { return unknown("the question's contract could not be built"); }
+  return { v: SERVER_GRADER_VERSION, id: r.id, known: true, credit: g.assessment.credit, verdict: g.decision.verdict, reason: g.decision.reason, source: sourceOf(g.decision), expected: question(r.id).answer, decision: g.decision, ms: ms() };
 }
 
 if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.test(process.argv[1])) {
@@ -42,7 +33,7 @@ if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.tes
   process.stdin.on("data", (d) => { raw += d; if (raw.length > 1_000_000) process.exit(2); });
   process.stdin.on("end", () => {
     let input: unknown;
-    try { input = JSON.parse(raw); } catch { process.stdout.write(JSON.stringify({ v: SERVER_GRADER_VERSION, verification: "unknown", credit: null, reason: "unreadable request" })); return; }
+    try { input = JSON.parse(raw); } catch { process.stdout.write(JSON.stringify({ v: SERVER_GRADER_VERSION, known: false, verdict: "unknown", credit: null, reason: "unreadable request" })); return; }
     const out = Array.isArray(input) ? input.slice(0, 500).map((x) => gradeRequest(x as GraderRequest)) : gradeRequest(input as GraderRequest);
     process.stdout.write(JSON.stringify(out));
   });

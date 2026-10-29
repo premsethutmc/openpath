@@ -106,6 +106,7 @@ REST_FRAMEWORK = {
         "account-password": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
         "developer-claim": "10/hour",
         "telemetry": "240/hour",
+        "pupil-events": os.environ.get("OPENPATH_EVENT_RATE", "600/hour"),
     },
     # Rate limits are keyed on the client address. Behind N trusted proxies, set OPENPATH_NUM_PROXIES=N so the
     # address is read from the right place in X-Forwarded-For; 0 ignores that (client-controlled) header entirely.

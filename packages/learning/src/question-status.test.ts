@@ -106,7 +106,7 @@ describe("selectors never return a quarantined question", () => {
 describe("no authoritative grade for a quarantined question", () => {
   const id = "gen:adexp:9,8,5,7:w", right = problemOf(id)!.answer;
   test("the app decides nothing, whatever is typed", () => { for (const r of [right, "1", "x"]) { expect(decide(id, r).credit).toBe(null); expect(creditOf(id, r)).toBe(null); } });
-  test("the server grader decides nothing", () => expect(gradeRequest({ id, response: right })).toMatchObject({ verification: "held", credit: null }));
+  test("the server grader decides nothing", () => expect(gradeRequest({ id, response: right })).toMatchObject({ known: true, credit: null, verdict: "unresolved", reason: "unresolved.quarantined", source: "held" }));
   test("existing records: answers to a quarantined question are kept but are never attempts or evidence, however many", () => {
     const at = (n: number) => ({ learnerId: "L", sessionId: "S", at: new Date(Date.UTC(2026, 9, 1, 9, n)).toISOString() });
     const evs = [0, 1, 2, 3, 4].map((n) => make.attempt(at(n), id, right, "transfer"));
