@@ -1,7 +1,7 @@
 """Grading audit, step 4: the backend's authoritative decision for every oracle candidate, from the real Django code.
 
 For each candidate it runs what checked_learning does for an attempt: the request checks on the response, `_answer_ok`, then
-`_authoritative` (trusted Node grader for verified questions, the Python stored-answer mirror otherwise) and `credited` (the value
+`_decide` (the trusted Node grader; under OPENPATH_GRADING=legacy|shadow the earlier policy) and `credited` (the value
 mastery and replay use). The Node grader is the real bundle (backend/family/grader/grader.mjs, integrity-checked), called in batches
 through kernel_grader.run; each reply is accepted only through kernel_grader's own reply check, exactly as kernel_decision does.
 
@@ -15,6 +15,7 @@ import sys
 sys.path.insert(0, os.getcwd())
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 os.environ.setdefault('OPENPATH_GRADER_TIMEOUT', '120')
+os.environ.setdefault('OPENPATH_GRADING', 'unified')  # the audited policy; OPENPATH_GRADING=legacy measures the earlier one
 import django  # noqa: E402
 
 django.setup()
@@ -51,7 +52,7 @@ def fake_kernel_decision(question_id, response, stored_answer, working=None):
     o = cache.get((question_id, response, tuple(w)))
     if o is None or not kernel_grader._reply_ok(o, question_id, stored_answer):
         return None
-    return {k: o[k] for k in ('credit', 'source', 'reason', 'verdict')}
+    return {k: o[k] for k in ('credit', 'source', 'reason', 'verdict', 'decision')}
 
 
 if not OFF:
@@ -80,12 +81,13 @@ for f in sorted(os.listdir(src)):
                 continue
             readable = learning._answer_ok(g['type'], r)
             event = {'questionId': q['qid'], 'response': r, 'working': c['working'], 'assessment': dict(NEUTRAL)}
-            decided = learning._authoritative(event, g, readable)
-            stored = {**event, 'assessment': decided} if decided is not None else event
+            decided, decision = learning._decide(event, g)
+            decision.pop('shadow', None)
+            stored = {**event, **({'assessment': decided} if decided is not None else {}), 'decision': decision}
             credit = learning.credited(g, stored)
             a = decided or {}
             rows.append({'qid': q['qid'], 'response': r, 'working': c['working'], 'backend': {
-                'readable': readable, 'source': a.get('source'), 'answerCorrect': a.get('answerCorrect'), 'unresolved': a.get('unresolved'),
+                'readable': readable, 'source': a.get('source'), 'verdict': decision.get('verdict'), 'reason': decision.get('reason'), 'policy': decision.get('policy'), 'answerCorrect': a.get('answerCorrect'), 'unresolved': a.get('unresolved'),
                 'credited': credit, 'storedAnswer': g['answer'], 'storedParity': g['answer'] == q['answer'] if g['type'] != 'choice' or q['type'] == 'choice' else None}})
     tmp = out + '.tmp'
     json.dump({'family': fam['family'], 'rows': rows}, open(tmp, 'w'))

@@ -128,6 +128,27 @@ Fixtures: `packages/learning/src/grading-audit-regressions.test.ts` (TS) and `ba
 Not defects: option text longer than 80 characters is refused by the server (the app sends letters); equal answers in an unstated
 form left unresolved (11k, e.g. `24/2` for 12, option text for a choice) are safe and are reported, not counted as errors.
 
+### 6a. Defect status after Phase C (branch `feat/unified-grading`; not merged or deployed)
+
+| ID | Status | Where |
+|---|---|---|
+| D01 | fixed — invalid input is unresolved on both routes (audit: 0 invalid-marked-incorrect) | stages 2, 4 |
+| D02 | fixed — strict parser (no dropped operators, no joined digits); kernels receive parsed values | stage 2 |
+| D03, D04, D05 | fixed (equal answers remaining unresolved are policy outcomes, see the certification report) | stage 2 |
+| D06 | fixed — mixed numbers parsed only where the contract permits them | stage 2 |
+| D07 | fixed — declared and stated form rules (45 families); audit: 0 stated forms not enforced | stage 3 |
+| D08 | fixed — ambiguous grouping is unresolved with a clarification (decision 2) | stage 2 |
+| D09 | contained — 951 presentations quarantined on every selector and grading route; the generator guard defect itself is open | stage 1 |
+| D10 | fixed — one decision function for app and server; audit: 0 disagreements | stage 4 |
+| D11 | fixed for every record with a server decision; historical records unchanged pending decision 3 (dry run built) | stage 7 |
+| D12 | fixed — grader failure is unresolved, regraded automatically by an appended decision | stages 6, 7 |
+| D13 | resolved — the 4 tests now assert approved policy P1 / §11 | stages 4, 6 |
+| D14 | fixed — 168 program questions decided by the unified decision on app and server; still provisional (outside the audit) | stage 9 |
+| D15 | open — the Python generator mirror remains (used to recognise question ids); retirement awaits the migration-mode decision | stage 10 |
+| D16 | fixed — no unresolved cap; per-pupil request throttle instead | stage 6 |
+| D18 (new) | contained — 20 `aqd2` presentations store `e^x(…)`, which strict syntax reads two ways; quarantined; generator fix open | stage 3 |
+| D19 (new) | fixed — the server's study summary counted unresolved answers as incorrect | stage 7 |
+
 ## 7. Django integration tests
 
 Django could not be installed from PyPI here (blocked). `backend/vendor-deps.sh` now clones the exact pins of

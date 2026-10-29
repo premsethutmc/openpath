@@ -8,6 +8,8 @@ from datetime import timedelta
 from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
+from . import decisions
+from .learning import grading_mode
 from .models import PupilEvent
 
 @lru_cache
@@ -42,7 +44,11 @@ def checked_foundation(event, pupil):
         raw = event.get('response')
         if not isinstance(raw, str) or len(raw) > 80:
             reject('Answer must be a short string.')
-        if action == 'answer':
+        if action == 'answer' and not raw.strip():
+            reject('Enter an answer.')
+        if action == 'answer' and grading_mode() == 'unified':
+            pass  # approved policy P1 (stage 9): an unreadable answer is kept (unresolved), never refused; the trusted grader decides below
+        elif action == 'answer':
             normalized = raw.strip().replace('−', '-')
             if not re.fullmatch(r'[+-]?\d+(?:\.\d+)?(?:/[+-]?\d+)?', normalized, flags=re.ASCII):
                 reject('Enter a number or fraction.')
@@ -78,11 +84,16 @@ def checked_foundation(event, pupil):
         position = spec['stages'].index(stage)
         if any(s['id'] not in done for s in spec['stages'][:position]):
             reject('Finish the earlier fixed activities first.')
-        if any(not any(e.get('action') == 'answer' and e.get('questionId') == q for e in own) for q in stage['questions']):
+        if any(not any(e.get('action') == 'answer' and e.get('questionId') == q and decisions.verdict_of(e) != 'unresolved' for e in own) for q in stage['questions']):
             reject('Try every question first. Correctness is not a completion score.')
         if stage['id'] == 'explore' and not any(e.get('questionId') == 'exploration' and e.get('response') == 'done' for e in own):
             reject('Try the interactive model first.')
     saved = {**event, 'at': now.isoformat(), 'savedAt': now.isoformat()}
+    if action == 'answer' and grading_mode() != 'legacy':
+        # stage 9 (D14): the trusted grader decides the program answer; shadow mode keeps it beside the earlier client-only marking
+        q = next(x for x in spec['questions'] if x['id'] == event['questionId'])
+        d = decisions.program_decision(event, f"foundation:{spec['id']}:{q['id']}", q['answer'], now)
+        saved['decision' if grading_mode() == 'unified' else 'shadowDecision'] = d if grading_mode() == 'unified' else {**d, 'decidedBy': 'shadow'}
     if action == 'complete' and stage['id'] == 'transfer':
         saved['retentionDueAt'] = due or (now + timedelta(days=spec['retentionDelayDays'])).isoformat()
     return saved

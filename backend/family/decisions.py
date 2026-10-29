@@ -37,6 +37,27 @@ def build(event, grader=None, failure=None, now=None, educator=False, supersedes
     return d
 
 
+def program_decision(event, question_id, stored_answer, now=None):
+    """stage 9 (D14): the decision for a program answer, from the trusted grader (grading/program.ts), or the failure decision"""
+    k = kernel_grader.grader_decision(question_id, event.get('response', ''), stored_answer, [])
+    if k is not None:
+        return build(event, grader=k, now=now)
+    return build({**event, 'questionId': question_id}, failure='held' if kernel_grader.enabled() else 'infrastructure', now=now)
+
+
+def build_legacy(event, ok, source, now=None):
+    """the decision the earlier policy makes (OPENPATH_GRADING=shadow|legacy), in the same schema, so replay reads it as recorded"""
+    verdict = 'correct' if ok is True else 'incorrect' if ok is False else 'unresolved'
+    reason = {'correct': 'correct.equal', 'incorrect': 'incorrect.value', 'unresolved': 'unresolved.invalid-response'}[verdict]
+    d = {'schema': SCHEMA, 'policy': 'legacy-policy@0', 'questionId': event.get('questionId'), 'contract': None, 'parser': None,
+         'verifier': 'kernel-v1' if source == 'kernel' else 'legacy-mirror@1', 'certified': False, 'certifications': None, 'verdict': verdict, 'reason': reason,
+         'response': {'raw': event.get('response'), 'working': list(event.get('working') or [])}, 'interpretation': None, 'form': None,
+         'method': {'examined': False, 'verified': False}, 'diagnosis': None,
+         'decisionId': str(uuid.uuid4()), 'attemptId': event.get('id'), 'decidedBy': 'server', 'decidedAt': now.isoformat() if now else None,
+         'grader': {'bundleSha256': kernel_grader.bundle_sha256() if source == 'kernel' else None}}
+    return d
+
+
 def record(pupil, subject, decision, decided_at):
     from .models import GradingDecisionRecord
     return GradingDecisionRecord.objects.create(pupil=pupil, subject=subject, attempt_id=decision['attemptId'], decision_id=decision['decisionId'],

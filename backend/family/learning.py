@@ -14,7 +14,9 @@ from pathlib import Path
 from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
-from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
+from .answer_types import HUMAN, NEW_TYPES
+# retired comparison (stage 10): only the migration modes and historical replay use it
+from .legacy_grading import MIXED, NUMBER, RATIONAL, _answer_ok, _rational, _unbrace, canonical, right  # noqa: F401
 from . import decisions
 from .kernel_grader import enabled as grader_enabled, kernel_decision
 from .question_status import quarantined
@@ -41,20 +43,10 @@ WRITTEN_LIMIT = 16000  # a written answer, or a drawing with its note (draw@1; f
 RETENTION_DELAY = timedelta(days=7)
 INDEPENDENT_MIN = 2
 INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
-NUMBER = r'[+-]?\d{1,9}(?:\.\d{0,9})?'  # a whole number may be typed with a zero decimal part (the app's canonical)
-RATIONAL = r'[+-]?\d{1,9}(?:\.\d{1,6})?(?:/[+-]?\d{1,9})?'
-# mixed@1: a mixed number "3 1/2" is 3 + 1/2 ("-3 1/2" is -(3 + 1/2)), never 31/2 (packages/mathematics answers.ts)
-MIXED = r'([+-]?)(\d{1,9})\s+(\d{1,9})/(\d{1,9})'
 
 
-def _rational(t):
-    m = re.fullmatch(MIXED, t, flags=re.ASCII)
-    if m:
-        v = int(m.group(2)) + Fraction(int(m.group(3)), int(m.group(4)))
-        return -v if m.group(1) == '-' else v
-    if ' ' in t:
-        raise ValueError('not a number')
-    return Fraction(t)
+
+
 
 
 def _load(name):
@@ -117,46 +109,13 @@ def server_now(pupil):
     return now
 
 
-def _unbrace(t):
-    """An unordered set may be written with its braces: {1, 2} is 1, 2 (the app's canonical)."""
-    m = re.fullmatch(r'\{([^{}]*)\}', t)
-    return m.group(1) if m else t
 
 
-def canonical(kind, raw):
-    """The answer's canonical form (the app's `canonical`), or None if it is not one of this kind. answers@2 types
-    (answer_types.py): exact types have a canonical form; sampled types are compared in `right`; written: none."""
-    if kind in NEW_TYPES:
-        return canonical_of(kind, raw)
-    t = str(raw).strip().replace('−', '-')
-    try:
-        if kind == 'choice':
-            return t.upper() if t.upper() in {'A', 'B', 'C', 'D'} else None
-        if kind == 'integer':
-            if not re.fullmatch(NUMBER, t, flags=re.ASCII):
-                return None
-            v = Fraction(t)
-            return str(v.numerator) if v.denominator == 1 else str(v)
-        if kind == 'fraction':
-            return str(_rational(t))
-        if kind == 'set':
-            parts = [Fraction(p.strip()) for p in _unbrace(t).split(',')]
-            return ','.join(sorted(str(p) for p in parts)) if len(set(parts)) == len(parts) else None
-    except (ValueError, ZeroDivisionError):
-        return None
-    return t
 
 
-def right(q, response):
-    if q['type'] in HUMAN:
-        return False  # an educator marks it
-    # form@1: an "expand" task's answer must be written expanded, whatever its value
-    if q.get('expanded') and not expanded_form(response):
-        return False
-    if q['type'] in SAMPLED:
-        return same_answer(q['type'], response, q['answer'])
-    c = canonical(q['type'], response)
-    return c is not None and c == canonical(q['type'], q['answer'])
+
+
+
 
 
 ASSESSMENT_KEYS = {'policy', 'answerCorrect', 'methodExamined', 'derivationVerified', 'firstError', 'clarificationRequired', 'aiFallbackUsed', 'unresolved', 'source'}
@@ -204,11 +163,37 @@ def _decide(event, q, now=None):
     k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working'))
     if k is not None:
         ok = k['credit']
-        return ({**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': k['source']},
-                decisions.build(event, grader=k, now=now))
-    source = 'held' if grader_enabled() else 'infrastructure'
-    return ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source},
-            decisions.build(event, failure=source, now=now))
+        unified = ({**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': k['source']},
+                   decisions.build(event, grader=k, now=now))
+    else:
+        source = 'held' if grader_enabled() else 'infrastructure'
+        unified = ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source},
+                   decisions.build(event, failure=source, now=now))
+    mode = grading_mode()
+    if mode == 'unified':
+        return unified
+    # OPENPATH_GRADING=shadow|legacy (migration, UNIFIED_GRADING_ARCHITECTURE.md §13): the earlier policy is authoritative — the trusted
+    # grader's verdict only where the question's kernel validated its contract, the stored-answer comparison everywhere else and whenever
+    # the grader cannot run. In shadow mode the unified decision is kept beside it for comparison, never used.
+    if k is not None and k['source'] == 'kernel':
+        ok = k['credit']
+    elif _answer_ok(q['type'], event['response']):
+        ok = right(q, event['response'])
+    else:
+        ok = None
+    legacy = {**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None,
+              'source': 'kernel' if k is not None and k['source'] == 'kernel' else 'legacy'}
+    d = decisions.build_legacy(event, ok, legacy['source'], now=now)
+    if mode == 'shadow':
+        d['shadow'] = {**unified[1], 'decidedBy': 'shadow'}
+    return legacy, d
+
+
+def grading_mode():
+    """OPENPATH_GRADING: 'unified' (grading-policy@1 authoritative), 'shadow' (earlier policy authoritative, unified recorded beside it) or
+    'legacy' (earlier policy only). Quarantine (question-status@1) and written-answer marking apply in every mode."""
+    m = getattr(settings, 'OPENPATH_GRADING', 'shadow')
+    return m if m in ('unified', 'shadow', 'legacy') else 'shadow'
 
 
 def credited(q, event):
@@ -262,30 +247,7 @@ def _text(value, limit):
     return isinstance(value, str) and 0 < len(value) <= limit
 
 
-def _answer_ok(kind, raw):
-    t = raw.strip().replace('−', '-')
-    if kind in HUMAN:
-        return 0 < len(t) <= WRITTEN_LIMIT
-    if kind in SAMPLED:
-        try:
-            parse_expression(re.sub(r'\s*\+\s*[cCkK]\s*$', '', t) if kind == 'antiderivative' else t)
-            return True
-        except Exception:  # noqa: BLE001 - any unreadable expression
-            return False
-    if kind in NEW_TYPES:
-        return canonical_of(kind, t) is not None
-    if kind == 'choice':
-        return t.upper() in {'A', 'B', 'C', 'D'}
-    if kind == 'integer':
-        return re.fullmatch(NUMBER, t, flags=re.ASCII) is not None
-    if kind == 'fraction':
-        return (re.fullmatch(RATIONAL, t, flags=re.ASCII) is not None or re.fullmatch(MIXED, t, flags=re.ASCII) is not None) and not re.search(r'/[+-]?0+$', t)
-    if kind == 'set':
-        parts = [p.strip() for p in _unbrace(t).split(',')]
-        return 0 < len(parts) <= 30 and all(re.fullmatch(RATIONAL, p, flags=re.ASCII) for p in parts)
-    if kind == 'polynomial':
-        return re.fullmatch(r'[0-9x+\-*^() /.²³]{1,60}', t) is not None
-    return False
+
 
 
 def _check_release(release, pupil_prior):
@@ -396,7 +358,6 @@ def checked_learning(event, pupil):
             _reject('Hints and solutions are recorded as given.')
         if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or not event['response'].strip():
             _reject('That answer is too long, or empty.')
-        readable = _answer_ok(q['type'], event['response'])  # not readable: saved undecided below, never recorded as wrong
         if isinstance(event.get('context'), str) and event['context'].startswith('study:'):
             plan_id = event['context'][6:]
             visits = [e for e in prior if e.get('record') == 'study_session' and e.get('planId') == plan_id]
@@ -409,6 +370,9 @@ def checked_learning(event, pupil):
         decided, decision = _decide(event, q, now)
         if decided is not None:
             event = {**event, 'assessment': decided}
+        shadow = decision.pop('shadow', None)
+        if shadow is not None:
+            event = {**event, 'shadowDecision': shadow}  # shadow mode: kept for the comparison report, never used for credit or replay
         # grading-decision@1 (stage 7): the server's decision is kept in the immutable event body and appended to the decision log (views.py)
         event = {**event, 'decision': decision}
         w = event.get('working', [])

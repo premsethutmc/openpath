@@ -114,6 +114,11 @@ REST_FRAMEWORK = {
     "UNAUTHENTICATED_USER": None,
 }
 
+# Grading authority during migration (UNIFIED_GRADING_ARCHITECTURE.md §13): "shadow" (default: the earlier policy decides and the unified
+# decision is recorded beside it), "unified" (grading-policy@1 decides) or "legacy". Switching to "unified" is an approved release step.
+OPENPATH_GRADING = os.environ.get("OPENPATH_GRADING", "shadow")
+TEST_RUNNER = "config.test_runner.OpenPathTestRunner"
+
 OPENPATH_CURRICULUM = REPO_DIR / "shared" / "curriculum" / "math-early-number.json"
 OPENPATH_TRUST_CLIENT_CLOCK = os.environ.get("OPENPATH_TRUST_CLIENT_CLOCK", "1" if DEBUG else "0") == "1"
 OPENPATH_CONSENT_POLICY_VERSION = "2026-10-prototype"

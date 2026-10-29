@@ -7,6 +7,12 @@ from .tests import FamilyTestCase
 from .mathematics import lesson, program
 from .models import PupilEvent
 
+
+def verdict_of_last(case):
+    """the server's recorded decision for the last saved program event (stage 9, D14)"""
+    ev = case.client.get(f'/api/pupils/{case.pupil_id}/events/?subject=mathematics').json()['events'][-1]
+    return (ev.get('decision') or {}).get('verdict')
+
 class MathematicsAccountTests(FamilyTestCase):
 
     def setUp(self):
@@ -62,9 +68,14 @@ class MathematicsAccountTests(FamilyTestCase):
         self.assertEqual(PupilEvent.objects.filter(subject='mathematics').count(), 1)
 
     def test_undefined_or_unsupported_answers_rejected(self):
-        for response in ['1/0', 'x', '1e5', '', 'NaN', '௨', '٢']:
-            self.assertEqual(self.save(self.activity('answer', 'guided', questionId='guided-1', response=response)).status_code, 400)
+        # updated for approved policy P1 (stage 9, D14): an unreadable answer is kept and recorded unresolved, never refused or marked
+        # wrong; only an empty answer is refused (it is not a submission)
+        self.assertEqual(self.save(self.activity('answer', 'guided', questionId='guided-1', response='')).status_code, 400)
+        for response in ['1/0', 'x', '1e5', 'NaN', '௨', '٢']:
+            self.assertEqual(self.save(self.activity('answer', 'guided', questionId='guided-1', response=response)).status_code, 201, response)
+            self.assertEqual(verdict_of_last(self), 'unresolved', response)
         self.assertEqual(self.save(self.activity('answer', 'guided', questionId='guided-1', response='2.0')).status_code, 201)
+        self.assertEqual(verdict_of_last(self), 'correct')
 
     def test_server_clock_delayed_retention_and_separate_journeys(self):
         now = timezone.now()
@@ -154,8 +165,11 @@ class JeeChapterTests(FamilyTestCase):
             self.assertEqual(self.save(self.activity('answer', 'class', questionId=qid, response=q['answer'])).status_code, 201)
         for stage in ['class', 'worked']:
             self.assertEqual(self.save(self.activity(stage=stage)).status_code, 201)
-        self.assertEqual(self.save(self.activity('answer', 'practice', questionId='p1', response='1/2')).status_code, 400, 'numerical value: an integer')
-        self.assertEqual(self.save(self.activity('answer', 'practice', questionId='p2', response='E')).status_code, 400, 'a choice: A to D')
+        # P1 (stage 9): a readable wrong value is incorrect; something that is not an option is kept unresolved (was: both refused)
+        self.assertEqual(self.save(self.activity('answer', 'practice', questionId='p1', response='1/2')).status_code, 201, 'numerical value')
+        self.assertEqual(verdict_of_last(self), 'incorrect')
+        self.assertEqual(self.save(self.activity('answer', 'practice', questionId='p2', response='E')).status_code, 201, 'not one of A to D')
+        self.assertEqual(verdict_of_last(self), 'unresolved')
         self.assertEqual(self.save(self.activity('complete', 'practice')).status_code, 400, 'each practice question first')
         for stage in ['practice', 'check']:
             for qid in next(s for s in spec['stages'] if s['id'] == stage)['questions']:
@@ -212,10 +226,10 @@ class CompletingSquareUnitTests(FamilyTestCase):
 
     def test_formats_extra_practice_order_and_revision(self):
         self.assertEqual(self.save(self.activity(stage='picture')).status_code, 400, 'steps in order')
-        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='d2', response='1')).status_code, 400, 'two values for two fields')
-        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='d2', response='1,x')).status_code, 400, 'numbers only')
-        self.assertEqual(self.save(self.activity('answer', 'picture', questionId='e4', response='25/0')).status_code, 400, 'a nonzero denominator')
-        self.assertEqual(self.save(self.activity('answer', 'picture', questionId='e4', response='2.5')).status_code, 400, 'a fraction, not a decimal')
+        # P1 (stage 9): unreadable answers are kept unresolved (were refused); a readable different value is incorrect
+        for qid, stage, response, verdict in [('d2', 'prereq', '1', 'unresolved'), ('d2', 'prereq', '1,x', 'unresolved'), ('e4', 'picture', '25/0', 'unresolved'), ('e4', 'picture', '2.5', 'incorrect')]:
+            self.assertEqual(self.save(self.activity('answer', stage, questionId=qid, response=response)).status_code, 201, response)
+            self.assertEqual(verdict_of_last(self), verdict, response)
         self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='es1', response='36')).status_code, 400, "another step's extra practice")
         self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='d2', response='1, −9')).status_code, 201, 'either order, the minus sign accepted')
         self.assertEqual(self.save(self.activity('complete', 'prereq')).status_code, 400, 'each prediction and check first')
@@ -264,7 +278,8 @@ class CompletingSquareHelpTests(FamilyTestCase):
         self.assertEqual(self.save(self.activity('teach', 'prereq', response='expand:invented')).status_code, 400, 'unknown strategy')
         self.assertEqual(self.save(self.activity('teach', 'prereq')).status_code, 400, 'which block')
         self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='px1', response='4,4')).status_code, 201, 'a help question, in the step the learner is in')
-        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='px1', response='4')).status_code, 400, 'its format is checked')
+        self.assertEqual(self.save(self.activity('answer', 'prereq', questionId='px1', response='4')).status_code, 201, 'one value for two fields: kept (P1)')
+        self.assertEqual(verdict_of_last(self), 'unresolved')
         self.assertEqual(self.save(self.activity('skip', 'prereq', response='roots')).status_code, 201, 'help set aside')
         self.assertEqual(self.save(self.activity('skip', 'prereq', response='transfer:t1')).status_code, 201)
         self.assertEqual(self.save(self.activity('skip', 'prereq', response='nothing')).status_code, 400)

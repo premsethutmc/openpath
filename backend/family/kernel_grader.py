@@ -18,7 +18,7 @@ from pathlib import Path
 
 BUNDLE = Path(__file__).resolve().parent / 'grader' / 'grader.mjs'
 MANIFEST = BUNDLE.with_name('grader.manifest.json')
-QUESTION_ID = re.compile(r'^(?:gen:[a-z0-9]+:-?\d+(?:,-?\d+)*(?::mc|:w)?|[a-z][a-z0-9]*(?:[-.][a-z0-9]+){0,6})$')
+QUESTION_ID = re.compile(r'^(?:gen:[a-z0-9]+:-?\d+(?:,-?\d+)*(?::mc|:w)?|(?:program|foundation):[a-z0-9-]{1,60}:[A-Za-z0-9._-]{1,60}|[a-z][a-z0-9]*(?:[-.][a-z0-9]+){0,6})$')
 SOURCES = {'kernel', 'verifier', 'parser', 'held', 'educator'}
 
 
@@ -65,7 +65,10 @@ def _reply_ok(reply, question_id, stored_answer):
             and reply.get('expected') == stored_answer and reply.get('source') in SOURCES
             and reply.get('verdict') in ('correct', 'incorrect', 'unresolved', 'pending-educator')
             and (reply['verdict'] == 'correct') == (reply['credit'] is True) and (reply['verdict'] == 'incorrect') == (reply['credit'] is False)
-            and isinstance(reply.get('reason'), str))
+            and isinstance(reply.get('reason'), str)
+            # grading-decision@1 (stage 7): the reply must carry the decision itself, and it must say the same verdict
+            and isinstance(reply.get('decision'), dict) and reply['decision'].get('schema') == 'grading-decision@1'
+            and reply['decision'].get('verdict') == reply['verdict'] and reply['decision'].get('reason') == reply['reason'])
 
 
 def grader_decision(question_id, response, stored_answer, working=None):

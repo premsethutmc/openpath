@@ -1,4 +1,4 @@
-# OpenPath — Grading Certification Report (Phase C, stages 4–6)
+# OpenPath — Grading Certification Report (Phase C, stages 4–10)
 
 Branch `feat/unified-grading`. Certification registry: `content/learning/grading-certifications.v1.json` (hash in every decision).
 Evidence: `tools/mathematics/grading-audit/data/results-c4/` (app + server, trusted grader on) and `results-c6-off/` (grader off).
@@ -51,3 +51,37 @@ Grader unavailable (`OPENPATH_GRADER=off`, stage 6): every one of the 308,568 se
    README). Its judgements are evidence, not ground truth.
 5. **Authored questions (221) and program questions (140, D14)** are outside this certification and stay provisional.
 6. **Historical records** are not re-graded (decision 3); stages 7–8 handle prospective records and the dry-run reconstruction.
+
+## 5. Stages 7–10 (added)
+
+**Decision records and replay (stage 7).** Every graded answer receives one server `grading-decision@1`, kept in the immutable event and an
+append-only log; replay on app and server reads it. A later grader that would decide differently changes nothing recorded (tested). Only
+a grader-failure decision is regraded automatically, by appending a superseding decision. The historical reconstruction is a read-only
+dry run (`manage.py reconstruct_decisions --dry-run`); it has been exercised in tests only — no real learner records exist in this
+workspace, and running it on production data needs approval.
+
+**Shadow comparison, G5 (stage 8).** Server route, same 308,568 cases, earlier policy (`OPENPATH_GRADING=legacy`) versus unified:
+12,725 different decisions (of 289,770 compared; 18,798 refused or not comparable), **every one classified, 0 to investigate**:
+
+| Class | Cases | Oracle check |
+|---|---|---|
+| fix: an equal answer is now credited | 6,641 | 94 agree with the oracle outright; 6,547 are equal values in another form with no stated form rule (P2) |
+| policy P1/P3: not an answer, no longer marked incorrect | 3,322 | 3,201 agree; 111 are readable but unconventional (`4 6/5`, `2/-3`, `log 5/log 3`) — now unresolved, never wrong |
+| fix: a readable wrong answer is now decided | 1,955 | 1,895 agree; 60 form-dependent |
+| policy P3: strict syntax asks for clarification | 429 | includes 38 equal answers such as `12x^3y^2` and `x^x(log(x) + 1)` that strict syntax reads two ways |
+| policy P2: stated form enforced | 378 | all form-dependent |
+
+Earlier policy on the same cases: 64 false acceptances, 6 false rejections, 3,201 invalid-marked-incorrect, 388 stated forms not enforced.
+Unified (both routes): 0 of each, 0 app/server disagreements — identical to the stage-4 run (0 verdict differences in 308,568 cases).
+
+**Programs (stage 9).** 168 program questions (3 programs + foundation) are decided by the same decision on app and server; all 168 stored
+answers verify against their own contracts; solution pairs ("x =", "or x =") are unordered, labelled pairs ordered. Provisional (not in
+the generated-question audit).
+
+**Python comparison retired from authority (stage 10).** `family/legacy_grading.py` is used only by the migration modes and by replay of
+historical records without a recorded verdict; a test fails if the unified path calls it.
+
+**Test results at the end of Phase C.** `bun test packages/learning`: 1,385 pass, 0 fail (one E3 fuzz test is timing-sensitive under
+load: it failed once at 5.46 s against bun's 5 s default and passed on every rerun). Program engine suites (frontend/src/mathematics,
+7 files): 77 pass, 0 fail. Django: 290 tests OK.
+

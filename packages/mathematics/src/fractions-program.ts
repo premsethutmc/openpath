@@ -1,5 +1,6 @@
 import lesson from "../../../content/mathematics/programs/equivalent-fractions.v2.json";
-import { indexContent, scoreCode } from "../../english-core/src/content";
+import { indexContent } from "../../english-core/src/content";
+import { programDecision } from "./program-grading";
 import type { Item, EvidenceEvent } from "../../english-core/src/types";
 import { mathematicsLedger } from "./registration";
 import { parseNumber, show } from "./answers";
@@ -142,11 +143,16 @@ export function replay(
       if (!stage.questions.includes(ev.questionId ?? ""))
         throw new Error("Question does not belong to stage");
       const item = questionItem(ev.questionId!);
+      // stage 9 (D14): THE grading decision; an unresolved answer is not an answer (P1) and changes nothing
+      const decision = programDecision(`program:${lesson.id}:${ev.questionId}`, ev.response ?? "", (ev as { decision?: unknown }).decision);
+      if (decision.verdict === "unresolved") continue;
+      const correct = decision.verdict === "correct";
       let text: string;
       try {
-        text = answerKey(ev.questionId!, ev.response ?? "");
+        // the evidence ledger reads its own answer list: a credited answer is given to it in the stored form, so it agrees with the decision
+        text = answerKey(ev.questionId!, correct ? lesson.questions.find((q) => q.id === ev.questionId)!.answer : ev.response ?? "");
       } catch {
-        continue;
+        text = `math-unread:${ev.response ?? ""}`;
       }
       const assisted =
         state.hints.includes(ev.questionId!) ||
@@ -163,10 +169,9 @@ export function replay(
         use: ev.stage === "retention" ? "retention" : "practice",
       };
       // Receipt counts cannot invent hint event IDs. Omitted lineage is explicitly unknown; provisional gate holds.
-      const result = scoreCode(item, event.response);
       ledger.apply(event);
       state.answers[ev.questionId!] = {
-        correct: result.correct,
+        correct,
         response: ev.response!,
         assisted: assisted || prior > 0,
       };

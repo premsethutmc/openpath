@@ -9,6 +9,7 @@
  */
 import { isQuestion, question } from "./content.ts";
 import { grade, type GradingDecision } from "./grading/decision.ts";
+import { gradeProgram, isProgramQuestion, programQuestion } from "./grading/program.ts";
 
 export const SERVER_GRADER_VERSION = 2 as const;
 export interface GraderRequest { id: string; response: string; working?: string[] }
@@ -20,6 +21,12 @@ export function gradeRequest(r: GraderRequest): GraderReply {
   const t0 = performance.now(), ms = () => +(performance.now() - t0).toFixed(3);
   const unknown = (reason: string): GraderReply => ({ v: SERVER_GRADER_VERSION, id: String(r?.id ?? ""), known: false, credit: null, verdict: "unknown", reason, source: "unknown", expected: null, decision: null, ms: ms() });
   if (!r || typeof r.id !== "string" || typeof r.response !== "string" || r.response.length > 4000) return unknown("malformed request");
+  // stage 9 (D14): program questions are decided by the same parser, verifiers and form rules (grading/program.ts)
+  if (isProgramQuestion(r.id)) {
+    let d;
+    try { d = gradeProgram(r.id, r.response, Array.isArray(r.working) ? r.working.filter((l) => typeof l === "string").slice(0, 8) : []); } catch { return unknown("the program question's contract could not be built"); }
+    return { v: SERVER_GRADER_VERSION, id: r.id, known: true, credit: d.verdict === "correct" ? true : d.verdict === "incorrect" ? false : null, verdict: d.verdict, reason: d.reason, source: sourceOf(d), expected: programQuestion(r.id)!.answer, decision: d, ms: ms() };
+  }
   if (!isQuestion(r.id)) return unknown("not a known question");
   const working = Array.isArray(r.working) ? r.working.filter((l) => typeof l === "string").slice(0, 8).map((l) => l.slice(0, 80)) : [];
   let g;

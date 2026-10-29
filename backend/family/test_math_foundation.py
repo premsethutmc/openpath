@@ -74,8 +74,22 @@ class FoundationTests(FamilyTestCase):
         self.assertEqual(self.save(old).status_code, 400)
         self.assertEqual(len(self.records()), 1)
 
+    def test_an_unresolved_answer_does_not_count_as_trying_the_question(self):
+        # stage 9 (P1, D14): completion needs a decided answer; a decided wrong answer counts ("correctness is not a completion score")
+        for ev in [self.event(), self.event('draft', 'explore', questionId='model', response='[3,2,2,1,4,2]'), self.event('draft', 'explore', questionId='exploration', response='done'),
+                   self.event(stage='explore'), self.event(stage='worked')]:
+            self.assertEqual(self.save(ev).status_code, 201)
+        self.assertEqual(self.save(self.event('answer', 'guided', questionId='guided', response='1/0')).status_code, 201)
+        self.assertEqual(self.save(self.event(stage='guided')).status_code, 400)
+        wrong = '1000'
+        self.assertEqual(self.save(self.event('answer', 'guided', questionId='guided', response=wrong)).status_code, 201)
+        self.assertEqual(self.records()[-1]['decision']['verdict'], 'incorrect')
+        self.assertEqual(self.save(self.event(stage='guided')).status_code, 201)
+
     def test_invalid_answers_and_models(self):
+        # updated for approved policy P1 (stage 9, D14): kept and recorded unresolved, never refused or marked wrong
         for raw in ['1/0', 'NaN', '٢', '1e3']:
-            self.assertEqual(self.save(self.event('answer', 'guided', questionId='guided', response=raw)).status_code, 400)
+            self.assertEqual(self.save(self.event('answer', 'guided', questionId='guided', response=raw)).status_code, 201, raw)
+            self.assertEqual(self.records()[-1]['decision']['verdict'], 'unresolved', raw)
         for raw in ['null', '{}', '[1000000000]', '[0,0,0,0,0,0]']:
             self.assertEqual(self.save(self.event('draft', 'explore', questionId='model', response=raw)).status_code, 400)

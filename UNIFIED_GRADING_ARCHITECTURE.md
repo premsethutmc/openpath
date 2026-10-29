@@ -421,3 +421,36 @@ reused as verifiers; what is replaced is text reading, the decision path and rep
 3. Historical reconstruction (§9): run once over existing records with a reviewed diff — approve the approach (it touches stored
    learner data only by appending; nothing is altered)?
 4. C1 is independent of the rest and low-risk; may it be implemented first, ahead of the full C-phase review?
+
+## 16. Implementation status, migration and rollback (Phase C, as built)
+
+| Spec section | Built in | Notes |
+|---|---|---|
+| §8 quarantine | stage 1 | `question-status.v1.json`, `selectable()`; 971 quarantined (D09 951 + D18 20) |
+| §4 strict parser | stage 2 | `grading/parse.ts`; examples published from `grading/syntax.ts`; decision 2: no grouping conventions, mixed numbers only where the contract permits |
+| §3 contract @2 | stage 3 | `grading/contract.ts`; form rules declared in `content/learning/form-rules.v1.json` and required to be stated in the prompt; status kept out of the hash |
+| §5 dispatcher / §7 decision | stage 4 | `grading/decision.ts grade()` for app and server; `grading/verify.ts` value verifiers |
+| §6 certification | stage 5 | `tools/mathematics/grading-audit/certify.py` → `content/learning/grading-certifications.v1.json` |
+| §11 failure semantics | stage 6 | no fallback comparison; `regrade_unresolved`; per-pupil throttle `OPENPATH_EVENT_RATE` |
+| §9 decisions and replay | stage 7 | `GradingDecisionRecord` (append-only) + `decision` in the event; `reconstruct_decisions --dry-run` |
+| §13 flags | stage 8 | `OPENPATH_GRADING` = `shadow` (default) / `unified` / `legacy`; `compare_shadow`; corpus G5 in `tools/mathematics/grading-audit/g5.py` |
+| D14 programs | stage 9 | `grading/program.ts`; engines use `program-grading.ts` |
+| Python retirement | stage 10 | `family/legacy_grading.py`, used only by migration modes and historical replay |
+
+**Release sequence (each step needs explicit approval; nothing here is deployed):**
+1. Deploy with `OPENPATH_GRADING=shadow` (the code default). The earlier policy stays authoritative on the server; the unified decision
+   is stored beside it (`shadowDecision`). Quarantine applies from this step.
+2. Run `manage.py compare_shadow --out report.json` on real use; review every class; `toInvestigate` must be 0.
+3. Approve the switch: set `OPENPATH_GRADING=unified`. From then on every answer carries an authoritative `grading-decision@1`.
+4. Approve (separately) the historical reconstruction after reviewing `reconstruct_decisions --dry-run`.
+5. After a fixed period in `unified`, approve retiring `shadow`/`legacy` and deleting `family/legacy_grading.py` and the Python
+   generator mirror (D15).
+
+**Rollback.** Set `OPENPATH_GRADING=shadow` (or `legacy`) and restart. Decisions already recorded under `unified` keep their own policy,
+versions and verdicts, and replay keeps reading them; nothing is migrated back. A full code rollback is a redeploy of the previous build;
+migration `0006_grading_decision_record` only adds a table and can stay.
+
+**Known gap.** The app's own preview and the program engines use the unified decision in every build: the server flag controls server
+authority only. In `shadow` mode a learner can therefore see a preview that differs from the server's recorded (earlier-policy) verdict
+until the switch; the app replays the server's recorded decision once the record is loaded.
+
