@@ -26,6 +26,7 @@ def apmcon(q):
     r, c = int(m.group(1)), int(m.group(2))
     I_, J_ = sp.symbols('i j')
     rule = re.sub(r'\|([^|]+)\|', r'Abs(\1)', m.group(3))
+    rule = re.sub(r'(\d)([ij])', r'\1*\2', rule)
     ex = P(rule, i=I_, j=J_, Abs=sp.Abs)
     A = [[ex.subs({I_: i, J_: j}) for j in range(1, c + 1)] for i in range(1, r + 1)]
     if m.group(4):

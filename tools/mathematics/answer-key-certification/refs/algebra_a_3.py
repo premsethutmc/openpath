@@ -213,6 +213,13 @@ def allcm(q):
 @ref('alglp', 'q = GCD x LCM / p by exact polynomial division (remainder must be 0); product identity re-multiplied', 'exhaustive')
 def alglp(q):
     p = U(q['prompt'])
+    m2 = re.search(r'have GCD (.+?), and their product is (.+?)\. Use GCD', p)
+    if m2:
+        G, Pr = P(m2.group(1)), P(m2.group(2))
+        L, r = sp.div(sp.Poly(Pr, x), sp.Poly(G, x))
+        if r != 0:
+            return Verdict(False, 'product not divisible by GCD')
+        return Expect(str(L.as_expr()))
     m = re.search(r'GCD of two polynomials p\(x\) and q\(x\) is (.+?) and their LCM is (.+?)\. If p\(x\) = (.+?),', p)
     G, L, Pp = P(m.group(1)), P(m.group(2)), P(m.group(3))
     qq, r = sp.div(sp.Poly(sp.expand(G * L), x), sp.Poly(Pp, x))
@@ -384,14 +391,14 @@ def alrem(q):
 @ref('alrop', 'rational expression simplified with SymPy cancel / together; monic linear form (x+p)/(x+q) or numerator mx+n over the stated denominator', 'exhaustive')
 def alrop(q):
     p = U(q['prompt'])
-    m = re.search(r'Simplify (.+?)\. The result', p)
+    m = re.search(r'Simplify (.+?)\. The result', q['prompt'].replace('−', '-'))
     if m:
         s = m.group(1)
-        if ' ÷ ' in s or '/' in s and '÷' in s:
+        if ' ÷ ' in s:
             a, b = s.split(' ÷ ')
             val = ex(a) / ex(b)
         else:
-            a, b = s.split(' * ')
+            a, b = s.replace('×', '*').split(' * ')
             val = ex(a) * ex(b)
         n, d = sp.fraction(sp.cancel(sp.together(val)))
         pn, pd = sp.Poly(n, x), sp.Poly(d, x)
@@ -436,6 +443,14 @@ def alsol2(q):
 @ref('alsplit', 'integer pairs (r, s) with r+s = b and rs = ac enumerated; statement numbers cross-checked', 'exhaustive')
 def alsplit(q):
     p = U(q['prompt'])
+    mz = re.search(r'Factorise (.+?) by splitting the middle term, and hence find the zeros', p)
+    if mz:
+        pz = P(mz.group(1))
+        r = sp.roots(sp.Poly(pz, x))
+        assert all(pz.subs(x, v) == 0 for v in r)
+        if sum(r.values()) != 2 or any(not v.is_rational for v in r):
+            return Verdict(False, f'zeros not two rationals: {r}')
+        return Expect(lst(sorted(Q(v) for v in r)))
     pol = P(re.search(r'To factorise (.+?) by splitting', p).group(1))
     A, B, C = [int(pol.coeff(x, d)) for d in (2, 1, 0)] if False else [int(sp.Poly(pol, x).coeff_monomial(x ** d)) for d in (2, 1, 0)]
     sols = [(r, s) for r in range(-400, 401) for s in range(r, 401) if r + s == B and r * s == A * C]
