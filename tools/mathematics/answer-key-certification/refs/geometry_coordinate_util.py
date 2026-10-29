@@ -1,0 +1,100 @@
+"""helpers for the geometry-coordinate references: read the statement (prompt/figure), never params, never production code."""
+import re
+from fractions import Fraction
+import sympy as sp
+from sympy.parsing.sympy_parser import parse_expr, standard_transformations, implicit_multiplication_application, convert_xor
+
+TR = standard_transformations + (implicit_multiplication_application, convert_xor)
+x, y, z = sp.symbols('x y z')
+NUM = r'-?\d+(?:\.\d+)?(?:/\d+)?'
+
+
+def U(s):
+    return s.replace('−', '-').replace('²', '^2').replace('³', '^3').replace('·', '*').replace('×', '*')
+
+
+def R(t):
+    t = t.strip()
+    if '/' in t:
+        a, b = t.split('/')
+        return sp.Rational(a) / sp.Rational(b)
+    return sp.Rational(t)
+
+
+def points(s, dim=None):
+    """[(label, (coords...))] for every  P(1, 2)  /  (1, 2)  /  (1, 2, 3)  in the text"""
+    s = U(s)
+    out = []
+    for m in re.finditer(r'(?<![A-Za-z0-9])([A-Z][A-Za-z]?)?\s*\(\s*(' + NUM + r')\s*,\s*(' + NUM + r')(?:\s*,\s*(' + NUM + r'))?\s*\)', s):
+        c = [R(m.group(i)) for i in (2, 3, 4) if m.group(i) is not None]
+        if dim and len(c) != dim:
+            continue
+        out.append((m.group(1), tuple(c)))
+    return out
+
+
+def labelled(s, dim=None):
+    d = {}
+    for lab, c in points(s, dim):
+        if lab:
+            d.setdefault(lab, c)
+    return d
+
+
+def unlabelled(s, dim=None):
+    return [c for lab, c in points(s, dim) if not lab]
+
+
+def expr(s):
+    return parse_expr(U(s).replace('^', '**'), local_dict={'x': x, 'y': y, 'z': z}, transformations=standard_transformations + (implicit_multiplication_application,))
+
+
+def eqn(s):
+    """'a x + b y + c = 0' (or any 'lhs = rhs') -> lhs - rhs as a sympy expression"""
+    l, r = U(s).split('=')
+    return expr(l) - expr(r)
+
+
+def lines_in(s):
+    """every linear equation 'lhs = rhs' in the text, as expressions lhs - rhs in x, y (z)"""
+    out = []
+    for m in re.finditer(r'((?:[-+]?\s*\d*\s*[xyz]\s*)+(?:[-+]\s*\d+)?\s*=\s*-?\d+|(?:[-+]?\s*\d*\s*[xyz]\s*)+(?:[-+]\s*\d+)?\s*=\s*0|[xyz]\s*=\s*-?\d+)', U(s)):
+        try:
+            out.append(eqn(m.group(1)))
+        except Exception:
+            pass
+    return out
+
+
+def coeffs(e, vs=(x, y)):
+    p = sp.Poly(sp.expand(e), *vs)
+    a = [p.coeff_monomial(v) for v in vs]
+    return a + [p.coeff_monomial(1)]
+
+
+def fx(e):
+    """text of an exact expression for the kit's reader"""
+    return str(sp.nsimplify(sp.simplify(e)) if not isinstance(e, (int, sp.Basic)) else sp.simplify(e))
+
+
+def tup(*c):
+    return '(' + ', '.join(str(sp.nsimplify(v)) for v in c) + ')'
+
+
+def surd(n):
+    """sqrt(n) of a nonneg integer/rational as the text  k√m  (k omitted when 1), exact"""
+    n = sp.Rational(n)
+    if n.q != 1:
+        raise ValueError('not integer')
+    n = int(n)
+    k, m = 1, n
+    f = sp.factorint(n)
+    k = 1
+    m = 1
+    for p, e in f.items():
+        k *= p ** (e // 2)
+        if e % 2:
+            m *= p
+    if m == 1:
+        return str(k)
+    return ('' if k == 1 else str(k)) + '√' + str(m)
