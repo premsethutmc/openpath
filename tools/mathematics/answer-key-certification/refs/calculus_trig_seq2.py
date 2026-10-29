@@ -267,8 +267,8 @@ def arwallis(q):
 
 @ref('audbe', method='SymPy exact definite integral of the stated product', coverage='exhaustive')
 def audbe(q):
-    m = re.search(r'Evaluate ∫ from (\d+) to (π/2|π|\d+) of (.+) dx\. Give the exact value', q['prompt'])
-    lo = int(m.group(1)); hi = {'π/2': sp.pi / 2, 'π': sp.pi}.get(m.group(2)) or int(m.group(2))
+    m = re.search(r'Evaluate ∫ from (\d+) to (π/2|π|e|\d+) of (.+) dx\. Give the exact value', q['prompt'])
+    lo = int(m.group(1)); hi = {'π/2': sp.pi / 2, 'π': sp.pi, 'e': sp.E}.get(m.group(2)) or int(m.group(2))
     return Expect(str(sp.integrate(E(m.group(3)), (x, lo, hi))))
 
 
