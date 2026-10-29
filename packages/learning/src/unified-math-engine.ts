@@ -239,10 +239,16 @@ async function assessE5Route(problem: MathematicalProblem, input: NaturalWorking
   let verdict = resolveVerdict(account, plan.nativeComplete, plan.obligations);
   let classification: Classification = verdict.classification as Classification;
   if (classification === "incomplete" && plan.terminal === "missing-assumption") classification = "missing-assumption";
+  let domainGap: string | null = null;
+  // an antiderivative claimed without a stated domain must be defined wherever the integrand is (same check as the typed and E6 routes)
+  if (classification === "verified" && domain === "calculus" && (problem as { task?: string }).task === "indefinite-integral" && (problem as { integrand?: unknown }).integrand && plan.final?.kind === "expression") {
+    const gap = typedCalculusDomainGap(problem as CalculusProblem, [plan.final.value as Expr]);
+    if (gap) { domainGap = gap.reason; classification = gap.kind as Classification; verdict = { ...verdict, classification: gap.kind as never, correct: null, complete: false, justification: `domain: ${gap.reason}; ${verdict.justification}`, obligations: [gap.reason, ...verdict.obligations] }; }
+  }
   const destination = await e5DestinationCheck(problem, input, plan, classification, options);
   let notes = [...plan.notes];
   if (destination) { notes.push(destination.note); if (classification === "verified" && destination.contradicts) { classification = "unsupported"; verdict = { ...verdict, classification: "unsupported", correct: null, complete: false, justification: `the destination reasoner contradicts the independent check (${destination.note}); nothing is accepted`, obligations: [destination.note] }; } }
-  const steps = stepsFromAccount(plan.parsed, account);
+  const steps0 = stepsFromAccount(plan.parsed, account), steps = domainGap ? steps0.map((st, k) => k === steps0.length - 1 && st.classification === "verified" ? { ...st, classification, justification: `the antiderivative is not defined on the whole domain of the integrand: ${domainGap}` } : st) : steps0;
   return { contractVersion: UNIFIED_MATH_CONTRACT, domain, classification, correct: classification === "verified" ? true : classification === "invalid" ? false : null, complete: classification === "verified", firstInvalidStep: classification === "invalid" ? verdict.firstInvalidStep : null,
     steps, proofDependencies: steps.map((s) => s.dependencies), domainRestrictions: plan.restrictions, outstandingObligations: classification === "verified" ? [] : verdict.obligations, skills: [`${domain}.natural-e5.${plan.family}`], reasoners,
     justification: classification === "missing-assumption" ? verdict.obligations[0] ?? "an assumption is missing" : verdict.justification,
