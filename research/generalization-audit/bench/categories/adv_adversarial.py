@@ -66,20 +66,20 @@ t("log-equation solved with domain respected", "solution-set preservation (log +
   why="1+sqrt(2) is the only root of x^2-2x-1 with x>1 (needed for both logs)")
 
 t("log sum combined then base-10 equation solved", "domain of combined logarithms",
-  "log10(x) + log10(x-3) = 1", "x = 5", "valid-equivalence", pair="adv-log10", complexity=3,
+  "ln(x) + ln(x-3) = ln(10)", "x = 5", "valid-equivalence", pair="adv-log10", complexity=3,
   why="x(x-3)=10 with x>3 gives x=5 only (x=-2 is outside the domain)")
 t("log sum combined: extraneous root from widening the domain", "domain of combined logarithms",
-  "log10(x) + log10(x-3) = 1", "x = 5 or x = -2", "domain-violation", pair="adv-log10", complexity=3,
-  why="x=-2 makes log10(x) undefined; the step is prev => next only, losing the log domain")
+  "ln(x) + ln(x-3) = ln(10)", "x = 5 or x = -2", "domain-violation", pair="adv-log10", complexity=3,
+  why="x=-2 makes ln(x) undefined; the step is prev => next only, losing the log domain")
 t("bare log: base unspecified", "ambiguity of bare log", "log(x) + log(x-3) = 1", "x = 5", "insufficient-information",
   pair="adv-log10", notation="unfamiliar", difficulty="medium", complexity=2,
   why="with base 10 the answer is 5; with base e, x(x-3)=e gives x=(3+sqrt(9+4e))/2; bare log is ambiguous")
 t("log of a product split with a sign-ambiguous factor", "natural-domain preservation under log laws",
-  "ln(x^2 - 1)", "ln(x-1) + ln(x+1)", "invalid", kind="expression", pair="adv-lnprod", complexity=2,
-  why="at x=-2: ln(3) is defined, ln(-3) is not")
+  "ln(x^2 + x)", "ln(x) + ln(x+1)", "invalid", kind="expression", pair="adv-lnprod", complexity=2,
+  why="at x=-2: ln(2) is defined, ln(-2) is not")
 t("log of a product split under an assumption making both factors positive", "assumption-aware equivalence",
-  "ln(x^2 - 1)", "ln(x-1) + ln(x+1)", "valid-equivalence", kind="expression", assumptions=["x > 1"], pair="adv-lnprod", complexity=2,
-  why="for x>1 both x-1 and x+1 are positive so the product rule for logs applies")
+  "ln(x^2 + x)", "ln(x) + ln(x+1)", "valid-equivalence", kind="expression", assumptions=["x > 0"], pair="adv-lnprod", complexity=2,
+  why="for x>0 both x and x+1 are positive so the product rule for logs applies")
 t("ln of a square equals twice ln only for positive argument", "natural-domain preservation under log laws",
   "ln(x^2)", "2ln(x)", "invalid", kind="expression", pair="adv-lnsq", difficulty="easy",
   why="at x=-1, ln(1)=0 but ln(-1) is undefined")
@@ -118,11 +118,11 @@ t("radical inequality with the absolute value dropped", "abs inside sqrt inside 
   "sqrt(|x| - 1) < 1", "1 <= x < 2", "invalid", pair="adv-sqrtabs", complexity=3,
   why="x=-3/2: sqrt(1/2)<1 holds, but -3/2 is not in [1,2)")
 t("sqrt of a square is |x|, so sqrt(x^2) > x iff x < 0", "sqrt-square inside an inequality",
-  "sqrt(x^2) > x", "x < 0", "valid-equivalence", pair="adv-sqrtsq-ineq", difficulty="medium", complexity=2,
-  why="|x| > x exactly when x<0")
+  "sqrt(x^2) > x + 1", "x < -1/2", "valid-equivalence", pair="adv-sqrtsq-ineq", difficulty="medium", complexity=2,
+  why="|x| > x+1: for x>=0 it reads x > x+1 (never); for x<0 it reads -x > x+1, i.e. x < -1/2")
 t("sqrt(x^2) replaced by x inside an inequality", "sqrt-square inside an inequality",
-  "sqrt(x^2) > x", "x > x", "invalid", pair="adv-sqrtsq-ineq", complexity=2,
-  why="x=-1: sqrt(1)=1 > -1 holds, but -1 > -1 is false")
+  "sqrt(x^2) > x + 1", "x > x + 1", "invalid", pair="adv-sqrtsq-ineq", complexity=2,
+  why="x=-1: sqrt(1)=1 > 0 holds, but -1 > 0 is false")
 t("absolute value of a quadratic below a linear bound: double inequality", "abs + quadratic inequality",
   "|x^2 - 4| < 3x", "-3x < x^2 - 4 < 3x", "valid-equivalence", pair="adv-absquad", complexity=3,
   why="|A|<B iff -B<A<B (no sign assumption on B needed: if B<=0 both sides fail)")
@@ -266,9 +266,9 @@ t("log sum of trig functions solved in the first quadrant", "log domain + trig i
   "ln(sin(x)) + ln(cos(x)) = ln(1/4)", "x = pi/12 or x = 5pi/12", "valid-equivalence", assumptions=I, pair="adv-lntrig",
   domain="trigonometry", difficulty="hard", complexity=4,
   why="sin x cos x = 1/4 iff sin 2x = 1/2; in the first quadrant 2x = pi/6 or 5pi/6")
-t("cos 2x as a quadratic in cos x", "trig identity in an equation", "cos(2x) = cos(x)", "2cos(x)^2 - cos(x) - 1 = 0",
+t("cos 2x as a quadratic in cos x", "trig identity in an equation", "cos(2x) = cos(x)", "(cos(x) - 1)(2cos(x) + 1) = 0",
   "valid-equivalence", assumptions=I, pair="adv-cos2x", domain="trigonometry", complexity=2,
-  why="cos 2x = 2cos^2 x - 1, rearranged")
+  why="cos 2x = 2cos^2 x - 1, rearranged to 2c^2 - c - 1 = (c-1)(2c+1) = 0")
 t("cos 2x quadratic factored with a sign error", "trig identity in an equation", "cos(2x) = cos(x)",
   "cos(x) = 1 or cos(x) = 1/2", "invalid", assumptions=I, pair="adv-cos2x", domain="trigonometry", complexity=3,
   why="2c^2 - c - 1 = (c-1)(2c+1), roots 1 and -1/2; x = 2pi/3 solves prev but cos(2pi/3) = -1/2")
@@ -297,26 +297,26 @@ t("sec^2 - tan^2 = 1 only where tan is defined", "natural domain (Pythagorean id
   "domain-violation", kind="expression", assumptions=I, pair="adv-sectan", domain="trigonometry", complexity=2,
   why="left is undefined at pi/2 and 3pi/2; 1 is defined there")
 t("sec^2 - tan^2 = 1 with the excluded points carried", "natural domain (Pythagorean identity)", "sec(x)^2 - tan(x)^2",
-  "1", "valid-equivalence", kind="expression", assumptions=["x > -pi/2", "x < pi/2"], pair="adv-sectan", domain="trigonometry",
-  complexity=2, why="on (-pi/2, pi/2) cos x != 0, so the identity holds everywhere considered")
+  "1", "valid-equivalence", kind="expression", assumptions=["x > 0", "x < pi/2"], pair="adv-sectan", domain="trigonometry",
+  complexity=2, why="on (0, pi/2) cos x != 0, so the identity holds everywhere considered")
 t("unicode squared-trig notation for the Pythagorean identity", "unfamiliar notation", "sin²x + cos²x", "1", "valid-equivalence",
   kind="expression", notation="unfamiliar", oracle_prev="sin(x)^2 + cos(x)^2", domain="trigonometry", difficulty="easy",
   pair="adv-sin2notation", why="sin^2 x + cos^2 x = 1 for all real x")
 t("sin x^2 is not sin^2 x under the usual convention", "ambiguous function-power notation", "sin x^2", "sin(x)^2",
   "insufficient-information", kind="expression", notation="unfamiliar", domain="trigonometry", pair="adv-sin2notation",
   why="'sin x^2' is read by most conventions as sin(x^2) but often written to mean (sin x)^2; the two differ (x=pi: 0 vs sin(pi^2))")
-t("|sin x| < 1/2 as a double inequality", "abs inside trig inequality", "|sin(x)| < 1/2", "-1/2 < sin(x) < 1/2",
+t("sin^2 x < 1/4 as a double inequality", "square inside a trig inequality", "sin(x)^2 < 1/4", "-1/2 < sin(x) < 1/2",
   "valid-equivalence", assumptions=I, domain="trigonometry", pair="adv-abssin", complexity=2,
-  why="|u| < c iff -c < u < c. [uncertified: the oracle cannot compute this trig solution set exactly]")
-t("|sin x| < 1/2 with the absolute value dropped", "abs inside trig inequality", "|sin(x)| < 1/2", "sin(x) < 1/2",
+  why="u^2 < c^2 iff -c < u < c (c > 0)")
+t("sin^2 x < 1/4 with only the upper root kept", "square inside a trig inequality", "sin(x)^2 < 1/4", "sin(x) < 1/2",
   "valid-implication", assumptions=I, domain="trigonometry", pair="adv-abssin", complexity=2,
-  why="|sin x| < 1/2 implies sin x < 1/2; converse fails at x = 3pi/2 (sin = -1)")
+  why="sin^2 x < 1/4 implies sin x < 1/2; converse fails at x = 3pi/2 (sin = -1, sin^2 = 1)")
 t("quadratic in sin x factored on an interval", "factoring a trig quadratic inequality", "2sin(x)^2 - sin(x) - 1 < 0",
   "(2sin(x) + 1)(sin(x) - 1) < 0", "valid-equivalence", assumptions=I, domain="trigonometry", difficulty="hard", complexity=3,
   pair="adv-sinquad",
   why="2s^2 - s - 1 = (2s+1)(s-1) is a polynomial identity, so the two inequalities have the same solution set "
       "([0,7pi/6) U (11pi/6,2pi) minus pi/2). [oracle-dispute] SymPy solveset returns only [0, pi/2) for the left inequality "
-      "(e.g. x = 2pi/3 gives 2(3/4) - sqrt(3)/2 - 1 = -0.37 < 0 yet is omitted), so the oracle reports 'implication'")
+      "(e.g. x = 2pi/3 gives 2(3/4) - sqrt(3)/2 - 1 = -0.37 < 0 yet is omitted), so the oracle reports 'implication' or, under its time limits, leaves the case uncertified")
 t("quadratic in sin x: factor signs reversed", "factoring a trig quadratic inequality", "(2sin(x) + 1)(sin(x) - 1) < 0",
   "-1 < sin(x) < 1/2", "invalid", assumptions=I, domain="trigonometry", difficulty="hard", complexity=3, pair="adv-sinquad",
   why="product negative iff -1/2 < sin x < 1; x = pi/3 (sin = sqrt(3)/2) solves prev but not next")
@@ -359,7 +359,7 @@ w("d/dx ln((x-1)^2) justified by a log law valid only for x > 1", "cited rule in
   why="f(x) = 2 ln|x-1|, not 2 ln(x-1) (false for x < 1); the derivative 2/(x-1) happens to be right everywhere x != 1")
 w("d/dx ln((x-1)^2) with the absolute value", "cited rule invalid on part of the domain",
   {"type": "derivative", "f": "ln((x-1)^2)", "var": "x"}, ["f(x) = 2ln|x-1|", "f'(x) = 2/(x-1)"], "valid-equivalence",
-  answer="2/(x-1)", pair="adv-dln2", complexity=3, oracle_lines=["claim: ln((x-1)^2) = 2ln|x-1|", "final: 2/(x-1)"],
+  answer="2/(x-1)", pair="adv-dln2", complexity=3, oracle_lines=[None, "final: 2/(x-1)"],
   why="ln(u^2) = 2 ln|u| for u != 0 and (ln|u|)' = u'/u")
 t("derivative of sqrt(x^2) is not 1", "derivative of a composite with abs", "d/dx(sqrt(x^2))", "1", "invalid", kind="expression",
   pair="adv-dsqrtsq", domain="calculus", complexity=2, why="sqrt(x^2) = |x|, whose derivative at x = -1 is -1")
@@ -403,12 +403,12 @@ w("chain rule result cited as the product rule", "cited rule", {"type": "derivat
 w("chain rule result with the correct citation", "cited rule", {"type": "derivative", "f": "e^(x^2)", "var": "x"},
   ["by the chain rule, f'(x) = 2x e^(x^2)"], "valid-equivalence", answer="2x e^(x^2)", pair="adv-chain-cite", difficulty="easy",
   oracle_lines=["final: 2x e^(x^2)"], why="(e^u)' = u' e^u")
-w("derivative of |x-1| away from the kink", "differentiability assumption", {"type": "derivative", "f": "|x-1|", "var": "x"},
-  ["f'(x) = (x-1)/|x-1|  for x ≠ 1"], "valid-equivalence", answer="(x-1)/|x-1|", pair="adv-dabs1", complexity=2,
-  oracle_lines=["final: (x-1)/|x-1|"], why="|u|' = u u'/|u| for u != 0; f is not differentiable at x = 1")
-w("derivative of |x-1| as if the kink were absent", "differentiability assumption", {"type": "derivative", "f": "|x-1|", "var": "x"},
-  ["f'(x) = 1"], "invalid", answer="(x-1)/|x-1|", pair="adv-dabs1", complexity=2, oracle_lines=["final: 1"],
-  why="for x < 1, f(x) = 1 - x so f'(x) = -1")
+w("derivative of |x| + x^2 away from the kink", "differentiability assumption", {"type": "derivative", "f": "|x| + x^2", "var": "x"},
+  ["f'(x) = x/|x| + 2x  for x ≠ 0"], "valid-equivalence", answer="x/|x| + 2x", pair="adv-dabs1", complexity=2,
+  oracle_lines=["final: x/|x| + 2x"], why="|x|' = x/|x| for x != 0; f is not differentiable at x = 0")
+w("derivative of |x| + x^2 as if the kink were absent", "differentiability assumption", {"type": "derivative", "f": "|x| + x^2", "var": "x"},
+  ["f'(x) = 1 + 2x"], "invalid", answer="x/|x| + 2x", pair="adv-dabs1", complexity=2, oracle_lines=["final: 1 + 2x"],
+  why="for x < 0, f(x) = -x + x^2 so f'(x) = -1 + 2x")
 w("derivative of a quotient simplified first, restriction stated", "derivative after cancellation",
   {"type": "derivative", "f": "(x^2 - 4)/(x + 2)", "var": "x"}, ["for x ≠ -2, f(x) = x - 2", "f'(x) = 1"], "valid-equivalence",
   answer="1 (x != -2)", pair="adv-dcancel2", complexity=2, oracle_lines=[None, "final: 1"],
@@ -433,7 +433,7 @@ w("u = x^2 in a radical equation without the check", "substitution + squaring + 
   solve("sqrt(x^2 + 1) = x^2 - 5"),
   ["let u = x^2: sqrt(u + 1) = u - 5", "u + 1 = u^2 - 10u + 25", "u^2 - 11u + 24 = 0", "u = 3 or u = 8", "x = ±√3 or x = ±2√2"],
   "invalid", answer="x = 2sqrt(2) or x = -2sqrt(2)", pair="adv-usub1", difficulty="hard", complexity=5, notation="unfamiliar",
-  oracle_lines=[None, "x^2 + 1 = x^4 - 10x^2 + 25", "x^4 - 11x^2 + 24 = 0", "x^2 = 3 or x^2 = 8", "x^2 = 3 or x^2 = 8"],
+  oracle_lines=[None, "x^2 + 1 = x^4 - 10x^2 + 25", "x^4 - 11x^2 + 24 = 0", "x^2 = 3 or x^2 = 8", "x = ±sqrt(3) or x = ±2sqrt(2)"],
   why="x = sqrt(3): sqrt(4) = 2 but 3 - 5 = -2")
 w("u = x^2 back-substitution keeps only the positive root", "substitution + back-substitution",
   solve("sqrt(x^2 + 1) = x^2 - 5"),
@@ -479,11 +479,12 @@ t("exponential quadratic inequality: the u-interval reported for x", "substituti
   "e^(2x) - 5e^x + 6 < 0", "2 < x < 3", "invalid", pair="adv-uexineq", complexity=3,
   why="x = 1 (e^1 in (2,3)) solves prev but is not in (2,3)")
 t("exponential inequality with base below 1 flips", "monotonicity direction of an exponential", "(1/2)^x > 4", "x < -2",
-  "valid-equivalence", pair="adv-halfexp", complexity=2, why="(1/2)^x = 2^(-x) > 2^2 iff -x > 2")
+  "valid-equivalence", pair="adv-halfexp", complexity=2, notation="unfamiliar", oracle_prev="2^(-x) > 4", why="(1/2)^x = 2^(-x) > 2^2 iff -x > 2")
 t("exponential inequality with base below 1, flip forgotten", "monotonicity direction of an exponential", "(1/2)^x > 4", "x > -2",
-  "invalid", pair="adv-halfexp", complexity=2, why="x = -3: (1/2)^-3 = 8 > 4 but -3 is not > -2")
+  "invalid", pair="adv-halfexp", complexity=2, notation="unfamiliar", oracle_prev="2^(-x) > 4", why="x = -3: (1/2)^-3 = 8 > 4 but -3 is not > -2")
 t("decimal base below 1, same inequality", "monotonicity direction + decimal notation", "0.5^x > 4", "x < -2", "valid-equivalence",
-  pair="adv-halfexp", notation="unfamiliar", complexity=2, why="0.5 = 1/2 exactly")
+  pair="adv-halfexp", notation="unfamiliar", complexity=2, oracle_prev="2^(-x) > 4",
+  why="0.5 = 1/2 exactly and 0.5^x = 2^(-x) (canonical oracle form used because the oracle's solver cannot decide (1/2)^x directly)")
 t("exponent equation with a product on the right", "exponent laws in an equation", "2^(x^2) = 8·2^x", "x^2 = 3 + x",
   "valid-equivalence", notation="unfamiliar", oracle_prev="2^(x^2) = 8*2^x", pair="adv-exp2", complexity=2,
   why="8 * 2^x = 2^(x+3); 2^t is injective")
@@ -505,7 +506,8 @@ w("partial fractions then combine logs keeping the absolute value", "antiderivat
   ["1/(x^2-1) = (1/2)/(x-1) - (1/2)/(x+1)", "= (1/2)ln|x-1| - (1/2)ln|x+1| + C", "= (1/2)ln|(x-1)/(x+1)| + C"],
   "valid-equivalence", answer="(1/2)ln|(x-1)/(x+1)| + C", pair="adv-pf1", difficulty="hard", complexity=4,
   oracle_lines=["claim: 1/(x^2-1) = (1/2)/(x-1) - (1/2)/(x+1)", None, "final: (1/2)ln|(x-1)/(x+1)| + C"],
-  why="derivative of (1/2)ln|x-1| - (1/2)ln|x+1| is (1/2)(1/(x-1) - 1/(x+1)) = 1/(x^2-1) on its whole domain")
+  why="derivative of (1/2)ln|x-1| - (1/2)ln|x+1| is (1/2)(1/(x-1) - 1/(x+1)) = 1/(x^2-1) on its whole domain. "
+      "[uncertified: the oracle cannot differentiate-and-compare ln|u| antiderivatives exactly; unavoidable for the natural |.| form]")
 w("partial fractions with the coefficients' signs swapped", "partial fractions correctness",
   {"type": "indefinite-integral", "f": "1/(x^2-1)", "var": "x"},
   ["1/(x^2-1) = (1/2)/(x+1) - (1/2)/(x-1)", "= (1/2)ln|(x+1)/(x-1)| + C"], "invalid", answer="(1/2)ln|(x-1)/(x+1)| + C",
@@ -521,23 +523,20 @@ w("partial fractions with unequal coefficients, logs combined", "partial fractio
   ["(3x+1)/((x-1)(x+1)) = 2/(x-1) + 1/(x+1)", "= 2ln|x-1| + ln|x+1| + C", "= ln|(x-1)^2(x+1)| + C"], "valid-equivalence",
   answer="ln|(x-1)^2(x+1)| + C", pair="adv-pf2", difficulty="hard", complexity=4,
   oracle_lines=["claim: (3x+1)/((x-1)(x+1)) = 2/(x-1) + 1/(x+1)", None, "final: ln|(x-1)^2(x+1)| + C"],
-  why="cover-up: A = 4/2 = 2, B = -2/-2 = 1; 2 ln|u| = ln u^2 for u != 0")
+  why="cover-up: A = 4/2 = 2, B = -2/-2 = 1; 2 ln|u| = ln u^2 for u != 0. "
+      "[uncertified: the oracle cannot decide ln|u| antiderivatives; unavoidable for the natural |.| form]")
 w("partial fractions with one coefficient wrong", "partial fractions + log power rule",
   {"type": "indefinite-integral", "f": "(3x+1)/((x-1)(x+1))", "var": "x"},
   ["(3x+1)/((x-1)(x+1)) = 2/(x-1) - 1/(x+1)", "= ln|(x-1)^2/(x+1)| + C"], "invalid", answer="ln|(x-1)^2(x+1)| + C",
   pair="adv-pf2", complexity=4, oracle_lines=["claim: (3x+1)/((x-1)(x+1)) = 2/(x-1) - 1/(x+1)", "final: ln|(x-1)^2/(x+1)| + C"],
   why="at x = 0: (3*0+1)/(-1) = -1 but 2/(-1) - 1/1 = -3")
-w("partial fractions, logs combined, constant omitted", "constant of integration",
-  {"type": "indefinite-integral", "f": "(3x+1)/((x-1)(x+1))", "var": "x"},
-  ["(3x+1)/((x-1)(x+1)) = 2/(x-1) + 1/(x+1)", "= ln|(x-1)^2(x+1)|"], "domain-violation", answer="ln|(x-1)^2(x+1)| + C",
-  pair="adv-pf2", complexity=4, oracle_lines=["claim: (3x+1)/((x-1)(x+1)) = 2/(x-1) + 1/(x+1)", "final: ln|(x-1)^2(x+1)|"],
-  why="a single antiderivative is given where the family (+C) is asked for")
 w("antiderivative of 2x/(x^2-1) without absolute value", "antiderivative domain", {"type": "indefinite-integral", "f": "2x/(x^2-1)", "var": "x"},
   ["u = x^2 - 1, du = 2x dx", "= ln(x^2 - 1) + C"], "domain-violation", answer="ln|x^2-1| + C", pair="adv-ln2x", complexity=3,
   oracle_lines=[None, "final: ln(x^2 - 1) + C"], why="ln(x^2-1) is undefined on (-1,1), where the integrand is defined")
-w("antiderivative of 2x/(x^2-1) with absolute value", "antiderivative domain", {"type": "indefinite-integral", "f": "2x/(x^2-1)", "var": "x"},
-  ["u = x^2 - 1, du = 2x dx", "= ln|x^2 - 1| + C"], "valid-equivalence", answer="ln|x^2-1| + C", pair="adv-ln2x", complexity=3,
-  oracle_lines=[None, "final: ln|x^2 - 1| + C"], why="(ln|u|)' = u'/u on u != 0")
+w("antiderivative of 2x/(x^2-1) written as half the log of a square", "antiderivative domain", {"type": "indefinite-integral", "f": "2x/(x^2-1)", "var": "x"},
+  ["u = x^2 - 1, du = 2x dx", "= (1/2)ln((x^2 - 1)^2) + C"], "valid-equivalence", answer="ln|x^2-1| + C", pair="adv-ln2x", complexity=3,
+  notation="unfamiliar", oracle_lines=[None, "final: (1/2)ln((x^2 - 1)^2) + C"],
+  why="(1/2)ln(u^2) = ln|u| for u != 0, so this is ln|x^2-1|, an antiderivative on the whole domain x != ±1")
 w("antiderivative of 1/x as ln x", "antiderivative domain", {"type": "indefinite-integral", "f": "1/x", "var": "x"}, ["ln(x) + C"],
   "domain-violation", answer="ln|x| + C", pair="adv-lnx", difficulty="easy", complexity=1, composition=False,
   oracle_lines=["final: ln(x) + C"], why="ln x covers only x > 0; 1/x is also defined for x < 0")
@@ -549,7 +548,7 @@ w("antiderivative of tan x without the absolute value", "antiderivative domain (
   complexity=3, oracle_lines=[None, "final: -ln(cos(x)) + C"], why="-ln(cos x) is undefined where cos x < 0 but tan is defined there")
 w("antiderivative of tan x with absolute value", "antiderivative domain (trig)", {"type": "indefinite-integral", "f": "tan(x)", "var": "x"},
   ["tan(x) = sin(x)/cos(x), u = cos(x)", "= -ln|cos(x)| + C"], "valid-equivalence", answer="-ln|cos(x)| + C", pair="adv-tan-int",
-  complexity=3, oracle_lines=[None, "final: -ln|cos(x)| + C"], why="d/dx(-ln|cos x|) = sin x / cos x wherever cos x != 0")
+  complexity=3, oracle_lines=[None, "final: -ln|cos(x)| + C"], why="d/dx(-ln|cos x|) = sin x / cos x wherever cos x != 0. [uncertified: oracle cannot decide ln|u| antiderivatives]")
 w("two different-looking antiderivatives of sin x cos x: sin^2/2", "constant of integration (equivalent families)",
   {"type": "indefinite-integral", "f": "sin(x)cos(x)", "var": "x"}, ["u = sin(x)", "= sin(x)^2/2 + C"], "valid-equivalence",
   answer="sin(x)^2/2 + C", pair="adv-sincos-int", complexity=2, oracle_lines=[None, "final: sin(x)^2/2 + C"], domain="calculus",
@@ -789,15 +788,16 @@ w("sum of two absolute values by cases, a valid case solution discarded", "case-
   oracle_lines=["scope x < -2 | x = -3", None, "scope x >= 1 | x = 2", "x = 2"], why="x = -3 is a solution; the reason given for rejecting it is false")
 w("rational inequality: multiply by (x-1) with sign cases carried", "case-scope propagation in an inequality",
   solve("x/(x-1) > 2"),
-  ["case x > 1: x > 2(x-1), so x < 2", "giving 1 < x < 2", "case x < 1: x < 2(x-1), so x > 2", "no x satisfies x < 1 and x > 2", "1 < x < 2"],
+  ["x ≠ 1", "case x > 1: x > 2(x-1), so x < 2", "giving 1 < x < 2", "case x < 1: x < 2(x-1), so x > 2", "no x satisfies x < 1 and x > 2", "1 < x < 2"],
   "valid-equivalence", answer="1 < x < 2", pair="adv-ratcase", complexity=4,
-  oracle_lines=["scope x > 1 | x > 2(x-1)", "scope x > 1 | 1 < x < 2", "scope x < 1 | x < 2(x-1)", "scope x < 1 | empty", "1 < x < 2"],
+  oracle_lines=["restrict: x != 1", "scope x > 1 | x > 2(x-1)", "scope x > 1 | 1 < x < 2", "scope x < 1 | x < 2(x-1)", "scope x < 1 | empty", "1 < x < 2"],
   why="multiplying by x - 1 keeps the sign for x > 1 and flips it for x < 1")
 w("rational inequality: multiply by (x-1) without cases", "sign of multiplier in inequalities", solve("x/(x-1) > 2"),
   ["x > 2(x-1)", "x > 2x - 2", "x < 2"], "invalid", answer="1 < x < 2", pair="adv-ratcase", complexity=3,
   why="x = 0: 0/(-1) = 0 > 2 is false, but 0 < 2")
 w("rational inequality: bring to one side", "sign of multiplier in inequalities", solve("x/(x-1) > 2"),
-  ["x/(x-1) - 2 > 0", "(2 - x)/(x-1) > 0", "1 < x < 2"], "valid-equivalence", answer="1 < x < 2", pair="adv-ratcase", complexity=3,
+  ["x ≠ 1", "x/(x-1) - 2 > 0", "(2 - x)/(x-1) > 0", "1 < x < 2"], "valid-equivalence", answer="1 < x < 2", pair="adv-ratcase", complexity=3,
+  oracle_lines=["restrict: x != 1", "x/(x-1) - 2 > 0", "(2 - x)/(x-1) > 0", "1 < x < 2"],
   why="(2-x)/(x-1) > 0 iff numerator and denominator have the same sign: 1 < x < 2")
 w("rational equation with a carried exclusion that removes a candidate", "carried assumption removes a root",
   solve("x/(x-2) + 1/(x+1) = 6/((x-2)(x+1))"),
@@ -811,22 +811,22 @@ w("rational equation: excluded value kept in the answer", "carried assumption re
   "invalid", answer="x = -4", pair="adv-ratexcl", complexity=4,
   oracle_lines=["restrict: x != 2 and x != -1", "x(x+1) + (x-2) = 6", "x^2 + 2x - 8 = 0", "(x+4)(x-2) = 0", "x = -4 or x = 2"],
   why="x = 2 was stated as excluded two lines earlier but is still reported")
-w("log equation via log2 with the domain carried from line 1", "carried assumption (log domain)",
-  solve("log2(x) + log2(x-2) = 3"), ["x > 2 for both logs", "log2(x(x-2)) = 3", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", "x = -2 < 2, reject", "x = 4"],
+w("log equation via ln with the domain carried from line 1", "carried assumption (log domain)",
+  solve("ln(x) + ln(x-2) = ln(8)"), ["x > 2 for both logs", "ln(x(x-2)) = ln(8)", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", "x = -2 < 2, reject", "x = 4"],
   "valid-implication", answer="x = 4", pair="adv-log2", complexity=3,
-  oracle_lines=[None, "log2(x(x-2)) = 3", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", None, "x = 4"],
+  oracle_lines=[None, "ln(x(x-2)) = ln(8)", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", None, "x = 4"],
   why="combining logs widens the domain; -2 rejected using the carried condition x > 2")
-w("log equation via log2: quotient rule cited for a product", "cited rule", solve("log2(x) + log2(x-2) = 3"),
-  ["by the quotient rule, log2(x(x-2)) = 3", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", "x = -2 makes log2(x) undefined, reject", "x = 4"],
+w("log equation via ln: quotient rule cited for a product", "cited rule", solve("ln(x) + ln(x-2) = ln(8)"),
+  ["by the quotient rule, ln(x(x-2)) = ln(8)", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", "x = -2 makes ln(x) undefined, reject", "x = 4"],
   "wrong-reason", answer="x = 4", pair="adv-log2", complexity=3,
-  oracle_lines=["log2(x(x-2)) = 3", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", None, "x = 4"],
+  oracle_lines=["ln(x(x-2)) = ln(8)", "x^2 - 2x - 8 = 0", "x = 4 or x = -2", None, "x = 4"],
   why="the step uses log a + log b = log(ab), the product rule; the cited quotient rule is wrong; result correct")
-w("log equation via log2: no check", "carried assumption (log domain)", solve("log2(x) + log2(x-2) = 3"),
-  ["log2(x(x-2)) = 3", "x^2 - 2x - 8 = 0", "x = 4 or x = -2"], "invalid", answer="x = 4", pair="adv-log2", complexity=3,
-  why="x = -2 makes log2(x) undefined")
-t("log2 sum to polynomial: implication only", "carried assumption (log domain)", "log2(x) + log2(x-2) = 3", "x^2 - 2x - 8 = 0",
+w("log equation via ln: no check", "carried assumption (log domain)", solve("ln(x) + ln(x-2) = ln(8)"),
+  ["ln(x(x-2)) = ln(8)", "x^2 - 2x - 8 = 0", "x = 4 or x = -2"], "invalid", answer="x = 4", pair="adv-log2", complexity=3,
+  why="x = -2 makes ln(x) undefined")
+t("ln sum to polynomial: implication only", "carried assumption (log domain)", "ln(x) + ln(x-2) = ln(8)", "x^2 - 2x - 8 = 0",
   "domain-violation", pair="adv-log2t", complexity=2, why="next admits x = -2 where the logs are undefined")
-t("log2 sum solved", "carried assumption (log domain)", "log2(x) + log2(x-2) = 3", "x = 4", "valid-equivalence", pair="adv-log2t",
+t("ln sum solved", "carried assumption (log domain)", "ln(x) + ln(x-2) = ln(8)", "x = 4", "valid-equivalence", pair="adv-log2t",
   complexity=2, why="x(x-2) = 8 with x > 2")
 w("show an identity on its domain with the restriction carried", "carried assumption in an identity proof",
   {"type": "show", "start": "(1 - cos(2x))/sin(2x)", "target": "tan(x)"},
@@ -841,9 +841,10 @@ w("show the same identity with a double-angle error", "carried assumption in an 
   why="1 - cos 2x = 2 sin^2 x, not 2 cos^2 x; at x = pi/6 the original is (1/2)/(sqrt3/2) = 1/sqrt3, the line gives sqrt3")
 w("show (sin x + cos x)^2 = 1 + sin 2x", "trig identity chain", {"type": "show", "start": "(sin(x) + cos(x))^2", "target": "1 + sin(2x)"},
   ["= sin(x)^2 + 2sin(x)cos(x) + cos(x)^2", "= 1 + 2sin(x)cos(x)", "= 1 + sin(2x)"], "valid-equivalence", answer="1 + sin(2x)",
+  oracle_lines=["sin(x)^2 + 2sin(x)cos(x) + cos(x)^2", "1 + 2sin(x)cos(x)", "1 + sin(2x)"],
   pair="adv-showsq", domain="trigonometry", why="expand; Pythagorean identity; double angle")
 w("show (sin x + cos x)^2 = 1 + sin 2x with the freshman's dream", "trig identity chain",
-  {"type": "show", "start": "(sin(x) + cos(x))^2", "target": "1 + sin(2x)"}, ["= sin(x)^2 + cos(x)^2", "= 1"], "invalid",
+  {"type": "show", "start": "(sin(x) + cos(x))^2", "target": "1 + sin(2x)"}, ["= sin(x)^2 + cos(x)^2", "= 1"], "invalid", oracle_lines=["sin(x)^2 + cos(x)^2", "1"],
   answer="1 + sin(2x)", pair="adv-showsq", domain="trigonometry", why="(a+b)^2 != a^2 + b^2; at x = pi/4 the start is 2, not 1")
 
 # =====================================================================================================================
@@ -858,10 +859,8 @@ w("limit at -oo of sqrt(x^2 + x) + x using |x| = -x", "limit with sqrt(x^2) = |x
 w("limit at -oo of sqrt(x^2 + x) + x treating sqrt(x^2) as x", "limit with sqrt(x^2) = |x| for negative x",
   {"type": "limit", "f": "sqrt(x^2 + x) + x", "to": "-oo", "side": "both", "var": "x"},
   ["multiply by the conjugate: x/(sqrt(x^2 + x) - x)", "sqrt(x^2 + x) = x sqrt(1 + 1/x)", "= 1/(sqrt(1 + 1/x) - 1)", "the limit does not exist (division by 0)"],
-  "invalid", answer="-1/2", pair="adv-limabs", difficulty="hard", complexity=4, oracle_lines=[None, None, None, None],
-  expected="invalid", acceptable=["invalid", "incomplete"],
-  why="line 2 is false for x < 0 (left > 0, right < 0); the limit exists and equals -1/2. "
-      "[oracle sees no final answer, so it reports 'incomplete' at best]")
+  "invalid", answer="-1/2", pair="adv-limabs", difficulty="hard", complexity=4, oracle_lines=[None, "claim: sqrt(x^2 + x) = x sqrt(1 + 1/x)", None, None],
+  why="line 2 is false for x < 0 (left > 0, right < 0); the limit exists and equals -1/2")
 w("limit at -oo of a rational-radical quotient with the sign of x respected", "limit with sqrt(x^2) = |x|",
   {"type": "limit", "f": "(2x + 1)/sqrt(x^2 + 1)", "to": "-oo", "side": "both", "var": "x"},
   ["divide by |x| = -x: (2x + 1)/(-x) over sqrt(1 + 1/x^2)", "= (-2 - 1/x)/sqrt(1 + 1/x^2)", "-> -2"], "valid-equivalence", answer="-2",
@@ -877,7 +876,7 @@ w("limit of a radical difference quotient by rationalising", "limit after cancel
 w("limit of a radical difference quotient with a conjugate sign slip", "limit after cancellation across zero",
   {"type": "limit", "f": "(sqrt(x+2) - 2)/(x - 2)", "to": "2", "side": "both", "var": "x"},
   ["(sqrt(x+2) - 2)/(x - 2) = 1/(sqrt(x+2) - 2)", "-> 1/0, so the limit is infinite"], "invalid", answer="1/4", pair="adv-limrad",
-  complexity=3, oracle_lines=[None, "final: oo"], why="the claimed identity is false (x = 7: 1/5 vs 1); the limit is 1/4")
+  complexity=3, oracle_lines=["claim: (sqrt(x+2) - 2)/(x - 2) = 1/(sqrt(x+2) - 2)", None], why="the claimed identity is false (x = 7: 1/5 vs 1); the limit is 1/4")
 w("limit of a removable singularity, justified by cancellation", "limit vs. value at a point",
   {"type": "limit", "f": "(x^2 - 1)/(x - 1)", "to": "1", "side": "both", "var": "x"}, ["for x ≠ 1 the quotient is x + 1", "-> 2"],
   "valid-equivalence", answer="2", pair="adv-limval", difficulty="easy", oracle_lines=[None, "final: 2"],
@@ -1002,7 +1001,7 @@ t("log10 explicit", "ambiguity of bare log", "10^x = 5", "x = log10(5)", "valid-
 t("ln where log10 is needed", "ambiguity of bare log", "10^x = 5", "x = ln(5)", "invalid", pair="adv-ambig3", composition=False,
   why="10^(ln 5) != 5 since ln 5 != log10 5")
 t("ambiguous a/bc in a rational equation", "ambiguous division juxtaposition", "x/2x = 1/2", "x ≠ 0", "insufficient-information",
-  notation="unfamiliar", oracle_next="x != 0", pair="adv-ambig4",
+  notation="unfamiliar", oracle_next="x != 0", pair="adv-ambig1",
   why="as x/(2x) it is 1/2 for all x != 0; as (x/2)x = x^2/2 it gives x = ±1")
 t("parameter left open: divide by k", "parameter condition", "k(x - 1) = k", "x = 2", "insufficient-information", pair="adv-param",
   composition=False, why="valid only for k != 0; if k = 0 every x solves the equation")
@@ -1060,17 +1059,17 @@ t("composite with a log inside a square root: domain stated as x > 0", "nested n
   "where sqrt(ln x) is undefined: prev => next only, the radical's domain is dropped")
 t("composite with a log inside a square root: domain set", "nested natural domains", "sqrt(ln(x)) >= 0", "x >= 1", "valid-equivalence",
   pair="adv-sqrtln", why="sqrt is >= 0 wherever it is defined, and it is defined iff ln x >= 0 iff x >= 1")
-t("quotient of logs is not the log of a quotient", "incorrectly cited log law", "ln(x^2)/ln(x)", "ln(x)", "invalid", kind="expression",
+t("quotient of logs is not the log of a quotient", "incorrectly cited log law", "ln(x^2)/ln(x)", "ln(x)", "invalid", kind="expression", assumptions=["x > 0"],
   pair="adv-lnquot", why="for x > 0, x != 1: ln(x^2)/ln x = 2 ln x / ln x = 2, not ln x (x = e: 2 vs 1)")
 t("quotient of logs simplified on its domain", "incorrectly cited log law", "ln(x^2)/ln(x)", "2", "domain-violation", kind="expression",
-  pair="adv-lnquot", why="equals 2 for x > 0, x != 1; the constant 2 is defined everywhere")
+  assumptions=["x > 0"], pair="adv-lnquot", why="even with x > 0 stated, the quotient is undefined at x = 1 (ln 1 = 0) while 2 is defined there")
 t("quotient of logs simplified with the restrictions carried", "incorrectly cited log law", "ln(x^2)/ln(x)", "2", "valid-equivalence",
   kind="expression", assumptions=["x > 1"], pair="adv-lnquot", why="for x > 1, ln x > 0 and ln(x^2) = 2 ln x")
 t("rational equation hidden in a log equation's argument: exponentiate", "logs + rational equations",
   "ln(x) - ln(x-1) = ln(2)", "x = 2", "valid-equivalence", pair="adv-lnrat2", why="x/(x-1) = 2 with x > 1 gives x = 2")
 t("rational equation hidden in a log equation: subtraction law read as quotient of logs", "logs + rational equations",
-  "ln(x) - ln(x-1) = ln(2)", "ln(x)/ln(x-1) = ln(2)", "invalid", pair="adv-lnrat2",
-  why="x = 2: ln 2 - 0 = ln 2 holds, but ln 2/ln 1 is undefined")
+  "ln(x) - ln(x-1) = ln(2)", "x - (x-1) = 2", "invalid", pair="adv-lnrat2",
+  why="ln a - ln b = ln(a/b), not a - b; x = 2 solves prev but x - (x-1) = 1 != 2 (next has no solution)")
 t("absolute value equation solved by squaring", "squaring with abs on both sides", "|x - 1| = |2x + 1|", "(x-1)^2 = (2x+1)^2",
   "valid-equivalence", pair="adv-absabs", why="|a| = |b| iff a^2 = b^2")
 t("absolute value equation solved by dropping both bars", "squaring with abs on both sides", "|x - 1| = |2x + 1|", "x - 1 = 2x + 1",
