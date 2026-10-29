@@ -348,13 +348,13 @@ def ahman(q):
 @ref('ahlike', 'sum/difference parsed and expanded with SymPy', 'exhaustive')
 def ahlike(q):
     e = sp.expand(ex(U(q['prompt']).split('Simplify ')[1].rstrip('.')))
-    return Expect(str(e))
+    return Expect(canon(e, [x, y]), form=True)
 
 
 @ref('ahsub', 'difference parsed and expanded with SymPy', 'exhaustive')
 def ahsub(q):
     e = sp.expand(ex(U(q['prompt']).split('Simplify ')[1].rstrip('.')))
-    return Expect(str(e))
+    return Expect(canon(e, [x]), form=True)
 
 
 @ref('ahmatch', 'linear rule fitted exactly through the four stated values', 'exhaustive')
@@ -383,7 +383,7 @@ def ahpyr(q):
     row = [ex(t.strip()) for t in s.split(',')]
     while len(row) > 1:
         row = [row[i] + row[i + 1] for i in range(len(row) - 1)]
-    return Expect(str(sp.expand(row[0])))
+    return Expect(canon(row[0], [x]), form=True)
 
 
 @ref('ahthink', 'the instructions applied in order to a symbol', 'exhaustive')
@@ -405,7 +405,7 @@ def ahthink(q):
         if m:
             e = e / int(m.group(1)); continue
         return Unsupported('step: ' + st)
-    return Expect(str(sp.expand(e)))
+    return Expect(canon(e, [sp.Symbol('n')]), form=True)
 
 
 @ref('ahwork', 'combined rate = 1/a + 1/b jobs per day, time = reciprocal (Fractions); check: work done in that time = 1', 'exhaustive')

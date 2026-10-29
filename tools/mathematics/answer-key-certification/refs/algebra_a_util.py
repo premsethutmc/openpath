@@ -115,3 +115,27 @@ def digit_root_nines(n):
 
 def pol(s, var=None):
     return sp.sympify(ex(s))
+
+
+SUPD = '⁰¹²³⁴⁵⁶⁷⁸⁹'
+
+
+def canon(e, gens):
+    """canonical text of a polynomial with rational coefficients: descending total degree, gens order within a degree,
+    unicode minus, coefficient 1 omitted, superscript powers"""
+    e = sp.expand(e)
+    if e == 0:
+        return '0'
+    P_ = sp.Poly(e, *gens)
+    terms = sorted(P_.terms(), key=lambda t: (-sum(t[0]), tuple(-d for d in t[0])))
+    out = ''
+    for mon, c in terms:
+        c = Fr(str(c))
+        body = ''.join(g.name + ('' if d == 1 else ''.join(SUPD[int(ch)] for ch in str(d))) for g, d in zip(gens, mon) if d)
+        mag = abs(c)
+        s = (fs(mag) if (mag != 1 or not body) else '') + body
+        if not out:
+            out = ('−' if c < 0 else '') + s
+        else:
+            out += (' − ' if c < 0 else ' + ') + s
+    return out

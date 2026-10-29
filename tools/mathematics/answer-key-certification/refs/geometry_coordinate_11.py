@@ -130,19 +130,54 @@ POLY = {'triangle': 3, 'square': 4, 'pentagon': 5, 'hexagon': 6, 'heptagon': 7, 
 ORD = {}
 
 
+GLYPHS = {   # block sans-serif capitals on a 5 x 7 pixel grid
+    'H': ['#...#', '#...#', '#...#', '#####', '#...#', '#...#', '#...#'],
+    'N': ['#...#', '##..#', '#.#.#', '#.#.#', '#.#.#', '#..##', '#...#'],
+    'S': ['.####', '#....', '#....', '.###.', '....#', '....#', '####.'],
+    'Z': ['#####', '....#', '...#.', '..#..', '.#...', '#....', '#####'],
+}
+
+
+def glyph_order(g):
+    px = {(c, r) for r, row in enumerate(g) for c, ch in enumerate(row) if ch == '#'}
+    W, H = len(g[0]), len(g)
+    order = 1
+    if {(W - 1 - c, H - 1 - r) for c, r in px} == px:
+        order = 2   # a 90-degree turn would need a 7 x 5 footprint, impossible for a 5 x 7 glyph
+    return order
+
+
+def sym_order(poly):
+    n, k = len(poly), 0
+    cx = sum(x for x, y in poly) / n
+    cy = sum(y for x, y in poly) / n
+    pts = {(round(x - cx, 9), round(y - cy, 9)) for x, y in poly}
+    cnt = 0
+    for d in range(1, 361):
+        t = math.radians(d)
+        r = {(round(x * math.cos(t) - y * math.sin(t), 9) + 0.0, round(x * math.sin(t) + y * math.cos(t), 9) + 0.0) for x, y in pts}
+        if all(any(abs(a - c) < 1e-6 and abs(b - e) < 1e-6 for c, e in pts) for a, b in r):
+            cnt += 1
+    return cnt
+
+
 @ref('afrot', method='n-fold symmetry: the shape coincides with itself after every 360/n degrees; k-th coincidence at k*360/n (cross-check: n rotations by 360/n return to 360)')
 def afrot(q):
     p = q['prompt']
     m = re.search(r'with (\d+) identical', p)
     if m:
         n = int(m.group(1))
+    elif 'not a square' in p:
+        n = 2     # rectangle / rhombus that is not a square: only the half turn
+    elif 'parallelogram with no right angles' in p:
+        n = sym_order([(0, 0), (4, 0), (6, 3), (2, 3)])
+    elif re.search(r'capital letter [HNSZ]', p):
+        n = glyph_order(GLYPHS[re.search(r'capital letter (\w)', p).group(1)])
     else:
-        m = re.search(r'(?:regular|equilateral|a) (triangle|square|pentagon|hexagon|heptagon|octagon|nonagon|decagon|dodecagon)', p.replace('A regular', 'a regular'))
+        m = re.search(r'\b(triangle|square|pentagon|hexagon|heptagon|octagon|nonagon|decagon|dodecagon)\b', p)
         if not m:
             return Unsupported('unknown shape in afrot')
         n = POLY[m.group(1)]
-    if m and 'regular dodecagon (a shape with' in p:
-        n = 12
     step = Fraction(360, n)
     assert step * n == 360
     k = re.search(r'for the (\d+)(?:st|nd|rd|th) time', p)
@@ -265,7 +300,7 @@ def solid_ref(q):
     w = (want.group(1) or want.group(2)).split()[0].lower() if want else None
     if w is None:
         return Unsupported('unknown solid question')
-    m = re.search(r'a ([a-z]+) (prism|pyramid)', p)
+    m = re.search(r'\ban? ([a-z]+) (prism|pyramid)', p)
     if m:
         n = NAMES[m.group(1)]
         if m.group(2) == 'prism':
@@ -464,3 +499,37 @@ def ampgx(q):
     if any(v.subs(s) <= 0 for v in E.values()):
         return Verdict(False, 'a side/segment length is not positive at the solution')
     return Expect(f'({s[x]}, {s[y]})')
+
+
+@ref('amctan', method='all lines n.x=c (|n|=1) tangent to both circles solved from |c|=r1 and |n.(d,0)-c|=r2; count distinct lines; contact points built explicitly and their distance measured, split into direct/transverse by the side of the centres')
+def amctan(q):
+    p = q['prompt']
+    r1, r2, d = [sp.Rational(v) for v in re.findall(r'(\d+(?:\.\d+)?) cm', p)[:3]]
+    if d == 0:
+        return Expect('0') if 'How many' in p else Verdict(False, 'concentric circles have no common tangent')
+    lines = set()
+    info = []
+    for t_sign in (1, -1):               # circle 2 contact offset t = +-r2 along n; circle 1 at c = r1
+        cos = (r1 - t_sign * r2) / d     # from t = c - d cos(theta)
+        if abs(cos) > 1:
+            continue
+        s2 = 1 - cos ** 2
+        for sg in ((1, -1) if s2 != 0 else (1,)):
+            sin = sg * sp.sqrt(s2)
+            key = (cos, sin)
+            if key in lines:
+                continue
+            lines.add(key)
+            n = (cos, sin)
+            P1 = (r1 * n[0], r1 * n[1])
+            P2 = (d + t_sign * r2 * n[0], t_sign * r2 * n[1])
+            L = sp.simplify(sp.sqrt((P1[0] - P2[0]) ** 2 + (P1[1] - P2[1]) ** 2))
+            info.append(('direct' if t_sign * 1 > 0 else 'transverse', L))
+    # t = +r2 (same sign as c = +r1): both centres on the same side of the line -> direct tangent
+    if 'How many' in p:
+        return Expect(str(len(lines)))
+    kind = 'direct' if 'direct common tangent' in p else 'transverse'
+    Ls = {sp.nsimplify(L) for k, L in info if k == kind}
+    if len(Ls) != 1:
+        return Verdict(False, f'no {kind} tangent exists' if not Ls else f'lengths differ {Ls}')
+    return Expect(str(Ls.pop()))

@@ -116,7 +116,7 @@ def aobinco(q):
 @ref('aobinexp', 'power expanded with SymPy', 'exhaustive')
 def aobinexp(q):
     m = re.search(r'Expand \((.+?)\)([⁰¹²³⁴⁵⁶⁷⁸⁹]+) using', U(q['prompt']))
-    return Expect(str(sp.expand(ex(m.group(1)) ** sup(m.group(2)))))
+    return Expect(canon(ex(m.group(1)) ** sup(m.group(2)), [x]), form=True)
 
 
 @ref('aobinind', 'constant term (x^0) of the SymPy expansion of the power', 'exhaustive')
@@ -140,7 +140,7 @@ def aobinmid(q):
         if n_ % 2:
             return Unsupported('odd n with single middle term')
         idx = n_ // 2
-    return Expect(str(terms[idx]))
+    return Expect(canon(terms[idx], [x]), form=True)
 
 
 @ref('aocart', 'sizes of the sets read from the braces; |AxB| = |A||B|, relations = subsets of AxB (2^|AxB|)', 'exhaustive')

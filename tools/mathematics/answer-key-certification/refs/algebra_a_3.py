@@ -63,7 +63,7 @@ def alcomp(q):
 def alcompx(q):
     m = re.search(r'f\(x\) = (.+?) and g\(x\) = (.+?)\. Find \((f|g) ∘ (f|g)\)\(x\)', U(q['prompt']))
     F = {'f': ex(m.group(1)), 'g': ex(m.group(2))}
-    return Expect(str(sp.expand(F[m.group(3)].subs(x, F[m.group(4)]))))
+    return Expect(canon(F[m.group(3)].subs(x, F[m.group(4)]), [x]), form=True)
 
 
 @ref('alcub', 'zeros of the cubic from SymPy roots with multiplicity; each re-substituted into the polynomial; distinct real zeros listed', 'exhaustive')
@@ -147,11 +147,11 @@ def alform(q):
     m = re.search(r'whose zeros are (.+?) and (.+?)\.$', p)
     if m:
         r1, r2 = ex(m.group(1)), ex(m.group(2))
-        return Expect(str(sp.expand((x - r1) * (x - r2))))
+        return Expect(canon(sp.expand((x - r1) * (x - r2)), [x]), form=True)
     m = re.search(r'sum (-?\d+) and product (-?\d+)', p)
     if m:
         S, Pd = int(m.group(1)), int(m.group(2))
-        return Expect(str(sp.expand(x ** 2 - S * x + Pd)))
+        return Expect(canon(x ** 2 - S * x + Pd, [x]), form=True)
     return Unsupported('template')
 
 
@@ -340,7 +340,7 @@ def alpsq(q):
     assert sp.expand(r ** 2 - pol) == 0
     if sp.Poly(r, x).LC() < 0:
         r = -r
-    return Expect(str(r))
+    return Expect(canon(r, [x]), form=True)
 
 
 @ref('alqtab', 'quadratic equation solved algebraically (SymPy), solutions cross-checked against the table row', 'exhaustive')
@@ -629,13 +629,15 @@ def ajfsq(q):
     tpl = re.sub(r'([+−-]) b\)', lambda mm: ('+' if mm.group(1) == '+' else '-') + ' B)', tpl)
     tpl = tpl.replace('−', '-').replace('²', '**2')
     tpl = tpl.replace('(x + b)', '(x + B)').replace('(x - b)', '(x - B)').replace(')(', ')*(')
-    Aa, Bb = sp.symbols('A B')
+    pf = sp.lambdify((x, y), pol, 'math')
+    pts = [(1, 2), (2, -1), (3, 5), (-2, 7), (4, 1), (-3, -2), (5, 3), (0, 6)]
+    target = [pf(a_, b_) for a_, b_ in pts]
     sols = []
     for av in range(1, 25):
         for bv in range(1, 25):
-            val = eval(tpl, {'A': av, 'B': bv, 'x': x, 'y': y})
-            if sp.expand(val - pol) == 0:
-                sols.append((av, bv))
+            if all(eval(tpl, {'A': av, 'B': bv, 'x': a_, 'y': b_}) == t_ for (a_, b_), t_ in zip(pts, target)):
+                if sp.expand(eval(tpl, {'A': av, 'B': bv, 'x': x, 'y': y}) - pol) == 0:
+                    sols.append((av, bv))
     if len(sols) != 1:
         return Ambiguous(f'{tpl} -> {sols}')
     return Expect(tup(sols[0]))

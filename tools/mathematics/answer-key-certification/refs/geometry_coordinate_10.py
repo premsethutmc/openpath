@@ -353,3 +353,25 @@ def c_aawhere(q):
 
 
 WHY = {k: 'choice letters not related to the statement without option texts' for k in CLS}
+
+CHOICE_MAPS.update({
+    'alcyc': {'cyclic': 'A', 'not cyclic': 'B'},
+    'alnear': {'AB longer': 'A', 'CD longer': 'B', 'equal': 'C'},
+})
+MAP_NOTE = ('letter order inferred from the data (one class -> one letter, distinct letters, over every released question); '
+            'option texts are not exported, so the mapping itself is not independently verified')
+
+
+def _safe(fn):
+    def g(q):
+        try:
+            return fn(q)
+        except Exception as e:  # noqa: BLE001
+            return Unsupported(f'statement variant not parsed ({type(e).__name__})')
+    return g
+
+
+for _f, _fn in CLS.items():
+    ref(_f, method=('class derived from the statement/figure independently (coordinates, definitions, brute force) and compared with the keyed letter through the inferred letter map; ' + MAP_NOTE) if _f in CHOICE_MAPS
+        else 'class derived from the statement/figure independently; option texts are not exported and the keyed letter is shuffled per question, so the key cannot be compared',
+        assumptions=(MAP_NOTE if _f in CHOICE_MAPS else 'option texts not exported'))(choice_ref_fn(_f, _safe(_fn), WHY.get(_f, '')))

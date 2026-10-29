@@ -295,7 +295,7 @@ def alpoly(q):
     m = re.search(r'By its number of terms \(after collecting like terms\), what kind of polynomial is (.+)\?$', p)
     if m:
         k_ = len(sp.Poly(sp.expand(ex(m.group(1))), x).terms())
-        nm = {1: 'monomial', 2: 'binomial', 3: 'trinomial'}.get(k_)
+        nm = {1: 'monomial', 2: 'binomial', 3: 'trinomial', 4: 'four terms'}.get(k_)
         if nm is None:
             return Unsupported(f'{k_} terms')
         return pick(q, 'alpoly', lambda o: nm in o)
