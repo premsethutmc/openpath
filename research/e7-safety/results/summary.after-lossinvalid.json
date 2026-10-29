@@ -11227,10 +11227,10 @@
   "decisiveFailureRate": 0.0357
  },
  "latencyMs": {
-  "p50": 0.756,
-  "p95": 6.768,
-  "p99": 14.158,
-  "max": 35.52,
+  "p50": 0.757,
+  "p95": 7.192,
+  "p99": 13.932,
+  "max": 35.13,
   "n": 2248
  },
  "studentFacingAnswerFirst": {

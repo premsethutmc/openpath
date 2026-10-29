@@ -46,7 +46,7 @@ function derivativeNotation(raw:string):NaturalDerivativeNotation|null{
  m=lhs.match(/^\\frac\{\\partial\s*([A-Za-z]\w*)\}\{\\partial\s*([A-Za-z]\w*)\}$/);if(m)return{kind:"derivative",notation:raw,dependent:m[1],variable:m[2],order:1,partial:true,...(eq>=0?{result:result()}:{})};
  return null;
 }
-function functionNotation(raw:string):NaturalFunctionNotation|null{const m=raw.match(/^\s*([A-Za-z]\w*)\s*\((.*)\)\s*(?:=\s*(.+))?$/);if(!m||["sin","cos","tan","ln","log","exp","sqrt","abs"].includes(m[1])||/^[A-Za-z](?:sqrt|sin|cos|tan|log|exp)$/.test(m[1]))return null;const argument=m[2].trim();if(!argument)return null;if(m[1].length===1&&new RegExp("(?<![A-Za-z0-9_])"+m[1]+"(?![A-Za-z0-9_]|\\s*\\()").test(argument))return null;return{kind:"function",notation:raw,functionName:m[1],argument,nested:/[A-Za-z]\w*\s*\(/.test(argument),...(m[3]?{result:parsedExpression(m[3])}:{})}}
+function functionNotation(raw:string):NaturalFunctionNotation|null{const m=raw.match(/^\s*([A-Za-z]\w*)\s*\((.*)\)\s*(?:=\s*(.+))?$/);if(!m||["sin","cos","tan","ln","log","exp","sqrt","abs"].includes(m[1])||/^[A-Za-z](?:sqrt|sin|cos|tan|log|exp)$/.test(m[1]))return null;if(UNSUPPORTED_FUNCTIONS.test(m[1]))throw Error(`unsupported: function ${m[1]}(…) is not supported`);const argument=m[2].trim();if(!argument)return null;if(m[1].length===1&&new RegExp("(?<![A-Za-z0-9_])"+m[1]+"(?![A-Za-z0-9_]|\\s*\\()").test(argument))return null;return{kind:"function",notation:raw,functionName:m[1],argument,nested:/[A-Za-z]\w*\s*\(/.test(argument),...(m[3]?{result:parsedExpression(m[3])}:{})}}
 function looksDerivative(raw:string){return /[′']|\^\{\\prime\}|(?:^|\s)d(?:\^\d+)?[A-Za-z]\w*\s*\/\s*d|\\frac\{d|∂|\\partial/.test(raw)}
 
 

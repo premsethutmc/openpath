@@ -34,7 +34,7 @@ describe("I1 no silent repair of invalid syntax; unknown notation gets no invent
     expect(parse("sin x) = 1").classification).not.toBe("parsed");
   });
   test("unknown function names are unsupported, not variables; atan/arctan keep their meaning", () => {
-    for (const t of ["3sec(3x)tan(3x)", "cbrt(x) + 1", "csc(x)^2", "arcsin(x) + 1", "2sinh(2x)", "foo(x) + 1"]) expect([t, parse(t).classification]).toEqual([t, "unsupported"]);
+    for (const t of ["3sec(3x)tan(3x)", "cbrt(x) + 1", "csc(x)^2", "arcsin(x) + 1", "2sinh(2x)", "foo(x) + 1", "arcsin(x/3)", "sec(x)"]) expect([t, parse(t).classification]).toEqual([t, "unsupported"]);
     for (const t of ["atan(x) + 1", "arctan(x) + 1"]) { const r = parse(t); expect(r.classification).toBe("parsed"); expect(JSON.stringify(r.lines[0].relation)).toContain('"kind":"atan"'); }
     expect(parse("sec + x").classification).toBe("unsupported");
   });

@@ -1,7 +1,7 @@
 {
  "version": 1,
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "76ef4edf4b63de6953878c30d95553706e6ce74dcd0f22afa250637bd2c4277b",
+ "sha256": "70752246b58b4c1ea19cd7f6ac2e03017687c944c4127f6582d2e5a98e21e58e",
  "inputs": {
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
   "content/learning/competency-expansion.v1.json": "4598b09ddd9a798a5fff55d870c4a83ec6e771ffa922403c0d41e8df49587c42",
@@ -48,7 +48,7 @@
   "packages/learning/src/independent-checker.ts": "a17be422326dbc11cb6c4ebd9a19706c632a1a856af58b940e19c53dd331e736",
   "packages/learning/src/linear-algebra-kernel.ts": "bf0cf6bee4d368213485ed580f3676274df23a7172bd6d958cf56dad71c26046",
   "packages/learning/src/math-kernel.ts": "3142b8f20ba62afd53f3aee168e5953cba6457900a371622230876938a0c8e4d",
-  "packages/learning/src/natural-working.ts": "ed5be2b7883d7b1afafc7784077bc0acee72c72c76d6a4b1676bc491b37381fe",
+  "packages/learning/src/natural-working.ts": "e40d24de8365287e4c7bca35d14984e32d6056f2eadd51b946e06e31f12dc38b",
   "packages/learning/src/parse-fidelity.ts": "82ac5523a135e48b5a3e3c4834eece8d6c860e7b3e081862824d46f702f92b03",
   "packages/learning/src/probability-statistics.ts": "1a878046e0c2d45148abf44d6473ec0417a4ec6f262907951b1e2210b13b0d25",
   "packages/learning/src/proof-kernel.ts": "b1e7550c69aa0c49d489c4fbeb976522c6f6e1cc4e90204a4575b260ebb61a87",

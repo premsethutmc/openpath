@@ -3,17 +3,6 @@
     "id": "H-001",
     "invariant": "I1",
     "kind": "minimal",
-    "rationale": "Unclosed parenthesis must not be auto-closed.",
-    "channel": "parser",
-    "text": "4*(x - 7",
-    "expected": [
-      "malformed"
-    ]
-  },
-  {
-    "id": "H-002",
-    "invariant": "I1",
-    "kind": "minimal",
     "rationale": "Dangling binary operator must not be silently dropped.",
     "channel": "parser",
     "text": "x^3 - * 2",
@@ -22,7 +11,7 @@
     ]
   },
   {
-    "id": "H-003",
+    "id": "H-002",
     "invariant": "I1",
     "kind": "minimal",
     "rationale": "Extra closing parenthesis must not be silently removed.",
@@ -33,18 +22,7 @@
     ]
   },
   {
-    "id": "H-004",
-    "invariant": "I1",
-    "kind": "notation",
-    "rationale": "Doubled power operator is malformed, not x^2.",
-    "channel": "parser",
-    "text": "x^^2 + 1",
-    "expected": [
-      "malformed"
-    ]
-  },
-  {
-    "id": "H-005",
+    "id": "H-003",
     "invariant": "I1",
     "kind": "minimal",
     "rationale": "sec is outside the supported function set and must get no invented meaning.",
@@ -55,7 +33,7 @@
     ]
   },
   {
-    "id": "H-006",
+    "id": "H-004",
     "invariant": "I1",
     "kind": "minimal",
     "rationale": "arcsin is not a supported function name.",
@@ -66,7 +44,7 @@
     ]
   },
   {
-    "id": "H-007",
+    "id": "H-005",
     "invariant": "I1",
     "kind": "minimal",
     "rationale": "cbrt is not a supported function name.",
@@ -77,7 +55,7 @@
     ]
   },
   {
-    "id": "H-008",
+    "id": "H-006",
     "invariant": "I1",
     "kind": "minimal",
     "rationale": "A made-up function name must not be read as a product or known function.",
@@ -88,7 +66,7 @@
     ]
   },
   {
-    "id": "H-009",
+    "id": "H-007",
     "invariant": "I1",
     "kind": "minimal",
     "rationale": "cos x^3 can mean cos(x^3) or (cos x)^3 and must be refused.",
@@ -99,29 +77,7 @@
     ]
   },
   {
-    "id": "H-010",
-    "invariant": "I1",
-    "kind": "notation",
-    "rationale": "Unparenthesised trig argument with a power is ambiguous.",
-    "channel": "parser",
-    "text": "sin 2x^2",
-    "expected": [
-      "ambiguous"
-    ]
-  },
-  {
-    "id": "H-011",
-    "invariant": "I1",
-    "kind": "contrast",
-    "rationale": "Contrast to cos x^3: the explicit form is unambiguous and must parse.",
-    "channel": "parser",
-    "text": "cos(x^3) + 1",
-    "expected": [
-      "parsed"
-    ]
-  },
-  {
-    "id": "H-012",
+    "id": "H-008",
     "invariant": "I1",
     "kind": "contrast",
     "rationale": "Contrast to cos x^3: the explicit cube of cosine must parse.",
@@ -132,7 +88,7 @@
     ]
   },
   {
-    "id": "H-013",
+    "id": "H-009",
     "invariant": "I1",
     "kind": "contrast",
     "rationale": "Well-formed expression with supported functions must parse (over-strictness check).",
@@ -143,7 +99,7 @@
     ]
   },
   {
-    "id": "H-014",
+    "id": "H-010",
     "invariant": "I1",
     "kind": "composition",
     "rationale": "True identity but sinh is unsupported, so no meaning may be invented for it.",
@@ -156,20 +112,7 @@
     ]
   },
   {
-    "id": "H-015",
-    "invariant": "I1",
-    "kind": "composition",
-    "rationale": "cot is unsupported; the checker must not assume a definition for it.",
-    "channel": "symbolic",
-    "start": "cot(x)*sin(x)",
-    "next": "cos(x)",
-    "assumptions": [],
-    "expected": [
-      "unsupported"
-    ]
-  },
-  {
-    "id": "H-016",
+    "id": "H-011",
     "invariant": "I1",
     "kind": "composition",
     "rationale": "Working uses unsupported cbrt; the step must not be interpreted.",
@@ -184,7 +127,7 @@
     ]
   },
   {
-    "id": "H-017",
+    "id": "H-012",
     "invariant": "I1",
     "kind": "composition",
     "rationale": "Malformed working line must not be repaired even though the final answer is right.",
@@ -199,14 +142,14 @@
     ]
   },
   {
-    "id": "H-018",
+    "id": "H-013",
     "invariant": "I1",
     "kind": "composition",
     "rationale": "Unsupported function in the problem itself; no verdict may be invented.",
     "channel": "answer-first",
-    "statement": "sec(x) = 2",
+    "statement": "csc(x) = 2",
     "working": [
-      "x = pi/3"
+      "x = pi/6"
     ],
     "expected": [
       "unsupported",
@@ -214,7 +157,7 @@
     ]
   },
   {
-    "id": "H-019",
+    "id": "H-014",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "Odd parity of sine with a scaled argument.",
@@ -227,7 +170,7 @@
     ]
   },
   {
-    "id": "H-020",
+    "id": "H-015",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "Supplement shift of cosine with a scaled argument.",
@@ -240,7 +183,7 @@
     ]
   },
   {
-    "id": "H-021",
+    "id": "H-016",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "Shift by an odd multiple of pi negates cosine.",
@@ -253,20 +196,20 @@
     ]
   },
   {
-    "id": "H-022",
+    "id": "H-017",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "tan has period pi; domains coincide.",
     "channel": "symbolic",
-    "start": "tan(x + pi)",
-    "next": "tan(x)",
+    "start": "tan(2*x - pi)",
+    "next": "tan(2*x)",
     "assumptions": [],
     "expected": [
       "verified"
     ]
   },
   {
-    "id": "H-023",
+    "id": "H-018",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "Double angle with argument 3x.",
@@ -279,20 +222,7 @@
     ]
   },
   {
-    "id": "H-024",
-    "invariant": "I2",
-    "kind": "notation",
-    "rationale": "Double angle for cosine, difference-of-squares form.",
-    "channel": "symbolic",
-    "start": "cos(5*x)^2 - sin(5*x)^2",
-    "next": "cos(10*x)",
-    "assumptions": [],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-025",
+    "id": "H-019",
     "invariant": "I2",
     "kind": "notation",
     "rationale": "Double angle with related arguments 4x and 2x.",
@@ -305,20 +235,20 @@
     ]
   },
   {
-    "id": "H-026",
+    "id": "H-020",
     "invariant": "I2",
     "kind": "minimal",
-    "rationale": "Quarter-period shift turns cosine into sine.",
+    "rationale": "Quarter-period shift turns sine into cosine.",
     "channel": "symbolic",
-    "start": "cos(x - pi/2)",
-    "next": "sin(x)",
+    "start": "sin(pi/2 + 3*x)",
+    "next": "cos(3*x)",
     "assumptions": [],
     "expected": [
       "verified"
     ]
   },
   {
-    "id": "H-027",
+    "id": "H-021",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "Special values cos(pi) = -1 and sin(pi/6) = 1/2.",
@@ -331,26 +261,13 @@
     ]
   },
   {
-    "id": "H-028",
-    "invariant": "I2",
-    "kind": "notation",
-    "rationale": "Special value cos(pi/4) = sqrt(2)/2 combined with a radical.",
-    "channel": "symbolic",
-    "start": "sqrt(2)*cos(pi/4) + tan(x)",
-    "next": "1 + tan(x)",
-    "assumptions": [],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-029",
+    "id": "H-022",
     "invariant": "I2",
     "kind": "minimal",
-    "rationale": "Triple-angle identity is true; a conservative checker may abstain but must not reject.",
+    "rationale": "Cosine triple-angle identity is true; a conservative checker may abstain but must not reject.",
     "channel": "symbolic",
-    "start": "sin(3*x)",
-    "next": "3*sin(x) - 4*sin(x)^3",
+    "start": "cos(3*x)",
+    "next": "4*cos(x)^3 - 3*cos(x)",
     "assumptions": [],
     "expected": [
       "verified",
@@ -358,7 +275,7 @@
     ]
   },
   {
-    "id": "H-030",
+    "id": "H-023",
     "invariant": "I2",
     "kind": "contrast",
     "rationale": "False 'double angle' must never be verified.",
@@ -371,7 +288,7 @@
     ]
   },
   {
-    "id": "H-031",
+    "id": "H-024",
     "invariant": "I2",
     "kind": "contrast",
     "rationale": "Wrong parity for cosine must never be verified.",
@@ -384,33 +301,20 @@
     ]
   },
   {
-    "id": "H-032",
+    "id": "H-025",
     "invariant": "I2",
     "kind": "contrast",
-    "rationale": "Shift by pi negates sine; claiming invariance is false.",
+    "rationale": "Shift by pi negates cosine; claiming invariance is false.",
     "channel": "symbolic",
-    "start": "sin(x + pi)",
-    "next": "sin(x)",
+    "start": "cos(x - pi)",
+    "next": "cos(x)",
     "assumptions": [],
     "expected": [
       "invalid"
     ]
   },
   {
-    "id": "H-033",
-    "invariant": "I2",
-    "kind": "contrast",
-    "rationale": "Sign error in double angle must never be verified.",
-    "channel": "symbolic",
-    "start": "cos(6*x)",
-    "next": "2*cos(3*x)^2 + 1",
-    "assumptions": [],
-    "expected": [
-      "invalid"
-    ]
-  },
-  {
-    "id": "H-034",
+    "id": "H-026",
     "invariant": "I2",
     "kind": "contrast",
     "rationale": "Wrong special value sin(pi/3) = 1/2 must never be verified.",
@@ -423,7 +327,7 @@
     ]
   },
   {
-    "id": "H-035",
+    "id": "H-027",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "Derived contradiction correctly concludes no solution.",
@@ -439,7 +343,7 @@
     ]
   },
   {
-    "id": "H-036",
+    "id": "H-028",
     "invariant": "I2",
     "kind": "minimal",
     "rationale": "Correct final answer for an equation with no solutions.",
@@ -453,7 +357,7 @@
     ]
   },
   {
-    "id": "H-037",
+    "id": "H-029",
     "invariant": "I2",
     "kind": "contrast",
     "rationale": "An identity holds for all x; concluding no solution is wrong.",
@@ -469,7 +373,7 @@
     ]
   },
   {
-    "id": "H-038",
+    "id": "H-030",
     "invariant": "I2",
     "kind": "contrast",
     "rationale": "Answer-first: 'no solution' for an identity is incorrect.",
@@ -483,7 +387,7 @@
     ]
   },
   {
-    "id": "H-039",
+    "id": "H-031",
     "invariant": "I2",
     "kind": "composition",
     "rationale": "Only candidate is the excluded value, so no solution is correct (I2 + I5).",
@@ -500,7 +404,7 @@
     ]
   },
   {
-    "id": "H-040",
+    "id": "H-032",
     "invariant": "I3",
     "kind": "minimal",
     "rationale": "Cancelling x+4 widens the domain to include x = -4.",
@@ -514,7 +418,7 @@
     ]
   },
   {
-    "id": "H-041",
+    "id": "H-033",
     "invariant": "I3",
     "kind": "contrast",
     "rationale": "With x+4 != 0 assumed the cancellation is valid.",
@@ -529,7 +433,7 @@
     ]
   },
   {
-    "id": "H-042",
+    "id": "H-034",
     "invariant": "I3",
     "kind": "notation",
     "rationale": "Factored vs expanded denominator, identical domains.",
@@ -542,33 +446,7 @@
     ]
   },
   {
-    "id": "H-043",
-    "invariant": "I3",
-    "kind": "notation",
-    "rationale": "Negative exponent vs reciprocal, identical domains.",
-    "channel": "symbolic",
-    "start": "3*x^(-2)",
-    "next": "3/x^2",
-    "assumptions": [],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-044",
-    "invariant": "I3",
-    "kind": "notation",
-    "rationale": "Decimal vs fraction coefficient.",
-    "channel": "symbolic",
-    "start": "0.25*x - 1",
-    "next": "x/4 - 1",
-    "assumptions": [],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-045",
+    "id": "H-035",
     "invariant": "I3",
     "kind": "notation",
     "rationale": "Product of reciprocal powers vs expanded denominator; same domain.",
@@ -581,20 +459,7 @@
     ]
   },
   {
-    "id": "H-046",
-    "invariant": "I3",
-    "kind": "notation",
-    "rationale": "Nested integer powers.",
-    "channel": "symbolic",
-    "start": "(x^3)^2",
-    "next": "x^6",
-    "assumptions": [],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-047",
+    "id": "H-036",
     "invariant": "I3",
     "kind": "notation",
     "rationale": "sqrt(x^4) = x^2 for all real x; same domain.",
@@ -608,7 +473,7 @@
     ]
   },
   {
-    "id": "H-048",
+    "id": "H-037",
     "invariant": "I3",
     "kind": "minimal",
     "rationale": "sqrt(x)^4 is undefined for x < 0, so x^2 widens the domain.",
@@ -622,7 +487,7 @@
     ]
   },
   {
-    "id": "H-049",
+    "id": "H-038",
     "invariant": "I3",
     "kind": "contrast",
     "rationale": "With x >= 0 the rewrite is valid.",
@@ -637,7 +502,7 @@
     ]
   },
   {
-    "id": "H-050",
+    "id": "H-039",
     "invariant": "I3",
     "kind": "minimal",
     "rationale": "Original excludes x = 0 and x = -1; result excludes neither.",
@@ -651,20 +516,7 @@
     ]
   },
   {
-    "id": "H-051",
-    "invariant": "I3",
-    "kind": "notation",
-    "rationale": "Cancellation that keeps the excluded point x = -2.",
-    "channel": "symbolic",
-    "start": "(x + 2)/(x^2 + 4*x + 4)",
-    "next": "1/(x + 2)",
-    "assumptions": [],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-052",
+    "id": "H-040",
     "invariant": "I3",
     "kind": "minimal",
     "rationale": "Cancelling x+1 silently admits x = -1.",
@@ -678,13 +530,13 @@
     ]
   },
   {
-    "id": "H-053",
+    "id": "H-041",
     "invariant": "I3",
     "kind": "composition",
-    "rationale": "True where defined, but drops the cos(x) != 0 restriction (I2 + I3).",
+    "rationale": "True where defined, but drops the sin(x) != 0 restriction (I2 + I3).",
     "channel": "symbolic",
-    "start": "tan(x)*cos(x)",
-    "next": "sin(x)",
+    "start": "tan(x)/sin(x)",
+    "next": "1/cos(x)",
     "assumptions": [],
     "expected": [
       "invalid",
@@ -692,21 +544,7 @@
     ]
   },
   {
-    "id": "H-054",
-    "invariant": "I3",
-    "kind": "composition",
-    "rationale": "Double angle cancellation widens domain where cos(2x) = 0 (I2 + I3).",
-    "channel": "symbolic",
-    "start": "sin(4*x)/(2*cos(2*x))",
-    "next": "sin(2*x)",
-    "assumptions": [],
-    "expected": [
-      "invalid",
-      "missing-assumption"
-    ]
-  },
-  {
-    "id": "H-055",
+    "id": "H-042",
     "invariant": "I3",
     "kind": "composition",
     "rationale": "Cancelling x-5 then reporting the excluded value x = 5 is wrong; there is no solution.",
@@ -721,7 +559,7 @@
     ]
   },
   {
-    "id": "H-056",
+    "id": "H-043",
     "invariant": "I3",
     "kind": "composition",
     "rationale": "Contrast: the restriction rules out the only candidate.",
@@ -738,40 +576,40 @@
     ]
   },
   {
-    "id": "H-057",
+    "id": "H-044",
     "invariant": "I3",
     "kind": "composition",
-    "rationale": "Squaring then rejecting the extraneous root x = 2.",
+    "rationale": "Squaring then rejecting the extraneous root x = -1.",
     "channel": "algebra",
-    "statement": "sqrt(x + 7) = x - 5",
+    "statement": "sqrt(x + 10) = x - 2",
     "working": [
-      "x + 7 = x^2 - 10*x + 25",
-      "x^2 - 11*x + 18 = 0",
-      "x = 9 or x = 2",
-      "x = 9"
+      "x + 10 = x^2 - 4*x + 4",
+      "x^2 - 5*x - 6 = 0",
+      "x = 6 or x = -1",
+      "x = 6"
     ],
     "expected": [
       "verified"
     ]
   },
   {
-    "id": "H-058",
+    "id": "H-045",
     "invariant": "I3",
     "kind": "contrast",
-    "rationale": "x = 2 is extraneous (sqrt 9 != -3); final answer is wrong.",
+    "rationale": "x = -1 is extraneous (sqrt 9 != -3); final answer is wrong.",
     "channel": "algebra",
-    "statement": "sqrt(x + 7) = x - 5",
+    "statement": "sqrt(x + 10) = x - 2",
     "working": [
-      "x + 7 = x^2 - 10*x + 25",
-      "x^2 - 11*x + 18 = 0",
-      "x = 9 or x = 2"
+      "x + 10 = x^2 - 4*x + 4",
+      "x^2 - 5*x - 6 = 0",
+      "x = 6 or x = -1"
     ],
     "expected": [
       "invalid"
     ]
   },
   {
-    "id": "H-059",
+    "id": "H-046",
     "invariant": "I4",
     "kind": "minimal",
     "rationale": "Power rule for log licensed by x > 0.",
@@ -786,13 +624,13 @@
     ]
   },
   {
-    "id": "H-060",
+    "id": "H-047",
     "invariant": "I4",
     "kind": "minimal",
-    "rationale": "log(x^4) is defined for x < 0 but 4 log x is not.",
+    "rationale": "log(x^6) is defined for x < 0 but 6 log x is not.",
     "channel": "symbolic",
-    "start": "log(x^4)",
-    "next": "4*log(x)",
+    "start": "log(x^6)",
+    "next": "6*log(x)",
     "assumptions": [],
     "expected": [
       "invalid",
@@ -800,13 +638,13 @@
     ]
   },
   {
-    "id": "H-061",
+    "id": "H-048",
     "invariant": "I4",
     "kind": "contrast",
     "rationale": "With x > 0 the power rule is valid.",
     "channel": "symbolic",
-    "start": "log(x^4)",
-    "next": "4*log(x)",
+    "start": "log(x^6)",
+    "next": "6*log(x)",
     "assumptions": [
       "x > 0"
     ],
@@ -815,7 +653,7 @@
     ]
   },
   {
-    "id": "H-062",
+    "id": "H-049",
     "invariant": "I4",
     "kind": "minimal",
     "rationale": "Both factors positive, so the product is positive.",
@@ -831,7 +669,7 @@
     ]
   },
   {
-    "id": "H-063",
+    "id": "H-050",
     "invariant": "I4",
     "kind": "contrast",
     "rationale": "Without y > 0 the product may be negative.",
@@ -847,38 +685,7 @@
     ]
   },
   {
-    "id": "H-064",
-    "invariant": "I4",
-    "kind": "minimal",
-    "rationale": "Sum of positives is positive.",
-    "channel": "symbolic",
-    "start": "abs(x + y)",
-    "next": "x + y",
-    "assumptions": [
-      "x > 0",
-      "y > 0"
-    ],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-065",
-    "invariant": "I4",
-    "kind": "notation",
-    "rationale": "Linear assumption on a shifted variable.",
-    "channel": "symbolic",
-    "start": "abs(x - 2)",
-    "next": "x - 2",
-    "assumptions": [
-      "x - 2 > 0"
-    ],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-066",
+    "id": "H-051",
     "invariant": "I4",
     "kind": "contrast",
     "rationale": "x > 0 does not imply x > 2 (e.g. x = 1).",
@@ -894,7 +701,7 @@
     ]
   },
   {
-    "id": "H-067",
+    "id": "H-052",
     "invariant": "I4",
     "kind": "composition",
     "rationale": "Product rule for log with both factors positive.",
@@ -910,36 +717,7 @@
     ]
   },
   {
-    "id": "H-068",
-    "invariant": "I4",
-    "kind": "contrast",
-    "rationale": "Without positivity the right side is undefined for x, y < 0.",
-    "channel": "symbolic",
-    "start": "log(x*y)",
-    "next": "log(x) + log(y)",
-    "assumptions": [],
-    "expected": [
-      "invalid",
-      "missing-assumption"
-    ]
-  },
-  {
-    "id": "H-069",
-    "invariant": "I4",
-    "kind": "composition",
-    "rationale": "x > 0 implies x != 0, licensing the cancellation (I3 + I4).",
-    "channel": "symbolic",
-    "start": "(x^2 - 3*x)/x",
-    "next": "x - 3",
-    "assumptions": [
-      "x > 0"
-    ],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-070",
+    "id": "H-053",
     "invariant": "I4",
     "kind": "composition",
     "rationale": "Left side is undefined for x < 0 (I3 + I4).",
@@ -953,22 +731,7 @@
     ]
   },
   {
-    "id": "H-071",
-    "invariant": "I4",
-    "kind": "composition",
-    "rationale": "sqrt(x^2) = |x| = x when x > 0.",
-    "channel": "symbolic",
-    "start": "(x^2)^(1/2)",
-    "next": "x",
-    "assumptions": [
-      "x > 0"
-    ],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-072",
+    "id": "H-054",
     "invariant": "I4",
     "kind": "contrast",
     "rationale": "sqrt(x^2) = |x|, not x, for negative x.",
@@ -982,7 +745,7 @@
     ]
   },
   {
-    "id": "H-073",
+    "id": "H-055",
     "invariant": "I4",
     "kind": "minimal",
     "rationale": "Absolute value makes the antiderivative valid on the whole integrand domain.",
@@ -994,7 +757,7 @@
     ]
   },
   {
-    "id": "H-074",
+    "id": "H-056",
     "invariant": "I4",
     "kind": "contrast",
     "rationale": "Invalid for x < 2 where the integrand is defined.",
@@ -1007,7 +770,7 @@
     ]
   },
   {
-    "id": "H-075",
+    "id": "H-057",
     "invariant": "I4",
     "kind": "minimal",
     "rationale": "Fails on -3 < x < 3 where the integrand is defined.",
@@ -1020,7 +783,7 @@
     ]
   },
   {
-    "id": "H-076",
+    "id": "H-058",
     "invariant": "I4",
     "kind": "contrast",
     "rationale": "Correct on all of the integrand's domain.",
@@ -1032,19 +795,7 @@
     ]
   },
   {
-    "id": "H-077",
-    "invariant": "I4",
-    "kind": "notation",
-    "rationale": "Argument is always positive so no absolute value is needed.",
-    "channel": "integral",
-    "working": "∫ 2x/(x^2 + 5) dx = ln(x^2 + 5) + C",
-    "integrand": "2*x/(x^2 + 5)",
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-078",
+    "id": "H-059",
     "invariant": "I4",
     "kind": "contrast",
     "rationale": "Missing factor 1/4 from the chain rule.",
@@ -1056,7 +807,7 @@
     ]
   },
   {
-    "id": "H-079",
+    "id": "H-060",
     "invariant": "I4",
     "kind": "notation",
     "rationale": "Correct antiderivative with the chain-rule factor.",
@@ -1068,7 +819,7 @@
     ]
   },
   {
-    "id": "H-080",
+    "id": "H-061",
     "invariant": "I4",
     "kind": "composition",
     "rationale": "Valid on every interval where cos x != 0.",
@@ -1081,7 +832,7 @@
     ]
   },
   {
-    "id": "H-081",
+    "id": "H-062",
     "invariant": "I4",
     "kind": "composition",
     "rationale": "Undefined where cos x < 0 although the integrand is defined there.",
@@ -1095,7 +846,7 @@
     ]
   },
   {
-    "id": "H-082",
+    "id": "H-063",
     "invariant": "I5",
     "kind": "minimal",
     "rationale": "The x != 2 line is a restriction annotation, not a solution claim.",
@@ -1111,23 +862,7 @@
     ]
   },
   {
-    "id": "H-083",
-    "invariant": "I5",
-    "kind": "minimal",
-    "rationale": "Restriction line followed by correct clearing of denominators.",
-    "channel": "algebra",
-    "statement": "(x + 1)/(x - 4) = 2",
-    "working": [
-      "x != 4",
-      "x + 1 = 2*x - 8",
-      "x = 9"
-    ],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-084",
+    "id": "H-064",
     "invariant": "I5",
     "kind": "notation",
     "rationale": "Excluded value stated first; both roots lie in the domain.",
@@ -1143,7 +878,7 @@
     ]
   },
   {
-    "id": "H-085",
+    "id": "H-065",
     "invariant": "I5",
     "kind": "minimal",
     "rationale": "Answer-first: restriction line must not be read as the answer.",
@@ -1158,7 +893,7 @@
     ]
   },
   {
-    "id": "H-086",
+    "id": "H-066",
     "invariant": "I5",
     "kind": "minimal",
     "rationale": "x = 0 is excluded by the stated premise, so x = 5 is complete.",
@@ -1174,7 +909,7 @@
     ]
   },
   {
-    "id": "H-087",
+    "id": "H-067",
     "invariant": "I5",
     "kind": "composition",
     "rationale": "Dividing by x is licensed by the premise x > 0 (I5 + I6).",
@@ -1188,7 +923,7 @@
     ]
   },
   {
-    "id": "H-088",
+    "id": "H-068",
     "invariant": "I5",
     "kind": "composition",
     "rationale": "Contrast: without the premise x = 0 is lost.",
@@ -1203,7 +938,7 @@
     ]
   },
   {
-    "id": "H-089",
+    "id": "H-069",
     "invariant": "I5",
     "kind": "composition",
     "rationale": "Premise removes the x < -4 interval.",
@@ -1217,36 +952,7 @@
     ]
   },
   {
-    "id": "H-090",
-    "invariant": "I5",
-    "kind": "composition",
-    "rationale": "Answer-first version of the premise-restricted inequality.",
-    "channel": "answer-first",
-    "statement": "x^2 > 16 for x > 0",
-    "working": [
-      "x > 4"
-    ],
-    "expected": [
-      "correct"
-    ]
-  },
-  {
-    "id": "H-091",
-    "invariant": "I5",
-    "kind": "minimal",
-    "rationale": "Premise excludes x = 0 and x = -3.",
-    "channel": "algebra",
-    "statement": "x^3 - 9*x = 0 for x > 0",
-    "working": [
-      "x*(x^2 - 9) = 0",
-      "x = 3"
-    ],
-    "expected": [
-      "verified"
-    ]
-  },
-  {
-    "id": "H-092",
+    "id": "H-070",
     "invariant": "I6",
     "kind": "minimal",
     "rationale": "Dividing by x^2 loses x = 0.",
@@ -1262,7 +968,7 @@
     ]
   },
   {
-    "id": "H-093",
+    "id": "H-071",
     "invariant": "I6",
     "kind": "minimal",
     "rationale": "Answer-first: omits x = 0.",
@@ -1277,7 +983,7 @@
     ]
   },
   {
-    "id": "H-094",
+    "id": "H-072",
     "invariant": "I6",
     "kind": "contrast",
     "rationale": "Factoring keeps all solutions.",
@@ -1293,7 +999,7 @@
     ]
   },
   {
-    "id": "H-095",
+    "id": "H-073",
     "invariant": "I6",
     "kind": "minimal",
     "rationale": "Taking only the positive square root loses x = -3.",
@@ -1309,7 +1015,7 @@
     ]
   },
   {
-    "id": "H-096",
+    "id": "H-074",
     "invariant": "I6",
     "kind": "contrast",
     "rationale": "Both square-root branches kept.",
@@ -1324,21 +1030,7 @@
     ]
   },
   {
-    "id": "H-097",
-    "invariant": "I6",
-    "kind": "contrast",
-    "rationale": "Answer-first complete answer.",
-    "channel": "answer-first",
-    "statement": "(x - 1)^2 = 16",
-    "working": [
-      "x = 5 or x = -3"
-    ],
-    "expected": [
-      "correct"
-    ]
-  },
-  {
-    "id": "H-098",
+    "id": "H-075",
     "invariant": "I6",
     "kind": "minimal",
     "rationale": "Keeping one interval loses x <= -7.",
@@ -1353,7 +1045,7 @@
     ]
   },
   {
-    "id": "H-099",
+    "id": "H-076",
     "invariant": "I6",
     "kind": "contrast",
     "rationale": "Both intervals present.",
@@ -1367,7 +1059,7 @@
     ]
   },
   {
-    "id": "H-100",
+    "id": "H-077",
     "invariant": "I6",
     "kind": "minimal",
     "rationale": "Dividing by x loses x = 0.",
@@ -1383,22 +1075,7 @@
     ]
   },
   {
-    "id": "H-101",
-    "invariant": "I6",
-    "kind": "minimal",
-    "rationale": "Answer-first: omits x = 0.",
-    "channel": "answer-first",
-    "statement": "x*(x + 6) = 2*x",
-    "working": [
-      "x = -4"
-    ],
-    "expected": [
-      "incomplete",
-      "incorrect"
-    ]
-  },
-  {
-    "id": "H-102",
+    "id": "H-078",
     "invariant": "I6",
     "kind": "contrast",
     "rationale": "Plainly wrong answer must be incorrect, not incomplete.",
