@@ -77,6 +77,12 @@ def failure_class(case, rec, got, oc):
         sec.append("F")
     if got == "unrepresentable":
         return "B", ",".join(sec)
+    if re.search(r"no lossless natural adapter|not an equation|more than one '='|unknown symbol", str(det)):
+        return "B", ",".join(sec)
+    if case.get("task", {}).get("type") == "statement-task":
+        return "H", ",".join(sec)
+    if re.search(r"outside the exact checker|UNSUPPORTED_OPERATOR|acceptance withdrawn|no bounded exact strategy|outside bounded exact|proof kernel could not verify", str(det)) and oc == "safe-abstention":
+        return "C", ",".join(sec)
     if parse and parse.get("classification") not in (None, "parsed"):
         return "A", ",".join(sec)
     if PARSE_MSG.search(str(det)) and oc == "safe-abstention":
@@ -154,7 +160,8 @@ def block(rs):
             "overclaim": oc["overclaim"],
             "falseRejection": fr, "falseRejectionDenominator": len(shouldAccept), "falseRejectionRate": round(fr / len(shouldAccept), 4) if shouldAccept else None,
             "safeAbstention": ab, "safeAbstentionRate": round(ab / len(ev), 4) if ev else None,
-            "decisiveCorrectAmongDecided": round(cor / max(1, len(ev) - ab), 4)}
+            "decided": sum(r["e7Verdict"] not in ("abstain", "unrepresentable") for r in ev),
+            "decisiveCorrectAmongDecided": round(sum(r["outcome"] == "correct" for r in ev if r["e7Verdict"] not in ("abstain", "unrepresentable")) / max(1, sum(r["e7Verdict"] not in ("abstain", "unrepresentable") for r in ev)), 4)}
 
 
 def summarise(rows):

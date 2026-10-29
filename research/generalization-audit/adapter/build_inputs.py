@@ -24,8 +24,18 @@ class Unrep(Exception):
     pass
 
 
+CANONICAL = False  # sensitivity variant: fold closed numeric subterms and nested integer powers (same mathematics)
+
+
 def to_e7(e):
     """SymPy (unevaluated) -> E7 calculus-core Expr JSON."""
+    if CANONICAL:
+        if not e.free_symbols and not e.is_Atom:
+            v = e.doit()
+            if v.is_Rational:
+                return {"kind": "constant", "value": str(v)}
+        if isinstance(e, sp.Pow) and isinstance(e.base, sp.Pow) and e.exp.is_Integer and e.base.exp.is_Integer and e.base.exp > 0:  # (b^m)^n = b^(mn) keeps the domain only for m > 0
+            return to_e7(sp.Pow(e.base.base, e.base.exp * e.exp, evaluate=False))
     if e is sp.pi:
         return {"kind": "pi"}
     if e is sp.E:
@@ -98,6 +108,8 @@ def json_of(text):
         return None, f"unrepresentable: {e}"
     except (Unreadable, Ambiguous) as e:
         return None, f"unreadable by adapter: {e}"
+    except Exception as e:  # noqa: BLE001 - a SymPy failure inside the adapter is an adapter defect, recorded as such
+        return None, f"unreadable by adapter: {type(e).__name__}"
     # round trip: E7 JSON must denote exactly the oracle's (evaluated) expression
     ref = parse_statement(text, Ctx(allow_e_const=True)).exprs[0]
     back = from_e7(j)
@@ -216,4 +228,7 @@ def main(bench, outp):
 
 
 if __name__ == "__main__":
+    if "--canonical" in sys.argv:
+        CANONICAL = True
+        sys.argv.remove("--canonical")
     main(sys.argv[1], sys.argv[2])

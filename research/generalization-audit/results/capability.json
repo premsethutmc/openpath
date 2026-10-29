@@ -1,0 +1,731 @@
+{
+ "Cited reasons / rule citation": {
+  "correctAbstentions": 1,
+  "n": 61,
+  "correct": 7,
+  "correctRate": 0.115,
+  "correctCI95": [
+   0.0567,
+   0.2184
+  ],
+  "decided": 18,
+  "decisiveCorrect": 0.333,
+  "decisiveCI95": [
+   0.1628,
+   0.5625
+  ],
+  "abstentionRate": 0.705,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [
+   "ADV-0105",
+   "CAL-0020",
+   "CAL-0056",
+   "CAL-0099",
+   "CAL-0104",
+   "CAL-0154",
+   "PRF-0172"
+  ],
+  "falseReject": [
+   "ADV-0301",
+   "PRF-0181"
+  ],
+  "misgrade": [
+   "ADV-0089",
+   "ADV-0090",
+   "CAL-0060"
+  ],
+  "status": "unsupported",
+  "failureClasses": {
+   "G": 10,
+   "A": 32,
+   "C": 3,
+   "E": 1,
+   "B": 3,
+   "F": 2,
+   "H": 3
+  }
+ },
+ "Notation, ambiguity, malformed input": {
+  "correctAbstentions": 19,
+  "n": 84,
+  "correct": 56,
+  "correctRate": 0.667,
+  "correctCI95": [
+   0.5605,
+   0.7582
+  ],
+  "decided": 39,
+  "decisiveCorrect": 0.949,
+  "decisiveCI95": [
+   0.8311,
+   0.9858
+  ],
+  "abstentionRate": 0.536,
+  "falseAcceptMath": [
+   "ADV-0327"
+  ],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "ADV-0274"
+  ],
+  "misgrade": [],
+  "status": "partial",
+  "failureClasses": {
+   "A": 13,
+   "C": 12,
+   "E": 1,
+   "B": 2
+  }
+ },
+ "Convergence and proof-style arguments": {
+  "correctAbstentions": 47,
+  "n": 53,
+  "correct": 47,
+  "correctRate": 0.887,
+  "correctCI95": [
+   0.7742,
+   0.9471
+  ],
+  "decided": 0,
+  "decisiveCorrect": null,
+  "decisiveCI95": null,
+  "abstentionRate": 1.0,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [],
+  "misgrade": [],
+  "status": "unsupported",
+  "failureClasses": {
+   "A": 3,
+   "H": 3
+  }
+ },
+ "Multivariable (identities, systems, partials, parameters)": {
+  "correctAbstentions": 20,
+  "n": 170,
+  "correct": 84,
+  "correctRate": 0.494,
+  "correctCI95": [
+   0.4199,
+   0.5686
+  ],
+  "decided": 67,
+  "decisiveCorrect": 0.955,
+  "decisiveCI95": [
+   0.8764,
+   0.9847
+  ],
+  "abstentionRate": 0.606,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "MUL-0009",
+   "MUL-0017",
+   "MUL-0027"
+  ],
+  "misgrade": [],
+  "status": "partial",
+  "failureClasses": {
+   "E": 3,
+   "C": 10,
+   "B": 38,
+   "A": 35
+  }
+ },
+ "Limits": {
+  "correctAbstentions": 9,
+  "n": 145,
+  "correct": 11,
+  "correctRate": 0.076,
+  "correctCI95": [
+   0.0429,
+   0.1307
+  ],
+  "decided": 15,
+  "decisiveCorrect": 0.133,
+  "decisiveCI95": [
+   0.0374,
+   0.3788
+  ],
+  "abstentionRate": 0.897,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "ADV-0231",
+   "LIM-0007",
+   "LIM-0012",
+   "LIM-0048",
+   "LIM-0056",
+   "LIM-0057",
+   "LIM-0060",
+   "LIM-0063"
+  ],
+  "misgrade": [
+   "LIM-0059",
+   "LIM-0062",
+   "LIM-0064",
+   "LIM-0072",
+   "LIM-0103"
+  ],
+  "status": "unsupported",
+  "failureClasses": {
+   "A": 122,
+   "E": 1,
+   "B": 9,
+   "C": 2
+  }
+ },
+ "Antiderivatives and definite integrals": {
+  "correctAbstentions": 0,
+  "n": 132,
+  "correct": 32,
+  "correctRate": 0.242,
+  "correctCI95": [
+   0.1773,
+   0.3221
+  ],
+  "decided": 36,
+  "decisiveCorrect": 0.889,
+  "decisiveCI95": [
+   0.7468,
+   0.9559
+  ],
+  "abstentionRate": 0.727,
+  "falseAcceptMath": [
+   "CAL-0131"
+  ],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "CAL-0141",
+   "CAL-0148",
+   "CAL-0153"
+  ],
+  "misgrade": [],
+  "status": "unsupported",
+  "failureClasses": {
+   "A": 84,
+   "C": 3,
+   "B": 12,
+   "E": 1
+  }
+ },
+ "Derivatives": {
+  "correctAbstentions": 7,
+  "n": 133,
+  "correct": 80,
+  "correctRate": 0.602,
+  "correctCI95": [
+   0.5166,
+   0.6807
+  ],
+  "decided": 77,
+  "decisiveCorrect": 0.948,
+  "decisiveCI95": [
+   0.8739,
+   0.9796
+  ],
+  "abstentionRate": 0.421,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "CAL-0061",
+   "CAL-0080",
+   "CAL-0200"
+  ],
+  "misgrade": [
+   "ADV-0087"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "B": 21,
+   "G": 1,
+   "C": 7,
+   "A": 24
+  }
+ },
+ "Case analysis and piecewise / absolute value": {
+  "correctAbstentions": 0,
+  "n": 81,
+  "correct": 16,
+  "correctRate": 0.198,
+  "correctCI95": [
+   0.1254,
+   0.297
+  ],
+  "decided": 20,
+  "decisiveCorrect": 0.8,
+  "decisiveCI95": [
+   0.584,
+   0.9193
+  ],
+  "abstentionRate": 0.753,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "FUN-0085"
+  ],
+  "misgrade": [
+   "FUN-0083",
+   "FUN-0093",
+   "PRF-0064"
+  ],
+  "status": "unsupported",
+  "failureClasses": {
+   "A": 42,
+   "C": 15,
+   "B": 4,
+   "G": 2,
+   "E": 1,
+   "D": 1
+  }
+ },
+ "Assumption-aware equivalence": {
+  "correctAbstentions": 0,
+  "n": 73,
+  "correct": 16,
+  "correctRate": 0.219,
+  "correctCI95": [
+   0.1397,
+   0.3268
+  ],
+  "decided": 35,
+  "decisiveCorrect": 0.457,
+  "decisiveCI95": [
+   0.3047,
+   0.6181
+  ],
+  "abstentionRate": 0.521,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "ALG-0057",
+   "ALG-0091",
+   "ALG-0104",
+   "ALG-0109",
+   "DOM-0006",
+   "DOM-0014",
+   "DOM-0027",
+   "DOM-0032",
+   "DOM-0058",
+   "DOM-0066",
+   "DOM-0147",
+   "DOM-0153",
+   "MUL-0061",
+   "MUL-0062",
+   "MUL-0064",
+   "TRG-0094"
+  ],
+  "misgrade": [
+   "DOM-0045",
+   "DOM-0067",
+   "MUL-0065"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "C": 29,
+   "A": 7,
+   "E": 17,
+   "B": 2,
+   "G": 2
+  }
+ },
+ "Domain preservation and excluded values": {
+  "correctAbstentions": 0,
+  "n": 360,
+  "correct": 108,
+  "correctRate": 0.3,
+  "correctCI95": [
+   0.255,
+   0.3492
+  ],
+  "decided": 166,
+  "decisiveCorrect": 0.651,
+  "decisiveCI95": [
+   0.5754,
+   0.719
+  ],
+  "abstentionRate": 0.539,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [
+   "ALG-0178",
+   "ALG-0189",
+   "ALG-0205",
+   "ALG-0221",
+   "DOM-0159",
+   "DOM-0171",
+   "DOM-0189",
+   "DOM-0193",
+   "DOM-0207",
+   "DOM-0209",
+   "DOM-0211",
+   "EQN-0200",
+   "EQN-0203",
+   "PRF-0033",
+   "PRF-0036",
+   "PRF-0043"
+  ],
+  "falseReject": [
+   "ADV-0073",
+   "DOM-0009",
+   "DOM-0036",
+   "DOM-0160",
+   "DOM-0172",
+   "FUN-0011",
+   "FUN-0032",
+   "FUN-0104",
+   "FUN-0106",
+   "FUN-0108",
+   "FUN-0109",
+   "FUN-0118",
+   "MUL-0060",
+   "PRF-0032",
+   "PRF-0042",
+   "PRF-0044"
+  ],
+  "misgrade": [
+   "ADV-0003",
+   "ADV-0014",
+   "ADV-0045",
+   "ADV-0070",
+   "ALG-0126",
+   "DOM-0004",
+   "DOM-0016",
+   "DOM-0021",
+   "DOM-0024",
+   "DOM-0031",
+   "DOM-0057",
+   "DOM-0062",
+   "DOM-0064",
+   "DOM-0065",
+   "DOM-0070",
+   "DOM-0080",
+   "DOM-0146",
+   "DOM-0151",
+   "FUN-0103",
+   "FUN-0105",
+   "FUN-0107",
+   "PRF-0045",
+   "TRG-0090",
+   "TRG-0091",
+   "TRG-0097",
+   "TRG-0099"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "C": 105,
+   "G": 40,
+   "A": 51,
+   "D": 2,
+   "B": 37,
+   "E": 16,
+   "F": 1
+  }
+ },
+ "Extraneous roots and candidate checks": {
+  "correctAbstentions": 0,
+  "n": 71,
+  "correct": 22,
+  "correctRate": 0.31,
+  "correctCI95": [
+   0.2144,
+   0.4248
+  ],
+  "decided": 25,
+  "decisiveCorrect": 0.88,
+  "decisiveCI95": [
+   0.7004,
+   0.9583
+  ],
+  "abstentionRate": 0.648,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [
+   "EQN-0154",
+   "PRF-0072"
+  ],
+  "falseReject": [],
+  "misgrade": [
+   "ADV-0040"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "A": 31,
+   "C": 14,
+   "D": 1,
+   "B": 1,
+   "G": 2
+  }
+ },
+ "Inequalities: sign, monotonicity, boundaries": {
+  "correctAbstentions": 0,
+  "n": 127,
+  "correct": 55,
+  "correctRate": 0.433,
+  "correctCI95": [
+   0.3501,
+   0.52
+  ],
+  "decided": 59,
+  "decisiveCorrect": 0.932,
+  "decisiveCI95": [
+   0.8382,
+   0.9733
+  ],
+  "abstentionRate": 0.535,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [],
+  "misgrade": [
+   "INE-0013",
+   "INE-0030",
+   "INE-0037",
+   "INE-0134"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "A": 44,
+   "C": 23,
+   "E": 3,
+   "D": 1,
+   "B": 1
+  }
+ },
+ "Logarithm and exponential laws": {
+  "correctAbstentions": 0,
+  "n": 108,
+  "correct": 39,
+  "correctRate": 0.361,
+  "correctCI95": [
+   0.2767,
+   0.455
+  ],
+  "decided": 47,
+  "decisiveCorrect": 0.83,
+  "decisiveCI95": [
+   0.6986,
+   0.9111
+  ],
+  "abstentionRate": 0.565,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "ALG-0060",
+   "ALG-0079",
+   "ALG-0081",
+   "ALG-0098",
+   "ALG-0110",
+   "DOM-0071",
+   "DOM-0072",
+   "DOM-0076"
+  ],
+  "misgrade": [],
+  "status": "partial",
+  "failureClasses": {
+   "C": 22,
+   "A": 16,
+   "B": 23,
+   "E": 8
+  }
+ },
+ "Trigonometric identities and equations": {
+  "correctAbstentions": 0,
+  "n": 75,
+  "correct": 4,
+  "correctRate": 0.053,
+  "correctCI95": [
+   0.0209,
+   0.1293
+  ],
+  "decided": 11,
+  "decisiveCorrect": 0.364,
+  "decisiveCI95": [
+   0.1517,
+   0.6462
+  ],
+  "abstentionRate": 0.853,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "FUN-0061",
+   "FUN-0069",
+   "TRG-0032",
+   "TRG-0038",
+   "TRG-0072",
+   "TRG-0076",
+   "TRG-0108"
+  ],
+  "misgrade": [],
+  "status": "unsupported",
+  "failureClasses": {
+   "C": 52,
+   "A": 5,
+   "D": 7,
+   "B": 7
+  }
+ },
+ "Functions: composition and inverses": {
+  "correctAbstentions": 0,
+  "n": 30,
+  "correct": 10,
+  "correctRate": 0.333,
+  "correctCI95": [
+   0.1923,
+   0.5122
+  ],
+  "decided": 13,
+  "decisiveCorrect": 0.769,
+  "decisiveCI95": [
+   0.4974,
+   0.9182
+  ],
+  "abstentionRate": 0.567,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "FUN-0028"
+  ],
+  "misgrade": [
+   "FUN-0015",
+   "FUN-0057"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "B": 7,
+   "G": 2,
+   "C": 5,
+   "E": 1,
+   "A": 5
+  }
+ },
+ "Multi-step chains, side claims, completion": {
+  "correctAbstentions": 0,
+  "n": 169,
+  "correct": 66,
+  "correctRate": 0.391,
+  "correctCI95": [
+   0.3202,
+   0.4657
+  ],
+  "decided": 76,
+  "decisiveCorrect": 0.868,
+  "decisiveCI95": [
+   0.7745,
+   0.9269
+  ],
+  "abstentionRate": 0.55,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "PRF-0030"
+  ],
+  "misgrade": [
+   "CAL-0197",
+   "PRF-0020",
+   "PRF-0031",
+   "PRF-0107",
+   "PRF-0145",
+   "PRF-0159",
+   "PRF-0160",
+   "PRF-0167",
+   "PRF-0195"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "A": 47,
+   "B": 38,
+   "C": 5,
+   "D": 7,
+   "F": 6
+  }
+ },
+ "Solution-set preservation (equations)": {
+  "correctAbstentions": 4,
+  "n": 294,
+  "correct": 114,
+  "correctRate": 0.388,
+  "correctCI95": [
+   0.3338,
+   0.4446
+  ],
+  "decided": 121,
+  "decisiveCorrect": 0.909,
+  "decisiveCI95": [
+   0.8445,
+   0.9485
+  ],
+  "abstentionRate": 0.588,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "EQN-0199",
+   "EQN-0204",
+   "EQN-0221",
+   "FUN-0145",
+   "FUN-0147"
+  ],
+  "misgrade": [
+   "DOM-0173",
+   "EQN-0123",
+   "EQN-0168",
+   "EQN-0220",
+   "FUN-0146",
+   "INE-0128"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "D": 6,
+   "A": 88,
+   "C": 69,
+   "E": 5,
+   "F": 1,
+   "B": 11
+  }
+ },
+ "Algebraic identities (expand, factor, rational, exponent, radical)": {
+  "correctAbstentions": 1,
+  "n": 209,
+  "correct": 99,
+  "correctRate": 0.474,
+  "correctCI95": [
+   0.4071,
+   0.5412
+  ],
+  "decided": 113,
+  "decisiveCorrect": 0.867,
+  "decisiveCI95": [
+   0.7925,
+   0.9179
+  ],
+  "abstentionRate": 0.459,
+  "falseAcceptMath": [],
+  "falseAcceptPolicy": [],
+  "falseReject": [
+   "ALG-0042",
+   "ALG-0049",
+   "ALG-0086",
+   "ALG-0112",
+   "ALG-0117",
+   "ALG-0119",
+   "DOM-0007",
+   "DOM-0028",
+   "DOM-0214",
+   "TRG-0051"
+  ],
+  "misgrade": [
+   "CAL-0082",
+   "DOM-0103",
+   "DOM-0112",
+   "DOM-0134",
+   "FUN-0141"
+  ],
+  "status": "partial",
+  "failureClasses": {
+   "A": 19,
+   "B": 14,
+   "C": 63,
+   "E": 8,
+   "I": 1,
+   "G": 3,
+   "D": 2
+  }
+ }
+}
