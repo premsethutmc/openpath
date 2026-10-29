@@ -1,0 +1,3770 @@
+[
+ {
+  "id": "exp-01",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "(x+2)^2",
+  "next": "x^2+4x+4",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "square of a binomial",
+  "e7": {
+   "start": {
+    "kind": "power",
+    "base": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "2"
+      }
+     ]
+    },
+    "exponent": 2
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "4"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "constant",
+      "value": "4"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-02",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "(x+2)^2",
+  "next": "x^2+4",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "cross term dropped; x=1: 9 vs 5",
+  "e7": {
+   "start": {
+    "kind": "power",
+    "base": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "2"
+      }
+     ]
+    },
+    "exponent": 2
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 2
+     },
+     {
+      "kind": "constant",
+      "value": "4"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-03",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "x^2-9",
+  "next": "(x-3)(x+3)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "difference of squares",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 2
+     },
+     {
+      "kind": "constant",
+      "value": "-9"
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "-3"
+       }
+      ]
+     },
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "3"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-04",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "x^3-8",
+  "next": "(x-2)(x^2+2x+4)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "difference of cubes",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 3
+     },
+     {
+      "kind": "constant",
+      "value": "-8"
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "-2"
+       }
+      ]
+     },
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "multiply",
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "2"
+           },
+           {
+            "kind": "variable",
+            "name": "x"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "kind": "constant",
+        "value": "4"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-05",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "x^3+8",
+  "next": "(x+2)(x^2+2x+4)",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "sign error; x=0: 8 vs 8, x=1: 9 vs 21",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 3
+     },
+     {
+      "kind": "constant",
+      "value": "8"
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "2"
+       }
+      ]
+     },
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "multiply",
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "2"
+           },
+           {
+            "kind": "variable",
+            "name": "x"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "kind": "constant",
+        "value": "4"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-06",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "6x^2+x-12",
+  "next": "(2x+3)(3x-4)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "split middle term",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "6"
+         },
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         }
+        ]
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     },
+     {
+      "kind": "constant",
+      "value": "-12"
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       },
+       {
+        "kind": "constant",
+        "value": "3"
+       }
+      ]
+     },
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       },
+       {
+        "kind": "constant",
+        "value": "-4"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-07",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "(a+b)^2",
+  "next": "a^2+b^2",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "freshman's dream",
+  "e7": {
+   "start": {
+    "kind": "power",
+    "base": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "a"
+      },
+      {
+       "kind": "variable",
+       "name": "b"
+      }
+     ]
+    },
+    "exponent": 2
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "a"
+      },
+      "exponent": 2
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "b"
+      },
+      "exponent": 2
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-08",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "(a-b)(a+b)",
+  "next": "a^2-b^2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "two variables",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "a"
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "-1"
+         },
+         {
+          "kind": "variable",
+          "name": "b"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "a"
+       },
+       {
+        "kind": "variable",
+        "name": "b"
+       }
+      ]
+     }
+    ]
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "a"
+      },
+      "exponent": 2
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "-1"
+       },
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "b"
+        },
+        "exponent": 2
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-09",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "x^2+6x+2",
+  "next": "(x+3)^2-7",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "completed square",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "6"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "constant",
+      "value": "2"
+     }
+    ]
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "3"
+        }
+       ]
+      },
+      "exponent": 2
+     },
+     {
+      "kind": "constant",
+      "value": "-7"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-10",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "x^4-1",
+  "next": "(x^2+1)(x-1)(x+1)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "repeated difference of squares",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 4
+     },
+     {
+      "kind": "constant",
+      "value": "-1"
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "-1"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "exp-11",
+  "category": "expand-factor",
+  "task": "expression",
+  "prev": "x^2+6x+2",
+  "next": "(x+3)^2-11",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "wrong constant in completed square",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "6"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "constant",
+      "value": "2"
+     }
+    ]
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "3"
+        }
+       ]
+      },
+      "exponent": 2
+     },
+     {
+      "kind": "constant",
+      "value": "-11"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rat-01",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(x^2-1)/(x-1)",
+  "next": "x+1",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "equal for x != 1 only",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "constant",
+        "value": "-1"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "-1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "constant",
+      "value": "1"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rat-02",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(x^2-1)/(x-1)",
+  "next": "x+1",
+  "assumptions": [
+   "x != 1"
+  ],
+  "expected": "equivalent",
+  "why": "restriction carried",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "constant",
+        "value": "-1"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "-1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "constant",
+      "value": "1"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rat-03",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(x^2-4)/(x^2-x-2)",
+  "next": "(x+2)/(x+1)",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "x=2 excluded from prev only",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "constant",
+        "value": "-4"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "power",
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2
+          },
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "-1"
+            },
+            {
+             "kind": "variable",
+             "name": "x"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "kind": "constant",
+         "value": "-2"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "2"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rat-04",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(x+1)/(x+1)",
+  "next": "1",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "x=-1 excluded",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "constant",
+    "value": "1"
+   }
+  }
+ },
+ {
+  "id": "rat-05",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(x^2+x)/x",
+  "next": "x+1",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "x=0 excluded",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "constant",
+      "value": "1"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rat-06",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(x^2+1)/(x^2+1)",
+  "next": "1",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "denominator never zero",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "constant",
+    "value": "1"
+   }
+  }
+ },
+ {
+  "id": "rat-07",
+  "category": "rational",
+  "task": "expression",
+  "prev": "x/(x+1) - 1/(x+1)",
+  "next": "(x-1)/(x+1)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "same denominator",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "power",
+        "base": {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "variable",
+           "name": "x"
+          },
+          {
+           "kind": "constant",
+           "value": "1"
+          }
+         ]
+        },
+        "exponent": -1
+       }
+      ]
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "-1"
+       },
+       {
+        "kind": "power",
+        "base": {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "variable",
+           "name": "x"
+          },
+          {
+           "kind": "constant",
+           "value": "1"
+          }
+         ]
+        },
+        "exponent": -1
+       }
+      ]
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "-1"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rat-08",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(x+3)/(x+6)",
+  "next": "1/2",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "cancelling terms, not factors",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "3"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "6"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "power",
+    "base": {
+     "kind": "constant",
+     "value": "2"
+    },
+    "exponent": -1
+   }
+  }
+ },
+ {
+  "id": "rat-09",
+  "category": "rational",
+  "task": "expression",
+  "prev": "1/(1+1/x)",
+  "next": "x/(x+1)",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "prev undefined at 0 and -1, next only at -1",
+  "e7": {
+   "start": {
+    "kind": "power",
+    "base": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "exponent": -1
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rat-10",
+  "category": "rational",
+  "task": "expression",
+  "prev": "(2x)/(4x^2)",
+  "next": "1/(2x)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "both exclude 0",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "4"
+        },
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "power",
+    "base": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "2"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ]
+    },
+    "exponent": -1
+   }
+  }
+ },
+ {
+  "id": "rat-11",
+  "category": "rational",
+  "task": "expression",
+  "prev": "x/x",
+  "next": "1",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "0 excluded",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "constant",
+    "value": "1"
+   }
+  }
+ },
+ {
+  "id": "rat-12",
+  "category": "rational",
+  "task": "expression",
+  "prev": "1/(x-2) + 1/(x+2)",
+  "next": "2x/(x^2-4)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "common denominator, same exclusions",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "-2"
+        }
+       ]
+      },
+      "exponent": -1
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "2"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "constant",
+         "value": "-4"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "zero-01",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "x(x-3)=2(x-3)",
+  "next": "x=2",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "dividing by x-3 loses x=3"
+ },
+ {
+  "id": "zero-02",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "x^2=4x",
+  "next": "x=4",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "dividing by x loses x=0"
+ },
+ {
+  "id": "zero-03",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "(x^2+1)(x-3)=2(x^2+1)",
+  "next": "x-3=2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "x^2+1 never zero"
+ },
+ {
+  "id": "zero-04",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "x/(x-1)=1/(x-1)",
+  "next": "x=1",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "prev has no solution; clearing the denominator admits x=1"
+ },
+ {
+  "id": "zero-05",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "x=2",
+  "next": "x(x-1)=2(x-1)",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "multiplying by x-1 admits x=1"
+ },
+ {
+  "id": "zero-06",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "(x-2)(x+1)=4(x-2)",
+  "next": "(x-2)(x-3)=0",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "subtract and factor"
+ },
+ {
+  "id": "zero-07",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "2x+4=10",
+  "next": "x+2=5",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "divide by 2"
+ },
+ {
+  "id": "zero-08",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "x+2=5",
+  "next": "2x+4=10",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "multiply by 2"
+ },
+ {
+  "id": "zero-09",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "x+2=5",
+  "next": "0(x+2)=0",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "multiplying by 0 makes every x a solution"
+ },
+ {
+  "id": "zero-10",
+  "category": "zero-division",
+  "task": "solve",
+  "prev": "1/x+1/(x+1)=1",
+  "next": "2x+1=x^2+x",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "cleared denominators; neither root is 0 or -1"
+ },
+ {
+  "id": "sq-01",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "sqrt(x+2)=x",
+  "next": "x+2=x^2",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "squaring admits -1"
+ },
+ {
+  "id": "sq-02",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "sqrt(x+2)=x",
+  "next": "x=2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "the only solution"
+ },
+ {
+  "id": "sq-03",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "sqrt(x+2)=x",
+  "next": "x=2 or x=-1",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "unchecked candidate -1"
+ },
+ {
+  "id": "sq-04",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "sqrt(x)=-2",
+  "next": "x=4",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "no real solution before squaring"
+ },
+ {
+  "id": "sq-05",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "x=3",
+  "next": "x^2=9",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "squaring admits -3"
+ },
+ {
+  "id": "sq-06",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "|x|=x",
+  "next": "x>=0",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "definition of absolute value"
+ },
+ {
+  "id": "sq-07",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "sqrt(2x+3)=3",
+  "next": "2x+3=9",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "right side non-negative, single root"
+ },
+ {
+  "id": "sq-08",
+  "category": "squaring",
+  "task": "solve",
+  "prev": "sqrt(x+2)=x",
+  "next": "x=-1",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "the extraneous root kept, true root lost"
+ },
+ {
+  "id": "loss-01",
+  "category": "loss",
+  "task": "solve",
+  "prev": "x^2=9",
+  "next": "x=3",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "loses -3"
+ },
+ {
+  "id": "loss-02",
+  "category": "loss",
+  "task": "solve",
+  "prev": "x^2-5x+6=0",
+  "next": "x=2",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "loses 3"
+ },
+ {
+  "id": "loss-03",
+  "category": "loss",
+  "task": "solve",
+  "prev": "x^2=x",
+  "next": "x=1",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "loses 0"
+ },
+ {
+  "id": "loss-04",
+  "category": "loss",
+  "task": "solve",
+  "prev": "(x-1)^2=0",
+  "next": "x=1",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "double root"
+ },
+ {
+  "id": "loss-05",
+  "category": "loss",
+  "task": "solve",
+  "prev": "x^3=x",
+  "next": "x^2=1",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "loses 0"
+ },
+ {
+  "id": "loss-06",
+  "category": "loss",
+  "task": "solve",
+  "prev": "x^2=9",
+  "next": "x=3 or x=-3",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "both roots"
+ },
+ {
+  "id": "ineq-01",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "-2x<6",
+  "next": "x<-3",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "sign not reversed"
+ },
+ {
+  "id": "ineq-02",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "-2x<6",
+  "next": "x>-3",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "sign reversed"
+ },
+ {
+  "id": "ineq-03",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "-x>=4",
+  "next": "x<=-4",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "sign reversed"
+ },
+ {
+  "id": "ineq-04",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "3x-1<5",
+  "next": "x<2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "positive factor"
+ },
+ {
+  "id": "ineq-05",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "1/x>1",
+  "next": "1>x",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "multiplying by x of unknown sign: prev (0,1) inside next"
+ },
+ {
+  "id": "ineq-06",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "1/x>1",
+  "next": "0<x<1",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "correct case analysis"
+ },
+ {
+  "id": "ineq-07",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "x^2<4",
+  "next": "x<2",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "lower bound dropped: still implied"
+ },
+ {
+  "id": "ineq-08",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "x^2<4",
+  "next": "-2<x<2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": ""
+ },
+ {
+  "id": "ineq-09",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "x^2>4",
+  "next": "x>2",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "loses x<-2"
+ },
+ {
+  "id": "ineq-10",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "(x-1)/(x+2)>0",
+  "next": "(x-1)(x+2)>0",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "same sign, x=-2 excluded in both"
+ },
+ {
+  "id": "ineq-11",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "x^2-4x-5<0",
+  "next": "-1<x<5",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": ""
+ },
+ {
+  "id": "ineq-12",
+  "category": "inequality",
+  "task": "solve",
+  "prev": "|x-3|<2",
+  "next": "x-3<2",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "one side of the absolute-value condition only"
+ },
+ {
+  "id": "rad-01",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(x^2)",
+  "next": "x",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "x=-1: 1 vs -1",
+  "e7": {
+   "start": {
+    "kind": "root",
+    "index": 2,
+    "radicand": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": 2
+    }
+   },
+   "next": {
+    "kind": "variable",
+    "name": "x"
+   }
+  }
+ },
+ {
+  "id": "rad-02",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(x^2)",
+  "next": "|x|",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "root",
+    "index": 2,
+    "radicand": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": 2
+    }
+   },
+   "next": {
+    "kind": "abs",
+    "argument": {
+     "kind": "variable",
+     "name": "x"
+    }
+   }
+  }
+ },
+ {
+  "id": "rad-03",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(x^2)",
+  "next": "x",
+  "assumptions": [
+   "x > 0"
+  ],
+  "expected": "equivalent",
+  "why": "under x > 0",
+  "e7": {
+   "start": {
+    "kind": "root",
+    "index": 2,
+    "radicand": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": 2
+    }
+   },
+   "next": {
+    "kind": "variable",
+    "name": "x"
+   }
+  }
+ },
+ {
+  "id": "rad-04",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(x)*sqrt(x)",
+  "next": "x",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "prev needs x >= 0",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "root",
+      "index": 2,
+      "radicand": {
+       "kind": "variable",
+       "name": "x"
+      }
+     },
+     {
+      "kind": "root",
+      "index": 2,
+      "radicand": {
+       "kind": "variable",
+       "name": "x"
+      }
+     }
+    ]
+   },
+   "next": {
+    "kind": "variable",
+    "name": "x"
+   }
+  }
+ },
+ {
+  "id": "rad-05",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(12)+sqrt(27)",
+  "next": "5sqrt(3)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "root",
+      "index": 2,
+      "radicand": {
+       "kind": "constant",
+       "value": "12"
+      }
+     },
+     {
+      "kind": "root",
+      "index": 2,
+      "radicand": {
+       "kind": "constant",
+       "value": "27"
+      }
+     }
+    ]
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "5"
+     },
+     {
+      "kind": "root",
+      "index": 2,
+      "radicand": {
+       "kind": "constant",
+       "value": "3"
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rad-06",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(a*b)",
+  "next": "sqrt(a)*sqrt(b)",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "a=b=-1: 1 vs undefined (real)",
+  "e7": {
+   "start": {
+    "kind": "root",
+    "index": 2,
+    "radicand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "a"
+      },
+      {
+       "kind": "variable",
+       "name": "b"
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "root",
+      "index": 2,
+      "radicand": {
+       "kind": "variable",
+       "name": "a"
+      }
+     },
+     {
+      "kind": "root",
+      "index": 2,
+      "radicand": {
+       "kind": "variable",
+       "name": "b"
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rad-07",
+  "category": "radical",
+  "task": "expression",
+  "prev": "1/(sqrt(5)-sqrt(3))",
+  "next": "(sqrt(5)+sqrt(3))/2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "rationalised",
+  "e7": {
+   "start": {
+    "kind": "power",
+    "base": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "root",
+       "index": 2,
+       "radicand": {
+        "kind": "constant",
+        "value": "5"
+       }
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "kind": "root",
+         "index": 2,
+         "radicand": {
+          "kind": "constant",
+          "value": "3"
+         }
+        }
+       ]
+      }
+     ]
+    },
+    "exponent": -1
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "root",
+        "index": 2,
+        "radicand": {
+         "kind": "constant",
+         "value": "5"
+        }
+       },
+       {
+        "kind": "root",
+        "index": 2,
+        "radicand": {
+         "kind": "constant",
+         "value": "3"
+        }
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "constant",
+       "value": "2"
+      },
+      "exponent": -1
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rad-08",
+  "category": "radical",
+  "task": "expression",
+  "prev": "cbrt(-8)",
+  "next": "-2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "real cube root",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "constant",
+    "value": "-2"
+   }
+  }
+ },
+ {
+  "id": "rad-09",
+  "category": "radical",
+  "task": "expression",
+  "prev": "(x^(1/2))^2",
+  "next": "x",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "prev needs x >= 0",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "variable",
+    "name": "x"
+   }
+  }
+ },
+ {
+  "id": "rad-10",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(x^2+9)",
+  "next": "x+3",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "root of a sum",
+  "e7": {
+   "start": {
+    "kind": "root",
+    "index": 2,
+    "radicand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2
+      },
+      {
+       "kind": "constant",
+       "value": "9"
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "constant",
+      "value": "3"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "rad-11",
+  "category": "radical",
+  "task": "expression",
+  "prev": "sqrt(4x^2)",
+  "next": "2x",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "x=-1: 2 vs -2",
+  "e7": {
+   "start": {
+    "kind": "root",
+    "index": 2,
+    "radicand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "4"
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "2"
+     },
+     {
+      "kind": "variable",
+      "name": "x"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "trig-01",
+  "category": "trig",
+  "task": "expression",
+  "prev": "sin(x)^2 + cos(x)^2",
+  "next": "1",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "sin",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      "exponent": 2
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "cos",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      "exponent": 2
+     }
+    ]
+   },
+   "next": {
+    "kind": "constant",
+    "value": "1"
+   }
+  }
+ },
+ {
+  "id": "trig-02",
+  "category": "trig",
+  "task": "expression",
+  "prev": "2 sin(x) cos(x)",
+  "next": "sin(2x)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "sin",
+        "argument": {
+         "kind": "variable",
+         "name": "x"
+        }
+       }
+      ]
+     },
+     {
+      "kind": "cos",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     }
+    ]
+   },
+   "next": {
+    "kind": "sin",
+    "argument": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "2"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ]
+    }
+   }
+  }
+ },
+ {
+  "id": "trig-03",
+  "category": "trig",
+  "task": "expression",
+  "prev": "sin(2x)",
+  "next": "2 sin(x)",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "x=pi/2: 0 vs 2",
+  "e7": {
+   "start": {
+    "kind": "sin",
+    "argument": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "2"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "2"
+     },
+     {
+      "kind": "sin",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "trig-04",
+  "category": "trig",
+  "task": "expression",
+  "prev": "tan(x)",
+  "next": "sin(x)/cos(x)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "same domain cos x != 0",
+  "e7": {
+   "start": {
+    "kind": "tan",
+    "argument": {
+     "kind": "variable",
+     "name": "x"
+    }
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "sin",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "cos",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      "exponent": -1
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "trig-05",
+  "category": "trig",
+  "task": "expression",
+  "prev": "1 + tan(x)^2",
+  "next": "sec(x)^2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "tan",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      "exponent": 2
+     }
+    ]
+   },
+   "next": null
+  }
+ },
+ {
+  "id": "trig-06",
+  "category": "trig",
+  "task": "expression",
+  "prev": "cos(2x)",
+  "next": "1 - 2sin(x)^2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "cos",
+    "argument": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "2"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "-2"
+       },
+       {
+        "kind": "power",
+        "base": {
+         "kind": "sin",
+         "argument": {
+          "kind": "variable",
+          "name": "x"
+         }
+        },
+        "exponent": 2
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "trig-07",
+  "category": "trig",
+  "task": "expression",
+  "prev": "cos(2x)",
+  "next": "2cos(x)^2 - 1",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "cos",
+    "argument": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "2"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "power",
+        "base": {
+         "kind": "cos",
+         "argument": {
+          "kind": "variable",
+          "name": "x"
+         }
+        },
+        "exponent": 2
+       }
+      ]
+     },
+     {
+      "kind": "constant",
+      "value": "-1"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "trig-08",
+  "category": "trig",
+  "task": "expression",
+  "prev": "sin(x+y)",
+  "next": "sin(x)cos(y) + cos(x)sin(y)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "addition formula",
+  "e7": {
+   "start": {
+    "kind": "sin",
+    "argument": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "variable",
+       "name": "y"
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "sin",
+        "argument": {
+         "kind": "variable",
+         "name": "x"
+        }
+       },
+       {
+        "kind": "cos",
+        "argument": {
+         "kind": "variable",
+         "name": "y"
+        }
+       }
+      ]
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "cos",
+        "argument": {
+         "kind": "variable",
+         "name": "x"
+        }
+       },
+       {
+        "kind": "sin",
+        "argument": {
+         "kind": "variable",
+         "name": "y"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "trig-09",
+  "category": "trig",
+  "task": "expression",
+  "prev": "sin(x)/x",
+  "next": "1",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "not an identity",
+  "e7": {
+   "start": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "sin",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "next": {
+    "kind": "constant",
+    "value": "1"
+   }
+  }
+ },
+ {
+  "id": "trig-10",
+  "category": "trig",
+  "task": "expression",
+  "prev": "cos(x)^2",
+  "next": "1 + sin(x)^2",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "sign error",
+  "e7": {
+   "start": {
+    "kind": "power",
+    "base": {
+     "kind": "cos",
+     "argument": {
+      "kind": "variable",
+      "name": "x"
+     }
+    },
+    "exponent": 2
+   },
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "sin",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      "exponent": 2
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "log-01",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "ln(x^2)",
+  "next": "2ln(x)",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "x=-1: prev defined, next not",
+  "e7": {
+   "start": {
+    "kind": "log",
+    "argument": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": 2
+    }
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "2"
+     },
+     {
+      "kind": "log",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "log-02",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "ln(x^2)",
+  "next": "2ln(x)",
+  "assumptions": [
+   "x > 0"
+  ],
+  "expected": "equivalent",
+  "why": "under x > 0",
+  "e7": {
+   "start": {
+    "kind": "log",
+    "argument": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": 2
+    }
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "2"
+     },
+     {
+      "kind": "log",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "log-03",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "ln(x^2)",
+  "next": "2ln|x|",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": {
+    "kind": "log",
+    "argument": {
+     "kind": "power",
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": 2
+    }
+   },
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "2"
+     },
+     {
+      "kind": "log",
+      "argument": {
+       "kind": "abs",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "log-04",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "ln(a) + ln(b)",
+  "next": "ln(ab)",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "next is defined for a,b both negative",
+  "e7": {
+   "start": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "log",
+      "argument": {
+       "kind": "variable",
+       "name": "a"
+      }
+     },
+     {
+      "kind": "log",
+      "argument": {
+       "kind": "variable",
+       "name": "b"
+      }
+     }
+    ]
+   },
+   "next": {
+    "kind": "log",
+    "argument": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "a"
+      },
+      {
+       "kind": "variable",
+       "name": "b"
+      }
+     ]
+    }
+   }
+  }
+ },
+ {
+  "id": "log-05",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "e^(ln(x))",
+  "next": "x",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "prev needs x > 0",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "variable",
+    "name": "x"
+   }
+  }
+ },
+ {
+  "id": "log-06",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "ln(e^x)",
+  "next": "x",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "variable",
+    "name": "x"
+   }
+  }
+ },
+ {
+  "id": "log-07",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "log2(8x)",
+  "next": "3 + log2(x)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "same domain x > 0",
+  "e7": {
+   "start": null,
+   "next": null
+  }
+ },
+ {
+  "id": "log-08",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "2^(n+3)",
+  "next": "8*2^n",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": null,
+   "next": null
+  }
+ },
+ {
+  "id": "log-09",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "e^(2x)/e^x",
+  "next": "e^x",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": null,
+   "next": null
+  }
+ },
+ {
+  "id": "log-10",
+  "category": "log-exp",
+  "task": "expression",
+  "prev": "ln(x+1)",
+  "next": "ln(x)",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "ln(x+1) != ln x + ln 1",
+  "e7": {
+   "start": {
+    "kind": "log",
+    "argument": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    }
+   },
+   "next": {
+    "kind": "log",
+    "argument": {
+     "kind": "variable",
+     "name": "x"
+    }
+   }
+  }
+ },
+ {
+  "id": "log-11",
+  "category": "log-exp",
+  "task": "solve",
+  "prev": "ln(x)+ln(x-2)=ln(3)",
+  "next": "x(x-2)=3",
+  "assumptions": [],
+  "expected": "implication",
+  "why": "combining logs admits x=-1"
+ },
+ {
+  "id": "log-12",
+  "category": "log-exp",
+  "task": "solve",
+  "prev": "2^x=8",
+  "next": "x=3",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": ""
+ },
+ {
+  "id": "log-13",
+  "category": "log-exp",
+  "task": "solve",
+  "prev": "3^(2x)=3^4",
+  "next": "2x=4",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": ""
+ },
+ {
+  "id": "log-14",
+  "category": "log-exp",
+  "task": "solve",
+  "prev": "e^x=-1",
+  "next": "x=ln(-1)",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "next is meaningless over the reals (the parser records ln(-1) as undefined)"
+ },
+ {
+  "id": "calc-01",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx(x^3)",
+  "next": "3x^2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "power rule",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "3"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 2
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "calc-02",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx(x^2 sin(x))",
+  "next": "2x sin(x) + x^2 cos(x)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "product rule",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       },
+       {
+        "kind": "sin",
+        "argument": {
+         "kind": "variable",
+         "name": "x"
+        }
+       }
+      ]
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "cos",
+        "argument": {
+         "kind": "variable",
+         "name": "x"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "calc-03",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx(x^2 sin(x))",
+  "next": "2x cos(x)",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "derivative of a product is not the product of derivatives",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     },
+     {
+      "kind": "cos",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "calc-04",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx(ln|x|)",
+  "next": "1/x",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": -1
+   }
+  }
+ },
+ {
+  "id": "calc-05",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx(e^(2x))",
+  "next": "2e^(2x)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "chain rule",
+  "e7": {
+   "start": null,
+   "next": null
+  }
+ },
+ {
+  "id": "calc-06",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx(sqrt(x))",
+  "next": "1/(2sqrt(x))",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "both defined on x > 0",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "power",
+    "base": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "2"
+      },
+      {
+       "kind": "root",
+       "index": 2,
+       "radicand": {
+        "kind": "variable",
+        "name": "x"
+       }
+      }
+     ]
+    },
+    "exponent": -1
+   }
+  }
+ },
+ {
+  "id": "calc-07",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx((3x+1)^5)",
+  "next": "15(3x+1)^4",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "15"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "3"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": 4
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "calc-08",
+  "category": "calculus",
+  "task": "expression",
+  "prev": "d/dx((3x+1)^5)",
+  "next": "5(3x+1)^4",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "missing inner derivative",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "5"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "3"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": 4
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "unf-01",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "x^2-6x+5=0",
+  "next": "(x-3)^2=4",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "completing the square"
+ },
+ {
+  "id": "unf-02",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "x^2+x-12=0",
+  "next": "x=(-1\u00b17)/2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "quadratic formula, evaluated later"
+ },
+ {
+  "id": "unf-03",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "x^4-5x^2+4=0",
+  "next": "(x^2-1)(x^2-4)=0",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "substitution u=x^2"
+ },
+ {
+  "id": "unf-04",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "|x-3|<2",
+  "next": "-2<x-3<2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": ""
+ },
+ {
+  "id": "unf-05",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "x^2+6x+4=0",
+  "next": "(x+3)^2=5",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": ""
+ },
+ {
+  "id": "unf-06",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "(x-1)(x-2)=0",
+  "next": "x=1 or x=2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "zero product"
+ },
+ {
+  "id": "unf-07",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "x^3-x^2-4x+4=0",
+  "next": "x=1, 2 or -2",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "grouping"
+ },
+ {
+  "id": "unf-08",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "3x+6=0",
+  "next": "x+2=0",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": "divide by 3"
+ },
+ {
+  "id": "unf-09",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "x^2-2x-1=0",
+  "next": "x=1\u00b1sqrt(2)",
+  "assumptions": [],
+  "expected": "equivalent",
+  "why": ""
+ },
+ {
+  "id": "unf-10",
+  "category": "unfamiliar",
+  "task": "solve",
+  "prev": "x^2-2x-1=0",
+  "next": "x=1\u00b1sqrt(3)",
+  "assumptions": [],
+  "expected": "invalid",
+  "why": "wrong discriminant"
+ },
+ {
+  "id": "bad-01",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "1/2x=4",
+  "next": "x=8",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "1/2x has two readings"
+ },
+ {
+  "id": "bad-02",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "x+1=2",
+  "next": "x=",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "incomplete statement"
+ },
+ {
+  "id": "bad-03",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "x^2==4",
+  "next": "x=2",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "double relation"
+ },
+ {
+  "id": "bad-04",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "x=1",
+  "next": "__import__('os').system('id')",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "code injection attempt"
+ },
+ {
+  "id": "bad-05",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "x=9^9^9^9",
+  "next": "x=1",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "resource exhaustion attempt"
+ },
+ {
+  "id": "bad-06",
+  "category": "malformed",
+  "task": "expression",
+  "prev": "x.real",
+  "next": "x",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "attribute access",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "variable",
+    "name": "x"
+   }
+  }
+ },
+ {
+  "id": "bad-07",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "log 100 = 2",
+  "next": "2=2",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "bare log: base e or 10"
+ },
+ {
+  "id": "bad-08",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "2x+=3",
+  "next": "x=1",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "dangling operator"
+ },
+ {
+  "id": "bad-09",
+  "category": "malformed",
+  "task": "expression",
+  "prev": "(x+1",
+  "next": "x+1",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "unbalanced bracket",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "constant",
+      "value": "1"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "bad-10",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "x=1/0",
+  "next": "x=1",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "division by zero"
+ },
+ {
+  "id": "bad-11",
+  "category": "malformed",
+  "task": "expression",
+  "prev": "x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x",
+  "next": "401x",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "over-long input",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "401"
+     },
+     {
+      "kind": "variable",
+      "name": "x"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "id": "bad-12",
+  "category": "malformed",
+  "task": "solve",
+  "prev": "x=lambda: 1",
+  "next": "x=1",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "python syntax"
+ },
+ {
+  "id": "bad-13",
+  "category": "malformed",
+  "task": "expression",
+  "prev": "6/2(1+2)",
+  "next": "9",
+  "assumptions": [],
+  "expected": "unresolved",
+  "why": "6/2(1+2) has two readings",
+  "e7": {
+   "start": null,
+   "next": {
+    "kind": "constant",
+    "value": "9"
+   }
+  }
+ }
+]

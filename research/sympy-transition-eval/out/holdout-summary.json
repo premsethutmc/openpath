@@ -1,0 +1,914 @@
+{
+ "A": {
+  "n": 678,
+  "exact": 236,
+  "falseAcceptances": 0,
+  "faIds": [],
+  "falseRejections": 212,
+  "falseInvalidOnVerified": 16,
+  "falseInvalidIds": [
+   "h7-calcD-028",
+   "h7-dom-013",
+   "h7-dom-018",
+   "h7-dom-040",
+   "h7-geo-047",
+   "h7-geo-053",
+   "h7-geo-059",
+   "h7-typed-005",
+   "h7-typed-009",
+   "h7-typed-037",
+   "h7-typed-043",
+   "h7-typed-044",
+   "h7-typed-046",
+   "h7-typed-048",
+   "h7-typed-049",
+   "h7-typed-055"
+  ],
+  "verified": 86,
+  "undecided": 410,
+  "conflict": 0,
+  "dist": {
+   "verified": 86,
+   "unsupported": 271,
+   "malformed": 117,
+   "incomplete": 50,
+   "invalid": 114,
+   "ambiguous": 22,
+   "missing-assumption": 18
+  },
+  "recoveredFromA_FR": [],
+  "recovered": 0,
+  "preservedAExact": 236,
+  "lostAExact": [],
+  "newFA": []
+ },
+ "B": {
+  "n": 678,
+  "exact": 233,
+  "falseAcceptances": 1,
+  "faIds": [
+   "h7-typed-033"
+  ],
+  "falseRejections": 190,
+  "falseInvalidOnVerified": 0,
+  "falseInvalidIds": [],
+  "verified": 109,
+  "undecided": 435,
+  "conflict": 0,
+  "dist": {
+   "verified": 109,
+   "unsupported": 430,
+   "missing-assumption": 9,
+   "invalid": 98,
+   "incomplete": 27,
+   "ambiguous": 5
+  },
+  "recoveredFromA_FR": [
+   "h7-algA-004",
+   "h7-algA-007",
+   "h7-algA-009",
+   "h7-algA-011",
+   "h7-algA-012",
+   "h7-algA-014",
+   "h7-algA-018",
+   "h7-algA-019",
+   "h7-algA-021",
+   "h7-algA-022",
+   "h7-algA-025",
+   "h7-algA-033",
+   "h7-algA-034",
+   "h7-algA-038",
+   "h7-algA-039",
+   "h7-algB-001",
+   "h7-algB-002",
+   "h7-algB-003",
+   "h7-algB-004",
+   "h7-algB-007",
+   "h7-algB-009",
+   "h7-algB-010",
+   "h7-algB-012",
+   "h7-algB-013",
+   "h7-algB-019",
+   "h7-algB-024",
+   "h7-algB-025",
+   "h7-algB-026",
+   "h7-algB-029",
+   "h7-algB-030",
+   "h7-algB-031",
+   "h7-calcD-002",
+   "h7-calcD-012",
+   "h7-calcD-022",
+   "h7-calcD-030",
+   "h7-calcD-031",
+   "h7-calcD-032",
+   "h7-calcI-001",
+   "h7-calcI-004",
+   "h7-calcI-005",
+   "h7-calcI-017",
+   "h7-calcI-033",
+   "h7-calcL-008",
+   "h7-calcL-011",
+   "h7-calcL-012",
+   "h7-typed-005",
+   "h7-typed-009",
+   "h7-typed-013",
+   "h7-typed-015",
+   "h7-typed-037",
+   "h7-typed-043",
+   "h7-typed-044",
+   "h7-typed-046",
+   "h7-typed-048",
+   "h7-typed-049",
+   "h7-typed-055",
+   "h7-typed-057",
+   "h7-typed-062",
+   "h7-typed-064",
+   "h7-typed-067",
+   "h7-typed-091",
+   "h7-typed-092"
+  ],
+  "recovered": 62,
+  "preservedAExact": 130,
+  "lostAExact": [
+   "h7-algA-078",
+   "h7-algA-081",
+   "h7-calcD-043",
+   "h7-calcD-055",
+   "h7-calcD-060",
+   "h7-calcD-062",
+   "h7-calcD-065",
+   "h7-calcD-073",
+   "h7-calcD-079",
+   "h7-calcD-080",
+   "h7-calcI-002",
+   "h7-calcI-009",
+   "h7-calcI-011",
+   "h7-calcI-025",
+   "h7-calcI-028",
+   "h7-calcI-035",
+   "h7-calcI-036",
+   "h7-calcI-040",
+   "h7-calcI-048",
+   "h7-calcI-062",
+   "h7-calcI-071",
+   "h7-calcI-074",
+   "h7-calcL-006",
+   "h7-calcL-058",
+   "h7-calcL-064",
+   "h7-dom-002",
+   "h7-dom-003",
+   "h7-dom-004",
+   "h7-dom-005",
+   "h7-dom-006",
+   "h7-dom-009",
+   "h7-dom-010",
+   "h7-dom-015",
+   "h7-dom-016",
+   "h7-dom-017",
+   "h7-dom-021",
+   "h7-dom-022",
+   "h7-dom-037",
+   "h7-dom-039",
+   "h7-dom-041",
+   "h7-dom-044",
+   "h7-dom-049",
+   "h7-dom-051",
+   "h7-geo-001",
+   "h7-geo-002",
+   "h7-geo-004",
+   "h7-geo-005",
+   "h7-geo-008",
+   "h7-geo-009",
+   "h7-geo-010",
+   "h7-geo-015",
+   "h7-geo-016",
+   "h7-geo-017",
+   "h7-geo-018",
+   "h7-geo-019",
+   "h7-geo-020",
+   "h7-geo-023",
+   "h7-geo-024",
+   "h7-geo-026",
+   "h7-geo-036",
+   "h7-geo-038",
+   "h7-geo-039",
+   "h7-geo-040",
+   "h7-geo-042",
+   "h7-geo-049",
+   "h7-geo-050",
+   "h7-geo-052",
+   "h7-geo-054",
+   "h7-geo-055",
+   "h7-geo-056",
+   "h7-geo-057",
+   "h7-geo-060",
+   "h7-geo-061",
+   "h7-geo-062",
+   "h7-geo-064",
+   "h7-geo-065",
+   "h7-geo-075",
+   "h7-geo-076",
+   "h7-geo-079",
+   "h7-geo-080",
+   "h7-geo-082",
+   "h7-geo-083",
+   "h7-typed-033",
+   "h7-typed-035",
+   "h7-typed-038",
+   "h7-typed-039",
+   "h7-typed-068",
+   "h7-typed-069",
+   "h7-typed-070",
+   "h7-typed-071",
+   "h7-typed-072",
+   "h7-typed-074",
+   "h7-typed-075",
+   "h7-typed-078",
+   "h7-typed-079",
+   "h7-typed-080",
+   "h7-typed-081",
+   "h7-typed-082",
+   "h7-typed-083",
+   "h7-typed-084",
+   "h7-typed-085",
+   "h7-typed-086",
+   "h7-typed-087",
+   "h7-typed-088",
+   "h7-typed-089",
+   "h7-typed-090"
+  ],
+  "newFA": [
+   "h7-typed-033"
+  ]
+ },
+ "C1": {
+  "n": 678,
+  "exact": 323,
+  "falseAcceptances": 0,
+  "faIds": [],
+  "falseRejections": 159,
+  "falseInvalidOnVerified": 7,
+  "falseInvalidIds": [
+   "h7-calcD-028",
+   "h7-dom-013",
+   "h7-dom-018",
+   "h7-dom-040",
+   "h7-geo-047",
+   "h7-geo-053",
+   "h7-geo-059"
+  ],
+  "verified": 139,
+  "undecided": 309,
+  "conflict": 10,
+  "dist": {
+   "verified": 139,
+   "malformed": 79,
+   "unsupported": 209,
+   "incomplete": 60,
+   "missing-assumption": 25,
+   "invalid": 135,
+   "ambiguous": 21,
+   "conflict": 10
+  },
+  "recoveredFromA_FR": [
+   "h7-algA-004",
+   "h7-algA-007",
+   "h7-algA-009",
+   "h7-algA-011",
+   "h7-algA-012",
+   "h7-algA-014",
+   "h7-algA-018",
+   "h7-algA-019",
+   "h7-algA-021",
+   "h7-algA-022",
+   "h7-algA-025",
+   "h7-algA-033",
+   "h7-algA-034",
+   "h7-algA-038",
+   "h7-algA-039",
+   "h7-algB-001",
+   "h7-algB-002",
+   "h7-algB-003",
+   "h7-algB-004",
+   "h7-algB-007",
+   "h7-algB-009",
+   "h7-algB-010",
+   "h7-algB-012",
+   "h7-algB-013",
+   "h7-algB-019",
+   "h7-algB-024",
+   "h7-algB-025",
+   "h7-algB-026",
+   "h7-algB-029",
+   "h7-algB-030",
+   "h7-algB-031",
+   "h7-calcD-002",
+   "h7-calcD-012",
+   "h7-calcD-022",
+   "h7-calcD-030",
+   "h7-calcD-031",
+   "h7-calcD-032",
+   "h7-calcI-001",
+   "h7-calcI-004",
+   "h7-calcI-005",
+   "h7-calcI-017",
+   "h7-calcI-033",
+   "h7-calcL-008",
+   "h7-calcL-011",
+   "h7-calcL-012",
+   "h7-typed-013",
+   "h7-typed-015",
+   "h7-typed-057",
+   "h7-typed-062",
+   "h7-typed-064",
+   "h7-typed-067",
+   "h7-typed-091",
+   "h7-typed-092"
+  ],
+  "recovered": 53,
+  "preservedAExact": 235,
+  "lostAExact": [
+   "h7-typed-033"
+  ],
+  "newFA": []
+ },
+ "C2": {
+  "n": 678,
+  "exact": 288,
+  "falseAcceptances": 0,
+  "faIds": [],
+  "falseRejections": 159,
+  "falseInvalidOnVerified": 7,
+  "falseInvalidIds": [
+   "h7-calcD-028",
+   "h7-dom-013",
+   "h7-dom-018",
+   "h7-dom-040",
+   "h7-geo-047",
+   "h7-geo-053",
+   "h7-geo-059"
+  ],
+  "verified": 139,
+  "undecided": 357,
+  "conflict": 10,
+  "dist": {
+   "verified": 139,
+   "malformed": 98,
+   "unsupported": 238,
+   "incomplete": 50,
+   "invalid": 104,
+   "ambiguous": 21,
+   "missing-assumption": 18,
+   "conflict": 10
+  },
+  "recoveredFromA_FR": [
+   "h7-algA-004",
+   "h7-algA-007",
+   "h7-algA-009",
+   "h7-algA-011",
+   "h7-algA-012",
+   "h7-algA-014",
+   "h7-algA-018",
+   "h7-algA-019",
+   "h7-algA-021",
+   "h7-algA-022",
+   "h7-algA-025",
+   "h7-algA-033",
+   "h7-algA-034",
+   "h7-algA-038",
+   "h7-algA-039",
+   "h7-algB-001",
+   "h7-algB-002",
+   "h7-algB-003",
+   "h7-algB-004",
+   "h7-algB-007",
+   "h7-algB-009",
+   "h7-algB-010",
+   "h7-algB-012",
+   "h7-algB-013",
+   "h7-algB-019",
+   "h7-algB-024",
+   "h7-algB-025",
+   "h7-algB-026",
+   "h7-algB-029",
+   "h7-algB-030",
+   "h7-algB-031",
+   "h7-calcD-002",
+   "h7-calcD-012",
+   "h7-calcD-022",
+   "h7-calcD-030",
+   "h7-calcD-031",
+   "h7-calcD-032",
+   "h7-calcI-001",
+   "h7-calcI-004",
+   "h7-calcI-005",
+   "h7-calcI-017",
+   "h7-calcI-033",
+   "h7-calcL-008",
+   "h7-calcL-011",
+   "h7-calcL-012",
+   "h7-typed-013",
+   "h7-typed-015",
+   "h7-typed-057",
+   "h7-typed-062",
+   "h7-typed-064",
+   "h7-typed-067",
+   "h7-typed-091",
+   "h7-typed-092"
+  ],
+  "recovered": 53,
+  "preservedAExact": 235,
+  "lostAExact": [
+   "h7-typed-033"
+  ],
+  "newFA": []
+ },
+ "byCategory": {
+  "algebra-equations": {
+   "A": {
+    "n": 85,
+    "exact": 38,
+    "falseAcceptances": 0,
+    "falseRejections": 27,
+    "falseInvalidOnVerified": 0,
+    "verified": 12,
+    "undecided": 46,
+    "conflict": 0
+   },
+   "B": {
+    "n": 85,
+    "exact": 63,
+    "falseAcceptances": 0,
+    "falseRejections": 12,
+    "falseInvalidOnVerified": 0,
+    "verified": 27,
+    "undecided": 22,
+    "conflict": 0,
+    "recovered": 15
+   },
+   "C1": {
+    "n": 85,
+    "exact": 61,
+    "falseAcceptances": 0,
+    "falseRejections": 12,
+    "falseInvalidOnVerified": 0,
+    "verified": 27,
+    "undecided": 19,
+    "conflict": 0,
+    "recovered": 15
+   },
+   "C2": {
+    "n": 85,
+    "exact": 53,
+    "falseAcceptances": 0,
+    "falseRejections": 12,
+    "falseInvalidOnVerified": 0,
+    "verified": 27,
+    "undecided": 31,
+    "conflict": 0,
+    "recovered": 15
+   }
+  },
+  "algebra-expressions": {
+   "A": {
+    "n": 81,
+    "exact": 10,
+    "falseAcceptances": 0,
+    "falseRejections": 32,
+    "falseInvalidOnVerified": 0,
+    "verified": 0,
+    "undecided": 74,
+    "conflict": 0
+   },
+   "B": {
+    "n": 81,
+    "exact": 41,
+    "falseAcceptances": 0,
+    "falseRejections": 16,
+    "falseInvalidOnVerified": 0,
+    "verified": 16,
+    "undecided": 36,
+    "conflict": 0,
+    "recovered": 16
+   },
+   "C1": {
+    "n": 81,
+    "exact": 40,
+    "falseAcceptances": 0,
+    "falseRejections": 16,
+    "falseInvalidOnVerified": 0,
+    "verified": 16,
+    "undecided": 36,
+    "conflict": 0,
+    "recovered": 16
+   },
+   "C2": {
+    "n": 81,
+    "exact": 26,
+    "falseAcceptances": 0,
+    "falseRejections": 16,
+    "falseInvalidOnVerified": 0,
+    "verified": 16,
+    "undecided": 58,
+    "conflict": 0,
+    "recovered": 16
+   }
+  },
+  "calculus-derivative": {
+   "A": {
+    "n": 81,
+    "exact": 48,
+    "falseAcceptances": 0,
+    "falseRejections": 15,
+    "falseInvalidOnVerified": 1,
+    "verified": 20,
+    "undecided": 27,
+    "conflict": 0
+   },
+   "B": {
+    "n": 81,
+    "exact": 50,
+    "falseAcceptances": 0,
+    "falseRejections": 9,
+    "falseInvalidOnVerified": 0,
+    "verified": 26,
+    "undecided": 26,
+    "conflict": 0,
+    "recovered": 6
+   },
+   "C1": {
+    "n": 81,
+    "exact": 58,
+    "falseAcceptances": 0,
+    "falseRejections": 9,
+    "falseInvalidOnVerified": 1,
+    "verified": 26,
+    "undecided": 17,
+    "conflict": 0,
+    "recovered": 6
+   },
+   "C2": {
+    "n": 81,
+    "exact": 54,
+    "falseAcceptances": 0,
+    "falseRejections": 9,
+    "falseInvalidOnVerified": 1,
+    "verified": 26,
+    "undecided": 21,
+    "conflict": 0,
+    "recovered": 6
+   }
+  },
+  "calculus-integral": {
+   "A": {
+    "n": 78,
+    "exact": 13,
+    "falseAcceptances": 0,
+    "falseRejections": 28,
+    "falseInvalidOnVerified": 0,
+    "verified": 5,
+    "undecided": 65,
+    "conflict": 0
+   },
+   "B": {
+    "n": 78,
+    "exact": 11,
+    "falseAcceptances": 0,
+    "falseRejections": 28,
+    "falseInvalidOnVerified": 0,
+    "verified": 5,
+    "undecided": 67,
+    "conflict": 0,
+    "recovered": 5
+   },
+   "C1": {
+    "n": 78,
+    "exact": 23,
+    "falseAcceptances": 0,
+    "falseRejections": 23,
+    "falseInvalidOnVerified": 0,
+    "verified": 10,
+    "undecided": 55,
+    "conflict": 0,
+    "recovered": 5
+   },
+   "C2": {
+    "n": 78,
+    "exact": 18,
+    "falseAcceptances": 0,
+    "falseRejections": 23,
+    "falseInvalidOnVerified": 0,
+    "verified": 10,
+    "undecided": 60,
+    "conflict": 0,
+    "recovered": 5
+   }
+  },
+  "calculus-limits-series": {
+   "A": {
+    "n": 70,
+    "exact": 7,
+    "falseAcceptances": 0,
+    "falseRejections": 29,
+    "falseInvalidOnVerified": 0,
+    "verified": 1,
+    "undecided": 66,
+    "conflict": 0
+   },
+   "B": {
+    "n": 70,
+    "exact": 8,
+    "falseAcceptances": 0,
+    "falseRejections": 27,
+    "falseInvalidOnVerified": 0,
+    "verified": 3,
+    "undecided": 65,
+    "conflict": 0,
+    "recovered": 3
+   },
+   "C1": {
+    "n": 70,
+    "exact": 11,
+    "falseAcceptances": 0,
+    "falseRejections": 26,
+    "falseInvalidOnVerified": 0,
+    "verified": 4,
+    "undecided": 62,
+    "conflict": 0,
+    "recovered": 3
+   },
+   "C2": {
+    "n": 70,
+    "exact": 10,
+    "falseAcceptances": 0,
+    "falseRejections": 26,
+    "falseInvalidOnVerified": 0,
+    "verified": 4,
+    "undecided": 63,
+    "conflict": 0,
+    "recovered": 3
+   }
+  },
+  "geometry": {
+   "A": {
+    "n": 83,
+    "exact": 39,
+    "falseAcceptances": 0,
+    "falseRejections": 22,
+    "falseInvalidOnVerified": 3,
+    "verified": 14,
+    "undecided": 35,
+    "conflict": 0
+   },
+   "B": {
+    "n": 83,
+    "exact": 0,
+    "falseAcceptances": 0,
+    "falseRejections": 36,
+    "falseInvalidOnVerified": 0,
+    "verified": 0,
+    "undecided": 83,
+    "conflict": 0,
+    "recovered": 0
+   },
+   "C1": {
+    "n": 83,
+    "exact": 39,
+    "falseAcceptances": 0,
+    "falseRejections": 22,
+    "falseInvalidOnVerified": 3,
+    "verified": 14,
+    "undecided": 35,
+    "conflict": 0,
+    "recovered": 0
+   },
+   "C2": {
+    "n": 83,
+    "exact": 39,
+    "falseAcceptances": 0,
+    "falseRejections": 22,
+    "falseInvalidOnVerified": 3,
+    "verified": 14,
+    "undecided": 35,
+    "conflict": 0,
+    "recovered": 0
+   }
+  },
+  "other-domains": {
+   "A": {
+    "n": 100,
+    "exact": 21,
+    "falseAcceptances": 0,
+    "falseRejections": 33,
+    "falseInvalidOnVerified": 3,
+    "verified": 7,
+    "undecided": 76,
+    "conflict": 0
+   },
+   "B": {
+    "n": 100,
+    "exact": 3,
+    "falseAcceptances": 0,
+    "falseRejections": 40,
+    "falseInvalidOnVerified": 0,
+    "verified": 0,
+    "undecided": 100,
+    "conflict": 0,
+    "recovered": 0
+   },
+   "C1": {
+    "n": 100,
+    "exact": 21,
+    "falseAcceptances": 0,
+    "falseRejections": 33,
+    "falseInvalidOnVerified": 3,
+    "verified": 7,
+    "undecided": 76,
+    "conflict": 0,
+    "recovered": 0
+   },
+   "C2": {
+    "n": 100,
+    "exact": 21,
+    "falseAcceptances": 0,
+    "falseRejections": 33,
+    "falseInvalidOnVerified": 3,
+    "verified": 7,
+    "undecided": 76,
+    "conflict": 0,
+    "recovered": 0
+   }
+  },
+  "typed-routes": {
+   "A": {
+    "n": 100,
+    "exact": 60,
+    "falseAcceptances": 0,
+    "falseRejections": 26,
+    "falseInvalidOnVerified": 9,
+    "verified": 27,
+    "undecided": 21,
+    "conflict": 0
+   },
+   "B": {
+    "n": 100,
+    "exact": 57,
+    "falseAcceptances": 1,
+    "falseRejections": 22,
+    "falseInvalidOnVerified": 0,
+    "verified": 32,
+    "undecided": 36,
+    "conflict": 0,
+    "recovered": 17
+   },
+   "C1": {
+    "n": 100,
+    "exact": 70,
+    "falseAcceptances": 0,
+    "falseRejections": 18,
+    "falseInvalidOnVerified": 0,
+    "verified": 35,
+    "undecided": 9,
+    "conflict": 10,
+    "recovered": 8
+   },
+   "C2": {
+    "n": 100,
+    "exact": 67,
+    "falseAcceptances": 0,
+    "falseRejections": 18,
+    "falseInvalidOnVerified": 0,
+    "verified": 35,
+    "undecided": 13,
+    "conflict": 10,
+    "recovered": 8
+   }
+  }
+ },
+ "latencyMs": {
+  "A": {
+   "p50": 1.23,
+   "p95": 10.56,
+   "p99": 22.66,
+   "max": 69.845
+  },
+  "B": {
+   "p50": 0.83,
+   "p95": 54.88,
+   "p99": 224.08,
+   "max": 783.11
+  },
+  "C": {
+   "p50": 2.64,
+   "p95": 53.74,
+   "p99": 214.64,
+   "max": 785.14
+  }
+ },
+ "timeouts": 0,
+ "crashes": 0,
+ "B_reasonsOnUndecided": [
+  [
+   "domain 'geometry' has no answer contract in the prototype",
+   87
+  ],
+  [
+   "clause not parsed",
+   72
+  ],
+  [
+   "domain 'probability-statistics' has no answer contract in th",
+   29
+  ],
+  [
+   "domain 'complex-polynomial' has no answer contract in the pr",
+   21
+  ],
+  [
+   "domain 'linear-algebra' has no answer contract in the protot",
+   18
+  ],
+  [
+   "domain 'trigonometry' has no answer contract in the prototyp",
+   16
+  ],
+  [
+   "domain 'exponential-log' has no answer contract in the proto",
+   12
+  ],
+  [
+   "domain 'sequence-series' has no answer contract in the proto",
+   12
+  ],
+  [
+   "calculus task 'series-convergence' outside prototype scope (",
+   11
+  ],
+  [
+   "calculus task 'improper-integral' outside prototype scope (p",
+   10
+  ],
+  [
+   "domain 'radical' has no answer contract in the prototype",
+   9
+  ],
+  [
+   "word problem",
+   8
+  ],
+  [
+   "calculus task 'fundamental-theorem-derivative' outside proto",
+   8
+  ],
+  [
+   "calculus task 'epsilon-delta-proof' outside prototype scope ",
+   7
+  ],
+  [
+   "calculus task 'limit-squeeze' outside prototype scope (proof",
+   6
+  ],
+  [
+   "problem not parsed",
+   4
+  ],
+  [
+   "binding not parsed 'u = x^2, du = 2x dx'",
+   4
+  ],
+  [
+   "calculus task 'taylor' outside prototype scope (proof-style ",
+   4
+  ],
+  [
+   "typed step s0 undecided",
+   4
+  ],
+  [
+   "error",
+   3
+  ],
+  [
+   "system solution set not finite/exact (parametric or unsolved",
+   3
+  ],
+  [
+   "calculus task 'logarithmic-differentiation' outside prototyp",
+   3
+  ],
+  [
+   "line 1",
+   3
+  ],
+  [
+   "binding not parsed 'u = x, dv = e^x dx'",
+   3
+  ],
+  [
+   "binding not parsed 'u = x^2 + 1, du = 2x dx'",
+   3
+  ]
+ ],
+ "wallSec": 9.9,
+ "workerRestarts": 0
+}

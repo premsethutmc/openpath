@@ -1,0 +1,537 @@
+{
+ "rows": [
+  {
+   "id": "ca-01",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "verified",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-02",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "line 1 loses the solution x = 6",
+   "why": "sign error",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-03",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "verified",
+   "B": "unsupported",
+   "B_reason": "written computation uses 12 (line 2), not grounded in earlier lines; semantic checks cannot credit it",
+   "why": "x=18-12 is not 18/3: right value, wrong arithmetic",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-04",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "verified",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-05",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "incomplete",
+   "B": "invalid",
+   "B_reason": "line 2 loses the solution x = 2",
+   "why": "lost root 2",
+   "C1": "incomplete",
+   "C2": "incomplete"
+  },
+  {
+   "id": "ca-06",
+   "cat": "adversarial-cases",
+   "exp": "incomplete",
+   "A": "incomplete",
+   "B": "incomplete",
+   "B_reason": "final statement '(x-2)(x-5)=0' is not in solved form",
+   "why": "not solved",
+   "C1": "incomplete",
+   "C2": "incomplete"
+  },
+  {
+   "id": "ca-07",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "incomplete",
+   "B": "invalid",
+   "B_reason": "line 1 loses the solution x = 0",
+   "why": "divided by x",
+   "C1": "incomplete",
+   "C2": "incomplete"
+  },
+  {
+   "id": "ca-08",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "verified",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-09",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "unsupported",
+   "B": "unsupported",
+   "B_reason": "clause not parsed: 'sqrt(4)=2, not -2, rejected' (word 'not')",
+   "why": "checked",
+   "C1": "unsupported",
+   "C2": "unsupported"
+  },
+  {
+   "id": "ca-10",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "final answer includes x = -2, which is not a solution",
+   "why": "extraneous root kept",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-11",
+   "cat": "adversarial-cases",
+   "exp": "missing-assumption",
+   "A": "verified",
+   "B": "missing-assumption",
+   "B_reason": "extraneous candidates were dropped without a visible check",
+   "why": "dropped -2 without a check",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-12",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "unsupported",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "restrictions stated",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-13",
+   "cat": "adversarial-cases",
+   "exp": "missing-assumption",
+   "A": "verified",
+   "B": "missing-assumption",
+   "B_reason": "a denominator was cleared but the excluded values were never stated",
+   "why": "denominators cleared without restriction",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-14",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-15",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "final answer includes x = 2, which is not a solution",
+   "why": "x=2 is excluded",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-16",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "verified",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-17",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "line 2 loses the solution x = -3",
+   "why": "inequality not reversed",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-18",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-19",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "final answer includes x = -4, which is not a solution",
+   "why": "lower bound lost",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-20",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-21",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "incomplete",
+   "B": "invalid",
+   "B_reason": "line 1 loses the solution x = -9",
+   "why": "lost -9",
+   "C1": "incomplete",
+   "C2": "incomplete"
+  },
+  {
+   "id": "ca-22",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "unsupported",
+   "B_reason": "written computation uses 4 (line 1), not grounded in earlier lines; semantic checks cannot credit it",
+   "why": "",
+   "C1": "malformed",
+   "C2": "malformed"
+  },
+  {
+   "id": "ca-23",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "unsupported",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "completing the square",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-24",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "line 1 loses the solution x = -2 + sqrt(3)",
+   "why": "wrong constant",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-25",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "unsupported",
+   "B_reason": "statement '(x-3)/x, x != 0 and x != -3' in an expression task",
+   "why": "",
+   "C1": "malformed",
+   "C2": "malformed"
+  },
+  {
+   "id": "ca-26",
+   "cat": "adversarial-cases",
+   "exp": "incomplete",
+   "A": "incomplete",
+   "B": "incomplete",
+   "B_reason": "final form does not meet the instruction (simplify): a common factor remains in the written fraction",
+   "why": "common factor not cancelled",
+   "C1": "incomplete",
+   "C2": "incomplete"
+  },
+  {
+   "id": "ca-27",
+   "cat": "adversarial-cases",
+   "exp": "missing-assumption",
+   "A": "verified",
+   "B": "missing-assumption",
+   "B_reason": "a step widened the domain and the excluded values were not stated",
+   "why": "excluded value -3 not stated",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-28",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "unsupported",
+   "B": "verified",
+   "B_reason": "exact identity chain; final form meets the instruction",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-29",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "step x**2 - x - 20 -> (x - 4)*(x + 5): values differ at an exact point of both domains",
+   "why": "signs swapped",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-30",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "unsupported",
+   "B": "verified",
+   "B_reason": "exact identity chain; final form meets the instruction",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-31",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "invalid",
+   "B": "invalid",
+   "B_reason": "step (2*x - 3)**2 -> 4*x**2 + 9: values differ at an exact point of both domains",
+   "why": "cross term dropped",
+   "C1": "invalid",
+   "C2": "invalid"
+  },
+  {
+   "id": "ca-32",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "verified",
+   "B_reason": "exact identity chain; final form meets the instruction",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-33",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "malformed",
+   "B": "invalid",
+   "B_reason": "step 200 -> 2000: values differ at an exact point of both domains",
+   "why": "arithmetic slip",
+   "C1": "invalid",
+   "C2": "malformed"
+  },
+  {
+   "id": "ca-34",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "unsupported",
+   "B": "incomplete",
+   "B_reason": "final statement does not determine every variable",
+   "why": "",
+   "C1": "incomplete",
+   "C2": "unsupported"
+  },
+  {
+   "id": "ca-35",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "unsupported",
+   "B": "invalid",
+   "B_reason": "'y=4' is false at the solution {x: 7, y: 3}",
+   "why": "y wrong",
+   "C1": "invalid",
+   "C2": "unsupported"
+  },
+  {
+   "id": "ca-36",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "unsupported",
+   "B_reason": "clause not parsed: 'x=-1 is outside the domain x>3, rejected' (word 'outside')",
+   "why": "",
+   "C1": "malformed",
+   "C2": "malformed"
+  },
+  {
+   "id": "ca-37",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "unsupported",
+   "B": "invalid",
+   "B_reason": "final answer includes x = -1, which is not a solution",
+   "why": "-1 outside the domain kept",
+   "C1": "invalid",
+   "C2": "unsupported"
+  },
+  {
+   "id": "ca-38",
+   "cat": "adversarial-cases",
+   "exp": "invalid",
+   "A": "malformed",
+   "B": "invalid",
+   "B_reason": "false closed claim: 'Also 7*8=54'",
+   "why": "false side claim",
+   "C1": "invalid",
+   "C2": "malformed"
+  },
+  {
+   "id": "ca-39",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "true side claim",
+   "C1": "verified",
+   "C2": "verified"
+  },
+  {
+   "id": "ca-40",
+   "cat": "adversarial-cases",
+   "exp": "verified",
+   "A": "malformed",
+   "B": "verified",
+   "B_reason": "every step keeps the exact solution set; final answer equals it",
+   "why": "",
+   "C1": "verified",
+   "C2": "verified"
+  }
+ ],
+ "summary": {
+  "A": {
+   "n": 40,
+   "exact": 14,
+   "falseAcceptances": 4,
+   "faIds": [
+    "ca-03",
+    "ca-11",
+    "ca-13",
+    "ca-27"
+   ],
+   "falseRejections": 15,
+   "falseInvalidOnVerified": 0,
+   "falseInvalidIds": [],
+   "verified": 8,
+   "undecided": 19,
+   "conflict": 0,
+   "dist": {
+    "verified": 8,
+    "invalid": 8,
+    "incomplete": 5,
+    "unsupported": 8,
+    "malformed": 11
+   }
+  },
+  "B": {
+   "n": 40,
+   "exact": 34,
+   "falseAcceptances": 0,
+   "faIds": [],
+   "falseRejections": 5,
+   "falseInvalidOnVerified": 0,
+   "falseInvalidIds": [],
+   "verified": 14,
+   "undecided": 5,
+   "conflict": 0,
+   "dist": {
+    "verified": 14,
+    "invalid": 15,
+    "unsupported": 5,
+    "incomplete": 3,
+    "missing-assumption": 3
+   }
+  },
+  "C1": {
+   "n": 40,
+   "exact": 28,
+   "falseAcceptances": 4,
+   "faIds": [
+    "ca-03",
+    "ca-11",
+    "ca-13",
+    "ca-27"
+   ],
+   "falseRejections": 5,
+   "falseInvalidOnVerified": 0,
+   "falseInvalidIds": [],
+   "verified": 18,
+   "undecided": 4,
+   "conflict": 0,
+   "dist": {
+    "verified": 18,
+    "invalid": 12,
+    "incomplete": 6,
+    "unsupported": 1,
+    "malformed": 3
+   }
+  },
+  "C2": {
+   "n": 40,
+   "exact": 24,
+   "falseAcceptances": 4,
+   "faIds": [
+    "ca-03",
+    "ca-11",
+    "ca-13",
+    "ca-27"
+   ],
+   "falseRejections": 5,
+   "falseInvalidOnVerified": 0,
+   "falseInvalidIds": [],
+   "verified": 18,
+   "undecided": 9,
+   "conflict": 0,
+   "dist": {
+    "verified": 18,
+    "invalid": 8,
+    "incomplete": 5,
+    "unsupported": 4,
+    "malformed": 5
+   }
+  }
+ }
+}

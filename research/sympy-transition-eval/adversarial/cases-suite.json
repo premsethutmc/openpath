@@ -1,0 +1,522 @@
+[
+ {
+  "id": "ca-01",
+  "problem": {
+   "domain": "algebra",
+   "statement": "3x-7=11"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "3x=18\nx=6"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-02",
+  "problem": {
+   "domain": "algebra",
+   "statement": "3x-7=11"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "3x=4\nx=4/3"
+  },
+  "exp": "invalid",
+  "why": "sign error"
+ },
+ {
+  "id": "ca-03",
+  "problem": {
+   "domain": "algebra",
+   "statement": "3x-7=11"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "3x=18\nx=18-12\nx=6"
+  },
+  "exp": "invalid",
+  "why": "x=18-12 is not 18/3: right value, wrong arithmetic"
+ },
+ {
+  "id": "ca-04",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2-7x+10=0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-2)(x-5)=0\nx=2 or x=5"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-05",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2-7x+10=0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-2)(x-5)=0\nx=5"
+  },
+  "exp": "invalid",
+  "why": "lost root 2"
+ },
+ {
+  "id": "ca-06",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2-7x+10=0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-2)(x-5)=0"
+  },
+  "exp": "incomplete",
+  "why": "not solved"
+ },
+ {
+  "id": "ca-07",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2=5x"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x=5"
+  },
+  "exp": "invalid",
+  "why": "divided by x"
+ },
+ {
+  "id": "ca-08",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2=5x"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x^2-5x=0\nx(x-5)=0\nx=0 or x=5"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-09",
+  "problem": {
+   "domain": "algebra",
+   "statement": "sqrt(x+6)=x"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x+6=x^2\n(x-3)(x+2)=0\nx=3 or x=-2\ncheck x=-2: sqrt(4)=2, not -2, rejected\nx=3"
+  },
+  "exp": "verified",
+  "why": "checked"
+ },
+ {
+  "id": "ca-10",
+  "problem": {
+   "domain": "algebra",
+   "statement": "sqrt(x+6)=x"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x+6=x^2\n(x-3)(x+2)=0\nx=3 or x=-2"
+  },
+  "exp": "invalid",
+  "why": "extraneous root kept"
+ },
+ {
+  "id": "ca-11",
+  "problem": {
+   "domain": "algebra",
+   "statement": "sqrt(x+6)=x"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x+6=x^2\n(x-3)(x+2)=0\nx=3"
+  },
+  "exp": "missing-assumption",
+  "why": "dropped -2 without a check"
+ },
+ {
+  "id": "ca-12",
+  "problem": {
+   "domain": "algebra",
+   "statement": "2/(x-1)=4/(x+1)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x != 1 and x != -1\n2(x+1)=4(x-1)\n2x+2=4x-4\nx=3"
+  },
+  "exp": "verified",
+  "why": "restrictions stated"
+ },
+ {
+  "id": "ca-13",
+  "problem": {
+   "domain": "algebra",
+   "statement": "2/(x-1)=4/(x+1)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "2(x+1)=4(x-1)\n2x+2=4x-4\nx=3"
+  },
+  "exp": "missing-assumption",
+  "why": "denominators cleared without restriction"
+ },
+ {
+  "id": "ca-14",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x/(x-2)=2/(x-2)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x != 2\nx=2\nbut x=2 is excluded, so there is no solution"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-15",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x/(x-2)=2/(x-2)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x=2"
+  },
+  "exp": "invalid",
+  "why": "x=2 is excluded"
+ },
+ {
+  "id": "ca-16",
+  "problem": {
+   "domain": "algebra",
+   "statement": "-3x+2>8"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "-3x>6\nx<-2"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-17",
+  "problem": {
+   "domain": "algebra",
+   "statement": "-3x+2>8"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "-3x>6\nx>-2"
+  },
+  "exp": "invalid",
+  "why": "inequality not reversed"
+ },
+ {
+  "id": "ca-18",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2-x-12<0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-4)(x+3)<0\n-3<x<4"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-19",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2-x-12<0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-4)(x+3)<0\nx<4"
+  },
+  "exp": "invalid",
+  "why": "lower bound lost"
+ },
+ {
+  "id": "ca-20",
+  "problem": {
+   "domain": "algebra",
+   "statement": "|x+2|=7"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x+2=7 or x+2=-7\nx=5 or x=-9"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-21",
+  "problem": {
+   "domain": "algebra",
+   "statement": "|x+2|=7"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x+2=7\nx=5"
+  },
+  "exp": "invalid",
+  "why": "lost -9"
+ },
+ {
+  "id": "ca-22",
+  "problem": {
+   "domain": "algebra",
+   "statement": "2^(x+1)=16"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "2^(x+1)=2^4\nx+1=4\nx=3"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-23",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2+4x+1=0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x+2)^2=3\nx+2=\u00b1sqrt(3)\nx=-2\u00b1sqrt(3)"
+  },
+  "exp": "verified",
+  "why": "completing the square"
+ },
+ {
+  "id": "ca-24",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2+4x+1=0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x+2)^2=5\nx=-2\u00b1sqrt(5)"
+  },
+  "exp": "invalid",
+  "why": "wrong constant"
+ },
+ {
+  "id": "ca-25",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Simplify (x^2-9)/(x^2+3x)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-3)(x+3)/(x(x+3))\n(x-3)/x, x != 0 and x != -3"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-26",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Simplify (x^2-9)/(x^2+3x)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-3)(x+3)/(x(x+3))"
+  },
+  "exp": "incomplete",
+  "why": "common factor not cancelled"
+ },
+ {
+  "id": "ca-27",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Simplify (x^2-9)/(x^2+3x)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(x-3)(x+3)/(x(x+3))\n(x-3)/x"
+  },
+  "exp": "missing-assumption",
+  "why": "excluded value -3 not stated"
+ },
+ {
+  "id": "ca-28",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Factor x^2-x-20"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x^2-x-20 = (x-5)(x+4)"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-29",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Factor x^2-x-20"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x^2-x-20 = (x+5)(x-4)"
+  },
+  "exp": "invalid",
+  "why": "signs swapped"
+ },
+ {
+  "id": "ca-30",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Expand (2x-3)^2"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(2x-3)^2 = 4x^2-12x+9"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-31",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Expand (2x-3)^2"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "(2x-3)^2 = 4x^2+9"
+  },
+  "exp": "invalid",
+  "why": "cross term dropped"
+ },
+ {
+  "id": "ca-32",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Evaluate 51^2 - 49^2"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "51^2 - 49^2 = (51-49)(51+49)\n= 2 * 100\n= 200"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-33",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Evaluate 51^2 - 49^2"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "51^2 - 49^2 = (51-49)(51+49)\n= 2 * 100\n= 2000"
+  },
+  "exp": "invalid",
+  "why": "arithmetic slip"
+ },
+ {
+  "id": "ca-34",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Solve the system x+y=10, x-y=4"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "2x=14\nx=7\ny=3"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-35",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Solve the system x+y=10, x-y=4"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "2x=14\nx=7\ny=4"
+  },
+  "exp": "invalid",
+  "why": "y wrong"
+ },
+ {
+  "id": "ca-36",
+  "problem": {
+   "domain": "algebra",
+   "statement": "ln(x)+ln(x-3)=ln(4)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "ln(x(x-3))=ln(4)\nx^2-3x-4=0\n(x-4)(x+1)=0\nx=4 or x=-1\nx=-1 is outside the domain x>3, rejected\nx=4"
+  },
+  "exp": "verified",
+  "why": ""
+ },
+ {
+  "id": "ca-37",
+  "problem": {
+   "domain": "algebra",
+   "statement": "ln(x)+ln(x-3)=ln(4)"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "ln(x(x-3))=ln(4)\nx^2-3x-4=0\n(x-4)(x+1)=0\nx=4 or x=-1"
+  },
+  "exp": "invalid",
+  "why": "-1 outside the domain kept"
+ },
+ {
+  "id": "ca-38",
+  "problem": {
+   "domain": "algebra",
+   "statement": "5x+2=17"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "5x=15\nx=3\nAlso 7*8=54."
+  },
+  "exp": "invalid",
+  "why": "false side claim"
+ },
+ {
+  "id": "ca-39",
+  "problem": {
+   "domain": "algebra",
+   "statement": "5x+2=17"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "5x=15\nx=3\nAlso 7*8=56."
+  },
+  "exp": "verified",
+  "why": "true side claim"
+ },
+ {
+  "id": "ca-40",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^3-4x=0"
+  },
+  "studentWorking": {
+   "format": "natural",
+   "text": "x(x^2-4)=0\nx(x-2)(x+2)=0\nx=0, 2 or -2"
+  },
+  "exp": "verified",
+  "why": ""
+ }
+]

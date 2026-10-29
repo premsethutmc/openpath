@@ -1,0 +1,204 @@
+{
+ "A": {
+  "outcomes": {
+   "correct": 78,
+   "safe-miss": 42,
+   "over-restrictive": 4,
+   "FALSE-INVALID": 1
+  },
+  "byCategory": {
+   "calculus": {
+    "safe-miss": 8,
+    "n": 8
+   },
+   "expand-factor": {
+    "correct": 11,
+    "n": 11
+   },
+   "inequality": {
+    "correct": 9,
+    "safe-miss": 3,
+    "n": 12
+   },
+   "log-exp": {
+    "safe-miss": 12,
+    "correct": 2,
+    "n": 14
+   },
+   "loss": {
+    "correct": 6,
+    "n": 6
+   },
+   "malformed": {
+    "correct": 13,
+    "n": 13
+   },
+   "radical": {
+    "safe-miss": 9,
+    "correct": 1,
+    "over-restrictive": 1,
+    "n": 11
+   },
+   "rational": {
+    "correct": 8,
+    "safe-miss": 1,
+    "over-restrictive": 3,
+    "n": 12
+   },
+   "squaring": {
+    "correct": 8,
+    "n": 8
+   },
+   "trig": {
+    "correct": 3,
+    "safe-miss": 6,
+    "FALSE-INVALID": 1,
+    "n": 10
+   },
+   "unfamiliar": {
+    "correct": 7,
+    "safe-miss": 3,
+    "n": 10
+   },
+   "zero-division": {
+    "correct": 10,
+    "n": 10
+   }
+  },
+  "unsoundIds": [
+   "trig-07"
+  ]
+ },
+ "B": {
+  "outcomes": {
+   "correct": 123,
+   "safe-miss": 2
+  },
+  "byCategory": {
+   "calculus": {
+    "correct": 8,
+    "n": 8
+   },
+   "expand-factor": {
+    "correct": 11,
+    "n": 11
+   },
+   "inequality": {
+    "correct": 12,
+    "n": 12
+   },
+   "log-exp": {
+    "correct": 13,
+    "safe-miss": 1,
+    "n": 14
+   },
+   "loss": {
+    "correct": 6,
+    "n": 6
+   },
+   "malformed": {
+    "correct": 13,
+    "n": 13
+   },
+   "radical": {
+    "correct": 10,
+    "safe-miss": 1,
+    "n": 11
+   },
+   "rational": {
+    "correct": 12,
+    "n": 12
+   },
+   "squaring": {
+    "correct": 8,
+    "n": 8
+   },
+   "trig": {
+    "correct": 10,
+    "n": 10
+   },
+   "unfamiliar": {
+    "correct": 10,
+    "n": 10
+   },
+   "zero-division": {
+    "correct": 10,
+    "n": 10
+   }
+  },
+  "unsoundIds": []
+ },
+ "C": {
+  "outcomes": {
+   "correct": 123,
+   "safe-miss": 2
+  },
+  "byCategory": {
+   "calculus": {
+    "correct": 8,
+    "n": 8
+   },
+   "expand-factor": {
+    "correct": 11,
+    "n": 11
+   },
+   "inequality": {
+    "correct": 12,
+    "n": 12
+   },
+   "log-exp": {
+    "correct": 14,
+    "n": 14
+   },
+   "loss": {
+    "correct": 6,
+    "n": 6
+   },
+   "malformed": {
+    "correct": 13,
+    "n": 13
+   },
+   "radical": {
+    "correct": 10,
+    "safe-miss": 1,
+    "n": 11
+   },
+   "rational": {
+    "correct": 12,
+    "n": 12
+   },
+   "squaring": {
+    "correct": 8,
+    "n": 8
+   },
+   "trig": {
+    "correct": 9,
+    "safe-miss": 1,
+    "n": 10
+   },
+   "unfamiliar": {
+    "correct": 10,
+    "n": 10
+   },
+   "zero-division": {
+    "correct": 10,
+    "n": 10
+   }
+  },
+  "unsoundIds": []
+ },
+ "B_latencyMs": {
+  "p50": 14.72,
+  "p95": 100.74,
+  "p99": 295.76,
+  "max": 297.57
+ },
+ "A_latencyMs": {
+  "p50": 0.817,
+  "p95": 4.495,
+  "p99": 19.093,
+  "max": 19.691
+ },
+ "B_timeouts": 0,
+ "n": 125
+}

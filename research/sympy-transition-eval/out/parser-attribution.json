@@ -1,0 +1,25 @@
+{
+ "A_normalized_all": {
+  "exact": 202,
+  "fa": 2,
+  "fr": 227
+ },
+ "A_retry_on_undecided": {
+  "exact": 252,
+  "falseAcceptances": 1,
+  "faIds": [
+   "h7-algA-065"
+  ],
+  "falseRejections": 205,
+  "recovered": 7,
+  "recoveredIds": [
+   "h7-algA-019",
+   "h7-algA-021",
+   "h7-algA-022",
+   "h7-calcL-002",
+   "h7-dom-045",
+   "h7-geo-063",
+   "h7-geo-077"
+  ]
+ }
+}

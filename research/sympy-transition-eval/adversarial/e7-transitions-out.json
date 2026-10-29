@@ -1,0 +1,752 @@
+[
+ {
+  "id": "exp-01",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 19.691
+ },
+ {
+  "id": "exp-02",
+  "verdict": "invalid",
+  "detail": "invalid: step 1: exact rational-polynomial normal forms differ",
+  "ms": 5.1
+ },
+ {
+  "id": "exp-03",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 4.263
+ },
+ {
+  "id": "exp-04",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 4.495
+ },
+ {
+  "id": "exp-05",
+  "verdict": "invalid",
+  "detail": "invalid: step 1: exact rational-polynomial normal forms differ",
+  "ms": 1.892
+ },
+ {
+  "id": "exp-06",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 3.428
+ },
+ {
+  "id": "exp-07",
+  "verdict": "invalid",
+  "detail": "invalid: step 1: exact rational-polynomial normal forms differ",
+  "ms": 1.22
+ },
+ {
+  "id": "exp-08",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 4.451
+ },
+ {
+  "id": "exp-09",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 3.516
+ },
+ {
+  "id": "exp-10",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 2.016
+ },
+ {
+  "id": "exp-11",
+  "verdict": "invalid",
+  "detail": "invalid: step 1: exact rational-polynomial normal forms differ",
+  "ms": 1.703
+ },
+ {
+  "id": "rat-01",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 2.456
+ },
+ {
+  "id": "rat-02",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "rat-03",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 2.087
+ },
+ {
+  "id": "rat-04",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 1.093
+ },
+ {
+  "id": "rat-05",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 1.116
+ },
+ {
+  "id": "rat-06",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 1.412
+ },
+ {
+  "id": "rat-07",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 5.014
+ },
+ {
+  "id": "rat-08",
+  "verdict": "invalid",
+  "detail": "invalid: step 1: exact rational-polynomial normal forms differ",
+  "ms": 1.256
+ },
+ {
+  "id": "rat-09",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 1.321
+ },
+ {
+  "id": "rat-10",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 3.091
+ },
+ {
+  "id": "rat-11",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 0.783
+ },
+ {
+  "id": "rat-12",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 1.598
+ },
+ {
+  "id": "zero-01",
+  "verdict": "invalid",
+  "detail": "invalid: the step discards a solution of the original: {2, 3} became {2}",
+  "ms": 19.093
+ },
+ {
+  "id": "zero-02",
+  "verdict": "invalid",
+  "detail": "invalid: the step discards a solution of the original: {0, 4} became {4}",
+  "ms": 2.665
+ },
+ {
+  "id": "zero-03",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 2.179
+ },
+ {
+  "id": "zero-04",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ({1}): a one-way step, so candidates must later be checked against the original",
+  "ms": 2.049
+ },
+ {
+  "id": "zero-05",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ({1, 2}): a one-way step, so candidates must later be checked against the original",
+  "ms": 1.267
+ },
+ {
+  "id": "zero-06",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 5.398
+ },
+ {
+  "id": "zero-07",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.804
+ },
+ {
+  "id": "zero-08",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 0.528
+ },
+ {
+  "id": "zero-09",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values (all real numbers): a one-way step, so candidates must later be checked against the original",
+  "ms": 0.939
+ },
+ {
+  "id": "zero-10",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 8.981
+ },
+ {
+  "id": "sq-01",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ({-1, 2}): a one-way step, so candidates must later be checked against the original",
+  "ms": 1.516
+ },
+ {
+  "id": "sq-02",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 0.634
+ },
+ {
+  "id": "sq-03",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ({-1, 2}): a one-way step, so candidates must later be checked against the original",
+  "ms": 0.876
+ },
+ {
+  "id": "sq-04",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ({4}): a one-way step, so candidates must later be checked against the original",
+  "ms": 4.117
+ },
+ {
+  "id": "sq-05",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ({-3, 3}): a one-way step, so candidates must later be checked against the original",
+  "ms": 1.094
+ },
+ {
+  "id": "sq-06",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.654
+ },
+ {
+  "id": "sq-07",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.334
+ },
+ {
+  "id": "sq-08",
+  "verdict": "invalid",
+  "detail": "invalid: neither equivalent to nor implied by the previous line ({2} versus {-1})",
+  "ms": 1.841
+ },
+ {
+  "id": "loss-01",
+  "verdict": "invalid",
+  "detail": "invalid: the step discards a solution of the original: {-3, 3} became {3}",
+  "ms": 1.176
+ },
+ {
+  "id": "loss-02",
+  "verdict": "invalid",
+  "detail": "invalid: the step discards a solution of the original: {2, 3} became {2}",
+  "ms": 1.046
+ },
+ {
+  "id": "loss-03",
+  "verdict": "invalid",
+  "detail": "invalid: the step discards a solution of the original: {0, 1} became {1}",
+  "ms": 1.403
+ },
+ {
+  "id": "loss-04",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 0.393
+ },
+ {
+  "id": "loss-05",
+  "verdict": "invalid",
+  "detail": "invalid: the step discards a solution of the original: {-1, 0, 1} became {-1, 1}",
+  "ms": 1.125
+ },
+ {
+  "id": "loss-06",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.736
+ },
+ {
+  "id": "ineq-01",
+  "verdict": "invalid",
+  "detail": "invalid: neither equivalent to nor implied by the previous line ((-3, inf) versus (-inf, -3))",
+  "ms": 0.537
+ },
+ {
+  "id": "ineq-02",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 0.622
+ },
+ {
+  "id": "ineq-03",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 0.427
+ },
+ {
+  "id": "ineq-04",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 0.301
+ },
+ {
+  "id": "ineq-05",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ((-inf, 1)): a one-way step, so candidates must later be checked against the original",
+  "ms": 0.355
+ },
+ {
+  "id": "ineq-06",
+  "verdict": "unresolved",
+  "detail": "answer unresolved",
+  "ms": 0.334
+ },
+ {
+  "id": "ineq-07",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ((-inf, 2)): a one-way step, so candidates must later be checked against the original",
+  "ms": 0.536
+ },
+ {
+  "id": "ineq-08",
+  "verdict": "unresolved",
+  "detail": "answer unresolved",
+  "ms": 0.129
+ },
+ {
+  "id": "ineq-09",
+  "verdict": "invalid",
+  "detail": "invalid: the step discards a solution of the original: (-inf, -2) U (2, inf) became (2, inf)",
+  "ms": 0.496
+ },
+ {
+  "id": "ineq-10",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.683
+ },
+ {
+  "id": "ineq-11",
+  "verdict": "unresolved",
+  "detail": "answer unresolved",
+  "ms": 0.081
+ },
+ {
+  "id": "ineq-12",
+  "verdict": "implication",
+  "detail": "implied: follows from the previous line but admits more values ((-inf, 5)): a one-way step, so candidates must later be checked against the original",
+  "ms": 2.492
+ },
+ {
+  "id": "rad-01",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: removing an absolute value requires a nonnegative assumption",
+  "ms": 0.732
+ },
+ {
+  "id": "rad-02",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 0.734
+ },
+ {
+  "id": "rad-03",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "rad-04",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 1.175
+ },
+ {
+  "id": "rad-05",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 1.011
+ },
+ {
+  "id": "rad-06",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 0.879
+ },
+ {
+  "id": "rad-07",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: expression values agree but the target changes the domain",
+  "ms": 1.394
+ },
+ {
+  "id": "rad-08",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.003
+ },
+ {
+  "id": "rad-09",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "rad-10",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 0.817
+ },
+ {
+  "id": "rad-11",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 0.644
+ },
+ {
+  "id": "trig-01",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 1.586
+ },
+ {
+  "id": "trig-02",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 1.37
+ },
+ {
+  "id": "trig-03",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 1.113
+ },
+ {
+  "id": "trig-04",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 2.634
+ },
+ {
+  "id": "trig-05",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "trig-06",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 4.23
+ },
+ {
+  "id": "trig-07",
+  "verdict": "invalid",
+  "detail": "invalid: step 1: exact rational-polynomial normal forms differ",
+  "ms": 0.919
+ },
+ {
+  "id": "trig-08",
+  "verdict": "equivalent",
+  "detail": "verified: every symbolic transformation has a replayable exact certificate",
+  "ms": 0.817
+ },
+ {
+  "id": "trig-09",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 0.921
+ },
+ {
+  "id": "trig-10",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 0.841
+ },
+ {
+  "id": "log-01",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: canonical identity requires stated obligations and the same domain",
+  "ms": 0.559
+ },
+ {
+  "id": "log-02",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "log-03",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 0.496
+ },
+ {
+  "id": "log-04",
+  "verdict": "conditional",
+  "detail": "missing-assumption: step 1: canonical identity requires stated obligations and the same domain",
+  "ms": 0.755
+ },
+ {
+  "id": "log-05",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "log-06",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "log-07",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "log-08",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "log-09",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "log-10",
+  "verdict": "unresolved",
+  "detail": "unsupported: step 1: no bounded exact strategy proved or refuted this transformation",
+  "ms": 0.434
+ },
+ {
+  "id": "log-11",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.608
+ },
+ {
+  "id": "log-12",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.091
+ },
+ {
+  "id": "log-13",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.046
+ },
+ {
+  "id": "log-14",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.164
+ },
+ {
+  "id": "calc-01",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "calc-02",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "calc-03",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "calc-04",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "calc-05",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "calc-06",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "calc-07",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "calc-08",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "unf-01",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.521
+ },
+ {
+  "id": "unf-02",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.707
+ },
+ {
+  "id": "unf-03",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 3.635
+ },
+ {
+  "id": "unf-04",
+  "verdict": "unresolved",
+  "detail": "answer unresolved",
+  "ms": 0.134
+ },
+ {
+  "id": "unf-05",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.579
+ },
+ {
+  "id": "unf-06",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 0.665
+ },
+ {
+  "id": "unf-07",
+  "verdict": "unresolved",
+  "detail": "answer unresolved",
+  "ms": 0.26
+ },
+ {
+  "id": "unf-08",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.356
+ },
+ {
+  "id": "unf-09",
+  "verdict": "equivalent",
+  "detail": "equivalent: equivalent to the previous line (same solution set)",
+  "ms": 1.641
+ },
+ {
+  "id": "unf-10",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.436
+ },
+ {
+  "id": "bad-01",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.534
+ },
+ {
+  "id": "bad-02",
+  "verdict": "unresolved",
+  "detail": "answer unresolved",
+  "ms": 0.171
+ },
+ {
+  "id": "bad-03",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.069
+ },
+ {
+  "id": "bad-04",
+  "verdict": "unresolved",
+  "detail": "answer unresolved",
+  "ms": 0.065
+ },
+ {
+  "id": "bad-05",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.048
+ },
+ {
+  "id": "bad-06",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "bad-07",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.049
+ },
+ {
+  "id": "bad-08",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.031
+ },
+ {
+  "id": "bad-09",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ },
+ {
+  "id": "bad-10",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.119
+ },
+ {
+  "id": "bad-11",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0.001
+ },
+ {
+  "id": "bad-12",
+  "verdict": "unresolved",
+  "detail": "answer unsupported",
+  "ms": 0.098
+ },
+ {
+  "id": "bad-13",
+  "verdict": "unresolved",
+  "detail": "input not representable for the E7 symbolic route",
+  "ms": 0
+ }
+]
