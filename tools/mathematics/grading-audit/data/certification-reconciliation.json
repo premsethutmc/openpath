@@ -2,7 +2,7 @@
  "schema": "certification-reconciliation@1",
  "pr83": "901c907",
  "gradingCertifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
- "questionStatus": "4e545c33c47978f37c38dae36451e326b891a408c3ea5ba989caa95c366d5c53",
+ "questionStatus": "269cda9416e24cccccdc56abc2cb4c2ee218c3bb22d18627ada3022e4a8ba927",
  "summary": {
   "families": 1080,
   "readiness": {
@@ -18,10 +18,12 @@
   "grader": {
    "certified (sample)": 1080
   },
-  "quarantinedPresentations": 1012,
+  "quarantinedPresentations": 2070,
   "quarantineByReason": {
-   "contract-inconsistency": 971,
-   "invalid-question": 41
+   "ambiguous-question": 1058,
+   "pending-release-review": 951,
+   "invalid-question": 41,
+   "contract-inconsistency": 20
   },
   "note": "answer-key certification is exhaustive over typed questions; grading certification is sampled; neither verifies working, figures or most word wording"
  },
@@ -1958,8 +1960,10 @@
    },
    "working": "not verified (answer-only)",
    "quarantine": {
-    "quarantined": 0,
-    "reasons": {}
+    "quarantined": 192,
+    "reasons": {
+     "ambiguous-question": 192
+    }
    },
    "releaseReadiness": "hold: answer key: Discrepancy detected"
   },
@@ -3301,8 +3305,10 @@
    },
    "working": "not verified (answer-only)",
    "quarantine": {
-    "quarantined": 0,
-    "reasons": {}
+    "quarantined": 324,
+    "reasons": {
+     "ambiguous-question": 324
+    }
    },
    "releaseReadiness": "hold: answer key: Discrepancy detected"
   },
@@ -6615,7 +6621,7 @@
    "quarantine": {
     "quarantined": 360,
     "reasons": {
-     "contract-inconsistency": 360
+     "pending-release-review": 360
     }
    },
    "releaseReadiness": "ready except quarantined presentations"
@@ -15379,8 +15385,10 @@
    },
    "working": "not verified (answer-only)",
    "quarantine": {
-    "quarantined": 0,
-    "reasons": {}
+    "quarantined": 70,
+    "reasons": {
+     "ambiguous-question": 70
+    }
    },
    "releaseReadiness": "hold: answer key: Discrepancy detected; presentation defect (critical/medium) in register"
   },
@@ -16054,7 +16062,7 @@
    "quarantine": {
     "quarantined": 194,
     "reasons": {
-     "contract-inconsistency": 194
+     "pending-release-review": 194
     }
    },
    "releaseReadiness": "ready except quarantined presentations"
@@ -23938,8 +23946,10 @@
    },
    "working": "not verified (answer-only)",
    "quarantine": {
-    "quarantined": 0,
-    "reasons": {}
+    "quarantined": 100,
+    "reasons": {
+     "ambiguous-question": 100
+    }
    },
    "releaseReadiness": "hold: answer key: Discrepancy detected"
   },
@@ -25233,8 +25243,10 @@
    },
    "working": "not verified (answer-only)",
    "quarantine": {
-    "quarantined": 0,
-    "reasons": {}
+    "quarantined": 72,
+    "reasons": {
+     "ambiguous-question": 72
+    }
    },
    "releaseReadiness": "hold: answer key: Discrepancy detected; presentation defect (critical/medium) in register"
   },
@@ -26611,8 +26623,10 @@
    },
    "working": "not verified (answer-only)",
    "quarantine": {
-    "quarantined": 0,
-    "reasons": {}
+    "quarantined": 300,
+    "reasons": {
+     "ambiguous-question": 300
+    }
    },
    "releaseReadiness": "hold: answer key: Partially certified"
   },
@@ -40393,7 +40407,7 @@
    "quarantine": {
     "quarantined": 397,
     "reasons": {
-     "contract-inconsistency": 397
+     "pending-release-review": 397
     }
    },
    "releaseReadiness": "ready except quarantined presentations"

@@ -53409,7 +53409,7 @@
      }
     ]
    },
-   "fingerprint": "4f4638d5",
+   "fingerprint": "c24f6b26",
    "validation": {
     "family": "anncr",
     "deterministic": {
@@ -75727,7 +75727,7 @@
      }
     ]
    },
-   "fingerprint": "3c39066c",
+   "fingerprint": "ca59069c",
    "validation": {
     "family": "atgen",
     "deterministic": {
@@ -85121,7 +85121,7 @@
      }
     ]
    },
-   "fingerprint": "6a633830",
+   "fingerprint": "c766b5f4",
    "validation": {
     "family": "avfexp",
     "deterministic": {

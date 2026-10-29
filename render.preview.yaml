@@ -21,6 +21,9 @@ services:
         generateValue: true
       - key: DEMO_SESSION_HOURS
         value: "168"
+      # grading authority: shadow (approved) or legacy (rollback). start.sh refuses anything else, including unified.
+      - key: OPENPATH_GRADING
+        value: "shadow"
 # No database/resource declarations. Default SQLite contains synthetic preview data only and is ephemeral.
 # Optional PREVIEW_DATABASE_URL must identify an existing, dedicated SYNTHETIC preview PostgreSQL database.
 # Ordinary DATABASE_URL and model credentials are ignored/removed by this preview startup.

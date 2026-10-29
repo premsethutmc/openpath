@@ -136,5 +136,6 @@ class DryRunReadOnlyTests(LearningBase):
         with tempfile.NamedTemporaryFile(suffix='.json') as f:
             call_command('reconstruct_decisions', '--dry-run', '--pupil', self.pupil_id, '--out', f.name, stdout=io.StringIO())
             rep = json.load(open(f.name))
-        self.assertEqual(rep['readOnlyGuards'], {'session': 'sqlite', 'statementFilter': True, 'rollback': True})
+        from django.db import connection
+        self.assertEqual(rep['readOnlyGuards'], {'session': connection.vendor, 'statementFilter': True, 'rollback': True})   # sqlite or postgresql
         self.assertEqual((PupilEvent.objects.count(), GradingDecisionRecord.objects.count()), counts)

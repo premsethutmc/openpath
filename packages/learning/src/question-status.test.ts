@@ -26,10 +26,13 @@ const FAMS = [...new Set(Q.map((id) => id.split(":")[1]))];
 
 const LONG = 900_000;
 describe("registry", () => {
-  test("lists the 951 word-form presentations found by the audit (D09), the 20 aqd2 presentations whose stored answer the strict parser reads two ways (D18), and the 41 invalid aofclass questions (manual, PR #83 handoff)", () => {
-    expect(Q.length).toBe(1012);
-    expect(FAMS.sort()).toEqual(["adexp", "aiintx", "aofclass", "aqd2", "auaps"]);
-    expect(Q.filter((id) => !id.startsWith("gen:aqd2:") && !id.startsWith("gen:aofclass:")).every((id) => id.endsWith(":w"))).toBe(true);
+  test("lists the 951 word-form presentations found by the audit (D09, kept by owner decision 4), the 20 aqd2 presentations whose stored answer the strict parser reads two ways (D18), and the 41 invalid aofclass questions (manual, PR #83 handoff)", () => {
+    // + 1,058 presentations of 6 families that cannot be graded unambiguously (PR #83 register, reviewed 2026-10-29)
+    expect(Q.length).toBe(1012 + 1058);
+    expect(FAMS.sort()).toEqual(["aasolid", "abmeas", "adexp", "aiconvex", "aiintx", "amcrit", "amsimc", "anquad", "aofclass", "aqd2", "auaps"]);
+    expect(Q.filter((id) => ["adexp", "aiintx", "auaps"].includes(id.split(":")[1])).every((id) => id.endsWith(":w"))).toBe(true);
+    expect(Q.filter((id) => ["adexp", "aiintx", "auaps"].includes(id.split(":")[1])).length).toBe(951);
+    expect(Q.filter((id) => statusEntry(id)!.reason === "ambiguous-question").length).toBe(1058);
     expect(Q.filter((id) => id.startsWith("gen:aqd2:")).length).toBe(20);
     expect(Q.filter((id) => id.startsWith("gen:aofclass:")).map((id) => statusEntry(id)!.reason)).toEqual(Array(41).fill("invalid-question"));
   }, LONG);

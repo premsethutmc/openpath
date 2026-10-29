@@ -3,13 +3,19 @@ import { readFileSync } from "node:fs";
 import { FAMILIES, pool, problemOf } from "./families.ts";
 import { contractFor } from "./assessment.ts";
 import { decide } from "./grade.ts";
+import { quarantined } from "./question-status.ts";
 import { submissions } from "../../../tools/mathematics/grading-audit/oracle.ts";
 
 const corpus = JSON.parse(readFileSync(new URL("../../../tools/mathematics/grading-audit/data/regression-corpus.json", import.meta.url), "utf8")) as { id: string; defect: string; response: string; expect: boolean | null }[];
 describe("grading audit: permanent regression corpus (every confirmed grading defect)", () => {
   test("each confirmed defect stays fixed", () => {
     expect(corpus.length).toBeGreaterThan(0);
-    for (const c of corpus) expect(decide(c.id, c.response).credit, `${c.defect} ${c.id} "${c.response}"`).toBe(c.expect);
+    // merged into staging/unified-grading-shadow: a presentation quarantined by the owner (decision 4, D09; or the release review) gets no
+    // verdict, whatever the corpus expected; its contract repair (G1: no longer held) is still checked
+    for (const c of corpus) {
+      if (quarantined(c.id)) { expect(decide(c.id, c.response).credit, `${c.defect} ${c.id} quarantined`).toBe(null); expect(contractFor(c.id)!.verification).not.toBe("held"); continue; }
+      expect(decide(c.id, c.response).credit, `${c.defect} ${c.id} "${c.response}"`).toBe(c.expect);
+    }
   });
   test("no contract family is held in any presentation (typed, multiple choice, word) for a sample of its pool", () => {
     for (const [fam, d] of FAMILIES) {
