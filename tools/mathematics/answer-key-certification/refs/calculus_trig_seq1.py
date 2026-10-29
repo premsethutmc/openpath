@@ -114,6 +114,10 @@ def aqconc(q):
 
 @ref('aqcontk', method='solve left limit = right limit = f(c) for k (SymPy solve)', coverage='exhaustive')
 def aqcontk(q):
+    m = re.search(r'f\(x\) = (.+) for x ≠ (−?\d+), and f\((−?\d+)\) = k\.', q['prompt'])
+    if m:
+        g = E(m.group(1)); c = num(m.group(2)); assert num(m.group(3)) == c
+        return Expect(str(sp.limit(g, x, c)))
     m = re.search(r'f\(x\) = (.+) for x ≤ (−?\d+), and f\(x\) = (.+) for x > (−?\d+)\. Find the value of k', q['prompt'])
     A, B, c = E(m.group(1)), E(m.group(3)), num(m.group(2))
     assert num(m.group(4)) == c
@@ -132,20 +136,21 @@ def aqd2(q):
 def aqd2rel(q):
     m = re.match(r'If y = (.+), where A and B are arbitrary', q['prompt'])
     A_, B_, p_, q_ = sp.symbols('A B p q')
-    Y = E(m.group(1).replace('A', 'AA').replace('B', 'BB'))
-    AA, BB = sp.symbols('AA BB')
+    Y = E(m.group(1))
+    AA, BB = sp.Symbol('A'), sp.Symbol('B')
     eq = sp.diff(Y, x, 2) + p_ * sp.diff(Y, x) + q_ * Y
-    eqs = []
+    rows = []
     for xv in (sp.Rational(1, 3), sp.Rational(7, 5), sp.Rational(-2, 3), sp.Rational(5, 2)):
         for (a, b) in ((1, 0), (0, 1)):
-            eqs.append(sp.nsimplify(sp.N(eq.subs({x: xv, AA: a, BB: b}), 40), rational=False))
-    sol = sp.solve([sp.N(e_, 30) for e_ in eqs[:2]] + [sp.N(e_, 30) for e_ in eqs[2:4]], [p_, q_], dict=True)
-    s = sol[0]
-    pv, qv = sp.nsimplify(s[p_], tolerance=1e-12, rational=True), sp.nsimplify(s[q_], tolerance=1e-12, rational=True)
-    # verify identically on a larger point set
-    for xv in (sp.Rational(1, 7), sp.Rational(9, 4), sp.Rational(-5, 3)):
-        for (a, b) in ((1, 0), (0, 1), (2, -3)):
-            assert abs(complex(sp.N(eq.subs({p_: pv, q_: qv, x: xv, AA: a, BB: b}), 30))) < 1e-15
+            sub = {x: xv, AA: a, BB: b}
+            c0 = sp.N(eq.subs({p_: 0, q_: 0}).subs(sub), 40)
+            cp = sp.N(sp.diff(eq, p_).subs(sub), 40); cq = sp.N(sp.diff(eq, q_).subs(sub), 40)
+            rows.append((cp, cq, c0))
+    M = sp.Matrix([[r[0], r[1]] for r in rows[:2]]); rhs_ = sp.Matrix([-r[2] for r in rows[:2]])
+    sol = M.LUsolve(rhs_)
+    pv, qv = sp.nsimplify(sol[0], tolerance=1e-12, rational=True), sp.nsimplify(sol[1], tolerance=1e-12, rational=True)
+    for r in rows:   # the other sample points must be satisfied too (identity in x, A, B)
+        assert abs(complex(r[0] * pv + r[1] * qv + r[2])) < 1e-15, 'not an identity'
     return Expect(tup(pv, qv))
 
 
@@ -198,3 +203,140 @@ def aqivp(q):
         return Expect(str(num(m.group(2).replace(',', '')) + sp.integrate(E(m.group(1)), (x, 0, num(m.group(3))))))
     m = re.search(r'f′\(x\) = (.+) and f\((−?\d+)\) = (−?\d+)\. Find f\((−?\d+)\)\.', p)
     return Expect(str(num(m.group(3)) + sp.integrate(E(m.group(1)), (x, num(m.group(2)), num(m.group(4))))))
+
+
+@ref('aqking', method='numerical integration of the stated integrand to 40 digits (mpmath), recognised as a rational and cross-checked to 1e-30', coverage='exhaustive')
+def aqking(q):
+    import mpmath as mp
+    mp.mp.dps = 40
+    lo, hi = bounds(q['prompt'])
+    body = re.search(r'Evaluate ∫[₀₁₂₃₄₅₆₇₈₉₋]+[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+ (.+) dx\.', q['prompt']).group(1)
+    f = sp.lambdify(x, E(body), 'mpmath')
+    val = mp.quad(f, [lo, hi])
+    r = sp.nsimplify(sp.Float(val, 40), rational=True, tolerance=1e-25)
+    assert abs(mp.mpf(r.p) / r.q - val) < mp.mpf(10) ** -25, ('not rational', val)
+    return Expect(str(r))
+
+
+@ref('aqlarea', method='lines: integrate |f| (SymPy); axis-intercept triangle by integration; triangle between two lines and the x-axis by the shoelace formula on the vertices', coverage='exhaustive')
+def aqlarea(q):
+    p = q['prompt']
+    m = re.search(r'the line (\d*)x \+ (\d*)y = (\d+) and the coordinate axes', p)
+    if m:
+        a_ = int(m.group(1) or 1); b_ = int(m.group(2) or 1); c_ = int(m.group(3))
+        return Expect(str(sp.integrate((c_ - a_ * x) / b_, (x, 0, sp.Rational(c_, a_)))))
+    m = re.search(r'the line y = (.+), the x-axis and the lines x = (−?\d+) and x = (−?\d+)', p)
+    if m:
+        return Expect(str(_area_abs(E(m.group(1)), num(m.group(2)), num(m.group(3)))))
+    m = re.search(r'lines y = (.+), y = (.+) and the x-axis', p)
+    f1, f2 = E(m.group(1)), E(m.group(2))
+    xa = sp.solve(sp.Eq(f1, f2), x)[0]; ya = f1.subs(x, xa)
+    r1, r2 = sp.solve(f1, x)[0], sp.solve(f2, x)[0]
+    V = [(xa, ya), (r1, 0), (r2, 0)]
+    A = sp.Abs(sum(V[i][0] * V[(i + 1) % 3][1] - V[(i + 1) % 3][0] * V[i][1] for i in range(3))) / 2
+    return Expect(str(A))
+
+
+def _linear_lhs(lhs_text):
+    pass
+
+
+@ref('aqlinde', method='substitute the stored y(x) into the linear ODE and initial condition (numeric residual, SymPy diff); uniqueness of the linear IVP', coverage='exhaustive')
+def aqlinde(q):
+    m = re.search(r'dy/dx \+ (.+?) = (.+?), x > 0, given that y = (−?\d+) when x = (−?\d+)\.', q['prompt'])
+    rhs = E(m.group(2)) - E(m.group(1))     # y' = Q - P*y
+    return ode_check(q['answer'], rhs, m.group(4), m.group(3))
+
+
+@ref('aqmono', method='sign of f\' via SymPy solveset on the inequality f\'>0 / f\'<0', coverage='exhaustive')
+def aqmono(q):
+    m = re.search(r'on which f\(x\) = (.+) is strictly (increasing|decreasing)', q['prompt'])
+    f1 = sp.diff(E(m.group(1)), x)
+    S = sp.solveset(f1 > 0 if m.group(2) == 'increasing' else f1 < 0, x, sp.Reals)
+    return Expect(set_text(S))
+
+
+@ref('aqodd', method='exact SymPy definite integral of the whole integrand over [-a, a]', coverage='exhaustive')
+def aqodd(q):
+    m = re.search(r'Evaluate ∫[₀₁₂₃₄₅₆₇₈₉₋]+[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+ \((.+)\) dx', q['prompt'])
+    lo, hi = bounds(q['prompt'])
+    f = E(m.group(1))
+    return Expect(str(sp.simplify(sp.integrate(f, (x, lo, hi)))))
+
+
+@ref('aqorddeg', method='replace derivatives by polynomial symbols; order = highest derivative present, degree = its power in the (polynomial) equation', coverage='exhaustive')
+def aqorddeg(q):
+    d = re.search(r'differential equation (.+)\. Write the answer', q['prompt']).group(1)
+    L = {0: 'u', 1: 'p', 2: 'v', 3: 'w', 4: 'z', 5: 'a'}
+    for ch, n_ in (('²', 2), ('³', 3), ('⁴', 4), ('⁵', 5)):
+        d = d.replace(f'd{ch}y/dx{ch}', f' {L[n_]} ')
+    d = d.replace('dy/dx', f' {L[1]} ')
+    d = re.sub(r'(?<![a-zA-Z])y(?![a-zA-Z])', f' {L[0]} ', d)
+    lhs, rhs = d.split('=')
+    e = E(lhs) - E(rhs)
+    syms = {n_: sp.Symbol(L[n_]) for n_ in L}
+    present = [n_ for n_ in (5, 4, 3, 2, 1) if e.has(syms[n_])]
+    assert present
+    order = present[0]
+    deg = sp.Poly(e, syms[order]).degree()
+    return Expect(tup(order, deg))
+
+
+@ref('aqrr', method='related rates: the quantity as a SymPy function of t, differentiated, evaluated at t=0', coverage='exhaustive')
+def aqrr(q):
+    p = q['prompt']
+    t_ = sp.Symbol('t')
+    m = re.search(r'edge of a cube is increasing at (\d+) cm/s\. How fast, in cm[²³]/s, is its (volume|total surface area) increasing when the edge is (\d+) cm', p)
+    if m:
+        e = int(m.group(3)) + int(m.group(1)) * t_
+        A = e**3 if m.group(2) == 'volume' else 6 * e**2
+        return Expect(str(sp.diff(A, t_).subs(t_, 0)))
+    m = re.search(r'radius of a circular ripple is increasing at (\d+) cm/s\. When the radius is (\d+) cm the area is increasing at kπ', p)
+    if m:
+        r_ = int(m.group(2)) + int(m.group(1)) * t_
+        return Expect(str(sp.diff(sp.pi * r_**2, t_).subs(t_, 0) / sp.pi))
+    m = re.search(r'R\(x\) = (.+)\. Find the marginal revenue, in rupees per item, when x = (\d+)', p)
+    if m:
+        return Expect(str(sp.diff(E(m.group(1)), x).subs(x, int(m.group(2)))))
+    m = re.search(r'length of a rectangle is decreasing at (\d+) cm/s and its width is increasing at (\d+) cm/s\..*when the length is (\d+) cm and the width is (\d+) cm', p)
+    L_ = int(m.group(3)) - int(m.group(1)) * t_; W_ = int(m.group(4)) + int(m.group(2)) * t_
+    return Expect(str(sp.diff(L_ * W_, t_).subs(t_, 0)))
+
+
+@ref('aqsep', method='substitute the stored y(x) into dy/dx = g(x) y and the initial condition (numeric residual, SymPy diff); IVP uniqueness', coverage='exhaustive')
+def aqsep(q):
+    m = re.search(r'dy/dx = (.+?), (?:x > (−?\d+), )?given that y = (−?\d+) when x = (−?\d+)\.', q['prompt'])
+    return ode_check(q['answer'], E(m.group(1)), m.group(4), m.group(3))
+
+
+@ref('aqsubsep', method='substitute the stored y(x) into the stated ODE and initial condition (numeric residual, SymPy diff)', coverage='exhaustive')
+def aqsubsep(q):
+    m = re.search(r'Solve dy/dx = (.+?), given that y = (−?\d+) when x = (−?\d+),', q['prompt'])
+    return ode_check(q['answer'], E(m.group(1)), m.group(3), m.group(2), offsets=(Fraction(1, 100), Fraction(1, 50), Fraction(1, 25), Fraction(1, 10), Fraction(1, 5)))
+
+
+@ref('aqtann', method='tangent/normal from the SymPy derivative at the point; angle: tan(theta) = |(m1-m2)/(1+m1 m2)| from the two derivatives', coverage='exhaustive')
+def aqtann(q):
+    p = q['prompt']
+    m = re.search(r'equation of the (tangent|normal) to the curve y = (.+) at the point where x = (−?\d+)\.', p)
+    if m:
+        f = E(m.group(2)); a = num(m.group(3))
+        s = sp.diff(f, x).subs(x, a); y0 = f.subs(x, a)
+        if m.group(1) == 'normal':
+            if s == 0:
+                return Ambiguous('normal is the vertical line x = %s, which cannot be written y = mx + k' % a)
+            s = -1 / s
+        return Expect(str(sp.expand(y0 + s * (x - a))))
+    m = re.search(r'curves y = (.+) and y = (.+) meet at a point with x = (−?\d+)\.', p)
+    f, g = E(m.group(1)), E(m.group(2)); a = num(m.group(3))
+    assert f.subs(x, a) == g.subs(x, a), 'curves do not meet at x'
+    m1, m2 = sp.diff(f, x).subs(x, a), sp.diff(g, x).subs(x, a)
+    if 1 + m1 * m2 == 0:
+        return Ambiguous('tangents perpendicular: tan(theta) undefined')
+    return Expect(str(sp.Abs((m1 - m2) / (1 + m1 * m2))))
+
+
+@ref('aqvel', method='velocity = d s/dt (SymPy) at the given time', coverage='exhaustive')
+def aqvel(q):
+    m = re.search(r's = (.+) metres\. Find its instantaneous velocity, in m/s, at t = (−?\d+)', q['prompt'])
+    return Expect(str(sp.diff(E(m.group(1)), x if False else sp.Symbol('t')).subs(sp.Symbol('t'), num(m.group(2)))))

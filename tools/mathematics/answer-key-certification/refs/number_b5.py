@@ -135,10 +135,22 @@ def aksqf(q):
 def parse_num(s):
     """items of amclass; returns sympy number"""
     s = s.strip().replace(M, '-')
+    if s == 'π':
+        return sp.pi
+    if '(one more' in s:
+        return sp.Symbol('nonrepeating', irrational=True)
+    m = re.fullmatch(r'(\d+)\.(\d+)…', s)
+    if m:
+        d = m[2]
+        for L in range(1, len(d) + 1):
+            if all(d[i] == d[i % L] for i in range(len(d))):
+                break
+        return sp.Rational(int(m[1])) + sp.Rational(int(d[:L]), 10 ** L - 1) / 10 ** 0 if False else sp.Rational(int(m[1])) + sp.Rational(int(d[:L]), 10 ** L - 1)
+    s = re.sub(r'(?<![\w.])(\d+\.\d+)(?![\w.])', lambda m: f"Rational('{m[1]}')", s)
     s = re.sub(r'√\(([^)]*)\)', r'sqrt(\1)', s)
     s = re.sub(r'√(\d+)', r'sqrt(\1)', s)
     s = re.sub(r'(\d)sqrt', r'\1*sqrt', s)
-    s = re.sub(r'(?<![\d.])(\d+)/(\d+)', r'Rational(\1,\2)', s)
+    s = re.sub(r'(?<![\d.\'])(\d+)/(\d+)', r'Rational(\1,\2)', s)
     return sp.sympify(s, locals={'Rational': sp.Rational})
 
 
@@ -167,7 +179,7 @@ def amclass(q):
 
 @ref('amcyc', 'exact long-division digit: floor(k*10^N/d) mod 10 in integers')
 def amcyc(q):
-    m = re.search(r'what is the (\d+)(?:st|nd|rd|th) digit after the decimal point of (\d+)/(\d+)\?', q['prompt'])
+    m = re.search(r'what is the (\d+)(?:st|nd|rd|th) digit after the decimal point of (\d+)/(\d+)\?', q['prompt'], re.I)
     N, k, d = int(m[1]), int(m[2]), int(m[3])
     return Expect(str(k * 10 ** N // d % 10))
 
@@ -203,9 +215,10 @@ def strip_dec(s):
 @ref('amrec', 'geometric-series sum of the repeating block, verified by long-division expansion matching the displayed decimal')
 def amrec(q):
     p = q['prompt']
-    m = re.match(r'Write 0\.(\d+)… \((.*)\) as a fraction p/q', p)
-    digs = m[1]
-    desc = m[2]
+    m = re.match(r'Write (\d+)\.(\d+)… \((.*)\) as a fraction p/q', p)
+    ip = int(m[1])
+    digs = m[2]
+    desc = m[3]
     if desc.startswith('the digit') or desc.startswith('the block'):
         rep = re.search(r'(?:digit|block) (\d+) repeats', desc)[1]
         pre = ''
@@ -215,9 +228,9 @@ def amrec(q):
         pre = digs[:len(digs) - len(rep)] if digs.endswith(rep) else None
         pre = digs[:digs.index(rep)] if False else digs[:len(digs) - len(rep)]
     k, L = len(pre), len(rep)
-    v = (F(int(pre)) / 10 ** k if pre else F(0)) + F(int(rep), 10 ** k * (10 ** L - 1))
+    v = ip + (F(int(pre)) / 10 ** k if pre else F(0)) + F(int(rep), 10 ** k * (10 ** L - 1))
     # verify: expansion of v matches the shown digits
-    s, r = '', v
+    s, r = '', v - ip
     for _ in range(len(digs)):
         r *= 10
         s += str(int(r))

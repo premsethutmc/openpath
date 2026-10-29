@@ -53,7 +53,9 @@ def akdice(q):
     a, b = spinner_ranges(p)
     # the statement of ranges is repeated in "from 1 to a ... from 1 to b"; cross-check
     rr = [int(x) for x in re.findall(r'from 1 to (\d+)', p)]
-    if rr and rr != [a, b] and not (len(rr) == 2 and rr == [a, b]):
+    if len(rr) == 1:
+        rr = [rr[0], rr[0]]
+    if rr != [a, b]:
         return Verdict(False, 'ranges disagree %r vs %r' % (rr, [a, b]))
     pairs = list(itertools.product(range(1, a + 1), range(1, b + 1)))
     s = last_q(p)

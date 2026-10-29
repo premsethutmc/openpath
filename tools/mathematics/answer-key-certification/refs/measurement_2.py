@@ -57,7 +57,7 @@ def accal(q):
             pos = pos % 12 + 1
         return Expect(str(pos))
     if 'add up to' in p:
-        s = ints(p)[1]
+        s = ints(p)[-1]
         return Expect(str(Fraction(s, 9))) if s % 9 == 0 else Ambiguous('sum not divisible by 9')
     g = q['figure']['rows']
     for i in range(3):
@@ -108,21 +108,14 @@ def acelhm(q):
     n = ints(p)
     if 'ends at' in p:
         h1, m1, h2, m2 = n[:4]
-        d = (h2 * 60 + m2) - (h1 * 60 + m1)
+        d = ((h2 % 12) * 60 + m2) - ((h1 % 12) * 60 + m1)  # both p.m.: the 12 o'clock hour is the earliest
         return Expect(f'({d // 60}, {d % 60})') if d > 0 else Ambiguous('non-positive span')
     h1, m1, dh, dm = n[:4]
-    t = h1 * 60 + m1 + dh * 60 + dm
-    h = t // 60
-    if h > 12:
-        h -= 12
-    if t // 60 >= 12 and t // 60 != 12 and t // 60 > 12 and t >= 12 * 60 + 60 and False:
-        pass
-    if t >= 13 * 60 and t < 24 * 60:
-        pass
-    # still p.m. only while the 24-hour reading is 12:00..23:59
-    if t < 12 * 60 or t >= 24 * 60:
-        return Ambiguous('end time would not be p.m.')
-    return Expect(f'({h}, {t % 60})')
+    t = ((h1 % 12) + 12) * 60 + m1 + dh * 60 + dm  # minutes since midnight, start is p.m.
+    if t >= 24 * 60:
+        return Ambiguous('end time is after midnight, not p.m.')
+    h = t // 60 - 12
+    return Expect(f'({h or 12}, {t % 60})')
 
 
 @ref('acmcm', 'metre/centimetre conversion by integer arithmetic', 'exhaustive')
@@ -291,7 +284,10 @@ def adperim(q):
     L = q['figure']['lengths']
     if len(L) != shape_sides(q['prompt']):
         return Verdict(False, 'number of sides drawn differs from statement')
-    return Expect(str(sum(ints(x)[0] for x in L)))
+    sides = [ints(x)[0] for x in L]
+    if max(sides) * 2 >= sum(sides):
+        return Verdict(False, f'impossible polygon: longest side {max(sides)} >= sum of the others')
+    return Expect(str(sum(sides)))
 
 
 @ref('admper', 'perimeter minus the sum of the known sides', 'exhaustive')
@@ -301,7 +297,12 @@ def admper(q):
     if len(L) != shape_sides(q['prompt']) or sum(1 for x in L if x == '?') != 1:
         return Verdict(False, 'figure does not match the statement (side count / one ? side)')
     r = P - sum(ints(x)[0] for x in L if x != '?')
-    return Expect(str(r)) if r > 0 else Ambiguous('non-positive side')
+    if r <= 0:
+        return Ambiguous('non-positive side')
+    sides = [ints(x)[0] for x in L if x != '?'] + [r]
+    if max(sides) * 2 >= sum(sides):
+        return Verdict(False, f'impossible polygon: longest side {max(sides)} >= sum of the others')
+    return Expect(str(r))
 
 
 @ref('adpreg', 'regular polygon: n equal sides; perimeter = n x side, side = perimeter / n', 'exhaustive')

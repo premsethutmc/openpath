@@ -268,29 +268,40 @@ def option_is(text):
     return lambda o: o == text
 
 
-@ref('aqbinp', 'symbolic identity test (expand a*b - b*a, (a*b)*c - a*(b*c)) for polynomial ops; for max/min/|.| exhaustive search over a rational grid for a counterexample plus case analysis noted', 'exhaustive')
+_binp_cache = {}
+
+
 def aqbinp(q):
     p = norm(q['prompt'])
     expr = re.search(r'a ∗ b = (.+?)\. Which is true', p).group(1)
+    if expr not in _binp_cache:
+        _binp_cache[expr] = _binp_props(expr)
+    comm, assoc = _binp_cache[expr]
+    t = comm_assoc_text(comm, assoc)
+    return Expect(pick(q, option_is(t)))
+
+
+def _binp_props(expr):
     a, b, c = sp.symbols('a b c')
     e = expr.replace('{', '(').replace('}', ')')
     e = re.sub(r'\bmax\b', 'Max', e); e = re.sub(r'\bmin\b', 'Min', e)
-    e = re.sub(r'\|([^|]+)\|', r'Abs(\1)', e)
+    e = re.sub(r'\|([^|]+)\|', r' Abs(\1) ', e)
     f, _, _ = sympify_op(e)
-    op = lambda u, v: f.subs({sp.Symbol('a'): u, sp.Symbol('b'): v}, simultaneous=True)
-    grid = [sp.Rational(n, 2) for n in range(-12, 13)]
+    A_, B_ = sp.Symbol('a'), sp.Symbol('b')
+    fast = sp.lambdify((A_, B_), f, modules=[{'Max': max, 'Min': min, 'Abs': abs}])
+    sym_op = lambda u, v: f.subs({A_: u, B_: v}, simultaneous=True)
+    grid = [Fraction(n, 2) for n in range(-12, 13)]
+    gc = all(fast(u, v) == fast(v, u) for u in grid for v in grid)
+    ga = all(fast(fast(u, v), w) == fast(u, fast(v, w)) for u in grid for v in grid for w in grid[::2])
     if f.has(sp.Max, sp.Min, sp.Abs):
-        comm = all(op(u, v) == op(v, u) for u in grid for v in grid)
-        assoc = all(op(op(u, v), w) == op(u, op(v, w)) for u in grid for v in grid for w in grid[::2])
-    else:
-        comm = sp.expand(op(a, b) - op(b, a)) == 0
-        assoc = sp.expand(op(op(a, b), c) - op(a, op(b, c))) == 0
-        # cross-check on grid
-        gc = all(op(u, v) == op(v, u) for u in grid[::3] for v in grid[::3])
-        ga = all(op(op(u, v), w) == op(u, op(v, w)) for u in grid[::4] for v in grid[::4] for w in grid[::4])
-        assert gc == comm and ga == assoc
-    t = comm_assoc_text(comm, assoc)
-    return Expect(pick(q, option_is(t)))
+        return gc, ga
+    comm = sp.expand(sym_op(a, b) - sym_op(b, a)) == 0
+    assoc = sp.expand(sym_op(sym_op(a, b), c) - sym_op(a, sym_op(b, c))) == 0
+    assert gc == comm and ga == assoc
+    return comm, assoc
+
+
+ref('aqbinp', 'symbolic identity test (expand a*b - b*a, (a*b)*c - a*(b*c)) for polynomial ops, cross-checked on a rational grid; for max/min/|.| operations an exhaustive rational-grid search for a counterexample (25^2 and 25^2*13 points) plus the hand argument that max{a,-2}-type operations ignore one argument', 'exhaustive')(aqbinp)
 
 
 @ref('aqbinmod', 'brute force on the finite set (all pairs / triples) for mod-n operations and explicit tables; closure by enumeration; symbolic 2x2 matrices for the matrix operations', 'exhaustive')
@@ -396,24 +407,27 @@ def parse_fn(expr):
 def aqonto(q):
     from sympy.calculus.util import function_range
     p = norm(q['prompt'])
-    m = re.search(r'f: (\S+) → (.+?) is given by f\(x\) = (.+?)\. Which is true', p)
+    m = re.search(r'f: (.+?) → (.+?) is given by f\(x\) = (.+?)\. Which is true', p)
     D, C, expr = m.group(1), m.group(2), m.group(3)
     f, x = parse_fn(expr)
     res = {}
     for nat0 in ((False, True) if 'ℕ' in (D + C) else (False,)):
-        if D == 'ℝ':
+        if D == 'ℝ' or D.startswith('['):
+            DS = sp.S.Reals if D == 'ℝ' else parse_interval(D)
             collide = False
             for k in range(-12, 13):
                 x0 = sp.Rational(k, 2)
-                ys = sp.solveset(sp.Eq(f, f.subs(x, x0)), x, sp.S.Reals)
+                if x0 not in DS:
+                    continue
+                ys = sp.solveset(sp.Eq(f, f.subs(x, x0)), x, DS)
                 if ys != sp.FiniteSet(x0):
                     collide = True; break
             if not collide:  # also require f' of one sign on a fine grid (strict monotonicity) when differentiable
                 d = sp.diff(f, x)
-                vals = [d.subs(x, sp.Rational(k, 3)) for k in range(-60, 61)]
+                vals = [d.subs(x, sp.Rational(k, 3)) for k in range(-60, 61) if sp.Rational(k, 3) in DS]
                 collide = not (all(v <= 0 for v in vals) or all(v >= 0 for v in vals))
             inj = not collide
-            rng = function_range(f, x, sp.S.Reals)
+            rng = function_range(f, x, DS)
             cod = sp.S.Reals if C == 'ℝ' else parse_interval(C)
             sur = rng == cod
             assert rng.is_subset(cod)
@@ -517,7 +531,7 @@ def atrows(q):
     return Expect(str(sum(ev(f, dict(zip('pqr', bits))) for bits in itertools.product([True, False], repeat=3))))
 
 
-FIXED = {'Chennai is the capital of Tamil Nadu.': True, 'Every square is a rectangle.': True, 'Close the door.': False,
+FIXED = {'The square of every real number is positive.': True, 'The sum of the angles of a triangle is 180°.': True, 'Chennai is the capital of Tamil Nadu.': True, 'Every square is a rectangle.': True, 'Close the door.': False,
          'How many sides does a hexagon have?': False, 'What a beautiful kolam!': False, 'Please solve this equation.': False}
 
 

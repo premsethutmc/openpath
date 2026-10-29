@@ -89,3 +89,46 @@ def builder_to_pred(cond):
     c = re.sub(r'(?<![\w)*])(\d+)x', r'\1*x', c)
     c = re.sub(r'(?<![<>=!])=(?!=)', '==', c)
     return eval('lambda x: (' + c + ')', {'isprime': isprime})
+
+
+def un(s):
+    """sympy/ASCII text -> notation of the exported answers (unicode minus)"""
+    return str(s).replace('-', '−') if False else str(s)
+
+
+def iv_text(S, var=None):
+    """sympy Set (of reals) -> interval notation text; or inequality text in `var` if given"""
+    import sympy as sp
+    def num_(v):
+        return str(v).replace('-', '−')
+    def one(I):
+        if I.is_FiniteSet:
+            return '{' + ', '.join(num_(v) for v in sorted(I.args)) + '}'
+        l = '−∞' if I.start == -sp.oo else num_(I.start)
+        r = '∞' if I.end == sp.oo else num_(I.end)
+        lb = '(' if (I.left_open or I.start == -sp.oo) else '['
+        rb = ')' if (I.right_open or I.end == sp.oo) else ']'
+        return f'{lb}{l}, {r}{rb}'
+    if isinstance(S, sp.Union):
+        return ' ∪ '.join(one(a) if not a.is_FiniteSet else one(a) for a in sorted(S.args, key=lambda a: a.inf if not a.is_FiniteSet else min(a.args)))
+    if S == sp.S.Reals:
+        return '(−∞, ∞)'
+    if S == sp.S.EmptySet:
+        return '∅'
+    return one(S)
+
+
+def ineq_text(S, var='k'):
+    import sympy as sp
+    def num_(v): return str(v).replace('-', '−')
+    def one(I):
+        if I.start == -sp.oo:
+            return f'{var} {"<" if I.right_open else "≤"} {num_(I.end)}'
+        if I.end == sp.oo:
+            return f'{var} {">" if I.left_open else "≥"} {num_(I.start)}'
+        return f'{num_(I.start)} {"<" if I.left_open else "≤"} {var} {"<" if I.right_open else "≤"} {num_(I.end)}'
+    if isinstance(S, sp.Union):
+        return ' or '.join(one(a) for a in sorted(S.args, key=lambda a: a.inf))
+    if S == sp.S.Reals:
+        return f'all real {var}'
+    return one(S)

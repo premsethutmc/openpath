@@ -310,7 +310,11 @@ def aeineqz(q):
         m = re.search(r'from (-?\d+) to (-?\d+)', p)
         dom = range(int(m.group(1)), int(m.group(2)) + 1)
     ineq = re.search(r'Solve (.+?) and list', p).group(1)
-    sol = [v for v in dom if member(ineq, Fr(v))]
+    a_, b_, op_ = ineq_ab(ineq)
+    test = {'<': lambda t: t < 0, '<=': lambda t: t <= 0, '>': lambda t: t > 0, '>=': lambda t: t >= 0}[op_]
+    sol = [v for v in dom if test(a_ * v + b_)]
+    for v in (dom[0], dom[-1], 0):
+        assert (v in sol) == member(ineq, Fr(v))
     if dom[-1] in sol and dom[-1] == 399:
         return Verdict(False, 'infinite solution set')
     if not sol:

@@ -247,9 +247,9 @@ def _expand_box(prompt):
 
 def _box(q, lhs_src, eq_src):
     """solve for the box by comparing polynomial coefficients"""
-    k = sp.Symbol('kbox')
+    k = sp.Symbol('k')
     lhs = ex(lhs_src)
-    rhs = ex(eq_src.replace('□', 'kbox'))
+    rhs = ex(eq_src.replace('□', 'k'))
     gens = sorted((lhs.free_symbols | rhs.free_symbols) - {k}, key=lambda s: s.name)
     diff = sp.expand(lhs - rhs)
     P = sp.Poly(diff, *gens)
@@ -262,17 +262,21 @@ def _box(q, lhs_src, eq_src):
     return good
 
 
+def _box_sentence(q):
+    sents = [t for t in re.split(r'(?<=[\)\dxyz²³])\. ', U(q['prompt'])) if '□' in t and ' = ' in t]
+    if len(sents) != 1:
+        return None
+    t = sents[0].rstrip('.')
+    t = t.split(' What number')[0].rstrip('. ')
+    return t.split(' = ', 1)
+
+
 @ref('ahcube', 'box found by comparing coefficients of the SymPy-expanded polynomial with the statement equation', 'exhaustive')
 def ahcube(q):
-    p = U(q['prompt'])
-    m = re.match(r'Expand (.+?) using .*?\. (.+?)\. What number goes in the box', p)
-    if not m:
-        m = re.match(r'(?:Use .*? to )?[Ee]xpand (.+?)\. (.+?)\. What number', p)
-    if not m:
-        return Unsupported('template not recognised: ' + p[:80])
-    lhs, eq = m.group(1), m.group(2)
-    lhs_expr, rhs_src = eq.split(' = ', 1)
-    good = _box(q, lhs_expr, rhs_src)
+    pr = _box_sentence(q)
+    if not pr:
+        return Unsupported('template not recognised: ' + q['prompt'][:80])
+    good = _box(q, pr[0], pr[1])
     if len(good) != 1:
         return Ambiguous(f'box solutions {good}')
     return Expect(str(good[0]))
@@ -280,12 +284,10 @@ def ahcube(q):
 
 @ref('ahid', 'box found by comparing coefficients of the SymPy-expanded polynomial with the statement equation', 'exhaustive')
 def ahid(q):
-    p = U(q['prompt'])
-    m = re.search(r'\. (\([^.]*?\)\S*(?: [^.]*?)? = [^.]*□[^.]*)\. What number goes', p)
-    if not m:
-        return Unsupported('template not recognised: ' + p[:90])
-    lhs_expr, rhs_src = m.group(1).split(' = ', 1)
-    good = _box(q, lhs_expr, rhs_src)
+    pr = _box_sentence(q)
+    if not pr:
+        return Unsupported('template not recognised: ' + q['prompt'][:80])
+    good = _box(q, pr[0], pr[1])
     if len(good) != 1:
         return Ambiguous(f'box solutions {good}')
     return Expect(str(good[0]))
@@ -297,9 +299,9 @@ def ajfcub(q):
     m = re.search(r'factorise: (.+?) = (.+?)\. What number', p)
     if not m:
         return Unsupported('template not recognised')
-    k = sp.Symbol('kbox')
+    k = sp.Symbol('k')
     lhs = ex(m.group(1))
-    rhs = ex(m.group(2).replace('□', 'kbox'))
+    rhs = ex(m.group(2).replace('□', 'k'))
     diff = sp.expand(lhs - rhs)
     gens = sorted(diff.free_symbols - {k}, key=lambda s: s.name)
     sols = set()
