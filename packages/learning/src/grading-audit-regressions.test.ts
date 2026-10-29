@@ -23,7 +23,12 @@ describe("controls (must stay true today and after every fix)", () => {
   for (const [id, r, want] of controls) test(`${id} ${JSON.stringify(r)} -> ${want}`, () => expect(client(id, r)).toBe(want));
 });
 
-describe("open defects (flip test.failing -> test when fixed)", () => {
+describe("fixed defects (Phase C)", () => {
+  // D09 symptom fixed in stage 1 (approved policy 4): a held/quarantined question is not selectable and receives no verdict on any route
+  test("D09 a quarantined :w question gets no verdict from the app or the server grader", () => { expect(client("gen:adexp:9,8,5,7:w", "9857")).toBe(null); expect(server("gen:adexp:9,8,5,7:w", "9857")).toBe(null); });
+});
+
+describe("defects (test = fixed in Phase C; test.failing = still open, flip when fixed)", () => {
   // D02 malformed text credited by the kernel answer readers: a trailing operator is dropped, and spaces are deleted inside numbers
   test.failing("D02 '177147 +' is not credited (aogp, M2 reader)", () => { expect(client("gen:aogp:-9,-3,10", "177147 +")).toBe(null); expect(server("gen:aogp:-9,-3,10", "177147 +")).toBe(null); });
   test.failing("D02 '17714 7' is not read as 177147", () => { expect(client("gen:aogp:-9,-3,10", "17714 7")).toBe(null); expect(server("gen:aogp:-9,-3,10", "17714 7")).toBe(null); });
@@ -43,7 +48,9 @@ describe("open defects (flip test.failing -> test when fixed)", () => {
   test.failing("D10 client and server agree on '4 21/25' (agdec, 4.84)", () => expect(client("gen:agdec:11,374,0", "4 21/25")).toBe(server("gen:agdec:11,374,0", "4 21/25")));
   test.failing("D10 client and server agree on '40 1/2' (akmed)", () => expect(client("gen:akmed:0,8", "40 1/2")).toBe(server("gen:akmed:0,8", "40 1/2")));
   // D09 a held (quarantined) word-form question is served; the learner's correct answer is never decided on the client
-  test.failing("D09 a correct answer to a served :w question is decided (adexp)", () => expect(client("gen:adexp:9,8,5,7:w", "9857")).toBe(true));
+  // D09 root cause (still open): the contract number guard rejects word prompts ("9 boxes of 1000 pins" has no 9000), so 951 :w
+  // presentations are held. When the guard is repaired and the family re-audited, the question leaves quarantine and this is decided.
+  test.failing("D09 root: the adexp word form leaves quarantine and a correct answer is credited", () => expect(client("gen:adexp:9,8,5,7:w", "9857")).toBe(true));
   // D01 invalid input recorded as incorrect instead of unresolved
   test.failing("D01 'C' on a two-option question is unresolved (aabig)", () => expect(client("gen:aabig:0,2,0", "C")).toBe(null));
   test.failing("D01 '1/0' is unresolved (apinvf, expression)", () => expect(client("gen:apinvf:-5,-5,0,1", "1/0")).toBe(null));

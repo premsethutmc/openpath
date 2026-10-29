@@ -6,6 +6,7 @@ import type {StudyTime,StudyAdvice,StudySummary} from "./study-session";
 import type { CurriculumRelease } from "./curriculum";
 import { isQuestion } from "./content";
 import { creditOf } from "./grade";
+import { quarantined } from "./question-status";
 import { exposureKey } from "./families";
 import { isWritten, MARKED_NOT, MARKED_RIGHT, type WrittenMark } from "./written";
 
@@ -98,6 +99,8 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
     } else if (r.record === "curriculum") out.curricula.set(`${r.release.id}@${r.release.version}#${r.release.hash}`, r.release);
     else if (r.record === "attempt" && isWritten(r.questionId) && !markOf.has(r.id)) out.pending.push({ id: r.id, at: r.at, questionId: r.questionId, text: r.response, competency: r.competency });
     // "unresolved" is honoured only where the deterministic decision itself cannot decide (a record claiming it for a decidable answer is just an attempt); at most UNRESOLVED_CAP undecided submissions per problem sit outside the attempts: a learner cannot park wrong answers as "unresolved" to avoid the demotion rule
+    // question-status@1: an answer to a quarantined question is kept, but is never an attempt or mastery evidence, however many are sent
+    else if (r.record === "attempt" && quarantined(r.questionId)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment as AttemptAssessment });
     else if (r.record === "attempt" && isQuestion(r.questionId) && r.assessment?.unresolved === true && creditOf(r.questionId, r.response) === null && held.set(exposureKey(r.questionId), (held.get(exposureKey(r.questionId)) ?? 0) + 1).get(exposureKey(r.questionId))! <= UNRESOLVED_CAP) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment });
     else if (r.record === "attempt" && isQuestion(r.questionId)) {
       // the same problem in another answer format is the same exposure: a second sight is never fresh evidence

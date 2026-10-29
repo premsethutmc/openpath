@@ -16,6 +16,7 @@ from django.utils import timezone
 from rest_framework.exceptions import ValidationError
 from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
 from .kernel_grader import kernel_decision
+from .question_status import quarantined
 from .learning_families import exposure, generated
 from .models import PupilEvent
 
@@ -183,6 +184,10 @@ def _authoritative(event, q, readable):
     the app's legacy comparison) and the result is labelled `legacy`, whatever the browser called it. An answer neither route can read is
     saved and left undecided (never wrong). Written answers stay with the educator."""
     a = event.get('assessment')
+    if quarantined(event.get('questionId')):
+        # question-status@1: no authoritative grade for a quarantined question, whatever the browser sent; the answer is kept
+        base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False}
+        return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': 'held'}
     if q['type'] in HUMAN:
         return None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'}
     base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'clarificationRequired': False, 'firstError': None}
@@ -201,6 +206,8 @@ def _authoritative(event, q, readable):
 def credited(q, event):
     """Whether a stored attempt earned answer credit: the server's own kernel verdict when the trusted grader decided it, otherwise the stored-answer comparison."""
     a = event.get('assessment') or {}
+    if quarantined(event.get('questionId')):
+        return False
     if a.get('source') == 'kernel':
         return a.get('answerCorrect') is True
     return right(q, event.get('response', ''))
@@ -221,6 +228,8 @@ def independent_at(prior, competency, marks=None):
             continue
         # one exposure per problem, whichever answer format (the app's families.ts exposureKey; distinct@1)
         key = exposure(e['questionId'])
+        if quarantined(e['questionId']):
+            continue  # question-status@1: never an attempt, never evidence
         if (e.get('assessment') or {}).get('unresolved') is True:
             held[key] = held.get(key, 0) + 1
             if held[key] <= UNRESOLVED_CAP:
@@ -456,6 +465,8 @@ def _study_session(event, prior, pupil, c):
     correct, incorrect, pending = [], [], []
     for a in attempts:
         q = c['questions'].get(a['questionId']) or generated(a['questionId'])
+        if quarantined(a['questionId']):
+            continue  # question-status@1: neither correct nor incorrect (kept in attemptIds as answered)
         if q['type'] in HUMAN and a['id'] not in marks:
             pending.append(a['id'])
         elif (marks.get(a['id']) == 'correct' if q['type'] in HUMAN else credited(q, a)):

@@ -40,6 +40,5 @@ class OpenDefects(SimpleTestCase):
     def test_D01_a_repeated_element_is_decided_as_the_app_decides(self):
         self.assertIsNone(verdict('gen:aeeven:0', '12, 28, 194, 310, 12'))  # the app: unresolved; the server: incorrect
 
-    @unittest.expectedFailure
-    def test_D09_a_held_question_is_not_credited_by_the_legacy_fallback(self):
+    def test_D09_a_held_question_is_not_credited_by_the_legacy_fallback(self):  # fixed in Phase C stage 1 (question-status@1)
         self.assertIsNone(verdict('gen:adexp:9,8,5,7:w', '9857'))  # the app never decides a held question; the server credits it

@@ -7,6 +7,7 @@
  *   out: {"v":1,"id":...,"verification":"verified"|"legacy"|"held"|"human","credit":true|false|null,"expected":"<stored answer>","capability":"typed-kernel"|...,"reason":"...","ms":0.1}
  */
 import { assessSubmission, contractFor } from "./assessment.ts";
+import { quarantined } from "./question-status.ts";
 
 export const SERVER_GRADER_VERSION = 1 as const;
 export interface GraderRequest { id: string; response: string; working?: string[] }
@@ -17,6 +18,8 @@ export function gradeRequest(r: GraderRequest): GraderReply {
   const none = (verification: GraderReply["verification"], reason: string, expected: string | null = null, capability = "none"): GraderReply => ({ v: SERVER_GRADER_VERSION, id: String(r?.id ?? ""), verification, credit: null, expected, capability, reason, ms: ms() });
   if (!r || typeof r.id !== "string" || typeof r.response !== "string" || r.response.length > 400) return none("unknown", "malformed request");
   const working = Array.isArray(r.working) ? r.working.filter((l) => typeof l === "string").slice(0, 8).map((l) => l.slice(0, 80)) : [];
+  // question-status@1: a quarantined question is reported as held and decided by no one (the server records it unresolved)
+  if (quarantined(r.id)) return none("held", "quarantined (question-status@1)");
   let c;
   try { c = contractFor(r.id); } catch { return none("unknown", "the contract could not be built"); }
   if (!c) return none("unknown", "not a generated question");

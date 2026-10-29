@@ -4267,7 +4267,7 @@
    ],
    "transfer": [
     "gen:apn:12,5,14:mc",
-    "gen:auaps:18,3,5:w",
+    "gen:auaps:13,11,24:w",
     "gen:auapln:1,24,7:w"
    ],
    "retention": [
@@ -19574,7 +19574,7 @@
     "gen:adseq:4,19,1"
    ],
    "transfer": [
-    "gen:adexp:2,0,9,1:w",
+    "gen:adexp:0,2,1,8:w",
     "gen:ad1000:837:w",
     "gen:adbetw:7685,7:w"
    ],
@@ -33805,7 +33805,7 @@
     "gen:ajidiv:-14,-12"
    ],
    "transfer": [
-    "gen:aiintx:1,-2,-9,-45,9:w",
+    "gen:aiintx:0,6,-5,-7,4:w",
     "gen:ajimul:3,-2:w",
     "gen:ajidiv:12,-12:w"
    ],

@@ -18,6 +18,7 @@
 import { poolFamilies, type Module, type Screen, type Strategy } from "./content";
 import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
 import { graph } from "./graph";
+import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
 
 export const LIBRARY_POLICY = "library@2";
@@ -73,7 +74,7 @@ const typedOf = (id: string) => problemOf(id.replace(/:mc$/, ""))!;
  */
 function drawer(family: string, used: Set<string>) {
   const take = (phase: Phase, form: "typed" | "mc" | "word" | "any" = "any"): string => {
-    const id = phasePool(family, phase).map((x) => (form === "typed" ? x.replace(/:mc$/, "") : form === "mc" && !x.endsWith(":mc") && problemOf(`${x}:mc`) ? `${x}:mc` : form === "word" ? `${x.replace(/:mc$/, "")}:w` : x)).find((x) => !used.has(exposureKey(x)) && (form !== "word" || problemOf(x) !== null));
+    const id = phasePool(family, phase).map((x) => (form === "typed" ? x.replace(/:mc$/, "") : form === "mc" && !x.endsWith(":mc") && problemOf(`${x}:mc`) ? `${x}:mc` : form === "word" ? `${x.replace(/:mc$/, "")}:w` : x)).find((x) => !used.has(exposureKey(x)) && selectable(x) && (form !== "word" || problemOf(x) !== null));
     if (!id) throw new Error(`${LIBRARY_POLICY}: family ${family} has too few ${phase} questions for a module`);
     used.add(exposureKey(id));
     return id;
@@ -144,7 +145,7 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
   };
   const diagnostics = explore(bp.family, used);
   // the facts the explanations rest on (7 × 8, 2⁴ …): probe questions a strategy can build on
-  const probes = [...new Set(seed.bugs.flatMap((b) => (b.probe && b.probe !== seed.id && !b.probe.startsWith(`gen:${bp.family}:`) && problemOf(b.probe) ? [b.probe] : [])))].slice(0, 2);
+  const probes = [...new Set(seed.bugs.flatMap((b) => (b.probe && b.probe !== seed.id && !b.probe.startsWith(`gen:${bp.family}:`) && problemOf(b.probe) && selectable(b.probe) ? [b.probe] : [])))].slice(0, 2);
   const chapter = bp.chapter.map((s) => screen(s, seed));
   const sub = subSkills(bp.competency, bp.family, used);
   const strategies: Strategy[] = bp.strategies.map((st, k) => {
@@ -192,7 +193,7 @@ export function fromTemplate(family: string, competency: string, version: string
   const mistakeEx = ex((p) => !!conceptual(p));
   const stepsEx = ex()!;
   const diagnostics = explore(family, used);
-  const probes = [...new Set(first.bugs.flatMap((b) => (b.probe && !b.probe.startsWith(`gen:${family}:`) && problemOf(b.probe) ? [b.probe] : [])))].slice(0, 2);
+  const probes = [...new Set(first.bugs.flatMap((b) => (b.probe && !b.probe.startsWith(`gen:${family}:`) && problemOf(b.probe) && selectable(b.probe) ? [b.probe] : [])))].slice(0, 2);
   const uses = [...new Set(first.steps.map((s) => s.competency).filter((c) => c !== competency))].map((c) => graph.get(c).name);
   const vis = (f: ((p: number[]) => unknown) | undefined, p: Problem) => {
     const w = f?.(p.params);

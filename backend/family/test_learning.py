@@ -391,3 +391,35 @@ class KernelAuthorityTests(LearningBase):
         self.assertEqual(r.status_code, 201)
         a = self.stored('lg')
         self.assertEqual((a['answerCorrect'], a['source']), (True, 'legacy'))
+
+
+class QuarantineTests(LearningBase):
+    """question-status@1 (Phase C stage 1, D09): an answer to a quarantined question is accepted and stored, never credited, never an
+    attempt or mastery evidence, whatever the browser claims; the question's definition and the records are kept."""
+    Q = 'gen:adexp:9,8,5,7:w'
+    KEYS = KernelAuthorityTests.KEYS
+    go = KernelAuthorityTests.go
+    stored = KernelAuthorityTests.stored
+
+    def spec(self):
+        from .learning_families import generated
+        g = generated(self.Q)
+        return (self.Q, g['competency'], g['answer'])
+
+    def test_a_quarantined_question_is_stored_unresolved_and_never_credited(self):
+        from .learning import credited, independent_at
+        from .learning_families import generated
+        from .question_status import quarantined
+        self.assertTrue(quarantined(self.Q))
+        self.save(self.enrol())
+        spec = self.spec()
+        claim = dict(self.KEYS, answerCorrect=True, unresolved=False, source='kernel')
+        for i in range(5):
+            self.assertEqual(self.go(spec, spec[2], claim if i % 2 else None, rid=f'q{i}').status_code, 201)
+        for i in range(5):
+            a = self.stored(f'q{i}')
+            self.assertEqual((a['answerCorrect'], a['unresolved'], a['source']), (None, True, 'held'))
+        recs = [e for e in self.records() if e.get('record') == 'attempt']
+        self.assertEqual(len(recs), 5)                                              # every answer is kept
+        self.assertTrue(all(credited(generated(self.Q), e) is False for e in recs))
+        self.assertIsNone(independent_at(recs, spec[1]))                            # five "right" answers are no evidence

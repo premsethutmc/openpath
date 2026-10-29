@@ -14,6 +14,7 @@
  * Anything else is UNSUPPORTED: `parseProblem` says so, with a reason, and nothing downstream guesses.
  */
 import { graph } from "./graph";
+import { selectable } from "./question-status";
 import { b1Object, laObject, m2Object } from "./typed-contract.ts";
 import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { DOMAIN_FAMILIES } from "./fam";
@@ -1380,7 +1381,7 @@ export function problemOf(id: string): Problem | null {
     return null;
   }
 }
-export const variantsOf = (pr: Problem): Problem[] => FAMILIES.get(pr.family)!.variants(pr.params).flatMap((p) => (FAMILIES.get(pr.family)!.reject(p) ? [] : [build(FAMILIES.get(pr.family)!, p)]));
+export const variantsOf = (pr: Problem): Problem[] => FAMILIES.get(pr.family)!.variants(pr.params).flatMap((p) => (FAMILIES.get(pr.family)!.reject(p) ? [] : [build(FAMILIES.get(pr.family)!, p)])).filter((v) => selectable(v.id));
 export const explainStep = (pr: Problem, s: Step) => prose(FAMILIES.get(pr.family)!.explain(s));
 
 // ---------------------------------------------------------------- decomposition (decomposition@2)
@@ -1532,6 +1533,8 @@ export function inPool(qid: string): boolean {
   const p = m[2].split(",").map(Number);
   if (p.length !== def.arity || p.some((v, i) => v < def.domain![i][0] || v > def.domain![i][1]) || (def.keep && !def.keep(p))) return false;
   if ((m[3] === "mc" && !def.mc) || (m[3] === "w" && !def.word)) return false;
+  // question-status@1: a quarantined presentation is not in the released pool for any purpose (selection, grading credit)
+  if (!selectable(qid)) return false;
   return pool(m[1]).ids.has(exposureKey(qid));
 }
 export type Phase = "retention" | "diagnostic" | "check" | "practice";
@@ -1559,5 +1562,6 @@ export function phasePool(fam: string, phase: Phase): string[] {
   return pool(fam)
     .items.filter((x) => phaseOf(x.id) === phase)
     .sort((a, b) => fnv(a.id) - fnv(b.id) || a.id.localeCompare(b.id))
-    .map((x, i) => (def.mc && x.type !== "set" && x.type !== "choice" && i % 2 === 1 ? `${x.id}:mc` : x.id));
+    .map((x, i) => (def.mc && x.type !== "set" && x.type !== "choice" && i % 2 === 1 ? `${x.id}:mc` : x.id))
+    .filter(selectable);
 }
