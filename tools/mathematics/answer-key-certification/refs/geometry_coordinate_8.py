@@ -31,7 +31,8 @@ def dec(v):
 @ref('ahcong', method='congruence maps A->P, B->R, C->Q; the asked side/angle of PRQ is the image of the matching element of ABC; triangle validity checked by constructing it')
 def ahcong(q):
     p = q['prompt']
-    corr = {'P': 'A', 'R': 'B', 'Q': 'C'}
+    second = re.search(r'≅ triangle ([PQR]{3})', p).group(1)
+    corr = dict(zip(second, 'ABC'))
     if 'AB =' in p:
         ab, bc, ca = [R(v) for v in re.findall(r'(?:AB|BC|CA) = (\d+(?:\.\d+)?) cm', p)[:3]]
         if tri_from_sides(bc, ca, ab) is None:
@@ -72,6 +73,8 @@ def ahgen(q):
     assert t[0] ** 2 + t[1] ** 2 == t[2] ** 2
     if 'largest' in p:
         return Expect(str(max(t)))
+    if 'other smaller number' in p:
+        return Expect(str(m_ * m_ - 1))
     if 'smallest' in p:
         return Expect(str(min(t)))
     if 'odd' in p:
@@ -187,14 +190,20 @@ def amalt(q):
     return Unsupported('unknown amalt template')
 
 
-@ref('ambpt', method='coordinates: A=(0,0), B=(AB,0), C general; D,E placed so DE || BC; EC measured numerically')
+@ref('ambpt', method='D = A + t(B-A), E = A + t(C-A) with t = AD/AB makes DE parallel to BC; the asked length scaled from the coordinates')
 def ambpt(q):
     p = q['prompt']
-    ad, db, ae = [R(v) for v in re.findall(r'(?:AD|DB|AE) = (\d+(?:\.\d+)?) cm', p)[:3]]
-    t = ad / (ad + db)   # D = A + t(B-A), E = A + t(C-A) makes DE parallel to BC
-    # AE = t*AC => AC = AE/t, EC = AC - AE
-    ac = ae / t
-    return Expect(dec(ac - ae))
+    L = {k: R(v) for k, v in re.findall(r'(AD|DB|AE|BC|AC) = (\d+(?:\.\d+)?) cm', p)}
+    t = L['AD'] / (L['AD'] + L['DB'])
+    want = re.search(r'Find ([A-Z]{2})', p).group(1)
+    if want == 'EC':
+        ac = L['AE'] / t
+        return Expect(dec(ac - L['AE']))
+    if want == 'DE':
+        return Expect(dec(t * L['BC']))
+    if want == 'AE':
+        return Expect(dec(t * L['AC']))
+    return Unsupported('unknown ambpt template')
 
 
 @ref('ammid', method='triangle built from coordinates; midpoints joined; lengths measured')
@@ -220,12 +229,19 @@ def ammid(q):
     return Unsupported('unknown ammid template')
 
 
-@ref('ammidc', method='D midpoint of AB and DE || BC: construct coordinates, E = midpoint of AC, so AE = AC/2 (line through D parallel to BC meets AC at the point with AE/AC = AD/AB)')
+@ref('ammidc', method='D midpoint of AB (t = 1/2): the parallel through D meets AC at E with AE/AC = DE/BC = 1/2')
 def ammidc(q):
     p = q['prompt']
-    ab, ac = [R(v) for v in re.findall(r'(?:AB|AC) = (\d+(?:\.\d+)?) cm', p)[:2]]
-    t = (ab / 2) / ab
-    return Expect(dec(ac * t))
+    L = {k: R(v) for k, v in re.findall(r'(AC|BC|AE|DE) = (\d+(?:\.\d+)?) cm', p)}
+    t = sp.Rational(1, 2)
+    want = re.search(r'Find ([A-Z]{2})', p).group(1)
+    if want == 'AE':
+        return Expect(dec(t * L['AC']))
+    if want == 'DE':
+        return Expect(dec(t * L['BC']))
+    if want == 'AC':
+        return Expect(dec(L['AE'] / t))
+    return Unsupported('unknown ammidc template')
 
 
 @ref('amsarea', method='area ratio = (side ratio)^2, shown by scaling coordinates; sqrt for the inverse')
@@ -240,11 +256,13 @@ def amsarea(q):
     return Expect(str(sp.nsimplify(side * k)))
 
 
-@ref('amsim', method='scale factor from the corresponding sides AB -> PQ applied to BC')
+@ref('amsim', method='scale factor k = PQ/AB applied to the matching sides (QR<->BC, RP<->CA) or to the perimeter')
 def amsim(q):
     p = q['prompt']
     L = {k: R(v) for k, v in re.findall(r'(AB|BC|CA|PQ|QR|RP) = (\d+(?:\.\d+)?) cm', p)}
     k = L['PQ'] / L['AB']
+    if 'perimeter' in p:
+        return Expect(dec(k * (L['AB'] + L['BC'] + L['CA'])))
     want = re.search(r'Find ([A-Z]{2})', p).group(1)
     base = {'QR': 'BC', 'RP': 'CA', 'PQ': 'AB'}[want]
     return Expect(dec(L[base] * k))
@@ -263,9 +281,9 @@ def amsimang(q):
         c = 180 - a - qq
         return Expect(str(c)) if c > 0 else Ambiguous('angles too large')
     if 'In ΔABC, ∠A' in p:
-        a, b, pp, r = n[0], n[1], n[2], n[3]
-        # similar by AA: A<->P (equal), the triangles share angle multiset; Q = ?
-        return Unsupported('correspondence not stated for the 3rd template')
+        pp, r = n[2], n[3]
+        qq = 180 - pp - r
+        return Expect(str(qq)) if qq > 0 else Ambiguous('invalid triangle PQR')
     return Unsupported('unknown template')
 
 
