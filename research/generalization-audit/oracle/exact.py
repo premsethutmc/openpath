@@ -341,6 +341,10 @@ def expression_relation(e1, c1, e2, c2, x, D) -> TransitionResult:
         sx = sp.Symbol(x.name, positive=True)
     elif limited(lambda: D.is_subset(sp.Interval.open(-sp.oo, 0)), 1.0):
         sx = sp.Symbol(x.name, negative=True)
+    elif limited(lambda: D.is_subset(sp.Interval(0, sp.oo)), 1.0):
+        sx = sp.Symbol(x.name, nonnegative=True)
+    elif limited(lambda: D.is_subset(sp.Interval(-sp.oo, 0)), 1.0):
+        sx = sp.Symbol(x.name, nonpositive=True)
     same = zero_test(d, x) or (sx is not None and zero_test(d.xreplace({x: sx}), None))
     if same:
         if D1 is None or D2 is None:

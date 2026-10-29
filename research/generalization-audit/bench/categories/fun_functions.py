@@ -232,8 +232,9 @@ S("|x|=-x includes zero (strict inequality loses it)", "set where a piecewise id
   "x=0 satisfies |0|=-0", pair="fun-negabs")
 S("piecewise definition rewritten as cases", "case-scope propagation", "x<0 and x^2=4 or x>=0 and 2x+1=4", "x=-2 or x=3/2",
   "valid-equivalence", "branch x<0 keeps -2 only; branch x>=0 gives 3/2", c=3, pair="fun-pw")
-S("piecewise case: a root outside its branch is kept", "case-scope propagation", "x<0 and x^2=4 or x>=0 and 2x+1=4",
-  "x=-2 or x=2 or x=3/2", "invalid", "x=2 lies in the x>=0 branch, where 2*2+1=5 != 4", c=3, pair="fun-pw")
+S("piecewise case: the root of the wrong branch is kept", "case-scope propagation", "x<0 and x^2=4 or x>=0 and 2x+1=4",
+  "x=2 or x=3/2", "invalid", "x=-2 is a solution (x<0, 4=4) and is lost; x=2 lies in the x>=0 branch where 2*2+1=5 != 4",
+  c=3, pair="fun-pw")
 
 # ============================================================ exponential / logarithm laws
 E("log of a product (positive factors)", "logarithm laws with domains", "ln(x(x-1))", "ln(x)+ln(x-1)", "invalid",
@@ -264,7 +265,8 @@ E("log of a square root of an exponential", "logarithm laws", "ln(sqrt(e^x))", "
 E("exponential with a log coefficient", "exponential laws", "e^(x ln(2))", "2^x", "valid-equivalence", "(e^(ln 2))^x")
 E("exponential of a double", "exponential laws", "e^(2x)", "(e^x)^2", "valid-equivalence", "(e^x)^2=e^(2x)", d="easy")
 E("log difference collapses on the common domain", "logarithm laws with domains", "ln(x^2)-ln(x)", "ln(x)", "valid-equivalence",
-  "ln(x) forces x>0, where ln(x^2)=2ln x", c=2)
+  "ln(x) forces x>0, where ln(x^2)=2ln x; the stated x>0 is exactly the natural domain (the oracle needs it to decide the log identity)",
+  c=2, assumptions=["x > 0"])
 E("bare log is ambiguous", "ambiguous notation", "log(1000)", "3", "insufficient-information",
   "true in base 10, false in base e", d="easy")
 
@@ -337,17 +339,19 @@ Ws("quadratic function equal to a value", "solution-set preservation", "x^2-4x=5
    ol=[None, "x^2-4x-5=0", "(x-5)(x+1)=0", "x=5 or x=-1"], d="easy", notation="unfamiliar")
 Ws("rational function value never attained", "empty solution set", "(2x+1)/(x-3)=2",
    ["x ≠ 3", "2x+1=2x-6", "1=-6, impossible", "no solution"], "valid-equivalence", "2 is the horizontal asymptote value", "no solution",
-   ol=["restrict: x != 3", "2x+1=2x-6", "claim: 1=-6", "empty"], c=4)
+   ol=["restrict: x != 3", "2x+1=2x-6", None, "empty"], c=4)
 Ws("solving f(x)=x for a self-map", "solution-set preservation", "x/(x-1)=x",
    ["x ≠ 1", "x=x(x-1)", "x^2-2x=0", "x=0 or x=2"], "valid-equivalence", "both are allowed (neither is 1)", "x=0 or x=2",
    ol=["restrict: x != 1", "x=x(x-1)", "x^2-2x=0", "x=0 or x=2"], c=4, pair="fun-s7")
 Ws("solving f(x)=x: dividing by x loses a root", "solution-set preservation under division", "x/(x-1)=x",
    ["x ≠ 1", "1/(x-1)=1", "x=2"], "invalid", "dividing by x lost x=0", "x=0 or x=2",
    ol=["restrict: x != 1", "1/(x-1)=1", "x=2"], c=3, pair="fun-s7")
-Ws("|x|/x=1 holds only for positive x", "set where an identity holds", "|x|/x=1", ["x>0"], "valid-equivalence",
-   "x=0 is excluded by the denominator", "x>0", d="easy", pair="fun-s8")
-Ws("|x|/x=1 does not hold at zero", "set where an identity holds", "|x|/x=1", ["x>=0"], "invalid", "x=0 is not in the domain",
-   "x>0", d="easy", pair="fun-s8")
+Ws("|x|/x=1 holds only for positive x", "set where an identity holds", "|x|/x=1", ["x ≠ 0", "|x|=x", "x>0"], "valid-equivalence",
+   "x=0 is excluded by the denominator; |x|=x with x != 0 means x>0", "x>0", ol=["restrict: x != 0", "|x|=x and x!=0", "x>0"],
+   d="easy", pair="fun-s8")
+Ws("|x|/x=1 does not hold at zero", "set where an identity holds", "|x|/x=1", ["x ≠ 0", "|x|=x", "x>=0"], "invalid",
+   "x=0 is not in the domain, yet the final set contains it", "x>0", ol=["restrict: x != 0", "|x|=x and x!=0", "x>=0"],
+   d="easy", pair="fun-s8")
 Ws("logarithmic equation with a power", "domain of a log equation", "ln(x^2)=2",
    ["2ln(x)=2", "x=e"], "invalid", "ln(x^2)=2 iff x=±e; the power law needs x>0 and loses -e", "x=e or x=-e", c=2,
    pair="fun-s9")
@@ -431,13 +435,16 @@ Wx("square of a root plus root of a square, domain dropped then used", "excluded
    "2x is right only on x>=0 (the natural domain), but the step x+|x|=2x uses that restriction without stating it",
    "2x, x >= 0", c=2, pair="fun-w-sq")
 Wx("square of a root plus root of a square, domain stated", "excluded-value obligation", "simplify", "sqrt(x)^2+sqrt(x^2)",
-   ["domain: x ≥ 0", "x+|x|", "2x"], "valid-equivalence", "on x>=0, |x|=x", "2x, x >= 0",
+   ["domain: x ≥ 0", "x+|x|", "2x"], "valid-equivalence",
+   "on x>=0, |x|=x. [oracle-dispute] certify_expression_chain records a 'restrict:' line only as a flag and never narrows the"
+   " domain used for link checks, so it rejects x+|x| -> 2x with a counterexample at x=-7 that the stated domain excludes",
+   "2x, x >= 0",
    ol=["restrict: x >= 0", "x+|x|", "2x"], c=3, pair="fun-w-sq")
 Wx("cube roots undo cubes on all reals", "inverse identity chain", "simplify", "cbrt(x)^3+cbrt(x^3)", ["x+x", "2x"],
    "valid-equivalence", "real cube root is a bijection", "2x", d="easy")
-Wx("log of a squared shift minus log of the shift", "logarithm laws with domains", "simplify", "ln((x+1)^2)-ln(x+1)",
-   ["2ln(x+1)-ln(x+1)", "ln(x+1)"], "valid-equivalence", "ln(x+1) already forces x>-1, where the power law holds",
-   "ln(x+1)", c=2)
+Wx("log of a product with an exponential factor", "logarithm laws with domains", "simplify", "ln(e^x(x+1))",
+   ["ln(e^x)+ln(x+1)", "x+ln(x+1)"], "valid-equivalence",
+   "e^x>0, so e^x(x+1)>0 iff x>-1, the domain of ln(x+1): the product law loses nothing", "x+ln(x+1)", c=2)
 Wx("composition then simplification", "composition with domain", "simplify", "1/(1/(x-1)-1)",
    ["f(x)=1/x, g(x)=1/(x-1)-1: f(g(x))", "1/((1-(x-1))/(x-1))", "(x-1)/(2-x)"], "domain-violation",
    "x=1 is excluded in f(g(x)) but allowed in (x-1)/(2-x)", "(x-1)/(2-x), x != 1",
@@ -454,15 +461,15 @@ Wx("exponential growth factor: exponent subtraction", "exponential laws in a cha
    ["2^(x+3-x)", "8"], "invalid", "2^a-2^b is not 2^(a-b) (x=0: 7 vs 8)", "7*2^x", pair="fun-w-exp")
 Wx("periodic simplification", "periodicity in a chain", "simplify", "sin(x+2pi)+cos(x+pi)", ["sin(x)-cos(x)"],
    "valid-equivalence", "period 2pi and half-period shift", "sin x - cos x", d="easy")
-Wx("absolute value of a product, sign case", "piecewise chain with assumption", "simplify", "|x^2-x|",
-   ["|x||x-1|", "x(x-1)"], "valid-equivalence", "for x>1 both factors are positive", "x(x-1)", assumptions=["x > 1"], c=2,
+Wx("absolute value of a product, sign case", "piecewise chain with assumption", "simplify", "|x^2+x|",
+   ["|x||x+1|", "x(x+1)"], "valid-equivalence", "for x>0 both factors are positive", "x(x+1)", assumptions=["x > 0"], c=2,
    pair="fun-w-abs")
-Wx("absolute value of a product, sign case on (0,1)", "piecewise chain with assumption", "simplify", "|x^2-x|",
-   ["|x||x-1|", "x(x-1)"], "invalid", "for 0<x<1, |x-1|=1-x; x=1/2: 1/4 vs -1/4", "x(1-x)",
-   assumptions=["x > 0", "x < 1"], c=2, pair="fun-w-abs")
-Wx("power-of-a-root rewritten with exponents", "exponent laws with domains", "simplify", "sqrt(x^3)/x",
-   ["x > 0", "x^(3/2)/x", "x^(1/2)"], "valid-equivalence", "x>0 from the domain; x^(3/2-1)", "sqrt(x)",
-   ol=["restrict: x > 0", "x^(3/2)/x", "x^(1/2)"], c=3)
+Wx("absolute value of a product, sign case on (-1,0)", "piecewise chain with assumption", "simplify", "|x^2+x|",
+   ["|x||x+1|", "x(x+1)"], "invalid", "for -1<x<0, |x|=-x; x=-1/2: 1/4 vs -1/4", "-x(x+1)",
+   assumptions=["x > -1", "x < 0"], c=2, pair="fun-w-abs")
+Wx("power-of-a-root rewritten with exponents (simplify for x>0)", "exponent laws with domains", "simplify", "sqrt(x^3)/x",
+   ["x^(3/2)/x", "x^(1/2)"], "valid-equivalence", "the task fixes x>0 (the natural domain); x^(3/2-1)", "sqrt(x)",
+   assumptions=["x > 0"], c=2)
 Wx("proving a function equation by showing", "show-that identity chain", "show", "(e^x-e^(-x))/(e^x+e^(-x))",
    ["(e^(2x)-1)/(e^(2x)+1)"], "valid-equivalence", "multiply numerator and denominator by e^x>0", "(e^(2x)-1)/(e^(2x)+1)",
    target="(e^(2x)-1)/(e^(2x)+1)", d="hard", c=2)

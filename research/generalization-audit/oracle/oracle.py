@@ -261,6 +261,10 @@ def certify_expression_chain(task, assumptions, olines):
             continue
         if ol.startswith("restrict:"):
             assumptions = list(assumptions) + [ol[9:]]
+            if x is not None:
+                S = statement_set(parse_statement(ol[9:], ctx), x, R)
+                if S is not None:
+                    D = sp.Intersection(D, S)  # a stated restriction narrows the domain for the following links
             continue
         st = parse_statement(ol, ctx)
         e = st.exprs[0]
@@ -283,6 +287,8 @@ def certify_expression_chain(task, assumptions, olines):
         r = _erel(final_e, [], tgt, [], syms, x, D)
         if r.verdict not in ("equivalent", "implication"):
             return {"verdict": "incomplete", "certified": True, "facts": facts, "evidence": "target not reached"}
+        if not _same_shape(final_t, task["target"]):
+            return {"verdict": "incomplete", "certified": True, "facts": facts, "evidence": "the target form is never written"}
     form = _form(task["type"], start, final_t)
     facts["form"] = form
     if form is not True:
@@ -298,6 +304,58 @@ def _erel(e1, c1, e2, c2, syms, x, D):
     return multi_expression_relation(e1, c1, e2, c2, syms)
 
 
+def _flat_factors(w):
+    if isinstance(w, sp.Mul):
+        out = []
+        for a in w.args:
+            out += _flat_factors(a)
+        return out
+    return [w]
+
+
+def _flat_terms(w):
+    if isinstance(w, sp.Add):
+        out = []
+        for t in w.args:
+            out += _flat_terms(t)
+        return out
+    return [w]
+
+
+def _canon(e):
+    if e.is_Atom:
+        return str(e)
+    args = [_canon(a) for a in e.args]
+    if isinstance(e, (sp.Add, sp.Mul)):
+        flat = []
+        for a, raw in zip(args, e.args):
+            flat += [x for x in (a[1] if isinstance(raw, type(e)) else [a])]
+        return (type(e).__name__, tuple(sorted(flat, key=str)))
+    return (type(e).__name__, tuple(args))
+
+
+def _same_shape(a_text, b_text):
+    """The written final line is the target form (same unevaluated structure up to the order of terms/factors):
+    '2 + 6x^2' matches '6x^2+2'; 'x^3+3x^2+3x+1-(x^3-3x^2+3x-1)' does not match '6x^2+2'."""
+    try:
+        with sp.evaluate(False):
+            w = parse_statement(a_text, _ctx()).exprs[-1]
+            t = parse_statement(b_text, _ctx()).exprs[-1]
+    except (Unreadable, Ambiguous, IndexError):
+        return False
+    return _canon(w) == _canon(t)
+
+
+def _has_unexpanded(w):
+    for a in sp.preorder_traversal(w):
+        if isinstance(a, sp.Pow) and isinstance(a.base, sp.Add) and a.exp.is_Integer and a.exp > 1:
+            return True
+        if isinstance(a, sp.Mul) and sum(1 for f in _flat_factors(a) if isinstance(f, sp.Add) and f.free_symbols) >= 1 and \
+                sum(1 for f in _flat_factors(a) if f.free_symbols) >= 2:
+            return True
+    return False
+
+
 def _form(kind, start, final_text):
     try:
         with sp.evaluate(False):
@@ -305,9 +363,9 @@ def _form(kind, start, final_text):
     except (Unreadable, Ambiguous, IndexError):
         return "unreadable final"
     if kind == "expand":
-        return True if sp.expand(w) == w.doit() and not any(isinstance(a, sp.Pow) and isinstance(a.base, sp.Add) and a.exp.is_Integer and a.exp > 1 for a in sp.preorder_traversal(w)) else "not expanded"
+        return "not expanded" if _has_unexpanded(w) else True
     if kind == "factor":
-        fs = w.args if isinstance(w, sp.Mul) else [w]
+        fs = _flat_factors(w)
         if len([f for f in fs if f.free_symbols]) < 1 or not isinstance(w, (sp.Mul, sp.Pow)):
             return "not a product"
         for f in fs:
