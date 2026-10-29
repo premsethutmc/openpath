@@ -8,6 +8,8 @@ export DJANGO_DEBUG=0
 export OPENPATH_BEHIND_HTTPS_PROXY=0
 export OPENPATH_PREVIEW_DATA_DIR="${OPENPATH_PREVIEW_DATA_DIR:-${APP_DIR}/preview-data}"
 export DEMO_API_TARGET="http://127.0.0.1:${PREVIEW_API_PORT:-8000}"
+# The mathematics preview opens on the curriculum (teaching-first journey); the English app stays at /english.
+export DEMO_HOME="${DEMO_HOME:-/curriculum/}"
 export OPENPATH_ESSAY_EVALUATOR=disabled OPENPATH_EVALUATION_ADAPTER=disabled
 unset DATABASE_URL OPENPATH_LLM_API_KEY OPENAI_API_KEY ANTHROPIC_API_KEY
 # Grading authority (SHADOW_RELEASE_CHECKLIST.md): set explicitly, never by default. Shadow is approved; legacy is the rollback mode.

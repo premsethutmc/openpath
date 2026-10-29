@@ -177,6 +177,10 @@ export function configFromEnv(env = process.env) {
     : fileURLToPath(new URL(`../${"dist-english"}`, import.meta.url));
   if (!existsSync(join(dist, "index.html")))
     problems.push(`no build at ${dist}: run npm run english:build first`);
+  // DEMO_HOME: where "/" leads (the mathematics preview sets /curriculum/); the English app stays at /english. Unset: "/" is the English app.
+  const home = env.DEMO_HOME ?? "/";
+  if (!/^\/[A-Za-z0-9/_-]*$/.test(home) || home.startsWith("//"))
+    problems.push("DEMO_HOME must be a local path such as /curriculum/");
   let api = null;
   if (env.DEMO_API_TARGET) {
     try {
@@ -195,6 +199,7 @@ export function configFromEnv(env = process.env) {
       dist,
       allowHttp: env.DEMO_ALLOW_HTTP === "1",
       api,
+      home,
     },
   };
 }
@@ -571,6 +576,14 @@ export function createDemoServer(
     if (config.api && path.startsWith("/api/")) return forward(req, res);
     if (req.method !== "GET" && req.method !== "HEAD")
       return text(res, 405, "Method not allowed", { Allow: "GET" });
+    // A preview with its own home (DEMO_HOME): "/" leads there, and the English app is served at /english (its assets are relative,
+    // and any other path without an extension is the English app anyway, so deep links keep working).
+    const home = config.home ?? "/";
+    if (home !== "/" && path === "/" && !url.search) {
+      res.writeHead(303, { ...base(), Location: home, "Cache-Control": "no-store" });
+      return res.end();
+    }
+    if (home !== "/" && path === "/english") return sendFile(res, req, join(dist, "index.html"));
     // Built sub-applications keep their own entry points; relative asset paths need the trailing slash.
     for (const entry of ["/tamil", "/maths", "/year", "/review", "/curriculum"]) {
       if (path === entry) {
