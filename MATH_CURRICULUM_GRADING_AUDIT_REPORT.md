@@ -123,6 +123,7 @@ Fixtures: `packages/learning/src/grading-audit-regressions.test.ts` (TS) and `ba
 | D13 | **Django tests disagree with the current invalid-input policy**: 3 tests still expect HTTP 400 for unreadable answers (`two`, `fifty`, option `Z`) after `1479472` made them "saved undecided"; 1 test expects grader-off `6/2` to be **incorrect** (it is now unresolved — which is what this brief requires). | 4 failures | P | — |
 | D14 | **Parallel grading route**: `packages/mathematics` (`unit.ts`, `chapter.ts`, `foundation/programs.ts`, `fractions-program.ts`) grades its program questions with `scoreCode`, outside `decide()`, with its own verdict semantics. | code inspection | P | — |
 | D15 | Server re-implements 17 families' generators in Python (`learning_families._mirror`) for arbitrary parameters; parity is currently exact (0 mismatches). | parity.json | risk | — |
+| D16 | **Unreadable submissions start counting as attempts** after `UNRESOLVED_CAP` (2) per problem, in the app (`records.ts readRecords`) and the server (`independent_at`); the extra ones are then replayed through `creditOf`/`credited` and count as not correct. Conflicts with approved policy P1 (2026-10-29). | code inspection; existing test `assessment.test.ts` asserts the cap | S2 | D16 TS (added in Phase B) |
 
 Not defects: option text longer than 80 characters is refused by the server (the app sends letters); equal answers in an unstated
 form left unresolved (11k, e.g. `24/2` for 12, option text for a choice) are safe and are reported, not counted as errors.

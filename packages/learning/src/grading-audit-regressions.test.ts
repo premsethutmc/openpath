@@ -7,6 +7,8 @@
 import { describe, expect, test } from "bun:test";
 import { decide } from "./grade.ts";
 import { gradeRequest } from "./server-grader.ts";
+import { make } from "./session.ts";
+import { readRecords } from "./records.ts";
 
 type V = boolean | null;
 const client = (id: string, r: string, w: string[] = []): V => decide(id, r, w).credit;
@@ -47,4 +49,10 @@ describe("open defects (flip test.failing -> test when fixed)", () => {
   test.failing("D01 '1/0' is unresolved (apinvf, expression)", () => expect(client("gen:apinvf:-5,-5,0,1", "1/0")).toBe(null));
   // D08 (policy proposal) text with two differing readings is not credited without clarification
   test.failing("D08 '−1/2x − 9/2' for −(1/2)x − 9/2 is unresolved (asfam)", () => expect(client("gen:asfam:-3,-3,0,2,2,4", "−1/2x − 9/2")).toBe(null));
+  // D16 (approved policy 1, 2026-10-29): an unreadable submission never consumes an assessed attempt, however many are sent (abuse is rate-limited elsewhere)
+  test.failing("D16 four unreadable submissions create no attempt", () => {
+    const at = (n: number) => ({ learnerId: "L", sessionId: "S", at: new Date(Date.UTC(2026, 9, 1, 9, n)).toISOString() });
+    const rr = readRecords("L", [0, 1, 2, 3].map((n) => make.attempt(at(n), "gen:lin:3,5,4", "four-ish", "practice")));
+    expect(rr.attempts.length).toBe(0);
+  });
 });
