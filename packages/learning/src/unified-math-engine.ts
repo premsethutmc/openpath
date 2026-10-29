@@ -23,7 +23,7 @@ import { CLAIM_LEDGER_CONTRACT, type CoverageRecord } from "./claim-ledger.ts";
 import { buildLineAccount, resolveVerdict, unparsedLineAccount, validateAccounts, type AccountEntry, type LineAccount, type LineStatus, type StepClassification } from "./proof-integrity.ts";
 import { bindClaimsDetailed, replaySymbolicSteps } from "./claim-binding.ts";
 import { ACCEPTANCE_GATE_CONTRACT, checkerStatusToStep, checkerSummary, evidenceFromCheck, reconcileAlgebra, type AcceptanceGateRecord, type BindingEvidence, type GateEvidenceItem, type GateLevel } from "./acceptance-gate.ts";
-import { checkAlgebraSubmission, type AlgebraCheck } from "./independent-checker.ts";
+import { checkAlgebraSubmission, solutionLossPolicy, type AlgebraCheck } from "./independent-checker.ts";
 import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geocalc-e5.ts";
 import { buildObligations, type ObligationSet } from "./proof-obligations.ts";
 import { typedIdentities } from "./evidence-binding.ts";
@@ -139,7 +139,7 @@ function stepsFromAccount(parsed:NaturalParseResult,account:LineAccount,assessed
 /** Text (algebra) route: math-core judges every submitted line; certification additionally requires 1:1 line accounting. */
 /** A step that only loses solutions is a valid-but-incomplete narrowing, not a false statement (E2 completeness rule). */
 function refineLoss(statement:string,lines:string[],assessed:AssessmentEnvelope):AssessmentEnvelope{
-  if(assessed.classification!=="invalid"||assessed.domain==="arithmetic")return assessed;
+  if(assessed.classification!=="invalid"||assessed.domain==="arithmetic"||solutionLossPolicy()==="invalid")return assessed;
   const steps=assessed.steps.map(step=>({...step}));let loss=false,firstBad=-1;const lost:string[]=[];
   const completeness=/\b(?:the\s+)?(?:complete|full|entire|whole)\s+(?:solution|answer|set)\b|\bthis is (?:the )?(?:only|whole|entire|complete)\b|\ball (?:the )?solutions\b|\bthe only solution\b/i;
   for(let i=1;i<steps.length&&i<lines.length;i++){if(steps[i].classification!=="invalid")continue;const v=verifyWorkingStep(statement,lines[i-1],lines[i]);
@@ -306,7 +306,7 @@ async function assessCandidateBase(problem: MathematicalProblem, studentWorking:
     const parsed=parseNaturalWorking(studentWorking as NaturalWorkingInput),domain=(problem.domain==="symbolic"?"symbolic":problem.domain==="auto"||problem.domain==="arithmetic"||problem.domain==="algebra"||!("domain" in problem)?"algebra":problem.domain) as AssessmentEnvelope["domain"];
     if(parsed.classification!=="parsed"){const lineAccount=unparsedLineAccount(studentWorking as NaturalWorkingInput,parseNaturalWorking);return{...malformed(domain,parsed.message),classification:parsed.classification,steps:lineAccount.records.map((r,index)=>({index,classification:lineClass(r.status),justification:r.reason,reasoner:"natural-working-parser",dependencies:["problem"],source:{line:r.line,start:r.span.start,end:r.span.end,text:r.text}})),domainPayload:{naturalInput:parsed,lineAccount},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT}]}}
     let assessed:AssessmentEnvelope;
-    if("statement" in problem){assessed=textAssessment(problem,parsed.lines.map(x=>x.source.text),options);const square=problem.statement.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)\^2=(\d+)$/),single=parsed.lines.length===1?parsed.lines[0].source.text.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)=(-?\d+)$/):null;if(assessed.classification==="invalid"&&square&&single&&square[1]===single[1]&&Number(single[2])**2===Number(square[2])&&Number(square[2])>0)assessed={...assessed,classification:"incomplete",correct:null,complete:false,firstInvalidStep:null,justification:"one square-root branch is valid, but the opposite root is still required",outstandingObligations:[`include both ${square[1]} = ${Math.abs(Number(single[2]))} and ${square[1]} = ${-Math.abs(Number(single[2]))}`],steps:assessed.steps.map(step=>({...step,classification:"verified",justification:"this is one valid solution branch"}))}}
+    if("statement" in problem){assessed=textAssessment(problem,parsed.lines.map(x=>x.source.text),options);const square=problem.statement.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)\^2=(\d+)$/),single=parsed.lines.length===1?parsed.lines[0].source.text.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)=(-?\d+)$/):null;if(assessed.classification==="invalid"&&solutionLossPolicy()==="incomplete"&&square&&single&&square[1]===single[1]&&Number(single[2])**2===Number(square[2])&&Number(square[2])>0)assessed={...assessed,classification:"incomplete",correct:null,complete:false,firstInvalidStep:null,justification:"one square-root branch is valid, but the opposite root is still required",outstandingObligations:[`include both ${square[1]} = ${Math.abs(Number(single[2]))} and ${square[1]} = ${-Math.abs(Number(single[2]))}`],steps:assessed.steps.map(step=>({...step,classification:"verified",justification:"this is one valid solution branch"}))}}
     else if(problem.domain==="symbolic"){
       const adapted=adaptNaturalWorking(problem,parsed);
       if(adapted.outcome==="converted")return assessConverted(problem,domain,parsed,adapted,studentWorking as NaturalWorkingInput,options);

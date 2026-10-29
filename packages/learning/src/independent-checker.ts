@@ -34,6 +34,18 @@ export const CHECKER_LIMITS = { maxDegree: 12, maxCriticalPoints: 64, maxNodes: 
 export type CandidateEliminationPolicy = "implicit" | "shown";
 let candidatePolicy: CandidateEliminationPolicy = "implicit";
 export function withCandidateEliminationPolicy<T>(policy: CandidateEliminationPolicy, fn: () => T): T { const old = candidatePolicy; candidatePolicy = policy; try { return fn(); } finally { candidatePolicy = old; } }
+/**
+ * E7 safety F7 (owner decision pending). How a working whose stated solution omits solutions of the problem is graded.
+ * "incomplete" (default, the E2 completeness contract): a valid narrowing that loses solutions is valid-but-incomplete; the lost values are obligations.
+ * "invalid": when the working's last solution statement omits solutions (the lost values are claimed not to be solutions), the work is invalid
+ * at the step that lost them; answer-first grades such a final answer "incorrect". A working that stops before stating a solution is unaffected.
+ */
+export type SolutionLossPolicy = "incomplete" | "invalid";
+let lossPolicy: SolutionLossPolicy = "incomplete";
+export function solutionLossPolicy(): SolutionLossPolicy { return lossPolicy; }
+export function withSolutionLossPolicy<T>(policy: SolutionLossPolicy, fn: () => T): T { const old = lossPolicy; lossPolicy = policy; try { return fn(); } finally { lossPolicy = old; } }
+/** async variant for callers whose assessment awaits (sequential use only: the policy is module state) */
+export async function withSolutionLossPolicyAsync<T>(policy: SolutionLossPolicy, fn: () => Promise<T>): Promise<T> { const old = lossPolicy; lossPolicy = policy; try { return await fn(); } finally { lossPolicy = old; } }
 let degreeCap: number = CHECKER_LIMITS.maxDegree;
 export class Unsupported extends Error {}
 export class Exhausted extends Error {}
@@ -1004,6 +1016,23 @@ function withPremises(base: Stmt, premises: Stmt[], text: string): Stmt {
   const all = [base, ...premises];
   return { kind: "set", text, critical: all.flatMap((x) => x.critical), holds: (v) => all.every((x) => x.holds(v)), defined: (v) => all.every((x) => x.defined(v)) };
 }
+/** E7 safety F6: a line that only states excluded values (x ≠ a), each of which the problem itself excludes (undefined there, or ruled out by a
+ * stated condition), restates the domain. Unless it is itself exactly the solution set, it is an annotation, not a claim about the solution set, and the chain continues from the line before it. */
+function isRestrictionNote(rel: NaturalRelation, s: Stmt, prof: Profile, excluded: boolean[]): boolean {
+  if (rel.kind !== "inequality" || rel.operator !== "!=") return false;
+  const M = prof.membership.get(s); if (!M || M.gap.some((v) => !v)) return false;
+  return M.pt.every((v, k) => v || excluded[k]);
+}
+/** points the problem excludes: undefined in the relation, or violating a stated condition */
+function problemExcluded(prof: Profile, rel0Stmt: Stmt, premises: Stmt[]): boolean[] {
+  const undef = prof.undefinedAt(rel0Stmt);
+  return prof.points.map((p, k) => undef[k] || premises.some((x) => !x.defined(p) || !x.holds(p)));
+}
+const emptyIn = (prof: Profile, s: Stmt) => { const M = prof.membership.get(s); return !!M && M.gap.every((v) => !v) && M.pt.every((v) => !v); };
+/** E7 safety F6: a stated condition of the task holds on every line, so a transition is judged with the conditions applied to both lines */
+function premisedStmts(built: BuiltLine[], premises: Stmt[]): Map<Stmt, Stmt> {
+  const m = new Map<Stmt, Stmt>(); for (const b of built) if ("kind" in b) m.set(b, withPremises(b, premises, b.text)); return m;
+}
 type BuiltLine = Stmt | { claim: "completeness" | "universal" } | { error: string } | { closed: boolean | null };
 /** each written line as a statement the profile can compare (shared by the full checker and the answer-first workflow) */
 function builtLines(lines: NaturalParseResult["lines"], classOf: string[], name: string | null): BuiltLine[] {
@@ -1031,16 +1060,17 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
   const stmt0 = withPremises(stmtFromRelation(rel0, name, "problem"), premiseStmts, "problem with its conditions"), lines = parsed.lines;
   const out: CheckedLine[] = []; const chain: { stmt: Stmt; index: number; rel: NaturalRelation; solved: boolean }[] = [];
   let prev = stmt0, prevRel: SetRelation | null = null; void prevRel;
-  let unresolved: number | null = null, firstInvalid: number | null = null, narrowing = -1, widening = -1, falseCompleteness: number | null = null, missingAssumptionAt: number | null = null;
+  let unresolved: number | null = null, firstInvalid: number | null = null, narrowing = -1, widening = -1, falseCompleteness: number | null = null, missingAssumptionAt: number | null = null, lossAt = -1;
   const obligations: string[] = []; let u4Steps = 0, exactSteps = 0;
   const stmts: Stmt[] = [stmt0]; const pending: { index: number; stmt: Stmt; from: Stmt; kind: "chain" }[] = [];
   const text = (i: number) => lines[i].source.text;
   // build statements first (profile needs all critical points)
-  const built = builtLines(lines, classOf, name);
+  const built = builtLines(lines, classOf, name), premised = premisedStmts(built, premiseStmts), rel0Stmt = stmtFromRelation(rel0, name, "problem");
   const ALL: Stmt = { kind: "all", text: "all real numbers", critical: [], holds: () => true, defined: () => true };
-  stmts.push(ALL);
-  for (const b of built) if ("kind" in b) stmts.push(b);
+  stmts.push(ALL, rel0Stmt);
+  for (const b of built) if ("kind" in b) stmts.push(b, premised.get(b)!);
   const prof = profile(stmts); const desc = (s: Stmt) => describe(prof, s);
+  const excluded0 = problemExcluded(prof, rel0Stmt, premiseStmts);
   const S0desc = desc(stmt0); let finalStmt: Stmt | null = null, finalIndex = -1;
   const undefined0 = prof.undefinedAt(stmt0);
   for (let i = 0; i < lines.length; i++) {
@@ -1050,6 +1080,7 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
     if ("error" in b) { unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: b.error, solutionSet: null, evidence: null }); continue; }
     if ("closed" in b) {
       if (b.closed === true) push({ status: "verified-valid", relation: "independent-true", detail: "an independent closed numeric statement that is exactly true", solutionSet: null, evidence: { checker: "exact-arithmetic", u4: null } });
+      else if (b.closed === false && emptyIn(prof, prev)) push({ status: "verified-valid", relation: "equivalent", detail: `a false closed statement derived from a line with no real solutions (${desc(prev)}): a valid derivation of a contradiction`, solutionSet: "no real solutions", evidence: { checker: "exact-arithmetic", u4: null } });
       else if (b.closed === false) { firstInvalid = i; push({ status: "verified-invalid", relation: "independent-false", detail: "a closed numeric statement that is exactly false", solutionSet: null, evidence: { checker: "exact-arithmetic", u4: null } }); }
       else { unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: "a closed statement that is undefined", solutionSet: null, evidence: null }); }
       continue;
@@ -1072,9 +1103,10 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
       }
       continue;
     }
-    const s = b as Stmt, r = relate(prof, prev, s);
+    if (isRestrictionNote(lines[i].relation, b as Stmt, prof, excluded0) && relate(prof, b as Stmt, stmt0) !== "equal") { push({ status: "verified-valid", relation: "widening", detail: `states a restriction the problem already imposes (${text(i)}); a condition on the variable, not a claim about the solutions`, solutionSet: null, evidence: { checker: "exact-solution-set", u4: null } }); continue; }
+    const sRaw = b as Stmt, s = premised.get(sRaw)!, r = relate(prof, prev, s);
     let u4: U4Evidence | null = null;
-    if (name && prev.kind === "atom" && (s.kind === "atom" || s.kind === "set")) { u4 = u4StepEvidence(prev, s, name); if (u4.outcome === "verified") u4Steps++; else exactSteps++; } else exactSteps++;
+    if (name && prev.kind === "atom" && (sRaw.kind === "atom" || sRaw.kind === "set")) { u4 = u4StepEvidence(prev, sRaw, name); if (u4.outcome === "verified") u4Steps++; else exactSteps++; } else exactSteps++;
     const ev = { checker: (u4 && u4.outcome === "verified" ? "u4+exact-solution-set" : "exact-solution-set") as "u4+exact-solution-set" | "exact-solution-set", u4 };
     if (u4 && u4.outcome === "rejected") { unresolved = i; push({ status: "unsupported", relation: "unsupported", detail: "the independent U4 identity check rejected the derived algebraic relation; abstaining", solutionSet: desc(s), evidence: ev }); continue; }
     if (r === "equal") push({ status: "verified-valid", relation: "equivalent", detail: `equivalent to the previous statement: ${desc(s)}`, solutionSet: desc(s), evidence: ev });
@@ -1090,13 +1122,13 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
       const prevFinite = Mp.gap.every((v) => !v) && Mp.pt.filter(Boolean).length <= 8;
       const droppedUndefined = cp.every((v, k) => !(v && !cs[k]) || (k >= Mp.gap.length && undefined0[k - Mp.gap.length]));
       if (dropsSolution && anySolution && !keepsSolution) { firstInvalid = i; push({ status: "verified-invalid", relation: "narrowing", detail: `the step discards every solution of the original problem: ${desc(prev)} became ${desc(s)} but the problem's solution set is ${S0desc}`, solutionSet: desc(s), evidence: ev }); }
-      else if (dropsSolution) { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that loses solutions: ${desc(prev)} became ${desc(s)}`, solutionSet: desc(s), evidence: ev }); }
+      else if (dropsSolution) { narrowing = narrowing < 0 ? i : narrowing; lossAt = lossAt < 0 ? i : lossAt; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that loses solutions: ${desc(prev)} became ${desc(s)}`, solutionSet: desc(s), evidence: ev }); }
       else if ((prevFinite || droppedUndefined) && candidatePolicy === "shown") { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that discards candidates (${desc(prev)} became ${desc(s)}) without showing the check against the original problem`, solutionSet: desc(s), evidence: ev }); }
       else if (prevFinite || droppedUndefined) push({ status: "verified-valid", relation: "narrowing", detail: `eliminates candidates that the exact check shows are not solutions of the original problem (${desc(prev)} became ${desc(s)})`, solutionSet: desc(s), evidence: ev });
       else { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `an unjustified jump from ${desc(prev)} to ${desc(s)}: the removed values are not shown to be non-solutions`, solutionSet: desc(s), evidence: ev }); }
     }
     else { firstInvalid = i; push({ status: "verified-invalid", relation: "incomparable", detail: `neither follows from nor is equivalent to the previous statement (${desc(prev)} versus ${desc(s)})`, solutionSet: desc(s), evidence: ev }); }
-    if (firstInvalid === null) { chain.push({ stmt: s, index: i, rel: lines[i].relation, solved: !!s.emptyClaim || isSolvedForm(lines[i].relation, name ?? "x") }); prev = s; finalStmt = s; finalIndex = i; }
+    if (firstInvalid === null) { chain.push({ stmt: sRaw, index: i, rel: lines[i].relation, solved: !!sRaw.emptyClaim || isSolvedForm(lines[i].relation, name ?? "x") }); prev = s; finalStmt = sRaw; finalIndex = i; }
   }
   void pending; void stmts;
   const restrictions = prof.points.filter((_, k) => undefined0[k]).map((p) => `${name ?? "x"} != ${extText(p)}`);
@@ -1109,6 +1141,8 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
   if (missingAssumptionAt !== null && falseCompleteness === null) return result("missing-assumption", null, `the conclusion ignores the domain restriction: ${restrictions.join(", ")}`, restrictions.map((r) => `state the restriction ${r}`));
   if (!finalStmt) return result("incomplete", null, "no mathematical conclusion about the variable was reached", ["state the solution"]);
   if (falseCompleteness !== null) return result("invalid", narrowing >= 0 ? narrowing : falseCompleteness, out[falseCompleteness].detail);
+  // F7 "invalid" policy: the stated final solution omits solutions, so the step that lost them made a false claim
+  if (lossPolicy === "invalid" && chain.length && chain[chain.length - 1].solved && relate(prof, finalStmt, stmt0) === "subset") { const at = lossAt >= 0 ? lossAt : finalIndex; return result("invalid", at, `the stated solution (${desc(finalStmt)}) omits solutions of the problem (${S0desc})${lossAt >= 0 ? `: line ${lossAt + 1} ${out[lossAt].detail}` : ""}`, [`include the remaining solutions: ${S0desc}`]); }
   if (narrowing >= 0 || (candidatePolicy === "shown" && widening >= 0)) return result("incomplete", null, candidatePolicy === "shown" && widening >= 0 ? "the working widened the solution set (for example by squaring) and later removed candidates without showing the check against the original problem" : "a step lost solutions or jumped to a smaller set without justification", [candidatePolicy === "shown" && widening >= 0 ? "verify each candidate in the original problem" : "justify every solution-changing step"]);
   if (!chain[chain.length - 1].solved) return result("incomplete", null, "the working is correct but the solution is not stated in solved form", ["state the solution explicitly"]);
   const rel = relate(prof, finalStmt, stmt0);
@@ -1170,7 +1204,7 @@ function identityMode(expr: Expr, parsed: NaturalParseResult, name: string, clas
  */
 export interface AfTransition {
   index: number; from: string; to: string;
-  status: "equivalent" | "implied" | "narrowing" | "invalid" | "closed-true" | "closed-false" | "unsupported" | "inconclusive";
+  status: "equivalent" | "implied" | "narrowing" | "invalid" | "closed-true" | "closed-false" | "restriction" | "unsupported" | "inconclusive";
   /** "implied": follows from the previous line but admits more values (a one-way step such as squaring); "narrowing": valid reduction that discards values */
   detail: string; keepsOriginalSolutions: boolean | null; diagnosis: AfDiagnosis | null;
 }
@@ -1285,8 +1319,8 @@ export function answerFirstSolutionSet(statement: string, parsed: NaturalParseRe
     const t = lines[lastNb] ? text(lastNb) : "", asClaim = lines[lastNb] && (classOf[lastNb] === "prose" || lines[lastNb].relation.kind === "expression");
     if (asClaim && NO_SOLUTION_CLAIM.test(t)) { claimStmt = emptyClaimStmt(t); fin = lastNb; } else if (asClaim && UNIVERSAL_CLAIM.test(t)) { claimStmt = ALL; fin = lastNb; } }
   const finalStmt = claimStmt ?? (fin >= 0 ? stmtFromRelation(lines[fin].relation, name, text(fin)) : null);
-  const built = withTransitions ? builtLines(lines, classOf, name) : null;
-  const stmts: Stmt[] = [stmt0, ALL, ...(finalStmt ? [finalStmt] : []), ...(built ?? []).filter((b): b is Stmt => "kind" in b && b !== finalStmt)];
+  const built = withTransitions ? builtLines(lines, classOf, name) : null, premised = built ? premisedStmts(built, premiseStmts) : new Map<Stmt, Stmt>(), rel0Stmt = stmtFromRelation(rel0, name, "problem");
+  const stmts: Stmt[] = [stmt0, ALL, rel0Stmt, ...(finalStmt ? [finalStmt] : []), ...(built ?? []).filter((b): b is Stmt => "kind" in b && b !== finalStmt), ...[...premised.values()].filter((x) => x !== finalStmt && !(built ?? []).includes(x))];
   const prof = profile(stmts); checks++;
   const desc = (s: Stmt) => describe(prof, s), S0 = desc(stmt0), M0 = prof.membership.get(stmt0)!, undef = prof.undefinedAt(stmt0);
   const restrictions = prof.points.filter((_, k) => undef[k]).map((p) => `${name} != ${extText(p)}`);
@@ -1300,20 +1334,23 @@ export function answerFirstSolutionSet(statement: string, parsed: NaturalParseRe
     const extraneous = prof.points.map((_, k) => k).filter((k) => Mf.pt[k] && !M0.pt[k]).map(ptName), missing = prof.points.map((_, k) => k).filter((k) => !Mf.pt[k] && M0.pt[k]).map(ptName);
     const onlyExcluded = r === "superset" && cf.some((v, k) => v && !c0[k]) && prof.points.every((_, k) => !(Mf.pt[k] && !M0.pt[k]) || undef[k]);
     if (r === "equal") ans = answer({ status: "correct", reason: `the stated solution ${desc(finalStmt)} is exactly the problem's solution set`, finalSet: desc(finalStmt), expectedSet: S0, restrictions });
-    else if (r === "subset") ans = answer({ status: "incomplete", reason: `the stated solution ${desc(finalStmt)} omits solutions: the problem's solution set is ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, missing, restrictions });
+    else if (r === "subset") ans = answer({ status: lossPolicy === "invalid" ? "incorrect" : "incomplete", reason: `the stated solution ${desc(finalStmt)} omits solutions: the problem's solution set is ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, missing, restrictions });
     else ans = answer({ status: "incorrect", reason: r === "superset" ? `the stated solution ${desc(finalStmt)} includes values that are not solutions${onlyExcluded ? " (excluded by the domain)" : ""}; the problem's solution set is ${S0}` : `the stated solution ${desc(finalStmt)} is not the problem's solution set ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, extraneous, missing, restrictions });
   }
   if (!withTransitions) return { family: "solution-set", answer: ans, transitions: null, firstInvalid: null, checks, finalIndex: fin >= 0 ? fin : null };
   // T: local validity of every written transition against the previous written line (the original problem for the first)
   const sol = prof.points.find((_, k) => M0.pt[k]) ?? null; // one exact solution, for the evidence line
+  const excluded0 = problemExcluded(prof, rel0Stmt, premiseStmts);
   const transitions: AfTransition[] = []; let prevStmt: Stmt = stmt0, prevRel: NaturalRelation = rel0, prevText = statement, firstInvalid: number | null = null;
   const pushT = (t: AfTransition) => { transitions.push(t); if (t.status === "invalid" && firstInvalid === null) firstInvalid = t.index; };
   lines.forEach((l, i) => {
     const b = built![i], from = prevText, to = text(i);
     if ("error" in b) { pushT({ index: i, from, to, status: "unsupported", detail: b.error, keepsOriginalSolutions: null, diagnosis: null }); return; }
     if ("claim" in b) { pushT({ index: i, from, to, status: "unsupported", detail: "a completeness or universality claim is not a transition", keepsOriginalSolutions: null, diagnosis: null }); return; }
+    if ("closed" in b && b.closed === false && emptyIn(prof, prevStmt)) { checks++; pushT({ index: i, from, to, status: "equivalent", detail: `a false closed statement derived from a line with no real solutions (${desc(prevStmt)}): a valid derivation of a contradiction`, keepsOriginalSolutions: true, diagnosis: null }); return; }
     if ("closed" in b) { checks++; pushT({ index: i, from, to, status: b.closed === false ? "closed-false" : b.closed === true ? "closed-true" : "unsupported", detail: b.closed === false ? "a closed numeric statement that is exactly false" : b.closed === true ? "a closed numeric statement that is exactly true" : "a closed statement that is undefined", keepsOriginalSolutions: null, diagnosis: null }); if (b.closed === false && firstInvalid === null) firstInvalid = i; return; }
-    const s = b as Stmt, r = relate(prof, prevStmt, s); checks++;
+    if (isRestrictionNote(l.relation, b as Stmt, prof, excluded0) && relate(prof, b as Stmt, stmt0) !== "equal") { checks++; pushT({ index: i, from, to, status: "restriction", detail: "states a restriction the problem already imposes; a condition on the variable, not a step", keepsOriginalSolutions: true, diagnosis: null }); return; }
+    const s = premised.get(b as Stmt)!, r = relate(prof, prevStmt, s); checks++;
     const Ms = prof.membership.get(s)!, keeps = [...Ms.gap.map((v, k) => !M0.gap[k] || v), ...Ms.pt.map((v, k) => !M0.pt[k] || v)].every(Boolean);
     const Mp = prof.membership.get(prevStmt)!;
     const dropsSolution = [...Mp.gap.map((v, k) => v && M0.gap[k] && !Ms.gap[k]), ...Mp.pt.map((v, k) => v && M0.pt[k] && !Ms.pt[k])].some(Boolean);
