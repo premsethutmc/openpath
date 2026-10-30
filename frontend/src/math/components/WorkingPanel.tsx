@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { WorkingSpec, LocaleStrings } from "../types";
-import { MathDisplay } from "./QuestionPanel";
+import { KatexMath } from "./KatexMath";
 
 interface WorkingPanelProps {
   working: WorkingSpec;
@@ -39,7 +39,7 @@ export function WorkingPanel({ working, onStepRevealed, onToggle, strings }: Wor
             <li key={step.id} className="lr-step">
               <p className="lr-step-desc">{step.description}</p>
               <div className="lr-step-math">
-                <MathDisplay content={step.math} />
+                <KatexMath content={step.math} />
               </div>
               {!step.verified && (
                 <span className="lr-step-unverified" role="note">unverified</span>

@@ -1,5 +1,5 @@
 import type { HintSpec, LocaleStrings } from "../types";
-import { MathDisplay } from "./QuestionPanel";
+import { KatexMath } from "./KatexMath";
 
 interface HintPanelProps {
   hints: HintSpec;
@@ -27,7 +27,7 @@ export function HintPanel({ hints, onRequestHint, strings }: HintPanelProps) {
           <p className="lr-hint-text">{hint.text}</p>
           {hint.math && (
             <div className="lr-hint-math">
-              <MathDisplay content={hint.math} />
+              <KatexMath content={hint.math} />
             </div>
           )}
         </div>

@@ -47,8 +47,18 @@ const template = `<!doctype html>
 if (standalone) {
   const result = await esbuild.build(options({ minify: true, write: false, format: "iife" }));
   const file = (suffix) => result.outputFiles.find((f) => f.path.endsWith(suffix)).text;
+
+  // Load KaTeX CSS (structural rules only — strip @font-face declarations)
+  let katexCss = "";
+  try {
+    const raw = await readFile(`${root}/node_modules/katex/dist/katex.min.css`, "utf8");
+    katexCss = raw.replace(/@font-face\{[^}]+\}/g, "");
+  } catch {
+    console.warn("⚠ KaTeX CSS not found — math rendering may lack proper styling");
+  }
+
   const html = template
-    .replace("<!--styles-->", () => `<style>${file(".css")}</style>`)
+    .replace("<!--styles-->", () => `<style>${katexCss}${file(".css")}</style>`)
     .replace("<!--script-->", () => `<script>${file(".js").replaceAll("</script", "<\\/script")}</script>`);
   await mkdir(`${root}/dist-math`, { recursive: true });
   await writeFile(`${root}/dist-math/math-standalone.html`, html);

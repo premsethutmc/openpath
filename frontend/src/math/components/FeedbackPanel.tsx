@@ -1,5 +1,5 @@
 import type { FeedbackState, LocaleStrings } from "../types";
-import { MathDisplay } from "./QuestionPanel";
+import { KatexMath } from "./KatexMath";
 
 interface FeedbackPanelProps {
   feedback: FeedbackState;
@@ -46,7 +46,7 @@ export function FeedbackPanel({ feedback, strings }: FeedbackPanelProps) {
 
       {feedback.showCorrectAnswer && feedback.correctAnswer && (
         <p className="lr-feedback-answer">
-          Correct answer: <MathDisplay content={feedback.correctAnswer} />
+          Correct answer: <KatexMath content={feedback.correctAnswer} />
         </p>
       )}
     </section>
