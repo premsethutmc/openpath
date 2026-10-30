@@ -1,0 +1,170 @@
+../packages/learning/src/answer-first-e7.test.ts(3,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/answer-first.ts(31,169): error TS2322: Type '"unresolved" | "unsupported"' is not assignable to type '"unresolved" | "correct" | "incomplete" | "incorrect"'.
+../packages/learning/src/answer-first.ts(46,64): error TS18048: 'prior.text' is possibly 'undefined'.
+../packages/learning/src/assessment.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/assessment.test.ts(15,186): error TS2339: Property 'statement' does not exist on type '{ domain: "algebra"; statement: string; } | { domain: "typed"; object: TypedObject; }'.
+../packages/learning/src/calculus-core.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/calculus-core.test.ts(13,673): error TS2345: Argument of type '{ id: string; rule: string; claim: { kind: string; value: Expr; }; }[]' is not assignable to parameter of type 'StudentWorking'.
+../packages/learning/src/calculus-core.ts(17,120): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/calculus-core.ts(17,136): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/calculus-core.ts(18,683): error TS2322: Type 'Expr' is not assignable to type '{ kind: "pi"; } | { kind: "variable"; name: string; } | { kind: "abs"; argument: Expr; } | { kind: "root"; radicand: Expr; index: number; } | { kind: "add"; terms: Expr[]; } | { kind: "multiply"; factors: Expr[]; } | { ...; } | { ...; }'.
+../packages/learning/src/calculus-core.ts(26,1381): error TS2339: Property 'argument' does not exist on type 'never'.
+../packages/learning/src/calculus-core.ts(30,62): error TS2339: Property 'restrictions' does not exist on type 'CalculusProblem'.
+../packages/learning/src/calculus-core.ts(30,137): error TS2345: Argument of type 'Set<unknown>' is not assignable to parameter of type 'Set<string>'.
+../packages/learning/src/calculus-core.ts(30,197): error TS2345: Argument of type 'Set<unknown>' is not assignable to parameter of type 'Set<string>'.
+../packages/learning/src/calculus-core.ts(30,248): error TS2345: Argument of type 'Set<unknown>' is not assignable to parameter of type 'Set<string>'.
+../packages/learning/src/calculus-core.ts(30,284): error TS2345: Argument of type 'Set<unknown>' is not assignable to parameter of type 'Set<string>'.
+../packages/learning/src/calculus-core.ts(35,461): error TS2322: Type 'unknown[]' is not assignable to type 'string[]'.
+../packages/learning/src/calculus-corpus.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/calculus-cross-domain.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/calculus-methods-corpus.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/calculus-methods.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/calculus-methods.test.ts(13,407): error TS2345: Argument of type '{ readonly domain: "calculus"; readonly task: "piecewise-integral"; readonly variable: "x"; readonly pieces: readonly [{ readonly integrand: Expr; readonly lower: "0"; readonly upper: "1"; }, { readonly integrand: Expr; readonly lower: "1"; readonly upper: "3"; }]; }' is not assignable to parameter of type 'MathematicalProblem'.
+../packages/learning/src/calculus-methods.ts(25,120): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/calculus-methods.ts(25,136): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/calculus-methods.ts(26,418): error TS2345: Argument of type '{ argument: Expr; kind: "pi"; } | { argument: Expr; kind: "abs"; } | { argument: Expr; kind: "root"; radicand: Expr; index: number; } | { argument: Expr; kind: "sin" | ... 4 more ... | "atan"; }' is not assignable to parameter of type 'Expr'.
+../packages/learning/src/calculus-methods.ts(26,437): error TS2339: Property 'argument' does not exist on type '{ kind: "pi"; } | { kind: "abs"; argument: Expr; } | { kind: "root"; radicand: Expr; index: number; } | { kind: "sin" | "cos" | "tan" | "log" | "exp" | "atan"; argument: Expr; }'.
+../packages/learning/src/canonical-math-ir.test.ts(1,69): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/certification-authority-e7.test.ts(2,50): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/certification-authority.ts(154,25): error TS2367: This comparison appears to be unintentional because the types '"verified" | "contradictory" | "invalid" | "incomplete" | "unsupported" | "resource-exhausted" | "malformed"' and '"missing-assumption"' have no overlap.
+../packages/learning/src/claim-ledger-e7.test.ts(8,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/claim-ledger-e7.test.ts(154,49): error TS2345: Argument of type '{ domain: string; task: string; expression: { kind: string; factors: ({ kind: string; terms: ({ kind: string; base: { kind: string; name: string; }; exponent: number; value?: undefined; } | { kind: string; value: string; base?: undefined; exponent?: undefined; })[]; base?: undefined; exponent?: undefined; } | { ...;...' is not assignable to parameter of type 'MathematicalProblem'.
+../packages/learning/src/claim-ledger-e7.test.ts(159,49): error TS2345: Argument of type '{ domain: string; task: string; expression: { kind: string; factors: ({ kind: string; terms: ({ kind: string; base: { kind: string; name: string; }; exponent: number; value?: undefined; } | { kind: string; value: string; base?: undefined; exponent?: undefined; })[]; base?: undefined; exponent?: undefined; } | { ...;...' is not assignable to parameter of type 'MathematicalProblem'.
+../packages/learning/src/claim-ledger.ts(114,41): error TS2322: Type '"q"' is not assignable to type '"m" | "w"'.
+../packages/learning/src/claim-ledger.ts(118,41): error TS2322: Type '"q"' is not assignable to type '"m" | "w"'.
+../packages/learning/src/complex-kernel.ts(2,120): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/complex-kernel.ts(2,136): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/complex-polynomial.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/cross-domain-bindings.ts(30,91): error TS2365: Operator '>' cannot be applied to types 'bigint' and 'string | bigint'.
+../packages/learning/src/cross-domain-d3.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/decision-replay.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/derivation-e7.test.ts(2,50): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/domain-uniform-e7.test.ts(2,50): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/domains-m1.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/domains-m2-cross.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/domains-m2-cross.test.ts(4,590): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+../packages/learning/src/domains-m2.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/e6-calc.ts(182,15): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-calc.ts(182,35): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-calc.ts(182,65): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-calc.ts(491,269): error TS2339: Property 'name' does not exist on type 'A'.
+../packages/learning/src/e6-common.ts(70,15): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-common.ts(70,52): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-common.ts(86,3): error TS2741: Property 'resourceUsage' is missing in type '{ contractVersion: NaturalParseResult["contractVersion"]; classification: "parsed"; lines: NaturalParsedLine[]; message: string; }' but required in type 'NaturalParseResult'.
+../packages/learning/src/e6-numbers.ts(105,15): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-numbers.ts(676,28): error TS2322: Type 'boolean' is not assignable to type 'false'.
+../packages/learning/src/e6-parse.ts(27,69): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-parse.ts(113,15): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/e6-parse.ts(113,34): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/evidence-binding-e7.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/generator-contracts.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/geometry-worker-pool.test.ts(1,57): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/geometry-worker.ts(6,113): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/geometry-worker.ts(15,14): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/geometry-worker.ts(15,34): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/geometry-worker.ts(15,56): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/geometry-worker.ts(15,83): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/geometry-worker.ts(27,14): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/geometry-worker.ts(27,34): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/geometry-worker.ts(27,56): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/grading-audit-regressions.test.ts(7,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/grading-pathways.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/grading/certify.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/grading/contract.test.ts(5,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/grading/parse.test.ts(4,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/grading/parse.ts(46,43): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/grading/parse.ts(46,73): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/grading/parse.ts(47,45): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/grading/parse.ts(47,80): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/grading/parse.ts(75,24): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(83,34): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(87,63): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(88,151): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(97,24): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(100,90): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(101,41): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(103,23): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(103,49): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(103,75): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(103,101): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(103,127): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(103,153): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(103,179): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(104,23): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(104,49): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(104,75): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(104,101): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(104,127): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(104,153): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(106,24): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(106,51): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(106,78): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(106,106): error TS2353: Object literal may only specify known properties, and 'v' does not exist in type 'Omit<Tok, "sp">'.
+../packages/learning/src/grading/parse.ts(185,15): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/grading/parse.ts(185,35): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/grading/program.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/grading/read.ts(24,52): error TS2339: Property 'readings' does not exist on type '{ status: "invalid"; reason: InvalidReason; detail: string; } | { status: "ambiguous"; readings: [string, string]; detail: string; }'.
+../packages/learning/src/grading/read.ts(24,78): error TS2339: Property 'readings' does not exist on type '{ status: "invalid"; reason: InvalidReason; detail: string; } | { status: "ambiguous"; readings: [string, string]; detail: string; }'.
+../packages/learning/src/grading/read.ts(32,131): error TS2339: Property 'readings' does not exist on type '{ status: "invalid"; reason: InvalidReason; detail: string; } | { status: "ambiguous"; readings: [string, string]; detail: string; }'.
+../packages/learning/src/grading/read.ts(32,157): error TS2339: Property 'readings' does not exist on type '{ status: "invalid"; reason: InvalidReason; detail: string; } | { status: "ambiguous"; readings: [string, string]; detail: string; }'.
+../packages/learning/src/grading/view.test.ts(2,51): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/independent-checker.ts(980,44): error TS2367: This comparison appears to be unintentional because the types '"equation" | "inequality"' and '"conjunction"' have no overlap.
+../packages/learning/src/index.ts(17,1): error TS2308: Module "./domains-m1" has already exported a member named 'Rat'. Consider explicitly re-exporting to resolve the ambiguity.
+../packages/learning/src/index.ts(19,1): error TS2308: Module "./domains-m1" has already exported a member named 'Rat'. Consider explicitly re-exporting to resolve the ambiguity.
+../packages/learning/src/index.ts(26,1): error TS2308: Module "./domains-m2" has already exported a member named 'Exact'. Consider explicitly re-exporting to resolve the ambiguity.
+../packages/learning/src/index.ts(28,1): error TS2308: Module "./domains-m1" has already exported a member named 'Rat'. Consider explicitly re-exporting to resolve the ambiguity.
+../packages/learning/src/linear-algebra-kernel.ts(5,120): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/linear-algebra-kernel.ts(5,136): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/linear-algebra.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/math-m1-u2-integration.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/natural-domain-adapters.ts(53,706): error TS2339: Property 'value' does not exist on type 'Expr'.
+../packages/learning/src/natural-domain-adapters.ts(88,111): error TS2367: This comparison appears to be unintentional because the types 'string' and 'boolean' have no overlap.
+../packages/learning/src/natural-geocalc-e5.ts(121,15): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/natural-geocalc-e5.ts(121,52): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/natural-geocalc-e5.ts(133,3): error TS2741: Property 'resourceUsage' is missing in type '{ contractVersion: NaturalParseResult["contractVersion"]; classification: "parsed"; lines: NaturalParsedLine[]; message: string; }' but required in type 'NaturalParseResult'.
+../packages/learning/src/natural-geocalc-e5.ts(484,38): error TS2339: Property 'e' does not exist on type '{ t: "int"; integrand: Expr; v: string; lo: Q | null; hi: Q | null; text: string; } | { t: "br"; F: Expr; lo: Q; hi: Q; text: string; } | { t: "lim"; expr: Expr; v: string; target: LimitTarget; text: string; } | { ...; } | { ...; } | { ...; }'.
+../packages/learning/src/natural-geocalc-e5.ts(484,135): error TS2339: Property 'e' does not exist on type '{ t: "int"; integrand: Expr; v: string; lo: Q | null; hi: Q | null; text: string; } | { t: "br"; F: Expr; lo: Q; hi: Q; text: string; } | { t: "lim"; expr: Expr; v: string; target: LimitTarget; text: string; } | { ...; } | { ...; } | { ...; }'.
+../packages/learning/src/natural-geocalc-e5.ts(562,41): error TS2322: Type 'boolean' is not assignable to type 'false'.
+../packages/learning/src/natural-working-d4.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/natural-working-d5.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/natural-working-d6.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/natural-working-d7.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/natural-working.ts(34,49): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/parse-integrity-e7.test.ts(2,50): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/premise-binding-e7.test.ts(2,50): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/probability-statistics.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/probability-statistics.test.ts(2,1471): error TS2345: Argument of type '{ readonly domain: "probability-statistics"; readonly area: "combinatorics"; readonly task: "combination"; readonly data: { readonly n: 8; readonly r: 3; }; readonly assumptions: readonly ["unordered"]; }' is not assignable to parameter of type 'MathematicalProblem'.
+../packages/learning/src/probability-statistics.ts(7,120): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/probability-statistics.ts(7,136): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/proof-context-e7.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/proof-context-e7.test.ts(23,21): error TS2352: Conversion of type 'ProofContext' to type '{ restrictions: string[]; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+../packages/learning/src/proof-integrity-e2.test.ts(3,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/proof-kernel-u4.test.ts(1,69): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/proof-kernel.ts(7,120): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/proof-kernel.ts(7,136): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/proof-obligations-e7.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/proof-obligations.ts(92,22): error TS2454: Variable 'status' is used before being assigned.
+../packages/learning/src/proof-obligations.ts(96,11): error TS2454: Variable 'status' is used before being assigned.
+../packages/learning/src/proof-obligations.ts(114,148): error TS2345: Argument of type 'number | null' is not assignable to parameter of type 'number'.
+../packages/learning/src/question-status.test.ts(6,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/reasoning-depth-d1.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/reasoning-depth-d2.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/semantic-grounding-e7.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/symbolic-equivalence.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/symbolic-equivalence.ts(19,21): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/symbolic-equivalence.ts(19,37): error TS1294: This syntax is not allowed when 'erasableSyntaxOnly' is enabled.
+../packages/learning/src/symbolic-m3-corpus.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/unified-math-engine-u2.test.ts(1,50): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/unified-math-engine.test.ts(1,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/unified-math-engine.ts(2,15): error TS2300: Duplicate identifier 'ObligationSet'.
+../packages/learning/src/unified-math-engine.ts(28,33): error TS2300: Duplicate identifier 'ObligationSet'.
+../packages/learning/src/unified-math-engine.ts(79,265): error TS2322: Type '{ index: number; classification: Classification; justification: string; reasoner: string; dependencies: {}; }[]' is not assignable to type 'AssessmentStep[]'.
+../packages/learning/src/unified-math-engine.ts(123,539): error TS2322: Type '{ readonly kind: "add"; readonly terms: readonly [...MathExpression[], MathExpression]; }' is not assignable to type 'MathExpression'.
+../packages/learning/src/unified-math-engine.ts(309,171): error TS2339: Property 'expression' does not exist on type 'NaturalDerivativeNotation | NaturalFunctionNotation | { kind: "expression"; expression: Expr; } | { kind: "inequality"; operator: ">" | ... 3 more ... | "!="; left: Expr; right: Expr; } | { ...; } | { ...; } | { ...; } | { ...; }'.
+../packages/learning/src/unified-math-u3-audit.test.ts(1,33): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/unit-answers.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/verification-closure-e3.test.ts(3,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/verification-closure-e4.test.ts(3,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/verification-closure-e5.test.ts(3,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/verification-closure-e6.test.ts(3,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
+../packages/learning/src/verification-closure-e6r.test.ts(2,40): error TS2307: Cannot find module 'bun:test' or its corresponding type declarations.
