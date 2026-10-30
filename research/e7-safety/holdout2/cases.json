@@ -1,0 +1,1045 @@
+[
+ {
+  "id": "N-001",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "x^2 = 9",
+  "working": [
+   "x^2 = 9 ⇔ x = 3"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Explicit ⇔ drops x=-3 (solution set {-3,3})."
+ },
+ {
+  "id": "N-002",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "x^2 = 9",
+  "working": [
+   "x^2 = 9",
+   "⇔ x = 3"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Line starting ⇔ claims equivalence with x=3; loses x=-3."
+ },
+ {
+  "id": "N-003",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "x^2 = 9",
+  "working": [
+   "x^2 = 9",
+   "x = 3"
+  ],
+  "expected": [
+   "incomplete"
+  ],
+  "rationale": "No equivalence claimed; final set {3} misses -3."
+ },
+ {
+  "id": "N-004",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "answer-first",
+  "statement": "x^2 = 9",
+  "working": [
+   "x^2 = 9",
+   "x = 3"
+  ],
+  "expected": [
+   "incomplete"
+  ],
+  "rationale": "Answer-first: final set {3} misses -3, no ⇔."
+ },
+ {
+  "id": "N-005",
+  "feature": "F1",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "x^2 = 9",
+  "working": [
+   "x^2 = 9",
+   "⇔ x = 3 or x = -3"
+  ],
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Correct ⇔ chain; solution set {-3,3}."
+ },
+ {
+  "id": "N-006",
+  "feature": "F1",
+  "kind": "positive",
+  "channel": "answer-first",
+  "statement": "x^2 = 9",
+  "working": [
+   "x^2 = 9",
+   "x = 3 or x = -3"
+  ],
+  "expected": [
+   "correct"
+  ],
+  "rationale": "Complete solution set {-3,3}."
+ },
+ {
+  "id": "N-007",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "x^2 > 4",
+  "working": [
+   "x^2 > 4 ⇔ x > 2"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "x^2>4 ⇔ x>2 loses x<-2."
+ },
+ {
+  "id": "N-008",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "answer-first",
+  "statement": "x^2 >= 1",
+  "working": [
+   "x^2 >= 1",
+   "x >= 1"
+  ],
+  "expected": [
+   "incomplete"
+  ],
+  "rationale": "x^2>=1 has set (-inf,-1]∪[1,inf); x>=1 alone, no ⇔ → incomplete."
+ },
+ {
+  "id": "N-009",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "sqrt(x + 2) = x",
+  "working": [
+   "x + 2 = x^2",
+   "x^2 - x - 2 = 0",
+   "x = 2 or x = -1"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Extraneous root -1 kept: sqrt(1)=1 != -1. Solution set {2}."
+ },
+ {
+  "id": "N-010",
+  "feature": "F1",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "sqrt(x + 2) = x",
+  "working": [
+   "x + 2 = x^2",
+   "(x - 2)(x + 1) = 0",
+   "x = 2"
+  ],
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Squaring written as implication rows (no ⇔); final {2} is exactly the solution set."
+ },
+ {
+  "id": "N-011",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "sqrt(x + 2) = x",
+  "working": [
+   "sqrt(x + 2) = x ⇔ x + 2 = x^2"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Explicit ⇔ with squared equation gains x=-1 (x+2=x^2 has {-1,2})."
+ },
+ {
+  "id": "N-012",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "x^2/(x - 1) = 1/(x - 1)",
+  "working": [
+   "x^2 = 1",
+   "x = 1 or x = -1"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Excluded value x=1 kept as solution (denominator 0)."
+ },
+ {
+  "id": "N-013",
+  "feature": "F1",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "x^2/(x - 1) = 1/(x - 1)",
+  "working": [
+   "x^2/(x - 1) = 1/(x - 1) ⇔ x = -1"
+  ],
+  "expected": [
+   "verified"
+  ],
+  "rationale": "True equivalence on the domain x != 1: solution set {-1}."
+ },
+ {
+  "id": "N-014",
+  "feature": "F1",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "x^3 = x",
+  "working": [
+   "x^3 = x <=> x^2 = 1",
+   "<=> x = 1 or x = -1"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Dividing by x with <=> loses x=0 (set {-1,0,1})."
+ },
+ {
+  "id": "N-015",
+  "feature": "F1",
+  "kind": "positive",
+  "channel": "answer-first",
+  "statement": "(x - 1)/(x + 2) >= 0",
+  "working": [
+   "x < -2 or x >= 1"
+  ],
+  "expected": [
+   "correct"
+  ],
+  "rationale": "(x-1)/(x+2)>=0 ⇔ x<-2 or x>=1 (x=-2 excluded)."
+ },
+ {
+  "id": "N-016",
+  "feature": "F2",
+  "kind": "positive",
+  "channel": "policy",
+  "statement": "x^2/(x - 2) = 4/(x - 2)",
+  "mode": "answer-only",
+  "working": [
+   "x = -2"
+  ],
+  "expected": [
+   "full"
+  ],
+  "rationale": "Answer-only, correct complete answer {-2}."
+ },
+ {
+  "id": "N-017",
+  "feature": "F2",
+  "kind": "negative",
+  "channel": "policy",
+  "statement": "x^2/(x - 2) = 4/(x - 2)",
+  "mode": "answer-only",
+  "working": [
+   "x = 2 or x = -2"
+  ],
+  "expected": [
+   "none"
+  ],
+  "rationale": "States excluded value x=2 as solution."
+ },
+ {
+  "id": "N-018",
+  "feature": "F2",
+  "kind": "positive",
+  "channel": "policy",
+  "statement": "x^2/(x - 2) = 4/(x - 2)",
+  "mode": "method-required",
+  "working": [
+   "x^2 = 4",
+   "x = -2"
+  ],
+  "expected": [
+   "full"
+  ],
+  "rationale": "Method-required, valid steps, no rubric flags → omission of restriction not penalised."
+ },
+ {
+  "id": "N-019",
+  "feature": "F2",
+  "kind": "negative",
+  "channel": "policy",
+  "statement": "x^2/(x - 2) = 4/(x - 2)",
+  "mode": "method-required",
+  "rubric": {
+   "requireStatedRestrictions": true
+  },
+  "working": [
+   "x^2 = 4",
+   "x = -2"
+  ],
+  "expected": [
+   "partial"
+  ],
+  "rationale": "requireStatedRestrictions and x != 2 never stated → partial."
+ },
+ {
+  "id": "N-020",
+  "feature": "F2",
+  "kind": "negative",
+  "channel": "policy",
+  "statement": "x^2/(x - 2) = 4/(x - 2)",
+  "mode": "proof-required",
+  "working": [
+   "x = -2"
+  ],
+  "expected": [
+   "partial"
+  ],
+  "rationale": "Proof-required: bare one-line answer → partial."
+ },
+ {
+  "id": "N-021",
+  "feature": "F2",
+  "kind": "positive",
+  "channel": "policy",
+  "statement": "x^2/(x - 2) = 4/(x - 2)",
+  "mode": "proof-required",
+  "working": [
+   "x != 2",
+   "x^2 = 4",
+   "x = -2"
+  ],
+  "expected": [
+   "full"
+  ],
+  "rationale": "Proof-required: complete valid derivation with restriction."
+ },
+ {
+  "id": "N-022",
+  "feature": "F2",
+  "kind": "negative",
+  "channel": "policy",
+  "statement": "x^2/(x - 2) = 4/(x - 2)",
+  "mode": "proof-required",
+  "working": [
+   "x^2 = 4",
+   "x = 2"
+  ],
+  "expected": [
+   "none"
+  ],
+  "rationale": "Proof-required but final answer is the excluded value."
+ },
+ {
+  "id": "N-023",
+  "feature": "F2",
+  "kind": "negative",
+  "channel": "policy",
+  "statement": "x^3 = 4x",
+  "mode": "method-required",
+  "working": [
+   "x^2 = 4",
+   "x = 2 or x = -2"
+  ],
+  "expected": [
+   "partial"
+  ],
+  "rationale": "x^3=4x has {-2,0,2}; dividing by x loses 0 (no ⇔) → incomplete → partial."
+ },
+ {
+  "id": "N-024",
+  "feature": "F2",
+  "kind": "positive",
+  "channel": "policy",
+  "statement": "x^3 = 4x",
+  "mode": "proof-required",
+  "working": [
+   "x^3 - 4x = 0",
+   "x(x - 2)(x + 2) = 0",
+   "x = 0 or x = 2 or x = -2"
+  ],
+  "expected": [
+   "full"
+  ],
+  "rationale": "Complete factorised solution {-2,0,2}."
+ },
+ {
+  "id": "N-025",
+  "feature": "F2",
+  "kind": "positive",
+  "channel": "policy",
+  "statement": "sqrt(x + 6) = x",
+  "mode": "answer-only",
+  "working": [
+   "x = 3"
+  ],
+  "expected": [
+   "full"
+  ],
+  "rationale": "Answer-only, correct {3}, no checks required."
+ },
+ {
+  "id": "N-026",
+  "feature": "F2",
+  "kind": "positive",
+  "channel": "policy",
+  "statement": "sqrt(x + 6) = x",
+  "mode": "method-required",
+  "working": [
+   "x + 6 = x^2",
+   "(x - 3)(x + 2) = 0",
+   "x = 3"
+  ],
+  "expected": [
+   "full"
+  ],
+  "rationale": "Method-required, flags off: dropping -2 without written check is fine."
+ },
+ {
+  "id": "N-027",
+  "feature": "F2",
+  "kind": "negative",
+  "channel": "policy",
+  "statement": "sqrt(x + 6) = x",
+  "mode": "method-required",
+  "rubric": {
+   "requireShownCandidateChecks": true
+  },
+  "working": [
+   "x + 6 = x^2",
+   "(x - 3)(x + 2) = 0",
+   "x = 3"
+  ],
+  "expected": [
+   "partial"
+  ],
+  "rationale": "requireShownCandidateChecks: -2 dropped without written check."
+ },
+ {
+  "id": "N-028",
+  "feature": "F2",
+  "kind": "positive",
+  "channel": "policy",
+  "statement": "sqrt(x + 6) = x",
+  "mode": "method-required",
+  "rubric": {
+   "requireShownCandidateChecks": true
+  },
+  "working": [
+   "x + 6 = x^2",
+   "(x - 3)(x + 2) = 0",
+   "x = 3 or x = -2",
+   "x = -2: sqrt(4) = 2 != -2",
+   "x = 3"
+  ],
+  "expected": [
+   "full",
+   "unresolved"
+  ],
+  "rationale": "Check of -2 written; check-line parsing may cause abstention."
+ },
+ {
+  "id": "N-029",
+  "feature": "F2",
+  "kind": "negative",
+  "channel": "policy",
+  "statement": "sqrt(x + 6) = x",
+  "mode": "proof-required",
+  "working": [
+   "x + 6 = x^2",
+   "(x - 3)(x + 2) = 0",
+   "x = 3"
+  ],
+  "expected": [
+   "partial"
+  ],
+  "rationale": "Proof-required: extraneous candidate dropped without written check."
+ },
+ {
+  "id": "N-030",
+  "feature": "F3",
+  "kind": "ambiguous",
+  "channel": "identity",
+  "start": "log(100)",
+  "next": "2",
+  "expected": [
+   "ambiguous"
+  ],
+  "rationale": "log(100)=2 only in base 10; no convention."
+ },
+ {
+  "id": "N-031",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "identity",
+  "start": "log(100)",
+  "next": "2",
+  "convention": {
+   "log": "base10"
+  },
+  "expected": [
+   "verified"
+  ],
+  "rationale": "base10 convention: log(100)=2."
+ },
+ {
+  "id": "N-032",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "identity",
+  "start": "ln(exp(2))",
+  "next": "2",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "ln(exp(2)) = 2."
+ },
+ {
+  "id": "N-033",
+  "feature": "F3",
+  "kind": "negative",
+  "channel": "identity",
+  "start": "log_10(1000)",
+  "next": "2",
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "log_10(1000)=3, not 2."
+ },
+ {
+  "id": "N-034",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "identity",
+  "start": "log(x^2)",
+  "next": "2*log(x)",
+  "assumptions": [
+   "x > 0"
+  ],
+  "expected": [
+   "verified",
+   "ambiguous",
+   "unsupported"
+  ],
+  "rationale": "log(x^2)=2log(x) for x>0 in every base."
+ },
+ {
+  "id": "N-035",
+  "feature": "F3",
+  "kind": "domain",
+  "channel": "identity",
+  "start": "log(x^2)",
+  "next": "2*log(x)",
+  "expected": [
+   "missing-assumption",
+   "invalid",
+   "unsupported",
+   "ambiguous"
+  ],
+  "rationale": "Without x>0 fails at x<0 (rhs undefined); base-independent."
+ },
+ {
+  "id": "N-036",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "identity",
+  "start": "ln(2x)",
+  "next": "ln(2) + ln(x)",
+  "assumptions": [
+   "x > 0"
+  ],
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "rationale": "ln(2x)=ln2+ln x for x>0."
+ },
+ {
+  "id": "N-037",
+  "feature": "F3",
+  "kind": "negative",
+  "channel": "identity",
+  "start": "ln(x + 1)",
+  "next": "ln(x) + ln(1)",
+  "assumptions": [
+   "x > 0"
+  ],
+  "expected": [
+   "invalid",
+   "unsupported"
+  ],
+  "rationale": "ln(x+1) != ln(x)+ln(1)=ln(x)."
+ },
+ {
+  "id": "N-038",
+  "feature": "F3",
+  "kind": "ambiguous",
+  "channel": "algebra",
+  "statement": "log(x) = 1",
+  "working": [
+   "x = 10"
+  ],
+  "expected": [
+   "ambiguous"
+  ],
+  "rationale": "log(x)=1 → x=10 only in base 10."
+ },
+ {
+  "id": "N-039",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "log(x) = 1",
+  "working": [
+   "x = 10"
+  ],
+  "convention": {
+   "log": "base10"
+  },
+  "expected": [
+   "verified"
+  ],
+  "rationale": "base10: x=10."
+ },
+ {
+  "id": "N-040",
+  "feature": "F3",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "log(x) = 1",
+  "working": [
+   "x = 10"
+  ],
+  "convention": {
+   "log": "natural"
+  },
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "natural: x=e, not 10."
+ },
+ {
+  "id": "N-041",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "log(x) = 0",
+  "working": [
+   "x = 1"
+  ],
+  "expected": [
+   "verified",
+   "ambiguous"
+  ],
+  "rationale": "log(x)=0 ⇔ x=1 in every base."
+ },
+ {
+  "id": "N-042",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "ln(x) = 2",
+  "working": [
+   "x = exp(2)"
+  ],
+  "expected": [
+   "verified"
+  ],
+  "rationale": "ln x = 2 ⇔ x = e^2."
+ },
+ {
+  "id": "N-043",
+  "feature": "F3",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "log_10(x - 1) = 1",
+  "working": [
+   "x - 1 = 10",
+   "x = 11"
+  ],
+  "expected": [
+   "verified"
+  ],
+  "rationale": "log_10(x-1)=1 ⇔ x=11."
+ },
+ {
+  "id": "N-044",
+  "feature": "F4",
+  "kind": "negative",
+  "channel": "parser",
+  "text": "sech(x)",
+  "expected": [
+   "unsupported"
+  ],
+  "rationale": "Unknown function sech; must not be s*e*c*h*(x)."
+ },
+ {
+  "id": "N-045",
+  "feature": "F4",
+  "kind": "negative",
+  "channel": "parser",
+  "text": "blah(x) + 1",
+  "expected": [
+   "unsupported"
+  ],
+  "rationale": "Unknown function blah."
+ },
+ {
+  "id": "N-046",
+  "feature": "F4",
+  "kind": "malformed",
+  "channel": "parser",
+  "text": "sec(x",
+  "expected": [
+   "malformed"
+  ],
+  "rationale": "Unclosed bracket."
+ },
+ {
+  "id": "N-047",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "parser",
+  "text": "cbrt(-8)",
+  "expected": [
+   "parsed"
+  ],
+  "rationale": "cbrt of a negative constant is well formed."
+ },
+ {
+  "id": "N-048",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "identity",
+  "start": "cbrt(-8)",
+  "next": "-2",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Real cube root: cbrt(-8) = -2."
+ },
+ {
+  "id": "N-049",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "identity",
+  "start": "sec(x)^2 - 1",
+  "next": "tan(x)^2",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "rationale": "sec^2 x - 1 = tan^2 x where cos x != 0."
+ },
+ {
+  "id": "N-050",
+  "feature": "F4",
+  "kind": "negative",
+  "channel": "identity",
+  "start": "sec(x)^2",
+  "next": "1 + sin(x)^2",
+  "expected": [
+   "invalid",
+   "unsupported"
+  ],
+  "rationale": "sec^2 x != 1 + sin^2 x (x=pi/3: 4 vs 1.75)."
+ },
+ {
+  "id": "N-051",
+  "feature": "F4",
+  "kind": "negative",
+  "channel": "identity",
+  "start": "csc(x)",
+  "next": "1/sin(x)",
+  "expected": [
+   "unsupported"
+  ],
+  "rationale": "csc unknown; must abstain, not guess."
+ },
+ {
+  "id": "N-052",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "identity",
+  "start": "cbrt(x^3)",
+  "next": "x",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "rationale": "Real cube root: cbrt(x^3) = x for all real x."
+ },
+ {
+  "id": "N-053",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "derivative",
+  "expression": "sec(x)",
+  "working": "sec(x)tan(x)",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "rationale": "d/dx sec x = sec x tan x."
+ },
+ {
+  "id": "N-054",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "derivative",
+  "expression": "cbrt(x)",
+  "working": "1/(3*cbrt(x)^2)",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "rationale": "d/dx cbrt x = 1/(3 cbrt(x)^2), x != 0."
+ },
+ {
+  "id": "N-055",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "algebra",
+  "statement": "cbrt(x) = -2",
+  "working": [
+   "x = (-2)^3",
+   "x = -8"
+  ],
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Real cube root: cbrt(x)=-2 ⇔ x=-8."
+ },
+ {
+  "id": "N-056",
+  "feature": "F4",
+  "kind": "negative",
+  "channel": "algebra",
+  "statement": "cbrt(x) = -2",
+  "working": [
+   "no solution"
+  ],
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "cbrt is real-valued for negatives; x=-8 is a solution."
+ },
+ {
+  "id": "N-057",
+  "feature": "F4",
+  "kind": "positive",
+  "channel": "answer-first",
+  "statement": "cbrt(x) = -2",
+  "working": [
+   "x = -8"
+  ],
+  "expected": [
+   "correct"
+  ],
+  "rationale": "cbrt(x)=-2 → x=-8."
+ },
+ {
+  "id": "N-058",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "sin(x)/x",
+  "approach": "0",
+  "side": "both",
+  "working": "lim(x→0) sin(x)/x = 1",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Standard limit = 1."
+ },
+ {
+  "id": "N-059",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "(x^2-4)/(x-2)",
+  "approach": "2",
+  "side": "both",
+  "working": "(x^2-4)/(x-2) = x+2 → 4",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Cancel to x+2 → 4."
+ },
+ {
+  "id": "N-060",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "1/(x-2)",
+  "approach": "2",
+  "side": "right",
+  "working": "lim(x→2+) 1/(x-2) = ∞",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Right-hand → +∞."
+ },
+ {
+  "id": "N-061",
+  "feature": "F5",
+  "kind": "negative",
+  "channel": "limit",
+  "expression": "1/(x-2)",
+  "approach": "2",
+  "side": "left",
+  "working": "lim(x→2-) 1/(x-2) = ∞",
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Left-hand → -∞."
+ },
+ {
+  "id": "N-062",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "1/x",
+  "approach": "0",
+  "side": "both",
+  "working": "lim(x→0) 1/x does not exist",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "One-sided limits ±∞ differ → DNE."
+ },
+ {
+  "id": "N-063",
+  "feature": "F5",
+  "kind": "negative",
+  "channel": "limit",
+  "expression": "1/x",
+  "approach": "0",
+  "side": "both",
+  "working": "lim(x→0) 1/x = ∞",
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "Two-sided limit of 1/x at 0 does not exist."
+ },
+ {
+  "id": "N-064",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "1/x^2",
+  "approach": "0",
+  "side": "both",
+  "working": "lim(x→0) 1/x^2 = ∞",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Both sides → +∞."
+ },
+ {
+  "id": "N-065",
+  "feature": "F5",
+  "kind": "ambiguous",
+  "channel": "limit",
+  "expression": "1/x^2",
+  "approach": "0",
+  "side": "both",
+  "working": "lim(x→0) 1/x^2 does not exist",
+  "expected": [
+   "unsupported",
+   "invalid",
+   "verified"
+  ],
+  "rationale": "Convention-dependent DNE vs ∞."
+ },
+ {
+  "id": "N-066",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "(3x^2+1)/(x^2-5)",
+  "approach": "infinity",
+  "side": "both",
+  "working": "lim(x→∞) (3x^2+1)/(x^2-5) = 3",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "Leading coefficients ratio 3."
+ },
+ {
+  "id": "N-067",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "x^3/(x^2+1)",
+  "approach": "-infinity",
+  "side": "both",
+  "working": "lim(x→-∞) x^3/(x^2+1) = -∞",
+  "expected": [
+   "verified"
+  ],
+  "rationale": "x^3/(x^2+1) ~ x → -∞."
+ },
+ {
+  "id": "N-068",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "(1-cos(x))/x^2",
+  "approach": "0",
+  "side": "both",
+  "working": "lim(x→0) (1-cos(x))/x^2 = 1/2",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "rationale": "Standard (1-cos x)/x^2 → 1/2."
+ },
+ {
+  "id": "N-069",
+  "feature": "F5",
+  "kind": "negative",
+  "channel": "limit",
+  "expression": "(x^2-1)/(x+1)",
+  "approach": "-1",
+  "side": "both",
+  "working": "(x^2-1)/(x+1) = x - 1",
+  "expected": [
+   "incomplete"
+  ],
+  "rationale": "Simplification only, no value stated (value is -2)."
+ },
+ {
+  "id": "N-070",
+  "feature": "F5",
+  "kind": "positive",
+  "channel": "limit",
+  "expression": "abs(x)/x",
+  "approach": "0",
+  "side": "right",
+  "working": "lim(x→0+) abs(x)/x = 1",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "rationale": "|x|/x → 1 from the right."
+ },
+ {
+  "id": "N-071",
+  "feature": "F5",
+  "kind": "negative",
+  "channel": "limit",
+  "expression": "x/(x+1)",
+  "approach": "-1",
+  "side": "left",
+  "working": "lim(x→-1-) x/(x+1) = -∞",
+  "expected": [
+   "invalid"
+  ],
+  "rationale": "x/(x+1) as x→-1- → +∞, not -∞."
+ }
+]

@@ -16,7 +16,7 @@ import { assessLinearAlgebra, LINEAR_ALGEBRA_B2_CONTRACT, type LAProblem, type L
 import { assessComplex, COMPLEX_B3_CONTRACT, type ComplexProblem, type ComplexStep } from "./complex-polynomial.ts";
 import { D2_MAX_STAGES, D2_PROOF_STATE_VERSION, D2ProofState } from "./d2-proof-state.ts";
 import { D3_BINDING_CONTRACT, MathematicalBindingStore, type D3Problem, type D3Working } from "./cross-domain-bindings.ts";
-import { NATURAL_WORKING_CONTRACT, equationAsExpression, naturalRestrictionKeys, parseNaturalWorking, type NaturalWorkingInput, type SourceLocation } from "./natural-working.ts";
+import { NATURAL_WORKING_CONTRACT, equationAsExpression, naturalRestrictionKeys, parseNaturalWorking, resolveLogNotation, restoreOriginalFragment, usesBareLog, type NaturalWorkingInput, type NotationConventions, type SourceLocation } from "./natural-working.ts";
 import { NATURAL_ADAPTER_CONTRACT, adaptNaturalWorking, type NaturalAdapterResult } from "./natural-domain-adapters.ts";
 import { evaluateLedger } from "./claim-certifier.ts";
 import { CLAIM_LEDGER_CONTRACT, type CoverageRecord } from "./claim-ledger.ts";
@@ -47,9 +47,11 @@ export interface M2CrossDomainProblem { domain:"m2-cross-domain"; stages:{id:str
 export interface M2CrossDomainWorking { stages:{id:string;working:string[]|M1Step[]|M2Step[]|CalculusStep[]|CalculusMethodStep[]|SymbolicStep[]|B1Step[]|LAStep[]|ComplexStep[]|{steps:Record<string,unknown>[]} | {geometry:{steps:Record<string,unknown>[]};calculation:string[];domainConclusion?:{symbol:string;value:number}}}[] }
 export type MathematicalProblem = TextProblem | GeometryProblem | MixedProblem | M1Problem | M2Problem | CalculusProblem | CalculusMethodProblem | SymbolicProblem | B1Problem | LAProblem | ComplexProblem | M2CrossDomainProblem | D3Problem;
 export type StudentWorking = string[] | NaturalWorkingInput | M1Step[] | M2Step[] | CalculusStep[] | CalculusMethodStep[] | SymbolicStep[] | B1Step[] | LAStep[] | ComplexStep[] | M2CrossDomainWorking | D3Working | { steps: Record<string, unknown>[] } | { geometry: { steps: Record<string, unknown>[] }; calculation: string[]; domainConclusion?: { symbol: string; value: number } };
-export interface AssessOptions extends WorkingOptions { /** E7 Phase 6: internal; the working is already the task-relevant part of a submission, do not exclude side claims again */ sideClaimsExcluded?: boolean; maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; proofContext?: ProofContext; symbolicBudget?: SymbolicBudget; maxCrossDomainStages?: number }
+export interface AssessOptions extends WorkingOptions { /** E7 Phase 6: internal; the working is already the task-relevant part of a submission, do not exclude side claims again */ sideClaimsExcluded?: boolean; maxRuleApplications?: number; python?: string; geometryRoot?: string; geometryTimeoutMs?: number; geometryWorkerCount?: number; geometryQueueLimit?: number; signal?: AbortSignal; proofContext?: ProofContext; symbolicBudget?: SymbolicBudget; maxCrossDomainStages?: number; /** assessment or curriculum notation conventions (bare log); a question's own `conventions` take precedence */ conventions?: NotationConventions }
 export interface AssessmentStep { index: number; classification: Classification; justification: string; reasoner: string; dependencies: unknown[]; source?:SourceLocation }
-export interface AssessmentEnvelope { contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | "d3-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus" | "symbolic" | "probability-statistics" | "linear-algebra" | "complex-polynomial"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode; /** E3: the mandatory final gate record; present on every envelope returned by assessMathematicalWorking */ acceptanceGate?: AcceptanceGateRecord; /** E7 Phase 6: proof obligations of a typed (structured) submission (natural-text routes carry them in domainPayload.proofObligations) */ proofObligations?: ObligationSet; /** E7 Phase 6: how the single certification authority reached the final verdict */ certification?: CertificationRecord }
+/** a finding about the evidence of reasoning (not about mathematical validity); the assessment rubric decides whether it costs process credit */
+export interface ProcessFinding { kind: "restriction-not-stated" | "candidate-check-not-shown" | "cited-rule-contradicted" | "no-derivation-shown"; line: number | null; detail: string }
+export interface AssessmentEnvelope { /** finalisation (compatible extension): process findings recorded separately from the classification */ processFindings?: ProcessFinding[]; contractVersion: typeof UNIFIED_MATH_CONTRACT; domain: "arithmetic" | "algebra" | "geometry" | "mixed" | "m2-cross-domain" | "d3-cross-domain" | M1Problem["domain"] | M2Problem["domain"] | "calculus" | "symbolic" | "probability-statistics" | "linear-algebra" | "complex-polynomial"; classification: Classification; correct: true | false | null; complete: boolean; firstInvalidStep: number | null; steps: AssessmentStep[]; proofDependencies: unknown[]; domainRestrictions: string[]; outstandingObligations: string[]; skills: string[]; reasoners: { id: string; version: string }[]; justification: string; domainPayload: unknown; failureKind?: "transport" | "mathematical"; infrastructureFailure?: GeometryFailureCode; /** E3: the mandatory final gate record; present on every envelope returned by assessMathematicalWorking */ acceptanceGate?: AcceptanceGateRecord; /** E7 Phase 6: proof obligations of a typed (structured) submission (natural-text routes carry them in domainPayload.proofObligations) */ proofObligations?: ObligationSet; /** E7 Phase 6: how the single certification authority reached the final verdict */ certification?: CertificationRecord }
 type GeometryNative = { outcome: string; correct: boolean | null; firstInvalidStep: number | null; steps: { index: number; status: string; explanation: string }[]; summary: string; resourceLimit: boolean; geometry: { native_verdicts: string[]; proof_dependencies: unknown[]; mathematical_dependencies: unknown[]; unresolved_obligations: string[]; skill_ids: string[]; resource_limit_reached: boolean } };
 
 const malformed = (domain: AssessmentEnvelope["domain"], why: string): AssessmentEnvelope => ({ contractVersion: UNIFIED_MATH_CONTRACT, domain, classification: "malformed", correct: null, complete: false, firstInvalidStep: null, steps: [], proofDependencies: [], domainRestrictions: [], outstandingObligations: [why], skills: [], reasoners: [{ id: "unified-dispatch", version: "u1" }], justification: why, domainPayload: null });
@@ -142,14 +144,14 @@ function refineLoss(statement:string,lines:string[],assessed:AssessmentEnvelope)
   if(assessed.classification!=="invalid"||assessed.domain==="arithmetic")return assessed;
   const steps=assessed.steps.map(step=>({...step}));let loss=false,firstBad=-1;const lost:string[]=[];
   const completeness=/\b(?:the\s+)?(?:complete|full|entire|whole)\s+(?:solution|answer|set)\b|\bthis is (?:the )?(?:only|whole|entire|complete)\b|\ball (?:the )?solutions\b|\bthe only solution\b/i;
-  for(let i=1;i<steps.length&&i<lines.length;i++){if(steps[i].classification!=="invalid")continue;const v=verifyWorkingStep(statement,lines[i-1],lines[i]);
-    if(v.effect==="invalid-loss"&&!lines.slice(i+1).some(l=>completeness.test(l))){loss=true;lost.push(`line ${i+1}: ${v.detail}`);steps[i]={...steps[i],classification:"incomplete",justification:`valid but incomplete narrowing: ${v.detail}`}}else if(firstBad<0)firstBad=i}
+  for(let i=1;i<steps.length&&i<lines.length;i++){if(steps[i].classification!=="invalid")continue;const v=verifyWorkingStep(statement,lines[i-1].replace(/^\s*⇔\s*/,""),lines[i].replace(/^\s*⇔\s*/,""));
+    if(v.effect==="invalid-loss"&&!/^\s*⇔/.test(lines[i])&&!lines.slice(i+1).some(l=>completeness.test(l))){ /* an explicitly claimed equivalence (⇔) that loses solutions stays invalid */loss=true;lost.push(`line ${i+1}: ${v.detail}`);steps[i]={...steps[i],classification:"incomplete",justification:`valid but incomplete narrowing: ${v.detail}`}}else if(firstBad<0)firstBad=i}
   if(!loss)return assessed;
   if(firstBad>=0)return{...assessed,steps,firstInvalidStep:firstBad,justification:`line ${firstBad+1} is not an equivalent step`};
   return{...assessed,classification:"incomplete",correct:null,complete:false,firstInvalidStep:null,steps,justification:"every step is valid, but the working narrows the solution set and does not account for all solutions",outstandingObligations:[...assessed.outstandingObligations,...lost]}}
 
 function gateTextRoute(domain:AssessmentEnvelope["domain"],parsed:NaturalParseResult,assessed0:AssessmentEnvelope,input:NaturalWorkingInput,statement?:string):AssessmentEnvelope{
-  const assessed=statement?refineLoss(statement,parsed.lines.map(l=>l.source.text),assessed0):assessed0;
+  const assessed=statement?refineLoss(statement,parsed.lines.map(l=>l.connective==="equivalent"?`⇔ ${l.source.text}`:l.source.text),assessed0):assessed0;
   const finalClaimInvalid=assessed.classification==="invalid"&&assessed.firstInvalidStep===null&&(assessed.domainPayload as {invalidAt?:string}|null)?.invalidAt==="final-claim"&&assessed.steps.length===parsed.lines.length;
   const accounts:AccountEntry[]=parsed.lines.map((l,i)=>({lineId:l.id,role:"claim-step" as const,stepIndex:i,dependsOn:i?[parsed.lines[i-1].id]:[]}));
   const violations:string[]=[];if(assessed.steps.length>parsed.lines.length)violations.push(`reasoner returned ${assessed.steps.length} steps for ${parsed.lines.length} lines`);
@@ -239,10 +241,16 @@ async function assessE5Route(problem: MathematicalProblem, input: NaturalWorking
   let verdict = resolveVerdict(account, plan.nativeComplete, plan.obligations);
   let classification: Classification = verdict.classification as Classification;
   if (classification === "incomplete" && plan.terminal === "missing-assumption") classification = "missing-assumption";
+  let domainGap: string | null = null;
+  // an antiderivative claimed without a stated domain must be defined wherever the integrand is (same check as the typed and E6 routes)
+  if (classification === "verified" && domain === "calculus" && (problem as { task?: string }).task === "indefinite-integral" && (problem as { integrand?: unknown }).integrand && plan.final?.kind === "expression") {
+    const gap = typedCalculusDomainGap(problem as CalculusProblem, [plan.final.value as Expr]);
+    if (gap) { domainGap = gap.reason; classification = gap.kind as Classification; verdict = { ...verdict, classification: gap.kind as never, correct: null, complete: false, justification: `domain: ${gap.reason}; ${verdict.justification}`, obligations: [gap.reason, ...verdict.obligations] }; }
+  }
   const destination = await e5DestinationCheck(problem, input, plan, classification, options);
   let notes = [...plan.notes];
   if (destination) { notes.push(destination.note); if (classification === "verified" && destination.contradicts) { classification = "unsupported"; verdict = { ...verdict, classification: "unsupported", correct: null, complete: false, justification: `the destination reasoner contradicts the independent check (${destination.note}); nothing is accepted`, obligations: [destination.note] }; } }
-  const steps = stepsFromAccount(plan.parsed, account);
+  const steps0 = stepsFromAccount(plan.parsed, account), steps = domainGap ? steps0.map((st, k) => k === steps0.length - 1 && st.classification === "verified" ? { ...st, classification, justification: `the antiderivative is not defined on the whole domain of the integrand: ${domainGap}` } : st) : steps0;
   return { contractVersion: UNIFIED_MATH_CONTRACT, domain, classification, correct: classification === "verified" ? true : classification === "invalid" ? false : null, complete: classification === "verified", firstInvalidStep: classification === "invalid" ? verdict.firstInvalidStep : null,
     steps, proofDependencies: steps.map((s) => s.dependencies), domainRestrictions: plan.restrictions, outstandingObligations: classification === "verified" ? [] : verdict.obligations, skills: [`${domain}.natural-e5.${plan.family}`], reasoners,
     justification: classification === "missing-assumption" ? verdict.obligations[0] ?? "an assumption is missing" : verdict.justification,
@@ -391,9 +399,11 @@ async function assessCandidateBase(problem: MathematicalProblem, studentWorking:
     const lbl:{index:number;label:string;verdict:string}[]=[];
     if((problem as any).task==="derivative"){(studentWorking as CalculusStep[]).forEach((st,i)=>{const inp=st.input??(i===0?(problem as CalculusProblem & {expression:Expr}).expression:undefined);if(inp&&typeof st.rule==="string"&&st.rule.trim()){lbl.push({index:i,label:st.rule,verdict:ruleLabelVerdict(st.rule,inp,(problem as any).variable??"x")})}})}
     const wrong=lbl.find(x=>x.verdict==="contradicted"&&native0.steps[x.index]?.classification==="verified");
-    const native1=wrong?{...native0,classification:"invalid" as never,correct:false as never,complete:false,firstInvalidStep:wrong.index as never,justification:`the cited rule "${wrong.label}" does not apply to this step's expression, although the result is correct; `+native0.justification,steps:native0.steps.map(s=>s.index===wrong.index?{...s,classification:"invalid" as never,justification:`the cited rule "${wrong.label}" cannot produce this step from its input`}:s)}:native0;
+    // finalisation: the mathematics and the cited justification are separate findings. A correct step under a wrong cited rule stays mathematically valid;
+    // the contradicted citation is recorded as a process finding, and the assessment rubric decides whether process marks are deducted (assessment-policy.ts).
+    const native1=wrong?{...native0,justification:`${native0.justification}; process finding: the cited rule "${wrong.label}" does not apply to this step's expression, although the result is correct`,processFindings:[{kind:"cited-rule-contradicted" as const,line:wrong.index+1,detail:`the cited rule "${wrong.label}" cannot produce this step from its input; the result itself is correct`}]}:native0;
     const native=gap?{...native1,classification:gap.kind as never,correct:null as never,complete:false,outstandingObligations:[...native0.outstandingObligations,gap.reason],justification:`domain: ${gap.reason}; `+native0.justification,steps:native0.steps.map(s=>s.classification==="verified"?{...s,classification:gap.kind as never}:s)}:native1;
-    return {contractVersion:UNIFIED_MATH_CONTRACT,domain:"calculus",classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"calculus:exact",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"calculus:exact",version:CALCULUS_CONTRACT}],justification:native.justification,domainPayload:{...native,ruleLabels:lbl.map(x=>({...x,certified:x.verdict==="applies"?"applies":x.verdict==="unrecognised"?"uncertified":"contradicted"}))}};
+    return {...((native as unknown as {processFindings?:ProcessFinding[]}).processFindings?{processFindings:(native as unknown as {processFindings:ProcessFinding[]}).processFindings}:{}),contractVersion:UNIFIED_MATH_CONTRACT,domain:"calculus",classification:native.classification,correct:native.correct,complete:native.complete,firstInvalidStep:native.firstInvalidStep,steps:native.steps.map(s=>({index:s.index,classification:s.classification,justification:s.justification,reasoner:"calculus:exact",dependencies:s.dependencies})),proofDependencies:native.steps.map(s=>s.dependencies),domainRestrictions:native.domainRestrictions,outstandingObligations:native.outstandingObligations,skills:native.skills,reasoners:[{id:"calculus:exact",version:CALCULUS_CONTRACT}],justification:native.justification,domainPayload:{...native,ruleLabels:lbl.map(x=>({...x,certified:x.verdict==="applies"?"applies":x.verdict==="unrecognised"?"uncertified":"contradicted"}))}};
   }
   if (problem.domain === "geometry") {
     if (!studentWorking || Array.isArray(studentWorking) || !("steps" in studentWorking) || !Array.isArray(studentWorking.steps)) return malformed("geometry", "geometry working must contain structured steps");
@@ -461,7 +471,7 @@ function algebraGroundings(statement: string, parsed: NaturalParseResult, check:
 function gateAlgebraText(statement: string, parsed: NaturalParseResult, rawText: string, cand: AssessmentEnvelope): AssessmentEnvelope {
   if (parsed.classification !== "parsed") return cand.classification === "verified" ? withdrawAcceptance(cand, "algebra-text", "downgraded-no-independent-evidence", "the working could not be parsed for independent verification") : { ...cand, acceptanceGate: gateRecord("algebra-text", cand, { reconciliation: "the working is not parsed; nothing is accepted" }) };
   const check = checkAlgebraSubmission(statement, parsed), dec = reconcileAlgebra(cand.classification, check);
-  const evidence = evidenceFromCheck(check, parsed.lines.map((l) => l.source.text)), summary = checkerSummary(check);
+  const evidence = evidenceFromCheck(check, parsed.lines.map((l) => l.source.text), parsed.lines.map((l) => l.source.line)), summary = checkerSummary(check);
   const allU4 = evidence.length > 0 && evidence.every((e) => e.checker === "u4+exact-solution-set" || e.checker === "u4-identity" || e.checker === "exact-arithmetic");
   const level: GateLevel = dec.classification === "verified" ? (allU4 && check.u4Steps > 0 && check.exactSteps === 0 ? "u4-kernel" : "independent-exact-checker") : "none";
   const record = gateRecord("algebra-text", cand, { verdict: dec.classification, independentlyVerified: dec.classification === "verified", level, source: dec.source, evidence, obligations: check.obligations, reconciliation: dec.why, checker: summary });
@@ -595,7 +605,33 @@ function certifyClaims(problem: MathematicalProblem, working0: StudentWorking, c
   const why = `claim accounting: ${lv.blocking.length} recognized claim(s) are not proven (line ${lv.blocking[0].line}: ${lv.blocking[0].reason})`;
   return withLedger(withdrawAcceptance(cand, (cand.acceptanceGate?.route ?? "natural-other") as AcceptanceGateRecord["route"], "downgraded-unresolved-lines", why, cand.acceptanceGate?.evidence ?? []));
 }
+/**
+ * Notation conventions (finalisation): an explicit base in the expression wins; then the question's `conventions`; then the assessment's
+ * (`options.conventions`). With none, bare "log" is read both ways: a verdict that is the same under the natural and the base-10 reading stands
+ * (the base does not matter); otherwise the assessment is ambiguous. "ln" is always the natural logarithm.
+ */
 export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking0: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
+  // the convention is applied to THIS assessment's own copy of its texts (same-length explicit spelling); nothing is shared between assessments
+  const conv: NotationConventions = { ...(options.conventions ?? {}), ...(((problem as { conventions?: NotationConventions } | null)?.conventions) ?? {}) };
+  const stmt = typeof (problem as { statement?: unknown } | null)?.statement === "string" ? (problem as { statement: string }).statement : null;
+  const wText = studentWorking0 && !Array.isArray(studentWorking0) && typeof (studentWorking0 as { text?: unknown }).text === "string" ? (studentWorking0 as { text: string }).text : null;
+  const wLines = Array.isArray(studentWorking0) && studentWorking0.every((x) => typeof x === "string") ? (studentWorking0 as string[]) : null;
+  const bare = [stmt, wText, ...(wLines ?? [])].some((t) => typeof t === "string" && usesBareLog(t));
+  if (!bare) return assessMathematicalWorkingIn(problem, studentWorking0, options);
+  const under = async (log: "natural" | "base10") => {
+    const p = stmt === null ? problem : ({ ...(problem as object), statement: resolveLogNotation(stmt, log) } as MathematicalProblem);
+    const w = wText !== null ? ({ ...(studentWorking0 as object), text: resolveLogNotation(wText, log) } as StudentWorking) : wLines ? (wLines.map((t) => resolveLogNotation(t, log)) as StudentWorking) : studentWorking0;
+    const env = await assessMathematicalWorkingIn(p, w, options);
+    const original = wText ?? (wLines ? wLines.join("\n") : ""), rewritten = resolveLogNotation(original, log);
+    return { ...env, steps: env.steps.map((st) => st.source ? { ...st, source: { ...st.source, text: restoreOriginalFragment(st.source.text, rewritten, original) } } : st) };
+  };
+  if (conv.log) return under(conv.log);
+  const [a, b] = [await under("natural"), await under("base10")];
+  if (a.classification === b.classification) return { ...a, justification: `${a.justification} (bare log: the same verdict under the natural and the base-10 reading)` };
+  const why = `bare log has no stated base and the verdict depends on it (natural log: ${a.classification}; base 10: ${b.classification}); state the base or set a notation convention`;
+  return { ...a, classification: "ambiguous", correct: null, complete: false, firstInvalidStep: null, justification: why, outstandingObligations: [why] };
+}
+async function assessMathematicalWorkingIn(problem: MathematicalProblem, studentWorking0: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   // E7 Phase 6: a list of text lines for a statement problem is the same input as natural text; it takes the same route, so it gets the same obligations
   const studentWorking: StudentWorking = !!problem && typeof problem === "object" && "statement" in problem && typeof (problem as { statement: unknown }).statement === "string" && Array.isArray(studentWorking0) && studentWorking0.length > 0 && studentWorking0.every((x) => typeof x === "string")
     ? ({ format: "natural", text: (studentWorking0 as string[]).join("\n") } as NaturalWorkingInput) : studentWorking0;

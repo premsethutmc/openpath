@@ -1,0 +1,964 @@
+[
+ {
+  "id": "H-001",
+  "invariant": "I1",
+  "kind": "minimal",
+  "channel": "parser",
+  "expected": [
+   "malformed"
+  ],
+  "got": "malformed",
+  "outcome": "agree",
+  "detail": "unexpected token *"
+ },
+ {
+  "id": "H-002",
+  "invariant": "I1",
+  "kind": "minimal",
+  "channel": "parser",
+  "expected": [
+   "malformed"
+  ],
+  "got": "malformed",
+  "outcome": "agree",
+  "detail": "unexpected trailing notation"
+ },
+ {
+  "id": "H-003",
+  "invariant": "I1",
+  "kind": "minimal",
+  "channel": "parser",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "parsed",
+  "outcome": "FALSE-ACCEPT",
+  "detail": "notation parsed into existing typed mathematical representations"
+ },
+ {
+  "id": "H-004",
+  "invariant": "I1",
+  "kind": "minimal",
+  "channel": "parser",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "detail": "unsupported: function arcsin(…) is not supported"
+ },
+ {
+  "id": "H-005",
+  "invariant": "I1",
+  "kind": "minimal",
+  "channel": "parser",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "parsed",
+  "outcome": "FALSE-ACCEPT",
+  "detail": "notation parsed into existing typed mathematical representations"
+ },
+ {
+  "id": "H-006",
+  "invariant": "I1",
+  "kind": "minimal",
+  "channel": "parser",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "detail": "unsupported: function blorp(…) is not supported"
+ },
+ {
+  "id": "H-007",
+  "invariant": "I1",
+  "kind": "minimal",
+  "channel": "parser",
+  "expected": [
+   "ambiguous"
+  ],
+  "got": "ambiguous",
+  "outcome": "agree",
+  "detail": "ambiguous: cos with an unparenthesised argument followed by ^"
+ },
+ {
+  "id": "H-008",
+  "invariant": "I1",
+  "kind": "contrast",
+  "channel": "parser",
+  "expected": [
+   "parsed"
+  ],
+  "got": "parsed",
+  "outcome": "agree",
+  "detail": "notation parsed into existing typed mathematical representations"
+ },
+ {
+  "id": "H-009",
+  "invariant": "I1",
+  "kind": "contrast",
+  "channel": "parser",
+  "expected": [
+   "parsed"
+  ],
+  "got": "ambiguous",
+  "outcome": "abstain",
+  "detail": "ambiguous: bare log has no stated base (natural or base 10)"
+ },
+ {
+  "id": "H-010",
+  "invariant": "I1",
+  "kind": "composition",
+  "channel": "symbolic",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "adapter-unavailable",
+  "outcome": "abstain",
+  "detail": "adapter: unrepresentable: sinh"
+ },
+ {
+  "id": "H-011",
+  "invariant": "I1",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "detail": "some lines could not be analysed exactly; they are not judged, and the working is not certified"
+ },
+ {
+  "id": "H-012",
+  "invariant": "I1",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "malformed"
+  ],
+  "got": "malformed",
+  "outcome": "agree",
+  "detail": "missing closing parenthesis"
+ },
+ {
+  "id": "H-013",
+  "invariant": "I1",
+  "kind": "composition",
+  "channel": "answer-first",
+  "expected": [
+   "unsupported",
+   "unresolved"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "detail": "outside the exact checker's scope: not a numeric expression problem"
+ },
+ {
+  "id": "H-014",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-015",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-016",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-017",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-018",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-019",
+  "invariant": "I2",
+  "kind": "notation",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-020",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-021",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-022",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-023",
+  "invariant": "I2",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "invalid"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-024",
+  "invariant": "I2",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "detail": "step 1: exact substitution at zero gives 1 and -1"
+ },
+ {
+  "id": "H-025",
+  "invariant": "I2",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "invalid"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-026",
+  "invariant": "I2",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "invalid"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-027",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set no real solutions is stated"
+ },
+ {
+  "id": "H-028",
+  "invariant": "I2",
+  "kind": "minimal",
+  "channel": "answer-first",
+  "expected": [
+   "correct"
+  ],
+  "got": "correct",
+  "outcome": "agree",
+  "detail": "the stated solution no real solutions is exactly the problem's solution set"
+ },
+ {
+  "id": "H-029",
+  "invariant": "I2",
+  "kind": "contrast",
+  "channel": "algebra",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "detail": "line 3: the step discards every solution of the original problem: all real numbers became no real solutions but the problem's solution set is all real numbers"
+ },
+ {
+  "id": "H-030",
+  "invariant": "I2",
+  "kind": "contrast",
+  "channel": "answer-first",
+  "expected": [
+   "incorrect"
+  ],
+  "got": "incorrect",
+  "outcome": "agree",
+  "detail": "the answer states there is no solution, but the problem's solution set is all real numbers"
+ },
+ {
+  "id": "H-031",
+  "invariant": "I2",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set no real solutions is stated"
+ },
+ {
+  "id": "H-032",
+  "invariant": "I3",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "step 1: expression values agree but the target changes the domain"
+ },
+ {
+  "id": "H-033",
+  "invariant": "I3",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every symbolic transformation has a replayable exact certificate"
+ },
+ {
+  "id": "H-034",
+  "invariant": "I3",
+  "kind": "notation",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every symbolic transformation has a replayable exact certificate"
+ },
+ {
+  "id": "H-035",
+  "invariant": "I3",
+  "kind": "notation",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every symbolic transformation has a replayable exact certificate"
+ },
+ {
+  "id": "H-036",
+  "invariant": "I3",
+  "kind": "notation",
+  "channel": "symbolic",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "adapter-unavailable",
+  "outcome": "abstain",
+  "detail": "adapter: unrepresentable: symbolic exponent"
+ },
+ {
+  "id": "H-037",
+  "invariant": "I3",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-038",
+  "invariant": "I3",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-039",
+  "invariant": "I3",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "step 1: expression values agree but the target changes the domain"
+ },
+ {
+  "id": "H-040",
+  "invariant": "I3",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "step 1: expression values agree but the target changes the domain"
+ },
+ {
+  "id": "H-041",
+  "invariant": "I3",
+  "kind": "composition",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "step 1: expression values agree but the target changes the domain"
+ },
+ {
+  "id": "H-042",
+  "invariant": "I3",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "detail": "the final statement ({5}) includes values that are not solutions; the problem's solution set is no real solutions"
+ },
+ {
+  "id": "H-043",
+  "invariant": "I3",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set no real solutions is stated"
+ },
+ {
+  "id": "H-044",
+  "invariant": "I3",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set {6} is stated"
+ },
+ {
+  "id": "H-045",
+  "invariant": "I3",
+  "kind": "contrast",
+  "channel": "algebra",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "detail": "the final statement ({-1, 6}) includes values that are not solutions; the problem's solution set is {6}"
+ },
+ {
+  "id": "H-046",
+  "invariant": "I4",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every symbolic transformation has a replayable exact certificate"
+ },
+ {
+  "id": "H-047",
+  "invariant": "I4",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "step 1: canonical identity requires stated obligations and the same domain"
+ },
+ {
+  "id": "H-048",
+  "invariant": "I4",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every symbolic transformation has a replayable exact certificate"
+ },
+ {
+  "id": "H-049",
+  "invariant": "I4",
+  "kind": "minimal",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every symbolic transformation has a replayable exact certificate"
+ },
+ {
+  "id": "H-050",
+  "invariant": "I4",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "step 1: removing an absolute value requires a nonnegative assumption"
+ },
+ {
+  "id": "H-051",
+  "invariant": "I4",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "step 1: removing an absolute value requires a nonnegative assumption"
+ },
+ {
+  "id": "H-052",
+  "invariant": "I4",
+  "kind": "composition",
+  "channel": "symbolic",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every symbolic transformation has a replayable exact certificate"
+ },
+ {
+  "id": "H-053",
+  "invariant": "I4",
+  "kind": "composition",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "H-054",
+  "invariant": "I4",
+  "kind": "contrast",
+  "channel": "symbolic",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "adapter-unavailable",
+  "outcome": "abstain",
+  "detail": "adapter: unrepresentable: symbolic exponent"
+ },
+ {
+  "id": "H-055",
+  "invariant": "I4",
+  "kind": "minimal",
+  "channel": "integral",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "all 1 submitted line(s) are accounted for and verified"
+ },
+ {
+  "id": "H-056",
+  "invariant": "I4",
+  "kind": "contrast",
+  "channel": "integral",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "detail": "state the domain x - 2 > 0 (a logarithm without absolute value assumes it)"
+ },
+ {
+  "id": "H-057",
+  "invariant": "I4",
+  "kind": "minimal",
+  "channel": "integral",
+  "expected": [
+   "invalid",
+   "missing-assumption"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "detail": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "H-058",
+  "invariant": "I4",
+  "kind": "contrast",
+  "channel": "integral",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "all 1 submitted line(s) are accounted for and verified"
+ },
+ {
+  "id": "H-059",
+  "invariant": "I4",
+  "kind": "contrast",
+  "channel": "integral",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "detail": "line 1 is mathematically invalid"
+ },
+ {
+  "id": "H-060",
+  "invariant": "I4",
+  "kind": "notation",
+  "channel": "integral",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "all 1 submitted line(s) are accounted for and verified"
+ },
+ {
+  "id": "H-061",
+  "invariant": "I4",
+  "kind": "composition",
+  "channel": "integral",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "all 1 submitted line(s) are accounted for and verified"
+ },
+ {
+  "id": "H-062",
+  "invariant": "I4",
+  "kind": "composition",
+  "channel": "integral",
+  "expected": [
+   "invalid",
+   "missing-assumption",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "detail": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "H-063",
+  "invariant": "I5",
+  "kind": "minimal",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set {9} is stated"
+ },
+ {
+  "id": "H-064",
+  "invariant": "I5",
+  "kind": "notation",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set {-6, 6} is stated"
+ },
+ {
+  "id": "H-065",
+  "invariant": "I5",
+  "kind": "minimal",
+  "channel": "answer-first",
+  "expected": [
+   "correct"
+  ],
+  "got": "correct",
+  "outcome": "agree",
+  "detail": "the stated solution {1} is exactly the problem's solution set"
+ },
+ {
+  "id": "H-066",
+  "invariant": "I5",
+  "kind": "minimal",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set {5} is stated"
+ },
+ {
+  "id": "H-067",
+  "invariant": "I5",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set {5} is stated"
+ },
+ {
+  "id": "H-068",
+  "invariant": "I5",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "incomplete",
+   "invalid"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "detail": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "H-069",
+  "invariant": "I5",
+  "kind": "composition",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set (4, inf) is stated"
+ },
+ {
+  "id": "H-070",
+  "invariant": "I6",
+  "kind": "minimal",
+  "channel": "algebra",
+  "expected": [
+   "incomplete",
+   "invalid"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "detail": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "H-071",
+  "invariant": "I6",
+  "kind": "minimal",
+  "channel": "answer-first",
+  "expected": [
+   "incomplete",
+   "incorrect"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "detail": "the stated solution {-5, 5} omits solutions: the problem's solution set is {-5, 0, 5}"
+ },
+ {
+  "id": "H-072",
+  "invariant": "I6",
+  "kind": "contrast",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "detail": "all 3 steps are valid and the answer is correct"
+ },
+ {
+  "id": "H-073",
+  "invariant": "I6",
+  "kind": "minimal",
+  "channel": "algebra",
+  "expected": [
+   "incomplete",
+   "invalid"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "detail": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "H-074",
+  "invariant": "I6",
+  "kind": "contrast",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "malformed",
+  "outcome": "abstain",
+  "detail": "solution branches must name one variable"
+ },
+ {
+  "id": "H-075",
+  "invariant": "I6",
+  "kind": "minimal",
+  "channel": "algebra",
+  "expected": [
+   "incomplete",
+   "invalid"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "detail": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "H-076",
+  "invariant": "I6",
+  "kind": "contrast",
+  "channel": "algebra",
+  "expected": [
+   "verified"
+  ],
+  "got": "malformed",
+  "outcome": "abstain",
+  "detail": "solution branches must name one variable"
+ },
+ {
+  "id": "H-077",
+  "invariant": "I6",
+  "kind": "minimal",
+  "channel": "algebra",
+  "expected": [
+   "incomplete",
+   "invalid"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "detail": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "H-078",
+  "invariant": "I6",
+  "kind": "contrast",
+  "channel": "answer-first",
+  "expected": [
+   "incorrect"
+  ],
+  "got": "incorrect",
+  "outcome": "agree",
+  "detail": "the stated solution {3} is not the problem's solution set {4}"
+ }
+]

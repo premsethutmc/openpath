@@ -186,7 +186,7 @@ export function fEval(e: Expr, v: string, x: number, aux?: Map<string, number>):
       case "sin": return Math.sin(go(t.argument)); case "cos": return Math.cos(go(t.argument)); case "tan": return Math.tan(go(t.argument));
       case "exp": return Math.exp(go(t.argument)); case "log": return Math.log(go(t.argument)); case "atan": return Math.atan(go(t.argument));
       case "abs": return Math.abs(go(t.argument));
-      case "root": return t.index === 2 ? Math.sqrt(go(t.radicand)) : Math.pow(go(t.radicand), 1 / t.index);
+      case "root": { const r = go(t.radicand); return t.index === 2 ? Math.sqrt(r) : t.index % 2 === 1 ? Math.sign(r) * Math.pow(Math.abs(r), 1 / t.index) : Math.pow(r, 1 / t.index); }
       default: return NaN;
     }
   };

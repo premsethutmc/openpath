@@ -1,0 +1,716 @@
+{
+ "outcomes_before": {
+  "safe-abstention": 1329,
+  "misgrade": 68,
+  "correct": 866,
+  "false-rejection": 85,
+  "false-acceptance": 27,
+  "adapter-defect": 7
+ },
+ "outcomes_after": {
+  "safe-abstention": 1343,
+  "misgrade": 47,
+  "correct": 936,
+  "false-rejection": 24,
+  "false-acceptance": 25,
+  "adapter-defect": 7
+ },
+ "changed": 87,
+ "transitions": {
+  "false-rejection -> correct": 47,
+  "misgrade -> correct": 21,
+  "false-rejection -> safe-abstention": 14,
+  "safe-abstention -> correct": 2,
+  "false-acceptance -> correct": 1,
+  "false-acceptance -> safe-abstention": 1,
+  "correct -> safe-abstention": 1
+ },
+ "resolved": [
+  {
+   "id": "ADV-0040",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "ADV-0045",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "ADV-0274",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ADV-0327",
+   "before": "equivalent",
+   "after": "abstain",
+   "expected": "abstain",
+   "outcome": "false-acceptance -> correct"
+  },
+  {
+   "id": "ALG-0042",
+   "before": "conditional",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "ALG-0049",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0057",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0060",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0079",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0081",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0086",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0091",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0098",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0104",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0109",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0110",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "ALG-0117",
+   "before": "conditional",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "ALG-0119",
+   "before": "conditional",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "CAL-0061",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "verified",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "CAL-0131",
+   "before": "verified",
+   "after": "abstain",
+   "expected": "missing-assumption",
+   "outcome": "false-acceptance -> safe-abstention"
+  },
+  {
+   "id": "DOM-0006",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0007",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0009",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0014",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0027",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0028",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0032",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0036",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0045",
+   "before": "implied",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "DOM-0058",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0066",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0160",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0172",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "DOM-0173",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "DOM-0214",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "verified",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "EQN-0013",
+   "before": "abstain",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "safe-abstention -> correct"
+  },
+  {
+   "id": "EQN-0116",
+   "before": "abstain",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "safe-abstention -> correct"
+  },
+  {
+   "id": "EQN-0123",
+   "before": "implied",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "EQN-0168",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "EQN-0199",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "EQN-0204",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "EQN-0220",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "EQN-0221",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "verified",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "FUN-0011",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0028",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0032",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0061",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "FUN-0069",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "FUN-0085",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0104",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0106",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0108",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0109",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0118",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0141",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "FUN-0145",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "FUN-0146",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "FUN-0147",
+   "before": "invalid",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "INE-0013",
+   "before": "implied",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "INE-0030",
+   "before": "implied",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "INE-0037",
+   "before": "implied",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "INE-0128",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "INE-0134",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "MUL-0009",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "MUL-0017",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "MUL-0027",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "MUL-0060",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "MUL-0061",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "MUL-0062",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "MUL-0064",
+   "before": "conditional",
+   "after": "equivalent",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "PRF-0020",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "PRF-0031",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "PRF-0032",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "PRF-0042",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "PRF-0044",
+   "before": "incomplete",
+   "after": "verified",
+   "expected": "verified",
+   "outcome": "false-rejection -> correct"
+  },
+  {
+   "id": "PRF-0064",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "PRF-0107",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "PRF-0159",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "PRF-0160",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "PRF-0167",
+   "before": "incomplete",
+   "after": "invalid",
+   "expected": "invalid",
+   "outcome": "misgrade -> correct"
+  },
+  {
+   "id": "TRG-0032",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "TRG-0038",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "TRG-0051",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "TRG-0072",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "TRG-0076",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  },
+  {
+   "id": "TRG-0108",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "equivalent",
+   "outcome": "false-rejection -> safe-abstention"
+  }
+ ],
+ "regressions": [
+  {
+   "id": "DOM-0215",
+   "before": "invalid",
+   "after": "abstain",
+   "expected": "invalid",
+   "outcome": "correct -> safe-abstention",
+   "detail": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+  }
+ ],
+ "matrix_before": {
+  "accept": {
+   "accept": 327,
+   "one-way": 5,
+   "objection": 68,
+   "reject": 17,
+   "abstain": 763
+  },
+  "one-way": {
+   "accept": 0,
+   "one-way": 41,
+   "objection": 0,
+   "reject": 0,
+   "abstain": 22
+  },
+  "objection": {
+   "accept": 19,
+   "one-way": 10,
+   "objection": 89,
+   "reject": 6,
+   "abstain": 143
+  },
+  "reject": {
+   "accept": 7,
+   "one-way": 0,
+   "objection": 61,
+   "reject": 287,
+   "abstain": 439
+  },
+  "abstain": {
+   "accept": 1,
+   "one-way": 0,
+   "objection": 0,
+   "reject": 0,
+   "abstain": 77
+  }
+ },
+ "matrix_after": {
+  "accept": {
+   "accept": 381,
+   "one-way": 0,
+   "objection": 19,
+   "reject": 5,
+   "abstain": 775
+  },
+  "one-way": {
+   "accept": 0,
+   "one-way": 41,
+   "objection": 0,
+   "reject": 0,
+   "abstain": 22
+  },
+  "objection": {
+   "accept": 18,
+   "one-way": 10,
+   "objection": 89,
+   "reject": 6,
+   "abstain": 144
+  },
+  "reject": {
+   "accept": 7,
+   "one-way": 0,
+   "objection": 45,
+   "reject": 302,
+   "abstain": 440
+  },
+  "abstain": {
+   "accept": 0,
+   "one-way": 0,
+   "objection": 0,
+   "reject": 0,
+   "abstain": 78
+  }
+ }
+}

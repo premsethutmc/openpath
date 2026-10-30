@@ -365,7 +365,9 @@ const bound = (t: string): Q | null => { const s = t.replace(/^\(|\)$/g, "").tri
 function parseTarget(raw: string): Target | null {
   let t = raw.trim(), side: Target["side"] = "both";
   const sm = /^(.*?)\s*(?:\^\s*([+-])|([⁺⁻])|\b(from the (?:left|right)))$/.exec(t);
-  if (sm) { t = sm[1]; side = (sm[2] ?? sm[3]) === "+" || sm[3] === "⁺" ? "right" : "left"; }
+  if (sm) { t = sm[1]; side = (sm[2] ?? sm[3]) === "+" || sm[3] === "⁺" || sm[4] === "from the right" ? "right" : "left"; }
+  // finalisation: a plain trailing sign after the approach value ("0+", "2-") is the conventional one-sided notation
+  else { const ps = /^(.*[0-9a-zA-Z)∞])\s*([+-])$/.exec(t); if (ps && !/^[+-]?\s*(?:∞|infinity|inf|oo)$/i.test(ps[1].trim())) { t = ps[1]; side = ps[2] === "+" ? "right" : "left"; } }
   if (/^[+]?\s*(?:∞|infinity|inf|oo)$/i.test(t)) return { at: "inf", side };
   if (/^-\s*(?:∞|infinity|inf|oo)$/i.test(t)) return { at: "-inf", side };
   const e = ex(t); const v = e ? evalRat(e) : null; return v ? { at: v, side } : null;
@@ -620,6 +622,15 @@ function calcDefinite(problem: Extract<CalculusProblem, { task: "definite-integr
 }
 
 // ---------------------------------------------------------------------------------------------- limit
+/** "f = g → v [as x → a]" → "lim(x→a) f = lim(x→a) g = v"; text without a value arrow is returned unchanged; null when the arrow's variable is not the limit variable */
+function arrowLimitText(text: string, v: string, targetText: string): string | null {
+  if (/^\s*lim(?![a-z])/i.test(text) || !/→|->/.test(text)) return text;
+  const m = /^(.*?)\s*(?:→|->)\s*(.+?)(?:\s*,?\s+as\s+([A-Za-z])\s*(?:→|->)\s*(.+?))?\s*\.?$/.exec(text);
+  if (!m || !m[1].trim() || /→|->/.test(m[2])) return text;
+  if (m[3] && m[3] !== v) return null;
+  const tgt = (m[4] ?? targetText).trim();
+  return `${splitTop(m[1], "=").map((part) => `lim(${v}→${tgt}) ${part.trim()}`).join(" = ")} = ${m[2].trim()}`;
+}
 function sameLimit(a: LimitResult, b2: LimitResult): boolean { if (a.kind !== b2.kind) return false; if (a.kind === "finite" && b2.kind === "finite") return qeq(a.value, b2.value); if (a.kind === "inf" && b2.kind === "inf") return a.sign === b2.sign; return true; }
 function calcLimit(problem: Extract<CalculusProblem, { task: "limit" }>, rows: RawLine[], parsed: NaturalParseResult, b: Builder, notes: string[]): E5Plan {
   const c: Ctx = { rows, parsed, b, notes }; const v = problem.variable;
@@ -630,9 +641,12 @@ function calcLimit(problem: Extract<CalculusProblem, { task: "limit" }>, rows: R
   const est: Expr[] = [problem.expression]; let finalOk = false; const names = new Set<string>();
   const sameTarget = (t: Target) => t.side === side && (t.at === at || (typeof t.at !== "string" && typeof at !== "string" && qeq(t.at, at)));
   const anchoredExpr = (e: Expr): boolean => est.some((x) => { const a = rfOf(x, v), r = rfOf(e, v); return a && r ? rfEqual(a, r) : judgeIdentity(x, e, v, "x").status === "valid"; });
+  const targetText = (at === "inf" ? "∞" : at === "-inf" ? "-∞" : qtext(at)) + (side === "right" ? "+" : side === "left" ? "-" : "");
   rows.forEach((row, i) => {
     // "lim ... does not exist" without "="
-    let text = row.plain; const dnePhrase = /^(.*\S)\s+(does not exist|DNE)\s*\.?$/i.exec(text); if (dnePhrase && !/=/.test(text)) text = `${dnePhrase[1]} = ${dnePhrase[2]}`;
+    let text = row.plain;
+    // finalisation: a stated limit value written with an arrow ("g → v", "g → v as x → a+", "f = g → v") is the claim lim f = lim g = v
+    { const arrowed = arrowLimitText(text, v, targetText); if (arrowed === null) { addJ(c, i, uns("the arrow names a different variable than the problem's limit")); return; } text = arrowed; } const dnePhrase = /^(.*\S)\s+(does not exist|DNE)\s*\.?$/i.exec(text); if (dnePhrase && !/=/.test(text)) text = `${dnePhrase[1]} = ${dnePhrase[2]}`;
     const members = splitTop(text, "="); const ms = members.map((m) => parseMember(m, v, names));
     if (members.length < 2 || members.length > LIMITS.members || ms.some((m) => !m)) { addJ(c, i, uns("a part of this line is outside the supported limit notation")); return; }
     const mm = ms as Member[]; type Den = { kind: "lim"; r: LimitResult | null; anchored: boolean } | { kind: "fn"; e: Expr } | { kind: "val"; r: LimitResult } | { kind: "dne" };

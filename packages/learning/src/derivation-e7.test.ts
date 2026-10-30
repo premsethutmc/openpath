@@ -58,28 +58,27 @@ describe("D: probability chains ground every member", () => {
   });
 });
 
-describe("D: the cited rule is a claim of its own", () => {
+describe("D: the cited rule is a claim of its own (finalisation: a wrong citation on a correct step is a process finding, not an invalid step)", () => {
   const deriv = (expression: unknown) => ({ domain: "calculus", task: "derivative", expression, variable: "x" });
   const C = (n: number) => ({ kind: "constant", value: String(n) }), X = { kind: "variable", name: "x" };
   const run = (expression: unknown, claim: unknown, rule: string) => assessMathematicalWorking(deriv(expression) as never, [{ id: "s0", rule, claim: { kind: "expression", value: claim } }] as never);
-  test("power rule on a x^n: right label verified, wrong label invalid, unknown label verified, wrong transform invalid", async () => {
+  test("power rule on a x^n: right label verified, wrong label recorded as a finding, unknown label verified, wrong transform invalid", async () => {
     for (let i = 0; i < 12; i++) {
       const a = 2 + rnd(7), n = 2 + rnd(6), f = { kind: "multiply", factors: [C(a), { kind: "power", base: X, exponent: n }] }, d = { kind: "multiply", factors: [C(a * n), { kind: "power", base: X, exponent: n - 1 }] };
       const wrong = { kind: "multiply", factors: [C(a * n + 1), { kind: "power", base: X, exponent: n - 1 }] };
       expect((await run(f, d, "power rule")).classification).toBe("verified");
       const u: any = await run(f, d, "quadratic formula"); // an unrecognised label is no prerequisite for a correct step, and is never silently certified
       expect(u.classification).toBe("verified"); expect(u.domainPayload.ruleLabels[0].certified).toBe("uncertified");
-      expect((await run(f, d, "chain rule")).classification).toBe("invalid");
-      expect((await run(f, d, "product rule")).classification).toBe("invalid");
+      for (const label of ["chain rule", "product rule"]) { const w: any = await run(f, d, label); expect(w.classification).toBe("verified"); expect(w.processFindings?.map((x: any) => x.kind)).toEqual(["cited-rule-contradicted"]); }
       expect((await run(f, wrong, "power rule")).classification).toBe("invalid");
     }
   });
-  test("chain rule on sin(kx): right label verified, power-rule label contradicted", async () => {
+  test("chain rule on sin(kx): right label verified, power-rule label contradicted (finding)", async () => {
     for (let i = 0; i < 8; i++) {
       const k = 2 + rnd(8), arg = { kind: "multiply", factors: [C(k), X] };
       const f = { kind: "sin", argument: arg }, d = { kind: "multiply", factors: [C(k), { kind: "cos", argument: arg }] };
       expect((await run(f, d, "chain rule")).classification).toBe("verified");
-      expect((await run(f, d, "power rule")).classification).toBe("invalid");
+      const w: any = await run(f, d, "power rule"); expect(w.classification).toBe("verified"); expect(w.processFindings?.[0]?.kind).toBe("cited-rule-contradicted");
     }
   });
 });
