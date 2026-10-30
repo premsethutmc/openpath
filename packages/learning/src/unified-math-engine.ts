@@ -28,6 +28,7 @@ import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geoca
 import { buildObligations, type ObligationSet } from "./proof-obligations.ts";
 import { typedIdentities } from "./evidence-binding.ts";
 import { assessRelevance, literalProvenance, polynomialKey, previousClosure } from "./claim-grounding.ts";
+import { rewriteLicense, hasFlattenedNumberComputation } from "./rewrite-registry.ts";
 import { MECHANISMS } from "./evidence-provenance.ts";
 import { buildProofContext, relateStudentRestriction, routeUse, withProved, withStudent, withUnresolved, type ProofContext, type RouteUse } from "./proof-context.ts";
 import { GENERALIZATION_E6_CONTRACT, planGeneralizationE6 } from "./natural-generalization-e6.ts";
@@ -449,7 +450,9 @@ function algebraGroundings(statement: string, parsed: NaturalParseResult, check:
     if (st === "verified-valid") {
       // a line that is the same polynomial statement as the line before it (expanded, factored, collected, sides swapped) is an exact rewrite: the identity certifies its numbers
       const key = polynomialKey(text), rewrite = !!key && key !== "0" && polynomialKey(pool[pool.length - 1]) === key && !/(?<![A-Za-z^.\d])\d+(?:\.\d+)?\s*[+\-*/]\s*\d+(?:\.\d+)?(?![A-Za-z(\d^.])/.test(text.replace(/\d+\s*\/\s*\d+/g, "q")); // an exact rewrite certifies a numeral only in the form it is written in: a pure-number computation inside it (69 − 54) is a claim of its own
-      const derived = new Set<string>(), sources = rewrite ? [] : literalProvenance(text, { task, established, licensed: new Set([...(pool.some((x) => /sqrt|√|\^\s*\(?1\/2/i.test(x)) ? ["2"] : []), ...(pool.some((x) => /cbrt|∛/i.test(x)) ? ["3"] : [])]), previous: previousClosure(pool) }, derived); // squaring (cubing) is the inverse of a root the working has written
+      const lic = rewriteLicense(pool, text), bracketSafe = rewrite && !hasFlattenedNumberComputation(text); // policy closure: the exemption never depends on harmless parentheses; a pure-number computation is a claim of its own, bracketed or not
+      const derived = new Set<string>(), sources = bracketSafe ? [] : literalProvenance(text, { rewrite: lic?.kind === "licensed" ? lic.license.numerals : undefined, task, established, licensed: new Set([...(pool.some((x) => /sqrt|√|\^\s*\(?1\/2/i.test(x)) ? ["2"] : []), ...(pool.some((x) => /cbrt|∛/i.test(x)) ? ["3"] : [])]), previous: previousClosure(pool) }, derived); // squaring (cubing) is the inverse of a root the working has written
+      if (lic?.kind === "unjustified") sources.push({ kind: "free-literal", ref: lic.side, by: "value", trivial: false }); // a numeric side no registered, certified rewrite produces from the visible expression (96*1, 2*48)
       sources.push(prevLine ? { kind: "derived-fact", ref: `line-${prevLine}`, by: "symbol", trivial: false } : { kind: "task-premise", ref: "the statement", by: "symbol", trivial: false });
       const g = assessRelevance(sources);
       out.push({ line: l.source.line, grounding: g });

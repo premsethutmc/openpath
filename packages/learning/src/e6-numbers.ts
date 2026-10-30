@@ -13,6 +13,7 @@ import { NotationError, normalize, splitEquals } from "./e6-parse.ts";
 import { Budget, Unsupported } from "./e6-cas.ts";
 import { Overflow, q, qadd, qcmp, qdiv, qeq, qiszero, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
 import { assessRelevance, literalProvenance, previousClosure, type GroundingSource } from "./claim-grounding.ts";
+import { rewriteLicense } from "./rewrite-registry.ts";
 import { Builder, bad, finish, incomplete, isProse, proseJudge, missing, ok, readStatement, syntheticParse, uns, worst, type E6Plan, type Judge, type Row } from "./e6-common.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 
@@ -653,8 +654,12 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
       const visible = new Set<string>(previousClosure([texts[from], ...rows.slice(0, i).map((r) => r.plain), ...premises.map((p) => cxText(p.value))]));
       for (const m of members.slice(0, -1)) for (const x of memberClosure(m, env)) visible.add(x);
       const tail = texts.slice(from + 1).join(" = ");
-      const free = literalProvenance(tail, { task, established: est, licensed: new Set(), previous: visible }).filter((x) => x.kind === "free-literal");
-      if (free.length) grounding = { ...grounding, relevant: false, reason: `the number${free.length > 1 ? "s" : ""} ${[...new Set(free.map((x) => x.ref))].slice(0, 4).join(", ")} in a later step of this chain come${free.length > 1 ? "" : "s"} from neither the task data, an earlier verified result nor the step before it` };
+      // guarded local-rewrite certification (rewrite-registry.ts): numerals introduced by a CERTIFIED registered rewrite of a visible expression are derived; a numeric side that no registered rewrite
+      // produces from what is visible (96*1, 2*48, a padded +k-k) is refused here, whatever its value
+      const lic = rewriteLicense([texts[from], ...rows.slice(0, i).map((r) => r.plain)], texts.slice(from).join(" = "));
+      const free = literalProvenance(tail, { task, established: est, licensed: new Set(), previous: visible, rewrite: lic?.kind === "licensed" ? lic.license.numerals : undefined }).filter((x) => x.kind === "free-literal");
+      if (lic?.kind === "unjustified") grounding = { ...grounding, relevant: false, reason: `"${lic.side}" is not obtained from the expression before it by a registered, certified rewrite (place-value or other additive/multiplicative split, distribution, fraction scaling, shown balanced transfer, evaluation); equal value alone does not justify a new numeral` };
+      else if (free.length) grounding = { ...grounding, relevant: false, reason: `the number${free.length > 1 ? "s" : ""} ${[...new Set(free.map((x) => x.ref))].slice(0, 4).join(", ")} in a later step of this chain come${free.length > 1 ? "" : "s"} from neither the task data, an earlier verified result nor the step before it` };
     }
     const labelBound = label !== null && (answerRe.test(label) || answerRe.test(labelRaw) || (label !== null && ANSWER_WORD.test(label.trim())) || (label !== null && /^[A-Za-z][0-9]?$/.test(label.trim()) && !env.has(label)) || (labelWords.length === 0 || labelWords.every((w) => taskWords.has(w) || w === "roots" || w === "root" || w === "value")));
     const answerBound = label === null ? grounding.relevant : members.length > 1 ? labelBound && grounding.relevant : labelBound; // E7 Phase 5: a SHOWN derivation must itself be justified from the task, whatever it is labelled; a bare `label = value` is an answer statement judged against the kernel's own value

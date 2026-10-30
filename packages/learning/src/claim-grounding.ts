@@ -13,7 +13,7 @@ import { canonicalizeMathematicalObject, type CanonicalMathematicalObject } from
 
 export const GROUNDING_CONTRACT = "openpath-claim-grounding@1" as const;
 export type SourceKind = "task-premise" | "derived-fact" | "student-assumption" | "free-literal";
-export interface GroundingSource { kind: SourceKind; ref: string; by: "symbol" | "value"; /** explained by one arithmetic step from task premises, not a premise itself */ derived?: boolean; /** a value such as 0, 1, 2: it matches too many things to relate a claim to the task by itself */ trivial: boolean }
+export interface GroundingSource { /** set when the numeral is explained by a certified rewrite */ rule?: string; certificate?: string; kind: SourceKind; ref: string; by: "symbol" | "value"; /** explained by one arithmetic step from task premises, not a premise itself */ derived?: boolean; /** a value such as 0, 1, 2: it matches too many things to relate a claim to the task by itself */ trivial: boolean }
 export interface Grounding { contract: typeof GROUNDING_CONTRACT; sources: GroundingSource[]; relevant: boolean; reason: string; /** false for a bare `label = value` answer statement, which is judged against the kernel's own value instead of being derived */ required?: boolean }
 
 /**
@@ -45,7 +45,7 @@ export function assessRelevance(sources: GroundingSource[]): Grounding {
  *   an equal-pair/bisector/isosceles premise); (iv) a RESULT: the value of a computation the line itself shows (35 + 75 = 110, A + B = 120 with A, B known), whose operands are themselves (i)-(iii).
  * Not explanations: the answer the task asks for, "being one arithmetic step from some two numbers of the task", or a small value. An operand that is none of (i)-(iv) is a free literal.
  */
-export interface ProvenanceEnv { task: ReadonlySet<string>; established: ReadonlySet<string>; licensed: ReadonlySet<string>; named?: ReadonlyMap<string, number>; /** (v) what the immediately previous line/member computes with: see `previousClosure` */ previous?: ReadonlySet<string> }
+export interface ProvenanceEnv { task: ReadonlySet<string>; established: ReadonlySet<string>; licensed: ReadonlySet<string>; named?: ReadonlyMap<string, number>; /** (v) what the immediately previous line/member computes with: see `previousClosure` */ previous?: ReadonlySet<string>; /** numerals introduced by a CERTIFIED registered rewrite of a visible expression (rewrite-registry.ts): numeral -> rule + certificate digest */ rewrite?: ReadonlyMap<string, { rule: string; digest: string }> }
 const clean = (t: string): string => t.replace(/[−–—]/g, "-").replace(/[×·⋅]|\\cdot|\\times/g, "*").replace(/÷/g, "/").replace(/°|degrees?|\\circ|\^\{?\\circ\}?/gi, "").replace(/[$\\]/g, " ");
 const numKey = (x: number): string => String(Math.round(x * 1e9) / 1e9);
 /** a tiny exact-enough evaluator for the arithmetic a student writes (numbers, known names, + - * / ^ and parentheses); null when anything is not understood */
@@ -167,7 +167,7 @@ function literalProvenanceOne(text: string, env: ProvenanceEnv, derivedOut?: Set
   // (iii-b) the sum of the task's own named quantities is a licensed aggregate (the sum of the known angles in 180 − 110): sums of quantities the task states, never arbitrary differences or quotients of its numbers
   const sums = new Set<string>(); const nv = env.named ? [...env.named.values()].slice(0, 8) : [];
   for (let m = 3; m < (1 << nv.length); m++) { let c = 0, t = 0; for (let b = 0; b < nv.length; b++) if (m & (1 << b)) { c++; t += nv[b]; } if (c >= 2) sums.add(numKey(t)); }
-  const base = (l: string) => env.task.has(l) || env.established.has(l) || env.licensed.has(l) || sums.has(l) || !!env.previous?.has(l);
+  const base = (l: string) => env.task.has(l) || env.established.has(l) || env.licensed.has(l) || sums.has(l) || !!env.previous?.has(l) || !!env.rewrite?.has(l);
   const vals = new Set<string>(); // values of computations the line shows, whose operands are already explained
   const explained = (l: string) => base(l) || vals.has(l);
   const ok: boolean[] = segs.map(() => false);
@@ -194,6 +194,7 @@ function literalProvenanceOne(text: string, env: ProvenanceEnv, derivedOut?: Set
       if (env.licensed.has(l) && !env.task.has(l) && !env.established.has(l)) { seen.add(l); continue; }
       if (env.task.has(l)) out.push({ kind: "task-premise", ref: l, by: "value", trivial });
       else if (env.established.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial });
+      else if (env.rewrite?.has(l)) { const r = env.rewrite.get(l)!; out.push({ kind: "derived-fact", ref: l, by: "value", trivial: false, derived: true, rule: r.rule, certificate: r.digest }); }
       else if (balance.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial: Math.abs(Number(l)) <= 2, derived: true });
       else if (env.previous?.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial: Math.abs(Number(l)) <= 2, derived: true });
       else if (sums.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial: false, derived: true });
