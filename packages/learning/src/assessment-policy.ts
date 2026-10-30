@@ -15,7 +15,7 @@
  */
 import { assessAnswerFirst } from "./answer-first.ts";
 import { checkAlgebraSubmission } from "./independent-checker.ts";
-import { expandEquivalenceRows, parseNaturalWorking, withNotationConventions, type NotationConventions } from "./natural-working.ts";
+import { parseNaturalWorking, resolveLogNotation, type NotationConventions } from "./natural-working.ts";
 import { assessMathematicalWorking, type AssessmentEnvelope, type AssessOptions, type ProcessFinding } from "./unified-math-engine.ts";
 
 /** distinct from the unified grading decision's "grading-policy@1" (feat/unified-grading grading/decision.ts): this is the E7 process-evidence policy it can consume */
@@ -51,9 +51,9 @@ const UNRESOLVED = new Set(["unsupported", "malformed", "ambiguous", "resource-e
 
 /** process findings of a natural algebra working, read from the independent checker's own line record (the same evidence the engine used) */
 export function algebraProcessFindings(statement: string, text: string, conventions?: NotationConventions): ProcessFinding[] {
-  const parsed = parseNaturalWorking({ format: "natural", text: expandEquivalenceRows(text), conventions });
+  const parsed = parseNaturalWorking({ format: "natural", text, conventions });
   if (parsed.classification !== "parsed") return [];
-  let check; try { check = withNotationConventions(conventions, () => checkAlgebraSubmission(statement, parsed)); } catch { return []; }
+  let check; try { check = checkAlgebraSubmission(conventions?.log ? resolveLogNotation(statement, conventions.log) : statement, parsed); } catch { return []; }
   const out: ProcessFinding[] = [];
   const stated = parsed.lines.some((l) => (l.relation.kind === "inequality" && l.relation.operator === "!=") || (l.restrictions ?? []).length > 0);
   const restrictions = (check as { restrictions?: string[] }).restrictions ?? [];

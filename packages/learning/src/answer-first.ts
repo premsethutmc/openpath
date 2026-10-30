@@ -5,7 +5,7 @@
  * Nothing new is solved or parsed: the independent checker's exact solution-set profile, exact arithmetic and the shared natural parser do all of it.
  */
 import { answerFirstNumeric, answerFirstSolutionSet, Exhausted, Unsupported, type AfAnswer, type AfDiagnosis, type AfTransition } from "./independent-checker.ts";
-import { expandEquivalenceRows, parseNaturalWorking, usesBareLog, withNotationConventions, type NotationConventions } from "./natural-working.ts";
+import { parseNaturalWorking, resolveLogNotation, restoreOriginalFragment, usesBareLog, type NotationConventions } from "./natural-working.ts";
 
 export const ANSWER_FIRST_CONTRACT = "openpath-answer-first@1" as const;
 export interface AnswerFirstAssessment {
@@ -39,15 +39,20 @@ const none = (reason: string, status: "unresolved" | "unsupported", t0: number):
 export type AnswerFirstOptions = { diagnose?: boolean | "always"; finalAnswer?: string; /** assessment/curriculum notation conventions; the problem's own `conventions` take precedence */ conventions?: NotationConventions };
 /** bare "log" without a convention: the verdict stands only when it is the same under the natural and the base-10 reading; otherwise unresolved */
 export function assessAnswerFirst(problem: unknown, working: unknown, opts: AnswerFirstOptions = {}): AnswerFirstAssessment {
-  if (working && typeof (working as { text?: unknown }).text === "string" && /⇔|<=>|⟺|\biff\b/.test((working as { text: string }).text)) working = { ...(working as object), text: expandEquivalenceRows((working as { text: string }).text) };
+  // the convention rewrites THIS assessment's own texts to an explicit same-length spelling; nothing is shared between assessments
   const conv: NotationConventions = { ...(opts.conventions ?? {}), ...((problem as { conventions?: NotationConventions } | null)?.conventions ?? {}) };
-  const texts = [(problem as { statement?: unknown } | null)?.statement, (working as { text?: unknown } | null)?.text, opts.finalAnswer].filter((x): x is string => typeof x === "string");
-  if (!conv.log && texts.some(usesBareLog)) {
-    const a = withNotationConventions({ ...conv, log: "natural" }, () => assessAnswerFirstIn(problem, working, opts)), b = withNotationConventions({ ...conv, log: "base10" }, () => assessAnswerFirstIn(problem, working, opts));
-    if (a.answer.status === b.answer.status) return a;
-    return { ...a, answer: { ...a.answer, status: "unresolved", credit: null, reason: `bare log has no stated base and the verdict depends on it (natural log: ${a.answer.status}; base 10: ${b.answer.status}); state the base or set a notation convention` }, diagnosis: null };
-  }
-  return withNotationConventions(conv, () => assessAnswerFirstIn(problem, working, opts));
+  const stmt = (problem as { statement?: unknown } | null)?.statement, wt = (working as { text?: unknown } | null)?.text;
+  if (![stmt, wt, opts.finalAnswer].some((x) => typeof x === "string" && usesBareLog(x))) return assessAnswerFirstIn(problem, working, opts);
+  const under = (log: "natural" | "base10"): AnswerFirstAssessment => {
+    const r = (x: unknown) => (typeof x === "string" ? resolveLogNotation(x, log) : x);
+    const out = assessAnswerFirstIn(typeof stmt === "string" ? { ...(problem as object), statement: r(stmt) } : problem, typeof wt === "string" ? { ...(working as object), text: r(wt) } : working, { ...opts, ...(typeof opts.finalAnswer === "string" ? { finalAnswer: r(opts.finalAnswer) as string } : {}) });
+    const original = [typeof wt === "string" ? wt : "", opts.finalAnswer ?? ""].join("\n"), rewritten = resolveLogNotation(original, log), back = (s: string) => restoreOriginalFragment(s, rewritten, original);
+    return { ...out, answer: { ...out.answer, finalText: out.answer.finalText === null ? null : back(out.answer.finalText) }, diagnosis: out.diagnosis && { ...out.diagnosis, transitions: out.diagnosis.transitions.map((t) => ({ ...t, from: back(t.from), to: back(t.to) })) } };
+  };
+  if (conv.log) return under(conv.log);
+  const a = under("natural"), b = under("base10");
+  if (a.answer.status === b.answer.status) return a;
+  return { ...a, answer: { ...a.answer, status: "unresolved", credit: null, reason: `bare log has no stated base and the verdict depends on it (natural log: ${a.answer.status}; base 10: ${b.answer.status}); state the base or set a notation convention` }, diagnosis: null };
 }
 function assessAnswerFirstIn(problem: unknown, working: unknown, opts: AnswerFirstOptions = {}): AnswerFirstAssessment {
   const t0 = performance.now();

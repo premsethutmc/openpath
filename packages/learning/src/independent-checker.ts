@@ -19,7 +19,7 @@ import { parseFidelityLoss } from "./parse-fidelity.ts";
 import { sha256Hex } from "./digest.ts";
 import type { Expr } from "./calculus-core";
 import { checkSymbolicCertificate, type KernelCertificate } from "./proof-kernel.ts";
-import { currentNotationConventions, parseNaturalWorking, type NaturalParseResult, type NaturalRelation } from "./natural-working.ts";
+import { parseNaturalWorking, type NaturalParseResult, type NaturalRelation } from "./natural-working.ts";
 
 export const INDEPENDENT_CHECKER_CONTRACT = "openpath-independent-algebra-checker@1" as const;
 export const CHECKER_SCOPE = "single-variable rational-coefficient polynomial/rational equations and inequalities, |.|, one sqrt radicand, finite/interval solution sets, closed numeric statements, expression identity via U4; all critical points rational" as const;
@@ -1288,7 +1288,7 @@ export function diagnoseTransition(prev: NaturalRelation, next: NaturalRelation,
 
 /** question-level reference parse, reused across the many submissions of one question */
 const parseCache = new Map<string, NaturalParseResult>();
-function cachedParse(text: string): NaturalParseResult { const k = `${currentNotationConventions().log ?? "-"}|${text}`; let r = parseCache.get(k); if (!r) { r = parseNaturalWorking({ format: "natural", text }); if (parseCache.size > 512) parseCache.clear(); parseCache.set(k, r); } return r; }
+function cachedParse(text: string): NaturalParseResult { let r = parseCache.get(text); if (!r) { r = parseNaturalWorking({ format: "natural", text }); if (parseCache.size > 512) parseCache.clear(); parseCache.set(text, r); } return r; }
 /** A: the final stated answer against the exact solution set of the problem. T (optional): written transitions, judged locally against the previous written line. */
 export function answerFirstSolutionSet(statement: string, parsed: NaturalParseResult, withTransitions: boolean): AfResult {
   let checks = 0;

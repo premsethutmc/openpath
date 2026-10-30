@@ -16,7 +16,7 @@ import { assessLinearAlgebra, LINEAR_ALGEBRA_B2_CONTRACT, type LAProblem, type L
 import { assessComplex, COMPLEX_B3_CONTRACT, type ComplexProblem, type ComplexStep } from "./complex-polynomial.ts";
 import { D2_MAX_STAGES, D2_PROOF_STATE_VERSION, D2ProofState } from "./d2-proof-state.ts";
 import { D3_BINDING_CONTRACT, MathematicalBindingStore, type D3Problem, type D3Working } from "./cross-domain-bindings.ts";
-import { NATURAL_WORKING_CONTRACT, equationAsExpression, expandEquivalenceRows, naturalRestrictionKeys, parseNaturalWorking, usesBareLog, withNotationConventionsAsync, type NaturalWorkingInput, type NotationConventions, type SourceLocation } from "./natural-working.ts";
+import { NATURAL_WORKING_CONTRACT, equationAsExpression, naturalRestrictionKeys, parseNaturalWorking, resolveLogNotation, restoreOriginalFragment, usesBareLog, type NaturalWorkingInput, type NotationConventions, type SourceLocation } from "./natural-working.ts";
 import { NATURAL_ADAPTER_CONTRACT, adaptNaturalWorking, type NaturalAdapterResult } from "./natural-domain-adapters.ts";
 import { evaluateLedger } from "./claim-certifier.ts";
 import { CLAIM_LEDGER_CONTRACT, type CoverageRecord } from "./claim-ledger.ts";
@@ -471,7 +471,7 @@ function algebraGroundings(statement: string, parsed: NaturalParseResult, check:
 function gateAlgebraText(statement: string, parsed: NaturalParseResult, rawText: string, cand: AssessmentEnvelope): AssessmentEnvelope {
   if (parsed.classification !== "parsed") return cand.classification === "verified" ? withdrawAcceptance(cand, "algebra-text", "downgraded-no-independent-evidence", "the working could not be parsed for independent verification") : { ...cand, acceptanceGate: gateRecord("algebra-text", cand, { reconciliation: "the working is not parsed; nothing is accepted" }) };
   const check = checkAlgebraSubmission(statement, parsed), dec = reconcileAlgebra(cand.classification, check);
-  const evidence = evidenceFromCheck(check, parsed.lines.map((l) => l.source.text)), summary = checkerSummary(check);
+  const evidence = evidenceFromCheck(check, parsed.lines.map((l) => l.source.text), parsed.lines.map((l) => l.source.line)), summary = checkerSummary(check);
   const allU4 = evidence.length > 0 && evidence.every((e) => e.checker === "u4+exact-solution-set" || e.checker === "u4-identity" || e.checker === "exact-arithmetic");
   const level: GateLevel = dec.classification === "verified" ? (allU4 && check.u4Steps > 0 && check.exactSteps === 0 ? "u4-kernel" : "independent-exact-checker") : "none";
   const record = gateRecord("algebra-text", cand, { verdict: dec.classification, independentlyVerified: dec.classification === "verified", level, source: dec.source, evidence, obligations: check.obligations, reconciliation: dec.why, checker: summary });
@@ -611,19 +611,25 @@ function certifyClaims(problem: MathematicalProblem, working0: StudentWorking, c
  * (the base does not matter); otherwise the assessment is ambiguous. "ln" is always the natural logarithm.
  */
 export async function assessMathematicalWorking(problem: MathematicalProblem, studentWorking0: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
-  // an inline equivalence chain is split into rows so that every part is accounted for as a statement of its own
-  if (studentWorking0 && !Array.isArray(studentWorking0) && typeof (studentWorking0 as { text?: unknown }).text === "string" && /⇔|<=>|⟺|\biff\b/.test((studentWorking0 as { text: string }).text)) studentWorking0 = { ...(studentWorking0 as NaturalWorkingInput), text: expandEquivalenceRows((studentWorking0 as { text: string }).text) } as StudentWorking;
-  else if (Array.isArray(studentWorking0) && studentWorking0.every((x) => typeof x === "string") && (studentWorking0 as string[]).some((x) => /⇔|<=>|⟺|\biff\b/.test(x))) studentWorking0 = expandEquivalenceRows((studentWorking0 as string[]).join("\n")).split("\n") as StudentWorking;
+  // the convention is applied to THIS assessment's own copy of its texts (same-length explicit spelling); nothing is shared between assessments
   const conv: NotationConventions = { ...(options.conventions ?? {}), ...(((problem as { conventions?: NotationConventions } | null)?.conventions) ?? {}) };
-  const texts = [typeof (problem as { statement?: unknown } | null)?.statement === "string" ? (problem as { statement: string }).statement : "", ...(Array.isArray(studentWorking0) ? studentWorking0.filter((x): x is string => typeof x === "string") : studentWorking0 && typeof (studentWorking0 as { text?: unknown }).text === "string" ? [(studentWorking0 as { text: string }).text] : [])];
-  if (!conv.log && texts.some(usesBareLog)) {
-    const a = await withNotationConventionsAsync({ ...conv, log: "natural" }, () => assessMathematicalWorkingIn(problem, studentWorking0, options));
-    const b = await withNotationConventionsAsync({ ...conv, log: "base10" }, () => assessMathematicalWorkingIn(problem, studentWorking0, options));
-    if (a.classification === b.classification) return { ...a, justification: `${a.justification} (bare log: the same verdict under the natural and the base-10 reading)` };
-    const why = `bare log has no stated base and the verdict depends on it (natural log: ${a.classification}; base 10: ${b.classification}); state the base or set a notation convention`;
-    return { ...a, classification: "ambiguous", correct: null, complete: false, firstInvalidStep: null, justification: why, outstandingObligations: [why] };
-  }
-  return withNotationConventionsAsync(conv, () => assessMathematicalWorkingIn(problem, studentWorking0, options));
+  const stmt = typeof (problem as { statement?: unknown } | null)?.statement === "string" ? (problem as { statement: string }).statement : null;
+  const wText = studentWorking0 && !Array.isArray(studentWorking0) && typeof (studentWorking0 as { text?: unknown }).text === "string" ? (studentWorking0 as { text: string }).text : null;
+  const wLines = Array.isArray(studentWorking0) && studentWorking0.every((x) => typeof x === "string") ? (studentWorking0 as string[]) : null;
+  const bare = [stmt, wText, ...(wLines ?? [])].some((t) => typeof t === "string" && usesBareLog(t));
+  if (!bare) return assessMathematicalWorkingIn(problem, studentWorking0, options);
+  const under = async (log: "natural" | "base10") => {
+    const p = stmt === null ? problem : ({ ...(problem as object), statement: resolveLogNotation(stmt, log) } as MathematicalProblem);
+    const w = wText !== null ? ({ ...(studentWorking0 as object), text: resolveLogNotation(wText, log) } as StudentWorking) : wLines ? (wLines.map((t) => resolveLogNotation(t, log)) as StudentWorking) : studentWorking0;
+    const env = await assessMathematicalWorkingIn(p, w, options);
+    const original = wText ?? (wLines ? wLines.join("\n") : ""), rewritten = resolveLogNotation(original, log);
+    return { ...env, steps: env.steps.map((st) => st.source ? { ...st, source: { ...st.source, text: restoreOriginalFragment(st.source.text, rewritten, original) } } : st) };
+  };
+  if (conv.log) return under(conv.log);
+  const [a, b] = [await under("natural"), await under("base10")];
+  if (a.classification === b.classification) return { ...a, justification: `${a.justification} (bare log: the same verdict under the natural and the base-10 reading)` };
+  const why = `bare log has no stated base and the verdict depends on it (natural log: ${a.classification}; base 10: ${b.classification}); state the base or set a notation convention`;
+  return { ...a, classification: "ambiguous", correct: null, complete: false, firstInvalidStep: null, justification: why, outstandingObligations: [why] };
 }
 async function assessMathematicalWorkingIn(problem: MathematicalProblem, studentWorking0: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   // E7 Phase 6: a list of text lines for a statement problem is the same input as natural text; it takes the same route, so it gets the same obligations

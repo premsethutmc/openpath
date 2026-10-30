@@ -219,8 +219,11 @@ export function accountForLedger(ledger: ClaimLedger, records: CoverageRecord[])
         // a record that spans the WHOLE line, where nothing but connectives is left over besides the claims, was given the complete line text and accepted
         // it as one statement ("x = 3 or x = -3", "x = 1, y = 2"); it then covers every claim of the line. Otherwise a record that swallows several claims cannot be shown to have checked each.
         const connectiveOnly = ln.residue.every((x) => /^(?:[\s,;.:]|and|or|so|then|since|thus|hence|therefore|because|now|next|step\s*\d*|⇔|<=>|⟺|iff)+$/i.test(x.text));
-const lead = /^(?:⇔|<=>|⟺|iff)\s*/.exec(ln.text)?.[0].length ?? 0; // a row that opens with an equivalence connective ("⇔ x = 3"): the statement starts after it
-        const wholeLine = (r: CoverageRecord) => connectiveOnly && r.start <= ln.start + lead && r.end >= ln.end - 1;
+        // an explicit equivalence connective (⇔, <=>, ⟺, iff) divides the line into statements of their own (the parser reads each part as a
+        // statement on the same source line, with its own span): a record that spans one whole part, with only connectives left over, covers that part's claims
+        const parts: [number, number][] = []; { const re = /⇔|<=>|⟺|\biff\b/g; let from = 0, m: RegExpExecArray | null; while ((m = re.exec(ln.text))) { parts.push([from, m.index]); from = m.index + m[0].length; } parts.push([from, ln.text.length]); }
+        const spans = parts.map(([a, b]) => { const t = ln.text.slice(a, b), lead = t.length - t.trimStart().length, trail = t.length - t.trimEnd().length; return [ln.start + a + lead, ln.start + b - trail] as const; }).filter(([a, b]) => b > a);
+        const wholeLine = (r: CoverageRecord) => connectiveOnly && spans.some(([a, b]) => r.start <= a && r.end >= b - 1 && overlap(a, b, c.start, c.end) > 0);
         const shared = (r: CoverageRecord) => !wholeLine(r) && ln.claims.filter((o) => o !== c && o.kind !== "assumption" && overlap(r.start, r.end, o.start, o.end) > 0).length > 0;
         const good = full.find((r) => r.verified && r.credited && !shared(r));
         if (c.kind === "assertion") res = full.some((r) => r.verified && r.credited && !shared(r)) && !cover.some((r) => !r.credited) ? { outcome: "proven", reason: "checked by a verifier that covers the statement" } : { outcome: "unsupported", reason: `the statement "${c.text}" is a recognizable mathematical claim that could not be interpreted into a checkable form` };

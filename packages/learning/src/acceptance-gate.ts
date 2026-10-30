@@ -51,9 +51,10 @@ export function reconcileAlgebra(candidate: string, check: AlgebraCheck): Reconc
 }
 
 /** `lineTexts[i]` is the submitted text of checked line i: the evidence is bound to that claim text (not to the relation label the checker computed about it) */
-export function evidenceFromCheck(check: AlgebraCheck, lineTexts?: string[]): GateEvidenceItem[] {
+/** sourceLines: the student's own line number of each parsed line (several statements may share one line, e.g. "A ⇔ B"; blank lines are skipped) */
+export function evidenceFromCheck(check: AlgebraCheck, lineTexts?: string[], sourceLines?: number[]): GateEvidenceItem[] {
   return check.lines.filter((l) => l.evidence).map((l) => ({
-    line: l.index + 1, claim: lineTexts?.[l.index] ?? l.relation, checker: l.evidence!.checker, scope: `${CHECKER_SCOPE}; relation to the previous line: ${l.relation}`, outcome: l.status,
+    line: sourceLines?.[l.index] ?? l.index + 1, claim: lineTexts?.[l.index] ?? l.relation, checker: l.evidence!.checker, scope: `${CHECKER_SCOPE}; relation to the previous line: ${l.relation}`, outcome: l.status,
     digest: l.evidence!.u4?.digest ?? null, claimIdentity: lineTexts?.[l.index] !== undefined ? claimIdentity(lineTexts[l.index]) : null,
   }));
 }
