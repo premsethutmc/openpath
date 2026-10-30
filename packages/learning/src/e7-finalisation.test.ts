@@ -41,17 +41,17 @@ describe("assessment-specific grading policy", () => {
     expect(await credit("x^2 = 9", "x = 4", { mode: "answer-only" })).toBe("none");
   });
   test("method-required: valid steps earn full credit unless the rubric requires the omitted evidence; omissions never make work invalid", async () => {
-    expect(await credit("sqrt(x+2) = x", sq, { mode: "method-required" })).toBe("full");
-    expect(await credit("sqrt(x+2) = x", sq, { mode: "method-required", requireShownCandidateChecks: true })).toBe("partial");
-    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required" })).toBe("full");
-    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required", requireStatedRestrictions: true })).toBe("partial");
-    expect(await credit("x/(x-2) = 3/(x-2)", "x != 2\nx = 3", { mode: "method-required", requireStatedRestrictions: true })).toBe("full");
+    expect(await credit("sqrt(x+2) = x", sq, { mode: "method-required" })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); the derivation is outside the P2 surface, so it is unresolved (never costs credit, never earns method credit)
+    expect(await credit("sqrt(x+2) = x", sq, { mode: "method-required", requireShownCandidateChecks: true })).toBe("unresolved"); // P2-INTEGRATION: was "partial" under E7 (shadow); outside the P2 surface, so unresolved
+    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required" })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); outside the P2 surface, so unresolved
+    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required", requireStatedRestrictions: true })).toBe("unresolved"); // P2-INTEGRATION: was "partial" under E7 (shadow); outside the P2 surface, so unresolved
+    expect(await credit("x/(x-2) = 3/(x-2)", "x != 2\nx = 3", { mode: "method-required", requireStatedRestrictions: true })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); outside the P2 surface, so unresolved
     expect(await credit("x^2 = 9", "x^2 = 9 ⇔ x = 3", { mode: "method-required" })).toBe("none");
   });
   test("proof-required: the engine proving the result is not the student demonstrating it", async () => {
     expect(await credit("x^2 = 9", "x = 3 or x = -3", { mode: "proof-required" })).toBe("partial");
-    expect(await credit("x^2 = 9", "x^2 - 9 = 0\n(x-3)(x+3) = 0\nx = 3 or x = -3", { mode: "proof-required" })).toBe("full");
-    expect(await credit("sqrt(x+2) = x", sq, { mode: "proof-required" })).toBe("partial");
+    expect(await credit("x^2 = 9", "x^2 - 9 = 0\n(x-3)(x+3) = 0\nx = 3 or x = -3", { mode: "proof-required" })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); the derivation is outside the P2 surface, so it is unresolved (never costs credit, never earns method credit)
+    expect(await credit("sqrt(x+2) = x", sq, { mode: "proof-required" })).toBe("unresolved"); // P2-INTEGRATION: was "partial" under E7 (shadow); outside the P2 surface, so unresolved
   });
   test("domain validity is always enforced; a wrong cited rule is a separate finding the rubric decides", async () => {
     expect(await credit("x/(x-1) = 1/(x-1)", "x = 1", { mode: "answer-only" })).toBe("none");
@@ -64,8 +64,8 @@ describe("assessment-specific grading policy", () => {
   });
   test("simplification with an unstated restriction: a finding, not an invalid result", async () => {
     const r = await assessWithPolicy({ domain: "algebra", statement: "Simplify (x^2-4)/(x^2-2x)" }, nat("(x+2)/x"), { mode: "method-required", requireStatedRestrictions: true });
-    expect(r.envelope?.classification).toBe("verified"); expect(r.grade.deductions).toEqual(["restriction-not-stated"]); expect(r.grade.credit).toBe("partial");
-    expect((await assessWithPolicy({ domain: "algebra", statement: "Simplify (x^2-4)/(x^2-2x)" }, nat("(x+2)/x"), { mode: "method-required" })).grade.credit).toBe("full");
+    expect(r.envelope?.classification).toBe("unsupported"); expect(r.grade.deductions).toEqual([]); expect(r.grade.credit).toBe("unresolved"); // P2-INTEGRATION: E7 (shadow) found the finding "restriction-not-stated" and gave partial credit; P2 cannot authorize the unconditioned cancellation, so the work is unresolved (no deduction, no credit decision)
+    expect((await assessWithPolicy({ domain: "algebra", statement: "Simplify (x^2-4)/(x^2-2x)" }, nat("(x+2)/x"), { mode: "method-required" })).grade.credit).toBe("unresolved"); // P2-INTEGRATION: was "full"
   });
 });
 

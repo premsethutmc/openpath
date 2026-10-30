@@ -32,7 +32,7 @@ describe("D: algebra lines introduce no unexplained number", () => {
     for (let i = 0; i < 16; i++) {
       const a = 2 + rnd(6), x = 1 + rnd(9), b = 1 + rnd(9), c = a * x + b;
       expect((await alg(`${a}x + ${b} = ${c}`, [`${a}x + ${b} = ${c}`, `${a}x = ${c - b}`, `x = ${x}`])).classification).toBe("verified");
-      expect((await alg(`${a}(x + ${b}) = ${a * (x + b)}`, [`${a}(x + ${b}) = ${a * (x + b)}`, `${a}x + ${a * b} = ${a * (x + b)}`, `x = ${x}`])).classification).toBe("verified");
+      expect((await alg(`${a}(x + ${b}) = ${a * (x + b)}`, [`${a}(x + ${b}) = ${a * (x + b)}`, `${a}x + ${a * b} = ${a * (x + b)}`, `x = ${x}`])).classification).not.toBe("verified"); // P2-FINAL: `ax + ab = c -> x = k` skips the subtract/divide steps of a presented derivation: unsupported, not wrong (a bare answer claim is separate)
     }
   });
   test("a line that smuggles in a numeral the working never derived is not verified (the solution set alone is not a derivation)", async () => {

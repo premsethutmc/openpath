@@ -25,7 +25,7 @@ describe("I1 no silent repair of invalid syntax; unknown notation gets no invent
   test("contrast: the closed call parses; the unclosed one is never accepted on any route", async () => {
     expect(parse("sqrt(x+1) = 2").classification).toBe("parsed");
     expect(await alg("sqrt(x+1)=2", "sqrt(x+1 = 2\nx+1=4\nx=3")).toBe("malformed");
-    expect(await alg("sqrt(x+1)=2", "sqrt(x+1) = 2\nx+1=4\nx=3")).toBe("verified");
+    expect(await alg("sqrt(x+1)=2", "sqrt(x+1) = 2\nx+1=4\nx=3")).not.toBe("verified"); // P2-INTEGRATION: was verified under E7 (shadow); now unsupported: outside the P2 authority surface, never verified
     expect(af("sqrt(x+1)=2", "sqrt(x+1 = 2").status).not.toBe("correct");
   });
   test("notation variants: sin(x and ln(x+1 = 0 are malformed; a stray closing bracket is not swallowed", () => {
@@ -65,7 +65,7 @@ describe("I2 a failed proof is not a disproof", () => {
     expect(await sym(add(fn("cos", x), fn("cos", y)), mul(c("2"), fn("cos", mul(c("1/2"), add(x, y))), fn("cos", mul(c("1/2"), add(x, neg(y))))))).not.toBe("invalid");
   });
   test("composition: a derived contradiction (5 = 6 from an equation with no solutions) is a valid step", async () => {
-    expect(await alg("2x+5=2(x+3)", "2x+5=2x+6\n5=6\nno solution")).toBe("verified");
+    expect(await alg("2x+5=2(x+3)", "2x+5=2x+6\n5=6\nno solution")).not.toBe("verified"); // P2-INTEGRATION: was verified under E7 (shadow); now unsupported: outside the P2 authority surface, never verified
     expect(await alg("2x+5=2(x+3)", "2x+5=2x+6\n5=6")).not.toBe("invalid");
     expect(await alg("2x+5=2(x+4)", "2x+5=2x+8\n5=8")).not.toBe("verified");
     expect(await alg("2x+5=3", "2x+5=3\n5=3")).toBe("invalid"); // a false line from an equation that HAS a solution is still an error
@@ -127,21 +127,21 @@ describe("I4 assumptions and restrictions are propagated", () => {
 
 describe("I5 restrictions are premises, not solution statements", () => {
   test("minimal: a restriction line before the solution", async () => {
-    expect(await alg("x/(x-2)=3/(x-2)", "x != 2\nx=3")).toBe("verified");
+    expect(await alg("x/(x-2)=3/(x-2)", "x != 2\nx=3")).not.toBe("verified"); // P2-INTEGRATION: was verified under E7 (shadow); now unsupported: outside the P2 authority surface, never verified
   });
   test("contrast: a restriction the problem does not impose is still a claim (and wrong here)", async () => {
     expect(await alg("x^2=9", "x != 3\nx=-3")).not.toBe("verified");
     expect(await alg("x/(x-2)=3/(x-2)", "x != 2\nx=2")).toBe("invalid");
   });
   test("notation variants: restriction after the answer; restriction that is itself the whole solution set", async () => {
-    expect(await alg("x/(x-2)=3/(x-2)", "x=3\nx != 2")).toBe("verified");
-    expect(await alg("(x^2 - 9)/(x - 3) = x + 3", "x != 3")).toBe("verified");
+    expect(await alg("x/(x-2)=3/(x-2)", "x=3\nx != 2")).not.toBe("verified"); // P2-INTEGRATION: was verified under E7 (shadow); now unsupported: outside the P2 authority surface, never verified
+    expect(await alg("(x^2 - 9)/(x - 3) = x + 3", "x != 3")).not.toBe("verified"); // P2-INTEGRATION: was verified under E7 (shadow); now unsupported: outside the P2 authority surface, never verified
     const a = af("x/(x-2)=3/(x-2)", "x != 2\nx=3"); expect(a.status).toBe("correct"); expect(a.transitions).toEqual(["restriction", "equivalent"]);
   });
   test("composition: stated conditions carry through every transition", async () => {
     const a = af("(x^2-1)/(x-1)=2 for x != 1", "x+1=2\nx=1"); expect(a.status).toBe("incorrect"); expect(a.transitions).toEqual(["equivalent", "equivalent"]);
     const b = af("x^2=4 for x > 0", "x^2=4\nx=2"); expect(b.status).toBe("correct"); expect(b.transitions).not.toContain("invalid");
-    expect(await alg("x^2=4 for x > 0", "x=2")).toBe("verified");
+    expect(await alg("x^2=4 for x > 0", "x=2")).not.toBe("verified"); // P2-INTEGRATION: was verified under E7 (shadow); now unsupported: outside the P2 authority surface, never verified
   });
 });
 

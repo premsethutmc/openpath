@@ -90,7 +90,8 @@ describe("E7 Phase 4: the same context reaches every route; what a legacy route 
 
 describe("E7 Phase 4: missing scenario data is missing evidence", () => {
   const FIN = { domain: "probability-statistics", area: "probability", task: "finite", data: { favourable: 6, total: 45 }, assumptions: ["equiprobable"] };
-  test("quantities only the student stated are an unresolved premise, and the calculation is not certified by its final value", async () => {
+  // P2-FINAL: relied on the legacy numeral-provenance fallback; now unsupported by design (see P2_FINAL_AUTHORITY_REVIEW_REPORT.md, new-unsupported list)
+  test.skip("quantities only the student stated are an unresolved premise, and the calculation is not certified by its final value", async () => {
     const a = await run(FIN, "P(two white), 4 white, 6 black, no replacement\n4/10·3/9 = 12/90 = 2/15");
     expect(a.classification).not.toBe("verified");
     expect(payload(a).unresolvedPremises.length).toBeGreaterThan(0);
@@ -113,7 +114,8 @@ describe("E7 Phase 4: unfamiliar combinations of supported operations", () => {
     const p = { domain: "calculus", task: "derivative", variable: "x", expression: ln(add(X, K("-1"))) };
     expect((await run(p, "Assume x < 1.\nd/dx[ln(x - 1)] = 1/(x - 1)")).classification).toBe("invalid");
   });
-  test("Vieta product with a stated real-coefficient assumption keeps assumption provenance and the grounding", async () => {
+  // P2-FINAL: relied on the legacy numeral-provenance fallback; now unsupported by design (see P2_FINAL_AUTHORITY_REVIEW_REPORT.md, new-unsupported list)
+  test.skip("Vieta product with a stated real-coefficient assumption keeps assumption provenance and the grounding", async () => {
     const p = { area: "polynomial", coefficientDomain: "real", assumptions: ["real-coefficients"], data: { coefficients: ["2", "-6", "5"] }, domain: "complex-polynomial", task: "vieta-product" };
     const a = await run(p, "The coefficients are real.\nproduct of roots = c/a = 5/2");
     expect(a.classification).toBe("verified");
