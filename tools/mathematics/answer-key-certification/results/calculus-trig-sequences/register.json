@@ -1,0 +1,43 @@
+[
+ {
+  "family": "antable",
+  "class": "form",
+  "severity": "low",
+  "questionIds": [
+   "gen:antable:3,11,5,2",
+   "gen:antable:3,11,5,3",
+   "gen:antable:3,34,2,2",
+   "gen:antable:3,34,2,3",
+   "gen:antable:3,35,0,3",
+   "gen:antable:3,35,0,5",
+   "gen:antable:3,54,3,3",
+   "gen:antable:3,54,3,4",
+   "gen:antable:3,54,3,5"
+  ],
+  "affectedCount": 9,
+  "exampleId": "gen:antable:3,11,5,2",
+  "params": [
+   3,
+   11,
+   5,
+   2
+  ],
+  "prompt": "A ladder 5 m long leans against a wall and makes an angle of 11°32′ with the ground. Using the table of natural sines in the picture (with its mean differences), find how high up the wall the ladder reaches, in metres, to 2 decimal places.",
+  "stored": "1",
+  "derived": "same value written with 2 decimal places (e.g. 1.00)",
+  "method": "value verified exactly; display digits compared with the requested decimal places",
+  "explanation": "Value is mathematically correct; the stored text drops trailing zeros although the prompt asks for 2 decimal places. Notation only, not a maths error.",
+  "proposedFix": "Format answers with exactly the requested number of decimal places, or accept equal values in grading."
+ },
+ {
+  "refNotes": [
+   "139/139 families have a reference; none Unsupported; all coverage exhaustive (36,794 questions, none sampled).",
+   "Inverse trig uses NCERT principal branches; interval-endpoint continuity: left end needs right-continuity, right end needs left limit = value.",
+   "Choice-type families take option texts from the supplementary bun export (choiceopts/*.jsonl); mc check is done inside verdict_mc, exactly the keyed option must satisfy the predicate.",
+   "Verdict-based families (ODE/antiderivative/limit-by-numerics/aurie Riemann by Richardson) check the stored answer directly; antiderivatives are differentiated, + C and |.| on logs checked.",
+   "Multivariable limit/continuity (armvcont, armvlimx) use circles plus curved paths x=c*y^k, y=c*x^k; circles alone miss cusps such as xy^2/(x^2+y^4) (first-run false mismatch was a reference bug, fixed; stored keys correct).",
+   "audquo 'simplify' form and numeric-decimal display forms are not machine-form-checked except antable/apsapp decimal digits scanned by script (apsapp clean; antable 9 low-severity form notes).",
+   "Word wording read for about 58 families (one example each) plus sign checks; wording of the rest not verified."
+  ]
+ }
+]

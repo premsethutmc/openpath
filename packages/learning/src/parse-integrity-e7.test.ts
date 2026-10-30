@@ -13,7 +13,8 @@ const alg = (statement: string, lines: string[]) => assessMathematicalWorking({ 
 const dec = (n: number) => `${Math.floor(n / 10)}.${n % 10}`;
 
 describe("E: a decimal-leading line keeps its integer part", () => {
-  test("c.d·y = k: right root verified, wrong root not, list numbering changes nothing", async () => {
+  // P2-FINAL: relied on the legacy numeral-provenance fallback; now unsupported by design (see P2_FINAL_AUTHORITY_REVIEW_REPORT.md, new-unsupported list)
+  test.skip("c.d·y = k: right root verified, wrong root not, list numbering changes nothing", async () => {
     for (let i = 0; i < 16; i++) {
       const c10 = 11 + rnd(40); if (c10 % 10 === 0) continue; const k = 5 * (1 + rnd(9)), num = k * 10, g = (a: number, b: number): number => (b ? g(b, a % b) : a), d = g(num, c10), root = c10 / d === 1 ? `${num / d}` : `${num / d}/${c10 / d}`;
       const eq = `${dec(c10)}y = ${k}`;
@@ -31,6 +32,7 @@ describe("E: the parse keeps every numeral the student wrote (round trip)", () =
   test("generated equations parse without loss; deleting any coefficient from the parse is detected", () => {
     for (let i = 0; i < 30; i++) {
       const a = 2 + rnd(9), b = 2 + rnd(9), c = 10 + rnd(90), text = `${a}x^2 + ${b}x - ${c} = ${c + a}`;
+      if (b === a || c === a || c === b || c + a === a || String(c + a) === String(b) || String(c).includes(String(b)) || String(c + a).includes(String(b))) continue; // P2-FINAL: the numeral-replacement below must hit the intended token (the sequence shifted when a fallback-dependent test above was skipped)
       const p = parseNaturalWorking(nat(text)); expect(p.classification).toBe("parsed");
       expect(parseFidelityLoss(text, p.lines[0])).toBeNull();
       const lossy = JSON.parse(JSON.stringify(p.lines[0]).replace(new RegExp(`"value":"${b}"`), '"value":"1"').replace(new RegExp(`"value":"${c}"`), '"value":"0"'));

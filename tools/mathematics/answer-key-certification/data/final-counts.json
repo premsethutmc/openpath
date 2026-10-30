@@ -1,0 +1,3264 @@
+{
+ "released": 341483,
+ "classes": {
+  "verified": 341014,
+  "generator-defect": 41,
+  "ambiguous": 414,
+  "form-notation": 14
+ },
+ "notesOnVerified": {
+  "Generator defect": 93,
+  "Ambiguous": 370,
+  "form": 59,
+  "Generator defect (wording)": 92
+ },
+ "perFamily": {
+  "aaadd": {
+   "verified": 190
+  },
+  "aabig": {
+   "verified": 90
+  },
+  "aabond": {
+   "verified": 184
+  },
+  "aabund": {
+   "verified": 300
+  },
+  "aacmp": {
+   "verified": 300
+  },
+  "aadigit": {
+   "verified": 234
+  },
+  "aadigmax": {
+   "verified": 300
+  },
+  "aagreat": {
+   "verified": 240
+  },
+  "aagrp": {
+   "verified": 243
+  },
+  "aamore": {
+   "verified": 300
+  },
+  "aamul01": {
+   "verified": 300
+  },
+  "aaname": {
+   "verified": 90
+  },
+  "aanext": {
+   "verified": 294
+  },
+  "aaordn": {
+   "verified": 300
+  },
+  "aaordx": {
+   "verified": 394
+  },
+  "aasenadd": {
+   "verified": 232
+  },
+  "aasensub": {
+   "verified": 220
+  },
+  "aasign": {
+   "verified": 189
+  },
+  "aastadd": {
+   "verified": 298
+  },
+  "aastsub": {
+   "verified": 296
+  },
+  "aasub": {
+   "verified": 190
+  },
+  "aatens": {
+   "verified": 130
+  },
+  "aaword": {
+   "verified": 89
+  },
+  "aazero": {
+   "verified": 80
+  },
+  "abgroup": {
+   "verified": 81
+  },
+  "abhto": {
+   "verified": 400
+  },
+  "abreg": {
+   "verified": 400
+  },
+  "abrep": {
+   "verified": 108
+  },
+  "acaddten": {
+   "verified": 400
+  },
+  "acequal": {
+   "verified": 144
+  },
+  "achalf": {
+   "verified": 103
+  },
+  "achalfof": {
+   "verified": 240
+  },
+  "acnlbetween": {
+   "verified": 300
+  },
+  "acnlcmp": {
+   "verified": 400
+  },
+  "acnljump": {
+   "verified": 300
+  },
+  "acnlpos": {
+   "verified": 300
+  },
+  "acpart": {
+   "verified": 300
+  },
+  "acshare": {
+   "verified": 300
+  },
+  "acsub2": {
+   "verified": 400
+  },
+  "acsub3": {
+   "verified": 400
+  },
+  "acsubn": {
+   "verified": 300
+  },
+  "ad1000": {
+   "verified": 300
+  },
+  "adbetw": {
+   "verified": 300
+  },
+  "adcol3": {
+   "verified": 500
+  },
+  "adcolx": {
+   "verified": 500
+  },
+  "addr": {
+   "verified": 400
+  },
+  "adexp": {
+   "verified": 400
+  },
+  "adfbuild": {
+   "verified": 89
+  },
+  "adfcmp": {
+   "verified": 500
+  },
+  "adfcmpu": {
+   "verified": 287
+  },
+  "adfcol": {
+   "verified": 300
+  },
+  "adfmeas": {
+   "verified": 122
+  },
+  "adfname": {
+   "verified": 145
+  },
+  "adfnl": {
+   "verified": 126
+  },
+  "adford": {
+   "verified": 400
+  },
+  "adfordu": {
+   "verified": 400
+  },
+  "adfunit": {
+   "verified": 227
+  },
+  "admental": {
+   "verified": 384
+  },
+  "adname": {
+   "verified": 180
+  },
+  "adseq": {
+   "verified": 378
+  },
+  "adshade": {
+   "verified": 300
+  },
+  "aeadd3": {
+   "verified": 400
+  },
+  "aeaddn": {
+   "verified": 450
+  },
+  "aechk": {
+   "verified": 693
+  },
+  "aecmp": {
+   "verified": 300
+  },
+  "aecol4": {
+   "verified": 450
+  },
+  "aedec": {
+   "verified": 400
+  },
+  "aedecc": {
+   "verified": 300
+  },
+  "aedfr": {
+   "verified": 119
+  },
+  "aediv0": {
+   "verified": 192
+  },
+  "aedord": {
+   "verified": 300
+  },
+  "aedpv": {
+   "verified": 404
+  },
+  "aeest": {
+   "verified": 400
+  },
+  "aeestp": {
+   "verified": 450
+  },
+  "aeeuc": {
+   "verified": 300
+  },
+  "aeeven": {
+   "verified": 417
+  },
+  "aeind": {
+   "verified": 400
+  },
+  "aemult": {
+   "verified": 400
+  },
+  "aenumf": {
+   "verified": 600
+  },
+  "aep10": {
+   "verified": 400
+  },
+  "aepair": {
+   "verified": 92
+  },
+  "aerat": {
+   "verified": 400
+  },
+  "aerdec": {
+   "verified": 594
+  },
+  "aernd": {
+   "verified": 300
+  },
+  "aeround": {
+   "verified": 450
+  },
+  "aesurc": {
+   "verified": 168
+  },
+  "aesurop": {
+   "verified": 450
+  },
+  "agbod": {
+   "verified": 600
+  },
+  "agclass": {
+   "verified": 191
+  },
+  "agcomf": {
+   "verified": 163
+  },
+  "agcop": {
+   "verified": 160
+  },
+  "agdec": {
+   "verified": 500
+  },
+  "agediv": {
+   "verified": 400
+  },
+  "agfac": {
+   "verified": 97
+  },
+  "agfdec": {
+   "verified": 300
+  },
+  "agfta": {
+   "verified": 400
+  },
+  "aghcf3": {
+   "verified": 400
+  },
+  "aghlp": {
+   "verified": 400
+  },
+  "aghlw": {
+   "verified": 400
+  },
+  "agimp": {
+   "verified": 279
+  },
+  "agjump": {
+   "verified": 300
+  },
+  "aglcm": {
+   "verified": 253
+  },
+  "aglcm3": {
+   "verified": 400
+  },
+  "agmeas": {
+   "verified": 400
+  },
+  "agmix": {
+   "verified": 279
+  },
+  "agnl": {
+   "verified": 103
+  },
+  "agpct": {
+   "verified": 198
+  },
+  "agpctd": {
+   "verified": 149
+  },
+  "agpfrac": {
+   "verified": 238
+  },
+  "agprime": {
+   "verified": 400
+  },
+  "agptest": {
+   "verified": 393
+  },
+  "agrupee": {
+   "verified": 500
+  },
+  "agterm": {
+   "verified": 219
+  },
+  "agwrite": {
+   "verified": 360
+  },
+  "ahpsq": {
+   "verified": 131
+  },
+  "ahsqd": {
+   "verified": 186
+  },
+  "aiddiv": {
+   "verified": 400
+  },
+  "aidmul": {
+   "verified": 400
+  },
+  "aidp10": {
+   "verified": 400
+  },
+  "aidword": {
+   "verified": 400
+  },
+  "aiest": {
+   "verified": 300
+  },
+  "aifdiv": {
+   "verified": 400
+  },
+  "aifmul": {
+   "verified": 400
+  },
+  "aifword": {
+   "verified": 400
+  },
+  "aiint": {
+   "verified": 500
+  },
+  "aiintx": {
+   "verified": 400
+  },
+  "aimulti": {
+   "verified": 400
+  },
+  "aitemp": {
+   "verified": 500
+  },
+  "aiwdiv": {
+   "verified": 341
+  },
+  "ajb10": {
+   "verified": 400
+  },
+  "ajbase": {
+   "verified": 400
+  },
+  "ajbest": {
+   "verified": 400
+  },
+  "ajbrk": {
+   "verified": 400
+  },
+  "ajci": {
+   "verified": 400
+  },
+  "ajcip": {
+   "verified": 400
+  },
+  "ajcmpx": {
+   "verified": 500
+  },
+  "ajcmul": {
+   "verified": 101
+  },
+  "ajcrcmp": {
+   "verified": 400
+  },
+  "ajcrore": {
+   "verified": 450
+  },
+  "ajcube": {
+   "verified": 102
+  },
+  "ajd99": {
+   "verified": 352
+  },
+  "ajdisc": {
+   "verified": 400
+  },
+  "ajeqr": {
+   "verified": 400
+  },
+  "ajfare": {
+   "verified": 400
+  },
+  "ajgrow": {
+   "verified": 300
+  },
+  "ajidiv": {
+   "verified": 400
+  },
+  "ajimul": {
+   "verified": 400
+  },
+  "ajintl": {
+   "verified": 500
+  },
+  "ajinv": {
+   "verified": 400
+  },
+  "ajlaw": {
+   "verified": 450
+  },
+  "ajmill": {
+   "verified": 350
+  },
+  "ajneg": {
+   "verified": 224
+  },
+  "ajord": {
+   "verified": 400
+  },
+  "ajpf": {
+   "verified": 143
+  },
+  "ajpfdc": {
+   "verified": 400
+  },
+  "ajpl": {
+   "verified": 400
+  },
+  "ajplamt": {
+   "verified": 450
+  },
+  "ajprop": {
+   "verified": 500
+  },
+  "ajrat": {
+   "verified": 450
+  },
+  "ajrate": {
+   "verified": 400
+  },
+  "ajrcmp": {
+   "verified": 450
+  },
+  "ajrcq": {
+   "verified": 450
+  },
+  "ajrdiv": {
+   "verified": 450
+  },
+  "ajrline": {
+   "verified": 450
+  },
+  "ajrq": {
+   "verified": 500
+  },
+  "ajrstd": {
+   "verified": 400
+  },
+  "ajsi": {
+   "verified": 500
+  },
+  "ajsqm": {
+   "verified": 173
+  },
+  "ajtaxi": {
+   "verified": 135
+  },
+  "ajudig": {
+   "verified": 350
+  },
+  "ajwork": {
+   "verified": 253
+  },
+  "akscalc": {
+   "verified": 450
+  },
+  "aksci": {
+   "verified": 400
+  },
+  "akscid": {
+   "verified": 400
+  },
+  "akscmp": {
+   "verified": 400
+  },
+  "aksmag": {
+   "verified": 450
+  },
+  "aksqb": {
+   "verified": 98
+  },
+  "aksqe": {
+   "verified": 300
+  },
+  "aksqf": {
+   "verified": 176
+  },
+  "amclass": {
+   "verified": 298
+  },
+  "amcyc": {
+   "verified": 400
+  },
+  "amdec": {
+   "verified": 88
+  },
+  "amirr": {
+   "verified": 300
+  },
+  "amnline": {
+   "verified": 450
+  },
+  "amplaces": {
+   "verified": 300
+  },
+  "amrec": {
+   "verified": 400
+  },
+  "amrop": {
+   "verified": 400
+  },
+  "amterm": {
+   "verified": 300
+  },
+  "ancong": {
+   "verified": 300
+  },
+  "anmod": {
+   "verified": 400
+  },
+  "anweek": {
+   "verified": 300
+  },
+  "asarg": {
+   "verified": 135
+  },
+  "ascinv": {
+   "verified": 400
+  },
+  "ascloc": {
+   "verified": 400
+  },
+  "ascmod": {
+   "verified": 400
+  },
+  "asconj": {
+   "verified": 300
+  },
+  "ascop": {
+   "verified": 400
+  },
+  "ascpow": {
+   "verified": 256
+  },
+  "ascsqrt": {
+   "verified": 128
+  },
+  "asdemo": {
+   "verified": 110
+  },
+  "aspolm": {
+   "verified": 242
+  },
+  "asroot": {
+   "verified": 120
+  },
+  "avarea": {
+   "verified": 360
+  },
+  "avdfact": {
+   "verified": 90
+  },
+  "avdirv": {
+   "verified": 300
+  },
+  "avdiv": {
+   "verified": 500
+  },
+  "avexpn": {
+   "verified": 320
+  },
+  "avfas": {
+   "verified": 420
+  },
+  "avfexp": {
+   "verified": 234
+  },
+  "avfold": {
+   "verified": 112
+  },
+  "avfwq": {
+   "verified": 400
+  },
+  "avlat": {
+   "verified": 320
+  },
+  "avlike": {
+   "verified": 300
+  },
+  "avlow": {
+   "verified": 360
+  },
+  "avmarked": {
+   "verified": 420
+  },
+  "avmdiv": {
+   "verified": 360
+  },
+  "avpctof": {
+   "verified": 450
+  },
+  "avpest": {
+   "verified": 400
+  },
+  "avpmiss": {
+   "verified": 400
+  },
+  "avpp": {
+   "verified": 420
+  },
+  "avppf": {
+   "verified": 225
+  },
+  "avprop": {
+   "verified": 360
+  },
+  "avrsub": {
+   "verified": 400
+  },
+  "avstrat": {
+   "verified": 320
+  },
+  "avtab": {
+   "verified": 99
+  },
+  "avzero": {
+   "verified": 350
+  },
+  "cnt": {
+   "verified": 120
+  },
+  "divr": {
+   "verified": 536
+  },
+  "eqfrac": {
+   "verified": 405
+  },
+  "fadd": {
+   "verified": 825
+  },
+  "faddu": {
+   "verified": 870
+  },
+  "fmulw": {
+   "verified": 528
+  },
+  "hcf": {
+   "verified": 1402
+  },
+  "ldiv": {
+   "verified": 704
+  },
+  "mmul": {
+   "verified": 640
+  },
+  "mul": {
+   "verified": 121
+  },
+  "pct": {
+   "verified": 380
+  },
+  "pow": {
+   "verified": 42
+  },
+  "prop": {
+   "verified": 980
+  },
+  "root": {
+   "verified": 99
+  },
+  "surd": {
+   "verified": 211
+  },
+  "aacalpat": {
+   "verified": 300
+  },
+  "aapatn": {
+   "verified": 400
+  },
+  "aapatu": {
+   "verified": 228
+  },
+  "aaweave": {
+   "verified": 300
+  },
+  "abmiss": {
+   "verified": 400
+  },
+  "abnine": {
+   "verified": 293
+  },
+  "above": {
+   "verified": 215
+  },
+  "abpascal": {
+   "verified": 95
+  },
+  "abseq": {
+   "verified": 400
+  },
+  "acbalance": {
+   "verified": 400
+  },
+  "accmpx": {
+   "verified": 400
+  },
+  "acfacts": {
+   "verified": 280
+  },
+  "acgrow": {
+   "verified": 300
+  },
+  "acmissing": {
+   "verified": 400
+  },
+  "acplace": {
+   "verified": 300
+  },
+  "acsticks": {
+   "verified": 84
+  },
+  "aecons": {
+   "verified": 240
+  },
+  "aehund": {
+   "verified": 400
+  },
+  "aeineqs": {
+   "verified": 450
+  },
+  "aeineqw": {
+   "verified": 450
+  },
+  "aeineqz": {
+   "verified": 450
+  },
+  "aelinw": {
+   "verified": 450
+  },
+  "aenbhd": {
+   "verified": 567
+  },
+  "aepat": {
+   "verified": 400
+  },
+  "aerev": {
+   "verified": 126
+  },
+  "affig": {
+   "verified": 98
+  },
+  "affigrel": {
+   "verified": 94
+  },
+  "affrule": {
+   "verified": 189
+  },
+  "afletter": {
+   "verified": 132
+  },
+  "afmatch": {
+   "verified": 90
+  },
+  "agtree": {
+   "verified": 85
+  },
+  "ahboth": {
+   "verified": 400
+  },
+  "ahcal": {
+   "verified": 366
+  },
+  "ahcoef": {
+   "verified": 300
+  },
+  "ahcomp": {
+   "verified": 397
+  },
+  "ahcube": {
+   "verified": 400
+  },
+  "ahfrac": {
+   "verified": 208
+  },
+  "ahid": {
+   "verified": 333
+  },
+  "ahidn": {
+   "verified": 120
+  },
+  "ahinv": {
+   "verified": 400
+  },
+  "ahlike": {
+   "verified": 400
+  },
+  "ahman": {
+   "verified": 400
+  },
+  "ahmatch": {
+   "verified": 176
+  },
+  "ahone": {
+   "verified": 400
+  },
+  "ahpyr": {
+   "verified": 300
+  },
+  "ahsub": {
+   "verified": 400
+  },
+  "ahthink": {
+   "verified": 288
+  },
+  "ahvary": {
+   "verified": 120
+  },
+  "ahwork": {
+   "verified": 171
+  },
+  "ahzk": {
+   "verified": 400
+  },
+  "ajfcub": {
+   "verified": 130
+  },
+  "ajfgrp": {
+   "verified": 400
+  },
+  "ajfspl": {
+   "verified": 450
+  },
+  "ajfsq": {
+   "verified": 450
+  },
+  "ajzchk": {
+   "verified": 400
+  },
+  "ajzero": {
+   "verified": 400
+  },
+  "al3cons": {
+   "verified": 300
+  },
+  "al3sys": {
+   "verified": 300
+  },
+  "aladd": {
+   "verified": 300
+  },
+  "alcomp": {
+   "verified": 400
+  },
+  "alcompx": {
+   "verified": 400
+  },
+  "alcons": {
+   "verified": 360
+  },
+  "alcub": {
+   "verified": 165
+  },
+  "aldisk": {
+   "verified": 300
+  },
+  "aleval": {
+   "verified": 202
+  },
+  "alfack": {
+   "verified": 300
+  },
+  "alfop": {
+   "verified": 400
+  },
+  "alform": {
+   "verified": 456
+  },
+  "algcd": {
+   "verified": 300
+  },
+  "algcd3": {
+   "verified": 300
+  },
+  "alglp": {
+   "verified": 300
+  },
+  "alinf": {
+   "verified": 300
+  },
+  "alkcase": {
+   "verified": 300
+  },
+  "allcm": {
+   "verified": 300
+  },
+  "alldiv": {
+   "verified": 400
+  },
+  "almeth": {
+   "verified": 450
+  },
+  "almono": {
+   "verified": 300
+  },
+  "alpdeg": {
+   "verified": 239
+  },
+  "alpdiv": {
+   "verified": 400
+  },
+  "alpmul": {
+   "verified": 400
+  },
+  "alpoly": {
+   "verified": 236
+  },
+  "alpred": {
+   "verified": 400
+  },
+  "alpsq": {
+   "verified": 300
+  },
+  "alqline": {
+   "verified": 300
+  },
+  "alqtab": {
+   "verified": 300
+  },
+  "alratl": {
+   "verified": 300
+  },
+  "alratx": {
+   "verified": 300
+  },
+  "alrem": {
+   "verified": 400
+  },
+  "alrop": {
+   "verified": 400
+  },
+  "alrule": {
+   "verified": 300
+  },
+  "alsol2": {
+   "verified": 300
+  },
+  "alsplit": {
+   "verified": 400
+  },
+  "alsym": {
+   "verified": 450
+  },
+  "alsys": {
+   "verified": 500
+  },
+  "alsysw": {
+   "verified": 300
+  },
+  "alsysx": {
+   "verified": 400
+  },
+  "alzgr": {
+   "verified": 244
+  },
+  "aoabseq": {
+   "verified": 300
+  },
+  "aoabsin": {
+   "verified": 400
+  },
+  "aoarr": {
+   "verified": 91
+  },
+  "aobinapp": {
+   "verified": 103
+  },
+  "aobinco": {
+   "verified": 400
+  },
+  "aobinexp": {
+   "verified": 116
+  },
+  "aobinind": {
+   "verified": 216
+  },
+  "aobinmid": {
+   "verified": 162
+  },
+  "aocart": {
+   "verified": 228
+  },
+  "aochb": {
+   "verified": 192
+  },
+  "aocomm": {
+   "verified": 300
+  },
+  "aoconj": {
+   "verified": 234
+  },
+  "aocorner": {
+   "verified": 300
+  },
+  "aocq": {
+   "verified": 300
+  },
+  "aodk": {
+   "verified": 321
+  },
+  "aodkr": {
+   "verified": 190
+  },
+  "aodom": {
+   "verified": 450
+  },
+  "aoexpeq": {
+   "verified": 400
+  },
+  "aofact": {
+   "verified": 100
+  },
+  "aofclass": {
+   "verified": 259,
+   "generator-defect": 41
+  },
+  "aofname": {
+   "verified": 161
+  },
+  "aofund": {
+   "verified": 604
+  },
+  "aogeoc": {
+   "verified": 137
+  },
+  "aogp": {
+   "verified": 300
+  },
+  "aogpcv": {
+   "verified": 630
+  },
+  "aogpgr": {
+   "verified": 228
+  },
+  "aogpid": {
+   "verified": 144
+  },
+  "aogpinf": {
+   "verified": 300
+  },
+  "aogpsum": {
+   "verified": 300
+  },
+  "aogpuse": {
+   "verified": 569
+  },
+  "aograph": {
+   "verified": 96
+  },
+  "aoinex": {
+   "verified": 300
+  },
+  "aoisfn": {
+   "verified": 190
+  },
+  "aolog": {
+   "verified": 212
+  },
+  "aologeq": {
+   "verified": 268
+  },
+  "aologlaw": {
+   "verified": 190
+  },
+  "aomix": {
+   "verified": 95
+  },
+  "aomulti": {
+   "verified": 111
+  },
+  "aoncr": {
+   "verified": 153
+  },
+  "aoncrp": {
+   "verified": 231
+  },
+  "aonlread": {
+   "verified": 480
+  },
+  "aonpr": {
+   "verified": 110
+  },
+  "aopas": {
+   "verified": 117
+  },
+  "aopf": {
+   "verified": 400
+  },
+  "aopfint": {
+   "verified": 400
+  },
+  "aopfq": {
+   "verified": 300
+  },
+  "aoqin": {
+   "verified": 400
+  },
+  "aorange": {
+   "verified": 300
+  },
+  "aorat": {
+   "verified": 300
+  },
+  "aorel": {
+   "verified": 102
+  },
+  "aosamp": {
+   "verified": 87
+  },
+  "aosetcl": {
+   "verified": 438
+  },
+  "aosetform": {
+   "verified": 255
+  },
+  "aosetlaw": {
+   "verified": 530
+  },
+  "aosetop": {
+   "verified": 400
+  },
+  "aostd": {
+   "verified": 300
+  },
+  "aosub": {
+   "verified": 110
+  },
+  "aotrans": {
+   "verified": 300
+  },
+  "aoven3": {
+   "verified": 400
+  },
+  "apcode": {
+   "verified": 300
+  },
+  "apconj": {
+   "verified": 300
+  },
+  "apdesc": {
+   "verified": 486
+  },
+  "apinvf": {
+   "verified": 400
+  },
+  "apinvv": {
+   "verified": 300
+  },
+  "aplpfeas": {
+   "verified": 400
+  },
+  "aplpmax": {
+   "verified": 400
+  },
+  "aplpmin": {
+   "verified": 400
+  },
+  "aplpopt": {
+   "verified": 400
+  },
+  "apmcon": {
+   "verified": 160
+  },
+  "apmcost": {
+   "verified": 300
+  },
+  "apmeq": {
+   "verified": 2171
+  },
+  "apmlin": {
+   "verified": 400
+  },
+  "apmmod": {
+   "verified": 300
+  },
+  "apmmul": {
+   "verified": 400
+  },
+  "apmtype": {
+   "verified": 281
+  },
+  "apn": {
+   "verified": 2560
+  },
+  "aporth": {
+   "verified": 208
+  },
+  "approg": {
+   "verified": 192
+  },
+  "aprecip": {
+   "verified": 132
+  },
+  "apredu": {
+   "verified": 129
+  },
+  "aprot": {
+   "verified": 400
+  },
+  "aprrt": {
+   "verified": 300
+  },
+  "apsys2": {
+   "verified": 400
+  },
+  "apsys3": {
+   "verified": 400
+  },
+  "apsysw": {
+   "verified": 400
+  },
+  "apvbox": {
+   "verified": 660
+  },
+  "apvform": {
+   "verified": 400
+  },
+  "apvolg": {
+   "verified": 282
+  },
+  "apvolx": {
+   "verified": 360
+  },
+  "apvsum": {
+   "verified": 400
+  },
+  "auapc": {
+   "verified": 300
+  },
+  "auapis": {
+   "verified": 300
+  },
+  "auapk": {
+   "verified": 400
+  },
+  "auapln": {
+   "verified": 371
+  },
+  "auaprec": {
+   "verified": 400
+  },
+  "auaps": {
+   "verified": 400
+  },
+  "aubin": {
+   "verified": 400
+  },
+  "audk": {
+   "verified": 400
+  },
+  "audsg": {
+   "verified": 400
+  },
+  "audt3": {
+   "verified": 400
+  },
+  "auinv": {
+   "verified": 400
+  },
+  "auleq": {
+   "verified": 300
+  },
+  "aulwp": {
+   "verified": 400
+  },
+  "auqcs": {
+   "verified": 620
+  },
+  "auqf": {
+   "verified": 400
+  },
+  "auqsplit": {
+   "verified": 400
+  },
+  "auqstd": {
+   "verified": 400
+  },
+  "auqwp": {
+   "verified": 400
+  },
+  "auvexp": {
+   "verified": 400
+  },
+  "det2": {
+   "verified": 2076
+  },
+  "disc": {
+   "verified": 960
+  },
+  "dist": {
+   "verified": 132
+  },
+  "expand": {
+   "verified": 144
+  },
+  "factor": {
+   "verified": 288
+  },
+  "lin": {
+   "verified": 1920
+  },
+  "lineq": {
+   "verified": 500
+  },
+  "linev": {
+   "verified": 1512
+  },
+  "lneg": {
+   "verified": 500
+  },
+  "meet": {
+   "verified": 13
+  },
+  "quad": {
+   "verified": 127
+  },
+  "aaage": {
+   "verified": 300
+  },
+  "aacalc": {
+   "verified": 168
+  },
+  "aacald": {
+   "verified": 300
+  },
+  "aacalgap": {
+   "verified": 300
+  },
+  "aacalmo": {
+   "verified": 300
+  },
+  "aaclip": {
+   "verified": 222
+  },
+  "aacoin": {
+   "verified": 300
+  },
+  "aacups": {
+   "verified": 288
+  },
+  "aaday": {
+   "verified": 300
+  },
+  "aaddmm": {
+   "verified": 300
+  },
+  "aadur": {
+   "verified": 300
+  },
+  "aaheavy": {
+   "verified": 288
+  },
+  "aaheavyo": {
+   "verified": 144
+  },
+  "aalong": {
+   "verified": 300
+  },
+  "aamake": {
+   "verified": 119
+  },
+  "aamdays": {
+   "verified": 156
+  },
+  "aamoney": {
+   "verified": 300
+  },
+  "aaorder": {
+   "verified": 180
+  },
+  "aaseason": {
+   "verified": 92
+  },
+  "aaseq": {
+   "verified": 300
+  },
+  "aaspan": {
+   "verified": 300
+  },
+  "aaways": {
+   "verified": 195
+  },
+  "aaweek": {
+   "verified": 126
+  },
+  "ab24h": {
+   "verified": 300
+  },
+  "abchange": {
+   "verified": 162
+  },
+  "abclock": {
+   "verified": 144
+  },
+  "abcost": {
+   "verified": 300
+  },
+  "abcup": {
+   "verified": 400
+  },
+  "abcupord": {
+   "verified": 300
+  },
+  "abdisp": {
+   "verified": 300
+  },
+  "abenough": {
+   "verified": 300
+  },
+  "abjug": {
+   "verified": 94
+  },
+  "abkg": {
+   "verified": 83
+  },
+  "abkgg": {
+   "verified": 300
+  },
+  "ablen": {
+   "verified": 90
+  },
+  "abmeas": {
+   "verified": 159,
+   "ambiguous": 108
+  },
+  "abminute": {
+   "verified": 300
+  },
+  "abneed": {
+   "verified": 300
+  },
+  "abunit": {
+   "verified": 82
+  },
+  "abwunit": {
+   "verified": 92
+  },
+  "acbill": {
+   "verified": 240
+  },
+  "accal": {
+   "verified": 411
+  },
+  "acdecu": {
+   "verified": 400
+  },
+  "acelapsed": {
+   "verified": 400
+  },
+  "acelhm": {
+   "verified": 400
+  },
+  "acmcm": {
+   "verified": 300
+  },
+  "acmcmp": {
+   "verified": 400
+  },
+  "acmmkm": {
+   "verified": 400
+  },
+  "acmoneyadd": {
+   "verified": 400
+  },
+  "acmoneymul": {
+   "verified": 400
+  },
+  "acp2r": {
+   "verified": 300
+  },
+  "acpaise": {
+   "verified": 300
+  },
+  "actrain": {
+   "verified": 400
+  },
+  "adday": {
+   "verified": 336
+  },
+  "addur": {
+   "verified": 298
+  },
+  "adhmin": {
+   "verified": 96
+  },
+  "adm2h": {
+   "verified": 96
+  },
+  "admper": {
+   "verified": 178
+  },
+  "adperim": {
+   "verified": 178
+  },
+  "adpreg": {
+   "verified": 288
+  },
+  "adrace": {
+   "verified": 141
+  },
+  "adsec": {
+   "verified": 108
+  },
+  "aeampm": {
+   "verified": 288
+  },
+  "aearea": {
+   "verified": 99
+  },
+  "aecf": {
+   "verified": 230
+  },
+  "aeconv": {
+   "verified": 450
+  },
+  "aeconvd": {
+   "verified": 450
+  },
+  "aeconvu": {
+   "verified": 450
+  },
+  "aedivm": {
+   "verified": 400
+  },
+  "aeel24": {
+   "verified": 400
+  },
+  "aeftin": {
+   "verified": 138
+  },
+  "aeirr": {
+   "verified": 370
+  },
+  "aemix": {
+   "verified": 450
+  },
+  "aemulm": {
+   "verified": 400
+  },
+  "aeparts": {
+   "verified": 90
+  },
+  "aeperar": {
+   "verified": 400
+  },
+  "aet12": {
+   "verified": 156
+  },
+  "aet24": {
+   "verified": 288
+  },
+  "aewcmp": {
+   "verified": 281
+  },
+  "afapr": {
+   "verified": 300
+  },
+  "agspd": {
+   "verified": 400
+  },
+  "agspdc": {
+   "verified": 400
+  },
+  "aicap": {
+   "verified": 300
+  },
+  "aicarea": {
+   "verified": 90
+  },
+  "aicircum": {
+   "verified": 114
+  },
+  "aicvol": {
+   "verified": 400
+  },
+  "aicyls": {
+   "verified": 300
+  },
+  "aicylv": {
+   "verified": 300
+  },
+  "aihollow": {
+   "verified": 400
+  },
+  "ailsa": {
+   "verified": 300
+  },
+  "ailshape": {
+   "verified": 400
+  },
+  "aipack": {
+   "verified": 300
+  },
+  "aipara": {
+   "verified": 400
+  },
+  "aipath": {
+   "verified": 400
+  },
+  "aipi": {
+   "verified": 286,
+   "form-notation": 14
+  },
+  "airad": {
+   "verified": 130
+  },
+  "airhomb": {
+   "verified": 300
+  },
+  "airing": {
+   "verified": 114
+  },
+  "aisector": {
+   "verified": 234
+  },
+  "aisplit": {
+   "verified": 400
+  },
+  "aitrap": {
+   "verified": 400
+  },
+  "aitri": {
+   "verified": 400
+  },
+  "aitrih": {
+   "verified": 400
+  },
+  "aitsa": {
+   "verified": 300
+  },
+  "aiwheel": {
+   "verified": 300
+  },
+  "aiwiper": {
+   "verified": 177
+  },
+  "ambrahma": {
+   "verified": 300
+  },
+  "amclock": {
+   "verified": 300
+  },
+  "amcombs": {
+   "verified": 295
+  },
+  "amcombv": {
+   "verified": 300
+  },
+  "amcone": {
+   "verified": 159
+  },
+  "amconev": {
+   "verified": 106
+  },
+  "amcshape": {
+   "verified": 450
+  },
+  "amcube": {
+   "verified": 400
+  },
+  "amfrust": {
+   "verified": 300
+  },
+  "amheron": {
+   "verified": 400
+  },
+  "amherq": {
+   "verified": 112
+  },
+  "ammodel": {
+   "verified": 818
+  },
+  "ampyrp": {
+   "verified": 400
+  },
+  "ampyrs": {
+   "verified": 92
+  },
+  "ampyrv": {
+   "verified": 300
+  },
+  "amrecast": {
+   "verified": 300
+  },
+  "amsecinv": {
+   "verified": 212
+  },
+  "amseg": {
+   "verified": 122
+  },
+  "amshell": {
+   "verified": 300
+  },
+  "amsph": {
+   "verified": 112
+  },
+  "avfence": {
+   "verified": 400
+  },
+  "avvcmp": {
+   "verified": 360
+  },
+  "rect": {
+   "verified": 121
+  },
+  "rperim": {
+   "verified": 190
+  },
+  "vol": {
+   "verified": 196
+  },
+  "apcarteq": {
+   "verified": 1008
+  },
+  "apcartl": {
+   "verified": 120
+  },
+  "apcartn": {
+   "verified": 270
+  },
+  "apcartset": {
+   "verified": 300
+  },
+  "apineq": {
+   "verified": 400
+  },
+  "apintch": {
+   "verified": 300
+  },
+  "apintop": {
+   "verified": 400
+  },
+  "aqbinid": {
+   "verified": 300
+  },
+  "aqbinmod": {
+   "verified": 186
+  },
+  "aqbinp": {
+   "verified": 147
+  },
+  "aqeqcl": {
+   "verified": 400
+  },
+  "aqonto": {
+   "verified": 277
+  },
+  "aqrel": {
+   "verified": 400
+  },
+  "aapass": {
+   "verified": 174
+  },
+  "absort": {
+   "verified": 400
+  },
+  "acstory": {
+   "verified": 400
+  },
+  "acstory4": {
+   "verified": 320
+  },
+  "acstory9": {
+   "verified": 288
+  },
+  "adest": {
+   "verified": 400
+  },
+  "adestchk": {
+   "verified": 249
+  },
+  "adestcost": {
+   "verified": 120
+  },
+  "adwtcap": {
+   "verified": 159
+  },
+  "aebig": {
+   "verified": 300
+  },
+  "aedrip": {
+   "verified": 120
+  },
+  "aematch": {
+   "verified": 200
+  },
+  "aeshop": {
+   "verified": 400
+  },
+  "aetab": {
+   "verified": 600
+  },
+  "aetrip": {
+   "verified": 400
+  },
+  "afcount": {
+   "verified": 100
+  },
+  "afdigits": {
+   "verified": 90
+  },
+  "afhidden": {
+   "verified": 84
+  },
+  "afmissd": {
+   "verified": 400
+  },
+  "afnim": {
+   "verified": 154
+  },
+  "afriver": {
+   "verified": 150
+  },
+  "agcex": {
+   "verified": 200
+  },
+  "akcode": {
+   "verified": 450
+  },
+  "akcollatz": {
+   "verified": 331
+  },
+  "akcolst": {
+   "verified": 97
+  },
+  "akcrypt": {
+   "verified": 400
+  },
+  "akcrypt2": {
+   "verified": 321
+  },
+  "akdig": {
+   "verified": 450
+  },
+  "akdirinv": {
+   "verified": 192
+  },
+  "akdivd": {
+   "verified": 400
+  },
+  "akdsort": {
+   "verified": 600
+  },
+  "akeuclid": {
+   "verified": 400
+  },
+  "akflow": {
+   "verified": 400
+  },
+  "akkap": {
+   "verified": 300
+  },
+  "akloop": {
+   "verified": 400
+  },
+  "akmagic": {
+   "verified": 400
+  },
+  "akodd": {
+   "verified": 300
+  },
+  "akpar": {
+   "verified": 300
+  },
+  "akresize": {
+   "verified": 400
+  },
+  "akshift": {
+   "verified": 400
+  },
+  "akthink": {
+   "verified": 300
+  },
+  "angarr": {
+   "verified": 126
+  },
+  "anpair": {
+   "verified": 400
+  },
+  "anpow0": {
+   "verified": 149
+  },
+  "anpts": {
+   "verified": 300
+  },
+  "anquad": {
+   "verified": 300
+  },
+  "atcex": {
+   "verified": 126
+  },
+  "atclass": {
+   "verified": 300
+  },
+  "atconv": {
+   "verified": 271
+  },
+  "atrows": {
+   "verified": 400
+  },
+  "atstmt": {
+   "verified": 384
+  },
+  "avrem": {
+   "verified": 400
+  },
+  "aaflat": {
+   "verified": 300
+  },
+  "aarow": {
+   "verified": 300
+  },
+  "aashelf": {
+   "verified": 120
+  },
+  "aasolid": {
+   "verified": 236,
+   "ambiguous": 64
+  },
+  "aawhere": {
+   "verified": 240
+  },
+  "abcurve": {
+   "verified": 264
+  },
+  "abcurved": {
+   "verified": 300
+  },
+  "abdiag": {
+   "verified": 300
+  },
+  "abdir": {
+   "verified": 104
+  },
+  "abgrid": {
+   "verified": 300
+  },
+  "abline": {
+   "verified": 93
+  },
+  "abmove": {
+   "verified": 300
+  },
+  "abobj": {
+   "verified": 120
+  },
+  "abroll": {
+   "verified": 300
+  },
+  "abroute": {
+   "verified": 174
+  },
+  "abseat": {
+   "verified": 300
+  },
+  "abside": {
+   "verified": 284
+  },
+  "absolid": {
+   "verified": 93
+  },
+  "absym": {
+   "verified": 92
+  },
+  "accoll": {
+   "verified": 180
+  },
+  "aclines": {
+   "verified": 90
+  },
+  "acparl": {
+   "verified": 300
+  },
+  "actile": {
+   "verified": 124
+  },
+  "aeang": {
+   "verified": 400
+  },
+  "aeangk": {
+   "verified": 142
+  },
+  "aearms": {
+   "verified": 145
+  },
+  "aecirc": {
+   "verified": 120
+  },
+  "aecpart": {
+   "verified": 196
+  },
+  "aedigsym": {
+   "verified": 347
+  },
+  "aedsym": {
+   "verified": 146
+  },
+  "aemirror": {
+   "verified": 400
+  },
+  "aerefl": {
+   "verified": 400
+  },
+  "aertang": {
+   "verified": 305
+  },
+  "aesym": {
+   "verified": 551
+  },
+  "aetrans": {
+   "verified": 400
+  },
+  "aeturn": {
+   "verified": 132
+  },
+  "afclock": {
+   "verified": 132
+  },
+  "afcross": {
+   "verified": 300
+  },
+  "afcube": {
+   "verified": 400
+  },
+  "afface": {
+   "verified": 112
+  },
+  "affrac": {
+   "verified": 118
+  },
+  "afkind": {
+   "verified": 120
+  },
+  "afnet": {
+   "verified": 87
+  },
+  "afpaint": {
+   "verified": 84
+  },
+  "afpair": {
+   "verified": 220
+  },
+  "afpara": {
+   "verified": 108
+  },
+  "afprot": {
+   "verified": 300
+  },
+  "afpside": {
+   "verified": 400
+  },
+  "afquad": {
+   "verified": 180
+  },
+  "afrot": {
+   "verified": 107
+  },
+  "afsolid": {
+   "verified": 96
+  },
+  "aftri": {
+   "verified": 180
+  },
+  "aftris": {
+   "verified": 180
+  },
+  "afturn": {
+   "verified": 112
+  },
+  "afview": {
+   "verified": 180
+  },
+  "ahcfig": {
+   "verified": 113
+  },
+  "ahcong": {
+   "verified": 400
+  },
+  "ahconv": {
+   "verified": 360
+  },
+  "ahext": {
+   "verified": 400
+  },
+  "ahgen": {
+   "verified": 146
+  },
+  "ahineq": {
+   "verified": 380
+  },
+  "ahiso": {
+   "verified": 137
+  },
+  "ahname": {
+   "verified": 108
+  },
+  "ahpar": {
+   "verified": 400
+  },
+  "ahparx": {
+   "verified": 400
+  },
+  "ahpyth": {
+   "verified": 156
+  },
+  "ahtile": {
+   "verified": 119
+  },
+  "ahtri": {
+   "verified": 400
+  },
+  "aiconvex": {
+   "verified": 159,
+   "ambiguous": 70
+  },
+  "aidiag": {
+   "verified": 300
+  },
+  "aieuler": {
+   "verified": 90
+  },
+  "aipgram": {
+   "verified": 162
+  },
+  "aipolymiss": {
+   "verified": 203
+  },
+  "aipolyreg": {
+   "verified": 96
+  },
+  "aiquad": {
+   "verified": 400
+  },
+  "airatio": {
+   "verified": 140
+  },
+  "aiscale": {
+   "verified": 168
+  },
+  "aisolid": {
+   "verified": 96
+  },
+  "alangle": {
+   "verified": 628
+  },
+  "alchord": {
+   "verified": 208
+  },
+  "alcvoc": {
+   "verified": 400
+  },
+  "alcyc": {
+   "verified": 300
+  },
+  "alnear": {
+   "verified": 300
+  },
+  "altheo": {
+   "verified": 400
+  },
+  "amabis": {
+   "verified": 300
+  },
+  "amalt": {
+   "verified": 400
+  },
+  "ambpt": {
+   "verified": 300
+  },
+  "ambptc": {
+   "verified": 1076
+  },
+  "amceva": {
+   "verified": 300
+  },
+  "amcrit": {
+   "verified": 200,
+   "ambiguous": 100
+  },
+  "amctan": {
+   "verified": 400
+  },
+  "amline": {
+   "verified": 400
+  },
+  "ammen": {
+   "verified": 1526
+  },
+  "ammid": {
+   "verified": 257
+  },
+  "ammidc": {
+   "verified": 400
+  },
+  "ampgx": {
+   "verified": 300
+  },
+  "amreason": {
+   "verified": 300
+  },
+  "amsarea": {
+   "verified": 300
+  },
+  "amsim": {
+   "verified": 300
+  },
+  "amsimang": {
+   "verified": 400
+  },
+  "amsimc": {
+   "verified": 264,
+   "ambiguous": 72
+  },
+  "amtang": {
+   "verified": 248
+  },
+  "amtcount": {
+   "verified": 145
+  },
+  "amtlen": {
+   "verified": 300
+  },
+  "amtquad": {
+   "verified": 300
+  },
+  "awcen": {
+   "verified": 172
+  },
+  "awctr": {
+   "verified": 160
+  },
+  "awinc": {
+   "verified": 233
+  },
+  "ahmap": {
+   "verified": 400
+  },
+  "ahmove": {
+   "verified": 300
+  },
+  "ahquad": {
+   "verified": 300
+  },
+  "ahread": {
+   "verified": 168
+  },
+  "alcoll": {
+   "verified": 300
+  },
+  "aldist": {
+   "verified": 400
+  },
+  "almid": {
+   "verified": 400
+  },
+  "alpar": {
+   "verified": 400
+  },
+  "alquad": {
+   "verified": 300
+  },
+  "altri": {
+   "verified": 400
+  },
+  "altria": {
+   "verified": 400
+  },
+  "arcirceq": {
+   "verified": 400
+  },
+  "arcircle": {
+   "verified": 400
+  },
+  "arcircpos": {
+   "verified": 300
+  },
+  "arconapp": {
+   "verified": 400
+  },
+  "arcone": {
+   "verified": 300
+  },
+  "arconeq": {
+   "verified": 192
+  },
+  "arconicarea": {
+   "verified": 126
+  },
+  "arconicid": {
+   "verified": 300
+  },
+  "arconprop": {
+   "verified": 400
+  },
+  "areccentric": {
+   "verified": 131
+  },
+  "arparabola": {
+   "verified": 300
+  },
+  "arparaeq": {
+   "verified": 432
+  },
+  "arxyconic": {
+   "verified": 300
+  },
+  "asangl": {
+   "verified": 400
+  },
+  "ascoll": {
+   "verified": 300
+  },
+  "asdcos": {
+   "verified": 400
+  },
+  "asdist3": {
+   "verified": 400
+  },
+  "asfam": {
+   "verified": 300
+  },
+  "asfoot": {
+   "verified": 400
+  },
+  "asgenf": {
+   "verified": 500
+  },
+  "asimage": {
+   "verified": 400
+  },
+  "asint3": {
+   "verified": 300
+  },
+  "aslang": {
+   "verified": 400
+  },
+  "asleq": {
+   "verified": 300
+  },
+  "asline": {
+   "verified": 400
+  },
+  "aslineq": {
+   "verified": 400
+  },
+  "aslinpar": {
+   "verified": 300
+  },
+  "aslocpar": {
+   "verified": 400
+  },
+  "aslocus": {
+   "verified": 400
+  },
+  "aslrel": {
+   "verified": 372
+  },
+  "asmeet": {
+   "verified": 400
+  },
+  "asoct": {
+   "verified": 300
+  },
+  "aspair": {
+   "verified": 300
+  },
+  "aspairang": {
+   "verified": 300
+  },
+  "aspairbis": {
+   "verified": 169
+  },
+  "aspar": {
+   "verified": 300
+  },
+  "asparl3": {
+   "verified": 400
+  },
+  "asparld": {
+   "verified": 400
+  },
+  "asperpd": {
+   "verified": 400
+  },
+  "asplaned": {
+   "verified": 400
+  },
+  "asplaneq": {
+   "verified": 400
+  },
+  "asplang": {
+   "verified": 193
+  },
+  "assect3": {
+   "verified": 400
+  },
+  "asside": {
+   "verified": 300
+  },
+  "asskew": {
+   "verified": 400
+  },
+  "asslope": {
+   "verified": 350
+  },
+  "astan": {
+   "verified": 372
+  },
+  "astanc": {
+   "verified": 584
+  },
+  "astaneh": {
+   "verified": 400
+  },
+  "au3ce": {
+   "verified": 400
+  },
+  "au3cl": {
+   "verified": 300
+  },
+  "au3ex": {
+   "verified": 400
+  },
+  "aucen": {
+   "verified": 400
+  },
+  "aurat": {
+   "verified": 400
+  },
+  "ausec": {
+   "verified": 400
+  },
+  "cdist": {
+   "verified": 548
+  },
+  "alp": {
+   "verified": 17
+  },
+  "aqabs": {
+   "verified": 300
+  },
+  "aqabsint": {
+   "verified": 193
+  },
+  "aqarea": {
+   "verified": 121
+  },
+  "aqcarea": {
+   "verified": 120
+  },
+  "aqconc": {
+   "verified": 400
+  },
+  "aqcontd": {
+   "verified": 300
+  },
+  "aqcontk": {
+   "verified": 243
+  },
+  "aqd2": {
+   "verified": 90
+  },
+  "aqd2rel": {
+   "verified": 104
+  },
+  "aqd2test": {
+   "verified": 292
+  },
+  "aqdecl": {
+   "verified": 120
+  },
+  "aqdiffab": {
+   "verified": 300
+  },
+  "aqext": {
+   "verified": 400
+  },
+  "aqfp": {
+   "verified": 300
+  },
+  "aqhom": {
+   "verified": 141
+  },
+  "aqivp": {
+   "verified": 300
+  },
+  "aqking": {
+   "verified": 300
+  },
+  "aqlarea": {
+   "verified": 300
+  },
+  "aqlinde": {
+   "verified": 300
+  },
+  "aqmono": {
+   "verified": 400
+  },
+  "aqodd": {
+   "verified": 300
+  },
+  "aqorddeg": {
+   "verified": 360
+  },
+  "aqrr": {
+   "verified": 400
+  },
+  "aqsep": {
+   "verified": 300
+  },
+  "aqsubsep": {
+   "verified": 300
+  },
+  "aqtann": {
+   "verified": 400
+  },
+  "aqvel": {
+   "verified": 300
+  },
+  "archain": {
+   "verified": 300
+  },
+  "arerror": {
+   "verified": 400
+  },
+  "areuler": {
+   "verified": 300
+  },
+  "argamma": {
+   "verified": 100
+  },
+  "arimpl": {
+   "verified": 300
+  },
+  "arlhinf": {
+   "verified": 152
+  },
+  "arlhop": {
+   "verified": 151
+  },
+  "arlinapp": {
+   "verified": 144
+  },
+  "arlinapp2": {
+   "verified": 300
+  },
+  "arlinde": {
+   "verified": 299
+  },
+  "arlindx": {
+   "verified": 468
+  },
+  "arlogdiff": {
+   "verified": 96
+  },
+  "armaclaurin": {
+   "verified": 105
+  },
+  "armix": {
+   "verified": 300
+  },
+  "armono": {
+   "verified": 180
+  },
+  "armvcont": {
+   "verified": 176
+  },
+  "armvlim": {
+   "verified": 160
+  },
+  "armvlimx": {
+   "verified": 300
+  },
+  "armvt": {
+   "verified": 266
+  },
+  "arodemod": {
+   "verified": 315
+  },
+  "arparam": {
+   "verified": 300
+  },
+  "arpartial": {
+   "verified": 400
+  },
+  "arpfint": {
+   "verified": 400
+  },
+  "arrolle": {
+   "verified": 289
+  },
+  "artaylor": {
+   "verified": 115
+  },
+  "arvolrev": {
+   "verified": 109
+  },
+  "arwallis": {
+   "verified": 121
+  },
+  "audbe": {
+   "verified": 90
+  },
+  "audch": {
+   "verified": 400
+  },
+  "audel": {
+   "verified": 240
+  },
+  "audfp": {
+   "verified": 400
+  },
+  "audinv": {
+   "verified": 198
+  },
+  "audquo": {
+   "verified": 400
+  },
+  "audsum": {
+   "verified": 400
+  },
+  "auform": {
+   "verified": 400
+  },
+  "auinit": {
+   "verified": 400
+  },
+  "auinvf": {
+   "verified": 400
+  },
+  "aulax": {
+   "verified": 300
+  },
+  "auliinf": {
+   "verified": 400
+  },
+  "aulpow": {
+   "verified": 298
+  },
+  "aulstd": {
+   "verified": 360
+  },
+  "aultab": {
+   "verified": 400
+  },
+  "auparts": {
+   "verified": 220
+  },
+  "aupfr": {
+   "verified": 400
+  },
+  "aupi": {
+   "verified": 225
+  },
+  "auprq": {
+   "verified": 400
+  },
+  "aurie": {
+   "verified": 159
+  },
+  "ausbd": {
+   "verified": 96
+  },
+  "auspd": {
+   "verified": 95
+  },
+  "austd": {
+   "verified": 400
+  },
+  "autrig": {
+   "verified": 400
+  },
+  "cint": {
+   "verified": 792
+  },
+  "dpow": {
+   "verified": 138
+  },
+  "dprod": {
+   "verified": 120
+  },
+  "lim": {
+   "verified": 54
+  },
+  "pint": {
+   "verified": 360
+  },
+  "subst": {
+   "verified": 72
+  },
+  "ancompa": {
+   "verified": 300
+  },
+  "ancomps": {
+   "verified": 300
+  },
+  "anheight": {
+   "verified": 180
+  },
+  "anidsimp": {
+   "verified": 96
+  },
+  "anratio": {
+   "verified": 400
+  },
+  "ansecpt": {
+   "verified": 216
+  },
+  "anstd": {
+   "verified": 400
+  },
+  "antable": {
+   "verified": 400
+  },
+  "antwo": {
+   "verified": 234
+  },
+  "aqinvbr": {
+   "verified": 92
+  },
+  "atapp": {
+   "verified": 400
+  },
+  "atarc": {
+   "verified": 400
+  },
+  "atarea": {
+   "verified": 300
+  },
+  "atcomp": {
+   "verified": 192
+  },
+  "atcosr": {
+   "verified": 400
+  },
+  "atcsimp": {
+   "verified": 126
+  },
+  "atdbl": {
+   "verified": 120
+  },
+  "atdeg": {
+   "verified": 236
+  },
+  "atdom": {
+   "verified": 140
+  },
+  "atgen": {
+   "verified": 108
+  },
+  "athalf": {
+   "verified": 120
+  },
+  "athalft": {
+   "verified": 300
+  },
+  "atinv": {
+   "verified": 384
+  },
+  "atinvc": {
+   "verified": 300
+  },
+  "atinvd": {
+   "verified": 180
+  },
+  "atinveq": {
+   "verified": 127
+  },
+  "atp2s": {
+   "verified": 144
+  },
+  "atper": {
+   "verified": 300
+  },
+  "atprinc": {
+   "verified": 141
+  },
+  "atrad": {
+   "verified": 288
+  },
+  "atsign": {
+   "verified": 108
+  },
+  "atsiner": {
+   "verified": 300
+  },
+  "atunit": {
+   "verified": 104
+  },
+  "atval": {
+   "verified": 400
+  },
+  "ahexp": {
+   "verified": 504
+  },
+  "ahfib": {
+   "verified": 300
+  },
+  "ahnth": {
+   "verified": 300
+  },
+  "ahrec": {
+   "verified": 262
+  },
+  "ahrhy": {
+   "verified": 192
+  },
+  "alsum": {
+   "verified": 104
+  },
+  "alsump": {
+   "verified": 300
+  },
+  "alsumr": {
+   "verified": 300
+  },
+  "aoagp": {
+   "verified": 300
+  },
+  "aohm": {
+   "verified": 300
+  },
+  "apamgm": {
+   "verified": 360
+  },
+  "apbin": {
+   "verified": 132
+  },
+  "apexlog": {
+   "verified": 120
+  },
+  "apgent": {
+   "verified": 384
+  },
+  "apgms": {
+   "verified": 134
+  },
+  "apins": {
+   "verified": 400
+  },
+  "apsapp": {
+   "verified": 102
+  },
+  "apsigch": {
+   "verified": 300
+  },
+  "apsumk": {
+   "verified": 400
+  },
+  "aptel": {
+   "verified": 400
+  },
+  "abpic": {
+   "verified": 400
+  },
+  "abpicmore": {
+   "verified": 400
+  },
+  "acpict": {
+   "verified": 300
+  },
+  "acpicthalf": {
+   "verified": 300
+  },
+  "acpictmore": {
+   "verified": 300
+  },
+  "acpicttab": {
+   "verified": 300
+  },
+  "adbar": {
+   "verified": 448
+  },
+  "adbartf": {
+   "verified": 336
+  },
+  "adrec": {
+   "verified": 216
+  },
+  "adtally": {
+   "verified": 270
+  },
+  "adtwo": {
+   "verified": 400
+  },
+  "advenn": {
+   "verified": 400
+  },
+  "afbar": {
+   "verified": 360
+  },
+  "afpie": {
+   "verified": 300
+  },
+  "afpieang": {
+   "verified": 300
+  },
+  "akbarpct": {
+   "verified": 400
+  },
+  "akfmean": {
+   "verified": 203
+  },
+  "akfreq": {
+   "verified": 360
+  },
+  "akgroup": {
+   "verified": 400
+  },
+  "akhist": {
+   "verified": 400
+  },
+  "akmed": {
+   "verified": 400
+  },
+  "akmode": {
+   "verified": 200
+  },
+  "akprim": {
+   "verified": 303
+  },
+  "anaddv": {
+   "verified": 300
+  },
+  "anavgav": {
+   "verified": 300
+  },
+  "anempir": {
+   "verified": 400
+  },
+  "anfmed": {
+   "verified": 300
+  },
+  "anfreq": {
+   "verified": 300
+  },
+  "angmean": {
+   "verified": 300
+  },
+  "angmedian": {
+   "verified": 300
+  },
+  "angmode": {
+   "verified": 300
+  },
+  "angstep": {
+   "verified": 300
+  },
+  "anpct": {
+   "verified": 300
+  },
+  "anstack": {
+   "verified": 300
+  },
+  "anumean": {
+   "verified": 300
+  },
+  "anwmean": {
+   "verified": 300
+  },
+  "atcv": {
+   "verified": 300
+  },
+  "atgvar": {
+   "verified": 400
+  },
+  "atmdf": {
+   "verified": 400
+  },
+  "atmdmean": {
+   "verified": 400
+  },
+  "atmdmed": {
+   "verified": 400
+  },
+  "atsd": {
+   "verified": 400
+  },
+  "atvar": {
+   "verified": 400
+  },
+  "avfmed": {
+   "verified": 420
+  },
+  "avmiss": {
+   "verified": 420
+  },
+  "avmix": {
+   "verified": 400
+  },
+  "avstatq": {
+   "verified": 108
+  },
+  "mean4": {
+   "verified": 126
+  },
+  "akchance": {
+   "verified": 400
+  },
+  "akdice": {
+   "verified": 160
+  },
+  "akexp": {
+   "verified": 400
+  },
+  "akmex": {
+   "verified": 118
+  },
+  "aksarr": {
+   "verified": 290
+  },
+  "akscale": {
+   "verified": 386
+  },
+  "akss": {
+   "verified": 375
+  },
+  "akssl": {
+   "verified": 86
+  },
+  "anaxiom": {
+   "verified": 300
+  },
+  "anbag": {
+   "verified": 400
+  },
+  "ancardn": {
+   "verified": 400
+  },
+  "ancomp": {
+   "verified": 300
+  },
+  "andice": {
+   "verified": 98
+  },
+  "anncr": {
+   "verified": 400
+  },
+  "ansure": {
+   "verified": 118
+  },
+  "antree": {
+   "verified": 400
+  },
+  "anunion": {
+   "verified": 300
+  },
+  "anvalid": {
+   "verified": 200
+  },
+  "asadd3": {
+   "verified": 300
+  },
+  "asaddp": {
+   "verified": 400
+  },
+  "asbayes": {
+   "verified": 400
+  },
+  "asbern": {
+   "verified": 300
+  },
+  "asbinmv": {
+   "verified": 400
+  },
+  "asbinom": {
+   "verified": 400
+  },
+  "asevset": {
+   "verified": 300
+  },
+  "asmex": {
+   "verified": 320
+  },
+  "astotp": {
+   "verified": 400
+  },
+  "atcdf": {
+   "verified": 96
+  },
+  "atcexp": {
+   "verified": 400
+  },
+  "atindt": {
+   "verified": 400
+  },
+  "atindu": {
+   "verified": 324
+  },
+  "atpdfk": {
+   "verified": 124
+  },
+  "atpdfp": {
+   "verified": 130
+  },
+  "atpmf": {
+   "verified": 111
+  },
+  "atrvmean": {
+   "verified": 400
+  },
+  "atrvvar": {
+   "verified": 400
+  },
+  "attotal": {
+   "verified": 400
+  },
+  "avcond": {
+   "verified": 513
+  },
+  "avdraw": {
+   "verified": 324
+  },
+  "condp": {
+   "verified": 625
+  },
+  "atang": {
+   "verified": 400
+  },
+  "atcopl": {
+   "verified": 300
+  },
+  "atcross": {
+   "verified": 400
+  },
+  "atdc": {
+   "verified": 300
+  },
+  "atlin": {
+   "verified": 300
+  },
+  "atmag": {
+   "verified": 300
+  },
+  "atpara": {
+   "verified": 300
+  },
+  "atproj": {
+   "verified": 400
+  },
+  "atsec": {
+   "verified": 400
+  },
+  "atstp": {
+   "verified": 400
+  },
+  "attorq": {
+   "verified": 300
+  },
+  "atvarea": {
+   "verified": 300
+  },
+  "atvol": {
+   "verified": 300
+  },
+  "atvtp": {
+   "verified": 300
+  },
+  "atvtype": {
+   "verified": 300
+  },
+  "apadj3": {
+   "verified": 300
+  },
+  "apgj3": {
+   "verified": 200
+  },
+  "apinv2": {
+   "verified": 400
+  },
+  "aprank": {
+   "verified": 300
+  },
+  "aqcpar": {
+   "verified": 400
+  },
+  "aqrank": {
+   "verified": 400
+  },
+  "aqsolset": {
+   "verified": 300
+  },
+  "aqsym": {
+   "verified": 400
+  },
+  "aqtrab": {
+   "verified": 400
+  }
+ }
+}

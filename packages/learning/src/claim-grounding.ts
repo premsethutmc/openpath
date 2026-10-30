@@ -13,7 +13,7 @@ import { canonicalizeMathematicalObject, type CanonicalMathematicalObject } from
 
 export const GROUNDING_CONTRACT = "openpath-claim-grounding@1" as const;
 export type SourceKind = "task-premise" | "derived-fact" | "student-assumption" | "free-literal";
-export interface GroundingSource { kind: SourceKind; ref: string; by: "symbol" | "value"; /** explained by one arithmetic step from task premises, not a premise itself */ derived?: boolean; /** a value such as 0, 1, 2: it matches too many things to relate a claim to the task by itself */ trivial: boolean }
+export interface GroundingSource { /** set when the numeral is explained by a certified rewrite */ rule?: string; certificate?: string; kind: SourceKind; ref: string; by: "symbol" | "value"; /** explained by one arithmetic step from task premises, not a premise itself */ derived?: boolean; /** a value such as 0, 1, 2: it matches too many things to relate a claim to the task by itself */ trivial: boolean }
 export interface Grounding { contract: typeof GROUNDING_CONTRACT; sources: GroundingSource[]; relevant: boolean; reason: string; /** false for a bare `label = value` answer statement, which is judged against the kernel's own value instead of being derived */ required?: boolean }
 
 /**
@@ -45,7 +45,7 @@ export function assessRelevance(sources: GroundingSource[]): Grounding {
  *   an equal-pair/bisector/isosceles premise); (iv) a RESULT: the value of a computation the line itself shows (35 + 75 = 110, A + B = 120 with A, B known), whose operands are themselves (i)-(iii).
  * Not explanations: the answer the task asks for, "being one arithmetic step from some two numbers of the task", or a small value. An operand that is none of (i)-(iv) is a free literal.
  */
-export interface ProvenanceEnv { task: ReadonlySet<string>; established: ReadonlySet<string>; licensed: ReadonlySet<string>; named?: ReadonlyMap<string, number>; /** (v) what the immediately previous line/member computes with: see `previousClosure` */ previous?: ReadonlySet<string> }
+export interface ProvenanceEnv { task: ReadonlySet<string>; established: ReadonlySet<string>; licensed: ReadonlySet<string>; named?: ReadonlyMap<string, number>; /** (v) what the immediately previous line/member computes with: see `previousClosure` */ previous?: ReadonlySet<string>; /** numerals introduced by a CERTIFIED registered rewrite of a visible expression (rewrite-registry.ts): numeral -> rule + certificate digest */ rewrite?: ReadonlyMap<string, { rule: string; digest: string }> }
 const clean = (t: string): string => t.replace(/[−–—]/g, "-").replace(/[×·⋅]|\\cdot|\\times/g, "*").replace(/÷/g, "/").replace(/°|degrees?|\\circ|\^\{?\\circ\}?/gi, "").replace(/[$\\]/g, " ");
 const numKey = (x: number): string => String(Math.round(x * 1e9) / 1e9);
 /** a tiny exact-enough evaluator for the arithmetic a student writes (numbers, known names, + - * / ^ and parentheses); null when anything is not understood */

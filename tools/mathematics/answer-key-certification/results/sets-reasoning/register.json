@@ -1,0 +1,20 @@
+[
+ {
+  "family": "anquad",
+  "class": "Ambiguous",
+  "severity": "low",
+  "questionIds": "all (word form of each of the 300 questions; typed form is unaffected)",
+  "affectedCount": 300,
+  "exampleId": "gen:anquad:2,1",
+  "params": [
+   2,
+   1
+  ],
+  "prompt": "A photo frame is 1 cm taller than it is wide, and the area of the glass is 6 cm². How wide is the frame, in cm?",
+  "stored": "2",
+  "derived": "width w with w(w+d)=A, i.e. the stored value, but only if the glass area equals the frame area",
+  "method": "read the word-form wording against the typed statement (area of a rectangle = length x width)",
+  "explanation": "The word form says the frame is d cm taller than it is wide and gives the area of the GLASS, then asks for the width of the FRAME. A frame normally has a border, so the glass is smaller than the frame and its area does not determine the frame width. The stored answer is correct only under the unstated assumption that the glass fills the whole frame.",
+  "proposedFix": "Say \"the area of the frame (including the glass)\" or ask for \"the width of the glass\" / make the glass the rectangle that is d cm taller than wide."
+ }
+]
