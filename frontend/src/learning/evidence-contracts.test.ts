@@ -92,3 +92,23 @@ test("no discriminating probe left: the hypothesis stays open and the module car
   const ms = moduleState(TARGET, st.records, st.evidence(TARGET), j.d.now, j.d.session);
   assert.ok(!(ms.phase === "verify" && ms.why?.startsWith("resolution probe")), "no probe is asked when none is left");
 });
+
+test("contested: discriminating answers right alone without teaching keep the hypothesis open; a predicted answer re-opens it", async () => {
+  const { discriminatingProbe, openHypothesis, hypotheses: all } = await import("../../../packages/learning/src/hypotheses");
+  const { probeReading: read } = await import("../../../packages/learning/src/reasoning");
+  const j = new Journey("contested");
+  const BUGS = new Set(["minus-c-sign", "minus-negative-as-minus"]);
+  await j.topicCheck(TARGET, (q) => { const v = bugValue(problemOf(q), BUGS); return v === null ? respond(q, "right") : respond(q, v); });
+  const h0 = openHypothesis(TARGET, j.d.state().records)!;
+  for (let i = 0; i < 2; i++) { const q = discriminatingProbe(h0, j.d.state().records)!; j.d.answer(q, respond(q, "right"), "practice"); }
+  let h = all(j.d.state().records).find((x) => x.id === h0.id)!;
+  assert.equal(h.status, "contested");
+  assert.equal(h.use.teach, false);
+  assert.equal(h.use.evidence, false);
+  const q = discriminatingProbe(h, j.d.state().records)!;
+  j.d.answer(q, respond(q, bugValue(problemOf(q), new Set([h.claim!.explanation]))!), "practice");
+  assert.equal(read(q, h.claim!.explanation, j.d.state().records.attempts.at(-1)!.response).reading, "predicted");
+  h = all(j.d.state().records).find((x) => x.id === h0.id)!;
+  assert.equal(h.status, "established");
+  assert.ok(h.teachingDue);
+});
