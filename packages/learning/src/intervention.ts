@@ -23,7 +23,7 @@ import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phaseP
 import { graph, walkSupports } from "./graph";
 import { modulePhasePool } from "./library";
 import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis } from "./hypotheses";
-import { nextFromReasoning, type Reasoning } from "./reasoning";
+import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import { teachingEligibility, type TeachingEligibility } from "./teaching-contract";
 import type { Attempt, LearnerRecords } from "./records";
 

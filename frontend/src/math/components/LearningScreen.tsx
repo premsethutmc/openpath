@@ -14,6 +14,7 @@ import { PlaceValueViz } from "./PlaceValueViz";
 import { FractionBarViz } from "./FractionBarViz";
 import { AlgebraWorkspace } from "./AlgebraWorkspace";
 import { TeacherGuide } from "./TeacherGuide";
+import { ChoiceInput } from "./ChoiceInput";
 
 interface LearningScreenProps {
   spec: RenderSpec;
@@ -96,8 +97,8 @@ export function LearningScreen({ spec, onEvent, learningState, experienceId }: L
         <div className="lr-completed">
           <div className="lr-completed-header">
             <TeacherGuide
-              message="Excellent work! You solved it correctly."
-              detail={spec.feedback.evidence}
+              message={spec.teacherGuide?.message ?? "Excellent work! You solved it correctly."}
+              detail={spec.teacherGuide ? spec.teacherGuide.detail : spec.feedback.evidence}
               tone="celebrating"
               showCharacter={true}
               strings={strings}
@@ -208,7 +209,9 @@ export function LearningScreen({ spec, onEvent, learningState, experienceId }: L
           {/* Input area — center of workspace */}
           {spec.layout.panels.includes("input") && (
             <div className="lr-workspace-input">
-              {spec.input.type === "fraction" ? (
+              {spec.input.type === "multiple-choice" ? (
+                <ChoiceInput choices={spec.input.choices} disabled={spec.feedback.level === "correct"} onChange={handleInputChange} />
+              ) : spec.input.type === "fraction" ? (
                 <FractionInput
                   placeholder={spec.input.placeholder}
                   disabled={spec.feedback.level === "correct"}
@@ -291,6 +294,7 @@ function getTeacherState(
   learningState: string,
   experienceId: ExperienceId,
 ): { message: string; detail?: string; tone: "neutral" | "encouraging" | "celebrating" | "thinking" } | null {
+  if (spec.teacherGuide) return spec.teacherGuide;   // Integration M1: engine-supplied guidance replaces the demo prompts
   if (spec.feedback.level === "correct") {
     return {
       message: spec.feedback.evidence ?? "Well done!",

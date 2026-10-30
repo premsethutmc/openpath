@@ -1337,3 +1337,9 @@ input:focus-visible {
   max-height: 200px;
   overflow-y: auto;
 }
+
+/* Integration M1: multiple-choice input */
+.lr-choices { display: grid; gap: 10px; width: 100%; }
+.lr-choice { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 8px 16px; text-align: left; font: inherit; font-weight: 600; background: #fff; border: 2.5px solid var(--lr-border, #e6dccb); border-radius: var(--lr-radius); cursor: pointer; }
+.lr-choice-id { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #efe6f7; font-size: .85rem; }
+.lr-choice-picked { border-color: #6c4fc2; background: #f4eefc; }

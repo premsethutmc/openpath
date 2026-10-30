@@ -18,7 +18,7 @@ export function NavControls({ nav, onSubmit, onSkip, onBack, strings }: NavContr
       )}
       {nav.canSkip && (
         <button type="button" className="lr-nav-btn lr-nav-skip" onClick={onSkip}>
-          {strings.skip}
+          {nav.skipLabel ?? strings.skip}
         </button>
       )}
       <button

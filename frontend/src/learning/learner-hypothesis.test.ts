@@ -86,7 +86,9 @@ test("nothing is established without evidence: a slip, and a learner no explanat
     assert.equal(h.use.teach, false);
   }
   assert.ok(c.final.hypotheses.some((h) => h.status === "unsupported"));
-  assert.ok(a1.final.hypotheses.some((h) => h.status === "insufficient"));
+  // INTEGRATION-M1 (docs/integration/03-RECONCILIATION.md #4): the loop's stopping rule ends an investigation at once after an isolated slip, so no
+  // hypothesis is recorded at all (previously one "insufficient" one). Still never established, never claimed, never used to teach.
+  assert.ok(a1.final.hypotheses.every((h) => h.status === "insufficient" || h.status === "slip" || h.status === "unsupported"));
 });
 
 test("teaching history: questions seen as practice are not instruction delivered, and no pause claims teaching that did not happen", async () => {

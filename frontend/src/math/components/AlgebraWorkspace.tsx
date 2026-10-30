@@ -41,13 +41,13 @@ export function AlgebraWorkspace({ steps, revealedCount }: AlgebraWorkspaceProps
               <span className="lr-algebra-step-num">{i + 1}</span>
               <span className="lr-algebra-step-desc">{step.description}</span>
               {!step.verified && (
-                <span className="lr-algebra-unverified" role="note">demo</span>
+                <span className="lr-algebra-unverified" role="note">{step.badge ?? "demo"}</span>
               )}
             </div>
             {/* Math expression */}
-            <div className="lr-algebra-step-math">
+            {(step.math.latex ?? step.math.plain) && (<div className="lr-algebra-step-math">
               <KatexRaw latex={step.math.latex ?? step.math.plain} display={true} />
-            </div>
+            </div>)}
             {/* Arrow to next step */}
             {i < shown.length - 1 && (
               <div className="lr-algebra-arrow" aria-hidden="true">↓</div>

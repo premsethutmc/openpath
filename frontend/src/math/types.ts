@@ -132,6 +132,8 @@ export interface WorkingStep {
   math: MathContent;
   /** Whether this step has been verified by the math engine */
   verified: boolean;
+  /** Integration M1: label for the unverified badge (default "demo"); engine teaching steps say "explanation" because they are not derivations. */
+  badge?: string;
   /** Substeps for detailed breakdowns */
   substeps?: WorkingStep[];
 }
@@ -219,6 +221,8 @@ export interface NavSpec {
   canRequestHint: boolean;
   canShowWorking: boolean;
   submitLabel?: string;
+  /** Integration M1: engine-supplied label for the skip/continue action (the renderer's default "Skip" is wrong for "continue to the next step"). */
+  skipLabel?: string;
 }
 
 // ── Accessibility ───────────────────────────────────────────────────────────
@@ -313,4 +317,10 @@ export interface RenderSpec {
 
   /** Accessibility metadata */
   a11y: AccessibilityMeta;
+
+  /**
+   * Integration M1: guidance text SUPPLIED by the learning engine (its reason / the selected explanation's title). When present the
+   * renderer shows it verbatim instead of its built-in per-experience prompts, which are demonstration text, not engine decisions.
+   */
+  teacherGuide?: { message: string; detail?: string; tone: "neutral" | "encouraging" | "celebrating" | "thinking" };
 }
