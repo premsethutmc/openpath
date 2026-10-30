@@ -62,7 +62,7 @@ export class Driver {
       this.trace.push(`teach:${ms.strategy!.id}`);
     } else if (ms.question) {
       const act = activityFor(ms);
-      this.answer(ms.question, answerer(ms.question, ms.phase), act, act === "guided" && o.hintOnGuided ? { hints: 1 } : {});
+      this.answer(ms.question, answerer(ms.question, ms.phase), act, { ...(act === "guided" && o.hintOnGuided ? { hints: 1 } : {}), ...(ms.context ? { context: ms.context } : {}) });
     }
     return ms;
   }

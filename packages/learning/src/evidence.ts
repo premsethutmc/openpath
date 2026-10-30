@@ -127,6 +127,8 @@ export function ledgerFor(learnerId: string, records: LearnerRecords, graphVersi
 // ---------------------------------------------------------------- what the records show, per competency (status@1)
 
 export type Status = "not_started" | "exposure" | "guided" | "independent" | "transfer" | "review" | "verified";
+/** retention@2: one delayed check and what came of it (a failure is kept; recovery opens the next check). */
+export interface RetentionCycle { due: string; result: "pending" | "passed" | "failed"; failedAt: string | null; recoveredAt: string | null }
 export interface SkillEvidence {
   id: string;
   status: Status;
@@ -134,6 +136,8 @@ export interface SkillEvidence {
   independentAt: string | null;
   retention: "none" | "scheduled" | "due" | "passed" | "failed";
   retentionDueAt: string | null;
+  /** retention@2: every delayed check so far, oldest first (a failed one stays failed) */
+  retentionHistory: RetentionCycle[];
   independent: { right: number; total: number };
   assisted: { right: number; total: number };
   attempts: string[];
@@ -172,11 +176,32 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // the delayed check: seven full days after independent success, and after the shared engine's own first
   // demonstration when it has one, so the check this surface offers is one the engine can verify (verification@3)
   const from = independentAt && engineShownAt && engineShownAt > independentAt ? engineShownAt : independentAt;
-  const due = from ? new Date(Date.parse(from) + RETENTION_DAYS * DAY).toISOString() : null;
-  const retentionAnswers = due ? ind.filter((a) => a.activity === "retention" && a.at >= due) : [];
   // the delayed check is the skill's retention questions (up to RETENTION_CHECK of them): any wrong fails it
   const need = Math.min(RETENTION_CHECK, moduleFor(id)?.retention.length ?? 1);
-  const retention: SkillEvidence["retention"] = !due ? "none" : retentionAnswers.some((a) => !right(a)) ? "failed" : new Set(retentionAnswers.map((a) => a.questionId)).size >= need ? "passed" : now >= Date.parse(due) ? "due" : "scheduled";
+  // retention@2: a failed delayed check stays failed (kept in the history, never forgiven); once the skill has been
+  // shown again on your own after the failure (INDEPENDENT_MIN distinct fresh questions right, alone, outside the
+  // delayed check), a NEW delayed check is scheduled RETENTION_DAYS later. With no failure this is retention@1 exactly.
+  const history: RetentionCycle[] = [];
+  let cycleDue = from ? new Date(Date.parse(from) + RETENTION_DAYS * DAY).toISOString() : null;
+  let retention: SkillEvidence["retention"] = "none";
+  while (cycleDue) {
+    const dueAt = cycleDue;
+    const answers = ind.filter((a) => a.activity === "retention" && a.at >= dueAt);
+    const firstWrong = answers.find((a) => !right(a));
+    if (!firstWrong) {
+      retention = new Set(answers.map((a) => a.questionId)).size >= need ? "passed" : now >= Date.parse(dueAt) ? "due" : "scheduled";
+      history.push({ due: dueAt, result: retention === "passed" ? "passed" : "pending", failedAt: null, recoveredAt: null });
+      break;
+    }
+    // recovery: distinct questions right alone after the failure, outside the delayed check
+    const seen = new Set<string>();
+    let recoveredAt: string | null = null;
+    for (const a of ind) if (a.at > firstWrong.at && a.activity !== "retention" && right(a)) { seen.add(a.questionId); if (seen.size >= INDEPENDENT_MIN) { recoveredAt = a.at; break; } }
+    history.push({ due: dueAt, result: "failed", failedAt: firstWrong.at, recoveredAt });
+    retention = "failed";
+    cycleDue = recoveredAt ? new Date(Date.parse(recoveredAt) + RETENTION_DAYS * DAY).toISOString() : null;
+  }
+  const due = history.at(-1)?.due ?? null;
   const transferRight = ind.some((a) => ["transfer", "original", "challenge"].includes(a.activity) && right(a));
   const assisted = mine.filter((a) => !independentAttempt(a));
   const probed = mine.filter((a) => independentAttempt(a) && !ind.includes(a));
@@ -197,6 +222,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     independentAt,
     retention,
     retentionDueAt: due,
+    retentionHistory: history,
     independent: { right: ind.filter(right).length, total: ind.length },
     assisted: { right: assisted.filter(right).length, total: assisted.length },
     attempts: mine.map((a) => a.id),

@@ -1268,9 +1268,23 @@
      "teaching": {
       "deliveredAt": null,
       "strategy": null,
-      "competency": null
+      "competency": null,
+      "lastAt": null
      },
      "resolvedBy": null,
+     "probes": [],
+     "uncertainty": {
+      "supporting": 0,
+      "contradicting": 0,
+      "inconclusive": 0,
+      "note": "nothing established"
+     },
+     "teachingDue": false,
+     "probeDue": false,
+     "trigger": {
+      "kind": "other",
+      "detail": "a wrong answer (transfer)"
+     },
      "provenance": {
       "policy": "diagnostic@2-draft",
       "established": null,
@@ -1513,9 +1527,23 @@
      "teaching": {
       "deliveredAt": null,
       "strategy": null,
-      "competency": null
+      "competency": null,
+      "lastAt": null
      },
      "resolvedBy": null,
+     "probes": [],
+     "uncertainty": {
+      "supporting": 0,
+      "contradicting": 0,
+      "inconclusive": 0,
+      "note": "nothing established"
+     },
+     "teachingDue": false,
+     "probeDue": false,
+     "trigger": {
+      "kind": "other",
+      "detail": "a wrong answer (transfer)"
+     },
      "provenance": {
       "policy": "diagnostic@2-draft",
       "established": null,
@@ -1612,9 +1640,23 @@
     "teaching": {
      "deliveredAt": null,
      "strategy": null,
-     "competency": null
+     "competency": null,
+     "lastAt": null
     },
     "resolvedBy": null,
+    "probes": [],
+    "uncertainty": {
+     "supporting": 0,
+     "contradicting": 0,
+     "inconclusive": 0,
+     "note": "nothing established"
+    },
+    "teachingDue": false,
+    "probeDue": false,
+    "trigger": {
+     "kind": "other",
+     "detail": "a wrong answer (transfer)"
+    },
     "provenance": {
      "policy": "diagnostic@2-draft",
      "established": null,

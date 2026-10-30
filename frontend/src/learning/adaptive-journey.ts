@@ -46,7 +46,10 @@ export function respond(qid: string, value: "right" | number | string): string {
 }
 export const bugValue = (p: Problem | null, ids: Set<string>) => {
   const b = p?.bugs.find((x) => ids.has(x.id) && x.predict !== null);
-  return b ? (Array.isArray(b.predict) ? b.predict[0] : b.predict) as number : null;
+  if (!b) return null;
+  const v = (Array.isArray(b.predict) ? b.predict[0] : b.predict) as number;
+  // a choice problem's predictions are option positions: the learner means the option at that position
+  return p!.type === "choice" && typeof v === "number" ? (question(p!.id).options?.[v] ?? v) : v;
 };
 /** A careless slip: off by one from the right value (a numeric answer), never a known misconception's prediction. */
 export const slipFor = (qid: string) => slip(qid);

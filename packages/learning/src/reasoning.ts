@@ -183,6 +183,25 @@ export function reason(original: string, observations: Observation[]): Reasoning
   };
 }
 
+/**
+ * probe@1: how one question bears on one explanation (a modelled misunderstanding). It DISCRIMINATES when the
+ * explanation predicts at least one wrong answer here and none of its predictions is the right answer; a response is
+ * then read as the target understanding ("correct"), the misunderstanding ("predicted"), something else ("other"), or
+ * not read at all ("unreadable"). Family-independent: it uses only the problem's own explanations and values.
+ */
+export function probeReading(qid: string, explanation: string, response?: string): { discriminates: boolean; predicted: string[]; correct: string | null; reading: "correct" | "predicted" | "other" | "unreadable" | null } {
+  const pr = problemOf(qid);
+  const b = pr?.bugs.find((x) => x.id === explanation);
+  if (!pr || !b) return { discriminates: false, predicted: [], correct: null, reading: null };
+  const right = correctValue(pr);
+  const preds = predictions(b, pr);
+  const discriminates = preds.length > 0 && !preds.some((v) => same(v, right));
+  if (response === undefined) return { discriminates, predicted: preds.map(show), correct: show(right), reading: null };
+  const v = asValue(pr, response);
+  const reading = v === null ? "unreadable" : same(v, right) ? "correct" : preds.some((x) => same(x, v)) ? "predicted" : "other";
+  return { discriminates, predicted: preds.map(show), correct: show(right), reading };
+}
+
 /** What to do next, from a diagnosis: the defensible next activity, and why. */
 export function nextFromReasoning(r: Reasoning, problemCompetency: string): { kind: "practise" | "teach" | "support" | "unsure"; competency: string | null; why: string } {
   if (r.status !== "established" || !r.best) {

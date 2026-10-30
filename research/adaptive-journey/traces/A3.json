@@ -1369,7 +1369,7 @@
     "retention": "failed"
    },
    "evidenceAfter": {
-    "status": "review",
+    "status": "transfer",
     "independent": {
      "right": 14,
      "total": 16
@@ -1378,12 +1378,13 @@
      "right": 1,
      "total": 1
     },
-    "retention": "failed"
+    "retention": "scheduled"
    },
    "next": {
-    "kind": "review",
-    "competency": "MATH.algebra.quadratic-discriminant",
-    "reason": "The delayed check was missed, so this skill comes back for review."
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
    },
    "diagnosis": {
     "result": "secure",
@@ -1396,30 +1397,16 @@
    "step": 25,
    "stage": "module",
    "competency": "MATH.algebra.quadratic-discriminant",
-   "phase": "verify",
-   "question": "gen:aodk:2,3,12:mc",
-   "activity": "check",
-   "response": "D",
-   "hints": 0,
-   "authoritative": {
-    "verdict": "correct",
-    "reason": "correct.equal",
-    "credit": true
+   "phase": "done",
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
    },
-   "stepFindings": {
-    "supported": false
-   },
-   "e7Shadow": {
-    "advisory": true,
-    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
-   },
-   "questionStatus": {
-    "formCertified": true,
-    "quarantined": false
-   },
-   "recordedAsAttempt": true,
-   "evidenceBefore": {
-    "status": "review",
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Wed Sep 16 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
     "independent": {
      "right": 14,
      "total": 16
@@ -1428,41 +1415,20 @@
      "right": 1,
      "total": 1
     },
-    "retention": "failed"
-   },
-   "evidenceAfter": {
-    "status": "review",
-    "independent": {
-     "right": 15,
-     "total": 17
-    },
-    "assisted": {
-     "right": 1,
-     "total": 1
-    },
-    "retention": "failed"
+    "retention": "scheduled"
    },
    "next": {
-    "kind": "review",
-    "competency": "MATH.algebra.quadratic-discriminant",
-    "reason": "The delayed check was missed, so this skill comes back for review."
-   },
-   "diagnosis": {
-    "result": "secure",
-    "confidence": 0.77
-   },
-   "finding": null,
-   "reason": "You seem to know this. Now on your own, on a new question."
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   }
   },
   {
    "step": 26,
    "stage": "plan",
    "competency": "MATH.algebra.quadratic-discriminant",
    "planItems": [
-    {
-     "competency": "MATH.algebra.quadratic-discriminant",
-     "reason": "The delayed check was missed, so this skill comes back for review."
-    },
     {
      "competency": "MATH.algebra.quadratics",
      "reason": "Next in Quadratic equations."
@@ -1471,21 +1437,22 @@
    "finding": null,
    "hypotheses": [],
    "evidenceAfter": {
-    "status": "review",
+    "status": "transfer",
     "independent": {
-     "right": 15,
-     "total": 17
+     "right": 14,
+     "total": 16
     },
     "assisted": {
      "right": 1,
      "total": 1
     },
-    "retention": "failed"
+    "retention": "scheduled"
    },
    "next": {
-    "kind": "review",
-    "competency": "MATH.algebra.quadratic-discriminant",
-    "reason": "The delayed check was missed, so this skill comes back for review."
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
    }
   }
  ],
@@ -1503,21 +1470,22 @@
    "retention": "scheduled"
   },
   "target": {
-   "status": "review",
+   "status": "transfer",
    "independent": {
-    "right": 15,
-    "total": 17
+    "right": 14,
+    "total": 16
    },
    "assisted": {
     "right": 1,
     "total": 1
    },
-   "retention": "failed"
+   "retention": "scheduled"
   },
   "next": {
-   "kind": "review",
-   "competency": "MATH.algebra.quadratic-discriminant",
-   "reason": "The delayed check was missed, so this skill comes back for review."
+   "kind": "start",
+   "competency": "MATH.algebra.quadratics",
+   "chapter": "Quadratic equations",
+   "reason": "Next in Quadratic equations."
   },
   "hypotheses": [],
   "teachingHistory": {

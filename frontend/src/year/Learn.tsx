@@ -329,7 +329,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
       <div className="stack">
         {head}
         <p className="why">{ms.reason}</p>
-        <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
+        <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
       </div>
     );
   // done or pause

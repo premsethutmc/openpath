@@ -22,7 +22,7 @@ import { DAY, independentAttempt, rightAnswer, type SkillEvidence } from "./evid
 import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
 import { modulePhasePool } from "./library";
-import { familyOf, investigateContext, investigation, openHypothesis } from "./hypotheses";
+import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis } from "./hypotheses";
 import { nextFromReasoning, type Reasoning } from "./reasoning";
 import type { Attempt, LearnerRecords } from "./records";
 
@@ -126,6 +126,10 @@ export interface ModuleState {
   reason: string;
   /** How the answer is recorded (from the list the question came from: a check alone is an assessment). */
   activity?: import("./records").LearningActivity;
+  /** Recorded with the answer: investigate:<question> for an investigation question (investigation-trigger@1). */
+  context?: string;
+  /** Why this question is asked, when it is an investigation or a resolution probe (for reports; not learner-facing). */
+  why?: string;
 }
 
 /** What an earlier diagnosis (diagnostic@2, in recovery) established about this skill, so it is not asked again. */
@@ -165,12 +169,27 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: asEstablished(established.kind), confidence: asked.confidence }
     : open && inconclusive ? { ...asked, next: null, result: own!.scope.observedIn === competency ? own!.claim!.kind : asEstablished(own!.claim!.kind), confidence: asked.confidence }
     : asked;
-  const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !open;
+  // resolution-probe@1: once taught (and not shown again since), an open hypothesis seen in this skill is resolved only
+  // by a question that discriminates it; when none is left, it stays open and the module carries on as usual
+  const here = !!own && own.scope.observedIn === competency;
+  const resProbe = here && own!.probeDue ? discriminatingProbe(own!, records) : null;
+  const hold = !!own && (own.teachingDue || !!resProbe);
+  const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !hold;
   const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null;
   if (ev.retention === "due") {
     // the delayed check: the module's own questions, then fresh ones from the pool's delayed-check part
     const r = unanswered(m.retention) ?? fromPool(m, "retention", records);
     if (r) return { ...base, phase: "retention", question: r, diagnosis: d, reason: "A delayed check, a week after you first showed this: does it last?" };
+  }
+  // investigation-trigger@1: a significant or repeated error in practice or verification is investigated (bounded)
+  const inv = pendingInvestigation(m, records, session);
+  if (inv) return { ...base, phase: "explore", question: inv.question, diagnosis: d, context: investigateContext(inv.original), why: inv.why, reason: "One more question to understand your last answer." };
+  // the misunderstanding showed again after this skill's teaching: a different explanation (all tried: a person)
+  if (here && own!.teachingDue && records.teaching.some((t) => t.competency === competency && t.at > (own!.provenance.established ?? ""))) {
+    const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
+    const s = orderStrategies(m, d, records).find((x) => !delivered(x));
+    if (!s) return { ...base, phase: "pause", diagnosis: d, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
+    return { ...base, phase: "chapter", strategy: s, diagnosis: d, reason: `${own!.claim!.says} It showed again after the last explanation, so here is a different one.` };
   }
   if (d.next && !shown) return { ...base, phase: "explore", question: d.next, diagnosis: d, reason: "A short check to find the right starting point." };
   if (shown) {
@@ -238,12 +257,41 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   }
   if (decision.action === "content_gap") return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
   if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
+  if (resProbe) return { ...base, phase: "verify", question: resProbe, diagnosis: d, decision, why: `resolution probe for ${own!.id}`, reason: "One question on your own that shows whether that misunderstanding has gone." };
   if (decision.action === "done") {
     const more = unanswered([...m.practice, ...m.transfer]);
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours." };
   }
   const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
   return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "One more question on your own." };
+}
+
+/**
+ * investigation-trigger@1 in a module: the learner's latest answer alone (practice, transfer or a check) was wrong in a
+ * way worth understanding (investigationTrigger: a modelled misunderstanding predicts it, or two of the last three were
+ * wrong), it comes from a family diagnostic@2 can read, nothing open already explains errors here, and the reading
+ * still needs a question nobody has asked. At most two investigations are begun per skill in a session.
+ */
+function pendingInvestigation(m: Module, records: LearnerRecords, session: string): { question: string; original: string; why: string } | null {
+  const alone = records.attempts.filter((a) => of(m)(a) && a.n === 1 && independentAttempt(a) && !a.context);
+  const latest = alone.at(-1);
+  const started = alone.filter((a) => records.attempts.some((x) => x.context === investigateContext(a.questionId)));
+  const candidates = [...(latest && !rightAnswer(latest) && ["practice", "transfer", "check"].includes(latest.activity) ? [latest] : []), ...started.reverse()];
+  if (!candidates.length) return null;
+  if (hypothesesFor(m.competency, records).some((h) => h.status === "established" || h.status === "contested")) return null;
+  const begun = new Set(records.attempts.filter((a) => a.session === session && a.context?.startsWith("investigate:") && of(m)({ questionId: a.context.slice("investigate:".length) } as Attempt)).map((a) => a.context));
+  for (const c of candidates) {
+    if (!familyOf(c.questionId)) continue;
+    const ctx = investigateContext(c.questionId);
+    const trig = investigationTrigger(c, records);
+    if (!trig && !records.attempts.some((x) => x.context === ctx)) continue; // an isolated, unexplained slip
+    if (!begun.has(ctx) && begun.size >= 2) continue;
+    const { reasoning } = investigation(c.questionId, records);
+    const next = reasoning?.status === "need_more" ? reasoning.next : null;
+    if (!next || records.attempts.some((a) => exposureKey(a.questionId) === exposureKey(next))) continue;
+    return { question: next, original: c.questionId, why: trig?.detail ?? "continuing an investigation" };
+  }
+  return null;
 }
 
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */

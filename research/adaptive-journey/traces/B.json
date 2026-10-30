@@ -741,14 +741,28 @@
      "contradicting": [],
      "obligations": [
       "teaching in scope",
-      "then a fresh answer alone, in scope"
+      "then a right answer alone to a question that discriminates it"
      ],
      "teaching": {
       "deliveredAt": null,
       "strategy": null,
-      "competency": null
+      "competency": null,
+      "lastAt": null
      },
      "resolvedBy": null,
+     "probes": [],
+     "uncertainty": {
+      "supporting": 0,
+      "contradicting": 0,
+      "inconclusive": 0,
+      "note": "no discriminating answer since it was established"
+     },
+     "teachingDue": true,
+     "probeDue": false,
+     "trigger": {
+      "kind": "starting-check",
+      "detail": "a wrong answer in the starting-point check"
+     },
      "provenance": {
       "policy": "diagnostic@2-draft",
       "established": "2026-09-01T09:05:00.000Z",
@@ -1006,9 +1020,9 @@
    "stage": "module",
    "competency": "MATH.algebra.quadratic-discriminant",
    "phase": "verify",
-   "question": "gen:disc:-1,4",
+   "question": "gen:disc:-2,-7",
    "activity": "practice",
-   "response": "0",
+   "response": "2",
    "hints": 0,
    "authoritative": {
     "verdict": "correct",
@@ -1058,7 +1072,7 @@
     "reason": "Next in Quadratic equations."
    },
    "diagnosis": {
-    "result": "insufficient_evidence",
+    "result": "prerequisite",
     "confidence": 0.31
    },
    "finding": {
@@ -1066,18 +1080,18 @@
     "kind": "prerequisite",
     "competency": "MATH.number.integer-add",
     "establishedOn": "gen:disc:-7,-18",
-    "resolved": true
+    "resolved": false
    },
-   "reason": "Shown on your own. More practice is optional."
+   "reason": "One question on your own that shows whether that misunderstanding has gone."
   },
   {
    "step": 14,
    "stage": "module",
    "competency": "MATH.algebra.quadratic-discriminant",
    "phase": "verify",
-   "question": "gen:disc:5,10:mc",
+   "question": "gen:disc:-1,4",
    "activity": "practice",
-   "response": "A",
+   "response": "0",
    "hints": 0,
    "authoritative": {
     "verdict": "correct",
@@ -1144,9 +1158,9 @@
    "stage": "module",
    "competency": "MATH.algebra.quadratic-discriminant",
    "phase": "verify",
-   "question": "gen:disc:-2,-7",
+   "question": "gen:disc:5,10:mc",
    "activity": "practice",
-   "response": "2",
+   "response": "A",
    "hints": 0,
    "authoritative": {
     "verdict": "correct",
@@ -2349,10 +2363,40 @@
      ],
      "contradicting": [
       {
-       "attempt": "record#10",
-       "questionId": "gen:disc:-10,20",
+       "attempt": "record#11",
+       "questionId": "gen:disc:-2,-7",
        "response": "2",
-       "at": "2026-09-01T09:11:00.000Z",
+       "at": "2026-09-01T09:12:00.000Z",
+       "matches": [],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#18",
+       "questionId": "gen:disc:-2,-2",
+       "response": "2",
+       "at": "2026-09-01T09:19:00.000Z",
+       "matches": [],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#19",
+       "questionId": "gen:disc:-2,-3:mc",
+       "response": "C",
+       "at": "2026-09-01T09:20:00.000Z",
        "matches": [],
        "mathematical": {
         "credit": null,
@@ -2368,9 +2412,132 @@
      "teaching": {
       "deliveredAt": "2026-09-01T09:09:00.000Z",
       "strategy": "signed_numbers",
-      "competency": "MATH.algebra.quadratic-discriminant"
+      "competency": "MATH.algebra.quadratic-discriminant",
+      "lastAt": "2026-09-01T09:09:00.000Z"
      },
-     "resolvedBy": "record#10",
+     "resolvedBy": "record#11",
+     "probes": [
+      {
+       "contract": "resolution-probe@1",
+       "hypothesis": {
+        "id": "minus-c-sign@gen:disc:-7,-18",
+        "contract": "learner-hypothesis@1",
+        "policy": "diagnostic@2-draft"
+       },
+       "question": "gen:disc:-2,-7",
+       "family": "disc",
+       "prediction": {
+        "explanation": "minus-c-sign",
+        "values": [
+         "0"
+        ]
+       },
+       "expected": {
+        "target": "2",
+        "distinguishes": true
+       },
+       "response": "2",
+       "assistance": {
+        "activity": "practice",
+        "hints": 0,
+        "solution": false,
+        "n": 1,
+        "independent": true
+       },
+       "grader": {
+        "credit": null,
+        "source": "verifier"
+       },
+       "afterTeaching": true,
+       "outcome": "contradicts",
+       "at": "2026-09-01T09:12:00.000Z",
+       "attempt": "record#11"
+      },
+      {
+       "contract": "resolution-probe@1",
+       "hypothesis": {
+        "id": "minus-c-sign@gen:disc:-7,-18",
+        "contract": "learner-hypothesis@1",
+        "policy": "diagnostic@2-draft"
+       },
+       "question": "gen:disc:-2,-2",
+       "family": "disc",
+       "prediction": {
+        "explanation": "minus-c-sign",
+        "values": [
+         "0"
+        ]
+       },
+       "expected": {
+        "target": "2",
+        "distinguishes": true
+       },
+       "response": "2",
+       "assistance": {
+        "activity": "check",
+        "hints": 0,
+        "solution": false,
+        "n": 1,
+        "independent": true
+       },
+       "grader": {
+        "credit": null,
+        "source": "verifier"
+       },
+       "afterTeaching": true,
+       "outcome": "contradicts",
+       "at": "2026-09-01T09:19:00.000Z",
+       "attempt": "record#18"
+      },
+      {
+       "contract": "resolution-probe@1",
+       "hypothesis": {
+        "id": "minus-c-sign@gen:disc:-7,-18",
+        "contract": "learner-hypothesis@1",
+        "policy": "diagnostic@2-draft"
+       },
+       "question": "gen:disc:-2,-3:mc",
+       "family": "disc",
+       "prediction": {
+        "explanation": "minus-c-sign",
+        "values": [
+         "0"
+        ]
+       },
+       "expected": {
+        "target": "2",
+        "distinguishes": true
+       },
+       "response": "C",
+       "assistance": {
+        "activity": "check",
+        "hints": 0,
+        "solution": false,
+        "n": 1,
+        "independent": true
+       },
+       "grader": {
+        "credit": null,
+        "source": "verifier"
+       },
+       "afterTeaching": true,
+       "outcome": "contradicts",
+       "at": "2026-09-01T09:20:00.000Z",
+       "attempt": "record#19"
+      }
+     ],
+     "uncertainty": {
+      "supporting": 0,
+      "contradicting": 3,
+      "inconclusive": 0,
+      "note": "3 against, 0 for, after it was established (counts, not a probability)"
+     },
+     "teachingDue": false,
+     "probeDue": false,
+     "trigger": {
+      "kind": "starting-check",
+      "detail": "a wrong answer in the starting-point check"
+     },
      "provenance": {
       "policy": "diagnostic@2-draft",
       "established": "2026-09-01T09:05:00.000Z",
@@ -2500,10 +2667,40 @@
     ],
     "contradicting": [
      {
-      "attempt": "record#10",
-      "questionId": "gen:disc:-10,20",
+      "attempt": "record#11",
+      "questionId": "gen:disc:-2,-7",
       "response": "2",
-      "at": "2026-09-01T09:11:00.000Z",
+      "at": "2026-09-01T09:12:00.000Z",
+      "matches": [],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#18",
+      "questionId": "gen:disc:-2,-2",
+      "response": "2",
+      "at": "2026-09-01T09:19:00.000Z",
+      "matches": [],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#19",
+      "questionId": "gen:disc:-2,-3:mc",
+      "response": "C",
+      "at": "2026-09-01T09:20:00.000Z",
       "matches": [],
       "mathematical": {
        "credit": null,
@@ -2519,9 +2716,132 @@
     "teaching": {
      "deliveredAt": "2026-09-01T09:09:00.000Z",
      "strategy": "signed_numbers",
-     "competency": "MATH.algebra.quadratic-discriminant"
+     "competency": "MATH.algebra.quadratic-discriminant",
+     "lastAt": "2026-09-01T09:09:00.000Z"
     },
-    "resolvedBy": "record#10",
+    "resolvedBy": "record#11",
+    "probes": [
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "minus-c-sign@gen:disc:-7,-18",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:disc:-2,-7",
+      "family": "disc",
+      "prediction": {
+       "explanation": "minus-c-sign",
+       "values": [
+        "0"
+       ]
+      },
+      "expected": {
+       "target": "2",
+       "distinguishes": true
+      },
+      "response": "2",
+      "assistance": {
+       "activity": "practice",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "contradicts",
+      "at": "2026-09-01T09:12:00.000Z",
+      "attempt": "record#11"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "minus-c-sign@gen:disc:-7,-18",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:disc:-2,-2",
+      "family": "disc",
+      "prediction": {
+       "explanation": "minus-c-sign",
+       "values": [
+        "0"
+       ]
+      },
+      "expected": {
+       "target": "2",
+       "distinguishes": true
+      },
+      "response": "2",
+      "assistance": {
+       "activity": "check",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "contradicts",
+      "at": "2026-09-01T09:19:00.000Z",
+      "attempt": "record#18"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "minus-c-sign@gen:disc:-7,-18",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:disc:-2,-3:mc",
+      "family": "disc",
+      "prediction": {
+       "explanation": "minus-c-sign",
+       "values": [
+        "0"
+       ]
+      },
+      "expected": {
+       "target": "2",
+       "distinguishes": true
+      },
+      "response": "C",
+      "assistance": {
+       "activity": "check",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "contradicts",
+      "at": "2026-09-01T09:20:00.000Z",
+      "attempt": "record#19"
+     }
+    ],
+    "uncertainty": {
+     "supporting": 0,
+     "contradicting": 3,
+     "inconclusive": 0,
+     "note": "3 against, 0 for, after it was established (counts, not a probability)"
+    },
+    "teachingDue": false,
+    "probeDue": false,
+    "trigger": {
+     "kind": "starting-check",
+     "detail": "a wrong answer in the starting-point check"
+    },
     "provenance": {
      "policy": "diagnostic@2-draft",
      "established": "2026-09-01T09:05:00.000Z",
