@@ -19,7 +19,7 @@ import { parseFidelityLoss } from "./parse-fidelity.ts";
 import { sha256Hex } from "./digest.ts";
 import type { Expr } from "./calculus-core";
 import { checkSymbolicCertificate, type KernelCertificate } from "./proof-kernel.ts";
-import { parseNaturalWorking, type NaturalParseResult, type NaturalRelation } from "./natural-working.ts";
+import { currentNotationConventions, parseNaturalWorking, type NaturalParseResult, type NaturalRelation } from "./natural-working.ts";
 
 export const INDEPENDENT_CHECKER_CONTRACT = "openpath-independent-algebra-checker@1" as const;
 export const CHECKER_SCOPE = "single-variable rational-coefficient polynomial/rational equations and inequalities, |.|, one sqrt radicand, finite/interval solution sets, closed numeric statements, expression identity via U4; all critical points rational" as const;
@@ -34,18 +34,6 @@ export const CHECKER_LIMITS = { maxDegree: 12, maxCriticalPoints: 64, maxNodes: 
 export type CandidateEliminationPolicy = "implicit" | "shown";
 let candidatePolicy: CandidateEliminationPolicy = "implicit";
 export function withCandidateEliminationPolicy<T>(policy: CandidateEliminationPolicy, fn: () => T): T { const old = candidatePolicy; candidatePolicy = policy; try { return fn(); } finally { candidatePolicy = old; } }
-/**
- * E7 safety F7 (owner decision pending). How a working whose stated solution omits solutions of the problem is graded.
- * "incomplete" (default, the E2 completeness contract): a valid narrowing that loses solutions is valid-but-incomplete; the lost values are obligations.
- * "invalid": when the working's last solution statement omits solutions (the lost values are claimed not to be solutions), the work is invalid
- * at the step that lost them; answer-first grades such a final answer "incorrect". A working that stops before stating a solution is unaffected.
- */
-export type SolutionLossPolicy = "incomplete" | "invalid";
-let lossPolicy: SolutionLossPolicy = "incomplete";
-export function solutionLossPolicy(): SolutionLossPolicy { return lossPolicy; }
-export function withSolutionLossPolicy<T>(policy: SolutionLossPolicy, fn: () => T): T { const old = lossPolicy; lossPolicy = policy; try { return fn(); } finally { lossPolicy = old; } }
-/** async variant for callers whose assessment awaits (sequential use only: the policy is module state) */
-export async function withSolutionLossPolicyAsync<T>(policy: SolutionLossPolicy, fn: () => Promise<T>): Promise<T> { const old = lossPolicy; lossPolicy = policy; try { return await fn(); } finally { lossPolicy = old; } }
 let degreeCap: number = CHECKER_LIMITS.maxDegree;
 export class Unsupported extends Error {}
 export class Exhausted extends Error {}
@@ -156,6 +144,14 @@ function rationalBetween(a: Ext, b: Ext): Q {
  */
 interface QF { c: [Q, Q, Q, Q]; f: [Q, Q] } // basis 1, sqrt f1, sqrt f2, sqrt f1 sqrt f2 ; f = 0 means absent (present radicals are packed first)
 const qfRat = (x: Q): QF => ({ c: [x, ZERO, ZERO, ZERO], f: [ZERO, ZERO] });
+/** real n-th root of a rational for odd n (cbrt(-8) = -2): exact when rational, otherwise outside the exact scope. Even indices other than 2 are refused. */
+function oddRootRational(z: Q, n: number): Q {
+  if (n % 2 === 0) throw new Unsupported(`a root of even index ${n} other than a square root`);
+  const iroot = (a: bigint): bigint | null => { if (a === 0n) return 0n; let lo = 0n, hi = 1n; while (hi ** BigInt(n) <= a) hi *= 2n; while (lo < hi) { const m = (lo + hi + 1n) / 2n; if (m ** BigInt(n) <= a) lo = m; else hi = m - 1n; } return lo ** BigInt(n) === a ? lo : null; };
+  const neg = z.n < 0n, a = iroot(neg ? -z.n : z.n), b = iroot(z.d);
+  if (a === null || b === null) throw new Unsupported(`an irrational ${n === 3 ? "cube" : `${n}th`} root`);
+  return new Q(neg ? -a : a, b);
+}
 function qfUnify(a: QF, b: QF): [QF, QF] {
   const radicals: Q[] = []; for (const f of [...a.f, ...b.f]) if (!f.isZero() && !radicals.some((x) => x.eq(f))) radicals.push(f);
   if (radicals.length > 2) throw new Unsupported("three or more distinct radicals");
@@ -209,7 +205,7 @@ function qfEval(e: Expr, v: Q, name: string): QF | null {
       let acc = qfRat(ONE); for (let i = 0; i < Math.abs(e.exponent); i++) acc = qfMul(acc, b); return acc;
     }
     case "abs": { const z = qfEval(e.argument, v, name); if (!z) return null; return qfSign(z) < 0 ? qfNeg(z) : z; }
-    case "root": { const z = qfEval(e.radicand, v, name); if (!z) return null; if (qfSign(z) < 0) return null; return qfSqrt(z); }
+    case "root": { const z = qfEval(e.radicand, v, name); if (!z) return null; if (e.index !== 2) { if (!z.c[1].isZero() || !z.c[2].isZero() || !z.c[3].isZero()) throw new Unsupported("a cube root of an irrational value"); return qfRat(oddRootRational(z.c[0], e.index)); } if (qfSign(z) < 0) return null; return qfSqrt(z); }
     default: throw new Unsupported(`${e.kind} is outside the checker scope`);
   }
 }
@@ -323,6 +319,7 @@ function evalAt(e: Expr, v: Ext, name: string): Ext | null {
     case "abs": { const z = evalAt(e.argument, v, name); if (!z) return null; return signExt(z) < 0 ? eNeg(z) : z; }
     case "root": {
       const z = evalAt(e.radicand, v, name); if (!z) return null;
+      if (e.index !== 2) { if (!z.y.isZero()) throw new Unsupported("a cube root of an irrational value"); return rat(oddRootRational(z.x, e.index)); }
       if (signExt(z) < 0) return null;
       const r = sqrtExt(z); if (!r) throw new Unsupported("a nested radical outside the single quadratic field");
       return r;
@@ -360,6 +357,7 @@ function toXQ(e: Expr, c: SymCtx): XQ {
     }
     case "abs": { const a = toXQ(e.argument, c); if (!xIsPure(a)) throw new Unsupported("absolute value of a radical"); const sg = c.sigma.get(JSON.stringify(e.argument)) ?? 1; return sg === 1 ? a : xNeg(a); }
     case "root": {
+      if (e.index !== 2) throw new Unsupported("roots other than square roots in a symbolic radical");
       const a = toXQ(e.radicand, c); if (!xIsPure(a)) throw new Unsupported("nested radicals");
       const r0 = a.get(0) ?? rfConst(ZERO); let i = c.rads.findIndex((x) => rfEq(x, r0));
       if (i < 0) { if (c.rads.length >= 2) throw new Unsupported("more than two distinct radicands"); c.rads.push(r0); i = c.rads.length - 1; }
@@ -1060,7 +1058,7 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
   const stmt0 = withPremises(stmtFromRelation(rel0, name, "problem"), premiseStmts, "problem with its conditions"), lines = parsed.lines;
   const out: CheckedLine[] = []; const chain: { stmt: Stmt; index: number; rel: NaturalRelation; solved: boolean }[] = [];
   let prev = stmt0, prevRel: SetRelation | null = null; void prevRel;
-  let unresolved: number | null = null, firstInvalid: number | null = null, narrowing = -1, widening = -1, falseCompleteness: number | null = null, missingAssumptionAt: number | null = null, lossAt = -1;
+  let unresolved: number | null = null, firstInvalid: number | null = null, narrowing = -1, widening = -1, falseCompleteness: number | null = null, missingAssumptionAt: number | null = null;
   const obligations: string[] = []; let u4Steps = 0, exactSteps = 0;
   const stmts: Stmt[] = [stmt0]; const pending: { index: number; stmt: Stmt; from: Stmt; kind: "chain" }[] = [];
   const text = (i: number) => lines[i].source.text;
@@ -1103,7 +1101,8 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
       }
       continue;
     }
-    if (isRestrictionNote(lines[i].relation, b as Stmt, prof, excluded0) && relate(prof, b as Stmt, stmt0) !== "equal") { push({ status: "verified-valid", relation: "widening", detail: `states a restriction the problem already imposes (${text(i)}); a condition on the variable, not a claim about the solutions`, solutionSet: null, evidence: { checker: "exact-solution-set", u4: null } }); continue; }
+    if (lines[i].connective === "equivalent") { const sq = premised.get(b as Stmt)!, rq = relate(prof, prev, sq); if (rq !== "equal") { firstInvalid = i; push({ status: "verified-invalid", relation: rq === "superset" ? "narrowing" : rq === "subset" ? "widening" : "incomparable", detail: `the line claims equivalence (⇔) with the previous statement, but ${desc(prev)} and ${desc(sq)} differ${rq === "superset" ? " (solutions are lost)" : rq === "subset" ? " (values are gained)" : ""}`, solutionSet: desc(sq), evidence: { checker: "exact-solution-set", u4: null } }); continue; } }
+    else if (isRestrictionNote(lines[i].relation, b as Stmt, prof, excluded0) && relate(prof, b as Stmt, stmt0) !== "equal") { push({ status: "verified-valid", relation: "widening", detail: `states a restriction the problem already imposes (${text(i)}); a condition on the variable, not a claim about the solutions`, solutionSet: null, evidence: { checker: "exact-solution-set", u4: null } }); continue; }
     const sRaw = b as Stmt, s = premised.get(sRaw)!, r = relate(prof, prev, s);
     let u4: U4Evidence | null = null;
     if (name && prev.kind === "atom" && (sRaw.kind === "atom" || sRaw.kind === "set")) { u4 = u4StepEvidence(prev, sRaw, name); if (u4.outcome === "verified") u4Steps++; else exactSteps++; } else exactSteps++;
@@ -1122,7 +1121,7 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
       const prevFinite = Mp.gap.every((v) => !v) && Mp.pt.filter(Boolean).length <= 8;
       const droppedUndefined = cp.every((v, k) => !(v && !cs[k]) || (k >= Mp.gap.length && undefined0[k - Mp.gap.length]));
       if (dropsSolution && anySolution && !keepsSolution) { firstInvalid = i; push({ status: "verified-invalid", relation: "narrowing", detail: `the step discards every solution of the original problem: ${desc(prev)} became ${desc(s)} but the problem's solution set is ${S0desc}`, solutionSet: desc(s), evidence: ev }); }
-      else if (dropsSolution) { narrowing = narrowing < 0 ? i : narrowing; lossAt = lossAt < 0 ? i : lossAt; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that loses solutions: ${desc(prev)} became ${desc(s)}`, solutionSet: desc(s), evidence: ev }); }
+      else if (dropsSolution) { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that loses solutions: ${desc(prev)} became ${desc(s)}`, solutionSet: desc(s), evidence: ev }); }
       else if ((prevFinite || droppedUndefined) && candidatePolicy === "shown") { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `a valid reduction that discards candidates (${desc(prev)} became ${desc(s)}) without showing the check against the original problem`, solutionSet: desc(s), evidence: ev }); }
       else if (prevFinite || droppedUndefined) push({ status: "verified-valid", relation: "narrowing", detail: `eliminates candidates that the exact check shows are not solutions of the original problem (${desc(prev)} became ${desc(s)})`, solutionSet: desc(s), evidence: ev });
       else { narrowing = narrowing < 0 ? i : narrowing; push({ status: "incomplete", relation: "narrowing", detail: `an unjustified jump from ${desc(prev)} to ${desc(s)}: the removed values are not shown to be non-solutions`, solutionSet: desc(s), evidence: ev }); }
@@ -1141,13 +1140,12 @@ function solutionMode(rel0: NaturalRelation, parsed: NaturalParseResult, name: s
   if (missingAssumptionAt !== null && falseCompleteness === null) return result("missing-assumption", null, `the conclusion ignores the domain restriction: ${restrictions.join(", ")}`, restrictions.map((r) => `state the restriction ${r}`));
   if (!finalStmt) return result("incomplete", null, "no mathematical conclusion about the variable was reached", ["state the solution"]);
   if (falseCompleteness !== null) return result("invalid", narrowing >= 0 ? narrowing : falseCompleteness, out[falseCompleteness].detail);
-  // F7 "invalid" policy: the stated final solution omits solutions, so the step that lost them made a false claim
-  if (lossPolicy === "invalid" && chain.length && chain[chain.length - 1].solved && relate(prof, finalStmt, stmt0) === "subset") { const at = lossAt >= 0 ? lossAt : finalIndex; return result("invalid", at, `the stated solution (${desc(finalStmt)}) omits solutions of the problem (${S0desc})${lossAt >= 0 ? `: line ${lossAt + 1} ${out[lossAt].detail}` : ""}`, [`include the remaining solutions: ${S0desc}`]); }
   if (narrowing >= 0 || (candidatePolicy === "shown" && widening >= 0)) return result("incomplete", null, candidatePolicy === "shown" && widening >= 0 ? "the working widened the solution set (for example by squaring) and later removed candidates without showing the check against the original problem" : "a step lost solutions or jumped to a smaller set without justification", [candidatePolicy === "shown" && widening >= 0 ? "verify each candidate in the original problem" : "justify every solution-changing step"]);
   if (!chain[chain.length - 1].solved) return result("incomplete", null, "the working is correct but the solution is not stated in solved form", ["state the solution explicitly"]);
   const rel = relate(prof, finalStmt, stmt0);
   if (rel === "incomparable") return result("invalid", finalIndex, `the final statement (${desc(finalStmt)}) is not related to the problem's solution set (${S0desc})`);
   if (rel === "superset") return result("invalid", finalIndex, `the final statement (${desc(finalStmt)}) includes values that are not solutions; the problem's solution set is ${S0desc}`);
+  if (rel === "subset" && finalStmt.emptyClaim) return result("invalid", finalIndex, `the working concludes there is no solution, but the problem's solution set is ${S0desc}`); // a claim of emptiness is not an incomplete list
   if (rel === "subset") return result("incomplete", null, `the conclusion (${desc(finalStmt)}) omits solutions: the problem's solution set is ${S0desc}`, [`include the remaining solutions: ${S0desc}`]);
   return result("verified", null, `every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set ${S0desc} is stated`);
 }
@@ -1290,7 +1288,7 @@ export function diagnoseTransition(prev: NaturalRelation, next: NaturalRelation,
 
 /** question-level reference parse, reused across the many submissions of one question */
 const parseCache = new Map<string, NaturalParseResult>();
-function cachedParse(text: string): NaturalParseResult { let r = parseCache.get(text); if (!r) { r = parseNaturalWorking({ format: "natural", text }); if (parseCache.size > 512) parseCache.clear(); parseCache.set(text, r); } return r; }
+function cachedParse(text: string): NaturalParseResult { const k = `${currentNotationConventions().log ?? "-"}|${text}`; let r = parseCache.get(k); if (!r) { r = parseNaturalWorking({ format: "natural", text }); if (parseCache.size > 512) parseCache.clear(); parseCache.set(k, r); } return r; }
 /** A: the final stated answer against the exact solution set of the problem. T (optional): written transitions, judged locally against the previous written line. */
 export function answerFirstSolutionSet(statement: string, parsed: NaturalParseResult, withTransitions: boolean): AfResult {
   let checks = 0;
@@ -1334,7 +1332,8 @@ export function answerFirstSolutionSet(statement: string, parsed: NaturalParseRe
     const extraneous = prof.points.map((_, k) => k).filter((k) => Mf.pt[k] && !M0.pt[k]).map(ptName), missing = prof.points.map((_, k) => k).filter((k) => !Mf.pt[k] && M0.pt[k]).map(ptName);
     const onlyExcluded = r === "superset" && cf.some((v, k) => v && !c0[k]) && prof.points.every((_, k) => !(Mf.pt[k] && !M0.pt[k]) || undef[k]);
     if (r === "equal") ans = answer({ status: "correct", reason: `the stated solution ${desc(finalStmt)} is exactly the problem's solution set`, finalSet: desc(finalStmt), expectedSet: S0, restrictions });
-    else if (r === "subset") ans = answer({ status: lossPolicy === "invalid" ? "incorrect" : "incomplete", reason: `the stated solution ${desc(finalStmt)} omits solutions: the problem's solution set is ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, missing, restrictions });
+    else if (r === "subset" && claimStmt?.emptyClaim) ans = answer({ status: "incorrect", reason: `the answer states there is no solution, but the problem's solution set is ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, missing, restrictions });
+    else if (r === "subset") ans = answer({ status: "incomplete", reason: `the stated solution ${desc(finalStmt)} omits solutions: the problem's solution set is ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, missing, restrictions });
     else ans = answer({ status: "incorrect", reason: r === "superset" ? `the stated solution ${desc(finalStmt)} includes values that are not solutions${onlyExcluded ? " (excluded by the domain)" : ""}; the problem's solution set is ${S0}` : `the stated solution ${desc(finalStmt)} is not the problem's solution set ${S0}`, finalSet: desc(finalStmt), expectedSet: S0, extraneous, missing, restrictions });
   }
   if (!withTransitions) return { family: "solution-set", answer: ans, transitions: null, firstInvalid: null, checks, finalIndex: fin >= 0 ? fin : null };
@@ -1349,13 +1348,14 @@ export function answerFirstSolutionSet(statement: string, parsed: NaturalParseRe
     if ("claim" in b) { pushT({ index: i, from, to, status: "unsupported", detail: "a completeness or universality claim is not a transition", keepsOriginalSolutions: null, diagnosis: null }); return; }
     if ("closed" in b && b.closed === false && emptyIn(prof, prevStmt)) { checks++; pushT({ index: i, from, to, status: "equivalent", detail: `a false closed statement derived from a line with no real solutions (${desc(prevStmt)}): a valid derivation of a contradiction`, keepsOriginalSolutions: true, diagnosis: null }); return; }
     if ("closed" in b) { checks++; pushT({ index: i, from, to, status: b.closed === false ? "closed-false" : b.closed === true ? "closed-true" : "unsupported", detail: b.closed === false ? "a closed numeric statement that is exactly false" : b.closed === true ? "a closed numeric statement that is exactly true" : "a closed statement that is undefined", keepsOriginalSolutions: null, diagnosis: null }); if (b.closed === false && firstInvalid === null) firstInvalid = i; return; }
-    if (isRestrictionNote(l.relation, b as Stmt, prof, excluded0) && relate(prof, b as Stmt, stmt0) !== "equal") { checks++; pushT({ index: i, from, to, status: "restriction", detail: "states a restriction the problem already imposes; a condition on the variable, not a step", keepsOriginalSolutions: true, diagnosis: null }); return; }
+    if (l.connective !== "equivalent" && isRestrictionNote(l.relation, b as Stmt, prof, excluded0) && relate(prof, b as Stmt, stmt0) !== "equal") { checks++; pushT({ index: i, from, to, status: "restriction", detail: "states a restriction the problem already imposes; a condition on the variable, not a step", keepsOriginalSolutions: true, diagnosis: null }); return; }
     const s = premised.get(b as Stmt)!, r = relate(prof, prevStmt, s); checks++;
     const Ms = prof.membership.get(s)!, keeps = [...Ms.gap.map((v, k) => !M0.gap[k] || v), ...Ms.pt.map((v, k) => !M0.pt[k] || v)].every(Boolean);
     const Mp = prof.membership.get(prevStmt)!;
     const dropsSolution = [...Mp.gap.map((v, k) => v && M0.gap[k] && !Ms.gap[k]), ...Mp.pt.map((v, k) => v && M0.pt[k] && !Ms.pt[k])].some(Boolean);
     let status: AfTransition["status"], detail: string;
     if (r === "equal") { status = "equivalent"; detail = "equivalent to the previous line (same solution set)"; }
+    else if (l.connective === "equivalent") { status = "invalid"; detail = `the line claims equivalence (⇔) with the previous line, but ${desc(prevStmt)} and ${desc(s)} differ${r === "superset" ? " (solutions are lost)" : r === "subset" ? " (values are gained)" : ""}`; }
     else if (r === "subset") { status = "implied"; detail = `follows from the previous line but admits more values (${desc(s)}): a one-way step, so candidates must later be checked against the original`; }
     else if (r === "superset" && !dropsSolution) { status = "narrowing"; detail = `a reduction of the previous line that discards only non-solutions of the original (${desc(prevStmt)} → ${desc(s)})`; }
     else if (r === "superset") { status = "invalid"; detail = `the step discards a solution of the original: ${desc(prevStmt)} became ${desc(s)}`; }

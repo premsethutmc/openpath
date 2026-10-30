@@ -5,7 +5,7 @@
  * Nothing new is solved or parsed: the independent checker's exact solution-set profile, exact arithmetic and the shared natural parser do all of it.
  */
 import { answerFirstNumeric, answerFirstSolutionSet, Exhausted, Unsupported, type AfAnswer, type AfDiagnosis, type AfTransition } from "./independent-checker.ts";
-import { parseNaturalWorking } from "./natural-working.ts";
+import { expandEquivalenceRows, parseNaturalWorking, usesBareLog, withNotationConventions, type NotationConventions } from "./natural-working.ts";
 
 export const ANSWER_FIRST_CONTRACT = "openpath-answer-first@1" as const;
 export interface AnswerFirstAssessment {
@@ -36,7 +36,20 @@ const none = (reason: string, status: "unresolved" | "unsupported", t0: number):
  * @param opts.finalAnswer  the explicit final answer, already in statement form ("x = 4", "x = 2 or x = 3", "56"); appended as the last line. Without working, only the verdict is produced (nothing to localise).
  * @param opts.diagnose  false = answer verdict only; default true = diagnose only when the answer is not correct (a correct answer is never analysed); "always" = also report the written transitions of a correct answer (optional, never part of the credit decision)
  */
-export function assessAnswerFirst(problem: unknown, working: unknown, opts: { diagnose?: boolean | "always"; finalAnswer?: string } = {}): AnswerFirstAssessment {
+export type AnswerFirstOptions = { diagnose?: boolean | "always"; finalAnswer?: string; /** assessment/curriculum notation conventions; the problem's own `conventions` take precedence */ conventions?: NotationConventions };
+/** bare "log" without a convention: the verdict stands only when it is the same under the natural and the base-10 reading; otherwise unresolved */
+export function assessAnswerFirst(problem: unknown, working: unknown, opts: AnswerFirstOptions = {}): AnswerFirstAssessment {
+  if (working && typeof (working as { text?: unknown }).text === "string" && /⇔|<=>|⟺|\biff\b/.test((working as { text: string }).text)) working = { ...(working as object), text: expandEquivalenceRows((working as { text: string }).text) };
+  const conv: NotationConventions = { ...(opts.conventions ?? {}), ...((problem as { conventions?: NotationConventions } | null)?.conventions ?? {}) };
+  const texts = [(problem as { statement?: unknown } | null)?.statement, (working as { text?: unknown } | null)?.text, opts.finalAnswer].filter((x): x is string => typeof x === "string");
+  if (!conv.log && texts.some(usesBareLog)) {
+    const a = withNotationConventions({ ...conv, log: "natural" }, () => assessAnswerFirstIn(problem, working, opts)), b = withNotationConventions({ ...conv, log: "base10" }, () => assessAnswerFirstIn(problem, working, opts));
+    if (a.answer.status === b.answer.status) return a;
+    return { ...a, answer: { ...a.answer, status: "unresolved", credit: null, reason: `bare log has no stated base and the verdict depends on it (natural log: ${a.answer.status}; base 10: ${b.answer.status}); state the base or set a notation convention` }, diagnosis: null };
+  }
+  return withNotationConventions(conv, () => assessAnswerFirstIn(problem, working, opts));
+}
+function assessAnswerFirstIn(problem: unknown, working: unknown, opts: AnswerFirstOptions = {}): AnswerFirstAssessment {
   const t0 = performance.now();
   const p = problem as { domain?: string; statement?: string; task?: string } | null;
   let w = working as { format?: string; text?: string } | null;
