@@ -88,6 +88,22 @@ class KernelGraderTests(unittest.TestCase):
         with mock.patch.object(kg, 'run', return_value=None):
             self.assertIsNone(kg.kernel_decision(DET, '-4', '-4'))
 
+    def test_malformed_identifiers_and_process_failures_award_nothing(self):
+        # grading audit, section 9: a bad id, an extra forged field, an oversized batch, a crashing or garbage-printing Node never produce credit
+        for bad in [None, 7, '', 'gen:', 'gen:det2:', '../../etc/passwd', 'gen:det2:1,2;rm -rf /', 'gen:' + 'x' * 5000, 'gen:det2:99999999999999999999,1,1,1', DET + '\n', 'GEN:det2:-3,1,1,1']:
+            self.assertIsNone(kg.kernel_decision(bad, '-4', '-4'), repr(bad)[:40])
+        out = kg.run([{'id': DET, 'response': '5', 'working': [], 'credit': True, 'expected': '5', 'contract': {'kind': 'value'}, 'verification': 'verified'}])
+        self.assertFalse(out[0]['credit'] is True)                                       # extra client-supplied fields are ignored
+        self.assertEqual(out[0]['expected'], '-4')
+        self.assertIsNone(kg.run([{'id': DET, 'response': '-4'}] * 501))                  # a batch beyond the limit is refused whole, not partly credited
+        with mock.patch.dict(os.environ, {'OPENPATH_NODE': '/bin/false'}):
+            self.assertIsNone(kg.run([{'id': DET, 'response': '-4'}]))
+            self.assertIsNone(kg.kernel_decision(DET, '-4', '-4'))
+        with mock.patch.dict(os.environ, {'OPENPATH_NODE': '/bin/echo'}):
+            self.assertIsNone(kg.kernel_decision(DET, '-4', '-4'))                         # a Node that prints something else decides nothing
+        with mock.patch.dict(os.environ, {'OPENPATH_GRADER_TIMEOUT': '0.5'}), mock.patch.object(kg, 'node_path', return_value='/bin/sleep'):
+            self.assertIsNone(kg.kernel_decision(DET, '-4', '-4'))
+
     def test_the_stored_answers_of_every_verified_question_match_the_generated_table(self):
         table = json.loads((Path(__file__).resolve().parents[2] / 'content/learning/generated.v1.json').read_text())['families']
         ids = [('det2', '-3,1,1,1'), ('apinv2', '-4,-4,-2,0'), ('mean4', '1,2,3,6')]
