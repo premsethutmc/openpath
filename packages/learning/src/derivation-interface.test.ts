@@ -40,3 +40,16 @@ test("disputed labels: restatement-only working is unsupported; a factorised qua
   for (const [st, ls] of [["Solve x^2 + 11x + 18 = 0", ["x^2 + 11x + 18 = 0", "(x + 9)(x + 2) = 0", "x = \u22129 or x = \u22122"]], ["Solve x^2 \u2212 2x \u2212 8 = 0", ["x^2 \u2212 2x \u2212 8 = 0", "(x \u2212 4)(x + 2) = 0", "x = 4 or x = \u22122"]], ["Solve x^2 \u2212 17x + 72 = 0", ["x^2 \u2212 17x + 72 = 0", "(x \u2212 8)(x \u2212 9) = 0", "x = 8 or x = 9"]]] as [string, string[]][])
     expect(authorizeWorking(st, ls).status).toBe("authorized");
 });
+
+test("closure: an authorized answer-only or jump working is NOT method evidence (P2 solve-conclusion checks the solution set, not the route)", () => {
+  const S = "Solve x^2 + 11x + 18 = 0", E = "x^2 + 11x + 18 = 0";
+  for (const ls of [["x = \u22129 or x = \u22122"], [E, "x = \u22129 or x = \u22122"]]) {
+    const a = authorizeWorking(S, ls);
+    expect(a.status).toBe("authorized");
+    expect(workingEvidence(a)).toBe("no-method-evidence");
+  }
+  const full = authorizeWorking(S, [E, "(x + 9)(x + 2) = 0", "x = \u22129 or x = \u22122"]);
+  expect(workingEvidence(full)).toBe("method-verified");
+  expect(authorizeWorking(S, [E, "(x + 9)(x + 2) = 0", "x = \u22129"]).status).toBe("unsupported");
+  expect(authorizeWorking(S, [E, "(x + 3)(x + 6) = 0", "x = \u22123 or x = \u22126"]).status).toBe("unsupported");
+});

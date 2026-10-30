@@ -31,7 +31,7 @@ export function questionSpec(qid: string, o: { feedback?: FeedbackState; guide?:
 }
 
 /** The decision's verdict as the renderer's feedback level. `unresolved` / `pending-educator` is "none": the renderer never turns it into right or wrong. */
-export function feedbackFromDecision(d: GradingDecision, correctAnswer?: string): FeedbackState {
+export function feedbackFromDecision(d: GradingDecision): FeedbackState {
   const verified = d.contract?.keyAuthority === "independent-kernel" && d.certified === true;
   if (d.verdict === "correct") return { level: "correct", verified, message: "That answer is right.", evidence: `Marked by the answer checker (${d.reason})` };
   if (d.verdict === "incorrect") return { level: "incorrect", verified, message: "That is not the answer we are looking for.", evidence: `Marked by the answer checker (${d.reason})` };

@@ -1,5 +1,5 @@
 # 07 — Exact references
-Integration branch: `integration/milestone-1` (this commit on top of merge commits a6fe979 loop repair, 1122330 P2, 7e5fc6b renderer).
-Sources: math `feat/math-answer-key-certification` 49a6be8; evidence `feat/adaptive-evidence-investigation` 2db1c44; loop `feature/adaptive-loop-repair` 5289948; renderer `feat/universal-learning-renderer` 12a82f9; phase 3 `feat/adaptive-journey-slice` e2176d2. Main (b578c78) untouched. Nothing merged to main, nothing deployed.
-Screenshots: `docs/integration/screenshots/{desktop,mobile}-{1-open-question,2-incorrect-feedback,4-teaching-1,4-teaching-2,5-recheck-correct,6-summary}.png`.
-Run: `cd frontend && node scripts/build-slice.mjs && node --test e2e/slice-journey.test.mjs`.
+Branch `integration/milestone-1`. Integration commits: a6fe979 (loop repair onto evidence), 1122330 (P2), 7e5fc6b (renderer), a6c6856 (vertical slice), and the closure commit that contains this file (its SHA is in the final report and `git log`).
+Sources: math `feat/math-answer-key-certification` 49a6be8; evidence `feat/adaptive-evidence-investigation` 2db1c44; loop `feature/adaptive-loop-repair` 5289948; renderer `feat/universal-learning-renderer` 12a82f9; phase 3 `feat/adaptive-journey-slice` e2176d2. `main` (b578c78) untouched. Nothing merged to main; nothing deployed.
+Screenshots (`docs/integration/screenshots/`, desktop 1366x800 and mobile 390x844): 1-open-question, 2-incorrect-feedback, 4-teaching-1, 4-teaching-2, 5a-guided-practice, 5b-independent-check, 5-recheck-correct, 6-summary.
+Reproduce: `cd frontend && node scripts/build-slice.mjs && node --test e2e/slice-journey.test.mjs`; `bash frontend/scripts/m1-persistence.sh`; `node --import tsx --test src/journey/slice.test.ts`.

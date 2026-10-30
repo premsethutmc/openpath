@@ -4,12 +4,13 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { hypotheses, openHypothesis } from "../../../packages/learning/src/hypotheses";
+import { familyOf, hypotheses, openHypothesis } from "../../../packages/learning/src/hypotheses";
+import { reason } from "../../../packages/learning/src/reasoning";
 import { moduleState, recovery, teachingHistory } from "../../../packages/learning/src/intervention";
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import { nextActivity } from "../../../packages/learning/src/plan";
 import { topicCheck } from "../year/topic-session";
-import { Journey, SCENARIOS, TARGET } from "./adaptive-journey";
+import { Journey, SCENARIOS, TARGET, slip } from "./adaptive-journey";
 import { problemOf, show } from "../../../packages/learning/src/families";
 
 const SUPPORT = "MATH.number.integer-add";
@@ -86,9 +87,17 @@ test("nothing is established without evidence: a slip, and a learner no explanat
     assert.equal(h.use.teach, false);
   }
   assert.ok(c.final.hypotheses.some((h) => h.status === "unsupported"));
-  // INTEGRATION-M1 (docs/integration/03-RECONCILIATION.md #4): the loop's stopping rule ends an investigation at once after an isolated slip, so no
-  // hypothesis is recorded at all (previously one "insufficient" one). Still never established, never claimed, never used to teach.
-  assert.ok(a1.final.hypotheses.every((h) => h.status === "insufficient" || h.status === "slip" || h.status === "unsupported"));
+  // INTEGRATION-M1 closure (policy 1): evidence interpretation and adaptive decision are separate, compatible conclusions about a lone slip.
+  //  evidence:  the slip is KEPT as an observation (not erased, not counted as help) and does not establish anything: the real reasoning over
+  //             that one answer is not "established" (insufficient evidence); no hypothesis is claimed, and nothing is promoted to mastery.
+  //  adaptive:  with competence otherwise supported, no investigation or remedial teaching follows the slip (the loop's stopping rule).
+  const slipQ = a1.slipped as string, fam = familyOf(slipQ)!;
+  const r = reason(fam, [{ questionId: fam, response: slip(slipQ) }]);
+  assert.ok(r && r.status !== "established", "one unexplained wrong answer never establishes a misconception");
+  assert.equal(a1.final.afterSlip.independent.total - a1.final.afterSlip.independent.right, 1, "the slip stays recorded as an independent wrong answer");
+  assert.equal(a1.final.hypotheses.length, 0, "no hypothesis is invented (neither established nor 'confident')");
+  const after = a1.steps.slice(a1.steps.findIndex((x: { question?: string }) => x.question === slipQ) + 1);
+  assert.ok(!after.some((x: { phase?: string }) => x.phase === "explore" || x.phase === "recover" || x.phase === "chapter"), "no investigation or lesson after an isolated slip");
 });
 
 test("teaching history: questions seen as practice are not instruction delivered, and no pause claims teaching that did not happen", async () => {

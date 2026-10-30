@@ -15,5 +15,7 @@ One decision, one owner. The slice (`frontend/src/journey/`) records, per step, 
 Rules enforced in code
 - Renderer feedback level is derived only from a `GradingDecision` (`feedbackFromDecision`); `unresolved` / `pending-educator` render as "not marked", never right or wrong (test).
 - Teaching steps are the selected `Strategy.screens` verbatim, `verified:false`, badge "explanation" (a screen is not a derivation).
-- `workingEvidence()`: only `authorized` + replayed + certificates is method-verified; `unsupported` is neither verified nor wrong; restatement-only working is unsupported.
+- `workingEvidence()`: method-verified only for `authorized` + replayed + certificates + at least one certified transformation (not only `identity` / `solve-conclusion`); `unsupported` is neither verified nor wrong; restatement-only working is unsupported (09-CORPUS-REVIEW.md).
+- Guided vs independent: the renderer's progress pill and feedback detail come from the engine's activity (`guided` -> "Getting some help" / "Guided practice: help was available, so this is practice, not an independent check"; check/other -> "Try it yourself" / "On your own"). Independence for evidence is decided by the evidence engine (first, unaided attempt), never by the renderer.
+- Durable state lives only in Django `PupilEvent` (attempt / teach records; attempts carry the server's `grading-decision@1`) and the decision log. Evidence, hypotheses, investigation, teaching choice and the retention schedule are derived from those records at read time; nothing in the slice's memory is durable (04-TRACES.md).
 - Hypotheses are read for investigation / teaching choice only; no code path maps a hypothesis to a grade.

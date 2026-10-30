@@ -210,7 +210,7 @@ export function LearningScreen({ spec, onEvent, learningState, experienceId }: L
           {spec.layout.panels.includes("input") && (
             <div className="lr-workspace-input">
               {spec.input.type === "multiple-choice" ? (
-                <ChoiceInput choices={spec.input.choices} disabled={spec.feedback.level === "correct"} onChange={handleInputChange} />
+                <ChoiceInput choices={spec.input.choices ?? []} disabled={spec.feedback.level === "correct"} onChange={handleInputChange} />
               ) : spec.input.type === "fraction" ? (
                 <FractionInput
                   placeholder={spec.input.placeholder}

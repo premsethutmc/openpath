@@ -1,29 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { question } from "../../../packages/learning/src/content";
-import { problemOf } from "../../../packages/learning/src/families";
-import { bugValue } from "../learning/adaptive-journey";
 import { DECIDES } from "./contracts";
-import { SliceFlow } from "./flow";
+import { runScripted } from "./scripted";
 import { RETENTION_DAYS } from "../../../packages/learning/src/evidence";
 import { gradeRequest } from "../../../packages/learning/src/server-grader";
 
 const Q = "gen:lin:2,17,11"; // Solve 2x + 17 = 39. What is x?  (answer 11; forgot-divide predicts 22)
-const BUG = new Set(["forgot-divide"]);
-const answerFor = (qid: string, taught: boolean) => String((taught ? null : bugValue(problemOf(qid), BUG)) ?? question(qid).answer);
 
-function run() {
-  const f = new SliceFlow(Q);
-  let taught = false;
-  for (let i = 0; i < 40 && f.stage !== "summary"; i++) {
-    if (f.stage === "question") f.on({ type: "answer_submitted", value: answerFor(f.frames.at(-1)!.qid!, taught), timestamp: 0 });
-    else { if (f.stage === "teaching") taught = true; f.on({ type: "skip_requested", timestamp: 0 }); }
-    if (f.session.trace.some((t) => t.component === "session.make.teach")) taught = true;
-    if (f.frames.length > 60) break;
-    if (f.session.state().evidence(f.session.competency).retention === "scheduled" && f.stage === "question" && i > 12) break;
-  }
-  return f;
-}
+const run = () => runScripted();
 
 test("slice: every step is produced by the component that owns it", () => {
   const f = run();

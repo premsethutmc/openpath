@@ -2,9 +2,10 @@
  * Integration Milestone 1 vertical slice. Every step calls the real component that owns the decision (contracts.ts); the only scripted
  * thing in a run is the learner's own input. Nothing here grades, diagnoses or selects teaching itself.
  */
-import { question } from "../../../packages/learning/src/content";
+import { moduleFor, question } from "../../../packages/learning/src/content";
 import { DAY } from "../../../packages/learning/src/evidence";
 import { moduleState, type ModuleState } from "../../../packages/learning/src/intervention";
+import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
 import { hypothesesFor, investigationTrigger } from "../../../packages/learning/src/hypotheses";
 import { withDecisions, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { gradeRequest, type GraderReply } from "../../../packages/learning/src/server-grader";
@@ -23,7 +24,8 @@ export class SliceSession {
   now: number;
   session = "s1";
   private seq = 0;
-  constructor(readonly learnerId: string, readonly competency: string, now = Date.parse("2026-11-02T09:00:00Z")) { this.now = now; }
+  /** `now` defaults to the real clock (retention due dates are then real-clock dates). */
+  constructor(readonly learnerId: string, readonly competency: string, now: number = Date.now()) { this.now = now; }
 
   private log(authority: Authority, decides: string, component: string, input: unknown, output: unknown) {
     assertOwns(authority, decides);
@@ -39,6 +41,10 @@ export class SliceSession {
     const ms = moduleState(this.competency, st.records, st.evidence(this.competency), this.now, this.session);
     this.log("adaptive-engine", ms.phase === "chapter" ? "teaching-selection" : ms.context?.startsWith("investigate") || ms.phase === "explore" ? "investigation" : ms.phase === "retention" ? "retention-policy" : "recheck", "intervention.moduleState",
       { competency: this.competency }, { phase: ms.phase, question: ms.question, strategy: ms.strategy?.id ?? null, reason: ms.reason, context: ms.context ?? null });
+    if (ms.phase === "chapter" && ms.strategy) {
+      const e = teachingEligibility(moduleFor(this.competency)!, ms.strategy);
+      this.log("adaptive-engine", "teaching-selection", "teaching-contract.teachingEligibility", { strategy: ms.strategy.id }, { checked: e.checked, eligible: e.eligible, review: e.review });
+    }
     return ms;
   }
 

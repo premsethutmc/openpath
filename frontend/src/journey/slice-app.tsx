@@ -14,7 +14,6 @@ const flow = new SliceFlow("gen:lin:2,17,11");
 
 function App() {
   const [spec, setSpec] = useState(flow.spec);
-  const learningState = flow.stage === "feedback" ? "feedback" : flow.stage === "summary" ? "completed" : "independent";
-  return <LearningScreen key={flow.frames.length + flow.stage + (spec.question.questionId)} spec={spec} learningState={learningState} experienceId="algebra" onEvent={(e) => { if (e.type === "input_changed") return; setSpec(flow.on(e)); }} />;
+  return <LearningScreen key={flow.frames.length + flow.stage + (spec.question.questionId)} spec={spec} learningState={flow.learningState} experienceId="algebra" onEvent={(e) => { if (e.type === "input_changed") return; setSpec(flow.on(e)); }} />;
 }
 createRoot(document.getElementById("root")!).render(<App />);

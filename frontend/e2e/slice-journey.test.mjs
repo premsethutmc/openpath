@@ -21,7 +21,7 @@ async function journey(name, viewport) {
   await page.goto(`http://localhost:${server.address().port}/`);
   mkdirSync(shots, { recursive: true });
   const shot = (n) => page.screenshot({ path: `${shots}/${name}-${n}.png` });
-  const seen = [];
+  const seen = []; const shots3 = {};
   const body = () => page.evaluate(() => document.body.innerText);
   await page.waitForSelector("input, button");
   await shot("1-open-question");
@@ -31,6 +31,9 @@ async function journey(name, viewport) {
     if (st === "summary") break;
     if (st === "question") {
       const qid = await page.evaluate(() => window.__slice.flow.frames.at(-1).qid);
+      const act = await page.evaluate(() => window.__slice.flow.currentActivity);
+      if (taught && act === "guided" && !shots3.g) { shots3.g = 1; await shot("5a-guided-practice"); }
+      if (taught && act === "check" && !shots3.c) { shots3.c = 1; await shot("5b-independent-check"); }
       // the learner's own input: the misconception's answer until an explanation has been shown, the right answer afterwards
       const ans = await page.evaluate(([q, t]) => { const b = window.__slice; return t ? b.answer(q) : (document.title, b.answer(q)); }, [qid, taught]);
       const wrong = !taught ? await page.evaluate((q) => String(window.__bug(q)), qid).catch(() => null) : null;

@@ -25,15 +25,22 @@ export class SliceFlow {
   private context: string | undefined;
   private revealed = 0;
   private count = 0;
-  /** the engine's last step, kept to name it in the guide */
-  constructor(readonly startQid: string, learnerId = "synthetic-slice-1") {
+  constructor(readonly startQid: string, learnerId = "synthetic-slice-1", now?: number) {
     this.qid = startQid;
-    this.session = new SliceSession(learnerId, question(startQid).competency);
+    this.session = new SliceSession(learnerId, question(startQid).competency, now);
     this.spec = questionSpec(startQid, { guide: { message: "Here is your question.", tone: "neutral" } });
     this.push();
   }
   private push() { this.frames.push({ stage: this.stage, spec: this.spec, qid: this.stage === "teaching" || this.stage === "summary" ? null : this.qid, strategyId: this.ms?.strategy?.id ?? null, ...(this.stage === "teaching" ? { revealed: this.revealed } : {}) }); }
 
+  /** what the renderer's progress pill should say: help was available (guided practice) vs on your own (a check or any other activity) */
+  get learningState(): "independent" | "guided" | "feedback" | "completed" {
+    if (this.stage === "summary") return "completed";
+    if (this.stage === "feedback") return "feedback";
+    if (this.stage === "teaching") return "guided";
+    return this.activity === "guided" ? "guided" : "independent";
+  }
+  get currentActivity() { return this.activity; }
   /** a renderer interaction event; the renderer never reports correctness, only what the learner did */
   on(e: RendererEvent): RenderSpec {
     if (e.type === "answer_submitted" && this.stage === "question") return this.answer(e.value);
@@ -43,11 +50,11 @@ export class SliceFlow {
 
   private answer(value: string) {
     const reply = this.session.submit(this.qid, value, this.activity, this.context ? { context: this.context } : {});
-    const fb = feedbackFromDecision(reply.decision as GradingDecision, reply.expected ?? undefined);
+    const fb = feedbackFromDecision(reply.decision as GradingDecision);
     this.count++;
     this.stage = "feedback";
     this.spec = {
-      ...questionSpec(this.qid, { feedback: fb, guide: { message: fb.level === "correct" ? "That matches." : fb.level === "incorrect" ? "Not this time." : "Not marked.", detail: "Press Continue to see what the learning engine chooses next.", tone: fb.level === "correct" ? "encouraging" : "thinking" } }),
+      ...questionSpec(this.qid, { feedback: fb, guide: { message: fb.level === "correct" ? "That matches." : fb.level === "incorrect" ? "Not this time." : "Not marked.", detail: (this.activity === "guided" ? "Guided practice: help was available, so this is practice, not an independent check. " : "On your own: no help was given. ") + "Press Continue to see what the learning engine chooses next.", tone: fb.level === "correct" ? "encouraging" : "thinking" } }),
       nav: { canSubmit: false, canSkip: true, skipLabel: "Continue", canGoBack: false, canRequestHint: false, canShowWorking: false },
     };
     this.push();
