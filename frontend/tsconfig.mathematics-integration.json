@@ -23,5 +23,11 @@
     "../tools/mathematics/fingerprint-portability.mts",
     "src/writing"
   ],
-  "exclude": []
+  "exclude": [
+    "../packages/learning/src/e7-finalisation.test.ts",
+    "../packages/learning/src/e7-safety-invariants.test.ts",
+    "../packages/learning/src/grading-audit.test.ts",
+    "../packages/learning/src/grading/e7-integration-gate.test.ts",
+    "../packages/learning/src/grading/process-shadow.test.ts"
+  ]
 }

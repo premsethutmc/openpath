@@ -3,13 +3,14 @@
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { assessWithPolicy } from "../assessment-policy.ts";
 import { contractFor } from "../assessment.ts";
 import { quarantinedIds } from "../question-status.ts";
 import { grade } from "./decision.ts";
 import { learnerProjection, shadowProcessRecord } from "./process-shadow.ts";
 
-const SRC = resolve(import.meta.dir, "..");
+const SRC = resolve(fileURLToPath(new URL(".", import.meta.url)), "..");
 const nat = (text: string) => ({ format: "natural" as const, text });
 
 describe("incomplete work stays distinguishable from incorrect work", () => {
