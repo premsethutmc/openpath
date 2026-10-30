@@ -37,7 +37,9 @@
     "tamil:build": "node scripts/build-tamil.mjs",
     "tamil:preview": "node scripts/preview-tamil.mjs",
     "tamil:test": "node --import tsx --test src/tamil/*.test.ts",
-    "tamil:e2e": "node --test e2e/tamil.test.mjs"
+    "tamil:e2e": "node --test e2e/tamil.test.mjs",
+    "math:build": "node scripts/build-math.mjs",
+    "math:build:standalone": "node scripts/build-math.mjs --standalone"
   },
   "dependencies": {
     "react": "^19.2.0",

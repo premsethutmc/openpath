@@ -17,6 +17,7 @@ frontend/e2e/shots/
 # English tools output
 tools/english/out/
 frontend/dist-english/
+frontend/dist-math/
 frontend/dist-english-pilot/
 frontend/dist-english-pilot-approved/
 
