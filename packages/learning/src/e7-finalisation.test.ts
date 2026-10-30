@@ -143,3 +143,35 @@ describe("stated limit values", () => {
     expect(["unsupported", "malformed"]).toContain(await limit(inv, "0", "right", "1/y → ∞ as y → 0+")); // a different variable is not read as the posed limit
   });
 });
+
+describe("review corrections: assessment-local conventions and original source spans", () => {
+  const lnx2 = { kind: "log", argument: { kind: "power", base: { kind: "variable", name: "x" }, exponent: 2 } } as Expr;
+  test("concurrent, interleaved assessments with different log conventions do not affect each other", async () => {
+    const one = (log?: "natural" | "base10") => assessMathematicalWorking({ domain: "symbolic", start: lnx2 } as never, nat("2log(x)"), log ? { conventions: { log } } : {}).then((r) => r.classification);
+    const solo = { natural: await one("natural"), base10: await one("base10"), none: await one() };
+    expect(solo.natural).toBe("missing-assumption"); expect(solo.base10).not.toBe(solo.natural); expect(solo.none).toBe("ambiguous");
+    const order = Array.from({ length: 36 }, (_, i) => (["natural", "base10", undefined] as const)[i % 3]);
+    const got = await Promise.all(order.map((log) => one(log)));
+    order.forEach((log, i) => expect([i, got[i]]).toEqual([i, solo[log ?? "none"]]));
+    // answer-first and the policy layer interleaved with them
+    const mixed = await Promise.all(order.map(async (log, i) => i % 2 ? one(log) : (await assessWithPolicy({ domain: "algebra", statement: "x^2 = 9" }, nat("x = 3 or x = -3"), { mode: "answer-only", ...(log ? { conventions: { log } } : {}) })).grade.credit));
+    order.forEach((log, i) => expect(mixed[i]).toBe(i % 2 ? solo[log ?? "none"] : "full"));
+  });
+  test("the parser keeps no convention between calls; the convention never leaks into a later parse", () => {
+    expect(parse("log(x)", { log: "base10" }).classification).toBe("parsed");
+    expect(parse("log(x)").classification).toBe("ambiguous");
+    const r = parse("x = 1\nlog(100) = 2", { log: "base10" }); expect(r.lines[1].source).toEqual({ line: 2, start: 0, end: 12, text: "log(100) = 2" }); // the student's spelling is kept
+  });
+  test("inline equivalences keep the student's line number and columns", async () => {
+    const row = "x^2 = 9 <=> x = 3 or x = -3", r = parse(row);
+    expect(r.lines.map((l) => l.source.line)).toEqual([1, 1]);
+    for (const l of r.lines) expect(row.slice(l.source.start, l.source.end)).toBe(l.source.text);
+    expect(r.lines[1].connective).toBe("equivalent"); expect(r.lines[1].source.start).toBe(row.indexOf("x = 3"));
+    const env = await assessMathematicalWorking({ domain: "algebra", statement: "x^2 = 9" } as never, nat(row), {});
+    expect(env.classification).toBe("verified"); expect(env.steps.map((s) => s.source?.line)).toEqual([1, 1]);
+    const bad = await assessMathematicalWorking({ domain: "algebra", statement: "x^2 = 9" } as never, nat("x^2 = 9\nx^2 = 9 ⇔ x = 3"), {});
+    expect(bad.classification).toBe("invalid"); expect(bad.steps[bad.firstInvalidStep!].source).toMatchObject({ line: 2, start: 10 });
+    const a: any = assessAnswerFirst({ domain: "algebra", statement: "x^2 = 9" }, nat("x^2 = 9 ⇔ x = 3"), { diagnose: "always" });
+    expect(a.diagnosis.transitions.map((t: any) => [t.status, t.to])).toEqual([["equivalent", "x^2 = 9"], ["invalid", "x = 3"]]);
+  });
+});
