@@ -2,6 +2,7 @@
  * Mathematics home and the first JEE Main chapter, for a phone, top to bottom: one thing per screen, large cards,
  * no drop-downs. Same OpenPath account and learner as English; progress is saved to the account after every step.
  */
+import { setGradingMode } from "../../../../packages/learning/src/grading/mode";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../../english/logic/account";
@@ -43,8 +44,9 @@ class Repo {
     this.learner = learner;
   }
   async load() {
-    const r = await api.request<{ count: number; events: MathEvent[] }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
+    const r = await api.request<{ count: number; events: MathEvent[]; gradingMode?: string }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
     this.count = r.count;
+    setGradingMode(r.gradingMode); // the server says which grading is authoritative; the engines show that one
     return r.events;
   }
   append(event: MathEvent) {

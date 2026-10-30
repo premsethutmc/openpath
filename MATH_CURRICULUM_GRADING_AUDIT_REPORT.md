@@ -1,135 +1,179 @@
-# Curriculum-Wide Grading Reliability Audit
+# OpenPath — Curriculum-Wide Grading Audit (Phase A)
 
-Branch `feat/math-generalization-core-e7`, baseline `46ce4b9`. Nothing merged or deployed. No new solver, parser or engine was written.
-Data: `tools/mathematics/grading-audit/data/grading-audit-families.json` (all 1,080 families, every field in section 13 of the brief), `regression-corpus.json`, `server-parity-corpus.json`. Runner, oracle and tools: `tools/mathematics/grading-audit/`.
+Branch `feat/unified-grading`, stacked on `feat/math-generalization-core-e7` @ `46ce4b9` (the only branch that has the assessment
+contract, `grade.ts`, the trusted Node grader and the Django wrapper; `main` @ `b578c78` has none of them). **No production
+grading code was changed.** Nothing is merged or deployed.
 
-## 1. Result in one paragraph
+Machine-readable results: `tools/mathematics/grading-audit/data/` — `inventory.json` (the 15 facts for each of the 1,080 families),
+`question-policies.json` (the policy of every released presentation), `results/summary.json`, `results/per-family.json`,
+`results/findings.jsonl.gz` (every non-OK case), `results-grader-off/` (the fallback measurement), `parity.json`, `baseline.json`,
+`django-test-results.txt`. Harness and method: `tools/mathematics/grading-audit/README.md`.
 
-Across 1,080 families (341,483 released questions), 31,400 generated questions and 468,969 submissions, the application's assessment entry point made **0 false acceptances, 0 false rejections and 0 incorrect unresolved decisions** against an independent oracle, and the server-side routes agreed with the client on all 468,969 submissions after two shared fixes. This is a sample result, not proof (section 9). The measurement also exposed two real defects, both fixed, and several policy and evidence limits that matter more than the zero-error headline: 87.6 % of released questions (301,853, 987 families) are graded by comparison with the generator's stored answer, which this audit could not verify independently.
+## 1. Headline
 
-## 2. How grading actually works (traced, section 1 of the brief)
-
-| Stage | Route |
+| | Result |
 |---|---|
-| Generation | `Problem{params, prompt, answer, type, options?, figure?}`; the released pool is the typed form of each question, `:mc` (choice) and `:w` (word) are presentations of the same parameters; the stored answer is also in `content/learning/generated.v1.json` (855,926 entries incl. presentations) |
-| Contract | optional generator-owned `contract` (94 families, previous task); otherwise none |
-| Client | `decide()` in `grade.ts`: kernel verdict when the contract is `verified`, else stored-answer comparison labelled `legacy`; unreadable = undecided, never wrong |
-| Server | `learning._authoritative`: trusted Node grader (`grader.mjs`) for verified questions, otherwise Python stored-answer comparison (`_answer_ok` + `right`), labelled `legacy`; client flags ignored |
-| Mastery | `records.ts`: an "unresolved" claim counts only if the deterministic decision itself is undecided; at most `UNRESOLVED_CAP = 2` per problem sit outside the attempts |
-| Written | 376 written tasks, educator-marked, never automatic |
+| Released families / questions (recomputed) | **1,080 / 341,483** typed — identical to the brief; plus 284,170 `:mc` and 230,273 `:w` presentations: **855,926 gradable presentations** |
+| Every presentation assigned its current policy | yes — kernel-exact 52,287 · kernel-typed 44,158 · legacy-canonical 743,591 · legacy-sampled 14,939 · **held 951** · educator 0 |
+| App ↔ server stored-answer parity | 855,926 compared, **0 mismatches** |
+| Families audited with the independent oracle | **1,080 of 1,080**; 18,741 questions; 308,568 graded cases; 0 cases the oracle could not decide |
+| False acceptances (wrong or malformed answer credited) | **259 cases, 186 questions, 20 families** — identical on app and server; **195 of them through the kernel readers on verified questions** (D02) |
+| False rejections (equal answer marked incorrect) | **6 cases, 4 questions, 1 family** (`amrop`), both routes |
+| Equal answer in an unstated form marked incorrect | app 15 · **server 366** (31 families) |
+| Stated form not enforced (e.g. "simplest form", "interval notation") | 238 cases, 17 families |
+| Ambiguous text credited (`1/2x` read as x/2) | 77 cases, 18 families |
+| Invalid input recorded as **incorrect** (should be unresolved) | app 2,785 (217 families) · server 3,103 (241 families) |
+| Equal answer left unresolved (safe, missed credit) | app 294 · server 279 |
+| App and server give different verdicts on the same submission | **1,884 cases, 1,058 questions, 131 families** |
+| Held (quarantined) questions served | **951** `:w` presentations (adexp, aiintx, auaps) |
+| Django integration tests | **executed for the first time: 273 run, 266 pass, 4 fail, 3 expected failures** (new defect fixtures) |
+| Learning package tests | 1,293 pass, 0 fail (+25 new regression fixtures: 9 controls pass, 16 open defects recorded as `test.failing`) |
 
-Kernel vs legacy by family: 81 families fully kernel-verified in the sample, 12 mixed, **987 legacy**. By submissions: 41,961 kernel, 427,008 legacy. Authored (non-generated) question banks are outside the 1,080-family inventory and were not audited here.
+These are counts on a **stratified sample** (≤12 typed, ≤4 `:mc`, ≤3 `:w` per family), not a proof over all 855,926
+presentations. Outcome classes are never added together.
 
-## 3. Method and oracle independence
+## 2. What was inspected first
 
-- `oracle.ts` imports nothing from the graders. The expected outcome of each submission comes from the stored answer (generator-derived) plus explicit type-level rules: reformatting rules (spacing, minus sign, `.0`, terminating decimal, set order, `+ C`, reverse term order of a sum, `a√m = √(a²m)`, `≤` as `<=`); wrong answers that change one value to a different one; hedges; malformed input; division by zero; optional working.
-- Sampling is deterministic, no seeds: 20 questions per family at indices `floor(i × released / 20)`, plus the `:mc` and `:w` forms of the first 6. Every failure record carries the question id (parameters) and response.
-- Every question gets: correct, justified equivalents, wrong, unreadable, domain (`1/0`), ambiguous (hedge), and working-ignored (correct answer with false working; wrong answer with locally valid working). Tests that do not apply are recorded per family (`notApplicable`), not counted.
-- The runner is resumable (one JSON per family, progress log), bounded per family (60 s; none timed out), whole curriculum in about 8 minutes.
-- Tests that turned out to be wrong in my own oracle (a repeated element of a set is the same set; "abc" is a readable product in algebra types; double "+ C"; a decimal broken by a root rewrite) were corrected before counting; none is reported as a grader defect.
-- Independent cross-checks that need no grader: stored-answer parity between TS and the server table for all 341,483 questions (0 mismatches); the server's own route reads and credits the stored answer of all 855,926 entries (0 failures); MC key = typed answer for all 284,170 choice forms and word-form answer = typed answer for all 230,273 word forms (0 mismatches).
+- 47 open PRs. Grading-relevant: #81 (math core, draft), #79/#80 (R1/R2), #78 (engine audit), #72 (TN5 bank), #68/#67 (verified
+  teaching). The newest work is on unmerged branches; `feat/math-generalization-core-e7` (2026-10-28 15:35Z) is the head.
+- Existing audits, reused and not duplicated: `MATH_COVERAGE_AUDIT_REPORT.md` (kernel *coverage* of 1,080 families, `inv-final.json`),
+  `MATH_GENERATOR_CONTRACT_COVERAGE_REPORT.md`, `MATH_TYPED_KERNEL_INTEGRATION_REPORT.md`. None measured grading *reliability*
+  against an independent oracle, and none ran Django. This audit does both and reuses their family enumeration (`FAMILIES`, `pool`).
+- Baseline recomputed (`baseline.ts`): 1,080 families, 341,483 questions, 94 contract families (39 value, 4 var, 3 set, 48 typed),
+  38,028 verified / 303,455 legacy / 0 held typed questions — the brief's figures are current. 1,078 families are used by a module;
+  2 families (228 questions) are not referenced by any module.
 
-## 4. Findings
+## 3. Method
 
-### Defects found and fixed (shared, not per family)
+**Routes measured, for every candidate answer:**
+1. *Client* — `grade.ts decide()` (what the learner sees and what the app records).
+2. *Server* — the real Django code path: `_answer_ok` → `_authoritative` → `credited`, with the real integrity-checked Node bundle
+   (`grader.mjs`) called in batches through `kernel_grader.run` and accepted only through its own reply check. This is the value
+   mastery uses.
+3. *Server, grader unavailable* — the same with `OPENPATH_GRADER=off`.
 
-| ID | Cause | Effect | Scope | Fix |
+**Independent oracle** (`oracle/`, Python + SymPy 1.14, shares no code with the production readers). From each stored answer it builds
+candidates (spacing, ASCII spellings, reorderings, unreduced/decimal/mixed forms, ±1 and sign perturbations, reciprocal, missing or
+extra elements, closure flips, transposes, the generator's own predicted misconception answers, malformed text, split digits,
+ambiguous juxtaposition, correct answer with wrong working, wrong answer with plausible working). The **label comes from the oracle's
+own mathematics**, not from how a candidate was built: exact simplification plus 40-digit evaluation at fixed rational points;
+antiderivatives compared by derivative; intervals as real subsets; sets/roots as (multi)sets. Prompt form requirements
+(`simplest form`, `interval notation`, `mixed number`, `expand`, …) decide whether an equal answer in another form must be credited.
+The oracle's own reader was corrected four times during the audit after its labels were checked against production
+disagreements (e.g. `xlogx`, `sec x tan x`, decimals read exactly, mixed numbers inside tuples); 68 hand-derived fixtures
+(`oracle/test_oracle.py`) pin it.
+
+**Premise not tested here:** the oracle judges against the *stored* answer. The stored answer itself is independently verified only
+for the 38,028 typed questions with a verified generator contract; for the other 303,455 typed questions (and their `:mc`/`:w`
+forms) the generator remains the sole authority on the answer key.
+
+**Not covered:** the 221 authored questions in `content/learning` (graded through `decide` with an authored legacy contract) and the
+140 program questions graded by `packages/mathematics` `scoreCode` — a separate grading route (§6, D14).
+
+## 4. Measured reliability (sample of 18,741 questions, 308,568 cases)
+
+Oracle truth: equivalent 53,246 · form-variant 33,077 · wrong 112,499 · malformed 109,124 · approximation 545 · ambiguous 77 · unverified 0.
+
+| Outcome | Client cases | Server cases | Server families |
+|---|---|---|---|
+| OK | 293,229 | 292,859 | — |
+| FALSE_ACCEPTANCE | 259 | 259 | 20 |
+| FALSE_REJECTION | 6 | 6 | 1 |
+| FORM_VIOLATION_ACCEPTED | 238 | 238 | 17 |
+| FORM_POLICY_REJECTION (equal, unstated form, marked incorrect) | 15 | 366 | 31 |
+| AMBIGUITY_CREDITED | 77 | 77 | 18 |
+| INVALID_MARKED_INCORRECT | 2,785 | 3,103 | 241 |
+| UNRESOLVED_ON_CORRECT | 294 | 279 | 32 |
+| UNRESOLVED_ON_FORM | 11,665 | 11,328 | 1,064 |
+| request refused (option text > 80 chars) | — | 53 | 7 |
+
+By route, wrong answers (incl. misconception predictions) were credited 29 times, all of them split-digit or ill-formed radicals
+(`√2 2` for √22); every other credit of a non-equal answer was malformed text. **No readable, mathematically different answer
+was credited on either route.** 1,059 of 1,080 families had no false acceptance and no false rejection on either route; 715
+families (578,341 presentations) had no finding of any class.
+
+## 5. Fallback behaviour (`OPENPATH_GRADER=off`)
+
+With the trusted grader unavailable the server falls back to the Python stored-answer mirror for every question. On the same cases:
+false rejections 6 → 6 (no new false rejection), false acceptances 259 → 64 (the kernel readers' leniency disappears), equal answers
+unresolved 279 → 105, invalid marked incorrect 3,103 → 3,202, client/server disagreements 1,884 → 3,481. The fallback did not turn
+a sampled equal answer into "incorrect", but it is **not certified** for any contract: it is a different policy (canonical
+comparison) silently substituted, labelled `legacy`, and it changes 1,597 more verdicts relative to the app.
+
+## 6. Defect register (by root cause)
+
+Severity: **S1** credits an answer that is not correct · **S2** marks a correct answer wrong or disagrees with the app on credit ·
+**S3** invalid input treated as a wrong answer, or a missed credit · **P** policy decision needed.
+Fixtures: `packages/learning/src/grading-audit-regressions.test.ts` (TS) and `backend/family/test_grading_regressions.py` (server).
+
+| ID | Root cause (layer) | Evidence | Sev | Fixture |
 |---|---|---|---|---|
-| G1 | The contract's number guard compares the statement with the prompt; a word form (`:w`) rewords the prompt, so a derived number (the 20 of `1000 + 100 + 20 + 4`) is legitimately not printed and the question came out **held**. A held question leaves every answer, even a correct one, undecided. | correct answer never credited on word forms | 951 word-form questions, 3 families: adexp 360, aiintx 194, auaps 397 (my contracts; adexp was a baseline contract) | in `contractOfProblem`: a word form whose only problem is the number guard keeps the legacy comparison of its stored answer (identical to the typed form's, audited) instead of being held. The verifier is not loosened for any typed or choice question. |
-| G2 | Server accepted at most 9 whole digits and 6 decimals; the client accepts any length | the server left valid decimals undecided where the client credited them, e.g. `0.36328125` for 93/256 | 9 submissions, 8 families (asbinom, ajneg, atcosr, atpdfp, avdraw, aobinapp…) in the sample; any dyadic fraction beyond 2⁶ is affected | server `NUMBER`/`RATIONAL`/`MIXED` widened to 30 digits, bounded, same canonical compare |
+| D01 | **Invalid input is decided as incorrect** instead of unresolved, and the app's and server's readers disagree on what is readable (typed parsing / backend–client consistency). App: letters for a number (1,378 server cases), `1/0` in expressions (855), an option letter that does not exist on a 2–3 option question (772). Server additionally: `_answer_ok` accepts `1/0` in a set and `right()` returns False (318 cases; repeated elements likewise, counted under D07); Python limits numbers to 9 digits / 6 decimals where TS has no limit (848 cases). | 2,785 / 3,103 cases; 1,664 of the 1,884 disagreements | S3 (S2 where the app shows Correct and the server leaves it unresolved: 6) | D01 ×2 TS, ×2 Python |
+| D02 | **Kernel answer readers credit malformed text** (typed parsing). `m2Exact`/`radical` in `typed-contract.ts` split on `+`/`−` and silently drop a trailing operator (`177147 +`), and delete every space before reading, so `17714 7` is 177147 and `√2 2` is √22. Families: aksqf, aogp, aogpinf, aogpsum, apn, asdist3, atmag, atval, auaps, root, surd. | 195 cases, 11 families — *on the routes labelled verified* | **S1** | D02 ×2 |
+| D03 | **Legacy interval reader accepts brackets closed at ±∞** (`[−∞, 1)`, `(19, ∞]`) (normalisation). | 64 cases, 9 families | S1 | D03 ×2 |
+| D04 | **Legacy exact reader rejects `29sqrt(2)`** (a coefficient written against `sqrt(…)`) (normalisation). | 6 cases, `amrop` | S2 | D04 ×2 |
+| D05 | Equal answers left unresolved: kernel readers refuse `+5` and `sqrt(22)`; legacy reads neither `oo` for ∞ nor `tan^-1` (normalisation). | 294 / 279 cases | S3 | D05 ×3 |
+| D06 | **B1 reader deletes the space of a mixed number** (`40 1/2` → `401/2`) so the server marks an equal answer incorrect on a verified question; the app shows "being double-checked". | 62 server cases, 7 families (akmed, anumean, anwmean, aogpinf, atrvmean, atrvvar, atvar) | S2 | D06, D10 |
+| D07 | **Form requirements are not part of any contract** (generator contract). Stated forms are not enforced (238: interval answers accepted as inequalities, `8/2` accepted for "simplest form", `(x − 5)²` for "expand"), while unstated forms are refused (repeated set elements on the server, `6/4` for an improper fraction). | 238 + 366 | P | — |
+| D08 | **Ambiguous juxtaposition credited**: `−1/8x` read as −x/8 without asking (parsing policy). | 77 cases, 18 families | P | D08 |
+| D09 | **Held questions are served**: the contract guard compares the typed object's numbers with the `:w` prompt ("9 boxes of 1000 pins" has no 9000), marks 951 presentations `held`, and `publishable()` is never called. The app never decides them (a correct answer stays "being checked"); the server credits them by legacy comparison. | 951 presentations; 53 disagreements in sample | S2 | D09 TS + Python |
+| D10 | **App and server run different policies on verified questions**: `decide()` passes the stored-answer comparison into `assessSubmission` (falls back to it when the kernel cannot read a numeric-looking answer, and parks kernel/legacy disagreements as pending); `gradeRequest` passes `null`. | 167 disagreements (e.g. `4 21/25`: app Correct, server unresolved) | S2 | D10 ×2 |
+| D11 | **Replay recomputes instead of reading the recorded decision**: `evidence.ts` uses `creditOf(qid, response)`; the server's `credited()` re-runs `right()` for every non-kernel record. A grader change silently rewrites past mastery. Recorded assessments carry no contract version, verifier version or bundle hash, and no machine-readable reason. | code inspection | S2 | Phase D |
+| D12 | **Fallback is uncertified** (§5): on grader failure the server substitutes the Python mirror for verified contracts. | §5 | S2 | Phase D |
+| D13 | **Django tests disagree with the current invalid-input policy**: 3 tests still expect HTTP 400 for unreadable answers (`two`, `fifty`, option `Z`) after `1479472` made them "saved undecided"; 1 test expects grader-off `6/2` to be **incorrect** (it is now unresolved — which is what this brief requires). | 4 failures | P | — |
+| D14 | **Parallel grading route**: `packages/mathematics` (`unit.ts`, `chapter.ts`, `foundation/programs.ts`, `fractions-program.ts`) grades its program questions with `scoreCode`, outside `decide()`, with its own verdict semantics. | code inspection | P | — |
+| D15 | Server re-implements 17 families' generators in Python (`learning_families._mirror`) for arbitrary parameters; parity is currently exact (0 mismatches). | parity.json | risk | — |
+| D16 | **Unreadable submissions start counting as attempts** after `UNRESOLVED_CAP` (2) per problem, in the app (`records.ts readRecords`) and the server (`independent_at`); the extra ones are then replayed through `creditOf`/`credited` and count as not correct. Conflicts with approved policy P1 (2026-10-29). | code inspection; existing test `assessment.test.ts` asserts the cap | S2 | D16 TS (added in Phase B) |
 
-Both are in the permanent regression corpus (`regression-corpus.json`: 66 replays; `server-parity-corpus.json`: 9), replayed by `grading-audit.test.ts` and `family.test_server_parity`. The G1 corpus was shown to fail when the fix is disabled.
+Not defects: option text longer than 80 characters is refused by the server (the app sends letters); equal answers in an unstated
+form left unresolved (11k, e.g. `24/2` for 12, option text for a choice) are safe and are reported, not counted as errors.
 
-### Before and after
+### 6a. Defect status after Phase C (branch `feat/unified-grading`; not merged or deployed)
 
-| | Before fixes | After |
+| ID | Status | Where |
 |---|---|---|
-| Unresolved/never-credited correct answers (sample) | 40 in 2 families (G1) | 0 |
-| Client/server disagreements, 468,969 submissions | 9 (G2) | 0 |
-| Held questions in contract families, all presentations | 951 word forms | 0 of 103,037 |
-| False acceptances / rejections | 0 / 0 | 0 / 0 |
+| D01 | fixed — invalid input is unresolved on both routes (audit: 0 invalid-marked-incorrect) | stages 2, 4 |
+| D02 | fixed — strict parser (no dropped operators, no joined digits); kernels receive parsed values | stage 2 |
+| D03, D04, D05 | fixed (equal answers remaining unresolved are policy outcomes, see the certification report) | stage 2 |
+| D06 | fixed — mixed numbers parsed only where the contract permits them | stage 2 |
+| D07 | fixed — declared and stated form rules (45 families); audit: 0 stated forms not enforced | stage 3 |
+| D08 | fixed — ambiguous grouping is unresolved with a clarification (decision 2) | stage 2 |
+| D09 | contained — 951 presentations quarantined on every selector and grading route; the generator guard defect itself is open | stage 1 |
+| D10 | fixed — one decision function for app and server; audit: 0 disagreements | stage 4 |
+| D11 | fixed for every record with a server decision; historical records unchanged pending decision 3 (dry run built) | stage 7 |
+| D12 | fixed — grader failure is unresolved, regraded automatically by an appended decision | stages 6, 7 |
+| D13 | resolved — the 4 tests now assert approved policy P1 / §11 | stages 4, 6 |
+| D14 | fixed — 168 program questions decided by the unified decision on app and server; still provisional (outside the audit) | stage 9 |
+| D15 | open — the Python generator mirror remains (used to recognise question ids); retirement awaits the migration-mode decision | stage 10 |
+| D16 | fixed — no unresolved cap; per-pupil request throttle instead | stage 6 |
+| D18 (new) | contained — 20 `aqd2` presentations store `e^x(…)`, which strict syntax reads two ways; quarantined; generator fix open | stage 3 |
+| D19 (new) | fixed — the server's study summary counted unresolved answers as incorrect | stage 7 |
 
-### Policy and evidence limits (not defects, but they decide real outcomes)
+## 7. Django integration tests
 
-1. **Equal-valued but unsimplified answers are left unresolved.** `356/2` for the integer 178 or `2×` a fraction is mathematically equal; the system neither credits nor rejects it (30,317 submissions in 387 families, 119,686 released questions: 376 integer and 11 fraction families). Because only 2 undecided submissions per problem are exempt from counting, a third such submission becomes an ordinary attempt. Whether "simplest form" should be demanded is a curriculum decision; it is reported separately and never counted as an error.
-2. **Stored answers of legacy families are unverified.** 987 families (301,853 questions) pass because the response equals the generator's own answer. Correctness of those answers rests on generator tests, not on this audit. Only 38,028 questions have a kernel-verified stored answer.
-3. **Equivalence evidence is thin where no reformatting rule is justified:** 281 families (80,522 questions) were tested with surface forms only (spacing, sign glyph) — all 169 choice families, 55 `exact`, 19 `expression`, 15 `interval`, 7 `mixed`, 4 `roots`, 3 `ratio`, 7 `fraction`, 2 `tuple`. For them a false-rejection risk on equal but differently written answers is **not** measured.
-4. **Duplicate-valued choice options:** 931 choice questions in 5 families (agimp, agpfrac, ajrstd, avlow, avfas) offer an option equal in value to the key (`2/4` beside `1/2`); each prompt demands lowest terms, so they are intentional distractors, not ambiguity.
-5. Typed kernels give no step diagnosis, so "method feedback where supported" was exercised only for the algebra statement route covered by existing tests; working never changed credit anywhere (31,400 correct-with-wrong-working credited; 28,912 wrong-with-valid-working denied).
-6. A wrong but readable answer was left unresolved only for 46 non-numeric constructions (set-wrong forms in algebra types); informational, safe.
+Django could not be installed from PyPI here (blocked). `backend/vendor-deps.sh` now clones the exact pins of
+`backend/requirements.txt` from GitHub release tags (Django 5.2.18, asgiref 3.12.1, DRF 3.18.3, sqlparse 0.6.0) and the suite runs on
+SQLite. Result (`data/django-test-results.txt`): **273 run, 266 pass, 4 fail (D13), 3 expected failures (new D01/D09 fixtures)**.
+`KernelAuthorityTests` ran for the first time: 7 of 8 pass — correct/equivalent/incorrect through the real Node grader, working never
+changes credit, forged browser verdicts change nothing, unreadable is undecided, repeated submissions agree, replay uses the server's
+kernel verdict; the 8th is D13. `test_kernel_grader`: 10 of 10 pass. **Backend certification is not claimed**: the four failures and
+D09–D12 are open.
 
-## 5. Classification (per family; counts of families / released questions)
+## 8. Decisions needed before Phase B
 
-| Classification | Families | Released |
-|---|---|---|
-| Reliable in tested scope | 1,080 | 341,483 |
-| False acceptance / False rejection / Unresolved defect / Server disagreement | 0 | 0 |
-| Contract defect | 0 after G1 (3 families before) | – |
-| Insufficient evidence | 0 under the rule "≥10 questions tested and a wrong-answer test constructed" | – |
-| Not applicable | 0 families (written tasks are outside the generated inventory) | – |
+1. **Invalid input** (D01, D13): record as `unresolved` with reason `invalid-response` (current app behaviour; tests updated) — or
+   refuse the request with 400. Recommended: unresolved.
+2. **Stated form requirements** (D07): represent them in the contract; an equal answer in a forbidden form gets no credit with reason
+   `required-form` and a form hint — or credit equal values regardless of form. Recommended: enforce only what the prompt states.
+3. **Ambiguous text** (D08): ask one clarification (unresolved) instead of crediting `1/2x`. Recommended.
+4. **Held questions** (D09): withdraw the 951 `:w` presentations from release until the guard is fixed. Recommended (reversible).
 
-**"Reliable in tested scope" must be read with section 4's limits:** it means no error was found by these tests, not that the stored answers are right, and for the 281 families above the equivalence side is weakly tested. The per-family `equivalenceEvidence` and `gradingRoute` fields let a reader separate the strongly evidenced families (799 families with substantive equivalents, 93 with a kernel) from the rest.
+## 9. Readiness
 
-By answer type (families / released): integer 411 / 133,107; choice 169 / 46,878; fraction 151 / 48,168; exact 128 / 40,371; tuple 110 / 39,382; set 27 / 7,603; expression 31 / 7,494; interval 16 / 6,267; matrix 12 / 3,868; antiderivative 10 / 3,720; mixed 7 / 2,079; roots 5 / 1,396; ratio 3 / 1,150.
-
-## 6. Metrics
-
-| Metric | Value |
-|---|---|
-| Families audited / released accounted for | 1,080 / 341,483 |
-| Questions generated for testing | 31,400 (21,590 typed, 5,256 choice, 4,554 word) |
-| Submissions tested | 468,969 |
-| False acceptances / false rejections / incorrect unresolved | 0 / 0 / 0 |
-| Equivalent-answer acceptance (justified equivalents) | 65,423 / 65,423 = 100 % |
-| Policy equivalents (unsimplified) | 20,754 credited, 9,563 unresolved, 0 rejected |
-| Unreadable and malformed (143,748) | all unresolved |
-| Domain-invalid `1/0` (19,921) | all unresolved |
-| Ambiguous hedges (46,815) | none credited (613 rejected, 46,202 unresolved) |
-| Server/client disagreements | 0 of 468,969 (after G2); 9 before |
-| Server false acceptances | 0 |
-| Kernel vs legacy submissions | 41,961 kernel, 427,008 legacy; every verdict class identical in both |
-| Assessment latency (in process, 468,969 calls) | median 0.027 ms, p95 0.58 ms, p99 1.9 ms, max 77.7 ms (`aoarr`; slowest families `arxyconic` 54 ms, `arcirceq` 46 ms) |
-
-Zero errors in a sample is not proof of universal correctness: 31,400 of 341,483 questions (9.2 %) were generated, the test transformations are the ones a rule justifies, and unlisted answer forms are untested.
-
-## 7. Server authority (section 9 of the brief)
-
-Verified by tests and by the 468,969-submission comparison (real Node grader and the real Python `_answer_ok`/`right`; Django imports stubbed only so the module loads):
-- Contract rebuilt from the question id by the grader's own generator; the request carries only id, response and working. Extra forged fields (`credit`, `expected`, `contract`, `verification`) are ignored (test).
-- Malformed or missing ids (null, number, empty, path-like, injection-like, 5,000 characters, overflowing parameters, lowercase prefix, trailing newline) never produce a verdict; a batch over 500 is refused whole.
-- Correct / incorrect / undecided are distinct; the grader's expected answer must equal the server's stored answer or the kernel verdict is discarded.
-- Failure of Node (`/bin/false`, garbage stdout, timeout, missing, tampered or switched-off bundle) returns nothing and the stored-answer comparison decides; it cannot award credit the stored answer would not.
-- Mathematical decisions match the application verifier on all 41,961 kernel submissions and 427,008 legacy submissions.
-- **Per-request Node cost:** 470 ms median (427–553 ms over 8 runs; a 400-request batch costs 585 ms in total). Acceptable for a single answer submission by a learner; not acceptable under concurrent load or for bulk re-grading. A persistent worker is a later optimisation and was not built.
-- **Django: not executable here** (Django not installed, package index unreachable; not retried). The HTTP view, serializers, database and mastery persistence were therefore **not exercised end to end**; `KernelAuthorityTests` is written and unrun. The server pathway is reported as unverified at the Django level, and client tests are not presented as end-to-end proof.
-
-## 8. Regression results
-
-| Suite | Result |
-|---|---|
-| `bun test packages/learning` | **1,296 pass, 0 fail** (80 files; includes the new audit sample and corpus tests) |
-| E7 integrity gate | 678 cases, exact 236, **0 false acceptances**, 212 false rejections (unchanged; the known E7 false rejections have not disappeared), verified 86; 6 reference-not-verified rows and 1 battery mismatch (`alg-side`) unchanged |
-| Python server-wrapper tests | `family.test_kernel_grader` 11 and `family.test_server_parity` 2 |
-| Frontend suites (from `frontend/`) | dashboard 12, mapping 6, canonical 12, mathematics 26, study-time 8, grade7-board 1, engine 20, topic-session 3: all pass, 0 fail. `generalisation.test.ts` and `mathematics-completion.test.ts` (content-system scale) were not run to completion and are not claimed |
-| Browser bundle | builds; 0 `node:*` imports |
-| Django tests | not executed (blocker above) |
-| Content-system suite | not rerun (known 30-minute-plus) |
-
-## 9. What the evidence does not show
-
-- Independence of the oracle ends at the stored answer: for legacy families an incorrect stored answer would be graded as correct by both client and server and by this audit.
-- Student interface representability (can a learner type `√`, `∪`, matrices?) was not tested; only the readers were.
-- Mastery and replay were checked through existing client-side tests (`grading-pathways.test.ts`: unreadable input is undecided and never moves mastery; forged claims do not change the grade; a decidable wrong answer flagged unresolved is an attempt); the server-side replay (`credited`) is covered only by the unrun Django tests.
-- Authored question banks and educator marking were not audited.
-
-## 10. Remaining unsupported mathematical capabilities (decision left for later)
-
-Unchanged from the typed-kernel report: no final-answer route for calculus (80 families, 21,776 questions) or geometry/measure (136 families, 35,788), none for composite linear-algebra, setup-dependent probability, series and recurrence, inverse-trig composites. The audit found no grading failure in those families' legacy comparison, so no capability is justified by *failures*; the justification would be independent verification of their stored answers.
-
-## 11. Prioritised recommendations from observed failures
-
-1. Run the Django suites in an environment with Django before labelling anything server-authoritative end to end (blocks the claim, not found defects).
-2. Decide the unsimplified-answer policy for integer and fraction answers (387 families, 119,686 questions): accept as equal, reject as not-simplest, or ask once; today it is "undecided", which becomes an attempt after two tries.
-3. Add independent verification of stored answers for the largest legacy groups (integer word-or-model families, 133k released), since that is where an unnoticed generator error would be graded as correct.
-4. Add justified equivalence rules for the 281 thinly evidenced families only where a mathematical rule exists (e.g. expression identity sampling is already in the reader; extend tests, not the reader).
-5. Keep the 75 regression replays (66 client, 9 server) in CI; consider a persistent Node worker only if submit-time p95 under load matters.
+Phase A is complete for the 1,080 generated families: every family inventoried, every released presentation assigned its current
+policy, independent reliability measured on all families, defects classified with fixtures. Not certified: nothing in this report
+certifies a grading policy. Proposed Phase B (architecture specification, documentation only): one versioned contract carrying form
+rules and a capability; one verdict record (`correct | incorrect | unresolved` + reason class: invalid / ambiguous / unsupported /
+infrastructure / contract-inconsistency, contract and verifier versions, parsed interpretation); one dispatcher used identically by
+`decide()` and `gradeRequest`; replay from recorded decisions; reuse of `assessment.ts`, `typed-contract.ts`, `answer-types.ts` and the
+Node grader as adapters.

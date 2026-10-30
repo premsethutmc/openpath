@@ -74,8 +74,19 @@ def checked_activity(event, pupil):
         raise ValidationError({'event': 'Question is not part of this stage.'})
     if event['action'] in {'answer', 'draft'} and (not isinstance(event.get('response'), str) or len(event['response']) > 80):
         raise ValidationError({'event': 'Use an answer of at most 80 characters.'})
+    if event['action'] == 'answer' and not event['response'].strip():
+        raise ValidationError({'event': 'Enter an answer.'})
     kind = next((q.get('type', 'number') for q in spec['questions'] if q['id'] == event.get('questionId')), 'number')
-    if event['action'] == 'answer' and kind == 'choice':
+    from .learning import grading_mode
+    from . import decisions
+    decision = None
+    if event['action'] == 'answer' and grading_mode() != 'legacy':
+        # stage 9 (D14): the program answer is decided by the trusted grader (same parser, verifiers and form rules as every question)
+        stored = next(q['answer'] for q in spec['questions'] if q['id'] == event['questionId'])
+        decision = decisions.program_decision(event, f"program:{program_id}:{event['questionId']}", stored, timezone.now())
+    if grading_mode() == 'unified':
+        pass  # approved policy P1: an unreadable answer is kept (unresolved), never refused or marked wrong; the request-shape checks above stay
+    elif event['action'] == 'answer' and kind == 'choice':
         if event['response'].strip().upper() not in {'A', 'B', 'C', 'D'}:
             raise ValidationError({'event': 'Choose one of A, B, C or D.'})
     elif event['action'] == 'answer' and kind == 'integer':
@@ -117,13 +128,16 @@ def checked_activity(event, pupil):
         if any((s['id'] not in done for s in spec['stages'][:index])):
             raise ValidationError({'event': 'Finish the earlier fixed activities first.'})
         # a timed section may end with questions left unanswered (they score 0); every other stage needs each attempted
-        if stage.get('kind') != 'timed' and any((not any((e.get('action') == 'answer' and e.get('questionId') == q for e in own)) for q in stage['questions'])):
+        if stage.get('kind') != 'timed' and any((not any((e.get('action') == 'answer' and e.get('questionId') == q and decisions.verdict_of(e) != 'unresolved' for e in own)) for q in stage['questions'])):
             raise ValidationError({'event': 'Attempt each question before finishing the activity.'})
         if stage['id'] == retention_stage:
             due = next((e.get('retentionDueAt') for e in own if e.get('retentionDueAt')), None)
             if not due or now < timezone.datetime.fromisoformat(due):
                 raise ValidationError({'event': 'The delayed retention check is not due yet.'})
     saved = {**event, 'at': now.isoformat(), 'savedAt': now.isoformat()}
+    if decision is not None:
+        # unified: the authoritative decision; shadow: kept beside the earlier (client-only) marking for the comparison report
+        saved['decision' if grading_mode() == 'unified' else 'shadowDecision'] = decision if grading_mode() == 'unified' else {**decision, 'decidedBy': 'shadow'}
     if event['action'] == 'complete' and stage['id'] == rule['retentionAfter']:
         previous = next((e.get('retentionDueAt') for e in own if e.get('retentionDueAt')), None)
         saved['retentionDueAt'] = previous or (now + timedelta(days=spec['retentionDelayDays'])).isoformat()

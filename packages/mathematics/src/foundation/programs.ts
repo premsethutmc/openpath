@@ -4,6 +4,7 @@ import {
   type MathActivity,
 } from "../fractions-program";
 import { indexContent, scoreCode } from "../../../english-core/src/content";
+import { programDecision } from "../program-grading";
 import type { Item, EvidenceEvent } from "../../../english-core/src/types";
 import { parseNumber, show } from "../answers";
 import { sharedProfile } from "../canonical";
@@ -54,7 +55,7 @@ const fresh = (): Progress => ({
 });
 export const key = (programId: string, journey: string) =>
   `${programId}:${journey}`;
-const numeric = (raw: string) => `math-number:${show(parseNumber(raw))}`;
+const numeric = (raw: string) => { try { return `math-number:${show(parseNumber(raw))}`; } catch { return `math-unread:${raw}`; } };
 export function itemFor(p: Program, q: Question): Item & { kind: "code" } {
   return {
     kind: "code",
@@ -72,13 +73,17 @@ export function itemFor(p: Program, q: Question): Item & { kind: "code" } {
     explain: q.solution,
   };
 }
-export function evaluate(p: Program, q: Question, response: string) {
+/** stage 9 (D14): THE grading decision (the server's recorded one when the event carries it); an unreadable answer is unresolved, never wrong */
+export function evaluate(p: Program, q: Question, response: string, recorded?: unknown) {
+  // the earlier marking (shadow / legacy mode): unreadable -> not decided (the earlier route refused it), otherwise scoreCode
+  const earlier = () => { try { parseNumber(response); } catch { return null; } return scoreCode(itemFor(p, q), { kind: "typed", text: numeric(response) }).correct; };
+  const d = programDecision(`foundation:${p.id}:${q.id}`, response, recorded, earlier);
+  if (d.verdict === "unresolved")
+    return { correct: false, unresolved: true, message: "Enter a number or fraction with a nonzero denominator. Your answer has not been marked wrong." };
   try {
-    const correct = scoreCode(itemFor(p, q), {
-      kind: "typed",
-      text: numeric(response),
-    }).correct;
+    const correct = d.verdict === "correct";
     return {
+      unresolved: false,
       correct,
       message: correct
         ? "That matches this practice example. " + q.solution
@@ -87,10 +92,7 @@ export function evaluate(p: Program, q: Question, response: string) {
           : "Let’s try the model again. " + q.hint,
     };
   } catch {
-    return {
-      correct: false,
-      message: "Enter a number or fraction with a nonzero denominator.",
-    };
+    return { correct: false, unresolved: true, message: "Enter a number or fraction with a nonzero denominator. Your answer has not been marked wrong." };
   }
 }
 /** UI support is an observation about this fixed practice, never a competency inference or mastery decision. */
@@ -173,6 +175,8 @@ export function replayFoundation(
         !p.stages.find((x) => x.id === e.stage)!.questions.includes(q.id)
       )
         throw Error("Question outside stage");
+      const verdict = evaluate(p, q, e.response ?? "", (e as { decision?: unknown }).decision);
+      if (verdict.unresolved) continue; // not an answer (P1): nothing recorded, no evidence
       const item = itemFor(p, q),
         prior = ledger.exposures.get(item.id)?.count ?? 0;
       const native: EvidenceEvent = {
@@ -181,12 +185,13 @@ export function replayFoundation(
         at: e.at,
         session: e.sessionId,
         item: { id: item.id, version: 1 },
-        response: { kind: "typed", text: numeric(e.response ?? "") },
+        // the evidence ledger reads its own answer list: a credited answer is given to it in the stored form, so it agrees with the decision
+        response: { kind: "typed", text: numeric(verdict.correct ? q.answer : e.response ?? "") },
         use: e.stage === "retention" ? "retention" : "practice",
       };
       ledger.apply(native);
       s.answers[q.id] = {
-        correct: evaluate(p, q, e.response ?? "").correct,
+        correct: verdict.correct,
         response: e.response ?? "",
         assisted: s.hints.includes(q.id) || prior > 0,
       };

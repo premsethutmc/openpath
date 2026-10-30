@@ -26,6 +26,7 @@
  */
 import spec from "../../../content/mathematics/programs/completing-the-square.v1.json";
 import { indexContent, scoreCode } from "../../english-core/src/content";
+import { programDecision } from "./program-grading";
 import type { AssistedResponseEvent, EvidenceEvent, EvidenceUse, HintEvent, Item } from "../../english-core/src/types";
 import { canonicalInteger, joinParts } from "../../learning/src/answer-core";
 import { sharedProfile } from "./canonical";
@@ -343,14 +344,20 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
     }
     if (ev.action === "answer" && known && state.answers[qid]) {
       const text = normalise(question(qid), ev.response ?? "");
-      if (text !== null) state.attempts.push({ questionId: qid, response: text, correct: text === normalise(question(qid), question(qid).answer), at: ev.at });
+      const d = text === null ? null : programDecision(`program:${spec.id}:${qid}`, ev.response ?? "", (ev as { decision?: unknown }).decision, () => text === normalise(question(qid), question(qid).answer));
+      if (text !== null && d && d.verdict !== "unresolved") state.attempts.push({ questionId: qid, response: text, correct: d.verdict === "correct", at: ev.at });
     }
     if (ev.action === "answer" && known && !state.answers[qid]) {
       const q = question(qid);
       const text = normalise(q, ev.response ?? "");
       if (text === null) continue;
+      // stage 9 (D14): THE grading decision; an unresolved answer is not an answer (P1) and changes nothing
+      const decision = programDecision(`program:${spec.id}:${qid}`, ev.response ?? "", (ev as { decision?: unknown }).decision, () => scoreCode(nativeItem(q), { kind: "typed", text: `${q.type}:${text}` }).correct);
+      if (decision.verdict === "unresolved") continue;
+      const correct = decision.verdict === "correct";
       const item = nativeItem(q);
-      const response = { kind: "typed" as const, text: `${q.type}:${text}` };
+      // the evidence ledger reads its own answer list: a credited answer is given to it in the stored form, so it agrees with the decision
+      const response = { kind: "typed" as const, text: `${q.type}:${correct ? normalise(q, q.answer) ?? text : text}` };
       // help-branch questions: the guided one is assisted (as the planner says); checks and probes are independent
       const use = remedial ? ("role" in remedial && remedial.role === "guided" ? null : "assessment") : USE[stage.phase];
       const assisted = use === null || !!hintIds[qid]?.length;
@@ -372,7 +379,7 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
         };
         ledger.apply(evidence);
       }
-      state.answers[qid] = { response: text, correct: scoreCode(item, response).correct, assisted, at: ev.at, stage: stage.id };
+      state.answers[qid] = { response: text, correct, assisted, at: ev.at, stage: stage.id };
       state.attempts.push({ questionId: qid, response: text, correct: state.answers[qid].correct, at: ev.at });
     }
     if (ev.action === "complete" && canComplete(state, stage.id, Date.parse(ev.at)) && !state.completed.includes(stage.id)) {

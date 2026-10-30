@@ -106,12 +106,18 @@ REST_FRAMEWORK = {
         "account-password": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
         "developer-claim": "10/hour",
         "telemetry": "240/hour",
+        "pupil-events": os.environ.get("OPENPATH_EVENT_RATE", "600/hour"),
     },
     # Rate limits are keyed on the client address. Behind N trusted proxies, set OPENPATH_NUM_PROXIES=N so the
     # address is read from the right place in X-Forwarded-For; 0 ignores that (client-controlled) header entirely.
     "NUM_PROXIES": int(os.environ.get("OPENPATH_NUM_PROXIES", "0")),
     "UNAUTHENTICATED_USER": None,
 }
+
+# Grading authority during migration (UNIFIED_GRADING_ARCHITECTURE.md §13): "shadow" (default: the earlier policy decides and the unified
+# decision is recorded beside it), "unified" (grading-policy@1 decides) or "legacy". Switching to "unified" is an approved release step.
+OPENPATH_GRADING = os.environ.get("OPENPATH_GRADING", "shadow")
+TEST_RUNNER = "config.test_runner.OpenPathTestRunner"
 
 OPENPATH_CURRICULUM = REPO_DIR / "shared" / "curriculum" / "math-early-number.json"
 OPENPATH_TRUST_CLIENT_CLOCK = os.environ.get("OPENPATH_TRUST_CLIENT_CLOCK", "1" if DEBUG else "0") == "1"

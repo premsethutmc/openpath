@@ -14,8 +14,12 @@ from pathlib import Path
 from django.conf import settings
 from django.utils import timezone
 from rest_framework.exceptions import ValidationError
-from .answer_types import HUMAN, NEW_TYPES, SAMPLED, canonical_of, expanded_form, parse as parse_expression, same_answer
-from .kernel_grader import kernel_decision
+from .answer_types import HUMAN, NEW_TYPES
+# retired comparison (stage 10): only the migration modes and historical replay use it
+from .legacy_grading import MIXED, NUMBER, RATIONAL, _answer_ok, _rational, _unbrace, canonical, right  # noqa: F401
+from . import decisions
+from .kernel_grader import enabled as grader_enabled, kernel_decision
+from .question_status import quarantined
 from .learning_families import exposure, generated
 from .models import PupilEvent
 
@@ -39,20 +43,10 @@ WRITTEN_LIMIT = 16000  # a written answer, or a drawing with its note (draw@1; f
 RETENTION_DELAY = timedelta(days=7)
 INDEPENDENT_MIN = 2
 INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
-NUMBER = r'[+-]?\d{1,30}(?:\.\d{0,30})?'  # a whole number may be typed with a zero decimal part (the app's canonical)
-RATIONAL = r'[+-]?\d{1,30}(?:\.\d{1,30})?(?:/[+-]?\d{1,30})?'
-# mixed@1: a mixed number "3 1/2" is 3 + 1/2 ("-3 1/2" is -(3 + 1/2)), never 31/2 (packages/mathematics answers.ts)
-MIXED = r'([+-]?)(\d{1,30})\s+(\d{1,30})/(\d{1,30})'
 
 
-def _rational(t):
-    m = re.fullmatch(MIXED, t, flags=re.ASCII)
-    if m:
-        v = int(m.group(2)) + Fraction(int(m.group(3)), int(m.group(4)))
-        return -v if m.group(1) == '-' else v
-    if ' ' in t:
-        raise ValueError('not a number')
-    return Fraction(t)
+
+
 
 
 def _load(name):
@@ -115,51 +109,18 @@ def server_now(pupil):
     return now
 
 
-def _unbrace(t):
-    """An unordered set may be written with its braces: {1, 2} is 1, 2 (the app's canonical)."""
-    m = re.fullmatch(r'\{([^{}]*)\}', t)
-    return m.group(1) if m else t
 
 
-def canonical(kind, raw):
-    """The answer's canonical form (the app's `canonical`), or None if it is not one of this kind. answers@2 types
-    (answer_types.py): exact types have a canonical form; sampled types are compared in `right`; written: none."""
-    if kind in NEW_TYPES:
-        return canonical_of(kind, raw)
-    t = str(raw).strip().replace('−', '-')
-    try:
-        if kind == 'choice':
-            return t.upper() if t.upper() in {'A', 'B', 'C', 'D'} else None
-        if kind == 'integer':
-            if not re.fullmatch(NUMBER, t, flags=re.ASCII):
-                return None
-            v = Fraction(t)
-            return str(v.numerator) if v.denominator == 1 else str(v)
-        if kind == 'fraction':
-            return str(_rational(t))
-        if kind == 'set':
-            parts = [Fraction(p.strip()) for p in _unbrace(t).split(',')]
-            return ','.join(sorted(str(p) for p in parts)) if len(set(parts)) == len(parts) else None
-    except (ValueError, ZeroDivisionError):
-        return None
-    return t
 
 
-def right(q, response):
-    if q['type'] in HUMAN:
-        return False  # an educator marks it
-    # form@1: an "expand" task's answer must be written expanded, whatever its value
-    if q.get('expanded') and not expanded_form(response):
-        return False
-    if q['type'] in SAMPLED:
-        return same_answer(q['type'], response, q['answer'])
-    c = canonical(q['type'], response)
-    return c is not None and c == canonical(q['type'], q['answer'])
 
 
-UNRESOLVED_CAP = 2  # the app's records.ts UNRESOLVED_CAP: undecided submissions per problem that sit outside the attempts
+
+
+
 ASSESSMENT_KEYS = {'policy', 'answerCorrect', 'methodExamined', 'derivationVerified', 'firstError', 'clarificationRequired', 'aiFallbackUsed', 'unresolved', 'source'}
-ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement'}
+ASSESSMENT_SOURCES = {'kernel', 'legacy', 'educator', 'held', 'disagreement', 'parser', 'verifier', 'infrastructure'}
+GRADER_SOURCES = {'kernel', 'verifier', 'parser', 'held'}  # decided by the trusted grader (grading/decision.ts): the record carries the verdict
 
 
 def _assessment_ok(a, q, response=None):
@@ -178,31 +139,73 @@ def _assessment_ok(a, q, response=None):
 
 
 def _authoritative(event, q, readable):
-    """The server's decision about one answer, and nothing the client claims. Where the trusted exact grader (kernel_grader) has verified
-    the question, its verdict decides (correct, incorrect, or undecided); everywhere else the stored answer decides (the python mirror of
-    the app's legacy comparison) and the result is labelled `legacy`, whatever the browser called it. An answer neither route can read is
-    saved and left undecided (never wrong). Written answers stay with the educator."""
+    """The server's assessment@1 for one answer (the decision's compatibility view); see _decide."""
+    return _decide(event, q)[0]
+
+
+def _decide(event, q, now=None):
+    """The server's decision about one answer, and nothing the client claims: (assessment@1 view, grading-decision@1).
+    grading-policy@1 (Phase C): the trusted grader runs THE decision (the app's own code) for every known question and its verdict is
+    recorded as is. There is no stored-answer fallback (UNIFIED_GRADING_ARCHITECTURE.md §11, D12): the grader not runnable (missing,
+    tampered, disabled, timed out, crashed) -> unresolved, source "infrastructure"; a reply refused because the grader's stored answer
+    differs from this server's (parity: a contract inconsistency) -> unresolved, source "held". A quarantined question gets no grade;
+    written answers stay with the educator. Unresolved is never incorrect, never credited, never an attempt; the answer is kept."""
     a = event.get('assessment')
+    if quarantined(event.get('questionId')):
+        # question-status@1: no authoritative grade for a quarantined question, whatever the browser sent; the answer is kept
+        base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False}
+        return ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': 'held'},
+                decisions.build(event, failure='quarantined', now=now))
     if q['type'] in HUMAN:
-        return None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'}
+        return (None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'},
+                decisions.build(event, educator=True, now=now))
     base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'clarificationRequired': False, 'firstError': None}
-    k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working')) if q.get('role') == 'generated' else None
+    k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working'))
     if k is not None:
         ok = k['credit']
-        return {**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': 'kernel'}
-    if readable:
-        if a is None:
-            return None
+        unified = ({**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': k['source']},
+                   decisions.build(event, grader=k, now=now))
+    else:
+        source = 'held' if grader_enabled() else 'infrastructure'
+        unified = ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source},
+                   decisions.build(event, failure=source, now=now))
+    mode = grading_mode()
+    if mode == 'unified':
+        return unified
+    # OPENPATH_GRADING=shadow|legacy (migration, UNIFIED_GRADING_ARCHITECTURE.md §13): the earlier policy is authoritative — the trusted
+    # grader's verdict only where the question's kernel validated its contract, the stored-answer comparison everywhere else and whenever
+    # the grader cannot run. In shadow mode the unified decision is kept beside it for comparison, never used.
+    if k is not None and k['source'] == 'kernel':
+        ok = k['credit']
+    elif _answer_ok(q['type'], event['response']):
         ok = right(q, event['response'])
-        return {**a, 'answerCorrect': ok, 'unresolved': False, 'firstError': None if ok else a['firstError'], 'source': 'legacy'}
-    return {**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': True, 'unresolved': True, 'source': 'legacy'}
+    else:
+        ok = None
+    legacy = {**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None,
+              'source': 'kernel' if k is not None and k['source'] == 'kernel' else 'legacy'}
+    d = decisions.build_legacy(event, ok, legacy['source'], now=now)
+    if mode == 'shadow':
+        d['shadow'] = {**unified[1], 'decidedBy': 'shadow'}
+    return legacy, d
+
+
+def grading_mode():
+    """OPENPATH_GRADING: 'unified' (grading-policy@1 authoritative), 'shadow' (earlier policy authoritative, unified recorded beside it) or
+    'legacy' (earlier policy only). Quarantine (question-status@1) and written-answer marking apply in every mode."""
+    m = getattr(settings, 'OPENPATH_GRADING', 'shadow')
+    return m if m in ('unified', 'shadow', 'legacy') else 'shadow'
 
 
 def credited(q, event):
-    """Whether a stored attempt earned answer credit: the server's own kernel verdict when the trusted grader decided it, otherwise the stored-answer comparison."""
-    a = event.get('assessment') or {}
-    if a.get('source') == 'kernel':
-        return a.get('answerCorrect') is True
+    """Whether a stored attempt earned answer credit, from its RECORDED verdict (UNIFIED_GRADING_ARCHITECTURE.md §9, D11): the server's
+    grading decision, else the assessment this server recorded with it. Only a record with no recorded verdict at all (saved before the
+    server recorded assessments) is compared again, with the stored-answer comparison it was graded by; the reconstruction dry run
+    reports those."""
+    if quarantined(event.get('questionId')):
+        return False
+    v = decisions.verdict_of(event)
+    if v is not None:
+        return v == 'correct'
     return right(q, event.get('response', ''))
 
 
@@ -212,7 +215,7 @@ def independent_at(prior, competency, marks=None):
     yet evidence of anything."""
     qs = content()['questions']
     marks = marks or {}
-    seen, distinct, held = {}, set(), {}
+    seen, distinct = {}, set()
     for e in prior:
         if e.get('record') == 'attempt' and (qs.get(e.get('questionId')) or {}).get('type') in HUMAN and e.get('id') not in marks:
             continue
@@ -221,10 +224,10 @@ def independent_at(prior, competency, marks=None):
             continue
         # one exposure per problem, whichever answer format (the app's families.ts exposureKey; distinct@1)
         key = exposure(e['questionId'])
-        if (e.get('assessment') or {}).get('unresolved') is True:
-            held[key] = held.get(key, 0) + 1
-            if held[key] <= UNRESOLVED_CAP:
-                continue  # undecided: not an attempt (the app's readRecords)
+        if quarantined(e['questionId']):
+            continue  # question-status@1: never an attempt, never evidence
+        if decisions.verdict_of(e) == 'unresolved':
+            continue  # undecided (set by this server, never by the browser): not an attempt, however many (approved policy P1, D16)
         n = seen[key] = seen.get(key, 0) + 1
         if q['competency'] != competency or n > 1 or e.get('hints') or e.get('solution') or e.get('activity') not in INDEPENDENT:
             continue
@@ -244,30 +247,7 @@ def _text(value, limit):
     return isinstance(value, str) and 0 < len(value) <= limit
 
 
-def _answer_ok(kind, raw):
-    t = raw.strip().replace('−', '-')
-    if kind in HUMAN:
-        return 0 < len(t) <= WRITTEN_LIMIT
-    if kind in SAMPLED:
-        try:
-            parse_expression(re.sub(r'\s*\+\s*[cCkK]\s*$', '', t) if kind == 'antiderivative' else t)
-            return True
-        except Exception:  # noqa: BLE001 - any unreadable expression
-            return False
-    if kind in NEW_TYPES:
-        return canonical_of(kind, t) is not None
-    if kind == 'choice':
-        return t.upper() in {'A', 'B', 'C', 'D'}
-    if kind == 'integer':
-        return re.fullmatch(NUMBER, t, flags=re.ASCII) is not None
-    if kind == 'fraction':
-        return (re.fullmatch(RATIONAL, t, flags=re.ASCII) is not None or re.fullmatch(MIXED, t, flags=re.ASCII) is not None) and not re.search(r'/[+-]?0+$', t)
-    if kind == 'set':
-        parts = [p.strip() for p in _unbrace(t).split(',')]
-        return 0 < len(parts) <= 30 and all(re.fullmatch(RATIONAL, p, flags=re.ASCII) for p in parts)
-    if kind == 'polynomial':
-        return re.fullmatch(r'[0-9x+\-*^() /.²³]{1,60}', t) is not None
-    return False
+
 
 
 def _check_release(release, pupil_prior):
@@ -333,7 +313,7 @@ def checked_learning(event, pupil):
         _reject('A learning record needs an id.')
     if not isinstance(event.get('sessionId'), str) or not event['sessionId'].startswith(f'learn:{pupil.pk}:') or len(event['sessionId']) > 160:
         _reject('A learning visit must belong to this learner.')
-    prior = [e for e in PupilEvent.objects.filter(pupil=pupil, subject='mathematics', kind='learning_record').values_list('body', flat=True)]
+    prior = decisions.effective(pupil, PupilEvent.objects.filter(pupil=pupil, subject='mathematics', kind='learning_record').order_by('seq').values_list('body', flat=True))
     if any(e.get('id') == event['id'] for e in prior):
         _reject('This activity ID already exists. Reload to confirm a retry.')
     now = server_now(pupil)
@@ -378,7 +358,6 @@ def checked_learning(event, pupil):
             _reject('Hints and solutions are recorded as given.')
         if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or not event['response'].strip():
             _reject('That answer is too long, or empty.')
-        readable = _answer_ok(q['type'], event['response'])  # not readable: saved undecided below, never recorded as wrong
         if isinstance(event.get('context'), str) and event['context'].startswith('study:'):
             plan_id = event['context'][6:]
             visits = [e for e in prior if e.get('record') == 'study_session' and e.get('planId') == plan_id]
@@ -388,9 +367,14 @@ def checked_learning(event, pupil):
             _reject('Invalid context.')
         if 'assessment' in event and not _assessment_ok(event['assessment'], q):
             _reject('The assessment result is malformed.')
-        decided = _authoritative(event, q, readable)
+        decided, decision = _decide(event, q, now)
         if decided is not None:
             event = {**event, 'assessment': decided}
+        shadow = decision.pop('shadow', None)
+        if shadow is not None:
+            event = {**event, 'shadowDecision': shadow}  # shadow mode: kept for the comparison report, never used for credit or replay
+        # grading-decision@1 (stage 7): the server's decision is kept in the immutable event body and appended to the decision log (views.py)
+        event = {**event, 'decision': decision}
         w = event.get('working', [])
         if not isinstance(w, list) or len(w) > 8 or not all(isinstance(x, str) and len(x) <= 80 for x in w):
             _reject('Working is at most 8 lines of 80 characters.')
@@ -456,6 +440,8 @@ def _study_session(event, prior, pupil, c):
     correct, incorrect, pending = [], [], []
     for a in attempts:
         q = c['questions'].get(a['questionId']) or generated(a['questionId'])
+        if quarantined(a['questionId']) or decisions.verdict_of(a) == 'unresolved':
+            continue  # question-status@1 and approved policy P1 (D19): neither correct nor incorrect (kept in attemptIds as answered)
         if q['type'] in HUMAN and a['id'] not in marks:
             pending.append(a['id'])
         elif (marks.get(a['id']) == 'correct' if q['type'] in HUMAN else credited(q, a)):

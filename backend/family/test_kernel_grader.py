@@ -47,8 +47,11 @@ class KernelGraderTests(unittest.TestCase):
         self.assertIsNone(kg.kernel_decision(DET, '-4', '-5'))       # the server's stored answer does not match: tampered or stale
         self.assertIsNotNone(kg.kernel_decision(DET, '-4', '-4'))
 
-    def test_only_verified_generated_questions_are_answered(self):
-        self.assertIsNone(kg.kernel_decision('gen:rect:3,4', '12', '12'))          # legacy family
+    def test_unknown_questions_are_not_answered(self):
+        # grading-policy@1 (stage 4): every KNOWN question is decided by the trusted grader (a non-kernel family by a value verifier)
+        d = kg.kernel_decision('gen:rect:3,4', '12', '12')
+        self.assertEqual({k: d[k] for k in ('credit', 'source', 'reason', 'verdict')}, {'credit': True, 'source': 'verifier', 'reason': 'correct.equal', 'verdict': 'correct'})
+        self.assertEqual((d['decision']['schema'], d['decision']['verdict']), ('grading-decision@1', 'correct'))
         self.assertIsNone(kg.kernel_decision('q-not-generated', '12', '12'))
         self.assertIsNone(kg.kernel_decision('gen:nosuchfamily:1,2', '3', '3'))
         self.assertIsNone(kg.kernel_decision('gen:det2:1,1,1', '0', '0'))          # wrong parameter count
@@ -57,7 +60,8 @@ class KernelGraderTests(unittest.TestCase):
 
     def test_a_multiple_choice_form_is_graded_by_the_option(self):
         out = kg.run([{'id': 'gen:det2:-3,1,1,1:mc', 'response': 'A'}, {'id': 'gen:det2:-3,1,1,1:mc', 'response': 'B'}, {'id': 'gen:det2:-3,1,1,1:mc', 'response': 'Z'}])
-        self.assertEqual({x['verification'] for x in out}, {'verified'})
+        self.assertEqual({(x['v'], x['known'], x['source']) for x in out[:2]}, {(2, True, 'kernel')})
+        self.assertEqual(out[2]['verdict'], 'unresolved')
         self.assertEqual(sum(1 for x in out[:2] if x['credit'] is True), 1)   # exactly one of A and B is the right option
         self.assertIsNone(out[2]['credit'])
 

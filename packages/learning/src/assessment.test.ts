@@ -5,7 +5,7 @@ import { contractFor, contractOfProblem, legacyContract, publishable, assessSubm
 import { costUsd, createProvider, fallbackConfigFrom, FALLBACK_DISABLED, planFallback, settle, confirmedResubmission, type FallbackConfig } from "./assessment-fallback.ts";
 import { pool, problemOf } from "./families.ts";
 import { make, decide } from "./session.ts";
-import { readRecords, UNRESOLVED_CAP } from "./records.ts";
+import { readRecords } from "./records.ts";
 
 const KERNEL = ["mul", "pow", "lin", "quad", "meet", "linev"];
 const ctx = (n = 0) => ({ learnerId: "L", sessionId: "S", at: new Date(Date.UTC(2026, 9, 1, 9, n)).toISOString() });
@@ -55,7 +55,8 @@ describe("decision: answer first, explicit answer, no guessing", () => {
   test("incomplete solution set is not credited but is described as incomplete", () => { const a = decide(quad, "2"); expect(a.credit).toBe(false); expect(a.feedback.kind).toBe("incomplete"); });
   test("alternative forms are accepted and recorded in plain form", () => {
     for (const r of ["x = 2 or x = 3", "{3, 2}", "2 and 3", "x=2, x=3"]) { const a = decide(quad, r); expect(a.credit).toBe(true); }
-    expect(decide(quad, "x=2, x=3").recordAs).toBe("2, 3"); expect(decide(lin, "x = 4").recordAs).toBe("4"); expect(decide(lin, "4.0").credit).toBe(true); expect(decide(lin, "4.0").recordAs).toBeUndefined();
+    // grading-policy@1 (stage 4): the server runs the same decision, so the learner's text is recorded as written, never rewritten
+    expect(decide(quad, "x=2, x=3").recordAs).toBeUndefined(); expect(decide(lin, "x = 4").recordAs).toBeUndefined(); expect(decide(lin, "4.0").credit).toBe(true); expect(decide(lin, "4.0").recordAs).toBeUndefined();
   });
   test("unreadable answer: unresolved, never incorrect; one clarification, then pending and fallback-eligible", () => {
     const a1 = decide(lin, "four-ish"); expect(a1.credit).toBeNull(); expect(a1.evidence).toMatchObject({ unresolved: true, answerCorrect: null, clarificationRequired: true }); expect(a1.clarification?.kind).toBe("answer-field"); expect(a1.fallbackEligible).toBe(false);
@@ -69,7 +70,7 @@ describe("decision: answer first, explicit answer, no guessing", () => {
   test("a held question is never graded", () => { const a = assessSubmission(contractOfProblem({ ...problemOf(lin)!, answer: "5" }, "x"), { response: "5", legacyCorrect: true }); expect(a.credit).toBeNull(); expect(a.evidence.source).toBe("held"); });
   test("choice answers", () => { expect(decide(`${lin}:mc`, "B").credit).toBe(true); expect(decide(`${lin}:mc`, "C").credit).toBe(false); });
   test("authored and non-kernel questions keep the stored answer as the (reported) authority; written is educator-marked", () => {
-    const q = pool("rect").items[0]; expect(decide(q.id, q.answer)).toMatchObject({ credit: true, evidence: { source: "legacy" } }); expect(decide(q.id, "0").credit).toBe(false);
+    const q = pool("rect").items[0]; expect(decide(q.id, q.answer)).toMatchObject({ credit: true, evidence: { source: "verifier" } }); expect(decide(q.id, "0").credit).toBe(false);
   });
 });
 
@@ -77,7 +78,7 @@ describe("evidence: separate results, mastery untouched by undecided submissions
   const ev = (items: any[]) => items.map((r, i) => ({ kind: "learning_record", ...r }));
   test("every attempt record carries the assessment evidence (no grading route without it)", () => {
     const r = make.attempt(ctx(), "gen:lin:3,5,4", "x = 4", "practice") as any;
-    expect(r.assessment).toMatchObject({ policy: "assessment@1", answerCorrect: true, derivationVerified: false }); expect(r.response).toBe("4");
+    expect(r.assessment).toMatchObject({ policy: "assessment@1", answerCorrect: true, derivationVerified: false }); expect(r.response).toBe("x = 4");
     for (const dir of ["../../../frontend/src", "."]) { /* attempt records are only built by make.attempt */ }
   });
   test("only session.ts and records.ts build attempt records", () => {
@@ -86,11 +87,15 @@ describe("evidence: separate results, mastery untouched by undecided submissions
     walk(new URL("../../../packages", import.meta.url).pathname); walk(new URL("../../../frontend/src", import.meta.url).pathname);
     expect(hits.sort()).toEqual(["packages/learning/src/records.ts", "packages/learning/src/session.ts"]);
   });
-  test("unresolved submissions are not attempts: no attempt number, no mastery input; the cap stops parking", () => {
+  test("unresolved submissions are not attempts: no attempt number, no mastery input, however many (approved policy P1, D16)", () => {
+    // updated 2026-10-29 for approved policy P1: the earlier cap (after 2, unreadable submissions became attempts) is removed
     const id = "gen:lin:3,5,4", recs: any[] = [];
-    for (let i = 0; i < 4; i++) recs.push(make.attempt(ctx(i), id, "four-ish", "practice"));
+    for (let i = 0; i < 6; i++) recs.push(make.attempt(ctx(i), id, "four-ish", "practice"));
     const rr = readRecords("L", recs);
-    expect(rr.unresolved.length).toBe(UNRESOLVED_CAP); expect(rr.attempts.length).toBe(4 - UNRESOLVED_CAP);
+    expect(rr.unresolved.length).toBe(6); expect(rr.attempts.length).toBe(0);
+    // a wrong answer cannot be parked: a record that claims "unresolved" for a decidable answer is still an attempt
+    const claimed = { ...(make.attempt(ctx(7), id, "5", "practice") as any) }; claimed.assessment = { ...claimed.assessment, unresolved: true, answerCorrect: null };
+    expect(readRecords("L", [claimed]).attempts.length).toBe(1);
     const one = readRecords("L", [make.attempt(ctx(0), id, "four-ish", "practice"), make.attempt(ctx(1), id, "4", "practice")]);
     expect(one.attempts.length).toBe(1); expect(one.attempts[0].n).toBe(1); expect(one.unresolved.length).toBe(1);   // the resubmission is still the first real attempt
   });
@@ -102,8 +107,8 @@ describe("evidence: separate results, mastery untouched by undecided submissions
 
 describe("python server: the record validator mirrors the rules", () => {
   const py = readFileSync(new URL("../../../backend/family/learning.py", import.meta.url), "utf8");
-  test("the server admits the assessment field and keeps the cap in step with the app", () => {
-    expect(py).toContain("'assessment'"); expect(py).toContain(`UNRESOLVED_CAP = ${UNRESOLVED_CAP}`); expect(py).toContain("def _assessment_ok");
+  test("the server admits the assessment field and, like the app, has no unresolved cap (P1)", () => {
+    expect(py).toContain("'assessment'"); expect(py).not.toContain("UNRESOLVED_CAP"); expect(py).toContain("def _assessment_ok");
     expect(py).toMatch(/aiFallbackUsed'\]/); expect(py).toContain("derivationVerified");
   });
 });

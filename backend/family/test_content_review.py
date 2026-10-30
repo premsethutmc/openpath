@@ -164,7 +164,8 @@ class ReleasedContentEvidenceTests(ReviewBase):
         self.assertEqual(save('attempt', questionId='gen:mmul:47,6', **ok).status_code, 201)
         self.assertEqual(save('attempt', questionId='gen:mmul:47,1', **(ok | {'response': '47'})).status_code, 400, 'outside the domain')
         self.assertEqual(save('attempt', questionId='gen:mmul:40,6', **(ok | {'response': '240'})).status_code, 400, 'excluded by the specification')
-        self.assertEqual(save('attempt', questionId='gen:mmul:47,6:mc', **(ok | {'response': 'Z'})).status_code, 400, 'not an option letter')
+        # approved policy P1: not an option letter is an unreadable answer, kept unresolved (no longer refused)
+        self.assertEqual(save('attempt', questionId='gen:mmul:47,6:mc', **(ok | {'response': 'Z'})).status_code, 201, 'not an option letter: kept, unresolved')
 
     def test_a_repeated_problem_never_makes_a_delayed_check_due(self):
         pid, save = self._pupil()

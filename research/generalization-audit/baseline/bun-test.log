@@ -1,0 +1,30 @@
+bun test v1.4.4 (38afee6c8)
+
+packages/learning/src/teaching-presentation-audit.test.ts:
+aeind: generated=18 accepted=18 rejected=0 failures=0
+aiint: generated=18 accepted=18 rejected=0 failures=0
+eqfrac: generated=18 accepted=18 rejected=0 failures=0
+fadd: generated=18 accepted=0 rejected=18 failures=0
+adfcmp: generated=18 accepted=18 rejected=0 failures=0
+adfname: generated=18 accepted=18 rejected=0 failures=0
+adshade: generated=18 accepted=18 rejected=0 failures=0
+aocart: generated=18 accepted=17 rejected=1 failures=0
+apcartn: generated=18 accepted=10 rejected=8 failures=0
+lin: generated=18 accepted=18 rejected=0 failures=0
+ahone: generated=18 accepted=18 rejected=0 failures=0
+lneg: generated=18 accepted=18 rejected=0 failures=0
+rect: generated=18 accepted=18 rejected=0 failures=0
+aearea: generated=18 accepted=18 rejected=0 failures=0
+rperim: generated=18 accepted=18 rejected=0 failures=0
+
+packages/learning/src/core/symbolic.test.ts:
+      random expansions: 300 assessments, mean 1.18 ms, worst pair 7.2 ms
+
+packages/learning/src/core/multivariate/multivariate.test.ts:
+      random 3-letter expansions: 240 assessments, mean 4.3 ms, worst pair 61 ms
+
+ 1296 pass
+ 0 fail
+ 87771 expect() calls
+Ran 1296 tests across 80 files. [55.49s]
+exit 0

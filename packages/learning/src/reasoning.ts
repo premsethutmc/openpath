@@ -15,6 +15,7 @@
  * relative support, and an unexplained answer never produces a confident claim.
  */
 import { phasePool, problemOf, show, variantsOf, type Bug, type Problem, type Value } from "./families";
+import { selectable } from "./question-status";
 
 export const REASONING_POLICY = {
   version: "diagnostic@2-draft",
@@ -131,7 +132,7 @@ function followUpsOf(root: Problem): Problem[] {
   for (const id of phasePool(root.family, "diagnostic")) {
     if (out.length >= POOL_FOLLOW_UPS) break;
     const p = problemOf(id.replace(/:mc$/, ""));
-    if (p && p.id !== root.id && !out.some((x) => x.id === p.id)) out.push(p);
+    if (p && selectable(p.id) && p.id !== root.id && !out.some((x) => x.id === p.id)) out.push(p);
   }
   return out;
 }

@@ -1,0 +1,694 @@
+{
+ "cases": 308568,
+ "truths": {
+  "equivalent": 53246,
+  "wrong": 112499,
+  "malformed": 109124,
+  "form-variant": 33077,
+  "approximation": 545,
+  "ambiguous": 77
+ },
+ "totals": {
+  "client": {
+   "OK": 303289,
+   "UNRESOLVED_ON_FORM": 5223,
+   "UNRESOLVED_ON_CORRECT": 56
+  },
+  "backend": {
+   "UNRESOLVED_ON_CORRECT": 53246,
+   "OK": 222954,
+   "UNRESOLVED_ON_FORM": 32315,
+   "REFUSED_FORM-VARIANT": 43,
+   "REFUSED_WRONG": 10
+  }
+ },
+ "byTruth": {
+  "client": {
+   "equivalent": {
+    "OK": 53190,
+    "UNRESOLVED_ON_CORRECT": 56
+   },
+   "wrong": {
+    "OK": 112499
+   },
+   "malformed": {
+    "OK": 109124
+   },
+   "form-variant": {
+    "OK": 27854,
+    "UNRESOLVED_ON_FORM": 5223
+   },
+   "approximation": {
+    "OK": 545
+   },
+   "ambiguous": {
+    "OK": 77
+   }
+  },
+  "backend": {
+   "equivalent": {
+    "UNRESOLVED_ON_CORRECT": 53246
+   },
+   "wrong": {
+    "OK": 112489,
+    "REFUSED_WRONG": 10
+   },
+   "malformed": {
+    "OK": 109124
+   },
+   "form-variant": {
+    "UNRESOLVED_ON_FORM": 32315,
+    "OK": 719,
+    "REFUSED_FORM-VARIANT": 43
+   },
+   "approximation": {
+    "OK": 545
+   },
+   "ambiguous": {
+    "OK": 77
+   }
+  }
+ },
+ "byType": {
+  "client": {
+   "integer": {
+    "OK": 102947,
+    "UNRESOLVED_ON_CORRECT": 15,
+    "UNRESOLVED_ON_FORM": 10
+   },
+   "choice": {
+    "OK": 69830,
+    "UNRESOLVED_ON_FORM": 4922
+   },
+   "tuple": {
+    "OK": 28874
+   },
+   "fraction": {
+    "OK": 39694
+   },
+   "exact": {
+    "OK": 33527,
+    "UNRESOLVED_ON_FORM": 237,
+    "UNRESOLVED_ON_CORRECT": 9
+   },
+   "set": {
+    "OK": 7349
+   },
+   "interval": {
+    "OK": 4225
+   },
+   "mixed": {
+    "OK": 2007
+   },
+   "ratio": {
+    "OK": 631,
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "antiderivative": {
+    "OK": 2462,
+    "UNRESOLVED_ON_CORRECT": 3
+   },
+   "matrix": {
+    "OK": 2929
+   },
+   "roots": {
+    "OK": 1403
+   },
+   "expression": {
+    "OK": 7411,
+    "UNRESOLVED_ON_CORRECT": 29,
+    "UNRESOLVED_ON_FORM": 12
+   }
+  },
+  "backend": {
+   "integer": {
+    "UNRESOLVED_ON_CORRECT": 17651,
+    "OK": 73420,
+    "UNRESOLVED_ON_FORM": 11901
+   },
+   "choice": {
+    "UNRESOLVED_ON_CORRECT": 11646,
+    "UNRESOLVED_ON_FORM": 10702,
+    "OK": 52351,
+    "REFUSED_FORM-VARIANT": 43,
+    "REFUSED_WRONG": 10
+   },
+   "tuple": {
+    "UNRESOLVED_ON_CORRECT": 6806,
+    "OK": 20526,
+    "UNRESOLVED_ON_FORM": 1542
+   },
+   "fraction": {
+    "UNRESOLVED_ON_CORRECT": 4909,
+    "OK": 30534,
+    "UNRESOLVED_ON_FORM": 4251
+   },
+   "exact": {
+    "UNRESOLVED_ON_CORRECT": 5577,
+    "OK": 25616,
+    "UNRESOLVED_ON_FORM": 2580
+   },
+   "set": {
+    "UNRESOLVED_ON_CORRECT": 1727,
+    "OK": 4937,
+    "UNRESOLVED_ON_FORM": 685
+   },
+   "interval": {
+    "UNRESOLVED_ON_CORRECT": 1115,
+    "OK": 3053,
+    "UNRESOLVED_ON_FORM": 57
+   },
+   "mixed": {
+    "UNRESOLVED_ON_CORRECT": 213,
+    "OK": 1779,
+    "UNRESOLVED_ON_FORM": 15
+   },
+   "ratio": {
+    "UNRESOLVED_ON_CORRECT": 126,
+    "OK": 505,
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "antiderivative": {
+    "UNRESOLVED_ON_CORRECT": 789,
+    "OK": 1565,
+    "UNRESOLVED_ON_FORM": 111
+   },
+   "matrix": {
+    "UNRESOLVED_ON_CORRECT": 746,
+    "OK": 2030,
+    "UNRESOLVED_ON_FORM": 153
+   },
+   "roots": {
+    "UNRESOLVED_ON_CORRECT": 396,
+    "OK": 941,
+    "UNRESOLVED_ON_FORM": 66
+   },
+   "expression": {
+    "UNRESOLVED_ON_CORRECT": 1545,
+    "OK": 5697,
+    "UNRESOLVED_ON_FORM": 210
+   }
+  }
+ },
+ "byTag": {
+  "client": {
+   "stored": {
+    "OK": 18735,
+    "UNRESOLVED_ON_CORRECT": 6
+   },
+   "first-number-plus-one": {
+    "OK": 12898
+   },
+   "sign-flip": {
+    "OK": 10524
+   },
+   "dangling-operator": {
+    "OK": 12918
+   },
+   "unbalanced-bracket": {
+    "OK": 12918
+   },
+   "question-mark": {
+    "OK": 12918
+   },
+   "division-by-zero": {
+    "OK": 12918
+   },
+   "letters": {
+    "OK": 12918
+   },
+   "blank": {
+    "OK": 18741
+   },
+   "predicted-misconception": {
+    "OK": 25180
+   },
+   "correct-with-wrong-working": {
+    "OK": 18735,
+    "UNRESOLVED_ON_CORRECT": 6
+   },
+   "wrong-with-plausible-working": {
+    "OK": 18721
+   },
+   "unreduced-fraction": {
+    "OK": 9062,
+    "UNRESOLVED_ON_FORM": 5
+   },
+   "trailing-zero": {
+    "OK": 7192,
+    "UNRESOLVED_ON_FORM": 5
+   },
+   "explicit-plus": {
+    "OK": 6857,
+    "UNRESOLVED_ON_CORRECT": 5
+   },
+   "times-ten": {
+    "OK": 8777
+   },
+   "digits-split": {
+    "OK": 5786
+   },
+   "lowercase-letter": {
+    "OK": 5823
+   },
+   "other-option": {
+    "OK": 16548
+   },
+   "no-such-option": {
+    "OK": 5823
+   },
+   "invalid-letter": {
+    "OK": 5823
+   },
+   "option-text-correct": {
+    "OK": 887,
+    "UNRESOLVED_ON_FORM": 4922
+   },
+   "option-text-wrong": {
+    "OK": 5811
+   },
+   "two-letters": {
+    "OK": 5823
+   },
+   "no-spaces": {
+    "OK": 2843,
+    "UNRESOLVED_ON_CORRECT": 12
+   },
+   "extra-spaces": {
+    "OK": 2280
+   },
+   "last-number-plus-one": {
+    "OK": 4678
+   },
+   "parentheses-toggled": {
+    "OK": 1542
+   },
+   "missing-component": {
+    "OK": 1542
+   },
+   "first-two-swapped": {
+    "OK": 503
+   },
+   "reversed": {
+    "OK": 1021
+   },
+   "improper-fraction": {
+    "OK": 671
+   },
+   "mixed-number": {
+    "OK": 779,
+    "UNRESOLVED_ON_FORM": 228
+   },
+   "reciprocal": {
+    "OK": 2426
+   },
+   "half": {
+    "OK": 1868
+   },
+   "decimal": {
+    "OK": 574
+   },
+   "one-plus": {
+    "OK": 685
+   },
+   "reordered": {
+    "OK": 366
+   },
+   "missing-one": {
+    "OK": 322
+   },
+   "duplicate": {
+    "OK": 366
+   },
+   "braces": {
+    "OK": 423
+   },
+   "x-equals-or": {
+    "OK": 423
+   },
+   "extra-one": {
+    "OK": 423
+   },
+   "space-separated": {
+    "OK": 366
+   },
+   "ascii-glyphs": {
+    "OK": 2177,
+    "UNRESOLVED_ON_CORRECT": 13
+   },
+   "left-closure-flipped": {
+    "OK": 110
+   },
+   "right-closure-flipped": {
+    "OK": 111
+   },
+   "as-inequality": {
+    "OK": 132
+   },
+   "U-for-union": {
+    "OK": 39
+   },
+   "or-for-union": {
+    "OK": 39
+   },
+   "oo-for-infinity": {
+    "OK": 64
+   },
+   "closed-at-infinity": {
+    "OK": 64
+   },
+   "equation-equals-zero": {
+    "OK": 466,
+    "UNRESOLVED_ON_FORM": 9
+   },
+   "derivative-instead": {
+    "OK": 788
+   },
+   "doubled": {
+    "OK": 735
+   },
+   "factored": {
+    "OK": 319,
+    "UNRESOLVED_ON_FORM": 10
+   },
+   "sympy-rendering": {
+    "OK": 312,
+    "UNRESOLVED_ON_CORRECT": 14
+   },
+   "unsimplified": {
+    "OK": 41
+   },
+   "as-fraction": {
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "decimal-approximation": {
+    "OK": 545
+   },
+   "expanded": {
+    "OK": 82,
+    "UNRESOLVED_ON_FORM": 2
+   },
+   "as-interval": {
+    "OK": 24
+   },
+   "direction-flipped": {
+    "OK": 9
+   },
+   "reversed-sides": {
+    "OK": 24
+   },
+   "with-constant": {
+    "OK": 12
+   },
+   "log-ln-spelling": {
+    "OK": 77
+   },
+   "transpose": {
+    "OK": 113
+   },
+   "semicolon-rows": {
+    "OK": 159
+   },
+   "reciprocal-juxtaposition": {
+    "OK": 77
+   },
+   "no-constant": {
+    "OK": 111
+   },
+   "other-constant": {
+    "OK": 111
+   },
+   "other-constant-letter": {
+    "OK": 111
+   }
+  },
+  "backend": {
+   "stored": {
+    "UNRESOLVED_ON_CORRECT": 18741
+   },
+   "first-number-plus-one": {
+    "OK": 12898
+   },
+   "sign-flip": {
+    "OK": 10432,
+    "UNRESOLVED_ON_CORRECT": 92
+   },
+   "dangling-operator": {
+    "OK": 12918
+   },
+   "unbalanced-bracket": {
+    "OK": 12918
+   },
+   "question-mark": {
+    "OK": 12918
+   },
+   "division-by-zero": {
+    "OK": 12918
+   },
+   "letters": {
+    "OK": 12918
+   },
+   "blank": {
+    "OK": 18741
+   },
+   "predicted-misconception": {
+    "OK": 25180
+   },
+   "correct-with-wrong-working": {
+    "UNRESOLVED_ON_CORRECT": 18741
+   },
+   "wrong-with-plausible-working": {
+    "OK": 18721
+   },
+   "unreduced-fraction": {
+    "UNRESOLVED_ON_FORM": 8865,
+    "OK": 202
+   },
+   "trailing-zero": {
+    "UNRESOLVED_ON_FORM": 7189,
+    "OK": 8
+   },
+   "explicit-plus": {
+    "UNRESOLVED_ON_CORRECT": 6852,
+    "UNRESOLVED_ON_FORM": 10
+   },
+   "times-ten": {
+    "OK": 8777
+   },
+   "digits-split": {
+    "OK": 5786
+   },
+   "lowercase-letter": {
+    "UNRESOLVED_ON_FORM": 5823
+   },
+   "other-option": {
+    "OK": 16548
+   },
+   "no-such-option": {
+    "OK": 5823
+   },
+   "invalid-letter": {
+    "OK": 5823
+   },
+   "option-text-correct": {
+    "OK": 887,
+    "UNRESOLVED_ON_FORM": 4879,
+    "REFUSED_FORM-VARIANT": 43
+   },
+   "option-text-wrong": {
+    "OK": 5801,
+    "REFUSED_WRONG": 10
+   },
+   "two-letters": {
+    "OK": 5823
+   },
+   "no-spaces": {
+    "UNRESOLVED_ON_CORRECT": 2804,
+    "OK": 51
+   },
+   "extra-spaces": {
+    "UNRESOLVED_ON_CORRECT": 2280
+   },
+   "last-number-plus-one": {
+    "OK": 4678
+   },
+   "parentheses-toggled": {
+    "UNRESOLVED_ON_FORM": 1542
+   },
+   "missing-component": {
+    "OK": 1542
+   },
+   "first-two-swapped": {
+    "OK": 503
+   },
+   "reversed": {
+    "OK": 1021
+   },
+   "improper-fraction": {
+    "UNRESOLVED_ON_FORM": 576,
+    "OK": 95
+   },
+   "mixed-number": {
+    "UNRESOLVED_ON_FORM": 950,
+    "OK": 57
+   },
+   "reciprocal": {
+    "OK": 2426
+   },
+   "half": {
+    "OK": 1868
+   },
+   "decimal": {
+    "UNRESOLVED_ON_FORM": 505,
+    "OK": 69
+   },
+   "one-plus": {
+    "OK": 685
+   },
+   "reordered": {
+    "UNRESOLVED_ON_CORRECT": 366
+   },
+   "missing-one": {
+    "OK": 322
+   },
+   "duplicate": {
+    "UNRESOLVED_ON_FORM": 328,
+    "OK": 38
+   },
+   "braces": {
+    "UNRESOLVED_ON_CORRECT": 423
+   },
+   "x-equals-or": {
+    "UNRESOLVED_ON_FORM": 423
+   },
+   "extra-one": {
+    "OK": 423
+   },
+   "space-separated": {
+    "OK": 366
+   },
+   "ascii-glyphs": {
+    "UNRESOLVED_ON_CORRECT": 2183,
+    "OK": 7
+   },
+   "left-closure-flipped": {
+    "OK": 110
+   },
+   "right-closure-flipped": {
+    "OK": 111
+   },
+   "as-inequality": {
+    "OK": 100,
+    "UNRESOLVED_ON_FORM": 32
+   },
+   "U-for-union": {
+    "UNRESOLVED_ON_CORRECT": 39
+   },
+   "or-for-union": {
+    "OK": 26,
+    "UNRESOLVED_ON_FORM": 13
+   },
+   "oo-for-infinity": {
+    "UNRESOLVED_ON_CORRECT": 64
+   },
+   "closed-at-infinity": {
+    "OK": 64
+   },
+   "equation-equals-zero": {
+    "UNRESOLVED_ON_FORM": 472,
+    "OK": 3
+   },
+   "derivative-instead": {
+    "OK": 788
+   },
+   "doubled": {
+    "OK": 735
+   },
+   "factored": {
+    "UNRESOLVED_ON_FORM": 308,
+    "OK": 21
+   },
+   "sympy-rendering": {
+    "UNRESOLVED_ON_CORRECT": 326
+   },
+   "unsimplified": {
+    "OK": 41
+   },
+   "as-fraction": {
+    "UNRESOLVED_ON_FORM": 42
+   },
+   "decimal-approximation": {
+    "OK": 545
+   },
+   "expanded": {
+    "UNRESOLVED_ON_FORM": 82,
+    "OK": 2
+   },
+   "as-interval": {
+    "UNRESOLVED_ON_FORM": 12,
+    "OK": 12
+   },
+   "direction-flipped": {
+    "OK": 9
+   },
+   "reversed-sides": {
+    "UNRESOLVED_ON_CORRECT": 24
+   },
+   "with-constant": {
+    "UNRESOLVED_ON_CORRECT": 12
+   },
+   "log-ln-spelling": {
+    "UNRESOLVED_ON_CORRECT": 77
+   },
+   "transpose": {
+    "OK": 113
+   },
+   "semicolon-rows": {
+    "UNRESOLVED_ON_FORM": 153,
+    "OK": 6
+   },
+   "reciprocal-juxtaposition": {
+    "OK": 77
+   },
+   "no-constant": {
+    "UNRESOLVED_ON_FORM": 111
+   },
+   "other-constant": {
+    "UNRESOLVED_ON_CORRECT": 111
+   },
+   "other-constant-letter": {
+    "UNRESOLVED_ON_CORRECT": 111
+   }
+  }
+ },
+ "clientBackendDisagreements": [
+  {
+   "client": "incorrect",
+   "backend": "unresolved",
+   "clientSource": "verifier",
+   "backendSource": "infrastructure",
+   "n": 98968
+  },
+  {
+   "client": "correct",
+   "backend": "unresolved",
+   "clientSource": "verifier",
+   "backendSource": "infrastructure",
+   "n": 73448
+  },
+  {
+   "client": "incorrect",
+   "backend": "unresolved",
+   "clientSource": "kernel",
+   "backendSource": "infrastructure",
+   "n": 9518
+  },
+  {
+   "client": "correct",
+   "backend": "unresolved",
+   "clientSource": "kernel",
+   "backendSource": "infrastructure",
+   "n": 6877
+  }
+ ]
+}

@@ -1,0 +1,338 @@
+[
+ {
+  "id": "F1a",
+  "channel": "answer-first",
+  "input": "sqrt(x+1)=2 | sqrt(x+1 = 2",
+  "observed": "incomplete [equivalent]",
+  "expected": [
+   "unsupported",
+   "unresolved"
+  ],
+  "note": "the last statement is not a solution in solved form",
+  "ok": false
+ },
+ {
+  "id": "F1b",
+  "channel": "unified-natural",
+  "input": "sqrt(x+1)=2 | sqrt(x+1 = 2 / x+1=4 / x=3",
+  "observed": "verified",
+  "expected": [
+   "malformed"
+  ],
+  "note": "every line is exact-equivalent to the problem or a proven candidate elimination, and the solution set {3} is stated",
+  "ok": false
+ },
+ {
+  "id": "F1c",
+  "channel": "parser",
+  "input": "3sec(3x)tan(3x)",
+  "observed": "parsed:{expression,{multiply,[{multiply,[{multiply,[{constant,3},{v",
+  "expected": [
+   "unsupported"
+  ],
+  "ok": false
+ },
+ {
+  "id": "F1d",
+  "channel": "parser",
+  "input": "sin x^2",
+  "observed": "parsed:{expression,{power,{sin,{variable,x}},2}}",
+  "expected": [
+   "ambiguous"
+  ],
+  "ok": false
+ },
+ {
+  "id": "F1e",
+  "channel": "parser",
+  "input": "atan(x)",
+  "observed": "parsed:{expression,{multiply,[{variable,atan},{variable,x}]}}",
+  "expected": [
+   "parsed:{atan"
+  ],
+  "ok": false
+ },
+ {
+  "id": "F1f",
+  "channel": "parser",
+  "input": "sqrt(x+1 = 2",
+  "observed": "parsed:{equation,{root,{add,[{variable,x},{constant,1}]},2},{consta",
+  "expected": [
+   "malformed"
+  ],
+  "ok": false
+ },
+ {
+  "id": "F2a",
+  "channel": "unified-natural",
+  "input": "indefinite-integral | ∫2x/(x^2-1) dx = ln(x^2-1) + C",
+  "observed": "verified",
+  "expected": [
+   "missing-assumption",
+   "incomplete",
+   "invalid"
+  ],
+  "note": "all 1 submitted line(s) are accounted for and verified",
+  "ok": false
+ },
+ {
+  "id": "F2b",
+  "channel": "unified-natural",
+  "input": "indefinite-integral | ∫2x/(x^2-1) dx = ln|x^2-1| + C",
+  "observed": "verified",
+  "expected": [
+   "verified"
+  ],
+  "note": "all 1 submitted line(s) are accounted for and verified",
+  "ok": true
+ },
+ {
+  "id": "F2c",
+  "channel": "unified-natural",
+  "input": "indefinite-integral | ∫1/x dx = ln(x) + C",
+  "observed": "missing-assumption",
+  "expected": [
+   "missing-assumption",
+   "incomplete",
+   "invalid"
+  ],
+  "note": "finish with the antiderivative plus + C",
+  "ok": true
+ },
+ {
+  "id": "F3a",
+  "channel": "symbolic",
+  "input": "cos(-x) -> cos x",
+  "observed": "invalid",
+  "expected": [
+   "verified"
+  ],
+  "note": "step 1: exact rational-polynomial normal forms differ",
+  "ok": false
+ },
+ {
+  "id": "F3b",
+  "channel": "symbolic",
+  "input": "cos^2 x -> (1+cos 2x)/2",
+  "observed": "invalid",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "note": "step 1: exact rational-polynomial normal forms differ",
+  "ok": false
+ },
+ {
+  "id": "F3c",
+  "channel": "symbolic",
+  "input": "cos(2pi/3) -> -1/2",
+  "observed": "invalid",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "note": "step 1: exact rational-polynomial normal forms differ",
+  "ok": false
+ },
+ {
+  "id": "F3d",
+  "channel": "symbolic",
+  "input": "sin(-x) -> sin x  (false)",
+  "observed": "unsupported",
+  "expected": [
+   "invalid",
+   "unsupported (safe: no witness exhibited)"
+  ],
+  "note": "step 1: no bounded exact strategy proved or refuted this transformation",
+  "ok": true
+ },
+ {
+  "id": "F4a",
+  "channel": "symbolic",
+  "input": "6x*6^-1 -> x",
+  "observed": "missing-assumption",
+  "expected": [
+   "verified"
+  ],
+  "note": "step 1: expression values agree but the target changes the domain",
+  "ok": false
+ },
+ {
+  "id": "F4b",
+  "channel": "symbolic",
+  "input": "x^2*(x^3)^-1 -> x^-1",
+  "observed": "missing-assumption",
+  "expected": [
+   "verified"
+  ],
+  "note": "step 1: expression values agree but the target changes the domain",
+  "ok": false
+ },
+ {
+  "id": "F4c",
+  "channel": "symbolic",
+  "input": "x^-2 -> (x^2)^-1",
+  "observed": "missing-assumption",
+  "expected": [
+   "verified"
+  ],
+  "note": "step 1: expression values agree but the target changes the domain",
+  "ok": false
+ },
+ {
+  "id": "F4d",
+  "channel": "symbolic",
+  "input": "(x^2-1)^-1 -> ((x-1)(x+1))^-1",
+  "observed": "missing-assumption",
+  "expected": [
+   "verified"
+  ],
+  "note": "step 1: expression values agree but the target changes the domain",
+  "ok": false
+ },
+ {
+  "id": "F5a",
+  "channel": "symbolic",
+  "input": "ln(x^2) -> 2 ln x  [x>0]",
+  "observed": "missing-assumption",
+  "expected": [
+   "verified"
+  ],
+  "note": "step 1: canonical identity requires stated obligations and the same domain",
+  "ok": false
+ },
+ {
+  "id": "F5b",
+  "channel": "symbolic",
+  "input": "|x| -> x  [x>0]",
+  "observed": "verified",
+  "expected": [
+   "verified"
+  ],
+  "note": "every symbolic transformation has a replayable exact certificate",
+  "ok": true
+ },
+ {
+  "id": "F5c",
+  "channel": "symbolic",
+  "input": "|x+y| -> x+y  [x>0,y>0]",
+  "observed": "missing-assumption",
+  "expected": [
+   "verified"
+  ],
+  "note": "step 1: removing an absolute value requires a nonnegative assumption",
+  "ok": false
+ },
+ {
+  "id": "F5d",
+  "channel": "symbolic",
+  "input": "ln(x^2) -> 2 ln x  (none)",
+  "observed": "missing-assumption",
+  "expected": [
+   "missing-assumption",
+   "invalid"
+  ],
+  "note": "step 1: canonical identity requires stated obligations and the same domain",
+  "ok": true
+ },
+ {
+  "id": "F6a",
+  "channel": "unified-natural",
+  "input": "x/(x-2)=3/(x-2) | x != 2 / x=3",
+  "observed": "incomplete",
+  "expected": [
+   "verified"
+  ],
+  "note": "a step lost solutions or jumped to a smaller set without justification",
+  "ok": false
+ },
+ {
+  "id": "F6b",
+  "channel": "answer-first",
+  "input": "x/(x-2)=3/(x-2) | x != 2 / x=3",
+  "observed": "correct [implied,narrowing]",
+  "expected": [
+   "correct [equivalent]"
+  ],
+  "note": "the stated solution {3} is exactly the problem's solution set",
+  "ok": false
+ },
+ {
+  "id": "F6c",
+  "channel": "answer-first",
+  "input": "(x^2-1)/(x-1)=2 for x != 1 | x+1=2 / x=1",
+  "observed": "incorrect [implied,equivalent]",
+  "expected": [
+   "incorrect [equivalent,equivalent]"
+  ],
+  "note": "the stated solution {1} includes values that are not solutions (excluded by the domain); the problem's solution set is n",
+  "ok": false
+ },
+ {
+  "id": "F7a",
+  "channel": "unified-natural",
+  "input": "x^2=9 | x=3",
+  "observed": "incomplete",
+  "expected": [
+   "invalid"
+  ],
+  "note": "a step lost solutions or jumped to a smaller set without justification",
+  "ok": false
+ },
+ {
+  "id": "F7b",
+  "channel": "unified-natural",
+  "input": "x^3=4x | x^2=4 / x=2 or x=-2",
+  "observed": "incomplete",
+  "expected": [
+   "invalid"
+  ],
+  "note": "a step lost solutions or jumped to a smaller set without justification",
+  "ok": false
+ },
+ {
+  "id": "F7c",
+  "channel": "answer-first",
+  "input": "x^3=4x | x^2=4 / x=2 or x=-2",
+  "observed": "incomplete [invalid,equivalent]",
+  "expected": [
+   "incorrect"
+  ],
+  "note": "the stated solution {-2, 2} omits solutions: the problem's solution set is {-2, 0, 2}",
+  "ok": false
+ },
+ {
+  "id": "F7d",
+  "channel": "unified-natural",
+  "input": "x^2>4 | x>2",
+  "observed": "incomplete",
+  "expected": [
+   "invalid"
+  ],
+  "note": "a step lost solutions or jumped to a smaller set without justification",
+  "ok": false
+ },
+ {
+  "id": "F8a",
+  "channel": "unified-natural",
+  "input": "x^2/(x-3)=9/(x-3) | x^2=9 / x=-3",
+  "observed": "verified",
+  "expected": [
+   "verified (implicit policy)",
+   "incomplete (shown policy)"
+  ],
+  "note": "all 2 steps are valid and the answer is correct",
+  "ok": true
+ },
+ {
+  "id": "F8b",
+  "channel": "unified-natural",
+  "input": "2x+5=2(x+3) | 2x+5=2x+6 / 5=6 / no solution",
+  "observed": "invalid",
+  "expected": [
+   "verified"
+  ],
+  "note": "line 2: a closed numeric statement that is exactly false",
+  "ok": false
+ }
+]

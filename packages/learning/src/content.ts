@@ -13,6 +13,7 @@ import { parseNumber, polynomial, show } from "../../mathematics/src/answers";
 import { explainStep, problemOf, show as showValue, type Problem as FamilyProblem } from "./families";
 import { canonicalOf, expandedForm, HUMAN, NEW_TYPES, normalise, readable, SAMPLED, sameAnswer, type AnswerType } from "./answer-types";
 import { MARKED_NOT, MARKED_RIGHT, outOf, tasksFor, writtenTask } from "./written";
+import { selectable } from "./question-status";
 
 export type Role = "diagnostic" | "probe" | "guided" | "check" | "practice" | "transfer" | "retention" | "original" | "challenge" | "generated";
 export type Hypothesis = "secure" | "conceptual" | "procedural" | "recall" | "prerequisite" | "transfer";
@@ -144,7 +145,20 @@ const withWritten = (m: Module): Module => {
   const w = tasksFor(m.competency).map((t) => t.id).filter((id) => !own.has(id));
   return w.length ? { ...m, written: w } : m;
 };
-export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))].map(withWritten);
+/** question-status@1: every question list of a module (compiled library, authored modules, strategies, written tasks) is filtered by
+ * the quarantine registry at load, so no route that reads a module can offer a quarantined question. What was removed is kept for reporting. */
+export const quarantinedFromModules: { competency: string; list: string; id: string }[] = [];
+export const withoutQuarantined = (m: Module): Module => {
+  const keep = (list: string) => (id: string) => (selectable(id) ? true : (quarantinedFromModules.push({ competency: m.competency, list, id }), false));
+  return {
+    ...m,
+    diagnostics: m.diagnostics.filter(keep("diagnostics")), practice: m.practice.filter(keep("practice")), transfer: m.transfer.filter(keep("transfer")),
+    retention: m.retention.filter(keep("retention")), probes: m.probes.filter(keep("probes")),
+    strategies: m.strategies.map((st) => ({ ...st, needs: st.needs.filter(keep("needs")) })).filter((st) => keep("guided")(st.guided) && keep("check")(st.check)),
+    ...(m.written ? { written: m.written.filter(keep("written")) } : {}),
+  };
+};
+export const modules: Module[] = [...authoredModules, ...synthesisedModules.filter((m) => !authoredModules.some((a) => a.competency === m.competency))].map(withWritten).map(withoutQuarantined);
 /** Where a module came from: written by hand, or synthesised from a blueprint and a problem family. */
 export const moduleOrigin = (competency: string): "authored" | "synthesised" | null => (authoredModules.some((m) => m.competency === competency) ? "authored" : synthesisedModules.some((m) => m.competency === competency) ? "synthesised" : null);
 export const questions = [...data.questions, ...markedData.questions] as unknown as Question[];

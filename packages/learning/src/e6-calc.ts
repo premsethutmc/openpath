@@ -22,7 +22,7 @@ export function fromExpr(e: Expr): A {
     case "pi": return { t: "pi" };
     case "variable": return S(e.name);
     case "abs": return fn("abs", fromExpr(e.argument));
-    case "root": return e.index === 2 ? fn("sqrt", fromExpr(e.radicand)) : pw(fromExpr(e.radicand), N(1, e.index));
+    case "root": if (e.index !== 2) throw new Unsupported("a real odd root (cbrt) is not represented by this kernel"); return fn("sqrt", fromExpr(e.radicand)); // a fractional power would lose the real cube root of negative values
     case "add": return add(...e.terms.map(fromExpr));
     case "multiply": return mul(...e.factors.map(fromExpr));
     case "power": return pw(fromExpr(e.base), e.exponent < 0 ? neg(N(-e.exponent)) : N(e.exponent));

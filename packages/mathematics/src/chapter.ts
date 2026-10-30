@@ -9,6 +9,7 @@
  */
 import spec from "../../../content/mathematics/programs/jee-quadratics.v1.json";
 import { indexContent, scoreCode } from "../../english-core/src/content";
+import { programDecision } from "./program-grading";
 import type { EvidenceEvent, Item } from "../../english-core/src/types";
 import { sharedProfile } from "./canonical";
 import { mathematicsLedger } from "./registration";
@@ -118,6 +119,10 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
       const q = question(ev.questionId);
       const text = normalise(q, ev.response ?? "");
       if (text === null) continue;
+      // stage 9 (D14): THE grading decision; an unresolved answer is not an answer (P1)
+      const decision = programDecision(`program:${spec.id}:${q.id}`, ev.response ?? "", (ev as { decision?: unknown }).decision, () => scoreCode(nativeItem(q), { kind: "typed", text: `${q.type}:${text}` }).correct);
+      if (decision.verdict === "unresolved") continue;
+      const correct = decision.verdict === "correct";
       const item = nativeItem(q);
       const evidence: EvidenceEvent = {
         kind: "evidence",
@@ -125,11 +130,11 @@ export function replay(learnerId: string, events: readonly { kind: string; progr
         at: ev.at,
         session: ev.sessionId ?? `legacy-unknown:${spec.id}`,
         item: { id: item.id, version: item.version },
-        response: { kind: "typed", text: `${q.type}:${text}` },
+        response: { kind: "typed", text: `${q.type}:${correct ? normalise(q, q.answer) ?? text : text}` },
         use: stage.id === spec.stages.at(-1)!.id ? "retention" : "practice",
       };
       ledger.apply(evidence);
-      state.answers[q.id] = { response: text, correct: scoreCode(item, evidence.response).correct, assisted: state.hints.includes(q.id) || state.solutions.includes(q.id), at: ev.at };
+      state.answers[q.id] = { response: text, correct, assisted: state.hints.includes(q.id) || state.solutions.includes(q.id), at: ev.at };
     }
     if (ev.action === "complete" && canComplete(state, stage.id, Date.parse(ev.at)) && !state.completed.includes(stage.id)) {
       state.completed.push(stage.id);

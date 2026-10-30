@@ -1,4 +1,5 @@
 import { CurriculumPractice } from "./CurriculumPractice";
+import { setGradingMode } from "../../../packages/learning/src/grading/mode";
 import { TopicSession } from "./TopicSession";
 import { KeyboardPractice } from "../writing/KeyboardPractice";
 /**
@@ -21,7 +22,7 @@ import { reviewFixtureActive, useReviewFixture } from "../../../packages/learnin
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
-import type { LearningActivity, LearningRecord } from "../../../packages/learning/src/records";
+import { withDecisions, type LearningActivity, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { learnerState, make, type StudyRecord, type StudyUpdate } from "../../../packages/learning/src/session";
 import { writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
 import { isDrawing, SketchView } from "./SketchPad";
@@ -51,9 +52,11 @@ class Repo {
     this.learner = learner;
   }
   async load() {
-    const r = await api.request<{ count: number; events: { kind: string }[] }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
+    const r = await api.request<{ count: number; events: { kind: string }[]; decisions?: Record<string, ServerDecision>; gradingMode?: string }>("GET", `/pupils/${this.learner}/events/?subject=mathematics`);
     this.count = r.count;
-    return r.events;
+    setGradingMode(r.gradingMode); // which grading is authoritative: the result shown after an answer is the server's recorded decision
+    // stage 7: a regrade appends a superseding decision on the server; replay uses it in place of the one inside the stored attempt
+    return withDecisions(r.events, r.decisions);
   }
   append(event: LearningRecord) {
     const work = this.queue.then(async () => {
@@ -158,13 +161,18 @@ function App() {
   const session = `learn:${learner}:${visit.current}`;
   const ctxOf = () => ({ learnerId: learner, sessionId: session, at: new Date().toISOString() });
 
+  const lastDecision = useRef<ServerDecision | null>(null);
   async function save(...records: LearningRecord[]) {
     if (!repo) return false;
     setSaving(true);
     setError("");
+    lastDecision.current = null;
     try {
       let next = events ?? [];
       for (const r of records) next = await repo.append(r);
+      // the server's recorded (authoritative) decision for the answer just saved: what the learner is shown (check A)
+      const savedId = (records.at(-1) as { id?: string } | undefined)?.id;
+      lastDecision.current = ((next as { id?: string; decision?: ServerDecision }[]).find((e) => e.id === savedId)?.decision) ?? null;
       setEvents(next);
       setNow(Date.now());
       return true;
@@ -213,6 +221,7 @@ function App() {
     session,
     saving,
     answer: (qid: string, response: string, activity: LearningActivity, o = {}) => save(make.attempt(ctxOf(), qid, response, activity, o)),
+    recorded: () => lastDecision.current,
     teach: (competency: string, strategy: string, rule: string) => save(make.teach(ctxOf(), competency, strategy, rule.slice(0, 40))),
   };
   const top = (left: React.ReactNode, title: string) => <TopBar left={left} title={title} />;

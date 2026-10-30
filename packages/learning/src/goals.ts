@@ -12,6 +12,7 @@
 import { goal as goalById, questions, type Goal } from "./content";
 import type { SkillEvidence } from "./evidence";
 import { graph } from "./graph";
+import { selectable } from "./question-status";
 
 const shown = (e: SkillEvidence) => e.status === "independent" || e.status === "transfer" || e.status === "verified";
 
@@ -36,7 +37,7 @@ export function overlay(goalId: string, grade: number, curriculum: string[], ev:
   const inYear = new Set(curriculum);
   const foundations = curriculum.filter((id) => g.foundations.strands.includes(graph.get(id).strand));
   const challenges = questions
-    .filter((q) => q.role === "challenge" && q.goals?.includes(goalId))
+    .filter((q) => q.role === "challenge" && q.goals?.includes(goalId) && selectable(q.id))
     .filter((q) => (q.readiness ?? []).every((r) => inYear.has(r)) && graph.get(q.competency).gradeRange[0] <= grade + 1)
     .map((q) => ({ question: q.id, competency: q.competency, readiness: q.readiness ?? [], ready: (q.readiness ?? []).every((r) => shown(ev(r))) }));
   return { goal: g, foundations, challenges, note: `${g.name} is a long-term goal. These are skills from your own year that it builds on; nothing from later grades is shown.` };

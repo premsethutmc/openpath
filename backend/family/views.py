@@ -36,7 +36,7 @@ from rest_framework.authentication import SessionAuthentication
 from rest_framework.exceptions import APIException, Throttled, ValidationError
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.throttling import ScopedRateThrottle
+from rest_framework.throttling import ScopedRateThrottle, SimpleRateThrottle
 from rest_framework.views import APIView
 
 from .models import ACTIVE_SUBJECTS, Pupil, PupilEvent
@@ -363,14 +363,36 @@ class PupilView(AccountBase):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class PupilEventWriteThrottle(SimpleRateThrottle):
+    """Approved policy P1 (2026-10-29): unreadable answers never cost an attempt, so repeated submissions are limited here, by request
+    rate per pupil (OPENPATH_EVENT_RATE), never by assessment. Reading the ledger is not limited."""
+    scope = "pupil-events"
+
+    def get_cache_key(self, request, view):
+        return None if request.method != "POST" else self.cache_format % {"scope": self.scope, "ident": view.kwargs.get("pupil_id")}
+
+
 class PupilEventsView(AccountBase):
     """A pupil's ledger for one subject: read it in order, append one event, or fill an empty one (an import)."""
+    throttle_classes = [PupilEventWriteThrottle]
 
     def get(self, request, pupil_id):
         pupil = _owned(request, pupil_id)
         subject = _subject(request.query_params.get("subject"))
         bodies = list(PupilEvent.objects.filter(pupil=pupil, subject=subject).order_by("seq").values_list("body", flat=True))
-        return Response({"subject": subject, "count": len(bodies), "events": bodies})
+        out = {"subject": subject, "count": len(bodies), "events": bodies}
+        if subject == "mathematics":
+            # events are returned exactly as stored; a later decision that supersedes the one inside an attempt (a regrade) is sent
+            # alongside, keyed by attempt id, and the app's replay uses it (UNIFIED_GRADING_ARCHITECTURE.md §9)
+            from .decisions import latest
+
+            from .learning import grading_mode
+
+            # which policy is authoritative, so the app shows that result and never a conflicting preview (release preparation, check A)
+            out["gradingMode"] = grading_mode()
+            stored = {b.get("id"): (b.get("decision") or {}).get("decisionId") for b in bodies if b.get("record") == "attempt"}
+            out["decisions"] = {k: d for k, d in latest(pupil, subject).items() if k in stored and stored[k] != d.get("decisionId")}
+        return Response(out)
 
     def post(self, request, pupil_id):
         subject = _subject(request.data.get("subject"))
@@ -403,6 +425,11 @@ class PupilEventsView(AccountBase):
                 from .mathematics import checked_activity
                 event = checked_activity(event, pupil)
             PupilEvent.objects.create(pupil=pupil, subject=subject, seq=seq, kind=event["kind"], occurred_at=_occurred_at(event), body=event)
+            if isinstance(event.get("decision"), dict):
+                # grading-decision@1: appended to the decision log in the same transaction as the attempt it decides
+                from .decisions import record
+
+                record(pupil, subject, event["decision"], _occurred_at(event))
         # the saved time (mathematics records keep the server's clock), so the app can use exactly what was stored
         return Response({"count": count + 1, "at": event.get("at")}, status=status.HTTP_201_CREATED)
 

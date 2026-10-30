@@ -1,0 +1,328 @@
+[
+ {
+  "id": "ADV-0105",
+  "expected": "invalid",
+  "principle": "chain rule result cited as the product rule",
+  "answer-only": "full",
+  "findings": [
+   "no-derivation-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "full",
+  "proof": "partial (no-derivation-shown)",
+  "category": "natural-text citation not parsed (known gap)"
+ },
+ {
+  "id": "ALG-0178",
+  "expected": "missing-assumption",
+  "principle": "cancelling x-2 must state x != 2",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "ALG-0189",
+  "expected": "missing-assumption",
+  "principle": "complex fraction simplification must state x != 0",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated",
+   "no-derivation-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "partial (no-derivation-shown)",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "ALG-0205",
+  "expected": "missing-assumption",
+  "principle": "cancelling two factors without stating exclusions",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "ALG-0221",
+  "expected": "missing-assumption",
+  "principle": "multi-step simplification: unstated cancellation",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "CAL-0020",
+  "expected": "invalid",
+  "principle": "product rule cited as chain rule",
+  "answer-only": "full",
+  "findings": [
+   "no-derivation-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "full",
+  "proof": "partial (no-derivation-shown)",
+  "category": "natural-text citation not parsed (known gap)"
+ },
+ {
+  "id": "CAL-0056",
+  "expected": "invalid",
+  "principle": "e^(2x) differentiated, power rule cited",
+  "answer-only": "full",
+  "findings": [
+   "no-derivation-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "full",
+  "proof": "partial (no-derivation-shown)",
+  "category": "natural-text citation not parsed (known gap)"
+ },
+ {
+  "id": "CAL-0099",
+  "expected": "invalid",
+  "principle": "integrating 1/x by the power rule is wrong reasoning",
+  "answer-only": "full",
+  "findings": [],
+  "method (no flags)": "full",
+  "method (all flags)": "full",
+  "proof": "full",
+  "category": "natural-text citation not parsed (known gap)"
+ },
+ {
+  "id": "CAL-0104",
+  "expected": "invalid",
+  "principle": "exponential integral attributed to the power rule",
+  "answer-only": "full",
+  "findings": [
+   "no-derivation-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "full",
+  "proof": "partial (no-derivation-shown)",
+  "category": "natural-text citation not parsed (known gap)"
+ },
+ {
+  "id": "CAL-0154",
+  "expected": "invalid",
+  "principle": "integration by parts cited for a substitution integral",
+  "answer-only": "full",
+  "findings": [],
+  "method (no flags)": "full",
+  "method (all flags)": "full",
+  "proof": "full",
+  "category": "natural-text citation not parsed (known gap)"
+ },
+ {
+  "id": "DOM-0159",
+  "expected": "missing-assumption",
+  "principle": "clearing denominators requires stating the excluded value",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated",
+   "no-derivation-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "partial (no-derivation-shown)",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "DOM-0171",
+  "expected": "missing-assumption",
+  "principle": "rational equation with two denominators",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "DOM-0189",
+  "expected": "missing-assumption",
+  "principle": "merging square roots then squaring",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated",
+   "candidate-check-not-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated,candidate-check-not-shown)",
+  "proof": "partial (candidate-check-not-shown)",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "DOM-0193",
+  "expected": "missing-assumption",
+  "principle": "cancelling a common factor that can vanish",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "DOM-0207",
+  "expected": "missing-assumption",
+  "principle": "compound fraction cancellation",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "DOM-0209",
+  "expected": "missing-assumption",
+  "principle": "division of fractions over several lines",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "DOM-0211",
+  "expected": "missing-assumption",
+  "principle": "product of rational expressions cancels to a constant",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "EQN-0154",
+  "expected": "missing-assumption",
+  "principle": "dropping an extraneous root with no visible check",
+  "answer-only": "full",
+  "findings": [
+   "candidate-check-not-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (candidate-check-not-shown)",
+  "proof": "partial (candidate-check-not-shown)",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "EQN-0200",
+  "expected": "missing-assumption",
+  "principle": "cross-multiplying without stating restrictions",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "EQN-0203",
+  "expected": "missing-assumption",
+  "principle": "excluded candidate silently dropped",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated",
+   "candidate-check-not-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated,candidate-check-not-shown)",
+  "proof": "partial (candidate-check-not-shown)",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "PRF-0033",
+  "expected": "missing-assumption",
+  "principle": "clear denominators without stating the restriction",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "PRF-0036",
+  "expected": "missing-assumption",
+  "principle": "excluded candidate silently dropped, no restriction",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated",
+   "candidate-check-not-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated,candidate-check-not-shown)",
+  "proof": "partial (candidate-check-not-shown)",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "PRF-0043",
+  "expected": "missing-assumption",
+  "principle": "short rational equation, restriction omitted",
+  "answer-only": "full",
+  "findings": [
+   "restriction-not-stated"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (restriction-not-stated)",
+  "proof": "full",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "PRF-0072",
+  "expected": "missing-assumption",
+  "principle": "squaring, extraneous root dropped with no check",
+  "answer-only": "full",
+  "findings": [
+   "candidate-check-not-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "partial (candidate-check-not-shown)",
+  "proof": "partial (candidate-check-not-shown)",
+  "category": "finding recorded; rubric decides"
+ },
+ {
+  "id": "PRF-0172",
+  "expected": "invalid",
+  "principle": "chain-rule result attributed to the product rule",
+  "answer-only": "full",
+  "findings": [
+   "no-derivation-shown"
+  ],
+  "method (no flags)": "full",
+  "method (all flags)": "full",
+  "proof": "partial (no-derivation-shown)",
+  "category": "natural-text citation not parsed (known gap)"
+ }
+]
