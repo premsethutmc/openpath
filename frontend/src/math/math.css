@@ -1,0 +1,618 @@
+/**
+ * Universal Learning Screen Renderer — Styles
+ *
+ * Follows the same design-token approach as the existing OpenPath apps.
+ * Light mode by default; dark mode support via prefers-color-scheme.
+ * Responsive: mobile-first with breakpoints at 640px (tablet) and 1024px (desktop).
+ */
+
+:root {
+  color-scheme: light dark;
+  --lr-ink: #2d2440;
+  --lr-ink-soft: #645a78;
+  --lr-bg: #faf8f4;
+  --lr-surface: #ffffff;
+  --lr-accent: #1f8a7a;
+  --lr-accent-deep: #14584e;
+  --lr-correct: #1f8a7a;
+  --lr-correct-bg: #e8f5f0;
+  --lr-incorrect: #d64040;
+  --lr-incorrect-bg: #fdecea;
+  --lr-partial: #e5a100;
+  --lr-partial-bg: #fff8e6;
+  --lr-hint-bg: #f0f0ff;
+  --lr-hint-border: #b8b0d0;
+  --lr-border: #d8dde0;
+  --lr-keypad-bg: #f2f0ee;
+  --lr-keypad-key: #ffffff;
+  --lr-keypad-active: #e0dcd6;
+  --lr-carry: #e5a100;
+  --lr-radius: 12px;
+  --lr-display: "Baloo 2", ui-rounded, "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  --lr-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --lr-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --lr-ink: #e8e4ef;
+    --lr-ink-soft: #a8a0b8;
+    --lr-bg: #1a1624;
+    --lr-surface: #252030;
+    --lr-accent: #3cc0a8;
+    --lr-accent-deep: #5fd8c0;
+    --lr-correct: #3cc0a8;
+    --lr-correct-bg: #1a2e28;
+    --lr-incorrect: #f06060;
+    --lr-incorrect-bg: #2e1a1a;
+    --lr-partial: #f0c040;
+    --lr-partial-bg: #2e2810;
+    --lr-hint-bg: #22203a;
+    --lr-hint-border: #4a4270;
+    --lr-border: #3a3548;
+    --lr-keypad-bg: #201c2a;
+    --lr-keypad-key: #2a2538;
+    --lr-keypad-active: #3a3548;
+    --lr-carry: #f0c040;
+  }
+}
+
+:root[data-theme="dark"] {
+  --lr-ink: #e8e4ef;
+  --lr-ink-soft: #a8a0b8;
+  --lr-bg: #1a1624;
+  --lr-surface: #252030;
+  --lr-accent: #3cc0a8;
+  --lr-accent-deep: #5fd8c0;
+  --lr-correct: #3cc0a8;
+  --lr-correct-bg: #1a2e28;
+  --lr-incorrect: #f06060;
+  --lr-incorrect-bg: #2e1a1a;
+  --lr-partial: #f0c040;
+  --lr-partial-bg: #2e2810;
+  --lr-hint-bg: #22203a;
+  --lr-hint-border: #4a4270;
+  --lr-border: #3a3548;
+  --lr-keypad-bg: #201c2a;
+  --lr-keypad-key: #2a2538;
+  --lr-keypad-active: #3a3548;
+  --lr-carry: #f0c040;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────── */
+
+* { box-sizing: border-box; }
+
+html, body, #root { height: 100%; margin: 0; }
+
+body {
+  background: var(--lr-bg);
+  color: var(--lr-ink);
+  font-family: var(--lr-body);
+  font-size: 17px;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+button { font: inherit; color: inherit; cursor: pointer; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ── Screen layout ──────────────────────────────────────────────────── */
+
+.lr-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 16px;
+  gap: 16px;
+}
+
+.lr-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 16px;
+}
+
+/* Desktop: side-by-side layout */
+@media (min-width: 1024px) {
+  .lr-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .lr-left { flex: 1; min-width: 0; }
+  .lr-right { flex: 1; min-width: 0; }
+}
+
+/* Tablet: can do side-by-side for simpler modes */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .lr-mode-minimal .lr-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .lr-mode-minimal .lr-left { flex: 1; }
+  .lr-mode-minimal .lr-right { flex: 1; }
+}
+
+/* ── Panels (shared) ────────────────────────────────────────────────── */
+
+.lr-panel {
+  background: var(--lr-surface);
+  border: 1px solid var(--lr-border);
+  border-radius: var(--lr-radius);
+  padding: 20px;
+}
+
+/* ── Question panel ─────────────────────────────────────────────────── */
+
+.lr-question { text-align: center; }
+
+.lr-prompt {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+  color: var(--lr-ink-soft);
+}
+
+.lr-expression {
+  font-family: var(--lr-display);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.math-expr { font-variant-numeric: lining-nums tabular-nums; }
+
+/* ── Numeric input ──────────────────────────────────────────────────── */
+
+.lr-input-panel { padding: 16px; }
+
+.lr-input-row { display: flex; gap: 8px; }
+
+.lr-input-field {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  border: 2px solid var(--lr-border);
+  border-radius: var(--lr-radius);
+  background: var(--lr-surface);
+  color: var(--lr-ink);
+  font-family: var(--lr-mono);
+  font-size: 1.4rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.lr-input-field:focus {
+  border-color: var(--lr-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lr-accent) 20%, transparent);
+}
+
+.lr-input-field:disabled { opacity: 0.5; }
+
+/* ── Keypad ─────────────────────────────────────────────────────────── */
+
+.lr-keypad {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 8px;
+  background: var(--lr-keypad-bg);
+  border-radius: var(--lr-radius);
+}
+
+.lr-keypad-row {
+  display: flex;
+  gap: 6px;
+}
+
+.lr-keypad-key {
+  flex: 1;
+  min-height: 52px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--lr-keypad-key);
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: background 0.1s;
+}
+
+.lr-keypad-key:active { background: var(--lr-keypad-active); }
+.lr-keypad-key:disabled { opacity: 0.35; cursor: default; }
+.lr-keypad-delete { font-size: 1.1rem; }
+
+/* Hide keypad on desktop unless minimal mode */
+@media (min-width: 1024px) {
+  .lr-mode-minimal .lr-keypad,
+  .lr-mode-guided .lr-keypad { display: none; }
+}
+
+/* ── Feedback ───────────────────────────────────────────────────────── */
+
+.lr-feedback {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lr-feedback-correct { border-left: 5px solid var(--lr-correct); background: var(--lr-correct-bg); }
+.lr-feedback-incorrect { border-left: 5px solid var(--lr-incorrect); background: var(--lr-incorrect-bg); }
+.lr-feedback-partial { border-left: 5px solid var(--lr-partial); background: var(--lr-partial-bg); }
+
+.lr-feedback-verdict {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lr-feedback-icon { font-size: 1.3rem; }
+.lr-feedback-message { margin: 0; }
+.lr-feedback-unverified { margin: 0; font-size: 0.85rem; color: var(--lr-ink-soft); }
+.lr-feedback-answer { margin: 0; font-weight: 600; }
+
+/* ── Hints ──────────────────────────────────────────────────────────── */
+
+.lr-hints { background: var(--lr-hint-bg); border-color: var(--lr-hint-border); }
+
+.lr-hint { margin-bottom: 12px; }
+.lr-hint:last-child { margin-bottom: 0; }
+
+.lr-hint-label {
+  margin: 0 0 4px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--lr-ink-soft);
+}
+
+.lr-hint-text { margin: 0; }
+.lr-hint-math { margin-top: 6px; font-family: var(--lr-display); font-size: 1.2rem; }
+
+.lr-hint-reveals { border-left: 3px solid var(--lr-carry); padding-left: 12px; }
+
+.lr-hint-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 2px solid var(--lr-hint-border);
+  border-radius: var(--lr-radius);
+  background: transparent;
+  font-weight: 600;
+}
+
+.lr-hint-count { font-size: 0.85rem; color: var(--lr-ink-soft); }
+
+/* ── Working panel ──────────────────────────────────────────────────── */
+
+.lr-working { padding: 16px; }
+
+.lr-working-toggle {
+  padding: 8px 16px;
+  border: 2px solid var(--lr-border);
+  border-radius: var(--lr-radius);
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.lr-steps {
+  margin: 16px 0 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.lr-step {
+  position: relative;
+  padding: 12px 0 12px 36px;
+  border-bottom: 1px solid var(--lr-border);
+  counter-increment: step;
+}
+
+.lr-step:last-child { border-bottom: 0; }
+
+.lr-step::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--lr-accent);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.lr-step-desc { margin: 0 0 4px; font-weight: 500; }
+
+.lr-step-math {
+  font-family: var(--lr-display);
+  font-size: 1.2rem;
+}
+
+.lr-step-unverified {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--lr-partial-bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--lr-partial);
+}
+
+.lr-step-reveal {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: 2px dashed var(--lr-border);
+  border-radius: var(--lr-radius);
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ── Place-value visualization ──────────────────────────────────────── */
+
+.lr-place-value {
+  background: var(--lr-surface);
+  border: 1px solid var(--lr-border);
+  border-radius: var(--lr-radius);
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.lr-pv-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  text-align: center;
+  font-family: var(--lr-display);
+}
+
+.lr-pv-header {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: var(--lr-ink-soft);
+  border-bottom: 2px solid var(--lr-border);
+}
+
+.lr-pv-label {
+  width: 30px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--lr-ink-soft);
+}
+
+.lr-pv-digit { padding: 8px 12px; }
+
+.lr-pv-block {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--lr-keypad-bg);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.lr-pv-block-result {
+  background: var(--lr-accent);
+  color: white;
+}
+
+.lr-pv-carry-row td { padding: 2px 12px; }
+
+.lr-pv-carry-digit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--lr-carry);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.lr-pv-separator td { padding: 0; }
+.lr-pv-separator hr {
+  border: none;
+  border-top: 3px solid var(--lr-ink);
+  margin: 4px 0;
+}
+
+/* ── Progress bar ───────────────────────────────────────────────────── */
+
+.lr-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.lr-progress-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--lr-ink-soft);
+  white-space: nowrap;
+}
+
+.lr-progress-dots {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.lr-progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--lr-border);
+  background: transparent;
+  transition: all 0.2s;
+}
+
+.lr-progress-current { border-color: var(--lr-accent); background: var(--lr-accent); }
+.lr-progress-correct { border-color: var(--lr-correct); background: var(--lr-correct); }
+.lr-progress-incorrect { border-color: var(--lr-incorrect); background: var(--lr-incorrect); }
+.lr-progress-pending { border-color: var(--lr-border); }
+
+/* ── Navigation controls ────────────────────────────────────────────── */
+
+.lr-nav {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0;
+  justify-content: flex-end;
+}
+
+.lr-nav-btn {
+  min-height: 48px;
+  padding: 0 24px;
+  border: 2px solid transparent;
+  border-radius: var(--lr-radius);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.15s;
+}
+
+.lr-nav-submit {
+  background: var(--lr-accent);
+  color: white;
+}
+
+.lr-nav-submit:disabled { opacity: 0.4; cursor: default; }
+
+.lr-nav-submit:not(:disabled):hover {
+  background: var(--lr-accent-deep);
+}
+
+.lr-nav-skip, .lr-nav-back {
+  background: transparent;
+  border-color: var(--lr-border);
+}
+
+.lr-nav-skip:hover, .lr-nav-back:hover { background: var(--lr-keypad-bg); }
+
+/* ── Focus styles ───────────────────────────────────────────────────── */
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--lr-accent);
+  outline-offset: 2px;
+}
+
+/* ── Mobile adjustments ─────────────────────────────────────────────── */
+
+@media (max-width: 639px) {
+  .lr-screen { padding: 12px; gap: 12px; }
+  .lr-panel { padding: 14px; }
+  .lr-expression { font-size: 2rem; }
+  .lr-pv-block { width: 36px; height: 36px; font-size: 1.1rem; }
+  .lr-pv-digit { padding: 6px 6px; }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ── Demo controls (not part of the renderer) ───────────────────────── */
+
+.demo-controls {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--lr-surface);
+  border-bottom: 1px solid var(--lr-border);
+  padding: 8px 16px;
+}
+
+.demo-controls-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 72rem;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demo-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--lr-accent-deep);
+}
+
+.demo-switches {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+.demo-switches select {
+  padding: 4px 8px;
+  border: 1px solid var(--lr-border);
+  border-radius: 6px;
+  background: var(--lr-surface);
+  color: var(--lr-ink);
+  font: inherit;
+}
+
+.demo-reset {
+  padding: 4px 14px;
+  border: 1px solid var(--lr-border);
+  border-radius: 6px;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.demo-events {
+  max-width: 72rem;
+  margin: 16px auto;
+  padding: 0 16px;
+  font-size: 0.8rem;
+}
+
+.demo-events summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--lr-ink-soft);
+}
+
+.demo-events pre {
+  margin-top: 8px;
+  padding: 12px;
+  background: var(--lr-surface);
+  border: 1px solid var(--lr-border);
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+}

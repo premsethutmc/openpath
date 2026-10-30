@@ -30,7 +30,9 @@
     "english:demo-hash-password": "node scripts/demo-hash-password.mjs",
     "english:demo-dictation": "node --import tsx scripts/demo-dictation.mts",
     "english:build:pilot": "node scripts/build-english.mjs --pilot",
-    "english:build:preview": "node scripts/build-english.mjs --preview"
+    "english:build:preview": "node scripts/build-english.mjs --preview",
+    "math:build": "node scripts/build-math.mjs",
+    "math:build:standalone": "node scripts/build-math.mjs --standalone"
   },
   "dependencies": {
     "react": "^19.2.0",
