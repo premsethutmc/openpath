@@ -103,6 +103,9 @@ function competencyContext(competencyId: string): string {
  * Falls back to a generic op-based explanation only for steps without a
  * justification (backward compatibility with families not yet annotated).
  */
+/** The explanation a family step gives (justification-driven when the step is annotated). */
+export const familyStepExplanation = (problem: Problem, step: Step) => mathematicalExplanation(step, FAMILIES.get(problem.family) ?? ({ teach: undefined } as unknown as Def));
+
 function mathematicalExplanation(step: Step, family: Def): string {
   const result = shown(step.value);
 

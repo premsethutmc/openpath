@@ -3,13 +3,17 @@
  "contract": "teaching-contract@1",
  "modules": 336,
  "sections": 1472,
- "workedVerified": 101,
- "workedLabelled": 1,
+ "workedVerified": 148,
+ "workedLabelled": 50,
  "byRule": {
-  "no-instance": 37,
-  "worked-unverified": 305,
-  "text-not-instance": 161,
+  "no-instance": 17,
+  "worked-unverified": 266,
+  "text-not-instance": 113,
   "decorative-visual": 8
+ },
+ "exempted": {
+  "no-instance": 6,
+  "text-not-instance": 12
  },
  "byModule": {
   "MATH.number.equivalent-fractions": {
@@ -36,34 +40,16 @@
   "MATH.calculus.definite-integrals": {
    "no-instance": 1
   },
-  "MATH.number.factors-multiples": {
-   "no-instance": 1
-  },
-  "MATH.algebra.quadratics": {
-   "no-instance": 1
-  },
   "MATH.geometry.basic-constructions": {
-   "no-instance": 1
-  },
-  "MATH.geometry.construction-triangles": {
    "no-instance": 1
   },
   "MATH.reasoning.proof-intro": {
    "no-instance": 1
   },
-  "MATH.geometry.triangle-proof": {
-   "no-instance": 1
-  },
   "MATH.geometry.constructions-bisectors": {
    "no-instance": 1
   },
-  "MATH.geometry.scaled-construction": {
-   "no-instance": 1
-  },
   "MATH.geometry.construction-quadrilaterals": {
-   "no-instance": 1
-  },
-  "MATH.number.irrationality-proofs": {
    "no-instance": 1
   },
   "MATH.number.root-length-construction": {
@@ -81,26 +67,8 @@
   "MATH.statistics.statistical-questions": {
    "no-instance": 1
   },
-  "MATH.number.exponents": {
-   "no-instance": 2
-  },
   "MATH.algebra.identities-intro": {
-   "no-instance": 2
-  },
-  "MATH.algebra.identities": {
-   "no-instance": 2
-  },
-  "MATH.calculus.derivative-rules": {
-   "no-instance": 2
-  },
-  "MATH.calculus.indefinite-integrals": {
-   "no-instance": 2
-  },
-  "MATH.calculus.integration-methods": {
-   "no-instance": 2
-  },
-  "MATH.algebra.quadratic-discriminant": {
-   "no-instance": 2
+   "worked-unverified": 2
   },
   "MATH.algebra.variables": {
    "worked-unverified": 1
@@ -119,7 +87,7 @@
    "worked-unverified": 1
   },
   "MATH.number.long-division": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.number.fraction-multiply": {
@@ -130,14 +98,14 @@
    "worked-unverified": 1
   },
   "MATH.number.percentage": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.statistics.averages-intro": {
    "worked-unverified": 1
   },
   "MATH.number.square-roots": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.measurement.volume-cubes": {
@@ -146,19 +114,7 @@
   "MATH.algebra.linear-equations": {
    "worked-unverified": 1
   },
-  "MATH.number.proportion": {
-   "worked-unverified": 1
-  },
   "MATH.algebra.factorisation": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.arithmetic-sequences": {
-   "worked-unverified": 1
-  },
-  "MATH.coordinate.distance": {
-   "worked-unverified": 1
-  },
-  "MATH.number.euclid-algorithm": {
    "worked-unverified": 1
   },
   "MATH.algebra.determinants": {
@@ -201,8 +157,7 @@
    "worked-unverified": 1
   },
   "MATH.measurement.calendar": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
+   "worked-unverified": 1
   },
   "MATH.measurement.length-comparison": {
    "worked-unverified": 1
@@ -211,7 +166,7 @@
    "worked-unverified": 1
   },
   "MATH.measurement.money-coins": {
-   "text-not-instance": 2,
+   "text-not-instance": 1,
    "worked-unverified": 1
   },
   "MATH.measurement.money-totals": {
@@ -233,7 +188,7 @@
    "worked-unverified": 1
   },
   "MATH.number.place-value-tens": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.number.subtraction": {
@@ -276,7 +231,7 @@
   },
   "MATH.measurement.clock": {
    "worked-unverified": 1,
-   "text-not-instance": 3
+   "text-not-instance": 2
   },
   "MATH.measurement.money-change": {
    "worked-unverified": 1
@@ -289,7 +244,7 @@
    "text-not-instance": 1
   },
   "MATH.number.equal-groups": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.number.hundreds": {
@@ -310,7 +265,6 @@
    "worked-unverified": 1
   },
   "MATH.number.unit-fractions": {
-   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.reasoning.operation-choice": {
@@ -347,7 +301,7 @@
    "text-not-instance": 1
   },
   "MATH.measurement.money-decimals": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.measurement.perimeter-intro": {
@@ -381,7 +335,7 @@
   },
   "MATH.algebra.pattern-rules": {
    "worked-unverified": 1,
-   "text-not-instance": 2
+   "text-not-instance": 1
   },
   "MATH.geometry.angles-intro": {
    "worked-unverified": 1
@@ -396,7 +350,7 @@
    "worked-unverified": 1
   },
   "MATH.measurement.24-hour-clock": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.measurement.area-squares": {
@@ -408,12 +362,12 @@
    "text-not-instance": 1
   },
   "MATH.measurement.unit-conversions": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.number.decimal-tenths": {
    "worked-unverified": 1,
-   "text-not-instance": 2
+   "text-not-instance": 1
   },
   "MATH.number.even-odd": {
    "worked-unverified": 1,
@@ -426,7 +380,7 @@
   },
   "MATH.number.multiply-divide-powers-of-ten": {
    "worked-unverified": 1,
-   "text-not-instance": 3
+   "text-not-instance": 2
   },
   "MATH.number.rounding": {
    "worked-unverified": 1,
@@ -447,7 +401,7 @@
    "worked-unverified": 1
   },
   "MATH.statistics.scaled-bars": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.algebra.expressions-intro": {
@@ -493,10 +447,6 @@
    "worked-unverified": 1,
    "text-not-instance": 1
   },
-  "MATH.number.hcf-lcm": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
-  },
   "MATH.number.mixed-fractions": {
    "worked-unverified": 1
   },
@@ -505,12 +455,11 @@
    "text-not-instance": 1
   },
   "MATH.number.percent-intro": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.number.primes": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
+   "worked-unverified": 1
   },
   "MATH.reasoning.counterexamples-intro": {
    "worked-unverified": 1
@@ -531,9 +480,6 @@
   "MATH.sequences.explicit-recursive-rules": {
    "worked-unverified": 1
   },
-  "MATH.algebra.inverse-proportion": {
-   "worked-unverified": 1
-  },
   "MATH.geometry.triangle-properties": {
    "worked-unverified": 1
   },
@@ -543,16 +489,9 @@
   "MATH.geometry.parallel-angles": {
    "worked-unverified": 1
   },
-  "MATH.geometry.pythagoras": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
-  },
   "MATH.geometry.tessellations": {
    "worked-unverified": 1,
    "text-not-instance": 1
-  },
-  "MATH.algebra.polynomial-zeros": {
-   "worked-unverified": 1
   },
   "MATH.geometry.polygon-angles": {
    "worked-unverified": 1,
@@ -567,7 +506,7 @@
    "text-not-instance": 1
   },
   "MATH.geometry.quadrilaterals": {
-   "text-not-instance": 2,
+   "text-not-instance": 1,
    "worked-unverified": 1
   },
   "MATH.geometry.scale-drawings": {
@@ -579,10 +518,6 @@
   "MATH.measurement.triangle-area": {
    "worked-unverified": 1
   },
-  "MATH.measurement.circle-area": {
-   "worked-unverified": 1,
-   "text-not-instance": 2
-  },
   "MATH.measurement.parallelogram-rhombus-area": {
    "worked-unverified": 1
   },
@@ -590,14 +525,11 @@
    "worked-unverified": 1,
    "text-not-instance": 1
   },
-  "MATH.measurement.cylinder": {
-   "worked-unverified": 1
-  },
   "MATH.measurement.trapezium-area": {
    "worked-unverified": 1
   },
   "MATH.number.decimal-product": {
-   "text-not-instance": 4,
+   "text-not-instance": 3,
    "worked-unverified": 1
   },
   "MATH.number.fraction-product": {
@@ -609,10 +541,6 @@
   "MATH.number.integer-multiply": {
    "worked-unverified": 1
   },
-  "MATH.measurement.sectors": {
-   "worked-unverified": 1,
-   "text-not-instance": 2
-  },
   "MATH.number.integers": {
    "worked-unverified": 1,
    "text-not-instance": 1
@@ -622,8 +550,7 @@
    "text-not-instance": 1
   },
   "MATH.number.prime-factorisation": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
+   "worked-unverified": 1
   },
   "MATH.number.ratio": {
    "worked-unverified": 1,
@@ -637,7 +564,7 @@
    "text-not-instance": 2
   },
   "MATH.number.profit-loss": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.number.ratio-division": {
@@ -662,7 +589,7 @@
    "text-not-instance": 1
   },
   "MATH.number.scientific-notation": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.probability.chance-language": {
@@ -672,15 +599,12 @@
    "worked-unverified": 1,
    "text-not-instance": 1
   },
-  "MATH.probability.sample-space": {
-   "worked-unverified": 1
-  },
   "MATH.reasoning.conjecture-testing": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.reasoning.divisibility": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.reasoning.number-grid-puzzles": {
@@ -708,22 +632,13 @@
   "MATH.statistics.histograms": {
    "worked-unverified": 1
   },
-  "MATH.algebra.polynomials": {
-   "worked-unverified": 1
-  },
   "MATH.algebra.factor-theorem": {
    "worked-unverified": 1
   },
   "MATH.algebra.linear-two-variables": {
    "worked-unverified": 1
   },
-  "MATH.algebra.polynomial-gcd-lcm": {
-   "worked-unverified": 1
-  },
   "MATH.algebra.rational-expressions": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.function-operations": {
    "worked-unverified": 1
   },
   "MATH.algebra.linear-systems": {
@@ -738,23 +653,6 @@
   "MATH.algebra.quadratic-graphs": {
    "worked-unverified": 1
   },
-  "MATH.sequences.power-sums": {
-   "text-not-instance": 2,
-   "worked-unverified": 1
-  },
-  "MATH.coordinate.distance-intro": {
-   "worked-unverified": 1
-  },
-  "MATH.coordinate.polygon-area": {
-   "worked-unverified": 1
-  },
-  "MATH.geometry.circle-theorems": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
-  },
-  "MATH.measurement.cones-spheres": {
-   "worked-unverified": 1
-  },
   "MATH.measurement.heron": {
    "worked-unverified": 1
   },
@@ -763,26 +661,6 @@
    "worked-unverified": 1
   },
   "MATH.measurement.pyramids": {
-   "worked-unverified": 1
-  },
-  "MATH.measurement.combined-solids": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
-  },
-  "MATH.measurement.frustum": {
-   "worked-unverified": 1
-  },
-  "MATH.number.real-numbers": {
-   "text-not-instance": 4,
-   "worked-unverified": 1
-  },
-  "MATH.geometry.similarity": {
-   "worked-unverified": 1
-  },
-  "MATH.geometry.circle-tangents": {
-   "worked-unverified": 1
-  },
-  "MATH.geometry.ceva-menelaus": {
    "worked-unverified": 1
   },
   "MATH.geometry.midpoint-theorem": {
@@ -794,19 +672,8 @@
   "MATH.geometry.euclidean": {
    "worked-unverified": 1
   },
-  "MATH.number.modular-arithmetic": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
-  },
-  "MATH.probability.classical": {
-   "worked-unverified": 1
-  },
   "MATH.probability.tree-diagrams": {
    "worked-unverified": 1
-  },
-  "MATH.probability.complements": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
   },
   "MATH.reasoning.mathematical-argument": {
    "worked-unverified": 1
@@ -815,8 +682,7 @@
    "worked-unverified": 1
   },
   "MATH.statistics.grouped-data": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
+   "worked-unverified": 1
   },
   "MATH.statistics.stacked-bar-charts": {
    "worked-unverified": 1
@@ -824,34 +690,17 @@
   "MATH.statistics.weighted-mean": {
    "worked-unverified": 1
   },
-  "MATH.statistics.grouped-mean": {
-   "worked-unverified": 1
-  },
-  "MATH.trigonometry.heights-distances": {
-   "worked-unverified": 1,
-   "text-not-instance": 1
-  },
-  "MATH.trigonometry.identities": {
-   "worked-unverified": 1
-  },
   "MATH.trigonometry.ratios": {
-   "worked-unverified": 1,
-   "text-not-instance": 2
+   "worked-unverified": 1
   },
   "MATH.algebra.sets": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.relations": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.functions": {
    "worked-unverified": 1
   },
   "MATH.algebra.function-transformations": {
    "worked-unverified": 1
   },
   "MATH.algebra.standard-function-graphs": {
-   "text-not-instance": 2,
+   "text-not-instance": 1,
    "worked-unverified": 1
   },
   "MATH.algebra.inequalities-two-variables": {
@@ -870,9 +719,6 @@
    "worked-unverified": 1
   },
   "MATH.algebra.binomial": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.geometric-sequences": {
    "worked-unverified": 1
   },
   "MATH.sequences.agp-hp": {
@@ -898,13 +744,7 @@
    "worked-unverified": 1,
    "text-not-instance": 1
   },
-  "MATH.sets-relations.cartesian-product": {
-   "worked-unverified": 1
-  },
   "MATH.sets-relations.real-intervals": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.inverse-functions": {
    "worked-unverified": 1
   },
   "MATH.algebra.linear-programming": {
@@ -933,9 +773,6 @@
    "worked-unverified": 1
   },
   "MATH.matrices.system-consistency": {
-   "worked-unverified": 1
-  },
-  "MATH.matrices.transpose-symmetry": {
    "worked-unverified": 1
   },
   "MATH.sets-relations.binary-operations": {
@@ -1031,9 +868,6 @@
   "MATH.coordinate.pair-of-lines": {
    "worked-unverified": 1
   },
-  "MATH.coordinate.straight-lines": {
-   "worked-unverified": 1
-  },
   "MATH.coordinate.conic-tangents-normals": {
    "worked-unverified": 1,
    "text-not-instance": 1
@@ -1062,9 +896,6 @@
   "MATH.number.de-moivre-roots": {
    "worked-unverified": 1
   },
-  "MATH.probability.events": {
-   "worked-unverified": 1
-  },
   "MATH.probability.bayes": {
    "worked-unverified": 1
   },
@@ -1091,14 +922,11 @@
   "MATH.reasoning.propositional-logic": {
    "worked-unverified": 1
   },
-  "MATH.statistics.dispersion": {
-   "worked-unverified": 1
-  },
   "MATH.statistics.mean-deviation": {
    "worked-unverified": 1
   },
   "MATH.trigonometry.compound-angle-identities": {
-   "text-not-instance": 3,
+   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.trigonometry.equations": {

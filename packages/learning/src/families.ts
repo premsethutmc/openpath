@@ -19,6 +19,7 @@ import { b1Object, laObject, m2Object } from "./typed-contract.ts";
 import { numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { DOMAIN_FAMILIES } from "./fam";
 
+import type { InstanceTeaching } from "./family-kit";
 import { EXP, MT, SUP, SUPREAD, addForMul, coef, factId, factSlip, fmt, gcd, int, mul, near, neg, neighbours, norm, pairs, par, powerOf, powerSlip, show, signed, simpson, sup, unsup, xp, type Bug, type Def, type Problem, type Step, type Value } from "./family-kit";
 export { show, neighbours, factId, type Bug, type Problem, type Step, type Value, type Def } from "./family-kit";
 
@@ -545,6 +546,12 @@ const F: Def[] = [
     },
     variants: (p) => pairs(p, [[-6, 6], [-9, 9]], ([pp, qq]) => pp !== 0 && qq !== 0),
     explain: (s) => (s.id === "square" ? `b² = ${par(s.inputs[0])}² = ${show(s.value)}` : s.id === "four-q" ? `4ac = 4 × ${par(s.inputs[1])} = ${neg(show(s.value))}` : s.id === "discriminant" ? `b² − 4ac = ${s.inputs[0]} − ${par(s.inputs[1])} = ${neg(show(s.value))}` : `${show(s.inputs[0] as number)} is ${(s.inputs[0] as number) > 0 ? "positive: two solutions" : s.inputs[0] === 0 ? "zero: one solution" : "negative: no real solutions"}`),
+    teach: {
+      idea: "The discriminant b² − 4ac of ax² + bx + c = 0 decides how many real solutions there are: positive, two; zero, one; negative, none.",
+      method: "Work out b², then 4ac with each sign kept, then subtract, and read the sign of the result.",
+      // stage 2: two, one and no real solutions are practised as different cases (the lesson's text comes from its blueprint)
+      caseOf: ([p, q]) => (p * p - 4 * q > 0 ? "two" : p * p - 4 * q === 0 ? "one" : "none"),
+    },
   },
   // ======================================================== families@2: families for curriculum coverage (each with an
   // approved generation domain, a difficulty rule and teaching hints; reviewed as a whole, see spec.ts)
@@ -999,7 +1006,7 @@ const F: Def[] = [
     explain: (s) => (s.id === "steps" ? `From term 1 to term ${s.inputs[0]}: ${show(s.value)} jumps` : s.id === "jump" ? `${s.inputs[0]} jumps of ${s.inputs[1]}: ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[1, 20], [2, 9], [5, 20]],
     difficulty: ([, d, n]) => (n <= 10 && d <= 5 ? 1 : n <= 15 ? 2 : 3),
-    teach: { idea: "Each term of an arithmetic progression is the one before plus the common difference d.", method: "Term n = first term + (n − 1) × d: count the jumps, not the terms." },
+    teach: { idea: "Each term of an arithmetic progression is the one before plus the common difference d.", method: "Term n = first term + (n − 1) × d: count the jumps, not the terms.", instance: apTeaching },
   },
   {
     id: "cdist",
@@ -1081,7 +1088,7 @@ const F: Def[] = [
     domain: [[12, 98], [13, 99]],
     keep: ([a, b]) => a < b,
     difficulty: ([a, b]) => (gcd(a, b) <= 5 && b < 50 ? 1 : b < 70 ? 2 : 3),
-    teach: { idea: "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder.", method: "Divide the larger by the smaller and keep the remainder; repeat with the smaller number and the remainder until the remainder is 0." },
+    teach: { idea: "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder.", method: "Divide the larger by the smaller and keep the remainder; repeat with the smaller number and the remainder until the remainder is 0." , instance: euclidTeaching },
   },
   {
     id: "det2",
@@ -1382,6 +1389,41 @@ export function problemOf(id: string): Problem | null {
   }
 }
 export const variantsOf = (pr: Problem): Problem[] => FAMILIES.get(pr.family)!.variants(pr.params).flatMap((p) => (FAMILIES.get(pr.family)!.reject(p) ? [] : [build(FAMILIES.get(pr.family)!, p)])).filter((v) => selectable(v.id));
+/** teaching-contract@1 (stage 2, arithmetic progressions): the teaching for one progression [a, d, n]. */
+function apTeaching([a, d, n]: number[]): InstanceTeaching {
+  const t = (k: number) => a + (k - 1) * d, answer = t(n);
+  return {
+    concept: { title: "Adding the same difference", text: [`${a}, ${t(2)}, ${t(3)}, … goes up by ${d} each time: ${d} is the common difference.`, `To reach term ${n} from term 1 you make ${n - 1} jumps of ${d}, not ${n}.`] },
+    // the three terms the question gives
+    representation: { kind: "sequence-table", rows: [1, 2, 3].map((k) => ({ n: k, value: t(k), how: k === 1 ? "start" : `${a} + ${k - 1} × ${d}` })), change: "difference", caption: `Each term is ${d} more than the one before` },
+    worked: {
+      result: answer,
+      steps: [
+        { expression: `d = ${t(2)} − ${a} = ${d}`, explanation: "The common difference is any term minus the one before it.", claims: [{ expr: `${t(2)} − ${a}`, value: d }, { expr: `${t(3)} − ${t(2)}`, value: d }] },
+        { expression: `Jumps from term 1 to term ${n}: ${n} − 1 = ${n - 1}`, explanation: "Count the jumps between terms, not the terms.", claims: [{ expr: `${n} − 1`, value: n - 1 }] },
+        { expression: `Term ${n} = ${a} + ${n - 1} × ${d} = ${a} + ${(n - 1) * d} = ${answer}`, explanation: `Start at the first term and add ${n - 1} jumps of ${d}.`, claims: [{ expr: `${n - 1} × ${d}`, value: (n - 1) * d }, { expr: `${a} + ${(n - 1) * d}`, value: answer }] },
+      ],
+    },
+  };
+}
+/** teaching-contract@1 (stage 2, Euclid's algorithm): the teaching for one pair [a, b]: the division steps themselves. */
+function euclidTeaching([a, b]: number[]): InstanceTeaching {
+  const rows: { dividend: number; divisor: number; quotient: number; remainder: number }[] = [];
+  let [x, y] = [b, a];
+  while (y) { rows.push({ dividend: x, divisor: y, quotient: Math.floor(x / y), remainder: x % y }); [x, y] = [y, x % y]; }
+  const g = x;
+  return {
+    concept: { title: "Euclid's division algorithm", text: [`Any number that divides both ${b} and ${a} also divides the remainder when ${b} is divided by ${a}.`, "So the HCF does not change when the larger number is replaced by that remainder. Repeat until the remainder is 0: the last divisor is the HCF."] },
+    representation: { kind: "division-chain", rows, caption: `Each divisor and remainder move down a row; the last divisor, ${g}, is the HCF` },
+    worked: {
+      result: g,
+      steps: [
+        ...rows.map((r) => ({ expression: `${r.dividend} = ${r.quotient} × ${r.divisor} + ${r.remainder}`, explanation: r.remainder ? `Divide ${r.dividend} by ${r.divisor}: the remainder ${r.remainder} becomes the next divisor.` : `The remainder is 0, so ${r.divisor} divides ${r.dividend} exactly.`, claims: [{ expr: `${r.quotient} × ${r.divisor} + ${r.remainder}`, value: r.dividend }] })),
+        { expression: `HCF(${a}, ${b}) = ${g}`, explanation: `The last non-zero remainder (the last divisor) is the HCF. Check: ${a} = ${a / g} × ${g} and ${b} = ${b / g} × ${g}.`, claims: [{ expr: `${a / g} × ${g}`, value: a }, { expr: `${b / g} × ${g}`, value: b }] },
+      ],
+    },
+  };
+}
 export const explainStep = (pr: Problem, s: Step) => prose(FAMILIES.get(pr.family)!.explain(s));
 
 // ---------------------------------------------------------------- decomposition (decomposition@2)

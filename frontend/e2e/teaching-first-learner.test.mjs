@@ -99,7 +99,10 @@ for (const width of [360, 393]) for (const sample of cases) test(`${width}px ${s
     await page.getByRole("button", { name: "Check", exact: true }).click();
     assert.equal((await wrongSaved).status(), 201);
     await page.getByText("Not this time.", { exact: true }).waitFor();
-    assert.match(await page.locator(".feedback.bad").innerText(), sample.board === "tn" ? /subtracted.*divide/i : /subtracting a negative.*adding its opposite/i);
+    // stage 2: practice starts with a fresh question rather than the example solved on the page, so the diagnosis is checked when
+    // the question is the subtraction kind (an addition question gets the general next step)
+    const subtractsNegative = /^gen:aiint:-?\d+,-\d+,1/.test(qid);
+    assert.match(await page.locator(".feedback.bad").innerText(), sample.board === "tn" ? /subtracted.*divide/i : subtractsNegative ? /subtracting a negative.*adding its opposite/i : /working|step|add/i);
     await screenshot(page, `${width}-${sample.name}-learner-mistake`);
     await page.getByRole("button", { name: "Give me a hint", exact: true }).click();
     await page.getByRole("complementary", { name: "Contextual help" }).waitFor();

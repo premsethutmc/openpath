@@ -216,7 +216,13 @@ export interface TeachStep {
 export type Representation =
   | { kind: "dot-array"; rows: number; cols: number; value: number; caption: string }
   | { kind: "dot-triangle"; rows: number; value: number; caption: string }
-  | { kind: "sequence-table"; rows: { n: number; value: number; how?: string }[]; change?: "difference" | "ratio"; caption: string };
+  | { kind: "sequence-table"; rows: { n: number; value: number; how?: string }[]; change?: "difference" | "ratio"; caption: string }
+  /** a right triangle with its two shorter sides and hypotenuse; the side asked for is null */
+  | { kind: "right-triangle"; a: number | null; b: number | null; c: number | null; caption: string }
+  /** equally likely objects, counted by kind (balls in a bag); the kind asked about is marked */
+  | { kind: "counts"; items: { label: string; count: number; asked?: boolean }[]; caption: string }
+  /** Euclid's division steps: dividend = quotient × divisor + remainder, each divisor and remainder carried down */
+  | { kind: "division-chain"; rows: { dividend: number; divisor: number; quotient: number; remainder: number }[]; caption: string };
 /** The teaching for one concrete question: its concept, its worked solution, and a picture of the same instance. */
 export interface InstanceTeaching {
   concept: { title: string; text: string[] };

@@ -147,3 +147,16 @@
 .sequence-visual .sequence-how td { font-size: .78rem; color: #4f4a43; }
 .sequence-visual .sequence-change td { color: #2f7a52; }
 .worked-label { margin-top: 14px; }
+.triangle-visual svg { display: block; width: 100%; max-width: 320px; margin: 0 auto; }
+.triangle-visual polygon { fill: #f1eeff; stroke: #4d456a; stroke-width: 2; }
+.triangle-visual polyline { stroke: #4d456a; stroke-width: 1.5; }
+.triangle-visual text { fill: #292536; font: 600 15px Georgia, "Times New Roman", serif; }
+.triangle-visual text.asked { fill: #5b48bd; }
+.count-balls { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 6px 0; }
+.ball { width: 22px; height: 22px; border-radius: 50%; border: 2px solid transparent; }
+.ball-red { background: #d6574a; } .ball-blue { background: #3f6fd1; } .ball-green { background: #3a9a63; }
+.ball.asked { border-color: #1d1f28; }
+.counts-visual figcaption { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.counts-visual figcaption .asked { font-weight: 800; }
+.chain-visual th { text-align: center; }
+.chain-visual td.zero { color: #2f7a52; font-weight: 800; }

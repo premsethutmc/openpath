@@ -53,6 +53,8 @@ export interface Screen {
   role?: import("./family-kit").TeachRole;
   /** teaching-contract@1: the question this section's text, solution and picture are about. */
   instance?: string;
+  /** teaching-contract@1: the text was written for this question by the family's own code (not family-level text). */
+  textFrom?: "instance";
 }
 export interface Strategy {
   id: string;

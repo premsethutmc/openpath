@@ -1043,10 +1043,10 @@
     "forgot-four (procedural): The discriminant was taken as b² − c; it is b² − 4ac."
    ],
    "teach": {
-    "idea": "b² − 4ac decides how many real solutions there are.",
-    "method": "Positive: two; zero: one; negative: none."
+    "idea": "The discriminant b² − 4ac of ax² + bx + c = 0 decides how many real solutions there are: positive, two; zero, one; negative, none.",
+    "method": "Work out b², then 4ac with each sign kept, then subtract, and read the sign of the result."
    },
-   "fingerprint": "ddb647e1",
+   "fingerprint": "66a30d48",
    "validation": {
     "family": "disc",
     "deterministic": {
@@ -1931,7 +1931,7 @@
     "idea": "Each term of an arithmetic progression is the one before plus the common difference d.",
     "method": "Term n = first term + (n − 1) × d: count the jumps, not the terms."
    },
-   "fingerprint": "a8dad5c4",
+   "fingerprint": "7cdbaeff",
    "validation": {
     "family": "apn",
     "deterministic": {
@@ -2061,7 +2061,7 @@
     "idea": "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder.",
     "method": "Divide the larger by the smaller and keep the remainder; repeat with the smaller number and the remainder until the remainder is 0."
    },
-   "fingerprint": "db3c75dc",
+   "fingerprint": "7bb1d3fc",
    "validation": {
     "family": "hcf",
     "deterministic": {
@@ -25334,7 +25334,7 @@
      }
     ]
    },
-   "fingerprint": "fca8fa06",
+   "fingerprint": "7975071c",
    "validation": {
     "family": "aglcm",
     "deterministic": {
@@ -29265,7 +29265,7 @@
      }
     ]
    },
-   "fingerprint": "2ff67d44",
+   "fingerprint": "ddf55f1a",
    "validation": {
     "family": "ahpyth",
     "deterministic": {
@@ -34940,7 +34940,7 @@
      }
     ]
    },
-   "fingerprint": "5f7f42ec",
+   "fingerprint": "a3c2e924",
    "validation": {
     "family": "ajpf",
     "deterministic": {
@@ -47626,7 +47626,7 @@
      }
     ]
    },
-   "fingerprint": "deeef979",
+   "fingerprint": "9549dde1",
    "validation": {
     "family": "amrec",
     "deterministic": {
@@ -50341,7 +50341,7 @@
      }
     ]
    },
-   "fingerprint": "c9c925f1",
+   "fingerprint": "eb2e3958",
    "validation": {
     "family": "anmod",
     "deterministic": {
@@ -50578,7 +50578,7 @@
      }
     ]
    },
-   "fingerprint": "ea3d4093",
+   "fingerprint": "84d2abea",
    "validation": {
     "family": "anbag",
     "deterministic": {
@@ -50891,7 +50891,7 @@
      }
     ]
    },
-   "fingerprint": "7b854894",
+   "fingerprint": "deb229ea",
    "validation": {
     "family": "ancomp",
     "deterministic": {

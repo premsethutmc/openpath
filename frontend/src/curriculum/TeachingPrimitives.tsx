@@ -96,6 +96,33 @@ export function RepresentationRenderer({ representation: r }: { representation: 
       <figcaption>{r.caption}</figcaption>
     </figure>;
   }
+  if (r.kind === "right-triangle") {
+    const side = (v: number | null, name: string) => (v === null ? `${name} = ?` : `${name} = ${v} cm`);
+    return <figure className="teaching-data-visual triangle-visual" role="img" aria-label={`Right triangle: ${side(r.a, "a")}, ${side(r.b, "b")}, hypotenuse ${side(r.c, "c")}`} data-kind={r.kind}>
+      <svg viewBox="0 0 300 190" aria-hidden="true">
+        <polygon points="80,160 280,160 80,30" />
+        <polyline points="80,144 96,144 96,160" fill="none" />
+        <text x="180" y="182" textAnchor="middle">{r.b === null ? "b = ?" : `b = ${r.b}`}</text>
+        <text x="72" y="98" textAnchor="end">{r.a === null ? "a = ?" : `a = ${r.a}`}</text>
+        <text x="190" y="86" textAnchor="start" className={r.c === null ? "asked" : ""}>{r.c === null ? "c = ?" : `c = ${r.c}`}</text>
+      </svg>
+      <figcaption>{r.caption}</figcaption>
+    </figure>;
+  }
+  if (r.kind === "counts") {
+    const total = r.items.reduce((n, it) => n + it.count, 0);
+    return <figure className="teaching-data-visual counts-visual" role="img" aria-label={`${total} equally likely: ${r.items.map((it) => `${it.count} ${it.label}`).join(", ")}`} data-kind={r.kind}>
+      <div className="count-balls">{r.items.flatMap((it) => Array.from({ length: it.count }, (_, k) => <span key={`${it.label}-${k}`} className={`ball ball-${it.label}${it.asked ? " asked" : ""}`} />))}</div>
+      <figcaption>{r.items.map((it) => <span key={it.label} className={it.asked ? "asked" : ""}>{it.count} {it.label}</span>)}<span>{r.caption}</span></figcaption>
+    </figure>;
+  }
+  if (r.kind === "division-chain") {
+    return <figure className="teaching-data-visual sequence-visual chain-visual" aria-label={r.caption} data-kind={r.kind}>
+      <table><thead><tr><th>Divide</th><th>by</th><th>quotient</th><th>remainder</th></tr></thead>
+        <tbody>{r.rows.map((row, k) => <tr key={k}><td>{row.dividend}</td><td>{row.divisor}</td><td>{row.quotient}</td><td className={row.remainder === 0 ? "zero" : ""}>{row.remainder}</td></tr>)}</tbody></table>
+      <figcaption>{r.caption}</figcaption>
+    </figure>;
+  }
   const change = r.change;
   return <figure className="teaching-data-visual sequence-visual" aria-label={r.caption} data-kind={r.kind}>
     <table>

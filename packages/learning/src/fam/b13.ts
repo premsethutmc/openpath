@@ -1640,7 +1640,17 @@ export const B13: Def[] = [
     teach: {
       idea: "A recurring decimal is rational: multiplying by a power of 10 shifts the repeating part, and subtracting makes the endless tail cancel.",
       method: "Let x be the number. Multiply by 10 for one repeating digit, by 100 for two, and subtract so the repeating tails cancel; then divide and simplify.",
-      alternatives: [{ id: "nines", title: "The nines rule", kind: "procedural", text: ["0.ddd… = d/9 and 0.ababab… = ab/99.", "If one digit comes before the repeat, as in 0.2777…, use (27 − 2)/90."] }],
+      alternatives: [{
+        id: "nines", title: "The nines rule", kind: "procedural", text: ["0.ddd… = d/9 and 0.ababab… = ab/99.", "If one digit comes before the repeat, as in 0.2777…, use (27 − 2)/90."],
+        // stage 2: the rule applied to the question's own decimal
+        textFor: ([f, n, x]) => {
+          const frac = (p: number, q: number) => { const g = gcd(p, q); return `${p / g}/${q / g}`; };
+          if (f === 0) return [`One digit repeats, so 0.${x}${x}${x}… = ${x}/9.`, `${n}.${x}${x}${x}… = ${n} + ${x}/9 = ${9 * n + x}/9 = ${frac(9 * n + x, 9)}.`];
+          const ab = String(x).padStart(2, "0");
+          if (f === 1) return [`A block of two digits repeats, so 0.${ab}${ab}… = ${x}/99.`, `${n}.${ab}${ab}… = ${n} + ${x}/99 = ${99 * n + x}/99 = ${frac(99 * n + x, 99)}.`];
+          return [`One digit, ${n}, comes before the repeating ${x}: use (${n}${x} − ${n})/90.`, `(${10 * n + x} − ${n})/90 = ${9 * n + x}/90 = ${frac(9 * n + x, 90)}.`];
+        },
+      }],
     },
     limits: "One repeating digit, a two-digit repeating block, or one digit before one repeating digit.",
   },

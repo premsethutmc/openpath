@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { moduleFor, needsMarking, question } from "../../../packages/learning/src/content";
 import { problemOf } from "../../../packages/learning/src/families";
 import { modulePhasePool } from "../../../packages/learning/src/library";
-import { lessonBlocks, type LessonBlock } from "../../../packages/learning/src/teaching-contract";
+import { teachingLesson, type LessonBlock } from "../../../packages/learning/src/teaching-contract";
 import { teachingScopeFor } from "../../../packages/learning/src/teaching-presentation";
 import { Figure } from "../year/Figure";
 import { ProgressiveWorkedExample, RepresentationRenderer, TeachingVisualRenderer } from "./TeachingPrimitives";
@@ -30,24 +30,32 @@ function TeachingBlock({ block, index, resumeKey, repeatsHeading = false }: { bl
   </section>;
 }
 
-export function teachingPracticeIds(competency: string) {
-  const module = moduleFor(competency);
-  if (!module) return [];
+const lessonCache = new Map<string, ReturnType<typeof teachingLesson> | null>();
+function lessonFor(competency: string) {
+  if (!lessonCache.has(competency)) { const module = moduleFor(competency); lessonCache.set(competency, module ? teachingLesson(module, candidatesFor(module)) : null); }
+  return lessonCache.get(competency)!;
+}
+/** Practice candidates: the lesson's practice pool, minus questions needing marking and questions outside the taught scope. */
+function candidatesFor(module: NonNullable<ReturnType<typeof moduleFor>>) {
   const scope = teachingScopeFor(module);
-  const ids = [...modulePhasePool(module, "practice"), ...module.practice, ...module.transfer];
-  return [...new Set(ids)].filter((id) => {
+  return [...new Set([...modulePhasePool(module, "practice"), ...module.practice, ...module.transfer])].filter((id) => {
     if (needsMarking(question(id))) return false;
     const problem = problemOf(id);
     return !!problem && scope.accepts(problem);
   });
+}
+/** Practice queue for a lesson: the kind of question the lesson worked through first, never a question it already solved first. */
+export function teachingPracticeIds(competency: string) {
+  return lessonFor(competency)?.practice ?? [];
 }
 
 /** Shared teaching-first content for preview and authenticated learner journeys. */
 export function TeachingContent({ competency, topic, onPractice, resumeKey }: { competency: string; topic: TopicCopy; onPractice: () => void; resumeKey?: string }) {
   const module = moduleFor(competency);
   const scope = useMemo(() => module ? teachingScopeFor(module) : null, [module]);
-  const practice = useMemo(() => teachingPracticeIds(competency), [competency]);
-  const blocks = useMemo(() => module ? lessonBlocks(module, practice) : [], [module, practice]);
+  const lesson = useMemo(() => lessonFor(competency), [competency]);
+  const practice = lesson?.practice ?? [];
+  const blocks = lesson?.blocks ?? [];
   const exampleId = scope?.strategyId ? module?.strategies.find((strategy) => strategy.id === scope.strategyId)?.guided : undefined;
   const exampleProblem = exampleId ? problemOf(exampleId) : null;
   const primaryId = exampleId && exampleProblem && scope?.accepts(exampleProblem) ? exampleId : practice[0];

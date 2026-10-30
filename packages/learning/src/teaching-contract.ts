@@ -16,9 +16,17 @@
  * section lists which of its parts are mechanically verified and which await review.
  */
 import { moduleFor, question, type Module, type Screen, type Strategy } from "./content";
-import { FAMILIES, parseProblem, problemOf, type Problem } from "./families";
+import { explainStep, exposureKey, FAMILIES, parseProblem, problemOf, show, type Problem } from "./families";
+import scopeData from "../../../content/learning/showcase-grade10.v1.json";
+import exemptionData from "../../../content/learning/teaching-contract-exemptions.v1.json";
 import type { Representation, TeachRole } from "./family-kit";
-import { teachingPresentationFrom, teachingScopeFor, type TeachingVisual } from "./teaching-presentation";
+import { familyStepExplanation, teachingPresentationFrom, teachingScopeFor, type TeachingVisual } from "./teaching-presentation";
+
+/** The Grade 10 showcase scope (CBSE and Tamil Nadu lessons) and its curated lessons (stage 2). */
+export const SHOWCASE = scopeData as { competencies: string[]; curated: string[] };
+const SCOPE = new Set(SHOWCASE.competencies);
+/** Reviewed decisions that a flagged section is not a defect (each with its reason), e.g. a general fact, not an example. */
+export const EXEMPTIONS = exemptionData as { entries: { competency: string; title: string; rule: Violation; reason: string }[] };
 
 export const TEACHING_CONTRACT = "teaching-contract@1" as const;
 
@@ -46,7 +54,7 @@ export interface LessonBlock {
   title: string;
   text: string[];
   instance: string | null;
-  worked: { question: string; steps: { expression: string; explanation: string }[]; verified: boolean; source: "contract" | "kernel" | "compatibility" } | null;
+  worked: { question: string; steps: { expression: string; explanation: string }[]; verified: boolean; source: "contract" | "kernel" | "compatibility" | "family-steps" } | null;
   /** A picture of the question's own mathematical object (teaching-contract@1 families). */
   representation: Representation | null;
   /** A typed picture from the teaching presentation (kernel and adapter families). */
@@ -56,6 +64,8 @@ export interface LessonBlock {
   /** Which parts are mechanically verified, and which are explanations that still need educator review. */
   claims: { verified: string[]; review: string[] };
   violations: Violation[];
+  /** Flags a reviewed exemption settles (not counted as violations; listed with their reasons). */
+  exempt: { rule: Violation; reason: string }[];
 }
 
 // ---------------------------------------------------------------- arithmetic claims
@@ -138,18 +148,31 @@ function instanceNumbers(p: Problem, extra: string[]): Set<number> {
     ...numbersIn(p.prompt), ...p.params.map((x) => Math.abs(x)), ...numbersIn(p.answer),
     ...p.steps.flatMap((st) => [...st.inputs, st.value].flatMap((v) => numbersIn(String(v)))),
     // the family's diagnoses are computed from the same parameters, so the numbers they quote belong to this question
-    ...p.bugs.flatMap((b) => [...(b.predict === null ? [] : numbersIn(String(b.predict))), ...numbersIn(b.says)]),
+    ...p.bugs.flatMap((b) => [...(b.predict === null ? [] : [...numbersIn(String(b.predict)), ...numbersIn(show(b.predict))]), ...numbersIn(b.says)]),
     ...extra.flatMap(numbersIn),
     0, 1, 2,
   ];
   return new Set(values);
 }
 
-function checkRepresentation(r: Representation, p: Problem): boolean {
+export function checkRepresentation(r: Representation, p: Problem): boolean {
   const given = new Set(numbersIn(p.prompt));
   const howHolds = (how: string | undefined, value: number) => !how || !/^[\d\s()+\-−×÷^.]+$/.test(how) || holds(how, value);
   if (r.kind === "dot-array") return r.rows * r.cols === r.value && given.has(r.value);
   if (r.kind === "dot-triangle") return (r.rows * (r.rows + 1)) / 2 === r.value && given.has(r.value);
+  if (r.kind === "right-triangle") {
+    // the sides shown are the question's, exactly one is asked for, and with the checked answer in its place they satisfy a² + b² = c²
+    const shown = [r.a, r.b, r.c].filter((x): x is number => x !== null);
+    if (shown.length !== 2 || !shown.every((x) => given.has(x))) return false;
+    const ans = numericAnswer(p.answer), [a, b, c] = [r.a ?? ans, r.b ?? ans, r.c ?? ans];
+    return a * a + b * b === c * c;
+  }
+  if (r.kind === "counts") return r.items.every((it) => given.has(it.count)) && r.items.filter((it) => it.asked).length === 1;
+  if (r.kind === "division-chain") {
+    // each row is a true division, each divisor and remainder move down a row, it starts from the question's numbers and ends at 0
+    const ok = r.rows.every((row, k) => row.dividend === row.quotient * row.divisor + row.remainder && row.remainder < row.divisor && (k === 0 || (row.dividend === r.rows[k - 1].divisor && row.divisor === r.rows[k - 1].remainder)));
+    return ok && given.has(r.rows[0].dividend) && given.has(r.rows[0].divisor) && r.rows.at(-1)!.remainder === 0 && r.rows.at(-1)!.divisor === numericAnswer(p.answer);
+  }
   return r.rows.length > 1 && r.rows.every((row, k) => row.n === (r.rows[0].n + k) && given.has(row.value) && howHolds(row.how, row.value));
 }
 
@@ -217,6 +240,16 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
       }
       }
     }
+    // stage 2 (Grade 10 scope): a worked-example section with no checked presentation shows its question's own solution,
+    // the family's solver steps, when that solution is complete and its result is the checked answer
+    if (role === "worked-example" && !worked?.verified && !own && p && family && SCOPE.has(module.competency)) {
+      const fs = familySteps(p);
+      if (fs) {
+        worked = fs.worked;
+        verified.push(...fs.claims, `result ${p.answer} is the checked answer`);
+        review.push(...fs.worked.steps.map((x) => x.explanation));
+      }
+    }
     if (role === "worked-example" && !worked?.verified) violations.push("worked-unverified");
     if (role !== "prerequisite" && !p) violations.push("no-instance");
     const widget = screen.widget && !decorative(screen.widget) ? screen.widget : null;
@@ -227,11 +260,70 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
         ...(screen.math ?? []),
         JSON.stringify(representation ?? {}), JSON.stringify(visual ?? {}), JSON.stringify(widget ?? {}),
       ]);
-      if (screen.text.some((t) => numbersIn(t).some((v) => !allowed.has(Math.abs(v))))) violations.push("text-not-instance");
+      // text the family's code writes for this question is aligned by construction (its wording still needs review);
+      // family-level text must quote only this question's numbers
+      if (screen.textFrom === "instance") review.push("(text written for this question by the family's code: aligned by construction, wording to review)");
+      else if (screen.text.some((t) => numbersIn(t).some((v) => !allowed.has(Math.abs(v))))) violations.push("text-not-instance");
     }
     const label = role === "worked-example" ? (worked?.verified ? ROLE_LABEL["worked-example"] : "Method") : ROLE_LABEL[role];
-    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, claims: { verified, review }, violations };
+    const exempt = EXEMPTIONS.entries.filter((e) => e.competency === module.competency && e.title === screen.title && violations.includes(e.rule)).map(({ rule, reason }) => ({ rule, reason }));
+    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
   });
+}
+
+/** The question's own solution from the family's solver: steps, explanations, the arithmetic claims that hold, and whether the
+ *  solution is complete (its last step's value is the checked answer, which the family's independent check accepts). */
+export function familySteps(p: Problem): { worked: NonNullable<LessonBlock["worked"]>; claims: string[] } | null {
+  const family = FAMILIES.get(p.family);
+  if (!family || !p.steps.length) return null;
+  const answer = numericAnswer(p.answer);
+  const last = p.steps.at(-1)!;
+  const lastValue = typeof last.value === "number" ? last.value : Array.isArray(last.value) ? NaN : numericAnswer(String(last.value));
+  // the last step's value is the answer (as a number, or exactly as the answer is written), and the family's independent check accepts it
+  const sameValue = (Number.isFinite(answer) && Math.abs(lastValue - answer) < 1e-9) || show(last.value) === p.answer;
+  const checked = (() => { try { return family.validate(p.params, Number.isFinite(answer) ? answer : p.answer); } catch { return false; } })();
+  const complete = sameValue && checked;
+  const OPS: Record<string, string> = { add: "+", subtract: "−", multiply: "×", divide: "÷" };
+  const claims = p.steps.flatMap((st) => {
+    const [a, b] = st.inputs;
+    if (!OPS[st.op] || typeof a !== "number" || typeof b !== "number" || typeof st.value !== "number") return [];
+    const expr = `${a < 0 ? `(${a})` : a} ${OPS[st.op]} ${b < 0 ? `(${b})` : b}`;
+    return holds(expr, st.value) ? [`${expr} = ${st.value}`] : [];
+  });
+  const steps = p.steps.map((st) => ({ expression: displayStep(p, st), explanation: familyStepExplanation(p, st) }));
+  if (steps.some((x) => !x.expression || !x.explanation)) return null;
+  return { worked: { question: question(p.id).prompt, steps, verified: complete, source: "family-steps" }, claims };
+}
+const displayStep = (p: Problem, st: Problem["steps"][number]) => {
+  try { return explainStep(p, st); } catch { return ""; }
+};
+
+/** Practice after a lesson starts with questions of the same kind as the one it worked through (a family that mixes kinds
+ *  gives `teach.caseOf`); the other kinds follow, so practice tests what was just taught. Written answers come before multiple choice
+ *  within each group, and questions already solved on the page come last. */
+export function alignedPractice(module: Module, ids: string[]): string[] {
+  const scope = teachingScopeFor(module);
+  const family = scope.family ? FAMILIES.get(scope.family) : undefined;
+  const caseOf = family?.teach?.caseOf;
+  // the lesson is assembled from the candidate list as given (not from the reordered one), so the order never changes what is taught
+  const blocks = lessonBlocks(module, ids);
+  // a question the lesson has already worked through (its answer is on the page) is not practice: it goes last
+  const shown = new Set(blocks.flatMap((b) => (b.instance && b.worked ? [exposureKey(b.instance)] : [])));
+  const isShown = (id: string) => shown.has(exposureKey(id));
+  const taught = blocks.find((b) => b.worked?.verified && b.instance) ?? blocks.find((b) => b.instance);
+  const tp = caseOf && taught?.instance ? problemOf(taught.instance) : null;
+  const kind = tp && tp.family === scope.family ? caseOf!(tp.params) : null;
+  const same = (id: string) => { if (kind === null) return false; const q = problemOf(id.replace(/:mc$/, "")); return !!q && q.family === tp!.family && caseOf!(q.params) === kind; };
+  // within each group a written answer comes before a multiple-choice one: the first attempt after a worked example is the learner's own
+  const rank = (id: string) => (isShown(id) ? 4 : same(id) ? 0 : 2) + (question(id).type === "choice" ? 1 : 0);
+  return ids.map((id, i) => [rank(id), i, id] as const).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map((x) => x[2]);
+}
+
+/** The teaching page's lesson and its practice queue, from one candidate list (already filtered by the caller's selector):
+ *  the sections are built from the candidates in their given order, and practice is the same candidates aligned to what those
+ *  sections taught, so reordering practice never changes what is taught. */
+export function teachingLesson(module: Module, candidates: string[]) {
+  return { blocks: lessonBlocks(module, candidates), practice: alignedPractice(module, candidates), candidates };
 }
 
 /** Platform-wide violation counts (the ratchet baseline): by rule, and by module. */
@@ -239,18 +331,20 @@ export function contractReport(modules: Module[]) {
   const byRule: Record<string, number> = {};
   const byModule: Record<string, Partial<Record<Violation, number>>> = {};
   let sections = 0, workedVerified = 0, workedLabelled = 0;
+  const exempted: Record<string, number> = {};
   for (const m of modules) {
     for (const b of lessonBlocks(m)) {
       sections++;
       if (b.worked?.verified) workedVerified++;
       if (b.label === ROLE_LABEL["worked-example"]) workedLabelled++;
+      for (const e of b.exempt) exempted[e.rule] = (exempted[e.rule] ?? 0) + 1;
       for (const v of b.violations) {
         byRule[v] = (byRule[v] ?? 0) + 1;
         (byModule[m.competency] ??= {})[v] = (byModule[m.competency][v] ?? 0) + 1;
       }
     }
   }
-  return { contract: TEACHING_CONTRACT, modules: modules.length, sections, workedVerified, workedLabelled, byRule, byModule };
+  return { contract: TEACHING_CONTRACT, modules: modules.length, sections, workedVerified, workedLabelled, byRule, exempted, byModule };
 }
 
 export const lessonFor = (competency: string) => moduleFor(competency);

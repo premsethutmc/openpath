@@ -5,7 +5,7 @@
  * 100% stacked bar charts, weighted and combined means, grouped mean, median and mode, heights and distances,
  * trigonometric identities, and the ratios of standard and complementary angles. Written by OpenPath; CC0.
  */
-import type { Bug, Def, Step, Value, Visual } from "../family-kit";
+import type { Bug, Def, InstanceTeaching, Step, Value, Visual } from "../family-kit";
 import { b1Object } from "../typed-contract.ts";
 import { fmt, gcd } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
@@ -138,6 +138,24 @@ const weekOpts = ([s, d]: number[]) => {
 // ---------------------------------------------------------------- probability helpers
 
 const COLOURS = ["red", "blue", "green"];
+/** teaching-contract@1 (stage 2, classical probability): the teaching for one bag [r, b, g, c]. */
+function bagTeaching([r, b, g, c]: number[]): InstanceTeaching {
+  const counts = [r, b, g], k = counts[c], T = r + b + g, h = gcd(k, T);
+  const items = COLOURS.slice(0, g ? 3 : 2).map((label, i) => ({ label, count: counts[i], ...(i === c ? { asked: true } : {}) }));
+  const parts = counts.filter((n, i) => i < 2 || g).join(" + ");
+  return {
+    concept: { title: "Equally likely outcomes", text: [`The bag has ${parts} = ${T} balls of the same size, so each of the ${T} balls is equally likely to be taken.`, `The event "${COLOURS[c]}" happens for ${k} of them, so its probability is ${k} out of ${T}.`] },
+    representation: { kind: "counts", items, caption: `${T} equally likely balls; ${k} are ${COLOURS[c]}` },
+    worked: {
+      result: k / T,
+      steps: [
+        { expression: `Total = ${parts} = ${T}`, explanation: "Count every ball: each one is an equally likely outcome.", claims: [{ expr: parts, value: T }] },
+        { expression: `${COLOURS[c]}: ${k}`, explanation: `The favourable outcomes are the ${COLOURS[c]} balls.` },
+        { expression: h > 1 ? `P(${COLOURS[c]}) = ${k}/${T} = ${k / h}/${T / h}` : `P(${COLOURS[c]}) = ${k}/${T}`, explanation: h > 1 ? `Favourable over total, then divide top and bottom by ${h}.` : "Favourable outcomes over all outcomes.", claims: [{ expr: `${k} ÷ ${T}`, value: k / T }, ...(h > 1 ? [{ expr: `${k / h} ÷ ${T / h}`, value: k / T }] : [])] },
+      ],
+    },
+  };
+}
 const DICE: { say: (s: number) => string; test: (a: number, b: number, s: number) => boolean; ok: (s: number) => boolean }[] = [
   { say: (s) => `the sum of the two numbers is ${s}`, test: (a, b, s) => a + b === s, ok: (s) => s >= 2 && s <= 12 },
   { say: (s) => `the sum of the two numbers is greater than ${s}`, test: (a, b, s) => a + b > s, ok: (s) => s >= 2 && s <= 11 },
@@ -522,7 +540,14 @@ export const B14: Def[] = [
       visual: ([N, n]) => ({ type: "numberline", from: Math.min(0, Math.floor(N / n) * n), to: Math.max(N, n), marks: [Math.floor(N / n) * n, N] }),
       alternatives: [
         { id: "clock", title: "Wrap around a clock", kind: "conceptual", text: ["Think of a clock with n hours marked 0 to n − 1.", "Moving a steps from 0 lands on the residue: every full turn of n steps brings you back to 0, and going backwards is turning the other way."] },
-        { id: "add-n", title: "Add or take away the modulus", kind: "procedural", text: ["Adding or subtracting n does not change the class: 17 ≡ 12 ≡ 7 ≡ 2 (mod 5).", "Keep adding n to a negative number until it lands between 0 and n − 1."] },
+        {
+          id: "add-n", title: "Add or take away the modulus", kind: "procedural", text: ["Adding or subtracting n does not change the class: 17 ≡ 12 ≡ 7 ≡ 2 (mod 5).", "Keep adding n to a negative number until it lands between 0 and n − 1."],
+          // stage 2: on the question's own number and modulus
+          textFor: ([N, n]) => {
+            const r = ((N % n) + n) % n, k = (N - r) / n;
+            return [`Adding or subtracting ${n} does not change the class mod ${n}.`, k >= 0 ? `${n_(N)} = ${k} × ${n} + ${r}: taking away ${k} lots of ${n} leaves ${r}, so ${n_(N)} ≡ ${r} (mod ${n}).` : `Add ${-k} lots of ${n}: ${n_(N)} + ${-k * n} = ${r}, which is between 0 and ${n - 1}, so ${n_(N)} ≡ ${r} (mod ${n}).`];
+          },
+        },
       ],
     },
     limits: "Integers from −80 to 250 that are not multiples of the modulus, moduli 3 to 13; powers and large exponents are left to the congruence families.",
@@ -675,8 +700,17 @@ export const B14: Def[] = [
       method: "Count all the balls, count the balls of the asked colour, and write the second over the first.",
       visual: ([r, b, g]) => ({ type: "bars", title: "balls in the bag", labels: g ? ["red", "blue", "green"] : ["red", "blue"], values: g ? [r, b, g] : [r, b] }),
       alternatives: [
-        { id: "out-of", title: "Out of how many?", kind: "conceptual", text: ["Imagine numbering every ball. Each number is as likely as any other.", "The probability is how many of the numbers belong to the colour, out of how many numbers there are."] },
+        {
+          id: "out-of", title: "Out of how many?", kind: "conceptual", text: ["Imagine numbering every ball. Each number is as likely as any other.", "The probability is how many of the numbers belong to the colour, out of how many numbers there are."],
+          textFor: ([r, b, g, c]) => {
+            const counts = [r, b, g], T = r + b + g;
+            return [`Imagine numbering the balls 1 to ${T}. Each number is as likely as any other.`, `${counts[c]} of the ${T} numbers are on ${COLOURS[c]} balls, so the probability is ${counts[c]} out of ${T}.`];
+          },
+        },
       ],
+      instance: bagTeaching,
+      // a bag of two colours and a bag of three are taught and practised as different cases
+      caseOf: ([, , g]) => (g ? "three colours" : "two colours"),
     },
     limits: "One draw from a bag of up to three colours with up to 9 balls each; several draws are the tree-diagram family.",
   },
@@ -927,7 +961,11 @@ export const B14: Def[] = [
       idea: "The outcomes of an experiment together form the sure event, with probability 1. So P(E) + P(not E) = 1, and the probabilities of outcomes that cannot happen together and cover everything add to 1.",
       method: "Add the probabilities you know (with a common denominator) and take the sum from 1.",
       alternatives: [
-        { id: "tickets", title: "Think of tickets", kind: "conceptual", text: ["Write the probabilities with one denominator, say 20: imagine 20 equally likely tickets.", "The event takes some tickets; the rest of the tickets are 'not E'."] },
+        {
+          id: "tickets", title: "Think of tickets", kind: "conceptual", text: ["Write the probabilities with one denominator, say 20: imagine 20 equally likely tickets.", "The event takes some tickets; the rest of the tickets are 'not E'."],
+          // stage 2: the question's own denominator as the tickets
+          textFor: ([m, a, c, d]) => m === 0 ? [`Imagine ${d} equally likely tickets. The event E takes ${a} of them.`, `The other ${d - a} tickets are 'not E', so P(not E) = ${d - a}/${d}.`] : [`Imagine ${d} equally likely tickets: a win takes ${a} and a draw takes ${c}.`, `The other ${d - a - c} tickets are a loss, so P(loss) = ${d - a - c}/${d}.`],
+        },
       ],
     },
     limits: "One event and its complement, or three outcomes that cannot happen together and cover everything; denominators up to 20.",

@@ -98,7 +98,7 @@ for (const width of [360, 393]) test(`${width}px CBSE Grade 10: Real Numbers →
     await page.getByRole("article", { name: "Mathematics teaching and practice" }).waitFor();
     const stages = page.getByRole("list", { name: "Lesson stages" });
     assert.equal(await stages.getByRole("button", { name: /Learn/ }).getAttribute("aria-current"), "step");
-    const example = page.locator(".teaching-block").first().locator(".progressive-worked");
+    const example = page.locator(".progressive-worked").first(); // stage 2: the worked example may follow the concept section
     await example.getByRole("button", { name: /Next step/ }).click();
     assert.equal(await example.locator(".worked-step").count(), 1);
     await noEngineering(page, "teaching");
@@ -159,7 +159,7 @@ for (const width of [360, 393]) test(`${width}px Tamil Nadu Grade 10 Relations: 
     await noEngineering(page, "TN lesson page");
     await page.getByRole("link", { name: "Start learning", exact: true }).click();
     await page.getByRole("article", { name: "Mathematics teaching and practice" }).waitFor();
-    const example = page.locator(".teaching-block").first().locator(".progressive-worked");
+    const example = page.locator(".progressive-worked").first(); // stage 2: the worked example may follow the concept section
     while (await example.getByRole("button", { name: /Next step/ }).count()) await example.getByRole("button", { name: /Next step/ }).click();
     assert.deepEqual((await example.locator(".step-expression").allTextContents()).map((t) => t.trim()), ["n(A × B) = n(A) × n(B)", "6 = 3 × n(B)", "6 ÷ 3 = 2"]);
     await noEngineering(page, "TN teaching");

@@ -49,7 +49,7 @@ requirement in the review registry.
 
 `content/learning/teaching-contract-baseline.v1.json` is written by `bun packages/learning/scripts/teaching-contract.ts`.
 It holds violation counts by rule and by module. `teaching-contract.test.ts` fails when any count rises. Lower the
-baseline when content is corrected (stage 2).
+baseline when content is corrected.
 
 ## Reference
 
@@ -62,3 +62,38 @@ baseline when content is corrected (stage 2).
   - triangular numbers as a triangle of dots;
   - cube, doubling and odd numbers as sequence tables with the rule that makes each term, and the gap or ratio.
 - **"Look at the gaps"** is paired only with patterns whose gaps explain them: square, triangular, rectangular and odd numbers.
+
+## Stage 2: Grade 10 showcase
+
+The scope is `content/learning/showcase-grade10.v1.json`. It covers 63 competencies: every CBSE and Tamil Nadu Grade 10 lesson with a module. Six of them are curated:
+
+- Euclid's algorithm;
+- relations;
+- arithmetic sequences;
+- the discriminant;
+- Pythagoras;
+- classical probability.
+
+"Curated" means engineered for review, not educator-approved.
+
+- **Instance teaching.**
+  - `hcf` and `apn` now generate their teaching from the question itself: the division chain, and the AP table with its jumps.
+  - `ahpyth` (hypotenuse or shorter side, triangle drawn from the question) and `anbag` (two or three colours, balls counted from the question) do the same.
+  - Each case has its own concept and solution. There is no shared template.
+- **`textFor` alternatives** (`textFrom: "instance"`). An alternative method's text is written by the family's code for the section's question. Examples: the out-of total, prime factors, the factor tree, add-n, tickets, nines, the triple.
+  - The numeric check is skipped for this text because it is aligned by construction.
+  - Its wording is still listed for review.
+- **Family-step fallback** (scope only). A worked-example section without contract teaching is verified from the family's own solver, but only when:
+  - the last step's value is the checked answer; and
+  - `validate` accepts that answer.
+  
+  Otherwise the section is labelled **Method**, not Worked example. Fourteen sections in scope remain Method: their solver stops short of the answer, or the answer is algebraic.
+- **Exemptions** (`teaching-contract-exemptions.v1.json`). These are engineering decisions, each with a stated reason, for example "general rule, not an example" or "proof or construction topic".
+  - They are not educator approval.
+  - The ratchet counts exempted sections separately.
+- **Aligned practice** (`alignedPractice`, `teachingLesson`).
+  - The lesson is built from the candidate list in its given order. Practice is the same list reordered, so reordering never changes what is taught.
+  - Practice order: first, questions of the case taught (`teach.caseOf`) that the lesson has not already solved; then the other kinds; last, the questions solved on the page.
+  - Grading is unchanged. The learner journey still uses the authoritative server grader.
+
+Human review checklist: `docs/product/GRADE10_SHOWCASE_REVIEW.md`.
