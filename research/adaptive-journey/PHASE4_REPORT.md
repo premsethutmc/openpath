@@ -163,7 +163,18 @@ A contract test checks hypothesis wording ("Possible…", "Earlier possible…",
 
 ## 8. Regression results
 
-See §8 of the final report message. Only completed runs are reported. The frontend suite runs on a clean worktree of `5b0c429`.
+Only completed runs are reported.
+
+| Suite | Phase 3 (`2a33767` / `6460969`) | Phase 4 |
+|---|---|---|
+| `bun test packages/learning/src` | 1454 / 0 | **1454 / 0**. Two notes: (1) the selector-registration guard failed on the first run, because the new `hypotheses.ts` imports the pool selectors (it applies `selectable()` and `formCertified`); it is now registered in `question-status.test.ts`, a reviewed change to the guard's list. (2) In one run, the E3 differential fuzz test timed out at 5 s while CPU was shared. It passes alone (45/45) and in the clean full run. This flake was already known from the E7 gate. |
+| Frontend unit tests (clean worktree of `5b0c429`) | 472 / 474 | **480 / 482** (+3 retention, +5 evidence contracts); the contested test added in `2db1c44` passes in its file (6/6) |
+| Django (SQLite) | 302 OK | **302 OK** |
+| Type check (main / English / mathematics-integration) | 0 / 0 / 170 | **0 / 0 / 170** (the existing baseline) |
+| Server grader bundle | `17204038…` | `17204038…` (unchanged) |
+| Journey and scenario traces, two runs | identical | identical |
+
+**Pre-existing failures (both phases):** the 2 `aofclass` generator tests. **New failures:** none after the registration above.
 
 ## 9. Remaining gaps
 
