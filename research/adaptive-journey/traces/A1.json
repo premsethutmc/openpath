@@ -286,6 +286,7 @@
     }
    ],
    "finding": null,
+   "hypotheses": [],
    "evidenceAfter": {
     "status": "independent",
     "independent": {
@@ -1239,6 +1240,54 @@
     }
    ],
    "finding": null,
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "?@gen:disc:-1,5:mc",
+     "claim": null,
+     "scope": {
+      "question": "gen:disc:-1,5:mc",
+      "family": "gen:disc:-1,5:mc",
+      "observedIn": "MATH.algebra.quadratic-discriminant",
+      "about": null
+     },
+     "status": "insufficient",
+     "support": {
+      "unexplained": 0.615,
+      "secure": 0.385
+     },
+     "competing": [
+      "unexplained",
+      "secure"
+     ],
+     "supporting": [],
+     "contradicting": [],
+     "obligations": [
+      "further investigation questions"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null
+     },
+     "resolvedBy": null,
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": null,
+      "attempts": [
+       "record#9",
+       "record#15",
+       "record#16"
+      ]
+     },
+     "use": {
+      "teach": false,
+      "ask": true,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
    "evidenceAfter": {
     "status": "transfer",
     "independent": {
@@ -1436,6 +1485,54 @@
     }
    ],
    "finding": null,
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "?@gen:disc:-1,5:mc",
+     "claim": null,
+     "scope": {
+      "question": "gen:disc:-1,5:mc",
+      "family": "gen:disc:-1,5:mc",
+      "observedIn": "MATH.algebra.quadratic-discriminant",
+      "about": null
+     },
+     "status": "insufficient",
+     "support": {
+      "unexplained": 0.615,
+      "secure": 0.385
+     },
+     "competing": [
+      "unexplained",
+      "secure"
+     ],
+     "supporting": [],
+     "contradicting": [],
+     "obligations": [
+      "further investigation questions"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null
+     },
+     "resolvedBy": null,
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": null,
+      "attempts": [
+       "record#9",
+       "record#15",
+       "record#16"
+      ]
+     },
+     "use": {
+      "teach": false,
+      "ask": true,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
    "evidenceAfter": {
     "status": "transfer",
     "independent": {
@@ -1486,6 +1583,94 @@
    "competency": "MATH.algebra.quadratics",
    "chapter": "Quadratic equations",
    "reason": "Next in Quadratic equations."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "?@gen:disc:-1,5:mc",
+    "claim": null,
+    "scope": {
+     "question": "gen:disc:-1,5:mc",
+     "family": "gen:disc:-1,5:mc",
+     "observedIn": "MATH.algebra.quadratic-discriminant",
+     "about": null
+    },
+    "status": "insufficient",
+    "support": {
+     "unexplained": 0.615,
+     "secure": 0.385
+    },
+    "competing": [
+     "unexplained",
+     "secure"
+    ],
+    "supporting": [],
+    "contradicting": [],
+    "obligations": [
+     "further investigation questions"
+    ],
+    "teaching": {
+     "deliveredAt": null,
+     "strategy": null,
+     "competency": null
+    },
+    "resolvedBy": null,
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": null,
+     "attempts": [
+      "record#9",
+      "record#15",
+      "record#16"
+     ]
+    },
+    "use": {
+     "teach": false,
+     "ask": true,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:12:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:13:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:14:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    }
+   ]
   }
  }
 }

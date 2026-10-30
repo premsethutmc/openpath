@@ -70,6 +70,9 @@ export interface Attempt {
   /** the answer credit as RECORDED (stage 7, D11): the server's decision, or the educator's mark. Absent only for a record saved before the
    *  server recorded decisions; evidence.ts then compares it again (decision 3: historical records are not reconstructed yet). */
   credit?: boolean;
+  /** evidence@1 (pass-through): the assessment@1 evidence recorded with the answer (source, method examined, first invalid
+   *  transition). Read-only context for diagnosis and reports; credit and evidence never read it. */
+  assessment?: AttemptAssessment;
 }
 /** A written answer waiting for an educator's mark: kept, shown, and not evidence of anything. */
 export interface PendingWritten {
@@ -125,7 +128,7 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
       const mark = isWritten(r.questionId) ? markOf.get(r.id) : undefined;
       // a marked written answer enters the engine as the educator's mark, never as the learner's own text
       const response = mark ? (mark.verdict === "correct" ? MARKED_RIGHT : MARKED_NOT) : r.response;
-      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response, activity: r.activity, hints: r.hints, solution: r.solution, competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}), ...(mark ? { written: { text: r.response, mark } } : {}), ...(mark ? { credit: mark.verdict === "correct" } : serverVerdict(r) === "correct" || serverVerdict(r) === "incorrect" ? { credit: serverVerdict(r) === "correct" } : {}) });
+      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response, activity: r.activity, hints: r.hints, solution: r.solution, competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}), ...(mark ? { written: { text: r.response, mark } } : {}), ...(mark ? { credit: mark.verdict === "correct" } : serverVerdict(r) === "correct" || serverVerdict(r) === "incorrect" ? { credit: serverVerdict(r) === "correct" } : {}) , ...(r.assessment ? { assessment: r.assessment } : {}) });
     } else if (r.record === "teach") out.teaching.push({ at: r.at, rule: r.rule, strategy: r.strategy, competency: r.competency, session: r.sessionId });
     else if (r.record === "skip") out.skips.push({ at: r.at, target: r.target });
   }

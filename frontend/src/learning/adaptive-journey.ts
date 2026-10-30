@@ -19,7 +19,8 @@ import { problemOf, show, type Problem } from "../../../packages/learning/src/fa
 import { formCertified } from "../../../packages/learning/src/grading/certify";
 import { grade } from "../../../packages/learning/src/grading/decision";
 import { shadowProcessRecord } from "../../../packages/learning/src/grading/process-shadow";
-import { findingResolved, investigateContext, moduleState, ownFinding, recovery, type ModuleState } from "../../../packages/learning/src/intervention";
+import { hypotheses, hypothesesFor } from "../../../packages/learning/src/hypotheses";
+import { investigateContext, moduleState, recovery, teachingHistory, type ModuleState } from "../../../packages/learning/src/intervention";
 import { quarantined } from "../../../packages/learning/src/question-status";
 import { reviewOf } from "../../../packages/learning/src/review";
 import { canCheckWorking, checkWorking } from "../../../packages/learning/src/working";
@@ -54,6 +55,9 @@ const slippable = (qid: string) => !!question(qid).options?.length || Number.isF
 function slip(qid: string): string {
   const q = question(qid);
   if (q.options?.length) return respond(qid, "__wrong__");
+  // a list of numbers (e.g. the roots "2,3"): the last one off by one, still a readable answer of the same shape
+  const parts = q.answer.split(",").map((x) => x.trim().replace(/−/g, "-"));
+  if (parts.length > 1 && parts.every((x) => Number.isFinite(Number(x)))) return [...parts.slice(0, -1), show(Number(parts.at(-1)) + 1)].join(",");
   const v = Number(q.answer.trim().replace(/−/g, "-"));
   if (!Number.isFinite(v)) throw new Error(`no numeric slip for ${qid}`);
   const p = problemOf(qid);
@@ -85,6 +89,8 @@ export interface TraceStep {
   evidenceAfter?: Snapshot;
   next?: unknown;
   planItems?: { competency: string; reason: string }[];
+  /** learner-hypothesis@1, every hypothesis the records support (plan steps only) */
+  hypotheses?: unknown[];
   /** set when the step is NOT a transition the app makes on its own (e.g. investigating a module answer) */
   supplementary?: string;
 }
@@ -130,9 +136,8 @@ export class Journey {
     this.steps.push({ step: this.steps.length + 1, stage, competency, phase: o.phase, question: qid, activity, context: o.context, response, hints: o.hints ?? 0, ...ann, recordedAsAttempt: recorded, evidenceBefore: before, evidenceAfter: this.snap(competency), next: this.next(), ...o.extra });
   }
   private findingOf(competency: string) {
-    const m = moduleFor(competency);
-    const f = m ? ownFinding(m, this.d.state().records) : null;
-    return f ? { explanation: f.explanation, kind: f.kind, competency: f.competency, establishedOn: f.question, resolved: findingResolved(m!, f, this.d.state().records) } : null;
+    const f = hypothesesFor(competency, this.d.state().records).filter((h) => h.status === "established" || h.status === "resolved").at(-1);
+    return f ? { explanation: f.claim!.explanation, kind: f.claim!.kind, competency: f.scope.about, establishedOn: f.scope.question, resolved: f.status === "resolved" } : null;
   }
   /** The starting-point check (TopicSession.tsx), until it asks nothing more. */
   async topicCheck(target: string, answer: (qid: string) => string) {
@@ -156,7 +161,7 @@ export class Journey {
   }
   plan(target: string, minutes: 15 | 30 | 60 = 60) {
     const p = topicPlan(target, this.release, this.ctx(), minutes);
-    this.steps.push({ step: this.steps.length + 1, stage: "plan", competency: target, planItems: p.items.map((i) => ({ competency: i.competency, reason: i.reason })), finding: this.findingOf(target), evidenceAfter: this.snap(target), next: this.next() });
+    this.steps.push({ step: this.steps.length + 1, stage: "plan", competency: target, planItems: p.items.map((i) => ({ competency: i.competency, reason: i.reason })), finding: this.findingOf(target), hypotheses: hypotheses(this.d.state().records), evidenceAfter: this.snap(target), next: this.next() });
     return p;
   }
   /** One skill's module (StudySession → Module), until done, pause or nothing to ask. */
@@ -199,6 +204,17 @@ export class Journey {
     }
     return null;
   }
+  /** the shared state at the end: every learner hypothesis, and the teaching history of each skill worked on */
+  summary() {
+    const st = this.d.state();
+    const skills = [...new Set(st.records.teaching.map((t) => t.competency).concat(TARGET))];
+    return { hypotheses: hypotheses(st.records), teachingHistory: Object.fromEntries(skills.map((c) => [c, moduleFor(c) ? teachingHistory(moduleFor(c)!, st.records) : null])) };
+  }
+  /** record ids are random (session.ts); traces name each record by its position in the event log instead */
+  stable<T>(x: T): T {
+    const ids = new Map(this.d.events.map((e, i) => [(e as { id?: string }).id, `record#${i}`]));
+    return JSON.parse(JSON.stringify(x, (_k, v) => (typeof v === "string" && ids.has(v) ? ids.get(v) : v)));
+  }
   newSession(days: number) {
     this.d.newSession(days);
     this.steps.push({ step: this.steps.length + 1, stage: "session", competency: null, reason: `new session after ${days} day(s)`, next: this.next() });
@@ -231,7 +247,7 @@ async function careless(variant: "A1" | "A2" | "A3") {
   const slipOnCheck = variant !== "A1";
   await j.module(TARGET, (q, ms) => (slipOnCheck && ms.phase === "retention" && !retentionSlip && slippable(q) ? ((retentionSlip = q), { response: slip(q) }) : { response: respond(q, "right") }), 6);
   j.plan(TARGET);
-  return { scenario: `${variant}-careless-error`, slipped, retentionSlip, steps: j.steps, final: { afterSlip, target: j.snap(TARGET), next: j.next() } };
+  return j.stable({ scenario: `${variant}-careless-error`, slipped, retentionSlip, steps: j.steps, final: { afterSlip, target: j.snap(TARGET), next: j.next(), ...j.summary() } });
 }
 export const scenarioA1 = () => careless("A1");
 export const scenarioA2 = () => careless("A2");
@@ -250,7 +266,7 @@ export async function scenarioB() {
   j.newSession(1);
   await j.module(TARGET, (q) => ({ response: learner(q) }), 4);
   j.plan(TARGET);
-  return { scenario: "B-prerequisite-gap", steps: j.steps, final: { target: j.snap(TARGET), support: j.snap("MATH.number.integer-add"), next: j.next() } };
+  return j.stable({ scenario: "B-prerequisite-gap", steps: j.steps, final: { target: j.snap(TARGET), support: j.snap("MATH.number.integer-add"), next: j.next(), ...j.summary() } });
 }
 
 /** C: right only with a hint on guided questions; wrong (a readable wrong answer) whenever working alone. */
@@ -262,7 +278,7 @@ export async function scenarioC() {
   const work = (q: string, ms: ModuleState) => (ms.phase === "guided" ? { response: respond(q, "right"), hints: 1 } : { response: alone(q) });
   for (const it of plan.items) await j.module(it.competency, work, 20);
   if (!plan.items.some((i) => i.competency === TARGET)) await j.module(TARGET, work, 20);
-  return { scenario: "C-assisted-only", steps: j.steps, final: { target: j.snap(TARGET), next: j.next() } };
+  return j.stable({ scenario: "C-assisted-only", steps: j.steps, final: { target: j.snap(TARGET), next: j.next(), ...j.summary() } });
 }
 
 export const SCENARIOS = { A1: scenarioA1, A2: scenarioA2, A3: scenarioA3, B: scenarioB, C: scenarioC } as const;

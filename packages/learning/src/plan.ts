@@ -5,6 +5,7 @@
  * (an open intervention), 4. the first not-yet-shown skill of the current chapter, 5. the next chapter, 6. enrichment
  * from a goal overlay (only once the year's skills it rests on are shown). Nothing outside the current curriculum.
  */
+import { hypotheses } from "./hypotheses";
 import { assigned, type CurriculumRelease } from "./curriculum";
 import { moduleFor } from "./content";
 import type { SkillEvidence } from "./evidence";
@@ -48,6 +49,10 @@ export function nextActivity(release: CurriculumRelease, ev: (id: string) => Ski
   if (due) return { kind: "retention", competency: due, reason: "A delayed check is due: a few questions to see the skill has stayed with you." };
   const review = ids.find((id) => ev(id).status === "review");
   if (review) return { kind: "review", competency: review, reason: "The delayed check was missed, so this skill comes back for review." };
+  // learner-hypothesis@1: an established misunderstanding not yet taught survives into the plan, whatever the skill's
+  // broader status says (a skill can read as shown while a narrower misunderstanding in it is still supported)
+  const untaught = hypotheses(records).find((h) => h.status === "established" && !h.teaching.deliveredAt && ids.includes(h.scope.observedIn));
+  if (untaught) return { kind: "continue", competency: untaught.scope.observedIn, chapter: rows.find((r) => r.competency === untaught.scope.observedIn)?.chapter.title, reason: `${untaught.claim!.says} A short explanation is waiting.` };
   const inProgress = ids.find((id) => ["exposure", "guided"].includes(ev(id).status));
   if (inProgress) return { kind: "continue", competency: inProgress, chapter: rows.find((r) => r.competency === inProgress)?.chapter.title, reason: "Carry on where you left off." };
   const fresh = rows.find((r) => ev(r.competency).status === "not_started");

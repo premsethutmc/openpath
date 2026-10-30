@@ -286,6 +286,7 @@
     }
    ],
    "finding": null,
+   "hypotheses": [],
    "evidenceAfter": {
     "status": "independent",
     "independent": {
@@ -1040,6 +1041,7 @@
     }
    ],
    "finding": null,
+   "hypotheses": [],
    "evidenceAfter": {
     "status": "transfer",
     "independent": {
@@ -1136,14 +1138,36 @@
    "step": 21,
    "stage": "module",
    "competency": "MATH.algebra.quadratic-discriminant",
-   "phase": "pause",
+   "phase": "chapter",
    "diagnosis": {
     "result": "secure",
     "confidence": 0.77
    },
    "finding": null,
-   "reason": "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back.",
-   "question": null,
+   "reason": "Here is a short explanation, then practice.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "parabola",
+     "kind": "conceptual",
+     "title": "Picture the parabola",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "failed"
+   },
    "evidenceAfter": {
     "status": "review",
     "independent": {
@@ -1164,6 +1188,274 @@
   },
   {
    "step": 22,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "guided",
+   "question": "gen:disc:10,-19",
+   "activity": "guided",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "review",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "reason": "The delayed check was missed, so this skill comes back for review."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "parabola",
+     "kind": "conceptual",
+     "title": "Picture the parabola",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 23,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "check",
+   "question": "gen:aodk:2,3,20",
+   "activity": "check",
+   "response": "100/3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 15
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "review",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "reason": "The delayed check was missed, so this skill comes back for review."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "parabola",
+     "kind": "conceptual",
+     "title": "Picture the parabola",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 24,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "verify",
+   "question": "gen:aodkr:1,1,16",
+   "activity": "check",
+   "response": "k ≤ −8 or k ≥ 8",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 15
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 16
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "review",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "reason": "The delayed check was missed, so this skill comes back for review."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "You seem to know this. Now on your own, on a new question."
+  },
+  {
+   "step": 25,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "verify",
+   "question": "gen:aodk:2,3,12:mc",
+   "activity": "check",
+   "response": "D",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 16
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "review",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "reason": "The delayed check was missed, so this skill comes back for review."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "You seem to know this. Now on your own, on a new question."
+  },
+  {
+   "step": 26,
    "stage": "plan",
    "competency": "MATH.algebra.quadratic-discriminant",
    "planItems": [
@@ -1177,15 +1469,16 @@
     }
    ],
    "finding": null,
+   "hypotheses": [],
    "evidenceAfter": {
     "status": "review",
     "independent": {
-     "right": 12,
-     "total": 14
+     "right": 15,
+     "total": 17
     },
     "assisted": {
-     "right": 0,
-     "total": 0
+     "right": 1,
+     "total": 1
     },
     "retention": "failed"
    },
@@ -1212,12 +1505,12 @@
   "target": {
    "status": "review",
    "independent": {
-    "right": 12,
-    "total": 14
+    "right": 15,
+    "total": 17
    },
    "assisted": {
-    "right": 0,
-    "total": 0
+    "right": 1,
+    "total": 1
    },
    "retention": "failed"
   },
@@ -1225,6 +1518,52 @@
    "kind": "review",
    "competency": "MATH.algebra.quadratic-discriminant",
    "reason": "The delayed check was missed, so this skill comes back for review."
+  },
+  "hypotheses": [],
+  "teachingHistory": {
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [
+      "2026-09-09T09:17:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-09T09:18:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:12:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": true
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:13:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:14:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    }
+   ]
   }
  }
 }

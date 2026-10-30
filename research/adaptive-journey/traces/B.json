@@ -281,10 +281,10 @@
     "retention": "scheduled"
    },
    "next": {
-    "kind": "start",
-    "competency": "MATH.algebra.quadratics",
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
     "chapter": "Quadratic equations",
-    "reason": "Next in Quadratic equations."
+    "reason": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds. A short explanation is waiting."
    },
    "diagnosis": {
     "result": "insufficient_evidence",
@@ -369,10 +369,10 @@
     "retention": "none"
    },
    "next": {
-    "kind": "start",
-    "competency": "MATH.algebra.quadratics",
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
     "chapter": "Quadratic equations",
-    "reason": "Next in Quadratic equations."
+    "reason": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds. A short explanation is waiting."
    },
    "diagnosis": {
     "result": "insufficient_evidence",
@@ -461,10 +461,10 @@
     "retention": "none"
    },
    "next": {
-    "kind": "start",
-    "competency": "MATH.algebra.quadratics",
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
     "chapter": "Quadratic equations",
-    "reason": "Next in Quadratic equations."
+    "reason": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds. A short explanation is waiting."
    },
    "diagnosis": {
     "result": "insufficient_evidence",
@@ -553,10 +553,10 @@
     "retention": "scheduled"
    },
    "next": {
-    "kind": "start",
-    "competency": "MATH.algebra.quadratics",
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
     "chapter": "Quadratic equations",
-    "reason": "Next in Quadratic equations."
+    "reason": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds. A short explanation is waiting."
    },
    "diagnosis": {
     "result": "insufficient_evidence",
@@ -651,10 +651,10 @@
     "retention": "scheduled"
    },
    "next": {
-    "kind": "start",
-    "competency": "MATH.algebra.quadratics",
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
     "chapter": "Quadratic equations",
-    "reason": "Next in Quadratic equations."
+    "reason": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds. A short explanation is waiting."
    }
   },
   {
@@ -678,6 +678,93 @@
     "establishedOn": "gen:disc:-7,-18",
     "resolved": false
    },
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "minus-c-sign@gen:disc:-7,-18",
+     "claim": {
+      "explanation": "minus-c-sign",
+      "kind": "prerequisite",
+      "says": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds."
+     },
+     "scope": {
+      "question": "gen:disc:-7,-18",
+      "family": "gen:disc:-7,-18",
+      "observedIn": "MATH.algebra.quadratic-discriminant",
+      "about": "MATH.number.integer-add"
+     },
+     "status": "established",
+     "support": {
+      "minus-c-sign": 0.996,
+      "unexplained": 0.003,
+      "secure": 0
+     },
+     "competing": [
+      "minus-c-sign"
+     ],
+     "supporting": [
+      {
+       "attempt": "record#2",
+       "questionId": "gen:disc:-7,-18",
+       "response": "0",
+       "at": "2026-09-01T09:03:00.000Z",
+       "matches": [
+        "minus-c-sign"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#4",
+       "questionId": "gen:disc:-1,-1",
+       "response": "0",
+       "at": "2026-09-01T09:05:00.000Z",
+       "matches": [
+        "minus-c-sign"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      }
+     ],
+     "contradicting": [],
+     "obligations": [
+      "teaching in scope",
+      "then a fresh answer alone, in scope"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null
+     },
+     "resolvedBy": null,
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": "2026-09-01T09:05:00.000Z",
+      "attempts": [
+       "record#2",
+       "record#4"
+      ]
+     },
+     "use": {
+      "teach": true,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
    "evidenceAfter": {
     "status": "independent",
     "independent": {
@@ -691,10 +778,10 @@
     "retention": "scheduled"
    },
    "next": {
-    "kind": "start",
-    "competency": "MATH.algebra.quadratics",
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
     "chapter": "Quadratic equations",
-    "reason": "Next in Quadratic equations."
+    "reason": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds. A short explanation is waiting."
    }
   },
   {
@@ -2200,6 +2287,106 @@
     "establishedOn": "gen:disc:-7,-18",
     "resolved": true
    },
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "minus-c-sign@gen:disc:-7,-18",
+     "claim": {
+      "explanation": "minus-c-sign",
+      "kind": "prerequisite",
+      "says": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds."
+     },
+     "scope": {
+      "question": "gen:disc:-7,-18",
+      "family": "gen:disc:-7,-18",
+      "observedIn": "MATH.algebra.quadratic-discriminant",
+      "about": "MATH.number.integer-add"
+     },
+     "status": "resolved",
+     "support": {
+      "minus-c-sign": 0.996,
+      "unexplained": 0.003,
+      "secure": 0
+     },
+     "competing": [
+      "minus-c-sign"
+     ],
+     "supporting": [
+      {
+       "attempt": "record#2",
+       "questionId": "gen:disc:-7,-18",
+       "response": "0",
+       "at": "2026-09-01T09:03:00.000Z",
+       "matches": [
+        "minus-c-sign"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#4",
+       "questionId": "gen:disc:-1,-1",
+       "response": "0",
+       "at": "2026-09-01T09:05:00.000Z",
+       "matches": [
+        "minus-c-sign"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      }
+     ],
+     "contradicting": [
+      {
+       "attempt": "record#10",
+       "questionId": "gen:disc:-10,20",
+       "response": "2",
+       "at": "2026-09-01T09:11:00.000Z",
+       "matches": [],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      }
+     ],
+     "obligations": [],
+     "teaching": {
+      "deliveredAt": "2026-09-01T09:09:00.000Z",
+      "strategy": "signed_numbers",
+      "competency": "MATH.algebra.quadratic-discriminant"
+     },
+     "resolvedBy": "record#10",
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": "2026-09-01T09:05:00.000Z",
+      "attempts": [
+       "record#2",
+       "record#4"
+      ]
+     },
+     "use": {
+      "teach": false,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
    "evidenceAfter": {
     "status": "transfer",
     "independent": {
@@ -2250,6 +2437,151 @@
    "competency": "MATH.algebra.arithmetic-sequences",
    "chapter": "Arithmetic progressions",
    "reason": "Next in Arithmetic progressions."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "minus-c-sign@gen:disc:-7,-18",
+    "claim": {
+     "explanation": "minus-c-sign",
+     "kind": "prerequisite",
+     "says": "The sign of −4ac was lost when c is negative: − 4 × (a negative number) adds."
+    },
+    "scope": {
+     "question": "gen:disc:-7,-18",
+     "family": "gen:disc:-7,-18",
+     "observedIn": "MATH.algebra.quadratic-discriminant",
+     "about": "MATH.number.integer-add"
+    },
+    "status": "resolved",
+    "support": {
+     "minus-c-sign": 0.996,
+     "unexplained": 0.003,
+     "secure": 0
+    },
+    "competing": [
+     "minus-c-sign"
+    ],
+    "supporting": [
+     {
+      "attempt": "record#2",
+      "questionId": "gen:disc:-7,-18",
+      "response": "0",
+      "at": "2026-09-01T09:03:00.000Z",
+      "matches": [
+       "minus-c-sign"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#4",
+      "questionId": "gen:disc:-1,-1",
+      "response": "0",
+      "at": "2026-09-01T09:05:00.000Z",
+      "matches": [
+       "minus-c-sign"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     }
+    ],
+    "contradicting": [
+     {
+      "attempt": "record#10",
+      "questionId": "gen:disc:-10,20",
+      "response": "2",
+      "at": "2026-09-01T09:11:00.000Z",
+      "matches": [],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     }
+    ],
+    "obligations": [],
+    "teaching": {
+     "deliveredAt": "2026-09-01T09:09:00.000Z",
+     "strategy": "signed_numbers",
+     "competency": "MATH.algebra.quadratic-discriminant"
+    },
+    "resolvedBy": "record#10",
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": "2026-09-01T09:05:00.000Z",
+     "attempts": [
+      "record#2",
+      "record#4"
+     ]
+    },
+    "use": {
+     "teach": false,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:19:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:20:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [
+      "2026-09-01T09:09:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:10:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:11:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": true
+    }
+   ]
   }
  }
 }

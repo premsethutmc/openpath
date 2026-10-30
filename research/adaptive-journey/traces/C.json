@@ -558,9 +558,62 @@
     {
      "competency": "MATH.algebra.quadratic-discriminant",
      "reason": "Here is a short explanation, then practice."
+    },
+    {
+     "competency": "MATH.algebra.quadratics",
+     "reason": "Next in Quadratic equations."
     }
    ],
    "finding": null,
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "?@gen:disc:5,14",
+     "claim": null,
+     "scope": {
+      "question": "gen:disc:5,14",
+      "family": "gen:disc:5,14",
+      "observedIn": "MATH.algebra.quadratic-discriminant",
+      "about": null
+     },
+     "status": "unsupported",
+     "support": {
+      "unexplained": 1,
+      "forgot-four": 0,
+      "secure": 0
+     },
+     "competing": [
+      "unexplained"
+     ],
+     "supporting": [],
+     "contradicting": [],
+     "obligations": [
+      "none the engine can ask: no known explanation fits; a person may look at the working"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null
+     },
+     "resolvedBy": null,
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": null,
+      "attempts": [
+       "record#1",
+       "record#4",
+       "record#5",
+       "record#6"
+      ]
+     },
+     "use": {
+      "teach": false,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
    "evidenceAfter": {
     "status": "exposure",
     "independent": {
@@ -1207,6 +1260,624 @@
     "chapter": "Quadratic equations",
     "reason": "Carry on where you left off."
    }
+  },
+  {
+   "step": 19,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "explore",
+   "question": "qd-d1",
+   "activity": "diagnostic",
+   "response": "2,4",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 20,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "explore",
+   "question": "qd-d3",
+   "activity": "diagnostic",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 21,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "explore",
+   "question": "qd-d2",
+   "activity": "diagnostic",
+   "response": "8",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.39
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 22,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.43
+   },
+   "finding": null,
+   "reason": "Here is a short explanation, then practice.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "square_meaning",
+     "kind": "conceptual",
+     "title": "What a square can be",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 23,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "guided",
+   "question": "qd-s2g",
+   "activity": "guided",
+   "response": "C",
+   "hints": 1,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.43
+   },
+   "finding": null,
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "square_meaning",
+     "kind": "conceptual",
+     "title": "What a square can be",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 24,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "check",
+   "question": "qd-s2c",
+   "activity": "check",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.43
+   },
+   "finding": null,
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "square_meaning",
+     "kind": "conceptual",
+     "title": "What a square can be",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 25,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.43
+   },
+   "finding": null,
+   "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "two_numbers",
+     "kind": "procedural",
+     "title": "Find two numbers",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 26,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "guided",
+   "question": "qd-g1",
+   "activity": "guided",
+   "response": "3,4",
+   "hints": 1,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.43
+   },
+   "finding": null,
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "two_numbers",
+     "kind": "procedural",
+     "title": "Find two numbers",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 27,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "check",
+   "question": "qd-c1",
+   "activity": "check",
+   "response": "-2,4",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 5
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.43
+   },
+   "finding": null,
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "two_numbers",
+     "kind": "procedural",
+     "title": "Find two numbers",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 28,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "pause",
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.43
+   },
+   "finding": null,
+   "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 5
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
   }
  ],
  "final": {
@@ -1224,9 +1895,149 @@
   },
   "next": {
    "kind": "continue",
-   "competency": "MATH.algebra.quadratic-discriminant",
+   "competency": "MATH.algebra.quadratics",
    "chapter": "Quadratic equations",
    "reason": "Carry on where you left off."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "?@gen:disc:5,14",
+    "claim": null,
+    "scope": {
+     "question": "gen:disc:5,14",
+     "family": "gen:disc:5,14",
+     "observedIn": "MATH.algebra.quadratic-discriminant",
+     "about": null
+    },
+    "status": "unsupported",
+    "support": {
+     "unexplained": 1,
+     "forgot-four": 0,
+     "secure": 0
+    },
+    "competing": [
+     "unexplained"
+    ],
+    "supporting": [],
+    "contradicting": [],
+    "obligations": [
+     "none the engine can ask: no known explanation fits; a person may look at the working"
+    ],
+    "teaching": {
+     "deliveredAt": null,
+     "strategy": null,
+     "competency": null
+    },
+    "resolvedBy": null,
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": null,
+     "attempts": [
+      "record#1",
+      "record#4",
+      "record#5",
+      "record#6"
+     ]
+    },
+    "use": {
+     "teach": false,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [
+      "2026-09-01T09:08:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:09:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:10:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-01T09:11:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:12:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:13:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [
+      "2026-09-01T09:14:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:15:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:16:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    }
+   ],
+   "MATH.algebra.quadratics": [
+    {
+     "strategy": "two_numbers",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-01T09:23:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:24:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:25:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    },
+    {
+     "strategy": "square_meaning",
+     "kind": "conceptual",
+     "delivered": [
+      "2026-09-01T09:20:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:21:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:22:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    }
+   ]
   }
  }
 }

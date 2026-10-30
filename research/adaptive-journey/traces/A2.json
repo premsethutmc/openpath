@@ -286,6 +286,7 @@
     }
    ],
    "finding": null,
+   "hypotheses": [],
    "evidenceAfter": {
     "status": "independent",
     "independent": {
@@ -1040,6 +1041,7 @@
     }
    ],
    "finding": null,
+   "hypotheses": [],
    "evidenceAfter": {
     "status": "transfer",
     "independent": {
@@ -1457,6 +1459,7 @@
     }
    ],
    "finding": null,
+   "hypotheses": [],
    "evidenceAfter": {
     "status": "review",
     "independent": {
@@ -1505,6 +1508,47 @@
    "kind": "review",
    "competency": "MATH.algebra.quadratic-discriminant",
    "reason": "The delayed check was missed, so this skill comes back for review."
+  },
+  "hypotheses": [],
+  "teachingHistory": {
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:12:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:13:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:14:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    }
+   ]
   }
  }
 }

@@ -30,7 +30,10 @@ export function topicPlan(target:string,release:CurriculumRelease,ctx:Ctx,minute
  if(support&&result.recovery?.active===support&&moduleFor(support))items.push({competency:support,reason:result.recovery?.plan?.why??'Check this supporting skill.',minutes:15});
  // findings@1: when the target's own module has teaching pending (e.g. a misunderstanding the check established), the target comes next
  const tm=moduleFor(target)?moduleState(target,ctx.records,ctx.evidence(target),ctx.now,ctx.session):null;
- if(tm&&['strategy','chapter','guided','check'].includes(tm.phase)&&!items.some(i=>i.competency===target))items.push({competency:target,reason:tm.reason,minutes:15});
+ const hooked=!!tm&&['strategy','chapter','guided','check'].includes(tm.phase)&&!items.some(i=>i.competency===target);
+ if(hooked)items.push({competency:target,reason:tm!.reason,minutes:15});
+ const without=(picked:string)=>{const strip=<T extends Chapter|Section>(c:T):T=>({...c,outcomes:c.outcomes.map(o=>({...o,mapping:{...o.mapping,competencies:o.mapping.competencies.filter(m=>m.id!==picked)}})),sections:c.sections?.map(s=>strip(s))});scope={...scope,subjects:scope.subjects.map(s=>({...s,chapters:s.chapters.map(strip)}))};};
+ if(hooked)without(target); // the planner below must not stop at the target it would also point to
  while(items.length*15<minutes){
   const next=nextActivity(scope,ctx.evidence,ctx.records);
   if(!next.competency||items.some(i=>i.competency===next.competency))break;

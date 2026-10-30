@@ -22,7 +22,8 @@ import { DAY, independentAttempt, rightAnswer, type SkillEvidence } from "./evid
 import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
 import { modulePhasePool } from "./library";
-import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
+import { familyOf, investigateContext, investigation, openHypothesis } from "./hypotheses";
+import { nextFromReasoning, type Reasoning } from "./reasoning";
 import type { Attempt, LearnerRecords } from "./records";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
@@ -82,7 +83,9 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
     const until = taught[i + 1]?.at ?? "9999";
     const within = (id: string) => mine.find((a) => a.questionId === id && a.at >= t.at && a.at < until) ?? null;
     const g = within(st.guided);
-    const c = within(st.check);
+    // teaching-history@1: the block's check alone is its own check question, or (when that question had already been
+    // seen elsewhere) the fresh question asked in its place: the first answer alone labelled "check" in the block
+    const c = within(st.check) ?? mine.find((a) => a.at >= t.at && a.at < until && a.activity === "check" && a.n === 1 && a.questionId !== st.guided && !a.context) ?? null;
     const clean = c && independentAttempt(c) ? c : null;
     return {
       id: `${m.competency}:${t.strategy}:${t.at}`,
@@ -153,11 +156,14 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // the first answer and the investigation answers) is taught here until a fresh answer alone after teaching is right.
   // It needs two matching answers (reason()); one slip, or an uncertain investigation, establishes nothing. It replaces
   // an inconclusive own diagnosis only, and it does not change the evidence or the status: it decides what to teach.
-  const own = established ? null : ownFinding(m, records);
-  const open = !!own && !findingResolved(m, own, records);
+  // learner-hypothesis@1 (hypotheses.ts): the same hypotheses every entry path reads; one seen in this skill keeps its
+  // kind, one about this skill (seen in a skill that builds on it) is mapped as an established finding passed in is
+  const own = established ? null : openHypothesis(competency, records);
+  const open = !!own;
   const inconclusive = !asked.result || asked.result === "insufficient_evidence" || asked.result === "secure";
-  const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: established.kind === "conceptual" ? "conceptual" : established.kind === "procedural" ? "procedural" : "recall", confidence: asked.confidence }
-    : open && inconclusive ? { ...asked, next: null, result: own!.kind, confidence: asked.confidence }
+  const asEstablished = (k: Established["kind"]): Diagnosis["result"] => (k === "conceptual" ? "conceptual" : k === "procedural" ? "procedural" : "recall");
+  const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: asEstablished(established.kind), confidence: asked.confidence }
+    : open && inconclusive ? { ...asked, next: null, result: own!.scope.observedIn === competency ? own!.claim!.kind : asEstablished(own!.claim!.kind), confidence: asked.confidence }
     : asked;
   const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !open;
   const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null;
@@ -208,7 +214,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     now: new Date(now).toISOString(),
     sessionStartedAt: sessionStart,
     session,
-    available: { apply: m.strategies.filter((s) => !answered(records, s.check)).length, contrast: 0, guided: st && !answered(records, st.guided) ? 1 : 0 },
+    available: { apply: m.strategies.filter((s) => !answered(records, s.check)).length + (fromPool(m, "check", records) ? 1 : 0), contrast: 0, guided: st && !answered(records, st.guided) ? 1 : 0 },
     answeredThisSession: records.attempts.filter((a) => of(m)(a) && a.at >= sessionStart && independentAttempt(a)).length,
     guidedThisBlock: st && records.attempts.some((a) => a.questionId === st.guided && a.at >= last!.at) ? 1 : 0,
     policy: MODULE_POLICY,
@@ -216,15 +222,22 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const byId = (id?: string) => m.strategies.find((s) => s.id === id) ?? null;
   if (decision.action === "teach") {
     let s = byId(decision.strategy);
-    // a strategy is taught once: if its questions are used, take the next unused one
-    if (s && answered(records, s.check)) s = order.find((x) => !answered(records, x.check) && !records.teaching.some((t) => t.competency === competency && t.strategy === x.id)) ?? null;
+    // a strategy is taught once: availability is instruction DELIVERED (a teach record), not its questions having been
+    // seen as practice; a strategy whose check was already answered is still taught, with a fresh check (blockCheck)
+    const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
+    if (s && delivered(s)) s = order.find((x) => !delivered(x)) ?? null;
     if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
     const before = records.teaching.some((t) => t.competency === competency);
-    return { ...base, phase: "chapter", strategy: s, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open ? `${own!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
+    return { ...base, phase: "chapter", strategy: s, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open ? `${own!.claim!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
   }
   if (decision.action === "guided_practice" && st) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
-  if (decision.action === "reassess" && st) return { ...base, phase: "check", question: st.check, strategy: st, diagnosis: d, decision, reason: "Now one new question on your own, with no hints." };
-  if (decision.action === "recommend_human" || decision.action === "content_gap") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
+  if (decision.action === "reassess" && st) {
+    const q = blockCheck(m, st, records);
+    if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, decision, reason: "Now one new question on your own, with no hints." };
+    return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
+  }
+  if (decision.action === "content_gap") return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
+  if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
   if (decision.action === "done") {
     const more = unanswered([...m.practice, ...m.transfer]);
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours." };
@@ -233,40 +246,36 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "One more question on your own." };
 }
 
-/** diagnostic@2 on one question from the learner's records: its first answer and the investigation answers (context
- * investigate:<question>, first tries). The same reading recovery uses. */
-export function investigation(qid: string, records: LearnerRecords): { reasoning: Reasoning | null; follow: Attempt[] } {
-  const fam = familyOf(qid);
-  const first = records.attempts.find((a) => a.questionId === qid);
-  if (!fam || !first) return { reasoning: null, follow: [] };
-  const follow = records.attempts.filter((a) => a.context === investigateContext(qid) && a.n === 1);
-  return { reasoning: reason(fam, [{ questionId: fam, response: first.response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))]), follow };
+/** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
+export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => (!answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records));
+
+/**
+ * teaching-history@1: for each strategy, instruction DELIVERED (teach records) kept apart from its questions merely
+ * ATTEMPTED (in any activity, e.g. as verification practice), and what the instruction achieved (the block's check
+ * alone after it). Read-only; the module chooses strategies by delivery, never by exposure.
+ */
+export interface StrategyHistory {
+  strategy: string;
+  kind: Strategy["kind"];
+  delivered: string[];
+  guidedSeen: { at: string; activity: string } | null;
+  checkSeen: { at: string; activity: string; inBlock: boolean } | null;
+  effective: boolean | null;
 }
-export interface Finding extends Established {
-  /** the question it was established on, the explanation, the skill it points to, and when (the last investigation answer) */
-  question: string;
-  explanation: string;
-  competency: string | null;
-  at: string;
-}
-/** findings@1: the latest misunderstanding established (status "established", not secure/unexplained) by investigating
- * a wrong first answer, alone, to one of this module's questions. null when nothing was investigated or it is unsure. */
-export function ownFinding(m: Module, records: LearnerRecords): Finding | null {
-  const wrong = records.attempts.filter((a) => of(m)(a) && a.n === 1 && independentAttempt(a) && !rightAnswer(a) && !a.context);
-  for (const a of [...wrong].reverse()) {
-    if (!records.attempts.some((x) => x.context === investigateContext(a.questionId))) continue; // never investigated
-    const { reasoning: r, follow } = investigation(a.questionId, records);
-    const b = r?.status === "established" ? r.best : null;
-    if (!b || !follow.length || b.kind === "secure" || b.kind === "unexplained") continue;
-    return { kind: b.kind, says: b.says, question: a.questionId, explanation: b.id, competency: b.competency, at: follow.at(-1)!.at };
-  }
-  return null;
-}
-/** A finding is resolved when, after teaching on this skill that came after it, a fresh question alone is right. */
-export function findingResolved(m: Module, f: Finding, records: LearnerRecords): boolean {
-  const taught = records.teaching.filter((t) => t.competency === m.competency && t.at > f.at);
-  if (!taught.length) return false;
-  return records.attempts.some((a) => of(m)(a) && a.at > taught[0].at && independentAttempt(a) && !a.context && rightAnswer(a));
+export function teachingHistory(m: Module, records: LearnerRecords): StrategyHistory[] {
+  const taught = records.teaching.filter((t) => t.competency === m.competency);
+  const blocks = ruleStateFor(m, diagnose(m, records.attempts), records).interventions;
+  return m.strategies.map((s) => {
+    const mine = taught.filter((t) => t.strategy === s.id);
+    const g = answered(records, s.guided), c = answered(records, s.check);
+    const blk = blocks.filter((b) => b.strategy === s.id);
+    return {
+      strategy: s.id, kind: s.kind, delivered: mine.map((t) => t.at),
+      guidedSeen: g && g.at ? { at: g.at, activity: g.activity } : null,
+      checkSeen: c && c.at ? { at: c.at, activity: c.activity, inBlock: mine.some((t) => c.at >= t.at) } : null,
+      effective: blk.length ? blk.some((b) => b.independentAfter.right > 0) : null,
+    };
+  });
 }
 
 const diagnosisReason = (d: Diagnosis) =>
@@ -296,13 +305,7 @@ export interface RecoveryState {
   reason: string;
 }
 
-/** The supported-family form of a question: itself if generated, or its prompt read as a problem. */
-export function familyOf(qid: string): string | null {
-  if (problemOf(qid)) return qid;
-  const p = parseProblem(question(qid).prompt);
-  return p.supported ? p.problem.id : null;
-}
-export const investigateContext = (original: string) => `investigate:${original}`;
+export { familyOf, investigateContext, investigation } from "./hypotheses";
 
 export function recovery(originalQid: string, records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string): RecoveryState {
   const q = question(originalQid);
