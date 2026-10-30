@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { moduleFor } from '../../../packages/learning/src/content';
 import { exposureKey } from '../../../packages/learning/src/families';
 import { graph } from '../../../packages/learning/src/graph';
+import { familyOf } from '../../../packages/learning/src/intervention';
 import { TeachingContent, teachingPracticeIds } from '../curriculum/TeachingContent';
 import { Ask, Feedback, type Ctx, type Fb } from './Learn';
 import { useResume } from './resume';
@@ -24,7 +25,7 @@ function LessonStages({ here, onLearn, onPractice, onAssess }: { here: Screen; o
   </ol>;
 }
 
-export function CurriculumPractice({ competency, ctx, resumeKey, back, initialStage, onAssess }: { competency: string; ctx: Ctx; resumeKey: string; back: string; initialStage?: Screen; onAssess?: () => void }) {
+export function CurriculumPractice({ competency, ctx, resumeKey, back, initialStage, onAssess, onStuck }: { competency: string; ctx: Ctx; resumeKey: string; back: string; initialStage?: Screen; onAssess?: () => void; onStuck?: (qid: string) => void }) {
   const ids = moduleFor(competency) ? teachingPracticeIds(competency) : [];
   const next = () => ids.find((id) => !ctx.records.attempts.some((attempt) => exposureKey(attempt.questionId) === exposureKey(id))) ?? null;
   const [screen, setScreen] = useResume<Screen>(resumeKey + ':screen', initialStage ?? 'teaching');
@@ -52,6 +53,7 @@ export function CurriculumPractice({ competency, ctx, resumeKey, back, initialSt
         label="Next question"
         onNext={() => { setCursor({ qid: next(), fb: null, hint: false }); setRetry(0); }}
         onRetry={hint => { setCursor({ ...cursor, fb: null, hint: cursor.hint || hint }); setRetry(retry + 1); }}
+        onInvestigate={onStuck && familyOf(cursor.qid) ? () => onStuck(cursor.qid!) : undefined}
       /> : <Ask
         key={`${cursor.qid}:${retry}`} qid={cursor.qid} ctx={ctx} activity="practice" hintAllowed
         resumeKey={`${resumeKey}:${cursor.qid}`} showHint={cursor.hint}

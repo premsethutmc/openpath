@@ -78,7 +78,7 @@ type View =
   | { name: "topic-diagnostic"; competency: string; back: View }
   | { name: "curriculum-practice"; competency: string; back: View; stage?: "teaching" | "practice" }
   | { name: "module"; competency: string; back: View }
-  | { name: "stuck"; qid: string }
+  | { name: "stuck"; qid: string; back?: View }
   | { name: "single"; qid: string; heading: string; note?: string }
   | { name: "years" };
 
@@ -287,6 +287,7 @@ function App() {
           back={`/curriculum/?learner=${encodeURIComponent(learner)}#c=${encodeURIComponent(view.competency)}`}
           initialStage={view.stage}
           onAssess={() => setView({ name: "module", competency: view.competency, back: { name: "curriculum-practice", competency: view.competency, back: view.back } })}
+          onStuck={(qid) => setView({ name: "stuck", qid, back: { name: "curriculum-practice", competency: view.competency, back: view.back, stage: "practice" } })}
         />
       </Shell>
     );
@@ -303,7 +304,7 @@ function App() {
   if (view.name === "stuck")
     return (
       <Shell banner={banner} error={error} top={top(home, name)}>
-        <Recovery original={view.qid} ctx={ctx} onExit={() => setView({ name: "year" })} />
+        <Recovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />
       </Shell>
     );
   if (view.name === "single")

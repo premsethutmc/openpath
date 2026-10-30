@@ -138,7 +138,7 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
   );
 }
 
-export function Feedback({ fb, onNext, label = "Continue", onRetry }: { fb: Fb; onNext: () => void; label?: string; onRetry?: (hint:boolean) => void }) {
+export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigate }: { fb: Fb; onNext: () => void; label?: string; onRetry?: (hint:boolean) => void; onInvestigate?: () => void }) {
   const q = question(fb.qid);
   if (needsMarking(q))
     return (
@@ -172,6 +172,8 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry }: { fb: Fb; 
           <p>{check.note}</p>
         </div>
       )}
+      {/* adaptive loop: a wrong answer on a problem OpenPath can reason about opens the same recovery as "I'm stuck" */}
+      {onInvestigate && !fb.right && !undecided ? <button className="secondary wide" onClick={onInvestigate}>Find out what went wrong</button> : null}
       <div className="actions sticky">
         <button className="primary" onClick={onNext}>{onRetry && !fb.right ? "Continue with another question" : label}</button>
       </div>
@@ -347,7 +349,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
 }
 
 /** A problem the learner is stuck on: try it, find the supporting skill that is missing, learn it, come back. */
-export function Recovery({ original, ctx, onExit }: { original: string; ctx: Ctx; onExit: () => void }) {
+export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year" }: { original: string; ctx: Ctx; onExit: () => void; exitLabel?: string }) {
   const [fb, setFb] = useState<Fb | null>(null);
   const r = recovery(original, ctx.records, ctx.evidence, ctx.now, ctx.session);
   const q = question(original);
@@ -410,7 +412,7 @@ export function Recovery({ original, ctx, onExit }: { original: string; ctx: Ctx
         <p>{r.reason}</p>
       </div>
       {trace}
-      <button className="secondary wide" onClick={onExit}>Back to the year</button>
+      <button className="secondary wide" onClick={onExit}>{exitLabel}</button>
     </div>
   );
 }
