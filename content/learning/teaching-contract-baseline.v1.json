@@ -4,11 +4,11 @@
  "modules": 336,
  "sections": 1472,
  "workedVerified": 158,
- "workedLabelled": 60,
+ "workedLabelled": 61,
  "byRule": {
   "no-instance": 17,
-  "worked-unverified": 255,
-  "text-not-instance": 113,
+  "worked-unverified": 254,
+  "text-not-instance": 111,
   "decorative-visual": 8
  },
  "exempted": {
@@ -102,10 +102,6 @@
    "worked-unverified": 1
   },
   "MATH.statistics.averages-intro": {
-   "worked-unverified": 1
-  },
-  "MATH.number.square-roots": {
-   "text-not-instance": 2,
    "worked-unverified": 1
   },
   "MATH.measurement.volume-cubes": {

@@ -50,7 +50,7 @@ export const STATUS_WORD: Record<SkillEvidence["status"], string> = {
 export const statusClass = (s: SkillEvidence["status"]) => (s === "verified" ? "verified" : s === "independent" || s === "transfer" ? "shown" : s === "not_started" ? "not_started" : "active");
 
 const FLOW = ["Explore", "Strategy", "Chapter", "Practise", "Verify"] as const;
-const flowIndex = (p: ModulePhase) => (p === "explore" ? 0 : p === "strategy" ? 1 : p === "chapter" ? 2 : p === "guided" || p === "check" ? 3 : 4);
+const flowIndex = (p: ModulePhase) => (p === "explore" || p === "recover" ? 0 : p === "strategy" ? 1 : p === "chapter" ? 2 : p === "guided" || p === "check" ? 3 : 4);
 const activityOf = (phase: ModulePhase, q: Question): LearningActivity =>
   phase === "explore" ? "diagnostic" : phase === "strategy" ? "probe" : phase === "guided" ? "guided" : phase === "check" ? "check" : phase === "retention" ? "retention" : q.role === "transfer" ? "transfer" : "practice";
 const COUNTS: Record<LearningActivity, string> = {
@@ -295,7 +295,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
-  const ms = moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established);
+  const ms = moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, ctx.evidence);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
   const stepper = (
@@ -318,11 +318,14 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   if (sessionMode && ms.question && writtenTask(ms.question)?.answer === "drawing" && !HANDWRITING_ENABLED)
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
   if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p><button className="secondary wide" onClick={onExit}>Back</button></div>;
+  // the same investigation as from Practice: the wrong answer is looked into, and the skill it points to is worked on first
+  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}<Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded /></div>;
   if (ms.phase === "chapter" && ms.strategy)
     return (
       <div className="stack">
         {head}
         <p className="why">{ms.reason}</p>
+        <p className="small muted" role="note">{ms.teachingReview === "machine-checked" ? "This explanation has been checked automatically against its question. A teacher has not reviewed it yet." : "This explanation has not been checked automatically or reviewed by a teacher yet."}</p>
         <Lesson key={ms.strategy.id} resumeKey={resumeKey && `${resumeKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
     );
@@ -349,13 +352,24 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
 }
 
 /** A problem the learner is stuck on: try it, find the supporting skill that is missing, learn it, come back. */
-export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year" }: { original: string; ctx: Ctx; onExit: () => void; exitLabel?: string }) {
+/** The supports to explain to a learner: only relations confirmed all the way from the problem's skill (mandatory edges whose
+ *  chain is mandatory too); unconfirmed (plausible, support) relations stay advisory and are not shown as "what this uses". */
+function confirmedSupports(start: string, supports: { id: string; via: string | null; type: string; assessable: boolean; depth: number }[]) {
+  const reached = new Set([start]);
+  return supports.filter((s) => {
+    if (s.type !== "mandatory" || !reached.has(s.via ?? "")) return false;
+    reached.add(s.id);
+    return s.assessable;
+  });
+}
+export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year", embedded = false }: { original: string; ctx: Ctx; onExit: () => void; exitLabel?: string; embedded?: boolean }) {
   const [fb, setFb] = useState<Fb | null>(null);
   const r = recovery(original, ctx.records, ctx.evidence, ctx.now, ctx.session);
   const q = question(original);
   const trace = (
     <div className="trace" aria-label="What this problem uses">
-      {r.supports.filter((s) => s.assessable).map((s) => {
+      {/* only confirmed (mandatory) relations are explained to the learner; unconfirmed ones stay advisory */}
+      {confirmedSupports(q.competency, r.supports).map((s) => {
         const e = ctx.evidence(s.id);
         return (
           <div key={s.id} className={`trace-row ${statusClass(e.status)} ${r.active === s.id ? "now" : ""}`}>
@@ -408,7 +422,7 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
     <div className="stack">
       <h1>{graph.get(q.competency).name}</h1>
       <div className={`feedback ${r.phase === "escalate" ? "bad" : "good"}`} role="status">
-        <strong>{r.phase === "solved" ? "Solved on your own" : r.phase === "solved_after_help" ? "Solved after help" : "Ask for help with this one"}</strong>
+        <strong>{r.phase === "solved" ? "Solved on your own" : r.phase === "solved_on_retry" ? "Solved on a second try" : r.phase === "solved_after_help" ? "Solved after help" : "Ask for help with this one"}</strong>
         <p>{r.reason}</p>
       </div>
       {trace}

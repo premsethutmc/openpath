@@ -424,3 +424,22 @@ export function contractReport(modules: Module[]) {
 }
 
 export const lessonFor = (competency: string) => moduleFor(competency);
+
+/** Teaching eligibility (adaptive-loop repair): whether a module's strategy may be used as an intervention. Eligible only when
+ *  every one of its sections was checked against the contract and none has an outstanding violation (a reviewed exemption
+ *  is not a violation). This is a machine check: "eligible" never means educator-approved. */
+export interface TeachingEligibility { eligible: boolean; checked: boolean; violations: string[]; review: "machine-checked" | "not-checked" }
+const eligibilityCache = new Map<string, Map<string, TeachingEligibility>>();
+export function teachingEligibility(module: Module, strategy: Strategy): TeachingEligibility {
+  let byStrategy = eligibilityCache.get(module.competency);
+  if (!byStrategy) eligibilityCache.set(module.competency, (byStrategy = new Map()));
+  const hit = byStrategy.get(strategy.id);
+  if (hit) return hit;
+  // the strategy's own sections, assembled exactly as a lesson assembles them (the module's idea first, then this strategy)
+  const blocks = lessonBlocks({ ...module, strategies: [strategy] }).slice(1).filter((b) => strategy.screens.some((s) => s.title === b.title));
+  const checked = blocks.length > 0;
+  const violations = [...new Set(blocks.flatMap((b) => b.violations.map((v) => `${b.title}: ${v}`)))];
+  const out: TeachingEligibility = { eligible: checked && !violations.length, checked, violations, review: checked ? "machine-checked" : "not-checked" };
+  byStrategy.set(strategy.id, out);
+  return out;
+}

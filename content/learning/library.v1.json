@@ -3254,7 +3254,8 @@
     {
      "title": "The square root of a perfect square",
      "text": [
-      "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49."
+      "√25 is the number that, multiplied by itself, makes 25.",
+      "So we look for the whole number whose square is 25."
      ],
      "math": [
       "√25 = ?",
@@ -3262,7 +3263,8 @@
      ],
      "tip": "The number was squared; the square root goes the other way.",
      "role": "concept",
-     "instance": "gen:root:5"
+     "instance": "gen:root:5",
+     "textFrom": "instance"
     },
     {
      "title": "Is it a perfect square? Last digits of squares",
@@ -3347,16 +3349,17 @@
      "needs": [],
      "screens": [
       {
-       "title": "The method",
+       "title": "The square root of a perfect square, step by step",
        "text": [
-        "Think of the square facts: 7 × 7 = 49, so √49 = 7."
+        "So we look for the whole number whose square is 2809."
        ],
        "math": [
         "√2809 = ?",
         "53 × 53 = 2809"
        ],
        "role": "worked-example",
-       "instance": "gen:root:53"
+       "instance": "gen:root:53",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:root:33",
@@ -3437,7 +3440,7 @@
    ],
    "provenance": {
     "origin": "synthesised",
-    "policy": "library@2+template@1",
+    "policy": "library@2+template@1+teaching-contract@1",
     "family": "root",
     "seed": [
      5

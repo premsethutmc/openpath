@@ -9,6 +9,7 @@ import { assigned, type CurriculumRelease } from "./curriculum";
 import { moduleFor } from "./content";
 import type { SkillEvidence } from "./evidence";
 import { overlay } from "./goals";
+import { moduleState } from "./intervention";
 import { graph } from "./graph";
 import { currentEnrolment, type LearnerRecords } from "./records";
 import { flatten, tilesFor, type Tile } from "./tiles";
@@ -20,6 +21,8 @@ export interface NextActivity {
   question?: string;
   chapter?: string;
   reason: string;
+  /** Skills the engine has paused for a teacher or parent (never offered as "carry on" while paused). */
+  paused?: string[];
 }
 
 export function yearSummary(release: CurriculumRelease, ev: (id: string) => SkillEvidence) {
@@ -39,16 +42,28 @@ export function yearSummary(release: CurriculumRelease, ev: (id: string) => Skil
   };
 }
 
-export function nextActivity(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords): NextActivity {
+export function nextActivity(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: { now: number; session: string }): NextActivity {
+  const n = nextActivityOf(release, ev, records, at);
+  return at ? { ...n, paused: pausedSkills(release, ev, records, at) } : n;
+}
+/** pause@1: a skill whose module has stopped for a person (every checked explanation tried, or the planner recommends a
+ *  person). It stays paused for as long as the engine says so from the records; it lifts only when the records change what the
+ *  engine decides (new evidence on the skill, e.g. after the supporting skill is worked on), never by asking again. */
+function pausedSkills(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at: { now: number; session: string }) {
+  const touched = [...new Set(records.attempts.map((a) => graph.evidenceTarget(a.competency)))].filter((id) => moduleFor(id));
+  return touched.filter((id) => moduleState(id, records, ev(id), at.now, at.session, null, ev).phase === "pause");
+}
+function nextActivityOf(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: { now: number; session: string }): NextActivity {
+  const paused = new Set(at ? pausedSkills(release, ev, records, at) : []);
   const rows = assigned(release).filter((r) => moduleFor(r.competency));
   const ids = [...new Set(rows.map((r) => r.competency))];
   // a delayed check comes back whatever year the skill was shown in (records persist across grades)
   const touched = [...new Set(records.attempts.map((a) => graph.evidenceTarget(a.competency)))].filter((id) => moduleFor(id));
   const due = [...ids, ...touched.filter((id) => !ids.includes(id))].find((id) => ev(id).retention === "due");
   if (due) return { kind: "retention", competency: due, reason: "A delayed check is due: a few questions to see the skill has stayed with you." };
-  const review = ids.find((id) => ev(id).status === "review");
+  const review = ids.find((id) => ev(id).status === "review" && !paused.has(id));
   if (review) return { kind: "review", competency: review, reason: "The delayed check was missed, so this skill comes back for review." };
-  const inProgress = ids.find((id) => ["exposure", "guided"].includes(ev(id).status));
+  const inProgress = ids.find((id) => ["exposure", "guided"].includes(ev(id).status) && !paused.has(id));
   if (inProgress) return { kind: "continue", competency: inProgress, chapter: rows.find((r) => r.competency === inProgress)?.chapter.title, reason: "Carry on where you left off." };
   const fresh = rows.find((r) => ev(r.competency).status === "not_started");
   if (fresh) return { kind: "start", competency: fresh.competency, chapter: fresh.chapter.title, reason: `Next in ${fresh.chapter.title}.` };

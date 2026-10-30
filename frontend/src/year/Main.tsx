@@ -424,6 +424,7 @@ function App() {
       ) : (
         <div className="next"><p className="eyebrow">Next</p><p>{next.reason}</p></div>
       )}
+      {next.paused?.length ? <p className="why" role="note"><b>Paused for a teacher or parent:</b> {next.paused.map((id) => graph.get(id).name).join(", ")}. Different explanations have not worked yet, so OpenPath does not ask more on {next.paused.length > 1 ? "these" : "this"} on its own.</p> : null}
       {tiles.map((s) => (
         <section key={s.id} aria-label={s.title}>
           <div className="section-title"><h2>{s.title}</h2><span className="small muted">{s.progress.done} of {s.progress.total} skills shown on your own</span></div>

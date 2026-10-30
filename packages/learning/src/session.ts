@@ -39,7 +39,7 @@ export function learnerState(learnerId: string, events: readonly { kind: string 
   const ev = evidenceFor(learnerId, records, now);
   const enrol = currentEnrolment(records);
   const release = enrol ? releaseFor(enrol.curriculum, records.curricula) : null;
-  const next = release ? nextActivity(release, ev.get, records) : null;
+  const next = release ? nextActivity(release, ev.get, records, { now, session: o.currentSession ?? "" }) : null;
   // the plan at the end of the previous visit: the same derivation, without this visit's records
   let change: string | null = null;
   if (next && release) {

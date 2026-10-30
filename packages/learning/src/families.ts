@@ -858,7 +858,7 @@ const F: Def[] = [
     explain: (s) => `${show(s.value)} × ${show(s.value)} = ${s.inputs[0]}`,
     domain: [[2, 100]],
     difficulty: ([n]) => (n <= 10 ? 1 : n <= 15 ? 2 : 3),
-    teach: { idea: "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49.", method: "Think of the square facts: 7 × 7 = 49, so √49 = 7." },
+    teach: { idea: "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49.", method: "Think of the square facts: 7 × 7 = 49, so √49 = 7.", instance: rootTeaching },
   },
   {
     id: "vol",
@@ -1389,6 +1389,30 @@ export function problemOf(id: string): Problem | null {
   }
 }
 export const variantsOf = (pr: Problem): Problem[] => FAMILIES.get(pr.family)!.variants(pr.params).flatMap((p) => (FAMILIES.get(pr.family)!.reject(p) ? [] : [build(FAMILIES.get(pr.family)!, p)])).filter((v) => selectable(v.id));
+/** teaching-contract@1 (adaptive-loop repair, square roots): the teaching for √(n²) from this question's own number: for a
+ *  one-digit root the square fact; for a larger root, the tens it lies between, the last digit, and the check. */
+function rootTeaching([n]: number[]): InstanceTeaching {
+  const v = n * n;
+  const concept = { title: "The square root of a perfect square", text: [`√${v} is the number that, multiplied by itself, makes ${v}.`, `So we look for the whole number whose square is ${v}.`] };
+  if (n < 10) return { concept, worked: { result: n, steps: [
+    { expression: `${n} × ${n} = ${v}`, explanation: "This is a square fact.", claims: [{ expr: `${n} × ${n}`, value: v }] },
+    { expression: `√${v} = ${n}`, explanation: `${n} multiplied by itself makes ${v}.`, claims: [{ expr: `${n} × ${n}`, value: v }] },
+  ] } };
+  if (n % 10 === 0) { const k = n / 10; return { concept, worked: { result: n, steps: [
+    { expression: `${k} × ${k} = ${k * k}`, explanation: "Start from the square fact without the zero.", claims: [{ expr: `${k} × ${k}`, value: k * k }] },
+    { expression: `${n} × ${n} = ${v}`, explanation: `${n} is ${k} tens, so its square is ${k * k} hundreds.`, claims: [{ expr: `${n} × ${n}`, value: v }] },
+    { expression: `√${v} = ${n}`, explanation: `${n} multiplied by itself makes ${v}.`, claims: [{ expr: `${n} × ${n}`, value: v }] },
+  ] } }; }
+  const lo = Math.floor(n / 10) * 10, hi = lo + 10, last = v % 10;
+  const ends = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter((d) => (d * d) % 10 === last);
+  const cands = ends.map((d) => lo + d);
+  const other = cands.find((c) => c !== n);
+  return { concept, worked: { result: n, steps: [
+    { expression: `${lo} × ${lo} = ${lo * lo} and ${hi} × ${hi} = ${hi * hi}`, explanation: `${v} lies between them, so √${v} lies between ${lo} and ${hi}.`, claims: [{ expr: `${lo} × ${lo}`, value: lo * lo }, { expr: `${hi} × ${hi}`, value: hi * hi }] },
+    { expression: `${v} ends in ${last}, so the root ends in ${ends.join(" or ")}`, explanation: `Only ${ends.map((d) => `${d} × ${d} = ${d * d}`).join(" and ")} end in ${last}. So the root is ${cands.join(" or ")}.`, claims: ends.map((d) => ({ expr: `${d} × ${d}`, value: d * d })) },
+    { expression: `√${v} = ${n}`, explanation: `Check: ${n} × ${n} = ${v}${other ? `, while ${other} × ${other} = ${other * other}` : ""}.`, claims: [{ expr: `${n} × ${n}`, value: v }, ...(other ? [{ expr: `${other} × ${other}`, value: other * other }] : [])] },
+  ] } };
+}
 /** teaching-contract@1 (stage 2, arithmetic progressions): the teaching for one progression [a, d, n]. */
 function apTeaching([a, d, n]: number[]): InstanceTeaching {
   const t = (k: number) => a + (k - 1) * d, answer = t(n);

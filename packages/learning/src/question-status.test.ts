@@ -98,7 +98,7 @@ describe("selectors never return a quarantined question", () => {
   }, LONG);
   test("selection code is registered: only these files import the pool selectors (each applies selectable() or reads filtered modules)", () => {
     // a new selector must apply selectable() and be added here in a reviewed change
-    const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts", "packages/learning/src/exact/verify.ts",
+    const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts", "packages/learning/src/exact/verify.ts",
       "packages/learning/src/intervention.ts", "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts", "packages/learning/src/spec.ts"];
     const root = new URL("../../../", import.meta.url).pathname, hits: string[] = [];
     const walk = (d: string) => { for (const e of readdirSync(join(root, d), { withFileTypes: true })) { const r = `${d}/${e.name}`; if (e.isDirectory()) { if (e.name !== "node_modules") walk(r); } else if (/\.tsx?$/.test(e.name) && !/\.test\.tsx?$/.test(e.name) && /import \{[^}]*\b(pool|phasePool|variantsOf|modulePhasePool|fromPool)\b[^}]*\} from/.test(readFileSync(join(root, r), "utf8"))) hits.push(r); } };

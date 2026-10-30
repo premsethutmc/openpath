@@ -79,3 +79,48 @@ for (const width of [360]) test(`${width}px a wrong practice answer leads to the
     await context.close();
   }
 });
+
+for (const width of [360]) test(`${width}px from the Assessment stage, the same wrong answers lead to the same investigation`, async () => {
+  const context = await browser.newContext({ viewport: { width, height: 800 }, isMobile: true, hasTouch: true });
+  const page = await context.newPage();
+  page.setDefaultTimeout(60_000);
+  try {
+    await page.goto(`${base}/year/`);
+    await api(page, "/account/");
+    assert.equal((await api(page, "/account/register/", { email: `adaptive-assess-${width}-${Date.now()}@example.org`, password: "synthetic-adaptive-password", consent: true })).status, 201);
+    const learner = (await api(page, "/pupils/", { display_name: "Synthetic adaptive learner", consent: true })).data.id;
+    const { e, data } = release;
+    const enrol = { kind: "learning_record", id: `enrol-${learner}`, at: new Date().toISOString(), learnerId: learner, sessionId: `learn:${learner}:setup`, record: "enrol", grade: 10, academicYear: "2026-27", curriculum: { id: data.release.id, version: data.release.version, hash: data.release.hash } };
+    assert.equal((await api(page, `/pupils/${learner}/events/`, { subject: "mathematics", seq: 0, event: enrol })).status, 201);
+    await page.goto(`${base}/curriculum/?learner=${learner}&view=learner#b=${e.board}&g=10&c=${encodeURIComponent(C)}`);
+    await page.getByRole("link", { name: "Start learning", exact: true }).click();
+    await page.getByRole("list", { name: "Lesson stages" }).getByRole("button", { name: /Assessment/ }).click();
+    // the exploratory questions, answered with the square-root misconception, until the investigation starts
+    for (let k = 0; k < 4 && !(await page.getByText("Working out what happened", { exact: true }).count()); k++) {
+      const qid = await page.locator(".qcard[data-qid]").getAttribute("data-qid");
+      const q = question(qid);
+      if (q.type === "choice") await page.getByRole("radio").nth(q.answer === "A" ? 1 : 0).click();
+      else await page.getByRole("textbox", { name: "Your answer", exact: true }).fill(missingRoot(qid) ?? "1");
+      await page.getByRole("button", { name: "Check", exact: true }).click();
+      await page.getByRole("button", { name: /Continue/ }).first().click();
+    }
+    await page.getByText("Working out what happened", { exact: true }).waitFor();
+    await page.screenshot({ path: `${shots}/${width}-assessment-investigate.png`, fullPage: true });
+    const follow = await page.locator(".qcard[data-qid]").getAttribute("data-qid");
+    await page.getByRole("textbox", { name: "Your answer", exact: true }).fill(missingRoot(follow) ?? "1");
+    await page.getByRole("button", { name: "Check", exact: true }).click();
+    await page.getByRole("button", { name: /Continue/ }).first().click();
+    await page.getByRole("note", { name: "What we think happened" }).waitFor();
+    await page.getByRole("heading", { name: graph.get("MATH.number.square-roots").name, exact: true }).waitFor();
+    // the lesson offered is machine-checked and says it is not teacher-reviewed
+    await page.getByText(/checked automatically against its question\. A teacher has not reviewed it yet\./).waitFor();
+    await page.screenshot({ path: `${shots}/${width}-assessment-support.png`, fullPage: true });
+    // only confirmed relations are listed as what the problem uses (none of Pythagoras's are confirmed)
+    assert.equal(await page.locator(".trace-row").count(), 0);
+  } catch (error) {
+    await page.screenshot({ path: `${shots}/${width}-assessment-failure.png`, fullPage: true });
+    throw error;
+  } finally {
+    await context.close();
+  }
+});

@@ -1611,7 +1611,7 @@
     "idea": "A square root undoes squaring: √49 is the number that, multiplied by itself, makes 49.",
     "method": "Think of the square facts: 7 × 7 = 49, so √49 = 7."
    },
-   "fingerprint": "e42fc2fe",
+   "fingerprint": "fbbee837",
    "validation": {
     "family": "root",
     "deterministic": {

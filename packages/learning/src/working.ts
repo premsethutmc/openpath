@@ -123,7 +123,9 @@ const METHODS: Record<string, string> = {
   "completing-square": "Completing the square",
   other: "Your own way",
 };
-const supportsWorking = (pr: Problem) => ["mul", "rect", "cint", "linev", "eqfrac", "quad"].includes(pr.family);
+// apn (adaptive-loop repair): arithmetic-progression working is plain arithmetic (n − 1, × d, + a), so the numeric contract
+// applies unchanged: each line a true statement, the last at the answer. A line in words is reported as unreadable, never as a slip.
+const supportsWorking = (pr: Problem) => ["mul", "rect", "cint", "linev", "eqfrac", "quad", "apn"].includes(pr.family);
 export const canCheckWorking = supportsWorking;
 
 function numericValue(pr: Problem): number {
@@ -224,6 +226,6 @@ export function checkWorking(pr: Problem, raw: string[]): WorkingCheck {
     lines: checked.map(({ text, valid, why }) => ({ text, valid, ...(why ? { why } : {}) })),
     valid,
     method: id ? { id, name: METHODS[id] } : null,
-    note: !lines.length ? "No working given." : valid ? (id === "other" ? "Every line is right. That is a valid way, even if it is not one of the ways taught here." : "Every line is right.") : `A line has a slip: ${checked.find((l) => !l.valid)!.why}.`,
+    note: !lines.length ? "No working given." : valid ? (id === "other" ? "Every line is right. That is a valid way, even if it is not one of the ways taught here." : "Every line is right.") : (() => { const why = checked.find((l) => !l.valid)!.why!; return /could not be read|is not one number|empty/.test(why) ? `A line could not be checked: ${why}.` : `A line has a slip: ${why}.`; })(),
   };
 }

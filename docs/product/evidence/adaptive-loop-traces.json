@@ -44,8 +44,8 @@
      "prompt": "An arithmetic progression starts 12, 17, 22, … What is term number 15?",
      "response": "81",
      "working": [
-      "From term 1 to term 15: 14 jumps",
-      "14 jumps of 5: 70",
+      "15 − 1 = 14",
+      "14 × 5 = 70",
       "12 + 70 = 81"
      ],
      "hints": 0,
@@ -57,7 +57,10 @@
       "methodExamined": false,
       "firstError": null
      },
-     "workingCheck": null,
+     "workingCheck": {
+      "valid": false,
+      "note": "A line has a slip: 12 + 70 is 82, but 81 is 81."
+     },
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "guided",
@@ -70,110 +73,8 @@
     {
      "n": 3,
      "path": "recovery",
-     "phase": "investigate",
-     "reason": "One more question to understand what happened (it does not count against you).",
-     "activity": "diagnostic",
-     "question": "gen:apn:1,2,10",
-     "prompt": "An arithmetic progression starts 1, 3, 5, … What is term number 10?",
-     "response": "19",
-     "hints": 0,
-     "grading": {
-      "verdict": "correct",
-      "reason": "correct.equal",
-      "credit": true,
-      "source": "kernel",
-      "methodExamined": false,
-      "firstError": null
-     },
-     "workingCheck": null,
-     "evidence": {
-      "competency": "MATH.algebra.arithmetic-sequences",
-      "status": "independent",
-      "independent": "2/3",
-      "assisted": "0/0",
-      "engine": "unavailable",
-      "retention": "scheduled"
-     },
-     "reasoning": {
-      "status": "need_more",
-      "best": null,
-      "competency": null,
-      "plan": null
-     }
-    },
-    {
-     "n": 4,
-     "path": "recovery",
-     "phase": "investigate",
-     "reason": "One more question to understand what happened (it does not count against you).",
-     "activity": "diagnostic",
-     "question": "gen:apn:1,2,11",
-     "prompt": "An arithmetic progression starts 1, 3, 5, … What is term number 11?",
-     "response": "21",
-     "hints": 0,
-     "grading": {
-      "verdict": "correct",
-      "reason": "correct.equal",
-      "credit": true,
-      "source": "kernel",
-      "methodExamined": false,
-      "firstError": null
-     },
-     "workingCheck": null,
-     "evidence": {
-      "competency": "MATH.algebra.arithmetic-sequences",
-      "status": "independent",
-      "independent": "3/4",
-      "assisted": "0/0",
-      "engine": "unavailable",
-      "retention": "scheduled"
-     },
-     "reasoning": {
-      "status": "need_more",
-      "best": null,
-      "competency": null,
-      "plan": null
-     }
-    },
-    {
-     "n": 5,
-     "path": "recovery",
-     "phase": "investigate",
-     "reason": "One more question to understand what happened (it does not count against you).",
-     "activity": "diagnostic",
-     "question": "gen:apn:2,2,10",
-     "prompt": "An arithmetic progression starts 2, 4, 6, … What is term number 10?",
-     "response": "20",
-     "hints": 0,
-     "grading": {
-      "verdict": "correct",
-      "reason": "correct.equal",
-      "credit": true,
-      "source": "kernel",
-      "methodExamined": false,
-      "firstError": null
-     },
-     "workingCheck": null,
-     "evidence": {
-      "competency": "MATH.algebra.arithmetic-sequences",
-      "status": "independent",
-      "independent": "4/5",
-      "assisted": "0/0",
-      "engine": "unavailable",
-      "retention": "scheduled"
-     },
-     "reasoning": {
-      "status": "need_more",
-      "best": null,
-      "competency": null,
-      "plan": null
-     }
-    },
-    {
-     "n": 6,
-     "path": "recovery",
      "phase": "return",
-     "reason": "Not sure yet. It could be: knows it; the mistake was a slip. Try the problem again, or ask a teacher to look at your working.",
+     "reason": "Not sure why yet: the answers do not match any explanation OpenPath knows, so it will not guess. Try the problem again, or ask a teacher to look at your working.",
      "activity": "original",
      "question": "gen:apn:12,5,15",
      "prompt": "An arithmetic progression starts 12, 17, 22, … What is term number 15?",
@@ -190,11 +91,11 @@
      "workingCheck": null,
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
-      "status": "independent",
-      "independent": "4/5",
+      "status": "guided",
+      "independent": "1/2",
       "assisted": "1/1",
       "engine": "unavailable",
-      "retention": "scheduled"
+      "retention": "none"
      },
      "reasoning": {
       "status": "uncertain",
@@ -204,22 +105,55 @@
      }
     },
     {
-     "n": 7,
+     "n": 4,
      "path": "recovery",
-     "phase": "solved_after_help",
-     "reason": "Solved after help. That counts as help, not as work on your own.",
+     "phase": "solved_on_retry",
+     "reason": "Solved on a second try, without help. A second try is practice: it does not count as solving it on your own the first time.",
      "reasoning": null,
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
-      "status": "independent",
-      "independent": "4/5",
+      "status": "guided",
+      "independent": "1/2",
       "assisted": "1/1",
       "engine": "unavailable",
-      "retention": "scheduled"
+      "retention": "none"
      }
     },
     {
-     "n": 8,
+     "n": 5,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:apn:18,2,12",
+     "prompt": "An arithmetic progression starts 18, 20, 22, … What is term number 12?",
+     "response": "40",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "2/3",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.35,
+      "asked": 0
+     }
+    },
+    {
+     "n": 6,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -240,19 +174,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "5/6",
+      "independent": "3/4",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 9,
+     "n": 7,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -273,19 +207,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "6/7",
+      "independent": "4/5",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 10,
+     "n": 8,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -306,19 +240,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "7/8",
+      "independent": "5/6",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 11,
+     "n": 9,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -339,19 +273,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "8/9",
+      "independent": "6/7",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 12,
+     "n": 10,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -372,19 +306,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "9/10",
+      "independent": "7/8",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 13,
+     "n": 11,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -405,19 +339,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "10/11",
+      "independent": "8/9",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 14,
+     "n": 12,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -438,19 +372,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "11/12",
+      "independent": "9/10",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 15,
+     "n": 13,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -471,19 +405,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "independent",
-      "independent": "12/13",
+      "independent": "10/11",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 16,
+     "n": 14,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -504,19 +438,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "13/14",
+      "independent": "11/12",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 17,
+     "n": 15,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -537,19 +471,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "14/15",
+      "independent": "12/13",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 18,
+     "n": 16,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -570,19 +504,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "15/16",
+      "independent": "13/14",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 19,
+     "n": 17,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -603,19 +537,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "16/17",
+      "independent": "14/15",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 20,
+     "n": 18,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -636,19 +570,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "17/18",
+      "independent": "15/16",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 21,
+     "n": 19,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. More practice is optional.",
@@ -669,19 +603,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "18/19",
+      "independent": "16/17",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 22,
+     "n": 20,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
@@ -702,19 +636,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "18/19",
+      "independent": "16/17",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 23,
+     "n": 21,
      "path": "module",
      "phase": "verify",
      "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
@@ -735,52 +669,52 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "18/19",
+      "independent": "16/17",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 24,
+     "n": 22,
      "path": "module",
      "phase": "done",
      "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      },
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "18/19",
+      "independent": "16/17",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      }
     },
     {
-     "n": 25,
+     "n": 23,
      "path": "module",
      "phase": "done (day +1)",
      "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "18/19",
+      "independent": "16/17",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "scheduled"
      }
     },
     {
-     "n": 26,
+     "n": 24,
      "path": "module",
      "phase": "retention",
      "reason": "A delayed check, a week after you first showed this: does it last?",
@@ -801,19 +735,19 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "19/20",
+      "independent": "17/18",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "due"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 27,
+     "n": 25,
      "path": "module",
      "phase": "retention",
      "reason": "A delayed check, a week after you first showed this: does it last?",
@@ -834,26 +768,26 @@
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "20/21",
+      "independent": "18/19",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "passed"
      },
      "diagnosis": {
       "result": null,
-      "confidence": 0.35,
-      "asked": 0
+      "confidence": 0.56,
+      "asked": 1
      }
     },
     {
-     "n": 28,
+     "n": 26,
      "path": "module",
      "phase": "done (day +8)",
      "reason": "Shown on your own.",
      "evidence": {
       "competency": "MATH.algebra.arithmetic-sequences",
       "status": "transfer",
-      "independent": "20/21",
+      "independent": "18/19",
       "assisted": "1/1",
       "engine": "unavailable",
       "retention": "passed"
@@ -863,7 +797,7 @@
    "final": {
     "competency": "MATH.algebra.arithmetic-sequences",
     "status": "transfer",
-    "independent": "20/21",
+    "independent": "18/19",
     "assisted": "1/1",
     "engine": "unavailable",
     "retention": "passed"
@@ -871,7 +805,8 @@
    "next": {
     "kind": "start",
     "competency": "MATH.number.euclid-algorithm",
-    "reason": "Next in Real Numbers."
+    "reason": "Next in Real Numbers.",
+    "paused": []
    },
    "supports": []
   }
@@ -915,7 +850,7 @@
      "n": 2,
      "path": "recovery",
      "phase": "investigate",
-     "reason": "One more question to understand what happened (it does not count against you).",
+     "reason": "One more question to help work out what happened. Like every answer you give on your own, it is part of your record and helps OpenPath choose what comes next.",
      "activity": "diagnostic",
      "question": "gen:ahpyth:14,48,2",
      "prompt": "A right-angled triangle has hypotenuse 50 cm and one shorter side 14 cm, as in the picture. How long is the other shorter side, in cm?",
@@ -954,15 +889,13 @@
       "competency": "MATH.number.square-roots",
       "strategy": "worked_steps",
       "kind": "procedural",
+      "review": "machine-checked",
       "sections": [
        {
-        "title": "The method",
-        "label": "Method",
-        "verified": null,
-        "violations": [
-         "worked-unverified",
-         "text-not-instance"
-        ]
+        "title": "The square root of a perfect square, step by step",
+        "label": "Worked example",
+        "verified": true,
+        "violations": []
        }
       ]
      },
@@ -1838,20 +1771,17 @@
    "next": {
     "kind": "retention",
     "competency": "MATH.number.square-roots",
-    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you.",
+    "paused": []
    },
    "supports": [
     "plausible:MATH.geometry.triangle-types",
-    "support:MATH.coordinate.distance-intro",
     "support:MATH.geometry.similarity",
     "support:MATH.geometry.triangle-properties",
     "support:MATH.measurement.area-squares",
-    "support:MATH.trigonometry.ratios",
     "mandatory:MATH.geometry.angle-measure",
-    "mandatory:MATH.coordinate.cartesian",
     "mandatory:MATH.geometry.constructions-bisectors",
-    "mandatory:MATH.geometry.basic-constructions",
-    "mandatory:MATH.number.addition"
+    "mandatory:MATH.geometry.basic-constructions"
    ]
   }
  },
@@ -1931,21 +1861,8 @@
     {
      "n": 3,
      "path": "module",
-     "phase": "chapter",
-     "reason": "You have the idea; a step in the method slips. Here is the method, one step.",
-     "teaching": {
-      "competency": "MATH.geometry.pythagoras",
-      "strategy": "worked_steps",
-      "kind": "procedural",
-      "sections": [
-       {
-        "title": "Finding a shorter side, step by step",
-        "label": "Worked example",
-        "verified": true,
-        "violations": []
-       }
-      ]
-     },
+     "phase": "recover",
+     "reason": "One more question to help work out what happened. Like every answer you give on your own, it is part of your record and helps OpenPath choose what comes next.",
      "diagnosis": {
       "result": "procedural",
       "confidence": 0.85,
@@ -1962,13 +1879,13 @@
     },
     {
      "n": 4,
-     "path": "module",
-     "phase": "guided",
-     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
-     "activity": "guided",
-     "question": "gen:ahpyth:27,36,1",
-     "prompt": "A right-angled triangle has hypotenuse 45 cm and one shorter side 36 cm, as in the picture. How long is the other shorter side, in cm?",
-     "response": "729",
+     "path": "recovery",
+     "phase": "investigate",
+     "reason": "One more question to help work out what happened. Like every answer you give on your own, it is part of your record and helps OpenPath choose what comes next.",
+     "activity": "diagnostic",
+     "question": "gen:ahpyth:14,48,2",
+     "prompt": "A right-angled triangle has hypotenuse 50 cm and one shorter side 14 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "2304",
      "hints": 0,
      "grading": {
       "verdict": "incorrect",
@@ -1982,166 +1899,139 @@
      "evidence": {
       "competency": "MATH.geometry.pythagoras",
       "status": "exposure",
-      "independent": "0/2",
-      "assisted": "0/1",
+      "independent": "0/3",
+      "assisted": "0/0",
       "engine": "unavailable",
       "retention": "none"
      },
-     "diagnosis": {
-      "result": "procedural",
-      "confidence": 0.85,
-      "asked": 2
+     "reasoning": {
+      "status": "need_more",
+      "best": null,
+      "competency": null,
+      "plan": null
      }
     },
     {
      "n": 5,
      "path": "module",
-     "phase": "check",
-     "reason": "Now one new question on your own, with no hints.",
-     "activity": "check",
-     "question": "gen:ahpyth:11,60,1",
-     "prompt": "A right-angled triangle has hypotenuse 61 cm and one shorter side 60 cm, as in the picture. How long is the other shorter side, in cm?",
-     "response": "121",
-     "hints": 0,
-     "grading": {
-      "verdict": "incorrect",
-      "reason": "incorrect.value",
-      "credit": false,
-      "source": "verifier",
-      "methodExamined": false,
-      "firstError": null
-     },
-     "workingCheck": null,
-     "evidence": {
-      "competency": "MATH.geometry.pythagoras",
-      "status": "exposure",
-      "independent": "0/3",
-      "assisted": "0/1",
-      "engine": "unavailable",
-      "retention": "none"
-     },
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
      "diagnosis": {
       "result": "procedural",
       "confidence": 0.85,
       "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
      }
     },
     {
      "n": 6,
-     "path": "module",
+     "path": "recovery",
      "phase": "chapter",
-     "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length. Here is a way to rebuild it.",
      "teaching": {
-      "competency": "MATH.geometry.pythagoras",
-      "strategy": "triples",
+      "competency": "MATH.number.square-roots",
+      "strategy": "worked_steps",
       "kind": "procedural",
+      "review": "machine-checked",
       "sections": [
        {
-        "title": "Spot a triple",
-        "label": "Another way",
-        "verified": null,
+        "title": "The square root of a perfect square, step by step",
+        "label": "Worked example",
+        "verified": true,
         "violations": []
        }
       ]
      },
      "diagnosis": {
       "result": "procedural",
-      "confidence": 0.85,
-      "asked": 2
+      "confidence": 0.35,
+      "asked": 0
      },
      "evidence": {
-      "competency": "MATH.geometry.pythagoras",
+      "competency": "MATH.number.square-roots",
       "status": "exposure",
-      "independent": "0/3",
-      "assisted": "0/1",
+      "independent": "0/0",
+      "assisted": "0/0",
       "engine": "unavailable",
       "retention": "none"
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
      }
     },
     {
      "n": 7,
      "path": "module",
-     "phase": "guided",
-     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
-     "activity": "guided",
-     "question": "gen:ahpyth:40,75,2",
-     "prompt": "A right-angled triangle has hypotenuse 85 cm and one shorter side 40 cm, as in the picture. How long is the other shorter side, in cm?",
-     "response": "5625",
-     "hints": 0,
-     "grading": {
-      "verdict": "incorrect",
-      "reason": "incorrect.value",
-      "credit": false,
-      "source": "verifier",
-      "methodExamined": false,
-      "firstError": null
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
      },
-     "workingCheck": null,
      "evidence": {
       "competency": "MATH.geometry.pythagoras",
       "status": "exposure",
       "independent": "0/3",
-      "assisted": "0/2",
+      "assisted": "0/0",
       "engine": "unavailable",
       "retention": "none"
-     },
-     "diagnosis": {
-      "result": "procedural",
-      "confidence": 0.85,
-      "asked": 2
      }
     },
     {
      "n": 8,
-     "path": "module",
-     "phase": "check",
-     "reason": "Now one new question on your own, with no hints.",
-     "activity": "check",
-     "question": "gen:ahpyth:18,80,0",
-     "prompt": "A right-angled triangle has shorter sides 18 cm and 80 cm, as in the picture. How long is the hypotenuse, in cm?",
-     "response": "6724",
+     "path": "recovery",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:root:33",
+     "prompt": "√1089 = ?",
+     "response": "33",
      "hints": 0,
      "grading": {
-      "verdict": "incorrect",
-      "reason": "incorrect.value",
-      "credit": false,
-      "source": "verifier",
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
       "methodExamined": false,
       "firstError": null
      },
      "workingCheck": null,
      "evidence": {
-      "competency": "MATH.geometry.pythagoras",
-      "status": "exposure",
-      "independent": "0/4",
-      "assisted": "0/2",
+      "competency": "MATH.number.square-roots",
+      "status": "guided",
+      "independent": "0/0",
+      "assisted": "1/1",
       "engine": "unavailable",
       "retention": "none"
      },
      "diagnosis": {
       "result": "procedural",
-      "confidence": 0.85,
-      "asked": 2
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
      }
     },
     {
      "n": 9,
      "path": "module",
-     "phase": "chapter",
-     "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
-     "teaching": {
-      "competency": "MATH.geometry.pythagoras",
-      "strategy": "squares_on_sides",
-      "kind": "conceptual",
-      "sections": [
-       {
-        "title": "Squares on the sides",
-        "label": "Another way",
-        "verified": null,
-        "violations": []
-       }
-      ]
-     },
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
      "diagnosis": {
       "result": "procedural",
       "confidence": 0.85,
@@ -2150,151 +2040,793 @@
      "evidence": {
       "competency": "MATH.geometry.pythagoras",
       "status": "exposure",
-      "independent": "0/4",
-      "assisted": "0/2",
+      "independent": "0/3",
+      "assisted": "0/0",
       "engine": "unavailable",
       "retention": "none"
      }
     },
     {
      "n": 10,
-     "path": "module",
-     "phase": "guided",
-     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
-     "activity": "guided",
-     "question": "gen:ahpyth:16,30,1",
-     "prompt": "A right-angled triangle has hypotenuse 34 cm and one shorter side 30 cm, as in the picture. How long is the other shorter side, in cm?",
-     "response": "256",
+     "path": "recovery",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:root:43",
+     "prompt": "√1849 = ?",
+     "response": "43",
      "hints": 0,
      "grading": {
-      "verdict": "incorrect",
-      "reason": "incorrect.value",
-      "credit": false,
-      "source": "verifier",
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
       "methodExamined": false,
       "firstError": null
      },
      "workingCheck": null,
      "evidence": {
-      "competency": "MATH.geometry.pythagoras",
-      "status": "exposure",
-      "independent": "0/4",
-      "assisted": "0/3",
+      "competency": "MATH.number.square-roots",
+      "status": "guided",
+      "independent": "1/1",
+      "assisted": "1/1",
       "engine": "unavailable",
       "retention": "none"
      },
      "diagnosis": {
       "result": "procedural",
-      "confidence": 0.85,
-      "asked": 2
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
      }
     },
     {
      "n": 11,
      "path": "module",
-     "phase": "check",
-     "reason": "Now one new question on your own, with no hints.",
-     "activity": "check",
-     "question": "gen:ahpyth:11,60,0:mc",
-     "prompt": "A right-angled triangle has shorter sides 11 cm and 60 cm, as in the picture. How long is the hypotenuse, in cm? Choose one.",
-     "response": "A",
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 12,
+     "path": "recovery",
+     "phase": "verify",
+     "reason": "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours.",
+     "activity": "practice",
+     "question": "gen:root:30",
+     "prompt": "√900 = ?",
+     "response": "30",
      "hints": 0,
      "grading": {
-      "verdict": "incorrect",
-      "reason": "incorrect.value",
-      "credit": false,
-      "source": "verifier",
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
       "methodExamined": false,
       "firstError": null
      },
      "workingCheck": null,
      "evidence": {
-      "competency": "MATH.geometry.pythagoras",
-      "status": "exposure",
-      "independent": "0/5",
-      "assisted": "0/3",
+      "competency": "MATH.number.square-roots",
+      "status": "independent",
+      "independent": "2/2",
+      "assisted": "1/1",
       "engine": "unavailable",
-      "retention": "none"
+      "retention": "scheduled"
      },
      "diagnosis": {
       "result": "procedural",
-      "confidence": 0.85,
-      "asked": 2
-     }
-    },
-    {
-     "n": 12,
-     "path": "module",
-     "phase": "pause",
-     "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
-     "diagnosis": {
-      "result": "procedural",
-      "confidence": 0.85,
-      "asked": 2
+      "confidence": 0.35,
+      "asked": 0
      },
-     "evidence": {
-      "competency": "MATH.geometry.pythagoras",
-      "status": "exposure",
-      "independent": "0/5",
-      "assisted": "0/3",
-      "engine": "unavailable",
-      "retention": "none"
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
      }
     },
     {
      "n": 13,
      "path": "module",
-     "phase": "pause (day +1)",
-     "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+     "phase": "recover",
+     "reason": "Back to the original problem.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
      "evidence": {
       "competency": "MATH.geometry.pythagoras",
       "status": "exposure",
-      "independent": "0/5",
-      "assisted": "0/3",
+      "independent": "0/3",
+      "assisted": "0/0",
       "engine": "unavailable",
       "retention": "none"
      }
     },
     {
      "n": 14,
-     "path": "module",
-     "phase": "pause (day +8)",
-     "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+     "path": "recovery",
+     "phase": "return",
+     "reason": "Back to the original problem.",
+     "activity": "original",
+     "question": "gen:ahpyth:36,77,2",
+     "prompt": "A right-angled triangle has hypotenuse 85 cm and one shorter side 36 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "77",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
      "evidence": {
       "competency": "MATH.geometry.pythagoras",
-      "status": "exposure",
-      "independent": "0/5",
-      "assisted": "0/3",
+      "status": "guided",
+      "independent": "0/3",
+      "assisted": "1/1",
       "engine": "unavailable",
       "retention": "none"
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 15,
+     "path": "module",
+     "phase": "verify",
+     "reason": "What was missing has been worked on. Now a new question on your own.",
+     "activity": "practice",
+     "question": "gen:ahpyth:40,75,0",
+     "prompt": "A right-angled triangle has shorter sides 40 cm and 75 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "85",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "guided",
+      "independent": "1/4",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 16,
+     "path": "module",
+     "phase": "verify",
+     "reason": "What was missing has been worked on. Now a new question on your own.",
+     "activity": "practice",
+     "question": "gen:ahpyth:39,80,2:mc",
+     "prompt": "A right-angled triangle has hypotenuse 89 cm and one shorter side 39 cm, as in the picture. How long is the other shorter side, in cm? Choose one.",
+     "response": "D",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "2/5",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 17,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahpyth:16,63,1",
+     "prompt": "A right-angled triangle has hypotenuse 65 cm and one shorter side 63 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "16",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "3/6",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 18,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahconv:10,0,1,0",
+     "prompt": "A triangle has sides 30 cm, 18 cm and 24 cm. Is it a right-angled triangle?",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "4/7",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 19,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahgen:0,5,0",
+     "prompt": "For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains 10 as its even member 2m. What is its largest number?",
+     "response": "26",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "5/8",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 20,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahpyth:16,63,0:w",
+     "prompt": "A rectangular playground is 16 m wide and 63 m long. A straight path runs across it from one corner to the opposite corner. How long is the path, in metres?",
+     "response": "65",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "6/9",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 21,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahconv:2,0,0,0:w",
+     "prompt": "Imran makes a triangular frame for a kite from three sticks 5 cm, 12 cm and 13 cm long. Will one corner of the frame be a right angle?",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "7/10",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 22,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahgen:3,9,5:w",
+     "prompt": "A carpenter builds right-angled frames using the rule: sides m² − n², 2mn and m² + n². For m = 9 and n = 5, how long is the side 2mn, in cm?",
+     "response": "90",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "8/11",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 23,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:11,60,1",
+     "prompt": "A right-angled triangle has hypotenuse 61 cm and one shorter side 60 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "11",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "9/12",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 24,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:11,60,0:mc",
+     "prompt": "A right-angled triangle has shorter sides 11 cm and 60 cm, as in the picture. How long is the hypotenuse, in cm? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "10/13",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 25,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:18,80,0",
+     "prompt": "A right-angled triangle has shorter sides 18 cm and 80 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "82",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "11/14",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 26,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:18,80,1:mc",
+     "prompt": "A right-angled triangle has hypotenuse 82 cm and one shorter side 80 cm, as in the picture. How long is the other shorter side, in cm? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "12/15",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 27,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:24,70,2",
+     "prompt": "A right-angled triangle has hypotenuse 74 cm and one shorter side 24 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "70",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 28,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:pyth:similarity-proof",
+     "prompt": "(a) Prove the Pythagoras theorem: in triangle ABC with ∠B = 90°, AB² + BC² = AC². Draw (or describe) the perpendicular BD from B to AC and give a reason for every step. (b) A triangle has sides 20 cm, 21 cm and 29 cm. Use the converse of the theorem to decide whether it is right-angled, and if so name the side opposite the right angle.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 29,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:pyth:converse-proof",
+     "prompt": "Prove the converse of the Pythagoras theorem: in △ABC, if AC² = AB² + BC², then ∠B = 90°. (Hint: draw a second triangle PQR with ∠Q = 90°, PQ = AB and QR = BC.) Give the reason for each step. Then use the converse to decide whether a triangle with sides 20 cm, 21 cm and 29 cm is right-angled.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 30,
+     "path": "module",
+     "phase": "done",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 31,
+     "path": "module",
+     "phase": "done (day +1)",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 32,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:ahpyth:6,8,2",
+     "prompt": "A right-angled triangle has hypotenuse 10 cm and one shorter side 6 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "8",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "14/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "due"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 33,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:ahconv:3,0,0,0",
+     "prompt": "A triangle has sides 9 cm, 12 cm and 15 cm. Is it a right-angled triangle?",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/18",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 34,
+     "path": "module",
+     "phase": "done (day +8)",
+     "reason": "Shown on your own.",
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/18",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
      }
     }
    ],
    "final": {
     "competency": "MATH.geometry.pythagoras",
-    "status": "exposure",
-    "independent": "0/5",
-    "assisted": "0/3",
+    "status": "transfer",
+    "independent": "15/18",
+    "assisted": "1/1",
     "engine": "unavailable",
-    "retention": "none"
+    "retention": "passed"
    },
    "next": {
-    "kind": "continue",
-    "competency": "MATH.geometry.pythagoras",
-    "reason": "Carry on where you left off."
+    "kind": "retention",
+    "competency": "MATH.number.square-roots",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you.",
+    "paused": []
    },
    "supports": [
     "plausible:MATH.geometry.triangle-types",
-    "support:MATH.coordinate.distance-intro",
     "support:MATH.geometry.similarity",
     "support:MATH.geometry.triangle-properties",
     "support:MATH.measurement.area-squares",
-    "support:MATH.trigonometry.ratios",
     "mandatory:MATH.geometry.angle-measure",
-    "mandatory:MATH.coordinate.cartesian",
     "mandatory:MATH.geometry.constructions-bisectors",
-    "mandatory:MATH.geometry.basic-constructions",
-    "mandatory:MATH.number.addition"
+    "mandatory:MATH.geometry.basic-constructions"
    ]
   }
  },
@@ -2833,6 +3365,7 @@
       "competency": "MATH.probability.classical",
       "strategy": "out-of",
       "kind": "conceptual",
+      "review": "machine-checked",
       "sections": [
        {
         "title": "Out of how many?",
@@ -2987,6 +3520,7 @@
       "competency": "MATH.probability.classical",
       "strategy": "spot_the_mistake",
       "kind": "conceptual",
+      "review": "machine-checked",
       "sections": [
        {
         "title": "A common wrong answer",
@@ -3141,6 +3675,7 @@
       "competency": "MATH.probability.classical",
       "strategy": "worked_steps",
       "kind": "procedural",
+      "review": "machine-checked",
       "sections": [
        {
         "title": "Equally likely outcomes, step by step",
@@ -3343,9 +3878,12 @@
     "retention": "none"
    },
    "next": {
-    "kind": "continue",
-    "competency": "MATH.probability.classical",
-    "reason": "Carry on where you left off."
+    "kind": "start",
+    "competency": "MATH.number.euclid-algorithm",
+    "reason": "Next in Real Numbers.",
+    "paused": [
+     "MATH.probability.classical"
+    ]
    },
    "supports": [
     "mandatory:MATH.probability.sample-space",

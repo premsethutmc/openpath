@@ -16,6 +16,7 @@ import { DAY } from "../../../packages/learning/src/evidence";
 import { explainStep, problemOf, type Problem } from "../../../packages/learning/src/families";
 import { modulePhasePool } from "../../../packages/learning/src/library";
 import { needsMarking } from "../../../packages/learning/src/content";
+import { selectable } from "../../../packages/learning/src/question-status";
 import { teachingLesson } from "../../../packages/learning/src/teaching-contract";
 import { teachingScopeFor } from "../../../packages/learning/src/teaching-presentation";
 import { familyOf } from "../../../packages/learning/src/intervention";
@@ -68,7 +69,7 @@ export interface TraceStep {
   workingCheck?: { valid: boolean; note: string } | null;
   diagnosis?: { result: string | null; confidence: number; asked: number } | null;
   reasoning?: { status: string; best: string | null; competency: string | null; plan: string | null } | null;
-  teaching?: { competency: string; strategy: string; kind: string; sections: { title: string; label: string; verified: boolean | null; violations: string[] }[] };
+  teaching?: { competency: string; strategy: string; kind: string; review: string | null; sections: { title: string; label: string; verified: boolean | null; violations: string[] }[] };
   evidence?: { competency: string; status: string; independent: string; assisted: string; engine: string; retention: string };
 }
 
@@ -91,7 +92,9 @@ export function runLearner(mind: Mind, o: { competency: string; grade: number; d
       wrong = String(Number(q.answer) - 1);
       const p = problemOf(qid);
       // the learner's lines are the solver's own steps, with the slip in the last one
-      working = p ? p.steps.map((st, k) => { const line = explainStep(p, st); return k === p.steps.length - 1 ? line.replace(new RegExp(`${String(st.value)}(?!.*\\d)`), wrong!) : line; }) : [wrong];
+      // written as plain arithmetic from the solver's own steps (a op b = value), with the slip in the last result
+      const OP: Record<string, string> = { add: "+", subtract: "−", multiply: "×", divide: "÷" };
+      working = p ? p.steps.map((st, k) => { const [x, y] = st.inputs; const line = OP[st.op] && typeof x === "number" && typeof y === "number" ? `${x} ${OP[st.op]} ${y} = ${String(st.value)}` : explainStep(p, st); return k === p.steps.length - 1 ? line.replace(new RegExp(`${String(st.value)}$`), wrong!) : line; }) : [wrong];
     }
     const first = mind.hintDependent ? (wrongFor({ ...mind, lacks: new Set([q.competency, graph.evidenceTarget(q.competency)]) }, qid) ?? "0") : wrong ?? q.answer;
     const doOne = (response: string, hints: number) => {
@@ -113,17 +116,38 @@ export function runLearner(mind: Mind, o: { competency: string; grade: number; d
     const m = moduleFor(ms.competency)!, s = ms.strategy!;
     const blocks = lessonBlocks(m).filter((b) => s.screens.some((x) => x.title === b.title));
     d.events.push(make.teach(d.ctx(), ms.competency, s.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis"));
-    record({ path, phase: "chapter", reason, teaching: { competency: ms.competency, strategy: s.id, kind: s.kind, sections: blocks.map((b) => ({ title: b.title, label: b.label, verified: b.worked ? b.worked.verified : null, violations: b.violations })) }, diagnosis: ms.diagnosis ? { result: ms.diagnosis.result, confidence: ms.diagnosis.confidence, asked: ms.diagnosis.asked.length } : null, evidence: ev(ms.competency) });
+    record({ path, phase: "chapter", reason, teaching: { competency: ms.competency, strategy: s.id, kind: s.kind, review: ms.teachingReview ?? null, sections: blocks.map((b) => ({ title: b.title, label: b.label, verified: b.worked ? b.worked.verified : null, violations: b.violations })) }, diagnosis: ms.diagnosis ? { result: ms.diagnosis.result, confidence: ms.diagnosis.confidence, asked: ms.diagnosis.asked.length } : null, evidence: ev(ms.competency) });
     if (mind.learnsFromTeaching) {
       mind.lacks.delete(ms.competency);
       // a prerequisite-kind explanation is about what the skill builds on: the skills of its own probe questions
       if (s.kind === "prerequisite") for (const id of s.needs) mind.lacks.delete(graph.evidenceTarget(question(id).competency));
     }
   };
-  const moduleStep = (competency: string, path: TraceStep["path"], established?: Parameters<typeof moduleState>[5]) => {
+  /** One step of recovery from a wrong answer, as the Recovery view does it. Returns false when recovery has nothing more to ask. */
+  const recoveryStep = (original: string): boolean => {
     const st = d.state();
-    const ms = moduleState(competency, st.records, st.evidence(competency), d.now, d.session, established);
-    if (ms.phase === "chapter" && ms.strategy) teach(path, ms, ms.reason);
+    const r = recovery(original, st.records, st.evidence, d.now, d.session);
+    const reasoning = r.reasoning ? { status: r.reasoning.status, best: r.reasoning.best?.id ?? null, competency: r.reasoning.best?.competency ?? null, plan: r.plan ? `${r.plan.kind}:${r.plan.competency ?? "-"}` : null } : null;
+    if (r.phase === "attempt" || r.phase === "return") { attempt("recovery", r.phase, r.reason, original, "original", { context: `recovery:${original}` }); steps.at(-1)!.reasoning = reasoning; return true; }
+    if (r.phase === "investigate") { attempt("recovery", r.phase, r.reason, r.question!, "diagnostic", { context: investigateContext(original) }); steps.at(-1)!.reasoning = reasoning; return true; }
+    if (r.phase === "support" || r.phase === "teach") {
+      const before = steps.length;
+      const ms = moduleStep(r.active!, "recovery", r.established, true);
+      if (steps[before]) steps[before].reasoning = reasoning;
+      if (ms.phase === "done" || ms.phase === "pause" || (!ms.question && ms.phase !== "chapter")) { record({ path: "recovery", phase: `${r.phase}:${ms.phase}`, reason: ms.reason, reasoning, evidence: ev(r.active!) }); return ms.phase === "done"; }
+      return true;
+    }
+    record({ path: "recovery", phase: r.phase, reason: r.reason, reasoning, evidence: ev(r.competency) });
+    return false;
+  };
+  /** One step of a module, as the Module view does it (inside a recovery, the module does not start another one). */
+  const moduleStep = (competency: string, path: TraceStep["path"], established?: Parameters<typeof moduleState>[5], inRecovery = false): ModuleState => {
+    const st = d.state();
+    const ms = moduleState(competency, st.records, st.evidence(competency), d.now, d.session, established, inRecovery ? undefined : st.evidence);
+    if (ms.phase === "recover" && ms.original) {
+      record({ path, phase: "recover", reason: ms.reason, diagnosis: ms.diagnosis ? { result: ms.diagnosis.result, confidence: ms.diagnosis.confidence, asked: ms.diagnosis.asked.length } : null, evidence: ev(competency) });
+      recoveryStep(ms.original);
+    } else if (ms.phase === "chapter" && ms.strategy) teach(path, ms, ms.reason);
     else if (ms.question) {
       attempt(path, ms.phase, ms.reason, ms.question, activityFor(ms));
       const last = steps.at(-1)!;
@@ -131,52 +155,35 @@ export function runLearner(mind: Mind, o: { competency: string; grade: number; d
     }
     return ms;
   };
+  const stops = (ms: ModuleState) => ms.phase === "done" || ms.phase === "pause" || ms.phase === "unavailable" || (ms.phase !== "chapter" && ms.phase !== "recover" && !ms.question);
 
   const max = o.maxSteps ?? 40;
   if (o.entry === "practice") {
     // entry: the lesson's Practice stage (the queue the page builds); a wrong answer there offers "Find out what went wrong",
-    // which opens recovery on that question (stage A1 connection); the learner always takes it
+    // which opens recovery on that question; the learner always takes it
     const m = moduleFor(o.competency)!, scope = teachingScopeFor(m);
-    const candidates = [...new Set([...modulePhasePool(m, "practice"), ...m.practice, ...m.transfer])].filter((id) => !needsMarking(question(id)) && !!problemOf(id) && scope.accepts(problemOf(id)!));
+    const candidates = [...new Set([...modulePhasePool(m, "practice"), ...m.practice, ...m.transfer])].filter((id) => selectable(id) && !needsMarking(question(id)) && !!problemOf(id) && scope.accepts(problemOf(id)!));
     for (const qid of teachingLesson(m, candidates).practice.slice(0, 6)) {
       attempt("practice", "practice", "Practice this concept (the lesson page).", qid, "practice");
       if (steps.at(-1)!.grading!.credit === false && familyOf(qid)) { o = { ...o, recoveryFrom: qid }; break; }
     }
   }
-  if (o.recoveryFrom) {
-    // entry: a problem the learner is stuck on (the app's "stuck" view)
-    for (let i = 0; i < max; i++) {
-      const st = d.state();
-      const r = recovery(o.recoveryFrom, st.records, st.evidence, d.now, d.session);
-      const reasoning = r.reasoning ? { status: r.reasoning.status, best: r.reasoning.best?.id ?? null, competency: r.reasoning.best?.competency ?? null, plan: r.plan ? `${r.plan.kind}:${r.plan.competency ?? "-"}` : null } : null;
-      if (r.phase === "attempt" || r.phase === "return") { attempt("recovery", r.phase, r.reason, o.recoveryFrom, "original", { context: `recovery:${o.recoveryFrom}` }); steps.at(-1)!.reasoning = reasoning; continue; }
-      if (r.phase === "investigate") { attempt("recovery", r.phase, r.reason, r.question!, "diagnostic", { context: investigateContext(o.recoveryFrom) }); steps.at(-1)!.reasoning = reasoning; continue; }
-      if (r.phase === "support" || r.phase === "teach") {
-        const before = steps.length;
-        const ms = moduleStep(r.active!, "recovery", r.established);
-        if (steps[before]) steps[before].reasoning = reasoning;
-        if (ms.phase === "done" || ms.phase === "pause" || (!ms.question && ms.phase !== "chapter")) { record({ path: "recovery", phase: `${r.phase}:${ms.phase}`, reason: ms.reason, reasoning, evidence: ev(r.active!) }); if (ms.phase !== "done") break; }
-        continue;
-      }
-      record({ path: "recovery", phase: r.phase, reason: r.reason, reasoning, evidence: ev(r.competency) });
-      break;
-    }
-  }
+  if (o.recoveryFrom) for (let i = 0; i < max && recoveryStep(o.recoveryFrom); i++);
   // entry: the skill's module (the lesson page's "Assessment" stage)
   for (let i = 0; i < max; i++) {
     const ms = moduleStep(o.competency, "module");
-    if (ms.phase === "done" || ms.phase === "pause" || ms.phase === "unavailable" || (ms.phase !== "chapter" && !ms.question)) { record({ path: "module", phase: ms.phase, reason: ms.reason, diagnosis: ms.diagnosis ? { result: ms.diagnosis.result, confidence: ms.diagnosis.confidence, asked: ms.diagnosis.asked.length } : null, evidence: ev(o.competency) }); break; }
+    if (stops(ms)) { record({ path: "module", phase: ms.phase, reason: ms.reason, diagnosis: ms.diagnosis ? { result: ms.diagnosis.result, confidence: ms.diagnosis.confidence, asked: ms.diagnosis.asked.length } : null, evidence: ev(o.competency) }); break; }
   }
   // later visits: the next day (fresh checks the engine needs), then after the delayed-check interval
   for (const gap of [1, o.days ?? 8]) {
     d.newSession(gap);
     for (let i = 0; i < max; i++) {
       const ms = moduleStep(o.competency, "module");
-      if (ms.phase === "done" || ms.phase === "pause" || ms.phase === "unavailable" || (ms.phase !== "chapter" && !ms.question)) { record({ path: "module", phase: `${ms.phase} (day +${gap})`, reason: ms.reason, evidence: ev(o.competency) }); break; }
+      if (stops(ms)) { record({ path: "module", phase: `${ms.phase} (day +${gap})`, reason: ms.reason, evidence: ev(o.competency) }); break; }
     }
   }
   const st = d.state();
-  return { learner: mind.name, competency: o.competency, release: release.id, steps, final: ev(o.competency), next: st.next ? { kind: (st.next as { kind?: string }).kind, competency: (st.next as { competency?: string }).competency ?? null, reason: (st.next as { reason?: string }).reason ?? null } : null, supports: walkSupports(o.competency, 2).map((s) => `${s.type}:${s.id}`) };
+  return { learner: mind.name, competency: o.competency, release: release.id, steps, final: ev(o.competency), next: st.next ? { kind: st.next.kind, competency: st.next.competency ?? null, reason: st.next.reason ?? null, paused: st.next.paused ?? [] } : null, supports: walkSupports(o.competency, 2).map((s) => `${s.type}:${s.id}`) };
 }
 
 export const DAY_MS = DAY;
@@ -198,8 +205,8 @@ export function traceMarkdown(runs: { title: string; r: ReturnType<typeof runLea
   for (const { title, r } of runs) {
     out.push(`## ${title}`, "", `Competency \`${r.competency}\` · release \`${r.release}\` · graph supports (depth ≤ 2): ${r.supports.length ? r.supports.map((s) => `\`${s}\``).join(", ") : "none"}`, "");
     out.push("| # | Path / phase | Question → response | Grading | Diagnosis | Teaching selected | Evidence after | What the learner is told |", "|---|---|---|---|---|---|---|---|");
-    for (const s of r.steps) out.push(`| ${s.n} | ${cell(`${s.path} / ${s.phase}${s.activity ? ` (${s.activity})` : ""}`)} | ${cell(s.question ? `\`${s.question}\` → ${s.response}${s.hints ? " (hint)" : ""}${s.working ? ` · working: ${s.working.join("; ")}` : ""}` : "")} | ${cell(s.grading ? `${s.grading.verdict} (${s.grading.source})${s.grading.methodExamined ? "" : ", method not examined"}` : "")} | ${cell(s.reasoning ? `diagnostic@2 ${s.reasoning.status}: ${s.reasoning.best ?? "-"} → ${s.reasoning.plan ?? "-"}` : s.diagnosis ? `diagnostic@1 ${s.diagnosis.result ?? "pending"} (${s.diagnosis.confidence})` : "")} | ${cell(s.teaching ? `${s.teaching.competency.split(".").pop()} · ${s.teaching.strategy} (${s.teaching.kind}) · ${s.teaching.sections.map((x) => x.label + (x.violations.length ? ` ⚠ ${x.violations.join(",")}` : "")).join("; ")}` : "")} | ${cell(s.evidence ? `${s.evidence.competency.split(".").pop()}: ${s.evidence.status}, alone ${s.evidence.independent}, helped ${s.evidence.assisted}, retention ${s.evidence.retention}, engine ${s.evidence.engine}` : "")} | ${cell(s.reason)} |`);
-    out.push("", `**Result:** \`${JSON.stringify(r.final)}\` · **next action:** ${r.next ? `${r.next.kind} ${r.next.competency ?? ""} — ${r.next.reason ?? ""}` : "none"}`, "");
+    for (const s of r.steps) out.push(`| ${s.n} | ${cell(`${s.path} / ${s.phase}${s.activity ? ` (${s.activity})` : ""}`)} | ${cell(s.question ? `\`${s.question}\` → ${s.response}${s.hints ? " (hint)" : ""}${s.working ? ` · working: ${s.working.join("; ")}` : ""}` : "")} | ${cell(s.grading ? `${s.grading.verdict} (${s.grading.source})${s.grading.methodExamined ? "" : ", method not examined"}` : "")} | ${cell(s.reasoning ? `diagnostic@2 ${s.reasoning.status}: ${s.reasoning.best ?? "-"} → ${s.reasoning.plan ?? "-"}` : s.diagnosis ? `diagnostic@1 ${s.diagnosis.result ?? "pending"} (${s.diagnosis.confidence})` : "")} | ${cell(s.teaching ? `${s.teaching.competency.split(".").pop()} · ${s.teaching.strategy} (${s.teaching.kind}) · ${s.teaching.sections.map((x) => x.label + (x.violations.length ? ` ⚠ ${x.violations.join(",")}` : "")).join("; ")} · ${s.teaching.review ?? ""}` : "")} | ${cell(s.evidence ? `${s.evidence.competency.split(".").pop()}: ${s.evidence.status}, alone ${s.evidence.independent}, helped ${s.evidence.assisted}, retention ${s.evidence.retention}, engine ${s.evidence.engine}` : "")} | ${cell(s.reason)} |`);
+    out.push("", `**Result:** \`${JSON.stringify(r.final)}\` · **next action:** ${r.next ? `${r.next.kind} ${r.next.competency ?? ""} — ${r.next.reason ?? ""}${r.next.paused.length ? ` · paused: ${r.next.paused.join(", ")}` : ""}` : "none"}`, "");
   }
   return out.join("\n") + "\n";
 }
