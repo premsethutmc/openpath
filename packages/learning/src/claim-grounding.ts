@@ -167,7 +167,7 @@ function literalProvenanceOne(text: string, env: ProvenanceEnv, derivedOut?: Set
   // (iii-b) the sum of the task's own named quantities is a licensed aggregate (the sum of the known angles in 180 − 110): sums of quantities the task states, never arbitrary differences or quotients of its numbers
   const sums = new Set<string>(); const nv = env.named ? [...env.named.values()].slice(0, 8) : [];
   for (let m = 3; m < (1 << nv.length); m++) { let c = 0, t = 0; for (let b = 0; b < nv.length; b++) if (m & (1 << b)) { c++; t += nv[b]; } if (c >= 2) sums.add(numKey(t)); }
-  const base = (l: string) => env.task.has(l) || env.established.has(l) || env.licensed.has(l) || sums.has(l) || !!env.previous?.has(l) || !!env.rewrite?.has(l);
+  const base = (l: string) => env.task.has(l) || env.established.has(l) || env.licensed.has(l) || sums.has(l) || !!env.previous?.has(l);
   const vals = new Set<string>(); // values of computations the line shows, whose operands are already explained
   const explained = (l: string) => base(l) || vals.has(l);
   const ok: boolean[] = segs.map(() => false);
@@ -194,7 +194,6 @@ function literalProvenanceOne(text: string, env: ProvenanceEnv, derivedOut?: Set
       if (env.licensed.has(l) && !env.task.has(l) && !env.established.has(l)) { seen.add(l); continue; }
       if (env.task.has(l)) out.push({ kind: "task-premise", ref: l, by: "value", trivial });
       else if (env.established.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial });
-      else if (env.rewrite?.has(l)) { const r = env.rewrite.get(l)!; out.push({ kind: "derived-fact", ref: l, by: "value", trivial: false, derived: true, rule: r.rule, certificate: r.digest }); }
       else if (balance.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial: Math.abs(Number(l)) <= 2, derived: true });
       else if (env.previous?.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial: Math.abs(Number(l)) <= 2, derived: true });
       else if (sums.has(l)) out.push({ kind: "derived-fact", ref: l, by: "value", trivial: false, derived: true });

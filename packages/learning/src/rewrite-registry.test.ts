@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { REGISTRY, parseTree, certifyRewrite, replayRewriteCertificate, rewriteLicense, hasFlattenedNumberComputation, REWRITE_CERTIFICATE_VERSION, type RewriteCertificate } from "./rewrite-registry.ts";
+import { REGISTRY, parseTree, certifyRewrite, replayRewriteCertificate, REWRITE_CERTIFICATE_VERSION, type RewriteCertificate } from "./rewrite-registry.ts";
 
 const cert = (a: string, b: string): RewriteCertificate | null => { const A = parseTree(a), B = parseTree(b); return A && B ? certifyRewrite(A, B) : null; };
 const ok = (a: string, b: string) => { const c = cert(a, b); return !!c && replayRewriteCertificate(c, a, b).ok; };
@@ -7,8 +7,8 @@ let seed = 8675309; const rnd = (n: number) => { seed = (seed * 1103515245 + 123
 
 describe("rewrite registry: closed, common interface", () => {
   test("every rule has the same shape and the registry is exactly the approved set", () => {
-    expect(REGISTRY.map((r) => r.id).sort()).toEqual(["distribute", "evaluate", "fraction-scale", "shifted-transfer", "split-additive", "split-multiplicative"]);
-    for (const r of REGISTRY) { expect(typeof r.admissible).toBe("function"); expect(["terms", "factors"]).toContain(r.ctx); }
+    expect(REGISTRY.map((r) => r.id).sort()).toEqual(["distribute", "distribute-split", "distribute-unevaluated", "evaluate", "evaluate-product", "fraction-chain", "fraction-combine", "fraction-divide", "fraction-multiply", "fraction-regroup", "fraction-scale", "shifted-transfer", "sign-product", "split-additive", "split-multiplicative"]);
+    for (const r of REGISTRY) { expect(typeof r.admissible).toBe("function"); expect(["terms", "factors", "node"]).toContain(r.ctx); }
   });
 });
 
@@ -21,10 +21,10 @@ describe("certified rewrites carry rule, path, source, replacement, kernel certi
     expect(replayRewriteCertificate(c, "12*4", "(10+2)*4").ok).toBe(true);
   });
   test("accepts: split, evaluate (unreduced and reduced), distribute, fraction scale/split, shown transfer", () => {
-    for (const [a, b] of [["64+28", "(60+20)+(4+8)"], ["(60+20)+(4+8)", "80+12"], ["80+12", "92"], ["15*6", "(10+5)*6"], ["8*47", "8*(50-3)"], ["8*(50-3)", "400-24"], ["3/4", "1/4+2/4"], ["2/3", "4/6"], ["6/10*6/10", "36/100"], ["36/100", "9/25"], ["(4+8+3)/3", "15/3"], ["15/3", "5"], ["64+28", "(64+6)+(28-6)"], ["100-37", "(100-40)+3"], ["5/6", "1/2+1/3"]]) expect([a, b, ok(a, b)]).toEqual([a, b, true]);
+    for (const [a, b] of [["64+28", "(60+20)+(4+8)"], ["(60+20)+(4+8)", "80+12"], ["80+12", "92"], ["15*6", "(10+5)*6"], ["8*47", "8*(50-3)"], ["8*(50-3)", "400-24"], ["3/4", "1/4+1/4+1/4"], ["6*15", "6*10+6*5"], ["2/3", "4/6"], ["6/10*6/10", "36/100"], ["36/100", "9/25"], ["(4+8+3)/3", "15/3"], ["15/3", "5"], ["64+28", "(64+6)+(28-6)"], ["100-37", "(100-40)+3"], ["5/6", "1/2+1/3"]]) expect([a, b, ok(a, b)]).toEqual([a, b, true]);
   });
   test("refuses (unsupported, not guessed): neutral elements, answer re-expression, unshown partitions, cancelling pads, 2 rewrites hidden in one block", () => {
-    for (const [a, b] of [["64+28", "92*1"], ["64+28", "4*23"], ["64+28", "(64+28)*1"], ["64+28", "(92+17)-17"], ["64+28", "91+1"], ["64+28", "100-8"], ["64+28", "70+22"], ["64+28", "64+28+(5-5)"], ["64+28", "92+0"], ["92", "192/2"], ["92", "184/2"], ["6*15", "6*10+6*5"], ["x+3", "(x+4713)+3-4713"], ["x+3", "x+3+k-k"]]) expect([a, b, ok(a, b)]).toEqual([a, b, false]);
+    for (const [a, b] of [["64+28", "92*1"], ["64+28", "4*23"], ["64+28", "(64+28)*1"], ["64+28", "(92+17)-17"], ["64+28", "91+1"], ["64+28", "100-8"], ["64+28", "70+22"], ["64+28", "64+28+(5-5)"], ["64+28", "92+0"], ["92", "192/2"], ["92", "184/2"], ["x+3", "(x+4713)+3-4713"], ["x+3", "x+3+k-k"]]) expect([a, b, ok(a, b)]).toEqual([a, b, false]);
   });
   test("a false equality is never certified", () => { for (const [a, b] of [["64+28", "(60+20)+(4+9)"], ["12*4", "(10+3)*4"], ["8*47", "8*(50-2)"], ["1/2", "2/5"]]) expect(cert(a, b)).toBeNull(); });
 });
@@ -66,19 +66,5 @@ describe("properties (pseudo-random, fixed seed; not the cases used to design th
       for (const pad of [`${s}*1`, `(${a}+${b})*1`, `(${s}+${w})-${w}`, `${a}+${b}+(${w}-${w})`, `${s}+0`, `${s - 1}+1`, `${s + 5}-5`, `${2 * s}/2`]) expect([pad, ok(`${a}+${b}`, pad)]).toEqual([pad, false]);
       expect(ok(`${a}+${b}`, `(${t(a)}+${t(b)})+(${a % 10}+${(b % 10) + 1})`)).toBe(false);                  // perturbed numeral
     }
-  });
-  test("bracket and whitespace invariance of the provenance guard", () => {
-    const base = ["2x+6+4713-4713", "(2x+4713)+(6)-(4713)", "(2x+4713)-(4713)+6", "2x+(6+4713)-(4713)", "((2x+6)+4713)-4713", "2x + ( 6 ) + 4713 - ( 4713 )"];
-    for (const t of base) expect([t, hasFlattenedNumberComputation(t)]).toEqual([t, true]);
-    for (const t of ["2x+6", "(2x+6)", "((2x))+(6)", "3(x+4)", "x^2-9", "(x+3)(x-3)"]) expect([t, hasFlattenedNumberComputation(t)]).toEqual([t, false]);
-  });
-});
-
-describe("license for a line", () => {
-  test("licensed / unjustified / not applicable", () => {
-    expect(rewriteLicense(["64+28"], "64+28 = (60+20)+(4+8)")?.kind).toBe("licensed");
-    expect(rewriteLicense(["64+28"], "64+28 = 92*1")?.kind).toBe("unjustified");
-    expect(rewriteLicense(["2x+6=12"], "(2x+17)-11 = 12")?.kind).toBe("licensed");
-    expect(rewriteLicense(["2x+6=12"], "(2x+4713)+(6)-(4713) = 12")).toBeNull();     // symbolic: not explained here -> the numerals stay unlicensed
   });
 });

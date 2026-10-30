@@ -28,7 +28,8 @@ import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geoca
 import { buildObligations, type ObligationSet } from "./proof-obligations.ts";
 import { typedIdentities } from "./evidence-binding.ts";
 import { assessRelevance, literalProvenance, polynomialKey, previousClosure } from "./claim-grounding.ts";
-import { rewriteLicense, hasFlattenedNumberComputation } from "./rewrite-registry.ts";
+import { DerivationSession, routeDecision } from "./derivation-authority.ts";
+import type { GroundingSource } from "./claim-grounding.ts";
 import { MECHANISMS } from "./evidence-provenance.ts";
 import { buildProofContext, relateStudentRestriction, routeUse, withProved, withStudent, withUnresolved, type ProofContext, type RouteUse } from "./proof-context.ts";
 import { GENERALIZATION_E6_CONTRACT, planGeneralizationE6 } from "./natural-generalization-e6.ts";
@@ -442,22 +443,22 @@ function withdrawAcceptance(cand: AssessmentEnvelope, route: AcceptanceGateRecor
  * applied to both sides, or from a computation the line itself shows. `x = 8 - 6` after `4x = 8` introduces 6 from nowhere, whatever its value.
  */
 function algebraGroundings(statement: string, parsed: NaturalParseResult, check: AlgebraCheck): NonNullable<RouteUse["grounded"]> {
+  // P2: AUTHORIZATION is decided by the derivation authority (derivation-authority.ts): refuse by default. Validity (`check`) is independent. A line the authority's surface does not cover
+  // (systems, radicals, solution lists) is judged by the older numeral provenance ONLY after the authority's structural guards, and the use is recorded; a definite refusal is never overridden.
   const nums = (t: string) => (t.match(/(?<![A-Za-z])\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x)));
-  const task = new Set(nums(statement)), established = new Set<string>(), out: NonNullable<RouteUse["grounded"]> = [];
+  const session = new DerivationSession(statement), task = new Set(nums(statement)), established = new Set<string>(), out: NonNullable<RouteUse["grounded"]> = [];
   const pool: string[] = [statement]; let prevLine = 0;
   parsed.lines.forEach((l, i) => {
-    const text = l.source.text, st = check.lines[i]?.status;
-    if (st === "verified-valid") {
-      // a line that is the same polynomial statement as the line before it (expanded, factored, collected, sides swapped) is an exact rewrite: the identity certifies its numbers
-      const key = polynomialKey(text), rewrite = !!key && key !== "0" && polynomialKey(pool[pool.length - 1]) === key && !/(?<![A-Za-z^.\d])\d+(?:\.\d+)?\s*[+\-*/]\s*\d+(?:\.\d+)?(?![A-Za-z(\d^.])/.test(text.replace(/\d+\s*\/\s*\d+/g, "q")); // an exact rewrite certifies a numeral only in the form it is written in: a pure-number computation inside it (69 − 54) is a claim of its own
-      const lic = rewriteLicense(pool, text), bracketSafe = rewrite && !hasFlattenedNumberComputation(text); // policy closure: the exemption never depends on harmless parentheses; a pure-number computation is a claim of its own, bracketed or not
-      const derived = new Set<string>(), sources = bracketSafe ? [] : literalProvenance(text, { rewrite: lic?.kind === "licensed" ? lic.license.numerals : undefined, task, established, licensed: new Set([...(pool.some((x) => /sqrt|√|\^\s*\(?1\/2/i.test(x)) ? ["2"] : []), ...(pool.some((x) => /cbrt|∛/i.test(x)) ? ["3"] : [])]), previous: previousClosure(pool) }, derived); // squaring (cubing) is the inverse of a root the working has written
-      if (lic?.kind === "unjustified") sources.push({ kind: "free-literal", ref: lic.side, by: "value", trivial: false }); // a numeric side no registered, certified rewrite produces from the visible expression (96*1, 2*48)
-      sources.push(prevLine ? { kind: "derived-fact", ref: `line-${prevLine}`, by: "symbol", trivial: false } : { kind: "task-premise", ref: "the statement", by: "symbol", trivial: false });
-      const g = assessRelevance(sources);
-      out.push({ line: l.source.line, grounding: g });
-      if (g.relevant) { for (const x of [...nums(text), ...derived]) established.add(x); pool.push(text); prevLine = l.source.line; }
-    }
+    if (check.lines[i]?.status !== "verified-valid") return;
+    const text = l.source.text, d = routeDecision(session, text), sources: GroundingSource[] = [], derived = new Set<string>();
+    if (d.kind === "refused") { const own = [...new Set(nums(text))].filter((x) => !task.has(x)); for (const x of own.length ? own : [`not authorized: ${d.verdict.reason}`]) sources.push({ kind: "free-literal", ref: x, by: "value", trivial: false }); }   // the numerals of the refused line stay free, so every later line that uses them is unresolved too
+    else if (d.kind === "outside-surface") sources.push(...literalProvenance(text, { task, established, licensed: new Set([...(pool.some((x) => /sqrt|√|\^\s*\(?1\/2/i.test(x)) ? ["2"] : []), ...(pool.some((x) => /cbrt|∛/i.test(x)) ? ["3"] : [])]), previous: previousClosure(pool) }, derived));
+    const cert = d.kind === "authorized" ? d.verdict.certificate : null, rule = cert ? (cert.parts.find((p) => p.rule !== "identity")?.rule ?? cert.move.kind) : undefined;   // the certificate that authorizes the line travels with its grounding
+    sources.push(prevLine ? { kind: "derived-fact", ref: `line-${prevLine}`, by: "symbol", trivial: false, ...(cert ? { rule, certificate: cert.digest } : {}) } : { kind: "task-premise", ref: "the statement", by: "symbol", trivial: false, ...(cert ? { rule, certificate: cert.digest } : {}) });
+    const g0 = assessRelevance(sources), g = d.kind === "refused" ? { ...g0, reason: `not authorized (${d.verdict.reason}); ${g0.reason}` } : g0;
+    out.push({ line: l.source.line, grounding: g });
+    if (g.relevant) { for (const x of [...nums(text), ...derived]) established.add(x); pool.push(text); }
+    prevLine = l.source.line;   // an unauthorized line is still the line before the next one: whatever rests on it is unresolved too (no dead-branch laundering: 9x8 = 72; 72 = 8x9 (refused); 8x9 = 72)
   });
   return out;
 }

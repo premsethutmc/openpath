@@ -10,11 +10,11 @@ const A = (s: string, l: string[]) => cls("arithmetic", s, l), G = (s: string, l
 describe("E8 gates: correct justified transformations are certified", () => {
   test("place-value decomposition", async () => expect(await A("37 + 59", ["37 + 59 = (30 + 50) + (7 + 9)", "(30 + 50) + (7 + 9) = 80 + 16", "80 + 16 = 96"])).toBe("verified"));
   test("explicitly justified balanced transfer", async () => { expect(await A("37 + 59", ["37 + 59 = (37 + 3) + (59 - 3)", "(37 + 3) + (59 - 3) = 40 + 56", "40 + 56 = 96"])).toBe("verified"); expect(await A("100 - 37", ["100 - 37 = (100 - 40) + 3", "(100 - 40) + 3 = 63"])).toBe("verified"); });
-  test("distribution, fraction split/scale", async () => { expect(await A("8 * 47", ["8 * 47 = 8 * (50 - 3)", "8 * (50 - 3) = 400 - 24", "400 - 24 = 376"])).toBe("verified"); expect(await A("3/4", ["3/4 = 1/4 + 2/4", "1/4 + 2/4 = 3/4"])).toBe("verified"); });
+  test("distribution, fraction split/scale", async () => { expect(await A("8 * 47", ["8 * 47 = 8 * (50 - 3)", "8 * (50 - 3) = 400 - 24", "400 - 24 = 376"])).toBe("verified"); expect(await A("3/4", ["3/4 = 1/4 + 1/4 + 1/4", "1/4 + 1/4 + 1/4 = 3/4"])).toBe("verified"); expect(await A("3/4", ["3/4 = 1/4 + 2/4", "1/4 + 2/4 = 3/4"])).not.toBe("verified");   /* P2 CHANGE: an arbitrary numerator split has a free parameter; only the unit decomposition is determined */ });
   test("certificate is recorded in the grounding: rule and certificate digest on the introduced numerals", async () => {
     const r = await run("arithmetic", "37 + 59", ["37 + 59 = (30 + 50) + (7 + 9)", "(30 + 50) + (7 + 9) = 80 + 16", "80 + 16 = 96"]);
     const src = (r.domainPayload?.groundedLines ?? []).flatMap((g) => g.grounding.sources).filter((s) => s.rule);
-    expect(src.length).toBeGreaterThan(0); expect(src.every((s) => s.rule === "split-additive" && /^[0-9a-f]{64}$/.test(s.certificate ?? ""))).toBe(true);
+    expect(src.length).toBeGreaterThan(0); expect(src.every((s) => ["rewrite", "identity", "representation"].includes(s.rule!) && /^[0-9a-f]{64}$/.test(s.certificate ?? ""))).toBe(true);   // P2: the DERIVATION certificate (task-bound, replayable) travels with the grounding
   });
 });
 
@@ -41,7 +41,7 @@ describe("E8 gates: parentheses cannot change a provenance judgment", () => {
   const pads = ["2x + 6 + 4713 - 4713 = 12", "(2x + 4713) + (6) - (4713) = 12", "(2x + 4713) - (4713) + 6 = 12", "2x + (6 + 4713) - (4713) = 12", "((2x + 6) + 4713) - 4713 = 12", "(2x + 4713) + (6 - 4713) = 12", "(2x + 6 + 4713 - 4713) = 12", "(2x + 4713) + (6) - (4700) - (13) = 12"];
   test("every bracketing of an arbitrary pad is unsupported", async () => { for (const p of pads) expect([p, await G("2x + 6 = 12", ["2x + 6 = 12", p, "2x = 6", "x = 3"])]).toEqual([p, "unsupported"]); });
   test("a pad with a different arbitrary constant is equally refused", async () => { for (const k of ["91", "1000003", "53"]) for (const f of [`(2x + ${k}) + (6) - (${k})`, `2x + 6 + ${k} - ${k}`, `(2x + ${k} + 6) - ${k}`]) expect([f, await G("2x + 6 = 12", ["2x + 6 = 12", `${f} = 12`, "2x = 6", "x = 3"])]).toEqual([f, "unsupported"]); });
-  test("the justified partition (17 - 11 = 6 is visible) is verified with and without brackets", async () => { for (const f of ["(2x + 17) - 11", "2x + 17 - 11", "(2x + 17 - 11)"]) expect([f, await G("2x + 6 = 12", ["2x + 6 = 12", `${f} = 12`, "2x = 6", "x = 3"])]).toEqual([f, "verified"]); });
+  test("P2 CHANGE: 6 = 17 - 11 splits a task numeral with a free parameter (17) tied to nothing visible: unsupported in every bracketing (it was verified under the 32c7f2c registry)", async () => { for (const f of ["(2x + 17) - 11", "2x + 17 - 11", "(2x + 17 - 11)"]) expect([f, await G("2x + 6 = 12", ["2x + 6 = 12", `${f} = 12`, "2x = 6", "x = 3"])]).toEqual([f, "unsupported"]); });
   test("false lines are still invalid at the false line", async () => { const r = await run("algebra", "2x + 6 = 12", ["2x + 6 = 12", "(2x + 17) - 12 = 12", "2x = 6", "x = 3"]); expect(r.classification).toBe("invalid"); expect(r.firstInvalidStep).toBe(1); });
 });
 
