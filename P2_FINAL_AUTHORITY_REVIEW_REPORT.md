@@ -1,6 +1,6 @@
 # P2 Final Authority Review
 
-Branch `feat/math-answer-key-certification` (draft PR #83), base 99aea8e. Commit: `26863c5`. **Nothing merged or deployed.** Adaptive engine, renderer and curriculum untouched.
+Branch `feat/math-answer-key-certification` (draft PR #83), base 99aea8e. Commit: the head of this branch (hash given in the hand-off message; a report cannot contain its own hash). **Nothing merged or deployed.** Adaptive engine, renderer and curriculum untouched.
 
 ## 1. Legacy authorization boundary closed
 The older numeral-provenance check (`literalProvenance`) no longer authorizes anything the derivation authority cannot parse. The "outside-surface tier" is gone from every route it served.
