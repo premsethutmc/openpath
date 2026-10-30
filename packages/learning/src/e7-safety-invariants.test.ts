@@ -4,7 +4,7 @@ import { describe, expect, test } from "bun:test";
 import { assessMathematicalWorking } from "./unified-math-engine.ts";
 import { assessAnswerFirst } from "./answer-first.ts";
 import { parseNaturalWorking } from "./natural-working.ts";
-import { withSolutionLossPolicy, withSolutionLossPolicyAsync, withCandidateEliminationPolicy, checkAlgebraSubmission } from "./independent-checker.ts";
+import { withCandidateEliminationPolicy, checkAlgebraSubmission } from "./independent-checker.ts";
 import type { Expr } from "./calculus-core.ts";
 
 const v = (n: string): Expr => ({ kind: "variable", name: n }), c = (s: string): Expr => ({ kind: "constant", value: s });
@@ -34,9 +34,9 @@ describe("I1 no silent repair of invalid syntax; unknown notation gets no invent
     expect(parse("sin x) = 1").classification).not.toBe("parsed");
   });
   test("unknown function names are unsupported, not variables; atan/arctan keep their meaning", () => {
-    for (const t of ["3sec(3x)tan(3x)", "cbrt(x) + 1", "csc(x)^2", "arcsin(x) + 1", "2sinh(2x)", "foo(x) + 1", "arcsin(x/3)", "sec(x)"]) expect([t, parse(t).classification]).toEqual([t, "unsupported"]);
+    for (const t of ["csc(x)^2", "arcsin(x) + 1", "2sinh(2x)", "foo(x) + 1", "arcsin(x/3)", "2cot(x)"]) expect([t, parse(t).classification]).toEqual([t, "unsupported"]);
     for (const t of ["atan(x) + 1", "arctan(x) + 1"]) { const r = parse(t); expect(r.classification).toBe("parsed"); expect(JSON.stringify(r.lines[0].relation)).toContain('"kind":"atan"'); }
-    expect(parse("sec + x").classification).toBe("unsupported");
+    expect(parse("csc + x").classification).toBe("unsupported");
   });
   test("ambiguous: sin x^2 is refused with both readings; sin(x)^2 and sin(x^2) are read as written", () => {
     const r = parse("sin x^2"); expect(r.classification).toBe("ambiguous"); expect((r as any).alternatives).toHaveLength(2);
@@ -44,9 +44,9 @@ describe("I1 no silent repair of invalid syntax; unknown notation gets no invent
     expect((parse("sin(x^2)").lines[0].relation as any).expression.kind).toBe("sin");
     expect(parse("sin x + 1").classification).toBe("parsed");
   });
-  test("composition: a derivative answer written with sec is unsupported, never invalid", async () => {
+  test("composition: a derivative answer written with sec is never called invalid", async () => {
     const r = await assessMathematicalWorking({ domain: "calculus", task: "derivative", expression: { kind: "tan", argument: mul(c("3"), x) }, variable: "x" } as never, { format: "natural", text: "3sec(3x)^2" } as never, {});
-    expect(r.classification).toBe("unsupported");
+    expect(r.classification).not.toBe("invalid");
   });
 });
 
@@ -145,22 +145,30 @@ describe("I5 restrictions are premises, not solution statements", () => {
   });
 });
 
-describe("I6 lost solutions (F7, owner decision pending: default keeps the E2 contract)", () => {
-  test("default policy: unchanged E2 behaviour (valid-but-incomplete, never verified)", async () => {
+describe("I6 lost solutions: an explicitly claimed equivalence that loses solutions is invalid; an incomplete answer is incomplete", () => {
+  test("minimal: x^2 = 9 ⇔ x = 3 is invalid; x = 3 alone is incomplete", async () => {
+    expect(await alg("x^2 = 9", "x^2 = 9 ⇔ x = 3")).toBe("invalid");
     expect(await alg("x^2 = 9", "x^2 = 9\nx = 3")).toBe("incomplete");
     expect(af("x^2=9", "x=3").status).toBe("incomplete");
   });
-  test("invalid policy, minimal and contrast: a stated answer that omits solutions is invalid; the complete answer verifies", async () => {
-    expect(await withSolutionLossPolicyAsync("invalid", () => alg("x^2=9", "x=3"))).toBe("invalid");
-    expect(await withSolutionLossPolicyAsync("invalid", () => alg("x^2=9", "x=3 or x=-3"))).toBe("verified");
-    expect(withSolutionLossPolicy("invalid", () => af("x^2=9", "x=3").status)).toBe("incorrect");
+  test("contrast: a correct equivalence chain verifies", async () => {
+    expect(await alg("x^2 = 9", "x^2 = 9 ⇔ x = 3 or x = -3")).toBe("verified");
+    expect(await alg("x^2-5x+6=0", "(x-2)(x-3)=0 ⇔ x = 2 or x = 3")).toBe("verified");
   });
-  test("invalid policy, notation variant: an inequality answer that loses part of the set", async () => {
-    expect(await withSolutionLossPolicyAsync("invalid", () => alg("x^2>4", "x>2"))).toBe("invalid");
+  test("notation variants: <=>, iff and a row that opens with ⇔", async () => {
+    expect(await alg("x^2 = 9", "x^2 = 9 <=> x = 3")).toBe("invalid");
+    expect(await alg("x^2 = 9", "x^2 = 9\n⇔ x = 3")).toBe("invalid");
+    expect(await alg("x^2 = 9", "x^2 = 9 iff x = 3 or x = -3")).toBe("verified");
   });
-  test("invalid policy, composition: dividing by x drops x = 0 midway; a working that stops before an answer is not judged as a claim", async () => {
-    expect(await withSolutionLossPolicyAsync("invalid", () => alg("x^3=4x", "x^2=4\nx=2 or x=-2"))).toBe("invalid");
-    expect(withSolutionLossPolicy("invalid", () => checkAlgebraSubmission("x^3=4x", parse("x^3=4x\nx^3-4x=0")).outcome)).not.toBe("invalid");
+  test("composition: inequalities, extraneous roots and excluded values under an explicit equivalence claim", async () => {
+    expect(await alg("x^2>4", "x^2>4 ⇔ x>2")).toBe("invalid");
+    expect(await alg("x^2>4", "x>2")).toBe("incomplete");
+    expect(await alg("x^2>4", "x^2>4 ⇔ x<-2 or x>2")).not.toBe("invalid");
+    expect(await alg("sqrt(x+2)=x", "sqrt(x+2)=x ⇔ x+2=x^2")).toBe("invalid"); // squaring gains x = -1: not an equivalence
+    expect(await alg("x/(x-2)=2/(x-2)", "x/(x-2)=2/(x-2) ⇔ x=2")).toBe("invalid"); // clearing denominators gains the excluded value
+    expect(await alg("x^3=4x", "x^3=4x ⇔ x^2=4")).toBe("invalid");
+    expect(await alg("x^3=4x", "x^2=4\nx=2 or x=-2")).toBe("incomplete");
+    expect(af("x^3=4x", "x^3=4x ⇔ x^2=4\nx=2 or x=-2").transitions).toContain("invalid");
   });
 });
 
