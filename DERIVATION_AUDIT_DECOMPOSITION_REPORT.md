@@ -1,5 +1,7 @@
 # General Mathematical Derivation Audit — the legitimate-decomposition false negative
 
+> **Erratum (design review, see `DERIVATION_GROUNDING_DESIGN_DECISION.md`):** §4's rule and its "13/13" prototype result held only for the cases I chose. Adversarial probing of the prototype found it **explains `37+59 → 96*1` and `2*48`** (its multiplicative branch covers numerals unconditionally, an answer-smuggling hole) and **refuses the legitimate shown-shift transfer `(37+3)+(59−3)`**. §4 is superseded by the registry design in the decision document; §§1-3 (reproduction, root cause, answers) stand.
+
 Branch `feat/math-answer-key-certification`. **No production code, protected semantics or test was changed.** Evidence: `tools/mathematics/answer-key-certification/derivation-audit/` (`probe.ts` + `probe-output.txt` reproduce every outcome below against the unmodified engine; `prototype-rule.ts` + `prototype-cases.ts` are a standalone prototype of the proposed rule, imported by nothing). Nothing merged or deployed.
 
 ## 1. Reproduction (existing engine, one complete equality per line)
