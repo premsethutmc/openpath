@@ -26,11 +26,24 @@ export interface ProcessShadowRecord {
   authoritative: { verdict: Verdict; reason: GradingDecision["reason"]; method: GradingDecision["method"] };
   /** what the process policy implies in the decision contract's vocabulary */
   implied: { verdict: Verdict; method: GradingDecision["method"] };
+  /** advisory projection for future learner-facing feedback; never an input to credit, mastery or records */
+  projection: LearnerProjection;
   process: Pick<PolicyGrade, "contract" | "mode" | "mathematicalValidity" | "completeness" | "evidence" | "credit" | "deductions"> & { findings: { kind: string; line: number | null }[] };
   agreement: ShadowAgreement;
   note: string;
 }
 
+/**
+ * Future learner-facing projection (advisory; nothing reads it for credit). The binary decision contract records an incomplete answer and a
+ * wrong one alike as "incorrect"; the projection keeps them apart so feedback can say "keep going: solutions are missing" instead of "wrong".
+ */
+export type LearnerProjection = "correct" | "correct-process-feedback" | "incomplete" | "incorrect" | "unresolved";
+export function learnerProjection(g: PolicyGrade): LearnerProjection {
+  if (g.credit === "unresolved") return "unresolved";
+  if (g.mathematicalValidity === "invalid" || g.credit === "none") return "incorrect";
+  if (g.completeness === "incomplete") return "incomplete";
+  return g.deductions.length ? "correct-process-feedback" : "correct";
+}
 export function impliedVerdict(g: PolicyGrade): Verdict {
   if (g.credit === "unresolved") return "unresolved";
   if (g.mathematicalValidity === "invalid" || g.credit === "none") return "incorrect";
@@ -57,7 +70,7 @@ export function shadowProcessRecord(decision: Readonly<GradingDecision>, g: Poli
   return {
     schema: PROCESS_SHADOW_SCHEMA, questionId: decision.questionId,
     authoritative: { verdict: auth, reason: decision.reason, method: { ...decision.method } },
-    implied,
+    implied, projection: learnerProjection(g),
     process: { contract: g.contract, mode: g.mode, mathematicalValidity: g.mathematicalValidity, completeness: g.completeness, evidence: g.evidence, credit: g.credit, deductions: [...g.deductions], findings: g.findings.map((f) => ({ kind: f.kind, line: f.line })) },
     agreement, note,
   };
