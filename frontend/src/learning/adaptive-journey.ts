@@ -32,7 +32,7 @@ export const GRADE = 10;
 const T0 = Date.parse("2026-09-01T09:00:00Z");
 
 /** What a learner means (a value, or "right"), written the way the question takes it (a letter for a choice question). */
-function respond(qid: string, value: "right" | number | string): string {
+export function respond(qid: string, value: "right" | number | string): string {
   const q = question(qid);
   if (value === "right") return q.answer;
   const text = typeof value === "number" ? show(value) : value;
@@ -44,15 +44,15 @@ function respond(qid: string, value: "right" | number | string): string {
   }
   return text;
 }
-const bugValue = (p: Problem | null, ids: Set<string>) => {
+export const bugValue = (p: Problem | null, ids: Set<string>) => {
   const b = p?.bugs.find((x) => ids.has(x.id) && x.predict !== null);
   return b ? (Array.isArray(b.predict) ? b.predict[0] : b.predict) as number : null;
 };
 /** A careless slip: off by one from the right value (a numeric answer), never a known misconception's prediction. */
 export const slipFor = (qid: string) => slip(qid);
 /** whether a slip can be written for this question (a choice, or a numeric answer) */
-const slippable = (qid: string) => !!question(qid).options?.length || Number.isFinite(Number(question(qid).answer.trim().replace(/−/g, "-")));
-function slip(qid: string): string {
+export const slippable = (qid: string) => !!question(qid).options?.length || Number.isFinite(Number(question(qid).answer.trim().replace(/−/g, "-")));
+export function slip(qid: string): string {
   const q = question(qid);
   if (q.options?.length) return respond(qid, "__wrong__");
   // a list of numbers (e.g. the roots "2,3"): the last one off by one, still a readable answer of the same shape
@@ -74,6 +74,7 @@ export interface TraceStep {
   questionStatus?: { formCertified: boolean; quarantined: boolean };
   activity?: string;
   context?: string;
+  working?: string[];
   response?: string;
   hints?: number;
   authoritative?: { verdict: string; reason: string; credit: boolean | null };
@@ -99,10 +100,11 @@ interface Snapshot { status: string; independent: { right: number; total: number
 export class Journey {
   d: Driver;
   steps: TraceStep[] = [];
-  release = sampleFor(GRADE)!;
-  constructor(id: string, now = T0) {
+  release: ReturnType<typeof sampleFor> & object;
+  constructor(id: string, now = T0, grade = GRADE) {
+    this.release = sampleFor(grade)!;
     this.d = new Driver(`synthetic-${id}`, now);
-    this.d.enrol(GRADE, "2026-27", this.release);
+    this.d.enrol(grade, "2026-27", this.release);
   }
   ctx() {
     const st = this.d.state();
@@ -127,13 +129,13 @@ export class Journey {
     } else e7Shadow = { advisory: true, notApplicable: "no algebra statement in this question's contract (the process policy covers algebra kernels)" };
     return { authoritative: { verdict: g.decision.verdict, reason: String(g.decision.reason), credit: g.assessment.credit ?? null }, stepFindings, e7Shadow, questionStatus: { formCertified: formCertified(qid), quarantined: quarantined(qid) } };
   }
-  private async answer(stage: TraceStep["stage"], competency: string, qid: string, response: string, activity: string, o: { context?: string; hints?: number; phase?: string; extra?: Partial<TraceStep> } = {}) {
+  private async answer(stage: TraceStep["stage"], competency: string, qid: string, response: string, activity: string, o: { context?: string; hints?: number; working?: string[]; phase?: string; extra?: Partial<TraceStep> } = {}) {
     const before = this.snap(competency);
-    const ann = await this.annotate(qid, response);
+    const ann = await this.annotate(qid, response, o.working ?? []);
     const n = this.d.events.length;
-    this.d.answer(qid, response, activity as never, { context: o.context, hints: o.hints });
+    this.d.answer(qid, response, activity as never, { context: o.context, hints: o.hints, working: o.working });
     const recorded = this.d.state().records.attempts.some((a) => a.id === (this.d.events[n] as { id?: string }).id);
-    this.steps.push({ step: this.steps.length + 1, stage, competency, phase: o.phase, question: qid, activity, context: o.context, response, hints: o.hints ?? 0, ...ann, recordedAsAttempt: recorded, evidenceBefore: before, evidenceAfter: this.snap(competency), next: this.next(), ...o.extra });
+    this.steps.push({ step: this.steps.length + 1, stage, competency, phase: o.phase, question: qid, activity, context: o.context, response, ...(o.working?.length ? { working: o.working } : {}), hints: o.hints ?? 0, ...ann, recordedAsAttempt: recorded, evidenceBefore: before, evidenceAfter: this.snap(competency), next: this.next(), ...o.extra });
   }
   private findingOf(competency: string) {
     const f = hypothesesFor(competency, this.d.state().records).filter((h) => h.status === "established" || h.status === "resolved").at(-1);
@@ -165,7 +167,7 @@ export class Journey {
     return p;
   }
   /** One skill's module (StudySession → Module), until done, pause or nothing to ask. */
-  async module(competency: string, answer: (qid: string, ms: ModuleState) => { response: string; hints?: number }, max = 30) {
+  async module(competency: string, answer: (qid: string, ms: ModuleState) => { response: string; hints?: number; working?: string[] }, max = 30) {
     for (let i = 0; i < max; i++) {
       const st = this.d.state();
       const ms = moduleState(competency, st.records, st.evidence(competency), this.d.now, this.d.session);
@@ -186,7 +188,7 @@ export class Journey {
         return ms;
       }
       const a = answer(ms.question, ms);
-      await this.answer("module", competency, ms.question, a.response, activityFor(ms), { hints: a.hints, phase: ms.phase, extra: { ...common, intervention: ms.strategy ? { support: null, plan: ms.decision?.action ?? null, strategy: { id: ms.strategy.id, kind: ms.strategy.kind, title: ms.strategy.title, screens: ms.strategy.screens.length } } : undefined } });
+      await this.answer("module", competency, ms.question, a.response, activityFor(ms), { hints: a.hints, working: a.working, context: (ms as { context?: string }).context, phase: ms.phase, extra: { ...common, intervention: ms.strategy ? { support: null, plan: ms.decision?.action ?? null, strategy: { id: ms.strategy.id, kind: ms.strategy.kind, title: ms.strategy.title, screens: ms.strategy.screens.length } } : undefined } });
     }
     return null;
   }
