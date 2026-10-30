@@ -13,7 +13,7 @@ export function NavControls({ nav, onSubmit, onSkip, onBack, strings }: NavContr
     <div className="lr-nav" role="toolbar" aria-label="Question controls">
       {nav.canGoBack && (
         <button type="button" className="lr-nav-btn lr-nav-back" onClick={onBack}>
-          {strings.back}
+          {nav.backLabel ?? strings.back}
         </button>
       )}
       {nav.canSkip && (

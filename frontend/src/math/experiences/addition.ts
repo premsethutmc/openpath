@@ -164,7 +164,6 @@ export interface ExperienceAOptions {
 export function buildAdditionSpec(opts: ExperienceAOptions): RenderSpec {
   const { params, mode, locale, feedback, hintLevel, questionNumber, totalQuestions } = opts;
   const { a, b } = params;
-  const sum = a + b;
   const places = placesForNumbers(a, b);
   const hints = buildHints(a, b);
 

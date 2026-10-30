@@ -91,13 +91,13 @@ test("nothing is established without evidence: a slip, and a learner no explanat
   //  evidence:  the slip is KEPT as an observation (not erased, not counted as help) and does not establish anything: the real reasoning over
   //             that one answer is not "established" (insufficient evidence); no hypothesis is claimed, and nothing is promoted to mastery.
   //  adaptive:  with competence otherwise supported, no investigation or remedial teaching follows the slip (the loop's stopping rule).
-  const slipQ = a1.slipped as string, fam = familyOf(slipQ)!;
+  const slipQ = a1.slipped as unknown as string, fam = familyOf(slipQ)!;
   const r = reason(fam, [{ questionId: fam, response: slip(slipQ) }]);
   assert.ok(r && r.status !== "established", "one unexplained wrong answer never establishes a misconception");
   assert.equal(a1.final.afterSlip.independent.total - a1.final.afterSlip.independent.right, 1, "the slip stays recorded as an independent wrong answer");
   assert.equal(a1.final.hypotheses.length, 0, "no hypothesis is invented (neither established nor 'confident')");
-  const after = a1.steps.slice(a1.steps.findIndex((x: { question?: string }) => x.question === slipQ) + 1);
-  assert.ok(!after.some((x: { phase?: string }) => x.phase === "explore" || x.phase === "recover" || x.phase === "chapter"), "no investigation or lesson after an isolated slip");
+  const after = a1.steps.slice(a1.steps.findIndex((x) => (x as { question?: string }).question === slipQ) + 1);
+  assert.ok(!after.some((x) => ["explore", "recover", "chapter"].includes((x as { phase?: string }).phase ?? "")), "no investigation or lesson after an isolated slip");
 });
 
 test("teaching history: questions seen as practice are not instruction delivered, and no pause claims teaching that did not happen", async () => {

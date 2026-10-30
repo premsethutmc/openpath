@@ -223,6 +223,8 @@ export interface NavSpec {
   submitLabel?: string;
   /** Integration M1: engine-supplied label for the skip/continue action (the renderer's default "Skip" is wrong for "continue to the next step"). */
   skipLabel?: string;
+  /** Integration M2: engine-supplied label for the back action ("Try again" for a bounded retry). */
+  backLabel?: string;
 }
 
 // ── Accessibility ───────────────────────────────────────────────────────────

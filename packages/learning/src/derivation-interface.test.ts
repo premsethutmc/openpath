@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { decide } from "./grade";
 import { authorizeWorking, workingEvidence } from "./derivation-interface.ts";
 
 describe("derivation-authorization@1: the explicit P2 interface", () => {
@@ -11,7 +12,8 @@ describe("derivation-authorization@1: the explicit P2 interface", () => {
     const f = authorizeWorking("37+59", ["37+59 = 95"]);
     expect(f.status).toBe("invalid"); expect(workingEvidence(f)).toBe("method-false-step");
     const g = authorizeWorking("3x+5=14", ["3x+5=14", "3x=8", "x=3"]);
-    expect(g.status).not.toBe("authorized"); expect(workingEvidence(g)).toBe("no-method-evidence");
+    // M2 (loses-solution@1): x = 3 satisfies 3x + 5 = 14 but not 3x = 8, so the step is now invalid (was unsupported); never method-verified
+    expect(g.status).toBe("invalid"); expect(workingEvidence(g)).toBe("method-false-step");
   });
   test("an unrecognized route is unsupported and yields NO method evidence (not verified, not wrong)", () => {
     for (const [s, l] of [["sqrt(x+2)=x", ["sqrt(x+2)=x", "x+2=x^2", "x=2"]], ["3x+5=14", ["x=3 because I checked"]], ["log(xy)", ["log(xy)=log(x)+log(y)"]]] as [string, string[]][]) {
@@ -41,15 +43,32 @@ test("disputed labels: restatement-only working is unsupported; a factorised qua
     expect(authorizeWorking(st, ls).status).toBe("authorized");
 });
 
-test("closure: an authorized answer-only or jump working is NOT method evidence (P2 solve-conclusion checks the solution set, not the route)", () => {
+test("Milestone 2: answer versus method (general), zero-product, and invalid versus unsupported", () => {
   const S = "Solve x^2 + 11x + 18 = 0", E = "x^2 + 11x + 18 = 0";
-  for (const ls of [["x = \u22129 or x = \u22122"], [E, "x = \u22129 or x = \u22122"]]) {
-    const a = authorizeWorking(S, ls);
+  // a bare answer is certified as an answer claim, never as a method (linear, polynomial, arithmetic)
+  for (const [st, ls] of [[S, ["x = \u22129 or x = \u22122"]], ["Solve 2x + 17 = 39", ["x = 11"]], ["Compute 52 \u2212 20", ["32"]], ["Compute 52 \u2212 20", ["52 \u2212 20 = 32"]]] as [string, string[]][]) {
+    const a = authorizeWorking(st, ls);
     expect(a.status).toBe("authorized");
     expect(workingEvidence(a)).toBe("no-method-evidence");
   }
+  // a jump from the unfactored equation to its roots is refused by P2 now (zero-product@1): the roots are read only off factors
+  expect(authorizeWorking(S, [E, "x = \u22129 or x = \u22122"]).status).toBe("unsupported");
   const full = authorizeWorking(S, [E, "(x + 9)(x + 2) = 0", "x = \u22129 or x = \u22122"]);
+  expect(full.moves).toEqual(["identity", "side-rewrite", "zero-product"]);
   expect(workingEvidence(full)).toBe("method-verified");
-  expect(authorizeWorking(S, [E, "(x + 9)(x + 2) = 0", "x = \u22129"]).status).toBe("unsupported");
-  expect(authorizeWorking(S, [E, "(x + 3)(x + 6) = 0", "x = \u22123 or x = \u22126"]).status).toBe("unsupported");
+  expect(workingEvidence(authorizeWorking("Solve 2x + 17 = 39", ["2x = 22", "x = 11"]))).toBe("method-verified");
+  // loses-solution@1: a line that drops an exact root of the line before is invalid (was unsupported); the counterexample is in the reason
+  for (const ls of [[E, "(x + 9)(x + 2) = 0", "x = \u22129"], [E, "(x + 3)(x + 6) = 0", "x = \u22123 or x = \u22126"]]) {
+    const a = authorizeWorking(S, ls);
+    expect(a.status).toBe("invalid");
+    expect(a.reason).toContain("loses-solution");
+    expect(workingEvidence(a)).toBe("method-false-step");
+  }
+  // fail-closed: irrational or unparsed routes are left unsupported, never invalid
+  expect(authorizeWorking("Solve x^2 \u2212 2 = 0", ["x^2 \u2212 2 = 0", "x = 1.41"]).status).not.toBe("invalid");
+});
+
+test("Milestone 2: production grading never records a verified derivation from an answer", () => {
+  const a = decide("gen:lin:2,17,11", "11", ["x = 11"]);
+  expect(a.evidence.derivationVerified).toBe(false);
 });

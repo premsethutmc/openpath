@@ -20,7 +20,8 @@ import { polynomialKey } from "./claim-grounding.ts";
 import type { Expr } from "./calculus-core";
 import { parseTree, certifyRewrite, replayRewriteCertificate, canon, show, isFrac, toExpr, sameUpToFractionRegrouping, REWRITE_REGISTRY_VERSION, type Tree, type RewriteCertificate } from "./rewrite-registry.ts";
 
-export const AUTHORITY_VERSION = "openpath-derivation-authority@1" as const;
+// @2 (Milestone 2): zero-product@1 / square-root@1 solution reading, solve-jump refusal, loses-solution@1 refutation; @1 certificates no longer replay as current
+export const AUTHORITY_VERSION = "openpath-derivation-authority@2" as const;
 export const DERIVATION_CERTIFICATE_VERSION = "openpath-derivation-certificate@2" as const;
 export const KERNEL_VERSION = "openpath-symbolic-proof-kernel@1" as const;
 export type Grade = "determined" | "anchored" | "parametric";
@@ -330,6 +331,43 @@ const parseConclusion = (text: string): { v: string; values: R[] } | null => {
   for (const c of clauses) { const m = /^([A-Za-z])\s*=\s*(.+)$/.exec(c.trim()); if (!m) return null; if (v && v !== m[1]) return null; v = m[1]; const n = parseTree(m[2]); if (!n || hasVar(n) || !(isAtomT(n) || isNegAtom(n))) return null; const q = evalTree(n); if (!q) return null; values.push(q); }
   return { v, values };
 };
+// ---- zero-product (Milestone 2): `A1 · A2 · … = 0` with every Ai linear in v (or a non-zero constant) has exactly the roots of its factors: over a field
+// (Q, R, C) a product is 0 iff a factor is 0, so reading `v = r1 or v = r2 …` off the factors is an equivalence. Anything else returns null.
+const factorsOf = (t: Tree): Tree[] => (t.k === "b" && t.op === "*" ? [...factorsOf(t.l), ...factorsOf(t.r)] : [t]);
+function zeroProductRoots(P: Tree[], v: string): R[] | null {
+  if (P.length !== 2) return null;
+  const zi = P.findIndex((t) => !hasVar(t) && !!evalTree(t) && evalTree(t)!.n === 0n); if (zi < 0) return null;
+  const fs = factorsOf(P[1 - zi]); if (fs.length < 2 && !hasVar(fs[0])) return null;
+  const roots: R[] = [];
+  for (const f of fs) {
+    if (!hasVar(f)) { const c = evalTree(f); if (!c || c.n === 0n) return null; continue; }
+    const poly = polyCoefficients([f, parseTree("0")!], v); if (!poly || poly.length !== 2 || poly[1].n === 0n) return null;      // linear in v
+    const r = mk(-poly[0].n * poly[1].d, poly[0].d * poly[1].n); if (!roots.some((x) => same(x, r))) roots.push(r);
+  }
+  return roots.length ? roots : null;
+}
+/** square-root@1 (Milestone 2): `L^2 = c` with L linear in v and c a constant: L = ±√c, read off directly (rational roots only; else null) */
+function squareRootRoots(P: Tree[], v: string): R[] | null {
+  if (P.length !== 2) return null;
+  const si = P.findIndex((t) => t.k === "b" && t.op === "^" && !hasVar(t.r) && !!evalTree(t.r) && same(evalTree(t.r)!, mk(2n, 1n))); if (si < 0 || hasVar(P[1 - si])) return null;
+  const L = (P[si] as Extract<Tree, { k: "b" }>).l; const lin = polyCoefficients([L, parseTree("0")!], v); if (!lin || lin.length !== 2 || lin[1].n === 0n) return null;
+  const poly = polyCoefficients(P, v); return poly ? rationalRootSet(poly) : null;
+}
+const visibleRoots = (P: Tree[], v: string): R[] | null => zeroProductRoots(P, v) ?? squareRootRoots(P, v);
+const singleVariable = (ts: Tree[]): string | null => { const names = new Set<string>(); const walk = (t: Tree): void => { if (t.k === "v") names.add(t.name); else if (t.k === "b") { walk(t.l); walk(t.r); } }; ts.forEach(walk); return names.size === 1 ? [...names][0] : null; };
+const substitute = (t: Tree, v: string, r: R): R | null => { const u = parseTree(show(t).replace(new RegExp(`\\b${v}\\b`, "g"), `(${r.n}/${r.d})`)); return u ? evalTree(u) : null; };
+/** loses-solution@1 (Milestone 2): a step from equation P to the claim N is FALSE when some exact root of P (P splits over Q) does not satisfy N:
+ *  N does not follow from P, so a solution has been lost. Fail-closed: only a certain counterexample makes a line invalid; anything else is left to authorization. */
+export function lostSolution(prev: Tree[], v: string, next: { trees?: Tree[]; values?: R[] }): R | null {
+  const poly = polyCoefficients(prev, v); const roots = poly && poly.length > 1 ? rationalRootSet(poly) : null; if (!roots) return null;
+  for (const r of roots) {
+    if (next.values) { if (!next.values.some((x) => same(x, r))) return r; continue; }
+    if (!next.trees || next.trees.length !== 2) return null;
+    const a = substitute(next.trees[0], v, r), b = substitute(next.trees[1], v, r);
+    if (a && b && !same(a, b)) return r;
+  }
+  return null;
+}
 // ---- equation moves
 const sumOf = (ts: { n: Tree; s: number }[]): Tree => ts.length === 0 ? parseTree("0")! : ts.map((t) => (t.s < 0 ? ({ k: "b", op: "-", l: { k: "n", v: (parseTree("0") as any).v, u: true }, r: t.n } as Tree) : t.n)).reduce((x, y) => (y.k === "b" && y.op === "-" && y.l.k === "n" && (y.l as any).u ? ({ k: "b", op: "-", l: x, r: y.r } as Tree) : ({ k: "b", op: "+", l: x, r: y } as Tree)));
 const bin = (op: "+" | "-" | "*" | "/", l: Tree, r: Tree): Tree => ({ k: "b", op, l, r });
@@ -420,7 +458,12 @@ export class DerivationSession {
       const cl = parseConclusion(text);
       if (cl) { const poly = polyCoefficients(this.last, cl.v), roots = poly && rationalRootSet(poly); const ok = !!roots && roots.length === new Set(cl.values.map((x) => `${x.n}/${x.d}`)).size && cl.values.every((x) => roots.some((r) => same(r, x)));
         if (!ok) return out(false, roots ? "solution-set-differs" : "no-registered-equation-move", null);
-        return this.seal(line, task, this.last.map(canon), [strip(text)], [], "solve-conclusion", null, [], null); }
+        // Milestone 2 (zero-product@1): the solution set may be READ OFF only where it is visible: from factors (zero-product) or as a bare first-line answer
+        // claim; a jump from an unfactored polynomial to its roots skips the method, like a several-operation jump in a linear equation, and is refused.
+        const zp = visibleRoots(this.last, cl.v);
+        if (line === 0) return this.seal(line, task, this.last.map(canon), [strip(text)], [], "answer-claim", null, [], null);
+        if (!zp || zp.length !== cl.values.length || !zp.every((r) => cl.values.some((x) => same(x, r)))) return out(false, "solve-jump", null);
+        return this.seal(line, task, this.last.map(canon), [strip(text)], [], zeroProductRoots(this.last, cl.v) ? "zero-product" : "square-root", zp.map((r) => `${r.n}/${r.d}`).join(","), [], null); }
     }
     const ss = splitSides(text); if (!ss) return out(false, "line-unparsed", null);
     const T = ss.map((x) => parseTree(x)); if (T.some((t) => !t)) return out(false, "line-unparsed", null);
@@ -498,6 +541,21 @@ export function assessChain(statement: string, texts: string[]): ChainVerdict {
   const s = new DerivationSession(statement); const lines: LineVerdict[] = [];
   // validity first: scan for a false closed equality anywhere before authorizing
   for (let i = 0; i < texts.length; i++) { const ss = splitSides(texts[i]); const ts = ss?.map((x) => parseTree(x)); if (ts && ts.every((x) => x)) for (let j = 1; j < ts.length; j++) { const a = evalTree(ts[j - 1]!), b = evalTree(ts[j]!); if (a && b && !same(a, b) && (s.task?.mode ?? "expression") === "expression") return { status: "invalid", at: i, reason: "mathematically-false", lines, chain: [] }; } }
+  // loses-solution@1 (Milestone 2): an equation line that drops an exact root of the equation before it is false, whatever moves it claims
+  if (s.task?.mode === "equation" && s.task.trees.length === 2 && !s.task.conditions.length) {
+    const v = singleVariable(s.task.trees);
+    let prev: Tree[] | null = v ? [...s.task.trees] : null;
+    for (let i = 0; v && prev && i < texts.length; i++) {
+      const t = texts[i]; let next: { trees?: Tree[]; values?: R[] } | null = null;
+      if (/\bor\b|[,;]/i.test(t)) { const cl = parseConclusion(t); if (cl && cl.v === v) next = { values: cl.values }; }
+      else { const ss = splitSides(t); const ts = ss?.map((x) => parseTree(x)); if (ts && ts.length === 2 && ts.every((x) => x)) next = { trees: ts as Tree[] }; }
+      if (!next) break;
+      const r = lostSolution(prev, v, next);
+      if (r) return { status: "invalid", at: i, reason: `loses-solution: ${v} = ${r.d === 1n ? r.n : `${r.n}/${r.d}`} satisfies the line before but not this one`, lines, chain: [] };
+      if (!next.trees) break;
+      prev = next.trees;
+    }
+  }
   for (let i = 0; i < texts.length; i++) { const v = s.append(texts[i]); lines.push(v); if (!v.authorized) return { status: v.valid === false ? "invalid" : "unsupported", at: i, reason: v.reason, lines, chain: s.chain }; }
   return { status: texts.length ? "verified" : "unsupported", at: null, reason: texts.length ? "all-lines-authorized" : "no-working", lines, chain: s.chain };
 }

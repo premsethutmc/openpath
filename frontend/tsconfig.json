@@ -35,6 +35,8 @@
     "src/learning",
     "src/review",
     "src/curriculum",
-    "src/writing"
+    "src/writing",
+    "src/journey",
+    "src/math/react-shim.d.ts"
   ]
 }

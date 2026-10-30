@@ -24,8 +24,10 @@ export interface DerivationAuthorization {
   reason: string;
   /** certificate digests, one per authorized line; empty unless every line was authorized */
   certificates: string[];
-  /** the kind of each certified move (identity, side-rewrite, solve-conclusion ...) */
+  /** the kind of each certified move (identity, side-rewrite, zero-product, answer-claim ...) */
   moves: string[];
+  /** what each certified line used and produced (canonical forms), for the answer-versus-method rule */
+  steps: { sources: string[]; results: string[] }[];
   /** true only when the whole chain was replayed independently from the task and re-authorized line by line */
   replayed: boolean;
   versions: { authority: string; registry: string; kernel: string };
@@ -37,23 +39,23 @@ const versions = { authority: AUTHORITY_VERSION, registry: REWRITE_REGISTRY_VERS
 export function authorizeWorking(statement: string, lines: readonly string[]): DerivationAuthorization {
   const base = { schema: DERIVATION_AUTHORIZATION, versions } as const;
   const clean = lines.map((l) => String(l ?? "").trim()).filter((l) => l.length > 0);
-  if (!clean.length || typeof statement !== "string" || !statement.trim()) return { ...base, status: "unsupported", at: null, reason: "no working to judge", certificates: [], moves: [], replayed: false };
+  if (!clean.length || typeof statement !== "string" || !statement.trim()) return { ...base, status: "unsupported", at: null, reason: "no working to judge", certificates: [], moves: [], steps: [], replayed: false };
   // Integration M1 (disputed labels tr-002/006/021): "A = (A)" then "(A) = value" is valid but restates the task and evaluates it: it shows no
   // method beyond the answer, so it is not method evidence however it is certified. Kept unsupported (conservative), never invalid.
   if (clean.length === 2) {
     const m = /^(.+?)\s*=\s*\((.+)\)$/.exec(clean[0]);
-    if (m && m[1].replace(/\s+/g, "") === m[2].replace(/\s+/g, "") && /^\(.+\)\s*=/.test(clean[1])) return { ...base, status: "unsupported", at: null, reason: "restatement-only working: restates the task and evaluates it; no method shown", certificates: [], moves: [], replayed: false };
+    if (m && m[1].replace(/\s+/g, "") === m[2].replace(/\s+/g, "") && /^\(.+\)\s*=/.test(clean[1])) return { ...base, status: "unsupported", at: null, reason: "restatement-only working: restates the task and evaluates it; no method shown", certificates: [], moves: [], steps: [], replayed: false };
   }
   try {
     const v = assessChain(statement, clean);
-    if (v.status === "invalid") return { ...base, status: "invalid", at: v.at, reason: v.reason, certificates: [], moves: [], replayed: false };
-    if (v.status !== "verified") return { ...base, status: "unsupported", at: v.at, reason: v.reason, certificates: [], moves: [], replayed: false };
+    if (v.status === "invalid") return { ...base, status: "invalid", at: v.at, reason: v.reason, certificates: [], moves: [], steps: [], replayed: false };
+    if (v.status !== "verified") return { ...base, status: "unsupported", at: v.at, reason: v.reason, certificates: [], moves: [], steps: [], replayed: false };
     // a self-consistent digest is not enough: replay every certificate from the task and re-authorize each line
     const r = replayDerivationChain(statement, clean, v.chain);
-    if (!r.ok) return { ...base, status: "unsupported", at: r.at, reason: `replay refused: ${r.reason}`, certificates: [], moves: [], replayed: false };
-    return { ...base, status: "authorized", at: null, reason: v.reason, certificates: v.chain.map((c) => c.digest), moves: v.chain.map((c) => c.move.kind), replayed: true };
+    if (!r.ok) return { ...base, status: "unsupported", at: r.at, reason: `replay refused: ${r.reason}`, certificates: [], moves: [], steps: [], replayed: false };
+    return { ...base, status: "authorized", at: null, reason: v.reason, certificates: v.chain.map((c) => c.digest), moves: v.chain.map((c) => c.move.kind), steps: v.chain.map((c) => ({ sources: c.sources, results: c.results })), replayed: true };
   } catch (e) {
-    return { ...base, status: "unsupported", at: null, reason: `authority could not read the working (${(e as Error).message?.slice(0, 80) ?? "error"})`, certificates: [], moves: [], replayed: false };
+    return { ...base, status: "unsupported", at: null, reason: `authority could not read the working (${(e as Error).message?.slice(0, 80) ?? "error"})`, certificates: [], moves: [], steps: [], replayed: false };
   }
 }
 
@@ -61,9 +63,13 @@ export function authorizeWorking(statement: string, lines: readonly string[]): D
 export type WorkingEvidence = "method-verified" | "method-false-step" | "no-method-evidence";
 export function workingEvidence(a: DerivationAuthorization | null | undefined): WorkingEvidence {
   if (!a) return "no-method-evidence";
-  // P2's `solve-conclusion` accepts a stated solution set equal to the task's (an answer alone, or a jump from the task to the roots, is
-  // "authorized"); an `identity` line only restates. Neither shows a method, so method evidence needs at least one certified transformation.
-  if (a.status === "authorized" && a.replayed && a.certificates.length > 0 && a.moves.some((m) => m !== "identity" && m !== "solve-conclusion")) return "method-verified";
+  // answer-vs-method@1 (Milestone 2, general): a method is shown only by a certified line that PRODUCES something new, an expression that is
+  // neither one of the task's own expressions nor the final answer. A bare answer ("x = 11", "32"), a restatement ("52 − 20 = (52 − 20)",
+  // "52 − 20 = 32"), or a task restated then the answer, shows none, however it is certified.
+  if (a.status === "authorized" && a.replayed && a.certificates.length > 0 && a.steps.length === a.certificates.length) {
+    const task = new Set(a.steps[0].sources), final = new Set(a.steps[a.steps.length - 1].results);
+    if (a.steps.some((st) => st.results.some((r) => !task.has(r) && !final.has(r)))) return "method-verified";
+  }
   if (a.status === "invalid") return "method-false-step";
   return "no-method-evidence";    // unsupported is never treated as verified, and never as wrong
 }

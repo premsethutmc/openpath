@@ -146,11 +146,25 @@ export interface Established {
   kind: "conceptual" | "procedural" | "recall" | "prerequisite";
   says: string;
 }
+/** bounded-input@1 (Milestone 2): an answer that cannot be read is never marked and never an attempt (approved policy P1), so on its own it never
+ *  moves the module on. After UNREADABLE_LIMIT unreadable answers to the question the module would ask next, the module does not ask it again:
+ *  it stops for a person (pause@1). No credit either way, no misconception, no mastery; it lifts only when the records change what is asked. */
+export const UNREADABLE_LIMIT = 2;
+/** bounded-retry@1 (Milestone 2): a wrong answer may be retried on the same question at most RETRY_LIMIT times (the first retry plain, the
+ *  next with a hint, in the app); then the learner moves to another question. A retry is never independent evidence (attempt n > 1). */
+export const RETRY_LIMIT = 2;
+export const retriesLeft = (records: LearnerRecords, qid: string) =>
+  Math.max(0, 1 + RETRY_LIMIT - records.attempts.filter((a) => exposureKey(a.questionId) === exposureKey(qid)).length);
+export const unreadableCount = (records: LearnerRecords, qid: string) => records.unresolved.filter((u) => exposureKey(u.questionId) === exposureKey(qid)).length;
 export function moduleState(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null, evidence?: (id: string) => SkillEvidence): ModuleState {
   const ms = moduleStep(competency, records, ev, now, session, established, evidence);
   const m = moduleFor(competency);
   if (!m || !ms.question) return ms;
   const q = ms.question;
+  const unread = unreadableCount(records, q);
+  if (unread >= UNREADABLE_LIMIT)
+    return { ...ms, phase: "pause", question: null, why: `bounded-input@1: ${unread} unreadable answers to ${q}`,
+      reason: "Your answers to this question could not be read, so they were not marked: nothing was counted for or against you. This needs a person: go through it with a teacher or parent." };
   const fromCheckPool = !!m.pool && q.startsWith("gen:") && ![...m.practice, ...m.transfer].includes(q) && phaseOfQ(q) === "check";
   const activity = ms.phase === "explore" ? "diagnostic" : ms.phase === "strategy" ? "probe" : ms.phase === "guided" ? "guided" : ms.phase === "check" ? "check" : ms.phase === "retention" ? "retention" : m.transfer.includes(q) ? "transfer" : m.strategies.some((s) => s.check === q) || fromCheckPool ? "check" : "practice";
   return { ...ms, activity };
@@ -400,6 +414,9 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
       ? { ...base, phase: "solved_after_help", active: null, reason: "Solved after help. That counts as help, not as work on your own." }
       : { ...base, phase: "solved_on_retry", active: null, reason: "Solved on a second try, without help. A second try is practice: it does not count as solving it on your own the first time." };
   }
+  // bounded-retry@1 (Milestone 2): the original problem is not sent back again and again. After the first try and RETRY_LIMIT returns, all wrong,
+  // recovery stops for a person (escalate -> pause@1); the wrong answers stay recorded, nothing is counted as solved.
+  if (tries.length >= 1 + RETRY_LIMIT) return { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
   const shown = (id: string) => ["independent", "transfer", "verified"].includes(evidence(id).status);
   const resolved = (id: string, est?: Established | null) => {
     const ms = moduleState(id, records, evidence(id), now, session, est);

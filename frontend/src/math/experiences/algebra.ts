@@ -219,7 +219,7 @@ export function buildAlgebraSpec(opts: AlgebraExperienceOptions): RenderSpec {
  * unverified. In production, grading comes from the math engine.
  */
 export function gradeAlgebra(params: AlgebraParams, answer: string): FeedbackState {
-  const { x, exact } = solve(params);
+  const { x } = solve(params);
 
   // Parse: accept "4", "x=4", "x = 4"
   const cleaned = answer.replace(/^x\s*=\s*/i, "").trim();

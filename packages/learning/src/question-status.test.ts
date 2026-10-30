@@ -12,6 +12,9 @@ import { moduleFor, modules, poolFamilies, question, quarantinedFromModules, wit
 import { FAMILIES, inPool, phasePool, pool, problemOf, variantsOf, type Phase } from "./families.ts";
 import { decide, creditOf } from "./grade.ts";
 import { fromPool } from "./intervention.ts";
+import { discriminatingProbe, type LearnerHypothesis } from "./hypotheses.ts";
+import { formCertified } from "./grading/certify.ts";
+import { readRecords as _rr } from "./records.ts";
 import { modulePhasePool, moduleQuestions } from "./library.ts";
 import { quarantined, quarantinedIds, selectable, statusEntry } from "./question-status.ts";
 import { readRecords } from "./records.ts";
@@ -99,6 +102,9 @@ describe("selectors never return a quarantined question", () => {
   test("selection code is registered: only these files import the pool selectors (each applies selectable() or reads filtered modules)", () => {
     // a new selector must apply selectable() and be added here in a reviewed change
     const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts", "packages/learning/src/exact/verify.ts",
+      // hypotheses.ts: added in a reviewed change (Milestone 2). Its only selector, discriminatingProbe, applies selectable(), formCertified() and
+      // the grade ceiling, and its result is asked only through moduleState; see "hypotheses.ts resolution probes pass the eligibility gate".
+      "packages/learning/src/hypotheses.ts",
       "packages/learning/src/intervention.ts", "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts", "packages/learning/src/spec.ts"];
     const root = new URL("../../../", import.meta.url).pathname, hits: string[] = [];
     const walk = (d: string) => { for (const e of readdirSync(join(root, d), { withFileTypes: true })) { const r = `${d}/${e.name}`; if (e.isDirectory()) { if (e.name !== "node_modules") walk(r); } else if (/\.tsx?$/.test(e.name) && !/\.test\.tsx?$/.test(e.name) && /import \{[^}]*\b(pool|phasePool|variantsOf|modulePhasePool|fromPool)\b[^}]*\} from/.test(readFileSync(join(root, r), "utf8"))) hits.push(r); } };
@@ -121,4 +127,35 @@ describe("no authoritative grade for a quarantined question", () => {
     expect(st.evidence(question(id).competency).status).toBe(learnerState("L", [], Date.UTC(2026, 9, 2), { currentSession: "S2" }).evidence(question(id).competency).status);
   }, LONG);
   test("the three modules that drew a quarantined word form still have their transfer questions", () => { for (const c of ["MATH.algebra.arithmetic-sequences", "MATH.number.thousands", "MATH.number.integer-multiply"]) expect(moduleFor(c)?.transfer.length).toBe(3); });
+});
+
+// Milestone 2 (selection governance): hypotheses.ts proposes questions only through discriminatingProbe. Every probe it can return, for every
+// misconception of every family in every pooled module and for a learner of every grade, is selectable (not quarantined), carries a certified
+// answer form (generated) and is within the learner's grade; the result is asked only through moduleState (intervention.ts, registered).
+describe("hypotheses.ts resolution probes pass the eligibility gate (Milestone 2)", () => {
+  test("every discriminating probe is selectable, form-certified and within grade", () => {
+    let probes = 0;
+    for (const m of modules) {
+      if (!m.pool) continue;
+      const fams = poolFamilies(m);
+      for (const f of fams) {
+        const sample = phasePool(f, "check")[0] ?? phasePool(f, "practice")[0];
+        const p = sample ? problemOf(sample) : null;
+        if (!p) continue;
+        for (const b of p.bugs) {
+          for (const grade of [3, 6, 9, 12]) {
+            const records = _rr("synthetic-gov", [{ kind: "learning_record", record: "enrol", id: "e1", at: "2026-01-01T00:00:00Z", learnerId: "synthetic-gov", sessionId: "s1", grade, academicYear: "2026-27", curriculum: { id: "x", version: "1", hash: "h" } } as never]);
+            const h = { claim: { explanation: b.id, kind: b.kind ?? "procedural", says: b.says }, scope: { question: sample, family: f, observedIn: m.competency, about: null } } as unknown as LearnerHypothesis;
+            const q = discriminatingProbe(h, records);
+            if (!q) continue;
+            probes++;
+            expect(selectable(q)).toBe(true);
+            expect(quarantined(q)).toBe(false);
+            if (q.startsWith("gen:")) expect(formCertified(q)).toBe(true);
+          }
+        }
+      }
+    }
+    expect(probes).toBeGreaterThan(0);
+  }, LONG);
 });

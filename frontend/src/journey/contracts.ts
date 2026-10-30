@@ -12,7 +12,7 @@ export type Authority = "mathematical-grader" | "evidence-engine" | "adaptive-en
 export const DECIDES: Record<Authority, readonly string[]> = {
   "mathematical-grader": ["correctness", "derivation-authorization"],
   "evidence-engine": ["observation", "hypothesis", "retention-schedule"],
-  "adaptive-engine": ["investigation", "teaching-selection", "recheck", "retention-policy"],
+  "adaptive-engine": ["investigation", "teaching-selection", "recheck", "retention-policy", "recovery"],
   renderer: ["presentation", "interaction-event"],
 };
 

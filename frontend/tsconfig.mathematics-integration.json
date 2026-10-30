@@ -21,7 +21,8 @@
     "../packages/learning/scripts",
     "../tools/mathematics/prerequisite-report.mts",
     "../tools/mathematics/fingerprint-portability.mts",
-    "src/writing"
+    "src/writing",
+    "src/journey"
   ],
   "exclude": [
     "../packages/learning/src/e7-finalisation.test.ts",
