@@ -1,7 +1,7 @@
 /** UI adapter only: all diagnostic, prerequisite and next-activity decisions remain in the shared engine. */
 import {moduleFor} from '../../../packages/learning/src/content';
 import {diagnose} from '../../../packages/learning/src/diagnostic';
-import {familyOf,investigateContext,recovery} from '../../../packages/learning/src/intervention';
+import {familyOf,investigateContext,moduleState,recovery} from '../../../packages/learning/src/intervention';
 import {nextActivity} from '../../../packages/learning/src/plan';
 import {assigned,type CurriculumRelease,type Chapter,type Section} from '../../../packages/learning/src/curriculum';
 import type {Ctx} from './Learn';
@@ -28,6 +28,9 @@ export function topicPlan(target:string,release:CurriculumRelease,ctx:Ctx,minute
  const items:{competency:string;reason:string;minutes:number}[]=[];
  const support=result.support;
  if(support&&result.recovery?.active===support&&moduleFor(support))items.push({competency:support,reason:result.recovery?.plan?.why??'Check this supporting skill.',minutes:15});
+ // findings@1: when the target's own module has teaching pending (e.g. a misunderstanding the check established), the target comes next
+ const tm=moduleFor(target)?moduleState(target,ctx.records,ctx.evidence(target),ctx.now,ctx.session):null;
+ if(tm&&['strategy','chapter','guided','check'].includes(tm.phase)&&!items.some(i=>i.competency===target))items.push({competency:target,reason:tm.reason,minutes:15});
  while(items.length*15<minutes){
   const next=nextActivity(scope,ctx.evidence,ctx.records);
   if(!next.competency||items.some(i=>i.competency===next.competency))break;

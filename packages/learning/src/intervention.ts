@@ -149,8 +149,17 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // a misunderstanding already established elsewhere (diagnostic@2, on a problem the learner was stuck on) replaces the
   // exploratory questions here: it is not asked again; strategy probes and teaching follow as usual
   const asked = diagnose(m, records.attempts);
-  const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: established.kind === "conceptual" ? "conceptual" : established.kind === "procedural" ? "procedural" : "recall", confidence: asked.confidence } : asked;
-  const shown = ev.status === "independent" || ev.status === "transfer" || ev.status === "verified";
+  // findings@1: a misunderstanding diagnostic@2 established on this module's own questions (from the learner's records:
+  // the first answer and the investigation answers) is taught here until a fresh answer alone after teaching is right.
+  // It needs two matching answers (reason()); one slip, or an uncertain investigation, establishes nothing. It replaces
+  // an inconclusive own diagnosis only, and it does not change the evidence or the status: it decides what to teach.
+  const own = established ? null : ownFinding(m, records);
+  const open = !!own && !findingResolved(m, own, records);
+  const inconclusive = !asked.result || asked.result === "insufficient_evidence" || asked.result === "secure";
+  const d: Diagnosis = established && !asked.result ? { ...asked, next: null, result: established.kind === "conceptual" ? "conceptual" : established.kind === "procedural" ? "procedural" : "recall", confidence: asked.confidence }
+    : open && inconclusive ? { ...asked, next: null, result: own!.kind, confidence: asked.confidence }
+    : asked;
+  const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !open;
   const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null;
   if (ev.retention === "due") {
     // the delayed check: the module's own questions, then fresh ones from the pool's delayed-check part
@@ -211,7 +220,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (s && answered(records, s.check)) s = order.find((x) => !answered(records, x.check) && !records.teaching.some((t) => t.competency === competency && t.strategy === x.id)) ?? null;
     if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
     const before = records.teaching.some((t) => t.competency === competency);
-    return { ...base, phase: "chapter", strategy: s, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : diagnosisReason(d) };
+    return { ...base, phase: "chapter", strategy: s, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open ? `${own!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
   }
   if (decision.action === "guided_practice" && st) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) return { ...base, phase: "check", question: st.check, strategy: st, diagnosis: d, decision, reason: "Now one new question on your own, with no hints." };
@@ -222,6 +231,42 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   }
   const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
   return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "One more question on your own." };
+}
+
+/** diagnostic@2 on one question from the learner's records: its first answer and the investigation answers (context
+ * investigate:<question>, first tries). The same reading recovery uses. */
+export function investigation(qid: string, records: LearnerRecords): { reasoning: Reasoning | null; follow: Attempt[] } {
+  const fam = familyOf(qid);
+  const first = records.attempts.find((a) => a.questionId === qid);
+  if (!fam || !first) return { reasoning: null, follow: [] };
+  const follow = records.attempts.filter((a) => a.context === investigateContext(qid) && a.n === 1);
+  return { reasoning: reason(fam, [{ questionId: fam, response: first.response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))]), follow };
+}
+export interface Finding extends Established {
+  /** the question it was established on, the explanation, the skill it points to, and when (the last investigation answer) */
+  question: string;
+  explanation: string;
+  competency: string | null;
+  at: string;
+}
+/** findings@1: the latest misunderstanding established (status "established", not secure/unexplained) by investigating
+ * a wrong first answer, alone, to one of this module's questions. null when nothing was investigated or it is unsure. */
+export function ownFinding(m: Module, records: LearnerRecords): Finding | null {
+  const wrong = records.attempts.filter((a) => of(m)(a) && a.n === 1 && independentAttempt(a) && !rightAnswer(a) && !a.context);
+  for (const a of [...wrong].reverse()) {
+    if (!records.attempts.some((x) => x.context === investigateContext(a.questionId))) continue; // never investigated
+    const { reasoning: r, follow } = investigation(a.questionId, records);
+    const b = r?.status === "established" ? r.best : null;
+    if (!b || !follow.length || b.kind === "secure" || b.kind === "unexplained") continue;
+    return { kind: b.kind, says: b.says, question: a.questionId, explanation: b.id, competency: b.competency, at: follow.at(-1)!.at };
+  }
+  return null;
+}
+/** A finding is resolved when, after teaching on this skill that came after it, a fresh question alone is right. */
+export function findingResolved(m: Module, f: Finding, records: LearnerRecords): boolean {
+  const taught = records.teaching.filter((t) => t.competency === m.competency && t.at > f.at);
+  if (!taught.length) return false;
+  return records.attempts.some((a) => of(m)(a) && a.at > taught[0].at && independentAttempt(a) && !a.context && rightAnswer(a));
 }
 
 const diagnosisReason = (d: Diagnosis) =>
@@ -278,9 +323,11 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   let reasoning: Reasoning | null = null;
   let plan: RecoveryState["plan"] = null;
   if (fam) {
-    const follow = records.attempts.filter((a) => a.context === investigateContext(originalQid) && a.n === 1);
-    reasoning = reason(fam, [{ questionId: fam, response: tries[0].response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))]);
-    if (reasoning?.status === "need_more" && reasoning.next) return { ...base, reasoning, phase: "investigate", active: null, question: reasoning.next, reason: "One more question to understand what happened (it does not count against you)." };
+    reasoning = investigation(originalQid, records).reasoning;
+    // a follow-up the learner has already answered (anywhere) is not new evidence: a repeat is a second try (n > 1), which
+    // the reading leaves out, so asking it again would never move the investigation on. Then the reading stays unsure.
+    const fresh = reasoning?.next && !records.attempts.some((a) => exposureKey(a.questionId) === exposureKey(reasoning!.next!)) ? reasoning.next : null;
+    if (reasoning?.status === "need_more" && fresh) return { ...base, reasoning, phase: "investigate", active: null, question: fresh, reason: "One more question to understand what happened (it does not count against you)." };
     if (reasoning) plan = nextFromReasoning(reasoning, q.competency);
     if (plan && plan.kind !== "unsure" && plan.competency) {
       const best = reasoning!.best!;
