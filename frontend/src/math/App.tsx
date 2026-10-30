@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from "react";
+import { useCallback, useReducer, useState } from "react";
 import type { RendererEvent, FeedbackState, PresentationMode, SupportedLocale } from "./types";
 import { LearningScreen } from "./components/LearningScreen";
 import {
@@ -70,6 +70,7 @@ const initialState: AppState = {
 
 export function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [debugMode, setDebugMode] = useState(false);
 
   const handleEvent = useCallback(
     (event: RendererEvent) => {
@@ -95,63 +96,76 @@ export function App() {
     feedback: state.feedback,
     hintLevel: state.hintLevel,
     questionNumber: 1,
-    totalQuestions: 1,
+    totalQuestions: 5,
   });
 
   return (
     <div className="math-app">
-      {/* Mode & locale switcher (for demo/testing — not part of the renderer) */}
-      <header className="demo-controls">
-        <div className="demo-controls-inner">
-          <span className="demo-title">OpenPath Math Renderer</span>
-          <div className="demo-switches">
-            <label>
-              Mode{" "}
-              <select
-                value={state.mode}
-                onChange={(e: { target: { value: string } }) =>
-                  dispatch({ type: "mode_changed", mode: e.target.value as PresentationMode })
-                }
-              >
-                <option value="minimal">Minimal</option>
-                <option value="guided">Guided</option>
-                <option value="visual-interactive">Visual-Interactive</option>
-              </select>
-            </label>
-            <label>
-              Lang{" "}
-              <select
-                value={state.locale}
-                onChange={(e: { target: { value: string } }) =>
-                  dispatch({ type: "locale_changed", locale: e.target.value as SupportedLocale })
-                }
-              >
-                <option value="en">English</option>
-                <option value="ta">தமிழ்</option>
-              </select>
-            </label>
-            {state.feedback.level !== "none" && (
-              <button
-                type="button"
-                className="demo-reset"
-                onClick={() => dispatch({ type: "reset" })}
-              >
-                Reset
-              </button>
-            )}
+      {/* Debug controls — hidden by default, activated by toggle */}
+      {debugMode && (
+        <header className="lr-debug-bar">
+          <div className="lr-debug-bar-inner">
+            <span className="lr-debug-title">Debug Mode</span>
+            <div className="lr-debug-switches">
+              <label>
+                Mode{" "}
+                <select
+                  value={state.mode}
+                  onChange={(e: { target: { value: string } }) =>
+                    dispatch({ type: "mode_changed", mode: e.target.value as PresentationMode })
+                  }
+                >
+                  <option value="minimal">Minimal</option>
+                  <option value="guided">Guided</option>
+                  <option value="visual-interactive">Visual-Interactive</option>
+                </select>
+              </label>
+              <label>
+                Lang{" "}
+                <select
+                  value={state.locale}
+                  onChange={(e: { target: { value: string } }) =>
+                    dispatch({ type: "locale_changed", locale: e.target.value as SupportedLocale })
+                  }
+                >
+                  <option value="en">English</option>
+                  <option value="ta">தமிழ்</option>
+                </select>
+              </label>
+              {state.feedback.level !== "none" && (
+                <button
+                  type="button"
+                  className="lr-debug-btn"
+                  onClick={() => dispatch({ type: "reset" })}
+                >
+                  Reset
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       <LearningScreen spec={spec} onEvent={handleEvent} />
 
-      {/* Event log (for testing/demo — shows the renderer's output) */}
-      {state.events.length > 0 && (
-        <details className="demo-events">
+      {/* Event log — debug mode only */}
+      {debugMode && state.events.length > 0 && (
+        <details className="lr-debug-events" open>
           <summary>Event log ({state.events.length} events)</summary>
           <pre>{JSON.stringify(state.events, null, 2)}</pre>
         </details>
       )}
+
+      {/* Debug toggle — small unobtrusive button */}
+      <button
+        type="button"
+        className="lr-debug-toggle"
+        onClick={() => setDebugMode(!debugMode)}
+        aria-label={debugMode ? "Hide debug controls" : "Show debug controls"}
+        title={debugMode ? "Hide debug controls" : "Show debug controls"}
+      >
+        {debugMode ? "×" : "⚙"}
+      </button>
     </div>
   );
 }

@@ -31,6 +31,13 @@ export function FeedbackPanel({ feedback, strings }: FeedbackPanelProps) {
 
       {feedback.message && <p className="lr-feedback-message">{feedback.message}</p>}
 
+      {/* Educational evidence — identifies the mathematical step demonstrated */}
+      {feedback.evidence && (
+        <div className="lr-feedback-evidence">
+          {feedback.evidence}
+        </div>
+      )}
+
       {feedback.evidence && !feedback.verified && (
         <p className="lr-feedback-unverified" role="note">
           <em>Unverified explanation</em>

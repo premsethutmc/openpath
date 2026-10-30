@@ -9,6 +9,7 @@ import { WorkingPanel } from "./WorkingPanel";
 import { ProgressBar } from "./ProgressBar";
 import { NavControls } from "./NavControls";
 import { PlaceValueViz } from "./PlaceValueViz";
+import { TeacherGuide } from "./TeacherGuide";
 
 interface LearningScreenProps {
   spec: RenderSpec;
@@ -79,6 +80,9 @@ export function LearningScreen({ spec, onEvent }: LearningScreenProps) {
 
   const modeClass = `lr-mode-${spec.mode}`;
 
+  // Determine teacher guidance tone and message based on current state
+  const teacherState = getTeacherState(spec, strings);
+
   return (
     <main
       className={`lr-screen ${modeClass}`}
@@ -92,17 +96,34 @@ export function LearningScreen({ spec, onEvent }: LearningScreenProps) {
 
       {/* Main content area — responsive grid */}
       <div className="lr-content">
-        {/* Left / Top: Question + Visual */}
+        {/* Left / Top: Question + Teacher guidance */}
         <div className="lr-left">
           <QuestionPanel question={spec.question} />
 
-          {hasVisual && spec.visual?.type === "place-value" && (
-            <PlaceValueViz params={spec.visual.params as unknown as PlaceValueParams} />
+          {/* Teacher guidance — contextual to current state */}
+          {spec.mode !== "minimal" && teacherState && (
+            <TeacherGuide
+              message={teacherState.message}
+              detail={teacherState.detail}
+              tone={teacherState.tone}
+              showCharacter={true}
+              strings={strings}
+            />
+          )}
+
+          {/* Hints below teacher on desktop */}
+          {hasHints && (
+            <HintPanel hints={spec.hints} onRequestHint={handleHintRequest} strings={strings} />
           )}
         </div>
 
-        {/* Right / Bottom: Input + Working + Feedback + Hints */}
+        {/* Right / Bottom: Visual (dominant) + Working + Input + Feedback */}
         <div className="lr-right">
+          {/* Place-value visualization — the dominant interactive element */}
+          {hasVisual && spec.visual?.type === "place-value" && (
+            <PlaceValueViz params={spec.visual.params as unknown as PlaceValueParams} />
+          )}
+
           {/* Working steps */}
           {hasWorking && spec.working && (
             <WorkingPanel
@@ -134,11 +155,6 @@ export function LearningScreen({ spec, onEvent }: LearningScreenProps) {
           {hasFeedback && (
             <FeedbackPanel feedback={spec.feedback} strings={strings} />
           )}
-
-          {/* Hints */}
-          {hasHints && (
-            <HintPanel hints={spec.hints} onRequestHint={handleHintRequest} strings={strings} />
-          )}
         </div>
       </div>
 
@@ -161,4 +177,48 @@ export function LearningScreen({ spec, onEvent }: LearningScreenProps) {
       )}
     </main>
   );
+}
+
+/**
+ * Determine the teacher guidance state based on the current spec.
+ * Returns message, detail and tone for the TeacherGuide component.
+ *
+ * This function reads from the spec — it does NOT make pedagogical decisions.
+ * The teaching composer (layer C) controls what appears in the spec.
+ */
+function getTeacherState(
+  spec: RenderSpec,
+  _strings: ReturnType<typeof getStrings>,
+): { message: string; detail?: string; tone: "neutral" | "encouraging" | "celebrating" | "thinking" } | null {
+  // After correct answer — celebrate and identify the mathematical step
+  if (spec.feedback.level === "correct") {
+    return {
+      message: spec.feedback.evidence ?? "Well done!",
+      detail: spec.feedback.message,
+      tone: "celebrating",
+    };
+  }
+
+  // After incorrect answer — encourage retry
+  if (spec.feedback.level === "incorrect") {
+    return {
+      message: spec.feedback.message ?? "Let’s try again!",
+      detail: "Look at the place-value chart above. Start with the ones column.",
+      tone: "encouraging",
+    };
+  }
+
+  // Hints are being shown — thinking mode
+  if (spec.hints.currentLevel > 0) {
+    return {
+      message: "Take your time working through each column.",
+      tone: "thinking",
+    };
+  }
+
+  // Default — neutral welcome
+  return {
+    message: "Break the numbers into ones and tens, then add each column.",
+    tone: "neutral",
+  };
 }
