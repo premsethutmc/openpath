@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { moduleFor, needsMarking, question } from "../../../packages/learning/src/content";
 import { problemOf } from "../../../packages/learning/src/families";
 import { modulePhasePool } from "../../../packages/learning/src/library";
-import { teachingLesson, type LessonBlock } from "../../../packages/learning/src/teaching-contract";
+import { SHOWCASE, teachingLesson, type LessonBlock } from "../../../packages/learning/src/teaching-contract";
 import { teachingScopeFor } from "../../../packages/learning/src/teaching-presentation";
 import { Figure } from "../year/Figure";
 import { ProgressiveWorkedExample, RepresentationRenderer, TeachingVisualRenderer } from "./TeachingPrimitives";
@@ -64,7 +64,8 @@ export function TeachingContent({ competency, topic, onPractice, resumeKey }: { 
   const intro = scope?.introduction ?? (module && blocks.length ? null : topic.description);
   const first = blocks[0];
   // the first section is the idea itself: when it says exactly what the page heading and introduction say, say it once
-  const introRepeats = !!first && !!intro && first.text.map(displayed).join(" ").trim() === intro.trim();
+  // in the Grade 10 showcase the concept section states the idea, so a summary introduction above it would say it twice
+  const introRepeats = !!first && !!intro && (first.text.map(displayed).join(" ").trim() === intro.trim() || (SHOWCASE.competencies.includes(competency) && first.role === "concept"));
   return <main className="teaching-page">
     <header className="teaching-head">
       <p className="teaching-crumb">{topic.breadcrumb}</p>

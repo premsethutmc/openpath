@@ -149,7 +149,7 @@ export function ProgressiveWorkedExample({ example, storageKey }: { example: Wor
     <div className="worked-steps" aria-live="polite">
       {example.steps.slice(0, shown).map((step, index) => <div className="worked-step" key={`${step.expression}-${index}`}>
         <span className="step-number">{index + 1}</span>
-        <div><div className="step-expression">{step.expression}</div><p>{step.explanation}</p></div>
+        <div><div className="step-expression">{step.expression}</div>{step.explanation ? <p>{step.explanation}</p> : null}</div>
       </div>)}
     </div>
     {shown < example.steps.length

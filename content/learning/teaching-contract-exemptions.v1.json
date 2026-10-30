@@ -20,12 +20,6 @@
    "reason": "General rule, not an example: multiply by 10 for one repeating digit, by 100 for two."
   },
   {
-   "competency": "MATH.measurement.sectors",
-   "title": "Think in fractions of a circle",
-   "rule": "text-not-instance",
-   "reason": "General facts, not an example: 90°, 120° and 60° as fractions of a full turn."
-  },
-  {
    "competency": "MATH.measurement.circle-area",
    "title": "Measure with a string",
    "rule": "text-not-instance",

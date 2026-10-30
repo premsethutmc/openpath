@@ -90,8 +90,8 @@ describe("practice tests what was taught", () => {
     const caseOf = FAMILIES.get(problemOf(taught.instance!)!.family)!.teach!.caseOf!;
     const first = problemOf(ordered[0].replace(/:mc$/, ""))!;
     expect(caseOf(first.params), `${c}: first practice ${ordered[0]}`).toBe(caseOf(problemOf(taught.instance!)!.params));
-    const shown = new Set(blocks.flatMap((b) => (b.instance && b.worked ? [exposureKey(b.instance)] : [])));
-    expect(shown.has(exposureKey(ordered[0])), `${c}: practice starts with a question the lesson already worked`).toBe(false);
+    const shown = new Set(blocks.flatMap((b) => (b.instance ? [exposureKey(b.instance)] : [])));
+    expect(shown.has(exposureKey(ordered[0])), `${c}: practice starts with a question the lesson already used`).toBe(false);
     expect([...ordered].sort()).toEqual([...ids].sort());
   }, LONG);
 });
@@ -128,5 +128,52 @@ describe("holdout: mixed-subtype families", () => {
     const two = pool("anbag").items.find((p) => p.form === "typed" && p.params[2] === 0 && p.params[0] !== three.params[0])!;
     const wrong: Module = { ...m, strategies: [{ ...m.strategies[0], guided: three.id, screens: [{ title: "Out of how many?", role: "strategy", instance: three.id, text: alt.textFor!(two.params) }] }] };
     expect(lessonBlocks(wrong).find((b) => b.title === "Out of how many?")!.violations).toContain("text-not-instance");
+  }, LONG);
+});
+
+describe("showcase readiness: each thing said once, solutions checked to the answer", () => {
+  const CURATED6 = ["MATH.number.euclid-algorithm", "MATH.algebra.relations", "MATH.algebra.arithmetic-sequences", "MATH.algebra.quadratic-discriminant", "MATH.geometry.pythagoras", "MATH.probability.classical"];
+  const pictureOf = (b: ReturnType<typeof lessonBlocks>[number]) => b.representation?.kind ?? (b.visual as { kind?: string } | null)?.kind ?? (b.widget as { type?: string } | null)?.type;
+  for (const c of CURATED6) test(`${c}: no repeated sentence, picture or solution; the worked example follows the concept`, () => {
+    const blocks = lessonBlocks(mod(c));
+    const lines = blocks.flatMap((b) => b.text).map((t) => t.replace(/“[^”]*”|"[^"]*"/g, "#").replace(/[−-]?\d+/g, "#").trim());
+    expect(new Set(lines).size, lines.join(" | ")).toBe(lines.length);
+    const pics = blocks.flatMap((b) => (pictureOf(b) ? [pictureOf(b)!.replace(/^triangle$/, "right-triangle")] : []));
+    expect(new Set(pics).size, pics.join(",")).toBe(pics.length);
+    // the first checked solution is in the concept itself (relations) or the section straight after it
+    const w = blocks.findIndex((b) => b.worked?.verified);
+    expect(w, c).toBeGreaterThanOrEqual(0);
+    expect(blocks.slice(0, w).every((b) => b.role === "concept")).toBe(true);
+    // an unchecked solution is never shown beside the checked one
+    expect(blocks.filter((b) => b.worked && !b.worked.verified)).toEqual([]);
+    for (const b of blocks) if (b.label === ROLE_LABEL["worked-example"]) expect(b.worked?.verified).toBe(true);
+  }, LONG);
+
+  test("Euclid: the explanation is said once and the division table is drawn once, on the worked example", () => {
+    const blocks = lessonBlocks(mod("MATH.number.euclid-algorithm"));
+    expect(blocks.filter((b) => b.representation?.kind === "division-chain").map((b) => b.role)).toEqual(["worked-example"]);
+    expect(blocks.flatMap((b) => b.text).filter((t) => t.startsWith("So the HCF does not change")).length).toBe(1);
+  }, LONG);
+
+  test("composite answers: a solution counts as complete only when its steps produce the answer", () => {
+    const at = (c: string) => lessonBlocks(mod(c)).find((b) => b.title === "The method")!;
+    // option, set, tuple, matrix, exact value: produced by the steps
+    for (const c of ["MATH.algebra.quadratic-graphs", "MATH.algebra.sets", "MATH.algebra.linear-systems", "MATH.algebra.matrices", "MATH.trigonometry.ratios", "MATH.algebra.rational-expressions"]) expect(at(c).worked?.verified, c).toBe(true);
+    // the primes of 255 are the divisors used, not results; the factorisation's last step is a check; the square root's last step multiplies back
+    for (const c of ["MATH.number.prime-factorisation", "MATH.algebra.factorisation", "MATH.algebra.polynomial-square-root"]) {
+      expect(at(c).label, c).toBe("Method");
+      expect(at(c).violations, c).toEqual(["worked-unverified"]);
+    }
+    // explanations are the family's justifications, never a trace of the solver
+    for (const b of lessonBlocks(mod("MATH.algebra.linear-systems"))) for (const s of b.worked?.steps ?? []) expect(s.explanation).not.toMatch(/→|: .* and /);
+  }, LONG);
+
+  test("sectors: 'fractions of a circle' is paired only with a plain sector, in its own angle and radius", () => {
+    const b = lessonBlocks(mod("MATH.measurement.sectors")).find((x) => x.title === "Think in fractions of a circle")!;
+    const p = problemOf(b.instance!)!;
+    expect(p.params[0]).toBe(3);
+    expect(b.violations).toEqual([]);
+    expect(b.exempt).toEqual([]);
+    expect(b.text.join(" ")).toContain(`${[60, 72, 90, 105, 115, 120, 135, 150][p.params[3]]}°`);
   }, LONG);
 });

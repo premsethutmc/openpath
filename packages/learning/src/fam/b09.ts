@@ -2579,7 +2579,17 @@ B09.push(
       idea: "A sector of angle θ is θ/360 of a circle, so its area is (θ/360) × πr². Shapes from wipers and designs are built from sectors, squares and triangles by adding and taking away.",
       method: "Split the shape: a wiper's path is a big sector minus a small one; corner quarter circles together make a whole circle; a leaf is two segments, each a quarter circle minus a right triangle. Work out each part, then combine.",
       alternatives: [
-        { id: "fraction_of_circle", title: "Think in fractions of a circle", kind: "conceptual", text: ["90° is a quarter of a full turn, 120° a third, 60° a sixth.", "So the sector is that fraction of πr²."], visual: () => ({ type: "circle", radius: "r", sector: 90 }) },
+        {
+          id: "fraction_of_circle", title: "Think in fractions of a circle", kind: "conceptual", text: ["90° is a quarter of a full turn, 120° a third, 60° a sixth.", "So the sector is that fraction of πr²."],
+          // stage 2: only for a plain sector (the lighthouse), with that question's own angle and radius; a wiper's path or a tile's
+          // design is not one sector, so this way of explaining is not paired with them
+          applies: ([mode]) => mode === 3,
+          textFor: ([, , b, t]) => {
+            const g = gcd(WANG[t], 360), n = WANG[t] / g, d = 360 / g;
+            return [`${WANG[t]}° is ${WANG[t]}/360 = ${n === 1 ? `1/${d}` : `${n}/${d}`} of a full turn of 360°.`, `So the sector is ${n}/${d} of the whole circle of radius ${b} km: its area is ${n}/${d} × π × ${b}².`];
+          },
+          visual: ([, , b, t]) => ({ type: "circle", radius: `${b} km`, sector: WANG[t] }),
+        },
         { id: "add_take", title: "Add and take away", kind: "procedural", text: ["Write the shaded area as (big shape) − (pieces cut out) or (piece) + (piece).", "Work out each piece separately and combine them at the end."] },
       ],
     },

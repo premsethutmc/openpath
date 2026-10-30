@@ -182,7 +182,7 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
   const exampleId = scope.strategyId ? module.strategies.find((s) => s.id === scope.strategyId)?.guided : undefined;
   const exampleProblem = exampleId ? problemOf(exampleId) : null;
   const primaryId = exampleId && exampleProblem && scope.accepts(exampleProblem) ? exampleId : practiceIds[0] ?? module.practice[0];
-  return lessonScreens(module).map(({ screen, strategy }, index) => {
+  const blocks = lessonScreens(module).map(({ screen, strategy }, index): LessonBlock => {
     const role = roleOf(screen, strategy);
     const violations: Violation[] = [];
     const verified: string[] = [];
@@ -269,6 +269,57 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
     const exempt = EXEMPTIONS.entries.filter((e) => e.competency === module.competency && e.title === screen.title && violations.includes(e.rule)).map(({ rule, reason }) => ({ rule, reason }));
     return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
   });
+  return SCOPE.has(module.competency) ? withoutRepetition(blocks) : blocks;
+}
+
+/** Stage 2 showcase scope: a lesson says each thing once. Applied after the checks, so it never hides a violation.
+ *  - a sentence already said in an earlier section (the same wording with other numbers or names) is not said again;
+ *  - each kind of picture is drawn once, on the checked worked example when it has one, otherwise where it first appears;
+ *  - unchecked steps are not shown beside a checked worked example (only a Method section keeps its unchecked steps). */
+const PICTURE_ALIAS: Record<string, string> = { triangle: "right-triangle" };
+function pictureKind(b: LessonBlock) {
+  const k = b.representation?.kind ?? (b.visual as { kind?: string } | null)?.kind ?? (b.widget as { type?: string } | null)?.type;
+  return k ? PICTURE_ALIAS[k] ?? k : null;
+}
+function caseKey(id: string | null) {
+  const p = id ? problemOf(id) : null;
+  const caseOf = p ? FAMILIES.get(p.family)?.teach?.caseOf : undefined;
+  // without the family's own cases, two questions are not known to be the same kind: nothing is treated as a repeat
+  return p ? (caseOf ? `${p.family}:${caseOf(p.params)}` : p.id) : null;
+}
+export function withoutRepetition(blocks: LessonBlock[]): LessonBlock[] {
+  const template = (line: string) => line.replace(/“[^”]*”|"[^"]*"/g, "#").replace(/[−-]?\d+(?:\.\d+)?/g, "#").replace(/\s+/g, " ").trim().toLowerCase();
+  const said = new Set<string>();
+  const keepPicture = new Map<string, number>();
+  blocks.forEach((b, i) => {
+    const k = pictureKind(b);
+    if (!k) return;
+    if (!keepPicture.has(k) || (b.role === "worked-example" && b.worked?.verified && blocks[keepPicture.get(k)!].role !== "worked-example")) keepPicture.set(k, i);
+  });
+  const checkedCases = new Set(blocks.flatMap((b) => (b.worked?.verified ? [caseKey(b.instance)] : [])));
+  // one checked solution per kind of question: a later, shorter one of the same kind is a repeat (its section keeps its words, as a Method)
+  const solved = new Map<string, number>();
+  const out = blocks.map((b, i) => {
+    const text = b.text.filter((line) => { const t = template(line); if (said.has(t)) return false; said.add(t); return true; });
+    const k = pictureKind(b);
+    const picture = !k || keepPicture.get(k) === i;
+    // unchecked steps are shown only as a lesson's labelled Method, never beside a checked worked example
+    let worked = b.worked && !b.worked.verified && (checkedCases.has(caseKey(b.instance)) || (checkedCases.size > 0 && b.role !== "worked-example")) ? null : b.worked;
+    let label = b.label;
+    if (worked?.verified) {
+      const key = caseKey(b.instance)!, before = solved.get(key);
+      if (before !== undefined && before >= worked.steps.length) { worked = null; if (b.role === "worked-example") label = "Method"; }
+      else solved.set(key, Math.max(before ?? 0, worked.steps.length));
+    }
+    // a quoted question that refers to a picture the section does not draw
+    const hasPicture = picture && !!k;
+    return { ...b, label, text: hasPicture ? text : text.map((line) => line.replace(/, as in the picture(?=[.?])/g, "")), worked, ...(picture ? {} : { representation: null, visual: null, widget: null }) };
+  });
+  // the journey is concept, then worked example: a checked worked example comes straight after the concept sections
+  const w = out.findIndex((b) => b.role === "worked-example" && b.worked?.verified);
+  const lastConcept = out.reduce((n, b, i) => (b.role === "concept" ? i : n), -1);
+  if (w > lastConcept + 1) out.splice(lastConcept + 1, 0, ...out.splice(w, 1));
+  return out;
 }
 
 /** The question's own solution from the family's solver: steps, explanations, the arithmetic claims that hold, and whether the
@@ -280,8 +331,10 @@ export function familySteps(p: Problem): { worked: NonNullable<LessonBlock["work
   const last = p.steps.at(-1)!;
   const lastValue = typeof last.value === "number" ? last.value : Array.isArray(last.value) ? NaN : numericAnswer(String(last.value));
   // the last step's value is the answer (as a number, or exactly as the answer is written), and the family's independent check accepts it
-  const sameValue = (Number.isFinite(answer) && Math.abs(lastValue - answer) < 1e-9) || show(last.value) === p.answer;
-  const checked = (() => { try { return family.validate(p.params, Number.isFinite(answer) ? answer : p.answer); } catch { return false; } })();
+  const sameValue = (Number.isFinite(answer) && Math.abs(lastValue - answer) < 1e-9) || squash(show(last.value)) === squash(p.answer) || reachesComposite(p);
+  // the family's independent check accepts the stored answer (families take a number, the written answer, a list, or an option index)
+  const forms: unknown[] = [p.answer, signedNumbers(p.answer), ...(Number.isFinite(answer) ? [answer] : []), ...(/^[A-D]$/.test(p.answer) ? ["ABCD".indexOf(p.answer)] : [])];
+  const checked = forms.some((v) => { try { return family.validate(p.params, v as never); } catch { return false; } });
   const complete = sameValue && checked;
   const OPS: Record<string, string> = { add: "+", subtract: "−", multiply: "×", divide: "÷" };
   const claims = p.steps.flatMap((st) => {
@@ -290,9 +343,31 @@ export function familySteps(p: Problem): { worked: NonNullable<LessonBlock["work
     const expr = `${a < 0 ? `(${a})` : a} ${OPS[st.op]} ${b < 0 ? `(${b})` : b}`;
     return holds(expr, st.value) ? [`${expr} = ${st.value}`] : [];
   });
-  const steps = p.steps.map((st) => ({ expression: displayStep(p, st), explanation: familyStepExplanation(p, st) }));
-  if (steps.some((x) => !x.expression || !x.explanation)) return null;
+  // a step's explanation is shown only when the family states why the step holds (its justification); the generic fallback is a
+  // trace of the solver's operation ("subtract: 2 and −4 → −2"), not an explanation, so the step's own sentence stands alone
+  const steps = p.steps.map((st) => ({ expression: displayStep(p, st), explanation: st.justification ? familyStepExplanation(p, st) : "" }));
+  if (steps.some((x) => !x.expression)) return null;
   return { worked: { question: question(p.id).prompt, steps, verified: complete, source: "family-steps" }, claims };
+}
+const squash = (x: string) => x.replace(/\s+/g, "").replace(/−/g, "-");
+/** Signed numbers as written: "(x − 1)" gives −1, "(−3, 4)" gives −3 and 4. */
+const signedNumbers = (x: string) => [...x.replace(/−/g, "-").matchAll(/([+-])?\s*(\d+(?:\.\d+)?)/g)].map((m) => (m[1] === "-" ? -1 : 1) * Number(m[2]));
+/** Steps that reach an answer that is not one number: an option (the last step picks it), a matrix (its rows, in order), or a
+ *  tuple (every component is the result of a step). Only step results count, never the question's data. */
+function reachesComposite(p: Problem) {
+  const last = p.steps.at(-1)!;
+  if (/^[A-D]$/.test(p.answer)) return typeof last.value === "number" && "ABCD"[last.value] === p.answer;
+  const values = p.steps.map((st) => st.value);
+  if (p.answer.startsWith("[[")) {
+    const rows = values.filter((v): v is string => typeof v === "string" && v.startsWith("["));
+    return rows.length > 0 && JSON.stringify(rows.flatMap(signedNumbers)) === JSON.stringify(signedNumbers(p.answer));
+  }
+  if (p.answer.startsWith("(")) {
+    const got = values.flatMap((v) => (typeof v === "number" ? [v] : typeof v === "string" && v.startsWith("(") ? signedNumbers(v) : Array.isArray(v) ? v.filter((x): x is number => typeof x === "number") : []));
+    const want = signedNumbers(p.answer);
+    return want.length > 1 && want.every((w) => got.some((g) => Math.abs(g - w) < 1e-9));
+  }
+  return false;
 }
 const displayStep = (p: Problem, st: Problem["steps"][number]) => {
   try { return explainStep(p, st); } catch { return ""; }
@@ -307,8 +382,9 @@ export function alignedPractice(module: Module, ids: string[]): string[] {
   const caseOf = family?.teach?.caseOf;
   // the lesson is assembled from the candidate list as given (not from the reordered one), so the order never changes what is taught
   const blocks = lessonBlocks(module, ids);
-  // a question the lesson has already worked through (its answer is on the page) is not practice: it goes last
-  const shown = new Set(blocks.flatMap((b) => (b.instance && b.worked ? [exposureKey(b.instance)] : [])));
+  // a question the lesson has already used (its answer or its common wrong answer is on the page) is not practice: it goes last
+  // any question the lesson itself uses (solved, or quoted with its common wrong answer) is not fresh practice
+  const shown = new Set(blocks.flatMap((b) => (b.instance ? [exposureKey(b.instance)] : [])));
   const isShown = (id: string) => shown.has(exposureKey(id));
   const taught = blocks.find((b) => b.worked?.verified && b.instance) ?? blocks.find((b) => b.instance);
   const tp = caseOf && taught?.instance ? problemOf(taught.instance) : null;

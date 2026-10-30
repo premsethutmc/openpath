@@ -97,3 +97,19 @@ The scope is `content/learning/showcase-grade10.v1.json`. It covers 63 competenc
   - Grading is unchanged. The learner journey still uses the authoritative server grader.
 
 Human review checklist: `docs/product/GRADE10_SHOWCASE_REVIEW.md`.
+
+### Showcase readiness pass (Grade 10 scope only)
+
+`withoutRepetition` runs after the checks, so it never hides a violation.
+
+- **Each sentence once.** A sentence already said, even with other numbers or names, is not repeated.
+- **Each kind of picture once.** It is drawn on the checked worked example when there is one.
+- **No unchecked steps beside checked ones.** Unchecked steps are dropped when a checked solution of the same case exists.
+- **No repeated solution.** A shorter checked solution of the same case is dropped, and its section becomes a Method.
+- **Order.** The checked worked example moves straight after the concept.
+- **Picture references.** A quoted question loses "as in the picture" when its section draws none.
+
+Two related changes:
+
+- **Composite answers.** The family-step check now recognises option, set, tuple, matrix and exact answers produced by the steps.
+- **Practice.** Practice now also puts last any question a lesson quotes, such as a common mistake's question.

@@ -3,17 +3,17 @@
  "contract": "teaching-contract@1",
  "modules": 336,
  "sections": 1472,
- "workedVerified": 148,
- "workedLabelled": 50,
+ "workedVerified": 158,
+ "workedLabelled": 60,
  "byRule": {
   "no-instance": 17,
-  "worked-unverified": 266,
+  "worked-unverified": 255,
   "text-not-instance": 113,
   "decorative-visual": 8
  },
  "exempted": {
   "no-instance": 6,
-  "text-not-instance": 12
+  "text-not-instance": 11
  },
  "byModule": {
   "MATH.number.equivalent-fractions": {
@@ -458,9 +458,6 @@
    "text-not-instance": 2,
    "worked-unverified": 1
   },
-  "MATH.number.primes": {
-   "worked-unverified": 1
-  },
   "MATH.reasoning.counterexamples-intro": {
    "worked-unverified": 1
   },
@@ -638,19 +635,7 @@
   "MATH.algebra.linear-two-variables": {
    "worked-unverified": 1
   },
-  "MATH.algebra.rational-expressions": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.linear-systems": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.linear-systems-three-variables": {
-   "worked-unverified": 1
-  },
   "MATH.algebra.polynomial-square-root": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.quadratic-graphs": {
    "worked-unverified": 1
   },
   "MATH.measurement.heron": {
@@ -675,12 +660,6 @@
   "MATH.probability.tree-diagrams": {
    "worked-unverified": 1
   },
-  "MATH.reasoning.mathematical-argument": {
-   "worked-unverified": 1
-  },
-  "MATH.reasoning.model-selection": {
-   "worked-unverified": 1
-  },
   "MATH.statistics.grouped-data": {
    "worked-unverified": 1
   },
@@ -688,12 +667,6 @@
    "worked-unverified": 1
   },
   "MATH.statistics.weighted-mean": {
-   "worked-unverified": 1
-  },
-  "MATH.trigonometry.ratios": {
-   "worked-unverified": 1
-  },
-  "MATH.algebra.sets": {
    "worked-unverified": 1
   },
   "MATH.algebra.function-transformations": {
@@ -750,9 +723,6 @@
   "MATH.algebra.linear-programming": {
    "worked-unverified": 1
   },
-  "MATH.algebra.matrices": {
-   "worked-unverified": 1
-  },
   "MATH.algebra.matrix-systems": {
    "worked-unverified": 1
   },
@@ -776,9 +746,6 @@
    "worked-unverified": 1
   },
   "MATH.sets-relations.binary-operations": {
-   "worked-unverified": 1
-  },
-  "MATH.sets-relations.function-types": {
    "worked-unverified": 1
   },
   "MATH.sets-relations.relation-properties": {

@@ -1410,7 +1410,7 @@
       {
        "title": "b², then 4ac, then subtract",
        "text": [
-        "Write b², then 4ac with c's own sign, then subtract. The sign of b² − 4ac decides: positive, two solutions; zero, one; negative, none."
+        "Write b², then 4ac with c's own sign, then subtract."
        ],
        "math": [
         "How many different real solutions does x² − x + 3 = 0 have?",
@@ -35107,25 +35107,24 @@
       {
        "title": "Think in fractions of a circle",
        "text": [
-        "90° is a quarter of a full turn, 120° a third, 60° a sixth.",
-        "So the sector is that fraction of πr²."
+        "72° is 72/360 = 1/5 of a full turn of 360°.",
+        "So the sector is 1/5 of the whole circle of radius 7 km: its area is 1/5 × π × 7²."
        ],
        "math": [
-        "A car's wiper blade cleans the part of the windscreen between 7 cm and 56 cm from its pivot as it sweeps through 72°. Taking π = 22/7, what area does it clean in one sweep, in cm²?",
-        "Sector out to the blade's tip: 72/360 × 22/7 × 3136 = 1971.2",
-        "Sector the blade does not reach: 72/360 × 22/7 × 49 = 30.8",
-        "Area cleaned: outer sector − inner sector = 1940.4"
+        "A lighthouse lights up the sea in a sector of angle 72° out to a distance of 7 km. Taking π = 22/7, what area of sea does it light, in km²?",
+        "The lit sector: 72/360 × 22/7 × 49 = 30.8"
        ],
        "widget": {
         "type": "circle",
-        "radius": "r",
-        "sector": 90
+        "radius": "7 km",
+        "sector": 72
        },
        "role": "strategy",
-       "instance": "gen:aiwiper:0,7,56,1"
+       "instance": "gen:aiwiper:3,0,7,1",
+       "textFrom": "instance"
       }
      ],
-     "guided": "gen:aiwiper:0,7,56,2",
+     "guided": "gen:aiwiper:0,7,56,1",
      "check": "gen:aiwiper:0,7,56,5:mc"
     },
     {
@@ -35141,16 +35140,16 @@
         "Work out each piece separately and combine them at the end."
        ],
        "math": [
-        "A car's wiper blade cleans the part of the windscreen between 7 cm and 56 cm from its pivot as it sweeps through 105°. Taking π = 22/7, what area does it clean in one sweep, in cm²?",
-        "Sector out to the blade's tip: 105/360 × 22/7 × 3136 = 8624/3",
-        "Sector the blade does not reach: 105/360 × 22/7 × 49 = 539/12",
-        "Area cleaned: outer sector − inner sector = 2829.75"
+        "A car's wiper blade cleans the part of the windscreen between 7 cm and 56 cm from its pivot as it sweeps through 90°. Taking π = 22/7, what area does it clean in one sweep, in cm²?",
+        "Sector out to the blade's tip: 90/360 × 22/7 × 3136 = 2464",
+        "Sector the blade does not reach: 90/360 × 22/7 × 49 = 38.5",
+        "Area cleaned: outer sector − inner sector = 2425.5"
        ],
        "role": "strategy",
-       "instance": "gen:aiwiper:0,7,56,3"
+       "instance": "gen:aiwiper:0,7,56,2"
       }
      ],
-     "guided": "gen:aiwiper:0,7,28,0",
+     "guided": "gen:aiwiper:0,7,56,3",
      "check": "gen:aiwiper:0,28,42,6"
     },
     {
@@ -35172,20 +35171,20 @@
        ]
       }
      ],
-     "guided": "gen:aiwiper:0,7,28,7",
+     "guided": "gen:aiwiper:0,7,28,0",
      "check": "gen:aiwiper:0,35,56,5:mc"
     }
    ],
    "practice": [
-    "gen:aiwiper:0,7,28,6",
-    "gen:aiwiper:0,7,28,5:mc",
-    "gen:aiwiper:0,28,42,1",
+    "gen:aiwiper:0,7,28,7",
+    "gen:aiwiper:0,7,28,6:mc",
+    "gen:aiwiper:0,7,28,5",
     "gen:amseg:37,1,0",
     "gen:amclock:9,10,0,1",
     "gen:amsecinv:6,0,0"
    ],
    "transfer": [
-    "gen:aiwiper:0,28,42,2:mc",
+    "gen:aiwiper:0,28,42,1:mc",
     "gen:amseg:6,0,1:w",
     "gen:amclock:9,6,0,1:w"
    ],

@@ -44,12 +44,12 @@ None of these checks establishes that the teaching is good. Each lesson needs a 
 
 These lessons were checked mechanically only (see `TEACHING_CONTRACT.md`).
 
-Fourteen worked-example sections are labelled **Method** because their solution could not be checked to the answer. They need repair or confirmation before a showcase:
+### Solutions now checked through to the answer
+
+The solver's own steps already reached the answer; the check could not see it for option, set, tuple, matrix and exact answers. These sections are now labelled **Worked example**:
 
 - mathematical-argument (`anpts`)
-- prime-factorisation (`ajpf`)
 - primes (`agprime`)
-- factorisation (`factor`)
 - linear-systems (`alsys`)
 - model-selection (`anpair`)
 - trigonometry ratios (`anstd`)
@@ -57,8 +57,33 @@ Fourteen worked-example sections are labelled **Method** because their solution 
 - function-types (`aqonto`)
 - three-variable systems (`al3sys`)
 - rational expressions (`alratl`)
-- polynomial square root (`alpsq`)
 - quadratic graphs (`alqline`)
 - matrices (`apmmul`)
 
-Seventeen sections in scope (eighteen platform-wide) are exempted, each with a stated reason in `content/learning/teaching-contract-exemptions.v1.json`. A reviewer confirms or rejects every exemption.
+The steps were not changed. Their explanations now show only the family's own justifications; the solver trace ("subtract: 2 and −4 → −2") is no longer shown.
+
+**Review especially:** two of these are terse.
+
+- `anpts`: the conclusion "the three points lie on one straight line" follows from √20 + √5 = √45, which no step states.
+- `anstd`: "Combine the values: 3/4" skips (√2/2)² + (1/2)² = 1/2 + 1/4.
+
+Changing the steps would touch the grader bundle, so they are left for content review.
+
+### Still labelled Method
+
+These three sections need new content, because their steps never produce the answer:
+
+| Lesson | Family | Why the steps do not reach the answer |
+|---|---|---|
+| Prime factorisation | `ajpf` | The primes 3, 5 and 17 appear only as divisors. The steps produce 85, 17 and 1. |
+| Factorisation | `factor` | The answer (−1) comes from the first step. The last step is a check of the sum. |
+| Polynomial square root | `alpsq` | The last step multiplies the answer back out to the original polynomial. |
+
+### Exemptions
+
+Seventeen exemptions remain, sixteen of them in scope, each with a stated reason in `content/learning/teaching-contract-exemptions.v1.json`. A reviewer confirms or rejects every exemption.
+
+One exemption hid a genuine mismatch and was removed:
+
+- **Sectors, "Think in fractions of a circle".** Its text gave 90°, 120° and 60°, but it was paired with a 72° windscreen-wiper question (a ring, not a sector).
+- It is now paired only with plain sector questions, and its text uses that question's own angle and radius ("72° is 72/360 = 1/5 of a full turn …").

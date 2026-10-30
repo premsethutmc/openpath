@@ -466,7 +466,7 @@
       {
        "title": "b², then 4ac, then subtract",
        "text": [
-        "Write b², then 4ac with c's own sign, then subtract. The sign of b² − 4ac decides: positive, two solutions; zero, one; negative, none."
+        "Write b², then 4ac with c's own sign, then subtract."
        ],
        "worked": true
       }
