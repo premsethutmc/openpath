@@ -49,6 +49,10 @@ export interface Screen {
   tip?: string;
   /** A picture (family-kit Visual: strips, array, dots, tenframe, blocks, numberline, clock, coins, bars …). */
   widget?: { type: string; top?: number; bottom?: number; shaded?: number; rows?: number; cols?: number; split?: number; [k: string]: unknown };
+  /** teaching-contract@1: what this section is for (concept, worked-example, strategy, misconception, prerequisite). */
+  role?: import("./family-kit").TeachRole;
+  /** teaching-contract@1: the question this section's text, solution and picture are about. */
+  instance?: string;
 }
 export interface Strategy {
   id: string;

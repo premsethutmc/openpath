@@ -92,6 +92,10 @@ export function familySpec(fam: string): FamilySpec | null {
     ...(word.length ? { word: word.map(itemSignature) } : {}),
     ...(def.cap ? { cap: def.cap } : {}),
     ...(def.teach?.alternatives ? { alternatives: def.teach.alternatives.map((a) => [a.id, a.title, a.kind, ...a.text]) } : {}),
+    // teaching-contract@1: the instance teaching is code, so its output for the specification's examples is fingerprinted
+    ...(def.teach?.instance || def.teach?.alternatives?.some((a) => a.textFor || a.applies)
+      ? { instanceTeaching: examples.map((id) => problemOf(id.replace(/:mc$/, ""))!.params).map((p) => [def.teach!.instance?.(p) ?? null, def.teach!.caseOf?.(p) ?? null, ...(def.teach!.alternatives ?? []).map((a) => [a.applies?.(p) ?? true, a.textFor?.(p) ?? null])]) }
+      : {}),
   });
   return {
     id: fam,

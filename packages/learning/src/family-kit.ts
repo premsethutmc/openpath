@@ -185,9 +185,43 @@ export interface TeachAlternative {
   id: string;
   title: string;
   kind: Bug["kind"];
+  /** The family-level summary (what a reviewer reads). A lesson shows `textFor` for its own example when the family gives it. */
   text: string[];
   /** A picture for this way of explaining, for a worked example's parameters. */
   visual?: (p: number[]) => Visual | null;
+  /** teaching-contract@1: the questions this way of explaining is about (an example is drawn only from these). */
+  applies?: (p: number[]) => boolean;
+  /** teaching-contract@1: the explanation written for one concrete question (the same instance as its example and picture). */
+  textFor?: (p: number[]) => string[];
+}
+
+// ---------------------------------------------------------------- teaching-contract@1 (packages/learning/src/teaching-contract.ts)
+
+/** What a lesson section is for. Only a "worked-example" section whose solution is complete and checked is labelled
+ *  "Worked example"; the others are explanations an educator reviews. */
+export type TeachRole = "concept" | "worked-example" | "strategy" | "misconception" | "prerequisite";
+
+/** A mechanically checkable claim inside a worked step: an arithmetic expression and the value it is said to equal. */
+export interface TeachClaim {
+  expr: string;
+  value: number;
+}
+/** One step of a worked solution for a concrete question. The number and kind of steps belong to the concept. */
+export interface TeachStep {
+  expression: string;
+  explanation: string;
+  claims?: TeachClaim[];
+}
+/** A picture of the actual mathematical object of one question (never decoration). */
+export type Representation =
+  | { kind: "dot-array"; rows: number; cols: number; value: number; caption: string }
+  | { kind: "dot-triangle"; rows: number; value: number; caption: string }
+  | { kind: "sequence-table"; rows: { n: number; value: number; how?: string }[]; change?: "difference" | "ratio"; caption: string };
+/** The teaching for one concrete question: its concept, its worked solution, and a picture of the same instance. */
+export interface InstanceTeaching {
+  concept: { title: string; text: string[] };
+  worked: { steps: TeachStep[]; result: number };
+  representation?: Representation;
 }
 /** What the exact checker needs to verify this family's answers, from the generated parameters (never recovered from the prompt text). A family opts in; null from `statement` leaves that question on the legacy comparison. */
 import type { TypedObject } from "./typed-contract.ts";
@@ -243,7 +277,18 @@ export type Def = {
   expanded?: boolean;
   /** Teaching hints for template strategies: the idea, and the method; alternatives are further ways of explaining
    * (template@2); `visual` draws a worked example's parameters for younger learners. */
-  teach?: { idea: string; method: string; alternatives?: TeachAlternative[]; visual?: (p: number[]) => Visual | null };
+  teach?: {
+    idea: string;
+    method: string;
+    alternatives?: TeachAlternative[];
+    visual?: (p: number[]) => Visual | null;
+    /** teaching-contract@1: the teaching for one concrete question. A family that gives it is taught instance by instance
+     *  (concept, worked solution and picture of the same question); without it the family-level template is used. */
+    instance?: (p: number[]) => InstanceTeaching;
+    /** teaching-contract@1: which kind of question this is (for a family that mixes kinds, such as square and odd-number
+     *  patterns): a lesson draws its sections' questions from different kinds, each taught as itself. */
+    caseOf?: (p: number[]) => string;
+  };
   // ---- families@2
   /** A picture the question needs (it is part of the question, and of its specification). */
   figure?: (p: number[]) => Visual | null;

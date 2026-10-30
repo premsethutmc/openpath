@@ -137,3 +137,13 @@
 .practice-done { display: grid; gap: 10px; }
 .practice-done .primary { width: 100%; min-height: 50px; border: 0; }
 .teaching-nav a, .teaching-nav button { white-space: nowrap; }
+
+/* teaching-contract@1 representations: dots drawn at the question's own size, and sequence tables of its own terms */
+.dot-visual svg { display: block; width: auto; max-width: 100%; max-height: 190px; margin: 0 auto; }
+.dot-visual circle { fill: #6954c8; }
+.sequence-visual table { width: 100%; border-collapse: collapse; table-layout: fixed; text-align: center; font: 600 1.05rem/1.2 Georgia, "Times New Roman", serif; }
+.sequence-visual th { padding: 6px 4px; color: #6255bd; font: 700 .72rem/1.2 system-ui, sans-serif; text-align: left; }
+.sequence-visual td { padding: 8px 2px; border: 1px solid #ddd6ef; }
+.sequence-visual .sequence-how td { font-size: .78rem; color: #4f4a43; }
+.sequence-visual .sequence-change td { color: #2f7a52; }
+.worked-label { margin-top: 14px; }

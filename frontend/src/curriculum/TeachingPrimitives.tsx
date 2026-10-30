@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import type { Question, Screen } from "../../../packages/learning/src/content";
 import type { Problem as FamilyProblem } from "../../../packages/learning/src/families";
 import type { TeachingVisual } from "../../../packages/learning/src/teaching-presentation";
+import type { Representation } from "../../../packages/learning/src/family-kit";
 
 const signed = (value: number) => String(value).replace("-", "−");
 const wrapped = (value: number) => value < 0 ? `(${signed(value)})` : signed(value);
@@ -80,6 +81,33 @@ export function TeachingVisualRenderer({ visual }: { visual: TeachingVisual }) {
   if (visual.kind === "cartesian-grid") return <PairGrid rows={visual.rows} columns={visual.columns} />;
   if (visual.kind === "equation") return <EquationTransformation {...visual} />;
   return <LabeledGeometry {...visual} />;
+}
+
+/** teaching-contract@1: a picture of the question's own mathematical object, drawn from its values (never decoration). */
+export function RepresentationRenderer({ representation: r }: { representation: Representation }) {
+  if (r.kind === "dot-array" || r.kind === "dot-triangle") {
+    const rows = r.kind === "dot-array" ? Array.from({ length: r.rows }, () => r.cols) : Array.from({ length: r.rows }, (_, k) => k + 1);
+    const width = Math.max(...rows), gap = 26, w = width * gap + 12, h = rows.length * gap + 12;
+    const label = r.kind === "dot-array" ? `${r.rows} rows of ${r.cols} dots, ${r.value} in all` : `A triangle of dots with rows of ${rows.join(", ")}: ${r.value} in all`;
+    return <figure className="teaching-data-visual dot-visual" role="img" aria-label={label} data-kind={r.kind} data-value={r.value}>
+      <svg viewBox={`0 0 ${w} ${h}`} aria-hidden="true">
+        {rows.flatMap((count, row) => Array.from({ length: count }, (_, col) => <circle key={`${row}-${col}`} cx={6 + gap / 2 + col * gap} cy={6 + gap / 2 + row * gap} r={8} />))}
+      </svg>
+      <figcaption>{r.caption}</figcaption>
+    </figure>;
+  }
+  const change = r.change;
+  return <figure className="teaching-data-visual sequence-visual" aria-label={r.caption} data-kind={r.kind}>
+    <table>
+      <thead><tr><th scope="row">Term</th>{r.rows.map((row) => <th key={row.n}>{row.n}</th>)}</tr></thead>
+      <tbody>
+        <tr><th scope="row">Value</th>{r.rows.map((row) => <td key={row.n}>{row.value}</td>)}</tr>
+        {r.rows.some((row) => row.how) ? <tr className="sequence-how"><th scope="row">Made by</th>{r.rows.map((row) => <td key={row.n}>{row.how}</td>)}</tr> : null}
+        {change ? <tr className="sequence-change"><th scope="row">{change === "ratio" ? "Ratio" : "Gap"}</th>{r.rows.map((row, k) => <td key={row.n}>{k === 0 ? "" : change === "ratio" ? `×${row.value / r.rows[k - 1].value}` : `+${row.value - r.rows[k - 1].value}`}</td>)}</tr> : null}
+      </tbody>
+    </table>
+    <figcaption>{r.caption}</figcaption>
+  </figure>;
 }
 
 /** The page asks for one tap per reasoning step; no answer or learner evidence is submitted. */
