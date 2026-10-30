@@ -24,7 +24,7 @@ import { sha256Hex } from "./digest.ts";
 import type { Expr } from "./calculus-core";
 
 export const REWRITE_CERTIFICATE_VERSION = "openpath-rewrite-certificate@2" as const;
-export const REWRITE_REGISTRY_VERSION = "openpath-rewrite-registry@2" as const;
+export const REWRITE_REGISTRY_VERSION = "openpath-rewrite-registry@3" as const;
 
 // ------------------------------------------------------------------------------------------------ exact numerals (pruning/refusal only)
 class Q {
@@ -194,6 +194,22 @@ const NODE_APPLY: Record<string, (n: Tree) => Tree[]> = {
     if (n.op === "*" && isGrp2(n.r) !== isGrp2(n.l)) { const left = isGrp2(n.r); const g = left ? n.r : n.l, a = left ? n.l : n.r; return [sumTree(addTg(g).map((t) => ({ n: left ? BN("*", a, t.n) : BN("*", t.n, a), s: t.s })))]; }
     if (n.op === "/" && isGrp2(n.l) && nzClosed(n.r)) return [sumTree(addTg(n.l).map((t) => ({ n: BN("/", t.n, n.r), s: t.s })))];
     return [];
+  },
+  /** ab + ac -> a(b+c), ba + ca -> (b+c)a: the reverse of distribution; the common factor is VISIBLE in both terms (nothing is introduced) */
+  "factor-common": (n) => {
+    const ts = addTg(n); if (ts.length !== 2 || ts[0].s !== 1) return [];
+    const [x, y] = ts; if (x.n.k !== "b" || y.n.k !== "b" || x.n.op !== "*" || y.n.op !== "*") return [];
+    const out: Tree[] = [];
+    if (canon(x.n.l) === canon(y.n.l)) out.push(BN("*", x.n.l, sumTree([{ n: x.n.r, s: 1 }, { n: y.n.r, s: y.s }])));
+    if (canon(x.n.r) === canon(y.n.r)) out.push(BN("*", sumTree([{ n: x.n.l, s: 1 }, { n: y.n.l, s: y.s }]), x.n.r));
+    return out;
+  },
+  /** x^2 - y^2 -> (x-y)(x+y) (an identity with no free parameter) */
+  "difference-of-squares": (n) => {
+    if (n.k !== "b" || n.op !== "-" || isUnaryNeg(n)) return [];
+    const sq = (m: Tree): Tree | null => m.k === "b" && m.op === "^" && m.r.k === "n" && !m.r.u && m.r.v.d === 1n && m.r.v.n === 2n ? m.l : null;
+    const x = sq(n.l), y = sq(n.r); if (!x || !y) return [];
+    return [BN("*", BN("-", x, y), BN("+", x, y)), BN("*", BN("+", x, y), BN("-", x, y))];
   },
   /** (a/b)(c/d) -> (ac)/(bd) [or with the products written out]; k(a/b) -> (ka)/b */
   "fraction-multiply": (n) => {

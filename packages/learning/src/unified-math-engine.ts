@@ -452,10 +452,9 @@ function algebraGroundings(statement: string, parsed: NaturalParseResult, check:
     if (check.lines[i]?.status !== "verified-valid") return;
     const text = l.source.text, d = routeDecision(session, text), sources: GroundingSource[] = [], derived = new Set<string>();
     if (d.kind === "refused") { const own = [...new Set(nums(text))].filter((x) => !task.has(x)); for (const x of own.length ? own : [`not authorized: ${d.verdict.reason}`]) sources.push({ kind: "free-literal", ref: x, by: "value", trivial: false }); }   // the numerals of the refused line stay free, so every later line that uses them is unresolved too
-    else if (d.kind === "outside-surface") sources.push(...literalProvenance(text, { task, established, licensed: new Set([...(pool.some((x) => /sqrt|√|\^\s*\(?1\/2/i.test(x)) ? ["2"] : []), ...(pool.some((x) => /cbrt|∛/i.test(x)) ? ["3"] : [])]), previous: previousClosure(pool) }, derived));
     const cert = d.kind === "authorized" ? d.verdict.certificate : null, rule = cert ? (cert.parts.find((p) => p.rule !== "identity")?.rule ?? cert.move.kind) : undefined;   // the certificate that authorizes the line travels with its grounding
     sources.push(prevLine ? { kind: "derived-fact", ref: `line-${prevLine}`, by: "symbol", trivial: false, ...(cert ? { rule, certificate: cert.digest } : {}) } : { kind: "task-premise", ref: "the statement", by: "symbol", trivial: false, ...(cert ? { rule, certificate: cert.digest } : {}) });
-    const g0 = assessRelevance(sources), g = d.kind === "refused" ? { ...g0, reason: `not authorized (${d.verdict.reason}); ${g0.reason}` } : g0;
+    const g0 = assessRelevance(sources), g = d.kind === "refused" ? { ...g0, reason: `${d.unrecognized ? "unrecognized by the derivation authority" : "not authorized"} (${d.verdict.reason}); ${g0.reason}` } : g0;
     out.push({ line: l.source.line, grounding: g });
     if (g.relevant) { for (const x of [...nums(text), ...derived]) established.add(x); pool.push(text); }
     prevLine = l.source.line;   // an unauthorized line is still the line before the next one: whatever rests on it is unresolved too (no dead-branch laundering: 9x8 = 72; 72 = 8x9 (refused); 8x9 = 72)

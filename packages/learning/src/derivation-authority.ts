@@ -106,15 +106,20 @@ const sv = (x: { t: Tree; sg: 1 | -1 }) => { const v = evalTree(x.t); return v &
 export function gradeStep(s: { rule: string; source: string[]; replacement: string[] }, cx: GCtx): Grade {
   const src = s.source.map(pt), rep = s.replacement.map(pt); if (src.some((x) => !x) || rep.some((x) => !x)) return "parametric";
   const S = src as { t: Tree; sg: 1 | -1 }[], Rp = rep as { t: Tree; sg: 1 | -1 }[];
-  if (["evaluate", "evaluate-product", "distribute", "distribute-unevaluated", "fraction-multiply", "fraction-divide", "fraction-combine", "fraction-chain", "fraction-regroup", "sign-product", "distribute-split"].includes(s.rule)) return "determined";
+  if (["evaluate", "evaluate-product", "distribute", "distribute-unevaluated", "fraction-multiply", "fraction-divide", "fraction-combine", "fraction-chain", "fraction-regroup", "sign-product", "distribute-split", "factor-common", "difference-of-squares"].includes(s.rule)) return "determined";
   const taskOrigin = (x: { t: Tree; sg: 1 | -1 }) => { const v = sv(x); return !!v && cx.numerals.has(`${v.n < 0n ? -v.n : v.n}/${v.d}`); };
   if (s.rule === "split-additive") {
     const v = sv(S[0]), ps = Rp.map(sv); if (v && ps.every((p) => p) && groupedPV(v, ps as R[])) return "determined";
     if (v && ps.every((p) => p) && groupedUnits(S[0].t, Rp.map((x) => x.t))) return "determined";                  // 3/4 = 1/4 + 2/4: a grouping of the unit fractions that make the numeral
     if (!taskOrigin(S[0]) || !v) return "parametric";
     const partition = ps.every((p) => p && (p.n < 0n) === (v.n < 0n) && (p.n < 0n ? -p.n : p.n) * v.d < (v.n < 0n ? -v.n : v.n) * p.d);   // a real PARTITION of the source: same sign, each piece smaller (not 32 = 109 + (-77))
-    const sib = (p: R) => cx.siblings.some((q) => { const t = mk(p.n * q.d + q.n * p.d, p.d * q.d); return (t.n === 0n && partition) || tz(t) > Math.max(tz(p), tz(q)) || (tz(t) >= 1 && tz(p) === 0 && tz(q) === 0); });   // NOT "cancels a sibling": 77 + 32 = 77 + (109 - 77) re-expresses the answer (found by the held-out corpus)
-    return Rp.some((x) => { const p = sv(x); return p && tz(p) >= 1 && tz(p) > tz(v); }) || (ps as R[]).some(sib) ? "anchored" : "parametric";
+    { const abs = (r: R) => (r.n < 0n ? mk(-r.n, r.d) : r), sibs = [...cx.siblings]; const k = sibs.findIndex((q) => same(abs(q), abs(v))); if (k >= 0) sibs.splice(k, 1);
+      if (!partition && (ps as R[]).some((p) => sibs.some((q) => same(abs(p), abs(q))))) return "parametric"; }   // a piece that IS another term of the line rebuilds the term from its neighbour (29 - 28 = 29 - (29 - 1)): circular
+    const sib = (p: R) => cx.siblings.some((q) => { const t = mk(p.n * q.d + q.n * p.d, p.d * q.d); if (t.n === 0n) return partition;                                                                         // cancelling a sibling (77 + 32 = 77 + (109 - 77)): only a true partition
+      const ap = p.n < 0n ? -p.n : p.n, lim = 10n ** BigInt(tz(t));                                           // the compensation is the distance to the round target (86 + 4 = 90), never an arbitrary number (86 + 104 = 190)
+      return ap < lim * p.d && (tz(t) > Math.max(tz(p), tz(q)) || (tz(t) >= 1 && tz(p) === 0 && tz(q) === 0)); });   // NOT "cancels a sibling": 77 + 32 = 77 + (109 - 77) re-expresses the answer (found by the held-out corpus)
+    return Rp.some((x) => { const p = sv(x); if (!p || tz(p) < 1 || tz(p) <= tz(v)) return false; const dn = p.n * v.d - v.n * p.d, ad = dn < 0n ? -dn : dn; return ad < 10n ** BigInt(tz(p)) * p.d * v.d; }) ||   // a ROUND piece must be the round neighbour of the source (37 = 40 - 3), not any round number
+       (ps as R[]).some(sib) ? "anchored" : "parametric";
   }
   if (s.rule === "split-multiplicative") { if (!taskOrigin(S[0])) return "parametric"; const ps = Rp.map(sv) as R[]; return ps.some((p, i) => ps.some((q, j) => i !== j && p && q && tz(mk(p.n * q.n, p.d * q.d)) > Math.max(tz(p), tz(q)))) ? "anchored" : "parametric"; }
   if (s.rule === "fraction-scale") {
@@ -294,10 +299,41 @@ export function hasFlattenedPureNumber(t: Tree): boolean {
   return walk(t);
 }
 
+
+// ---- solved-form conclusions: `x = 2 or x = 3` must be EXACTLY the solution set of the previous equation (a function of the equation alone, so determined)
+function polyCoefficients(P: Tree[], v: string): R[] | null {
+  const f = (k: number): R | null => { const g = (t: Tree) => { const u = parseTree(show(t).replace(new RegExp(`\\b${v}\\b`, "g"), `(${k})`)); return u ? evalTree(u) : null; }; const a = g(P[0]), b = g(P[1]); return a && b ? mk(a.n * b.d - b.n * a.d, a.d * b.d) : null; };
+  const y: R[] = []; for (let k = 0; k <= 5; k++) { const r = f(k); if (!r) return null; y.push(r); }
+  const sub = (a: R, b: R) => mk(a.n * b.d - b.n * a.d, a.d * b.d), mul = (a: R, b: R) => mk(a.n * b.n, a.d * b.d), add = (a: R, b: R) => mk(a.n * b.d + b.n * a.d, a.d * b.d);
+  const diffs: R[] = []; let row = y; for (let j = 0; j <= 5; j++) { diffs.push(row[0]); row = row.slice(1).map((r, i) => sub(r, row[i])); }
+  if (diffs[5].n !== 0n) return null;                                                          // degree above 4
+  let poly: R[] = [mk(0n, 1n)]; let ff: R[] = [mk(1n, 1n)]; let fact = 1n;                        // Newton forward-difference form -> monomials
+  for (let j = 0; j <= 4; j++) { if (j > 0) { fact *= BigInt(j); const nxt: R[] = new Array(ff.length + 1).fill(mk(0n, 1n)); ff.forEach((c, i) => { nxt[i + 1] = add(nxt[i + 1], c); nxt[i] = add(nxt[i], mul(c, mk(-BigInt(j - 1), 1n))); }); ff = nxt; }
+    const coef = mk(diffs[j].n, diffs[j].d * fact); poly = poly.concat(new Array(Math.max(0, ff.length - poly.length)).fill(mk(0n, 1n))); ff.forEach((c, i) => { poly[i] = add(poly[i], mul(c, coef)); }); }
+  while (poly.length > 1 && poly[poly.length - 1].n === 0n) poly.pop(); return poly;
+}
+function rationalRootSet(poly: R[]): R[] | null {                                               // complete only when the polynomial splits over the rationals
+  if (poly.length < 2) return null; let lcm = 1n; for (const c of poly) lcm = (lcm * c.d) / gcd(lcm, c.d);
+  let ints = poly.map((c) => (c.n * lcm) / c.d); const roots: R[] = [];
+  while (ints.length > 1 && ints[0] === 0n) { if (!roots.some((r) => r.n === 0n)) roots.push(mk(0n, 1n)); ints = ints.slice(1); }
+  const divisors = (n: bigint): bigint[] => { n = n < 0n ? -n : n; const o: bigint[] = []; if (n > 1000000n) return o; for (let d = 1n; d * d <= n; d++) if (n % d === 0n) { o.push(d); if (d * d !== n) o.push(n / d); } return o; };
+  let progress = true;
+  while (ints.length > 1 && progress) { progress = false; const lead = ints[ints.length - 1], low = ints[0];
+    outer: for (const p of divisors(low)) for (const q of divisors(lead)) for (const sg of [1n, -1n]) { const r = mk(sg * p, q); let acc = mk(0n, 1n); for (let i = ints.length - 1; i >= 0; i--) acc = mk(acc.n * r.n + ints[i] * acc.d * r.d, acc.d * r.d);
+      if (acc.n === 0n) { if (!roots.some((x) => same(x, r))) roots.push(r); const out: bigint[] = []; let carry = 0n; const rn = r.n, rd = r.d; void rn; void rd; // divide by (q x - sg p)
+        const qd = q, pd = sg * p; const res: bigint[] = new Array(ints.length - 1).fill(0n); let rem = 0n; for (let i = ints.length - 1; i >= 1; i--) { const c = ints[i] + rem; res[i - 1] = c / qd; rem = (res[i - 1] * pd); if (c % qd !== 0n) return null; } void out; void carry; ints = res; progress = true; break outer; } }
+  }
+  return ints.length === 1 ? roots : null;
+}
+const parseConclusion = (text: string): { v: string; values: R[] } | null => {
+  const t = strip(text).trim(); const clauses = t.split(/\s+or\s+|\s*[,;]\s*/i); if (!clauses.length) return null; let v = ""; const values: R[] = [];
+  for (const c of clauses) { const m = /^([A-Za-z])\s*=\s*(.+)$/.exec(c.trim()); if (!m) return null; if (v && v !== m[1]) return null; v = m[1]; const n = parseTree(m[2]); if (!n || hasVar(n) || !(isAtomT(n) || isNegAtom(n))) return null; const q = evalTree(n); if (!q) return null; values.push(q); }
+  return { v, values };
+};
 // ---- equation moves
 const sumOf = (ts: { n: Tree; s: number }[]): Tree => ts.length === 0 ? parseTree("0")! : ts.map((t) => (t.s < 0 ? ({ k: "b", op: "-", l: { k: "n", v: (parseTree("0") as any).v, u: true }, r: t.n } as Tree) : t.n)).reduce((x, y) => (y.k === "b" && y.op === "-" && y.l.k === "n" && (y.l as any).u ? ({ k: "b", op: "-", l: x, r: y.r } as Tree) : ({ k: "b", op: "+", l: x, r: y } as Tree)));
 const bin = (op: "+" | "-" | "*" | "/", l: Tree, r: Tree): Tree => ({ k: "b", op, l, r });
-function equationMove(task: TaskContext, P: Tree[], N: Tree[]): { ok: boolean; why: string; kind: string; parameter: string | null; parts: PartCertificate[]; grades: Grade[] } {
+function equationMove(task: TaskContext, P: Tree[], N: Tree[], firstLine = false): { ok: boolean; why: string; kind: string; parameter: string | null; parts: PartCertificate[]; grades: Grade[] } {
   const fail = (why: string) => ({ ok: false, why, kind: "none", parameter: null as string | null, parts: [] as PartCertificate[], grades: [] as Grade[] });
   const done = (kind: string, parameter: string | null, parts: PartCertificate[], grades: Grade[] = []) => ({ ok: true, why: kind, kind, parameter, parts, grades });
   if (P.length !== 2 || N.length !== 2) return fail("equation-shape");
@@ -308,8 +344,16 @@ function equationMove(task: TaskContext, P: Tree[], N: Tree[]): { ok: boolean; w
   if (sideRes.every((v) => v === null || v.ok)) { const parts = sideRes.flatMap((v) => (v?.part ? [v.part] : [])); return done("side-rewrite", null, parts, sideRes.flatMap((v) => v?.grades ?? [])); }
   // balance: both sides take the same operation with the same nonzero closed parameter, shown
   for (const op of ["+", "-", "*", "/"] as const) {
-    const m = N.map((n, i) => n.k === "b" && n.op === op && canon(n.l) === canon(P[i]) ? n.r : null);
+    const opSplit = (n: Tree): [Tree, Tree] | null => {                                                 // `-45/9` is parsed as -(45/9): the sign belongs to the numerator, (-45)/9
+      if (n.k === "b" && n.op === op) return [n.l, n.r];
+      if ((op === "*" || op === "/") && n.k === "b" && n.op === "-" && n.l.k === "n" && (n.l as any).u && n.r.k === "b" && n.r.op === op) return [{ ...n, r: n.r.l } as Tree, n.r.r];
+      return null;
+    };
+    const m = N.map((n, i) => { const sp = opSplit(n); return sp && canon(sp[0]) === canon(P[i]) ? sp[1] : null; });
     if (m[0] && m[1] && canon(m[0]) === canon(m[1]) && !hasVar(m[0]) && evalTree(m[0]) && (op === "+" || op === "-" || !evalTree(m[0])!.n === false && evalTree(m[0])!.n !== 0n)) return done("balance", op + show(m[0]), []);
+    if (m[0] && m[1] && (op === "*" || op === "/") && canon(m[0]) === canon(m[1]) && m[0].k === "v") {                  // multiplying / dividing both sides by a VARIABLE needs the task to declare it nonzero (x^2 = 4x, x != 0)
+      const ex = toExpr(m[0]); if (ex && covered({ kind: "nonzero", expression: ex }, task.assumptions)) return done("balance", op + show(m[0]) + " [nonzero declared]", []);
+    }
   }
   // transposition and factor cancellation (balance followed by the cancellation of the parameter), the other side optionally evaluated by an authorized, determined rewrite
   for (const i of [0, 1]) {
@@ -322,7 +366,7 @@ function equationMove(task: TaskContext, P: Tree[], N: Tree[]): { ok: boolean; w
       const au = authorizeExpr(task, expectOther, N[j], j); if (!au.ok || au.grades.includes("anchored") || au.grades.includes("parametric")) return fail("no-match");
       return done(kind, par, au.part ? [au.part] : [], au.grades);
     };
-    for (let k = 0; k < ts.length && ts.length > 1; k++) if (!hasVar(ts[k].n) ? !!evalTree(ts[k].n) : monomial(ts[k].n) !== null) {   // a closed term or a monomial moves across the equals sign
+    for (let k = 0; k < ts.length && (ts.length > 1 || (hasVar(ts[k].n) && monomial(ts[k].n) !== null)); k++) if (!hasVar(ts[k].n) ? !!evalTree(ts[k].n) : monomial(ts[k].n) !== null) {   // a closed term or a monomial moves across the equals sign
       const rest = sumOf(ts.filter((_, q) => q !== k)), t = ts[k].n;
       const other = ts[k].s > 0 ? bin("-", P[j], t) : bin("+", P[j], t);
       const r = finish("transposition", (ts[k].s > 0 ? "-" : "+") + show(t), rest, other); if (r.ok) return r;
@@ -332,6 +376,21 @@ function equationMove(task: TaskContext, P: Tree[], N: Tree[]): { ok: boolean; w
       const r = finish("cancel-factor", "/" + show(c), rest, bin("/", P[j], c)); if (r.ok) return r;
     }
     if (P[i].k === "b" && P[i].op === "/" && !hasVar(P[i].r) && evalTree(P[i].r) && evalTree(P[i].r)!.n !== 0n) { const r = finish("cancel-divisor", "*" + show(P[i].r), P[i].l, bin("*", P[j], P[i].r)); if (r.ok) return r; }
+  }
+  // solve-linear: `v = c` where c is the exact solution of the previous equation after ONE visible inverse operation (a determined consequence: the solution is a function of the equation alone).
+  // Several operations at once (x/6 - 1 = 4 -> x = 30) skip the balance steps: they are NOT authorized (independent corpus 3, B2-B4).
+  for (const i of [0, 1]) {
+    const v = N[i], c = N[1 - i]; if (!(v.k === "v") || hasVar(c) || !evalTree(c) || !(isAtomT(c) || isNegAtom(c))) continue;   // the conclusion is a plain numeral: a computation inside it is a claim of its own
+    const at = (t: Tree, k: string): R | null => { const u = parseTree(show(t).replace(new RegExp(`\\b${v.name}\\b`, "g"), `(${k})`)); return u ? evalTree(u) : null; };
+    const f = (k: string): R | null => { const a0 = at(P[0], k), b0 = at(P[1], k); return a0 && b0 ? mk(a0.n * b0.d - b0.n * a0.d, a0.d * b0.d) : null; };
+    const oneOp = (() => { const pv = P.find((t) => hasVar(t)), pc = P.find((t) => !hasVar(t)); if (!pv || !pc || P.filter((t) => hasVar(t)).length !== 1 || !evalTree(pc)) return false;
+      return pv.k === "b" && "+-*/".includes(pv.op) && ((pv.l.k === "v" && pv.l.name === v.name && !hasVar(pv.r) && !!evalTree(pv.r)) || (pv.r.k === "v" && pv.r.name === v.name && !hasVar(pv.l) && !!evalTree(pv.l))); })();
+    if (!oneOp && !firstLine) continue;                                                              // a derivation with a jump is refused; only a bare answer claim (the first line) may state the solution of the task itself
+    const f0 = f("0"), f1 = f("1"), f2 = f("2"); if (!f0 || !f1 || !f2) continue;
+    const d1 = mk(f1.n * f0.d - f0.n * f1.d, f1.d * f0.d), d2 = mk(f2.n * f1.d - f1.n * f2.d, f2.d * f1.d);
+    if (!same(d1, d2) || d1.n === 0n) continue;                                                   // not linear in v (or no unique solution)
+    const sol = mk(-f0.n * d1.d, f0.d * d1.n), cv = evalTree(c)!;
+    if (same(sol, cv)) return done(oneOp ? "solve-linear" : "answer-claim", null, []);
   }
   // the equation rewritten as a polynomial identity: both sides normalised, nothing hidden (checked by the sides' own authorization above); anything else is refused
   return fail("no-registered-equation-move");
@@ -356,7 +415,14 @@ export class DerivationSession {
     const line = this.chain.length;
     const out = (authorized: boolean, reason: string, valid: boolean | null, grades: Grade[] = [], certificate: DerivationCertificate | null = null): LineVerdict => ({ line, valid, authorized, reason, grades, certificate });
     if (!this.task) return out(false, this.failure ?? "task-unparsed", null);
-    const task = this.task, ss = splitSides(text); if (!ss) return out(false, "line-unparsed", null);
+    const task = this.task;
+    if (task.mode === "equation" && this.last.length === 2 && /\bor\b|[,;]/i.test(text)) {          // a solved-form conclusion: the complete solution set of the equation before it
+      const cl = parseConclusion(text);
+      if (cl) { const poly = polyCoefficients(this.last, cl.v), roots = poly && rationalRootSet(poly); const ok = !!roots && roots.length === new Set(cl.values.map((x) => `${x.n}/${x.d}`)).size && cl.values.every((x) => roots.some((r) => same(r, x)));
+        if (!ok) return out(false, roots ? "solution-set-differs" : "no-registered-equation-move", null);
+        return this.seal(line, task, this.last.map(canon), [strip(text)], [], "solve-conclusion", null, [], null); }
+    }
+    const ss = splitSides(text); if (!ss) return out(false, "line-unparsed", null);
     const T = ss.map((x) => parseTree(x)); if (T.some((t) => !t)) return out(false, "line-unparsed", null);
     const sides = T as Tree[];
     const seen = (t: Tree) => this.pool.some((p) => sameUpToFractionRegrouping(p, t));
@@ -372,7 +438,7 @@ export class DerivationSession {
       for (let j = 1; j < sides.length; j++) { const v = authorizeExpr(task, sides[j - 1], sides[j], j); if (!v.ok) return out(false, v.why, valid, v.grades); if (v.part) parts.push(v.part); grades.push(...v.grades); }
     } else {
       if (sides.length !== 2) return out(false, "equation-shape", null);
-      const prev = this.last; const m = equationMove(task, prev, sides);
+      const prev = this.last; const m = equationMove(task, prev, sides, this.chain.length === 0);
       if (!m.ok) return out(false, m.why, null);
       kind = m.kind; parameter = m.parameter; parts.push(...m.parts); grades.push(...m.grades); valid = null; sources.push(...prev.map(canon));
     }
@@ -438,28 +504,21 @@ export function assessChain(statement: string, texts: string[]): ChainVerdict {
 
 // ------------------------------------------------------------------------------------------------ route policy
 /**
- * Reasons that mean "the authority's supported surface does not cover this line" (not "the line is unjustified"). A route may then consult its older, STRICTER-than-nothing provenance
- * check, but only (a) after the engine's own parser and independent checker accepted the task and the line, (b) with the structural guards below, and (c) with the use recorded as
- * `surface: "legacy-provenance"`. A DEFINITE refusal (neutral element, hidden computation, arbitrary parameter, missing assumption, ...) is never overridden.
+ * FINAL POLICY: the authority is the ONLY thing that can authorize a derivation. There is no fallback. Two kinds of refusal are kept apart so reports and users can tell them apart:
+ *   - unjustified:  the line is in the authority's surface and no registered, replayable justification explains it (neutral element, arbitrary parameter, missing assumption, ...);
+ *   - unrecognized: the line / task is outside the authority's surface (unparsed text, systems, radicals, logarithms, inequalities, symbol chains): nothing is claimed about its truth.
+ * Neither is "invalid" (that is the validity judgment, made elsewhere) and neither is verified.
  */
 export const OUTSIDE_SURFACE = new Set(["task-unparsed", "task-condition-unparsed", "line-unparsed", "equation-shape", "no-registered-equation-move"]);
-export type RouteDecision = { kind: "authorized"; verdict: LineVerdict } | { kind: "refused"; verdict: LineVerdict } | { kind: "outside-surface"; verdict: LineVerdict };
-/** Structural guards that hold even outside the surface: a neutral element or a pure-number computation inside a symbolic/equation line is a claim of its own. */
-export function surfaceGuard(text: string): string | null {
-  const ss = splitSides(text); if (!ss) return null;
-  for (const x of ss) { const t = parseTree(x); if (!t) continue; if (neutral(t)) return "neutral-element"; if (hasFlattenedPureNumber(t) && hasVar(t)) return "hidden-number-computation"; }
-  return null;
-}
-/** how often each route decision was taken (observability: the outside-surface count is the amount of working still judged by the older provenance) */
-export const ROUTE_STATS = { authorized: 0, refused: 0, outsideSurface: 0 };
+export type RouteDecision = { kind: "authorized"; verdict: LineVerdict } | { kind: "refused"; verdict: LineVerdict; unrecognized: boolean };
+export const ROUTE_STATS = { authorized: 0, refusedUnjustified: 0, refusedUnrecognized: 0 };
 export function routeDecision(session: DerivationSession, text: string): RouteDecision {
-  const d = routeDecisionInner(session, text); if (d.kind === "authorized") ROUTE_STATS.authorized++; else if (d.kind === "refused") ROUTE_STATS.refused++; else ROUTE_STATS.outsideSurface++; return d;
-}
-function routeDecisionInner(session: DerivationSession, text: string): RouteDecision {
   const v = session.append(text);
-  if (v.authorized) return { kind: "authorized", verdict: v };
-  if (OUTSIDE_SURFACE.has(v.reason)) { const g = surfaceGuard(text); return g ? { kind: "refused", verdict: { ...v, reason: g } } : { kind: "outside-surface", verdict: v }; }
-  return { kind: "refused", verdict: v };
+  if (v.authorized) { ROUTE_STATS.authorized++; return { kind: "authorized", verdict: v }; }
+  const unrecognized = OUTSIDE_SURFACE.has(v.reason); if (unrecognized) ROUTE_STATS.refusedUnrecognized++; else ROUTE_STATS.refusedUnjustified++;
+  return { kind: "refused", verdict: v, unrecognized };
 }
+/** a decision for text the route cannot even hand to the authority (a symbol chain of a data model it does not know): refused as unrecognized, never authorized */
+export function unrecognizedDecision(reason: string): RouteDecision { ROUTE_STATS.refusedUnrecognized++; return { kind: "refused", unrecognized: true, verdict: { line: -1, valid: null, authorized: false, reason, grades: [], certificate: null } }; }
 /** a line that is a chain of closed numeric expressions only (the authority's exact-arithmetic surface for routes whose symbols belong to a data model it does not know) */
 export function isClosedNumericLine(text: string): boolean { const ss = splitSides(text); return !!ss && ss.every((x) => { const t = parseTree(x); return !!t && !hasVar(t); }); }

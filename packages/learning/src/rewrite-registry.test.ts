@@ -7,7 +7,7 @@ let seed = 8675309; const rnd = (n: number) => { seed = (seed * 1103515245 + 123
 
 describe("rewrite registry: closed, common interface", () => {
   test("every rule has the same shape and the registry is exactly the approved set", () => {
-    expect(REGISTRY.map((r) => r.id).sort()).toEqual(["distribute", "distribute-split", "distribute-unevaluated", "evaluate", "evaluate-product", "fraction-chain", "fraction-combine", "fraction-divide", "fraction-multiply", "fraction-regroup", "fraction-scale", "shifted-transfer", "sign-product", "split-additive", "split-multiplicative"]);
+    expect(REGISTRY.map((r) => r.id).sort()).toEqual(["difference-of-squares", "distribute", "distribute-split", "distribute-unevaluated", "evaluate", "evaluate-product", "factor-common", "fraction-chain", "fraction-combine", "fraction-divide", "fraction-multiply", "fraction-regroup", "fraction-scale", "shifted-transfer", "sign-product", "split-additive", "split-multiplicative"]);
     for (const r of REGISTRY) { expect(typeof r.admissible).toBe("function"); expect(["terms", "factors", "node"]).toContain(r.ctx); }
   });
 });

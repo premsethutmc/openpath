@@ -13,7 +13,7 @@ import { NotationError, normalize, splitEquals } from "./e6-parse.ts";
 import { Budget, Unsupported } from "./e6-cas.ts";
 import { Overflow, q, qadd, qcmp, qdiv, qeq, qiszero, qmul, qneg, qsign, qsub, qtext, ONE, Z, type Q } from "./exact-e5.ts";
 import { assessRelevance, literalProvenance, previousClosure, type GroundingSource } from "./claim-grounding.ts";
-import { DerivationSession, routeDecision, isClosedNumericLine } from "./derivation-authority.ts";
+import { DerivationSession, routeDecision, isClosedNumericLine, unrecognizedDecision } from "./derivation-authority.ts";
 import { Builder, bad, finish, incomplete, isProse, proseJudge, missing, ok, readStatement, syntheticParse, uns, worst, type E6Plan, type Judge, type Row } from "./e6-common.ts";
 import { digestOf } from "./geometry-binder-e5.ts";
 
@@ -533,7 +533,7 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
   const stated = new Set<string>(), negated = new Set<string>();
   const provided = new Set<string>(problem.assumptions ?? []);
   if (problem.coefficientDomain === "real") provided.add("real-coefficients");
-  const found: Cx[] = []; let finalRow = -1; let sawAnswerClaim = false; let sawNoReal = false; let needReplacement = false;
+  const found: Cx[] = []; const deferredIncomplete = new Map<number, ReturnType<typeof incomplete>>(); let finalRow = -1; let sawAnswerClaim = false; let sawNoReal = false; let needReplacement = false;
   rows.forEach((row, i) => {
     const st = readStatement(row.plain);
     st.assumptions.forEach((x) => stated.add(x)); st.negated.forEach((x) => negated.add(x));
@@ -654,21 +654,17 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
       const visible = new Set<string>(previousClosure([texts[from], ...rows.slice(0, i).map((r) => r.plain), ...premises.map((p) => cxText(p.value))]));
       for (const m of members.slice(0, -1)) for (const x of memberClosure(m, env)) visible.add(x);
       const tail = texts.slice(from + 1).join(" = ");
-      // P2: authorization is the derivation authority's (derivation-authority.ts), refuse by default. A chain the authority's surface does not cover (complex numbers, factorials, roots) keeps the older
-      // numeral provenance, after the authority's structural guards. A DEFINITE refusal is never overridden.
+      // FINAL P2 POLICY: only the derivation authority authorizes a shown derivation. A chain it cannot recognise (complex numbers, factorials, symbol chains of the data model) is refused as UNRECOGNIZED -
+      // nothing is claimed about its truth (that is the kernel's), and no numeral provenance can authorize it instead.
       const sess = new DerivationSession(texts[from], [...task]); for (const r of rows.slice(0, i)) sess.adopt(r.plain);
-      const chainText = texts.slice(from).join(" = "), d = isClosedNumericLine(chainText) ? routeDecision(sess, chainText) : { kind: "outside-surface" as const, verdict: null };
-      if (d.kind === "refused") grounding = { ...grounding, relevant: false, reason: `this chain is not an authorized derivation of the expression before it (${d.kind === "refused" ? d.verdict.reason : ""}); equal value alone does not justify a new numeral` };
-      else if (d.kind === "outside-surface") {
-        const free = literalProvenance(tail, { task, established: est, licensed: new Set(), previous: visible }).filter((x) => x.kind === "free-literal");
-        if (free.length) grounding = { ...grounding, relevant: false, reason: `the number${free.length > 1 ? "s" : ""} ${[...new Set(free.map((x) => x.ref))].slice(0, 4).join(", ")} in a later step of this chain come${free.length > 1 ? "" : "s"} from neither the task data, an earlier verified result nor the step before it` };
-      }
+      const chainText = texts.slice(from).join(" = "), d = isClosedNumericLine(chainText) ? routeDecision(sess, chainText) : unrecognizedDecision("chain-outside-authority-surface");
+      if (d.kind === "refused") grounding = { ...grounding, relevant: false, reason: d.unrecognized ? `this chain is outside what the derivation authority recognises (${d.verdict.reason}); its truth is not in question, but it is not an authorized derivation` : `this chain is not an authorized derivation of the expression before it (${d.verdict.reason}); equal value alone does not justify a new numeral` };
     }
     const labelBound = label !== null && (answerRe.test(label) || answerRe.test(labelRaw) || (label !== null && ANSWER_WORD.test(label.trim())) || (label !== null && /^[A-Za-z][0-9]?$/.test(label.trim()) && !env.has(label)) || (labelWords.length === 0 || labelWords.every((w) => taskWords.has(w) || w === "roots" || w === "root" || w === "value")));
     const answerBound = label === null ? grounding.relevant : members.length > 1 ? labelBound && grounding.relevant : labelBound; // E7 Phase 5: a SHOWN derivation must itself be justified from the task, whatever it is labelled; a bare `label = value` is an answer statement judged against the kernel's own value
-    if (j.status === "valid" && canon && !answerBound && spec.truth.some((t) => ceq(t, lastVal))) j = incomplete(label === null || labelBound
+    if (j.status === "valid" && canon && !answerBound && spec.truth.some((t) => ceq(t, lastVal))) deferredIncomplete.set(i, incomplete(label === null || labelBound
       ? `this calculation reaches the right value, but nothing in it comes from the problem's data or from an earlier verified result (${grounding.reason}); its relevance to the requested quantity is not established, so show how the quantity follows from the givens`
-      : `this line names "${label}", which is not the requested quantity; state the requested quantity by name`);
+      : `this line names "${label}", which is not the requested quantity; state the requested quantity by name`));   // deferred: validity and assumption judgments are made first and are never masked by a missing authorization
     if (j.status === "valid" && canon) { found.push(lastVal); if (spec.truth.some((t) => ceq(t, lastVal))) { sawAnswerClaim = true; finalRow = i; } }
     grounding = { ...grounding, required: label === null || members.length > 1 };
     if (j.status !== "valid") j = { ...j, grounding };
@@ -690,6 +686,7 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
     if (r) b.records[target] = { ...r, judge: missing(`state the assumption ${unmetAssumptions.join(", ")} before relying on this method`), evidence: null };
     complete = false;
   }
+  for (const [row, jd] of deferredIncomplete) { const r = b.records[row]; if (r && r.judge.status === "valid") { b.records[row] = { ...r, judge: jd, evidence: null }; complete = false; } }
   const why = spec.noRealRoots ? "state that there are no real roots" : spec.setValued ? "give every solution as a reduced numeral" : "finish with the requested quantity as a single reduced number";
   if (allValid && !complete && !unmetAssumptions.length && !contradicted.length) { const last = rows.length - 1; const r = b.records[last]; if (r && r.judge.status === "valid") b.records[last] = { ...r, judge: { status: "incomplete", reason: why }, evidence: null }; }
   void NAMES_PRIME; void ident; void qtext;
