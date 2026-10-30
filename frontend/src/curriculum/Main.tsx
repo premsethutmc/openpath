@@ -10,6 +10,14 @@
  * The first screen needs only the small per-release index (data/*.json, built from the repository's releases and
  * the compiler's output). The learner's evidence (the shared engine) and question previews load when asked for.
  * Nothing here writes a learning record; learning happens in My Learning Year.
+ *
+ * Two views (learner experience 2026-10-29):
+ *   learner (default)        what a learner needs: lesson titles, progress, objectives, and one clear next action
+ *                             (Learn → Practice → Assessment). No engineering metadata.
+ *   diagnostics (?view=diagnostics, educators and developers only: an account with a content-review role or the
+ *                             developer flag) the full dashboard: coverage, question families, review states, ids,
+ *                             mappings and evidence history. Presentation only: certification and quarantine are
+ *                             enforced by the engine and the server in both views.
  */
 import React, { Suspense, lazy, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
@@ -126,6 +134,24 @@ function writeOrder(release: string, parent: string, ids: string[] | null) {
 
 // ---------------------------------------------------------------- small views
 
+/** What a learner reads for each state (the same states as MASTERY_WORD; green still means verified and nothing else). */
+const LEARNER_WORD: Record<Mastery, string> = { not_assessed: "Not started", learning: "In progress", pending: "Almost there: a later check confirms it", verified: "Mastered", review: "Time to review" };
+const STAGES_KEY = (learner: string) => `openpath.curriculum-practice@1:${learner}:`;
+/** Whether this learner has opened the lesson on this device before (the lesson's own resume state), so the action reads "Continue". */
+function lessonStarted(learner: string, target: string) {
+  try {
+    for (let k = 0; k < localStorage.length; k++) {
+      const key = localStorage.key(k) ?? "";
+      if (key.startsWith(STAGES_KEY(learner)) && key.endsWith(`:${target}:screen`)) return true;
+    }
+  } catch {
+    /* without storage the ledger still decides: answers on record count as started */
+  }
+  return false;
+}
+const lessonHref = (learner: string, target: string, stage?: "learn" | "practice") =>
+  `/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(target)}&practice=curriculum${stage ? `&stage=${stage}` : ""}`;
+
 const masteryClass = (m: Mastery | null) => (m === "verified" ? "m-verified" : m === "learning" || m === "pending" || m === "review" ? "m-progress" : "m-none");
 
 function Meter({ label, value, of, pct, kind, note }: { label: string; value: number; of: number; pct: number; kind: "mastery" | "coverage"; note?: string }) {
@@ -176,7 +202,7 @@ function Summary({ m, c, learner, scopeWord }: { m: MasteryRollup; c: CoverageRo
   );
 }
 
-function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last }: { node: DashNode; r: DashRelease; skillOf: ((c: string) => Mastery) | null; onOpen: () => void; details?: string; arrange: boolean; onMove: (by: -1 | 1) => void; first: boolean; last: boolean }) {
+function Tile({ node, r, skillOf, onOpen, arrange, onMove, first, last, learnerView }: { node: DashNode; r: DashRelease; skillOf: ((c: string) => Mastery) | null; onOpen: () => void; arrange: boolean; onMove: (by: -1 | 1) => void; first: boolean; last: boolean; learnerView: boolean }) {
   const scope = node.kind === "competency" || node.kind === "micro" ? { competencies: node.competency ? [node.competency] : [], outcomes: [] } : scopeOf(node);
   const m = skillOf ? masteryRollup(scope.competencies, skillOf) : null;
   const cov = coverageRollup(r, scope.outcomes);
@@ -184,7 +210,9 @@ function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last 
   const leafContent = node.kind === "competency" ? contentOf(comp) : null;
   const withModule = scope.competencies.filter((c) => r.competencies[c]?.module).length;
   const state = m ? m.state : null;
-  const statusText = !m ? null : node.kind === "competency" ? MASTERY_WORD[m.state] : m.counts.not_assessed === m.total ? "Not assessed" : `${m.counts.verified}/${m.total} verified`;
+  const statusText = !m ? null : learnerView
+    ? node.kind === "competency" ? LEARNER_WORD[m.state] : m.counts.not_assessed === m.total ? "Not started" : `${m.counts.verified} of ${m.total} mastered`
+    : node.kind === "competency" ? MASTERY_WORD[m.state] : m.counts.not_assessed === m.total ? "Not assessed" : `${m.counts.verified}/${m.total} verified`;
   const partial = cov.counts.partial > 0;
   return (
     <li className={`tile ${masteryClass(state)} k-${node.kind}`} data-id={node.id}>
@@ -203,7 +231,11 @@ function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last 
             </span>
           </>
         ) : null}
-        <span className="tile-content">
+        {learnerView ? (
+          <span className="tile-content">
+            {node.kind === "competency" ? (leafContent!.learn ? "Lesson and practice" : "Lesson coming soon") : node.kind === "unsupported" || node.kind === "proposal" ? "Coming soon" : `${scope.competencies.length} ${scope.competencies.length === 1 ? "skill" : "skills"}`}
+          </span>
+        ) : <span className="tile-content">
           {node.kind === "competency" ? (
             <>
               <span className={`dot ${leafContent!.learn ? "on" : ""}`} title="Learning module" aria-hidden="true" />
@@ -217,9 +249,8 @@ function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last 
             </>
           )}
           {partial ? <span className="tag partial">Partial</span> : null}
-        </span>
+        </span>}
       </button>
-      {details && <a className="link" href={details}>View topic details</a>}
       {arrange ? (
         <span className="arrange">
           <button type="button" aria-label={`Move ${node.title} earlier`} disabled={first} onClick={() => onMove(-1)}>
@@ -234,7 +265,7 @@ function Tile({ node, r, skillOf, onOpen, details, arrange, onMove, first, last 
   );
 }
 
-function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId, prescribed = false }: { learnerId?: string; prescribed?: boolean; nodes: DashNode[]; parent: string; r: DashRelease; skillOf: ((c: string) => Mastery) | null; route: Route; arrange: boolean }) {
+function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId, prescribed = false, learnerView = false }: { learnerId?: string; prescribed?: boolean; learnerView?: boolean; nodes: DashNode[]; parent: string; r: DashRelease; skillOf: ((c: string) => Mastery) | null; route: Route; arrange: boolean }) {
   const [order, setOrder] = useState(() => readOrder(r.release.id, parent));
   useEffect(() => setOrder(readOrder(r.release.id, parent)), [r.release.id, parent]);
   const shown = learnerId || prescribed ? nodes : ordered(nodes, order);
@@ -253,6 +284,7 @@ function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId, prescribe
             r={r}
             skillOf={skillOf}
             arrange={arrange}
+            learnerView={learnerView}
             first={k === 0}
             last={k === visible.length - 1}
             onMove={(by) => {
@@ -260,13 +292,8 @@ function Tiles({ nodes, parent, r, skillOf, route, arrange, learnerId, prescribe
               setOrder(next);
               writeOrder(r.release.id, parent, next);
             }}
-            details={learnerId && n.kind === "chapter" ? hashOf({...route,node:n.id,competency:null}) : undefined}
             onOpen={() => {
-              if ((n.kind === "competency" || n.kind === "micro") && learnerId) {
-                const target = r.competencies[n.competency!]?.evidenceTarget ?? n.competency!;
-                location.href = `/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(target)}&practice=curriculum`;
-                return;
-              }
+              // a skill opens its lesson page (Learn → Practice → Assessment); the learner starts from there
               return (n.kind === "competency" || n.kind === "micro" ? go({ ...route, competency: n.competency! }) : n.kind === "unsupported" || n.kind === "proposal" ? undefined : go({ ...route, node: n.id, competency: null }));}}
           />
         ))}
@@ -521,13 +548,106 @@ function Detail({ r, id, route, learner, registry, skillOf }: { r: DashRelease; 
   );
 }
 
+// ---------------------------------------------------------------- a learner's lesson page
+
+/** A skill as a learner sees it: what it is, where they are, and one clear next action through Learn → Practice → Assessment. */
+function LearnerLesson({ r, id, route, learner, skillOf, signedIn, needsLearner }: { r: DashRelease; id: string; route: Route; learner: LearnerView | null; skillOf: ((c: string) => Mastery) | null; signedIn: boolean | null; needsLearner: boolean }) {
+  const c: DashCompetency | undefined = r.competencies[id];
+  if (!c) return <p>This skill is not part of {r.release.title}.</p>;
+  const method = methodRequired(r, id);
+  const s: LearnerSkill | undefined = learner?.skillOf(c.evidenceTarget);
+  const state = learner ? masteryOf(s, method) : null;
+  const content = contentOf(c);
+  const ready = !!c.module && c.families.length > 0;
+  const started = !!learner && (!!s?.attempts || lessonStarted(learner.learnerId, c.evidenceTarget));
+  const name = (p: string) => r.competencies[p]?.name ?? r.names[p] ?? p;
+  const L = learner?.learnerId ?? "";
+  const stages = [
+    { n: 1, title: "Learn", what: "The idea, a worked example step by step, and pictures you can explore.", href: L ? lessonHref(L, c.evidenceTarget, "learn") : null, action: "Open the lesson" },
+    { n: 2, title: "Practice", what: "Guided questions with hints and feedback on each answer.", href: L ? lessonHref(L, c.evidenceTarget, "practice") : null, action: "Practise questions" },
+    { n: 3, title: "Assessment", what: "Questions on your own. This is how mastery is checked, with a later check to make sure it stays.", href: L ? `/year/?learner=${encodeURIComponent(L)}&skill=${encodeURIComponent(c.evidenceTarget)}` : null, action: "Check my understanding" },
+  ];
+  return (
+    <article className="detail learner-lesson" aria-label="Lesson">
+      <h2>{c.name}</h2>
+      {c.description ? <p className="lesson-objective">{c.description}</p> : null}
+      {learner ? (
+        <div className={`state-card ${masteryClass(state)}`}>
+          <strong>
+            <span aria-hidden="true">{MASTERY_ICON[state!]}</span> <span className="state-word">{LEARNER_WORD[state!]}</span>
+          </strong>
+          <span className="muted small">{s?.attempts ? `${s.attempts} answer${s.attempts === 1 ? "" : "s"} so far` : "You have not answered any questions on this yet."}</span>
+        </div>
+      ) : null}
+      {!ready ? (
+        <p className="note">The lesson for this skill is being prepared.</p>
+      ) : learner ? (
+        <a className="primary lesson-start" href={lessonHref(L, c.evidenceTarget)}>
+          {state === "verified" ? "Review the lesson" : started ? "Continue learning" : "Start learning"}
+        </a>
+      ) : needsLearner ? (
+        <p className="note">Choose who is learning (at the top of the page) to start this lesson.</p>
+      ) : signedIn === false ? (
+        <a className="primary lesson-start" href="/year/">Sign in to start learning</a>
+      ) : null}
+      {ready ? (
+        <ol className="lesson-path" aria-label="How this lesson works">
+          {stages.map((st) => (
+            <li key={st.n}>
+              <span className="lesson-num" aria-hidden="true">{st.n}</span>
+              <div>
+                <strong>{st.title}</strong>
+                <p>{st.what}</p>
+                {st.href ? <a className="link" href={st.href}>{st.action}</a> : null}
+              </div>
+            </li>
+          ))}
+        </ol>
+      ) : null}
+      {method ? <p className="note">Some answers here need your written working. A teacher reads and marks them.</p> : null}
+      {c.prerequisites.length ? (
+        <>
+          <h3>It helps to know first</h3>
+          <ul className="chips">
+            {c.prerequisites.map((p) => (
+              <li key={p.id}>
+                {r.competencies[p.id] ? (
+                  <button type="button" className={`chip-btn ${masteryClass(skillOf ? skillOf(p.id) : null)}`} onClick={() => go({ ...route, competency: p.id })}>
+                    {name(p.id)}
+                  </button>
+                ) : (
+                  <span className={`chip-btn ${masteryClass(skillOf ? skillOf(p.id) : null)}`}>{name(p.id)}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
+      {content.learn ? null : <p className="muted small">Practice for this skill is coming soon.</p>}
+    </article>
+  );
+}
+
+/** A learner's progress for the grade or topic shown: mastered skills only (verified), and what is in progress. */
+function LearnerProgress({ m, scopeWord }: { m: MasteryRollup; scopeWord: string }) {
+  const going = m.counts.learning + m.counts.pending + m.counts.review;
+  return (
+    <section className="summary learner-progress" aria-label={`${scopeWord} progress`}>
+      <Meter label="Skills mastered" value={m.counts.verified} of={m.total} pct={m.verifiedPct} kind="mastery" note={going ? `${going} in progress` : undefined} />
+    </section>
+  );
+}
+
 // ---------------------------------------------------------------- the app
 
 function App() {
   const route = useRoute();
   const params = new URLSearchParams(location.search);
-  const learnerMode = params.get("view") === "learner";
   const previewMode = params.get("preview") === "1";
+  // educators and developers only; everyone else (and everyone until their role is known) sees the learner view
+  const [canDiagnose, setCanDiagnose] = useState(false);
+  const diagnostics = !previewMode && params.get("view") === "diagnostics" && canDiagnose;
+  const learnerMode = !previewMode && !diagnostics;
   const [index, setIndex] = useState<DashIndex | null>(null);
   const [release, setRelease] = useState<DashRelease | null>(null);
   const [error, setError] = useState("");
@@ -551,13 +671,18 @@ function App() {
       .then(async (s) => {
         setSignedIn(!!s.available && s.account.authenticated);
         if (s.available && s.account.authenticated) {
-          const [rows, reg] = await Promise.all([api.pupils().catch(() => []), api.request<{ registry: RegistryLike }>("GET", "/content-review/").catch(() => null)]);
+          const [rows, reg, dev] = await Promise.all([
+            api.pupils().catch(() => []),
+            api.request<{ registry: RegistryLike; roles?: string[] }>("GET", "/content-review/").catch(() => null),
+            api.request<{ developer: boolean }>("GET", "/developer/status/").catch(() => null),
+          ]);
           setPupils(rows);
+          setCanDiagnose(!!reg?.roles?.length || !!dev?.developer);
           if (reg) {
             registryRef.current = reg.registry;
             setRegistry(reg.registry);
           }
-          setLearnerId((cur) => (rows.some((p) => p.id === cur) ? cur : learnerMode && rows.length === 1 ? rows[0].id : ""));
+          setLearnerId((cur) => (rows.some((p) => p.id === cur) ? cur : params.get("view") !== "diagnostics" && rows.length === 1 ? rows[0].id : ""));
         }
       })
       .catch(() => setSignedIn(false));
@@ -642,7 +767,7 @@ function App() {
           <h1>Mathematics</h1>
           {previewMode ? <span className="preview-badge">Preview mode · no progress saved</span> : null}
         </div>
-        {!learnerMode ? (
+        {!learnerMode || !learnerId ? (
           <div className="controls">
             <div className="seg" role="group" aria-label="Board">
               {(["cbse", "tn"] as Board[]).map((b) => (
@@ -658,12 +783,12 @@ function App() {
                 </button>
               ))}
             </div>
-            {!previewMode ? <label className="learner-pick">
-              Learner
+            {!previewMode && (!learnerMode || signedIn !== true || pupils.length > 0) ? <label className="learner-pick">
+              {learnerMode ? "Who is learning?" : "Learner"}
               {signedIn ? (
                 <span className="pick-row">
                 <select value={learnerId} onChange={(e) => setLearnerId(e.target.value)}>
-                  <option value="">No learner (curriculum and coverage only)</option>
+                  <option value="">{learnerMode ? "Choose a learner" : "No learner (curriculum and coverage only)"}</option>
                   {pupils.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.display_name}
@@ -678,7 +803,7 @@ function App() {
                 </span>
               ) : signedIn === false ? (
                 <span className="muted small">
-                  <a href="/year/">Sign in</a> to see your learners' progress.
+                  <a href="/year/">Sign in</a> {learnerMode ? "to save your progress." : "to see your learners' progress."}
                 </span>
               ) : (
                 <span className="muted small">Checking your account…</span>
@@ -714,23 +839,29 @@ function App() {
             ))}
             {route.competency ? <span> › {r.competencies[route.competency]?.name ?? route.competency}</span> : null}
           </nav>
-          {!previewMode && !r.release.sourceVerified ? <p className="note">Parts of this book's inventory could not be checked against the official textbook yet.</p> : null}
+          {diagnostics && !r.release.sourceVerified ? <p className="note">Parts of this book's inventory could not be checked against the official textbook yet.</p> : null}
 
           {route.competency ? (
             previewMode ? (
               <Suspense fallback={<p className="muted">Loading the experience…</p>}>
                 <PreviewExperience release={r} competency={route.competency} home={() => go({ board, grade, node: null, competency: null })} back={() => history.back()} />
               </Suspense>
-            ) : <Detail r={r} id={route.competency} route={routeHere} learner={learner} registry={registry} skillOf={skillOf} />
+            ) : diagnostics ? (
+              <Detail r={r} id={route.competency} route={routeHere} learner={learner} registry={registry} skillOf={skillOf} />
+            ) : (
+              <LearnerLesson r={r} id={route.competency} route={routeHere} learner={learner} skillOf={skillOf} signedIn={signedIn} needsLearner={!!signedIn && pupils.length > 0 && !learnerId} />
+            )
           ) : (
             <>
               <h2 className="scope-title">{node ? node.title : `Grade ${grade} Mathematics`}</h2>
-              <p className="muted small counts">
+              {diagnostics ? <p className="muted small counts">
                 {node ? "" : `${r.nodes.length} chapters · `}
                 {scope.competencies.length} competencies · {scope.outcomes.length} curriculum outcomes
-              </p>
-              {!previewMode ? <Summary m={masteryRollup(scope.competencies, skillOf ?? (() => "not_assessed"))} c={coverageRollup(r, scope.outcomes)} learner={learner} scopeWord={node ? node.title : `Grade ${grade}`} /> : <p className="preview-intro">Explore freely. Open any chapter, topic or competency; preview controls let you visit teaching, question and feedback states without submitting work.</p>}
-              {learner && learnerMode && node ? <TopicPlan node={node} r={r} skillOf={skillOf!} route={routeHere} learnerId={learnerId} registry={registry} /> : null}
+              </p> : null}
+              {learnerMode ? (
+                learner ? <LearnerProgress m={masteryRollup(scope.competencies, skillOf ?? (() => "not_assessed"))} scopeWord={node ? node.title : `Grade ${grade}`} /> : null
+              ) : !previewMode ? <Summary m={masteryRollup(scope.competencies, skillOf ?? (() => "not_assessed"))} c={coverageRollup(r, scope.outcomes)} learner={learner} scopeWord={node ? node.title : `Grade ${grade}`} /> : <p className="preview-intro">Explore freely. Open any chapter, topic or competency; preview controls let you visit teaching, question and feedback states without submitting work.</p>}
+              {learner && learnerMode ? <TopicPlan ids={scope.competencies} r={r} skillOf={skillOf!} route={routeHere} learnerId={learnerId} /> : null}
               {goalCards.length && !node ? (
                 <section className="goals">
                   {goalCards.map(({ g, o }) => (
@@ -745,49 +876,58 @@ function App() {
                 </section>
               ) : null}
               <div className="level-head">
-                <h3>{node ? "Inside" : "Chapters"}</h3>
-                {!learnerMode && !previewMode ? (
+                <h3>{node ? (learnerMode ? "Lessons" : "Inside") : "Chapters"}</h3>
+                {diagnostics ? (
                   <button type="button" className="link" aria-pressed={arrange} onClick={() => setArrange((a) => !a)}>
                     {arrange ? "Done arranging" : "Arrange tiles"}
                   </button>
                 ) : null}
               </div>
               {arrange ? <p className="muted small">Arranging changes only the order on this device. The curriculum, its skills and every learner's evidence stay the same.</p> : null}
-              <Tiles prescribed={previewMode} learnerId={learnerMode && learner ? learnerId : undefined} nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
-              {!previewMode ? <OutcomeList r={r} ids={node?.outcomes ?? []} /> : null}
+              <Tiles prescribed={previewMode} learnerView={learnerMode} learnerId={learnerMode && learner ? learnerId : undefined} nodes={node ? node.children : r.nodes} parent={node?.id ?? "root"} r={r} skillOf={skillOf} route={routeHere} arrange={arrange} />
+              {diagnostics ? <OutcomeList r={r} ids={node?.outcomes ?? []} /> : null}
             </>
           )}
+          {canDiagnose && !previewMode ? (
+            <p className="view-switch small">
+              {diagnostics ? (
+                <a className="link" href={`${location.pathname}${learnerId ? `?learner=${encodeURIComponent(learnerId)}` : ""}${location.hash}`}>Back to the learner view</a>
+              ) : (
+                <a className="link" href={`${location.pathname}?${new URLSearchParams({ ...(learnerId ? { learner: learnerId } : {}), view: "diagnostics" })}${location.hash}`}>Educator diagnostics</a>
+              )}
+            </p>
+          ) : null}
         </main>
       ) : null}
     </div>
   );
 }
 
-function nextTopicSkill(node: DashNode, r: DashRelease, skillOf: (c:string)=>Mastery) {
- const ids=scopeOf(node).competencies;
+function nextTopicSkill(ids: string[], r: DashRelease, skillOf: (c:string)=>Mastery) {
  return ["review","learning","not_assessed"].flatMap(m=>ids.filter(c=>skillOf(c)===m)).find(c=>contentOf(r.competencies[c]).learn) ?? null;
 }
 
 /** A learner opening a topic: what is verified, being learned, waiting for its delayed check, and what to do next. */
-function TopicPlan({ node, r, skillOf, route, learnerId, registry }: { registry: RegistryLike | null; learnerId: string; node: DashNode; r: DashRelease; skillOf: (c: string) => Mastery; route: Route }) {
-  const ids = scopeOf(node).competencies;
+/** Where a learner starts in a grade or topic: the next lesson in book order, one action, and a one-line tally. */
+function TopicPlan({ ids, r, skillOf, route, learnerId }: { learnerId: string; ids: string[]; r: DashRelease; skillOf: (c: string) => Mastery; route: Route }) {
   const by = (m: Mastery) => ids.filter((c) => skillOf(c) === m);
-  const next = nextTopicSkill(node,r,skillOf);
+  const next = nextTopicSkill(ids,r,skillOf);
   return (
     <section className="topic-plan card">
-      <div className="small">
-        <strong>{by("verified").length}</strong> verified · <strong>{by("learning").length + by("review").length}</strong> learning · <strong>{by("pending").length}</strong> awaiting verification (a delayed check or an educator's mark)
-      </div>
       {next ? (
         <div>
-          Next:{" "}
-          <button type="button" className="link" onClick={() => go({ ...route, competency: next })}>
-            {r.competencies[next].name}
-          </button>
-          {contentOf(r.competencies[next]).learn && <p><a className="primary" href={`/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}${r.release.grade === 7 ? "&diagnostic=topic" : ""}`}>{r.release.grade === 7 ? "Start diagnostic" : "Start learning"}</a></p>}
-          <p className="muted small">Content review: {REVIEW_WORD[reviewState(registry, `module:${next}`, r.competencies[next].module?.hash ?? "")]}. Practice does not grant verified mastery.</p>
+          <p className="topic-next">
+            Next lesson:{" "}
+            <button type="button" className="link" onClick={() => go({ ...route, competency: next })}>
+              {r.competencies[next].name}
+            </button>
+          </p>
+          {contentOf(r.competencies[next]).learn && <p><a className="primary" href={r.release.grade === 7 ? `/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}&diagnostic=topic` : lessonHref(learnerId, r.competencies[next].evidenceTarget)}>{r.release.grade === 7 ? "Start diagnostic" : lessonStarted(learnerId, r.competencies[next].evidenceTarget) ? "Continue learning" : "Start learning"}</a></p>}
         </div>
       ) : null}
+      <div className="small muted">
+        {by("verified").length} mastered · {by("learning").length + by("review").length} in progress · {by("pending").length} waiting for a later check
+      </div>
     </section>
   );
 }

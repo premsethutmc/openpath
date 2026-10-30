@@ -49,7 +49,7 @@ export function PreviewExperience({ release, competency, home, back }: { release
 
     {view === "teaching" ? <TeachingContent competency={c.evidenceTarget ?? competency} topic={{ name: c.name, description: c.description, breadcrumb: `${release.release.boardLabel} › Grade ${release.release.grade} › ${c.strand}` }} onPractice={goPractice} /> : null}
 
-    {view === "practice" ? <main className="practice-workspace">
+    {view === "practice" ? <main className="practice-workspace" data-qid={q?.id}>
       <div className="practice-progress" aria-label={`Question ${index + 1}`}><div>{Array.from({ length: 6 }, (_, i) => <span key={i} className={i <= index ? "done" : ""} />)}</div><b>{index + 1} / …</b></div>
       <header className="practice-head"><p className="practice-kicker">{c.name}</p><h2>{q?.prompt ?? "No keyboard practice is available for this topic yet."}</h2></header>
       {q ? <>

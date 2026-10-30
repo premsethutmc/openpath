@@ -164,7 +164,9 @@ test("an exhausted pool: the module stops, never repeats a problem, and never re
     d.enrol(8, "2026-27", sampleReleases.find((r) => r.grade === 8)!);
     // a learner who keeps getting it wrong: the module teaches, then stops when its explanations and questions run out
     for (let visit = 0; visit < 6; visit++) {
-      d.work(comp, (q) => String(Number(question(q).answer.replace(/\D/g, "") || 0) + 3), { max: 40 });
+      // a wrong answer in the question's own form: a wrong option for a choice question (an unreadable "3" is undecided, not
+      // wrong, so the same check would rightly be asked again for ever), a wrong number otherwise
+      d.work(comp, (q) => (question(q).type === "choice" ? (question(q).answer === "A" ? "B" : "A") : String(Number(question(q).answer.replace(/\D/g, "") || 0) + 3)), { max: 40 });
       d.newSession(1);
     }
     const st = d.state();

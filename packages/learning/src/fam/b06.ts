@@ -3,7 +3,7 @@
  * number rules, figurate numbers, protractor reading, angle pairs, turns, fractal stages, solids and painted cubes,
  * quadrilateral and triangle classification, rotational symmetry, equal area / equal perimeter. Written by OpenPath; CC0.
  */
-import type { Bug, Def, Step, Visual } from "../family-kit";
+import type { Bug, Def, InstanceTeaching, Step, Visual } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 import { fmt } from "../family-kit";
 
@@ -163,6 +163,98 @@ const FIGK = [
   { name: "numbers made by doubling", t: (n: number) => 2 ** (n - 1), lo: 5, hi: 12, things: "cells in a dish that double every hour" },
   { name: "odd numbers", t: (n: number) => 2 * n - 1, lo: 5, hi: 30, things: "beads on a string that grows by 2 each time" },
 ];
+/**
+ * teaching-contract@1 reference (affig): the teaching for one concrete question [kind, n]. The concept, the worked
+ * solution and the picture are all about that question's own pattern and term; each kind has the solution steps that
+ * suit it (a picture rule, a sum, a constant gap, repeated doubling), not one template. Every number in a step is a
+ * claim the contract recomputes; the explanations themselves are for educator review.
+ */
+function figTeaching([kind, n]: number[]): InstanceTeaching {
+  const K = FIGK[kind];
+  const first = [1, 2, 3, 4].map(K.t);
+  const list = first.join(", ");
+  const answer = K.t(n);
+  const table = (how: (k: number) => string, change?: "difference" | "ratio") => ({ kind: "sequence-table" as const, rows: [1, 2, 3, 4].map((k) => ({ n: k, value: K.t(k), how: how(k) })), ...(change ? { change } : {}), caption: `The first four ${K.name.replace(/ \(.*\)$/, "")}: ${list}` });
+  switch (kind) {
+    case 0:
+      return {
+        concept: { title: "Square numbers", text: [`The square numbers ${list} come from square dot pictures: the ${ord(4)} picture has 4 rows of 4 dots, so 4 × 4 = 16.`, "Picture n has n rows of n dots, so the n-th square number is n × n."] },
+        representation: { kind: "dot-array", rows: 4, cols: 4, value: 16, caption: "The 4th square number: 4 rows of 4 dots = 16" },
+        worked: {
+          result: answer,
+          steps: [
+            { expression: `${list} = 1 × 1, 2 × 2, 3 × 3, 4 × 4`, explanation: "Each term is its position multiplied by itself: a square of dots.", claims: [1, 2, 3, 4].map((k) => ({ expr: `${k} × ${k}`, value: K.t(k) })) },
+            { expression: `The ${ord(n)} square number = ${n} × ${n}`, explanation: `So the ${ord(n)} picture has ${n} rows of ${n} dots.` },
+            { expression: `${n} × ${n} = ${answer}`, explanation: `The ${ord(n)} square number is ${answer}.`, claims: [{ expr: `${n} × ${n}`, value: answer }] },
+          ],
+        },
+      };
+    case 1:
+      return {
+        concept: { title: "Triangular numbers", text: [`The triangular numbers ${list} come from triangles of dots: row 1 has 1 dot, row 2 has 2, and so on.`, "The n-th triangular number is 1 + 2 + … + n, which is half of n × (n + 1)."] },
+        representation: { kind: "dot-triangle", rows: 4, value: 10, caption: "The 4th triangular number: 1 + 2 + 3 + 4 = 10" },
+        worked: {
+          result: answer,
+          steps: [
+            { expression: `${list} = 1, 1 + 2, 1 + 2 + 3, 1 + 2 + 3 + 4`, explanation: "Each triangle adds a new row with one more dot than the row before.", claims: [1, 2, 3, 4].map((k) => ({ expr: Array.from({ length: k }, (_, i) => i + 1).join(" + "), value: K.t(k) })) },
+            { expression: "1 + 2 + … + n = n × (n + 1) ÷ 2", explanation: "Two copies of the triangle fit together into an n by (n + 1) rectangle, so one triangle is half of it.", claims: [{ expr: "4 × (4 + 1) ÷ 2", value: 10 }] },
+            { expression: `${n} × ${n + 1} ÷ 2 = ${answer}`, explanation: `The ${ord(n)} triangular number is ${answer}.`, claims: [{ expr: `${n} × ${n + 1} ÷ 2`, value: answer }] },
+          ],
+        },
+      };
+    case 2:
+      return {
+        concept: { title: "Rectangular numbers", text: [`The rectangular numbers ${list} come from rectangles of dots with one more column than rows: the ${ord(4)} has 4 rows of 5, so 4 × 5 = 20.`, "Picture n has n rows of n + 1 dots, so the n-th rectangular number is n × (n + 1)."] },
+        representation: { kind: "dot-array", rows: 4, cols: 5, value: 20, caption: "The 4th rectangular number: 4 rows of 5 dots = 20" },
+        worked: {
+          result: answer,
+          steps: [
+            { expression: `${list} = 1 × 2, 2 × 3, 3 × 4, 4 × 5`, explanation: "Each picture has one more column than rows.", claims: [1, 2, 3, 4].map((k) => ({ expr: `${k} × ${k + 1}`, value: K.t(k) })) },
+            { expression: `${n} × ${n + 1} = ${answer}`, explanation: `The ${ord(n)} picture has ${n} rows of ${n + 1} dots: ${answer}.`, claims: [{ expr: `${n} × ${n + 1}`, value: answer }] },
+          ],
+        },
+      };
+    case 3:
+      return {
+        concept: { title: "Cube numbers", text: [`The cube numbers ${list} come from cubes built of small cubes: the ${ord(4)} is 4 layers of 4 × 4, so 4 × 4 × 4 = 64.`, "The n-th cube number is n × n × n."] },
+        representation: table((k) => `${k} × ${k} × ${k}`),
+        worked: {
+          result: answer,
+          steps: [
+            { expression: `${list} = 1 × 1 × 1, 2 × 2 × 2, 3 × 3 × 3, 4 × 4 × 4`, explanation: "Each cube has as many layers as its side, and each layer is a square.", claims: [1, 2, 3, 4].map((k) => ({ expr: `${k} × ${k} × ${k}`, value: K.t(k) })) },
+            { expression: `${n} × ${n} = ${n * n}`, explanation: `One layer of the ${ord(n)} cube has ${n * n} small cubes.`, claims: [{ expr: `${n} × ${n}`, value: n * n }] },
+            { expression: `${n * n} × ${n} = ${answer}`, explanation: `There are ${n} layers, so ${answer} small cubes.`, claims: [{ expr: `${n * n} × ${n}`, value: answer }] },
+          ],
+        },
+      };
+    case 4:
+      return {
+        concept: { title: "Doubling patterns", text: [`In ${list} each number is double the one before: the ratio is ×2 every time, so the pattern grows faster and faster.`, "Starting from 1, the n-th number has been doubled n − 1 times: 2 to the power n − 1."] },
+        representation: table((k) => (k === 1 ? "start" : `${K.t(k - 1)} × 2`), "ratio"),
+        worked: {
+          result: answer,
+          steps: [
+            { expression: `${list}: × 2 each time`, explanation: "Divide each term by the one before: always 2.", claims: [2, 3, 4].map((k) => ({ expr: `${K.t(k)} ÷ ${K.t(k - 1)}`, value: 2 })) },
+            { expression: `The ${ord(n)} number = 2^${n - 1}`, explanation: `From the 1st to the ${ord(n)} number there are ${n - 1} doublings.`, claims: [{ expr: "2^3", value: 8 }] },
+            { expression: `2^${n - 1} = ${answer}`, explanation: `The ${ord(n)} number is ${answer}.`, claims: [{ expr: `2^${n - 1}`, value: answer }] },
+          ],
+        },
+      };
+    default:
+      return {
+        concept: { title: "Odd numbers", text: [`The odd numbers ${list} go up by the same amount each time: the gap is always 2.`, "A pattern with a constant gap of 2 that starts at 1 has the rule 2 × n − 1."] },
+        representation: table((k) => `2 × ${k} − 1`, "difference"),
+        worked: {
+          result: answer,
+          steps: [
+            { expression: `${list}: + 2 each time`, explanation: "Subtract each term from the next: the gap is always 2.", claims: [2, 3, 4].map((k) => ({ expr: `${K.t(k)} − ${K.t(k - 1)}`, value: 2 })) },
+            { expression: "The n-th odd number = 2 × n − 1", explanation: "A constant gap of 2 means 2 × n; the first term is 1, one less than 2 × 1, so subtract 1. Check the 4th: 2 × 4 − 1 = 7.", claims: [{ expr: "2 × 4 − 1", value: 7 }] },
+            { expression: `2 × ${n} − 1 = ${answer}`, explanation: `The ${ord(n)} odd number is ${answer}.`, claims: [{ expr: `2 × ${n} − 1`, value: answer }] },
+          ],
+        },
+      };
+  }
+}
 /** The k-th term built a different way: by adding the gaps one at a time (or by repeated multiplication). */
 function figBuild(kind: number, n: number) {
   let v = 0;
@@ -973,9 +1065,21 @@ export const B06: Def[] = [
     teach: {
       idea: "Square numbers come from square dot pictures (n rows of n), triangular numbers from triangles (1 + 2 + … + n), rectangular numbers from n rows of n + 1.",
       method: "Find the rule that makes each term from its position (for squares, n × n), test it on the terms you know, then use it for the term asked.",
-      visual: ([kind]) => (kind === 0 ? { type: "array", rows: 4, cols: 4 } : kind === 2 ? { type: "array", rows: 4, cols: 5 } : { type: "dots", count: FIGK[kind].t(4) }),
+      // teaching-contract@1: no decorative dots; each lesson pictures its own pattern (figTeaching)
+      instance: figTeaching,
+      caseOf: ([kind]) => FIGK[kind].name,
       alternatives: [
-        { id: "gaps", title: "Look at the gaps", kind: "procedural", text: ["Write the gaps between the terms: for square numbers they are 3, 5, 7, 9 … (the odd numbers); for triangular numbers 2, 3, 4, 5 ….", "Keep adding the next gap until you reach the term you need."], visual: ([kind]) => ({ type: "table", head: ["Term", "1st", "2nd", "3rd", "4th"], rows: [["Number", ...[1, 2, 3, 4].map((t) => String(FIGK[kind].t(t)))], ["Gap", "", ...[2, 3, 4].map((t) => `+${FIGK[kind].t(t) - FIGK[kind].t(t - 1)}`)]] }) },
+        {
+          id: "gaps", title: "Look at the gaps", kind: "procedural",
+          text: ["Write the gaps between the terms: for square numbers they are 3, 5, 7, 9 … (the odd numbers); for triangular numbers 2, 3, 4, 5 ….", "Keep adding the next gap until you reach the term you need."],
+          // the gaps tell the pattern apart only for these kinds (cubes and doubling are taught by their own rule)
+          applies: ([kind]) => kind === 0 || kind === 1 || kind === 2 || kind === 5,
+          textFor: ([kind]) => {
+            const t = [1, 2, 3, 4].map(FIGK[kind].t), gaps = [1, 2, 3].map((i) => t[i] - t[i - 1]);
+            return [`For the ${FIGK[kind].name.replace(/ \(.*\)$/, "")} ${t.slice(0, 4).join(", ")} the gaps are ${gaps.map((g) => `+${g}`).join(", ")}${kind === 5 ? ": always the same." : `: each gap is ${kind === 1 ? "1" : "2"} more than the one before.`}`, kind === 5 ? "A constant gap of 2 means you can jump straight to any term with 2 × n − 1." : "Keep adding the next gap until you reach the term you need, or use the rule to jump straight there."];
+          },
+          visual: ([kind]) => ({ type: "table", head: ["Term", "1st", "2nd", "3rd", "4th"], rows: [["Number", ...[1, 2, 3, 4].map((t) => String(FIGK[kind].t(t)))], ["Gap", "", ...[2, 3, 4].map((t) => `+${FIGK[kind].t(t) - FIGK[kind].t(t - 1)}`)]] }),
+        },
       ],
     },
     limits: "Square, triangular, rectangular, cube, doubling and odd-number patterns up to a stated term; drawing the dot pictures is marked by an educator.",

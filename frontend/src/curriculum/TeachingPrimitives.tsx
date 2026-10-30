@@ -2,6 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import type { Question, Screen } from "../../../packages/learning/src/content";
 import type { Problem as FamilyProblem } from "../../../packages/learning/src/families";
 import type { TeachingVisual } from "../../../packages/learning/src/teaching-presentation";
+import type { Representation } from "../../../packages/learning/src/family-kit";
 
 const signed = (value: number) => String(value).replace("-", "−");
 const wrapped = (value: number) => value < 0 ? `(${signed(value)})` : signed(value);
@@ -82,6 +83,60 @@ export function TeachingVisualRenderer({ visual }: { visual: TeachingVisual }) {
   return <LabeledGeometry {...visual} />;
 }
 
+/** teaching-contract@1: a picture of the question's own mathematical object, drawn from its values (never decoration). */
+export function RepresentationRenderer({ representation: r }: { representation: Representation }) {
+  if (r.kind === "dot-array" || r.kind === "dot-triangle") {
+    const rows = r.kind === "dot-array" ? Array.from({ length: r.rows }, () => r.cols) : Array.from({ length: r.rows }, (_, k) => k + 1);
+    const width = Math.max(...rows), gap = 26, w = width * gap + 12, h = rows.length * gap + 12;
+    const label = r.kind === "dot-array" ? `${r.rows} rows of ${r.cols} dots, ${r.value} in all` : `A triangle of dots with rows of ${rows.join(", ")}: ${r.value} in all`;
+    return <figure className="teaching-data-visual dot-visual" role="img" aria-label={label} data-kind={r.kind} data-value={r.value}>
+      <svg viewBox={`0 0 ${w} ${h}`} aria-hidden="true">
+        {rows.flatMap((count, row) => Array.from({ length: count }, (_, col) => <circle key={`${row}-${col}`} cx={6 + gap / 2 + col * gap} cy={6 + gap / 2 + row * gap} r={8} />))}
+      </svg>
+      <figcaption>{r.caption}</figcaption>
+    </figure>;
+  }
+  if (r.kind === "right-triangle") {
+    const side = (v: number | null, name: string) => (v === null ? `${name} = ?` : `${name} = ${v} cm`);
+    return <figure className="teaching-data-visual triangle-visual" role="img" aria-label={`Right triangle: ${side(r.a, "a")}, ${side(r.b, "b")}, hypotenuse ${side(r.c, "c")}`} data-kind={r.kind}>
+      <svg viewBox="0 0 300 190" aria-hidden="true">
+        <polygon points="80,160 280,160 80,30" />
+        <polyline points="80,144 96,144 96,160" fill="none" />
+        <text x="180" y="182" textAnchor="middle">{r.b === null ? "b = ?" : `b = ${r.b}`}</text>
+        <text x="72" y="98" textAnchor="end">{r.a === null ? "a = ?" : `a = ${r.a}`}</text>
+        <text x="190" y="86" textAnchor="start" className={r.c === null ? "asked" : ""}>{r.c === null ? "c = ?" : `c = ${r.c}`}</text>
+      </svg>
+      <figcaption>{r.caption}</figcaption>
+    </figure>;
+  }
+  if (r.kind === "counts") {
+    const total = r.items.reduce((n, it) => n + it.count, 0);
+    return <figure className="teaching-data-visual counts-visual" role="img" aria-label={`${total} equally likely: ${r.items.map((it) => `${it.count} ${it.label}`).join(", ")}`} data-kind={r.kind}>
+      <div className="count-balls">{r.items.flatMap((it) => Array.from({ length: it.count }, (_, k) => <span key={`${it.label}-${k}`} className={`ball ball-${it.label}${it.asked ? " asked" : ""}`} />))}</div>
+      <figcaption>{r.items.map((it) => <span key={it.label} className={it.asked ? "asked" : ""}>{it.count} {it.label}</span>)}<span>{r.caption}</span></figcaption>
+    </figure>;
+  }
+  if (r.kind === "division-chain") {
+    return <figure className="teaching-data-visual sequence-visual chain-visual" aria-label={r.caption} data-kind={r.kind}>
+      <table><thead><tr><th>Divide</th><th>by</th><th>quotient</th><th>remainder</th></tr></thead>
+        <tbody>{r.rows.map((row, k) => <tr key={k}><td>{row.dividend}</td><td>{row.divisor}</td><td>{row.quotient}</td><td className={row.remainder === 0 ? "zero" : ""}>{row.remainder}</td></tr>)}</tbody></table>
+      <figcaption>{r.caption}</figcaption>
+    </figure>;
+  }
+  const change = r.change;
+  return <figure className="teaching-data-visual sequence-visual" aria-label={r.caption} data-kind={r.kind}>
+    <table>
+      <thead><tr><th scope="row">Term</th>{r.rows.map((row) => <th key={row.n}>{row.n}</th>)}</tr></thead>
+      <tbody>
+        <tr><th scope="row">Value</th>{r.rows.map((row) => <td key={row.n}>{row.value}</td>)}</tr>
+        {r.rows.some((row) => row.how) ? <tr className="sequence-how"><th scope="row">Made by</th>{r.rows.map((row) => <td key={row.n}>{row.how}</td>)}</tr> : null}
+        {change ? <tr className="sequence-change"><th scope="row">{change === "ratio" ? "Ratio" : "Gap"}</th>{r.rows.map((row, k) => <td key={row.n}>{k === 0 ? "" : change === "ratio" ? `×${row.value / r.rows[k - 1].value}` : `+${row.value - r.rows[k - 1].value}`}</td>)}</tr> : null}
+      </tbody>
+    </table>
+    <figcaption>{r.caption}</figcaption>
+  </figure>;
+}
+
 /** The page asks for one tap per reasoning step; no answer or learner evidence is submitted. */
 export function ProgressiveWorkedExample({ example, storageKey }: { example: WorkedExample; storageKey?: string }) {
   const [shown, setShown] = useState(() => {
@@ -94,7 +149,7 @@ export function ProgressiveWorkedExample({ example, storageKey }: { example: Wor
     <div className="worked-steps" aria-live="polite">
       {example.steps.slice(0, shown).map((step, index) => <div className="worked-step" key={`${step.expression}-${index}`}>
         <span className="step-number">{index + 1}</span>
-        <div><div className="step-expression">{step.expression}</div><p>{step.explanation}</p></div>
+        <div><div className="step-expression">{step.expression}</div>{step.explanation ? <p>{step.explanation}</p> : null}</div>
       </div>)}
     </div>
     {shown < example.steps.length

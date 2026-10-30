@@ -1,7 +1,8 @@
 # OpenPath — Unified Grading: Shadow Release Checklist
 
-Branch `feat/unified-grading`. Base for this preparation: `b2a35e6` (Phase C). Release-preparation commit: the commit that adds this file.
-Nothing has been merged or deployed, and the production grading mode has not been changed.
+Branch `staging/unified-grading-shadow` = `feat/unified-grading` (`bb20657`) + the E7 safety branch + the staging verification commit.
+Nothing has been merged into `main` or deployed to any hosted service. The grading mode has not been switched to `unified`. The legacy
+grader is in place.
 
 ## 1. Commits
 
@@ -13,109 +14,192 @@ Nothing has been merged or deployed, and the production grading mode has not bee
 | `a1e7028` | stages 4–6 |
 | `b7d7317` | stage 7 |
 | `b2a35e6` | stages 8–10 |
-| this commit | release preparation (checks A–E below) |
+| `bb20657` | release preparation (checks A–E) |
+| `d3f91ac` | merge of `fix/math-e7-safety-invariants` (E7) |
+| this commit | staging verification: ambiguous-question quarantine, migration round trip, start-up guards, smoke tests |
 
 PR #83 (answer-key certification, `feat/math-answer-key-certification` @ `901c907`) is read, not merged.
 
-## 2. Test suites (this commit)
+## 2. Pre-deployment verification
+
+### 2.1 E7 safety branch — was not included; now merged
+
+`feat/unified-grading` was based on `46ce4b9` and did **not** contain E7 (`837c79c`, on `fix/math-e7-safety-invariants` @ `d7d59bf`).
+It is merged in `d3f91ac`. Conflict resolution:
+- The main audit report keeps the unified-grading version. E7's report is kept as `MATH_CURRICULUM_GRADING_AUDIT_REPORT.e7-audit.md`.
+- E7 G2 (1–30 digit bounds on numbers) is applied to `legacy_grading.py` as well.
+- The grader bundle is rebuilt.
+- E7's own tests (`e7-safety-invariants.test.ts`, `test_server_parity.py`) run in the suites below and pass.
+
+**Owner decision needed later:** E7 G1 repairs the contract guard that held the 951 D09 word forms, so they would no longer be quarantined
+automatically. Owner decision 4 keeps them quarantined. They are now listed as manual entries (`question-status-d09-hold.v1.json`, reason
+`pending-release-review`), so the hold no longer depends on the defect. Releasing them is a separate approval.
+
+### 2.2 Migrations 0006 and 0007 — reversible, recovery procedure tested
+
+- `0006` creates `GradingDecisionRecord`.
+- `0007` adds two partial unique constraints.
+- Both are standard Django operations with automatic reverse operations.
+
+`backend/scripts/migration_roundtrip.sh` exercises the full cycle with data in the table. It was run on SQLite and on PostgreSQL 16
+(local server, psycopg 3.2.13), and passed on both:
+
+| Step | Result |
+|---|---|
+| Fresh database → `0007`, seed 3 decisions (an original, its superseding regrade, a second attempt) | 3 rows |
+| Export decisions (`dumpdata family.gradingdecisionrecord`) | 3 exported |
+| Reverse `0007` → `0006` | constraints dropped, 3 rows kept |
+| Re-apply `0007` | a duplicate original decision is refused again |
+| Reverse `0006` → `0005` | table dropped |
+| Re-apply `0006` + `0007`, `loaddata` the export | the 3 rows restored exactly |
+
+**Recovery procedure:**
+- Reversing `0007` is safe at any time.
+- Reversing `0006` deletes the decision log:
+  - Original decisions are also kept in each event body (`decision`).
+  - Regrade (superseding) decisions exist **only** in the table.
+- So before reversing `0006`, export the table (`manage.py dumpdata family.gradingdecisionrecord -o decisions.json`, or `pg_dump -t
+  family_gradingdecisionrecord`), and restore it with `loaddata` after re-applying.
+- The preferred rollback (§8) leaves both migrations in place.
+
+### 2.3 Grader bundle matches its manifest
+
+- `sha256sum backend/family/grader/grader.mjs` = `e5535318c369…a7d19593a4`, equal to `grader.manifest.json` `sha256`.
+- The server checks this on every call (`kernel_grader.bundle_intact`).
+- New in this commit: `deploy/preview/start.sh` refuses to start if the bundle does not match its manifest or Node is missing. It logs the
+  verified hash at start-up (`grading mode shadow | grader bundle sha256 e5535318… matches its manifest`, seen in staging).
+
+### 2.4 Production learner database — none exists; the historical dry run is not applicable
+
+Evidence:
+- `render.yaml`: the only production-like service is `openpath-english-demo`. It is an owner-only demo with "No database, no account
+  server".
+- `render.preview.yaml` (the existing preview service `srv-dbaeu33ncjis73dagjt0`): ephemeral SQLite with synthetic data only. An optional
+  `PREVIEW_DATABASE_URL` must be a dedicated synthetic database. `start.sh` unsets `DATABASE_URL`.
+- `docs/product/PRODUCTION_BLOCKERS.md`: "Nothing here is deployed". Managed PostgreSQL is still an open blocker.
+- No database credentials exist in this environment or the repository.
+
+**Conclusion:** there are no historical learner records to reconstruct, so the reconstruction dry run (§7) is **not applicable**. It is no
+longer a release blocker. The command and its read-only guards remain, tested, for when a real database exists.
+
+### 2.5 Remaining ambiguous questions and defective distractors — reviewed
+
+Rule applied: quarantine only what cannot be graded unambiguously. Every original record is kept: the registry withholds a presentation, it
+deletes nothing, and recorded answers stay in the event log.
+
+**Quarantined (1,058 presentations, reason `ambiguous-question`; list: `content/learning/question-status-ambiguous.v1.json`):**
+
+| Family | Presentations | Why no single answer can be required |
+|---|---|---|
+| abmeas | 324 | Ruler described in millimetres but labelled in centimetre numbers. 31 and 3.1 are both defensible. |
+| anquad | 300 (word form only) | Asks about the frame but gives the glass area. The answer is right only if the two are equal. |
+| aasolid | 192 | Everyday objects (tin of oil, pencil box) can be read as a cylinder or a cuboid, so the count is not determined. |
+| amcrit | 100 | ASA and AAS are both valid for the given data, so two options are correct. |
+| amsimc | 72 | The SSA data with the longer opposite side does determine the triangle, so the key "Not shown to be similar" is disputable. |
+| aiconvex | 70 | A, B and C are collinear (a 180° angle). Whether the figure is a quadrilateral is a convention the question does not state. |
+
+**Kept (gradable as written):**
+- The value-equal or form-violating distractors (agmix 248, amceva 122, ajrat, ajrstd, avfas, avlow, agnl, agpfrac): the question states the
+  form, so exactly one option satisfies it.
+- The form/wording notes (aipi, ahcube, above, alcomp, antable, aofund, auapk, aosamp, aaname): the stored answer is unambiguous.
+- These remain on the hold list for `unified` (§5).
+
+**Pipeline consequences:**
+- The compiled library was rebuilt without the newly quarantined questions; replacements come from the same pools.
+- Family specs were regenerated; spec validation now treats quarantined presentations as withheld (`spec.ts`), with 0 failing validation
+  across 1,080 families.
+- 6 modules and families whose content hash changed were already drafts, so no educator approval was reset.
+
+**Quarantine now:** 2,070 presentations:
+
+| Reason | Presentations |
+|---|---|
+| ambiguous-question | 1,058 |
+| pending-release-review (D09, owner decision 4) | 951 |
+| invalid-question (aofclass) | 41 |
+| contract-inconsistency (aqd2) | 20 |
+
+## 3. Test suites (this commit)
 
 | Suite | Result |
 |---|---|
-| `bun test packages/learning` | 1,391 pass, 0 fail |
-| Program engines (`frontend/src/mathematics`: unit, chapter, journey, foundation, remediation, mathematics, canonical) | 77 pass, 0 fail |
-| App bundles (`year`, `chapter`, `foundation`, `journey`) | build, 0 errors |
-| Django `manage.py test` (vendored pins, SQLite; suite runs with `OPENPATH_GRADING=unified`) | 297 tests, OK |
-| Shadow-mode tests under `OPENPATH_GRADING=shadow` (`test_grading_modes`, `test_release_invariants`) | 12 tests, OK |
+| `bun test packages/learning` (includes E7 invariants) | 1,423 pass, 0 fail |
+| Program engines (`frontend/src/mathematics`, all) | 79 pass, 2 fail. Both fail identically at `bb20657` (`foundation/prerequisites.test.ts`, curriculum-inventory counts). They predate this work and are unrelated to grading. |
+| Django `manage.py test`, SQLite (suite runs with `OPENPATH_GRADING=unified`) | 300 tests, OK |
+| Django, `OPENPATH_GRADING=shadow` (`test_grading_modes`, `test_release_invariants`) | OK |
+| Django, PostgreSQL 16 (local server, psycopg 3.2.13) | 300 tests, OK. The first run showed one test that hard-coded the SQLite read-only guard name; the PostgreSQL guard itself worked (write refused). The assertion now reads the database vendor. |
+| Migration round trip, SQLite and PostgreSQL 16 | pass (§2.2) |
 
-The rest of the Django suite asserts unified behaviour. Under `OPENPATH_GRADING=shadow` the unified-specific assertions differ, as
-expected; the shadow behaviour itself is covered by the two dedicated suites.
-
-## 3. Check A — what a learner sees in shadow mode
+## 4. Check A — what a learner sees in shadow mode
 
 - The server reports the authoritative mode with the learner's record (`GET .../events` → `gradingMode`). The app sets it on every load,
-  in the year app and the three program apps (`grading/mode.ts`). A server that reports no mode is treated as `legacy`.
-- **Year app:** after an answer, the learner sees the server's recorded (authoritative) decision (`grading/view.ts authoritativeView`).
-  - A unified preview that differs is never shown.
-  - Without a server decision in shadow mode, the screen says "saved", not a verdict.
-- **Program apps:** in shadow and legacy modes each engine marks with its earlier marking (english-core `scoreCode`), passed in as
-  `earlier`. A recorded server decision always wins over both.
-- **Replay of records saved before decisions existed:** these use the earlier comparison until the switch to unified, so mastery is not
-  reinterpreted.
-- **Internal comparison is preserved:** the server stores the unified decision as `shadowDecision` on every graded answer, and
-  `compare_shadow` reports on them.
-- Tests: `grading/view.test.ts`, 6 tests.
+  in the year app and the three program apps. A server that reports no mode is treated as `legacy`.
+- The year app shows the server's recorded (authoritative) decision. A differing unified preview is never shown.
+- Program apps mark with their earlier marking in shadow and legacy modes. A recorded server decision always wins.
+- Records saved before decisions existed replay with the earlier comparison until the switch.
+- Tests: `grading/view.test.ts`.
 
-## 4. Check B — decision-record and replay invariants (`backend/family/test_release_invariants.py`, real endpoints, real Node grader)
+## 5. Checks B–D (unchanged from `bb20657`)
 
-| Invariant | Mechanism | Test |
+**Check B — invariants** (`test_release_invariants.py`): all pass. They cover:
+- immutability;
+- shadow decisions never counting toward credit;
+- authoritative and shadow decisions being distinguishable;
+- one authoritative outcome per attempt (constraints from migration `0007`);
+- deterministic replay;
+- a grader failure in shadow mode keeping the earlier fallback;
+- a mode switch never reinterpreting a recorded decision.
+
+**Check C — reconciliation** (`data/certification-reconciliation.json`, refreshed):
+- Answer keys: 1,056 fully certified, 18 partially, 6 with a discrepancy.
+- Grader: certified on sample for all 1,080 families.
+- 24 families are held for `unified`.
+- The quarantine now counts 2,070 presentations.
+
+**Check D — 12,725 disagreements** on the audit corpus:
+- Oracle-adjudicated: unified agrees with the oracle 12,316, earlier 399, neither 10.
+- Hand-adjudicated: 27 cases, 0 wrong unified verdicts.
+- Unified is less decisive in 409 cases: 288 equal answers are now unresolved (mixed numbers, ungrouped calculus expressions), and 121
+  answers the earlier policy correctly marked incorrect are now unresolved.
+
+## 6. Staging verification
+
+**Environment.** There are no hosted staging credentials here (no Render access). The registries are also unreachable from this workspace,
+so the container image could not be built. Staging was therefore run locally, using the deployment's own start script
+(`deploy/preview/start.sh`):
+- Same settings module (`config.preview`), gunicorn 23.0.0, Node grader bundle.
+- PostgreSQL 16 through `PREVIEW_DATABASE_URL`.
+- Password gate on HTTP (local testing mode).
+- The static app is a placeholder (frontend build not possible offline). The API path is the real one.
+
+All traffic went through the gate, with fresh synthetic accounts only. Launcher: `/var/tmp/staging/run.sh` (not in the repository).
+
+**Start-up guards:**
+- `OPENPATH_GRADING=unified` → refused ("not approved for this deployment"), exit 1.
+- Shadow → starts, and logs the mode and the verified bundle hash.
+
+**Smoke tests** (`tools/mathematics/server-grader/staging_smoke.py`, app replay via `staging-replay.ts`):
+
+| Area | Checks | Result |
 |---|---|---|
-| Recorded decisions are immutable | `save()`, queryset `update()` and `bulk_update()` all refused on `GradingDecisionRecord`. Event bodies change only through the parent-requested privacy scrub, which keeps answers. | test_1 |
-| Shadow decisions never affect mastery | Replay reads only `decision`. `shadowDecision` is not logged; it is not credited, and `independent_at` ignores it. | test_2_and_3 |
-| Authoritative is distinguishable from shadow | `decision.policy` is `legacy-policy@0` or `grading-policy@1`, with `decidedBy: server`. `shadowDecision` carries `decidedBy: shadow`. | test_2_and_3 |
-| Retries cannot create two authoritative outcomes | Two database constraints (migration `0007`): one original decision per attempt, and one successor per decision. A racing regrade is skipped. Duplicate attempt ids are refused (400). | test_4 |
-| Replay is deterministic and uses the latest recorded decision | `decisions.effective` returns the latest decision that nothing supersedes, in a fixed order. | test_5 (3 identical runs) |
-| Shadow keeps the earlier fallback | With the grader down in shadow mode, the earlier policy still decides. The unified failure decision is recorded beside it only. | test_5b |
-| Rollback never reinterprets | Credit is read from the recorded decision in all three modes. Historical records keep their recorded verdict. | test_6 |
+| Answer submission | gate, register, pupil, enrol, 6 attempts saved, repeated attempt id refused (400) | pass |
+| Authoritative grading | `correct` / `incorrect` / `unresolved` decided by the server under `legacy-policy@0`, `gradingMode: shadow` | pass |
+| Unresolved answers | unreadable `three-ish` kept verbatim with no credit; quarantined `gen:aasolid:1,0` → `unresolved.quarantined`, answer kept | pass |
+| Mastery replay | the app's own replay: credit only c1, c2; u1, d1, q1 kept apart, never attempts (P1); averages skill reaches `independent` | pass |
+| Shadow comparison | unified decision stored beside every graded answer (`grading-policy@1`, `decidedBy: shadow`); `24/2` for 12 differs (earlier unresolved, unified correct) and the earlier verdict stays authoritative; `compare_shadow` against the staging database: 20 compared, 4 different, all "fix: an equal answer is now credited", **toInvestigate 0** | pass |
+| Rollback | restarted with `OPENPATH_GRADING=legacy`: same account; mode reported `legacy`; events byte-identical; per-attempt credit, unresolved set and skill status identical; new answers graded by the earlier policy with no shadow evaluation | pass |
+| Roll forward | restarted in shadow: full shadow suite passes again on the same database | pass |
 
-## 5. Check C — certification reconciliation
+Totals:
+- Shadow: 31/31, twice.
+- After rollback: 10/10.
+- Staging database afterwards: 30 events, 25 decision rows, all synthetic.
 
-Output: `tools/mathematics/grading-audit/data/certification-reconciliation.json`, produced by `reconcile.py 901c907`. It is read-only and
-changes neither certification.
+## 7. Historical reconstruction dry run — not applicable
 
-| Dimension | Evidence | Basis | Result |
-|---|---|---|---|
-| Answer-key correctness | PR #83 | exhaustive over 341,483 typed questions | Fully certified 1,056 families; Partially 18; Discrepancy 6. 0 demonstrably wrong keys. 41 invalid (aofclass), 414 ambiguous, 14 notation-only. |
-| Question presentation | PR #83 register | partial | Word-form wording sampled per template only. Figure rendering not verified. Distractor defects: agmix 248, amceva 122 (value-equal distractor). Ambiguous wording: amsimc, aiconvex, amcrit, abmeas, aasolid, anquad. |
-| Grader correctness | `grading-certifications.v1.json` | sampled (≤19 questions per family) | 1,080 families certified on sample; 0 false acceptances, 0 false rejections. |
-| Student working | none | — | Not verified anywhere: every released question is answer-only, and working never changes credit. |
-| Quarantine | `question-status.v1.json` | — | 1,012 presentations: 971 contract inconsistencies (D09, D18) plus **41 aofclass invalid questions added in this commit** (manual entries from the PR #83 handoff, re-checked: f(x) = (x+4)² − 4 on [−5, ∞) takes −4, which is outside the stated codomain [−3, ∞)). |
-
-Reconciled readiness for unified grading:
-- 1,052 families ready.
-- 4 families ready except their quarantined presentations.
-- 24 families on hold:
-  - 6 with an answer-key discrepancy (aofclass, amsimc, aiconvex, amcrit, abmeas, aasolid);
-  - 18 with partial key certification (form, wording or distractor notes).
-
-No family was promoted. The grading certification is not changed by the answer-key results, because it says something different (the
-grader agrees with the stored key). The hold list is for the switch to unified, not for shadow.
-
-## 6. Check D — the 12,725 disagreements (earlier policy versus unified, server route, 308,568 cases)
-
-- **Consistent:** each case gets exactly one class, decided by `compare_shadow.classify(earlier verdict, unified verdict, unified reason)`.
-  The class counts sum to 12,725, and 0 cases are unclassified or need investigation.
-- **Reproducible:** two runs of `g5.py` produced byte-identical summaries and review sets. The unified verdicts are identical to the
-  stage-4 run (0 differences in 308,568 cases).
-- **Adjudicated against the independent oracle (automatic, all 12,725):**
-  - Unified agrees with the oracle: 12,316.
-  - Earlier agrees with the oracle: 399.
-  - Neither: 10.
-- **Adjudicated by hand: 27** (3 per verdict pair, seeded sample; `data/g5-hand-adjudication.json`).
-  - In 0 cases did the unified grader give a wrong definite verdict.
-  - In 7 cases the earlier grader gave a correct definite verdict where unified asks for clarification, because of decision 2.
-- **Where the new grader is less decisive:** never wrong, but no credit and no penalty.
-  - 288 equal answers are now unresolved:
-    - 238 mixed numbers on answers whose contract does not permit them (e.g. `4 1/2` for 9/2);
-    - 50 expressions written without grouping (e.g. `12x^2cos(3x)`, `x^x(log(x) + 1)`, `3x^2y`).
-  - 121 answers the earlier policy correctly marked incorrect are now unresolved: 111 readable wrong values and 10 equal values in a
-    forbidden form (e.g. `4 6/5`, `2/-3`, `log 5/log 3`).
-  - These follow decisions 2 and 3, but they will show up in shadow data as missed credit, mostly in calculus answers.
-- **Limitation:** the "earlier policy" here is the branch's `legacy` mode, which reproduces the earlier routing with the current parser.
-  It is not a byte-for-byte replay of the production build (`main` @ `b578c78`). The production shadow comparison (`compare_shadow`)
-  measures that directly.
-
-## 7. Check E — historical dry run
-
-**Implementation (read-only):** `manage.py reconstruct_decisions --dry-run` refuses to run without the flag. It has three independent
-guards, any one of which stops a write:
-1. The database session is read-only (PostgreSQL `SET TRANSACTION READ ONLY`; SQLite `PRAGMA query_only`).
-2. Every SQL statement is filtered before it is sent, and any write is refused (`ReadOnlyViolation`).
-3. The whole run is rolled back.
-
-There are no signal handlers in the project. Middleware does not run for management commands. The grader is a subprocess with no
-database access. A test injects a write into the run and confirms it is refused with nothing changed (`test_decisions.DryRunReadOnlyTests`).
-
-**Least-privilege credentials** (PostgreSQL; run by the database owner; the role name is an example):
+No production learner database exists (§2.4). `reconstruct_decisions --dry-run` and its three read-only guards are retained and tested
+(`DryRunReadOnlyTests`). If a learner database is created before the switch to `unified`, the command should be run then with the
+read-only role below:
 ```sql
 CREATE ROLE openpath_dryrun LOGIN PASSWORD '<generated>';
 GRANT CONNECT ON DATABASE <db> TO openpath_dryrun;
@@ -123,49 +207,39 @@ GRANT USAGE ON SCHEMA public TO openpath_dryrun;
 GRANT SELECT ON family_pupil, family_pupilevent, family_writtenmark TO openpath_dryrun;
 ALTER ROLE openpath_dryrun SET default_transaction_read_only = on;
 ```
-Then run, with no other credentials in the environment:
 
-`DATABASE_URL=postgres://openpath_dryrun:…@host/db OPENPATH_GRADING=shadow python manage.py reconstruct_decisions --dry-run --out report.json`
+## 8. Rollback procedure (tested in staging, §6)
 
-**Status: NOT EXECUTED against production — blocked.** This workspace has no production database credentials, and the repository's
-deployment configuration (`render.yaml`) defines only the database-less English demo. No production backend database is described
-anywhere I can reach. The dry run has been exercised only on test databases. To run it I need the read-only connection string above (or
-the owner can run the command and share `report.json`). Nothing will be written either way.
-
-## 8. Rollback procedure
-
-1. Set `OPENPATH_GRADING=legacy` (or `shadow`) and restart the web service. Effective at once; no migration is needed.
-2. Recorded decisions keep their own policy and versions; replay reads them in every mode (test_6).
-3. The app follows the server's reported mode on the next record load.
-4. A full code rollback is a redeploy of the previous build. Migrations `0006` and `0007` only add a table and constraints, so they can
-   stay in place. The quarantine registry is code: reverting it releases those questions.
+1. Set `OPENPATH_GRADING=legacy` and restart. It takes effect at once, with no migration. Replay reads recorded decisions in every mode.
+2. The app follows the server's reported mode on the next record load.
+3. Code rollback: redeploy the previous build, leaving migrations `0006`/`0007` in place. If they must be reversed, follow §2.2: export
+   first.
+4. The quarantine registry is code: reverting it releases those presentations.
 
 ## 9. Known risks
 
-1. **Production comparison not yet measured.** The dry run is blocked (see §7), and real shadow data does not exist until deployment.
-2. **Strict syntax in calculus.** Equal answers written without grouping become unresolved: 50 in the audit sample. Expect missed credit
-   in shadow data. These are never marked wrong.
-3. **Sample-based grader certification.** At most 19 questions per family. Answer keys are exhaustive (PR #83), but presentation (figures,
-   most word wording) and student working are unverified.
-4. **Problems found by PR #83 but not quarantined (owner decision):**
-   - 414 ambiguous questions (amsimc, aiconvex, amcrit, abmeas, aasolid, anquad);
-   - value-equal multiple-choice distractors (agmix, amceva): a learner choosing the equal distractor is marked incorrect under both
-     policies.
-5. **Shadow keeps earlier behaviour.** The earlier policy, including its grader-failure fallback (D12) and its invalid-input-as-incorrect
-   behaviour, remains authoritative until the switch. Shadow changes no production verdicts, except that quarantine (1,012
-   presentations) applies in every mode.
-6. **Cost per graded answer.** One Node grader subprocess per answer (~0.5 s), in shadow and unified modes alike.
-7. **Timing-sensitive test.** One fuzz test (E3) is sensitive to machine load (it failed once at 5.46 s against a 5 s limit).
+1. **No real shadow data yet.** The comparison has been measured only on the audit corpus and synthetic staging traffic.
+2. **Strict syntax in calculus.** Equal answers without grouping become unresolved under unified. In shadow this is visible only in the
+   comparison.
+3. **Sample-based grader certification** (≤19 questions per family). Figures, most word-form wording and student working are unverified.
+4. **Quarantine reduces content.** 2,070 presentations are withheld, including 951 word forms awaiting owner release.
+5. **Shadow keeps earlier behaviour**, including its grader-failure fallback and invalid-input-as-incorrect handling, until the switch.
+6. **Cost.** One Node grader subprocess per graded answer (~0.5 s).
+7. **The staging image was not built here.** The image itself still needs one build on the hosting platform. Staging ran the same start
+   script and code outside a container.
+8. **Pre-existing failing test** in `foundation/prerequisites.test.ts` (inventory counts, unrelated to grading).
 
 ## 10. Recommendation
 
-**GO for a shadow deployment**, conditional on:
-1. Explicit owner approval to deploy.
-2. `OPENPATH_GRADING=shadow` set explicitly in the deployment environment. It is the default, but it should not rely on the default.
-3. Migrations `0006` and `0007` applied.
-4. The grader bundle and its manifest deployed together (the integrity check refuses a mismatch).
+**GO for a controlled production shadow rollout**, subject to:
+1. Explicit owner approval to deploy, and to merge this branch to the deployed branch.
+2. `OPENPATH_GRADING=shadow` set explicitly. The start script refuses anything except `shadow` or `legacy`.
+3. Migrations `0006` and `0007` applied (they run at start-up).
+4. The bundle and its manifest deployed together. Start-up refuses a mismatch; check the logged hash `e5535318…`.
+5. One image build and a rerun of `staging_smoke.py` on the hosted service before learners use it.
 
 **NO-GO for switching to `unified`** until:
-- the production dry run (§7) and a period of `compare_shadow` data have been reviewed, with `toInvestigate` at 0;
-- the 24 held families are fixed or quarantined;
-- the strict-syntax missed-credit rate in real data has been reviewed.
+- a period of real `compare_shadow` data has been reviewed with `toInvestigate` at 0;
+- the 24 held families are resolved;
+- the missed-credit rate from strict syntax has been reviewed;
+- the owner has decided on the 951 D09 word forms.

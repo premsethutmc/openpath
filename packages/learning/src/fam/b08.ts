@@ -5,7 +5,7 @@
  * triangle inequality, congruent triangles, parallel lines, Baudhayana-Pythagoras, angles at a point in a tiling).
  * Written by OpenPath; CC0.
  */
-import type { Bug, Def, Value, Visual } from "../family-kit";
+import type { Bug, Def, InstanceTeaching, Value, Visual } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 import { fmt, gcd, near, signed } from "../family-kit";
 
@@ -27,6 +27,40 @@ const INTADD = "MATH.number.integer-add";
 const INTS = "MATH.number.integers";
 const FRADD = "MATH.number.fraction-add";
 const SQRT = "MATH.number.square-roots";
+/**
+ * teaching-contract@1 (stage 2, Pythagoras): the teaching for one right triangle [a, b, f]. Finding the hypotenuse adds
+ * the squares; finding a shorter side subtracts them; both end with a square root, checked by squaring back.
+ */
+const PYTH_TRIPLES = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25]];
+function pythTeaching([a, b, f]: number[]): InstanceTeaching {
+  const c = Math.sqrt(a * a + b * b);
+  if (f === 0)
+    return {
+      concept: { title: "Finding the hypotenuse", text: [`The hypotenuse is the side opposite the right angle, and the longest side. Here the two shorter sides are ${a} cm and ${b} cm.`, "The square on the hypotenuse is the sum of the squares on the other two sides: c² = a² + b²."] },
+      representation: { kind: "right-triangle", a, b, c: null, caption: `Shorter sides ${a} cm and ${b} cm; the hypotenuse is asked for` },
+      worked: {
+        result: c,
+        steps: [
+          { expression: `c² = ${a}² + ${b}²`, explanation: "The hypotenuse is opposite the right angle, so its square is the sum of the other two squares." },
+          { expression: `c² = ${a * a} + ${b * b} = ${c * c}`, explanation: "Square each shorter side, then add.", claims: [{ expr: `${a}^2`, value: a * a }, { expr: `${b}^2`, value: b * b }, { expr: `${a * a} + ${b * b}`, value: c * c }] },
+          { expression: `c = √${c * c} = ${c}`, explanation: `${c} × ${c} = ${c * c}, so the hypotenuse is ${c} cm.`, claims: [{ expr: `${c} × ${c}`, value: c * c }] },
+        ],
+      },
+    };
+  const k = f === 1 ? b : a, u = f === 1 ? a : b;
+  return {
+    concept: { title: "Finding a shorter side", text: [`The hypotenuse (${c} cm) is the longest side. The other shorter side is less than it, so its square is a difference: the hypotenuse's square minus the known side's square.`, "From c² = a² + b²: a² = c² − b²."] },
+    representation: { kind: "right-triangle", a: f === 1 ? null : a, b: f === 1 ? b : null, c, caption: `Hypotenuse ${c} cm and one shorter side ${k} cm; the other shorter side is asked for` },
+    worked: {
+      result: u,
+      steps: [
+        { expression: `${c}² = ${k}² + ?²`, explanation: "Put the known sides into c² = a² + b²; the hypotenuse is the side on its own." },
+        { expression: `?² = ${c * c} − ${k * k} = ${u * u}`, explanation: "Subtract the known side's square from the hypotenuse's square.", claims: [{ expr: `${c}^2`, value: c * c }, { expr: `${k}^2`, value: k * k }, { expr: `${c * c} − ${k * k}`, value: u * u }] },
+        { expression: `? = √${u * u} = ${u}`, explanation: `${u} × ${u} = ${u * u}. Check: ${k}² + ${u}² = ${c * c} = ${c}².`, claims: [{ expr: `${u} × ${u}`, value: u * u }, { expr: `${k}^2 + ${u}^2`, value: c * c }] },
+      ],
+    },
+  };
+}
 const MT = "MATH.number.multiplication-tables";
 const PROP = "MATH.number.proportion";
 const POLY = "MATH.geometry.polygon-angles";
@@ -1449,8 +1483,20 @@ export const B08: Def[] = [
       method: "Hypotenuse: add the squares of the two shorter sides and take the square root. Shorter side: subtract the square of the known shorter side from the square of the hypotenuse, then take the square root.",
       alternatives: [
         { id: "squares_on_sides", title: "Squares on the sides", kind: "conceptual", text: ["Draw a square on each side of the triangle. The two smaller squares together have the same area as the big one.", "So the area of the big square is a² + b², and its side is the square root."], visual: ([a, b]) => ({ type: "triangle", right: true, sides: [`${b}`, `${Math.sqrt(a * a + b * b)}`, `${a}`] }) },
-        { id: "triples", title: "Spot a triple", kind: "procedural", text: ["Many whole-number right triangles are multiples of 3-4-5, 5-12-13 or 8-15-17.", "Divide the sides by a common factor, recognise the triple, then scale back."] },
+        {
+          id: "triples", title: "Spot a triple", kind: "procedural", text: ["Many whole-number right triangles are multiples of 3-4-5, 5-12-13 or 8-15-17.", "Divide the sides by a common factor, recognise the triple, then scale back."],
+          // only for a triangle that is a multiple of one of these triples, with that triple and its scale
+          applies: ([a, b]) => PYTH_TRIPLES.some(([x, y]) => a % x === 0 && b === (a / x) * y && a / x > 1),
+          textFor: ([a, b]) => {
+            const hit = PYTH_TRIPLES.find(([x, y]) => a % x === 0 && b === (a / x) * y);
+            if (!hit) return ["Many whole-number right triangles are multiples of 3-4-5, 5-12-13 or 8-15-17.", "Divide the sides by a common factor, recognise the triple, then scale back."];
+            const [x, y, z] = hit, k = a / x;
+            return [`${a} and ${b} are ${k} × ${x} and ${k} × ${y}: this triangle is ${k} times the ${x}-${y}-${z} triangle.`, `So its hypotenuse is ${k} × ${z} = ${k * z}.`];
+          },
+        },
       ],
+      instance: pythTeaching,
+      caseOf: ([, , f]) => (f === 0 ? "hypotenuse" : "shorter side"),
     },
     limits: "Whole-number right triangles with hypotenuse up to 100; the converse and surd answers are not asked here.",
   },

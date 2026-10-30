@@ -1,6 +1,6 @@
 {
  "schema": "competency-expansion@1",
- "version": "1.0.0",
+ "version": "1.0.1",
  "status": "provisional",
  "note": "New competencies found by comparing the Grades 1-12 CBSE/NCERT and Tamil Nadu State Board inventories (content/learning/syllabus) with the 200-competency graph. Existing ids are unchanged; no learner evidence is remapped. Written by content/learning/src/expansion.py; AI-assisted, not educator-reviewed.",
  "merged": [
@@ -3475,8 +3475,8 @@
   {
    "target": "MATH.geometry.pythagoras",
    "from": "MATH.coordinate.distance-intro",
-   "type": "support",
-   "reason": "helpful background named by the curriculum inventory; never a gate"
+   "type": "disputed",
+   "reason": "reversed (adaptive-loop repair audit): this skill is built on Pythagoras, not the other way round. The distance formula is Pythagoras on coordinate differences, and the distance family attributes its \"subtract-squares\" mistake to Pythagoras; Pythagoras is met from Grade 7, the distance formula in Grade 9. Replaced by pythagoras → distance-intro (support)."
   },
   {
    "target": "MATH.geometry.pythagoras",
@@ -3499,8 +3499,8 @@
   {
    "target": "MATH.geometry.pythagoras",
    "from": "MATH.trigonometry.ratios",
-   "type": "support",
-   "reason": "helpful background named by the curriculum inventory; never a gate"
+   "type": "disputed",
+   "reason": "reversed (adaptive-loop repair audit): this skill is built on Pythagoras, not the other way round. The third side of a right triangle in trigonometry is found with Pythagoras; Pythagoras is met from Grade 7, trigonometric ratios in Grade 10. Replaced by pythagoras → trigonometry.ratios (support)."
   },
   {
    "target": "MATH.geometry.quadrilateral-classification",
@@ -4803,6 +4803,18 @@
    "from": "MATH.number.multiplication-tables",
    "type": "support",
    "reason": "a fraction of a whole number multiplies and divides whole numbers"
+  },
+  {
+   "target": "MATH.coordinate.distance-intro",
+   "from": "MATH.geometry.pythagoras",
+   "type": "support",
+   "reason": "reverse of the disputed distance-intro → pythagoras relation (adaptive-loop repair audit): the distance formula applies Pythagoras; helpful background, never a gate; pending educator confirmation"
+  },
+  {
+   "target": "MATH.trigonometry.ratios",
+   "from": "MATH.geometry.pythagoras",
+   "type": "support",
+   "reason": "reverse of the disputed trigonometry.ratios → pythagoras relation (adaptive-loop repair audit): finding the third side uses Pythagoras; helpful background, never a gate; pending educator confirmation"
   }
  ],
  "disputed": [

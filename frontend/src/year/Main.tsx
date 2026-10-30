@@ -76,9 +76,9 @@ type View =
   | { name: "setup"; sameYear?: boolean }
   | { name: "tile"; path: string[] }
   | { name: "topic-diagnostic"; competency: string; back: View }
-  | { name: "curriculum-practice"; competency: string; back: View }
+  | { name: "curriculum-practice"; competency: string; back: View; stage?: "teaching" | "practice" }
   | { name: "module"; competency: string; back: View }
-  | { name: "stuck"; qid: string }
+  | { name: "stuck"; qid: string; back?: View }
   | { name: "single"; qid: string; heading: string; note?: string }
   | { name: "years" };
 
@@ -154,7 +154,10 @@ function App() {
     const want = wanted.current;
     if (!want || !st?.release || !moduleFor(want)) return;
     wanted.current = null;
-    if (new URLSearchParams(location.search).get("practice") === "curriculum") setView({name:"curriculum-practice",competency:want,back:{name:"year"}});
+    const stage = new URLSearchParams(location.search).get("stage");
+    // a stage chosen on the lesson page applies once: a reload resumes the lesson where it was left
+    if (stage) { const u = new URL(location.href); u.searchParams.delete("stage"); history.replaceState(history.state, "", u); }
+    if (new URLSearchParams(location.search).get("practice") === "curriculum") setView({name:"curriculum-practice",competency:want,back:{name:"year"},stage:stage==="practice"?"practice":stage==="learn"?"teaching":undefined});
     else if (new URLSearchParams(location.search).get("diagnostic") === "topic" && st.enrolment?.grade === 7) setView({name:"topic-diagnostic",competency:want,back:{name:"year"}});
     else setView({name:"module",competency:want,back:{name:"year"}});
   }, [st?.release]);
@@ -281,7 +284,10 @@ function App() {
           key={`${learner}:${release.hash}:${view.competency}`}
           competency={view.competency} ctx={ctx}
           resumeKey={`openpath.curriculum-practice@1:${learner}:${st.enrolment.academicYear}:${release.hash}:${view.competency}`}
-          back={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner#c=${encodeURIComponent(view.competency)}`}
+          back={`/curriculum/?learner=${encodeURIComponent(learner)}#c=${encodeURIComponent(view.competency)}`}
+          initialStage={view.stage}
+          onAssess={() => setView({ name: "module", competency: view.competency, back: { name: "curriculum-practice", competency: view.competency, back: view.back } })}
+          onStuck={(qid) => setView({ name: "stuck", qid, back: { name: "curriculum-practice", competency: view.competency, back: view.back, stage: "practice" } })}
         />
       </Shell>
     );
@@ -298,7 +304,7 @@ function App() {
   if (view.name === "stuck")
     return (
       <Shell banner={banner} error={error} top={top(home, name)}>
-        <Recovery original={view.qid} ctx={ctx} onExit={() => setView({ name: "year" })} />
+        <Recovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />
       </Shell>
     );
   if (view.name === "single")
@@ -418,6 +424,7 @@ function App() {
       ) : (
         <div className="next"><p className="eyebrow">Next</p><p>{next.reason}</p></div>
       )}
+      {next.paused?.length ? <p className="why" role="note"><b>Paused for a teacher or parent:</b> {next.paused.map((id) => graph.get(id).name).join(", ")}. Different explanations have not worked yet, so OpenPath does not ask more on {next.paused.length > 1 ? "these" : "this"} on its own.</p> : null}
       {tiles.map((s) => (
         <section key={s.id} aria-label={s.title}>
           <div className="section-title"><h2>{s.title}</h2><span className="small muted">{s.progress.done} of {s.progress.total} skills shown on your own</span></div>

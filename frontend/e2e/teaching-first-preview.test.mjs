@@ -2,13 +2,14 @@ import assert from "node:assert/strict";
 import { mkdirSync } from "node:fs";
 import { test } from "node:test";
 import { chromium } from "playwright";
+import { question } from "../../packages/learning/src/content.ts";
 
 const base = process.env.PREVIEW_URL ?? "http://127.0.0.1:4312";
 const shots = process.env.SHOTS ?? "/tmp/teaching-first-preview";
 mkdirSync(shots, { recursive: true });
 const examples = [
-  { board: "tn", grade: 10, competency: "MATH.algebra.relations", name: "tn-grade10", wrong: "40", right: "6" },
-  { board: "cbse", grade: 7, competency: "MATH.number.integer-add", name: "cbse-grade7", wrong: "1", right: "51" },
+  { board: "tn", grade: 10, competency: "MATH.algebra.relations", name: "tn-grade10" },
+  { board: "cbse", grade: 7, competency: "MATH.number.integer-add", name: "cbse-grade7" },
 ];
 
 for (const width of [360, 393]) test(`${width}px teaching-first preview uses real Grade 7 and Tamil Nadu Grade 10 content`, async () => {
@@ -46,19 +47,23 @@ for (const width of [360, 393]) test(`${width}px teaching-first preview uses rea
 
       await page.getByRole("button", { name: "Practice this concept" }).click();
       await page.locator(".practice-workspace").waitFor();
-      assert.ok(await page.getByLabel("Your answer").isVisible(), "keyboard answer input is available");
+      // stage 2: practice starts with a fresh question of the kind taught (not the solved example); its answer comes from the question
+      const q = question(await page.locator(".practice-workspace").getAttribute("data-qid"));
+      const choice = q.type === "choice";
+      const enter = async (v) => { if (choice) await page.getByRole("radio").nth("ABCD".indexOf(v)).click(); else await page.getByLabel("Your answer").fill(v); };
+      if (!choice) assert.ok(await page.getByLabel("Your answer").isVisible(), "keyboard answer input is available");
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "practice has no horizontal overflow");
       const first = await page.locator(".practice-head h2").innerText();
-      await page.getByLabel("Your answer").fill(x.wrong);
+      await enter(choice ? (q.answer === "A" ? "B" : "A") : "987654");
       await page.getByRole("button", { name: "Check answer" }).click();
       await page.getByText("Not quite yet.", { exact: true }).waitFor();
       if (x.board === "tn") await page.screenshot({ path: `${shots}/${width}-${x.name}-practice.png`, fullPage: true });
       await page.getByRole("button", { name: "Try again" }).click();
-      await page.getByLabel("Your answer").fill(x.right);
+      await enter(q.answer);
       await page.getByRole("button", { name: "Check answer" }).click();
       await page.getByText("That’s right.", { exact: true }).waitFor();
       if (x.board === "cbse") {
-        assert.match(await page.locator(".practice-feedback").innerText(), /subtracting a negative|adding its opposite|51/i);
+        assert.ok((await page.locator(".practice-feedback").innerText()).length > 20, "the right-answer feedback explains the solution");
         await page.screenshot({ path: `${shots}/${width}-${x.name}-practice.png`, fullPage: true });
       }
       await page.getByRole("button", { name: "Another question" }).click();

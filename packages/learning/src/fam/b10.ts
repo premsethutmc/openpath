@@ -6,6 +6,7 @@
  */
 import type { Bug, Def, Step, Value } from "../family-kit";
 import { EXP, MT, factSlip, gcd, near, signed, sup } from "../family-kit";
+const primesOf = (n: number) => { const out: number[] = []; for (let p = 2; n > 1; p++) while (n % p === 0) { out.push(p); n /= p; } return out; };
 
 const INT = "MATH.number.integers";
 const OPP = "MATH.number.operation-properties";
@@ -310,7 +311,16 @@ export const B10: Def[] = [
       idea: "Every whole number greater than 1 is either prime or can be split into primes in exactly one way (apart from order).",
       method: "Divide by the smallest prime that goes exactly (2, then 3, then 5 …) again and again until 1 is left. The divisors are the prime factors.",
       alternatives: [
-        { id: "factor_tree", title: "A factor tree", kind: "procedural", text: ["Split the number into any two factors, for example 72 = 8 × 9.", "Keep splitting every factor that is not prime: 8 = 2 × 2 × 2 and 9 = 3 × 3.", "The primes at the ends of the branches are the answer: 2, 2, 2, 3, 3."] },
+        {
+          id: "factor_tree", title: "A factor tree", kind: "procedural", text: ["Split the number into any two factors, for example 72 = 8 × 9.", "Keep splitting every factor that is not prime: 8 = 2 × 2 × 2 and 9 = 3 × 3.", "The primes at the ends of the branches are the answer: 2, 2, 2, 3, 3."],
+          // stage 2: the tree of the question's own number (split into its two closest factors)
+          textFor: ([n]) => {
+            let f = Math.floor(Math.sqrt(n));
+            while (f > 1 && n % f) f--;
+            const g = n / f, split = (x: number) => (primesOf(x).length > 1 ? `${x} = ${primesOf(x).join(" × ")}` : `${x} is prime`);
+            return f > 1 ? [`Split ${n} into two factors: ${n} = ${f} × ${g}.`, `Keep splitting every factor that is not prime: ${split(f)}; ${split(g)}.`, `The primes at the ends of the branches are the answer: ${primesOf(n).join(", ")}.`] : [`${n} has no factor pair other than 1 × ${n}: it is prime.`];
+          },
+        },
       ],
     },
     limits: "Numbers from 16 to 400 with at least three prime factors, all at most 19; index form (2³ × 3²) is checked as the same list.",

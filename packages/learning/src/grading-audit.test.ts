@@ -10,9 +10,13 @@ const corpus = JSON.parse(readFileSync(new URL("../../../tools/mathematics/gradi
 describe("grading audit: permanent regression corpus (every confirmed grading defect)", () => {
   test("each confirmed defect stays fixed", () => {
     expect(corpus.length).toBeGreaterThan(0);
-    // integration with feat/unified-grading: a quarantined question (D09, e.g. the G1 word forms whose guard cannot confirm the reworded
-    // prompt) is decided "unresolved" and never costs credit; quarantine supersedes the E7-core G1 legacy-comparison fix
-    for (const c of corpus) expect(decide(c.id, c.response).credit, `${c.defect} ${c.id} "${c.response}"`).toBe(quarantined(c.id) ? null : c.expect);
+    // merged into staging/unified-grading-shadow: a presentation quarantined by the owner (decision 4, D09; or the release review) gets no
+    // verdict, whatever the corpus expected. INTEGRATION M1: the loop branch also asserted contractFor(id).verification !== "held" for these; on the evidence
+    // lineage quarantine supersedes that G1 repair (this test's earlier text), so the contract stays held by design. Recorded in docs/integration/03-RECONCILIATION.md.
+    for (const c of corpus) {
+      if (quarantined(c.id)) { expect(decide(c.id, c.response).credit, `${c.defect} ${c.id} quarantined`).toBe(null); continue; }
+      expect(decide(c.id, c.response).credit, `${c.defect} ${c.id} "${c.response}"`).toBe(c.expect);
+    }
   });
   test("no contract family is held in any presentation (typed, multiple choice, word) for a sample of its pool", () => {
     for (const [fam, d] of FAMILIES) {

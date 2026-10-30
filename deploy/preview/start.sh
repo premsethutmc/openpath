@@ -8,8 +8,17 @@ export DJANGO_DEBUG=0
 export OPENPATH_BEHIND_HTTPS_PROXY=0
 export OPENPATH_PREVIEW_DATA_DIR="${OPENPATH_PREVIEW_DATA_DIR:-${APP_DIR}/preview-data}"
 export DEMO_API_TARGET="http://127.0.0.1:${PREVIEW_API_PORT:-8000}"
+# The mathematics preview opens on the curriculum (teaching-first journey); the English app stays at /english.
+export DEMO_HOME="${DEMO_HOME:-/curriculum/}"
 export OPENPATH_ESSAY_EVALUATOR=disabled OPENPATH_EVALUATION_ADAPTER=disabled
 unset DATABASE_URL OPENPATH_LLM_API_KEY OPENAI_API_KEY ANTHROPIC_API_KEY
+# Grading authority (SHADOW_RELEASE_CHECKLIST.md): set explicitly, never by default. Shadow is approved; legacy is the rollback mode.
+# Switching to unified needs separate owner approval, so this deployment refuses to start with it.
+export OPENPATH_GRADING="${OPENPATH_GRADING:-shadow}"
+case "$OPENPATH_GRADING" in
+    shadow|legacy) ;;
+    *) echo "OPENPATH_GRADING=${OPENPATH_GRADING} is not approved for this deployment (shadow or legacy only)" >&2; exit 1 ;;
+esac
 HOST_NAME="${RENDER_EXTERNAL_HOSTNAME:-localhost}"
 export DJANGO_ALLOWED_HOSTS="${HOST_NAME},localhost,127.0.0.1"
 export DJANGO_CSRF_TRUSTED_ORIGINS="${PREVIEW_ORIGIN:-https://${HOST_NAME}}"
@@ -24,6 +33,12 @@ node --input-type=module -e 'import {configFromEnv} from "./frontend/scripts/pre
 cd "${APP_DIR}/backend"
 python manage.py migrate --noinput
 python manage.py check --deploy --fail-level ERROR
+# The grader bundle decides credit: refuse to start unless it is exactly the one its manifest records and Node can run it.
+python -c 'import django,os;os.environ.setdefault("DJANGO_SETTINGS_MODULE","config.preview");django.setup()
+from family import kernel_grader as k
+import sys
+if not (k.node_path() and k.bundle_intact()): sys.exit("grader bundle does not match grader.manifest.json (or Node is missing)")
+print("grading mode", os.environ["OPENPATH_GRADING"], "| grader bundle sha256", k.bundle_sha256(), "matches its manifest")'
 # One worker keeps the default synthetic SQLite preview usable within a small Render instance.
 gunicorn config.wsgi:application --bind "127.0.0.1:${PREVIEW_API_PORT:-8000}" --workers 1 --timeout 60 --access-logfile - &
 api_pid=$!

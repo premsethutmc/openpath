@@ -685,6 +685,8 @@ export const B15: Def[] = [
           ? `${m === 1 ? "A student says" : `Each of ${m} students says`}, for ${n === 1 ? "one game" : `each of ${n} games`}, whether or not they like it. How many different sets of answers are possible${m === 1 ? "" : " for the whole group"}?`
           : `A tiffin centre makes ${pl(m, "kind", "kinds")} of dosa. A plate is one dosa with one chutney, and ${m * n} different plates are possible. How many kinds of chutney are there?`,
     teach: {
+      // stage 2: counting A × B and finding n(B) from it are taught and practised as different cases
+      caseOf: ([, , q]) => ["count the ordered pairs", "count the relations", "find n(B)"][q],
       idea: "A × B is the set of all ordered pairs (a, b) with a in A and b in B, so n(A × B) = n(A) × n(B). A relation from A to B is any subset of A × B.",
       method: "Multiply the sizes for the product. For the number of relations, raise 2 to the power n(A) × n(B).",
       alternatives: [{ id: "grid", title: "Draw the pairs as a grid", kind: "conceptual", text: ["Write A down the side and B along the top: each cell is one ordered pair.", "The grid has n(A) rows and n(B) columns; a relation is a choice of cells to tick."] }],

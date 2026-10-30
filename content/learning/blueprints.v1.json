@@ -48,7 +48,7 @@
       {
        "title": "Multiply again and again",
        "text": [
-        "Start with the number and multiply by it again for each extra power: for 3⁴, 3 → 9 → 27 → 81. That is one multiplication fewer than the power."
+        "Start with the number and multiply by it again for each extra power. That is one multiplication fewer than the power."
        ],
        "worked": true
       }
@@ -198,7 +198,7 @@
       {
        "title": "Keep each sign",
        "text": [
-        "When a number is negative, keep its sign: (x + 3)(x − 5) gives 3x and −5x, and 3 + (−5) = −2, so the x term is −2x."
+        "When a number is negative, keep its sign in each product. The x term is the sum of the two signed products, so a negative product makes it smaller."
        ]
       }
      ]
@@ -234,7 +234,7 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "Not the value: how fast it changes",
+       "title": "Not the value: how fast it changes", "instance": "gen:dpow:1,2,3",
        "text": [
         "f′(3) is how fast f is changing at x = 3, not the value f(3). For f(x) = x², the values at 2.9, 3 and 3.1 are 8.41, 9 and 9.61: they rise by 1.2 over 0.2, which is 6 per unit, and the rule gives 2 × 3 = 6."
        ]
@@ -466,7 +466,7 @@
       {
        "title": "b², then 4ac, then subtract",
        "text": [
-        "Write b², then 4ac with c's own sign, then subtract. For x² − 4x − 5: b² = 16, 4ac = 4 × (−5) = −20, and 16 − (−20) = 36, which is positive: two solutions."
+        "Write b², then 4ac with c's own sign, then subtract."
        ],
        "worked": true
       }

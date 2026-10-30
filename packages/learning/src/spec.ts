@@ -23,6 +23,7 @@
 import { canonical, isCorrect, question } from "./content";
 import { expandedForm, numericValue, sameAnswer, NEW_TYPES } from "./answer-types";
 import { hashOf } from "./curriculum";
+import { quarantined } from "./question-status";
 import { candidates, difficultyOf, explainStep, FAMILIES, inPool, pool, problemOf, rangeOf, show, type Problem } from "./families";
 
 export const SPEC_POLICY = "spec@1";
@@ -91,6 +92,10 @@ export function familySpec(fam: string): FamilySpec | null {
     ...(word.length ? { word: word.map(itemSignature) } : {}),
     ...(def.cap ? { cap: def.cap } : {}),
     ...(def.teach?.alternatives ? { alternatives: def.teach.alternatives.map((a) => [a.id, a.title, a.kind, ...a.text]) } : {}),
+    // teaching-contract@1: the instance teaching is code, so its output for the specification's examples is fingerprinted
+    ...(def.teach?.instance || def.teach?.alternatives?.some((a) => a.textFor || a.applies)
+      ? { instanceTeaching: examples.map((id) => problemOf(id.replace(/:mc$/, ""))!.params).map((p) => [def.teach!.instance?.(p) ?? null, def.teach!.caseOf?.(p) ?? null, ...(def.teach!.alternatives ?? []).map((a) => [a.applies?.(p) ?? true, a.textFor?.(p) ?? null])]) }
+      : {}),
   });
   return {
     id: fam,
@@ -202,7 +207,8 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
   for (let k = 0; k < cases; k++) {
     const p = def.domain!.map(([lo, hi]) => lo - 1 + Math.floor(r() * (hi - lo + 3)));
     const id = `gen:${fam}:${p.join(",")}`;
-    const shouldBe = allowed.has(p.join(",")) && !excluded.some((e) => e.params.join(",") === p.join(","));
+    // question-status@1: a quarantined presentation is withheld from the pool (its record is kept), so the specification expects it out
+    const shouldBe = allowed.has(p.join(",")) && !excluded.some((e) => e.params.join(",") === p.join(",")) && !quarantined(id);
     if (inPool(id) !== shouldBe) prop.push(`${id}: in the pool is ${inPool(id)}, the specification says ${shouldBe}`);
     if (shouldBe) {
       const pr = problemOf(id);
@@ -222,7 +228,7 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
         bcases++;
         const outside = v < lo || v > hi;
         if (outside && inPool(id)) bnd.push(`${id}: outside the domain but in the pool`);
-        if (!outside && allowed.has(p.join(",")) && !inPool(id) && !excluded.some((e) => e.params.join(",") === p.join(","))) bnd.push(`${id}: an allowed edge is missing from the pool`);
+        if (!outside && allowed.has(p.join(",")) && !inPool(id) && !quarantined(id) && !excluded.some((e) => e.params.join(",") === p.join(","))) bnd.push(`${id}: an allowed edge is missing from the pool`);
       }
     });
   return { family: fam, deterministic: { checked: items.length, failures: det }, property: { cases, failures: prop }, boundary: { cases: bcases, failures: bnd }, excluded: excluded.length, ok: !det.length && !prop.length && !bnd.length };

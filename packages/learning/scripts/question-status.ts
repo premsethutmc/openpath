@@ -21,10 +21,20 @@ import { contractV2 } from "../src/grading/contract";
 // aofclass (release preparation, 2026-10-29): invalid as written — the stated codomain excludes a value f takes, so "f : A -> B" is not a
 // function; confirmed by the answer-key certification (PR #83, handoff/aofclass-quarantine.json) and re-checked here on f(x)=(x+4)^2-4 on [-5, oo).
 const AOFCLASS: string[] = ["gen:aofclass:-4,-4,-5,2", "gen:aofclass:-3,2,-5,2", "gen:aofclass:-2,0,-3,2", "gen:aofclass:-2,9,-5,2", "gen:aofclass:-1,-8,-3,2", "gen:aofclass:-1,-6,-3,2", "gen:aofclass:-1,-6,-2,2", "gen:aofclass:-1,-3,-4,2", "gen:aofclass:-1,6,-2,2", "gen:aofclass:-1,7,-4,2", "gen:aofclass:-1,9,-2,2", "gen:aofclass:0,-9,-3,2", "gen:aofclass:0,-7,-2,2", "gen:aofclass:0,-6,-3,2", "gen:aofclass:0,-3,-1,2", "gen:aofclass:0,1,-3,2", "gen:aofclass:1,3,-2,2", "gen:aofclass:1,7,-1,2", "gen:aofclass:1,8,0,2", "gen:aofclass:2,-7,1,2", "gen:aofclass:2,-1,-1,2", "gen:aofclass:2,-1,0,2", "gen:aofclass:2,8,0,2", "gen:aofclass:2,8,1,2", "gen:aofclass:2,9,-1,2", "gen:aofclass:3,-5,0,2", "gen:aofclass:3,-5,1,2", "gen:aofclass:3,-1,2,2", "gen:aofclass:3,8,0,2", "gen:aofclass:4,-8,2,2", "gen:aofclass:4,-5,2,2", "gen:aofclass:4,-1,2,2", "gen:aofclass:4,0,3,2", "gen:aofclass:4,4,3,2", "gen:aofclass:5,-9,2,2", "gen:aofclass:5,-8,3,2", "gen:aofclass:5,-7,3,2", "gen:aofclass:5,-3,3,2", "gen:aofclass:5,-2,4,2", "gen:aofclass:5,0,3,2", "gen:aofclass:5,5,4,2"];
-const MANUAL: { id: string; reason: string; detail: string; since: string; evidence: string }[] = AOFCLASS.map((id) => ({
+// D09 (owner decision 4, 2026-10-29): the 951 word-form presentations stay excluded until their release is approved. The contract guard that
+// held them is repaired in E7 (837c79c, "G1": they now keep the stored-answer comparison), so they are no longer derived from held contracts;
+// they are listed here so the quarantine does not lapse silently when the code changes.
+import d09 from "../../../content/learning/question-status-d09-hold.v1.json";
+const D09 = (d09 as string[]).map((id) => ({ id, reason: "pending-release-review", detail: "word-form presentation excluded by owner decision 4 (D09); the contract-guard defect is repaired in E7 G1; release needs owner approval", since: "2026-10-29", evidence: "manual entry: MATH_CURRICULUM_GRADING_AUDIT_REPORT.md D09; SHADOW_RELEASE_CHECKLIST.md" }));
+// Ambiguous questions (release preparation review, 2026-10-29): only those that cannot be graded unambiguously, from the PR #83 register.
+// Defective multiple-choice distractors that violate a form the question states (agmix, amceva, ajrat, ...) remain: exactly one option
+// satisfies the question as written, so they can be graded.
+import ambiguous from "../../../content/learning/question-status-ambiguous.v1.json";
+const AMBIGUOUS = (ambiguous as { entries: { id: string; family: string; why: string }[] }).entries.map((e) => ({ id: e.id, reason: "ambiguous-question", detail: e.why, since: "2026-10-29", evidence: "manual entry: MATH_ANSWER_KEY_CERTIFICATION_REPORT.md section 5 (PR #83 register), reviewed in SHADOW_RELEASE_CHECKLIST.md" }));
+const MANUAL: { id: string; reason: string; detail: string; since: string; evidence: string }[] = [...D09, ...AMBIGUOUS, ...AOFCLASS.map((id) => ({
   id, reason: "invalid-question", detail: "the stated codomain excludes a value the function takes (f is not a function into it); the key cannot be right or wrong",
   since: "2026-10-29", evidence: "manual entry: MATH_ANSWER_KEY_CERTIFICATION_REPORT.md section 5 (PR #83), aofclass handoff",
-}));
+}))];
 
 const entries: { id: string; status: "quarantined"; reason: string; detail: string; since: string; evidence: string }[] = [];
 for (const [fam, def] of FAMILIES) {

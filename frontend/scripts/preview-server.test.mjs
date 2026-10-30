@@ -140,3 +140,41 @@ test("fresh preview login returns to the requested curriculum route", async () =
     await new Promise((r) => server.close(r));
   }
 });
+
+test("the mathematics preview opens on its curriculum home; the English app stays at /english", async () => {
+  const { mkdirSync } = await import("node:fs");
+  mkdirSync(join(dist, "curriculum"), { recursive: true });
+  writeFileSync(join(dist, "curriculum", "index.html"), "<!doctype html><title>Mathematics fixture</title>");
+  const signedIn = async (url) => {
+    const login = await fetch(url + "/login", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ password: env.DEMO_PASSWORD, next: "/" }),
+      redirect: "manual",
+    });
+    assert.equal(login.headers.get("location"), "/");
+    const cookie = login.headers.get("set-cookie").split(";")[0];
+    return (path) => fetch(url + path, { headers: { cookie, accept: "text/html" }, redirect: "manual" });
+  };
+  const preview = configFromEnv({ ...env, DEMO_HOME: "/curriculum/" });
+  assert.deepEqual(preview.problems, []);
+  const server = createDemoServer(preview.config, { log: () => {} });
+  const plain = createDemoServer(configFromEnv(env).config, { log: () => {} });
+  try {
+    const get = await signedIn(await listen(server));
+    const root = await get("/");
+    assert.equal(root.status, 303);
+    assert.equal(root.headers.get("location"), "/curriculum/");
+    assert.match(await (await get("/curriculum/")).text(), /Mathematics fixture/);
+    assert.match(await (await get("/english")).text(), /Gateway fixture only/, "the English app is still served");
+    assert.match(await (await get("/?no-sw")).text(), /Gateway fixture only/, "a root URL with a query is still the English app");
+    // without DEMO_HOME (the English demo and every other deployment) "/" is unchanged
+    const getPlain = await signedIn(await listen(plain));
+    const english = await getPlain("/");
+    assert.equal(english.status, 200);
+    assert.match(await english.text(), /Gateway fixture only/);
+    assert.ok(configFromEnv({ ...env, DEMO_HOME: "//evil.example/" }).problems.length > 0, "an off-site home is refused");
+  } finally {
+    for (const s of [server, plain]) { s.closeAllConnections(); await new Promise((r) => s.close(r)); }
+  }
+});

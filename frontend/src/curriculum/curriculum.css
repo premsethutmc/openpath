@@ -186,3 +186,19 @@ body:has(.preview-notebook) { background: #fbfaf6; }
   .preview-head h2 { font-size: 1.45rem; }
   .preview-sheet, .preview-workspace { padding: 15px 13px; }
 }
+
+/* Learner lesson page (learner view): one column, the lesson heading, its objective, where the learner is, and one action. */
+.learner-lesson { display: grid; gap: 12px; }
+.learner-lesson h2 { margin: 6px 0 0; font: 650 clamp(1.45rem, 6.4vw, 2rem)/1.15 Georgia, "Times New Roman", serif; letter-spacing: -0.015em; }
+.lesson-objective { margin: 0; color: var(--muted); font: 500 1rem/1.5 Georgia, "Times New Roman", serif; }
+.learner-lesson .state-card { border-width: 1px; border-left-width: 4px; border-radius: 8px; }
+.learner-lesson .lesson-start { width: 100%; min-height: 52px; margin: 0; font-size: 1.05rem; }
+.lesson-path { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.lesson-path li { display: grid; grid-template-columns: 32px 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.lesson-path strong { display: block; font-size: 1rem; }
+.lesson-path p { margin: 2px 0 4px; color: var(--muted); font-size: 0.9rem; line-height: 1.45; }
+.lesson-path .link { display: inline-flex; align-items: center; min-height: 40px; font-weight: 750; }
+.lesson-num { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--brand-soft); color: var(--brand); font-weight: 800; }
+.learner-progress .meter { border-radius: 8px; box-shadow: none; }
+.topic-next { margin: 0 0 4px; }
+.view-switch { margin: 28px 0 8px; text-align: center; }

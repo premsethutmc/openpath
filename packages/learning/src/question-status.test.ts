@@ -26,10 +26,13 @@ const FAMS = [...new Set(Q.map((id) => id.split(":")[1]))];
 
 const LONG = 900_000;
 describe("registry", () => {
-  test("lists the 951 word-form presentations found by the audit (D09), the 20 aqd2 presentations whose stored answer the strict parser reads two ways (D18), and the 41 invalid aofclass questions (manual, PR #83 handoff)", () => {
-    expect(Q.length).toBe(1012);
-    expect(FAMS.sort()).toEqual(["adexp", "aiintx", "aofclass", "aqd2", "auaps"]);
-    expect(Q.filter((id) => !id.startsWith("gen:aqd2:") && !id.startsWith("gen:aofclass:")).every((id) => id.endsWith(":w"))).toBe(true);
+  test("lists the 951 word-form presentations found by the audit (D09, kept by owner decision 4), the 20 aqd2 presentations whose stored answer the strict parser reads two ways (D18), and the 41 invalid aofclass questions (manual, PR #83 handoff)", () => {
+    // + 1,058 presentations of 6 families that cannot be graded unambiguously (PR #83 register, reviewed 2026-10-29)
+    expect(Q.length).toBe(1012 + 1058);
+    expect(FAMS.sort()).toEqual(["aasolid", "abmeas", "adexp", "aiconvex", "aiintx", "amcrit", "amsimc", "anquad", "aofclass", "aqd2", "auaps"]);
+    expect(Q.filter((id) => ["adexp", "aiintx", "auaps"].includes(id.split(":")[1])).every((id) => id.endsWith(":w"))).toBe(true);
+    expect(Q.filter((id) => ["adexp", "aiintx", "auaps"].includes(id.split(":")[1])).length).toBe(951);
+    expect(Q.filter((id) => statusEntry(id)!.reason === "ambiguous-question").length).toBe(1058);
     expect(Q.filter((id) => id.startsWith("gen:aqd2:")).length).toBe(20);
     expect(Q.filter((id) => id.startsWith("gen:aofclass:")).map((id) => statusEntry(id)!.reason)).toEqual(Array(41).fill("invalid-question"));
   }, LONG);
@@ -95,7 +98,7 @@ describe("selectors never return a quarantined question", () => {
   }, LONG);
   test("selection code is registered: only these files import the pool selectors (each applies selectable() or reads filtered modules)", () => {
     // a new selector must apply selectable() and be added here in a reviewed change
-    const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts", "packages/learning/src/exact/verify.ts",
+    const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts", "packages/learning/src/exact/verify.ts",
       "packages/learning/src/intervention.ts", "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts", "packages/learning/src/spec.ts"];
     const root = new URL("../../../", import.meta.url).pathname, hits: string[] = [];
     const walk = (d: string) => { for (const e of readdirSync(join(root, d), { withFileTypes: true })) { const r = `${d}/${e.name}`; if (e.isDirectory()) { if (e.name !== "node_modules") walk(r); } else if (/\.tsx?$/.test(e.name) && !/\.test\.tsx?$/.test(e.name) && /import \{[^}]*\b(pool|phasePool|variantsOf|modulePhasePool|fromPool)\b[^}]*\} from/.test(readFileSync(join(root, r), "utf8"))) hits.push(r); } };

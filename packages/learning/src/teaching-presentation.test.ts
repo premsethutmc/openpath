@@ -52,3 +52,20 @@ test("unsupported teaching is explicit", () => {
   assert.equal(presentation.status, "unsupported");
   assert.match(presentation.unsupportedReason ?? "", /No deterministic family example/);
 });
+
+test("Relations (Tamil Nadu Grade 10): finding n(B) is taught in three kernel-backed steps, product rule → substitution → division", () => {
+  const module = moduleFor("MATH.algebra.relations")!;
+  const id = module.strategies.find((s) => s.id === "grid")!.guided;            // gen:aocart:3,2,2, the lesson's first example
+  assert.equal(id, "gen:aocart:3,2,2");
+  const problem = problemOf(id)!;
+  const p = teachingPresentationFrom({ module, screen: module.chapter[0], problem, question: question(id), practiceIds: [] });
+  assert.equal(p.teachingSource, "kernel");
+  assert.deepEqual(p.workedExample!.steps.map((s) => s.expression), ["n(A × B) = n(A) × n(B)", "6 = 3 × n(B)", "6 ÷ 3 = 2"]);
+  assert.equal(problem.answer, "2");
+  assert.deepEqual(validateTeachingPresentation(problem, p), []);
+  // counting the product directly (n(A × B)) and the Grade 7 integer example keep their own kernel steps
+  const direct = problemOf("gen:aocart:3,2,0")!;
+  assert.equal(teachingPresentationFrom({ module, screen: module.chapter[0], problem: direct, question: question("gen:aocart:3,2,0"), practiceIds: [] }).workedExample!.steps.length, 1);
+  const integers = moduleFor("MATH.number.integer-add")!, sub = problemOf("gen:aiint:26,-25,1")!;
+  assert.equal(teachingPresentationFrom({ module: integers, screen: integers.chapter[0], problem: sub, question: question("gen:aiint:26,-25,1"), practiceIds: [] }).workedExample!.steps.length, 3);
+});

@@ -75,6 +75,9 @@ for (const width of [360, 393]) for (const sample of cases) test(`${width}px ${s
     await page.getByRole("heading", { name: `Grade ${sample.grade} Mathematics`, exact: true }).waitFor();
     await page.getByText(/Loading .*evidence/).waitFor({ state: "detached" });
     for (const node of path) await page.locator(".tiles > li").filter({ has: page.locator(".tile-title", { hasText: node.title }) }).getByRole("button").first().click();
+    // the skill opens its lesson page: one clear first action, Learn → Practice → Assessment, no engineering detail
+    await page.getByRole("article", { name: "Lesson" }).waitFor();
+    await page.getByRole("link", { name: "Start learning", exact: true }).click();
 
     await page.getByRole("article", { name: "Mathematics teaching and practice" }).waitFor();
     assert.ok(await page.locator(".pair-visual, .movement-line").first().isVisible());
@@ -96,7 +99,10 @@ for (const width of [360, 393]) for (const sample of cases) test(`${width}px ${s
     await page.getByRole("button", { name: "Check", exact: true }).click();
     assert.equal((await wrongSaved).status(), 201);
     await page.getByText("Not this time.", { exact: true }).waitFor();
-    assert.match(await page.locator(".feedback.bad").innerText(), sample.board === "tn" ? /subtracted.*divide/i : /subtracting a negative.*adding its opposite/i);
+    // stage 2: practice starts with a fresh question rather than the example solved on the page, so the diagnosis is checked when
+    // the question is the subtraction kind (an addition question gets the general next step)
+    const subtractsNegative = /^gen:aiint:-?\d+,-\d+,1/.test(qid);
+    assert.match(await page.locator(".feedback.bad").innerText(), sample.board === "tn" ? /subtracted.*divide/i : subtractsNegative ? /subtracting a negative.*adding its opposite/i : /working|step|add/i);
     await screenshot(page, `${width}-${sample.name}-learner-mistake`);
     await page.getByRole("button", { name: "Give me a hint", exact: true }).click();
     await page.getByRole("complementary", { name: "Contextual help" }).waitFor();

@@ -139,18 +139,19 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
     examples.push(id);
     return problemOf(id)!;
   };
-  const screen = (s: BlueprintScreen, ex: Problem): Screen => {
+  // teaching-contract@1: a screen that shows a worked example is about that example's question
+  const screen = (s: BlueprintScreen, ex: Problem, role: "concept" | "strategy" | "prerequisite"): Screen => {
     const { worked: w, ...rest } = s;
-    return w ? { ...rest, math: [...(rest.math ?? []), ...worked(ex)] } : rest;
+    return w ? { ...rest, math: [...(rest.math ?? []), ...worked(ex)], role: role === "concept" ? "concept" : "worked-example", instance: ex.id } : { ...rest, role, ...(role === "prerequisite" ? {} : { instance: rest.instance ?? ex.id }) }; // a screen with its own illustration names the question it illustrates
   };
   const diagnostics = explore(bp.family, used);
   // the facts the explanations rest on (7 × 8, 2⁴ …): probe questions a strategy can build on
   const probes = [...new Set(seed.bugs.flatMap((b) => (b.probe && b.probe !== seed.id && !b.probe.startsWith(`gen:${bp.family}:`) && problemOf(b.probe) && selectable(b.probe) ? [b.probe] : [])))].slice(0, 2);
-  const chapter = bp.chapter.map((s) => screen(s, seed));
+  const chapter = bp.chapter.map((s) => screen(s, seed, "concept"));
   const sub = subSkills(bp.competency, bp.family, used);
   const strategies: Strategy[] = bp.strategies.map((st, k) => {
     const ex = st.screens.some((s) => s.worked) ? example() : seed;
-    return { id: st.id, title: st.title, kind: st.kind, needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens.map((s) => screen(s, ex)), guided: take("practice", "typed"), check: take("check", k % 2 ? "mc" : "typed") };
+    return { id: st.id, title: st.title, kind: st.kind, needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens.map((s) => screen(s, ex, st.kind === "prerequisite" ? "prerequisite" : "strategy")), guided: take("practice", "typed"), check: take("check", k % 2 ? "mc" : "typed") };
   });
   return {
     competency: bp.competency,
@@ -182,10 +183,18 @@ export function fromTemplate(family: string, competency: string, version: string
   if (def.competency !== competency) throw new Error(`${LIBRARY_POLICY}: family ${family} is about ${def.competency}`);
   const used = new Set<string>();
   const take = drawer(family, used);
+  // teaching-contract@1: each section's text, solution and picture are about one question (its `instance`), drawn so that the
+  // section applies to it; a family with instance teaching (teach.instance) writes the text for that question
+  const inst = def.teach.instance;
+  const cases = new Set<string>();
   const ex = (pred: (p: Problem) => boolean = () => true) => {
-    const id = phasePool(family, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).find((x) => !used.has(x) && pred(typedOf(x)));
+    const ids = phasePool(family, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x) && pred(typedOf(x)));
+    // a family that mixes kinds of question teaches each section on a kind not yet shown (then any)
+    const caseOf = inst ? def.teach!.caseOf : undefined;
+    const id = (caseOf && ids.find((x) => !cases.has(caseOf(typedOf(x).params)))) || ids[0];
     if (!id) return null;
     used.add(id);
+    if (caseOf) cases.add(caseOf(typedOf(id).params));
     return typedOf(id);
   };
   const first = ex((p) => difficultyOf(p) <= 2) ?? ex()!;
@@ -200,25 +209,29 @@ export function fromTemplate(family: string, competency: string, version: string
     return w ? { widget: w as Screen["widget"] } : {};
   };
   const strategies: Strategy[] = [
-    { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [{ title: "The method", text: [def.teach.method], math: worked(stepsEx), ...vis(def.teach.visual, stepsEx) }], guided: take("practice", "typed"), check: take("check", "typed") },
+    { id: "worked_steps", title: "Step by step", kind: "procedural", needs: probes, screens: [inst
+      ? { title: `${inst(stepsEx.params).concept.title}, step by step`, text: inst(stepsEx.params).concept.text.slice(-1), math: worked(stepsEx), role: "worked-example", instance: stepsEx.id, textFrom: "instance" }
+      : { title: "The method", text: [def.teach.method], math: worked(stepsEx), ...vis(def.teach.visual, stepsEx), role: "worked-example", instance: stepsEx.id }], guided: take("practice", "typed"), check: take("check", "typed") },
   ];
   // template@2: the family's further ways of explaining, each with its own example (and picture)
   for (const alt of def.teach.alternatives ?? []) {
-    const e = ex() ?? stepsEx;
-    strategies.push({ id: alt.id, title: alt.title, kind: alt.kind, needs: [], screens: [{ title: alt.title, text: alt.text, math: worked(e), ...vis(alt.visual, e) }], guided: take("practice", "typed"), check: take("check", strategies.length % 2 ? "mc" : "typed") });
+    const fits = (p: Problem) => !alt.applies || alt.applies(p.params);
+    const e = ex(fits) ?? (fits(stepsEx) ? stepsEx : null);
+    if (!e) continue; // no question this way of explaining is about: it is not paired with one it does not fit
+    strategies.push({ id: alt.id, title: alt.title, kind: alt.kind, needs: [], screens: [{ title: alt.title, text: alt.textFor ? alt.textFor(e.params) : alt.text, math: worked(e), ...vis(alt.visual, e), role: "strategy", instance: e.id, ...(alt.textFor ? { textFrom: "instance" as const } : {}) }], guided: take("practice", "typed"), check: take("check", strategies.length % 2 ? "mc" : "typed") });
   }
   if (mistakeEx) {
     const b = conceptual(mistakeEx)!;
-    strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \(.*\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says, def.teach.idea], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
+    strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ role: "misconception", instance: mistakeEx.id, title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \(.*\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
   }
   if (uses.length)
-    strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });
+    strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ role: "prerequisite", title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });
   const sub = subSkills(competency, family, used);
   const own = [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")];
   return {
     competency,
     title: def.title,
-    chapter: [{ title: def.title, text: [def.teach.idea], math: worked(first), ...vis(def.teach.visual, first), ...(conceptual(first) ? { tip: conceptual(first)!.says } : {}) }, ...sub.chapter],
+    chapter: [{ title: inst ? inst(first.params).concept.title : def.title, text: inst ? inst(first.params).concept.text : [def.teach.idea], math: worked(first), ...(inst ? {} : vis(def.teach.visual, first)), ...(conceptual(first) ? { tip: conceptual(first)!.says } : {}), role: "concept", instance: first.id, ...(inst ? { textFrom: "instance" as const } : {}) }, ...sub.chapter],
     diagnostics,
     strategies,
     practice: [...own, ...sub.practice],
@@ -227,7 +240,7 @@ export function fromTemplate(family: string, competency: string, version: string
     probes,
     pool: { family, version: FAMILY_VERSION[family] },
     ...(sub.pools.length > 1 ? { pools: sub.pools } : {}),
-    provenance: { origin: "synthesised", policy: `${LIBRARY_POLICY}+${def.teach.alternatives?.length || def.teach.visual ? "template@2" : "template@1"}`, family, seed: first.params, blueprintVersion: version, author: "OpenPath template (generated from the family's teaching hints; not educator-reviewed)", aiAssisted: true, licence: "CC0", examples: [first.id, ...(mistakeEx ? [mistakeEx.id] : []), stepsEx.id] },
+    provenance: { origin: "synthesised", policy: `${LIBRARY_POLICY}+${def.teach.alternatives?.length || def.teach.visual ? "template@2" : "template@1"}${inst ? "+teaching-contract@1" : ""}`, family, seed: first.params, blueprintVersion: version, author: "OpenPath template (generated from the family's teaching hints; not educator-reviewed)", aiAssisted: true, licence: "CC0", examples: [first.id, ...(mistakeEx ? [mistakeEx.id] : []), stepsEx.id] },
   };
 }
 

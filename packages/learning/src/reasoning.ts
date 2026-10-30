@@ -18,7 +18,7 @@ import { phasePool, problemOf, show, variantsOf, type Bug, type Problem, type Va
 import { selectable } from "./question-status";
 
 export const REASONING_POLICY = {
-  version: "diagnostic@2-draft",
+  version: "diagnostic@2.1-draft",
   prior: { secure: 0.3, unexplained: 0.1 },
   /** P(the predicted wrong answer | that explanation) when it predicts one value; split when it predicts several. */
   consistency: 0.7,
@@ -163,7 +163,12 @@ export function reason(original: string, observations: Observation[]): Reasoning
   const P = REASONING_POLICY;
   // never established on one answer: a misunderstanding must be seen again on a different problem
   const decided = s[top.id] >= P.establishAt && top.id !== "unexplained" && observed.filter((o) => o.matches.includes(top.id)).length >= 2;
-  const out = followUps >= P.maxFollowUps || decided || firstRight;
+  // stopping rule (adaptive-loop repair): follow-ups can only tell written explanations apart. When none is still in play (the
+  // same 0.15 support threshold as `competing`), more questions could only separate "a slip" from "unexplained", which lead to
+  // the same next step, so the investigation stops at once (uncertain), instead of asking up to maxFollowUps questions.
+  const inPlay = ranked.filter((e) => e.id !== "secure" && e.id !== "unexplained" && s[e.id] >= 0.15);
+  const nothingToTellApart = !firstRight && observed.length > 0 && !inPlay.length;
+  const out = followUps >= P.maxFollowUps || decided || firstRight || nothingToTellApart;
   let next: string | null = null;
   if (!out) {
     const askedIds = new Set(asked.map((x) => x.pr.id));

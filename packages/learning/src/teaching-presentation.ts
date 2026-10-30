@@ -70,7 +70,8 @@ export function teachingScopeFor(module: Module): TeachingScope {
     family, title: "Counting elements in A × B", introduction: "Each element of A can be paired with each element of B. Multiplication counts all the ordered pairs.",
     accepts: (problem) => problem.family === family && problem.params[2] !== 1, strategyId: "grid",
   };
-  return { family, title: def.title, introduction: def.teach?.idea ?? null, accepts: (problem) => problem.family === family };
+  // teaching-contract@1: a family taught instance by instance has no family-level introduction (it would describe other questions)
+  return { family, title: def.title, introduction: def.teach?.instance ? null : def.teach?.idea ?? null, accepts: (problem) => problem.family === family };
 }
 
 const shown = (value: unknown) => Array.isArray(value) ? value.join(", ") : String(value).replace(/-/g, "−");
@@ -102,6 +103,9 @@ function competencyContext(competencyId: string): string {
  * Falls back to a generic op-based explanation only for steps without a
  * justification (backward compatibility with families not yet annotated).
  */
+/** The explanation a family step gives (justification-driven when the step is annotated). */
+export const familyStepExplanation = (problem: Problem, step: Step) => mathematicalExplanation(step, FAMILIES.get(problem.family) ?? ({ teach: undefined } as unknown as Def));
+
 function mathematicalExplanation(step: Step, family: Def): string {
   const result = shown(step.value);
 

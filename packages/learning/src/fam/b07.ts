@@ -5,6 +5,7 @@
  */
 import type { Bug, Def, Value, Visual } from "../family-kit";
 import { gcd, MT } from "../family-kit";
+const primesOf = (n: number) => { const out: number[] = []; for (let p = 2; n > 1; p++) while (n % p === 0) { out.push(p); n /= p; } return out; };
 import { evaluate, parse } from "../answer-types";
 
 const SPD = "MATH.measurement.time-speed-intro";
@@ -621,7 +622,15 @@ export const B07: Def[] = [
       method: "Go up the times table of the larger number and stop at the first one the smaller number divides exactly.",
       visual: ([a, b]) => ({ type: "numberline", from: 0, to: lcm(a, b), marks: Array.from({ length: lcm(a, b) / b }, (_, i) => (i + 1) * b), jumps: Array.from({ length: lcm(a, b) / a }, (_, i) => [i * a, (i + 1) * a]) }),
       alternatives: [
-        { id: "prime_factors", title: "Use prime factors", kind: "procedural", text: ["Write each number as a product of primes, e.g. 12 = 2 × 2 × 3 and 18 = 2 × 3 × 3.", "Take each prime the greatest number of times it appears in either: 2 × 2 × 3 × 3 = 36."] },
+        {
+          id: "prime_factors", title: "Use prime factors", kind: "procedural", text: ["Write each number as a product of primes, e.g. 12 = 2 × 2 × 3 and 18 = 2 × 3 × 3.", "Take each prime the greatest number of times it appears in either: 2 × 2 × 3 × 3 = 36."],
+          // stage 2: the explanation works on the question's own two numbers
+          textFor: ([a, b]) => {
+            const pa = primesOf(a), pb = primesOf(b), take: number[] = [];
+            for (const p of [...new Set([...pa, ...pb])].sort((x, y) => x - y)) for (let k = 0; k < Math.max(pa.filter((q) => q === p).length, pb.filter((q) => q === p).length); k++) take.push(p);
+            return [`Write each number as a product of primes: ${a} = ${pa.join(" × ")} and ${b} = ${pb.join(" × ")}.`, `Take each prime the greatest number of times it appears in either: ${take.join(" × ")} = ${take.reduce((x, y) => x * y, 1)}.`];
+          },
+        },
         { id: "ladder", title: "Divide both together", kind: "procedural", text: ["Divide both numbers by a common factor and write the quotients below; repeat until no common factor is left.", "Multiply the divisors on the left by the numbers left at the bottom."] },
       ],
     },
