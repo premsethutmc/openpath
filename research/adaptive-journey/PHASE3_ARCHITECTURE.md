@@ -152,7 +152,27 @@ The two kinds of evidence are kept apart: mathematical (left) and about the lear
 
 ## 8. Regression results
 
-See the final section of the commit message and the final report for the run that completed. Partial runs are not reported as passes.
+Every run below completed, and each frontend run used a clean worktree. An earlier frontend run was stopped before it finished: source files were edited while it ran, so it is not counted.
+
+| Suite | `2a33767` (Phase 2) | `6460969` (this phase) |
+|---|---|---|
+| `bun test packages/learning/src` | 1454 pass / 0 fail | 1454 pass / 0 fail |
+| Frontend unit tests (`node --import tsx --test`, substituted toolchain, not lockfile-exact) | 467: 465 pass, 2 fail | 474: 472 pass, 2 fail (+7 contract tests) |
+| Django (SQLite) | 302, OK | 302, OK |
+| Type check: `tsconfig.json` / `tsconfig.english.json` / `tsconfig.mathematics-integration.json` | 0 / 0 / 170 | 0 / 0 / 170 (the existing baseline; no new errors) |
+| Server grader bundle | `17204038…` | `17204038…` (unchanged) |
+| Journey traces, two runs | byte-identical | byte-identical |
+
+The 2 frontend failures are the same, pre-existing ones on both commits: the `aofclass` family specification, and an exhausted `aofclass` pool. They are a generator defect, unchanged since the E7 gate. **No new failures.**
+
+Invariants, and where each is checked:
+- **No unsupported mathematical acceptance:** grading is untouched, the bundle is identical, and the bun grading corpus passes.
+- **No assisted-to-independent promotion:** journey C, the guided-step assertions, and `evidence.ts` is untouched.
+- **No silent loss of established diagnostic evidence:** contract tests 1–3.
+- **No false teaching claim:** contract test 6.
+- **No ineligible questions:** journey `common()` checks that every question asked is not quarantined and is form-certified.
+- **No change to mastery or grading policy:** `evidence.ts`, `grading/*`, `question-status*` and `certify` are not in the diff.
+- **Deterministic traces:** two runs compared.
 
 ## 9. Remaining architectural limitations
 
