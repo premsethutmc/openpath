@@ -78,6 +78,8 @@ export interface InputSpec {
   placeholder?: string;
   /** Whether to show a numeric keypad on mobile */
   showKeypad?: boolean;
+  /** D1: the text entry also takes working lines ("3x = 15; x = 5"): letters, =, ; and operators are kept, not stripped */
+  acceptsWorking?: boolean;
 }
 
 // ── Visual model ────────────────────────────────────────────────────────────
@@ -249,6 +251,8 @@ export interface LocaleStrings {
   next: string;
   back: string;
   correct: string;
+  /** D1: the verdict label for working that was looked at but not marked right or wrong (feedback level "partial") */
+  notMarked?: string;
   incorrect: string;
   tryAgain: string;
   showWorking: string;

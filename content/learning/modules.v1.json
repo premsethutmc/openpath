@@ -3693,6 +3693,21 @@
    "licence": "CC0",
    "review": "provisional",
    "probe": "transfer"
+  },
+  {
+   "id": "le-ref-3x-19-4",
+   "competency": "MATH.algebra.linear-equations",
+   "skill": "MATH.algebra.linear-equations",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "Solve 3x = 19 − 4. What is x?",
+   "answer": "5",
+   "statement": "3x = 19 - 4",
+   "solution": "19 − 4 = 15, so 3x = 15. Divide both sides by 3: x = 5. Check: 3 × 5 = 15 and 19 − 4 = 15.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath (D1 grader-teaching reference problem)",
+   "licence": "CC0",
+   "review": "provisional"
   }
  ]
 }

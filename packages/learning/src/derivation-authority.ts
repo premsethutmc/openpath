@@ -25,7 +25,11 @@ import { approximatesAllRoots, compareStatements, fullDomain, pgcd, sameRational
 // @3 (grader generalization): solution-sets@1 validity (exact real solution sets, domain-aware), balance by any visible term / factor / denominator,
 //     provably nonzero expressions, implication-only steps (multiplying by a possibly-zero expression, squaring) with candidate checking, inequalities,
 //     substitution under task bindings, wider task-statement normalization; @2 certificates no longer replay as current
-export const AUTHORITY_VERSION = "openpath-derivation-authority@3" as const;
+// @4 (D1 grader-teaching integration; rules unchanged from B2 aac35c6, only the label): B2 changed what authority@3 decides without a new label —
+//     notation@2 ambiguity refusals (2^3x, x2, 1/(x+3)(x-2), 2 3x), the bounded balance+symmetry move (6 < 2x -> x > 3) and completeness@2 (lowest-terms
+//     quotients). An @3 certificate therefore did not identify its rules (an @3 chain for "2^3x = 64" issued at be91d17 fails replay under B2 as if
+//     tampered). @3 certificates are now reported as historical-version-not-replayable (their recorded result stands, unverified); they are never replayed as @4.
+export const AUTHORITY_VERSION = "openpath-derivation-authority@4" as const;
 export const DERIVATION_CERTIFICATE_VERSION = "openpath-derivation-certificate@3" as const;
 export const KERNEL_VERSION = "openpath-symbolic-proof-kernel@1" as const;
 export type Grade = "determined" | "anchored" | "parametric";

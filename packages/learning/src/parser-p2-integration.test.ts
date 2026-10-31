@@ -129,7 +129,7 @@ describe("Stage 6: certificate compatibility", () => {
     expect(replayDerivationChain(s, l, c).ok).toBe(false);
     const d = chain(); d[0].versions.authority = "openpath-derivation-authority@2";
     expect(chainVerificationStatus(s, l, d).status).toBe("historical-version-not-replayable");
-    expect(DERIVATION_CERTIFICATE_VERSION).toMatch(/@3$/); expect(AUTHORITY_VERSION).toMatch(/@3$/);
+    expect(DERIVATION_CERTIFICATE_VERSION).toMatch(/@3$/); expect(AUTHORITY_VERSION).toMatch(/@4$/); // D1: label bumped for B2 rule changes (certificate format still @3)
   });
   test("tampered, truncated, cross-task and forged chains fail", () => {
     const t = chain(); t[2].results = ["x = 12"]; expect(chainVerificationStatus(s, l, t).status).toBe("failed-replay");

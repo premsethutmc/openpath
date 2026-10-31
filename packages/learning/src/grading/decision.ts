@@ -19,6 +19,7 @@ import { PARSER_VERSION } from "./parse.ts";
 import { notAnAnswer, readResponse } from "./read.ts";
 import { compareValues, type Verifier } from "./verify.ts";
 import { certified, CERTIFICATIONS_HASH } from "./certify.ts";
+import { assessWorking, type WorkingAssessment } from "./working.ts";
 
 export const GRADING_POLICY = "grading-policy@1" as const;
 export type Verdict = "correct" | "incorrect" | "unresolved" | "pending-educator";
@@ -45,6 +46,9 @@ export interface GradingDecision {
   form: Assessment["form"] | null;
   method: { examined: boolean; verified: boolean };
   diagnosis: Assessment["evidence"]["firstError"];
+  /** working-assessment@1 (D1): the derivation authority's judgement of the submitted working, kept apart from the verdict above (which it never
+   *  changes). Present for questions with a task statement (and for any submission with working); absent otherwise. */
+  working?: WorkingAssessment;
 }
 
 const contractsV1 = new Map<string, AssessmentContract>();
@@ -55,8 +59,18 @@ function decision(qid: string, c: ContractV2 | null, raw: string, working: reado
 }
 const verdictOf = (credit: boolean | null): Verdict => (credit === true ? "correct" : credit === false ? "incorrect" : "unresolved");
 
-/** the decision and the assessment@1 evidence the app records with it (the record format is unchanged until decision records, stage 7) */
+/** the decision and the assessment@1 evidence the app records with it (the record format is unchanged until decision records, stage 7).
+ *  D1: the working is then judged by the derivation authority (grading/working.ts) and attached beside the verdict; a held, quarantined or
+ *  educator-marked decision gets none (nothing is concluded about working the grader did not decide on). */
 export function grade(qid: string, raw: string, working: readonly string[] = [], clarifications = 0): { decision: GradingDecision; assessment: Assessment } {
+  const g = gradeAnswer(qid, raw, working, clarifications);
+  const d = g.decision;
+  if (d.reason === "unresolved.quarantined" || d.reason === "unresolved.contract-inconsistency" || d.reason === "pending-educator") return g;
+  const value = d.interpretation && "value" in d.interpretation ? d.interpretation.value : null;
+  const w = assessWorking(qid, working, d.verdict, value);
+  return w ? { ...g, decision: { ...d, working: w } } : g;
+}
+function gradeAnswer(qid: string, raw: string, working: readonly string[] = [], clarifications = 0): { decision: GradingDecision; assessment: Assessment } {
   if (quarantined(qid)) {
     const a = assessSubmission(null, { response: raw, working, clarifications });
     return { decision: decision(qid, null, raw, working, "unresolved", "unresolved.quarantined"), assessment: a };

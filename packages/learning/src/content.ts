@@ -28,6 +28,9 @@ export interface Question {
   type: AnswerType;
   prompt: string;
   answer: string;
+  /** D1: the task as the derivation authority reads it ("3x = 19 - 4"), for questions whose prompt is a sentence. Generated questions take it
+   *  from their family contract instead. Only the trusted grader reads it, to judge submitted working; it never changes the answer verdict. */
+  statement?: string;
   solution: string;
   difficulty: number;
   probe?: "concept" | "procedure" | "recall" | "transfer";

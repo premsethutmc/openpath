@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import "../math/math.css";
 import { LearningScreen } from "../math/components/LearningScreen";
-import { moduleFor, question } from "../../../packages/learning/src/content";
+import { isQuestion, moduleFor, question } from "../../../packages/learning/src/content";
 import { contentEligibility } from "../../../packages/learning/src/explanation-review";
 import { teachingSpec, teachingSteps } from "./renderer-adapter";
 import { problemOf } from "../../../packages/learning/src/families";
@@ -14,7 +14,9 @@ import type { LearnerView } from "./learners";
 // ?scenario=<id> runs a Milestone 2 scenario's learner; no parameter: the Milestone 1 slice (gen:lin:2,17,11, real clock)
 const sid = new URLSearchParams(location.search).get("scenario");
 const sc = sid ? SCENARIOS.find((s) => s.id === sid) ?? null : null;
-const flow = sc ? new SliceFlow(sc.start, `synthetic-browser-${sc.id}`, T0, { retry: !!sc.retry, entry: sc.entry ?? "diagnostic" }) : new SliceFlow("gen:lin:2,17,11");
+// ?start=<question id> (D1): the slice from another question, e.g. the reference problem le-ref-3x-19-4; the learner types into the real screen
+const start0 = new URLSearchParams(location.search).get("start");
+const flow = sc ? new SliceFlow(sc.start, `synthetic-browser-${sc.id}`, T0, { retry: !!sc.retry, entry: sc.entry ?? "diagnostic" }) : (start0 && isQuestion(start0) ? new SliceFlow(start0, "synthetic-browser-d1", T0) : new SliceFlow("gen:lin:2,17,11"));
 const learner = sc?.learner() ?? null;
 const asked = new Set<string>();
 let rerender: (() => void) | null = null;

@@ -225,6 +225,7 @@ export function LearningScreen({ spec, onEvent, learningState, experienceId }: L
               ) : (
                 <NumericInput
                   placeholder={spec.input.placeholder}
+                  acceptsWorking={spec.input.acceptsWorking}
                   showKeypad={showKeypad}
                   disabled={spec.feedback.level === "correct"}
                   onSubmit={(v) => {

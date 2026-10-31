@@ -10,10 +10,8 @@ import { hypothesesFor, investigationTrigger } from "../../../packages/learning/
 import { withDecisions, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { gradeRequest, type GraderReply } from "../../../packages/learning/src/server-grader";
 import { learnerState, make } from "../../../packages/learning/src/session";
-import { authorizeWorking, workingEvidence } from "../../../packages/learning/src/derivation-interface";
 import { activityFor } from "../learning/driver";
 import { assertOwns, type Authority, type TraceEntry } from "./contracts";
-import { FAMILIES, problemOf } from "../../../packages/learning/src/families";
 
 export interface Shown { phase: ModuleState["phase"]; question: string | null; strategyId: string | null; reason: string; context?: string }
 
@@ -79,12 +77,11 @@ export class SliceSession {
       const id = (rec as { id: string }).id;
       this.decisions[id] = { ...(reply.decision as object), schema: "grading-decision@1", decisionId: `dec:${id}`, decidedBy: "server" } as ServerDecision;
     }
-    if (o.working?.length) {
-      // the task as the generator states it (its contract, from the parameters), else the prompt: the authority reads equations, not sentences
-      const p = problemOf(qid.replace(/:(mc|w)$/, "")), stmt = p ? FAMILIES.get(p.family)?.contract?.statement?.(p.params) : null;
-      const a = authorizeWorking(stmt ?? question(qid).prompt, o.working);
-      this.log("mathematical-grader", "derivation-authorization", "derivation-interface.authorizeWorking", { lines: o.working }, { status: a.status, evidence: workingEvidence(a) });
-    }
+    // D1: the working is judged by the trusted grader itself (grading/working.ts -> derivation-interface.authorizeWorking, replayed), against the
+    // question's own task statement, and returned inside its decision; the journey only reads it. No client-side authorization remains.
+    const w = reply.decision?.working;
+    if (w && o.working?.length) this.log("mathematical-grader", "derivation-authorization", "derivation-interface.authorizeWorking", { qid, lines: o.working ?? [], statement: w.statement, by: "server-grader.gradeRequest" },
+      { status: w.status, evidence: w.methodEvidence, completeness: w.completeness, firstInvalid: w.firstInvalid?.index ?? null, workingAnswer: w.workingAnswer, substitution: w.substitution ? w.substitution.holds : null, certificates: w.certificates.length, replayed: w.replayed });
     const st = this.state();
     const comp = question(qid).competency;
     const ev = st.evidence(comp);

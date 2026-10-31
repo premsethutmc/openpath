@@ -7,6 +7,8 @@
  */
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import { HINT_FALLBACK, type SliceFlow } from "./flow";
+import { feedbackFromDecision, workingFeedback } from "./renderer-adapter";
+import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
 
 export const ADAPTER_LABELS = new Set([
   "Here is your question.", "Try this one again.", "That matches.", "Not this time.", "Not marked.",
@@ -48,9 +50,14 @@ export function checkProvenance(f: SliceFlow): string[] {
     }
     if (fr.stage === "feedback") {
       const r = f.session.replies[reply++];
-      const want = r?.verdict === "correct" ? "correct" : r?.verdict === "incorrect" ? "incorrect" : "none";
-      if (!r || sp.feedback.level !== want) bad.push(`${where}: feedback ${sp.feedback.level} is not the grader's ${r?.verdict}`);
-      if (!ADAPTER_LABELS.has(sp.feedback.message ?? "")) bad.push(`${where}: feedback message has no owner`);
+      // D1: an unmarked answer whose working the grader judged is shown as "partial" (not marked), never as right or wrong
+      const want = r?.verdict === "correct" ? "correct" : r?.verdict === "incorrect" ? "incorrect" : r?.decision ? feedbackFromDecision(r.decision as GradingDecision).level : "none";
+      if (!r || sp.feedback.level !== want || (want === "partial" && r.verdict !== "unresolved")) bad.push(`${where}: feedback ${sp.feedback.level} is not the grader's ${r?.verdict}`);
+      const wf = r?.decision ? workingFeedback(r.decision as GradingDecision) : null;
+      if (!ADAPTER_LABELS.has(sp.feedback.message ?? "") && sp.feedback.message !== wf?.message) bad.push(`${where}: feedback message has no owner`);
+      // the learner's lines shown with the feedback are exactly the decision's working record, and "verified" only where a replayed certificate says so
+      if ((sp.working?.steps.length ?? 0) > 0 && JSON.stringify(sp.working!.steps) !== JSON.stringify(wf?.steps ?? [])) bad.push(`${where}: working shown is not the decision's`);
+      for (const [i, st] of (sp.working?.steps ?? []).entries()) if (st.verified && !(r?.decision?.working?.replayed && i < r.decision.working.replayedLines && r.decision.working.lines[i]?.status.startsWith("certified"))) bad.push(`${where}: a working line shown as checked without a replayed certificate`);
       if (r && sp.feedback.evidence && !sp.feedback.evidence.endsWith(`(${r.reason})`)) bad.push(`${where}: feedback reason is not the decision's`);
       if (sp.feedback.verified && !(r?.decision?.certified)) bad.push(`${where}: "verified" without a certified decision`);
     } else if (sp.feedback.level !== "none") bad.push(`${where}: a verdict shown without an answer`);

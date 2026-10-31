@@ -16,6 +16,7 @@ const en: LocaleStrings = {
   back: "Back",
   correct: "Correct!",
   incorrect: "Not quite right",
+  notMarked: "Not marked",
   tryAgain: "Try again",
   showWorking: "Show working",
   hideWorking: "Hide working",

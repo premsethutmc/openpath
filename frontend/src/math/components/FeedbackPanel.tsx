@@ -26,7 +26,7 @@ export function FeedbackPanel({ feedback, strings }: FeedbackPanelProps) {
         <span className="lr-feedback-icon" aria-hidden="true">
           {feedback.level === "correct" ? "✓" : feedback.level === "partial" ? "◐" : "✗"}
         </span>
-        {feedback.level === "correct" ? strings.correct : strings.incorrect}
+        {feedback.level === "correct" ? strings.correct : feedback.level === "partial" ? (strings.notMarked ?? "Not marked") : strings.incorrect}
       </p>
 
       {feedback.message && <p className="lr-feedback-message">{feedback.message}</p>}

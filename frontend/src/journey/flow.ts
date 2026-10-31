@@ -8,7 +8,9 @@ import { question } from "../../../packages/learning/src/content";
 import { familyOf, investigateContext, retriesLeft, type Established, type ModuleState } from "../../../packages/learning/src/intervention";
 import { activityFor } from "../learning/driver";
 import type { RenderSpec, RendererEvent } from "../math/types";
-import { feedbackFromDecision, questionSpec, teachingSpec, teachingSteps } from "./renderer-adapter";
+import { feedbackFromDecision, questionSpec, teachingSpec, teachingSteps, workingFeedback } from "./renderer-adapter";
+import { readSubmission } from "../../../packages/learning/src/grading/submission";
+import { taskStatement } from "../../../packages/learning/src/grading/working";
 import { SliceSession } from "./session";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
 import type { LearningActivity } from "../../../packages/learning/src/records";
@@ -81,8 +83,11 @@ export class SliceFlow {
   }
 
   private answer(value: string, working?: string[]) {
-    const reply = this.session.submit(this.qid, value, this.activity, { ...(this.context ? { context: this.context } : {}), ...(this.hints ? { hints: this.hints } : {}), ...(working?.length ? { working } : {}) });
+    // D1: one typed submission may hold working lines ("3x = 15; x = 5"); splitting is syntax only (grading/submission.ts), the grader judges both parts
+    const sub = working?.length ? { response: value, working } : readSubmission(value, taskStatement(this.qid) !== null);
+    const reply = this.session.submit(this.qid, sub.response, this.activity, { ...(this.context ? { context: this.context } : {}), ...(this.hints ? { hints: this.hints } : {}), ...(sub.working.length ? { working: sub.working } : {}) });
     const fb = feedbackFromDecision(reply.decision as GradingDecision);
+    const wf = workingFeedback(reply.decision as GradingDecision);
     const assisted = this.activity === "guided" || this.hints > 0;
     const canRetry = !!this.opts.retry && fb.level === "incorrect" && retriesLeft(this.session.state().records, this.qid) > 0;
     this.stage = "feedback";
@@ -90,6 +95,8 @@ export class SliceFlow {
       ...questionSpec(this.qid, { feedback: fb, guide: { message: fb.level === "correct" ? "That matches." : fb.level === "incorrect" ? "Not this time." : "Not marked.", detail: (assisted ? "Guided practice: help was available, so this is practice, not an independent check. " : "On your own: no help was given. ") + "Press Continue to see what the learning engine chooses next.", tone: fb.level === "correct" ? "encouraging" : "thinking" } }),
       nav: { canSubmit: false, canSkip: true, skipLabel: canRetry ? "Continue with another question" : "Continue", canGoBack: canRetry, ...(canRetry ? { backLabel: "Try again" } : {}), canRequestHint: false, canShowWorking: false },
     } as RenderSpec;
+    // the learner's own working lines, marked as the trusted grader judged them (the existing working panel; nothing new is drawn)
+    if (wf?.steps.length) this.spec = { ...this.spec, layout: { panels: [...this.spec.layout.panels, "working"] }, working: { steps: wf.steps, revealedCount: wf.steps.length, editable: false } } as RenderSpec;
     this.hints = 0;
     this.push();
     return this.spec;

@@ -137,5 +137,5 @@ describe("structured working evidence (openpath-working-evidence@1)", () => {
     expect(status("Solve x^2 - 2 = 0", ["x^2 - 2 = 0", "x = 1.41 or x = -1.41"])).toBe("unsupported");     // approximation: a marking decision
     expect(status("Solve x^2 - 2 = 0", ["x = 1.41"])).toBe("invalid");                                     // loses -sqrt(2)
   });
-  test("versions", () => { expect(AUTHORITY_VERSION).toBe("openpath-derivation-authority@3"); expect(assessChain("Solve x = 1", ["x = 1"]).evidence.contract).toBe("openpath-working-evidence@1"); });
+  test("versions", () => { expect(AUTHORITY_VERSION).toBe("openpath-derivation-authority@4"); expect(assessChain("Solve x = 1", ["x = 1"]).evidence.contract).toBe("openpath-working-evidence@1"); });
 });
