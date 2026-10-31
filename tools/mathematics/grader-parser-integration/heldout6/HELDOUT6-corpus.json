@@ -1,0 +1,4892 @@
+[
+ {
+  "id": "h6-lin-001",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 3x - 7 = 11.",
+  "working": "3x = 18\nx = 6",
+  "lines": [
+   "3x = 18",
+   "x = 6"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "add 7, divide by 3"
+ },
+ {
+  "id": "h6-lin-002",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 3x - 7 = 11.",
+  "working": "3x = 4\nx = 4/3",
+  "lines": [
+   "3x = 4",
+   "x = 4/3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "subtracted 7 instead of adding"
+ },
+ {
+  "id": "h6-lin-003",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve -4x + 5 = 21.",
+  "working": "-4x = 16\nx = -4",
+  "lines": [
+   "-4x = 16",
+   "x = -4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "divide by a negative"
+ },
+ {
+  "id": "h6-lin-004",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve -4x + 5 = 21.",
+  "working": "-4x = 16\nx = 4",
+  "lines": [
+   "-4x = 16",
+   "x = 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "sign lost when dividing by -4"
+ },
+ {
+  "id": "h6-lin-005",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve (2/3)x - 1 = 5.",
+  "working": "(2/3)x = 6\n2x = 18\nx = 9",
+  "lines": [
+   "(2/3)x = 6",
+   "2x = 18",
+   "x = 9"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "fractional coefficient, isolate then clear"
+ },
+ {
+  "id": "h6-lin-006",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve (2/3)x - 1 = 5.",
+  "working": "2x - 3 = 15\n2x = 18\nx = 9",
+  "lines": [
+   "2x - 3 = 15",
+   "2x = 18",
+   "x = 9"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "alternative path: multiply by 3 first"
+ },
+ {
+  "id": "h6-lin-007",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve (2/3)x - 1 = 5.",
+  "working": "2x - 3 = 5\n2x = 8\nx = 4",
+  "lines": [
+   "2x - 3 = 5",
+   "2x = 8",
+   "x = 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "multiplied only the left side by 3"
+ },
+ {
+  "id": "h6-lin-008",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 0.4x + 1.2 = 2.",
+  "working": "0.4x = 0.8\nx = 2",
+  "lines": [
+   "0.4x = 0.8",
+   "x = 2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "decimal coefficients"
+ },
+ {
+  "id": "h6-lin-009",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 0.4x + 1.2 = 2.",
+  "working": "0.4x = 3.2\nx = 8",
+  "lines": [
+   "0.4x = 3.2",
+   "x = 8"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "added 1.2 instead of subtracting"
+ },
+ {
+  "id": "h6-lin-010",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 5 - 2(x - 3) = 3x + 1.",
+  "working": "5 - 2x + 6 = 3x + 1\n11 - 2x = 3x + 1\n11 = 5x + 1\n10 = 5x\nx = 2",
+  "lines": [
+   "5 - 2x + 6 = 3x + 1",
+   "11 - 2x = 3x + 1",
+   "11 = 5x + 1",
+   "10 = 5x",
+   "x = 2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "negative bracket expanded correctly, one operation per line"
+ },
+ {
+  "id": "h6-lin-011",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 5 - 2(x - 3) = 3x + 1.",
+  "working": "5 - 2x - 6 = 3x + 1\n-1 - 2x = 3x + 1\n-1 = 5x + 1\n-2 = 5x\nx = -2/5",
+  "lines": [
+   "5 - 2x - 6 = 3x + 1",
+   "-1 - 2x = 3x + 1",
+   "-1 = 5x + 1",
+   "-2 = 5x",
+   "x = -2/5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "sign error expanding -2(x - 3); later lines follow correctly"
+ },
+ {
+  "id": "h6-lin-012",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve x/4 + x/6 = 5.",
+  "working": "3x + 2x = 60\n5x = 60\nx = 12",
+  "lines": [
+   "3x + 2x = 60",
+   "5x = 60",
+   "x = 12"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "multiply through by LCD 12"
+ },
+ {
+  "id": "h6-lin-013",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve x/4 + x/6 = 5.",
+  "working": "(5/12)x = 5\nx = 12",
+  "lines": [
+   "(5/12)x = 5",
+   "x = 12"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "alternative path: combine fractions first"
+ },
+ {
+  "id": "h6-lin-014",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve x/4 + x/6 = 5.",
+  "working": "x/10 = 5\nx = 50",
+  "lines": [
+   "x/10 = 5",
+   "x = 50"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "added denominators"
+ },
+ {
+  "id": "h6-lin-015",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 7 - x = 2x - 8.",
+  "working": "7 = 3x - 8\n15 = 3x\nx = 5",
+  "lines": [
+   "7 = 3x - 8",
+   "15 = 3x",
+   "x = 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "collect on the right"
+ },
+ {
+  "id": "h6-lin-016",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 7 - x = 2x - 8.",
+  "working": "-x - 2x = -8 - 7\n-3x = -15\nx = 5",
+  "lines": [
+   "-x - 2x = -8 - 7",
+   "-3x = -15",
+   "x = 5"
+  ],
+  "expect": "valid-jump",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "first line moves two terms at once"
+ },
+ {
+  "id": "h6-lin-017",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve 7 - x = 2x - 8.",
+  "working": "-x - 2x = -8 + 7\n-3x = -1\nx = 1/3",
+  "lines": [
+   "-x - 2x = -8 + 7",
+   "-3x = -1",
+   "x = 1/3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "moved 7 without changing sign"
+ },
+ {
+  "id": "h6-lin-018",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve -(x + 4) = 3(2 - x).",
+  "working": "-x - 4 = 6 - 3x\n2x - 4 = 6\n2x = 10\nx = 5",
+  "lines": [
+   "-x - 4 = 6 - 3x",
+   "2x - 4 = 6",
+   "2x = 10",
+   "x = 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "expand both sides, add 3x"
+ },
+ {
+  "id": "h6-lin-019",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve -(x + 4) = 3(2 - x).",
+  "working": "-x + 4 = 6 - 3x\n2x + 4 = 6\n2x = 2\nx = 1",
+  "lines": [
+   "-x + 4 = 6 - 3x",
+   "2x + 4 = 6",
+   "2x = 2",
+   "x = 1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "minus not distributed over +4"
+ },
+ {
+  "id": "h6-lin-020",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve (x - 1)/3 = (x + 2)/5.",
+  "working": "5(x - 1) = 3(x + 2)\n5x - 5 = 3x + 6\n2x - 5 = 6\n2x = 11\nx = 11/2",
+  "lines": [
+   "5(x - 1) = 3(x + 2)",
+   "5x - 5 = 3x + 6",
+   "2x - 5 = 6",
+   "2x = 11",
+   "x = 11/2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "fraction answer"
+ },
+ {
+  "id": "h6-lin-021",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve (x - 1)/3 = (x + 2)/5.",
+  "working": "5x - 5 = 3x + 6\n2x = 11\nx = 5.5",
+  "lines": [
+   "5x - 5 = 3x + 6",
+   "2x = 11",
+   "x = 5.5"
+  ],
+  "expect": "valid-jump",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "combined steps, decimal answer"
+ },
+ {
+  "id": "h6-lin-022",
+  "category": "linear",
+  "domain": "algebra",
+  "statement": "Solve (x - 1)/3 = (x + 2)/5.",
+  "working": "5(x - 1) = 3(x + 2)\n5x - 5 = 3x + 6",
+  "lines": [
+   "5(x - 1) = 3(x + 2)",
+   "5x - 5 = 3x + 6"
+  ],
+  "expect": "incomplete",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "stops before isolating x"
+ },
+ {
+  "id": "h6-quad-001",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x^2 - 5x + 6 = 0.",
+  "working": "(x - 2)(x - 3) = 0\nx - 2 = 0 or x - 3 = 0\nx = 2 or x = 3",
+  "lines": [
+   "(x - 2)(x - 3) = 0",
+   "x - 2 = 0 or x - 3 = 0",
+   "x = 2 or x = 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "factorise, zero product"
+ },
+ {
+  "id": "h6-quad-002",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x^2 - 5x + 6 = 0.",
+  "working": "(x + 2)(x + 3) = 0\nx = -2 or x = -3",
+  "lines": [
+   "(x + 2)(x + 3) = 0",
+   "x = -2 or x = -3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "signs wrong in factorisation"
+ },
+ {
+  "id": "h6-quad-003",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve 2x^2 + x - 3 = 0.",
+  "working": "(2x + 3)(x - 1) = 0\n2x + 3 = 0 or x - 1 = 0\nx = -3/2 or x = 1",
+  "lines": [
+   "(2x + 3)(x - 1) = 0",
+   "2x + 3 = 0 or x - 1 = 0",
+   "x = -3/2 or x = 1"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "fraction root"
+ },
+ {
+  "id": "h6-quad-004",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve 2x^2 + x - 3 = 0.",
+  "working": "(2x - 3)(x + 1) = 0\nx = 3/2 or x = -1",
+  "lines": [
+   "(2x - 3)(x + 1) = 0",
+   "x = 3/2 or x = -1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "factorisation expands to 2x^2 - x - 3"
+ },
+ {
+  "id": "h6-quad-005",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x^2 = 7x.",
+  "working": "x^2 - 7x = 0\nx(x - 7) = 0\nx = 0 or x = 7",
+  "lines": [
+   "x^2 - 7x = 0",
+   "x(x - 7) = 0",
+   "x = 0 or x = 7"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "keeps root 0"
+ },
+ {
+  "id": "h6-quad-006",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x^2 = 7x.",
+  "working": "x = 7",
+  "lines": [
+   "x = 7"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implied-by"
+  ],
+  "family": "quadratic",
+  "note": "divided by x, lost root 0"
+ },
+ {
+  "id": "h6-quad-007",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve (x - 4)^2 = 9.",
+  "working": "x - 4 = 3 or x - 4 = -3\nx = 7 or x = 1",
+  "lines": [
+   "x - 4 = 3 or x - 4 = -3",
+   "x = 7 or x = 1"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "plus/minus square root"
+ },
+ {
+  "id": "h6-quad-008",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve (x - 4)^2 = 9.",
+  "working": "x - 4 = ±3\nx = 4 ± 3\nx = 7 or x = 1",
+  "lines": [
+   "x - 4 = ±3",
+   "x = 4 ± 3",
+   "x = 7 or x = 1"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "± notation"
+ },
+ {
+  "id": "h6-quad-009",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve (x - 4)^2 = 9.",
+  "working": "x - 4 = 3\nx = 7",
+  "lines": [
+   "x - 4 = 3",
+   "x = 7"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implied-by",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "took only the positive root"
+ },
+ {
+  "id": "h6-quad-010",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve 4x^2 - 9 = 0.",
+  "working": "4x^2 = 9\nx^2 = 9/4\nx = 3/2 or x = -3/2",
+  "lines": [
+   "4x^2 = 9",
+   "x^2 = 9/4",
+   "x = 3/2 or x = -3/2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "fraction roots via square root"
+ },
+ {
+  "id": "h6-quad-011",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve 4x^2 - 9 = 0.",
+  "working": "(2x - 3)(2x + 3) = 0\nx = 3/2 or x = -3/2",
+  "lines": [
+   "(2x - 3)(2x + 3) = 0",
+   "x = 3/2 or x = -3/2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "difference of squares, read roots off"
+ },
+ {
+  "id": "h6-quad-012",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve 4x^2 - 9 = 0.",
+  "working": "x^2 = 9/4\nx = 3/2",
+  "lines": [
+   "x^2 = 9/4",
+   "x = 3/2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "quadratic",
+  "note": "lost negative root"
+ },
+ {
+  "id": "h6-quad-013",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x(x + 2) = 15.",
+  "working": "x^2 + 2x = 15\nx^2 + 2x - 15 = 0\n(x + 5)(x - 3) = 0\nx = -5 or x = 3",
+  "lines": [
+   "x^2 + 2x = 15",
+   "x^2 + 2x - 15 = 0",
+   "(x + 5)(x - 3) = 0",
+   "x = -5 or x = 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "expansion",
+  "note": "expand then factorise"
+ },
+ {
+  "id": "h6-quad-014",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x(x + 2) = 15.",
+  "working": "x = 15 or x + 2 = 15\nx = 15 or x = 13",
+  "lines": [
+   "x = 15 or x + 2 = 15",
+   "x = 15 or x = 13"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "zero-product rule applied to a nonzero right side"
+ },
+ {
+  "id": "h6-quad-015",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve 6x^2 - x - 2 = 0.",
+  "working": "(3x - 2)(2x + 1) = 0\nx = 2/3 or x = -1/2",
+  "lines": [
+   "(3x - 2)(2x + 1) = 0",
+   "x = 2/3 or x = -1/2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "non-monic factorisation, fraction roots"
+ },
+ {
+  "id": "h6-quad-016",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve 6x^2 - x - 2 = 0.",
+  "working": "(3x + 2)(2x - 1) = 0\nx = -2/3 or x = 1/2",
+  "lines": [
+   "(3x + 2)(2x - 1) = 0",
+   "x = -2/3 or x = 1/2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "factorisation expands to 6x^2 + x - 2"
+ },
+ {
+  "id": "h6-quad-017",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)(x - 3) = 5.",
+  "working": "x^2 - 2x - 3 = 5\nx^2 - 2x - 8 = 0\n(x - 4)(x + 2) = 0\nx = 4 or x = -2",
+  "lines": [
+   "x^2 - 2x - 3 = 5",
+   "x^2 - 2x - 8 = 0",
+   "(x - 4)(x + 2) = 0",
+   "x = 4 or x = -2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "expansion",
+  "note": "expand, collect, factorise"
+ },
+ {
+  "id": "h6-quad-018",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)(x - 3) = 5.",
+  "working": "x + 1 = 5 or x - 3 = 5\nx = 4 or x = 8",
+  "lines": [
+   "x + 1 = 5 or x - 3 = 5",
+   "x = 4 or x = 8"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "zero-product misuse; 4 correct by accident, -2 lost"
+ },
+ {
+  "id": "h6-quad-019",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)(x - 3) = 5.",
+  "working": "x^2 - 2x + 3 = 5\nx^2 - 2x - 2 = 0\nx = 1 + √3 or x = 1 - √3",
+  "lines": [
+   "x^2 - 2x + 3 = 5",
+   "x^2 - 2x - 2 = 0",
+   "x = 1 + √3 or x = 1 - √3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "expansion",
+  "note": "expansion sign error on constant term"
+ },
+ {
+  "id": "h6-quad-020",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve (2x - 1)^2 = 25.",
+  "working": "2x - 1 = 5 or 2x - 1 = -5\n2x = 6 or 2x = -4\nx = 3 or x = -2",
+  "lines": [
+   "2x - 1 = 5 or 2x - 1 = -5",
+   "2x = 6 or 2x = -4",
+   "x = 3 or x = -2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "both square roots"
+ },
+ {
+  "id": "h6-quad-021",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x^2 + 6x + 5 = 0.",
+  "working": "x^2 + 6x = -5\nx^2 + 6x + 9 = 4\n(x + 3)^2 = 4\nx + 3 = ±2\nx = -1 or x = -5",
+  "lines": [
+   "x^2 + 6x = -5",
+   "x^2 + 6x + 9 = 4",
+   "(x + 3)^2 = 4",
+   "x + 3 = ±2",
+   "x = -1 or x = -5"
+  ],
+  "expect": "valid-jump",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "quadratic",
+  "note": "completing the square; last line subtracts 3 and resolves ± together"
+ },
+ {
+  "id": "h6-quad-022",
+  "category": "quadratic",
+  "domain": "algebra",
+  "statement": "Solve x^2 - x - 12 = 0.",
+  "working": "(x - 4)(x + 3) = 0",
+  "lines": [
+   "(x - 4)(x + 3) = 0"
+  ],
+  "expect": "incomplete",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "factorised but roots not stated"
+ },
+ {
+  "id": "h6-rat-001",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)/(x - 2) = 3.",
+  "working": "x + 1 = 3(x - 2)\nx + 1 = 3x - 6\nx + 7 = 3x\n7 = 2x\nx = 7/2",
+  "lines": [
+   "x + 1 = 3(x - 2)",
+   "x + 1 = 3x - 6",
+   "x + 7 = 3x",
+   "7 = 2x",
+   "x = 7/2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "multiply by task denominator"
+ },
+ {
+  "id": "h6-rat-002",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)/(x - 2) = 3.",
+  "working": "x + 1 = 3x - 2\n3 = 2x\nx = 3/2",
+  "lines": [
+   "x + 1 = 3x - 2",
+   "3 = 2x",
+   "x = 3/2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "3 not distributed over (x - 2)"
+ },
+ {
+  "id": "h6-rat-003",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve 4/x = 2/(x + 3).",
+  "working": "4(x + 3) = 2x\n4x + 12 = 2x\n2x + 12 = 0\n2x = -12\nx = -6",
+  "lines": [
+   "4(x + 3) = 2x",
+   "4x + 12 = 2x",
+   "2x + 12 = 0",
+   "2x = -12",
+   "x = -6"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "cross-multiplication"
+ },
+ {
+  "id": "h6-rat-004",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x^2 - 9)/(x - 3) = 8.",
+  "working": "(x - 3)(x + 3)/(x - 3) = 8\nx + 3 = 8\nx = 5",
+  "lines": [
+   "(x - 3)(x + 3)/(x - 3) = 8",
+   "x + 3 = 8",
+   "x = 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "cancel common factor; x ≠ 3 from task denominator"
+ },
+ {
+  "id": "h6-rat-005",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x^2 - 9)/(x - 3) = 6.",
+  "working": "x + 3 = 6\nx = 3\nbut x ≠ 3, so no solution",
+  "lines": [
+   "x + 3 = 6",
+   "x = 3",
+   "but x ≠ 3, so no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "candidate is excluded and discarded"
+ },
+ {
+  "id": "h6-rat-006",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x^2 - 9)/(x - 3) = 6.",
+  "working": "x + 3 = 6\nx = 3",
+  "lines": [
+   "x + 3 = 6",
+   "x = 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "excluded value kept as final answer"
+ },
+ {
+  "id": "h6-rat-007",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve x/(x - 1) = 1/(x - 1) + 2.",
+  "working": "x = 1 + 2(x - 1)\nx = 2x - 1\n-x = -1\nx = 1\nx = 1 is excluded, so no solution",
+  "lines": [
+   "x = 1 + 2(x - 1)",
+   "x = 2x - 1",
+   "-x = -1",
+   "x = 1",
+   "x = 1 is excluded, so no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "excluded candidate discarded"
+ },
+ {
+  "id": "h6-rat-008",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve x/(x - 1) = 1/(x - 1) + 2.",
+  "working": "x = 1 + 2(x - 1)\nx = 2x - 1\n-x = -1\nx = 1",
+  "lines": [
+   "x = 1 + 2(x - 1)",
+   "x = 2x - 1",
+   "-x = -1",
+   "x = 1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "excluded value kept"
+ },
+ {
+  "id": "h6-rat-009",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve 1/x + 1/(x + 2) = 3/4.",
+  "working": "4(x + 2) + 4x = 3x(x + 2)\n8x + 8 = 3x^2 + 6x\n0 = 3x^2 - 2x - 8\n0 = (3x + 4)(x - 2)\nx = -4/3 or x = 2",
+  "lines": [
+   "4(x + 2) + 4x = 3x(x + 2)",
+   "8x + 8 = 3x^2 + 6x",
+   "0 = 3x^2 - 2x - 8",
+   "0 = (3x + 4)(x - 2)",
+   "x = -4/3 or x = 2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "multiply by 4x(x + 2); fraction root"
+ },
+ {
+  "id": "h6-rat-010",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve 1/x + 1/(x + 2) = 3/4.",
+  "working": "(x + 2) + x = 3x(x + 2)\n2x + 2 = 3x^2 + 6x\n0 = 3x^2 + 4x - 2\nx = (-2 + √10)/3 or x = (-2 - √10)/3",
+  "lines": [
+   "(x + 2) + x = 3x(x + 2)",
+   "2x + 2 = 3x^2 + 6x",
+   "0 = 3x^2 + 4x - 2",
+   "x = (-2 + √10)/3 or x = (-2 - √10)/3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "left multiplied by x(x + 2), right by 4x(x + 2)"
+ },
+ {
+  "id": "h6-rat-011",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve 3/(x - 1) = 2/(x + 1).",
+  "working": "3(x + 1) = 2(x - 1)\n3x + 3 = 2x - 2\nx + 3 = -2\nx = -5",
+  "lines": [
+   "3(x + 1) = 2(x - 1)",
+   "3x + 3 = 2x - 2",
+   "x + 3 = -2",
+   "x = -5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "cross-multiplication"
+ },
+ {
+  "id": "h6-rat-012",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve 3/(x - 1) = 2/(x + 1).",
+  "working": "3(x - 1) = 2(x + 1)\n3x - 3 = 2x + 2\nx = 5",
+  "lines": [
+   "3(x - 1) = 2(x + 1)",
+   "3x - 3 = 2x + 2",
+   "x = 5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "cross-multiplied the wrong way"
+ },
+ {
+  "id": "h6-rat-013",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (2x)/(x - 3) = 6/(x - 3).",
+  "working": "2x = 6\nx = 3\nx ≠ 3, so no solution",
+  "lines": [
+   "2x = 6",
+   "x = 3",
+   "x ≠ 3, so no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "only candidate excluded"
+ },
+ {
+  "id": "h6-rat-014",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (2x)/(x - 3) = 6/(x - 3).",
+  "working": "2x = 6\nx = 3",
+  "lines": [
+   "2x = 6",
+   "x = 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "excluded value kept"
+ },
+ {
+  "id": "h6-rat-015",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve x/(x + 1) = 2/(x + 1) + 1.",
+  "working": "x = 2 + (x + 1)\nx = x + 3\n0 = 3\nno solution",
+  "lines": [
+   "x = 2 + (x + 1)",
+   "x = x + 3",
+   "0 = 3",
+   "no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "contradiction, no solution"
+ },
+ {
+  "id": "h6-rat-016",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x^2 + 3x)/x = 7, for x ≠ 0.",
+  "working": "x(x + 3)/x = 7\nx + 3 = 7\nx = 4",
+  "lines": [
+   "x(x + 3)/x = 7",
+   "x + 3 = 7",
+   "x = 4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "cancel x with stated condition"
+ },
+ {
+  "id": "h6-rat-017",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x^2 + 3x)/x = 3.",
+  "working": "x + 3 = 3\nx = 0\nx ≠ 0, so no solution",
+  "lines": [
+   "x + 3 = 3",
+   "x = 0",
+   "x ≠ 0, so no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "cancelled x; candidate 0 excluded"
+ },
+ {
+  "id": "h6-rat-018",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve (x^2 + 3x)/x = 3.",
+  "working": "x + 3 = 3\nx = 0",
+  "lines": [
+   "x + 3 = 3",
+   "x = 0"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "excluded value kept"
+ },
+ {
+  "id": "h6-rat-019",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve x - 4/x = 3.",
+  "working": "x^2 - 4 = 3x\nx^2 - 3x - 4 = 0\n(x - 4)(x + 1) = 0\nx = 4 or x = -1",
+  "lines": [
+   "x^2 - 4 = 3x",
+   "x^2 - 3x - 4 = 0",
+   "(x - 4)(x + 1) = 0",
+   "x = 4 or x = -1"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "multiply by x (nonzero in task domain)"
+ },
+ {
+  "id": "h6-rat-020",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve x - 4/x = 3.",
+  "working": "x^2 - 4 = 3\nx^2 = 7\nx = √7 or x = -√7",
+  "lines": [
+   "x^2 - 4 = 3",
+   "x^2 = 7",
+   "x = √7 or x = -√7"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "right side not multiplied by x"
+ },
+ {
+  "id": "h6-rat-021",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve 5/(x + 2) = 1, for x ≠ -2.",
+  "working": "5 = x + 2\n3 = x\nx = 3",
+  "lines": [
+   "5 = x + 2",
+   "3 = x",
+   "x = 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "stated condition matches denominator"
+ },
+ {
+  "id": "h6-rat-022",
+  "category": "rational",
+  "domain": "algebra",
+  "statement": "Solve 2/(x - 1) + 1/x = 2.",
+  "working": "2x + (x - 1) = 2x(x - 1)\n3x - 1 = 2x^2 - 2x",
+  "lines": [
+   "2x + (x - 1) = 2x(x - 1)",
+   "3x - 1 = 2x^2 - 2x"
+  ],
+  "expect": "incomplete",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "stops at the quadratic"
+ },
+ {
+  "id": "h6-ineq-001",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 3x - 5 < 7.",
+  "working": "3x < 12\nx < 4",
+  "lines": [
+   "3x < 12",
+   "x < 4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "no flip needed"
+ },
+ {
+  "id": "h6-ineq-002",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve -2x + 1 ≥ 9.",
+  "working": "-2x ≥ 8\nx ≤ -4",
+  "lines": [
+   "-2x ≥ 8",
+   "x ≤ -4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "divide by negative, flip"
+ },
+ {
+  "id": "h6-ineq-003",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve -2x + 1 ≥ 9.",
+  "working": "-2x ≥ 8\nx ≥ -4",
+  "lines": [
+   "-2x ≥ 8",
+   "x ≥ -4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip"
+ },
+ {
+  "id": "h6-ineq-004",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 5 - x > 2x - 7.",
+  "working": "5 > 3x - 7\n12 > 3x\n4 > x\nx < 4",
+  "lines": [
+   "5 > 3x - 7",
+   "12 > 3x",
+   "4 > x",
+   "x < 4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "avoid negatives by collecting on the right"
+ },
+ {
+  "id": "h6-ineq-005",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 5 - x > 2x - 7.",
+  "working": "-x - 2x > -7 - 5\n-3x > -12\nx < 4",
+  "lines": [
+   "-x - 2x > -7 - 5",
+   "-3x > -12",
+   "x < 4"
+  ],
+  "expect": "valid-jump",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "first line moves two terms"
+ },
+ {
+  "id": "h6-ineq-006",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 5 - x > 2x - 7.",
+  "working": "-3x > -12\nx > 4",
+  "lines": [
+   "-3x > -12",
+   "x > 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip dividing by -3"
+ },
+ {
+  "id": "h6-ineq-007",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve (x + 2)/(-3) ≤ 1.",
+  "working": "x + 2 ≥ -3\nx ≥ -5",
+  "lines": [
+   "x + 2 ≥ -3",
+   "x ≥ -5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "multiply by -3 with flip"
+ },
+ {
+  "id": "h6-ineq-008",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve (x + 2)/(-3) ≤ 1.",
+  "working": "x + 2 ≤ -3\nx ≤ -5",
+  "lines": [
+   "x + 2 ≤ -3",
+   "x ≤ -5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "multiplied by -3 without flipping"
+ },
+ {
+  "id": "h6-ineq-009",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve -(1/2)x < 3.",
+  "working": "x > -6",
+  "lines": [
+   "x > -6"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "multiply by -2 with flip"
+ },
+ {
+  "id": "h6-ineq-010",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve -(1/2)x < 3.",
+  "working": "x < -6",
+  "lines": [
+   "x < -6"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip"
+ },
+ {
+  "id": "h6-ineq-011",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 2(x - 3) ≥ 5x + 3.",
+  "working": "2x - 6 ≥ 5x + 3\n-6 ≥ 3x + 3\n-9 ≥ 3x\n-3 ≥ x\nx ≤ -3",
+  "lines": [
+   "2x - 6 ≥ 5x + 3",
+   "-6 ≥ 3x + 3",
+   "-9 ≥ 3x",
+   "-3 ≥ x",
+   "x ≤ -3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "collect on the right, swap sides correctly"
+ },
+ {
+  "id": "h6-ineq-012",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 2(x - 3) ≥ 5x + 3.",
+  "working": "2x - 6 ≥ 5x + 3\n-3x - 6 ≥ 3\n-3x ≥ 9\nx ≥ -3",
+  "lines": [
+   "2x - 6 ≥ 5x + 3",
+   "-3x - 6 ≥ 3",
+   "-3x ≥ 9",
+   "x ≥ -3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip at the last step"
+ },
+ {
+  "id": "h6-ineq-013",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 4/x > 2, for x > 0.",
+  "working": "4 > 2x\n2 > x\nx < 2",
+  "lines": [
+   "4 > 2x",
+   "2 > x",
+   "x < 2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "multiply by x, positive by stated condition; x < 2 read inside domain x > 0"
+ },
+ {
+  "id": "h6-ineq-014",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 3/x < 1.",
+  "working": "3 < x\nx > 3",
+  "lines": [
+   "3 < x",
+   "x > 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implied-by",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "multiplied by x of unknown sign; loses x < 0"
+ },
+ {
+  "id": "h6-ineq-015",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 6/x ≥ 3, for x > 0.",
+  "working": "6 ≥ 3x\n2 ≥ x\nx ≤ 2",
+  "lines": [
+   "6 ≥ 3x",
+   "2 ≥ x",
+   "x ≤ 2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "positive multiplier by condition; x ≤ 2 read inside domain"
+ },
+ {
+  "id": "h6-ineq-016",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 2/x > 1, for x < 0.",
+  "working": "2 < x\nx > 2 contradicts x < 0, so no solution",
+  "lines": [
+   "2 < x",
+   "x > 2 contradicts x < 0, so no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "multiply by negative x with flip; empty set"
+ },
+ {
+  "id": "h6-ineq-017",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 2/x > 1, for x < 0.",
+  "working": "2 > x\nx < 2",
+  "lines": [
+   "2 > x",
+   "x < 2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "x < 0 but no flip"
+ },
+ {
+  "id": "h6-ineq-018",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve (2x - 1)/4 > (x + 3)/2.",
+  "working": "2x - 1 > 2(x + 3)\n2x - 1 > 2x + 6\n-1 > 6\nno solution",
+  "lines": [
+   "2x - 1 > 2(x + 3)",
+   "2x - 1 > 2x + 6",
+   "-1 > 6",
+   "no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "contradiction"
+ },
+ {
+  "id": "h6-ineq-019",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 0.5x - 1.5 ≤ 0.2x.",
+  "working": "0.3x - 1.5 ≤ 0\n0.3x ≤ 1.5\nx ≤ 5",
+  "lines": [
+   "0.3x - 1.5 ≤ 0",
+   "0.3x ≤ 1.5",
+   "x ≤ 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "decimals"
+ },
+ {
+  "id": "h6-ineq-020",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 0.5x - 1.5 ≤ 0.2x.",
+  "working": "0.3x - 1.5 ≤ 0\n0.3x ≤ 1.5\nx ≤ 0.5",
+  "lines": [
+   "0.3x - 1.5 ≤ 0",
+   "0.3x ≤ 1.5",
+   "x ≤ 0.5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 2,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "inequality",
+  "note": "decimal division slip"
+ },
+ {
+  "id": "h6-ineq-021",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve -3 < 2x + 1 ≤ 7.",
+  "working": "-4 < 2x ≤ 6\n-2 < x ≤ 3",
+  "lines": [
+   "-4 < 2x ≤ 6",
+   "-2 < x ≤ 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "compound inequality"
+ },
+ {
+  "id": "h6-ineq-022",
+  "category": "inequality",
+  "domain": "algebra",
+  "statement": "Solve 7 - 3x ≤ 1 - x.",
+  "working": "7 ≤ 1 + 2x\n6 ≤ 2x",
+  "lines": [
+   "7 ≤ 1 + 2x",
+   "6 ≤ 2x"
+  ],
+  "expect": "incomplete",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "stops before dividing"
+ },
+ {
+  "id": "h6-sub-001",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate 3x^2 - 2x + 1 when x = -2.",
+  "working": "3(-2)^2 - 2(-2) + 1\n= 12 + 4 + 1\n= 17",
+  "lines": [
+   "3(-2)^2 - 2(-2) + 1",
+   "= 12 + 4 + 1",
+   "= 17"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "negative substitution"
+ },
+ {
+  "id": "h6-sub-002",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate 3x^2 - 2x + 1 when x = -2.",
+  "working": "3(-2)^2 - 2(-2) + 1\n= -12 + 4 + 1\n= -7",
+  "lines": [
+   "3(-2)^2 - 2(-2) + 1",
+   "= -12 + 4 + 1",
+   "= -7"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "(-2)^2 treated as -4"
+ },
+ {
+  "id": "h6-sub-003",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate 3x^2 - 2x + 1 when x = -2.",
+  "working": "3(-2)^2 - 2(-2) + 1\n= 36 + 4 + 1\n= 41",
+  "lines": [
+   "3(-2)^2 - 2(-2) + 1",
+   "= 36 + 4 + 1",
+   "= 41"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "squared the coefficient too"
+ },
+ {
+  "id": "h6-sub-004",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given a = 3 and b = -2, find a^2 - 3ab.",
+  "working": "3^2 - 3(3)(-2)\n= 9 + 18\n= 27",
+  "lines": [
+   "3^2 - 3(3)(-2)",
+   "= 9 + 18",
+   "= 27"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "two variables"
+ },
+ {
+  "id": "h6-sub-005",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given a = 3 and b = -2, find a^2 - 3ab.",
+  "working": "3^2 - 3(3)(-2)\n= 9 - 18\n= -9",
+  "lines": [
+   "3^2 - 3(3)(-2)",
+   "= 9 - 18",
+   "= -9"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "sign slip on product"
+ },
+ {
+  "id": "h6-sub-006",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate -x^2 + 4x when x = 3.",
+  "working": "-(3)^2 + 4(3)\n= -9 + 12\n= 3",
+  "lines": [
+   "-(3)^2 + 4(3)",
+   "= -9 + 12",
+   "= 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "-x^2 means -(x^2)"
+ },
+ {
+  "id": "h6-sub-007",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate -x^2 + 4x when x = 3.",
+  "working": "(-3)^2 + 4(3)\n= 9 + 12\n= 21",
+  "lines": [
+   "(-3)^2 + 4(3)",
+   "= 9 + 12",
+   "= 21"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "-x^2 read as (-x)^2"
+ },
+ {
+  "id": "h6-sub-008",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate (2x + 1)/(x - 1) when x = 1/2.",
+  "working": "(2(1/2) + 1)/((1/2) - 1)\n= 2/(-1/2)\n= -4",
+  "lines": [
+   "(2(1/2) + 1)/((1/2) - 1)",
+   "= 2/(-1/2)",
+   "= -4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "fractional value"
+ },
+ {
+  "id": "h6-sub-009",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate (2x + 1)/(x - 1) when x = 1/2.",
+  "working": "(2(1/2) + 1)/((1/2) - 1)\n= 2/(-1/2)\n= -1",
+  "lines": [
+   "(2(1/2) + 1)/((1/2) - 1)",
+   "= 2/(-1/2)",
+   "= -1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 2,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "substitution",
+  "note": "division by a fraction slip"
+ },
+ {
+  "id": "h6-sub-010",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given p = -1 and q = 4, find p^3 - q/2 + pq.",
+  "working": "(-1)^3 - 4/2 + (-1)(4)\n= -1 - 2 - 4\n= -7",
+  "lines": [
+   "(-1)^3 - 4/2 + (-1)(4)",
+   "= -1 - 2 - 4",
+   "= -7"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "cube of a negative"
+ },
+ {
+  "id": "h6-sub-011",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given p = -1 and q = 4, find p^3 - q/2 + pq.",
+  "working": "(-1)^3 - 4/2 + (-1)(4)\n= 1 - 2 - 4\n= -5",
+  "lines": [
+   "(-1)^3 - 4/2 + (-1)(4)",
+   "= 1 - 2 - 4",
+   "= -5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "(-1)^3 taken as 1"
+ },
+ {
+  "id": "h6-sub-012",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate 2(x - 3)^2 when x = 5.",
+  "working": "2(5 - 3)^2\n= 2(2)^2\n= 2(4)\n= 8",
+  "lines": [
+   "2(5 - 3)^2",
+   "= 2(2)^2",
+   "= 2(4)",
+   "= 8"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "order of operations"
+ },
+ {
+  "id": "h6-sub-013",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate 2(x - 3)^2 when x = 5.",
+  "working": "2(5 - 3)^2\n= (4)^2\n= 16",
+  "lines": [
+   "2(5 - 3)^2",
+   "= (4)^2",
+   "= 16"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "multiplied before squaring"
+ },
+ {
+  "id": "h6-sub-014",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate x^3 - x when x = -3.",
+  "working": "(-3)^3 - (-3)\n= -27 + 3\n= -24",
+  "lines": [
+   "(-3)^3 - (-3)",
+   "= -27 + 3",
+   "= -24"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "subtracting a negative"
+ },
+ {
+  "id": "h6-sub-015",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate x^3 - x when x = -3.",
+  "working": "(-3)^3 - (-3)\n= -27 - 3\n= -30",
+  "lines": [
+   "(-3)^3 - (-3)",
+   "= -27 - 3",
+   "= -30"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "subtracting a negative mishandled"
+ },
+ {
+  "id": "h6-sub-016",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given x = 2 and y = -5, find 3x - 2y + xy.",
+  "working": "3(2) - 2(-5) + (2)(-5)\n= 6 + 10 - 10\n= 6",
+  "lines": [
+   "3(2) - 2(-5) + (2)(-5)",
+   "= 6 + 10 - 10",
+   "= 6"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "two variables"
+ },
+ {
+  "id": "h6-sub-017",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given m = 0.5 and n = 4, find mn^2.",
+  "working": "0.5 × 4^2\n= 0.5 × 16\n= 8",
+  "lines": [
+   "0.5 × 4^2",
+   "= 0.5 × 16",
+   "= 8"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "decimal; × sign"
+ },
+ {
+  "id": "h6-sub-018",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given m = 0.5 and n = 4, find mn^2.",
+  "working": "0.5 × 4^2\n= 2^2\n= 4",
+  "lines": [
+   "0.5 × 4^2",
+   "= 2^2",
+   "= 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "multiplied before squaring"
+ },
+ {
+  "id": "h6-sub-019",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate (x^2 - 1)/(x + 1) when x = 4.",
+  "working": "(16 - 1)/(4 + 1)\n= 15/5\n= 3",
+  "lines": [
+   "(16 - 1)/(4 + 1)",
+   "= 15/5",
+   "= 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "substitute and evaluate the square"
+ },
+ {
+  "id": "h6-sub-020",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given a = -2, b = 3 and c = 1, find b^2 - 4ac.",
+  "working": "3^2 - 4(-2)(1)\n= 9 + 8\n= 17",
+  "lines": [
+   "3^2 - 4(-2)(1)",
+   "= 9 + 8",
+   "= 17"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "discriminant-style"
+ },
+ {
+  "id": "h6-sub-021",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Given a = -2, b = 3 and c = 1, find b^2 - 4ac.",
+  "working": "3^2 - 4(-2)(1)\n= 9 - 8\n= 1",
+  "lines": [
+   "3^2 - 4(-2)(1)",
+   "= 9 - 8",
+   "= 1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "sign slip"
+ },
+ {
+  "id": "h6-sub-022",
+  "category": "substitution",
+  "domain": "algebra",
+  "statement": "Evaluate 5x^2 - 3x when x = -1.",
+  "working": "5(-1)^2 - 3(-1)\n= 5 + 3",
+  "lines": [
+   "5(-1)^2 - 3(-1)",
+   "= 5 + 3"
+  ],
+  "expect": "incomplete",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "substitution",
+  "note": "not reduced to a number"
+ },
+ {
+  "id": "h6-sq-001",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x + 3) = x - 3.",
+  "working": "x + 3 = (x - 3)^2\nx + 3 = x^2 - 6x + 9\n0 = x^2 - 7x + 6\n0 = (x - 1)(x - 6)\nx = 1 or x = 6\ncheck: x = 1 gives 2 ≠ -2, so x = 6",
+  "lines": [
+   "x + 3 = (x - 3)^2",
+   "x + 3 = x^2 - 6x + 9",
+   "0 = x^2 - 7x + 6",
+   "0 = (x - 1)(x - 6)",
+   "x = 1 or x = 6",
+   "check: x = 1 gives 2 ≠ -2, so x = 6"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "square (implication), check, discard extraneous"
+ },
+ {
+  "id": "h6-sq-002",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x + 3) = x - 3.",
+  "working": "x + 3 = (x - 3)^2\nx + 3 = x^2 - 6x + 9\n0 = x^2 - 7x + 6\n0 = (x - 1)(x - 6)\nx = 1 or x = 6",
+  "lines": [
+   "x + 3 = (x - 3)^2",
+   "x + 3 = x^2 - 6x + 9",
+   "0 = x^2 - 7x + 6",
+   "0 = (x - 1)(x - 6)",
+   "x = 1 or x = 6"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 4,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "extraneous root 1 kept"
+ },
+ {
+  "id": "h6-sq-003",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(2x + 3) = x.",
+  "working": "2x + 3 = x^2\n0 = x^2 - 2x - 3\n0 = (x - 3)(x + 1)\nx = 3 or x = -1\nx = -1 fails since √1 ≠ -1, so x = 3",
+  "lines": [
+   "2x + 3 = x^2",
+   "0 = x^2 - 2x - 3",
+   "0 = (x - 3)(x + 1)",
+   "x = 3 or x = -1",
+   "x = -1 fails since √1 ≠ -1, so x = 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "check discards -1"
+ },
+ {
+  "id": "h6-sq-004",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(2x + 3) = x.",
+  "working": "2x + 3 = x^2\n0 = x^2 - 2x - 3\n0 = (x - 3)(x + 1)\nx = 3 or x = -1",
+  "lines": [
+   "2x + 3 = x^2",
+   "0 = x^2 - 2x - 3",
+   "0 = (x - 3)(x + 1)",
+   "x = 3 or x = -1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "extraneous -1 kept"
+ },
+ {
+  "id": "h6-sq-005",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve x - 1 = √(x + 5).",
+  "working": "(x - 1)^2 = x + 5\nx^2 - 2x + 1 = x + 5\nx^2 - 3x - 4 = 0\n(x - 4)(x + 1) = 0\nx = 4 or x = -1\nx = -1 gives -2 ≠ 2, so x = 4",
+  "lines": [
+   "(x - 1)^2 = x + 5",
+   "x^2 - 2x + 1 = x + 5",
+   "x^2 - 3x - 4 = 0",
+   "(x - 4)(x + 1) = 0",
+   "x = 4 or x = -1",
+   "x = -1 gives -2 ≠ 2, so x = 4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "square, check"
+ },
+ {
+  "id": "h6-sq-006",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve x - 1 = √(x + 5).",
+  "working": "x^2 + 1 = x + 5\nx^2 - x - 4 = 0\nx = (1 + √17)/2 or x = (1 - √17)/2",
+  "lines": [
+   "x^2 + 1 = x + 5",
+   "x^2 - x - 4 = 0",
+   "x = (1 + √17)/2 or x = (1 - √17)/2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "(x - 1)^2 squared term by term"
+ },
+ {
+  "id": "h6-sq-007",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x + 7) = x + 1.",
+  "working": "x + 7 = (x + 1)^2\nx + 7 = x^2 + 2x + 1\n0 = x^2 + x - 6\n0 = (x + 3)(x - 2)\nx = -3 or x = 2\nx = -3 fails, so x = 2",
+  "lines": [
+   "x + 7 = (x + 1)^2",
+   "x + 7 = x^2 + 2x + 1",
+   "0 = x^2 + x - 6",
+   "0 = (x + 3)(x - 2)",
+   "x = -3 or x = 2",
+   "x = -3 fails, so x = 2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "check discards -3"
+ },
+ {
+  "id": "h6-sq-008",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x + 7) = x + 1.",
+  "working": "x + 7 = (x + 1)^2\nx + 7 = x^2 + 2x + 1\n0 = x^2 + x - 6\n0 = (x - 3)(x + 2)\nx = 3 or x = -2",
+  "lines": [
+   "x + 7 = (x + 1)^2",
+   "x + 7 = x^2 + 2x + 1",
+   "0 = x^2 + x - 6",
+   "0 = (x - 3)(x + 2)",
+   "x = 3 or x = -2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "wrong factorisation loses the true root 2"
+ },
+ {
+  "id": "h6-sq-009",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve 2√x = x - 3.",
+  "working": "4x = (x - 3)^2\n4x = x^2 - 6x + 9\n0 = x^2 - 10x + 9\n0 = (x - 1)(x - 9)\nx = 1 or x = 9\nx = 1 fails, so x = 9",
+  "lines": [
+   "4x = (x - 3)^2",
+   "4x = x^2 - 6x + 9",
+   "0 = x^2 - 10x + 9",
+   "0 = (x - 1)(x - 9)",
+   "x = 1 or x = 9",
+   "x = 1 fails, so x = 9"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "coefficient squared too"
+ },
+ {
+  "id": "h6-sq-010",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve 2√x = x - 3.",
+  "working": "2x = (x - 3)^2\n0 = x^2 - 8x + 9\nx = 4 + √7 or x = 4 - √7",
+  "lines": [
+   "2x = (x - 3)^2",
+   "0 = x^2 - 8x + 9",
+   "x = 4 + √7 or x = 4 - √7"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "coefficient 2 not squared"
+ },
+ {
+  "id": "h6-sq-011",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)^2 = (2x - 4)^2.",
+  "working": "x + 1 = 2x - 4 or x + 1 = -(2x - 4)\nx = 5 or 3x = 3\nx = 5 or x = 1",
+  "lines": [
+   "x + 1 = 2x - 4 or x + 1 = -(2x - 4)",
+   "x = 5 or 3x = 3",
+   "x = 5 or x = 1"
+  ],
+  "expect": "valid-jump",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "A^2 = B^2 split into A = ±B"
+ },
+ {
+  "id": "h6-sq-012",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)^2 = (2x - 4)^2.",
+  "working": "x + 1 = 2x - 4\nx = 5",
+  "lines": [
+   "x + 1 = 2x - 4",
+   "x = 5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implied-by",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "square-rooted both sides, lost negative branch"
+ },
+ {
+  "id": "h6-sq-013",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve x^2 = (x - 2)^2.",
+  "working": "x^2 = x^2 - 4x + 4\n0 = -4x + 4\n4x = 4\nx = 1",
+  "lines": [
+   "x^2 = x^2 - 4x + 4",
+   "0 = -4x + 4",
+   "4x = 4",
+   "x = 1"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "expansion",
+  "note": "expand the square"
+ },
+ {
+  "id": "h6-sq-014",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve x^2 = (x - 2)^2.",
+  "working": "x = x - 2\n0 = -2\nno solution",
+  "lines": [
+   "x = x - 2",
+   "0 = -2",
+   "no solution"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implied-by",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "square-rooted both sides, lost x = 1"
+ },
+ {
+  "id": "h6-sq-015",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(3x + 1) = x - 1.",
+  "working": "3x + 1 = (x - 1)^2\n3x + 1 = x^2 - 2x + 1\n0 = x^2 - 5x\n0 = x(x - 5)\nx = 0 or x = 5\nx = 0 fails, so x = 5",
+  "lines": [
+   "3x + 1 = (x - 1)^2",
+   "3x + 1 = x^2 - 2x + 1",
+   "0 = x^2 - 5x",
+   "0 = x(x - 5)",
+   "x = 0 or x = 5",
+   "x = 0 fails, so x = 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "check discards 0"
+ },
+ {
+  "id": "h6-sq-016",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x - 2) = 4 - x.",
+  "working": "x - 2 = (4 - x)^2\nx - 2 = 16 - 8x + x^2\n0 = x^2 - 9x + 18\n0 = (x - 3)(x - 6)\nx = 3 or x = 6",
+  "lines": [
+   "x - 2 = (4 - x)^2",
+   "x - 2 = 16 - 8x + x^2",
+   "0 = x^2 - 9x + 18",
+   "0 = (x - 3)(x - 6)",
+   "x = 3 or x = 6"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 4,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "extraneous 6 kept"
+ },
+ {
+  "id": "h6-sq-017",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x - 2) = 4 - x.",
+  "working": "x - 2 = (4 - x)^2\nx - 2 = 16 - 8x + x^2\n0 = x^2 - 9x + 18\n0 = (x - 3)(x - 6)\nx = 3 or x = 6\nx = 6 gives 2 ≠ -2, so x = 3",
+  "lines": [
+   "x - 2 = (4 - x)^2",
+   "x - 2 = 16 - 8x + x^2",
+   "0 = x^2 - 9x + 18",
+   "0 = (x - 3)(x - 6)",
+   "x = 3 or x = 6",
+   "x = 6 gives 2 ≠ -2, so x = 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "check discards 6"
+ },
+ {
+  "id": "h6-sq-018",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x - 2) = 4 - x.",
+  "working": "x - 2 = (4 - x)^2\nx - 2 = 16 - 8x + x^2\n0 = x^2 - 9x + 18\n0 = (x - 3)(x - 6)\nx = 3 or x = 6\nx = 3 fails, so x = 6",
+  "lines": [
+   "x - 2 = (4 - x)^2",
+   "x - 2 = 16 - 8x + x^2",
+   "0 = x^2 - 9x + 18",
+   "0 = (x - 3)(x - 6)",
+   "x = 3 or x = 6",
+   "x = 3 fails, so x = 6"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 5,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "discarded the true root, kept the extraneous one"
+ },
+ {
+  "id": "h6-sq-019",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(x + 1) = x - 5.",
+  "working": "x + 1 = (x - 5)^2\nx + 1 = x^2 - 10x + 25\n0 = x^2 - 11x + 24\n0 = (x - 3)(x - 8)\nx = 3 or x = 8\nx = 3 fails, so x = 8",
+  "lines": [
+   "x + 1 = (x - 5)^2",
+   "x + 1 = x^2 - 10x + 25",
+   "0 = x^2 - 11x + 24",
+   "0 = (x - 3)(x - 8)",
+   "x = 3 or x = 8",
+   "x = 3 fails, so x = 8"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "check discards 3"
+ },
+ {
+  "id": "h6-sq-020",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve √(5x + 6) = x.",
+  "working": "5x + 6 = x^2\n0 = x^2 - 5x - 6\n0 = (x - 6)(x + 1)",
+  "lines": [
+   "5x + 6 = x^2",
+   "0 = x^2 - 5x - 6",
+   "0 = (x - 6)(x + 1)"
+  ],
+  "expect": "incomplete",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "squaring",
+  "note": "stops before roots and check"
+ },
+ {
+  "id": "h6-sq-021",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve sqrt(4x + 5) = x.",
+  "working": "4x + 5 = x^2\nx^2 - 4x - 5 = 0\n(x - 5)(x + 1) = 0\nx = 5 or x = -1\nx = -1 fails, so x = 5",
+  "lines": [
+   "4x + 5 = x^2",
+   "x^2 - 4x - 5 = 0",
+   "(x - 5)(x + 1) = 0",
+   "x = 5 or x = -1",
+   "x = -1 fails, so x = 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "ASCII sqrt; check discards -1"
+ },
+ {
+  "id": "h6-sq-022",
+  "category": "squaring",
+  "domain": "algebra",
+  "statement": "Solve sqrt(4x + 5) = x.",
+  "working": "4x + 5 = x^2\nx^2 - 4x - 5 = 0\n(x - 5)(x + 1) = 0\nx = 5 or x = -1\nx = 5 fails, so x = -1",
+  "lines": [
+   "4x + 5 = x^2",
+   "x^2 - 4x - 5 = 0",
+   "(x - 5)(x + 1) = 0",
+   "x = 5 or x = -1",
+   "x = 5 fails, so x = -1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 4,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "kept the extraneous root, discarded the true one"
+ },
+ {
+  "id": "h6-nota-001",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve for x: 2x + 3 = 11.",
+  "working": "2x+3=11\n2x=8\nx=4",
+  "lines": [
+   "2x+3=11",
+   "2x=8",
+   "x=4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "no spaces; restated task"
+ },
+ {
+  "id": "h6-nota-002",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Find x: 5x − 4 = 3x + 6.",
+  "working": "5x − 4 = 3x + 6\n2x − 4 = 6\n2x = 10\nx = 5",
+  "lines": [
+   "5x − 4 = 3x + 6",
+   "2x − 4 = 6",
+   "2x = 10",
+   "x = 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "unicode minus"
+ },
+ {
+  "id": "h6-nota-003",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x² − 5x + 6 = 0.",
+  "working": "x² − 5x + 6 = 0\n(x − 2)(x − 3) = 0\nx = 2 or x = 3",
+  "lines": [
+   "x² − 5x + 6 = 0",
+   "(x − 2)(x − 3) = 0",
+   "x = 2 or x = 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "superscript square"
+ },
+ {
+  "id": "h6-nota-004",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 3 × (x + 2) = 21.",
+  "working": "3x + 6 = 21\n3x = 15\nx = 5",
+  "lines": [
+   "3x + 6 = 21",
+   "3x = 15",
+   "x = 5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "× sign"
+ },
+ {
+  "id": "h6-nota-005",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x ÷ 4 = 7 − x.",
+  "working": "x = 28 − 4x\n5x = 28\nx = 28/5",
+  "lines": [
+   "x = 28 − 4x",
+   "5x = 28",
+   "x = 28/5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "÷ sign"
+ },
+ {
+  "id": "h6-nota-006",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x ÷ 4 = 7 − x.",
+  "working": "x = 7 − 4x\n5x = 7\nx = 7/5",
+  "lines": [
+   "x = 7 − 4x",
+   "5x = 7",
+   "x = 7/5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "only -x multiplied by 4"
+ },
+ {
+  "id": "h6-nota-007",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 2[x − 3(x + 1)] = 10.",
+  "working": "2[x − 3x − 3] = 10\n2[−2x − 3] = 10\n−4x − 6 = 10\n−4x = 16\nx = −4",
+  "lines": [
+   "2[x − 3x − 3] = 10",
+   "2[−2x − 3] = 10",
+   "−4x − 6 = 10",
+   "−4x = 16",
+   "x = −4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "square brackets"
+ },
+ {
+  "id": "h6-nota-008",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 2[x − 3(x + 1)] = 10.",
+  "working": "2[x − 3x + 3] = 10\n2[−2x + 3] = 10\n−4x + 6 = 10\n−4x = 4\nx = −1",
+  "lines": [
+   "2[x − 3x + 3] = 10",
+   "2[−2x + 3] = 10",
+   "−4x + 6 = 10",
+   "−4x = 4",
+   "x = −1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "sign error inside brackets"
+ },
+ {
+  "id": "h6-nota-009",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x³ = 4x.",
+  "working": "x³ − 4x = 0\nx(x² − 4) = 0\nx(x − 2)(x + 2) = 0\nx = 0 or x = 2 or x = −2",
+  "lines": [
+   "x³ − 4x = 0",
+   "x(x² − 4) = 0",
+   "x(x − 2)(x + 2) = 0",
+   "x = 0 or x = 2 or x = −2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "factorisation",
+  "note": "superscript cube"
+ },
+ {
+  "id": "h6-nota-010",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x³ = 4x.",
+  "working": "x² = 4\nx = 2 or x = −2",
+  "lines": [
+   "x² = 4",
+   "x = 2 or x = −2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implied-by",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "divided by x, lost 0"
+ },
+ {
+  "id": "h6-nota-011",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 4x − 1 ≤ 2x + 7.",
+  "working": "4x − 1 ≤ 2x + 7\n2x − 1 ≤ 7\n2x ≤ 8\nx ≤ 4",
+  "lines": [
+   "4x − 1 ≤ 2x + 7",
+   "2x − 1 ≤ 7",
+   "2x ≤ 8",
+   "x ≤ 4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "≤ symbol"
+ },
+ {
+  "id": "h6-nota-012",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve −3x ≥ 12.",
+  "working": "x ≤ −4",
+  "lines": [
+   "x ≤ −4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "≥ with unicode minus, flip"
+ },
+ {
+  "id": "h6-nota-013",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve −3x ≥ 12.",
+  "working": "x ≥ −4",
+  "lines": [
+   "x ≥ −4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip"
+ },
+ {
+  "id": "h6-nota-014",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 3/(x − 2) + 1/(x + 2) = 4/(x² − 4), for x ≠ 2 and x ≠ −2.",
+  "working": "3(x + 2) + (x − 2) = 4\n3x + 6 + x − 2 = 4\n4x + 4 = 4\n4x = 0\nx = 0",
+  "lines": [
+   "3(x + 2) + (x − 2) = 4",
+   "3x + 6 + x − 2 = 4",
+   "4x + 4 = 4",
+   "4x = 0",
+   "x = 0"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "rational",
+  "note": "conditions joined with 'and'"
+ },
+ {
+  "id": "h6-nota-015",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x/(x − 2) − 2/(x + 2) = 8/(x² − 4), for x ≠ 2 and x ≠ −2.",
+  "working": "x(x + 2) − 2(x − 2) = 8\nx² + 2x − 2x + 4 = 8\nx² + 4 = 8\nx² = 4\nx = 2 or x = −2\nboth are excluded, so no solution",
+  "lines": [
+   "x(x + 2) − 2(x − 2) = 8",
+   "x² + 2x − 2x + 4 = 8",
+   "x² + 4 = 8",
+   "x² = 4",
+   "x = 2 or x = −2",
+   "both are excluded, so no solution"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "both candidates excluded"
+ },
+ {
+  "id": "h6-nota-016",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x/(x − 2) − 2/(x + 2) = 8/(x² − 4), for x ≠ 2 and x ≠ −2.",
+  "working": "x(x + 2) − 2(x − 2) = 8\nx² + 2x − 2x + 4 = 8\nx² + 4 = 8\nx² = 4\nx = 2 or x = −2",
+  "lines": [
+   "x(x + 2) − 2(x − 2) = 8",
+   "x² + 2x − 2x + 4 = 8",
+   "x² + 4 = 8",
+   "x² = 4",
+   "x = 2 or x = −2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 4,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "domain",
+  "note": "excluded values kept as answer"
+ },
+ {
+  "id": "h6-nota-017",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve for t: 3t + 4 = 2t − 1.",
+  "working": "t + 4 = −1\nt = −5",
+  "lines": [
+   "t + 4 = −1",
+   "t = −5"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "variable t"
+ },
+ {
+  "id": "h6-nota-018",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 0.25x = 1.5 − 0.5x.",
+  "working": "0.75x = 1.5\nx = 2",
+  "lines": [
+   "0.75x = 1.5",
+   "x = 2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "decimals"
+ },
+ {
+  "id": "h6-nota-019",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x / 3 + 2 = x − 4.",
+  "working": "x + 6 = 3x − 12\n18 = 2x\nx = 9",
+  "lines": [
+   "x + 6 = 3x − 12",
+   "18 = 2x",
+   "x = 9"
+  ],
+  "expect": "valid-jump",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "spaced slash; second line two operations"
+ },
+ {
+  "id": "h6-nota-020",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 2(x − 1)² = 18.",
+  "working": "(x − 1)² = 9\nx − 1 = ±3\nx = 1 ± 3\nx = 4 or x = −2",
+  "lines": [
+   "(x − 1)² = 9",
+   "x − 1 = ±3",
+   "x = 1 ± 3",
+   "x = 4 or x = −2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "superscript and ±"
+ },
+ {
+  "id": "h6-nota-021",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 5 − 2x > 11.",
+  "working": "−2x > 6\nx < −3",
+  "lines": [
+   "−2x > 6",
+   "x < −3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "unicode minus, flip"
+ },
+ {
+  "id": "h6-nota-022",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 5 − 2x > 11.",
+  "working": "−2x > 6\nx > −3",
+  "lines": [
+   "−2x > 6",
+   "x > −3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip"
+ },
+ {
+  "id": "h6-nota-023",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve: 7x = 3x + 10.",
+  "working": "Solve: 7x = 3x + 10\n4x = 10\nx = 5/2",
+  "lines": [
+   "Solve: 7x = 3x + 10",
+   "4x = 10",
+   "x = 5/2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "first line copies the task"
+ },
+ {
+  "id": "h6-nota-024",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 6 = 4 − x.",
+  "working": "2 = −x\n−2 = x\nx = −2",
+  "lines": [
+   "2 = −x",
+   "−2 = x",
+   "x = −2"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "variable on the right; swap sides"
+ },
+ {
+  "id": "h6-nota-025",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x² = 49.",
+  "working": "x = ±7",
+  "lines": [
+   "x = ±7"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "± roots"
+ },
+ {
+  "id": "h6-nota-026",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x² = 49.",
+  "working": "x = 7",
+  "lines": [
+   "x = 7"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implied-by"
+  ],
+  "family": "notation",
+  "note": "lost -7"
+ },
+ {
+  "id": "h6-nota-027",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)(x − 4) = 0.",
+  "working": "x = −1 or x = 4",
+  "lines": [
+   "x = −1 or x = 4"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "read roots off"
+ },
+ {
+  "id": "h6-nota-028",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 3 × (2x − 1) − 2 × (x + 4) = 1.",
+  "working": "6x − 3 − 2x − 8 = 1\n4x − 11 = 1\n4x = 12\nx = 3",
+  "lines": [
+   "6x − 3 − 2x − 8 = 1",
+   "4x − 11 = 1",
+   "4x = 12",
+   "x = 3"
+  ],
+  "expect": "valid",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "× with brackets"
+ },
+ {
+  "id": "h6-nota-029",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve 3 × (2x − 1) − 2 × (x + 4) = 1.",
+  "working": "6x − 3 − 2x + 8 = 1\n4x + 5 = 1\n4x = −4\nx = −1",
+  "lines": [
+   "6x − 3 − 2x + 8 = 1",
+   "4x + 5 = 1",
+   "4x = −4",
+   "x = −1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "neither",
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "notation",
+  "note": "-2 × 4 taken as +8"
+ },
+ {
+  "id": "h6-nota-030",
+  "category": "notation-new",
+  "domain": "algebra",
+  "statement": "Solve x/2 ≥ x − 3.",
+  "working": "x ≥ 2x − 6\n6 ≥ x\nx ≤ 6",
+  "lines": [
+   "x ≥ 2x − 6",
+   "6 ≥ x",
+   "x ≤ 6"
+  ],
+  "expect": "valid-jump",
+  "firstInvalid": null,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent"
+  ],
+  "family": "inequality",
+  "note": "second line subtracts x and adds 6"
+ },
+ {
+  "id": "h6-ambm-001",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve (1/2)x + 3 = 7.",
+  "working": "1/2x = 4\nx = 8",
+  "lines": [
+   "1/2x = 4",
+   "x = 8"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "1/2x: (1/2)x or 1/(2x)"
+ },
+ {
+  "id": "h6-ambm-002",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve x/8 = 1.",
+  "working": "x/2/4 = 1\nx = 8",
+  "lines": [
+   "x/2/4 = 1",
+   "x = 8"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "x/2/4 grouping"
+ },
+ {
+  "id": "h6-ambm-003",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Given a = 2, find (a^3)^2.",
+  "working": "2^3^2\n= 64",
+  "lines": [
+   "2^3^2",
+   "= 64"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "tower 2^3^2"
+ },
+ {
+  "id": "h6-ambm-004",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Given a = 6, b = 2 and c = 3, find a/(bc).",
+  "working": "a/bc\n= 6/6\n= 1",
+  "lines": [
+   "a/bc",
+   "= 6/6",
+   "= 1"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "a/bc"
+ },
+ {
+  "id": "h6-ambm-005",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Given x = 9, find x^(1/2) + 1.",
+  "working": "9^1/2 + 1\n= 3 + 1\n= 4",
+  "lines": [
+   "9^1/2 + 1",
+   "= 3 + 1",
+   "= 4"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "9^1/2"
+ },
+ {
+  "id": "h6-ambm-006",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve (1/3)x - 2 = 4.",
+  "working": "1/3x = 6\nx = 18",
+  "lines": [
+   "1/3x = 6",
+   "x = 18"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "1/3x"
+ },
+ {
+  "id": "h6-ambm-007",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 3/(4x) = 1/8.",
+  "working": "3/4x = 1/8\nx = 6",
+  "lines": [
+   "3/4x = 1/8",
+   "x = 6"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "3/4x"
+ },
+ {
+  "id": "h6-ambm-008",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve x/6 = 5.",
+  "working": "x/2/3 = 5\nx = 30",
+  "lines": [
+   "x/2/3 = 5",
+   "x = 30"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "x/2/3"
+ },
+ {
+  "id": "h6-ambm-009",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Evaluate 3/(2a) when a = 1/2.",
+  "working": "3/2a\n= 3/1\n= 3",
+  "lines": [
+   "3/2a",
+   "= 3/1",
+   "= 3"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "3/2a"
+ },
+ {
+  "id": "h6-ambm-010",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve (1/2)(x + 4) = 6.",
+  "working": "1/2(x + 4) = 6\nx + 4 = 12\nx = 8",
+  "lines": [
+   "1/2(x + 4) = 6",
+   "x + 4 = 12",
+   "x = 8"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "1/2(x + 4)"
+ },
+ {
+  "id": "h6-ambm-011",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Given x = 2, find 3^(x^2).",
+  "working": "3^2^2\n= 81",
+  "lines": [
+   "3^2^2",
+   "= 81"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "3^2^2"
+ },
+ {
+  "id": "h6-ambm-012",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Given x = 16, find x^(1/2).",
+  "working": "16^1/2\n= 4",
+  "lines": [
+   "16^1/2",
+   "= 4"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "16^1/2"
+ },
+ {
+  "id": "h6-ambm-013",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Given a = 4 and b = 2, find a/(2b).",
+  "working": "a/2b\n= 4/4\n= 1",
+  "lines": [
+   "a/2b",
+   "= 4/4",
+   "= 1"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "a/2b"
+ },
+ {
+  "id": "h6-ambm-014",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 2/(3x) = 1.",
+  "working": "2/3x = 1\n2 = 3x\nx = 2/3",
+  "lines": [
+   "2/3x = 1",
+   "2 = 3x",
+   "x = 2/3"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "2/3x"
+ },
+ {
+  "id": "h6-ambm-015",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve (x/2)/4 = 3.",
+  "working": "x/2/4 = 3\nx = 24",
+  "lines": [
+   "x/2/4 = 3",
+   "x = 24"
+  ],
+  "expect": "ambiguous",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "x/2/4"
+ },
+ {
+  "id": "h6-ambm-016",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 2x + 3 = 7.",
+  "working": "2x = = 4\nx = 2",
+  "lines": [
+   "2x = = 4",
+   "x = 2"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "doubled equals"
+ },
+ {
+  "id": "h6-ambm-017",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 3(x + 2) = 12.",
+  "working": "3(x + 2 = 12\nx + 2 = 4\nx = 2",
+  "lines": [
+   "3(x + 2 = 12",
+   "x + 2 = 4",
+   "x = 2"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "unbalanced bracket"
+ },
+ {
+  "id": "h6-ambm-018",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 5x − 1 = 9.",
+  "working": "5x = 10 +\nx = 2",
+  "lines": [
+   "5x = 10 +",
+   "x = 2"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "dangling operator"
+ },
+ {
+  "id": "h6-ambm-019",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 4x + 1 = 13.",
+  "working": "4x plus 1 = 13\n4x = 12\nx = 3",
+  "lines": [
+   "4x plus 1 = 13",
+   "4x = 12",
+   "x = 3"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "word inside maths"
+ },
+ {
+  "id": "h6-ambm-020",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve x² = 16.",
+  "working": "x = ±\nx = 4",
+  "lines": [
+   "x = ±",
+   "x = 4"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "dangling ±"
+ },
+ {
+  "id": "h6-ambm-021",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 2(x − 1) = x + 5.",
+  "working": "2x − 2) = x + 5\nx = 7",
+  "lines": [
+   "2x − 2) = x + 5",
+   "x = 7"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "unbalanced bracket"
+ },
+ {
+  "id": "h6-ambm-022",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve x/3 = 4.",
+  "working": "x = 4 × × 3\nx = 12",
+  "lines": [
+   "x = 4 × × 3",
+   "x = 12"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "doubled operator"
+ },
+ {
+  "id": "h6-ambm-023",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 6x = 18.",
+  "working": "x = 18 ÷\nx = 3",
+  "lines": [
+   "x = 18 ÷",
+   "x = 3"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "dangling ÷"
+ },
+ {
+  "id": "h6-ambm-024",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve x + 7 = 2x.",
+  "working": "7 = x equals\nx = 7",
+  "lines": [
+   "7 = x equals",
+   "x = 7"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "word inside maths"
+ },
+ {
+  "id": "h6-ambm-025",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 3x − 4 < 8.",
+  "working": "3x < < 12\nx < 4",
+  "lines": [
+   "3x < < 12",
+   "x < 4"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "doubled inequality sign"
+ },
+ {
+  "id": "h6-ambm-026",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Evaluate 2x² when x = 3.",
+  "working": "2(3)² )\n= 18",
+  "lines": [
+   "2(3)² )",
+   "= 18"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "unbalanced bracket"
+ },
+ {
+  "id": "h6-ambm-027",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve (x + 1)(x − 2) = 0.",
+  "working": "(x + 1)(x − 2 = 0\nx = −1 or x = 2",
+  "lines": [
+   "(x + 1)(x − 2 = 0",
+   "x = −1 or x = 2"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "unbalanced bracket"
+ },
+ {
+  "id": "h6-ambm-028",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve 9x = 3.",
+  "working": "x = 3/9\nx = 1/",
+  "lines": [
+   "x = 3/9",
+   "x = 1/"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "dangling slash"
+ },
+ {
+  "id": "h6-ambm-029",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Given a = 2 and b = 5, find 2a + b.",
+  "working": "2(2) + + 5\n= 9",
+  "lines": [
+   "2(2) + + 5",
+   "= 9"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "substitution",
+  "note": "doubled plus"
+ },
+ {
+  "id": "h6-ambm-030",
+  "category": "ambiguous-malformed",
+  "domain": "algebra",
+  "statement": "Solve x/2 = 5.",
+  "working": "x = 5 × 2\nx = 10 cm",
+  "lines": [
+   "x = 5 × 2",
+   "x = 10 cm"
+  ],
+  "expect": "malformed",
+  "firstInvalid": null,
+  "finalAnswerCorrect": null,
+  "relation": [
+   "n/a",
+   "n/a"
+  ],
+  "family": "notation",
+  "note": "stray unit word"
+ },
+ {
+  "id": "h6-cainv-001",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve 3x + 2 = 11.",
+  "working": "3x = 13\nx = 3",
+  "lines": [
+   "3x = 13",
+   "x = 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "added 2; then divided wrongly back to the right answer"
+ },
+ {
+  "id": "h6-cainv-002",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve x^2 = 4x.",
+  "working": "x = 4\nx = 0 or x = 4",
+  "lines": [
+   "x = 4",
+   "x = 0 or x = 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implied-by",
+   "implies"
+  ],
+  "family": "quadratic",
+  "note": "divided by x, then re-added 0 without justification"
+ },
+ {
+  "id": "h6-cainv-003",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve 2(x + 3) = 14.",
+  "working": "2x + 3 = 14\n2x = 8\nx = 4",
+  "lines": [
+   "2x + 3 = 14",
+   "2x = 8",
+   "x = 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "bracket not distributed; compensating slip"
+ },
+ {
+  "id": "h6-cainv-004",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve 5 - 3x = -7.",
+  "working": "3x = -12\nx = 4",
+  "lines": [
+   "3x = -12",
+   "x = 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "two sign errors cancel"
+ },
+ {
+  "id": "h6-cainv-005",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve (x + 5)/(x - 1) = 3.",
+  "working": "x + 5 = 3x - 1\n4 = 2x\nx = 4",
+  "lines": [
+   "x + 5 = 3x - 1",
+   "4 = 2x",
+   "x = 4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither",
+   "neither"
+  ],
+  "family": "rational",
+  "note": "three slips land on the right answer"
+ },
+ {
+  "id": "h6-cainv-006",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve -2x < 6.",
+  "working": "x < -3\nx > -3",
+  "lines": [
+   "x < -3",
+   "x > -3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "wrong division, then flip"
+ },
+ {
+  "id": "h6-cainv-007",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve 3x - 4 ≥ 2x + 1.",
+  "working": "5x - 4 ≥ 1\n5x ≥ 5\nx ≥ 5",
+  "lines": [
+   "5x - 4 ≥ 1",
+   "5x ≥ 5",
+   "x ≥ 5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "inequality",
+  "note": "added 2x instead of subtracting"
+ },
+ {
+  "id": "h6-cainv-008",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Evaluate x^2 - 2x when x = -1.",
+  "working": "(-1)^2 - 2(-1)\n= -1 + 2\n= 3",
+  "lines": [
+   "(-1)^2 - 2(-1)",
+   "= -1 + 2",
+   "= 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "neither",
+   "neither"
+  ],
+  "family": "substitution",
+  "note": "(-1)^2 as -1, then arithmetic slip"
+ },
+ {
+  "id": "h6-cainv-009",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve x^2 + x - 6 = 0.",
+  "working": "(x - 3)(x + 2) = 0\nx = -3 or x = 2",
+  "lines": [
+   "(x - 3)(x + 2) = 0",
+   "x = -3 or x = 2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither"
+  ],
+  "family": "factorisation",
+  "note": "wrong factors, wrong signs on roots"
+ },
+ {
+  "id": "h6-cainv-010",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve √(x + 2) = x.",
+  "working": "x + 2 = x^2\n0 = x^2 - x - 2\n0 = (x + 2)(x - 1)\nx = -2 or x = 1\nboth fail when checked, so x = 2",
+  "lines": [
+   "x + 2 = x^2",
+   "0 = x^2 - x - 2",
+   "0 = (x + 2)(x - 1)",
+   "x = -2 or x = 1",
+   "both fail when checked, so x = 2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 2,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "implies",
+   "equivalent",
+   "neither",
+   "equivalent",
+   "neither"
+  ],
+  "family": "squaring",
+  "note": "wrong factorisation; answer asserted"
+ },
+ {
+  "id": "h6-cainv-011",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve 7 = 2x - 3.",
+  "working": "4 = 2x\nx = 5",
+  "lines": [
+   "4 = 2x",
+   "x = 5"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "subtracted 3"
+ },
+ {
+  "id": "h6-cainv-012",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve x/3 - 1 = 1.",
+  "working": "x - 1 = 3\nx = 6",
+  "lines": [
+   "x - 1 = 3",
+   "x = 6"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "multiplied only x by 3"
+ },
+ {
+  "id": "h6-cainv-013",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve 12/x = 4.",
+  "working": "x = 4/12\nx = 1/3\nx = 3",
+  "lines": [
+   "x = 4/12",
+   "x = 1/3",
+   "x = 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "equivalent",
+   "neither"
+  ],
+  "family": "rational",
+  "note": "inverted, then inverted back"
+ },
+ {
+  "id": "h6-cainv-014",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve 2(x - 1) - (x - 4) = 5.",
+  "working": "2x - 2 - x - 4 = 5\nx - 6 = 5\nx = 3",
+  "lines": [
+   "2x - 2 - x - 4 = 5",
+   "x - 6 = 5",
+   "x = 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 0,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "neither",
+   "equivalent",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "-(x - 4) expanded wrongly"
+ },
+ {
+  "id": "h6-cainv-015",
+  "category": "correct-answer-invalid-working",
+  "domain": "algebra",
+  "statement": "Solve x^2 - 9 = 0.",
+  "working": "x^2 = 9\nx = 3\nx = ±3",
+  "lines": [
+   "x^2 = 9",
+   "x = 3",
+   "x = ±3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": true,
+  "relation": [
+   "equivalent",
+   "implied-by",
+   "implies"
+  ],
+  "family": "quadratic",
+  "note": "lost -3 then restored"
+ },
+ {
+  "id": "h6-wavs-001",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve 4x - 3 = 2x + 9.",
+  "working": "2x - 3 = 9\n2x = 12\nx = 24",
+  "lines": [
+   "2x - 3 = 9",
+   "2x = 12",
+   "x = 24"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 2,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "multiplied instead of divided"
+ },
+ {
+  "id": "h6-wavs-002",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve x^2 - 2x - 15 = 0.",
+  "working": "(x - 5)(x + 3) = 0\nx = 5 or x = 3",
+  "lines": [
+   "(x - 5)(x + 3) = 0",
+   "x = 5 or x = 3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "factorisation",
+  "note": "sign slip reading root"
+ },
+ {
+  "id": "h6-wavs-003",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve 3(x - 2) = x + 4.",
+  "working": "3x - 6 = x + 4\n2x - 6 = 4\n2x = -2\nx = -1",
+  "lines": [
+   "3x - 6 = x + 4",
+   "2x - 6 = 4",
+   "2x = -2",
+   "x = -1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 2,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "neither",
+   "equivalent"
+  ],
+  "family": "linear",
+  "note": "subtracted 6 instead of adding"
+ },
+ {
+  "id": "h6-wavs-004",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve 2x/(x + 3) = 1.",
+  "working": "2x = x + 3\nx = -3",
+  "lines": [
+   "2x = x + 3",
+   "x = -3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "rational",
+  "note": "sign slip; also an excluded value"
+ },
+ {
+  "id": "h6-wavs-005",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve -5x + 2 > 12.",
+  "working": "-5x > 10\nx > -2",
+  "lines": [
+   "-5x > 10",
+   "x > -2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip"
+ },
+ {
+  "id": "h6-wavs-006",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve (x + 2)^2 = 16.",
+  "working": "x + 2 = 4 or x + 2 = -4\nx = 2 or x = -2",
+  "lines": [
+   "x + 2 = 4 or x + 2 = -4",
+   "x = 2 or x = -2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "quadratic",
+  "note": "-4 - 2 computed as -2"
+ },
+ {
+  "id": "h6-wavs-007",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Evaluate 4x^2 - x when x = -3.",
+  "working": "4(-3)^2 - (-3)\n= 4(9) + 3\n= 36 + 3\n= 38",
+  "lines": [
+   "4(-3)^2 - (-3)",
+   "= 4(9) + 3",
+   "= 36 + 3",
+   "= 38"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "substitution",
+  "note": "final addition slip"
+ },
+ {
+  "id": "h6-wavs-008",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve √(x + 6) = x.",
+  "working": "x + 6 = x^2\n0 = x^2 - x - 6\n0 = (x - 3)(x + 2)\nx = 3 or x = -2\nx = 3 fails, so x = -2",
+  "lines": [
+   "x + 6 = x^2",
+   "0 = x^2 - x - 6",
+   "0 = (x - 3)(x + 2)",
+   "x = 3 or x = -2",
+   "x = 3 fails, so x = -2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 4,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "implies",
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "implied-by"
+  ],
+  "family": "squaring",
+  "note": "wrong check discards the true root"
+ },
+ {
+  "id": "h6-wavs-009",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve 0.2x + 1 = 0.5x - 0.8.",
+  "working": "1 = 0.3x - 0.8\n1.8 = 0.3x\nx = 0.6",
+  "lines": [
+   "1 = 0.3x - 0.8",
+   "1.8 = 0.3x",
+   "x = 0.6"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 2,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "decimal division slip"
+ },
+ {
+  "id": "h6-wavs-010",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve (2x - 1)/3 ≤ x + 1.",
+  "working": "2x - 1 ≤ 3x + 3\n-1 ≤ x + 3\n-4 ≤ x\nx ≤ -4",
+  "lines": [
+   "2x - 1 ≤ 3x + 3",
+   "-1 ≤ x + 3",
+   "-4 ≤ x",
+   "x ≤ -4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "sides swapped without reversing the sign"
+ },
+ {
+  "id": "h6-wavs-011",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve x² + 4x = 12.",
+  "working": "x² + 4x − 12 = 0\n(x + 6)(x − 2) = 0\nx = 6 or x = −2",
+  "lines": [
+   "x² + 4x − 12 = 0",
+   "(x + 6)(x − 2) = 0",
+   "x = 6 or x = −2"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 2,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "factorisation",
+  "note": "root signs swapped"
+ },
+ {
+  "id": "h6-wavs-012",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve 1/(x - 1) = 2/(x + 1).",
+  "working": "x + 1 = 2(x - 1)\nx + 1 = 2x - 2\nx + 3 = 2x\nx = -3",
+  "lines": [
+   "x + 1 = 2(x - 1)",
+   "x + 1 = 2x - 2",
+   "x + 3 = 2x",
+   "x = -3"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "rational",
+  "note": "sign slip at the end"
+ },
+ {
+  "id": "h6-wavs-013",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Given a = -3 and b = 2, find 2a² − b².",
+  "working": "2(−3)² − 2²\n= 2(9) − 4\n= 18 − 4\n= 12",
+  "lines": [
+   "2(−3)² − 2²",
+   "= 2(9) − 4",
+   "= 18 − 4",
+   "= 12"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "substitution",
+  "note": "subtraction slip"
+ },
+ {
+  "id": "h6-wavs-014",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve 5 - (x + 1) = 2x.",
+  "working": "5 - x - 1 = 2x\n4 - x = 2x\n4 = 3x\nx = 3/4",
+  "lines": [
+   "5 - x - 1 = 2x",
+   "4 - x = 2x",
+   "4 = 3x",
+   "x = 3/4"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 3,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "equivalent",
+   "equivalent",
+   "neither"
+  ],
+  "family": "linear",
+  "note": "inverted the quotient"
+ },
+ {
+  "id": "h6-wavs-015",
+  "category": "wrong-answer-valid-start",
+  "domain": "algebra",
+  "statement": "Solve 6 - 4x ≤ 2.",
+  "working": "-4x ≤ -4\nx ≤ 1",
+  "lines": [
+   "-4x ≤ -4",
+   "x ≤ 1"
+  ],
+  "expect": "invalid",
+  "firstInvalid": 1,
+  "finalAnswerCorrect": false,
+  "relation": [
+   "equivalent",
+   "neither"
+  ],
+  "family": "inequality",
+  "note": "missing flip"
+ }
+]

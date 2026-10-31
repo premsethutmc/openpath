@@ -63,6 +63,7 @@ const KEY: Record<string, string> = {
   "wm-ind-d1": "A", "wm-ind-d2": String([1, 2, 3, 4, 5].find((n) => 2 ** n > n + 4)), "wm-ind-g1": "C", "wm-ind-c1": "B", "wm-ind-g2": "D", "wm-ind-p1": String(7 - 1), "wm-ind-p2": "A", "wm-ind-r1": "C",
   "wm-game-d1": "D", "wm-game-d2": String(10 % 4), "wm-game-g1": String(10 - 3), "wm-game-c1": "B", "wm-game-g2": String(5 - 3), "wm-game-p1": String(23 % 4), "wm-game-p2": "A", "wm-game-r1": String(26 % 6),
   "wm-disp-d1": "B", "wm-disp-d2": String(3 * 4 + 2), "wm-disp-g1": String((70 - 50) / (55 - 50)), "wm-disp-c1": "C", "wm-disp-g2": "A", "wm-disp-p1": "D", "wm-disp-p2": String((15 / 60) * 360), "wm-disp-r1": "B",
+  "le-ref-3x-19-4": String((19 - 4) / 3), // D1 reference problem: 3x = 19 − 4
   "wm-stq-d1": "B", "wm-stq-d2": "2/5", "wm-stq-g1": "D", "wm-stq-c1": "A", "wm-stq-g2": "C", "wm-stq-p1": "B", "wm-stq-p2": String((7 + 8 + 9 + 9 + 12) / 5), "wm-stq-r1": "D",
 };
 const factors = (n: number) => [...Array(n).keys()].map((k) => k + 1).filter((k) => n % k === 0).length;

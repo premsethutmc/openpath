@@ -18,7 +18,7 @@ import { claimIdentity } from "./evidence-binding.ts";
 
 export const ACCEPTANCE_GATE_CONTRACT = "openpath-acceptance-gate@1" as const;
 export type GateRoute = "algebra-text" | "adapter-converted" | "structured-typed" | "natural-other";
-export type GateLevel = "u4-kernel" | "independent-exact-checker" | "claim-recheck+destination-reasoner" | "domain-reasoner" | "none";
+export type GateLevel = "u4-kernel" | "independent-exact-checker" | "p2-derivation-authority" | "claim-recheck+destination-reasoner" | "domain-reasoner" | "none";
 export type GateSource = "agreement" | "checker-authority" | "downgraded-no-independent-evidence" | "downgraded-unresolved-lines" | "conflict" | "candidate-unchanged";
 export interface GateEvidenceItem { line: number | null; claim: string; checker: string; scope: string; outcome: string; digest?: string | null; /** E7 repair A: identity of the exact claim the checker established, and the digest of the task premises it was produced under (stamped by the route that holds the context) */ claimIdentity?: string | null; premises?: string | null }
 export interface BindingEvidence { lineId: string; line: number; claim: string; checker: "u4-kernel" | "independent-ir-evaluator" | "independent-polynomial-identity" | "e5-independent-geocalc" | "e6-independent-exact"; destination: string; scope: string; outcome: "verified" | "mismatch" | "not-covered"; detail: string; digest?: string | null; /** E7: why the verified claim is about the task (premises, derived facts, student assumptions) */ grounding?: import("./claim-grounding.ts").Grounding }

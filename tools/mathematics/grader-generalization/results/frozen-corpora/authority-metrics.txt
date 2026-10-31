@@ -1,0 +1,62 @@
+== HELDOUT3-corpus (477)
+    stored-P2FINAL     M2-authority      G-authority
+  debatable_invalid                                0               2               2
+  debatable_unsupported                            4               2               0
+  debatable_verified                               3               3               5
+  firstInvalid_exact                              70              82             100
+  invalid_detected                                70              82             100
+  invalid_total                                  114             114             114
+  legit_total                                    186             186             186
+  legit_verified                                  57             131             147
+  unjustified_authorized                           3              48              53
+  unsupported_reported_unsupported               165             122             115
+  unsupported_total                              170             170             170
+   unsafe stored-P2FINAL ['tr-002', 'tr-006', 'tr-021']
+   unsafe M2-authority ['td-001', 'td-003', 'td-004', 'td-005', 'td-006', 'td-007', 'td-008', 'td-009', 'td-010', 'td-011', 'td-012', 'td-013', 'td-014', 'td-016', 'td-017', 'td-018', 'td-020', 'td-021', 'td-022', 'td-023', 'td-024', 'td-025', 'td-027', 'td-028', 'td-030', 'td-031', 'td-032', 'tr-002', 'tr-004', 'tr-005', 'tr-006', 'tr-008', 'tr-009', 'tr-010', 'tr-011', 'tr-012', 'tr-013', 'tr-015', 'tr-016', 'tr-017', 'tr-018', 'tr-019', 'tr-021', 'rl-022', 'rl-023', 'rl-024', 'mf-038', 'mf-042']
+   unsafe G-authority ['td-001', 'td-002', 'td-003', 'td-004', 'td-005', 'td-006', 'td-007', 'td-008', 'td-009', 'td-010', 'td-011', 'td-012', 'td-013', 'td-014', 'td-016', 'td-017', 'td-018', 'td-020', 'td-021', 'td-022', 'td-023', 'td-024', 'td-025', 'td-027', 'td-028', 'td-030', 'td-031', 'td-032', 'tr-002', 'tr-004', 'tr-005', 'tr-006', 'tr-008', 'tr-009', 'tr-010', 'tr-011', 'tr-012', 'tr-013', 'tr-015', 'tr-016', 'tr-017', 'tr-018', 'tr-019', 'tr-021', 'rl-018', 'rl-019', 'rl-020', 'rl-021', 'rl-022', 'rl-023', 'rl-024', 'mf-038', 'mf-042']
+== HELDOUT3-corpus-bare (477)
+    stored-P2FINAL     M2-authority      G-authority
+  debatable_incomplete                             2               0               0
+  debatable_invalid                                0               2               2
+  debatable_unsupported                            2               2               2
+  debatable_verified                               3               3               3
+  firstInvalid_exact                              81              82              91
+  invalid_detected                                82              82              91
+  invalid_total                                  114             114             114
+  legit_total                                    186             186             186
+  legit_verified                                 106             131             142
+  unjustified_authorized                           6              48              53
+  unsupported_reported_unsupported               162             122             115
+  unsupported_total                              170             170             170
+   unsafe stored-P2FINAL ['tr-002', 'tr-006', 'tr-021', 'rl-022', 'rl-023', 'rl-024']
+   unsafe M2-authority ['td-001', 'td-003', 'td-004', 'td-005', 'td-006', 'td-007', 'td-008', 'td-009', 'td-010', 'td-011', 'td-012', 'td-013', 'td-014', 'td-016', 'td-017', 'td-018', 'td-020', 'td-021', 'td-022', 'td-023', 'td-024', 'td-025', 'td-027', 'td-028', 'td-030', 'td-031', 'td-032', 'tr-002', 'tr-004', 'tr-005', 'tr-006', 'tr-008', 'tr-009', 'tr-010', 'tr-011', 'tr-012', 'tr-013', 'tr-015', 'tr-016', 'tr-017', 'tr-018', 'tr-019', 'tr-021', 'rl-022', 'rl-023', 'rl-024', 'mf-038', 'mf-042']
+   unsafe G-authority ['td-001', 'td-002', 'td-003', 'td-004', 'td-005', 'td-006', 'td-007', 'td-008', 'td-009', 'td-010', 'td-011', 'td-012', 'td-013', 'td-014', 'td-016', 'td-017', 'td-018', 'td-020', 'td-021', 'td-022', 'td-023', 'td-024', 'td-025', 'td-027', 'td-028', 'td-030', 'td-031', 'td-032', 'tr-002', 'tr-004', 'tr-005', 'tr-006', 'tr-008', 'tr-009', 'tr-010', 'tr-011', 'tr-012', 'tr-013', 'tr-015', 'tr-016', 'tr-017', 'tr-018', 'tr-019', 'tr-021', 'rl-018', 'rl-019', 'rl-020', 'rl-021', 'rl-022', 'rl-023', 'rl-024', 'mf-038', 'mf-042']
+== HELDOUT2-corpus (442)
+    stored-P2FINAL     M2-authority      G-authority
+  debatable_ambiguous                              1               0               0
+  debatable_incomplete                             2               0               0
+  debatable_invalid                                0               1               1
+  debatable_malformed                              1               0               0
+  debatable_unsupported                            9               7               7
+  debatable_verified                               2               7               7
+  firstInvalid_exact                             100             104             117
+  invalid_detected                               100             104             117
+  invalid_total                                  125             125             125
+  legit_total                                    181             181             181
+  legit_verified                                  72             114             135
+  unsupported_reported_unsupported               118             121             121
+  unsupported_total                              121             121             121
+== bare-corpus (442)
+    stored-P2FINAL     M2-authority      G-authority
+  debatable_incomplete                             3               0               0
+  debatable_invalid                                0               1               1
+  debatable_malformed                              1               0               0
+  debatable_unsupported                            9               8               8
+  debatable_verified                               2               6               6
+  firstInvalid_exact                             110             103             115
+  invalid_detected                               110             103             115
+  invalid_total                                  125             125             125
+  legit_total                                    181             181             181
+  legit_verified                                  97             110             122
+  unsupported_reported_unsupported               118             121             121
+  unsupported_total                              121             121             121

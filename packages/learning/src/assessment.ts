@@ -155,8 +155,10 @@ function typedContract(pr: Problem, base: Omit<AssessmentContract, "problem" | "
   return { ...mk("verified", `the ${id} kernel reproduces the expected answer from the generator's object and credits no known wrong answer`, judged), reference: { steps: fmtSteps(pr), evidence: `typed ${id} kernel (independent exact computation)` } };
 }
 /** an authored (non-generated) question: no independent kernel, so the stored answer is the only authority (reported as legacy), or an educator marks it */
-export const legacyContract = (q: { id: string; type: AnswerType; answer: string; prompt: string }): AssessmentContract =>
-  ({ contract: ASSESSMENT_CONTRACT, questionId: q.id, prompt: q.prompt, problem: null, answerType: q.type, expected: { stored: q.answer, display: q.answer, values: [] }, variable: null, assumptions: [], mode: q.type === "written" ? "method-required" : "answer-only", capability: q.type === "written" ? "educator" : "none", reference: { steps: [], evidence: "authored answer (not independently verified)" }, verification: q.type === "written" ? "human" : "legacy", reason: q.type === "written" ? "marked by an educator" : "authored question without an independent kernel", checkedWrong: [] });
+/** D1: an authored question that states its task (Question.statement, one unknown) names that unknown, so "x = 5" reads as the answer 5; no other change */
+const statedVariable = (q: { statement?: string }) => { const vs = [...new Set(q.statement?.match(/[a-z]/gi) ?? [])]; return vs.length === 1 ? vs[0] : null; };
+export const legacyContract = (q: { id: string; type: AnswerType; answer: string; prompt: string; statement?: string }): AssessmentContract =>
+  ({ contract: ASSESSMENT_CONTRACT, questionId: q.id, prompt: q.prompt, problem: null, answerType: q.type, expected: { stored: q.answer, display: q.answer, values: [] }, variable: statedVariable(q), assumptions: [], mode: q.type === "written" ? "method-required" : "answer-only", capability: q.type === "written" ? "educator" : "none", reference: { steps: [], evidence: "authored answer (not independently verified)" }, verification: q.type === "written" ? "human" : "legacy", reason: q.type === "written" ? "marked by an educator" : "authored question without an independent kernel", checkedWrong: [] });
 /** a held question must never reach a student */
 export const publishable = (c: AssessmentContract | null): boolean => !!c && c.verification !== "held";
 

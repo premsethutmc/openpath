@@ -1,0 +1,184 @@
+[
+ {
+  "case": "A",
+  "viewport": "desktop",
+  "typed": "x = 4",
+  "verdict": "incorrect",
+  "reason": "incorrect.value",
+  "working": {
+   "status": "none",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "✗Not quite right"
+ },
+ {
+  "case": "A",
+  "viewport": "mobile",
+  "typed": "x = 4",
+  "verdict": "incorrect",
+  "reason": "incorrect.value",
+  "working": {
+   "status": "none",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "✗Not quite right"
+ },
+ {
+  "case": "B",
+  "viewport": "desktop",
+  "typed": "x = 5",
+  "verdict": "correct",
+  "reason": "correct.equal",
+  "working": {
+   "status": "none",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "✓Correct!"
+ },
+ {
+  "case": "B",
+  "viewport": "mobile",
+  "typed": "x = 5",
+  "verdict": "correct",
+  "reason": "correct.equal",
+  "working": {
+   "status": "none",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "✓Correct!"
+ },
+ {
+  "case": "C",
+  "viewport": "desktop",
+  "typed": "3x = 15; x = 5",
+  "verdict": "correct",
+  "reason": "correct.equal",
+  "working": {
+   "status": "verified",
+   "methodEvidence": "method-verified",
+   "firstInvalid": null
+  },
+  "label": "✓Correct!"
+ },
+ {
+  "case": "C",
+  "viewport": "mobile",
+  "typed": "3x = 15; x = 5",
+  "verdict": "correct",
+  "reason": "correct.equal",
+  "working": {
+   "status": "verified",
+   "methodEvidence": "method-verified",
+   "firstInvalid": null
+  },
+  "label": "✓Correct!"
+ },
+ {
+  "case": "D",
+  "viewport": "desktop",
+  "typed": "3x = 15; x = 4",
+  "verdict": "incorrect",
+  "reason": "incorrect.value",
+  "working": {
+   "status": "invalid",
+   "methodEvidence": "method-false-step",
+   "firstInvalid": 1
+  },
+  "label": "✗Not quite right"
+ },
+ {
+  "case": "D",
+  "viewport": "mobile",
+  "typed": "3x = 15; x = 4",
+  "verdict": "incorrect",
+  "reason": "incorrect.value",
+  "working": {
+   "status": "invalid",
+   "methodEvidence": "method-false-step",
+   "firstInvalid": 1
+  },
+  "label": "✗Not quite right"
+ },
+ {
+  "case": "E",
+  "viewport": "desktop",
+  "typed": "3x = 16; x = 16/3",
+  "verdict": "incorrect",
+  "reason": "incorrect.value",
+  "working": {
+   "status": "invalid",
+   "methodEvidence": "method-false-step",
+   "firstInvalid": 0
+  },
+  "label": "✗Not quite right"
+ },
+ {
+  "case": "E",
+  "viewport": "mobile",
+  "typed": "3x = 16; x = 16/3",
+  "verdict": "incorrect",
+  "reason": "incorrect.value",
+  "working": {
+   "status": "invalid",
+   "methodEvidence": "method-false-step",
+   "firstInvalid": 0
+  },
+  "label": "✗Not quite right"
+ },
+ {
+  "case": "F",
+  "viewport": "desktop",
+  "typed": "3x = 15",
+  "verdict": "unresolved",
+  "reason": "unresolved.invalid-response",
+  "working": {
+   "status": "partial",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "◐Not marked"
+ },
+ {
+  "case": "F",
+  "viewport": "mobile",
+  "typed": "3x = 15",
+  "verdict": "unresolved",
+  "reason": "unresolved.invalid-response",
+  "working": {
+   "status": "partial",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "◐Not marked"
+ },
+ {
+  "case": "G",
+  "viewport": "desktop",
+  "typed": "3x = 15 => x = 5; x = 5",
+  "verdict": "correct",
+  "reason": "correct.equal",
+  "working": {
+   "status": "unsupported",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "✓Correct!"
+ },
+ {
+  "case": "G",
+  "viewport": "mobile",
+  "typed": "3x = 15 => x = 5; x = 5",
+  "verdict": "correct",
+  "reason": "correct.equal",
+  "working": {
+   "status": "unsupported",
+   "methodEvidence": "no-method-evidence",
+   "firstInvalid": null
+  },
+  "label": "✓Correct!"
+ }
+]

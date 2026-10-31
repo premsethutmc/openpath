@@ -1,0 +1,75 @@
+== baseline
+   firstInvalid_exact           49
+   incomplete->unsupported      4
+   incomplete->verified         6
+   invalid->invalid             49
+   invalid->unsupported         41
+   invalid_detected             49
+   invalid_total                90
+   malformed->invalid           1
+   malformed->unsupported       25
+   malformed->verified          4
+   valid->unsupported           84
+   valid->verified              57
+   valid-jump->unsupported      1
+   valid-jump->verified         3
+   valid_total                  141
+   valid_verified               57
+   FALSE ACCEPTS (verified, labelled invalid/malformed): ['h4-mf-005', 'h4-mf-006', 'h4-mf-020', 'h4-mf-027']
+   transition-level false certifications: []
+   FALSE REJECTS (invalid, labelled valid/jump/incomplete): []
+   first-invalid mismatches: []
+== first-run
+   final_agree                  232
+   final_compared               232
+   final_undecided              3
+   firstInvalid_exact           63
+   incomplete->unsupported      3
+   incomplete->verified         7
+   incomplete_reported          9
+   incomplete_total             10
+   invalid->invalid             70
+   invalid->unsupported         20
+   invalid_detected             70
+   invalid_total                90
+   malformed->invalid           1
+   malformed->unsupported       25
+   malformed->verified          4
+   rel_agree                    568
+   rel_compared                 575
+   valid->invalid               3
+   valid->unsupported           37
+   valid->verified              101
+   valid-jump->unsupported      1
+   valid-jump->verified         3
+   valid_total                  141
+   valid_verified               101
+   FALSE ACCEPTS (verified, labelled invalid/malformed): ['h4-mf-005', 'h4-mf-006', 'h4-mf-020', 'h4-mf-027']
+   transition-level false certifications: []
+   FALSE REJECTS (invalid, labelled valid/jump/incomplete): [('h4-dc-009', 1, 'excluded-value: x = 2 is outside the domain (x-2 ≠ 0)'), ('h4-dc-019', 2, 'keeps-extraneous: x = 2 came from an implication-only step and does no'), ('h4-dc-022', 4, 'keeps-extraneous: x = 2/3 came from an implication-only step and does ')]
+   first-invalid mismatches: [('h4-dc-010', 0, 1), ('h4-dc-011', 0, 1), ('h4-dc-013', 0, 3), ('h4-dc-016', 0, 1), ('h4-dc-020', 0, 2), ('h4-dc-021', 0, 4), ('h4-dc-035', 0, 1)]
+== final
+   final_agree                  232
+   final_compared               232
+   final_undecided              3
+   firstInvalid_exact           83
+   incomplete->unsupported      3
+   incomplete->verified         7
+   incomplete_reported          9
+   incomplete_total             10
+   invalid->invalid             90
+   invalid_detected             90
+   invalid_total                90
+   malformed->unsupported       30
+   rel_agree                    586
+   rel_compared                 593
+   valid->unsupported           31
+   valid->verified              110
+   valid-jump->unsupported      1
+   valid-jump->verified         3
+   valid_total                  141
+   valid_verified               110
+   FALSE ACCEPTS (verified, labelled invalid/malformed): []
+   transition-level false certifications: []
+   FALSE REJECTS (invalid, labelled valid/jump/incomplete): []
+   first-invalid mismatches: [('h4-dc-010', 0, 1), ('h4-dc-011', 0, 1), ('h4-dc-013', 0, 3), ('h4-dc-016', 0, 1), ('h4-dc-020', 0, 2), ('h4-dc-021', 0, 4), ('h4-dc-035', 0, 1)]

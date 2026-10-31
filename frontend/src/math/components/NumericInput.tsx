@@ -8,6 +8,8 @@ interface NumericInputProps {
   onSubmit: (value: string) => void;
   onChange: (value: string) => void;
   strings: LocaleStrings;
+  /** D1: keep working text (letters, =, ;, operators, spaces) instead of digits only */
+  acceptsWorking?: boolean;
 }
 
 const KEYPAD_KEYS = [
@@ -24,6 +26,7 @@ export function NumericInput({
   onSubmit,
   onChange,
   strings,
+  acceptsWorking = false,
 }: NumericInputProps) {
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null!);  // non-null assertion for ref init
@@ -67,13 +70,13 @@ export function NumericInput({
         <input
           ref={inputRef}
           type="text"
-          inputMode="decimal"
+          inputMode={acceptsWorking ? "text" : "decimal"}
           className="lr-input-field"
           value={value}
           placeholder={placeholder ?? strings.enterAnswer}
           disabled={disabled}
           aria-label={strings.enterAnswer}
-          onChange={(e: { target: { value: string } }) => updateValue(e.target.value.replace(/[^0-9.\-/]/g, ""))}
+          onChange={(e: { target: { value: string } }) => updateValue(acceptsWorking ? e.target.value.replace(/[^0-9A-Za-z.\-/=;+*×÷−()<>^ ]/g, "") : e.target.value.replace(/[^0-9.\-/]/g, ""))}
           onKeyDown={handleKeyDown}
           autoComplete="off"
           autoCorrect="off"
