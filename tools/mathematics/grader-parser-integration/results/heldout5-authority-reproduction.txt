@@ -1,0 +1,77 @@
+== frozen
+   final_agree                  132
+   final_compared               132
+   final_undecided              6
+   firstInvalid_exact           58
+   incomplete->unsupported      3
+   incomplete->verified         6
+   incomplete_reported          8
+   incomplete_total             9
+   invalid->invalid             59
+   invalid_detected             59
+   invalid_total                59
+   malformed->invalid           1
+   malformed->unsupported       15
+   rel_agree                    395
+   rel_compared                 395
+   valid->unsupported           34
+   valid->verified              28
+   valid-jump->invalid          1
+   valid-jump->unsupported      13
+   valid-jump->verified         3
+   valid_total                  62
+   valid_verified               28
+   FALSE ACCEPTS (verified, labelled invalid/malformed): []
+   transition-level false certifications: []
+   FALSE REJECTS (invalid, labelled valid/jump/incomplete): [('h5-sub-010', 0, 'mathematically-false')]
+   first-invalid mismatches: [('h5-ineq-016', 2, 0)]
+== eca220f0
+   final_agree                  132
+   final_compared               132
+   final_undecided              6
+   firstInvalid_exact           58
+   incomplete->unsupported      2
+   incomplete->verified         7
+   incomplete_reported          8
+   incomplete_total             9
+   invalid->invalid             59
+   invalid_detected             59
+   invalid_total                59
+   malformed->unsupported       16
+   rel_agree                    395
+   rel_compared                 395
+   valid->unsupported           24
+   valid->verified              38
+   valid-jump->unsupported      12
+   valid-jump->verified         5
+   valid_total                  62
+   valid_verified               38
+   FALSE ACCEPTS (verified, labelled invalid/malformed): []
+   transition-level false certifications: []
+   FALSE REJECTS (invalid, labelled valid/jump/incomplete): []
+   first-invalid mismatches: [('h5-ineq-016', 2, 0)]
+== B2
+   final_agree                  135
+   final_compared               135
+   final_undecided              3
+   firstInvalid_exact           58
+   incomplete->unsupported      2
+   incomplete->verified         7
+   incomplete_reported          8
+   incomplete_total             9
+   invalid->invalid             59
+   invalid_detected             59
+   invalid_total                59
+   malformed->unsupported       16
+   rel_agree                    395
+   rel_compared                 395
+   valid->unsupported           24
+   valid->verified              38
+   valid-jump->unsupported      12
+   valid-jump->verified         5
+   valid_total                  62
+   valid_verified               38
+   FALSE ACCEPTS (verified, labelled invalid/malformed): []
+   transition-level false certifications: []
+   FALSE REJECTS (invalid, labelled valid/jump/incomplete): []
+   first-invalid mismatches: [('h5-ineq-016', 2, 0)]

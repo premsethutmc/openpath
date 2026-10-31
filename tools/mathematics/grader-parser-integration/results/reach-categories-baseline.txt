@@ -1,0 +1,50 @@
+== baseline/trace-HELDOUT2-corpus.json: 442 items, 260 decided by P2 (certified 142, refuted 118)
+      8  final-answer: incomplete / no final answer
+     13  parser rejection: notation refused as ambiguous
+     73  reached-P2: certified
+     99  reached-P2: invalid reasoning (agrees)
+     34  task-normalization failure: statement unreadable by the established route
+     33  unsupported operation (established route abstained on a line)
+   reach (engine verdict = P2 verdict): 172/260
+== baseline/trace-HELDOUT3-corpus-bare.json: 477 items, 293 decided by P2 (certified 198, refuted 95)
+     49  final-answer: incomplete / no final answer
+     14  parser rejection: notation refused as ambiguous
+     12  parser rejection: working line unreadable
+    120  reached-P2: certified
+     77  reached-P2: invalid reasoning (agrees)
+     21  unsupported operation (established route abstained on a line)
+   reach (engine verdict = P2 verdict): 197/293
+== baseline/trace-HELDOUT3-corpus.json: 477 items, 309 decided by P2 (certified 205, refuted 104)
+     37  final-answer: incomplete / no final answer
+     14  parser rejection: notation refused as ambiguous
+     13  parser rejection: working line unreadable
+     64  reached-P2: certified
+     66  reached-P2: invalid reasoning (agrees)
+     69  task-normalization failure: statement unreadable by the established route
+     46  unsupported operation (established route abstained on a line)
+   reach (engine verdict = P2 verdict): 130/309
+== baseline/trace-HELDOUT4.json: 275 items, 210 decided by P2 (certified 120, refuted 90)
+      4  final-answer: incomplete / no final answer
+      3  parser rejection: notation refused as ambiguous
+      7  parser rejection: working line unreadable
+     10  reached-P2: certified
+     12  reached-P2: invalid reasoning (agrees)
+    172  task-normalization failure: statement unreadable by the established route
+      2  unsupported operation (established route abstained on a line)
+   reach (engine verdict = P2 verdict): 22/210
+== baseline/trace-HELDOUT5.json: 163 items, 109 decided by P2 (certified 50, refuted 59)
+      3  final-answer: incomplete / no final answer
+      6  parser rejection: notation refused as ambiguous
+      3  parser rejection: working line unreadable
+      8  reached-P2: certified
+     11  reached-P2: invalid reasoning (agrees)
+     77  task-normalization failure: statement unreadable by the established route
+      1  unsupported operation (established route abstained on a line)
+   reach (engine verdict = P2 verdict): 19/109
+== baseline/trace-bare-corpus.json: 442 items, 244 decided by P2 (certified 128, refuted 116)
+      9  final-answer: incomplete / no final answer
+     98  reached-P2: certified
+    109  reached-P2: invalid reasoning (agrees)
+     18  task-normalization failure: statement unreadable by the established route
+     10  unsupported operation (established route abstained on a line)
+   reach (engine verdict = P2 verdict): 207/244

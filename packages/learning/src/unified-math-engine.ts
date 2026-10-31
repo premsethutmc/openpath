@@ -17,6 +17,7 @@ import { assessComplex, COMPLEX_B3_CONTRACT, type ComplexProblem, type ComplexSt
 import { D2_MAX_STAGES, D2_PROOF_STATE_VERSION, D2ProofState } from "./d2-proof-state.ts";
 import { D3_BINDING_CONTRACT, MathematicalBindingStore, type D3Problem, type D3Working } from "./cross-domain-bindings.ts";
 import { NATURAL_WORKING_CONTRACT, equationAsExpression, naturalRestrictionKeys, parseNaturalWorking, resolveLogNotation, restoreOriginalFragment, usesBareLog, type NaturalWorkingInput, type NotationConventions, type SourceLocation } from "./natural-working.ts";
+import { parseWorkingWithDisjunctions } from "./natural-disjunction.ts";
 import { NATURAL_ADAPTER_CONTRACT, adaptNaturalWorking, type NaturalAdapterResult } from "./natural-domain-adapters.ts";
 import { evaluateLedger } from "./claim-certifier.ts";
 import { CLAIM_LEDGER_CONTRACT, type CoverageRecord } from "./claim-ledger.ts";
@@ -28,7 +29,9 @@ import { GEOCALC_E5_CONTRACT, planGeoCalcE5, type E5Plan } from "./natural-geoca
 import { buildObligations, type ObligationSet } from "./proof-obligations.ts";
 import { typedIdentities } from "./evidence-binding.ts";
 import { assessRelevance, literalProvenance, polynomialKey, previousClosure } from "./claim-grounding.ts";
-import { DerivationSession, routeDecision } from "./derivation-authority.ts";
+import { AUTHORITY_VERSION, DerivationSession, ambiguousNotation, assessChain, normalizeTask, replayDerivationChain, routeDecision, type ChainVerdict } from "./derivation-authority.ts";
+import { ambiguousText } from "./core/ambiguity.ts";
+import { claimIdentity } from "./evidence-binding.ts";
 import type { GroundingSource } from "./claim-grounding.ts";
 import { MECHANISMS } from "./evidence-provenance.ts";
 import { buildProofContext, relateStudentRestriction, routeUse, withProved, withStudent, withUnresolved, type ProofContext, type RouteUse } from "./proof-context.ts";
@@ -307,7 +310,7 @@ async function assessCandidate(problem: MathematicalProblem, studentWorking: Stu
 async function assessCandidateBase(problem: MathematicalProblem, studentWorking: StudentWorking, options: AssessOptions = {}): Promise<AssessmentEnvelope> {
   if (!problem || typeof problem !== "object" || !("domain" in problem || "statement" in problem)) return malformed("algebra", "problem must be a typed mathematical problem");
   if(studentWorking&&!Array.isArray(studentWorking)&&"format" in studentWorking&&"text" in studentWorking){
-    const parsed=parseNaturalWorking(studentWorking as NaturalWorkingInput),domain=(problem.domain==="symbolic"?"symbolic":problem.domain==="auto"||problem.domain==="arithmetic"||problem.domain==="algebra"||!("domain" in problem)?"algebra":problem.domain) as AssessmentEnvelope["domain"];
+    const parsed=("statement" in problem?parseWorkingWithDisjunctions:parseNaturalWorking)(studentWorking as NaturalWorkingInput),domain=(problem.domain==="symbolic"?"symbolic":problem.domain==="auto"||problem.domain==="arithmetic"||problem.domain==="algebra"||!("domain" in problem)?"algebra":problem.domain) as AssessmentEnvelope["domain"];
     if(parsed.classification!=="parsed"){const lineAccount=unparsedLineAccount(studentWorking as NaturalWorkingInput,parseNaturalWorking);return{...malformed(domain,parsed.message),classification:parsed.classification,steps:lineAccount.records.map((r,index)=>({index,classification:lineClass(r.status),justification:r.reason,reasoner:"natural-working-parser",dependencies:["problem"],source:{line:r.line,start:r.span.start,end:r.span.end,text:r.text}})),domainPayload:{naturalInput:parsed,lineAccount},reasoners:[{id:"natural-working-parser",version:NATURAL_WORKING_CONTRACT}]}}
     let assessed:AssessmentEnvelope;
     if("statement" in problem){assessed=textAssessment(problem,parsed.lines.map(x=>x.source.text),options);const square=problem.statement.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)\^2=(\d+)$/),single=parsed.lines.length===1?parsed.lines[0].source.text.replace(/\s/g,"").match(/^([A-Za-z][A-Za-z0-9_]*)=(-?\d+)$/):null;if(assessed.classification==="invalid"&&square&&single&&square[1]===single[1]&&Number(single[2])**2===Number(square[2])&&Number(square[2])>0)assessed={...assessed,classification:"incomplete",correct:null,complete:false,firstInvalidStep:null,justification:"one square-root branch is valid, but the opposite root is still required",outstandingObligations:[`include both ${square[1]} = ${Math.abs(Number(single[2]))} and ${square[1]} = ${-Math.abs(Number(single[2]))}`],steps:assessed.steps.map(step=>({...step,classification:"verified",justification:"this is one valid solution branch"}))}}
@@ -452,14 +455,14 @@ function withdrawAcceptance(cand: AssessmentEnvelope, route: AcceptanceGateRecor
  * by the shared literal-provenance rule: every number it writes comes from the statement, from an earlier accepted line, from what the previous line computes, from a balance operation
  * applied to both sides, or from a computation the line itself shows. `x = 8 - 6` after `4x = 8` introduces 6 from nowhere, whatever its value.
  */
-function algebraGroundings(statement: string, parsed: NaturalParseResult, check: AlgebraCheck): NonNullable<RouteUse["grounded"]> {
+function algebraGroundings(statement: string, parsed: NaturalParseResult, check: AlgebraCheck, verifiedAt?: (i: number) => boolean): NonNullable<RouteUse["grounded"]> {
   // P2: AUTHORIZATION is decided by the derivation authority (derivation-authority.ts): refuse by default. Validity (`check`) is independent. A line the authority's surface does not cover
   // (systems, radicals, solution lists) is judged by the older numeral provenance ONLY after the authority's structural guards, and the use is recorded; a definite refusal is never overridden.
   const nums = (t: string) => (t.match(/(?<![A-Za-z])\d+(?:\.\d+)?/g) ?? []).map((x) => String(Number(x)));
   const session = new DerivationSession(statement), task = new Set(nums(statement)), established = new Set<string>(), out: NonNullable<RouteUse["grounded"]> = [];
   const pool: string[] = [statement]; let prevLine = 0;
   parsed.lines.forEach((l, i) => {
-    if (check.lines[i]?.status !== "verified-valid") return;
+    if (!(verifiedAt ? verifiedAt(i) : check.lines[i]?.status === "verified-valid")) return;
     const text = l.source.text, d = routeDecision(session, text), sources: GroundingSource[] = [], derived = new Set<string>();
     if (d.kind === "refused") { const own = [...new Set(nums(text))].filter((x) => !task.has(x)); for (const x of own.length ? own : [`not authorized: ${d.verdict.reason}`]) sources.push({ kind: "free-literal", ref: x, by: "value", trivial: false }); }   // the numerals of the refused line stay free, so every later line that uses them is unresolved too
     const cert = d.kind === "authorized" ? d.verdict.certificate : null, rule = cert ? (cert.parts.find((p) => p.rule !== "identity")?.rule ?? cert.move.kind) : undefined;   // the certificate that authorizes the line travels with its grounding
@@ -471,9 +474,99 @@ function algebraGroundings(statement: string, parsed: NaturalParseResult, check:
   });
   return out;
 }
+/* ======================================================================================================
+ * B2 parser-to-P2 integration. The statement-text route reads the task with ONE canonical reader: P2's normalizeTask (derivation-authority.ts), whose
+ * Tree is the representation the authority certifies. Nothing here judges mathematics: notation is either read by that reader or refused as ambiguous,
+ * and validity comes only from the P2 authority's own verdict (registered moves, exact solution sets) with its certificate chain replayed from scratch.
+ * P2 is consulted only where the established route established nothing (the native engine and the independent checker both abstained); a definite
+ * established verdict (verified with independent evidence, invalid, incomplete, missing-assumption, conflict) is never replaced.
+ * ====================================================================================================== */
+export const PARSER_INTEGRATION_CONTRACT = "openpath-parser-p2-integration@1" as const;
+const LAST_CHECK = new WeakMap<NaturalParseResult, AlgebraCheck>();
+const P2_REASONER = { id: "p2-derivation-authority", version: AUTHORITY_VERSION };
+const lineTexts = (parsed: NaturalParseResult) => parsed.lines.map((l) => l.source.text);
+/** fail closed on notation with more than one reading (notation@2): the statement after its wrapper is removed, or any submitted line */
+function notationAmbiguity(statement: string, parsed: NaturalParseResult, cand: AssessmentEnvelope): AssessmentEnvelope | null {
+  if (cand.classification === "ambiguous") return null;   // already refused as ambiguous by the established route
+  const nt = normalizeTask(statement), inStatement = !nt.ok && !!nt.ambiguous;
+  const at = lineTexts(parsed).findIndex((t) => ambiguousNotation(t));
+  if (!inStatement && at < 0) return null;
+  if (!inStatement && cand.classification === "invalid" && cand.firstInvalidStep !== null && cand.firstInvalidStep < at) return null;   // an earlier, independent invalid step stands
+  const where = inStatement ? "the task statement" : `line ${parsed.lines[at].source.line} ("${parsed.lines[at].source.text.trim()}")`;
+  const why = `${where} can be read in more than one way (for example 1/2x, x/2/4, 1/(x+3)(x-2), x^2x, x2 or a missing operator between numbers); no mathematical judgement is made. Rewrite it with brackets or explicit operators.`;
+  const steps: AssessmentStep[] = parsed.lines.map((l, index) => ({ index, classification: (index === at ? "ambiguous" : "unsupported") as Classification, justification: index === at ? why : "not judged: the submission contains notation with more than one reading", reasoner: NATURAL_PARSER_ID.id, dependencies: index ? [index - 1] : ["problem"], source: l.source }));
+  const payload = (cand.domainPayload && typeof cand.domainPayload === "object" ? cand.domainPayload : {}) as Record<string, unknown>;
+  return { ...cand, classification: "ambiguous", correct: null, complete: false, firstInvalidStep: null, steps, proofDependencies: steps.map((s) => s.dependencies), justification: why, outstandingObligations: [why],
+    domainPayload: { ...payload, naturalInput: parsed, notation: { contract: PARSER_INTEGRATION_CONTRACT, where: inStatement ? "statement" : "line", line: inStatement ? null : parsed.lines[at].source.line } },
+    acceptanceGate: gateRecord("algebra-text", cand, { verdict: "ambiguous", reconciliation: why }) };
+}
+/** the native engine called the task ambiguous only because of the instruction wrapper ("Simplify … for x ≠ 0"): the canonical reader reads it, and neither notation rule fires on the task or any line */
+function wrapperOnlyAmbiguity(statement: string, parsed: NaturalParseResult, cand: AssessmentEnvelope): boolean {
+  if (cand.classification !== "ambiguous" || !/the problem itself/.test(cand.justification ?? "")) return false;
+  const nt = normalizeTask(statement); if (!nt.ok) return false;
+  const canonical = nt.task.sides.join(nt.task.mode === "inequality" ? ` ${nt.task.rel} ` : " = ");
+  return !ambiguousText(canonical) && !ambiguousNotation(canonical) && lineTexts(parsed).every((t) => !ambiguousText(t) && !ambiguousNotation(t));
+}
+const showPoint = (x: unknown): string => typeof x === "string" ? x : x && typeof x === "object" && "n" in (x as object) ? (() => { const r = x as { n: bigint | string; d: bigint | string }; return String(r.d) === "1" ? String(r.n) : `${r.n}/${r.d}`; })() : JSON.stringify(x, (_k, v) => typeof v === "bigint" ? String(v) : v);
+function authoritySummary(v: ChainVerdict, replay: { ok: boolean; reason: string } | null) {
+  // answer-vs-method: a bare stated answer ("answer-claim") certifies the answer, not a method; the flag lets evidence layers keep the two apart (derivation-interface.workingEvidence applies the full rule)
+  const methodShown = v.evidence.transitions.some((t) => t.status.startsWith("certified") && t.move !== "answer-claim");
+  return { contract: PARSER_INTEGRATION_CONTRACT, authority: AUTHORITY_VERSION, status: v.status, at: v.at, reason: v.reason, replay, methodShown, finalAnswer: v.evidence.finalAnswer, method: v.evidence.method, completeness: v.evidence.completeness, evidence: JSON.parse(JSON.stringify(v.evidence, (_k, x) => typeof x === "bigint" ? String(x) : x)) };
+}
+/** consult the P2 authority where the established route abstained; adopt only its definite, replayed verdicts */
+function authorityReading(statement: string, parsed: NaturalParseResult, rawText: string, cand: AssessmentEnvelope, g: AssessmentEnvelope): AssessmentEnvelope {
+  const check = LAST_CHECK.get(parsed);
+  if (!check || !(check.outcome === "unsupported" || check.outcome === "resource-exhausted")) return g;
+  // E7 premise contract kept as is: where the established route refuses because a premise is attached to a kind of problem it cannot use, that refusal stands
+  if (/condition attached to this kind of problem/.test(check.justification)) return g;
+  const open = g.classification === "unsupported" || g.classification === "resource-exhausted" || (g.classification === "ambiguous" && wrapperOnlyAmbiguity(statement, parsed, cand));
+  if (!open || !["verified", "unsupported", "resource-exhausted", "ambiguous"].includes(cand.classification)) return g;
+  if (!normalizeTask(statement).ok) return g;
+  const texts = lineTexts(parsed);
+  let v: ChainVerdict; try { v = assessChain(statement, texts); } catch { return g; }
+  const ev = v.evidence, gp = (g.domainPayload && typeof g.domainPayload === "object" ? g.domainPayload : {}) as Record<string, unknown>;
+  const note = (why: string, replay: { ok: boolean; reason: string } | null = null): AssessmentEnvelope => ({ ...g, outstandingObligations: [...g.outstandingObligations, why], domainPayload: { ...gp, derivationAuthority: { ...authoritySummary(v, replay), adopted: false, why } } });
+  if (v.status === "unsupported") return note(`the derivation authority could not certify line ${v.at !== null && parsed.lines[v.at] ? parsed.lines[v.at].source.line : "-"} (${v.reason}); nothing is claimed about its truth`);
+  if (v.status === "invalid" && cand.classification === "verified") return note(`the native engine accepted this working but the derivation authority refutes line ${parsed.lines[ev.firstInvalid ?? 0]?.source.line}; trusted mechanisms disagree, so nothing is certified`);
+  let replay: { ok: boolean; reason: string } | null = null, cls: Classification, why: string;
+  if (v.status === "invalid") {
+    const i = ev.firstInvalid ?? 0, tr = ev.transitions[i], cx = tr.counterexample;
+    const witness = cx ? ` (${cx.lost !== null && cx.lost !== undefined ? `x = ${showPoint(cx.lost)} satisfies the ${i ? "line before" : "task"} but not this line` : `x = ${showPoint(cx.gained)} satisfies this line but not the ${i ? "line before" : "task"}`})` : "";
+    cls = "invalid"; why = `line ${parsed.lines[i].source.line} does not follow from the ${i ? "line before" : "task"}: ${tr.reason}${witness}`;
+  } else {
+    const r = replayDerivationChain(statement, texts, v.chain); replay = { ok: r.ok, reason: r.reason };
+    if (!r.ok) return note(`the derivation certificate chain did not replay (${r.reason}); nothing is certified`, replay);
+    if (ev.completeness !== "complete") { cls = "incomplete"; why = "every line is certified by the derivation authority, but the working does not reach a final answer"; }
+    else if (ev.finalAnswer.correct !== true) return note(`every line is certified but the final answer could not be confirmed against the task (${ev.finalAnswer.reason})`, replay);
+    else { cls = "verified"; why = "the derivation authority certified every line with a replayed certificate chain, and the final answer equals the task's exact solution"; }
+  }
+  const at = cls === "invalid" ? ev.firstInvalid ?? 0 : -1;
+  const lineOutcome = (i: number): { classification: StepClassification; justification: string } | undefined => {
+    const tr = ev.transitions[i]; if (!tr) return undefined;
+    if (tr.status.startsWith("certified") && (at < 0 || i < at)) return { classification: "verified" as StepClassification, justification: `certified by the derivation authority (${tr.move ?? tr.status})` };
+    if (i === at) return { classification: "invalid" as StepClassification, justification: why };
+    return undefined;
+  };
+  const accounts: AccountEntry[] = parsed.lines.map((l, i) => ({ lineId: l.id, role: "claim-step" as const, stepIndex: i, dependsOn: i ? [parsed.lines[i - 1].id] : [] }));
+  const account = buildLineAccount(parsed, accounts, parsed.lines.map((_, i) => lineOutcome(i)), rawText, []);
+  const steps: AssessmentStep[] = account.records.map((r, index) => ({ index, classification: lineClass(r.status), justification: r.reason, reasoner: P2_REASONER.id, dependencies: index ? [index - 1] : ["problem"], source: parsed.lines[index].source }));
+  const evidence: GateEvidenceItem[] = ev.transitions.flatMap((tr, i) => (tr.status.startsWith("certified") && (at < 0 || i < at)) || i === at ? [{ line: parsed.lines[i].source.line, claim: texts[i], checker: P2_REASONER.id, scope: `P2 derivation authority (${AUTHORITY_VERSION}); move: ${tr.move ?? tr.status}; relation to the ${i ? "line before" : "task"}: ${tr.relation ?? "not decided"}`, outcome: i === at ? "verified-invalid" : "verified-valid", digest: tr.certificate, claimIdentity: claimIdentity(texts[i]) }] : []);
+  const record = gateRecord("algebra-text", cand, { verdict: cls, independentlyVerified: cls === "verified", level: cls === "verified" || cls === "invalid" ? "p2-derivation-authority" : "none", source: "checker-authority", evidence, obligations: cls === "verified" ? [] : [why], reconciliation: `the native engine and the independent checker could not establish this working; the derivation authority's verdict is adopted (${v.reason})`, checker: checkerSummary(check) });
+  return { ...g, classification: cls, correct: cls === "verified" ? true : cls === "invalid" ? false : null, complete: cls === "verified", firstInvalidStep: cls === "invalid" ? at : null, steps, proofDependencies: steps.map((s) => s.dependencies),
+    domainRestrictions: [...new Set([...g.domainRestrictions, ...ev.task.conditions, ...ev.task.domain])], outstandingObligations: cls === "verified" ? [] : [why], justification: why,
+    reasoners: [...g.reasoners.filter((r) => r.id !== P2_REASONER.id), P2_REASONER],
+    domainPayload: { ...gp, naturalInput: parsed, lineAccount: account, independentCheck: check, groundedLines: algebraGroundings(statement, parsed, check, (i) => !!lineOutcome(i) && lineOutcome(i)!.classification === "verified"), derivationAuthority: { ...authoritySummary(v, replay), adopted: true } },
+    acceptanceGate: record };
+}
 function gateAlgebraText(statement: string, parsed: NaturalParseResult, rawText: string, cand: AssessmentEnvelope): AssessmentEnvelope {
+  const notation = parsed.classification === "parsed" ? notationAmbiguity(statement, parsed, cand) : null;
+  if (notation) return notation;
+  const g = gateAlgebraTextEstablished(statement, parsed, rawText, cand);
+  return parsed.classification === "parsed" ? authorityReading(statement, parsed, rawText, cand, g) : g;
+}
+function gateAlgebraTextEstablished(statement: string, parsed: NaturalParseResult, rawText: string, cand: AssessmentEnvelope): AssessmentEnvelope {
   if (parsed.classification !== "parsed") return cand.classification === "verified" ? withdrawAcceptance(cand, "algebra-text", "downgraded-no-independent-evidence", "the working could not be parsed for independent verification") : { ...cand, acceptanceGate: gateRecord("algebra-text", cand, { reconciliation: "the working is not parsed; nothing is accepted" }) };
-  const check = checkAlgebraSubmission(statement, parsed), dec = reconcileAlgebra(cand.classification, check);
+  const check = checkAlgebraSubmission(statement, parsed), dec = reconcileAlgebra(cand.classification, check); LAST_CHECK.set(parsed, check);
   const evidence = evidenceFromCheck(check, parsed.lines.map((l) => l.source.text), parsed.lines.map((l) => l.source.line)), summary = checkerSummary(check);
   const allU4 = evidence.length > 0 && evidence.every((e) => e.checker === "u4+exact-solution-set" || e.checker === "u4-identity" || e.checker === "exact-arithmetic");
   const level: GateLevel = dec.classification === "verified" ? (allU4 && check.u4Steps > 0 && check.exactSteps === 0 ? "u4-kernel" : "independent-exact-checker") : "none";
@@ -525,13 +618,13 @@ function applyAcceptanceGate(problem: MathematicalProblem, working: StudentWorki
   if (isNaturalInput(working)) {
     const payload = (cand.domainPayload && typeof cand.domainPayload === "object" ? cand.domainPayload : {}) as { naturalInput?: NaturalParseResult; bindingEvidence?: BindingEvidence[]; lineAccount?: LineAccount };
     if (payload.bindingEvidence) return gateConverted(cand, payload);
-    if (textProblem) return gateAlgebraText((problem as { statement: string }).statement, payload.naturalInput ?? parseNaturalWorking(working), working.text, cand);
+    if (textProblem) return gateAlgebraText((problem as { statement: string }).statement, payload.naturalInput ?? parseWorkingWithDisjunctions(working), working.text, cand);
     if (cand.classification === "verified") return withdrawAcceptance(cand, "natural-other", "downgraded-no-independent-evidence", "a natural-language working was accepted without any independent verifier");
     return { ...cand, acceptanceGate: gateRecord("natural-other", cand, { reconciliation: "the candidate did not accept" }) };
   }
   if (textProblem && Array.isArray(working) && working.every((x) => typeof x === "string")) {
     const text = (working as string[]).join("\n");
-    return gateAlgebraText((problem as { statement: string }).statement, parseNaturalWorking({ format: "natural", text }), text, cand);
+    return gateAlgebraText((problem as { statement: string }).statement, parseWorkingWithDisjunctions({ format: "natural", text } as NaturalWorkingInput), text, cand);
   }
   return gateStructured(cand, problem, working);
 }

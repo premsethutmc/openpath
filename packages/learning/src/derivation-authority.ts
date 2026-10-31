@@ -19,7 +19,7 @@ import { sha256Hex } from "./digest.ts";
 import { polynomialKey } from "./claim-grounding.ts";
 import type { Expr } from "./calculus-core";
 import { parseTree, certifyRewrite, replayRewriteCertificate, canon, show, isFrac, toExpr, sameUpToFractionRegrouping, REWRITE_REGISTRY_VERSION, type Tree, type RewriteCertificate } from "./rewrite-registry.ts";
-import { approximatesAllRoots, compareStatements, fullDomain, sameRational, provableSign, provablyNonzero, rationalSolutionSet, ratOf, showQ, variableOf, SOLUTION_SETS_VERSION, type Comparison, type Domain, type Rel, type Statement } from "./solution-sets.ts";
+import { approximatesAllRoots, compareStatements, fullDomain, pgcd, sameRational, provableSign, provablyNonzero, rationalSolutionSet, ratOf, showQ, variableOf, SOLUTION_SETS_VERSION, type Comparison, type Domain, type Rel, type Statement } from "./solution-sets.ts";
 
 // @2 (Milestone 2): zero-product@1 / square-root@1 solution reading, solve-jump refusal, loses-solution@1 refutation; @1 certificates no longer replay as current
 // @3 (grader generalization): solution-sets@1 validity (exact real solution sets, domain-aware), balance by any visible term / factor / denominator,
@@ -71,7 +71,7 @@ export interface TaskContext {
   /** the domain of the derivation (solution-sets@1): declared conditions, and every variable denominator of the task nonzero (the task is undefined there) */
   domain?: Domain | null; natural?: string[];
 }
-export type TaskResult = { ok: true; task: TaskContext } | { ok: false; reason: string };
+export type TaskResult = { ok: true; task: TaskContext } | { ok: false; reason: string; /** notation@2: the task text has more than one reading (structured, so a caller can say "ambiguous" rather than "unsupported") */ ambiguous?: boolean };
 const VERB = /^(?:expand and simplify|simplify fully|factori[sz]e fully|compute|evaluate|work out|find the value of|calculate|solve(?: for [a-z])?|find [a-z]|simplify|expand|factori[sz]e|factor|reduce|what is)\s*:?\s+/i;
 const V = (name: string): Expr => ({ kind: "variable", name } as Expr);
 function parseCondition(c: string): { text: string; a: SymbolicAssumption; v: string; rel: string; k: string } | null {
@@ -103,10 +103,23 @@ const varDenominators = (t: Tree): Tree[] => t.k !== "b" ? [] : [...varDenominat
 export function ambiguousNotation(text: string): boolean {
   const clauses = strip(text).split(/\s+(?:or|and)\s+|[,;]/i);
   if (clauses.length > 1) return clauses.some((c) => ambiguousNotation(c));
+  if (/(?:\d|(?<![A-Za-z])[A-Za-z])\s+\d/.test(clauses[0].trim())) return true;                           // notation@2: 2 3, x 2: a missing operator between a term and a numeral (23? 2·3? x·2? x^2?)
   const t = clauses[0].replace(/\s+/g, "");
   if (/\/(?:\d+(?:\.\d+)?|[A-Za-z])(?=[A-Za-z(])/.test(t)) return true;                                   // a/b x, a/b(…)
+  if (groupedDivisorThenFactor(t)) return true;                                                           // notation@2: 1/(x+3)(x-2): 1/((x+3)(x-2)) or (x-2)/(x+3)
+  if (/\^(?:-?[\dA-Za-z.]+|\([^()]*\))\^/.test(t)) return true;                                           // notation@2: 2^3^2: (2^3)^2 or 2^(3^2)
+  if (/\^-?\d+(?:\.\d+)?[A-Za-z]/.test(t)) return true;                                                  // notation@2: x^2x, 2^3x: exponent scope (x^(2x) or x^2·x)
+  if (/(?<![A-Za-z])[A-Za-z]\d/.test(t)) return true;                                                     // notation@2: x2 is neither 2x nor x^2
   if (/(?<![A-Za-z)\d.])\d+(?:\.\d+)?\^-?\d+(?:\.\d+)?\/\d/.test(t)) return true;                         // 9^1/2: (9^1)/2 or 9^(1/2)
   if (/\/(?:[^+\-*/=<>()≤≥]+|\([^()]*\))\//.test(t)) return true;                                          // a/b/c: (a/b)/c or a/(b/c)
+  return false;
+}
+/** a parenthesised divisor directly followed by an implicit factor: `/(…)(…)`, `/(…)x`, `/(…)2` */
+function groupedDivisorThenFactor(t: string): boolean {
+  for (let k = t.indexOf("/("); k >= 0; k = t.indexOf("/(", k + 1)) {
+    let i = k + 2, d = 1; while (i < t.length && d) { d += t[i] === "(" ? 1 : t[i] === ")" ? -1 : 0; i++; }
+    if (d === 0 && i < t.length && /[A-Za-z0-9(]/.test(t[i])) return true;
+  }
   return false;
 }
 /** the ONLY wrapper handling. Everything else fails closed with a reason. Declared conditions become carried assumptions; an unparseable condition refuses the task. */
@@ -122,7 +135,7 @@ export function normalizeTask(statement: string, extraNumerals: readonly string[
   const m = /\s*(?:,|\bfor\b|\bwhere\b|\bassuming\b|\bwith\b)\s+([A-Za-z]\s*(?:≠|!=|≥|>|≤|<)[^,]*?(?:(?:,|\s+and)\s*[A-Za-z]\s*(?:≠|!=|≥|>|≤|<)[^,]*?)*)$/i.exec(s);
   if (m) { conds.push(...m[1].split(/,|\s+and\s+/i)); s = s.slice(0, m.index); }
   s = s.replace(VERB, "").trim().replace(/=\s*$/, "").trim();
-  if (ambiguousNotation(s)) return { ok: false, reason: "task-unparsed" };
+  if (ambiguousNotation(s)) return { ok: false, reason: "task-unparsed", ambiguous: true };
   const parsed = conds.map(parseCondition); if (parsed.some((p) => !p)) return { ok: false, reason: "task-condition-unparsed" };
   if (/[A-Za-z]{3,}|\b(?:ln|pi|or|if)\b|[A-Za-z]+\s+[A-Za-z]+/i.test(s)) return { ok: false, reason: "task-unparsed" };   // words are not algebra: "a thing happened" must not parse as a product of letters
   // an inequality task: exactly one relation, no "="
@@ -213,6 +226,21 @@ export function isExpandedCollected(t: Tree): boolean {
   return ts.filter((x) => !hasVar(x.n)).length <= 1;
 }
 const isFactored = (t: Tree): boolean => { const fs = mulFlat(t); return fs.length >= 2 && fs.filter((f) => f.k === "b" && (f.op === "+" || f.op === "-") && hasVar(f)).length >= 1 && fs.every((f) => !hasVar(f) || isExpandedCollected(f) || (f.k === "b" && f.op === "^" && isExpandedCollected(f.l))); };
+/** completeness@2 (final form only, never validity): a quotient N/D of single-variable polynomials, each written expanded-and-collected or factored, in lowest terms
+ *  (gcd(N, D) is a constant over Q; a numeric D shares no factor with N's integer coefficients): (x - 3)/(x + 3), (x + 3)/2, 1/(x - 1)^2. */
+function lowestTermsQuotient(t: Tree): boolean {
+  if (t.k !== "b" || t.op !== "/") return false;
+  const shaped = (x: Tree) => !hasVar(x) ? isAtomT(x) || isNegAtom(x) : isExpandedCollected(x) || isFactored(x) || (x.k === "b" && x.op === "^" && x.r.k === "n" && isExpandedCollected(x.l));
+  if (!shaped(t.l) || !shaped(t.r) || !hasVar(t)) return false;
+  const v = variableOf([t]); if (!v) return false;
+  const N = ratOf(t.l, v)?.f, D = ratOf(t.r, v)?.f; if (!N || !D || N.den.length !== 1 || D.den.length !== 1) return false;
+  if (D.num.length === 1) {                                                   // numeric divisor: (x + 3)/2 is final, (2x + 6)/2 is not
+    if (!N.num.every((c) => c.d === 1n) || D.num[0].d !== 1n || D.num[0].n === 0n) return false;
+    const g = N.num.reduce((a, c) => gcd(a, c.n < 0n ? -c.n : c.n), D.num[0].n < 0n ? -D.num[0].n : D.num[0].n);
+    return g === 1n;
+  }
+  return pgcd(N.num, D.num).length === 1;
+}
 const polyShape = (t: Tree): boolean => isExpandedCollected(t) || isFactored(t) || (t.k === "b" && t.op === "/" && polyShape(t.l) && polyShape(t.r)) || (t.k === "b" && t.op === "^" && t.l.k === "b" && isExpandedCollected(t.l));
 
 // ------------------------------------------------------------------------------------------------ assumptions (carried, never invented)
@@ -717,6 +745,9 @@ export class DerivationSession {
     else if (relN === flipRel(relP) && canon(N[0]) === canon(P[1]) && canon(N[1]) === canon(P[0])) mv = { kind: "symmetry", parameter: null, parts: [], grades: [] };
     else if (relN === relP) { const rs = N.map((n, i) => (canon(n) === canon(P[i]) ? null : sideTo(task, P[i], n, i))); if (rs.every((r) => r !== undefined) && rs.every((r) => r === null || r.ok) && !rs.every((r) => r === null)) mv = { kind: "side-rewrite", parameter: null, parts: rs.flatMap((r) => (r?.part ? [r.part] : [])), grades: rs.flatMap((r) => r?.grades ?? []) }; }
     if (!mv) { const g = generalBalance(task, P, N, relP, relN); if (g && !g.implication) mv = g; }
+    // B2 bounded decomposition (two recognised steps, each replayable): one registered balance move, then symmetry (6 < 2x  →  3 < x  →  x > 3). The balance is certified on the
+    // swapped reading of the new line; the exact solution-set comparison below still decides equivalence.
+    if (!mv) { const g = generalBalance(task, P, [N[1], N[0]], relP, flipRel(relN)); if (g && !g.implication) mv = { ...g, kind: `${g.kind}+symmetry` }; }
     if (!mv) {
       // the step multiplies / divides by an expression whose sign is not established: refused (never assumed positive)
       const unknownSign = P.some((side) => mulFlat(side).concat(varDenominators(side)).some((k) => hasVar(k) && (["*", "/"] as const).some((op) => N.every((n, i) => !!sideTo(task, bin(op, grp(P[i]), grp(k)), n, i)))));
@@ -775,6 +806,18 @@ export function replayDerivationChain(statement: string, texts: string[], chain:
     if (v.certificate.digest !== digest) return bad("re-authorization produced a different certificate", i);
   }
   return { ok: true, reason: "replayed: every line re-authorized in the original task context", at: null };
+}
+
+/**
+ * B2 certificate compatibility (read-only, never migrates): the verification status of a STORED chain. A certificate of another version (e.g. derivation-certificate@2 issued by
+ * authority@2) is never replayed as, or relabelled to, the current version: it is reported as historical evidence whose original result stands as recorded but is not re-verified.
+ */
+export type ChainVerificationStatus = "replayable-current" | "historical-version-not-replayable" | "failed-replay";
+export function chainVerificationStatus(statement: string, texts: string[], chain: readonly { version?: unknown; versions?: { authority?: unknown } }[]): { status: ChainVerificationStatus; versions: string[]; reason: string } {
+  const versions = [...new Set(chain.map((c) => `${String(c?.version)} / ${String(c?.versions?.authority)}`))];
+  if (chain.some((c) => c?.version !== DERIVATION_CERTIFICATE_VERSION || c?.versions?.authority !== AUTHORITY_VERSION)) return { status: "historical-version-not-replayable", versions, reason: `issued under ${versions.join(", ")}; the current replayer is ${DERIVATION_CERTIFICATE_VERSION} / ${AUTHORITY_VERSION}, so the original result is preserved as historical evidence and not re-verified` };
+  const r = replayDerivationChain(statement, texts, chain as readonly DerivationCertificate[]);
+  return r.ok ? { status: "replayable-current", versions, reason: r.reason } : { status: "failed-replay", versions, reason: r.reason };
 }
 
 /** convenience: judge a whole chain; the first false line is `invalid` even when an earlier line is unauthorized */
@@ -924,7 +967,7 @@ export function assessChain(statement: string, texts: string[]): ChainVerdict {
       if (lt) {
         const bound = (t: Tree) => (task.bindings && Object.keys(task.bindings).length ? substituteVars(t, task.bindings) : t);
         const a = evalTree(bound(task.trees[0])), b = evalTree(bound(lt));
-        const simplified = !hasVar(lt) ? (isAtomT(lt) || isNegAtom(lt)) : isExpandedCollected(lt) || isFactored(lt);
+        const simplified = !hasVar(lt) ? (isAtomT(lt) || isNegAtom(lt)) : isExpandedCollected(lt) || isFactored(lt) || lowestTermsQuotient(lt);
         completeness = simplified ? "complete" : "incomplete";
         if (simplified) finalAnswer = { present: true, claimed: show(lt), correct: a && b ? same(a, b) : (() => { const k = checkSymbolicStep(toExpr(task.trees[0]), toExpr(lt), task.assumptions); return k.ok ? true : k.outcome === "invalid" ? false : null; })(), reason: "compared with the task expression" };
       }
