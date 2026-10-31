@@ -111,4 +111,25 @@ describe("contract safety", () => {
     expect(readSubmission("3x = 15\nx = 5", true)).toEqual({ response: "x = 5", working: ["3x = 15", "x = 5"] });
     expect(readSubmission("  ", true)).toEqual({ response: "", working: [] });
   });
+  test("invalid working never becomes verified method evidence, even when the final answer is correct", () => {
+    const ref: string[][] = [["3x = 16", "x = 5"], ["3x = 15", "3x = 16", "x = 5"], ["3x = 14", "x = 5"], ["x = 15/3", "3x = 16", "x = 5"], ["3x = 19 + 4", "x = 5"], ["x + 3 = 8", "x = 5"]];
+    for (const working of ref) {
+      const r = gradeRequest({ id: REF, response: "x = 5", working });
+      expect(r.verdict).toBe("correct");
+      expect(r.decision!.working!.methodEvidence).not.toBe("method-verified");
+      expect(["invalid", "unsupported"]).toContain(r.decision!.working!.status);
+    }
+    // every generated ax + b = c question: a false intermediate line (a·x = c − b + 1) followed by the right answer
+    let n = 0;
+    for (let a = 2; a <= 9; a++) for (let b = 1; b <= 12; b += 3) for (let x = 1; x <= 9; x += 2) {
+      const id = `gen:lin:${a},${b},${x}`, c = a * x + b;
+      const r = gradeRequest({ id, response: `x = ${x}`, working: [`${a}x = ${c - b + 1}`, `x = ${x}`] });
+      expect(r.verdict).toBe("correct");
+      const w = r.decision!.working!;
+      expect([w.status, w.methodEvidence, w.firstInvalid?.index]).toEqual(["invalid", "method-false-step", 0]);
+      expect(w.replayedLines).toBe(0);
+      n++;
+    }
+    expect(n).toBe(160);
+  });
 });
