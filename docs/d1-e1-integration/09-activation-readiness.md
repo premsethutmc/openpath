@@ -1,6 +1,8 @@
 # 9. Activation-readiness recommendation
 
-## Decision on this integration: see the end of doc 7 and the report
+## Decision on this integration: **PASS — INTEGRATED (SHADOW)**
+
+This is based on the final regression on `2c221bd` (doc 7): no introduced failures, 0 false accepts, unchanged production decisions, all 20 journeys passing, and certificate history preserved.
 
 The integration connects D1's trusted, server-recorded working verdicts to E1's shadow sub-skill evidence. One evidence contract (doc 2) keeps these apart:
 
