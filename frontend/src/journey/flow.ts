@@ -12,6 +12,8 @@ import { feedbackFromDecision, questionSpec, teachingSpec, teachingSteps } from 
 import { SliceSession } from "./session";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
 import type { LearningActivity } from "../../../packages/learning/src/records";
+/** The reason for the explanation, and what may be said about its review (explanation-review@1: never "approved" unless it is). */
+const withLabel = (ms: { reason: string; contentReview?: { label: string } }) => `${ms.reason} ${ms.contentReview?.label ?? "Demonstration: this explanation has not been approved by an educator."}`;
 
 export type Stage = "question" | "feedback" | "teaching" | "summary";
 export interface Frame { stage: Stage; spec: RenderSpec; qid: string | null; strategyId: string | null; revealed?: number; activity?: LearningActivity; phase?: string }
@@ -99,7 +101,7 @@ export class SliceFlow {
   }
   private teach(ms: ModuleState) {
     this.ms = ms; this.stage = "teaching"; this.revealed = 1; this.phase = "chapter";
-    this.spec = teachingSpec(this.qid, ms.strategy!, 1, { message: ms.strategy!.title, detail: ms.reason, tone: "encouraging" });
+    this.spec = teachingSpec(this.qid, ms.strategy!, 1, { message: ms.strategy!.title, detail: withLabel(ms), tone: "encouraging" });
   }
   private stop(phase: string, reason: string, why: string | null) {
     this.stage = "summary"; this.phase = phase; this.ended = { phase, reason, why };
@@ -132,7 +134,7 @@ export class SliceFlow {
     if (this.stage === "feedback" && this.opts.entry === "practice" && this.frames.filter((f) => f.stage === "feedback").length === 1 && this.session.replies[0]?.verdict === "incorrect" && familyOf(this.startQid)) this.recovering = this.startQid;
     if (this.stage === "teaching") {
       const st = this.ms!.strategy!;
-      if (this.revealed < teachingSteps(st)) { this.revealed++; this.spec = teachingSpec(this.qid, st, this.revealed, { message: st.title, detail: this.ms!.reason, tone: "encouraging" }); this.push(); return this.spec; }
+      if (this.revealed < teachingSteps(st)) { this.revealed++; this.spec = teachingSpec(this.qid, st, this.revealed, { message: st.title, detail: withLabel(this.ms!), tone: "encouraging" }); this.push(); return this.spec; }
       this.session.taught(this.ms!);
     }
     for (let guard = 0; guard < 8; guard++) {

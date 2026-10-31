@@ -20,6 +20,7 @@ import { explainStep, exposureKey, FAMILIES, parseProblem, problemOf, show, type
 import scopeData from "../../../content/learning/showcase-grade10.v1.json";
 import exemptionData from "../../../content/learning/teaching-contract-exemptions.v1.json";
 import type { Representation, TeachRole } from "./family-kit";
+import { chapterExplanation, contentEligibility } from "./explanation-review";
 import { familyStepExplanation, teachingPresentationFrom, teachingScopeFor, type TeachingVisual } from "./teaching-presentation";
 
 /** The Grade 10 showcase scope (CBSE and Tamil Nadu lessons) and its curated lessons (stage 2). */
@@ -399,7 +400,15 @@ export function alignedPractice(module: Module, ids: string[]): string[] {
  *  the sections are built from the candidates in their given order, and practice is the same candidates aligned to what those
  *  sections taught, so reordering practice never changes what is taught. */
 export function teachingLesson(module: Module, candidates: string[]) {
-  return { blocks: lessonBlocks(module, candidates), practice: alignedPractice(module, candidates), candidates };
+  // explanation-review@1: a lesson page shows only the concept section and explanations cleared for the current teaching mode (a
+  // general lesson: no misconception is claimed about the reader); blocked, unregistered or changed-since-review content is left out
+  const req = { competency: module.competency, usage: "lesson" as const };
+  const chapter = contentEligibility(module, chapterExplanation(module), req);
+  const kept = module.strategies.map((s) => ({ s, e: contentEligibility(module, s, req) })).filter((x) => x.e.eligible);
+  const shown = { ...module, chapter: chapter.eligible ? module.chapter : [], strategies: kept.map((x) => x.s) };
+  const all = [...(chapter.eligible ? [chapter] : []), ...kept.map((x) => x.e)];
+  const contentLabel = all.length && all.every((e) => e.educatorApproved) ? "Approved by an educator for supervised evaluation." : "Demonstration: these explanations have not been approved by an educator.";
+  return { blocks: lessonBlocks(shown, candidates), practice: alignedPractice(shown, candidates), candidates, contentLabel };
 }
 
 /** Platform-wide violation counts (the ratchet baseline): by rule, and by module. */

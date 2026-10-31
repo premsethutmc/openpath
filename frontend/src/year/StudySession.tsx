@@ -11,7 +11,8 @@ import {Lesson,Module,type Ctx,STATUS_WORD} from './Learn';
 import {useResume} from './resume';
 import {moduleFor} from '../../../packages/learning/src/content';
 import {diagnose} from '../../../packages/learning/src/diagnostic';
-import {orderStrategies} from '../../../packages/learning/src/intervention';
+import {contentReviewOf,establishedIds,failsChecks,orderStrategies} from '../../../packages/learning/src/intervention';
+import {chapterExplanation,contentEligibility} from '../../../packages/learning/src/explanation-review';
 import {graph} from '../../../packages/learning/src/graph';
 import {reviewOf} from '../../../packages/learning/src/review';
 import {REVIEW_WORD} from '../../../packages/learning/src/dashboard';
@@ -21,14 +22,18 @@ function StudyBlock({competency,ctx,resumeKey,onNext}:{competency:string;ctx:Ctx
  const m=moduleFor(competency);
  // The shared engine supplies strategy ordering; no new teaching selection or mathematical scoring policy.
  const [strategyId]=useResume(`${resumeKey}:strategy`,m?orderStrategies(m,diagnose(m,ctx.records.attempts),ctx.records)[0]?.id:null);
- const strategy=m?.strategies.find(s=>s.id===strategyId);
+ // explanation-review@1: a saved choice is checked again now (it may have been blocked, or the mode changed, since it was saved)
+ const chosen=m?.strategies.find(s=>s.id===strategyId);
+ const review=m&&chosen?contentReviewOf(m,chosen,establishedIds(competency,ctx.records)):null;
+ const strategy=m&&chosen&&!failsChecks(m,chosen)&&review?.eligible?chosen:undefined;
+ const chapterOk=!!m&&contentEligibility(m,chapterExplanation(m),{competency:m.competency,usage:'lesson'}).eligible;
  const [intro,setIntro]=useResume(`${resumeKey}:intro`,false);
  const alreadyTaught=ctx.records.teaching.some(t=>t.competency===competency&&t.strategy===strategyId);
  const verified=ctx.evidence(competency).status==='verified';
  if(!m)return <><p>This module is unavailable.</p><button onClick={onNext}>Next planned competency</button></>;
  if(!intro&&!alreadyTaught&&!verified&&strategy){
-  const screens=[...m.chapter,...strategy.screens];
-  return <section aria-label="Concept teaching"><h2>{graph.get(competency).name}</h2><Lesson key={strategy.id} s={{title:strategy.title,screens}} resumeKey={`${resumeKey}:introduction-screen`} saving={ctx.saving} onDone={async()=>{if(await ctx.teach(competency,strategy.id,'session-concept'))setIntro(true);}}/></section>;
+  const screens=[...(chapterOk?m.chapter:[]),...strategy.screens];
+  return <section aria-label="Concept teaching"><h2>{graph.get(competency).name}</h2><p className="small muted" role="note" data-content-review={review?.status}>{review?.label}</p><Lesson key={strategy.id} s={{title:strategy.title,screens}} resumeKey={`${resumeKey}:introduction-screen`} saving={ctx.saving} onDone={async()=>{if(await ctx.teach(competency,strategy.id,'session-concept'))setIntro(true);}}/></section>;
  }
  return <Module competency={competency} ctx={ctx} resumeKey={resumeKey} sessionMode onExit={onNext}/>;
 }

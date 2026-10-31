@@ -43,7 +43,10 @@ export function teachingSpec(qid: string, strategy: Strategy, revealed: number, 
   // one revealable step per line of the selected explanation: its text lines, then its worked-math lines (all verbatim from the strategy)
   const steps: WorkingStep[] = strategy.screens.flatMap((s: Screen, i) => [
     ...s.text.map((t, j) => ({ id: `${strategy.id}:${i}:t${j}`, description: j === 0 ? `${s.title} — ${t}` : t, math: { plain: "" }, verified: false as const, badge: "explanation" })),
-    ...(s.math ?? []).map((m, j) => ({ id: `${strategy.id}:${i}:m${j}`, description: "Worked line", math: { plain: m, latex: m }, verified: false as const, badge: "explanation" })),
+    // a worked line that is a sentence ("Not 14/45, but −14/45", "Undo the adding: take away") is shown as text: typeset, it loses its spaces
+    ...(s.math ?? []).map((m, j) => (/[A-Za-z]{2,}/.test(m)
+      ? { id: `${strategy.id}:${i}:m${j}`, description: m, math: { plain: "" }, verified: false as const, badge: "explanation" }
+      : { id: `${strategy.id}:${i}:m${j}`, description: "Worked line", math: { plain: m, latex: m }, verified: false as const, badge: "explanation" })),
   ]);
   const base = questionSpec(qid, { guide, lead: strategy.title });
   return {

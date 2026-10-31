@@ -28,6 +28,9 @@ export const options = (overrides = {}) => ({
   define: {
     __OPENPATH_API__: JSON.stringify(apiBase),
     __OPENPATH_EMBED__: JSON.stringify(process.argv.includes("--embed")),
+    // explanation-review@1 (read in packages/learning/src/explanation-review.ts): OPENPATH_TEACHING_MODE=supervised-evaluation builds an
+    // app that shows educator-approved explanations only
+    __OPENPATH_TEACHING_MODE__: JSON.stringify(process.env.OPENPATH_TEACHING_MODE === "supervised-evaluation" ? "supervised-evaluation" : "demonstration"),
     "process.env.NODE_ENV": '"production"',
   },
   logLevel: "info",
