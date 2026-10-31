@@ -10,7 +10,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { moduleFor, question } from "../../packages/learning/src/content.ts";
 import { problemOf } from "../../packages/learning/src/families.ts";
 import { graph } from "../../packages/learning/src/graph.ts";
-import { contentHash, currentRevision, explanationId, explanationRegistry, isMisconceptionSpecific } from "../../packages/learning/src/explanation-review.ts";
+import { chapterExplanation, contentHash, currentRevision, explanationId, explanationRegistry, isMisconceptionSpecific } from "../../packages/learning/src/explanation-review.ts";
 import { lessonBlocks, teachingEligibility } from "../../packages/learning/src/teaching-contract.ts";
 
 const args = process.argv.slice(2);
@@ -36,7 +36,7 @@ function findCompetency(short: string): string | null {
   for (const e of explanationRegistry().entries) if (e.competency.endsWith(`.${short}`) || e.competency === short) return e.competency;
   return null;
 }
-const ids = [...new Set([...(idsArg.length ? idsArg : [...triggers.keys()]), ...CORRECTED])].sort();
+const ids = idsArg.length ? idsArg : [...new Set([...triggers.keys(), ...CORRECTED])].sort();
 
 const q = (id: string) => { try { const x = question(id); return `${x.prompt} — answer: ${x.answer}`; } catch { return `${id} (not found)`; } };
 const lines: string[] = [
@@ -49,7 +49,7 @@ const lines: string[] = [
 ];
 for (const id of ids) {
   const [cid, sid] = id.split("#");
-  const m = moduleFor(cid), s = m?.strategies.find((x) => x.id === sid);
+  const m = moduleFor(cid), s = sid === "chapter" && m ? chapterExplanation(m) : m?.strategies.find((x) => x.id === sid);
   lines.push(`## ${id}`, "");
   if (!m || !s) { lines.push("Not found in the current content.", ""); continue; }
   const cur = currentRevision(m, s);

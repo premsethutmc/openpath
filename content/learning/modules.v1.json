@@ -720,6 +720,734 @@
     "qd-r2"
    ],
    "probes": []
+  },
+  {
+   "competency": "MATH.algebra.linear-equations",
+   "title": "Solve linear equations",
+   "chapter": [
+    {
+     "title": "What an equation says",
+     "text": [
+      "An equation says that two amounts are equal. 2x + 5 = 17 means: 2 lots of a number, plus 5, is the same amount as 17.",
+      "Think of a balance. If you do the same thing to both sides, it stays level. That is why each step of solving keeps the equation true, and why the answer can be checked by putting it back in."
+     ],
+     "role": "concept",
+     "instance": "gen:lin:2,5,6"
+    },
+    {
+     "title": "Choosing the equation that models a situation",
+     "text": [
+      "An equation is the story written in symbols: the unknown is a letter, and each action in the story becomes an operation on it, in the same order.",
+      "Name the unknown x. Follow the story: what multiplies x, what is added or taken away, and what the result equals. Check by putting a guessed number for x into both the story and the equation."
+     ],
+     "math": [
+      "Anu thinks of a number x. Anu multiplies it by 8 and then adds 16. The result is 120. Which equation describes this situation?",
+      "Let x stand for the unknown number in the story",
+      "Write the story in order: 8 times x, then add 16, equals 120: 8x + 16 = 120"
+     ]
+    },
+    {
+     "title": "Forming and solving a linear equation from a word problem",
+     "text": [
+      "Call the number you are asked for x; the story then tells you how to build the total from x, and that is the equation.",
+      "Write each quantity in terms of x, add them as the story says, set the result equal to the total, then undo: take away the constant, divide by the coefficient. Check in the story."
+     ],
+     "math": [
+      "The length of a rectangle is 7 cm more than its width, and its perimeter is 78 cm. Form an equation and find the width, in cm.",
+      "Let x be the number asked for and write the equation: 2(x + x + 7) = 78, so 4x + 14 = 78",
+      "Take 14 from both sides: 4x = 64",
+      "Divide by 4: x = 16"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:lin:3,3,2",
+    "gen:lin:3,9,8",
+    "gen:lin:3,9,2"
+   ],
+   "strategies": [
+    {
+     "id": "balance",
+     "title": "Keep the balance",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Do the same to both sides",
+       "text": [
+        "In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance."
+       ],
+       "math": [
+        "x − 4 = 11",
+        "x − 4 + 4 = 11 + 4",
+        "Add 4 to both sides: − 4 + 4 is 0.",
+        "x = 15",
+        "Check: 15 − 4 = 11"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:1,4,15"
+      },
+      {
+       "title": "Undo × with ÷",
+       "text": [
+        "5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5."
+       ],
+       "math": [
+        "5x = 35",
+        "5x ÷ 5 = 35 ÷ 5",
+        "Divide both sides by 5.",
+        "x = 7",
+        "Check: 5 × 7 = 35"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:2,5,7"
+      },
+      {
+       "title": "Two steps: undo the last one first",
+       "text": [
+        "In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides."
+       ],
+       "math": [
+        "3x + 4 = 19",
+        "The two sides are equal: 3 lots of x, plus 4, is the same amount as 19.",
+        "3x + 4 − 4 = 19 − 4",
+        "Take 4 from both sides. Doing the same to both sides keeps them equal.",
+        "3x = 15",
+        "4 − 4 = 0, so only 3x is left on the left.",
+        "3x ÷ 3 = 15 ÷ 3",
+        "3x means 3 × x. Divide the whole of each side by 3.",
+        "x = 5",
+        "x is on its own: this is the solution.",
+        "Check: 3 × 5 + 4 = 19"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lin:3,4,5"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:3,4,5"
+      }
+     ],
+     "guided": "gen:lin:7,5,10",
+     "check": "gen:lin:2,15,1"
+    },
+    {
+     "id": "two_steps",
+     "title": "Undo one step at a time",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What you are finding",
+       "text": [
+        "You want the number x that makes 2x + 5 = 17 true.",
+        "2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:2,5,6"
+      },
+      {
+       "title": "Solve 2x + 5 = 17",
+       "text": [
+        "Each line does the same to both sides, so the two sides stay equal and the solution does not change."
+       ],
+       "math": [
+        "2x + 5 = 17",
+        "The two sides are equal: 2 lots of x, plus 5, is the same amount as 17.",
+        "2x + 5 − 5 = 17 − 5",
+        "Take 5 from both sides. Doing the same to both sides keeps them equal.",
+        "2x = 12",
+        "5 − 5 = 0, so only 2x is left on the left.",
+        "2x ÷ 2 = 12 ÷ 2",
+        "2x means 2 × x. Divide the whole of each side by 2.",
+        "x = 6",
+        "x is on its own: this is the solution.",
+        "Check: 2 × 6 + 5 = 17"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lin:2,5,6"
+      },
+      {
+       "title": "Check in the original equation",
+       "text": [
+        "Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:2,5,6"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:2,5,6"
+      }
+     ],
+     "guided": "gen:lin:6,17,3",
+     "check": "gen:lin:5,6,5"
+    },
+    {
+     "id": "both_sides",
+     "title": "x on both sides",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Why you may move x's",
+       "text": [
+        "In 3x + 4 = x + 12 both sides contain x. Taking x from both sides keeps them equal, just as taking a number from both sides does.",
+        "Every line changes both sides in the same way, so every line has the same solution as the first."
+       ],
+       "role": "strategy",
+       "instance": "gen:lboth:3,4,1,4"
+      },
+      {
+       "title": "Solve 3x + 4 = x + 12",
+       "text": [
+        "Collect the x's on the side with more of them, then the numbers on the other side."
+       ],
+       "math": [
+        "3x + 4 = x + 12",
+        "There are x's on both sides. Collect them on the side with more x's.",
+        "3x + 4 − x = x + 12 − x",
+        "Take x from both sides. It is the same amount on each side, so they stay equal.",
+        "2x + 4 = 12",
+        "3x − x = 2x, and the x's on the right are gone.",
+        "2x + 4 − 4 = 12 − 4",
+        "Take 4 from both sides, so the x term is on its own.",
+        "2x = 8",
+        "2x means 2 × x.",
+        "x = 8 ÷ 2 = 4",
+        "Divide both sides by 2.",
+        "Check: 3 × 4 + 4 = 16 and 4 + 12 = 16"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lboth:3,4,1,4"
+      },
+      {
+       "title": "Check both sides",
+       "text": [
+        "Put your answer into both sides of the original equation: the two sides must give the same number."
+       ],
+       "role": "strategy",
+       "instance": "gen:lboth:3,4,1,4"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lboth:3,4,1,4"
+      }
+     ],
+     "guided": "gen:lboth:7,15,3,5",
+     "check": "gen:lboth:8,3,4,3"
+    },
+    {
+     "id": "brackets",
+     "title": "Multiply out the bracket first",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What the bracket means",
+       "text": [
+        "3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.",
+        "Multiply out first. Then it is an equation with x on both sides."
+       ],
+       "role": "strategy",
+       "instance": "gen:lbrk:3,-2,2,11"
+      },
+      {
+       "title": "Solve 3(x − 2) = 2x + 5",
+       "text": [
+        "Multiply out, collect the x's, then the numbers, doing the same to both sides each time."
+       ],
+       "math": [
+        "3(x − 2) = 2x + 5",
+        "3(x − 2) means 3 lots of (x − 2).",
+        "3x − 6 = 2x + 5",
+        "Multiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.",
+        "3x − 6 − 2x = 2x + 5 − 2x",
+        "Take 2x from both sides, so the x's are on one side.",
+        "x − 6 = 5",
+        "3x − 2x = x.",
+        "x − 6 + 6 = 5 + 6",
+        "Add 6 to both sides, so the x term is on its own.",
+        "x = 11",
+        "x is on its own.",
+        "Check: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lbrk:3,-2,2,11"
+      },
+      {
+       "title": "Check with the bracket",
+       "text": [
+        "Check in the original equation, with the bracket: work out the bracket first, then multiply."
+       ],
+       "role": "strategy",
+       "instance": "gen:lbrk:3,-2,2,11"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lbrk:3,-2,2,11"
+      }
+     ],
+     "guided": "gen:lbrk:5,-5,1,10",
+     "check": "gen:lbrk:4,4,2,2"
+    },
+    {
+     "id": "fix_finish",
+     "title": "Finish by dividing",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 2x + 17 = 41, one wrong answer is 24.",
+        "17 was taken away but the 2 was not divided out: 2x = 24 means x = 24 ÷ 2.",
+        "x is not on its own until the number multiplying it has been divided out, on both sides."
+       ],
+       "math": [
+        "Not 24, but 12"
+       ],
+       "role": "misconception",
+       "instance": "gen:lin:2,17,12"
+      },
+      {
+       "title": "Solve 2x + 17 = 41 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "2x + 17 = 41",
+        "The two sides are equal: 2 lots of x, plus 17, is the same amount as 41.",
+        "2x + 17 − 17 = 41 − 17",
+        "Take 17 from both sides. Doing the same to both sides keeps them equal.",
+        "2x = 24",
+        "17 − 17 = 0, so only 2x is left on the left.",
+        "2x ÷ 2 = 24 ÷ 2",
+        "2x means 2 × x. Divide the whole of each side by 2.",
+        "x = 12",
+        "x is on its own: this is the solution.",
+        "Check: 2 × 12 + 17 = 41"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lin:2,17,12"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:2,17,12"
+      }
+     ],
+     "guided": "gen:lin:9,20,9",
+     "check": "gen:lin:3,3,4"
+    },
+    {
+     "id": "fix_inverse",
+     "title": "Undo with the opposite operation",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 4x + 16 = 64, one wrong answer is 20.",
+        "16 was added to 64 instead of taken away: 4x = 64 + 16. To remove the + 16, take 16 from both sides: 4x = 64 − 16.",
+        "To undo + a number, take it away from both sides; to undo × a number, divide both sides by it."
+       ],
+       "math": [
+        "Not 20, but 12"
+       ],
+       "role": "misconception",
+       "instance": "gen:lin:4,16,12"
+      },
+      {
+       "title": "Solve 4x + 16 = 64 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "4x + 16 = 64",
+        "The two sides are equal: 4 lots of x, plus 16, is the same amount as 64.",
+        "4x + 16 − 16 = 64 − 16",
+        "Take 16 from both sides. Doing the same to both sides keeps them equal.",
+        "4x = 48",
+        "16 − 16 = 0, so only 4x is left on the left.",
+        "4x ÷ 4 = 48 ÷ 4",
+        "4x means 4 × x. Divide the whole of each side by 4.",
+        "x = 12",
+        "x is on its own: this is the solution.",
+        "Check: 4 × 12 + 16 = 64"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lin:4,16,12"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:4,16,12"
+      }
+     ],
+     "guided": "gen:lin:2,13,7",
+     "check": "gen:lin:3,9,1"
+    },
+    {
+     "id": "fix_divide_all",
+     "title": "Divide the whole side",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 8x + 8 = 72, one wrong answer is 1.",
+        "Only part of the left side was divided by 8: 8x + 8 divided by 8 is x + 1, not x + 8. Divide every term, or take away 8 first.",
+        "Dividing both sides is allowed, but it must divide every term of each side."
+       ],
+       "math": [
+        "Not 1, but 8"
+       ],
+       "role": "misconception",
+       "instance": "gen:lin:8,8,8"
+      },
+      {
+       "title": "Solve 8x + 8 = 72 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "8x + 8 = 72",
+        "The two sides are equal: 8 lots of x, plus 8, is the same amount as 72.",
+        "8x + 8 − 8 = 72 − 8",
+        "Take 8 from both sides. Doing the same to both sides keeps them equal.",
+        "8x = 64",
+        "8 − 8 = 0, so only 8x is left on the left.",
+        "8x ÷ 8 = 64 ÷ 8",
+        "8x means 8 × x. Divide the whole of each side by 8.",
+        "x = 8",
+        "x is on its own: this is the solution.",
+        "Check: 8 × 8 + 8 = 72"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lin:8,8,8"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:8,8,8"
+      }
+     ],
+     "guided": "gen:lin:2,16,2",
+     "check": "gen:lin:5,10,2"
+    },
+    {
+     "id": "fix_one_side",
+     "title": "Change both sides",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 6x + 5 = 5x + 15, one wrong answer is 15.",
+        "5 was taken away on the left but not on the right. Whatever is done to one side must be done to the other: x = 15 − 5.",
+        "An equation stays true only if both sides change in the same way."
+       ],
+       "math": [
+        "Not 15, but 10"
+       ],
+       "role": "misconception",
+       "instance": "gen:lboth:6,5,5,10"
+      },
+      {
+       "title": "Solve 6x + 5 = 5x + 15 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "6x + 5 = 5x + 15",
+        "There are x's on both sides. Collect them on the side with more x's.",
+        "6x + 5 − 5x = 5x + 15 − 5x",
+        "Take 5x from both sides. It is the same amount on each side, so they stay equal.",
+        "x + 5 = 15",
+        "6x − 5x = x, and the x's on the right are gone.",
+        "x + 5 − 5 = 15 − 5",
+        "Take 5 from both sides, so the x term is on its own.",
+        "x = 10",
+        "x is on its own.",
+        "Check: 6 × 10 + 5 = 65 and 5 × 10 + 15 = 65"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lboth:6,5,5,10"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lboth:6,5,5,10"
+      }
+     ],
+     "guided": "gen:lboth:4,18,2,4",
+     "check": "gen:lboth:5,20,4,4"
+    },
+    {
+     "id": "fix_sign_move",
+     "title": "Taking away an x term",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 3x + 1 = 2x + 11, one wrong answer is 2.",
+        "2x was moved to the left without changing its sign. Taking 2x from both sides leaves x on the left, not 5x.",
+        "Moving a term to the other side means taking it from both sides, so its sign changes."
+       ],
+       "math": [
+        "Not 2, but 10"
+       ],
+       "role": "misconception",
+       "instance": "gen:lboth:3,1,2,10"
+      },
+      {
+       "title": "Solve 3x + 1 = 2x + 11 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "3x + 1 = 2x + 11",
+        "There are x's on both sides. Collect them on the side with more x's.",
+        "3x + 1 − 2x = 2x + 11 − 2x",
+        "Take 2x from both sides. It is the same amount on each side, so they stay equal.",
+        "x + 1 = 11",
+        "3x − 2x = x, and the x's on the right are gone.",
+        "x + 1 − 1 = 11 − 1",
+        "Take 1 from both sides, so the x term is on its own.",
+        "x = 10",
+        "x is on its own.",
+        "Check: 3 × 10 + 1 = 31 and 2 × 10 + 11 = 31"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lboth:3,1,2,10"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lboth:3,1,2,10"
+      }
+     ],
+     "guided": "gen:lboth:4,5,3,7",
+     "check": "gen:lboth:7,16,5,6"
+    },
+    {
+     "id": "fix_number_sign",
+     "title": "Taking away a number",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 5x + 18 = x + 22, one wrong answer is 10.",
+        "18 was moved to the right without changing its sign. To remove + 18 from the left, take 18 from both sides: 22 − 18, not 22 + 18.",
+        "Moving a number to the other side means taking it from both sides, so its sign changes."
+       ],
+       "math": [
+        "Not 10, but 1"
+       ],
+       "role": "misconception",
+       "instance": "gen:lboth:5,18,1,1"
+      },
+      {
+       "title": "Solve 5x + 18 = x + 22 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "5x + 18 = x + 22",
+        "There are x's on both sides. Collect them on the side with more x's.",
+        "5x + 18 − x = x + 22 − x",
+        "Take x from both sides. It is the same amount on each side, so they stay equal.",
+        "4x + 18 = 22",
+        "5x − x = 4x, and the x's on the right are gone.",
+        "4x + 18 − 18 = 22 − 18",
+        "Take 18 from both sides, so the x term is on its own.",
+        "4x = 4",
+        "4x means 4 × x.",
+        "x = 4 ÷ 4 = 1",
+        "Divide both sides by 4.",
+        "Check: 5 × 1 + 18 = 23 and 1 + 22 = 23"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lboth:5,18,1,1"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lboth:5,18,1,1"
+      }
+     ],
+     "guided": "gen:lboth:6,13,4,11",
+     "check": "gen:lboth:8,18,7,8"
+    },
+    {
+     "id": "fix_distribution",
+     "title": "Multiply every term in the bracket",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 6(x + 3) = 5x + 26, one wrong answer is 23.",
+        "Only x was multiplied by 6. The 6 multiplies every term in the bracket: 6(x + 3) = 6x + 18, not 6x + 3.",
+        "The number outside a bracket multiplies each term inside it."
+       ],
+       "math": [
+        "Not 23, but 8"
+       ],
+       "role": "misconception",
+       "instance": "gen:lbrk:6,3,5,8"
+      },
+      {
+       "title": "Solve 6(x + 3) = 5x + 26 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "6(x + 3) = 5x + 26",
+        "6(x + 3) means 6 lots of (x + 3).",
+        "6x + 18 = 5x + 26",
+        "Multiply out the bracket first: 6 × x = 6x and 6 × 3 = 18. Both terms inside are multiplied.",
+        "6x + 18 − 5x = 5x + 26 − 5x",
+        "Take 5x from both sides, so the x's are on one side.",
+        "x + 18 = 26",
+        "6x − 5x = x.",
+        "x + 18 − 18 = 26 − 18",
+        "Take 18 from both sides, so the x term is on its own.",
+        "x = 8",
+        "x is on its own.",
+        "Check: 6 × (8 + 3) = 66 and 5 × 8 + 26 = 66"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lbrk:6,3,5,8"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lbrk:6,3,5,8"
+      }
+     ],
+     "guided": "gen:lbrk:5,-6,3,3",
+     "check": "gen:lbrk:4,3,3,4"
+    },
+    {
+     "id": "fix_bracket_sign",
+     "title": "Keep the sign in the bracket",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "What went wrong",
+       "text": [
+        "In 2(x − 1) = x + 12, one wrong answer is 10.",
+        "The sign was lost when multiplying out: 2 × −1 = −2, so 2(x − 1) = 2x − 2.",
+        "Multiply the sign too: a positive number times a negative number is negative."
+       ],
+       "math": [
+        "Not 10, but 14"
+       ],
+       "role": "misconception",
+       "instance": "gen:lbrk:2,-1,1,14"
+      },
+      {
+       "title": "Solve 2(x − 1) = x + 12 correctly",
+       "text": [
+        "Every line does the same to both sides; the check uses the original equation."
+       ],
+       "math": [
+        "2(x − 1) = x + 12",
+        "2(x − 1) means 2 lots of (x − 1).",
+        "2x − 2 = x + 12",
+        "Multiply out the bracket first: 2 × x = 2x and 2 × −1 = −2. Both terms inside are multiplied.",
+        "2x − 2 − x = x + 12 − x",
+        "Take x from both sides, so the x's are on one side.",
+        "x − 2 = 12",
+        "2x − x = x.",
+        "x − 2 + 2 = 12 + 2",
+        "Add 2 to both sides, so the x term is on its own.",
+        "x = 14",
+        "x is on its own.",
+        "Check: 2 × (14 − 1) = 26 and 14 + 12 = 26"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lbrk:2,-1,1,14"
+      },
+      {
+       "title": "Your turn",
+       "text": [
+        "Now solve one on your own. Check your answer in the original equation."
+       ],
+       "role": "strategy",
+       "instance": "gen:lbrk:2,-1,1,14"
+      }
+     ],
+     "guided": "gen:lbrk:6,-6,2,12",
+     "check": "gen:lbrk:6,-5,3,9"
+    }
+   ],
+   "practice": [
+    "gen:lin:2,17,11",
+    "gen:lin:7,9,11:mc",
+    "gen:lin:7,18,9",
+    "gen:auleq:1,2,9,10",
+    "gen:aulwp:1,5,2,7",
+    "gen:lboth:9,7,8,2",
+    "gen:lbrk:5,-4,2,1"
+   ],
+   "transfer": [
+    "gen:lin:2,4,7:mc",
+    "gen:aulwp:1,5,2,9:w"
+   ],
+   "retention": [
+    "gen:lin:6,17,2",
+    "gen:auleq:2,9,19,11"
+   ],
+   "probes": []
   }
  ],
  "questions": [

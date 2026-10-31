@@ -3651,174 +3651,6 @@
    }
   },
   {
-   "competency": "MATH.algebra.linear-equations",
-   "title": "Solving ax + b = c",
-   "chapter": [
-    {
-     "title": "Solving ax + b = c",
-     "text": [
-      "An equation is a balance: do the same to both sides and it stays true."
-     ],
-     "math": [
-      "Solve 6x + 17 = 35. What is x?",
-      "Take 17 from both sides: 18",
-      "Divide by 6: 18 ÷ 6 = 3"
-     ],
-     "tip": "17 was taken away but the 6 was not divided out: 6x = 18 means x = 18 ÷ 6.",
-     "role": "concept",
-     "instance": "gen:lin:6,17,3"
-    },
-    {
-     "title": "Choosing the equation that models a situation",
-     "text": [
-      "An equation is the story written in symbols: the unknown is a letter, and each action in the story becomes an operation on it, in the same order.",
-      "Name the unknown x. Follow the story: what multiplies x, what is added or taken away, and what the result equals. Check by putting a guessed number for x into both the story and the equation."
-     ],
-     "math": [
-      "Anu thinks of a number x. Anu multiplies it by 8 and then adds 16. The result is 120. Which equation describes this situation?",
-      "Let x stand for the unknown number in the story",
-      "Write the story in order: 8 times x, then add 16, equals 120: 8x + 16 = 120"
-     ]
-    },
-    {
-     "title": "Forming and solving a linear equation from a word problem",
-     "text": [
-      "Call the number you are asked for x; the story then tells you how to build the total from x, and that is the equation.",
-      "Write each quantity in terms of x, add them as the story says, set the result equal to the total, then undo: take away the constant, divide by the coefficient. Check in the story."
-     ],
-     "math": [
-      "The length of a rectangle is 7 cm more than its width, and its perimeter is 78 cm. Form an equation and find the width, in cm.",
-      "Let x be the number asked for and write the equation: 2(x + x + 7) = 78, so 4x + 14 = 78",
-      "Take 14 from both sides: 4x = 64",
-      "Divide by 4: x = 16"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:lin:3,3,2",
-    "gen:lin:3,9,8",
-    "gen:lin:3,9,2"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Undo the operations in reverse order: first take away the number added, then divide by the number multiplying x."
-       ],
-       "math": [
-        "Solve 2x + 4 = 14. What is x?",
-        "Take 4 from both sides: 10",
-        "Divide by 2: 10 ÷ 2 = 5"
-       ],
-       "role": "worked-example",
-       "instance": "gen:lin:2,4,5"
-      }
-     ],
-     "guided": "gen:lin:2,17,12",
-     "check": "gen:lin:5,6,5"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:lin:7,5,10",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Solve 7x + 5 = 75. What is x?” A common wrong answer is 70.",
-        "5 was taken away but the 7 was not divided out: 7x = 70 means x = 70 ÷ 7."
-       ],
-       "math": [
-        "Not 70, but 10"
-       ]
-      }
-     ],
-     "guided": "gen:lin:7,9,12",
-     "check": "gen:lin:3,3,4:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Undo the operations in reverse order: first take away the number added, then divide by the number multiplying x."
-       ]
-      }
-     ],
-     "guided": "gen:lin:2,4,6",
-     "check": "gen:lin:2,15,1"
-    }
-   ],
-   "practice": [
-    "gen:lin:2,17,11",
-    "gen:lin:7,9,11:mc",
-    "gen:lin:7,18,9",
-    "gen:auleq:1,2,9,10",
-    "gen:aulwp:1,5,2,7"
-   ],
-   "transfer": [
-    "gen:lin:2,4,7:mc",
-    "gen:aulwp:1,5,2,9:w"
-   ],
-   "retention": [
-    "gen:lin:6,17,2",
-    "gen:auleq:2,9,19,11"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "lin",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "lin",
-     "version": "1.0.0"
-    },
-    {
-     "family": "auleq",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aulwp",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@1",
-    "family": "lin",
-    "seed": [
-     6,
-     17,
-     3
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:lin:6,17,3",
-     "gen:lin:7,5,10",
-     "gen:lin:2,4,5"
-    ]
-   }
-  },
-  {
    "competency": "MATH.number.proportion",
    "title": "A direct proportion",
    "chapter": [
@@ -67757,6 +67589,32 @@
     },
     {
      "family": "auqwp",
+     "version": "1.0.0"
+    }
+   ]
+  },
+  "MATH.algebra.linear-equations": {
+   "family": "lin",
+   "version": "1.0.0",
+   "pools": [
+    {
+     "family": "lin",
+     "version": "1.0.0"
+    },
+    {
+     "family": "lboth",
+     "version": "1.0.0"
+    },
+    {
+     "family": "lbrk",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auleq",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aulwp",
      "version": "1.0.0"
     }
    ]

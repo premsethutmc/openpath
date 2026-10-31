@@ -5,8 +5,9 @@ import { decide } from "./grade.ts";
 
 const withContract = [...FAMILIES].filter(([, d]) => d.contract);
 describe("generator-owned answer contracts", () => {
-  test("94 families declare a contract; none is held across their whole pools", () => {
-    expect(withContract.length).toBe(94);
+  // 96 since Workstream A3 (lboth, lbrk)
+  test("96 families declare a contract; none is held across their whole pools", () => {
+    expect(withContract.length).toBe(96);
     let verified = 0, legacy = 0;
     for (const [fam] of withContract) for (const it of pool(fam).items) {
       const c = contractFor(it.id)!;

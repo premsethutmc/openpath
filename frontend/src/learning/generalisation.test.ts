@@ -138,11 +138,12 @@ test("G: an unseen mistake on a problem the learner types in is investigated and
 const NEW_SEEDS: Record<string, number[]> = { pow: [3, 4], dist: [4, 7], expand: [3, -5], dpow: [3, 4, 2], pint: [1, 3, 2, 2], subst: [0, 2, 1, 2], disc: [-5, 6] };
 
 test("B: diagnosis generalises across families and unseen parameter combinations, and says when it is unsure", () => {
-  const rand = rng(20261019);
   const tally = { trials: 0, identified: 0, uncertain: 0, wrongClaim: 0 };
   const noise = { trials: 0, claimed: 0 };
   for (const fam of FAMILIES.keys()) {
     if (fam === "above") continue;
+    // each family's simulated learners come from its own random sequence, so adding a family never changes another family's trials
+    const rand = rng(20261019 ^ [...fam].reduce((h, c) => Math.imul(h ^ c.charCodeAt(0), 16777619) >>> 0, 2166136261));
     const seeds = { mul: [7, 8], rect: [7, 6], eqfrac: [2, 5, 15], fadd: [3, 2, 8, 1], cint: [2, 9, 6], quad: [-5, 6], linev: [2, 3, 4], meet: [1, 2], alp: [1, 2], ...NEW_SEEDS }[fam] ?? familyPool(fam).items[Math.floor(familyPool(fam).items.length / 2)]?.params;
     if (!seeds) continue;
     const pool = [problemOf(`gen:${fam}:${seeds.join(",")}`)!, ...variantsOf(problemOf(`gen:${fam}:${seeds.join(",")}`)!)];

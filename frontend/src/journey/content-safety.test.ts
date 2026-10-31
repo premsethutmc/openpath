@@ -57,7 +57,10 @@ test("0 the committed registry covers every explanation, validates, and approves
   assert.equal(reg.reviewers.length, 0, "no authorised reviewer is invented");
   assert.equal(reg.entries.flatMap((e) => e.revisions).filter((r) => r.status === "approved").length, 0, "nothing is approved");
   assert.equal(teachingMode(), "demonstration");
-  assert.equal(reg.entries.length, modules.reduce((n, m) => n + m.strategies.length + (m.chapter.length ? 1 : 0), 0), "every explanation and every concept section");
+  const current = new Set(modules.flatMap((m) => [...m.strategies.map((s) => explanationId(m.competency, s.id)), ...(m.chapter.length ? [explanationId(m.competency, "chapter")] : [])]));
+  assert.equal(reg.entries.filter((e) => current.has(e.id)).length, current.size, "every explanation and every concept section");
+  // records of retired explanations stay as history (A3 replaced three linear-equations explanations); none of them can be shown
+  for (const e of reg.entries.filter((x) => !current.has(x.id))) assert.ok(!moduleFor(e.competency)?.strategies.some((s) => s.id === e.strategy), e.id);
   assert.equal(explanationBlocklist().entries.length, 4, "the four known-invalid revisions are on the blocklist");
 });
 
@@ -70,7 +73,7 @@ test("1 an approved explanation is shown when every eligibility condition passes
 });
 
 test("2 a pending explanation is refused in supervised mode (and shown, labelled, in demonstration)", () => {
-  const m = lin(), s = strat(m, "worked_steps");
+  const m = lin(), s = strat(m, "two_steps");
   const sup = contentEligibility(m, s, { competency: m.competency, mode: "supervised-evaluation" });
   assert.equal(sup.eligible, false);
   assert.ok(sup.failed.includes("approved-for-usage"), sup.failed.join());
@@ -120,7 +123,7 @@ test("3b the concept section is gated like an explanation: refused in supervised
 
 test("4 modified content is refused when its approval no longer matches the content", () => {
   const reg = approved(allLin);
-  const m = lin(), s = strat(m, "worked_steps");
+  const m = lin(), s = strat(m, "two_steps");
   const edited = { ...s, screens: s.screens.map((x, i) => (i === 0 ? { ...x, text: [...x.text, "An extra sentence added after review."] } : x)) };
   const mod = { ...m, strategies: m.strategies.map((x) => (x.id === s.id ? edited : x)) };
   for (const mode of ["demonstration", "supervised-evaluation"] as const) {
@@ -134,7 +137,7 @@ test("4 modified content is refused when its approval no longer matches the cont
 
 test("5 a missing explanation is handled safely (no substitute, structured result)", () => {
   const m = lin();
-  for (const [mod, s] of [[m, undefined], [null, strat(m, "worked_steps")], [m, { ...strat(m, "worked_steps"), id: "not_in_module" }], [m, { ...strat(m, "worked_steps"), screens: [] }]] as const) {
+  for (const [mod, s] of [[m, undefined], [null, strat(m, "two_steps")], [m, { ...strat(m, "two_steps"), id: "not_in_module" }], [m, { ...strat(m, "two_steps"), screens: [] }]] as const) {
     const e = contentEligibility(mod as Module | null, s as Strategy | undefined, { competency: m.competency });
     assert.equal(e.eligible, false);
     assert.deepEqual(e.failed, ["exists"]);
@@ -143,7 +146,7 @@ test("5 a missing explanation is handled safely (no substitute, structured resul
 });
 
 test("6 an explanation for another skill is refused", () => {
-  const m = lin(), s = strat(m, "worked_steps");
+  const m = lin(), s = strat(m, "two_steps");
   const e = contentEligibility(m, s, { competency: "MATH.number.integer-add" });
   assert.equal(e.eligible, false);
   assert.ok(e.failed.includes("competency"));
@@ -160,10 +163,10 @@ test("7 an unverified misconception never triggers misconception-specific teachi
       const s = m?.strategies.find((y) => y.id === x.strategy);
       if (s && isMisconceptionSpecific(s)) assert.ok(x.misconceptionEvidence, `${id}: ${x.strategy} taught without an established misconception (${x.basis})`);
     }
-    if (["4a", "4c", "5b"].includes(id)) assert.ok(!teaches(r).some((t) => t.strategy === "spot_the_mistake"), `${id}: no "spot the mistake" without evidence`);
+    if (["4a", "4c", "5b"].includes(id)) assert.ok(!teaches(r).some((t) => { const mm = moduleFor(t.competency); const st = mm?.strategies.find((y) => y.id === t.strategy); return !!st && isMisconceptionSpecific(st); }), `${id}: no misconception-specific explanation without evidence`);
   }
-  assert.ok(teaches(runScenario(sc("2a"))).some((t) => t.strategy === "spot_the_mistake"), "control: established forgot-divide is taught with its own explanation");
-  const m = lin(), s = strat(m, "spot_the_mistake");
+  assert.ok(teaches(runScenario(sc("2a"))).some((t) => t.strategy === "fix_finish"), "control: established forgot-divide is taught with its own explanation");
+  const m = lin(), s = strat(m, "fix_finish");
   const about = addressedMisconception(s);
   assert.ok(about, "the misconception it is about is read from its content");
   assert.ok(contentEligibility(m, s, { competency: m.competency, misconceptionEvidence: false }).failed.includes("misconception-evidence"));
@@ -241,7 +244,7 @@ test("13 demonstration teaching cannot promote content into approved instruction
 });
 
 test("14 forged or altered review metadata cannot bypass eligibility", () => {
-  const m = lin(), s = strat(m, "worked_steps"), id = explanationId(m.competency, s.id), h = contentHash(m.competency, s);
+  const m = lin(), s = strat(m, "two_steps"), id = explanationId(m.competency, s.id), h = contentHash(m.competency, s);
   const rev = (r: ExplanationRegistry) => r.entries.find((x) => x.id === id)!.revisions.find((x) => x.contentHash === h)!;
   const forgeries: [string, (r: ExplanationRegistry) => void][] = [
     ["approved by AI screening", (r) => { const v = rev(r); v.provenance = { ...v.provenance, source: "ai-screening" }; v.approvalDigest = approvalDigest(id, v); }],
@@ -251,14 +254,14 @@ test("14 forged or altered review metadata cannot bypass eligibility", () => {
     ["no digest", (r) => { delete rev(r).approvalDigest; }],
     ["reviewed before the reviewer was authorised", (r) => { const v = rev(r); v.reviewedAt = "2025-01-01T00:00:00.000Z"; v.approvalDigest = approvalDigest(id, v); }],
     ["intervention type altered", (r) => { r.entries.find((x) => x.id === id)!.intervention = "recall"; }],
-    ["misconception flag cleared", (r) => { const sm = r.entries.find((x) => x.id === explanationId(m.competency, "spot_the_mistake"))!; sm.misconceptionSpecific = false; }],
+    ["misconception flag cleared", (r) => { const sm = r.entries.find((x) => x.id === explanationId(m.competency, "fix_finish"))!; sm.misconceptionSpecific = false; }],
     ["addressed misconception altered", (r) => { r.entries.find((x) => x.id === id)!.addresses = "forgot-divide"; }],
     ["supervised scope on a pending revision", (r) => { const v = rev(r); Object.assign(v, { status: "pending_review", reviewer: undefined, reviewerRole: "none", provenance: { source: "registry", by: "x", at: "2026-01-01", note: "" }, approvalDigest: undefined, scope: ["demonstration", "supervised-evaluation"] }); }],
     ["blocked revision relabelled approved without an educator", (r) => { const v = rev(r); Object.assign(v, { status: "approved", reviewerRole: "ai-reviewer", reviewer: undefined, approvalDigest: undefined }); }],
   ];
   for (const [name, forge] of forgeries) {
     const reg = approved(allLin, forge);
-    const target = name === "misconception flag cleared" ? strat(m, "spot_the_mistake") : s;
+    const target = name === "misconception flag cleared" ? strat(m, "fix_finish") : s;
     const e = contentEligibility(m, target, { competency: m.competency, mode: "supervised-evaluation", misconceptionEvidence: true }, reg);
     assert.equal(e.eligible, false, `${name}: refused in supervised evaluation`);
     assert.equal(e.educatorApproved, false, name);

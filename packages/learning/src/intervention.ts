@@ -25,7 +25,7 @@ import { modulePhasePool } from "./library";
 import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis } from "./hypotheses";
 import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import { teachingEligibility, type TeachingEligibility } from "./teaching-contract";
-import { contentEligibility, teachingMode, type ContentEligibility } from "./explanation-review";
+import { contentEligibility, isMisconceptionSpecific, teachingMode, type ContentEligibility } from "./explanation-review";
 import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
 
@@ -64,7 +64,17 @@ export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords
     if (res.every((a) => a && rightAnswer(a))) return 0; // builds on what the learner showed
     return 1;
   };
-  return m.strategies.filter((s) => teachable(m, s, misconceptionEvidence)).sort((a, b) => Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
+  // misconception-evidence@1: an eligible misconception-specific explanation is about a misconception established for this learner (the
+  // gate refuses it otherwise), so it comes first: the evidence justifies it more than the diagnosis kind does
+  const specific = (s: Strategy) => Number(!isMisconceptionSpecific(s));
+  // in a module whose explanations are about different kinds of question (its families), one about the kind the learner last got wrong
+  // comes first: its worked example and recheck are that kind (Workstream A3: linear equations, two steps / both sides / bracket)
+  const lastWrong = records.attempts.filter((a) => of(m)(a) && !rightAnswer(a)).at(-1);
+  const wrongFamily = lastWrong ? problemOf(lastWrong.questionId.replace(/:(mc|w)$/, ""))?.family ?? null : null;
+  const relevant = (s: Strategy) => Number(!!wrongFamily && problemOf(s.check.replace(/:(mc|w)$/, ""))?.family !== wrongFamily);
+  // a general explanation of another kind is not offered while there is one of the kind the learner got wrong (all tried: a person)
+  const onTopic = (s: Strategy) => !wrongFamily || isMisconceptionSpecific(s) || !relevant(s) || !m.strategies.some((x) => !isMisconceptionSpecific(x) && !relevant(x));
+  return m.strategies.filter((s) => teachable(m, s, misconceptionEvidence) && onTopic(s)).sort((a, b) => specific(a) - specific(b) || relevant(a) - relevant(b) || Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
 }
 /** teaching gate (adaptive-loop repair): an explanation whose sections fail the teaching contract is never chosen as an
  *  intervention. One that was not machine-checked (hand-written modules) may be used, and says so; none is "verified". */
@@ -253,6 +263,31 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
       }
     }
   }
+  // sub-skill difficulty (Workstream A3; misconception-evidence@1 "repeated-difficulty" within one kind of question): in a module whose
+  // explanations are about different kinds of question, two or more answers alone wrong on one kind, none right alone since, is taught
+  // with that kind's general explanation once (through the gate), then rechecked alone on a fresh question of that kind; still wrong
+  // after it: a person. The learner's evidence is not changed (a competency is shown or not by the shared engine); only what is taught.
+  const gap = shown && !established ? subSkillGap(m, records) : null;
+  if (gap) {
+    const basis0 = evidenceBasis(competency, records, { evidence: ev, diagnosis: d });
+    const kindOf = (st: Strategy) => problemOf(st.check.replace(/:(mc|w)$/, ""))?.family;
+    const forGap = m.strategies.filter((st) => !isMisconceptionSpecific(st) && kindOf(st) === gap.family);
+    const taught = records.teaching.filter((t) => t.competency === competency && t.at > gap.since && forGap.some((st) => st.id === t.strategy));
+    if (!taught.length) {
+      const st = forGap.find((x) => teachable(m, x, basis0.established));
+      if (st) return { ...base, phase: "chapter", strategy: st, teachingReview: teachingStatus(m, st), contentReview: contentReviewOf(m, st, basis0.established), basis: basis0, diagnosis: d, reason: "Questions of this kind have gone wrong a few times on your own, so here is how to solve them, then one on your own." };
+    } else {
+      const st = forGap.find((x) => x.id === taught.at(-1)!.strategy)!;
+      // the recheck is of the same kind: the explanation's own check if not yet seen, else a fresh check question of that kind
+      const seen = new Set(records.attempts.map((x) => exposureKey(x.questionId)));
+      // (and never close to the worked example just shown: not the same answer, not two of its numbers the same)
+      const shownEx = st.screens.flatMap((sc) => (sc.instance ? [problemOf(sc.instance)] : [])).filter((p): p is NonNullable<typeof p> => !!p && p.family === gap.family);
+      const close = (id: string) => { const p = problemOf(id.replace(/:(mc|w)$/, "")); return !p || shownEx.some((e) => e.answer === p.answer || e.params.filter((v, i) => v === p.params[i]).length >= 2); };
+      const q = (!answered(records, st.check) && withinGrade(records, st.check) ? st.check : null) ?? phasePool(gap.family, "check").find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && !close(id)) ?? null;
+      if (q && !records.attempts.some((a) => a.at > taught.at(-1)!.at && kindOf(st) === problemOf(a.questionId.replace(/:(mc|w)$/, ""))?.family && independentAttempt(a))) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, reason: "Now one of this kind on your own, with no hints." };
+      return { ...base, phase: "pause", diagnosis: d, reason: "This kind of question has not clicked yet, even after the explanation. Carry on, and go through it with a teacher or parent." };
+    }
+  }
   if (shown) {
     // more questions alone: practice, the transfer question, then the checks of strategies not taught (independent
     // assessments, so the shared engine has the direct evidence it needs to demonstrate the skill)
@@ -359,6 +394,20 @@ function pendingInvestigation(m: Module, records: LearnerRecords, session: strin
   return null;
 }
 
+/** A kind of question (a family of a module whose explanations cover several kinds) with two or more answers alone wrong and none right alone
+ *  since the first of them: { family, since } (Workstream A3). Null for a module whose explanations are all about one kind. */
+export function subSkillGap(m: Module, records: LearnerRecords): { family: string; since: string } | null {
+  const kinds = new Set(m.strategies.map((st) => problemOf(st.check.replace(/:(mc|w)$/, ""))?.family).filter(Boolean));
+  if (kinds.size < 2) return null;
+  const alone = records.attempts.filter((a) => of(m)(a) && independentAttempt(a));
+  for (const f of kinds) {
+    const mine = alone.filter((a) => problemOf(a.questionId.replace(/:(mc|w)$/, ""))?.family === f);
+    const firstRightLast = mine.map((a) => rightAnswer(a)).lastIndexOf(true);
+    const wrongSince = mine.slice(firstRightLast + 1);
+    if (wrongSince.length >= 2) return { family: f!, since: wrongSince[0].at };
+  }
+  return null;
+}
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
 export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => (!answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records));
 

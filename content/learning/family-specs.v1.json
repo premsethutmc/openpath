@@ -1734,14 +1734,14 @@
    ],
    "explanations": [
     "forgot-divide (procedural): 20 was taken away but the 9 was not divided out: 9x = 108 means x = 108 ÷ 9.",
-    "added-not-subtracted (procedural): 18 was added to both sides; to undo + 18, subtract 18.",
-    "divided-first (procedural): Only part of the left side was divided: undo the + 18 first, then the × 9."
+    "added-not-subtracted (procedural): 18 was added to 126 instead of taken away: 9x = 126 + 18. To remove the + 18, take 18 from both sides: 9x = 126 − 18.",
+    "divided-first (procedural): Only part of the left side was divided by 9: 9x + 18 divided by 9 is x + 2, not x + 18. Divide every term, or take away 18 first."
    ],
    "teach": {
     "idea": "An equation is a balance: do the same to both sides and it stays true.",
     "method": "Undo the operations in reverse order: first take away the number added, then divide by the number multiplying x."
    },
-   "fingerprint": "4bf4c8ea",
+   "fingerprint": "53af65fb",
    "validation": {
     "family": "lin",
     "deterministic": {
@@ -28387,6 +28387,144 @@
    "fingerprint": "70e59585",
    "validation": {
     "family": "ahboth",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "lboth",
+   "version": "1.0.0",
+   "title": "Solving an equation with x on both sides",
+   "competency": "MATH.algebra.linear-equations",
+   "skill": "MATH.algebra.linear-equations",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     2,
+     9
+    ],
+    [
+     1,
+     20
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     1,
+     12
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 168,
+    "2": 120,
+    "3": 112
+   },
+   "examples": [
+    "gen:lboth:3,2,2,5",
+    "gen:lboth:5,14,4,5:mc",
+    "gen:lboth:5,4,2,5",
+    "gen:lboth:7,14,5,8:mc",
+    "gen:lboth:6,16,4,11",
+    "gen:lboth:8,12,6,10:mc"
+   ],
+   "explanations": [
+    "number-sign-kept (procedural): 12 was moved to the right without changing its sign. To remove + 12 from the left, take 12 from both sides: 60 − 12, not 60 + 12.",
+    "only-one-side (conceptual): 12 was taken away on the left but not on the right. Whatever is done to one side must be done to the other: 4x = 60 − 12.",
+    "x-sign-kept (procedural): 7x was moved to the left without changing its sign. Taking 7x from both sides leaves 2x on the left, not 16x."
+   ],
+   "teach": {
+    "idea": "Taking the same number of x's from both sides keeps an equation balanced, just as taking the same number does.",
+    "method": "Take the smaller x term from both sides so x is on one side only, take the number away from both sides, then divide by the number of x's. Check by putting the answer into both sides of the original equation."
+   },
+   "fingerprint": "648e0364",
+   "validation": {
+    "family": "lboth",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "lbrk",
+   "version": "1.0.0",
+   "title": "Solving an equation with a bracket",
+   "competency": "MATH.algebra.linear-equations",
+   "skill": "MATH.algebra.linear-equations",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     2,
+     6
+    ],
+    [
+     -6,
+     6
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     1,
+     15
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 75,
+    "2": 192,
+    "3": 133
+   },
+   "examples": [
+    "gen:lbrk:2,5,1,8",
+    "gen:lbrk:4,3,3,9:mc",
+    "gen:lbrk:3,-5,2,3",
+    "gen:lbrk:4,1,2,7:mc",
+    "gen:lbrk:5,-6,3,5",
+    "gen:lbrk:6,-6,2,12:mc"
+   ],
+   "explanations": [
+    "first-term-only (procedural): Only x was multiplied by 6. The 6 multiplies every term in the bracket: 6(x + 4) = 6x + 24, not 6x + 4.",
+    "bracket-sign (procedural): The sign was lost when multiplying out: 6 × −1 = −6, so 6(x − 1) = 6x − 6.",
+    "x-sign-kept (procedural): 5x was moved to the left without changing its sign. Taking 5x from both sides leaves x, not 11x."
+   ],
+   "teach": {
+    "idea": "A number outside a bracket multiplies every term inside it.",
+    "method": "Multiply out the bracket first, then collect the x's on one side and the numbers on the other, doing the same to both sides. Check by putting the answer into both sides of the original equation."
+   },
+   "fingerprint": "88bf5ace",
+   "validation": {
+    "family": "lbrk",
     "deterministic": {
      "checked": 400,
      "failures": []
