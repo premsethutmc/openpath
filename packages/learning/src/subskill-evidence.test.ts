@@ -230,7 +230,7 @@ describe("D1 + E1: method evidence comes only from the server-recorded working v
     const mine = ev(L, "d1", T0, q, ans(q), { working: linW(q, true) });
     const theirs = { ...(ev("someone-else", "d1", T0, q, ans(q), { working: linW(q) }) as object) } as { kind: string };
     expect(st(projectFromEvents(L, [theirs, mine], T0 + DAY), "linear-equations.two-step@1").method.verified).toBe(0);
-    const dup = { ...(mine as object), response: off(q) } as { kind: string };
+    const dup = { ...(mine as object), response: off(q) } as unknown as { kind: string };
     expect(JSON.stringify(projectFromEvents(L, [mine, dup], T0 + DAY))).toBe(JSON.stringify(projectFromEvents(L, [dup, mine], T0 + DAY)));
   });
   test("recovery in one sub-skill does not clear another", () => {
