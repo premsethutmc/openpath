@@ -1,0 +1,1725 @@
+{
+ "profile": "S002@1.0.0",
+ "seed": 2002,
+ "hidden": [
+  {
+   "n": 1,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "start",
+   "detail": {
+    "profile": "S002@1.0.0",
+    "seed": 2002
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 2,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 3x + 3 = 9. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "4",
+     "working": [
+      "x = 4"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "divide",
+       "outcome": "misconception:forgot-divide"
+      }
+     ],
+     "value": "4",
+     "style": "bare",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 3,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 4,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 3x + 9 = 33. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "18",
+     "working": []
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "guessed",
+     "steps": [],
+     "value": null,
+     "style": "none",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 5,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 6,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 3x + 9 = 15. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "12",
+     "working": [
+      "3x = 4",
+      "x = 12"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "divide",
+       "outcome": "conceptual-error"
+      }
+     ],
+     "value": "12",
+     "style": "partial",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 7,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 8,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 2 = 4. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "4",
+     "working": [
+      "2x = 4",
+      "x = 4",
+      "x = 4"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "divide",
+       "outcome": "misconception:forgot-divide"
+      }
+     ],
+     "value": "4",
+     "style": "full+unsupported-notation",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 9,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 10,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 1 = 3. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "4",
+     "working": [
+      "2x = 4",
+      "x = 4",
+      "x = 4"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "misconception:added-not-subtracted"
+      },
+      {
+       "step": "divide",
+       "outcome": "misconception:forgot-divide"
+      }
+     ],
+     "value": "4",
+     "style": "full+unsupported-notation",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 11,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 12,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: x ÷ 2 = 12.",
+    "response": {
+     "kind": "answer",
+     "answer": "6",
+     "working": [
+      "x = 12/2",
+      "x = 6"
+     ]
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "undo-divide",
+       "outcome": "misconception:inverse-operation"
+      }
+     ],
+     "value": "6",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 13,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "one-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 14,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: 5x = 5.",
+    "response": {
+     "kind": "answer",
+     "answer": "0",
+     "working": [
+      "x = 5 - 5",
+      "x = 0"
+     ]
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "divide",
+       "outcome": "misconception:inverse-operation"
+      }
+     ],
+     "value": "0",
+     "style": "partial",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 15,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "one-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 16,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "teaching",
+   "detail": {
+    "title": "Guess, check and improve",
+    "understood": {
+     "kind": null,
+     "misconception": null,
+     "title": "Guess, check and improve"
+    },
+    "outcome": "full"
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 17,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: 3x = 51.",
+    "response": {
+     "kind": "hint"
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "hint",
+       "outcome": "requested"
+      }
+     ],
+     "value": null,
+     "style": "-",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 18,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: 3x = 51.",
+    "response": {
+     "kind": "answer",
+     "answer": "17",
+     "working": [
+      "x = 51/3",
+      "x = 17"
+     ]
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "17",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 19,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "one-step",
+     "independent": false,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 20,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: x − 4 = 7. Choose one.",
+    "response": {
+     "kind": "answer",
+     "answer": "A",
+     "working": [
+      "x = 3",
+      "x = 3"
+     ]
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "misconception:added-not-subtracted"
+      }
+     ],
+     "value": "3",
+     "style": "full+unsupported-notation",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 21,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "one-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 22,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: x + 11 = 31.",
+    "response": {
+     "kind": "answer",
+     "answer": "42",
+     "working": [
+      "x = 42",
+      "x = 42"
+     ]
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "misconception:added-not-subtracted"
+      }
+     ],
+     "value": "42",
+     "style": "full+unsupported-notation",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 23,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "one-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.45,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.1,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.08,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.15,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 24,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "teaching",
+   "detail": {
+    "title": "Keep the balance level",
+    "understood": {
+     "kind": "one-step",
+     "misconception": null,
+     "title": "Keep the balance level"
+    },
+    "outcome": "partial"
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.494,
+      "fragile": 0.066
+     },
+     "two-step": {
+      "stable": 0.2032,
+      "fragile": 0.0048
+     },
+     "both-sides": {
+      "stable": 0.1036,
+      "fragile": 0.0054
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.00552
+     },
+     "modelling": {
+      "stable": 0.1534,
+      "fragile": 0.0051
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 25,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: 3x = 45.",
+    "response": {
+     "kind": "hint"
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "hint",
+       "outcome": "requested"
+      }
+     ],
+     "value": null,
+     "style": "-",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.494,
+      "fragile": 0.066
+     },
+     "two-step": {
+      "stable": 0.2032,
+      "fragile": 0.0048
+     },
+     "both-sides": {
+      "stable": 0.1036,
+      "fragile": 0.0054
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.00552
+     },
+     "modelling": {
+      "stable": 0.1534,
+      "fragile": 0.0051
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 26,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: 3x = 45.",
+    "response": {
+     "kind": "answer",
+     "answer": "42",
+     "working": [
+      "x = 45 - 3",
+      "x = 42"
+     ]
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "divide",
+       "outcome": "misconception:inverse-operation"
+      }
+     ],
+     "value": "42",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.494,
+      "fragile": 0.066
+     },
+     "two-step": {
+      "stable": 0.2032,
+      "fragile": 0.0048
+     },
+     "both-sides": {
+      "stable": 0.1036,
+      "fragile": 0.0054
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.00552
+     },
+     "modelling": {
+      "stable": 0.1534,
+      "fragile": 0.0051
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 27,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "one-step",
+     "independent": false,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.494,
+      "fragile": 0.066
+     },
+     "two-step": {
+      "stable": 0.2032,
+      "fragile": 0.0048
+     },
+     "both-sides": {
+      "stable": 0.1036,
+      "fragile": 0.0054
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.00552
+     },
+     "modelling": {
+      "stable": 0.1534,
+      "fragile": 0.0051
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 28,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Find x: x + 14 = 34.",
+    "response": {
+     "kind": "answer",
+     "answer": "48",
+     "working": [
+      "x = 48",
+      "x = 48"
+     ]
+    },
+    "reasoning": {
+     "task": "one-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "misconception:added-not-subtracted"
+      }
+     ],
+     "value": "48",
+     "style": "full+unsupported-notation",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.494,
+      "fragile": 0.066
+     },
+     "two-step": {
+      "stable": 0.2032,
+      "fragile": 0.0048
+     },
+     "both-sides": {
+      "stable": 0.1036,
+      "fragile": 0.0054
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.00552
+     },
+     "modelling": {
+      "stable": 0.1534,
+      "fragile": 0.0051
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 29,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "one-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.5105,
+      "fragile": 0.0495
+     },
+     "two-step": {
+      "stable": 0.2032,
+      "fragile": 0.0048
+     },
+     "both-sides": {
+      "stable": 0.1036,
+      "fragile": 0.0054
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.00552
+     },
+     "modelling": {
+      "stable": 0.1534,
+      "fragile": 0.0051
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 30,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 1
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.497172,
+      "fragile": 0.041624
+     },
+     "two-step": {
+      "stable": 0.199849,
+      "fragile": 0.004036
+     },
+     "both-sides": {
+      "stable": 0.103483,
+      "fragile": 0.004541
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.004642
+     },
+     "modelling": {
+      "stable": 0.151666,
+      "fragile": 0.004289
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 31,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 8
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.405,
+      "fragile": 0.010406
+     },
+     "two-step": {
+      "stable": 0.176677,
+      "fragile": 0.001009
+     },
+     "both-sides": {
+      "stable": 0.102675,
+      "fragile": 0.001135
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.001161
+     },
+     "modelling": {
+      "stable": 0.139676,
+      "fragile": 0.001072
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 32,
+   "at": "2026-03-14T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 3
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.376246,
+      "fragile": 0.006187
+     },
+     "two-step": {
+      "stable": 0.169448,
+      "fragile": 0.0006
+     },
+     "both-sides": {
+      "stable": 0.102423,
+      "fragile": 0.000675
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.00069
+     },
+     "modelling": {
+      "stable": 0.135935,
+      "fragile": 0.000637
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  },
+  {
+   "n": 33,
+   "at": "2026-03-22T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 8
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.312138,
+      "fragile": 0.001547
+     },
+     "two-step": {
+      "stable": 0.153331,
+      "fragile": 0.00015
+     },
+     "both-sides": {
+      "stable": 0.101861,
+      "fragile": 0.000169
+     },
+     "brackets": {
+      "stable": 0.08368,
+      "fragile": 0.000173
+     },
+     "modelling": {
+      "stable": 0.127596,
+      "fragile": 0.000159
+     }
+    },
+    "misconception": {
+     "inverse-operation": 0.5,
+     "added-not-subtracted": 0.55,
+     "forgot-divide": 0.45,
+     "only-one-side": 0.6,
+     "first-term-only": 0.6,
+     "model-swap": 0.6,
+     "divide-wrong-way": 0.2
+    }
+   }
+  }
+ ]
+}

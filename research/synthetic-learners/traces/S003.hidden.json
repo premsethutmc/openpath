@@ -1,0 +1,3888 @@
+{
+ "profile": "S003@1.0.0",
+ "seed": 3003,
+ "hidden": [
+  {
+   "n": 1,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "start",
+   "detail": {
+    "profile": "S003@1.0.0",
+    "seed": 3003
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.93,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 2,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 3x + 3 = 9. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "2",
+     "working": [
+      "3x = 6",
+      "x = 2"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "2",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.93,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 3,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.9328,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 4,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 3x + 9 = 33. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "8",
+     "working": [
+      "3x = 24",
+      "x = 8"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "8",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.9328,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 5,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.935488,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 6,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 17 = 39. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "10",
+     "working": [
+      "x = 10"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "10",
+     "style": "bare",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.935488,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 7,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.936133,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 8,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 7x + 9 = 86. What is x? Choose one.",
+    "response": {
+     "kind": "answer",
+     "answer": "C",
+     "working": []
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "conceptual-error"
+      }
+     ],
+     "value": "539",
+     "style": "full+no-matching-option(guessed)",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.936133,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 9,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.936772,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 10,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 1 = 3. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "1",
+     "working": [
+      "2x = 2",
+      "x = 1"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "1",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.936772,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 11,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.939301,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 12,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 7x + 18 = 81. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "9",
+     "working": [
+      "7x = 63",
+      "x = 9"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "9",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.939301,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 13,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 14,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Anu buys 2 notebooks at ₹x each and one pen for ₹9, and pays ₹29 in all. Which equation describes this situation?",
+    "response": {
+     "kind": "answer",
+     "answer": "C",
+     "working": []
+    },
+    "reasoning": {
+     "task": "modelling",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "form-equation",
+       "outcome": "correct"
+      }
+     ],
+     "value": "2x + 9 = 29",
+     "style": "choice",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.45,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 15,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "modelling",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.472,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 16,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "One number is 5 times another. When 2 is added to each of them, the two new numbers add up to 46. Form an equation and find the smaller number.",
+    "response": {
+     "kind": "answer",
+     "answer": "7",
+     "working": [
+      "x + 2 + 5x + 2 = 46",
+      "6x = 42",
+      "x = 7"
+     ]
+    },
+    "reasoning": {
+     "task": "modelling",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "form-equation",
+       "outcome": "correct"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "7",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.472,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 17,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "modelling",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 18,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 9x + 7 = 8x + 9. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "1/5",
+     "working": [
+      "x = 1/5"
+     ]
+    },
+    "reasoning": {
+     "task": "both-sides",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "collect-x",
+       "outcome": "misconception:only-one-side+slip"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "1/5",
+     "style": "bare",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.25,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 19,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "both-sides",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 20,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 5(x − 4) = 2x − 17. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "3/5",
+     "working": [
+      "5x - 20 = 2x - 17",
+      "5x - 20 = -17",
+      "5x = 3",
+      "x = 3/5"
+     ]
+    },
+    "reasoning": {
+     "task": "brackets",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "distribute",
+       "outcome": "conceptual-error+slip"
+      },
+      {
+       "step": "collect-x",
+       "outcome": "misconception:only-one-side"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "3/5",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.2,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 21,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "brackets",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 22,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 3x + 9 = 15. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "2",
+     "working": [
+      "3x + 9 - 9 = 15 - 9",
+      "3x/3 = 6/3",
+      "x = 2"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "2",
+     "style": "full+unsupported-notation",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.941729,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 23,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.94406,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 24,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 4 = 18. What is x? Choose one.",
+    "response": {
+     "kind": "answer",
+     "answer": "A",
+     "working": []
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "conceptual-error"
+      }
+     ],
+     "value": "28",
+     "style": "full+no-matching-option(guessed)",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.94406,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 25,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.944619,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 26,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 2 = 6. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "3/2",
+     "working": [
+      "x = 3/2"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct+slip"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "3/2",
+     "style": "bare",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.944619,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 27,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.945173,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 28,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 4 = 12. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "4",
+     "working": [
+      "2x = 8",
+      "x = 4"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "4",
+     "style": "partial",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.945173,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 29,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.947366,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 30,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 6 = 18. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "6",
+     "working": []
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "6",
+     "style": "none",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.947366,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 31,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.949471,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 32,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Kavya's mother is 5 times as old as Kavya is now. In 2 years, their two ages will add up to 58 years. How old is Kavya now, in years?",
+    "response": {
+     "kind": "answer",
+     "answer": "15",
+     "working": []
+    },
+    "reasoning": {
+     "task": "unknown",
+     "mode": "not-understood",
+     "steps": [],
+     "value": null,
+     "style": "none",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.949471,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 33,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": null,
+     "independent": true,
+     "engaged": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.949471,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 34,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 2x + 15 = 17. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "1",
+     "working": [
+      "2x = 2",
+      "x = 1"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "1",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.949471,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 35,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.951492,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 36,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 5x + 6 = 31. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "5",
+     "working": [
+      "5x = 25",
+      "x = 5"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "5",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.951492,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 37,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.953432,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 38,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 8x + 3 = 4x + 15. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "1",
+     "working": [
+      "12x + 3 = 15",
+      "12x = 12",
+      "x = 1"
+     ]
+    },
+    "reasoning": {
+     "task": "both-sides",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "collect-x",
+       "outcome": "misconception:x-sign-kept"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "1",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.953432,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.2575,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 39,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "both-sides",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96,
+      "fragile": 0
+     },
+     "two-step": {
+      "stable": 0.953432,
+      "fragile": 0
+     },
+     "both-sides": {
+      "stable": 0.264925,
+      "fragile": 0
+     },
+     "brackets": {
+      "stable": 0.208,
+      "fragile": 0
+     },
+     "modelling": {
+      "stable": 0.49312,
+      "fragile": 0
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 40,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "teaching",
+   "detail": {
+    "title": "x on both sides",
+    "understood": {
+     "kind": "both-sides",
+     "misconception": null,
+     "title": "x on both sides"
+    },
+    "outcome": "full"
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96066,
+      "fragile": 0.00044
+     },
+     "two-step": {
+      "stable": 0.9542,
+      "fragile": 0.000512
+     },
+     "both-sides": {
+      "stable": 0.5075,
+      "fragile": 0.161717
+     },
+     "brackets": {
+      "stable": 0.221068,
+      "fragile": 0.008712
+     },
+     "modelling": {
+      "stable": 0.501484,
+      "fragile": 0.005576
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 41,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 8x + 15 = 2x + 21. What is x? Choose one.",
+    "response": {
+     "kind": "answer",
+     "answer": "B",
+     "working": []
+    },
+    "reasoning": {
+     "task": "both-sides",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "collect-x",
+       "outcome": "correct"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "1",
+     "style": "none",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96066,
+      "fragile": 0.00044
+     },
+     "two-step": {
+      "stable": 0.9542,
+      "fragile": 0.000512
+     },
+     "both-sides": {
+      "stable": 0.5075,
+      "fragile": 0.161717
+     },
+     "brackets": {
+      "stable": 0.221068,
+      "fragile": 0.008712
+     },
+     "modelling": {
+      "stable": 0.501484,
+      "fragile": 0.005576
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 42,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "both-sides",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96066,
+      "fragile": 0.00044
+     },
+     "two-step": {
+      "stable": 0.9542,
+      "fragile": 0.000512
+     },
+     "both-sides": {
+      "stable": 0.585418,
+      "fragile": 0.09703
+     },
+     "brackets": {
+      "stable": 0.221068,
+      "fragile": 0.008712
+     },
+     "modelling": {
+      "stable": 0.501484,
+      "fragile": 0.005576
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 43,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 4(x + 4) = 2x + 20. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "5/6",
+     "working": [
+      "4x + 15 = 2x + 20",
+      "x = 5/6"
+     ]
+    },
+    "reasoning": {
+     "task": "brackets",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "distribute",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "collect-x",
+       "outcome": "misconception:x-sign-kept"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "5/6",
+     "style": "partial",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96066,
+      "fragile": 0.00044
+     },
+     "two-step": {
+      "stable": 0.9542,
+      "fragile": 0.000512
+     },
+     "both-sides": {
+      "stable": 0.585418,
+      "fragile": 0.09703
+     },
+     "brackets": {
+      "stable": 0.221068,
+      "fragile": 0.008712
+     },
+     "modelling": {
+      "stable": 0.501484,
+      "fragile": 0.005576
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 44,
+   "at": "2026-03-02T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "brackets",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.96066,
+      "fragile": 0.00044
+     },
+     "two-step": {
+      "stable": 0.9542,
+      "fragile": 0.000512
+     },
+     "both-sides": {
+      "stable": 0.585418,
+      "fragile": 0.09703
+     },
+     "brackets": {
+      "stable": 0.232255,
+      "fragile": 0.005227
+     },
+     "modelling": {
+      "stable": 0.501484,
+      "fragile": 0.005576
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 45,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 1
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.954824,
+      "fragile": 0.000411
+     },
+     "two-step": {
+      "stable": 0.948414,
+      "fragile": 0.000478
+     },
+     "both-sides": {
+      "stable": 0.582461,
+      "fragile": 0.090532
+     },
+     "brackets": {
+      "stable": 0.232008,
+      "fragile": 0.004877
+     },
+     "modelling": {
+      "stable": 0.499171,
+      "fragile": 0.005203
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 46,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 4(x + 1) = x + 16. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "5",
+     "working": [
+      "4x + 4 = x + 16",
+      "2x + 4 = 16",
+      "2x = 12",
+      "x = 5"
+     ]
+    },
+    "reasoning": {
+     "task": "brackets",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "distribute",
+       "outcome": "correct"
+      },
+      {
+       "step": "collect-x",
+       "outcome": "correct+slip"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct+slip"
+      }
+     ],
+     "value": "5",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.954824,
+      "fragile": 0.000411
+     },
+     "two-step": {
+      "stable": 0.948414,
+      "fragile": 0.000478
+     },
+     "both-sides": {
+      "stable": 0.582461,
+      "fragile": 0.090532
+     },
+     "brackets": {
+      "stable": 0.232008,
+      "fragile": 0.004877
+     },
+     "modelling": {
+      "stable": 0.499171,
+      "fragile": 0.005203
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 47,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "brackets",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.954824,
+      "fragile": 0.000411
+     },
+     "two-step": {
+      "stable": 0.948414,
+      "fragile": 0.000478
+     },
+     "both-sides": {
+      "stable": 0.582461,
+      "fragile": 0.090532
+     },
+     "brackets": {
+      "stable": 0.24159,
+      "fragile": 0.002926
+     },
+     "modelling": {
+      "stable": 0.499171,
+      "fragile": 0.005203
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 48,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 4(x + 4) = 2x + 24. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "5/2",
+     "working": [
+      "4x + 14 = 2x + 24",
+      "4x + 14 = 24",
+      "4x = 10",
+      "x = 5/2"
+     ]
+    },
+    "reasoning": {
+     "task": "brackets",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "distribute",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "collect-x",
+       "outcome": "misconception:only-one-side"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "5/2",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.954824,
+      "fragile": 0.000411
+     },
+     "two-step": {
+      "stable": 0.948414,
+      "fragile": 0.000478
+     },
+     "both-sides": {
+      "stable": 0.582461,
+      "fragile": 0.090532
+     },
+     "brackets": {
+      "stable": 0.24159,
+      "fragile": 0.002926
+     },
+     "modelling": {
+      "stable": 0.499171,
+      "fragile": 0.005203
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 49,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "brackets",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.954824,
+      "fragile": 0.000411
+     },
+     "two-step": {
+      "stable": 0.948414,
+      "fragile": 0.000478
+     },
+     "both-sides": {
+      "stable": 0.582461,
+      "fragile": 0.090532
+     },
+     "brackets": {
+      "stable": 0.250315,
+      "fragile": 0.001756
+     },
+     "modelling": {
+      "stable": 0.499171,
+      "fragile": 0.005203
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 50,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "teaching",
+   "detail": {
+    "title": "Multiply out the bracket first",
+    "understood": {
+     "kind": "brackets",
+     "misconception": null,
+     "title": "Multiply out the bracket first"
+    },
+    "outcome": "partial"
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.955193,
+      "fragile": 0.000657
+     },
+     "two-step": {
+      "stable": 0.948836,
+      "fragile": 0.000759
+     },
+     "both-sides": {
+      "stable": 0.585159,
+      "fragile": 0.092331
+     },
+     "brackets": {
+      "stable": 0.373723,
+      "fragile": 0.084028
+     },
+     "modelling": {
+      "stable": 0.50326,
+      "fragile": 0.007929
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 51,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 5(x − 5) = x + 15. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "10/3",
+     "working": [
+      "5x - 5 = x + 15",
+      "6x - 5 = 15",
+      "6x = 20",
+      "x = 10/3"
+     ]
+    },
+    "reasoning": {
+     "task": "brackets",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "distribute",
+       "outcome": "misconception:first-term-only"
+      },
+      {
+       "step": "collect-x",
+       "outcome": "misconception:x-sign-kept"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "10/3",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.955193,
+      "fragile": 0.000657
+     },
+     "two-step": {
+      "stable": 0.948836,
+      "fragile": 0.000759
+     },
+     "both-sides": {
+      "stable": 0.585159,
+      "fragile": 0.092331
+     },
+     "brackets": {
+      "stable": 0.373723,
+      "fragile": 0.084028
+     },
+     "modelling": {
+      "stable": 0.50326,
+      "fragile": 0.007929
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 52,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "brackets",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.955193,
+      "fragile": 0.000657
+     },
+     "two-step": {
+      "stable": 0.948836,
+      "fragile": 0.000759
+     },
+     "both-sides": {
+      "stable": 0.585159,
+      "fragile": 0.092331
+     },
+     "brackets": {
+      "stable": 0.412756,
+      "fragile": 0.050417
+     },
+     "modelling": {
+      "stable": 0.50326,
+      "fragile": 0.007929
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 53,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 3(x − 3) = 2x + 2. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "5/2",
+     "working": [
+      "3x - 3 = 2x + 2",
+      "x = 5/2"
+     ]
+    },
+    "reasoning": {
+     "task": "brackets",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "distribute",
+       "outcome": "misconception:first-term-only"
+      },
+      {
+       "step": "collect-x",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "5/2",
+     "style": "partial",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.955193,
+      "fragile": 0.000657
+     },
+     "two-step": {
+      "stable": 0.948836,
+      "fragile": 0.000759
+     },
+     "both-sides": {
+      "stable": 0.585159,
+      "fragile": 0.092331
+     },
+     "brackets": {
+      "stable": 0.412756,
+      "fragile": 0.050417
+     },
+     "modelling": {
+      "stable": 0.50326,
+      "fragile": 0.007929
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 54,
+   "at": "2026-03-03T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "brackets",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.955193,
+      "fragile": 0.000657
+     },
+     "two-step": {
+      "stable": 0.948836,
+      "fragile": 0.000759
+     },
+     "both-sides": {
+      "stable": 0.585159,
+      "fragile": 0.092331
+     },
+     "brackets": {
+      "stable": 0.438291,
+      "fragile": 0.03025
+     },
+     "modelling": {
+      "stable": 0.50326,
+      "fragile": 0.007929
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 55,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 8
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.910068,
+      "fragile": 0.000377
+     },
+     "two-step": {
+      "stable": 0.904091,
+      "fragile": 0.000436
+     },
+     "both-sides": {
+      "stable": 0.562144,
+      "fragile": 0.05303
+     },
+     "brackets": {
+      "stable": 0.424052,
+      "fragile": 0.017374
+     },
+     "modelling": {
+      "stable": 0.485139,
+      "fragile": 0.004554
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 56,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 6x + 17 = 29. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "7/3",
+     "working": [
+      "6x = 14",
+      "x = 7/3"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "conceptual-error"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "7/3",
+     "style": "full",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.910068,
+      "fragile": 0.000377
+     },
+     "two-step": {
+      "stable": 0.904091,
+      "fragile": 0.000436
+     },
+     "both-sides": {
+      "stable": 0.562144,
+      "fragile": 0.05303
+     },
+     "brackets": {
+      "stable": 0.424052,
+      "fragile": 0.017374
+     },
+     "modelling": {
+      "stable": 0.485139,
+      "fragile": 0.004554
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 57,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.910068,
+      "fragile": 0.000377
+     },
+     "two-step": {
+      "stable": 0.90522,
+      "fragile": 0.000262
+     },
+     "both-sides": {
+      "stable": 0.562144,
+      "fragile": 0.05303
+     },
+     "brackets": {
+      "stable": 0.424052,
+      "fragile": 0.017374
+     },
+     "modelling": {
+      "stable": 0.485139,
+      "fragile": 0.004554
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 58,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "teaching",
+   "detail": {
+    "title": "Keep the balance",
+    "understood": {
+     "kind": "one-step",
+     "misconception": null,
+     "title": "Keep the balance"
+    },
+    "outcome": "partial"
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.906,
+      "fragile": 0.000782
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.489349,
+      "fragile": 0.007361
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 59,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 7x + 5 = 75. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "10",
+     "working": [
+      "7x = 70",
+      "x = 10"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "10",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.906,
+      "fragile": 0.000782
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.489349,
+      "fragile": 0.007361
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 60,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.910042,
+      "fragile": 0.000469
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.489349,
+      "fragile": 0.007361
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 61,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Anu had 8 boxes with x sweets in each. After giving away 14 sweets, Anu has 50 sweets left. Which equation describes this situation?",
+    "response": {
+     "kind": "answer",
+     "answer": "B",
+     "working": []
+    },
+    "reasoning": {
+     "task": "modelling",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "form-equation",
+       "outcome": "conceptual-error:sign"
+      }
+     ],
+     "value": "8x + 14 = 50",
+     "style": "choice",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.910042,
+      "fragile": 0.000469
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.489349,
+      "fragile": 0.007361
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 62,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "modelling",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.910042,
+      "fragile": 0.000469
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.497326,
+      "fragile": 0.004417
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 63,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Divya had 2 boxes with x sweets in each. After giving away 7 sweets, Divya has 23 sweets left. Which equation describes this situation?",
+    "response": {
+     "kind": "answer",
+     "answer": "C",
+     "working": []
+    },
+    "reasoning": {
+     "task": "modelling",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "form-equation",
+       "outcome": "conceptual-error:swap"
+      }
+     ],
+     "value": "7x - 2 = 23",
+     "style": "choice",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.910042,
+      "fragile": 0.000469
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.497326,
+      "fragile": 0.004417
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 64,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "modelling",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.910042,
+      "fragile": 0.000469
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.504076,
+      "fragile": 0.00265
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 65,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Selvi thinks of a number x. Selvi multiplies it by 3 and then adds 14. The result is 41. Which equation describes this situation?",
+    "response": {
+     "kind": "answer",
+     "answer": "C",
+     "working": []
+    },
+    "reasoning": {
+     "task": "modelling",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "form-equation",
+       "outcome": "conceptual-error:swap"
+      }
+     ],
+     "value": "14x + 3 = 41",
+     "style": "choice",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.910042,
+      "fragile": 0.000469
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.504076,
+      "fragile": 0.00265
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 66,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "modelling",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.924845,
+      "fragile": 0.010228
+     },
+     "two-step": {
+      "stable": 0.910042,
+      "fragile": 0.000469
+     },
+     "both-sides": {
+      "stable": 0.565319,
+      "fragile": 0.055147
+     },
+     "brackets": {
+      "stable": 0.42866,
+      "fragile": 0.020446
+     },
+     "modelling": {
+      "stable": 0.510069,
+      "fragile": 0.00159
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 67,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "teaching",
+   "detail": {
+    "title": "Undo one step at a time",
+    "understood": {
+     "kind": "two-step",
+     "misconception": null,
+     "title": "Undo one step at a time"
+    },
+    "outcome": "partial"
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.925381,
+      "fragile": 0.010585
+     },
+     "two-step": {
+      "stable": 0.924808,
+      "fragile": 0.010313
+     },
+     "both-sides": {
+      "stable": 0.56845,
+      "fragile": 0.057234
+     },
+     "brackets": {
+      "stable": 0.433205,
+      "fragile": 0.023476
+     },
+     "modelling": {
+      "stable": 0.514098,
+      "fragile": 0.004276
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 68,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Solve 6x + 17 = 35. What is x?",
+    "response": {
+     "kind": "answer",
+     "answer": "3",
+     "working": [
+      "6x = 18",
+      "x = 3"
+     ]
+    },
+    "reasoning": {
+     "task": "two-step",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "3",
+     "style": "full",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.925381,
+      "fragile": 0.010585
+     },
+     "two-step": {
+      "stable": 0.924808,
+      "fragile": 0.010313
+     },
+     "both-sides": {
+      "stable": 0.56845,
+      "fragile": 0.057234
+     },
+     "brackets": {
+      "stable": 0.433205,
+      "fragile": 0.023476
+     },
+     "modelling": {
+      "stable": 0.514098,
+      "fragile": 0.004276
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 69,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "two-step",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.925381,
+      "fragile": 0.010585
+     },
+     "two-step": {
+      "stable": 0.931528,
+      "fragile": 0.006188
+     },
+     "both-sides": {
+      "stable": 0.56845,
+      "fragile": 0.057234
+     },
+     "brackets": {
+      "stable": 0.433205,
+      "fragile": 0.023476
+     },
+     "modelling": {
+      "stable": 0.514098,
+      "fragile": 0.004276
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 70,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "One number is 6 times another. When 10 is added to each of them, the two new numbers add up to 62. Form an equation and find the smaller number.",
+    "response": {
+     "kind": "answer",
+     "answer": "6",
+     "working": [
+      "x + 10 + 6x + 10 = 62",
+      "x = 6"
+     ]
+    },
+    "reasoning": {
+     "task": "modelling",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "form-equation",
+       "outcome": "correct"
+      },
+      {
+       "step": "move-constant",
+       "outcome": "correct"
+      },
+      {
+       "step": "divide",
+       "outcome": "correct"
+      }
+     ],
+     "value": "6",
+     "style": "partial",
+     "correctMethod": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.925381,
+      "fragile": 0.010585
+     },
+     "two-step": {
+      "stable": 0.931528,
+      "fragile": 0.006188
+     },
+     "both-sides": {
+      "stable": 0.56845,
+      "fragile": 0.057234
+     },
+     "brackets": {
+      "stable": 0.433205,
+      "fragile": 0.023476
+     },
+     "modelling": {
+      "stable": 0.514098,
+      "fragile": 0.004276
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 71,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "correct",
+    "practice": {
+     "kind": "modelling",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.925381,
+      "fragile": 0.010585
+     },
+     "two-step": {
+      "stable": 0.931528,
+      "fragile": 0.006188
+     },
+     "both-sides": {
+      "stable": 0.56845,
+      "fragile": 0.057234
+     },
+     "brackets": {
+      "stable": 0.433205,
+      "fragile": 0.023476
+     },
+     "modelling": {
+      "stable": 0.535073,
+      "fragile": 0.002566
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 72,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "respond",
+   "detail": {
+    "prompt": "Karthik had 9 boxes with x sweets in each. After giving away 19 sweets, Karthik has 80 sweets left. Which equation describes this situation?",
+    "response": {
+     "kind": "answer",
+     "answer": "A",
+     "working": []
+    },
+    "reasoning": {
+     "task": "modelling",
+     "mode": "solved",
+     "steps": [
+      {
+       "step": "form-equation",
+       "outcome": "conceptual-error:swap"
+      }
+     ],
+     "value": "19x - 9 = 80",
+     "style": "choice",
+     "correctMethod": false
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.925381,
+      "fragile": 0.010585
+     },
+     "two-step": {
+      "stable": 0.931528,
+      "fragile": 0.006188
+     },
+     "both-sides": {
+      "stable": 0.56845,
+      "fragile": 0.057234
+     },
+     "brackets": {
+      "stable": 0.433205,
+      "fragile": 0.023476
+     },
+     "modelling": {
+      "stable": 0.535073,
+      "fragile": 0.002566
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 73,
+   "at": "2026-03-11T09:00:00.000Z",
+   "event": "feedback",
+   "detail": {
+    "level": "incorrect",
+    "practice": {
+     "kind": "modelling",
+     "independent": true,
+     "engaged": true
+    }
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.925381,
+      "fragile": 0.010585
+     },
+     "two-step": {
+      "stable": 0.931528,
+      "fragile": 0.006188
+     },
+     "both-sides": {
+      "stable": 0.56845,
+      "fragile": 0.057234
+     },
+     "brackets": {
+      "stable": 0.433205,
+      "fragile": 0.023476
+     },
+     "modelling": {
+      "stable": 0.540723,
+      "fragile": 0.00154
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 74,
+   "at": "2026-03-14T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 3
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.908813,
+      "fragile": 0.008598
+     },
+     "two-step": {
+      "stable": 0.91482,
+      "fragile": 0.005026
+     },
+     "both-sides": {
+      "stable": 0.560035,
+      "fragile": 0.046488
+     },
+     "brackets": {
+      "stable": 0.427879,
+      "fragile": 0.019068
+     },
+     "modelling": {
+      "stable": 0.532941,
+      "fragile": 0.001251
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  },
+  {
+   "n": 75,
+   "at": "2026-03-22T09:00:00.000Z",
+   "event": "time",
+   "detail": {
+    "days": 8
+   },
+   "state": {
+    "skill": {
+     "one-step": {
+      "stable": 0.866459,
+      "fragile": 0.004938
+     },
+     "two-step": {
+      "stable": 0.872107,
+      "fragile": 0.002887
+     },
+     "both-sides": {
+      "stable": 0.538522,
+      "fragile": 0.0267
+     },
+     "brackets": {
+      "stable": 0.414262,
+      "fragile": 0.010952
+     },
+     "modelling": {
+      "stable": 0.513047,
+      "fragile": 0.000719
+     }
+    },
+    "misconception": {
+     "only-one-side": 0.45,
+     "x-sign-kept": 0.35,
+     "first-term-only": 0.5,
+     "bracket-sign": 0.45
+    }
+   }
+  }
+ ]
+}

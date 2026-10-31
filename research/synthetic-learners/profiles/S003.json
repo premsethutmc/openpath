@@ -1,0 +1,56 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "S003",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Procedural learner",
+ "description": "Strong one- and two-step procedures; weak with x on both sides and brackets (systematic errors there).",
+ "seed": 3003,
+ "skills": {
+  "one-step": 0.96,
+  "two-step": 0.93,
+  "both-sides": 0.25,
+  "brackets": 0.2,
+  "modelling": 0.45
+ },
+ "misconceptions": {
+  "only-one-side": 0.45,
+  "x-sign-kept": 0.35,
+  "first-term-only": 0.5,
+  "bracket-sign": 0.45
+ },
+ "slip": 0.04,
+ "guess": 0.0,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.75,
+  "partial": 0.1,
+  "bare": 0.1,
+  "none": 0.05,
+  "unsupportedNotation": 0.1
+ },
+ "hints": {
+  "seek": 0.3,
+  "help": 0.2
+ },
+ "instruction": {
+  "full": 0.5,
+  "partial": 0.3,
+  "gain": 0.55,
+  "fragileShare": 0.4,
+  "misconceptionReduction": 0.7,
+  "misconceptionResponse": 0.6,
+  "offTargetGain": 0.05
+ },
+ "practice": {
+  "consolidate": 0.4,
+  "gainRight": 0.04,
+  "gainWrong": 0.01
+ },
+ "forgetting": {
+  "halfLifeDays": 90,
+  "floor": 0.2,
+  "fragileHalfLifeDays": 10,
+  "relapse": 0.2
+ }
+}
