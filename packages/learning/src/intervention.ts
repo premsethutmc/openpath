@@ -25,6 +25,8 @@ import { modulePhasePool } from "./library";
 import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis } from "./hypotheses";
 import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import { teachingEligibility, type TeachingEligibility } from "./teaching-contract";
+import { contentEligibility, teachingMode, type ContentEligibility } from "./explanation-review";
+import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
@@ -54,7 +56,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
 }
 
 /** Strategies in the order to try: the diagnosis's kind first, then by what the probes show the learner can build on. */
-export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords): Strategy[] {
+export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords, misconceptionEvidence: Evidence = establishedIds(m.competency, records)): Strategy[] {
   const kind = d.result === "conceptual" || d.result === "insufficient_evidence" ? "conceptual" : d.result === "procedural" || d.result === "transfer" ? "procedural" : d.result === "recall" ? "recall" : d.result === "prerequisite" ? "prerequisite" : null;
   const needState = (s: Strategy) => {
     const res = s.needs.map((id) => answered(records, id));
@@ -62,12 +64,24 @@ export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords
     if (res.every((a) => a && rightAnswer(a))) return 0; // builds on what the learner showed
     return 1;
   };
-  return m.strategies.filter((s) => !failsChecks(m, s)).sort((a, b) => Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
+  return m.strategies.filter((s) => teachable(m, s, misconceptionEvidence)).sort((a, b) => Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
 }
 /** teaching gate (adaptive-loop repair): an explanation whose sections fail the teaching contract is never chosen as an
  *  intervention. One that was not machine-checked (hand-written modules) may be used, and says so; none is "verified". */
 export const failsChecks = (m: Module, s: Strategy) => { const e = teachingEligibility(m, s); return e.checked && !e.eligible; };
 export const teachingStatus = (m: Module, s: Strategy): TeachingEligibility["review"] => teachingEligibility(m, s).review;
+/** content-safety gate (explanation-review@1, misconception-evidence@1): an explanation is used as an intervention only
+ *  when it also passes the content review for the current teaching mode, is for this skill, and, when it is about a
+ *  particular misconception, that misconception is established for this learner. A refusal is never replaced by other
+ *  content: the engine chooses another eligible explanation or pauses. */
+type Evidence = boolean | readonly string[];
+/** The misconceptions established for this learner in this skill (learner-hypothesis@1), by diagnosis id. */
+export const establishedIds = (competency: string, records: LearnerRecords) => hypothesesFor(competency, records).filter((h) => h.status === "established").map((h) => h.claim?.explanation).filter((x): x is string => !!x);
+export const contentReviewOf = (m: Module, s: Strategy, misconceptionEvidence: Evidence): ContentEligibility => contentEligibility(m, s, { competency: m.competency, misconceptionEvidence, usage: "intervention" });
+export const teachable = (m: Module, s: Strategy, misconceptionEvidence: Evidence) => !failsChecks(m, s) && contentReviewOf(m, s, misconceptionEvidence).eligible;
+const NO_EXPLANATION = () => teachingMode() === "supervised-evaluation"
+  ? "OpenPath has no educator-approved explanation for this yet, so it will not teach this one for now. Carry on, and go through it with a teacher or parent."
+  : "OpenPath has no checked explanation for this yet, so it will not teach this one for now. Carry on, and go through it with a teacher or parent.";
 /** The next probe to ask before choosing: the first unknown need of the best strategy that could still be chosen. */
 export function nextProbe(m: Module, d: Diagnosis, records: LearnerRecords): string | null {
   for (const s of orderStrategies(m, d, records)) {
@@ -137,14 +151,20 @@ export interface ModuleState {
   why?: string;
   /** phase "recover": the wrong answer whose investigation (diagnostic@2, the same as from Practice) runs first. */
   original?: string;
-  /** phase "chapter": what the explanation's quality is known to be (never educator-approved here). */
+  /** phase "chapter": what the explanation's quality is known to be (machine check). */
   teachingReview?: TeachingEligibility["review"];
+  /** phase "chapter": the content-safety decision for the explanation shown (explanation-review@1), with its label. */
+  contentReview?: ContentEligibility;
+  /** phase "chapter": what the learner's evidence shows (misconception-evidence@1). */
+  basis?: EvidenceBasis;
 }
 
 /** What an earlier diagnosis (diagnostic@2, in recovery) established about this skill, so it is not asked again. */
 export interface Established {
   kind: "conceptual" | "procedural" | "recall" | "prerequisite";
   says: string;
+  /** The diagnosis id (misconception-evidence@1: a misconception-specific explanation must be about this one). */
+  id?: string;
 }
 /** bounded-input@1 (Milestone 2): an answer that cannot be read is never marked and never an attempt (approved policy P1), so on its own it never
  *  moves the module on. After UNREADABLE_LIMIT unreadable answers to the question the module would ask next, the module does not ask it again:
@@ -210,9 +230,9 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // the misunderstanding showed again after this skill's teaching: a different explanation (all tried: a person)
   if (here && own!.teachingDue && records.teaching.some((t) => t.competency === competency && t.at > (own!.provenance.established ?? ""))) {
     const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
-    const s = orderStrategies(m, d, records).find((x) => !delivered(x));
+    const s = orderStrategies(m, d, records, [own!.claim!.explanation]).find((x) => !delivered(x));
     if (!s) return { ...base, phase: "pause", diagnosis: d, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
-    return { ...base, phase: "chapter", strategy: s, diagnosis: d, reason: `${own!.claim!.says} It showed again after the last explanation, so here is a different one.` };
+    return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, [own!.claim!.explanation]), basis: evidenceBasis(competency, records, { evidence: ev, diagnosis: d }), diagnosis: d, reason: `${own!.claim!.says} It showed again after the last explanation, so here is a different one.` };
   }
   if (d.next && !shown) return { ...base, phase: "explore", question: d.next, diagnosis: d, reason: "A short check to find the right starting point." };
   // adaptive-loop repair: a gap the exploratory questions show is investigated exactly as from Practice (diagnostic@2 on the
@@ -263,7 +283,10 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   }
   const probe = nextProbe(m, d, records);
   if (probe && !records.teaching.some((t) => t.competency === competency)) return { ...base, phase: "strategy", question: probe, diagnosis: d, reason: "A quick question about what you already know, to choose the best way to explain." };
-  const order = orderStrategies(m, d, records);
+  const basis = evidenceBasis(competency, records, { evidence: ev, diagnosis: d, established });
+  // a finding passed in by recovery (diagnostic@2) carries its diagnosis id; one without an id licenses any misconception-specific explanation
+  const misEv: Evidence = established ? (established.id ? [established.id] : true) : basis.established;
+  const order = orderStrategies(m, d, records, misEv);
   const rs = ruleStateFor(m, d, records);
   const sessionStart = records.sessions[session] ?? new Date(now).toISOString();
   const last = records.teaching.filter((t) => t.competency === competency).at(-1);
@@ -274,7 +297,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     now: new Date(now).toISOString(),
     sessionStartedAt: sessionStart,
     session,
-    available: { apply: m.strategies.filter((s) => !failsChecks(m, s) && !answered(records, s.check)).length + (fromPool(m, "check", records) ? 1 : 0), contrast: 0, guided: st && !answered(records, st.guided) ? 1 : 0 },
+    available: { apply: m.strategies.filter((s) => teachable(m, s, misEv) && !answered(records, s.check)).length + (fromPool(m, "check", records) ? 1 : 0), contrast: 0, guided: st && !answered(records, st.guided) ? 1 : 0 },
     answeredThisSession: records.attempts.filter((a) => of(m)(a) && a.at >= sessionStart && independentAttempt(a)).length,
     guidedThisBlock: st && records.attempts.some((a) => a.questionId === st.guided && a.at >= last!.at) ? 1 : 0,
     policy: MODULE_POLICY,
@@ -286,9 +309,9 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     // seen as practice; a strategy whose check was already answered is still taught, with a fresh check (blockCheck)
     const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
     if (s && delivered(s)) s = order.find((x) => !delivered(x)) ?? null;
-    if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : "OpenPath has no checked explanation for this yet, so it will not teach this one for now. Carry on, and go through it with a teacher or parent." };
+    if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() };
     const before = records.teaching.some((t) => t.competency === competency);
-    return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open ? `${own!.claim!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
+    return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open ? `${own!.claim!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
   }
   if (decision.action === "guided_practice" && st) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) {
@@ -296,7 +319,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, decision, reason: "Now one new question on your own, with no hints." };
     return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
   }
-  if ((decision.action === "recommend_human" || decision.action === "content_gap") && !order.length) return { ...base, phase: "pause", diagnosis: d, decision, reason: "OpenPath has no checked explanation for this yet, so it will not teach this one for now. Carry on, and go through it with a teacher or parent." };
+  if ((decision.action === "recommend_human" || decision.action === "content_gap") && !order.length) return { ...base, phase: "pause", diagnosis: d, decision, reason: NO_EXPLANATION() };
   if (decision.action === "content_gap") return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
   if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
   if (resProbe) return { ...base, phase: "verify", question: resProbe, diagnosis: d, decision, why: `resolution probe for ${own!.id}`, reason: "One question on your own that shows whether that misunderstanding has gone." };
@@ -441,7 +464,7 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     if (reasoning) plan = nextFromReasoning(reasoning, q.competency);
     if (plan && plan.kind !== "unsure" && plan.competency) {
       const best = reasoning!.best!;
-      const est: Established | null = best.kind === "secure" || best.kind === "unexplained" ? null : { kind: best.kind, says: best.says };
+      const est: Established | null = best.kind === "secure" || best.kind === "unexplained" ? null : { kind: best.kind, says: best.says, id: best.id };
       if (plan.kind === "practise") return { ...base, reasoning, plan, phase: "return", active: null, reason: `${plan.why} Try the problem again.` };
       if (moduleFor(plan.competency)) {
         const r = resolved(plan.competency, est);
@@ -473,7 +496,7 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
       return { ...base, reasoning, plan, phase: "return", active: null, reason: "Back to the original problem, after the explanation and a question on your own." };
     }
     const m = moduleFor(ownTarget);
-    const eligible = !!m && m.strategies.some((st) => !failsChecks(m, st));
+    const eligible = !!m && m.strategies.some((st) => teachable(m, st, establishedIds(ownTarget, records)));
     if (!eligible) return { ...base, reasoning, plan, phase: "escalate", active: null, reason: "No gap was found in the skills this problem builds on, and there is no checked explanation of this skill to offer here. Go through it with a teacher or parent." };
     const r = resolved(ownTarget);
     if (r.ms.phase === "chapter" || r.ms.question) return { ...base, reasoning, plan, phase: "teach", active: ownTarget, reason: "No gap was found in the skills this problem builds on. Here is this skill itself: an explanation, then a question on your own." };

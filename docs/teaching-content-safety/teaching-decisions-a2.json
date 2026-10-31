@@ -1,0 +1,583 @@
+[
+ {
+  "id": "1b",
+  "category": "strong learner, one isolated slip",
+  "learner": "strong, one slip at answer 3",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": false,
+   "taught": 0,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": []
+ },
+ {
+  "id": "1a",
+  "category": "strong learner, one isolated slip",
+  "learner": "strong, one slip at answer 1",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": false,
+   "taught": 0,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": []
+ },
+ {
+  "id": "2a",
+  "category": "same mathematical error repeated",
+  "learner": "misconception forgot-divide until 1 explanation(s)",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 1,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "spot_the_mistake",
+    "specific": true,
+    "basis": "established misconception: forgot-divide (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "pending_review (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "2b",
+  "category": "same mathematical error repeated",
+  "learner": "misconception forgot-divide until never explanation(s)",
+  "ended": "pause",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 2,
+   "retried": 0,
+   "paused": true,
+   "escalated": true
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "spot_the_mistake",
+    "specific": true,
+    "basis": "established misconception: forgot-divide (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "pending_review (ai-screening)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "linear-equations",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "established misconception: forgot-divide (3 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "2c",
+  "category": "same mathematical error repeated",
+  "learner": "misconception added-not-subtracted until 1 explanation(s)",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 1,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "established misconception: added-not-subtracted (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "2h",
+  "category": "same mathematical error repeated",
+  "learner": "misconception minus-c-sign until never explanation(s)",
+  "ended": "pause",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 3,
+   "retried": 0,
+   "paused": true,
+   "escalated": true
+  },
+  "decisions": [
+   {
+    "competency": "quadratic-discriminant",
+    "strategy": "parabola",
+    "specific": false,
+    "basis": "module starting check: insufficient_evidence (confidence 0.39); hypotheses none",
+    "evidence": "repeated-difficulty",
+    "facts": [
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "general (no diagnosis claimed)",
+    "content": "pending_review (registry)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "quadratics",
+    "strategy": "square_meaning",
+    "specific": false,
+    "basis": "recovery named this skill (uncertain)",
+    "evidence": "repeated-difficulty",
+    "facts": [
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "general (no diagnosis claimed)",
+    "content": "pending_review (registry)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "quadratics",
+    "strategy": "two_numbers",
+    "specific": false,
+    "basis": "recovery named this skill (uncertain)",
+    "evidence": "repeated-difficulty",
+    "facts": [
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "general (no diagnosis claimed)",
+    "content": "pending_review (registry)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "3a",
+  "category": "missing prerequisite competency",
+  "learner": "lacks integer-add (minus-c-sign+minus-negative-as-minus) until it is taught",
+  "ended": "done",
+  "actions": {
+   "assessed": false,
+   "investigated": true,
+   "taught": 2,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "integer-add",
+    "strategy": "tokens",
+    "specific": false,
+    "basis": "established misconception: minus-c-sign (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception"
+    ],
+    "verdict": "justified",
+    "content": "revision_required (ai-screening)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "quadratic-discriminant",
+    "strategy": "signed_numbers",
+    "specific": false,
+    "basis": "established misconception: minus-c-sign (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "missing-prerequisite",
+     "hint-dependence",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "pending_review (registry)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "3c",
+  "category": "missing prerequisite competency",
+  "learner": "lacks place-value-tens (no-regroup) until it is taught",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 1,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "place-value-tens",
+    "strategy": "count_on",
+    "specific": false,
+    "basis": "established misconception: no-regroup (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception"
+    ],
+    "verdict": "justified",
+    "content": "revision_required (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "3d",
+  "category": "missing prerequisite competency",
+  "learner": "lacks multiplication-tables (fact-slip:5x6) until it is taught",
+  "ended": "done",
+  "actions": {
+   "assessed": false,
+   "investigated": true,
+   "taught": 2,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "multiplication-tables",
+    "strategy": "near_fact",
+    "specific": false,
+    "basis": "established misconception: fact-slip:5x6 (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "pending_review (ai-screening)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "multi-multiplication",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "established misconception: fact-slip:5x6 (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "missing-prerequisite",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "revision_required (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "3h",
+  "category": "missing prerequisite competency",
+  "learner": "misconception sign-dropped until never explanation(s)",
+  "ended": "pause",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 2,
+   "retried": 0,
+   "paused": true,
+   "escalated": true
+  },
+  "decisions": [
+   {
+    "competency": "algebra-simplify",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "recovery found no gap in the skills it builds on; the problem is still wrong",
+    "evidence": "missing-prerequisite",
+    "facts": [
+     "missing-prerequisite",
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "algebra-simplify",
+    "strategy": "check_number",
+    "specific": false,
+    "basis": "recovery found no gap in the skills it builds on; the problem is still wrong",
+    "evidence": "missing-prerequisite",
+    "facts": [
+     "missing-prerequisite",
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "revision_required (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "4a",
+  "category": "succeeds only after hints",
+  "learner": "right only after a hint",
+  "ended": "pause",
+  "actions": {
+   "assessed": true,
+   "investigated": false,
+   "taught": 1,
+   "retried": 0,
+   "paused": true,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "module starting check: insufficient_evidence (confidence 0.47); hypotheses none",
+    "evidence": "repeated-difficulty",
+    "facts": [
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "general (no diagnosis claimed)",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "4b",
+  "category": "succeeds only after hints",
+  "learner": "hint in guided practice, then right alone",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 0,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": []
+ },
+ {
+  "id": "4c",
+  "category": "succeeds only after hints",
+  "learner": "hint, still wrong",
+  "ended": "pause",
+  "actions": {
+   "assessed": true,
+   "investigated": false,
+   "taught": 1,
+   "retried": 0,
+   "paused": true,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "module starting check: insufficient_evidence (confidence 0.47); hypotheses none",
+    "evidence": "repeated-difficulty",
+    "facts": [
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "general (no diagnosis claimed)",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "5a",
+  "category": "fails after the first teaching",
+  "learner": "misconception forgot-divide until 2 explanation(s)",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 2,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "spot_the_mistake",
+    "specific": true,
+    "basis": "established misconception: forgot-divide (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "pending_review (ai-screening)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "linear-equations",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "established misconception: forgot-divide (3 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "5b",
+  "category": "fails after the first teaching",
+  "learner": "always wrong (readable)",
+  "ended": "pause",
+  "actions": {
+   "assessed": true,
+   "investigated": false,
+   "taught": 1,
+   "retried": 0,
+   "paused": true,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "module starting check: insufficient_evidence (confidence 0.47); hypotheses none",
+    "evidence": "repeated-difficulty",
+    "facts": [
+     "repeated-difficulty",
+     "observed-incorrect"
+    ],
+    "verdict": "general (no diagnosis claimed)",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "5c",
+  "category": "fails after the first teaching",
+  "learner": "misconception forgot-divide, slips the first check after teaching",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": true,
+   "taught": 2,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": [
+   {
+    "competency": "linear-equations",
+    "strategy": "spot_the_mistake",
+    "specific": true,
+    "basis": "established misconception: forgot-divide (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "pending_review (ai-screening)",
+    "mode": "demonstration"
+   },
+   {
+    "competency": "linear-equations",
+    "strategy": "check_what_it_uses",
+    "specific": false,
+    "basis": "established misconception: forgot-divide (2 supporting answer(s))",
+    "evidence": "verified-misconception",
+    "facts": [
+     "verified-misconception",
+     "hint-dependence",
+     "observed-incorrect"
+    ],
+    "verdict": "justified",
+    "content": "demo_only (ai-screening)",
+    "mode": "demonstration"
+   }
+  ]
+ },
+ {
+  "id": "6a",
+  "category": "forgets during delayed retention",
+  "learner": "strong, slips once on the delayed check",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": false,
+   "taught": 0,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": []
+ },
+ {
+  "id": "6e",
+  "category": "forgets during delayed retention",
+  "learner": "strong, slips once on the delayed check",
+  "ended": "done",
+  "actions": {
+   "assessed": true,
+   "investigated": false,
+   "taught": 0,
+   "retried": 0,
+   "paused": false,
+   "escalated": false
+  },
+  "decisions": []
+ }
+]

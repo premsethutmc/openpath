@@ -3,6 +3,7 @@ import { moduleFor, needsMarking, question } from "../../../packages/learning/sr
 import { problemOf } from "../../../packages/learning/src/families";
 import { modulePhasePool } from "../../../packages/learning/src/library";
 import { SHOWCASE, teachingLesson, type LessonBlock } from "../../../packages/learning/src/teaching-contract";
+import { teachingMode } from "../../../packages/learning/src/explanation-review";
 import { teachingScopeFor } from "../../../packages/learning/src/teaching-presentation";
 import { Figure } from "../year/Figure";
 import { ProgressiveWorkedExample, RepresentationRenderer, TeachingVisualRenderer } from "./TeachingPrimitives";
@@ -32,8 +33,9 @@ function TeachingBlock({ block, index, resumeKey, repeatsHeading = false }: { bl
 
 const lessonCache = new Map<string, ReturnType<typeof teachingLesson> | null>();
 function lessonFor(competency: string) {
-  if (!lessonCache.has(competency)) { const module = moduleFor(competency); lessonCache.set(competency, module ? teachingLesson(module, candidatesFor(module)) : null); }
-  return lessonCache.get(competency)!;
+  const key = `${competency}|${teachingMode()}`; // explanation-review@1: what may be shown depends on the teaching mode
+  if (!lessonCache.has(key)) { const module = moduleFor(competency); lessonCache.set(key, module ? teachingLesson(module, candidatesFor(module)) : null); }
+  return lessonCache.get(key)!;
 }
 /** Practice candidates: the lesson's practice pool, minus questions needing marking and questions outside the taught scope. */
 function candidatesFor(module: NonNullable<ReturnType<typeof moduleFor>>) {
@@ -71,6 +73,7 @@ export function TeachingContent({ competency, topic, onPractice, resumeKey }: { 
       <p className="teaching-crumb">{topic.breadcrumb}</p>
       <h2>{heading}</h2>
       {intro && !introRepeats ? <p className="teaching-intro">{intro}</p> : null}
+      {lesson && blocks.length ? <p className="small muted" role="note" data-content-review="lesson">{lesson.contentLabel}</p> : null}
     </header>
     {module && blocks.length ? blocks.map((block, i) => <TeachingBlock key={`${competency}-${block.title}-${i}`} block={block} index={i} resumeKey={resumeKey} repeatsHeading={i === 0 && block.title === heading} />) : <section className="teaching-block unavailable"><h3>Teaching is being prepared</h3><p>This topic does not yet have suitable teaching content.</p></section>}
     <section className="practice-invitation">

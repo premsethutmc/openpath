@@ -1,7 +1,7 @@
 {
  "version": 1,
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "b4a2e6379ce28f86b336051a02dd76dd4d707bd43daa53d1686d6e5cabdb61ac",
+ "sha256": "15a5b71b5ad9cc057bf54b190489b824fa338bc326f26e9bd3c11726f04a9c20",
  "inputs": {
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
   "content/learning/competency-expansion.v1.json": "1bb51dbadd083f995c56df644a1a2af30b3dabfdb2a5a4532a8f18e36a4ea7b8",
@@ -9,8 +9,8 @@
   "content/learning/goals.v1.json": "ce68e02e772b6944ee20ab45186ec070da33f64af6b7aa81ab32b87af9f55dcf",
   "content/learning/grading-certifications.v1.json": "ef820377fd71a6459c3c339657c7403884538db33d4dad70bdbe61daae6ead66",
   "content/learning/graph-audit.v1.json": "6eccc095bc2e8174c21c284bfeb51bb72f64dc936b0a895df52ed7bb89798754",
-  "content/learning/library.v1.json": "f36f913424574cbf8f984c423906125ae8dc381ef421b5fd98a221aa94555ee7",
-  "content/learning/modules.v1.json": "eccbd32538b73bdf6449b47d4f602486146b46ccef4915322f6d4bf593c266d4",
+  "content/learning/library.v1.json": "df45ef45cd978f87a7872e72e6ed053963f38f0624c5e46134a011be7e645880",
+  "content/learning/modules.v1.json": "815e91ebe644d5966ffed58fa9913fd934b702ff87b1b6b611b0e0334b38ddbe",
   "content/learning/problems.v1.json": "2d0cca6da92e398d4077e07be65162787e59652cda5319b8928ab0ab52c4e727",
   "content/learning/question-status.v1.json": "4a368546d264f94ed741ac32a4aebe75d610bbdd55e8f39aae17809a82144a61",
   "content/learning/written-modules.v1.json": "d9a0a9c5af5a65353d1ecc984a55166e8a7c572d1d6ef76e25f52962f96ad08a",
@@ -34,7 +34,7 @@
   "packages/learning/src/domains-m2.ts": "fcde7bde7b75086a547e6873ef252062b95d312d008b7490e21fb5c905190866",
   "packages/learning/src/fam/b01.ts": "537350fb432d55b4c66ac71ae2946000bb833c1fed2e024135db6a0ea1fb0066",
   "packages/learning/src/fam/b02.ts": "a76754b48bcba7ec9fca23e585cd58be396f5fa8dc1f6d360ebac1e9ca88230b",
-  "packages/learning/src/fam/b03.ts": "d6f7d91b78809dc9754be51e2d372a6809a1c6f482b772c53c19c3fb2afcc2c8",
+  "packages/learning/src/fam/b03.ts": "5c1d8b11662377d4f355349543e5c0c3d9b215cbb0442436e1f81f6eaaf06146",
   "packages/learning/src/fam/b04.ts": "c6692180eede6082e30bedda9fa363229bb30e78cc180800c6ba33d78b45e537",
   "packages/learning/src/fam/b05.ts": "dcfdf0fd65f45d4e2156a8a549afaaee85eb54473102e945955e140781651e2d",
   "packages/learning/src/fam/b06.ts": "2206cef55a7bd5c73ad80e5e077f1594e44f362bee90c8e09e7c15f9a72d8b78",

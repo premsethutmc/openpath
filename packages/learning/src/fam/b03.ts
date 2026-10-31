@@ -1017,7 +1017,7 @@ export const B03: Def[] = [
             : `${k} children each have the same number of pencils. Together they have ${k * u} pencils. How many pencils does each child have?`,
     teach: {
       idea: "Adding and taking away undo each other, and so do multiplying and dividing, so you can work backwards to the missing number.",
-      method: "Read the sentence and ask what was done to the box. Do the opposite to the other number, then check by putting your answer in the box.",
+      method: "Read the sentence and ask what was done to the box, then work backwards. If a number was added to the box, take it away. If a number was taken away from the box, add it back. If the box was multiplied by a number, divide by that number. If the box was taken away from a number, the box is the gap: the first number take away the answer. Check by putting your answer in the box.",
       visual: ([f, u, k]) => ({ type: "balance", left: missingText(f, u, k).split(" = ")[0], right: missingText(f, u, k).split(" = ")[1] }),
       alternatives: [
         { id: "count_on", title: "Count on to find the gap", kind: "procedural", text: ["For □ + 7 = 15, start at 7 and count on to 15: 8, 9, … 15 is 8 counts.", "The number of counts is the missing number."], visual: ([f, u, k]) => (f === 0 ? { type: "numberline", from: k, to: u + k, jumps: [[k, u + k]] } : null) },

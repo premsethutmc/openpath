@@ -361,7 +361,7 @@
       {
        "title": "8 is 2 × 2 × 2",
        "text": [
-        "Start from 7 × 2 = 14 and double three times: 28, then 56."
+        "So 7 × 8 is 7 doubled three times: 7 → 14 → 28 → 56. If you already know 7 × 2 = 14, double twice more: 28, then 56."
        ],
        "math": [
         "7 × 2 = 14",

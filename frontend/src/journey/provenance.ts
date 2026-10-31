@@ -1,7 +1,8 @@
 /**
  * Milestone 2 teaching/feedback provenance: every learner-facing text in every frame the renderer was given must come from an owner:
  *   question content (prompt, options, authored hint) | the adaptive engine (a moduleState / recovery reason, a selected strategy's title and screens)
- *   | the grader's decision (verdict, reason code) | a fixed adapter label that states no mathematics (listed below).
+ *   | the grader's decision (verdict, reason code) | a fixed adapter label that states no mathematics (listed below)
+ *   | the content-review label explanation-review@1 returned for the explanation shown, appended to the engine's reason.
  * Returns the violations (empty = every text is traceable). No raw solver output, generated feedback or invented correctness claim can pass.
  */
 import { moduleFor, question } from "../../../packages/learning/src/content";
@@ -27,6 +28,9 @@ export function checkProvenance(f: SliceFlow): string[] {
       if (st) strategies.set(st.id, { title: st.title, texts: new Set(st.screens.flatMap((s) => [...s.text.map((x, j) => (j === 0 ? `${s.title} — ${x}` : x)), ...(s.math ?? [])])) });
     }
   }
+  // explanation-review@1: the label is the content gate's own sentence, appended to the engine's reason for the explanation
+  const labels = new Set(["Demonstration: this explanation has not been approved by an educator.", ...f.session.trace.filter((t) => t.component === "explanation-review.contentEligibility").map((t) => (t.output as { label?: string }).label ?? "")]);
+  for (const r of [...engine]) for (const l of labels) engine.add(`${r} ${l}`);
   let reply = 0;
   f.frames.forEach((fr, i) => {
     const sp = fr.spec, where = `frame ${i} (${fr.stage})`;

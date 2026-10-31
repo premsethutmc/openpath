@@ -8,6 +8,7 @@ import { AnswerInput } from "../year/Learn";
 import { Figure } from "../year/Figure";
 import { TeachingContent, teachingPracticeIds } from "./TeachingContent";
 import type { DashRelease } from "../../../packages/learning/src/dashboard";
+import { chapterExplanation, contentEligibility } from "../../../packages/learning/src/explanation-review";
 
 type View = "teaching" | "practice" | "complete";
 type Result = "wrong" | "right" | null;
@@ -32,7 +33,7 @@ export function PreviewExperience({ release, competency, home, back }: { release
   const workingLines = working.split("\n").map((line) => line.trim()).filter(Boolean);
   const workingResult = result && workable && workingLines.length ? checkWorking(familyProblem!, workingLines) : null;
   const usefulFigure = q?.figure?.type !== "numberline" || ("jumps" in (q?.figure ?? {}) && Array.isArray(q?.figure?.jumps) && q.figure.jumps.length > 0);
-  const focusedIdea = module?.chapter[0]?.text[0]?.split(/ A relation from/i)[0];
+  const focusedIdea = module && contentEligibility(module, chapterExplanation(module), { competency: module.competency, usage: "lesson" }).eligible ? module.chapter[0]?.text[0]?.split(/ A relation from/i)[0] : undefined;
   const goPractice = () => { setView("practice"); setResult(null); setHint(false); window.scrollTo(0, 0); };
   const goTeaching = () => { setView("teaching"); setResult(null); setHint(false); window.scrollTo(0, 0); };
   const next = () => {

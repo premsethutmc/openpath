@@ -2,7 +2,9 @@ import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import "../math/math.css";
 import { LearningScreen } from "../math/components/LearningScreen";
-import { question } from "../../../packages/learning/src/content";
+import { moduleFor, question } from "../../../packages/learning/src/content";
+import { contentEligibility } from "../../../packages/learning/src/explanation-review";
+import { teachingSpec, teachingSteps } from "./renderer-adapter";
 import { problemOf } from "../../../packages/learning/src/families";
 import { bugValue } from "../learning/adaptive-journey";
 import { SliceFlow } from "./flow";
@@ -40,4 +42,15 @@ function App() {
   rerender = () => { setSpec(flow.spec); tick((n) => n + 1); };
   return <LearningScreen key={flow.frames.length + flow.stage + spec.question.questionId} spec={spec} learningState={flow.learningState} experienceId="algebra" onEvent={(e) => { if (e.type === "input_changed") return; setSpec(flow.on(e)); }} />;
 }
-createRoot(document.getElementById("root")!).render(<App />);
+// ?explain=<competency>#<strategy> (encoded): one explanation as the learner sees it, every step revealed, with what may be said about its
+// review (explanation-review@1) — the rendering check for corrected explanations. Display only: no learner, no records.
+const ex = new URLSearchParams(location.search).get("explain");
+function Explain({ id }: { id: string }) {
+  const [competency, sid0] = id.split("#");
+  const m = moduleFor(competency), st = m?.strategies.find((x) => x.id === sid0);
+  if (!m || !st) return <p role="alert">No such explanation: {id}</p>;
+  const c = contentEligibility(m, st, { competency, usage: "lesson" });
+  const spec = teachingSpec(st.guided, st, teachingSteps(st), { message: st.title, detail: c.eligible ? c.label : `Not shown: ${c.failed.join(", ")}`, tone: "encouraging" });
+  return <div data-explanation={id} data-eligible={String(c.eligible)} data-status={c.status}>{c.eligible ? <LearningScreen spec={spec} learningState={flow.learningState} experienceId="algebra" onEvent={() => {}} /> : <p role="alert">{spec.teacherGuide?.detail}</p>}</div>;
+}
+createRoot(document.getElementById("root")!).render(ex ? <Explain id={ex} /> : <App />);

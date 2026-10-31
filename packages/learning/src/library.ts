@@ -222,7 +222,7 @@ export function fromTemplate(family: string, competency: string, version: string
   }
   if (mistakeEx) {
     const b = conceptual(mistakeEx)!;
-    strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ role: "misconception", instance: mistakeEx.id, title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \(.*\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
+    strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ role: "misconception", instance: mistakeEx.id, title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \((?:[^()]|\([^()]*\))*[.!?]\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
   }
   if (uses.length)
     strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ role: "prerequisite", title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });

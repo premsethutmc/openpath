@@ -325,7 +325,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
       <div className="stack">
         {head}
         <p className="why">{ms.reason}</p>
-        <p className="small muted" role="note">{ms.teachingReview === "machine-checked" ? "This explanation has been checked automatically against its question. A teacher has not reviewed it yet." : "This explanation has not been checked automatically or reviewed by a teacher yet."}</p>
+        <p className="small muted" role="note" data-content-review={ms.contentReview?.status ?? "unknown"}>{ms.contentReview?.educatorApproved ? ms.contentReview.label : `${ms.contentReview?.label ?? "Demonstration: this explanation has not been approved by an educator."} ${ms.teachingReview === "machine-checked" ? "It has been checked automatically against its question." : "It has not been checked automatically."}`}</p>
         <Lesson key={ms.strategy.id} resumeKey={resumeKey && `${resumeKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
     );

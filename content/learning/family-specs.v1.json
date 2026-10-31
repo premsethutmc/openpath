@@ -11447,7 +11447,7 @@
    ],
    "teach": {
     "idea": "Adding and taking away undo each other, and so do multiplying and dividing, so you can work backwards to the missing number.",
-    "method": "Read the sentence and ask what was done to the box. Do the opposite to the other number, then check by putting your answer in the box.",
+    "method": "Read the sentence and ask what was done to the box, then work backwards. If a number was added to the box, take it away. If a number was taken away from the box, add it back. If the box was multiplied by a number, divide by that number. If the box was taken away from a number, the box is the gap: the first number take away the answer. Check by putting your answer in the box.",
     "alternatives": [
      {
       "id": "count_on",
@@ -11460,7 +11460,7 @@
      }
     ]
    },
-   "fingerprint": "0ddb8c4f",
+   "fingerprint": "87f5465d",
    "validation": {
     "family": "acmissing",
     "deterministic": {

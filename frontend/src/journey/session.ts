@@ -54,6 +54,8 @@ export class SliceSession {
     if (ms.phase === "chapter" && ms.strategy) {
       const e = teachingEligibility(moduleFor(competency)!, ms.strategy);
       this.log("adaptive-engine", "teaching-selection", "teaching-contract.teachingEligibility", { strategy: ms.strategy.id }, { checked: e.checked, eligible: e.eligible, review: e.review });
+      const c = ms.contentReview;
+      this.log("adaptive-engine", "teaching-selection", "explanation-review.contentEligibility", { strategy: ms.strategy.id, mode: c?.mode ?? null }, { eligible: c?.eligible ?? null, status: c?.status ?? null, educatorApproved: c?.educatorApproved ?? null, failed: c?.failed ?? null, label: c?.label ?? null, basis: ms.basis?.primary ?? null, facts: ms.basis?.facts ?? null, misconceptionEvidence: ms.basis?.misconceptionEvidence ?? null });
     }
     return ms;
   }
