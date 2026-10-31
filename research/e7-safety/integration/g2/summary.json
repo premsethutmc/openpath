@@ -1,0 +1,11 @@
+{
+ "agreement": {
+  "agree": 698,
+  "client=(True, False) server=(False, None)": 59,
+  "client=(True, True) server=(False, None)": 6,
+  "client=(True, True) server=(True, False)": 1,
+  "client=(False, None) server=(True, False)": 6
+ },
+ "serverCreditsWhereAppDoesNot": 0,
+ "changes9toFinal": 101
+}

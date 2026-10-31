@@ -1,0 +1,3502 @@
+[
+ {
+  "text": "22=-2*x-12",
+  "class": "unique",
+  "solution": "-17",
+  "form": "mixed",
+  "id": "s000"
+ },
+ {
+  "text": "x/3-12=11",
+  "class": "unique",
+  "solution": "69",
+  "form": "mixed",
+  "id": "s001"
+ },
+ {
+  "text": "x/7-2=-5",
+  "class": "unique",
+  "solution": "-21",
+  "form": "mixed",
+  "id": "s002"
+ },
+ {
+  "text": "-1*(x+3)=-17",
+  "class": "unique",
+  "solution": "14",
+  "form": "mixed",
+  "id": "s003"
+ },
+ {
+  "text": "3-2*x=-17",
+  "class": "unique",
+  "solution": "10",
+  "form": "mixed",
+  "id": "s004"
+ },
+ {
+  "text": "2*(x-3)+15=23",
+  "class": "unique",
+  "solution": "7",
+  "form": "mixed",
+  "id": "s005"
+ },
+ {
+  "text": "3*x-1=4*x-7",
+  "class": "unique",
+  "solution": "6",
+  "form": "mixed",
+  "id": "s006"
+ },
+ {
+  "text": "-3-(x+4)=3*x-5",
+  "class": "unique",
+  "solution": "-1/2",
+  "form": "mixed",
+  "id": "s007"
+ },
+ {
+  "text": "-5*(x+2)=-1*(x-5)",
+  "class": "unique",
+  "solution": "-15/4",
+  "form": "mixed",
+  "id": "s008"
+ },
+ {
+  "text": "x/7-3=3",
+  "class": "unique",
+  "solution": "42",
+  "form": "mixed",
+  "id": "s009"
+ },
+ {
+  "text": "(x+5)/5=(x+1)/4",
+  "class": "unique",
+  "solution": "15",
+  "form": "mixed",
+  "id": "s010"
+ },
+ {
+  "text": "-8*(x-8)=10",
+  "class": "unique",
+  "solution": "27/4",
+  "form": "mixed",
+  "id": "s011"
+ },
+ {
+  "text": "9*(x-8)=-32",
+  "class": "unique",
+  "solution": "40/9",
+  "form": "mixed",
+  "id": "s012"
+ },
+ {
+  "text": "(x+10)/5=12",
+  "class": "unique",
+  "solution": "50",
+  "form": "mixed",
+  "id": "s013"
+ },
+ {
+  "text": "4*x+5=-26",
+  "class": "unique",
+  "solution": "-31/4",
+  "form": "mixed",
+  "id": "s014"
+ },
+ {
+  "text": "x/6+8=2",
+  "class": "unique",
+  "solution": "-36",
+  "form": "mixed",
+  "id": "s015"
+ },
+ {
+  "text": "7*x-6=-32",
+  "class": "unique",
+  "solution": "-26/7",
+  "form": "mixed",
+  "id": "s016"
+ },
+ {
+  "text": "(x+9)/4=-7",
+  "class": "unique",
+  "solution": "-37",
+  "form": "mixed",
+  "id": "s017"
+ },
+ {
+  "text": "-x-3=37",
+  "class": "unique",
+  "solution": "-40",
+  "form": "mixed",
+  "id": "s018"
+ },
+ {
+  "text": "-3*(1*(x+5)-5)=25",
+  "class": "unique",
+  "solution": "-25/3",
+  "form": "mixed",
+  "id": "s019"
+ },
+ {
+  "text": "-4-6*x=15",
+  "class": "unique",
+  "solution": "-19/6",
+  "form": "mixed",
+  "id": "s020"
+ },
+ {
+  "text": "9-3*x=-4",
+  "class": "unique",
+  "solution": "13/3",
+  "form": "mixed",
+  "id": "s021"
+ },
+ {
+  "text": "27=-9*x-1",
+  "class": "unique",
+  "solution": "-28/9",
+  "form": "mixed",
+  "id": "s022"
+ },
+ {
+  "text": "-6*(x+9)-7=33",
+  "class": "unique",
+  "solution": "-47/3",
+  "form": "mixed",
+  "id": "s023"
+ },
+ {
+  "text": "-14-(x-9)=4*x+1",
+  "class": "unique",
+  "solution": "-6/5",
+  "form": "mixed",
+  "id": "s024"
+ },
+ {
+  "text": "(x+2)/2=(x-4)/6",
+  "class": "unique",
+  "solution": "-5",
+  "form": "mixed",
+  "id": "s025"
+ },
+ {
+  "text": "(x-1)/8=3",
+  "class": "unique",
+  "solution": "25",
+  "form": "mixed",
+  "id": "s026"
+ },
+ {
+  "text": "-3*x-15=16",
+  "class": "unique",
+  "solution": "-31/3",
+  "form": "mixed",
+  "id": "s027"
+ },
+ {
+  "text": "2*(x+6)=-1*(x+4)",
+  "class": "unique",
+  "solution": "-16/3",
+  "form": "mixed",
+  "id": "s028"
+ },
+ {
+  "text": "2*x+8=3*x+7",
+  "class": "unique",
+  "solution": "1",
+  "form": "mixed",
+  "id": "s029"
+ },
+ {
+  "text": "x/9+12=-13",
+  "class": "unique",
+  "solution": "-225",
+  "form": "mixed",
+  "id": "s030"
+ },
+ {
+  "text": "x-18=-7*x+10",
+  "class": "unique",
+  "solution": "7/2",
+  "form": "mixed",
+  "id": "s031"
+ },
+ {
+  "text": "11-(x+8)=-2*x-7",
+  "class": "unique",
+  "solution": "-10",
+  "form": "mixed",
+  "id": "s032"
+ },
+ {
+  "text": "x/4+x/3=12",
+  "class": "unique",
+  "solution": "144/7",
+  "form": "mixed",
+  "id": "s033"
+ },
+ {
+  "text": "1-8*x=30",
+  "class": "unique",
+  "solution": "-29/8",
+  "form": "mixed",
+  "id": "s034"
+ },
+ {
+  "text": "x/5+x/8=7",
+  "class": "unique",
+  "solution": "280/13",
+  "form": "mixed",
+  "id": "s035"
+ },
+ {
+  "text": "x/4+x/5=11",
+  "class": "unique",
+  "solution": "220/9",
+  "form": "mixed",
+  "id": "s036"
+ },
+ {
+  "text": "(x+5)/3=(x-7)/4",
+  "class": "unique",
+  "solution": "-41",
+  "form": "mixed",
+  "id": "s037"
+ },
+ {
+  "text": "3*(x+6)=-16",
+  "class": "unique",
+  "solution": "-34/3",
+  "form": "mixed",
+  "id": "s038"
+ },
+ {
+  "text": "x/5+x/3=15",
+  "class": "unique",
+  "solution": "225/8",
+  "form": "mixed",
+  "id": "s039"
+ },
+ {
+  "text": "3*(x+2)=1*(x-3)",
+  "class": "unique",
+  "solution": "-9/2",
+  "form": "mixed",
+  "id": "s040"
+ },
+ {
+  "text": "2*(-1*(x-3)-3)=-15",
+  "class": "unique",
+  "solution": "15/2",
+  "form": "mixed",
+  "id": "s041"
+ },
+ {
+  "text": "1*(-2*(x+4)-4)=46",
+  "class": "unique",
+  "solution": "-29",
+  "form": "mixed",
+  "id": "s042"
+ },
+ {
+  "text": "1-8*x=9",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s043"
+ },
+ {
+  "text": "(x+11)/6=1",
+  "class": "unique",
+  "solution": "-5",
+  "form": "mixed",
+  "id": "s044"
+ },
+ {
+  "text": "(x+8)/2=(x+7)/6",
+  "class": "unique",
+  "solution": "-17/2",
+  "form": "mixed",
+  "id": "s045"
+ },
+ {
+  "text": "8-(x-6)=4*x+7",
+  "class": "unique",
+  "solution": "7/5",
+  "form": "mixed",
+  "id": "s046"
+ },
+ {
+  "text": "2-(x-5)=2*x-10",
+  "class": "unique",
+  "solution": "17/3",
+  "form": "mixed",
+  "id": "s047"
+ },
+ {
+  "text": "x/2+9=14",
+  "class": "unique",
+  "solution": "10",
+  "form": "mixed",
+  "id": "s048"
+ },
+ {
+  "text": "19=-8*x-11",
+  "class": "unique",
+  "solution": "-15/4",
+  "form": "mixed",
+  "id": "s049"
+ },
+ {
+  "text": "-5-(x-9)=-2*x+9",
+  "class": "unique",
+  "solution": "5",
+  "form": "mixed",
+  "id": "s050"
+ },
+ {
+  "text": "1*(x+6)=-24",
+  "class": "unique",
+  "solution": "-30",
+  "form": "mixed",
+  "id": "s051"
+ },
+ {
+  "text": "-9*x-17=8*x+16",
+  "class": "unique",
+  "solution": "-33/17",
+  "form": "mixed",
+  "id": "s052"
+ },
+ {
+  "text": "(3/3)*x+6=12",
+  "class": "unique",
+  "solution": "6",
+  "form": "mixed",
+  "id": "s053"
+ },
+ {
+  "text": "-8*(x-10)=-18",
+  "class": "unique",
+  "solution": "49/4",
+  "form": "mixed",
+  "id": "s054"
+ },
+ {
+  "text": "4-(x+9)=4*x+7",
+  "class": "unique",
+  "solution": "-12/5",
+  "form": "mixed",
+  "id": "s055"
+ },
+ {
+  "text": "(x-8)/3=-10",
+  "class": "unique",
+  "solution": "-22",
+  "form": "mixed",
+  "id": "s056"
+ },
+ {
+  "text": "x/8-1=8",
+  "class": "unique",
+  "solution": "72",
+  "form": "mixed",
+  "id": "s057"
+ },
+ {
+  "text": "x/3+12=-5",
+  "class": "unique",
+  "solution": "-51",
+  "form": "mixed",
+  "id": "s058"
+ },
+ {
+  "text": "(x-5)/9=10",
+  "class": "unique",
+  "solution": "95",
+  "form": "mixed",
+  "id": "s059"
+ },
+ {
+  "text": "-40=9*x-9",
+  "class": "unique",
+  "solution": "-31/9",
+  "form": "mixed",
+  "id": "s060"
+ },
+ {
+  "text": "-6*(x+10)=-57",
+  "class": "unique",
+  "solution": "-1/2",
+  "form": "mixed",
+  "id": "s061"
+ },
+ {
+  "text": "(x+1)/6=(x-9)/2",
+  "class": "unique",
+  "solution": "14",
+  "form": "mixed",
+  "id": "s062"
+ },
+ {
+  "text": "(x-5)/6=(x+9)/2",
+  "class": "unique",
+  "solution": "-16",
+  "form": "mixed",
+  "id": "s063"
+ },
+ {
+  "text": "-8-(x+3)=x+3",
+  "class": "unique",
+  "solution": "-7",
+  "form": "mixed",
+  "id": "s064"
+ },
+ {
+  "text": "-5*x+2=29",
+  "class": "unique",
+  "solution": "-27/5",
+  "form": "mixed",
+  "id": "s065"
+ },
+ {
+  "text": "2*(x-6)=1*(x+5)",
+  "class": "unique",
+  "solution": "17",
+  "form": "mixed",
+  "id": "s066"
+ },
+ {
+  "text": "18-7*x=-15",
+  "class": "unique",
+  "solution": "33/7",
+  "form": "mixed",
+  "id": "s067"
+ },
+ {
+  "text": "(x-6)/5=(x-2)/4",
+  "class": "unique",
+  "solution": "-14",
+  "form": "mixed",
+  "id": "s068"
+ },
+ {
+  "text": "20-8*x=3",
+  "class": "unique",
+  "solution": "17/8",
+  "form": "mixed",
+  "id": "s069"
+ },
+ {
+  "text": "3*(x+6)+7=-20",
+  "class": "unique",
+  "solution": "-15",
+  "form": "mixed",
+  "id": "s070"
+ },
+ {
+  "text": "x/9+4=-9",
+  "class": "unique",
+  "solution": "-117",
+  "form": "mixed",
+  "id": "s071"
+ },
+ {
+  "text": "7*x-8=-7*x+8",
+  "class": "unique",
+  "solution": "8/7",
+  "form": "mixed",
+  "id": "s072"
+ },
+ {
+  "text": "(3/3)*x+7=-9",
+  "class": "unique",
+  "solution": "-16",
+  "form": "mixed",
+  "id": "s073"
+ },
+ {
+  "text": "-5*(x+4)=-1*(x+1)",
+  "class": "unique",
+  "solution": "-19/4",
+  "form": "mixed",
+  "id": "s074"
+ },
+ {
+  "text": "-3*(x+7)=-4*(x-1)",
+  "class": "unique",
+  "solution": "25",
+  "form": "mixed",
+  "id": "s075"
+ },
+ {
+  "text": "x/3+x/2=2",
+  "class": "unique",
+  "solution": "12/5",
+  "form": "mixed",
+  "id": "s076"
+ },
+ {
+  "text": "1*(3*(x-6)-4)=30",
+  "class": "unique",
+  "solution": "52/3",
+  "form": "mixed",
+  "id": "s077"
+ },
+ {
+  "text": "(x+1)/4=11",
+  "class": "unique",
+  "solution": "43",
+  "form": "mixed",
+  "id": "s078"
+ },
+ {
+  "text": "(5/5)*x-7=-9",
+  "class": "unique",
+  "solution": "-2",
+  "form": "mixed",
+  "id": "s079"
+ },
+ {
+  "text": "x/6+x/8=8",
+  "class": "unique",
+  "solution": "192/7",
+  "form": "mixed",
+  "id": "s080"
+ },
+ {
+  "text": "x/8+4=15",
+  "class": "unique",
+  "solution": "88",
+  "form": "mixed",
+  "id": "s081"
+ },
+ {
+  "text": "4=6*x-18",
+  "class": "unique",
+  "solution": "11/3",
+  "form": "mixed",
+  "id": "s082"
+ },
+ {
+  "text": "(x+2)/3=-9",
+  "class": "unique",
+  "solution": "-29",
+  "form": "mixed",
+  "id": "s083"
+ },
+ {
+  "text": "-5*(x+4)-4=-19",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s084"
+ },
+ {
+  "text": "-17-3*x=19",
+  "class": "unique",
+  "solution": "-12",
+  "form": "mixed",
+  "id": "s085"
+ },
+ {
+  "text": "4*x+3=-18",
+  "class": "unique",
+  "solution": "-21/4",
+  "form": "mixed",
+  "id": "s086"
+ },
+ {
+  "text": "(x-9)/4=(x+5)/3",
+  "class": "unique",
+  "solution": "-47",
+  "form": "mixed",
+  "id": "s087"
+ },
+ {
+  "text": "x/9-6=3",
+  "class": "unique",
+  "solution": "81",
+  "form": "mixed",
+  "id": "s088"
+ },
+ {
+  "text": "1*(x-7)+2=-4",
+  "class": "unique",
+  "solution": "1",
+  "form": "mixed",
+  "id": "s089"
+ },
+ {
+  "text": "2*(x+1)+3=-33",
+  "class": "unique",
+  "solution": "-19",
+  "form": "mixed",
+  "id": "s090"
+ },
+ {
+  "text": "1*(x-4)=2*(x+8)",
+  "class": "unique",
+  "solution": "-20",
+  "form": "mixed",
+  "id": "s091"
+ },
+ {
+  "text": "(5/6)*x-7=3",
+  "class": "unique",
+  "solution": "12",
+  "form": "mixed",
+  "id": "s092"
+ },
+ {
+  "text": "3-(x+4)=-3*x-11",
+  "class": "unique",
+  "solution": "-5",
+  "form": "mixed",
+  "id": "s093"
+ },
+ {
+  "text": "-5*(x+1)=6*(x-6)",
+  "class": "unique",
+  "solution": "31/11",
+  "form": "mixed",
+  "id": "s094"
+ },
+ {
+  "text": "-3*x-3=-30",
+  "class": "unique",
+  "solution": "9",
+  "form": "mixed",
+  "id": "s095"
+ },
+ {
+  "text": "-2*(3*(x-3)+2)=-48",
+  "class": "unique",
+  "solution": "31/3",
+  "form": "mixed",
+  "id": "s096"
+ },
+ {
+  "text": "(x+1)/2=(x-7)/5",
+  "class": "unique",
+  "solution": "-19/3",
+  "form": "mixed",
+  "id": "s097"
+ },
+ {
+  "text": "(x+9)/4=(x+9)/3",
+  "class": "unique",
+  "solution": "-9",
+  "form": "mixed",
+  "id": "s098"
+ },
+ {
+  "text": "(x-7)/6=7",
+  "class": "unique",
+  "solution": "49",
+  "form": "mixed",
+  "id": "s099"
+ },
+ {
+  "text": "(x+5)/2=(x+1)/5",
+  "class": "unique",
+  "solution": "-23/3",
+  "form": "mixed",
+  "id": "s100"
+ },
+ {
+  "text": "(x+6)/6=6",
+  "class": "unique",
+  "solution": "30",
+  "form": "mixed",
+  "id": "s101"
+ },
+ {
+  "text": "-1*(x+5)=-21",
+  "class": "unique",
+  "solution": "16",
+  "form": "mixed",
+  "id": "s102"
+ },
+ {
+  "text": "-6*x+6=6*x+7",
+  "class": "unique",
+  "solution": "-1/12",
+  "form": "mixed",
+  "id": "s103"
+ },
+ {
+  "text": "x/3-11=4",
+  "class": "unique",
+  "solution": "45",
+  "form": "mixed",
+  "id": "s104"
+ },
+ {
+  "text": "-6-(x-2)=-5*x-5",
+  "class": "unique",
+  "solution": "-1/4",
+  "form": "mixed",
+  "id": "s105"
+ },
+ {
+  "text": "-1*(x-1)=-3*(x+4)",
+  "class": "unique",
+  "solution": "-13/2",
+  "form": "mixed",
+  "id": "s106"
+ },
+ {
+  "text": "-2-(x-4)=-5*x-3",
+  "class": "unique",
+  "solution": "-5/4",
+  "form": "mixed",
+  "id": "s107"
+ },
+ {
+  "text": "12-7*x=24",
+  "class": "unique",
+  "solution": "-12/7",
+  "form": "mixed",
+  "id": "s108"
+ },
+ {
+  "text": "-1*(-2*(x+3)+4)=-23",
+  "class": "unique",
+  "solution": "-25/2",
+  "form": "mixed",
+  "id": "s109"
+ },
+ {
+  "text": "(x+11)/6=-11",
+  "class": "unique",
+  "solution": "-77",
+  "form": "mixed",
+  "id": "s110"
+ },
+ {
+  "text": "-1*(-4*(x+1)-1)=2",
+  "class": "unique",
+  "solution": "-3/4",
+  "form": "mixed",
+  "id": "s111"
+ },
+ {
+  "text": "(x+2)/2=(x+4)/4",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s112"
+ },
+ {
+  "text": "x/5+10=2",
+  "class": "unique",
+  "solution": "-40",
+  "form": "mixed",
+  "id": "s113"
+ },
+ {
+  "text": "15-2*x=4",
+  "class": "unique",
+  "solution": "11/2",
+  "form": "mixed",
+  "id": "s114"
+ },
+ {
+  "text": "-3*(-4*(x+2)+3)=50",
+  "class": "unique",
+  "solution": "35/12",
+  "form": "mixed",
+  "id": "s115"
+ },
+ {
+  "text": "(x+5)/8=-11",
+  "class": "unique",
+  "solution": "-93",
+  "form": "mixed",
+  "id": "s116"
+ },
+ {
+  "text": "-2=2*x-3",
+  "class": "unique",
+  "solution": "1/2",
+  "form": "mixed",
+  "id": "s117"
+ },
+ {
+  "text": "1-(x-7)=-5*x+4",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s118"
+ },
+ {
+  "text": "-2*(x-1)=-21",
+  "class": "unique",
+  "solution": "23/2",
+  "form": "mixed",
+  "id": "s119"
+ },
+ {
+  "text": "22=x+20",
+  "class": "unique",
+  "solution": "2",
+  "form": "mixed",
+  "id": "s120"
+ },
+ {
+  "text": "-30=4*x-10",
+  "class": "unique",
+  "solution": "-5",
+  "form": "mixed",
+  "id": "s121"
+ },
+ {
+  "text": "4*(1*(x-1)+5)=-30",
+  "class": "unique",
+  "solution": "-23/2",
+  "form": "mixed",
+  "id": "s122"
+ },
+ {
+  "text": "11=3*x+1",
+  "class": "unique",
+  "solution": "10/3",
+  "form": "mixed",
+  "id": "s123"
+ },
+ {
+  "text": "8*x-18=-35",
+  "class": "unique",
+  "solution": "-17/8",
+  "form": "mixed",
+  "id": "s124"
+ },
+ {
+  "text": "-3*(x-5)-1=-3",
+  "class": "unique",
+  "solution": "17/3",
+  "form": "mixed",
+  "id": "s125"
+ },
+ {
+  "text": "-1-(x-6)=2*x+9",
+  "class": "unique",
+  "solution": "-4/3",
+  "form": "mixed",
+  "id": "s126"
+ },
+ {
+  "text": "32=x+6",
+  "class": "unique",
+  "solution": "26",
+  "form": "mixed",
+  "id": "s127"
+ },
+ {
+  "text": "-14=x-17",
+  "class": "unique",
+  "solution": "3",
+  "form": "mixed",
+  "id": "s128"
+ },
+ {
+  "text": "9-6*x=26",
+  "class": "unique",
+  "solution": "-17/6",
+  "form": "mixed",
+  "id": "s129"
+ },
+ {
+  "text": "-1*(x-6)=44",
+  "class": "unique",
+  "solution": "-38",
+  "form": "mixed",
+  "id": "s130"
+ },
+ {
+  "text": "(3/3)*x-11=11",
+  "class": "unique",
+  "solution": "22",
+  "form": "mixed",
+  "id": "s131"
+ },
+ {
+  "text": "(x-6)/4=(x-6)/5",
+  "class": "unique",
+  "solution": "6",
+  "form": "mixed",
+  "id": "s132"
+ },
+ {
+  "text": "-2*(x-9)=-4*(x+2)",
+  "class": "unique",
+  "solution": "-13",
+  "form": "mixed",
+  "id": "s133"
+ },
+ {
+  "text": "35=x+1",
+  "class": "unique",
+  "solution": "34",
+  "form": "mixed",
+  "id": "s134"
+ },
+ {
+  "text": "4-4*x=-8",
+  "class": "unique",
+  "solution": "3",
+  "form": "mixed",
+  "id": "s135"
+ },
+ {
+  "text": "-4*(x+1)=2*(x+5)",
+  "class": "unique",
+  "solution": "-7/3",
+  "form": "mixed",
+  "id": "s136"
+ },
+ {
+  "text": "x/3-4=11",
+  "class": "unique",
+  "solution": "45",
+  "form": "mixed",
+  "id": "s137"
+ },
+ {
+  "text": "(-2/6)*x+6=2",
+  "class": "unique",
+  "solution": "12",
+  "form": "mixed",
+  "id": "s138"
+ },
+ {
+  "text": "(x-7)/3=(x+9)/2",
+  "class": "unique",
+  "solution": "-41",
+  "form": "mixed",
+  "id": "s139"
+ },
+ {
+  "text": "-2*(x+4)+14=27",
+  "class": "unique",
+  "solution": "-21/2",
+  "form": "mixed",
+  "id": "s140"
+ },
+ {
+  "text": "-8*(x+6)=-11",
+  "class": "unique",
+  "solution": "-37/8",
+  "form": "mixed",
+  "id": "s141"
+ },
+ {
+  "text": "5*(x+8)=-3*(x+9)",
+  "class": "unique",
+  "solution": "-67/8",
+  "form": "mixed",
+  "id": "s142"
+ },
+ {
+  "text": "3*(-2*(x-6)-2)=-28",
+  "class": "unique",
+  "solution": "29/3",
+  "form": "mixed",
+  "id": "s143"
+ },
+ {
+  "text": "16=-7*x+19",
+  "class": "unique",
+  "solution": "3/7",
+  "form": "mixed",
+  "id": "s144"
+ },
+ {
+  "text": "4-2*x=16",
+  "class": "unique",
+  "solution": "-6",
+  "form": "mixed",
+  "id": "s145"
+ },
+ {
+  "text": "x/3+x/5=14",
+  "class": "unique",
+  "solution": "105/4",
+  "form": "mixed",
+  "id": "s146"
+ },
+ {
+  "text": "2*(-1*(x-6)-1)=-32",
+  "class": "unique",
+  "solution": "21",
+  "form": "mixed",
+  "id": "s147"
+ },
+ {
+  "text": "(x+8)/2=(x+5)/5",
+  "class": "unique",
+  "solution": "-10",
+  "form": "mixed",
+  "id": "s148"
+ },
+ {
+  "text": "-7*(x+4)=56",
+  "class": "unique",
+  "solution": "-12",
+  "form": "mixed",
+  "id": "s149"
+ },
+ {
+  "text": "-5=-6*x+16",
+  "class": "unique",
+  "solution": "7/2",
+  "form": "mixed",
+  "id": "s150"
+ },
+ {
+  "text": "x/3+x/2=6",
+  "class": "unique",
+  "solution": "36/5",
+  "form": "mixed",
+  "id": "s151"
+ },
+ {
+  "text": "13-(x+7)=4*x-3",
+  "class": "unique",
+  "solution": "9/5",
+  "form": "mixed",
+  "id": "s152"
+ },
+ {
+  "text": "4*(x+2)=-32",
+  "class": "unique",
+  "solution": "-10",
+  "form": "mixed",
+  "id": "s153"
+ },
+ {
+  "text": "-7*(x-5)-2=23",
+  "class": "unique",
+  "solution": "10/7",
+  "form": "mixed",
+  "id": "s154"
+ },
+ {
+  "text": "-11-(x+5)=-3*x+4",
+  "class": "unique",
+  "solution": "10",
+  "form": "mixed",
+  "id": "s155"
+ },
+ {
+  "text": "3*x-2=-7*x-3",
+  "class": "unique",
+  "solution": "-1/10",
+  "form": "mixed",
+  "id": "s156"
+ },
+ {
+  "text": "-3*(2*(x-1)-2)=23",
+  "class": "unique",
+  "solution": "-11/6",
+  "form": "mixed",
+  "id": "s157"
+ },
+ {
+  "text": "(x-4)/3=4",
+  "class": "unique",
+  "solution": "16",
+  "form": "mixed",
+  "id": "s158"
+ },
+ {
+  "text": "7*(x+3)-7=-21",
+  "class": "unique",
+  "solution": "-5",
+  "form": "mixed",
+  "id": "s159"
+ },
+ {
+  "text": "-9-8*x=-5",
+  "class": "unique",
+  "solution": "-1/2",
+  "form": "mixed",
+  "id": "s160"
+ },
+ {
+  "text": "8*x-20=4*x+8",
+  "class": "unique",
+  "solution": "7",
+  "form": "mixed",
+  "id": "s161"
+ },
+ {
+  "text": "-1*(x+12)=-21",
+  "class": "unique",
+  "solution": "9",
+  "form": "mixed",
+  "id": "s162"
+ },
+ {
+  "text": "2*x-3=-8",
+  "class": "unique",
+  "solution": "-5/2",
+  "form": "mixed",
+  "id": "s163"
+ },
+ {
+  "text": "-38=2*x+16",
+  "class": "unique",
+  "solution": "-27",
+  "form": "mixed",
+  "id": "s164"
+ },
+ {
+  "text": "(x-4)/2=-9",
+  "class": "unique",
+  "solution": "-14",
+  "form": "mixed",
+  "id": "s165"
+ },
+ {
+  "text": "x/8-8=-4",
+  "class": "unique",
+  "solution": "32",
+  "form": "mixed",
+  "id": "s166"
+ },
+ {
+  "text": "3*x-5=4*x+10",
+  "class": "unique",
+  "solution": "-15",
+  "form": "mixed",
+  "id": "s167"
+ },
+ {
+  "text": "-4*(x-5)=3*(x-5)",
+  "class": "unique",
+  "solution": "5",
+  "form": "mixed",
+  "id": "s168"
+ },
+ {
+  "text": "-7*(x+10)=-37",
+  "class": "unique",
+  "solution": "-33/7",
+  "form": "mixed",
+  "id": "s169"
+ },
+ {
+  "text": "(-6/2)*x-3=6",
+  "class": "unique",
+  "solution": "-3",
+  "form": "mixed",
+  "id": "s170"
+ },
+ {
+  "text": "-4*(x+5)=-5*(x+2)",
+  "class": "unique",
+  "solution": "10",
+  "form": "mixed",
+  "id": "s171"
+ },
+ {
+  "text": "-1*(x+9)-13=4",
+  "class": "unique",
+  "solution": "-26",
+  "form": "mixed",
+  "id": "s172"
+ },
+ {
+  "text": "(5/2)*x+7=-1",
+  "class": "unique",
+  "solution": "-16/5",
+  "form": "mixed",
+  "id": "s173"
+ },
+ {
+  "text": "1*(-3*(x+3)+2)=3",
+  "class": "unique",
+  "solution": "-10/3",
+  "form": "mixed",
+  "id": "s174"
+ },
+ {
+  "text": "4*x-11=-3*x+17",
+  "class": "unique",
+  "solution": "4",
+  "form": "mixed",
+  "id": "s175"
+ },
+ {
+  "text": "4*(x+3)=52",
+  "class": "unique",
+  "solution": "10",
+  "form": "mixed",
+  "id": "s176"
+ },
+ {
+  "text": "5*(x-3)=-5*(x-2)",
+  "class": "unique",
+  "solution": "5/2",
+  "form": "mixed",
+  "id": "s177"
+ },
+ {
+  "text": "-24=6*x-11",
+  "class": "unique",
+  "solution": "-13/6",
+  "form": "mixed",
+  "id": "s178"
+ },
+ {
+  "text": "-4*x-20=-x+11",
+  "class": "unique",
+  "solution": "-31/3",
+  "form": "mixed",
+  "id": "s179"
+ },
+ {
+  "text": "-5*(x-8)-14=-9",
+  "class": "unique",
+  "solution": "7",
+  "form": "mixed",
+  "id": "s180"
+ },
+ {
+  "text": "(6/2)*x-6=-2",
+  "class": "unique",
+  "solution": "4/3",
+  "form": "mixed",
+  "id": "s181"
+ },
+ {
+  "text": "1-6*x=17",
+  "class": "unique",
+  "solution": "-8/3",
+  "form": "mixed",
+  "id": "s182"
+ },
+ {
+  "text": "25=2*x-5",
+  "class": "unique",
+  "solution": "15",
+  "form": "mixed",
+  "id": "s183"
+ },
+ {
+  "text": "-3*(-4*(x+4)+5)=50",
+  "class": "unique",
+  "solution": "17/12",
+  "form": "mixed",
+  "id": "s184"
+ },
+ {
+  "text": "-6*(x+7)=-4*(x+7)",
+  "class": "unique",
+  "solution": "-7",
+  "form": "mixed",
+  "id": "s185"
+ },
+ {
+  "text": "-2*(-2*(x+2)-8)=13",
+  "class": "unique",
+  "solution": "-11/4",
+  "form": "mixed",
+  "id": "s186"
+ },
+ {
+  "text": "-3*x-9=-26",
+  "class": "unique",
+  "solution": "17/3",
+  "form": "mixed",
+  "id": "s187"
+ },
+ {
+  "text": "-2*(x-1)=30",
+  "class": "unique",
+  "solution": "-14",
+  "form": "mixed",
+  "id": "s188"
+ },
+ {
+  "text": "1*(x-9)=-3*(x-1)",
+  "class": "unique",
+  "solution": "3",
+  "form": "mixed",
+  "id": "s189"
+ },
+ {
+  "text": "-2*(x-8)=1*(x-8)",
+  "class": "unique",
+  "solution": "8",
+  "form": "mixed",
+  "id": "s190"
+ },
+ {
+  "text": "(x+11)/3=-6",
+  "class": "unique",
+  "solution": "-29",
+  "form": "mixed",
+  "id": "s191"
+ },
+ {
+  "text": "-1*(x+4)-7=-26",
+  "class": "unique",
+  "solution": "15",
+  "form": "mixed",
+  "id": "s192"
+ },
+ {
+  "text": "(x-8)/2=(x-2)/5",
+  "class": "unique",
+  "solution": "12",
+  "form": "mixed",
+  "id": "s193"
+ },
+ {
+  "text": "9*(x-11)=55",
+  "class": "unique",
+  "solution": "154/9",
+  "form": "mixed",
+  "id": "s194"
+ },
+ {
+  "text": "14-4*x=15",
+  "class": "unique",
+  "solution": "-1/4",
+  "form": "mixed",
+  "id": "s195"
+ },
+ {
+  "text": "x/2+6=-7",
+  "class": "unique",
+  "solution": "-26",
+  "form": "mixed",
+  "id": "s196"
+ },
+ {
+  "text": "21=-6*x-10",
+  "class": "unique",
+  "solution": "-31/6",
+  "form": "mixed",
+  "id": "s197"
+ },
+ {
+  "text": "2*x-13=-24",
+  "class": "unique",
+  "solution": "-11/2",
+  "form": "mixed",
+  "id": "s198"
+ },
+ {
+  "text": "(-4/2)*x+8=-10",
+  "class": "unique",
+  "solution": "9",
+  "form": "mixed",
+  "id": "s199"
+ },
+ {
+  "text": "-2*x-18=17",
+  "class": "unique",
+  "solution": "-35/2",
+  "form": "mixed",
+  "id": "s200"
+ },
+ {
+  "text": "-1*(x-8)-3=36",
+  "class": "unique",
+  "solution": "-31",
+  "form": "mixed",
+  "id": "s201"
+ },
+ {
+  "text": "5*(x+5)=-6*(x-7)",
+  "class": "unique",
+  "solution": "17/11",
+  "form": "mixed",
+  "id": "s202"
+ },
+ {
+  "text": "-6*(x+6)+13=11",
+  "class": "unique",
+  "solution": "-17/3",
+  "form": "mixed",
+  "id": "s203"
+ },
+ {
+  "text": "9*x+9=-2",
+  "class": "unique",
+  "solution": "-11/9",
+  "form": "mixed",
+  "id": "s204"
+ },
+ {
+  "text": "9*x-14=x+4",
+  "class": "unique",
+  "solution": "9/4",
+  "form": "mixed",
+  "id": "s205"
+ },
+ {
+  "text": "x/6+x/2=16",
+  "class": "unique",
+  "solution": "24",
+  "form": "mixed",
+  "id": "s206"
+ },
+ {
+  "text": "-5-(x+4)=-3*x-8",
+  "class": "unique",
+  "solution": "1/2",
+  "form": "mixed",
+  "id": "s207"
+ },
+ {
+  "text": "x/7+5=3",
+  "class": "unique",
+  "solution": "-14",
+  "form": "mixed",
+  "id": "s208"
+ },
+ {
+  "text": "3-(x-8)=4*x-9",
+  "class": "unique",
+  "solution": "4",
+  "form": "mixed",
+  "id": "s209"
+ },
+ {
+  "text": "12-6*x=1",
+  "class": "unique",
+  "solution": "11/6",
+  "form": "mixed",
+  "id": "s210"
+ },
+ {
+  "text": "x/8+x/4=17",
+  "class": "unique",
+  "solution": "136/3",
+  "form": "mixed",
+  "id": "s211"
+ },
+ {
+  "text": "2*(-1*(x-5)+6)=-45",
+  "class": "unique",
+  "solution": "67/2",
+  "form": "mixed",
+  "id": "s212"
+ },
+ {
+  "text": "(-3/6)*x-3=-10",
+  "class": "unique",
+  "solution": "14",
+  "form": "mixed",
+  "id": "s213"
+ },
+ {
+  "text": "-8*x-19=6*x-18",
+  "class": "unique",
+  "solution": "-1/14",
+  "form": "mixed",
+  "id": "s214"
+ },
+ {
+  "text": "-2*(x-8)+14=-2",
+  "class": "unique",
+  "solution": "16",
+  "form": "mixed",
+  "id": "s215"
+ },
+ {
+  "text": "(x+6)/5=8",
+  "class": "unique",
+  "solution": "34",
+  "form": "mixed",
+  "id": "s216"
+ },
+ {
+  "text": "8*x+3=3*x-2",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s217"
+ },
+ {
+  "text": "(-4/2)*x+9=1",
+  "class": "unique",
+  "solution": "4",
+  "form": "mixed",
+  "id": "s218"
+ },
+ {
+  "text": "1*(-3*(x-2)-6)=19",
+  "class": "unique",
+  "solution": "-19/3",
+  "form": "mixed",
+  "id": "s219"
+ },
+ {
+  "text": "-7-(x+8)=x+12",
+  "class": "unique",
+  "solution": "-27/2",
+  "form": "mixed",
+  "id": "s220"
+ },
+ {
+  "text": "x/5+x/4=16",
+  "class": "unique",
+  "solution": "320/9",
+  "form": "mixed",
+  "id": "s221"
+ },
+ {
+  "text": "(x+4)/2=(x-5)/3",
+  "class": "unique",
+  "solution": "-22",
+  "form": "mixed",
+  "id": "s222"
+ },
+ {
+  "text": "x/6+x/5=14",
+  "class": "unique",
+  "solution": "420/11",
+  "form": "mixed",
+  "id": "s223"
+ },
+ {
+  "text": "-4*(x+4)=1",
+  "class": "unique",
+  "solution": "-17/4",
+  "form": "mixed",
+  "id": "s224"
+ },
+ {
+  "text": "-4*(x-6)=-6*(x-9)",
+  "class": "unique",
+  "solution": "15",
+  "form": "mixed",
+  "id": "s225"
+ },
+ {
+  "text": "3*(4*(x+5)-1)=-28",
+  "class": "unique",
+  "solution": "-85/12",
+  "form": "mixed",
+  "id": "s226"
+ },
+ {
+  "text": "-10=7*x-15",
+  "class": "unique",
+  "solution": "5/7",
+  "form": "mixed",
+  "id": "s227"
+ },
+ {
+  "text": "(x-6)/5=9",
+  "class": "unique",
+  "solution": "51",
+  "form": "mixed",
+  "id": "s228"
+ },
+ {
+  "text": "(x+7)/5=(x-8)/3",
+  "class": "unique",
+  "solution": "61/2",
+  "form": "mixed",
+  "id": "s229"
+ },
+ {
+  "text": "5*(x-3)=-4*(x+7)",
+  "class": "unique",
+  "solution": "-13/9",
+  "form": "mixed",
+  "id": "s230"
+ },
+ {
+  "text": "-9-8*x=-9",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s231"
+ },
+ {
+  "text": "(-2/2)*x-11=-7",
+  "class": "unique",
+  "solution": "-4",
+  "form": "mixed",
+  "id": "s232"
+ },
+ {
+  "text": "4*(x+9)=6*(x-3)",
+  "class": "unique",
+  "solution": "27",
+  "form": "mixed",
+  "id": "s233"
+ },
+ {
+  "text": "(-4/2)*x-9=-1",
+  "class": "unique",
+  "solution": "-4",
+  "form": "mixed",
+  "id": "s234"
+ },
+ {
+  "text": "15-(x-9)=4*x-5",
+  "class": "unique",
+  "solution": "29/5",
+  "form": "mixed",
+  "id": "s235"
+ },
+ {
+  "text": "-2*(x+12)=-33",
+  "class": "unique",
+  "solution": "9/2",
+  "form": "mixed",
+  "id": "s236"
+ },
+ {
+  "text": "(7/2)*x-12=11",
+  "class": "unique",
+  "solution": "46/7",
+  "form": "mixed",
+  "id": "s237"
+ },
+ {
+  "text": "x/2+x/8=15",
+  "class": "unique",
+  "solution": "24",
+  "form": "mixed",
+  "id": "s238"
+ },
+ {
+  "text": "35=2*x-12",
+  "class": "unique",
+  "solution": "47/2",
+  "form": "mixed",
+  "id": "s239"
+ },
+ {
+  "text": "6-(x+8)=-5*x+8",
+  "class": "unique",
+  "solution": "5/2",
+  "form": "mixed",
+  "id": "s240"
+ },
+ {
+  "text": "6*(x-9)=5*(x-5)",
+  "class": "unique",
+  "solution": "29",
+  "form": "mixed",
+  "id": "s241"
+ },
+ {
+  "text": "(-5/5)*x-11=-15",
+  "class": "unique",
+  "solution": "4",
+  "form": "mixed",
+  "id": "s242"
+ },
+ {
+  "text": "-4*(x-7)=-3*(x+2)",
+  "class": "unique",
+  "solution": "34",
+  "form": "mixed",
+  "id": "s243"
+ },
+ {
+  "text": "-5*x+5=-21",
+  "class": "unique",
+  "solution": "26/5",
+  "form": "mixed",
+  "id": "s244"
+ },
+ {
+  "text": "(7/5)*x+10=-7",
+  "class": "unique",
+  "solution": "-85/7",
+  "form": "mixed",
+  "id": "s245"
+ },
+ {
+  "text": "3*(x+1)=-4*(x-5)",
+  "class": "unique",
+  "solution": "17/7",
+  "form": "mixed",
+  "id": "s246"
+ },
+ {
+  "text": "-11-4*x=-4",
+  "class": "unique",
+  "solution": "-7/4",
+  "form": "mixed",
+  "id": "s247"
+ },
+ {
+  "text": "(x-8)/6=12",
+  "class": "unique",
+  "solution": "80",
+  "form": "mixed",
+  "id": "s248"
+ },
+ {
+  "text": "3-9*x=-13",
+  "class": "unique",
+  "solution": "16/9",
+  "form": "mixed",
+  "id": "s249"
+ },
+ {
+  "text": "x/3+x/6=20",
+  "class": "unique",
+  "solution": "40",
+  "form": "mixed",
+  "id": "s250"
+ },
+ {
+  "text": "-1*(x+3)+4=26",
+  "class": "unique",
+  "solution": "-25",
+  "form": "mixed",
+  "id": "s251"
+ },
+ {
+  "text": "x/6-8=-11",
+  "class": "unique",
+  "solution": "-18",
+  "form": "mixed",
+  "id": "s252"
+ },
+ {
+  "text": "-15-(x+7)=3*x+10",
+  "class": "unique",
+  "solution": "-8",
+  "form": "mixed",
+  "id": "s253"
+ },
+ {
+  "text": "(x+4)/3=(x+1)/4",
+  "class": "unique",
+  "solution": "-13",
+  "form": "mixed",
+  "id": "s254"
+ },
+ {
+  "text": "(-5/6)*x-9=-6",
+  "class": "unique",
+  "solution": "-18/5",
+  "form": "mixed",
+  "id": "s255"
+ },
+ {
+  "text": "-10=-2*x-15",
+  "class": "unique",
+  "solution": "-5/2",
+  "form": "mixed",
+  "id": "s256"
+ },
+ {
+  "text": "x/3-7=-2",
+  "class": "unique",
+  "solution": "15",
+  "form": "mixed",
+  "id": "s257"
+ },
+ {
+  "text": "-6*x-15=7",
+  "class": "unique",
+  "solution": "-11/3",
+  "form": "mixed",
+  "id": "s258"
+ },
+ {
+  "text": "-1*(-4*(x-1)-8)=1",
+  "class": "unique",
+  "solution": "-3/4",
+  "form": "mixed",
+  "id": "s259"
+ },
+ {
+  "text": "x/3+x/5=7",
+  "class": "unique",
+  "solution": "105/8",
+  "form": "mixed",
+  "id": "s260"
+ },
+ {
+  "text": "-6*x-7=-24",
+  "class": "unique",
+  "solution": "17/6",
+  "form": "mixed",
+  "id": "s261"
+ },
+ {
+  "text": "4*(x+5)=43",
+  "class": "unique",
+  "solution": "23/4",
+  "form": "mixed",
+  "id": "s262"
+ },
+ {
+  "text": "-36=6*x-2",
+  "class": "unique",
+  "solution": "-17/3",
+  "form": "mixed",
+  "id": "s263"
+ },
+ {
+  "text": "x+10=5*x+16",
+  "class": "unique",
+  "solution": "-3/2",
+  "form": "mixed",
+  "id": "s264"
+ },
+ {
+  "text": "(-4/4)*x-6=2",
+  "class": "unique",
+  "solution": "-8",
+  "form": "mixed",
+  "id": "s265"
+ },
+ {
+  "text": "7*x-9=-23",
+  "class": "unique",
+  "solution": "-2",
+  "form": "mixed",
+  "id": "s266"
+ },
+ {
+  "text": "x/9+10=1",
+  "class": "unique",
+  "solution": "-81",
+  "form": "mixed",
+  "id": "s267"
+ },
+ {
+  "text": "(x-8)/6=(x-2)/4",
+  "class": "unique",
+  "solution": "-10",
+  "form": "mixed",
+  "id": "s268"
+ },
+ {
+  "text": "1*(1*(x+1)+5)=-17",
+  "class": "unique",
+  "solution": "-23",
+  "form": "mixed",
+  "id": "s269"
+ },
+ {
+  "text": "-5*(x+1)=1*(x+8)",
+  "class": "unique",
+  "solution": "-13/6",
+  "form": "mixed",
+  "id": "s270"
+ },
+ {
+  "text": "x/8+x/4=7",
+  "class": "unique",
+  "solution": "56/3",
+  "form": "mixed",
+  "id": "s271"
+ },
+ {
+  "text": "8*x-14=-17",
+  "class": "unique",
+  "solution": "-3/8",
+  "form": "mixed",
+  "id": "s272"
+ },
+ {
+  "text": "6*(x+1)+9=-23",
+  "class": "unique",
+  "solution": "-19/3",
+  "form": "mixed",
+  "id": "s273"
+ },
+ {
+  "text": "x/4+4=4",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s274"
+ },
+ {
+  "text": "(-3/5)*x-7=-13",
+  "class": "unique",
+  "solution": "10",
+  "form": "mixed",
+  "id": "s275"
+ },
+ {
+  "text": "-3*(x+1)=-6*(x+5)",
+  "class": "unique",
+  "solution": "-9",
+  "form": "mixed",
+  "id": "s276"
+ },
+ {
+  "text": "5*(x-9)=2*(x+4)",
+  "class": "unique",
+  "solution": "53/3",
+  "form": "mixed",
+  "id": "s277"
+ },
+ {
+  "text": "-5*(x-5)=6*(x+1)",
+  "class": "unique",
+  "solution": "19/11",
+  "form": "mixed",
+  "id": "s278"
+ },
+ {
+  "text": "x/3+x/2=12",
+  "class": "unique",
+  "solution": "72/5",
+  "form": "mixed",
+  "id": "s279"
+ },
+ {
+  "text": "6*(x-7)+3=12",
+  "class": "unique",
+  "solution": "17/2",
+  "form": "mixed",
+  "id": "s280"
+ },
+ {
+  "text": "-3*(x+7)=56",
+  "class": "unique",
+  "solution": "-77/3",
+  "form": "mixed",
+  "id": "s281"
+ },
+ {
+  "text": "-3*(4*(x-5)-4)=10",
+  "class": "unique",
+  "solution": "31/6",
+  "form": "mixed",
+  "id": "s282"
+ },
+ {
+  "text": "4*(4*(x+1)+8)=-36",
+  "class": "unique",
+  "solution": "-21/4",
+  "form": "mixed",
+  "id": "s283"
+ },
+ {
+  "text": "3-(x-7)=4*x-7",
+  "class": "unique",
+  "solution": "17/5",
+  "form": "mixed",
+  "id": "s284"
+ },
+ {
+  "text": "-2*x-16=4*x+5",
+  "class": "unique",
+  "solution": "-7/2",
+  "form": "mixed",
+  "id": "s285"
+ },
+ {
+  "text": "-7*x-12=39",
+  "class": "unique",
+  "solution": "-51/7",
+  "form": "mixed",
+  "id": "s286"
+ },
+ {
+  "text": "(x-1)/6=(x-8)/5",
+  "class": "unique",
+  "solution": "43",
+  "form": "mixed",
+  "id": "s287"
+ },
+ {
+  "text": "4-4*x=8",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s288"
+ },
+ {
+  "text": "-33=4*x+7",
+  "class": "unique",
+  "solution": "-10",
+  "form": "mixed",
+  "id": "s289"
+ },
+ {
+  "text": "2*x+20=-36",
+  "class": "unique",
+  "solution": "-28",
+  "form": "mixed",
+  "id": "s290"
+ },
+ {
+  "text": "-5*(x-3)=1*(x+3)",
+  "class": "unique",
+  "solution": "2",
+  "form": "mixed",
+  "id": "s291"
+ },
+ {
+  "text": "4*(x+11)=-24",
+  "class": "unique",
+  "solution": "-17",
+  "form": "mixed",
+  "id": "s292"
+ },
+ {
+  "text": "14-(x-2)=x+8",
+  "class": "unique",
+  "solution": "4",
+  "form": "mixed",
+  "id": "s293"
+ },
+ {
+  "text": "-8-5*x=-5",
+  "class": "unique",
+  "solution": "-3/5",
+  "form": "mixed",
+  "id": "s294"
+ },
+ {
+  "text": "(-3/3)*x+5=5",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s295"
+ },
+ {
+  "text": "-3*(x-3)=46",
+  "class": "unique",
+  "solution": "-37/3",
+  "form": "mixed",
+  "id": "s296"
+ },
+ {
+  "text": "-6*(x+1)=5*(x+7)",
+  "class": "unique",
+  "solution": "-41/11",
+  "form": "mixed",
+  "id": "s297"
+ },
+ {
+  "text": "x/5-12=1",
+  "class": "unique",
+  "solution": "65",
+  "form": "mixed",
+  "id": "s298"
+ },
+ {
+  "text": "2*(x+8)+5=3",
+  "class": "unique",
+  "solution": "-9",
+  "form": "mixed",
+  "id": "s299"
+ },
+ {
+  "text": "10-(x+1)=2*x+12",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s300"
+ },
+ {
+  "text": "(x-4)/9=-10",
+  "class": "unique",
+  "solution": "-86",
+  "form": "mixed",
+  "id": "s301"
+ },
+ {
+  "text": "x/4-11=3",
+  "class": "unique",
+  "solution": "56",
+  "form": "mixed",
+  "id": "s302"
+ },
+ {
+  "text": "-8-(x+9)=2*x+12",
+  "class": "unique",
+  "solution": "-29/3",
+  "form": "mixed",
+  "id": "s303"
+ },
+ {
+  "text": "(x-7)/2=(x+2)/6",
+  "class": "unique",
+  "solution": "23/2",
+  "form": "mixed",
+  "id": "s304"
+ },
+ {
+  "text": "7*(x+7)-5=12",
+  "class": "unique",
+  "solution": "-32/7",
+  "form": "mixed",
+  "id": "s305"
+ },
+ {
+  "text": "3-5*x=-13",
+  "class": "unique",
+  "solution": "16/5",
+  "form": "mixed",
+  "id": "s306"
+ },
+ {
+  "text": "-7*(x-12)=29",
+  "class": "unique",
+  "solution": "55/7",
+  "form": "mixed",
+  "id": "s307"
+ },
+ {
+  "text": "15-4*x=-20",
+  "class": "unique",
+  "solution": "35/4",
+  "form": "mixed",
+  "id": "s308"
+ },
+ {
+  "text": "x/7+9=10",
+  "class": "unique",
+  "solution": "7",
+  "form": "mixed",
+  "id": "s309"
+ },
+ {
+  "text": "(x+4)/5=(x-5)/3",
+  "class": "unique",
+  "solution": "37/2",
+  "form": "mixed",
+  "id": "s310"
+ },
+ {
+  "text": "-32=-6*x-10",
+  "class": "unique",
+  "solution": "11/3",
+  "form": "mixed",
+  "id": "s311"
+ },
+ {
+  "text": "-7-(x-7)=5*x-15",
+  "class": "unique",
+  "solution": "5/2",
+  "form": "mixed",
+  "id": "s312"
+ },
+ {
+  "text": "2*(1*(x+1)-1)=5",
+  "class": "unique",
+  "solution": "5/2",
+  "form": "mixed",
+  "id": "s313"
+ },
+ {
+  "text": "x/7+7=8",
+  "class": "unique",
+  "solution": "7",
+  "form": "mixed",
+  "id": "s314"
+ },
+ {
+  "text": "2*(4*(x+6)+5)=30",
+  "class": "unique",
+  "solution": "-7/2",
+  "form": "mixed",
+  "id": "s315"
+ },
+ {
+  "text": "-3*(2*(x+1)+8)=12",
+  "class": "unique",
+  "solution": "-7",
+  "form": "mixed",
+  "id": "s316"
+ },
+ {
+  "text": "-4*x-16=36",
+  "class": "unique",
+  "solution": "-13",
+  "form": "mixed",
+  "id": "s317"
+ },
+ {
+  "text": "-2*(x-9)-5=-2",
+  "class": "unique",
+  "solution": "15/2",
+  "form": "mixed",
+  "id": "s318"
+ },
+ {
+  "text": "-7*(x+3)-2=30",
+  "class": "unique",
+  "solution": "-53/7",
+  "form": "mixed",
+  "id": "s319"
+ },
+ {
+  "text": "(x+9)/6=(x-8)/4",
+  "class": "unique",
+  "solution": "42",
+  "form": "mixed",
+  "id": "s320"
+ },
+ {
+  "text": "(x-3)/4=(x+5)/5",
+  "class": "unique",
+  "solution": "35",
+  "form": "mixed",
+  "id": "s321"
+ },
+ {
+  "text": "-3*x-7=-28",
+  "class": "unique",
+  "solution": "7",
+  "form": "mixed",
+  "id": "s322"
+ },
+ {
+  "text": "(x-12)/9=-11",
+  "class": "unique",
+  "solution": "-87",
+  "form": "mixed",
+  "id": "s323"
+ },
+ {
+  "text": "-1*(x+1)=-58",
+  "class": "unique",
+  "solution": "57",
+  "form": "mixed",
+  "id": "s324"
+ },
+ {
+  "text": "-7*(x+3)+14=6",
+  "class": "unique",
+  "solution": "-13/7",
+  "form": "mixed",
+  "id": "s325"
+ },
+ {
+  "text": "4-(x-9)=-5*x+13",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s326"
+ },
+ {
+  "text": "-x+11=12",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s327"
+ },
+ {
+  "text": "x/6-8=-12",
+  "class": "unique",
+  "solution": "-24",
+  "form": "mixed",
+  "id": "s328"
+ },
+ {
+  "text": "(x+2)/7=-10",
+  "class": "unique",
+  "solution": "-72",
+  "form": "mixed",
+  "id": "s329"
+ },
+ {
+  "text": "-7*(x-11)=-34",
+  "class": "unique",
+  "solution": "111/7",
+  "form": "mixed",
+  "id": "s330"
+ },
+ {
+  "text": "(x-12)/4=9",
+  "class": "unique",
+  "solution": "48",
+  "form": "mixed",
+  "id": "s331"
+ },
+ {
+  "text": "(-5/5)*x-11=6",
+  "class": "unique",
+  "solution": "-17",
+  "form": "mixed",
+  "id": "s332"
+ },
+ {
+  "text": "13-4*x=-25",
+  "class": "unique",
+  "solution": "19/2",
+  "form": "mixed",
+  "id": "s333"
+ },
+ {
+  "text": "-8*x+19=3",
+  "class": "unique",
+  "solution": "2",
+  "form": "mixed",
+  "id": "s334"
+ },
+ {
+  "text": "x/4+x/6=19",
+  "class": "unique",
+  "solution": "228/5",
+  "form": "mixed",
+  "id": "s335"
+ },
+ {
+  "text": "(x-9)/3=(x+1)/2",
+  "class": "unique",
+  "solution": "-21",
+  "form": "mixed",
+  "id": "s336"
+ },
+ {
+  "text": "(x-6)/4=(x-9)/6",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s337"
+ },
+ {
+  "text": "x/2+x/6=3",
+  "class": "unique",
+  "solution": "9/2",
+  "form": "mixed",
+  "id": "s338"
+ },
+ {
+  "text": "6*x+11=-30",
+  "class": "unique",
+  "solution": "-41/6",
+  "form": "mixed",
+  "id": "s339"
+ },
+ {
+  "text": "(x-6)/4=(x+3)/5",
+  "class": "unique",
+  "solution": "42",
+  "form": "mixed",
+  "id": "s340"
+ },
+ {
+  "text": "2*(x+5)+9=-19",
+  "class": "unique",
+  "solution": "-19",
+  "form": "mixed",
+  "id": "s341"
+ },
+ {
+  "text": "23=7*x-2",
+  "class": "unique",
+  "solution": "25/7",
+  "form": "mixed",
+  "id": "s342"
+ },
+ {
+  "text": "(x+4)/6=(x+9)/2",
+  "class": "unique",
+  "solution": "-23/2",
+  "form": "mixed",
+  "id": "s343"
+ },
+ {
+  "text": "x/5-10=-13",
+  "class": "unique",
+  "solution": "-15",
+  "form": "mixed",
+  "id": "s344"
+ },
+ {
+  "text": "(x-9)/4=(x-9)/2",
+  "class": "unique",
+  "solution": "9",
+  "form": "mixed",
+  "id": "s345"
+ },
+ {
+  "text": "15-6*x=-1",
+  "class": "unique",
+  "solution": "8/3",
+  "form": "mixed",
+  "id": "s346"
+ },
+ {
+  "text": "x/8+x/3=10",
+  "class": "unique",
+  "solution": "240/11",
+  "form": "mixed",
+  "id": "s347"
+ },
+ {
+  "text": "7*(x+8)-10=-6",
+  "class": "unique",
+  "solution": "-52/7",
+  "form": "mixed",
+  "id": "s348"
+ },
+ {
+  "text": "(x+5)/5=(x+6)/3",
+  "class": "unique",
+  "solution": "-15/2",
+  "form": "mixed",
+  "id": "s349"
+ },
+ {
+  "text": "-7*x-2=-x+8",
+  "class": "unique",
+  "solution": "-5/3",
+  "form": "mixed",
+  "id": "s350"
+ },
+ {
+  "text": "1*(1*(x+3)-6)=22",
+  "class": "unique",
+  "solution": "25",
+  "form": "mixed",
+  "id": "s351"
+ },
+ {
+  "text": "(-6/6)*x-11=3",
+  "class": "unique",
+  "solution": "-14",
+  "form": "mixed",
+  "id": "s352"
+ },
+ {
+  "text": "x/8+x/6=12",
+  "class": "unique",
+  "solution": "288/7",
+  "form": "mixed",
+  "id": "s353"
+ },
+ {
+  "text": "x/8+x/4=11",
+  "class": "unique",
+  "solution": "88/3",
+  "form": "mixed",
+  "id": "s354"
+ },
+ {
+  "text": "-6*(x+1)=2*(x-9)",
+  "class": "unique",
+  "solution": "3/2",
+  "form": "mixed",
+  "id": "s355"
+ },
+ {
+  "text": "(-2/3)*x+3=15",
+  "class": "unique",
+  "solution": "-18",
+  "form": "mixed",
+  "id": "s356"
+ },
+ {
+  "text": "x/4+4=11",
+  "class": "unique",
+  "solution": "28",
+  "form": "mixed",
+  "id": "s357"
+ },
+ {
+  "text": "x/6-9=8",
+  "class": "unique",
+  "solution": "102",
+  "form": "mixed",
+  "id": "s358"
+ },
+ {
+  "text": "3-(x+9)=-4*x+10",
+  "class": "unique",
+  "solution": "16/3",
+  "form": "mixed",
+  "id": "s359"
+ },
+ {
+  "text": "-5*(x+3)+9=11",
+  "class": "unique",
+  "solution": "-17/5",
+  "form": "mixed",
+  "id": "s360"
+ },
+ {
+  "text": "6=-x-6",
+  "class": "unique",
+  "solution": "-12",
+  "form": "mixed",
+  "id": "s361"
+ },
+ {
+  "text": "1*(-3*(x-3)+8)=22",
+  "class": "unique",
+  "solution": "-5/3",
+  "form": "mixed",
+  "id": "s362"
+ },
+ {
+  "text": "-14-2*x=1",
+  "class": "unique",
+  "solution": "-15/2",
+  "form": "mixed",
+  "id": "s363"
+ },
+ {
+  "text": "x/5+x/8=9",
+  "class": "unique",
+  "solution": "360/13",
+  "form": "mixed",
+  "id": "s364"
+ },
+ {
+  "text": "-2=6*x+4",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s365"
+ },
+ {
+  "text": "-4*(x-6)=1*(x+5)",
+  "class": "unique",
+  "solution": "19/5",
+  "form": "mixed",
+  "id": "s366"
+ },
+ {
+  "text": "-1*(x-8)-5=-15",
+  "class": "unique",
+  "solution": "18",
+  "form": "mixed",
+  "id": "s367"
+ },
+ {
+  "text": "x/8+x/3=17",
+  "class": "unique",
+  "solution": "408/11",
+  "form": "mixed",
+  "id": "s368"
+ },
+ {
+  "text": "-4*(x-5)=-1*(x+8)",
+  "class": "unique",
+  "solution": "28/3",
+  "form": "mixed",
+  "id": "s369"
+ },
+ {
+  "text": "x+3=-3*x-19",
+  "class": "unique",
+  "solution": "-11/2",
+  "form": "mixed",
+  "id": "s370"
+ },
+ {
+  "text": "8*(x+10)=17",
+  "class": "unique",
+  "solution": "-63/8",
+  "form": "mixed",
+  "id": "s371"
+ },
+ {
+  "text": "(x+4)/6=(x-2)/2",
+  "class": "unique",
+  "solution": "5",
+  "form": "mixed",
+  "id": "s372"
+ },
+ {
+  "text": "(x+3)/3=(x-1)/6",
+  "class": "unique",
+  "solution": "-7",
+  "form": "mixed",
+  "id": "s373"
+ },
+ {
+  "text": "(-4/2)*x+8=15",
+  "class": "unique",
+  "solution": "-7/2",
+  "form": "mixed",
+  "id": "s374"
+ },
+ {
+  "text": "-4*(x+4)=-12",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s375"
+ },
+ {
+  "text": "6-3*x=21",
+  "class": "unique",
+  "solution": "-5",
+  "form": "mixed",
+  "id": "s376"
+ },
+ {
+  "text": "(7/2)*x+12=-9",
+  "class": "unique",
+  "solution": "-6",
+  "form": "mixed",
+  "id": "s377"
+ },
+ {
+  "text": "10-5*x=-21",
+  "class": "unique",
+  "solution": "31/5",
+  "form": "mixed",
+  "id": "s378"
+ },
+ {
+  "text": "(x+10)/5=-5",
+  "class": "unique",
+  "solution": "-35",
+  "form": "mixed",
+  "id": "s379"
+ },
+ {
+  "text": "-12-(x-9)=-3*x-9",
+  "class": "unique",
+  "solution": "-3",
+  "form": "mixed",
+  "id": "s380"
+ },
+ {
+  "text": "-4*(x-4)=-2*(x+7)",
+  "class": "unique",
+  "solution": "15",
+  "form": "mixed",
+  "id": "s381"
+ },
+ {
+  "text": "(-3/6)*x-5=7",
+  "class": "unique",
+  "solution": "-24",
+  "form": "mixed",
+  "id": "s382"
+ },
+ {
+  "text": "-13=-5*x-13",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s383"
+ },
+ {
+  "text": "(x+2)/5=(x+2)/2",
+  "class": "unique",
+  "solution": "-2",
+  "form": "mixed",
+  "id": "s384"
+ },
+ {
+  "text": "(x-9)/5=-11",
+  "class": "unique",
+  "solution": "-46",
+  "form": "mixed",
+  "id": "s385"
+ },
+ {
+  "text": "(x-6)/5=(x+8)/6",
+  "class": "unique",
+  "solution": "76",
+  "form": "mixed",
+  "id": "s386"
+ },
+ {
+  "text": "2*x+1=x+7",
+  "class": "unique",
+  "solution": "6",
+  "form": "mixed",
+  "id": "s387"
+ },
+ {
+  "text": "7*(x-7)+8=6",
+  "class": "unique",
+  "solution": "47/7",
+  "form": "mixed",
+  "id": "s388"
+ },
+ {
+  "text": "(3/4)*x+12=13",
+  "class": "unique",
+  "solution": "4/3",
+  "form": "mixed",
+  "id": "s389"
+ },
+ {
+  "text": "-8-5*x=-29",
+  "class": "unique",
+  "solution": "21/5",
+  "form": "mixed",
+  "id": "s390"
+ },
+ {
+  "text": "4*(2*(x+1)+6)=-15",
+  "class": "unique",
+  "solution": "-47/8",
+  "form": "mixed",
+  "id": "s391"
+ },
+ {
+  "text": "7*(x-5)+15=5",
+  "class": "unique",
+  "solution": "25/7",
+  "form": "mixed",
+  "id": "s392"
+ },
+ {
+  "text": "-x+12=25",
+  "class": "unique",
+  "solution": "-13",
+  "form": "mixed",
+  "id": "s393"
+ },
+ {
+  "text": "-3*(2*(x+1)-3)=-9",
+  "class": "unique",
+  "solution": "2",
+  "form": "mixed",
+  "id": "s394"
+ },
+ {
+  "text": "-4*(-1*(x-1)+3)=-34",
+  "class": "unique",
+  "solution": "-9/2",
+  "form": "mixed",
+  "id": "s395"
+ },
+ {
+  "text": "-5-4*x=-18",
+  "class": "unique",
+  "solution": "13/4",
+  "form": "mixed",
+  "id": "s396"
+ },
+ {
+  "text": "(7/3)*x-1=-12",
+  "class": "unique",
+  "solution": "-33/7",
+  "form": "mixed",
+  "id": "s397"
+ },
+ {
+  "text": "x/4-3=-11",
+  "class": "unique",
+  "solution": "-32",
+  "form": "mixed",
+  "id": "s398"
+ },
+ {
+  "text": "(-5/5)*x+4=-13",
+  "class": "unique",
+  "solution": "17",
+  "form": "mixed",
+  "id": "s399"
+ },
+ {
+  "text": "5*(x-9)=-3*(x+7)",
+  "class": "unique",
+  "solution": "3",
+  "form": "mixed",
+  "id": "s400"
+ },
+ {
+  "text": "20-5*x=-2",
+  "class": "unique",
+  "solution": "22/5",
+  "form": "mixed",
+  "id": "s401"
+ },
+ {
+  "text": "15-(x-4)=4*x-2",
+  "class": "unique",
+  "solution": "21/5",
+  "form": "mixed",
+  "id": "s402"
+ },
+ {
+  "text": "x/5+10=-3",
+  "class": "unique",
+  "solution": "-65",
+  "form": "mixed",
+  "id": "s403"
+ },
+ {
+  "text": "3*(x-2)=-5*(x+9)",
+  "class": "unique",
+  "solution": "-39/8",
+  "form": "mixed",
+  "id": "s404"
+ },
+ {
+  "text": "11-(x+1)=5*x+7",
+  "class": "unique",
+  "solution": "1/2",
+  "form": "mixed",
+  "id": "s405"
+ },
+ {
+  "text": "1*(x-4)-15=27",
+  "class": "unique",
+  "solution": "46",
+  "form": "mixed",
+  "id": "s406"
+ },
+ {
+  "text": "x/4+x/6=3",
+  "class": "unique",
+  "solution": "36/5",
+  "form": "mixed",
+  "id": "s407"
+ },
+ {
+  "text": "9*(x+1)=-48",
+  "class": "unique",
+  "solution": "-19/3",
+  "form": "mixed",
+  "id": "s408"
+ },
+ {
+  "text": "x/3+x/8=13",
+  "class": "unique",
+  "solution": "312/11",
+  "form": "mixed",
+  "id": "s409"
+ },
+ {
+  "text": "x/3+x/8=8",
+  "class": "unique",
+  "solution": "192/11",
+  "form": "mixed",
+  "id": "s410"
+ },
+ {
+  "text": "9*x-4=36",
+  "class": "unique",
+  "solution": "40/9",
+  "form": "mixed",
+  "id": "s411"
+ },
+ {
+  "text": "x/8+x/3=18",
+  "class": "unique",
+  "solution": "432/11",
+  "form": "mixed",
+  "id": "s412"
+ },
+ {
+  "text": "1=8*x+8",
+  "class": "unique",
+  "solution": "-7/8",
+  "form": "mixed",
+  "id": "s413"
+ },
+ {
+  "text": "-6*x+10=38",
+  "class": "unique",
+  "solution": "-14/3",
+  "form": "mixed",
+  "id": "s414"
+ },
+ {
+  "text": "9-2*x=14",
+  "class": "unique",
+  "solution": "-5/2",
+  "form": "mixed",
+  "id": "s415"
+ },
+ {
+  "text": "x/8-3=8",
+  "class": "unique",
+  "solution": "88",
+  "form": "mixed",
+  "id": "s416"
+ },
+ {
+  "text": "(x-7)/6=(x-9)/5",
+  "class": "unique",
+  "solution": "19",
+  "form": "mixed",
+  "id": "s417"
+ },
+ {
+  "text": "x/2+4=-6",
+  "class": "unique",
+  "solution": "-20",
+  "form": "mixed",
+  "id": "s418"
+ },
+ {
+  "text": "(x+6)/4=(x+8)/2",
+  "class": "unique",
+  "solution": "-10",
+  "form": "mixed",
+  "id": "s419"
+ },
+ {
+  "text": "3*(x+5)=4*(x+7)",
+  "class": "unique",
+  "solution": "-13",
+  "form": "mixed",
+  "id": "s420"
+ },
+ {
+  "text": "7*x+4=-27",
+  "class": "unique",
+  "solution": "-31/7",
+  "form": "mixed",
+  "id": "s421"
+ },
+ {
+  "text": "-18=3*x+5",
+  "class": "unique",
+  "solution": "-23/3",
+  "form": "mixed",
+  "id": "s422"
+ },
+ {
+  "text": "9-(x-9)=-2*x+14",
+  "class": "unique",
+  "solution": "-4",
+  "form": "mixed",
+  "id": "s423"
+ },
+ {
+  "text": "x/6-2=3",
+  "class": "unique",
+  "solution": "30",
+  "form": "mixed",
+  "id": "s424"
+ },
+ {
+  "text": "(6/3)*x+6=-12",
+  "class": "unique",
+  "solution": "-9",
+  "form": "mixed",
+  "id": "s425"
+ },
+ {
+  "text": "(x-10)/6=-6",
+  "class": "unique",
+  "solution": "-26",
+  "form": "mixed",
+  "id": "s426"
+ },
+ {
+  "text": "x/9-2=-5",
+  "class": "unique",
+  "solution": "-27",
+  "form": "mixed",
+  "id": "s427"
+ },
+ {
+  "text": "-x+8=2*x-18",
+  "class": "unique",
+  "solution": "26/3",
+  "form": "mixed",
+  "id": "s428"
+ },
+ {
+  "text": "2*x+7=9*x-1",
+  "class": "unique",
+  "solution": "8/7",
+  "form": "mixed",
+  "id": "s429"
+ },
+ {
+  "text": "x/9-11=-9",
+  "class": "unique",
+  "solution": "18",
+  "form": "mixed",
+  "id": "s430"
+ },
+ {
+  "text": "4*(-1*(x-5)-6)=23",
+  "class": "unique",
+  "solution": "-27/4",
+  "form": "mixed",
+  "id": "s431"
+ },
+ {
+  "text": "x/6+x/5=15",
+  "class": "unique",
+  "solution": "450/11",
+  "form": "mixed",
+  "id": "s432"
+ },
+ {
+  "text": "-16=-3*x-1",
+  "class": "unique",
+  "solution": "5",
+  "form": "mixed",
+  "id": "s433"
+ },
+ {
+  "text": "x/8+x/2=11",
+  "class": "unique",
+  "solution": "88/5",
+  "form": "mixed",
+  "id": "s434"
+ },
+ {
+  "text": "(-5/2)*x+10=2",
+  "class": "unique",
+  "solution": "16/5",
+  "form": "mixed",
+  "id": "s435"
+ },
+ {
+  "text": "-5*x-15=-8*x+12",
+  "class": "unique",
+  "solution": "9",
+  "form": "mixed",
+  "id": "s436"
+ },
+ {
+  "text": "-8*x+2=x-3",
+  "class": "unique",
+  "solution": "5/9",
+  "form": "mixed",
+  "id": "s437"
+ },
+ {
+  "text": "1=x-3",
+  "class": "unique",
+  "solution": "4",
+  "form": "mixed",
+  "id": "s438"
+ },
+ {
+  "text": "-1*(x-3)=52",
+  "class": "unique",
+  "solution": "-49",
+  "form": "mixed",
+  "id": "s439"
+ },
+ {
+  "text": "36=6*x+20",
+  "class": "unique",
+  "solution": "8/3",
+  "form": "mixed",
+  "id": "s440"
+ },
+ {
+  "text": "-8*x-2=-28",
+  "class": "unique",
+  "solution": "13/4",
+  "form": "mixed",
+  "id": "s441"
+ },
+ {
+  "text": "5*x-7=-6*x+11",
+  "class": "unique",
+  "solution": "18/11",
+  "form": "mixed",
+  "id": "s442"
+ },
+ {
+  "text": "-6*(x+4)+5=-32",
+  "class": "unique",
+  "solution": "13/6",
+  "form": "mixed",
+  "id": "s443"
+ },
+ {
+  "text": "-4*(-3*(x-2)-5)=-35",
+  "class": "unique",
+  "solution": "-31/12",
+  "form": "mixed",
+  "id": "s444"
+ },
+ {
+  "text": "-19-9*x=2",
+  "class": "unique",
+  "solution": "-7/3",
+  "form": "mixed",
+  "id": "s445"
+ },
+ {
+  "text": "(-2/6)*x-3=-3",
+  "class": "unique",
+  "solution": "0",
+  "form": "mixed",
+  "id": "s446"
+ },
+ {
+  "text": "-4*(x+7)+4=37",
+  "class": "unique",
+  "solution": "-61/4",
+  "form": "mixed",
+  "id": "s447"
+ },
+ {
+  "text": "(x-6)/3=-1",
+  "class": "unique",
+  "solution": "3",
+  "form": "mixed",
+  "id": "s448"
+ },
+ {
+  "text": "x+10=-7*x+16",
+  "class": "unique",
+  "solution": "3/4",
+  "form": "mixed",
+  "id": "s449"
+ },
+ {
+  "text": "-5*x-19=4",
+  "class": "unique",
+  "solution": "-23/5",
+  "form": "mixed",
+  "id": "s450"
+ },
+ {
+  "text": "-3*x-10=33",
+  "class": "unique",
+  "solution": "-43/3",
+  "form": "mixed",
+  "id": "s451"
+ },
+ {
+  "text": "(x-8)/4=10",
+  "class": "unique",
+  "solution": "48",
+  "form": "mixed",
+  "id": "s452"
+ },
+ {
+  "text": "-15-(x-7)=-4*x+15",
+  "class": "unique",
+  "solution": "23/3",
+  "form": "mixed",
+  "id": "s453"
+ },
+ {
+  "text": "(x+7)/5=-5",
+  "class": "unique",
+  "solution": "-32",
+  "form": "mixed",
+  "id": "s454"
+ },
+ {
+  "text": "-9*(x+3)=21",
+  "class": "unique",
+  "solution": "-16/3",
+  "form": "mixed",
+  "id": "s455"
+ },
+ {
+  "text": "-2*(-3*(x-2)+4)=-29",
+  "class": "unique",
+  "solution": "-3/2",
+  "form": "mixed",
+  "id": "s456"
+ },
+ {
+  "text": "-11-2*x=20",
+  "class": "unique",
+  "solution": "-31/2",
+  "form": "mixed",
+  "id": "s457"
+ },
+ {
+  "text": "(x-2)/5=(x+8)/4",
+  "class": "unique",
+  "solution": "-48",
+  "form": "mixed",
+  "id": "s458"
+ },
+ {
+  "text": "12-(x-4)=5*x+11",
+  "class": "unique",
+  "solution": "5/6",
+  "form": "mixed",
+  "id": "s459"
+ },
+ {
+  "text": "x/3+x/4=3",
+  "class": "unique",
+  "solution": "36/7",
+  "form": "mixed",
+  "id": "s460"
+ },
+ {
+  "text": "(x+3)/3=(x+9)/5",
+  "class": "unique",
+  "solution": "6",
+  "form": "mixed",
+  "id": "s461"
+ },
+ {
+  "text": "1*(x-3)=34",
+  "class": "unique",
+  "solution": "37",
+  "form": "mixed",
+  "id": "s462"
+ },
+ {
+  "text": "4*(x+9)=46",
+  "class": "unique",
+  "solution": "5/2",
+  "form": "mixed",
+  "id": "s463"
+ },
+ {
+  "text": "2*x+13=37",
+  "class": "unique",
+  "solution": "12",
+  "form": "mixed",
+  "id": "s464"
+ },
+ {
+  "text": "-8*x+1=-3",
+  "class": "unique",
+  "solution": "1/2",
+  "form": "mixed",
+  "id": "s465"
+ },
+ {
+  "text": "x/2+x/4=15",
+  "class": "unique",
+  "solution": "20",
+  "form": "mixed",
+  "id": "s466"
+ },
+ {
+  "text": "x/4+x/2=9",
+  "class": "unique",
+  "solution": "12",
+  "form": "mixed",
+  "id": "s467"
+ },
+ {
+  "text": "x/4+x/5=6",
+  "class": "unique",
+  "solution": "40/3",
+  "form": "mixed",
+  "id": "s468"
+ },
+ {
+  "text": "(x+7)/9=-5",
+  "class": "unique",
+  "solution": "-52",
+  "form": "mixed",
+  "id": "s469"
+ },
+ {
+  "text": "(x-6)/3=-8",
+  "class": "unique",
+  "solution": "-18",
+  "form": "mixed",
+  "id": "s470"
+ },
+ {
+  "text": "x/2-2=7",
+  "class": "unique",
+  "solution": "18",
+  "form": "mixed",
+  "id": "s471"
+ },
+ {
+  "text": "-5*(x+9)-6=-4",
+  "class": "unique",
+  "solution": "-47/5",
+  "form": "mixed",
+  "id": "s472"
+ },
+ {
+  "text": "4*(x-2)=3*(x+4)",
+  "class": "unique",
+  "solution": "20",
+  "form": "mixed",
+  "id": "s473"
+ },
+ {
+  "text": "x/2+x/5=1",
+  "class": "unique",
+  "solution": "10/7",
+  "form": "mixed",
+  "id": "s474"
+ },
+ {
+  "text": "(x+12)/5=4",
+  "class": "unique",
+  "solution": "8",
+  "form": "mixed",
+  "id": "s475"
+ },
+ {
+  "text": "-5*(x-7)-2=5",
+  "class": "unique",
+  "solution": "28/5",
+  "form": "mixed",
+  "id": "s476"
+ },
+ {
+  "text": "30=4*x+19",
+  "class": "unique",
+  "solution": "11/4",
+  "form": "mixed",
+  "id": "s477"
+ },
+ {
+  "text": "-7-2*x=-19",
+  "class": "unique",
+  "solution": "6",
+  "form": "mixed",
+  "id": "s478"
+ },
+ {
+  "text": "x/3+6=-13",
+  "class": "unique",
+  "solution": "-57",
+  "form": "mixed",
+  "id": "s479"
+ },
+ {
+  "text": "-8*(x-6)=7",
+  "class": "unique",
+  "solution": "41/8",
+  "form": "mixed",
+  "id": "s480"
+ },
+ {
+  "text": "3*(x+5)=-20",
+  "class": "unique",
+  "solution": "-35/3",
+  "form": "mixed",
+  "id": "s481"
+ },
+ {
+  "text": "3*(x-3)-2=-2",
+  "class": "unique",
+  "solution": "3",
+  "form": "mixed",
+  "id": "s482"
+ },
+ {
+  "text": "1*(x+1)+1=18",
+  "class": "unique",
+  "solution": "16",
+  "form": "mixed",
+  "id": "s483"
+ },
+ {
+  "text": "(x+7)/5=(x-8)/6",
+  "class": "unique",
+  "solution": "-82",
+  "form": "mixed",
+  "id": "s484"
+ },
+ {
+  "text": "2*(-1*(x-5)+2)=-20",
+  "class": "unique",
+  "solution": "17",
+  "form": "mixed",
+  "id": "s485"
+ },
+ {
+  "text": "1*(-3*(x+6)+5)=-36",
+  "class": "unique",
+  "solution": "23/3",
+  "form": "mixed",
+  "id": "s486"
+ },
+ {
+  "text": "4*(x-10)=-19",
+  "class": "unique",
+  "solution": "21/4",
+  "form": "mixed",
+  "id": "s487"
+ },
+ {
+  "text": "-21=-6*x+18",
+  "class": "unique",
+  "solution": "13/2",
+  "form": "mixed",
+  "id": "s488"
+ },
+ {
+  "text": "-6=-9*x-14",
+  "class": "unique",
+  "solution": "-8/9",
+  "form": "mixed",
+  "id": "s489"
+ },
+ {
+  "text": "-4*(-4*(x+2)+7)=46",
+  "class": "unique",
+  "solution": "21/8",
+  "form": "mixed",
+  "id": "s490"
+ },
+ {
+  "text": "-4=-9*x-12",
+  "class": "unique",
+  "solution": "-8/9",
+  "form": "mixed",
+  "id": "s491"
+ },
+ {
+  "text": "4*(x+12)=-21",
+  "class": "unique",
+  "solution": "-69/4",
+  "form": "mixed",
+  "id": "s492"
+ },
+ {
+  "text": "x/3+x/6=13",
+  "class": "unique",
+  "solution": "26",
+  "form": "mixed",
+  "id": "s493"
+ },
+ {
+  "text": "3*(-2*(x-4)-6)=-13",
+  "class": "unique",
+  "solution": "19/6",
+  "form": "mixed",
+  "id": "s494"
+ },
+ {
+  "text": "1*(x+4)=-60",
+  "class": "unique",
+  "solution": "-64",
+  "form": "mixed",
+  "id": "s495"
+ },
+ {
+  "text": "-2*(x+9)=27",
+  "class": "unique",
+  "solution": "-45/2",
+  "form": "mixed",
+  "id": "s496"
+ },
+ {
+  "text": "-2*x+6=3*x+11",
+  "class": "unique",
+  "solution": "-1",
+  "form": "mixed",
+  "id": "s497"
+ },
+ {
+  "text": "-31=-4*x-2",
+  "class": "unique",
+  "solution": "29/4",
+  "form": "mixed",
+  "id": "s498"
+ },
+ {
+  "text": "3*(-2*(x+6)-7)=50",
+  "class": "unique",
+  "solution": "-107/6",
+  "form": "mixed",
+  "id": "s499"
+ }
+]

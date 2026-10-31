@@ -1,0 +1,32 @@
+{
+ "summary": {
+  "dataset": "eval",
+  "stage": "D4",
+  "label": "run3",
+  "sha256": "6147a52e23e0028323e9fb4d714234171e484c03c8ad0c3f121d69c3e236603d",
+  "cases": 400,
+  "correct": 400,
+  "rate": 1,
+  "failuresByCategory": {},
+  "invalidStepsInTraces": 0,
+  "openObligations": 0,
+  "moveVerifyRejected": 0,
+  "movePreconditionRefused": 9576,
+  "visited": {
+   "median": 23,
+   "p95": 67,
+   "worst": 92
+  },
+  "pathLength": {
+   "median": 6,
+   "p95": 9,
+   "worst": 9
+  },
+  "ms": {
+   "median": 29.1,
+   "p95": 116,
+   "worst": 303.63
+  }
+ },
+ "failures": []
+}

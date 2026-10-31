@@ -1,0 +1,43 @@
+{
+  "version": "unified-math-u1-evaluation@1",
+  "corpus": "independent-cases.v1.json",
+  "totalCases": 200,
+  "failures": 0,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "firstInvalidStepMatches": 200,
+  "domains": {
+    "arithmetic": {
+      "cases": 50,
+      "accepted": 50,
+      "rejected": 0,
+      "failures": 0,
+      "elapsedMs": 20.366,
+      "meanMs": 0.407
+    },
+    "algebra": {
+      "cases": 50,
+      "accepted": 50,
+      "rejected": 0,
+      "failures": 0,
+      "elapsedMs": 67.18,
+      "meanMs": 1.344
+    },
+    "geometry": {
+      "cases": 50,
+      "accepted": 50,
+      "rejected": 0,
+      "failures": 0,
+      "elapsedMs": 2336.816,
+      "meanMs": 46.736
+    },
+    "mixed": {
+      "cases": 50,
+      "accepted": 50,
+      "rejected": 0,
+      "failures": 0,
+      "elapsedMs": 2528.933,
+      "meanMs": 50.579
+    }
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "schema": "openpath-natural-working-d6-remaining-inventory@1",
+  "sourceBenchmarkSha256": "3dad06d2fa23b9f0fe56e04a0b1ebcce28b449ef82d99bbcf559a09a500f14e5",
+  "total": 50,
+  "cases": [
+    {
+      "id": "d4-geometry-vectors-000",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-002",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-004",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-006",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-008",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-010",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-012",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-014",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-016",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-018",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-020",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-022",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-024",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-026",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-028",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-030",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-032",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-034",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-036",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-geometry-vectors-038",
+      "category": "geometry-vectors",
+      "blocker": "missing-domain-or-assumption-handling",
+      "detail": "segment name and value are text; adapter must match a typed geometric object, given measurement and nonzero condition before U4 checks the derived scalar claim"
+    },
+    {
+      "id": "d4-mixed-domain-000",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-001",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-002",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-003",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-004",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-005",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-006",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-007",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-008",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-009",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-010",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-011",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-012",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-013",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-014",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-015",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-016",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-017",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-018",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-019",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-020",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-021",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-022",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-023",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-024",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-025",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-026",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-027",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    },
+    {
+      "id": "d4-mixed-domain-028",
+      "category": "mixed-domain",
+      "blocker": "missing-multi-step-relationship",
+      "detail": "exact scalar assignment must substitute into a symbolic formula with source/dependency preservation"
+    },
+    {
+      "id": "d4-mixed-domain-029",
+      "category": "mixed-domain",
+      "blocker": "missing-typed-conversion",
+      "detail": "a prior scalar assignment must bind the symbolic function argument before M3/U4 evaluation"
+    }
+  ]
+}

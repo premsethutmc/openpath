@@ -1,0 +1,2970 @@
+{
+ "version": "1.0.0",
+ "status": "provisional",
+ "note": "Original, written for OpenPath (CC0). Not educator-reviewed: every question is provisional and can never verify mastery until reviewed and released.",
+ "modules": [
+  {
+   "competency": "MATH.number.equivalent-fractions",
+   "title": "Generate equivalent fractions",
+   "chapter": [
+    {
+     "title": "Same size, different pieces",
+     "text": [
+      "Two fractions are equal when they cover the same amount of the same whole. Cut the same strip into more pieces and the shaded length does not change."
+     ],
+     "widget": {
+      "type": "strips",
+      "top": 2,
+      "bottom": 4,
+      "shaded": 1
+     }
+    },
+    {
+     "title": "What changes and what stays",
+     "text": [
+      "Cutting every piece into 2 doubles the number of pieces (the bottom) and doubles the number of shaded pieces (the top)."
+     ],
+     "math": [
+      "1/2 = (1 × 2)/(2 × 2) = 2/4"
+     ],
+     "tip": "Multiply the top and the bottom by the same number. Adding the same number does not work: 1/2 is not 2/3."
+    }
+   ],
+   "diagnostics": [
+    "eq-d1",
+    "eq-d2",
+    "eq-d3"
+   ],
+   "strategies": [
+    {
+     "id": "strip_model",
+     "title": "See it with fraction strips",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "One strip, two cuts",
+       "text": [
+        "Put a strip cut in halves above the same strip cut in eighths. Count the eighths under one half."
+       ],
+       "widget": {
+        "type": "strips",
+        "top": 2,
+        "bottom": 8,
+        "shaded": 1
+       }
+      }
+     ],
+     "guided": "eq-s1g",
+     "check": "eq-s1c"
+    },
+    {
+     "id": "multiply_both",
+     "title": "Multiply top and bottom by the same number",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Find the multiplier",
+       "text": [
+        "Look at the parts you know. 3 became 12: that is × 4. Do exactly the same to the other part."
+       ],
+       "math": [
+        "2/3 = (2 × 4)/(3 × 4) = 8/12"
+       ]
+      }
+     ],
+     "guided": "eq-s2g",
+     "check": "eq-s2c"
+    },
+    {
+     "id": "times_table_link",
+     "title": "Use the times table you know",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "It is a multiplication fact",
+       "text": [
+        "Each equivalent fraction hides a multiplication: 1/4 = 3/12 because 1 × 3 = 3 and 4 × 3 = 12. If the fact is slow, say the times table first."
+       ],
+       "math": [
+        "4 × 3 = 12"
+       ]
+      }
+     ],
+     "guided": "eq-s3g",
+     "check": "eq-s3c"
+    }
+   ],
+   "practice": [
+    "eq-p1",
+    "eq-p2",
+    "eq-p3"
+   ],
+   "transfer": [
+    "eq-t1"
+   ],
+   "retention": [
+    "eq-r1",
+    "eq-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.number.fraction-models",
+   "title": "Represent fractions of a whole",
+   "chapter": [
+    {
+     "title": "Equal parts",
+     "text": [
+      "A fraction names equal parts of one whole. The bottom number says how many equal parts; the top says how many we mean."
+     ],
+     "math": [
+      "A strip cut into 4 equal parts, 1 part shaded",
+      "Equal parts: 4, so the bottom number is 4",
+      "Shaded: 1, so the top number is 1",
+      "The shaded part is 1/4 of the strip"
+     ],
+     "widget": {
+      "type": "strips",
+      "top": 4,
+      "bottom": 4,
+      "shaded": 1
+     }
+    }
+   ],
+   "diagnostics": [
+    "fm-d1",
+    "fm-d2"
+   ],
+   "strategies": [
+    {
+     "id": "equal_parts",
+     "title": "Count equal parts",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Check the parts are equal",
+       "text": [
+        "First check that every part is the same size. Then count the parts you need."
+       ]
+      }
+     ],
+     "guided": "fm-g1",
+     "check": "fm-c1"
+    }
+   ],
+   "practice": [
+    "fm-p1",
+    "fm-p2"
+   ],
+   "transfer": [
+    "fm-t1"
+   ],
+   "retention": [
+    "fm-r1",
+    "fm-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.number.fraction-comparison",
+   "title": "Compare fractions with like denominators",
+   "chapter": [
+    {
+     "title": "Same pieces",
+     "text": [
+      "When the bottom numbers are the same, the pieces are the same size. Then the fraction with more pieces is larger."
+     ],
+     "math": [
+      "Compare 3/7 and 5/7",
+      "Both are sevenths: the pieces are the same size",
+      "5 pieces is more than 3 pieces",
+      "So 5/7 > 3/7"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "fc-d1",
+    "fc-d2"
+   ],
+   "strategies": [
+    {
+     "id": "same_size_pieces",
+     "title": "Same-size pieces: count them",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count the pieces",
+       "text": [
+        "3/8 and 5/8 are both made of eighths. Compare 3 eighths with 5 eighths."
+       ],
+       "widget": {
+        "type": "strips",
+        "top": 8,
+        "bottom": 8,
+        "shaded": 3
+       }
+      }
+     ],
+     "guided": "fc-g1",
+     "check": "fc-c1"
+    }
+   ],
+   "practice": [
+    "fc-p1",
+    "fc-p2"
+   ],
+   "transfer": [
+    "fc-t1"
+   ],
+   "retention": [
+    "fc-r1",
+    "fc-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.number.fraction-add-like",
+   "title": "Add and subtract like fractions",
+   "chapter": [
+    {
+     "title": "Add the pieces, keep their size",
+     "text": [
+      "3/8 + 2/8: three eighths and two eighths make five eighths. The bottom names the piece; it does not change."
+     ],
+     "math": [
+      "3/8 + 2/8",
+      "= (3 + 2) eighths",
+      "= 5/8 (the eighths stay eighths)"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "fa-d1",
+    "fa-d2"
+   ],
+   "strategies": [
+    {
+     "id": "count_pieces",
+     "title": "Count pieces of the same size",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Pieces are the unit",
+       "text": [
+        "Read 3/8 as '3 eighths'. 3 eighths + 2 eighths = 5 eighths, just like 3 apples + 2 apples."
+       ]
+      }
+     ],
+     "guided": "fa-g1",
+     "check": "fa-c1"
+    }
+   ],
+   "practice": [
+    "fa-p1",
+    "fa-p2"
+   ],
+   "transfer": [
+    "fa-t1"
+   ],
+   "retention": [
+    "fa-r1",
+    "fa-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.number.multiplication-tables",
+   "title": "Multiplication facts",
+   "chapter": [
+    {
+     "title": "A fact you can rebuild",
+     "text": [
+      "Every multiplication fact can be rebuilt from facts you already know: a near fact, a split, or doubling."
+     ],
+     "widget": {
+      "type": "array",
+      "rows": 7,
+      "cols": 8,
+      "split": 5
+     }
+    }
+   ],
+   "diagnostics": [
+    "mt-d1",
+    "mt-d2"
+   ],
+   "strategies": [
+    {
+     "id": "near_fact",
+     "title": "Use a fact next door",
+     "kind": "recall",
+     "needs": [
+      "mt-k-77"
+     ],
+     "screens": [
+      {
+       "title": "One more group",
+       "text": [
+        "7 × 8 is one more 7 than 7 × 7. If you know 7 × 7 = 49, add 7."
+       ],
+       "math": [
+        "7 × 8 = 7 × 7 + 7 = 49 + 7 = 56"
+       ]
+      }
+     ],
+     "guided": "mt-near-g",
+     "check": "mt-near-c"
+    },
+    {
+     "id": "decomposition",
+     "title": "Split it into facts you know",
+     "kind": "recall",
+     "needs": [
+      "mt-k-75",
+      "mt-k-73"
+     ],
+     "screens": [
+      {
+       "title": "Split the 8",
+       "text": [
+        "8 = 5 + 3. Seven fives and seven threes are facts you know. Add them."
+       ],
+       "math": [
+        "7 × 8 = 7 × 5 + 7 × 3",
+        "= 35 + 21 = 56"
+       ],
+       "widget": {
+        "type": "array",
+        "rows": 7,
+        "cols": 8,
+        "split": 5
+       }
+      }
+     ],
+     "guided": "mt-dec-g",
+     "check": "mt-dec-c"
+    },
+    {
+     "id": "doubling",
+     "title": "Double, double, double",
+     "kind": "recall",
+     "needs": [
+      "mt-k-72"
+     ],
+     "screens": [
+      {
+       "title": "8 is 2 × 2 × 2",
+       "text": [
+        "Start from 7 × 2 = 14 and double three times: 28, then 56."
+       ],
+       "math": [
+        "7 × 2 = 14",
+        "7 × 4 = 28",
+        "7 × 8 = 56"
+       ]
+      }
+     ],
+     "guided": "mt-dbl-g",
+     "check": "mt-dbl-c"
+    },
+    {
+     "id": "repeated_addition",
+     "title": "Add groups one at a time",
+     "kind": "conceptual",
+     "needs": [
+      "mt-k-add"
+     ],
+     "screens": [
+      {
+       "title": "Eight sevens",
+       "text": [
+        "7 × 8 means 8 groups of 7: 7, 14, 21, 28, 35, 42, 49, 56."
+       ]
+      }
+     ],
+     "guided": "mt-add-g",
+     "check": "mt-add-c"
+    },
+    {
+     "id": "visual_groups",
+     "title": "See the groups as an array",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Rows of dots",
+       "text": [
+        "Draw 8 rows of 7 dots. Count 5 rows (35) and 3 more rows (21)."
+       ],
+       "widget": {
+        "type": "array",
+        "rows": 8,
+        "cols": 7,
+        "split": 5
+       }
+      }
+     ],
+     "guided": "mt-arr-g",
+     "check": "mt-arr-c"
+    }
+   ],
+   "practice": [
+    "mt-p1",
+    "mt-p2"
+   ],
+   "transfer": [
+    "mt-t1"
+   ],
+   "retention": [
+    "mt-r1",
+    "mt-r2"
+   ],
+   "probes": [
+    "mt-k-77",
+    "mt-k-75",
+    "mt-k-73",
+    "mt-k-72",
+    "mt-k-add"
+   ]
+  },
+  {
+   "competency": "MATH.measurement.rectangle-area",
+   "title": "Calculate rectangle area",
+   "chapter": [
+    {
+     "title": "Rows of squares",
+     "text": [
+      "A 6 by 4 rectangle holds 4 rows of 6 unit squares: 6 × 4 = 24."
+     ],
+     "math": [
+      "Length 6 cm, width 4 cm",
+      "4 rows of 6 squares of 1 cm²",
+      "Area = 6 × 4 = 24 cm²"
+     ],
+     "widget": {
+      "type": "array",
+      "rows": 4,
+      "cols": 6
+     }
+    }
+   ],
+   "diagnostics": [
+    "ra-d1",
+    "ra-d2"
+   ],
+   "strategies": [
+    {
+     "id": "rows_of_squares",
+     "title": "Count rows of squares",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Length × width",
+       "text": [
+        "One row has 'length' squares; there are 'width' rows."
+       ]
+      }
+     ],
+     "guided": "ra-g1",
+     "check": "ra-c1"
+    }
+   ],
+   "practice": [
+    "ra-p1",
+    "ra-p2"
+   ],
+   "transfer": [
+    "ra-t1"
+   ],
+   "retention": [
+    "ra-r1",
+    "ra-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.coordinate.cartesian",
+   "title": "Plot points in four quadrants",
+   "chapter": [
+    {
+     "title": "Across, then up",
+     "text": [
+      "A point (x, y) is x across from the origin, then y up (negative: left or down)."
+     ],
+     "math": [
+      "Plot (−3, 2)",
+      "Start at the origin (0, 0)",
+      "x = −3: move 3 to the left",
+      "y = 2: then move 2 up",
+      "The point is in the second quadrant"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "ca-d1",
+    "ca-d2"
+   ],
+   "strategies": [
+    {
+     "id": "across_then_up",
+     "title": "Across first, then up or down",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Walk to the point",
+       "text": [
+        "Start at (0, 0). Walk x across, then y up."
+       ]
+      }
+     ],
+     "guided": "ca-g1",
+     "check": "ca-c1"
+    }
+   ],
+   "practice": [
+    "ca-p1",
+    "ca-p2"
+   ],
+   "transfer": [
+    "ca-t1"
+   ],
+   "retention": [
+    "ca-r1",
+    "ca-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.calculus.definite-integrals",
+   "title": "Evaluate definite integrals",
+   "chapter": [
+    {
+     "title": "Area under a graph",
+     "text": [
+      "∫ from a to b of f(x) dx is the area under y = f(x) between x = a and x = b. Under a constant it is a rectangle."
+     ],
+     "math": [
+      "∫ from 1 to 4 of 3 dx",
+      "The graph y = 3 is a horizontal line",
+      "Width 4 − 1 = 3, height 3",
+      "Area = 3 × 3 = 9"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "di-d1",
+    "di-d2"
+   ],
+   "strategies": [
+    {
+     "id": "rectangle_picture",
+     "title": "Picture the rectangle",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Width × height",
+       "text": [
+        "Under y = c from x = a to x = b: width b − a, height c."
+       ]
+      }
+     ],
+     "guided": "di-g1",
+     "check": "di-c1"
+    }
+   ],
+   "practice": [
+    "di-p1",
+    "di-p2"
+   ],
+   "transfer": [
+    "di-t1"
+   ],
+   "retention": [
+    "di-r1",
+    "di-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.number.factors-multiples",
+   "title": "Find factors and multiples",
+   "chapter": [
+    {
+     "title": "Factor pairs",
+     "text": [
+      "Factors come in pairs that multiply to the number: 12 = 1 × 12 = 2 × 6 = 3 × 4."
+     ],
+     "math": [
+      "Factors of 12: try 1, 2, 3, … in turn",
+      "1 × 12, 2 × 6, 3 × 4 (4 × 3 repeats a pair: stop)",
+      "Factors: 1, 2, 3, 4, 6, 12"
+     ],
+     "widget": {
+      "type": "array",
+      "rows": 3,
+      "cols": 4
+     }
+    }
+   ],
+   "diagnostics": [
+    "fx-d1",
+    "fx-d2"
+   ],
+   "strategies": [
+    {
+     "id": "factor_pairs",
+     "title": "Find the factor pairs",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Pairs",
+       "text": [
+        "Try 1, 2, 3, … and stop when the pairs meet."
+       ]
+      }
+     ],
+     "guided": "fx-g1",
+     "check": "fx-c1"
+    }
+   ],
+   "practice": [
+    "fx-p1",
+    "fx-p2"
+   ],
+   "transfer": [
+    "fx-t1"
+   ],
+   "retention": [
+    "fx-r1",
+    "fx-r2"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.algebra.quadratics",
+   "title": "Solve quadratic equations",
+   "chapter": [
+    {
+     "title": "Zero products",
+     "text": [
+      "If a product is zero, one of its factors is zero. Factorise, then set each factor to zero."
+     ],
+     "math": [
+      "x² − 5x + 6 = (x − 2)(x − 3)",
+      "x − 2 = 0 or x − 3 = 0"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "qd-d1",
+    "qd-d2",
+    "qd-d3"
+   ],
+   "strategies": [
+    {
+     "id": "two_numbers",
+     "title": "Find two numbers",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Multiply to c, add to b",
+       "text": [
+        "For x² + bx + c, find two numbers that multiply to c and add to b. They give the factors."
+       ],
+       "math": [
+        "x² − 7x + 12: −3 × −4 = 12, −3 + −4 = −7",
+        "(x − 3)(x − 4) = 0"
+       ]
+      }
+     ],
+     "guided": "qd-g1",
+     "check": "qd-c1"
+    },
+    {
+     "id": "square_meaning",
+     "title": "What a square can be",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Squares are never negative",
+       "text": [
+        "x² is x × x. It is 0 or positive for every real x, so x² = −1 has no real solution and x² = 49 has two: 7 and −7."
+       ]
+      }
+     ],
+     "guided": "qd-s2g",
+     "check": "qd-s2c"
+    }
+   ],
+   "practice": [
+    "qd-p1",
+    "qd-p2"
+   ],
+   "transfer": [
+    "qd-t1"
+   ],
+   "retention": [
+    "qd-r1",
+    "qd-r2"
+   ],
+   "probes": []
+  }
+ ],
+ "questions": [
+  {
+   "id": "eq-d1",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.same-whole",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "A strip is cut into 2 equal parts and 1 part is shaded. The same strip is cut into 4 equal parts instead. How many of the quarter parts cover the same shaded length?",
+   "answer": "2",
+   "solution": "1/2 of the strip is the same length as 2/4: two quarters fit in one half.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "misconceptions": [
+    {
+     "when": "1",
+     "hypothesis": "conceptual",
+     "says": "One quarter is only half of the shaded half. Two quarters cover it."
+    },
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "4 quarters cover the whole strip, not just the shaded half."
+    }
+   ]
+  },
+  {
+   "id": "eq-d2",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "Fill in the box: 1/3 = □/6",
+   "answer": "2",
+   "solution": "6 is 3 × 2, so multiply the top by 2 as well: 1 × 2 = 2. So 1/3 = 2/6.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "Adding 3 to the bottom does not mean adding 3 to the top. Equal fractions come from multiplying both by the same number."
+    },
+    {
+     "when": "3",
+     "hypothesis": "procedural",
+     "says": "The bottom was doubled, so the top must be doubled too: 1 × 2 = 2."
+    }
+   ]
+  },
+  {
+   "id": "eq-d3",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "Fill in the box: 2/5 = 6/□",
+   "answer": "15",
+   "solution": "The top went from 2 to 6, which is × 3, so the bottom is 5 × 3 = 15.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "recall",
+   "misconceptions": [
+    {
+     "when": "9",
+     "hypothesis": "conceptual",
+     "says": "From 2 to 6 is × 3 (not + 4). Multiply the bottom by 3 too: 15."
+    },
+    {
+     "when": "10",
+     "hypothesis": "procedural",
+     "says": "2 to 6 is × 3, not × 2: 5 × 3 = 15."
+    },
+    {
+     "when": "13",
+     "hypothesis": "recall",
+     "says": "The idea is right (× 3), but 5 × 3 = 15."
+    }
+   ]
+  },
+  {
+   "id": "eq-s1g",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.same-whole",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "Using the strips: 1/2 = □/8",
+   "answer": "4",
+   "solution": "Cut each half into 4 equal pieces: one half becomes 4 eighths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "How many eighths fit in one half of the strip?"
+  },
+  {
+   "id": "eq-s1c",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.same-whole",
+   "role": "check",
+   "type": "integer",
+   "prompt": "3/4 = □/8",
+   "answer": "6",
+   "solution": "Each quarter is 2 eighths, so 3 quarters are 6 eighths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "7",
+     "hypothesis": "conceptual",
+     "says": "Adding 4 to the bottom and to the top does not keep the fraction the same. Each quarter is 2 eighths: 3 × 2 = 6."
+    }
+   ]
+  },
+  {
+   "id": "eq-s2g",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "2/3 = □/12",
+   "answer": "8",
+   "solution": "3 × 4 = 12, so multiply the top by 4 as well: 2 × 4 = 8.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "What do you multiply 3 by to get 12? Do the same to the top."
+  },
+  {
+   "id": "eq-s2c",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "check",
+   "type": "integer",
+   "prompt": "3/5 = □/20",
+   "answer": "12",
+   "solution": "5 × 4 = 20, so 3 × 4 = 12.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "18",
+     "hypothesis": "conceptual",
+     "says": "From 5 to 20 is × 4, not + 15. 3 × 4 = 12."
+    }
+   ]
+  },
+  {
+   "id": "eq-s3g",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "Four times what is 12? Use it: 1/4 = 3/□",
+   "answer": "12",
+   "solution": "1 × 3 = 3, so the bottom is 4 × 3 = 12.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "The top went from 1 to 3. That is × 3."
+  },
+  {
+   "id": "eq-s3c",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "check",
+   "type": "integer",
+   "prompt": "2/7 = 6/□",
+   "answer": "21",
+   "solution": "2 × 3 = 6, so 7 × 3 = 21.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "11",
+     "hypothesis": "conceptual",
+     "says": "From 2 to 6 is × 3, not + 4: 7 × 3 = 21."
+    }
+   ]
+  },
+  {
+   "id": "eq-p1",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "3/4 = □/12",
+   "answer": "9",
+   "solution": "4 × 3 = 12 and 3 × 3 = 9.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "eq-p2",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.check-equal",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which fraction is equal to 2/3?",
+   "answer": "B",
+   "solution": "2/3 = 4/6: both parts multiplied by 2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "4/5",
+    "4/6",
+    "3/4",
+    "6/8"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "4/5 adds 2 to the top and 2 to the bottom. That does not keep the size."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "6/8 = 3/4, not 2/3."
+    }
+   ]
+  },
+  {
+   "id": "eq-p3",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "5/6 = 15/□",
+   "answer": "18",
+   "solution": "5 × 3 = 15 and 6 × 3 = 18.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "eq-t1",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.same-whole",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A recipe needs 1/2 cup of milk. Asha's measuring cup is marked in eighths. How many eighths should she pour?",
+   "answer": "4",
+   "solution": "1/2 = 4/8, so 4 eighths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "eq-r1",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "2/3 = □/9",
+   "answer": "6",
+   "solution": "3 × 3 = 9 and 2 × 3 = 6.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "8",
+     "hypothesis": "conceptual",
+     "says": "From 3 to 9 is × 3, not + 6: 2 × 3 = 6."
+    }
+   ]
+  },
+  {
+   "id": "eq-r2",
+   "competency": "MATH.number.equivalent-fractions",
+   "skill": "MLY.frac.scale",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "3/5 = 9/□",
+   "answer": "15",
+   "solution": "3 × 3 = 9 and 5 × 3 = 15.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fm-d1",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "A pizza is cut into 4 pieces of different sizes, and 1 piece is eaten. Is 1/4 of the pizza eaten?",
+   "answer": "B",
+   "solution": "Quarters must be 4 equal parts. With unequal pieces we cannot say 1/4.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "options": [
+    "Yes, 1 of 4 pieces",
+    "Not necessarily: the pieces are not equal",
+    "Yes, always",
+    "No, it is 1/3"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "A fraction counts equal parts. 1 of 4 unequal pieces is not 1/4."
+    }
+   ]
+  },
+  {
+   "id": "fm-d2",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "A chocolate bar has 6 equal pieces. Ravi eats 2. How many sixths are left?",
+   "answer": "4",
+   "solution": "6 − 2 = 4 pieces, so 4/6 is left.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "misconceptions": [
+    {
+     "when": "2",
+     "hypothesis": "procedural",
+     "says": "2 pieces were eaten; 4 are left."
+    }
+   ]
+  },
+  {
+   "id": "fm-g1",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "A ribbon is cut into 8 equal parts and 3 are used. How many eighths are left?",
+   "answer": "5",
+   "solution": "8 − 3 = 5, so 5/8 is left.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Count the equal parts that are not used."
+  },
+  {
+   "id": "fm-c1",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "check",
+   "type": "integer",
+   "prompt": "A cake has 10 equal slices. 7 are eaten. How many tenths are left?",
+   "answer": "3",
+   "solution": "10 − 7 = 3, so 3/10.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fm-r1",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "A garden has 5 equal beds. 2 have flowers. How many fifths have no flowers?",
+   "answer": "3",
+   "solution": "5 − 2 = 3, so 3/5.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fm-p1",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "A pie has 3 equal pieces. 1 is left. How many thirds were eaten?",
+   "answer": "2",
+   "solution": "3 − 1 = 2, so 2/3 was eaten.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fm-r2",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "A bar has 6 equal pieces. 4 are shaded. How many sixths are not shaded?",
+   "answer": "2",
+   "solution": "6 − 4 = 2, so 2/6.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fc-d1",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which is larger: 3/8 or 5/8?",
+   "answer": "B",
+   "solution": "Same-sized pieces (eighths): 5 of them is more than 3.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "options": [
+    "3/8",
+    "5/8",
+    "They are equal",
+    "You cannot tell"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Both are eighths, the same size of piece. 5 pieces are more than 3."
+    }
+   ]
+  },
+  {
+   "id": "fc-d2",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which is smallest: 4/9, 7/9 or 2/9?",
+   "answer": "C",
+   "solution": "All ninths: 2 pieces is the fewest.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "options": [
+    "4/9",
+    "7/9",
+    "2/9",
+    "They are all equal"
+   ]
+  },
+  {
+   "id": "fc-g1",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Put in order, smallest first: 5/6, 1/6, 3/6",
+   "answer": "A",
+   "solution": "Same pieces (sixths), so order by the top: 1/6, 3/6, 5/6.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "The pieces are the same size. Compare how many.",
+   "options": [
+    "1/6, 3/6, 5/6",
+    "5/6, 3/6, 1/6",
+    "3/6, 1/6, 5/6",
+    "1/6, 5/6, 3/6"
+   ]
+  },
+  {
+   "id": "fc-c1",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Which is larger: 6/10 or 4/10?",
+   "answer": "A",
+   "solution": "Same pieces (tenths): 6 is more than 4.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "6/10",
+    "4/10",
+    "They are equal",
+    "You cannot tell"
+   ]
+  },
+  {
+   "id": "fc-r1",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Which is larger: 2/5 or 4/5?",
+   "answer": "B",
+   "solution": "Fifths: 4 of them is more than 2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "2/5",
+    "4/5",
+    "They are equal",
+    "You cannot tell"
+   ]
+  },
+  {
+   "id": "fc-p1",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "□/7 is larger than 4/7 and smaller than 6/7. What number goes in the box?",
+   "answer": "5",
+   "solution": "Sevenths: more than 4 and fewer than 6 is 5.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "4/7 is equal to 4/7, not larger."
+    },
+    {
+     "when": "6",
+     "hypothesis": "conceptual",
+     "says": "6/7 is equal to 6/7, not smaller."
+    }
+   ]
+  },
+  {
+   "id": "fc-r2",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Which is smaller: 5/9 or 7/9?",
+   "answer": "A",
+   "solution": "Ninths: 5 of them is fewer than 7.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "5/9",
+    "7/9",
+    "They are equal",
+    "You cannot tell"
+   ]
+  },
+  {
+   "id": "fa-d1",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "diagnostic",
+   "type": "fraction",
+   "prompt": "3/8 + 2/8 = ?",
+   "answer": "5/8",
+   "solution": "Same pieces: 3 eighths + 2 eighths = 5 eighths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "misconceptions": [
+    {
+     "when": "5/16",
+     "hypothesis": "conceptual",
+     "says": "The pieces stay eighths. Add the tops only: 5/8."
+    }
+   ]
+  },
+  {
+   "id": "fa-d2",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "diagnostic",
+   "type": "fraction",
+   "prompt": "7/10 − 4/10 = ?",
+   "answer": "3/10",
+   "solution": "7 tenths − 4 tenths = 3 tenths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "misconceptions": [
+    {
+     "when": "3/0",
+     "hypothesis": "conceptual",
+     "says": "The pieces stay tenths: 3/10."
+    }
+   ]
+  },
+  {
+   "id": "fa-g1",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "guided",
+   "type": "fraction",
+   "prompt": "2/6 + 3/6 = ?",
+   "answer": "5/6",
+   "solution": "2 sixths + 3 sixths = 5 sixths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "The size of the pieces does not change. Count them."
+  },
+  {
+   "id": "fa-c1",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "check",
+   "type": "fraction",
+   "prompt": "4/9 + 3/9 = ?",
+   "answer": "7/9",
+   "solution": "4 ninths + 3 ninths = 7 ninths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "7/18",
+     "hypothesis": "conceptual",
+     "says": "Ninths plus ninths are still ninths: 7/9."
+    }
+   ]
+  },
+  {
+   "id": "fa-r1",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "retention",
+   "type": "fraction",
+   "prompt": "5/7 − 2/7 = ?",
+   "answer": "3/7",
+   "solution": "5 sevenths − 2 sevenths = 3 sevenths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fa-p1",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which equals 2/5 + 1/5?",
+   "answer": "A",
+   "solution": "2 fifths + 1 fifth = 3 fifths. The bottom stays 5.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "3/5",
+    "3/10",
+    "2/10",
+    "1/5"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "Add the tops only: the pieces are still fifths, so 3/5."
+    }
+   ]
+  },
+  {
+   "id": "fa-r2",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "retention",
+   "type": "fraction",
+   "prompt": "1/6 + 4/6 = ?",
+   "answer": "5/6",
+   "solution": "1 sixth + 4 sixths = 5 sixths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-d1",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "7 × 8 = ?",
+   "answer": "56",
+   "solution": "7 × 8 = 56.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "recall",
+   "misconceptions": [
+    {
+     "when": "15",
+     "hypothesis": "conceptual",
+     "says": "7 + 8 = 15. Multiplying means 8 groups of 7."
+    },
+    {
+     "when": "54",
+     "hypothesis": "recall",
+     "says": "Close: 7 × 8 is 56."
+    },
+    {
+     "when": "48",
+     "hypothesis": "recall",
+     "says": "48 is 6 × 8. 7 × 8 is one more 8: 56."
+    },
+    {
+     "when": "63",
+     "hypothesis": "recall",
+     "says": "63 is 7 × 9."
+    }
+   ]
+  },
+  {
+   "id": "mt-d2",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "6 × 7 = ?",
+   "answer": "42",
+   "solution": "6 × 7 = 42.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "recall",
+   "misconceptions": [
+    {
+     "when": "13",
+     "hypothesis": "conceptual",
+     "says": "6 + 7 = 13. Multiplying means 6 groups of 7."
+    },
+    {
+     "when": "36",
+     "hypothesis": "recall",
+     "says": "36 is 6 × 6; 6 × 7 is 6 more: 42."
+    }
+   ]
+  },
+  {
+   "id": "mt-k-77",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "probe",
+   "type": "integer",
+   "prompt": "Quick one: 7 × 7 = ?",
+   "answer": "49",
+   "solution": "7 × 7 = 49.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-k-75",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-2-5-10",
+   "role": "probe",
+   "type": "integer",
+   "prompt": "Quick one: 7 × 5 = ?",
+   "answer": "35",
+   "solution": "7 × 5 = 35.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-k-73",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-3-4",
+   "role": "probe",
+   "type": "integer",
+   "prompt": "Quick one: 7 × 3 = ?",
+   "answer": "21",
+   "solution": "7 × 3 = 21.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-k-72",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-2-5-10",
+   "role": "probe",
+   "type": "integer",
+   "prompt": "Quick one: 7 × 2 = ?",
+   "answer": "14",
+   "solution": "7 × 2 = 14.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-k-add",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-2-5-10",
+   "role": "probe",
+   "type": "integer",
+   "prompt": "Quick one: 7 + 7 + 7 = ?",
+   "answer": "21",
+   "solution": "7 + 7 + 7 = 21.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-near-g",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.derive",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "8 × 8 = 64. So 8 × 9 = ?",
+   "answer": "72",
+   "solution": "One more 8: 64 + 8 = 72.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "8 × 9 is one more group of 8 than 8 × 8."
+  },
+  {
+   "id": "mt-near-c",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.derive",
+   "role": "check",
+   "type": "integer",
+   "prompt": "6 × 6 = 36. So 6 × 7 = ?",
+   "answer": "42",
+   "solution": "One more 6: 36 + 6 = 42.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-dec-g",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.derive",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "7 × 6 = 7 × 5 + 7 × 1 = 35 + 7 = ?",
+   "answer": "42",
+   "solution": "35 + 7 = 42.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Add the two parts."
+  },
+  {
+   "id": "mt-dec-c",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.derive",
+   "role": "check",
+   "type": "integer",
+   "prompt": "6 × 8 = ? (Split 8 into 5 + 3 if it helps.)",
+   "answer": "48",
+   "solution": "6 × 5 = 30 and 6 × 3 = 18; 30 + 18 = 48.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "14",
+     "hypothesis": "conceptual",
+     "says": "6 + 8 = 14; we need 8 groups of 6."
+    },
+    {
+     "when": "46",
+     "hypothesis": "recall",
+     "says": "6 × 5 = 30 and 6 × 3 = 18: 30 + 18 = 48."
+    }
+   ]
+  },
+  {
+   "id": "mt-dbl-g",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.derive",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "6 × 2 = 12. Double it: 6 × 4 = ?",
+   "answer": "24",
+   "solution": "12 doubled is 24.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Double 12."
+  },
+  {
+   "id": "mt-dbl-c",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.derive",
+   "role": "check",
+   "type": "integer",
+   "prompt": "9 × 8 = ? (9 × 2 = 18; keep doubling.)",
+   "answer": "72",
+   "solution": "18, 36, 72: three doublings of 18 → 9 × 8 = 72.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-add-g",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "6 × 4 = 6 + 6 + 6 + 6 = ?",
+   "answer": "24",
+   "solution": "6, 12, 18, 24.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Count on in sixes."
+  },
+  {
+   "id": "mt-add-c",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "check",
+   "type": "integer",
+   "prompt": "4 × 7 = ?",
+   "answer": "28",
+   "solution": "7, 14, 21, 28.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-arr-g",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "An array has 3 rows of 6 dots. How many dots?",
+   "answer": "18",
+   "solution": "6, 12, 18.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Count one row, then add a row at a time."
+  },
+  {
+   "id": "mt-arr-c",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "check",
+   "type": "integer",
+   "prompt": "An array has 4 rows of 6 dots. How many dots?",
+   "answer": "24",
+   "solution": "6 + 6 + 6 + 6 = 24.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-r1",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "8 × 7 = ?",
+   "answer": "56",
+   "solution": "8 × 7 = 56.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-r2",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "9 × 6 = ?",
+   "answer": "54",
+   "solution": "9 × 6 = 54.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "mt-p1",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which equals 8 × 6?",
+   "answer": "C",
+   "solution": "8 × 6 = 8 × 5 + 8 = 40 + 8 = 48.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "42",
+    "46",
+    "48",
+    "54"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "42 is 6 × 7. 8 × 6 is 6 more: 48."
+    },
+    {
+     "when": "D",
+     "hypothesis": "recall",
+     "says": "54 is 9 × 6. 8 × 6 is 6 less: 48."
+    }
+   ]
+  },
+  {
+   "id": "ra-d1",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "A rectangle is 6 cm long and 4 cm wide. What is its area in square centimetres?",
+   "answer": "24",
+   "solution": "Area = length × width = 6 × 4 = 24.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "misconceptions": [
+    {
+     "when": "20",
+     "hypothesis": "conceptual",
+     "says": "20 is the perimeter (6 + 4 + 6 + 4). Area is length × width: 24."
+    }
+   ]
+  },
+  {
+   "id": "ra-d2",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "A square has sides of 5 m. What is its area in square metres?",
+   "answer": "25",
+   "solution": "5 × 5 = 25.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "misconceptions": [
+    {
+     "when": "20",
+     "hypothesis": "conceptual",
+     "says": "20 is the perimeter. Area is 5 × 5 = 25."
+    }
+   ]
+  },
+  {
+   "id": "ra-g1",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "A rectangle is 9 m by 3 m. Area in square metres?",
+   "answer": "27",
+   "solution": "9 × 3 = 27.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Rows of 9 squares, 3 rows."
+  },
+  {
+   "id": "ra-c1",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "check",
+   "type": "integer",
+   "prompt": "A rectangle is 8 cm by 5 cm. Area in square centimetres?",
+   "answer": "40",
+   "solution": "8 × 5 = 40.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ra-r1",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "A rectangle is 7 m by 4 m. Area in square metres?",
+   "answer": "28",
+   "solution": "7 × 4 = 28.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ra-p1",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which rectangle has an area of 36 square centimetres?",
+   "answer": "B",
+   "solution": "6 × 6 = 36. The others: 4 × 8 = 32, 5 × 7 = 35, 3 × 10 = 30.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "4 cm by 8 cm",
+    "6 cm by 6 cm",
+    "5 cm by 7 cm",
+    "3 cm by 10 cm"
+   ]
+  },
+  {
+   "id": "ra-r2",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "A rectangle is 9 cm by 3 cm. Area in square centimetres?",
+   "answer": "27",
+   "solution": "9 × 3 = 27.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ca-d1",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which point is 3 to the right of the origin and 2 down?",
+   "answer": "C",
+   "solution": "x = 3 (right), y = −2 (down): (3, −2).",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "options": [
+    "(2, 3)",
+    "(−2, 3)",
+    "(3, −2)",
+    "(−3, 2)"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "x comes first and goes across; y goes up or down."
+    }
+   ]
+  },
+  {
+   "id": "ca-d2",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "The point (4, 7) is how far above the x-axis?",
+   "answer": "7",
+   "solution": "The y-coordinate, 7.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure"
+  },
+  {
+   "id": "ca-g1",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Which point is on the y-axis?",
+   "answer": "B",
+   "solution": "On the y-axis, x = 0.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Which point has no movement across?",
+   "options": [
+    "(3, 0)",
+    "(0, 5)",
+    "(2, 2)",
+    "(−1, 1)"
+   ]
+  },
+  {
+   "id": "ca-c1",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "check",
+   "type": "integer",
+   "prompt": "The point (−6, 2) is how far from the y-axis?",
+   "answer": "6",
+   "solution": "The distance across is 6.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ca-r1",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "In which quadrant is (−2, −5)?",
+   "answer": "C",
+   "solution": "Both negative: the third quadrant.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "First",
+    "Second",
+    "Third",
+    "Fourth"
+   ]
+  },
+  {
+   "id": "ca-p1",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "In which quadrant is (−3, 4)?",
+   "answer": "B",
+   "solution": "x negative, y positive: the second quadrant.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "First",
+    "Second",
+    "Third",
+    "Fourth"
+   ]
+  },
+  {
+   "id": "ca-r2",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "In which quadrant is (4, −1)?",
+   "answer": "D",
+   "solution": "x positive, y negative: the fourth quadrant.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "First",
+    "Second",
+    "Third",
+    "Fourth"
+   ]
+  },
+  {
+   "id": "di-d1",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "The integral of 3 from x = 0 to x = 4 is the area of a rectangle. What is it?",
+   "answer": "12",
+   "solution": "Height 3, width 4: area 12.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept"
+  },
+  {
+   "id": "di-d2",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "∫ from 1 to 5 of 2 dx = ?",
+   "answer": "8",
+   "solution": "Width 5 − 1 = 4, height 2: 8.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "misconceptions": [
+    {
+     "when": "10",
+     "hypothesis": "procedural",
+     "says": "The width is 5 − 1 = 4, not 5: 2 × 4 = 8."
+    }
+   ]
+  },
+  {
+   "id": "di-g1",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "∫ from 0 to 6 of 5 dx = ?",
+   "answer": "30",
+   "solution": "Height 5, width 6: 30.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Draw the rectangle under y = 5."
+  },
+  {
+   "id": "di-c1",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "check",
+   "type": "integer",
+   "prompt": "∫ from 2 to 7 of 4 dx = ?",
+   "answer": "20",
+   "solution": "Width 5, height 4: 20.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "di-r1",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "∫ from 0 to 3 of 9 dx = ?",
+   "answer": "27",
+   "solution": "Width 3, height 9: 27.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "di-p1",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which equals ∫ from 1 to 5 of 6 dx?",
+   "answer": "C",
+   "solution": "Width 5 − 1 = 4, height 6: 4 × 6 = 24.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "30",
+    "6",
+    "24",
+    "20"
+   ]
+  },
+  {
+   "id": "di-r2",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "∫ from 2 to 6 of 5 dx = ?",
+   "answer": "20",
+   "solution": "Width 6 − 2 = 4, height 5: 20.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ai-original",
+   "competency": "MATH.calculus.area-integrals",
+   "skill": "MLY.calc.area-constant",
+   "role": "original",
+   "type": "integer",
+   "prompt": "Find ∫ from 0 to 8 of 7 dx: the area under y = 7 from x = 0 to x = 8.",
+   "answer": "56",
+   "solution": "The region is a rectangle 8 wide and 7 high: 8 × 7 = 56.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer",
+   "misconceptions": [
+    {
+     "when": "15",
+     "hypothesis": "prerequisite",
+     "says": "15 is 7 + 8. The area of the rectangle is 7 × 8."
+    },
+    {
+     "when": "54",
+     "hypothesis": "prerequisite",
+     "says": "The method is right: the area is 7 × 8. The multiplication fact is 56."
+    }
+   ]
+  },
+  {
+   "id": "ai-c1",
+   "competency": "MATH.calculus.area-integrals",
+   "skill": "MLY.calc.area-constant",
+   "role": "check",
+   "type": "integer",
+   "prompt": "Find ∫ from 0 to 9 of 6 dx.",
+   "answer": "54",
+   "solution": "A 9 by 6 rectangle: 54.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fx-d1",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "How many factors does 12 have? (Count 1 and 12.)",
+   "answer": "6",
+   "solution": "1, 2, 3, 4, 6, 12.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "procedural",
+     "says": "Remember 1 and 12 themselves: 1, 2, 3, 4, 6, 12."
+    }
+   ]
+  },
+  {
+   "id": "fx-d2",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "What is the smallest number, other than 0, that is a multiple of both 4 and 6?",
+   "answer": "12",
+   "solution": "Multiples of 4: 4, 8, 12…; of 6: 6, 12… → 12.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "misconceptions": [
+    {
+     "when": "24",
+     "hypothesis": "procedural",
+     "says": "24 works, but 12 is smaller."
+    },
+    {
+     "when": "2",
+     "hypothesis": "conceptual",
+     "says": "2 is a common factor. A multiple is in the times table: 12."
+    }
+   ]
+  },
+  {
+   "id": "fx-g1",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "How many factors does 18 have?",
+   "answer": "6",
+   "solution": "1, 2, 3, 6, 9, 18.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Find factor pairs: 1 × 18, 2 × 9, 3 × 6."
+  },
+  {
+   "id": "fx-c1",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "check",
+   "type": "integer",
+   "prompt": "What is the smallest number, other than 0, that is a multiple of both 6 and 8?",
+   "answer": "24",
+   "solution": "6, 12, 18, 24 and 8, 16, 24 → 24.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fx-r1",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "How many factors does 20 have?",
+   "answer": "6",
+   "solution": "1, 2, 4, 5, 10, 20.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fx-p1",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which is a factor of 18?",
+   "answer": "D",
+   "solution": "18 = 6 × 3, so 6 is a factor. 4, 5 and 7 do not divide 18.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "4",
+    "5",
+    "7",
+    "6"
+   ]
+  },
+  {
+   "id": "fx-r2",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "How many factors does 15 have?",
+   "answer": "4",
+   "solution": "1, 3, 5, 15.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ch-remainder",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "challenge",
+   "type": "integer",
+   "prompt": "Reasoning challenge: find the smallest number greater than 1 that leaves remainder 1 when divided by 2, by 3 and by 4.",
+   "answer": "13",
+   "solution": "A multiple of 12 (the smallest common multiple of 2, 3, 4) plus 1: 12 + 1 = 13.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "goals": [
+    "jee-advanced",
+    "jee-main"
+   ],
+   "readiness": [
+    "MATH.number.factors-multiples"
+   ]
+  },
+  {
+   "id": "ch-triangle",
+   "competency": "MATH.algebra.expressions-intro",
+   "skill": "MATH.algebra.expressions-intro",
+   "role": "challenge",
+   "type": "integer",
+   "prompt": "Pattern challenge: 1, 3, 6, 10, 15, … What is the 8th number?",
+   "answer": "36",
+   "solution": "Add 2, 3, 4, …: 21, 28, 36. The 8th is 1 + 2 + … + 8 = 36.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "goals": [
+    "jee-advanced",
+    "jee-main"
+   ],
+   "readiness": [
+    "MATH.number.factors-multiples"
+   ]
+  },
+  {
+   "id": "ch-counter",
+   "competency": "MATH.reasoning.counterexamples-intro",
+   "skill": "MATH.reasoning.counterexamples-intro",
+   "role": "challenge",
+   "type": "choice",
+   "prompt": "Reasoning challenge: Meena says every number ending in 1 is prime. Which number shows she is wrong?",
+   "answer": "B",
+   "solution": "21 = 3 × 7 ends in 1 but is not prime.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "11",
+    "21",
+    "31",
+    "41"
+   ],
+   "goals": [
+    "jee-advanced",
+    "jee-main"
+   ],
+   "readiness": [
+    "MATH.number.factors-multiples"
+   ]
+  },
+  {
+   "id": "qd-d1",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "diagnostic",
+   "type": "set",
+   "prompt": "Solve x² − 5x + 6 = 0. Give both solutions, separated by a comma.",
+   "answer": "2,3",
+   "solution": "Two numbers that multiply to 6 and add to 5: 2 and 3. (x − 2)(x − 3) = 0, so x = 2 or x = 3.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "procedure",
+   "misconceptions": [
+    {
+     "when": "-2,-3",
+     "hypothesis": "procedural",
+     "says": "(x + 2)(x + 3) gives + 5x. Here it is − 5x, so the factors are (x − 2)(x − 3): x = 2 or 3."
+    },
+    {
+     "when": "6",
+     "hypothesis": "conceptual",
+     "says": "6 is the constant term, not a solution. Find x that makes the expression zero."
+    }
+   ]
+  },
+  {
+   "id": "qd-d2",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "x² = 49 and x is positive. What is x?",
+   "answer": "7",
+   "solution": "7 × 7 = 49.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "recall",
+   "misconceptions": [
+    {
+     "when": "24",
+     "hypothesis": "conceptual",
+     "says": "x² means x × x, not x × 2. 7 × 7 = 49."
+    }
+   ]
+  },
+  {
+   "id": "qd-d3",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "How many real solutions does x² + 1 = 0 have?",
+   "answer": "A",
+   "solution": "x² is never negative, so x² + 1 is at least 1 and is never 0: no real solutions.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "concept",
+   "options": [
+    "None",
+    "One",
+    "Two",
+    "Infinitely many"
+   ],
+   "misconceptions": [
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "A square is never negative, so x² = −1 has no real solution."
+    }
+   ]
+  },
+  {
+   "id": "qd-g1",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "guided",
+   "type": "set",
+   "prompt": "Solve x² − 7x + 12 = 0.",
+   "answer": "3,4",
+   "solution": "3 × 4 = 12 and 3 + 4 = 7: (x − 3)(x − 4) = 0.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Find two numbers that multiply to 12 and add to 7."
+  },
+  {
+   "id": "qd-c1",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "check",
+   "type": "set",
+   "prompt": "Solve x² − x − 6 = 0.",
+   "answer": "-2,3",
+   "solution": "−2 × 3 = −6 and −2 + 3 = 1: (x + 2)(x − 3) = 0, so x = −2 or 3.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "2,-3",
+     "hypothesis": "procedural",
+     "says": "Check the middle term: (x − 2)(x + 3) gives + x. We need − x: (x + 2)(x − 3)."
+    }
+   ]
+  },
+  {
+   "id": "qd-p1",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "practice",
+   "type": "set",
+   "prompt": "Solve x² + 5x + 4 = 0.",
+   "answer": "-4,-1",
+   "solution": "1 × 4 = 4 and 1 + 4 = 5: (x + 1)(x + 4) = 0, so x = −1 or −4.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "qd-p2",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which number is a solution of x² − 9 = 0?",
+   "answer": "B",
+   "solution": "3² = 9, so 3² − 9 = 0. (−3 is also a solution.)",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "9",
+    "3",
+    "81",
+    "0"
+   ]
+  },
+  {
+   "id": "qd-t1",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A rectangle is 2 cm longer than it is wide. Its area is 15 cm². How wide is it, in cm?",
+   "answer": "3",
+   "solution": "w(w + 2) = 15, so w² + 2w − 15 = 0, (w + 5)(w − 3) = 0. A width is positive: w = 3.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "qd-s2g",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "How many real solutions does x² = 16 have?",
+   "answer": "C",
+   "solution": "4 × 4 = 16 and (−4) × (−4) = 16: two solutions.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "hint": "Try a negative number too.",
+   "options": [
+    "None",
+    "One",
+    "Two",
+    "Infinitely many"
+   ]
+  },
+  {
+   "id": "qd-s2c",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "check",
+   "type": "choice",
+   "prompt": "How many real solutions does x² + 4 = 0 have?",
+   "answer": "A",
+   "solution": "x² + 4 is at least 4, never 0.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "None",
+    "One",
+    "Two",
+    "Infinitely many"
+   ]
+  },
+  {
+   "id": "qd-r1",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "retention",
+   "type": "set",
+   "prompt": "Solve x² − 8x + 15 = 0.",
+   "answer": "3,5",
+   "solution": "3 × 5 = 15 and 3 + 5 = 8.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "qd-r2",
+   "competency": "MATH.algebra.quadratics",
+   "skill": "MATH.algebra.quadratics",
+   "role": "retention",
+   "type": "set",
+   "prompt": "Solve x² + x − 2 = 0.",
+   "answer": "-2,1",
+   "solution": "(x + 2)(x − 1) = 0.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fm-p2",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "A bar is cut into 5 equal parts and 2 are shaded. What fraction is shaded?",
+   "answer": "A",
+   "solution": "2 of 5 equal parts: 2/5.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "2/5",
+    "2/3",
+    "5/2",
+    "3/5"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "2/3 compares shaded with unshaded parts; a fraction compares shaded parts with all the equal parts."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "The top and bottom are swapped: the bottom counts all the equal parts."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "3/5 is the part that is not shaded."
+    }
+   ]
+  },
+  {
+   "id": "fm-t1",
+   "competency": "MATH.number.fraction-models",
+   "skill": "MATH.number.fraction-models",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A ribbon is cut into 8 equal pieces. Sam uses 3 pieces for a gift. How many eighths of the ribbon are left?",
+   "answer": "5",
+   "solution": "8 − 3 = 5 equal pieces, so 5/8 is left.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "fc-p2",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "□/9 is smaller than 3/9 and larger than 1/9. What number goes in the box?",
+   "answer": "2",
+   "solution": "Ninths: more than 1 and fewer than 3 is 2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "fc-t1",
+   "competency": "MATH.number.fraction-comparison",
+   "skill": "MATH.number.fraction-comparison",
+   "role": "transfer",
+   "type": "choice",
+   "prompt": "Asha ate 2/6 of a cake and Ravi ate 4/6 of the same cake. Who ate more?",
+   "answer": "B",
+   "solution": "Both are sixths of the same cake: 4 pieces are more than 2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer",
+   "options": [
+    "Asha",
+    "Ravi",
+    "They ate the same",
+    "You cannot tell"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Both are sixths of one cake, so the one with more sixths ate more."
+    }
+   ]
+  },
+  {
+   "id": "fa-p2",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "practice",
+   "type": "fraction",
+   "prompt": "3/7 + 2/7 = ?",
+   "answer": "5/7",
+   "solution": "3 sevenths + 2 sevenths = 5 sevenths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "5/14",
+     "hypothesis": "procedural",
+     "says": "The bottom numbers were added too; sevenths stay sevenths."
+    }
+   ]
+  },
+  {
+   "id": "fa-t1",
+   "competency": "MATH.number.fraction-add-like",
+   "skill": "MATH.number.fraction-add-like",
+   "role": "transfer",
+   "type": "fraction",
+   "prompt": "A jug is 2/9 full. You pour in another 5/9 of a jug. How full is it now?",
+   "answer": "7/9",
+   "solution": "2 ninths + 5 ninths = 7 ninths.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer",
+   "misconceptions": [
+    {
+     "when": "7/18",
+     "hypothesis": "procedural",
+     "says": "The bottom numbers were added too; ninths stay ninths."
+    }
+   ]
+  },
+  {
+   "id": "mt-p2",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "7 × 6 = ?",
+   "answer": "42",
+   "solution": "7 × 5 = 35, and one more 7 is 42.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "48",
+     "hypothesis": "recall",
+     "says": "48 is 8 × 6. 7 × 6 is one 6 less: 42."
+    },
+    {
+     "when": "13",
+     "hypothesis": "conceptual",
+     "says": "7 and 6 were added; 7 × 6 is 7 groups of 6."
+    }
+   ]
+  },
+  {
+   "id": "mt-t1",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "Chairs are set out in 8 rows of 7. How many chairs are there?",
+   "answer": "56",
+   "solution": "8 rows of 7: 8 × 7 = 56.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "ra-p2",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "A rectangle is 9 cm by 4 cm. What is its area in square centimetres?",
+   "answer": "36",
+   "solution": "9 × 4 = 36 unit squares.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "26",
+     "hypothesis": "conceptual",
+     "says": "26 cm is the perimeter (the distance around); area is the space inside: 9 × 4."
+    },
+    {
+     "when": "13",
+     "hypothesis": "conceptual",
+     "says": "The sides were added; area multiplies them."
+    }
+   ]
+  },
+  {
+   "id": "ra-t1",
+   "competency": "MATH.measurement.rectangle-area",
+   "skill": "MATH.measurement.rectangle-area",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A floor is 6 m long and 5 m wide. How many tiles 1 m by 1 m cover it?",
+   "answer": "30",
+   "solution": "6 rows of 5 tiles: 6 × 5 = 30.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "ca-p2",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "The point (−4, □) is on the x-axis. What number goes in the box?",
+   "answer": "0",
+   "solution": "Every point on the x-axis has y = 0.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional"
+  },
+  {
+   "id": "ca-t1",
+   "competency": "MATH.coordinate.cartesian",
+   "skill": "MATH.coordinate.cartesian",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "On a map grid you start at (1, 2) and move 3 units left. What is your new x-coordinate?",
+   "answer": "-2",
+   "solution": "Left lowers x: 1 − 3 = −2.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "Moving left makes x smaller, not larger."
+    },
+    {
+     "when": "2",
+     "hypothesis": "procedural",
+     "says": "The sign was dropped: 1 − 3 is −2."
+    }
+   ]
+  },
+  {
+   "id": "di-p2",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "∫ from 2 to 7 of 3 dx = ?",
+   "answer": "15",
+   "solution": "Width 7 − 2 = 5, height 3: 5 × 3 = 15.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "21",
+     "hypothesis": "conceptual",
+     "says": "Only the upper limit was used; the width is 7 − 2."
+    },
+    {
+     "when": "18",
+     "hypothesis": "procedural",
+     "says": "The whole numbers from 2 to 7 were counted; the width is 7 − 2 = 5."
+    }
+   ]
+  },
+  {
+   "id": "di-t1",
+   "competency": "MATH.calculus.definite-integrals",
+   "skill": "MATH.calculus.definite-integrals",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A tap adds water at a steady 4 litres per minute from minute 3 to minute 10. The water added is ∫ from 3 to 10 of 4 dt. How many litres is that?",
+   "answer": "28",
+   "solution": "Width 10 − 3 = 7 minutes, height 4 litres per minute: 7 × 4 = 28 litres.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  },
+  {
+   "id": "fx-p2",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "What is the smallest number that is a multiple of both 4 and 6?",
+   "answer": "12",
+   "solution": "Multiples of 6: 6, 12. 12 is also 4 × 3.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "24",
+     "hypothesis": "procedural",
+     "says": "4 × 6 = 24 is a common multiple, but 12 is smaller."
+    }
+   ]
+  },
+  {
+   "id": "fx-t1",
+   "competency": "MATH.number.factors-multiples",
+   "skill": "MATH.number.factors-multiples",
+   "role": "transfer",
+   "type": "integer",
+   "prompt": "A class of 24 is split into equal teams of more than 1 and fewer than 24 pupils. How many different team sizes are possible?",
+   "answer": "6",
+   "solution": "The factors of 24 between 2 and 23: 2, 3, 4, 6, 8, 12. That is 6 sizes.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "probe": "transfer"
+  }
+ ]
+}

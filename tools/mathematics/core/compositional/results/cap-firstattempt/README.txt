@@ -1,0 +1,1 @@
+First attempt: the canonical form was the monic reduced (L-R)/denominator, which is invariant under EVERY equivalence step, so dupCanonical~1 for all states: the metric was degenerate and its 'repeated equivalent states' verdicts are void. Replaced by a spelling-level canonical form (flattened, sorted sums/products).

@@ -1,0 +1,542 @@
+{
+ "id": "openpath-sample-mathematics-grade-5",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 5,
+ "title": "OpenPath Sample Mathematics, Grade 5",
+ "hash": "5e1e9660",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 5",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true,
+  "extractor": "structured-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency (for an educator to check: ch4-area-and-volume.o2). Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-factors-and-multiples",
+     "number": 1,
+     "title": "Factors and multiples",
+     "pages": "1–16",
+     "examples": [
+      {
+       "title": "All the factors of 36",
+       "pages": "4"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "7"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch1-factors-and-multiples.o1",
+       "text": "Find factors and multiples of whole numbers",
+       "pages": "2",
+       "location": {
+        "line": 12,
+        "page": 2
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.identities-intro",
+          "score": 0.53,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on multiplication, factorsMultiples.",
+        "concepts": [
+         "multiplication",
+         "factorsMultiples"
+        ]
+       }
+      },
+      {
+       "id": "ch1-factors-and-multiples.o2",
+       "text": "Distinguish prime and composite numbers",
+       "pages": "10",
+       "location": {
+        "line": 13,
+        "page": 10
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.primes",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.trapezium-area",
+          "score": 0.65,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on primes.",
+        "concepts": [
+         "primes"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-more-fractions",
+     "number": 2,
+     "title": "More fractions",
+     "pages": "17–36",
+     "examples": [
+      {
+       "title": "1/2 + 1/3 with sixths",
+       "pages": "25"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "22"
+      },
+      {
+       "ref": "Exercise 2.2",
+       "pages": "29"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch2-more-fractions.o1",
+       "text": "Generate equivalent fractions to compare and simplify",
+       "pages": "18",
+       "location": {
+        "line": 20,
+        "page": 18
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 0.758,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.integers",
+          "score": 0.522,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.probability.chance-language",
+          "score": 0.522,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on fraction, equivalence.",
+        "concepts": [
+         "fraction",
+         "equivalence",
+         "comparison"
+        ]
+       }
+      },
+      {
+       "id": "ch2-more-fractions.o2",
+       "text": "Add unlike fractions using a common denominator",
+       "pages": "24",
+       "location": {
+        "line": 21,
+        "page": 24
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-add",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on fraction, unlikeDenominators, addition.",
+        "concepts": [
+         "fraction",
+         "unlikeDenominators",
+         "addition"
+        ]
+       }
+      },
+      {
+       "id": "ch2-more-fractions.o3",
+       "text": "Multiply fractions by whole numbers",
+       "pages": "31",
+       "location": {
+        "line": 22,
+        "page": 31
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-multiply",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.fraction-product",
+          "score": 0.8,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.identities-intro",
+          "score": 0.58,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on fraction, multiplication.",
+        "concepts": [
+         "fraction",
+         "multiplication"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch3-decimals",
+     "number": 3,
+     "title": "Decimals",
+     "pages": "37–50",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "43"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch3-decimals.o1",
+       "text": "Add and subtract decimals",
+       "pages": "38",
+       "location": {
+        "line": 30,
+        "page": 38
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-operations",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.integer-add",
+          "score": 0.723,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.fraction-add-like",
+          "score": 0.513,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on addition, subtraction, decimals.",
+        "concepts": [
+         "addition",
+         "subtraction",
+         "decimals"
+        ]
+       }
+      },
+      {
+       "id": "ch3-decimals.o2",
+       "text": "Represent percentages as hundredths",
+       "pages": "46",
+       "location": {
+        "line": 31,
+        "page": 46
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.percentage",
+          "score": 0.599,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on decimals, percent.",
+        "concepts": [
+         "decimals",
+         "percent"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch4-area-and-volume",
+     "number": 4,
+     "title": "Area and volume",
+     "pages": "51–66",
+     "examples": [
+      {
+       "title": "Area of a 7 m by 8 m floor",
+       "pages": "53"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 4.1",
+       "pages": "57"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch4-area-and-volume.o1",
+       "text": "Calculate rectangle area",
+       "pages": "52",
+       "location": {
+        "line": 36,
+        "page": 52
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.rectangle-area",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.area-squares",
+          "score": 0.585,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.measurement.triangle-area",
+          "score": 0.585,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on area, rectangle.",
+        "concepts": [
+         "area",
+         "rectangle"
+        ]
+       }
+      },
+      {
+       "id": "ch4-area-and-volume.o2",
+       "text": "Measure volume with unit cubes",
+       "pages": "60",
+       "location": {
+        "line": 37,
+        "page": 60
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.volume-cubes",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.cube-volume",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.measurement.cylinder",
+          "score": 0.65,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "uncertain",
+        "why": "Two skills are close (Measure volume with unit cubes; Calculate cube and cuboid volume): a reviewer should choose.",
+        "concepts": [
+         "volume"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch5-patterns-and-reasoning",
+     "number": 5,
+     "title": "Patterns and reasoning",
+     "pages": "67–80",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 5.1",
+       "pages": "72"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch5-patterns-and-reasoning.o1",
+       "text": "Represent a number rule with a symbol",
+       "pages": "68",
+       "location": {
+        "line": 44,
+        "page": 68
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.expressions-intro",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.pattern-rules",
+          "score": 0.647,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.variables",
+          "score": 0.633,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on expressions, patterns.",
+        "concepts": [
+         "expressions",
+         "patterns"
+        ]
+       }
+      },
+      {
+       "id": "ch5-patterns-and-reasoning.o2",
+       "text": "Test a generalisation with examples and counterexamples",
+       "pages": "74",
+       "location": {
+        "line": 45,
+        "page": 74
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.counterexamples-intro",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.logic",
+          "score": 0.64,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on reasoning.",
+        "concepts": [
+         "reasoning"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch6-data",
+     "number": 6,
+     "title": "Data",
+     "pages": "81–90",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 6.1",
+       "pages": "87"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch6-data.o1",
+       "text": "Find and interpret a mean",
+       "pages": "82",
+       "location": {
+        "line": 50,
+        "page": 82
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.averages-intro",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.grouped-mean",
+          "score": 0.7,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on mean.",
+        "concepts": [
+         "mean"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

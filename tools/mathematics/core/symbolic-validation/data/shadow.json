@@ -1,0 +1,181 @@
+{
+ "summary": {
+  "cases": 17,
+  "adapterAgreesWithExpected": 17,
+  "unknownBecameDefiniteWrong": 0,
+  "adapterDiffersFromProductionClass": 0,
+  "marksProduced": 0
+ },
+ "rows": [
+  {
+   "id": "T01-linear",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T02-alt-distribute",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T03-alt-divide",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T04-both-sides",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T05-fraction",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T06-rational",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T07-first-error",
+   "expected": "invalid",
+   "production": "invalid",
+   "adapter": "mathematically-invalid",
+   "firstInvalid": 1,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T08-excluded-answer",
+   "expected": "invalid",
+   "production": "invalid",
+   "adapter": "mathematically-invalid",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T09-divide-by-x",
+   "expected": "invalid",
+   "production": "invalid",
+   "adapter": "mathematically-invalid",
+   "firstInvalid": 1,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T10-case-split",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T11-obligation",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T12-obligation-open",
+   "expected": "invalid",
+   "production": "invalid",
+   "adapter": "mathematically-invalid",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T13-incomplete",
+   "expected": "incomplete",
+   "production": "incomplete",
+   "adapter": "correct-but-incomplete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T14-glyphs",
+   "expected": "verified",
+   "production": "verified",
+   "adapter": "correct-and-complete",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T15-ambiguous",
+   "expected": "ambiguous",
+   "production": "ambiguous",
+   "adapter": "unsupported-or-undecidable",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T16-sqrt",
+   "expected": "unsupported",
+   "production": "unsupported",
+   "adapter": "unsupported-or-undecidable",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  },
+  {
+   "id": "T17-restriction-suffix",
+   "expected": "unsupported",
+   "production": "unsupported",
+   "adapter": "unsupported-or-undecidable",
+   "firstInvalid": null,
+   "agreesWithExpected": true,
+   "differsFromProduction": false,
+   "markingEffect": "none"
+  }
+ ]
+}

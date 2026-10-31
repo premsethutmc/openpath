@@ -1,0 +1,19 @@
+{
+ "e1": {
+  "algebra-text/u4-kernel/true": 45,
+  "adapter-converted/u4-kernel/true": 36,
+  "adapter-converted/claim-recheck+destination-reasoner/true": 43
+ },
+ "e2dev": {
+  "algebra-text/u4-kernel/true": 7,
+  "adapter-converted/claim-recheck+destination-reasoner/true": 8
+ },
+ "e2sealed": {
+  "algebra-text/u4-kernel/true": 6,
+  "adapter-converted/claim-recheck+destination-reasoner/true": 5,
+  "adapter-converted/u4-kernel/true": 4
+ },
+ "e3dev": {
+  "algebra-text/u4-kernel/true": 14
+ }
+}

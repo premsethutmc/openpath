@@ -1,0 +1,1807 @@
+{
+ "id": "no-probe-available",
+ "competency": "MATH.trigonometry.ratios",
+ "truth": {
+  "misconception": "angles-combined",
+  "heldAtEnd": true,
+  "taughtByEnd": false,
+  "notes": "trigonometric ratios, grade 7 (anstd): combines the angles (sin A + sin B as sin(A+B)); almost no question the engine can ask shows it, so the learner is right on nearly everything"
+ },
+ "expect": {
+  "investigation": "either",
+  "resolution": "must-not-resolve",
+  "establish": "either",
+  "notes": "with no discriminating question available the misconception can be neither confirmed nor ruled out by later right answers: the engine must not resolve it on non-discriminating evidence, and should say it cannot probe rather than ask uninformative questions"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "stage": "topic-check",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "diagnostic",
+   "question": "gen:anstd:1,3,0,3,4",
+   "activity": "diagnostic",
+   "response": "−1/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35,
+    "posterior": {
+     "secure": 0.35,
+     "conceptual": 0.15,
+     "procedural": 0.15,
+     "recall": 0.15,
+     "prerequisite": 0.1,
+     "transfer": 0.1
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 2,
+   "stage": "topic-check",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "diagnostic",
+   "question": "gen:anstd:0,3,0,1,1",
+   "activity": "diagnostic",
+   "response": "1/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56,
+    "posterior": {
+     "secure": 0.5550660792951541,
+     "conceptual": 0.079295154185022,
+     "procedural": 0.039647577092511,
+     "recall": 0.13215859030837002,
+     "prerequisite": 0.052863436123348005,
+     "transfer": 0.1409691629955947
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 3,
+   "stage": "topic-check",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "diagnostic",
+   "question": "gen:anstd:1,2,1,0,3",
+   "activity": "diagnostic",
+   "response": "3/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.43,
+    "posterior": {
+     "secure": 0.14342629482071712,
+     "conceptual": 0.43027888446215135,
+     "procedural": 0.08708025042686397,
+     "recall": 0.17074558907228232,
+     "prerequisite": 0.09561752988047809,
+     "transfer": 0.07285145133750712
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 4,
+   "stage": "topic-check",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "investigate",
+   "question": "gen:anstd:0,1,0,3,1",
+   "activity": "probe",
+   "context": "investigate:gen:anstd:0,3,0,1,1",
+   "response": "(1 − √3)/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29,
+    "posterior": {
+     "secure": 0.291011740553025,
+     "conceptual": 0.291011740553025,
+     "procedural": 0.029447616603579908,
+     "recall": 0.1924680823763393,
+     "prerequisite": 0.06466927567844999,
+     "transfer": 0.13139154423558094
+    }
+   },
+   "reasoning": {
+    "status": "need_more",
+    "best": null,
+    "competing": [
+     "angles-combined"
+    ],
+    "support": {
+     "angles-combined": 0.907,
+     "unexplained": 0.043,
+     "sin-cos-swapped": 0.032,
+     "secure": 0.017
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "One more question to understand what happened (it does not count against you)."
+  },
+  {
+   "step": 5,
+   "stage": "topic-check",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "investigate",
+   "question": "gen:anstd:0,2,0,4,1",
+   "activity": "probe",
+   "context": "investigate:gen:anstd:0,3,0,1,1",
+   "response": "(√2 − 2)/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29,
+    "posterior": {
+     "secure": 0.291011740553025,
+     "conceptual": 0.291011740553025,
+     "procedural": 0.029447616603579908,
+     "recall": 0.1924680823763393,
+     "prerequisite": 0.06466927567844999,
+     "transfer": 0.13139154423558094
+    }
+   },
+   "reasoning": {
+    "status": "need_more",
+    "best": null,
+    "competing": [
+     "unexplained",
+     "angles-combined"
+    ],
+    "support": {
+     "unexplained": 0.664,
+     "angles-combined": 0.31,
+     "sin-cos-swapped": 0.021,
+     "secure": 0.006
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "One more question to understand what happened (it does not count against you)."
+  },
+  {
+   "step": 6,
+   "stage": "topic-check",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "investigate",
+   "question": "gen:anstd:0,3,0,2,2",
+   "activity": "probe",
+   "context": "investigate:gen:anstd:0,3,0,1,1",
+   "response": "√6/4",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29,
+    "posterior": {
+     "secure": 0.291011740553025,
+     "conceptual": 0.291011740553025,
+     "procedural": 0.029447616603579908,
+     "recall": 0.1924680823763393,
+     "prerequisite": 0.06466927567844999,
+     "transfer": 0.13139154423558094
+    }
+   },
+   "reasoning": {
+    "status": "need_more",
+    "best": null,
+    "competing": [
+     "unexplained"
+    ],
+    "support": {
+     "unexplained": 0.988,
+     "angles-combined": 0.01,
+     "sin-cos-swapped": 0.001,
+     "secure": 0
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "One more question to understand what happened (it does not count against you)."
+  },
+  {
+   "step": 7,
+   "stage": "topic-check",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "complete",
+   "question": null,
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29,
+    "posterior": {
+     "secure": 0.291011740553025,
+     "conceptual": 0.291011740553025,
+     "procedural": 0.029447616603579908,
+     "recall": 0.1924680823763393,
+     "prerequisite": 0.06466927567844999,
+     "transfer": 0.13139154423558094
+    }
+   },
+   "reasoning": {
+    "status": "uncertain",
+    "best": null,
+    "competing": [
+     "unexplained"
+    ],
+    "support": {
+     "unexplained": 1,
+     "angles-combined": 0,
+     "sin-cos-swapped": 0,
+     "secure": 0
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": {
+     "kind": "unsure",
+     "competency": null,
+     "why": "Not sure why yet: the answers do not match any explanation OpenPath knows, so it will not guess."
+    }
+   },
+   "reason": "Not sure why yet: the answers do not match any explanation OpenPath knows, so it will not guess. This problem rests on a skill that is not shown yet: Combine quantities within 20. We check it first, then come back to the problem.",
+   "finding": null,
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   }
+  },
+  {
+   "step": 8,
+   "stage": "plan",
+   "competency": "MATH.trigonometry.ratios",
+   "planItems": [],
+   "finding": null,
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "?@gen:anstd:0,3,0,1,1",
+     "claim": null,
+     "scope": {
+      "question": "gen:anstd:0,3,0,1,1",
+      "family": "gen:anstd:0,3,0,1,1",
+      "observedIn": "MATH.trigonometry.ratios",
+      "about": null
+     },
+     "status": "unsupported",
+     "support": {
+      "unexplained": 1,
+      "angles-combined": 0,
+      "sin-cos-swapped": 0,
+      "secure": 0
+     },
+     "competing": [
+      "unexplained"
+     ],
+     "supporting": [],
+     "contradicting": [],
+     "obligations": [
+      "none the engine can ask: no known explanation fits; a person may look at the working"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null,
+      "lastAt": null
+     },
+     "resolvedBy": null,
+     "probes": [],
+     "uncertainty": {
+      "supporting": 0,
+      "contradicting": 0,
+      "inconclusive": 0,
+      "note": "nothing established"
+     },
+     "teachingDue": false,
+     "probeDue": false,
+     "trigger": {
+      "kind": "starting-check",
+      "detail": "a wrong answer in the starting-point check"
+     },
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": null,
+      "attempts": [
+       "record#2",
+       "record#4",
+       "record#5",
+       "record#6"
+      ]
+     },
+     "use": {
+      "teach": false,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   }
+  },
+  {
+   "step": 9,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:0,2,0,4,4",
+   "activity": "practice",
+   "response": "−1/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 10,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:0,3,0,2,1:mc",
+   "activity": "practice",
+   "response": "A",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 11,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:2,1,2,2,4",
+   "activity": "practice",
+   "response": "−2/3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 12,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anratio:2,2,7,3",
+   "activity": "practice",
+   "response": "√53/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 13,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:ancompa:2,4,1,8",
+   "activity": "practice",
+   "response": "26",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 14,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:ancomps:1,64,2,5",
+   "activity": "practice",
+   "response": "-3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 8,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 15,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:antable:0,58,7,5",
+   "activity": "practice",
+   "response": "0.8553",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 8,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 9,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 16,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:0,2,2,3,0:w",
+   "activity": "transfer",
+   "response": "(√2 + 2√3)/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 9,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 17,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:1,2,2,3,3",
+   "activity": "check",
+   "response": "7/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 12
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 18,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:1,2,2,3,2:mc",
+   "activity": "check",
+   "response": "C",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 12
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 19,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:0,3,0,2,4",
+   "activity": "check",
+   "response": "1/4",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 14
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 20,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:0,2,2,3,2:mc",
+   "activity": "check",
+   "response": "C",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 14
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 14,
+     "total": 15
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 21,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "gen:anstd:0,2,2,3,3",
+   "activity": "check",
+   "response": "7/2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 14,
+     "total": 15
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 22,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "wr:trig:ratios-similar",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 23,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "verify",
+   "question": "wr:gap:trig-derive",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 24,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "done",
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   }
+  },
+  {
+   "step": 25,
+   "stage": "session",
+   "competency": null,
+   "reason": "new session after 1 day(s)",
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   }
+  },
+  {
+   "step": 26,
+   "stage": "module",
+   "competency": "MATH.trigonometry.ratios",
+   "phase": "done",
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.29
+   },
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.rational-numbers",
+    "chapter": "Rational numbers",
+    "reason": "Next in Rational numbers."
+   }
+  }
+ ],
+ "final": {
+  "facts": {
+   "answered": 21,
+   "discriminatingMet": 1,
+   "showedMisconception": 1,
+   "discriminatingAfterTeaching": 0,
+   "correctOnNonDiscriminatingAfterTeaching": 0,
+   "wrong": [
+    {
+     "q": "gen:anstd:0,3,0,1,1",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    }
+   ],
+   "phases": [
+    "diagnostic",
+    "verify"
+   ]
+  },
+  "snap": {
+   "status": "transfer",
+   "independent": {
+    "right": 15,
+    "total": 16
+   },
+   "assisted": {
+    "right": 0,
+    "total": 0
+   },
+   "retention": "scheduled"
+  },
+  "next": {
+   "kind": "start",
+   "competency": "MATH.number.rational-numbers",
+   "chapter": "Rational numbers",
+   "reason": "Next in Rational numbers."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "?@gen:anstd:0,3,0,1,1",
+    "claim": null,
+    "scope": {
+     "question": "gen:anstd:0,3,0,1,1",
+     "family": "gen:anstd:0,3,0,1,1",
+     "observedIn": "MATH.trigonometry.ratios",
+     "about": null
+    },
+    "status": "unsupported",
+    "support": {
+     "unexplained": 1,
+     "angles-combined": 0,
+     "sin-cos-swapped": 0,
+     "secure": 0
+    },
+    "competing": [
+     "unexplained"
+    ],
+    "supporting": [],
+    "contradicting": [],
+    "obligations": [
+     "none the engine can ask: no known explanation fits; a person may look at the working"
+    ],
+    "teaching": {
+     "deliveredAt": null,
+     "strategy": null,
+     "competency": null,
+     "lastAt": null
+    },
+    "resolvedBy": null,
+    "probes": [],
+    "uncertainty": {
+     "supporting": 0,
+     "contradicting": 0,
+     "inconclusive": 0,
+     "note": "nothing established"
+    },
+    "teachingDue": false,
+    "probeDue": false,
+    "trigger": {
+     "kind": "starting-check",
+     "detail": "a wrong answer in the starting-point check"
+    },
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": null,
+     "attempts": [
+      "record#2",
+      "record#4",
+      "record#5",
+      "record#6"
+     ]
+    },
+    "use": {
+     "teach": false,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    }
+   ]
+  }
+ }
+}

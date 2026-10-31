@@ -87,6 +87,23 @@ export function itemParams(item: CodeItem): ItemParams {
   return { a: item.a, b: item.b, c: guessingFloor(item) };
 }
 
+/**
+ * The index with some items added (model-written questions recorded in a learner's own ledger). The added items are
+ * validated exactly as bank items are; an id already in the bank is refused. The original index is not changed.
+ */
+export function extendContent(content: ContentIndex, items: Item[], index: FrameworkIndex): ContentIndex {
+  if (!items.length) return content;
+  const clash = items.find((i) => content.items.has(i.id));
+  if (clash) throw new Error(`Invalid content:\n- added item ${clash.id} has the id of an existing item`);
+  const problems = validateContent({ items, passages: [...content.passages.values()], goals: [], misspellings: {} }, index);
+  if (problems.length) throw new Error(`Invalid content:\n- ${problems.join("\n- ")}`);
+  const byCapability = new Map(content.byCapability);
+  for (const item of items) for (const t of targetsOf(item)) byCapability.set(t, [...(byCapability.get(t) ?? []), item]);
+  const all = new Map(content.items);
+  for (const i of items) all.set(i.id, i);
+  return { ...content, items: all, byCapability };
+}
+
 /** Response-model parameters for anything scored right or wrong: a code item, or a short written answer (no guessing floor). */
 export function binaryParams(item: Item): ItemParams | null {
   if (item.kind === "code") return itemParams(item);
@@ -171,6 +188,16 @@ export function validateContent(bundle: ContentBundle, index: FrameworkIndex): s
         if (!item.generated.sources?.length) problems.push(`generated item ${item.id} must name its lexical sources`);
         if (!item.generated.word) problems.push(`generated item ${item.id} must name its word`);
       } else if (item.difficulty_source === "feature_estimate") problems.push(`item ${item.id} has a feature_estimate difficulty but no generation record`);
+      // H-V3: a validated (educator-approved) version says when it was released; nothing else may claim a release
+      if (item.evidence_status === "validated" && !(typeof item.released_at === "string" && Number.isFinite(Date.parse(item.released_at))))
+        problems.push(`validated item ${item.id} needs released_at (when this version was approved and released)`);
+      if (item.released_at !== undefined && item.evidence_status !== "validated") problems.push(`item ${item.id} has released_at but is not validated`);
+      // a model-written question is provisional by construction: it can never change an estimate
+      if (item.model_generated) {
+        if (item.evidence_status !== "provisional") problems.push(`model-generated item ${item.id} must be provisional`);
+        if (item.difficulty_source !== "model_estimate") problems.push(`model-generated item ${item.id} must say its difficulty is a model_estimate`);
+        if (item.generated) problems.push(`model-generated item ${item.id} cannot also carry a spelling generation record`);
+      } else if (item.difficulty_source === "model_estimate") problems.push(`item ${item.id} has a model_estimate difficulty but no model generation record`);
       for (const tag of [...Object.values(item.distractor_tags ?? {}), ...Object.values(item.wrong ?? {}), ...(item.addresses ?? [])])
         if (!allowed.has(tag)) problems.push(`item ${item.id} uses misconception ${tag}, which ${item.target} does not list`);
       const n = item.options?.length ?? 0;

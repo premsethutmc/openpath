@@ -1,0 +1,110 @@
+[
+ {
+  "caseId": "d1",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The posed function ln(x)+ln(3x) has real domain x>0. On it ln(x)+ln(3x)=ln(3x^2) holds, since the log of a product is the sum of logs for positive factors. The right side has a larger natural domain (x!=0), but the equality holds on the whole posed domain. The derivative is 1/x+1/x=2/x, correct. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": false,
+  "contestableWhy": "",
+  "domainCategory": "restricted-domain-equality"
+ },
+ {
+  "caseId": "d2",
+  "verdict": "missing-assumption",
+  "firstInvalidStep": 0,
+  "reasoning": "The posed function ln(x^2) has domain x!=0. The identity ln(x^2)=2ln(x) is false for x<0, where ln(x) is undefined, so it holds only under x>0, which the task does not give and the working does not state. The final answer 2/x is correct on the whole domain, but the justifying line needs x>0 (2ln|x| would be right). Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": true,
+  "contestableWhy": "A grader may call the line plainly false (invalid) rather than missing an assumption; the final answer is right on the whole domain.",
+  "domainCategory": "genuinely-missing"
+ },
+ {
+  "caseId": "d3",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "ln(x^2)=2ln|x| holds for every x!=0, which is exactly the posed domain, and both sides share that domain. The derivative of 2ln|x| is 2/x for x!=0, matching the derivative of ln(x^2). All lines are valid and the answer is correct. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": false,
+  "contestableWhy": "",
+  "domainCategory": "implied-by-task"
+ },
+ {
+  "caseId": "d4",
+  "verdict": "invalid",
+  "firstInvalidStep": 0,
+  "reasoning": "The posed function sqrt(x^2) is defined for all reals and equals |x|. The line sqrt(x^2)=x is false for x<0, with no x>=0 assumption supplied. The stated derivative 1 is wrong for x<0, where the derivative is -1, and the derivative does not exist at 0. The correct answer is x/|x| on x!=0, so the final answer is not the derivative on the posed domain. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": true,
+  "contestableWhy": "Could be labelled missing-assumption because the working is right under x>0; but the final answer is wrong on x<0, so invalid is preferred.",
+  "domainCategory": "genuinely-missing"
+ },
+ {
+  "caseId": "d5",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The posed function ln(x-1)+ln(x+1) has domain x>1. On it ln(x-1)+ln(x+1)=ln(x^2-1) holds. The right side has a larger natural domain (|x|>1), but the equality is true everywhere on the posed domain. The derivative is 1/(x-1)+1/(x+1)=2x/(x^2-1), correct. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": false,
+  "contestableWhy": "",
+  "domainCategory": "restricted-domain-equality"
+ },
+ {
+  "caseId": "d6",
+  "verdict": "missing-assumption",
+  "firstInvalidStep": 0,
+  "reasoning": "The posed ln(x^2-1) has domain |x|>1. The identity ln(x^2-1)=ln(x-1)+ln(x+1) fails for x<-1, where the right side is undefined, so it needs x>1, which is neither given nor stated. The final answer 1/(x-1)+1/(x+1)=2x/(x^2-1) is correct on the whole domain, but the working supplies no ln|.| form that would justify it on x<-1. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": true,
+  "contestableWhy": "A grader may call the false line invalid; the final answer is right on the whole domain.",
+  "domainCategory": "genuinely-missing"
+ },
+ {
+  "caseId": "d7",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The working states x>1, which is within the posed domain |x|>1, so the assumption is supplied and carried into the next line. Under it the identity holds and the derivative is 1/(x-1)+1/(x+1), correct. It treats only x>1, but the answer expression is the same on x<-1. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": true,
+  "contestableWhy": "A strict grader may call this incomplete because the derivation covers only x>1, not all of the posed domain.",
+  "domainCategory": "carried-forward"
+ },
+ {
+  "caseId": "d8",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The posed function (x^2-9)/(x-3) has domain x!=3. On it (x-3)(x+3)/(x-3)=x+3 is valid, since cancelling is legal when x-3!=0. The right side has a larger natural domain, but the equality holds on the whole posed domain. f'(x)=1 on x!=3, correct. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": false,
+  "contestableWhy": "",
+  "domainCategory": "restricted-domain-equality"
+ },
+ {
+  "caseId": "d9",
+  "verdict": "missing-assumption",
+  "firstInvalidStep": 0,
+  "reasoning": "The integrand 1/x lives on x!=0. The answer ln(x)+C is an antiderivative only for x>0 and is undefined for x<0. The requested antiderivative on the whole domain needs ln|x|. The assumption x>0 is neither given nor stated. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": true,
+  "contestableWhy": "A grader may call it invalid or incomplete since it fails on x<0.",
+  "domainCategory": "genuinely-missing"
+ },
+ {
+  "caseId": "d10",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "ln|x| is an antiderivative of 1/x on each interval of x!=0, since its derivative is 1/x for x>0 and x<0. This is the standard form and covers the whole domain, with the usual caveat that the constant may differ on each interval. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": false,
+  "contestableWhy": "",
+  "domainCategory": "implied-by-task"
+ },
+ {
+  "caseId": "d11",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The working states the assumption x>0 and uses it. Under it d/dx ln(x)=1/x, so ln(x)+C is a valid antiderivative. The assumption is supplied rather than missing, though it covers only part of the domain x!=0. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": true,
+  "contestableWhy": "A strict grader may call this incomplete because ln|x|+C would cover x<0 as well.",
+  "domainCategory": "carried-forward"
+ },
+ {
+  "caseId": "d12",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The factorization (x-2)(x+2)/(x-2)=x+2 holds for x!=2, which is the posed domain and the only set that matters for a limit at 2. The limit of x+2 as x->2 is 4, and the two-sided limit exists. The equality holds on the whole posed domain although the right side is also defined at 2. Policy: a first-line equality that holds throughout the posed function's domain is acceptable without a stated restriction even if the two sides have different natural domains; it is not acceptable if it fails or is undefined on part of that domain.",
+  "contestable": false,
+  "contestableWhy": "",
+  "domainCategory": "restricted-domain-equality"
+ }
+]

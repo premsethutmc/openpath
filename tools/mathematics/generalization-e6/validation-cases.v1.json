@@ -1,0 +1,5018 @@
+{
+ "cases": [
+  {
+   "caseId": "e6-001",
+   "category": "differentiation",
+   "family": "poly-negpower",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "2"
+          },
+          {
+           "base": {
+            "kind": "variable",
+            "name": "t"
+           },
+           "exponent": 3,
+           "kind": "power"
+          }
+         ],
+         "kind": "multiply"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "5"
+          },
+          {
+           "kind": "variable",
+           "name": "t"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "1"
+          },
+          {
+           "base": {
+            "kind": "variable",
+            "name": "t"
+           },
+           "exponent": -1,
+           "kind": "power"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ],
+       "kind": "multiply"
+      }
+     ]
+    },
+    "task": "derivative",
+    "variable": "t"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "g(t) = 2t^3 + 5t - 1/t\ng'(t) = 6t^2 + 5 + 1/t^2"
+   },
+   "tags": [
+    "valid",
+    "symbol-t"
+   ]
+  },
+  {
+   "caseId": "e6-013",
+   "category": "differentiation",
+   "family": "chain-log-trig",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "argument": {
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "kind": "cos"
+     },
+     "kind": "log"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = ln(cos(x))\nf'(x) = 1/cos(x) · (-sin(x)) = -sin(x)/cos(x) = -tan(x)"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-014",
+   "category": "differentiation",
+   "family": "chain-power-poly",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "base": {
+      "kind": "add",
+      "terms": [
+       {
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2,
+        "kind": "power"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     },
+     "exponent": 7,
+     "kind": "power"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "\\frac{d}{dx}\\left(\\left(x^{2} + x\\right)^{7}\\right) = 7 \\cdot \\left(x^{2} + x\\right)^{6} \\cdot \\left(2x + 1\\right)"
+   },
+   "tags": [
+    "valid",
+    "latex"
+   ]
+  },
+  {
+   "caseId": "e6-015",
+   "category": "differentiation",
+   "family": "product-chain",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "base": {
+        "kind": "variable",
+        "name": "s"
+       },
+       "exponent": 2,
+       "kind": "power"
+      },
+      {
+       "argument": {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "s"
+         }
+        ],
+        "kind": "multiply"
+       },
+       "kind": "sin"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "s"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "h(s) = s^2 sin(3s)\nh'(s) = 2s*sin(3s) + s^2*(3 cos(3s)) = 2s*sin(3s) + 3s^2*cos(3s)"
+   },
+   "tags": [
+    "valid",
+    "symbol-s"
+   ]
+  },
+  {
+   "caseId": "e6-020",
+   "category": "differentiation",
+   "family": "alt-expand-first",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "2"
+        }
+       ]
+      },
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "3"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x + 2)*(x - 3)\n(x + 2)*(x - 3) = x^2 - x - 6\nf'(x) = 2x - 1"
+   },
+   "tags": [
+    "valid",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-021",
+   "category": "differentiation",
+   "family": "alt-expand-square",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "base": {
+      "kind": "add",
+      "terms": [
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "exponent": 2,
+     "kind": "power"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "y = (2*x + 1)^2\n(2*x + 1)^2 = 4*x^2 + 4*x + 1\ndy/dx = 8*x + 4"
+   },
+   "tags": [
+    "valid",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-022",
+   "category": "differentiation",
+   "family": "alt-quotient-as-product",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2,
+       "kind": "power"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d/dx[x²/(x + 1)] = 2x · (x + 1)^(-1) + x² · (-1 · (x + 1)^(-2)) = 2x/(x + 1) - x²/(x + 1)^2"
+   },
+   "tags": [
+    "valid",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-023",
+   "category": "differentiation",
+   "family": "trig-product-identity",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "sin"
+      },
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "cos"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = sin(x)*cos(x)\nf'(x) = cos(x)*cos(x) + sin(x)*(-sin(x)) = cos(x)^2 - sin(x)^2 = cos(2x)"
+   },
+   "tags": [
+    "valid",
+    "identity-step"
+   ]
+  },
+  {
+   "caseId": "e6-024",
+   "category": "differentiation",
+   "family": "alt-binomial-expand",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "base": {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "exponent": 3,
+     "kind": "power"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "y = (x + 1)^3\n(x + 1)^3 = x^3 + 3*x^2 + 3*x + 1\ndy/dx = 3*x^2 + 6*x + 3"
+   },
+   "tags": [
+    "valid",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-030",
+   "category": "differentiation",
+   "family": "err-power-rule",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "3"
+      },
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 4,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = 3x^4\nf'(x) = 12x^4"
+   },
+   "tags": [
+    "wrong-power"
+   ]
+  },
+  {
+   "caseId": "e6-031",
+   "category": "differentiation",
+   "family": "err-trig-sign",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "argument": {
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ],
+      "kind": "multiply"
+     },
+     "kind": "cos"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "y = cos(2*x)\ndy/dx = 2*sin(2*x)"
+   },
+   "tags": [
+    "sign"
+   ]
+  },
+  {
+   "caseId": "e6-034",
+   "category": "differentiation",
+   "family": "final-ok-after-invalid-middle",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "base": {
+      "kind": "add",
+      "terms": [
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       {
+        "kind": "constant",
+        "value": "3"
+       }
+      ]
+     },
+     "exponent": 4,
+     "kind": "power"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "y = (2*x + 3)^4\ndy/dx = 4*(2*x + 3)^3\ndy/dx = 8*(2*x + 3)^3"
+   },
+   "tags": [
+    "correct-final-after-error"
+   ]
+  },
+  {
+   "caseId": "e6-038",
+   "category": "differentiation",
+   "family": "err-expansion-alt",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "2"
+        }
+       ]
+      },
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "3"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x + 2)*(x - 3)\n(x + 2)*(x - 3) = x^2 - 6\nf'(x) = 2x - 1"
+   },
+   "tags": [
+    "wrong-expansion"
+   ]
+  },
+  {
+   "caseId": "e6-045",
+   "category": "differentiation",
+   "family": "incomplete-chain-pieces",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       {
+        "kind": "constant",
+        "value": "2"
+       }
+      ]
+     },
+     "kind": "sin"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "no final answer line"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = 3x + 2\ny = sin(u)\ndy/du = cos(u)\nd/dx(u) = 3"
+   },
+   "tags": [
+    "setup-only"
+   ]
+  },
+  {
+   "caseId": "e6-046",
+   "category": "differentiation",
+   "family": "incomplete-restatement-only",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "base": {
+      "kind": "add",
+      "terms": [
+       {
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2,
+        "kind": "power"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "exponent": 3,
+     "kind": "power"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "no final answer line"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x^2 + 1)^3"
+   },
+   "tags": [
+    "restatement-only"
+   ]
+  },
+  {
+   "caseId": "e6-048",
+   "category": "differentiation",
+   "family": "implicit-circle-valid",
+   "problem": {
+    "domain": "calculus",
+    "task": "implicit-derivative",
+    "template": "circle",
+    "x": "3",
+    "y": "4"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "hand-adjudicated: circle x^2+y^2=25: differentiating gives 2x+2y y'=0, y'=-x/y, at (3,4) y'=-3/4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + y^2 = 25\n2x + 2y dy/dx = 0\ndy/dx = -x/y\nAt (3, 4): dy/dx = -3/4"
+   },
+   "tags": [
+    "valid",
+    "implicit"
+   ]
+  },
+  {
+   "caseId": "e6-049",
+   "category": "differentiation",
+   "family": "implicit-circle-sign",
+   "problem": {
+    "domain": "calculus",
+    "task": "implicit-derivative",
+    "template": "circle",
+    "x": "3",
+    "y": "4"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "rationale": "hand-adjudicated: solving 2x+2y y'=0 gives y'=-x/y; the sign is lost at line 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + y^2 = 25\n2x + 2y dy/dx = 0\ndy/dx = x/y\nAt (3, 4): dy/dx = 3/4"
+   },
+   "tags": [
+    "implicit",
+    "sign"
+   ]
+  },
+  {
+   "caseId": "e6-051",
+   "category": "differentiation",
+   "family": "malformed-missing-paren",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "3"
+      },
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "malformed",
+    "complete": false,
+    "coverage": "malformed",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "hand-adjudicated: unbalanced parenthesis in the first line"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x = 3x^2\nf'(x) = 6x"
+   },
+   "tags": [
+    "malformed"
+   ]
+  },
+  {
+   "caseId": "e6-052",
+   "category": "differentiation",
+   "family": "ambiguous-scope-of-d-dx",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "sin"
+      },
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "cos"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "ambiguous",
+    "complete": false,
+    "coverage": "ambiguous",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "hand-adjudicated: the scope of d/dx (sin x alone, or the product) is not marked"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d/dx sin(x) cos(x) = cos(x)cos(x) - sin(x)sin(x)"
+   },
+   "tags": [
+    "ambiguous"
+   ]
+  },
+  {
+   "caseId": "e6-056",
+   "category": "differentiation",
+   "family": "quotient-with-poly",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "2"
+          },
+          {
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 3,
+           "kind": "power"
+          }
+         ],
+         "kind": "multiply"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "5"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2,
+          "kind": "power"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (2x³ - 5)/(x² + 1)\nf'(x) = (6x² · (x² + 1) - (2x³ - 5) · (2x))/(x² + 1)^2 = (2x⁴ + 6x² + 10x)/(x² + 1)^2"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-061",
+   "category": "integration",
+   "family": "trig-linear-arg",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "argument": {
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "4"
+       },
+       {
+        "kind": "variable",
+        "name": "t"
+       }
+      ],
+      "kind": "multiply"
+     },
+     "kind": "cos"
+    },
+    "task": "indefinite-integral",
+    "variable": "t"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ cos(4t) dt = sin(4t)/4 + C"
+   },
+   "tags": [
+    "valid",
+    "symbol-t"
+   ]
+  },
+  {
+   "caseId": "e6-064",
+   "category": "integration",
+   "family": "negative-power-latex",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "base": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "exponent": -3,
+     "kind": "power"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "\\int x^{-3} \\, dx = \\frac{-1}{2x^{2}} + C"
+   },
+   "tags": [
+    "valid",
+    "latex"
+   ]
+  },
+  {
+   "caseId": "e6-068",
+   "category": "integration",
+   "family": "no-constant-poly",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "5"
+      },
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 4,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "missing-assumption",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "no +C"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ 5*x^4 dx = x^5"
+   },
+   "tags": [
+    "missing-constant"
+   ]
+  },
+  {
+   "caseId": "e6-069",
+   "category": "integration",
+   "family": "no-constant-trig",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "5"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "-1"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ],
+        "kind": "multiply"
+       }
+      ]
+     },
+     "kind": "sin"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "missing-assumption",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "no +C"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ sin(5x - 1) dx = -cos(5x - 1)/5"
+   },
+   "tags": [
+    "missing-constant"
+   ]
+  },
+  {
+   "caseId": "e6-074",
+   "category": "integration",
+   "family": "err-missing-inner-factor",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "7"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       {
+        "kind": "constant",
+        "value": "2"
+       }
+      ]
+     },
+     "kind": "cos"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ cos(7x + 2) dx = sin(7x + 2) + C"
+   },
+   "tags": [
+    "wrong-antiderivative"
+   ]
+  },
+  {
+   "caseId": "e6-079",
+   "category": "integration",
+   "family": "subst-poly",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ],
+       "kind": "multiply"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2,
+          "kind": "power"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": 3,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = x^2 + 1\ndu = 2x dx\n∫ 2x*(x^2 + 1)^3 dx = ∫ u^3 du = u^4/4 + C = (x^2 + 1)^4/4 + C"
+   },
+   "tags": [
+    "valid",
+    "substitution"
+   ]
+  },
+  {
+   "caseId": "e6-080",
+   "category": "integration",
+   "family": "subst-linear-trig",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "kind": "cos"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "Let u = 3*x + 1\ndu = 3 dx\n∫ cos(3*x + 1) dx = 1/3*∫ cos(u) du = 1/3*sin(u) + C = 1/3*sin(3*x + 1) + C"
+   },
+   "tags": [
+    "valid",
+    "substitution"
+   ]
+  },
+  {
+   "caseId": "e6-084",
+   "category": "integration",
+   "family": "subst-exp-sin",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "argument": {
+        "argument": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "kind": "sin"
+       },
+       "kind": "exp"
+      },
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "cos"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = \\sin\\left(x\\right)\ndu = \\cos\\left(x\\right) dx\n\\int e^{\\sin\\left(x\\right)} \\cdot \\cos\\left(x\\right) \\, dx = \\int e^{u} \\, du = e^{u} + C = e^{\\sin\\left(x\\right)} + C"
+   },
+   "tags": [
+    "valid",
+    "substitution",
+    "latex"
+   ]
+  },
+  {
+   "caseId": "e6-089",
+   "category": "integration",
+   "family": "err-subst-back",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "kind": "cos"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = 3x + 1\ndu = 3 dx\n∫ cos(3x + 1) dx = 1/3 · ∫ cos(u) du = 1/3 · sin(u) + C = 1/3 · sin(3x) + C"
+   },
+   "tags": [
+    "invalid-substitution",
+    "back-substitution"
+   ]
+  },
+  {
+   "caseId": "e6-092",
+   "category": "integration",
+   "family": "parts-x-cos",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "cos"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = x\ndv = cos(x) dx\ndu = dx\nv = sin(x)\n∫ x*cos(x) dx = x*sin(x) - ∫ sin(x) dx = x*sin(x) + cos(x) + C"
+   },
+   "tags": [
+    "valid",
+    "parts"
+   ]
+  },
+  {
+   "caseId": "e6-094",
+   "category": "integration",
+   "family": "parts-twice",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2,
+       "kind": "power"
+      },
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "exp"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ x^2 e^x dx = x^2 e^x - 2∫ x e^x dx = x^2 e^x - 2(x e^x - ∫ e^x dx) = x^2 e^x - 2x*e^x + 2 e^x + C"
+   },
+   "tags": [
+    "valid",
+    "parts",
+    "repeated"
+   ]
+  },
+  {
+   "caseId": "e6-097",
+   "category": "integration",
+   "family": "err-parts-sign",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "cos"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = x\ndv = cos(x) dx\ndu = dx\nv = sin(x)\n∫ x*cos(x) dx = x*sin(x) + ∫ sin(x) dx = x*sin(x) - cos(x) + C"
+   },
+   "tags": [
+    "parts",
+    "sign"
+   ]
+  },
+  {
+   "caseId": "e6-103",
+   "category": "integration",
+   "family": "pf-shifted-roots",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "4"
+        }
+       ]
+      },
+      {
+       "base": {
+        "factors": [
+         {
+          "kind": "add",
+          "terms": [
+           {
+            "kind": "variable",
+            "name": "x"
+           },
+           {
+            "factors": [
+             {
+              "kind": "constant",
+              "value": "-1"
+             },
+             {
+              "kind": "constant",
+              "value": "2"
+             }
+            ],
+            "kind": "multiply"
+           }
+          ]
+         },
+         {
+          "kind": "add",
+          "terms": [
+           {
+            "kind": "variable",
+            "name": "x"
+           },
+           {
+            "kind": "constant",
+            "value": "1"
+           }
+          ]
+         }
+        ],
+        "kind": "multiply"
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "\\frac{x + 4}{\\left(x - 2\\right) \\cdot \\left(x + 1\\right)} = \\frac{2}{x - 2} - \\frac{1}{x + 1}\n\\int \\frac{x + 4}{\\left(x - 2\\right) \\cdot \\left(x + 1\\right)} \\, dx = 2\\ln\\left(\\left|x - 2\\right|\\right) - \\ln\\left(\\left|x + 1\\right|\\right) + C"
+   },
+   "tags": [
+    "valid",
+    "partial-fractions",
+    "latex"
+   ]
+  },
+  {
+   "caseId": "e6-105",
+   "category": "integration",
+   "family": "err-pf-integration",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "4"
+        }
+       ]
+      },
+      {
+       "base": {
+        "factors": [
+         {
+          "kind": "add",
+          "terms": [
+           {
+            "kind": "variable",
+            "name": "x"
+           },
+           {
+            "factors": [
+             {
+              "kind": "constant",
+              "value": "-1"
+             },
+             {
+              "kind": "constant",
+              "value": "2"
+             }
+            ],
+            "kind": "multiply"
+           }
+          ]
+         },
+         {
+          "kind": "add",
+          "terms": [
+           {
+            "kind": "variable",
+            "name": "x"
+           },
+           {
+            "kind": "constant",
+            "value": "1"
+           }
+          ]
+         }
+        ],
+        "kind": "multiply"
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x + 4)/((x - 2)*(x + 1)) = 2/(x - 2) - 1/(x + 1)\n∫ (x + 4)/((x - 2)*(x + 1)) dx = 2 ln(abs(x - 2)) + ln(abs(x + 1)) + C"
+   },
+   "tags": [
+    "partial-fractions",
+    "sign"
+   ]
+  },
+  {
+   "caseId": "e6-107",
+   "category": "integration",
+   "family": "def-sin-pi",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "argument": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "kind": "sin"
+    },
+    "lower": "0",
+    "task": "definite-integral",
+    "upper": "pi",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫_0^π sin(x) dx = [-cos(x)]_0^π = -cos(π) - -cos(0) = 2"
+   },
+   "tags": [
+    "valid",
+    "trig-bounds"
+   ]
+  },
+  {
+   "caseId": "e6-109",
+   "category": "integration",
+   "family": "def-substitution-bounds",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ],
+       "kind": "multiply"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2,
+          "kind": "power"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": 3,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "lower": "0",
+    "task": "definite-integral",
+    "upper": "1",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = x^2 + 1\ndu = 2*x dx\nwhen x = 0, u = 1; when x = 1, u = 2\n∫_0^1 2*x*(x^2 + 1)^3 dx = ∫_1^2 u^3 du = [u^4/4]_1^2 = 16/4 - 1/4 = 15/4"
+   },
+   "tags": [
+    "valid",
+    "substitution",
+    "bounds"
+   ]
+  },
+  {
+   "caseId": "e6-113",
+   "category": "integration",
+   "family": "err-def-arith",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "2"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "lower": "1",
+    "task": "definite-integral",
+    "upper": "3",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫_1^3 2x dx = [x^2]_1^3 = 3^2 - 1^2 = 9 - 1 = 10"
+   },
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "caseId": "e6-114",
+   "category": "integration",
+   "family": "err-def-bounds-unchanged",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ],
+       "kind": "multiply"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2,
+          "kind": "power"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": 3,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "lower": "0",
+    "task": "definite-integral",
+    "upper": "1",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = x^2 + 1\ndu = 2*x dx\n∫_0^1 2*x*(x^2 + 1)^3 dx = ∫_0^1 u^3 du = [u^4/4]_0^1 = 1/4"
+   },
+   "tags": [
+    "bounds",
+    "invalid-substitution"
+   ]
+  },
+  {
+   "caseId": "e6-116",
+   "category": "integration",
+   "family": "incomplete-integrand-and-note",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "3"
+        },
+        {
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2,
+         "kind": "power"
+        }
+       ],
+       "kind": "multiply"
+      },
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "4"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ],
+       "kind": "multiply"
+      }
+     ]
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "no final answer line"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ 3x^2 + 4x dx\nintegrate each term separately"
+   },
+   "tags": [
+    "prose-only",
+    "no-final-line"
+   ]
+  },
+  {
+   "caseId": "e6-119",
+   "category": "integration",
+   "family": "improper-convergent",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "base": {
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2,
+        "kind": "power"
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "lower": "1",
+    "task": "improper-integral",
+    "upper": "infinity",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "hand-adjudicated: ∫_1^b x^-2 dx = 1 - 1/b -> 1; the integral converges to 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫_1^∞ 1/x^2 dx = lim_(b→∞) ∫_1^b 1/x^2 dx\n= lim_(b→∞) [-1/x]_1^b\n= lim_(b→∞) (1 - 1/b) = 1"
+   },
+   "tags": [
+    "valid",
+    "improper"
+   ]
+  },
+  {
+   "caseId": "e6-121",
+   "category": "limits-continuity",
+   "family": "infinity-divide-by-power",
+   "problem": {
+    "approach": "infinity",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "3"
+          },
+          {
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2,
+           "kind": "power"
+          }
+         ],
+         "kind": "multiply"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2,
+          "kind": "power"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "4"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(3x^2 + x)/(x^2 - 4) = (3 + 1/x)/(1 - 4/x^2)\nlim_(x→∞) ((3x^2 + x)/(x^2 - 4)) = (3 + 0)/(1 - 0) = 3"
+   },
+   "tags": [
+    "valid",
+    "infinity"
+   ]
+  },
+  {
+   "caseId": "e6-125",
+   "category": "limits-continuity",
+   "family": "one-sided-left-neg-infinite",
+   "problem": {
+    "approach": "0",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "left",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→0-) (1/x) = -∞"
+   },
+   "tags": [
+    "valid",
+    "one-sided"
+   ]
+  },
+  {
+   "caseId": "e6-127",
+   "category": "limits-continuity",
+   "family": "exp-at-minus-infinity",
+   "problem": {
+    "approach": "-infinity",
+    "domain": "calculus",
+    "expression": {
+     "argument": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "kind": "exp"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→-∞) exp(x) = 0"
+   },
+   "tags": [
+    "valid",
+    "infinity"
+   ]
+  },
+  {
+   "caseId": "e6-128",
+   "category": "limits-continuity",
+   "family": "lhopital-exp",
+   "problem": {
+    "approach": "0",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "argument": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "kind": "exp"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "1"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→0) ((e^x - 1)/x) = lim_(x→0) (e^x/1)\nlim_(x→0) (e^x/1) = e^0 = 1"
+   },
+   "tags": [
+    "valid",
+    "lhopital",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-130",
+   "category": "limits-continuity",
+   "family": "direct-substitution-poly",
+   "problem": {
+    "approach": "2",
+    "domain": "calculus",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 3,
+         "kind": "power"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "3"
+            },
+            {
+             "kind": "variable",
+             "name": "x"
+            }
+           ],
+           "kind": "multiply"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_{x→2} (x³ - 3x + 1) = 2³ - 3 · 2 + 1 = 3"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-133",
+   "category": "limits-continuity",
+   "family": "conjugate-root-difference",
+   "problem": {
+    "approach": "4",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "4"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "index": 2,
+          "kind": "root",
+          "radicand": {
+           "kind": "variable",
+           "name": "x"
+          }
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "2"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x - 4)/(sqrt(x) - 2) = sqrt(x) + 2\nlim_(x→4) (sqrt(x) + 2) = 2 + 2 = 4"
+   },
+   "tags": [
+    "valid",
+    "conjugate"
+   ]
+  },
+  {
+   "caseId": "e6-136",
+   "category": "limits-continuity",
+   "family": "err-cancel-wrong",
+   "problem": {
+    "approach": "1/2",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "4"
+          },
+          {
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2,
+           "kind": "power"
+          }
+         ],
+         "kind": "multiply"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "1"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "2"
+           },
+           {
+            "kind": "variable",
+            "name": "x"
+           }
+          ],
+          "kind": "multiply"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "1"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(4*x^2 - 1)/(2*x - 1) = (2*x - 1)*(2*x + 1)/(2*x - 1) = 2*x - 1\nlim_(x→1/2) (2*x - 1) = 0"
+   },
+   "tags": [
+    "wrong-cancellation"
+   ]
+  },
+  {
+   "caseId": "e6-137",
+   "category": "limits-continuity",
+   "family": "err-infinity-claimed-divergent",
+   "problem": {
+    "approach": "infinity",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "3"
+          },
+          {
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2,
+           "kind": "power"
+          }
+         ],
+         "kind": "multiply"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2,
+          "kind": "power"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "4"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→∞) ((3x^2 + x)/(x^2 - 4)) = ∞"
+   },
+   "tags": [
+    "wrong-infinity"
+   ]
+  },
+  {
+   "caseId": "e6-139",
+   "category": "limits-continuity",
+   "family": "err-one-sided-sign",
+   "problem": {
+    "approach": "3",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "3"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "left",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→3-) (1/(x - 3)) = ∞"
+   },
+   "tags": [
+    "one-sided",
+    "sign"
+   ]
+  },
+  {
+   "caseId": "e6-142",
+   "category": "limits-continuity",
+   "family": "correct-final-after-invalid-factor",
+   "problem": {
+    "approach": "-2",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2,
+           "kind": "power"
+          },
+          {
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "5"
+            },
+            {
+             "kind": "variable",
+             "name": "x"
+            }
+           ],
+           "kind": "multiply"
+          }
+         ]
+        },
+        {
+         "kind": "constant",
+         "value": "6"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "2"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 + 5x + 6)/(x + 2) = (x + 2)*(x + 3)/(x + 2) = x + 2\nlim_(x→-2) (x + 3) = 1"
+   },
+   "tags": [
+    "correct-final-after-error"
+   ]
+  },
+  {
+   "caseId": "e6-144",
+   "category": "limits-continuity",
+   "family": "incomplete-prose",
+   "problem": {
+    "approach": "-3",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2,
+           "kind": "power"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "6"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "3"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "no final answer line"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "Factor the numerator and cancel the common factor"
+   },
+   "tags": [
+    "prose-only"
+   ]
+  },
+  {
+   "caseId": "e6-145",
+   "category": "limits-continuity",
+   "family": "incomplete-factored-no-limit",
+   "problem": {
+    "approach": "-3",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2,
+           "kind": "power"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "6"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "3"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "no final answer line"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 + x - 6)/(x + 3) = (x + 3)*(x - 2)/(x + 3)"
+   },
+   "tags": [
+    "no-final-line"
+   ]
+  },
+  {
+   "caseId": "e6-151",
+   "category": "limits-continuity",
+   "family": "continuity-jump",
+   "problem": {
+    "domain": "calculus",
+    "left": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "point": "2",
+    "right": {
+     "kind": "add",
+     "terms": [
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "3"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ],
+       "kind": "multiply"
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "task": "continuity",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→2-) (x + 1) = 2 + 1 = 3\n3 · 2 + 1 = 7\n3 ≠ 7, so f is not continuous at 2"
+   },
+   "tags": [
+    "valid",
+    "discontinuity"
+   ]
+  },
+  {
+   "caseId": "e6-155",
+   "category": "limits-continuity",
+   "family": "continuity-exp-piece",
+   "problem": {
+    "domain": "calculus",
+    "left": {
+     "argument": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "kind": "exp"
+    },
+    "point": "0",
+    "right": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "task": "continuity",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "exp(0) = 1\n0 + 1 = 1\nboth equal 1, so f is continuous at 0"
+   },
+   "tags": [
+    "valid",
+    "continuity"
+   ]
+  },
+  {
+   "caseId": "e6-160",
+   "category": "probability-combinatorics",
+   "family": "combination-factorials",
+   "problem": {
+    "area": "combinatorics",
+    "assumptions": [
+     "unordered"
+    ],
+    "data": {
+     "n": 8,
+     "r": 3
+    },
+    "domain": "probability-statistics",
+    "task": "combination"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "8C3 = 8!/(3! × 5!) = 8 × 7 × 6/(3 × 2 × 1) = 56"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-165",
+   "category": "probability-combinatorics",
+   "family": "inclusion-exclusion-counts",
+   "problem": {
+    "area": "combinatorics",
+    "data": {
+     "a": 25,
+     "b": 18,
+     "intersection": 7
+    },
+    "domain": "probability-statistics",
+    "task": "inclusion-exclusion"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "n(A union B) = 25 + 18 - 7 = 36"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-166",
+   "category": "probability-combinatorics",
+   "family": "combination-symmetry",
+   "problem": {
+    "area": "combinatorics",
+    "assumptions": [
+     "unordered"
+    ],
+    "data": {
+     "n": 8,
+     "r": 3
+    },
+    "domain": "probability-statistics",
+    "task": "combination"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "C(8,3) = C(8,5) = 8!/(5!*3!) = 56"
+   },
+   "tags": [
+    "valid",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-167",
+   "category": "probability-combinatorics",
+   "family": "finite-prime-die",
+   "problem": {
+    "area": "probability",
+    "assumptions": [
+     "equiprobable"
+    ],
+    "data": {
+     "favourable": 3,
+     "total": 6
+    },
+    "domain": "probability-statistics",
+    "task": "finite"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "P(prime) = 3/6 = 1/2"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-168",
+   "category": "probability-combinatorics",
+   "family": "complement-rain",
+   "problem": {
+    "area": "probability",
+    "data": {
+     "pa": "3/8"
+    },
+    "domain": "probability-statistics",
+    "task": "complement"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "PA = 3/8\nP(A') = 1 - P(A) = 1 - 3/8 = 5/8"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-171",
+   "category": "probability-combinatorics",
+   "family": "independent-stated",
+   "problem": {
+    "area": "probability",
+    "data": {
+     "pa": "2/3",
+     "pb": "3/4"
+    },
+    "domain": "probability-statistics",
+    "task": "independent-intersection"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "Assume the events A and B are independent.\nP(A∩B) = P(A)P(B) = (2/3)(3/4) = 1/2"
+   },
+   "tags": [
+    "valid",
+    "stated-assumption"
+   ]
+  },
+  {
+   "caseId": "e6-178",
+   "category": "probability-combinatorics",
+   "family": "mean-five-values",
+   "problem": {
+    "area": "statistics",
+    "data": {
+     "values": [
+      "4",
+      "8",
+      "6",
+      "10",
+      "12"
+     ]
+    },
+    "domain": "probability-statistics",
+    "task": "mean"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "mean = (4 + 8 + 6 + 10 + 12)/5 = 40/5 = 8"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-182",
+   "category": "probability-combinatorics",
+   "family": "err-combination-as-permutation",
+   "problem": {
+    "area": "combinatorics",
+    "assumptions": [
+     "unordered"
+    ],
+    "data": {
+     "n": 8,
+     "r": 3
+    },
+    "domain": "probability-statistics",
+    "task": "combination"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "C(8,3) = 8*7*6 = 336"
+   },
+   "tags": [
+    "wrong-formula"
+   ]
+  },
+  {
+   "caseId": "e6-186",
+   "category": "probability-combinatorics",
+   "family": "err-complement-slip",
+   "problem": {
+    "area": "probability",
+    "data": {
+     "pa": "3/8"
+    },
+    "domain": "probability-statistics",
+    "task": "complement"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "P(A') = 1 - 3/8 = 3/8"
+   },
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "caseId": "e6-189",
+   "category": "probability-combinatorics",
+   "family": "err-mean-divisor",
+   "problem": {
+    "area": "statistics",
+    "data": {
+     "values": [
+      "4",
+      "8",
+      "6",
+      "10",
+      "12"
+     ]
+    },
+    "domain": "probability-statistics",
+    "task": "mean"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "mean = (4 + 8 + 6 + 10 + 12)/4 = 40/4 = 10"
+   },
+   "tags": [
+    "arithmetic"
+   ]
+  },
+  {
+   "caseId": "e6-191",
+   "category": "probability-combinatorics",
+   "family": "err-pmf-mean-unweighted",
+   "problem": {
+    "area": "distribution",
+    "data": {
+     "probabilities": [
+      "1/2",
+      "1/3",
+      "1/6"
+     ],
+     "values": [
+      "1",
+      "2",
+      "3"
+     ]
+    },
+    "domain": "probability-statistics",
+    "task": "pmf-mean"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "E[X] = (1 + 2 + 3)/3 = 2"
+   },
+   "tags": [
+    "wrong-formula"
+   ]
+  },
+  {
+   "caseId": "e6-194",
+   "category": "probability-combinatorics",
+   "family": "missing-independence",
+   "problem": {
+    "area": "probability",
+    "data": {
+     "pa": "2/3",
+     "pb": "3/4"
+    },
+    "domain": "probability-statistics",
+    "task": "independent-intersection"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "missing-assumption",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "assumption not established (line 0)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "P(A∩B) = P(A)P(B) = (2/3)(3/4) = 1/2"
+   },
+   "tags": [
+    "missing-assumption",
+    "independence"
+   ]
+  },
+  {
+   "caseId": "e6-197",
+   "category": "probability-combinatorics",
+   "family": "missing-unordered",
+   "problem": {
+    "area": "combinatorics",
+    "data": {
+     "n": 10,
+     "r": 4
+    },
+    "domain": "probability-statistics",
+    "task": "combination"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "missing-assumption",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "assumption not established (line 0)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "10C4 = 10!/(4! × 6!) = 210"
+   },
+   "tags": [
+    "missing-assumption",
+    "unordered"
+   ]
+  },
+  {
+   "caseId": "e6-200",
+   "category": "probability-combinatorics",
+   "family": "incomplete-unevaluated-factorials",
+   "problem": {
+    "area": "combinatorics",
+    "assumptions": [
+     "unordered"
+    ],
+    "data": {
+     "n": 8,
+     "r": 3
+    },
+    "domain": "probability-statistics",
+    "task": "combination"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "final member is not a canonical numeral"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "8C3 = 8!/(3! × 5!)"
+   },
+   "tags": [
+    "not-evaluated"
+   ]
+  },
+  {
+   "caseId": "e6-203",
+   "category": "probability-combinatorics",
+   "family": "unsupported-normal-tail",
+   "problem": {
+    "area": "distribution",
+    "data": {
+     "mean": "0",
+     "sd": "1",
+     "x": "1"
+    },
+    "domain": "probability-statistics",
+    "task": "normal-probability"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "unsupported",
+    "complete": false,
+    "coverage": "out-of-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "hand-adjudicated: normal-distribution tail probabilities are outside exact B1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "P(X < 1) = 0.8413"
+   },
+   "tags": [
+    "out-of-scope"
+   ]
+  },
+  {
+   "caseId": "e6-206",
+   "category": "complex-polynomial",
+   "family": "divide-by-conjugate",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "a": {
+      "im": "1",
+      "re": "5"
+     },
+     "b": {
+      "im": "3",
+      "re": "2"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "divide"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(5 + i)/(2 + 3i) = (5 + i)(2 - 3i)/((2 + 3i)(2 - 3i)) = (10 - 15i + 2i - 3i²)/(4 + 9) = (13 - 13i)/13 = 1 - i"
+   },
+   "tags": [
+    "valid",
+    "conjugate"
+   ]
+  },
+  {
+   "caseId": "e6-210",
+   "category": "complex-polynomial",
+   "family": "modulus-square-product",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "z": {
+      "im": "-5",
+      "re": "2"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "modulus-square"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(2 - 5*i)*conj(2 - 5*i) = (2 - 5*i)*(2 + 5*i) = 4 + 25 = 29"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-211",
+   "category": "complex-polynomial",
+   "family": "reciprocal-surd-free",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "z": {
+      "im": "-4",
+      "re": "3"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "reciprocal"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "1/(3 - 4i) = (3 + 4i)/((3 - 4i)(3 + 4i)) = (3 + 4i)/25 = 3/25 + (4/25)i"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-212",
+   "category": "complex-polynomial",
+   "family": "conjugate-of-sum",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "w": {
+      "im": "5",
+      "re": "-1"
+     },
+     "z": {
+      "im": "3",
+      "re": "2"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "conjugate"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "conj(2 + 3i + -1 + 5i) = conj(1 + 8i) = 1 - 8i"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-213",
+   "category": "complex-polynomial",
+   "family": "conjugate-product-alt",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "a": {
+      "im": "2",
+      "re": "1"
+     },
+     "b": {
+      "im": "-1",
+      "re": "3"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "multiply"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "conj((1 + 2*i)*(3 - i)) = conj(1 + 2*i)*conj(3 - i) = (1 - 2*i)*(3 + i) = 3 + i - 6*i - 2*i^2 = 5 - 5*i"
+   },
+   "tags": [
+    "valid",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-214",
+   "category": "complex-polynomial",
+   "family": "square-complex",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "a": {
+      "im": "3",
+      "re": "2"
+     },
+     "b": {
+      "im": "3",
+      "re": "2"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "multiply"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(2 + 3i)^{2} = 4 + 12i + 9i^{2} = -5 + 12i"
+   },
+   "tags": [
+    "valid",
+    "latex"
+   ]
+  },
+  {
+   "caseId": "e6-218",
+   "category": "complex-polynomial",
+   "family": "vieta-sum-quartic",
+   "problem": {
+    "area": "polynomial",
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "2",
+      "-10",
+      "3",
+      "1",
+      "7"
+     ]
+    },
+    "domain": "complex-polynomial",
+    "task": "vieta-sum"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sum of roots = -(-10)/2 = 5"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-223",
+   "category": "complex-polynomial",
+   "family": "cubic-value-synthetic-alt",
+   "problem": {
+    "area": "polynomial",
+    "coefficientDomain": "real",
+    "data": {
+     "coefficients": [
+      "1",
+      "0",
+      "-7",
+      "6"
+     ],
+     "divisor_root": "2"
+    },
+    "domain": "complex-polynomial",
+    "task": "remainder"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2³ - 7 × 2 + 6 = 8 - 14 + 6 = 0"
+   },
+   "tags": [
+    "valid",
+    "alternative"
+   ]
+  },
+  {
+   "caseId": "e6-226",
+   "category": "complex-polynomial",
+   "family": "reflect-real-axis",
+   "problem": {
+    "area": "geometry",
+    "data": {
+     "z": {
+      "im": "7",
+      "re": "-4"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "reflect"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "conj(-4 + 7i) = -4 - 7i"
+   },
+   "tags": [
+    "valid"
+   ]
+  },
+  {
+   "caseId": "e6-231",
+   "category": "complex-polynomial",
+   "family": "err-wrong-conjugate",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "w": {
+      "im": "5",
+      "re": "-1"
+     },
+     "z": {
+      "im": "3",
+      "re": "2"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "conjugate"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "conj(2 + 3i + -1 + 5i) = conj(1 + 8i) = -1 + 8i"
+   },
+   "tags": [
+    "incorrect-conjugation"
+   ]
+  },
+  {
+   "caseId": "e6-232",
+   "category": "complex-polynomial",
+   "family": "err-divide-wrong-multiplier",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "a": {
+      "im": "1",
+      "re": "5"
+     },
+     "b": {
+      "im": "3",
+      "re": "2"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "divide"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(5 + i)/(2 + 3i) = (5 + i)(2 + 3i)/((2 + 3i)(2 + 3i)) = (7 + 17i)/(-5 + 12i) = (7 + 17i)/13"
+   },
+   "tags": [
+    "incorrect-conjugation"
+   ]
+  },
+  {
+   "caseId": "e6-234",
+   "category": "complex-polynomial",
+   "family": "err-vieta-sign",
+   "problem": {
+    "area": "polynomial",
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "2",
+      "-10",
+      "3",
+      "1",
+      "7"
+     ]
+    },
+    "domain": "complex-polynomial",
+    "task": "vieta-sum"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sum of roots = -10/2 = -5"
+   },
+   "tags": [
+    "wrong-formula"
+   ]
+  },
+  {
+   "caseId": "e6-240",
+   "category": "complex-polynomial",
+   "family": "missing-real-coeffs-conjugate-root",
+   "problem": {
+    "area": "polynomial",
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "1",
+      "-6",
+      "13"
+     ],
+     "root": {
+      "im": "2",
+      "re": "3"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "conjugate-root"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "missing-assumption",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "assumption not established (line 0)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "conj(3 + 2i) = 3 - 2i"
+   },
+   "tags": [
+    "missing-assumption",
+    "real-coefficients"
+   ]
+  },
+  {
+   "caseId": "e6-246",
+   "category": "complex-polynomial",
+   "family": "incomplete-unrationalised-quotient",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "a": {
+      "im": "1",
+      "re": "5"
+     },
+     "b": {
+      "im": "3",
+      "re": "2"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "divide"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "final member is not a canonical numeral"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(5 + i)/(2 + 3i) = (5 + i)(2 - 3i)/13"
+   },
+   "tags": [
+    "not-evaluated"
+   ]
+  },
+  {
+   "caseId": "e6-248",
+   "category": "complex-polynomial",
+   "family": "unsupported-quintic-roots",
+   "problem": {
+    "area": "polynomial",
+    "data": {
+     "coefficients": [
+      "1",
+      "0",
+      "0",
+      "1",
+      "-1",
+      "3"
+     ]
+    },
+    "domain": "complex-polynomial",
+    "task": "solve"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "unsupported",
+    "complete": false,
+    "coverage": "out-of-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "hand-adjudicated: unrestricted symbolic root solving is outside B3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "The roots of x^5 + x^2 - x + 3 are found by radicals."
+   },
+   "tags": [
+    "out-of-scope"
+   ]
+  },
+  {
+   "caseId": "e6-251",
+   "category": "mixed-domain",
+   "family": "cancel-missing-restriction",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2,
+         "kind": "power"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "4"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "2"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "missing-assumption",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "restriction x!=2 not stated (line 1)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x² - 4)/(x - 2)\nf = (x - 2) · (x + 2)/(x - 2) = x + 2\nf'(x) = 1"
+   },
+   "tags": [
+    "missing-restriction",
+    "algebra-to-calculus"
+   ]
+  },
+  {
+   "caseId": "e6-254",
+   "category": "mixed-domain",
+   "family": "exp-laws-then-diff",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "argument": {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       "kind": "exp"
+      },
+      {
+       "argument": {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       "kind": "exp"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = e^{2x} \\cdot e^{3x}\nf = e^{5x}\nf'(x) = 5e^{5x}"
+   },
+   "tags": [
+    "valid",
+    "latex",
+    "algebra-to-calculus"
+   ]
+  },
+  {
+   "caseId": "e6-256",
+   "category": "mixed-domain",
+   "family": "split-fraction-restricted",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 3,
+         "kind": "power"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "2"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x^3 + 2x)/x\nf = x^2 + 2  (x ≠ 0)\nf'(x) = 2x"
+   },
+   "tags": [
+    "valid",
+    "restriction"
+   ]
+  },
+  {
+   "caseId": "e6-258",
+   "category": "mixed-domain",
+   "family": "err-log-of-sum",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2,
+        "kind": "power"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "kind": "log"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = ln(x² + 1)\nf = ln(x²) + ln(1)\nf'(x) = 2/x"
+   },
+   "tags": [
+    "log-rule"
+   ]
+  },
+  {
+   "caseId": "e6-259",
+   "category": "mixed-domain",
+   "family": "final-ok-after-bad-algebra",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "argument": {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       "kind": "exp"
+      },
+      {
+       "argument": {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       "kind": "exp"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = e^(2x)*e^(3x)\nf = e^(6x)\nf'(x) = 5 e^(5x)"
+   },
+   "tags": [
+    "correct-final-after-error"
+   ]
+  },
+  {
+   "caseId": "e6-261",
+   "category": "mixed-domain",
+   "family": "err-exponent-law",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "argument": {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       "kind": "exp"
+      },
+      {
+       "argument": {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ],
+        "kind": "multiply"
+       },
+       "kind": "exp"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "y = e^(2x) · e^(3x)\ny = e^(6x)\ndy/dx = 6 e^(6x)"
+   },
+   "tags": [
+    "exponent-law"
+   ]
+  },
+  {
+   "caseId": "e6-266",
+   "category": "mixed-domain",
+   "family": "half-angle-identity",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "base": {
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "kind": "sin"
+     },
+     "exponent": 2,
+     "kind": "power"
+    },
+    "lower": "0",
+    "task": "definite-integral",
+    "upper": "pi",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "\\sin^{2}x = \\frac{1 - \\cos\\left(2x\\right)}{2}\n\\int_{0}^{pi} \\sin^{2}x \\, dx = \\left[\\frac{x}{2} - \\frac{\\sin\\left(2x\\right)}{4}\\right]_{0}^{pi} = \\frac{\\pi}{2} - 0 = \\frac{\\pi}{2}"
+   },
+   "tags": [
+    "valid",
+    "latex",
+    "identity"
+   ]
+  },
+  {
+   "caseId": "e6-270",
+   "category": "mixed-domain",
+   "family": "expected-value-pdf",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ],
+       "kind": "multiply"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "lower": "0",
+    "task": "definite-integral",
+    "upper": "1",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "E[X] is the integral of x f(x) over the support, with f(x) = 2x on [0, 1]\n∫_0^1 x · (2x) dx = [2x³/3]_0^1 = 2/3 - 0 = 2/3"
+   },
+   "tags": [
+    "valid",
+    "probability-to-calculus"
+   ]
+  },
+  {
+   "caseId": "e6-272",
+   "category": "mixed-domain",
+   "family": "err-expected-value-forgot-x",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ],
+       "kind": "multiply"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "lower": "0",
+    "task": "definite-integral",
+    "upper": "1",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "rationale": "hand-adjudicated: the integrand must be x f(x) = 2x^2, not f(x) = 2x; the line integrates the density itself (which is 1) and the method is wrong"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "E[X] for f(x) = 2x on [0, 1]\n∫_0^1 2x dx = [x^2]_0^1 = 1 - 0 = 1"
+   },
+   "tags": [
+    "wrong-method",
+    "probability-to-calculus"
+   ]
+  },
+  {
+   "caseId": "e6-286",
+   "category": "mixed-domain",
+   "family": "at-least-one-six",
+   "problem": {
+    "area": "probability",
+    "data": {
+     "n": 3,
+     "p": "1/6"
+    },
+    "domain": "probability-statistics",
+    "task": "complement"
+   },
+   "reference": {
+    "alternativeMethodValid": true,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "The three rolls are independent and the die is fair.\nP(at least one six) = 1 - (5/6)^3 = 1 - 125/216 = 91/216"
+   },
+   "tags": [
+    "valid",
+    "alternative",
+    "stated-assumption"
+   ]
+  },
+  {
+   "caseId": "e6-287",
+   "category": "mixed-domain",
+   "family": "incomplete-at-least-one-six",
+   "problem": {
+    "area": "probability",
+    "data": {
+     "n": 3,
+     "p": "1/6"
+    },
+    "domain": "probability-statistics",
+    "task": "complement"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "incomplete",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "final member is not a canonical numeral"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "The three rolls are independent.\nP(at least one six) = 1 - (5/6)^3"
+   },
+   "tags": [
+    "not-evaluated"
+   ]
+  },
+  {
+   "caseId": "e6-288",
+   "category": "mixed-domain",
+   "family": "modulus-of-root",
+   "problem": {
+    "area": "polynomial",
+    "assumptions": [
+     "real-coefficients"
+    ],
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "1",
+      "-6",
+      "25"
+     ],
+     "root": {
+      "im": "4",
+      "re": "3"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "verify-root"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "|3 + 4i| = √(9 + 16) = √(25) = 5"
+   },
+   "tags": [
+    "valid",
+    "complex-to-polynomial"
+   ]
+  },
+  {
+   "caseId": "e6-289",
+   "category": "mixed-domain",
+   "family": "vieta-sum-from-roots",
+   "problem": {
+    "area": "polynomial",
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "1",
+      "-6",
+      "25"
+     ]
+    },
+    "domain": "complex-polynomial",
+    "task": "vieta-sum"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3 + 4*i + 3 - 4*i = -(-6)/1 = 6"
+   },
+   "tags": [
+    "valid",
+    "complex-to-polynomial"
+   ]
+  },
+  {
+   "caseId": "e6-292",
+   "category": "mixed-domain",
+   "family": "verify-root-one-plus-i",
+   "problem": {
+    "area": "polynomial",
+    "assumptions": [
+     "real-coefficients"
+    ],
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "1",
+      "-2",
+      "2"
+     ],
+     "root": {
+      "im": "1",
+      "re": "1"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "verify-root"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "verified",
+    "complete": true,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": ""
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(1 + i)^{2} - 2(1 + i) + 2 = 2i - 2 - 2i + 2 = 0"
+   },
+   "tags": [
+    "valid",
+    "latex"
+   ]
+  },
+  {
+   "caseId": "e6-293",
+   "category": "mixed-domain",
+   "family": "err-verify-root-one-plus-i",
+   "problem": {
+    "area": "polynomial",
+    "assumptions": [
+     "real-coefficients"
+    ],
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "1",
+      "-2",
+      "2"
+     ],
+     "root": {
+      "im": "1",
+      "re": "1"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "verify-root"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "invalid",
+    "complete": false,
+    "coverage": "in-scope",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "rationale": "claim false"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(1 + i)^2 - 2(1 + i) + 2 = 2 - 2 - 2i + 2 = 2 - 2i"
+   },
+   "tags": [
+    "incorrect-i-squared"
+   ]
+  },
+  {
+   "caseId": "e6-296",
+   "category": "mixed-domain",
+   "family": "ambiguous-product-derivative",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "reference": {
+    "alternativeMethodValid": false,
+    "classification": "ambiguous",
+    "complete": false,
+    "coverage": "ambiguous",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "rationale": "hand-adjudicated: y is not defined; it may be a constant or a function of x, so d/dx(xy) cannot be assessed"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d/dx(x y) = y"
+   },
+   "tags": [
+    "ambiguous"
+   ]
+  }
+ ],
+ "count": 100,
+ "partition": "validation"
+}

@@ -1,0 +1,5097 @@
+{
+ "baseline": {
+  "cases": 500,
+  "definiteVerdicts": 257,
+  "coverage": 0.514,
+  "definiteReferenceCeiling": 440
+ },
+ "recoverability": {
+  "assessed": 257,
+  "genuinely-ambiguous-or-out-of-scope": 60,
+  "recoverable-with-capability": 151,
+  "ambiguous-input-keep-abstaining": 32
+ },
+ "causeCounts": {
+  "assessed": 257,
+  "Ambiguous input": 71,
+  "Unsupported mathematical operation": 19,
+  "Unsupported calculus reasoning": 33,
+  "Unsupported notation": 80,
+  "Missing natural-working adapter": 32,
+  "Incomplete proof evidence": 8
+ },
+ "rankedRecoveryMatrix": [
+  {
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "cases": 67,
+   "byReference": {
+    "incomplete": 13,
+    "verified": 37,
+    "missing-assumption": 9,
+    "invalid": 8
+   }
+  },
+  {
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "cases": 33,
+   "byReference": {
+    "invalid": 12,
+    "verified": 15,
+    "incomplete": 6
+   }
+  },
+  {
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "cases": 13,
+   "byReference": {
+    "verified": 13
+   }
+  },
+  {
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "cases": 12,
+   "byReference": {
+    "verified": 10,
+    "missing-assumption": 2
+   }
+  },
+  {
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "cases": 11,
+   "byReference": {
+    "incomplete": 11
+   }
+  },
+  {
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "cases": 6,
+   "byReference": {
+    "missing-assumption": 6
+   }
+  },
+  {
+   "cause": "Incomplete proof evidence",
+   "capability": "typed adapter partial coverage (complex-polynomial)",
+   "cases": 5,
+   "byReference": {
+    "verified": 5
+   }
+  },
+  {
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "cases": 4,
+   "byReference": {
+    "incomplete": 4
+   }
+  }
+ ],
+ "cases": [
+  {
+   "id": "e1-001",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-002",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-003",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-004",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-005",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-006",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-007",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-008",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-009",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-010",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-011",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-012",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-013",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-014",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-015",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-016",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-017",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-018",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-019",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-020",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-021",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-022",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-023",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-024",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-025",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-026",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-027",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-028",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-029",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-030",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-031",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-032",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-033",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-034",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-035",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-036",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-037",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-038",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-039",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-040",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-041",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-042",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-043",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-044",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-045",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-046",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-047",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-048",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-049",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-050",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-051",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-052",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-053",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-054",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-055",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-056",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-057",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-058",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-059",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-060",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-061",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-062",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-063",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-064",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-065",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-066",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-067",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-068",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-069",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-070",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-071",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-072",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-073",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-074",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-075",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-076",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-077",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-078",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-079",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-080",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-081",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-082",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-083",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-084",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-085",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-086",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-087",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-088",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-089",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-090",
+   "area": "algebra",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-091",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-092",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-093",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-094",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-095",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-096",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-097",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-098",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-099",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-100",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-101",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "algebra",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-102",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-103",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-104",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-105",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-106",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-107",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-108",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-109",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-110",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-111",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-112",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-113",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-114",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-115",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-116",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-117",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "algebra",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-118",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-119",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-120",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-121",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-122",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-123",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-124",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-125",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-126",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-127",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-128",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-129",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "algebra",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-130",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-131",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-132",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-133",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-134",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-135",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-136",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "algebra",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-137",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-138",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-139",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-140",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-141",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-142",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-143",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-144",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-145",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-146",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-147",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "ambiguous",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-148",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-149",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-150",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-151",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-152",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "algebra",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-153",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-154",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "algebra",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "problem statement outside exact scope",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-155",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-156",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-157",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-158",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-159",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-160",
+   "area": "functions-trigonometry-logarithms",
+   "domain": "function",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-161",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-162",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-163",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-164",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-165",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-166",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-167",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "malformed",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-168",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-169",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-170",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-171",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-172",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-173",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-174",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-175",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-176",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-177",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-178",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-179",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-180",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-181",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-182",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-183",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-184",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-185",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-186",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-187",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-188",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-189",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-190",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-191",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-192",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-193",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-194",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-195",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-196",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-197",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-198",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-199",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-200",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-201",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-202",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-203",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-204",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-205",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-206",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-207",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-208",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-209",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-210",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-211",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-212",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-213",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-214",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-215",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-216",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-217",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-218",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-219",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-220",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-221",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-222",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-223",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-224",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "malformed",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-225",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-226",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-227",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-228",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported calculus reasoning",
+   "capability": "natural adapter: calculus",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-229",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-230",
+   "area": "calculus",
+   "domain": "calculus",
+   "reference": "verified",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-231",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-232",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-233",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-234",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-235",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-236",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-237",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-238",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-239",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-240",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-241",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-242",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-243",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-244",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-245",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-246",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-247",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-248",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-249",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-250",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-251",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-252",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: geometry",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-253",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-254",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-255",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-256",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-257",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-258",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-259",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-260",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-261",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-262",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-263",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-264",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-265",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-266",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-267",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-268",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-269",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-270",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-271",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-272",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "ambiguous",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: geometry",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-273",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-274",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-275",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-276",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-277",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: geometry",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-278",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-279",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-280",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-281",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-282",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-283",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-284",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-285",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-286",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-287",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "invalid",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-288",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-289",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-290",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-291",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-292",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-293",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-294",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-295",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-296",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-297",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-298",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-299",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-300",
+   "area": "geometry-coordinate-geometry",
+   "domain": "geometry",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "degree-symbol (geometry)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-301",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-302",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-303",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-304",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-305",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "malformed",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-306",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-307",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-308",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-309",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "malformed",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-310",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "malformed",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-311",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-312",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "malformed",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-313",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-314",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-315",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-316",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-317",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-318",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-319",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-320",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-321",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-322",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-323",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-324",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-325",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-326",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-327",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-328",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-329",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-330",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-331",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-332",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-333",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-334",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-335",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-336",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-337",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-338",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-339",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-340",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-341",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-342",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-343",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-344",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-345",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "missing-assumption",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-346",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-347",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-348",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-349",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-350",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-351",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-352",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-353",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-354",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-355",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-356",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-357",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-358",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-359",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: probability-statistics",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-360",
+   "area": "probability-combinatorics-statistics",
+   "domain": "probability-statistics",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-361",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-362",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-363",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-364",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-365",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-366",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-367",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-368",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: linear-algebra",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-369",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-370",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-371",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-372",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-373",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-374",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-375",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-376",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-377",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-378",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-379",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: linear-algebra",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-380",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "malformed",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: linear-algebra",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-381",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-382",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-383",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-384",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-385",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-386",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "malformed",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: linear-algebra",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-387",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-388",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-389",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-390",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-391",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-392",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-393",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-394",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-395",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "malformed",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: linear-algebra",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-396",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-397",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-398",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-399",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: linear-algebra",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-400",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-401",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-402",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-403",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "missing-assumption",
+   "engine": "ambiguous",
+   "cause": "Ambiguous input",
+   "capability": "ambiguous-notation",
+   "recoverability": "ambiguous-input-keep-abstaining"
+  },
+  {
+   "id": "e1-404",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-405",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-406",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-407",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-408",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-409",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-410",
+   "area": "vectors-matrices",
+   "domain": "linear-algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-411",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-412",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-413",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-414",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-415",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-416",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed adapter partial coverage (complex-polynomial)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-417",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed adapter partial coverage (complex-polynomial)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-418",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-419",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-420",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-421",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "ambiguous",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed binding mismatch",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-422",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-423",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-424",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-425",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-426",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-427",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-428",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-429",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-430",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-431",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-432",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed adapter partial coverage (complex-polynomial)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-433",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-434",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-435",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-436",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-437",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-438",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-439",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-440",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed adapter partial coverage (complex-polynomial)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-441",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "ambiguous",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed binding mismatch",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-442",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-443",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-444",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed adapter partial coverage (complex-polynomial)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-445",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "unsupported",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-446",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-447",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Missing natural-working adapter",
+   "capability": "natural adapter: complex-polynomial",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-448",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-449",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-450",
+   "area": "complex-polynomial-roots",
+   "domain": "complex-polynomial",
+   "reference": "ambiguous",
+   "engine": "unsupported",
+   "cause": "Incomplete proof evidence",
+   "capability": "typed binding mismatch",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-451",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-452",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-453",
+   "area": "mixed-domain",
+   "domain": "mixed",
+   "reference": "unsupported",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-454",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-455",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-456",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-457",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-458",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-459",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-460",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-461",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-462",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-463",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-464",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-465",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-466",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-467",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-468",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-469",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-470",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-471",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-472",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-473",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-474",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-475",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-476",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-477",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-478",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-479",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-480",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-481",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-482",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-483",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-484",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "incomplete",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-485",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-486",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-487",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-488",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-489",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-490",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-491",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-492",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "invalid",
+   "engine": "invalid",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-493",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-494",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "unsupported",
+   "cause": "Unsupported notation",
+   "capability": "plus-minus in solution lines",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-495",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-496",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-497",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  },
+  {
+   "id": "e1-498",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "ambiguous",
+   "engine": "malformed",
+   "cause": "Ambiguous input",
+   "capability": "malformed/unparseable working",
+   "recoverability": "genuinely-ambiguous-or-out-of-scope"
+  },
+  {
+   "id": "e1-499",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "verified",
+   "engine": "verified",
+   "cause": "assessed",
+   "capability": null,
+   "recoverability": "assessed"
+  },
+  {
+   "id": "e1-500",
+   "area": "mixed-domain",
+   "domain": "algebra",
+   "reference": "incomplete",
+   "engine": "unsupported",
+   "cause": "Unsupported mathematical operation",
+   "capability": "algebra lines outside the exact checker (prose / functions / multi-variable)",
+   "recoverability": "recoverable-with-capability"
+  }
+ ]
+}

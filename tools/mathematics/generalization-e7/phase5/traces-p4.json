@@ -1,0 +1,128 @@
+[
+ {
+  "kind": "unjustified-step",
+  "name": "Vieta product: product of roots = 10/4 = 5/2",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "mean: mean = 20/4 = 5",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "mean: mean = (9+9+7)/5 = 5",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "binomial mean from unrelated numbers",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "Vieta sum through roots that are not the task's",
+  "classification": "incomplete",
+  "obligations": null
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "algebra: right final value after a wrong step",
+  "classification": "invalid",
+  "obligations": null
+ },
+ {
+  "kind": "irrelevant",
+  "name": "Vieta product: 10/4 = 5/2",
+  "classification": "incomplete",
+  "obligations": null
+ },
+ {
+  "kind": "irrelevant",
+  "name": "mean: 20/4 = 5",
+  "classification": "incomplete",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: c/a",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: through the roots",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta sum: through the roots",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "mean: via a sum",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "binomial mean: complement form",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "quadratic roots with the discriminant",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "algebra: concise answer",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "alternative",
+  "name": "algebra: factor then solve",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "conditional",
+  "name": "derivation under a disclosed assumption",
+  "classification": "verified",
+  "obligations": null
+ },
+ {
+  "kind": "conditional",
+  "name": "the same, claimed for the whole domain",
+  "classification": "incomplete",
+  "obligations": null
+ },
+ {
+  "kind": "conditional",
+  "name": "narrowing one of two task branches",
+  "classification": "unsupported",
+  "obligations": null
+ },
+ {
+  "kind": "missing-premise",
+  "name": "undefined symbol",
+  "classification": "unsupported",
+  "obligations": null
+ },
+ {
+  "kind": "missing-premise",
+  "name": "scenario quantities only in the working",
+  "classification": "incomplete",
+  "obligations": null
+ }
+]

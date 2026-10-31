@@ -1,0 +1,31 @@
+{
+  "version": "unified-math-u2-hardening-evaluation@1",
+  "coldPoolStartupMs": 52.99,
+  "requests": 500,
+  "verified": 500,
+  "concurrent500Ms": 511.434,
+  "throughputPerSecond": 977.64,
+  "latencyMs": {
+    "p50": 3.671243000000004,
+    "p95": 6.589182999999991,
+    "p99": 8.989113000000003
+  },
+  "queueWaitMs": {
+    "p50": 295.790533,
+    "p95": 486.96763899999996,
+    "p99": 501.360133
+  },
+  "queueDepthHighWater": 496,
+  "workerStarts": 4,
+  "workerMaxRssKb": [
+    32740,
+    34532,
+    34660,
+    35172
+  ],
+  "recoveryMs": 40.234,
+  "recovered": "verified",
+  "failures": {
+    "worker-crash": 1
+  }
+}

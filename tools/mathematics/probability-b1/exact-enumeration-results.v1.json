@@ -1,0 +1,1407 @@
+{
+  "version": "probability-b1-exact-enumeration@1",
+  "total": 200,
+  "matched": 200,
+  "results": [
+    {
+      "id": "combinatorics-0",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-1",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-2",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-3",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-4",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-5",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-6",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-7",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-8",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-9",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-10",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-11",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-12",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-13",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-14",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-15",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-16",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-17",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-18",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-19",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-20",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-21",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-22",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-23",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-24",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-25",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-26",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-27",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-28",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-29",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-30",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-31",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-32",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-33",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-34",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-35",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-36",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-37",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-38",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-39",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-40",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-41",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-42",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-43",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "combinatorics-44",
+      "area": "combinatorics",
+      "expected": "10",
+      "enumerated": "10",
+      "match": true
+    },
+    {
+      "id": "combinatorics-45",
+      "area": "combinatorics",
+      "expected": "6",
+      "enumerated": "6",
+      "match": true
+    },
+    {
+      "id": "combinatorics-46",
+      "area": "combinatorics",
+      "expected": "21",
+      "enumerated": "21",
+      "match": true
+    },
+    {
+      "id": "combinatorics-47",
+      "area": "combinatorics",
+      "expected": "336",
+      "enumerated": "336",
+      "match": true
+    },
+    {
+      "id": "combinatorics-48",
+      "area": "combinatorics",
+      "expected": "3",
+      "enumerated": "3",
+      "match": true
+    },
+    {
+      "id": "combinatorics-49",
+      "area": "combinatorics",
+      "expected": "12",
+      "enumerated": "12",
+      "match": true
+    },
+    {
+      "id": "probability-0",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-1",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-2",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-3",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-4",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-5",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-6",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-7",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-8",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-9",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-10",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-11",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-12",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-13",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-14",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-15",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-16",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-17",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-18",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-19",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-20",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-21",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-22",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-23",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-24",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-25",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-26",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-27",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-28",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-29",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-30",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-31",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-32",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-33",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-34",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-35",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-36",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-37",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-38",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-39",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-40",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-41",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-42",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-43",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-44",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-45",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-46",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-47",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-48",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "probability-49",
+      "area": "probability",
+      "expected": "1/3",
+      "enumerated": "1/3",
+      "match": true
+    },
+    {
+      "id": "distribution-0",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-1",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-2",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-3",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-4",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-5",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-6",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-7",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-8",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-9",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-10",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-11",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-12",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-13",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-14",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-15",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-16",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-17",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-18",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-19",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-20",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-21",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-22",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-23",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-24",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-25",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-26",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-27",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-28",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-29",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-30",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-31",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-32",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-33",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-34",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-35",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-36",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-37",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-38",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-39",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-40",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-41",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-42",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-43",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-44",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-45",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-46",
+      "area": "distribution",
+      "expected": "1/4",
+      "enumerated": "1/4",
+      "match": true
+    },
+    {
+      "id": "distribution-47",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "distribution-48",
+      "area": "distribution",
+      "expected": "5/36",
+      "enumerated": "5/36",
+      "match": true
+    },
+    {
+      "id": "distribution-49",
+      "area": "distribution",
+      "expected": "2/9",
+      "enumerated": "2/9",
+      "match": true
+    },
+    {
+      "id": "statistics-0",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-1",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-2",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-3",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-4",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-5",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-6",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-7",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-8",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-9",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-10",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-11",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-12",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-13",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-14",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-15",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-16",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-17",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-18",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-19",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-20",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-21",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-22",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-23",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-24",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-25",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-26",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-27",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-28",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-29",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-30",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-31",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-32",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-33",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-34",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-35",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-36",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-37",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-38",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-39",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-40",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-41",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-42",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-43",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-44",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    },
+    {
+      "id": "statistics-45",
+      "area": "statistics",
+      "expected": "11/2",
+      "enumerated": "11/2",
+      "match": true
+    },
+    {
+      "id": "statistics-46",
+      "area": "statistics",
+      "expected": "83/16",
+      "enumerated": "83/16",
+      "match": true
+    },
+    {
+      "id": "statistics-47",
+      "area": "statistics",
+      "expected": "21/4",
+      "enumerated": "21/4",
+      "match": true
+    },
+    {
+      "id": "statistics-48",
+      "area": "statistics",
+      "expected": "91/16",
+      "enumerated": "91/16",
+      "match": true
+    },
+    {
+      "id": "statistics-49",
+      "area": "statistics",
+      "expected": "13/2",
+      "enumerated": "13/2",
+      "match": true
+    }
+  ]
+}

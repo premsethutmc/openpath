@@ -1,0 +1,1243 @@
+{
+  "summary": {
+    "total": 150,
+    "verified": 150,
+    "falseAcceptances": 0,
+    "falseRejections": 0,
+    "firstInvalidStepMatches": 150,
+    "p50Ms": 0.1783190000000019,
+    "p95Ms": 0.7684169999999995,
+    "byCategory": {
+      "geometry-measurement": {
+        "verified": 30,
+        "total": 30
+      },
+      "symbolic-substitution": {
+        "verified": 30,
+        "total": 30
+      },
+      "function-bound-argument": {
+        "verified": 20,
+        "total": 20
+      },
+      "vector-arithmetic": {
+        "verified": 20,
+        "total": 20
+      },
+      "determinant": {
+        "verified": 20,
+        "total": 20
+      },
+      "derivative": {
+        "verified": 15,
+        "total": 15
+      },
+      "probability-complement": {
+        "verified": 15,
+        "total": 15
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "d6-dev-geometry-000",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 6.429326
+    },
+    {
+      "id": "d6-dev-geometry-001",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.8068140000000028
+    },
+    {
+      "id": "d6-dev-geometry-002",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.3804529999999957
+    },
+    {
+      "id": "d6-dev-geometry-003",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.29999200000000315
+    },
+    {
+      "id": "d6-dev-geometry-004",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.42892499999999956
+    },
+    {
+      "id": "d6-dev-geometry-005",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.3051189999999977
+    },
+    {
+      "id": "d6-dev-geometry-006",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.314592999999995
+    },
+    {
+      "id": "d6-dev-geometry-007",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.3600619999999992
+    },
+    {
+      "id": "d6-dev-geometry-008",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.2870620000000059
+    },
+    {
+      "id": "d6-dev-geometry-009",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.20175300000000362
+    },
+    {
+      "id": "d6-dev-geometry-010",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.20269500000000562
+    },
+    {
+      "id": "d6-dev-geometry-011",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.451469000000003
+    },
+    {
+      "id": "d6-dev-geometry-012",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.19554500000000274
+    },
+    {
+      "id": "d6-dev-geometry-013",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.19704600000000028
+    },
+    {
+      "id": "d6-dev-geometry-014",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.20713200000000143
+    },
+    {
+      "id": "d6-dev-geometry-015",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.3058499999999995
+    },
+    {
+      "id": "d6-dev-geometry-016",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.5608739999999983
+    },
+    {
+      "id": "d6-dev-geometry-017",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.5221049999999963
+    },
+    {
+      "id": "d6-dev-geometry-018",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.3376480000000015
+    },
+    {
+      "id": "d6-dev-geometry-019",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.22791300000000092
+    },
+    {
+      "id": "d6-dev-geometry-020",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.28209400000000073
+    },
+    {
+      "id": "d6-dev-geometry-021",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.18313500000000005
+    },
+    {
+      "id": "d6-dev-geometry-022",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.1656899999999979
+    },
+    {
+      "id": "d6-dev-geometry-023",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.12456699999999898
+    },
+    {
+      "id": "d6-dev-geometry-024",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.30709199999999726
+    },
+    {
+      "id": "d6-dev-geometry-025",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.38607100000000116
+    },
+    {
+      "id": "d6-dev-geometry-026",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.20275499999999624
+    },
+    {
+      "id": "d6-dev-geometry-027",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.17613499999999505
+    },
+    {
+      "id": "d6-dev-geometry-028",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.21884999999999621
+    },
+    {
+      "id": "d6-dev-geometry-029",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.1660800000000009
+    },
+    {
+      "id": "d6-dev-substitution-000",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.9713619999999992
+    },
+    {
+      "id": "d6-dev-substitution-001",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.7379109999999969
+    },
+    {
+      "id": "d6-dev-substitution-002",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.3866820000000004
+    },
+    {
+      "id": "d6-dev-substitution-003",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.3611930000000001
+    },
+    {
+      "id": "d6-dev-substitution-004",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.7870689999999954
+    },
+    {
+      "id": "d6-dev-substitution-005",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.6379300000000043
+    },
+    {
+      "id": "d6-dev-substitution-006",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.2495750000000001
+    },
+    {
+      "id": "d6-dev-substitution-007",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.29658699999999527
+    },
+    {
+      "id": "d6-dev-substitution-008",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.21003600000000233
+    },
+    {
+      "id": "d6-dev-substitution-009",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.3314990000000009
+    },
+    {
+      "id": "d6-dev-substitution-010",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.2644069999999985
+    },
+    {
+      "id": "d6-dev-substitution-011",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.31016699999999986
+    },
+    {
+      "id": "d6-dev-substitution-012",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.17695700000000159
+    },
+    {
+      "id": "d6-dev-substitution-013",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.2996910000000028
+    },
+    {
+      "id": "d6-dev-substitution-014",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.22986600000000124
+    },
+    {
+      "id": "d6-dev-substitution-015",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.19209999999999638
+    },
+    {
+      "id": "d6-dev-substitution-016",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.24864500000000334
+    },
+    {
+      "id": "d6-dev-substitution-017",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.32675100000000157
+    },
+    {
+      "id": "d6-dev-substitution-018",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.24224499999999694
+    },
+    {
+      "id": "d6-dev-substitution-019",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.16920500000000516
+    },
+    {
+      "id": "d6-dev-substitution-020",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.19026700000000574
+    },
+    {
+      "id": "d6-dev-substitution-021",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.26395800000000236
+    },
+    {
+      "id": "d6-dev-substitution-022",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.27085699999999946
+    },
+    {
+      "id": "d6-dev-substitution-023",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.20671099999999853
+    },
+    {
+      "id": "d6-dev-substitution-024",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.1635959999999983
+    },
+    {
+      "id": "d6-dev-substitution-025",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.17961000000000382
+    },
+    {
+      "id": "d6-dev-substitution-026",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.25900000000000034
+    },
+    {
+      "id": "d6-dev-substitution-027",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.17749700000000246
+    },
+    {
+      "id": "d6-dev-substitution-028",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.14654999999999774
+    },
+    {
+      "id": "d6-dev-substitution-029",
+      "category": "symbolic-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.16336600000000345
+    },
+    {
+      "id": "d6-dev-function-000",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.9780219999999957
+    },
+    {
+      "id": "d6-dev-function-001",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.5835579999999965
+    },
+    {
+      "id": "d6-dev-function-002",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.3253400000000042
+    },
+    {
+      "id": "d6-dev-function-003",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.38293600000000083
+    },
+    {
+      "id": "d6-dev-function-004",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.24224499999999694
+    },
+    {
+      "id": "d6-dev-function-005",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.16033200000000392
+    },
+    {
+      "id": "d6-dev-function-006",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.18361700000000525
+    },
+    {
+      "id": "d6-dev-function-007",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.25822799999999546
+    },
+    {
+      "id": "d6-dev-function-008",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.2581290000000038
+    },
+    {
+      "id": "d6-dev-function-009",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.24668199999999985
+    },
+    {
+      "id": "d6-dev-function-010",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.24989599999999967
+    },
+    {
+      "id": "d6-dev-function-011",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.2473320000000001
+    },
+    {
+      "id": "d6-dev-function-012",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.144397000000005
+    },
+    {
+      "id": "d6-dev-function-013",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.24143299999999357
+    },
+    {
+      "id": "d6-dev-function-014",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.2003920000000008
+    },
+    {
+      "id": "d6-dev-function-015",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.3088949999999997
+    },
+    {
+      "id": "d6-dev-function-016",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.22392700000000332
+    },
+    {
+      "id": "d6-dev-function-017",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.27698600000000084
+    },
+    {
+      "id": "d6-dev-function-018",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.22205399999999997
+    },
+    {
+      "id": "d6-dev-function-019",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.23953000000000202
+    },
+    {
+      "id": "d6-dev-vector-000",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 1.0806960000000032
+    },
+    {
+      "id": "d6-dev-vector-001",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.1382989999999964
+    },
+    {
+      "id": "d6-dev-vector-002",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.0823740000000015
+    },
+    {
+      "id": "d6-dev-vector-003",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.18945500000000237
+    },
+    {
+      "id": "d6-dev-vector-004",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.09676600000000235
+    },
+    {
+      "id": "d6-dev-vector-005",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.09342099999999931
+    },
+    {
+      "id": "d6-dev-vector-006",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.0723079999999996
+    },
+    {
+      "id": "d6-dev-vector-007",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.04670099999999877
+    },
+    {
+      "id": "d6-dev-vector-008",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.04103200000000129
+    },
+    {
+      "id": "d6-dev-vector-009",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.09309999999999974
+    },
+    {
+      "id": "d6-dev-vector-010",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.07212899999999678
+    },
+    {
+      "id": "d6-dev-vector-011",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.1783190000000019
+    },
+    {
+      "id": "d6-dev-vector-012",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.12307500000000005
+    },
+    {
+      "id": "d6-dev-vector-013",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.0996200000000016
+    },
+    {
+      "id": "d6-dev-vector-014",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.049003000000006125
+    },
+    {
+      "id": "d6-dev-vector-015",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.0687730000000002
+    },
+    {
+      "id": "d6-dev-vector-016",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.08087199999999939
+    },
+    {
+      "id": "d6-dev-vector-017",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.07898899999999998
+    },
+    {
+      "id": "d6-dev-vector-018",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.050335999999994385
+    },
+    {
+      "id": "d6-dev-vector-019",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.025778999999999996
+    },
+    {
+      "id": "d6-dev-det-000",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.4447589999999977
+    },
+    {
+      "id": "d6-dev-det-001",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.1502359999999996
+    },
+    {
+      "id": "d6-dev-det-002",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.05505300000000091
+    },
+    {
+      "id": "d6-dev-det-003",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.060141000000001554
+    },
+    {
+      "id": "d6-dev-det-004",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.050615999999997996
+    },
+    {
+      "id": "d6-dev-det-005",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.049393999999999494
+    },
+    {
+      "id": "d6-dev-det-006",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.10426700000000011
+    },
+    {
+      "id": "d6-dev-det-007",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.02786200000000605
+    },
+    {
+      "id": "d6-dev-det-008",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.05371099999999984
+    },
+    {
+      "id": "d6-dev-det-009",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.04989499999999936
+    },
+    {
+      "id": "d6-dev-det-010",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.06240400000000079
+    },
+    {
+      "id": "d6-dev-det-011",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.06400600000000622
+    },
+    {
+      "id": "d6-dev-det-012",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.04319500000000431
+    },
+    {
+      "id": "d6-dev-det-013",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.13497300000000223
+    },
+    {
+      "id": "d6-dev-det-014",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.231698999999999
+    },
+    {
+      "id": "d6-dev-det-015",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.09638499999999794
+    },
+    {
+      "id": "d6-dev-det-016",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.17981100000000083
+    },
+    {
+      "id": "d6-dev-det-017",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.08341500000000224
+    },
+    {
+      "id": "d6-dev-det-018",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.044736999999997806
+    },
+    {
+      "id": "d6-dev-det-019",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.023755999999998778
+    },
+    {
+      "id": "d6-dev-derivative-000",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.7684169999999995
+    },
+    {
+      "id": "d6-dev-derivative-001",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.11176799999999787
+    },
+    {
+      "id": "d6-dev-derivative-002",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.04869399999999757
+    },
+    {
+      "id": "d6-dev-derivative-003",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.08489799999999548
+    },
+    {
+      "id": "d6-dev-derivative-004",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.07620500000000163
+    },
+    {
+      "id": "d6-dev-derivative-005",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.07165799999999933
+    },
+    {
+      "id": "d6-dev-derivative-006",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.08742099999999908
+    },
+    {
+      "id": "d6-dev-derivative-007",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.04217299999999824
+    },
+    {
+      "id": "d6-dev-derivative-008",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.03133699999999351
+    },
+    {
+      "id": "d6-dev-derivative-009",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.033820999999996104
+    },
+    {
+      "id": "d6-dev-derivative-010",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.05498200000000253
+    },
+    {
+      "id": "d6-dev-derivative-011",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.09980999999999796
+    },
+    {
+      "id": "d6-dev-derivative-012",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.13246999999999787
+    },
+    {
+      "id": "d6-dev-derivative-013",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.05552300000000088
+    },
+    {
+      "id": "d6-dev-derivative-014",
+      "category": "derivative",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "calculus-derivative",
+      "ms": 0.032328999999997166
+    },
+    {
+      "id": "d6-dev-probability-000",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.9016570000000002
+    },
+    {
+      "id": "d6-dev-probability-001",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.13828799999999575
+    },
+    {
+      "id": "d6-dev-probability-002",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.09438199999999597
+    },
+    {
+      "id": "d6-dev-probability-003",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.04192300000000415
+    },
+    {
+      "id": "d6-dev-probability-004",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.05805699999999803
+    },
+    {
+      "id": "d6-dev-probability-005",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.06445700000000443
+    },
+    {
+      "id": "d6-dev-probability-006",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.08099200000000906
+    },
+    {
+      "id": "d6-dev-probability-007",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.04983500000000163
+    },
+    {
+      "id": "d6-dev-probability-008",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.024456999999998175
+    },
+    {
+      "id": "d6-dev-probability-009",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.01830700000000718
+    },
+    {
+      "id": "d6-dev-probability-010",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.01854800000000978
+    },
+    {
+      "id": "d6-dev-probability-011",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.04443700000000206
+    },
+    {
+      "id": "d6-dev-probability-012",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.05929899999999577
+    },
+    {
+      "id": "d6-dev-probability-013",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.03239800000000059
+    },
+    {
+      "id": "d6-dev-probability-014",
+      "category": "probability-complement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "probability-complement",
+      "ms": 0.02726100000000997
+    }
+  ]
+}

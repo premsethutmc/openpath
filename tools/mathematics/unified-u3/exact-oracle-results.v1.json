@@ -1,0 +1,2416 @@
+{
+  "version": "unified-math-u3-oracle@1",
+  "total": 300,
+  "matched": 300,
+  "inconclusive": 0,
+  "byArea": {
+    "calculus": 50,
+    "log-exp": 50,
+    "polynomial-rational": 50,
+    "radicals": 50,
+    "solution-sets": 50,
+    "trigonometry": 50
+  },
+  "results": [
+    {
+      "id": "polynomial-rational-000",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-001",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-002",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-003",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-004",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-005",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-006",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-007",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-008",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-009",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-010",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-011",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-012",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-013",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-014",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-015",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-016",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-017",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-018",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-019",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-020",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-021",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-022",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-023",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-024",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-025",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-026",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-027",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-028",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-029",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-030",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-031",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-032",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-033",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-034",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-035",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-036",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-037",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-038",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-039",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-040",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-041",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-042",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-043",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-044",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-045",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-046",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-047",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-048",
+      "area": "polynomial-rational",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "polynomial-rational-049",
+      "area": "polynomial-rational",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact expansion"
+    },
+    {
+      "id": "trigonometry-000",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-001",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-002",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-003",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-004",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-005",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-006",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-007",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-008",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-009",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-010",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-011",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-012",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-013",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-014",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-015",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-016",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-017",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-018",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-019",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-020",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-021",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-022",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-023",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-024",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-025",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-026",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-027",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-028",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-029",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-030",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-031",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-032",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-033",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-034",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-035",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-036",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-037",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-038",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-039",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-040",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-041",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-042",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-043",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-044",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-045",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-046",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-047",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-048",
+      "area": "trigonometry",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "trigonometry-049",
+      "area": "trigonometry",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "Pythagorean identity"
+    },
+    {
+      "id": "log-exp-000",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-001",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-002",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-003",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-004",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-005",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-006",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-007",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-008",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-009",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-010",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-011",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-012",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-013",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-014",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-015",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-016",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-017",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-018",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-019",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-020",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-021",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-022",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-023",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-024",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-025",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-026",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-027",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-028",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-029",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-030",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-031",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-032",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-033",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-034",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-035",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-036",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-037",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-038",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-039",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-040",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-041",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-042",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-043",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-044",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-045",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-046",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-047",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-048",
+      "area": "log-exp",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "log-exp-049",
+      "area": "log-exp",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "positive-domain log power"
+    },
+    {
+      "id": "radicals-000",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-001",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-002",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-003",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-004",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-005",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-006",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-007",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-008",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-009",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-010",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-011",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-012",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-013",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-014",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-015",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-016",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-017",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-018",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-019",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-020",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-021",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-022",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-023",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-024",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-025",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-026",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-027",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-028",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-029",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-030",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-031",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-032",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-033",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-034",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-035",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-036",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-037",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-038",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-039",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-040",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-041",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-042",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-043",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-044",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-045",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-046",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-047",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-048",
+      "area": "radicals",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "radicals-049",
+      "area": "radicals",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "principal root"
+    },
+    {
+      "id": "calculus-000",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-001",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-002",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-003",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-004",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-005",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-006",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-007",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-008",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-009",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-010",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-011",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-012",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-013",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-014",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-015",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-016",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-017",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-018",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-019",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-020",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-021",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-022",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-023",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-024",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-025",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-026",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-027",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-028",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-029",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-030",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-031",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-032",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-033",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-034",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-035",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-036",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-037",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-038",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-039",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-040",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-041",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-042",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-043",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-044",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-045",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-046",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-047",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-048",
+      "area": "calculus",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "calculus-049",
+      "area": "calculus",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "exact derivative"
+    },
+    {
+      "id": "solution-sets-000",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-001",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-002",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-003",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-004",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-005",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-006",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-007",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-008",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-009",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-010",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-011",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-012",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-013",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-014",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-015",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-016",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-017",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-018",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-019",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-020",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-021",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-022",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-023",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-024",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-025",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-026",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-027",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-028",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-029",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-030",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-031",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-032",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-033",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-034",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-035",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-036",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-037",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-038",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-039",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-040",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-041",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-042",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-043",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-044",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-045",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-046",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-047",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-048",
+      "area": "solution-sets",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    },
+    {
+      "id": "solution-sets-049",
+      "area": "solution-sets",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "note": "complete periodic set versus principal value"
+    }
+  ]
+}

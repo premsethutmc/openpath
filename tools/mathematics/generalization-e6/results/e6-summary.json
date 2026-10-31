@@ -1,0 +1,241 @@
+{
+ "dev": {
+  "cases": 100,
+  "exactVerdicts": 100,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 55,
+  "referenceVerified": 55,
+  "correctlyInvalid": 27,
+  "referenceInvalid": 27,
+  "engineClassCounts": {
+   "verified": 55,
+   "invalid": 27,
+   "incomplete": 9,
+   "unsupported": 3,
+   "missing-assumption": 3,
+   "ambiguous": 2,
+   "resource-exhausted": 1
+  },
+  "assessed": 94,
+  "assessmentCoverage": 0.94,
+  "firstInvalidExact": [
+   25,
+   27
+  ],
+  "alternativeAccepted": [
+   4,
+   4
+  ],
+  "restrictionDetected": [
+   3,
+   3
+  ],
+  "independentVerificationCoverage": 1,
+  "verifiedTotal": 55,
+  "abstentions": 6,
+  "byCategory": {
+   "differentiation": {
+    "n": 20,
+    "exact": 20,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 19
+   },
+   "integration": {
+    "n": 20,
+    "exact": 20,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 20
+   },
+   "limits-continuity": {
+    "n": 13,
+    "exact": 13,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 12
+   },
+   "probability-combinatorics": {
+    "n": 15,
+    "exact": 15,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 14
+   },
+   "complex-polynomial": {
+    "n": 15,
+    "exact": 15,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 14
+   },
+   "mixed-domain": {
+    "n": 17,
+    "exact": 17,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 15
+   }
+  }
+ },
+ "validation": {
+  "cases": 100,
+  "exactVerdicts": 83,
+  "falseAcceptances": 0,
+  "falseRejections": 2,
+  "correctlyVerified": 44,
+  "referenceVerified": 54,
+  "correctlyInvalid": 24,
+  "referenceInvalid": 27,
+  "engineClassCounts": {
+   "verified": 44,
+   "invalid": 28,
+   "incomplete": 8,
+   "unsupported": 12,
+   "malformed": 3,
+   "missing-assumption": 5
+  },
+  "assessed": 85,
+  "assessmentCoverage": 0.85,
+  "firstInvalidExact": [
+   21,
+   27
+  ],
+  "alternativeAccepted": [
+   9,
+   10
+  ],
+  "restrictionDetected": [
+   5,
+   6
+  ],
+  "independentVerificationCoverage": 1,
+  "verifiedTotal": 44,
+  "abstentions": 15,
+  "byCategory": {
+   "differentiation": {
+    "n": 20,
+    "exact": 17,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 17
+   },
+   "integration": {
+    "n": 20,
+    "exact": 15,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 15
+   },
+   "limits-continuity": {
+    "n": 14,
+    "exact": 12,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 12
+   },
+   "probability-combinatorics": {
+    "n": 15,
+    "exact": 14,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 14
+   },
+   "complex-polynomial": {
+    "n": 15,
+    "exact": 13,
+    "FA": 0,
+    "FR": 1,
+    "assessed": 14
+   },
+   "mixed-domain": {
+    "n": 16,
+    "exact": 12,
+    "FA": 0,
+    "FR": 1,
+    "assessed": 13
+   }
+  }
+ },
+ "sealed": {
+  "cases": 100,
+  "exactVerdicts": 80,
+  "falseAcceptances": 2,
+  "falseRejections": 3,
+  "correctlyVerified": 37,
+  "referenceVerified": 52,
+  "correctlyInvalid": 25,
+  "referenceInvalid": 27,
+  "engineClassCounts": {
+   "verified": 39,
+   "unsupported": 14,
+   "invalid": 27,
+   "incomplete": 10,
+   "ambiguous": 3,
+   "missing-assumption": 4,
+   "malformed": 3
+  },
+  "assessed": 80,
+  "assessmentCoverage": 0.8,
+  "firstInvalidExact": [
+   21,
+   27
+  ],
+  "alternativeAccepted": [
+   3,
+   5
+  ],
+  "restrictionDetected": [
+   4,
+   5
+  ],
+  "independentVerificationCoverage": 1,
+  "verifiedTotal": 39,
+  "abstentions": 20,
+  "byCategory": {
+   "differentiation": {
+    "n": 20,
+    "exact": 19,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 18
+   },
+   "integration": {
+    "n": 20,
+    "exact": 17,
+    "FA": 0,
+    "FR": 0,
+    "assessed": 16
+   },
+   "limits-continuity": {
+    "n": 13,
+    "exact": 11,
+    "FA": 0,
+    "FR": 2,
+    "assessed": 12
+   },
+   "probability-combinatorics": {
+    "n": 15,
+    "exact": 10,
+    "FA": 1,
+    "FR": 0,
+    "assessed": 11
+   },
+   "complex-polynomial": {
+    "n": 15,
+    "exact": 13,
+    "FA": 0,
+    "FR": 1,
+    "assessed": 13
+   },
+   "mixed-domain": {
+    "n": 17,
+    "exact": 10,
+    "FA": 1,
+    "FR": 0,
+    "assessed": 10
+   }
+  }
+ }
+}

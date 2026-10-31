@@ -1,0 +1,748 @@
+{
+ "id": "openpath.essay-benchmark",
+ "version": 1,
+ "rubric": "openpath.g8-writing@2",
+ "status": "synthetic",
+ "provenance": "Essays and reference annotations written by the OpenPath development team (an AI assistant) for testing. They are NOT educator-validated: no teacher has reviewed them. Agreement with these annotations measures agreement with one synthetic reference, not with educators. On 18 October 2026 the rubric was re-pointed to profile openpath.g8-writing@2, which adds Plurals and countability; no essay or annotation changed, and the essays were not re-annotated for plural errors.",
+ "conventions": {
+  "kind": "error = a genuine error a Grade 8 teacher would correct; style = a preference, not an error; strength = done clearly well",
+  "optional": "an ambiguous or debatable annotation: matching it counts as agreement, missing it is not penalised",
+  "acceptAlso": "other competencies that also count as a match for the same place",
+  "acceptKinds": "kinds that count as a match (default: the annotation's kind)",
+  "slip": "a single lapse where the form is correct elsewhere",
+  "must_not_flag": "valid text (often a valid alternative) that must not be reported as an error"
+ },
+ "essays": [
+  {
+   "id": "b01-agreement",
+   "focus": [
+    "subject–verb agreement (repeated)"
+   ],
+   "prompt": "How do students in your town get to school?",
+   "text": "Every morning my sister walk to school with her friends. She say the road is safe, but the traffic near the market are heavy. My parents worries about her. The school bus come at seven, but it is always full. I think the town need a new bus route for students. Then everyone could reach school safely and on time.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.VERB.sva",
+     "kind": "error",
+     "quote": "my sister walk",
+     "note": "Singular subject needs walks.",
+     "misconception": "third_person_s"
+    },
+    {
+     "competency": "EN.GRM.VERB.sva",
+     "kind": "error",
+     "quote": "She say",
+     "note": "She needs says.",
+     "misconception": "third_person_s"
+    },
+    {
+     "competency": "EN.GRM.VERB.sva",
+     "kind": "error",
+     "quote": "the traffic near the market are",
+     "note": "The subject is traffic (singular); the verb wrongly agrees with the nearer noun, market.",
+     "misconception": "attraction_error"
+    },
+    {
+     "competency": "EN.GRM.VERB.sva",
+     "kind": "error",
+     "quote": "My parents worries",
+     "note": "Plural subject needs worry."
+    },
+    {
+     "competency": "EN.GRM.VERB.sva",
+     "kind": "error",
+     "quote": "The school bus come",
+     "note": "Singular subject needs comes.",
+     "misconception": "third_person_s"
+    },
+    {
+     "competency": "EN.GRM.VERB.sva",
+     "kind": "error",
+     "quote": "the town need",
+     "note": "Singular subject needs needs.",
+     "misconception": "third_person_s"
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "everyone could reach school safely",
+     "why": "Correct modal use."
+    }
+   ],
+   "words": 60
+  },
+  {
+   "id": "b02-tense",
+   "focus": [
+    "tense consistency in a past narrative"
+   ],
+   "prompt": "Describe a day out with your family.",
+   "text": "Last Sunday we went to the zoo with our cousins. We saw the elephants first and then we walk to the lion enclosure. The lion was sleeping, so we decide to visit the birds. My little brother laughed when a parrot copies his voice. In the evening we eat ice cream and took a bus home. It was a wonderful day.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.VERB.present_past_simple",
+     "kind": "error",
+     "quote": "we walk",
+     "note": "The story is in the past: walked.",
+     "misconception": "tense_shift"
+    },
+    {
+     "competency": "EN.GRM.VERB.present_past_simple",
+     "kind": "error",
+     "quote": "we decide",
+     "note": "Past narrative: decided.",
+     "misconception": "tense_shift"
+    },
+    {
+     "competency": "EN.GRM.VERB.present_past_simple",
+     "kind": "error",
+     "quote": "a parrot copies",
+     "note": "Past narrative: copied.",
+     "misconception": "tense_shift"
+    },
+    {
+     "competency": "EN.GRM.VERB.present_past_simple",
+     "kind": "error",
+     "quote": "we eat ice cream",
+     "note": "Past narrative: ate.",
+     "misconception": "tense_shift"
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "The lion was sleeping",
+     "why": "Past progressive is correct for an ongoing action."
+    }
+   ],
+   "words": 61
+  },
+  {
+   "id": "b03-articles-prepositions",
+   "focus": [
+    "articles",
+    "prepositions of time and place"
+   ],
+   "prompt": "Introduce yourself and your family.",
+   "text": "I was born on 2012 in a small town near Madurai. My father is an engineer and my mother is teacher. We live at the second floor of an old building. Every summer we go to a beach for a week. I like to swim in the morning and read books on the night. Next year we will move to the Chennai.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.PREP.time_place",
+     "kind": "error",
+     "quote": "born on 2012",
+     "note": "Years take in: in 2012.",
+     "misconception": "in_on_at_confusion"
+    },
+    {
+     "competency": "EN.GRM.NOUN.articles",
+     "kind": "error",
+     "quote": "my mother is teacher",
+     "note": "A singular job noun needs an article: a teacher.",
+     "misconception": "article_omission"
+    },
+    {
+     "competency": "EN.GRM.PREP.time_place",
+     "kind": "error",
+     "quote": "at the second floor",
+     "note": "Floors take on: on the second floor.",
+     "misconception": "in_on_at_confusion"
+    },
+    {
+     "competency": "EN.GRM.PREP.time_place",
+     "kind": "error",
+     "quote": "on the night",
+     "note": "Use at night.",
+     "misconception": "in_on_at_confusion"
+    },
+    {
+     "competency": "EN.GRM.NOUN.articles",
+     "kind": "error",
+     "quote": "to the Chennai",
+     "note": "City names take no article."
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "go to a beach",
+     "why": "\"a beach\" and \"the beach\" are both acceptable."
+    },
+    {
+     "quote": "an engineer",
+     "why": "Correct article."
+    },
+    {
+     "quote": "in the morning",
+     "why": "Correct preposition."
+    }
+   ],
+   "words": 61
+  },
+  {
+   "id": "b04-sentence-boundaries",
+   "focus": [
+    "run-on sentences",
+    "comma splices",
+    "fragments"
+   ],
+   "prompt": "Write about a class activity.",
+   "text": "Our class planted trees last week it was hard work. Some students dug the holes, others carried water. Because the soil was dry. We used a lot of water. The teacher was pleased, she said the trees would grow quickly. Next month we will plant flowers near the gate.",
+   "annotations": [
+    {
+     "competency": "EN.SEN.CMP.run_ons",
+     "kind": "error",
+     "quote": "Our class planted trees last week it was hard work",
+     "note": "Two sentences fused without punctuation.",
+     "misconception": "fused_sentence"
+    },
+    {
+     "competency": "EN.SEN.CMP.run_ons",
+     "kind": "error",
+     "quote": "Some students dug the holes, others carried water",
+     "note": "Comma splice.",
+     "misconception": "comma_splice",
+     "acceptAlso": [
+      "EN.GRM.PUN.commas"
+     ]
+    },
+    {
+     "competency": "EN.SEN.CMP.fragments",
+     "kind": "error",
+     "quote": "Because the soil was dry.",
+     "note": "A subordinate clause on its own is a fragment.",
+     "misconception": "subordinate_fragment"
+    },
+    {
+     "competency": "EN.SEN.CMP.run_ons",
+     "kind": "error",
+     "quote": "The teacher was pleased, she said",
+     "note": "Comma splice.",
+     "misconception": "comma_splice",
+     "acceptAlso": [
+      "EN.GRM.PUN.commas"
+     ]
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "Next month we will plant flowers near the gate.",
+     "why": "Correct sentence."
+    }
+   ],
+   "words": 49
+  },
+  {
+   "id": "b05-vocabulary",
+   "focus": [
+    "collocations",
+    "word choice"
+   ],
+   "prompt": "Describe a mistake you learned from.",
+   "text": "Yesterday I did a big mistake in my science test. I forgot to make my homework the night before, so I was very nervous. The questions were very hard and I felt very bad. My teacher said I should take more attention in class. Now I will do an effort to study every day.",
+   "annotations": [
+    {
+     "competency": "EN.VOC.REL.collocations",
+     "kind": "error",
+     "quote": "did a big mistake",
+     "note": "We make a mistake.",
+     "misconception": "make_do_confusion"
+    },
+    {
+     "competency": "EN.VOC.REL.collocations",
+     "kind": "error",
+     "quote": "make my homework",
+     "note": "We do homework.",
+     "misconception": "make_do_confusion"
+    },
+    {
+     "competency": "EN.VOC.REL.collocations",
+     "kind": "error",
+     "quote": "take more attention",
+     "note": "We pay attention.",
+     "misconception": "word_by_word"
+    },
+    {
+     "competency": "EN.VOC.REL.collocations",
+     "kind": "error",
+     "quote": "do an effort",
+     "note": "We make an effort.",
+     "misconception": "make_do_confusion"
+    },
+    {
+     "competency": "EN.VOC.USE.word_choice",
+     "kind": "style",
+     "quote": "felt very bad",
+     "note": "Vague; a precise word (upset, worried) would be clearer.",
+     "acceptKinds": [
+      "style",
+      "error"
+     ],
+     "optional": true
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "study every day",
+     "why": "Correct."
+    }
+   ],
+   "words": 54
+  },
+  {
+   "id": "b06-connectives",
+   "focus": [
+    "connectives",
+    "logical sequencing"
+   ],
+   "prompt": "Should mobile phones be allowed in school?",
+   "text": "Mobile phones should be allowed in school. However, they help students find information quickly. Some students play games in class. Therefore, phones can be useful in an emergency. In conclusion, schools should make clear rules.",
+   "annotations": [
+    {
+     "competency": "EN.SEN.COH.connectives",
+     "kind": "error",
+     "quote": "However, they help",
+     "note": "However signals contrast, but this sentence supports the claim.",
+     "misconception": "wrong_connective"
+    },
+    {
+     "competency": "EN.SEN.COH.connectives",
+     "kind": "error",
+     "quote": "Therefore, phones can be useful",
+     "note": "Therefore signals a result that does not follow from the previous sentence.",
+     "misconception": "wrong_connective"
+    },
+    {
+     "competency": "EN.WRT.ORG.sequencing",
+     "kind": "error",
+     "quote": "Some students play games in class.",
+     "note": "A counter-point appears without any signal, so the argument jumps.",
+     "misconception": "jumps_between_ideas",
+     "optional": true
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "In conclusion, schools should make clear rules.",
+     "why": "Appropriate concluding connective."
+    }
+   ],
+   "words": 35
+  },
+  {
+   "id": "b07-concision",
+   "focus": [
+    "concision (stylistic)"
+   ],
+   "prompt": "Why is reading important?",
+   "text": "In my opinion, I think that reading books is very important due to the fact that it helps us. At this point in time, many students do not read. Each and every student should read for at least twenty minutes every single day. Reading helps us learn new words and new ideas.",
+   "annotations": [
+    {
+     "competency": "EN.SEN.PRE.concision",
+     "kind": "style",
+     "quote": "In my opinion, I think",
+     "note": "Says the same thing twice.",
+     "acceptKinds": [
+      "style",
+      "error"
+     ]
+    },
+    {
+     "competency": "EN.SEN.PRE.concision",
+     "kind": "style",
+     "quote": "due to the fact that",
+     "note": "Because is shorter.",
+     "acceptKinds": [
+      "style",
+      "error"
+     ]
+    },
+    {
+     "competency": "EN.SEN.PRE.concision",
+     "kind": "style",
+     "quote": "At this point in time",
+     "note": "Now is shorter.",
+     "acceptKinds": [
+      "style",
+      "error"
+     ]
+    },
+    {
+     "competency": "EN.SEN.PRE.concision",
+     "kind": "style",
+     "quote": "Each and every",
+     "note": "Every is enough.",
+     "acceptKinds": [
+      "style",
+      "error"
+     ]
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "Reading helps us learn new words and new ideas.",
+     "why": "Correct."
+    }
+   ],
+   "words": 52
+  },
+  {
+   "id": "b08-clean-library",
+   "focus": [
+    "correct writing"
+   ],
+   "prompt": "Write about a place in your school that matters to you.",
+   "text": "Our school library is small, but it is the busiest room in the building. Students come there before classes, during lunch and after school. The librarian helps us find books that suit our interests. Last month she started a reading club, and twelve students joined in the first week. I hope the school gives the library more space next year.",
+   "annotations": [],
+   "must_not_flag": [
+    {
+     "quote": "the busiest room",
+     "why": "Correct superlative."
+    },
+    {
+     "quote": "before classes, during lunch and after school",
+     "why": "A list without a final comma is acceptable."
+    },
+    {
+     "quote": "I hope the school gives",
+     "why": "Correct agreement."
+    }
+   ],
+   "words": 60
+  },
+  {
+   "id": "b09-clean-alternatives",
+   "focus": [
+    "correct writing",
+    "valid alternatives (false-positive traps)"
+   ],
+   "prompt": "What do you think about school uniforms?",
+   "text": "Different schools have different rules about uniforms, and ours is different from most. We wear a blue shirt and grey trousers. And honestly, nobody minds. The data on student opinions is clear: most of us like the uniform because it saves time in the morning. Everyone has their own style at weekends, so the uniform does not feel boring.",
+   "annotations": [],
+   "must_not_flag": [
+    {
+     "quote": "different from most",
+     "why": "Standard."
+    },
+    {
+     "quote": "And honestly, nobody minds.",
+     "why": "Beginning a sentence with And is acceptable."
+    },
+    {
+     "quote": "The data on student opinions is clear",
+     "why": "Data as a mass noun is acceptable."
+    },
+    {
+     "quote": "Everyone has their own style",
+     "why": "Singular they is acceptable."
+    },
+    {
+     "quote": "at weekends",
+     "why": "British usage, standard in Indian English."
+    },
+    {
+     "quote": "grey",
+     "why": "British spelling."
+    }
+   ],
+   "words": 59
+  },
+  {
+   "id": "b10-aspect-ambiguous",
+   "focus": [
+    "perfect with finished time",
+    "ambiguous tense"
+   ],
+   "prompt": "Describe a city you have visited.",
+   "text": "When I was ten, I have visited Delhi with my uncle. We have seen the Red Fort and India Gate. The city is crowded, but the people were kind. I would like to go there again, if my parents agree.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.VERB.aspect",
+     "kind": "error",
+     "quote": "I have visited",
+     "note": "A finished time (when I was ten) needs the past simple: I visited.",
+     "misconception": "perfect_with_finished_time"
+    },
+    {
+     "competency": "EN.GRM.VERB.aspect",
+     "kind": "error",
+     "quote": "We have seen",
+     "note": "Part of the same finished trip: we saw.",
+     "misconception": "perfect_with_finished_time",
+     "optional": true
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "The city is crowded",
+     "why": "A present fact about the city is acceptable."
+    },
+    {
+     "quote": "if my parents agree",
+     "why": "Correct."
+    }
+   ],
+   "words": 40
+  },
+  {
+   "id": "b11-single-slip",
+   "focus": [
+    "a single slip in correct writing"
+   ],
+   "prompt": "Write about someone in your family.",
+   "text": "My grandfather grows vegetables in a small garden behind our house. He waters the plants every evening and talks to them as if they were friends. My brother and I help him on Sundays. He say that a garden teaches patience. Last year the tomatoes grew so well that we gave some to our neighbours.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.VERB.sva",
+     "kind": "error",
+     "quote": "He say",
+     "note": "He says; the same form is correct elsewhere, so this may be a slip.",
+     "misconception": "third_person_s",
+     "slip": true
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "My brother and I help",
+     "why": "Correct compound subject."
+    },
+    {
+     "quote": "as if they were friends",
+     "why": "Correct subjunctive."
+    },
+    {
+     "quote": "neighbours",
+     "why": "British spelling."
+    }
+   ],
+   "words": 55
+  },
+  {
+   "id": "b12-dependent-prepositions",
+   "focus": [
+    "dependent prepositions"
+   ],
+   "prompt": "Tell us about a competition you took part in.",
+   "text": "I am very interested about astronomy. Last month I participated to a science fair at our school. My project depended of a small telescope that my uncle gave me. I explained my results to the judges in the afternoon, and they congratulated me for my work.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.PREP.dependent",
+     "kind": "error",
+     "quote": "interested about",
+     "note": "Interested in.",
+     "acceptAlso": [
+      "EN.VOC.REL.collocations"
+     ]
+    },
+    {
+     "competency": "EN.GRM.PREP.dependent",
+     "kind": "error",
+     "quote": "participated to",
+     "note": "Participated in.",
+     "acceptAlso": [
+      "EN.VOC.REL.collocations"
+     ]
+    },
+    {
+     "competency": "EN.GRM.PREP.dependent",
+     "kind": "error",
+     "quote": "depended of",
+     "note": "Depended on.",
+     "acceptAlso": [
+      "EN.VOC.REL.collocations"
+     ]
+    },
+    {
+     "competency": "EN.GRM.PREP.dependent",
+     "kind": "error",
+     "quote": "congratulated me for",
+     "note": "Congratulated on is standard; for is also common, so this is debatable.",
+     "optional": true,
+     "acceptAlso": [
+      "EN.VOC.REL.collocations"
+     ]
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "in the afternoon",
+     "why": "Correct."
+    },
+    {
+     "quote": "explained my results to the judges",
+     "why": "Correct."
+    }
+   ],
+   "words": 46
+  },
+  {
+   "id": "b13-boundaries-commas",
+   "focus": [
+    "run-ons",
+    "introductory commas (ambiguous)"
+   ],
+   "prompt": "Describe an evening after a match.",
+   "text": "After the match ended we walked home together. My friend was tired, I was hungry. When we reached my house my mother had made dinner. We ate quickly then we watched a film.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.PUN.commas",
+     "kind": "error",
+     "quote": "After the match ended we walked",
+     "note": "A comma after an introductory clause helps; many teachers accept it without one.",
+     "misconception": "missing_intro_comma",
+     "optional": true
+    },
+    {
+     "competency": "EN.SEN.CMP.run_ons",
+     "kind": "error",
+     "quote": "My friend was tired, I was hungry",
+     "note": "Comma splice.",
+     "misconception": "comma_splice",
+     "acceptAlso": [
+      "EN.GRM.PUN.commas"
+     ]
+    },
+    {
+     "competency": "EN.GRM.PUN.commas",
+     "kind": "error",
+     "quote": "When we reached my house my mother",
+     "note": "A comma after the introductory clause is expected here.",
+     "misconception": "missing_intro_comma",
+     "optional": true
+    },
+    {
+     "competency": "EN.SEN.CMP.run_ons",
+     "kind": "error",
+     "quote": "We ate quickly then we watched",
+     "note": "Then cannot join two clauses on its own.",
+     "misconception": "fused_sentence"
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "had made dinner",
+     "why": "Correct past perfect."
+    }
+   ],
+   "words": 33
+  },
+  {
+   "id": "b14-clean-argument",
+   "focus": [
+    "correct writing",
+    "subordination and connectives used well"
+   ],
+   "prompt": "Should schools give homework?",
+   "text": "Although homework can feel tiring, it gives students a chance to practise what they learned in class. Teachers can see which topics need more explanation, and students can work at their own pace. However, too much homework leaves no time for rest or hobbies. Therefore, schools should set short, focused tasks rather than long ones.",
+   "annotations": [
+    {
+     "competency": "EN.SEN.CMB.subordination",
+     "kind": "strength",
+     "quote": "Although homework can feel tiring",
+     "note": "A subordinate clause sets up the concession clearly."
+    },
+    {
+     "competency": "EN.SEN.COH.connectives",
+     "kind": "strength",
+     "quote": "However, too much homework",
+     "note": "However marks the counter-argument."
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "practise",
+     "why": "British spelling of the verb."
+    },
+    {
+     "quote": "Therefore, schools should set",
+     "why": "A logical conclusion."
+    }
+   ],
+   "words": 55
+  },
+  {
+   "id": "b15-a-an",
+   "focus": [
+    "a/an by sound",
+    "countability"
+   ],
+   "prompt": "Write about yesterday after school.",
+   "text": "I had a ice cream and an banana after school. My teacher gave us an useful advice about exams. We need to bring a umbrella tomorrow because it may rain. An hour later, the sky was dark.",
+   "annotations": [
+    {
+     "competency": "EN.GRM.NOUN.articles",
+     "kind": "error",
+     "quote": "a ice cream",
+     "note": "An before a vowel sound.",
+     "misconception": "a_an_sound"
+    },
+    {
+     "competency": "EN.GRM.NOUN.articles",
+     "kind": "error",
+     "quote": "an banana",
+     "note": "A before a consonant sound.",
+     "misconception": "a_an_sound"
+    },
+    {
+     "competency": "EN.GRM.NOUN.articles",
+     "kind": "error",
+     "quote": "an useful advice",
+     "note": "Useful starts with a /j/ sound (a useful), and advice is uncountable (useful advice).",
+     "misconception": "a_an_sound"
+    },
+    {
+     "competency": "EN.GRM.NOUN.articles",
+     "kind": "error",
+     "quote": "a umbrella",
+     "note": "An before a vowel sound.",
+     "misconception": "a_an_sound"
+    }
+   ],
+   "must_not_flag": [
+    {
+     "quote": "An hour later",
+     "why": "An before a silent h is correct."
+    }
+   ],
+   "words": 37
+  }
+ ],
+ "rewrites": [
+  {
+   "id": "r01-good",
+   "essay": "b01-agreement",
+   "text": "Every morning my sister walks to school with her friends. She says the road is safe, but traffic near the market is heavy. My parents worry because the school bus is always full. The town needs a new bus route so that students reach school safely and on time.",
+   "reference": {
+    "meaning_preservation": "fully",
+    "grammar": "fully",
+    "coherence": "mostly",
+    "clarity": "fully",
+    "concision": "mostly"
+   },
+   "words": 49
+  },
+  {
+   "id": "r02-meaning-lost",
+   "essay": "b01-agreement",
+   "text": "My sister likes walking to school with her friends because it is good exercise and she enjoys talking with them. The road near the market is very beautiful in the morning. Everyone in our family enjoys walking together on weekends.",
+   "reference": {
+    "meaning_preservation": "not_yet",
+    "grammar": "fully",
+    "coherence": "mostly",
+    "clarity": "mostly",
+    "concision": "partly"
+   },
+   "words": 40
+  },
+  {
+   "id": "r03-grammar",
+   "essay": "b07-concision",
+   "text": "Reading books are very important because it help us learn new word and new idea. Many student do not read now. Every student should reads for twenty minutes each day.",
+   "reference": {
+    "meaning_preservation": "mostly",
+    "grammar": "not_yet",
+    "coherence": "mostly",
+    "clarity": "partly",
+    "concision": "fully"
+   },
+   "words": 30
+  }
+ ]
+}

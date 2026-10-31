@@ -1,0 +1,308 @@
+{
+ "version": "1.0.0",
+ "status": "provisional",
+ "goals": [
+  {
+   "id": "jee-advanced",
+   "name": "JEE Advanced",
+   "examTrack": "jee-advanced",
+   "status": "provisional",
+   "note": "An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",
+   "foundations": {
+    "strands": [
+     "number",
+     "algebra",
+     "reasoning",
+     "geometry"
+    ],
+    "note": "For younger learners: number sense, fractions, patterns, reasoning and proof-like thinking within their own grade."
+   },
+   "topics": [
+    {
+     "id": "algebra",
+     "competencies": [
+      "MATH.algebra.quadratics",
+      "MATH.algebra.quadratic-complex",
+      "MATH.algebra.arithmetic-sequences",
+      "MATH.algebra.binomial",
+      "MATH.algebra.permutations"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "calculus",
+     "competencies": [
+      "MATH.calculus.limits",
+      "MATH.calculus.derivative-rules",
+      "MATH.calculus.definite-integrals",
+      "MATH.calculus.area-integrals"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "coordinate",
+     "competencies": [
+      "MATH.coordinate.straight-lines",
+      "MATH.coordinate.conics"
+     ],
+     "weight": [
+      0.1,
+      0.25
+     ]
+    },
+    {
+     "id": "vectors-3d",
+     "competencies": [
+      "MATH.vectors.algebra",
+      "MATH.coordinate.space-lines"
+     ],
+     "weight": [
+      0.05,
+      0.2
+     ]
+    },
+    {
+     "id": "probability",
+     "competencies": [
+      "MATH.probability.conditional",
+      "MATH.probability.bayes"
+     ],
+     "weight": [
+      0.05,
+      0.15
+     ]
+    }
+   ],
+   "marking": {
+    "correct": 4,
+    "wrong": -1,
+    "note": "Varies by paper and section; a configurable default, not a claim about any year's paper."
+   },
+   "exam": {
+    "pattern": "example pattern (the paper changes every year; not authoritative)",
+    "verified": false,
+    "durationMinutes": 180,
+    "papers": 2,
+    "sections": [
+     {
+      "id": "single",
+      "format": "mcq-single",
+      "questions": 4,
+      "marking": {
+       "correct": 3,
+       "wrong": -1,
+       "blank": 0
+      }
+     },
+     {
+      "id": "multiple",
+      "format": "mcq-multiple",
+      "questions": 4,
+      "marking": {
+       "correct": 4,
+       "wrong": -2,
+       "blank": 0,
+       "partialPerOption": 1
+      }
+     },
+     {
+      "id": "numerical",
+      "format": "numerical",
+      "questions": 6,
+      "marking": {
+       "correct": 4,
+       "wrong": 0,
+       "blank": 0
+      }
+     }
+    ],
+    "note": "JEE Advanced changes its sections and marking every year: confirm against that year's official paper before use."
+   }
+  },
+  {
+   "id": "jee-main",
+   "name": "JEE Main",
+   "examTrack": "jee-main",
+   "status": "provisional",
+   "note": "An overlay on the shared graph. Weights are provisional ranges, not a fixed marks allocation.",
+   "foundations": {
+    "strands": [
+     "number",
+     "algebra",
+     "reasoning",
+     "geometry"
+    ],
+    "note": "As for JEE Advanced."
+   },
+   "topics": [
+    {
+     "id": "algebra",
+     "competencies": [
+      "MATH.algebra.quadratics",
+      "MATH.algebra.arithmetic-sequences",
+      "MATH.algebra.binomial"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "calculus",
+     "competencies": [
+      "MATH.calculus.limits",
+      "MATH.calculus.derivative-rules",
+      "MATH.calculus.definite-integrals"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "coordinate",
+     "competencies": [
+      "MATH.coordinate.straight-lines",
+      "MATH.coordinate.conics"
+     ],
+     "weight": [
+      0.1,
+      0.25
+     ]
+    }
+   ],
+   "marking": {
+    "correct": 4,
+    "wrong": -1,
+    "note": "NTA Information Bulletin JEE (Main) 2026: +4 / −1 / 0."
+   },
+   "exam": {
+    "pattern": "2026 (provisional)",
+    "verified": false,
+    "durationMinutes": 180,
+    "papers": 1,
+    "sections": [
+     {
+      "id": "A",
+      "format": "mcq-single",
+      "questions": 20,
+      "marking": {
+       "correct": 4,
+       "wrong": -1,
+       "blank": 0
+      }
+     },
+     {
+      "id": "B",
+      "format": "numerical",
+      "questions": 5,
+      "marking": {
+       "correct": 4,
+       "wrong": -1,
+       "blank": 0
+      },
+      "disputed": "Published summaries disagree on negative marking for Section B; confirm against the official NTA bulletin."
+     }
+    ],
+    "note": "Mathematics part only (the paper also has physics and chemistry)."
+   }
+  },
+  {
+   "id": "gre-quant",
+   "name": "GRE Quantitative",
+   "examTrack": "gre-quant",
+   "status": "provisional",
+   "note": "An overlay; weights provisional.",
+   "foundations": {
+    "strands": [
+     "number",
+     "algebra",
+     "statistics",
+     "geometry"
+    ],
+    "note": "Arithmetic, algebra, data analysis."
+   },
+   "topics": [
+    {
+     "id": "arithmetic",
+     "competencies": [
+      "MATH.number.percentage",
+      "MATH.number.ratio"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "algebra",
+     "competencies": [
+      "MATH.algebra.linear-equations",
+      "MATH.algebra.quadratics"
+     ],
+     "weight": [
+      0.2,
+      0.35
+     ]
+    },
+    {
+     "id": "data",
+     "competencies": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.dispersion"
+     ],
+     "weight": [
+      0.15,
+      0.3
+     ]
+    }
+   ],
+   "marking": {
+    "correct": 1,
+    "wrong": 0,
+    "note": "No negative marking."
+   },
+   "exam": {
+    "pattern": "shorter GRE (from September 2023; provisional)",
+    "verified": false,
+    "durationMinutes": 47,
+    "papers": 1,
+    "sections": [
+     {
+      "id": "quant-1",
+      "format": "mixed",
+      "questions": 12,
+      "marking": {
+       "correct": 1,
+       "wrong": 0,
+       "blank": 0
+      }
+     },
+     {
+      "id": "quant-2",
+      "format": "mixed",
+      "questions": 15,
+      "marking": {
+       "correct": 1,
+       "wrong": 0,
+       "blank": 0
+      }
+     }
+    ],
+    "formats": [
+     "quantitative comparison",
+     "multiple choice, one answer",
+     "multiple choice, one or more answers (all correct choices needed)",
+     "numeric entry"
+    ],
+    "note": "Section-level adaptive; scaled scores 130–170 are not modelled."
+   }
+  }
+ ]
+}

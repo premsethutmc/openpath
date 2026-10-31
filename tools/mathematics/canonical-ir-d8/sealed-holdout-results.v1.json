@@ -1,0 +1,698 @@
+{
+  "summary": {
+    "total": 60,
+    "matches": 60,
+    "falseUnifications": 0,
+    "falseSeparations": 0,
+    "p50Ms": 0.05635499999999993,
+    "p95Ms": 0.17764700000000033,
+    "byCategory": {
+      "notation": {
+        "matches": 12,
+        "total": 12
+      },
+      "function-derivative": {
+        "matches": 12,
+        "total": 12
+      },
+      "scope": {
+        "matches": 9,
+        "total": 9
+      },
+      "domain": {
+        "matches": 9,
+        "total": 9
+      },
+      "binding": {
+        "matches": 9,
+        "total": 9
+      },
+      "certificate": {
+        "matches": 9,
+        "total": 9
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "d8-notation-028",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 1.2081479999999996,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-029",
+      "category": "notation",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.09806700000000035,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"t\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"t\"},\"exponent\":3,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-030",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.1574069999999992,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"u\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"u\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-031",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.10062199999999955,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"index\":2,\"kind\":\"root\",\"radicand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"z\"}]}},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"index\":2,\"kind\":\"root\",\"radicand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"z\"}]}},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-032",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.03893799999999992,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"argument\":{\"kind\":\"variable\",\"name\":\"x\"},\"kind\":\"sin\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"argument\":{\"kind\":\"variable\",\"name\":\"x\"},\"kind\":\"sin\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-033",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.1260399999999997,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"t\"}]},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"t\"}]},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-034",
+      "category": "notation",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.04253399999999985,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"u\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"u\"},\"exponent\":3,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-035",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.029474999999999696,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"z\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"z\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-036",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.11941900000000061,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"index\":2,\"kind\":\"root\",\"radicand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]}},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"index\":2,\"kind\":\"root\",\"radicand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]}},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-037",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.03666500000000106,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"argument\":{\"kind\":\"variable\",\"name\":\"t\"},\"kind\":\"sin\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"argument\":{\"kind\":\"variable\",\"name\":\"t\"},\"kind\":\"sin\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-038",
+      "category": "notation",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.13153799999999904,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"u\"}]},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"u\"}]},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-notation-039",
+      "category": "notation",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.012088999999999572,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"z\"},\"exponent\":2,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"expression\":{\"base\":{\"kind\":\"variable\",\"name\":\"z\"},\"exponent\":3,\"kind\":\"power\"},\"kind\":\"expression\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-028",
+      "category": "function-derivative",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.1264599999999998,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"kind\":\"expression\"},\"functionName\":\"f\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"kind\":\"expression\"},\"functionName\":\"f\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-029",
+      "category": "function-derivative",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.23847899999999989,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"argument\":{\"expression\":{\"kind\":\"variable\",\"name\":\"t\"},\"kind\":\"expression\"},\"functionName\":\"g\",\"kind\":\"function-application\",\"result\":null},\"functionName\":\"g\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"variable\",\"name\":\"t\"},\"kind\":\"expression\"},\"functionName\":\"g\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-030",
+      "category": "function-derivative",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.17764700000000033,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"rate\",\"kind\":\"derivative\",\"order\":1,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"x\"}],\"kind\":\"multiply\"},\"variable\":\"x\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"rate\",\"kind\":\"derivative\",\"order\":1,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"x\"}],\"kind\":\"multiply\"},\"variable\":\"x\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-031",
+      "category": "function-derivative",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.10958499999999916,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"phi\",\"kind\":\"derivative\",\"order\":1,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"t\"}],\"kind\":\"multiply\"},\"variable\":\"t\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"phi\",\"kind\":\"derivative\",\"order\":2,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"t\"}],\"kind\":\"multiply\"},\"variable\":\"t\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-032",
+      "category": "function-derivative",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.10561899999999902,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"f\",\"kind\":\"derivative\",\"order\":1,\"partial\":true,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"x\"}],\"kind\":\"multiply\"},\"variable\":\"x\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"f\",\"kind\":\"derivative\",\"order\":1,\"partial\":true,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"x\"}],\"kind\":\"multiply\"},\"variable\":\"x\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-033",
+      "category": "function-derivative",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.08511800000000136,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"t\"}]},\"kind\":\"expression\"},\"functionName\":\"g\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"t\"}]},\"kind\":\"expression\"},\"functionName\":\"g\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-034",
+      "category": "function-derivative",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.06750100000000003,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"argument\":{\"expression\":{\"kind\":\"variable\",\"name\":\"x\"},\"kind\":\"expression\"},\"functionName\":\"g\",\"kind\":\"function-application\",\"result\":null},\"functionName\":\"rate\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"variable\",\"name\":\"x\"},\"kind\":\"expression\"},\"functionName\":\"rate\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-035",
+      "category": "function-derivative",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.04242400000000046,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"phi\",\"kind\":\"derivative\",\"order\":1,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"t\"}],\"kind\":\"multiply\"},\"variable\":\"t\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"phi\",\"kind\":\"derivative\",\"order\":1,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"t\"}],\"kind\":\"multiply\"},\"variable\":\"t\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-036",
+      "category": "function-derivative",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.08369599999999977,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"f\",\"kind\":\"derivative\",\"order\":1,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"x\"}],\"kind\":\"multiply\"},\"variable\":\"x\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"f\",\"kind\":\"derivative\",\"order\":2,\"partial\":false,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"x\"}],\"kind\":\"multiply\"},\"variable\":\"x\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-037",
+      "category": "function-derivative",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.07179800000000114,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"g\",\"kind\":\"derivative\",\"order\":1,\"partial\":true,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"t\"}],\"kind\":\"multiply\"},\"variable\":\"t\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"evaluationPoint\":null,\"functionName\":\"g\",\"kind\":\"derivative\",\"order\":1,\"partial\":true,\"result\":{\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"variable\",\"name\":\"t\"}],\"kind\":\"multiply\"},\"variable\":\"t\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-038",
+      "category": "function-derivative",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.0672309999999996,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"kind\":\"expression\"},\"functionName\":\"rate\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"kind\":\"expression\"},\"functionName\":\"rate\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-function-derivative-039",
+      "category": "function-derivative",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.040760999999999825,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"argument\":{\"expression\":{\"kind\":\"variable\",\"name\":\"t\"},\"kind\":\"expression\"},\"functionName\":\"g\",\"kind\":\"function-application\",\"result\":null},\"functionName\":\"phi\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"natural-relation\",\"outstandingObligations\":[],\"semantic\":{\"argument\":{\"expression\":{\"kind\":\"variable\",\"name\":\"t\"},\"kind\":\"expression\"},\"functionName\":\"phi\",\"kind\":\"function-application\",\"result\":null},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-021",
+      "category": "scope",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.3537430000000015,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"base\":{\"kind\":\"variable\",\"name\":\"$bound:0\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"base\":{\"kind\":\"variable\",\"name\":\"$bound:0\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-022",
+      "category": "scope",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.0584680000000013,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"x\"},{\"kind\":\"variable\",\"name\":\"y\"}]},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"x\"},{\"kind\":\"variable\",\"name\":\"z\"}]},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-023",
+      "category": "scope",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.03406200000000226,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"$bound:0\"},{\"kind\":\"variable\",\"name\":\"u\"}]}},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"$bound:0\"},{\"kind\":\"variable\",\"name\":\"$bound:0\"}]}},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-024",
+      "category": "scope",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.024226999999999776,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"base\":{\"kind\":\"variable\",\"name\":\"$bound:0\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"base\":{\"kind\":\"variable\",\"name\":\"$bound:0\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-025",
+      "category": "scope",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.022133999999997656,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"x\"},{\"kind\":\"variable\",\"name\":\"y\"}]},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"x\"},{\"kind\":\"variable\",\"name\":\"z\"}]},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-026",
+      "category": "scope",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.04683999999999955,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"$bound:0\"},{\"kind\":\"variable\",\"name\":\"u\"}]}},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"$bound:0\"},{\"kind\":\"variable\",\"name\":\"$bound:0\"}]}},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-027",
+      "category": "scope",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.0326190000000004,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"base\":{\"kind\":\"variable\",\"name\":\"$bound:0\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"base\":{\"kind\":\"variable\",\"name\":\"$bound:0\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-028",
+      "category": "scope",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.018518000000000256,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"x\"},{\"kind\":\"variable\",\"name\":\"y\"}]},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"x\"},{\"kind\":\"variable\",\"name\":\"z\"}]},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-scope-029",
+      "category": "scope",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.056003999999997944,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"$bound:0\"},{\"kind\":\"variable\",\"name\":\"u\"}]}},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"integral\",\"outstandingObligations\":[],\"semantic\":{\"boundVariable\":\"$bound:0\",\"integrand\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"variable\",\"name\":\"$bound:0\"},{\"kind\":\"variable\",\"name\":\"$bound:0\"}]}},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-021",
+      "category": "domain",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.1566459999999985,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-022",
+      "category": "domain",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.06101199999999807,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-023",
+      "category": "domain",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.07526300000000319,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"complex:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-024",
+      "category": "domain",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.06271399999999971,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-025",
+      "category": "domain",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.10266400000000075,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-026",
+      "category": "domain",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.06178299999999837,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"complex:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-027",
+      "category": "domain",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.09550300000000078,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-028",
+      "category": "domain",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.053640000000001464,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-domain-029",
+      "category": "domain",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.06530799999999815,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}",
+      "rightIdentity": "{\"assumptions\":[\"complex:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[\"nonzero:x-1\"],\"mathematicalType\":\"symbolic-expression\",\"outstandingObligations\":[],\"semantic\":{\"factors\":[{\"base\":{\"kind\":\"add\",\"terms\":[{\"kind\":\"constant\",\"value\":\"-1\"},{\"kind\":\"variable\",\"name\":\"x\"}]},\"exponent\":-1,\"kind\":\"power\"},{\"kind\":\"add\",\"terms\":[{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},{\"kind\":\"constant\",\"value\":\"-1\"}]}],\"kind\":\"multiply\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-binding-021",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.059540000000001925,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-b\"},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-binding-022",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.01841800000000049,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"probability\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-binding-023",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.016846000000001027,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-binding-024",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.01488300000000109,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[\"prove:x>0\"],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-binding-025",
+      "category": "binding",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.016163999999999845,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-binding-026",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.013018999999999892,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-b\"},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-binding-027",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.01072600000000179,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"probability\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-binding-028",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.01127699999999976,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-binding-029",
+      "category": "binding",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.020890999999998883,
+      "leftIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[],\"domainRestrictions\":[],\"mathematicalType\":\"exact-scalar\",\"outstandingObligations\":[\"prove:x>0\"],\"semantic\":\"3\",\"symbol\":{\"name\":\"x\",\"scope\":\"stage-a\"},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-021",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.1723700000000008,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":3,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-022",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.022643999999999664,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-023",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.05635499999999993,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"forged\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-024",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.01788699999999821,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}"
+    },
+    {
+      "id": "d8-certificate-025",
+      "category": "certificate",
+      "expected": true,
+      "actual": true,
+      "match": true,
+      "error": null,
+      "ms": 0.11433200000000099,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-026",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.03704500000000266,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":3,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-027",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.027491000000001264,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-028",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.023845999999998924,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"forged\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}"
+    },
+    {
+      "id": "d8-certificate-029",
+      "category": "certificate",
+      "expected": false,
+      "actual": false,
+      "match": true,
+      "error": null,
+      "ms": 0.043575000000000585,
+      "leftIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"verified\"}",
+      "rightIdentity": "{\"assumptions\":[\"real:x\"],\"contractVersion\":\"openpath-canonical-mathematical-ir@1\",\"dependencies\":[\"problem\"],\"domainRestrictions\":[],\"mathematicalType\":\"proof-claim\",\"outstandingObligations\":[],\"semantic\":{\"after\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"},\"before\":{\"base\":{\"kind\":\"variable\",\"name\":\"x\"},\"exponent\":2,\"kind\":\"power\"}},\"verificationStatus\":\"unverified\"}"
+    }
+  ]
+}

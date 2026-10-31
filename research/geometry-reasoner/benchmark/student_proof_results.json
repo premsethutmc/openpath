@@ -1,0 +1,20 @@
+{
+  "corpus": "student-complete-proofs@1",
+  "proofs": 90,
+  "final_verdict_correct": 90,
+  "first_invalid_step_correct": 90,
+  "false_acceptance": 0,
+  "false_rejection": 0,
+  "elapsed_seconds": 0.01208,
+  "categories": {
+    "alternative-valid-route": 10,
+    "circular-proof": 10,
+    "correct-proof": 10,
+    "degenerate-configuration": 10,
+    "incomplete-proof": 10,
+    "incorrect-intermediate": 10,
+    "missing-assumption": 10,
+    "redundant-valid": 10,
+    "unsupported-theorem": 10
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "extends": "./tsconfig.english.json",
+  "compilerOptions": {
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/mathematics/canonical.test.ts",
+    "../packages/mathematics/src/canonical.ts",
+    "src/mathematics/journey",
+    "../packages/mathematics/src/chapter.ts",
+    "src/mathematics/chapter",
+    "../packages/mathematics/src/unit.ts",
+    "src/mathematics/unit",
+    "src/globals.d.ts",
+    "src/mathematics/foundation",
+    "src/year",
+    "src/learning",
+    "src/review",
+    "src/curriculum",
+    "../packages/learning/src",
+    "../packages/learning/scripts",
+    "../tools/mathematics/prerequisite-report.mts",
+    "../tools/mathematics/fingerprint-portability.mts",
+    "src/writing",
+    "src/journey"
+  ],
+  "exclude": [
+    "../packages/learning/src/e7-finalisation.test.ts",
+    "../packages/learning/src/e7-safety-invariants.test.ts",
+    "../packages/learning/src/grading-audit.test.ts",
+    "../packages/learning/src/grading/e7-integration-gate.test.ts",
+    "../packages/learning/src/grading/process-shadow.test.ts"
+  ]
+}

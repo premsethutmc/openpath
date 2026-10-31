@@ -1,0 +1,79 @@
+{
+ "mutants": 2000,
+ "thrown": 0,
+ "nonVerifiedBecameVerified": 14,
+ "slowOver2s": 0,
+ "maxMs": 38,
+ "details": [
+  {
+   "id": "e6-035",
+   "text": "d/dx[x sin(x)] = sin(x) + x cos(x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-035",
+   "text": "d/dx[x sin(x)] = sin(x) + x cos(x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-036",
+   "text": "u = x^2 + 1\ny = ln(u)\ndy/du = 1/u\ndy/dx = 2*x/(x^2 + 1)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-043",
+   "text": "d/dx[x^2 sin(x)] = x^2 cos(x) + sin(x)*(2x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-043",
+   "text": "d/dx[x^2 sin(x)] = x^2 cos(x) + sin(x)*(2x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-043",
+   "text": "d/dx[x^2 sin(x)] = x^2 cos(x) + sin(x)*(2x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-043",
+   "text": "d/dx[x^2 sin(x)] = x^2 cos(x) + sin(x)*(2x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-043",
+   "text": "d/dx[x^2 sin(x)] = x^2 cos(x) + sin(x)*(2x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-043",
+   "text": "d/dx[x^2 sin(x)] = x^2 cos(x) + sin(x)*(2x)",
+   "got": "verified"
+  },
+  {
+   "id": "e6-047",
+   "text": "d/dx[ln(x^2 + 1)] = 1/(x^2 + 1)*2*x",
+   "got": "verified"
+  },
+  {
+   "id": "e6-190",
+   "text": "P(A|B) = P(A∩B)/P(B) = 1/8/(1/2) = 1/4",
+   "got": "verified"
+  },
+  {
+   "id": "e6-190",
+   "text": "P(A|B) = P(A∩B)/P(B) = 1/8/(1/2) = 1/4",
+   "got": "verified"
+  },
+  {
+   "id": "e6-237",
+   "text": "i²⁷ = -i",
+   "got": "verified"
+  },
+  {
+   "id": "e6-237",
+   "text": "i²⁷ = -i",
+   "got": "verified"
+  }
+ ]
+}

@@ -1,0 +1,93 @@
+[
+ {
+  "kind": "contradiction",
+  "name": "student x>0 against task restriction x<0",
+  "classification": "invalid",
+  "why": "line 1: the assumed condition \"x > 0\" contradicts the task restriction (task restrictions are immutable; a student assumption cannot replace them)",
+  "context": null
+ },
+ {
+  "kind": "contradiction",
+  "name": "student x<1 against the implied domain of ln(x-1)",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "disjoint-domain",
+  "name": "student x>0 against task alternatives x<0 | x>0",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "disjoint-domain",
+  "name": "no student assumption, both alternatives kept",
+  "classification": "verified",
+  "why": "all 1 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "implied",
+  "name": "student restates the implied restriction x>1",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "new-quantity",
+  "name": "student introduces k>0 unrelated to x",
+  "classification": "malformed",
+  "why": "line(s) 1 could not be verified (malformed); the submission cannot be certified",
+  "context": null
+ },
+ {
+  "kind": "scoping",
+  "name": "task with no stated domain, student scopes to x>0",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "missing-scenario",
+  "name": "scenario quantities exist only in the working",
+  "classification": "incomplete",
+  "why": "finish with the requested quantity as a single reduced number",
+  "context": null
+ },
+ {
+  "kind": "missing-scenario",
+  "name": "only the expected value is given",
+  "classification": "unsupported",
+  "why": "line(s) 1 could not be verified (unsupported); the submission cannot be certified",
+  "context": null
+ },
+ {
+  "kind": "unreadable-restriction",
+  "name": "typed restriction no route can read",
+  "classification": "verified",
+  "why": "all 1 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta by c/a under a stated real-coefficient assumption",
+  "classification": "verified",
+  "why": "all 2 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta by roots",
+  "classification": "verified",
+  "why": "all 3 submitted line(s) are accounted for and verified",
+  "context": null
+ },
+ {
+  "kind": "false-accept-guard",
+  "name": "Vieta unrelated arithmetic under the same assumption",
+  "classification": "incomplete",
+  "why": "finish with the requested quantity as a single reduced number",
+  "context": null
+ }
+]

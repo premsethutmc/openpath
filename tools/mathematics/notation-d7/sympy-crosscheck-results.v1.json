@@ -1,0 +1,509 @@
+{
+  "oracle": "SymPy 1.14.0",
+  "total": 100,
+  "passed": 100,
+  "failed": 0,
+  "elapsedMs": 194.2897099943366,
+  "results": [
+    {
+      "id": "derivative-0",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-1",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-2",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-3",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-4",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-5",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-6",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-7",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-8",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-9",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-10",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-11",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-12",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-13",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-14",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-15",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-16",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-17",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-18",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-19",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-20",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-21",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-22",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-23",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-24",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-25",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-26",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-27",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-28",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-29",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-30",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-31",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-32",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-33",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-34",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-35",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-36",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-37",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-38",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-39",
+      "kind": "derivative",
+      "passed": true
+    },
+    {
+      "id": "unary-0",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-1",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-2",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-3",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-4",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-5",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-6",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-7",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-8",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-9",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-10",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-11",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-12",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-13",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-14",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-15",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-16",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-17",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-18",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "unary-19",
+      "kind": "precedence",
+      "passed": true
+    },
+    {
+      "id": "trig-0",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-1",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-2",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-3",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-4",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-5",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-6",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-7",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-8",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-9",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-10",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-11",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-12",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-13",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-14",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-15",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-16",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-17",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-18",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "trig-19",
+      "kind": "function-power",
+      "passed": true
+    },
+    {
+      "id": "radical-0",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-1",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-2",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-3",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-4",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-5",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-6",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-7",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-8",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-9",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-10",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-11",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-12",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-13",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-14",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-15",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-16",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-17",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-18",
+      "kind": "equivalent-notation",
+      "passed": true
+    },
+    {
+      "id": "radical-19",
+      "kind": "equivalent-notation",
+      "passed": true
+    }
+  ]
+}

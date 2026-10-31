@@ -1,0 +1,16 @@
+{
+  "version": "math-m1-u2-integration-performance@1",
+  "coldPoolStartupMs": 48.257,
+  "requests": 500,
+  "verified": 500,
+  "concurrent500Ms": 445.272,
+  "throughputPerSecond": 1122.91,
+  "latencyMs": { "p50": 3.232013, "p95": 5.169439, "p99": 11.677142 },
+  "queueWaitMs": { "p50": 236.46776, "p95": 416.863387, "p99": 433.360504 },
+  "queueDepthHighWater": 496,
+  "workerStarts": 4,
+  "workerMaxRssKb": [32312, 34232, 34232, 36792],
+  "recoveryMs": 44.036,
+  "recovered": "verified",
+  "failures": { "worker-crash": 1 }
+}

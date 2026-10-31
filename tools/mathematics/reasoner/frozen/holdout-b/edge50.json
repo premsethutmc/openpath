@@ -1,0 +1,267 @@
+[
+ {
+  "text": "x+14=x+20",
+  "class": "no-solution",
+  "id": "e00"
+ },
+ {
+  "text": "3*x-15=3*x-24",
+  "class": "no-solution",
+  "id": "e01"
+ },
+ {
+  "text": "-6*x-5=-6*x-13",
+  "class": "no-solution",
+  "id": "e02"
+ },
+ {
+  "text": "7*x+14=7*x+21",
+  "class": "no-solution",
+  "id": "e03"
+ },
+ {
+  "text": "6*x+8=6*x+10",
+  "class": "no-solution",
+  "id": "e04"
+ },
+ {
+  "text": "8*x-12=8*x-4",
+  "class": "no-solution",
+  "id": "e05"
+ },
+ {
+  "text": "8*x+9=8*x+3",
+  "class": "no-solution",
+  "id": "e06"
+ },
+ {
+  "text": "8*x-4=8*x-11",
+  "class": "no-solution",
+  "id": "e07"
+ },
+ {
+  "text": "3*x-11=3*x-17",
+  "class": "no-solution",
+  "id": "e08"
+ },
+ {
+  "text": "8*x-10=8*x-4",
+  "class": "no-solution",
+  "id": "e09"
+ },
+ {
+  "text": "9*x+7=9*x+11",
+  "class": "no-solution",
+  "id": "e10"
+ },
+ {
+  "text": "2*x-8=2*x-17",
+  "class": "no-solution",
+  "id": "e11"
+ },
+ {
+  "text": "-2*x-15=-2*x-24",
+  "class": "no-solution",
+  "id": "e12"
+ },
+ {
+  "text": "-8*x-13=-8*x-14",
+  "class": "no-solution",
+  "id": "e13"
+ },
+ {
+  "text": "-3*x-8=-3*x",
+  "class": "no-solution",
+  "id": "e14"
+ },
+ {
+  "text": "9*x+8=9*x+9",
+  "class": "no-solution",
+  "id": "e15"
+ },
+ {
+  "text": "2*x-7=2*x",
+  "class": "no-solution",
+  "id": "e16"
+ },
+ {
+  "text": "-6*x-14=-6*x-9",
+  "class": "no-solution",
+  "id": "e17"
+ },
+ {
+  "text": "4*x-14=4*x-11",
+  "class": "no-solution",
+  "id": "e18"
+ },
+ {
+  "text": "-6*x-15=-6*x-13",
+  "class": "no-solution",
+  "id": "e19"
+ },
+ {
+  "text": "-7*(x+12)=-7*x-84",
+  "class": "identity",
+  "id": "e20"
+ },
+ {
+  "text": "7*(x+8)=7*x+56",
+  "class": "identity",
+  "id": "e21"
+ },
+ {
+  "text": "7*(x-12)=7*x-84",
+  "class": "identity",
+  "id": "e22"
+ },
+ {
+  "text": "-8*(x-9)=-8*x+72",
+  "class": "identity",
+  "id": "e23"
+ },
+ {
+  "text": "7*(x-3)=7*x-21",
+  "class": "identity",
+  "id": "e24"
+ },
+ {
+  "text": "5*(x+4)=5*x+20",
+  "class": "identity",
+  "id": "e25"
+ },
+ {
+  "text": "2*(x-8)=2*x-16",
+  "class": "identity",
+  "id": "e26"
+ },
+ {
+  "text": "2*(x+2)=2*x+4",
+  "class": "identity",
+  "id": "e27"
+ },
+ {
+  "text": "-5*(x-3)=-5*x+15",
+  "class": "identity",
+  "id": "e28"
+ },
+ {
+  "text": "-9*(x+11)=-9*x-99",
+  "class": "identity",
+  "id": "e29"
+ },
+ {
+  "text": "x*x-4*x=0",
+  "class": "unsupported-nonlinear",
+  "id": "e30"
+ },
+ {
+  "text": "x*(x-3)=-15",
+  "class": "unsupported-nonlinear",
+  "id": "e31"
+ },
+ {
+  "text": "x^2+3=-18",
+  "class": "unsupported-nonlinear",
+  "id": "e32"
+ },
+ {
+  "text": "x^2-1=9",
+  "class": "unsupported-nonlinear",
+  "id": "e33"
+ },
+ {
+  "text": "x^2-4=22",
+  "class": "unsupported-nonlinear",
+  "id": "e34"
+ },
+ {
+  "text": "x^2-6=27",
+  "class": "unsupported-nonlinear",
+  "id": "e35"
+ },
+ {
+  "text": "x*x-5*x=0",
+  "class": "unsupported-nonlinear",
+  "id": "e36"
+ },
+ {
+  "text": "x^2-6=-3",
+  "class": "unsupported-nonlinear",
+  "id": "e37"
+ },
+ {
+  "text": "x^2+8=10",
+  "class": "unsupported-nonlinear",
+  "id": "e38"
+ },
+ {
+  "text": "x^2-4=-13",
+  "class": "unsupported-nonlinear",
+  "id": "e39"
+ },
+ {
+  "text": "(2*x)/x=9+1",
+  "class": "no-solution",
+  "id": "e40"
+ },
+ {
+  "text": "1/(x+4)=2",
+  "class": "unsupported-variable-denominator",
+  "id": "e41"
+ },
+ {
+  "text": "(7*x)/x=1+1",
+  "class": "no-solution",
+  "id": "e42"
+ },
+ {
+  "text": "3/(x+2)=2",
+  "class": "unsupported-variable-denominator",
+  "id": "e43"
+ },
+ {
+  "text": "1/x+9=8",
+  "class": "unsupported-variable-denominator",
+  "id": "e44"
+ },
+ {
+  "text": "1/x=6",
+  "class": "unsupported-variable-denominator",
+  "id": "e45"
+ },
+ {
+  "text": "1/x+8=3",
+  "class": "unsupported-variable-denominator",
+  "id": "e46"
+ },
+ {
+  "text": "3/(x+5)=2",
+  "class": "unsupported-variable-denominator",
+  "id": "e47"
+ },
+ {
+  "text": "5/x=3",
+  "class": "unsupported-variable-denominator",
+  "id": "e48"
+ },
+ {
+  "text": "(8*x)/x=3+1",
+  "class": "no-solution",
+  "id": "e49"
+ },
+ {
+  "text": "7/x=4",
+  "class": "unsupported-variable-denominator",
+  "id": "e50"
+ },
+ {
+  "text": "5/(x+3)=2",
+  "class": "unsupported-variable-denominator",
+  "id": "e51"
+ },
+ {
+  "text": "1/x+7=4",
+  "class": "unsupported-variable-denominator",
+  "id": "e52"
+ }
+]

@@ -1,0 +1,3875 @@
+{
+ "benchmark": "openpath-e4-verified-coverage",
+ "version": "1",
+ "seed": 20261101,
+ "cases": [
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-common-denominator/wrong_clear",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "1/(x + 1) + 1/(x - 5) = 4/((x + 1)(x - 5))"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "1/(x + 1) + 1/(x - 5) = 4/((x + 1)(x - 5))\n(x - 5) + (x + 1) = 5\n2x - 4 = 4\nx = 4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "invalid",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_clear"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-000",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-substitution/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3x - 2y = 0 and 3x - y = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3x - 2y = 0\n3x - y = 0\ny = 3x\n-2(3x) + 3x = 0\n-3x = 0\n-3x = 0\nx = 0\ny = 3*0\ny = 0\nx = 0 and y = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-001",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-substitution/only_first",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-2m - 3n = -7 and -m - 4n = -6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-2m - 3n = -7\n-m - 4n = -6\nm = 6 - 4n\n-2(6 - 4n) - 3n = -7\n5n - 12 = -7\n5n = 5\nn = 1"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "only_first"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-002",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/ok_short",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(-5x + 29) = x - 3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(-5x + 29) = x - 3\n-5x + 29 = (x - 3)^2\nx^2 - x - 20 = 0\nx = 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_short"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-003",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "evaluation/wrong_final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "s^2 - st + t^2 when s = 1 and t = 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "s^2 - st + t^2\n1*1^2 + (-1)*1*1 + 1*1^2\n1 + (-1) + 1\n2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     3
+    ],
+    "firstInvalidStep": 3,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_final"
+    ],
+    "derivation": "oracle-derived: every line evaluated exactly under the stated bindings"
+   },
+   "id": "e4-sealed-004",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-hole/stop",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 1)/(x - 1) = x + 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 1)/(x - 1) = x + 1\nx + 1 = x + 1"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "stop"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-005",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-simple/hole_nosol",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x/(x - 1) = 1/(x - 1)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x/(x - 1) = 1/(x - 1)\nx = 1\nno solution"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "hole_nosol"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-006",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "alt:rational-multiply-through",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x - 2)/(x - 4) = 3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x - 2)/(x - 4) = 3\nx - 2 = 3(x - 4)\nx - 2 = 3x - 12\n-2x = -10\nx = 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-007",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-cross-multiply/wrong_expand",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x)/(x + 4) = (x - 2)/(x + 1)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x)/(x + 4) = (x - 2)/(x + 1)\n(x)(x + 1) = (x - 2)(x + 4)\nx^2 + x + 1 = x^2 + 2x - 8\n-x = -8\nx = 8"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "invalid",
+     "invalid",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_expand"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-008",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic-formula/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 2x - 4 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 2x - 4 = 0\nx = (2 + sqrt(20))/2 or x = (2 - sqrt(20))/2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok",
+     "irrational"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-009",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-common-denominator/nosol_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "1/(x - 5) + 1/(x + 2) = -7/((x - 5)(x + 2))"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "1/(x - 5) + 1/(x + 2) = -7/((x - 5)(x + 2))\n(x + 2) + (x - 5) = -7\n2x - 3 = -7\nx = -2\nno solution"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "nosol_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-010",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-shared-denominator/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 8)/(x) = (5x - 8)/(x)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 8)/(x) = (5x - 8)/(x)\nx^2 - 8 = 5x - 8\nx^2 - 5x = 0\nx(x - 5) = 0\nx = 0 or x = 5\nx = 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-011",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "polynomial-quadratic/wrong_fac",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 10x + 24 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 10x + 24 = 0\n(x + 4)(x - 6) = 0\nx = 4 or x = 6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_fac"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-012",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-equal/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(4x + 4) = sqrt(2x + 4)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(4x + 4) = sqrt(2x + 4)\n4x + 4 = 2x + 4\n2x = 0\nx = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-013",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic/missing",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 2x - 8 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 2x - 8 = 0\n(x + 2)(x - 4) = 0\nx = -2"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "narrowing-lost"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "missing"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-014",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic/wrong_fac",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - x - 6 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - x - 6 = 0\n(x + 3)(x + 2) = 0\nx = 3 or x = -2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_fac"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-015",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-hole/missing",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 1)/(x + 1) = x - 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 1)/(x + 1) = x - 1\nx - 1 = x - 1\nthis holds for all x"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "universal-claim"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "missing"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-016",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/keep_ext",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(2x + 28) = x + 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(2x + 28) = x + 2\n2x + 28 = (x + 2)^2\nx^2 + 2x - 24 = 0\n(x - 4)(x + 6) = 0\nx = 4 or x = -6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "keep_ext"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-017",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "evaluation/wrong_line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - xy + y^2 when x = -2 and y = -3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - xy + y^2\n1*(-2)^2 + (-1)*(-2)*(-3) + 1*(-3)^2\n5 + (-6) + 9\n7"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_line"
+    ],
+    "derivation": "oracle-derived: every line evaluated exactly under the stated bindings"
+   },
+   "id": "e4-sealed-018",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-elimination/ok_noecho",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "u + v = -5 and 3u + 2v = -12"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u + v = -5\n3u + 2v = -12\n3u + 3v = -15\n3u + 2v = -12\nv = -3\nv = -3\nu = -2\nu = -2 and v = -3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_noecho"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-019",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-common-denominator/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "1/(x + 3) + 1/(x + 2) = -3/((x + 3)(x + 2))"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "1/(x + 3) + 1/(x + 2) = -3/((x + 3)(x + 2))\n(x + 2) + (x + 3) = -3\n2x + 5 = -3\nx = -4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-020",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-degenerate/incons_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x - y = 6 and 3x - 3y = 19"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x - y = 6\n3x - 3y = 19\n3x - 3y = 18\n0 = 1\nno solution"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "incons_ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-021",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "alt:radical-other-radical-first",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 18) + sqrt(x + 3) = 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 18) + sqrt(x + 3) = 5\nsqrt(x + 3) = 5 - sqrt(x + 18)\nx + 3 = 25 - 10*sqrt(x + 18) + x + 18\n10*sqrt(x + 18) = 40\nsqrt(x + 18) = 4\nx + 18 = 16\nx = -2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-022",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-substitution/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-s - 4t = -17 and -4s + 2t = -14"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-s - 4t = -17\n-4s + 2t = -14\ns = 17 - 4t\n-4(17 - 4t) + 2t = -14\n18t - 68 = -14\n18t = 54\nt = 3\ns = 17 - 4*3\ns = 5\ns = 5 and t = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-023",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "rational-shared-denominator/wrong_clear",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 1)/(x + 4) = (-7x - 13)/(x + 4)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 1)/(x + 4) = (-7x - 13)/(x + 4)\nx^2 - 1 = -7x + 13\nx^2 + 7x + 12 = 0\n(x + 4)(x + 3) = 0\nx = -4 or x = -3\nx = -3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "invalid",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_clear"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-024",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/keep_ext",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(2x + 7) = x - 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(2x + 7) = x - 4\n2x + 7 = (x - 4)^2\nx^2 - 10x + 9 = 0\n(x - 9)(x - 1) = 0\nx = 9 or x = 1"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "keep_ext"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-025",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "radical-linear/wrong_sq",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(2x + 13) = x - 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(2x + 13) = x - 1\n2x + 13 = x^2 + 1\nx^2 - 4x - 12 = 0\n(x - 6)(x + 2) = 0\nx = 6 or x = -2\nx = 6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "invalid",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sq"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-026",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-cross-multiply/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x + 6)/(x - 1) = (x - 4)/(x + 3)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x + 6)/(x - 1) = (x - 4)/(x + 3)\n(x + 6)(x + 3) = (x - 4)(x - 1)\nx^2 + 9x + 18 = x^2 - 5x + 4\n14x = -14\nx = -1"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-027",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-two/skip_half",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 2) + sqrt(x - 7) = 3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 2) + sqrt(x - 7) = 3\nsqrt(x + 2) = 3 - sqrt(x - 7)\nx + 2 = 9 - 6*sqrt(x - 7) + x - 7\nsqrt(x - 7) = 0\nx - 7 = 0\nx = 7"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "skip_half"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-028",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/wrong_sq",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(3x + 22) = x - 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(3x + 22) = x - 2\n3x + 22 = x^2 + 4\nx^2 - 7x - 18 = 0\n(x - 9)(x + 2) = 0\nx = 9 or x = -2\nx = 9"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "invalid",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sq"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-029",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-quadratic-radicand/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x^2 + 3x) = x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x^2 + 3x) = x\nx^2 + 3x = (x)^2\n3x = 0\nx = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-030",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic/fac_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 9x + 20 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 9x + 20 = 0\n(x - 4)(x - 5) = 0\nx = 4 or x = 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "fac_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-031",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-sqrt-branch/pm_one_branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 = 196"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 = 196\nx = \u00b114\nx = 14"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "narrowing-lost"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "pm_one_branch"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-032",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-higher/cubic_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^3 - 3x^2 + 2x = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^3 - 3x^2 + 2x = 0\n(x - 2)(x - 1)x = 0\nx = 0 or x = 1 or x = 2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "cubic_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-033",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-sqrt-branch/sqrt_one_branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 = 841"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 = 841\nx = 29"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "narrowing-lost"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "sqrt_one_branch"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-034",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-higher/double_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^3 - 15x^2 + 75x - 125 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^3 - 15x^2 + 75x - 125 = 0\n(x - 5)(x - 5)(x - 5) = 0\nx = 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "double_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-035",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/both_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(5x - 15) = x - 3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(5x - 15) = x - 3\n5x - 15 = (x - 3)^2\nx^2 - 11x + 24 = 0\n(x - 3)(x - 8) = 0\nx = 8 or x = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "both_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-036",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-hole/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 16)/(x + 4) = x - 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 16)/(x + 4) = x - 4\nx - 4 = x - 4\nx != -4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-037",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-common-denominator/ok_restr",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "1/(x - 5) + 1/(x - 2) = 7/((x - 5)(x - 2))"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "1/(x - 5) + 1/(x - 2) = 7/((x - 5)(x - 2))\n(x - 2) + (x - 5) = 7, x != 5\n2x - 7 = 7\nx = 7"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_restr"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-038",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-quadratic-radicand/wrong_sq",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x^2 - 1) = x + 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x^2 - 1) = x + 1\nx^2 - 1 = x^2 + 1\n-2x = 2\nx = -1"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "widening",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sq"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-039",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-two/wrong_final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 20) + sqrt(x - 4) = 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 20) + sqrt(x - 4) = 6\nsqrt(x + 20) = 6 - sqrt(x - 4)\nx + 20 = 36 - 12*sqrt(x - 4) + x - 4\n12*sqrt(x - 4) = 12\nsqrt(x - 4) = 1\nx - 4 = 1\nx = 6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     6
+    ],
+    "firstInvalidStep": 6,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_final"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-040",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-elimination/wrong_final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-4x + y = -20 and -4x + 3y = -20"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-4x + y = -20\n-4x + 3y = -20\n4x - y = 20\n4x - 3y = 20\n2y = 0\ny = 0\n-4x + 1*0 = -20\n-4x = -20\nx = 5\nx = 5 and y = 1"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     9
+    ],
+    "firstInvalidStep": 9,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_final"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-041",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-substitution/wrong_expand",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x + 3y = 6 and -2x + 3y = 15"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x + 3y = 6\n-2x + 3y = 15\nx = 6 - 3y\n-2(6 - 3y) + 3y = 15\n9y - 11 = 15\n9y = 27\ny = 3\nx = 6 - 3*3\nx = -3\nx = -3 and y = 3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_expand"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-042",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic/fac_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 8x + 15 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 8x + 15 = 0\n(x + 5)(x + 3) = 0\nx = -5 or x = -3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "fac_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-043",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "radical-two/wrong_sq1",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x - 2) + sqrt(x - 5) = 3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x - 2) + sqrt(x - 5) = 3\nsqrt(x - 2) = 3 - sqrt(x - 5)\nx - 2 = 9 + x - 5\n6*sqrt(x - 5) = 6\nsqrt(x - 5) = 1\nx - 5 = 1\nx = 6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "invalid",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sq1"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-044",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "polynomial-quadratic/fac_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 2x - 15 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 2x - 15 = 0\n(x + 5)(x - 3) = 0\nx = -5 or x = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "fac_ok",
+     "pool-alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-045",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "radical-linear/ok_full",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(-6x + 19) = x - 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(-6x + 19) = x - 2\n-6x + 19 = (x - 2)^2\nx^2 + 2x - 15 = 0\n(x - 3)(x + 5) = 0\nx = 3 or x = -5\nx = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_full",
+     "pool-alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-046",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-degenerate/dep_param_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x + y = 3 and 2x + 2y = 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x + y = 3\n2x + 2y = 6\ny = 3 - x"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "dep_param_ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-047",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-elimination/incomplete_x_only",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-u - 4v = 7 and u + v = 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-u - 4v = 7\nu + v = 2\nu + 4v = -7\nu + v = 2\n3v = -9\nv = -3"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "incomplete_x_only"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-048",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-equal/nosol_keep",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(3x - 3) = sqrt(x - 5)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(3x - 3) = sqrt(x - 5)\n3x - 3 = x - 5\n2x = -2\nx = -1"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     3
+    ],
+    "firstInvalidStep": 3,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "nosol_keep"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-049",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "expansion/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "Expand (s - 1t)^2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(s - 1t)^2\ns^2 + 2*s*(-1t) + (-1t)^2\ns^2 - 2st + t^2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: polynomial identity by exact evaluation at 25 random rational points; final form must be fully expanded"
+   },
+   "id": "e4-sealed-050",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-higher/cubic_wrong",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^3 - 3x^2 - 4x = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^3 - 3x^2 - 4x = 0\n(x + 1)(x - 4)x = 0\nx = 1 or x = 0 or x = -4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "cubic_wrong"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-051",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-elimination/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-4u - 4v = -8 and -3u - v = -10"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-4u - 4v = -8\n-3u - v = -10\n12u + 12v = 24\n12u + 4v = 40\n8v = -16\nv = -2\n-4u - 4*(-2) = -8\n-4u = -16\nu = 4\nu = 4 and v = -2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-052",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/none_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(-5x + 16) = x - 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(-5x + 16) = x - 4\n-5x + 16 = (x - 4)^2\nx^2 - 3x = 0\n(x - 3)x = 0\nx = 3 or x = 0\nthere is no solution"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "none_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-053",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "radical-quadratic-radicand/wrong_sq",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x^2 + 2x + 6) = x + 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x^2 + 2x + 6) = x + 2\nx^2 + 2x + 6 = x^2 + 4\n-2x = -2\nx = 1"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid",
+     "invalid",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sq"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-054",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-shared-denominator/stop",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 7)/(x - 6) = (4x + 5)/(x - 6)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 7)/(x - 6) = (4x + 5)/(x - 6)\nx^2 - 7 = 4x + 5\nx^2 - 4x - 12 = 0"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "stop"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-055",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "evaluation/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "a^2 + 2ab + b^2 when a = -1 and b = 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a^2 + 2ab + b^2\n1*(-1)^2 + (2)*(-1)*1 + 1*1^2\n1 + (-2) + 1\n0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "ok",
+     "pool-alternative"
+    ],
+    "derivation": "oracle-derived: every line evaluated exactly under the stated bindings"
+   },
+   "id": "e4-sealed-056",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "alt:factor-out",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 = 8x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 = 8x\nx^2 - 8x = 0\nx(x - 8) = 0\nx = 0 or x = 8"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-057",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "alt:negative-division",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-5x + 3 > -2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-5x + 3 > -2\n-5x > -5\nx < 1"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-058",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-substitution/ok_pair_line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3u + 2v = 7 and u - v = 9"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3u + 2v = 7\nu - v = 9\nu = 9 + v\n3(9 + v) + 2v = 7\n5v + 27 = 7\n5v = -20\nv = -4\nu = 9 + (-4)\nu = 5\nu = 5, v = -4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_pair_line"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-059",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic/missing",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 2x = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 2x = 0\nx(x + 2) = 0\nx = 0"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "narrowing-lost"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "missing"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-060",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "radical-linear/keep_ext",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(-8x + 17) = 2x + 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(-8x + 17) = 2x + 1\n-8x + 17 = (2x + 1)^2\n4x^2 + 12x - 16 = 0\n4(x - 1)(x + 4) = 0\nx = 1 or x = -4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "keep_ext"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-061",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "rational-common-denominator/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "1/(x - 2) + 1/(x - 4) = -6/((x - 2)(x - 4))"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "1/(x - 2) + 1/(x - 4) = -6/((x - 2)(x - 4))\n(x - 4) + (x - 2) = -6\n2x - 6 = -6\nx = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "ok",
+     "pool-alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-062",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "expansion/unexpanded_final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "Expand (3s + 1t)^2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(3s + 1t)^2\n(3s)^2 + 2*(3s)*(1t) + (1t)^2"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "unexpanded_final"
+    ],
+    "derivation": "oracle-derived: polynomial identity by exact evaluation at 25 random rational points; final form must be fully expanded"
+   },
+   "id": "e4-sealed-063",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "system-elimination/wrong_scale",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "p + 4q = 10 and 3p - 2q = -12"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "p + 4q = 10\n3p - 2q = -12\n3p + 12q = 31\n3p - 2q = -12\n14q = 42\nq = 3\np + 4*3 = 10\np = -2\np = -2\np = -2 and q = 3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_scale"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-064",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-two/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 19) + sqrt(x - 2) = 7"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 19) + sqrt(x - 2) = 7\nsqrt(x + 19) = 7 - sqrt(x - 2)\nx + 19 = 49 - 14*sqrt(x - 2) + x - 2\n14*sqrt(x - 2) = 28\nsqrt(x - 2) = 2\nx - 2 = 4\nx = 6"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-065",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic-formula/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 5x - 1 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 5x - 1 = 0\nx = (5 + sqrt(29))/2 or x = (5 - sqrt(29))/2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok",
+     "irrational"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-066",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "evaluation/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3u^2 + uv + 3v^2 when u = 3 and v = -2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3u^2 + uv + 3v^2\n3*3^2 + (1)*3*(-2) + 3*(-2)^2\n27 + (-6) + 12\n33"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: every line evaluated exactly under the stated bindings"
+   },
+   "id": "e4-sealed-067",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/ok_full",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(-2x + 18) = x - 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(-2x + 18) = x - 5\n-2x + 18 = (x - 5)^2\nx^2 - 8x + 7 = 0\n(x - 7)(x - 1) = 0\nx = 7 or x = 1\nx = 7"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_full"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-068",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-cross-multiply/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x + 1)/(x - 1) = (x - 1)/(x + 1)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x + 1)/(x - 1) = (x - 1)/(x + 1)\n(x + 1)(x + 1) = (x - 1)(x - 1)\nx^2 + 2x + 1 = x^2 - 2x + 1\n4x = 0\nx = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-069",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/lost",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(13x - 55) = x - 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(13x - 55) = x - 1\n13x - 55 = (x - 1)^2\nx^2 - 15x + 56 = 0\n(x - 8)(x - 7) = 0\nx = 8"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "narrowing-lost"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "lost"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-070",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-elimination/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3p + 2q = 17 and -2p - q = -11"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3p + 2q = 17\n-2p - q = -11\n6p + 4q = 34\n6p + 3q = 33\nq = 1\nq = 1\n3p + 2*1 = 17\n3p = 15\np = 5\np = 5 and q = 1"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-071",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-linear/ok_short",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(-6x + 51) = x - 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(-6x + 51) = x - 4\n-6x + 51 = (x - 4)^2\nx^2 - 2x - 35 = 0\nx = 7"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_short"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-072",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-cross-multiply/stop",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x - 2)/(x - 3) = (x + 1)/(x - 1)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x - 2)/(x - 3) = (x + 1)/(x - 1)\n(x - 2)(x - 1) = (x + 1)(x - 3)\nx^2 - 3x + 2 = x^2 - 2x - 3\n-x = -5"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "stop"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-073",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "evaluation/ok_symbolic_first",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3m^2 + 2mn + n^2 when m = -3 and n = 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3*(-3)^2 + (2)*(-3)*4 + 1*4^2\n27 + (-24) + 16\n19"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_symbolic_first"
+    ],
+    "derivation": "oracle-derived: every line evaluated exactly under the stated bindings"
+   },
+   "id": "e4-sealed-074",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-3x3/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "a - b = 3 and 2a - 3b - 2c = 3 and -2a - 3b - 3c = -7"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a - b = 3\n2a - 3b - 2c = 3\n-2a - 3b - 3c = -7\n-b - 2c = -3\n-5b - 3c = -1\nc = 2\nb = -1\na = 2\na = 2 and b = -1 and c = 2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated at the unique solution"
+   },
+   "id": "e4-sealed-075",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-higher/quartic_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^4 - 17x^2 + 16 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^4 - 17x^2 + 16 = 0\n(x^2 - 1)(x^2 - 16) = 0\n(x - 1)(x + 1)(x - 4)(x + 4) = 0\nx = 1 or x = -1 or x = 4 or x = -4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "quartic_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-076",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "alt:move-terms",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-3x + 5 > 11"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-3x + 5 > 11\n5 - 11 > 3x\n3x < -6\nx < -2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-077",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "system-substitution/wrong_expand",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3x + y = -1 and -2x - 2y = 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3x + y = -1\n-2x - 2y = 6\ny = -1 - 3x\n-2(-1 - 3x) - 2x = 6\n4x + 3 = 6\n4x = 4\nx = 1\ny = -1 - 3*1\ny = -4\nx = 1 and y = -4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_expand"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-078",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-shared-denominator/keep",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 4)/(x + 3) = (5)/(x + 3)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 4)/(x + 3) = (5)/(x + 3)\nx^2 - 4 = 5\nx^2 - 9 = 0\n(x + 3)(x - 3) = 0\nx = -3 or x = 3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "keep"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-079",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-quadratic-radicand/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x^2 - x + 3) = x + 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x^2 - x + 3) = x + 5\nx^2 - x + 3 = (x + 5)^2\n-11x = 22\nx = -2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-080",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-3x3/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "a - b = 0 and -a + 2b - 3c = 5 and -a = 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a - b = 0\n-a + 2b - 3c = 5\n-a = 1\nb - 3c = 5\n-b = 1\nc = -2\nb = -1\na = -1\na = -1 and b = -1 and c = -2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated at the unique solution"
+   },
+   "id": "e4-sealed-081",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "radical-surd/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 1) = x - 3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 1) = x - 3\nx + 1 = (x - 3)^2\nx^2 - 7x + 8 = 0\nx = (7 + sqrt(17))/2 or x = (7 - sqrt(17))/2\nx = (7 + sqrt(17))/2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "ok",
+     "irrational",
+     "pool-alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-082",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-cross-multiply/excluded",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x - 4)/(x - 4) = (x + 2)/(x - 3)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x - 4)/(x - 4) = (x + 2)/(x - 3)\n(x - 4)(x - 3) = (x + 2)(x - 4)\nx^2 - 7x + 12 = x^2 - 2x - 8\n-5x = -20\nx = 4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "excluded"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-083",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "polynomial-higher/cubic_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^3 + 4x^2 - 9x - 36 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^3 + 4x^2 - 9x - 36 = 0\n(x + 3)(x + 4)(x - 3) = 0\nx = -4 or x = -3 or x = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "cubic_ok",
+     "pool-alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-084",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-quadratic-radicand/ext_nosol",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x^2 - 6x - 4) = x - 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x^2 - 6x - 4) = x - 2\nx^2 - 6x - 4 = (x - 2)^2\n-2x = 8\nx = -4\nno solution"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ext_nosol"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-085",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "rational-domain-restrictions",
+   "family": "rational-shared-denominator/ok_restr",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 9)/(x - 4) = (4x - 9)/(x - 4)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 9)/(x - 4) = (4x - 9)/(x - 4)\nx^2 - 9 = 4x - 9, x != 4\nx^2 - 4x = 0, x != 4\nx = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok_restr"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-086",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "rational-cross-multiply/wrong_expand",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x - 4)/(x + 4) = (x - 3)/(x + 6)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x - 4)/(x + 4) = (x - 3)/(x + 6)\n(x - 4)(x + 6) = (x - 3)(x + 4)\nx^2 + 2x + 2 = x^2 + x - 12\nx = 12\nx = 12"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "invalid",
+     "widening",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_expand"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-087",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-two/wrong_sq1",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 11) + sqrt(x + 3) = 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 11) + sqrt(x + 3) = 4\nsqrt(x + 11) = 4 - sqrt(x + 3)\nx + 11 = 16 + x + 3\n8*sqrt(x + 3) = 8\nsqrt(x + 3) = 1\nx + 3 = 1\nx = -2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "invalid",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sq1"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-088",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "invalid-intermediate-reasoning",
+   "family": "evaluation/wrong_line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "2m^2 - 3mn + 2n^2 when m = 5 and n = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2m^2 - 3mn + 2n^2\n2*5^2 + (-3)*5*0 + 2*0^2\n51 + (0) + 0\n50"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_line"
+    ],
+    "derivation": "oracle-derived: every line evaluated exactly under the stated bindings"
+   },
+   "id": "e4-sealed-089",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "rational-cross-multiply/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x + 6)/(x) = (x + 5)/(x + 1)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x + 6)/(x) = (x + 5)/(x + 1)\n(x + 6)(x + 1) = (x + 5)(x)\nx^2 + 7x + 6 = x^2 + 5x\n2x = -6\nx = -3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "ok",
+     "pool-alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-090",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "alternative-method",
+   "family": "alt:complete-square",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 6x - 7 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 6x - 7 = 0\nx^2 + 6x = 7\n(x + 3)^2 = 16\nx = 1 or x = -7"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "tags": [
+     "alternative"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-091",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "system-elimination/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-4x - 4y = 24 and -3x + y = 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-4x - 4y = 24\n-3x + y = 6\n12x + 12y = -72\n12x - 4y = -24\n16y = -48\ny = -3\n-4x - 4*(-3) = 24\n-4x = 12\nx = -3\nx = -3 and y = -3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: exact Fraction solution of the system; each line evaluated on every sample point of the solution space"
+   },
+   "id": "e4-sealed-092",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-two/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 4) + sqrt(x + 0) = 2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 4) + sqrt(x + 0) = 2\nsqrt(x + 4) = 2 - sqrt(x + 0)\nx + 4 = 4 - 4*sqrt(x + 0) + x + 0\n4*sqrt(x + 0) = 0\nsqrt(x + 0) = 0\nx + 0 = 0\nx = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-093",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic-formula/wrong_sign",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 8x + 5 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 8x + 5 = 0\nx = (-8 + sqrt(44))/2 or x = (8 - sqrt(44))/2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "equal",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sign",
+     "irrational"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-094",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "polynomial-solution-sets",
+   "family": "polynomial-quadratic/fac_ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 6x = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 6x = 0\n(x + 6)x = 0\nx = -6 or x = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "fac_ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-095",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-surd/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x + 2) = x - 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x + 2) = x - 1\nx + 2 = (x - 1)^2\nx^2 - 3x - 1 = 0\nx = (3 + sqrt(13))/2 or x = (3 - sqrt(13))/2\nx = (3 + sqrt(13))/2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "widening",
+     "equal",
+     "equal",
+     "narrowing-extraneous"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok",
+     "irrational"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-096",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-equal/ok",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(4x - 8) = sqrt(x + 1)"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(4x - 8) = sqrt(x + 1)\n4x - 8 = x + 1\n3x = 9\nx = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-097",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "multivariable-algebra",
+   "family": "expansion/wrong_final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "Expand (x - 3y)^2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x - 3y)^2\nx^2 + 2*x*(-3y) + (-3y)^2\nx^2 - 6xy + 10y^2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_final"
+    ],
+    "derivation": "oracle-derived: polynomial identity by exact evaluation at 25 random rational points; final form must be fully expanded"
+   },
+   "id": "e4-sealed-098",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  },
+  {
+   "category": "radical-extraneous-roots",
+   "family": "radical-two/wrong_sq1",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(x - 1) + sqrt(x - 6) = 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(x - 1) + sqrt(x - 6) = 5\nsqrt(x - 1) = 5 - sqrt(x - 6)\nx - 1 = 25 + x - 6\n10*sqrt(x - 6) = 20\nsqrt(x - 6) = 2\nx - 6 = 4\nx = 10"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "equal",
+     "equal",
+     "invalid",
+     "widening",
+     "equal",
+     "equal",
+     "equal"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong_sq1"
+    ],
+    "derivation": "oracle-derived: Decimal(80) truth sets over rational universe k/24 plus designed candidates and every real root found by sign-change scan"
+   },
+   "id": "e4-sealed-099",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e4_oracle.py (Fractions + Decimal(80)); no OpenPath code; SymPy unavailable offline"
+   }
+  }
+ ]
+}

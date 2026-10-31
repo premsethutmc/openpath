@@ -1,0 +1,1 @@
+ 1293 pass  0 fail Ran 1293 tests across 79 files. [50.02s] 

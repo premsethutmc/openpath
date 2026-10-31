@@ -1,0 +1,294 @@
+{
+  "version": "symbolic-m3-evaluation@1",
+  "independent": {
+    "name": "independent",
+    "total": 600,
+    "matched": 580,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "firstInvalidStep": {
+      "correct": 80,
+      "total": 80
+    },
+    "outcomes": {
+      "verified": 370,
+      "invalid": 100,
+      "resource-exhausted": 30,
+      "incomplete": 30,
+      "missing-assumption": 40,
+      "unsupported": 30
+    },
+    "latencyMs": {
+      "median": 0.10485800000000722,
+      "p95": 0.4597009999999955,
+      "p99": 1.139724000000001,
+      "throughputPerSecond": 6131.8152648393325
+    },
+    "failures": [
+      {
+        "id": "trigonometry-8",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-18",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-28",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-38",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-48",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-58",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-68",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-78",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-88",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "trigonometry-98",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-8",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-18",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-28",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-38",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-48",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-58",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-68",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-78",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-88",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      },
+      {
+        "id": "calculus-symbolic-98",
+        "expected": {
+          "classification": "unsupported",
+          "firstInvalidStep": null
+        },
+        "actual": {
+          "classification": "invalid",
+          "firstInvalidStep": 0,
+          "justification": "step 1: exact substitution at zero gives 0 and 1"
+        }
+      }
+    ]
+  },
+  "heldout": {
+    "name": "heldout",
+    "total": 150,
+    "matched": 150,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "firstInvalidStep": {
+      "correct": 25,
+      "total": 25
+    },
+    "outcomes": {
+      "verified": 75,
+      "missing-assumption": 25,
+      "invalid": 25,
+      "unsupported": 25
+    },
+    "latencyMs": {
+      "median": 0.08648099999999204,
+      "p95": 0.19248999999999228,
+      "p99": 0.29775800000001595,
+      "throughputPerSecond": 10063.478409108842
+    },
+    "failures": []
+  }
+}

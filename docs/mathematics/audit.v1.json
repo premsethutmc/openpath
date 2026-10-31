@@ -1,0 +1,350 @@
+{
+  "inventorySHA256": "e4c17772945ff4ad1892b8839d99d3f1a5d149cebdaeb8d138ecfcc112df44d4",
+  "competencies": 200,
+  "prerequisiteEdges": 200,
+  "graphErrors": [],
+  "executableProgramAudit": [
+    {
+      "competencyId": "MATH.number.addition",
+      "families": [
+        "arithmetic"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.number.fraction-comparison",
+      "families": [
+        "comparison"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.number.equivalent-fractions",
+      "families": [
+        "fractions"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.measurement.rectangle-area",
+      "families": [
+        "geometry"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.number.percentage",
+      "families": [
+        "percent"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.algebra.linear-equations",
+      "families": [
+        "linear"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.algebra.algebra-simplify",
+      "families": [
+        "polynomial"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.probability.classical",
+      "families": [
+        "probability"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.algebra.quadratics",
+      "families": [
+        "quadratic",
+        "quadratic-numerical"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.trigonometry.ratios",
+      "families": [
+        "trigonometry"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.coordinate.distance",
+      "families": [
+        "coordinate"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    },
+    {
+      "competencyId": "MATH.calculus.derivative-rules",
+      "families": [
+        "calculus",
+        "calculus-numerical"
+      ],
+      "instruction": "objective-restatement-only",
+      "workedExamples": "generated-short-procedures",
+      "completeInstructionalProgram": false,
+      "educatorReviewed": false,
+      "application": "same-family-template",
+      "transfer": "same-family-variant-not-validated",
+      "retention": "host-pending"
+    }
+  ],
+  "familyAudit": [
+    {
+      "id": "arithmetic",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 100,
+      "uniqueStatements": 100,
+      "uniqueAnswers": 19,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "fractions",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 3263,
+      "uniqueAnswers": 228,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "percent",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 740,
+      "uniqueAnswers": 323,
+      "statementsWithMultipleFingerprints": 723,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "linear",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 3263,
+      "uniqueAnswers": 39,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "polynomial",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 3263,
+      "uniqueAnswers": 2516,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "quadratic-numerical",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 228,
+      "uniqueStatements": 228,
+      "uniqueAnswers": 30,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "quadratic",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 228,
+      "uniqueStatements": 228,
+      "uniqueAnswers": 228,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "geometry",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 740,
+      "uniqueAnswers": 323,
+      "statementsWithMultipleFingerprints": 723,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "trigonometry",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 12,
+      "uniqueStatements": 12,
+      "uniqueAnswers": 1,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "coordinate",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 3263,
+      "uniqueAnswers": 4,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "probability",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 740,
+      "uniqueAnswers": 469,
+      "statementsWithMultipleFingerprints": 723,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "calculus-numerical",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 228,
+      "uniqueStatements": 228,
+      "uniqueAnswers": 194,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "calculus",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 76,
+      "uniqueStatements": 76,
+      "uniqueAnswers": 76,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    },
+    {
+      "id": "comparison",
+      "sampledSeeds": [
+        1,
+        4096
+      ],
+      "uniqueFingerprints": 3263,
+      "uniqueStatements": 3263,
+      "uniqueAnswers": 3,
+      "statementsWithMultipleFingerprints": 0,
+      "educationalValidation": "not-reviewed",
+      "examReadiness": "disabled"
+    }
+  ]
+}

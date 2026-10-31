@@ -106,12 +106,18 @@ REST_FRAMEWORK = {
         "account-password": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
         "developer-claim": "10/hour",
         "telemetry": "240/hour",
+        "pupil-events": os.environ.get("OPENPATH_EVENT_RATE", "600/hour"),
     },
     # Rate limits are keyed on the client address. Behind N trusted proxies, set OPENPATH_NUM_PROXIES=N so the
     # address is read from the right place in X-Forwarded-For; 0 ignores that (client-controlled) header entirely.
     "NUM_PROXIES": int(os.environ.get("OPENPATH_NUM_PROXIES", "0")),
     "UNAUTHENTICATED_USER": None,
 }
+
+# Grading authority during migration (UNIFIED_GRADING_ARCHITECTURE.md §13): "shadow" (default: the earlier policy decides and the unified
+# decision is recorded beside it), "unified" (grading-policy@1 decides) or "legacy". Switching to "unified" is an approved release step.
+OPENPATH_GRADING = os.environ.get("OPENPATH_GRADING", "shadow")
+TEST_RUNNER = "config.test_runner.OpenPathTestRunner"
 
 OPENPATH_CURRICULUM = REPO_DIR / "shared" / "curriculum" / "math-early-number.json"
 OPENPATH_TRUST_CLIENT_CLOCK = os.environ.get("OPENPATH_TRUST_CLIENT_CLOCK", "1" if DEBUG else "0") == "1"
@@ -120,6 +126,26 @@ OPENPATH_CONSENT_POLICY_VERSION = "2026-10-prototype"
 # provider adapter, and configuring one fails at start-up (decision of 12 October; E3b needs approval).
 OPENPATH_EVALUATION_ADAPTER = os.environ.get("OPENPATH_EVALUATION_ADAPTER", "disabled")
 OPENPATH_EVALUATION_REPLAY_FILE = os.environ.get("OPENPATH_EVALUATION_REPLAY_FILE") or None
+
+# Essay Intelligence v2: the essay evaluator behind the server (evaluation/essay.py). Off by default.
+#   disabled   refuses every request (the default); the essay studio uses its recorded samples and pattern stand-in
+#   replay     recorded outputs by text fingerprint (OPENPATH_ESSAY_REPLAY_FILE): repeatable tests, no provider
+#   llm        a configured LLM provider (evaluation/llm.py); the key is read from the environment only
+# Only developer accounts may call it, and only for synthetic test essays: real learners' essays are refused until
+# consent, retention and deletion policies are approved (that switch is not configurable here).
+OPENPATH_ESSAY_EVALUATOR = os.environ.get("OPENPATH_ESSAY_EVALUATOR", "disabled")
+OPENPATH_ESSAY_REPLAY_FILE = os.environ.get("OPENPATH_ESSAY_REPLAY_FILE") or None
+OPENPATH_ESSAY_EVALUATOR_VERSION = os.environ.get("OPENPATH_ESSAY_EVALUATOR_VERSION", "essay-llm@1")
+OPENPATH_LLM_PROVIDER = os.environ.get("OPENPATH_LLM_PROVIDER", "anthropic")
+OPENPATH_LLM_MODEL = os.environ.get("OPENPATH_LLM_MODEL", "")
+OPENPATH_LLM_BASE_URL = os.environ.get("OPENPATH_LLM_BASE_URL", "")
+OPENPATH_LLM_API_KEY = os.environ.get("OPENPATH_LLM_API_KEY", "")
+OPENPATH_LLM_MAX_OUTPUT_TOKENS = int(os.environ.get("OPENPATH_LLM_MAX_OUTPUT_TOKENS", "4000"))
+OPENPATH_LLM_TIMEOUT_S = float(os.environ.get("OPENPATH_LLM_TIMEOUT_S", "60"))
+OPENPATH_LLM_RETRIES = int(os.environ.get("OPENPATH_LLM_RETRIES", "1"))
+# bounded cost: requests and tokens per day across all developers; over either limit, requests are refused
+OPENPATH_ESSAY_DAILY_REQUESTS = int(os.environ.get("OPENPATH_ESSAY_DAILY_REQUESTS", "50"))
+OPENPATH_ESSAY_DAILY_TOKENS = int(os.environ.get("OPENPATH_ESSAY_DAILY_TOKENS", "300000"))
 OPENPATH_MAX_EVENTS_PER_SESSION = 5000
 
 # ---------------------------------------------------------------- parent accounts (family app)

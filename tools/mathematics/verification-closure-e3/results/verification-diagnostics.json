@@ -1,0 +1,500 @@
+{
+ "e1-final-after": {
+  "abstentionReasons": [
+   [
+    "unsupported",
+    "unsupported character '\u00b0' at 15",
+    52
+   ],
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    44
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for calculus",
+    33
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for probability-statistics",
+    16
+   ],
+   [
+    "malformed",
+    "expected expression",
+    15
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u00b1' at 4",
+    13
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u00b0' at 11",
+    11
+   ],
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    11
+   ]
+  ]
+ },
+ "e1-final-before": {
+  "abstentionReasons": [
+   [
+    "unsupported",
+    "unsupported character '\u00b0' at 15",
+    52
+   ],
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    44
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for calculus",
+    33
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for probability-statistics",
+    16
+   ],
+   [
+    "malformed",
+    "expected expression",
+    15
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u00b1' at 4",
+    13
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u00b0' at 11",
+    11
+   ],
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    11
+   ]
+  ]
+ },
+ "e1adj-final-after": {
+  "abstentionReasons": [
+   [
+    "unsupported",
+    "unsupported character '\u00b0' at 15",
+    52
+   ],
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    44
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for calculus",
+    33
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for probability-statistics",
+    16
+   ],
+   [
+    "malformed",
+    "expected expression",
+    15
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u00b1' at 4",
+    13
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u00b0' at 11",
+    11
+   ],
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    11
+   ]
+  ]
+ },
+ "e2dev-final-after": {
+  "abstentionReasons": [
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    9
+   ],
+   [
+    "malformed",
+    "expected expression",
+    7
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for calculus",
+    4
+   ],
+   [
+    "unsupported",
+    "adapter function-evaluation can verify only part of the submission (li",
+    2
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u222a' at 6",
+    2
+   ],
+   [
+    "unsupported",
+    "adapter linear-determinant can verify only part of the submission (lin",
+    2
+   ],
+   [
+    "unsupported",
+    "adapter complex-modulus can verify only part of the submission (line i",
+    1
+   ],
+   [
+    "malformed",
+    "unexpected token =",
+    1
+   ]
+  ]
+ },
+ "e2dev-final-before": {
+  "abstentionReasons": [
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    9
+   ],
+   [
+    "malformed",
+    "expected expression",
+    7
+   ],
+   [
+    "unsupported",
+    "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: U",
+    7
+   ],
+   [
+    "unsupported",
+    "no lossless natural adapter for calculus",
+    4
+   ],
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    4
+   ],
+   [
+    "unsupported",
+    "adapter function-evaluation can verify only part of the submission (li",
+    2
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u222a' at 6",
+    2
+   ],
+   [
+    "unsupported",
+    "adapter linear-determinant can verify only part of the submission (lin",
+    2
+   ]
+  ]
+ },
+ "e2sealed-final-after": {
+  "abstentionReasons": [
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    5
+   ],
+   [
+    "unsupported",
+    "adapter function-evaluation can verify only part of the submission (li",
+    4
+   ],
+   [
+    "unsupported",
+    "adapter linear-determinant can verify only part of the submission (lin",
+    3
+   ],
+   [
+    "malformed",
+    "dependency destination is not established",
+    3
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u222a' at 6",
+    2
+   ],
+   [
+    "unsupported",
+    "adapter complex-modulus can verify only part of the submission (line i",
+    2
+   ],
+   [
+    "unsupported",
+    "adapter statistics-mean can verify only part of the submission (line i",
+    2
+   ],
+   [
+    "malformed",
+    "expected expression",
+    2
+   ]
+  ]
+ },
+ "e2sealed-final-before": {
+  "abstentionReasons": [
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    5
+   ],
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    5
+   ],
+   [
+    "unsupported",
+    "adapter function-evaluation can verify only part of the submission (li",
+    4
+   ],
+   [
+    "unsupported",
+    "adapter linear-determinant can verify only part of the submission (lin",
+    3
+   ],
+   [
+    "unsupported",
+    "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: U",
+    3
+   ],
+   [
+    "malformed",
+    "dependency destination is not established",
+    3
+   ],
+   [
+    "unsupported",
+    "unsupported character '\u222a' at 6",
+    2
+   ],
+   [
+    "unsupported",
+    "adapter complex-modulus can verify only part of the submission (line i",
+    2
+   ]
+  ]
+ },
+ "e3dev-final-after": {
+  "abstentionReasons": [
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    5
+   ],
+   [
+    "unsupported",
+    "adapter function-evaluation can verify only part of the submission (li",
+    1
+   ],
+   [
+    "unsupported",
+    "unsupported character '%' at 3",
+    1
+   ],
+   [
+    "unsupported",
+    "unsupported character '!' at 1",
+    1
+   ],
+   [
+    "unsupported",
+    "adapter complex-modulus can verify only part of the submission (line i",
+    1
+   ],
+   [
+    "malformed",
+    "dependency destination is not established",
+    1
+   ],
+   [
+    "malformed",
+    "unexpected token =",
+    1
+   ],
+   [
+    "malformed",
+    "missing closing parenthesis",
+    1
+   ]
+  ]
+ },
+ "e3dev-final-before": {
+  "abstentionReasons": [
+   [
+    "unsupported",
+    "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERRO",
+    10
+   ],
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    8
+   ],
+   [
+    "unsupported",
+    "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: U",
+    3
+   ],
+   [
+    "unsupported",
+    "adapter function-evaluation can verify only part of the submission (li",
+    1
+   ],
+   [
+    "unsupported",
+    "unsupported character '%' at 3",
+    1
+   ],
+   [
+    "unsupported",
+    "unsupported character '!' at 1",
+    1
+   ],
+   [
+    "unsupported",
+    "adapter complex-modulus can verify only part of the submission (line i",
+    1
+   ],
+   [
+    "malformed",
+    "dependency destination is not established",
+    1
+   ]
+  ]
+ },
+ "e3sealed-sealed-after": {
+  "abstentionReasons": [
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    4
+   ],
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    4
+   ],
+   [
+    "unsupported",
+    "adapter statistics-mean can verify only part of the submission (line i",
+    3
+   ],
+   [
+    "unsupported",
+    "unsupported character '!' at 1",
+    1
+   ],
+   [
+    "unsupported",
+    "adapter complex-modulus can verify only part of the submission (line i",
+    1
+   ],
+   [
+    "unsupported",
+    "adapter linear-determinant can verify only part of the submission (lin",
+    1
+   ],
+   [
+    "unsupported",
+    "adapter function-evaluation can verify only part of the submission (li",
+    1
+   ]
+  ]
+ },
+ "e3sealed-sealed-before": {
+  "abstentionReasons": [
+   [
+    "unsupported",
+    "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERRO",
+    9
+   ],
+   [
+    "unsupported",
+    "some lines could not be analysed exactly; they are not judged, and the",
+    9
+   ],
+   [
+    "unsupported",
+    "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: U",
+    7
+   ],
+   [
+    "ambiguous",
+    "division followed by implicit multiplication has multiple conventional",
+    4
+   ],
+   [
+    "unsupported",
+    "adapter statistics-mean can verify only part of the submission (line i",
+    3
+   ],
+   [
+    "unsupported",
+    "unsupported character '!' at 1",
+    1
+   ],
+   [
+    "unsupported",
+    "adapter complex-modulus can verify only part of the submission (line i",
+    1
+   ],
+   [
+    "unsupported",
+    "adapter linear-determinant can verify only part of the submission (lin",
+    1
+   ]
+  ]
+ },
+ "gateLevelsOfVerifiedAssessments": {
+  "e1": {
+   "algebra-text/u4-kernel/true": 45,
+   "adapter-converted/u4-kernel/true": 36,
+   "adapter-converted/claim-recheck+destination-reasoner/true": 43
+  },
+  "e2dev": {
+   "algebra-text/u4-kernel/true": 7,
+   "adapter-converted/claim-recheck+destination-reasoner/true": 8
+  },
+  "e2sealed": {
+   "algebra-text/u4-kernel/true": 6,
+   "adapter-converted/claim-recheck+destination-reasoner/true": 5,
+   "adapter-converted/u4-kernel/true": 4
+  },
+  "e3dev": {
+   "algebra-text/u4-kernel/true": 14
+  }
+ }
+}

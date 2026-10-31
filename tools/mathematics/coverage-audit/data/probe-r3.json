@@ -1,0 +1,134 @@
+[
+ {
+  "family": "akmed",
+  "kernel": "B1 statistics",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "akmode",
+  "kernel": "B1 statistics",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "aonpr",
+  "kernel": "B1 combinatorics",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "aoncr",
+  "kernel": "B1 combinatorics",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "anbag",
+  "kernel": "B1 probability",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "audt3",
+  "kernel": "B2 determinant",
+  "samples": 5,
+  "built": 3,
+  "storedVerified": 3,
+  "wrongRejected": 3,
+  "errors": [
+   "could not map prompt",
+   "could not map prompt"
+  ]
+ },
+ {
+  "family": "apmmul",
+  "kernel": "B2 matrix",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "apn",
+  "kernel": "M2 sequence",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "aogp",
+  "kernel": "M2 sequence",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "cdist",
+  "kernel": "M1 coordinate",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "lineq",
+  "kernel": "M1 inequality",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 5,
+  "wrongRejected": 5,
+  "errors": []
+ },
+ {
+  "family": "cint",
+  "kernel": "calculus-core definite integral",
+  "samples": 5,
+  "built": 5,
+  "storedVerified": 0,
+  "wrongRejected": 5,
+  "errors": [
+   "stored 1: invalid",
+   "stored 48: invalid",
+   "stored 72: invalid",
+   "stored 36: invalid",
+   "stored 48: invalid"
+  ]
+ },
+ {
+  "family": "audfp",
+  "kernel": "calculus-core definite integral",
+  "samples": 5,
+  "built": 2,
+  "storedVerified": 0,
+  "wrongRejected": 2,
+  "errors": [
+   "stored 7: invalid",
+   "stored 124: invalid",
+   "could not map prompt",
+   "could not map prompt",
+   "could not map prompt"
+  ]
+ }
+]

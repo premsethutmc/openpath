@@ -1,0 +1,29 @@
+5d6003e   false-math-accept=0 unjustified-authorized=56 legit-verified=90/186 invalid-detected=82/114 wrong-firstInvalid=1 debatable-verified=3/7 ms p50=5.99 p95=40.54 p99=97.3 max=180.4 total=5965
+   unsafe ids: [('UNJUST', 'va-065'), ('UNJUST', 'va-066'), ('UNJUST', 'vl-065'), ('UNJUST', 'vl-066'), ('UNJUST', 'vl-067'), ('UNJUST', 'vl-068'), ('UNJUST', 'cs-001'), ('UNJUST', 'cs-002'), ('UNJUST', 'cs-003'), ('UNJUST', 'cs-004'), ('UNJUST', 'cs-005'), ('UNJUST', 'cs-006'), ('UNJUST', 'cs-007'), ('UNJUST', 'cs-008'), ('UNJUST', 'cs-009'), ('UNJUST', 'cs-010'), ('UNJUST', 'cs-011'), ('UNJUST', 'cs-012'), ('UNJUST', 'cs-013'), ('UNJUST', 'cs-014'), ('UNJUST', 'cs-015'), ('UNJUST', 'cs-016'), ('UNJUST', 'cs-017'), ('UNJUST', 'cs-018'), ('UNJUST', 'cs-019'), ('UNJUST', 'cs-020'), ('UNJUST', 'cs-021'), ('UNJUST', 'cs-022'), ('UNJUST', 'cs-023'), ('UNJUST', 'cs-024'), ('UNJUST', 'cs-025'), ('UNJUST', 'cs-026'), ('UNJUST', 'cs-027'), ('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021'), ('UNJUST', 'at-004'), ('UNJUST', 'at-005'), ('UNJUST', 'at-012'), ('UNJUST', 'at-013'), ('UNJUST', 'at-015'), ('UNJUST', 'at-017'), ('UNJUST', 'at-024'), ('UNJUST', 'rl-001'), ('UNJUST', 'rl-003'), ('UNJUST', 'rl-005'), ('UNJUST', 'rl-009'), ('UNJUST', 'rl-018'), ('UNJUST', 'rl-019'), ('UNJUST', 'rl-020'), ('UNJUST', 'rl-021'), ('UNJUST', 'rl-022'), ('UNJUST', 'rl-023'), ('UNJUST', 'rl-024'), ('UNJUST', 'rl-027'), ('UNJUST', 'mf-045')]
+32c7f2c   false-math-accept=0 unjustified-authorized=47 legit-verified=79/186 invalid-detected=82/114 wrong-firstInvalid=1 debatable-verified=3/7 ms p50=7.81 p95=53.8 p99=76.84 max=235.3 total=7096
+   unsafe ids: [('UNJUST', 'vl-065'), ('UNJUST', 'vl-066'), ('UNJUST', 'vl-067'), ('UNJUST', 'vl-068'), ('UNJUST', 'cs-001'), ('UNJUST', 'cs-003'), ('UNJUST', 'cs-004'), ('UNJUST', 'cs-007'), ('UNJUST', 'cs-008'), ('UNJUST', 'cs-009'), ('UNJUST', 'cs-010'), ('UNJUST', 'cs-011'), ('UNJUST', 'cs-012'), ('UNJUST', 'cs-013'), ('UNJUST', 'cs-014'), ('UNJUST', 'cs-015'), ('UNJUST', 'cs-016'), ('UNJUST', 'cs-017'), ('UNJUST', 'cs-018'), ('UNJUST', 'cs-019'), ('UNJUST', 'cs-021'), ('UNJUST', 'cs-022'), ('UNJUST', 'cs-023'), ('UNJUST', 'cs-024'), ('UNJUST', 'cs-025'), ('UNJUST', 'cs-026'), ('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021'), ('UNJUST', 'at-007'), ('UNJUST', 'at-012'), ('UNJUST', 'at-015'), ('UNJUST', 'at-017'), ('UNJUST', 'at-021'), ('UNJUST', 'rl-001'), ('UNJUST', 'rl-003'), ('UNJUST', 'rl-005'), ('UNJUST', 'rl-009'), ('UNJUST', 'rl-018'), ('UNJUST', 'rl-019'), ('UNJUST', 'rl-020'), ('UNJUST', 'rl-021'), ('UNJUST', 'rl-022'), ('UNJUST', 'rl-023'), ('UNJUST', 'rl-024'), ('UNJUST', 'rl-027'), ('UNJUST', 'mf-045')]
+99aea8e   false-math-accept=0 unjustified-authorized=33 legit-verified=99/186 invalid-detected=82/114 wrong-firstInvalid=1 debatable-verified=3/7 ms p50=7.08 p95=53.05 p99=110.94 max=147.8 total=7114
+   unsafe ids: [('UNJUST', 'vl-065'), ('UNJUST', 'vl-066'), ('UNJUST', 'vl-067'), ('UNJUST', 'vl-068'), ('UNJUST', 'cs-003'), ('UNJUST', 'cs-007'), ('UNJUST', 'cs-008'), ('UNJUST', 'cs-010'), ('UNJUST', 'cs-011'), ('UNJUST', 'cs-013'), ('UNJUST', 'cs-015'), ('UNJUST', 'cs-017'), ('UNJUST', 'cs-018'), ('UNJUST', 'cs-021'), ('UNJUST', 'cs-023'), ('UNJUST', 'cs-024'), ('UNJUST', 'cs-025'), ('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021'), ('UNJUST', 'at-021'), ('UNJUST', 'rl-001'), ('UNJUST', 'rl-003'), ('UNJUST', 'rl-005'), ('UNJUST', 'rl-009'), ('UNJUST', 'rl-018'), ('UNJUST', 'rl-019'), ('UNJUST', 'rl-020'), ('UNJUST', 'rl-021'), ('UNJUST', 'rl-022'), ('UNJUST', 'rl-023'), ('UNJUST', 'rl-024'), ('UNJUST', 'rl-027')]
+P2-FINAL  false-math-accept=0 unjustified-authorized=6 legit-verified=106/186 invalid-detected=82/114 wrong-firstInvalid=1 debatable-verified=3/7 ms p50=2.39 p95=25.51 p99=47.39 max=104.8 total=3335
+   unsafe ids: [('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021'), ('UNJUST', 'rl-022'), ('UNJUST', 'rl-023'), ('UNJUST', 'rl-024')]
+legit regressions b5d->P2-FINAL: 0 []; gains 16
+legit regressions b32->P2-FINAL: 0 []; gains 27
+legit regressions b99->P2-FINAL: 0 []; gains 7
+
+per category (P2-FINAL): verified-labelled verified / invalid detected / unsupported-labelled verified
+  arbitrary-introduced-terms   legit 5/5  invalid 5/5  unsupported-verified 0/25
+  circular-substitution        legit 0/0  invalid 8/8  unsupported-verified 0/27
+  domain-manipulation          legit 2/18  invalid 2/10  unsupported-verified 0/19
+  invalid-intermediate         legit 0/0  invalid 45/55  unsupported-verified 0/0
+  mixed-formatting             legit 5/25  invalid 6/12  unsupported-verified 0/8
+  radicals-logs-syntax         legit 0/0  invalid 10/16  unsupported-verified 3/27
+  task-restatement             legit 10/10  invalid 5/5  unsupported-verified 3/22
+  truncated-derivation         legit 0/0  invalid 1/3  unsupported-verified 0/32
+  valid-multistep-algebra      legit 28/64  invalid 0/0  unsupported-verified 0/4
+  valid-multistep-arithmetic   legit 56/64  invalid 0/0  unsupported-verified 0/6
+
+verdict distribution P2-FINAL by label:
+  verified {'verified': 106, 'unsupported': 61, 'ambiguous': 16, 'incomplete': 3}
+  unsupported {'unsupported': 114, 'incomplete': 42, 'verified': 6, 'invalid': 2, 'ambiguous': 6}
+  debatable {'unsupported': 2, 'verified': 3, 'incomplete': 2}
+  invalid {'invalid': 82, 'unsupported': 26, 'ambiguous': 6}

@@ -1,0 +1,2082 @@
+{
+ "id": "correct-discriminating",
+ "competency": "MATH.algebra.arithmetic-sequences",
+ "truth": {
+  "misconception": "n-jumps",
+  "heldAtEnd": false,
+  "taughtByEnd": true,
+  "notes": "arithmetic sequences (apn): n-jumps predicts a distinct wrong answer on every apn item; the learner shows it until a lesson on the skill, then is right on discriminating questions alone"
+ },
+ "expect": {
+  "investigation": "either",
+  "resolution": "may-resolve",
+  "establish": "either",
+  "notes": "after teaching, right answers on questions where the misconception would have shown are genuine evidence it has gone: the engine may resolve it (it need not, if it wants more evidence)"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "diagnostic",
+   "question": "gen:apn:18,2,12",
+   "activity": "diagnostic",
+   "response": "42",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35,
+    "posterior": {
+     "secure": 0.35,
+     "conceptual": 0.15,
+     "procedural": 0.15,
+     "recall": 0.15,
+     "prerequisite": 0.1,
+     "transfer": 0.1
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 2,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "diagnostic",
+   "question": "gen:apn:9,3,19",
+   "activity": "diagnostic",
+   "response": "66",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56,
+    "posterior": {
+     "secure": 0.050909090909090904,
+     "conceptual": 0.15272727272727274,
+     "procedural": 0.5563636363636364,
+     "recall": 0.1090909090909091,
+     "prerequisite": 0.10181818181818182,
+     "transfer": 0.02909090909090909
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 3,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "investigate",
+   "question": "gen:apn:1,2,10",
+   "activity": "probe",
+   "context": "investigate:gen:apn:18,2,12",
+   "response": "21",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "12 jumps were counted; from term 1 to term 12 there are 11 jumps. A short explanation is waiting."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85,
+    "posterior": {
+     "secure": 0.0030624521491851684,
+     "conceptual": 0.06431149513288856,
+     "procedural": 0.8534397900032812,
+     "recall": 0.03281198731269824,
+     "prerequisite": 0.042874330088592365,
+     "transfer": 0.003499945313354478
+    }
+   },
+   "reasoning": {
+    "status": "need_more",
+    "best": null,
+    "competing": [
+     "n-jumps"
+    ],
+    "support": {
+     "n-jumps": 0.854,
+     "unexplained": 0.061,
+     "times-n": 0.03,
+     "forgot-start": 0.03,
+     "secure": 0.024
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "One more question to understand what happened (it does not count against you)."
+  },
+  {
+   "step": 4,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "complete",
+   "question": null,
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85,
+    "posterior": {
+     "secure": 0.0030624521491851684,
+     "conceptual": 0.06431149513288856,
+     "procedural": 0.8534397900032812,
+     "recall": 0.03281198731269824,
+     "prerequisite": 0.042874330088592365,
+     "transfer": 0.003499945313354478
+    }
+   },
+   "reasoning": {
+    "status": "established",
+    "best": "n-jumps",
+    "competing": [
+     "n-jumps"
+    ],
+    "support": {
+     "n-jumps": 0.987,
+     "unexplained": 0.01,
+     "times-n": 0.001,
+     "forgot-start": 0.001,
+     "secure": 0.001
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": {
+     "kind": "teach",
+     "competency": "MATH.algebra.arithmetic-sequences",
+     "why": "12 jumps were counted; from term 1 to term 12 there are 11 jumps."
+    }
+   },
+   "reason": "12 jumps were counted; from term 1 to term 12 there are 11 jumps.",
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": false
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "12 jumps were counted; from term 1 to term 12 there are 11 jumps. A short explanation is waiting."
+   }
+  },
+  {
+   "step": 5,
+   "stage": "plan",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "planItems": [
+    {
+     "competency": "MATH.algebra.arithmetic-sequences",
+     "reason": "12 jumps were counted; from term 1 to term 12 there are 11 jumps. Here is a way to rebuild it."
+    }
+   ],
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": false
+   },
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "n-jumps@gen:apn:18,2,12",
+     "claim": {
+      "explanation": "n-jumps",
+      "kind": "procedural",
+      "says": "12 jumps were counted; from term 1 to term 12 there are 11 jumps."
+     },
+     "scope": {
+      "question": "gen:apn:18,2,12",
+      "family": "gen:apn:18,2,12",
+      "observedIn": "MATH.algebra.arithmetic-sequences",
+      "about": "MATH.algebra.arithmetic-sequences"
+     },
+     "status": "established",
+     "support": {
+      "n-jumps": 0.987,
+      "unexplained": 0.01,
+      "times-n": 0.001,
+      "forgot-start": 0.001,
+      "secure": 0.001
+     },
+     "competing": [
+      "n-jumps"
+     ],
+     "supporting": [
+      {
+       "attempt": "record#1",
+       "questionId": "gen:apn:18,2,12",
+       "response": "42",
+       "at": "2026-09-01T09:02:00.000Z",
+       "matches": [
+        "n-jumps"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "kernel",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#3",
+       "questionId": "gen:apn:1,2,10",
+       "response": "21",
+       "at": "2026-09-01T09:04:00.000Z",
+       "matches": [
+        "n-jumps"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "kernel",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      }
+     ],
+     "contradicting": [],
+     "obligations": [
+      "teaching in scope",
+      "then a fresh answer alone, in scope"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null
+     },
+     "resolvedBy": null,
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": "2026-09-01T09:04:00.000Z",
+      "attempts": [
+       "record#1",
+       "record#3"
+      ]
+     },
+     "use": {
+      "teach": true,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "12 jumps were counted; from term 1 to term 12 there are 11 jumps. A short explanation is waiting."
+   }
+  },
+  {
+   "step": 6,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": false
+   },
+   "reason": "12 jumps were counted; from term 1 to term 12 there are 11 jumps. Here is a way to rebuild it.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 7,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "guided",
+   "question": "gen:apn:7,7,11",
+   "activity": "guided",
+   "response": "77",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 8,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "check",
+   "question": "gen:apn:14,3,13",
+   "activity": "check",
+   "response": "50",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 3
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "chapter": "Arithmetic progressions",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 9,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:apn:12,5,15",
+   "activity": "practice",
+   "response": "82",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 3
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 4
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours."
+  },
+  {
+   "step": 10,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:apn:7,7,10:mc",
+   "activity": "practice",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 4
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 11,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:apn:18,6,20",
+   "activity": "practice",
+   "response": "132",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 6
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 12,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auapis:16,6,1,3",
+   "activity": "practice",
+   "response": "A",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 6
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 7
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 13,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auapk:1,19,2,27,3",
+   "activity": "practice",
+   "response": "67",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 7
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 8
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 14,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auaps:58,1,8",
+   "activity": "practice",
+   "response": "492",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 8
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 9
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 15,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auapc:-5,2,3,1,0,7",
+   "activity": "practice",
+   "response": "-5",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 9
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 8,
+     "total": 10
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 16,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auaprec:0,-1,5,-3",
+   "activity": "practice",
+   "response": "(1, −5, −13, −23)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 8,
+     "total": 10
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 9,
+     "total": 11
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 17,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auapln:1,3,7",
+   "activity": "practice",
+   "response": "(3, 7)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 9,
+     "total": 11
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 10,
+     "total": 12
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 18,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:apn:12,5,14:mc",
+   "activity": "transfer",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 10,
+     "total": 12
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 13
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 19,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auaps:13,11,24:w",
+   "activity": "transfer",
+   "response": "3348",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 13
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 20,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:auapln:1,24,7:w",
+   "activity": "transfer",
+   "response": "(24, 7)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 15
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 21,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:apn:11,3,6:mc",
+   "activity": "check",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 15
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 14,
+     "total": 16
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 22,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "gen:apn:10,6,20",
+   "activity": "check",
+   "response": "124",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 14,
+     "total": 16
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 23,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "wr:ap:derive-sum",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 24,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "verify",
+   "question": "wr:ap:derive-nth",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 25,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "done",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   }
+  },
+  {
+   "step": 26,
+   "stage": "session",
+   "competency": null,
+   "reason": "new session after 1 day(s)",
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   }
+  },
+  {
+   "step": 27,
+   "stage": "module",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "phase": "done",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "n-jumps",
+    "kind": "procedural",
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "establishedOn": "gen:apn:18,2,12",
+    "resolved": true
+   },
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   }
+  }
+ ],
+ "final": {
+  "facts": {
+   "answered": 21,
+   "discriminatingMet": 11,
+   "showedMisconception": 3,
+   "discriminatingAfterTeaching": 8,
+   "correctOnNonDiscriminatingAfterTeaching": 10,
+   "wrong": [
+    {
+     "q": "gen:apn:18,2,12",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:apn:9,3,19",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:apn:1,2,10",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    }
+   ],
+   "phases": [
+    "diagnostic",
+    "guided",
+    "check",
+    "verify"
+   ]
+  },
+  "snap": {
+   "status": "transfer",
+   "independent": {
+    "right": 15,
+    "total": 17
+   },
+   "assisted": {
+    "right": 1,
+    "total": 1
+   },
+   "retention": "scheduled"
+  },
+  "next": {
+   "kind": "start",
+   "competency": "MATH.algebra.quadratics",
+   "chapter": "Quadratic equations",
+   "reason": "Next in Quadratic equations."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "n-jumps@gen:apn:18,2,12",
+    "claim": {
+     "explanation": "n-jumps",
+     "kind": "procedural",
+     "says": "12 jumps were counted; from term 1 to term 12 there are 11 jumps."
+    },
+    "scope": {
+     "question": "gen:apn:18,2,12",
+     "family": "gen:apn:18,2,12",
+     "observedIn": "MATH.algebra.arithmetic-sequences",
+     "about": "MATH.algebra.arithmetic-sequences"
+    },
+    "status": "resolved",
+    "support": {
+     "n-jumps": 0.987,
+     "unexplained": 0.01,
+     "times-n": 0.001,
+     "forgot-start": 0.001,
+     "secure": 0.001
+    },
+    "competing": [
+     "n-jumps"
+    ],
+    "supporting": [
+     {
+      "attempt": "record#1",
+      "questionId": "gen:apn:18,2,12",
+      "response": "42",
+      "at": "2026-09-01T09:02:00.000Z",
+      "matches": [
+       "n-jumps"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "kernel",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#3",
+      "questionId": "gen:apn:1,2,10",
+      "response": "21",
+      "at": "2026-09-01T09:04:00.000Z",
+      "matches": [
+       "n-jumps"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "kernel",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     }
+    ],
+    "contradicting": [
+     {
+      "attempt": "record#6",
+      "questionId": "gen:apn:14,3,13",
+      "response": "50",
+      "at": "2026-09-01T09:07:00.000Z",
+      "matches": [],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "kernel",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     }
+    ],
+    "obligations": [],
+    "teaching": {
+     "deliveredAt": "2026-09-01T09:05:00.000Z",
+     "strategy": "worked_steps",
+     "competency": "MATH.algebra.arithmetic-sequences"
+    },
+    "resolvedBy": "record#6",
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": "2026-09-01T09:04:00.000Z",
+     "attempts": [
+      "record#1",
+      "record#3"
+     ]
+    },
+    "use": {
+     "teach": false,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.arithmetic-sequences": [
+    {
+     "strategy": "worked_steps",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-01T09:05:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:06:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:07:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": true
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:20:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    },
+    {
+     "strategy": "check_what_it_uses",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:21:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    }
+   ],
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    }
+   ]
+  }
+ }
+}

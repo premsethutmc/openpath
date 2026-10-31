@@ -1,0 +1,439 @@
+{
+  "summary": {
+    "total": 50,
+    "verified": 45,
+    "falseAcceptances": 0,
+    "falseRejections": 5,
+    "firstInvalidStepMatches": 50,
+    "p50Ms": 0.32280500000000245,
+    "p95Ms": 1.2797660000000022,
+    "byCategory": {
+      "geometry-measurement": {
+        "verified": 10,
+        "total": 10
+      },
+      "nested-substitution": {
+        "verified": 15,
+        "total": 15
+      },
+      "function-bound-argument": {
+        "verified": 10,
+        "total": 10
+      },
+      "vector-arithmetic": {
+        "verified": 5,
+        "total": 5
+      },
+      "determinant": {
+        "verified": 5,
+        "total": 5
+      },
+      "derivative": {
+        "verified": 0,
+        "total": 5
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "d6-hold-geometry-000",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 6.275784999999999
+    },
+    {
+      "id": "d6-hold-geometry-001",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.6935340000000068
+    },
+    {
+      "id": "d6-hold-geometry-002",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.5462120000000041
+    },
+    {
+      "id": "d6-hold-geometry-003",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.37950099999999765
+    },
+    {
+      "id": "d6-hold-geometry-004",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.4154449999999983
+    },
+    {
+      "id": "d6-hold-geometry-005",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.4623549999999952
+    },
+    {
+      "id": "d6-hold-geometry-006",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.4909290000000013
+    },
+    {
+      "id": "d6-hold-geometry-007",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.4690960000000004
+    },
+    {
+      "id": "d6-hold-geometry-008",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.49976200000000404
+    },
+    {
+      "id": "d6-hold-geometry-009",
+      "category": "geometry-measurement",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "geometry-measurement-binding",
+      "ms": 0.24056200000000416
+    },
+    {
+      "id": "d6-hold-substitution-000",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 1.2797660000000022
+    },
+    {
+      "id": "d6-hold-substitution-001",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.5959470000000024
+    },
+    {
+      "id": "d6-hold-substitution-002",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.31614599999999626
+    },
+    {
+      "id": "d6-hold-substitution-003",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.3683539999999965
+    },
+    {
+      "id": "d6-hold-substitution-004",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.37873000000000445
+    },
+    {
+      "id": "d6-hold-substitution-005",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.3561960000000042
+    },
+    {
+      "id": "d6-hold-substitution-006",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.2894450000000006
+    },
+    {
+      "id": "d6-hold-substitution-007",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.40404800000000307
+    },
+    {
+      "id": "d6-hold-substitution-008",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.28281600000000395
+    },
+    {
+      "id": "d6-hold-substitution-009",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.28201400000000376
+    },
+    {
+      "id": "d6-hold-substitution-010",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.32280500000000245
+    },
+    {
+      "id": "d6-hold-substitution-011",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.29450299999999885
+    },
+    {
+      "id": "d6-hold-substitution-012",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.3179189999999963
+    },
+    {
+      "id": "d6-hold-substitution-013",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.22988600000000048
+    },
+    {
+      "id": "d6-hold-substitution-014",
+      "category": "nested-substitution",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "typed-symbolic-substitution",
+      "ms": 0.23870900000000006
+    },
+    {
+      "id": "d6-hold-function-000",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 1.2477169999999944
+    },
+    {
+      "id": "d6-hold-function-001",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.5269030000000043
+    },
+    {
+      "id": "d6-hold-function-002",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.3452800000000025
+    },
+    {
+      "id": "d6-hold-function-003",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.30359699999999634
+    },
+    {
+      "id": "d6-hold-function-004",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.2245580000000018
+    },
+    {
+      "id": "d6-hold-function-005",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.3829759999999993
+    },
+    {
+      "id": "d6-hold-function-006",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.35200899999999535
+    },
+    {
+      "id": "d6-hold-function-007",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.40049300000000443
+    },
+    {
+      "id": "d6-hold-function-008",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.45077900000000426
+    },
+    {
+      "id": "d6-hold-function-009",
+      "category": "function-bound-argument",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "function-evaluation",
+      "ms": 0.32031200000000126
+    },
+    {
+      "id": "d6-hold-vector-000",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 1.0315630000000056
+    },
+    {
+      "id": "d6-hold-vector-001",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.13357099999999633
+    },
+    {
+      "id": "d6-hold-vector-002",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.04097200000000356
+    },
+    {
+      "id": "d6-hold-vector-003",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.09090599999999682
+    },
+    {
+      "id": "d6-hold-vector-004",
+      "category": "vector-arithmetic",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-vector",
+      "ms": 0.12880400000000236
+    },
+    {
+      "id": "d6-hold-det-000",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.4564269999999979
+    },
+    {
+      "id": "d6-hold-det-001",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.12167300000000125
+    },
+    {
+      "id": "d6-hold-det-002",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.1150130000000047
+    },
+    {
+      "id": "d6-hold-det-003",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.08095100000000599
+    },
+    {
+      "id": "d6-hold-det-004",
+      "category": "determinant",
+      "classification": "verified",
+      "firstInvalidStep": null,
+      "adapter": "linear-determinant",
+      "ms": 0.05874899999999883
+    },
+    {
+      "id": "d6-hold-derivative-000",
+      "category": "derivative",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "ms": 1.881807000000002
+    },
+    {
+      "id": "d6-hold-derivative-001",
+      "category": "derivative",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "ms": 0.08011100000000226
+    },
+    {
+      "id": "d6-hold-derivative-002",
+      "category": "derivative",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "ms": 0.015953999999993584
+    },
+    {
+      "id": "d6-hold-derivative-003",
+      "category": "derivative",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "ms": 0.009634999999995841
+    },
+    {
+      "id": "d6-hold-derivative-004",
+      "category": "derivative",
+      "classification": "unsupported",
+      "firstInvalidStep": null,
+      "adapter": null,
+      "ms": 0.007601000000001079
+    }
+  ]
+}

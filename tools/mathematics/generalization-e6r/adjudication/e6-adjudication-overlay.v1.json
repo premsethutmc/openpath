@@ -1,0 +1,386 @@
+{
+ "overlayVersion": "e6r-adjudication-overlay@1",
+ "policy": "original frozen corpora are never edited; corrections apply only when the evaluator is run with E6R_OVERLAY=1; raw results are always reported alongside",
+ "adjudications": [
+  {
+   "caseId": "e6-213",
+   "partition": "validation",
+   "task": "multiply",
+   "problem": {
+    "area": "arithmetic",
+    "data": {
+     "a": {
+      "im": "2",
+      "re": "1"
+     },
+     "b": {
+      "im": "-1",
+      "re": "3"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "multiply"
+   },
+   "studentWorking": "conj((1 + 2*i)*(3 - i)) = conj(1 + 2*i)*conj(3 - i) = (1 - 2*i)*(3 + i) = 3 + i - 6*i - 2*i^2 = 5 - 5*i",
+   "originalReference": "verified",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "incomplete",
+     "reasoning": "The task asks for the product (1+2i)(3-i)=3-i+6i-2i^2=5+5i. The student computes the conjugate of the product. The conj(a*b)=conj(a)*conj(b) step is valid, and (1-2i)(3+i)=5-5i is correct arithmetic. Every line is true, but the result is the conjugate 5-5i, a different quantity from the requested 5+5i, so the working is incomplete.",
+     "contestable": true
+    },
+    "implementerAnalysis": "conj(zw)=conj z conj w and (1-2i)(3+i)=5-5i are true; the product is 5+5i; the working never returns to it."
+   },
+   "correctedClassification": "incomplete",
+   "labelDefect": "The reference marks a working that ends at conj(product)=5-5i as verified. All lines are true, but the requested quantity is the product 5+5i, which is never stated; the conjugate detour needs one more step.",
+   "contestable": false
+  },
+  {
+   "caseId": "e6-288",
+   "partition": "validation",
+   "task": "verify-root",
+   "problem": {
+    "area": "polynomial",
+    "assumptions": [
+     "real-coefficients"
+    ],
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "1",
+      "-6",
+      "25"
+     ],
+     "root": {
+      "im": "4",
+      "re": "3"
+     }
+    },
+    "domain": "complex-polynomial",
+    "task": "verify-root"
+   },
+   "studentWorking": "|3 + 4i| = \u221a(9 + 16) = \u221a(25) = 5",
+   "originalReference": "verified",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "incomplete",
+     "reasoning": "To verify that 3+4i is a root of x^2-6x+25, one must show p(3+4i)=0: (3+4i)^2-6(3+4i)+25=(-7+24i)-18-24i+25=0. The student only computes |3+4i|=5, which is true but does not show the polynomial vanishes. Its modulus equals sqrt(25), but that is not a verification. All lines are valid but the requested conclusion is not reached, so incomplete.",
+     "contestable": true
+    },
+    "implementerAnalysis": "|3+4i|=5 is true and consistent with Vieta (product of conjugate roots 25) but p(3+4i)=0 is never shown."
+   },
+   "correctedClassification": "incomplete",
+   "labelDefect": "The reference marks |3+4i|=5 as verifying the root of x^2-6x+25. A true modulus does not evaluate the polynomial at the root nor conclude it vanishes.",
+   "contestable": false
+  },
+  {
+   "caseId": "e6-220",
+   "partition": "sealed",
+   "task": "quadratic-roots",
+   "problem": {
+    "area": "polynomial",
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "1",
+      "4",
+      "13"
+     ]
+    },
+    "domain": "complex-polynomial",
+    "task": "quadratic-roots"
+   },
+   "studentWorking": "D = 4^{2} - 4 \\cdot 1 \\cdot 13\nD = 16 - 52 = -36\n\\frac{-4 + \\sqrt{-36}}{2} = \\frac{-4 + 6i}{2} = -2 + 3i",
+   "originalReference": "verified",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "incomplete",
+     "reasoning": "The discriminant is 16-52=-36, and sqrt(-36)=6i, so (-4+6i)/2=-2+3i is a correct root. Every line is valid. The task asks for all roots over the complex domain, and the conjugate root -2-3i is never given. The answer covers only part of the solution set, so it is incomplete rather than invalid.",
+     "contestable": false
+    },
+    "implementerAnalysis": "Both roots -2\u00b13i are required over C; only one is derived."
+   },
+   "correctedClassification": "incomplete",
+   "labelDefect": "The reference marks a single root -2+3i as the complete solution over the complex numbers; the conjugate root -2-3i is never given and the formula is written with + only.",
+   "contestable": false
+  },
+  {
+   "caseId": "e6-263",
+   "partition": "sealed",
+   "task": "derivative",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "log"
+      },
+      {
+       "argument": {
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2,
+        "kind": "power"
+       },
+       "kind": "log"
+      }
+     ]
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "studentWorking": "ln(x) + ln(x^2) = ln(x^3)\nd/dx[ln(x) + ln(x^2)] = 3/x",
+   "originalReference": "missing-assumption",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "verified",
+     "reasoning": "The posed expression ln(x)+ln(x^2) is real only for x>0, because ln(x) needs x>0. On that domain ln(x)+ln(x^2)=ln(x)+2ln(x)=3ln(x)=ln(x^3), so the first line is valid. The derivative is 3/x, which is correct. The restriction x>0 is implied by the task, so it is not a missing assumption.",
+     "contestable": true
+    },
+    "implementerAnalysis": "ln x + ln x^2 = ln x^3 on x>0 (the domain of the posed function); derivative 3/x is correct."
+   },
+   "correctedClassification": "verified",
+   "labelDefect": "The reference demands a stated x>0. The posed function ln x + ln x^2 is real only for x>0, so x>0 is implied by the task; on that domain the identity holds and the sides have the same domain.",
+   "contestable": true
+  },
+  {
+   "caseId": "e6-204",
+   "partition": "sealed",
+   "task": "independent-intersection",
+   "problem": {
+    "area": "probability",
+    "assumptions": [
+     "independent"
+    ],
+    "data": {
+     "pa": "1/2",
+     "pb": "1/3"
+    },
+    "domain": "probability-statistics",
+    "task": "independent-intersection"
+   },
+   "studentWorking": "P(A, B) = 1/6",
+   "originalReference": "ambiguous",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "verified",
+     "reasoning": "Under the stated independence assumption, P(A and B)=P(A)P(B)=1/2*1/3=1/6. The line gives 1/6, which is correct. P(A, B) is the standard joint-probability notation for the intersection. The working gives no explicit product step, but the line is true and the assumption comes from the task.",
+     "contestable": true
+    },
+    "implementerAnalysis": "Under independence P(A\u2229B)=1/2\u00b71/3=1/6. Contract revision E6-R: a comma list is joint only under a typed joint/intersection task; elsewhere it stays ambiguous."
+   },
+   "correctedClassification": "verified",
+   "labelDefect": "The reference calls P(A, B)=1/6 ambiguous. The typed task is the intersection of independent events (assumption given), which authorises reading the comma list as the joint event; the value is correct.",
+   "contestable": true
+  },
+  {
+   "caseId": "e6-251",
+   "partition": "validation",
+   "task": "derivative",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2,
+         "kind": "power"
+        },
+        {
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "4"
+          }
+         ],
+         "kind": "multiply"
+        }
+       ]
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "2"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "studentWorking": "f(x) = (x\u00b2 - 4)/(x - 2)\nf = (x - 2) \u00b7 (x + 2)/(x - 2) = x + 2\nf'(x) = 1",
+   "originalReference": "missing-assumption",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "verified",
+     "reasoning": "The posed function (x^2-4)/(x-2) has real domain x!=2. On it (x-2)(x+2)/(x-2)=x+2 is valid because the cancelled factor is nonzero there. The right side x+2 has a larger natural domain, but the equality holds on the whole posed domain, so no stated restriction is needed. Writing f for f(x) is harmless shorthand. The derivative is 1 on x!=2, which is the requested answer on the posed domain.",
+     "contestable": true
+    },
+    "implementerAnalysis": "(x^2-4)/(x-2)=x+2 on x\u22602, the domain of f; f'=1 on that domain."
+   },
+   "correctedClassification": "verified",
+   "labelDefect": "The reference demands a stated x\u22602 for the cancellation. x\u22602 is already excluded by the posed function, the equality f=x+2 holds on every point of that domain, and f'(x)=1 is claimed there.",
+   "contestable": true
+  },
+  {
+   "caseId": "e6-124",
+   "partition": "sealed",
+   "task": "limit",
+   "problem": {
+    "approach": "2",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "2"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "right",
+    "task": "limit",
+    "variable": "x"
+   },
+   "studentWorking": "lim x->2+ (1/(x - 2)) = \u221e",
+   "originalReference": "verified",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "verified",
+     "reasoning": "The posed expression is 1*(x-2)^-1 with approach 2 from the right. For x slightly above 2, x-2 is a small positive number, so 1/(x-2) grows without bound positively. The single line states the limit is infinity, which is the correct divergent right-hand limit. Reading unsigned infinity as +infinity is standard.",
+     "contestable": true
+    },
+    "implementerAnalysis": "The reference is correct; the engine mis-parsed the attached one-sided marker and rejected one-sided lemmas of a two-sided limit."
+   },
+   "correctedClassification": "verified",
+   "labelDefect": null,
+   "contestable": false,
+   "note": "no relabelling: original reference stands; recorded for completeness"
+  },
+  {
+   "caseId": "e6-126",
+   "partition": "sealed",
+   "task": "limit",
+   "problem": {
+    "approach": "1",
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "1"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "side": "both",
+    "task": "limit",
+    "variable": "x"
+   },
+   "studentWorking": "lim_(x\u21921+) (1/(x - 1)) = \u221e\nlim_(x\u21921-) (1/(x - 1)) = -\u221e\nlim_(x\u21921) (1/(x - 1)) = does not exist",
+   "originalReference": "verified",
+   "independentAdjudication": {
+    "blindAdjudicator": {
+     "verdict": "verified",
+     "reasoning": "The expression is 1/(x-1) at 1 with side both. The right-hand limit is +infinity and the left-hand limit is -infinity, both correct. Since the one-sided limits differ, the two-sided limit does not exist, which is the correct conclusion. All three lines are valid and answer the two-sided question.",
+     "contestable": false
+    },
+    "implementerAnalysis": "The reference is correct; the engine mis-parsed the attached one-sided marker and rejected one-sided lemmas of a two-sided limit."
+   },
+   "correctedClassification": "verified",
+   "labelDefect": null,
+   "contestable": false,
+   "note": "no relabelling: original reference stands; recorded for completeness"
+  }
+ ]
+}

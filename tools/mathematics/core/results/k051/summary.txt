@@ -1,0 +1,10 @@
+smoke20: traces byte-identical to committed K05.1 results
+checked 20 items; 0 with problems
+seeded500: traces byte-identical to committed K05.1 results
+checked 500 items; 0 with problems
+edge50: traces byte-identical to committed K05.1 results
+checked 56 items; 0 with problems
+holdout-b: traces byte-identical to committed K05.1 results
+checked 500 items; 0 with problems
+constructed: traces byte-identical to committed K05.1 results
+checked 360 items; 0 with problems

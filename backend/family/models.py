@@ -18,10 +18,10 @@ from django.conf import settings
 from django.db import models
 
 # Subjects that share the pupil identity and the event architecture. English is the
-# only one with an engine today; mathematics is reserved so a later engine can keep
-# its own ordered ledger for the same pupil.
+# existing implementation; mathematics uses the same engine and pupil identity,
+# with its own ordered subject events.
 SUBJECTS = [("english", "English"), ("mathematics", "Mathematics")]
-ACTIVE_SUBJECTS = {"english"}
+ACTIVE_SUBJECTS = {"english", "mathematics"}
 
 
 class Pupil(models.Model):
@@ -40,6 +40,15 @@ class Pupil(models.Model):
 
     def __str__(self) -> str:
         return f"pupil {self.pk}"
+
+
+class _AppendOnlyQuerySet(models.QuerySet):
+    """grading decisions only: PupilEvent bodies may still be rewritten by the parent-requested privacy scrub (views.PupilScrubView)"""
+    def update(self, **kwargs):
+        raise ValueError("append-only records cannot be updated")
+
+    def bulk_update(self, *args, **kwargs):
+        raise ValueError("append-only records cannot be updated")
 
 
 class PupilEvent(models.Model):
@@ -131,3 +140,170 @@ class ClientMetric(models.Model):
     ok = models.BooleanField(default=True)
     app_version = models.CharField(max_length=40, blank=True)
     detail = models.CharField(max_length=200, blank=True)
+
+
+# ---------------------------------------------------------------- educator review of learning content (review@2)
+
+
+class ContentReviewer(models.Model):
+    """An explicit grant of a content-review role to one account (educator: approve, reject, request changes;
+    release manager: release approved content). Granted only by `manage.py content_reviewer grant`."""
+
+    ROLES = [("educator", "Educator"), ("release_manager", "Release manager")]
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="content_roles")
+    role = models.CharField(max_length=20, choices=ROLES)
+    granted_at = models.DateTimeField(auto_now_add=True)
+    granted_via = models.CharField(max_length=40)
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["user", "role"], name="one_grant_per_role")]
+
+    @property
+    def active(self) -> bool:
+        return self.revoked_at is None
+
+
+class AppendOnlyQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise ValueError("content review decisions are append-only")
+
+    def delete(self):
+        raise ValueError("content review decisions are append-only")
+
+
+class ContentDecision(models.Model):
+    """One review decision on one version of one item (family:<id> or module:<competency>). Append-only: the history
+    is the record of who decided what, on which content hash, when."""
+
+    DECISIONS = [("submit", "Submit"), ("approve", "Approve"), ("request_changes", "Request changes"), ("reject", "Reject"), ("release", "Release")]
+    item = models.CharField(max_length=120, db_index=True)
+    content_hash = models.CharField(max_length=16)
+    version = models.CharField(max_length=20, blank=True)
+    decision = models.CharField(max_length=20, choices=DECISIONS)
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name="+")
+    reviewer_label = models.CharField(max_length=160, help_text="The reviewer's name or email when they decided.")
+    role = models.CharField(max_length=20)
+    note = models.TextField(max_length=2000, blank=True)
+    at = models.DateTimeField(auto_now_add=True)
+
+    objects = AppendOnlyQuerySet.as_manager()
+
+    class Meta:
+        ordering = ["at", "id"]
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValueError("content review decisions are append-only")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValueError("content review decisions are append-only")
+
+
+# ---------------------------------------------------------------- written answers marked by an educator (written@1)
+
+
+class MarkingShare(models.Model):
+    """A parent's explicit choice to let one educator read and mark one pupil's written answers (proofs,
+    constructions, explanations). Nothing is shared by default; revoking stops access from then on."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="marking_shares")
+    reviewer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="marking_pupils")
+    granted_at = models.DateTimeField(auto_now_add=True)
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        ordering = ["granted_at", "id"]
+
+
+class WrittenMarkQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise ValueError("written marks are append-only")
+
+    def delete(self):
+        raise ValueError("written marks are append-only")
+
+
+class WrittenMark(models.Model):
+    """An educator's mark on one written answer (one learning_record attempt). Append-only and one per attempt:
+    a mark, once given, is part of the learner's history. Only a mark of "correct" is evidence of success."""
+
+    VERDICTS = [("correct", "Correct"), ("partial", "Partly correct"), ("incorrect", "Not yet correct")]
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="written_marks")
+    attempt_id = models.CharField(max_length=100)
+    question_id = models.CharField(max_length=120)
+    verdict = models.CharField(max_length=12, choices=VERDICTS)
+    score = models.PositiveSmallIntegerField()
+    out_of = models.PositiveSmallIntegerField()
+    feedback = models.TextField(max_length=2000)
+    marker = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name="+")
+    at = models.DateTimeField(auto_now_add=True)
+
+    objects = WrittenMarkQuerySet.as_manager()
+
+    class Meta:
+        ordering = ["at", "id"]
+        constraints = [models.UniqueConstraint(fields=["pupil", "attempt_id"], name="one_mark_per_written_attempt")]
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValueError("written marks are append-only")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValueError("written marks are append-only")
+
+
+class WritingDraft(models.Model):
+    """Resumable input/activity state, not a learner estimate or evidence ledger."""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name='writing_drafts')
+    problem_key = models.CharField(max_length=160)
+    topic = models.CharField(max_length=24)
+    parameters = models.JSONField(default=dict)
+    work = models.JSONField(null=True)
+    version = models.PositiveIntegerField(default=0)
+    stage = models.CharField(max_length=24, default='intro')
+    support = models.JSONField(default=dict)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=['pupil', 'problem_key'], name='unique_pupil_writing_problem')]
+
+
+# ---------------------------------------------------------------- grading decisions (grading-decision@1)
+
+
+class GradingDecisionRecord(models.Model):
+    """One authoritative grading decision about one stored attempt (UNIFIED_GRADING_ARCHITECTURE.md §7, §9). Append-only: a decision is
+    never changed. A later decision about the same attempt names the one it supersedes (an automatic regrade of an infrastructure
+    failure, or an approved, reported batch); replay uses the latest that nothing supersedes. The same decision is also kept inside the
+    attempt event body, which is itself immutable."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="grading_decisions")
+    subject = models.CharField(max_length=24, choices=SUBJECTS)
+    attempt_id = models.CharField(max_length=100)
+    decision_id = models.CharField(max_length=40, unique=True)
+    supersedes = models.CharField(max_length=40, blank=True, default="")
+    reason = models.CharField(max_length=60)
+    verdict = models.CharField(max_length=20)
+    decided_at = models.DateTimeField()
+    body = models.JSONField()
+
+    objects = _AppendOnlyQuerySet.as_manager()
+
+    class Meta:
+        ordering = ["pupil", "subject", "decided_at", "id"]
+        indexes = [models.Index(fields=["pupil", "subject", "attempt_id"], name="grading_decision_attempt")]
+        constraints = [
+            # one original decision per attempt, and at most one decision superseding any decision: a retried or concurrent regrade can
+            # never leave two authoritative outcomes for one answer (release check B)
+            models.UniqueConstraint(fields=["pupil", "subject", "attempt_id"], condition=models.Q(supersedes=""), name="one_original_decision_per_attempt"),
+            models.UniqueConstraint(fields=["supersedes"], condition=~models.Q(supersedes=""), name="one_successor_per_decision"),
+        ]
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValueError("grading decisions are append-only")
+        super().save(*args, **kwargs)

@@ -1,0 +1,2451 @@
+{
+ "id": "correct-nondiscriminating",
+ "competency": "MATH.algebra.quadratic-discriminant",
+ "truth": {
+  "misconception": "forgot-four",
+  "heldAtEnd": true,
+  "taughtByEnd": true,
+  "notes": "quadratic discriminant (disc): forgets the 4 in b² − 4ac whenever that changes the answer; right answers after teaching come only from questions on which forgot-four predicts nothing distinct"
+ },
+ "expect": {
+  "investigation": "either",
+  "resolution": "must-not-resolve",
+  "establish": "either",
+  "notes": "a right answer on a question the misconception cannot be seen on is no evidence it has gone: the engine must not resolve it on such answers (and any discriminating question after teaching is answered wrong)"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "diagnostic",
+   "question": "gen:disc:5,14",
+   "activity": "diagnostic",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35,
+    "posterior": {
+     "secure": 0.35,
+     "conceptual": 0.15,
+     "procedural": 0.15,
+     "recall": 0.15,
+     "prerequisite": 0.1,
+     "transfer": 0.1
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 2,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "diagnostic",
+   "question": "gen:disc:-7,-18",
+   "activity": "diagnostic",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56,
+    "posterior": {
+     "secure": 0.050909090909090904,
+     "conceptual": 0.15272727272727274,
+     "procedural": 0.5563636363636364,
+     "recall": 0.1090909090909091,
+     "prerequisite": 0.10181818181818182,
+     "transfer": 0.02909090909090909
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 3,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "diagnostic",
+   "question": "gen:disc:-11,-11",
+   "activity": "diagnostic",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.29,
+    "posterior": {
+     "secure": 0.16164207825529184,
+     "conceptual": 0.16164207825529187,
+     "procedural": 0.2944194996792816,
+     "recall": 0.19243104554201412,
+     "prerequisite": 0.1077613855035279,
+     "transfer": 0.0821039127645927
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 4,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "investigate",
+   "question": "gen:disc:-1,1",
+   "activity": "probe",
+   "context": "investigate:gen:disc:5,14",
+   "response": "1",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "The discriminant was taken as b² − c; it is b² − 4ac. A short explanation is waiting."
+   },
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.34,
+    "posterior": {
+     "secure": 0.33647355537423035,
+     "conceptual": 0.11215785179141013,
+     "procedural": 0.1021437578814628,
+     "recall": 0.22253542022105186,
+     "prerequisite": 0.0747719011942734,
+     "transfer": 0.1519175135375714
+    }
+   },
+   "reasoning": {
+    "status": "need_more",
+    "best": null,
+    "competing": [
+     "forgot-four"
+    ],
+    "support": {
+     "forgot-four": 0.968,
+     "unexplained": 0.023,
+     "secure": 0.009
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "One more question to understand what happened (it does not count against you)."
+  },
+  {
+   "step": 5,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "complete",
+   "question": null,
+   "diagnosis": {
+    "result": "insufficient_evidence",
+    "confidence": 0.34,
+    "posterior": {
+     "secure": 0.33647355537423035,
+     "conceptual": 0.11215785179141013,
+     "procedural": 0.1021437578814628,
+     "recall": 0.22253542022105186,
+     "prerequisite": 0.0747719011942734,
+     "transfer": 0.1519175135375714
+    }
+   },
+   "reasoning": {
+    "status": "established",
+    "best": "forgot-four",
+    "competing": [
+     "forgot-four"
+    ],
+    "support": {
+     "forgot-four": 0.996,
+     "unexplained": 0.003,
+     "secure": 0
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": {
+     "kind": "teach",
+     "competency": "MATH.algebra.quadratic-discriminant",
+     "why": "The discriminant was taken as b² − c; it is b² − 4ac."
+    }
+   },
+   "reason": "Back to the original problem.",
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "The discriminant was taken as b² − c; it is b² − 4ac. A short explanation is waiting."
+   }
+  },
+  {
+   "step": 6,
+   "stage": "plan",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "planItems": [
+    {
+     "competency": "MATH.algebra.quadratic-discriminant",
+     "reason": "The discriminant was taken as b² − c; it is b² − 4ac. Here is a way to rebuild it."
+    },
+    {
+     "competency": "MATH.algebra.quadratics",
+     "reason": "Next in Quadratic equations."
+    }
+   ],
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "forgot-four@gen:disc:5,14",
+     "claim": {
+      "explanation": "forgot-four",
+      "kind": "procedural",
+      "says": "The discriminant was taken as b² − c; it is b² − 4ac."
+     },
+     "scope": {
+      "question": "gen:disc:5,14",
+      "family": "gen:disc:5,14",
+      "observedIn": "MATH.algebra.quadratic-discriminant",
+      "about": "MATH.algebra.quadratic-discriminant"
+     },
+     "status": "established",
+     "support": {
+      "forgot-four": 0.996,
+      "unexplained": 0.003,
+      "secure": 0
+     },
+     "competing": [
+      "forgot-four"
+     ],
+     "supporting": [
+      {
+       "attempt": "record#1",
+       "questionId": "gen:disc:5,14",
+       "response": "2",
+       "at": "2026-09-01T09:02:00.000Z",
+       "matches": [
+        "forgot-four"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#4",
+       "questionId": "gen:disc:-1,1",
+       "response": "1",
+       "at": "2026-09-01T09:05:00.000Z",
+       "matches": [
+        "forgot-four"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      }
+     ],
+     "contradicting": [],
+     "obligations": [
+      "teaching in scope",
+      "then a right answer alone to a question that discriminates it"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null,
+      "lastAt": null
+     },
+     "resolvedBy": null,
+     "probes": [],
+     "uncertainty": {
+      "supporting": 0,
+      "contradicting": 0,
+      "inconclusive": 0,
+      "note": "no discriminating answer since it was established"
+     },
+     "teachingDue": true,
+     "probeDue": false,
+     "trigger": {
+      "kind": "starting-check",
+      "detail": "a wrong answer in the starting-point check"
+     },
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": "2026-09-01T09:05:00.000Z",
+      "attempts": [
+       "record#1",
+       "record#4"
+      ]
+     },
+     "use": {
+      "teach": true,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "The discriminant was taken as b² − c; it is b² − 4ac. A short explanation is waiting."
+   }
+  },
+  {
+   "step": 7,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "The discriminant was taken as b² − c; it is b² − 4ac. Here is a way to rebuild it.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "careful_signs",
+     "kind": "procedural",
+     "title": "Write each part with its sign",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   }
+  },
+  {
+   "step": 8,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "guided",
+   "question": "gen:disc:5,13",
+   "activity": "guided",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "careful_signs",
+     "kind": "procedural",
+     "title": "Write each part with its sign",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 9,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "check",
+   "question": "gen:disc:-2,-3:mc",
+   "activity": "check",
+   "response": "C",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "careful_signs",
+     "kind": "procedural",
+     "title": "Write each part with its sign",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 10,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "verify",
+   "question": "gen:disc:5,10:mc",
+   "activity": "practice",
+   "response": "C",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "One question on your own that shows whether that misunderstanding has gone."
+  },
+  {
+   "step": 11,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "The discriminant was taken as b² − c; it is b² − 4ac. It showed again after the last explanation, so here is a different one.",
+   "intervention": {
+    "support": null,
+    "plan": null,
+    "strategy": {
+     "id": "parabola",
+     "kind": "conceptual",
+     "title": "Picture the parabola",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   }
+  },
+  {
+   "step": 12,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "guided",
+   "question": "gen:disc:10,-19",
+   "activity": "guided",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "parabola",
+     "kind": "conceptual",
+     "title": "Picture the parabola",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 13,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "check",
+   "question": "gen:disc:-2,-2",
+   "activity": "check",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 5
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 6
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "parabola",
+     "kind": "conceptual",
+     "title": "Picture the parabola",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 14,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "verify",
+   "question": "gen:disc:6,20:mc",
+   "activity": "check",
+   "response": "C",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 6
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 4,
+     "total": 7
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "One question on your own that shows whether that misunderstanding has gone."
+  },
+  {
+   "step": 15,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "The discriminant was taken as b² − c; it is b² − 4ac. It showed again after the last explanation, so here is a different one.",
+   "intervention": {
+    "support": null,
+    "plan": null,
+    "strategy": {
+     "id": "signed_numbers",
+     "kind": "prerequisite",
+     "title": "Subtracting a negative",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 4,
+     "total": 7
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 4,
+     "total": 7
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 16,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "guided",
+   "question": "gen:disc:10,-18",
+   "activity": "guided",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 4,
+     "total": 7
+    },
+    "assisted": {
+     "right": 1,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 4,
+     "total": 7
+    },
+    "assisted": {
+     "right": 2,
+     "total": 3
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "signed_numbers",
+     "kind": "prerequisite",
+     "title": "Subtracting a negative",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 17,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "check",
+   "question": "gen:disc:-10,20",
+   "activity": "check",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 4,
+     "total": 7
+    },
+    "assisted": {
+     "right": 2,
+     "total": 3
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 8
+    },
+    "assisted": {
+     "right": 2,
+     "total": 3
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Next in Quadratic equations."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "signed_numbers",
+     "kind": "prerequisite",
+     "title": "Subtracting a negative",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 18,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "verify",
+   "question": "gen:disc:2,4",
+   "activity": "check",
+   "response": "1",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 8
+    },
+    "assisted": {
+     "right": 2,
+     "total": 3
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 5,
+     "total": 9
+    },
+    "assisted": {
+     "right": 2,
+     "total": 3
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "One question on your own that shows whether that misunderstanding has gone."
+  },
+  {
+   "step": 19,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "pause",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 5,
+     "total": 9
+    },
+    "assisted": {
+     "right": 2,
+     "total": 3
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 20,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "explore",
+   "question": "qd-d1",
+   "activity": "diagnostic",
+   "response": "2,3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratics",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 21,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "explore",
+   "question": "qd-d2",
+   "activity": "diagnostic",
+   "response": "7",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 22,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "verify",
+   "question": "qd-p1",
+   "activity": "practice",
+   "response": "-4,-1",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.72
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 23,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "verify",
+   "question": "qd-p2",
+   "activity": "practice",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.72
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 24,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "verify",
+   "question": "qd-t1",
+   "activity": "transfer",
+   "response": "3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.72
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 25,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "verify",
+   "question": "qd-c1",
+   "activity": "check",
+   "response": "-2,3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.72
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 26,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "verify",
+   "question": "qd-s2c",
+   "activity": "check",
+   "response": "A",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.72
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 27,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "verify",
+   "question": "wr:quad:graph-k",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.72
+   },
+   "finding": null,
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 28,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratics",
+   "phase": "done",
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.72
+   },
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 29,
+   "stage": "session",
+   "competency": null,
+   "reason": "new session after 1 day(s)",
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 30,
+   "stage": "module",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "phase": "pause",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.34
+   },
+   "finding": {
+    "explanation": "forgot-four",
+    "kind": "procedural",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "establishedOn": "gen:disc:5,14",
+    "resolved": false
+   },
+   "reason": "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 5,
+     "total": 9
+    },
+    "assisted": {
+     "right": 2,
+     "total": 3
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.quadratic-discriminant",
+    "chapter": "Quadratic equations",
+    "reason": "Carry on where you left off."
+   }
+  }
+ ],
+ "final": {
+  "endOfSession1": {
+   "status": "guided",
+   "independent": {
+    "right": 5,
+    "total": 9
+   },
+   "assisted": {
+    "right": 2,
+    "total": 3
+   },
+   "retention": "scheduled"
+  },
+  "facts": {
+   "answered": 21,
+   "discriminatingMet": 6,
+   "showedMisconception": 6,
+   "discriminatingAfterTeaching": 4,
+   "correctOnNonDiscriminatingAfterTeaching": 13,
+   "wrong": [
+    {
+     "q": "gen:disc:5,14",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:disc:-1,1",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:disc:5,13",
+     "phase": "guided",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:disc:5,10:mc",
+     "phase": "verify",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:disc:6,20:mc",
+     "phase": "verify",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:disc:2,4",
+     "phase": "verify",
+     "session": "s1",
+     "misconception": true
+    }
+   ],
+   "phases": [
+    "diagnostic",
+    "guided",
+    "check",
+    "verify",
+    "explore"
+   ]
+  },
+  "snap": {
+   "status": "guided",
+   "independent": {
+    "right": 5,
+    "total": 9
+   },
+   "assisted": {
+    "right": 2,
+    "total": 3
+   },
+   "retention": "scheduled"
+  },
+  "next": {
+   "kind": "continue",
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "chapter": "Quadratic equations",
+   "reason": "Carry on where you left off."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "forgot-four@gen:disc:5,14",
+    "claim": {
+     "explanation": "forgot-four",
+     "kind": "procedural",
+     "says": "The discriminant was taken as b² − c; it is b² − 4ac."
+    },
+    "scope": {
+     "question": "gen:disc:5,14",
+     "family": "gen:disc:5,14",
+     "observedIn": "MATH.algebra.quadratic-discriminant",
+     "about": "MATH.algebra.quadratic-discriminant"
+    },
+    "status": "established",
+    "support": {
+     "forgot-four": 0.996,
+     "unexplained": 0.003,
+     "secure": 0
+    },
+    "competing": [
+     "forgot-four"
+    ],
+    "supporting": [
+     {
+      "attempt": "record#1",
+      "questionId": "gen:disc:5,14",
+      "response": "2",
+      "at": "2026-09-01T09:02:00.000Z",
+      "matches": [
+       "forgot-four"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#4",
+      "questionId": "gen:disc:-1,1",
+      "response": "1",
+      "at": "2026-09-01T09:05:00.000Z",
+      "matches": [
+       "forgot-four"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#8",
+      "questionId": "gen:disc:5,10:mc",
+      "response": "C",
+      "at": "2026-09-01T09:09:00.000Z",
+      "matches": [
+       "forgot-four"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#12",
+      "questionId": "gen:disc:6,20:mc",
+      "response": "C",
+      "at": "2026-09-01T09:13:00.000Z",
+      "matches": [
+       "forgot-four"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#16",
+      "questionId": "gen:disc:2,4",
+      "response": "1",
+      "at": "2026-09-01T09:17:00.000Z",
+      "matches": [
+       "forgot-four"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     }
+    ],
+    "contradicting": [],
+    "obligations": [
+     "teaching in scope",
+     "then a right answer alone to a question that discriminates it"
+    ],
+    "teaching": {
+     "deliveredAt": "2026-09-01T09:06:00.000Z",
+     "strategy": "careful_signs",
+     "competency": "MATH.algebra.quadratic-discriminant",
+     "lastAt": "2026-09-01T09:14:00.000Z"
+    },
+    "resolvedBy": null,
+    "probes": [
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "forgot-four@gen:disc:5,14",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:disc:5,13",
+      "family": "disc",
+      "prediction": {
+       "explanation": "forgot-four",
+       "values": [
+        "2"
+       ]
+      },
+      "expected": {
+       "target": "0",
+       "distinguishes": true
+      },
+      "response": "2",
+      "assistance": {
+       "activity": "guided",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": false
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "inconclusive",
+      "at": "2026-09-01T09:07:00.000Z",
+      "attempt": "record#6"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "forgot-four@gen:disc:5,14",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:disc:5,10:mc",
+      "family": "disc",
+      "prediction": {
+       "explanation": "forgot-four",
+       "values": [
+        "2"
+       ]
+      },
+      "expected": {
+       "target": "0",
+       "distinguishes": true
+      },
+      "response": "C",
+      "assistance": {
+       "activity": "practice",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "supports",
+      "at": "2026-09-01T09:09:00.000Z",
+      "attempt": "record#8"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "forgot-four@gen:disc:5,14",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:disc:6,20:mc",
+      "family": "disc",
+      "prediction": {
+       "explanation": "forgot-four",
+       "values": [
+        "2"
+       ]
+      },
+      "expected": {
+       "target": "0",
+       "distinguishes": true
+      },
+      "response": "C",
+      "assistance": {
+       "activity": "check",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "supports",
+      "at": "2026-09-01T09:13:00.000Z",
+      "attempt": "record#12"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "forgot-four@gen:disc:5,14",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:disc:2,4",
+      "family": "disc",
+      "prediction": {
+       "explanation": "forgot-four",
+       "values": [
+        "1"
+       ]
+      },
+      "expected": {
+       "target": "0",
+       "distinguishes": true
+      },
+      "response": "1",
+      "assistance": {
+       "activity": "check",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "supports",
+      "at": "2026-09-01T09:17:00.000Z",
+      "attempt": "record#16"
+     }
+    ],
+    "uncertainty": {
+     "supporting": 3,
+     "contradicting": 0,
+     "inconclusive": 1,
+     "note": "0 against, 3 for, after it was established (counts, not a probability)"
+    },
+    "teachingDue": true,
+    "probeDue": false,
+    "trigger": {
+     "kind": "starting-check",
+     "detail": "a wrong answer in the starting-point check"
+    },
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": "2026-09-01T09:05:00.000Z",
+     "attempts": [
+      "record#1",
+      "record#4"
+     ]
+    },
+    "use": {
+     "teach": true,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [
+      "2026-09-01T09:10:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:11:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:12:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": true
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-01T09:06:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:07:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:08:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": true
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [
+      "2026-09-01T09:14:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:15:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:16:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": true
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "label": "e3-after",
+ "samples": 875,
+ "stages": {
+  "parse": {
+   "n": 760,
+   "p50": 0.043,
+   "p95": 0.119,
+   "max": 2.25
+  },
+  "independentVerification": {
+   "n": 470,
+   "p50": 1.358,
+   "p95": 4.829,
+   "max": 13.672
+  },
+  "overall": {
+   "n": 875,
+   "p50": 0.944,
+   "p95": 9.713,
+   "max": 57.142
+  }
+ },
+ "memoryMB": 104
+}

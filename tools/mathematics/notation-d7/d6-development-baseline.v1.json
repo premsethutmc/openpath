@@ -1,0 +1,2910 @@
+{
+  "summary": {
+    "total": 175,
+    "parseClassMatches": 111,
+    "typedInterpretationMatches": 63,
+    "assessed": 98,
+    "assessmentMatches": 28,
+    "falseMathematicalAcceptances": 0,
+    "falseMathematicalRejections": 62,
+    "parseP50Ms": 0.008873000000001241,
+    "parseP95Ms": 0.09761600000000215,
+    "assessmentP50Ms": 0.013780000000004122,
+    "assessmentP95Ms": 0.5715590000000006,
+    "byCategory": {
+      "derivative": {
+        "total": 42,
+        "parse": 13,
+        "typed": 0,
+        "assessment": 0
+      },
+      "function": {
+        "total": 28,
+        "parse": 28,
+        "typed": 0,
+        "assessment": 28
+      },
+      "implicit": {
+        "total": 28,
+        "parse": 28,
+        "typed": 21,
+        "assessment": 0
+      },
+      "equivalence": {
+        "total": 28,
+        "parse": 21,
+        "typed": 21,
+        "assessment": 0
+      },
+      "multiline": {
+        "total": 21,
+        "parse": 0,
+        "typed": 0,
+        "assessment": 0
+      },
+      "adversarial": {
+        "total": 28,
+        "parse": 21,
+        "typed": 21,
+        "assessment": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "d7-derivative-000",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.940374000000002,
+      "assessmentMs": 2.508371999999998,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 2x^1"
+      }
+    },
+    {
+      "id": "d7-derivative-001",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.22535900000000098,
+      "assessmentMs": 0.01848799999999784,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "q′(x) = 3x^2"
+      }
+    },
+    {
+      "id": "d7-derivative-002",
+      "category": "derivative",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "malformed",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.028704000000001173,
+      "assessmentMs": 0.012899000000000882,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 20,
+        "text": "R^{\\prime}(x) = 4x^3"
+      }
+    },
+    {
+      "id": "d7-derivative-003",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004988000000000881,
+      "assessmentMs": 0.005748999999998006,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 19,
+        "text": "dvelocity/dx = 5x^4"
+      }
+    },
+    {
+      "id": "d7-derivative-004",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.21766799999999975,
+      "assessmentMs": 0.1667100000000019,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-005",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.01060600000000278,
+      "assessmentMs": 0.0129789999999943,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-006",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.013579999999997483,
+      "assessmentMs": 0.0112269999999981,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "q'(t) = 3t^2"
+      }
+    },
+    {
+      "id": "d7-derivative-007",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.03689599999999871,
+      "assessmentMs": 0.01103700000000174,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "R′(t) = 4t^3"
+      }
+    },
+    {
+      "id": "d7-derivative-008",
+      "category": "derivative",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "malformed",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.00826200000000199,
+      "assessmentMs": 0.008282999999998708,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 27,
+        "text": "velocity^{\\prime}(t) = 5t^4"
+      }
+    },
+    {
+      "id": "d7-derivative-009",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.003325000000003797,
+      "assessmentMs": 0.003956000000002291,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 14,
+        "text": "dphi/dt = 6t^5"
+      }
+    },
+    {
+      "id": "d7-derivative-010",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.03707500000000152,
+      "assessmentMs": 0.022534000000000276,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-011",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.030776000000003023,
+      "assessmentMs": 0.03719600000000156,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-012",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.009053999999999007,
+      "assessmentMs": 0.008082000000001699,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "R'(u) = 4u^3"
+      }
+    },
+    {
+      "id": "d7-derivative-013",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.010365999999997655,
+      "assessmentMs": 0.011316999999998245,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 19,
+        "text": "velocity′(u) = 5u^4"
+      }
+    },
+    {
+      "id": "d7-derivative-014",
+      "category": "derivative",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "malformed",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.016324999999994816,
+      "assessmentMs": 0.0075310000000001764,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 22,
+        "text": "phi^{\\prime}(u) = 6u^5"
+      }
+    },
+    {
+      "id": "d7-derivative-015",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.09676500000000487,
+      "assessmentMs": 0.043455000000001576,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "dp/ds = 2s^1"
+      }
+    },
+    {
+      "id": "d7-derivative-016",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0196899999999971,
+      "assessmentMs": 0.019409000000003118,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-017",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.022974999999995305,
+      "assessmentMs": 0.04398700000000133,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-018",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.02165300000000059,
+      "assessmentMs": 0.04973499999999831,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 19,
+        "text": "velocity'(s) = 5s^4"
+      }
+    },
+    {
+      "id": "d7-derivative-019",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.010184999999999889,
+      "assessmentMs": 0.026440000000000907,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 14,
+        "text": "phi′(s) = 6s^5"
+      }
+    },
+    {
+      "id": "d7-derivative-020",
+      "category": "derivative",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "malformed",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006920999999998401,
+      "assessmentMs": 0.006940000000000168,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 20,
+        "text": "p^{\\prime}(z) = 2z^1"
+      }
+    },
+    {
+      "id": "d7-derivative-021",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.003165000000002749,
+      "assessmentMs": 0.003906000000000631,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "dq/dz = 3z^2"
+      }
+    },
+    {
+      "id": "d7-derivative-022",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.25970999999999833,
+      "assessmentMs": 0.04888400000000104,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-023",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.049154000000001474,
+      "assessmentMs": 0.04240400000000477,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-024",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.01127699999999976,
+      "assessmentMs": 0.013610999999997375,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 14,
+        "text": "phi'(z) = 6z^5"
+      }
+    },
+    {
+      "id": "d7-derivative-025",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008633000000003221,
+      "assessmentMs": 0.006889999999998508,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p′(x) = 2x^1"
+      }
+    },
+    {
+      "id": "d7-derivative-026",
+      "category": "derivative",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "malformed",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006158999999996695,
+      "assessmentMs": 0.006499999999995509,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 20,
+        "text": "q^{\\prime}(x) = 3x^2"
+      }
+    },
+    {
+      "id": "d7-derivative-027",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0021930000000054406,
+      "assessmentMs": 0.00707100000000338,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "dR/dx = 4x^3"
+      }
+    },
+    {
+      "id": "d7-derivative-028",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.021321999999997843,
+      "assessmentMs": 0.013589999999993552,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-029",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.05609400000000164,
+      "assessmentMs": 0.013780000000004122,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-030",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.011576999999995508,
+      "assessmentMs": 0.02903400000000289,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-031",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0025839999999988095,
+      "assessmentMs": 0.004767000000001076,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 16,
+        "text": "d^2q/dt^2 = 6t^1"
+      }
+    },
+    {
+      "id": "d7-derivative-032",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008253000000003397,
+      "assessmentMs": 0.006320000000002324,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 14,
+        "text": "R''(t) = 12t^2"
+      }
+    },
+    {
+      "id": "d7-derivative-033",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.00797200000000231,
+      "assessmentMs": 0.037546000000006075,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 21,
+        "text": "velocity′′(t) = 20t^3"
+      }
+    },
+    {
+      "id": "d7-derivative-034",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.013199999999997658,
+      "assessmentMs": 0.01909899999999709,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-035",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.002073000000002878,
+      "assessmentMs": 0.003545000000002574,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 16,
+        "text": "d^2p/du^2 = 2u^0"
+      }
+    },
+    {
+      "id": "d7-derivative-036",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0046870000000041045,
+      "assessmentMs": 0.017716000000000065,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 13,
+        "text": "q''(u) = 6u^1"
+      }
+    },
+    {
+      "id": "d7-derivative-037",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0059290000000018495,
+      "assessmentMs": 0.011427000000004739,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 14,
+        "text": "R′′(u) = 12u^2"
+      }
+    },
+    {
+      "id": "d7-derivative-038",
+      "category": "derivative",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.010516000000002634,
+      "assessmentMs": 0.011898000000002185,
+      "error": null
+    },
+    {
+      "id": "d7-derivative-039",
+      "category": "derivative",
+      "parse": "ambiguous",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "ambiguous",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0016519999999999868,
+      "assessmentMs": 0.0033949999999975944,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 19,
+        "text": "d^2phi/du^2 = 30u^4"
+      }
+    },
+    {
+      "id": "d7-derivative-040",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004637000000002445,
+      "assessmentMs": 0.006399999999999295,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 13,
+        "text": "p''(s) = 2s^0"
+      }
+    },
+    {
+      "id": "d7-derivative-041",
+      "category": "derivative",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.005527999999998201,
+      "assessmentMs": 0.0060189999999948895,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 13,
+        "text": "q′′(s) = 6s^1"
+      }
+    },
+    {
+      "id": "d7-function-000",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.02703000000000344,
+      "assessmentMs": 4.463552,
+      "error": null
+    },
+    {
+      "id": "d7-function-001",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.045418000000005065,
+      "assessmentMs": 1.729801000000002,
+      "error": null
+    },
+    {
+      "id": "d7-function-002",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.01452199999999948,
+      "assessmentMs": 0.5715590000000006,
+      "error": null
+    },
+    {
+      "id": "d7-function-003",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.025879000000003316,
+      "assessmentMs": 0.29345200000000204,
+      "error": null
+    },
+    {
+      "id": "d7-function-004",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.009264000000001715,
+      "assessmentMs": 0.16487800000000163,
+      "error": null
+    },
+    {
+      "id": "d7-function-005",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008873000000001241,
+      "assessmentMs": 0.4466019999999986,
+      "error": null
+    },
+    {
+      "id": "d7-function-006",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.009104000000000667,
+      "assessmentMs": 0.2322290000000038,
+      "error": null
+    },
+    {
+      "id": "d7-function-007",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006920000000000925,
+      "assessmentMs": 0.7011250000000047,
+      "error": null
+    },
+    {
+      "id": "d7-function-008",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.00997499999999718,
+      "assessmentMs": 0.2923189999999991,
+      "error": null
+    },
+    {
+      "id": "d7-function-009",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.007410999999997614,
+      "assessmentMs": 0.2032260000000008,
+      "error": null
+    },
+    {
+      "id": "d7-function-010",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.007580999999994731,
+      "assessmentMs": 0.1953539999999947,
+      "error": null
+    },
+    {
+      "id": "d7-function-011",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.007180999999995663,
+      "assessmentMs": 0.2680430000000058,
+      "error": null
+    },
+    {
+      "id": "d7-function-012",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006610000000002003,
+      "assessmentMs": 0.11433199999999744,
+      "error": null
+    },
+    {
+      "id": "d7-function-013",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.00586799999999954,
+      "assessmentMs": 0.1944429999999997,
+      "error": null
+    },
+    {
+      "id": "d7-function-014",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006579999999999586,
+      "assessmentMs": 0.17725599999999986,
+      "error": null
+    },
+    {
+      "id": "d7-function-015",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006199000000002286,
+      "assessmentMs": 0.16505800000000193,
+      "error": null
+    },
+    {
+      "id": "d7-function-016",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.005789000000000044,
+      "assessmentMs": 0.22451799999999622,
+      "error": null
+    },
+    {
+      "id": "d7-function-017",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.00683000000000078,
+      "assessmentMs": 0.39485400000000226,
+      "error": null
+    },
+    {
+      "id": "d7-function-018",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.00864299999999929,
+      "assessmentMs": 0.2635660000000044,
+      "error": null
+    },
+    {
+      "id": "d7-function-019",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008202000000004261,
+      "assessmentMs": 0.46946600000000416,
+      "error": null
+    },
+    {
+      "id": "d7-function-020",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008904000000001133,
+      "assessmentMs": 0.17056700000000546,
+      "error": null
+    },
+    {
+      "id": "d7-function-021",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.2891049999999993,
+      "assessmentMs": 0.2829550000000012,
+      "error": null
+    },
+    {
+      "id": "d7-function-022",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008521999999999252,
+      "assessmentMs": 0.28922500000000184,
+      "error": null
+    },
+    {
+      "id": "d7-function-023",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.009765000000001578,
+      "assessmentMs": 0.25903000000000276,
+      "error": null
+    },
+    {
+      "id": "d7-function-024",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.012057999999996127,
+      "assessmentMs": 0.37812899999999416,
+      "error": null
+    },
+    {
+      "id": "d7-function-025",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.010916999999999177,
+      "assessmentMs": 0.2848989999999958,
+      "error": null
+    },
+    {
+      "id": "d7-function-026",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.019418999999999187,
+      "assessmentMs": 0.14495800000000258,
+      "error": null
+    },
+    {
+      "id": "d7-function-027",
+      "category": "function",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "verified",
+        "expected": "verified",
+        "match": true,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006620000000005177,
+      "assessmentMs": 0.12317499999999626,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-000",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.07089700000000221,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-001",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.025539000000001977,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-002",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.008292999999994777,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-003",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.011576999999995508,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-004",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.05879799999999591,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-005",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.022723999999996636,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-006",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.029835000000005607,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-007",
+      "category": "implicit",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006228999999997598,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 4,
+        "text": "1/2t"
+      }
+    },
+    {
+      "id": "d7-implicit-008",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.030204999999995152,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-009",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.024135999999998603,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-010",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.009133999999995979,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-011",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.1829049999999981,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-012",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.032609000000000776,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-013",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.05187800000000209,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-014",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.02596900000000346,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-015",
+      "category": "implicit",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.004197000000004891,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 4,
+        "text": "1/2x"
+      }
+    },
+    {
+      "id": "d7-implicit-016",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.01699499999999432,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-017",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.009033999999999764,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-018",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006388999999998646,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-019",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.01069599999999582,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-020",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02890400000000426,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-021",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.00869300000000095,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-022",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.008552999999999145,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-023",
+      "category": "implicit",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.09761600000000215,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 4,
+        "text": "1/2y"
+      }
+    },
+    {
+      "id": "d7-implicit-024",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.013680999999998278,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-025",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.007511000000000934,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-026",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.005527999999998201,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-implicit-027",
+      "category": "implicit",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006949999999996237,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-000",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.00897300000000456,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-001",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.007350999999999885,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-002",
+      "category": "equivalence",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.01670599999999922,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "sin^2(t)"
+      }
+    },
+    {
+      "id": "d7-equivalence-003",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.009294000000004132,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-004",
+      "category": "equivalence",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.011967999999995982,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 6,
+        "text": "√(a+1)"
+      }
+    },
+    {
+      "id": "d7-equivalence-005",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02719000000000449,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-006",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.013510000000003686,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-007",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.010446000000001732,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-008",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.01638499999999965,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-009",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.007862000000002922,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-010",
+      "category": "equivalence",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.01956899999999706,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 9,
+        "text": "\\sin^2(a)"
+      }
+    },
+    {
+      "id": "d7-equivalence-011",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.009414999999997065,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-012",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006389999999996121,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-013",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.005228000000002453,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-014",
+      "category": "equivalence",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.011407000000005496,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "sin^2(t)"
+      }
+    },
+    {
+      "id": "d7-equivalence-015",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0065400000000011005,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-016",
+      "category": "equivalence",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.006149000000000626,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 6,
+        "text": "√(a+1)"
+      }
+    },
+    {
+      "id": "d7-equivalence-017",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.005808999999999287,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-018",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.007390999999998371,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-019",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006901000000006263,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-020",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.009584999999994182,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-021",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.010666000000000508,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-022",
+      "category": "equivalence",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.008152000000002602,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 9,
+        "text": "\\sin^2(a)"
+      }
+    },
+    {
+      "id": "d7-equivalence-023",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0067500000000038085,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-024",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006180000000000518,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-025",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0048269999999988045,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-equivalence-026",
+      "category": "equivalence",
+      "parse": "malformed",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": null,
+      "parseMs": 0.006380000000000052,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "sin^2(t)"
+      }
+    },
+    {
+      "id": "d7-equivalence-027",
+      "category": "equivalence",
+      "parse": "parsed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.005949000000001092,
+      "assessmentMs": 0,
+      "error": null
+    },
+    {
+      "id": "d7-multiline-000",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.006059000000000481,
+      "assessmentMs": 0.0173769999999962,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 2x^1"
+      }
+    },
+    {
+      "id": "d7-multiline-001",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004646999999998513,
+      "assessmentMs": 0.007801000000000613,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(t) = 3t^2"
+      }
+    },
+    {
+      "id": "d7-multiline-002",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.00688000000000244,
+      "assessmentMs": 0.005839000000001704,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(u) = 4u^3"
+      }
+    },
+    {
+      "id": "d7-multiline-003",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004055999999998505,
+      "assessmentMs": 0.004657000000001688,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 5x^4"
+      }
+    },
+    {
+      "id": "d7-multiline-004",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004176999999998543,
+      "assessmentMs": 0.004626999999999271,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(t) = 2t^1"
+      }
+    },
+    {
+      "id": "d7-multiline-005",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004075999999997748,
+      "assessmentMs": 0.00430700000000428,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(u) = 3u^2"
+      }
+    },
+    {
+      "id": "d7-multiline-006",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.010035000000002015,
+      "assessmentMs": 0.020269999999996458,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 4x^3"
+      }
+    },
+    {
+      "id": "d7-multiline-007",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.126659999999994,
+      "assessmentMs": 0.01409100000000052,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(t) = 5t^4"
+      }
+    },
+    {
+      "id": "d7-multiline-008",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.005949000000001092,
+      "assessmentMs": 0.0052579999999977645,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(u) = 2u^1"
+      }
+    },
+    {
+      "id": "d7-multiline-009",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004035999999999262,
+      "assessmentMs": 0.004837000000001979,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 3x^2"
+      }
+    },
+    {
+      "id": "d7-multiline-010",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004697000000000173,
+      "assessmentMs": 0.004356999999998834,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(t) = 4t^3"
+      }
+    },
+    {
+      "id": "d7-multiline-011",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004196000000000311,
+      "assessmentMs": 0.00424600000000197,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(u) = 5u^4"
+      }
+    },
+    {
+      "id": "d7-multiline-012",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0037349999999989336,
+      "assessmentMs": 0.0048570000000012215,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 2x^1"
+      }
+    },
+    {
+      "id": "d7-multiline-013",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0034350000000031855,
+      "assessmentMs": 0.004837999999999454,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(t) = 3t^2"
+      }
+    },
+    {
+      "id": "d7-multiline-014",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.010386000000004003,
+      "assessmentMs": 0.004978000000001259,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(u) = 4u^3"
+      }
+    },
+    {
+      "id": "d7-multiline-015",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008462999999998999,
+      "assessmentMs": 0.005548000000004549,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 5x^4"
+      }
+    },
+    {
+      "id": "d7-multiline-016",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0035650000000018167,
+      "assessmentMs": 0.005097999999996716,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(t) = 2t^1"
+      }
+    },
+    {
+      "id": "d7-multiline-017",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008282999999998708,
+      "assessmentMs": 0.008091999999997768,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(u) = 3u^2"
+      }
+    },
+    {
+      "id": "d7-multiline-018",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.2456990000000019,
+      "assessmentMs": 0.012518999999997504,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(x) = 4x^3"
+      }
+    },
+    {
+      "id": "d7-multiline-019",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "verified",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004255999999998039,
+      "assessmentMs": 0.005066999999996824,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(t) = 5t^4"
+      }
+    },
+    {
+      "id": "d7-multiline-020",
+      "category": "multiline",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004556999999998368,
+      "assessmentMs": 0.004536999999999125,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 12,
+        "text": "p'(u) = 3u^1"
+      }
+    },
+    {
+      "id": "d7-adversarial-000",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0021939999999958104,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/2x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-001",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.006059000000000481,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-002",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.03425099999999759,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-003",
+      "category": "adversarial",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.009314000000003375,
+      "assessmentMs": 0.004896999999999707,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "q'(x) = 99x"
+      }
+    },
+    {
+      "id": "d7-adversarial-004",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0014919999999989386,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/6x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-005",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.004226000000002728,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-006",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02610899999999816,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-007",
+      "category": "adversarial",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.0038549999999943907,
+      "assessmentMs": 0.005918999999998675,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "q'(x) = 99x"
+      }
+    },
+    {
+      "id": "d7-adversarial-008",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.001462000000003627,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/3x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-009",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.003664999999998031,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-010",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02478800000000092,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-011",
+      "category": "adversarial",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.003796000000001243,
+      "assessmentMs": 0.004947000000001367,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "q'(x) = 99x"
+      }
+    },
+    {
+      "id": "d7-adversarial-012",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.001221999999998502,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/7x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-013",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.02086100000000357,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-014",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.037044999999999106,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-015",
+      "category": "adversarial",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.004106000000000165,
+      "assessmentMs": 0.005459000000001879,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "q'(x) = 99x"
+      }
+    },
+    {
+      "id": "d7-adversarial-016",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0013620000000003074,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/4x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-017",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.024447000000002106,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-018",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.09467199999999565,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-019",
+      "category": "adversarial",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.008183000000002494,
+      "assessmentMs": 0.02988500000000016,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "q'(x) = 99x"
+      }
+    },
+    {
+      "id": "d7-adversarial-020",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.002192999999998335,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/8x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-021",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.0059590000000042664,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-022",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.026659999999999684,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-023",
+      "category": "adversarial",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.009864999999997792,
+      "assessmentMs": 0.12615999999999872,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "q'(x) = 99x"
+      }
+    },
+    {
+      "id": "d7-adversarial-024",
+      "category": "adversarial",
+      "parse": "ambiguous",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.024988000000000454,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 8,
+        "text": "1/5x = 3"
+      }
+    },
+    {
+      "id": "d7-adversarial-025",
+      "category": "adversarial",
+      "parse": "malformed",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.009654999999995084,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "\\frac{x+1}{"
+      }
+    },
+    {
+      "id": "d7-adversarial-026",
+      "category": "adversarial",
+      "parse": "resource-exhausted",
+      "parseMatch": true,
+      "relationMatch": true,
+      "assessment": null,
+      "parseMs": 0.042273999999999035,
+      "assessmentMs": 0,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 81,
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      }
+    },
+    {
+      "id": "d7-adversarial-027",
+      "category": "adversarial",
+      "parse": "unsupported",
+      "parseMatch": false,
+      "relationMatch": false,
+      "assessment": {
+        "actual": "unsupported",
+        "expected": "invalid",
+        "match": false,
+        "firstInvalidStep": null
+      },
+      "parseMs": 0.005127999999999133,
+      "assessmentMs": 0.006179000000003043,
+      "error": {
+        "line": 1,
+        "start": 0,
+        "end": 11,
+        "text": "q'(x) = 99x"
+      }
+    }
+  ]
+}

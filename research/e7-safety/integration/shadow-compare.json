@@ -1,0 +1,13 @@
+{
+ "questions": 179,
+ "submissions": 611,
+ "msPerSubmission": 1.01,
+ "tally": {
+  "answer-only:correct->correct:agree": 179,
+  "answer-only:incorrect->incorrect:agree": 167,
+  "answer-only:unresolved->unresolved:agree": 205,
+  "method-required:correct->correct:agree": 30,
+  "proof-required:correct->correct:agree": 30
+ },
+ "conflicts": []
+}

@@ -1,0 +1,7232 @@
+{
+ "benchmark": "openpath-e5-geometry-calculus",
+ "version": "1",
+ "seed": 20261103,
+ "cases": [
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-vertical",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pv",
+     "objects": [
+      {
+       "id": "AOC",
+       "kind": "angle"
+      },
+      {
+       "id": "BOD",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "vertical_pair",
+       "args": [
+        "AOC",
+        "BOD"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "AOC"
+       ],
+       "value": 50
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "BOD"
+      ],
+      "value": 50
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠BOD = ∠AOC (vertical angles)\n∠BOD = 50°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: rule table; vertical pair given"
+   },
+   "id": "e5-dev-000",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "direct-substitution",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "2"
+          },
+          {
+           "kind": "power",
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2
+          }
+         ]
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "3",
+    "side": "both",
+    "method": "direct"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→3) (2x^2 - x + 1) = 2(3)^2 - 3 + 1 = 16"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-001",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 30
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 60
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 90
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "A + B + C = 180°\n30° + 60° + C = 180°\nC = 90°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-002",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "trig-exp",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "exp",
+     "argument": {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ exp(2x) dx = exp(2x) + C"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "missing-inner-factor"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-003",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "midpoint",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "mid",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 2
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 5,
+        "y": 8
+       }
+      },
+      {
+       "id": "M",
+       "kind": "point",
+       "data": {
+        "x": 3,
+        "y": 5
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "midpoint",
+      "args": [
+       "M",
+       "A",
+       "B"
+      ]
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "M = ((1 + 5)/2, (2 + 8)/2)\nM = (6/2, 10/2)\nM = (3, 5)"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fractions; midpoint = average of coordinates"
+   },
+   "id": "e5-dev-004",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "definite-polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "definite-integral",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "3"
+        },
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x",
+    "lower": "1",
+    "upper": "3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫_1^3 (2x + 3x^2) dx = [x^2 + x^3]_1^3\n[x^2 + x^3]_1^3 = (9 + 27) - (1 + 1)\n(9 + 27) - (1 + 1) = 34"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "bracket-chain",
+    "tags": [
+     "valid",
+     "bracket-chain"
+    ],
+    "derivation": "oracle: exact Fraction polynomial antiderivative; value F(b) - F(a)"
+   },
+   "id": "e5-dev-005",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "trig-exp",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "sin",
+     "argument": {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "5"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ sin(5x) dx = -cos(5x)/5 + C"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-006",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "midpoint",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "mid",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": -4,
+        "y": -3
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 2,
+        "y": 7
+       }
+      },
+      {
+       "id": "M",
+       "kind": "point",
+       "data": {
+        "x": -1,
+        "y": 2
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "midpoint",
+      "args": [
+       "M",
+       "A",
+       "B"
+      ]
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "M = (-4 + 2, -3 + 7)\nM = (-2, 4)"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "forgot-half"
+    ],
+    "derivation": "oracle: exact Fractions; midpoint = average of coordinates"
+   },
+   "id": "e5-dev-007",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "direct-substitution",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "5"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "1",
+    "side": "both",
+    "method": "direct"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→1) (x^2 + 5x) = 5"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "dropped-term"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-008",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "outside-scope",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "power",
+     "base": {
+      "kind": "sin",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     },
+     "exponent": 2
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = sin(x)^2\nf'(x) = 2 sin(x) cos(x)"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid",
+     "chain-power-of-function"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-009",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "outside-scope",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "root",
+     "radicand": {
+      "kind": "variable",
+      "name": "x"
+     },
+     "index": 2
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = sqrt(x)\nf'(x) = 1/(2 sqrt(x))"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "radical-derivative",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-010",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-alternate",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pa",
+     "objects": [
+      {
+       "id": "a1",
+       "kind": "angle"
+      },
+      {
+       "id": "a2",
+       "kind": "angle"
+      },
+      {
+       "id": "l1",
+       "kind": "line"
+      },
+      {
+       "id": "l2",
+       "kind": "line"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "alternate_pair",
+       "args": [
+        "a1",
+        "a2",
+        "l1",
+        "l2"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "a1"
+       ],
+       "value": 55
+      },
+      {
+       "predicate": "parallel",
+       "args": [
+        "l1",
+        "l2"
+       ]
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "a2"
+      ],
+      "value": 55
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a2 = a1 (alternate interior angles, l1 ∥ l2)\na2 = 55°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle: alternate interior angles with parallel given"
+   },
+   "id": "e5-dev-011",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "quotient-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "exp",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = exp(x)/x\nf'(x) = (x exp(x) - exp(x))/x"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong-quotient-rule"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-012",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "reciprocal",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "0",
+    "side": "both",
+    "method": "reciprocal"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→0) 1/x does not exist"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-013",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "second-derivative",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 4
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "3"
+          },
+          {
+           "kind": "power",
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x",
+    "order": 2
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = x^4 - 3x^2\nf''(x) = 12x^2 - 6"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-014",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-congruence",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "cg",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      },
+      {
+       "id": "DEF",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "D",
+         "E",
+         "F"
+        ],
+        "sides": [
+         "DE",
+         "EF",
+         "FD"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "equal_length",
+       "args": [
+        "AB",
+        "DE"
+       ]
+      },
+      {
+       "predicate": "equal_length",
+       "args": [
+        "AC",
+        "DF"
+       ]
+      },
+      {
+       "predicate": "equal_angle",
+       "args": [
+        "B",
+        "E"
+       ]
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC",
+      "nondegenerate:DEF"
+     ],
+     "goal": {
+      "predicate": "congruent",
+      "args": [
+       "ABC",
+       "DEF"
+      ]
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "AB = DE (given)\n∠B = ∠E (given)\ntriangle ABC is congruent to triangle DEF (SSA)"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 2,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "congruence",
+    "tags": [
+     "ssa"
+    ],
+    "derivation": "oracle: SSA is not a congruence criterion"
+   },
+   "id": "e5-dev-015",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "power-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "3"
+            },
+            {
+             "kind": "power",
+             "base": {
+              "kind": "variable",
+              "name": "x"
+             },
+             "exponent": 4
+            }
+           ]
+          },
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "-1"
+            },
+            {
+             "kind": "multiply",
+             "factors": [
+              {
+               "kind": "constant",
+               "value": "2"
+              },
+              {
+               "kind": "power",
+               "base": {
+                "kind": "variable",
+                "name": "x"
+               },
+               "exponent": 2
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "5"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "kind": "constant",
+         "value": "7"
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = 3x^4 - 2x^2 + 5x - 7\nf'(x) = 12x^3 - 4x^3 + 5"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "slip"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-016",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "slope",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "slope",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 2
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 5,
+        "y": 8
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "slope",
+      "args": [
+       "AB"
+      ],
+      "value": "3/2"
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "m = (8 - 2)/(5 - 1)\nm = 6/4\nm = 3/2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fractions; slope = rise over run"
+   },
+   "id": "e5-dev-017",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "trig-exp",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "cos",
+     "argument": {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ cos(2x) dx = sin(2x)/2 + C"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-018",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "distance-squared",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "d2",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": -1,
+        "y": 4
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 3,
+        "y": 7
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "distance_squared",
+      "args": [
+       "AB"
+      ],
+      "value": 25
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d^2 = (3 + -1)^2 + (7 + 4)^2\nd^2 = 125"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "sign-error"
+    ],
+    "derivation": "oracle: exact integers"
+   },
+   "id": "e5-dev-019",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "exterior-angle",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "ext",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      },
+      {
+       "id": "E",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 55
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 30
+      },
+      {
+       "predicate": "linear_pair",
+       "args": [
+        "C",
+        "E"
+       ]
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "E"
+      ],
+      "value": 85
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "E = A + B\nE = 55° + 30°\nE = 95°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 2,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "arith-final"
+    ],
+    "derivation": "oracle: exact linear algebra (angle sum + linear pair imply the exterior angle theorem)"
+   },
+   "id": "e5-dev-020",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "vertical-angles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "vt",
+     "objects": [
+      {
+       "id": "AOC",
+       "kind": "angle"
+      },
+      {
+       "id": "BOD",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "AOC"
+       ],
+       "value": 37
+      },
+      {
+       "predicate": "vertical_pair",
+       "args": [
+        "AOC",
+        "BOD"
+       ]
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "BOD"
+      ],
+      "value": 37
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠BOD = ∠AOC\n∠BOD = 37°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; vertical pair equality requires the stated pair fact"
+   },
+   "id": "e5-dev-021",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "quotient-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "sin",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = sin(x)/x\nf'(x) = (x cos(x) - sin(x))/x^2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-022",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "distance",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "dist",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 1
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 7,
+        "y": 9
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "length",
+      "args": [
+       "AB"
+      ],
+      "value": 10
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d = sqrt((7 - 1)^2 + (9 - 1)^2)\nd = sqrt(36 + 64)\nd = sqrt(100)\nd = 10"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact integers"
+   },
+   "id": "e5-dev-023",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "substitution-claim",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "exp",
+       "argument": {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ 2x exp(x^2) dx = exp(x^2) + C"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-024",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "5"
+        },
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 4
+        }
+       ]
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ (5x^4 + 1) dx = x^5 + x + C"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-025",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-linear-pair",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pl",
+     "objects": [
+      {
+       "id": "ABD",
+       "kind": "angle"
+      },
+      {
+       "id": "DBC",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "linear_pair",
+       "args": [
+        "ABD",
+        "DBC"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "ABD"
+       ],
+       "value": 70
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "DBC"
+      ],
+      "value": 110
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠ABD + ∠DBC = 180° (angles on a straight line)\n∠DBC = 110°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: linear pair"
+   },
+   "id": "e5-dev-026",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "chain-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "exp",
+     "argument": {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = exp(2x)\nf'(x) = exp(2x)"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "missing-inner-derivative"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-027",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 45
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 80
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 55
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "A + B + C = 180° (angle sum of a triangle)\n45° + 80° + C = 180°\nC = 55°"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "nocond"
+    ],
+    "derivation": "oracle: nondegenerate condition absent"
+   },
+   "id": "e5-dev-028",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "distance",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "dist",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 2,
+        "y": 5
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 14,
+        "y": 10
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "length",
+      "args": [
+       "AB"
+      ],
+      "value": 13
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d = sqrt((14 - 2)^2 + (10 - 5)^2)\nd = sqrt(144 + 25)\nd = sqrt(170)\nd = 13"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 2,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "arith-slip"
+    ],
+    "derivation": "oracle: exact integers"
+   },
+   "id": "e5-dev-029",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "reciprocal",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "0",
+    "side": "both",
+    "method": "reciprocal"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→0) 1/x = ∞"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "two-sided-claimed-infinite"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-030",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "isosceles-base-angles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "iso",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "equal_length",
+       "args": [
+        "AB",
+        "CA"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 100
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "B = C\nA + B + C = 180°\n100° + 2B = 180°\nB = 40°"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "missing-condition"
+    ],
+    "derivation": "oracle: exact linear algebra; base angles equal because AB = CA is given"
+   },
+   "id": "e5-dev-031",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-alternate",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pa",
+     "objects": [
+      {
+       "id": "a1",
+       "kind": "angle"
+      },
+      {
+       "id": "a2",
+       "kind": "angle"
+      },
+      {
+       "id": "l1",
+       "kind": "line"
+      },
+      {
+       "id": "l2",
+       "kind": "line"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "alternate_pair",
+       "args": [
+        "a1",
+        "a2",
+        "l1",
+        "l2"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "a1"
+       ],
+       "value": 64
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "a2"
+      ],
+      "value": 64
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a2 = a1 (alternate interior angles, l1 ∥ l2)\na2 = 64°"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "nopar"
+    ],
+    "derivation": "oracle: parallel not given"
+   },
+   "id": "e5-dev-032",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-vertical",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pv",
+     "objects": [
+      {
+       "id": "AOC",
+       "kind": "angle"
+      },
+      {
+       "id": "BOD",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "vertical_pair",
+       "args": [
+        "AOC",
+        "BOD"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "AOC"
+       ],
+       "value": 65
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "BOD"
+      ],
+      "value": 65
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠BOD = ∠AOC (alternate interior angles)\n∠BOD = 65°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong-reason"
+    ],
+    "derivation": "oracle: cited reason does not justify the relation"
+   },
+   "id": "e5-dev-033",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "linear-pair",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "lp",
+     "objects": [
+      {
+       "id": "ABD",
+       "kind": "angle"
+      },
+      {
+       "id": "DBC",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "linear_pair",
+       "args": [
+        "ABD",
+        "DBC"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "ABD"
+       ],
+       "value": 98
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "DBC"
+      ],
+      "value": 82
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠ABD + ∠DBC = 180°\n98° + ∠DBC = 180°"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "stop"
+    ],
+    "derivation": "oracle: exact linear algebra; supplementary linear pair"
+   },
+   "id": "e5-dev-034",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "limit-at-infinity",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "infinity",
+    "side": "both",
+    "method": "rational-infinity"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→∞) (x + 1)/(x^2 + 1) = 0"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-035",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 72
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 18
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 90
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "A + B + C = 180°\n72° + 18° + C = 180°"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "stop"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-036",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "midpoint",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "mid",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 3,
+        "y": -1
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 9,
+        "y": 5
+       }
+      },
+      {
+       "id": "M",
+       "kind": "point",
+       "data": {
+        "x": 6,
+        "y": 2
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "midpoint",
+      "args": [
+       "M",
+       "A",
+       "B"
+      ]
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "M = ((3 + 9)/2, (-1 + 5)/2)\nM = (12/2, 4/2)\nM = (6, 2)"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fractions; midpoint = average of coordinates"
+   },
+   "id": "e5-dev-037",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 33
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 47
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 100
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "m∠A + m∠B + m∠C = 180°\n33° + 47° + m∠C = 180°\nm∠C = 100°"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "missing-condition"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-038",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "continuity",
+   "problem": {
+    "domain": "calculus",
+    "task": "continuity",
+    "left": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "right": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "3"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x",
+    "point": "2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "left: f(2) = 2^2 + 1 = 5\nright: f(2) = 3(2) - 1 = 5\nthe two pieces agree at x = 2, so f is continuous at 2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "continuity-multi-line",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: both one-sided values equal 5"
+   },
+   "id": "e5-dev-039",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "removable",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "25"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "multiply",
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "5"
+           }
+          ]
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "5",
+    "side": "both",
+    "method": "removable",
+    "equivalentExpression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "5"
+      }
+     ]
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 25)/(x - 5) = (x - 5)(x + 5)/(x - 5)\n(x - 5)(x + 5)/(x - 5) = x + 5\nlim_(x→5) (x + 5) = 10"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid",
+     "multi-line"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-040",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "power-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "2"
+            },
+            {
+             "kind": "power",
+             "base": {
+              "kind": "variable",
+              "name": "x"
+             },
+             "exponent": 3
+            }
+           ]
+          },
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "-1"
+            },
+            {
+             "kind": "multiply",
+             "factors": [
+              {
+               "kind": "constant",
+               "value": "9"
+              },
+              {
+               "kind": "power",
+               "base": {
+                "kind": "variable",
+                "name": "x"
+               },
+               "exponent": 2
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "6"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = 2x^3 - 9x^2 + 6x + 1\nf'(x) = 6x - 18x + 6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "slip"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-041",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "parallel-lines",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "par",
+     "objects": [
+      {
+       "id": "a1",
+       "kind": "angle"
+      },
+      {
+       "id": "a2",
+       "kind": "angle"
+      },
+      {
+       "id": "l1",
+       "kind": "line"
+      },
+      {
+       "id": "l2",
+       "kind": "line"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "alternate_pair",
+       "args": [
+        "a1",
+        "a2",
+        "l1",
+        "l2"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "a1"
+       ],
+       "value": 48
+      },
+      {
+       "predicate": "parallel",
+       "args": [
+        "l1",
+        "l2"
+       ]
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "a2"
+      ],
+      "value": 48
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a1 + a2 = 180°\na2 = 132°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "co-interior-instead"
+    ],
+    "derivation": "oracle: exact linear algebra; alternate/corresponding equality requires the parallel fact"
+   },
+   "id": "e5-dev-042",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "definite-substitution",
+   "problem": {
+    "domain": "calculus",
+    "task": "definite-integral",
+    "integrand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": 2
+      }
+     ]
+    },
+    "variable": "x",
+    "lower": "0",
+    "upper": "1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = x^2 + 1\n∫_0^1 2x(x^2 + 1)^2 dx = ∫_0^1 u^2 du\n= 1/3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "substitution-method",
+    "tags": [
+     "bounds-not-converted"
+    ],
+    "derivation": "oracle: u-bounds must be u(0)=1 and u(1)=2, not 0 and 1"
+   },
+   "id": "e5-dev-043",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "direct-substitution",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "3"
+          },
+          {
+           "kind": "power",
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2
+          }
+         ]
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "2"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "kind": "constant",
+         "value": "5"
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "-1",
+    "side": "both",
+    "method": "direct"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→-1) (3x^2 + 2x - 5) = 3 - 2 - 5 = -4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-044",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "definite-polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "definite-integral",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "3"
+        },
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x",
+    "lower": "1",
+    "upper": "3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "F(x) = x^2 + x^3\nF(3) - F(1) = 36 - 2\nF(3) - F(1) = 36"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 2,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "arith-slip"
+    ],
+    "derivation": "oracle: exact Fraction polynomial antiderivative; value F(b) - F(a)"
+   },
+   "id": "e5-dev-045",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 55
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 35
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 90
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "angle A + angle B + angle C = 180°\n55° + 35° + angle C = 180°\nangle C = 100°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 2,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "arith-final"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-046",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "distance-squared",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "d2",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": -3,
+        "y": 1
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 2,
+        "y": 13
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "distance_squared",
+      "args": [
+       "AB"
+      ],
+      "value": 169
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d^2 = (2 - -3)^2 + (13 - 1)^2\nd^2 = 25 + 144\nd^2 = 169"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact integers"
+   },
+   "id": "e5-dev-047",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "chain-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "power",
+     "base": {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "exponent": 5
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (3x + 1)^5\nf'(x) = 15(3x + 1)^4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-048",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "power-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "2"
+            },
+            {
+             "kind": "power",
+             "base": {
+              "kind": "variable",
+              "name": "x"
+             },
+             "exponent": 3
+            }
+           ]
+          },
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "-1"
+            },
+            {
+             "kind": "multiply",
+             "factors": [
+              {
+               "kind": "constant",
+               "value": "9"
+              },
+              {
+               "kind": "power",
+               "base": {
+                "kind": "variable",
+                "name": "x"
+               },
+               "exponent": 2
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "6"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "constant",
+       "value": "1"
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = 2x^3 - 9x^2 + 6x + 1\ndy/dx = 6x^2 - 18x + 6"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-049",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "isosceles-base-angles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "iso",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "equal_length",
+       "args": [
+        "AB",
+        "CA"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 40
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "B = C\nA + B + C = 180°\n40° + 2B = 180°\nB = 70°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; base angles equal because AB = CA is given"
+   },
+   "id": "e5-dev-050",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "alternative-expand-first",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "power",
+     "base": {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "kind": "constant",
+        "value": "1"
+       }
+      ]
+     },
+     "exponent": 2
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x + 1)^2\nf(x) = x^2 + 2x + 1\nf'(x) = 2x + 2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": true,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid",
+     "alt"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-051",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "right-triangle-complementary",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "rt",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "C"
+       ],
+       "value": 90
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 28
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 62
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "A + B = 180°\nB = 152°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "supplement-instead"
+    ],
+    "derivation": "oracle: exact linear algebra; the acute angles of a right triangle sum to 90"
+   },
+   "id": "e5-dev-052",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 66
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 24
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 90
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "angle A + angle B + angle C = 360°\nangle C = 90°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong-constant"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-053",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "removable",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "9"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "multiply",
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "3"
+           }
+          ]
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "3",
+    "side": "both",
+    "method": "removable",
+    "equivalentExpression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "3"
+      }
+     ]
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→3) (x^2 - 9)/(x - 3) = lim_(x→3) (x + 3) = 6"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-054",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "exterior-angle",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "ext",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      },
+      {
+       "id": "E",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 35
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 50
+      },
+      {
+       "predicate": "linear_pair",
+       "args": [
+        "C",
+        "E"
+       ]
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "E"
+      ],
+      "value": 85
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "E = A + B\nE = 35° + 50°\nE = 85°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra (angle sum + linear pair imply the exterior angle theorem)"
+   },
+   "id": "e5-dev-055",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-isosceles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pi",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 40
+      },
+      {
+       "predicate": "equal_length",
+       "args": [
+        "AB",
+        "CA"
+       ]
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "B = C (base angles of an isosceles triangle)\nB + C = 140°\nB = 70°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle: isosceles base angles"
+   },
+   "id": "e5-dev-056",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "by-parts-claim",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "exp",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ x exp(x) dx = x exp(x) - exp(x) + C"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-057",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "isosceles-base-angles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "iso",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "equal_length",
+       "args": [
+        "AB",
+        "CA"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 80
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "B = C\nA + B + C = 180°\n80° + 2B = 180°\nB = 50°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; base angles equal because AB = CA is given"
+   },
+   "id": "e5-dev-058",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-isosceles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pi",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 50
+      },
+      {
+       "predicate": "equal_length",
+       "args": [
+        "AB",
+        "CA"
+       ]
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 65
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "B = C (angle sum of a triangle)\nB + C = 130°\nB = 65°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong"
+    ],
+    "derivation": "oracle: cited reason does not justify B = C"
+   },
+   "id": "e5-dev-059",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "9"
+        },
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        }
+       ]
+      },
+      {
+       "kind": "constant",
+       "value": "2"
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ (9x^2 + 2) dx = 3x^3 + 2x"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "missing-constant"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-060",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "substitution-claim",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": 3
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ 2x(x^2 + 1)^3 dx = (x^2 + 1)^4/4 + C"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-061",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "alternative-expand-first",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "1"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "4"
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x - 1)(x + 4)\nf(x) = x^2 + 3x - 4\nf'(x) = 2x + 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": true,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid",
+     "alt"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-062",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "quotient-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = x/(x + 1)\nf'(x) = 1/(x + 1)^2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-063",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "chain-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "log",
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "5"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       },
+       {
+        "kind": "constant",
+        "value": "2"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = ln(5x + 2)\nf'(x) = 1/(5x + 2)"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "missing-inner-derivative"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-064",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "product-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "cos",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = x cos(x)\nf'(x) = cos(x) + x sin(x)"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong-product-rule"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-065",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "constant",
+       "value": "7"
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ (2x + 7) dx = x^2 + 7 + C"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong-antiderivative"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-066",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "distance-irrational",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "dsurd",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 0,
+        "y": 0
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 2,
+        "y": 6
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "distance_squared",
+      "args": [
+       "AB"
+      ],
+      "value": 40
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d = sqrt((2 - 0)^2 + (6 - 0)^2)\nd = sqrt(4 + 36)\nd = sqrt(40)\nd = 2*sqrt(10)"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "outside-rational-scope",
+    "tags": [
+     "valid",
+     "irrational"
+    ],
+    "derivation": "oracle: exact integers; sqrt(d2) = s*sqrt(r)"
+   },
+   "id": "e5-dev-067",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "distance-squared",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "d2",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 2
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 4,
+        "y": 6
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "distance_squared",
+      "args": [
+       "AB"
+      ],
+      "value": 25
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "d^2 = (4 - 1)^2 + (6 - 2)^2\nd^2 = 9 + 16\nd^2 = 25"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact integers"
+   },
+   "id": "e5-dev-068",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "slope",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "slope",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 3
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 5,
+        "y": 5
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "slope",
+      "args": [
+       "AB"
+      ],
+      "value": "1/2"
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "m = (5 - 1)/(5 - 3)\nm = 4/2\nm = 2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "inverted"
+    ],
+    "derivation": "oracle: exact Fractions; slope = rise over run"
+   },
+   "id": "e5-dev-069",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "limit-at-infinity",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "5"
+          },
+          {
+           "kind": "power",
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2
+          }
+         ]
+        },
+        {
+         "kind": "constant",
+         "value": "2"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "constant",
+          "value": "3"
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "infinity",
+    "side": "both",
+    "method": "rational-infinity"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→∞) (5x^2 + 2)/(x^2 + 3) = ∞"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "claims-infinity"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-070",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "slope",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "slope",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": -2,
+        "y": 5
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 4,
+        "y": -1
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "slope",
+      "args": [
+       "AB"
+      ],
+      "value": "-1"
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "m = (-1 - 5)/(4 - -2)\nm = -6/6\nm = -1"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fractions; slope = rise over run"
+   },
+   "id": "e5-dev-071",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "parallel-lines",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "par",
+     "objects": [
+      {
+       "id": "a1",
+       "kind": "angle"
+      },
+      {
+       "id": "a2",
+       "kind": "angle"
+      },
+      {
+       "id": "l1",
+       "kind": "line"
+      },
+      {
+       "id": "l2",
+       "kind": "line"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "alternate_pair",
+       "args": [
+        "a1",
+        "a2",
+        "l1",
+        "l2"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "a1"
+       ],
+       "value": 64
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "a2"
+      ],
+      "value": 64
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a2 = a1\na2 = 64°"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "missing-parallel"
+    ],
+    "derivation": "oracle: exact linear algebra; alternate/corresponding equality requires the parallel fact"
+   },
+   "id": "e5-dev-072",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "linear-pair",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "lp",
+     "objects": [
+      {
+       "id": "ABD",
+       "kind": "angle"
+      },
+      {
+       "id": "DBC",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "linear_pair",
+       "args": [
+        "ABD",
+        "DBC"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "ABD"
+       ],
+       "value": 40
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "DBC"
+      ],
+      "value": 140
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "angle ABD + angle DBC = 180°\n40° + angle DBC = 180°\nangle DBC = 140°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; supplementary linear pair"
+   },
+   "id": "e5-dev-073",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "product-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2
+      },
+      {
+       "kind": "exp",
+       "argument": {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "3"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = x^2 exp(3x)\nf'(x) = 2x exp(3x) * 3exp(3x)"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong-product-rule"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-074",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "linear-pair",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "lp",
+     "objects": [
+      {
+       "id": "ABD",
+       "kind": "angle"
+      },
+      {
+       "id": "DBC",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "linear_pair",
+       "args": [
+        "ABD",
+        "DBC"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "ABD"
+       ],
+       "value": 65
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "DBC"
+      ],
+      "value": 115
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠ABD + ∠DBC = 180°\n65° + ∠DBC = 180°\n∠DBC = 115°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; supplementary linear pair"
+   },
+   "id": "e5-dev-075",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "chain-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "sin",
+     "argument": {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "3"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     }
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = sin(3x)\nf'(x) = 3cos(3x)"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-076",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "definite-substitution",
+   "problem": {
+    "domain": "calculus",
+    "task": "definite-integral",
+    "integrand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 2
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       },
+       "exponent": 2
+      }
+     ]
+    },
+    "variable": "x",
+    "lower": "0",
+    "upper": "1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "u = x^2 + 1\n∫_0^1 2x(x^2 + 1)^2 dx = ∫_1^2 u^2 du\n= 7/3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "substitution-method",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: bounds u(0)=1, u(1)=2; exact value 7/3"
+   },
+   "id": "e5-dev-077",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "definite-polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "definite-integral",
+    "integrand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "6"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ]
+    },
+    "variable": "x",
+    "lower": "1",
+    "upper": "4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫_1^4 6x dx = 45"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid",
+     "one-line"
+    ],
+    "derivation": "oracle: exact Fraction polynomial antiderivative; value F(b) - F(a)"
+   },
+   "id": "e5-dev-078",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 25
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 80
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 75
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "m∠A + m∠B + m∠C = 180°\n25° + 80° + m∠C = 180°\nm∠C = 75°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-079",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "parallel-lines",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "par",
+     "objects": [
+      {
+       "id": "a1",
+       "kind": "angle"
+      },
+      {
+       "id": "a2",
+       "kind": "angle"
+      },
+      {
+       "id": "l1",
+       "kind": "line"
+      },
+      {
+       "id": "l2",
+       "kind": "line"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "corresponding_pair",
+       "args": [
+        "a1",
+        "a2",
+        "l1",
+        "l2"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "a1"
+       ],
+       "value": 110
+      },
+      {
+       "predicate": "parallel",
+       "args": [
+        "l1",
+        "l2"
+       ]
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "a2"
+      ],
+      "value": 110
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "a2 = a1\na2 = 110°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; alternate/corresponding equality requires the parallel fact"
+   },
+   "id": "e5-dev-080",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "vertical-angles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "vt",
+     "objects": [
+      {
+       "id": "AOC",
+       "kind": "angle"
+      },
+      {
+       "id": "BOD",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "AOC"
+       ],
+       "value": 48
+      },
+      {
+       "predicate": "vertical_pair",
+       "args": [
+        "AOC",
+        "BOD"
+       ]
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "BOD"
+      ],
+      "value": 48
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠BOD = ∠AOC\n∠BOD = 48°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; vertical pair equality requires the stated pair fact"
+   },
+   "id": "e5-dev-081",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "linear-pair",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "lp",
+     "objects": [
+      {
+       "id": "ABD",
+       "kind": "angle"
+      },
+      {
+       "id": "DBC",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "linear_pair",
+       "args": [
+        "ABD",
+        "DBC"
+       ]
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "ABD"
+       ],
+       "value": 72
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "DBC"
+      ],
+      "value": 108
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠DBC = 72°"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "equal-instead-of-supplement"
+    ],
+    "derivation": "oracle: exact linear algebra; supplementary linear pair"
+   },
+   "id": "e5-dev-082",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "geometry-proof-steps",
+   "family": "reason-triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 50
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 60
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 70
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "A + B + C = 180° (angle sum of a triangle)\n50° + 60° + C = 180°\nC = 70°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "ok"
+    ],
+    "derivation": "oracle: triangle angle sum"
+   },
+   "id": "e5-dev-083",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "definite-polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "definite-integral",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "4"
+        },
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x",
+    "lower": "0",
+    "upper": "3"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "F(x) = x + 4x^2/3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "wrong-antiderivative"
+    ],
+    "derivation": "oracle: exact Fraction polynomial antiderivative; value F(b) - F(a)"
+   },
+   "id": "e5-dev-084",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "right-triangle-complementary",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "rt",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle",
+       "data": {
+        "angles": [
+         "A",
+         "B",
+         "C"
+        ],
+        "sides": [
+         "AB",
+         "BC",
+         "CA"
+        ]
+       }
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "C"
+       ],
+       "value": 90
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 35
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 55
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "A + B = 90°\nB = 90° - 35°\nB = 55°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact linear algebra; the acute angles of a right triangle sum to 90"
+   },
+   "id": "e5-dev-085",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 62
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 38
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 80
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "C = 180° - 62° - 38°\nC = 80°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-086",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "perpendicular-by-slope",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pp",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 0,
+        "y": 0
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 2,
+        "y": 4
+       }
+      },
+      {
+       "id": "C",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 1
+       }
+      },
+      {
+       "id": "D",
+       "kind": "point",
+       "data": {
+        "x": 5,
+        "y": -1
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "line",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      },
+      {
+       "id": "CD",
+       "kind": "line",
+       "data": {
+        "points": [
+         "C",
+         "D"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "perpendicular",
+      "args": [
+       "AB",
+       "CD"
+      ]
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "slope AB = (4 - 0)/(2 - 0) = 2\nslope CD = (-1 - 1)/(5 - 1) = -1/2\n2 * -1/2 = -1, so AB is perpendicular to CD"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "multi-claim-line",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fractions slopes"
+   },
+   "id": "e5-dev-087",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "vertical-angles",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "vt",
+     "objects": [
+      {
+       "id": "AOC",
+       "kind": "angle"
+      },
+      {
+       "id": "BOD",
+       "kind": "angle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "AOC"
+       ],
+       "value": 85
+      }
+     ],
+     "conditions": [],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "BOD"
+      ],
+      "value": 85
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∠BOD = ∠AOC\n∠BOD = 85°"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "from-picture"
+    ],
+    "derivation": "oracle: exact linear algebra; vertical pair equality requires the stated pair fact"
+   },
+   "id": "e5-dev-088",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "standard-trig",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "sin",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "0",
+    "side": "both",
+    "method": "standard-trig"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→0) sin(x)/x = 1"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-089",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "product-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2
+      },
+      {
+       "kind": "sin",
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = x^2 sin(x)\nf'(x) = 2x sin(x) + x^2 cos(x)"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-090",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "removable-non-diff-squares",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "power",
+           "base": {
+            "kind": "variable",
+            "name": "x"
+           },
+           "exponent": 2
+          },
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "-1"
+            },
+            {
+             "kind": "multiply",
+             "factors": [
+              {
+               "kind": "constant",
+               "value": "5"
+              },
+              {
+               "kind": "variable",
+               "name": "x"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "kind": "constant",
+         "value": "6"
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "multiply",
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "2"
+           }
+          ]
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "2",
+    "side": "both",
+    "method": "direct"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→2) (x^2 - 5x + 6)/(x - 2) = lim_(x→2) (x - 3) = -1"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "trinomial-cancellation",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-091",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "slope",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "slope",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 1
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 4,
+        "y": 9
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "segment",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "slope",
+      "args": [
+       "AB"
+      ],
+      "value": "8/3"
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "m = (9 - 1)/(4 - 1)"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "stop"
+    ],
+    "derivation": "oracle: exact Fractions; slope = rise over run"
+   },
+   "id": "e5-dev-092",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "limits-continuity",
+   "family": "removable",
+   "problem": {
+    "domain": "calculus",
+    "task": "limit",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "16"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "power",
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "kind": "multiply",
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "4"
+           }
+          ]
+         }
+        ]
+       },
+       "exponent": -1
+      }
+     ]
+    },
+    "variable": "x",
+    "approach": "4",
+    "side": "both",
+    "method": "removable",
+    "equivalentExpression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "constant",
+       "value": "4"
+      }
+     ]
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "lim_(x→4) (x^2 - 16)/(x - 4) does not exist"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "claims-dne"
+    ],
+    "derivation": "oracle: exact polynomial arithmetic over Q"
+   },
+   "id": "e5-dev-093",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "product-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "3"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = (x + 1)(x^2 - 3)\nf'(x) = (x^2 - 3) + 2x(x + 1)"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-094",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "coordinate-geometry",
+   "family": "parallel-by-slope",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "pp",
+     "objects": [
+      {
+       "id": "A",
+       "kind": "point",
+       "data": {
+        "x": 1,
+        "y": 1
+       }
+      },
+      {
+       "id": "B",
+       "kind": "point",
+       "data": {
+        "x": 3,
+        "y": 5
+       }
+      },
+      {
+       "id": "C",
+       "kind": "point",
+       "data": {
+        "x": 2,
+        "y": 0
+       }
+      },
+      {
+       "id": "D",
+       "kind": "point",
+       "data": {
+        "x": 4,
+        "y": 4
+       }
+      },
+      {
+       "id": "AB",
+       "kind": "line",
+       "data": {
+        "points": [
+         "A",
+         "B"
+        ]
+       }
+      },
+      {
+       "id": "CD",
+       "kind": "line",
+       "data": {
+        "points": [
+         "C",
+         "D"
+        ]
+       }
+      }
+     ],
+     "facts": [],
+     "conditions": [],
+     "goal": {
+      "predicate": "parallel",
+      "args": [
+       "AB",
+       "CD"
+      ]
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "slope AB = (5 - 1)/(3 - 1) = 2\nslope CD = (4 - 0)/(4 - 2) = 2\n2 = 2, so AB is parallel to CD"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "multi-claim-line",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fractions slopes"
+   },
+   "id": "e5-dev-095",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "differentiation",
+   "family": "power-rule",
+   "problem": {
+    "domain": "calculus",
+    "task": "derivative",
+    "expression": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "add",
+         "terms": [
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "3"
+            },
+            {
+             "kind": "power",
+             "base": {
+              "kind": "variable",
+              "name": "x"
+             },
+             "exponent": 4
+            }
+           ]
+          },
+          {
+           "kind": "multiply",
+           "factors": [
+            {
+             "kind": "constant",
+             "value": "-1"
+            },
+            {
+             "kind": "multiply",
+             "factors": [
+              {
+               "kind": "constant",
+               "value": "2"
+              },
+              {
+               "kind": "power",
+               "base": {
+                "kind": "variable",
+                "name": "x"
+               },
+               "exponent": 2
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "5"
+          },
+          {
+           "kind": "variable",
+           "name": "x"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "kind": "constant",
+         "value": "7"
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = 3x^4 - 2x^2 + 5x - 7\nf'(x) = 12x^3 - 4x + 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: own differentiator + Decimal(70) agreement at >= 8 rational points"
+   },
+   "id": "e5-dev-096",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "substitution-claim",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "kind": "exp",
+       "argument": {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       }
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ x exp(x^2) dx = exp(x^2) + C"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "firstInvalidAcceptable": [],
+    "complete": false,
+    "alternativeMethodValid": false,
+    "mustNotVerify": true,
+    "coverage": "in-scope",
+    "tags": [
+     "forgot-half"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-097",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "integration",
+   "family": "polynomial",
+   "problem": {
+    "domain": "calculus",
+    "task": "indefinite-integral",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "3"
+        },
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        }
+       ]
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "2"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      }
+     ]
+    },
+    "variable": "x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "∫ (3x^2 + 2x) dx = x^3 + x^2 + C"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: derivative of the claimed antiderivative agrees with the integrand at >= 8 rational points; +C required"
+   },
+   "id": "e5-dev-098",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  },
+  {
+   "category": "angle-relationships",
+   "family": "triangle-sum",
+   "problem": {
+    "domain": "geometry",
+    "problem": {
+     "id": "tri",
+     "objects": [
+      {
+       "id": "ABC",
+       "kind": "triangle"
+      }
+     ],
+     "facts": [
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "A"
+       ],
+       "value": 35
+      },
+      {
+       "predicate": "angle_measure",
+       "args": [
+        "B"
+       ],
+       "value": 65
+      }
+     ],
+     "conditions": [
+      "nondegenerate:ABC"
+     ],
+     "goal": {
+      "predicate": "angle_measure",
+      "args": [
+       "C"
+      ],
+      "value": 80
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "angle A + angle B + angle C = 180°\nangle C = 180° - angle A - angle B\nangle C = 80°"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "firstInvalidAcceptable": [],
+    "complete": true,
+    "alternativeMethodValid": false,
+    "mustNotVerify": false,
+    "coverage": "in-scope",
+    "tags": [
+     "valid"
+    ],
+    "derivation": "oracle: exact Fraction linear algebra over the angle variables; premises = givens + angle-sum theorem (condition permitting)"
+   },
+   "id": "e5-dev-099",
+   "partition": "development",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "e5_oracle.py (Fractions + Decimal(70)); no OpenPath code; SymPy unavailable offline",
+    "seed": 20261103
+   }
+  }
+ ]
+}

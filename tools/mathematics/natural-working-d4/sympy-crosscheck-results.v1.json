@@ -1,0 +1,6 @@
+{
+  "oracle": "SymPy 1.14 exact symbolic evaluation",
+  "checks": 80,
+  "passed": 80,
+  "failed": []
+}

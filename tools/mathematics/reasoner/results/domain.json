@@ -1,0 +1,102 @@
+{
+ "cases": [
+  {
+   "previous": "(9*x)/x=10",
+   "next": "9=10",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "cancel x/x: widens the domain from x!=0 to all reals"
+  },
+  {
+   "previous": "(9*x)/x=9",
+   "next": "9=9",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "cancel x/x: identity over x!=0 would be reported as identity over all reals"
+  },
+  {
+   "previous": "(x*x)/x=5",
+   "next": "x=5",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "cancel one factor of x: domain changes even though the solution set stays {5}"
+  },
+  {
+   "previous": "x/x=1",
+   "next": "1=1",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "cancel x/x"
+  },
+  {
+   "previous": "2*x=6",
+   "next": "(2*x)/x=6/x",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "divide both sides by x introduces x!=0"
+  },
+  {
+   "previous": "2*x=6",
+   "next": "x*(2*x)=x*6",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "multiply both sides by x adds the root 0"
+  },
+  {
+   "previous": "2*x=6",
+   "next": "0*(2*x)=0*6",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "multiply both sides by 0"
+  },
+  {
+   "previous": "(9*x)/x=10",
+   "next": "(9*x)/x+1=10+1",
+   "expectedValid": true,
+   "checkerSaysValid": true,
+   "pass": true,
+   "why": "add 1 to both sides: domain x!=0 kept, solution set kept"
+  },
+  {
+   "previous": "(9*x)/x=10",
+   "next": "2*((9*x)/x)=2*10",
+   "expectedValid": true,
+   "checkerSaysValid": true,
+   "pass": true,
+   "why": "multiply both sides by 2 keeps the restriction"
+  },
+  {
+   "previous": "2*x=6",
+   "next": "2*x/2=6/2",
+   "expectedValid": true,
+   "checkerSaysValid": true,
+   "pass": true,
+   "why": "divide both sides by a non-zero constant"
+  },
+  {
+   "previous": "3/x=6",
+   "next": "3=6*x",
+   "expectedValid": false,
+   "checkerSaysValid": false,
+   "pass": true,
+   "why": "multiplying by x is only valid when x != 0 is carried along (here it is dropped)"
+  },
+  {
+   "previous": "3/x=6",
+   "next": "3/x+1=6+1",
+   "expectedValid": true,
+   "checkerSaysValid": true,
+   "pass": true,
+   "why": "keeps the restriction"
+  }
+ ],
+ "passed": 12,
+ "total": 12
+}

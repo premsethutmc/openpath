@@ -1,0 +1,1764 @@
+{
+ "id": "cbse-ncert-mathematics-grade-10",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 10,
+ "title": "Mathematics: Textbook for Class X — Grade 10 Mathematics (CBSE / NCERT)",
+ "hash": "50b2cdb6",
+ "source": {
+  "kind": "textbook",
+  "title": "Mathematics: Textbook for Class X",
+  "edition": "rationalised edition (content rationalised from the 2023-24 reprint; continued unchanged for 2026-27; exact 2026-27 reprint date not verified)",
+  "publisher": "NCERT",
+  "board": "CBSE (NCERT textbooks)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/cbse-g10.json. Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart1/Maths_SecP1X_2026-27.pdf https://cbseacademic.nic.in/web_material/Circulars/2026/14_Circular_2026.pdf https://cbseacademic.nic.in/curriculum_2027.html https://ncert.nic.in/pdf/announcement/notices/Advisory_ncertbooks.pdf. Notes: TEXTBOOK: For 2026-27 Class X still uses the rationalised NCERT 'Mathematics: Textbook for Class X' (14 chapters; Constructions removed). NCERT said in March 2026 that new NCF-SE books for Grades 10 and 11 come only from 2027-28; I read this in news reports because the NCERT advisory PDF is blocked to the fetch tool. STANDARD vs BASIC: CBSE offers Mathematics Standard (041) and Mathematics Basic (241). They have the same syllabus, the same textbook and the same 80+20 mark structure; only the question-paper design differs. Standard: Remembering/Understanding 43 marks (54%), Applying 19 (24%), Analysing/Evaluating/Creating 18 (22%). Basic: 60 (75%), 12 (15%), 8 (10%). This file covers both; no outcome is Standard-only. UNIT WEIGHTS (theory 80 marks, 3 hours): Number Systems 6, Algebra 20, Coordinate Geometry 6, Geometry 15, Trigonometry 12, Mensuration 10, Statistics and Probability 11. Internal assessment 20: pen-paper test and multiple assessment 10 (5+5), portfolio 5, lab practical 5. The extracted text of the 2026-27 document gave no period counts.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "cbse-g10-c01",
+     "number": 1,
+     "title": "Real Numbers",
+     "outcomes": [
+      {
+       "id": "cbse-g10-c01-o02",
+       "text": "Find the HCF and LCM of numbers from their prime factorisations, use HCF x LCM = product for two numbers, and solve word problems with them.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.euclid-algorithm",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.hcf-lcm",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      },
+      {
+       "id": "cbse-g10-c01-o03",
+       "text": "Use uniqueness of prime factorisation to justify number facts, e.g. that 6^n can never end in 0.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.mathematical-argument",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; written-explanation, true-false)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c01-s01",
+       "number": "1.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c01-s02",
+       "number": "1.2",
+       "title": "The Fundamental Theorem of Arithmetic",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c01-o01",
+         "text": "Express a natural number as a product of primes and state the Fundamental Theorem of Arithmetic (uniqueness of prime factorisation).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.euclid-algorithm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.prime-factorisation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.primes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c01-s03",
+       "number": "1.3",
+       "title": "Revisiting Irrational Numbers",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c01-o04",
+         "text": "Prove by contradiction that sqrt 2, sqrt 3 and sqrt 5 are irrational, using the fact that if a prime divides a^2 it divides a.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.irrationality-proofs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        },
+        {
+         "id": "cbse-g10-c01-o05",
+         "text": "Prove that numbers such as 3 + 2 sqrt 5 or 1/sqrt 2 are irrational, given the irrationality of the surd.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.irrationality-proofs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.real-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c01-s04",
+       "number": "1.4",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g10-c02",
+     "number": 2,
+     "title": "Polynomials",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c02-s01",
+       "number": "2.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c02-s02",
+       "number": "2.2",
+       "title": "Geometrical Meaning of the Zeroes of a Polynomial",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c02-o01",
+         "text": "Find the number of zeros of a polynomial from its graph by counting where it meets the x-axis.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-zeros",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.polynomials",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g10-c02-o03",
+         "text": "Write a quadratic polynomial whose zeros have a given sum and product.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-zeros",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c02-s03",
+       "number": "2.3",
+       "title": "Relationship between Zeroes and Coefficients of a Polynomial",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c02-o02",
+         "text": "Find the zeros of a quadratic polynomial by factorising, and check the sum and product of zeros against the coefficients.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.factorisation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.polynomial-zeros",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g10-c02-o04",
+         "text": "Evaluate symmetric expressions in the zeros (e.g. alpha^2 + beta^2, 1/alpha + 1/beta) without finding the zeros, and find unknown coefficients from conditions on the zeros.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.identities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.polynomial-zeros",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c02-s04",
+       "number": "2.4",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g10-c03",
+     "number": 3,
+     "title": "Pair of Linear Equations in Two Variables",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c03-s01",
+       "number": "3.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c03-s02",
+       "number": "3.2",
+       "title": "Graphical Method of Solution of a Pair of Linear Equations",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c03-o01",
+         "text": "Represent a situation as a pair of linear equations in two variables.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g10-c03-o02",
+         "text": "Solve a pair of linear equations graphically and interpret intersecting, parallel and coincident lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, coordinate)."
+         }
+        },
+        {
+         "id": "cbse-g10-c03-o03",
+         "text": "Decide from the coefficient ratios a1/a2, b1/b2, c1/c2 whether a pair has one, none or infinitely many solutions, and find parameter values for a given case.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g10-c03-o04",
+         "text": "Solve a pair of linear equations by substitution.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution)."
+         }
+        },
+        {
+         "id": "cbse-g10-c03-o05",
+         "text": "Solve a pair of linear equations by elimination.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution)."
+         }
+        },
+        {
+         "id": "cbse-g10-c03-o06",
+         "text": "Model and solve everyday problems (ages, money, speeds, digits, geometry) with a pair of linear equations and interpret the solution.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.model-selection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c03-s03",
+       "number": "3.3",
+       "title": "Algebraic Methods of Solving a Pair of Linear Equations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c03-s04",
+       "number": "3.4",
+       "title": "Substitution Method",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c03-s05",
+       "number": "3.5",
+       "title": "Elimination Method",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c03-s06",
+       "number": "3.6",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g10-c04",
+     "number": 4,
+     "title": "Quadratic Equations",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c04-s01",
+       "number": "4.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c04-s02",
+       "number": "4.2",
+       "title": "Quadratic Equations",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c04-o01",
+         "text": "Recognise quadratic equations in standard form ax^2 + bx + c = 0 (a not 0) and form them from situations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; true-false, equation-solution)."
+         }
+        },
+        {
+         "id": "cbse-g10-c04-o03",
+         "text": "Solve quadratic equations with real roots using the quadratic formula.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c04-s03",
+       "number": "4.3",
+       "title": "Solution of a Quadratic Equation by Factorisation",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c04-o02",
+         "text": "Solve quadratic equations by factorisation (splitting the middle term).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, set)."
+         }
+        },
+        {
+         "id": "cbse-g10-c04-o05",
+         "text": "Model everyday problems (areas, speeds, ages, numbers) with quadratic equations, solve them and reject solutions that do not fit the context.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.model-selection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c04-s04",
+       "number": "4.4",
+       "title": "Nature of Roots",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c04-o04",
+         "text": "Use the discriminant to decide the nature of roots and find parameter values for equal or real roots.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratic-discriminant",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c04-s05",
+       "number": "4.5",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g10-c05",
+     "number": 5,
+     "title": "Arithmetic Progressions",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c05-s01",
+       "number": "5.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c05-s02",
+       "number": "5.2",
+       "title": "Arithmetic Progressions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c05-s03",
+       "number": "5.3",
+       "title": "nth Term of an AP",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c05-o02",
+         "text": "Derive and use the nth-term formula of an AP, including the nth term from the end and which term has a given value.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.arithmetic-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c05-s04",
+       "number": "5.4",
+       "title": "Sum of First n Terms of an AP",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c05-o01",
+         "text": "Decide whether a list is an AP and identify its first term and common difference.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.arithmetic-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; true-false, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g10-c05-o03",
+         "text": "Derive and use the formula for the sum of the first n terms of an AP.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.arithmetic-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+         }
+        },
+        {
+         "id": "cbse-g10-c05-o04",
+         "text": "Solve everyday problems (savings, instalments, arrangements) with AP terms and sums.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.arithmetic-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c05-s05",
+       "number": "5.5",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g10-c06",
+     "number": 6,
+     "title": "Triangles",
+     "outcomes": [
+      {
+       "id": "cbse-g10-c06-o02",
+       "text": "Prove the Basic Proportionality Theorem: a line parallel to one side of a triangle divides the other two sides in the same ratio.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.similarity",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.triangle-proof",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+       }
+      },
+      {
+       "id": "cbse-g10-c06-o03",
+       "text": "Use the BPT and its converse to find lengths and to show lines are parallel.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.similarity",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c06-s01",
+       "number": "6.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c06-s02",
+       "number": "6.2",
+       "title": "Similar Figures",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c06-o01",
+         "text": "Explain when figures are similar versus congruent, with examples and counterexamples (e.g. polygons with equal angles but sides not in proportion).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.similarity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, written-explanation)."
+         }
+        },
+        {
+         "id": "cbse-g10-c06-o05",
+         "text": "Prove triangles similar and deduce relations between their sides, such as equal products of segments.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.similarity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.triangle-proof",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c06-s03",
+       "number": "6.3",
+       "title": "Similarity of Triangles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c06-s04",
+       "number": "6.4",
+       "title": "Criteria for Similarity of Triangles",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c06-o04",
+         "text": "Apply the AA/AAA, SSS and SAS similarity criteria to find unknown sides and angles.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.similarity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c06-s05",
+       "number": "6.5",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g10-c10",
+     "number": 10,
+     "title": "Circles",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c10-s01",
+       "number": "10.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c10-s02",
+       "number": "10.2",
+       "title": "Tangent to a Circle",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c10-o04",
+         "text": "Use tangent properties to find lengths and angles and to prove results such as AB + CD = AD + BC for a quadrilateral circumscribing a circle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-tangents",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c10-s03",
+       "number": "10.3",
+       "title": "Number of Tangents from a Point on a Circle",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c10-o01",
+         "text": "Tell tangents, secants and non-intersecting lines apart and state how many tangents can be drawn from a point inside, on or outside a circle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-tangents",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g10-c10-o02",
+         "text": "Prove that the tangent at any point of a circle is perpendicular to the radius through the point of contact.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-tangents",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        },
+        {
+         "id": "cbse-g10-c10-o03",
+         "text": "Prove that the two tangents drawn from an external point to a circle are equal in length.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-tangents",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c10-s04",
+       "number": "10.4",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g10-c11",
+     "number": 11,
+     "title": "Areas Related to Circles",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c11-s01",
+       "number": "11.1",
+       "title": "Areas of Sector and Segment of a Circle",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c11-o01",
+         "text": "Calculate the area of a sector and the length of its arc from the radius and central angle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.sectors",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        },
+        {
+         "id": "cbse-g10-c11-o02",
+         "text": "Calculate the area of a segment of a circle for central angles of 60, 90 or 120 degrees.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.sectors",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        },
+        {
+         "id": "cbse-g10-c11-o03",
+         "text": "Solve applied problems with sectors and segments, such as clock hands, wipers and designs.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.circle-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.sectors",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c11-s02",
+       "number": "11.2",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g10-c12",
+     "number": 12,
+     "title": "Surface Areas and Volumes",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c12-s01",
+       "number": "12.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c12-s02",
+       "number": "12.2",
+       "title": "Surface Area of a Combination of Solids",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c12-o01",
+         "text": "Calculate the surface area of a solid made of two basic solids (cube, cuboid, cylinder, cone, sphere, hemisphere), deciding which faces stay exposed.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.combined-solids",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        },
+        {
+         "id": "cbse-g10-c12-o03",
+         "text": "Model real objects (toys, tents, capsules, vessels) as combinations of solids and answer questions about material or capacity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.combined-solids",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.model-selection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c12-s03",
+       "number": "12.3",
+       "title": "Volume of a Combination of Solids",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c12-o02",
+         "text": "Calculate the volume of a solid made of two basic solids.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.combined-solids",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c12-s04",
+       "number": "12.4",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g10-c13",
+     "number": 13,
+     "title": "Statistics",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c13-s01",
+       "number": "13.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c13-s02",
+       "number": "13.2",
+       "title": "Mean of Grouped Data",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c13-o01",
+         "text": "Calculate the mean of grouped data by the direct, assumed-mean and step-deviation methods.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.grouped-mean",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, data-table)."
+         }
+        },
+        {
+         "id": "cbse-g10-c13-o04",
+         "text": "Find a missing frequency from a given mean or median and interpret which measure of centre suits a situation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.grouped-mean",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c13-s03",
+       "number": "13.3",
+       "title": "Mode of Grouped Data",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c13-o02",
+         "text": "Calculate the mode of grouped data from the modal class with the formula.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.grouped-mean",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, data-table)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c13-s04",
+       "number": "13.4",
+       "title": "Median of Grouped Data",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c13-o03",
+         "text": "Calculate the median of grouped data using cumulative frequencies and the median formula.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.grouped-mean",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, data-table)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c13-s05",
+       "number": "13.5",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    },
+    {
+     "id": "cbse-g10-c14",
+     "number": 14,
+     "title": "Probability",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c14-s01",
+       "number": "14.1",
+       "title": "Probability — A Theoretical Approach",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c14-o01",
+         "text": "Calculate theoretical (classical) probabilities for experiments with equally likely outcomes, such as coins, dice, cards and balls in bags.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.classical",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g10-c14-o02",
+         "text": "Use the facts that P(E) + P(not E) = 1, that 0 <= P(E) <= 1, and that impossible and sure events have probabilities 0 and 1.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.complements",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g10-c14-o03",
+         "text": "List the sample space of two-stage experiments (two coins, two dice) and find probabilities of events defined on it.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.classical",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.sample-space",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c14-s02",
+       "number": "14.2",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-probability",
+      "number": 6,
+      "title": "Probability"
+     }
+    },
+    {
+     "id": "cbse-g10-c07",
+     "number": 7,
+     "title": "Coordinate Geometry",
+     "outcomes": [
+      {
+       "id": "cbse-g10-c07-o02",
+       "text": "Use distances to test collinearity, classify triangles and quadrilaterals, and find points equidistant from given points.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.distance",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.coordinate.distance-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.mathematical-argument",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, coordinate, written-explanation)."
+       }
+      },
+      {
+       "id": "cbse-g10-c07-o03",
+       "text": "Find the point dividing a segment internally in a given ratio, including the midpoint and points of trisection.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.distance",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; coordinate)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c07-s01",
+       "number": "7.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c07-s02",
+       "number": "7.2",
+       "title": "Distance Formula",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c07-o01",
+         "text": "Calculate the distance between two points with the distance formula.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c07-s03",
+       "number": "7.3",
+       "title": "Section Formula",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c07-o04",
+         "text": "Find the ratio in which a point or an axis divides a segment, and unknown vertices (e.g. of a parallelogram) using the section formula.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.distance-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c07-s04",
+       "number": "7.4",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-coordinate",
+      "number": 7,
+      "title": "Coordinate geometry"
+     }
+    },
+    {
+     "id": "cbse-g10-c08",
+     "number": 8,
+     "title": "Introduction to Trigonometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c08-s01",
+       "number": "8.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c08-s02",
+       "number": "8.2",
+       "title": "Trigonometric Ratios",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c08-o01",
+         "text": "Define the six trigonometric ratios of an acute angle in a right triangle and explain, using similarity, why they depend only on the angle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.ratios",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        },
+        {
+         "id": "cbse-g10-c08-o02",
+         "text": "Find the other trigonometric ratios of an angle from one given ratio.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.ratios",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, expression)."
+         }
+        },
+        {
+         "id": "cbse-g10-c08-o03",
+         "text": "Recall and justify the ratios of 30, 45 and 60 degrees (and the motivated values at 0 and 90), and evaluate expressions with them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.ratios",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c08-s03",
+       "number": "8.3",
+       "title": "Trigonometric Ratios of Some Specific Angles",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c08-s04",
+       "number": "8.4",
+       "title": "Trigonometric Identities",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c08-o04",
+         "text": "Prove sin^2 A + cos^2 A = 1 and the related identities with sec/tan and cosec/cot.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.identities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        },
+        {
+         "id": "cbse-g10-c08-o05",
+         "text": "Prove simple trigonometric identities and simplify expressions using the basic identities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.identities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c08-s05",
+       "number": "8.5",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-trigonometry",
+      "number": 8,
+      "title": "Trigonometry"
+     }
+    },
+    {
+     "id": "cbse-g10-c09",
+     "number": 9,
+     "title": "Some Applications of Trigonometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g10-c09-s01",
+       "number": "9.1",
+       "title": "Heights and Distances",
+       "outcomes": [
+        {
+         "id": "cbse-g10-c09-o01",
+         "text": "Identify angles of elevation and depression and draw a labelled diagram for a heights-and-distances situation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.heights-distances",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; diagram-drawing, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g10-c09-o02",
+         "text": "Find heights or distances with one right triangle and angles of 30, 45 or 60 degrees.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.heights-distances",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g10-c09-o03",
+         "text": "Solve heights-and-distances problems involving two right triangles (e.g. two observation points, an object seen from a height).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.heights-distances",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g10-c09-s02",
+       "number": "9.2",
+       "title": "Summary",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-trigonometry",
+      "number": 8,
+      "title": "Trigonometry"
+     }
+    }
+   ]
+  }
+ ]
+}

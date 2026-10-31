@@ -1,0 +1,5945 @@
+{
+  "version": "student-complete-proofs@1",
+  "cases": [
+    {
+      "id": "proof-001",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v0a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v0b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v0a",
+            "v0b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v0a",
+          "v0b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v0a",
+              "v0b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-002",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v1a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v1b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v1a",
+            "v1b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v1a",
+          "v1b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v1a",
+              "v1b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-003",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v2a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v2b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v2a",
+            "v2b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v2a",
+          "v2b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v2a",
+              "v2b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-004",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v3a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v3b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v3a",
+            "v3b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v3a",
+          "v3b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v3a",
+              "v3b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-005",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v4a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v4b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v4a",
+            "v4b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v4a",
+          "v4b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v4a",
+              "v4b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-006",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v5a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v5b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v5a",
+            "v5b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v5a",
+          "v5b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v5a",
+              "v5b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-007",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v6a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v6b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v6a",
+            "v6b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v6a",
+          "v6b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v6a",
+              "v6b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-008",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v7a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v7b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v7a",
+            "v7b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v7a",
+          "v7b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v7a",
+              "v7b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-009",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v8a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v8b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v8a",
+            "v8b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v8a",
+          "v8b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v8a",
+              "v8b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-010",
+      "category": "correct-proof",
+      "objects": [
+        {
+          "id": "v9a",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "v9b",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "v9a",
+            "v9b"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "v9a",
+          "v9b"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "v9a",
+              "v9b"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Explicit vertical-pair construction entails equal angles."
+    },
+    {
+      "id": "proof-011",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L0T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L0AB",
+              "L0BC",
+              "L0CA"
+            ],
+            "angles": [
+              "L0A",
+              "L0B",
+              "L0C"
+            ]
+          }
+        },
+        {
+          "id": "R0T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R0AB",
+              "R0BC",
+              "R0CA"
+            ],
+            "angles": [
+              "R0A",
+              "R0B",
+              "R0C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L0AB",
+            "R0AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L0BC",
+            "R0BC"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L0CA",
+            "R0CA"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L0T",
+        "nondegenerate:R0T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L0T",
+          "R0T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L0T",
+              "R0T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-012",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L1T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L1AB",
+              "L1BC",
+              "L1CA"
+            ],
+            "angles": [
+              "L1A",
+              "L1B",
+              "L1C"
+            ]
+          }
+        },
+        {
+          "id": "R1T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R1AB",
+              "R1BC",
+              "R1CA"
+            ],
+            "angles": [
+              "R1A",
+              "R1B",
+              "R1C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L1AB",
+            "R1AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L1CA",
+            "R1CA"
+          ]
+        },
+        {
+          "predicate": "equal_angle",
+          "args": [
+            "L1A",
+            "R1A"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L1T",
+        "nondegenerate:R1T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L1T",
+          "R1T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L1T",
+              "R1T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-013",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L2T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L2AB",
+              "L2BC",
+              "L2CA"
+            ],
+            "angles": [
+              "L2A",
+              "L2B",
+              "L2C"
+            ]
+          }
+        },
+        {
+          "id": "R2T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R2AB",
+              "R2BC",
+              "R2CA"
+            ],
+            "angles": [
+              "R2A",
+              "R2B",
+              "R2C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L2AB",
+            "R2AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L2BC",
+            "R2BC"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L2CA",
+            "R2CA"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L2T",
+        "nondegenerate:R2T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L2T",
+          "R2T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L2T",
+              "R2T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-014",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L3T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L3AB",
+              "L3BC",
+              "L3CA"
+            ],
+            "angles": [
+              "L3A",
+              "L3B",
+              "L3C"
+            ]
+          }
+        },
+        {
+          "id": "R3T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R3AB",
+              "R3BC",
+              "R3CA"
+            ],
+            "angles": [
+              "R3A",
+              "R3B",
+              "R3C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L3AB",
+            "R3AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L3CA",
+            "R3CA"
+          ]
+        },
+        {
+          "predicate": "equal_angle",
+          "args": [
+            "L3A",
+            "R3A"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L3T",
+        "nondegenerate:R3T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L3T",
+          "R3T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L3T",
+              "R3T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-015",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L4T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L4AB",
+              "L4BC",
+              "L4CA"
+            ],
+            "angles": [
+              "L4A",
+              "L4B",
+              "L4C"
+            ]
+          }
+        },
+        {
+          "id": "R4T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R4AB",
+              "R4BC",
+              "R4CA"
+            ],
+            "angles": [
+              "R4A",
+              "R4B",
+              "R4C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L4AB",
+            "R4AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L4BC",
+            "R4BC"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L4CA",
+            "R4CA"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L4T",
+        "nondegenerate:R4T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L4T",
+          "R4T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L4T",
+              "R4T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-016",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L5T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L5AB",
+              "L5BC",
+              "L5CA"
+            ],
+            "angles": [
+              "L5A",
+              "L5B",
+              "L5C"
+            ]
+          }
+        },
+        {
+          "id": "R5T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R5AB",
+              "R5BC",
+              "R5CA"
+            ],
+            "angles": [
+              "R5A",
+              "R5B",
+              "R5C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L5AB",
+            "R5AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L5CA",
+            "R5CA"
+          ]
+        },
+        {
+          "predicate": "equal_angle",
+          "args": [
+            "L5A",
+            "R5A"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L5T",
+        "nondegenerate:R5T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L5T",
+          "R5T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L5T",
+              "R5T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-017",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L6T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L6AB",
+              "L6BC",
+              "L6CA"
+            ],
+            "angles": [
+              "L6A",
+              "L6B",
+              "L6C"
+            ]
+          }
+        },
+        {
+          "id": "R6T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R6AB",
+              "R6BC",
+              "R6CA"
+            ],
+            "angles": [
+              "R6A",
+              "R6B",
+              "R6C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L6AB",
+            "R6AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L6BC",
+            "R6BC"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L6CA",
+            "R6CA"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L6T",
+        "nondegenerate:R6T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L6T",
+          "R6T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L6T",
+              "R6T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-018",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L7T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L7AB",
+              "L7BC",
+              "L7CA"
+            ],
+            "angles": [
+              "L7A",
+              "L7B",
+              "L7C"
+            ]
+          }
+        },
+        {
+          "id": "R7T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R7AB",
+              "R7BC",
+              "R7CA"
+            ],
+            "angles": [
+              "R7A",
+              "R7B",
+              "R7C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L7AB",
+            "R7AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L7CA",
+            "R7CA"
+          ]
+        },
+        {
+          "predicate": "equal_angle",
+          "args": [
+            "L7A",
+            "R7A"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L7T",
+        "nondegenerate:R7T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L7T",
+          "R7T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L7T",
+              "R7T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-019",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L8T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L8AB",
+              "L8BC",
+              "L8CA"
+            ],
+            "angles": [
+              "L8A",
+              "L8B",
+              "L8C"
+            ]
+          }
+        },
+        {
+          "id": "R8T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R8AB",
+              "R8BC",
+              "R8CA"
+            ],
+            "angles": [
+              "R8A",
+              "R8B",
+              "R8C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L8AB",
+            "R8AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L8BC",
+            "R8BC"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L8CA",
+            "R8CA"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L8T",
+        "nondegenerate:R8T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L8T",
+          "R8T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L8T",
+              "R8T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-020",
+      "category": "alternative-valid-route",
+      "objects": [
+        {
+          "id": "L9T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "L9AB",
+              "L9BC",
+              "L9CA"
+            ],
+            "angles": [
+              "L9A",
+              "L9B",
+              "L9C"
+            ]
+          }
+        },
+        {
+          "id": "R9T",
+          "kind": "triangle",
+          "data": {
+            "sides": [
+              "R9AB",
+              "R9BC",
+              "R9CA"
+            ],
+            "angles": [
+              "R9A",
+              "R9B",
+              "R9C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L9AB",
+            "R9AB"
+          ]
+        },
+        {
+          "predicate": "equal_length",
+          "args": [
+            "L9CA",
+            "R9CA"
+          ]
+        },
+        {
+          "predicate": "equal_angle",
+          "args": [
+            "L9A",
+            "R9A"
+          ]
+        }
+      ],
+      "conditions": [
+        "nondegenerate:L9T",
+        "nondegenerate:R9T"
+      ],
+      "goal": {
+        "predicate": "congruent",
+        "args": [
+          "L9T",
+          "R9T"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "congruent",
+            "args": [
+              "L9T",
+              "R9T"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "triangle-congruence"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Independent SSS or SAS criterion with ordered correspondence."
+    },
+    {
+      "id": "proof-021",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad0",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad0"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad0"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad0"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad0"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-022",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad1",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad1"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad1"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad1"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad1"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-023",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad2",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad2"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad2"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad2"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad2"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-024",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad3",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad3"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad3"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad3"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad3"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-025",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad4",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad4"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad4"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad4"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad4"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-026",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad5",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad5"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad5"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad5"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad5"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-027",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad6",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad6"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad6"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad6"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad6"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-028",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad7",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad7"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad7"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad7"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad7"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-029",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad8",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad8"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad8"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad8"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad8"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-030",
+      "category": "incorrect-intermediate",
+      "objects": [
+        {
+          "id": "bad9",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "bad9"
+          ],
+          "value": 50
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "bad9"
+        ],
+        "value": 50
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad9"
+            ],
+            "value": 70
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "bad9"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "First assertion contradicts the given 50 degree measure; later repetition cannot repair it."
+    },
+    {
+      "id": "proof-031",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma0",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb0",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l0",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m0",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma0",
+            "mb0",
+            "l0",
+            "m0"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma0",
+          "mb0"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma0",
+              "mb0"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-032",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma1",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb1",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l1",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m1",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma1",
+            "mb1",
+            "l1",
+            "m1"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma1",
+          "mb1"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma1",
+              "mb1"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-033",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma2",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb2",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l2",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m2",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma2",
+            "mb2",
+            "l2",
+            "m2"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma2",
+          "mb2"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma2",
+              "mb2"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-034",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma3",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb3",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l3",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m3",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma3",
+            "mb3",
+            "l3",
+            "m3"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma3",
+          "mb3"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma3",
+              "mb3"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-035",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma4",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb4",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l4",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m4",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma4",
+            "mb4",
+            "l4",
+            "m4"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma4",
+          "mb4"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma4",
+              "mb4"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-036",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma5",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb5",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l5",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m5",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma5",
+            "mb5",
+            "l5",
+            "m5"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma5",
+          "mb5"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma5",
+              "mb5"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-037",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma6",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb6",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l6",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m6",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma6",
+            "mb6",
+            "l6",
+            "m6"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma6",
+          "mb6"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma6",
+              "mb6"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-038",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma7",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb7",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l7",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m7",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma7",
+            "mb7",
+            "l7",
+            "m7"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma7",
+          "mb7"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma7",
+              "mb7"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-039",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma8",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb8",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l8",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m8",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma8",
+            "mb8",
+            "l8",
+            "m8"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma8",
+          "mb8"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma8",
+              "mb8"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-040",
+      "category": "missing-assumption",
+      "objects": [
+        {
+          "id": "ma9",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "mb9",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "l9",
+          "kind": "line",
+          "data": {}
+        },
+        {
+          "id": "m9",
+          "kind": "line",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "corresponding_pair",
+          "args": [
+            "ma9",
+            "mb9",
+            "l9",
+            "m9"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ma9",
+          "mb9"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ma9",
+              "mb9"
+            ]
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Corresponding position needs parallel lines."
+    },
+    {
+      "id": "proof-041",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca0",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb0",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca0",
+            "cb0"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca0",
+          "cb0"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca0",
+              "cb0"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca0",
+              "cb0"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-042",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca1",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb1",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca1",
+            "cb1"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca1",
+          "cb1"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca1",
+              "cb1"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca1",
+              "cb1"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-043",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca2",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb2",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca2",
+            "cb2"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca2",
+          "cb2"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca2",
+              "cb2"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca2",
+              "cb2"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-044",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca3",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb3",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca3",
+            "cb3"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca3",
+          "cb3"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca3",
+              "cb3"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca3",
+              "cb3"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-045",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca4",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb4",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca4",
+            "cb4"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca4",
+          "cb4"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca4",
+              "cb4"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca4",
+              "cb4"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-046",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca5",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb5",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca5",
+            "cb5"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca5",
+          "cb5"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca5",
+              "cb5"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca5",
+              "cb5"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-047",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca6",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb6",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca6",
+            "cb6"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca6",
+          "cb6"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca6",
+              "cb6"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca6",
+              "cb6"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-048",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca7",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb7",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca7",
+            "cb7"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca7",
+          "cb7"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca7",
+              "cb7"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca7",
+              "cb7"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-049",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca8",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb8",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca8",
+            "cb8"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca8",
+          "cb8"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca8",
+              "cb8"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca8",
+              "cb8"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-050",
+      "category": "circular-proof",
+      "objects": [
+        {
+          "id": "ca9",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "cb9",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ca9",
+            "cb9"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ca9",
+          "cb9"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca9",
+              "cb9"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ]
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ca9",
+              "cb9"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "The first step cites a future step, creating a cycle/forward dependency."
+    },
+    {
+      "id": "proof-051",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra0",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb0",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra0",
+            "rb0"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra0",
+          "rb0"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra0",
+              "rb0"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra0",
+              "rb0"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra0",
+              "rb0"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-052",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra1",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb1",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra1",
+            "rb1"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra1",
+          "rb1"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra1",
+              "rb1"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra1",
+              "rb1"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra1",
+              "rb1"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-053",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra2",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb2",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra2",
+            "rb2"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra2",
+          "rb2"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra2",
+              "rb2"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra2",
+              "rb2"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra2",
+              "rb2"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-054",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra3",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb3",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra3",
+            "rb3"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra3",
+          "rb3"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra3",
+              "rb3"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra3",
+              "rb3"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra3",
+              "rb3"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-055",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra4",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb4",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra4",
+            "rb4"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra4",
+          "rb4"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra4",
+              "rb4"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra4",
+              "rb4"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra4",
+              "rb4"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-056",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra5",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb5",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra5",
+            "rb5"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra5",
+          "rb5"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra5",
+              "rb5"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra5",
+              "rb5"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra5",
+              "rb5"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-057",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra6",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb6",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra6",
+            "rb6"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra6",
+          "rb6"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra6",
+              "rb6"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra6",
+              "rb6"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra6",
+              "rb6"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-058",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra7",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb7",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra7",
+            "rb7"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra7",
+          "rb7"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra7",
+              "rb7"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra7",
+              "rb7"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra7",
+              "rb7"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-059",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra8",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb8",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra8",
+            "rb8"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra8",
+          "rb8"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra8",
+              "rb8"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra8",
+              "rb8"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra8",
+              "rb8"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-060",
+      "category": "redundant-valid",
+      "objects": [
+        {
+          "id": "ra9",
+          "kind": "angle",
+          "data": {}
+        },
+        {
+          "id": "rb9",
+          "kind": "angle",
+          "data": {}
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "vertical_pair",
+          "args": [
+            "ra9",
+            "rb9"
+          ]
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "equal_angle",
+        "args": [
+          "ra9",
+          "rb9"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra9",
+              "rb9"
+            ]
+          },
+          "cited_step_ids": []
+        },
+        {
+          "id": "s2",
+          "statement": {
+            "predicate": "vertical_pair",
+            "args": [
+              "ra9",
+              "rb9"
+            ]
+          },
+          "cited_step_ids": [
+            "s1"
+          ]
+        },
+        {
+          "id": "s3",
+          "statement": {
+            "predicate": "equal_angle",
+            "args": [
+              "ra9",
+              "rb9"
+            ]
+          },
+          "cited_step_ids": [
+            "s2"
+          ],
+          "cited_theorem": "vertical-opposite"
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": true,
+        "first_invalid_step": null
+      },
+      "oracle": "Repeated givens are redundant but true; vertical-angle conclusion remains valid."
+    },
+    {
+      "id": "proof-061",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it0",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i0A",
+              "i0B",
+              "i0C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i0A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i0B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it0"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i0C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i0A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-062",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it1",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i1A",
+              "i1B",
+              "i1C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i1A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i1B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it1"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i1C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i1A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-063",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it2",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i2A",
+              "i2B",
+              "i2C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i2A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i2B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it2"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i2C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i2A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-064",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it3",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i3A",
+              "i3B",
+              "i3C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i3A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i3B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it3"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i3C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i3A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-065",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it4",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i4A",
+              "i4B",
+              "i4C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i4A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i4B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it4"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i4C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i4A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-066",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it5",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i5A",
+              "i5B",
+              "i5C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i5A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i5B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it5"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i5C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i5A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-067",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it6",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i6A",
+              "i6B",
+              "i6C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i6A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i6B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it6"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i6C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i6A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-068",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it7",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i7A",
+              "i7B",
+              "i7C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i7A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i7B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it7"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i7C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i7A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-069",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it8",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i8A",
+              "i8B",
+              "i8C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i8A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i8B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it8"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i8C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i8A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-070",
+      "category": "incomplete-proof",
+      "objects": [
+        {
+          "id": "it9",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "i9A",
+              "i9B",
+              "i9C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i9A"
+          ],
+          "value": 50
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "i9B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [
+        "nondegenerate:it9"
+      ],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "i9C"
+        ],
+        "value": 70
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "i9A"
+            ],
+            "value": 50
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": true,
+        "complete": false,
+        "first_invalid_step": null
+      },
+      "oracle": "The submitted statement is true but the goal is absent."
+    },
+    {
+      "id": "proof-071",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt0",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d0A",
+              "d0B",
+              "d0C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d0A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d0B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d0C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d0C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-072",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt1",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d1A",
+              "d1B",
+              "d1C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d1A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d1B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d1C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d1C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-073",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt2",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d2A",
+              "d2B",
+              "d2C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d2A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d2B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d2C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d2C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-074",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt3",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d3A",
+              "d3B",
+              "d3C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d3A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d3B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d3C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d3C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-075",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt4",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d4A",
+              "d4B",
+              "d4C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d4A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d4B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d4C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d4C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-076",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt5",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d5A",
+              "d5B",
+              "d5C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d5A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d5B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d5C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d5C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-077",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt6",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d6A",
+              "d6B",
+              "d6C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d6A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d6B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d6C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d6C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-078",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt7",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d7A",
+              "d7B",
+              "d7C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d7A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d7B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d7C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d7C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-079",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt8",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d8A",
+              "d8B",
+              "d8C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d8A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d8B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d8C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d8C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-080",
+      "category": "degenerate-configuration",
+      "objects": [
+        {
+          "id": "dt9",
+          "kind": "triangle",
+          "data": {
+            "angles": [
+              "d9A",
+              "d9B",
+              "d9C"
+            ]
+          }
+        }
+      ],
+      "facts": [
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d9A"
+          ],
+          "value": 60
+        },
+        {
+          "predicate": "angle_measure",
+          "args": [
+            "d9B"
+          ],
+          "value": 60
+        }
+      ],
+      "conditions": [],
+      "goal": {
+        "predicate": "angle_measure",
+        "args": [
+          "d9C"
+        ],
+        "value": 60
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "angle_measure",
+            "args": [
+              "d9C"
+            ],
+            "value": 60
+          },
+          "cited_step_ids": []
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "Triangle angle sum cannot apply without nondegeneracy."
+    },
+    {
+      "id": "proof-081",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u0A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u0B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u0C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u0D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u0A",
+          "u0B",
+          "u0C",
+          "u0D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u0A",
+              "u0B",
+              "u0C",
+              "u0D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-082",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u1A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u1B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u1C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u1D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u1A",
+          "u1B",
+          "u1C",
+          "u1D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u1A",
+              "u1B",
+              "u1C",
+              "u1D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-083",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u2A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u2B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u2C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u2D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u2A",
+          "u2B",
+          "u2C",
+          "u2D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u2A",
+              "u2B",
+              "u2C",
+              "u2D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-084",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u3A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u3B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u3C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u3D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u3A",
+          "u3B",
+          "u3C",
+          "u3D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u3A",
+              "u3B",
+              "u3C",
+              "u3D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-085",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u4A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u4B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u4C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u4D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u4A",
+          "u4B",
+          "u4C",
+          "u4D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u4A",
+              "u4B",
+              "u4C",
+              "u4D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-086",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u5A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u5B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u5C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u5D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u5A",
+          "u5B",
+          "u5C",
+          "u5D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u5A",
+              "u5B",
+              "u5C",
+              "u5D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-087",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u6A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u6B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u6C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u6D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u6A",
+          "u6B",
+          "u6C",
+          "u6D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u6A",
+              "u6B",
+              "u6C",
+              "u6D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-088",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u7A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u7B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u7C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u7D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u7A",
+          "u7B",
+          "u7C",
+          "u7D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u7A",
+              "u7B",
+              "u7C",
+              "u7D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-089",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u8A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u8B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u8C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u8D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u8A",
+          "u8B",
+          "u8C",
+          "u8D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u8A",
+              "u8B",
+              "u8C",
+              "u8D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    },
+    {
+      "id": "proof-090",
+      "category": "unsupported-theorem",
+      "objects": [
+        {
+          "id": "u9A",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u9B",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u9C",
+          "kind": "point",
+          "data": {}
+        },
+        {
+          "id": "u9D",
+          "kind": "point",
+          "data": {}
+        }
+      ],
+      "facts": [],
+      "conditions": [],
+      "goal": {
+        "predicate": "concyclic",
+        "args": [
+          "u9A",
+          "u9B",
+          "u9C",
+          "u9D"
+        ]
+      },
+      "steps": [
+        {
+          "id": "s1",
+          "statement": {
+            "predicate": "concyclic",
+            "args": [
+              "u9A",
+              "u9B",
+              "u9C",
+              "u9D"
+            ]
+          },
+          "cited_step_ids": [],
+          "cited_theorem": "converse-opposite-angles"
+        }
+      ],
+      "expected": {
+        "valid": false,
+        "complete": false,
+        "first_invalid_step": 0
+      },
+      "oracle": "No supported construction or theorem establishes concyclicity."
+    }
+  ]
+}

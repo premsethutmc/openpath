@@ -1,0 +1,10 @@
+[
+ "Choice-type questions export only the keyed letter; option texts are missing. Families with shuffled letters (19 with files, 11 without) are Unsupported; for the shuffled ones the independently derived class is computed but cannot be compared.",
+ "Deterministic letter maps (class->letter) were inferred from the data for accoll, altri, arconicid, aslrel, aspar, alcyc, alnear; the map itself is not independently verified, only that the derived class always meets the same letter.",
+ "aasolid alternates: a tin of oil and a pencil box are treated as ambiguous objects (cylinder or cuboid) and reported as Ambiguous.",
+ "Ellipse co-vertex handling, circle counted as 0 sides, seven-segment digit conventions and block sans-serif letter symmetry tables (afrot H, N, S, Z drawn on a 5x7 grid) are choices made by the references; see the per-family method strings.",
+ "Euler/solid families use polygon face lists: edges = (sum of face sides)/2, vertices counted directly and checked with Euler, so they are formula-based with an independent cross-check.",
+ "Angle-chasing families (alangle, amtang, awinc) are verified by explicit coordinate constructions and measured angles (numeric, rounded to integer within 1e-6).",
+ "arconeq has only 16 distinct statements repeated 12 times each (192 released); coverage is of the statements, not of independent parameter variety.",
+ "aiconvex: the 39 ambiguous questions (collinear A, B, C) are excluded from the letter comparison."
+]

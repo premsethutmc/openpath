@@ -1,0 +1,32 @@
+{
+ "summary": {
+  "dataset": "dev",
+  "stage": "R1",
+  "label": "r1",
+  "sha256": "ec299ae02e95f516a31fadcd83161ad02ca4df82f28af719e26740bce9cfc487",
+  "cases": 206,
+  "correct": 206,
+  "rate": 1,
+  "failuresByCategory": {},
+  "invalidStepsInTraces": 0,
+  "openObligations": 0,
+  "moveVerifyRejected": 0,
+  "movePreconditionRefused": 4719,
+  "visited": {
+   "median": 22,
+   "p95": 64,
+   "worst": 87
+  },
+  "pathLength": {
+   "median": 5,
+   "p95": 9,
+   "worst": 9
+  },
+  "ms": {
+   "median": 62.16,
+   "p95": 242.65,
+   "worst": 575.09
+  }
+ },
+ "failures": []
+}

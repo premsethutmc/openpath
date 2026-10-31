@@ -1,0 +1,74 @@
+name: Mathematics prerequisite safety and runtime compatibility
+on:
+  push:
+    branches: [fix/mathematics-prerequisites-reproducibility-v1]
+  pull_request:
+    paths:
+      - 'content/mathematics/graphs/**'
+      - 'packages/mathematics/**'
+      - 'frontend/src/mathematics/**'
+      - 'frontend/tsconfig.mathematics-integration.json'
+      - 'tools/mathematics/**'
+      - '.github/workflows/mathematics-prerequisites-followup.yml'
+permissions:
+  contents: read
+jobs:
+  mathematics:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22.18.0', '24.19.0']
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: npm ci
+        working-directory: frontend
+      - run: pip install -r backend/requirements.txt
+      - run: npm run typecheck && npm test
+        working-directory: frontend
+      - run: node --import tsx ../tools/mathematics/prerequisite-report.mts
+        working-directory: frontend
+      - run: python manage.py test --noinput
+        working-directory: backend
+      - run: node scripts/build-mathematics-foundation.mjs
+        working-directory: frontend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - name: Fixed mathematics journeys and account regression
+        shell: bash
+        run: |
+          python backend/manage.py migrate --noinput
+          python backend/manage.py runserver 127.0.0.1:8012 --noreload --nothreading > /tmp/math-api.log 2>&1 &
+          followup_api_pid=$!
+          PORT=4182 API_TARGET=http://127.0.0.1:8012 node frontend/scripts/preview-english.mjs > /tmp/math-web.log 2>&1 &
+          followup_web_pid=$!
+          trap 'kill "$followup_api_pid" "$followup_web_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --silent --fail http://127.0.0.1:4182/api/account/ > /dev/null; then break; fi
+            sleep 1
+          done
+          cd frontend
+          CHROMIUM_PATH='' node --import tsx --test e2e/mathematics-foundation.test.mjs e2e/mathematics-journey.test.mjs
+  legacy-exact-research:
+    # Node 24's two known exact-hash failures remain real failures, not skips or rewritten baselines.
+    # Separate jobs let mathematics validation finish while the portability limitation stays visible.
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22.18.0', '24.19.0']
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+        working-directory: packages/english-core

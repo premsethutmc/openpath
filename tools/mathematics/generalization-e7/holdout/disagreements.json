@@ -1,0 +1,7433 @@
+[
+ {
+  "id": "h7-algA-004",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "Completing the square: x^2+6x+9=5 is equivalent; both signs kept.",
+  "just": "unsupported: a plus-or-minus sign is supported only in a solved form 'x = ... ± ...'"
+ },
+ {
+  "id": "h7-algA-005",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "Quadratic formula with discriminant 49 gives 5/2 and -1.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-algA-007",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Cancellation justified by x≠3; the only candidate is excluded.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algA-008",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Squaring then checking removes extraneous x=-1.",
+  "just": "unsupported character ':' at 10"
+ },
+ {
+  "id": "h7-algA-009",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Both branches of absolute value.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-011",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Product negative between the roots.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-algA-012",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "concise"
+  ],
+  "why": "Standard absolute-value inequality.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-algA-013",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Restrictions stated, quadratic correct, roots admissible.",
+  "just": "unsupported: a conjunction may only join equations"
+ },
+ {
+  "id": "h7-algA-014",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "Completing the square with both signs.",
+  "just": "unsupported: a plus-or-minus sign is supported only in a solved form 'x = ... ± ...'"
+ },
+ {
+  "id": "h7-algA-016",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "Quadratic in x^2; all four real roots.",
+  "just": "unsupported character ':' at 9"
+ },
+ {
+  "id": "h7-algA-018",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "Factor by grouping; roots 1,2,-2.",
+  "just": "malformed solution branch"
+ },
+ {
+  "id": "h7-algA-019",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Square and verify.",
+  "just": "unsupported character ':' at 5"
+ },
+ {
+  "id": "h7-algA-021",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Clearing denominators.",
+  "just": "unsupported character ':' at 13"
+ },
+ {
+  "id": "h7-algA-022",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "For |a|=|b| squaring is an equivalence; roots correct.",
+  "just": "unsupported character ':' at 17"
+ },
+ {
+  "id": "h7-algA-023",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Valid multiplication with x≠1; 5/2≠1.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-algA-024",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "Quadratic formula simplified.",
+  "just": "unsupported: more than one plus-or-minus sign in a branch"
+ },
+ {
+  "id": "h7-algA-025",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Upward parabola nonnegative outside roots.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-026",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Quotient and product have equal sign; solution set correct.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-031",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Isolate, square, check.",
+  "just": "unsupported character ':' at 3"
+ },
+ {
+  "id": "h7-algA-032",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Divisor shown nonzero.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algA-033",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "method"
+  ],
+  "why": "Correct sign analysis.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-034",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Correct two-ray split.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-035",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "why": "Case split with admissibility checks.",
+  "just": "unsupported character ':' at 11"
+ },
+ {
+  "id": "h7-algA-036",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Reciprocal of 1/6.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-algA-037",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "why": "Solution complete; the extra remark is true and harmless.",
+  "just": "malformed number"
+ },
+ {
+  "id": "h7-algA-038",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "why": "Correct solution plus a true irrelevant line.",
+  "just": "malformed number"
+ },
+ {
+  "id": "h7-algA-039",
+  "cat": "algebra-equations",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "why": "Correct solution; side line true.",
+  "just": "malformed number"
+ },
+ {
+  "id": "h7-algA-041",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [
+   "missing-assumption"
+  ],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "dropped x=0 branch",
+  "tags": [
+   "algA",
+   "cancellation"
+  ],
+  "why": "Dividing by x loses root x=0; claimed solution set {5} is wrong.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-algA-043",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "dropped negative branch",
+  "tags": [
+   "algA",
+   "dropped-pm"
+  ],
+  "why": "Dropped x-3=-4, so x=-1 is lost.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-algA-045",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "dropped x<-3",
+  "tags": [
+   "algA",
+   "solution-set"
+  ],
+  "why": "Solution set is x<-3 or x>3.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-algA-046",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "solution-set"
+  ],
+  "why": "Should be -2<x<3 (and, not or); 'or' gives all reals.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-048",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "verified",
+  "rule": "single-route",
+  "routes": "base:verified:accepted",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "correct-final"
+  ],
+  "why": "x=8-6 is false as a step (4x=8 gives x=8/4) though result 2 is right.",
+  "just": "all 3 steps are valid and the answer is correct"
+ },
+ {
+  "id": "h7-algA-049",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "An absolute value cannot be -3; neither value satisfies it.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-054",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Discriminant is 16+20=36, sign error.",
+  "just": "some lines could not be analysed exactly; they are not judged, and the working is not certified"
+ },
+ {
+  "id": "h7-algA-056",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Should be 'or'; 'and' yields an empty set, wrong claim.",
+  "just": "unsupported: a conjunction may only join equations"
+ },
+ {
+  "id": "h7-algA-058",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Zero-product rule misused for a nonzero product.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algA-061",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "dependent"
+  ],
+  "why": "Claim x≠0 is unsupported (x=0 satisfies the equation).",
+  "just": "some lines could not be analysed exactly; they are not judged, and the working is not certified"
+ },
+ {
+  "id": "h7-algA-062",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "why": "Solution right but side line 4^2=18 is false.",
+  "just": "malformed number"
+ },
+ {
+  "id": "h7-algA-063",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "side-claim"
+  ],
+  "why": "Irrelevant false statement: that discriminant is 0.",
+  "just": "malformed number"
+ },
+ {
+  "id": "h7-algA-064",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "why": "Under x+1<0 the absolute value equals -(x+1); false case line.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algA-065",
+  "cat": "algebra-equations",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Multiplying by x(x+1) needs x≠0,-1, never stated.",
+  "just": "unsupported character ':' at 29"
+ },
+ {
+  "id": "h7-algA-066",
+  "cat": "algebra-equations",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "why": "Case x=2 (a real solution) is not treated.",
+  "just": "unsupported: a conjunction may only join equations"
+ },
+ {
+  "id": "h7-algA-067",
+  "cat": "algebra-equations",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "x<1 case unaddressed",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "why": "Case x<1 is never examined (needed to show no solutions there).",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-algA-068",
+  "cat": "algebra-equations",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "other case missing",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "why": "Other branch (x=-5/3) omitted; case work incomplete.",
+  "just": "unsupported character ':' at 12"
+ },
+ {
+  "id": "h7-algA-069",
+  "cat": "algebra-equations",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "conditional"
+  ],
+  "why": "Case x=0 left unaddressed.",
+  "just": "unsupported character ':' at 20"
+ },
+ {
+  "id": "h7-algA-070",
+  "cat": "algebra-equations",
+  "exp": "invalid",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "algA",
+   "dropped-pm"
+  ],
+  "why": "Dropped x=-3; final answer wrong.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-algA-075",
+  "cat": "algebra-equations",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "algA"
+  ],
+  "why": "Branches stated, never solved.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algB-001",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "expand"
+  ],
+  "why": "Direct expansion; the x^2 and 9 terms cancel leaving 12x.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-002",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "different-method"
+  ],
+  "why": "Difference of squares gives 2*2000=4000.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-003",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "factor",
+   "concise"
+  ],
+  "why": "Difference of cubes; one-line correct factorisation, quadratic factor irreducible.",
+  "just": "acceptance withdrawn: the independent checker could not verify this working, so it cannot be accepted"
+ },
+ {
+  "id": "h7-algB-004",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "system",
+   "concise"
+  ],
+  "why": "Adding gives 2x=8 so x=4, y=3; concise correct answer.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: more than one '='); the working is not judged"
+ },
+ {
+  "id": "h7-algB-005",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "system-3x3"
+  ],
+  "why": "Elimination is valid and (1,2,3) satisfies all three equations.",
+  "just": "unsupported: a conjunction may only join equations"
+ },
+ {
+  "id": "h7-algB-006",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "rational",
+   "domain"
+  ],
+  "why": "Cancellation of x-2 is legitimate with x≠2 stated; denominator zeros are 2 and -1.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-007",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "log",
+   "conditional"
+  ],
+  "why": "Product rule for logs valid for positive arguments and log2 8 = 3.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algB-008",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "exponent"
+  ],
+  "why": "Factor 2^n out: 2^n(8-1)/7 = 2^n.",
+  "just": "power exponent must be a bounded integer"
+ },
+ {
+  "id": "h7-algB-009",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "surd"
+  ],
+  "why": "Multiplying by the conjugate gives difference of squares 5-3=2.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-010",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "surd"
+  ],
+  "why": "Extract square factors 4 and 9; 2√3+3√3=5√3.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+ },
+ {
+  "id": "h7-algB-011",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "extraneous"
+  ],
+  "why": "Squaring introduces x=-2 which is checked and rejected; x=3 satisfies the original.",
+  "just": "unsupported character ':' at 17"
+ },
+ {
+  "id": "h7-algB-012",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "For positive x, sqrt(x^2)=|x|=x, so ratio is 1.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algB-013",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "factor"
+  ],
+  "why": "Splitting x as -8x+9x (product -72) then grouping gives correct factors.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-014",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "system",
+   "inconsistent"
+  ],
+  "why": "Parallel distinct lines: the two equations are incompatible, so no solution.",
+  "just": "unsupported character ':' at 33"
+ },
+ {
+  "id": "h7-algB-015",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "system",
+   "dependent-equations"
+  ],
+  "why": "Dependent equations describe the same line; infinitely many solutions.",
+  "just": "unsupported character ':' at 9"
+ },
+ {
+  "id": "h7-algB-016",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "word"
+  ],
+  "why": "13+7=20 and 13-7=6.",
+  "just": "unsupported character ':' at 6"
+ },
+ {
+  "id": "h7-algB-017",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "word",
+   "different-method"
+  ],
+  "why": "Different but valid route via semi-perimeter; width 5, length 8, perimeter 26.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algB-018",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "word"
+  ],
+  "why": "Linear equation 3b+10=40 gives b=10; check 25+15=40.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-019",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "cases"
+  ],
+  "why": "Both cases handled and each root satisfies its case condition.",
+  "just": "unsupported character ':' at 11"
+ },
+ {
+  "id": "h7-algB-020",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "Zero product with a+b>0 forces a-b=0.",
+  "just": "unsupported: a conjunction may only join equations"
+ },
+ {
+  "id": "h7-algB-021",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "cases",
+   "inequality"
+  ],
+  "why": "Sign of the multiplier handled by cases; only 1<x<5/2 survives.",
+  "just": "unsupported character ':' at 10"
+ },
+ {
+  "id": "h7-algB-022",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "log",
+   "concise"
+  ],
+  "why": "Power rule for logs with positive argument; stated condition.",
+  "just": "missing closing parenthesis"
+ },
+ {
+  "id": "h7-algB-023",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "rational",
+   "extraneous"
+  ],
+  "why": "The only candidate x=3 is excluded from the domain, so no solution.",
+  "just": "malformed number"
+ },
+ {
+  "id": "h7-algB-024",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "log",
+   "domain"
+  ],
+  "why": "Domain x>2 rules out x=-1; x=3 satisfies the equation.",
+  "just": "unsupported character ':' at 6"
+ },
+ {
+  "id": "h7-algB-025",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "factor"
+  ],
+  "why": "Factoring out x-2 instead of dividing keeps the root x=2.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solve); the working is not judged"
+ },
+ {
+  "id": "h7-algB-026",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "system",
+   "concise"
+  ],
+  "why": "Adding gives 3x=6; concise correct solution satisfying both equations.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: more than one '='); the working is not judged"
+ },
+ {
+  "id": "h7-algB-027",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Correct solution; the aside 3^2=9 is true and harmless.",
+  "just": "unsupported character ':' at 6"
+ },
+ {
+  "id": "h7-algB-028",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim",
+   "exponent"
+  ],
+  "why": "Exponent laws give a^4 b (a,b nonzero implied by the denominator); extra true remark is harmless.",
+  "just": "missing closing parenthesis"
+ },
+ {
+  "id": "h7-algB-029",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "rational"
+  ],
+  "why": "Compound fraction inversion; restrictions given in the statement.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+ },
+ {
+  "id": "h7-algB-030",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "(x+3)^2 = x^2+6x+9, so subtracting 7 recovers the constant 2.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+ },
+ {
+  "id": "h7-algB-031",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "different-method"
+  ],
+  "why": "Completing the square is a valid alternative to factoring; roots 2 and 3.",
+  "just": "unsupported: a plus-or-minus sign is supported only in a solved form 'x = ... ± ...'"
+ },
+ {
+  "id": "h7-algB-032",
+  "cat": "algebra-expressions",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "Positivity condition selects x=7.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algB-034",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "forged",
+   "right-answer-wrong-step"
+  ],
+  "why": "The first line is false ((x-2)(x-3)=x^2-5x+6); correct roots reached from a forged identity.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algB-035",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "log"
+  ],
+  "why": "Difference of logs is log of the quotient, not difference; correct value is 2.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-038",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "sign"
+  ],
+  "why": "Negating the bracket should give -2x^2 + x + 3; sign slip on the x term.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-039",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "system-3x3",
+   "coincidence"
+  ],
+  "why": "Third equation fails (2+2-2=2≠0); true solution is (1,2,3).",
+  "just": "unsupported character ':' at 9"
+ },
+ {
+  "id": "h7-algB-041",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "surd",
+   "wrong-rule"
+  ],
+  "why": "sqrt does not distribute over addition; sqrt(25)=5.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-043",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "complete-square"
+  ],
+  "why": "(x+3)^2 = x^2+6x+9 so constant must be -7, not +2.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+ },
+ {
+  "id": "h7-algB-044",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "inequality",
+   "sign"
+  ],
+  "why": "Dividing by a negative flips the inequality: x < -3.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+ },
+ {
+  "id": "h7-algB-045",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "quadratic-formula"
+  ],
+  "why": "Discriminant is 9+16=25, not 9-16; roots are 4 and -1.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solvex); the working is not judged"
+ },
+ {
+  "id": "h7-algB-046",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "dependent",
+   "system"
+  ],
+  "why": "First line is false (x=y+1); later lines follow from it but the answer is wrong (true: x=3,y=2).",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: more than one '='); the working is not judged"
+ },
+ {
+  "id": "h7-algB-047",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "dependent"
+  ],
+  "why": "x^2-4x+4=(x-2)^2, so the first line is false and root should be 2.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solvex); the working is not judged"
+ },
+ {
+  "id": "h7-algB-048",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "dependent"
+  ],
+  "why": "The sum is 55 not 56, so the division line inherits a false premise; answer is 11.",
+  "just": "malformed number at 8"
+ },
+ {
+  "id": "h7-algB-049",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [
+   "missing-assumption"
+  ],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "domain"
+  ],
+  "why": "sqrt(x^2)=|x|, so result is -1 for x<0; the claimed identity is false in general.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-algB-050",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [
+   "missing-assumption"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "sign case dropped; stated answer wrong",
+  "tags": [
+   "inequality",
+   "conditional"
+  ],
+  "why": "Multiplying by x-1 ignores its sign; stated answer x<5/2 includes x<1 where 3/(x-1) is negative.",
+  "just": "unsupported character ':' at 26"
+ },
+ {
+  "id": "h7-algB-051",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "false-claim"
+  ],
+  "why": "Claim is false (a=1,b=-1); sqrt gives |a|=|b|.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algB-052",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "word"
+  ],
+  "why": "Perimeter is 2(w + w+3)=4w+6; the equation 2w+3=26 is wrong (width is 5).",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algB-053",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Solution is right but the irrelevant side line 7*8=54 is false (56).",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solve); the working is not judged"
+ },
+ {
+  "id": "h7-algB-054",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Answer correct but the justification 3^3=9 is false (27).",
+  "just": "malformed solution branch"
+ },
+ {
+  "id": "h7-algB-055",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "expand"
+  ],
+  "why": "Expansions drop cross terms 2xy; correct result is 4xy.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-057",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "system"
+  ],
+  "why": "0=0 means the equations are dependent, giving infinitely many solutions, not none.",
+  "just": "unsupported character ':' at 49"
+ },
+ {
+  "id": "h7-algB-058",
+  "cat": "algebra-expressions",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "log",
+   "wrong-rule"
+  ],
+  "why": "Sum of logs is log of the product x(x-2), not x+(x-2); true answer x=4.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solvelog); the working is not judged"
+ },
+ {
+  "id": "h7-algB-059",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "exclusions requested but not stated",
+  "tags": [
+   "rational",
+   "domain"
+  ],
+  "why": "Cancels x-2 and never states x≠2 (and x≠-1) as required.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-060",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "division-by-zero"
+  ],
+  "why": "Dividing by x discards the root x=0 without a case split.",
+  "just": "unsupported character ':' at 22"
+ },
+ {
+  "id": "h7-algB-061",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "extraneous"
+  ],
+  "why": "Squaring can add extraneous roots; x=-2 is not checked and is wrong (sqrt 4 = 2).",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solvesqrt); the working is not judged"
+ },
+ {
+  "id": "h7-algB-062",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "cases"
+  ],
+  "why": "Negative case x-2=-3 (x=-1) is dropped.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solve); the working is not judged"
+ },
+ {
+  "id": "h7-algB-063",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "true only for x>0; answer wrong for x<0",
+  "tags": [
+   "log",
+   "domain"
+  ],
+  "why": "Valid only for x>0; for x<0 ln x is undefined and the result should be 2 ln|x|.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+ },
+ {
+  "id": "h7-algB-064",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "rational",
+   "extraneous"
+  ],
+  "why": "x=3 makes the original denominator zero, so it is extraneous; no solution exists and the exclusion is not noted.",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unknown symbol Solve); the working is not judged"
+ },
+ {
+  "id": "h7-algB-065",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "log",
+   "domain",
+   "extraneous"
+  ],
+  "why": "x=-1 is outside the domain of the logs and is not rejected.",
+  "just": "solution branches must name one variable"
+ },
+ {
+  "id": "h7-algB-066",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "division-by-zero"
+  ],
+  "why": "Division by x-2 is only valid if x≠2; root x=2 is lost.",
+  "just": "unsupported character ':' at 24"
+ },
+ {
+  "id": "h7-algB-067",
+  "cat": "algebra-expressions",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "cases"
+  ],
+  "why": "x>2 does not imply x>=5; for 2<x<5 the sum is 3. Needs the extra case.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-algB-068",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "factor"
+  ],
+  "why": "Lines are true but x^2-4 = (x-2)(x+2) still factors, so not complete.",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-069",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "word"
+  ],
+  "why": "True equations set up but width never found.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-algB-070",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "True but irrelevant to the requested factorisation; no factors given.",
+  "just": "A line could not be checked exactly; no claim is made about the working."
+ },
+ {
+  "id": "h7-algB-071",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "expand"
+  ],
+  "why": "Correct setup but product not multiplied out (x^3+6x^2+12x+8).",
+  "just": "expected expression"
+ },
+ {
+  "id": "h7-algB-072",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "system-3x3"
+  ],
+  "why": "True eliminations, but x,y,z are never solved.",
+  "just": "unsupported: a conjunction may only join equations"
+ },
+ {
+  "id": "h7-algB-074",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "single-point check, not proof",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "A single test value does not establish the identity (and x≠1 is not stated); correct result reached without justification.",
+  "just": "unsupported character ':' at 8"
+ },
+ {
+  "id": "h7-algB-075",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "single-point check, not proof",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "One numeric instance cannot prove the general identity; the stated answer is correct but ungrounded.",
+  "just": "unsupported character ':' at 13"
+ },
+ {
+  "id": "h7-algB-076",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "decimal approximation is not proof",
+  "tags": [
+   "coincidence",
+   "surd"
+  ],
+  "why": "Agreement of rounded decimals does not prove exact equality; need 50=25*2.",
+  "just": "unsupported character '≈' at 9"
+ },
+ {
+  "id": "h7-algB-077",
+  "cat": "algebra-expressions",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "True arithmetic that never sets up or solves 12+5n=37 (n=5).",
+  "just": "the problem itself cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: not an equation); the working is not judged"
+ },
+ {
+  "id": "h7-algB-079",
+  "cat": "algebra-expressions",
+  "exp": "unsupported",
+  "alt": [
+   "incomplete"
+  ],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "unsupported",
+  "auditNote": "Lambert W, non-elementary",
+  "tags": [
+   "unsupported"
+  ],
+  "why": "The root requires the Lambert W function; no elementary closed form exists.",
+  "just": "power exponent must be a bounded integer"
+ },
+ {
+  "id": "h7-calcD-002",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "correct product rule.",
+  "just": "line(s) 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-004",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "expand-method"
+  ],
+  "why": "binomial expansion is correct and termwise differentiation gives 6x(x^2+1)^2.",
+  "just": "line(s) 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-006",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "arctan chain rule.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-012",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "different-method"
+  ],
+  "why": "quotient rule and Pythagorean identity.",
+  "just": "line(s) 2, 3 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-021",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "derivative correct; extra evaluation at x=1 is true and harmless.",
+  "just": "line 2 is mathematically invalid"
+ },
+ {
+  "id": "h7-calcD-022",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "product rule correct; aside is a true unrelated fact.",
+  "just": "line(s) 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-027",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "open-obligations",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:incomplete:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "correct derivative plus true unrelated remark.",
+  "just": "state the derivative purely in terms of x"
+ },
+ {
+  "id": "h7-calcD-028",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "both branches treated, cusp at 0 noted.",
+  "just": "line 1 is mathematically invalid"
+ },
+ {
+  "id": "h7-calcD-029",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "different-method"
+  ],
+  "why": "valid rewrite then power rule.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-030",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "correct implicit differentiation (where y^2!=2x as the derivative requires).",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-031",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "standard implicit result.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-032",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "parametric formula, dx/dt never zero.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-033",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "FTC part 1 with chain rule.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-034",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "swapping limits flips sign.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-035",
+  "cat": "calculus-derivative",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "standard log differentiation, x>0 given.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-050",
+  "cat": "calculus-derivative",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [],
+  "why": "y^2 differentiates to 2y y', the first line is false.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-051",
+  "cat": "calculus-derivative",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-rule"
+  ],
+  "why": "power rule misapplied to a variable exponent.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-052",
+  "cat": "calculus-derivative",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "chain-omission"
+  ],
+  "why": "chain factor 2x omitted.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-053",
+  "cat": "calculus-derivative",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [],
+  "why": "variable lower limit gives a minus sign.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-054",
+  "cat": "calculus-derivative",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-rule"
+  ],
+  "why": "dy/dx is a quotient dy/dt over dx/dt, not a product.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-066",
+  "cat": "calculus-derivative",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "divides by 2t, t may be 0",
+  "tags": [
+   "domain"
+  ],
+  "why": "cancels t without t!=0; at t=0 dx/dt=0.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-067",
+  "cat": "calculus-derivative",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "domain"
+  ],
+  "why": "assumes the upper branch y>0; lower branch gives +x/sqrt(25-x^2).",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-068",
+  "cat": "calculus-derivative",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "log of factors needs x>3",
+  "tags": [
+   "domain"
+  ],
+  "why": "ln y needs y>0 (or absolute values), unstated.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-071",
+  "cat": "calculus-derivative",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:unsupported:abstains,e5:invalid:agrees,e6:invalid:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [],
+  "why": "parts true but never combined into f'(x).",
+  "just": "line 2 is mathematically invalid; line 1 is unsupported; the earliest invalid line cannot be asserted with confidence (verified invalid: line 2)"
+ },
+ {
+  "id": "h7-calcD-072",
+  "cat": "calculus-derivative",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [],
+  "why": "only restates the quotient rule.",
+  "just": "line(s) 1, 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-074",
+  "cat": "calculus-derivative",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [],
+  "why": "true domain remark; derivative never found.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-075",
+  "cat": "calculus-derivative",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [],
+  "why": "setup only; derivative not obtained.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-076",
+  "cat": "calculus-derivative",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [],
+  "why": "correct differentiation but y' not solved for.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-077",
+  "cat": "calculus-derivative",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [],
+  "why": "derivatives true, ratio never formed.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcD-081",
+  "cat": "calculus-derivative",
+  "exp": "ambiguous",
+  "alt": [
+   "verified",
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "ambiguous",
+  "auditNote": "sin(x^2) vs (sin x)^2",
+  "tags": [],
+  "why": "'sin x^2' reads as sin(x^2) or (sin x)^2; the answer fits only the first.",
+  "just": "the working could not be translated safely"
+ },
+ {
+  "id": "h7-calcI-001",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "Power rule gives x^4/4 and the constant is included.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-003",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "u-substitution with the 1/3 factor gives sin(3x)/3 + C.",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-004",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "d/dx of e^(2x)/2 is e^(2x); constant present.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-005",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "Antiderivative of 1/x on any domain avoiding 0 is ln|x| + C.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-006",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Integration by parts executed correctly with constant.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-007",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Partial fractions are correct and logs carry absolute values.",
+  "just": "line(s) 2 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-008",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Substitution is exact; x^2+1>0 so absolute value drops legitimately.",
+  "just": "line(s) 1, 2, 3 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-010",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "alt-route"
+  ],
+  "why": "Substitution u = sin x is valid and yields sin^2(x)/2 + C.",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-011",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "F(3)-F(0) = 9.",
+  "just": "line 1 is mathematically invalid"
+ },
+ {
+  "id": "h7-calcI-012",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Bounds 1,2 are positive; value ln 2.",
+  "just": "line(s) 1 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-013",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Substitution with transformed bounds gives e-1.",
+  "just": "line(s) 1, 1, 1, 1, 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-014",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "alt-route"
+  ],
+  "why": "Shifted bounds 1..2 and u^4/4 give 15/4.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-015",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "symmetry",
+   "alt-route"
+  ],
+  "why": "Odd integrand over symmetric interval integrates to zero (also F(1)-F(-1)=0).",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-016",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Parts with correct v and remaining integral x/2.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-017",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "Derivative of (1/2)atan(x/2) is 1/(x^2+4).",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-018",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Standard substitution; sign and absolute value correct.",
+  "just": "line(s) 1, 2 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-019",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Limit definition gives 1.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-020",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "ln b is unbounded, so divergence is correct.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-021",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "FTC part 1 with chain factor 2x.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-022",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Iterated integral: 2x then 1.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-023",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [],
+  "why": "Substitution valid on |x|<2 where cos θ>0; result arcsin(x/2)+C.",
+  "just": "line(s) 1, 1, 1, 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-024",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "alt-form"
+  ],
+  "why": "Partial fractions correct; combined log form equivalent.",
+  "just": "line(s) 2 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-026",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "alt-route"
+  ],
+  "why": "Substitution u=x+1 and power rule yield correct antiderivative.",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-027",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "alt-route"
+  ],
+  "why": "Half-angle identity then termwise integration.",
+  "just": "line(s) 1, 2 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-029",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "comparison"
+  ],
+  "why": "Comparison test with 1/x^2.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-030",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "Each branch is correct and combined result is ln|x|+C.",
+  "just": "line(s) 1, 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-031",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "Case analysis is complete and correct.",
+  "just": "line(s) 1, 2, 2, 3, 3, 4, 5 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-032",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "Proof by contradiction is valid.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-033",
+  "cat": "calculus-integral",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "∫_0^1 x dx = 1/2.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-034",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "chain-factor"
+  ],
+  "why": "Chain factor 1/3 is omitted; derivative of sin(3x) is 3cos(3x).",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-037",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "sign"
+  ],
+  "why": "Antiderivative of cos x is sin x, not -sin x.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-038",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "bounds"
+  ],
+  "why": "Bounds applied in reverse order give -9, not 9.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-039",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "bounds"
+  ],
+  "why": "Should subtract: 9-1=8; adding F(1) is wrong.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-041",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "forged"
+  ],
+  "why": "Derivative of ln|x^2-1| is 2x/(x^2-1), not 1/(x^2-1).",
+  "just": "line(s) 1 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-042",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "chain-factor"
+  ],
+  "why": "du = 2x dx means x dx = du/2; factor 1/2 forgotten.",
+  "just": "line(s) 1, 2, 3 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-043",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "divergence"
+  ],
+  "why": "Integrand tending to 0 does not imply convergence; the integral diverges.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-044",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "divergence"
+  ],
+  "why": "Integral of x^(-1/2) equals 2√b - 2 → ∞, so it diverges.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-045",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "bounds"
+  ],
+  "why": "Bounds must become u=0 to 4, giving e^4-1.",
+  "just": "line(s) 1, 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-046",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "chain-factor"
+  ],
+  "why": "Chain-rule factor 2x is missing.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-047",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "arithmetic"
+  ],
+  "why": "∫_0^1 2x dx = 1, not 2.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-049",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "chain-factor"
+  ],
+  "why": "Missing 1/2: derivative of atan(x/2) is 2/(x^2+4).",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-050",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-rule"
+  ],
+  "why": "1/x^2 integrates to -1/x; the log rule applies only to 1/x.",
+  "just": "line(s) 1 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-051",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "true numbers, ungrounded; alt invalid",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "Evaluating the integrand at the upper bound is not integration; 4 is right only by coincidence.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-052",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "bad-middle"
+  ],
+  "why": "u^4/3 is false (should be u^4/4), so a middle line is wrong though the final answer is right.",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-053",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Irrelevant side line is false: ∫_0^1 2x dx = 1.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-054",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "back-substitution"
+  ],
+  "why": "θ = arcsin(x/2), not arcsin(x); back-substitution is wrong.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-055",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "dependent"
+  ],
+  "why": "First line is false (sign error) and the value 2e-1 depends on it; true value is 1.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-056",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "kernel-contradiction",
+  "routes": "e5:verified:accepted,e6:invalid:objection",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "Replacing the integrand by a different function is unjustified; equal values here are a coincidence.",
+  "just": "trusted mechanisms disagree about \"∫_0^1 3x^2 dx = ∫_0^1 4x^3 dx = [x^4]_0^1 = 1\": one proved it, another disproved it, so nothing is certified"
+ },
+ {
+  "id": "h7-calcI-057",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "coincidence, ungrounded; alt invalid",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "Evaluating integrand instead of antiderivative; 9 matches only by coincidence.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-058",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "divergence"
+  ],
+  "why": "Integrand has a non-integrable singularity at 0 and is positive; the integral diverges, and -2 is nonsense.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-059",
+  "cat": "calculus-integral",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "divergence"
+  ],
+  "why": "cos(x) has no limit at infinity, so cos(∞)=0 is false; the integral diverges.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-060",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "no-constant"
+  ],
+  "why": "Constant of integration omitted.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-061",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "no-constant"
+  ],
+  "why": "Correct antiderivative but +C missing.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-063",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "no-constant"
+  ],
+  "why": "Correct but no constant of integration.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-064",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "abs-value"
+  ],
+  "why": "Needs |x| (or x>0); domain of 1/x includes negative x, which is not restricted.",
+  "just": "line(s) 1 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-065",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "abs-value"
+  ],
+  "why": "Without |x-2| or x>2 the result fails for x<2.",
+  "just": "line(s) 1, 2 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-066",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "abs-value"
+  ],
+  "why": "Logs need absolute values; for |x|<1 neither argument is positive.",
+  "just": "line(s) 2 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-067",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "abs-value"
+  ],
+  "why": "Needs ln|ln x|; ln x may be negative for 0<x<1.",
+  "just": "line(s) 1, 2 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-068",
+  "cat": "calculus-integral",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:invalid:agrees,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "abs-value"
+  ],
+  "why": "cos x can be negative; requires absolute value or restricted domain.",
+  "just": "line 1 is mathematically invalid"
+ },
+ {
+  "id": "h7-calcI-069",
+  "cat": "calculus-integral",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stops-early"
+  ],
+  "why": "Setup only; integral never computed.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-070",
+  "cat": "calculus-integral",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stops-early"
+  ],
+  "why": "True but the bounds are never evaluated.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-072",
+  "cat": "calculus-integral",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stops-early"
+  ],
+  "why": "Limit b → ∞ never taken.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-073",
+  "cat": "calculus-integral",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stops-early"
+  ],
+  "why": "Outer integration missing.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-075",
+  "cat": "calculus-integral",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "True facts, but F(1)-F(0) never established.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-076",
+  "cat": "calculus-integral",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stops-early"
+  ],
+  "why": "Related true fact but composite with x^2 not addressed.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcI-077",
+  "cat": "calculus-integral",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stops-early"
+  ],
+  "why": "Substitution set up; integral not evaluated.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-001",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "standard-limit"
+  ],
+  "why": "standard limit sin(u)/u->1 gives 5/2",
+  "just": "line(s) 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-002",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "factor"
+  ],
+  "why": "cancel removable factor, value 6",
+  "just": "line(s) 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-003",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conjugate"
+  ],
+  "why": "conjugate gives 1/(sqrt(x+4)+2)->1/4",
+  "just": "line(s) 3, 4 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-004",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "infinity"
+  ],
+  "why": "ratio of leading coefficients 3/5",
+  "just": "line(s) 2, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-005",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "lhopital-correct"
+  ],
+  "why": "two valid L'Hopital steps, each 0/0, giving 1/2",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-007",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "one-sided"
+  ],
+  "why": "on x>0 the quotient is identically 1",
+  "just": "line(s) 1, 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-008",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "derivative of e^(2x) at 0 is 2",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-009",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "lhopital-correct",
+   "one-sided"
+  ],
+  "why": "rewrite as quotient, L'Hopital valid, gives 0",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-010",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conjugate",
+   "infinity"
+  ],
+  "why": "conjugate then divide by x gives 1/2",
+  "just": "line(s) 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-011",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "tan x/x -> 1 as x->0",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-012",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "concise"
+  ],
+  "why": "x^2+2x+4 at 2 equals 12",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-013",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "taylor"
+  ],
+  "why": "Maclaurin expansion of sin gives -1/6",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-014",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "sequence"
+  ],
+  "why": "limit laws give 2",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-015",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "squeeze"
+  ],
+  "why": "valid squeeze, multiplying by nonnegative x^2",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-016",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "comparison"
+  ],
+  "why": "direct comparison with p-series",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-017",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "ratio-test"
+  ],
+  "why": "ratio limit 1/2<1",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-018",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "continuity"
+  ],
+  "why": "limit equals f(1)=2",
+  "just": "the working could not be translated safely"
+ },
+ {
+  "id": "h7-calcL-019",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "differentiability"
+  ],
+  "why": "unequal one-sided derivatives",
+  "just": "the working could not be translated safely"
+ },
+ {
+  "id": "h7-calcL-020",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "why": "delta=eps/3 works exactly",
+  "just": "line(s) 1, 1, 2, 3, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-021",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "alternating"
+  ],
+  "why": "Leibniz test plus divergent harmonic series",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-022",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "squeeze",
+   "infinity"
+  ],
+  "why": "split and squeeze the bounded term",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-023",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "lhopital-correct"
+  ],
+  "why": "single valid L'Hopital step",
+  "just": "line(s) 1, 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-024",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "different-method"
+  ],
+  "why": "derivative definition, no L'Hopital",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-025",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "squeeze",
+   "sequence"
+  ],
+  "why": "product bounded by 1/n",
+  "just": "line(s) 1, 2, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-026",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "one-sided"
+  ],
+  "why": "case split shows unequal one-sided limits",
+  "just": "line(s) 1, 1, 2, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-027",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "why": "standard epsilon/2 argument via triangle inequality",
+  "just": "line(s) 1, 1, 2, 3, 4, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-028",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "correct solution; extra line lim cos x=1 is true and harmless",
+  "just": "line(s) 1, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-029",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "p-series test; side remark about harmonic series is true",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-030",
+  "cat": "calculus-limits-series",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "squeeze"
+  ],
+  "why": "absolute-value squeeze valid on both sides",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-031",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "lhopital-misuse"
+  ],
+  "why": "form at 0 is 1/2 not 0/0; L'Hopital misapplied and true limit is 1/2",
+  "just": "line(s) 2, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-032",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "lhopital-misuse",
+   "coincidence"
+  ],
+  "why": "quotient is 1/1 at 0, not indeterminate, so L'Hopital step is illegitimate even though 1 is right",
+  "just": "line(s) 1, 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-033",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "standard-limit"
+  ],
+  "why": "sin(3x)/x = 3 sin(3x)/(3x) -> 3; denominator x is not u",
+  "just": "line(s) 1, 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-034",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "indeterminate"
+  ],
+  "why": "infinity*0 is indeterminate; the limit equals 1",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-036",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "infinity"
+  ],
+  "why": "degrees differ; the quotient grows like x and diverges",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-037",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "one-sided"
+  ],
+  "why": "left limit is -1, two-sided limit does not exist",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-038",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "squeeze-misuse"
+  ],
+  "why": "bounds -x,x do not tend to 0 at infinity; true limit is 1",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-039",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-theorem"
+  ],
+  "why": "converse of divergence test is false; harmonic series diverges",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-040",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-theorem",
+   "coincidence"
+  ],
+  "why": "ratio test is inconclusive at 1; misstated rule though conclusion is true",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-041",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "continuity"
+  ],
+  "why": "limit 1 differs from f(0)=0, so f is discontinuous",
+  "just": "the working could not be translated safely"
+ },
+ {
+  "id": "h7-calcL-042",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "epsilon-delta"
+  ],
+  "why": "delta may not depend on x",
+  "just": "line(s) 1, 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-043",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "why": "3|x-2|<3 eps, not eps; delta=eps fails",
+  "just": "line(s) 1, 1, 2, 2, 3, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-044",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "taylor"
+  ],
+  "why": "cos x = 1 - x^2/2 + ..., true limit is -1/2",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-045",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "sequence",
+   "indeterminate"
+  ],
+  "why": "infinity*0 form; the limit is 1",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-046",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "taylor"
+  ],
+  "why": "sin coefficients are 1/3!, 1/5!; limit is -1/6",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-047",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "dependent"
+  ],
+  "why": "e^x ~ 1+x, so limit is 1; first line false and later lines depend on it",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-048",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "lhopital-misuse"
+  ],
+  "why": "L'Hopital inconclusive when derivative-limit fails; actual limit is 1",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-049",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "infinity",
+   "sign"
+  ],
+  "why": "for x<0, x=-sqrt(x^2), so the limit is -1",
+  "just": "line(s) 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-050",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "main answer right but side claim is false (that limit is 0)",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-051",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "irrelevant false side claim: sum 1/sqrt(n) diverges",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-052",
+  "cat": "calculus-limits-series",
+  "exp": "invalid",
+  "alt": [
+   "incomplete"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "one-sided bound only",
+  "tags": [
+   "squeeze-misuse"
+  ],
+  "why": "only an upper bound is given; squeeze needs a lower bound too (non-sequitur)",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-053",
+  "cat": "calculus-limits-series",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "needs |r|<1",
+  "tags": [
+   "geometric"
+  ],
+  "why": "convergence requires |r|<1, which is not stated and fails for other r",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-054",
+  "cat": "calculus-limits-series",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:ambiguous:agrees,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "monotonicity unchecked",
+  "tags": [
+   "alternating"
+  ],
+  "why": "alternating test also needs monotone decrease of 1/sqrt(n), not checked",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-055",
+  "cat": "calculus-limits-series",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "needs delta<=1 bound",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "why": "bound |x+3|<7 needs delta<=1, an unstated restriction",
+  "just": "line(s) 1, 1, 2, 3, 4, 5, 5 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-056",
+  "cat": "calculus-limits-series",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "squeeze"
+  ],
+  "why": "multiplying by x flips inequalities for x<0; sign case is omitted",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-057",
+  "cat": "calculus-limits-series",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "assumes existence; root choice unstated",
+  "tags": [
+   "conditional"
+  ],
+  "why": "existence of the limit and rejection of root -1 (needs L>=0) are not established",
+  "just": "line(s) 1, 2, 3, 4, 5 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-059",
+  "cat": "calculus-limits-series",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "ratio-test"
+  ],
+  "why": "ratio computed but no limit or conclusion",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-060",
+  "cat": "calculus-limits-series",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "epsilon-delta"
+  ],
+  "why": "no delta chosen, proof not completed",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-061",
+  "cat": "calculus-limits-series",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "taylor"
+  ],
+  "why": "expansion true but never divides or takes the limit",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-062",
+  "cat": "calculus-limits-series",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "one-sided"
+  ],
+  "why": "left side never examined; two-sided conclusion absent",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-063",
+  "cat": "calculus-limits-series",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "differentiability"
+  ],
+  "why": "left derivative missing, so no conclusion",
+  "just": "the working could not be translated safely"
+ },
+ {
+  "id": "h7-calcL-065",
+  "cat": "calculus-limits-series",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "numerical value suggests but does not establish the limit",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-066",
+  "cat": "calculus-limits-series",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "restate"
+  ],
+  "why": "only restates the goal",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-calcL-070",
+  "cat": "calculus-limits-series",
+  "exp": "ambiguous",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "units"
+  ],
+  "why": "correct only under a degree-measure reading; standard radian reading gives 1",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-001",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "finite"
+  ],
+  "why": "Five of 36 equally likely ordered pairs sum to 8.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-007",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "binomial-variance",
+   "wrong-formula"
+  ],
+  "why": "np is the mean; the variance is np(1-p)=16/5.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-008",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "binomial-variance",
+   "side-claim"
+  ],
+  "why": "Correct variance; the extra mean line is true and harmless.",
+  "just": "line(s) 1, 2 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-011",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e6:incomplete:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "variance",
+   "alt-method"
+  ],
+  "why": "Shortcut formula E[X^2]-mu^2 gives 5, matching the definition.",
+  "just": "finish with the requested quantity as a single reduced number"
+ },
+ {
+  "id": "h7-dom-012",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "sample-variance",
+   "wrong-formula"
+  ],
+  "why": "Sample variance divides by n-1=2, giving 4, not 8/3.",
+  "just": "line(s) 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-013",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:unsupported:abstains,e6:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "combination"
+  ],
+  "why": "C(10,4)=210.",
+  "just": "line 1 is mathematically invalid"
+ },
+ {
+  "id": "h7-dom-014",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e6:incomplete:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "combination",
+   "wrong-formula"
+  ],
+  "why": "That counts ordered selections; unordered gives 210.",
+  "just": "finish with the requested quantity as a single reduced number"
+ },
+ {
+  "id": "h7-dom-018",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:malformed:abstains,e6:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "finite",
+   "alt-method"
+  ],
+  "why": "Complement method gives 91/216.",
+  "just": "line 1 is mathematically invalid"
+ },
+ {
+  "id": "h7-dom-019",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "complement",
+   "side-claim"
+  ],
+  "why": "True irrelevant remark after correct answer.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-020",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "probability",
+   "complement",
+   "side-claim"
+  ],
+  "why": "C(12,2)=66, so the side line is false.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-024",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "determinant",
+   "alt-method"
+  ],
+  "why": "Column expansion with the zero entry yields 27.",
+  "just": "unsupported character ':' at 21"
+ },
+ {
+  "id": "h7-dom-025",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "determinant"
+  ],
+  "why": "The (1,3) cofactor has sign +, so the term is -1 and det is 27.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-026",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "determinant",
+   "incomplete"
+  ],
+  "why": "True first term only; the other cofactors and the total are missing.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-027",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "determinant",
+   "coincidence"
+  ],
+  "why": "True sums whose difference merely equals ad-bc here; no determinant formula is established.",
+  "just": "no lossless natural adapter for linear-algebra"
+ },
+ {
+  "id": "h7-dom-028",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "determinant",
+   "alt-method"
+  ],
+  "why": "Proportional rows force determinant zero.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-dom-029",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "inverse"
+  ],
+  "why": "Adjugate over det 1.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-030",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "inverse"
+  ],
+  "why": "Off-diagonal entries of the adjugate must be negated.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-031",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "solve",
+   "alt-method"
+  ],
+  "why": "Cramer's rule gives (1,2).",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-032",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "solve",
+   "incomplete"
+  ],
+  "why": "x is never found, so the solution is not complete.",
+  "just": "unsupported character ':' at 15"
+ },
+ {
+  "id": "h7-dom-033",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "solve",
+   "dependent"
+  ],
+  "why": "x = y + 1 is false (x = y - 1) and everything after depends on it.",
+  "just": "unsupported character ':' at 15"
+ },
+ {
+  "id": "h7-dom-034",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "multiply",
+   "wrong-formula"
+  ],
+  "why": "Matrix multiplication is not commutative; AB=[[8,1],[6,0]].",
+  "just": "no lossless natural adapter for linear-algebra"
+ },
+ {
+  "id": "h7-dom-035",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "linear-algebra",
+   "add",
+   "concise"
+  ],
+  "why": "Entrywise sum.",
+  "just": "no lossless natural adapter for linear-algebra"
+ },
+ {
+  "id": "h7-dom-036",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "modulus",
+   "side-claim"
+  ],
+  "why": "Extra z^2 line is true and does not affect the result.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-038",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "modulus",
+   "side-claim"
+  ],
+  "why": "The conjugate is 5 + 12i, so the side line is false.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-040",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:unsupported:abstains,e6:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "divide",
+   "alt-method"
+  ],
+  "why": "Solving for real and imaginary parts gives the same quotient.",
+  "just": "line 2 is mathematically invalid; line 1 is not-mathematical; the earliest invalid line cannot be asserted with confidence (verified invalid: line 2)"
+ },
+ {
+  "id": "h7-dom-042",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:malformed:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "power-i"
+  ],
+  "why": "50 mod 4 is 2, so the power is -1.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-043",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "ambiguous-reading",
+  "routes": "base:unsupported:abstains,e6:ambiguous:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "quadratic",
+   "alt-method"
+  ],
+  "why": "Completing the square.",
+  "just": "line(s) 1, 2, 3, 4 could not be verified (ambiguous); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-045",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "remainder"
+  ],
+  "why": "Remainder theorem.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-046",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "remainder",
+   "alt-method"
+  ],
+  "why": "Synthetic division yields 9.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-047",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "remainder",
+   "wrong-formula"
+  ],
+  "why": "Dividing by x-2 needs p(2)=9, not p(-2).",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-048",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "open-obligations",
+  "routes": "base:malformed:abstains,e6:incomplete:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "vieta",
+   "wrong-formula"
+  ],
+  "why": "For a quadratic the product is +c/a.",
+  "just": "finish with the requested quantity as a single reduced number"
+ },
+ {
+  "id": "h7-dom-050",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [
+   "missing-assumption"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "complex",
+   "conjugate-root",
+   "wrong-formula"
+  ],
+  "why": "Coefficients are not real; the roots are 1+i and 2.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-dom-052",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [
+   "missing-assumption"
+  ],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "equation",
+   "missing-branch"
+  ],
+  "why": "The branch 5π/6 + 2kπ is missing.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-dom-053",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "equation",
+   "alt-form"
+  ],
+  "why": "The union equals π/4 + kπ.",
+  "just": "malformed solution branch"
+ },
+ {
+  "id": "h7-dom-054",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [
+   "missing-assumption"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "equation",
+   "missing-branch"
+  ],
+  "why": "Misses 5π/4 + 2kπ.",
+  "just": "no lossless natural adapter for trigonometry"
+ },
+ {
+  "id": "h7-dom-055",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "equation",
+   "wrong-formula"
+  ],
+  "why": "Those angles give cos = +1/2.",
+  "just": "no lossless natural adapter for trigonometry"
+ },
+ {
+  "id": "h7-dom-056",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "equation",
+   "concise"
+  ],
+  "why": "cos vanishes at odd multiples of π/2.",
+  "just": "no lossless natural adapter for trigonometry"
+ },
+ {
+  "id": "h7-dom-057",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "equation"
+  ],
+  "why": "sin x vanishes at kπ; cos x vanishes at π/2 + kπ.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-058",
+  "cat": "other-domains",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid",
+   "incomplete"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "equation-statement",
+   "division"
+  ],
+  "why": "Dividing by sin x drops the case sin x = 0; solutions are x = kπ.",
+  "just": "unsupported character ':' at 26"
+ },
+ {
+  "id": "h7-dom-059",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "value",
+   "side-claim"
+  ],
+  "why": "cos 150° = -√3/2, so the side line is false.",
+  "just": "unsupported character '°' at 7"
+ },
+ {
+  "id": "h7-dom-060",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "value"
+  ],
+  "why": "cos(180°+θ) = -cos θ so the value is -1/2.",
+  "just": "unsupported character '°' at 7"
+ },
+ {
+  "id": "h7-dom-061",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "value",
+   "concise"
+  ],
+  "why": "tan 135° = -tan 45° = -1.",
+  "just": "no lossless natural adapter for trigonometry"
+ },
+ {
+  "id": "h7-dom-062",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "value",
+   "side-claim"
+  ],
+  "why": "Correct value with a true extra line.",
+  "just": "unsupported character '°' at 7"
+ },
+ {
+  "id": "h7-dom-063",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "identity",
+   "forged"
+  ],
+  "why": "Correct identity is sin 2x = 2 sin x cos x.",
+  "just": "no lossless natural adapter for trigonometry"
+ },
+ {
+  "id": "h7-dom-064",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "identity",
+   "forged"
+  ],
+  "why": "Forged: sin(a+b) = sin a cos b + cos a sin b.",
+  "just": "no lossless natural adapter for trigonometry"
+ },
+ {
+  "id": "h7-dom-065",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "identity"
+  ],
+  "why": "Division with the nonzero condition stated.",
+  "just": "unsupported character ':' at 33"
+ },
+ {
+  "id": "h7-dom-066",
+  "cat": "other-domains",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "ambiguous",
+  "rule": "single-route",
+  "routes": "base:ambiguous:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "trig",
+   "identity",
+   "missing-condition"
+  ],
+  "why": "Needs cos x ≠ 0; tan x is undefined where cos x = 0.",
+  "just": "division followed by implicit multiplication has multiple conventional readings"
+ },
+ {
+  "id": "h7-dom-068",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "exponential",
+   "alt-method"
+  ],
+  "why": "Taking logs gives the same x=2.",
+  "just": "comma suffix must be a domain restriction"
+ },
+ {
+  "id": "h7-dom-069",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "exponential",
+   "wrong-formula"
+  ],
+  "why": "Moving +1 across should subtract; x=2.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-070",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "exponential",
+   "incomplete"
+  ],
+  "why": "x is not solved.",
+  "just": "power exponent must be a bounded integer"
+ },
+ {
+  "id": "h7-dom-071",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "exponential",
+   "coincidence"
+  ],
+  "why": "True arithmetic with an unjustified 64; no link to 3x+1=7 is shown.",
+  "just": "no lossless natural adapter for exponential-log"
+ },
+ {
+  "id": "h7-dom-072",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "exponential",
+   "concise"
+  ],
+  "why": "2x-3=1 gives x=2.",
+  "just": "no lossless natural adapter for exponential-log"
+ },
+ {
+  "id": "h7-dom-073",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "log"
+  ],
+  "why": "Exponentiation and domain check.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-074",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "log",
+   "wrong-formula"
+  ],
+  "why": "3^3 is 27, not 3*3; x=13.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-075",
+  "cat": "other-domains",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "log-statement",
+   "extraneous"
+  ],
+  "why": "x = -2 is extraneous since log arguments must be positive; domain x > 2 is never checked.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-076",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "ambiguous",
+  "rule": "single-route",
+  "routes": "base:ambiguous:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "law",
+   "forged"
+  ],
+  "why": "Quotient law is a difference, not a quotient.",
+  "just": "division followed by implicit multiplication has multiple conventional readings"
+ },
+ {
+  "id": "h7-dom-077",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "law",
+   "forged"
+  ],
+  "why": "Exponents add: a^(m+n).",
+  "just": "power exponent must be a bounded integer"
+ },
+ {
+  "id": "h7-dom-078",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "inequality",
+   "alt-method"
+  ],
+  "why": "Rewriting with base 3 yields x>2.",
+  "just": "power exponent must be a bounded integer"
+ },
+ {
+  "id": "h7-dom-079",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "explog",
+   "inequality",
+   "wrong-formula"
+  ],
+  "why": "Base below 1 reverses the inequality; correct x>2.",
+  "just": "power exponent must be a bounded integer"
+ },
+ {
+  "id": "h7-dom-080",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "ap-term",
+   "wrong-formula"
+  ],
+  "why": "Uses n instead of n-1.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-081",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "ap-sum",
+   "alt-method"
+  ],
+  "why": "Sum via first and last term.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-082",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "ap-sum",
+   "incomplete"
+  ],
+  "why": "Last term only; sum not computed.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-083",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "ap-sum",
+   "alt-method"
+  ],
+  "why": "Sum of first n odd numbers is n^2.",
+  "just": "malformed number at 23"
+ },
+ {
+  "id": "h7-dom-084",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "gp-term",
+   "wrong-formula"
+  ],
+  "why": "Exponent should be n-1=5.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-085",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "gp-term",
+   "concise"
+  ],
+  "why": "27*(-2/3)^3=-8.",
+  "just": "no lossless natural adapter for sequence-series"
+ },
+ {
+  "id": "h7-dom-086",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "gp-sum",
+   "alt-method"
+  ],
+  "why": "Direct addition.",
+  "just": "no lossless natural adapter for sequence-series"
+ },
+ {
+  "id": "h7-dom-087",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "gp-sum",
+   "wrong-formula"
+  ],
+  "why": "Numerator and denominator signs mismatch; sum is +242.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-088",
+  "cat": "other-domains",
+  "exp": "incomplete",
+  "alt": [
+   "missing-assumption"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "gp-sum",
+   "division"
+  ],
+  "why": "Formula is 0/0 at r=1; the sum is not found.",
+  "just": "no lossless natural adapter for sequence-series"
+ },
+ {
+  "id": "h7-dom-089",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "infinite-gp"
+  ],
+  "why": "a/(1-r) with |r|<1.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-090",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "seq",
+   "infinite-gp",
+   "wrong-formula"
+  ],
+  "why": "|r|>1 so the series diverges; the formula does not apply.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-092",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "sqrt",
+   "forged"
+  ],
+  "why": "√(a+b) ≠ √a + √b.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-093",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "nth-root"
+  ],
+  "why": "Cube factor extracted.",
+  "just": "unsupported character '∛' at 0"
+ },
+ {
+  "id": "h7-dom-094",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "rationalize",
+   "alt-method"
+  ],
+  "why": "Factor 6 as 2√3·√3.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-095",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "rationalize"
+  ],
+  "why": "√3·√3 = 3, not 9; the value is 2√3.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-dom-096",
+  "cat": "other-domains",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "sqrt-square",
+   "missing-condition"
+  ],
+  "why": "For x<0 the value is -x; x ≥ 0 is not given.",
+  "just": "no lossless natural adapter for radical"
+ },
+ {
+  "id": "h7-dom-097",
+  "cat": "other-domains",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "sqrt-square",
+   "conditional"
+  ],
+  "why": "Both cases are covered.",
+  "just": "unsupported character ':' at 11"
+ },
+ {
+  "id": "h7-dom-098",
+  "cat": "other-domains",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "extraneous root x=-1 unchecked",
+  "tags": [
+   "radical",
+   "equation",
+   "extraneous"
+  ],
+  "why": "Squaring introduces -1, which fails the original equation; no check was made.",
+  "just": "unsupported character ':' at 8"
+ },
+ {
+  "id": "h7-dom-099",
+  "cat": "other-domains",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "nested",
+   "forged"
+  ],
+  "why": "(√5+√6)^2 = 11+2√30.",
+  "just": "no lossless natural adapter for radical"
+ },
+ {
+  "id": "h7-dom-100",
+  "cat": "other-domains",
+  "exp": "ambiguous",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "radical",
+   "ambiguous"
+  ],
+  "why": "As the value of √16 it is false (principal root 4), as the solution set of x^2=16 it is right.",
+  "just": "unsupported: a plus-or-minus sign is supported only in a solved form 'x = ... ± ...'"
+ },
+ {
+  "id": "h7-geo-003",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "reordered"
+  ],
+  "why": "Same derivation in a different order; every line true.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-006",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Complete correct solution; the extra true line is harmless.",
+  "just": "line(s) 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-007",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "The extra side line is false (3×47=141).",
+  "just": "line(s) 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-011",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "valid"
+  ],
+  "why": "Introducing a variable then applying angle sum is a valid derivation.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-012",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "verified",
+  "rule": "accepted-by-obligations",
+  "routes": "e5:verified:accepted,base:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "True arithmetic reaching 70 using an unexplained 40; no triangle theorem invoked.",
+  "just": "all 1 submitted line(s) are accounted for and verified"
+ },
+ {
+  "id": "h7-geo-013",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "verified",
+  "rule": "accepted-by-obligations",
+  "routes": "e5:verified:accepted,base:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "true numbers, bogus justification",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "Halving 120 happens to equal 180-120 but is not a justified step; the angle-sum theorem is never used.",
+  "just": "all 3 submitted line(s) are accounted for and verified"
+ },
+ {
+  "id": "h7-geo-014",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Correct solution with an irrelevant true remark.",
+  "just": "line(s) 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-021",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid"
+  ],
+  "why": "Base angles equal, then angle sum.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-022",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "reordered"
+  ],
+  "why": "Same derivation, different ordering.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-025",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Side claim false: angles 80,50,50 are not equal.",
+  "just": "line(s) 1, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-027",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stop-early"
+  ],
+  "why": "True but apex angle A is never found.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-028",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid"
+  ],
+  "why": "Angle sum then linear pair.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-029",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e5:missing-assumption:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "different-method"
+  ],
+  "why": "Exterior angle equals sum of remote interior angles; different valid route.",
+  "just": "complete line 1: the step is consistent with the facts but is not justified by them (a fact or relationship is assumed without being given)"
+ },
+ {
+  "id": "h7-geo-030",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e5:missing-assumption:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-theorem"
+  ],
+  "why": "Linear pair angles are supplementary, not equal; also ACD=100.",
+  "just": "complete line 1: the step is consistent with the facts but is not justified by them (a fact or relationship is assumed without being given)"
+ },
+ {
+  "id": "h7-geo-031",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e5:missing-assumption:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-theorem"
+  ],
+  "why": "Exterior angle is the sum, not difference, of remote angles.",
+  "just": "complete line 1: the step is consistent with the facts but is not justified by them (a fact or relationship is assumed without being given)"
+ },
+ {
+  "id": "h7-geo-032",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "missing-assumption",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e5:missing-assumption:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "Arithmetic true but 25 is unexplained; not derived from the figure.",
+  "just": "complete line 1: the step is consistent with the facts but is not justified by them (a fact or relationship is assumed without being given)"
+ },
+ {
+  "id": "h7-geo-033",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e5:missing-assumption:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stop-early"
+  ],
+  "why": "True, but exterior angle ACD is never found.",
+  "just": "complete line 1: the step is consistent with the facts but is not justified by them (a fact or relationship is assumed without being given)"
+ },
+ {
+  "id": "h7-geo-034",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Correct answer plus a true side check.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-035",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e5:missing-assumption:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "concise"
+  ],
+  "why": "180-62-38=80, 180-80=100.",
+  "just": "complete line 1: the step is consistent with the facts but is not justified by them (a fact or relationship is assumed without being given)"
+ },
+ {
+  "id": "h7-geo-037",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "concise"
+  ],
+  "why": "Concise but justified.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-041",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "True arithmetic with unexplained 18; no theorem links a2 to a1.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-043",
+  "cat": "geometry",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "dependent",
+   "missing-justification"
+  ],
+  "why": "Parallelism is assumed without being supplied.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-044",
+  "cat": "geometry",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "dependent"
+  ],
+  "why": "Line 1 is an unproven assertion that line 2 depends on.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-045",
+  "cat": "geometry",
+  "exp": "missing-assumption",
+  "alt": [
+   "incomplete"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "conditional"
+  ],
+  "why": "Conditional on parallelism that the task never provides; goal not established.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-046",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "conditional",
+   "valid"
+  ],
+  "why": "Conditional phrasing, hypothesis is given; conclusion correct.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-047",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:unsupported:abstains,e5:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid"
+  ],
+  "why": "Corresponding then supplementary.",
+  "just": "line 2 is mathematically invalid"
+ },
+ {
+  "id": "h7-geo-048",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "reordered"
+  ],
+  "why": "Same route compressed and reordered.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-051",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "True arithmetic with unexplained 56.",
+  "just": "acceptance withdrawn: proof obligation ob:1 (grounding, line 1) is unresolved: the number 3 comes from neither the task data nor an earlier verified result"
+ },
+ {
+  "id": "h7-geo-053",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:unsupported:abstains,e5:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Complete solution; extra lines are true and irrelevant.",
+  "just": "line 2 is mathematically invalid"
+ },
+ {
+  "id": "h7-geo-058",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "coincidence"
+  ],
+  "why": "True arithmetic, no justification linking BOD to AOC.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-059",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "disproven-claim",
+  "routes": "base:unsupported:abstains,e5:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid"
+  ],
+  "why": "Linear pair then vertical angles.",
+  "just": "line 2 is mathematically invalid"
+ },
+ {
+  "id": "h7-geo-063",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid"
+  ],
+  "why": "Linear pair is supplementary.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-066",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid"
+  ],
+  "why": "Three equal sides gives SSS.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-067",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "bad-step"
+  ],
+  "why": "Two equal sides do not imply congruence; third side not used.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-068",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "reordered"
+  ],
+  "why": "Two angles with included side: ASA, order shuffled.",
+  "just": "line(s) 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-069",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stop-early"
+  ],
+  "why": "Only restates givens; congruence not concluded.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-070",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "wrong-theorem"
+  ],
+  "why": "Angle A is not included between AB and BC; this is SSA, which does not guarantee congruence.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-071",
+  "cat": "geometry",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "dependent",
+   "missing-justification"
+  ],
+  "why": "BC = EF is asserted but not given or derivable.",
+  "just": "line(s) 4 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-072",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "reordered"
+  ],
+  "why": "Included angle B between sides AB, BC: valid SAS.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-073",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Valid SAS plus true triangle-inequality remark.",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-074",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "side-claim"
+  ],
+  "why": "Irrelevant side claim is false (a length is positive).",
+  "just": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-075",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "concise"
+  ],
+  "why": "Distance formula.",
+  "just": "acceptance withdrawn: proof obligation ob:1 (grounding, line 1) is unresolved: the numbers 25, 144 come from neither the task data nor an earlier verified result"
+ },
+ {
+  "id": "h7-geo-077",
+  "cat": "geometry",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "valid",
+   "different-method"
+  ],
+  "why": "Equivalent route via AB=13 (5-12-13).",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-078",
+  "cat": "geometry",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "stop-early"
+  ],
+  "why": "True partial computations; never summed to give AB².",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-geo-081",
+  "cat": "geometry",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "bad-step"
+  ],
+  "why": "Squares omitted; AB²=16+9.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-005",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "typed"
+  ],
+  "why": "With u=x^2, du=2x dx the integral is e^(x^2)/2 + C.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-006",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text"
+  ],
+  "why": "With u=x^2, du=2x dx the integral is e^(x^2)/2 + C.",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-007",
+  "cat": "typed-routes",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "typed",
+   "missing-constant"
+  ],
+  "why": "Antiderivative e^(x^2)/2 is right but the constant of integration is omitted.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-008",
+  "cat": "typed-routes",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text",
+   "missing-constant"
+  ],
+  "why": "Antiderivative e^(x^2)/2 is right but the constant of integration is omitted.",
+  "just": "line(s) 1, 2, 3 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-009",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "typed"
+  ],
+  "why": "Antiderivative x^3/3 gives 27/3 - 0 = 9.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-010",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text"
+  ],
+  "why": "Antiderivative x^3/3 gives 27/3 - 0 = 9.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-012",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text"
+  ],
+  "why": "x^3 is not an antiderivative of x^2 (derivative 3x^2); the true value is 9, not 27.",
+  "just": "line(s) 1, 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-013",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "typed"
+  ],
+  "why": "sin(5x)/(2x) = (5/2)(sin 5x)/(5x) -> 5/2.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-014",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text"
+  ],
+  "why": "sin(5x)/(2x) = (5/2)(sin 5x)/(5x) -> 5/2.",
+  "just": "line(s) 2 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-015",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "typed"
+  ],
+  "why": "(x^2-4)/(x-2)=x+2 for x≠2, so the limit as x->2 is 4.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-016",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:malformed:abstains",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text"
+  ],
+  "why": "(x^2-4)/(x-2)=x+2 for x≠2, so the limit as x->2 is 4.",
+  "just": "line(s) 1 could not be verified (malformed); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-018",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "open-obligations",
+  "routes": "base:unsupported:abstains,e5:unsupported:abstains,e6:incomplete:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text"
+  ],
+  "why": "Dividing by x^2: (3+1/x^2)/(1+5/x^2) -> 3.",
+  "just": "state the value of the limit"
+ },
+ {
+  "id": "h7-typed-020",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "no-route-decided",
+  "routes": "base:malformed:abstains,e5:unsupported:abstains,e6:unsupported:abstains",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text"
+  ],
+  "why": "Value 1/5 is the quotient at x=0; the limit at infinity is 3.",
+  "just": "line(s) 1 could not be verified (unsupported); the submission cannot be certified"
+ },
+ {
+  "id": "h7-typed-027",
+  "cat": "typed-routes",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "drops x=-3 branch",
+  "tags": [
+   "route-equivalence",
+   "text-lines",
+   "dropped-branch"
+  ],
+  "why": "Taking the root drops the branch x=-3; solution set is {3,-3}.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-typed-028",
+  "cat": "typed-routes",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "drops x=-3 branch",
+  "tags": [
+   "route-equivalence",
+   "natural",
+   "dropped-branch"
+  ],
+  "why": "Taking the root drops the branch x=-3; solution set is {3,-3}.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-typed-029",
+  "cat": "typed-routes",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "text-lines",
+   "dropped-branch"
+  ],
+  "why": "Dividing by x without excluding x=0 loses the root x=0.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-typed-030",
+  "cat": "typed-routes",
+  "exp": "missing-assumption",
+  "alt": [],
+  "final": "incomplete",
+  "rule": "single-route",
+  "routes": "base:incomplete:agrees",
+  "audit": "missing-assumption",
+  "auditNote": "",
+  "tags": [
+   "route-equivalence",
+   "natural",
+   "dropped-branch"
+  ],
+  "why": "Dividing by x without excluding x=0 loses the root x=0.",
+  "just": "a step lost solutions or jumped to a smaller set without justification"
+ },
+ {
+  "id": "h7-typed-033",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "verified",
+  "rule": "single-route",
+  "routes": "base:verified:accepted",
+  "audit": "verified",
+  "auditNote": "rule label says power rule but claim correct",
+  "tags": [
+   "typed",
+   "wrong-rule-label"
+  ],
+  "why": "The result 2cos(2x) is right but it comes from the chain rule, not the power rule; the cited rule does not justify it.",
+  "just": "all bounded exact calculus steps are justified"
+ },
+ {
+  "id": "h7-typed-037",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "equivalent-form"
+  ],
+  "why": "d/dx (x+1)^2 = 2(x+1) = 2x+2, an equivalent form.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-043",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed"
+  ],
+  "why": "d/dx sin(2x)/2 = cos(2x).",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-044",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed"
+  ],
+  "why": "With u=x^2+1, du=2x dx the integral is u^4/4 + C.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-045",
+  "cat": "typed-routes",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "final": "verified",
+  "rule": "single-route",
+  "routes": "base:verified:accepted",
+  "audit": "missing-assumption",
+  "auditNote": "ln x without absolute value domain",
+  "tags": [
+   "typed",
+   "domain"
+  ],
+  "why": "ln x is an antiderivative of 1/x only for x>0; the answer ln|x|+C or a restriction x>0 is needed.",
+  "just": "all bounded exact calculus steps are justified"
+ },
+ {
+  "id": "h7-typed-046",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed"
+  ],
+  "why": "d/dx (x-1)e^x = e^x + (x-1)e^x = x e^x.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-048",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "alt-method"
+  ],
+  "why": "d/dx sin^2(x)/2 = sin x cos x.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-049",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "alt-method"
+  ],
+  "why": "d/dx (-cos^2 x/2) = cos x sin x; it differs from sin^2 x/2 only by a constant.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-055",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "invalid",
+  "rule": "single-route",
+  "routes": "base:invalid:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "concise"
+  ],
+  "why": "x is odd on [-1,1] so the integral is 0.",
+  "just": "step 1 is invalid"
+ },
+ {
+  "id": "h7-typed-057",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed"
+  ],
+  "why": "(x^2-9)/(x-3)=x+3 for x≠3, limit 6.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-058",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "hidden-false"
+  ],
+  "why": "(x^2-9)/(x-3) equals x+3, not x-3; a false step precedes the right final value.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-059",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed"
+  ],
+  "why": "One-sided limits are -inf and +inf, so the two-sided limit does not exist.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-060",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "typed"
+  ],
+  "why": "The two-sided limit of 1/x at 0 does not exist; the left side goes to -infinity.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-061",
+  "cat": "typed-routes",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "typed-relevance"
+  ],
+  "why": "lim sin(2x)/x = 2 is true but concerns another function; the requested limit 3 is never established.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-062",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "typed-relevance",
+   "side-claim"
+  ],
+  "why": "The side claim lim sin(2x)/x = 2 is true and the requested limit 3 is stated.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-064",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed"
+  ],
+  "why": "x^2/(x+1) ~ x grows without bound.",
+  "just": "outside bounded exact calculus rules"
+ },
+ {
+  "id": "h7-typed-067",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "symbolic"
+  ],
+  "why": "Double-angle identity 2 sin x cos x = sin 2x.",
+  "just": "step 1: no bounded exact strategy proved or refuted this transformation"
+ },
+ {
+  "id": "h7-typed-073",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "single-route",
+  "routes": "base:missing-assumption:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "linear-algebra"
+  ],
+  "why": "det=1, so the inverse is [[3,-1],[-5,2]].",
+  "just": "step 1: inverse method requires invertibility"
+ },
+ {
+  "id": "h7-typed-076",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "single-route",
+  "routes": "base:missing-assumption:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "probability"
+  ],
+  "why": "C(7,2)=21.",
+  "just": "required assumptions were not established"
+ },
+ {
+  "id": "h7-typed-077",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "missing-assumption",
+  "rule": "single-route",
+  "routes": "base:missing-assumption:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "probability"
+  ],
+  "why": "42 = P(7,2) ordered count; C(7,2)=21.",
+  "just": "required assumptions were not established"
+ },
+ {
+  "id": "h7-typed-087",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "geometry"
+  ],
+  "why": "180-50-60=70.",
+  "just": "geometry transport failed safely"
+ },
+ {
+  "id": "h7-typed-088",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "geometry",
+   "wrong-rule-label"
+  ],
+  "why": "C=70 is correct but vertical angles do not justify it; the triangle angle sum does.",
+  "just": "geometry transport failed safely"
+ },
+ {
+  "id": "h7-typed-089",
+  "cat": "typed-routes",
+  "exp": "incomplete",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "incomplete",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "geometry"
+  ],
+  "why": "Restating the given angle A=50 does not determine C.",
+  "just": "geometry transport failed safely"
+ },
+ {
+  "id": "h7-typed-090",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "typed",
+   "geometry"
+  ],
+  "why": "180-50-60=70, not 80.",
+  "just": "geometry transport failed safely"
+ },
+ {
+  "id": "h7-typed-091",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "unsupported",
+  "rule": "single-route",
+  "routes": "base:unsupported:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "text-lines",
+   "conditional"
+  ],
+  "why": "Splitting on x=0 and x≠0 gives solutions 0 and 4.",
+  "just": "unsupported character ':' at 10"
+ },
+ {
+  "id": "h7-typed-092",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "text-lines",
+   "conditional"
+  ],
+  "why": "Both branches are consistent with their conditions; solutions 3 and -1.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-typed-095",
+  "cat": "typed-routes",
+  "exp": "verified",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "verified",
+  "auditNote": "",
+  "tags": [
+   "text-lines",
+   "side-claim"
+  ],
+  "why": "x=7 is correct and the extra line 3+4=7 is a harmless true remark.",
+  "just": "unexpected trailing notation"
+ },
+ {
+  "id": "h7-typed-096",
+  "cat": "typed-routes",
+  "exp": "invalid",
+  "alt": [],
+  "final": "malformed",
+  "rule": "single-route",
+  "routes": "base:malformed:agrees",
+  "audit": "invalid",
+  "auditNote": "",
+  "tags": [
+   "text-lines",
+   "side-claim"
+  ],
+  "why": "x=7 is right but the extra line 7*7=48 is false (49).",
+  "just": "unexpected trailing notation"
+ }
+]

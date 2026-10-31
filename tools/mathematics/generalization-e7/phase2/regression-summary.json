@@ -1,0 +1,97 @@
+{
+ "cases": 1725,
+ "exactBaseline": 1439,
+ "exactE7": 1434,
+ "rawFABaseline": [
+  "e5-sealed-007",
+  "e6-204",
+  "e6-251",
+  "e6-263",
+  "r6-194",
+  "r6-220",
+  "s6-182",
+  "s6-217",
+  "s6-226",
+  "s6-238",
+  "s6-299"
+ ],
+ "rawFAE7": [
+  "e5-sealed-007",
+  "e6-204",
+  "e6-251",
+  "e6-263",
+  "r6-194",
+  "r6-220"
+ ],
+ "regressions": [
+  [
+   "e6-147",
+   "incomplete",
+   "unsupported"
+  ],
+  [
+   "e6-270",
+   "verified",
+   "unsupported"
+  ],
+  [
+   "r6-012",
+   "verified",
+   "unsupported"
+  ],
+  [
+   "r6-315",
+   "incomplete",
+   "unsupported"
+  ],
+  [
+   "r6-355",
+   "verified",
+   "malformed"
+  ],
+  [
+   "s6-256",
+   "incomplete",
+   "unsupported"
+  ],
+  [
+   "s6-274",
+   "missing-assumption",
+   "unsupported"
+  ],
+  [
+   "s6-277",
+   "missing-assumption",
+   "unsupported"
+  ],
+  [
+   "s6-308",
+   "incomplete",
+   "unsupported"
+  ],
+  [
+   "s6-315",
+   "verified",
+   "unsupported"
+  ],
+  [
+   "s6-339",
+   "verified",
+   "unsupported"
+  ],
+  [
+   "s6-343",
+   "verified",
+   "unsupported"
+  ]
+ ],
+ "improved": [
+  "r6-051",
+  "r6-265",
+  "r6-285",
+  "s6-182",
+  "s6-217",
+  "s6-226",
+  "s6-299"
+ ]
+}

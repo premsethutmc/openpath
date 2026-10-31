@@ -27,8 +27,10 @@ import {
   foundHard,
   improvingInPractice,
   leafView,
+  PILOT_VERIFICATION,
   planDevelopment,
   scoreCode,
+  verificationClaim,
 } from "../../../../packages/english-core/src/index.ts";
 import { type AppContent, type Code, GUIDED, activityAllowed } from "./content.ts";
 import type { AppEvent, EvidenceTarget } from "./events.ts";
@@ -61,6 +63,14 @@ export interface CapabilityProfile extends CapabilitySnapshot {
    * The plan may sequence on a provisional level; nothing presents it as verified. Recomputed from the record.
    */
   mastery: "verified" | "provisional" | null;
+  /**
+   * verification@2 (one meaning across the app): "verified" needs BOTH educator-approved questions behind the claim AND
+   * the level kept at a later check at least the retention gap after it was shown (standing "confirmed" at the level
+   * shown). `masteryBasis` says which part is there: approved questions, or draft ones.
+   */
+  masteryBasis: "approved" | "draft" | null;
+  /** The level verified (kept at a later check, on approved questions); null unless mastery is "verified". */
+  verifiedLevel: number | null;
   /** Why mastery is provisional (or verified), in words. */
   masteryNote: string | null;
   /**
@@ -333,12 +343,23 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
     const shownLevel = shownNow ? supported!.level : null;
     const shownAndConfirmed = confirmedLevel !== null && confirmedLevel < shownLevel! ? `, at about level ${shownLevel} of 8, and still right at a later check at about level ${confirmedLevel}` : `, at about level ${shownLevel} of 8`;
     const validatedAtLevel = shownNow ? supported!.atLevel.filter((a) => a.validated).length : 0;
-    const mastery = shownNow ? (x.validated >= verifiedNeeds && validatedAtLevel >= MASTERY_GATE.atLevelMin ? "verified" : "provisional") : null;
+    const approvedBasis = shownNow ? x.validated >= verifiedNeeds && validatedAtLevel >= MASTERY_GATE.atLevelMin : false;
+    // verified: approved questions behind the claim, and the level shown kept at a later check (confirmed at that level)
+    // the level verified is the level kept at the later check (it may be below a higher level shown since)
+    // H-V1 (verification@2, one definition for every surface): verified only as the shared core says, under the pilot
+    // eligibility policy: shown, then kept at a delayed check at least the gap later on at least two distinct fresh
+    // questions at that level, counting only answers on educator-approved versions given after their release (H-V2, H-V3)
+    const vc = shownNow ? verificationClaim(c.ctx, s.ledger.composite.learnerId, s.ledger.events, id, now, PILOT_VERIFICATION, v) : null;
+    const verifiedAt = vc?.level != null ? Math.min(vc.level, shownLevel!) : null;
+    const mastery = shownNow ? (verifiedAt !== null ? "verified" : "provisional") : null;
+    const masteryBasis = shownNow ? (approvedBasis ? "approved" : "draft") : null;
     const masteryNote = !shownNow
       ? null
       : mastery === "verified"
-        ? `Verified: ${x.validated} of the independent answers, and ${validatedAtLevel} of the right answers at the level shown, are on educator-approved questions.`
-        : `Provisional: shown on draft questions that an educator has not yet approved (${x.validated} of the ${verifiedNeeds} independent answers, and ${validatedAtLevel} of the ${MASTERY_GATE.atLevelMin} right answers at level, on approved questions are needed for a verified result).`;
+        ? `Verified at about level ${verifiedAt}: shown on educator-approved questions answered after their release, and kept at a later check at least ${policy.mastery_gap_days} days later on at least two different fresh questions at that level.`
+        : approvedBasis
+          ? `Shown on educator-approved questions; verified only after the level is kept at a later check at least ${policy.mastery_gap_days} days after it was shown, on at least two different fresh approved questions at that level, answered after their release.`
+          : `Provisional: shown on draft questions that an educator has not yet approved (${x.validated} of the ${verifiedNeeds} independent answers, and ${validatedAtLevel} of the ${MASTERY_GATE.atLevelMin} right answers at level, on approved questions are needed for a verified result).`;
     const notYetShown = gate && !gate.passed && !shownNow ? `The estimate supports about level ${gate.level}, but it is not called shown yet: ${gate.missing.join(" ")}` : null;
     // shown at a lower level than the estimate: the lower level stands, the higher one is still to be shown
     const higherNotYetShown = shownNow && atEstimate && !atEstimate.passed ? `Shown now at about level ${shownLevel}. The estimate suggests about level ${atEstimate.level}, which is not shown yet: ${atEstimate.missing.join(" ")}` : null;
@@ -346,7 +367,9 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       strengths.push(
         mastery === "verified"
           ? `${standing === "confirmed" && confirmedLevel === shownLevel ? "Shown on their own, and still right at a later check" : "Shown on their own, on fresh questions"}${shownAndConfirmed} (a level shown, not a ceiling: harder questions may still be wrong). Verified on educator-approved questions.`
-          : `Provisionally shown on their own${standing === "confirmed" && confirmedLevel === shownLevel ? ", and still right at a later check" : ", on fresh questions"}${shownAndConfirmed}: on draft questions not yet approved by an educator, so not a verified result.`,
+          : approvedBasis
+            ? `Shown on their own, on fresh educator-approved questions${shownAndConfirmed}: verified once the level is kept at a later check.`
+            : `Provisionally shown on their own${standing === "confirmed" && confirmedLevel === shownLevel ? ", and still right at a later check" : ", on fresh questions"}${shownAndConfirmed}: on draft questions not yet approved by an educator, so not a verified result.`,
       );
     // history, labelled as history: a higher level the gate supported earlier is never presented as current
     if (shownNow && history.highest && history.highest.level > shownLevel!) strengths.push(`Earlier shown at about level ${history.highest.level} (${day(history.highest.at)}): history, not a current result.`);
@@ -408,6 +431,8 @@ export function learnerProfile(s: AppState, c: AppContent, now: string, speech =
       lastAssessedAt: v.lastDirectAt ?? x.lastAt,
       basis: { validated: x.validated, draft: x.draft },
       mastery,
+      masteryBasis,
+      verifiedLevel: verifiedAt,
       masteryNote,
       gate,
       notYetShown,

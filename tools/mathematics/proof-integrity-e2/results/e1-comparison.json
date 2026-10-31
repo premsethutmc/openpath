@@ -1,0 +1,182 @@
+{
+ "all": {
+  "before": {
+   "n": 500,
+   "falseAcceptances": 16,
+   "falseRejections": 110,
+   "exactVerdict": 224,
+   "assessed": 227,
+   "unsupportedInconclusive": 273,
+   "firstInvalid": [
+    33,
+    100
+   ],
+   "restrictionDetected": [
+    0,
+    40
+   ],
+   "alternativeAccepted": [
+    30,
+    75
+   ],
+   "distribution": {
+    "verified": 131,
+    "incomplete": 9,
+    "ambiguous": 44,
+    "invalid": 87,
+    "malformed": 27,
+    "unsupported": 202
+   },
+   "verified": 131
+  },
+  "after": {
+   "n": 500,
+   "falseAcceptances": 3,
+   "falseRejections": 104,
+   "exactVerdict": 278,
+   "assessed": 257,
+   "unsupportedInconclusive": 243,
+   "firstInvalid": [
+    77,
+    100
+   ],
+   "restrictionDetected": [
+    11,
+    40
+   ],
+   "alternativeAccepted": [
+    30,
+    75
+   ],
+   "distribution": {
+    "verified": 124,
+    "incomplete": 56,
+    "ambiguous": 44,
+    "invalid": 77,
+    "malformed": 27,
+    "unsupported": 172
+   },
+   "verified": 124
+  }
+ },
+ "diagnostic": {
+  "before": {
+   "n": 350,
+   "falseAcceptances": 12,
+   "falseRejections": 69,
+   "exactVerdict": 158,
+   "assessed": 162,
+   "unsupportedInconclusive": 188,
+   "firstInvalid": [
+    24,
+    71
+   ],
+   "restrictionDetected": [
+    0,
+    32
+   ],
+   "alternativeAccepted": [
+    22,
+    55
+   ],
+   "distribution": {
+    "verified": 91,
+    "incomplete": 8,
+    "ambiguous": 27,
+    "invalid": 63,
+    "malformed": 21,
+    "unsupported": 140
+   },
+   "verified": 91
+  },
+  "after": {
+   "n": 350,
+   "falseAcceptances": 1,
+   "falseRejections": 66,
+   "exactVerdict": 198,
+   "assessed": 182,
+   "unsupportedInconclusive": 168,
+   "firstInvalid": [
+    55,
+    71
+   ],
+   "restrictionDetected": [
+    9,
+    32
+   ],
+   "alternativeAccepted": [
+    22,
+    55
+   ],
+   "distribution": {
+    "verified": 83,
+    "incomplete": 44,
+    "ambiguous": 27,
+    "invalid": 55,
+    "malformed": 21,
+    "unsupported": 120
+   },
+   "verified": 83
+  }
+ },
+ "sealed-holdout": {
+  "before": {
+   "n": 150,
+   "falseAcceptances": 4,
+   "falseRejections": 41,
+   "exactVerdict": 66,
+   "assessed": 65,
+   "unsupportedInconclusive": 85,
+   "firstInvalid": [
+    9,
+    29
+   ],
+   "restrictionDetected": [
+    0,
+    8
+   ],
+   "alternativeAccepted": [
+    8,
+    20
+   ],
+   "distribution": {
+    "verified": 40,
+    "ambiguous": 17,
+    "invalid": 24,
+    "malformed": 6,
+    "incomplete": 1,
+    "unsupported": 62
+   },
+   "verified": 40
+  },
+  "after": {
+   "n": 150,
+   "falseAcceptances": 2,
+   "falseRejections": 38,
+   "exactVerdict": 80,
+   "assessed": 75,
+   "unsupportedInconclusive": 75,
+   "firstInvalid": [
+    22,
+    29
+   ],
+   "restrictionDetected": [
+    2,
+    8
+   ],
+   "alternativeAccepted": [
+    8,
+    20
+   ],
+   "distribution": {
+    "verified": 41,
+    "ambiguous": 17,
+    "invalid": 22,
+    "incomplete": 12,
+    "malformed": 6,
+    "unsupported": 52
+   },
+   "verified": 41
+  }
+ }
+}

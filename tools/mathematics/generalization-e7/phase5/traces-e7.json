@@ -1,0 +1,225 @@
+[
+ {
+  "kind": "unjustified-step",
+  "name": "Vieta product: product of roots = 10/4 = 5/2",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@1:unresolved",
+   "grounding@1:unresolved",
+   "answer@1:unresolved"
+  ]
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "mean: mean = 20/4 = 5",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@1:unresolved",
+   "grounding@1:unresolved",
+   "answer@1:unresolved"
+  ]
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "mean: mean = (9+9+7)/5 = 5",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@1:unresolved",
+   "grounding@1:unresolved",
+   "answer@1:unresolved"
+  ]
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "binomial mean from unrelated numbers",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@1:unresolved",
+   "grounding@1:unresolved",
+   "answer@1:unresolved"
+  ]
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "Vieta sum through roots that are not the task's",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@1:proven",
+   "derivation@2:proven",
+   "derivation@3:unresolved",
+   "grounding@3:unresolved",
+   "answer@3:unresolved"
+  ]
+ },
+ {
+  "kind": "unjustified-step",
+  "name": "algebra: right final value after a wrong step",
+  "classification": "invalid",
+  "obligations": [
+   "derivation@1:disproven",
+   "derivation@2:unresolved",
+   "answer@2:disproven"
+  ]
+ },
+ {
+  "kind": "irrelevant",
+  "name": "Vieta product: 10/4 = 5/2",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@1:unresolved",
+   "grounding@1:unresolved",
+   "answer@1:unresolved"
+  ]
+ },
+ {
+  "kind": "irrelevant",
+  "name": "mean: 20/4 = 5",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@1:unresolved",
+   "grounding@1:unresolved",
+   "answer@1:unresolved"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: c/a",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "grounding@1:proven",
+   "answer@1:proven"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: through the roots",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "derivation@2:proven",
+   "derivation@3:proven",
+   "grounding@3:proven",
+   "answer@3:proven"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta sum: through the roots",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "derivation@2:proven",
+   "derivation@3:proven",
+   "grounding@3:proven",
+   "answer@3:proven"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "mean: via a sum",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "grounding@1:proven",
+   "derivation@2:proven",
+   "grounding@2:proven",
+   "answer@2:proven"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "binomial mean: complement form",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "grounding@1:proven",
+   "answer@1:proven"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "quadratic roots with the discriminant",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "grounding@1:proven",
+   "derivation@2:proven",
+   "grounding@2:proven",
+   "derivation@3:proven",
+   "grounding@3:proven",
+   "answer@3:proven"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "algebra: concise answer",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "answer@1:proven"
+  ]
+ },
+ {
+  "kind": "alternative",
+  "name": "algebra: factor then solve",
+  "classification": "verified",
+  "obligations": [
+   "derivation@1:proven",
+   "derivation@2:proven",
+   "derivation@2:proven",
+   "answer@2:proven"
+  ]
+ },
+ {
+  "kind": "conditional",
+  "name": "derivation under a disclosed assumption",
+  "classification": "verified",
+  "obligations": [
+   "domain@1:proven",
+   "derivation@2:proven(cond)",
+   "answer@2:proven(cond)"
+  ]
+ },
+ {
+  "kind": "conditional",
+  "name": "the same, claimed for the whole domain",
+  "classification": "incomplete",
+  "obligations": [
+   "domain@1:proven",
+   "derivation@2:proven(cond)",
+   "derivation@3:unresolved(cond)",
+   "domain@3:unresolved",
+   "answer@3:unresolved(cond)"
+  ]
+ },
+ {
+  "kind": "conditional",
+  "name": "narrowing one of two task branches",
+  "classification": "unsupported",
+  "obligations": [
+   "domain@1:unresolved",
+   "derivation@2:proven",
+   "answer@2:proven"
+  ]
+ },
+ {
+  "kind": "missing-premise",
+  "name": "undefined symbol",
+  "classification": "unsupported",
+  "obligations": [
+   "derivation@1:unsupported",
+   "answer@1:unresolved"
+  ]
+ },
+ {
+  "kind": "missing-premise",
+  "name": "scenario quantities only in the working",
+  "classification": "incomplete",
+  "obligations": [
+   "derivation@2:unresolved",
+   "grounding@2:unresolved",
+   "answer@2:unresolved"
+  ]
+ }
+]

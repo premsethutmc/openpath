@@ -1,0 +1,10957 @@
+[
+ {
+  "id": "e000",
+  "text": "4/(2*x+5)=9",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-41/18"
+  ],
+  "excluded": [
+   "-5/2"
+  ],
+  "candidates": [
+   "-41/18"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e001",
+  "text": "3*(-1/(x)+2/(x-2))=3*((x+2)/((x)*(x-2)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "0",
+   "2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "0",
+   "2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e002",
+  "text": "-4/(x+2)-2/(x-9)+2=-7/((x+2)*(x-9))+2",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "13/2"
+  ],
+  "excluded": [
+   "-2",
+   "9"
+  ],
+  "candidates": [
+   "13/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e003",
+  "text": "-1/(x-1)+-3/(x-5)=(-4*x+8)/((x-1)*(x-5))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "1",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "1",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e004",
+  "text": "3/(x-3)+2/(x+6)=17/((x-3)*(x+6))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "excluded": [
+   "-6",
+   "3"
+  ],
+  "candidates": [
+   "1"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e005",
+  "text": "-4/(x+3)+-2/(x-1)=-5/((x^2+2*x-3))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "1/2"
+  ],
+  "excluded": [
+   "-3",
+   "1"
+  ],
+  "candidates": [
+   "1/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e006",
+  "text": "5*(-2/(x+4))=5*(-3/(x+4)+2)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-7/2"
+  ],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-7/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e007",
+  "text": "1/(x+6)+-1/(x+1)+1=(0*x-5)/((x+6)*(x+1))+1",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "-1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "-1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e008",
+  "text": "(-x-5)/(x+4)=(-x+6)/(x-2)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-14/5"
+  ],
+  "excluded": [
+   "-4",
+   "2"
+  ],
+  "candidates": [
+   "-14/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e009",
+  "text": "-6/(x+6)-6/(x+4)-2=12/((x^2+10*x+24))-2",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "-4"
+  ],
+  "candidates": [
+   "-6"
+  ],
+  "rejected": [
+   "-6"
+  ],
+  "removable": [
+   "-6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e010",
+  "text": "3/(x-6)+-3/(x+8)=20/((x-6)*(x+8))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-8",
+   "6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e011",
+  "text": "1/(x+4)+-5/(x)=(-4*x-20)/((x+4)*(x))+1",
+  "recipe": "r_ident",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "0"
+  ],
+  "candidates": [
+   "-4",
+   "0"
+  ],
+  "rejected": [
+   "-4",
+   "0"
+  ],
+  "removable": [
+   "-4",
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e012",
+  "text": "2*(1/(x+8)+2/(x+2))=2*((3*x+18)/((x+8)*(x+2)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "-2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "-2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e013",
+  "text": "1/(x-1)-4/(x-4)=-12/((x-1)*(x-4))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1",
+   "4"
+  ],
+  "candidates": [
+   "4"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e014",
+  "text": "8=-2/(x-9)+8",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e015",
+  "text": "x^2/(x)=10",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "10"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "0",
+   "10"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e016",
+  "text": "(x-7)/(x+9)=(x+7)/(x-3)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-21/13"
+  ],
+  "excluded": [
+   "-9",
+   "3"
+  ],
+  "candidates": [
+   "-21/13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e017",
+  "text": "-5/(x+1)+4/(x-2)=(-1*x+14)/((x+1)*(x-2))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e018",
+  "text": "-4=x-3+(x^2-9)/(x+3)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "excluded": [
+   "-3"
+  ],
+  "candidates": [
+   "-3",
+   "1"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e019",
+  "text": "-2/(x+1)-4/(x-6)-4/(x-7)=3/(x+1)-4/(x-6)-9/(x-7)",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "6",
+   "7"
+  ],
+  "candidates": [
+   "6"
+  ],
+  "rejected": [
+   "6"
+  ],
+  "removable": [
+   "6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e020",
+  "text": "(2*x-9)/(x-8)=(2*x)/(x+7)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "-7",
+   "8"
+  ],
+  "candidates": [
+   "3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e021",
+  "text": "(-8*x+47)/((x-9)*(x-4))+1=-5/(x-9)+-3/(x-4)",
+  "recipe": "r_ident",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "4",
+   "9"
+  ],
+  "candidates": [
+   "4",
+   "9"
+  ],
+  "rejected": [
+   "4",
+   "9"
+  ],
+  "removable": [
+   "4",
+   "9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e022",
+  "text": "5*(6/(x-7)+4/(x-9))=5*(9/((x^2-16*x+63)))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "91/10"
+  ],
+  "excluded": [
+   "7",
+   "9"
+  ],
+  "candidates": [
+   "91/10"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e023",
+  "text": "3*(-3/(x+4)+4/(x+8))=3*((x-8)/((x+4)*(x+8)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "-4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "-4"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e024",
+  "text": "4/(x)+6/(x-1)+1=-1/((x)*(x-1))+1",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "3/10"
+  ],
+  "excluded": [
+   "0",
+   "1"
+  ],
+  "candidates": [
+   "3/10"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e025",
+  "text": "(x+9)/(x+8)=(x-0)/(x+2)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-6"
+  ],
+  "excluded": [
+   "-8",
+   "-2"
+  ],
+  "candidates": [
+   "-6"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e026",
+  "text": "3*((x+5)/(x-7))=3*((x+3)/(x+3))",
+  "recipe": "r_cross_ex",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-3",
+   "7"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e027",
+  "text": "5=-2/(x-5)+8",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "17/3"
+  ],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [
+   "17/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e028",
+  "text": "4/(x-1)-1=-1",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e029",
+  "text": "3*(5/(x+5)-3/(x-7)+3/(x+4))=3*(-5/(x+5)+3/(x-7)+7/(x+4))",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-65/19"
+  ],
+  "excluded": [
+   "-5",
+   "-4",
+   "7"
+  ],
+  "candidates": [
+   "-65/19"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e030",
+  "text": "2/(x+6)-2/(x-2)-1/(x+7)=4/(x+6)+5/(x-2)-10/(x+7)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-374/65"
+  ],
+  "excluded": [
+   "-7",
+   "-6",
+   "2"
+  ],
+  "candidates": [
+   "-374/65"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e031",
+  "text": "4/(x-2)-3/(x)+3/(x+4)=1/(x-2)+4/(x)-1/(x+4)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "28/5"
+  ],
+  "excluded": [
+   "-4",
+   "0",
+   "2"
+  ],
+  "candidates": [
+   "28/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e032",
+  "text": "-2/(x-3)+-2/(x+5)=(-4*x-4)/((x-3)*(x+5))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-5",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-5",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e033",
+  "text": "1/(x-9)+-2/(x+1)=(-1*x+19)/((x-9)*(x+1))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e034",
+  "text": "-5/(x+7)+-4/(x-1)=40/((x+7)*(x-1))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7",
+   "1"
+  ],
+  "candidates": [
+   "-7"
+  ],
+  "rejected": [
+   "-7"
+  ],
+  "removable": [
+   "-7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e035",
+  "text": "(x^2-9)/(x+3)=-5",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-2"
+  ],
+  "excluded": [
+   "-3"
+  ],
+  "candidates": [
+   "-3",
+   "-2"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e036",
+  "text": "4/(x+5)+4/(x-4)+4=(8*x+4)/((x+5)*(x-4))+4",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-5",
+   "4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-5",
+   "4"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e037",
+  "text": "4/(x+1)--3/(x-7)-2=-13/((x^2-6*x-7))-2",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "12/7"
+  ],
+  "excluded": [
+   "-1",
+   "7"
+  ],
+  "candidates": [
+   "12/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e038",
+  "text": "-1/(x-5)+2=4/(x-5)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "15/2"
+  ],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [
+   "15/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e039",
+  "text": "-3/(x-2)+4/(x+8)=-30/((x-2)*(x+8))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-8",
+   "2"
+  ],
+  "candidates": [
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e040",
+  "text": "3*(3/(x+8)+-2/(x-2))=3*((x-22)/((x+8)*(x-2)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e041",
+  "text": "-2/(x+7)+-4/(x-5)-2=(-6*x-18)/((x+7)*(x-5))-2",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-7",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-7",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e042",
+  "text": "-2/(x)-3/(x-7)=11/((x)*(x-7))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "3/5"
+  ],
+  "excluded": [
+   "0",
+   "7"
+  ],
+  "candidates": [
+   "3/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e043",
+  "text": "2*(x+5+(x^2-1)/(x-1))=2*(5)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-1/2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "-1/2",
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e044",
+  "text": "6/(x+4)-4=-8",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-11/2"
+  ],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-11/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e045",
+  "text": "2*((-x-5)/(x-7))=2*((-x+5)/(x+4))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "5/7"
+  ],
+  "excluded": [
+   "-4",
+   "7"
+  ],
+  "candidates": [
+   "5/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e046",
+  "text": "(x+1)/(x-4)=(x-2)/(x+5)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "1/4"
+  ],
+  "excluded": [
+   "-5",
+   "4"
+  ],
+  "candidates": [
+   "1/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e047",
+  "text": "x+-6/(x-5)+1=(x^2-5*x-6)/(x-5)+1",
+  "recipe": "r_poly_rat",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e048",
+  "text": "(x^2-5*x-36)/(x+4)=-6",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-4",
+   "3"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e049",
+  "text": "-5/(x+1)-3/(x-2)=9/((x^2-x-2))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-1/4"
+  ],
+  "excluded": [
+   "-1",
+   "2"
+  ],
+  "candidates": [
+   "-1/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e050",
+  "text": "-3=-6/(x-3)-4",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-3"
+  ],
+  "excluded": [
+   "3"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e051",
+  "text": "(x+5)/(x-9)=(x+4)/(x+8)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-38/9"
+  ],
+  "excluded": [
+   "-8",
+   "9"
+  ],
+  "candidates": [
+   "-38/9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e052",
+  "text": "(x^2-15*x+56)/(x-8)-2=-7-2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "8"
+  ],
+  "candidates": [
+   "0",
+   "8"
+  ],
+  "rejected": [
+   "8"
+  ],
+  "removable": [
+   "8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e053",
+  "text": "4/(x+2)+-1/(x+1)-2=(3*x+2)/((x+2)*(x+1))-1-2",
+  "recipe": "r_ident",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "-1"
+  ],
+  "candidates": [
+   "-2",
+   "-1"
+  ],
+  "rejected": [
+   "-2",
+   "-1"
+  ],
+  "removable": [
+   "-2",
+   "-1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e054",
+  "text": "3*(-1/(x-4)+5/(x+7))=3*((4*x-27)/((x-4)*(x+7)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-7",
+   "4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-7",
+   "4"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e055",
+  "text": "x+4/(x+4)=(x^2+4*x+4)/(x+4)+3",
+  "recipe": "r_poly_rat",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-4"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e056",
+  "text": "-1/(x-7)+-4/(x)=(-5*x+28)/((x-7)*(x))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "0",
+   "7"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "0",
+   "7"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e057",
+  "text": "(x-2)/(x+6)=(x+5)/(x-9)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-6/11"
+  ],
+  "excluded": [
+   "-6",
+   "9"
+  ],
+  "candidates": [
+   "-6/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e058",
+  "text": "(x^2-9)/(x-3)=9",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "6"
+  ],
+  "excluded": [
+   "3"
+  ],
+  "candidates": [
+   "3",
+   "6"
+  ],
+  "rejected": [
+   "3"
+  ],
+  "removable": [
+   "3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e059",
+  "text": "5/(x+8)=-3/(x+8)-0",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e060",
+  "text": "-4/(x+7)-1/(x+6)+4/(x)=3/(x+7)+4/(x+6)-8/(x)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-504/79"
+  ],
+  "excluded": [
+   "-7",
+   "-6",
+   "0"
+  ],
+  "candidates": [
+   "-504/79"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e061",
+  "text": "(x+4)*(x+5)/(x+4)+-1/(x+8)-3=-1/(x+8)-3",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-5"
+  ],
+  "excluded": [
+   "-8",
+   "-4"
+  ],
+  "candidates": [
+   "-8",
+   "-5",
+   "-4"
+  ],
+  "rejected": [
+   "-8",
+   "-4"
+  ],
+  "removable": [
+   "-8",
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e062",
+  "text": "1/(x+5)-1/(x-2)-1/(x)-1=-2/(x+5)-1/(x-2)+2/(x)-1",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "0",
+   "2"
+  ],
+  "candidates": [
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e063",
+  "text": "-6/(x+4)-2/(x-7)=-6/((x^2-3*x-28))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "5"
+  ],
+  "excluded": [
+   "-4",
+   "7"
+  ],
+  "candidates": [
+   "5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e064",
+  "text": "(x+2)/(x+7)=3",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-19/2"
+  ],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-19/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e065",
+  "text": "-4/(x+7)+1=1/(x+7)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-2"
+  ],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e066",
+  "text": "(x^2-81)/(x-9)+2=-7+2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-16"
+  ],
+  "excluded": [
+   "9"
+  ],
+  "candidates": [
+   "-16",
+   "9"
+  ],
+  "rejected": [
+   "9"
+  ],
+  "removable": [
+   "9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e067",
+  "text": "-3/(x-2)-5/(x+5)-5/(x+4)=-5/(x-2)+3/(x+5)-11/(x+4)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-11/5"
+  ],
+  "excluded": [
+   "-5",
+   "-4",
+   "2"
+  ],
+  "candidates": [
+   "-11/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e068",
+  "text": "-3/(x+1)=-2/(x+1)-2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-1/2"
+  ],
+  "excluded": [
+   "-1"
+  ],
+  "candidates": [
+   "-1/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e069",
+  "text": "(x-9)/(x-6)=(2*x)/(2*x+4)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-18"
+  ],
+  "excluded": [
+   "-2",
+   "6"
+  ],
+  "candidates": [
+   "-18"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e070",
+  "text": "-65/((x^2-3*x-40))=2/(x+5)+-5/(x-8)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "8"
+  ],
+  "candidates": [
+   "8"
+  ],
+  "rejected": [
+   "8"
+  ],
+  "removable": [
+   "8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e071",
+  "text": "5*((x^2-3*x-40)/(x+5))=5*(7)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "15"
+  ],
+  "excluded": [
+   "-5"
+  ],
+  "candidates": [
+   "-5",
+   "15"
+  ],
+  "rejected": [
+   "-5"
+  ],
+  "removable": [
+   "-5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e072",
+  "text": "(6*x+24)/(x+4)=8",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-4"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e073",
+  "text": "2*(x+3+(x^2-49)/(x-7))=2*(1)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-9/2"
+  ],
+  "excluded": [
+   "7"
+  ],
+  "candidates": [
+   "-9/2",
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e074",
+  "text": "-1/(2*x+2)-2=9-2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-19/18"
+  ],
+  "excluded": [
+   "-1"
+  ],
+  "candidates": [
+   "-19/18"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e075",
+  "text": "(2*x)/x+1=-1+1",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e076",
+  "text": "7/(2*x+4)=6",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-17/12"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-17/12"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e077",
+  "text": "2/(x-1)+2/(x+5)+5/(x-4)=-5/(x-1)+3/(x+5)+11/(x-4)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-19/2"
+  ],
+  "excluded": [
+   "-5",
+   "1",
+   "4"
+  ],
+  "candidates": [
+   "-19/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e078",
+  "text": "3*(x+4+(x^2-9)/(x+3))=3*(-11)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-6"
+  ],
+  "excluded": [
+   "-3"
+  ],
+  "candidates": [
+   "-6",
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e079",
+  "text": "15/((x^2+5*x))=3/(x)+1/(x+5)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e080",
+  "text": "1/(x+7)+-1/(x+1)=(0*x-6)/((x+7)*(x+1))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-7",
+   "-1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-7",
+   "-1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e081",
+  "text": "3*(5/(x+3)--3/(x))=3*(-11/((x^2+3*x)))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-5/2"
+  ],
+  "excluded": [
+   "-3",
+   "0"
+  ],
+  "candidates": [
+   "-5/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e082",
+  "text": "-1/(x-9)+4=5/(x-9)+1+4",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "9"
+  ],
+  "candidates": [
+   "3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e083",
+  "text": "(x-1)/(x-4)+1=-6+1",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "25/7"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "25/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e084",
+  "text": "(0*x-2)/((x-3)*(x-5))=1/(x-3)+-1/(x-5)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "3",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "3",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e085",
+  "text": "(x+7)/(x+9)=(x-0)/(x-6)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-21/4"
+  ],
+  "excluded": [
+   "-9",
+   "6"
+  ],
+  "candidates": [
+   "-21/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e086",
+  "text": "3/(x+7)+5/(x-8)-2=-15/((x+7)*(x-8))-2",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-13/4"
+  ],
+  "excluded": [
+   "-7",
+   "8"
+  ],
+  "candidates": [
+   "-13/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e087",
+  "text": "x+3+(x^2-49)/(x+7)-1=-7-1",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-3/2"
+  ],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-7",
+   "-3/2"
+  ],
+  "rejected": [
+   "-7"
+  ],
+  "removable": [
+   "-7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e088",
+  "text": "-2/(x-4)-4/(x+1)+3/(x-1)-1=1/(x-4)+2/(x+1)-6/(x-1)-1",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "19"
+  ],
+  "excluded": [
+   "-1",
+   "1",
+   "4"
+  ],
+  "candidates": [
+   "19"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e089",
+  "text": "2*(-1/(x-1)-1/(x-8))=2*(7/((x-1)*(x-8)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1",
+   "8"
+  ],
+  "candidates": [
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e090",
+  "text": "(x+7)/(x+1)=(x+6)/(x-1)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-13"
+  ],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "candidates": [
+   "-13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e091",
+  "text": "(x-2)/(x)=(x+8)/(x+4)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-4/3"
+  ],
+  "excluded": [
+   "-4",
+   "0"
+  ],
+  "candidates": [
+   "-4/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e092",
+  "text": "(x-5)/(x-2)=(x+1)/(x-7)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "37/11"
+  ],
+  "excluded": [
+   "2",
+   "7"
+  ],
+  "candidates": [
+   "37/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e093",
+  "text": "(x+4)/(x)=(x-4)/(x-8)",
+  "recipe": "r_cross_ex",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0",
+   "8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e094",
+  "text": "5*(-4/(x-5)+4/(x-1))=5*(-5/((x-5)*(x-1)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e095",
+  "text": "5*(-2/(x+2)+-1/(x-5))=5*((-3*x+8)/((x+2)*(x-5)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-2",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-2",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e096",
+  "text": "(x^2+2*x-35)/(x-5)-3=-3-3",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-10"
+  ],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [
+   "-10",
+   "5"
+  ],
+  "rejected": [
+   "5"
+  ],
+  "removable": [
+   "5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e097",
+  "text": "5/(x+2)+4/(x-5)=(9*x-17)/((x+2)*(x-5))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-2",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-2",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e098",
+  "text": "5/(x-5)+-1/(x+3)-3=(4*x+20)/((x-5)*(x+3))-3",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-3",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-3",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e099",
+  "text": "(x^2-81)/(x+9)=11",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "20"
+  ],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-9",
+   "20"
+  ],
+  "rejected": [
+   "-9"
+  ],
+  "removable": [
+   "-9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e100",
+  "text": "2*((4*x+7)/(2*x+1))=2*((2*x-7)/(x-1))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "-1/2",
+   "1"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e101",
+  "text": "(2*x-4)/(x-3)=(2*x-4)/(x-2)",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "2",
+   "3"
+  ],
+  "candidates": [
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e102",
+  "text": "4/(x+8)+-5/(x-9)=(-1*x-76)/((x+8)*(x-9))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e103",
+  "text": "-4=(x^2+10*x+9)/(x+1)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-13"
+  ],
+  "excluded": [
+   "-1"
+  ],
+  "candidates": [
+   "-13",
+   "-1"
+  ],
+  "rejected": [
+   "-1"
+  ],
+  "removable": [
+   "-1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e104",
+  "text": "-2/(x-7)-2=3/(x-7)-0-2",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "7"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e105",
+  "text": "-6/(x-3)-2/(x+5)-2=10/((x^2+2*x-15))-2",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-17/4"
+  ],
+  "excluded": [
+   "-5",
+   "3"
+  ],
+  "candidates": [
+   "-17/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e106",
+  "text": "5*(x+5+(x^2-25)/(x+5))=5*(-10)",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5"
+  ],
+  "candidates": [
+   "-5"
+  ],
+  "rejected": [
+   "-5"
+  ],
+  "removable": [
+   "-5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e107",
+  "text": "5*(-4/(x+1)--2/(x-6))=5*(9/((x+1)*(x-6)))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "17/2"
+  ],
+  "excluded": [
+   "-1",
+   "6"
+  ],
+  "candidates": [
+   "17/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e108",
+  "text": "3/(x+5)-2/(x+3)+5/(x+4)=1/(x+5)+1/(x+3)+4/(x+4)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-21/5"
+  ],
+  "excluded": [
+   "-5",
+   "-4",
+   "-3"
+  ],
+  "candidates": [
+   "-21/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e109",
+  "text": "6/(x+1)+2-1=2-1",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e110",
+  "text": "1/(x+1)+-1/(x-7)-3=(0*x-8)/((x+1)*(x-7))-3",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "7"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "7"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e111",
+  "text": "-4/(x+2)+6/(x+9)=-11/((x+2)*(x+9))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "13/2"
+  ],
+  "excluded": [
+   "-9",
+   "-2"
+  ],
+  "candidates": [
+   "13/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e112",
+  "text": "-5/(x+2)+6=-8",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-23/14"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-23/14"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e113",
+  "text": "(2*x+6)/(x+3)+1=-9+1",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-3"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e114",
+  "text": "2*(2/(x-9)+-3/(x-6))=2*((-1*x+15)/((x-9)*(x-6)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "6",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "6",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e115",
+  "text": "3/(x+3)+-2/(x+4)+2=2/((x^2+7*x+12))+2",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "-3"
+  ],
+  "candidates": [
+   "-4"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e116",
+  "text": "-7=-4/(x-3)+1",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "7/2"
+  ],
+  "excluded": [
+   "3"
+  ],
+  "candidates": [
+   "7/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e117",
+  "text": "(x-9)*(x+8)/(x-9)+-2/(x-12)=-2/(x-12)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-8"
+  ],
+  "excluded": [
+   "9",
+   "12"
+  ],
+  "candidates": [
+   "-8",
+   "9",
+   "12"
+  ],
+  "rejected": [
+   "9",
+   "12"
+  ],
+  "removable": [
+   "9",
+   "12"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e118",
+  "text": "3*(-6/(x-8)-4/(x+6))=3*(9/((x^2-2*x-48)))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-13/10"
+  ],
+  "excluded": [
+   "-6",
+   "8"
+  ],
+  "candidates": [
+   "-13/10"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e119",
+  "text": "(2*x-4)/(2*x+9)=(2*x)/(2*x-2)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "4/15"
+  ],
+  "excluded": [
+   "-9/2",
+   "1"
+  ],
+  "candidates": [
+   "4/15"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e120",
+  "text": "2*(-3/(x+6)+4/(x+5))=2*((x+9)/((x+6)*(x+5))-1)",
+  "recipe": "r_ident",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "-5"
+  ],
+  "candidates": [
+   "-6",
+   "-5"
+  ],
+  "rejected": [
+   "-6",
+   "-5"
+  ],
+  "removable": [
+   "-6",
+   "-5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e121",
+  "text": "-5/(x+6)+2/(x+4)-4/(x+2)=2/(x+6)+1/(x+4)-10/(x+2)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-50/13"
+  ],
+  "excluded": [
+   "-6",
+   "-4",
+   "-2"
+  ],
+  "candidates": [
+   "-50/13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e122",
+  "text": "-3/(x-6)-2/(x+2)-1/(x+5)=-2/(x-6)-5/(x+2)+1/(x+5)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-38"
+  ],
+  "excluded": [
+   "-5",
+   "-2",
+   "6"
+  ],
+  "candidates": [
+   "-38"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e123",
+  "text": "5*((x^2-81)/(x+9))=5*(-8)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-9",
+   "1"
+  ],
+  "rejected": [
+   "-9"
+  ],
+  "removable": [
+   "-9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e124",
+  "text": "x-3+(x^2-1)/(x-1)=11",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "13/2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "1",
+   "13/2"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e125",
+  "text": "5/(x+5)-3/(x+7)+3/(x+4)=4/(x+5)-4/(x+7)+5/(x+4)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-11/2"
+  ],
+  "excluded": [
+   "-7",
+   "-5",
+   "-4"
+  ],
+  "candidates": [
+   "-11/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e126",
+  "text": "(x+1)/(x+4)=(2*x+8)/(2*x+1)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-31/13"
+  ],
+  "excluded": [
+   "-4",
+   "-1/2"
+  ],
+  "candidates": [
+   "-31/13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e127",
+  "text": "(-5*x-19)/((x+6)*(x-5))-2=-1/(x+6)+-4/(x-5)",
+  "recipe": "r_ident",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "5"
+  ],
+  "candidates": [
+   "-6",
+   "5"
+  ],
+  "rejected": [
+   "-6",
+   "5"
+  ],
+  "removable": [
+   "-6",
+   "5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e128",
+  "text": "3*((x+4)/(x-8))=3*((x+7)/(x-7))",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "14"
+  ],
+  "excluded": [
+   "7",
+   "8"
+  ],
+  "candidates": [
+   "14"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e129",
+  "text": "(x-7)/(x+5)=(x+2)/(x-3)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "11/17"
+  ],
+  "excluded": [
+   "-5",
+   "3"
+  ],
+  "candidates": [
+   "11/17"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e130",
+  "text": "4/(x-5)+3/(x+4)=36/((x^2-x-20))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "5"
+  ],
+  "candidates": [
+   "5"
+  ],
+  "rejected": [
+   "5"
+  ],
+  "removable": [
+   "5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e131",
+  "text": "-4=(x^2+10*x+21)/(x+7)",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-7"
+  ],
+  "rejected": [
+   "-7"
+  ],
+  "removable": [
+   "-7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e132",
+  "text": "2*(-3/(x-2)+-1/(x-3))=2*((-4*x+11)/((x-2)*(x-3)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "2",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "2",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e133",
+  "text": "3*((-2*x+5)/(2*x+2))=3*((-2*x-7)/(2*x+7))",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7/2",
+   "-1"
+  ],
+  "candidates": [
+   "-7/2"
+  ],
+  "rejected": [
+   "-7/2"
+  ],
+  "removable": [
+   "-7/2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e134",
+  "text": "5/(x-9)+3/(x+9)=(8*x+18)/((x-9)*(x+9))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-9",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-9",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e135",
+  "text": "-3/(x+9)+5/(x+1)-2=(2*x+42)/((x+9)*(x+1))-2",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-9",
+   "-1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-9",
+   "-1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e136",
+  "text": "5*(-5/(x-7)+-3/(x-5))=5*((-8*x+46)/((x-7)*(x-5)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "5",
+   "7"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "5",
+   "7"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e137",
+  "text": "2*(-4/(x-4)+-5/(x+8))=2*((-9*x-12)/((x-4)*(x+8)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "4"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e138",
+  "text": "3*(1/(x+8)+-5/(x+6))=3*((-4*x-34)/((x+8)*(x+6)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "-6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "-6"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e139",
+  "text": "-5/(x+3)+4/(x+5)+10/(x-5)=2/(x+3)+4/(x+5)+3/(x-5)",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "-3",
+   "5"
+  ],
+  "candidates": [
+   "-5"
+  ],
+  "rejected": [
+   "-5"
+  ],
+  "removable": [
+   "-5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e140",
+  "text": "(-2*x-9)/(2*x-7)=(-x-4)/(x-9)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-53/10"
+  ],
+  "excluded": [
+   "7/2",
+   "9"
+  ],
+  "candidates": [
+   "-53/10"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e141",
+  "text": "2*(x+7/(x-8))=2*((x^2-8*x+7)/(x-8)+1)",
+  "recipe": "r_poly_rat",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "8"
+  ],
+  "candidates": [
+   "8"
+  ],
+  "rejected": [
+   "8"
+  ],
+  "removable": [
+   "8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e142",
+  "text": "(x+3)/(x+2)=(x-7)/(x+3)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-23/11"
+  ],
+  "excluded": [
+   "-3",
+   "-2"
+  ],
+  "candidates": [
+   "-23/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e143",
+  "text": "-2/(x-6)+-4/(x+1)=(-6*x+22)/((x-6)*(x+1))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "6"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e144",
+  "text": "(x^2+6*x+8)/(x+2)-2=-7-2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-11"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-11",
+   "-2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e145",
+  "text": "5/(x-4)=3",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "17/3"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "17/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e146",
+  "text": "(-2*x-4)/(2*x-6)=(-x-4)/(x+4)",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "3"
+  ],
+  "candidates": [
+   "-4"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e147",
+  "text": "-6/(x-5)-5/(x+1)=6/((x^2-4*x-5))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "13/11"
+  ],
+  "excluded": [
+   "-1",
+   "5"
+  ],
+  "candidates": [
+   "13/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e148",
+  "text": "5*(-4/(x+3)-6/(x+6))=5*(-12/((x^2+9*x+18)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "-3"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e149",
+  "text": "(x+4)/(x)=(x+2)/(x-8)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-16/3"
+  ],
+  "excluded": [
+   "0",
+   "8"
+  ],
+  "candidates": [
+   "-16/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e150",
+  "text": "(2*x-3)/(2*x+3)=(x-6)/(x+9)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "3/8"
+  ],
+  "excluded": [
+   "-9",
+   "-3/2"
+  ],
+  "candidates": [
+   "3/8"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e151",
+  "text": "3*(-3/(x-3)+-5/(x))=3*((-8*x+15)/((x-3)*(x)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "0",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "0",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e152",
+  "text": "2/(x-1)-1/(x-3)+3/(x+6)=-5/(x-1)+5/(x-3)+4/(x+6)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-93/5"
+  ],
+  "excluded": [
+   "-6",
+   "1",
+   "3"
+  ],
+  "candidates": [
+   "-93/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e153",
+  "text": "2*(5/(x-2)+3/(x-3))=2*(-15/((x^2-5*x+6)))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "3/4"
+  ],
+  "excluded": [
+   "2",
+   "3"
+  ],
+  "candidates": [
+   "3/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e154",
+  "text": "4=x-5+(x^2-9)/(x+3)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "6"
+  ],
+  "excluded": [
+   "-3"
+  ],
+  "candidates": [
+   "-3",
+   "6"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e155",
+  "text": "(x-5)/(x-1)=5",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e156",
+  "text": "5*(4/(x+1)+-6/(x+4))=5*(12/((x^2+5*x+4)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "-1"
+  ],
+  "candidates": [
+   "-1"
+  ],
+  "rejected": [
+   "-1"
+  ],
+  "removable": [
+   "-1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e157",
+  "text": "x+2+(x^2-4)/(x-2)=3",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-1/2"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "candidates": [
+   "-1/2",
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e158",
+  "text": "(-2*x-7)/(2*x-8)=(-x+6)/(x+1)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "41/29"
+  ],
+  "excluded": [
+   "-1",
+   "4"
+  ],
+  "candidates": [
+   "41/29"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e159",
+  "text": "(-2*x+6)/(2*x-4)=(-2*x+2)/(2*x+5)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "19/5"
+  ],
+  "excluded": [
+   "-5/2",
+   "2"
+  ],
+  "candidates": [
+   "19/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e160",
+  "text": "x-2+(x^2-1)/(x-1)=1",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e161",
+  "text": "5/(x+4)+5/(x+3)+3/(x+6)+2=-5/(x+4)+1/(x+3)+17/(x+6)+2",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-27/8"
+  ],
+  "excluded": [
+   "-6",
+   "-4",
+   "-3"
+  ],
+  "candidates": [
+   "-27/8"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e162",
+  "text": "(4*x+4)/(2*x-3)=(2*x-2)/(x+6)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-9/19"
+  ],
+  "excluded": [
+   "-6",
+   "3/2"
+  ],
+  "candidates": [
+   "-9/19"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e163",
+  "text": "(x-0)/(x+7)=4",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-28/3"
+  ],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-28/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e164",
+  "text": "2/(x-4)-2/(x+1)+5/(x-3)=-1/(x-4)+5/(x+1)+1/(x-3)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "109/31"
+  ],
+  "excluded": [
+   "-1",
+   "3",
+   "4"
+  ],
+  "candidates": [
+   "109/31"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e165",
+  "text": "(-6*x-34)/((x+7)*(x+5))=-4/(x+7)+-2/(x+5)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-7",
+   "-5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-7",
+   "-5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e166",
+  "text": "2/(2*x+3)=-6",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-5/3"
+  ],
+  "excluded": [
+   "-3/2"
+  ],
+  "candidates": [
+   "-5/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e167",
+  "text": "-4/(x-2)+4/(x-5)-2=-7/((x-2)*(x-5))-2",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "2",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e168",
+  "text": "1/(x+5)-3/(x-4)=-27/((x^2+x-20))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "4"
+  ],
+  "candidates": [
+   "4"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e169",
+  "text": "(x^2+x-42)/(x-6)=-6",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-13"
+  ],
+  "excluded": [
+   "6"
+  ],
+  "candidates": [
+   "-13",
+   "6"
+  ],
+  "rejected": [
+   "6"
+  ],
+  "removable": [
+   "6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e170",
+  "text": "-5/(x+5)+2+2=-1+2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-10/3"
+  ],
+  "excluded": [
+   "-5"
+  ],
+  "candidates": [
+   "-10/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e171",
+  "text": "5*((8*x)/x)=5*(-4)",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e172",
+  "text": "-4/(x)-5/(x+8)=13/((x)*(x+8))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-5"
+  ],
+  "excluded": [
+   "-8",
+   "0"
+  ],
+  "candidates": [
+   "-5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e173",
+  "text": "x+-2/(x-1)=(x^2-x-2)/(x-1)-2",
+  "recipe": "r_poly_rat",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e174",
+  "text": "1/(x-6)=3",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "19/3"
+  ],
+  "excluded": [
+   "6"
+  ],
+  "candidates": [
+   "19/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e175",
+  "text": "-16/((x+5)*(x+1))=1/(x+5)-1/(x+1)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "-1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e176",
+  "text": "6/(2*x-4)=-5",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "7/5"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "candidates": [
+   "7/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e177",
+  "text": "1/(x)--5/(x+7)+4=-35/((x)*(x+7))+4",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7",
+   "0"
+  ],
+  "candidates": [
+   "-7"
+  ],
+  "rejected": [
+   "-7"
+  ],
+  "removable": [
+   "-7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e178",
+  "text": "(x^2-81)/(x+9)-1=8-1",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "17"
+  ],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-9",
+   "17"
+  ],
+  "rejected": [
+   "-9"
+  ],
+  "removable": [
+   "-9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e179",
+  "text": "(x-6)/(x-2)=3",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e180",
+  "text": "6/(x)-4/(x+4)=-2/((x)*(x+4))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-13"
+  ],
+  "excluded": [
+   "-4",
+   "0"
+  ],
+  "candidates": [
+   "-13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e181",
+  "text": "6=(x^2-36)/(x-6)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "6"
+  ],
+  "candidates": [
+   "0",
+   "6"
+  ],
+  "rejected": [
+   "6"
+  ],
+  "removable": [
+   "6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e182",
+  "text": "(x^2+13*x+40)/(x+5)-2=12-2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "4"
+  ],
+  "excluded": [
+   "-5"
+  ],
+  "candidates": [
+   "-5",
+   "4"
+  ],
+  "rejected": [
+   "-5"
+  ],
+  "removable": [
+   "-5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e183",
+  "text": "x-0+(x^2-1)/(x+1)+1=-1+1",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "-1"
+  ],
+  "candidates": [
+   "-1",
+   "0"
+  ],
+  "rejected": [
+   "-1"
+  ],
+  "removable": [
+   "-1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e184",
+  "text": "3*(2/(x-6)+2/(x-1)-5/(x))=3*(3/(x-6)-5/(x-1)+1/(x))",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "36"
+  ],
+  "excluded": [
+   "0",
+   "1",
+   "6"
+  ],
+  "candidates": [
+   "36"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e185",
+  "text": "(x+7)/(x-1)=(x+9)/(x-2)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-5/3"
+  ],
+  "excluded": [
+   "1",
+   "2"
+  ],
+  "candidates": [
+   "-5/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e186",
+  "text": "-1/(x-1)-4/(x+1)-2/(x-7)=5/(x-1)-3/(x+1)-9/(x-7)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-7/11"
+  ],
+  "excluded": [
+   "-1",
+   "1",
+   "7"
+  ],
+  "candidates": [
+   "-7/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e187",
+  "text": "4/(x+1)+4/(x-3)+4=(8*x-8)/((x+1)*(x-3))+4",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e188",
+  "text": "2/(x+2)+-2/(x+7)+1=10/((x^2+9*x+14))+1",
+  "recipe": "r_sum",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-7",
+   "-2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-7",
+   "-2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e189",
+  "text": "(x+7)/(x-3)+1=(x-6)/(x-7)+1",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "67/9"
+  ],
+  "excluded": [
+   "3",
+   "7"
+  ],
+  "candidates": [
+   "67/9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e190",
+  "text": "(x^2-49)/(x-7)=-10",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-17"
+  ],
+  "excluded": [
+   "7"
+  ],
+  "candidates": [
+   "-17",
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e191",
+  "text": "((x+6)*(x-4))/(x+6)+2=-11+2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-7"
+  ],
+  "excluded": [
+   "-6"
+  ],
+  "candidates": [
+   "-7",
+   "-6"
+  ],
+  "rejected": [
+   "-6"
+  ],
+  "removable": [
+   "-6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e192",
+  "text": "2*(((x-8)*(x-7))/(x-8))=2*(-12)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-5"
+  ],
+  "excluded": [
+   "8"
+  ],
+  "candidates": [
+   "-5",
+   "8"
+  ],
+  "rejected": [
+   "8"
+  ],
+  "removable": [
+   "8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e193",
+  "text": "-1/(x-3)-5/(x+7)+1/(x-2)=5/(x-3)+3/(x+7)-13/(x-2)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "43/11"
+  ],
+  "excluded": [
+   "-7",
+   "2",
+   "3"
+  ],
+  "candidates": [
+   "43/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e194",
+  "text": "2*((x-2)/(x-5))=2*((x+4)/(x+9))",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-1/4"
+  ],
+  "excluded": [
+   "-9",
+   "5"
+  ],
+  "candidates": [
+   "-1/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e195",
+  "text": "-5/(x)+4/(x-5)-0/(x+7)+1=-1/(x)-1/(x-5)+1/(x+7)+1",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-35/8"
+  ],
+  "excluded": [
+   "-7",
+   "0",
+   "5"
+  ],
+  "candidates": [
+   "-35/8"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e196",
+  "text": "4/(x+8)+-1/(x-3)=(3*x-20)/((x+8)*(x-3))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e197",
+  "text": "3*(-5/(2*x+1))=3*(-4)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "1/8"
+  ],
+  "excluded": [
+   "-1/2"
+  ],
+  "candidates": [
+   "1/8"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e198",
+  "text": "-12=x^2/(x)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-12"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "-12",
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e199",
+  "text": "-x+-8/(x-9)-2=(-x^2+9*x-8)/(x-9)-2",
+  "recipe": "r_poly_rat",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e200",
+  "text": "2*(-2/(x+7)+2/(x-8))=2*(1/((x^2-x-56)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7",
+   "8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e201",
+  "text": "(4*x-1)/(2*x-2)=(4*x+5)/(2*x+3)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-7/8"
+  ],
+  "excluded": [
+   "-3/2",
+   "1"
+  ],
+  "candidates": [
+   "-7/8"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e202",
+  "text": "3/(x-3)+-5/(x)=(-2*x+15)/((x-3)*(x))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "0",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "0",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e203",
+  "text": "3*(x+1+(x^2-64)/(x+8))=3*(-10)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-3/2"
+  ],
+  "excluded": [
+   "-8"
+  ],
+  "candidates": [
+   "-8",
+   "-3/2"
+  ],
+  "rejected": [
+   "-8"
+  ],
+  "removable": [
+   "-8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e204",
+  "text": "3/(x+6)-4/(x-6)-2/(x-1)=3/(x+6)+1/(x-6)-7/(x-1)",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "1",
+   "6"
+  ],
+  "candidates": [
+   "-6"
+  ],
+  "rejected": [
+   "-6"
+  ],
+  "removable": [
+   "-6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e205",
+  "text": "(x-2)/(x+8)=(x+6)/(x+7)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-62/9"
+  ],
+  "excluded": [
+   "-8",
+   "-7"
+  ],
+  "candidates": [
+   "-62/9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e206",
+  "text": "3/(x-6)-2=-3/(x-6)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "9"
+  ],
+  "excluded": [
+   "6"
+  ],
+  "candidates": [
+   "9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e207",
+  "text": "3*(-3/(x+8)+-3/(x-1))=3*((-6*x-21)/((x+8)*(x-1)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-8",
+   "1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-8",
+   "1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e208",
+  "text": "(4*x)/x=8",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e209",
+  "text": "5*((x^2-49)/(x-7))=5*(8)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "excluded": [
+   "7"
+  ],
+  "candidates": [
+   "1",
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e210",
+  "text": "(0*x+28)/((x-2)*(x+5))=4/(x-2)+-4/(x+5)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-5",
+   "2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-5",
+   "2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e211",
+  "text": "-5/(x-5)+-5/(x+9)=(-10*x-20)/((x-5)*(x+9))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-9",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-9",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e212",
+  "text": "2/(x-7)--1/(x+2)=18/((x^2-5*x-14))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "7"
+  ],
+  "candidates": [
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e213",
+  "text": "5*((x)/(x+5))=5*((x-6)/(x-4))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "10"
+  ],
+  "excluded": [
+   "-5",
+   "4"
+  ],
+  "candidates": [
+   "10"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e214",
+  "text": "3*((2*x+6)/(2*x+3))=3*((x-1)/(x+7))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-45/19"
+  ],
+  "excluded": [
+   "-7",
+   "-3/2"
+  ],
+  "candidates": [
+   "-45/19"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e215",
+  "text": "(-x-7)/(x-1)=(-x)/(x-1)",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e216",
+  "text": "2*(5/(x+3)+-5/(x+2))=2*(4/((x+3)*(x+2)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-3",
+   "-2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e217",
+  "text": "-1/(x-3)+-1/(x+3)-3=11/((x^2-9))-3",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-11/2"
+  ],
+  "excluded": [
+   "-3",
+   "3"
+  ],
+  "candidates": [
+   "-11/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e218",
+  "text": "4/(x-3)-1=-2/(x-3)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "9"
+  ],
+  "excluded": [
+   "3"
+  ],
+  "candidates": [
+   "9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e219",
+  "text": "-8/((x+6)*(x+8))=-2/(x+6)--2/(x+8)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-8",
+   "-6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e220",
+  "text": "(2*x+20)/((x+1)*(x-5))=-3/(x+1)+5/(x-5)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e221",
+  "text": "-1/(x-1)+6/(x-9)=-20/((x^2-10*x+9))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-23/5"
+  ],
+  "excluded": [
+   "1",
+   "9"
+  ],
+  "candidates": [
+   "-23/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e222",
+  "text": "(x+3)/(x+1)=(2*x-5)/(2*x+8)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-29/17"
+  ],
+  "excluded": [
+   "-4",
+   "-1"
+  ],
+  "candidates": [
+   "-29/17"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e223",
+  "text": "3*((x-3)/(x+7))=3*((x+5)/(x+5))",
+  "recipe": "r_cross_ex",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7",
+   "-5"
+  ],
+  "candidates": [
+   "-5"
+  ],
+  "rejected": [
+   "-5"
+  ],
+  "removable": [
+   "-5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e224",
+  "text": "42/((x-1)*(x+6))=-4/(x-1)+-6/(x+6)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "1"
+  ],
+  "candidates": [
+   "-6"
+  ],
+  "rejected": [
+   "-6"
+  ],
+  "removable": [
+   "-6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e225",
+  "text": "3*(5/(x-2)+2/(x-9))=3*((7*x-49)/((x-2)*(x-9)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "2",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "2",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e226",
+  "text": "4/(x+3)+4/(x-3)+2/(x-6)+4=4/(x+3)-2/(x-3)+8/(x-6)+4",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-3",
+   "3",
+   "6"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e227",
+  "text": "-3/(x+7)-1/(x-7)+4=-14/((x^2-49))+4",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7",
+   "7"
+  ],
+  "candidates": [
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e228",
+  "text": "(x^2-16)/(x-4)+1=0+1",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-4"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "-4",
+   "4"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e229",
+  "text": "5*(2*x+-8/(x-3))=5*((2*x^2-6*x-8)/(x-3)-1)",
+  "recipe": "r_poly_rat",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "3"
+  ],
+  "candidates": [
+   "3"
+  ],
+  "rejected": [
+   "3"
+  ],
+  "removable": [
+   "3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e230",
+  "text": "2/(x+7)-5/(x-3)+2/(x+4)=1/(x+7)-4/(x-3)+2/(x+4)",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-7",
+   "-4",
+   "3"
+  ],
+  "candidates": [
+   "-4"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e231",
+  "text": "42/((x-1)*(x+6))=6/(x-1)-5/(x+6)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "1"
+  ],
+  "candidates": [
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e232",
+  "text": "((x-3)*(x-9))/(x-3)=-9",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "3"
+  ],
+  "candidates": [
+   "0",
+   "3"
+  ],
+  "rejected": [
+   "3"
+  ],
+  "removable": [
+   "3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e233",
+  "text": "-15/((x+1)*(x-4))=3/(x+1)-4/(x-4)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "4"
+  ],
+  "candidates": [
+   "-1"
+  ],
+  "rejected": [
+   "-1"
+  ],
+  "removable": [
+   "-1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e234",
+  "text": "(2*x-10)/((x-2)*(x-4))=3/(x-2)+-1/(x-4)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "2",
+   "4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "2",
+   "4"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e235",
+  "text": "(x+8)/(x+4)=-1",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-6"
+  ],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-6"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e236",
+  "text": "2/(x+2)--3/(x+5)-2=6/((x^2+7*x+10))-2",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "-2"
+  ],
+  "candidates": [
+   "-2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e237",
+  "text": "(-x-8)/(x-1)=(-x-4)/(x-8)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-20"
+  ],
+  "excluded": [
+   "1",
+   "8"
+  ],
+  "candidates": [
+   "-20"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e238",
+  "text": "1/(x+3)+6/(x-2)=30/((x^2+x-6))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-3",
+   "2"
+  ],
+  "candidates": [
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e239",
+  "text": "2*((x+9)/(x+9))=2*(-6)",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-9"
+  ],
+  "rejected": [
+   "-9"
+  ],
+  "removable": [
+   "-9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e240",
+  "text": "4/(x-3)-2/(x)+2/(x+2)=-3/(x-3)+2/(x)+5/(x+2)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-8/9"
+  ],
+  "excluded": [
+   "-2",
+   "0",
+   "3"
+  ],
+  "candidates": [
+   "-8/9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e241",
+  "text": "-4/(x+6)-5/(x-2)=-40/((x+6)*(x-2))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "2"
+  ],
+  "candidates": [
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e242",
+  "text": "(x^2-1)/(x-1)=10",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "9"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "1",
+   "9"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e243",
+  "text": "2*(-1/(x-4)+-1/(x-3))=2*((-2*x+7)/((x-4)*(x-3)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "3",
+   "4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "3",
+   "4"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e244",
+  "text": "2/(x+5)+5/(x-8)=(7*x+9)/((x+5)*(x-8))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-5",
+   "8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-5",
+   "8"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e245",
+  "text": "5*(x-3+(x^2-16)/(x+4))=5*(-12)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-5/2"
+  ],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-4",
+   "-5/2"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e246",
+  "text": "x+1+(x^2-1)/(x-1)=-9",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-11/2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "-11/2",
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e247",
+  "text": "5*(-1/(x+2)+-2/(x-7))=5*(9/((x+2)*(x-7)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "7"
+  ],
+  "candidates": [
+   "-2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e248",
+  "text": "(x-3)/(x+2)=(x-8)/(x-8)",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "8"
+  ],
+  "candidates": [
+   "8"
+  ],
+  "rejected": [
+   "8"
+  ],
+  "removable": [
+   "8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e249",
+  "text": "-1/(x+9)-2=4/(x+9)+1-2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-14"
+  ],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-14"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e250",
+  "text": "-2/(x-8)+-1/(x+6)=-6/((x^2-2*x-48))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "2/3"
+  ],
+  "excluded": [
+   "-6",
+   "8"
+  ],
+  "candidates": [
+   "2/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e251",
+  "text": "5*((2*x+9)/(x+8))=5*((2*x-9)/(x+1))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-81/4"
+  ],
+  "excluded": [
+   "-8",
+   "-1"
+  ],
+  "candidates": [
+   "-81/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e252",
+  "text": "2*(((x+9)*(x-9))/(x+9))=2*(-11)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-2"
+  ],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-9",
+   "-2"
+  ],
+  "rejected": [
+   "-9"
+  ],
+  "removable": [
+   "-9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e253",
+  "text": "2/(x)+2/(x-1)+4/(x-3)+4=3/(x)-2/(x-1)+7/(x-3)+4",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-3/5"
+  ],
+  "excluded": [
+   "0",
+   "1",
+   "3"
+  ],
+  "candidates": [
+   "-3/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e254",
+  "text": "14/((x+3)*(x-4))=-2/(x+3)+-6/(x-4)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-3",
+   "4"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e255",
+  "text": "(x^2-9)/(x+3)+2=9+2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "12"
+  ],
+  "excluded": [
+   "-3"
+  ],
+  "candidates": [
+   "-3",
+   "12"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e256",
+  "text": "3*(-3/(x+6)+-1/(x))=3*((-4*x-6)/((x+6)*(x)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "0"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "0"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e257",
+  "text": "5/(x+1)=2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "3/2"
+  ],
+  "excluded": [
+   "-1"
+  ],
+  "candidates": [
+   "3/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e258",
+  "text": "(x+2)/(x+6)=(x+1)/(x+3)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "-6",
+   "-3"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e259",
+  "text": "-5=(5*x)/x",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e260",
+  "text": "5*((x-1)/(x+1))=5*((x+7)/(x+3))",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-5/3"
+  ],
+  "excluded": [
+   "-3",
+   "-1"
+  ],
+  "candidates": [
+   "-5/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e261",
+  "text": "2*(-4/(x-4)+1/(x-5)-2/(x+5))=2*(-4/(x-4)+3/(x-5)-4/(x+5))",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "4",
+   "5"
+  ],
+  "candidates": [
+   "4"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e262",
+  "text": "3*(x-4+(x^2-1)/(x+1))=3*(-6)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-1/2"
+  ],
+  "excluded": [
+   "-1"
+  ],
+  "candidates": [
+   "-1",
+   "-1/2"
+  ],
+  "rejected": [
+   "-1"
+  ],
+  "removable": [
+   "-1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e263",
+  "text": "(2*x-7)/(x-4)-2=(2*x+1)/(x-7)-2",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "53/14"
+  ],
+  "excluded": [
+   "4",
+   "7"
+  ],
+  "candidates": [
+   "53/14"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e264",
+  "text": "-9/(x-6)=3",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "6"
+  ],
+  "candidates": [
+   "3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e265",
+  "text": "-1/(x-5)-2=-3/(x-5)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "6"
+  ],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [
+   "6"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e266",
+  "text": "(x+1)/(x-4)=(x+4)/(x+6)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-22/7"
+  ],
+  "excluded": [
+   "-6",
+   "4"
+  ],
+  "candidates": [
+   "-22/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e267",
+  "text": "1/(x+2)+4/(x+4)+4=(5*x+12)/((x+2)*(x+4))+4",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-4",
+   "-2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-4",
+   "-2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e268",
+  "text": "3/(x-6)--1/(x+3)=10/((x-6)*(x+3))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "7/4"
+  ],
+  "excluded": [
+   "-3",
+   "6"
+  ],
+  "candidates": [
+   "7/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e269",
+  "text": "-5/(x-9)+-2/(x-3)=(-7*x+33)/((x-9)*(x-3))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "3",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "3",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e270",
+  "text": "-2/(x+1)--2/(x-3)=-16/((x+1)*(x-3))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e271",
+  "text": "4/(x+6)+4/(x+3)+1/(x+2)+2=1/(x+6)+4/(x+3)+4/(x+2)+2",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "-3",
+   "-2"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e272",
+  "text": "(x+2)/(x-2)=(x-1)/(x+6)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-10/11"
+  ],
+  "excluded": [
+   "-6",
+   "2"
+  ],
+  "candidates": [
+   "-10/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e273",
+  "text": "(x)/(x+6)-1=(2*x+5)/(2*x+6)-1",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-30/11"
+  ],
+  "excluded": [
+   "-6",
+   "-3"
+  ],
+  "candidates": [
+   "-30/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e274",
+  "text": "-2=(x^2-16)/(x+4)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "-4",
+   "2"
+  ],
+  "rejected": [
+   "-4"
+  ],
+  "removable": [
+   "-4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e275",
+  "text": "3/(x+3)-5/(x+1)-5/(x-4)=-2/(x+3)-2/(x+1)-3/(x-4)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "1/2"
+  ],
+  "excluded": [
+   "-3",
+   "-1",
+   "4"
+  ],
+  "candidates": [
+   "1/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e276",
+  "text": "-4/(x+2)+1/(x-1)=(-3*x+6)/((x+2)*(x-1))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-2",
+   "1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-2",
+   "1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e277",
+  "text": "5*(-5/(x-4))=5*(-3/(x-4)-0)",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e278",
+  "text": "(4*x-14)/((x+4)*(x-6))=3/(x+4)+1/(x-6)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-4",
+   "6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-4",
+   "6"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e279",
+  "text": "(x^2-x-12)/(x-4)=-2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-5"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "-5",
+   "4"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e280",
+  "text": "(x-9)/(x+2)=(x-5)/(x+6)",
+  "recipe": "r_cross_ex",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "-2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e281",
+  "text": "6=(x^2-49)/(x-7)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-1"
+  ],
+  "excluded": [
+   "7"
+  ],
+  "candidates": [
+   "-1",
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e282",
+  "text": "5*((8*x)/x)=5*(10)",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e283",
+  "text": "-2/(x-6)+4/(x-4)=(2*x-16)/((x-6)*(x-4))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "4",
+   "6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "4",
+   "6"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e284",
+  "text": "3*(-5/(x+4))=3*(2/(x+4)-1)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [
+   "3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e285",
+  "text": "5*((x^2-x-2)/(x-2))=5*(2)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "candidates": [
+   "1",
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e286",
+  "text": "(-x-4)/(x-2)=(-x-8)/(x+6)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-10"
+  ],
+  "excluded": [
+   "-6",
+   "2"
+  ],
+  "candidates": [
+   "-10"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e287",
+  "text": "2*(5/(x+6)+-5/(x+2))=2*((0*x-20)/((x+6)*(x+2)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "-2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "-2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e288",
+  "text": "1/(x-6)+-5/(x-9)-3=-15/((x-6)*(x-9))-3",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "6",
+   "9"
+  ],
+  "candidates": [
+   "9"
+  ],
+  "rejected": [
+   "9"
+  ],
+  "removable": [
+   "9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e289",
+  "text": "5*((3*x+24)/(x+8))=5*(0)",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-8"
+  ],
+  "candidates": [
+   "-8"
+  ],
+  "rejected": [
+   "-8"
+  ],
+  "removable": [
+   "-8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e290",
+  "text": "(x^2-4)/(x-2)=-9",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-11"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "candidates": [
+   "-11",
+   "2"
+  ],
+  "rejected": [
+   "2"
+  ],
+  "removable": [
+   "2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e291",
+  "text": "4/(x+2)+6/(x+6)+4=-18/((x^2+8*x+12))+4",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-27/5"
+  ],
+  "excluded": [
+   "-6",
+   "-2"
+  ],
+  "candidates": [
+   "-27/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e292",
+  "text": "5*((x-1)/(x-5))=5*((x+5)/(x-4))",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "29/5"
+  ],
+  "excluded": [
+   "4",
+   "5"
+  ],
+  "candidates": [
+   "29/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e293",
+  "text": "-3/(x+2)+-6/(x-3)=15/((x^2-x-6))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "3"
+  ],
+  "candidates": [
+   "-2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e294",
+  "text": "5*((x+3)/(x+4))=5*((x-9)/(x-7))",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-15"
+  ],
+  "excluded": [
+   "-4",
+   "7"
+  ],
+  "candidates": [
+   "-15"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e295",
+  "text": "-5/(x-3)+-2/(x-2)=(-7*x+16)/((x-3)*(x-2))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "2",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "2",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e296",
+  "text": "-5/(x-3)-5/(x-4)=-2/((x-3)*(x-4))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "37/10"
+  ],
+  "excluded": [
+   "3",
+   "4"
+  ],
+  "candidates": [
+   "37/10"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e297",
+  "text": "3/(x-2)+2/(x+6)=(5*x+14)/((x-2)*(x+6))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e298",
+  "text": "-5/(x+1)+-3/(x-8)+1=(-8*x+37)/((x+1)*(x-8))+1",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "8"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e299",
+  "text": "(5*x)/x-1=6-1",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e300",
+  "text": "5*(4/(x-2)+3/(x+6)+3/(x+3))=5*(1/(x-2)-4/(x+6)+13/(x+3))",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "22"
+  ],
+  "excluded": [
+   "-6",
+   "-3",
+   "2"
+  ],
+  "candidates": [
+   "22"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e301",
+  "text": "2*((x-0)/(x-2))=2*((x-6)/(x))",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "3/2"
+  ],
+  "excluded": [
+   "0",
+   "2"
+  ],
+  "candidates": [
+   "3/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e302",
+  "text": "6/(x+3)--6/(x-1)=5/((x+3)*(x-1))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-7/12"
+  ],
+  "excluded": [
+   "-3",
+   "1"
+  ],
+  "candidates": [
+   "-7/12"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e303",
+  "text": "2*(3/(x)--1/(x-6))=2*(-19/((x^2-6*x)))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-1/4"
+  ],
+  "excluded": [
+   "0",
+   "6"
+  ],
+  "candidates": [
+   "-1/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e304",
+  "text": "(x+1)/(x+7)=5",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-17/2"
+  ],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-17/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e305",
+  "text": "-1/(x)+5/(x+6)=(4*x-6)/((x)*(x+6))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "0"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "0"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e306",
+  "text": "2*((x^2-36)/(x-6))=2*(12)",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "6"
+  ],
+  "candidates": [
+   "6"
+  ],
+  "rejected": [
+   "6"
+  ],
+  "removable": [
+   "6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e307",
+  "text": "4/(x-2)+6/(x+3)=6/((x-2)*(x+3))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "3/5"
+  ],
+  "excluded": [
+   "-3",
+   "2"
+  ],
+  "candidates": [
+   "3/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e308",
+  "text": "(x+3)/(x+1)+1=(x-5)/(x-6)+1",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "13"
+  ],
+  "excluded": [
+   "-1",
+   "6"
+  ],
+  "candidates": [
+   "13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e309",
+  "text": "((x-4)*(x+6))/(x-4)=9",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "3",
+   "4"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e310",
+  "text": "(x-2)/(x-8)-1=(2*x+4)/(2*x+3)-1",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-26/11"
+  ],
+  "excluded": [
+   "-3/2",
+   "8"
+  ],
+  "candidates": [
+   "-26/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e311",
+  "text": "1/(x)+2/(x-6)+4/(x+7)=-3/(x)+3/(x-6)+7/(x+7)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "56/5"
+  ],
+  "excluded": [
+   "-7",
+   "0",
+   "6"
+  ],
+  "candidates": [
+   "56/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e312",
+  "text": "2/(x+5)+3/(x-1)=(5*x+13)/((x+5)*(x-1))+1",
+  "recipe": "r_ident",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "1"
+  ],
+  "candidates": [
+   "-5",
+   "1"
+  ],
+  "rejected": [
+   "-5",
+   "1"
+  ],
+  "removable": [
+   "-5",
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e313",
+  "text": "2*((2*x-8)/(x-7))=2*((2*x+8)/(x-2))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "12"
+  ],
+  "excluded": [
+   "2",
+   "7"
+  ],
+  "candidates": [
+   "12"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e314",
+  "text": "-5/(x-1)+-2/(x+6)=(-7*x-28)/((x-1)*(x+6))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e315",
+  "text": "3*(x-0+(x^2-1)/(x-1))=3*(-12)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-13/2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "-13/2",
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e316",
+  "text": "(-1*x-8)/((x+3)*(x-2))=1/(x+3)+-2/(x-2)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-3",
+   "2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-3",
+   "2"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e317",
+  "text": "6/(x+4)+-4/(x)=-16/((x+4)*(x))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "0"
+  ],
+  "candidates": [
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e318",
+  "text": "(-x-7)/(x+8)=(-x-5)/(x+3)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-19/3"
+  ],
+  "excluded": [
+   "-8",
+   "-3"
+  ],
+  "candidates": [
+   "-19/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e319",
+  "text": "5*((x+6)/(x+2))=5*(-6)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-18/7"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-18/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e320",
+  "text": "(3*x+27)/(x+9)=9",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-9"
+  ],
+  "rejected": [
+   "-9"
+  ],
+  "removable": [
+   "-9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e321",
+  "text": "12=(x^2-16)/(x-4)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "8"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "4",
+   "8"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e322",
+  "text": "((x-5)*(x+5))/(x-5)=7",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [
+   "2",
+   "5"
+  ],
+  "rejected": [
+   "5"
+  ],
+  "removable": [
+   "5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e323",
+  "text": "2/(x+3)+1/(x+1)=(3*x+5)/((x+3)*(x+1))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-3",
+   "-1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-3",
+   "-1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e324",
+  "text": "5/(x+2)-5/(x-7)-3=16/((x^2-5*x-14))-3",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "7"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e325",
+  "text": "-5/(x+1)+-2/(x+5)=8/((x+1)*(x+5))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "-1"
+  ],
+  "candidates": [
+   "-5"
+  ],
+  "rejected": [
+   "-5"
+  ],
+  "removable": [
+   "-5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e326",
+  "text": "(x+1)/(x+2)-2=3-2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-5/2"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-5/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e327",
+  "text": "(x^2+3*x)/(x)=2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-1"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "candidates": [
+   "-1",
+   "0"
+  ],
+  "rejected": [
+   "0"
+  ],
+  "removable": [
+   "0"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e328",
+  "text": "(x-6)/(x)=(x+8)/(x+3)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-18/11"
+  ],
+  "excluded": [
+   "-3",
+   "0"
+  ],
+  "candidates": [
+   "-18/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e329",
+  "text": "-5/(x-8)+2/(x)=(-3*x-16)/((x-8)*(x))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "0",
+   "8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "0",
+   "8"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e330",
+  "text": "(x-4)/(x-9)=(x+7)/(x+3)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-51"
+  ],
+  "excluded": [
+   "-3",
+   "9"
+  ],
+  "candidates": [
+   "-51"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e331",
+  "text": "5*((-2*x+9)/(2*x-5))=5*((-2*x-8)/(2*x+1))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "31/22"
+  ],
+  "excluded": [
+   "-1/2",
+   "5/2"
+  ],
+  "candidates": [
+   "31/22"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e332",
+  "text": "(5*x-21)/((x-1)*(x-9))=2/(x-1)+3/(x-9)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "1",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "1",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e333",
+  "text": "2/(x+9)-3=-4-3",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-19/2"
+  ],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-19/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e334",
+  "text": "-4/(x+9)+6/(x-3)=7/((x^2+6*x-27))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-59/2"
+  ],
+  "excluded": [
+   "-9",
+   "3"
+  ],
+  "candidates": [
+   "-59/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e335",
+  "text": "4/(x+1)+2/(x-2)+2/(x-5)+2=-2/(x+1)-2/(x-2)+12/(x-5)+2",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "5/4"
+  ],
+  "excluded": [
+   "-1",
+   "2",
+   "5"
+  ],
+  "candidates": [
+   "5/4"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e336",
+  "text": "-4=(x^2-49)/(x+7)",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-7",
+   "3"
+  ],
+  "rejected": [
+   "-7"
+  ],
+  "removable": [
+   "-7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e337",
+  "text": "-4/(x+6)+-2/(x-4)=(-6*x+4)/((x+6)*(x-4))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "4"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e338",
+  "text": "(x-2)/(x+3)=(x+1)/(x-7)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "11/13"
+  ],
+  "excluded": [
+   "-3",
+   "7"
+  ],
+  "candidates": [
+   "11/13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e339",
+  "text": "(2*x-8)/(2*x-6)=(x+5)/(x-8)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "47/14"
+  ],
+  "excluded": [
+   "3",
+   "8"
+  ],
+  "candidates": [
+   "47/14"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e340",
+  "text": "2*(-4/(x+9)+-6/(x+6))=2*(-18/((x+9)*(x+6)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-9",
+   "-6"
+  ],
+  "candidates": [
+   "-6"
+  ],
+  "rejected": [
+   "-6"
+  ],
+  "removable": [
+   "-6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e341",
+  "text": "5*((-x+3)/(x-6))=5*((-x+7)/(x+7))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "63/17"
+  ],
+  "excluded": [
+   "-7",
+   "6"
+  ],
+  "candidates": [
+   "63/17"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e342",
+  "text": "-2/(x-5)--1/(x-7)=4/((x^2-12*x+35))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "5",
+   "7"
+  ],
+  "candidates": [
+   "5"
+  ],
+  "rejected": [
+   "5"
+  ],
+  "removable": [
+   "5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e343",
+  "text": "3*(1/(x+7)-1/(x-5)+3/(x-4))=3*(2/(x+7)-3/(x-5)+4/(x-4))",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "41/13"
+  ],
+  "excluded": [
+   "-7",
+   "4",
+   "5"
+  ],
+  "candidates": [
+   "41/13"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e344",
+  "text": "(4*x+1)/(2*x+8)+4=(4*x+9)/(2*x+8)+4",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e345",
+  "text": "2*(-5/(x-5)-1)=2*(7)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "35/8"
+  ],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [
+   "35/8"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e346",
+  "text": "5*(3/(x+2)+-6/(x+3))=5*(3/((x+2)*(x+3)))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-3",
+   "-2"
+  ],
+  "candidates": [
+   "-2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e347",
+  "text": "2/(x-4)+2/(x-2)+5/(x+6)-2=2/(x-4)-1/(x-2)+8/(x+6)-2",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "2",
+   "4"
+  ],
+  "candidates": [
+   "4"
+  ],
+  "rejected": [
+   "4"
+  ],
+  "removable": [
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e348",
+  "text": "(4*x+8)/(2*x+7)=(2*x+7)/(x+5)",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "-7/2"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e349",
+  "text": "x+5+(x^2-25)/(x-5)=0",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-5"
+  ],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [
+   "-5",
+   "5"
+  ],
+  "rejected": [
+   "5"
+  ],
+  "removable": [
+   "5"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e350",
+  "text": "-6/(x-8)-0+4=6+4",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "7"
+  ],
+  "excluded": [
+   "8"
+  ],
+  "candidates": [
+   "7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e351",
+  "text": "3/(x+1)+-1/(x-6)=(2*x-19)/((x+1)*(x-6))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-1",
+   "6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-1",
+   "6"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e352",
+  "text": "(x+5)/(x+7)-1=6-1",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-37/5"
+  ],
+  "excluded": [
+   "-7"
+  ],
+  "candidates": [
+   "-37/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e353",
+  "text": "1/(x)-5/(x-6)+4/(x-3)=-4/(x)+5/(x-6)-1/(x-3)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "0",
+   "3",
+   "6"
+  ],
+  "candidates": [
+   "2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e354",
+  "text": "(x^2+12*x+32)/(x+8)-2=-6-2",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-10"
+  ],
+  "excluded": [
+   "-8"
+  ],
+  "candidates": [
+   "-10",
+   "-8"
+  ],
+  "rejected": [
+   "-8"
+  ],
+  "removable": [
+   "-8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e355",
+  "text": "-2/(x+7)+5/(x+6)-6/(x-4)=-1/(x+7)-3/(x+6)+1/(x-4)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-494/69"
+  ],
+  "excluded": [
+   "-7",
+   "-6",
+   "4"
+  ],
+  "candidates": [
+   "-494/69"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e356",
+  "text": "5*((2*x+8)/(2*x-9))=5*((2*x-9)/(2*x+5))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "41/62"
+  ],
+  "excluded": [
+   "-5/2",
+   "9/2"
+  ],
+  "candidates": [
+   "41/62"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e357",
+  "text": "17/((x-9)*(x+5))=2/(x-9)+-2/(x+5)",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e358",
+  "text": "5*(-3/(2*x-4))=5*(8)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "29/16"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "candidates": [
+   "29/16"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e359",
+  "text": "(x-53)/((x-9)*(x+2))=-4/(x-9)+5/(x+2)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-2",
+   "9"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-2",
+   "9"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e360",
+  "text": "(-2*x)/(2*x-1)=(-x-9)/(x-6)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "9/29"
+  ],
+  "excluded": [
+   "1/2",
+   "6"
+  ],
+  "candidates": [
+   "9/29"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e361",
+  "text": "15/((x^2-36))=-6/(x-6)-1/(x+6)",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "-45/7"
+  ],
+  "excluded": [
+   "-6",
+   "6"
+  ],
+  "candidates": [
+   "-45/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e362",
+  "text": "(2*x-6)/(x-6)+1=(2*x+3)/(x+2)+1",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-6/7"
+  ],
+  "excluded": [
+   "-2",
+   "6"
+  ],
+  "candidates": [
+   "-6/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e363",
+  "text": "(x+1)/(x+8)=(x+5)/(x+9)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-31/3"
+  ],
+  "excluded": [
+   "-9",
+   "-8"
+  ],
+  "candidates": [
+   "-31/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e364",
+  "text": "(x-5)/(x+9)-2=(x+8)/(x-2)-2",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "-31/12"
+  ],
+  "excluded": [
+   "-9",
+   "2"
+  ],
+  "candidates": [
+   "-31/12"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e365",
+  "text": "(x+2)/(x-4)=4",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "6"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "6"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e366",
+  "text": "-1/(x+7)-2/(x-7)-2/(x+3)+4=1/(x+7)-3/(x-7)-3/(x+3)+4",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-7/9"
+  ],
+  "excluded": [
+   "-7",
+   "-3",
+   "7"
+  ],
+  "candidates": [
+   "-7/9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e367",
+  "text": "(x+1)/(x-7)=(x-6)/(x)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "0",
+   "7"
+  ],
+  "candidates": [
+   "3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e368",
+  "text": "-3/(x-8)+-4/(x+3)+4=(-7*x+23)/((x-8)*(x+3))+4",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-3",
+   "8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-3",
+   "8"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e369",
+  "text": "3/(x)-5/(x+6)+3/(x+4)=5/(x)-5/(x+6)+1/(x+4)",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-6",
+   "-4",
+   "0"
+  ],
+  "candidates": [
+   "-6"
+  ],
+  "rejected": [
+   "-6"
+  ],
+  "removable": [
+   "-6"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e370",
+  "text": "(x+4)/(x+9)=-2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-22/3"
+  ],
+  "excluded": [
+   "-9"
+  ],
+  "candidates": [
+   "-22/3"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e371",
+  "text": "-4/(x-9)+-2/(x-2)=-28/((x-9)*(x-2))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "2",
+   "9"
+  ],
+  "candidates": [
+   "9"
+  ],
+  "rejected": [
+   "9"
+  ],
+  "removable": [
+   "9"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e372",
+  "text": "(-x-8)/(x+4)=(-x+7)/(x+8)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-92/19"
+  ],
+  "excluded": [
+   "-8",
+   "-4"
+  ],
+  "candidates": [
+   "-92/19"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e373",
+  "text": "(x-0)/(x-3)=(x-4)/(x+3)",
+  "recipe": "r_cross_ex",
+  "class": "unique",
+  "solution": [
+   "6/5"
+  ],
+  "excluded": [
+   "-3",
+   "3"
+  ],
+  "candidates": [
+   "6/5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e374",
+  "text": "x+1+(x^2-4)/(x+2)=0",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "1/2"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-2",
+   "1/2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e375",
+  "text": "x-0+(x^2-4)/(x+2)+1=-9+1",
+  "recipe": "r_remov",
+  "class": "unique",
+  "solution": [
+   "-7/2"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-7/2",
+   "-2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "extraneous-and-valid-root"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e376",
+  "text": "-4/(x-5)+3/(x-4)+4=(-1*x+1)/((x-5)*(x-4))+4",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "4",
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "4",
+   "5"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e377",
+  "text": "3*((x+2)/(x-7))=3*((x+2)/(x+8))",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "-2"
+  ],
+  "excluded": [
+   "-8",
+   "7"
+  ],
+  "candidates": [
+   "-2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e378",
+  "text": "3*(-5/(x+6)+2/(x-3))=3*((-3*x+27)/((x+6)*(x-3)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-6",
+   "3"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-6",
+   "3"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e379",
+  "text": "-1/(x-4)+2=3/(x-4)-2+2",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "6"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "6"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e380",
+  "text": "3/(x+1)+5/(x)+2/(x+6)=-3/(x+1)+3/(x)+10/(x+6)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "-2/7"
+  ],
+  "excluded": [
+   "-6",
+   "-1",
+   "0"
+  ],
+  "candidates": [
+   "-2/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e381",
+  "text": "-5/(x-1)+4/(x-4)=(-1*x+16)/((x-1)*(x-4))-2",
+  "recipe": "r_ident",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1",
+   "4"
+  ],
+  "candidates": [
+   "1",
+   "4"
+  ],
+  "rejected": [
+   "1",
+   "4"
+  ],
+  "removable": [
+   "1",
+   "4"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e382",
+  "text": "5*(1/(x-1)+-3/(x+4))=5*((-2*x+7)/((x-1)*(x+4)))",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-4",
+   "1"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-4",
+   "1"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e383",
+  "text": "4=-2/(x-6)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "11/2"
+  ],
+  "excluded": [
+   "6"
+  ],
+  "candidates": [
+   "11/2"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e384",
+  "text": "-4/(x-3)-5/(x+5)-3/(x+3)=-5/(x-3)-4/(x+5)-3/(x+3)",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-5",
+   "-3",
+   "3"
+  ],
+  "candidates": [
+   "-3"
+  ],
+  "rejected": [
+   "-3"
+  ],
+  "removable": [
+   "-3"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e385",
+  "text": "(2*x-5)/(x-4)=(4*x-7)/(2*x+3)",
+  "recipe": "r_cross",
+  "class": "unique",
+  "solution": [
+   "43/19"
+  ],
+  "excluded": [
+   "-3/2",
+   "4"
+  ],
+  "candidates": [
+   "43/19"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e386",
+  "text": "2/(x-7)--4/(x+4)=22/((x^2-3*x-28))",
+  "recipe": "r_sum",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "7"
+  ],
+  "candidates": [
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e387",
+  "text": "3*(4/(x-5))=3*(-2/(x-5)-0)",
+  "recipe": "r_simple",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "5"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e388",
+  "text": "3/(x-8)+-1/(x-3)-2=(2*x-1)/((x-8)*(x-3))-2",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "3",
+   "8"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "3",
+   "8"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e389",
+  "text": "9/(x-4)-1=9-1",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "5"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "5"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e390",
+  "text": "-6=-1/(x-4)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "25/6"
+  ],
+  "excluded": [
+   "4"
+  ],
+  "candidates": [
+   "25/6"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e391",
+  "text": "-5/(x+5)-3/(x+1)+19/(x+2)=5/(x+5)+5/(x+1)+1/(x+2)",
+  "recipe": "r_three",
+  "class": "unique",
+  "solution": [
+   "5/11"
+  ],
+  "excluded": [
+   "-5",
+   "-2",
+   "-1"
+  ],
+  "candidates": [
+   "5/11"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e392",
+  "text": "(x+8)/(x+8)-1=(x-3)/(x-8)-1",
+  "recipe": "r_cross_ex",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-8",
+   "8"
+  ],
+  "candidates": [
+   "-8"
+  ],
+  "rejected": [
+   "-8"
+  ],
+  "removable": [
+   "-8"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e393",
+  "text": "-3/(x-2)--6/(x+7)=-6/((x^2+5*x-14))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "9"
+  ],
+  "excluded": [
+   "-7",
+   "2"
+  ],
+  "candidates": [
+   "9"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e394",
+  "text": "(2*x-9)/(2*x+3)=(x+2)/(x+2)",
+  "recipe": "r_cross",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "-3/2"
+  ],
+  "candidates": [
+   "-2"
+  ],
+  "rejected": [
+   "-2"
+  ],
+  "removable": [
+   "-2"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e395",
+  "text": "6/(x)+2/(x-4)=13/((x)*(x-4))",
+  "recipe": "r_sum",
+  "class": "unique",
+  "solution": [
+   "37/8"
+  ],
+  "excluded": [
+   "0",
+   "4"
+  ],
+  "candidates": [
+   "37/8"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": 1,
+  "domainOps": 4,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e396",
+  "text": "-6=(x-3)/(x+2)",
+  "recipe": "r_simple",
+  "class": "unique",
+  "solution": [
+   "-9/7"
+  ],
+  "excluded": [
+   "-2"
+  ],
+  "candidates": [
+   "-9/7"
+  ],
+  "rejected": [],
+  "removable": [],
+  "tags": [],
+  "reducedDegree": 1,
+  "domainOps": 2,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e397",
+  "text": "5/(x-7)-1/(x-5)+1/(x+4)=5/(x-7)+2/(x-5)-2/(x+4)",
+  "recipe": "r_three",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "5",
+   "7"
+  ],
+  "candidates": [
+   "7"
+  ],
+  "rejected": [
+   "7"
+  ],
+  "removable": [
+   "7"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "multi-excluded",
+   "no-solution",
+   "multi-step"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 6,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e398",
+  "text": "(x+34)/((x-6)*(x+2))=5/(x-6)+-4/(x+2)",
+  "recipe": "r_ident",
+  "class": "identity-on-domain",
+  "solution": null,
+  "excluded": [
+   "-2",
+   "6"
+  ],
+  "candidates": [],
+  "rejected": [],
+  "removable": [
+   "-2",
+   "6"
+  ],
+  "tags": [
+   "restricted-identity",
+   "removable",
+   "multi-excluded",
+   "multi-step"
+  ],
+  "reducedDegree": -1,
+  "domainOps": 5,
+  "supported": true,
+  "reasons": []
+ },
+ {
+  "id": "e399",
+  "text": "(2*x-2)/(x-1)=-4",
+  "recipe": "r_remov",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "candidates": [
+   "1"
+  ],
+  "rejected": [
+   "1"
+  ],
+  "removable": [
+   "1"
+  ],
+  "tags": [
+   "removable",
+   "extraneous-candidate",
+   "all-candidates-rejected",
+   "no-solution"
+  ],
+  "reducedDegree": 0,
+  "domainOps": 3,
+  "supported": true,
+  "reasons": []
+ }
+]

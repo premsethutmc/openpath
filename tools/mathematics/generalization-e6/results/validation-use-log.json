@@ -1,0 +1,77 @@
+{
+ "policy": "validation partition may be scored only at predefined checkpoints; every use is appended here",
+ "uses": [
+  {
+   "at": "2026-10-28T01:57:35.892Z",
+   "label": "chk1-after-dev-iteration"
+  },
+  {
+   "at": "2026-10-28T01:59:35.267Z",
+   "label": "chk2-after-restriction-fix"
+  },
+  {
+   "at": "2026-10-28T02:25:05.124Z",
+   "label": "r2"
+  },
+  {
+   "at": "2026-10-28T02:27:53.743Z",
+   "label": "r3"
+  },
+  {
+   "at": "2026-10-28T02:30:00.109Z",
+   "label": "r4"
+  },
+  {
+   "at": "2026-10-28T02:31:18.906Z",
+   "label": "r4"
+  },
+  {
+   "at": "2026-10-28T02:31:19.847Z",
+   "label": "r4adj"
+  },
+  {
+   "at": "2026-10-28T02:31:27.067Z",
+   "label": "e5base"
+  },
+  {
+   "at": "2026-10-28T02:32:25.915Z",
+   "label": "e6r-final-raw"
+  },
+  {
+   "at": "2026-10-28T02:32:26.365Z",
+   "label": "e6r-final-adj"
+  },
+  {
+   "at": "2026-10-28T03:02:41.037Z",
+   "label": "r7a"
+  },
+  {
+   "at": "2026-10-28T03:03:52.000Z",
+   "label": "r7b"
+  },
+  {
+   "at": "2026-10-28T03:05:33.750Z",
+   "label": "r7c"
+  },
+  {
+   "at": "2026-10-28T03:08:17.886Z",
+   "label": "r7d"
+  },
+  {
+   "at": "2026-10-28T03:09:14.432Z",
+   "label": "r7e"
+  },
+  {
+   "at": "2026-10-28T03:09:21.151Z",
+   "label": "r7e-ov"
+  },
+  {
+   "at": "2026-10-28T03:12:12.666Z",
+   "label": "base-e5"
+  },
+  {
+   "at": "2026-10-28T03:12:19.002Z",
+   "label": "base-e6"
+  }
+ ]
+}

@@ -1,0 +1,6 @@
+{
+  "oracle": "SymPy 1.14.0 exact arithmetic",
+  "checks": 120,
+  "passed": 120,
+  "failed": []
+}

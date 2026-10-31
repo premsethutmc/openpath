@@ -1,0 +1,213 @@
+.writing-host {
+  font-family: system-ui, sans-serif;
+  color: #29233e;
+  background: #faf8ff;
+  font-size: 16px;
+}
+.writing-host * {
+  box-sizing: border-box;
+}
+.writing-host {
+  margin: 0;
+}
+.writing-host {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
+.writing-host h1 {
+  font-size: clamp(1.7rem, 5vw, 2.4rem);
+}
+.writing-host h2 {
+  font-size: 1.5rem;
+}
+.writing-host p {
+  line-height: 1.5;
+}
+.writing-host .eyebrow {
+  color: #5c41b4;
+  font-weight: 700;
+}
+.writing-host button,
+.writing-host input,
+.writing-host select {
+  font: inherit;
+}
+.writing-host button {
+  min-height: 44px;
+  border: 1px solid #a89acb;
+  border-radius: 10px;
+  background: #fff;
+  color: #382666;
+  padding: 10px 12px;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.writing-host button:hover {
+  background: #ede6ff;
+}
+.writing-host button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.writing-host button[aria-pressed="true"] {
+  background: #6745c2;
+  color: #fff;
+}
+.writing-host button:focus-visible,
+.writing-host input:focus-visible,
+.writing-host select:focus-visible,
+.writing-host summary:focus-visible {
+  outline: 3px solid #804e00;
+  outline-offset: 3px;
+}
+.writing-host label {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 10px 0;
+}
+.writing-host input:not([type="checkbox"]),
+.writing-host select {
+  padding: 10px;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid #ada4bd;
+  border-radius: 8px;
+}
+.writing-host form input:not([type="checkbox"]) {
+  width: 100%;
+}
+.writing-host details,
+.writing-host .math-workspace {
+  border: 1px solid #d7cfe5;
+  border-radius: 14px;
+  padding: 12px;
+  margin: 12px 0;
+  background: white;
+}
+.writing-host summary {
+  min-height: 44px;
+  padding: 10px;
+  cursor: pointer;
+}
+.writing-host .writing-tools,
+.writing-host .writing-settings,
+.writing-host .draft-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.writing-host .writing-settings label {
+  flex: 1 1 180px;
+}
+.writing-host .writing-paper {
+  display: block;
+  width: 100%;
+  background: white;
+  border: 2px solid #a296c4;
+  touch-action: none;
+  user-select: none;
+  overflow: hidden;
+}
+.writing-host .input-editor {
+  background: #e7f6ef;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 16px;
+}
+.writing-host .math-keypad {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.writing-host .input-editor form > button {
+  margin: 5px;
+}
+.writing-host .small {
+  font-size: 0.875rem;
+}
+.writing-host .working-row {
+  border-bottom: 1px solid #e5dfed;
+  padding: 8px 0;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.writing-host .working-row strong {
+  width: 100%;
+}
+.writing-host .uncertain {
+  background: #fff0cf;
+  border: 2px solid #9a5800;
+}
+.writing-host .interpreted {
+  background: #f2eefe;
+}
+.writing-host pre {
+  max-height: 400px;
+  overflow: auto;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.writing-host [role="alert"] {
+  background: #fff0de;
+  border-left: 4px solid #ac5600;
+  padding: 12px;
+}
+.writing-host button + button {
+  margin-left: 4px;
+}
+@media (max-width: 480px) {
+  .writing-host {
+    padding: 8px;
+  }
+  .writing-host .math-workspace {
+    padding: 8px;
+  }
+  .writing-host .writing-tools button {
+    flex: 1 1 26%;
+  }
+  .writing-host .draft-controls > * {
+    max-width: 100%;
+  }
+  .writing-host details {
+    padding: 8px;
+  }
+  .writing-host .writing-settings {
+    gap: 4px;
+  }
+}
+
+.simple-maths{max-width:600px;margin:0 auto;padding:12px 16px!important}.simple-maths h1{font-size:1.8rem;margin:12px 0 20px}.simple-maths form>label{display:block}.simple-maths #math-answer{width:100%;font-size:1.3rem;padding:14px;border:2px solid #cbbfe9;border-radius:12px;min-width:0}.simple-maths form>.primary{width:100%;margin:12px 0}.simple-maths>button{min-height:44px;margin:6px 0}.simple-maths small{display:block;margin-top:8px;color:#625b71}.answer-format{font-size:.85rem;margin:6px 0}.answer-actions,.answer-help{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.answer-help button,.answer-actions button{min-height:44px;padding:8px 10px;font-size:.95rem}.answer-feedback{padding:12px;border-radius:12px;background:#fff0df;margin:10px 0}.answer-feedback.complete{background:#dff6ec}.answer-canvas .writing-scroll{max-height:260px}.simple-maths .math-workspace{padding:0}.answer-canvas .writing-paper{min-height:180px}.simple-maths [aria-label="Write your answer"]>p{font-size:.85rem}.simple-maths button{touch-action:manipulation}
+
+.division-lesson{max-width:680px;margin:auto;padding:12px 16px!important}.division-lesson h1{font-size:1.5rem;margin:8px 0}.paper-instruction{font-size:.95rem}.division-paper{display:grid;grid-template-columns:calc(var(--lead) * var(--cell) + 14px) repeat(var(--columns),var(--cell));grid-auto-rows:54px;justify-content:center;align-items:center;position:relative;padding:12px 0 20px;overflow:visible;margin:8px 0;background:#fff;border-radius:14px;font:26px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.paper-divisor{text-align:right;padding-right:12px}.division-bracket{height:52px;border-top:2px solid #403650;border-left:2px solid #403650;align-self:start;border-top-left-radius:8px;margin-top:0}.printed-digit{text-align:center;z-index:1}.paper-entry{height:50px;position:relative;z-index:1;display:flex;align-items:center;justify-content:flex-end}.paper-number,.paper-cursor{font:inherit!important;letter-spacing:0!important;font-variant-numeric:tabular-nums;text-align:right!important;border:0!important;border-radius:0!important;padding:6px 8px!important;background:transparent!important;box-shadow:none!important;color:#262033!important;margin:0!important;min-width:0!important;width:100%;height:48px!important;min-height:44px;}.paper-cursor{z-index:3;outline:2px solid #7964db!important;border-radius:5px!important;caret-color:#5d45cc;background:#f4f0ff!important;}.paper-entry .minus{position:absolute;right:100%;padding:0 3px}.subtraction-line{align-self:end;border-bottom:2px solid #403650;z-index:2;margin-bottom:-1px;}.brought-digit{color:#504a5e}.paper-complete{background:#dff6ec;padding:12px;border-radius:10px}.division-lesson small{display:block;color:#625b71;font-size:.8rem;margin:8px 0}.paper-options{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.division-lesson button{min-height:44px;touch-action:manipulation}.division-lesson .paper-number{min-height:44px;}
+
+/* Place every written digit on the same columns as the printed dividend, including while typing. */
+.division-paper{font-size:min(26px,calc(var(--cell)*.65))}.division-paper .paper-number{display:flex;justify-content:flex-end;align-items:center;padding:0!important}.paper-number [data-paper-digit]{flex:0 0 var(--cell);width:var(--cell);text-align:center}.paper-entry.active{outline:2px solid #7964db;border-radius:5px;background:#f4f0ff}.paper-entry.active::after{content:"";position:absolute;right:calc(var(--cell)/2);height:1em;border-right:2px solid #5d45cc;pointer-events:none}.paper-entry.active.has-value::after{right:calc((var(--cell) - 1ch)/2 - 3px)}.division-paper .paper-cursor{opacity:0;outline:none!important}
+
+.workspace-recovery { max-width: 32rem; padding: .6rem .8rem; border-left: 3px solid #b9a6dd; background: #f7f2fc; border-radius: .5rem; }
+.workspace-recovery p { margin: 0 0 .3rem; }
+.workspace-recovery > div { display: flex; flex-wrap: wrap; gap: .5rem; }
+.workspace-recovery button { min-height: 44px; }
+.paper-entry.paper-error { background: #fff0df; border-radius: .25rem; outline: 1px solid #bd8b59; }
+/* Keyboard input shares the approved paper/ink notebook language. */
+body:has(.keyboard-workspace),body:has(.simple-maths){background:#fbfaf6}
+.keyboard-workspace,.keyboard-lesson,.simple-maths{background:#fbfaf6;color:#1d2130;border:0;box-shadow:none;border-radius:0}
+.keyboard-workspace input,.keyboard-workspace select{font:inherit;min-height:44px;border:1px solid #cbbfe0;border-radius:6px;background:#fffefa;max-width:100%;padding:10px}
+.keyboard-workspace input:focus{outline:2px solid #b29fe8;outline-offset:2px}
+.keyboard-workspace .input-editor{background:transparent;border:0;padding:0}
+.keyboard-workspace .working-row{border-color:#e6e2db;background:transparent}
+.keyboard-workspace .math-keypad{display:none}
+.keyboard-workspace button{min-height:44px;max-width:100%}
+.keyboard-workspace .interpreted,.keyboard-workspace .uncertain{font-family:'OpenPath Kalam',cursive;font-size:24px;background:#f4f0fc;border:1px solid #d9d0ec;color:#1d2130}
+.simple-maths h1,.keyboard-lesson h1{font-family:'OpenPath Kalam',cursive;font-weight:300}
+.simple-maths .primary{background:#6954c8;box-shadow:none;border-radius:8px;min-height:46px}
+@media(max-width:412px){.keyboard-workspace{padding:8px;min-width:0}.keyboard-workspace .input-editor form{min-width:0}.keyboard-workspace input,.keyboard-workspace select{width:100%}}
+.simple-maths .primary{color:#fff}
