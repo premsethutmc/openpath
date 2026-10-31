@@ -1,6 +1,6 @@
 // Workstream E1: sub-skill evidence projection (shadow). Generated variants from the families' release pools, graded by the trusted server grader.
 import { describe, expect, test } from "bun:test";
-import { CORE, MAX_ATTEMPTS, SUBSKILLS, UNMAPPED, COMPETENCY, classifyQuestion, projectFromEvents, projectSubSkills, retentionCycles, type SubSkillId } from "./subskill-evidence";
+import { CORE, MAX_ATTEMPTS, SUBSKILLS, UNMAPPED, COMPETENCY, classifyQuestion, projectFromEvents, projectSubSkills, retentionCycles, type StoredDecision, type SubSkillId } from "./subskill-evidence";
 import { FAMILIES, exposureKey, phasePool, problemOf, type Phase } from "./families";
 import { DAY, INDEPENDENT_MIN, skillEvidence } from "./evidence";
 import { gradeRequest } from "./server-grader";
@@ -15,9 +15,12 @@ const ans = (q: string) => problemOf(q.replace(/:(mc|w)$/, ""))!.answer;
 const off = (q: string) => String(Number(ans(q)) + 1);
 class H {
   attempts: Attempt[] = []; t = T0; private n = new Map<string, number>();
+  /** the trusted grader's decision for each attempt, as the server stores it (D1: the working verdict inside) */
+  decisions = new Map<string, StoredDecision>();
   add(q: string, response: string, o: Partial<Pick<Attempt, "activity" | "hints" | "solution" | "working" | "assessment">> = {}) {
     this.t += 60_000; const k = exposureKey(q); const n = (this.n.get(k) ?? 0) + 1; this.n.set(k, n);
-    const credit = gradeRequest({ id: q, response }).credit;
+    const g = gradeRequest({ id: q, response, ...(o.working?.length ? { working: o.working } : {}) }), credit = g.credit;
+    if (g.decision) this.decisions.set(`a${this.attempts.length}`, { ...(g.decision as object), decidedBy: "server" } as StoredDecision);
     this.attempts.push({ id: `a${this.attempts.length}`, at: new Date(this.t).toISOString(), session: "s1", questionId: q, response, activity: o.activity ?? "practice", hints: o.hints ?? 0, solution: o.solution ?? false, competency: problemOf(q.replace(/:(mc|w)$/, ""))!.competency, n, ...(credit === null ? {} : { credit }), ...(o.working ? { working: o.working } : {}), ...(o.assessment ? { assessment: o.assessment } : {}) });
     return this;
   }
@@ -25,7 +28,7 @@ class H {
   wrong(qs: string[], o: Parameters<H["add"]>[2] = {}) { for (const q of qs) this.add(q, off(q), o); return this; }
   wait(days: number) { this.t += days * DAY; return this; }
   rec(): Pick<LearnerRecords, "attempts"> { return { attempts: this.attempts }; }
-  proj(auth?: { status: string; verified: boolean } | null) { return projectSubSkills(this.rec(), this.t, auth); }
+  proj(auth?: { status: string; verified: boolean } | null) { return projectSubSkills(this.rec(), this.t, auth, this.decisions); }
 }
 const st = (p: ReturnType<H["proj"]>, id: SubSkillId) => p.subSkills.find((s) => s.id === id)!;
 const FAM: Record<SubSkillId, string> = { "linear-equations.one-step@1": "ahone", "linear-equations.two-step@1": "lin", "linear-equations.both-sides@1": "lboth", "linear-equations.brackets@1": "lbrk", "linear-equations.modelling@1": "auleq" };
@@ -171,5 +174,84 @@ describe("independent review fixes (E1 review round 1)", () => {
   test("events the existing reader cannot read fail safe (nothing projected)", () => {
     const p = projectFromEvents("L", [{ kind: "learning_record", record: "attempt", id: "x", learnerId: "L", sessionId: "s", at: new Date(T0).toISOString(), questionId: 7, response: "1", activity: "practice", hints: 0, solution: false, competency: COMPETENCY } as never], T0);
     expect(["unreadable-events", "projected"]).toContain(p.outcome); expect(p.subSkills.every((s) => s.status === "not-attempted")).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------- D1 + E1 integration: the trusted working verdict is the only method source
+const ev = (L: string, id: string, at: number, q: string, response: string, o: { working?: string[]; activity?: string; hints?: number; decision?: unknown } = {}) => {
+  const g = gradeRequest({ id: q, response, ...(o.working?.length ? { working: o.working } : {}) });
+  return { kind: "learning_record", record: "attempt", id, learnerId: L, sessionId: `learn:${L}:s1`, at: new Date(at).toISOString(), questionId: q, response, activity: o.activity ?? "practice", hints: o.hints ?? 0, solution: false, competency: COMPETENCY,
+    ...(o.working?.length ? { working: o.working } : {}), decision: o.decision === undefined ? { ...(g.decision as object), decisionId: `dec:${id}`, decidedBy: "server" } : o.decision } as { kind: string };
+};
+describe("D1 + E1: method evidence comes only from the server-recorded working verdict", () => {
+  const L = "de1-learner";
+  test("correct/incorrect answers and verified/invalid/unsupported/bare/partial methods are represented separately", () => {
+    rng = 37; const qs = pick("lin", "practice", 6); const [a, b, c, d, e, f] = qs;
+    const W = (q: string, bad = false) => linW(q, bad);
+    const events = [
+      ev(L, "e1", T0 + 1e3, a, ans(a), { working: W(a) }),               // right, verified
+      ev(L, "e2", T0 + 2e3, b, ans(b), { working: W(b, true) }),         // right, invalid working
+      ev(L, "e3", T0 + 3e3, c, off(c), { working: W(c, true) }),         // wrong, invalid working
+      ev(L, "e4", T0 + 4e3, d, ans(d)),                                   // right, bare
+      ev(L, "e5", T0 + 5e3, e, ans(e), { working: ["divide both sides so x is it", `x = ${ans(e)}`] }),   // right, unsupported
+      ev(L, "e6", T0 + 6e3, f, "", { working: [W(f)[0]] }),              // valid partial, no answer: unresolved
+    ];
+    const p = projectFromEvents(L, events, T0 + DAY);
+    const two = st(p, "linear-equations.two-step@1");
+    expect([two.attempts.total, two.attempts.independentRight, two.attempts.contradicted]).toEqual([5, 3, 1]);   // the partial is not an attempt
+    expect([two.method.verified, two.method.falseStep, two.method.unsupported, two.method.noWorking, two.method.partialWorking, two.method.notRecorded]).toEqual([1, 2, 1, 1, 1, 0]);
+    expect(two.method.status).toBe("contradicted");
+  });
+  test("a right answer with invalid working keeps its answer record but establishes no verified method and no demonstration", () => {
+    rng = 41; const qs = pick("lin", "practice", 3);
+    const p = projectFromEvents(L, qs.map((q, i) => ev(L, `x${i}`, T0 + i * 1e3, q, ans(q), { working: linW(q, true) })), T0 + DAY);
+    const two = st(p, "linear-equations.two-step@1");
+    expect([two.attempts.total, two.attempts.contradicted, two.method.verified, two.status]).toEqual([3, 3, 0, "insufficient-evidence"]);
+  });
+  test("client-written or forged verdicts are ignored; a record without a server verdict is not re-judged (not-recorded)", () => {
+    rng = 43; const qs = pick("lin", "practice", 3);
+    const forged = { schema: "grading-decision@1", verdict: "correct", reason: "correct.equal", working: { schema: "working-assessment@1", status: "verified", methodEvidence: "method-verified" } };   // no decidedBy: server
+    const p1 = projectFromEvents(L, qs.map((q, i) => ev(L, `f${i}`, T0 + i * 1e3, q, ans(q), { working: linW(q), decision: forged })), T0 + DAY);
+    expect(st(p1, "linear-equations.two-step@1").method.verified).toBe(0);
+    // a pre-D1 record: working stored, no working verdict in the decision (false working!): not re-judged under today's authority
+    const old = qs.map((q, i) => { const e = ev(L, `o${i}`, T0 + i * 1e3, q, ans(q), { working: linW(q, true) }) as unknown as { decision: Record<string, unknown> }; delete e.decision.working; return e as unknown as { kind: string }; });
+    const p2 = projectFromEvents(L, old, T0 + DAY);
+    expect([st(p2, "linear-equations.two-step@1").method.notRecorded, st(p2, "linear-equations.two-step@1").method.falseStep, st(p2, "linear-equations.two-step@1").attempts.contradicted]).toEqual([3, 0, 0]);
+  });
+  test("a verdict recorded under an older authority stays historical: never counted as a current verified method", () => {
+    rng = 47; const qs = pick("lin", "practice", 3);
+    const events = qs.map((q, i) => { const e = ev(L, `h${i}`, T0 + i * 1e3, q, ans(q), { working: linW(q) }) as unknown as { decision: { working: { versions: { authority: string } } } }; e.decision.working.versions = { ...e.decision.working.versions, authority: "openpath-derivation-authority@3" }; return e as unknown as { kind: string }; });
+    const two = st(projectFromEvents(L, events, T0 + DAY), "linear-equations.two-step@1");
+    expect([two.method.verified, two.method.historical, two.method.historicalVerified, two.method.status]).toEqual([0, 3, 3, "not-established"]);
+    expect(two.status).toBe("independently-demonstrated");   // the answers themselves count exactly as recorded
+  });
+  test("another learner's event with the same id cannot supply a verdict; duplicates cannot reorder by delivery position", () => {
+    rng = 53; const [q] = pick("lin", "practice", 1);
+    const mine = ev(L, "d1", T0, q, ans(q), { working: linW(q, true) });
+    const theirs = { ...(ev("someone-else", "d1", T0, q, ans(q), { working: linW(q) }) as object) } as { kind: string };
+    expect(st(projectFromEvents(L, [theirs, mine], T0 + DAY), "linear-equations.two-step@1").method.verified).toBe(0);
+    const dup = { ...(mine as object), response: off(q) } as { kind: string };
+    expect(JSON.stringify(projectFromEvents(L, [mine, dup], T0 + DAY))).toBe(JSON.stringify(projectFromEvents(L, [dup, mine], T0 + DAY)));
+  });
+  test("recovery in one sub-skill does not clear another", () => {
+    rng = 59; const h = new H().right(pick("lin", "practice", 2)).right(pick("lboth", "practice", 2)).wait(8)
+      .wrong(pick("lin", "retention", 1), { activity: "retention" }).wrong(pick("lboth", "retention", 1), { activity: "retention" })
+      .right(pick("lin", "practice", 2));   // two-step recovers; both-sides does not
+    const p = h.proj();
+    expect(st(p, "linear-equations.two-step@1").retention.history[0].recoveredAt).not.toBeNull();
+    expect(st(p, "linear-equations.both-sides@1").status).toBe("recovery-required");
+    expect(st(p, "linear-equations.both-sides@1").historical.everDemonstrated).toBe(true);
+  });
+});
+
+describe("shadow by construction (from the alternative E1)", () => {
+  test("no production module imports the projection or its journeys", async () => {
+    const { readdirSync, readFileSync, statSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const root = new URL("../../../", import.meta.url).pathname, files: string[] = [];
+    const walk = (d: string) => { for (const f of readdirSync(d)) { const p = join(d, f); if (f === "node_modules" || f.startsWith(".") || f.startsWith("dist")) continue; if (statSync(p).isDirectory()) walk(p); else if (/\.(ts|tsx|mts|mjs|py)$/.test(f)) files.push(p); } };
+    for (const d of ["packages/learning/src", "frontend/src", "backend/family"]) walk(join(root, d));
+    const importers = files.filter((f) => /subskill-(evidence|scenarios)|d1e1-journeys/.test(readFileSync(f, "utf8")) && !/(subskill-evidence|subskill-scenarios|d1e1-journeys)\.ts$/.test(f));
+    expect(importers.filter((f) => !/\.test\.(ts|tsx)$/.test(f)).map((f) => f.replace(root, ""))).toEqual([]);
   });
 });

@@ -11,12 +11,15 @@
  *   - "shown alone" through INDEPENDENT_MIN distinct right first answers and status@2 (two of the last three wrong undoes it);
  *   - the delayed check through retention@2 (RETENTION_DAYS after independent success, any wrong answer fails, recovery = INDEPENDENT_MIN
  *     distinct right answers alone outside the check, then a new check RETENTION_DAYS later; a failure is never forgotten);
- *   - method evidence through derivation-interface workingEvidence(authorizeWorking(...)) on the RECORDED working, computed here by the
- *     trusted authority, never read from a client field (assessment.derivationVerified is ignored).
+ *   - method evidence (D1 integration): ONLY the trusted grader's verdict recorded by the SERVER in the attempt's decision
+ *     (grading-decision@1, decidedBy "server", working-assessment@1). Nothing is recomputed here: a record without that verdict (any record
+ *     made before D1) is "not-recorded" and is never re-judged under the current authority; a verdict recorded under an older authority
+ *     version stays as recorded and is marked historical (it never counts as a current verified method). Client fields
+ *     (assessment.derivationVerified, a client-written decision) are ignored.
  * The sub-skill of an answer comes ONLY from the trusted generator id in its question id (gen:<family>:<params>[:mc|:w]); question text is
  * never read for it. An unmapped or unreadable family is "unknown" and is never credited to any sub-skill.
  */
-import { authorizeWorking, workingEvidence, type WorkingEvidence } from "./derivation-interface";
+import { AUTHORITY_VERSION } from "./derivation-authority";
 import { DAY, INDEPENDENT_MIN, RETENTION_CHECK, RETENTION_DAYS, independentAttempt, rightAnswer, type RetentionCycle, type SkillEvidence } from "./evidence";
 import { FAMILIES, exposureKey, problemOf } from "./families";
 import { moduleFor } from "./content";
@@ -70,12 +73,30 @@ export function classifyQuestion(questionId: unknown): Classified {
   return { kind: "mapped", family: m[1], subSkill: s, format: (m[3] as "mc" | "w" | undefined) ?? "typed" };
 }
 
-export type Method = WorkingEvidence | "no-working" | "not-applicable";
+/** the trusted method verdict of one answer, as the server recorded it (D1 working-assessment@1 status), or why there is none */
+export type Method = "method-verified" | "method-false-step" | "unsupported" | "no-method-evidence" | "partial" | "no-working" | "not-recorded" | "not-applicable";
+/** the server's stored decision, as far as this projection reads it */
+export interface StoredDecision { schema?: unknown; decidedBy?: unknown; working?: { schema?: unknown; status?: unknown; methodEvidence?: unknown; versions?: { authority?: unknown } } }
+/** the working verdict the SERVER recorded (records.ts serverVerdict's guard), else null */
+export function trustedWorking(d: StoredDecision | undefined | null) {
+  if (!d || d.schema !== "grading-decision@1" || d.decidedBy !== "server") return null;
+  const w = d.working;
+  return w && w.schema === "working-assessment@1" ? w : null;
+}
+const methodFrom = (w: NonNullable<ReturnType<typeof trustedWorking>>): Method =>
+  w.status === "verified" && w.methodEvidence === "method-verified" ? "method-verified"
+  : w.status === "invalid" ? "method-false-step"
+  : w.status === "partial" ? "partial"
+  : w.status === "answer-only" ? "no-method-evidence"
+  : w.status === "none" ? "no-working"
+  : "unsupported";
 export interface ProjectedAttempt {
   id: string; at: string; questionId: string; family: string; subSkill: SubSkillId; variant: string; format: "typed" | "mc" | "w"; activity: string;
   correct: boolean; independent: boolean; assisted: boolean;
-  /** method evidence from the recorded working, judged by the trusted derivation authority (never a client claim) */
+  /** method evidence: the server-recorded trusted verdict (never a client claim, never recomputed) */
   method: Method;
+  /** the authority version the verdict was recorded under; historical = not the current authority (kept as recorded, never upgraded) */
+  methodAuthority: string | null; historicalMethod: boolean;
   /** a right answer whose working has a false step: contradictory evidence, never counted as shown */
   contradicted: boolean;
 }
@@ -84,7 +105,9 @@ export interface SubSkillProjection {
   id: SubSkillId; name: string; families: string[]; competency: string;
   status: SubSkillStatus;
   attempts: { total: number; independent: number; independentRight: number; assisted: number; assistedRight: number; distinctVariantsRight: number; contradicted: number };
-  method: { verified: number; falseStep: number; noMethodEvidence: number; noWorking: number; status: "verified" | "contradicted" | "not-established" };
+  /** verified: right answers given alone with a current verified method; the other counts are over all answers of the sub-skill.
+   *  partialWorking: valid partial derivations submitted with no final answer (unresolved: never an attempt, never credit). */
+  method: { verified: number; falseStep: number; unsupported: number; noMethodEvidence: number; noWorking: number; partial: number; partialWorking: number; notRecorded: number; historical: number; historicalVerified: number; status: "verified" | "contradicted" | "not-established" };
   rechecks: { at: string; questionId: string; correct: boolean }[];
   retention: { state: SkillEvidence["retention"]; dueAt: string | null; need: number; sampledByModuleCheck: boolean; history: RetentionCycle[] };
   /** historical achievement: kept whatever happens later */
@@ -105,13 +128,13 @@ export interface Projection {
 }
 
 const MODULE_RETENTION = () => moduleFor(COMPETENCY)?.retention ?? [];
-const methodOf = (a: Attempt, family: string, format: string): Method => {
-  if (format === "mc" || !FAMILIES.get(family)?.contract?.statement) return "not-applicable";
-  if (!a.working?.length) return "no-working";
-  const p = problemOf(a.questionId.replace(/:(mc|w)$/, ""));
-  const stmt = p ? FAMILIES.get(family)!.contract!.statement!(p.params) : null;
-  if (!stmt) return "not-applicable";
-  return workingEvidence(authorizeWorking(stmt, a.working));
+const methodFrom2 = (d: StoredDecision | undefined): Method | null => { const w = trustedWorking(d); return w ? methodFrom(w) : null; };
+const methodOf = (a: Attempt, family: string, format: string, d: StoredDecision | undefined): { method: Method; authority: string | null } => {
+  const w = trustedWorking(d);
+  if (w) return { method: methodFrom(w), authority: typeof w.versions?.authority === "string" ? w.versions.authority : null };
+  if (format === "mc" || !FAMILIES.get(family)?.contract?.statement) return { method: "not-applicable", authority: null };
+  // no trusted verdict was recorded (a record from before D1, or one the server did not decide): not re-judged here
+  return { method: a.working?.length ? "not-recorded" : "no-working", authority: null };
 };
 const validAttempt = (a: unknown): a is Attempt => {
   const x = a as Attempt;
@@ -146,7 +169,7 @@ export function retentionCycles(ind: Attempt[], from: string | null, need: numbe
 }
 
 /** The projection. `authoritative` is the existing learner state for the competency (read only, to expose broader claims). */
-export function projectSubSkills(records: Pick<LearnerRecords, "attempts">, now: number, authoritative?: { status: string; verified: boolean } | null): Projection {
+export function projectSubSkills(records: Pick<LearnerRecords, "attempts"> & Partial<Pick<LearnerRecords, "unresolved">>, now: number, authoritative?: { status: string; verified: boolean } | null, decisions?: ReadonlyMap<string, StoredDecision>): Projection {
   const base: Projection = { version: SUBSKILL_PROJECTION_VERSION, mapping: SUBSKILL_MAPPING_VERSION, competency: COMPETENCY, authoritative: false, outcome: "projected", subSkills: [], unknown: { count: 0, byReason: {}, attempts: [] }, rejected: [], discrepancies: [] };
   const all = Array.isArray(records?.attempts) ? records.attempts : [];
   if (all.length > MAX_ATTEMPTS) return { ...base, outcome: "resource-limit", rejected: [{ id: null, reason: `more than ${MAX_ATTEMPTS} attempts: not projected` }] };
@@ -164,9 +187,9 @@ export function projectSubSkills(records: Pick<LearnerRecords, "attempts">, now:
       if (a.competency === COMPETENCY) { base.unknown.count++; base.unknown.byReason[c.reason] = (base.unknown.byReason[c.reason] ?? 0) + 1; base.unknown.attempts.push({ id: a.id, questionId: a.questionId, reason: c.reason }); }
       continue;
     }
-    const correct = rightAnswer(a), independent = independentAttempt(a), method = methodOf(a, c.family, c.format);
+    const correct = rightAnswer(a), independent = independentAttempt(a), mo = methodOf(a, c.family, c.format, decisions?.get(a.id)), method = mo.method;
     byId.set(a.id, a);
-    projected.push({ id: a.id, at: a.at, questionId: a.questionId, family: c.family, subSkill: c.subSkill.id, variant: exposureKey(a.questionId), format: c.format, activity: a.activity, correct, independent, assisted: !independent, method, contradicted: correct && method === "method-false-step" });
+    projected.push({ id: a.id, at: a.at, questionId: a.questionId, family: c.family, subSkill: c.subSkill.id, variant: exposureKey(a.questionId), format: c.format, activity: a.activity, correct, independent, assisted: !independent, method, methodAuthority: mo.authority, historicalMethod: mo.authority !== null && mo.authority !== AUTHORITY_VERSION, contradicted: correct && method === "method-false-step" });
   }
   const moduleRetention = MODULE_RETENTION();
   for (const s of SUBSKILLS) {
@@ -197,14 +220,20 @@ export function projectSubSkills(records: Pick<LearnerRecords, "attempts">, now:
     else if (shown) status = "independently-demonstrated";
     else if (ind.length < INDEPENDENT_MIN) status = "insufficient-evidence";
     else status = "developing";
-    const mv = mine.filter((p) => p.independent && p.method === "method-verified" && p.correct).length;
+    // a verified method counts only when recorded under the current authority; an older authority's verdict stays historical (never upgraded)
+    const mv = mine.filter((p) => p.independent && p.method === "method-verified" && p.correct && !p.historicalMethod).length;
     const mf = mine.filter((p) => p.method === "method-false-step").length;
+    // valid partial derivations with no final answer: the reader keeps them out of the attempts (unresolved), so they are counted here only
+    const partialWorking = (records?.unresolved ?? []).filter((u) => { const c = classifyQuestion(u.questionId); return c.kind === "mapped" && c.subSkill.id === s.id && methodFrom2(decisions?.get(u.id)) === "partial"; }).length;
     const lastIndependentAt = ind.at(-1)?.at ?? null;
     const daysSince = lastIndependentAt ? Math.floor((now - Date.parse(lastIndependentAt)) / DAY) : null;
     base.subSkills.push({
       id: s.id, name: s.name, families: s.families, competency: s.competency, status,
       attempts: { total: mine.length, independent: ind.length, independentRight: ind.filter(credited).length, assisted: mine.filter((p) => p.assisted).length, assistedRight: mine.filter((p) => p.assisted && p.correct).length, distinctVariantsRight: distinct.size, contradicted: mine.filter((p) => p.contradicted).length },
-      method: { verified: mv, falseStep: mf, noMethodEvidence: mine.filter((p) => p.method === "no-method-evidence").length, noWorking: mine.filter((p) => p.method === "no-working").length, status: mf ? "contradicted" : mv ? "verified" : "not-established" },
+      method: { verified: mv, falseStep: mf, unsupported: mine.filter((p) => p.method === "unsupported").length, noMethodEvidence: mine.filter((p) => p.method === "no-method-evidence").length, noWorking: mine.filter((p) => p.method === "no-working").length,
+        partial: mine.filter((p) => p.method === "partial").length, partialWorking, notRecorded: mine.filter((p) => p.method === "not-recorded").length,
+        historical: mine.filter((p) => p.historicalMethod).length, historicalVerified: mine.filter((p) => p.historicalMethod && p.method === "method-verified").length,
+        status: mf ? "contradicted" : mv ? "verified" : "not-established" },
       rechecks: mine.filter((p) => p.independent && p.activity === "check").map((p) => ({ at: p.at, questionId: p.questionId, correct: credited(p) })),
       retention: { state: cyc.retention, dueAt: cyc.due, need, sampledByModuleCheck: sampled > 0, history: cyc.history },
       historical: { everDemonstrated: !!independentAt, firstDemonstratedAt: independentAt },
@@ -237,11 +266,19 @@ export function projectFromEvents(learnerId: string, events: readonly { kind: st
   // own order (seq) is the same as time order for server-stamped records; this makes the projection independent of delivery order.
   const at = (e: unknown) => { const v = Date.parse(String((e as { at?: unknown })?.at)); return Number.isNaN(v) ? Infinity : v; };
   const idOf = (e: unknown) => String((e as { id?: unknown })?.id ?? "");
-  const ordered = Array.isArray(events) ? [...events].sort((x, y) => at(x) - at(y) || (idOf(x) < idOf(y) ? -1 : idOf(x) > idOf(y) ? 1 : 0)) : [];
+  // D1 integration (from the alternative E1): equal (instant, id) pairs are ordered by their canonical content, so duplicates cannot reorder by
+  // delivery position
+  const canon = (v: unknown): string => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon((v as Record<string, unknown>)[k])}`).join(",")}}` : JSON.stringify(v) ?? "null");
+  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+  const ordered = Array.isArray(events) ? events.map((e) => ({ e, t: at(e), i: idOf(e), c: canon(e) })).sort((x, y) => x.t - y.t || cmp(x.i, y.i) || cmp(x.c, y.c)).map((x) => x.e) : [];
   let recs: LearnerRecords;
   try { recs = readRecords(learnerId, ordered); }
   catch (e) { return { version: SUBSKILL_PROJECTION_VERSION, mapping: SUBSKILL_MAPPING_VERSION, competency: COMPETENCY, authoritative: false, outcome: "unreadable-events", subSkills: [], unknown: { count: 0, byReason: {}, attempts: [] }, rejected: [{ id: null, reason: `the existing reader could not read the events (${String((e as Error)?.message ?? e).slice(0, 80)}): nothing is projected` }], discrepancies: [] }; }
-  const p = projectSubSkills(recs, now, authoritative);
+  // the server's decision behind each record the reader admitted (this learner's, first occurrence): the only source of method verdicts
+  const admittedIds = new Set([...recs.attempts.map((a) => a.id), ...recs.unresolved.map((u) => u.id)]);
+  const decisions = new Map<string, StoredDecision>();
+  for (const e of ordered) { const r = e as { kind?: string; record?: string; id?: unknown; learnerId?: unknown; decision?: StoredDecision }; if (r.kind === "learning_record" && r.record === "attempt" && r.learnerId === learnerId && typeof r.id === "string" && admittedIds.has(r.id) && r.decision && !decisions.has(r.id)) decisions.set(r.id, r.decision); }
+  const p = projectSubSkills(recs, now, authoritative, decisions);
   if (p.outcome !== "projected") return p;
   const admitted = new Set([...recs.attempts.map((a) => a.id), ...recs.unresolved.map((a) => a.id), ...recs.pending.map((a) => a.id)]);
   const seen = new Set<string>();
