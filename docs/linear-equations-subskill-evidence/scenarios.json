@@ -1,0 +1,2386 @@
+{
+ "contract": "linear-equations-subskill-projection@1",
+ "mapping": "linear-equations-subskills@1",
+ "seed": 0,
+ "scenarios": [
+  {
+   "id": 1,
+   "name": "one-step success only",
+   "authoritative": {
+    "status": "not_started",
+    "verified": false,
+    "retention": "none",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "two-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [],
+   "supporting": [
+    {
+     "questionId": "gen:ahone:1,4,15",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:ahone:2,4,1",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:ahone:2,4,9",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "name": "two-step success only",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:3,9,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "name": "both-sides success only",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "both-sides"
+     ]
+    },
+    "two-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.two-step@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lboth:7,15,3,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:6,3,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:9,19,4,3",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "name": "bracket-equation success only",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "brackets"
+     ]
+    },
+    "two-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.two-step@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lbrk:5,-5,1,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lbrk:4,-6,2,3",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lbrk:6,-5,3,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "name": "mixed-family success (two-step, both sides, brackets)",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:7,15,3,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:6,3,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lbrk:5,-5,1,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lbrk:4,-6,2,3",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "name": "repeated two-step success, nothing on other kinds",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 8,
+     "independent": 8,
+     "assistedRight": 0,
+     "distinctVariantsRight": 8,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:3,9,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:8,17,12",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:8,19,1",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:4,14,6",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:8,4,6",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:8,12,11",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "name": "correct final answer with invalid working",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "two-step": {
+     "status": "insufficient-evidence",
+     "method": "contradicted",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 3,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.two-step@1",
+       "status": "insufficient-evidence"
+      },
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "7x = 80",
+      "x = 10"
+     ]
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "7x = 53",
+      "x = 7"
+     ]
+    },
+    {
+     "questionId": "gen:lin:3,9,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "3x = 33",
+      "x = 5"
+     ]
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "name": "correct bare answer without method evidence",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "x = 10"
+     ]
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "x = 7"
+     ]
+    },
+    {
+     "questionId": "gen:lin:3,9,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "x = 5"
+     ]
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "name": "unsupported mathematical working",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "7x + 5 - 5 = 75 - 5",
+      "7x/7 = 70/7",
+      "x = 10"
+     ]
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "7x + 2 - 2 = 51 - 2",
+      "7x/7 = 49/7",
+      "x = 7"
+     ]
+    },
+    {
+     "questionId": "gen:lin:3,9,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": [
+      "3x + 9 - 9 = 24 - 9",
+      "3x/3 = 15/3",
+      "x = 5"
+     ]
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "name": "assisted success followed by independent failure",
+   "authoritative": {
+    "status": "guided",
+    "verified": false,
+    "retention": "none",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "two-step": {
+     "status": "developing",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 2,
+     "assistedRight": 3,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 1,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 1,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:3,9,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 1,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:5,6,5",
+     "activity": "practice",
+     "correct": false,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:9,10,12",
+     "activity": "practice",
+     "correct": false,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "name": "successful independent recheck",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [
+      true
+     ],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:5,6,5",
+     "activity": "check",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "name": "failed independent recheck",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [
+      false
+     ],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:5,6,5",
+     "activity": "check",
+     "correct": false,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "name": "successful delayed retention (module check: two-step + modelling)",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "passed",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step",
+      "both-sides"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "passed",
+     "retentionHistory": [
+      "passed"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "retention-due",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "due",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 3,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 3,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "passed",
+     "retentionHistory": [
+      "passed"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "retention-due"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:auleq:0,8,16,13",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:auleq:2,6,14,9",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:7,15,3,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:6,3,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:6,17,2",
+     "activity": "retention",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:auleq:2,9,19,11",
+     "activity": "retention",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 14,
+   "name": "failed delayed retention with recovery",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step",
+      "both-sides"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 4,
+     "independent": 5,
+     "assistedRight": 0,
+     "distinctVariantsRight": 4,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "failed+recovered",
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "retention-due",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "due",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "insufficient-evidence",
+     "method": "not-established",
+     "independentRight": 1,
+     "independent": 1,
+     "assistedRight": 0,
+     "distinctVariantsRight": 1,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "retention-due"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:7,15,3,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:6,3,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:6,17,2",
+     "activity": "retention",
+     "correct": false,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:auleq:2,9,19,11",
+     "activity": "retention",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:4,17,8",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:6,20,4",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ],
+   "beforeRecovery": {
+    "authoritative": {
+     "status": "review",
+     "verified": false,
+     "independent": {
+      "right": 5,
+      "total": 6
+     },
+     "retention": "failed",
+     "recoveryRequired": true,
+     "retentionHistory": [
+      {
+       "due": "2026-03-09T09:02:00.000Z",
+       "result": "failed",
+       "failedAt": "2026-03-10T09:05:00.000Z",
+       "recoveredAt": null
+      }
+     ]
+    },
+    "subSkills": {
+     "two-step": "recovery-required",
+     "both-sides": "retention-due",
+     "modelling": "insufficient-evidence"
+    }
+   }
+  },
+  {
+   "id": 15,
+   "name": "restart and deterministic replay",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 3,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [
+      false
+     ],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {},
+   "discrepancies": [],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:7,15,3,5",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lboth:6,3,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lbrk:5,-5,1,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lbrk:4,-6,2,3",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:auleq:0,8,16,13",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:auleq:2,6,14,9",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lbrk:3,-3,2,11",
+     "activity": "check",
+     "correct": false,
+     "hints": 0,
+     "working": null
+    }
+   ],
+   "replay": {
+    "identicalAfterRestart": true,
+    "identicalWithReversedStoreOrder": true
+   }
+  },
+  {
+   "id": 16,
+   "name": "historical events with missing family metadata",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": [
+      "two-step"
+     ]
+    },
+    "two-step": {
+     "status": "independently-demonstrated",
+     "method": "not-established",
+     "independentRight": 2,
+     "independent": 2,
+     "assistedRight": 0,
+     "distinctVariantsRight": 2,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "scheduled",
+     "retentionHistory": [
+      "pending"
+     ],
+     "everDemonstrated": true,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {
+    "excluded-by-existing-reader": 2
+   },
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:lin:7,5,10",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:lin:7,2,7",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  },
+  {
+   "id": 17,
+   "name": "unknown or unmapped question family (meet)",
+   "authoritative": {
+    "status": "independent",
+    "verified": false,
+    "retention": "scheduled",
+    "recoveryRequired": false
+   },
+   "subSkills": {
+    "one-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "two-step": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "both-sides": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "brackets": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    },
+    "modelling": {
+     "status": "not-attempted",
+     "method": "not-established",
+     "independentRight": 0,
+     "independent": 0,
+     "assistedRight": 0,
+     "distinctVariantsRight": 0,
+     "contradicted": 0,
+     "rechecks": [],
+     "retention": "none",
+     "retentionHistory": [],
+     "everDemonstrated": false,
+     "prerequisiteSupport": []
+    }
+   },
+   "unknown": {
+    "unmapped-family": 3
+   },
+   "discrepancies": [
+    {
+     "authoritative": {
+      "status": "independent",
+      "verified": false
+     },
+     "claim": "the competency reads \"independent\" (shown alone) for every kind of linear equation",
+     "unsupported": [
+      {
+       "id": "linear-equations.two-step@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.both-sides@1",
+       "status": "not-attempted"
+      },
+      {
+       "id": "linear-equations.brackets@1",
+       "status": "not-attempted"
+      }
+     ]
+    }
+   ],
+   "supporting": [
+    {
+     "questionId": "gen:meet:3,0",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:meet:0,1",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    },
+    {
+     "questionId": "gen:meet:1,6",
+     "activity": "practice",
+     "correct": true,
+     "hints": 0,
+     "working": null
+    }
+   ]
+  }
+ ]
+}
