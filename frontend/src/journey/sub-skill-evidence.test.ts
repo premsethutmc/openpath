@@ -10,7 +10,7 @@ const t = (id: string) => { let x = T.get(id); if (!x) { x = e1Trace(E1_JOURNEYS
 const sub = (id: string, s: string) => t(id).projection.subSkills.find((x) => x.id === s)!;
 const le = (id: string) => t(id).projection.competencies.find((c) => c.competency === "MATH.algebra.linear-equations")!;
 const prod = (id: string, c = "MATH.algebra.linear-equations") => t(id).production.find((p) => p.competency === c)!;
-const kinds = (id: string) => le(id).leakage.map((l) => `${l.kind}:${l.missing.join("+")}`);
+const kinds = (id: string): string[] => le(id).leakage.map((l) => `${l.kind}:${l.missing.join("+")}`);
 
 test("E1-01 two-step success alone: production says independent for the whole competency; the projection shows brackets and both-sides unevidenced", () => {
   assert.equal(prod("E1-01").status, "independent");
@@ -48,7 +48,8 @@ test("E1-05 assisted performance never counts as independent", () => {
 test("E1-06 every sub-skill shown, but the delayed check only ever tests two-step and forming questions", () => {
   assert.equal(le("E1-06").supports, "shown-all-required");
   assert.equal(sub("E1-06", "two-step").retention, "passed");
-  assert.deepEqual([sub("E1-06", "variables-both-sides").retention, sub("E1-06", "brackets").retention], ["never-checked", "never-checked"]);
+  assert.deepEqual([sub("E1-06", "variables-both-sides").retention, sub("E1-06", "brackets").retention], ["not-in-delayed-check", "not-in-delayed-check"]);
+  assert.deepEqual(le("E1-06").notInDelayedCheck, ["variables-both-sides", "brackets"]);
   assert.ok(kinds("E1-06").includes("delayed-check-passed-without-sub-skill-check:variables-both-sides+brackets"));
 });
 
@@ -69,7 +70,7 @@ test("replay: a session rebuilt from the stored events gives the same projection
   for (const id of ["E1-03", "E1-07"]) {
     const x = t(id);
     const stored = JSON.parse(JSON.stringify(x.events)) as { kind: string; sessionId?: string }[];
-    const s1 = SliceSession.fromEvents(x.learnerId, "MATH.algebra.linear-equations", stored, x.now, stored.at(-1)?.sessionId?.split(":").pop() ?? "s1");
+    const s1 = SliceSession.fromEvents(x.learnerId, "MATH.algebra.linear-equations", stored as never, x.now, stored.at(-1)?.sessionId?.split(":").pop() ?? "s1");
     const again = subSkillProjection(x.learnerId, s1.events as unknown as { kind: string }[], s1.now);
     assert.equal(again.digest, x.digest, id);
     assert.equal(subSkillProjection(x.learnerId, x.events as { kind: string }[], x.now).digest, x.digest, `${id}: deterministic`);

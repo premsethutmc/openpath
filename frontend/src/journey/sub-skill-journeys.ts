@@ -58,7 +58,7 @@ export function e1Trace(j: E1Journey) {
     id: j.id, title: j.title, kind: j.kind, learnerId: r.learnerId, ...(r.extra ?? {}),
     answered: attempts.map((a) => ({ q: a.questionId!, family: famOf(a.questionId!), activity: a.activity, hints: a.hints ?? 0, verdict: a.decision?.verdict ?? null })),
     production: p.competencies.map((c) => ({ competency: c.competency, ...c.production })),
-    projection: { subSkills: p.subSkills.map((s) => ({ id: s.id, status: s.status, answers: s.answers, firstShownAt: s.firstShownAt, retention: s.retention, history: s.retentionHistory.map((h) => h.result), method: Object.fromEntries(Object.entries(s.method).filter(([, n]) => n)) })), competencies: p.competencies.map((c) => ({ competency: c.competency, supports: c.supports, shown: c.shown, missing: c.missing, retained: c.retained, leakage: c.leakage })) },
+    projection: { subSkills: p.subSkills.map((s) => ({ id: s.id, status: s.status, answers: s.answers, firstShownAt: s.firstShownAt, retention: s.retention, checkNeeds: s.checkNeeds, history: s.retentionHistory.map((h) => h.result), alone: s.alone, method: Object.fromEntries(Object.entries(s.method).filter(([, n]) => n)) })), competencies: p.competencies.map((c) => ({ competency: c.competency, supports: c.supports, shown: c.shown, missing: c.missing, retained: c.retained, notInDelayedCheck: c.notInDelayedCheck, leakage: c.leakage })) },
     digest: p.digest, events: r.events, now: r.now,
   };
 }
