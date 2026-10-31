@@ -1,0 +1,58 @@
+== HELDOUT3-corpus (477)
+    stored-P2FINAL        M2-engine         G-engine
+  debatable_unsupported                            4               4               4
+  debatable_verified                               3               3               3
+  firstInvalid_exact                              70              70              70
+  invalid_detected                                70              70              70
+  invalid_total                                  114             114             114
+  legit_total                                    186             186             186
+  legit_verified                                  57              57              58
+  unjustified_authorized                           3               3               3
+  unsupported_reported_unsupported               165             165             165
+  unsupported_total                              170             170             170
+   unsafe stored-P2FINAL ['tr-002', 'tr-006', 'tr-021']
+   unsafe M2-engine ['tr-002', 'tr-006', 'tr-021']
+   unsafe G-engine ['tr-002', 'tr-006', 'tr-021']
+== HELDOUT3-corpus-bare (477)
+    stored-P2FINAL        M2-engine         G-engine
+  debatable_incomplete                             2               2               2
+  debatable_unsupported                            2               2               2
+  debatable_verified                               3               3               3
+  firstInvalid_exact                              81              81              81
+  invalid_detected                                82              82              82
+  invalid_total                                  114             114             114
+  legit_total                                    186             186             186
+  legit_verified                                 106             106             107
+  unjustified_authorized                           6               6              10
+  unsupported_reported_unsupported               162             162             158
+  unsupported_total                              170             170             170
+   unsafe stored-P2FINAL ['tr-002', 'tr-006', 'tr-021', 'rl-022', 'rl-023', 'rl-024']
+   unsafe M2-engine ['tr-002', 'tr-006', 'tr-021', 'rl-022', 'rl-023', 'rl-024']
+   unsafe G-engine ['tr-002', 'tr-006', 'tr-021', 'rl-018', 'rl-019', 'rl-020', 'rl-021', 'rl-022', 'rl-023', 'rl-024']
+== HELDOUT2-corpus (442)
+    stored-P2FINAL        M2-engine         G-engine
+  debatable_ambiguous                              1               1               1
+  debatable_incomplete                             2               2               2
+  debatable_malformed                              1               1               1
+  debatable_unsupported                            9               9               9
+  debatable_verified                               2               2               2
+  firstInvalid_exact                             100             100             100
+  invalid_detected                               100             100             100
+  invalid_total                                  125             125             125
+  legit_total                                    181             181             181
+  legit_verified                                  72              71              71
+  unsupported_reported_unsupported               118             118             118
+  unsupported_total                              121             121             121
+== bare-corpus (442)
+    stored-P2FINAL        M2-engine         G-engine
+  debatable_incomplete                             3               3               3
+  debatable_malformed                              1               1               1
+  debatable_unsupported                            9               9               9
+  debatable_verified                               2               2               2
+  firstInvalid_exact                             110             110             110
+  invalid_detected                               110             110             110
+  invalid_total                                  125             125             125
+  legit_total                                    181             181             181
+  legit_verified                                  97              96              96
+  unsupported_reported_unsupported               118             118             118
+  unsupported_total                              121             121             121

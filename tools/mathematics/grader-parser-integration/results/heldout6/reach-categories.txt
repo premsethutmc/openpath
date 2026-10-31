@@ -1,0 +1,11 @@
+== heldout6/trace-baseline.json: 222 items, 113 decided by P2 (certified 46, refuted 67)
+      8  parser rejection: working line unreadable
+    103  task-normalization failure: statement unreadable by the established route
+      2  unsupported operation (established route abstained on a line)
+   reach (engine verdict = P2 verdict): 0/113
+== heldout6/trace-b2.json: 222 items, 113 decided by P2 (certified 46, refuted 67)
+      3  final-answer: incomplete / no final answer
+      2  parser rejection: working line unreadable
+     43  reached-P2: certified
+     65  reached-P2: invalid reasoning (agrees)
+   reach (engine verdict = P2 verdict): 108/113

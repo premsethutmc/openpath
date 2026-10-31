@@ -1,0 +1,32 @@
+== dev/trace-HELDOUT2-corpus.json: 442 items, 260 decided by P2 (certified 142, refuted 118)
+      8  final-answer: incomplete / no final answer
+    134  reached-P2: certified
+    118  reached-P2: invalid reasoning (agrees)
+   reach (engine verdict = P2 verdict): 252/260
+== dev/trace-HELDOUT3-corpus-bare.json: 477 items, 293 decided by P2 (certified 198, refuted 95)
+     49  final-answer: incomplete / no final answer
+     12  parser rejection: working line unreadable
+    144  reached-P2: certified
+     88  reached-P2: invalid reasoning (agrees)
+   reach (engine verdict = P2 verdict): 232/293
+== dev/trace-HELDOUT3-corpus.json: 477 items, 309 decided by P2 (certified 205, refuted 104)
+     42  final-answer: incomplete / no final answer
+     13  parser rejection: working line unreadable
+    154  reached-P2: certified
+    100  reached-P2: invalid reasoning (agrees)
+   reach (engine verdict = P2 verdict): 254/309
+== dev/trace-HELDOUT4.json: 275 items, 210 decided by P2 (certified 120, refuted 90)
+      8  final-answer: incomplete / no final answer
+    112  reached-P2: certified
+     90  reached-P2: invalid reasoning (agrees)
+   reach (engine verdict = P2 verdict): 202/210
+== dev/trace-HELDOUT5.json: 163 items, 109 decided by P2 (certified 50, refuted 59)
+      8  final-answer: incomplete / no final answer
+     42  reached-P2: certified
+     59  reached-P2: invalid reasoning (agrees)
+   reach (engine verdict = P2 verdict): 101/109
+== dev/trace-bare-corpus.json: 442 items, 244 decided by P2 (certified 128, refuted 116)
+      9  final-answer: incomplete / no final answer
+    120  reached-P2: certified
+    115  reached-P2: invalid reasoning (agrees)
+   reach (engine verdict = P2 verdict): 235/244

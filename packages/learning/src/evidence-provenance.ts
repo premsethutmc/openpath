@@ -49,6 +49,9 @@ export const MECHANISMS: Record<string, Mechanism> = Object.fromEntries([
   M("exact-arithmetic", "exact-kernel", "independent algebra checker (exact rational arithmetic)", ["algebra-text"], [], true, ALG),
   M("exact-polynomial-identity", "exact-kernel", "independent algebra checker (exact polynomial identity)", ["algebra-text"], [], true, ALG),
   M("exact-solution-set", "exact-kernel", "independent algebra checker (exact solution set)", ["algebra-text"], [], true, ALG),
+  // B2: the P2 derivation authority (registered moves, exact rational solution sets, a certificate chain replayed from scratch before it is used). It is a producer only on the
+  // statement-text route (like the other algebra-text checker mechanisms; the engine also records the P2 reasoner in the envelope).
+  M("p2-derivation-authority", "exact-kernel", "P2 derivation authority (registered moves + exact solution sets; replayed certificate chain)", ["algebra-text"], [], true, ALG),
   // typed (structured) inputs: the typed domain reasoner that judged the step against the typed problem object
   ...["symbolic:m3", "calculus:exact", "calculus:methods", "geometry:synthetic", "math-core:equation", "math-core:number", "math-core:symbolic", "math-core:multivariate", "complex-polynomial:b3", "linear-algebra:b2", "probability-statistics:b1", "math-domains-m1", "math-domains-m2"]
     .map((id) => M(id, "typed-domain-reasoner", `typed domain reasoner ${id}`, TYPED, [id])),

@@ -71,8 +71,8 @@ describe("E3 independent verification of complete algebra solutions", () => {
     ];
     for (const [s, l] of cases) { const a = await run(s, l); expect(a.classification).toBe("verified"); expect(gate(a)?.independentlyVerified).toBe(true); expect(gate(a)?.level).not.toBe("none"); }
   });
-  // P2-FINAL: relied on the legacy numeral-provenance fallback; now unsupported by design (see P2_FINAL_AUTHORITY_REVIEW_REPORT.md, new-unsupported list)
-  test.skip("multiplying an inequality by a negative number must reverse it", async () => {
+  // grader generalization (@3): re-enabled - the authority now certifies this route itself (was P2-FINAL skipped)
+  test("multiplying an inequality by a negative number must reverse it", async () => {
     expect((await run("-2x < 6", ["-2x < 6", "x < -3"])).classification).toBe("invalid");
     expect((await run("-2x < 6", ["-2x < 6", "x > -3"])).classification).toBe("verified");
   });
