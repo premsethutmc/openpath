@@ -10,6 +10,7 @@ import { withDecisions, type LearningRecord } from "../../../packages/learning/s
 import { COMPETENCY, projectFromEvents, type Projection } from "../../../packages/learning/src/subskill-evidence";
 import { JOURNEYS as D1_JOURNEYS, runJourney } from "./grader-journeys";
 import { SliceSession } from "./session";
+import { make } from "../../../packages/learning/src/session";
 
 export const DE1_START = Date.parse("2026-03-02T09:00:00Z");
 const base = (q: string) => q.replace(/:(mc|w)$/, "");
@@ -123,7 +124,9 @@ export const DE1_JOURNEYS: { id: string; title: string; run: () => DE1Trace }[] 
   { id: "J20", title: "Unknown question-family identifiers", run: () => {
     const s = session("J20", LIN.slice(0, 2).map((q) => rw(q)));
     const t0 = s.now;
-    const extra = ["gen:meet:3,0", "gen:zzz:1,2", "gen:lin:1,1,1", "Solve 2x + 5 = 17"].map((q, i) => ({ kind: "learning_record", record: "attempt", id: `u${i}`, learnerId: s.learnerId, sessionId: `learn:${s.learnerId}:s1`, at: new Date(t0 + (i + 1) * 60_000).toISOString(), questionId: q, response: "5", activity: "practice", hints: 0, solution: false, competency: COMPETENCY, decision: { schema: "grading-decision@1", decisionId: `dec:u${i}`, decidedBy: "server", verdict: "correct", reason: "correct.equal", working: { schema: "working-assessment@1", status: "verified", methodEvidence: "method-verified" } } }) as unknown as LearningRecord);
+    // stored records whose question id the current content does not know (a retired, unmapped or malformed id): built by the session's own
+    // record maker for a known question, then carrying that stored id, as a store would return them
+    const extra = ["gen:meet:3,0", "gen:zzz:1,2", "gen:lin:1,1,1", "Solve 2x + 5 = 17"].map((q, i) => ({ ...make.attempt({ learnerId: s.learnerId, sessionId: `learn:${s.learnerId}:s1`, at: new Date(t0 + (i + 1) * 60_000).toISOString() }, LIN[0], "5", "practice"), id: `u${i}`, questionId: q, competency: COMPETENCY, decision: { schema: "grading-decision@1", decisionId: `dec:u${i}`, decidedBy: "server", verdict: "correct", reason: "correct.equal", working: { schema: "working-assessment@1", status: "verified", methodEvidence: "method-verified" } } }) as unknown as LearningRecord);
     s.now = t0 + DAY;
     return trace("J20", "Unknown question-family identifiers", s, [...stored(s), ...extra]);
   } },

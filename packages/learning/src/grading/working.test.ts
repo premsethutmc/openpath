@@ -131,5 +131,5 @@ describe("contract safety", () => {
       n++;
     }
     expect(n).toBe(160);
-  });
+  }, 60_000);   // 160 trusted-grader decisions: allowed more than bun's 5 s default (it timed out under full-suite load)
 });
