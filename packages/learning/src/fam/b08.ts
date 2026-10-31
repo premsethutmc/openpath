@@ -8,6 +8,7 @@
 import type { Bug, Def, InstanceTeaching, Value, Visual } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 import { fmt, gcd, near, signed } from "../family-kit";
+import { bothSidesTeaching, bracket, bracketTeaching, lin as linTerm } from "./linear-teaching";
 
 const LINI = "MATH.algebra.linear-intro";
 const SIMP = "MATH.algebra.algebra-simplify";
@@ -929,6 +930,98 @@ export const B08: Def[] = [
       ],
     },
     limits: "Whole-number coefficients with a rational answer; equations with fractions of x are ahfrac.",
+  },
+
+  // ------------------------------------------------------------ Grade 7: linear equations with x on both sides, and with a bracket (Workstream A3)
+  {
+    id: "lboth",
+    contract: { kind: "var", statement: ([a, b, c, x]) => `${a}x+${b}=${c === 1 ? "" : c}x+${(a - c) * x + b}`, variable: "x" },
+    arity: 4,
+    title: "Solving an equation with x on both sides",
+    competency: LIN,
+    type: "integer",
+    mc: true,
+    // [a, b, c, x]: ax + b = cx + d with d = (a − c)x + b; whole numbers, x on both sides with more on the left
+    parse: none,
+    reject: ([a, b, c, x]) => (a < 2 || a > 9 || c < 1 || c >= a || b < 1 || b > 20 || x < 1 || x > 12 || (a - c) * x + b > 60 ? "ax + b = cx + d with 2 ≤ a ≤ 9, 1 ≤ c < a, 1 ≤ b ≤ 20, a whole-number solution from 1 to 12 and d up to 60." : null),
+    prompt: ([a, b, c, x]) => `Solve ${linTerm(a, b)} = ${linTerm(c, (a - c) * x + b)}. What is x?`,
+    solve: ([a, b, c, x]) => {
+      const d = (a - c) * x + b;
+      return { steps: [
+        { id: "x-left", op: "subtract", competency: LIN, inputs: [a, c], value: a - c },
+        { id: "numbers-right", op: "subtract", competency: LIN, inputs: [d, b], value: d - b },
+        { id: "divide", op: "divide", competency: LIN, inputs: [d - b, a - c], value: x },
+      ], answer: x };
+    },
+    // independent: substitute the answer into both sides and compare
+    validate: ([a, b, c, x], v) => typeof v === "number" && Number.isInteger(v) && a * v + b === c * v + ((a - c) * x + b),
+    bugs: ([a, b, c, x]) => {
+      const d = (a - c) * x + b;
+      const whole = (n: number, m: number) => (m !== 0 && n % m === 0 && n / m !== x ? n / m : null);
+      return keepPred([
+        { id: "x-sign-kept", kind: "procedural", competency: LIN, says: `${linTerm(c, 0)} was moved to the left without changing its sign. Taking ${linTerm(c, 0)} from both sides leaves ${linTerm(a - c, 0)} on the left, not ${linTerm(a + c, 0)}.`, predict: whole(d - b, a + c) },
+        { id: "number-sign-kept", kind: "procedural", competency: LIN, says: `${b} was moved to the right without changing its sign. To remove + ${b} from the left, take ${b} from both sides: ${d} − ${b}, not ${d} + ${b}.`, predict: whole(d + b, a - c) },
+        { id: "only-one-side", kind: "conceptual", competency: LIN, says: `${b} was taken away on the left but not on the right. Whatever is done to one side must be done to the other: ${linTerm(a - c, 0)} = ${d} − ${b}.`, predict: whole(d, a - c) },
+      ]);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "x-left" ? `Take ${linTerm(Number(s.inputs[1]), 0)} from both sides: ${linTerm(Number(s.value), 0)} on the left` : s.id === "numbers-right" ? `Take ${s.inputs[1]} from both sides: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value} on the right` : `Divide by ${s.inputs[1]}: x = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    domain: [[2, 9], [1, 20], [1, 8], [1, 12]],
+    cap: 400,
+    difficulty: ([a, b, c, x]) => (a - c === 1 ? 1 : (a - c) * x + b <= 30 ? 2 : 3),
+    teach: {
+      idea: "Taking the same number of x's from both sides keeps an equation balanced, just as taking the same number does.",
+      method: "Take the smaller x term from both sides so x is on one side only, take the number away from both sides, then divide by the number of x's. Check by putting the answer into both sides of the original equation.",
+      instance: bothSidesTeaching,
+    },
+    limits: "Whole numbers with more x's on the left and a whole-number solution; fractions and negative answers are ahboth (linear-rational).",
+  },
+  {
+    id: "lbrk",
+    contract: { kind: "var", statement: ([a, s, c, x]) => { const d = a * (x + s) - c * x; return `${a}(x${s < 0 ? "-" : "+"}${Math.abs(s)})=${c === 1 ? "" : c}x${d < 0 ? "-" : "+"}${Math.abs(d)}`; }, variable: "x" },
+    arity: 4,
+    title: "Solving an equation with a bracket",
+    competency: LIN,
+    type: "integer",
+    mc: true,
+    // [a, s, c, x]: a(x + s) = cx + d with d = a(x + s) − cx
+    parse: none,
+    reject: ([a, s, c, x]) => {
+      const d = a * (x + s) - c * x;
+      return a < 2 || a > 6 || s === 0 || s < -6 || s > 6 || c < 1 || c >= a || x < 1 || x > 15 || d === 0 || d < -30 || d > 40 ? "a(x + s) = cx + d with 2 ≤ a ≤ 6, s from −6 to 6 (not 0), 1 ≤ c < a, a whole-number solution from 1 to 15 and d from −30 to 40 (not 0)." : null;
+    },
+    prompt: ([a, s, c, x]) => `Solve ${bracket(a, s)} = ${linTerm(c, a * (x + s) - c * x)}. What is x?`,
+    solve: ([a, s, c, x]) => {
+      const d = a * (x + s) - c * x;
+      return { steps: [
+        { id: "expand", op: "multiply", competency: LIN, inputs: [a, s], value: a * s },
+        { id: "x-left", op: "subtract", competency: LIN, inputs: [a, c], value: a - c },
+        { id: "numbers-right", op: "subtract", competency: INTADD, inputs: [d, a * s], value: d - a * s },
+        { id: "divide", op: "divide", competency: LIN, inputs: [d - a * s, a - c], value: x },
+      ], answer: x };
+    },
+    // independent: substitute the answer into both sides and compare
+    validate: ([a, s, c, x], v) => typeof v === "number" && Number.isInteger(v) && a * (v + s) === c * v + (a * (x + s) - c * x),
+    bugs: ([a, s, c, x]) => {
+      const d = a * (x + s) - c * x;
+      const whole = (n: number, m: number) => (m !== 0 && n % m === 0 && n / m !== x ? n / m : null);
+      return keepPred([
+        { id: "first-term-only", kind: "procedural", competency: LIN, says: `Only x was multiplied by ${a}. The ${a} multiplies every term in the bracket: ${bracket(a, s)} = ${linTerm(a, a * s)}, not ${linTerm(a, s)}.`, predict: whole(d - s, a - c) },
+        { id: "bracket-sign", kind: "procedural", competency: INTADD, says: `The sign was lost when multiplying out: ${a} × ${n_(s)} = ${n_(a * s)}, so ${bracket(a, s)} = ${linTerm(a, a * s)}.`, predict: s < 0 ? whole(d + a * s, a - c) : null },
+        { id: "x-sign-kept", kind: "procedural", competency: LIN, says: `${linTerm(c, 0)} was moved to the left without changing its sign. Taking ${linTerm(c, 0)} from both sides leaves ${linTerm(a - c, 0)}, not ${linTerm(a + c, 0)}.`, predict: whole(d - a * s, a + c) },
+      ]);
+    },
+    variants: () => [],
+    explain: (s) => (s.id === "expand" ? `Multiply out: ${s.inputs[0]} × ${n_(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : s.id === "x-left" ? `Take ${linTerm(Number(s.inputs[1]), 0)} from both sides: ${linTerm(Number(s.value), 0)} on the left` : s.id === "numbers-right" ? `Move the number: ${n_(Number(s.inputs[0]))} − ${Number(s.inputs[1]) < 0 ? `(${n_(Number(s.inputs[1]))})` : s.inputs[1]} = ${n_(Number(s.value))}` : `Divide by ${s.inputs[1]}: x = ${n_(Number(s.inputs[0]))} ÷ ${s.inputs[1]} = ${s.value}`),
+    domain: [[2, 6], [-6, 6], [1, 5], [1, 15]],
+    cap: 400,
+    difficulty: ([a, s, c]) => (s > 0 && a - c === 1 ? 1 : s > 0 || a - c === 1 ? 2 : 3),
+    teach: {
+      idea: "A number outside a bracket multiplies every term inside it.",
+      method: "Multiply out the bracket first, then collect the x's on one side and the numbers on the other, doing the same to both sides. Check by putting the answer into both sides of the original equation.",
+      instance: bracketTeaching,
+    },
+    limits: "One bracket on the left, whole numbers, more x's on the left and a whole-number solution.",
   },
 
   // ------------------------------------------------------------ Grade 8: the coordinate plane

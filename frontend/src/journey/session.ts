@@ -13,6 +13,7 @@ import { learnerState, make } from "../../../packages/learning/src/session";
 import { authorizeWorking, workingEvidence } from "../../../packages/learning/src/derivation-interface";
 import { activityFor } from "../learning/driver";
 import { assertOwns, type Authority, type TraceEntry } from "./contracts";
+import { FAMILIES, problemOf } from "../../../packages/learning/src/families";
 
 export interface Shown { phase: ModuleState["phase"]; question: string | null; strategyId: string | null; reason: string; context?: string }
 
@@ -79,7 +80,9 @@ export class SliceSession {
       this.decisions[id] = { ...(reply.decision as object), schema: "grading-decision@1", decisionId: `dec:${id}`, decidedBy: "server" } as ServerDecision;
     }
     if (o.working?.length) {
-      const a = authorizeWorking(question(qid).prompt, o.working);
+      // the task as the generator states it (its contract, from the parameters), else the prompt: the authority reads equations, not sentences
+      const p = problemOf(qid.replace(/:(mc|w)$/, "")), stmt = p ? FAMILIES.get(p.family)?.contract?.statement?.(p.params) : null;
+      const a = authorizeWorking(stmt ?? question(qid).prompt, o.working);
       this.log("mathematical-grader", "derivation-authorization", "derivation-interface.authorizeWorking", { lines: o.working }, { status: a.status, evidence: workingEvidence(a) });
     }
     const st = this.state();

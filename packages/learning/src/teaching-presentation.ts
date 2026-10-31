@@ -71,7 +71,10 @@ export function teachingScopeFor(module: Module): TeachingScope {
     accepts: (problem) => problem.family === family && problem.params[2] !== 1, strategyId: "grid",
   };
   // teaching-contract@1: a family taught instance by instance has no family-level introduction (it would describe other questions)
-  return { family, title: def.title, introduction: def.teach?.instance ? null : def.teach?.idea ?? null, accepts: (problem) => problem.family === family };
+  // a module whose main family is taught instance by instance also teaches its other instance-taught pool families (each section is
+  // about its own question, aligned by construction): e.g. linear equations with x on both sides and with a bracket
+  const instanceFamilies = new Set(def.teach?.instance ? (module.pools ?? []).map((p) => p.family).filter((f) => !!FAMILIES.get(f)?.teach?.instance) : []);
+  return { family, title: def.title, introduction: def.teach?.instance ? null : def.teach?.idea ?? null, accepts: (problem) => problem.family === family || instanceFamilies.has(problem.family) };
 }
 
 const shown = (value: unknown) => Array.isArray(value) ? value.join(", ") : String(value).replace(/-/g, "−");

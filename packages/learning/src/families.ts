@@ -21,6 +21,7 @@ import { DOMAIN_FAMILIES } from "./fam";
 
 import type { InstanceTeaching } from "./family-kit";
 import { EXP, MT, SUP, SUPREAD, addForMul, coef, factId, factSlip, fmt, gcd, int, mul, near, neg, neighbours, norm, pairs, par, powerOf, powerSlip, show, signed, simpson, sup, unsup, xp, type Bug, type Def, type Problem, type Step, type Value } from "./family-kit";
+import { twoStepTeaching } from "./fam/linear-teaching";
 export { show, neighbours, factId, type Bug, type Problem, type Step, type Value, type Def } from "./family-kit";
 
 // ---------------------------------------------------------------- the families
@@ -913,8 +914,8 @@ const F: Def[] = [
       const c = a * x + b;
       return [
         { id: "forgot-divide", kind: "procedural", competency: "MATH.algebra.linear-equations", says: `${b} was taken away but the ${a} was not divided out: ${a}x = ${c - b} means x = ${c - b} ÷ ${a}.`, predict: c - b },
-        { id: "added-not-subtracted", kind: "procedural", competency: "MATH.algebra.linear-equations", says: `${b} was added to both sides; to undo + ${b}, subtract ${b}.`, predict: (c + b) % a === 0 ? (c + b) / a : null },
-        { id: "divided-first", kind: "procedural", competency: "MATH.algebra.linear-equations", says: `Only part of the left side was divided: undo the + ${b} first, then the × ${a}.`, predict: c % a === 0 ? c / a - b : null },
+        { id: "added-not-subtracted", kind: "procedural", competency: "MATH.algebra.linear-equations", says: `${b} was added to ${c} instead of taken away: ${a}x = ${c} + ${b}. To remove the + ${b}, take ${b} from both sides: ${a}x = ${c} − ${b}.`, predict: (c + b) % a === 0 ? (c + b) / a : null },
+        { id: "divided-first", kind: "procedural", competency: "MATH.algebra.linear-equations", says: `Only part of the left side was divided by ${a}: ${a}x + ${b} divided by ${a} is x + ${b / a}, not x + ${b}. Divide every term, or take away ${b} first.`, predict: c % a === 0 ? c / a - b : null },
       ].filter((b2) => b2.predict !== null) as Bug[];
     },
     variants: (p) => pairs(p, [[2, 6], [1, 12], [1, 9]], () => true).slice(0, 80),
@@ -922,7 +923,7 @@ const F: Def[] = [
     domain: [[2, 9], [1, 30], [1, 12]],
     keep: ([, b]) => b <= 20,
     difficulty: ([a, b, x]) => (a * x + b <= 30 ? 1 : a * x + b <= 70 ? 2 : 3),
-    teach: { idea: "An equation is a balance: do the same to both sides and it stays true.", method: "Undo the operations in reverse order: first take away the number added, then divide by the number multiplying x." },
+    teach: { idea: "An equation is a balance: do the same to both sides and it stays true.", method: "Undo the operations in reverse order: first take away the number added, then divide by the number multiplying x.", instance: twoStepTeaching },
   },
   {
     id: "prop",

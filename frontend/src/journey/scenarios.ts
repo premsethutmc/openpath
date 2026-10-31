@@ -100,7 +100,7 @@ export function runScenario(s: Scenario): Run {
         const a = L.act(v);
         if ("hint" in a) { asked.add(`${f.frames.length + 1}:${v.q}`); f.on({ type: "hint_requested", level: 1, timestamp: 0 }); asked.add(`${f.frames.length}:${v.q}`); actions.push({ q: v.q, act: "hint", phase: v.phase, activity: v.activity }); continue; }
         actions.push({ q: v.q, act: a.answer, phase: v.phase, activity: v.activity });
-        f.on({ type: "answer_submitted", value: a.answer, timestamp: 0 });
+        f.on({ type: "answer_submitted", value: a.answer, ...(a.working ? { working: a.working } : {}), timestamp: 0 } as Parameters<typeof f.on>[0]);
       } else if (f.stage === "feedback" && f.spec.nav.canGoBack && L.retry?.(view())) { actions.push({ q: "", act: "retry", phase: f.currentPhase, activity: f.currentActivity }); f.on({ type: "back_requested", timestamp: 0 }); }
       else f.on({ type: "skip_requested", timestamp: 0 });
     }

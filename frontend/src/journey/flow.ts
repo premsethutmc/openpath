@@ -73,15 +73,15 @@ export class SliceFlow {
 
   /** a renderer interaction event; the renderer never reports correctness, only what the learner did */
   on(e: RendererEvent): RenderSpec {
-    if (e.type === "answer_submitted" && this.stage === "question") return this.answer(e.value);
+    if (e.type === "answer_submitted" && this.stage === "question") return this.answer(e.value, (e as { working?: string[] }).working);
     if (e.type === "hint_requested" && this.stage === "question" && this.hintAllowed() && this.hints === 0) { this.hints = 1; this.spec = this.questionFrame((this.spec.teacherGuide?.message) ?? ""); this.push(); return this.spec; }
     if (e.type === "back_requested" && this.stage === "feedback" && this.spec.nav.canGoBack) { this.stage = "question"; this.spec = this.questionFrame("Try this one again."); this.push(); return this.spec; }
     if (e.type === "skip_requested" && (this.stage === "feedback" || this.stage === "teaching")) return this.advance();
     return this.spec;
   }
 
-  private answer(value: string) {
-    const reply = this.session.submit(this.qid, value, this.activity, { ...(this.context ? { context: this.context } : {}), ...(this.hints ? { hints: this.hints } : {}) });
+  private answer(value: string, working?: string[]) {
+    const reply = this.session.submit(this.qid, value, this.activity, { ...(this.context ? { context: this.context } : {}), ...(this.hints ? { hints: this.hints } : {}), ...(working?.length ? { working } : {}) });
     const fb = feedbackFromDecision(reply.decision as GradingDecision);
     const assisted = this.activity === "guided" || this.hints > 0;
     const canRetry = !!this.opts.retry && fb.level === "incorrect" && retriesLeft(this.session.state().records, this.qid) > 0;

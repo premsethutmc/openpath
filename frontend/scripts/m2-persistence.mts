@@ -84,7 +84,8 @@ if (mode === "export") {
       "due review discoverable (evidence says due, opening the skill asks it)": s2[id].before.retention === "due" && s2[id].firstStep.phase === "retention" && !!s2[id].firstStep.question,
       "repeated reads identical": new Set(s2[id].reads).size === 1 && JSON.stringify(fz) === JSON.stringify(fz2),
       "retention outcome": ON_RETENTION[id] === "remember" ? cycles.some((x: any) => x.result === "passed") : (cycles.some((x: any) => x.result === "failed") && cycles.at(-1).result !== "failed" && Date.parse(cycles.at(-1).due) > Date.parse(cycles.find((x: any) => x.result === "failed").failedAt) && fz.status !== "verified"),
-      "failed check leads to recovery steps": ON_RETENTION[id] === "remember" ? true : s2[id].phases.some((p: string) => ["explore", "chapter", "guided", "check", "recover", "investigate"].includes(p)),
+      // recovery steps: investigation or teaching, or fresh questions alone (verify), which is how decision B's recovery lifts the requirement
+      "failed check leads to recovery steps": ON_RETENTION[id] === "remember" ? true : s2[id].phases.some((p: string) => ["explore", "chapter", "guided", "check", "recover", "investigate", "verify"].includes(p)),
       // decision B, in a new process from the stored records cut off just after the failed delayed check
       "failed check: review, not verified, recovery required, earlier achievement kept": ON_RETENTION[id] === "remember" ? true : (() => {
         const failedAt = (cycles.find((x: any) => x.result === "failed") ?? {}).failedAt; if (!failedAt) return false;

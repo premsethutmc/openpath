@@ -2804,6 +2804,87 @@
    ]
   },
   {
+   "id": "MATH.algebra.linear-equations#balance",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "balance",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:609a232f6670b880be0d0bc5422378473d84e0338f806c304870303246b7264c",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#both_sides",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "both_sides",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d1e680f45cc923e0de8d22a1dc624b1134cb44f0c1e220230a825bc7b1ee9027",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#brackets",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "brackets",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:ccad1d6c91d24125fe9dbf272a87fe751a1029a92f962f89ef6d0a8c21c03f14",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.linear-equations#chapter",
    "subject": "mathematics",
    "competency": "MATH.algebra.linear-equations",
@@ -2826,6 +2907,25 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:989f0cbb1dc544c5dff0ff4ee24b447e486b5656415b86a24080aec238db33d4",
+     "status": "revision_required",
+     "provenance": {
+      "source": "ai-screening",
+      "by": "Workstream A3 independent AI review (screening, not educator review)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "concept section: the first screen (what an equation says) is new; the two sections after it need revision",
+      "ref": "docs/linear-equations-teaching/07-INDEPENDENT-REVIEW.md"
+     },
+     "reviewerRole": "ai-reviewer",
+     "knownIssues": [
+      "the two sub-skill sections kept from the template (choosing the equation; word problems) use \"constant\" and \"coefficient\" and a rectangle problem that needs brackets before brackets are taught"
+     ],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:254fafb3d936416f6c5f3b79923565fb8ba81e8c5766a2db955a820c478d6712"
     }
    ]
   },
@@ -2859,6 +2959,222 @@
    ]
   },
   {
+   "id": "MATH.algebra.linear-equations#fix_bracket_sign",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_bracket_sign",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "bracket-sign",
+   "revisions": [
+    {
+     "contentHash": "sha256:8b9ab8fc53b535f70cdff53ae98a78dd94f263728e364b13f2390aa49f8503a7",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#fix_distribution",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_distribution",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "first-term-only",
+   "revisions": [
+    {
+     "contentHash": "sha256:f0be3389c9cb7d377b3789760e9c79099aa33a7c771994570adf9ed75d0e26a6",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#fix_divide_all",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_divide_all",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "divided-first",
+   "revisions": [
+    {
+     "contentHash": "sha256:377edebdfa574554b577c583cbc142269a3722987f94863399dd9cddb7e113dd",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#fix_finish",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_finish",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "forgot-divide",
+   "revisions": [
+    {
+     "contentHash": "sha256:0d182aa99b83b117cfc54560972fda7944a8eba219fd31b29b49ebd6b178a245",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#fix_inverse",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_inverse",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "added-not-subtracted",
+   "revisions": [
+    {
+     "contentHash": "sha256:a5b6f1addea70bccf9baa10f6c69e8bdda2184d1fc05bb563bde399d8c9785c9",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#fix_number_sign",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_number_sign",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "number-sign-kept",
+   "revisions": [
+    {
+     "contentHash": "sha256:67a1f1ee2b1181ae89e486f8142415f0c8a13c6989ffeeb654c195b5a817e4e7",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#fix_one_side",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_one_side",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "only-one-side",
+   "revisions": [
+    {
+     "contentHash": "sha256:dcf7968ab1f89d51df243356a6fb12fbb54fa71b4a18e08d9f620116cffc70a7",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#fix_sign_move",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "fix_sign_move",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "x-sign-kept",
+   "revisions": [
+    {
+     "contentHash": "sha256:54d9767fc5f029f46405b7fc6a27a4a0274344fe6a937973e8145327f0e376e5",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.linear-equations#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.algebra.linear-equations",
@@ -2878,6 +3194,33 @@
       "ref": "docs/milestone-2/closure/03-TEACHING-CONTENT-MATRIX.md"
      },
      "reviewerRole": "ai-reviewer",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-equations#two_steps",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-equations",
+   "strategy": "two_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:514fb926db37e86eff56182f8b337c4c155521c18a3cf21cf74fcb231f6f1614",
+     "status": "pending_review",
+     "provenance": {
+      "source": "engineering",
+      "by": "Workstream A3 (AI-assisted engineering)",
+      "at": "2026-10-31T00:00:00.000Z",
+      "note": "new linear-equations explanation; worked lines machine-checked (teaching contract) and independently re-derived (linear-equations.test.ts); revised after two rounds of independent AI review; pending educator review, not approved",
+      "ref": "docs/linear-equations-teaching/06-REVIEW-RECORDS.md"
+     },
+     "reviewerRole": "engineer",
      "knownIssues": [],
      "scope": [
       "demonstration"

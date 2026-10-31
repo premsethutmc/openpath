@@ -91,9 +91,10 @@ const stats = classifyAll();
 // ════════════════════════════════════════════════════════════════════════════════
 
 describe("curriculum-wide coverage: honest numbers", () => {
-  it("total families count is 1,080", () => {
-    assert.equal(stats.total, 1080,
-      `Expected 1,080 families, got ${stats.total}`);
+  // 1,082 since Workstream A3 added lboth and lbrk (linear equations: x on both sides; a bracket)
+  it("total families count is 1,082", () => {
+    assert.equal(stats.total, 1082,
+      `Expected 1,082 families, got ${stats.total}`);
   });
 
   it("kernel-backed families (all steps verified) is at least 100", () => {

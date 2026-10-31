@@ -27994,6 +27994,56 @@
    ]
   },
   {
+   "item": "family:lboth",
+   "kind": "family",
+   "competency": "MATH.algebra.linear-equations",
+   "family": "lboth",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "648e0364",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T07:35:14.316Z",
+     "contentHash": "648e0364",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:lbrk",
+   "kind": "family",
+   "competency": "MATH.algebra.linear-equations",
+   "family": "lbrk",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "88bf5ace",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T07:35:14.316Z",
+     "contentHash": "89792b6c",
+     "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T08:11:58.271Z",
+     "contentHash": "88bf5ace",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
    "item": "family:ldiv",
    "kind": "family",
    "competency": "MATH.number.long-division",
@@ -28091,8 +28141,8 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "4bf4c8ea",
-   "state": "submitted",
+   "contentHash": "53af65fb",
+   "state": "draft",
    "history": [
     {
      "state": "draft",
@@ -28125,6 +28175,22 @@
      "at": "2026-10-19T18:00:00.000Z",
      "contentHash": "4bf4c8ea",
      "note": "submitted for educator review"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T07:35:14.316Z",
+     "contentHash": "61cfe13b",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T08:11:58.271Z",
+     "contentHash": "53af65fb",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -30251,7 +30317,7 @@
    "competency": "MATH.algebra.linear-equations",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "8186a253",
+   "contentHash": "c9189a87",
    "state": "draft",
    "history": [
     {
@@ -30340,6 +30406,38 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "8186a253",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T07:35:14.316Z",
+     "contentHash": "f2f357ac",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T08:11:58.271Z",
+     "contentHash": "edbe409a",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T08:47:32.349Z",
+     "contentHash": "43868a85",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-10-31T09:05:38.873Z",
+     "contentHash": "c9189a87",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

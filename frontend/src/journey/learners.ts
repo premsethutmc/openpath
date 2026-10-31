@@ -10,7 +10,7 @@ import { gradeRequest } from "../../../packages/learning/src/server-grader";
 import { graph } from "../../../packages/learning/src/graph";
 
 export interface LearnerView { q: string; phase: string; activity: string; taught: number; answered: number; hintShown: boolean; hintAsked: boolean; session: string; retentionFails: number; taughtSkills: string[] }
-export type Action = { answer: string } | { hint: true } ;
+export type Action = { answer: string; working?: string[] } | { hint: true } ;
 export interface Learner { name: string; act: (v: LearnerView) => Action; retry?: (v: LearnerView) => boolean }
 
 export const right = (q: string) => question(q).answer;
