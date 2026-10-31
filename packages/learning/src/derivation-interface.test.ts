@@ -64,8 +64,10 @@ test("Milestone 2: answer versus method (general), zero-product, and invalid ver
     expect(a.reason).toContain("loses-solution");
     expect(workingEvidence(a)).toBe("method-false-step");
   }
-  // fail-closed: irrational or unparsed routes are left unsupported, never invalid
-  expect(authorizeWorking("Solve x^2 \u2212 2 = 0", ["x^2 \u2212 2 = 0", "x = 1.41"]).status).not.toBe("invalid");
+  // grader generalization (@3, solution-sets@1): an irrational root is now decided exactly. "x = 1.41" loses the root -sqrt(2) (isolated in a rational
+  // interval), so the line is invalid; a claim that rounds EVERY root is an approximation (a marking decision): unsupported, never invalid
+  expect(authorizeWorking("Solve x^2 \u2212 2 = 0", ["x^2 \u2212 2 = 0", "x = 1.41"]).status).toBe("invalid");
+  expect(authorizeWorking("Solve x^2 \u2212 2 = 0", ["x^2 \u2212 2 = 0", "x = 1.41 or x = \u22121.41"]).status).toBe("unsupported");
 });
 
 test("Milestone 2: production grading never records a verified derivation from an answer", () => {

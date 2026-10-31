@@ -43,14 +43,14 @@ describe("assessment-specific grading policy", () => {
   test("method-required: valid steps earn full credit unless the rubric requires the omitted evidence; omissions never make work invalid", async () => {
     expect(await credit("sqrt(x+2) = x", sq, { mode: "method-required" })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); the derivation is outside the P2 surface, so it is unresolved (never costs credit, never earns method credit)
     expect(await credit("sqrt(x+2) = x", sq, { mode: "method-required", requireShownCandidateChecks: true })).toBe("unresolved"); // P2-INTEGRATION: was "partial" under E7 (shadow); outside the P2 surface, so unresolved
-    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required" })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); outside the P2 surface, so unresolved
-    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required", requireStatedRestrictions: true })).toBe("unresolved"); // P2-INTEGRATION: was "partial" under E7 (shadow); outside the P2 surface, so unresolved
+    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required" })).toBe("full"); // P2 generalization @3: multiplying both sides by the task's own denominator (nonzero in the natural domain) is certified, so E7's original "full" is reached again
+    expect(await credit("x/(x-2) = 3/(x-2)", "x = 3", { mode: "method-required", requireStatedRestrictions: true })).toBe("partial"); // P2 generalization @3: inside the surface again; E7's original "partial" (restriction not stated)
     expect(await credit("x/(x-2) = 3/(x-2)", "x != 2\nx = 3", { mode: "method-required", requireStatedRestrictions: true })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); outside the P2 surface, so unresolved
     expect(await credit("x^2 = 9", "x^2 = 9 ⇔ x = 3", { mode: "method-required" })).toBe("none");
   });
   test("proof-required: the engine proving the result is not the student demonstrating it", async () => {
     expect(await credit("x^2 = 9", "x = 3 or x = -3", { mode: "proof-required" })).toBe("partial");
-    expect(await credit("x^2 = 9", "x^2 - 9 = 0\n(x-3)(x+3) = 0\nx = 3 or x = -3", { mode: "proof-required" })).toBe("unresolved"); // P2-INTEGRATION: was "full" under E7 (shadow); the derivation is outside the P2 surface, so it is unresolved (never costs credit, never earns method credit)
+    expect(await credit("x^2 = 9", "x^2 - 9 = 0\n(x-3)(x+3) = 0\nx = 3 or x = -3", { mode: "proof-required" })).toBe("full"); // P2 generalization @3: balance by the whole side, factorisation and zero-product reading are certified (E7's original "full") // P2-INTEGRATION: was "full" under E7 (shadow); the derivation is outside the P2 surface, so it is unresolved (never costs credit, never earns method credit)
     expect(await credit("sqrt(x+2) = x", sq, { mode: "proof-required" })).toBe("unresolved"); // P2-INTEGRATION: was "partial" under E7 (shadow); outside the P2 surface, so unresolved
   });
   test("domain validity is always enforced; a wrong cited rule is a separate finding the rubric decides", async () => {

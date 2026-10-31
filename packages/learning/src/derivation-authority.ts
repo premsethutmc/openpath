@@ -19,10 +19,14 @@ import { sha256Hex } from "./digest.ts";
 import { polynomialKey } from "./claim-grounding.ts";
 import type { Expr } from "./calculus-core";
 import { parseTree, certifyRewrite, replayRewriteCertificate, canon, show, isFrac, toExpr, sameUpToFractionRegrouping, REWRITE_REGISTRY_VERSION, type Tree, type RewriteCertificate } from "./rewrite-registry.ts";
+import { approximatesAllRoots, compareStatements, fullDomain, sameRational, provableSign, provablyNonzero, rationalSolutionSet, ratOf, showQ, variableOf, SOLUTION_SETS_VERSION, type Comparison, type Domain, type Rel, type Statement } from "./solution-sets.ts";
 
 // @2 (Milestone 2): zero-product@1 / square-root@1 solution reading, solve-jump refusal, loses-solution@1 refutation; @1 certificates no longer replay as current
-export const AUTHORITY_VERSION = "openpath-derivation-authority@2" as const;
-export const DERIVATION_CERTIFICATE_VERSION = "openpath-derivation-certificate@2" as const;
+// @3 (grader generalization): solution-sets@1 validity (exact real solution sets, domain-aware), balance by any visible term / factor / denominator,
+//     provably nonzero expressions, implication-only steps (multiplying by a possibly-zero expression, squaring) with candidate checking, inequalities,
+//     substitution under task bindings, wider task-statement normalization; @2 certificates no longer replay as current
+export const AUTHORITY_VERSION = "openpath-derivation-authority@3" as const;
+export const DERIVATION_CERTIFICATE_VERSION = "openpath-derivation-certificate@3" as const;
 export const KERNEL_VERSION = "openpath-symbolic-proof-kernel@1" as const;
 export type Grade = "determined" | "anchored" | "parametric";
 
@@ -46,7 +50,9 @@ const isAtomT = (t: Tree) => (t.k === "n" && !t.u) || isFrac(t);
 const isNegAtom = (t: Tree) => t.k === "b" && t.op === "-" && t.l.k === "n" && !!t.l.u && isAtomT(t.r);
 const isId = (t: Tree, v: bigint) => t.k === "n" && !t.u && (t.v as any).n === v && (t.v as any).d === 1n;
 const neutral = (t: Tree): boolean => t.k === "b" && (neutral(t.l) || neutral(t.r) || (t.op === "*" && (isId(t.l, 1n) || isId(t.r, 1n))) || (t.op === "+" && (isId(t.l, 0n) || isId(t.r, 0n))) || (t.op === "-" && isId(t.r, 0n) && !(t.l.k === "n" && t.l.u)) || (t.op === "/" && isId(t.r, 1n)) || (t.op === "^" && isId(t.r, 1n)));
-const strip = (s: string) => s.replace(/[−–—]/g, "-").replace(/[×·⋅]/g, "*").replace(/÷/g, "/");
+const SUP: Record<string, string> = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9" };
+/** notation normalization only (no meaning added): unicode minus / times / divide, square brackets as parentheses, superscript exponents, ≤ ≥ */
+const strip = (s: string) => s.replace(/[−–—]/g, "-").replace(/[×·⋅]/g, "*").replace(/÷/g, "/").replace(/\[/g, "(").replace(/\]/g, ")").replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, (m) => "^" + [...m].map((c) => SUP[c]).join("")).replace(/<=/g, "≤").replace(/>=/g, "≥");
 const tz = (r: R | null) => { if (!r || r.d !== 1n || r.n === 0n) return 0; let k = 0, x = r.n < 0n ? -r.n : r.n; while (x % 10n === 0n) { x /= 10n; k++; } return k; };
 const gcd = (a: bigint, b: bigint) => { a = a < 0n ? -a : a; while (b) [a, b] = [b, a % b]; return a || 1n; };
 const terms = (t: Tree, s = 1n): R[] => t.k === "b" && (t.op === "+" || t.op === "-") ? [...terms(t.l, s), ...terms(t.r, t.op === "+" ? s : -s)] : (() => { const v = evalTree(t); return v ? [mk(s * v.n, v.d)] : []; })();
@@ -55,34 +61,89 @@ const denomsOf = (t: Tree): bigint[] => isFrac(t) ? [(t as any).r.v.n] : t.k ===
 const pt = (s: string): { t: Tree; sg: 1 | -1 } | null => { const neg = s.startsWith("~("); const t = parseTree(neg ? s.slice(2, -1) : s); return t && { t, sg: neg ? -1 : 1 }; };
 
 // ------------------------------------------------------------------------------------------------ task identity
-export interface TaskContext { statement: string; sides: string[]; trees: Tree[]; conditions: string[]; assumptions: SymbolicAssumption[]; numerals: ReadonlySet<string>; denominators: bigint[]; mode: "expression" | "equation"; digest: string }
+export interface TaskContext {
+  statement: string; sides: string[]; trees: Tree[]; conditions: string[]; assumptions: SymbolicAssumption[]; numerals: ReadonlySet<string>; denominators: bigint[];
+  mode: "expression" | "equation" | "inequality"; digest: string;
+  /** inequality tasks: the relation between the two sides */
+  rel?: Rel;
+  /** substitution tasks ("Given x = 3, ...", "... when x = 4"): established values of variables, and the name the expression defines ("find y where y = ...") */
+  bindings?: Record<string, string>; defined?: string | null;
+  /** the domain of the derivation (solution-sets@1): declared conditions, and every variable denominator of the task nonzero (the task is undefined there) */
+  domain?: Domain | null; natural?: string[];
+}
 export type TaskResult = { ok: true; task: TaskContext } | { ok: false; reason: string };
-const VERB = /^(compute|evaluate|work out|find the value of|calculate|solve|simplify|expand|factorise|factorize|factor|reduce|what is)\s+/i;
+const VERB = /^(?:expand and simplify|simplify fully|factori[sz]e fully|compute|evaluate|work out|find the value of|calculate|solve(?: for [a-z])?|find [a-z]|simplify|expand|factori[sz]e|factor|reduce|what is)\s*:?\s+/i;
 const V = (name: string): Expr => ({ kind: "variable", name } as Expr);
-function parseCondition(c: string): { text: string; a: SymbolicAssumption } | null {
-  const m = /^\s*([A-Za-z])\s*(?:(≠|!=|=\/=)\s*(-?\d+(?:\.\d+)?)|(>|≥|>=)\s*(-?\d+(?:\.\d+)?))\s*$/.exec(c.replace(/\bnot equal to\b/i, "≠"));
+function parseCondition(c: string): { text: string; a: SymbolicAssumption; v: string; rel: string; k: string } | null {
+  const m = /^\s*([A-Za-z])\s*(?:(≠|!=|=\/=)\s*(-?\d+(?:\.\d+)?)|(>|≥|>=|<|≤|<=)\s*(-?\d+(?:\.\d+)?))\s*$/.exec(c.replace(/\bnot equal to\b/i, "≠"));
   if (!m) return null;
   const x = V(m[1]);
-  if (m[2]) { const k = Number(m[3]); const e = k === 0 ? x : ({ kind: "add", terms: [x, { kind: "constant", value: String(-k) }] } as Expr); return { text: c.trim(), a: { kind: "nonzero", expression: e } }; }
-  if (Number(m[5]) !== 0) return null;
-  return { text: c.trim(), a: { kind: m[4] === ">" ? "positive" : "nonnegative", expression: x } };
+  const shifted = (k: string, sign: 1 | -1): Expr => { const kk = Number(k); const base = sign > 0 ? x : ({ kind: "multiply", factors: [{ kind: "constant", value: "-1" }, x] } as Expr); return kk === 0 ? base : ({ kind: "add", terms: [base, { kind: "constant", value: String(sign > 0 ? -kk : kk) }] } as Expr); };
+  if (m[2]) return { text: c.trim(), a: { kind: "nonzero", expression: shifted(m[3], 1) }, v: m[1], rel: "≠", k: m[3] };
+  const r = m[4].replace(">=", "≥").replace("<=", "≤");
+  // x > k: x - k positive; x ≥ k: x - k nonnegative; x < k: k - x positive; x ≤ k: k - x nonnegative (the zero-k forms keep their earlier spelling)
+  const a: SymbolicAssumption = { kind: r === ">" || r === "<" ? "positive" : "nonnegative", expression: shifted(m[5], r === ">" || r === "≥" ? 1 : -1) };
+  return { text: c.trim(), a, v: m[1], rel: r, k: m[5] };
+}
+const qOfDecimal = (k: string) => { const [i, f = ""] = k.replace(/^-/, "").split("."); const n = BigInt(i + f) * (k.startsWith("-") ? -1n : 1n); return { n, d: 10n ** BigInt(f.length) }; };
+/** the derivation domain from the declared conditions on the task's single variable (null when the task has several variables) */
+function domainOf(v: string, conds: { v: string; rel: string; k: string }[], natural: Tree[]): Domain {
+  const d = fullDomain(v);
+  for (const c of conds) { if (c.v !== v) continue; const at = (() => { const r = qOfDecimal(c.k); const g0 = gcd(r.n, r.d); return { n: r.n / g0, d: r.d / g0 }; })();
+    if (c.rel === "≠") d.excluded.push(at); else if (c.rel === ">" || c.rel === "≥") d.lower = { at, strict: c.rel === ">" }; else d.upper = { at, strict: c.rel === "<" }; }
+  for (const t of natural) { const r = ratOf(t, v); if (r) d.nonzero.push(r.f.num); }
+  return d;
+}
+/** variable denominators of a tree (the task is undefined where one is zero) */
+const varDenominators = (t: Tree): Tree[] => t.k !== "b" ? [] : [...varDenominators(t.l), ...varDenominators(t.r), ...(t.op === "/" && hasVar(t.r) ? [t.r] : [])];
+/**
+ * notation@1: a division whose right operand is followed by an implicit product (1/2x, 3/4(x + 1), x/2x) or two divisions chained in one product
+ * (x/2/4) has two readings. Such text is never read (refused as unrecognized), so neither reading can be certified.
+ */
+export function ambiguousNotation(text: string): boolean {
+  const clauses = strip(text).split(/\s+(?:or|and)\s+|[,;]/i);
+  if (clauses.length > 1) return clauses.some((c) => ambiguousNotation(c));
+  const t = clauses[0].replace(/\s+/g, "");
+  if (/\/(?:\d+(?:\.\d+)?|[A-Za-z])(?=[A-Za-z(])/.test(t)) return true;                                   // a/b x, a/b(…)
+  if (/(?<![A-Za-z)\d.])\d+(?:\.\d+)?\^-?\d+(?:\.\d+)?\/\d/.test(t)) return true;                         // 9^1/2: (9^1)/2 or 9^(1/2)
+  if (/\/(?:[^+\-*/=<>()≤≥]+|\([^()]*\))\//.test(t)) return true;                                          // a/b/c: (a/b)/c or a/(b/c)
+  return false;
 }
 /** the ONLY wrapper handling. Everything else fails closed with a reason. Declared conditions become carried assumptions; an unparseable condition refuses the task. */
 export function normalizeTask(statement: string, extraNumerals: readonly string[] = []): TaskResult {
   let s = strip(String(statement ?? "")).trim().replace(/[.?]+$/, "").trim();
+  // substitution tasks: established values ("Given x = 3 and y = 2, ...", "... when x = 4") and a defined name ("find y where y = 5x + 10")
+  const bindings: Record<string, string> = {}; let defined: string | null = null;
+  const bindList = (txt: string): boolean => { for (const part of txt.split(/\s*(?:,|\band\b)\s*/i).filter(Boolean)) { const b = /^([A-Za-z])\s*=\s*(-?\d+(?:\.\d+)?(?:\/\d+)?)$/.exec(part.trim()); if (!b || b[1] in bindings) return false; bindings[b[1]] = b[2]; } return true; };
+  const given = /^given\s+(.+?),\s*(.+)$/i.exec(s); if (given) { if (!bindList(given[1])) return { ok: false, reason: "task-unparsed" }; s = given[2].trim(); }
+  const when = /^(.*\S)\s+(?:when|if|for)\s+([A-Za-z]\s*=\s*-?[\d./]+(?:\s*(?:,|and)\s*[A-Za-z]\s*=\s*-?[\d./]+)*)$/i.exec(s); if (when) { if (!bindList(when[2])) return { ok: false, reason: "task-unparsed" }; s = when[1].trim(); }
+  const def = /^find\s+([A-Za-z])\s+(?:where|if|when)\s+\1\s*=\s*(.+)$/i.exec(s); if (def) { defined = def[1]; s = def[2].trim(); }
   const conds: string[] = [];
-  const m = /\s*(?:,|\bfor\b|\bwhere\b|\bassuming\b|\bwith\b)\s+([A-Za-z]\s*(?:≠|!=|>=|≥|>)[^,]*(?:,\s*[A-Za-z]\s*(?:≠|!=|>=|≥|>)[^,]*)*)$/i.exec(s);
-  if (m) { conds.push(...m[1].split(",")); s = s.slice(0, m.index); }
+  const m = /\s*(?:,|\bfor\b|\bwhere\b|\bassuming\b|\bwith\b)\s+([A-Za-z]\s*(?:≠|!=|≥|>|≤|<)[^,]*?(?:(?:,|\s+and)\s*[A-Za-z]\s*(?:≠|!=|≥|>|≤|<)[^,]*?)*)$/i.exec(s);
+  if (m) { conds.push(...m[1].split(/,|\s+and\s+/i)); s = s.slice(0, m.index); }
   s = s.replace(VERB, "").trim().replace(/=\s*$/, "").trim();
+  if (ambiguousNotation(s)) return { ok: false, reason: "task-unparsed" };
   const parsed = conds.map(parseCondition); if (parsed.some((p) => !p)) return { ok: false, reason: "task-condition-unparsed" };
   if (/[A-Za-z]{3,}|\b(?:ln|pi|or|if)\b|[A-Za-z]+\s+[A-Za-z]+/i.test(s)) return { ok: false, reason: "task-unparsed" };   // words are not algebra: "a thing happened" must not parse as a product of letters
-  const sides = s.split("=").map((x) => x.trim()); if (!s || sides.length > 2) return { ok: false, reason: "task-unparsed" };
+  // an inequality task: exactly one relation, no "="
+  const relM = /(≤|≥|<|>)/.exec(s); let rel: Rel | undefined;
+  if (relM) { if (/=/.test(s) || (s.match(/[≤≥<>]/g) ?? []).length !== 1) return { ok: false, reason: "task-unparsed" }; rel = ({ "≤": "<=", "≥": ">=", "<": "<", ">": ">" } as const)[relM[1] as "≤"]; }
+  const sides = (relM ? s.split(relM[1]) : s.split("=")).map((x) => x.trim()); if (!s || sides.length > 2 || sides.some((x) => !x)) return { ok: false, reason: "task-unparsed" };
   const trees = sides.map((x) => parseTree(x)); if (trees.some((t) => !t)) return { ok: false, reason: "task-unparsed" };
-  const T = trees as Tree[]; const mode = sides.length === 2 && T.some(hasVar) ? "equation" : sides.length === 1 ? "expression" : null;
+  const T = trees as Tree[]; const mode = relM && T.some(hasVar) ? "inequality" : sides.length === 2 && !relM && T.some(hasVar) ? "equation" : sides.length === 1 ? "expression" : null;
   if (!mode) return { ok: false, reason: "task-unparsed" };
-  const conditions = (parsed as { text: string }[]).map((p) => p.text), assumptions = (parsed as { a: SymbolicAssumption }[]).map((p) => p.a);
-  const body = { v: AUTHORITY_VERSION, sides: T.map(canon), conditions, extra: [...extraNumerals].sort() };
-  return { ok: true, task: { statement, sides: T.map((t) => show(t)), trees: T, conditions, assumptions, numerals: new Set([...T.flatMap(numeralKeys), ...extraNumerals.flatMap((x) => { const t = parseTree(String(x)); return t ? numeralKeys(t) : []; })]), denominators: T.flatMap(denomsOf), mode, digest: sha256Hex(JSON.stringify(body)) } };
+  if (Object.keys(bindings).length && mode !== "expression") return { ok: false, reason: "task-unparsed" };
+  const P = parsed as NonNullable<ReturnType<typeof parseCondition>>[];
+  const conditions = P.map((p) => p.text), assumptions = P.map((p) => p.a);
+  // the natural domain of an equation / inequality: every variable denominator of the task is nonzero (the statement is undefined there)
+  const natural: Tree[] = mode === "expression" ? [] : T.flatMap(varDenominators);
+  const naturalText: string[] = [];
+  for (const dn of natural) { const ex = toExpr(dn); if (!ex) return { ok: false, reason: "task-unparsed" }; const a: SymbolicAssumption = { kind: "nonzero", expression: ex }; if (!assumptions.some((h) => covered(a, [h]))) { assumptions.push(a); naturalText.push(`${show(dn)} ≠ 0`); } }
+  const v = mode === "expression" ? null : variableOf(T);
+  const domain = v ? domainOf(v, P, natural) : null;
+  const body = { v: AUTHORITY_VERSION, sides: T.map(canon), conditions, rel: rel ?? null, bindings, defined, natural: naturalText, extra: [...extraNumerals].sort() };
+  const bindNumerals = Object.values(bindings).flatMap((x) => { const t = parseTree(x); return t ? numeralKeys(t) : []; });
+  return { ok: true, task: { statement, sides: T.map((t) => show(t)), trees: T, conditions, assumptions, numerals: new Set([...T.flatMap(numeralKeys), ...bindNumerals, ...extraNumerals.flatMap((x) => { const t = parseTree(String(x)); return t ? numeralKeys(t) : []; })]), denominators: T.flatMap(denomsOf), mode, digest: sha256Hex(JSON.stringify(body)), rel, bindings, defined, domain, natural: naturalText } };
 }
 
 // ------------------------------------------------------------------------------------------------ grading (P2): determined / anchored / parametric
@@ -239,6 +300,16 @@ export function authorizeExpr(task: TaskContext, l: Tree, r: Tree, side = 0): Pa
   const L = show(l), Rr = show(r);
   const part = (rule: string, grade: Grade | "none", rewrite: RewriteCertificate | null, kernel: KernelCertificate | null, assumptions: SymbolicAssumption[] = []): PartCertificate => ({ side, rule, grade, source: L, replacement: Rr, rewrite, kernel, assumptions });
   if (canon(l) === canon(r)) return { ok: true, why: "identity", part: part("identity", "none", null, null), grades: [] };
+  // substitution under established equalities (the task's bindings): every occurrence of some bound variables replaced by their values, nothing else changed
+  if (task.bindings && Object.keys(task.bindings).length) {
+    const inL = varsOf(l), inR = varsOf(r), gone = [...inL].filter((v) => v in task.bindings! && !inR.has(v));
+    if (gone.length && canon(substituteVars(l, Object.fromEntries(gone.map((v) => [v, task.bindings![v]])))) === canon(r)) return { ok: true, why: "authorized", part: part("substitute", "determined", null, null, []), grades: ["determined"] };
+  }
+  // under bindings, truth is decided with the values substituted: a line that substitutes AND does something else is a jump, not a false step
+  if (task.bindings && Object.keys(task.bindings).length && [...varsOf(l), ...varsOf(r)].some((v) => v in task.bindings!)) {
+    const bl = evalTree(substituteVars(l, task.bindings)), br = evalTree(substituteVars(r, task.bindings));
+    if (bl && br && hasVar(l) !== hasVar(r)) return refuse(same(bl, br) ? "substitution-combined-with-other-steps" : "mathematically-false");
+  }
   const a = evalTree(l), b = evalTree(r);
   if (isAtomT(l) && isAtomT(r) && a && b && same(a, b) && (r.k === "n" || (isFrac(r) && gcd((r as any).l.v.n, (r as any).r.v.n) === 1n))) return { ok: true, why: "representation", part: part("representation", "determined", null, null), grades: ["determined"] };
   const exact = a && b;                                                                   // closed expressions: truth is exact, authorization is the registry's
@@ -264,10 +335,18 @@ export function authorizeExpr(task: TaskContext, l: Tree, r: Tree, side = 0): Pa
   const kl = polynomialKey(L), kr = polynomialKey(Rr);
   const sv2 = checkSymbolicStep(toExpr(l), toExpr(r), task.assumptions);
   if (!sv2.ok) return { ok: false, why: sv2.reason, grades: [] };
-  const normalizing = (polyShape(r) && (isExpandedCollected(r) || isExpandedCollected(l) || r.k === "b" && r.op === "/")) || noGrowth(l, r);
+  // factorisation (@3): the result is a product of expanded, collected factors (isFactored), whatever the shape of the source
+  const normalizing = (polyShape(r) && (isExpandedCollected(r) || isExpandedCollected(l) || r.k === "b" && r.op === "/")) || noGrowth(l, r) || (isFactored(r) && hasVar(l));
   const hidden = hasFlattenedPureNumber(r);
   if (!normalizing || hidden || (kl !== null && kr !== null && kl !== kr && !task.assumptions.length && false)) return { ok: false, why: hidden ? "hidden-number-computation" : "no-registered-rewrite", grades: [] };
   return { ok: true, why: "polynomial-normalization", part: part(sv2.used.length ? "rational-simplification" : "polynomial-normalization", "determined", null, sv2.certificate, sv2.used), grades: ["determined"] };
+}
+const varsOf = (t: Tree): Set<string> => { const out = new Set<string>(); const w = (x: Tree): void => { if (x.k === "v") out.add(x.name); else if (x.k === "b") { w(x.l); w(x.r); } }; w(t); return out; };
+/** every occurrence of each listed variable replaced by its value (a negative value as a unary minus, as a learner writes (-6)) */
+export function substituteVars(t: Tree, vals: Record<string, string>): Tree {
+  if (t.k === "v" && t.name in vals) { const raw = vals[t.name]; const neg = raw.startsWith("-"); const n = parseTree(neg ? raw.slice(1) : raw)!; return neg ? ({ k: "b", op: "-", l: { k: "n", v: (parseTree("0") as any).v, u: true }, r: n, g: true } as Tree) : n; }
+  if (t.k !== "b") return t;
+  return { ...t, l: substituteVars(t.l, vals), r: substituteVars(t.r, vals) } as Tree;
 }
 /** 1x -> x for a leading unit coefficient of a variable term (a collected polynomial may still show it) */
 function stripUnitCoefficients(t: Tree): Tree {
@@ -331,6 +410,12 @@ const parseConclusion = (text: string): { v: string; values: R[] } | null => {
   for (const c of clauses) { const m = /^([A-Za-z])\s*=\s*(.+)$/.exec(c.trim()); if (!m) return null; if (v && v !== m[1]) return null; v = m[1]; const n = parseTree(m[2]); if (!n || hasVar(n) || !(isAtomT(n) || isNegAtom(n))) return null; const q = evalTree(n); if (!q) return null; values.push(q); }
   return { v, values };
 };
+/** the rational solution set of an equation in the task's domain (exact; null when not finite-rational or outside the surface) */
+function solutionValues(task: TaskContext, st: Statement, v: string): R[] | null {
+  if (task.domain && task.domain.v === v) { const r = rationalSolutionSet(st, task.domain); return r ? r.map((x) => mk(x.n, x.d)) : null; }
+  const poly = polyCoefficients([st.left, st.right], v); return poly ? rationalRootSet(poly) : null;
+}
+const parseConclusionValueTree = (v: string, c: R): Tree => parseTree(c.d === 1n ? `${c.n}` : `${c.n}/${c.d}`)!;
 // ---- zero-product (Milestone 2): `A1 · A2 · … = 0` with every Ai linear in v (or a non-zero constant) has exactly the roots of its factors: over a field
 // (Q, R, C) a product is 0 iff a factor is 0, so reading `v = r1 or v = r2 …` off the factors is an equivalence. Anything else returns null.
 const factorsOf = (t: Tree): Tree[] => (t.k === "b" && t.op === "*" ? [...factorsOf(t.l), ...factorsOf(t.r)] : [t]);
@@ -431,7 +516,71 @@ function equationMove(task: TaskContext, P: Tree[], N: Tree[], firstLine = false
     if (same(sol, cv)) return done(oneOp ? "solve-linear" : "answer-claim", null, []);
   }
   // the equation rewritten as a polynomial identity: both sides normalised, nothing hidden (checked by the sides' own authorization above); anything else is refused
+  const g = generalBalance(task, P, N, "=", "=");
+  if (g) return done(g.kind, g.parameter, g.parts, g.grades);
   return fail("no-registered-equation-move");
+}
+
+// ---- general balance (@3): ONE operation applied to both sides, then each side rewritten by an authorized, determined rewrite.
+// The operation is taken from what is visible in the line before: one of its additive terms or a whole side (added / subtracted), one of its numbers,
+// numeric denominators (their least common multiple), variable denominators or variable factors (multiplied / divided by). A multiplier must be
+// provably nonzero (a nonzero number, declared nonzero, the task's own denominator, or no real root in the domain): otherwise multiplying is an
+// IMPLICATION only (candidates must be checked later) and dividing is refused. For an inequality the multiplier's sign must be provable; it flips
+// the relation when negative; an unknown sign is refused. Squaring both sides of an equation is an implication. Several operations in one line are
+// still refused (each line one operation: a jump skips steps the learner has not shown).
+export interface BalanceMove { kind: string; parameter: string; parts: PartCertificate[]; grades: Grade[]; implication: boolean }
+const neg = (t: Tree): Tree => ({ k: "b", op: "-", l: { k: "n", v: (parseTree("0") as any).v, u: true }, r: t, g: true } as Tree);
+const grp = (t: Tree): Tree => (t.k === "b" ? ({ ...t, g: true } as Tree) : t);
+function sideTo(task: TaskContext, Q: Tree, n: Tree, side: number): PartVerdict | null {
+  if (canon(Q) === canon(n)) return { ok: true, why: "identity", part: undefined, grades: [] };
+  const au = authorizeExpr(task, Q, n, side); if (!au.ok || au.grades.includes("anchored") || au.grades.includes("parametric")) return null;
+  return au;
+}
+const flipRel = (r: Rel): Rel => (r === "<" ? ">" : r === ">" ? "<" : r === "<=" ? ">=" : r === ">=" ? "<=" : "=");
+export function generalBalance(task: TaskContext, P: Tree[], N: Tree[], relP: Rel, relN: Rel): BalanceMove | null {
+  const both = (Q: Tree[], kind: string, parameter: string, implication = false, expectRel: Rel = relP): BalanceMove | null => {
+    if (expectRel !== relN) return null;
+    if (canon(Q[0]) === canon(P[0]) && canon(Q[1]) === canon(P[1])) return null;
+    const a = sideTo(task, Q[0], N[0], 0); if (!a) return null; const b = sideTo(task, Q[1], N[1], 1); if (!b) return null;
+    return { kind, parameter, parts: [a.part, b.part].filter((x): x is PartCertificate => !!x), grades: [...a.grades, ...b.grades], implication };
+  };
+  const seen = new Set<string>();
+  // additive: subtract a visible term (or a whole side) from both sides; a negative term is added
+  const adds: { t: Tree; sub: boolean }[] = [];
+  for (const side of P) { for (const x of addFlat(side)) adds.push({ t: x.n, sub: x.s > 0 }); if (addFlat(side).length > 1) adds.push({ t: grp(side), sub: true }); }
+  for (const { t, sub } of adds) { const key = (sub ? "-" : "+") + canon(t); if (seen.has(key)) continue; seen.add(key);
+    const r = both(P.map((x) => bin(sub ? "-" : "+", x, t)), "balance-add", (sub ? "-" : "+") + show(t)); if (r) return r; }
+  // multiplicative
+  const dom = task.domain ?? null;
+  const ks: Tree[] = []; const add = (t: Tree) => { if (!ks.some((k) => canon(k) === canon(t))) ks.push(t); };
+  const nums: R[] = []; const walkN = (t: Tree): void => { if (t.k === "n" && !t.u) { const v = evalTree(t); if (v && v.n !== 0n) nums.push(v.n < 0n ? mk(-v.n, v.d) : v); } else if (t.k === "b") { walkN(t.l); walkN(t.r); } };
+  P.forEach(walkN);
+  // the common denominator: every numeric divisor and decimal place in the line, and every variable denominator (their product)
+  const numDivs: bigint[] = []; const walkD = (t: Tree): void => { if (t.k !== "b") { if (t.k === "n" && !t.u) { const v = evalTree(t); if (v && v.d !== 1n) numDivs.push(v.d); } return; } if (t.op === "/" && !hasVar(t.r)) { const v = evalTree(t.r); if (v && v.d === 1n && v.n !== 0n) numDivs.push(v.n < 0n ? -v.n : v.n); } walkD(t.l); walkD(t.r); };
+  P.forEach(walkD);
+  const dens = [...P.flatMap((t) => denomsOf(t)), ...numDivs]; const lcd = dens.length ? dens.reduce((a, d) => (a * d) / gcd(a, d), 1n) : 1n; if (lcd > 1n) nums.push(mk(lcd, 1n));
+  for (const v of nums) { const t = parseTree(v.d === 1n ? `${v.n}` : `${v.n}/${v.d}`); if (t) { add(t); add(neg(t)); } }
+  for (const side of P) { for (const d of varDenominators(side)) add(grp(d)); for (const f of mulFlat(side)) if (hasVar(f)) add(grp(f)); }
+  { const vd: Tree[] = []; for (const side of P) for (const d of varDenominators(side)) if (!vd.some((x) => canon(x) === canon(d))) vd.push(d);
+    if (vd.length > 1) { const prod = vd.map(grp).reduce((a, b) => bin("*", a, b)); add(prod); if (lcd > 1n) add(bin("*", parseTree(`${lcd}`)!, prod)); }
+    if (vd.length === 1 && lcd > 1n) add(bin("*", parseTree(`${lcd}`)!, grp(vd[0]))); }
+  for (const k of ks) {
+    const closed = !hasVar(k), kv = closed ? evalTree(k) : null; if (closed && (!kv || kv.n === 0n)) continue;
+    const ex = toExpr(k);
+    const declaredNonzero = !!ex && (covered({ kind: "nonzero", expression: ex }, task.assumptions) || covered({ kind: "positive", expression: ex }, task.assumptions));
+    const nonzero = closed || declaredNonzero || (!!dom && provablyNonzero(k, dom));
+    const sign: 1 | -1 | 0 = closed ? (kv!.n > 0n ? 1 : -1) : !!ex && covered({ kind: "positive", expression: ex }, task.assumptions) ? 1 : dom ? provableSign(k, dom) : 0;
+    for (const op of ["*", "/"] as const) {
+      const Q = P.map((x) => bin(op, grp(x), k)), par = op + show(k);
+      if (relP === "=") {
+        if (nonzero) { const r = both(Q, op === "*" ? "balance-multiply" : "balance-divide", par + (closed ? "" : " [nonzero]")); if (r) return r; }
+        else if (op === "*") { const r = both(Q, "implication:multiply", par + " [may be zero: candidates must be checked]", true); if (r) return r; }
+      } else if (sign !== 0) { const r = both(Q, op === "*" ? "balance-multiply" : "balance-divide", par + (sign < 0 ? " [negative: relation reversed]" : ""), false, sign < 0 ? flipRel(relP) : relP); if (r) return r; }
+    }
+  }
+  // squaring both sides (equations): an implication
+  if (relP === "=") { const two = parseTree("2")!; const r = both(P.map((x) => ({ k: "b", op: "^", l: grp(x), r: two } as Tree)), "implication:square", "^2 [candidates must be checked]", true); if (r) return r; }
+  return null;
 }
 
 // ------------------------------------------------------------------------------------------------ the derivation session (one task, an ordered chain of lines)
@@ -441,10 +590,15 @@ export class DerivationSession {
   readonly task: TaskContext | null; readonly failure: string | null;
   readonly chain: DerivationCertificate[] = [];
   private pool: Tree[]; private last: Tree[];
+  /** @3: an implication-only step was taken (candidates must then be checked against the task); the relation of the last inequality; the last conclusion's values */
+  private implied = false; private lastRel: Rel = "="; private candidates: R[] | null = null;
+  /** @3: the equations of a disjunction line ("x - 7 = 0 or x + 3 = 0"), each then solved on its own */
+  private branches: Tree[][] | null = null;
   constructor(statement: string, readonly extraNumerals: readonly string[] = []) {
     const t = normalizeTask(statement, extraNumerals);
     this.task = t.ok ? t.task : null; this.failure = t.ok ? null : t.reason;
     this.pool = this.task ? [...this.task.trees] : []; this.last = this.task ? [...this.task.trees] : [];
+    if (this.task?.rel) this.lastRel = this.task.rel;
   }
   /** make an earlier ACCEPTED expression visible (a line a route verified before this chain began). It carries no certificate and authorizes nothing by itself. */
   adopt(text: string): void { const ss = splitSides(text); if (!ss) return; for (const x of ss) { const t = parseTree(x); if (t) this.pool.push(t); } }
@@ -454,46 +608,133 @@ export class DerivationSession {
     const out = (authorized: boolean, reason: string, valid: boolean | null, grades: Grade[] = [], certificate: DerivationCertificate | null = null): LineVerdict => ({ line, valid, authorized, reason, grades, certificate });
     if (!this.task) return out(false, this.failure ?? "task-unparsed", null);
     const task = this.task;
-    if (task.mode === "equation" && this.last.length === 2 && /\bor\b|[,;]/i.test(text)) {          // a solved-form conclusion: the complete solution set of the equation before it
+    if (ambiguousNotation(text)) return out(false, "line-unparsed", null);
+    const solvedSingle = /^\s*[A-Za-z]\s*=\s*-?\d+(?:\.\d+)?(?:\/\d+)?\s*$/.test(strip(text));
+    if (task.mode === "equation" && this.last.length === 2 && (/\bor\b|[,;]/i.test(text) || (this.implied && solvedSingle))) {   // a solved-form conclusion: the complete solution set of the equation before it
       const cl = parseConclusion(text);
-      if (cl) { const poly = polyCoefficients(this.last, cl.v), roots = poly && rationalRootSet(poly); const ok = !!roots && roots.length === new Set(cl.values.map((x) => `${x.n}/${x.d}`)).size && cl.values.every((x) => roots.some((r) => same(r, x)));
+      if (cl) {
+        const prevSt: Statement = { left: this.last[0], rel: "=", right: this.last[1] };
+        const roots = solutionValues(task, prevSt, cl.v);
+        const setEq = (a: R[], b: R[]) => a.length === b.length && a.every((x) => b.some((y) => same(x, y))) && new Set(a.map((x) => `${x.n}/${x.d}`)).size === a.length;
+        if (this.branches && this.branches.length === cl.values.length) {
+          // each branch of a split solved on its own, in order: branch j to `v = c_j` by one registered equation move
+          const bs = this.branches; const okAll = cl.values.every((c, j) => { const tgt = [parseTree(cl.v)!, parseTree(showR(c).startsWith("-") ? `0${showR(c)}` : showR(c))!]; const direct = canon(bs[j][0]) === canon(tgt[0]) && evalTree(bs[j][1]) && same(evalTree(bs[j][1])!, c); return direct || equationMove(task, bs[j], [tgt[0], parseConclusionValueTree(cl.v, c)], false).ok; });
+          if (!okAll) return out(false, "branch-not-solved", null);
+          this.branches = null; this.candidates = cl.values;
+          return this.seal(line, task, bs.map((b) => `${canon(b[0])}=${canon(b[1])}`), [strip(text)], [], "branchwise-solve", cl.values.map((r) => `${r.n}/${r.d}`).join(","), [], null);
+        }
+        if (this.implied) {
+          // after an implication-only step the candidates must be checked: the conclusion keeps exactly the candidates that solve the TASK (in its domain)
+          const target = solutionValues(task, { left: task.trees[0], rel: "=", right: task.trees[1] }, cl.v);
+          const cands = this.candidates ?? visibleRoots(this.last, cl.v) ?? [];
+          // listing every candidate (the roots of the line before, read off where visible) is a step of its own; checking them comes after
+          const vis = visibleRoots(this.last, cl.v), allRoots = rationalSolutionSet(prevSt, fullDomain(cl.v));
+          if (!(target && setEq(cl.values, target)) && vis && allRoots && setEq(cl.values, vis) && setEq(vis, allRoots.map((x) => mk(x.n, x.d)))) { this.candidates = cl.values; return this.seal(line, task, this.last.map(canon), [strip(text)], [], "candidates", cl.values.map((r) => `${r.n}/${r.d}`).join(","), [], null); }
+          if (!target || !setEq(cl.values, target) || !cl.values.every((x) => cands.some((y) => same(x, y)))) return out(false, target ? "candidates-not-checked" : "no-registered-equation-move", null);
+          this.candidates = cl.values;
+          return this.seal(line, task, this.last.map(canon), [strip(text)], [], "check-candidates", cl.values.map((r) => `${r.n}/${r.d}`).join(","), [], null);
+        }
+        const ok = !!roots && setEq(cl.values, roots);
+        if (!ok && roots && task.domain && task.domain.v === cl.v) {
+          // the candidates of the polynomial before the domain is applied (a denominator's zero, a declared condition): a legitimate list ONLY as
+          // candidates; they must then be checked (the session is now in candidate mode, exactly as after an implication-only step)
+          const all = rationalSolutionSet(prevSt, fullDomain(cl.v)); const vis = visibleRoots(this.last, cl.v);
+          if (all && setEq(cl.values, all.map((x) => mk(x.n, x.d))) && line > 0 && vis && setEq(vis, cl.values)) { this.implied = true; this.candidates = cl.values; return this.seal(line, task, this.last.map(canon), [strip(text)], [], "candidates-before-domain", cl.values.map((r) => `${r.n}/${r.d}`).join(","), [], null); }
+        }
         if (!ok) return out(false, roots ? "solution-set-differs" : "no-registered-equation-move", null);
         // Milestone 2 (zero-product@1): the solution set may be READ OFF only where it is visible: from factors (zero-product) or as a bare first-line answer
         // claim; a jump from an unfactored polynomial to its roots skips the method, like a several-operation jump in a linear equation, and is refused.
-        const zp = visibleRoots(this.last, cl.v);
-        if (line === 0) return this.seal(line, task, this.last.map(canon), [strip(text)], [], "answer-claim", null, [], null);
+        // @3: roots the domain excludes (a denominator's zero, a declared condition) are not solutions and are not read off
+        const zp0 = visibleRoots(this.last, cl.v), zp = zp0 && zp0.filter((r) => roots!.some((x) => same(x, r)));
+        if (line === 0) { this.candidates = cl.values; return this.seal(line, task, this.last.map(canon), [strip(text)], [], "answer-claim", null, [], null); }
         if (!zp || zp.length !== cl.values.length || !zp.every((r) => cl.values.some((x) => same(x, r)))) return out(false, "solve-jump", null);
+        this.candidates = cl.values;
         return this.seal(line, task, this.last.map(canon), [strip(text)], [], zeroProductRoots(this.last, cl.v) ? "zero-product" : "square-root", zp.map((r) => `${r.n}/${r.d}`).join(","), [], null); }
     }
+    if (task.mode === "inequality") return this.appendInequality(line, task, text, out);
+    // @3: a disjunction of equations: a split of a product equal to zero, or of a square equal to a constant; then each branch moved on its own
+    if (task.mode === "equation" && /\s+or\s+/i.test(strip(text))) {
+      const clauses = strip(text).split(/\s+or\s+/i).map((c) => { const ss = splitSides(c); const ts = ss?.map((x) => parseTree(x)); return ts && ts.length === 2 && ts.every((x) => x) ? (ts as Tree[]) : null; });
+      if (clauses.length < 2 || clauses.some((c) => !c)) return out(false, "line-unparsed", null);
+      const C = clauses as Tree[][];
+      if (!this.branches) {
+        const P = this.last; const isZero = (t: Tree) => !hasVar(t) && !!evalTree(t) && evalTree(t)!.n === 0n;
+        const zi = P.findIndex(isZero);
+        if (zi >= 0) { const fs = factorsOf(P[1 - zi]).filter(hasVar); const cl0 = C.map((c) => (isZero(c[1]) ? c[0] : isZero(c[0]) ? c[1] : null));
+          if (fs.length === C.length && cl0.every((x) => x) && fs.every((f) => cl0.some((x) => canon(x!) === canon(f.k === "b" ? { ...f, g: undefined } as Tree : f) || canon(x!) === canon(f)))) { this.branches = C; return this.seal(line, task, P.map(canon), C.map((c) => `${canon(c[0])}=${canon(c[1])}`), [], "split-zero-product", null, [], null); } }
+        const si = P.findIndex((t) => t.k === "b" && t.op === "^" && !hasVar(t.r) && !!evalTree(t.r) && same(evalTree(t.r)!, mk(2n, 1n)));
+        if (si >= 0 && !hasVar(P[1 - si]) && C.length === 2) { const c = evalTree(P[1 - si]); const L = (P[si] as Extract<Tree, { k: "b" }>).l;
+          const rt = c && c.n > 0n ? (() => { const sq = (x: bigint) => { let r = BigInt(Math.floor(Math.sqrt(Number(x)))); while (r * r > x) r--; while ((r + 1n) * (r + 1n) <= x) r++; return r * r === x ? r : null; }; const a = sq(c.n), b = sq(c.d); return a !== null && b !== null ? mk(a, b) : null; })() : null;
+          const vals = C.map((x) => (canon(x[0]) === canon(L) && !hasVar(x[1]) ? evalTree(x[1]) : null));
+          if (rt && vals.every((x) => x) && vals.some((x) => same(x!, rt)) && vals.some((x) => same(x!, mk(-rt.n, rt.d)))) { this.branches = C; return this.seal(line, task, P.map(canon), C.map((c) => `${canon(c[0])}=${canon(c[1])}`), [], "split-square-root", showR(rt), [], null); } }
+        return out(false, "no-registered-equation-move", null);
+      }
+      if (C.length !== this.branches.length) return out(false, "branch-count-differs", null);
+      const bs = this.branches; if (!C.every((c, j) => (canon(c[0]) === canon(bs[j][0]) && canon(c[1]) === canon(bs[j][1])) || equationMove(task, bs[j], c, false).ok)) return out(false, "branch-not-derived", null);
+      this.branches = C;
+      return this.seal(line, task, bs.map((b) => `${canon(b[0])}=${canon(b[1])}`), C.map((c) => `${canon(c[0])}=${canon(c[1])}`), [], "branchwise", null, [], null);
+    }
+    if (this.branches) return out(false, "line-after-branches", null);
     const ss = splitSides(text); if (!ss) return out(false, "line-unparsed", null);
     const T = ss.map((x) => parseTree(x)); if (T.some((t) => !t)) return out(false, "line-unparsed", null);
     const sides = T as Tree[];
+    // a substitution task's defined name ("y = 5(-6) + 10" for "find y where y = 5x + 10") stands for the task's expression
+    if (task.mode === "expression" && task.defined && sides[0].k === "v" && sides[0].name === task.defined && sides.length > 1) sides[0] = this.last[this.last.length - 1];   // y stands for its current value
     const seen = (t: Tree) => this.pool.some((p) => sameUpToFractionRegrouping(p, t));
     const parts: PartCertificate[] = []; const grades: Grade[] = []; let kind = "chain", parameter: string | null = null; let valid: boolean | null = true; const sources: string[] = [];
     if (task.mode === "expression") {
       // validity of every consecutive pair first (exact arithmetic; symbolic pairs by the kernel with the declared assumptions)
-      for (let j = 1; j < sides.length; j++) { const a = evalTree(sides[j - 1]), b = evalTree(sides[j]); if (a && b) { if (!same(a, b)) return out(false, "mathematically-false", false); } else if (hasVar(sides[j - 1]) || hasVar(sides[j])) { const k = checkSymbolicStep(toExpr(sides[j - 1]), toExpr(sides[j]), task.assumptions); if (k.outcome === "invalid") return out(false, "mathematically-false", false); if (!k.ok && /^(missing-assumption|domain-restriction-lost)/.test(k.reason)) valid = null; } }
+      const bound = (t: Tree) => (task.bindings && Object.keys(task.bindings).length ? substituteVars(t, task.bindings) : t);
+      for (let j = 1; j < sides.length; j++) { const a = evalTree(bound(sides[j - 1])), b = evalTree(bound(sides[j])); if (a && b) { if (!same(a, b)) return out(false, "mathematically-false", false); } else if (hasVar(sides[j - 1]) || hasVar(sides[j])) { const k = checkSymbolicStep(toExpr(sides[j - 1]), toExpr(sides[j]), task.assumptions); if (k.outcome === "invalid") return out(false, "mathematically-false", false); if (!k.ok && /^(missing-assumption|domain-restriction-lost)/.test(k.reason)) valid = null; } }
       // the first side must be visible; with ONE side the line restates the previous result
       let from: Tree;
-      if (sides.length === 1) { from = this.last[this.last.length - 1]; if (canon(from) !== canon(sides[0])) { const v = authorizeExpr(task, from, sides[0]); if (!v.ok) return out(false, v.why, valid, v.grades); parts.push(v.part!); grades.push(...v.grades); sources.push(canon(from)); this.last = [sides[0]]; this.pool.push(sides[0]); return this.seal(line, task, sources, [canon(sides[0])], parts, "chain", null, grades, valid); } }
+      if (sides.length === 1) { from = this.last[this.last.length - 1]; if (canon(from) !== canon(sides[0])) { const v = authorizeExpr(task, from, sides[0]); if (!v.ok) return out(false, v.why, v.why === "mathematically-false" ? false : valid, v.grades); parts.push(v.part!); grades.push(...v.grades); sources.push(canon(from)); this.last = [sides[0]]; this.pool.push(sides[0]); return this.seal(line, task, sources, [canon(sides[0])], parts, "chain", null, grades, valid); } }
       if (!seen(sides[0])) return out(false, "source-not-visible", valid);
       sources.push(canon(sides[0]));
-      for (let j = 1; j < sides.length; j++) { const v = authorizeExpr(task, sides[j - 1], sides[j], j); if (!v.ok) return out(false, v.why, valid, v.grades); if (v.part) parts.push(v.part); grades.push(...v.grades); }
+      for (let j = 1; j < sides.length; j++) { const v = authorizeExpr(task, sides[j - 1], sides[j], j); if (!v.ok) return out(false, v.why, v.why === "mathematically-false" ? false : valid, v.grades); if (v.part) parts.push(v.part); grades.push(...v.grades); }
     } else {
       if (sides.length !== 2) return out(false, "equation-shape", null);
       const prev = this.last; const m = equationMove(task, prev, sides, this.chain.length === 0);
       if (!m.ok) return out(false, m.why, null);
+      // @3: the move's effect on the solution set, decided exactly (solution-sets@1); a move may never lose a solution, and only an implication move may gain one
+      const rel = task.domain ? compareStatements({ left: prev[0], rel: "=", right: prev[1] }, { left: sides[0], rel: "=", right: sides[1] }, task.domain) : null;
+      if (rel?.lost) return out(false, "loses-solution", false);
+      if (rel && rel.gained && !m.kind.startsWith("implication:")) return out(false, "gains-solution", null);
+      if (m.kind.startsWith("implication:")) this.implied = true;
       kind = m.kind; parameter = m.parameter; parts.push(...m.parts); grades.push(...m.grades); valid = null; sources.push(...prev.map(canon));
     }
     return this.sealLine(line, task, sources, sides, parts, kind, parameter, grades, valid);
   }
-  private sealLine(line: number, task: TaskContext, sources: string[], sides: Tree[], parts: PartCertificate[], kind: string, parameter: string | null, grades: Grade[], valid: boolean | null): LineVerdict {
+  /** an inequality line: one relation, the same moves as an equation (no implication moves), every step an exact equivalence of solution sets */
+  private appendInequality(line: number, task: TaskContext, text: string, out: (a: boolean, r: string, v: boolean | null, g?: Grade[]) => LineVerdict): LineVerdict {
+    const t = strip(text); if (/[A-Za-z]{3,}|=|\b(?:or|and)\b/i.test(t.replace(/≤|≥/g, ""))) return out(false, "line-unparsed", null);
+    const ms = t.match(/≤|≥|<|>/g) ?? []; if (ms.length !== 1) return out(false, "line-unparsed", null);
+    const relN = ({ "≤": "<=", "≥": ">=", "<": "<", ">": ">" } as const)[ms[0] as "≤"] as Rel;
+    const sides = t.split(ms[0]).map((x) => parseTree(x.trim())); if (sides.some((x) => !x)) return out(false, "line-unparsed", null);
+    const N = sides as Tree[], P = this.last, relP = this.lastRel;
+    let mv: { kind: string; parameter: string | null; parts: PartCertificate[]; grades: Grade[] } | null = null;
+    if (relN === relP && N.every((n, i) => canon(n) === canon(P[i]))) mv = { kind: "identity", parameter: null, parts: [], grades: [] };
+    else if (relN === flipRel(relP) && canon(N[0]) === canon(P[1]) && canon(N[1]) === canon(P[0])) mv = { kind: "symmetry", parameter: null, parts: [], grades: [] };
+    else if (relN === relP) { const rs = N.map((n, i) => (canon(n) === canon(P[i]) ? null : sideTo(task, P[i], n, i))); if (rs.every((r) => r !== undefined) && rs.every((r) => r === null || r.ok) && !rs.every((r) => r === null)) mv = { kind: "side-rewrite", parameter: null, parts: rs.flatMap((r) => (r?.part ? [r.part] : [])), grades: rs.flatMap((r) => r?.grades ?? []) }; }
+    if (!mv) { const g = generalBalance(task, P, N, relP, relN); if (g && !g.implication) mv = g; }
+    if (!mv) {
+      // the step multiplies / divides by an expression whose sign is not established: refused (never assumed positive)
+      const unknownSign = P.some((side) => mulFlat(side).concat(varDenominators(side)).some((k) => hasVar(k) && (["*", "/"] as const).some((op) => N.every((n, i) => !!sideTo(task, bin(op, grp(P[i]), grp(k)), n, i)))));
+      return out(false, unknownSign ? "multiplier-of-unknown-sign" : "no-registered-inequality-move", null);
+    }
+    const rel = task.domain ? compareStatements({ left: P[0], rel: relP, right: P[1] }, { left: N[0], rel: relN, right: N[1] }, task.domain) : null;
+    if (rel?.lost) return out(false, "loses-solution", false);
+    if (!rel || rel.relation !== "equivalent") return out(false, rel ? "gains-solution" : "outside-solution-set-surface", null);
+    this.lastRel = relN;
+    return this.sealLine(line, task, P.map(canon), N, mv.parts, mv.kind, mv.parameter, mv.grades, null, relN);
+  }
+  private sealLine(line: number, task: TaskContext, sources: string[], sides: Tree[], parts: PartCertificate[], kind: string, parameter: string | null, grades: Grade[], valid: boolean | null, rel?: Rel): LineVerdict {
     this.last = [...sides]; this.pool.push(...sides);
-    return this.seal(line, task, sources, sides.map(canon), parts, kind, parameter, grades, valid);
+    return this.seal(line, task, sources, rel && rel !== "=" ? [canon(sides[0]), rel, canon(sides[1])] : sides.map(canon), parts, kind, parameter, grades, valid);
   }
   private seal(line: number, task: TaskContext, sources: string[], results: string[], parts: PartCertificate[], kind: string, parameter: string | null, grades: Grade[], valid: boolean | null): LineVerdict {
     const prior = this.chain[this.chain.length - 1];
-    const body: Omit<DerivationCertificate, "digest"> = { version: DERIVATION_CERTIFICATE_VERSION, task: { digest: task.digest, conditions: task.conditions }, line, sources, results, parts, move: { kind, parameter }, assumptions: [...new Set(parts.flatMap((p) => p.assumptions.map(aKey)))], domainConditions: [...new Set(parts.flatMap((p) => [...(p.rewrite?.restrictions ?? []), ...(p.kernel?.restrictions ?? [])]))], dependencies: prior ? [{ line: prior.line, digest: prior.digest }] : [], versions: { authority: AUTHORITY_VERSION, registry: REWRITE_REGISTRY_VERSION, kernel: KERNEL_VERSION } };
+    const body: Omit<DerivationCertificate, "digest"> = { version: DERIVATION_CERTIFICATE_VERSION, task: { digest: task.digest, conditions: [...task.conditions, ...(task.natural ?? [])] }, line, sources, results, parts, move: { kind, parameter }, assumptions: [...new Set(parts.flatMap((p) => p.assumptions.map(aKey)))], domainConditions: [...new Set(parts.flatMap((p) => [...(p.rewrite?.restrictions ?? []), ...(p.kernel?.restrictions ?? [])]))], dependencies: prior ? [{ line: prior.line, digest: prior.digest }] : [], versions: { authority: AUTHORITY_VERSION, registry: REWRITE_REGISTRY_VERSION, kernel: KERNEL_VERSION } };
     const cert = { ...body, digest: digestOf(body) }; this.chain.push(cert);
     return { line, valid, authorized: true, reason: kind, grades, certificate: cert };
   }
@@ -526,6 +767,7 @@ export function replayDerivationChain(statement: string, texts: string[], chain:
       const l = parseTree(p.source), r = parseTree(p.replacement); if (!l || !r) return bad("a part does not parse", i);
       if (p.rewrite) { if (p.rewrite.visible !== canon(l) || p.rewrite.result !== canon(r)) return bad("a rewrite certificate is for different expressions", i); const rp = replayRewriteCertificate(p.rewrite, p.source, p.replacement); if (!rp.ok) return bad("rewrite replay: " + rp.reason, i); if (p.rewrite.steps.some((st) => gradeStep(st, gctx(task, l)) === "parametric")) return bad("a step needs an arbitrary parameter", i); }
       if (p.kernel) { const ex = toExpr(l), ey = toExpr(r); if (!ex || !ey || !kernelCheck(p.kernel, ex, ey, p.assumptions, task.assumptions)) return bad("kernel evidence does not verify", i); if (p.assumptions.some((a) => !covered(a, task.assumptions))) return bad("a used assumption is not declared by the task", i); }
+      else if (p.rule === "substitute") { const b = task.bindings ?? {}; const vs = [...varsOf(l)].filter((x) => x in b && !varsOf(r).has(x)); if (!vs.length || canon(substituteVars(l, Object.fromEntries(vs.map((x) => [x, b[x]])))) !== canon(r)) return bad("a substitution does not reproduce its replacement", i); }
       else if (!p.rewrite && p.rule !== "identity" && p.rule !== "representation") return bad("a part carries no evidence", i);
     }
     // finally the whole line is re-authorized from scratch and must reproduce the certificate (same moves, same results)
@@ -536,28 +778,169 @@ export function replayDerivationChain(statement: string, texts: string[], chain:
 }
 
 /** convenience: judge a whole chain; the first false line is `invalid` even when an earlier line is unauthorized */
-export interface ChainVerdict { status: "verified" | "invalid" | "unsupported"; at: number | null; reason: string; lines: LineVerdict[]; chain: DerivationCertificate[] }
+export interface ChainVerdict { status: "verified" | "invalid" | "unsupported"; at: number | null; reason: string; lines: LineVerdict[]; chain: DerivationCertificate[]; evidence: WorkingEvidence }
+
+// ------------------------------------------------------------------------------------------------ working evidence (@3): one record per transition
+export const WORKING_EVIDENCE_CONTRACT = "openpath-working-evidence@1" as const;
+export interface TransitionEvidence {
+  line: number;
+  /** certified-equivalence / certified-implication / certified-rewrite: authorized and replayable; invalid: provably does not follow from the line before;
+   *  unsupported: neither certified nor refuted (outside the surface, unjustified, or after an uncertified line) */
+  status: "certified-equivalence" | "certified-implication" | "certified-candidate-check" | "certified-rewrite" | "invalid" | "unsupported";
+  /** how this line's solution set relates to the line before (exact; null when not decided) */
+  relation: "equivalent" | "implies" | "implied-by" | "neither" | null;
+  reason: string;
+  /** a point that solves the line before but not this one (lost), or this one but not the line before (gained) */
+  counterexample: { lost: unknown; gained: unknown } | null;
+  move: string | null;
+  certificate: string | null;
+}
+export interface WorkingEvidence {
+  contract: typeof WORKING_EVIDENCE_CONTRACT;
+  versions: { authority: string; solutionSets: string };
+  task: { mode: string | null; conditions: string[]; domain: string[] };
+  transitions: TransitionEvidence[];
+  firstInvalid: number | null;
+  /** method: certified when every line is certified; invalid when some line is; else unsupported */
+  method: "certified" | "invalid" | "unsupported" | "no-working";
+  /** complete: the last line states a final answer (solved form / simplified result); incomplete: it does not */
+  completeness: "complete" | "incomplete" | "no-working";
+  /** the final answer judged on its own, independently of the method */
+  finalAnswer: { present: boolean; correct: boolean | null; claimed: string | null; reason: string };
+  /** the certified steps (what was legitimately shown), in order; never a score */
+  progress: string[];
+}
+/** a line read as a statement for solution-set comparison: an equation, an inequality, or a conclusion (`x = 2 or x = 3` as (x-2)(x-3) = 0) */
+function statementOf(task: TaskContext, text: string): { st: Statement; claim: R[] | null } | null {
+  const t = strip(text).trim();
+  if (/\s+or\s+/i.test(t) && !parseConclusion(t)) {
+    const cs = t.split(/\s+or\s+/i).map((c) => { const ss = splitSides(c); const ts = ss?.map((x) => parseTree(x)); return ts && ts.length === 2 && ts.every((x) => x) ? (ts as Tree[]) : null; });
+    if (cs.length < 2 || cs.some((c) => !c)) return null;
+    return { st: { left: (cs as Tree[][]).map((c) => grp(bin("-", grp(c[0]), grp(c[1])))).reduce((a, b) => bin("*", a, b)), rel: "=", right: parseTree("0")! }, claim: null };
+  }
+  if (/\bor\b|[,;]/i.test(t)) { const cl = parseConclusion(t); if (!cl) return null; const v = parseTree(cl.v)!;
+    const prod = cl.values.map((r) => bin("-", v, parseTree(r.d === 1n ? (r.n < 0n ? `(0-${-r.n})` : `${r.n}`) : `(${r.n}/${r.d})`)!)).reduce((a, b) => bin("*", grp(a), grp(b)));
+    return { st: { left: prod, rel: "=", right: parseTree("0")! }, claim: cl.values }; }
+  if (/[A-Za-z]{3,}/.test(t)) return null;
+  const rm = t.match(/≤|≥|<|>/g) ?? [];
+  if (rm.length === 1 && !/=/.test(t)) { const [a, b] = t.split(rm[0]).map((x) => parseTree(x.trim())); if (!a || !b) return null; return { st: { left: a, rel: ({ "≤": "<=", "≥": ">=", "<": "<", ">": ">" } as const)[rm[0] as "≤"], right: b }, claim: null }; }
+  const ss = splitSides(t); if (!ss || ss.length !== 2) return null; const a = parseTree(ss[0]), b = parseTree(ss[1]); if (!a || !b) return null;
+  const single = (x: Tree, y: Tree) => x.k === "v" && !hasVar(y) && (isAtomT(y) || isNegAtom(y)) ? evalTree(y) : null;
+  const c = single(a, b) ?? single(b, a);
+  return { st: { left: a, rel: "=", right: b }, claim: c ? [c] : null };
+}
+const solvedForm = (st: Statement, claim: R[] | null) => !!claim || ((st.left.k === "v" && !hasVar(st.right)) || (st.right.k === "v" && !hasVar(st.left)));
+const showR = (r: R) => (r.d === 1n ? `${r.n}` : `${r.n}/${r.d}`);
+
 export function assessChain(statement: string, texts: string[]): ChainVerdict {
   const s = new DerivationSession(statement); const lines: LineVerdict[] = [];
-  // validity first: scan for a false closed equality anywhere before authorizing
-  for (let i = 0; i < texts.length; i++) { const ss = splitSides(texts[i]); const ts = ss?.map((x) => parseTree(x)); if (ts && ts.every((x) => x)) for (let j = 1; j < ts.length; j++) { const a = evalTree(ts[j - 1]!), b = evalTree(ts[j]!); if (a && b && !same(a, b) && (s.task?.mode ?? "expression") === "expression") return { status: "invalid", at: i, reason: "mathematically-false", lines, chain: [] }; } }
-  // loses-solution@1 (Milestone 2): an equation line that drops an exact root of the equation before it is false, whatever moves it claims
-  if (s.task?.mode === "equation" && s.task.trees.length === 2 && !s.task.conditions.length) {
-    const v = singleVariable(s.task.trees);
-    let prev: Tree[] | null = v ? [...s.task.trees] : null;
-    for (let i = 0; v && prev && i < texts.length; i++) {
-      const t = texts[i]; let next: { trees?: Tree[]; values?: R[] } | null = null;
-      if (/\bor\b|[,;]/i.test(t)) { const cl = parseConclusion(t); if (cl && cl.v === v) next = { values: cl.values }; }
-      else { const ss = splitSides(t); const ts = ss?.map((x) => parseTree(x)); if (ts && ts.length === 2 && ts.every((x) => x)) next = { trees: ts as Tree[] }; }
-      if (!next) break;
-      const r = lostSolution(prev, v, next);
-      if (r) return { status: "invalid", at: i, reason: `loses-solution: ${v} = ${r.d === 1n ? r.n : `${r.n}/${r.d}`} satisfies the line before but not this one`, lines, chain: [] };
-      if (!next.trees) break;
-      prev = next.trees;
+  const task = s.task;
+  const tr: TransitionEvidence[] = texts.map((_, i) => ({ line: i, status: "unsupported", relation: null, reason: "", counterexample: null, move: null, certificate: null }));
+  // notation@1: an ambiguous line is never read, so it is neither refuted nor certified
+  const amb = texts.map((t) => ambiguousNotation(t));
+  amb.forEach((a, i) => { if (a) tr[i].reason = "ambiguous-notation"; });
+  // 1. validity of every transition on its own (independent of authorization): a false closed equality, or a line that loses a solution of the line before
+  for (let i = 0; i < texts.length; i++) { if (amb[i]) continue; const ss = splitSides(texts[i]); const ts = ss?.map((x) => parseTree(x)); if (ts && ts.every((x) => x)) for (let j = 1; j < ts.length; j++) { const a = evalTree(ts[j - 1]!), b = evalTree(ts[j]!); if (a && b && !same(a, b) && (task?.mode ?? "expression") === "expression") { tr[i].status = "invalid"; tr[i].reason = "mathematically-false"; tr[i].counterexample = { lost: null, gained: null }; break; } } }
+  // expressions (@3): each expression must equal the one before it as a rational function of the single variable (exact); a difference is shown at a
+  // rational point of the domain where both are defined
+  if (task && task.mode === "expression" && task.trees.length === 1) {
+    const binds = task.bindings && Object.keys(task.bindings).length ? task.bindings : null;
+    const bound = (t: Tree) => (binds ? substituteVars(t, binds) : t);
+    const v0 = variableOf(task.trees.map(bound));
+    const exprDom = v0 ? domainOf(v0, task.conditions.map(parseCondition).filter((x): x is NonNullable<ReturnType<typeof parseCondition>> => !!x), []) : null;
+    const okAt = (x: R) => !exprDom || ((!exprDom.lower || (exprDom.lower.strict ? x.n * exprDom.lower.at.d > exprDom.lower.at.n * x.d : x.n * exprDom.lower.at.d >= exprDom.lower.at.n * x.d)) && (!exprDom.upper || (exprDom.upper.strict ? x.n * exprDom.upper.at.d < exprDom.upper.at.n * x.d : x.n * exprDom.upper.at.d <= exprDom.upper.at.n * x.d)) && !exprDom.excluded.some((e) => e.n === x.n && e.d === x.d));
+    let prevT: Tree = task.trees[0];
+    for (let i = 0; i < texts.length && v0 !== null; i++) {
+      if (amb[i]) break;
+      const ss = splitSides(texts[i]); const ts = ss?.map((x) => parseTree(x)); if (!ts || ts.some((x) => !x)) break;
+      const seq = (ts as Tree[]).map((t) => (task.defined && t.k === "v" && t.name === task.defined ? prevT : t));
+      const chain = seq.length === 1 ? [prevT, seq[0]] : seq;
+      for (let j = 1; j < chain.length && tr[i].status !== "invalid"; j++) {
+        const a = bound(chain[j - 1]), b = bound(chain[j]); const v = variableOf([a, b]); if (v === null) continue;
+        const eq = v === "" ? (() => { const x = evalTree(a), y = evalTree(b); return x && y ? same(x, y) : null; })() : sameRational(a, b, v);
+        if (eq === false) {
+          let at: string | null = null;
+          if (v) for (let k = 0; k <= 40 && !at; k++) { const x = mk(BigInt(k % 2 ? -(k + 1) / 2 : k / 2), 1n); if (!okAt(x)) continue; const ea = evalTree(substituteVars(a, { [v]: showR(x) })), eb = evalTree(substituteVars(b, { [v]: showR(x) })); if (ea && eb && !same(ea, eb)) at = `${v} = ${showR(x)}: ${showR(ea)} vs ${showR(eb)}`; }
+          tr[i].status = "invalid"; tr[i].reason = `not-equal: ${show(chain[j - 1])} and ${show(chain[j])} differ${at ? ` (at ${at})` : ""}`; tr[i].counterexample = { lost: at, gained: null };
+        }
+      }
+      prevT = seq[seq.length - 1];
     }
   }
-  for (let i = 0; i < texts.length; i++) { const v = s.append(texts[i]); lines.push(v); if (!v.authorized) return { status: v.valid === false ? "invalid" : "unsupported", at: i, reason: v.reason, lines, chain: s.chain }; }
-  return { status: texts.length ? "verified" : "unsupported", at: null, reason: texts.length ? "all-lines-authorized" : "no-working", lines, chain: s.chain };
+  if (task && task.mode !== "expression" && task.domain && task.trees.length === 2) {
+    let prev: Statement | null = { left: task.trees[0], rel: task.rel ?? "=", right: task.trees[1] }; let prevClaimOutside = false;
+    for (let i = 0; i < texts.length; i++) {
+      const cur = amb[i] ? null : statementOf(task, texts[i]); if (!cur) { prev = null; tr[i].reason ||= "outside-solution-set-surface"; continue; }
+      const isFinal = i === texts.length - 1;
+      // the FINAL claim may not include a value outside the domain (an intermediate candidate list may, if a later line discards it)
+      const outside = cur.claim?.find((x) => !rationalSolutionSet({ left: parseTree(task.domain!.v)!, rel: "=", right: parseTree(showR(x))! }, task.domain!)?.length);
+      if (isFinal && cur.claim && outside && tr[i].status !== "invalid" && !tr.slice(0, i).some((t) => t.status === "invalid")) { tr[i].status = "invalid"; tr[i].reason = `excluded-value: ${task.domain.v} = ${showR(outside)} is outside the domain (${[...task.conditions, ...(task.natural ?? [])].join(", ")})`; }
+      if (prev) { const c = compareStatements(prev, cur.st, task.domain); if (c) { tr[i].relation = c.relation; if (c.lost || c.gained) tr[i].counterexample = { lost: c.lost, gained: c.gained };
+        const approx = c.lost && cur.claim && prev.rel === "=" && approximatesAllRoots(prev, task.domain, cur.claim.map((x) => ({ n: x.n, d: x.d })));
+        // after an implication-only step (or candidates listed before the domain was applied), dropping a candidate is legitimate exactly when no
+        // solution of the TASK is dropped: the task must imply this line
+        const candidateMode = tr.slice(0, i).some((t) => t.relation === "implies" || t.relation === "neither") || (cur.claim !== null && prevClaimOutside);
+        const rejects = c.lost && candidateMode && (() => { const k = compareStatements({ left: task.trees[0], rel: task.rel ?? "=", right: task.trees[1] }, cur.st, task.domain!); return !!k && !k.lost; })();
+        if (rejects && tr[i].status !== "invalid") tr[i].reason = "discards-candidates: every dropped candidate fails the task";
+        else if (!c.lost && c.gained && (prev.rel !== "=" || cur.st.rel !== "=") && tr[i].status !== "invalid") { tr[i].status = "invalid"; tr[i].reason = `changes-solution-set: ${task.domain.v} ${c.gained.kind === "exact" ? `= ${c.gained.value}` : `in (${c.gained.low}, ${c.gained.high}]`} satisfies this inequality but not the one before (an inequality step must be an equivalence)`; }
+        else if (approx && tr[i].status !== "invalid") tr[i].reason = "approximate-values: decimal roundings of every (irrational) root; whether an approximation is acceptable is a marking decision";
+        else if (c.lost && tr[i].status !== "invalid") { tr[i].status = "invalid"; tr[i].reason = `loses-solution: ${task.domain.v} ${c.lost.kind === "exact" ? `= ${c.lost.value}` : `in (${c.lost.low}, ${c.lost.high}]`} satisfies the line before but not this one`; } } }
+      // after an implication-only step (candidates gained), a FINAL claim that keeps a candidate which does not solve the TASK is false
+      // (only when no earlier line is invalid: a claim that merely follows from an earlier error is not itself the error)
+      if (isFinal && cur.claim && task.mode === "equation" && tr[i].status !== "invalid" && tr.slice(0, i).some((t) => t.relation === "implies" || t.relation === "neither") && !tr.slice(0, i).some((t) => t.status === "invalid")) {
+        const target = rationalSolutionSet({ left: task.trees[0], rel: "=", right: task.trees[1] }, task.domain);
+        const extra = target && cur.claim.find((x) => !target.some((y) => same(mk(y.n, y.d), x)));
+        if (extra) { tr[i].status = "invalid"; tr[i].reason = `keeps-extraneous: ${task.domain.v} = ${showR(extra)} came from an implication-only step and does not solve the task`; }
+      }
+      prevClaimOutside = !!(cur.claim && outside);
+      prev = cur.st;
+    }
+  }
+  // 2. authorization, line by line (a refused line is not added to the chain; later lines are then not certified)
+  let stopped = false;
+  for (let i = 0; i < texts.length; i++) {
+    if (stopped) { if (tr[i].status !== "invalid") tr[i].reason ||= "after-uncertified-line"; continue; }
+    const v = s.append(texts[i]); lines.push(v);
+    if (v.authorized && tr[i].status !== "invalid") { const k = v.certificate?.move.kind ?? v.reason; tr[i].status = k.startsWith("implication:") ? "certified-implication" : k === "check-candidates" || k === "candidates-before-domain" ? "certified-candidate-check" : task?.mode === "expression" ? "certified-rewrite" : "certified-equivalence"; tr[i].reason = k; tr[i].move = k; tr[i].certificate = v.certificate?.digest ?? null; }
+    else { if (v.valid === false && tr[i].status !== "invalid") { tr[i].status = "invalid"; tr[i].reason = v.reason; } else if (tr[i].status !== "invalid") tr[i].reason = v.reason; if (!v.authorized) stopped = true; }
+  }
+  const firstInvalid = tr.findIndex((t) => t.status === "invalid");
+  const firstUnauth = lines.findIndex((l) => !l.authorized);
+  // 3. completeness and the final answer, judged on their own
+  let completeness: WorkingEvidence["completeness"] = texts.length ? "incomplete" : "no-working";
+  let finalAnswer: WorkingEvidence["finalAnswer"] = { present: false, correct: null, claimed: null, reason: texts.length ? "no final answer stated" : "no working" };
+  if (task && texts.length) {
+    const last = texts[texts.length - 1];
+    if (task.mode !== "expression" && task.domain && task.trees.length === 2) {
+      const cur = statementOf(task, last);
+      if (cur && solvedForm(cur.st, cur.claim)) {
+        completeness = "complete";
+        const taskSt: Statement = { left: task.trees[0], rel: task.rel ?? "=", right: task.trees[1] };
+        if (cur.claim && task.mode === "equation") { const target = rationalSolutionSet(taskSt, task.domain); const cl = cur.claim; finalAnswer = { present: true, claimed: strip(last), correct: target ? cl.length === target.length && cl.every((x) => target.some((y) => same(mk(y.n, y.d), x))) : null, reason: target ? "compared with the exact solution set of the task" : "the task's solution set is not finite-rational: not decided" }; }
+        else { const c = compareStatements(taskSt, cur.st, task.domain); finalAnswer = { present: true, claimed: strip(last), correct: c ? c.relation === "equivalent" : null, reason: c ? "compared with the exact solution set of the task" : "not decided" }; }
+      }
+    } else if (task.mode === "expression") {
+      const ss = splitSides(last); const lt = ss ? parseTree(ss[ss.length - 1]) : null;
+      if (lt) {
+        const bound = (t: Tree) => (task.bindings && Object.keys(task.bindings).length ? substituteVars(t, task.bindings) : t);
+        const a = evalTree(bound(task.trees[0])), b = evalTree(bound(lt));
+        const simplified = !hasVar(lt) ? (isAtomT(lt) || isNegAtom(lt)) : isExpandedCollected(lt) || isFactored(lt);
+        completeness = simplified ? "complete" : "incomplete";
+        if (simplified) finalAnswer = { present: true, claimed: show(lt), correct: a && b ? same(a, b) : (() => { const k = checkSymbolicStep(toExpr(task.trees[0]), toExpr(lt), task.assumptions); return k.ok ? true : k.outcome === "invalid" ? false : null; })(), reason: "compared with the task expression" };
+      }
+    }
+  }
+  const status: ChainVerdict["status"] = firstInvalid >= 0 && (firstUnauth < 0 || firstInvalid <= firstUnauth || true) ? "invalid" : firstUnauth >= 0 ? "unsupported" : texts.length ? "verified" : "unsupported";
+  const at = status === "invalid" ? firstInvalid : status === "unsupported" ? (firstUnauth >= 0 ? firstUnauth : null) : null;
+  const reason = status === "invalid" ? tr[firstInvalid].reason : status === "unsupported" ? (firstUnauth >= 0 ? lines[firstUnauth].reason : "no-working") : "all-lines-authorized";
+  const evidence: WorkingEvidence = {
+    contract: WORKING_EVIDENCE_CONTRACT, versions: { authority: AUTHORITY_VERSION, solutionSets: SOLUTION_SETS_VERSION },
+    task: { mode: task?.mode ?? null, conditions: task?.conditions ?? [], domain: task?.natural ?? [] },
+    transitions: tr, firstInvalid: firstInvalid >= 0 ? firstInvalid : null,
+    method: !texts.length ? "no-working" : firstInvalid >= 0 ? "invalid" : tr.every((t) => t.status.startsWith("certified")) ? "certified" : "unsupported",
+    completeness, finalAnswer, progress: tr.filter((t) => t.status.startsWith("certified")).map((t) => t.move ?? t.status),
+  };
+  return { status, at, reason, lines, chain: status === "verified" ? s.chain : status === "invalid" ? [] : s.chain, evidence };
 }
 
 // ------------------------------------------------------------------------------------------------ route policy

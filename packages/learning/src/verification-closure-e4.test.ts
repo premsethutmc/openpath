@@ -93,8 +93,8 @@ describe("E4 polynomial solution sets: completeness within the supported cases o
     const b = await never("x^5 - x - 1 = 0", ["x^5 - x - 1 = 0", "x = 1"]);
     expect(["unsupported", "resource-exhausted", "invalid"]).toContain(b.classification);
   });
-  // P2-FINAL: relied on the legacy numeral-provenance fallback; now unsupported by design (see P2_FINAL_AUTHORITY_REVIEW_REPORT.md, new-unsupported list)
-  test.skip("large coefficients within the resource limits are exact", async () => {
+  // grader generalization (@3): re-enabled - the authority now certifies this route itself (was P2-FINAL skipped)
+  test("large coefficients within the resource limits are exact", async () => {
     await accepted("x^2 - 1000000007x + 1000000006 = 0", ["x^2 - 1000000007x + 1000000006 = 0", "(x - 1)(x - 1000000006) = 0", "x = 1 or x = 1000000006"]);
   });
 });
@@ -138,8 +138,8 @@ describe("E4 multivariable algebra: every inference is an exact consequence, sym
     await accepted("a - b - 2c = 1 and -a - 2b = 8 and 2b - c = -6", ["a - b - 2c = 1", "-a - 2b = 8", "2b - c = -6", "-3b - 2c = 9", "2b - c = -6", "c = 0", "b = -3", "a = -2", "a = -2 and b = -3 and c = 0"]);
     await never("a - b - 2c = 1 and -a - 2b = 8 and 2b - c = -6", ["a - b - 2c = 1", "-a - 2b = 8", "2b - c = -6", "-3b - 2c = 9", "c = 0", "b = -3"], "incomplete");
   });
-  // P2-FINAL: relied on the legacy numeral-provenance fallback; now unsupported by design (see P2_FINAL_AUTHORITY_REVIEW_REPORT.md, new-unsupported list)
-  test.skip("evaluation uses the given values exactly; swapped bindings are caught", async () => {
+  // grader generalization (@3): re-enabled - the authority now certifies this route itself (was P2-FINAL skipped)
+  test("evaluation uses the given values exactly; swapped bindings are caught", async () => {
     await accepted("a^2 - 3b when a = 2 and b = 1", ["a^2 - 3b", "2^2 - 3*1", "4 - 3", "1"]);
     await never("a^2 - 3b when a = 2 and b = 1", ["a^2 - 3b", "1^2 - 3*2", "-5"], "invalid");
     await never("a^2 - 3b when a = 2 and b = 1", ["a^2 - 3b", "2^2 - 3*1", "4 - 3"], "incomplete");
