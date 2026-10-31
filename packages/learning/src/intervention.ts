@@ -417,6 +417,11 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   // bounded-retry@1 (Milestone 2): the original problem is not sent back again and again. After the first try and RETRY_LIMIT returns, all wrong,
   // recovery stops for a person (escalate -> pause@1); the wrong answers stay recorded, nothing is counted as solved.
   if (tries.length >= 1 + RETRY_LIMIT) return { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
+  // own-skill teaching (Milestone 2 closure, decision C): when the skills this problem builds on show no gap and the problem is still wrong after a
+  // return, the problem's OWN skill is taught once (its module chooses the explanation through the teaching-eligibility gate and ends with an
+  // independent check), then the problem is tried once more. Taught already since the first try, or nothing eligible to teach: escalate.
+  const ownTarget = graph.evidenceTarget(q.competency);
+  const ownTaught = records.teaching.some((t) => graph.evidenceTarget(t.competency) === ownTarget && t.at > tries[0].at);
   const shown = (id: string) => ["independent", "transfer", "verified"].includes(evidence(id).status);
   const resolved = (id: string, est?: Established | null) => {
     const ms = moduleState(id, records, evidence(id), now, session, est);
@@ -457,6 +462,22 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     if (r.done) continue;
     if (r.ms.phase === "pause") return { ...base, reasoning, plan, phase: "escalate", active: s.id, reason: `${graph.get(s.id).name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
     return { ...base, reasoning, plan, phase: "support", active: s.id, reason: `${plan?.kind === "unsure" ? `${plan.why} ` : ""}${s.type === "mandatory" ? `This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}.` : `A related skill that is not shown yet may help: ${graph.get(s.id).name}.`} We check it first, then come back to the problem.` };
+  }
+  // no gap found in the skills this builds on
+  if (tries.length >= 2) {
+    if (ownTaught) {
+      // after the explanation: the module's own guided practice and independent check, then the problem once more (the RETRY_LIMIT rule above
+      // escalates if that try is wrong)
+      const r = resolved(ownTarget);
+      if (r.ms.phase === "chapter" || ((r.ms.phase === "guided" || r.ms.phase === "check") && r.ms.question)) return { ...base, reasoning, plan, phase: "teach", active: ownTarget, reason: r.ms.reason };
+      return { ...base, reasoning, plan, phase: "return", active: null, reason: "Back to the original problem, after the explanation and a question on your own." };
+    }
+    const m = moduleFor(ownTarget);
+    const eligible = !!m && m.strategies.some((st) => !failsChecks(m, st));
+    if (!eligible) return { ...base, reasoning, plan, phase: "escalate", active: null, reason: "No gap was found in the skills this problem builds on, and there is no checked explanation of this skill to offer here. Go through it with a teacher or parent." };
+    const r = resolved(ownTarget);
+    if (r.ms.phase === "chapter" || r.ms.question) return { ...base, reasoning, plan, phase: "teach", active: ownTarget, reason: "No gap was found in the skills this problem builds on. Here is this skill itself: an explanation, then a question on your own." };
+    return { ...base, reasoning, plan, phase: "escalate", active: null, reason: "No gap was found in the skills this problem builds on, and this skill's own module has nothing more to teach here. Go through it with a teacher or parent." };
   }
   return { ...base, reasoning, plan, phase: "return", active: null, reason: plan?.kind === "unsure" ? `${plan.why} Try the problem again, or ask a teacher to look at your working.` : "Back to the original problem." };
 }

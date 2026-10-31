@@ -24,7 +24,7 @@ const target = (id: string) => graph.evidenceTarget(question(SCENARIOS.find((s) 
 const summary = (learnerId: string, events: any[], c: string, now: number) => {
   const st = learnerState(learnerId, events, now, {}); const ev: any = st.evidence(c);
   return { attempts: st.records.attempts.map((a: any) => [a.questionId, a.response, a.activity, a.hints, a.n, a.credit]), teaches: st.records.teaching.map((t: any) => [t.competency, t.strategy]),
-    status: ev.status, independent: ev.independent, assisted: ev.assisted, retention: ev.retention, independentAt: ev.independentAt, due: ev.retentionDueAt, cycles: ev.retentionHistory, unresolved: st.records.unresolved.length };
+    status: ev.status, verified: ev.verified, recoveryRequired: ev.recoveryRequired, independent: ev.independent, assisted: ev.assisted, retention: ev.retention, independentAt: ev.independentAt, due: ev.retentionDueAt, cycles: ev.retentionHistory, unresolved: st.records.unresolved.length };
 };
 
 if (mode === "export") {
@@ -85,6 +85,13 @@ if (mode === "export") {
       "repeated reads identical": new Set(s2[id].reads).size === 1 && JSON.stringify(fz) === JSON.stringify(fz2),
       "retention outcome": ON_RETENTION[id] === "remember" ? cycles.some((x: any) => x.result === "passed") : (cycles.some((x: any) => x.result === "failed") && cycles.at(-1).result !== "failed" && Date.parse(cycles.at(-1).due) > Date.parse(cycles.find((x: any) => x.result === "failed").failedAt) && fz.status !== "verified"),
       "failed check leads to recovery steps": ON_RETENTION[id] === "remember" ? true : s2[id].phases.some((p: string) => ["explore", "chapter", "guided", "check", "recover", "investigate"].includes(p)),
+      // decision B, in a new process from the stored records cut off just after the failed delayed check
+      "failed check: review, not verified, recovery required, earlier achievement kept": ON_RETENTION[id] === "remember" ? true : (() => {
+        const failedAt = (cycles.find((x: any) => x.result === "failed") ?? {}).failedAt; if (!failedAt) return false;
+        const cut = summary(pupil, events.filter((e: any) => e.at <= failedAt), c, Date.parse(failedAt) + 60_000);
+        return cut.status === "review" && cut.verified === false && cut.recoveryRequired === true && cut.independentAt === b.independentAt;
+      })(),
+      "after recovery: requirement lifted, still not verified": ON_RETENTION[id] === "remember" ? true : fz.recoveryRequired === false && fz.verified === false,
       "no duplicate review or intervention": cycles.filter((x: any) => x.result === "pending").length <= 1 && events.filter((e: any) => e.record === "teach").length === new Set(events.filter((e: any) => e.record === "teach").map((e: any) => e.id)).size,
       detail: { session1: { status: b.status, retention: b.retention, due: b.due }, session2: { first: s2[id].firstStep, ended: s2[id].ended?.phase }, final: { status: fz.status, cycles: cycles.map((x: any) => x.result), due: fz.due, events: events.length } },
     };

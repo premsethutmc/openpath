@@ -138,6 +138,9 @@ export interface SkillEvidence {
   retentionDueAt: string | null;
   /** retention@2: every delayed check so far, oldest first (a failed one stays failed) */
   retentionHistory: RetentionCycle[];
+  /** retention-failure@1 (Milestone 2 closure, decision B): the latest delayed check failed and the skill has not been shown again on your own since.
+   *  Earlier achievement stays in the record (`independentAt`, the history); current status is "review" and `verified` is false until recovery. */
+  recoveryRequired: boolean;
   independent: { right: number; total: number };
   assisted: { right: number; total: number };
   attempts: string[];
@@ -223,6 +226,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     retention,
     retentionDueAt: due,
     retentionHistory: history,
+    recoveryRequired: retention === "failed",
     independent: { right: ind.filter(right).length, total: ind.length },
     assisted: { right: assisted.filter(right).length, total: assisted.length },
     attempts: mine.map((a) => a.id),

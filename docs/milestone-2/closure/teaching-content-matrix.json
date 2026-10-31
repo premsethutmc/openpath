@@ -1,0 +1,1330 @@
+[
+ {
+  "competency": "Compose tens and ones",
+  "cid": "MATH.number.place-value-tens",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   1,
+   1
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified",
+   "The method: text-not-instance"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "AI review: usable as is; add a second example with 10+ loose ones to show 'make another ten'. Machine eligibility flagged worked-unverified/text-not-instance."
+ },
+ {
+  "competency": "Compose tens and ones",
+  "cid": "MATH.number.place-value-tens",
+  "strategy": "count_on",
+  "kind": "procedural",
+  "grades": [
+   1,
+   1
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (6 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Show the blocks for 4 tens 1 one (or reword text to the number line); the math line refers to 'the picture' that is not shown."
+ },
+ {
+  "competency": "Compose tens and ones",
+  "cid": "MATH.number.place-value-tens",
+  "strategy": "bundles",
+  "kind": "conceptual",
+  "grades": [
+   1,
+   1
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (6 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Add a sticks/bundle visual and an example with more than ten loose sticks being tied into a new ten; align text and example (sticks vs blocks)."
+ },
+ {
+  "competency": "Compose tens and ones",
+  "cid": "MATH.number.place-value-tens",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   1,
+   1
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "State or show '3 long blocks and 4 cubes' and walk 10, 20, 30, 31...34; 'Not 7, but 34' is opaque without the picture."
+ },
+ {
+  "competency": "Compose tens and ones",
+  "cid": "MATH.number.place-value-tens",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   1,
+   1
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Map each prerequisite to the step it supports with a mini example; the check (5 tens 14 ones) needs a taught regrouping example first."
+ },
+ {
+  "competency": "Add two-digit numbers with regrouping",
+  "cid": "MATH.number.addition-regroup",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   2,
+   2
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified",
+   "The method: text-not-instance"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Add the final line '56 + 35 = 91' and link the widget's 11 ones to trading 10 ones for a ten."
+ },
+ {
+  "competency": "Add two-digit numbers with regrouping",
+  "cid": "MATH.number.addition-regroup",
+  "strategy": "make_ten",
+  "kind": "conceptual",
+  "grades": [
+   2,
+   2
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "Make a ten first: text-not-instance"
+  ],
+  "progressive": "yes (6 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Rewrite math lines as 66 + 4 = 70, 70 + 20 = 90 to match the number line; finish 40 + 23 = 63."
+ },
+ {
+  "competency": "Add two-digit numbers with regrouping",
+  "cid": "MATH.number.addition-regroup",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   2,
+   2
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "AI review: add one line '1 + 1 + 1 carried = 3 tens, so 30' to complete the repair."
+ },
+ {
+  "competency": "Add two-digit numbers with regrouping",
+  "cid": "MATH.number.addition-regroup",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   2,
+   2
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Tie 'Compose tens and ones' explicitly to the carry step with a short example."
+ },
+ {
+  "competency": "Use multiplication facts",
+  "cid": "MATH.number.multiplication-tables",
+  "strategy": "near_fact",
+  "kind": "recall",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "not machine-checked (allowed by the gate); educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "AI review: correct and clear but not machine-checked; a 2-screen reveal (7x7, then +7) and an array picture would help."
+ },
+ {
+  "competency": "Use multiplication facts",
+  "cid": "MATH.number.multiplication-tables",
+  "strategy": "decomposition",
+  "kind": "recall",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "not machine-checked (allowed by the gate); educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "AI review: not machine-checked; otherwise sound."
+ },
+ {
+  "competency": "Use multiplication facts",
+  "cid": "MATH.number.multiplication-tables",
+  "strategy": "doubling",
+  "kind": "recall",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "error",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "not machine-checked (allowed by the gate); educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "mathematically unsupported or unsafe",
+  "notes": "text says \"double three times\" from 7 \u00d7 2 = 14; it is twice (14 \u2192 28 \u2192 56). Verified."
+ },
+ {
+  "competency": "Use multiplication facts",
+  "cid": "MATH.number.multiplication-tables",
+  "strategy": "repeated_addition",
+  "kind": "conceptual",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "not machine-checked (allowed by the gate); educator-reviewed: no",
+  "violations": [],
+  "progressive": "no (1 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Split into reveal steps (one group per step) with a groups picture; note '8 groups of 7' vs '7 groups of 8' convention varies by curriculum."
+ },
+ {
+  "competency": "Use multiplication facts",
+  "cid": "MATH.number.multiplication-tables",
+  "strategy": "visual_groups",
+  "kind": "conceptual",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "unclear",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "not machine-checked (allowed by the gate); educator-reviewed: no",
+  "violations": [],
+  "progressive": "no (1 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Add '35 + 21 = 56, so 8 x 7 = 56'; confirm the widget split is applied to rows here."
+ },
+ {
+  "competency": "Multiply multi-digit numbers",
+  "cid": "MATH.number.multi-multiplication",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   4,
+   4
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "questionable",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified",
+   "The method: text-not-instance"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Use one example consistently and add a line on why splitting by place value works; add a 2-digit x 2-digit case."
+ },
+ {
+  "competency": "Multiply multi-digit numbers",
+  "cid": "MATH.number.multi-multiplication",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   4,
+   4
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "AI review: add '40 x 2 = 80, 8 x 2 = 16, 80 + 16 = 96' to show the correct path."
+ },
+ {
+  "competency": "Multiply multi-digit numbers",
+  "cid": "MATH.number.multi-multiplication",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   4,
+   4
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Show which fact (7x6, 4x6) each step uses."
+ },
+ {
+  "competency": "Interpret quotients and remainders",
+  "cid": "MATH.number.division-remainders",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "questionable",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Add '7 x 6 = 42 is too big' and 'remainder must be less than 6'; add a context problem to meet 'interpret'."
+ },
+ {
+  "competency": "Interpret quotients and remainders",
+  "cid": "MATH.number.division-remainders",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "questionable",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "AI review: add the 48 and 50-48 lines; confirm the grade placement."
+ },
+ {
+  "competency": "Interpret quotients and remainders",
+  "cid": "MATH.number.division-remainders",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "questionable",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Link 'multiplication facts' to finding the biggest multiple with an example."
+ },
+ {
+  "competency": "Evaluate arithmetic expressions using brackets and operation precedence",
+  "cid": "MATH.number.order-of-operations",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   5,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Use an example with brackets and x (e.g. 3 + (8 - 2) x 4) to show each rule."
+ },
+ {
+  "competency": "Evaluate arithmetic expressions using brackets and operation precedence",
+  "cid": "MATH.number.order-of-operations",
+  "strategy": "tree",
+  "kind": "conceptual",
+  "grades": [
+   5,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "Draw it as a tree: text-not-instance"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Add a tree widget for 12 + 6 x 5 and phrase the steps as 'bottom branch first'."
+ },
+ {
+  "competency": "Evaluate arithmetic expressions using brackets and operation precedence",
+  "cid": "MATH.number.order-of-operations",
+  "strategy": "terms",
+  "kind": "procedural",
+  "grades": [
+   5,
+   7
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "AI review: consider showing the term split visually (11 | 8 x 8)."
+ },
+ {
+  "competency": "Evaluate arithmetic expressions using brackets and operation precedence",
+  "cid": "MATH.number.order-of-operations",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   5,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "AI review: add '15 + 6 = 21, 21 x 2 = 42'."
+ },
+ {
+  "competency": "Order signed integers",
+  "cid": "MATH.number.integers",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Show each number being placed on the line (e.g. -8 is 8 steps left of 0, -7 is 7 steps left) before reading off the order; resolve the worked-unverified flag."
+ },
+ {
+  "competency": "Order signed integers",
+  "cid": "MATH.number.integers",
+  "strategy": "thermometer",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "Think of a thermometer: text-not-instance"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Rewrite the text to use the instance's numbers (e.g. -8 C colder than -2 C) and phrase the answer as coldest-to-warmest temperatures; fixes the text-not-instance flag."
+ },
+ {
+  "competency": "Order signed integers",
+  "cid": "MATH.number.integers",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Could add one line generalising: the larger the number after the minus sign, the smaller the value."
+ },
+ {
+  "competency": "Add and subtract integers",
+  "cid": "MATH.number.integer-add",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Show the intermediate step (sizes 17+7=24, keep the minus) and add a second example with subtraction rewritten as adding the opposite."
+ },
+ {
+  "competency": "Add and subtract integers",
+  "cid": "MATH.number.integer-add",
+  "strategy": "tokens",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Use a subtraction-of-negative instance with small numbers (e.g. 3-(-2)): draw 3 +tokens, add 2 zero pairs, remove 2 -tokens, count 5."
+ },
+ {
+  "competency": "Add and subtract integers",
+  "cid": "MATH.number.integer-add",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "mismatched",
+  "classification": "requires teaching-content revision",
+  "notes": "Give a reason (zero pairs or 'removing a debt') and use a check of the form a-(-b)."
+ },
+ {
+  "competency": "Multiply integers using sign rules",
+  "cid": "MATH.number.integer-multiply",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "questionable",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Start with single products before mixed expressions, and add one line on why the sign rule holds; resolve the worked-unverified flag."
+ },
+ {
+  "competency": "Multiply integers using sign rules",
+  "cid": "MATH.number.integer-multiply",
+  "strategy": "number_line",
+  "kind": "conceptual",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "no",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (6 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Use an instance matching the model (e.g. 4 x (-3) = -12 drawn as jumps), then extend with a pattern (3x(-3), 2x(-3), ... (-1)x(-3)) for negative x negative."
+ },
+ {
+  "competency": "Multiply integers using sign rules",
+  "cid": "MATH.number.integer-multiply",
+  "strategy": "sign_table",
+  "kind": "procedural",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (6 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Add 'the same rules work for division' and one line on why - x - = +."
+ },
+ {
+  "competency": "Multiply integers using sign rules",
+  "cid": "MATH.number.integer-multiply",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Optionally show the corrected line 6 - (-21) = 27 so the learner sees the fix in place."
+ },
+ {
+  "competency": "Multiply integers using sign rules",
+  "cid": "MATH.number.integer-multiply",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "no",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "demonstration-only",
+  "notes": "Turn into a real prerequisite check (one short integer add/subtract item plus a link) or drop it."
+ },
+ {
+  "competency": "Operate on rational numbers",
+  "cid": "MATH.number.rational-numbers",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Split into one screen per operation with its own example; remove or replace the number-line widget for division."
+ },
+ {
+  "competency": "Operate on rational numbers",
+  "cid": "MATH.number.rational-numbers",
+  "strategy": "number_line",
+  "kind": "conceptual",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (5 line(s))",
+  "recheck": "mismatched",
+  "classification": "requires teaching-content revision",
+  "notes": "Use an instance like 1/3 - (-1/2), show the converted numerators, and give an addition/subtraction check."
+ },
+ {
+  "competency": "Operate on rational numbers",
+  "cid": "MATH.number.rational-numbers",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "error",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "mismatched",
+  "classification": "mathematically unsupported or unsafe",
+  "notes": "the misconception screen cuts the question off at \"Work out 2/5 \u00d7\" (the question itself, 2/5 \u00d7 (\u22127/9), displays correctly). Verified."
+ },
+ {
+  "competency": "Find missing operands",
+  "cid": "MATH.algebra.missing-number",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "error",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "mathematically unsupported or unsafe",
+  "notes": "rule \"do the opposite to the other number\" gives 36 for 27 \u2212 \u25a1 = 9 (its own check question); the answer is 18. Verified."
+ },
+ {
+  "competency": "Find missing operands",
+  "cid": "MATH.algebra.missing-number",
+  "strategy": "count_on",
+  "kind": "procedural",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "Count on to find the gap: text-not-instance"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Use an addition or subtraction instance (e.g. box + 7 = 15) and show the counts; fixes text-not-instance."
+ },
+ {
+  "competency": "Find missing operands",
+  "cid": "MATH.algebra.missing-number",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "mismatched",
+  "classification": "requires teaching-content revision",
+  "notes": "Keep the content; change the check to a - box = b form (e.g. 30 - box = 12)."
+ },
+ {
+  "competency": "Find missing operands",
+  "cid": "MATH.algebra.missing-number",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   3,
+   3
+  ],
+  "math": "error",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "no",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "mathematically unsupported or unsafe",
+  "notes": "repeats the same rule. Verified."
+ },
+ {
+  "competency": "Evaluate variable expressions",
+  "cid": "MATH.algebra.variables",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "questionable",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Phrase as 'evaluate 8x + 10 when x = 1' and pick x > 1; drop the m/c notation; resolve the worked-unverified flag."
+ },
+ {
+  "competency": "Evaluate variable expressions",
+  "cid": "MATH.algebra.variables",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "questionable",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Reword as evaluating an expression rather than a point on a line."
+ },
+ {
+  "competency": "Evaluate variable expressions",
+  "cid": "MATH.algebra.variables",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "no",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "available",
+  "classification": "demonstration-only",
+  "notes": "Replace with an actual quick multiplication-facts check or remove."
+ },
+ {
+  "competency": "Represent a number rule with a symbol",
+  "cid": "MATH.algebra.expressions-intro",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   5,
+   5
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified",
+   "The method: text-not-instance"
+  ],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Show the intermediate step (m -> 2m -> 2m + 3) and a numeric test (m = 1 gives 5). Resolve the machine flags worked-unverified/text-not-instance."
+ },
+ {
+  "competency": "Represent a number rule with a symbol",
+  "cid": "MATH.algebra.expressions-intro",
+  "strategy": "table_first",
+  "kind": "conceptual",
+  "grades": [
+   5,
+   5
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Add a row or column showing 2\u00d71 + 8, 2\u00d72 + 8, 2\u00d73 + 8 so the generalisation to 2m + 8 is visible."
+ },
+ {
+  "competency": "Represent a number rule with a symbol",
+  "cid": "MATH.algebra.expressions-intro",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   5,
+   5
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Could add a numeric test (m = 3: 2m + 1 = 7, m + 3 = 6) to show why the two differ."
+ },
+ {
+  "competency": "Simplify linear expressions",
+  "cid": "MATH.algebra.algebra-simplify",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Add one line on why only like terms combine (6x + 7x = 13 lots of x). Resolve the machine flag worked-unverified."
+ },
+ {
+  "competency": "Simplify linear expressions",
+  "cid": "MATH.algebra.algebra-simplify",
+  "strategy": "objects",
+  "kind": "conceptual",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "questionable",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "Count things of the same kind: text-not-instance"
+  ],
+  "progressive": "yes (6 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Replace the apples/bananas framing with 'x stands for a number: 3x + 4x = 7 lots of the same number', or use area tiles. Machine flag text-not-instance also applies."
+ },
+ {
+  "competency": "Simplify linear expressions",
+  "cid": "MATH.algebra.algebra-simplify",
+  "strategy": "check_number",
+  "kind": "procedural",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (6 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Show the check worked out (question and answer both evaluate to the same number). Use non-special values such as x = 3, y = 5 instead of 1 and 2."
+ },
+ {
+  "competency": "Simplify linear expressions",
+  "cid": "MATH.algebra.algebra-simplify",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Optionally show the correct grouping lines (9x \u2212 5x = 4x, \u22129y \u2212 3y = \u221212y) after the 'Not ... but' line."
+ },
+ {
+  "competency": "Simplify linear expressions",
+  "cid": "MATH.algebra.algebra-simplify",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "no",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "mismatched",
+  "classification": "demonstration-only",
+  "notes": "Link a prerequisite item (e.g. \u22129 \u2212 3 = ?) and show where it appears in a simplification. Otherwise treat it as a routing placeholder, not teaching content."
+ },
+ {
+  "competency": "Solve one-step equations",
+  "cid": "MATH.algebra.linear-intro",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Show the substitution check (12 \u2212 4 = 8). Vary the check operation (\u00d7, \u00f7), not only x \u2212 4. Resolve the machine flag worked-unverified."
+ },
+ {
+  "competency": "Solve one-step equations",
+  "cid": "MATH.algebra.linear-intro",
+  "strategy": "think_back",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Replace the worked line with real trials (try 10: 6, too small; try 13: 9, correct). The id 'think_back' does not match the title."
+ },
+ {
+  "competency": "Solve one-step equations",
+  "cid": "MATH.algebra.linear-intro",
+  "strategy": "balance",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Add 'or split both sides into the same number of equal parts' to the text so it matches the division example."
+ },
+ {
+  "competency": "Solve one-step equations",
+  "cid": "MATH.algebra.linear-intro",
+  "strategy": "spot_the_mistake",
+  "kind": "conceptual",
+  "grades": [
+   6,
+   6
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "mismatched",
+  "classification": "requires teaching-content revision",
+  "notes": "Use a check of the form ax = b (e.g. 4x = 36, with distractor 32)."
+ },
+ {
+  "competency": "Solve linear equations",
+  "cid": "MATH.algebra.linear-equations",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "fits",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Write the full intermediate equation '2x = 10' and add a one-line reason for undoing +4 first (or a balance picture). Resolve the machine flag worked-unverified."
+ },
+ {
+  "competency": "Solve linear equations",
+  "cid": "MATH.algebra.linear-equations",
+  "strategy": "spot_the_mistake",
+  "kind": "procedural",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "fits",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Optionally show 7 \u00d7 10 + 5 = 75 as confirmation."
+ },
+ {
+  "competency": "Solve linear equations",
+  "cid": "MATH.algebra.linear-equations",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   7,
+   7
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "fits",
+  "difficulty": "no",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "mismatched",
+  "classification": "demonstration-only",
+  "notes": "Attach a prerequisite item (e.g. 7 \u00d7 ? = 70) or treat it as a routing placeholder."
+ },
+ {
+  "competency": "Solve equations with rational coefficients",
+  "cid": "MATH.algebra.linear-rational",
+  "strategy": "worked_steps",
+  "kind": "procedural",
+  "grades": [
+   8,
+   8
+  ],
+  "math": "correct",
+  "clarity": "adequate",
+  "fit": "questionable",
+  "difficulty": "partly",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "The method: worked-unverified"
+  ],
+  "progressive": "yes (4 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Add a fraction or decimal example (e.g. (2/3)x \u2212 1 = 5, multiply by 3/2 or clear denominators) and show '\u22126x = 48'. Resolve the machine flag worked-unverified."
+ },
+ {
+  "competency": "Solve equations with rational coefficients",
+  "cid": "MATH.algebra.linear-rational",
+  "strategy": "number_line_check",
+  "kind": "prerequisite",
+  "grades": [
+   8,
+   8
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "questionable",
+  "difficulty": "yes",
+  "review": "blocked by the gate (never shown); educator-reviewed: no",
+  "violations": [
+   "Check signs on a number line: text-not-instance"
+  ],
+  "progressive": "yes (5 line(s))",
+  "recheck": "available",
+  "classification": "requires teaching-content revision",
+  "notes": "Make the text match the instance ('\u221210 moves 10 left; undo by adding 10') and add a non-integer case. Machine flag text-not-instance also applies."
+ },
+ {
+  "competency": "Solve equations with rational coefficients",
+  "cid": "MATH.algebra.linear-rational",
+  "strategy": "spot_the_mistake",
+  "kind": "procedural",
+  "grades": [
+   8,
+   8
+  ],
+  "math": "correct",
+  "clarity": "clear",
+  "fit": "questionable",
+  "difficulty": "yes",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (3 line(s))",
+  "recheck": "available",
+  "classification": "ready for supervised educational evaluation",
+  "notes": "Show the full corrected line '\u22122x = \u221210, x = 5' and add a variant with a fractional coefficient for the competency."
+ },
+ {
+  "competency": "Solve equations with rational coefficients",
+  "cid": "MATH.algebra.linear-rational",
+  "strategy": "check_what_it_uses",
+  "kind": "prerequisite",
+  "grades": [
+   8,
+   8
+  ],
+  "math": "correct",
+  "clarity": "weak",
+  "fit": "questionable",
+  "difficulty": "no",
+  "review": "machine-checked, eligible; educator-reviewed: no",
+  "violations": [],
+  "progressive": "yes (2 line(s))",
+  "recheck": "mismatched",
+  "classification": "demonstration-only",
+  "notes": "Attach prerequisite items (e.g. \u22126 \u00d7 \u22128, 48 \u00f7 (\u22126), (2/3) \u00d7 3/2) or treat it as a routing placeholder."
+ }
+]
