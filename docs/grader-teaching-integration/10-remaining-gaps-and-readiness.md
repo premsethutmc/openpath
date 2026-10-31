@@ -2,6 +2,16 @@
 
 ## Decision: **PASS — INTEGRATION IMPLEMENTED**
 
+The decision rests on the final complete regression on `5395d2e` ([09](09-REGRESSION-RESULTS.md)):
+
+- 0 introduced failures;
+- 0 false mathematical accepts on 2,498 corpus items and on all reference and property cases;
+- 109,096 / 109,096 existing grading decisions unchanged;
+- all 15 integrated journeys pass ([06](06-LEARNER-JOURNEY-TRACES.md)), with desktop and mobile screenshots;
+- 563 / 563 historical @3 certificates classified historical.
+
+Commits after `5395d2e` change documentation only.
+
 | Criterion | Met | Where |
 |---|---|---|
 | The A3 learner journey consumes the improved grading capability | yes. The trusted grader judges working inside its decision, the journey reads it, and Django stores it. There is no client-side authorisation. | doc 1 |
