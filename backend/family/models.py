@@ -307,3 +307,40 @@ class GradingDecisionRecord(models.Model):
         if not self._state.adding:
             raise ValueError("grading decisions are append-only")
         super().save(*args, **kwargs)
+
+
+# ---------------------------------------------------------------- hand-over acknowledgements (handover@1)
+
+
+class HandoverAcknowledgementQuerySet(models.QuerySet):
+    def update(self, **kwargs):
+        raise ValueError("hand-over acknowledgements are append-only")
+
+    def delete(self):
+        raise ValueError("hand-over acknowledgements are append-only")
+
+
+class HandoverAcknowledgement(models.Model):
+    """An educator's record that they have gone through a paused competency with a learner (handover@1). Append-only. It is NOT a mark
+    and NOT mastery: it only reopens the competency for one fresh question on the learner's own (packages/learning/src/intervention.ts).
+    Only an account with the educator role, with the parent's share for this pupil, can create one; the learner's app cannot."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="handover_acknowledgements")
+    competency = models.CharField(max_length=120)
+    note = models.TextField(max_length=1000, blank=True, default="")
+    educator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name="+")
+    at = models.DateTimeField(auto_now_add=True)
+
+    objects = HandoverAcknowledgementQuerySet.as_manager()
+
+    class Meta:
+        ordering = ["at", "id"]
+
+    def save(self, *args, **kwargs):
+        if not self._state.adding:
+            raise ValueError("hand-over acknowledgements are append-only")
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        raise ValueError("hand-over acknowledgements are append-only")
+

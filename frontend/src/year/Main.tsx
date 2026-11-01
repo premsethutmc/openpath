@@ -22,7 +22,8 @@ import { reviewFixtureActive, useReviewFixture } from "../../../packages/learnin
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
-import { withDecisions, type LearningActivity, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
+import { withDecisions, type HandoverAcknowledgement, type LearningActivity, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
+import { delayedCheckFact } from "../../../packages/learning/src/due-display";
 import { learnerState, make, type StudyRecord, type StudyUpdate } from "../../../packages/learning/src/session";
 import { writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
 import { isDrawing, SketchView } from "./SketchPad";
@@ -132,12 +133,15 @@ function App() {
   const repo = useMemo(() => (learner ? new Repo(learner) : null), [learner]);
   // written@1: an educator's marks on this learner's written answers (read-only; only a mark of correct counts)
   const [marks, setMarks] = useState<WrittenMark[]>([]);
+  const [acks, setAcks] = useState<HandoverAcknowledgement[]>([]);
   useEffect(() => {
     setEvents(null);
     setMarks([]);
     if (!repo || !signedIn) return;
     repo.load().then(setEvents).catch((e) => setError(String(e.message ?? e)));
     api.request<{ marks: WrittenMark[] }>("GET", `/pupils/${learner}/written-marks/`).then((r) => setMarks(r.marks)).catch(() => setMarks([]));
+    // handover@1: an educator's acknowledgements of a paused skill, from the server only
+    api.request<{ acknowledgements: HandoverAcknowledgement[] }>("GET", `/pupils/${learner}/handover-acknowledgements/`).then((r) => setAcks(r.acknowledgements)).catch(() => setAcks([]));
   }, [repo, signedIn]);
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 30_000);
@@ -147,7 +151,7 @@ function App() {
     window.scrollTo({ top: 0 });
   }, [view]);
 
-  const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}`, marks }) : null), [learner, events, now, registryLoaded, marks]);
+  const st = useMemo(() => (learner && events ? learnerState(learner, events, now, { currentSession: `learn:${learner}:${visit.current}`, marks, acknowledgements: acks }) : null), [learner, events, now, registryLoaded, acks, marks]);
   // ?skill=<competency> (from the curriculum dashboard): open that skill's module once the year is loaded
   const wanted = useRef(new URLSearchParams(location.search).get("skill"));
   useEffect(() => {
@@ -590,7 +594,7 @@ function TileDetail({ t, ev, onStart }: { t: Tile; ev: Ctx["evidence"]; onStart?
           <div className="fact"><b>{e.independent.right} / {e.independent.total}</b>right on your own</div>
           <div className="fact"><b>{e.assisted.right} / {e.assisted.total}</b>right with help</div>
           <div className="fact"><b>{STATUS_WORD[e.status]}</b>status</div>
-          <div className="fact"><b>{e.retention === "none" ? "Not yet" : e.retention === "scheduled" ? new Date(e.retentionDueAt!).toLocaleDateString() : e.retention === "due" ? "Due now" : e.retention === "passed" ? "Passed" : "Missed"}</b>delayed check</div>
+          <div className="fact"><b>{delayedCheckFact(e, Intl.DateTimeFormat().resolvedOptions().timeZone).text}</b>delayed check</div>
         </div>
       )}
       {t.strategies.length > 0 && <p className="small muted">Ways it can be explained: {t.strategies.join(" · ")}</p>}

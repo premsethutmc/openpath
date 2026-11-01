@@ -12,6 +12,7 @@ import { feedbackFromDecision, questionSpec, teachingSpec, teachingSteps, workin
 import { readSubmission } from "../../../packages/learning/src/grading/submission";
 import { taskStatement } from "../../../packages/learning/src/grading/working";
 import { SliceSession } from "./session";
+import { scheduleNote } from "../../../packages/learning/src/due-display";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
 import type { LearningActivity } from "../../../packages/learning/src/records";
 /** The reason for the explanation, and what may be said about its review (explanation-review@1: never "approved" unless it is). */
@@ -40,8 +41,9 @@ export class SliceFlow {
   private supportCtx: { competency: string; established: Established | null } | null = null;
   /** `retry`: the app offers "Try again" (study-session mode); bounded by retriesLeft (bounded-retry@1). */
   readonly startQid: string;
-  readonly opts: { retry?: boolean; entry?: "diagnostic" | "practice"; resume?: SliceSession };
-  constructor(startQid: string, learnerId = "synthetic-slice-1", now?: number, opts: { retry?: boolean; entry?: "diagnostic" | "practice"; resume?: SliceSession } = {}) {
+  /** timeZone: the viewer's time zone for the opening times the summary states (retention-display@1); default UTC */
+  readonly opts: { retry?: boolean; entry?: "diagnostic" | "practice"; resume?: SliceSession; timeZone?: string };
+  constructor(startQid: string, learnerId = "synthetic-slice-1", now?: number, opts: { retry?: boolean; entry?: "diagnostic" | "practice"; resume?: SliceSession; timeZone?: string } = {}) {
     this.startQid = startQid; this.opts = opts;
     this.qid = startQid;
     this.activity = opts.entry === "practice" ? "practice" : "diagnostic";
@@ -112,7 +114,9 @@ export class SliceFlow {
   }
   private stop(phase: string, reason: string, why: string | null) {
     this.stage = "summary"; this.phase = phase; this.ended = { phase, reason, why };
-    this.spec = { ...questionSpec(this.qid, { guide: { message: reason, tone: "neutral" } }), layout: { panels: ["question", "nav"] } };
+    // retention-display@1: the exact opening time of the delayed check, or of the way back after a pause (date, time and time zone)
+    const note = this.ms ? scheduleNote(this.ms, this.opts.timeZone ?? "UTC") : null;
+    this.spec = { ...questionSpec(this.qid, { guide: { message: reason, tone: "neutral", ...(note ? { detail: note } : {}) } }), layout: { panels: ["question", "nav"] } };
   }
   /** a module step for `competency` as the app's Module view takes it; returns false when the module stops */
   private moduleStep(competency: string, established: Established | null, inRecovery: boolean): "asked" | "recover" | "stopped" {

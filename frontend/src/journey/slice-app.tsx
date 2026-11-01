@@ -16,7 +16,10 @@ const sid = new URLSearchParams(location.search).get("scenario");
 const sc = sid ? SCENARIOS.find((s) => s.id === sid) ?? null : null;
 // ?start=<question id> (D1): the slice from another question, e.g. the reference problem le-ref-3x-19-4; the learner types into the real screen
 const start0 = new URLSearchParams(location.search).get("start");
-const flow = sc ? new SliceFlow(sc.start, `synthetic-browser-${sc.id}`, T0, { retry: !!sc.retry, entry: sc.entry ?? "diagnostic" }) : (start0 && isQuestion(start0) ? new SliceFlow(start0, "synthetic-browser-d1", T0) : new SliceFlow("gen:lin:2,17,11"));
+// ?tz=<IANA zone> (H1): the viewer's time zone for the opening times stated; ?later=2,2 (H1): when the scripted learner comes back
+const tz0 = new URLSearchParams(location.search).get("tz") ?? undefined;
+const laterParam = new URLSearchParams(location.search).get("later");
+const flow = sc ? new SliceFlow(sc.start, `synthetic-browser-${sc.id}`, T0, { retry: !!sc.retry, entry: sc.entry ?? "diagnostic", ...(tz0 ? { timeZone: tz0 } : {}) }) : (start0 && isQuestion(start0) ? new SliceFlow(start0, "synthetic-browser-d1", T0) : new SliceFlow("gen:lin:2,17,11"));
 const learner = sc?.learner() ?? null;
 const asked = new Set<string>();
 let rerender: (() => void) | null = null;
@@ -34,7 +37,7 @@ let rerender: (() => void) | null = null;
     return a;
   },
   later: (days: number) => { flow.later(days); rerender?.(); },
-  later_days: sc?.later ?? [],
+  later_days: laterParam ? laterParam.split(",").map(Number).filter((n) => n > 0) : sc?.later ?? [],
 };
 (window as unknown as { __bug: unknown }).__bug = (q: string) => bugValue(problemOf(q), new Set(["forgot-divide"]));
 

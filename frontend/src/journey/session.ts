@@ -7,7 +7,7 @@ import { DAY } from "../../../packages/learning/src/evidence";
 import { moduleState, recovery, type Established, type ModuleState, type RecoveryState } from "../../../packages/learning/src/intervention";
 import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
 import { hypothesesFor, investigationTrigger } from "../../../packages/learning/src/hypotheses";
-import { withDecisions, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
+import { withDecisions, type HandoverAcknowledgement, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { gradeRequest, type GraderReply } from "../../../packages/learning/src/server-grader";
 import { learnerState, make } from "../../../packages/learning/src/session";
 import { activityFor } from "../learning/driver";
@@ -20,6 +20,8 @@ export class SliceSession {
   readonly events: LearningRecord[] = [];
   readonly decisions: Record<string, ServerDecision> = {};
   readonly replies: GraderReply[] = [];
+  /** handover@1: educator acknowledgements as the SERVER returns them (GET /pupils/<id>/handover-acknowledgements/); never learner records */
+  acknowledgements: HandoverAcknowledgement[] = [];
   now: number;
   session = "s1";
   private seq = 0;
@@ -41,7 +43,7 @@ export class SliceSession {
   }
   private ctx() { this.now += 60_000; return { learnerId: this.learnerId, sessionId: this.session, at: new Date(this.now).toISOString() }; }
   private evs() { return withDecisions(this.events, this.decisions); }
-  state() { return learnerState(this.learnerId, this.evs(), this.now, { currentSession: this.session }); }
+  state() { return learnerState(this.learnerId, this.evs(), this.now, { currentSession: this.session, acknowledgements: this.acknowledgements }); }
 
   /** what the adaptive engine says comes next for a skill (real moduleState over the real evidence, called exactly as the app's Module view
    *  does: with the learner's whole evidence, except inside a recovery that is already running, as adaptive-loop.ts does) */
