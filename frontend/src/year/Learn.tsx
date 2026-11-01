@@ -336,7 +336,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
   if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p>{reviewOffer}<button className="secondary wide" onClick={onExit}>Back</button></div>;
   // the same investigation as from Practice: the wrong answer is looked into, and the skill it points to is worked on first
-  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}<Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded /></div>;
+  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}<Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} /></div>;
   if (ms.phase === "chapter" && ms.strategy)
     return (
       <div className="stack">
@@ -381,8 +381,12 @@ function confirmedSupports(start: string, supports: { id: string; via: string | 
     return s.assessable;
   });
 }
-export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year", embedded = false }: { original: string; ctx: Ctx; onExit: () => void; exitLabel?: string; embedded?: boolean }) {
-  const [fb, setFb] = useState<Fb | null>(null);
+export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year", embedded = false, onFeedback }: { original: string; ctx: Ctx; onExit: () => void; exitLabel?: string; embedded?: boolean; onFeedback?: (fb: Fb) => void }) {
+  // Module recovery can end as soon as the saved answer arrives. Keep feedback
+  // in the owning module so that unmounting this investigation cannot discard it.
+  const [own, setOwn] = useState<Fb | null>(null);
+  const fb = onFeedback ? null : own;
+  const setFb = (f: Fb | null) => onFeedback ? f && onFeedback(f) : setOwn(f);
   const r = recovery(original, ctx.records, ctx.evidence, ctx.now, ctx.session);
   const q = question(original);
   const trace = (
@@ -400,7 +404,7 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
     </div>
   );
   // what the investigation found, in plain words (diagnostic@2; the support numbers are relative, not probabilities)
-  const finding = r.reasoning && r.reasoning.observed.length > 1 && (
+  const finding = r.reasoning && r.reasoning.observed.length > 0 && (
     <div className={`feedback ${r.reasoning.status === "established" ? "good" : "bad"}`} role="note" aria-label="What we think happened">
       <strong>{r.reasoning.status === "established" ? "What we think happened" : r.reasoning.status === "uncertain" ? "Not sure yet" : "Looking into it"}</strong>
       <p>{r.plan?.why ?? r.reason}</p>
@@ -440,6 +444,7 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
   return (
     <div className="stack">
       <h1>{graph.get(q.competency).name}</h1>
+      {finding}
       <div className={`feedback ${r.phase === "escalate" ? "bad" : "good"}`} role="status">
         <strong>{r.phase === "solved" ? "Solved on your own" : r.phase === "solved_on_retry" ? "Solved on a second try" : r.phase === "solved_after_help" ? "Solved after help" : "Ask for help with this one"}</strong>
         <p>{r.reason}</p>
