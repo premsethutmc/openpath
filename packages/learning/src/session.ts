@@ -2,6 +2,7 @@
  * Building learning records (the UI and the test drivers use the same constructors), and the learner's whole derived
  * state from their records at a moment: evidence, current year, tiles, plan.
  */
+import type { HandoverAcknowledgement } from "./records";
 import { decide } from "./grade";
 export { decide, creditOf } from "./grade";
 import { question } from "./content";
@@ -34,8 +35,8 @@ export const make = {
   teach: (c: Ctx, competency: string, strategy: string, rule: string): LearningRecord => ({ ...base(c), record: "teach", competency, strategy, rule }),
 };
 
-export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number, o: { currentSession?: string; marks?: readonly WrittenMark[] } = {}) {
-  const records = readRecords(learnerId, events, o.marks ?? []);
+export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number, o: { currentSession?: string; marks?: readonly WrittenMark[]; acknowledgements?: readonly HandoverAcknowledgement[] } = {}) {
+  const records = readRecords(learnerId, events, o.marks ?? [], o.acknowledgements ?? []);
   const ev = evidenceFor(learnerId, records, now);
   const enrol = currentEnrolment(records);
   const release = enrol ? releaseFor(enrol.curriculum, records.curricula) : null;

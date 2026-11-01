@@ -3,6 +3,7 @@
  * recovery from a problem the learner is stuck on, and a single question (a challenge or a problem fragment).
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
+import { scheduleNote } from "../../../packages/learning/src/due-display";
 import { useState } from "react";
 import {useResume} from "./resume";
 import { Figure } from "./Figure";
@@ -344,6 +345,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
       <div className={`feedback ${ms.phase === "pause" ? "bad" : ms.phase === "waiting" ? "" : "good"}`} role="status">
         <strong>{ms.phase === "pause" ? "Let's pause this one" : ms.phase === "waiting" ? "With an educator" : STATUS_WORD[ev.status]}</strong>
         <p>{ms.reason}</p>
+        {(() => { const n = scheduleNote(ms, Intl.DateTimeFormat().resolvedOptions().timeZone); return n ? <p className="small" data-handover={ms.handover?.route ?? "retention"}>{n}</p> : null; })()}
         <p className="small">On your own: {ev.independent.right} right of {ev.independent.total}. With help: {ev.assisted.right} right of {ev.assisted.total}.</p>
       </div>
       {!embedded && <button className="secondary wide" onClick={onExit}>{sessionMode ? "Next planned competency" : "Back to the year"}</button>}

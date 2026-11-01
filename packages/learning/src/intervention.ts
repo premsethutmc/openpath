@@ -143,7 +143,7 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
   };
 }
 
-export type ModulePhase = "recover" | "explore" | "strategy" | "chapter" | "guided" | "check" | "verify" | "retention" | "done" | "pause" | "unavailable" | "waiting";
+export type ModulePhase = "recover" | "explore" | "strategy" | "chapter" | "guided" | "check" | "verify" | "retention" | "done" | "pause" | "unavailable" | "waiting" | "reentry";
 export interface ModuleState {
   competency: string;
   phase: ModulePhase;
@@ -167,6 +167,96 @@ export interface ModuleState {
   contentReview?: ContentEligibility;
   /** phase "chapter": what the learner's evidence shows (misconception-evidence@1). */
   basis?: EvidenceBasis;
+  /** handover@1: phase "pause" or "reentry": when and how this competency opens again after a hand-over to a person */
+  handover?: HandoverState;
+  /** retention-display@1: the delayed check's exact opening instant when it is scheduled (shown with date, time and time zone) */
+  retentionOpensAt?: string;
+}
+
+// ---------------------------------------------------------------- handover@1 (Workstream H1): a bounded way back after a pause
+/**
+ * A pause (pause@1: "go through it with a teacher or parent") is derived from the records, so it used to last until the records changed —
+ * and a paused module asks nothing, so they never did (S2: 191/300 journeys stalled). handover@1 gives every pause an explicit, bounded way
+ * back, decided from the records alone (deterministic, replayable, nothing new is written by the engine):
+ *   since      the pause began at the learner's last record for this competency (attempt or teaching); nothing changes while paused
+ *   reentry    one fresh question ALONE (activity "diagnostic", context "reentry:<competency>"), graded by the trusted grader like any
+ *              other answer: no credit, mastery or status is given by re-entry itself, and nothing earlier is erased
+ *   opens      (a) an educator's acknowledgement recorded by the server after the pause began (records.acknowledgements; never a learner
+ *              record), or (b) self-service: REENTRY_DAYS after the pause began, at most SELF_REENTRY_LIMIT times per competency
+ *   bounded    each re-entry answer either moves the module on (the ordinary rules decide) or starts a new pause; after the self-service
+ *              re-entries are used, only an educator acknowledgement opens one more ("needs-teacher"): no infinite loop
+ *   elsewhere  the competencies the learner can carry on with meanwhile (graph neighbours with a module), for the planner and the message
+ */
+export const HANDOVER_POLICY = "handover@1" as const;
+export const REENTRY_DAYS = 2;
+export const SELF_REENTRY_LIMIT = 2;
+/** the configured policy (one switch, kept on globalThis like the teaching mode; recorded in every HandoverState for replay) */
+const HG = globalThis as { __openpathHandoverPolicy?: { reentryDays: number; selfLimit: number } };
+export const handoverPolicy = () => HG.__openpathHandoverPolicy ?? { reentryDays: REENTRY_DAYS, selfLimit: SELF_REENTRY_LIMIT };
+/** set the re-entry interval (days, > 0) and the self-service limit (>= 0); returns the previous policy */
+export function setHandoverPolicy(p: { reentryDays: number; selfLimit: number }) {
+  const prev = handoverPolicy();
+  if (!(p.reentryDays > 0) || !Number.isInteger(p.selfLimit) || p.selfLimit < 0) throw new Error("handover@1: reentryDays > 0 and an integer selfLimit >= 0");
+  HG.__openpathHandoverPolicy = { reentryDays: p.reentryDays, selfLimit: p.selfLimit };
+  return prev;
+}
+export interface HandoverState {
+  policy: typeof HANDOVER_POLICY;
+  /** the interval and limit this state was computed with */
+  config: { reentryDays: number; selfLimit: number };
+  since: string | null;
+  /** re-entry questions answered so far for this competency, and how each was opened */
+  reentries: { at: string; openedBy: "self" | "educator" }[];
+  selfReentriesLeft: number;
+  /** when self-service re-entry opens (exact instant; shown with date, time and time zone) */
+  eligibleAt: string | null;
+  /** an educator acknowledgement recorded after the pause began and not yet used by a re-entry */
+  acknowledgement: { id: string; at: string } | null;
+  route: "wait" | "reentry-self" | "reentry-acknowledged" | "needs-teacher" | "no-fresh-question";
+  continueWith: string[];
+}
+export const reentryContext = (competency: string) => `reentry:${competency}`;
+let leadsToMemo: Map<string, string[]> | null = null;
+const leadsTo = () => { if (!leadsToMemo) { leadsToMemo = new Map(); for (const c of graph.competencies) for (const s of graph.supportsOf(c.id)) leadsToMemo.set(s, [...(leadsToMemo.get(s) ?? []), c.id]); } return leadsToMemo; };
+const own = (competency: string) => (x: { competency: string }) => x.competency === competency || graph.evidenceTarget(x.competency) === competency;
+export function handoverState(competency: string, records: LearnerRecords, now: number, o: { reentryDays?: number; selfLimit?: number } = {}): HandoverState {
+  const days = o.reentryDays ?? handoverPolicy().reentryDays, limit = o.selfLimit ?? handoverPolicy().selfLimit;
+  const t = (x: { at: string }) => Date.parse(x.at);
+  const mine = [...records.attempts.filter(own(competency)), ...records.unresolved.filter((u) => { try { return own(competency)({ competency: question(u.questionId).competency }); } catch { return false; } }), ...records.teaching.filter(own(competency))];
+  const sinceMs = mine.length ? Math.max(...mine.map(t)) : null;
+  const acks = (records.acknowledgements ?? []).filter((a) => a.competency === competency && a.by === "educator" && t(a) <= now);
+  // each re-entry answer used the earliest acknowledgement before it not used yet; otherwise a self-service token
+  const used = new Set<string>(); const reentries: HandoverState["reentries"] = [];
+  for (const a of records.attempts.filter((x) => x.context === reentryContext(competency)).sort((x, y) => t(x) - t(y))) {
+    const ack = acks.find((k) => !used.has(k.id) && t(k) < t(a));
+    if (ack) used.add(ack.id);
+    reentries.push({ at: a.at, openedBy: ack ? "educator" : "self" });
+  }
+  const selfLeft = Math.max(0, limit - reentries.filter((r) => r.openedBy === "self").length);
+  // an acknowledgement opens the module only if it came after the pause began (an older one was for an earlier pause)
+  const open = acks.find((k) => !used.has(k.id) && (sinceMs === null || t(k) >= sinceMs)) ?? null;
+  const eligibleMs = sinceMs === null ? null : sinceMs + days * DAY;
+  const route: HandoverState["route"] = open ? "reentry-acknowledged" : selfLeft <= 0 ? "needs-teacher" : eligibleMs !== null && now >= eligibleMs ? "reentry-self" : "wait";
+  // what the learner can carry on with meanwhile: the skills this one builds on (direct supports) and the ones it leads to (direct)
+  const near = [...(graph.byId.get(competency) ? graph.supportsOf(competency) : []), ...leadsTo().get(competency) ?? []];
+  const continueWith = [...new Set(near)].filter((c) => c !== competency && !!moduleFor(c)).sort();
+  return { policy: HANDOVER_POLICY, config: { reentryDays: days, selfLimit: limit }, since: sinceMs === null ? null : new Date(sinceMs).toISOString(), reentries, selfReentriesLeft: selfLeft, eligibleAt: eligibleMs === null ? null : new Date(eligibleMs).toISOString(), acknowledgement: open ? { id: open.id, at: open.at } : null, route, continueWith };
+}
+function withHandover(ms: ModuleState, m: Module, records: LearnerRecords, now: number): ModuleState {
+  const h = handoverState(ms.competency, records, now);
+  if (h.route === "reentry-self" || h.route === "reentry-acknowledged") {
+    // a fresh question alone, never one seen before: the module's own diagnostic questions not yet answered, else a fresh check question
+    const q = m.diagnostics.find((id) => !answered(records, id) && withinGrade(records, id)) ?? fromPool(m, "check", records);
+    if (q) return { ...ms, phase: "reentry", question: q, activity: "diagnostic", context: reentryContext(ms.competency), handover: h,
+      reason: h.route === "reentry-acknowledged"
+        ? "Your teacher has looked at this with you. One question on your own now, to see where you are. Your earlier answers stay in your record."
+        : "Welcome back. One question on your own first, to see where you are now. Your earlier answers stay in your record, and this one counts only as what it is." };
+    return { ...ms, handover: { ...h, route: "no-fresh-question" }, reason: `${ms.reason} There is no fresh question left to try this again on your own: go through it with a teacher.` };
+  }
+  const tail = h.route === "needs-teacher"
+    ? " You have tried it again on your own already. It opens again once a teacher has gone through it with you; other skills carry on meanwhile."
+    : " It opens again for a fresh question on your own after a short break (the time is shown with this skill); other skills carry on meanwhile.";
+  return { ...ms, handover: h, reason: ms.reason + tail };
 }
 
 /** What an earlier diagnosis (diagnostic@2, in recovery) established about this skill, so it is not asked again. */
@@ -187,18 +277,22 @@ export const retriesLeft = (records: LearnerRecords, qid: string) =>
   Math.max(0, 1 + RETRY_LIMIT - records.attempts.filter((a) => exposureKey(a.questionId) === exposureKey(qid)).length);
 export const unreadableCount = (records: LearnerRecords, qid: string) => records.unresolved.filter((u) => exposureKey(u.questionId) === exposureKey(qid)).length;
 export function moduleState(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null, evidence?: (id: string) => SkillEvidence): ModuleState {
-  const ms = moduleStep(competency, records, ev, now, session, established, evidence);
+  const ms0 = withSchedule(moduleStep(competency, records, ev, now, session, established, evidence), ev);
   const m = moduleFor(competency);
-  if (!m || !ms.question) return ms;
+  // handover@1: every pause gets its bounded way back
+  const ms = m && ms0.phase === "pause" ? withHandover(ms0, m, records, now) : ms0;
+  if (!m || !ms.question || ms.phase === "reentry") return ms;
   const q = ms.question;
   const unread = unreadableCount(records, q);
   if (unread >= UNREADABLE_LIMIT)
-    return { ...ms, phase: "pause", question: null, why: `bounded-input@1: ${unread} unreadable answers to ${q}`,
-      reason: "Your answers to this question could not be read, so they were not marked: nothing was counted for or against you. This needs a person: go through it with a teacher or parent." };
+    return withHandover({ ...ms, phase: "pause", question: null, why: `bounded-input@1: ${unread} unreadable answers to ${q}`,
+      reason: "Your answers to this question could not be read, so they were not marked: nothing was counted for or against you. This needs a person: go through it with a teacher or parent." }, m, records, now);
   const fromCheckPool = !!m.pool && q.startsWith("gen:") && ![...m.practice, ...m.transfer].includes(q) && phaseOfQ(q) === "check";
   const activity = ms.phase === "explore" ? "diagnostic" : ms.phase === "strategy" ? "probe" : ms.phase === "guided" ? "guided" : ms.phase === "check" ? "check" : ms.phase === "retention" ? "retention" : m.transfer.includes(q) ? "transfer" : m.strategies.some((s) => s.check === q) || fromCheckPool ? "check" : "practice";
   return { ...ms, activity };
 }
+/** retention-display@1: a scheduled delayed check carries its exact opening instant (the same instant the evidence uses to open it) */
+const withSchedule = (ms: ModuleState, ev: SkillEvidence): ModuleState => (ev.retention === "scheduled" && ev.retentionDueAt ? { ...ms, retentionOpensAt: ev.retentionDueAt } : ms);
 function moduleStep(competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null, evidence?: (id: string) => SkillEvidence): ModuleState {
   const m = moduleFor(competency);
   const base = { competency, question: null, strategy: null, diagnosis: null, decision: null } as const;

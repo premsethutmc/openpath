@@ -93,11 +93,18 @@ export interface LearnerRecords {
   /** written@1: written answers not yet marked. */
   pending: PendingWritten[];
   /** assessment@1: submissions the assessment could not decide. They are not attempts: no credit either way, no effect on mastery or on the attempt number. */
-  unresolved: { id: string; at: string; questionId: string; assessment: AttemptAssessment }[];
+  unresolved: { id: string; at: string; questionId: string; assessment: AttemptAssessment }[];  /** handover@1: an educator's acknowledgement of a hand-over, as the SERVER returns it (an educator account with the parent's share; Django
+   *  HandoverAcknowledgement, append-only). Never read from learner events: a learner record cannot carry one. */
+  acknowledgements?: HandoverAcknowledgement[];
 }
+/** handover@1: one educator acknowledgement of a paused competency (server data; the reviewer is shown by role only) */
+export interface HandoverAcknowledgement { id: string; at: string; competency: string; by: "educator" }
 
-export function readRecords(learnerId: string, events: readonly { kind: string }[], marks: readonly WrittenMark[] = []): LearnerRecords {
-  const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], sessions: {}, pending: [], unresolved: [] };
+export function readRecords(learnerId: string, events: readonly { kind: string }[], marks: readonly WrittenMark[] = [], acknowledgements: readonly HandoverAcknowledgement[] = []): LearnerRecords {
+  // handover@1: only well-formed server acknowledgements, oldest first (deterministic)
+  const acks = acknowledgements.filter((x) => !!x && typeof x.id === "string" && typeof x.competency === "string" && x.by === "educator" && !Number.isNaN(Date.parse(x.at)))
+    .map((x) => ({ id: x.id, at: x.at, competency: x.competency, by: "educator" as const })).sort((x, y) => Date.parse(x.at) - Date.parse(y.at) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+  const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], sessions: {}, pending: [], unresolved: [], acknowledgements: acks };
   const markOf = new Map(marks.map((m) => [m.attemptId, m]));
   const seen = new Set<string>();
   const count = new Map<string, number>();

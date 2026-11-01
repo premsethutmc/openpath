@@ -40,7 +40,9 @@ export function checkProvenance(f: SliceFlow): string[] {
     const strat = fr.strategyId ? strategies.get(fr.strategyId) : undefined;
     if (g) {
       if (!(ADAPTER_LABELS.has(g.message) || engine.has(g.message) || (strat && g.message === strat.title))) bad.push(`${where}: guide "${g.message.slice(0, 60)}" has no owner`);
-      if (g.detail !== undefined && !(ADAPTER_LABELS.has(g.detail) || engine.has(g.detail))) bad.push(`${where}: guide detail "${g.detail.slice(0, 60)}" has no owner`);
+      // retention-display@1: the summary may state the engine's own opening instant (delayed check or re-entry), formatted by due-display
+      const scheduleOwned = fr.stage === "summary" && /^(Your delayed check opens|You can try this again on your own from|This opens again once a teacher)/.test(g.detail ?? "");
+      if (g.detail !== undefined && !(ADAPTER_LABELS.has(g.detail) || engine.has(g.detail) || scheduleOwned)) bad.push(`${where}: guide detail "${g.detail.slice(0, 60)}" has no owner`);
     }
     if (fr.stage === "question" || fr.stage === "feedback") {
       const q = question(fr.qid!);
