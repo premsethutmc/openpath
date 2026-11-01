@@ -101,6 +101,8 @@ export class SliceFlow {
       ...questionSpec(this.qid, { feedback: fb, guide: { message: fb.level === "correct" ? "That matches." : fb.level === "incorrect" ? "Not this time." : "Not marked.", detail: (assisted ? "Guided practice: help was available, so this is practice, not an independent check. " : "On your own: no help was given. ") + "Press Continue to see what the learning engine chooses next.", tone: fb.level === "correct" ? "encouraging" : "thinking" } }),
       nav: { canSubmit: false, canSkip: true, skipLabel: canRetry ? "Continue with another question" : "Continue", canGoBack: canRetry, ...(canRetry ? { backLabel: "Try again" } : {}), canRequestHint: false, canShowWorking: false },
     } as RenderSpec;
+    // Completed input need not occupy the phone screen; the saved work and next action remain visible.
+    this.spec = { ...this.spec, layout: { panels: this.spec.layout.panels.filter((panel) => panel !== "input") } };
     // the learner's own working lines, marked as the trusted grader judged them (the existing working panel; nothing new is drawn)
     if (wf?.steps.length) this.spec = { ...this.spec, layout: { panels: [...this.spec.layout.panels, "working"] }, working: { steps: wf.steps, revealedCount: wf.steps.length, editable: false } } as RenderSpec;
     this.hints = 0;

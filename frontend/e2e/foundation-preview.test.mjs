@@ -36,7 +36,9 @@ try {
    assert.equal(saved.working.status, 'unsupported');
    assert.equal(saved.verdict, 'correct');
   }
-  await page.screenshot({path:`${shots}/foundation-${start.split(':')[1]}.png`});
+  assert.equal(await page.locator(".lr-keypad").count(), 0);
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({fullPage:true,path:`${shots}/foundation-${start.split(':')[1]}.png`});
   await page.close();
  }
  console.log('PASS: opt-in foundation on 390x844 in linear equations, geometry and addition; repeated check action produces one saved submission each');
