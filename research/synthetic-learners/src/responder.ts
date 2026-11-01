@@ -126,8 +126,13 @@ function guess(v: QuestionView, rng: Rng, why: Reasoning["mode"], task: Task["ki
   return { r: { kind: "answer", answer: ans, working: [] }, why: { task, mode: why, steps: [], value: null, style: "none", correctMethod: false } };
 }
 
-/** one response to a visible question */
+/** one response to a visible question. S2 defect fix: when the learner's own (erroneous) arithmetic reaches a division by zero, it cannot
+ *  finish and answers with a guess (recorded as "stuck"), instead of the simulator failing. */
 export function respond(v: QuestionView, s: HiddenState, p: Profile, rng: Rng): { r: Response; why: Reasoning } {
+  try { return respondInner(v, s, p, rng); }
+  catch (e) { if (!/division by zero/.test(String((e as Error)?.message))) throw e; const g = guess(v, rng, "not-understood", readTask(v.prompt).kind); return { r: g.r, why: { ...g.why, style: "stuck:division-by-zero" } }; }
+}
+function respondInner(v: QuestionView, s: HiddenState, p: Profile, rng: Rng): { r: Response; why: Reasoning } {
   const task = readTask(v.prompt);
   if (task.kind === "unknown" || (task.kind === "modelling" && !task.story)) return guess(v, rng, "not-understood", task.kind);
   if (rng.chance(p.guess)) return guess(v, rng, "guessed", task.kind);
