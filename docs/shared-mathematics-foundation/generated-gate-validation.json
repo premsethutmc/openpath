@@ -1,0 +1,102 @@
+{
+  "implementationCommit": "ab2399b64b85473db67fbc8777b90fa80e0904c5",
+  "node": "24.19.0",
+  "python": "3.12.14",
+  "specsReused": {
+    "execution": {
+      "command": "node --import tsx ../packages/learning/scripts/specs.ts",
+      "exit": 0,
+      "seconds": 1392.57,
+      "log": "/tmp/ee68235-stage1-specs.log",
+      "changed_outputs": [
+        "content/learning/generated.v1.json"
+      ]
+    },
+    "reason": "The successful exact-command output was preserved. Relevant generator sources are unchanged; all three current output files match the preserved execution byte-for-byte. The sole generated-table discrepancy was repaired in ab2399b.",
+    "outputSha256": {
+      "content/learning/family-specs.v1.json": "ff0a6ed4157e0470ae1e74acee8f2682f95832e5669ea5e55078cc97650bd74e",
+      "content/learning/generated.v1.json": "5443c294e69f87caa353c970edad4b3146e2e84ce5c4779fd83912afb8fc8319",
+      "content/learning/marking-parity.v1.json": "c8b9dff86bd684e10a067e2353c45ee56037aa5c251a001f3ea9a32657ba832a"
+    }
+  },
+  "remainingCommands": [
+    {
+      "command": "node --import tsx ../packages/learning/scripts/library.ts",
+      "exit": 0,
+      "seconds": 137.45,
+      "log": "/tmp/ab2399b-stage2-library.log",
+      "changed_outputs": []
+    },
+    {
+      "stage": 3,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "../packages/learning/scripts/families-parity.ts"
+      ],
+      "exit": 0,
+      "seconds": 1.15,
+      "log": "/tmp/ab2399b-stage3-families-parity.log",
+      "changed_outputs": []
+    },
+    {
+      "stage": 4,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "../packages/learning/scripts/coverage.ts"
+      ],
+      "exit": 0,
+      "seconds": 662.14,
+      "log": "/tmp/ab2399b-stage4-coverage.log",
+      "changed_outputs": []
+    },
+    {
+      "stage": 5,
+      "command": [
+        "python3",
+        "../content/learning/src/expansion.py"
+      ],
+      "exit": 0,
+      "seconds": 0.14,
+      "log": "/tmp/ab2399b-stage5-expansion.log",
+      "changed_outputs": []
+    },
+    {
+      "stage": 6,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "../packages/learning/scripts/board-releases.ts"
+      ],
+      "exit": 0,
+      "seconds": 0.38,
+      "log": "/tmp/ab2399b-stage6-board-releases.log",
+      "changed_outputs": []
+    },
+    {
+      "stage": 7,
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "../packages/learning/scripts/compile-coverage.ts"
+      ],
+      "exit": 0,
+      "seconds": 1005.95,
+      "log": "/tmp/ab2399b-stage7-compile-coverage.log",
+      "changed_outputs": []
+    }
+  ],
+  "finalWorkflowDiffExit": 0,
+  "focusedTests": {
+    "contentReviewAndKernelGrader": {
+      "pass": 22,
+      "fail": 0
+    }
+  },
+  "remoteFirstError": "unconfirmed: authorized job-log retrieval returned Transport closed; denied CLI was not retried"
+}

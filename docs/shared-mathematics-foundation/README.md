@@ -1,5 +1,7 @@
 # Shared mathematics foundation — local implementation
 
+Latest content gate: [exact answer-table failure and complete local parity](GENERATED-TABLE-FAILURE.md).
+
 Content-consistency follow-up: [reproduced generator/report defects and bounded repair](CONTENT-PIPELINE-REPAIR.md). Exact-head CI remains tracked on PR96.
 
 Latest validation: [versioned method benchmarks and aggregate repair results](METHOD-VALIDATION.md). Original frozen corpora and results are preserved; current-method passes are not historical parity.
