@@ -107,3 +107,22 @@ test('a cyclic prerequisite route stops without claiming completion or granting 
   assert.equal(st.selectionRecords.readinessRoute,undefined);
  } finally {graph.relationsOf=original;}
 });
+
+
+test('saved demonstrated prerequisites are skipped on re-entry to an above-grade target',()=>{
+ const target='MATH.number.addition-regroup',s=begin(target);
+ for(let i=0;i<180&&s.state().next?.competency!==target;i++){
+  const st=s.state(),id=st.next?.competency;assert.ok(id);
+  const m=st.module(id);
+  if(m.phase==='chapter'&&m.strategy){s.taught(m);continue;}
+  assert.ok(m.question);const q=question(m.question);
+  s.submit(q.id,q.answer,m.activity??'diagnostic',{context:m.context});
+ }
+ assert.equal(s.state().next?.competency,target);
+ assert.ok(graph.get(target).gradeRange[0]>1);
+ const saved=JSON.parse(JSON.stringify(events(s))),count=saved.length;
+ const reentered=learnerState(s.learnerId,saved,s.now,{currentSession:'learn:pathway:new-session'});
+ assert.equal(reentered.next?.competency,target,'no compulsory replay of already demonstrated grade-one modules');
+ assert.equal(saved.length,count);
+ assert.deepEqual(learnerState(s.learnerId,[...saved].reverse(),s.now,{currentSession:'learn:pathway:new-session'}).next,reentered.next);
+});
