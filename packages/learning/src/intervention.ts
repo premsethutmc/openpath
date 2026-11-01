@@ -268,13 +268,19 @@ function freshFromPool(m: Module, records: LearnerRecords, tried: (id: string) =
   const seen = new Set([...records.attempts.map((a) => exposureKey(a.questionId)), ...records.unresolved.map((u) => exposureKey(u.questionId))]);
   return phasePool(familyOfPool(q), "check").find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
 }
+const moduleHasFamily = (m: Module, fam: string) => [...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention, ...m.strategies.flatMap((x) => [x.guided, x.check])].some((id) => problemOf(id.replace(/:(mc|w)$/, ""))?.family === fam);
 const familyOfPool = (q: string) => problemOf(q.replace(/:(mc|w)$/, ""))!.family;
 function withHandover(ms: ModuleState, m: Module, records: LearnerRecords, now: number): ModuleState {
   const h = handoverState(ms.competency, records, now);
   if (h.route === "reentry-self" || h.route === "reentry-acknowledged") {
     // a fresh question alone, never one seen before: the module's own diagnostic questions not yet answered, else a fresh check question
     const tried = (id: string) => !!answered(records, id) || records.unresolved.some((u) => exposureKey(u.questionId) === exposureKey(id));
-    const q = m.diagnostics.find((id) => !tried(id) && withinGrade(records, id)) ?? freshFromPool(m, records, tried);
+    // the recheck is of the kind that went wrong: the family of the learner's latest wrong answer alone in this competency, when the
+    // module has fresh questions of it; else the module's own unanswered diagnostic questions, else a fresh check question
+    const lastWrong = records.attempts.filter((a) => own(ms.competency)(a) && independentAttempt(a) && !rightAnswer(a)).sort((x, y) => Date.parse(y.at) - Date.parse(x.at))[0];
+    const fam = lastWrong ? problemOf(lastWrong.questionId.replace(/:(mc|w)$/, ""))?.family : undefined;
+    const ofKind = fam ? phasePool(fam, "check").find((id) => !tried(id) && withinGrade(records, id) && moduleHasFamily(m, fam)) ?? null : null;
+    const q = ofKind ?? m.diagnostics.find((id) => !tried(id) && withinGrade(records, id)) ?? freshFromPool(m, records, tried);
     if (q) return { ...ms, phase: "reentry", question: q, activity: "diagnostic", context: reentryContext(ms.competency), handover: h,
       reason: h.route === "reentry-acknowledged"
         ? "Your teacher has looked at this with you. One question on your own now, to see where you are. Your earlier answers stay in your record."
