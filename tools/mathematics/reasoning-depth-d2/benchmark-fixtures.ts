@@ -29,8 +29,11 @@ const unsupported = copy((b3 as any).cases.find((item: NativeCase) => item.expec
 
 export type D2BenchmarkCase = (typeof benchmark.cases)[number];
 
-export function fixture(item: D2BenchmarkCase): { problem: M2CrossDomainProblem; working: M2CrossDomainWorking } {
+export function fixture(item: D2BenchmarkCase, geometryStage?: NativeCase): { problem: M2CrossDomainProblem; working: M2CrossDomainWorking } {
   const source = copy(library[item.category]);
+  // The historical default remains byte-for-byte the same input. New method
+  // benchmarks explicitly supply an authored geometry stage rather than entailment.
+  if (geometryStage && item.category === "geometry") source[2] = copy(geometryStage);
   if (item.selectedRoute === "alternative") source.reverse();
   const stageCount = item.selectedStageCount;
   const selected = Array.from({ length: stageCount }, (_, index) => copy(source[index % source.length]));

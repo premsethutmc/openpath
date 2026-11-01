@@ -2,6 +2,8 @@
 
 Continuation from `1a278f1a2efe70357b8e970aa42de34fd5e972bd`. Mathematics only. No frozen fixture, expected benchmark label, safety assertion, production flag or permission was changed.
 
+The sections below record the first bounded repair at `af31466`. The subsequently authorized [method benchmark v2](../../tools/mathematics/method-contract-v2/README.md) resolves the active test-contract mismatch using new fixtures and explicit method inputs. Original corpora/results remain unchanged; the four historical incompatibilities below are not claimed to have disappeared.
+
 ## Repairs and unresolved tests
 
 | Original failing test | Cause | Result |

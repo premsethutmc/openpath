@@ -27,6 +27,7 @@ class UnifiedGeometryApiTests(unittest.TestCase):
     def test_resource_exhaustion_and_bad_domain(self):
         exhausted=assess_unified(triangle_request([S(1)],budget={"max_rule_applications":0}))
         self.assertEqual((exhausted["outcome"],exhausted["correct"],exhausted["resourceLimit"]),("unsupported",None,True))
+        self.assertIsNone(exhausted["firstInvalidStep"])
         self.assertEqual(assess_unified({"domain":"calculus"})["outcome"],"unsupported")
 
 if __name__=="__main__":unittest.main()

@@ -1,5 +1,7 @@
 # Shared mathematics foundation — local implementation
 
+Latest validation: [versioned method benchmarks and aggregate repair results](METHOD-VALIDATION.md). Original frozen corpora and results are preserved; current-method passes are not historical parity.
+
 Teaching-first correction: [chapter access, optional support and honest evidence](TEACHING-ACCESS.md).
 
 Release-blocker continuation: [typecheck and frozen-replay corrections](TYPECHECK-AND-REPLAY.md).

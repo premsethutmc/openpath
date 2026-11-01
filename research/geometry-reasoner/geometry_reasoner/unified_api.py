@@ -27,7 +27,7 @@ def assess_unified(request:dict[str,Any])->dict[str,Any]:
         if max_apps<1:
             goal=problem.goal or Fact("unsupported_goal",())
             result=verify_geometry_step(problem,[],goal,synthetic=SyntheticReasoner(max_rule_applications=0))
-            assessment=ProofAssessment((result,),False,False,result,0,(0,),result.unsupported_conditions)
+            assessment=ProofAssessment((result,),False,False,result,None,(0,),result.unsupported_conditions)
         else: assessment=verify_submitted_proof(problem,steps)
         result = json.loads(json.dumps(asdict(adapt_geometry_assessment(assessment,(problem.skill,))),default=str))
         result["authorityVersion"] = "geometry-reasoner@foundation-1"

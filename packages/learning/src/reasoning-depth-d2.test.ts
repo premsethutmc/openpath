@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import adversarial from "../../../tools/mathematics/reasoning-depth-d2/adversarial-cases.v1.json";
 import benchmark from "../../../tools/mathematics/reasoning-depth-d2/frozen-external-benchmark.v1.json";
 import b3 from "../../../tools/mathematics/complex-b3/independent-cases.v1.json";
-import { fixture } from "../../../tools/mathematics/reasoning-depth-d2/benchmark-fixtures";
+import { methodFixture as fixture } from "../../../tools/mathematics/method-contract-v2/d2-method-fixtures";
 import { assessMathematicalWorking } from "./unified-math-engine";
 import { shutdownGeometryWorkerPools } from "./geometry-worker";
 
@@ -52,7 +52,7 @@ function adversarialFixture(item: (typeof adversarial.cases)[number]) {
 }
 
 describe("D2 generalized cross-domain reasoning depth", () => {
-  test("the frozen external benchmark improves without label changes", async () => {
+  test("the versioned method harness preserves all frozen D2 mathematical labels", async () => {
     expect(benchmark.cases).toHaveLength(200);
     let matches = 0, valid = 0, accepted = 0, falseAcceptances = 0, falseRejections = 0, firstInvalid = 0;
     for (const item of benchmark.cases) {

@@ -2,10 +2,10 @@ import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { assessMathematicalWorking, UNIFIED_MATH_CONTRACT, type MathematicalProblem, type StudentWorking } from "./unified-math-engine.ts";
 
-const fixture = JSON.parse(readFileSync("tools/mathematics/unified-u1/independent-cases.v1.json", "utf8")) as { cases: { id: string; domain: string; problem: MathematicalProblem; working: StudentWorking; options: Record<string, unknown>; expected: { classification: string; firstInvalidStep: number | null } }[] };
+const fixture = JSON.parse(readFileSync("tools/mathematics/method-contract-v2/u1.method.v2.json", "utf8")) as { cases: { id: string; domain: string; problem: MathematicalProblem; working: StudentWorking; options: Record<string, unknown>; expected: { classification: string; firstInvalidStep: number | null } }[] };
 
 describe("unified mathematics engine U1", () => {
-  test("200 independently labelled arithmetic, algebra, geometry and mixed cases", async () => {
+  test("200 versioned method cases across arithmetic, algebra, geometry and mixed", async () => {
     expect(fixture.cases.length).toBe(200);
     const counts: Record<string, number> = {}; let falseAccept = 0, falseReject = 0, first = 0;
     for (const c of fixture.cases) {

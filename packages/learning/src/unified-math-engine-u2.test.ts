@@ -4,13 +4,14 @@ import { assessMathematicalWorking, type MathematicalProblem, type StudentWorkin
 import { geometryWorkerDiagnostics, healthGeometryWorker, stopGeometryWorkers, terminateGeometryWorker } from "./geometry-worker.ts";
 
 const root = `${process.cwd()}/research/geometry-reasoner`;
-const fixture = JSON.parse(readFileSync("tools/mathematics/unified-u2/independent-cases.v2.json", "utf8")) as { cases: { id:string; category:string; problem:MathematicalProblem; working:StudentWorking; options:Record<string,unknown>; expected:{classification:string;firstInvalidStep:number|null} }[] };
+const fixture = JSON.parse(readFileSync("tools/mathematics/method-contract-v2/u2.method.v2.json", "utf8")) as { cases: { id:string; category:string; problem:MathematicalProblem; working:StudentWorking; options:Record<string,unknown>; expected:{classification:string;firstInvalidStep:number|null} }[] };
+const historical = JSON.parse(readFileSync("tools/mathematics/unified-u2/independent-cases.v2.json", "utf8")) as typeof fixture;
 afterAll(() => stopGeometryWorkers());
 
 // Worker lifecycle needs a successful submitted method, not the frozen benchmark's
 // bare entailed conclusion. Preserve the frozen input and every lifecycle assertion.
 function triangleMethod(id: string) {
-  const sample = structuredClone(fixture.cases.find((x) => x.id === id)!);
+  const sample = structuredClone(historical.cases.find((x) => x.id === id)!);
   if (!("geometry" in sample.working)) throw new Error("expected mixed triangle fixture");
   if (sample.working.geometry.steps.length !== 1 || sample.working.geometry.steps[0].cited_theorem !== undefined) throw new Error("expected one uncited conclusion; do not replace an existing justification");
   sample.working.geometry.steps = sample.working.geometry.steps.map(step => ({ ...step, cited_theorem: "triangle-sum" }));
@@ -19,7 +20,7 @@ function triangleMethod(id: string) {
 
 
 describe("unified mathematics engine U2", () => {
-  test("250 independently labelled proof-carrying transfer cases", async () => {
+  test("250 versioned method proof-carrying transfer cases", async () => {
     expect(fixture.cases.length).toBe(250);
     let falseAcceptances=0,falseRejections=0,firstMatches=0;
     for (const item of fixture.cases) {
