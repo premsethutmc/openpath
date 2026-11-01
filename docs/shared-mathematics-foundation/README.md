@@ -1,5 +1,7 @@
 # Shared mathematics foundation — local implementation
 
+Content-consistency follow-up: [reproduced generator/report defects and bounded repair](CONTENT-PIPELINE-REPAIR.md). Exact-head CI remains tracked on PR96.
+
 Latest validation: [versioned method benchmarks and aggregate repair results](METHOD-VALIDATION.md). Original frozen corpora and results are preserved; current-method passes are not historical parity.
 
 Teaching-first correction: [chapter access, optional support and honest evidence](TEACHING-ACCESS.md).

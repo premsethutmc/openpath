@@ -39,14 +39,14 @@
    "competencies": 338,
    "inventory": 200,
    "expansion": 138,
-   "relations": 361,
+   "relations": 363,
    "disputed": 8
   },
   "families": {
-   "count": 1080,
-   "problems": 341483,
+   "count": 1082,
+   "problems": 342283,
    "answerTypes": {
-    "integer": 411,
+    "integer": 413,
     "fraction": 151,
     "set": 27,
     "choice": 169,
@@ -1253,6 +1253,8 @@
    ],
    "families": [
     "lin",
+    "lboth",
+    "lbrk",
     "auleq",
     "aulwp"
    ],

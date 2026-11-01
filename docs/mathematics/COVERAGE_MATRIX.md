@@ -65,7 +65,7 @@ Competencies the curricula require: **336**; complete (criteria 1–11): **329**
 
 ## Question families
 
-1080 families, 341483 problems in release pools. Answer types: integer 411, fraction 151, set 27, choice 169, exact 128, interval 16, expression 31, tuple 110, mixed 7, ratio 3, antiderivative 10, matrix 12, roots 5. With a picture: 304; with an everyday (transfer) form: 759; with alternative explanations: 1044. Written (educator-marked) tasks: 376.
+1082 families, 342283 problems in release pools. Answer types: integer 413, fraction 151, set 27, choice 169, exact 128, interval 16, expression 31, tuple 110, mixed 7, ratio 3, antiderivative 10, matrix 12, roots 5. With a picture: 304; with an everyday (transfer) form: 759; with alternative explanations: 1044. Written (educator-marked) tasks: 376.
 
 ## Assessment diversity and pool sufficiency (distinct@1, depth@1)
 
@@ -81,7 +81,7 @@ Of 327 modules with a pool, 327 can fill every phase with questions the learner 
 
 ## Graph
 
-338 competencies: 200 from the original inventory (ids unchanged) and 138 added by the curriculum expansion (expansion@1); 361 expansion relations; 8 disputed prerequisites listed for educator review and not followed.
+338 competencies: 200 from the original inventory (ids unchanged) and 138 added by the curriculum expansion (expansion@1); 363 expansion relations; 8 disputed prerequisites listed for educator review and not followed.
 
 ## What to build next (dependency order, then demand)
 

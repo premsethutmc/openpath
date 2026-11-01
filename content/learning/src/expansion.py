@@ -116,6 +116,21 @@ def main():
             relations.append({'target': t, 'from': f, 'type': ty, 'reason': why})
         else:
             dropped.append({'target': t, 'from': f, 'reason': 'unknown competency'})
+    # Curated corrections are source data, not hand-edits to generated output. Preserve
+    # the existing adaptive-loop audit, and check its active edges for cycles below.
+    audit = json.loads((ROOT / 'src/expansion-audit.v1.json').read_text())
+    for correction in audit['replace']:
+        matches = [i for i, r in enumerate(relations)
+                   if (r['target'], r['from']) == (correction['target'], correction['from'])]
+        if len(matches) != 1:
+            raise ValueError(f"Audited relation must match exactly once: {correction}")
+        relations[matches[0]] = correction
+    for correction in audit['append']:
+        if correction['target'] not in allids or correction['from'] not in allids:
+            raise ValueError(f"Unknown audited competency: {correction}")
+        if any((r['target'], r['from']) == (correction['target'], correction['from']) for r in relations):
+            raise ValueError(f"Duplicate audited relation: {correction}")
+        relations.append(correction)
     # cycles among followed relations (plausible and support: both are walked for recovery) are refused; the later edge
     # is listed as disputed for review
     graph = defaultdict(set)
@@ -134,7 +149,7 @@ def main():
             graph[r['target']].add(r['from'])
         kept.append(r)
     out = {
-        'schema': 'competency-expansion@1', 'version': '1.0.0', 'status': 'provisional',
+        'schema': 'competency-expansion@1', 'version': audit['version'], 'status': 'provisional',
         'note': 'New competencies found by comparing the Grades 1-12 CBSE/NCERT and Tamil Nadu State Board inventories (content/learning/syllabus) with the 200-competency graph. Existing ids are unchanged; no learner evidence is remapped. Written by content/learning/src/expansion.py; AI-assisted, not educator-reviewed.',
         'merged': [{'from': k, 'into': v[0], 'reason': v[1]} for k, v in sorted(MERGE.items())],
         'competencies': comps, 'relations': kept, 'disputed': disputed, 'droppedReferences': dropped,

@@ -16067,7 +16067,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "c24f6b26",
+   "contentHash": "4f4638d5",
    "state": "draft",
    "history": [
     {
@@ -16093,6 +16093,14 @@
      "at": "2026-10-29T11:06:02.177Z",
      "contentHash": "c24f6b26",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "OpenPath engineering",
+     "role": "engineer",
+     "at": "2026-11-01T13:54:23.282Z",
+     "contentHash": "4f4638d5",
+     "note": "Synchronize stale fingerprint with unchanged generator output; reproduced on pre-foundation d8cd680 and Node22/24. Released answers unchanged; family validation passes. Remains draft, not educator approval."
     }
    ]
   },
@@ -23753,7 +23761,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "ca59069c",
+   "contentHash": "3c39066c",
    "state": "draft",
    "history": [
     {
@@ -23771,6 +23779,14 @@
      "at": "2026-10-29T11:06:02.177Z",
      "contentHash": "ca59069c",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "OpenPath engineering",
+     "role": "engineer",
+     "at": "2026-11-01T13:54:23.282Z",
+     "contentHash": "3c39066c",
+     "note": "Synchronize stale fingerprint with unchanged generator output; reproduced on pre-foundation d8cd680 and Node22/24. Released answers unchanged; family validation passes. Remains draft, not educator approval."
     }
    ]
   },
@@ -26493,7 +26509,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "c766b5f4",
+   "contentHash": "6a633830",
    "state": "draft",
    "history": [
     {
@@ -26519,6 +26535,14 @@
      "at": "2026-10-29T11:06:02.177Z",
      "contentHash": "c766b5f4",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "OpenPath engineering",
+     "role": "engineer",
+     "at": "2026-11-01T13:54:23.283Z",
+     "contentHash": "6a633830",
+     "note": "Synchronize stale fingerprint with unchanged generator output; reproduced on pre-foundation d8cd680 and Node22/24. Released answers unchanged; family validation passes. Remains draft, not educator approval."
     }
    ]
   },
