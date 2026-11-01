@@ -57,3 +57,41 @@ class HandoverAcknowledgementTests(LearningBase):
             a.delete()
         with self.assertRaises(ValueError):
             HandoverAcknowledgement.objects.all().delete()
+
+
+import json  # noqa: E402
+import os  # noqa: E402
+import unittest  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+
+@unittest.skipUnless(os.environ.get('H1_DIR'), 'run by frontend/scripts/h1-persistence.sh')
+class HandoverPersistence(LearningBase):
+    """A paused learner's records (first visit, failed self-service re-entry) go into the store with the server's clock set to each record's
+    own time; an educator acknowledges; a NEW client reads records and acknowledgements back; a separate process rebuilds the hand-over
+    state from them (frontend/scripts/h1-persistence.mts verify)."""
+
+    def test_round_trip(self):
+        from unittest import mock
+        import datetime
+        d = Path(os.environ['H1_DIR'])
+        run = json.loads((d / 'events.json').read_text())
+        for i, e in enumerate(run['events']):
+            at = datetime.datetime.fromisoformat(e['at'].replace('Z', '+00:00'))
+            with mock.patch('family.learning.timezone.now', return_value=at):
+                r = self.append(self.client, self.pupil_id, i, {**e, 'learnerId': self.pupil_id, 'sessionId': f"learn:{self.pupil_id}:{e['sessionId'].split(':')[-1]}"}, subject='mathematics')
+            self.assertEqual(r.status_code, 201, (i, e.get('record'), r.content))
+        teacher = self.parent('teacher@example.org')
+        call_command('content_reviewer', 'grant', 'teacher@example.org', role='educator', stdout=open('/dev/null', 'w'))
+        self.assertEqual(self.client.post(f'/api/pupils/{self.pupil_id}/marking-share/', {'email': 'teacher@example.org'}, format='json').status_code, 201)
+        ack_at = datetime.datetime.fromisoformat(run['ackAt'].replace('Z', '+00:00'))
+        with mock.patch('django.utils.timezone.now', return_value=ack_at):
+            self.assertEqual(teacher.post('/api/handover/acknowledgements/', {'pupil': self.pupil_id, 'competency': LE}, format='json').status_code, 201)
+        from rest_framework.test import APIClient
+        from .tests import PASSWORD
+        fresh = APIClient()
+        self.assertEqual(fresh.post('/api/account/login/', {'email': 'asha.parent@example.org', 'password': PASSWORD}, format='json').status_code, 200)
+        events = fresh.get(f'/api/pupils/{self.pupil_id}/events/?subject=mathematics').json()['events']
+        acks = fresh.get(f'/api/pupils/{self.pupil_id}/handover-acknowledgements/').json()['acknowledgements']
+        self.assertEqual(len(events), len(run['events']))
+        (d / 'stored.json').write_text(json.dumps({'learnerId': self.pupil_id, 'events': events, 'acknowledgements': acks}))
