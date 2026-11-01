@@ -195,6 +195,11 @@ export function replayWorking(d: { questionId: string; verdict: string; interpre
   const value = d.interpretation && typeof d.interpretation === "object" && "value" in d.interpretation ? String((d.interpretation as { value: unknown }).value) : null;
   const again = assessWorking(d.questionId, d.response.working, d.verdict, value);
   if (!again) return { replay: "failed-replay", reason: "the question no longer has a task statement" };
-  const same = (!w.provenance || JSON.stringify(again.provenance) === JSON.stringify(w.provenance)) && again.status === w.status && again.methodEvidence === w.methodEvidence && JSON.stringify(again.firstInvalid) === JSON.stringify(w.firstInvalid) && JSON.stringify(again.certificates) === JSON.stringify(w.certificates) && again.replayedLines === w.replayedLines;
+  const canonical = (v: unknown): string => Array.isArray(v) ? `[${v.map(canonical).join(",")}]` : v && typeof v === "object"
+    ? `{${Object.entries(v).filter(([, value]) => value !== undefined).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([key, value]) => `${JSON.stringify(key)}:${canonical(value)}`).join(",")}}` : JSON.stringify(v) ?? "null";
+  // Every authoritative field must reproduce, including displayed lines and replay
+  // flags. Advisory async observations are not mathematical evidence to replay.
+  const core = (x: WorkingAssessment) => { const { provenance: _p, observation: _o, ...rest } = x; return rest; };
+  const same = (!w.provenance || canonical(again.provenance) === canonical(w.provenance)) && canonical(core(again)) === canonical(core(w));
   return same ? { replay: "replayable-current", reason: "re-derived: same status, first invalid step and certificate digests" } : { replay: "failed-replay", reason: `re-derived differently: ${again.status} vs recorded ${w.status}` };
 }

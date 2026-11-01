@@ -57,6 +57,7 @@ test("answer-only, invalid-method, replay and cross-task evidence binding", () =
   for (const working of [["x = 5"], ["3x = 16", "x = 5"], ["3x = 15", "x = 5"]]) {
     const d = gradeRequest({ id, response: "5", working }).decision!;
     assert.equal(d.verdict, "correct"); assert.equal(replayWorking(d).replay, "replayable-current");
+    assert.equal(replayWorking({ ...d, working: { ...d.working!, replayed: !d.working!.replayed } }).replay, "failed-replay");
     assert.equal(replayWorking({ ...d, working: { ...d.working!, provenance: { ...d.working!.provenance!, questionId: "other" } } }).replay, "failed-replay");
   }
   const s = new SliceSession("binding", TRIANGLE_PROPERTIES_CONFIG.competency, start);

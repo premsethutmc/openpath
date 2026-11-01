@@ -161,7 +161,7 @@
   "packages/learning/src/grading/read.ts": "1ca0f9a0d4d8d9330173b3d37bf68c404495a836ef84ca927d9819577ff9955e",
   "packages/learning/src/grading/syntax.ts": "12a290ffb520f5068d999b0fdf2eba5f0949dfc0fb50829bd72d45e2c901d56b",
   "packages/learning/src/grading/verify.ts": "0fe16d42a17fcf8fdc0d008265a0f944c95cc629e0317da1bdfd828179fe0c13",
-  "packages/learning/src/grading/working.ts": "712af7dddfb1eee4299d722d2edc0f73697f9091630096726fc3c56639bd7808",
+  "packages/learning/src/grading/working.ts": "42783dcdaa2cd9f539825c83169947ddd71b65e0e9b82f86b0fb4613f5a18f04",
   "packages/learning/src/graph.ts": "64298b312a5c25477561a2bd9a692b5ff96584689762d7206508d2f59f49765b",
   "packages/learning/src/hypotheses.ts": "927280ef794d33b22732b52278ff13f7bdd5c85fe9eab625df97df61fe67fd89",
   "packages/learning/src/independent-checker.ts": "237a8b7aa6a764c8c64537d2067f8fe3ef8734979896cddae24f1b01e5f44a6d",
