@@ -1,0 +1,56 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "C01",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "No learning despite instruction",
+ "description": "Moderate skills with catalogued misconceptions; instruction and practice change nothing (negative control: any mastery claim beyond its starting competence is false).",
+ "seed": 80001,
+ "skills": {
+  "one-step": 0.9,
+  "two-step": 0.6,
+  "both-sides": 0.3,
+  "brackets": 0.25,
+  "modelling": 0.4
+ },
+ "misconceptions": {
+  "only-one-side": 0.5,
+  "first-term-only": 0.5,
+  "forgot-divide": 0.3
+ },
+ "slip": 0.04,
+ "guess": 0.0,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.75,
+  "partial": 0.1,
+  "bare": 0.1,
+  "none": 0.05,
+  "unsupportedNotation": 0.1
+ },
+ "hints": {
+  "seek": 0.3,
+  "help": 0.2
+ },
+ "instruction": {
+  "full": 0,
+  "partial": 0,
+  "gain": 0.55,
+  "fragileShare": 0.4,
+  "misconceptionReduction": 0.7,
+  "misconceptionResponse": 0.6,
+  "offTargetGain": 0.05
+ },
+ "practice": {
+  "consolidate": 0,
+  "gainRight": 0,
+  "gainWrong": 0
+ },
+ "forgetting": {
+  "halfLifeDays": 90,
+  "floor": 0.2,
+  "fragileHalfLifeDays": 10,
+  "relapse": 0.2
+ },
+ "cohort": "C"
+}

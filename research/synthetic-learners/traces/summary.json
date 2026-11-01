@@ -1,0 +1,143 @@
+[
+ {
+  "profile": "S001@1.0.0",
+  "seed": 1001,
+  "answers": 31,
+  "correctFeedback": 25,
+  "hints": 0,
+  "explanationsSeen": [
+   "Keep the balance"
+  ],
+  "openpath": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "passed",
+   "recoveryRequired": false
+  },
+  "digests": {
+   "boundary": "b81eec865a7f55d9",
+   "hidden": "dbb409f6a882f31d",
+   "openpath": "7743243e7fd3c79e"
+  },
+  "identicalSecondRun": true
+ },
+ {
+  "profile": "S002@1.0.0",
+  "seed": 2002,
+  "answers": 12,
+  "correctFeedback": 1,
+  "hints": 2,
+  "explanationsSeen": [
+   "Guess, check and improve",
+   "Keep the balance level"
+  ],
+  "openpath": {
+   "status": "exposure",
+   "verified": false,
+   "retention": "none",
+   "recoveryRequired": false
+  },
+  "digests": {
+   "boundary": "c70b3aa43c93e3f1",
+   "hidden": "ddb6ed29ef4ef739",
+   "openpath": "428eb3c62d73d776"
+  },
+  "identicalSecondRun": true
+ },
+ {
+  "profile": "S003@1.0.0",
+  "seed": 3003,
+  "answers": 33,
+  "correctFeedback": 15,
+  "hints": 0,
+  "explanationsSeen": [
+   "x on both sides",
+   "Multiply out the bracket first",
+   "Keep the balance",
+   "Undo one step at a time"
+  ],
+  "openpath": {
+   "status": "review",
+   "verified": false,
+   "retention": "failed",
+   "recoveryRequired": true
+  },
+  "digests": {
+   "boundary": "d2b9abce1d5f0a3e",
+   "hidden": "08a5ccf1a9d1261d",
+   "openpath": "bc0fa3a9b3855f5a"
+  },
+  "identicalSecondRun": true
+ },
+ {
+  "profile": "S004@1.0.0",
+  "seed": 4004,
+  "answers": 14,
+  "correctFeedback": 3,
+  "hints": 0,
+  "explanationsSeen": [
+   "Guess, check and improve",
+   "Move on the number line"
+  ],
+  "openpath": {
+   "status": "exposure",
+   "verified": false,
+   "retention": "none",
+   "recoveryRequired": false
+  },
+  "digests": {
+   "boundary": "11eec8f64265ee13",
+   "hidden": "da364eaa7b67d128",
+   "openpath": "366f07e4b2c4a965"
+  },
+  "identicalSecondRun": true
+ },
+ {
+  "profile": "S005@1.0.0",
+  "seed": 5005,
+  "answers": 22,
+  "correctFeedback": 14,
+  "hints": 0,
+  "explanationsSeen": [
+   "Keep the balance",
+   "Undo one step at a time",
+   "Multiply out the bracket first"
+  ],
+  "openpath": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "passed",
+   "recoveryRequired": false
+  },
+  "digests": {
+   "boundary": "2f23b8a0abd9ef90",
+   "hidden": "7b36215b568b60be",
+   "openpath": "ab81aeba7b174a78"
+  },
+  "identicalSecondRun": true
+ },
+ {
+  "profile": "S006@1.0.0",
+  "seed": 6006,
+  "answers": 18,
+  "correctFeedback": 7,
+  "hints": 1,
+  "explanationsSeen": [
+   "Keep the balance",
+   "Undo one step at a time",
+   "Multiply out the bracket first"
+  ],
+  "openpath": {
+   "status": "review",
+   "verified": false,
+   "retention": "failed",
+   "recoveryRequired": true
+  },
+  "digests": {
+   "boundary": "d6070faa40dff423",
+   "hidden": "026b10cf38dcd910",
+   "openpath": "d354cd75a821dc97"
+  },
+  "identicalSecondRun": true
+ }
+]

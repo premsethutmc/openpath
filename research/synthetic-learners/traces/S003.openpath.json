@@ -1,0 +1,375 @@
+{
+ "note": "read from OpenPath AFTER the run, for the report; never shown to the learner",
+ "evidence": {
+  "id": "MATH.algebra.linear-equations",
+  "status": "review",
+  "independentAt": "2026-03-02T09:02:00.000Z",
+  "retention": "failed",
+  "retentionDueAt": "2026-03-09T09:02:00.000Z",
+  "retentionHistory": [
+   {
+    "due": "2026-03-09T09:02:00.000Z",
+    "result": "failed",
+    "failedAt": "2026-03-11T09:28:00.000Z",
+    "recoveredAt": null
+   }
+  ],
+  "recoveryRequired": true,
+  "independent": {
+   "right": 13,
+   "total": 30
+  },
+  "assisted": {
+   "right": 2,
+   "total": 3
+  },
+  "attempts": [
+   "lr-mvwmonu4-2k-qmwvv",
+   "lr-mvwmonuw-2l-gxijo",
+   "lr-mvwmonvr-2m-kmdb0",
+   "lr-mvwmonwj-2n-stkd9",
+   "lr-mvwmonxf-2o-g4y5f",
+   "lr-mvwmonyd-2p-4lcvm",
+   "lr-mvwmonzc-2q-12dgr",
+   "lr-mvwmoo07-2r-lk7mc",
+   "lr-mvwmoo1d-2s-3fnb8",
+   "lr-mvwmoo2e-2t-3ks8k",
+   "lr-mvwmoo3g-2u-gksd1",
+   "lr-mvwmoo4f-2v-5kd7j",
+   "lr-mvwmoo5n-2w-uhv2a",
+   "lr-mvwmoo7o-2x-iypg8",
+   "lr-mvwmoo9u-2y-1vyal",
+   "lr-mvwmoobe-2z-59fbt",
+   "lr-mvwmoocv-30-gj2k3",
+   "lr-mvwmooek-31-tpl1q",
+   "lr-mvwmoog1-32-jhvml",
+   "lr-mvwmooi1-34-smnhc",
+   "lr-mvwmoojl-35-4xrmy",
+   "lr-mvwmoolj-36-2coak",
+   "lr-mvwmoon7-37-fl3ou",
+   "lr-mvwmooq6-39-j5fp3",
+   "lr-mvwmooss-3a-oxsp7",
+   "lr-mvwmoova-3b-gi7f0",
+   "lr-mvwmooyj-3d-nt783",
+   "lr-mvwmop0i-3e-l0pxm",
+   "lr-mvwmop1q-3f-8vtiw",
+   "lr-mvwmop32-3g-uewfc",
+   "lr-mvwmop7m-3i-xa2cj",
+   "lr-mvwmopal-3j-5v301",
+   "lr-mvwmopcu-3k-4c50i"
+  ],
+  "verified": false,
+  "engine": "unavailable",
+  "engineRetention": "not_demonstrated"
+ },
+ "attempts": [
+  {
+   "questionId": "gen:lin:3,3,2",
+   "response": "2",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "3x = 6",
+    "x = 2"
+   ]
+  },
+  {
+   "questionId": "gen:lin:3,9,8",
+   "response": "8",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "3x = 24",
+    "x = 8"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,17,11",
+   "response": "10",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "x = 10"
+   ]
+  },
+  {
+   "questionId": "gen:lin:7,9,11:mc",
+   "response": "C",
+   "activity": "practice",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:lin:2,1,1",
+   "response": "1",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "2x = 2",
+    "x = 1"
+   ]
+  },
+  {
+   "questionId": "gen:lin:7,18,9",
+   "response": "9",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "7x = 63",
+    "x = 9"
+   ]
+  },
+  {
+   "questionId": "gen:auleq:1,2,9,10",
+   "response": "C",
+   "activity": "practice",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:aulwp:1,5,2,7",
+   "response": "7",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "x + 2 + 5x + 2 = 46",
+    "6x = 42",
+    "x = 7"
+   ]
+  },
+  {
+   "questionId": "gen:lboth:9,7,8,2",
+   "response": "1/5",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "x = 1/5"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:5,-4,2,1",
+   "response": "3/5",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "5x - 20 = 2x - 17",
+    "5x - 20 = -17",
+    "5x = 3",
+    "x = 3/5"
+   ]
+  },
+  {
+   "questionId": "gen:lin:3,9,2",
+   "response": "2",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "3x + 9 - 9 = 15 - 9",
+    "3x/3 = 6/3",
+    "x = 2"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,4,7:mc",
+   "response": "A",
+   "activity": "transfer",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:lin:2,2,2",
+   "response": "3/2",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 3/2"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,4,4",
+   "response": "4",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "2x = 8",
+    "x = 4"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,6,6",
+   "response": "6",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:aulwp:1,5,2,9:w",
+   "response": "15",
+   "activity": "transfer",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:lin:2,15,1",
+   "response": "1",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "2x = 2",
+    "x = 1"
+   ]
+  },
+  {
+   "questionId": "gen:lin:5,6,5",
+   "response": "5",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "5x = 25",
+    "x = 5"
+   ]
+  },
+  {
+   "questionId": "gen:lboth:8,3,4,3",
+   "response": "1",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "12x + 3 = 15",
+    "12x = 12",
+    "x = 1"
+   ]
+  },
+  {
+   "questionId": "gen:lboth:8,15,2,1:mc",
+   "response": "B",
+   "activity": "check",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:lbrk:4,4,2,2",
+   "response": "5/6",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "4x + 15 = 2x + 20",
+    "x = 5/6"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:4,1,1,4",
+   "response": "5",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "4x + 4 = x + 16",
+    "2x + 4 = 16",
+    "2x = 12",
+    "x = 5"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:4,4,2,4",
+   "response": "5/2",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "4x + 14 = 2x + 24",
+    "4x + 14 = 24",
+    "4x = 10",
+    "x = 5/2"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:5,-5,1,10",
+   "response": "10/3",
+   "activity": "guided",
+   "hints": 0,
+   "working": [
+    "5x - 5 = x + 15",
+    "6x - 5 = 15",
+    "6x = 20",
+    "x = 10/3"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:3,-3,2,11",
+   "response": "5/2",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "3x - 3 = 2x + 2",
+    "x = 5/2"
+   ]
+  },
+  {
+   "questionId": "gen:lin:6,17,2",
+   "response": "7/3",
+   "activity": "retention",
+   "hints": 0,
+   "working": [
+    "6x = 14",
+    "x = 7/3"
+   ]
+  },
+  {
+   "questionId": "gen:lin:7,5,10",
+   "response": "10",
+   "activity": "guided",
+   "hints": 0,
+   "working": [
+    "7x = 70",
+    "x = 10"
+   ]
+  },
+  {
+   "questionId": "gen:auleq:2,8,14,8",
+   "response": "B",
+   "activity": "check",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:auleq:2,2,7,15",
+   "response": "C",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:auleq:0,3,14,9",
+   "response": "C",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:lin:6,17,3",
+   "response": "3",
+   "activity": "guided",
+   "hints": 0,
+   "working": [
+    "6x = 18",
+    "x = 3"
+   ]
+  },
+  {
+   "questionId": "gen:aulwp:1,6,10,6",
+   "response": "6",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "x + 10 + 6x + 10 = 62",
+    "x = 6"
+   ]
+  },
+  {
+   "questionId": "gen:auleq:2,9,19,11",
+   "response": "A",
+   "activity": "practice",
+   "hints": 0,
+   "working": null
+  }
+ ]
+}
