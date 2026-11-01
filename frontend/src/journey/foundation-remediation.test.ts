@@ -40,11 +40,13 @@ for(const c of cases){
   s.events.push(make.teach(ctx(),c.config.competency,unrelated.id,'conceptual'));
   s.events.push(make.pathway(ctx(),c.config.competency));
   const es=events(s),records=pathwayRecords(s.learnerId,es),state=s.state();
-  const ms=pathwayModule(c.config.competency,s.learnerId,es,records,state.evidence,s.now,s.session);
+  for (const withinRecovery of [false,true]) {
+  const ms=pathwayModule(c.config.competency,s.learnerId,es,records,state.evidence,s.now,s.session,withinRecovery);
   assert.equal(ms.requirementsMet,false);
   assert.ok(['unavailable','pause'].includes(ms.phase),JSON.stringify(ms));
   assert.equal(ms.question,null);
   assert.match(ms.reason,/explanation|teaching|misunderstanding|misconception/i);
+  }
  });
  test(`${c.journey}: only an explicitly selected readiness route unlocks above-grade resolution probes`,()=>{
   const {s}=established(c);

@@ -34,7 +34,7 @@ export const LETTERS = ["A", "B", "C", "D"];
 
 export interface Ctx {
   records: LearnerRecords;
-  module?: (competency: string) => ReturnType<typeof moduleState>;
+  module?: (competency: string, withinRecovery?: boolean) => ReturnType<typeof moduleState>;
   evidence: (id: string) => SkillEvidence;
   now: number;
   session: string;
@@ -300,14 +300,14 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it" }: {
 }
 
 /** One skill, end to end, as the engine directs. */
-export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false, reviewOnly = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean; reviewOnly?: boolean }) {
+export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false, reviewOnly = false, withinRecovery = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean; reviewOnly?: boolean; withinRecovery?: boolean }) {
   const [own, setOwn] = useResume<Fb | null>(resumeKey && `${resumeKey}:feedback`, null);
   const [retry, setRetry] = useResume<boolean | "hint">(resumeKey && `${resumeKey}:retry`, false);
   const [reviewLesson, setReviewLesson] = useState(false);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
-  const ms = ctx.module && !established ? ctx.module(competency) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, ctx.evidence);
+  const ms = ctx.module && !established ? ctx.module(competency, withinRecovery) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
   const stepper = (
@@ -438,7 +438,7 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
         <h1>{graph.get(q.competency).name}</h1>
         {finding || <p className="why">{r.reason}</p>}
         {trace}
-        <div className="panel"><Module key={r.active} competency={r.active} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} established={r.established} /></div>
+        <div className="panel"><Module key={r.active} competency={r.active} ctx={ctx} onExit={onExit} embedded withinRecovery onFeedback={setFb} established={r.established} /></div>
       </div>
     );
   return (

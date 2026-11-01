@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "c150892b3a74d8fc6e4dc8a46a9a5f99bdecc49d61ade7a34fc0468a6961b6f8",
+ "sha256": "1e9848f145a556defe735c28e9208c181f1b16b51e3187615b5971c195edba4e",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
@@ -162,7 +162,7 @@
   "packages/learning/src/fam/linear-teaching.ts": "dda131607d6c27336c788b3bf9df2c7a559d3326a11978b38f5dfb8f5e43c947",
   "packages/learning/src/families.ts": "79bf29a8c205664e64d09fd890b56374842e3da042bff7de2ff9ac132131c46e",
   "packages/learning/src/family-kit.ts": "3d1c24f88f40bfad186c43ce4edc3dd82516245774ff8d21df599bab8b70d903",
-  "packages/learning/src/foundation-runtime.ts": "8697f88971cb37fa3a2cd9e9344e6416754ad31b04dea46ab6f7f2f297fc202b",
+  "packages/learning/src/foundation-runtime.ts": "4bfb7fa999e4e3b20e02d706a4234221149f25e853e6e2b7b17c144cdd27aec1",
   "packages/learning/src/foundation.ts": "33e0ee951c4257e6969652f208f54450564ec83852082a4d7b49c4e97a93238d",
   "packages/learning/src/geometry-task.ts": "0e4da8483045f14339578ba1a235565d4e3c981ac456c75c10934fc665c3706d",
   "packages/learning/src/geometry-worker.ts": "9788f4141e99cf2c2f5399756af4fd83919ceaa52980f32112401b4059b56dc0",
@@ -204,7 +204,7 @@
   "packages/learning/src/review.ts": "3a86049eae136e9622dd3d9a2e201601bbe17919c43e6108e073b451591af9f2",
   "packages/learning/src/rewrite-registry.ts": "88e26604a679e7956c5c43e33d4d997bee6c0d041a58708f1fec7c24c1c9b5eb",
   "packages/learning/src/server-grader.ts": "af31da50108b54a754a27d73b2cde752d879aeb7793edd67aa19b5fa602e884a",
-  "packages/learning/src/session.ts": "7b9250b8f5c8fd34b348edc3b576eceea89608d1a18939fa44294a5a4dc8893e",
+  "packages/learning/src/session.ts": "380ce5fcd4be1c0cf1935e0a77ff9158749c77c9ccac27db3b23b87cdc9e3f0f",
   "packages/learning/src/solution-sets.ts": "7d42a20cd953be3ba6fbe1a2e2caae10060aa5511046b8c9be75613cf4ee15f6",
   "packages/learning/src/spec.ts": "e7fc28103eddbdd563c591f9be5ae1403e48bb7775c8189c2bcb25641db5c699",
   "packages/learning/src/subskill-config-addition.ts": "5a9b0be2ad63cbaf77cc4aad4828fd1529011756a4e1a7362a38a8a7e0c8eb1c",

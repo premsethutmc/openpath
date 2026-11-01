@@ -47,7 +47,7 @@ export function learnerState(learnerId: string, events: readonly { kind: string 
   const release = enrol ? releaseFor(enrol.curriculum, records.curricula) : null;
   const pathRecords = records.pathway?.active ? pathwayRecords(learnerId, events, o.marks, o.acknowledgements) : records;
   const pathEvidence = records.pathway?.active ? evidenceFor(learnerId, pathRecords, now).get : ev.get;
-  const module = (competency: string) => pathwayModule(competency, learnerId, events, pathRecords, pathEvidence, now, o.currentSession ?? "");
+  const module = (competency: string, withinRecovery = false) => pathwayModule(competency, learnerId, events, pathRecords, pathEvidence, now, o.currentSession ?? "", withinRecovery);
   const next = release ? nextActivity(release, pathEvidence, pathRecords, { now, session: o.currentSession ?? "", module }) : null;
   // the plan at the end of the previous visit: the same derivation, without this visit's records
   let change: string | null = null;

@@ -30,8 +30,10 @@ export function pathwayRecords(learner: string, events: readonly { kind: string 
   if (out.pathway?.active) { const route = pathwayRoute(out.pathway.target); if (!route.error) out.readinessRoute = route.ids; }
   return out;
 }
-export function pathwayModule(competency: string, learner: string, events: readonly { kind: string }[], records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string) {
-  const ordinary = moduleState(competency, records, evidence(competency), now, session, null, evidence);
+export function pathwayModule(competency: string, learner: string, events: readonly { kind: string }[], records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string, withinRecovery = false) {
+  // Recovery already owns prerequisite investigation. Match its resolver while
+  // retaining the same opt-in coverage and misconception requirements below.
+  const ordinary = moduleState(competency, records, evidence(competency), now, session, null, withinRecovery ? undefined : evidence);
   const active = records.pathway?.active && records.readinessRoute?.includes(competency);
   if (!active) return ordinary;
   // A broad answer count cannot clear a diagnosed gap. Keep the existing hypotheses,
