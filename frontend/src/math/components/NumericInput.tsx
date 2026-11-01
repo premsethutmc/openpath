@@ -76,7 +76,7 @@ export function NumericInput({
           placeholder={placeholder ?? strings.enterAnswer}
           disabled={disabled}
           aria-label={strings.enterAnswer}
-          onChange={(e: { target: { value: string } }) => updateValue(acceptsWorking ? e.target.value.replace(/[^0-9A-Za-z.\-/=;+*×÷−()<>^ ]/g, "") : e.target.value.replace(/[^0-9.\-/]/g, ""))}
+          onChange={(e: { target: { value: string } }) => updateValue(acceptsWorking ? e.target.value : e.target.value.replace(/[^0-9.\-/]/g, ""))}
           onKeyDown={handleKeyDown}
           autoComplete="off"
           autoCorrect="off"

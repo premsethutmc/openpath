@@ -6,7 +6,7 @@
 import { question } from "../../../packages/learning/src/content";
 import type { Screen, Strategy } from "../../../packages/learning/src/content";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
-import { taskStatement, type WorkingAssessment } from "../../../packages/learning/src/grading/working";
+import type { WorkingAssessment } from "../../../packages/learning/src/grading/working";
 import { RENDER_SCHEMA_VERSION, type FeedbackState, type RenderSpec, type WorkingStep } from "../math/types";
 
 const noHints = { available: false, totalLevels: 0, currentLevel: 0, hints: [] };
@@ -21,8 +21,8 @@ export function questionSpec(qid: string, o: { feedback?: FeedbackState; guide?:
     mode: "guided",
     locale: "en",
     layout: { panels: ["question", "input", "feedback", "nav", ...(o.progress ? (["progress"] as const) : [])] },
-    // D1: a question whose task the derivation authority reads also takes working lines, judged by the trusted grader
-    input: choices ? { type: "multiple-choice", choices } : taskStatement(qid) !== null ? { type: "numeric", placeholder: "Answer or steps", showKeypad: true, acceptsWorking: true } : { type: "numeric", placeholder: "Your answer", showKeypad: true },
+    // Preserve typed notation even when method checking is unsupported; the trusted grader decides what it can establish.
+    input: choices ? { type: "multiple-choice", choices } : { type: "numeric", placeholder: "Answer or steps", showKeypad: true, acceptsWorking: true },
     feedback: o.feedback ?? { level: "none", verified: false },
     hints: noHints,
     nav: { canSubmit: true, canSkip: false, canGoBack: false, canRequestHint: false, canShowWorking: false },

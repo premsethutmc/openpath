@@ -125,3 +125,13 @@ class ReentryEligibilityTests(LearningBase):
         r = self.save(self.attempt('eq-d1', '2', context=f"reentry:{q['competency']}"))
         self.assertEqual(r.status_code, 400)
         self.assertEqual(len(self.records()), before)
+
+    def test_working_only_is_saved_unresolved_and_empty_submission_is_rejected(self):
+        self.assertEqual(self.save(self.enrol()).status_code, 201)
+        r = self.save(self.attempt('eq-d1', '', working=['a method the checker cannot read']))
+        self.assertEqual(r.status_code, 201, r.content)
+        saved = self.records()[-1]
+        self.assertEqual(saved['working'], ['a method the checker cannot read'])
+        self.assertEqual(saved['decision']['verdict'], 'unresolved')
+        self.assertEqual(self.save(self.attempt('eq-d1', '', working=[])).status_code, 400)
+        self.assertEqual(self.save(self.attempt('eq-d1', '', working=['  '])).status_code, 400)

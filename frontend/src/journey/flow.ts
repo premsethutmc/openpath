@@ -9,8 +9,8 @@ import { familyOf, investigateContext, retriesLeft, type Established, type Modul
 import { activityFor } from "../learning/driver";
 import type { RenderSpec, RendererEvent } from "../math/types";
 import { feedbackFromDecision, questionSpec, teachingSpec, teachingSteps, workingFeedback } from "./renderer-adapter";
-import { readSubmission } from "../../../packages/learning/src/grading/submission";
 import { taskStatement } from "../../../packages/learning/src/grading/working";
+import { readSubmission } from "../../../packages/learning/src/grading/submission";
 import { SliceSession } from "./session";
 import { scheduleNote } from "../../../packages/learning/src/due-display";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
@@ -86,7 +86,11 @@ export class SliceFlow {
 
   private answer(value: string, working?: string[]) {
     // D1: one typed submission may hold working lines ("3x = 15; x = 5"); splitting is syntax only (grading/submission.ts), the grader judges both parts
-    const sub = working?.length ? { response: value, working } : readSubmission(value, taskStatement(this.qid) !== null);
+    const sub = working?.length ? { response: value, working } : readSubmission(value, taskStatement(this.qid) !== null || ["integer", "fraction"].includes(question(this.qid).type));
+    if (sub.working.length > 8 || sub.working.some((line) => line.length > 80)) {
+      this.spec = { ...this.spec, feedback: { level: "partial", verified: false, message: "Your work is still in the input. Please use at most 8 steps, with at most 80 characters in each step, before checking." } };
+      return this.spec;
+    }
     const reply = this.session.submit(this.qid, sub.response, this.activity, { ...(this.context ? { context: this.context } : {}), ...(this.hints ? { hints: this.hints } : {}), ...(sub.working.length ? { working: sub.working } : {}) });
     const fb = feedbackFromDecision(reply.decision as GradingDecision);
     const wf = workingFeedback(reply.decision as GradingDecision);

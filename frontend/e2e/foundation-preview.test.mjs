@@ -17,10 +17,25 @@ try {
   assert.equal(await page.evaluate(()=>!!window.__slice.flow.session.foundation),true);
   assert.ok(!(await page.locator('input').first().getAttribute('placeholder')).includes('x ='));
   const a=await page.evaluate(q=>window.__slice.answer(q),start);
-  await page.locator('input').first().fill(a);
+  if (start.includes('ahtri')) {
+   const tooLong = 'a'.repeat(81) + '; ' + a;
+   await page.locator('input').first().fill(tooLong);
+   await page.getByRole('button',{name:/^check$/i}).click();
+   assert.equal(await page.evaluate(()=>window.__slice.flow.session.replies.length), 0);
+   assert.equal(await page.locator('input').first().inputValue(), tooLong);
+   await page.getByText(/Your work is still in the input/).waitFor();
+  }
+  const working = start.includes('ahtri') ? 'Angle sum: 180 − 16 − 44; ' + a : a;
+  await page.locator('input').first().fill(working);
   await page.getByRole('button',{name:/^check$/i}).dblclick();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
   assert.equal(await page.evaluate(()=>window.__slice.flow.session.replies.length),1);
+  if (start.includes('ahtri')) {
+   const saved = await page.evaluate(()=>window.__slice.flow.session.replies[0].decision);
+   assert.deepEqual(saved.response.working, ['Angle sum: 180 − 16 − 44', a]);
+   assert.equal(saved.working.status, 'unsupported');
+   assert.equal(saved.verdict, 'correct');
+  }
   await page.screenshot({path:`${shots}/foundation-${start.split(':')[1]}.png`});
   await page.close();
  }

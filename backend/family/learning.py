@@ -356,7 +356,10 @@ def checked_learning(event, pupil):
             _reject('Unknown activity.')
         if type(event.get('hints')) is not int or not 0 <= event['hints'] <= 5 or type(event.get('solution')) is not bool:
             _reject('Hints and solutions are recorded as given.')
-        if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or not event['response'].strip():
+        w = event.get('working', [])
+        if not isinstance(w, list) or len(w) > 8 or not all(isinstance(x, str) and len(x) <= 80 for x in w):
+            _reject('Working is at most 8 lines of 80 characters.')
+        if not isinstance(event.get('response'), str) or len(event['response']) > (WRITTEN_LIMIT if q['type'] in HUMAN else 300 if q['type'] in NEW_TYPES or q['type'] == 'set' else 80) or (not event['response'].strip() and not any(line.strip() for line in w)):
             _reject('That answer is too long, or empty.')
         if isinstance(event.get('context'), str) and event['context'].startswith('study:'):
             plan_id = event['context'][6:]
@@ -390,9 +393,6 @@ def checked_learning(event, pupil):
             event = {**event, 'shadowDecision': shadow}  # shadow mode: kept for the comparison report, never used for credit or replay
         # grading-decision@1 (stage 7): the server's decision is kept in the immutable event body and appended to the decision log (views.py)
         event = {**event, 'decision': decision}
-        w = event.get('working', [])
-        if not isinstance(w, list) or len(w) > 8 or not all(isinstance(x, str) and len(x) <= 80 for x in w):
-            _reject('Working is at most 8 lines of 80 characters.')
         if event['activity'] == 'retention':
             # the same rule as the app (status@1): two distinct right first answers on your own, then seven full days
             from .models import WrittenMark
