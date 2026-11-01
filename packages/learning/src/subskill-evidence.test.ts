@@ -245,7 +245,7 @@ describe("D1 + E1: method evidence comes only from the server-recorded working v
 });
 
 describe("shadow by construction (from the alternative E1)", () => {
-  test("no production module imports the projection or its journeys", async () => {
+  test("projection imports are confined to shadow tools and the explicit persisted opt-in adapter", async () => {
     const { readdirSync, readFileSync, statSync } = await import("node:fs");
     const { join } = await import("node:path");
     const root = new URL("../../../", import.meta.url).pathname, files: string[] = [];
@@ -253,10 +253,11 @@ describe("shadow by construction (from the alternative E1)", () => {
     for (const d of ["packages/learning/src", "frontend/src", "backend/family"]) walk(join(root, d));
     const importers = files.filter((f) => /subskill-(evidence|scenarios)|d1e1-journeys/.test(readFileSync(f, "utf8")) && !/(subskill-evidence|subskill-scenarios|d1e1-journeys)\.ts$/.test(f));
     // M1 (reviewed): the shadow gated-mastery policy and its journeys build on the projection; they are shadow modules themselves (next test)
-    // The local slice now has an explicit ?foundation=1 opt-in; ordinary app entry points still do not import it.
+    // The local slice and persisted runtime adapter opt in explicitly; the default year policy stays unchanged.
     const preview = readFileSync(join(root, "frontend/src/journey/slice-app.tsx"), "utf8");
     expect(preview).toContain('get("foundation") === "1"');
-    const SHADOW = ["frontend/src/journey/gated-journeys.ts", "packages/learning/src/gated-mastery.ts", "frontend/src/journey/slice-app.tsx"];
+    expect(readFileSync(join(root, "packages/learning/src/foundation-runtime.ts"), "utf8")).toContain("records.pathway?.active");
+    const SHADOW = ["packages/learning/src/foundation-runtime.ts", "frontend/src/journey/gated-journeys.ts", "packages/learning/src/gated-mastery.ts", "frontend/src/journey/slice-app.tsx"];
     expect(importers.filter((f) => !/\.test\.(ts|tsx)$/.test(f)).map((f) => f.replace(root, "")).filter((f) => !SHADOW.includes(f))).toEqual([]);
   });
   test("M1: no production module imports the gated-mastery shadow policy or its journeys", async () => {

@@ -99,13 +99,14 @@ const KIND_WORD: Record<Tile["kind"], string> = { subject: "Subject", unit: "Uni
 
 function App() {
   const [pathwayTarget, setPathwayTarget] = useState(new URLSearchParams(location.search).get("target") ?? "");
-  const pathwayChoices = useMemo(() => graph.competencies.filter((c) => !c.partOf && moduleFor(c.id)), []);
   const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [pupils, setPupils] = useState<PupilSummary[]>([]);
   const [learner, setLearner] = useState<string>(new URLSearchParams(location.search).get("learner") ?? "");
   const [events, setEvents] = useState<{ kind: string }[] | null>(null);
+  const showPathway = new URLSearchParams(location.search).get("foundation") === "1" || !!events?.some((e) => (e as LearningRecord).record === "foundation_pathway");
+  const pathwayChoices = useMemo(() => showPathway ? graph.competencies.filter((c) => !c.partOf && moduleFor(c.id)) : [], [showPathway]);
   const [view, setView] = useState<View>(new URLSearchParams(location.search).get("curriculum") === "change" ? { name: "setup", sameYear: true } : { name: "year" });
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
@@ -406,9 +407,9 @@ function App() {
         <a className="secondary" href={`/curriculum/?preview=1#b=${release.id.startsWith("tn-") ? "tn" : "cbse"}&g=${grade}`}>Preview Mathematics experience</a>
         <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
       </div>
-      {(new URLSearchParams(location.search).get("foundation") === "1" || st.records.pathway) && <section className="next" aria-label="Learning pathway">
+      {showPathway && <section className="next" aria-label="Learning pathway">
         <h2>Your learning goal</h2>
-        <p>Choose a supported topic. We will check its prerequisites and guide you toward it. Your starting grade is not a ceiling. Demonstration content remains labelled; choosing a goal awards no mastery.</p>
+        <p>Choose a supported topic. We will check its prerequisites and guide you toward it. Your starting grade is not a ceiling. This opt-in uses the trusted grader for new answers; earlier marks stay unchanged. Demonstration content remains labelled; choosing a goal awards no mastery.</p>
         {st.records.pathway?.active && <p>Current goal: {graph.get(st.records.pathway.target).name}</p>}
         <label>Target topic<select aria-label="Target topic" value={pathwayTarget} onChange={(e) => setPathwayTarget(e.target.value)}><option value="">Choose a topic</option>{pathwayChoices.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
         <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => save(make.pathway(ctxOf(), pathwayTarget))}>Use this learning goal</button>

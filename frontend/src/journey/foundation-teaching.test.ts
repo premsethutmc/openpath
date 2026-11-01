@@ -8,7 +8,7 @@ test('small-addition explanations and unit jumps match every supported pair',()=
  const f=FAMILIES.get('aaadd')!;
  for(let a=1;a<=19;a++)for(let b=1;b<=20-a;b++){
   const p=problemOf(`gen:aaadd:${a},${b}`)!;assert.ok(p);
-  const v=f.teach!.visual!([a,b]) as {jumps:number[][]};
+  const v=f.teach!.visual!([a,b]) as unknown as {jumps:number[][]};
   assert.equal(v.jumps.length,b);assert.deepEqual(v.jumps[0],[a,a+1]);assert.deepEqual(v.jumps.at(-1),[a+b-1,a+b]);
   const text=f.teach!.alternatives!.find(x=>x.id==='make_ten')!.textFor!([a,b]).join(' ');
   assert.ok(text.includes(`= ${a+b}.`));

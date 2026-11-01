@@ -144,7 +144,7 @@ def _authoritative(event, q, readable):
     return _decide(event, q)[0]
 
 
-def _decide(event, q, now=None):
+def _decide(event, q, now=None, mode=None):
     """The server's decision about one answer, and nothing the client claims: (assessment@1 view, grading-decision@1).
     grading-policy@1 (Phase C): the trusted grader runs THE decision (the app's own code) for every known question and its verdict is
     recorded as is. There is no stored-answer fallback (UNIFIED_GRADING_ARCHITECTURE.md §11, D12): the grader not runnable (missing,
@@ -170,7 +170,7 @@ def _decide(event, q, now=None):
         source = 'held' if grader_enabled() else 'infrastructure'
         unified = ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source},
                    decisions.build(event, failure=source, now=now))
-    mode = grading_mode()
+    mode = mode or grading_mode()
     if mode == 'unified':
         return unified
     # OPENPATH_GRADING=shadow|legacy (migration, UNIFIED_GRADING_ARCHITECTURE.md §13): the earlier policy is authoritative — the trusted
@@ -188,6 +188,12 @@ def _decide(event, q, now=None):
     if mode == 'shadow':
         d['shadow'] = {**unified[1], 'decidedBy': 'shadow'}
     return legacy, d
+
+
+def effective_grading_mode(events):
+    """Only an explicit versioned learner opt-in changes NEW decisions; never regrade history."""
+    choice = next((e for e in reversed(events) if e.get('record') == 'foundation_pathway' and e.get('policy') == 'mathematics-pathway@1'), None)
+    return 'unified' if choice and choice.get('active') is True else grading_mode()
 
 
 def grading_mode():
@@ -389,7 +395,7 @@ def checked_learning(event, pupil):
             _reject('Invalid context.')
         if 'assessment' in event and not _assessment_ok(event['assessment'], q):
             _reject('The assessment result is malformed.')
-        decided, decision = _decide(event, q, now)
+        decided, decision = _decide(event, q, now, mode=effective_grading_mode(prior))
         if decided is not None:
             event = {**event, 'assessment': decided}
         shadow = decision.pop('shadow', None)

@@ -51,7 +51,7 @@ export function learnerState(learnerId: string, events: readonly { kind: string 
   const next = release ? nextActivity(release, pathEvidence, pathRecords, { now, session: o.currentSession ?? "", module }) : null;
   // the plan at the end of the previous visit: the same derivation, without this visit's records
   let change: string | null = null;
-  if (next && release) {
+  if (next && release && !records.pathway?.active) {
     const own = (e: { kind: string }) => (e as LearningRecord).sessionId;
     const sessions = [...new Set(events.filter((e) => e.kind === "learning_record").map(own))];
     const last = o.currentSession && sessions.includes(o.currentSession) ? o.currentSession : null;

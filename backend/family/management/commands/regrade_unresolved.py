@@ -33,7 +33,12 @@ class Command(BaseCommand):
                 e = events[attempt_id]
                 q = content()["questions"].get(e["questionId"]) or generated(e["questionId"])
                 now = timezone.now()
-                _, new = _decide({**e, "id": attempt_id}, q, now)
+                # A recovered answer retains its original authority, even after opt-out or a global mode change.
+                # Unknown/older policies require a reviewed migration, not this automatic recovery command.
+                if d.get("policy") != "grading-policy@1":
+                    still += 1
+                    continue
+                _, new = _decide({**e, "id": attempt_id}, q, now, mode="unified")
                 if new["reason"] == "unresolved.infrastructure":
                     still += 1
                     continue

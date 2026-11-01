@@ -10,7 +10,7 @@ const t = Date.parse('2026-01-01T00:00:00Z');
 function begin(target: string) {
  const s = new SliceSession('pathway', target, t); s.session='learn:pathway:s1';
  const c={learnerId:s.learnerId,sessionId:s.session,at:new Date(t-2000).toISOString()};
- s.events.push(make.enrol(c,1,'2026',latestReleases.find(r=>r.grade===1)!));
+ s.events.push(make.enrol(c,1,'2026-27',latestReleases.find(r=>r.grade===1)!));
  s.events.push(make.pathway({...c,at:new Date(t-1000).toISOString()},target));
  return s;
 }
@@ -63,4 +63,47 @@ test('readiness placement is confined to the selected route and invalid methods 
  assert.equal(reply.decision?.verdict,'correct');assert.equal(reply.decision?.working?.status,'invalid');
  assert.equal(s.state().selectionRecords.attempts.length,0);
  assert.ok(s.state().selectionRecords.unresolved.some(r=>r.questionId==='gen:lin:2,17,11'));
+ const wrong=s.submit('gen:lin:2,17,11','12','check',{working:['2x = 23','x = 12']});
+ assert.equal(wrong.decision?.verdict,'incorrect');
+ const kept=s.state().selectionRecords.attempts;
+ assert.equal(kept.length,1);assert.equal(kept[0].credit,false);assert.equal(kept[0].n,2);
+ s.submit('gen:lin:2,17,11','11','check');
+ assert.equal(s.state().selectionRecords.attempts.at(-1)?.n,3);
+});
+
+test('a weak prerequisite stays in remediation; due skills return and failed checks recover',()=>{
+ const s=begin('MATH.number.subtraction');
+ let remediation=false;
+ for(let i=0;i<12;i++){
+  const st=s.state(),id=st.next!.competency!;assert.equal(id,'MATH.number.addition');
+  const m=st.module(id);
+  if(['chapter','strategy','recover','guided','pause'].includes(m.phase)){remediation=true;break;}
+  assert.ok(m.question);const q=question(m.question);
+  s.submit(q.id,q.type==='choice'?(q.answer==='A'?'B':'A'):String(Number(q.answer)+3),m.activity??'diagnostic',{context:m.context});
+ }
+ assert.equal(remediation,true);
+ const a=begin('MATH.number.addition');
+ for(let i=0;i<60&&a.state().next?.kind!=='none';i++){
+  const m=a.state().module('MATH.number.addition');
+  if(m.phase==='chapter'){a.taught(m);continue;}
+  assert.ok(m.question);const q=question(m.question);a.submit(q.id,q.answer,m.activity??'check',{context:m.context});
+ }
+ assert.equal(a.state().next?.kind,'none');a.now+=8*86400000;
+ assert.equal(a.state().next?.kind,'retention');
+ const due=a.state().module('MATH.number.addition');assert.equal(due.phase,'retention');assert.ok(due.question);
+ const q=question(due.question);a.submit(q.id,q.type==='choice'?(q.answer==='A'?'B':'A'):String(Number(q.answer)+3),'retention',{context:due.context});
+ assert.equal(a.state().next?.competency,'MATH.number.addition');assert.equal(a.state().next?.kind,'review');
+ const saved=JSON.parse(JSON.stringify(events(a)));
+ assert.deepEqual(learnerState(a.learnerId,saved,a.now,{currentSession:a.session}).next,a.state().next);
+});
+
+
+test('a cyclic prerequisite route stops without claiming completion or granting placement',()=>{
+ const original=graph.relationsOf;
+ graph.relationsOf=(id,opts)=>id==='MATH.number.addition'?[{from:id,type:'mandatory',source:'audit@1'}]:original(id,opts);
+ try {
+  const s=begin('MATH.number.addition'),st=s.state();
+  assert.equal(st.next?.kind,'none');assert.match(st.next!.reason,/route needs review/);
+  assert.equal(st.selectionRecords.readinessRoute,undefined);
+ } finally {graph.relationsOf=original;}
 });

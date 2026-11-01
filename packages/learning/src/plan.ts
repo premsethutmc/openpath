@@ -118,29 +118,21 @@ function pathwayNextActivity(records: LearnerRecords, ev: (id: string) => SkillE
   const target = records.pathway!.target;
   const stop = (reason: string, reviewCompetency?: string): NextActivity => ({ kind: "none", competency: null, reason: `${reason} Your progress is saved. Choose another supported goal or review a lesson; no mastery is claimed.`, ...(reviewCompetency ? { reviewCompetency } : {}) });
   if (!graph.byId.has(target) || !moduleFor(target)) return stop("This target does not yet have a supported learning module.");
-  if (pathwayRoute(target).error) return stop("This prerequisite route needs review before it can guide learning.", target);
-  const visiting = new Set<string>(), visited = new Set<string>();
+  const route = records.readinessRoute ? { ids: records.readinessRoute, error: false } : pathwayRoute(target);
+  if (route.error) return stop("This prerequisite route needs review before it can guide learning.", target);
   const pendingTeaching = new Set(hypotheses(records).filter((h) => h.status === "established" && !h.teaching.deliveredAt).map((h) => h.scope.observedIn));
-  const walk = (id: string): NextActivity | null => {
-    if (visiting.has(id) || visiting.size > 40 || visited.size > 256) return stop("This prerequisite route needs review before it can guide learning.", target);
-    if (visited.has(id)) return null;
-    visiting.add(id);
+  // The shared route is already in prerequisite order and cycle-checked. No second graph walk.
+  for (const id of route.ids) {
     const e = ev(id), m = moduleFor(id);
     const ms = m ? at?.module?.(id) ?? moduleState(id, records, e, at?.now ?? 0, at?.session ?? "", null, ev) : null;
     const shown = ["independent", "transfer", "verified"].includes(e.status) && !e.recoveryRequired && e.retention !== "due" && !pendingTeaching.has(id);
-    // A configured skill requirement can still demand evidence when broad topic evidence is shown.
-    const coveragePending = ms?.requirementsMet === false;
-    if (!m && shown) { visiting.delete(id); visited.add(id); return null; }
+    if (shown && ms?.requirementsMet !== false) continue;
     if (!m) return stop(`A prerequisite, ${graph.get(id).name}, has no supported module yet.`, target);
-    const prerequisites = graph.relationsOf(id).filter((r) => r.type === "mandatory" || r.type === "plausible").map((r) => r.from).sort();
-    for (const prior of prerequisites) { const n = walk(prior); if (n) return n; }
-    visiting.delete(id); visited.add(id);
-    if (shown && !coveragePending) return null;
     if (!ms || ["pause", "unavailable", "waiting", "done"].includes(ms.phase)) return stop(ms?.reason ?? "No safe learning opportunity is available.", id);
     const kind = e.retention === "due" ? "retention" : e.recoveryRequired || e.status === "review" ? "review" : e.status === "not_started" ? "start" : "continue";
     return { kind, competency: id, reason: `${id === target ? "Toward your chosen goal" : `A prerequisite for ${graph.get(target).name}`}: ${e.status === "not_started" ? "a short probe will find your starting point" : ms.reason}. Unobserved work is not treated as a weakness.` };
-  };
-  return walk(target) ?? { kind: "none", competency: null, reason: "The current evidence requirements on this route are shown. Delayed checks remain scheduled. Choose a further supported goal when you are ready." };
+  }
+  return { kind: "none", competency: null, reason: "The current evidence requirements on this route are shown. Delayed checks remain scheduled. Choose a further supported goal when you are ready." };
 }
 
 /** Shared route eligibility for planning and question placement. Never read from client events. */

@@ -14,16 +14,19 @@ export function pathwayRecords(learner: string, events: readonly { kind: string 
   // Only persisted server decisions (or educator-marked written work) establish new-policy readiness.
   const marked = new Set(marks.map((m) => m.attemptId));
   const trusted = events.filter((e) => {
-    const r = e as LearningRecord & { decision?: { schema?: string; decidedBy?: string; working?: { status?: string; methodEvidence?: string } } };
-    return r.record !== "attempt" || marked.has(r.id) || (r.decision?.schema === "grading-decision@1" && r.decision.decidedBy === "server" && r.decision.working?.status !== "invalid" && r.decision.working?.methodEvidence !== "false-step");
+    const r = e as LearningRecord & { decision?: { schema?: string; decidedBy?: string; verdict?: string; working?: { status?: string; methodEvidence?: string } } };
+    return r.record !== "attempt" || marked.has(r.id) || (r.decision?.schema === "grading-decision@1" && r.decision.decidedBy === "server" && !(r.decision.verdict === "correct" && (r.decision.working?.status === "invalid" || r.decision.working?.methodEvidence === "method-false-step")));
   });
-  const out = readRecords(learner, trusted, marks, acknowledgements);
+  const out = readRecords(learner, events, marks, acknowledgements);
+  const trustedIds = new Set(trusted.map((e) => (e as LearningRecord).id));
+  // Keep original exposure numbers: excluding an earlier verdict cannot make a repeat independent.
+  out.attempts = out.attempts.filter((a) => trustedIds.has(a.id));
   const accepted = new Set(trusted);
   for (const e of events) {
     const r = e as LearningRecord;
     if (!accepted.has(e) && r.record === "attempt" && r.learnerId === learner && isQuestion(r.questionId) && !out.unresolved.some((a) => a.id === r.id)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: { policy: "assessment@1", answerCorrect: null, methodExamined: false, derivationVerified: false, firstError: null, clarificationRequired: false, aiFallbackUsed: false, unresolved: true, source: "infrastructure" } });
   }
-  if (out.pathway?.active) out.readinessRoute = pathwayRoute(out.pathway.target).ids;
+  if (out.pathway?.active) { const route = pathwayRoute(out.pathway.target); if (!route.error) out.readinessRoute = route.ids; }
   return out;
 }
 export function pathwayModule(competency: string, learner: string, events: readonly { kind: string }[], records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string) {
