@@ -924,6 +924,7 @@ function TopicPlan({ ids, r, skillOf, route, learnerId }: { learnerId: string; i
             </button>
           </p>
           {contentOf(r.competencies[next]).learn && <p><a className="primary" href={lessonHref(learnerId, r.competencies[next].evidenceTarget)}>{lessonStarted(learnerId, r.competencies[next].evidenceTarget) ? "Continue learning" : "Start learning"}</a></p>}
+          {r.release.grade === 7 && contentOf(r.competencies[next]).learn && <p>Optional: <a className="secondary" href={`/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}&diagnostic=topic`}>Start diagnostic</a></p>}
         </div>
       ) : null}
       <div className="small muted">

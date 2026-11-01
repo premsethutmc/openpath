@@ -406,7 +406,7 @@ function App() {
         </div>
       </div>
       {events && (()=>{const done=[...events].reverse().find((e:any)=>e.record==='study_session'&&e.phase==='ended'&&events.some((p:any)=>p.id===e.planId&&p.academicYear===st.enrolment?.academicYear&&p.curriculum?.id===release.id&&p.curriculum?.hash===release.hash)) as StudyRecord|undefined;if(!done?.summary)return null;const plan=events.find((e:any)=>e.id===done.planId) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return plan?<p className="small">Last study session: {done.summary.correctIds.length} correct, {done.summary.incorrectIds.length} incorrect. <a href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(plan.target)}&diagnostic=topic`}>View session summary</a> · Performance is separate from verified mastery.</p>:null;})()}
-      <div className="actions">
+      <div className="actions year-actions">
         {events && (() => { const last=[...events].reverse().find((e:any)=>e.record==='topic_session'&&e.academicYear===st.enrolment?.academicYear&&e.curriculum?.id===release.id&&e.curriculum?.hash===release.hash) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return last?<a className="primary" href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(last.target)}&diagnostic=topic`}>Resume topic session</a>:null;})()}
         <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
         <a className="secondary" href={`/curriculum/?preview=1#b=${release.id.startsWith("tn-") ? "tn" : "cbse"}&g=${grade}`}>Preview Mathematics experience</a>

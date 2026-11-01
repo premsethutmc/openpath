@@ -178,3 +178,7 @@ body:has(.year-paper) { background: #fbfaf6; }
 .topic-session h2 { overflow-wrap: anywhere; }
 .study-timer{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.9rem;padding:6px 0;border-bottom:1px solid #e4e0ed}
 .study-session [aria-label="Planned time finished"]{border-left:3px solid #8b79c8;padding:0 10px;font-size:.9rem}
+
+/* Curriculum navigation remains tappable when labels wrap on a phone. */
+.page .actions { flex-wrap: wrap; }
+.page .actions > * { max-width: 100%; min-width: 0; white-space: normal; }
