@@ -443,7 +443,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aacups: Which container holds the most cups | `MATH.measurement.non-standard-units` | 288 | 0 | 0/144/144 | `be857943` |
 | aaseq: Putting the day's events in order | `MATH.measurement.time-order` | 300 | 0 | 150/150/0 | `481e6210` |
 | aadur: Which takes the longest or the shortest time | `MATH.measurement.time-order` | 300 | 0 | 181/119/0 | `2478e7ca` |
-| aaadd: Adding two numbers with a total up to 20 | `MATH.number.addition` | 190 | 0 | 36/100/54 | `8f685f8a` |
+| aaadd: Adding two numbers with a total up to 20 | `MATH.number.addition` | 190 | 0 | 36/100/54 | `6890d45d` |
 | aabond: How many more to make 10 (or another number up to 20) | `MATH.number.addition` | 184 | 0 | 9/30/145 | `d34c6f5b` |
 | aacmp: Which number is more (or less) | `MATH.number.compare-numbers` | 300 | 0 | 5/21/274 | `89a4c40d` |
 | aanext: The number just before, just after or between | `MATH.number.compare-numbers` | 294 | 0 | 58/128/108 | `2011984c` |
@@ -576,7 +576,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | adfbuild: Building a fraction from unit fractions | `MATH.number.fraction-models` | 89 | 0 | 11/43/35 | `56f26ddc` |
 | adfcol: A fraction of a collection of objects | `MATH.number.fraction-of-collection` | 300 | 0 | 9/143/148 | `515fb73c` |
 | adfmeas: A fraction of an hour, a metre, a kilogram, a day or ₹100 | `MATH.number.fraction-of-collection` | 122 | 0 | 12/32/78 | `527e5f6d` |
-| adcol3: Adding and subtracting three-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 81/242/177 | `3ed23af6` |
+| adcol3: Adding and subtracting three-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 500 | 0 | 81/242/177 | `9e9bb198` |
 | adexp: Writing a number from its place-value parts | `MATH.number.thousands` | 400 | 0 | 36/239/125 | `8661df82` |
 | ad1000: How much more makes 1000 | `MATH.number.thousands` | 300 | 0 | 3/27/270 | `404306ef` |
 | adbetw: How many whole numbers lie between two numbers | `MATH.number.thousands` | 300 | 0 | 72/99/129 | `f19fd2ae` |

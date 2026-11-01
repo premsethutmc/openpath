@@ -417,10 +417,18 @@ async function assessCandidateBase(problem: MathematicalProblem, studentWorking:
     if (!studentWorking || Array.isArray(studentWorking) || !("geometry" in studentWorking) || !("calculation" in studentWorking) || !Array.isArray(studentWorking.geometry.steps) || !Array.isArray(studentWorking.calculation)) return malformed("mixed", "mixed working needs geometry steps and calculation lines");
     const transfer = problem.transfer ?? (problem.handoff ? legacyTransfer(problem.handoff, studentWorking.geometry.steps) : null);
     if (!transfer) return malformed("mixed", "mixed problem needs a typed transfer");
+    // Validate the proposed boundary before asking a reasoner to establish its premise.
+    // Unsupported working cannot conceal a circular or mismatched transfer contract.
+    const transferErrors = problem.transfer ? verifyTransfer(problem, transfer, studentWorking.geometry.steps) : [];
+    if (transferErrors.length) return { ...malformed("mixed", "invalid proof-carrying transfer"), outstandingObligations: transferErrors, domainPayload: { transfer } };
     let g: AssessmentEnvelope; try { g = geometryEnvelope(await runGeometry(problem.geometry, studentWorking.geometry.steps, options)); } catch (error) { return { ...malformed("mixed", "geometry transport failed safely"), classification: "unsupported", failureKind: "transport", infrastructureFailure: error instanceof GeometryTransportError ? error.code : "transport", domainPayload: { transportError: error instanceof Error ? error.message : "geometry worker failure" } }; }
     if (g.classification !== "verified") { const missing = g.classification === "unsupported" ? missingTransferAssumptions(problem, transfer) : []; return { ...g, domain: "mixed", classification: missing.length ? "missing-assumption" : g.classification, outstandingObligations: [...g.outstandingObligations, ...missing], complete: false, reasoners: [...g.reasoners, { id: "unified:proof-state", version: "u2" }] }; }
-    const transferErrors = verifyTransfer(problem, transfer, studentWorking.geometry.steps);
-    if (transferErrors.length) return { ...malformed("mixed", "invalid proof-carrying transfer"), outstandingObligations: transferErrors, domainPayload: { geometry: g.domainPayload, transfer } };
+    // A legacy handoff is synthesized by this adapter. If its geometry is outside
+    // support, retain that refusal; only validate the synthesized transfer once usable.
+    if (!problem.transfer) {
+      const errors = verifyTransfer(problem, transfer, studentWorking.geometry.steps);
+      if (errors.length) return { ...malformed("mixed", "invalid proof-carrying transfer"), outstandingObligations: errors, domainPayload: { geometry: g.domainPayload, transfer } };
+    }
     const provenObligation: MathematicalObligation = { ...transfer.obligation, status: "verified", dischargeEvidence: [...transfer.obligation.dischargeEvidence, { reasoner: "geometry:synthetic", detail: g.justification, assessmentStepIndexes: g.steps.map((x)=>x.index) }] };
     let equation: string; try { equation = statementText(provenObligation.statement); } catch { return malformed("mixed", "obligation cannot be discharged by algebra"); }
     const a = textAssessment({ domain: "algebra", statement: equation }, studentWorking.calculation, options);

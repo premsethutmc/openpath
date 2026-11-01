@@ -7,6 +7,17 @@ const root = `${process.cwd()}/research/geometry-reasoner`;
 const fixture = JSON.parse(readFileSync("tools/mathematics/unified-u2/independent-cases.v2.json", "utf8")) as { cases: { id:string; category:string; problem:MathematicalProblem; working:StudentWorking; options:Record<string,unknown>; expected:{classification:string;firstInvalidStep:number|null} }[] };
 afterAll(() => stopGeometryWorkers());
 
+// Worker lifecycle needs a successful submitted method, not the frozen benchmark's
+// bare entailed conclusion. Preserve the frozen input and every lifecycle assertion.
+function triangleMethod(id: string) {
+  const sample = structuredClone(fixture.cases.find((x) => x.id === id)!);
+  if (!("geometry" in sample.working)) throw new Error("expected mixed triangle fixture");
+  if (sample.working.geometry.steps.length !== 1 || sample.working.geometry.steps[0].cited_theorem !== undefined) throw new Error("expected one uncited conclusion; do not replace an existing justification");
+  sample.working.geometry.steps = sample.working.geometry.steps.map(step => ({ ...step, cited_theorem: "triangle-sum" }));
+  return sample;
+}
+
+
 describe("unified mathematics engine U2", () => {
   test("250 independently labelled proof-carrying transfer cases", async () => {
     expect(fixture.cases.length).toBe(250);
@@ -24,7 +35,7 @@ describe("unified mathematics engine U2", () => {
   test("repeated and concurrent requests reuse the bounded persistent pool", async () => {
     stopGeometryWorkers();
     const before=await healthGeometryWorker(root) as {pid:number};
-    const sample=fixture.cases.find((x)=>x.id==="u2-angle-00")!;
+    const sample=triangleMethod("u2-angle-00");
     const results=await Promise.all(Array.from({length:20},()=>assessMathematicalWorking(sample.problem,sample.working,sample.options)));
     const after=await healthGeometryWorker(root) as {pid:number};
     expect(results.every((x)=>x.classification==="verified")).toBe(true);
@@ -33,7 +44,7 @@ describe("unified mathematics engine U2", () => {
   });
 
   test("worker termination and timeout fail closed and recover", async () => {
-    const sample=fixture.cases.find((x)=>x.id==="u2-angle-01")!;
+    const sample=triangleMethod("u2-angle-01");
     const first=await assessMathematicalWorking(sample.problem,sample.working,sample.options);
     expect(first.classification).toBe("verified");
     const oldPid=geometryWorkerDiagnostics(root).pid;
@@ -54,6 +65,10 @@ describe("unified mathematics engine U2", () => {
     for (const id of ["u2-adversarial-00","u2-adversarial-10","u2-adversarial-45"]) {
       const item=fixture.cases.find((x)=>x.id===id)!; const got=await assessMathematicalWorking(item.problem,item.working,item.options);
       expect(got.classification).toBe("malformed"); expect(got.correct).toBeNull();
+      const withoutWorker = await assessMathematicalWorking(item.problem, item.working, { geometryRoot: "/tmp/openpath-u2-no-such-reasoner" });
+      expect(withoutWorker.classification).toBe("malformed");
+      expect(withoutWorker.correct).toBeNull();
+      expect(withoutWorker.failureKind).toBeUndefined();
     }
   });
 });
