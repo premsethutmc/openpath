@@ -288,6 +288,10 @@ function App() {
   if (view.name === "curriculum-practice")
     return (
       <Shell paper banner={banner} error={error} top={top(home, name)}>
+        {st.records.pathway?.active && st.records.pathway.target === view.competency && st.next?.competency && st.next.competency !== view.competency && <aside className="why" aria-label="Optional supporting lesson">
+          <p>You can learn this chapter now. If you want supporting practice, we recommend {graph.get(st.next.competency).name}. Opening a lesson does not claim mastery.</p>
+          <button className="secondary" onClick={() => setView({ name: "module", competency: st.next!.competency!, back: view })}>Try optional support</button>
+        </aside>}
         <CurriculumPractice
           key={`${learner}:${release.hash}:${view.competency}`}
           competency={view.competency} ctx={ctx}
@@ -300,10 +304,11 @@ function App() {
       </Shell>
     );
   if (view.name === "topic-diagnostic")
-    return <Shell paper banner={banner} error={error} top={top(home, name)}><TopicSession academicYear={st.enrolment!.academicYear} learner={learner} target={view.competency} ctx={ctx} release={release} events={events ?? []} saveStudy={saveStudy} saveStart={() => save(make.topicStart(ctxOf(),view.competency,release,st.enrolment!.academicYear))} savePlan={minutes => save(make.sessionPlan(ctxOf(), view.competency, minutes, release,st.enrolment!.academicYear))} /></Shell>;
+    return <Shell paper banner={banner} error={error} top={top(home, name)}><button className="secondary" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>Open this lesson</button><p className="small muted">This starting-point check is optional. You can learn the chapter first.</p><TopicSession academicYear={st.enrolment!.academicYear} learner={learner} target={view.competency} ctx={ctx} release={release} events={events ?? []} saveStudy={saveStudy} saveStart={() => save(make.topicStart(ctxOf(),view.competency,release,st.enrolment!.academicYear))} savePlan={minutes => save(make.sessionPlan(ctxOf(), view.competency, minutes, release,st.enrolment!.academicYear))} /></Shell>;
   if (view.name === "module")
     return (
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
+        <button className="secondary" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>Open this lesson</button>
         <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
           <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} />
         </KeyboardPractice>
@@ -409,13 +414,15 @@ function App() {
       </div>
       {showPathway && <section className="next" aria-label="Learning pathway">
         <h2>Your learning goal</h2>
-        <p>Choose a supported topic. We will check its prerequisites and guide you toward it. Your starting grade is not a ceiling. This opt-in uses the trusted grader for new answers; earlier marks stay unchanged. Demonstration content remains labelled; choosing a goal awards no mastery.</p>
+        <p>Choose a topic and open its lesson now. Prerequisite checks recommend supporting practice; they do not lock lessons. Your starting grade is not a ceiling. Earlier marks stay unchanged, and opening a lesson or choosing a goal awards no mastery. Demonstration content remains labelled.</p>
+        <p className="small muted">Using a learning goal opts new answers into the trusted grader and skill-evidence policy. Opening a lesson alone does not change that policy.</p>
         {st.records.pathway?.active && <p>Current goal: {graph.get(st.records.pathway.target).name}</p>}
         <label>Target topic<select aria-label="Target topic" value={pathwayTarget} onChange={(e) => setPathwayTarget(e.target.value)}><option value="">Choose a topic</option>{pathwayChoices.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
+        <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => setView({ name: "curriculum-practice", competency: pathwayTarget, stage: "teaching", back: { name: "year" } })}>Open selected lesson</button>
         <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => save(make.pathway(ctxOf(), pathwayTarget))}>Use this learning goal</button>
         {st.records.pathway?.active && <button className="secondary" disabled={saving} onClick={() => save(make.pathway(ctxOf(), st.records.pathway!.target, false))}>Return to my year plan</button>}
       </section>}
-      {st.records.pathway?.active && <p className="small muted">Year totals summarize answer evidence. Your learning goal also checks skill coverage and unresolved diagnosed gaps before progressing.</p>}
+      {st.records.pathway?.active && <p className="small muted">Year totals summarize answer evidence. Recommendations and competency claims consider skill coverage and diagnosed gaps. Your chapters remain open for teaching.</p>}
       <div className="stats" role="list" aria-label="This year so far">
         <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
         <div className="stat shown" role="listitem"><b>{sum.shown}</b><span>Shown on your own</span></div>

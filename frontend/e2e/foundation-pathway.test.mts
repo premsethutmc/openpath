@@ -14,8 +14,9 @@ import { hypotheses, investigateContext } from '../../packages/learning/src/hypo
 import { withDecisions } from '../../packages/learning/src/records';
 const root=fileURLToPath(new URL('../dist-english/',import.meta.url));
 import { geometryTask } from '../../packages/learning/src/geometry-task';
+const accessOnly=process.env.PATHWAY_ACCESS_ONLY==='1';
 const geometryOnly=process.env.PATHWAY_GEOMETRY_ONLY==='1';
-const target=process.env.PATHWAY_TARGET??'MATH.number.addition-regroup';
+const target=process.env.PATHWAY_TARGET??(accessOnly?'MATH.algebra.linear-equations':'MATH.number.addition-regroup');
 const port=4197, api=process.env.PATHWAY_API??'http://127.0.0.1:8197';
 const server=http.createServer((req,res)=>{
  if(req.url?.startsWith('/api/')){const proxy=http.request(new URL(req.url,api),{method:req.method,headers:req.headers},r=>{res.writeHead(r.statusCode!,r.headers);r.pipe(res)});proxy.on('error',()=>res.writeHead(502).end());req.pipe(proxy);return;}
@@ -25,6 +26,8 @@ const server=http.createServer((req,res)=>{
 await new Promise<void>(r=>server.listen(port,'127.0.0.1',r));
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH??'/usr/bin/chromium',args:['--no-sandbox']});
 const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage();
+// Full board curriculum renders more content than the small synthetic pathway fixture.
+if(accessOnly)page.setDefaultTimeout(90_000);
 const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
 async function call(path:string,body?:unknown){return page.evaluate(async({path,body})=>{const token=document.cookie.match(/(?:^|; )csrftoken=([^;]*)/)?.[1]??'';const r=await fetch('/api'+path,{method:body?'POST':'GET',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRFToken':decodeURIComponent(token)},...(body?{body:JSON.stringify(body)}:{})});return {status:r.status,data:await r.json().catch(()=>null)};},{path,body});}
 try{
@@ -32,12 +35,58 @@ try{
  const email=`foundation-${Date.now()}@example.org`,password='synthetic-foundation-browser-passphrase';
  assert.equal((await call('/account/register/',{email,password,consent:true})).status,201);
  const pupil=await call('/pupils/',{display_name:'Synthetic foundation journey',consent:true});assert.equal(pupil.status,201);
- const id=pupil.data.id,r=latestReleases.find(r=>r.grade===1)!;
- const enrol={kind:'learning_record',id:`enrol-${Date.now()}`,at:new Date().toISOString(),learnerId:id,sessionId:`learn:${id}:setup`,record:'enrol',grade:1,academicYear:'2026-27',curriculum:{id:r.id,version:r.version,hash:r.hash}};
+ const id=pupil.data.id,r=latestReleases.find(r=>r.grade===(accessOnly?7:1)&&(!accessOnly||r.id.startsWith('cbse-')))! ;
+ const enrol={kind:'learning_record',id:`enrol-${Date.now()}`,at:new Date().toISOString(),learnerId:id,sessionId:`learn:${id}:setup`,record:'enrol',grade:r.grade,academicYear:'2026-27',curriculum:{id:r.id,version:r.version,hash:r.hash}};
  assert.equal((await call(`/pupils/${id}/events/`,{subject:'mathematics',seq:0,event:enrol})).status,201);
  await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&foundation=1`);
  await page.getByLabel('Target topic',{exact:true}).selectOption(target);await page.getByRole('button',{name:'Use this learning goal'}).click();
  await page.getByText('Current goal:',{exact:false}).waitFor();
+ if(accessOnly) {
+  const before=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+  const state=learnerState(id,withDecisions(before.events,before.decisions??{}),Date.now());
+  assert.notEqual(state.next?.competency,target,'missing prerequisites still recommend support');
+  assert.equal(state.evidence(target).status,'not_started');
+  // Failure to save exposure must keep teaching readable and preserve an honest retry.
+  await page.route('**/api/pupils/*/events/',route=>route.request().method()==='POST'?route.abort():route.continue(),{times:1});
+  await page.getByRole('button',{name:'Open selected lesson',exact:true}).click();
+  await page.locator('.teaching-head').waitFor();
+  await page.getByRole('button',{name:'Retry saving lesson',exact:true}).waitFor();
+  await page.getByRole('complementary',{name:'Optional supporting lesson'}).waitFor();
+  assert.ok(await page.locator('.teaching-block').count());
+  assert.equal(await page.locator('.lesson-stages button').nth(2).isDisabled(),true);
+  await Promise.all([page.waitForResponse(r=>r.url().includes('/events/')&&r.request().method()==='POST'),page.getByRole('button',{name:'Retry saving lesson',exact:true}).click()]);
+  const taught=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+  assert.ok(taught.events.some((e:any)=>e.record==='teach'&&e.competency===target&&e.rule==='foundation-lesson-review@1'));
+  assert.equal(taught.events.filter((e:any)=>e.record==='attempt').length,0,'opening teaching invents no answers');
+  const after=learnerState(id,withDecisions(taught.events,taught.decisions??{}),Date.now());
+  assert.ok(!['independent','transfer','verified'].includes(after.evidence(target).status));
+  // Optional support can be declined; proceed directly to this chapter's practice.
+  await page.getByRole('button',{name:'Practice this concept',exact:true}).click();
+  const card=page.locator('[data-qid]');await card.waitFor();const q=question((await card.getAttribute('data-qid'))!);
+  if(q.type==='choice')await page.getByRole('radio').nth('ABCD'.indexOf(q.answer)).click();else await page.getByLabel('Your answer',{exact:true}).fill(q.answer);
+  await page.getByRole('button',{name:'Check',exact:true}).click();await page.getByText('Right.',{exact:true}).waitFor();
+  const saved=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+  const records=withDecisions(saved.events,saved.decisions??{});
+  const result=learnerState(id,records,Date.now());
+  assert.ok(result.records.attempts.at(-1)?.solution,'saved teaching marks subsequent work assisted');
+  assert.ok(!['independent','transfer','verified'].includes(result.evidence(target).status));
+  await Promise.all([page.waitForResponse(r=>r.url().includes('/events/')&&r.request().method()==='POST'),page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&skill=${target}&practice=curriculum`)]);
+  await page.getByRole('article',{name:'Curriculum practice'}).waitFor();
+  const reload=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+  assert.equal(reload.count,saved.count+1,'resumed practice saves assistance in the new session');
+  await page.getByRole('button',{name:'Next question',exact:true}).click();
+  const nextCard=page.locator('[data-qid]');await nextCard.waitFor();const nextQ=question((await nextCard.getAttribute('data-qid'))!);
+  if(nextQ.type==='choice')await page.getByRole('radio').nth('ABCD'.indexOf(nextQ.answer)).click();else await page.getByLabel('Your answer',{exact:true}).fill(nextQ.answer);
+  await page.getByRole('button',{name:'Check',exact:true}).click();await page.getByText('Right.',{exact:true}).waitFor();
+  const resumed=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+  assert.equal(learnerState(id,withDecisions(resumed.events,resumed.decisions??{}),Date.now()).records.attempts.at(-1)?.solution,true);
+  assert.deepEqual(learnerState(id,withDecisions([...reload.events].reverse(),reload.decisions??{}),Date.now()).next,result.next);
+  await page.getByRole('button',{name:'Return to teaching',exact:true}).click();
+  await page.locator('.teaching-head').waitFor();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+  assert.deepEqual(errors,[]);
+  console.log(JSON.stringify({passed:true,grade:7,target,missingPrerequisites:true,teachingOpen:true,supportOptional:true,failedSaveRetried:true,assisted:true,persistence:true,replay:true,phone:'390x844'}));
+ } else {
  const visited=new Set<string>();let attempted=0;
  if(!geometryOnly) {
  for(let step=0;step<90;step++){
@@ -136,4 +185,5 @@ try{
  }
  await page.screenshot({path:'/tmp/pathway-browser-shots/geometry-working.png',fullPage:true});
  assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,topics:[...visited],attempted,events:saved.count,phone:'390x844',freshLogin:true,gapFallback:process.env.PATHWAY_GAP_CHECK==='1',geometryWorking:attempt.decision.working.status,gradingPolicy:attempt.decision.policy}));
-}finally{await context.close();await browser.close();server.close();}
+}
+}catch(error){console.error(await page.locator('body').innerText());throw error;}finally{await context.close();await browser.close();server.close();}

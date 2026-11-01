@@ -1,5 +1,7 @@
 # Shared mathematics foundation — local implementation
 
+Teaching-first correction: [chapter access, optional support and honest evidence](TEACHING-ACCESS.md).
+
 Release-blocker continuation: [typecheck and frozen-replay corrections](TYPECHECK-AND-REPLAY.md).
 
 Publication follow-up: [draft PR and CI correction](PUBLICATION.md). Earlier phase reports retain their historical no-publication statements.

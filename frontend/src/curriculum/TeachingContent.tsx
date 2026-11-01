@@ -3,7 +3,7 @@ import { moduleFor, needsMarking, question } from "../../../packages/learning/sr
 import { problemOf } from "../../../packages/learning/src/families";
 import { modulePhasePool } from "../../../packages/learning/src/library";
 import { SHOWCASE, teachingLesson, type LessonBlock } from "../../../packages/learning/src/teaching-contract";
-import { teachingMode } from "../../../packages/learning/src/explanation-review";
+import { teachingMode, contentEligibility } from "../../../packages/learning/src/explanation-review";
 import { teachingScopeFor } from "../../../packages/learning/src/teaching-presentation";
 import { Figure } from "../year/Figure";
 import { ProgressiveWorkedExample, RepresentationRenderer, TeachingVisualRenderer } from "./TeachingPrimitives";
@@ -51,8 +51,14 @@ export function teachingPracticeIds(competency: string) {
   return lessonFor(competency)?.practice ?? [];
 }
 
+/** Attribute exposure only to an explanation included by the existing lesson review filter. */
+export function teachingExposureStrategy(competency: string) {
+  const module = moduleFor(competency);
+  return module?.strategies.find((s) => contentEligibility(module, s, { competency, usage: "lesson" }).eligible)?.id ?? null;
+}
+
 /** Shared teaching-first content for preview and authenticated learner journeys. */
-export function TeachingContent({ competency, topic, onPractice, resumeKey }: { competency: string; topic: TopicCopy; onPractice: () => void; resumeKey?: string }) {
+export function TeachingContent({ competency, topic, onPractice, practiceDisabled = false, resumeKey }: { competency: string; topic: TopicCopy; onPractice: () => void; practiceDisabled?: boolean; resumeKey?: string }) {
   const module = moduleFor(competency);
   const scope = useMemo(() => module ? teachingScopeFor(module) : null, [module]);
   const lesson = useMemo(() => lessonFor(competency), [competency]);
@@ -79,7 +85,7 @@ export function TeachingContent({ competency, topic, onPractice, resumeKey }: { 
     <section className="practice-invitation">
       <h3>Ready to try it?</h3>
       <p>Work through one question at a time. You can return to this explanation whenever you need it.</p>
-      <button className="primary" type="button" disabled={!primaryQ} onClick={onPractice}>Practice this concept</button>
+      <button className="primary" type="button" disabled={!primaryQ || practiceDisabled} onClick={onPractice}>Practice this concept</button>
     </section>
   </main>;
 }

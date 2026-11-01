@@ -923,7 +923,7 @@ function TopicPlan({ ids, r, skillOf, route, learnerId }: { learnerId: string; i
               {r.competencies[next].name}
             </button>
           </p>
-          {contentOf(r.competencies[next]).learn && <p><a className="primary" href={r.release.grade === 7 ? `/year/?learner=${encodeURIComponent(learnerId)}&skill=${encodeURIComponent(r.competencies[next].evidenceTarget)}&diagnostic=topic` : lessonHref(learnerId, r.competencies[next].evidenceTarget)}>{r.release.grade === 7 ? "Start diagnostic" : lessonStarted(learnerId, r.competencies[next].evidenceTarget) ? "Continue learning" : "Start learning"}</a></p>}
+          {contentOf(r.competencies[next]).learn && <p><a className="primary" href={lessonHref(learnerId, r.competencies[next].evidenceTarget)}>{lessonStarted(learnerId, r.competencies[next].evidenceTarget) ? "Continue learning" : "Start learning"}</a></p>}
         </div>
       ) : null}
       <div className="small muted">
