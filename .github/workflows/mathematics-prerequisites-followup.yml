@@ -58,8 +58,8 @@ jobs:
           cd frontend
           CHROMIUM_PATH='' node --import tsx --test e2e/mathematics-foundation.test.mjs e2e/mathematics-journey.test.mjs
   legacy-exact-research:
-    # Node 24's two known exact-hash failures remain real failures, not skips or rewritten baselines.
-    # Separate jobs let mathematics validation finish while the portability limitation stays visible.
+    # Both runtimes replay the original numerical profile through frozen-replay-runtime@1.
+    # Frozen expected hashes remain unchanged; unsupported runtime profiles fail explicitly.
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
