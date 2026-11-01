@@ -22,7 +22,7 @@ export function questionSpec(qid: string, o: { feedback?: FeedbackState; guide?:
     locale: "en",
     layout: { panels: ["question", "input", "feedback", "nav", ...(o.progress ? (["progress"] as const) : [])] },
     // D1: a question whose task the derivation authority reads also takes working lines, judged by the trusted grader
-    input: choices ? { type: "multiple-choice", choices } : taskStatement(qid) !== null ? { type: "numeric", placeholder: "x = ?   or working: 3x = 15; x = 5", showKeypad: true, acceptsWorking: true } : { type: "numeric", placeholder: "x = ?", showKeypad: true },
+    input: choices ? { type: "multiple-choice", choices } : taskStatement(qid) !== null ? { type: "numeric", placeholder: "Answer or steps", showKeypad: true, acceptsWorking: true } : { type: "numeric", placeholder: "Your answer", showKeypad: true },
     feedback: o.feedback ?? { level: "none", verified: false },
     hints: noHints,
     nav: { canSubmit: true, canSkip: false, canGoBack: false, canRequestHint: false, canShowWorking: false },

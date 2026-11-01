@@ -15,6 +15,7 @@ try {
   const page=await browser.newPage({viewport:{width:390,height:844}});
   await page.goto(`http://127.0.0.1:${server.address().port}/?foundation=1&start=${encodeURIComponent(start)}`);
   assert.equal(await page.evaluate(()=>!!window.__slice.flow.session.foundation),true);
+  assert.ok(!(await page.locator('input').first().getAttribute('placeholder')).includes('x ='));
   const a=await page.evaluate(q=>window.__slice.answer(q),start);
   await page.locator('input').first().fill(a);
   await page.getByRole('button',{name:/^check$/i}).dblclick();
