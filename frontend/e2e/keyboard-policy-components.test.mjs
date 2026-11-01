@@ -31,3 +31,42 @@ test('drawing tasks remain unavailable, not converted to final answers; archived
         await browser.close();
     }
 });
+
+test('working disclosure saves activation synchronously and preserves drafts through reload and keyboard toggles', async () => {
+    const b = await build({ stdin: { loader: 'tsx', resolveDir: process.cwd(), contents: `
+ import {createRoot} from 'react-dom/client';
+ import {Ask} from './src/year/Learn';
+ import {moduleFor} from '../packages/learning/src/content';
+ const qid=moduleFor('MATH.number.fraction-add-like').diagnostics[0];
+ createRoot(document.getElementById('root')).render(<Ask qid={qid} activity="diagnostic" resumeKey="disclosure-regression" ctx={{saving:false,answer:async()=>false}}/>);
+ ` }, jsx: 'automatic', bundle: true, write: false, format: 'esm', target: 'es2022' });
+    const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
+    try {
+        const page = await browser.newPage();
+        await page.route('**/disclosure.html', r => r.fulfill({ contentType: 'text/html', body: '<!doctype html><div id="root"></div><script type="module" src="/disclosure.js"></script>' }));
+        await page.route('**/disclosure.js', r => r.fulfill({ contentType: 'text/javascript', body: b.outputFiles[0].text }));
+        await page.goto('http://localhost/disclosure.html');
+        await page.locator('details.working summary').waitFor();
+        // Navigation can follow activation before the queued native toggle event.
+        // The saved cursor must already reflect the learner's action.
+        assert.equal(await page.evaluate(() => {
+            document.querySelector('details.working summary').click();
+            return localStorage.getItem('disclosure-regression:working-open');
+        }), 'true');
+        const working = page.getByRole('textbox', {name:'Your working', exact:true});
+        await working.fill('1 + 2 = 3');
+        await page.reload();
+        assert.equal(await working.inputValue(), '1 + 2 = 3');
+        const summary = page.locator('details.working summary');
+        await summary.focus();
+        await page.keyboard.press('Enter');
+        await working.waitFor({state:'hidden'});
+        await page.reload();
+        await summary.waitFor();
+        assert.equal(await page.locator('details.working').getAttribute('open'), null);
+        await summary.focus();
+        await page.keyboard.press('Space');
+        assert.equal(await working.inputValue(), '1 + 2 = 3');
+        assert.equal(await page.evaluate(() => localStorage.getItem('disclosure-regression:working-open')), 'true');
+    } finally { await browser.close(); }
+});

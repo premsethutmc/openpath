@@ -207,8 +207,10 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       <AnswerInput q={q} value={value} setValue={setValue} disabled={ctx.saving} />
       {clarify && <p className="small" role="status">{clarify}</p>}
       {workable && (
-        <details className="working" open={workingOpen} onToggle={e=>setWorkingOpen(e.currentTarget.open)}>
-          <summary>Show your working (optional)</summary>
+        <details className="working" open={workingOpen}>
+          {/* Save activation before a queued native toggle can race editing/reload.
+              Summary still supplies native focus and Enter/Space activation. */}
+          <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>Show your working (optional)</summary>
           <p className="small">{geometryTask(qid)?.labels}</p>
           <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />
           <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>
