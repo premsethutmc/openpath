@@ -65,7 +65,7 @@ export function workingFeedback(d: GradingDecision | null | undefined): { messag
     const v = w.substitution?.variable ?? "x";
     const why = fi.lost !== null ? `${v} = ${shown(fi.lost)} makes ${shown(fi.from)} true but not ${shown(fi.text)}` : fi.gained !== null ? `${v} = ${shown(fi.gained)} makes ${shown(fi.text)} true but not ${shown(fi.from)}` : "it does not follow from the line before";
     parts.push(`${d.verdict === "correct" ? "But a step in your working is not right. " : ""}The first step that does not follow is ${shown(fi.text)}: ${why}, so this step changed the solution.`);
-  } else if (w.status === "unsupported") parts.push("Your working could not be checked automatically, so it is not marked right or wrong. Writing each step as an equation on its own line, ending with the answer, lets it be checked.");
+  } else if (w.status === "unsupported") parts.push("Your working is saved and has not been marked right or wrong. Show an intermediate step and explain the rule you used. If this method is still unsupported, use the lesson or a fresh practice question; no method mastery is claimed.");
   const steps: WorkingStep[] = w.status === "none" ? [] : w.lines.map((l, i) => {
     const ok = l.status.startsWith("certified") && i < w.replayedLines && w.status !== "answer-only";
     const bad = fi?.index === i;

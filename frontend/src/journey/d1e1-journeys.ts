@@ -100,7 +100,7 @@ export const DE1_JOURNEYS: { id: string; title: string; run: () => DE1Trace }[] 
     const s = session("J17", LIN.slice(0, 3).map((q) => rw(q, { working: workingFor(q, "invalid") })));
     // the same learner's events as they would have been stored before D1 (no working verdict) and under authority @3
     const pre = stored(s).map((e) => { const d = (e as { decision?: { working?: unknown } }).decision; if (!d) return e; const { working: _w, ...rest } = d as Record<string, unknown>; return { ...e, decision: rest } as LearningRecord; });
-    const old = stored(s).map((e) => { const d = (e as { decision?: { working?: { versions?: object } } }).decision; return d?.working ? ({ ...e, decision: { ...d, working: { ...d.working, versions: { ...(d.working.versions ?? {}), authority: "openpath-derivation-authority@3" } } } } as unknown as LearningRecord) : e; });
+    const old = stored(s).map((e) => { const d = (e as { decision?: { working?: { versions?: object } } }).decision; return d?.working ? ({ ...e, decision: { ...d, working: { ...d.working, provenance: undefined, versions: { ...(d.working.versions ?? {}), authority: "openpath-derivation-authority@3" } } } } as unknown as LearningRecord) : e; });
     const t = trace("J17", "Historical event replay", s, stored(s));
     const pPre = projectFromEvents(s.learnerId, pre, s.now), pOld = projectFromEvents(s.learnerId, old, s.now);
     const two = (p: Projection) => p.subSkills.find((x) => x.id === "linear-equations.two-step@1")!;

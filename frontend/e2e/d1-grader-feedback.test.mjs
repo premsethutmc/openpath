@@ -21,11 +21,11 @@ const CASES = [
   ["D", "3x = 15; x = 4", "Not quite right", ["The first step that does not follow is x = 4", "x = 5 makes 3x = 15 true but not x = 4", "First step that does not follow", "Checked: follows from the line before"], []],
   ["E", "3x = 16; x = 16/3", "Not quite right", ["The first step that does not follow is 3x = 16", "x = 5 makes 3x = 19 − 4 true but not 3x = 16"], []],
   ["F", "3x = 15", "Not marked", ["Your working is right so far", "It is not finished"], ["Not quite right", "is not the solution"]],
-  ["G", "3x = 15 => x = 5; x = 5", "Correct", ["could not be checked automatically, so it is not marked right or wrong"], ["first step that does not follow", "Every line of your working was checked"]],
+  ["G", "3x = 15 => x = 5; x = 5", "Correct", ["Your working is saved and has not been marked right or wrong", "Show an intermediate step", "no method mastery is claimed"], ["first step that does not follow", "Every line of your working was checked"]],
 ];
 let base, server;
 const seen = [];
-test.before(() => new Promise((ok) => { server = http.createServer((q, r) => { try { const p = q.url === "/" || q.url.startsWith("/?") ? "index.html" : q.url.slice(1).split("?")[0]; r.writeHead(200, { "content-type": types[extname(p)] ?? "text/plain" }); r.end(readFileSync(join(dist, p))); } catch { r.writeHead(404).end(); } }).listen(0, () => { base = `http://localhost:${server.address().port}`; ok(); }); mkdirSync(shots, { recursive: true }); }));
+test.before(() => new Promise((ok) => { server = http.createServer((q, r) => { try { const p = q.url === "/" || q.url.startsWith("/?") ? "index.html" : q.url.slice(1).split("?")[0]; const body = readFileSync(join(dist, p)); r.writeHead(200, { "content-type": types[extname(p)] ?? "text/plain" }); r.end(body); } catch { r.writeHead(404).end(); } }).listen(0, () => { base = `http://localhost:${server.address().port}`; ok(); }); mkdirSync(shots, { recursive: true }); }));
 test.after(() => { server.close(); writeFileSync(join(shots, "d1-screens.json"), JSON.stringify(seen, null, 1) + "\n"); });
 for (const [id, typed, label, must, never] of CASES) for (const [name, viewport] of [["desktop", { width: 1366, height: 800 }], ["mobile", { width: 390, height: 844 }]])
   test(`case ${id} "${typed}" (${name})`, async () => {

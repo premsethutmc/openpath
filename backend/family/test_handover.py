@@ -99,3 +99,22 @@ class HandoverPersistence(LearningBase):
         acks = fresh.get(f'/api/pupils/{self.pupil_id}/handover-acknowledgements/').json()['acknowledgements']
         self.assertEqual(len(events), len(run['events']))
         (d / 'stored.json').write_text(json.dumps({'learnerId': self.pupil_id, 'events': events, 'acknowledgements': acks}))
+
+class ReentryEligibilityTests(LearningBase):
+    def test_forged_reentry_does_not_consume_allowance_or_save_event(self):
+        self.assertEqual(self.save(self.enrol()).status_code, 201)
+        before = len(self.records())
+        for context in ('reentry:MATH.algebra.linear-equations', 'reentry:MATH.other'):
+            response = self.save(self.attempt('eq-d1', '2', context=context))
+            self.assertEqual(response.status_code, 400, response.content)
+            self.assertEqual(len(self.records()), before)
+        self.assertEqual(self.save(self.attempt('eq-d1', '2')).status_code, 201)
+
+    def test_lesson_review_is_recorded_as_assistance(self):
+        from .learning import content
+        q = content()['questions']['eq-d1']
+        m = content()['modules'][q['competency']]
+        self.assertEqual(self.save(self.enrol()).status_code, 201)
+        self.assertEqual(self.save(self.rec('teach', competency=q['competency'], strategy=m['strategies'][0]['id'], rule='lesson-review')).status_code, 201)
+        self.assertEqual(self.save(self.attempt('eq-d1', '2')).status_code, 201)
+        self.assertEqual(self.records()[-1]['hints'], 1)

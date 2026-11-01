@@ -1,15 +1,3 @@
-export function canonicalOrder<T>(events: readonly T[]): T[] {
-  // canonical order before the existing reader counts first exposures: the instant of each record, then its id (code-unit order). The store's
-  // own order (seq) is the same as time order for server-stamped records; this makes the projection independent of delivery order.
-  const at = (e: unknown) => { const v = Date.parse(String((e as { at?: unknown })?.at)); return Number.isNaN(v) ? Infinity : v; };
-  const idOf = (e: unknown) => String((e as { id?: unknown })?.id ?? "");
-  // D1 integration (from the alternative E1): equal (instant, id) pairs are ordered by their canonical content, so duplicates cannot reorder by
-  // delivery position
-  const canon = (v: unknown): string => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon((v as Record<string, unknown>)[k])}`).join(",")}}` : JSON.stringify(v) ?? "null");
-  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
-  return Array.isArray(events) ? events.map((e) => ({ e, t: at(e), i: idOf(e), c: canon(e) })).sort((x, y) => x.t - y.t || cmp(x.i, y.i) || cmp(x.c, y.c)).map((x) => x.e) : [];
-}
-
 /**
  * Sub-skill evidence projection, domain-neutral (G5: extracted from Workstream E1 without changing its behaviour). SHADOW, non-authoritative.
  *
@@ -23,11 +11,25 @@ export function canonicalOrder<T>(events: readonly T[]): T[] {
  *   - method evidence: ONLY the trusted grader's working verdict recorded by the SERVER (grading-decision@1, working-assessment@1);
  *   - identity: ONLY the trusted generator id (gen:<family>:<params>[:mc|:w]); question text is never read; unknown is never credited.
  */
+import { taskStatement, type WorkingProvenance } from "./grading/working";
+import { question } from "./content";
 import { AUTHORITY_VERSION } from "./derivation-authority";
 import { DAY, INDEPENDENT_MIN, RETENTION_CHECK, RETENTION_DAYS, independentAttempt, rightAnswer, type RetentionCycle, type SkillEvidence } from "./evidence";
 import { FAMILIES, exposureKey, problemOf } from "./families";
 import { moduleFor } from "./content";
 import { readRecords, type Attempt, type LearnerRecords } from "./records";
+
+export function canonicalOrder<T>(events: readonly T[]): T[] {
+  // canonical order before the existing reader counts first exposures: the instant of each record, then its id (code-unit order). The store's
+  // own order (seq) is the same as time order for server-stamped records; this makes the projection independent of delivery order.
+  const at = (e: unknown) => { const v = Date.parse(String((e as { at?: unknown })?.at)); return Number.isNaN(v) ? Infinity : v; };
+  const idOf = (e: unknown) => String((e as { id?: unknown })?.id ?? "");
+  // D1 integration (from the alternative E1): equal (instant, id) pairs are ordered by their canonical content, so duplicates cannot reorder by
+  // delivery position
+  const canon = (v: unknown): string => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon((v as Record<string, unknown>)[k])}`).join(",")}}` : JSON.stringify(v) ?? "null");
+  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+  return Array.isArray(events) ? events.map((e) => ({ e, t: at(e), i: idOf(e), c: canon(e) })).sort((x, y) => x.t - y.t || cmp(x.i, y.i) || cmp(x.c, y.c)).map((x) => x.e) : [];
+}
 
 export interface SubSkillDef<Id extends string = string> { id: Id; name: string; example: string; families: string[]; competency: string; note?: string }
 /** A subject's evidence dimensions, as configuration. */
@@ -76,7 +78,7 @@ export function classifyQuestionWith<Id extends string>(config: SubSkillConfig<I
 /** the trusted method verdict of one answer, as the server recorded it (D1 working-assessment@1 status), or why there is none */
 export type Method = "method-verified" | "method-false-step" | "unsupported" | "no-method-evidence" | "partial" | "no-working" | "not-recorded" | "not-applicable";
 /** the server's stored decision, as far as this projection reads it */
-export interface StoredDecision { schema?: unknown; decidedBy?: unknown; working?: { schema?: unknown; status?: unknown; methodEvidence?: unknown; versions?: { authority?: unknown } } }
+export interface StoredDecision { schema?: unknown; decidedBy?: unknown; questionId?: unknown; attemptId?: unknown; response?: { raw?: unknown; working?: unknown }; working?: { provenance?: WorkingProvenance; schema?: unknown; status?: unknown; methodEvidence?: unknown; versions?: { authority?: unknown } } }
 /** the working verdict the SERVER recorded (records.ts serverVerdict's guard), else null */
 export function trustedWorking(d: StoredDecision | undefined | null) {
   if (!d || d.schema !== "grading-decision@1" || d.decidedBy !== "server") return null;
@@ -129,7 +131,22 @@ export interface Projection<Id extends string = string, V extends string = strin
 
 const methodFrom2 = (d: StoredDecision | undefined): Method | null => { const w = trustedWorking(d); return w ? methodFrom(w) : null; };
 const methodOf = (a: Attempt, family: string, format: string, d: StoredDecision | undefined): { method: Method; authority: string | null } => {
-  const w = trustedWorking(d);
+  let w = trustedWorking(d);
+  if (w) {
+    const p = w.provenance;
+    // Old records remain readable only on the authority's original equation contract.
+    // A server label alone cannot turn geometry entailment into method evidence.
+    const bound = (!d?.questionId || d.questionId === a.questionId)
+      && (!d?.attemptId || d.attemptId === a.id)
+      && (!d?.response || (d.response.raw === a.response && JSON.stringify(d.response.working ?? []) === JSON.stringify(a.working ?? [])));
+    const expected = !!taskStatement(a.questionId);
+    const provenance = p ? p.schema === "working-provenance@1" && p.questionId === a.questionId
+      && p.competency === question(a.questionId).competency && p.checker === "derivation-authority"
+      && p.version === w.versions?.authority
+      && (w.status !== "verified" || p.reasoning === "demonstrated")
+      && (w.status !== "invalid" || p.reasoning === "refuted") : expected;
+    if (!bound || !expected || !provenance) return { method: "unsupported", authority: null };
+  }
   if (w) return { method: methodFrom(w), authority: typeof w.versions?.authority === "string" ? w.versions.authority : null };
   if (format === "mc" || !FAMILIES.get(family)?.contract?.statement) return { method: "not-applicable", authority: null };
   // no trusted verdict was recorded (a record from before D1, or one the server did not decide): not re-judged here
@@ -235,7 +252,7 @@ export function projectSubSkillsWith<Id extends string>(config: SubSkillConfig<I
     const mv = mine.filter((p) => p.independent && p.method === "method-verified" && p.correct && !p.historicalMethod).length;
     const mf = mine.filter((p) => p.method === "method-false-step").length;
     // valid partial derivations with no final answer: the reader keeps them out of the attempts (unresolved), so they are counted here only
-    const partialWorking = (records?.unresolved ?? []).filter((u) => { const c = classifyQuestion(u.questionId); return c.kind === "mapped" && c.subSkill.id === s.id && methodFrom2(decisions?.get(u.id)) === "partial"; }).length;
+    const partialWorking = (records?.unresolved ?? []).filter((u) => { const c = classifyQuestion(u.questionId); return c.kind === "mapped" && c.subSkill.id === s.id && (() => { const d = decisions?.get(u.id); const w = trustedWorking(d); return !!taskStatement(u.questionId) && (!d?.questionId || d.questionId === u.questionId) && (!d?.attemptId || d.attemptId === u.id) && (!w?.provenance || (w.provenance.schema === "working-provenance@1" && w.provenance.version === w.versions?.authority && w.provenance.questionId === u.questionId && w.provenance.competency === question(u.questionId).competency && w.provenance.checker === "derivation-authority")) && methodFrom2(d) === "partial"; })(); }).length;
     const lastIndependentAt = ind.at(-1)?.at ?? null;
     const daysSince = lastIndependentAt ? Math.floor((now - Date.parse(lastIndependentAt)) / DAY) : null;
     base.subSkills.push({

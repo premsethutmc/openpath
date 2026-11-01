@@ -363,10 +363,25 @@ def checked_learning(event, pupil):
             visits = [e for e in prior if e.get('record') == 'study_session' and e.get('planId') == plan_id]
             if not visits or visits[-1]['phase'] == 'ended':
                 _reject('Open this study session before recording answers; a completed summary is final.')
+        if isinstance(event.get('context'), str) and event['context'].startswith('reentry:'):
+            from .kernel_grader import run
+            from .models import HandoverAcknowledgement
+            if event['context'] != f"reentry:{q['competency']}" or event['activity'] != 'diagnostic' or event['hints'] or event['solution']:
+                _reject('Re-entry must be the offered fresh question on your own.')
+            acknowledgements = [{'id': f'ack-{a.pk}', 'at': a.at.isoformat(), 'competency': a.competency, 'by': 'educator'}
+                                for a in HandoverAcknowledgement.objects.filter(pupil=pupil)]
+            reply = run([{'operation': 'reentry', 'learner': str(pupil.pk), 'competency': q['competency'],
+                          'questionId': event['questionId'], 'now': now.timestamp() * 1000,
+                          'events': prior, 'acknowledgements': acknowledgements, 'sessionId': event['sessionId']}])
+            if not reply or reply[0] != {'allowed': True}:
+                _reject('This re-entry is not available. Reload for the current next step; no allowance was used.')
         if 'context' in event and not _text(event['context'], 80):
             _reject('Invalid context.')
         if 'assessment' in event and not _assessment_ok(event['assessment'], q):
             _reject('The assessment result is malformed.')
+        if any(e.get('record') == 'teach' and e.get('rule') == 'lesson-review' and e.get('sessionId') == event['sessionId']
+               and e.get('competency') == q['competency'] for e in prior):
+            event = {**event, 'hints': max(1, event['hints'])}
         decided, decision = _decide(event, q, now)
         if decided is not None:
             event = {**event, 'assessment': decided}

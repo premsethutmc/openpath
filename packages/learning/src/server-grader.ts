@@ -1,3 +1,4 @@
+import { reentryEligibility, type ReentryRequest } from "./reentry-eligibility.ts";
 /**
  * The trusted server-side grader. It receives ONLY a question id, the student's response and permitted working (JSON on stdin); the contract
  * (expected answer, kernel object, form rules, status) is rebuilt here from the question's own definition, never taken from the request.
@@ -10,6 +11,8 @@
 import { isQuestion, question } from "./content.ts";
 import { grade, type GradingDecision } from "./grading/decision.ts";
 import { gradeProgram, isProgramQuestion, programQuestion } from "./grading/program.ts";
+
+import { assessWorkingAsync, type WorkingObservation } from "./grading/working.ts";
 
 export const SERVER_GRADER_VERSION = 2 as const;
 export interface GraderRequest { id: string; response: string; working?: string[] }
@@ -34,6 +37,17 @@ export function gradeRequest(r: GraderRequest): GraderReply {
   return { v: SERVER_GRADER_VERSION, id: r.id, known: true, credit: g.assessment.credit, verdict: g.decision.verdict, reason: g.decision.reason, source: sourceOf(g.decision), expected: question(r.id).answer, decision: g.decision, ms: ms() };
 }
 
+/** Async callers finish the working boundary before persisting a single immutable decision.
+ * The observer is server code, never a field in GraderRequest. Sync callers stay compatible. */
+export async function gradeRequestAsync(r: GraderRequest, observe?: (request: Readonly<{ questionId: string; competency: string; lines: readonly string[] }>) => Promise<WorkingObservation>): Promise<GraderReply> {
+  const reply = gradeRequest(r);
+  const d = reply.decision;
+  if (!d?.working) return reply;
+  const value = d.interpretation && "value" in d.interpretation ? d.interpretation.value : null;
+  const working = await assessWorkingAsync(d.questionId, d.response.working, d.verdict, value, observe);
+  return { ...reply, decision: { ...d, working } };
+}
+
 if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.test(process.argv[1])) {
   let raw = "";
   process.stdin.setEncoding("utf8");
@@ -41,7 +55,7 @@ if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.tes
   process.stdin.on("end", () => {
     let input: unknown;
     try { input = JSON.parse(raw); } catch { process.stdout.write(JSON.stringify({ v: SERVER_GRADER_VERSION, known: false, verdict: "unknown", credit: null, reason: "unreadable request" })); return; }
-    const out = Array.isArray(input) ? input.slice(0, 500).map((x) => gradeRequest(x as GraderRequest)) : gradeRequest(input as GraderRequest);
+    const out = Array.isArray(input) ? input.slice(0, 500).map((x) => x?.operation === "reentry" ? reentryEligibility(x as ReentryRequest) : gradeRequest(x as GraderRequest)) : gradeRequest(input as GraderRequest);
     process.stdout.write(JSON.stringify(out));
   });
 }

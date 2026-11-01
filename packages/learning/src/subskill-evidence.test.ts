@@ -220,7 +220,7 @@ describe("D1 + E1: method evidence comes only from the server-recorded working v
   });
   test("a verdict recorded under an older authority stays historical: never counted as a current verified method", () => {
     rng = 47; const qs = pick("lin", "practice", 3);
-    const events = qs.map((q, i) => { const e = ev(L, `h${i}`, T0 + i * 1e3, q, ans(q), { working: linW(q) }) as unknown as { decision: { working: { versions: { authority: string } } } }; e.decision.working.versions = { ...e.decision.working.versions, authority: "openpath-derivation-authority@3" }; return e as unknown as { kind: string }; });
+    const events = qs.map((q, i) => { const e = ev(L, `h${i}`, T0 + i * 1e3, q, ans(q), { working: linW(q) }) as unknown as { decision: { working: { provenance?: unknown; versions: { authority: string } } } }; delete e.decision.working.provenance; e.decision.working.versions = { ...e.decision.working.versions, authority: "openpath-derivation-authority@3" }; return e as unknown as { kind: string }; });
     const two = st(projectFromEvents(L, events, T0 + DAY), "linear-equations.two-step@1");
     expect([two.method.verified, two.method.historical, two.method.historicalVerified, two.method.status]).toEqual([0, 3, 3, "not-established"]);
     expect(two.status).toBe("independently-demonstrated");   // the answers themselves count exactly as recorded
@@ -253,7 +253,10 @@ describe("shadow by construction (from the alternative E1)", () => {
     for (const d of ["packages/learning/src", "frontend/src", "backend/family"]) walk(join(root, d));
     const importers = files.filter((f) => /subskill-(evidence|scenarios)|d1e1-journeys/.test(readFileSync(f, "utf8")) && !/(subskill-evidence|subskill-scenarios|d1e1-journeys)\.ts$/.test(f));
     // M1 (reviewed): the shadow gated-mastery policy and its journeys build on the projection; they are shadow modules themselves (next test)
-    const SHADOW = ["frontend/src/journey/gated-journeys.ts", "packages/learning/src/gated-mastery.ts"];
+    // The local slice now has an explicit ?foundation=1 opt-in; ordinary app entry points still do not import it.
+    const preview = readFileSync(join(root, "frontend/src/journey/slice-app.tsx"), "utf8");
+    expect(preview).toContain('get("foundation") === "1"');
+    const SHADOW = ["frontend/src/journey/gated-journeys.ts", "packages/learning/src/gated-mastery.ts", "frontend/src/journey/slice-app.tsx"];
     expect(importers.filter((f) => !/\.test\.(ts|tsx)$/.test(f)).map((f) => f.replace(root, "")).filter((f) => !SHADOW.includes(f))).toEqual([]);
   });
   test("M1: no production module imports the gated-mastery shadow policy or its journeys", async () => {

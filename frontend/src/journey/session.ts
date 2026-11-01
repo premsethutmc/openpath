@@ -1,3 +1,4 @@
+import { foundationPlan, withFoundation, type FoundationPolicy } from "../../../packages/learning/src/foundation";
 /**
  * Integration Milestone 1 vertical slice. Every step calls the real component that owns the decision (contracts.ts); the only scripted
  * thing in a run is the learner's own input. Nothing here grades, diagnoses or selects teaching itself.
@@ -16,6 +17,7 @@ import { assertOwns, type Authority, type TraceEntry } from "./contracts";
 export interface Shown { phase: ModuleState["phase"]; question: string | null; strategyId: string | null; reason: string; context?: string }
 
 export class SliceSession {
+  foundation?: FoundationPolicy;
   readonly trace: TraceEntry[] = [];
   readonly events: LearningRecord[] = [];
   readonly decisions: Record<string, ServerDecision> = {};
@@ -49,7 +51,8 @@ export class SliceSession {
    *  does: with the learner's whole evidence, except inside a recovery that is already running, as adaptive-loop.ts does) */
   next(competency: string = this.competency, o: { established?: Established | null; inRecovery?: boolean } = {}): ModuleState {
     const st = this.state();
-    const ms = moduleState(competency, st.records, st.evidence(competency), this.now, this.session, o.established ?? null, o.inRecovery ? undefined : st.evidence);
+    const ordinary = moduleState(competency, st.records, st.evidence(competency), this.now, this.session, o.established ?? null, o.inRecovery ? undefined : st.evidence);
+    const ms = this.foundation && this.foundation.config.competency === competency ? withFoundation(ordinary, foundationPlan(this.foundation, this.learnerId, this.evs(), this.now)) : ordinary;
     this.log("adaptive-engine", ms.phase === "chapter" ? "teaching-selection" : ms.phase === "recover" ? "recovery" : ms.context?.startsWith("investigate") || ms.phase === "explore" ? "investigation" : ms.phase === "retention" ? "retention-policy" : "recheck", "intervention.moduleState",
       { competency }, { phase: ms.phase, question: ms.question, strategy: ms.strategy?.id ?? null, reason: ms.reason, context: ms.context ?? null, why: ms.why ?? null });
     if (ms.phase === "chapter" && ms.strategy) {

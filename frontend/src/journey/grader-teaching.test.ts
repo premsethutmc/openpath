@@ -83,7 +83,7 @@ test("D1-06 valid partial derivation: not marked, not an attempt, flagged incomp
 test("D1-07 unsupported working: the method is not verified and not called wrong; the answer is still marked", () => {
   const s = first("D1-07");
   assert.deepEqual([s.answer.verdict, s.method?.status, s.method?.evidence, s.method?.firstInvalid, s.feedback?.level], ["correct", "unsupported", "no-method-evidence", null, "correct"]);
-  assert.match(s.feedback!.message ?? "", /could not be checked automatically, so it is not marked right or wrong/);
+  assert.match(s.feedback!.message ?? "", /working is saved and has not been marked right or wrong/);
 });
 
 test("D1-08 verified misconception -> its matching explanation -> fresh recheck with verified working", () => {

@@ -10,7 +10,9 @@ import { Figure } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
-import { needsMarking } from "../../../packages/learning/src/content";
+import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
+import { contentEligibility } from "../../../packages/learning/src/explanation-review";
+import { moduleFor, needsMarking } from "../../../packages/learning/src/content";
 import { creditOf } from "../../../packages/learning/src/grade";
 import { misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import { rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
@@ -266,7 +268,7 @@ function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
   );
 }
 
-export function Lesson({ s, onDone, saving, resumeKey }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string }) {
+export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it" }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string }) {
   const [stored, setI] = useResume(resumeKey, 0);
   const i = Number.isInteger(stored) && stored >= 0 && stored < s.screens.length ? stored : 0;
   const sc = s.screens[i];
@@ -283,7 +285,7 @@ export function Lesson({ s, onDone, saving, resumeKey }: { s: Strategy | { title
       </div>
       <div className="actions sticky">
         {i > 0 && <button className="secondary" onClick={() => setI(i - 1)}>Back</button>}
-        <button className="primary" disabled={saving} onClick={() => (last ? onDone() : setI(i + 1))}>{last ? (saving ? "Saving…" : "Try it") : "Next"}</button>
+        <button className="primary" disabled={saving} onClick={() => (last ? onDone() : setI(i + 1))}>{last ? (saving ? "Saving…" : doneLabel) : "Next"}</button>
       </div>
     </div>
   );
@@ -293,6 +295,7 @@ export function Lesson({ s, onDone, saving, resumeKey }: { s: Strategy | { title
 export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean }) {
   const [own, setOwn] = useResume<Fb | null>(resumeKey && `${resumeKey}:feedback`, null);
   const [retry, setRetry] = useResume<boolean | "hint">(resumeKey && `${resumeKey}:retry`, false);
+  const [reviewLesson, setReviewLesson] = useState(false);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
@@ -314,11 +317,15 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
       {stepper}
     </>
   );
+  const lessonModule = moduleFor(competency);
+  const reviewStrategy = lessonModule?.strategies.find((s) => teachingEligibility(lessonModule, s).eligible && contentEligibility(lessonModule, s, { competency, usage: "lesson" }).eligible);
+  const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "lesson-review")) setReviewLesson(true); }}>Review a supported lesson</button> : null;
+  if (reviewLesson && reviewStrategy) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson s={reviewStrategy} doneLabel="Return to my progress" saving={false} onDone={() => setReviewLesson(false)} /><button className="secondary" onClick={() => setReviewLesson(false)}>Return to my progress</button></div>;
   if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}</div>;
   if (sessionMode && ms.phase === "retention") return <div className="stack">{head}<p>A delayed check is reserved for a later session. Your completed work is preserved.</p><button className="primary" onClick={onExit}>Next planned competency</button></div>;
   if (sessionMode && ms.question && writtenTask(ms.question)?.answer === "drawing" && !HANDWRITING_ENABLED)
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
-  if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p><button className="secondary wide" onClick={onExit}>Back</button></div>;
+  if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p>{reviewOffer}<button className="secondary wide" onClick={onExit}>Back</button></div>;
   // the same investigation as from Practice: the wrong answer is looked into, and the skill it points to is worked on first
   if (ms.phase === "recover" && ms.original) return <div className="stack">{head}<Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded /></div>;
   if (ms.phase === "chapter" && ms.strategy)
@@ -348,6 +355,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
         {(() => { const n = scheduleNote(ms, Intl.DateTimeFormat().resolvedOptions().timeZone); return n ? <p className="small" data-handover={ms.handover?.route ?? "retention"}>{n}</p> : null; })()}
         <p className="small">On your own: {ev.independent.right} right of {ev.independent.total}. With help: {ev.assisted.right} right of {ev.assisted.total}.</p>
       </div>
+      {ms.phase === "pause" && reviewOffer}
       {!embedded && <button className="secondary wide" onClick={onExit}>{sessionMode ? "Next planned competency" : "Back to the year"}</button>}
     </div>
   );

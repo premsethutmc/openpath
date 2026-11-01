@@ -7,7 +7,9 @@
  * hiding them, the known cases where it rejects or cannot judge valid reasoning. The geometry authority is not connected to the learner
  * journey's trusted grader (server-grader / working-assessment@1); see docs/geometry-cross-domain-validation.
  */
-import { describe, expect, test } from "bun:test";
+import { describe, it as test } from "node:test";
+import assert from "node:assert/strict";
+const expect = (value: unknown) => ({ toEqual: (expected: unknown) => assert.deepEqual(value, expected), toBe: (expected: unknown) => assert.equal(value, expected) });
 import { G5_REASONING_CASES, runReasoningCases } from "./geometry-reasoning-g5";
 
 describe("G5 geometric reasoning on structured givens (the existing geometry authority)", () => {
@@ -25,11 +27,11 @@ describe("G5 geometric reasoning on structured givens (the existing geometry aut
     // a bare final claim is "verified" by the authority (entailment, not shown reasoning): recorded as accepts-unjustified; it must never be
     // read as method evidence (an authority defect if connected to method evidence, see the review)
     expect(r.find((x) => x.id === "R02")!.outcome).toBe("accepts-unjustified");
-  }, 60_000);
+  });
 
   test("no claim is accepted from a picture: a relation not given as a fact blocks the step", async () => {
     const r = await runReasoningCases();
-    expect(r.find((x) => x.id === "R11")!.verdict).not.toBe("verified");
+    assert.notEqual(r.find((x) => x.id === "R11")!.verdict, "verified");
     expect(r.find((x) => x.id === "R08")!.verdict).toBe("missing-assumption");
-  }, 60_000);
+  });
 });

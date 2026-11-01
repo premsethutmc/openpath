@@ -14,7 +14,7 @@ const dist = fileURLToPath(new URL("../dist-slice/", import.meta.url));
 const shots = process.env.SHOTS_DIR ?? fileURLToPath(new URL("../../docs/recoverable-handover/screenshots/", import.meta.url));
 const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css" };
 let base, server;
-test.before(() => new Promise((ok) => { server = http.createServer((q, r) => { try { const p = q.url === "/" || q.url.startsWith("/?") ? "index.html" : q.url.slice(1).split("?")[0]; r.writeHead(200, { "content-type": types[extname(p)] ?? "text/plain" }); r.end(readFileSync(join(dist, p))); } catch { r.writeHead(404).end(); } }).listen(0, () => { base = `http://localhost:${server.address().port}`; ok(); }); mkdirSync(shots, { recursive: true }); }));
+test.before(() => new Promise((ok) => { server = http.createServer((q, r) => { try { const p = q.url === "/" || q.url.startsWith("/?") ? "index.html" : q.url.slice(1).split("?")[0]; const body = readFileSync(join(dist, p)); r.writeHead(200, { "content-type": types[extname(p)] ?? "text/plain" }); r.end(body); } catch { r.writeHead(404).end(); } }).listen(0, () => { base = `http://localhost:${server.address().port}`; ok(); }); mkdirSync(shots, { recursive: true }); }));
 test.after(() => server.close());
 
 /** drive the scripted learner through the screen until a summary */

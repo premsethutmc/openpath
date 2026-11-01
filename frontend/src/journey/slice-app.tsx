@@ -1,3 +1,7 @@
+import { FOUNDATION_POLICY } from "../../../packages/learning/src/foundation";
+import { LINEAR_EQUATIONS_CONFIG } from "../../../packages/learning/src/subskill-evidence";
+import { TRIANGLE_PROPERTIES_CONFIG, ANGLE_PAIRS_CONFIG } from "../../../packages/learning/src/subskill-config-geometry";
+import { ADDITION_CONFIG } from "../../../packages/learning/src/subskill-config-addition";
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
 import "../math/math.css";
@@ -20,6 +24,11 @@ const start0 = new URLSearchParams(location.search).get("start");
 const tz0 = new URLSearchParams(location.search).get("tz") ?? undefined;
 const laterParam = new URLSearchParams(location.search).get("later");
 const flow = sc ? new SliceFlow(sc.start, `synthetic-browser-${sc.id}`, T0, { retry: !!sc.retry, entry: sc.entry ?? "diagnostic", ...(tz0 ? { timeZone: tz0 } : {}) }) : (start0 && isQuestion(start0) ? new SliceFlow(start0, "synthetic-browser-d1", T0) : new SliceFlow("gen:lin:2,17,11"));
+// Explicit local preview only; no production policy is activated.
+if (new URLSearchParams(location.search).get("foundation") === "1") {
+  const config = [LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ANGLE_PAIRS_CONFIG, ADDITION_CONFIG].find((c) => c.competency === flow.session.competency);
+  if (config) flow.session.foundation = { version: FOUNDATION_POLICY, config, requirements: config.core.map((skill) => ({ skill, method: false })) };
+}
 const learner = sc?.learner() ?? null;
 const asked = new Set<string>();
 let rerender: (() => void) | null = null;

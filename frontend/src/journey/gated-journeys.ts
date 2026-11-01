@@ -116,14 +116,14 @@ export function runGatedJourneys(pool: Pool): GatedTrace[] {
     // the same learner's events replayed as stored under an older authority (verdicts kept historical, never regraded) and before D1 (no verdict)
     const l = L("j14"); l.allCore();
     const ev = l.events() as unknown as (LearningRecord & { decision?: { working?: { versions?: { authority?: string } } } })[];
-    const older = ev.map((e) => (e.decision?.working ? { ...e, decision: { ...e.decision, working: { ...e.decision.working, versions: { ...e.decision.working.versions, authority: "derivation-authority@1" } } } } : e));
+    const older = ev.map((e) => (e.decision?.working ? { ...e, decision: { ...e.decision, working: { ...e.decision.working, provenance: undefined, versions: { ...e.decision.working.versions, authority: "derivation-authority@1" } } } } : e));
     const preD1 = ev.map((e) => { if (!e.decision) return e; const { decision, ...rest } = e; void decision; return rest; });
     const run = (x: readonly unknown[]) => compareMastery(l.s.learnerId, x as never, l.s.now);
     const now = run(ev), a = run(older), b = run(preD1);
     const sum = (c: Comparison) => ({ existing: c.existing.status, gated: c.proposed.gated.status, method: c.proposed["gated-method"].status, verified: c.proposed.gated.subSkills.map((s) => s.method.verified), methodStatus: c.proposed.gated.subSkills.map((s) => s.method.status) });
     // an older authority's FALSE-STEP verdict: kept as recorded (never regraded away), so the answer stays contradicted
     const k = new Learner("j14b", pool); for (const f of ["lboth", "lbrk", "auleq"]) k.right(k.fresh(f, "practice", 2)); k.right(k.fresh("lin", "practice", 3), { working: "invalid" });
-    const kOld = (k.events() as unknown as (LearningRecord & { decision?: { working?: { versions?: { authority?: string } } } })[]).map((e) => (e.decision?.working ? { ...e, decision: { ...e.decision, working: { ...e.decision.working, versions: { ...e.decision.working.versions, authority: "derivation-authority@1" } } } } : e));
+    const kOld = (k.events() as unknown as (LearningRecord & { decision?: { working?: { versions?: { authority?: string } } } })[]).map((e) => (e.decision?.working ? { ...e, decision: { ...e.decision, working: { ...e.decision.working, provenance: undefined, versions: { ...e.decision.working.versions, authority: "derivation-authority@1" } } } } : e));
     const kc = compareMastery(k.s.learnerId, kOld as never, k.s.now).proposed.gated;
     out.push(traceOf(14, "Historical evidence replay (current authority, older authority, before D1)", l, { current: sum(now), olderAuthority: sum(a), beforeD1: sum(b),
       olderAuthorityFalseStep: { gated: kc.status, twoStep: kc.subSkills[0].status, twoStepMethod: kc.subSkills[0].method.status },

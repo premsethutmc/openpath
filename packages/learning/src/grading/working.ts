@@ -25,6 +25,9 @@ export const WORKING_ASSESSMENT = "working-assessment@1" as const;
 export type WorkingStatus = "none" | "answer-only" | "verified" | "partial" | "invalid" | "unsupported";
 export interface WorkingAssessment {
   schema: typeof WORKING_ASSESSMENT;
+  /** Issued inside the trusted grader; never accepted from a submission. */
+  provenance?: WorkingProvenance;
+  observation?: WorkingObservation & { methodAuthority: false };
   /** the task as the authority read it (from the question's own definition), or null when the question has none */
   statement: string | null;
   status: WorkingStatus;
@@ -81,7 +84,7 @@ function substitute(statement: string, value: string): WorkingAssessment["substi
  * The working assessment for one submission, or undefined when the question has no task statement AND no working was submitted (so a
  * decision for every other kind of question is exactly what it was). `verdict` and `value` are the answer decision's own (read-only).
  */
-export function assessWorking(qid: string, working: readonly string[], verdict: string, value: string | null): WorkingAssessment | undefined {
+function assessWorkingLegacy(qid: string, working: readonly string[], verdict: string, value: string | null): WorkingAssessment | undefined {
   const statement = taskStatement(qid);
   const lines = working.map((l) => String(l ?? "").trim()).filter((l) => l.length > 0);
   if (!statement && !lines.length) return undefined;
@@ -126,6 +129,57 @@ export function assessWorking(qid: string, working: readonly string[], verdict: 
   return { ...base, ...common, workingAnswer: null, agreesWithResponse: null, firstInvalid: null, certificates: [], replayed: false, replayedLines: 0, status: "unsupported", methodEvidence: "no-method-evidence", completeness: ev.completeness === "complete" ? "complete" : "incomplete", reason: auth.reason };
 }
 
+/** The common boundary separates a checked answer from demonstrated reasoning.
+ * The competency is resolved from content, never selected by the client. */
+export interface WorkingProvenance {
+  schema: "working-provenance@1";
+  questionId: string;
+  competency: string;
+  checker: string;
+  version: string;
+  reasoning: "demonstrated" | "refuted" | "not-established";
+}
+export function assessWorking(qid: string, working: readonly string[], verdict: string, value: string | null): WorkingAssessment | undefined {
+  const w = assessWorkingLegacy(qid, working, verdict, value);
+  if (!w) return w;
+  return { ...w, provenance: {
+    schema: "working-provenance@1", questionId: qid, competency: question(qid).competency,
+    checker: w.statement ? "derivation-authority" : "unsupported-domain",
+    version: w.versions.authority,
+    reasoning: w.methodEvidence === "method-verified" && w.replayed ? "demonstrated"
+      : w.status === "invalid" && w.firstInvalid ? "refuted" : "not-established",
+  } };
+}
+
+/** An asynchronous checker may provide observations before it has been certified as
+ * a reasoning authority. Its verdict NEVER changes answer credit or method evidence.
+ * This is the safe integration path for geometry's Python checker, whose entailment
+ * checks cannot yet establish the learner's justification. No per-case exceptions. */
+export interface WorkingObservation {
+  checker: string;
+  version: string;
+  questionId: string;
+  competency: string;
+  conclusion: "entailed" | "refuted" | "unknown";
+}
+export async function assessWorkingAsync(qid: string, working: readonly string[], verdict: string, value: string | null,
+  observe?: (request: Readonly<{ questionId: string; competency: string; lines: readonly string[] }>) => Promise<WorkingObservation>,
+): Promise<WorkingAssessment | undefined> {
+  const w = assessWorking(qid, working, verdict, value);
+  if (!w || w.status !== "unsupported" || !observe) return w;
+  // Snapshot the request: callbacks cannot rewrite submitted work or choose its task.
+  const request = Object.freeze({ questionId: qid, competency: question(qid).competency, lines: Object.freeze([...working]) });
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const observation = await Promise.race([observe(request), new Promise<never>((_, reject) => { timer = setTimeout(() => reject(new Error("checker timeout")), 1000); })]);
+    if (observation.questionId !== qid || observation.competency !== request.competency) return w;
+    // Even "entailed" only establishes the conclusion, not the method. Unsupported
+    // or refuted observations are not safe negative evidence from this checker either.
+    if (typeof observation.checker !== "string" || typeof observation.version !== "string" || !["entailed", "refuted", "unknown"].includes(observation.conclusion)) return w;
+    return { ...w, observation: { checker: observation.checker, version: observation.version, questionId: qid, competency: request.competency, conclusion: observation.conclusion, methodAuthority: false } };
+  } catch { return w; } finally { clearTimeout(timer); }
+}
+
 /**
  * Replay of a RECORDED working assessment (D1 certificate compatibility). A record made under another authority version is reported as
  * historical: its recorded result stands and is not re-judged under the current rules. A current record is re-derived from the decision's own
@@ -141,6 +195,6 @@ export function replayWorking(d: { questionId: string; verdict: string; interpre
   const value = d.interpretation && typeof d.interpretation === "object" && "value" in d.interpretation ? String((d.interpretation as { value: unknown }).value) : null;
   const again = assessWorking(d.questionId, d.response.working, d.verdict, value);
   if (!again) return { replay: "failed-replay", reason: "the question no longer has a task statement" };
-  const same = again.status === w.status && again.methodEvidence === w.methodEvidence && JSON.stringify(again.firstInvalid) === JSON.stringify(w.firstInvalid) && JSON.stringify(again.certificates) === JSON.stringify(w.certificates) && again.replayedLines === w.replayedLines;
+  const same = (!w.provenance || JSON.stringify(again.provenance) === JSON.stringify(w.provenance)) && again.status === w.status && again.methodEvidence === w.methodEvidence && JSON.stringify(again.firstInvalid) === JSON.stringify(w.firstInvalid) && JSON.stringify(again.certificates) === JSON.stringify(w.certificates) && again.replayedLines === w.replayedLines;
   return same ? { replay: "replayable-current", reason: "re-derived: same status, first invalid step and certificate digests" } : { replay: "failed-replay", reason: `re-derived differently: ${again.status} vs recorded ${w.status}` };
 }
