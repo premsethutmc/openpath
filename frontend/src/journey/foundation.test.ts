@@ -118,7 +118,7 @@ test("explicit higher target uses prerequisites rather than an enrolment ceiling
 test("typed geometry working is preserved by the existing learner flow", async () => {
   const { SliceFlow } = await import('./flow');
   const f = new SliceFlow("gen:ahtri:16,44", "geometry-working", start);
-  f.on({ type: "answer_submitted", value: "By the triangle angle sum; 120" });
+  f.on({ type: "answer_submitted", timestamp: start, value: "By the triangle angle sum; 120" });
   const d = f.session.replies.at(-1)?.decision;
   assert.equal(d?.verdict, "correct");
   assert.deepEqual(d?.response.working, ["By the triangle angle sum", "120"]);
@@ -129,14 +129,14 @@ test("typed geometry working is preserved by the existing learner flow", async (
 test("symbolic answers remain answers and oversized working stays editable", async () => {
   const { SliceFlow } = await import('./flow');
   const symbolic = new SliceFlow("gen:asdist3:-5,-5,-5,-2,-2,-3", "symbolic", start);
-  symbolic.on({ type: "answer_submitted", value: "sqrt(22)" });
+  symbolic.on({ type: "answer_submitted", timestamp: start, value: "sqrt(22)" });
   assert.equal(symbolic.session.replies.at(-1)?.decision?.response.raw, "sqrt(22)");
   assert.equal(symbolic.session.replies.at(-1)?.decision?.verdict, "correct");
   const f = new SliceFlow("gen:ahtri:16,44", "oversized-working", start);
-  f.on({ type: "answer_submitted", value: "a".repeat(81) + "; 120" });
+  f.on({ type: "answer_submitted", timestamp: start, value: "a".repeat(81) + "; 120" });
   assert.equal(f.stage, "question");
   assert.equal(f.session.replies.length, 0);
   assert.match(f.spec.feedback.message ?? "", /still in the input/);
-  f.on({ type: "answer_submitted", value: "Angle sum; 120" });
+  f.on({ type: "answer_submitted", timestamp: start, value: "Angle sum; 120" });
   assert.equal(f.session.replies.at(-1)?.decision?.verdict, "correct");
 });
