@@ -1,3 +1,5 @@
+import type { ProjectionOptions } from "./subskill-projection";
+export { canonicalOrder, type ProjectionOptions } from "./subskill-projection";
 /**
  * Workstream E1: sub-skill evidence for MATH.algebra.linear-equations (SHADOW, non-authoritative).
  *
@@ -69,8 +71,8 @@ export type Projection = ProjectionOf<SubSkillId, typeof SUBSKILL_PROJECTION_VER
 /** The sub-skill of a question, from the trusted generator id only. */
 export const classifyQuestion = (questionId: unknown): Classified => classifyQuestionWith(LINEAR_EQUATIONS_CONFIG, questionId);
 /** The projection. `authoritative` is the existing learner state for the competency (read only, to expose broader claims). */
-export const projectSubSkills = (records: Pick<LearnerRecords, "attempts"> & Partial<Pick<LearnerRecords, "unresolved">>, now: number, authoritative?: { status: string; verified: boolean } | null, decisions?: ReadonlyMap<string, StoredDecision>): Projection =>
-  projectSubSkillsWith(LINEAR_EQUATIONS_CONFIG, records, now, authoritative, decisions) as Projection;
+export const projectSubSkills = (records: Pick<LearnerRecords, "attempts"> & Partial<Pick<LearnerRecords, "unresolved">>, now: number, authoritative?: { status: string; verified: boolean } | null, decisions?: ReadonlyMap<string, StoredDecision>, opts: ProjectionOptions = {}): Projection =>
+  projectSubSkillsWith(LINEAR_EQUATIONS_CONFIG, records, now, authoritative, decisions, opts) as Projection;
 /** The projection from the stored events (subskill-projection.ts projectFromEventsWith). */
-export const projectFromEvents = (learnerId: string, events: readonly { kind: string }[], now: number, authoritative?: { status: string; verified: boolean } | null): Projection =>
-  projectFromEventsWith(LINEAR_EQUATIONS_CONFIG, learnerId, events, now, authoritative) as Projection;
+export const projectFromEvents = (learnerId: string, events: readonly { kind: string }[], now: number, authoritative?: { status: string; verified: boolean } | null, opts: ProjectionOptions = {}): Projection =>
+  projectFromEventsWith(LINEAR_EQUATIONS_CONFIG, learnerId, events, now, authoritative, opts) as Projection;

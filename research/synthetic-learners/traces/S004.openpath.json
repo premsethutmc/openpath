@@ -1,0 +1,141 @@
+{
+ "note": "read from OpenPath AFTER the run, for the report; never shown to the learner",
+ "evidence": {
+  "id": "MATH.algebra.linear-equations",
+  "status": "exposure",
+  "independentAt": null,
+  "retention": "none",
+  "retentionDueAt": null,
+  "retentionHistory": [],
+  "recoveryRequired": false,
+  "independent": {
+   "right": 0,
+   "total": 3
+  },
+  "assisted": {
+   "right": 0,
+   "total": 0
+  },
+  "attempts": [
+   "lr-mvwmoque-4m-6mzfw",
+   "lr-mvwmoqv5-4n-0xqj6",
+   "lr-mvwmoqvr-4o-mvqg6"
+  ],
+  "verified": false,
+  "engine": "unavailable",
+  "engineRetention": "not_demonstrated"
+ },
+ "attempts": [
+  {
+   "questionId": "gen:lin:3,3,2",
+   "response": "8",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 8"
+   ]
+  },
+  {
+   "questionId": "gen:lin:3,9,8",
+   "response": "24",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 24"
+   ]
+  },
+  {
+   "questionId": "gen:lin:3,9,2",
+   "response": "17",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:ahone:3,2,12",
+   "response": "24",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 24"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:2,5,1",
+   "response": "7",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:ahone:3,2,18",
+   "response": "37",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 37"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:2,3,17",
+   "response": "17",
+   "activity": "guided",
+   "hints": 0,
+   "working": [
+    "3x/3 = 51/3",
+    "x = 17"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:1,4,11:mc",
+   "response": "A",
+   "activity": "check",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:ahone:0,11,20",
+   "response": "20",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 20"
+   ]
+  },
+  {
+   "questionId": "gen:ajrq:-7,8,3,5,3",
+   "response": "13",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:ajrq:1,5,-1,4,1",
+   "response": "8",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:ajrq:-1,5,1,5,2",
+   "response": "14",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:ajrq:4,5,-1,9,3",
+   "response": "1",
+   "activity": "guided",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:ajrq:1,5,-7,9,2:mc",
+   "response": "A",
+   "activity": "check",
+   "hints": 0,
+   "working": null
+  }
+ ]
+}

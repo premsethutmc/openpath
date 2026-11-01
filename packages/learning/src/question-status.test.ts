@@ -102,6 +102,9 @@ describe("selectors never return a quarantined question", () => {
   test("selection code is registered: only these files import the pool selectors (each applies selectable() or reads filtered modules)", () => {
     // a new selector must apply selectable() and be added here in a reviewed change
     const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts", "packages/learning/src/exact/verify.ts",
+      // gated-mastery.ts: added in a reviewed change (M1, shadow only). proposedRetentionPlan reads phasePool (which applies selectable()) for
+      // a due sub-skill's delayed-check items; it is never read by the engine, the plan or the app (the module's own selector is unchanged)
+      "packages/learning/src/gated-mastery.ts",
       // hypotheses.ts: added in a reviewed change (Milestone 2). Its only selector, discriminatingProbe, applies selectable(), formCertified() and
       // the grade ceiling, and its result is asked only through moduleState; see "hypotheses.ts resolution probes pass the eligibility gate".
       "packages/learning/src/hypotheses.ts",

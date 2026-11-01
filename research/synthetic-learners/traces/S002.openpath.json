@@ -1,0 +1,150 @@
+{
+ "note": "read from OpenPath AFTER the run, for the report; never shown to the learner",
+ "evidence": {
+  "id": "MATH.algebra.linear-equations",
+  "status": "exposure",
+  "independentAt": null,
+  "retention": "none",
+  "retentionDueAt": null,
+  "retentionHistory": [],
+  "recoveryRequired": false,
+  "independent": {
+   "right": 0,
+   "total": 5
+  },
+  "assisted": {
+   "right": 0,
+   "total": 0
+  },
+  "attempts": [
+   "lr-mvwmomiy-1s-2jmun",
+   "lr-mvwmomjk-1t-fgihn",
+   "lr-mvwmomk6-1u-k4zib",
+   "lr-mvwmomm4-1v-ksfzi",
+   "lr-mvwmomna-1w-6wbo7"
+  ],
+  "verified": false,
+  "engine": "unavailable",
+  "engineRetention": "not_demonstrated"
+ },
+ "attempts": [
+  {
+   "questionId": "gen:lin:3,3,2",
+   "response": "4",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 4"
+   ]
+  },
+  {
+   "questionId": "gen:lin:3,9,8",
+   "response": "18",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:lin:3,9,2",
+   "response": "12",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "3x = 4",
+    "x = 12"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,2,1",
+   "response": "4",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "2x = 4",
+    "x = 4",
+    "x = 4"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,1,1",
+   "response": "4",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "2x = 4",
+    "x = 4",
+    "x = 4"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:3,2,12",
+   "response": "6",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 12/2",
+    "x = 6"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:2,5,1",
+   "response": "0",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 5 - 5",
+    "x = 0"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:2,3,17",
+   "response": "17",
+   "activity": "guided",
+   "hints": 1,
+   "working": [
+    "x = 51/3",
+    "x = 17"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:1,4,11:mc",
+   "response": "A",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "x = 3",
+    "x = 3"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:0,11,20",
+   "response": "42",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "x = 42",
+    "x = 42"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:2,3,15",
+   "response": "42",
+   "activity": "guided",
+   "hints": 1,
+   "working": [
+    "x = 45 - 3",
+    "x = 42"
+   ]
+  },
+  {
+   "questionId": "gen:ahone:0,14,20",
+   "response": "48",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "x = 48",
+    "x = 48"
+   ]
+  }
+ ]
+}

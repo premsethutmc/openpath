@@ -1,0 +1,224 @@
+{
+ "note": "read from OpenPath AFTER the run, for the report; never shown to the learner",
+ "evidence": {
+  "id": "MATH.algebra.linear-equations",
+  "status": "review",
+  "independentAt": "2026-03-02T09:10:00.000Z",
+  "retention": "failed",
+  "retentionDueAt": "2026-03-09T09:10:00.000Z",
+  "retentionHistory": [
+   {
+    "due": "2026-03-09T09:10:00.000Z",
+    "result": "failed",
+    "failedAt": "2026-03-11T09:21:00.000Z",
+    "recoveredAt": null
+   }
+  ],
+  "recoveryRequired": true,
+  "independent": {
+   "right": 5,
+   "total": 15
+  },
+  "assisted": {
+   "right": 2,
+   "total": 3
+  },
+  "attempts": [
+   "lr-mvwmotnb-6w-kel3i",
+   "lr-mvwmoto0-6x-sky74",
+   "lr-mvwmotor-6y-b1eji",
+   "lr-mvwmotpw-70-ysqdw",
+   "lr-mvwmotqr-71-dbozj",
+   "lr-mvwmots0-73-hwrrp",
+   "lr-mvwmotsv-74-w7tmx",
+   "lr-mvwmottl-75-e760s",
+   "lr-mvwmotuc-76-9ffaa",
+   "lr-mvwmotvb-77-o0w55",
+   "lr-mvwmotvz-78-akf0l",
+   "lr-mvwmotwl-79-ahshr",
+   "lr-mvwmotxa-7a-ltucl",
+   "lr-mvwmoty3-7b-fpccx",
+   "lr-mvwmotzq-7d-43tah",
+   "lr-mvwmou0t-7e-dexeq",
+   "lr-mvwmou1p-7f-rl1u9",
+   "lr-mvwmou3d-7g-x045z"
+  ],
+  "verified": false,
+  "engine": "unavailable",
+  "engineRetention": "not_demonstrated"
+ },
+ "attempts": [
+  {
+   "questionId": "gen:lin:3,3,2",
+   "response": "5/3",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "3x = 5",
+    "x = 5/3"
+   ]
+  },
+  {
+   "questionId": "gen:lin:3,9,8",
+   "response": "125",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "3x = 42",
+    "x = 125"
+   ]
+  },
+  {
+   "questionId": "gen:lin:3,9,2",
+   "response": "24",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "3x = 8",
+    "x = 24"
+   ]
+  },
+  {
+   "questionId": "gen:lin:7,5,10",
+   "response": "10",
+   "activity": "guided",
+   "hints": 1,
+   "working": [
+    "7x = 70",
+    "x = 10"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,15,1",
+   "response": "8",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "2x = 4",
+    "x = 8"
+   ]
+  },
+  {
+   "questionId": "gen:lin:6,17,3",
+   "response": "3",
+   "activity": "guided",
+   "hints": 0,
+   "working": [
+    "6x + 17 - 17 = 35 - 17",
+    "6x/6 = 18/6",
+    "x = 3"
+   ]
+  },
+  {
+   "questionId": "gen:lin:5,6,5",
+   "response": "5",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "x = 5"
+   ]
+  },
+  {
+   "questionId": "gen:lin:2,17,11",
+   "response": "11",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "2x = 22",
+    "x = 11"
+   ]
+  },
+  {
+   "questionId": "gen:lin:7,9,11:mc",
+   "response": "A",
+   "activity": "practice",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:lin:7,18,9",
+   "response": "9",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "7x = 63",
+    "x = 9"
+   ]
+  },
+  {
+   "questionId": "gen:auleq:1,2,9,10",
+   "response": "C",
+   "activity": "practice",
+   "hints": 0,
+   "working": null
+  },
+  {
+   "questionId": "gen:aulwp:1,5,2,7",
+   "response": "7",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "x + 2 + 5x + 2 = 46",
+    "6x = 42",
+    "x = 7"
+   ]
+  },
+  {
+   "questionId": "gen:lboth:9,7,8,2",
+   "response": "0",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "9x + 7 = 9",
+    "9x = 0",
+    "x = 0"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:5,-4,2,1",
+   "response": "4",
+   "activity": "practice",
+   "hints": 0,
+   "working": [
+    "x = 4"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:5,-5,1,10",
+   "response": "46/5",
+   "activity": "guided",
+   "hints": 0,
+   "working": [
+    "5x - 25 = x + 15",
+    "x = 46/5"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:4,4,2,2",
+   "response": "4",
+   "activity": "check",
+   "hints": 0,
+   "working": [
+    "4x + 4 = 2x + 20",
+    "x = 4"
+   ]
+  },
+  {
+   "questionId": "gen:lbrk:4,1,1,4",
+   "response": "60",
+   "activity": "diagnostic",
+   "hints": 0,
+   "working": [
+    "4x + 1 = x + 16",
+    "x = 60"
+   ]
+  },
+  {
+   "questionId": "gen:lin:6,17,2",
+   "response": "276",
+   "activity": "retention",
+   "hints": 0,
+   "working": null
+  }
+ ]
+}

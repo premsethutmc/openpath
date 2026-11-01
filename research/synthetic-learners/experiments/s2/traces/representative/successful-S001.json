@@ -1,0 +1,847 @@
+{
+ "journey": "synthetic-experiment-journey@1",
+ "id": "s2-A-S001-1001",
+ "cohort": "A",
+ "profile": "S001@1.0.0",
+ "seed": 1001,
+ "learnerId": "s2-A-S001-1001",
+ "initialHidden": {
+  "abilities": {
+   "one-step": 0.99,
+   "two-step": 0.98,
+   "both-sides": 0.96,
+   "brackets": 0.95,
+   "modelling": 0.92
+  },
+  "misconceptions": {}
+ },
+ "finalHidden": {
+  "abilities": {
+   "one-step": 0.989,
+   "two-step": 0.987,
+   "both-sides": 0.966,
+   "brackets": 0.957,
+   "modelling": 0.931
+  },
+  "misconceptions": {}
+ },
+ "end": "retention-passed",
+ "bounded": false,
+ "visits": [
+  {
+   "visit": 1,
+   "at": "2026-03-02T09:00:00.000Z",
+   "factBefore": {
+    "label": "Not yet"
+   },
+   "summary": "Shown on your own. A delayed check is planned for Mon Mar 09 2026.",
+   "ended": "summary",
+   "openpath": {
+    "attempts": [
+     {
+      "at": "2026-03-02T09:01:00.000Z",
+      "qid": "gen:lin:3,3,2",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "diagnostic",
+      "hints": 0,
+      "response": "2",
+      "working": null,
+      "verdict": "correct",
+      "workingStatus": "none",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:02:00.000Z",
+      "qid": "gen:lin:3,9,8",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "diagnostic",
+      "hints": 0,
+      "response": "7",
+      "working": [
+       "3x + 9 - 9 = 33 - 9",
+       "x = 7",
+       "x = 7"
+      ],
+      "verdict": "incorrect",
+      "workingStatus": "invalid",
+      "firstInvalid": 1
+     },
+     {
+      "at": "2026-03-02T09:03:00.000Z",
+      "qid": "gen:lin:3,9,2",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "diagnostic",
+      "hints": 0,
+      "response": "2",
+      "working": [
+       "3x = 6",
+       "x = 2"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:04:00.000Z",
+      "qid": "gen:lin:2,17,11",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "11",
+      "working": [
+       "2x = 22",
+       "x = 11"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:05:00.000Z",
+      "qid": "gen:lin:7,9,11:mc",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "D",
+      "working": null,
+      "verdict": "incorrect",
+      "workingStatus": "none",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:06:00.000Z",
+      "qid": "gen:lin:2,1,1",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "diagnostic",
+      "hints": 0,
+      "response": "1",
+      "working": [
+       "2x = 2",
+       "x = 1"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:07:00.000Z",
+      "qid": "gen:lin:2,1,2",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "diagnostic",
+      "hints": 0,
+      "response": "2",
+      "working": [
+       "2x + 1 - 1 = 5 - 1",
+       "2x/2 = 4/2",
+       "x = 2"
+      ],
+      "verdict": "correct",
+      "workingStatus": "unsupported",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:08:00.000Z",
+      "qid": "gen:lin:2,3,3",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "diagnostic",
+      "hints": 0,
+      "response": "3",
+      "working": [
+       "x = 3"
+      ],
+      "verdict": "correct",
+      "workingStatus": "answer-only",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:09:00.000Z",
+      "qid": "gen:lin:7,18,9",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "9",
+      "working": [
+       "x = 9"
+      ],
+      "verdict": "correct",
+      "workingStatus": "answer-only",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:10:00.000Z",
+      "qid": "gen:auleq:1,2,9,10",
+      "kind": "modelling",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "C",
+      "working": null,
+      "verdict": "correct",
+      "workingStatus": null,
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:11:00.000Z",
+      "qid": "gen:aulwp:1,5,2,7",
+      "kind": "modelling",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "7",
+      "working": [
+       "x = 7"
+      ],
+      "verdict": "correct",
+      "workingStatus": "unsupported",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:12:00.000Z",
+      "qid": "gen:lboth:9,7,8,2",
+      "kind": "both-sides",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "2",
+      "working": [
+       "x + 7 = 9",
+       "x = 2"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:13:00.000Z",
+      "qid": "gen:lbrk:5,-4,2,1",
+      "kind": "brackets",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "1",
+      "working": [
+       "x = 1"
+      ],
+      "verdict": "correct",
+      "workingStatus": "answer-only",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:14:00.000Z",
+      "qid": "gen:lin:2,4,7:mc",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "transfer",
+      "hints": 0,
+      "response": "B",
+      "working": [
+       "2x = 14",
+       "x = 7"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:15:00.000Z",
+      "qid": "gen:aulwp:1,5,2,9:w",
+      "kind": "modelling",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "transfer",
+      "hints": 0,
+      "response": "5",
+      "working": null,
+      "verdict": "incorrect",
+      "workingStatus": null,
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:16:00.000Z",
+      "qid": "gen:lin:2,15,1",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "4",
+      "working": [
+       "2x = 2",
+       "x = 4"
+      ],
+      "verdict": "incorrect",
+      "workingStatus": "invalid",
+      "firstInvalid": 1
+     },
+     {
+      "at": "2026-03-02T09:18:00.000Z",
+      "qid": "gen:lin:7,5,10",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "guided",
+      "hints": 0,
+      "response": "10",
+      "working": [
+       "x = 10"
+      ],
+      "verdict": "correct",
+      "workingStatus": "answer-only",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:19:00.000Z",
+      "qid": "gen:lin:5,6,5",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "5",
+      "working": [
+       "x = 5"
+      ],
+      "verdict": "correct",
+      "workingStatus": "answer-only",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:20:00.000Z",
+      "qid": "gen:lboth:8,3,4,3",
+      "kind": "both-sides",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "3",
+      "working": [
+       "4x + 3 = 15",
+       "4x = 12",
+       "x = 3"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:21:00.000Z",
+      "qid": "gen:lbrk:4,4,2,2",
+      "kind": "brackets",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "2",
+      "working": [
+       "4x + 16 = 2x + 20",
+       "2x + 16 = 20",
+       "2x = 4",
+       "x = 2"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:22:00.000Z",
+      "qid": "gen:lin:3,3,4",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "4",
+      "working": [
+       "3x = 12",
+       "x = 4"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:23:00.000Z",
+      "qid": "gen:lin:3,9,1",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "1",
+      "working": [
+       "3x = 3",
+       "x = 1"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:24:00.000Z",
+      "qid": "gen:lin:5,10,2",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "2",
+      "working": [
+       "5x = 10",
+       "x = 2"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:25:00.000Z",
+      "qid": "gen:lboth:5,20,4,4",
+      "kind": "both-sides",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "4",
+      "working": [
+       "x = 4"
+      ],
+      "verdict": "correct",
+      "workingStatus": "answer-only",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:26:00.000Z",
+      "qid": "gen:lboth:7,16,5,6",
+      "kind": "both-sides",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "6",
+      "working": [
+       "2x + 16 = 28",
+       "2x = 12",
+       "x = 6"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:27:00.000Z",
+      "qid": "gen:lboth:8,18,7,8",
+      "kind": "both-sides",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "8",
+      "working": null,
+      "verdict": "correct",
+      "workingStatus": "none",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:28:00.000Z",
+      "qid": "gen:lbrk:4,3,3,4",
+      "kind": "brackets",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "4",
+      "working": [
+       "4x + 12 = 3x + 16",
+       "x + 12 = 16",
+       "x = 4"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:29:00.000Z",
+      "qid": "gen:lbrk:6,-5,3,9",
+      "kind": "brackets",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "check",
+      "hints": 0,
+      "response": "9",
+      "working": [
+       "6x - 30 = 3x - 3",
+       "3x - 30 = -3",
+       "3x = 27",
+       "x = 9"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-02T09:30:00.000Z",
+      "qid": "wr:eq:find-mistakes",
+      "kind": null,
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "practice",
+      "hints": 0,
+      "response": "20",
+      "working": null,
+      "verdict": "pending-educator",
+      "workingStatus": null,
+      "firstInvalid": null
+     }
+    ],
+    "teaching": [
+     {
+      "at": "2026-03-02T09:17:00.000Z",
+      "competency": "MATH.algebra.linear-equations",
+      "strategy": "balance",
+      "kind": "two-step"
+     }
+    ],
+    "phases": [
+     "diagnostic",
+     "explore",
+     "verify",
+     "explore",
+     "verify",
+     "chapter",
+     "guided",
+     "check",
+     "verify",
+     "done"
+    ],
+    "evidence": {
+     "status": "transfer",
+     "verified": false,
+     "retention": "scheduled",
+     "retentionDueAt": "2026-03-09T09:03:00.000Z",
+     "recoveryRequired": false,
+     "independent": {
+      "right": 23,
+      "total": 27
+     },
+     "history": [
+      {
+       "due": "2026-03-09T09:03:00.000Z",
+       "result": "pending",
+       "failedAt": null,
+       "recoveredAt": null
+      }
+     ]
+    },
+    "established": [],
+    "e1": {
+     "subSkills": {
+      "one-step": "not-attempted",
+      "two-step": "independently-demonstrated",
+      "both-sides": "independently-demonstrated",
+      "brackets": "independently-demonstrated",
+      "modelling": "independently-demonstrated"
+     },
+     "discrepancy": null,
+     "unknown": {}
+    }
+   },
+   "feedback": [
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "incorrect",
+     "message": "Put x = 7 into 3x+9=33: the left side is 30 and the right side is 33, so they are not equal and x = 7 is not the solution. The first step that does not follow is x = 7: x = 8 makes 3x + 9 \u2212 9 = 33 \u2212 9 true but not x = 7, so this step changed the solution."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "incorrect",
+     "message": "That is not the answer we are looking for."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Your working could not be checked automatically, so it is not marked right or wrong. Writing each step as an equation on its own line, ending with the answer, lets it be checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Your working could not be checked automatically, so it is not marked right or wrong. Writing each step as an equation on its own line, ending with the answer, lets it be checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "incorrect",
+     "message": "That is not the answer we are looking for."
+    },
+    {
+     "level": "incorrect",
+     "message": "Put x = 4 into 2x+15=17: the left side is 23 and the right side is 17, so they are not equal and x = 4 is not the solution. The first step that does not follow is x = 4: x = 1 makes 2x = 2 true but not x = 4, so this step changed the solution."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. You gave the answer only, so your method was not checked."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "none",
+     "message": "This answer could not be checked automatically, so it was not marked."
+    }
+   ],
+   "hiddenAfter": {
+    "abilities": {
+     "one-step": 0.993,
+     "two-step": 0.991,
+     "both-sides": 0.97,
+     "brackets": 0.96,
+     "modelling": 0.93
+    },
+    "misconceptions": {}
+   }
+  },
+  {
+   "visit": 2,
+   "at": "2026-03-09T09:00:00.000Z",
+   "factBefore": {
+    "label": "scheduled",
+    "date": "2026-03-09"
+   },
+   "summary": "Shown on your own. A delayed check is planned for Mon Mar 09 2026.",
+   "ended": "summary",
+   "openpath": {
+    "attempts": [],
+    "teaching": [],
+    "phases": [],
+    "evidence": {
+     "status": "transfer",
+     "verified": false,
+     "retention": "scheduled",
+     "retentionDueAt": "2026-03-09T09:03:00.000Z",
+     "recoveryRequired": false,
+     "independent": {
+      "right": 23,
+      "total": 27
+     },
+     "history": [
+      {
+       "due": "2026-03-09T09:03:00.000Z",
+       "result": "pending",
+       "failedAt": null,
+       "recoveredAt": null
+      }
+     ]
+    },
+    "established": [],
+    "e1": {
+     "subSkills": {
+      "one-step": "not-attempted",
+      "two-step": "independently-demonstrated",
+      "both-sides": "independently-demonstrated",
+      "brackets": "independently-demonstrated",
+      "modelling": "independently-demonstrated"
+     },
+     "discrepancy": null,
+     "unknown": {}
+    }
+   },
+   "feedback": [],
+   "hiddenAfter": {
+    "abilities": {
+     "one-step": 0.989,
+     "two-step": 0.987,
+     "both-sides": 0.967,
+     "brackets": 0.958,
+     "modelling": 0.928
+    },
+    "misconceptions": {}
+   }
+  },
+  {
+   "visit": 3,
+   "at": "2026-03-10T09:00:00.000Z",
+   "factBefore": {
+    "label": "scheduled",
+    "date": "2026-03-09"
+   },
+   "summary": "Shown on your own.",
+   "ended": "summary",
+   "openpath": {
+    "attempts": [
+     {
+      "at": "2026-03-10T09:01:00.000Z",
+      "qid": "gen:lin:6,17,2",
+      "kind": "two-step",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "retention",
+      "hints": 0,
+      "response": "2",
+      "working": [
+       "6x = 12",
+       "x = 2"
+      ],
+      "verdict": "correct",
+      "workingStatus": "verified",
+      "firstInvalid": null
+     },
+     {
+      "at": "2026-03-10T09:02:00.000Z",
+      "qid": "gen:auleq:2,9,19,11",
+      "kind": "modelling",
+      "competency": "MATH.algebra.linear-equations",
+      "activity": "retention",
+      "hints": 0,
+      "response": "C",
+      "working": null,
+      "verdict": "correct",
+      "workingStatus": null,
+      "firstInvalid": null
+     }
+    ],
+    "teaching": [],
+    "phases": [
+     "retention",
+     "done"
+    ],
+    "evidence": {
+     "status": "transfer",
+     "verified": false,
+     "retention": "passed",
+     "retentionDueAt": "2026-03-09T09:03:00.000Z",
+     "recoveryRequired": false,
+     "independent": {
+      "right": 25,
+      "total": 29
+     },
+     "history": [
+      {
+       "due": "2026-03-09T09:03:00.000Z",
+       "result": "passed",
+       "failedAt": null,
+       "recoveredAt": null
+      }
+     ]
+    },
+    "established": [],
+    "e1": {
+     "subSkills": {
+      "one-step": "not-attempted",
+      "two-step": "independently-demonstrated",
+      "both-sides": "retention-due",
+      "brackets": "retention-due",
+      "modelling": "independently-demonstrated"
+     },
+     "discrepancy": [
+      "both-sides",
+      "brackets"
+     ],
+     "unknown": {}
+    }
+   },
+   "feedback": [
+    {
+     "level": "correct",
+     "message": "That answer is right. Every line of your working was checked: each one follows from the line before."
+    },
+    {
+     "level": "correct",
+     "message": "That answer is right."
+    }
+   ],
+   "hiddenAfter": {
+    "abilities": {
+     "one-step": 0.989,
+     "two-step": 0.987,
+     "both-sides": 0.966,
+     "brackets": 0.957,
+     "modelling": 0.931
+    },
+    "misconceptions": {}
+   }
+  }
+ ],
+ "instruction": [
+  {
+   "at": "2026-03-02T09:00:00.000Z",
+   "title": "Keep the balance",
+   "kind": "one-step",
+   "outcome": "partial",
+   "abilitiesBefore": {
+    "one-step": 0.99,
+    "two-step": 0.988,
+    "both-sides": 0.962,
+    "brackets": 0.953,
+    "modelling": 0.928
+   },
+   "misconceptionsBefore": {}
+  }
+ ]
+}

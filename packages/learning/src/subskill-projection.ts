@@ -1,3 +1,15 @@
+export function canonicalOrder<T>(events: readonly T[]): T[] {
+  // canonical order before the existing reader counts first exposures: the instant of each record, then its id (code-unit order). The store's
+  // own order (seq) is the same as time order for server-stamped records; this makes the projection independent of delivery order.
+  const at = (e: unknown) => { const v = Date.parse(String((e as { at?: unknown })?.at)); return Number.isNaN(v) ? Infinity : v; };
+  const idOf = (e: unknown) => String((e as { id?: unknown })?.id ?? "");
+  // D1 integration (from the alternative E1): equal (instant, id) pairs are ordered by their canonical content, so duplicates cannot reorder by
+  // delivery position
+  const canon = (v: unknown): string => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon((v as Record<string, unknown>)[k])}`).join(",")}}` : JSON.stringify(v) ?? "null");
+  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
+  return Array.isArray(events) ? events.map((e) => ({ e, t: at(e), i: idOf(e), c: canon(e) })).sort((x, y) => x.t - y.t || cmp(x.i, y.i) || cmp(x.c, y.c)).map((x) => x.e) : [];
+}
+
 /**
  * Sub-skill evidence projection, domain-neutral (G5: extracted from Workstream E1 without changing its behaviour). SHADOW, non-authoritative.
  *
@@ -132,16 +144,20 @@ const validAttempt = (a: unknown): a is Attempt => {
  * retention@2 scoped to one sub-skill: the same cycle rule as evidence.ts skillEvidence, over this sub-skill's answers only. `need` is the
  * number of distinct delayed-check answers required (evidence.ts: min(RETENTION_CHECK, the skill's retention questions)).
  */
-export function retentionCycles(ind: Attempt[], from: string | null, need: number, now: number, right: (a: Attempt) => boolean = rightAnswer) {
+export function retentionCycles(ind: Attempt[], from: string | null, need: number, now: number, right: (a: Attempt) => boolean = rightAnswer, slips = 0) {
   const history: RetentionCycle[] = [];
   let cycleDue = from ? new Date(Date.parse(from) + RETENTION_DAYS * DAY).toISOString() : null;
-  let retention: SkillEvidence["retention"] = "none";
+  let retention: SkillEvidence["retention"] = "none", slipPending = false;
   while (cycleDue) {
     const dueAt = cycleDue;
     const answers = ind.filter((a) => a.activity === "retention" && Date.parse(a.at) >= Date.parse(dueAt));
-    const firstWrong = answers.find((a) => !right(a));
+    // slips = 0 is retention@2 exactly (any wrong answer fails the check). M1 shadow alternative only: slips = 1 tolerates one wrong answer in
+    // the check (the check then fails at the second wrong answer, and passes only with `need` distinct RIGHT answers)
+    const wrongs = answers.filter((a) => !right(a)), firstWrong = wrongs[slips];
     if (!firstWrong) {
-      retention = new Set(answers.map((a) => a.questionId)).size >= need ? "passed" : now >= Date.parse(dueAt) ? "due" : "scheduled";
+      retention = new Set(answers.filter((a) => !slips || right(a)).map((a) => a.questionId)).size >= need ? "passed" : now >= Date.parse(dueAt) ? "due" : "scheduled";
+      // a tolerated slip in a check that has not (yet) passed: the sub-skill is not shown until the check passes or fails
+      if (wrongs.length && retention !== "passed") slipPending = true;
       history.push({ due: dueAt, result: retention === "passed" ? "passed" : "pending", failedAt: null, recoveredAt: null });
       break;
     }
@@ -152,11 +168,17 @@ export function retentionCycles(ind: Attempt[], from: string | null, need: numbe
     retention = "failed";
     cycleDue = recoveredAt ? new Date(Date.parse(recoveredAt) + RETENTION_DAYS * DAY).toISOString() : null;
   }
-  return { retention, history, due: history.at(-1)?.due ?? null };
+  return { retention, history, due: history.at(-1)?.due ?? null, slipPending };
 }
 
+export interface ProjectionOptions {
+  /** answers left out of a sub-skill's independent evidence (neither right nor wrong); they stay in its record and history */
+  exclude?: (a: { id: string; questionId: string }) => boolean;
+  /** 0 (default): retention@2 exactly. 1: one wrong answer in a delayed check is tolerated (see retentionCycles) */
+  retentionSlips?: 0 | 1;
+}
 /** The projection under a configuration. `authoritative` is the existing learner state for the competency (read only, to expose broader claims). */
-export function projectSubSkillsWith<Id extends string>(config: SubSkillConfig<Id>, records: Pick<LearnerRecords, "attempts"> & Partial<Pick<LearnerRecords, "unresolved">>, now: number, authoritative?: { status: string; verified: boolean } | null, decisions?: ReadonlyMap<string, StoredDecision>): Projection<Id> {
+export function projectSubSkillsWith<Id extends string>(config: SubSkillConfig<Id>, records: Pick<LearnerRecords, "attempts"> & Partial<Pick<LearnerRecords, "unresolved">>, now: number, authoritative?: { status: string; verified: boolean } | null, decisions?: ReadonlyMap<string, StoredDecision>, opts: ProjectionOptions = {}): Projection<Id> {
   const classifyQuestion = (q: unknown) => classifyQuestionWith(config, q);
   const base: Projection<Id> = { version: config.version, mapping: config.mapping, competency: config.competency, authoritative: false, outcome: "projected", subSkills: [], unknown: { count: 0, byReason: {}, attempts: [] }, rejected: [], discrepancies: [] };
   const all = Array.isArray(records?.attempts) ? records.attempts : [];
@@ -185,7 +207,7 @@ export function projectSubSkillsWith<Id extends string>(config: SubSkillConfig<I
     // as evidence.ts: a probe is evidence for its own micro-skill, never for showing the skill alone
     // a right answer whose own working has a false step is contradictory evidence: it is neither credited nor counted as a wrong answer
     // (it is reported, and makes the method "contradicted"); every other answer counts exactly as its recorded credit
-    const ind = mine.filter((p) => p.independent && p.activity !== "probe" && !p.contradicted);
+    const ind = mine.filter((p) => p.independent && p.activity !== "probe" && !p.contradicted && !opts.exclude?.(p));
     const credited = (p: ProjectedAttempt<Id>) => p.correct;
     const distinct = new Set<string>();
     let independentAt: string | null = null;
@@ -200,10 +222,11 @@ export function projectSubSkillsWith<Id extends string>(config: SubSkillConfig<I
     const need = sampled > 0 ? Math.min(RETENTION_CHECK, sampled) : RETENTION_CHECK;
     const indAttempts = ind.map((p) => byId.get(p.id)!);
     const byAttempt = new Map(ind.map((p) => [p.id, p] as const));
-    const cyc = retentionCycles(indAttempts, independentAt, need, now, (a) => credited(byAttempt.get(a.id)!));
+    const cyc = retentionCycles(indAttempts, independentAt, need, now, (a) => credited(byAttempt.get(a.id)!), opts.retentionSlips ?? 0);
     let status: SubSkillStatus;
     if (!mine.length) status = "not-attempted";
     else if (cyc.retention === "failed") status = "recovery-required";
+    else if (cyc.slipPending) status = "developing";
     else if (shown && cyc.retention === "due") status = "retention-due";
     else if (shown) status = "independently-demonstrated";
     else if (ind.length < INDEPENDENT_MIN) status = "insufficient-evidence";
@@ -250,16 +273,8 @@ export function projectSubSkillsWith<Id extends string>(config: SubSkillConfig<I
  * retired family) are reported as unknown, "excluded-by-existing-reader": nothing is credited to any sub-skill for them, and they are not
  * reinterpreted. Quarantined, unresolved and pending answers are excluded exactly as the reader excludes them.
  */
-export function projectFromEventsWith<Id extends string>(config: SubSkillConfig<Id>, learnerId: string, events: readonly { kind: string }[], now: number, authoritative?: { status: string; verified: boolean } | null): Projection<Id> {
-  // canonical order before the existing reader counts first exposures: the instant of each record, then its id (code-unit order). The store's
-  // own order (seq) is the same as time order for server-stamped records; this makes the projection independent of delivery order.
-  const at = (e: unknown) => { const v = Date.parse(String((e as { at?: unknown })?.at)); return Number.isNaN(v) ? Infinity : v; };
-  const idOf = (e: unknown) => String((e as { id?: unknown })?.id ?? "");
-  // D1 integration (from the alternative E1): equal (instant, id) pairs are ordered by their canonical content, so duplicates cannot reorder by
-  // delivery position
-  const canon = (v: unknown): string => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon((v as Record<string, unknown>)[k])}`).join(",")}}` : JSON.stringify(v) ?? "null");
-  const cmp = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
-  const ordered = Array.isArray(events) ? events.map((e) => ({ e, t: at(e), i: idOf(e), c: canon(e) })).sort((x, y) => x.t - y.t || cmp(x.i, y.i) || cmp(x.c, y.c)).map((x) => x.e) : [];
+export function projectFromEventsWith<Id extends string>(config: SubSkillConfig<Id>, learnerId: string, events: readonly { kind: string }[], now: number, authoritative?: { status: string; verified: boolean } | null, opts: ProjectionOptions = {}): Projection<Id> {
+  const ordered = canonicalOrder(events);
   let recs: LearnerRecords;
   try { recs = readRecords(learnerId, ordered); }
   catch (e) { return { version: config.version, mapping: config.mapping, competency: config.competency, authoritative: false, outcome: "unreadable-events", subSkills: [], unknown: { count: 0, byReason: {}, attempts: [] }, rejected: [{ id: null, reason: `the existing reader could not read the events (${String((e as Error)?.message ?? e).slice(0, 80)}): nothing is projected` }], discrepancies: [] }; }
@@ -267,7 +282,7 @@ export function projectFromEventsWith<Id extends string>(config: SubSkillConfig<
   const admittedIds = new Set([...recs.attempts.map((a) => a.id), ...recs.unresolved.map((u) => u.id)]);
   const decisions = new Map<string, StoredDecision>();
   for (const e of ordered) { const r = e as { kind?: string; record?: string; id?: unknown; learnerId?: unknown; decision?: StoredDecision }; if (r.kind === "learning_record" && r.record === "attempt" && r.learnerId === learnerId && typeof r.id === "string" && admittedIds.has(r.id) && r.decision && !decisions.has(r.id)) decisions.set(r.id, r.decision); }
-  const p = projectSubSkillsWith(config, recs, now, authoritative, decisions);
+  const p = projectSubSkillsWith(config, recs, now, authoritative, decisions, opts);
   if (p.outcome !== "projected") return p;
   const admitted = new Set([...recs.attempts.map((a) => a.id), ...recs.unresolved.map((a) => a.id), ...recs.pending.map((a) => a.id)]);
   const seen = new Set<string>();
