@@ -1,0 +1,281 @@
+{
+ "authority": "unified-math-engine assessMathematicalWorking → research/geometry-reasoner (openpath-geometry-worker@2)",
+ "cases": [
+  {
+   "id": "R01",
+   "title": "Correct answer with valid reasoning",
+   "oracle": "valid",
+   "verdict": "verified",
+   "firstInvalid": null,
+   "correct": true,
+   "steps": [
+    {
+     "classification": "verified",
+     "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+    },
+    {
+     "classification": "verified",
+     "justification": "Adjacent angles on a straight line sum to 180°."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "C = 180 − 40 − 65 = 75; D = 180 − 75 = 105"
+  },
+  {
+   "id": "R02",
+   "title": "Correct answer without working (the final claim alone)",
+   "oracle": "unjustified",
+   "verdict": "verified",
+   "firstInvalid": null,
+   "correct": true,
+   "steps": [
+    {
+     "classification": "verified",
+     "justification": "Adjacent angles on a straight line sum to 180°."
+    }
+   ],
+   "outcome": "accepts-unjustified",
+   "why": "true and entailed by the givens, but no reasoning is shown: it is an answer, not a justification"
+  },
+  {
+   "id": "R03",
+   "title": "Correct answer with invalid reasoning",
+   "oracle": "invalid",
+   "verdict": "invalid",
+   "firstInvalid": 0,
+   "correct": false,
+   "steps": [
+    {
+     "classification": "invalid",
+     "justification": "The established angle measure is 75°, not 85°."
+    },
+    {
+     "classification": "invalid",
+     "justification": "The cited proof steps are not premises of the stated justification."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "C is 75, not 85; and 180 − 85 is not 105"
+  },
+  {
+   "id": "R04",
+   "title": "Incorrect answer with valid partial reasoning",
+   "oracle": "invalid",
+   "verdict": "invalid",
+   "firstInvalid": 1,
+   "correct": false,
+   "steps": [
+    {
+     "classification": "verified",
+     "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+    },
+    {
+     "classification": "invalid",
+     "justification": "The established angle measure is 105°, not 115°."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "the first step is right; 180 − 75 is 105, not 115"
+  },
+  {
+   "id": "R05",
+   "title": "First invalid geometric step",
+   "oracle": "invalid",
+   "verdict": "invalid",
+   "firstInvalid": 0,
+   "correct": false,
+   "steps": [
+    {
+     "classification": "invalid",
+     "justification": "The established angle measure is 75°, not 65°."
+    },
+    {
+     "classification": "invalid",
+     "justification": "The established angle measure is 105°, not 115°."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "180 − 40 − 65 is 75, not 65"
+  },
+  {
+   "id": "R06",
+   "title": "Alternative valid reasoning path (vertically opposite instead of straight line)",
+   "oracle": "valid",
+   "verdict": "invalid",
+   "firstInvalid": 0,
+   "correct": false,
+   "steps": [
+    {
+     "classification": "invalid",
+     "justification": "The cited theorem vertical-opposite does not justify this step; the established route uses straight-line."
+    },
+    {
+     "classification": "verified",
+     "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+    }
+   ],
+   "outcome": "false-rejection",
+   "why": "B is vertically opposite E = 60°, so B = 60; C = 180 − 50 − 60 = 70"
+  },
+  {
+   "id": "R06b",
+   "title": "The other valid path (straight line)",
+   "oracle": "valid",
+   "verdict": "verified",
+   "firstInvalid": null,
+   "correct": true,
+   "steps": [
+    {
+     "classification": "verified",
+     "justification": "Adjacent angles on a straight line sum to 180°."
+    },
+    {
+     "classification": "verified",
+     "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "B and F = 120° are a linear pair, so B = 60"
+  },
+  {
+   "id": "R07",
+   "title": "Unsupported geometric claim: a theorem outside the authority's rule set (exterior-angle theorem)",
+   "oracle": "valid",
+   "verdict": "invalid",
+   "firstInvalid": 0,
+   "correct": false,
+   "steps": [
+    {
+     "classification": "invalid",
+     "justification": "The cited theorem exterior-angle does not justify this step; the established route uses straight-line."
+    }
+   ],
+   "outcome": "false-rejection",
+   "why": "the exterior-angle theorem is a valid school theorem: D = A + B = 105"
+  },
+  {
+   "id": "R08",
+   "title": "Missing prerequisite (the triangle is not given as nondegenerate)",
+   "oracle": "not-established",
+   "verdict": "missing-assumption",
+   "firstInvalid": 0,
+   "correct": null,
+   "steps": [
+    {
+     "classification": "missing-assumption",
+     "justification": "The conclusion may follow after these assumptions or proof obligations are established."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "within the formal system the angle-sum theorem needs a nondegenerate triangle, which is not given (mathematically, measures of 50° and 60° already rule out a degenerate triangle; the gap is the formal assumption, not the arithmetic)"
+  },
+  {
+   "id": "R09",
+   "title": "Incorrect application of the exterior-angle theorem (adds the adjacent interior angle)",
+   "oracle": "invalid",
+   "verdict": "invalid",
+   "firstInvalid": 1,
+   "correct": false,
+   "steps": [
+    {
+     "classification": "verified",
+     "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+    },
+    {
+     "classification": "invalid",
+     "justification": "The established angle measure is 105°, not 115°."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "the exterior angle is the sum of the two OPPOSITE interior angles (40 + 65), not 40 + 75"
+  },
+  {
+   "id": "R10",
+   "title": "Supplementary taken for vertically opposite",
+   "oracle": "invalid",
+   "verdict": "unsupported",
+   "firstInvalid": 0,
+   "correct": null,
+   "steps": [
+    {
+     "classification": "unsupported",
+     "justification": "The current engine cannot prove this conclusion. That is not evidence that it is false."
+    },
+    {
+     "classification": "unsupported",
+     "justification": "The current engine cannot prove this conclusion. That is not evidence that it is false."
+    }
+   ],
+   "outcome": "abstains-on-invalid",
+   "why": "E and B are vertically opposite (equal), not a linear pair: B = 60, not 120"
+  },
+  {
+   "id": "R11",
+   "title": "Diagram-dependent claim: C and D are not GIVEN as a linear pair",
+   "oracle": "not-established",
+   "verdict": "unsupported",
+   "firstInvalid": 1,
+   "correct": null,
+   "steps": [
+    {
+     "classification": "verified",
+     "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+    },
+    {
+     "classification": "unsupported",
+     "justification": "The current engine cannot prove this conclusion. That is not evidence that it is false."
+    }
+   ],
+   "outcome": "agrees",
+   "why": "nothing given relates D to C; a picture might suggest it, but appearance is not evidence"
+  },
+  {
+   "id": "R12a",
+   "title": "A valid solution in one order",
+   "oracle": "valid",
+   "verdict": "unsupported",
+   "firstInvalid": 0,
+   "correct": null,
+   "steps": [
+    {
+     "classification": "unsupported",
+     "justification": "The current engine cannot prove this conclusion. That is not evidence that it is false."
+    },
+    {
+     "classification": "verified",
+     "justification": "Adjacent angles on a straight line sum to 180°."
+    },
+    {
+     "classification": "unsupported",
+     "justification": "The current engine cannot prove this conclusion. That is not evidence that it is false."
+    }
+   ],
+   "outcome": "abstains",
+   "why": "A = E = 50 (vertically opposite); B = 180 − 120 = 60; C = 70"
+  },
+  {
+   "id": "R12b",
+   "title": "The same solution with the steps in a different order",
+   "oracle": "valid",
+   "verdict": "unsupported",
+   "firstInvalid": 1,
+   "correct": null,
+   "steps": [
+    {
+     "classification": "verified",
+     "justification": "Adjacent angles on a straight line sum to 180°."
+    },
+    {
+     "classification": "unsupported",
+     "justification": "The current engine cannot prove this conclusion. That is not evidence that it is false."
+    },
+    {
+     "classification": "unsupported",
+     "justification": "The current engine cannot prove this conclusion. That is not evidence that it is false."
+    }
+   ],
+   "outcome": "abstains",
+   "why": "the order of two independent steps does not matter (confounded: both orders abstain because the vertical-opposite rule yields equality, not a measure, the R06 root cause; order sensitivity is therefore NOT tested)"
+  }
+ ]
+}

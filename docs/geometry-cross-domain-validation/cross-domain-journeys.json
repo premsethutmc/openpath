@@ -1,0 +1,425 @@
+{
+ "linear": [
+  {
+   "id": "L-01",
+   "start": "gen:lin:2,17,11",
+   "ended": "done",
+   "submissions": 25,
+   "teaching": [],
+   "authoritative": {
+    "status": "transfer",
+    "independent": "24/24",
+    "assisted": "0/0",
+    "retentionHistory": [
+     "passed"
+    ]
+   },
+   "properties": [
+    {
+     "property": "1 grading authority",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "property": "2 evidence recording",
+     "ok": true,
+     "detail": "attempts 24 + unresolved 0 + awaiting a teacher 1 vs submissions 25"
+    },
+    {
+     "property": "3 honest uncertainty",
+     "ok": true,
+     "detail": "hypotheses none"
+    },
+    {
+     "property": "4 investigation decision",
+     "ok": true,
+     "detail": "1 investigation step(s)"
+    },
+    {
+     "property": "5 eligible teaching",
+     "ok": true,
+     "detail": "0 explanation(s): "
+    },
+    {
+     "property": "6 independent recheck",
+     "ok": true,
+     "detail": "status transfer"
+    },
+    {
+     "property": "7 assistance history",
+     "ok": true,
+     "detail": "independent 24/24 of 24 unaided first answers; 0 assisted"
+    },
+    {
+     "property": "8 no false mastery",
+     "ok": true,
+     "detail": "status transfer; 24 unaided right"
+    },
+    {
+     "property": "9 retention / recovery decision",
+     "ok": true,
+     "detail": "retention passed; cycles passed"
+    },
+    {
+     "property": "10 bounded termination",
+     "ok": true,
+     "detail": "ended done after 50 interactions"
+    }
+   ],
+   "components": [
+    "intervention.moduleState",
+    "server-grader.gradeRequest",
+    "session.learnerState / evidenceFor"
+   ]
+  },
+  {
+   "id": "L-02",
+   "start": "gen:lin:2,17,11",
+   "ended": "done",
+   "submissions": 29,
+   "teaching": [
+    "fix_finish"
+   ],
+   "authoritative": {
+    "status": "transfer",
+    "independent": "22/26",
+    "assisted": "2/2",
+    "retentionHistory": [
+     "passed"
+    ]
+   },
+   "properties": [
+    {
+     "property": "1 grading authority",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "property": "2 evidence recording",
+     "ok": true,
+     "detail": "attempts 28 + unresolved 0 + awaiting a teacher 1 vs submissions 29"
+    },
+    {
+     "property": "3 honest uncertainty",
+     "ok": true,
+     "detail": "hypotheses resolved"
+    },
+    {
+     "property": "4 investigation decision",
+     "ok": true,
+     "detail": "4 investigation step(s)"
+    },
+    {
+     "property": "5 eligible teaching",
+     "ok": true,
+     "detail": "1 explanation(s): fix_finish"
+    },
+    {
+     "property": "6 independent recheck",
+     "ok": true,
+     "detail": "status transfer"
+    },
+    {
+     "property": "7 assistance history",
+     "ok": true,
+     "detail": "independent 22/26 of 26 unaided first answers; 2 assisted"
+    },
+    {
+     "property": "8 no false mastery",
+     "ok": true,
+     "detail": "status transfer; 22 unaided right"
+    },
+    {
+     "property": "9 retention / recovery decision",
+     "ok": true,
+     "detail": "retention passed; cycles passed"
+    },
+    {
+     "property": "10 bounded termination",
+     "ok": true,
+     "detail": "ended done after 75 interactions"
+    }
+   ],
+   "components": [
+    "explanation-review.contentEligibility",
+    "hypotheses.hypothesesFor (learner-hypothesis@1, provisional)",
+    "hypotheses.investigationTrigger",
+    "intervention.moduleState",
+    "intervention.recovery",
+    "server-grader.gradeRequest",
+    "session.learnerState / evidenceFor",
+    "session.make.teach",
+    "teaching-contract.teachingEligibility"
+   ]
+  },
+  {
+   "id": "L-04",
+   "start": "gen:lin:2,17,11",
+   "ended": "pause",
+   "submissions": 9,
+   "teaching": [
+    "balance",
+    "two_steps"
+   ],
+   "authoritative": {
+    "status": "guided",
+    "independent": "0/7",
+    "assisted": "2/2",
+    "retentionHistory": []
+   },
+   "properties": [
+    {
+     "property": "1 grading authority",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "property": "2 evidence recording",
+     "ok": true,
+     "detail": "attempts 9 + unresolved 0 + awaiting a teacher 0 vs submissions 9"
+    },
+    {
+     "property": "3 honest uncertainty",
+     "ok": true,
+     "detail": "hypotheses unsupported"
+    },
+    {
+     "property": "4 investigation decision",
+     "ok": true,
+     "detail": "4 investigation step(s)"
+    },
+    {
+     "property": "5 eligible teaching",
+     "ok": true,
+     "detail": "2 explanation(s): balance,two_steps"
+    },
+    {
+     "property": "6 independent recheck",
+     "ok": true,
+     "detail": "status guided"
+    },
+    {
+     "property": "7 assistance history",
+     "ok": true,
+     "detail": "independent 0/7 of 7 unaided first answers; 2 assisted"
+    },
+    {
+     "property": "8 no false mastery",
+     "ok": true,
+     "detail": "status guided; 0 unaided right"
+    },
+    {
+     "property": "9 retention / recovery decision",
+     "ok": true,
+     "detail": "retention none; cycles none"
+    },
+    {
+     "property": "10 bounded termination",
+     "ok": true,
+     "detail": "ended pause after 68 interactions"
+    }
+   ],
+   "components": [
+    "explanation-review.contentEligibility",
+    "hypotheses.hypothesesFor (learner-hypothesis@1, provisional)",
+    "hypotheses.investigationTrigger",
+    "intervention.moduleState",
+    "server-grader.gradeRequest",
+    "session.learnerState / evidenceFor",
+    "session.make.teach",
+    "teaching-contract.teachingEligibility"
+   ]
+  },
+  {
+   "id": "L-05",
+   "start": "gen:lin:2,17,11",
+   "ended": "done",
+   "submissions": 28,
+   "teaching": [],
+   "authoritative": {
+    "status": "transfer",
+    "independent": "26/27",
+    "assisted": "0/0",
+    "retentionHistory": [
+     "failed+recovered",
+     "passed"
+    ]
+   },
+   "properties": [
+    {
+     "property": "1 grading authority",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "property": "2 evidence recording",
+     "ok": true,
+     "detail": "attempts 27 + unresolved 0 + awaiting a teacher 1 vs submissions 28"
+    },
+    {
+     "property": "3 honest uncertainty",
+     "ok": true,
+     "detail": "hypotheses none"
+    },
+    {
+     "property": "4 investigation decision",
+     "ok": true,
+     "detail": "3 investigation step(s)"
+    },
+    {
+     "property": "5 eligible teaching",
+     "ok": true,
+     "detail": "0 explanation(s): "
+    },
+    {
+     "property": "6 independent recheck",
+     "ok": true,
+     "detail": "status transfer"
+    },
+    {
+     "property": "7 assistance history",
+     "ok": true,
+     "detail": "independent 26/27 of 27 unaided first answers; 0 assisted"
+    },
+    {
+     "property": "8 no false mastery",
+     "ok": true,
+     "detail": "status transfer; 26 unaided right"
+    },
+    {
+     "property": "9 retention / recovery decision",
+     "ok": true,
+     "detail": "retention passed; cycles failed,passed"
+    },
+    {
+     "property": "10 bounded termination",
+     "ok": true,
+     "detail": "ended done after 56 interactions"
+    }
+   ],
+   "components": [
+    "hypotheses.investigationTrigger",
+    "intervention.moduleState",
+    "server-grader.gradeRequest",
+    "session.learnerState / evidenceFor"
+   ]
+  },
+  {
+   "id": "L-08",
+   "start": "gen:lin:2,17,11",
+   "ended": "done",
+   "submissions": 23,
+   "teaching": [],
+   "authoritative": {
+    "status": "transfer",
+    "independent": "21/22",
+    "assisted": "0/0",
+    "retentionHistory": [
+     "pending"
+    ]
+   },
+   "properties": [
+    {
+     "property": "1 grading authority",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "property": "2 evidence recording",
+     "ok": true,
+     "detail": "attempts 22 + unresolved 0 + awaiting a teacher 1 vs submissions 23"
+    },
+    {
+     "property": "3 honest uncertainty",
+     "ok": true,
+     "detail": "hypotheses none"
+    },
+    {
+     "property": "4 investigation decision",
+     "ok": true,
+     "detail": "after the slip: 0 starting-check question(s) resumed, no diagnosis of the slip, no teaching"
+    },
+    {
+     "property": "5 eligible teaching",
+     "ok": true,
+     "detail": "0 explanation(s): "
+    },
+    {
+     "property": "6 independent recheck",
+     "ok": true,
+     "detail": "status transfer"
+    },
+    {
+     "property": "7 assistance history",
+     "ok": true,
+     "detail": "independent 21/22 of 22 unaided first answers; 0 assisted"
+    },
+    {
+     "property": "8 no false mastery",
+     "ok": true,
+     "detail": "status transfer; 21 unaided right"
+    },
+    {
+     "property": "9 retention / recovery decision",
+     "ok": true,
+     "detail": "retention scheduled; cycles pending"
+    },
+    {
+     "property": "10 bounded termination",
+     "ok": true,
+     "detail": "ended done after 46 interactions"
+    }
+   ],
+   "components": [
+    "hypotheses.investigationTrigger",
+    "intervention.moduleState",
+    "server-grader.gradeRequest",
+    "session.learnerState / evidenceFor"
+   ]
+  }
+ ],
+ "geometryComponents": {
+  "G-01": [
+   "intervention.moduleState",
+   "server-grader.gradeRequest"
+  ],
+  "G-02": [
+   "hypotheses.hypothesesFor (learner-hypothesis@1, provisional)",
+   "hypotheses.investigationTrigger",
+   "intervention.moduleState",
+   "intervention.recovery",
+   "server-grader.gradeRequest",
+   "teaching-contract.teachingEligibility"
+  ],
+  "G-03": [
+   "hypotheses.investigationTrigger",
+   "intervention.moduleState",
+   "server-grader.gradeRequest"
+  ],
+  "G-04": [
+   "hypotheses.investigationTrigger",
+   "intervention.moduleState",
+   "server-grader.gradeRequest",
+   "teaching-contract.teachingEligibility"
+  ],
+  "G-05": [
+   "hypotheses.investigationTrigger",
+   "intervention.moduleState",
+   "server-grader.gradeRequest"
+  ],
+  "G-06": [
+   "hypotheses.investigationTrigger",
+   "intervention.moduleState",
+   "server-grader.gradeRequest"
+  ],
+  "G-07": [
+   "intervention.moduleState",
+   "server-grader.gradeRequest"
+  ],
+  "G-08": [
+   "hypotheses.investigationTrigger",
+   "intervention.moduleState",
+   "server-grader.gradeRequest"
+  ]
+ }
+}
