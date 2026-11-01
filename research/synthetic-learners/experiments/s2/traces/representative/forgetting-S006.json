@@ -416,16 +416,19 @@
     ],
     "teaching": [
      {
+      "at": "2026-03-02T09:04:00.000Z",
       "competency": "MATH.algebra.linear-equations",
       "strategy": "balance",
       "kind": "two-step"
      },
      {
+      "at": "2026-03-02T09:07:00.000Z",
       "competency": "MATH.algebra.linear-equations",
       "strategy": "two_steps",
       "kind": "two-step"
      },
      {
+      "at": "2026-03-02T09:25:00.000Z",
       "competency": "MATH.number.rational-numbers",
       "strategy": "number_line",
       "kind": null

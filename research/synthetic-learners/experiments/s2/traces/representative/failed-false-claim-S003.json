@@ -422,11 +422,13 @@
     ],
     "teaching": [
      {
+      "at": "2026-03-02T09:20:00.000Z",
       "competency": "MATH.algebra.linear-equations",
       "strategy": "both_sides",
       "kind": "both-sides"
      },
      {
+      "at": "2026-03-02T09:24:00.000Z",
       "competency": "MATH.algebra.linear-equations",
       "strategy": "brackets",
       "kind": "brackets"
@@ -741,6 +743,7 @@
     ],
     "teaching": [
      {
+      "at": "2026-03-10T09:03:00.000Z",
       "competency": "MATH.algebra.linear-equations",
       "strategy": "balance",
       "kind": "two-step"

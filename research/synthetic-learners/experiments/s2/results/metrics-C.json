@@ -83,6 +83,21 @@
     "d": 41,
     "rate": 0.512
    },
+   "firstClaimAlreadyFalse": {
+    "n": 1,
+    "d": 21,
+    "rate": 0.048
+   },
+   "trueClaimOutlivedKnowledge": {
+    "n": 20,
+    "d": 21,
+    "rate": 0.952
+   },
+   "falseClaimsOnVisitsWithAnswers": {
+    "n": 1,
+    "d": 21,
+    "rate": 0.048
+   },
    "journeysWithFalseAuthoritativeClaim": {
     "n": 21,
     "d": 21,
@@ -162,7 +177,7 @@
    }
   },
   "efficiency": {
-   "medianQuestionsToFirstDiagnosis": 19,
+   "medianQuestionsToFirstDiagnosis": 3,
    "medianQuestionsPerShownSubSkill": 21,
    "meanTeachingPerLearner": 2.85,
    "medianAttemptsPerJourney": 21,
@@ -252,6 +267,21 @@
      "d": 0,
      "rate": null
     },
+    "firstClaimAlreadyFalse": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
     "journeysWithFalseAuthoritativeClaim": {
      "n": 0,
      "d": 0,
@@ -330,7 +360,7 @@
     }
    },
    "efficiency": {
-    "medianQuestionsToFirstDiagnosis": 13,
+    "medianQuestionsToFirstDiagnosis": 3,
     "medianQuestionsPerShownSubSkill": 21,
     "meanTeachingPerLearner": 2.5,
     "medianAttemptsPerJourney": 17,
@@ -419,6 +449,21 @@
      "d": 0,
      "rate": null
     },
+    "firstClaimAlreadyFalse": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
     "journeysWithFalseAuthoritativeClaim": {
      "n": 0,
      "d": 0,
@@ -496,7 +541,7 @@
     }
    },
    "efficiency": {
-    "medianQuestionsToFirstDiagnosis": 8,
+    "medianQuestionsToFirstDiagnosis": 3,
     "medianQuestionsPerShownSubSkill": null,
     "meanTeachingPerLearner": 2.2,
     "medianAttemptsPerJourney": 8,
@@ -586,6 +631,21 @@
      "d": 1,
      "rate": 1
     },
+    "firstClaimAlreadyFalse": {
+     "n": 1,
+     "d": 1,
+     "rate": 1
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 0,
+     "d": 1,
+     "rate": 0
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 1,
+     "d": 1,
+     "rate": 1
+    },
     "journeysWithFalseAuthoritativeClaim": {
      "n": 1,
      "d": 1,
@@ -664,7 +724,7 @@
     }
    },
    "efficiency": {
-    "medianQuestionsToFirstDiagnosis": 20.5,
+    "medianQuestionsToFirstDiagnosis": 3,
     "medianQuestionsPerShownSubSkill": 24,
     "meanTeachingPerLearner": 3.15,
     "medianAttemptsPerJourney": 23.5,
@@ -755,6 +815,21 @@
      "d": 40,
      "rate": 0.5
     },
+    "firstClaimAlreadyFalse": {
+     "n": 0,
+     "d": 20,
+     "rate": 0
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 20,
+     "d": 20,
+     "rate": 1
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 0,
+     "d": 20,
+     "rate": 0
+    },
     "journeysWithFalseAuthoritativeClaim": {
      "n": 20,
      "d": 20,
@@ -834,7 +909,7 @@
     }
    },
    "efficiency": {
-    "medianQuestionsToFirstDiagnosis": 33.5,
+    "medianQuestionsToFirstDiagnosis": 26,
     "medianQuestionsPerShownSubSkill": 21,
     "meanTeachingPerLearner": 3.55,
     "medianAttemptsPerJourney": 41,
