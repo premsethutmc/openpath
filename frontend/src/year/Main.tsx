@@ -13,7 +13,7 @@ import { Api, type PupilSummary } from "../english/logic/account";
 import { goal as goalById, goals, moduleFor, question, questions } from "../../../packages/learning/src/content";
 import { latestReleases, releasesFor, sampleFor } from "../../../packages/learning/src/curricula";
 import { allOutcomesOf, assigned, review, subjectSupported, synthesise, type CurriculumRelease, type ReviewDecision } from "../../../packages/learning/src/curriculum";
-import { releaseCoverage, UNSUPPORTED } from "../../../packages/learning/src/coverage";
+import { UNSUPPORTED } from "../../../packages/learning/src/coverage";
 import { offersFor } from "../../../packages/learning/src/decomposition";
 import { extract } from "../../../packages/learning/src/extract";
 import { decompose, parseProblem, problemOf } from "../../../packages/learning/src/families";
@@ -27,7 +27,7 @@ import { delayedCheckFact } from "../../../packages/learning/src/due-display";
 import { learnerState, make, type StudyRecord, type StudyUpdate } from "../../../packages/learning/src/session";
 import { writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
 import { isDrawing, SketchView } from "./SketchPad";
-import { flatten, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
+import { contentOf, flatten, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
 import { setActiveRegistry, type Registry } from "../../../packages/learning/src/review";
 import { Icon } from "./icons";
 import { Module, Recovery, Single, STATUS_WORD, type Ctx } from "./Learn";
@@ -456,7 +456,7 @@ function App() {
           <TileGrid tiles={s.children} onOpen={(t) => open(t, [s.id, t.id])} />
         </section>
       ))}
-      <CoverageCard release={release} />
+      <CoverageCard release={release} learner={learner} />
       {overlays.map((o) => (
         <section key={o!.goal.id} aria-label={`Goal ${o!.goal.name}`}>
           <div className="section-title"><h2>Your goal: {o!.goal.name}</h2></div>
@@ -634,26 +634,18 @@ function TileDetail({ t, ev, onStart }: { t: Tile; ev: Ctx["evidence"]; onStart?
   );
 }
 
-/** What the platform can teach from this textbook, measured separately for each kind of content (coverage@1). */
-function CoverageCard({ release }: { release: CurriculumRelease }) {
-  const c = useMemo(() => releaseCoverage(release), [release]);
-  const row = (label: string, n: number) => <li key={label}><b>{n}</b> of {c.counts.total} · {label}</li>;
-  return (
-    <details className="panel coverage" style={{ marginTop: 16 }}>
-      <summary><b>What OpenPath can teach from this textbook</b> <span className="small muted">{c.counts.module} of {c.counts.total} skills have a full learning module · {c.counts.approved} educator-approved</span></summary>
-      <p className="small">Read from the book: {c.extracted.chapters} chapters{c.extracted.sections ? `, ${c.extracted.sections} sections` : ""}, {c.extracted.outcomes} outcomes. Mapped to a skill: {c.mapping.accepted} of {c.extracted.outcomes}{c.mapping.proposals ? ` (${c.mapping.proposals} kept as proposals)` : ""}.</p>
-      <ul className="plain small" aria-label="Coverage by kind of content">
-        {row("with diagnostic questions", c.counts.diagnostic)}
-        {row("with teaching strategies", c.counts.strategies)}
-        {row("with practice", c.counts.practice)}
-        {row("with independent assessment", c.counts.independent)}
-        {row("with a delayed (retention) check", c.counts.retention)}
-        {row("educator-approved", c.counts.approved)}
-      </ul>
-      {c.counts.none > 0 && <p className="small">No learning content yet: {c.competencies.filter((x) => x.module === "none").map((x) => x.name).join(", ")}.</p>}
-      <p className="small muted">Content is original OpenPath material and not yet educator-reviewed, so no skill can be verified on it. These are counts of content, not of learning.</p>
-    </details>
-  );
+/** Reuse validated tile metadata here; full question-pool audits belong to coverage tooling. */
+function CoverageCard({ release, learner }: { release: CurriculumRelease; learner: string }) {
+  const rows = [...new Set(assigned(release).map(a => a.competency))].map(id => ({ id, content: contentOf(id) }));
+  const complete = rows.filter(r => r.content.level === "module").length;
+  const missing = rows.filter(r => r.content.level === "none");
+  return <details className="panel coverage" style={{ marginTop: 16 }}>
+    <summary><b>What OpenPath can teach from this textbook</b> <span className="small muted">{complete} of {rows.length} mapped skills have content in a learning module</span></summary>
+    <p>Modules and teaching completeness are different. Some explanations, methods or practice may still be missing. Existing educator-review labels remain visible in each lesson.</p>
+    {missing.length > 0 && <p className="small">No learning content yet: {missing.map(r => graph.get(r.id).name).join(", ")}.</p>}
+    <a href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>View chapters and available teaching</a>
+    <p className="small muted">These are counts of available content, not of learning or verified mastery.</p>
+  </details>;
 }
 
 function ExamPlanCard({ goalId, ev }: { goalId: string; ev: Ctx["evidence"] }) {

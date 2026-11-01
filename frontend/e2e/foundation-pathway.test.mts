@@ -26,8 +26,7 @@ const server=http.createServer((req,res)=>{
 await new Promise<void>(r=>server.listen(port,'127.0.0.1',r));
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH??'/usr/bin/chromium',args:['--no-sandbox']});
 const context=await browser.newContext({viewport:{width:390,height:844}}),page=await context.newPage();
-// Full board curriculum renders more content than the small synthetic pathway fixture.
-if(accessOnly)page.setDefaultTimeout(90_000);
+let coldYearMs=0,warmYearMs=0;
 const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
 async function call(path:string,body?:unknown){return page.evaluate(async({path,body})=>{const token=document.cookie.match(/(?:^|; )csrftoken=([^;]*)/)?.[1]??'';const r=await fetch('/api'+path,{method:body?'POST':'GET',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRFToken':decodeURIComponent(token)},...(body?{body:JSON.stringify(body)}:{})});return {status:r.status,data:await r.json().catch(()=>null)};},{path,body});}
 try{
@@ -38,7 +37,9 @@ try{
  const id=pupil.data.id,r=latestReleases.find(r=>r.grade===(accessOnly?7:1)&&(!accessOnly||r.id.startsWith('cbse-')))! ;
  const enrol={kind:'learning_record',id:`enrol-${Date.now()}`,at:new Date().toISOString(),learnerId:id,sessionId:`learn:${id}:setup`,record:'enrol',grade:r.grade,academicYear:'2026-27',curriculum:{id:r.id,version:r.version,hash:r.hash}};
  assert.equal((await call(`/pupils/${id}/events/`,{subject:'mathematics',seq:0,event:enrol})).status,201);
+ const yearStart=Date.now();
  await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&foundation=1`);
+ await page.getByLabel('Target topic',{exact:true}).waitFor();coldYearMs=Date.now()-yearStart;
  await page.getByLabel('Target topic',{exact:true}).selectOption(target);await page.getByRole('button',{name:'Use this learning goal'}).click();
  await page.getByText('Current goal:',{exact:false}).waitFor();
  if(accessOnly) {
@@ -84,8 +85,9 @@ try{
   await page.getByRole('button',{name:'Return to teaching',exact:true}).click();
   await page.locator('.teaching-head').waitFor();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+  const warmStart=Date.now();await page.getByRole('button',{name:'← My year',exact:true}).click();await page.getByLabel('Target topic',{exact:true}).waitFor();warmYearMs=Date.now()-warmStart;
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({passed:true,grade:7,target,missingPrerequisites:true,teachingOpen:true,supportOptional:true,failedSaveRetried:true,assisted:true,persistence:true,replay:true,phone:'390x844'}));
+  console.log(JSON.stringify({passed:true,coldYearMs,warmYearMs,grade:7,target,missingPrerequisites:true,teachingOpen:true,supportOptional:true,failedSaveRetried:true,assisted:true,persistence:true,replay:true,phone:'390x844'}));
  } else {
  const visited=new Set<string>();let attempted=0;
  if(!geometryOnly) {
