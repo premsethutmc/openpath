@@ -1,0 +1,31 @@
+{
+  "baseline": "49e0e1d7cb10b528375a408b6ac52fa98e302dfd",
+  "mathematicsTypecheck": {
+    "baselineDiagnostics": 188,
+    "currentDiagnostics": 188,
+    "newDiagnostics": [],
+    "removedDiagnostics": []
+  },
+  "mainTypecheck": "pass",
+  "yearBuild": "pass",
+  "graderInputsVerified": 207,
+  "phone": {
+    "passed": true,
+    "topics": [
+      "MATH.number.addition",
+      "MATH.number.subtraction",
+      "MATH.number.zero",
+      "MATH.number.hundreds",
+      "MATH.number.count-objects",
+      "MATH.number.compare-numbers",
+      "MATH.number.place-value-tens",
+      "MATH.number.addition-regroup"
+    ],
+    "attempted": 20,
+    "events": 22,
+    "phone": "390x844",
+    "freshLogin": true,
+    "geometryWorking": "unsupported",
+    "gradingPolicy": "grading-policy@1"
+  }
+}

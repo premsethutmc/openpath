@@ -1,5 +1,7 @@
 # Acceptance boundaries
 
+This records the initial slice through `49e0e1d`. See [CONNECTED.md](CONNECTED.md) for the subsequent integration, teaching repairs and validation.
+
 | Requirement | Delivered evidence | Remaining limitation |
 | --- | --- | --- |
 | Shared working boundary | Question/competency/checker/version binding; replay tampering test; async deadline; immutable Django decision persistence. | Async observation seam is not a live certified Python grading adapter. |

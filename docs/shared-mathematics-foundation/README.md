@@ -1,6 +1,6 @@
 # Shared mathematics foundation — local implementation
 
-This is an implementation slice, not a claim that geometry proofs or the mathematics curriculum are complete. The new evidence policy is available only to explicitly opted-in local preview callers (`?foundation=1` in the existing slice). No production policy flag is enabled.
+The current connected continuation is described in [CONNECTED.md](CONNECTED.md), including a reuse map, real persisted year-flow journeys, opt-in grading and remaining gaps. No production flag is globally enabled. The sections below record the initial implementation through `49e0e1d`; its preview-only and teaching limitations are superseded where the connected report says so.
 
 ## Pinned inputs
 
@@ -11,7 +11,7 @@ This is an implementation slice, not a claim that geometry proofs or the mathema
 
 Remote heads were checked with `git ls-remote --heads origin`. No source branch was modified. Research inputs and frozen results were not regenerated.
 
-## Changes
+## Initial implementation through 49e0e1d
 
 1. Working assessments now carry prospective `working-provenance@1`: question, competency, checker/version and whether reasoning was demonstrated, refuted or not established. The existing answer verdict remains separate. Replay rejects a changed binding; historical records remain readable without inventing new certificates.
 2. `gradeRequestAsync` provides an asynchronous boundary before a decision is persisted. Experimental observations have a one-second deadline, retain their own identity/version, and explicitly carry `methodAuthority: false`. Neither positive entailment nor an experimental negative verdict changes answer credit or method evidence. The geometry Python checker remains disconnected from authoritative method grading; the async observer is an extension seam, not a claim of a live geometry adapter.
@@ -26,7 +26,7 @@ Remote heads were checked with `git ls-remote --heads origin`. No source branch 
 
 A separate reviewer inspected evidence/security logic and the final input changes. Repairs included event ordering, untrusted decision exclusions, historical-error loops, impossible method requirements, partial evidence binding, async deadlines, server session binding and review-assistance recording, and preserving symbolic-answer interpretation when enabling geometry working. The old browser test servers also attempted to send a second HTTP status for missing assets; reads now occur before headers.
 
-## Limits
+## Limits at 49e0e1d
 
 - No certified geometry method adapter is connected. The known alternative-proof false rejections and bare-conclusion semantics are isolated by conservative fallback, not repaired inside the Python reasoner.
 - Targeted geometry explanations and new multi-step generators have not been authored. A pending diagnosed gap can still reach generic teaching; this slice does not certify teaching quality.
@@ -34,7 +34,7 @@ A separate reviewer inspected evidence/security logic and the final input change
 - The async boundary preserves synchronous callers. The current Django grader entrypoint remains synchronous; observation callbacks are supplied by trusted code, not requests. A future Python adapter needs an explicit trusted task mapping and cancellation for its worker process.
 - The legacy full mathematics typecheck has inherited errors. New diagnostics are compared against the pinned baseline without adding exclusions.
 
-## Upward progression and engineering preparation
+## Initial upward-progression boundary
 
 The inspected production `goals.ts` overlay restricts challenges to the current curriculum and grade; `plan.ts` also works within the enrolled curriculum. That is an existing limitation, not the intended product boundary. Grade should place a learner initially, not cap their mathematical pathway.
 

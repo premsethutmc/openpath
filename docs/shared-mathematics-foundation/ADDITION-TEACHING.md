@@ -1,5 +1,7 @@
 # Addition: teaching responsibility, not a promised learning outcome
 
+This records the initial slice through `49e0e1d`. See [CONNECTED.md](CONNECTED.md) for the subsequent integration, teaching repairs and validation.
+
 The product's responsibility is to offer the concept, intelligible transitions, opportunities to participate, help and a useful next action. Passing an answer checker is not evidence that this responsibility is complete. Real-learner efficacy studies are not a prerequisite for this implementation slice.
 
 The existing families were inspected at the requested examples, not inferred from module counts.

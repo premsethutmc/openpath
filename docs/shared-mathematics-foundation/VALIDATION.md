@@ -1,5 +1,7 @@
 # Validation
 
+This records the initial slice through `49e0e1d`. See [CONNECTED.md](CONNECTED.md) for the subsequent integration, teaching repairs and validation.
+
 Runtime: Node 24.19.0, Bun 1.4.4, Python 3.12.14, installed Chromium 154. Runtime dependencies were installed locally; no production services were used.
 
 Commands:
