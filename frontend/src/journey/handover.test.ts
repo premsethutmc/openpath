@@ -245,3 +245,18 @@ test("R4 a later answer elsewhere in the competency does not cancel a valid ackn
   assert.equal(handoverState(LE, s.state().records, s.now).route, "reentry-acknowledged");
 });
 
+
+test("R5 no duplicate retention events: unique records, one history entry per check, unchanged by replay or later returns", () => {
+  const f = shownLearner();
+  const due = Date.parse(f.session.state().evidence(LE).retentionDueAt!);
+  f.later((due - f.session.now) / DAY); visit(f, learners.strong(), 7);
+  const ids = f.session.events.map((e) => (e as { id?: string }).id).filter(Boolean);
+  assert.equal(new Set(ids).size, ids.length, "every stored record id is unique");
+  const h1 = f.session.state().evidence(LE).retentionHistory;
+  assert.ok(h1.length >= 1);
+  const stored = JSON.parse(JSON.stringify(withDecisions(f.session.events, f.session.decisions))) as LearningRecord[];
+  const s1 = SliceSession.fromEvents(f.session.learnerId, LE, stored, f.session.now, f.session.session);
+  assert.deepEqual(s1.state().evidence(LE).retentionHistory, h1, "replay gives the same history");
+  f.later(1); visit(f, learners.strong(), 8);
+  assert.equal(f.session.state().evidence(LE).retentionHistory.length, h1.length, "a later return adds no retention event");
+});

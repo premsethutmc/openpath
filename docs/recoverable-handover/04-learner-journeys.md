@@ -13,7 +13,7 @@
   - `strong` is right throughout.
 - **Policy:** the default (re-entry after 2 days, 2 self-service re-entries, acknowledgement valid for 14 days).
 
-**Tests:** `frontend/src/journey/handover.test.ts` contains H01–H16, a policy test and R1–R4 (the independent review's fixes). **21/21 pass** (doc 6).
+**Tests:** `frontend/src/journey/handover.test.ts` contains H01–H16, a policy test, R1–R4 (the independent review's fixes) and R5 (no duplicate retention events). **22/22 pass** (doc 6).
 
 **Traces:** `scripts/h1-journeys.mts` writes the machine-readable traces below. The final-run copy is in `traces/h1-journeys.json`.
 
@@ -42,6 +42,7 @@
 | R2 | Old acknowledgement | An acknowledgement from before the pause neither opens it nor relabels a self-service re-entry. | pass |
 | R3 | After an unreadable-answer pause | The re-entry question is not the unreadable question. | pass |
 | R4 | Later answers elsewhere | A later answer elsewhere in the competency does not cancel a valid acknowledgement. | pass |
+| R5 | Retention events | Record ids are unique; replay gives the same retention history; a later return adds no retention event. | pass |
 
 ## Browser
 
