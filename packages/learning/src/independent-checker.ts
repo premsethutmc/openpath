@@ -987,7 +987,7 @@ function run(statement: string, parsed: NaturalParseResult): AlgebraCheck {
     if (!atoms.every((a) => a.kind === "equation" || a.kind === "inequality")) throw new Unsupported("the condition attached to the problem must be equations or inequalities");
     premises.push(...atoms, ...(pp.lines[0].restrictions ?? []));
   }
-  if (premises.length && !(solveProblem && rel0.kind !== "conjunction")) throw new Unsupported("a condition attached to this kind of problem is not supported (it is not silently ignored)");
+  if (premises.length && !solveProblem) throw new Unsupported("a condition attached to this kind of problem is not supported (it is not silently ignored)");
   if (whenM && !solveProblem) {
     if (rel0.kind !== "expression") throw new Unsupported("an evaluation problem needs an expression");
     const bp = parseNaturalWorking({ format: "natural", text: whenM[2] });

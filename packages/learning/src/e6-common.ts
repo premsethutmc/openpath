@@ -67,7 +67,7 @@ export function prepareRows(text: unknown): Row[] | { error: string; resource?: 
 
 export class Builder {
   readonly records: { id: string; judge: Judge; dependsOn: string[]; evidence: BindingEvidence | null }[] = [];
-  constructor(readonly parsed: NaturalParseResult, readonly destination: string) {}
+  readonly parsed: NaturalParseResult; readonly destination: string; constructor( parsed: NaturalParseResult,  destination: string) {this.parsed = parsed; this.destination = destination; }
   add(index: number, judge0: Judge, dependsOn: number[] | "prev" = "prev"): void {
     const line = this.parsed.lines[index];
     // E7 repair E: a refutation is trusted only if the whole line was interpreted. When the interpreted span leaves out mathematical content of the line (numerals, operators: `from 1 to 2`),
@@ -83,7 +83,7 @@ export class Builder {
 }
 export function syntheticParse(rows: Row[], kind: string): NaturalParseResult {
   const lines: NaturalParsedLine[] = rows.map((r, i) => ({ id: `e6-line-${i + 1}`, source: r.source, relation: { kind: kind as never, notation: r.plain } as never }));
-  return { contractVersion: "openpath-natural-math-input@1" as NaturalParseResult["contractVersion"], classification: "parsed", lines, message: "notation translated into typed claims (E6)" };
+  return { contractVersion: "openpath-natural-math-input@1" as NaturalParseResult["contractVersion"], classification: "parsed", lines, resourceUsage: { characters: rows.reduce((n,r)=>n+r.source.text.length,0), lines: rows.length, tokens: 0, depth: 0 }, message: "notation translated into typed claims (E6)" };
 }
 
 export interface E6Plan {

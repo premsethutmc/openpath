@@ -103,7 +103,7 @@ function lex(src: string): Tk[] {
 }
 class NParser {
   i = 0;
-  constructor(readonly t: Tk[]) {}
+  readonly t: Tk[]; constructor( t: Tk[]) {this.t = t; }
   pk(o = 0) { return this.t[this.i + o]; }
   isOp(v: string, o = 0) { const x = this.pk(o); return !!x && x.k === "op" && x.v === v; }
   done() { return this.i >= this.t.length; }
@@ -675,7 +675,7 @@ export function planNumbersE6(problem: NumProblem, rows: Row[]): E6Plan {
   const allValid = b.records.every((r) => r?.judge.status === "valid");
   const unmetAssumptions = [...spec.needs, ...(needReplacement && !provided.has("with-replacement") && !provided.has("independent") && !stated.has("with-replacement") && !stated.has("independent") ? ["with-replacement"] : [])].filter((a) => !provided.has(a) && !stated.has(a) && !(a === "unordered" && stated.has("ordered") === false && false));
   const contradicted = spec.needs.filter((a) => negated.has(a));
-  let complete = allValid && finalRow === rows.length - 1 && sawAnswerClaim;
+  let complete: boolean = allValid && finalRow === rows.length - 1 && sawAnswerClaim;
   if (spec.noRealRoots) complete = allValid && sawNoReal && finalRow === rows.length - 1;
   else if (spec.setValued) complete = allValid && spec.truth.every((t) => found.some((f) => ceq(f, t))) && finalRow >= 0 && rows.length - 1 === Math.max(...b.records.map((r, i) => (r?.judge.status === "valid" ? i : -1)));
   const notes: string[] = [];

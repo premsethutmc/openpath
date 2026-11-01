@@ -1,7 +1,7 @@
 /** E7 Phase 6: one certification authority, decided from proof obligations and registered evidence mechanisms. */
 import { afterAll, describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
-import { assessMathematicalWorking, type AssessmentEnvelope } from "./unified-math-engine.ts";
+import { assessMathematicalWorking, type AssessmentEnvelope, type MathematicalProblem, type StudentWorking, type AssessOptions } from "./unified-math-engine.ts";
 import { adjudicate, standsOnObligations, structuredObligations } from "./certification-authority.ts";
 import { attribute, MECHANISMS } from "./evidence-provenance.ts";
 import { assemble, internalEv, make } from "./proof-obligations.ts";
@@ -106,10 +106,26 @@ describe("E7 Phase 6: route disagreement is resolved by evidence, not by route p
 });
 
 describe("E7 Phase 6: typed (structured) input gets the same obligations or is non-certifiable", () => {
-  const fx = JSON.parse(readFileSync("tools/mathematics/unified-u2/independent-cases.v2.json", "utf8")).cases as { id: string; problem: unknown; working: unknown; options?: object; expected: { classification: string } }[];
+  const frozen = JSON.parse(readFileSync("tools/mathematics/unified-u2/independent-cases.v2.json", "utf8")).cases as { id: string; category: string; problem: MathematicalProblem; working: StudentWorking; options?: AssessOptions; expected: { classification: string } }[];
+  // U2 froze conclusion entailment. Certification of submitted methods now requires an explicit cited rule.
+  // Author the method in a copy, keeping the frozen source, expected verdicts and every obligation assertion intact.
+  const fx = frozen.map(c => {
+    const theorem = c.category === "triangle-angle" ? "triangle-sum" : c.category === "isosceles" ? "isosceles-base-angles" : null;
+    if (!theorem || !("geometry" in c.working)) return c;
+    return { ...c, working: { ...c.working, geometry: { ...c.working.geometry, steps: c.working.geometry.steps.map(step => {
+      const facts = c.problem.domain === "mixed" ? c.problem.geometry.problem.facts : [];
+      if (Array.isArray(facts) && facts.some(fact => JSON.stringify(fact) === JSON.stringify(step.statement))) return step;
+      return { ...step, cited_theorem: step.cited_theorem ?? theorem };
+    }) } } };
+  });
+  test("the frozen bare geometry conclusion is not itself certified learner reasoning", async () => {
+    const c = frozen.find(c => c.category === "triangle-angle" && c.expected.classification === "verified")!;
+    const a = await assessMathematicalWorking(c.problem, c.working, c.options);
+    expect(a.classification).not.toBe("verified"); expect(a.complete).toBe(false); expect(a.correct).toBeNull(); expect(a.firstInvalidStep).toBeNull();
+  });
   test("a typed acceptance carries per-step derivation and grounding obligations with registered typed mechanisms", async () => {
     const c = fx.find((x) => x.expected.classification === "verified")!;
-    const a = await assessMathematicalWorking(c.problem as never, c.working as never, c.options as never);
+    const a = await assessMathematicalWorking(c.problem, c.working, c.options);
     expect(a.classification).toBe("verified"); const o = a.proofObligations!;
     expect(o.obligations.filter((x) => x.kind === "derivation").length).toBeGreaterThan(0); expect(o.obligations.some((x) => x.kind === "grounding")).toBe(true);
     expect(o.obligations[o.obligations.length - 1].kind).toBe("answer"); expect(a.certification!.integrity.unattributed).toBe(0);
@@ -123,10 +139,18 @@ describe("E7 Phase 6: typed (structured) input gets the same obligations or is n
     const e = { steps: [{ index: 0, classification: "incomplete", justification: "j", reasoner: "symbolic:m3", dependencies: ["problem"] }, { index: 1, classification: "verified", justification: "j", reasoner: "symbolic:m3", dependencies: ["s0"] }], reasoners: [{ id: "symbolic:m3", version: "1" }], classification: "verified", complete: true, justification: "j" } as unknown as AssessmentEnvelope;
     const o = structuredObligations(e); expect(o.obligations.find((x) => x.line === 2 && x.kind === "derivation")!.status).toBe("unresolved");
   });
-  test("every typed fixture keeps its verdict and no accepted typed result is unattributed", async () => {
-    let checked = 0;
-    for (const c of fx.slice(0, 60)) { const a = await assessMathematicalWorking(c.problem as never, c.working as never, c.options as never); expect(a.classification).toBe(c.expected.classification); if (a.classification === "verified") { checked++; expect(a.certification!.integrity.unattributed).toBe(0); } }
-    expect(checked).toBeGreaterThan(5);
+  test("explicit typed methods retain obligations; unjustified citations stay neutral", async () => {
+    let checked = 0, unjustifiedCitations = 0;
+    for (const c of fx.slice(0, 60)) {
+      const a = await assessMathematicalWorking(c.problem, c.working, c.options);
+      // This frozen label predates submitted-method semantics. A registered rule without its required premises is not proof of a false method.
+      const unjustifiedRule = "geometry" in c.working && c.working.geometry.steps.some(step => step.cited_theorem === "parallel-alternate");
+      if (unjustifiedRule) {
+        unjustifiedCitations++; expect(a.classification, c.id).toBe("unsupported"); expect(a.correct).toBeNull(); expect(a.complete).toBe(false);
+      } else expect<string>(a.classification, c.id).toBe(c.expected.classification);
+      if (a.classification === "verified") { checked++; expect(a.certification!.integrity.unattributed).toBe(0); }
+    }
+    expect(unjustifiedCitations).toBe(3); expect(checked).toBe(44);
   });
 });
 

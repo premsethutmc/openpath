@@ -118,7 +118,7 @@ const canonicalSurd = (t: string): boolean => {
 
 class Builder {
   readonly records: { id: string; judge: Judge; dependsOn: string[]; evidence: BindingEvidence | null }[] = [];
-  constructor(readonly parsed: NaturalParseResult, readonly destination: string) {}
+  readonly parsed: NaturalParseResult; readonly destination: string; constructor( parsed: NaturalParseResult,  destination: string) {this.parsed = parsed; this.destination = destination; }
   add(index: number, judge: Judge, dependsOn: number[] | "prev", checker: BindingEvidence["checker"]): void {
     const line = this.parsed.lines[index];
     const deps = dependsOn === "prev" ? (index ? [this.parsed.lines[index - 1].id] : []) : dependsOn.map((i) => this.parsed.lines[i].id);
@@ -130,7 +130,7 @@ class Builder {
 }
 function syntheticParse(rows: RawLine[], kind: "geometry" | "calculus"): NaturalParseResult {
   const lines: NaturalParsedLine[] = rows.map((r, i) => ({ id: `e5-line-${i + 1}`, source: r.source, relation: { kind, notation: r.plain } }));
-  return { contractVersion: "openpath-natural-math-input@1" as NaturalParseResult["contractVersion"], classification: "parsed", lines, message: "notation translated into typed geometry/calculus claims (E5)" };
+  return { contractVersion: "openpath-natural-math-input@1" as NaturalParseResult["contractVersion"], classification: "parsed", lines, resourceUsage: { characters: rows.reduce((n,r)=>n+r.source.text.length,0), lines: rows.length, tokens: 0, depth: 0 }, message: "notation translated into typed geometry/calculus claims (E5)" };
 }
 function finish(parsed: NaturalParseResult, b: Builder, args: { domain: "geometry" | "calculus"; family: string; nativeComplete: boolean; obligations: string[]; notes: string[]; restrictions?: string[]; final?: CalculusClaim; geometry?: E5Plan["geometry"] }): E5Plan {
   const accounts: AccountEntry[] = parsed.lines.map((l, i) => ({ lineId: l.id, role: "claim-step" as const, stepIndex: i, dependsOn: b.records[i]?.dependsOn ?? [] }));
@@ -483,6 +483,7 @@ function calcDerivative(problem: Extract<CalculusProblem, { task: "derivative" }
     for (const m of mm) {
       if (m.t === "fn") continue;
       if (m.t === "dd") { const t = d5(m.operand, v); if (m.order !== 1) { addJ(c, i, uns("repeated Leibniz operators inside a line are not supported")); return; } js.push(t ? { status: "valid", reason: "operator form", digest: null } : uns("operand outside differentiation rules")); values.push(t as Expr); continue; }
+      if(m.t !== "expr") { addJ(c, i, uns("notation outside the derivative expression rules")); return; }
       js.push(judgeIdentity(truth, m.e, v, anchor === 0 ? "rewriting the function" : `derivative of order ${anchor}`)); values.push(m.e);
     }
     // dd members are equal to the truth by construction when connected; their right-hand neighbours are checked above
@@ -558,7 +559,7 @@ function calcIndefinite(problem: Extract<CalculusProblem, { task: "indefinite-in
     addJ(c, i, j);
   });
   const allValid = b.records.length === rows.length && b.records.every((r) => r?.judge.status === "valid");
-  let complete = allValid && finalOk; let finalClaim: CalculusClaim | undefined;
+  let complete: boolean = allValid && finalOk; let finalClaim: CalculusClaim | undefined;
   if (complete) {
     const last = splitTop(rows[rows.length - 1].plain, "=").pop() as string; const e = ex(last); const s = e ? splitConstant(e) : null;
     const t = s ? d5(s.core, v) : null; complete = !!s && s.constant && !!t && judgeIdentity(g, t, v, "final").status === "valid"; if (complete && s) finalClaim = { kind: "expression", value: s.core, constantIncluded: true };
@@ -613,7 +614,7 @@ function calcDefinite(problem: Extract<CalculusProblem, { task: "definite-integr
     prevRhs = seq[seq.length - 1]; lastValue = prevRhs; const lastM = mm[mm.length - 1]; lastCanonical = lastM.t === "expr" && canonicalNumeral(lastM.text);
   });
   const allValid = b.records.length === rows.length && b.records.every((r) => r?.judge.status === "valid");
-  let complete = allValid && lastCanonical && lastValue !== null && truthV !== null && qeq(lastValue, truthV);
+  let complete: boolean = allValid && lastCanonical && lastValue !== null && truthV !== null && qeq(lastValue, truthV);
   if (allValid && lastCanonical && lastValue !== null && truthV !== null && !qeq(lastValue, truthV)) {
     const last = rows.length - 1; const r = b.records[last]; if (r) b.records[last] = { ...r, judge: { status: "invalid", reason: `the final value ${qtext(lastValue)} is not the value of the posed integral`, scope: r.judge.scope }, evidence: null };
   }

@@ -27,7 +27,7 @@ function normalize(type:BindingType,raw:any):unknown|null{
   if(type==="exact-scalar"||type==="probability"){
     const value=exactString(raw)??exactString(raw?.value)??exactString(raw?.value?.rational);
     if(!value)return null;
-    if(type==="probability"){const[n,d="1"]=value.split("/").map(BigInt);if(d===0n||n<0n||n>d)return null}
+    if(type==="probability"){const[n,d=1n]=value.split("/").map(BigInt);if(d===0n||n<0n||n>d)return null}
     return{kind:type,value};
   }
   if(type==="vector"&&raw?.kind==="vector"&&Array.isArray(raw.value)&&raw.value.every((x:unknown)=>exactString(x)))return{kind:type,value:raw.value.map(String),dimension:raw.value.length};

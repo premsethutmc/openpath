@@ -1,3 +1,4 @@
+type WithoutSpan<T> = T extends unknown ? Omit<T, "sp"> : never;
 /**
  * The strict response parser (grading-policy@1, UNIFIED_GRADING_ARCHITECTURE.md §4). Every learner answer is read here, once, before
  * any comparison or kernel sees it. It never guesses:
@@ -43,8 +44,8 @@ export function semanticsOf(q: { type: string; answer: string; options?: readonl
   }
 }
 
-class Invalid extends Error { constructor(public reason: InvalidReason, public detail: string) { super(detail); } }
-class Ambiguous extends Error { constructor(public readings: [string, string], public detail: string) { super(detail); } }
+class Invalid extends Error { public reason: InvalidReason; public detail: string; constructor( reason: InvalidReason,  detail: string) { super(detail);this.reason = reason; this.detail = detail;  } }
+class Ambiguous extends Error { public readings: [string, string]; public detail: string; constructor( readings: [string, string],  detail: string) { super(detail);this.readings = readings; this.detail = detail;  } }
 const fail = (reason: InvalidReason, detail: string): never => { throw new Invalid(reason, detail); };
 
 const blankNotation = (): Notation => ({ orJoin: false, surds: [], surdInDenominator: false, unreducedFraction: false, expanded: true, mixedNumber: false, decimal: false, fraction: false, inequality: false, braces: false, parentheses: false, equation: false, constant: false, groupingCommas: false });
@@ -64,7 +65,7 @@ const SUPER: Record<string, string> = { "⁰": "0", "¹": "1", "²": "2", "³": 
 export function tokenize(src: string): Tok[] {
   const out: Tok[] = [];
   let i = 0, sp = false;
-  const push = (k: Omit<Tok, "sp">) => { out.push({ ...k, sp } as Tok); sp = false; };
+  const push = (k: WithoutSpan<Tok>) => { out.push({ ...k, sp } as Tok); sp = false; };
   while (i < src.length) {
     const c = src[i];
     if (/\s/.test(c)) { sp = true; i++; continue; }
@@ -99,7 +100,7 @@ export function tokenize(src: string): Tok[] {
     const two = src.slice(i, i + 2);
     if (two === "<=" || two === ">=" || two === "=<" || two === "=>") { push({ t: "cmp", v: two[0] === "=" ? (`${two[1]}=` as "<=") : (two as "<=") }); i += 2; continue; }
     if (two === "**") { push({ t: "op", v: "^" }); i += 2; continue; }
-    const ONE: Record<string, Omit<Tok, "sp">> = {
+    const ONE: Record<string, WithoutSpan<Tok>> = {
       "+": { t: "op", v: "+" }, "-": { t: "op", v: "-" }, "−": { t: "op", v: "-" }, "–": { t: "op", v: "-" }, "—": { t: "op", v: "-" }, "*": { t: "op", v: "*" }, "×": { t: "op", v: "*" },
       "·": { t: "op", v: "*" }, "⋅": { t: "op", v: "*" }, "/": { t: "op", v: "/" }, "÷": { t: "op", v: "/" }, "∕": { t: "op", v: "/" }, "^": { t: "op", v: "^" },
       "(": { t: "(" }, ")": { t: ")" }, "[": { t: "[" }, "]": { t: "]" }, "{": { t: "{" }, "}": { t: "}" }, "|": { t: "|" }, ",": { t: "," }, ";": { t: ";" }, ":": { t: ":" }, "∶": { t: ":" },
@@ -182,7 +183,7 @@ const human = (n: Node): string => show(n).replace(/\*/g, "").replace(/^\((.*)\)
 class ExprParser {
   i = 0;
   vars = new Set<string>();
-  constructor(public toks: Tok[], public stopAt: (t: Tok) => boolean = () => false) {}
+  public toks: Tok[]; public stopAt: (t: Tok) => boolean; constructor( toks: Tok[],  stopAt: (t: Tok) => boolean = () => false) {this.toks = toks; this.stopAt = stopAt; }
   peek(o = 0): Tok | undefined { const t = this.toks[this.i + o]; return t && !this.stopAt(t) ? t : undefined; }
   next(): Tok { return this.toks[this.i++]; }
   done() { return this.peek() === undefined; }

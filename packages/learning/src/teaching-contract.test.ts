@@ -55,7 +55,7 @@ describe("affig (number patterns): every question of all six kinds is taught as 
       expect(t.concept.text[0].includes(given.join(", ")), `${p.id}: ${t.concept.text[0]}`).toBe(true);
       const r = t.representation!;
       if (r.kind === "sequence-table") expect(r.rows.map((x) => x.value), p.id).toEqual(given);
-      else expect(given.includes(r.value), p.id).toBe(true);
+      else { if (!("value" in r)) throw Error(`Unexpected pattern representation: ${r.kind}`); expect(given.includes(r.value), p.id).toBe(true); }
       // and names its own kind of pattern
       expect(t.concept.title.toLowerCase(), p.id).toContain(PATTERNS[p.params[0]].slice(0, 5));
     }

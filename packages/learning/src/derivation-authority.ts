@@ -626,7 +626,7 @@ export class DerivationSession {
   private implied = false; private lastRel: Rel = "="; private candidates: R[] | null = null;
   /** @3: the equations of a disjunction line ("x - 7 = 0 or x + 3 = 0"), each then solved on its own */
   private branches: Tree[][] | null = null;
-  constructor(statement: string, readonly extraNumerals: readonly string[] = []) {
+  readonly extraNumerals: readonly string[]; constructor(statement: string,  extraNumerals: readonly string[] = []) {this.extraNumerals = extraNumerals;
     const t = normalizeTask(statement, extraNumerals);
     this.task = t.ok ? t.task : null; this.failure = t.ok ? null : t.reason;
     this.pool = this.task ? [...this.task.trees] : []; this.last = this.task ? [...this.task.trees] : [];

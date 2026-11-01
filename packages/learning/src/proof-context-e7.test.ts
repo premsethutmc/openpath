@@ -20,7 +20,7 @@ describe("E7 Phase 4: the context is immutable and kinds are never merged", () =
     expect(c2).not.toBe(c); expect(c.proved.length).toBe(0); expect(c2.proved.length).toBe(1); expect(c2.digest).toBe(c.digest);
     const c3 = withStudent(c2, [{ text: "x>5", line: 2, relation: "narrows", coveredBranches: [1], obligation: "o" }]);
     expect(c3.student.length).toBe(1); expect(c3.restrictions).toEqual(["x != 1"]); // the task is untouched by a student assumption
-    expect(() => { (c as { restrictions: string[] }).restrictions.push("x>9"); }).toThrow();
+    expect(() => { Array.prototype.push.call(c.restrictions, "x>9"); }).toThrow();
   });
   test("domain components stay alternatives (never one conjunction)", () => {
     const c = buildProofContext(integral({ domainComponents: ["x<-1", "x>2"] }));

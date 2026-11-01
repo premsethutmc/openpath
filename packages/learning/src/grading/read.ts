@@ -19,9 +19,10 @@ export function readResponse(q: { type: string; answer: string; options?: readon
 /** the decision for a response that is not (yet) an answer: unresolved, no credit, no mastery effect, never an attempt (approved policy P1/P3) */
 export function notAnAnswer(r: Extract<Read, { ok: false }>, clarifications = 0): Assessment {
   const ex = examplesFor(r.semantics);
-  const amb = r.parse.status === "ambiguous";
+  const parse = r.parse;
+  const amb = parse.status === "ambiguous";
   const message = amb
-    ? `Your answer can be read two ways: ${r.parse.readings[0]} or ${r.parse.readings[1]}. Add brackets to show which one you mean. It has not been marked wrong.`
+    ? `Your answer can be read two ways: ${parse.readings[0]} or ${parse.readings[1]}. Add brackets to show which one you mean. It has not been marked wrong.`
     : `Your answer could not be read (${r.parse.detail}). It has not been marked wrong.${ex.length ? ` For example: ${ex.slice(0, 3).join(", ")}.` : ""}`;
   return {
     contract: ASSESSMENT_CONTRACT,
@@ -29,7 +30,7 @@ export function notAnAnswer(r: Extract<Read, { ok: false }>, clarifications = 0)
     evidence: { policy: ASSESSMENT_POLICY, answerCorrect: null, methodExamined: false, derivationVerified: false, firstError: null, clarificationRequired: true, aiFallbackUsed: false, unresolved: true, source: "parser" },
     // one clarification is asked; after it the submission stays pending (and only then may the proposal-only fallback offer a reading)
     feedback: { kind: clarifications ? "pending" : "clarify", message },
-    clarification: clarifications ? null : { kind: amb ? "interpretation" : "answer-field", prompt: amb ? `Did you mean ${r.parse.readings[0]} or ${r.parse.readings[1]}?` : `Type just your final answer, for example ${ex[0] ?? "a number"}.` },
+    clarification: clarifications ? null : { kind: amb ? "interpretation" : "answer-field", prompt: amb ? `Did you mean ${parse.readings[0]} or ${parse.readings[1]}?` : `Type just your final answer, for example ${ex[0] ?? "a number"}.` },
     fallbackEligible: clarifications > 0,
     unreadable: { reason: r.parse.status === "ambiguous" ? "ambiguous" : r.parse.reason, detail: r.parse.detail },
     ms: 0,

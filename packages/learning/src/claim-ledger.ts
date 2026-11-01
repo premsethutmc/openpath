@@ -92,7 +92,7 @@ export function extractLine(line: number, s0: string, base: number, original: st
   // an explicit equivalence connective (⇔, <=>, ⟺, iff) separates two claims, as the natural-working parser splits them into two lines
   const toks = tokenize(s, base).flatMap((t, k, all) => { if (!/^(?:⇔|<=>|⟺|iff)$/.test(t.text)) return [t]; if (k > 0) all[k - 1].brk = true; return []; });
   const claims: LedgerClaim[] = [];
-  const kinds = toks.map((t, i) => {
+  const kinds: ("m" | "w" | "q")[] = toks.map((t, i) => {
     const prevOp = i > 0 && hasRel(toks[i - 1].text), nextOp = i + 1 < toks.length && hasRel(toks[i + 1].text);
     // E7 repair E: a lone A/a/I beside any operator is a variable ("A + B + C = 180"), not an article/pronoun
     const opTok = (u?: Tok) => !!u && /^[+\-*/^×÷−·]+$/.test(u.text);

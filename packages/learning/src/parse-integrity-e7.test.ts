@@ -73,7 +73,7 @@ describe("F: a mechanism proves only the families it declares", () => {
     expect(algebraOnly.length).toBeGreaterThanOrEqual(6);
     const claims = { calculus: ["∫ x^2 dx = x^3/3 + C", "d/dx sin(x) = cos(x)", "lim_(x→0) sin(x)/x = 1"], geometry: ["∠ABC = 70°", "angle C = 180° - 110°"], probability: ["P(A) = 1/6", "Var(X) = 21/10"] };
     for (const m of algebraOnly) {
-      for (const [fam, list] of Object.entries(claims)) for (const c of list) { expect(claimFamily(c)).toBe(fam); const pv = attribute(m.id, "algebra-text", [], c); expect(pv.trusted).toBe(false); expect(pv.reason).toContain("outside its capability"); }
+      for (const [fam, list] of Object.entries(claims)) for (const c of list) { expect<string>(claimFamily(c)).toBe(fam); const pv = attribute(m.id, "algebra-text", [], c); expect(pv.trusted).toBe(false); expect(pv.reason).toContain("outside its capability"); }
       for (let i = 0; i < 6; i++) expect(attribute(m.id, "algebra-text", [], `${2 + rnd(8)}x + ${rnd(9)} = ${rnd(50)}`).trusted).toBe(true);
     }
   });

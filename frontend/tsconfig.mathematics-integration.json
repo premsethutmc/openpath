@@ -1,7 +1,11 @@
 {
   "extends": "./tsconfig.english.json",
   "compilerOptions": {
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": [
+      "node",
+      "bun"
+    ]
   },
   "include": [
     "src/mathematics/canonical.test.ts",

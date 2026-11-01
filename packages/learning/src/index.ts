@@ -32,3 +32,7 @@ export * from "./d2-proof-state.ts";
 export * from "./cross-domain-bindings.ts";
 export * from "./natural-working.ts";
 export * from "./natural-domain-adapters.ts";
+
+// Resolve shared scalar type names explicitly; domain-specific imports remain available.
+export type { Rat } from "./domains-m1";
+export type { Exact } from "./domains-m2";

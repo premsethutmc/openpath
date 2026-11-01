@@ -79,7 +79,7 @@ describe("task restrictions are immutable; a student assumption cannot replace t
 });
 
 // ---------------------------------------------------------------------------------------------------------------- 3. bypasses are blocked
-const LIMIT = { domain: "calculus", task: "limit", expression: { kind: "multiply", factors: [{ kind: "add", terms: [{ kind: "power", base: { kind: "variable", name: "x" }, exponent: 2 }, { kind: "constant", value: "-4" }] }, { kind: "power", base: { kind: "add", terms: [{ kind: "variable", name: "x" }, { kind: "constant", value: "-2" }] }, exponent: -1 }] }, variable: "x", approach: "2", side: "both" };
+const LIMIT: import("./calculus-core.ts").CalculusProblem = { domain: "calculus", task: "limit", expression: { kind: "multiply", factors: [{ kind: "add", terms: [{ kind: "power", base: { kind: "variable", name: "x" }, exponent: 2 }, { kind: "constant", value: "-4" }] }, { kind: "power", base: { kind: "add", terms: [{ kind: "variable", name: "x" }, { kind: "constant", value: "-2" }] }, exponent: -1 }] }, variable: "x", approach: "2", side: "both" };
 const VIETA = { area: "polynomial", coefficientDomain: "complex", data: { coefficients: ["2", "-6", "5"] }, domain: "complex-polynomial", task: "vieta-product" };
 const LN_NEG = { domain: "calculus", task: "derivative", expression: { kind: "log", argument: { kind: "power", base: { kind: "variable", name: "x" }, exponent: 2 } }, restrictions: ["x<0"], variable: "x" };
 

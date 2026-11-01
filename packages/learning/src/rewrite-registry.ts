@@ -28,7 +28,7 @@ export const REWRITE_REGISTRY_VERSION = "openpath-rewrite-registry@3" as const;
 
 // ------------------------------------------------------------------------------------------------ exact numerals (pruning/refusal only)
 class Q {
-  constructor(public n: bigint, public d: bigint = 1n) { if (d < 0n) { n = -n; d = -d; } const g = Q.g(n < 0n ? -n : n, d); this.n = n / g; this.d = d / g; }
+  public n: bigint; public d: bigint; constructor( n: bigint,  d: bigint = 1n) {this.n = n; this.d = d;  if (d < 0n) { n = -n; d = -d; } const g = Q.g(n < 0n ? -n : n, d); this.n = n / g; this.d = d / g; }
   static g(a: bigint, b: bigint): bigint { while (b) [a, b] = [b, a % b]; return a || 1n; }
   static of(s: string): Q { const [i, f = ""] = s.split("."); return new Q(BigInt(i + f), 10n ** BigInt(f.length)); }
   add(o: Q) { return new Q(this.n * o.d + o.n * this.d, this.d * o.d); }

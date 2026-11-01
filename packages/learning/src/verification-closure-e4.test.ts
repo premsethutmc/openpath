@@ -15,7 +15,7 @@ const alg = (statement: string) => ({ domain: "algebra", statement }) as never;
 const run = (statement: string, lines: string[]) => assessMathematicalWorking(alg(statement), nat(lines.join("\n")));
 const gate = (a: AssessmentEnvelope) => a.acceptanceGate;
 const accepted = async (statement: string, lines: string[]) => { const a = await run(statement, lines); expect(a.classification).toBe("verified"); expect(gate(a)?.independentlyVerified).toBe(true); expect(gate(a)?.level).not.toBe("none"); expect(a.complete).toBe(true); return a; };
-const never = async (statement: string, lines: string[], expected?: string) => { const a = await run(statement, lines); expect(a.classification).not.toBe("verified"); expect(a.complete).not.toBe(true); expect(gate(a)?.independentlyVerified ?? false).toBe(false); if (expected) expect(a.classification).toBe(expected); return a; };
+const never = async (statement: string, lines: string[], expected?: string) => { const a = await run(statement, lines); expect(a.classification).not.toBe("verified"); expect(a.complete).not.toBe(true); expect(gate(a)?.independentlyVerified ?? false).toBe(false); if (expected) expect<string>(a.classification).toBe(expected); return a; };
 
 describe("E4 frozen inputs are untouched", () => {
   test("the E4 development and sealed corpora match their recorded hashes", () => {

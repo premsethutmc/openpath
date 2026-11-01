@@ -12,7 +12,7 @@ const ctx = (n = 0) => ({ learnerId: "L", sessionId: "S", at: new Date(Date.UTC(
 
 describe("contract: independent validation before a question may be used", () => {
   test("every released question of the kernel families is verified, none is held", () => {
-    for (const f of KERNEL) for (const q of pool(f).items) { const c = contractFor(q.id)!; expect(c.verification).toBe("verified"); expect(publishable(c)).toBe(true); expect(c.problem?.statement).toBeTruthy(); }
+    for (const f of KERNEL) for (const q of pool(f).items) { const c = contractFor(q.id)!; expect(c.verification).toBe("verified"); expect(publishable(c)).toBe(true); expect(c.problem?.domain).toBe("algebra"); if(c.problem?.domain!=="algebra")throw Error("kernel fixture must have an algebra statement"); expect(c.problem.statement).toBeTruthy(); }
   });
   test("a generator defect is held, not published", () => {
     const pr = problemOf("gen:lin:3,5,4")!;

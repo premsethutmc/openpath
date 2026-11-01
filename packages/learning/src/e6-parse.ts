@@ -24,7 +24,7 @@ export type A =
   | { t: "LIM"; f: A; v: string; at: A | "inf" | "-inf"; side: "both" | "left" | "right" }
   | { t: "V"; k: "inf" | "-inf" | "dne" };
 
-export class NotationError extends Error { constructor(msg: string, readonly kind: "malformed" | "ambiguous" | "unsupported" = "malformed") { super(msg); } }
+export class NotationError extends Error { readonly kind: "malformed" | "ambiguous" | "unsupported"; constructor(msg: string,  kind: "malformed" | "ambiguous" | "unsupported" = "malformed") { super(msg);this.kind = kind;  } }
 
 export const N = (n: number | bigint, d: number | bigint = 1): A => ({ t: "n", v: q(n, d) });
 export const S = (name: string): A => ({ t: "s", name });
@@ -110,7 +110,7 @@ const DIFF_RE = /^d([A-Za-z])$/;
 
 class Parser {
   i = 0;
-  constructor(readonly t: Tok[], readonly h: ParseHints) {}
+  readonly t: Tok[]; readonly h: ParseHints; constructor( t: Tok[],  h: ParseHints) {this.t = t; this.h = h; }
   pk(o = 0): Tok | undefined { return this.t[this.i + o]; }
   isOp(v: string, o = 0): boolean { const x = this.pk(o); return !!x && x.k === "op" && x.v === v; }
   eat(): Tok { const x = this.t[this.i++]; if (!x) throw new NotationError("unexpected end of expression"); return x; }

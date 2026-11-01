@@ -179,7 +179,7 @@ class Env {
   ov: Record<string, A> = {};
   nI = 0;
   hasI = false;
-  constructor(readonly v: string, readonly problemFn: A | null, readonly dom: TaskDom) { this.stated = [...dom.stated]; }
+  readonly v: string; readonly problemFn: A | null; readonly dom: TaskDom; constructor( v: string,  problemFn: A | null,  dom: TaskDom) {this.v = v; this.problemFn = problemFn; this.dom = dom;  this.stated = [...dom.stated]; }
 }
 const CONVENTION_FN = new Set(["f", "g", "h", "y", "r"]);
 
@@ -487,8 +487,8 @@ function derivative(problem: Extract<CalculusProblem, { task: "derivative" }>, r
     let members = (item as Extract<Item, { kind: "math" }>).members;
     if (members.length === 1) { b.add(i, uns("a line must state an equality; a bare expression is not a derivation step")); return; }
     // `dp/ds = …` where p is an otherwise unbound name: p labels the posed function (the derivative of the posed function is what is claimed)
-    { const m0 = members[0];
-      if (m0.t === "D" && m0.of.t === "s" && m0.v === v && m0.k === order && m0.of.name !== v && !env.defs.has(m0.of.name) && !fnNames.has(m0.of.name) && !env.fdefs.has(m0.of.name) && members.length === 2 && !hasNode(members[1], (x) => x.t === "s" && x.name === m0.of.name)) members = [{ t: "D", of: f0, v, k: order } as A, ...members.slice(1)]; }
+    { const m0 = members[0]; const of = m0.t === "D" ? m0.of : null;
+      if (m0.t === "D" && m0.of.t === "s" && m0.v === v && m0.k === order && m0.of.name !== v && !env.defs.has(m0.of.name) && !fnNames.has(m0.of.name) && !env.fdefs.has(m0.of.name) && members.length === 2 && !hasNode(members[1], (x) => x.t === "s" && x.name === (of?.t === "s" ? of.name : undefined))) members = [{ t: "D", of: f0, v, k: order } as A, ...members.slice(1)]; }
     const dvj = dvDefinition(members, env, v); if (dvj) { b.add(i, dvj); return; }
     const dj = differentialLine(members, env, v); if (dj) { b.add(i, dj); return; }
     const def = definitionLine(members, env, { kind: "fn-or-integrand", expr: f0 }, v);

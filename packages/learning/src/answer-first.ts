@@ -12,7 +12,7 @@ export interface AnswerFirstAssessment {
   contract: typeof ANSWER_FIRST_CONTRACT;
   family: "solution-set" | "arithmetic" | "none";
   /** credit: true = answer correct; false = answer wrong or incomplete; null = could not be established (never a guessed binary) */
-  answer: AfAnswer & { status: AfAnswer["status"] | "unsupported"; credit: boolean | null };
+  answer: Omit<AfAnswer, "status"> & { status: AfAnswer["status"] | "unsupported"; credit: boolean | null };
   /** answer-first never claims the written derivation was demonstrated or certified */
   derivationCertified: false;
   diagnosis: null | {
@@ -60,7 +60,7 @@ function assessAnswerFirstIn(problem: unknown, working: unknown, opts: AnswerFir
   let w = working as { format?: string; text?: string } | null;
   // an explicit final answer (the answer field) is the final line; it is never inferred from the working, and a missing working is not an error
   if (typeof opts.finalAnswer === "string" && opts.finalAnswer.trim()) {
-    const prior = w && typeof w.text === "string" && w.text.trim() && (w.format === "natural" || w.format === "latex") ? w : null;
+    const prior = w && typeof w.text === "string" && w.text.trim() && (w.format === "natural" || w.format === "latex") ? { format: w.format, text: w.text } : null;
     w = { format: prior?.format ?? "natural", text: prior ? `${prior.text.replace(/\s+$/, "")}\n${opts.finalAnswer.trim()}` : opts.finalAnswer.trim() };
     if (!prior) opts = { ...opts, diagnose: false };
   }

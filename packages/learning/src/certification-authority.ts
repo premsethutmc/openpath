@@ -151,7 +151,7 @@ export function adjudicate(reports0: RouteReport[], problem: unknown): Assessmen
       const covered = open.every((o) => o.kind === "answer" || (o.kind === "derivation" && o.line !== null && groundedLines.has(o.line)));
       if (covered) { roles.push(role(d, "scope-only", "everything it leaves open was proven and grounded by the accepting route")); continue; }
       roles.push(role(d, "objection", open[0] ? `${open[0].kind} obligation ${open[0].id} is ${open[0].status}: ${open[0].reason}` : `it reports the working ${d.env.classification}`));
-      if (!standing || (d.env.classification === "missing-assumption" && standing.r.env.classification !== "missing-assumption" && standing.r.env.classification !== "invalid")) standing = { r: d, why: "open obligation" };
+      if (!standing) standing = { r: d, why: "open obligation" };
     }
     for (const r of N.filter((x) => x.env.classification !== "ambiguous")) roles.push(role(r, "abstains", "could not read or decide the working"));
     if (standing) return done(standing.r, "objection-stands", (obligationsOf(standing.r.env)?.blocking ?? []).map((o) => o.id));

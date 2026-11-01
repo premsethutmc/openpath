@@ -80,7 +80,7 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
     const rec = inp.records.find((r) => r.line === c.line && r.span.start < c.end && c.start < r.span.end) ?? inp.records.find((r) => r.line === c.line);
     const deps = (rec?.dependencies ?? []).map((d) => byRecordDeriv.get(d)).filter((x): x is ProofObligation => !!x);
     const cond = scoping.filter((s) => s.line < c.line).map((s) => s.text);
-    let status: ObligationStatus, reason = c.reason, evidence: ProofObligation["evidence"] = null, aggregate = false;
+    let status: ObligationStatus = "unsupported", reason = c.reason, evidence: ProofObligation["evidence"] = null, aggregate = false;
     const rs = rec?.status;
     if (c.outcome === "disproven" && (!rec || rs === "verified-invalid")) status = "disproven";
     else if (c.outcome !== "proven") { // the status is the record's own: a line that was never checked is not disproven
@@ -111,7 +111,7 @@ export function buildObligations(inp: ObligationInput): ObligationSet {
     const letters = (t: string) => new Set((t.match(/(?<![A-Za-z])[A-Za-z](?![A-Za-z])/g) ?? []));
     const sharesSymbol = (line: number) => { const lt = allClaims.filter((k) => k.line === line).map((k) => k.text).join(" "), lv = letters(lt), cv = letters(c.text); return [...lv].some((v) => cv.has(v)); }; // a line about the variable the claim is about is part of the chain
     const usesIt = (line: number) => sharesSymbol(line) || (inp.grounded.find((gg) => gg.line === line)?.grounding.sources ?? []).some((q) => (q.kind === "free-literal" || (q.kind === "derived-fact" && (q as { derived?: boolean }).derived)) && claimNums.has(String(Number(q.ref))) && !ownTask.has(String(Number(q.ref))));
-    const gbadDep = deps.map((d) => out.find((x) => x.kind === "grounding" && x.line === d.line)).find((x) => x && x.status !== "proven" && usesIt(x.line) && inp.grounded.some((gg) => gg.line === x.line && !gg.grounding.relevant && gg.grounding.sources.some((q) => q.kind === "task-premise" || q.kind === "derived-fact"))); // a line wholly unrelated to the task is a side claim, not a premise of what follows
+    const gbadDep = deps.map((d) => out.find((x) => x.kind === "grounding" && x.line === d.line)).find((x) => x && x.status !== "proven" && x.line !== null && usesIt(x.line) && inp.grounded.some((gg) => gg.line === x.line && !gg.grounding.relevant && gg.grounding.sources.some((q) => q.kind === "task-premise" || q.kind === "derived-fact"))); // a line wholly unrelated to the task is a side claim, not a premise of what follows
     if (status === "proven" && bad) { status = "unresolved"; reason = `it depends on ${bad.id} (line ${bad.line}), which is ${bad.status}`; evidence = null; }
     else if (status === "proven" && gbadDep) { status = "unresolved"; reason = `it rests on line ${gbadDep.line}, whose numbers are not shown to come from the task (${gbadDep.reason})`; evidence = null; }
     const o = make(`ob:${out.length}`, "derivation", c.line, c.text, `"${c.text}" follows from the task premises and the facts already proved by a justified transformation`, status, reason, evidence, deps.map((d) => d.id), cond, aggregate);
