@@ -34,6 +34,13 @@ class ReviewBase(FamilyTestCase):
 
 class ContentReviewTests(ReviewBase):
 
+    def test_generated_answer_table_names_the_specified_family_revision(self):
+        specs = {s['id']: s['fingerprint'] for s in json.loads((ROOT / 'family-specs.v1.json').read_text())['families']}
+        table = json.loads((ROOT / 'generated.v1.json').read_text())['families']
+        self.assertEqual(set(table), set(specs))
+        for family, fingerprint in specs.items():
+            self.assertEqual(table[family]['fingerprint'], fingerprint, family)
+
     def test_the_server_hashes_content_exactly_as_the_app_does(self):
         repo = {e['item']: e['contentHash'] for e in json.loads((ROOT / 'review.v1.json').read_text())['entries']}
         here = items()
