@@ -210,7 +210,7 @@ test("the policy is configurable, recorded in the state, and validated", () => {
 test("R1 an unreadable answer to a re-entry question uses that re-entry (no unbounded loop)", () => {
   const j = journey("R1", stuck(), []);
   const f = j.flow;
-  for (let i = 0; i < 4; i++) { f.later(2); if (f.stage === "question") { f.on({ type: "answer_submitted", value: "1..2", timestamp: 0 } as never); f.on({ type: "skip_requested", timestamp: 0 } as never); for (let k = 0; k < 30 && f.stage !== "summary"; k++) f.on(f.stage === "question" ? ({ type: "answer_submitted", value: "1..2", timestamp: 0 } as never) : ({ type: "skip_requested", timestamp: 0 } as never)); } }
+  for (let i = 0; i < 4; i++) { f.later(2); if (f.stage === "question") { f.on({ type: "answer_submitted", value: "1..2", timestamp: 0 } as never); f.on({ type: "skip_requested", timestamp: 0 } as never); for (let k = 0; k < 30 && (f.stage as string) !== "summary"; k++) f.on(f.stage === "question" ? ({ type: "answer_submitted", value: "1..2", timestamp: 0 } as never) : ({ type: "skip_requested", timestamp: 0 } as never)); } }
   const h = handoverState(LE, f.session.state().records, f.session.now);
   assert.equal(h.reentries.length, 2);
   assert.deepEqual([h.selfReentriesLeft, h.route], [0, "needs-teacher"]);
