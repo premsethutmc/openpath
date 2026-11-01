@@ -121,7 +121,7 @@ def _verify_justified_step(problem: GeometryProblem, accepted: list[Fact], step:
     if state.inconsistent or (conclusion.verdict == "unsupported" and conclusion.unsupported_conditions in (("consistent premises",), ("well-formed geometry input",))):
         return conclusion
     given = next((f for f in problem.facts if f.key == step.statement.key), None)
-    if given and step.cited_theorem in (None, "given") and not cited:
+    if given and step.cited_theorem in (None, "given") and all(c.key == given.key for c in cited):
         return VerificationResult("verified", step.statement, "given", (given,), (given.key,), (), (), "Restatement of a supplied fact; no method step is established.")
     rule = next((r for r in RULES if r.id == step.cited_theorem), None)
     if rule is None:

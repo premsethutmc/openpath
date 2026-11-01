@@ -2,13 +2,15 @@ from __future__ import annotations
 import json,unittest
 from collections import Counter
 from pathlib import Path
-from geometry_reasoner import AlgebraicVerifier,ConstructionRequest,ConstructionVerifier,Fact,GeometryObject,GeometryProblem,SubmittedProofStep,verify_submitted_proof
+from geometry_reasoner import AlgebraicVerifier,ConstructionRequest,ConstructionVerifier,Fact,GeometryObject,GeometryProblem,SubmittedProofStep,verify_student_proof
 
 ROOT=Path(__file__).parents[1]
 def O(i,k,**d):return GeometryObject.make(i,k,**d)
 def P(i,x,y):return O(i,"point",x=x,y=y)
 def proof(problem,statements):
-    steps=[SubmittedProofStep(f"s{i+1}",s) for i,s in enumerate(statements)];a=verify_submitted_proof(problem,steps)
+    # This frozen audit supplies conclusions without reasons: test entailment,
+    # never trusted demonstrated-method evidence. Strict method tests are separate.
+    a=verify_student_proof(problem,statements)
     if a.valid and a.complete:return "verified",a.first_invalid_step
     if a.valid:return "incomplete",a.first_invalid_step
     return a.steps[a.first_invalid_step or 0].verdict,a.first_invalid_step

@@ -21,7 +21,11 @@ class CompleteProofCorpusTests(unittest.TestCase):
             p=GeometryProblem(row["id"],objects,[f(x) for x in row["facts"]],set(row["conditions"]),f(row["goal"]))
             steps=[SubmittedProofStep(x["id"],f(x["statement"]),tuple(x.get("cited_step_ids",())),x.get("cited_theorem")) for x in row["steps"]]
             a=verify_submitted_proof(p,steps); e=row["expected"]
-            first_correct += a.first_invalid_step==e["first_invalid_step"]
+            # Frozen v1 labels called any unverified line "first_invalid". Preserve
+            # that exact comparison while the live contract only calls false lines invalid.
+            first_unverified = next((i for i, result in enumerate(a.steps) if result.verdict != "verified"), None)
+            first_correct += first_unverified == e["first_invalid_step"]
+            self.assertEqual(a.first_invalid_step, next((i for i, result in enumerate(a.steps) if result.verdict == "invalid"), None))
             final_correct += (a.valid,a.complete)==(e["valid"],e["complete"])
             labels[row["category"]]+=1
         self.assertEqual(first_correct,90); self.assertEqual(final_correct,90)
@@ -38,7 +42,8 @@ class CompleteProofCorpusTests(unittest.TestCase):
         p=GeometryProblem("irrelevant",{},[Fact("vertical_pair",("a","b")),Fact("angle_measure",("x",),30)],goal=Fact("equal_angle",("a","b")))
         steps=(SubmittedProofStep("s1",Fact("angle_measure",("x",),30)),SubmittedProofStep("s2",Fact("equal_angle",("a","b")),("s1",),"vertical-opposite"))
         a=verify_submitted_proof(p,steps)
-        self.assertEqual(a.first_invalid_step,1); self.assertFalse(a.valid)
+        self.assertIsNone(a.first_invalid_step); self.assertFalse(a.valid)
+        self.assertEqual(a.steps[1].verdict,"unsupported")
 
 class ReliabilityTests(unittest.TestCase):
     def test_malformed_relation_fails_closed(self):
