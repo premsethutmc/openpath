@@ -28,10 +28,10 @@
 | Persistence H1 (`scripts/h1-persistence.sh`) | **PASS**: 14 stored events, 1 acknowledgement read back. Rebuilt state equals in-memory, and the next phase is `reentry` (acknowledged). | — | Django store, each record stored at its own time; a new client reads back, and a separate process rebuilds the state. |
 | E1 store replay | two replays identical | identical (own store) | The digests differ between runs because each run builds a fresh store at the current time. |
 | Journey suites: safety, scenarios, coverage, policies, D1, E1, D1+E1 | 42, 41, 17, 5, 16, 4, 17 pass, 0 fail | identical | |
-| H1 journeys (`handover.test.ts`) | 21 pass, 0 fail in the run; 22 pass after R5 was added (`R5` re-run separately) | — | H01–H16, policy, R1–R5 |
+| H1 journeys (`handover.test.ts`) | 22 pass, 0 fail (21 in the main run; R5 added after it, included in the frontend whole-suite run) | — | H01–H16, policy, R1–R5 |
 | Journey outputs: registry check, D1+E1 leakage scan, A2 decisions, A3 journeys, D1 journeys, E1 scenarios, D1+E1 journeys | byte-identical summaries | — | |
-| A3 generalisation | FRONTEND_GEN | 13 pass | |
-| Frontend, whole (`src/**/*.test.ts`) | FRONTEND_ALL | 660 pass, 0 fail | |
+| A3 generalisation | 13 pass | 13 pass | |
+| Frontend, whole (`src/**/*.test.ts`) | **682 pass, 0 fail** | 660 pass, 0 fail | +22 = the H1 journeys (including R5). |
 
 ## Time-boundary tests
 
