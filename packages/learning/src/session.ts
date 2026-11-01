@@ -10,6 +10,8 @@ import { releaseFor } from "./curricula";
 import type { CurriculumRelease } from "./curriculum";
 import { evidenceFor } from "./evidence";
 import { graph } from "./graph";
+import { pathwayModule, pathwayRecords } from "./foundation-runtime";
+import { canonicalOrder } from "./subskill-projection";
 import { nextActivity, planChange, yearSummary } from "./plan";
 import { currentEnrolment, readRecords, type AttemptAssessment, type LearningActivity, type LearningRecord } from "./records";
 import type { WrittenMark } from "./written";
@@ -22,6 +24,7 @@ const base = (c: Ctx) => ({ kind: "learning_record" as const, id: rid(), at: c.a
 export type StudyRecord = Extract<LearningRecord,{record:"study_session"}>;
 export type StudyUpdate = Pick<StudyRecord,"planId"|"revision"|"phase"|"time"|"advice">;
 export const make = {
+  pathway: (c: Ctx, target: string, active = true): LearningRecord => ({ ...base(c), record: "foundation_pathway", policy: "mathematics-pathway@1", target, active }),
   study: (c:Ctx, update:StudyUpdate):StudyRecord => ({...base(c), ...update,record:"study_session",id:`${update.planId}:study:${update.phase === "ended" ? "end" : update.revision}`}),
   topicStart: (c: Ctx, target: string, r: CurriculumRelease, academicYear: string): LearningRecord => ({ ...base(c), record: "topic_session", academicYear, stage: "diagnostic", target, curriculum: { id: r.id, version: r.version, hash: r.hash } }),
   sessionPlan: (c: Ctx, target: string, minutes: 15 | 30 | 60, r: CurriculumRelease, academicYear: string): LearningRecord => ({ ...base(c), record: "topic_session", academicYear, stage: "plan", target, minutes, curriculum: { id: r.id, version: r.version, hash: r.hash } }),
@@ -36,11 +39,16 @@ export const make = {
 };
 
 export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number, o: { currentSession?: string; marks?: readonly WrittenMark[]; acknowledgements?: readonly HandoverAcknowledgement[] } = {}) {
+  // Only the new opt-in history has canonical ordering; default historic replay is untouched.
+  if (events.some((e) => (e as LearningRecord).learnerId === learnerId && (e as LearningRecord).record === "foundation_pathway")) events = canonicalOrder(events);
   const records = readRecords(learnerId, events, o.marks ?? [], o.acknowledgements ?? []);
   const ev = evidenceFor(learnerId, records, now);
   const enrol = currentEnrolment(records);
   const release = enrol ? releaseFor(enrol.curriculum, records.curricula) : null;
-  const next = release ? nextActivity(release, ev.get, records, { now, session: o.currentSession ?? "" }) : null;
+  const pathRecords = records.pathway?.active ? pathwayRecords(learnerId, events, o.marks, o.acknowledgements) : records;
+  const pathEvidence = records.pathway?.active ? evidenceFor(learnerId, pathRecords, now).get : ev.get;
+  const module = (competency: string) => pathwayModule(competency, learnerId, events, pathRecords, pathEvidence, now, o.currentSession ?? "");
+  const next = release ? nextActivity(release, pathEvidence, pathRecords, { now, session: o.currentSession ?? "", module }) : null;
   // the plan at the end of the previous visit: the same derivation, without this visit's records
   let change: string | null = null;
   if (next && release) {
@@ -65,6 +73,9 @@ export function learnerState(learnerId: string, events: readonly { kind: string 
   }
   return {
     records,
+    module,
+    selectionRecords: pathRecords,
+    selectionEvidence: pathEvidence,
     evidence: ev.get,
     ledger: ev.ledger,
     enrolment: enrol,

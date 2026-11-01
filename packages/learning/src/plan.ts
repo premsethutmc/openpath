@@ -10,7 +10,7 @@ import { assigned, type CurriculumRelease } from "./curriculum";
 import { moduleFor } from "./content";
 import type { SkillEvidence } from "./evidence";
 import { overlay } from "./goals";
-import { moduleState } from "./intervention";
+import { moduleState, type ModuleState } from "./intervention";
 import { graph } from "./graph";
 import { currentEnrolment, type LearnerRecords } from "./records";
 import { flatten, tilesFor, type Tile } from "./tiles";
@@ -24,6 +24,8 @@ export interface NextActivity {
   reason: string;
   /** Skills the engine has paused for a teacher or parent (never offered as "carry on" while paused). */
   paused?: string[];
+  /** A supported lesson may be reviewed without claiming readiness or mastery. */
+  reviewCompetency?: string;
 }
 
 export function yearSummary(release: CurriculumRelease, ev: (id: string) => SkillEvidence) {
@@ -43,7 +45,9 @@ export function yearSummary(release: CurriculumRelease, ev: (id: string) => Skil
   };
 }
 
-export function nextActivity(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: { now: number; session: string }): NextActivity {
+type PlanContext = { now: number; session: string; module?: (id: string) => ModuleState };
+export function nextActivity(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: PlanContext): NextActivity {
+  if (records.pathway?.active) return pathwayNextActivity(records, ev, at);
   const n = nextActivityOf(release, ev, records, at);
   return at ? { ...n, paused: pausedSkills(release, ev, records, at) } : n;
 }
@@ -54,7 +58,7 @@ function pausedSkills(release: CurriculumRelease, ev: (id: string) => SkillEvide
   const touched = [...new Set(records.attempts.map((a) => graph.evidenceTarget(a.competency)))].filter((id) => moduleFor(id));
   return touched.filter((id) => moduleState(id, records, ev(id), at.now, at.session, null, ev).phase === "pause");
 }
-function nextActivityOf(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: { now: number; session: string }): NextActivity {
+function nextActivityOf(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: PlanContext): NextActivity {
   const paused = new Set(at ? pausedSkills(release, ev, records, at) : []);
   const rows = assigned(release).filter((r) => moduleFor(r.competency));
   const ids = [...new Set(rows.map((r) => r.competency))];
@@ -106,4 +110,50 @@ export function planChange(before: NextActivity | null, now: NextActivity, evBef
 /** The learner's years, from enrolment records (a grade transition keeps every earlier record). */
 export function years(records: LearnerRecords) {
   return records.enrolments.map((e, i) => ({ ...e, current: i === records.enrolments.length - 1 }));
+}
+
+
+/** The same next-activity planner, with an explicit supported destination instead of a grade ceiling. */
+function pathwayNextActivity(records: LearnerRecords, ev: (id: string) => SkillEvidence, at?: PlanContext): NextActivity {
+  const target = records.pathway!.target;
+  const stop = (reason: string, reviewCompetency?: string): NextActivity => ({ kind: "none", competency: null, reason: `${reason} Your progress is saved. Choose another supported goal or review a lesson; no mastery is claimed.`, ...(reviewCompetency ? { reviewCompetency } : {}) });
+  if (!graph.byId.has(target) || !moduleFor(target)) return stop("This target does not yet have a supported learning module.");
+  if (pathwayRoute(target).error) return stop("This prerequisite route needs review before it can guide learning.", target);
+  const visiting = new Set<string>(), visited = new Set<string>();
+  const pendingTeaching = new Set(hypotheses(records).filter((h) => h.status === "established" && !h.teaching.deliveredAt).map((h) => h.scope.observedIn));
+  const walk = (id: string): NextActivity | null => {
+    if (visiting.has(id) || visiting.size > 40 || visited.size > 256) return stop("This prerequisite route needs review before it can guide learning.", target);
+    if (visited.has(id)) return null;
+    visiting.add(id);
+    const e = ev(id), m = moduleFor(id);
+    const ms = m ? at?.module?.(id) ?? moduleState(id, records, e, at?.now ?? 0, at?.session ?? "", null, ev) : null;
+    const shown = ["independent", "transfer", "verified"].includes(e.status) && !e.recoveryRequired && e.retention !== "due" && !pendingTeaching.has(id);
+    // A configured skill requirement can still demand evidence when broad topic evidence is shown.
+    const coveragePending = ms?.requirementsMet === false;
+    if (!m && shown) { visiting.delete(id); visited.add(id); return null; }
+    if (!m) return stop(`A prerequisite, ${graph.get(id).name}, has no supported module yet.`, target);
+    const prerequisites = graph.relationsOf(id).filter((r) => r.type === "mandatory" || r.type === "plausible").map((r) => r.from).sort();
+    for (const prior of prerequisites) { const n = walk(prior); if (n) return n; }
+    visiting.delete(id); visited.add(id);
+    if (shown && !coveragePending) return null;
+    if (!ms || ["pause", "unavailable", "waiting", "done"].includes(ms.phase)) return stop(ms?.reason ?? "No safe learning opportunity is available.", id);
+    const kind = e.retention === "due" ? "retention" : e.recoveryRequired || e.status === "review" ? "review" : e.status === "not_started" ? "start" : "continue";
+    return { kind, competency: id, reason: `${id === target ? "Toward your chosen goal" : `A prerequisite for ${graph.get(target).name}`}: ${e.status === "not_started" ? "a short probe will find your starting point" : ms.reason}. Unobserved work is not treated as a weakness.` };
+  };
+  return walk(target) ?? { kind: "none", competency: null, reason: "The current evidence requirements on this route are shown. Delayed checks remain scheduled. Choose a further supported goal when you are ready." };
+}
+
+/** Shared route eligibility for planning and question placement. Never read from client events. */
+export function pathwayRoute(target: string): { ids: string[]; error: boolean } {
+  const ids: string[] = [], active = new Set<string>(), seen = new Set<string>();
+  let error = !graph.byId.has(target) || !moduleFor(target);
+  const visit = (id: string) => {
+    if (error || seen.has(id)) return;
+    if (active.has(id) || active.size > 40 || seen.size > 256 || !graph.byId.has(id)) { error = true; return; }
+    active.add(id);
+    for (const r of graph.relationsOf(id).filter((r) => r.type === "mandatory" || r.type === "plausible").sort((a,b)=>a.from.localeCompare(b.from))) visit(r.from);
+    active.delete(id); seen.add(id); ids.push(id);
+  };
+  if (!error) visit(target);
+  return { ids: error ? [] : ids, error };
 }

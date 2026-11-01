@@ -4,7 +4,7 @@
  * Every decision comes from the shared engine (moduleState, recovery); these views only show it and record answers.
  */
 import { scheduleNote } from "../../../packages/learning/src/due-display";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {useResume} from "./resume";
 import { Figure } from "./Figure";
 import { SketchPad } from "./SketchPad";
@@ -21,7 +21,8 @@ import { problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
 import type { Assessment } from "../../../packages/learning/src/assessment";
-import { checkWorking, canCheckWorking } from "../../../packages/learning/src/working";
+import { workingFeedback } from "../journey/renderer-adapter";
+import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
 import { Icon } from "./icons";
 import type { LearnerRecords, LearningActivity, ServerDecision } from "../../../packages/learning/src/records";
 import { authoritativeView } from "../../../packages/learning/src/grading/view";
@@ -32,6 +33,7 @@ export const LETTERS = ["A", "B", "C", "D"];
 
 export interface Ctx {
   records: LearnerRecords;
+  module?: (competency: string) => ReturnType<typeof moduleState>;
   evidence: (id: string) => SkillEvidence;
   now: number;
   session: string;
@@ -76,6 +78,7 @@ export interface Fb {
   activity?: LearningActivity;
   /** assessment@1: the decision behind `right`. credit null = undecided: the answer is saved, not marked wrong, and not counted either way. */
   assessment?: Assessment;
+  decision?: ServerDecision;
 }
 
 const ANSWER_LABEL: Record<string, string> = {
@@ -156,8 +159,8 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
     );
   const undecided = fb.assessment ? fb.assessment.credit === null : false;
   const says = fb.right || undecided ? null : misconceptionOf(q, fb.response)?.says;
-  const fam = fb.working?.length ? familyOf(fb.qid) : null;
-  const check = fam ? checkWorking(problemOf(fam)!, fb.working!) : null;
+  const trusted = fb.decision?.decidedBy === "server" && fb.decision.questionId === fb.qid ? fb.decision as unknown as GradingDecision : null;
+  const judged = trusted ? workingFeedback(trusted) : null;
   return (
     <div className="stack enter">
       <div className={`feedback ${undecided ? "" : fb.right ? "good" : "bad"}`} role="status">
@@ -169,12 +172,11 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
         {(!onRetry || fb.right) && <p>{q.solution}</p>}
         {onRetry && !fb.right && <><p>Your answer and working are saved. A wrong answer alone does not tell us why.</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
       </div>
-      {check && (
-        <div className={`feedback ${check.valid ? "good" : "bad"}`} role="note" aria-label="Your working">
-          <strong>Your working{check.method && check.method.id !== "other" ? `: ${check.method.name.toLowerCase()}` : ""}</strong>
-          <p>{check.note}</p>
-        </div>
-      )}
+      {!!fb.working?.length && <div className={`feedback ${trusted?.working?.status === "invalid" ? "bad" : ""}`} role="note" aria-label="Your working">
+        <strong>Your working</strong>
+        <p>{judged?.message ?? "Your working is saved. It has not been marked right or wrong. Show an intermediate step or review a supported lesson; no method mastery is claimed."}</p>
+        <ol>{fb.working.map((line,i)=><li key={i}>{line}</li>)}</ol>
+      </div>}
       {/* adaptive loop: a wrong answer on a problem OpenPath can reason about opens the same recovery as "I'm stuck" */}
       {onInvestigate && !fb.right && !undecided ? <button className="secondary wide" onClick={onInvestigate}>Find out what went wrong</button> : null}
       <div className="actions sticky">
@@ -193,8 +195,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [workingOpen,setWorkingOpen] = useResume(resumeKey && `${resumeKey}:working-open`, !!working);
   const [asked, setAsked] = useState(0);
   const [clarify, setClarify] = useState<string | null>(null);
-  const fam = familyOf(qid);
-  const workable = !!fam && canCheckWorking(problemOf(fam)!);
+  const submitting = useRef(false);
+  const workable = q.type !== "written";
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
@@ -215,18 +217,22 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
         {hintAllowed && q.hint && !hint && <button className="secondary" type="button" onClick={() => setHint(true)}>Show a hint</button>}
         <button
           className="primary"
-          disabled={!value.trim() || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
+          disabled={(!value.trim() && !working.trim()) || ctx.saving || (q.type === "written" && writtenTask(q.id)?.answer === "drawing" && !HANDWRITING_ENABLED)}
           onClick={async () => {
+            if (submitting.current) return;
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
+            if (lines.length > 8 || lines.some((line) => line.length > 80)) { setClarify("Your work is still here. Use at most 8 lines, with at most 80 characters per line, before checking."); return; }
             // one decision per submission (assessment@1): the answer box is graded first; an unreadable answer gets ONE short clarification, then it is saved as undecided
             const preview = needsMarking(q) ? null : decide(qid, value, lines, asked);
-            const ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) });
+            submitting.current = true;
+            let ok: boolean;
+            try { ok = await ctx.answer(qid, value, activity, { hints: hint || showHint ? 1 : 0, ...(context ? { context } : {}), ...(lines.length ? { working: lines } : {}), ...(asked ? { clarifications: asked } : {}) }); } finally { submitting.current = false; }
             if (!ok) return;
             // release check A: show the server's recorded decision, never a conflicting preview of the unified grader
             const a = authoritativeView(preview, ctx.recorded?.() ?? null);
             if (a?.clarification && a.credit === null && a.feedback.kind === "clarify") { setAsked(asked + 1); setClarify(a.clarification.prompt); return; }
             setClarify(null);
-            onAnswered?.({ qid, response: value, activity, right: a ? a.credit === true : creditOf(qid, value) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
+            onAnswered?.({ qid, response: value, activity, ...(ctx.recorded?.() ? { decision: ctx.recorded()! } : {}), right: a ? a.credit === true : creditOf(qid, value) === true, ...(a ? { assessment: a } : {}), ...(lines.length ? { working: lines } : {}) });
           }}
         >
           {ctx.saving ? "Saving…" : "Check"}
@@ -292,14 +298,14 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it" }: {
 }
 
 /** One skill, end to end, as the engine directs. */
-export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean }) {
+export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false, reviewOnly = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean; reviewOnly?: boolean }) {
   const [own, setOwn] = useResume<Fb | null>(resumeKey && `${resumeKey}:feedback`, null);
   const [retry, setRetry] = useResume<boolean | "hint">(resumeKey && `${resumeKey}:retry`, false);
   const [reviewLesson, setReviewLesson] = useState(false);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
-  const ms = moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, ctx.evidence);
+  const ms = ctx.module && !established ? ctx.module(competency) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, ctx.evidence);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
   const stepper = (
@@ -321,6 +327,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const reviewStrategy = lessonModule?.strategies.find((s) => teachingEligibility(lessonModule, s).eligible && contentEligibility(lessonModule, s, { competency, usage: "lesson" }).eligible);
   const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewLesson(true); }}>Review a supported lesson</button> : null;
   if (reviewLesson && reviewStrategy) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson s={reviewStrategy} doneLabel="Return to my progress" saving={false} onDone={() => setReviewLesson(false)} /><button className="secondary" onClick={() => setReviewLesson(false)}>Return to my progress</button></div>;
+  if (reviewOnly) return <div className="stack">{head}<p>This is lesson review, not a mastery check. Your progress is preserved.</p>{reviewOffer ?? <p>No eligible explanation is available for this topic yet.</p>}<button className="secondary" onClick={onExit}>Choose another goal</button></div>;
   if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}</div>;
   if (sessionMode && ms.phase === "retention") return <div className="stack">{head}<p>A delayed check is reserved for a later session. Your completed work is preserved.</p><button className="primary" onClick={onExit}>Next planned competency</button></div>;
   if (sessionMode && ms.question && writtenTask(ms.question)?.answer === "drawing" && !HANDWRITING_ENABLED)

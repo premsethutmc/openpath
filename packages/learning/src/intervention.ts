@@ -41,7 +41,7 @@ const gradeOf = (records: LearnerRecords) => records.enrolments.at(-1)?.grade ??
 const withinGrade = (records: LearnerRecords, qid: string) => {
   const g = gradeOf(records);
   const q = g === null ? null : gradeOfQuestion(qid);
-  return g === null || q === null || q <= g;
+  return records.readinessRoute?.includes(question(qid).competency) || g === null || q === null || q <= g;
 };
 /** The learner's first attempt at this problem, in either answer format (one exposure). */
 const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? (records.pending?.some((p) => p.questionId === qid) ? ({ questionId: qid } as unknown as Attempt) : null);
@@ -155,6 +155,8 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
 
 export type ModulePhase = "recover" | "explore" | "strategy" | "chapter" | "guided" | "check" | "verify" | "retention" | "done" | "pause" | "unavailable" | "waiting" | "reentry";
 export interface ModuleState {
+  /** Present only for the explicitly selected foundation policy. */
+  requirementsMet?: boolean;
   competency: string;
   phase: ModulePhase;
   question: string | null;

@@ -78,7 +78,7 @@ type View =
   | { name: "tile"; path: string[] }
   | { name: "topic-diagnostic"; competency: string; back: View }
   | { name: "curriculum-practice"; competency: string; back: View; stage?: "teaching" | "practice" }
-  | { name: "module"; competency: string; back: View }
+  | { name: "module"; competency: string; back: View; reviewOnly?: boolean }
   | { name: "stuck"; qid: string; back?: View }
   | { name: "single"; qid: string; heading: string; note?: string }
   | { name: "years" };
@@ -98,6 +98,8 @@ const childHeading = (ts: Tile[]) => {
 const KIND_WORD: Record<Tile["kind"], string> = { subject: "Subject", unit: "Unit", chapter: "Chapter", section: "Section", skill: "Skill", micro: "Smaller step", proposal: "Not mapped yet", unsupported: "Not supported yet" };
 
 function App() {
+  const [pathwayTarget, setPathwayTarget] = useState(new URLSearchParams(location.search).get("target") ?? "");
+  const pathwayChoices = useMemo(() => graph.competencies.filter((c) => !c.partOf && moduleFor(c.id)), []);
   const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
@@ -222,8 +224,9 @@ function App() {
 
   const name = pupils.find((p) => p.id === learner)?.display_name ?? "Learner";
   const ctx: Ctx = {
-    records: st.records,
-    evidence: st.evidence,
+    records: st.records.pathway?.active ? st.selectionRecords : st.records,
+    ...(st.records.pathway?.active ? { module: st.module } : {}),
+    evidence: st.records.pathway?.active ? st.selectionEvidence : st.evidence,
     now,
     session,
     saving,
@@ -301,7 +304,7 @@ function App() {
     return (
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
         <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
-          <Module competency={view.competency} ctx={ctx} onExit={() => setView(view.back)} />
+          <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} />
         </KeyboardPractice>
       </Shell>
     );
@@ -403,6 +406,14 @@ function App() {
         <a className="secondary" href={`/curriculum/?preview=1#b=${release.id.startsWith("tn-") ? "tn" : "cbse"}&g=${grade}`}>Preview Mathematics experience</a>
         <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
       </div>
+      {(new URLSearchParams(location.search).get("foundation") === "1" || st.records.pathway) && <section className="next" aria-label="Learning pathway">
+        <h2>Your learning goal</h2>
+        <p>Choose a supported topic. We will check its prerequisites and guide you toward it. Your starting grade is not a ceiling. Demonstration content remains labelled; choosing a goal awards no mastery.</p>
+        {st.records.pathway?.active && <p>Current goal: {graph.get(st.records.pathway.target).name}</p>}
+        <label>Target topic<select aria-label="Target topic" value={pathwayTarget} onChange={(e) => setPathwayTarget(e.target.value)}><option value="">Choose a topic</option>{pathwayChoices.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
+        <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => save(make.pathway(ctxOf(), pathwayTarget))}>Use this learning goal</button>
+        {st.records.pathway?.active && <button className="secondary" disabled={saving} onClick={() => save(make.pathway(ctxOf(), st.records.pathway!.target, false))}>Return to my year plan</button>}
+      </section>}
       <div className="stats" role="list" aria-label="This year so far">
         <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
         <div className="stat shown" role="listitem"><b>{sum.shown}</b><span>Shown on your own</span></div>
@@ -426,7 +437,7 @@ function App() {
           <button className="primary" onClick={goNext}>{next.kind === "retention" ? "Start the delayed check" : next.kind === "review" ? "Review it" : next.kind === "continue" ? "Continue" : "Start"}</button>
         </div>
       ) : (
-        <div className="next"><p className="eyebrow">Next</p><p>{next.reason}</p></div>
+        <div className="next"><p className="eyebrow">Next</p><p>{next.reason}</p>{next.reviewCompetency && <button className="secondary" onClick={() => setView({ name: "module", competency: next.reviewCompetency!, reviewOnly: true, back: { name: "year" } })}>Review a supported lesson</button>}</div>
       )}
       {next.paused?.length ? <p className="why" role="note"><b>Paused for a teacher or parent:</b> {next.paused.map((id) => graph.get(id).name).join(", ")}. Different explanations have not worked yet, so OpenPath does not ask more on {next.paused.length > 1 ? "these" : "this"} on its own.</p> : null}
       {tiles.map((s) => (

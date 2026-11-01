@@ -32,6 +32,7 @@ export interface AttemptAssessment {
 }
 export type LearningRecord =
   | (Base & { record: "enrol"; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } })
+  | (Base & { record: "foundation_pathway"; policy: "mathematics-pathway@1"; target: string; active: boolean })
   | (Base & { record: "goal"; pathway: string; targetYear?: number; active: boolean })
   | (Base & { record: "curriculum"; release: CurriculumRelease })
   | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[]; assessment?: AttemptAssessment; decision?: ServerDecision })
@@ -83,6 +84,10 @@ export interface PendingWritten {
   competency: string;
 }
 export interface LearnerRecords {
+  /** Explicit, append-only opt-in; absent for every historical/default learner. */
+  /** Derived by the validated planner, never accepted from an event. */
+  readinessRoute?: readonly string[];
+  pathway?: { policy: "mathematics-pathway@1"; target: string; active: boolean };
   enrolments: { at: string; grade: number; academicYear: string; curriculum: { id: string; version: string; hash: string } }[];
   goals: Map<string, { pathway: string; targetYear?: number; since: string }>;
   curricula: Map<string, CurriculumRelease>;
@@ -115,6 +120,7 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
     seen.add(r.id);
     out.sessions[r.sessionId] ??= r.at;
     if (r.record === "enrol") out.enrolments.push({ at: r.at, grade: r.grade, academicYear: r.academicYear, curriculum: r.curriculum });
+    else if (r.record === "foundation_pathway" && r.policy === "mathematics-pathway@1" && typeof r.target === "string" && typeof r.active === "boolean") out.pathway = { policy: r.policy, target: r.target, active: r.active };
     else if (r.record === "goal") {
       if (r.active) out.goals.set(r.pathway, { pathway: r.pathway, targetYear: r.targetYear, since: r.at });
       else out.goals.delete(r.pathway);

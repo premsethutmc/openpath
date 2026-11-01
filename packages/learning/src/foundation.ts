@@ -14,13 +14,13 @@ export interface FoundationPlan {
   skill: string | null; question: string | null; reason: string;
 }
 /** All candidate questions pass the existing module filtering, quarantine and grade checks. */
-export function foundationPlan(policy: FoundationPolicy, learner: string, events: readonly { kind: string }[], now: number): FoundationPlan {
+export function foundationPlan(policy: FoundationPolicy, learner: string, events: readonly { kind: string }[], now: number, options: { trustedOnly?: boolean } = {}): FoundationPlan {
   const result = (status: FoundationPlan["status"], skill: string | null, q: string | null, reason: string): FoundationPlan => ({ policy: FOUNDATION_POLICY, status, skill, question: q, reason });
   if (policy.version !== FOUNDATION_POLICY || !policy.requirements.length) return result("unavailable", null, null, "No versioned evidence requirements configured.");
   events = canonicalOrder(events);
   const untrusted = new Set(events.filter((e) => {
     const r = e as { learnerId?: string; record?: string; decision?: { schema?: string; decidedBy?: string } };
-    return r.learnerId === learner && r.record === "attempt" && r.decision !== undefined && (!r.decision || r.decision.schema !== "grading-decision@1" || r.decision.decidedBy !== "server");
+    return r.learnerId === learner && r.record === "attempt" && (options.trustedOnly || r.decision !== undefined) && (!r.decision || r.decision.schema !== "grading-decision@1" || r.decision.decidedBy !== "server");
   }).map((e) => (e as unknown as { id: string }).id));
   const p = projectFromEventsWith(policy.config, learner, events, now, null, { exclude: (a) => untrusted.has(a.id) });
   if (p.outcome !== "projected") return result("unavailable", null, null, "Saved evidence could not be projected; no mastery is claimed.");

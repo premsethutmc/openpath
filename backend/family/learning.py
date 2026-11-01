@@ -28,6 +28,7 @@ ACTIVITIES = {'diagnostic', 'probe', 'guided', 'check', 'practice', 'transfer', 
 RECORDS = {
     'enrol': {'grade', 'academicYear', 'curriculum'},
     'goal': {'pathway', 'active', 'targetYear'},
+    'foundation_pathway': {'policy', 'target', 'active'},
     'curriculum': {'release'},
     'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working', 'assessment'},
     'teach': {'rule', 'strategy', 'competency'},
@@ -339,6 +340,9 @@ def checked_learning(event, pupil):
             _reject('Unknown session target or curriculum.')
     elif record == 'study_session':
         event = _study_session(event, prior, pupil, c)
+    elif record == 'foundation_pathway':
+        if event.get('policy') != 'mathematics-pathway@1' or not isinstance(event.get('target'), str) or event.get('target') not in c['graph'] or type(event.get('active')) is not bool:
+            _reject('Unknown mathematics pathway or target.')
     elif record == 'goal':
         if event.get('pathway') not in c['goals'] or type(event.get('active')) is not bool:
             _reject('Unknown goal pathway.')
