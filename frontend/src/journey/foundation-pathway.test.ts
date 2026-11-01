@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import { learnerState, make } from '../../../packages/learning/src/session';
 import { latestReleases } from '../../../packages/learning/src/curricula';
 import { graph } from '../../../packages/learning/src/graph';
@@ -99,13 +100,16 @@ test('a weak prerequisite stays in remediation; due skills return and failed che
 
 
 test('a cyclic prerequisite route stops without claiming completion or granting placement',()=>{
- const original=graph.relationsOf;
- graph.relationsOf=(id,opts)=>id==='MATH.number.addition'?[{from:id,type:'mandatory',source:'audit@1'}]:original(id,opts);
+ // Node 22.18 + tsx can load this package through separate ESM and CommonJS instances.
+ // Inject the same graph defect into both test fixtures; never change the production graph contract.
+ const requiredGraph = (createRequire(import.meta.url)('../../../packages/learning/src/graph.ts') as { graph: typeof graph }).graph;
+ const originals = [...new Set([graph, requiredGraph])].map(g => ({ g, relations: g.relationsOf }));
+ for (const {g, relations} of originals) g.relationsOf=(id,opts)=>id==='MATH.number.addition'?[{from:id,type:'mandatory',source:'audit@1'}]:relations(id,opts);
  try {
   const s=begin('MATH.number.addition'),st=s.state();
   assert.equal(st.next?.kind,'none');assert.match(st.next!.reason,/route needs review/);
   assert.equal(st.selectionRecords.readinessRoute,undefined);
- } finally {graph.relationsOf=original;}
+ } finally {for (const {g, relations} of originals) g.relationsOf=relations;}
 });
 
 

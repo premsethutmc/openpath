@@ -34,3 +34,9 @@ The certification test now authors explicit triangle/isosceles citations in copi
 For U1, all 200 classifications still agree; 23 old `firstInvalidStep` values actually name the first non-verified step, whereas the current geometry contract reserves that field for a disproven step. Other frozen benchmarks assume entailment supplies learner method credit. Their expected files and assertions remain intact. This continuation does not restore unsafe method authority or silently relabel frozen benchmark outcomes to make those checks green. These historical benchmark contracts require separate reconciliation; they must remain visible in readiness reporting.
 
 Remote CI on the exact published correction, including previously blocked build/browser stages, will be recorded in PR96. Passing typechecks is not evidence that all downstream stages pass, nor completion of mathematics content or educational validation.
+
+## Node 22.18 cycle-fixture isolation
+
+The prerequisite runtime matrix exposed a separate test-fixture failure: under Node 22.18 with `tsx`, the frontend test's ESM graph and the learning package's CommonJS graph are distinct instances. Mutating only the first did not inject a cycle into the planner. An isolated probe confirmed that patching ESM alone left the route unchanged; patching the CommonJS instance triggered the expected stop. Node 24 uses one shared instance in this setup.
+
+The cycle test now patches each unique loaded instance and restores each in `finally`. Its assertions still require no next activity, an explicit route-review reason, and no readiness placement. Production graph, planner, authority and event semantics are unchanged. The full affected pathway file passes 7/7 under Node 22.18 and 7/7 under Node 24.19; independent review confirmed there was no assertion weakening.
