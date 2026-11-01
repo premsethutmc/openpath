@@ -46,6 +46,11 @@ class KnowledgeState:
                 if fact.value is not None and fact.value < 0: self.inconsistent = True
         for obj in self.problem.objects.values():
             if obj.kind != "triangle": continue
+            angles = tuple(obj.get("angles", ()))
+            measures = [self.valued("angle_measure", a) for a in angles]
+            if condition_nondegenerate(obj.id) in self.problem.conditions:
+                if any(x and not 0 < x.value < 180 for x in measures): self.inconsistent = True
+                if len(measures) == 3 and all(measures) and sum(x.value for x in measures) != 180: self.inconsistent = True
             sides = tuple(obj.get("sides", ()))
             lengths = [self.valued("length", side) for side in sides]
             if len(lengths) == 3 and all(lengths):
@@ -92,6 +97,14 @@ def _pair_rule(construction: str, conclusion: str, condition: Callable[[Knowledg
             required = condition(state, pair) if condition else ()
             if required is not None:
                 yield Fact(conclusion, pair.args[:2]), (pair, *required), ()
+                # A numerical use of an equality theorem is the same direct rule:
+                # equal angles with one stated measure give the other measure.
+                if conclusion == "equal_angle":
+                    a, b = pair.args[:2]
+                    for source, target in ((a, b), (b, a)):
+                        measure = state.valued("angle_measure", source)
+                        if measure:
+                            yield Fact("angle_measure", (target,), measure.value), (pair, *required, measure), ()
     return apply
 
 
@@ -106,10 +119,21 @@ def _straight_line(state: KnowledgeState):
         a, b = pair.args
         ma = next((x for x in state.all("angle_measure") if x.args == (a,)), None)
         mb = next((x for x in state.all("angle_measure") if x.args == (b,)), None)
-        if ma and not mb:
+        if ma:
             yield Fact("angle_measure", (b,), Fraction(180) - ma.value), (pair, ma), ()
-        if mb and not ma:
+        if mb:
             yield Fact("angle_measure", (a,), Fraction(180) - mb.value), (pair, mb), ()
+
+
+def _angle_pair_sum(predicate: str, total: int):
+    def apply(state: KnowledgeState):
+        for pair in state.all(predicate):
+            a, b = pair.args
+            for source, target in ((a, b), (b, a)):
+                measure = state.valued("angle_measure", source)
+                if measure and 0 < measure.value < total:
+                    yield Fact("angle_measure", (target,), Fraction(total) - measure.value), (pair, measure), ()
+    return apply
 
 
 def _triangle_sum(state: KnowledgeState):
@@ -121,10 +145,41 @@ def _triangle_sum(state: KnowledgeState):
             continue
         angles = tuple(triangle.get("angles", ()))
         known = [next((x for x in state.all("angle_measure") if x.args == (angle,)), None) for angle in angles]
-        if len(angles) == 3 and sum(x is not None for x in known) == 2:
-            missing = next(i for i, item in enumerate(known) if item is None)
-            premises = tuple(item for item in known if item is not None)
-            yield Fact("angle_measure", (angles[missing],), Fraction(180) - sum((item.value for item in premises), Fraction())), premises, (condition,)
+        if len(angles) == 3:
+            for missing in range(3):
+                premises = tuple(known[i] for i in range(3) if i != missing)
+                if all(premises):
+                    yield Fact("angle_measure", (angles[missing],), Fraction(180) - sum((item.value for item in premises), Fraction())), premises, (condition,)
+
+
+def _equal_angle_measure(state: KnowledgeState):
+    for equal in state.all("equal_angle"):
+        a, b = equal.args
+        for source, target in ((a, b), (b, a)):
+            measure = state.valued("angle_measure", source)
+            if measure:
+                yield Fact("angle_measure", (target,), measure.value), (equal, measure), ()
+
+
+def _exterior_angle(state: KnowledgeState):
+    # The linear pair must be explicitly established; never infer it from a picture.
+    for triangle in state.problem.objects.values():
+        condition = condition_nondegenerate(triangle.id)
+        angles = tuple(triangle.get("angles", ()))
+        if triangle.kind != "triangle" or len(set(angles)) != 3 or condition not in state.problem.conditions:
+            continue
+        for pair in state.all("linear_pair"):
+            for interior, exterior in (pair.args, tuple(reversed(pair.args))):
+                if interior not in angles or exterior in angles:
+                    continue
+                opposite = tuple(a for a in angles if a != interior)
+                x, y = (state.valued("angle_measure", a) for a in opposite)
+                outside = state.valued("angle_measure", exterior)
+                if x and y:
+                    yield Fact("angle_measure", (exterior,), x.value + y.value), (pair, x, y), (condition,)
+                for target, other in ((opposite[0], y), (opposite[1], x)):
+                    if outside and other:
+                        yield Fact("angle_measure", (target,), outside.value - other.value), (pair, outside, other), (condition,)
 
 
 def _isosceles(state: KnowledgeState):
@@ -245,7 +300,11 @@ def _triangle_inequality(state: KnowledgeState):
 
 
 RULES = (
-    TheoremRule("vertical-opposite", "Vertically opposite angles", ("vertical_pair",), (), ("equal_angle",), "Vertically opposite angles formed by two intersecting lines are equal.", _pair_rule("vertical_pair", "equal_angle")),
+    TheoremRule("complementary", "Complementary angles", ("complementary_pair", "angle_measure"), (), ("angle_measure",), "Complementary angles sum to 90°.", _angle_pair_sum("complementary_pair", 90)),
+    TheoremRule("supplementary", "Supplementary angles", ("supplementary_pair", "angle_measure"), (), ("angle_measure",), "Supplementary angles sum to 180°.", _angle_pair_sum("supplementary_pair", 180)),
+    TheoremRule("equal-angle-measure", "Measures of equal angles", ("equal_angle", "angle_measure"), (), ("angle_measure",), "Equal angles have equal measures.", _equal_angle_measure),
+    TheoremRule("exterior-angle", "Exterior angle of a triangle", ("linear_pair", "angle_measure"), ("nondegenerate triangle",), ("angle_measure",), "An exterior angle equals the sum of the two opposite interior angles.", _exterior_angle),
+    TheoremRule("vertical-opposite", "Vertically opposite angles", ("vertical_pair",), (), ("equal_angle", "angle_measure"), "Vertically opposite angles formed by two intersecting lines are equal.", _pair_rule("vertical_pair", "equal_angle")),
     TheoremRule("straight-line", "Angles on a straight line", ("linear_pair", "angle_measure"), (), ("angle_measure",), "Adjacent angles on a straight line sum to 180°.", _straight_line),
     TheoremRule("parallel-corresponding", "Corresponding angles", ("parallel", "corresponding_pair"), (), ("equal_angle",), "Corresponding angles are equal when a transversal crosses parallel lines.", _pair_rule("corresponding_pair", "equal_angle", _parallel_pair)),
     TheoremRule("parallel-alternate", "Alternate interior angles", ("parallel", "alternate_pair"), (), ("equal_angle",), "Alternate interior angles are equal when a transversal crosses parallel lines.", _pair_rule("alternate_pair", "equal_angle", _parallel_pair)),
@@ -282,6 +341,9 @@ class SyntheticReasoner:
                             state.resource_limit_reached = True
                             return state
                         changed |= state.add(fact, rule, tuple(premises), tuple(conditions))
+                        state._check_numeric_consistency()
+                        if state.inconsistent:
+                            return state
                 except (IndexError, KeyError, TypeError, ValueError, ZeroDivisionError):
                     state.malformed = True
                     return state

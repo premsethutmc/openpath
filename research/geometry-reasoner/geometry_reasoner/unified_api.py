@@ -29,7 +29,9 @@ def assess_unified(request:dict[str,Any])->dict[str,Any]:
             result=verify_geometry_step(problem,[],goal,synthetic=SyntheticReasoner(max_rule_applications=0))
             assessment=ProofAssessment((result,),False,False,result,0,(0,),result.unsupported_conditions)
         else: assessment=verify_submitted_proof(problem,steps)
-        return json.loads(json.dumps(asdict(adapt_geometry_assessment(assessment,(problem.skill,))),default=str))
+        result = json.loads(json.dumps(asdict(adapt_geometry_assessment(assessment,(problem.skill,))),default=str))
+        result["authorityVersion"] = "geometry-reasoner@foundation-1"
+        return result
     except (KeyError,TypeError,ValueError,OverflowError):
         return {"outcome":"unsupported","correct":None,"advisory":True,"firstInvalidStep":None,"steps":[],"causes":[],"summary":"malformed structured geometry request","resourceLimit":False,"geometry":{"schema_version":"openpath-geometry-extension@1","native_verdicts":[],"proof_dependencies":[],"mathematical_dependencies":[],"unresolved_obligations":["well-formed geometry request"],"verification_scopes":[],"skill_ids":[],"resource_limit_reached":False}}
 

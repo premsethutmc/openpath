@@ -5,7 +5,7 @@ from typing import Iterable
 
 from .algebraic import AlgebraicVerifier
 from .model import Fact, GeometryProblem, ProofAssessment, SubmittedProofStep, VerificationResult, condition_nondegenerate
-from .synthetic import SyntheticReasoner
+from .synthetic import KnowledgeState, RULES, SyntheticReasoner
 
 
 def _contradiction(statement: Fact, facts: Iterable[Fact]):
@@ -107,6 +107,43 @@ def verify_student_proof(problem: GeometryProblem, student_steps: Iterable[Fact]
     return ProofAssessment(tuple(results), valid, complete, goal, first_invalid, unsupported, obligations, (route,) if route else ())
 
 
+def _verify_justified_step(problem: GeometryProblem, accepted: list[Fact], step: SubmittedProofStep,
+                           cited: tuple[Fact, ...], algebraic: AlgebraicVerifier | None) -> VerificationResult:
+    """A method is a direct application of the cited rule, not a completed search.
+
+    Global entailment is consulted only for a sound contradiction or an honest
+    missing-assumption result. It cannot supply unstated intermediate steps.
+    """
+    conclusion = verify_geometry_step(problem, accepted, step.statement, algebraic=algebraic)
+    if conclusion.verdict == "invalid" or conclusion.resource_limit_reached:
+        return conclusion
+    state = KnowledgeState(problem, accepted)
+    if state.inconsistent or (conclusion.verdict == "unsupported" and conclusion.unsupported_conditions in (("consistent premises",), ("well-formed geometry input",))):
+        return conclusion
+    given = next((f for f in problem.facts if f.key == step.statement.key), None)
+    if given and step.cited_theorem in (None, "given") and not cited:
+        return VerificationResult("verified", step.statement, "given", (given,), (given.key,), (), (), "Restatement of a supplied fact; no method step is established.")
+    rule = next((r for r in RULES if r.id == step.cited_theorem), None)
+    if rule is None:
+        if not step.cited_theorem and conclusion.verdict == "missing_assumption":
+            return conclusion
+        return VerificationResult("unsupported", step.statement, None, (), (), (), ("justification",),
+                                  "Supply a supported rule and its intermediate steps; entailment alone is not demonstrated reasoning.")
+    try:
+        for index, (fact, premises, conditions) in enumerate(rule.apply(state)):
+            if index >= 10_000:
+                return VerificationResult("unsupported", step.statement, None, (), (), (), ("reasoning resource limit",), "The direct rule check reached its resource limit.", resource_limit_reached=True)
+            keys = tuple(p.key for p in premises)
+            if fact.key == step.statement.key and all(c.key in keys for c in cited):
+                return VerificationResult("verified", step.statement, rule.id, tuple(premises), keys, (), (), rule.justification)
+    except (IndexError, KeyError, TypeError, ValueError, ZeroDivisionError):
+        return VerificationResult("unsupported", step.statement, None, (), (), (), ("well-formed geometry input",), "Malformed data stopped the rule check safely.")
+    if conclusion.verdict == "missing_assumption":
+        return conclusion
+    return VerificationResult("unsupported", step.statement, None, (), (), (), ("justification",),
+                              "The cited rule has not been justified from the givens and earlier accepted steps. Show an intermediate step or clarify the rule; this is not evidence that the method is false.")
+
+
 def verify_submitted_proof(problem: GeometryProblem, steps: Iterable[SubmittedProofStep], *, algebraic: AlgebraicVerifier | None = None) -> ProofAssessment:
     """Verify an ordered student proof and its explicit citation graph.
 
@@ -128,20 +165,19 @@ def verify_submitted_proof(problem: GeometryProblem, steps: Iterable[SubmittedPr
             reason = "duplicate step identifier" if step.id in duplicate_ids else "forward, self, or unknown proof dependency"
             results.append(VerificationResult("invalid", step.statement, None, (), (), (), tuple(f"step:{x}" for x in bad), f"Invalid proof graph: {reason}."))
             continue
-        result = verify_geometry_step(problem, accepted, step.statement, algebraic=algebraic)
-        if result.verdict == "verified" and step.cited_theorem and result.theorem != step.cited_theorem:
-            result = VerificationResult("invalid", step.statement, result.theorem, result.premises, result.proof_dependencies, (), (), f"The cited theorem {step.cited_theorem} does not justify this step; the established route uses {result.theorem}.")
-        if result.verdict == "verified" and step.cited_step_ids:
-            relevant = set(result.proof_dependencies)
-            irrelevant = tuple(ref for ref in step.cited_step_ids if by_id[ref].statement.key not in relevant)
-            if irrelevant:
-                result = VerificationResult("invalid", step.statement, result.theorem, result.premises, result.proof_dependencies, (), tuple(f"irrelevant-step:{x}" for x in irrelevant), "The cited proof steps are not premises of the stated justification.")
+        cited = tuple(by_id[ref].statement for ref in step.cited_step_ids)
+        # Citing an earlier unsupported line cannot promote it to a premise.
+        accepted_keys = {f.key for f in accepted}
+        result = _verify_justified_step(problem, accepted, step, cited, algebraic)
+        if result.verdict == "verified" and any(f.key not in accepted_keys for f in cited):
+            result = VerificationResult("unsupported", step.statement, None, (), (), (), ("established premises",), "An earlier cited step has not been established.")
         results.append(result)
         if result.verdict == "verified": accepted.append(step.statement.as_status("derived", result.theorem))
     goal = verify_geometry_step(problem, accepted, problem.goal or Fact("unsupported_goal", ()), algebraic=algebraic)
     valid = all(r.verdict == "verified" for r in results)
-    complete = valid and bool(results) and problem.goal is not None and results[-1].statement.key == problem.goal.key
-    first = next((i for i, r in enumerate(results) if r.verdict != "verified"), None)
+    demonstrated = any(r.verdict == "verified" and r.theorem != "given" for r in results)
+    complete = valid and demonstrated and problem.goal is not None and results[-1].statement.key == problem.goal.key
+    first = next((i for i, r in enumerate(results) if r.verdict == "invalid"), None)
     unsupported = tuple(i for i, r in enumerate(results) if r.verdict == "unsupported")
     obligations = tuple(dict.fromkeys(x for r in results for x in (*r.missing_assumptions, *r.unsupported_conditions)))
     route = tuple(r.theorem or "given" for r in results if r.verdict == "verified")
