@@ -39,7 +39,7 @@ export function metrics(ts: JourneyTrace[]) {
     claims: 0, falseClaims: 0, journeysClaim: 0, journeysFalseClaim: 0, shadowClaims: 0, falseShadow: 0, competentPairs: 0, missedShadow: 0, competentJourneys: 0, missedAuth: 0, leakClaims: 0,
     correctWithWorking: 0, correctInvalid: 0, incorrectWithWorking: 0, incorrectVerified: 0,
     cyclesDue: 0, cyclesDone: 0, cyclesFailed: 0, journeysIndependent: 0, journeysNoDue: 0, recAttempts: 0, recTargeted: 0, recoveries: 0, recLeak: 0, retAttempts: {} as Record<string, number>,
-    shownNeverSampled: 0, shownPairs: 0, arrivedTooEarly: 0, scheduledArrivals: 0 };
+    shownNeverSampled: 0, shownPairs: 0, arrivedTooEarly: 0, scheduledArrivals: 0, firstClaims: 0, firstClaimFalse: 0, claimOutlived: 0, activeClaims: 0, activeFalse: 0 };
   const gainTaught: number[] = [], gainUntaught: number[] = [], qToDiag: number[] = [], qPerShown: number[] = [], teachPer: number[] = [], attemptsPer: number[] = [];
   const outcomes: Record<string, number> = {}, ends: Record<string, number> = {};
   for (const t of ts) {
@@ -78,8 +78,11 @@ export function metrics(ts: JourneyTrace[]) {
     const taughtKinds = new Set(teach.map((x) => x.kind).filter(Boolean) as string[]);
     for (const k of COMP_KINDS) (taughtKinds.has(k) ? gainTaught : gainUntaught).push((t.finalHidden.abilities[k] ?? 0) - (t.initialHidden.abilities[k] ?? 0));
     // ---------------- mastery
-    let anyClaim = false, anyFalse = false;
+    let anyClaim = false, anyFalse = false, firstSeen = false;
     for (const v of t.visits) {
+      // review addition (descriptive, post-hoc): is the FIRST claim already false, or does a true claim outlive the knowledge?
+      if (!firstSeen && (CLAIM.has(v.openpath.evidence.status) || v.openpath.evidence.verified)) { firstSeen = true; c.firstClaims++; if (COMP_KINDS.some((k) => weak(v.hiddenAfter, k))) c.firstClaimFalse++; else if (t.visits.slice(t.visits.indexOf(v) + 1).some((x) => CLAIM.has(x.openpath.evidence.status) && COMP_KINDS.some((k) => weak(x.hiddenAfter, k)))) c.claimOutlived++; }
+      if ((CLAIM.has(v.openpath.evidence.status) || v.openpath.evidence.verified) && v.openpath.attempts.length) { c.activeClaims++; if (COMP_KINDS.some((k) => weak(v.hiddenAfter, k))) c.activeFalse++; }
       const ev = v.openpath.evidence;
       if (CLAIM.has(ev.status) || ev.verified) { c.claims++; anyClaim = true; if (COMP_KINDS.some((k) => weak(v.hiddenAfter, k))) { c.falseClaims++; anyFalse = true; } if (v.openpath.e1.discrepancy?.length) c.leakClaims++; }
       for (const k of COMP_KINDS) if (E1_CLAIM.has(v.openpath.e1.subSkills[k])) { c.shadowClaims++; if (weak(v.hiddenAfter, k)) c.falseShadow++; }
@@ -112,7 +115,8 @@ export function metrics(ts: JourneyTrace[]) {
     for (let i = 1; i < t.visits.length; i++) if (t.visits[i].factBefore.label === "scheduled") { c.scheduledArrivals++; if (!t.visits[i].openpath.attempts.some((a) => a.activity === "retention")) c.arrivedTooEarly++; }
     // ---------------- efficiency
     const firstTeachVisit = t.visits.findIndex((v) => v.openpath.teaching.length || v.openpath.established.length);
-    if (firstTeachVisit >= 0) qToDiag.push(t.visits.slice(0, firstTeachVisit).reduce((n, v) => n + v.openpath.attempts.length, 0) + (() => { const v = t.visits[firstTeachVisit]; const firstT = v.openpath.phases.indexOf("chapter"); return firstT < 0 ? v.openpath.attempts.length : v.openpath.attempts.length; })());
+    // review fix: attempts before the first explanation (by OpenPath's own record times); a visit that only establishes a hypothesis counts whole
+    if (firstTeachVisit >= 0) { const v = t.visits[firstTeachVisit]; const tAt = v.openpath.teaching[0]?.at; qToDiag.push(t.visits.slice(0, firstTeachVisit).reduce((n, x) => n + x.openpath.attempts.length, 0) + (tAt ? v.openpath.attempts.filter((a) => Date.parse(a.at) < Date.parse(tAt)).length : v.openpath.attempts.length)); }
     const shown = COMP_KINDS.filter((k) => last.openpath.e1.subSkills[k] === "independently-demonstrated" || last.openpath.e1.subSkills[k] === "retention-due").length;
     if (shown) qPerShown.push(Math.round((atts.length / shown) * 10) / 10);
     teachPer.push(teach.length); attemptsPer.push(atts.length);
@@ -121,7 +125,7 @@ export function metrics(ts: JourneyTrace[]) {
     metrics: METRICS_VERSION, journeys: ts.length, ends,
     diagnosis: { correctlyIdentifiedWeak: R(c.idWeak, c.weakOpp), missedWeak: R(c.missWeak, c.weakOpp), falseDiagnosis: R(c.falseDiag, c.identified), misconceptionClassificationAccuracy: R(c.estCorrect, c.estTotal - c.estOutside), establishedOutsideSimulatorModel: R(c.estOutside, c.estTotal), missedMisconceptions: R(c.heldMissed, c.heldMisc), missedCatalogued: R(c.heldMissedCat, c.heldMiscCat), missedUnrecognised: R(c.heldMissedUnrec, c.heldMiscUnrec) },
     teaching: { appropriate: R(c.teachApprop, c.teachKinded), unnecessary: R(c.teachUnnec, c.teachKinded), repeatedIneffective: R(c.repeatsIneffective, c.repeats), instructionOutcomes: outcomes, meanGainTaughtKinds: mean(gainTaught), meanGainUntaughtKinds: mean(gainUntaught), pairsTaught: gainTaught.length, pairsUntaught: gainUntaught.length },
-    mastery: { falseAuthoritativeClaims: R(c.falseClaims, c.claims), journeysWithFalseAuthoritativeClaim: R(c.journeysFalseClaim, c.journeysClaim), falseShadowClaims: R(c.falseShadow, c.shadowClaims), missedCompetenceShadow: R(c.missedShadow, c.competentPairs), missedCompetenceAuthoritative: R(c.missedAuth, c.competentJourneys), crossFamilyLeakage: R(c.leakClaims, c.claims), correctAnswerInvalidMethod: R(c.correctInvalid, c.correctWithWorking), incorrectAnswerVerifiedWorking: R(c.incorrectVerified, c.incorrectWithWorking) },
+    mastery: { falseAuthoritativeClaims: R(c.falseClaims, c.claims), firstClaimAlreadyFalse: R(c.firstClaimFalse, c.firstClaims), trueClaimOutlivedKnowledge: R(c.claimOutlived, c.firstClaims), falseClaimsOnVisitsWithAnswers: R(c.activeFalse, c.activeClaims), journeysWithFalseAuthoritativeClaim: R(c.journeysFalseClaim, c.journeysClaim), falseShadowClaims: R(c.falseShadow, c.shadowClaims), missedCompetenceShadow: R(c.missedShadow, c.competentPairs), missedCompetenceAuthoritative: R(c.missedAuth, c.competentJourneys), crossFamilyLeakage: R(c.leakClaims, c.claims), correctAnswerInvalidMethod: R(c.correctInvalid, c.correctWithWorking), incorrectAnswerVerifiedWorking: R(c.incorrectVerified, c.incorrectWithWorking) },
     retention: { checksCompleted: R(c.cyclesDone, c.cyclesDue), checksFailed: R(c.cyclesFailed, c.cyclesDone), shownButNoDueDate: R(c.journeysNoDue, c.journeysIndependent), recoveryTargeting: R(c.recTargeted, c.recAttempts), crossFamilyRecovery: R(c.recLeak, c.recoveries), shownSubSkillNeverSampled: R(c.shownNeverSampled, c.shownPairs), arrivedOnShownDateButCheckNotYetDue: R(c.arrivedTooEarly, c.scheduledArrivals), retentionQuestionsByKind: c.retAttempts },
     efficiency: { medianQuestionsToFirstDiagnosis: median(qToDiag), medianQuestionsPerShownSubSkill: median(qPerShown), meanTeachingPerLearner: mean(teachPer), medianAttemptsPerJourney: median(attemptsPer), boundedJourneys: R(ts.filter((t) => t.bounded).length, ts.length) },
   };

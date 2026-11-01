@@ -44,7 +44,7 @@ export interface VisitTrace {
   /** OpenPath's decisions in this visit (read from OpenPath's records after the visit; never shown to the learner) */
   openpath: {
     attempts: { at: string; qid: string; kind: string | null; competency: string; activity: string; hints: number; response: string; working: string[] | null; verdict: string | null; workingStatus: string | null; firstInvalid: number | null }[];
-    teaching: { competency: string; strategy: string; kind: string | null }[];
+    teaching: { at: string; competency: string; strategy: string; kind: string | null }[];
     phases: string[];
     evidence: { status: string; verified: boolean; retention: string; retentionDueAt: string | null; recoveryRequired: boolean; independent: { right: number; total: number }; history: unknown };
     established: { explanation: string; family: string; question: string; status: string }[];
@@ -106,7 +106,7 @@ export function runS2Journey(profile: Profile, seed: number, cohort: string, o: 
       const d = flow.session.decisions[e.id] as unknown as { verdict?: string; working?: { status?: string; firstInvalid?: { index: number } | null } } | undefined;
       return { at: (e as unknown as { at: string }).at, qid: e.questionId!, kind: kindOfQuestion(e.questionId!), competency: e.competency, activity: e.activity!, hints: e.hints ?? 0, response: e.response!, working: e.working ?? null, verdict: d?.verdict ?? null, workingStatus: d?.working?.status ?? null, firstInvalid: d?.working?.firstInvalid?.index ?? null };
     });
-    const teaching = newEvents.filter((e) => e.record === "teach").map((e) => ({ competency: e.competency, strategy: e.strategy!, kind: strategyKind(e.competency, e.strategy!) }));
+    const teaching = newEvents.filter((e) => e.record === "teach").map((e) => ({ at: (e as unknown as { at: string }).at, competency: e.competency, strategy: e.strategy!, kind: strategyKind(e.competency, e.strategy!) }));
     const phases = flow.frames.slice(framesBefore).map((f) => (f as { phase?: string }).phase ?? f.stage).filter((p, i, a) => i === 0 || a[i - 1] !== p);
     const hs = hypotheses(st.records).filter((h) => h.claim && (h.status === "established" || h.status === "resolved" || h.status === "contested")).map((h) => ({ explanation: h.claim!.explanation, family: problemOf(String(h.scope.family).replace(/:(mc|w)$/, ""))?.family ?? String(h.scope.family), question: h.scope.question, status: h.status }));
     const p = projectFromEvents(learnerId, flow.session.events.map((e) => ({ ...(e as object), ...(flow.session.decisions[(e as { id: string }).id] ? { decision: flow.session.decisions[(e as { id: string }).id] } : {}) })) as never, flow.session.now, { status: ev.status, verified: ev.verified });

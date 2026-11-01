@@ -45,11 +45,12 @@ test("3 repeated guessed answers (C02): no authoritative claim and no shadow dem
   assert.ok(t.visits.every((v) => !["independent", "transfer", "verified"].includes(v.openpath.evidence.status)), JSON.stringify(t.visits.map((v) => v.openpath.evidence.status)));
 });
 test("4 assisted answers are not independent evidence", () => {
-  const f = fresh("4"); const q = f.currentQuestion!;
-  for (let i = 0; i < 40 && f.stage !== "summary"; i++) { if (f.stage === "question") { if ((f.spec as unknown as { nav: { canRequestHint: boolean } }).nav.canRequestHint) f.on({ type: "hint_requested", level: 1, timestamp: 0 } as never); submit(f, f.currentActivity === "guided" ? ans(f.currentQuestion!) : "999"); } else cont(f); }
-  const recs = f.session.state().records.attempts.filter((a) => a.hints > 0 || a.activity === "guided");
-  assert.ok(recs.length > 0 || q.length > 0);
+  const f = fresh("4");
+  for (let i = 0; i < 60 && f.stage !== "summary"; i++) { if (f.stage === "question") { if ((f.spec as unknown as { nav: { canRequestHint: boolean } }).nav.canRequestHint) f.on({ type: "hint_requested", level: 1, timestamp: 0 } as never); submit(f, f.currentActivity === "guided" || f.hintsShown > 0 ? ans(f.currentQuestion!) : "999"); } else cont(f); }
+  const assisted = f.session.state().records.attempts.filter((a) => (a.hints > 0 || a.activity === "guided") && a.credit === true);
+  assert.ok(assisted.length >= 1, "there were right answers with help");
   const p = proj(f); for (const s of p.subSkills) assert.notEqual(s.status, "independently-demonstrated");
+  assert.ok(!["independent", "transfer", "verified"].includes(f.session.state().evidence(COMPETENCY).status));
 });
 test("5 persistent misconception (C01: instruction never helps): errors continue after teaching [observed]", () => {
   const t = runS2Journey(profile("C01"), 80001, "case");
@@ -58,12 +59,16 @@ test("5 persistent misconception (C01: instruction never helps): errors continue
   assert.ok(t.instruction.every((i) => i.outcome === "none"));
   assert.deepEqual(t.finalHidden.misconceptions, t.initialHidden.misconceptions);
 });
-test("6 unrecognised misconception (coefficient-dropped): OpenPath establishes no hypothesis for it [OBSERVED-WEAKNESS]", () => {
+test("6 unrecognised misconception (coefficient-dropped): errors occur where it changes the answer; no OpenPath explanation names it [OBSERVED-WEAKNESS]", () => {
   const p = { ...profile("S003B"), skills: { "one-step": 1, "two-step": 1, "both-sides": 0, brackets: 1, modelling: 1 }, misconceptions: { "coefficient-dropped": 1 }, slip: 0, guess: 0 } as Profile;
-  const t = runS2Journey(p, 4242, "case", { limits: { visits: 4 } });
-  const est = t.visits.at(-1)!.openpath.established.map((h) => h.explanation);
-  assert.ok(!est.includes("coefficient-dropped"));
-  assert.ok(t.visits.flatMap((v) => v.openpath.attempts).some((a) => a.kind === "both-sides" && a.verdict === "incorrect") || true);
+  for (const seed of [4242, 4243, 4244]) {
+    const t = runS2Journey(p, seed, "case", { limits: { visits: 4 } });
+    // a − c = 1 makes the dropped coefficient harmless (a documented limitation of this error pattern): those questions are excluded
+    const both = t.visits.flatMap((v) => v.openpath.attempts).filter((a) => a.kind === "both-sides" && a.hints === 0 && !a.qid.endsWith(":mc") && (() => { const [a1, , c1] = params(a.qid); return a1 - c1 !== 1; })());
+    for (const a of both) assert.equal(a.verdict, "incorrect", `${a.qid} ${a.response}`);
+    const est = t.visits.flatMap((v) => v.openpath.established.map((h) => h.explanation));
+    assert.ok(!est.includes("coefficient-dropped"));
+  }
 });
 test("7 wrong intermediate algebraic step: D1 points at that line", () => {
   const f = fresh("7"); const q = f.currentQuestion!; const [a, b, x] = params(q); const c = a * x + b;
@@ -78,31 +83,37 @@ test("8 correct intermediate steps, wrong final answer: verdict incorrect; the w
 test("9 partial working: D1 reports partial, nothing invented", () => {
   const f = fresh("9"); const q = f.currentQuestion!; const [a, b, x] = params(q); const c = a * x + b;
   submit(f, "", [`${a}x = ${c - b}`]);
-  assert.ok(["partial", "unsupported", "answer-only", "none"].includes(String(decisionOfLast(f).working?.status)), JSON.stringify(decisionOfLast(f).working));
+  assert.equal(decisionOfLast(f).working?.status, "partial"); assert.equal(fbOf(f).level, "partial");
 });
 test("10 unsupported notation: not marked as a false step", () => {
   const f = fresh("10"); const q = f.currentQuestion!; const [a, b, x] = params(q); const c = a * x + b;
   submit(f, String(x), [`${a}x + ${b} - ${b} = ${c} - ${b}`, `${a}x/${a} = ${c - b}/${a}`, `x = ${x}`]);
   assert.notEqual(decisionOfLast(f).working!.status, "invalid");
 });
-test("11 early apparent mastery followed by failure (C04): authoritative claim made while the learner's knowledge is fragile [OBSERVED-WEAKNESS]", () => {
+test("11 early apparent mastery followed by failure (C04): the authoritative claim outlives the knowledge [OBSERVED-WEAKNESS]", () => {
   const t = runS2Journey(profile("C04"), 80004, "case");
-  const claimed = t.visits.some((v) => ["independent", "transfer"].includes(v.openpath.evidence.status));
-  assert.ok(claimed, "C04 is credited early");
-  const later = t.visits.flatMap((v) => v.openpath.attempts).filter((a) => a.activity === "retention");
-  assert.ok(later.length === 0 || later.some((a) => a.verdict === "incorrect") || t.visits.some((v) => v.openpath.evidence.retention === "failed") || true);
+  const claim = (v: (typeof t.visits)[number]) => ["independent", "transfer", "verified"].includes(v.openpath.evidence.status);
+  assert.ok(claim(t.visits[0]) && t.visits[0].hiddenAfter.abilities["two-step"] >= 0.9, "credited on the first visit while the (fragile) knowledge is there");
+  assert.ok(t.visits.some((v) => claim(v) && v.hiddenAfter.abilities["two-step"] < 0.6), "still credited after it has gone");
+  assert.ok(t.visits.some((v) => v.openpath.evidence.retention === "failed"), "the delayed check catches it");
 });
-test("12 successful teaching followed by independent success (instruction always lands)", () => {
-  const p = { ...loadProfile("S003"), instruction: { ...loadProfile("S003").instruction, full: 1, partial: 0, misconceptionResponse: 1 } } as Profile;
-  const t = runS2Journey(p, 9001, "case");
-  if (t.instruction.length) assert.ok(t.instruction.every((i) => i.outcome === "full"));
-  assert.ok(t.visits.some((v) => ["independent", "transfer"].includes(v.openpath.evidence.status)) || t.end !== "retention-passed");
+test("12 successful teaching followed by independent success: when instruction lands, the taught kind improves and the learner is later shown alone", () => {
+  const base = loadProfile("S003"); const p = { ...base, instruction: { ...base.instruction, full: 1, partial: 0, misconceptionResponse: 1 } } as Profile;
+  let shownAfterTeaching = 0;
+  for (const seed of [9001, 9002, 9003]) {
+    const t = runS2Journey(p, seed, "case");
+    assert.ok(t.instruction.length > 0, "OpenPath taught");
+    const first = t.instruction[0]; const k = first.kind!;
+    assert.ok(t.finalHidden.abilities[k] > first.abilitiesBefore[k] || first.abilitiesBefore[k] >= 0.95, `${k} improved`);
+    const tv = t.visits.findIndex((v) => v.openpath.teaching.length);
+    if (t.visits.slice(tv).some((v) => ["independent", "transfer"].includes(v.openpath.evidence.status))) shownAfterTeaching++;
+  }
+  assert.ok(shownAfterTeaching >= 1, "at least one of three journeys reaches 'shown alone' after teaching");
 });
-test("13 failed teaching followed by inappropriate mastery: C01 can be credited while weak [characterised in results]", () => {
+test("13 failed teaching followed by inappropriate mastery: C01 (instruction never lands) is not credited in this journey", () => {
   const t = runS2Journey(profile("C01"), 80001 + 7919, "case");
-  assert.ok(t.instruction.every((i) => i.outcome === "none"));
-  // recorded, not asserted either way here: the experiment's falseAuthoritativeClaims metric counts it over 20 seeds
-  assert.ok(Array.isArray(t.visits));
+  assert.ok(t.instruction.length > 0 && t.instruction.every((i) => i.outcome === "none"), "taught, and nothing was learned");
+  assert.ok(t.visits.every((v) => !["independent", "transfer", "verified"].includes(v.openpath.evidence.status)), "no authoritative claim (all 20 C01 journeys: 0 claims, see results)");
 });
 test("14 retention failure: the failed delayed check is kept in the history", () => {
   const f = fresh("14");
@@ -114,22 +125,21 @@ test("14 retention failure: the failed delayed check is kept in the history", ()
   assert.ok(sawRetention); const ev = f.session.state().evidence(COMPETENCY);
   assert.ok(ev.retentionHistory.some((h) => h.result === "failed"));
 });
-test("15 recovery targeting the wrong sub-skill: recovery after a failed two-step check can be completed by other kinds [OBSERVED-WEAKNESS]", () => {
-  const f = fresh("15");
-  for (let i = 0; i < 80 && f.stage !== "summary"; i++) { if (f.stage === "question") submit(f, ans(f.currentQuestion!)); else cont(f); }
-  const due = f.session.state().evidence(COMPETENCY).retentionDueAt!; f.later(Math.ceil((Date.parse(due) - f.session.now) / DAY) + 1);
-  const failedKinds = new Set<string>();
-  for (let i = 0; i < 60 && f.stage !== "summary"; i++) { if (f.stage === "question") { const q = f.currentQuestion!; if (f.currentActivity === "retention") { failedKinds.add(problemOf(q.replace(/:(mc|w)$/, ""))!.family); submit(f, "999"); } else submit(f, ans(q)); } else cont(f); }
-  // recovery accepts right answers alone of ANY family of the competency (retention@2), so a learner can recover on kinds other than the one that failed
-  const ev = f.session.state().evidence(COMPETENCY); const h = ev.retentionHistory.find((x) => x.result === "failed")!;
-  if (h?.recoveredAt) { const rec = f.session.state().records.attempts.filter((a) => a.at > h.failedAt! && a.at <= h.recoveredAt! && a.activity !== "retention").map((a) => problemOf(a.questionId.replace(/:(mc|w)$/, ""))?.family); assert.ok(rec.length >= 2); }
-  assert.ok(failedKinds.size >= 1);
+test("15 recovery targeting the wrong sub-skill: a failed modelling check is recovered by two-step and bracket answers [OBSERVED-WEAKNESS, experiment journey s2-A-S001-143543]", () => {
+  const t = runS2Journey(loadProfile("S001"), 1001 + 7919 * 18, "A");
+  const atts = t.visits.flatMap((v) => v.openpath.attempts);
+  const h = (t.visits.at(-1)!.openpath.evidence.history as { result: string; failedAt: string | null; recoveredAt: string | null }[]).find((x) => x.result === "failed" && x.recoveredAt)!;
+  assert.ok(h, "a failed delayed check that was later recovered");
+  const failed = atts.find((a) => a.activity === "retention" && a.at === h.failedAt)!;
+  const rec = atts.filter((a) => a.activity !== "retention" && Date.parse(a.at) > Date.parse(h.failedAt!) && Date.parse(a.at) <= Date.parse(h.recoveredAt!));
+  assert.ok(rec.length >= 2);
+  assert.ok(!rec.some((a) => a.kind === failed.kind && a.verdict === "correct"), `recovered with ${rec.map((a) => a.kind).join(", ")} after a failed ${failed.kind} check`);
 });
-test("16 bracket mastery inferred from two-step success: authoritative 'independent', E1 brackets not attempted (discrepancy exposed)", () => {
+test("16 bracket mastery inferred from two-step success: authoritative 'shown alone', E1 brackets not demonstrated, discrepancy exposed [OBSERVED-WEAKNESS]", () => {
   const f = fresh("16");
-  for (let i = 0; i < 20 && f.stage !== "summary"; i++) { if (f.stage === "question") { const q = f.currentQuestion!; submit(f, problemOf(q.replace(/:(mc|w)$/, ""))!.family === "lin" ? ans(q) : "999"); } else cont(f); if (["independent", "transfer"].includes(f.session.state().evidence(COMPETENCY).status)) break; }
-  const p = proj(f), ev = f.session.state().evidence(COMPETENCY);
-  if (["independent", "transfer"].includes(ev.status)) { assert.notEqual(sub(p, "brackets").status, "independently-demonstrated"); assert.ok(p.discrepancies.length > 0); }
+  for (let i = 0; i < 40 && f.stage !== "summary"; i++) { if (f.stage === "question") { const q = f.currentQuestion!; submit(f, problemOf(q.replace(/:(mc|w)$/, ""))!.family === "lin" ? ans(q) : "999"); } else cont(f); if (["independent", "transfer"].includes(f.session.state().evidence(COMPETENCY).status)) break; }
+  assert.ok(["independent", "transfer"].includes(f.session.state().evidence(COMPETENCY).status), "two-step answers alone earn the competency claim");
+  const p = proj(f); assert.notEqual(sub(p, "brackets").status, "independently-demonstrated"); assert.ok(p.discrepancies.length > 0);
 });
 test("17 both-sides mastery inferred from unrelated success: shadow never credits both-sides from two-step answers", () => {
   const f = fresh("17");
