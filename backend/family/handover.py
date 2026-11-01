@@ -10,6 +10,8 @@ from it could not be told apart from the learner's own. Learner records can neve
 """
 from __future__ import annotations
 
+import uuid
+
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied, ValidationError
@@ -37,7 +39,11 @@ class HandoverAcknowledgementView(AccountBase):
         if not _is_educator(request.user):
             raise PermissionDenied('Acknowledging a hand-over needs the educator role.')
         d = request.data
-        pupil = _shared_pupils(request.user).filter(pk=d.get('pupil')).first()
+        try:
+            pupil_id = uuid.UUID(str(d.get('pupil')))
+        except ValueError:
+            raise ValidationError({'pupil': 'A learner id.'})
+        pupil = _shared_pupils(request.user).filter(pk=pupil_id).first()
         if not pupil:
             raise PermissionDenied('This learner has not been shared with you.')
         competency = d.get('competency')

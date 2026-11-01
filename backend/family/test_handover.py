@@ -38,6 +38,10 @@ class HandoverAcknowledgementTests(LearningBase):
         self.assertEqual([(a['competency'], a['by']) for a in listed], [(LE, 'educator')])
         self.assertNotIn('note', listed[0]); self.assertNotIn('educator', listed[0])
         self.assertEqual(self.acks(self.teacher).status_code, 404, 'only the parent reads them back')
+        self.assertEqual(self.teacher.post('/api/handover/acknowledgements/', {'pupil': 'junk', 'competency': LE}, format='json').status_code, 400, 'not a learner id')
+        # the parent revokes the share: the educator can no longer acknowledge
+        self.assertIn(self.client.delete(f'/api/pupils/{self.pupil_id}/marking-share/', {'email': 'teacher@example.org'}, format='json').status_code, (200, 204))
+        self.assertEqual(self.ack(self.teacher).status_code, 403, 'a revoked share ends it')
 
     def test_a_learner_record_cannot_carry_an_acknowledgement(self):
         self.assertEqual(self.save(self.enrol()).status_code, 201)

@@ -19,6 +19,7 @@
  *                             mappings and evidence history. Presentation only: certification and quarantine are
  *                             enforced by the engine and the server in both views.
  */
+import { formatInstant } from "../../../packages/learning/src/due-display";
 import React, { Suspense, lazy, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../english/logic/account";
@@ -370,7 +371,7 @@ function Detail({ r, id, route, learner, registry, skillOf }: { r: DashRelease; 
               : "Hand in a written answer: this outcome needs a method an educator marks."
             : s?.retention === "due"
               ? "The delayed check is due now."
-              : `Delayed check from ${due ? due.toLocaleDateString() : "seven full days after it was shown"}.`
+              : `Delayed check from ${due ? formatInstant(due.toISOString(), Intl.DateTimeFormat().resolvedOptions().timeZone) : "seven full days after it was shown"}.`
           : state === "learning"
             ? "Carry on with the module."
             : content.learn

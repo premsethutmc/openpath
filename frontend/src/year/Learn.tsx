@@ -426,6 +426,7 @@ export function Recovery({ original, ctx, onExit, exitLabel = "Back to the year"
       <div className={`feedback ${r.phase === "escalate" ? "bad" : "good"}`} role="status">
         <strong>{r.phase === "solved" ? "Solved on your own" : r.phase === "solved_on_retry" ? "Solved on a second try" : r.phase === "solved_after_help" ? "Solved after help" : "Ask for help with this one"}</strong>
         <p>{r.reason}</p>
+        {r.handover && (() => { const n = scheduleNote(r, Intl.DateTimeFormat().resolvedOptions().timeZone); return n ? <p className="small" data-handover={r.handover.route}>{n}</p> : null; })()}
       </div>
       {trace}
       <button className="secondary wide" onClick={onExit}>{exitLabel}</button>

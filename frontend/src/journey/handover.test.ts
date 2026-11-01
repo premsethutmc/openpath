@@ -37,7 +37,9 @@ test("H03 return after eligibility: one fresh question alone, graded by the trus
   const a = j.visits[1].answers[0];
   assert.deepEqual([a.phase, a.activity, a.context], ["reentry", "diagnostic", reentryContext(LE)]);
   assert.ok(a.verdict === "incorrect" || a.verdict === "correct");
-  assert.ok(!j.visits[0].offered.some((o) => o.endsWith(a.q)), "a fresh question, not one seen before");
+  const recs = j.flow.session.state().records;
+  const prior = [...recs.attempts.filter((x) => x.at < j.visits[0].at || x.context !== reentryContext(LE)), ...recs.unresolved].filter((x) => x.questionId === a.q && !(x as { context?: string }).context);
+  assert.equal(prior.length, 0, "a fresh question: never answered before, readable or not");
   assert.deepEqual(checkProvenance(j.flow), []);
 });
 
@@ -61,8 +63,12 @@ test("H06 successful independent recheck: the module moves on; mastery only from
   const v = j.visits[1];
   assert.equal(v.answers[0].phase, "reentry"); assert.equal(v.answers[0].verdict, "correct");
   assert.ok(v.answers.length > 1, "learning continues after a right re-entry answer");
-  const recs = j.flow.session.state().records.attempts.filter((a) => a.competency === LE && a.n === 1 && a.hints === 0 && a.activity !== "guided" && a.credit === true && a.at > j.visits[0].at);
-  if (["independent", "transfer", "verified"].includes(v.evidence.status)) assert.ok(new Set(recs.map((a) => a.questionId)).size >= INDEPENDENT_MIN, "a claim needs the usual distinct right answers alone");
+  // right after the re-entry answer alone, before anything else: no claim from one answer
+  const s0 = j.flow.session, reAt = s0.state().records.attempts.find((a) => a.context === reentryContext(LE))!.at;
+  const only = SliceSession.fromEvents(s0.learnerId, LE, withDecisions(s0.events, s0.decisions).filter((e) => (e as { at: string }).at <= reAt) as LearningRecord[], Date.parse(reAt) + 1, "x");
+  assert.ok(!["independent", "transfer", "verified"].includes(only.state().evidence(LE).status), "re-entry alone claims nothing");
+  const recs = s0.state().records.attempts.filter((a) => a.competency === LE && a.n === 1 && a.hints === 0 && a.activity !== "guided" && a.credit === true && a.at > j.visits[0].at);
+  assert.ok(!["independent", "transfer", "verified"].includes(v.evidence.status) || new Set(recs.map((a) => a.questionId)).size >= INDEPENDENT_MIN, "a claim needs the usual distinct right answers alone");
   assert.equal(v.evidence.verified, false, "nothing verified without a delayed check");
 });
 
@@ -157,9 +163,10 @@ test("H13 midnight and time-zone boundaries: one instant, shown per zone; open a
   assert.equal(scheduleNote({ retentionOpensAt: due }, "Asia/Kolkata"), "Your delayed check opens Tue 10 Mar 2026, 00:00 (GMT+5:30, Asia/Kolkata).");
 });
 
-test("H14 forged acknowledgement: a learner record, a non-educator or a mismatched one opens nothing", () => {
+test("H14 forged acknowledgement: a learner record, a non-educator, a mismatched, a future or a before-the-pause one opens nothing", () => {
   const j = journey("H14", stuck(), []);
   const s = j.flow.session;
+  s.acknowledgements.push({ id: "before", at: new Date(T0 + 60_000).toISOString(), competency: LE, by: "educator" });   // before the pause began
   s.events.push({ ...(s.events.at(-1) as object), id: "forged-ack", record: "handover_ack", competency: LE, by: "educator", at: new Date(s.now).toISOString() } as unknown as LearningRecord);
   s.acknowledgements.push({ id: "p", at: new Date(s.now).toISOString(), competency: LE, by: "parent" as never });
   s.acknowledgements.push({ id: "other", at: new Date(s.now).toISOString(), competency: "MATH.algebra.linear-intro", by: "educator" });
@@ -198,3 +205,43 @@ test("the policy is configurable, recorded in the state, and validated", () => {
   } finally { setHandoverPolicy(prev); }
   assert.throws(() => setHandoverPolicy({ reentryDays: 0, selfLimit: 1 }));
 });
+
+// ---------------------------------------------------------------- independent review fixes
+test("R1 an unreadable answer to a re-entry question uses that re-entry (no unbounded loop)", () => {
+  const j = journey("R1", stuck(), []);
+  const f = j.flow;
+  for (let i = 0; i < 4; i++) { f.later(2); if (f.stage === "question") { f.on({ type: "answer_submitted", value: "1..2", timestamp: 0 } as never); f.on({ type: "skip_requested", timestamp: 0 } as never); for (let k = 0; k < 30 && f.stage !== "summary"; k++) f.on(f.stage === "question" ? ({ type: "answer_submitted", value: "1..2", timestamp: 0 } as never) : ({ type: "skip_requested", timestamp: 0 } as never)); } }
+  const h = handoverState(LE, f.session.state().records, f.session.now);
+  assert.equal(h.reentries.length, 2);
+  assert.deepEqual([h.selfReentriesLeft, h.route], [0, "needs-teacher"]);
+  assert.ok(f.session.state().records.unresolved.filter((u) => u.context === reentryContext(LE)).length >= 1);
+});
+test("R2 an acknowledgement from before the pause neither opens it nor relabels a self-service re-entry", () => {
+  const j = journey("R2", stuck(), []);
+  const s = j.flow.session;
+  s.acknowledgements.push({ id: "early", at: new Date(T0 + 60_000).toISOString(), competency: LE, by: "educator" });
+  assert.equal(handoverState(LE, s.state().records, s.now).route, "wait");
+  j.flow.later(2); visit(j.flow, stuck(), 2);
+  const h = handoverState(LE, s.state().records, s.now);
+  assert.deepEqual(h.reentries.map((r) => r.openedBy), ["self"]);
+  assert.equal(h.selfReentriesLeft, 1);
+});
+test("R3 the re-entry question after an unreadable-answer pause is not the unreadable question", () => {
+  const f = new SliceFlow(START, "h1-R3", T0, { timeZone: "UTC" });
+  for (let k = 0; k < 40 && f.stage !== "summary"; k++) f.on(f.stage === "question" ? ({ type: "answer_submitted", value: "1..2", timestamp: 0 } as never) : ({ type: "skip_requested", timestamp: 0 } as never));
+  assert.equal(f.ended?.phase, "pause");
+  const unread = new Set(f.session.state().records.unresolved.map((u) => u.questionId));
+  f.later(2);
+  assert.equal(f.currentPhase, "reentry");
+  assert.ok(!unread.has(f.currentQuestion!), `fresh: ${f.currentQuestion}`);
+});
+test("R4 a later answer elsewhere in the competency does not cancel a valid acknowledgement", () => {
+  const j = journey("R4", stuck(), []);
+  const s = j.flow.session;
+  s.now += 60_000;
+  s.acknowledgements.push({ id: "ack", at: new Date(s.now).toISOString(), competency: LE, by: "educator" });
+  assert.equal(handoverState(LE, s.state().records, s.now).route, "reentry-acknowledged");
+  s.submit("gen:lin:7,9,11:mc", "A", "practice");
+  assert.equal(handoverState(LE, s.state().records, s.now).route, "reentry-acknowledged");
+});
+

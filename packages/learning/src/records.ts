@@ -93,7 +93,7 @@ export interface LearnerRecords {
   /** written@1: written answers not yet marked. */
   pending: PendingWritten[];
   /** assessment@1: submissions the assessment could not decide. They are not attempts: no credit either way, no effect on mastery or on the attempt number. */
-  unresolved: { id: string; at: string; questionId: string; assessment: AttemptAssessment }[];  /** handover@1: an educator's acknowledgement of a hand-over, as the SERVER returns it (an educator account with the parent's share; Django
+  unresolved: { id: string; at: string; questionId: string; context?: string; assessment: AttemptAssessment }[];  /** handover@1: an educator's acknowledgement of a hand-over, as the SERVER returns it (an educator account with the parent's share; Django
    *  HandoverAcknowledgement, append-only). Never read from learner events: a learner record cannot carry one. */
   acknowledgements?: HandoverAcknowledgement[];
 }
@@ -124,9 +124,9 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
     // attempt, so a wrong answer cannot be parked as "unresolved"). Approved policy P1 (2026-10-29, D16): every undecided submission sits
     // outside the attempts, however many are sent; abuse is limited by the server's request throttle, not by assessment.
     // question-status@1: an answer to a quarantined question is kept, but is never an attempt or mastery evidence, however many are sent
-    else if (r.record === "attempt" && isQuestion(r.questionId) && serverVerdict(r) === "unresolved") out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment as AttemptAssessment });
-    else if (r.record === "attempt" && quarantined(r.questionId)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment as AttemptAssessment });
-    else if (r.record === "attempt" && isQuestion(r.questionId) && serverVerdict(r) === null && r.assessment?.unresolved === true && (r.assessment.source === "infrastructure" || creditOf(r.questionId, r.response) === null)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, assessment: r.assessment });
+    else if (r.record === "attempt" && isQuestion(r.questionId) && serverVerdict(r) === "unresolved") out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, ...(typeof r.context === "string" ? { context: r.context } : {}), assessment: r.assessment as AttemptAssessment });
+    else if (r.record === "attempt" && quarantined(r.questionId)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, ...(typeof r.context === "string" ? { context: r.context } : {}), assessment: r.assessment as AttemptAssessment });
+    else if (r.record === "attempt" && isQuestion(r.questionId) && serverVerdict(r) === null && r.assessment?.unresolved === true && (r.assessment.source === "infrastructure" || creditOf(r.questionId, r.response) === null)) out.unresolved.push({ id: r.id, at: r.at, questionId: r.questionId, ...(typeof r.context === "string" ? { context: r.context } : {}), assessment: r.assessment });
     else if (r.record === "attempt" && isQuestion(r.questionId)) {
       // the same problem in another answer format is the same exposure: a second sight is never fresh evidence
       const key = exposureKey(r.questionId);
