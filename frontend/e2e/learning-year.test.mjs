@@ -19,6 +19,7 @@ import { chromium } from "playwright";
 import { question } from "../../packages/learning/src/content.ts";
 import { problemOf, show } from "../../packages/learning/src/families.ts";
 import { moduleFor } from "../../packages/learning/src/content.ts";
+import { decide } from "../../packages/learning/src/session.ts";
 import { familiesOf } from "../../packages/learning/src/review.ts";
 
 const base = process.env.YEAR_URL ?? "http://127.0.0.1:4190";
@@ -120,7 +121,7 @@ async function answer(page, policy = () => null, { hint = false } = {}) {
   await card.waitFor();
   const qid = await card.getAttribute("data-qid");
   const q = Q.get(qid);
-  const response = policy(qid) ?? (educatorMarked(q) ? null : q.answer);
+  const response = policy(qid, await card.locator(".counted").innerText()) ?? (educatorMarked(q) ? null : q.answer);
   if (response == null) throw new Error(`${qid} is marked by an educator: give its text in the policy, or stop before it`);
   if (hint && (await page.getByRole("button", { name: "Show a hint" }).count())) await page.getByRole("button", { name: "Show a hint" }).click();
   try {
@@ -154,13 +155,14 @@ async function lesson(page) {
 /** Work the module on screen until it stops asking; returns what happened, in order. */
 /** What a learner answered (a written or drawn part left for an educator is not an answer). */
 const answered = (log) => log.filter((l) => !l.startsWith("written:"));
-async function work(page, policy = () => null, max = 30) {
+async function work(page, policy = () => null, max = 30, onLesson = () => {}) {
   const log = [];
   for (let i = 0; i < max; i++) {
     await page.waitForFunction(() => document.querySelector(".qcard, .lesson, .feedback, h1"));
     if (await page.locator(".lesson").count()) {
       log.push(`lesson:${await page.locator(".lesson .eyebrow").innerText()}`);
       await lesson(page);
+      onLesson();
       continue;
     }
     if (await page.locator(".qcard").count()) {
@@ -219,13 +221,16 @@ test("journeys A, E, F: Grade 4 textbook → Fractions → diagnostic → strate
   await tile(page, "Generate equivalent fractions");
   await page.getByRole("button", { name: "Start", exact: true }).click();
   // a conceptual difficulty: the diagnostic finds it, the picture strategy is taught, practice with help, then alone
-  const wrong = { "eq-d1": "4", "eq-d2": "4", "eq-d3": "9" };
+  // Keep the same additive misconception when diagnosis asks a fresh variant.
+  const wrong = (q, activity) => {
+    if (!activity.includes("a short check to find the starting point")) return null;
+    if (q.startsWith("gen:eqfrac:")) { const [a,b,d] = q.split(":")[2].split(",").map(Number); return String(a + d - b); }
+    return ({ "eq-d1": "4", "eq-d2": "4", "eq-d3": "9" })[q] ?? null;
+  };
   await page.locator(".flow li.here", { hasText: "Explore" }).waitFor();
   await shot(page, "a4-explore-phone");
-  const log = await work(page, (q) => wrong[q] ?? null, 4);
-  assert.ok(log.some((l) => l.startsWith("lesson:")), `a strategy was taught: ${log}`);
-  const rest = await work(page);
-  const all = [...log, ...rest];
+  const all = await work(page, wrong);
+  assert.ok(all.some((l) => l.startsWith("lesson:")), `a strategy was taught: ${all}`);
   assert.ok(all.includes("eq-s1g=4") && all.includes("eq-s1c=6"), `strip-model guided and check: ${all}`);
   await page.getByText(/Shown on your own/).first().waitFor();
   await shot(page, "a5-skill-shown-phone");
@@ -312,6 +317,7 @@ test("journeys C and D: integration problem → verified supports green → 7 ×
   for (let k = 0; k < 2; k++) {
     await page.getByRole("button", { name: "Start the delayed check" }).click();
     await work(page);
+    await page.locator(".year-meta").getByText("Verified", { exact: true }).waitFor();
     await home(page);
   }
   await page.getByRole("button", { name: "Start the next year" }).click();
@@ -332,7 +338,13 @@ test("journeys C and D: integration problem → verified supports green → 7 ×
   }
   assert.ok(investigated.includes("gen:mul:7,8=54"), `7 × 8 itself was asked: ${investigated}`);
   await page.getByRole("note", { name: "What we think happened" }).waitFor();
-  assert.equal(await page.locator(".trace-row.verified").count(), 2, "rectangle area and coordinates are verified (green)");
+  // Advisory graph edges must not be presented as confirmed dependencies.
+  assert.equal(await page.locator(".trace-row").filter({ hasText: /Calculate rectangle area|Plot points in four quadrants/ }).count(), 0, "advisory links are not confirmed dependencies");
+  const saved = await records(page, learner);
+  for (const skill of ["MATH.measurement.rectangle-area", "MATH.coordinate.cartesian"]) {
+    const delayed = saved.filter(r => r.record === "attempt" && r.competency === skill && r.activity === "retention");
+    assert.ok(new Set(delayed.filter(r => r.decision.verdict === "correct").map(r => r.questionId)).size >= 2, `${skill}: successful delayed checks remain saved`);
+  }
   await shot(page, "c1-trace-supports-phone");
   const log = [];
   for (let i = 0; i < 30; i++) {
@@ -458,12 +470,12 @@ test("journeys G and M: an unseen mistake on a typed problem is investigated; an
 
 // ---------------------------------------------------------------- I: different valid methods
 
-test("journey I: two learners solve 7 × 8 in different ways; both are valid and recognised, neither is required", async () => {
+test("journey I: two learners solve 7 × 8 in different ways; both answers receive credit and unsupported methods stay neutral", async () => {
   const ways = [
-    ["7 × 5 + 7 × 3 = 35 + 21 = 56", /split into facts you know/i, "i1-working-decomposition-phone"],
-    ["7 × 2 = 14\n14 × 2 = 28\n28 × 2 = 56", /doubling/i, "i2-working-doubling-tablet"],
+    ["7 × 5 + 7 × 3 = 35 + 21 = 56", "i1-working-decomposition-phone"],
+    ["7 × 2 = 14\n14 × 2 = 28\n28 × 2 = 56", "i2-working-doubling-tablet"],
   ];
-  for (const [k, [working, method, name]] of ways.entries()) {
+  for (const [k, [working, name]] of ways.entries()) {
     const { page, context, learner } = await learnerPage(`Synthetic method learner ${k + 1}`, k ? "tablet" : "phone");
     await setupYear(page, 4);
     await typeProblem(page, "7 × 8");
@@ -472,12 +484,15 @@ test("journey I: two learners solve 7 × 8 in different ways; both are valid and
     await page.getByLabel("Your working").fill(working);
     await page.locator(".qcard").getByLabel("Your answer").fill("56");
     await page.locator(".qcard").getByRole("button", { name: "Check" }).click();
-    await page.getByRole("note", { name: "Your working" }).locator("strong").getByText(method).waitFor();
+    await page.getByRole("status").filter({ hasText: "Right." }).waitFor();
+    await page.getByRole("note", { name: "Your working" }).getByText(/saved.*not been marked/i).first().waitFor();
     await shot(page, name);
     await next(page);
     await page.getByText("Solved on your own", { exact: true }).waitFor();
     const att = (await records(page, learner)).find((r) => r.record === "attempt");
     assert.deepEqual(att.working, working.split("\n"));
+    assert.equal(att.decision.verdict, "correct");
+    assert.equal(att.decision.method.verified, false, "unsupported method must not gain fabricated certification");
     assert.equal(att.activity, "original");
     await context.close();
   }
@@ -489,7 +504,12 @@ test("journeys J and K: the plan continues across visits without reteaching; no 
   const { page, context, email, learner } = await learnerPage("Synthetic returning learner");
   await setupYear(page, 4);
   await openSkill(page, "Fractions", "Generate equivalent fractions");
-  const wrong = { "eq-d1": "4", "eq-d2": "4", "eq-d3": "9" };
+  // Keep the same additive misconception when diagnosis asks a fresh variant.
+  const wrong = (q, activity) => {
+    if (!activity.includes("a short check to find the starting point")) return null;
+    if (q.startsWith("gen:eqfrac:")) { const [a,b,d] = q.split(":")[2].split(",").map(Number); return String(a + d - b); }
+    return ({ "eq-d1": "4", "eq-d2": "4", "eq-d3": "9" })[q] ?? null;
+  };
   // visit 1: up to the guided question, then the learner leaves
   for (let i = 0; i < 8; i++) {
     if (await page.locator(".flow li.here", { hasText: "Practise" }).count() && (await page.locator(".qcard .counted").innerText()).startsWith("On your own · no hints")) break;
@@ -498,7 +518,7 @@ test("journeys J and K: the plan continues across visits without reteaching; no 
       continue;
     }
     const guided = (await page.locator(".qcard .counted").innerText()).startsWith("Practice with help");
-    await answer(page, (q) => wrong[q] ?? null, { hint: guided });
+    await answer(page, wrong, { hint: guided });
     await next(page);
   }
   const taught = (await records(page, learner)).filter((r) => r.record === "teach").length;
@@ -677,9 +697,9 @@ test("platform C: Grade 12 → Calculus → Integrals → Techniques of integrat
   await shot(page, "p-c1-capabilities-tablet");
   await home(page);
   await page.getByText("What OpenPath can teach from this textbook").click();
-  // the coverage is said as it is: every skill of this book now has a module; any skill without content would be named
+  // Coverage describes available content, not complete teaching; missing content stays explicit.
   const summary = await page.locator("summary", { hasText: "What OpenPath can teach from this textbook" }).innerText();
-  const [, withModule, total] = summary.match(/(\d+) of (\d+) skills have a full learning module/) ?? [];
+  const [, withModule, total] = summary.match(/(\d+) of (\d+) mapped skills have content in a learning module/) ?? [];
   assert.ok(total, summary);
   if (withModule === total) assert.equal(await page.getByText(/No learning content yet: /).count(), 0, `nothing listed as without content: ${summary}`);
   else await page.getByText(/No learning content yet: /).waitFor();
@@ -764,6 +784,33 @@ test("platform E and F: an unseen textbook through the same screens; then the ne
   await context.close();
 });
 
+test("unreadable fraction asks for clarification without grading it wrong, then accepts a correction", async () => {
+  const { page, context, learner } = await learnerPage("Synthetic clarification learner");
+  await setupYear(page, 5);
+  await page.goto(`${base}/year/?learner=${learner}&skill=MATH.number.fraction-add-like`);
+  const card = page.locator(".qcard");
+  await card.waitFor();
+  const qid = await card.getAttribute("data-qid");
+  await card.getByLabel("Your answer", { exact: true }).fill("3/0");
+  await card.getByRole("button", { name: "Check", exact: true }).click();
+  await card.getByRole("status").waitFor();
+  assert.equal(await card.getAttribute("data-qid"), qid);
+  assert.equal(await card.getByLabel("Your answer", { exact: true }).inputValue(), "3/0");
+  assert.equal(await page.getByRole("status").filter({ hasText: /Right\.|Not this time\./ }).count(), 0);
+  const pending = (await records(page, learner)).filter(r => r.record === "attempt");
+  assert.equal(pending.length, 1);
+  assert.equal(pending[0].decision.verdict, "unresolved");
+  assert.equal(pending[0].assessment.answerCorrect, null);
+  assert.equal(pending[0].assessment.clarificationRequired, true);
+  assert.equal(pending[0].questionId, qid);
+  await answer(page);
+  const saved = (await records(page, learner)).filter(r => r.record === "attempt");
+  assert.equal(saved.length, 2);
+  assert.equal(saved[1].decision.verdict, "correct");
+  assert.equal(saved[1].questionId, qid);
+  await context.close();
+});
+
 // ---------------------------------------------------------------- content system: educator review, released content, depth
 
 const MANAGE = process.env.YEAR_MANAGE ?? "python3 backend/manage.py";
@@ -795,6 +842,10 @@ async function sharedReviewers() {
 }
 /** Take items through the whole workflow by the API (each decision by the role it needs; four eyes); idempotent. */
 async function releaseAll({ educator, manager }, items) {
+  // The registry reports the current source revision. Reuse completed releases
+  // on a focused rerun, exactly as the per-decision released-state checks do.
+  const current = (await call(educator, "/content-review/")).data.registry;
+  if (items.every(item => current.entries.some(e => e.item === item && e.state === "released"))) return;
   for (const item of items) {
     for (const decision of ["submit", "approve", "release"]) {
       const page = decision === "release" ? manager : educator;
@@ -810,8 +861,8 @@ async function releaseAll({ educator, manager }, items) {
 }
 /** pools@1: a module draws on every question family of its competency, and is released only after all of them. */
 const moduleWithFamilies = (competency) => [...familiesOf(moduleFor(competency)).map((f) => `family:${f}`), `module:${competency}`];
-/** Learn a skill with two early mistakes, come back the next day, and again after seven full days: verified. */
-async function learnToVerified(page, learner, path, shotPrefix) {
+/** Learn a skill with a persistent diagnostic difficulty, then return the next day and after seven full days. */
+async function learnToVerified(page, learner, path, shotPrefix, target) {
   const go = async () => {
     await home(page);
     for (const t of path) await tile(page, t);
@@ -820,13 +871,20 @@ async function learnToVerified(page, learner, path, shotPrefix) {
   };
   await go();
   let wrong = 0;
-  const twoMistakes = (qid) => {
-    if (wrong >= 2) return null;
-    wrong++;
+  let taught = false;
+  const diagnosticMistakes = (qid, activity) => {
+    if (taught || (!activity.includes("a short check to find the starting point") && activity !== "On your own")) return null;
     const q = Q.get(qid);
-    return q.misconceptions?.find((m) => m.when !== q.answer)?.when ?? String(Number(q.answer) + 10);
+    // This learner has difficulty in the selected topic, not in every prerequisite.
+    if (q.competency !== target) return null;
+    const candidates = [...(q.misconceptions ?? []).map(m => m.when), String(Number(q.answer) + 10)];
+    const response = candidates.find(value => decide(qid, value).credit === false);
+    assert.ok(response, `${qid}: this teaching fixture needs a readable incorrect response`);
+    wrong++;
+    return response;
   };
-  const first = await work(page, twoMistakes, 40);
+  const first = await work(page, diagnosticMistakes, 40, () => { taught = true; });
+  assert.ok(wrong >= 2, "the learner demonstrated a repeated diagnostic difficulty");
   assert.ok(first.some((l) => l.startsWith("lesson:")), `the mistakes led to teaching: ${first.join(" ")}`);
   await shot(page, `${shotPrefix}-1-after-lesson`);
   await timeTravel(page, learner, 1);
@@ -838,9 +896,15 @@ async function learnToVerified(page, learner, path, shotPrefix) {
   await timeTravel(page, learner, 7.05);
   await page.reload();
   await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
-  await page.getByRole("button", { name: "Start the delayed check" }).click();
+  // Several prerequisites may also be due. Check this topic, not whichever
+  // competency the dashboard currently recommends first.
+  await go();
+  await page.locator(".qcard .counted", { hasText: "delayed check" }).waitFor();
+  assert.equal(Q.get(await page.locator(".qcard").getAttribute("data-qid")).competency, target);
   const third = await work(page, () => null, 10);
   assert.ok(answered(third).length >= 2, `the delayed check: ${third.join(" ")}`);
+  const delayed = (await records(page, learner)).filter(r => r.record === "attempt" && r.competency === target && r.activity === "retention" && r.decision?.verdict === "correct");
+  assert.ok(new Set(delayed.map(r => r.questionId)).size >= 2, "two distinct correct delayed answers for the selected competency");
   await home(page);
   for (const t of path.slice(0, -1)) await tile(page, t);
   assert.equal(await tileStatus(page, path.at(-1)), "verified", `green: verified on released content (first visit: ${first.join(" ")}; next day: ${second.join(" ")}; delayed check: ${third.join(" ")})`);
@@ -918,7 +982,7 @@ test("content system: an educator reviews a question family and its module in th
   // a learner: two early mistakes, the next day, a week later: verified on released content (no test fixture)
   const { page: lp, context, learner } = await learnerPage("Synthetic G4 released learner");
   await setupYear(lp, 4);
-  await learnToVerified(lp, learner, ["Multiplication and division", "Multiply multi-digit numbers"], "v4");
+  await learnToVerified(lp, learner, ["Multiplication and division", "Multiply multi-digit numbers"], "v4", "MATH.number.multi-multiplication");
   for (const c of [ed.context, rm.context, context]) await c.close();
 });
 
@@ -928,7 +992,7 @@ test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, r
   // the reviewers are done (their review pages would otherwise go on counting the library's coverage meanwhile)
   await reviewers.close();
   reviewers = null;
-  // Grade 10 (Board B): factorising, with two early mistakes
+  // Grade 10 (Board B): factorising, with repeated diagnostic mistakes
   {
     const { page, context, learner } = await learnerPage("Synthetic G10 released learner");
     await page.getByRole("heading", { name: "Set up My Learning Year" }).waitFor();
@@ -937,7 +1001,7 @@ test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, r
     await page.getByRole("button", { name: /Board B Sample Mathematics/ }).click();
     await page.getByRole("button", { name: "Start Grade 10" }).click();
     await page.getByRole("heading", { name: /^Grade 10 · / }).waitFor();
-    await learnToVerified(page, learner, ["Algebra", "Polynomials", "Factorisation", "Factor algebraic expressions"], "v10");
+    await learnToVerified(page, learner, ["Algebra", "Polynomials", "Factorisation", "Factor algebraic expressions"], "v10", "MATH.algebra.factorisation");
     await context.close();
   }
   // Grade 12: a substitution integral done with powers as multiplication → recovery to powers; then the skill itself
@@ -946,7 +1010,7 @@ test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, r
     await setupYear(page, 12);
     await recoverTyped(page, "integral from 0 to 2 of 2x(x^2+1) dx", "multiply-for-power");
     await page.getByText("Solved after help", { exact: true }).waitFor();
-    await learnToVerified(page, learner, ["Calculus", "Integrals", "Techniques of integration", "Integrate by substitution and parts"], "v12");
+    await learnToVerified(page, learner, ["Calculus", "Integrals", "Techniques of integration", "Integrate by substitution and parts"], "v12", "MATH.calculus.integration-methods");
     await context.close();
   }
   // an unfamiliar plain-text textbook (Board C, Grade 9)
@@ -955,7 +1019,7 @@ test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, r
     await setupYear(page, 9, { textbook: UNSEEN });
     await page.getByRole("button", { name: "Use this curriculum for Grade 9" }).click();
     await page.getByRole("heading", { name: /^Grade 9 · / }).waitFor();
-    await learnToVerified(page, learner, ["Algebra", "Brackets and powers", "Expanding brackets", "Expand simple products"], "v9");
+    await learnToVerified(page, learner, ["Algebra", "Brackets and powers", "Expanding brackets", "Expand simple products"], "v9", "MATH.algebra.identities-intro");
     await context.close();
   }
 });

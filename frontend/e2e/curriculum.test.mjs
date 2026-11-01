@@ -10,6 +10,7 @@
  *   node --import tsx --test e2e/curriculum.test.mjs
  */
 import assert from "node:assert/strict";
+import { execSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { after, before, test } from "node:test";
 import { fileURLToPath } from "node:url";
@@ -51,7 +52,7 @@ async function call(page, path, body, method) {
   );
 }
 /** A signed-in account (an educator at home or a parent) with synthetic pupils, on a phone. */
-async function account(names) {
+async function account(names, educator = true) {
   const context = await browser.newContext({ viewport: PHONE, isMobile: true, hasTouch: true, deviceScaleFactor: 2 });
   const page = await context.newPage();
   page.on("pageerror", (e) => console.error("page error:", e.message));
@@ -59,6 +60,12 @@ async function account(names) {
   await call(page, "/account/"); // the CSRF cookie
   const email = `dash-${Date.now()}-${Math.random().toString(36).slice(2)}@example.org`;
   assert.equal((await call(page, "/account/register/", { email, password: PASSWORD, consent: true })).status, 201);
+  // Diagnostics are an educator view. Grant only this isolated synthetic account
+  // through the same management command used by content-review acceptance tests.
+  if (educator) {
+    assert.equal(mode, "django", "educator diagnostics acceptance requires the real role-enforcing API");
+    execSync(`${process.env.YEAR_MANAGE ?? "python3 backend/manage.py"} content_reviewer grant ${email} --role educator`, { cwd: fileURLToPath(new URL("../../", import.meta.url)), stdio: "pipe" });
+  }
   const pupils = {};
   for (const n of names) {
     const p = await call(page, "/pupils/", { display_name: n, consent: true });
@@ -102,7 +109,7 @@ async function workSkill(page, learner, competency, session, max = 30) {
   }
   return "max";
 }
-async function open(page, hash, learner, view) {
+async function open(page, hash, learner, view = "diagnostics") {
   const q = new URLSearchParams();
   if (learner) q.set("learner", learner);
   if (view) q.set("view", view);
@@ -280,11 +287,15 @@ test("E–I + K + N: a learner's evidence through Django: unassessed, a lesson, 
 });
 
 test("B: a Grade 5 learner sees their own year and goal foundations, nothing from later grades", async () => {
-  const { page, context, pupils } = await account(["Synthetic Arun"]);
+  const { page, context, pupils } = await account(["Synthetic Arun"], false);
   const L = pupils["Synthetic Arun"];
   const ctx = { learnerId: L, sessionId: `learn:${L}:dash-b`, at: new Date().toISOString() };
   await post(page, L, make.enrol(ctx, 5, "2026-27", boardFor("cbse", 5)));
   await post(page, L, make.goal(ctx, "jee-advanced"));
+  await open(page, "b=cbse&g=12", L, "diagnostics");
+  await page.getByRole("heading", { name: "Grade 5 Mathematics" }).waitFor();
+  assert.equal(await page.locator(".summary").getByText("Assessment coverage", { exact: true }).count(), 0, "ordinary parent cannot enable educator diagnostics by URL");
+  assert.equal(await page.getByRole("group", { name: "Grade" }).count(), 0);
   await open(page, "b=cbse&g=12", L, "learner");
   await page.getByRole("heading", { name: "Grade 5 Mathematics" }).waitFor();
   assert.equal(await page.getByRole("group", { name: "Grade" }).count(), 0, "a learner does not browse other grades");

@@ -1,5 +1,7 @@
 # Shared mathematics foundation — local implementation
 
+Latest browser follow-up: [recovery ownership, clarification and acceptance fixtures](BROWSER-GATE-REPAIR.md).
+
 Latest content gate: [exact answer-table failure and complete local parity](GENERATED-TABLE-FAILURE.md).
 
 Content-consistency follow-up: [reproduced generator/report defects and bounded repair](CONTENT-PIPELINE-REPAIR.md). Exact-head CI remains tracked on PR96.
