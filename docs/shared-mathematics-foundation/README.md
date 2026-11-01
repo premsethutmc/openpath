@@ -1,5 +1,7 @@
 # Shared mathematics foundation — local implementation
 
+Publication follow-up: [draft PR and CI correction](PUBLICATION.md). Earlier phase reports retain their historical no-publication statements.
+
 Current result: [combined foundation acceptance and research reconciliation](FINAL-ACCEPTANCE.md). This supersedes the phase-specific limits below where explicitly stated.
 
 Previous continuation: [trusted geometry working, safety boundary and validation](GEOMETRY-WORKING.md).

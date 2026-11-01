@@ -10,7 +10,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "8f685f8a",
+   "contentHash": "6890d45d",
    "state": "draft",
    "history": [
     {
@@ -20,6 +20,14 @@
      "at": "2026-10-19T20:28:43.280Z",
      "contentHash": "8f685f8a",
      "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-01T09:08:59.837Z",
+     "contentHash": "6890d45d",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -3830,7 +3838,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "3ed23af6",
+   "contentHash": "9e9bb198",
    "state": "draft",
    "history": [
     {
@@ -3847,6 +3855,14 @@
      "role": "engineer",
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "3ed23af6",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-01T09:08:59.837Z",
+     "contentHash": "9e9bb198",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -38518,7 +38534,7 @@
    "competency": "MATH.number.addition",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "652ec809",
+   "contentHash": "a3b654e0",
    "state": "draft",
    "history": [
     {
@@ -38559,6 +38575,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "652ec809",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-01T09:08:59.837Z",
+     "contentHash": "a3b654e0",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -40688,7 +40712,7 @@
    "competency": "MATH.number.multi-digit-add-subtract",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "8183f452",
+   "contentHash": "9d04941e",
    "state": "draft",
    "history": [
     {
@@ -40729,6 +40753,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "8183f452",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-01T09:08:59.837Z",
+     "contentHash": "9d04941e",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

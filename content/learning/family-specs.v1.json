@@ -4386,7 +4386,7 @@
    ],
    "teach": {
     "idea": "Adding puts two groups together; the total is how many there are in all.",
-    "method": "Start at the bigger number and count on the other number, one step at a time. Where you stop is the total.",
+    "method": "Start at the first number and count on the second number, one step at a time. Do not count the starting number again. Where you stop is the total.",
     "alternatives": [
      {
       "id": "ten_frame",
@@ -4399,16 +4399,15 @@
      },
      {
       "id": "make_ten",
-      "title": "Make a ten first",
+      "title": "Use a ten when it helps",
       "kind": "procedural",
       "text": [
-       "Break the second number to fill up to 10: 8 + 5 = 8 + 2 + 3 = 10 + 3.",
-       "10 and some more is a teen number: 13."
+       "Group ten counters when there are enough; keep any remaining ones."
       ]
      }
     ]
    },
-   "fingerprint": "8f685f8a",
+   "fingerprint": "6890d45d",
    "validation": {
     "family": "aaadd",
     "deterministic": {
@@ -14635,7 +14634,7 @@
      }
     ]
    },
-   "fingerprint": "3ed23af6",
+   "fingerprint": "9e9bb198",
    "validation": {
     "family": "adcol3",
     "deterministic": {
