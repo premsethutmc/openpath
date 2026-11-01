@@ -1,0 +1,59 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "C04",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Misleading early success",
+ "description": "Starts with high but entirely fragile knowledge (rehearsed answers) on every kind, which decays within days; stable skill is low and practice does not consolidate (negative control: early success is not competence).",
+ "seed": 80004,
+ "skills": {
+  "one-step": 0.3,
+  "two-step": 0.15,
+  "both-sides": 0.1,
+  "brackets": 0.1,
+  "modelling": 0.15
+ },
+ "misconceptions": {},
+ "slip": 0.04,
+ "guess": 0.0,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.75,
+  "partial": 0.1,
+  "bare": 0.1,
+  "none": 0.05,
+  "unsupportedNotation": 0.1
+ },
+ "hints": {
+  "seek": 0.3,
+  "help": 0.2
+ },
+ "instruction": {
+  "full": 0.2,
+  "partial": 0.2,
+  "gain": 0.3,
+  "fragileShare": 1,
+  "misconceptionReduction": 0.7,
+  "misconceptionResponse": 0.6,
+  "offTargetGain": 0.05
+ },
+ "practice": {
+  "consolidate": 0,
+  "gainRight": 0,
+  "gainWrong": 0
+ },
+ "forgetting": {
+  "halfLifeDays": 60,
+  "floor": 0.1,
+  "fragileHalfLifeDays": 1.5,
+  "relapse": 0.5
+ },
+ "cohort": "C",
+ "initialFragile": {
+  "one-step": 0.68,
+  "two-step": 0.83,
+  "both-sides": 0.88,
+  "brackets": 0.88,
+  "modelling": 0.8
+ }
+}

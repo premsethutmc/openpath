@@ -1,0 +1,534 @@
+{
+ "cohort": "B",
+ "label": "unrecognised misconceptions, neutral learning response (blinded)",
+ "journeys": 120,
+ "reproducedIdentically": 120,
+ "existingStatusDrift": 0,
+ "visits": 532,
+ "falseMastery": {
+  "existing": {
+   "claimVisits": 132,
+   "falseClaimVisits": {
+    "n": 29,
+    "d": 132,
+    "rate": 0.22
+   },
+   "journeysWithFalseClaim": {
+    "n": 16,
+    "d": 50,
+    "rate": 0.32
+   },
+   "journeysWithFalseClaimOfAll": {
+    "n": 16,
+    "d": 120,
+    "rate": 0.133
+   },
+   "weakVisitsClaimed": {
+    "n": 29,
+    "d": 392,
+    "rate": 0.074
+   },
+   "falseByWeakKind": {
+    "two-step": 2,
+    "both-sides": 29,
+    "brackets": 29,
+    "modelling": 29
+   }
+  },
+  "gated": {
+   "claimVisits": 67,
+   "falseClaimVisits": {
+    "n": 0,
+    "d": 67,
+    "rate": 0
+   },
+   "journeysWithFalseClaim": {
+    "n": 0,
+    "d": 29,
+    "rate": 0
+   },
+   "journeysWithFalseClaimOfAll": {
+    "n": 0,
+    "d": 120,
+    "rate": 0
+   },
+   "weakVisitsClaimed": {
+    "n": 0,
+    "d": 392,
+    "rate": 0
+   },
+   "falseByWeakKind": {
+    "two-step": 0,
+    "both-sides": 0,
+    "brackets": 0,
+    "modelling": 0
+   }
+  },
+  "gated-typed": {
+   "claimVisits": 3,
+   "falseClaimVisits": {
+    "n": 0,
+    "d": 3,
+    "rate": 0
+   },
+   "journeysWithFalseClaim": {
+    "n": 0,
+    "d": 1,
+    "rate": 0
+   },
+   "journeysWithFalseClaimOfAll": {
+    "n": 0,
+    "d": 120,
+    "rate": 0
+   },
+   "weakVisitsClaimed": {
+    "n": 0,
+    "d": 392,
+    "rate": 0
+   },
+   "falseByWeakKind": {
+    "two-step": 0,
+    "both-sides": 0,
+    "brackets": 0,
+    "modelling": 0
+   }
+  },
+  "gated-method": {
+   "claimVisits": 55,
+   "falseClaimVisits": {
+    "n": 0,
+    "d": 55,
+    "rate": 0
+   },
+   "journeysWithFalseClaim": {
+    "n": 0,
+    "d": 24,
+    "rate": 0
+   },
+   "journeysWithFalseClaimOfAll": {
+    "n": 0,
+    "d": 120,
+    "rate": 0
+   },
+   "weakVisitsClaimed": {
+    "n": 0,
+    "d": 392,
+    "rate": 0
+   },
+   "falseByWeakKind": {
+    "two-step": 0,
+    "both-sides": 0,
+    "brackets": 0,
+    "modelling": 0
+   }
+  },
+  "gated-slip": {
+   "claimVisits": 67,
+   "falseClaimVisits": {
+    "n": 0,
+    "d": 67,
+    "rate": 0
+   },
+   "journeysWithFalseClaim": {
+    "n": 0,
+    "d": 29,
+    "rate": 0
+   },
+   "journeysWithFalseClaimOfAll": {
+    "n": 0,
+    "d": 120,
+    "rate": 0
+   },
+   "weakVisitsClaimed": {
+    "n": 0,
+    "d": 392,
+    "rate": 0
+   },
+   "falseByWeakKind": {
+    "two-step": 0,
+    "both-sides": 0,
+    "brackets": 0,
+    "modelling": 0
+   }
+  }
+ },
+ "missedCompetence": {
+  "competentVisits": 140,
+  "competentJourneysS2": 40,
+  "competentJourneysAskedEachKind": 38,
+  "byPolicy": {
+   "existing": {
+    "visits": {
+     "n": 37,
+     "d": 140,
+     "rate": 0.264
+    },
+    "journeysFinalVisitS2": {
+     "n": 9,
+     "d": 40,
+     "rate": 0.225
+    },
+    "journeysFinalVisitAskedEachKind": {
+     "n": 7,
+     "d": 38,
+     "rate": 0.184
+    }
+   },
+   "gated": {
+    "visits": {
+     "n": 73,
+     "d": 140,
+     "rate": 0.521
+    },
+    "journeysFinalVisitS2": {
+     "n": 17,
+     "d": 40,
+     "rate": 0.425
+    },
+    "journeysFinalVisitAskedEachKind": {
+     "n": 15,
+     "d": 38,
+     "rate": 0.395
+    }
+   },
+   "gated-typed": {
+    "visits": {
+     "n": 137,
+     "d": 140,
+     "rate": 0.979
+    },
+    "journeysFinalVisitS2": {
+     "n": 39,
+     "d": 40,
+     "rate": 0.975
+    },
+    "journeysFinalVisitAskedEachKind": {
+     "n": 37,
+     "d": 38,
+     "rate": 0.974
+    }
+   },
+   "gated-method": {
+    "visits": {
+     "n": 85,
+     "d": 140,
+     "rate": 0.607
+    },
+    "journeysFinalVisitS2": {
+     "n": 21,
+     "d": 40,
+     "rate": 0.525
+    },
+    "journeysFinalVisitAskedEachKind": {
+     "n": 19,
+     "d": 38,
+     "rate": 0.5
+    }
+   },
+   "gated-slip": {
+    "visits": {
+     "n": 73,
+     "d": 140,
+     "rate": 0.521
+    },
+    "journeysFinalVisitS2": {
+     "n": 17,
+     "d": 40,
+     "rate": 0.425
+    },
+    "journeysFinalVisitAskedEachKind": {
+     "n": 15,
+     "d": 38,
+     "rate": 0.395
+    }
+   }
+  },
+  "competentKindPairs": 163,
+  "missedKindPairsByVariant": {
+   "gated": {
+    "n": 25,
+    "d": 163,
+    "rate": 0.153
+   },
+   "gated-typed": {
+    "n": 56,
+    "d": 163,
+    "rate": 0.344
+   },
+   "gated-method": {
+    "n": 29,
+    "d": 163,
+    "rate": 0.178
+   },
+   "gated-slip": {
+    "n": 25,
+    "d": 163,
+    "rate": 0.153
+   }
+  },
+  "gatedWithheldReasons": {
+   "two-step: recovery required": 26,
+   "modelling: fewer than 2 distinct right alone": 16,
+   "modelling: recovery required": 6,
+   "two-step: developing": 2,
+   "both-sides: fewer than 2 distinct right alone": 24,
+   "brackets: fewer than 2 distinct right alone": 29,
+   "both-sides: recovery required": 8,
+   "two-step: fewer than 2 distinct right alone": 4,
+   "both-sides: never asked": 4,
+   "brackets: never asked": 4,
+   "modelling: never asked": 4,
+   "both-sides: developing": 4
+  }
+ },
+ "coverage": {
+  "two-step": {
+   "askedAlone": {
+    "n": 120,
+    "d": 120,
+    "rate": 1
+   },
+   "shown": {
+    "n": 53,
+    "d": 120,
+    "rate": 0.442
+   },
+   "everDelayedChecked": {
+    "n": 80,
+    "d": 120,
+    "rate": 0.667
+   },
+   "shownButNeverDelayedChecked": {
+    "n": 0,
+    "d": 53,
+    "rate": 0
+   }
+  },
+  "both-sides": {
+   "askedAlone": {
+    "n": 74,
+    "d": 120,
+    "rate": 0.617
+   },
+   "shown": {
+    "n": 34,
+    "d": 120,
+    "rate": 0.283
+   },
+   "everDelayedChecked": {
+    "n": 14,
+    "d": 120,
+    "rate": 0.117
+   },
+   "shownButNeverDelayedChecked": {
+    "n": 29,
+    "d": 34,
+    "rate": 0.853
+   }
+  },
+  "brackets": {
+   "askedAlone": {
+    "n": 74,
+    "d": 120,
+    "rate": 0.617
+   },
+   "shown": {
+    "n": 31,
+    "d": 120,
+    "rate": 0.258
+   },
+   "everDelayedChecked": {
+    "n": 5,
+    "d": 120,
+    "rate": 0.042
+   },
+   "shownButNeverDelayedChecked": {
+    "n": 29,
+    "d": 31,
+    "rate": 0.935
+   }
+  },
+  "modelling": {
+   "askedAlone": {
+    "n": 81,
+    "d": 120,
+    "rate": 0.675
+   },
+   "shown": {
+    "n": 47,
+    "d": 120,
+    "rate": 0.392
+   },
+   "everDelayedChecked": {
+    "n": 57,
+    "d": 120,
+    "rate": 0.475
+   },
+   "shownButNeverDelayedChecked": {
+    "n": 9,
+    "d": 47,
+    "rate": 0.191
+   }
+  }
+ },
+ "retention": {
+  "planItemsBySubSkill": {
+   "two-step": 0,
+   "both-sides": 53,
+   "brackets": 47,
+   "modelling": 47
+  },
+  "unchecked": {
+   "n": 0,
+   "d": 147,
+   "rate": 0
+  },
+  "claimsRestingOnNeverCheckedDueSubSkill": {
+   "gated": {
+    "n": 21,
+    "d": 67,
+    "rate": 0.313
+   },
+   "gated-typed": {
+    "n": 1,
+    "d": 3,
+    "rate": 0.333
+   },
+   "gated-method": {
+    "n": 18,
+    "d": 55,
+    "rate": 0.327
+   },
+   "gated-slip": {
+    "n": 21,
+    "d": 67,
+    "rate": 0.313
+   }
+  }
+ },
+ "recovery": {
+  "existingRecoveryVisits": 147,
+  "gatedNamesASubSkill": {
+   "n": 96,
+   "d": 147,
+   "rate": 0.653
+  },
+  "bySubSkill": {
+   "two-step": 80,
+   "both-sides": 16,
+   "brackets": 0,
+   "modelling": 12
+  },
+  "clearedWhileSubSkillStillInRecoveryUpperBound": 0,
+  "gatedRecoveryWithoutExisting": 22,
+  "gatedClaimsDespiteEarlyWrongCheck": 0
+ },
+ "additionalQuestions": {
+  "gated": {
+   "perVisitWhereExistingClaimsButProposedNot": {
+    "n": 65,
+    "mean": 2.82,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFirstDisagreement": {
+    "n": 32,
+    "mean": 2.94,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFinalVisitNotClaimed": {
+    "n": 97,
+    "mean": 5.78,
+    "median": 6,
+    "max": 8
+   }
+  },
+  "gated-typed": {
+   "perVisitWhereExistingClaimsButProposedNot": {
+    "n": 129,
+    "mean": 2.3,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFirstDisagreement": {
+    "n": 49,
+    "mean": 2.67,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFinalVisitNotClaimed": {
+    "n": 119,
+    "mean": 5.21,
+    "median": 6,
+    "max": 8
+   }
+  },
+  "gated-method": {
+   "perVisitWhereExistingClaimsButProposedNot": {
+    "n": 77,
+    "mean": 2.53,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFirstDisagreement": {
+    "n": 36,
+    "mean": 2.69,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFinalVisitNotClaimed": {
+    "n": 101,
+    "mean": 5.59,
+    "median": 6,
+    "max": 8
+   }
+  },
+  "gated-slip": {
+   "perVisitWhereExistingClaimsButProposedNot": {
+    "n": 65,
+    "mean": 2.48,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFirstDisagreement": {
+    "n": 32,
+    "mean": 2.72,
+    "median": 2,
+    "max": 6
+   },
+   "perJourneyAtFinalVisitNotClaimed": {
+    "n": 97,
+    "mean": 5.44,
+    "median": 6,
+    "max": 8
+   }
+  }
+ },
+ "agreement": {
+  "gated": {
+   "bothClaim": 67,
+   "onlyExisting": 65,
+   "onlyProposed": 0,
+   "neither": 400
+  },
+  "gated-typed": {
+   "bothClaim": 3,
+   "onlyExisting": 129,
+   "onlyProposed": 0,
+   "neither": 400
+  },
+  "gated-method": {
+   "bothClaim": 55,
+   "onlyExisting": 77,
+   "onlyProposed": 0,
+   "neither": 400
+  },
+  "gated-slip": {
+   "bothClaim": 67,
+   "onlyExisting": 65,
+   "onlyProposed": 0,
+   "neither": 400
+  }
+ }
+}

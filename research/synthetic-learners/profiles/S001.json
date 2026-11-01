@@ -1,0 +1,51 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "S001",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Strong learner",
+ "description": "Correct across most equation families; occasional slips.",
+ "seed": 1001,
+ "skills": {
+  "one-step": 0.99,
+  "two-step": 0.98,
+  "both-sides": 0.96,
+  "brackets": 0.95,
+  "modelling": 0.92
+ },
+ "misconceptions": {},
+ "slip": 0.02,
+ "guess": 0.0,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.6,
+  "partial": 0.1,
+  "bare": 0.2,
+  "none": 0.1,
+  "unsupportedNotation": 0.1
+ },
+ "hints": {
+  "seek": 0.1,
+  "help": 0.2
+ },
+ "instruction": {
+  "full": 0.7,
+  "partial": 0.2,
+  "gain": 0.6,
+  "fragileShare": 0.3,
+  "misconceptionReduction": 0.8,
+  "misconceptionResponse": 0.9,
+  "offTargetGain": 0.1
+ },
+ "practice": {
+  "consolidate": 0.5,
+  "gainRight": 0.05,
+  "gainWrong": 0.02
+ },
+ "forgetting": {
+  "halfLifeDays": 180,
+  "floor": 0.85,
+  "fragileHalfLifeDays": 30,
+  "relapse": 0.05
+ }
+}

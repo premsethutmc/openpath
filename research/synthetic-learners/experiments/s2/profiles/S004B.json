@@ -1,0 +1,56 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "S004B",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Guesser (cohort B: unrecognised errors, neutral learning response)",
+ "description": "Often answers without valid working: guesses multiple choice, writes bare answers or invented lines. Cohort B: each catalogued misconception is replaced by an error at the same step that OpenPath's teaching taxonomy does not represent (same strength); instruction is understood only from the kind of equations an explanation works through (no title recognition, no misconception targeting).",
+ "seed": 74004,
+ "skills": {
+  "one-step": 0.6,
+  "two-step": 0.4,
+  "both-sides": 0.3,
+  "brackets": 0.25,
+  "modelling": 0.3
+ },
+ "misconceptions": {
+  "negate-on-divide": 0.2,
+  "coefficient-dropped": 0.2
+ },
+ "slip": 0.08,
+ "guess": 0.5,
+ "invalidWorkingWithCorrectAnswer": 0.5,
+ "working": {
+  "full": 0.15,
+  "partial": 0.15,
+  "bare": 0.5,
+  "none": 0.2,
+  "unsupportedNotation": 0.2
+ },
+ "hints": {
+  "seek": 0.2,
+  "help": 0.1
+ },
+ "instruction": {
+  "full": 0.2,
+  "partial": 0.3,
+  "gain": 0.3,
+  "fragileShare": 0.7,
+  "misconceptionReduction": 0.5,
+  "misconceptionResponse": 0.4,
+  "offTargetGain": 0.05
+ },
+ "practice": {
+  "consolidate": 0.2,
+  "gainRight": 0.02,
+  "gainWrong": 0.0
+ },
+ "forgetting": {
+  "halfLifeDays": 45,
+  "floor": 0.2,
+  "fragileHalfLifeDays": 5,
+  "relapse": 0.3
+ },
+ "cohort": "B",
+ "learningModel": "content-features"
+}

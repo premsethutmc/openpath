@@ -17,7 +17,7 @@ const base = (q: string) => q.replace(/:(mc|w)$/, "");
 const ans = (q: string) => problemOf(base(q))!.answer;
 const off = (q: string) => String(Number(ans(q)) + 1);
 /** the learner's own working for each family (each new equation once, then the answer), as a learner writes it */
-function workingFor(q: string, mode: "valid" | "invalid" | "partial" | "unsupported" | "wrong-last" = "valid"): string[] {
+export function workingFor(q: string, mode: "valid" | "invalid" | "partial" | "unsupported" | "wrong-last" = "valid"): string[] {
   const p = problemOf(base(q))!, f = p.family, v = p.params;
   let lines: string[];
   if (f === "lin") { const [a, b, x] = v; const c = a * x + b; lines = [`${a}x = ${c - b}`, `x = ${x}`]; if (mode === "invalid") lines = [`${a}x = ${c + b}`, `x = ${x}`]; if (mode === "wrong-last") lines = [`${a}x = ${c - b}`, `x = ${x + 1}`]; }

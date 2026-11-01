@@ -252,6 +252,17 @@ describe("shadow by construction (from the alternative E1)", () => {
     const walk = (d: string) => { for (const f of readdirSync(d)) { const p = join(d, f); if (f === "node_modules" || f.startsWith(".") || f.startsWith("dist")) continue; if (statSync(p).isDirectory()) walk(p); else if (/\.(ts|tsx|mts|mjs|py)$/.test(f)) files.push(p); } };
     for (const d of ["packages/learning/src", "frontend/src", "backend/family"]) walk(join(root, d));
     const importers = files.filter((f) => /subskill-(evidence|scenarios)|d1e1-journeys/.test(readFileSync(f, "utf8")) && !/(subskill-evidence|subskill-scenarios|d1e1-journeys)\.ts$/.test(f));
+    // M1 (reviewed): the shadow gated-mastery policy and its journeys build on the projection; they are shadow modules themselves (next test)
+    const SHADOW = ["frontend/src/journey/gated-journeys.ts", "packages/learning/src/gated-mastery.ts"];
+    expect(importers.filter((f) => !/\.test\.(ts|tsx)$/.test(f)).map((f) => f.replace(root, "")).filter((f) => !SHADOW.includes(f))).toEqual([]);
+  });
+  test("M1: no production module imports the gated-mastery shadow policy or its journeys", async () => {
+    const { readdirSync, readFileSync, statSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const root = new URL("../../../", import.meta.url).pathname, files: string[] = [];
+    const walk = (d: string) => { for (const f of readdirSync(d)) { const p = join(d, f); if (f === "node_modules" || f.startsWith(".") || f.startsWith("dist")) continue; if (statSync(p).isDirectory()) walk(p); else if (/\.(ts|tsx|mts|mjs|py)$/.test(f)) files.push(p); } };
+    for (const d of ["packages/learning/src", "frontend/src", "backend/family"]) walk(join(root, d));
+    const importers = files.filter((f) => /from "[^"]*(gated-mastery|gated-journeys)"/.test(readFileSync(f, "utf8")) && !/(gated-mastery|gated-journeys)\.ts$/.test(f));
     expect(importers.filter((f) => !/\.test\.(ts|tsx)$/.test(f)).map((f) => f.replace(root, ""))).toEqual([]);
   });
 });

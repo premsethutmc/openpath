@@ -1,0 +1,1484 @@
+{
+ "profile": "S006@1.0.0",
+ "seed": 6006,
+ "schedule": [
+  1,
+  8,
+  3,
+  8
+ ],
+ "boundary": [
+  {
+   "n": 1,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 3x + 3 = 9. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "5/3",
+    "working": [
+     "3x = 5",
+     "x = 5/3"
+    ]
+   }
+  },
+  {
+   "n": 2,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 3,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 3x + 9 = 33. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "125",
+    "working": [
+     "3x = 42",
+     "x = 125"
+    ]
+   }
+  },
+  {
+   "n": 4,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 5,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 3x + 9 = 15. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "24",
+    "working": [
+     "3x = 8",
+     "x = 24"
+    ]
+   }
+  },
+  {
+   "n": 6,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 7,
+   "frame": {
+    "stage": "teaching",
+    "step": 1,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 8,
+   "frame": {
+    "stage": "teaching",
+    "step": 2,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 9,
+   "frame": {
+    "stage": "teaching",
+    "step": 3,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 10,
+   "frame": {
+    "stage": "teaching",
+    "step": 4,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 11,
+   "frame": {
+    "stage": "teaching",
+    "step": 5,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 12,
+   "frame": {
+    "stage": "teaching",
+    "step": 6,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 13,
+   "frame": {
+    "stage": "teaching",
+    "step": 7,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 14,
+   "frame": {
+    "stage": "teaching",
+    "step": 8,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 15,
+   "frame": {
+    "stage": "teaching",
+    "step": 9,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 16,
+   "frame": {
+    "stage": "teaching",
+    "step": 10,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 17,
+   "frame": {
+    "stage": "teaching",
+    "step": 11,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 18,
+   "frame": {
+    "stage": "teaching",
+    "step": 12,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 19,
+   "frame": {
+    "stage": "teaching",
+    "step": 13,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 20,
+   "frame": {
+    "stage": "teaching",
+    "step": 14,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 21,
+   "frame": {
+    "stage": "teaching",
+    "step": 15,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 22,
+   "frame": {
+    "stage": "teaching",
+    "step": 16,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 23,
+   "frame": {
+    "stage": "teaching",
+    "step": 17,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 24,
+   "frame": {
+    "stage": "teaching",
+    "step": 18,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 25,
+   "frame": {
+    "stage": "teaching",
+    "step": 19,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 26,
+   "frame": {
+    "stage": "teaching",
+    "step": 20,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 27,
+   "frame": {
+    "stage": "teaching",
+    "step": 21,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 28,
+   "frame": {
+    "stage": "teaching",
+    "step": 22,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 29,
+   "frame": {
+    "stage": "teaching",
+    "step": 23,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 30,
+   "frame": {
+    "stage": "teaching",
+    "step": 24,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 31,
+   "frame": {
+    "stage": "teaching",
+    "step": 25,
+    "teaching": {
+     "title": "Keep the balance",
+     "text": "Do the same to both sides — In x − 4 = 11, the two sides balance. Add 4 to both sides: the − 4 is undone and the sides still balance.\nWorked line\nWorked line\nAdd 4 to both sides: − 4 + 4 is 0.\nWorked line\nCheck: 15 − 4 = 11\nUndo × with ÷ — 5x = 35: 5x means 5 × x. Divide both sides by 5 to undo the × 5.\nWorked line\nWorked line\nDivide both sides by 5.\nWorked line\nCheck: 5 × 7 = 35\nTwo steps: undo the last one first — In 3x + 4 = 19, x was multiplied by 3 and then 4 was added. Undo the + 4 first, then the × 3, each time on both sides.\nWorked line\nThe two sides are equal: 3 lots of x, plus 4, is the same amount as 19.\nWorked line\nTake 4 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n4 − 4 = 0, so only 3x is left on the left.\nWorked line\n3x means 3 × x. Divide the whole of each side by 3.\nWorked line\nx is on its own: this is the solution.\nCheck: 3 × 5 + 4 = 19\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 32,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 7x + 5 = 75. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": true,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "hint"
+   }
+  },
+  {
+   "n": 33,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 7x + 5 = 75. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": true
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ]
+   }
+  },
+  {
+   "n": 34,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "correct"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 35,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 2x + 15 = 17. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "8",
+    "working": [
+     "2x = 4",
+     "x = 8"
+    ]
+   }
+  },
+  {
+   "n": 36,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 37,
+   "frame": {
+    "stage": "teaching",
+    "step": 1,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 38,
+   "frame": {
+    "stage": "teaching",
+    "step": 2,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 39,
+   "frame": {
+    "stage": "teaching",
+    "step": 3,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 40,
+   "frame": {
+    "stage": "teaching",
+    "step": 4,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 41,
+   "frame": {
+    "stage": "teaching",
+    "step": 5,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 42,
+   "frame": {
+    "stage": "teaching",
+    "step": 6,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 43,
+   "frame": {
+    "stage": "teaching",
+    "step": 7,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 44,
+   "frame": {
+    "stage": "teaching",
+    "step": 8,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 45,
+   "frame": {
+    "stage": "teaching",
+    "step": 9,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 46,
+   "frame": {
+    "stage": "teaching",
+    "step": 10,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 47,
+   "frame": {
+    "stage": "teaching",
+    "step": 11,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 48,
+   "frame": {
+    "stage": "teaching",
+    "step": 12,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 49,
+   "frame": {
+    "stage": "teaching",
+    "step": 13,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 50,
+   "frame": {
+    "stage": "teaching",
+    "step": 14,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 51,
+   "frame": {
+    "stage": "teaching",
+    "step": 15,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 52,
+   "frame": {
+    "stage": "teaching",
+    "step": 16,
+    "teaching": {
+     "title": "Undo one step at a time",
+     "text": "What you are finding — You want the number x that makes 2x + 5 = 17 true.\n2x + 5 means: multiply x by 2, then add 5. To get x back, undo those in reverse order: first the + 5, then the × 2.\nSolve 2x + 5 = 17 — Each line does the same to both sides, so the two sides stay equal and the solution does not change.\nWorked line\nThe two sides are equal: 2 lots of x, plus 5, is the same amount as 17.\nWorked line\nTake 5 from both sides. Doing the same to both sides keeps them equal.\nWorked line\n5 − 5 = 0, so only 2x is left on the left.\nWorked line\n2x means 2 × x. Divide the whole of each side by 2.\nWorked line\nx is on its own: this is the solution.\nCheck: 2 × 6 + 5 = 17\nCheck in the original equation — Always check in the equation you were given. If you check in a later line, a mistake you made before it will not show up.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 53,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 6x + 17 = 35. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": true,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "3",
+    "working": [
+     "6x + 17 - 17 = 35 - 17",
+     "6x/6 = 18/6",
+     "x = 3"
+    ]
+   }
+  },
+  {
+   "n": 54,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "correct"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 55,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 5x + 6 = 31. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "5",
+    "working": [
+     "x = 5"
+    ]
+   }
+  },
+  {
+   "n": 56,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "correct"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 57,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 2x + 17 = 39. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "11",
+    "working": [
+     "2x = 22",
+     "x = 11"
+    ]
+   }
+  },
+  {
+   "n": 58,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "correct"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 59,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 7x + 9 = 86. What is x? Choose one.",
+     "input": {
+      "type": "multiple-choice",
+      "choices": [
+       {
+        "id": "A",
+        "label": "10"
+       },
+       {
+        "id": "B",
+        "label": "11"
+       },
+       {
+        "id": "C",
+        "label": "12"
+       },
+       {
+        "id": "D",
+        "label": "77"
+       }
+      ]
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "A"
+   }
+  },
+  {
+   "n": 60,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 61,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 7x + 18 = 81. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "9",
+    "working": [
+     "7x = 63",
+     "x = 9"
+    ]
+   }
+  },
+  {
+   "n": 62,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "correct"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 63,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Anu buys 2 notebooks at ₹x each and one pen for ₹9, and pays ₹29 in all. Which equation describes this situation?",
+     "input": {
+      "type": "multiple-choice",
+      "choices": [
+       {
+        "id": "A",
+        "label": "9x + 2 = 29"
+       },
+       {
+        "id": "B",
+        "label": "2x − 9 = 29"
+       },
+       {
+        "id": "C",
+        "label": "2x + 9 = 29"
+       },
+       {
+        "id": "D",
+        "label": "2(x + 9) = 29"
+       }
+      ]
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "C"
+   }
+  },
+  {
+   "n": 64,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "correct"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 65,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "One number is 5 times another. When 2 is added to each of them, the two new numbers add up to 46. Form an equation and find the smaller number.",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "7",
+    "working": [
+     "x + 2 + 5x + 2 = 46",
+     "6x = 42",
+     "x = 7"
+    ]
+   }
+  },
+  {
+   "n": 66,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "correct"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 67,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 9x + 7 = 8x + 9. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "0",
+    "working": [
+     "9x + 7 = 9",
+     "9x = 0",
+     "x = 0"
+    ]
+   }
+  },
+  {
+   "n": 68,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 69,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 5(x − 4) = 2x − 17. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "4",
+    "working": [
+     "x = 4"
+    ]
+   }
+  },
+  {
+   "n": 70,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 71,
+   "frame": {
+    "stage": "teaching",
+    "step": 1,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 72,
+   "frame": {
+    "stage": "teaching",
+    "step": 2,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 73,
+   "frame": {
+    "stage": "teaching",
+    "step": 3,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 74,
+   "frame": {
+    "stage": "teaching",
+    "step": 4,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 75,
+   "frame": {
+    "stage": "teaching",
+    "step": 5,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 76,
+   "frame": {
+    "stage": "teaching",
+    "step": 6,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 77,
+   "frame": {
+    "stage": "teaching",
+    "step": 7,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 78,
+   "frame": {
+    "stage": "teaching",
+    "step": 8,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 79,
+   "frame": {
+    "stage": "teaching",
+    "step": 9,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 80,
+   "frame": {
+    "stage": "teaching",
+    "step": 10,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 81,
+   "frame": {
+    "stage": "teaching",
+    "step": 11,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 82,
+   "frame": {
+    "stage": "teaching",
+    "step": 12,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 83,
+   "frame": {
+    "stage": "teaching",
+    "step": 13,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 84,
+   "frame": {
+    "stage": "teaching",
+    "step": 14,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 85,
+   "frame": {
+    "stage": "teaching",
+    "step": 15,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 86,
+   "frame": {
+    "stage": "teaching",
+    "step": 16,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 87,
+   "frame": {
+    "stage": "teaching",
+    "step": 17,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 88,
+   "frame": {
+    "stage": "teaching",
+    "step": 18,
+    "teaching": {
+     "title": "Multiply out the bracket first",
+     "text": "What the bracket means — 3(x − 2) = 2x + 5: the 3 multiplies everything inside the bracket, so 3(x − 2) is 3x − 6, not 3x − 2.\nMultiply out first. Then it is an equation with x on both sides.\nSolve 3(x − 2) = 2x + 5 — Multiply out, collect the x's, then the numbers, doing the same to both sides each time.\nWorked line\n3(x − 2) means 3 lots of (x − 2).\nWorked line\nMultiply out the bracket first: 3 × x = 3x and 3 × −2 = −6. Both terms inside are multiplied.\nWorked line\nTake 2x from both sides, so the x's are on one side.\nWorked line\nWorked line\nWorked line\nAdd 6 to both sides, so the x term is on its own.\nWorked line\nx is on its own.\nCheck: 3 × (11 − 2) = 27 and 2 × 11 + 5 = 27\nCheck with the bracket — Check in the original equation, with the bracket: work out the bracket first, then multiply.\nYour turn — Now solve one on your own. Check your answer in the original equation."
+    }
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 89,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 5(x − 5) = x + 15. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": true,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "46/5",
+    "working": [
+     "5x - 25 = x + 15",
+     "x = 46/5"
+    ]
+   }
+  },
+  {
+   "n": 90,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 91,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 4(x + 4) = 2x + 20. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "4",
+    "working": [
+     "4x + 4 = 2x + 20",
+     "x = 4"
+    ]
+   }
+  },
+  {
+   "n": 92,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 93,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 4(x + 1) = x + 16. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "60",
+    "working": [
+     "4x + 1 = x + 16",
+     "x = 60"
+    ]
+   }
+  },
+  {
+   "n": 94,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 95,
+   "frame": {
+    "stage": "summary"
+   },
+   "action": null
+  },
+  {
+   "n": 96,
+   "frame": {
+    "stage": "question",
+    "question": {
+     "prompt": "Solve 6x + 17 = 29. What is x?",
+     "input": {
+      "type": "numeric"
+     },
+     "hintAvailable": false,
+     "hintShown": false
+    }
+   },
+   "action": {
+    "type": "answer",
+    "value": "276"
+   }
+  },
+  {
+   "n": 97,
+   "frame": {
+    "stage": "feedback",
+    "feedback": "incorrect"
+   },
+   "action": {
+    "type": "continue"
+   }
+  },
+  {
+   "n": 98,
+   "frame": {
+    "stage": "summary"
+   },
+   "action": null
+  },
+  {
+   "n": 99,
+   "frame": {
+    "stage": "summary"
+   },
+   "action": null
+  },
+  {
+   "n": 100,
+   "frame": {
+    "stage": "summary"
+   },
+   "action": null
+  }
+ ]
+}
