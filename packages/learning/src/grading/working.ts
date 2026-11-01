@@ -1,3 +1,4 @@
+import { geometryTask, GEOMETRY_AUTHORITY } from '../geometry-task';
 /**
  * working-assessment@1 (Workstream D1): what the trusted grader can say about a learner's submitted WORKING, beside — never inside — the
  * answer verdict. It adds no mathematics of its own: every judgement comes from the P2 derivation authority through its one interface
@@ -139,6 +140,11 @@ export interface WorkingProvenance {
   version: string;
   reasoning: "demonstrated" | "refuted" | "not-established";
 }
+export function expectedWorkingAuthority(qid: string): { checker: string; version: string } | null {
+  if (geometryTask(qid)) return {checker: 'geometry-reasoner', version: GEOMETRY_AUTHORITY};
+  return taskStatement(qid) ? {checker: 'derivation-authority', version: authorizeWorking('', []).versions.authority} : null;
+}
+
 export function assessWorking(qid: string, working: readonly string[], verdict: string, value: string | null): WorkingAssessment | undefined {
   const w = assessWorkingLegacy(qid, working, verdict, value);
   if (!w) return w;

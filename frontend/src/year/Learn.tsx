@@ -1,3 +1,4 @@
+import { geometryTask } from '../../../packages/learning/src/geometry-task';
 /**
  * The learning views of My Learning Year: one skill module (Explore → Strategy → Chapter → Practise → Verify), the
  * recovery from a problem the learner is stuck on, and a single question (a challenge or a problem fragment).
@@ -175,7 +176,7 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
       {!!fb.working?.length && <div className={`feedback ${trusted?.working?.status === "invalid" ? "bad" : ""}`} role="note" aria-label="Your working">
         <strong>Your working</strong>
         <p>{judged?.message ?? "Your working is saved. It has not been marked right or wrong. Show an intermediate step or review a supported lesson; no method mastery is claimed."}</p>
-        <ol>{fb.working.map((line,i)=><li key={i}>{line}</li>)}</ol>
+        <ol>{fb.working.map((line,i)=><li key={i}>{line}{judged?.steps[i] && <span className="small"> — {judged.steps[i].verified ? "Checked" : judged.steps[i].badge === "invalid" ? "Check this step" : "Not checked"}</span>}</li>)}</ol>
       </div>}
       {/* adaptive loop: a wrong answer on a problem OpenPath can reason about opens the same recovery as "I'm stuck" */}
       {onInvestigate && !fb.right && !undecided ? <button className="secondary wide" onClick={onInvestigate}>Find out what went wrong</button> : null}
@@ -208,6 +209,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       {workable && (
         <details className="working" open={workingOpen} onToggle={e=>setWorkingOpen(e.currentTarget.open)}>
           <summary>Show your working (optional)</summary>
+          <p className="small">{geometryTask(qid)?.labels}</p>
           <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />
           <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>
         </details>
@@ -328,7 +330,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewLesson(true); }}>Review a supported lesson</button> : null;
   if (reviewLesson && reviewStrategy) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson s={reviewStrategy} doneLabel="Return to my progress" saving={false} onDone={() => setReviewLesson(false)} /><button className="secondary" onClick={() => setReviewLesson(false)}>Return to my progress</button></div>;
   if (reviewOnly) return <div className="stack">{head}<p>This is lesson review, not a mastery check. Your progress is preserved.</p>{reviewOffer ?? <p>No eligible explanation is available for this topic yet.</p>}<button className="secondary" onClick={onExit}>Choose another goal</button></div>;
-  if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}</div>;
+  if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}{!retry && reviewOffer}</div>;
   if (sessionMode && ms.phase === "retention") return <div className="stack">{head}<p>A delayed check is reserved for a later session. Your completed work is preserved.</p><button className="primary" onClick={onExit}>Next planned competency</button></div>;
   if (sessionMode && ms.question && writtenTask(ms.question)?.answer === "drawing" && !HANDWRITING_ENABLED)
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;

@@ -11,7 +11,7 @@
  *   - method evidence: ONLY the trusted grader's working verdict recorded by the SERVER (grading-decision@1, working-assessment@1);
  *   - identity: ONLY the trusted generator id (gen:<family>:<params>[:mc|:w]); question text is never read; unknown is never credited.
  */
-import { taskStatement, type WorkingProvenance } from "./grading/working";
+import { expectedWorkingAuthority, taskStatement, type WorkingProvenance } from "./grading/working";
 import { question } from "./content";
 import { AUTHORITY_VERSION } from "./derivation-authority";
 import { DAY, INDEPENDENT_MIN, RETENTION_CHECK, RETENTION_DAYS, independentAttempt, rightAnswer, type RetentionCycle, type SkillEvidence } from "./evidence";
@@ -136,15 +136,17 @@ const methodOf = (a: Attempt, family: string, format: string, d: StoredDecision 
     const p = w.provenance;
     // Old records remain readable only on the authority's original equation contract.
     // A server label alone cannot turn geometry entailment into method evidence.
-    const bound = (!d?.questionId || d.questionId === a.questionId)
+    const geometryBound = p?.checker !== 'geometry-reasoner' || (d?.questionId === a.questionId && d?.attemptId === a.id && !!d?.response);
+    const bound = geometryBound && (!d?.questionId || d.questionId === a.questionId)
       && (!d?.attemptId || d.attemptId === a.id)
       && (!d?.response || (d.response.raw === a.response && JSON.stringify(d.response.working ?? []) === JSON.stringify(a.working ?? [])));
-    const expected = !!taskStatement(a.questionId);
+    const authority = expectedWorkingAuthority(a.questionId);
+    const expected = !!authority;
     const provenance = p ? p.schema === "working-provenance@1" && p.questionId === a.questionId
-      && p.competency === question(a.questionId).competency && p.checker === "derivation-authority"
+      && p.competency === question(a.questionId).competency && p.checker === authority?.checker
       && p.version === w.versions?.authority
       && (w.status !== "verified" || p.reasoning === "demonstrated")
-      && (w.status !== "invalid" || p.reasoning === "refuted") : expected;
+      && (w.status !== "invalid" || p.reasoning === "refuted") : !!taskStatement(a.questionId);
     if (!bound || !expected || !provenance) return { method: "unsupported", authority: null };
   }
   if (w) return { method: methodFrom(w), authority: typeof w.versions?.authority === "string" ? w.versions.authority : null };
@@ -216,7 +218,7 @@ export function projectSubSkillsWith<Id extends string>(config: SubSkillConfig<I
     }
     const correct = rightAnswer(a), independent = independentAttempt(a), mo = methodOf(a, c.family, c.format, decisions?.get(a.id)), method = mo.method;
     byId.set(a.id, a);
-    projected.push({ id: a.id, at: a.at, questionId: a.questionId, family: c.family, subSkill: c.subSkill.id, variant: exposureKey(a.questionId), format: c.format, activity: a.activity, correct, independent, assisted: !independent, method, methodAuthority: mo.authority, historicalMethod: mo.authority !== null && mo.authority !== AUTHORITY_VERSION, contradicted: correct && method === "method-false-step" });
+    projected.push({ id: a.id, at: a.at, questionId: a.questionId, family: c.family, subSkill: c.subSkill.id, variant: exposureKey(a.questionId), format: c.format, activity: a.activity, correct, independent, assisted: !independent, method, methodAuthority: mo.authority, historicalMethod: mo.authority !== null && mo.authority !== expectedWorkingAuthority(a.questionId)?.version, contradicted: correct && method === "method-false-step" });
   }
   const moduleRetention = moduleFor(config.competency)?.retention ?? [];
   for (const s of config.subSkills) {

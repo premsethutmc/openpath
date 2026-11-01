@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 if d.get("policy") != "grading-policy@1":
                     still += 1
                     continue
-                _, new = _decide({**e, "id": attempt_id}, q, now, mode="unified")
+                _, new = _decide({**e, "id": attempt_id}, q, now, mode="unified", geometry=d.get("workingPolicy") == "geometry-working@1")
                 if new["reason"] == "unresolved.infrastructure":
                     still += 1
                     continue

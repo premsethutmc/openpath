@@ -4,7 +4,10 @@ import {assessMathematicalWorking,type MathematicalProblem,type StudentWorking} 
 import {geometryWorkerDiagnostics,shutdownGeometryWorkerPools,terminateGeometryWorker} from "./geometry-worker.ts";
 const root=`${process.cwd()}/research/geometry-reasoner`;
 const cases=(JSON.parse(readFileSync("tools/mathematics/unified-u2/independent-cases.v2.json","utf8")) as {cases:{id:string;problem:MathematicalProblem;working:StudentWorking}[]}).cases;
-const source=cases.find(x=>x.id==="u2-angle-00")!;
+// Frozen U2 fixture tested entailment without a reason. Transport tests now submit an actual method;
+// the frozen corpus stays unchanged, and all concurrency/timeout assertions remain intact.
+const source=JSON.parse(JSON.stringify(cases.find(x=>x.id==="u2-angle-00")!));
+source.working.geometry.steps[0].cited_theorem="triangle-sum";
 const clone=<T>(x:T):T=>JSON.parse(JSON.stringify(x));
 const configured=(problem:MathematicalProblem,working:StudentWorking,extra:Record<string,unknown>={})=>assessMathematicalWorking(problem,working,{geometryWorkerCount:2,geometryQueueLimit:128,...extra});
 // E3: bun runs every test file in one process and the geometry pools are process-global; without a clean start the counters include other files' work (observed completed=204 in the full run, 100 in isolation).

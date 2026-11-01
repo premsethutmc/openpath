@@ -13,6 +13,8 @@ import os
 import re
 import shutil
 import subprocess
+import sys
+import signal
 from functools import lru_cache
 from pathlib import Path
 
@@ -47,13 +49,28 @@ def enabled():
     return os.environ.get('OPENPATH_GRADER', 'on') != 'off' and bool(node_path()) and bundle_intact()
 
 
-def run(requests):
+def run(requests, geometry=False):
     """Raw replies for a list of {id, response, working?} (None if the grader could not run)."""
     if not enabled():
         return None
     try:
-        done = subprocess.run([node_path(), str(BUNDLE)], input=json.dumps(requests), capture_output=True, text=True, timeout=_timeout(), env={'PATH': os.environ.get('PATH', '')}, check=False)
-        out = json.loads(done.stdout) if done.returncode == 0 else None
+        env = {'PATH': os.environ.get('PATH', '')}
+        if geometry and geometry_intact():
+            env.update(OPENPATH_GEOMETRY_ROOT=str(BUNDLE.parents[3] / 'research/geometry-reasoner'), OPENPATH_GEOMETRY_PYTHON=sys.executable)
+        with subprocess.Popen([node_path(), str(BUNDLE)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                              text=True, env=env, start_new_session=(os.name == 'posix')) as child:
+            try:
+                stdout, _ = child.communicate(json.dumps(requests), timeout=_timeout())
+            except subprocess.TimeoutExpired:
+                # Node may be waiting on Python: terminate the whole private request group.
+                if os.name == 'posix':
+                    try: os.killpg(child.pid, signal.SIGKILL)
+                    except ProcessLookupError: pass
+                else:
+                    child.kill()
+                child.communicate()
+                return None
+            out = json.loads(stdout) if child.returncode == 0 else None
     except (OSError, ValueError, subprocess.SubprocessError):
         return None
     return out if isinstance(out, list) and len(out) == len(requests) else None
@@ -71,13 +88,13 @@ def _reply_ok(reply, question_id, stored_answer):
             and reply['decision'].get('verdict') == reply['verdict'] and reply['decision'].get('reason') == reply['reason'])
 
 
-def grader_decision(question_id, response, stored_answer, working=None):
+def grader_decision(question_id, response, stored_answer, working=None, geometry=False):
     """{'credit': True|False|None, 'source': str, 'reason': str, 'verdict': str} from the trusted grader, or None if it could not decide here
     (not runnable, failed, or its stored answer differs from this server's). credit None = undecided (never wrong)."""
     if not isinstance(question_id, str) or not QUESTION_ID.match(question_id) or not isinstance(response, str):
         return None
     w = [x for x in (working or []) if isinstance(x, str)][:8]
-    out = run([{'id': question_id, 'response': response, 'working': w}])
+    out = run([{'id': question_id, 'response': response, 'working': w}], geometry=True) if geometry else run([{'id': question_id, 'response': response, 'working': w}])
     if out is None or not _reply_ok(out[0], question_id, stored_answer):
         return None
     d = {k: out[0][k] for k in ('credit', 'source', 'reason', 'verdict')}
@@ -94,6 +111,17 @@ def bundle_sha256():
         return None
 
 
-def kernel_decision(question_id, response, stored_answer, working=None):
+def kernel_decision(question_id, response, stored_answer, working=None, geometry=False):
     """Compatibility name (assessment@1 callers): the trusted grader's decision, now for every known question."""
-    return grader_decision(question_id, response, stored_answer, working)
+    return grader_decision(question_id, response, stored_answer, working, geometry=geometry)
+
+
+def geometry_intact():
+    """Pin executable Python authority beside the bundled TS adapter; drift fails to neutral working."""
+    try:
+        inputs = json.loads(MANIFEST.read_text())['geometryInputs']
+        root = BUNDLE.parents[3]
+        expected = {str(p.relative_to(root)) for p in (root / 'research/geometry-reasoner/geometry_reasoner').glob('*.py')}
+        return bool(expected) and set(inputs) == expected and all(hashlib.sha256((root / p).read_bytes()).hexdigest() == h for p, h in inputs.items())
+    except (OSError, ValueError, KeyError, TypeError):
+        return False

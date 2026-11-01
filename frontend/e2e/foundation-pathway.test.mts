@@ -10,6 +10,8 @@ import { question } from '../../packages/learning/src/content';
 import { learnerState } from '../../packages/learning/src/session';
 import { withDecisions } from '../../packages/learning/src/records';
 const root=fileURLToPath(new URL('../dist-english/',import.meta.url));
+import { geometryTask } from '../../packages/learning/src/geometry-task';
+const geometryOnly=process.env.PATHWAY_GEOMETRY_ONLY==='1';
 const target=process.env.PATHWAY_TARGET??'MATH.number.addition-regroup';
 const port=4197, api=process.env.PATHWAY_API??'http://127.0.0.1:8197';
 const server=http.createServer((req,res)=>{
@@ -34,6 +36,7 @@ try{
  await page.getByLabel('Target topic',{exact:true}).selectOption(target);await page.getByRole('button',{name:'Use this learning goal'}).click();
  await page.getByText('Current goal:',{exact:false}).waitFor();
  const visited=new Set<string>();let attempted=0;
+ if(!geometryOnly) {
  for(let step=0;step<90;step++){
   const data=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
   const state=learnerState(id,withDecisions(data.events,data.decisions??{}),Date.now());
@@ -69,6 +72,7 @@ try{
   assert.ok(step<89,'bounded journey must finish');
  }
  assert.ok(visited.has('MATH.number.addition'));assert.ok(visited.has('MATH.number.subtraction'));assert.ok(visited.has('MATH.number.zero'));assert.ok(visited.has(target));assert.ok(graph.get(target).gradeRange[0]>1);
+ }
  const saved=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
  const expected=learnerState(id,withDecisions(saved.events,saved.decisions??{}),Date.now()).next;
  assert.deepEqual(learnerState(id,withDecisions([...saved.events].reverse(),saved.decisions??{}),Date.now()).next,expected);
@@ -85,15 +89,27 @@ try{
  const geometry=page.locator('[data-qid]');await geometry.waitFor();const g=question((await geometry.getAttribute('data-qid'))!);
  if(g.type==='choice')await page.getByRole('radio').nth('ABCD'.indexOf(g.answer)).click();else await page.getByLabel('Your answer',{exact:true}).fill(g.answer);
  await page.getByText('Show your working (optional)',{exact:true}).click();
- const work='Use the triangle angle sum; subtract the two given angles.';
+ const task=geometryTask(g.id);
+ if(geometryOnly) {assert.ok(task,'real UI must offer a supported geometry task');assert.ok(await page.locator('svg').count(),'existing geometry visual');}
+ const work=geometryOnly?`x = ${task!.problem.goal.value} (triangle sum)`:'Use the triangle angle sum; subtract the two given angles.';
  await page.getByLabel('Your working',{exact:true}).fill(work);
  await page.getByRole('button',{name:'Check',exact:true}).click();
  const note=page.getByRole('note',{name:'Your working',exact:true});await note.waitFor();
  assert.ok(!(await note.getAttribute('class'))?.includes('bad'));
- assert.match(await note.innerText(),/not been marked right or wrong/);
+ assert.match(await note.innerText(),geometryOnly?/geometric rules.*check out/:/not been marked right or wrong/);
  const final=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
  const attempt=withDecisions(final.events,final.decisions??{}).filter((e:any)=>e.record==='attempt').at(-1) as any;
- assert.deepEqual(attempt.working,[work]);assert.equal(attempt.decision.working.status,'unsupported');
+ assert.deepEqual(attempt.working,[work]);assert.equal(attempt.decision.working.status,geometryOnly?'verified':'unsupported');
+ if(geometryOnly) {
+  await page.screenshot({path:'/tmp/pathway-browser-shots/geometry-verified.png',fullPage:true});
+  await page.getByRole('button',{name:'Review a supported lesson',exact:true}).click();
+  const lesson=page.locator('.lesson');await lesson.waitFor();assert.match(await lesson.innerText(),/triangle|180/i);
+  await page.screenshot({path:'/tmp/pathway-browser-shots/geometry-lesson.png',fullPage:true});
+  const before=JSON.stringify(attempt.decision);await call('/account/logout/',{});await call('/account/login/',{email,password});await page.reload();
+  const reload=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+  assert.equal(JSON.stringify((withDecisions(reload.events,reload.decisions).find((e:any)=>e.id===attempt.id) as any)?.decision),before);
+  assert.deepEqual(learnerState(id,withDecisions(reload.events,reload.decisions),Date.now()).next,learnerState(id,withDecisions([...reload.events].reverse(),reload.decisions),Date.now()).next);
+ }
  await page.screenshot({path:'/tmp/pathway-browser-shots/geometry-working.png',fullPage:true});
  assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,topics:[...visited],attempted,events:saved.count,phone:'390x844',freshLogin:true,geometryWorking:attempt.decision.working.status,gradingPolicy:attempt.decision.policy}));
 }finally{await context.close();await browser.close();server.close();}

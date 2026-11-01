@@ -144,7 +144,7 @@ def _authoritative(event, q, readable):
     return _decide(event, q)[0]
 
 
-def _decide(event, q, now=None, mode=None):
+def _decide(event, q, now=None, mode=None, geometry=False):
     """The server's decision about one answer, and nothing the client claims: (assessment@1 view, grading-decision@1).
     grading-policy@1 (Phase C): the trusted grader runs THE decision (the app's own code) for every known question and its verdict is
     recorded as is. There is no stored-answer fallback (UNIFIED_GRADING_ARCHITECTURE.md §11, D12): the grader not runnable (missing,
@@ -161,7 +161,7 @@ def _decide(event, q, now=None, mode=None):
         return (None if a is None else {**a, 'answerCorrect': None, 'unresolved': False, 'firstError': None, 'source': 'educator'},
                 decisions.build(event, educator=True, now=now))
     base = a if a is not None else {'policy': 'assessment@1', 'methodExamined': False, 'derivationVerified': False, 'aiFallbackUsed': False, 'clarificationRequired': False, 'firstError': None}
-    k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working'))
+    k = kernel_decision(event.get('questionId'), event['response'], q['answer'], event.get('working'), **({'geometry': True} if geometry else {}))
     if k is not None:
         ok = k['credit']
         unified = ({**base, 'answerCorrect': ok, 'unresolved': ok is None, 'clarificationRequired': ok is None, 'firstError': base.get('firstError') if ok is False else None, 'source': k['source']},
@@ -170,6 +170,8 @@ def _decide(event, q, now=None, mode=None):
         source = 'held' if grader_enabled() else 'infrastructure'
         unified = ({**base, 'answerCorrect': None, 'firstError': None, 'clarificationRequired': False, 'unresolved': True, 'source': source},
                    decisions.build(event, failure=source, now=now))
+    if geometry:
+        unified[1]['workingPolicy'] = 'geometry-working@1'
     mode = mode or grading_mode()
     if mode == 'unified':
         return unified
@@ -188,6 +190,11 @@ def _decide(event, q, now=None, mode=None):
     if mode == 'shadow':
         d['shadow'] = {**unified[1], 'decidedBy': 'shadow'}
     return legacy, d
+
+
+def pathway_active(events):
+    choice = next((e for e in reversed(events) if e.get('record') == 'foundation_pathway' and e.get('policy') == 'mathematics-pathway@1'), None)
+    return bool(choice and choice.get('active') is True)
 
 
 def effective_grading_mode(events):
@@ -395,7 +402,7 @@ def checked_learning(event, pupil):
             _reject('Invalid context.')
         if 'assessment' in event and not _assessment_ok(event['assessment'], q):
             _reject('The assessment result is malformed.')
-        decided, decision = _decide(event, q, now, mode=effective_grading_mode(prior))
+        decided, decision = _decide(event, q, now, mode=effective_grading_mode(prior), geometry=pathway_active(prior))
         if decided is not None:
             event = {**event, 'assessment': decided}
         shadow = decision.pop('shadow', None)

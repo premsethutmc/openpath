@@ -12,6 +12,7 @@ import { isQuestion, question } from "./content.ts";
 import { grade, type GradingDecision } from "./grading/decision.ts";
 import { gradeProgram, isProgramQuestion, programQuestion } from "./grading/program.ts";
 
+import { geometryWorking, stopGeometryWorkers } from './grading/geometry-working';
 import { assessWorkingAsync, type WorkingObservation } from "./grading/working.ts";
 
 export const SERVER_GRADER_VERSION = 2 as const;
@@ -52,10 +53,20 @@ if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.tes
   let raw = "";
   process.stdin.setEncoding("utf8");
   process.stdin.on("data", (d) => { raw += d; if (raw.length > 1_000_000) process.exit(2); });
-  process.stdin.on("end", () => {
+  process.stdin.on("end", async () => {
     let input: unknown;
     try { input = JSON.parse(raw); } catch { process.stdout.write(JSON.stringify({ v: SERVER_GRADER_VERSION, known: false, verdict: "unknown", credit: null, reason: "unreadable request" })); return; }
-    const out = Array.isArray(input) ? input.slice(0, 500).map((x) => x?.operation === "reentry" ? reentryEligibility(x as ReentryRequest) : gradeRequest(x as GraderRequest)) : gradeRequest(input as GraderRequest);
-    process.stdout.write(JSON.stringify(out));
+    const run = async (x: any) => {
+      if (x?.operation === "reentry") return reentryEligibility(x as ReentryRequest);
+      const reply=gradeRequest(x as GraderRequest), d=reply.decision;
+      // Operator-selected, per owned persisted opt-in; never a field accepted from client JSON.
+      if(process.env.OPENPATH_GEOMETRY_ROOT && process.env.OPENPATH_GEOMETRY_PYTHON && d?.working) {
+        const working=await geometryWorking(d.questionId,d.response.working,d.response.raw,d.working,{root:process.env.OPENPATH_GEOMETRY_ROOT,python:process.env.OPENPATH_GEOMETRY_PYTHON});
+        return {...reply,decision:{...d,working}};
+      }
+      return reply;
+    };
+    try { const out=Array.isArray(input)?await Promise.all(input.slice(0,500).map(run)):await run(input); process.stdout.write(JSON.stringify(out)); }
+    finally { stopGeometryWorkers(); }
   });
 }
