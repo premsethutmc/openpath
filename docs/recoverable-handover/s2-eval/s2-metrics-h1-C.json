@@ -1,0 +1,926 @@
+{
+ "cohort": "C",
+ "label": "negative controls",
+ "journeys": 80,
+ "aggregate": {
+  "metrics": "synthetic-experiment-metrics@1",
+  "journeys": 80,
+  "ends": {
+   "stalled": 78,
+   "retention-passed": 2
+  },
+  "diagnosis": {
+   "correctlyIdentifiedWeak": {
+    "n": 86,
+    "d": 122,
+    "rate": 0.705
+   },
+   "missedWeak": {
+    "n": 36,
+    "d": 122,
+    "rate": 0.295
+   },
+   "falseDiagnosis": {
+    "n": 57,
+    "d": 143,
+    "rate": 0.399
+   },
+   "misconceptionClassificationAccuracy": {
+    "n": 3,
+    "d": 6,
+    "rate": 0.5
+   },
+   "establishedOutsideSimulatorModel": {
+    "n": 20,
+    "d": 26,
+    "rate": 0.769
+   },
+   "missedMisconceptions": {
+    "n": 38,
+    "d": 41,
+    "rate": 0.927
+   },
+   "missedCatalogued": {
+    "n": 38,
+    "d": 41,
+    "rate": 0.927
+   },
+   "missedUnrecognised": {
+    "n": 0,
+    "d": 0,
+    "rate": null
+   }
+  },
+  "teaching": {
+   "appropriate": {
+    "n": 187,
+    "d": 198,
+    "rate": 0.944
+   },
+   "unnecessary": {
+    "n": 11,
+    "d": 198,
+    "rate": 0.056
+   },
+   "repeatedIneffective": {
+    "n": 4,
+    "d": 5,
+    "rate": 0.8
+   },
+   "instructionOutcomes": {
+    "none": 132,
+    "full": 74,
+    "partial": 27
+   },
+   "meanGainTaughtKinds": -0.329,
+   "meanGainUntaughtKinds": -0.166,
+   "pairsTaught": 123,
+   "pairsUntaught": 197
+  },
+  "mastery": {
+   "falseAuthoritativeClaims": {
+    "n": 37,
+    "d": 57,
+    "rate": 0.649
+   },
+   "firstClaimAlreadyFalse": {
+    "n": 11,
+    "d": 31,
+    "rate": 0.355
+   },
+   "trueClaimOutlivedKnowledge": {
+    "n": 19,
+    "d": 31,
+    "rate": 0.613
+   },
+   "falseClaimsOnVisitsWithAnswers": {
+    "n": 14,
+    "d": 34,
+    "rate": 0.412
+   },
+   "journeysWithFalseAuthoritativeClaim": {
+    "n": 30,
+    "d": 31,
+    "rate": 0.968
+   },
+   "falseShadowClaims": {
+    "n": 138,
+    "d": 229,
+    "rate": 0.603
+   },
+   "missedCompetenceShadow": {
+    "n": 0,
+    "d": 0,
+    "rate": null
+   },
+   "missedCompetenceAuthoritative": {
+    "n": 0,
+    "d": 0,
+    "rate": null
+   },
+   "crossFamilyLeakage": {
+    "n": 21,
+    "d": 57,
+    "rate": 0.368
+   },
+   "correctAnswerInvalidMethod": {
+    "n": 4,
+    "d": 587,
+    "rate": 0.007
+   },
+   "incorrectAnswerVerifiedWorking": {
+    "n": 0,
+    "d": 596,
+    "rate": 0
+   }
+  },
+  "retention": {
+   "checksCompleted": {
+    "n": 65,
+    "d": 65,
+    "rate": 1
+   },
+   "checksFailed": {
+    "n": 63,
+    "d": 65,
+    "rate": 0.969
+   },
+   "shownButNoDueDate": {
+    "n": 0,
+    "d": 31,
+    "rate": 0
+   },
+   "recoveryTargeting": {
+    "n": 55,
+    "d": 196,
+    "rate": 0.281
+   },
+   "crossFamilyRecovery": {
+    "n": 3,
+    "d": 8,
+    "rate": 0.375
+   },
+   "shownSubSkillNeverSampled": {
+    "n": 56,
+    "d": 102,
+    "rate": 0.549
+   },
+   "arrivedOnShownDateButCheckNotYetDue": {
+    "n": 64,
+    "d": 129,
+    "rate": 0.496
+   },
+   "retentionQuestionsByKind": {
+    "two-step": 57,
+    "modelling": 13,
+    "both-sides": 2
+   }
+  },
+  "efficiency": {
+   "medianQuestionsToFirstDiagnosis": 3,
+   "medianQuestionsPerShownSubSkill": 23,
+   "meanTeachingPerLearner": 2.913,
+   "medianAttemptsPerJourney": 24,
+   "boundedJourneys": {
+    "n": 78,
+    "d": 80,
+    "rate": 0.975
+   }
+  }
+ },
+ "perProfile": {
+  "C01@1.0.0": {
+   "metrics": "synthetic-experiment-metrics@1",
+   "journeys": 20,
+   "ends": {
+    "stalled": 19,
+    "retention-passed": 1
+   },
+   "diagnosis": {
+    "correctlyIdentifiedWeak": {
+     "n": 24,
+     "d": 37,
+     "rate": 0.649
+    },
+    "missedWeak": {
+     "n": 13,
+     "d": 37,
+     "rate": 0.351
+    },
+    "falseDiagnosis": {
+     "n": 0,
+     "d": 24,
+     "rate": 0
+    },
+    "misconceptionClassificationAccuracy": {
+     "n": 3,
+     "d": 4,
+     "rate": 0.75
+    },
+    "establishedOutsideSimulatorModel": {
+     "n": 2,
+     "d": 6,
+     "rate": 0.333
+    },
+    "missedMisconceptions": {
+     "n": 25,
+     "d": 28,
+     "rate": 0.893
+    },
+    "missedCatalogued": {
+     "n": 25,
+     "d": 28,
+     "rate": 0.893
+    },
+    "missedUnrecognised": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    }
+   },
+   "teaching": {
+    "appropriate": {
+     "n": 33,
+     "d": 36,
+     "rate": 0.917
+    },
+    "unnecessary": {
+     "n": 3,
+     "d": 36,
+     "rate": 0.083
+    },
+    "repeatedIneffective": {
+     "n": 2,
+     "d": 2,
+     "rate": 1
+    },
+    "instructionOutcomes": {
+     "none": 52
+    },
+    "meanGainTaughtKinds": -0.035,
+    "meanGainUntaughtKinds": -0.014,
+    "pairsTaught": 22,
+    "pairsUntaught": 58
+   },
+   "mastery": {
+    "falseAuthoritativeClaims": {
+     "n": 6,
+     "d": 6,
+     "rate": 1
+    },
+    "firstClaimAlreadyFalse": {
+     "n": 4,
+     "d": 4,
+     "rate": 1
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 0,
+     "d": 4,
+     "rate": 0
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 6,
+     "d": 6,
+     "rate": 1
+    },
+    "journeysWithFalseAuthoritativeClaim": {
+     "n": 4,
+     "d": 4,
+     "rate": 1
+    },
+    "falseShadowClaims": {
+     "n": 21,
+     "d": 21,
+     "rate": 1
+    },
+    "missedCompetenceShadow": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedCompetenceAuthoritative": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "crossFamilyLeakage": {
+     "n": 6,
+     "d": 6,
+     "rate": 1
+    },
+    "correctAnswerInvalidMethod": {
+     "n": 2,
+     "d": 74,
+     "rate": 0.027
+    },
+    "incorrectAnswerVerifiedWorking": {
+     "n": 0,
+     "d": 190,
+     "rate": 0
+    }
+   },
+   "retention": {
+    "checksCompleted": {
+     "n": 16,
+     "d": 16,
+     "rate": 1
+    },
+    "checksFailed": {
+     "n": 15,
+     "d": 16,
+     "rate": 0.938
+    },
+    "shownButNoDueDate": {
+     "n": 0,
+     "d": 4,
+     "rate": 0
+    },
+    "recoveryTargeting": {
+     "n": 11,
+     "d": 22,
+     "rate": 0.5
+    },
+    "crossFamilyRecovery": {
+     "n": 0,
+     "d": 2,
+     "rate": 0
+    },
+    "shownSubSkillNeverSampled": {
+     "n": 0,
+     "d": 7,
+     "rate": 0
+    },
+    "arrivedOnShownDateButCheckNotYetDue": {
+     "n": 16,
+     "d": 32,
+     "rate": 0.5
+    },
+    "retentionQuestionsByKind": {
+     "two-step": 14,
+     "modelling": 5,
+     "both-sides": 1
+    }
+   },
+   "efficiency": {
+    "medianQuestionsToFirstDiagnosis": 3,
+    "medianQuestionsPerShownSubSkill": 23,
+    "meanTeachingPerLearner": 2.6,
+    "medianAttemptsPerJourney": 20,
+    "boundedJourneys": {
+     "n": 19,
+     "d": 20,
+     "rate": 0.95
+    }
+   }
+  },
+  "C02@1.0.0": {
+   "metrics": "synthetic-experiment-metrics@1",
+   "journeys": 20,
+   "ends": {
+    "stalled": 20
+   },
+   "diagnosis": {
+    "correctlyIdentifiedWeak": {
+     "n": 18,
+     "d": 21,
+     "rate": 0.857
+    },
+    "missedWeak": {
+     "n": 3,
+     "d": 21,
+     "rate": 0.143
+    },
+    "falseDiagnosis": {
+     "n": 0,
+     "d": 18,
+     "rate": 0
+    },
+    "misconceptionClassificationAccuracy": {
+     "n": 0,
+     "d": 1,
+     "rate": 0
+    },
+    "establishedOutsideSimulatorModel": {
+     "n": 0,
+     "d": 1,
+     "rate": 0
+    },
+    "missedMisconceptions": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedCatalogued": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedUnrecognised": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    }
+   },
+   "teaching": {
+    "appropriate": {
+     "n": 42,
+     "d": 42,
+     "rate": 1
+    },
+    "unnecessary": {
+     "n": 0,
+     "d": 42,
+     "rate": 0
+    },
+    "repeatedIneffective": {
+     "n": 2,
+     "d": 2,
+     "rate": 1
+    },
+    "instructionOutcomes": {
+     "none": 44
+    },
+    "meanGainTaughtKinds": 0,
+    "meanGainUntaughtKinds": 0,
+    "pairsTaught": 18,
+    "pairsUntaught": 62
+   },
+   "mastery": {
+    "falseAuthoritativeClaims": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "firstClaimAlreadyFalse": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "journeysWithFalseAuthoritativeClaim": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "falseShadowClaims": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedCompetenceShadow": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedCompetenceAuthoritative": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "crossFamilyLeakage": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "correctAnswerInvalidMethod": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "incorrectAnswerVerifiedWorking": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    }
+   },
+   "retention": {
+    "checksCompleted": {
+     "n": 5,
+     "d": 5,
+     "rate": 1
+    },
+    "checksFailed": {
+     "n": 5,
+     "d": 5,
+     "rate": 1
+    },
+    "shownButNoDueDate": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "recoveryTargeting": {
+     "n": 2,
+     "d": 2,
+     "rate": 1
+    },
+    "crossFamilyRecovery": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "shownSubSkillNeverSampled": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "arrivedOnShownDateButCheckNotYetDue": {
+     "n": 5,
+     "d": 10,
+     "rate": 0.5
+    },
+    "retentionQuestionsByKind": {
+     "two-step": 5
+    }
+   },
+   "efficiency": {
+    "medianQuestionsToFirstDiagnosis": 3,
+    "medianQuestionsPerShownSubSkill": null,
+    "meanTeachingPerLearner": 2.2,
+    "medianAttemptsPerJourney": 11,
+    "boundedJourneys": {
+     "n": 20,
+     "d": 20,
+     "rate": 1
+    }
+   }
+  },
+  "C03@1.0.0": {
+   "metrics": "synthetic-experiment-metrics@1",
+   "journeys": 20,
+   "ends": {
+    "stalled": 19,
+    "retention-passed": 1
+   },
+   "diagnosis": {
+    "correctlyIdentifiedWeak": {
+     "n": 44,
+     "d": 64,
+     "rate": 0.688
+    },
+    "missedWeak": {
+     "n": 20,
+     "d": 64,
+     "rate": 0.313
+    },
+    "falseDiagnosis": {
+     "n": 0,
+     "d": 44,
+     "rate": 0
+    },
+    "misconceptionClassificationAccuracy": {
+     "n": 0,
+     "d": 1,
+     "rate": 0
+    },
+    "establishedOutsideSimulatorModel": {
+     "n": 5,
+     "d": 6,
+     "rate": 0.833
+    },
+    "missedMisconceptions": {
+     "n": 13,
+     "d": 13,
+     "rate": 1
+    },
+    "missedCatalogued": {
+     "n": 13,
+     "d": 13,
+     "rate": 1
+    },
+    "missedUnrecognised": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    }
+   },
+   "teaching": {
+    "appropriate": {
+     "n": 57,
+     "d": 57,
+     "rate": 1
+    },
+    "unnecessary": {
+     "n": 0,
+     "d": 57,
+     "rate": 0
+    },
+    "repeatedIneffective": {
+     "n": 0,
+     "d": 1,
+     "rate": 0
+    },
+    "instructionOutcomes": {
+     "full": 65
+    },
+    "meanGainTaughtKinds": -0.048,
+    "meanGainUntaughtKinds": -0.042,
+    "pairsTaught": 39,
+    "pairsUntaught": 41
+   },
+   "mastery": {
+    "falseAuthoritativeClaims": {
+     "n": 11,
+     "d": 11,
+     "rate": 1
+    },
+    "firstClaimAlreadyFalse": {
+     "n": 7,
+     "d": 7,
+     "rate": 1
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 0,
+     "d": 7,
+     "rate": 0
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 7,
+     "d": 7,
+     "rate": 1
+    },
+    "journeysWithFalseAuthoritativeClaim": {
+     "n": 7,
+     "d": 7,
+     "rate": 1
+    },
+    "falseShadowClaims": {
+     "n": 27,
+     "d": 42,
+     "rate": 0.643
+    },
+    "missedCompetenceShadow": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedCompetenceAuthoritative": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "crossFamilyLeakage": {
+     "n": 11,
+     "d": 11,
+     "rate": 1
+    },
+    "correctAnswerInvalidMethod": {
+     "n": 1,
+     "d": 124,
+     "rate": 0.008
+    },
+    "incorrectAnswerVerifiedWorking": {
+     "n": 0,
+     "d": 210,
+     "rate": 0
+    }
+   },
+   "retention": {
+    "checksCompleted": {
+     "n": 21,
+     "d": 21,
+     "rate": 1
+    },
+    "checksFailed": {
+     "n": 20,
+     "d": 21,
+     "rate": 0.952
+    },
+    "shownButNoDueDate": {
+     "n": 0,
+     "d": 7,
+     "rate": 0
+    },
+    "recoveryTargeting": {
+     "n": 27,
+     "d": 29,
+     "rate": 0.931
+    },
+    "crossFamilyRecovery": {
+     "n": 0,
+     "d": 3,
+     "rate": 0
+    },
+    "shownSubSkillNeverSampled": {
+     "n": 3,
+     "d": 18,
+     "rate": 0.167
+    },
+    "arrivedOnShownDateButCheckNotYetDue": {
+     "n": 20,
+     "d": 41,
+     "rate": 0.488
+    },
+    "retentionQuestionsByKind": {
+     "two-step": 18,
+     "modelling": 4
+    }
+   },
+   "efficiency": {
+    "medianQuestionsToFirstDiagnosis": 3,
+    "medianQuestionsPerShownSubSkill": 26,
+    "meanTeachingPerLearner": 3.25,
+    "medianAttemptsPerJourney": 26,
+    "boundedJourneys": {
+     "n": 19,
+     "d": 20,
+     "rate": 0.95
+    }
+   }
+  },
+  "C04@1.0.0": {
+   "metrics": "synthetic-experiment-metrics@1",
+   "journeys": 20,
+   "ends": {
+    "stalled": 20
+   },
+   "diagnosis": {
+    "correctlyIdentifiedWeak": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedWeak": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "falseDiagnosis": {
+     "n": 57,
+     "d": 57,
+     "rate": 1
+    },
+    "misconceptionClassificationAccuracy": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "establishedOutsideSimulatorModel": {
+     "n": 13,
+     "d": 13,
+     "rate": 1
+    },
+    "missedMisconceptions": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedCatalogued": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedUnrecognised": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    }
+   },
+   "teaching": {
+    "appropriate": {
+     "n": 55,
+     "d": 63,
+     "rate": 0.873
+    },
+    "unnecessary": {
+     "n": 8,
+     "d": 63,
+     "rate": 0.127
+    },
+    "repeatedIneffective": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "instructionOutcomes": {
+     "none": 36,
+     "partial": 27,
+     "full": 9
+    },
+    "meanGainTaughtKinds": -0.861,
+    "meanGainUntaughtKinds": -0.841,
+    "pairsTaught": 44,
+    "pairsUntaught": 36
+   },
+   "mastery": {
+    "falseAuthoritativeClaims": {
+     "n": 20,
+     "d": 40,
+     "rate": 0.5
+    },
+    "firstClaimAlreadyFalse": {
+     "n": 0,
+     "d": 20,
+     "rate": 0
+    },
+    "trueClaimOutlivedKnowledge": {
+     "n": 19,
+     "d": 20,
+     "rate": 0.95
+    },
+    "falseClaimsOnVisitsWithAnswers": {
+     "n": 1,
+     "d": 21,
+     "rate": 0.048
+    },
+    "journeysWithFalseAuthoritativeClaim": {
+     "n": 19,
+     "d": 20,
+     "rate": 0.95
+    },
+    "falseShadowClaims": {
+     "n": 90,
+     "d": 166,
+     "rate": 0.542
+    },
+    "missedCompetenceShadow": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "missedCompetenceAuthoritative": {
+     "n": 0,
+     "d": 0,
+     "rate": null
+    },
+    "crossFamilyLeakage": {
+     "n": 4,
+     "d": 40,
+     "rate": 0.1
+    },
+    "correctAnswerInvalidMethod": {
+     "n": 1,
+     "d": 389,
+     "rate": 0.003
+    },
+    "incorrectAnswerVerifiedWorking": {
+     "n": 0,
+     "d": 196,
+     "rate": 0
+    }
+   },
+   "retention": {
+    "checksCompleted": {
+     "n": 23,
+     "d": 23,
+     "rate": 1
+    },
+    "checksFailed": {
+     "n": 23,
+     "d": 23,
+     "rate": 1
+    },
+    "shownButNoDueDate": {
+     "n": 0,
+     "d": 20,
+     "rate": 0
+    },
+    "recoveryTargeting": {
+     "n": 15,
+     "d": 143,
+     "rate": 0.105
+    },
+    "crossFamilyRecovery": {
+     "n": 3,
+     "d": 3,
+     "rate": 1
+    },
+    "shownSubSkillNeverSampled": {
+     "n": 53,
+     "d": 77,
+     "rate": 0.688
+    },
+    "arrivedOnShownDateButCheckNotYetDue": {
+     "n": 23,
+     "d": 46,
+     "rate": 0.5
+    },
+    "retentionQuestionsByKind": {
+     "two-step": 20,
+     "modelling": 4,
+     "both-sides": 1
+    }
+   },
+   "efficiency": {
+    "medianQuestionsToFirstDiagnosis": 26,
+    "medianQuestionsPerShownSubSkill": 22.25,
+    "meanTeachingPerLearner": 3.6,
+    "medianAttemptsPerJourney": 43,
+    "boundedJourneys": {
+     "n": 20,
+     "d": 20,
+     "rate": 1
+    }
+   }
+  }
+ }
+}
