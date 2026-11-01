@@ -1,0 +1,267 @@
+{
+  "authority": "geometry-reasoner@foundation-1",
+  "cases": [
+    {
+      "id": "R01",
+      "title": "Correct answer with valid reasoning",
+      "oracle": "valid",
+      "verdict": "verified",
+      "firstInvalid": null,
+      "correct": true,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        },
+        {
+          "classification": "verified",
+          "justification": "Adjacent angles on a straight line sum to 180°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R02",
+      "title": "Correct answer without working (the final claim alone)",
+      "oracle": "unjustified",
+      "verdict": "unsupported",
+      "firstInvalid": null,
+      "correct": null,
+      "steps": [
+        {
+          "classification": "unsupported",
+          "justification": "Supply a supported rule and its intermediate steps; entailment alone is not demonstrated reasoning."
+        }
+      ],
+      "outcome": "abstains"
+    },
+    {
+      "id": "R03",
+      "title": "Correct answer with invalid reasoning",
+      "oracle": "invalid",
+      "verdict": "invalid",
+      "firstInvalid": 0,
+      "correct": false,
+      "steps": [
+        {
+          "classification": "invalid",
+          "justification": "The established angle measure is 75°, not 85°."
+        },
+        {
+          "classification": "unsupported",
+          "justification": "The cited rule has not been justified from the givens and earlier accepted steps. Show an intermediate step or clarify the rule; this is not evidence that the method is false."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R04",
+      "title": "Incorrect answer with valid partial reasoning",
+      "oracle": "invalid",
+      "verdict": "invalid",
+      "firstInvalid": 1,
+      "correct": false,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        },
+        {
+          "classification": "invalid",
+          "justification": "The established angle measure is 105°, not 115°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R05",
+      "title": "First invalid geometric step",
+      "oracle": "invalid",
+      "verdict": "invalid",
+      "firstInvalid": 0,
+      "correct": false,
+      "steps": [
+        {
+          "classification": "invalid",
+          "justification": "The established angle measure is 75°, not 65°."
+        },
+        {
+          "classification": "invalid",
+          "justification": "The established angle measure is 105°, not 115°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R06",
+      "title": "Alternative valid reasoning path (vertically opposite instead of straight line)",
+      "oracle": "valid",
+      "verdict": "verified",
+      "firstInvalid": null,
+      "correct": true,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "Vertically opposite angles formed by two intersecting lines are equal."
+        },
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R06b",
+      "title": "The other valid path (straight line)",
+      "oracle": "valid",
+      "verdict": "verified",
+      "firstInvalid": null,
+      "correct": true,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "Adjacent angles on a straight line sum to 180°."
+        },
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R07",
+      "title": "Exterior-angle theorem with explicit givens",
+      "oracle": "valid",
+      "verdict": "verified",
+      "firstInvalid": null,
+      "correct": true,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "An exterior angle equals the sum of the two opposite interior angles."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R08",
+      "title": "Missing prerequisite (the triangle is not given as nondegenerate)",
+      "oracle": "not-established",
+      "verdict": "missing-assumption",
+      "firstInvalid": null,
+      "correct": null,
+      "steps": [
+        {
+          "classification": "missing-assumption",
+          "justification": "The conclusion may follow after these assumptions or proof obligations are established."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R09",
+      "title": "Incorrect application of the exterior-angle theorem (adds the adjacent interior angle)",
+      "oracle": "invalid",
+      "verdict": "invalid",
+      "firstInvalid": 1,
+      "correct": false,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        },
+        {
+          "classification": "invalid",
+          "justification": "The established angle measure is 105°, not 115°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R10",
+      "title": "Supplementary taken for vertically opposite",
+      "oracle": "invalid",
+      "verdict": "invalid",
+      "firstInvalid": 0,
+      "correct": false,
+      "steps": [
+        {
+          "classification": "invalid",
+          "justification": "The established angle measure is 60°, not 120°."
+        },
+        {
+          "classification": "invalid",
+          "justification": "The established angle measure is 70°, not 10°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R11",
+      "title": "Diagram-dependent claim: C and D are not GIVEN as a linear pair",
+      "oracle": "not-established",
+      "verdict": "unsupported",
+      "firstInvalid": null,
+      "correct": null,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        },
+        {
+          "classification": "unsupported",
+          "justification": "The cited rule has not been justified from the givens and earlier accepted steps. Show an intermediate step or clarify the rule; this is not evidence that the method is false."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R12a",
+      "title": "A valid solution in one order",
+      "oracle": "valid",
+      "verdict": "verified",
+      "firstInvalid": null,
+      "correct": true,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "Vertically opposite angles formed by two intersecting lines are equal."
+        },
+        {
+          "classification": "verified",
+          "justification": "Adjacent angles on a straight line sum to 180°."
+        },
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        }
+      ],
+      "outcome": "agrees"
+    },
+    {
+      "id": "R12b",
+      "title": "The same solution with the steps in a different order",
+      "oracle": "valid",
+      "verdict": "verified",
+      "firstInvalid": null,
+      "correct": true,
+      "steps": [
+        {
+          "classification": "verified",
+          "justification": "Adjacent angles on a straight line sum to 180°."
+        },
+        {
+          "classification": "verified",
+          "justification": "Vertically opposite angles formed by two intersecting lines are equal."
+        },
+        {
+          "classification": "verified",
+          "justification": "The interior angles of a nondegenerate triangle sum to 180°."
+        }
+      ],
+      "outcome": "agrees"
+    }
+  ]
+}

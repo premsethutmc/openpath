@@ -1,0 +1,38 @@
+{
+  "implementationCommit": "f6e2720",
+  "baseline": "98f2efb",
+  "mathematicsTypecheck": {
+    "baseline": 188,
+    "current": 188,
+    "new": []
+  },
+  "mainTypecheck": "pass",
+  "yearBuild": "pass",
+  "pythonTests": 56,
+  "djangoAggregate": 32,
+  "djangoFinalParserChecks": 4,
+  "frontendAggregate": 36,
+  "finalTrustedBoundaryTests": 5,
+  "learningAggregate": {
+    "passInitially": 48,
+    "initialFixtureFailures": 5,
+    "completeWorkerFileAfterRepair": {
+      "pass": 7,
+      "fail": 0
+    }
+  },
+  "graderInputs": 210,
+  "pythonInputs": 11,
+  "bundleSha256": "afe26422ff4638cb822c74c250048ab01039bd2be1aeef518664dbb7040ab612",
+  "phone": {
+    "passed": true,
+    "topics": [],
+    "attempted": 0,
+    "events": 2,
+    "phone": "390x844",
+    "freshLogin": true,
+    "geometryWorking": "verified",
+    "gradingPolicy": "grading-policy@1"
+  },
+  "phoneScope": "one actual geometry submission, existing concept lesson and figure, fresh-login persistence and reordered replay; preceding eight-topic journey not repeated"
+}

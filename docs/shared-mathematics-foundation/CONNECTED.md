@@ -1,5 +1,7 @@
 # Connected foundation continuation
 
+Historical connected slice at `98f2efb`. [The subsequent geometry-working continuation](GEOMETRY-WORKING.md) connects a bounded, corrected proof authority; unsupported broader methods remain guarded.
+
 This continues local commit `49e0e1d`; it does not replace the learning engine. The bounded connected slice is implemented and exercised in the actual year UI and Django event store. It is not completion of the mathematics curriculum or a claim that every existing explanation is adequate. Nothing is published, deployed or globally enabled.
 
 ## Learner behavior

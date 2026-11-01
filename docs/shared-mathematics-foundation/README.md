@@ -1,5 +1,7 @@
 # Shared mathematics foundation — local implementation
 
+Current continuation: [trusted geometry working, safety boundary and validation](GEOMETRY-WORKING.md).
+
 The current connected continuation is described in [CONNECTED.md](CONNECTED.md), including a reuse map, real persisted year-flow journeys, opt-in grading and remaining gaps. No production flag is globally enabled. The sections below record the initial implementation through `49e0e1d`; its preview-only and teaching limitations are superseded where the connected report says so.
 
 ## Pinned inputs
