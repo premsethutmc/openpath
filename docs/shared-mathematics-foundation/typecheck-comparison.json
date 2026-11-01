@@ -1,0 +1,12 @@
+{
+  "baseline": "d8cd680444b27e214c5e0cc7fa0e335c9bb85bf3",
+  "implementation": "bed5dd32a21fb4dea71256bb63440d06c9fd67cd",
+  "config": "frontend/tsconfig.mathematics-integration.json",
+  "normalization": "Relative ../ path prefix and source line/column removed; complete diagnostic text retained.",
+  "baseline_error_count": 189,
+  "implementation_error_count": 188,
+  "new_diagnostics": [],
+  "removed_diagnostics": [
+    "packages/learning/src/geometry-reasoning-g5.test.ts: error TS2307: Cannot find module 'bun:test' or its corresponding type declarations."
+  ]
+}

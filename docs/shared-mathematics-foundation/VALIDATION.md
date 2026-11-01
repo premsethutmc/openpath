@@ -22,7 +22,7 @@ python manage.py test
 python manage.py test family.test_handover
 ```
 
-The mathematics typecheck comparison normalizes source line numbers only and compares complete diagnostic sets against `d8cd680`: baseline 189 errors, implementation 188, zero new diagnostics. The removed diagnostic was the G5 `bun:test` import. Main and English typechecks pass.
+The mathematics typecheck comparison normalizes relative path prefixes and source line/column numbers and compares complete diagnostic sets against `d8cd680`: baseline 189 errors, implementation 188, zero new diagnostics. The removed diagnostic was the G5 `bun:test` import. Main and English typechecks pass. The final comparison is saved in [typecheck-comparison.json](typecheck-comparison.json).
 
 The original full learning run encountered a five-second timeout in E3 differential fuzz under concurrent load. Its focused rerun uses a 60-second timeout; mathematical assertions are unchanged. Historical fixtures needed to omit the new provenance field when simulating old authorities. No quarantine entry or question safety allowlist was broadened.
 
