@@ -321,7 +321,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     <>
       {!embedded && <p className="eyebrow">Skill</p>}
       {embedded ? <h2>{name}</h2> : <h1>{name}</h1>}
-      <div className="year-meta"><span className={`chip status-${statusClass(ev.status)}`}>{STATUS_WORD[ev.status]}</span></div>
+      <div className="year-meta"><span className={`chip status-${ms.requirementsMet === false ? "active" : statusClass(ev.status)}`}>{ms.requirementsMet === false ? "More evidence needed" : STATUS_WORD[ev.status]}</span></div>
       {stepper}
     </>
   );

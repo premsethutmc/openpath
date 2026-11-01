@@ -120,12 +120,12 @@ function pathwayNextActivity(records: LearnerRecords, ev: (id: string) => SkillE
   if (!graph.byId.has(target) || !moduleFor(target)) return stop("This target does not yet have a supported learning module.");
   const route = records.readinessRoute ? { ids: records.readinessRoute, error: false } : pathwayRoute(target);
   if (route.error) return stop("This prerequisite route needs review before it can guide learning.", target);
-  const pendingTeaching = new Set(hypotheses(records).filter((h) => h.status === "established" && !h.teaching.deliveredAt).map((h) => h.scope.observedIn));
+  const unresolved = new Set(hypotheses(records).filter((h) => h.status === "established").flatMap((h) => [h.scope.observedIn, ...(h.scope.about ? [h.scope.about] : [])]));
   // The shared route is already in prerequisite order and cycle-checked. No second graph walk.
   for (const id of route.ids) {
     const e = ev(id), m = moduleFor(id);
     const ms = m ? at?.module?.(id) ?? moduleState(id, records, e, at?.now ?? 0, at?.session ?? "", null, ev) : null;
-    const shown = ["independent", "transfer", "verified"].includes(e.status) && !e.recoveryRequired && e.retention !== "due" && !pendingTeaching.has(id);
+    const shown = ["independent", "transfer", "verified"].includes(e.status) && !e.recoveryRequired && e.retention !== "due" && !unresolved.has(id);
     if (shown && ms?.requirementsMet !== false) continue;
     if (!m) return stop(`A prerequisite, ${graph.get(id).name}, has no supported module yet.`, target);
     if (!ms || ["pause", "unavailable", "waiting", "done"].includes(ms.phase)) return stop(ms?.reason ?? "No safe learning opportunity is available.", id);

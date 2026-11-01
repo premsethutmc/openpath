@@ -4,10 +4,11 @@ import { LINEAR_EQUATIONS_CONFIG } from "./subskill-evidence";
 import { TRIANGLE_PROPERTIES_CONFIG, ANGLE_PAIRS_CONFIG } from "./subskill-config-geometry";
 import { ADDITION_CONFIG } from "./subskill-config-addition";
 import { pathwayRoute } from "./plan";
-import { isQuestion } from "./content";
-import { moduleState } from "./intervention";
+import { isQuestion, moduleFor } from "./content";
+import { moduleState, teachable, teachingStatus, contentReviewOf } from "./intervention";
 import { readRecords, type LearnerRecords, type HandoverAcknowledgement, type LearningRecord } from "./records";
 import type { WrittenMark } from "./written";
+import { hypothesesFor, discriminatingProbe, teachingMatchesMisconception } from "./hypotheses";
 import type { SkillEvidence } from "./evidence";
 const configs = [LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ANGLE_PAIRS_CONFIG, ADDITION_CONFIG];
 export function pathwayRecords(learner: string, events: readonly { kind: string }[], marks: readonly WrittenMark[] = [], acknowledgements: readonly HandoverAcknowledgement[] = []) {
@@ -31,7 +32,27 @@ export function pathwayRecords(learner: string, events: readonly { kind: string 
 }
 export function pathwayModule(competency: string, learner: string, events: readonly { kind: string }[], records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string) {
   const ordinary = moduleState(competency, records, evidence(competency), now, session, null, evidence);
-  const config = records.pathway?.active && records.readinessRoute?.includes(competency) && configs.find((c) => c.competency === competency);
+  const active = records.pathway?.active && records.readinessRoute?.includes(competency);
+  if (!active) return ordinary;
+  // A broad answer count cannot clear a diagnosed gap. Keep the existing hypotheses,
+  // content gates and discriminating selector; only connect their outstanding obligation.
+  const gaps = hypothesesFor(competency, records).filter((h) => h.status === "established");
+  const gap = gaps.find((h) => h.teachingDue) ?? gaps[0];
+  if (gap?.claim) {
+    const pending = { ...ordinary, requirementsMet: false, question: null, strategy: null, decision: null, why: "foundation-misconception-resolution@1" };
+    const m = moduleFor(competency);
+    if (gap.teachingDue) {
+      const strategy = m?.strategies.find((s) => teachingMatchesMisconception(s, gap.scope.question, gap.claim!.explanation, competency, gap.scope.about)
+        && teachable(m, s, [gap.claim!.explanation])
+        && !records.teaching.some((t) => t.competency === competency && t.strategy === s.id && t.at > (gap.provenance.established ?? "")));
+      if (strategy && m) return { ...pending, phase: "chapter" as const, strategy, teachingReview: teachingStatus(m, strategy), contentReview: contentReviewOf(m, strategy, [gap.claim.explanation]), reason: `${gap.claim.says} Review this kind of problem, then answer a fresh question that checks this misunderstanding.` };
+      return { ...pending, phase: "unavailable" as const, reason: "This diagnosed gap still needs attention, but no eligible explanation for it is available here. This is a content limitation, not a learner failure. Review a supported lesson or choose another goal; the gap remains open." };
+    }
+    const probe = discriminatingProbe(gap, records);
+    if (probe) return { ...pending, phase: "check" as const, question: probe, activity: "check" as const, context: "foundation:resolution", reason: "One fresh question on your own to check the diagnosed misunderstanding. Other skills' answers cannot resolve it." };
+    return { ...pending, phase: "unavailable" as const, reason: "The diagnosed misunderstanding has no fresh supported resolution question available. Your work is saved; review a supported lesson or choose another goal. The gap remains open." };
+  }
+  const config = configs.find((c) => c.competency === competency);
   if (!config) return ordinary;
   const plan = foundationPlan({ version: FOUNDATION_POLICY, config, placement: "readiness", requirements: config.core.map((skill) => ({ skill, method: false })) }, learner, events, now, { trustedOnly: true });
   return { ...withFoundation(ordinary, plan), requirementsMet: plan.status === "shown" };

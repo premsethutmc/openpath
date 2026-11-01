@@ -78,7 +78,11 @@ test("untrusted decisions cannot satisfy coverage; unsupported method requiremen
   const forged = events(s).map((e) => e.record === "attempt" ? { ...e, decision: { ...e.decision!, decidedBy: "client" } } : e);
   assert.notEqual(foundationPlan(p, s.learnerId, forged, s.now).status, "shown");
   const methods = { ...p, requirements: p.requirements.map((r) => ({ ...r, method: true })) };
-  assert.equal(foundationPlan(methods, s.learnerId, events(s), s.now).status, "unavailable");
+  const supported = foundationPlan(methods, s.learnerId, events(s), s.now);
+  assert.equal(supported.status, "method-needed"); assert.ok(supported.question);
+  assert.ok(supported.question.startsWith("gen:ahtri:"));
+  const absent = { ...p, requirements: [{ skill: "triangle-properties.side-inequality@1", method: true }] };
+  assert.equal(foundationPlan(absent, s.learnerId, events(s), s.now).status, "unavailable");
 });
 
 test("lesson review remains assistance after save/reload", () => {

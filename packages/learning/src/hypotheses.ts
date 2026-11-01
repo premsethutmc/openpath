@@ -15,7 +15,8 @@
  *
  * Permitted downstream use: choosing what to TEACH and what to ASK next. Never credit, evidence, status or mastery.
  */
-import { moduleFor, question } from "./content";
+import { moduleFor, question, type Strategy } from "./content";
+import { addressedMisconception, isMisconceptionSpecific } from "./explanation-review";
 import { independentAttempt, rightAnswer } from "./evidence";
 import { exposureKey, gradeOfQuestion, parseProblem, problemOf, type Phase } from "./families";
 import { formCertified } from "./grading/certify";
@@ -118,6 +119,14 @@ const obs = (a: Attempt, matches: string[]): HypothesisObservation => ({
   mathematical: { credit: a.credit ?? null, assessment: a.assessment ? { source: a.assessment.source, methodExamined: a.assessment.methodExamined, firstError: a.assessment.firstError } : null },
 });
 
+/** Reuse content's declared misconception target or its worked-question family, never its title. */
+export function teachingMatchesMisconception(s: Strategy, original: string, explanation: string, competency: string, about: string | null): boolean {
+  if (isMisconceptionSpecific(s)) return addressedMisconception(s) === explanation;
+  if (about === competency && question(original).competency !== competency) return true;
+  const family = problemOf(familyOf(original) ?? "")?.family;
+  return !!family && problemOf(familyOf(s.check) ?? "")?.family === family;
+}
+
 /**
  * Every hypothesis the records support: one per wrong first answer, alone, that was investigated (the learner answered
  * at least one investigation question about it). Deterministic: a function of the records only.
@@ -139,7 +148,13 @@ export function hypotheses(records: LearnerRecords): LearnerHypothesis[] {
     const about = misconception?.competency ?? null;
     const scopeSkills = [observedIn, ...(about && about !== observedIn ? [about] : [])];
     // teaching that came after it was established, in scope (the skill it was seen in, or the skill it is about)
-    const teachings = established ? records.teaching.filter((t) => scopeSkills.includes(t.competency) && t.at > established) : [];
+    const strict = records.pathway?.active && (records.readinessRoute?.includes(observedIn) || (!!about && records.readinessRoute?.includes(about)));
+    const teachings = established ? records.teaching.filter((t) => {
+      if (!scopeSkills.includes(t.competency) || t.at <= established) return false;
+      if (!strict) return true; // default historical hypothesis interpretation is unchanged
+      const strategy = moduleFor(t.competency)?.strategies.find((s) => s.id === t.strategy);
+      return !!strategy && teachingMatchesMisconception(strategy, a.questionId, misconception!.id, t.competency, about);
+    }) : [];
     const taught = teachings[0] ?? null;
     const id = misconception?.id ?? null;
     const hid = `${id ?? "?"}@${a.questionId}`;
@@ -148,7 +163,7 @@ export function hypotheses(records: LearnerRecords): LearnerHypothesis[] {
       const pr = probeReading(x.questionId, id, x.response);
       if (!pr.discriminates) return [];
       const ind = independentAttempt(x) && !x.hints && !x.solution;
-      const outcome: ResolutionProbe["outcome"] = !ind ? "inconclusive" : pr.reading === "correct" ? "contradicts" : pr.reading === "predicted" ? "supports" : "inconclusive";
+      const outcome: ResolutionProbe["outcome"] = !ind ? "inconclusive" : pr.reading === "correct" && (!strict || rightAnswer(x)) ? "contradicts" : pr.reading === "predicted" ? "supports" : "inconclusive";
       return [{
         contract: RESOLUTION_PROBE_CONTRACT, hypothesis: { id: hid, contract: LEARNER_HYPOTHESIS_CONTRACT, policy: r.policy }, question: x.questionId, family: problemOf(x.questionId)!.family,
         prediction: { explanation: id, values: pr.predicted }, expected: { target: pr.correct, distinguishes: true as const }, response: x.response,
@@ -238,7 +253,7 @@ export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecord
   if (!h.claim) return null;
   const m = moduleFor(h.scope.observedIn);
   if (!m) return null;
-  const seen = new Set(records.attempts.map((x) => exposureKey(x.questionId)));
+  const seen = new Set([...records.attempts, ...(records.pathway?.active && records.readinessRoute?.includes(h.scope.observedIn) ? [...records.unresolved, ...records.pending] : [])].map((x) => exposureKey(x.questionId)));
   const g = records.enrolments.at(-1)?.grade ?? null;
   const listed = [...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check), ...m.retention];
   const pooled = m.pool ? PROBE_PHASES.flatMap((ph) => modulePhasePool(m, ph)) : [];
@@ -246,7 +261,7 @@ export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecord
     if (seen.has(exposureKey(q)) || !selectable(q) || !problemOf(q)) continue;
     if (q.startsWith("gen:") && !formCertified(q)) continue;
     const qg = gradeOfQuestion(q);
-    if (g !== null && qg !== null && qg > g) continue;
+    if (g !== null && qg !== null && qg > g && !(records.pathway?.active && records.readinessRoute?.includes(question(q).competency))) continue;
     if (probeReading(q, h.claim.explanation).discriminates) return q;
   }
   return null;

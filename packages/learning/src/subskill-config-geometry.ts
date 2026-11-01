@@ -1,6 +1,6 @@
 /**
- * G5: geometry evidence dimensions as CONFIGURATION of the domain-neutral sub-skill projection (subskill-projection.ts). SHADOW,
- * non-authoritative, provisional (confirmed against the curriculum and the generator families below; not educator-reviewed).
+ * Geometry evidence dimensions as configuration of the domain-neutral sub-skill projection (subskill-projection.ts).
+ * Used by explicit versioned foundation opt-in; default projection remains shadow. Provisional (confirmed against the curriculum and the generator families below; not educator-reviewed).
  *
  * Two configurations, one per existing competency (sub-skills are not competencies and are not graph nodes; the competencies are unchanged):
  *
@@ -18,10 +18,9 @@
  * Not represented, because no generator family exists for it (MISSING DOMAIN CAPABILITY, not configurable):
  *   - angles around a point as its OWN evidence dimension: it appears only as afcross mode 2 (the other three angles at a crossing), which
  *     the projection cannot separate from the other afcross modes; otherwise only ahtile (MATH.geometry.tessellations, a tiling question);
- *   - multi-step angle reasoning and geometric justification (no family asks for it; the geometry reasoner can judge structured steps but
- *     no generator produces such tasks; the server does record a working-assessment@1 verdict for geometry answers, but it comes from the
- *     algebra derivation authority and is always "unsupported" (no geometry statement contract), and the projection does not check which
- *     authority produced a verdict; see docs/geometry-cross-domain-validation).
+ *   - multi-step reasoning tasks: no generator asks for a full proof. The opt-in trusted working adapter now checks bounded angle
+ *     methods from existing answer questions; the projection binds evidence to the expected checker/domain/version and saved decision.
+ *     Other geometric methods remain unsupported. See docs/shared-mathematics-foundation/GEOMETRY-WORKING.md.
  */
 import type { SubSkillConfig } from "./subskill-projection";
 

@@ -3,7 +3,7 @@ import { moduleFor, question } from "./content";
 import { canonicalOrder, classifyQuestionWith, projectFromEventsWith, type SubSkillConfig } from "./subskill-projection";
 import { graph } from "./graph";
 import { evidenceFor } from "./evidence";
-import { taskStatement } from "./grading/working";
+import { expectedWorkingAuthority } from "./grading/working";
 import { readRecords } from "./records";
 import { questionForRequirement, type ModuleState } from "./intervention";
 export const FOUNDATION_POLICY = "mathematics-foundation@1";
@@ -52,7 +52,7 @@ export function foundationPlan(policy: FoundationPolicy, learner: string, events
   const q = questionForRequirement(m, phase, records, (id) => {
     const c = classifyQuestionWith(policy.config, id);
     return c.kind === "mapped" && c.subSkill.id === need.r.skill
-      && (need.status !== "method-needed" || (!!taskStatement(id) && !question(id).options?.length));
+      && (need.status !== "method-needed" || (!!expectedWorkingAuthority(id) && !question(id).options?.length));
   }, policy.placement ?? "enrolment");
   return result(q ? need.status : "unavailable", need.r.skill, q, q
     ? `${need.s.name}: ${need.status === "unobserved" ? "not yet observed" : need.status === "recovery" ? "recheck the skill whose delayed check failed" : need.status === "retention" ? "a delayed check is due" : need.status === "method-needed" ? "show an intermediate step; answer credit alone does not establish a method" : "more evidence is needed on this skill"}.`

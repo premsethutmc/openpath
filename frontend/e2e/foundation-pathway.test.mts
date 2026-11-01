@@ -6,8 +6,11 @@ import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import { latestReleases } from '../../packages/learning/src/curricula';
 import { graph } from '../../packages/learning/src/graph';
-import { question } from '../../packages/learning/src/content';
-import { learnerState } from '../../packages/learning/src/session';
+import { question, moduleFor } from '../../packages/learning/src/content';
+import { learnerState, make } from '../../packages/learning/src/session';
+import { questionForRequirement } from '../../packages/learning/src/intervention';
+import { probeReading } from '../../packages/learning/src/reasoning';
+import { hypotheses, investigateContext } from '../../packages/learning/src/hypotheses';
 import { withDecisions } from '../../packages/learning/src/records';
 const root=fileURLToPath(new URL('../dist-english/',import.meta.url));
 import { geometryTask } from '../../packages/learning/src/geometry-task';
@@ -110,6 +113,27 @@ try{
   assert.equal(JSON.stringify((withDecisions(reload.events,reload.decisions).find((e:any)=>e.id===attempt.id) as any)?.decision),before);
   assert.deepEqual(learnerState(id,withDecisions(reload.events,reload.decisions),Date.now()).next,learnerState(id,withDecisions([...reload.events].reverse(),reload.decisions),Date.now()).next);
  }
+ if(geometryOnly && process.env.PATHWAY_GAP_CHECK==='1') {
+  const competency='MATH.geometry.triangle-properties';let original='';
+  for(let i=0;i<2;i++) {
+   const data=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+   const state=learnerState(id,withDecisions(data.events,data.decisions??{}),Date.now());
+   const qid=questionForRequirement(moduleFor(competency)!,'check',state.selectionRecords,q=>!q.endsWith(':mc')&&probeReading(q,'third-interior').discriminates,'readiness');assert.ok(qid);
+   const event=make.attempt({learnerId:id,sessionId:`learn:${id}:gap`,at:new Date().toISOString()},qid,probeReading(qid,'third-interior').predicted[0],i?'diagnostic':'check',i?{context:investigateContext(original)}:{});
+   assert.equal((await call(`/pupils/${id}/events/`,{subject:'mathematics',seq:data.count,event})).status,201);original ||= qid;
+  }
+  await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&skill=${competency}`);
+  await page.getByText('More evidence needed',{exact:true}).waitFor();
+  await page.getByText('This diagnosed gap still needs attention',{exact:false}).waitFor();
+  assert.equal(await page.locator('[data-qid]').count(),0,'no unrelated question masquerades as remediation');
+  await page.getByRole('button',{name:'Review a supported lesson',exact:true}).click();await page.locator('.lesson').waitFor();
+  const savedGap=(await call(`/pupils/${id}/events/?subject=mathematics`)).data;
+  const state=learnerState(id,withDecisions(savedGap.events,savedGap.decisions??{}),Date.now());
+  assert.ok(hypotheses(state.selectionRecords).some(h=>h.claim?.explanation==='third-interior'&&h.status==='established'&&h.teachingDue));
+  assert.equal(state.module(competency).phase,'unavailable');assert.equal(state.module(competency).requirementsMet,false);
+  await page.reload();await page.getByText('This diagnosed gap still needs attention',{exact:false}).waitFor();
+  await page.screenshot({path:'/tmp/pathway-browser-shots/foundation-gap.png',fullPage:true});
+ }
  await page.screenshot({path:'/tmp/pathway-browser-shots/geometry-working.png',fullPage:true});
- assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,topics:[...visited],attempted,events:saved.count,phone:'390x844',freshLogin:true,geometryWorking:attempt.decision.working.status,gradingPolicy:attempt.decision.policy}));
+ assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,topics:[...visited],attempted,events:saved.count,phone:'390x844',freshLogin:true,gapFallback:process.env.PATHWAY_GAP_CHECK==='1',geometryWorking:attempt.decision.working.status,gradingPolicy:attempt.decision.policy}));
 }finally{await context.close();await browser.close();server.close();}

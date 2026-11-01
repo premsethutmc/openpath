@@ -82,6 +82,8 @@ test('relevant teaching is followed by a discriminating probe before other cover
  assert.equal(ms.requirementsMet,false);assert.equal(ms.phase,'check');assert.ok(ms.question);
  assert.ok(probeReading(ms.question,c.bug).discriminates);
  assert.equal(ms.context,'foundation:resolution');
+ const unreadable={...records,unresolved:[...records.unresolved,{id:'unreadable-probe',questionId:ms.question!,at:new Date(s.now).toISOString(),assessment:{policy:'assessment@1' as const,answerCorrect:null,methodExamined:false,derivationVerified:false,firstError:null,clarificationRequired:true,aiFallbackUsed:false,unresolved:true,source:'parser' as const}}]};
+ assert.notEqual(discriminatingProbe(h,unreadable),ms.question,'saved unresolved input must not be selected as fresh evidence');
  // Record-level exhaustion fixture: assisted prior exposures cannot supply fresh
  // independent resolution evidence, but do consume every safe selectable variant.
  const seen=[...m.practice,...m.transfer,...m.retention,...m.strategies.map(st=>st.check),
@@ -100,6 +102,8 @@ test('two fresh correct discriminating answers contest a diagnosis without forci
  s.events.push(make.pathway({learnerId:s.learnerId,sessionId:s.session,at:new Date(++s.now).toISOString()},c.config.competency));
  const es=events(s),records=pathwayRecords(s.learnerId,es);
  assert.equal(hypotheses(records)[0].status,'contested');
+ const rejected={...records,attempts:records.attempts.map(a=>candidates.slice(2,4).includes(a.questionId)?{...a,credit:false}:a)};
+ assert.equal(hypotheses(rejected)[0].status,'established','text matching the target cannot override a recorded incorrect verdict');
  const ms=pathwayModule(c.config.competency,s.learnerId,es,records,s.state().evidence,s.now,s.session);
  assert.notEqual(ms.why,'foundation-misconception-resolution@1');
  assert.notEqual(ms.requirementsMet,true,'contesting one misconception does not invent full competency coverage');
