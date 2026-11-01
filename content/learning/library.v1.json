@@ -9578,6 +9578,42 @@
       "jumps": [
        [
         4,
+        5
+       ],
+       [
+        5,
+        6
+       ],
+       [
+        6,
+        7
+       ],
+       [
+        7,
+        8
+       ],
+       [
+        8,
+        9
+       ],
+       [
+        9,
+        10
+       ],
+       [
+        10,
+        11
+       ],
+       [
+        11,
+        12
+       ],
+       [
+        12,
+        13
+       ],
+       [
+        13,
         14
        ]
       ]
@@ -9676,7 +9712,7 @@
       {
        "title": "The method",
        "text": [
-        "Start at the bigger number and count on the other number, one step at a time. Where you stop is the total."
+        "Start at the first number and count on the second number, one step at a time. Do not count the starting number again. Where you stop is the total."
        ],
        "math": [
         "4 + 16 = ?",
@@ -9693,6 +9729,66 @@
         "jumps": [
          [
           4,
+          5
+         ],
+         [
+          5,
+          6
+         ],
+         [
+          6,
+          7
+         ],
+         [
+          7,
+          8
+         ],
+         [
+          8,
+          9
+         ],
+         [
+          9,
+          10
+         ],
+         [
+          10,
+          11
+         ],
+         [
+          11,
+          12
+         ],
+         [
+          12,
+          13
+         ],
+         [
+          13,
+          14
+         ],
+         [
+          14,
+          15
+         ],
+         [
+          15,
+          16
+         ],
+         [
+          16,
+          17
+         ],
+         [
+          17,
+          18
+         ],
+         [
+          18,
+          19
+         ],
+         [
+          19,
           20
          ]
         ]
@@ -9735,15 +9831,15 @@
     },
     {
      "id": "make_ten",
-     "title": "Make a ten first",
+     "title": "Use a ten when it helps",
      "kind": "procedural",
      "needs": [],
      "screens": [
       {
-       "title": "Make a ten first",
+       "title": "Use a ten when it helps",
        "text": [
-        "Break the second number to fill up to 10: 8 + 5 = 8 + 2 + 3 = 10 + 3.",
-        "10 and some more is a teen number: 13."
+        "The two groups have fewer than ten counters, so no full ten is needed.",
+        "Keep 5 counters and add 2 more: 5 + 2 = 7."
        ],
        "math": [
         "5 + 2 = ?",
@@ -9751,7 +9847,8 @@
         "Count on 2: you land on 7."
        ],
        "role": "strategy",
-       "instance": "gen:aaadd:5,2"
+       "instance": "gen:aaadd:5,2",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aaadd:4,1",
@@ -19446,7 +19543,8 @@
       "376 + 453 = ?",
       "Ones: 6 + 3 = 9",
       "Tens: 7 + 5 = 12: write 2, carry 1 hundred",
-      "Hundreds: 3 + 4 + 1 carried = 8"
+      "Hundreds: 3 + 4 + 1 carried = 8",
+      "Put the place values together: 800 + 20 + 9 = 829."
      ],
      "widget": {
       "type": "blocks",
@@ -19581,7 +19679,8 @@
         "502 − 303 = ?",
         "Ones: take 1 ten to make 12 ones; 12 − 3 = 9",
         "Tens: take 1 hundred to make 9 tens; 9 − 0 = 9",
-        "Hundreds: 4 − 3 = 1"
+        "Hundreds: 4 − 3 = 1",
+        "Put the place values together: 100 + 90 + 9 = 199."
        ],
        "widget": {
         "type": "blocks",
@@ -19612,7 +19711,8 @@
         "706 − 640 = ?",
         "Ones: 6 − 0 = 6",
         "Tens: take 1 hundred to make 10 tens; 10 − 4 = 6",
-        "Hundreds: 6 − 6 = 0"
+        "Hundreds: 6 − 6 = 0",
+        "Put the place values together: 0 + 60 + 6 = 66."
        ],
        "widget": {
         "type": "numberline",

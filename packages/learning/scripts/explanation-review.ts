@@ -37,7 +37,8 @@ const [cmd, ...rest] = process.argv.slice(2);
 if (cmd === "sync") {
   const r = load();
   let added = 0, revised = 0;
-  for (const { m, s } of explanations()) {
+  const selected = arg("competency")?.split(",");
+  for (const { m, s } of explanations().filter(({m}) => !selected || selected.includes(m.competency))) {
     {
       const id = explanationId(m.competency, s.id), hash = contentHash(m.competency, s);
       let e = r.entries.find((x) => x.id === id);

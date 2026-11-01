@@ -1432,11 +1432,14 @@ export const B01: Def[] = [
     word: ([a, b]) => `${nm(a)} picks ${nOf(a, FRUIT[(a + b) % FRUIT.length])} from the tree. ${nm(a + 4)} picks ${b} more. How many ${FRUIT[(a + b) % FRUIT.length]} do they have altogether?`,
     teach: {
       idea: "Adding puts two groups together; the total is how many there are in all.",
-      method: "Start at the bigger number and count on the other number, one step at a time. Where you stop is the total.",
-      visual: ([a, b]) => ({ type: "numberline", from: 0, to: 20, marks: [a], jumps: [[a, a + b]] }),
+      method: "Start at the first number and count on the second number, one step at a time. Do not count the starting number again. Where you stop is the total.",
+      visual: ([a, b]) => ({ type: "numberline", from: 0, to: 20, marks: [a], jumps: Array.from({ length: b }, (_, i) => [a + i, a + i + 1]) }),
       alternatives: [
         { id: "ten_frame", title: "Fill ten frames", kind: "conceptual", text: ["Put the first number of counters in a ten frame, then the second number.", "A full frame is 10; count the rest after 10."], visual: ([a, b]) => ({ type: "tenframe", filled: a + b, frames: a + b > 10 ? 2 : 1 }) },
-        { id: "make_ten", title: "Make a ten first", kind: "procedural", text: ["Break the second number to fill up to 10: 8 + 5 = 8 + 2 + 3 = 10 + 3.", "10 and some more is a teen number: 13."] },
+        { id: "make_ten", title: "Use a ten when it helps", kind: "procedural", text: ["Group ten counters when there are enough; keep any remaining ones."], textFor: ([a, b]) => a < 10 && a + b >= 10
+          ? [`Start with ${a}. Take ${10 - a} from the second group of ${b} to make 10.`, `${a} + ${b} = ${a} + ${10 - a} + ${a + b - 10} = 10 + ${a + b - 10} = ${a + b}.`]
+          : a >= 10 ? [`${a} already has one ten and ${a - 10} ones. Add the other ${b} ones.`, `10 + (${a - 10} + ${b}) = 10 + ${a + b - 10} = ${a + b}.`]
+          : [`The two groups have fewer than ten counters, so no full ten is needed.`, `Keep ${a} counters and add ${b} more: ${a} + ${b} = ${a + b}.`] },
       ],
     },
     limits: "Two whole numbers from 1 to 19 with a total up to 20; adding 0 is the zero family, two-digit sums are other families.",

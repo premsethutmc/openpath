@@ -810,6 +810,7 @@ export const B04: Def[] = [
           { id: "ones", op: "add", competency: ADD, inputs: [c.ao, c.bo], value: c.o },
           { id: "tens", op: "add", competency: ADDR, inputs: [c.at, c.bt, c.c1], value: c.t },
           { id: "hundreds", op: "add", competency: MDAS, inputs: [c.ah, c.bh, c.c2], value: c.h },
+          { id: "compose", op: "add", competency: MDAS, inputs: [c.h * 100, (c.t % 10) * 10, c.o % 10], value: c.h * 100 + (c.t % 10) * 10 + c.o % 10 },
         ];
         return { steps, answer: c.h * 100 + (c.t % 10) * 10 + (c.o % 10) };
       }
@@ -818,6 +819,7 @@ export const B04: Def[] = [
         { id: "ones-sub", op: "subtract", competency: SUBR, inputs: [c.ao + 10 * c.b1, c.bo, c.b1], value: c.o },
         { id: "tens-sub", op: "subtract", competency: SUBR, inputs: [c.at - c.b1 + 10 * c.b2, c.bt, c.b2], value: c.t },
         { id: "hundreds-sub", op: "subtract", competency: MDAS, inputs: [c.ah - c.b2, c.bh], value: c.h },
+        { id: "compose", op: "add", competency: MDAS, inputs: [c.h * 100, c.t * 10, c.o], value: c.h * 100 + c.t * 10 + c.o },
       ];
       return { steps, answer: c.h * 100 + c.t * 10 + c.o };
     },
@@ -851,6 +853,7 @@ export const B04: Def[] = [
     variants: () => [],
     explain: (s) => {
       const [x, y, c] = s.inputs.map(Number);
+      if (s.id === "compose") return `Put the place values together: ${x} + ${y} + ${c} = ${s.value}.`;
       if (s.id === "ones") return `Ones: ${x} + ${y} = ${s.value}${Number(s.value) >= 10 ? `: write ${Number(s.value) % 10}, carry 1 ten` : ""}`;
       if (s.id === "tens") return `Tens: ${x} + ${y}${c ? " + 1 carried" : ""} = ${s.value}${Number(s.value) >= 10 ? `: write ${Number(s.value) % 10}, carry 1 hundred` : ""}`;
       if (s.id === "hundreds") return `Hundreds: ${x} + ${y}${c ? " + 1 carried" : ""} = ${s.value}`;

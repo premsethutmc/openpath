@@ -22786,6 +22786,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:b0c86e3dd95385527479fa185412817caf2957bfac9697807ce1b280916b8edb",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-01T07:50:40.672Z",
+      "note": "content changed: the decision on sha256:a1348b6b6190 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:a1348b6b619068b973a9b4c30eb4cad4ea355d3d1e2bda30a02456a13e330ed1"
     }
    ]
   },
@@ -22812,6 +22828,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:fd55397189a4d6a895c6dab153d45203f27abce0516792eb455caeea58475674",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-01T07:50:40.670Z",
+      "note": "content changed: the decision on sha256:56bc7553691f (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:56bc7553691fb86531bab11616a0e82824c6fd6681052a8c146bc219ba4c9d7f"
     }
    ]
   },
@@ -22890,6 +22922,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:329eeb7eb75fcaf6412d0fdbff3642f38e1c513c870ff6eb25f8f1d81df5d164",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-01T07:50:40.667Z",
+      "note": "content changed: the decision on sha256:6d41504a003b (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:6d41504a003b0e45d380cb3abddf1b344988a6d70554a12d34aac11912a2fd4a"
     }
    ]
   },
@@ -27110,6 +27158,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:980c77c4e82bdb8f55cca9bc5ec610f6dc5e1d367fb14833ed428f48465e2598",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-01T07:50:40.676Z",
+      "note": "content changed: the decision on sha256:d8e6e6a3d44f (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:d8e6e6a3d44f43883f1ee2baa7b544075977645fb6e1638f413302bc93b7dc75"
     }
    ]
   },
@@ -27162,6 +27226,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:6d757352e5dd8125895d91f2b807d2f56bd602119f419200428590eb760d77d8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-01T07:50:40.675Z",
+      "note": "content changed: the decision on sha256:3e8e52c61589 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:3e8e52c615892185aa20af4955ba167dfc093cffdbd4a0f93af3f441c957cdcd"
     }
    ]
   },
@@ -27214,6 +27294,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:538e021fe131bd67f002849cdf5a2d12314695e35f576852783b5d1b5b8d1060",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-01T07:50:40.674Z",
+      "note": "content changed: the decision on sha256:36e6338b7f99 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:36e6338b7f99fc08795b93b6d0a42e32f84368a4537da53af9a6cbc126b33c65"
     }
    ]
   },
