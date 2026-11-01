@@ -1,0 +1,347 @@
+[
+  {
+    "file": "src/core/engine/engine.test.ts",
+    "exit": 0,
+    "seconds": 1.68
+  },
+  {
+    "file": "src/english/logic/account.test.ts",
+    "exit": 0,
+    "seconds": 13.27
+  },
+  {
+    "file": "src/english/logic/books.test.ts",
+    "exit": 0,
+    "seconds": 11.98
+  },
+  {
+    "file": "src/english/logic/developer-access.test.ts",
+    "exit": 0,
+    "seconds": 2.37
+  },
+  {
+    "file": "src/english/logic/diagnostics.test.ts",
+    "exit": 0,
+    "seconds": 31.39
+  },
+  {
+    "file": "src/english/logic/essay-demo/presenter.test.ts",
+    "exit": 0,
+    "seconds": 2.18
+  },
+  {
+    "file": "src/english/logic/essay-live/diagnostic-workflow.test.ts",
+    "exit": 0,
+    "seconds": 10.45
+  },
+  {
+    "file": "src/english/logic/essay-live/evidence-labels.test.ts",
+    "exit": 0,
+    "seconds": 1.82
+  },
+  {
+    "file": "src/english/logic/essay-live/pilot-journey.test.ts",
+    "exit": 0,
+    "seconds": 7.05
+  },
+  {
+    "file": "src/english/logic/essay-live/studio-review.test.ts",
+    "exit": 0,
+    "seconds": 8.76
+  },
+  {
+    "file": "src/english/logic/essay-live/studio.test.ts",
+    "exit": 0,
+    "seconds": 8.85
+  },
+  {
+    "file": "src/english/logic/investigation.test.ts",
+    "exit": 0,
+    "seconds": 13.1
+  },
+  {
+    "file": "src/english/logic/journey-reliability.test.ts",
+    "exit": 0,
+    "seconds": 18.62
+  },
+  {
+    "file": "src/english/logic/journey.test.ts",
+    "exit": 0,
+    "seconds": 12.74
+  },
+  {
+    "file": "src/english/logic/learner.test.ts",
+    "exit": 0,
+    "seconds": 21.0
+  },
+  {
+    "file": "src/english/logic/mastery-gate.test.ts",
+    "exit": 0,
+    "seconds": 40.28
+  },
+  {
+    "file": "src/english/logic/mastery-levels.test.ts",
+    "exit": 0,
+    "seconds": 22.99
+  },
+  {
+    "file": "src/english/logic/pilot-boundary.test.ts",
+    "exit": 0,
+    "seconds": 7.7
+  },
+  {
+    "file": "src/english/logic/pilot-content.test.ts",
+    "exit": 0,
+    "seconds": 14.78
+  },
+  {
+    "file": "src/english/logic/pilot-integrity.test.ts",
+    "exit": 0,
+    "seconds": 16.1
+  },
+  {
+    "file": "src/english/logic/pilot.test.ts",
+    "exit": 0,
+    "seconds": 6.17
+  },
+  {
+    "file": "src/english/logic/profile.test.ts",
+    "exit": 0,
+    "seconds": 37.94
+  },
+  {
+    "file": "src/english/logic/spelling-assessment.test.ts",
+    "exit": 0,
+    "seconds": 21.79
+  },
+  {
+    "file": "src/english/logic/spelling.test.ts",
+    "exit": 0,
+    "seconds": 3.21
+  },
+  {
+    "file": "src/english/logic/ux.test.ts",
+    "exit": 0,
+    "seconds": 10.0
+  },
+  {
+    "file": "src/english/logic/wordlists.test.ts",
+    "exit": 0,
+    "seconds": 3.18
+  },
+  {
+    "file": "src/journey/content-corrections.test.ts",
+    "exit": 0,
+    "seconds": 5.8
+  },
+  {
+    "file": "src/journey/content-safety.test.ts",
+    "exit": 0,
+    "seconds": 215.09
+  },
+  {
+    "file": "src/journey/coverage.test.ts",
+    "exit": 0,
+    "seconds": 246.45
+  },
+  {
+    "file": "src/journey/d1e1-journeys.test.ts",
+    "exit": 1,
+    "seconds": 37.27
+  },
+  {
+    "file": "src/journey/foundation.test.ts",
+    "exit": 0,
+    "seconds": 14.9
+  },
+  {
+    "file": "src/journey/gated-mastery.test.ts",
+    "exit": 1,
+    "seconds": 53.9
+  },
+  {
+    "file": "src/journey/geometry-journeys.test.ts",
+    "exit": 0,
+    "seconds": 36.37
+  },
+  {
+    "file": "src/journey/grader-teaching.test.ts",
+    "exit": 1,
+    "seconds": 112.0
+  },
+  {
+    "file": "src/journey/handover.test.ts",
+    "exit": 0,
+    "seconds": 44.16
+  },
+  {
+    "file": "src/journey/linear-equations.test.ts",
+    "exit": 0,
+    "seconds": 187.69
+  },
+  {
+    "file": "src/journey/policies.test.ts",
+    "exit": 0,
+    "seconds": 40.29
+  },
+  {
+    "file": "src/journey/scenarios.test.ts",
+    "exit": 0,
+    "seconds": 227.32
+  },
+  {
+    "file": "src/journey/slice.test.ts",
+    "exit": 0,
+    "seconds": 17.99
+  },
+  {
+    "file": "src/journey/subskill-evidence.test.ts",
+    "exit": 0,
+    "seconds": 12.53
+  },
+  {
+    "file": "src/learning/adaptive-journey.test.ts",
+    "exit": 0,
+    "seconds": 159.46
+  },
+  {
+    "file": "src/learning/adaptive-loop.test.ts",
+    "exit": 0,
+    "seconds": 91.95
+  },
+  {
+    "file": "src/learning/content-system.test.ts",
+    "exit": 0,
+    "seconds": 2192.05
+  },
+  {
+    "file": "src/learning/dashboard.test.ts",
+    "exit": 0,
+    "seconds": 240.82
+  },
+  {
+    "file": "src/learning/engine.test.ts",
+    "exit": 0,
+    "seconds": 46.68
+  },
+  {
+    "file": "src/learning/evidence-contracts.test.ts",
+    "exit": 0,
+    "seconds": 529.56
+  },
+  {
+    "file": "src/learning/generalisation.test.ts",
+    "exit": 0,
+    "seconds": 337.81
+  },
+  {
+    "file": "src/learning/learner-hypothesis.test.ts",
+    "exit": 0,
+    "seconds": 190.2
+  },
+  {
+    "file": "src/learning/mapping.test.ts",
+    "exit": 0,
+    "seconds": 18.41
+  },
+  {
+    "file": "src/learning/mathematics-completion.test.ts",
+    "exit": 0,
+    "seconds": 1358.5
+  },
+  {
+    "file": "src/learning/platform.test.ts",
+    "exit": 0,
+    "seconds": 819.68
+  },
+  {
+    "file": "src/learning/retention-cycle.test.ts",
+    "exit": 0,
+    "seconds": 48.99
+  },
+  {
+    "file": "src/math/experiences/addition.test.ts",
+    "exit": 0,
+    "seconds": 0.44
+  },
+  {
+    "file": "src/mathematics/canonical.test.ts",
+    "exit": 0,
+    "seconds": 1.62
+  },
+  {
+    "file": "src/mathematics/chapter/chapter.test.ts",
+    "exit": 0,
+    "seconds": 2.07
+  },
+  {
+    "file": "src/mathematics/foundation/foundation.test.ts",
+    "exit": 0,
+    "seconds": 2.4
+  },
+  {
+    "file": "src/mathematics/foundation/prerequisites.test.ts",
+    "exit": 0,
+    "seconds": 1.12
+  },
+  {
+    "file": "src/mathematics/journey/journey.test.ts",
+    "exit": 0,
+    "seconds": 2.22
+  },
+  {
+    "file": "src/mathematics/mathematics.test.ts",
+    "exit": 0,
+    "seconds": 1.08
+  },
+  {
+    "file": "src/mathematics/unit/remediation.test.ts",
+    "exit": 0,
+    "seconds": 29.41
+  },
+  {
+    "file": "src/mathematics/unit/unit.test.ts",
+    "exit": 0,
+    "seconds": 3.46
+  },
+  {
+    "file": "src/tamil/adapter.test.ts",
+    "exit": 0,
+    "seconds": 0.42
+  },
+  {
+    "file": "src/tamil/session.test.ts",
+    "exit": 0,
+    "seconds": 0.4
+  },
+  {
+    "file": "src/writing/keyboard-policy.test.ts",
+    "exit": 0,
+    "seconds": 0.34
+  },
+  {
+    "file": "src/writing/practice-round.test.ts",
+    "exit": 0,
+    "seconds": 0.34
+  },
+  {
+    "file": "src/writing/workspace.test.ts",
+    "exit": 0,
+    "seconds": 0.62
+  },
+  {
+    "file": "src/year/grade7-board.test.ts",
+    "exit": 0,
+    "seconds": 8.72
+  },
+  {
+    "file": "src/year/study-time.test.ts",
+    "exit": 0,
+    "seconds": 9.18
+  },
+  {
+    "file": "src/year/topic-session.test.ts",
+    "exit": 0,
+    "seconds": 13.72
+  }
+]
