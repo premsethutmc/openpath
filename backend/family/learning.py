@@ -363,6 +363,9 @@ def checked_learning(event, pupil):
             visits = [e for e in prior if e.get('record') == 'study_session' and e.get('planId') == plan_id]
             if not visits or visits[-1]['phase'] == 'ended':
                 _reject('Open this study session before recording answers; a completed summary is final.')
+        if any(e.get('record') == 'teach' and e.get('rule') == 'foundation-lesson-review@1' and e.get('sessionId') == event['sessionId']
+               and e.get('competency') == q['competency'] for e in prior):
+            event = {**event, 'hints': max(1, event['hints'])}
         if isinstance(event.get('context'), str) and event['context'].startswith('reentry:'):
             from .kernel_grader import run
             from .models import HandoverAcknowledgement
@@ -379,9 +382,6 @@ def checked_learning(event, pupil):
             _reject('Invalid context.')
         if 'assessment' in event and not _assessment_ok(event['assessment'], q):
             _reject('The assessment result is malformed.')
-        if any(e.get('record') == 'teach' and e.get('rule') == 'lesson-review' and e.get('sessionId') == event['sessionId']
-               and e.get('competency') == q['competency'] for e in prior):
-            event = {**event, 'hints': max(1, event['hints'])}
         decided, decision = _decide(event, q, now)
         if decided is not None:
             event = {**event, 'assessment': decided}

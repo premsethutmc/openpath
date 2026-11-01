@@ -1,14 +1,13 @@
 /** Preview-only shared evidence policy; no production switch is changed. */
 import { moduleFor, question } from "./content";
-import { exposureKey, gradeOfQuestion } from "./families";
-import { modulePhasePool } from "./library";
-import { quarantined } from "./question-status";
 import { canonicalOrder, classifyQuestionWith, projectFromEventsWith, type SubSkillConfig } from "./subskill-projection";
+import { graph } from "./graph";
+import { evidenceFor } from "./evidence";
 import { taskStatement } from "./grading/working";
 import { readRecords } from "./records";
-import type { ModuleState } from "./intervention";
+import { questionForRequirement, type ModuleState } from "./intervention";
 export const FOUNDATION_POLICY = "mathematics-foundation@1";
-export interface FoundationPolicy { version: typeof FOUNDATION_POLICY; config: SubSkillConfig; requirements: readonly { skill: string; method: boolean }[] }
+export interface FoundationPolicy { version: typeof FOUNDATION_POLICY; config: SubSkillConfig; requirements: readonly { skill: string; method: boolean }[]; placement?: "readiness" }
 export interface FoundationPlan {
   policy: typeof FOUNDATION_POLICY;
   status: "unobserved" | "weak" | "coverage" | "method-needed" | "recovery" | "retention" | "shown" | "unavailable";
@@ -39,16 +38,22 @@ export function foundationPlan(policy: FoundationPolicy, learner: string, events
   if (!need) return result("shown", null, null, "Each configured requirement has evidence; delayed checks remain scheduled.");
   const m = moduleFor(policy.config.competency);
   if (!m || !need.s) return result("unavailable", need.r.skill, null, "No supported learning opportunity is configured for this skill.");
+  // An explicitly chosen supported target may be above the enrolment grade. Readiness
+  // comes from its own prerequisite evidence, never from an unrelated easy success.
+  if (policy.placement === "readiness") {
+    const ev = evidenceFor(learner, { ...records, attempts: records.attempts.filter((a) => !untrusted.has(a.id)) }, now);
+    const missing = graph.relationsOf(policy.config.competency).filter((r) => r.type === "mandatory" || r.type === "plausible").map((r) => r.from).filter((id) => {
+      const e = ev.get(id);
+      return !["independent", "transfer", "verified"].includes(e.status) || e.recoveryRequired || e.retention === "due";
+    });
+    if (missing.length) return result("unavailable", need.r.skill, null, `This target is open for preparation. First probe or review its prerequisites: ${missing.join(", ")}. Your grade is not a mastery limit; an unrelated success is not readiness evidence.`);
+  }
   const phase = need.status === "retention" ? "retention" : "check";
-  const candidates = [...modulePhasePool(m, phase), ...(phase === "retention" ? m.retention : [...m.diagnostics, ...m.practice, ...m.strategies.map((s) => s.check)])];
-  const seen = new Set([...records.attempts, ...records.unresolved, ...records.pending].map((a) => exposureKey(a.questionId)));
-  const grade = records.enrolments.at(-1)?.grade;
-  const q = candidates.find((id) => {
-    const c = classifyQuestionWith(policy.config, id), g = gradeOfQuestion(id);
-    return c.kind === "mapped" && c.subSkill.id === need.r.skill && !quarantined(id) && !seen.has(exposureKey(id))
-      && (need.status !== "method-needed" || (!!taskStatement(id) && !question(id).options?.length))
-      && question(id).competency === policy.config.competency && (grade === undefined || g === null || g <= grade);
-  }) ?? null;
+  const q = questionForRequirement(m, phase, records, (id) => {
+    const c = classifyQuestionWith(policy.config, id);
+    return c.kind === "mapped" && c.subSkill.id === need.r.skill
+      && (need.status !== "method-needed" || (!!taskStatement(id) && !question(id).options?.length));
+  }, policy.placement ?? "enrolment");
   return result(q ? need.status : "unavailable", need.r.skill, q, q
     ? `${need.s.name}: ${need.status === "unobserved" ? "not yet observed" : need.status === "recovery" ? "recheck the skill whose delayed check failed" : need.status === "retention" ? "a delayed check is due" : need.status === "method-needed" ? "show an intermediate step; answer credit alone does not establish a method" : "more evidence is needed on this skill"}.`
     : `${need.s.name}: no fresh supported question is available. Progress is saved; revisit the lesson for supported practice. This does not establish mastery.`);

@@ -27,7 +27,7 @@ const flow = sc ? new SliceFlow(sc.start, `synthetic-browser-${sc.id}`, T0, { re
 // Explicit local preview only; no production policy is activated.
 if (new URLSearchParams(location.search).get("foundation") === "1") {
   const config = [LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ANGLE_PAIRS_CONFIG, ADDITION_CONFIG].find((c) => c.competency === flow.session.competency);
-  if (config) flow.session.foundation = { version: FOUNDATION_POLICY, config, requirements: config.core.map((skill) => ({ skill, method: false })) };
+  if (config) flow.session.foundation = { version: FOUNDATION_POLICY, config, requirements: config.core.map((skill) => ({ skill, method: false })), ...(new URLSearchParams(location.search).get("placement") === "readiness" ? { placement: "readiness" as const } : {}) };
 }
 const learner = sc?.learner() ?? null;
 const asked = new Set<string>();

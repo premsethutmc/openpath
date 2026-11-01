@@ -115,6 +115,13 @@ class ReentryEligibilityTests(LearningBase):
         q = content()['questions']['eq-d1']
         m = content()['modules'][q['competency']]
         self.assertEqual(self.save(self.enrol()).status_code, 201)
-        self.assertEqual(self.save(self.rec('teach', competency=q['competency'], strategy=m['strategies'][0]['id'], rule='lesson-review')).status_code, 201)
+        self.assertEqual(self.save(self.rec('teach', competency=q['competency'], strategy=m['strategies'][0]['id'], rule='foundation-lesson-review@1')).status_code, 201)
         self.assertEqual(self.save(self.attempt('eq-d1', '2')).status_code, 201)
         self.assertEqual(self.records()[-1]['hints'], 1)
+
+        # Review cannot be disguised as an independent re-entry, even if a caller
+        # has obtained an educator acknowledgement for this same visit.
+        before = len(self.records())
+        r = self.save(self.attempt('eq-d1', '2', context=f"reentry:{q['competency']}"))
+        self.assertEqual(r.status_code, 400)
+        self.assertEqual(len(self.records()), before)

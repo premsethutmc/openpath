@@ -6,7 +6,8 @@ import { TRIANGLE_PROPERTIES_CONFIG } from "../../../packages/learning/src/subsk
 import { ADDITION_CONFIG } from "../../../packages/learning/src/subskill-config-addition";
 import { projectFromEventsWith, type SubSkillConfig } from "../../../packages/learning/src/subskill-projection";
 import { withDecisions } from "../../../packages/learning/src/records";
-import { question } from "../../../packages/learning/src/content";
+import { graph } from "../../../packages/learning/src/graph";
+import { moduleFor, question } from "../../../packages/learning/src/content";
 import { gradeRequest, gradeRequestAsync } from "../../../packages/learning/src/server-grader";
 import { replayWorking } from "../../../packages/learning/src/grading/working";
 import { SliceSession } from "./session";
@@ -85,9 +86,30 @@ test("lesson review remains assistance after save/reload", () => {
   assert.ok(first.question);
   // This is the existing append-only teach record, with a review-specific reason.
   s.events.push({ kind: "learning_record", id: "review-exposure", at: new Date(start).toISOString(), learnerId: s.learnerId, sessionId: s.session,
-    record: "teach", competency: ADDITION_CONFIG.competency, strategy: "worked_steps", rule: "lesson-review" });
+    record: "teach", competency: ADDITION_CONFIG.competency, strategy: "worked_steps", rule: "foundation-lesson-review@1" });
   s.submit(first.question, question(first.question).answer, "check");
   const p = projectFromEventsWith(ADDITION_CONFIG, s.learnerId, JSON.parse(JSON.stringify(events(s))), s.now);
   assert.equal(p.subSkills.reduce((n, x) => n + x.attempts.independentRight, 0), 0);
   assert.equal(p.subSkills.reduce((n, x) => n + x.attempts.assistedRight, 0), 1);
+});
+
+
+test("explicit higher target uses prerequisites rather than an enrolment ceiling", () => {
+  const s = new SliceSession("upward", LINEAR_EQUATIONS_CONFIG.competency, start);
+  s.events.push({ kind: "learning_record", record: "enrol", id: "placement", learnerId: s.learnerId, sessionId: s.session, at: new Date(start).toISOString(), grade: 1, academicYear: "2026-27", curriculum: { id: "placement-fixture", version: "1", hash: "fixture" } });
+  const p = { ...policy(LINEAR_EQUATIONS_CONFIG), placement: "readiness" as const };
+  s.submit("gen:aaadd:1,2", "3", "check");
+  const before = foundationPlan(p, s.learnerId, events(s), s.now);
+  assert.equal(before.status, "unavailable"); assert.match(before.reason, /prerequisites/);
+  for (const r of graph.relationsOf(p.config.competency).filter((r) => r.type === "mandatory" || r.type === "plausible")) {
+    const m = moduleFor(r.from); assert.ok(m, r.from);
+    for (const q of [...m.diagnostics, ...m.practice, ...m.transfer]) {
+      if (["independent", "transfer", "verified"].includes(s.state().evidence(r.from).status)) break;
+      s.submit(q, question(q).answer, "check");
+    }
+    assert.ok(["independent", "transfer", "verified"].includes(s.state().evidence(r.from).status), r.from);
+  }
+  const after = foundationPlan(p, s.learnerId, events(s), s.now);
+  assert.ok(after.question, after.reason); assert.equal(question(after.question).competency, p.config.competency);
+  assert.notEqual(after.status, "shown");
 });

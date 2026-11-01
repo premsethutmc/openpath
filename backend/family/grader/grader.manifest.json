@@ -1,7 +1,7 @@
 {
  "version": 1,
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "1cc1fa4da387a73a6afa97671eecff9ff5a6a3c409635a5cb28a506fbfe0fb7f",
+ "sha256": "7328d2a2b835379a55e7973dfda01c7a839e205013b0e3485157f684fce23a32",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
@@ -165,7 +165,7 @@
   "packages/learning/src/graph.ts": "64298b312a5c25477561a2bd9a692b5ff96584689762d7206508d2f59f49765b",
   "packages/learning/src/hypotheses.ts": "927280ef794d33b22732b52278ff13f7bdd5c85fe9eab625df97df61fe67fd89",
   "packages/learning/src/independent-checker.ts": "237a8b7aa6a764c8c64537d2067f8fe3ef8734979896cddae24f1b01e5f44a6d",
-  "packages/learning/src/intervention.ts": "8ec96d580b172487d874fc1ea9a157f9b613a50c1c8b8a681280d6914dd25afe",
+  "packages/learning/src/intervention.ts": "b2bde2203bc10aa71afa71680c63f36b33275c5e18d98d88e54e828b502962c3",
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/library.ts": "f07daf9dee39ad456d2d23f96fd3ce42ea0012ac0198f7318710decde4b84433",
   "packages/learning/src/linear-algebra-kernel.ts": "bf0cf6bee4d368213485ed580f3676274df23a7172bd6d958cf56dad71c26046",
@@ -181,7 +181,7 @@
   "packages/learning/src/reasoner/outcomes.ts": "c5339dc54468a344d5274d1f6cc2a12c63e22c0a3ac73c14908b4119284b107c",
   "packages/learning/src/reasoner/verifier/verifier.ts": "cea2e801381edd4a1246d72f17dcf2366dc32c8061b628a9f52ce6a8fc64c275",
   "packages/learning/src/reasoning.ts": "9ec5e73bdbafcb576583573e75176fba8f1f029b392efe32453a900fb7af4b2f",
-  "packages/learning/src/records.ts": "e3e67534d389745730d5b18b95936a868e21d97047e17aedf87bff046ea52c6b",
+  "packages/learning/src/records.ts": "1058406a0cb6f62338c75e5e63f161599daecf548caf007854c79b7b96e42e5c",
   "packages/learning/src/reentry-eligibility.ts": "048f870d3b29ff76700b9aea0fd234a88658da08bd637ea6fee7ce0c2ab4ef89",
   "packages/learning/src/review.ts": "3a86049eae136e9622dd3d9a2e201601bbe17919c43e6108e073b451591af9f2",
   "packages/learning/src/rewrite-registry.ts": "0768807c5dd74c0a862bcaee932254f14e786d38e91bf2bfab846b03ab8b1747",
