@@ -215,6 +215,8 @@ Grading semantics did not change: every changed family's specification fingerpri
 
 **Half pictures.** The generator's half-symbol questions may ask about a row with no half picture, so `half_pictures` uses only rows with an odd number of halves for its worked example, guided question and check. Both half-picture texts count in halves (the generator's own method), so they hold when halves do not pair up.
 
+**Open runtime defect (integration finding): the half-symbol mapping.** The authored examples filter above does not fix the runtime mapping. `pictographs.half-symbol@1` maps every `acpicthalf` q = 0 task. The skill should mean "the asked row holds a half picture", that is `halves(ki, s)[j]` odd. That is a joint condition on key, seed and row, which per-index `parameters` cannot express. So 197 of the 472 valid tasks (100 of the 242 served) still earn half-symbol credit for a whole-picture row. Reproducer: `gen:acpicthalf:0,8,1,0`, two halves, one whole picture. `HALF_SYMBOL_ROWS` (`subskill-config-scale.ts`) enumerates the 275 genuine `(ki, s, j)`, ready for a versioned `pictographs-subskills@2` once Codex extends the contract (a tuple list or a problem predicate). The regression tests ("half-symbol runtime" in `scale-pattern.test.ts`) cover classification, projection credit, and assessment/retention/recovery selection. They are `todo` and currently fail for exactly this reason; they become plain tests with the fix.
+
 **Misconception teaching.** Only `fix_assume_tens` (scaled-bars.read) is added: its evidence is a numeric wrong answer and it needs no contrast item. It is never general teaching (`addresses: "assume-tens"`): with `assume-tens` evidence it is eligible for scaled-bars.read only (tested). The contrast-dependent fixes (`one-each`, `face-value`, `value-not-count`) are **not** added: they need contrast declarations, which belong with Codex's diagnosis integration.
 
 **Review status.** `explanation-review.ts sync`: 16 explanations registered and 7 given new revisions, all `pending_review` (demonstration scope). `review.ts sync`: the three modules are draft. No approval was recorded.
@@ -262,6 +264,8 @@ Unmapped with reasons: `acbill`, `acmoneyadd`, `acmoneymul` (money arithmetic, n
 **Journeys** (`conversion-pattern.test.ts`, 22/22): partitions over every served task, partition meanings read from the generated prompts, numeric diagnostic predictions, and for each of 18 skills same-skill fresh checks, a fresh delayed check after 8 days and recovery; plus the blocker reproducer.
 
 ### 6. Decisions for Codex
+
+0. **Mapping contract: joint parameter conditions** (half-symbol runtime defect, section 4). Extend `SubSkillDef` with an enumerated tuple list or a problem predicate. Until then, choose: keep @1 (false credit on whole-picture rows) or unmap `acpicthalf` q = 0 (no false credit, but no genuine half-row evidence either).
 
 1. **Unscoped prerequisite strategies** (`check_what_it_uses` in template modules): should `strategyConnects` exclude `kind: "prerequisite"` or strategies with no scope? Today they count as same-skill teaching by chance (two skills above, and previously `scaled-bars.total`).
 2. **Contrast declarations** for `one-each` (pictographs), `face-value` and `value-not-count` (place value): the candidates on `feat/math-teaching-content` are ready to scope once contrast items are declared.
