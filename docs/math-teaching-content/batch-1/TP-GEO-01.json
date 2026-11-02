@@ -1,0 +1,1658 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP-GEO-01",
+ "title": "The exterior angle of a triangle",
+ "competency": "MATH.geometry.triangle-properties",
+ "competencyName": "Use elementary triangle properties",
+ "grades": [
+  6,
+  6
+ ],
+ "strand": "geometry",
+ "family": "ahext",
+ "familyTitle": "The exterior angle of a triangle",
+ "skill": "Use the exterior-angle theorem: an exterior angle equals the sum of the two interior opposite angles (both directions).",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.geometry.basic-constructions",
+    "type": "mandatory"
+   }
+  ],
+  "knowledge": [
+   "angles on a straight line add to 180° (MATH.geometry.angle-pairs)",
+   "angle sum of a triangle is 180°"
+  ],
+  "note": "SUSPECTED GRAPH GAP: triangle-properties lists only basic-constructions as mandatory; the exterior-angle theorem depends on angles on a straight line (angle-pairs). Not changed here; for Codex/curriculum review."
+ },
+ "explanation": {
+  "concept": [
+   "At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.",
+   "The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together."
+  ],
+  "visual": {
+   "type": "triangle",
+   "angles": [
+    "39°",
+    "112°",
+    ""
+   ],
+   "exterior": "?"
+  },
+  "visualNote": "MISSING VISUAL CAPABILITY: the existing 'triangle' visual draws interior angles only; an extended side with an exterior angle cannot be drawn. Proposed: triangle + extended side + marked exterior angle (field 'exterior'). Until then, text only (structured givens; nothing is read from a picture)."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:ahext:39,112,0",
+   "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 39° and 112°. What is the exterior angle, in degrees?",
+   "lines": [
+    "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
+    "Exterior angle = 180° − 29° = 151° (straight line)",
+    "Check: 39° + 112° = 151° (exterior-angle theorem)"
+   ],
+   "familyExplainSteps": [
+    "Exterior angle = sum of the interior opposite angles: 39° + 112° = 151°"
+   ],
+   "answer": "151"
+  },
+  {
+   "id": "gen:ahext:93,36,1",
+   "prompt": "One side of a triangle is extended. The exterior angle is 129° and one of the two interior opposite angles is 93°. What is the other interior opposite angle, in degrees?",
+   "lines": [
+    "Interior angle next to the exterior angle C = 180° − 129° = 51° (straight line)",
+    "Other opposite angle = 180° − 93° − 51° = 36° (angle sum)",
+    "Check: 93° + 36° = 129° (exterior-angle theorem)"
+   ],
+   "familyExplainSteps": [
+    "Other opposite angle = exterior − known: 129° − 93° = 36°"
+   ],
+   "answer": "36"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:ahext:39,112,0",
+   "hints": [
+    "Which interior angle sits next to the exterior angle, on the straight line?",
+    "That angle and the exterior angle make 180°; the three interior angles also make 180°.",
+    "So the exterior angle equals the two far interior angles added."
+   ]
+  },
+  {
+   "for": "gen:ahext:93,36,1",
+   "hints": [
+    "Which interior angle sits next to the exterior angle, on the straight line?",
+    "That angle and the exterior angle make 180°; the three interior angles also make 180°.",
+    "So the far angle is the exterior angle minus the other far angle."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Go through the third angle (the family's own via_third)",
+  "text": [
+   "Find the third interior angle with the angle sum.",
+   "The exterior angle is 180° minus that angle, because they lie on a straight line."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Exterior-angle theorem directly",
+   "valid": true,
+   "example": [
+    "exterior = 39° + 112° = 151°"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: ahext has a geometry task (geometry-task.ts) for the foundation's geometry working adapter; the Python reasoner has NO exterior-angle rule (G5 R07), so a citation of the exterior-angle theorem is not verifiable; the 'via the third angle' route uses supported rules (triangle-sum, straight-line).",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "find the exterior angle",
+   "why": "third-interior gives 180 − a − b (the adjacent interior angle)",
+   "id": "gen:ahext:51,21,0",
+   "fromPhase": "diagnostic",
+   "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 51° and 21°. What is the exterior angle, in degrees?",
+   "answer": "72",
+   "readings": [
+    {
+     "response": "72",
+     "reading": "correct"
+    },
+    {
+     "response": "108",
+     "reading": "TARGET modelled error third-interior (conceptual): suspected on one answer"
+    },
+    {
+     "response": "129 | 159",
+     "reading": "other modelled error one-angle (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "find an interior opposite angle",
+   "why": "exterior-as-interior and adjacent-interior give different wrong values; a learner who only adds is wrong here",
+   "id": "gen:ahext:32,96,1",
+   "fromPhase": "diagnostic",
+   "prompt": "One side of a triangle is extended. The exterior angle is 128° and one of the two interior opposite angles is 32°. What is the other interior opposite angle, in degrees?",
+   "answer": "96",
+   "readings": [
+    {
+     "response": "96",
+     "reading": "correct"
+    },
+    {
+     "response": "20",
+     "reading": "TARGET modelled error exterior-as-interior (conceptual): suspected on one answer"
+    },
+    {
+     "response": "160",
+     "reading": "other modelled error added (procedural): suspected on one answer"
+    },
+    {
+     "response": "52",
+     "reading": "TARGET modelled error adjacent-interior (conceptual): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "third-interior",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the exterior angle confused with the adjacent interior angle",
+   "example": "gen:ahext:34,27,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 27°. What is the exterior angle, in degrees?\", one wrong answer is 119.",
+     "The third interior angle was found instead. The exterior angle sits outside, next to that angle, on the straight line.",
+     "The exterior angle is OUTSIDE the triangle, on the straight line next to the third angle; it is not the third angle.",
+     "Not 119, but 61."
+    ],
+    "counterCheck": "Counter-check: the third angle is 119°; it and the exterior angle must make 180°, so the exterior angle is 61°.",
+    "solvedCorrectly": [
+     "Third interior angle C = 180° − 34° − 27° = 119° (angle sum)",
+     "Exterior angle = 180° − 119° = 61° (straight line)",
+     "Check: 34° + 27° = 61° (exterior-angle theorem)"
+    ]
+   },
+   "guided": "gen:ahext:34,53,0:mc",
+   "check": "gen:ahext:111,26,0"
+  },
+  {
+   "bug": "adjacent-interior",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the same confusion in reverse",
+   "example": "gen:ahext:108,27,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"One side of a triangle is extended. The exterior angle is 135° and one of the two interior opposite angles is 108°. What is the other interior opposite angle, in degrees?\", one wrong answer is 45.",
+     "The interior angle next to the exterior angle was found (180° − exterior). The question asks for the other opposite angle.",
+     "The question asks for an angle FAR from the exterior angle, not the one next to it.",
+     "Not 45, but 27."
+    ],
+    "counterCheck": "Counter-check: 45° is the angle next to the exterior angle; the far angles add to 135°, so the other far angle is 27°.",
+    "solvedCorrectly": [
+     "Interior angle next to the exterior angle C = 180° − 135° = 45° (straight line)",
+     "Other opposite angle = 180° − 108° − 45° = 27° (angle sum)",
+     "Check: 108° + 27° = 135° (exterior-angle theorem)"
+    ]
+   },
+   "guided": "gen:ahext:23,76,1",
+   "check": "gen:ahext:47,45,1"
+  },
+  {
+   "bug": "exterior-as-interior",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the exterior angle used as a third interior angle",
+   "example": "gen:ahext:45,83,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"One side of a triangle is extended. The exterior angle is 128° and one of the two interior opposite angles is 45°. What is the other interior opposite angle, in degrees?\", one wrong answer is 7.",
+     "The exterior angle was used as if it were inside the triangle (180° − 128° − 45°). The exterior angle equals the two opposite interior angles together.",
+     "The exterior angle is outside the triangle; it is not one of the three angles that make 180°.",
+     "Not 7, but 83."
+    ],
+    "counterCheck": "Counter-check: 128° makes 180° with the interior angle next to it (52°). The interior angles are 45°, 52° and the one you want: 180° − 45° − 52° = 83°.",
+    "solvedCorrectly": [
+     "Interior angle next to the exterior angle C = 180° − 128° = 52° (straight line)",
+     "Other opposite angle = 180° − 45° − 52° = 83° (angle sum)",
+     "Check: 45° + 83° = 128° (exterior-angle theorem)"
+    ]
+   },
+   "guided": "gen:ahext:25,60,1:mc",
+   "check": "gen:ahext:69,32,1:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:ahext:62,79,0:mc",
+   "gen:ahext:34,63,0:mc",
+   "gen:ahext:80,39,0"
+  ],
+  "rechecks": [
+   "gen:ahext:86,70,0:mc",
+   "gen:ahext:44,76,1"
+  ],
+  "transfer": [
+   "gen:ahext:44,105,1:w",
+   "gen:ahext:21,85,1:w"
+  ],
+  "delayedChecks": [
+   "gen:ahext:56,89,0:mc",
+   "gen:ahext:77,74,1"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "integration": {
+  "strategyProposals": [
+   {
+    "id": "fix_third_interior",
+    "title": "The exterior angle is OUTSIDE the triangle, on the straight ",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:ahext:34,27,0"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:ahext:34,27,0"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:ahext:34,53,0:mc"
+     }
+    ],
+    "guided": "gen:ahext:34,53,0:mc",
+    "check": "gen:ahext:111,26,0"
+   },
+   {
+    "id": "fix_adjacent_interior",
+    "title": "The question asks for an angle FAR from the exterior angle, ",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:ahext:108,27,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:ahext:108,27,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:ahext:23,76,1"
+     }
+    ],
+    "guided": "gen:ahext:23,76,1",
+    "check": "gen:ahext:47,45,1"
+   },
+   {
+    "id": "fix_exterior_as_interior",
+    "title": "The exterior angle is outside the triangle; it is not one of",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:ahext:45,83,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:ahext:45,83,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:ahext:25,60,1:mc"
+     }
+    ],
+    "guided": "gen:ahext:25,60,1:mc",
+    "check": "gen:ahext:69,32,1:mc"
+   }
+  ],
+  "registryProposal": [
+   {
+    "competency": "MATH.geometry.triangle-properties",
+    "strategy": "fix_third_interior",
+    "misconceptionSpecific": true,
+    "addresses": "third-interior",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.geometry.triangle-properties",
+    "strategy": "fix_adjacent_interior",
+    "misconceptionSpecific": true,
+    "addresses": "adjacent-interior",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.geometry.triangle-properties",
+    "strategy": "fix_exterior_as_interior",
+    "misconceptionSpecific": true,
+    "addresses": "exterior-as-interior",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   }
+  ],
+  "generalStrategyProposal": {
+   "id": "ahext_concept",
+   "screens": [
+    "concept + visual",
+    "worked example(s)",
+    "alternative explanation"
+   ],
+   "note": "for modules where this family has only a chapter screen"
+  },
+  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+ },
+ "sources": [
+  "packages/learning/src/fam/b08.ts:1199 ahext: teach, via_third, bugs third-interior / one-angle / exterior-as-interior / added / adjacent-interior",
+  "docs/geometry-cross-domain-validation (G5): G-03 failed journey; R07"
+ ],
+ "uncertainties": [
+  "Family bugs 'one-angle' and 'added' are procedural and not given misconception screens here (general teaching covers them)."
+ ],
+ "validation": {
+  "items": 22,
+  "itemsOk": 22,
+  "poolAgreement": "400/400",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:ahext:51,21,0",
+    "role": "diagnostic",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 51° and 21°. What is the exterior angle, in degrees?",
+    "answer": "72",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 51° − 21° = 108° (angle sum)",
+      "Exterior angle = 180° − 108° = 72° (straight line)",
+      "Check: 51° + 21° = 72° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 51° + 21° = 72°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "108"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "129",
+       "159"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:32,96,1",
+    "role": "diagnostic",
+    "prompt": "One side of a triangle is extended. The exterior angle is 128° and one of the two interior opposite angles is 32°. What is the other interior opposite angle, in degrees?",
+    "answer": "96",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 128° = 52° (straight line)",
+      "Other opposite angle = 180° − 32° − 52° = 96° (angle sum)",
+      "Check: 32° + 96° = 128° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 128° − 32° = 96°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "160"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "52"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:39,112,0",
+    "role": "worked-example",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 39° and 112°. What is the exterior angle, in degrees?",
+    "answer": "151",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
+      "Exterior angle = 180° − 29° = 151° (straight line)",
+      "Check: 39° + 112° = 151° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 39° + 112° = 151°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "29"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "141",
+       "68"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:93,36,1",
+    "role": "worked-example",
+    "prompt": "One side of a triangle is extended. The exterior angle is 129° and one of the two interior opposite angles is 93°. What is the other interior opposite angle, in degrees?",
+    "answer": "36",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 129° = 51° (straight line)",
+      "Other opposite angle = 180° − 93° − 51° = 36° (angle sum)",
+      "Check: 93° + 36° = 129° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 129° − 93° = 36°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "222"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "51"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:34,27,0",
+    "role": "misconception-example",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 27°. What is the exterior angle, in degrees?",
+    "answer": "61",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 34° − 27° = 119° (angle sum)",
+      "Exterior angle = 180° − 119° = 61° (straight line)",
+      "Check: 34° + 27° = 61° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 34° + 27° = 61°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "119"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "146",
+       "153"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:34,53,0:mc",
+    "role": "misconception-guided",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 53°. What is the exterior angle, in degrees? Choose one.",
+    "answer": "87",
+    "options": [
+     "88",
+     "87",
+     "93",
+     "146"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 34° − 53° = 93° (angle sum)",
+      "Exterior angle = 180° − 93° = 87° (straight line)",
+      "Check: 34° + 53° = 87° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 34° + 53° = 87°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "93"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "146",
+       "127"
+      ],
+      "graded": [
+       "incorrect",
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:111,26,0",
+    "role": "misconception-check",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 111° and 26°. What is the exterior angle, in degrees?",
+    "answer": "137",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 111° − 26° = 43° (angle sum)",
+      "Exterior angle = 180° − 43° = 137° (straight line)",
+      "Check: 111° + 26° = 137° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 111° + 26° = 137°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "43"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "69",
+       "154"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:108,27,1",
+    "role": "misconception-example",
+    "prompt": "One side of a triangle is extended. The exterior angle is 135° and one of the two interior opposite angles is 108°. What is the other interior opposite angle, in degrees?",
+    "answer": "27",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 135° = 45° (straight line)",
+      "Other opposite angle = 180° − 108° − 45° = 27° (angle sum)",
+      "Check: 108° + 27° = 135° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 135° − 108° = 27°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "243"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "45"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:23,76,1",
+    "role": "misconception-guided",
+    "prompt": "One side of a triangle is extended. The exterior angle is 99° and one of the two interior opposite angles is 23°. What is the other interior opposite angle, in degrees?",
+    "answer": "76",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 99° = 81° (straight line)",
+      "Other opposite angle = 180° − 23° − 81° = 76° (angle sum)",
+      "Check: 23° + 76° = 99° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 99° − 23° = 76°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "58"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "122"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "81"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:47,45,1",
+    "role": "misconception-check",
+    "prompt": "One side of a triangle is extended. The exterior angle is 92° and one of the two interior opposite angles is 47°. What is the other interior opposite angle, in degrees?",
+    "answer": "45",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 92° = 88° (straight line)",
+      "Other opposite angle = 180° − 47° − 88° = 45° (angle sum)",
+      "Check: 47° + 45° = 92° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 92° − 47° = 45°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "41"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "139"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "88"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:45,83,1",
+    "role": "misconception-example",
+    "prompt": "One side of a triangle is extended. The exterior angle is 128° and one of the two interior opposite angles is 45°. What is the other interior opposite angle, in degrees?",
+    "answer": "83",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 128° = 52° (straight line)",
+      "Other opposite angle = 180° − 45° − 52° = 83° (angle sum)",
+      "Check: 45° + 83° = 128° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 128° − 45° = 83°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "173"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "52"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:25,60,1:mc",
+    "role": "misconception-guided",
+    "prompt": "One side of a triangle is extended. The exterior angle is 85° and one of the two interior opposite angles is 25°. What is the other interior opposite angle, in degrees? Choose one.",
+    "answer": "60",
+    "options": [
+     "110",
+     "60",
+     "70",
+     "95"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 85° = 95° (straight line)",
+      "Other opposite angle = 180° − 25° − 95° = 60° (angle sum)",
+      "Check: 25° + 60° = 85° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 85° − 25° = 60°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "70"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "110"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "95"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:69,32,1:mc",
+    "role": "misconception-check",
+    "prompt": "One side of a triangle is extended. The exterior angle is 101° and one of the two interior opposite angles is 69°. What is the other interior opposite angle, in degrees? Choose one.",
+    "answer": "32",
+    "options": [
+     "32",
+     "170",
+     "79",
+     "10"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 101° = 79° (straight line)",
+      "Other opposite angle = 180° − 69° − 79° = 32° (angle sum)",
+      "Check: 69° + 32° = 101° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 101° − 69° = 32°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "170"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "79"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:62,79,0:mc",
+    "role": "guided-practice",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 62° and 79°. What is the exterior angle, in degrees? Choose one.",
+    "answer": "141",
+    "options": [
+     "118",
+     "39",
+     "141",
+     "142"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 62° − 79° = 39° (angle sum)",
+      "Exterior angle = 180° − 39° = 141° (straight line)",
+      "Check: 62° + 79° = 141° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 62° + 79° = 141°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "39"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "118",
+       "101"
+      ],
+      "graded": [
+       "incorrect",
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:34,63,0:mc",
+    "role": "guided-practice",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 63°. What is the exterior angle, in degrees? Choose one.",
+    "answer": "97",
+    "options": [
+     "97",
+     "83",
+     "98",
+     "146"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 34° − 63° = 83° (angle sum)",
+      "Exterior angle = 180° − 83° = 97° (straight line)",
+      "Check: 34° + 63° = 97° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 34° + 63° = 97°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "83"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "146",
+       "117"
+      ],
+      "graded": [
+       "incorrect",
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:80,39,0",
+    "role": "guided-practice",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 80° and 39°. What is the exterior angle, in degrees?",
+    "answer": "119",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 80° − 39° = 61° (angle sum)",
+      "Exterior angle = 180° − 61° = 119° (straight line)",
+      "Check: 80° + 39° = 119° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 80° + 39° = 119°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "61"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "100",
+       "141"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:86,70,0:mc",
+    "role": "recheck",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 86° and 70°. What is the exterior angle, in degrees? Choose one.",
+    "answer": "156",
+    "options": [
+     "156",
+     "157",
+     "24",
+     "94"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 86° − 70° = 24° (angle sum)",
+      "Exterior angle = 180° − 24° = 156° (straight line)",
+      "Check: 86° + 70° = 156° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 86° + 70° = 156°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "94",
+       "110"
+      ],
+      "graded": [
+       "incorrect",
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:44,76,1",
+    "role": "recheck",
+    "prompt": "One side of a triangle is extended. The exterior angle is 120° and one of the two interior opposite angles is 44°. What is the other interior opposite angle, in degrees?",
+    "answer": "76",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 120° = 60° (straight line)",
+      "Other opposite angle = 180° − 44° − 60° = 76° (angle sum)",
+      "Check: 44° + 76° = 120° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 120° − 44° = 76°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "164"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:44,105,1:w",
+    "role": "transfer",
+    "prompt": "One side of a triangle is extended. The exterior angle is 149° and one of the two interior opposite angles is 44°. What is the other interior opposite angle, in degrees?",
+    "answer": "105",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 149° = 31° (straight line)",
+      "Other opposite angle = 180° − 44° − 31° = 105° (angle sum)",
+      "Check: 44° + 105° = 149° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 149° − 44° = 105°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "193"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "31"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:21,85,1:w",
+    "role": "transfer",
+    "prompt": "One side of a triangle is extended. The exterior angle is 106° and one of the two interior opposite angles is 21°. What is the other interior opposite angle, in degrees?",
+    "answer": "85",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 106° = 74° (straight line)",
+      "Other opposite angle = 180° − 21° − 74° = 85° (angle sum)",
+      "Check: 21° + 85° = 106° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 106° − 21° = 85°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "53"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "127"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "74"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:56,89,0:mc",
+    "role": "delayed-check",
+    "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 56° and 89°. What is the exterior angle, in degrees? Choose one.",
+    "answer": "145",
+    "options": [
+     "146",
+     "145",
+     "35",
+     "124"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Third interior angle C = 180° − 56° − 89° = 35° (angle sum)",
+      "Exterior angle = 180° − 35° = 145° (straight line)",
+      "Check: 56° + 89° = 145° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "exterior = 56° + 89° = 145°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "35"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-angle",
+      "kind": "procedural",
+      "predicts": [
+       "124",
+       "91"
+      ],
+      "graded": [
+       "incorrect",
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahext:77,74,1",
+    "role": "delayed-check",
+    "prompt": "One side of a triangle is extended. The exterior angle is 151° and one of the two interior opposite angles is 77°. What is the other interior opposite angle, in degrees?",
+    "answer": "74",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Interior angle next to the exterior angle C = 180° − 151° = 29° (straight line)",
+      "Other opposite angle = 180° − 77° − 29° = 74° (angle sum)",
+      "Check: 77° + 74° = 151° (exterior-angle theorem)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Exterior-angle theorem directly",
+      "ok": true,
+      "lines": [
+       "other opposite angle = 151° − 77° = 74°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "added",
+      "kind": "procedural",
+      "predicts": [
+       "228"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "predicts": [
+       "29"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

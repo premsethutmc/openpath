@@ -1,0 +1,1353 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP-ALG-01",
+ "title": "(a + b)²: why the middle term is 2ab",
+ "competency": "MATH.algebra.identities",
+ "competencyName": "Use algebraic identities",
+ "grades": [
+  8,
+  8
+ ],
+ "strand": "algebra",
+ "family": "ahid",
+ "familyTitle": "Expanding with (a + b)², (a − b)² and (a + b)(a − b)",
+ "skill": "Expand (px ± q)² with the identity; in particular the middle coefficient ±2pq.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.algebra.linear-rational",
+    "type": "disputed"
+   },
+   {
+    "from": "MATH.algebra.identities-intro",
+    "type": "support"
+   },
+   {
+    "from": "MATH.number.integer-add",
+    "type": "support"
+   }
+  ],
+  "knowledge": [
+   "multiplying two binomials term by term",
+   "x × x = x²"
+  ],
+  "note": "the graph's prerequisite relations for identities were not changed"
+ },
+ "explanation": {
+  "concept": [
+   "(a + b)² = (a + b)(a + b). Multiplying every term by every term gives a×a, a×b, b×a and b×b.",
+   "a×b and b×a are the same, and there are TWO of them: a² + 2ab + b². The area picture shows them as two equal rectangles."
+  ],
+  "visual": {
+   "type": "grid",
+   "rows": 2,
+   "cols": 2,
+   "labels": [
+    "a²",
+    "ab",
+    "ab",
+    "b²"
+   ]
+  },
+  "visualNote": "Reuses ahid's own 'area' visual ({type:'grid', rows:2, cols:2}); labels proposed (the existing visual has none)."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:ahid:0,5,2,1",
+   "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 2)². (5x + 2)² = 25x² + □x + 4. What number goes in the box? (It may be negative.)",
+   "lines": [
+    "(5x + 2)² = 25x² + 20x + 4 (every term times every term)",
+    "The box is the x coefficient: 20"
+   ],
+   "familyExplainSteps": null,
+   "answer": "20"
+  },
+  {
+   "id": "gen:ahid:1,3,8,1",
+   "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (3x − 8)². (3x − 8)² = 9x² + □x + 64. What number goes in the box? (It may be negative.)",
+   "lines": [
+    "(3x − 8)² = 9x² − 48x + 64 (every term times every term)",
+    "The box is the x coefficient: -48"
+   ],
+   "familyExplainSteps": null,
+   "answer": "-48"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:ahid:0,5,2,1",
+   "hints": [
+    "Write the square as a product of two brackets.",
+    "Multiply each term in the first bracket by each term in the second: four products.",
+    "Two of the four products are the same; add them."
+   ]
+  },
+  {
+   "for": "gen:ahid:1,3,8,1",
+   "hints": [
+    "Write the square as a product of two brackets.",
+    "Multiply each term in the first bracket by each term in the second: four products.",
+    "Two of the four products are the same; add them."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Multiply it out (the family's multiply_out)",
+  "text": [
+   "Write (px + q)² as (px + q)(px + q) and multiply each term by each term.",
+   "The two middle products come out equal, so the middle term is doubled."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Multiply it out: four products",
+   "valid": true,
+   "example": [
+    "25x² + 10x + 10x + 4 (first×first, first×second, second×first, second×second)",
+    "collect the two x terms: 10 + 10 = 20"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: ahid has no working contract; an expansion written as working is not examined (answer-level only).",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "(px + q)², middle",
+   "why": "middle-not-doubled gives pq; middle-sign gives −2pq",
+   "id": "gen:ahid:0,4,9,1",
+   "fromPhase": "check",
+   "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (4x + 9)². (4x + 9)² = 16x² + □x + 81. What number goes in the box? (It may be negative.)",
+   "answer": "72",
+   "readings": [
+    {
+     "response": "72",
+     "reading": "correct"
+    },
+    {
+     "response": "36",
+     "reading": "TARGET modelled error middle-not-doubled (conceptual): suspected on one answer"
+    },
+    {
+     "response": "-72",
+     "reading": "TARGET modelled error middle-sign (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "(px − q)², middle",
+   "why": "the same two difficulties with the sign reversed: separates a sign slip from the missing doubling",
+   "id": "gen:ahid:1,4,3,1",
+   "fromPhase": "diagnostic",
+   "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (4x − 3)². (4x − 3)² = 16x² + □x + 9. What number goes in the box? (It may be negative.)",
+   "answer": "-24",
+   "readings": [
+    {
+     "response": "-24",
+     "reading": "correct"
+    },
+    {
+     "response": "-12",
+     "reading": "TARGET modelled error middle-not-doubled (conceptual): suspected on one answer"
+    },
+    {
+     "response": "24",
+     "reading": "TARGET modelled error middle-sign (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "middle-not-doubled",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "conceptual: (a+b)² read as a² + ab + b² (or a² + b²)",
+   "example": "gen:ahid:0,5,7,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 7)². (5x + 7)² = 25x² + □x + 49. What number goes in the box? (It may be negative.)\", one wrong answer is 35.",
+     "The middle term was written as ab. The identity has 2ab: the two products 5x × 7 and 7 × 5x are both there.",
+     "There are two middle products, a×b and b×a; together they make 2ab.",
+     "Not 35, but 70."
+    ],
+    "counterCheck": "Check at x = 1: the left side is 144. With the middle term 70: 25 + 70 + 49 = 144. With 35 instead: 109, which is not 144.",
+    "solvedCorrectly": [
+     "(5x + 7)² = 25x² + 70x + 49 (every term times every term)",
+     "The box is the x coefficient: 70"
+    ]
+   },
+   "guided": "gen:ahid:0,2,5,1:mc",
+   "check": "gen:ahid:1,4,5,1"
+  },
+  {
+   "bug": "middle-sign",
+   "kind": "procedural",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "procedural sign slip",
+   "example": "gen:ahid:0,5,4,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 4)². (5x + 4)² = 25x² + □x + 16. What number goes in the box? (It may be negative.)\", one wrong answer is -40.",
+     "The middle term of (a + b)² is +2ab.",
+     "Square of a sum: +2ab. Square of a difference: −2ab.",
+     "Not -40, but 40."
+    ],
+    "counterCheck": "Check at x = 1: the left side is 81. With the middle term 40: 25 + 40 + 16 = 81. With -40 instead: 1, which is not 81.",
+    "solvedCorrectly": [
+     "(5x + 4)² = 25x² + 40x + 16 (every term times every term)",
+     "The box is the x coefficient: 40"
+    ]
+   },
+   "guided": "gen:ahid:1,3,4,1:mc",
+   "check": "gen:ahid:0,4,6,1"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:ahid:1,2,8,1:mc",
+   "gen:ahid:1,5,9,1:mc",
+   "gen:ahid:0,3,5,1:mc"
+  ],
+  "rechecks": [
+   "gen:ahid:0,3,9,1:mc",
+   "gen:ahid:1,5,1,1:mc"
+  ],
+  "transfer": [
+   "gen:ahid:0,3,2,1:w",
+   "gen:ahid:0,5,6,1:w"
+  ],
+  "delayedChecks": [
+   "gen:ahid:1,2,3,1",
+   "gen:ahid:1,2,6,1"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "integration": {
+  "strategyProposals": [
+   {
+    "id": "fix_middle_not_doubled",
+    "title": "There are two middle products, a×b and b×a; together they ma",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:ahid:0,5,7,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:ahid:0,5,7,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:ahid:0,2,5,1:mc"
+     }
+    ],
+    "guided": "gen:ahid:0,2,5,1:mc",
+    "check": "gen:ahid:1,4,5,1"
+   },
+   {
+    "id": "fix_middle_sign",
+    "title": "Square of a sum",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:ahid:0,5,4,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:ahid:0,5,4,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:ahid:1,3,4,1:mc"
+     }
+    ],
+    "guided": "gen:ahid:1,3,4,1:mc",
+    "check": "gen:ahid:0,4,6,1"
+   }
+  ],
+  "registryProposal": [
+   {
+    "competency": "MATH.algebra.identities",
+    "strategy": "fix_middle_not_doubled",
+    "misconceptionSpecific": true,
+    "addresses": "middle-not-doubled",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.algebra.identities",
+    "strategy": "fix_middle_sign",
+    "misconceptionSpecific": true,
+    "addresses": "middle-sign",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   }
+  ],
+  "generalStrategyProposal": {
+   "id": "ahid_concept",
+   "screens": [
+    "concept + visual",
+    "worked example(s)",
+    "alternative explanation"
+   ],
+   "note": "for modules where this family has only a chapter screen"
+  },
+  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+ },
+ "sources": [
+  "packages/learning/src/fam/b08.ts:2188 ahid: teach idea/method; alternatives area, multiply_out; bugs middle-not-doubled, middle-sign, minus-squared, q-doubled, p-not-squared",
+  "MATH.algebra.identities (authored module seeded from 'expand'; ahid has no misconception-specific explanation)"
+ ],
+ "uncertainties": [
+  "The question asks one coefficient at a time (by design, so the unexpanded form is not accepted); the package teaches the full expansion but checks the middle coefficient.",
+  "The area picture fits (a + b)² only; for (a − b)² use the four-products method.",
+  "CONTENT DEFECT (existing family step text, fam/b08.ts:2232 ahid explain): for every (px − q)² item it prints e.g. '2ab = 2 × 3x × 8 = -48x' (b shown as +8 while the product is negative) and '1x²' when p = 1. The package does NOT quote the family's step text for this family. Not changed here.",
+  "diagnostic case \"(px + q)², middle\": the family's diagnostic partition has no usable item (only ambiguous ones); candidate gen:ahid:0,4,9,1 is taken from the CHECK partition and must be re-partitioned or replaced at integration",
+  "delayed checks: no usable retention item for case \"(px + q)², middle\" (another case's item stands in)"
+ ],
+ "validation": {
+  "items": 19,
+  "itemsOk": 19,
+  "poolAgreement": "90/90",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:ahid:0,4,9,1",
+    "role": "diagnostic",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (4x + 9)². (4x + 9)² = 16x² + □x + 81. What number goes in the box? (It may be negative.)",
+    "answer": "72",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(4x + 9)² = 16x² + 72x + 81 (every term times every term)",
+      "The box is the x coefficient: 72"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "16x² + 36x + 36x + 81 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 36 + 36 = 72"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "36"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-72"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,4,3,1",
+    "role": "diagnostic",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (4x − 3)². (4x − 3)² = 16x² + □x + 9. What number goes in the box? (It may be negative.)",
+    "answer": "-24",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(4x − 3)² = 16x² − 24x + 9 (every term times every term)",
+      "The box is the x coefficient: -24"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "16x² − 12x − 12x + 9 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -12 + -12 = -24"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,5,2,1",
+    "role": "worked-example",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 2)². (5x + 2)² = 25x² + □x + 4. What number goes in the box? (It may be negative.)",
+    "answer": "20",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(5x + 2)² = 25x² + 20x + 4 (every term times every term)",
+      "The box is the x coefficient: 20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "25x² + 10x + 10x + 4 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 10 + 10 = 20"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,3,8,1",
+    "role": "worked-example",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (3x − 8)². (3x − 8)² = 9x² + □x + 64. What number goes in the box? (It may be negative.)",
+    "answer": "-48",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(3x − 8)² = 9x² − 48x + 64 (every term times every term)",
+      "The box is the x coefficient: -48"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "9x² − 24x − 24x + 64 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -24 + -24 = -48"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "48"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,5,7,1",
+    "role": "misconception-example",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 7)². (5x + 7)² = 25x² + □x + 49. What number goes in the box? (It may be negative.)",
+    "answer": "70",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(5x + 7)² = 25x² + 70x + 49 (every term times every term)",
+      "The box is the x coefficient: 70"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "25x² + 35x + 35x + 49 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 35 + 35 = 70"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "35"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-70"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,2,5,1:mc",
+    "role": "misconception-guided",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (2x + 5)². (2x + 5)² = 4x² + □x + 25. What number goes in the box? (It may be negative.) Choose one.",
+    "answer": "20",
+    "options": [
+     "10",
+     "-20",
+     "21",
+     "20"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(2x + 5)² = 4x² + 20x + 25 (every term times every term)",
+      "The box is the x coefficient: 20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "4x² + 10x + 10x + 25 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 10 + 10 = 20"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,4,5,1",
+    "role": "misconception-check",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (4x − 5)². (4x − 5)² = 16x² + □x + 25. What number goes in the box? (It may be negative.)",
+    "answer": "-40",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(4x − 5)² = 16x² − 40x + 25 (every term times every term)",
+      "The box is the x coefficient: -40"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "16x² − 20x − 20x + 25 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -20 + -20 = -40"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,5,4,1",
+    "role": "misconception-example",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 4)². (5x + 4)² = 25x² + □x + 16. What number goes in the box? (It may be negative.)",
+    "answer": "40",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(5x + 4)² = 25x² + 40x + 16 (every term times every term)",
+      "The box is the x coefficient: 40"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "25x² + 20x + 20x + 16 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 20 + 20 = 40"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,3,4,1:mc",
+    "role": "misconception-guided",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (3x − 4)². (3x − 4)² = 9x² + □x + 16. What number goes in the box? (It may be negative.) Choose one.",
+    "answer": "-24",
+    "options": [
+     "-23",
+     "-24",
+     "24",
+     "-12"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(3x − 4)² = 9x² − 24x + 16 (every term times every term)",
+      "The box is the x coefficient: -24"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "9x² − 12x − 12x + 16 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -12 + -12 = -24"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,4,6,1",
+    "role": "misconception-check",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (4x + 6)². (4x + 6)² = 16x² + □x + 36. What number goes in the box? (It may be negative.)",
+    "answer": "48",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(4x + 6)² = 16x² + 48x + 36 (every term times every term)",
+      "The box is the x coefficient: 48"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "16x² + 24x + 24x + 36 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 24 + 24 = 48"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-48"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,2,8,1:mc",
+    "role": "guided-practice",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (2x − 8)². (2x − 8)² = 4x² + □x + 64. What number goes in the box? (It may be negative.) Choose one.",
+    "answer": "-32",
+    "options": [
+     "32",
+     "-31",
+     "-32",
+     "-16"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(2x − 8)² = 4x² − 32x + 64 (every term times every term)",
+      "The box is the x coefficient: -32"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "4x² − 16x − 16x + 64 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -16 + -16 = -32"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "32"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,5,9,1:mc",
+    "role": "guided-practice",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (5x − 9)². (5x − 9)² = 25x² + □x + 81. What number goes in the box? (It may be negative.) Choose one.",
+    "answer": "-90",
+    "options": [
+     "-45",
+     "90",
+     "-90",
+     "-89"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(5x − 9)² = 25x² − 90x + 81 (every term times every term)",
+      "The box is the x coefficient: -90"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "25x² − 45x − 45x + 81 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -45 + -45 = -90"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-45"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "90"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,3,5,1:mc",
+    "role": "guided-practice",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (3x + 5)². (3x + 5)² = 9x² + □x + 25. What number goes in the box? (It may be negative.) Choose one.",
+    "answer": "30",
+    "options": [
+     "31",
+     "30",
+     "-30",
+     "15"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(3x + 5)² = 9x² + 30x + 25 (every term times every term)",
+      "The box is the x coefficient: 30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "9x² + 15x + 15x + 25 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 15 + 15 = 30"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "15"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,3,9,1:mc",
+    "role": "recheck",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (3x + 9)². (3x + 9)² = 9x² + □x + 81. What number goes in the box? (It may be negative.) Choose one.",
+    "answer": "54",
+    "options": [
+     "-54",
+     "55",
+     "54",
+     "27"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(3x + 9)² = 9x² + 54x + 81 (every term times every term)",
+      "The box is the x coefficient: 54"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "9x² + 27x + 27x + 81 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 27 + 27 = 54"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "27"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-54"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,5,1,1:mc",
+    "role": "recheck",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (5x − 1)². (5x − 1)² = 25x² + □x + 1. What number goes in the box? (It may be negative.) Choose one.",
+    "answer": "-10",
+    "options": [
+     "-10",
+     "10",
+     "-9",
+     "-5"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(5x − 1)² = 25x² − 10x + 1 (every term times every term)",
+      "The box is the x coefficient: -10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "25x² − 5x − 5x + 1 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -5 + -5 = -10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,3,2,1:w",
+    "role": "transfer",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (3x + 2)². (3x + 2)² = 9x² + □x + 4. What number goes in the box? (It may be negative.)",
+    "answer": "12",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(3x + 2)² = 9x² + 12x + 4 (every term times every term)",
+      "The box is the x coefficient: 12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "9x² + 6x + 6x + 4 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 6 + 6 = 12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:0,5,6,1:w",
+    "role": "transfer",
+    "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 6)². (5x + 6)² = 25x² + □x + 36. What number goes in the box? (It may be negative.)",
+    "answer": "60",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(5x + 6)² = 25x² + 60x + 36 (every term times every term)",
+      "The box is the x coefficient: 60"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "25x² + 30x + 30x + 36 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: 30 + 30 = 60"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "-60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,2,3,1",
+    "role": "delayed-check",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (2x − 3)². (2x − 3)² = 4x² + □x + 9. What number goes in the box? (It may be negative.)",
+    "answer": "-12",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(2x − 3)² = 4x² − 12x + 9 (every term times every term)",
+      "The box is the x coefficient: -12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "4x² − 6x − 6x + 9 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -6 + -6 = -12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:ahid:1,2,6,1",
+    "role": "delayed-check",
+    "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (2x − 6)². (2x − 6)² = 4x² + □x + 36. What number goes in the box? (It may be negative.)",
+    "answer": "-24",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "(2x − 6)² = 4x² − 24x + 36 (every term times every term)",
+      "The box is the x coefficient: -24"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply it out: four products",
+      "ok": true,
+      "lines": [
+       "4x² − 12x − 12x + 36 (first×first, first×second, second×first, second×second)",
+       "collect the two x terms: -12 + -12 = -24"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "predicts": [
+       "-12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

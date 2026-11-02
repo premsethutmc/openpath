@@ -1,0 +1,1520 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP-MEA-01",
+ "title": "Area or perimeter? Covering versus going round",
+ "competency": "MATH.measurement.area-squares",
+ "competencyName": "Measure area in square units",
+ "grades": [
+  4,
+  4
+ ],
+ "strand": "measurement",
+ "family": "aeperar",
+ "familyTitle": "Choosing area or perimeter in a problem",
+ "skill": "Decide whether a rectangle problem asks for area (covering) or perimeter (going round), then compute it.",
+ "prerequisites": {
+  "graph": [],
+  "knowledge": [
+   "area of a rectangle as rows × squares in a row",
+   "perimeter as the total length of all sides"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "Area is the space inside: how many unit squares cover the shape. For a rectangle, rows × squares in each row = length × width.",
+   "Perimeter is the distance round the edge: add all four sides, length + width + length + width."
+  ],
+  "visual": {
+   "type": "grid",
+   "rows": 9,
+   "cols": 11,
+   "shaded": 99,
+   "note": "every square inside is shaded: covering"
+  },
+  "visualNote": "Reuses the grid of squares (aearea / rows_of_squares); perimeter needs the outline emphasised, which the grid visual cannot do (visual gap)."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:aeperar:0,9,11,0",
+   "prompt": "A rectangular floor is 11 m long and 9 m wide. How many square tiles of side 1 m are needed to cover the floor?",
+   "lines": [
+    "Covering the inside: area",
+    "9 rows of 11 squares = 11 × 9 = 99"
+   ],
+   "familyExplainSteps": [
+    "Covering needs the area: 9 rows of 11 squares = 99"
+   ],
+   "answer": "99"
+  },
+  {
+   "id": "gen:aeperar:1,9,10,1",
+   "prompt": "A rectangular card is 10 cm long and 9 cm wide. How many centimetres of lace are needed to go once round the edge of the card?",
+   "lines": [
+    "Going once round the edge: perimeter",
+    "10 + 9 + 10 + 9 = 38"
+   ],
+   "familyExplainSteps": [
+    "Going round needs the perimeter: 10 + 9 + 10 + 9 = 38"
+   ],
+   "answer": "38"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:aeperar:0,9,11,0",
+   "hints": [
+    "Is something covering the inside, or going round the edge?",
+    "Covering: count the squares inside, rows × squares in a row.",
+    "Multiply length by width."
+   ]
+  },
+  {
+   "for": "gen:aeperar:1,9,10,1",
+   "hints": [
+    "Is something covering the inside, or going round the edge?",
+    "Going round: add all four sides.",
+    "Add length + width + length + width."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Act it out",
+  "text": [
+   "Tiling a floor: you lay squares all over it (area).",
+   "Fencing a garden: you walk round the edge (perimeter)."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+   "valid": true,
+   "example": [
+    "area, row by row: 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 = 99"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A 'two-sides' answer (length + width) on the covering item and on the going-round item counts as two different errors (adding instead of multiplying; adding only half the sides), so the pair must not establish one misconception. A learner who multiplies on both items is right on the covering item and is suspected of area-for-perimeter only; one who adds all four sides on both is suspected of perimeter-for-area only.",
+ "diagnostic": [
+  {
+   "case": "covering (area)",
+   "why": "perimeter-for-area gives 2(l+w)",
+   "id": "gen:aeperar:0,3,15,2",
+   "fromPhase": "diagnostic",
+   "prompt": "A rectangular stage is 15 m long and 3 m wide. How many square mats of side 1 m are needed to cover the stage?",
+   "answer": "45",
+   "readings": [
+    {
+     "response": "45",
+     "reading": "correct"
+    },
+    {
+     "response": "36",
+     "reading": "TARGET modelled error perimeter-for-area (conceptual): suspected on one answer"
+    },
+    {
+     "response": "18",
+     "reading": "TARGET modelled error two-sides (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "going round (perimeter)",
+   "why": "area-for-perimeter gives l×w; a learner who always multiplies is right on the first item only",
+   "id": "gen:aeperar:1,4,11,2",
+   "fromPhase": "diagnostic",
+   "prompt": "A rectangular playground is 11 m long and 4 m wide. How many metres of rope are needed to go once round the playground?",
+   "answer": "30",
+   "readings": [
+    {
+     "response": "30",
+     "reading": "correct"
+    },
+    {
+     "response": "44",
+     "reading": "TARGET modelled error area-for-perimeter (conceptual): suspected on one answer"
+    },
+    {
+     "response": "15",
+     "reading": "TARGET modelled error two-sides (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "perimeter-for-area",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "conceptual: area and perimeter not distinguished",
+   "example": "gen:aeperar:0,6,9,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"A rectangular card is 9 cm long and 6 cm wide. How many 1 cm squares of coloured paper are needed to cover the card?\", one wrong answer is 30.",
+     "The perimeter was found, but covering the inside needs the area (how many squares fit inside).",
+     "Covering needs the squares INSIDE, not the length of the edge.",
+     "Not 30, but 54."
+    ],
+    "counterCheck": "Counter-check: draw 6 rows of 9 squares: there are 54 squares, not 30.",
+    "solvedCorrectly": [
+     "Covering the inside: area",
+     "6 rows of 9 squares = 9 × 6 = 54"
+    ]
+   },
+   "guided": "gen:aeperar:0,12,16,2:mc",
+   "check": "gen:aeperar:0,2,11,2"
+  },
+  {
+   "bug": "area-for-perimeter",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "conceptual, the reverse",
+   "example": "gen:aeperar:1,8,15,2",
+   "screens": {
+    "whatWentWrong": [
+     "In \"A rectangular playground is 15 m long and 8 m wide. How many metres of rope are needed to go once round the playground?\", one wrong answer is 120.",
+     "The area was found, but going round the edge needs the perimeter (the length all the way round).",
+     "Going round needs the length of the EDGE, not the squares inside.",
+     "Not 120, but 46."
+    ],
+    "counterCheck": "Counter-check: walk round: 15 + 8 + 15 + 8 = 46, not 120.",
+    "solvedCorrectly": [
+     "Going once round the edge: perimeter",
+     "15 + 8 + 15 + 8 = 46"
+    ]
+   },
+   "guided": "gen:aeperar:1,14,15,2",
+   "check": "gen:aeperar:1,13,14,1"
+  },
+  {
+   "bug": "two-sides",
+   "kind": "procedural",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "procedural: added one length and one width",
+   "example": "gen:aeperar:1,2,12,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"A rectangular card is 12 cm long and 2 cm wide. How many centimetres of lace are needed to go once round the edge of the card?\", one wrong answer is 14.",
+     "Only one length and one width were added (2 + 12). Going round passes all four sides.",
+     "Going round a rectangle passes all FOUR sides: two lengths and two widths.",
+     "Not 14, but 28."
+    ],
+    "counterCheck": "Counter-check: 12 + 2 = 14 is only half the way round.",
+    "solvedCorrectly": [
+     "Going once round the edge: perimeter",
+     "12 + 2 + 12 + 2 = 28"
+    ]
+   },
+   "guided": "gen:aeperar:1,5,7,1:mc",
+   "check": "gen:aeperar:1,4,6,2:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:aeperar:0,6,14,2",
+   "gen:aeperar:0,5,6,0:mc",
+   "gen:aeperar:0,7,12,2:mc"
+  ],
+  "rechecks": [
+   "gen:aeperar:0,11,15,1:mc",
+   "gen:aeperar:1,10,13,1"
+  ],
+  "transfer": [
+   "gen:aeperar:0,6,7,1:w",
+   "gen:aeperar:0,8,14,1:w"
+  ],
+  "delayedChecks": [
+   "gen:aeperar:0,4,5,1:mc",
+   "gen:aeperar:1,10,16,0"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "integration": {
+  "strategyProposals": [
+   {
+    "id": "fix_perimeter_for_area",
+    "title": "Covering needs the squares INSIDE, not the length of the edg",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:aeperar:0,6,9,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:aeperar:0,6,9,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:aeperar:0,12,16,2:mc"
+     }
+    ],
+    "guided": "gen:aeperar:0,12,16,2:mc",
+    "check": "gen:aeperar:0,2,11,2"
+   },
+   {
+    "id": "fix_area_for_perimeter",
+    "title": "Going round needs the length of the EDGE, not the squares in",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:aeperar:1,8,15,2"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:aeperar:1,8,15,2"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:aeperar:1,14,15,2"
+     }
+    ],
+    "guided": "gen:aeperar:1,14,15,2",
+    "check": "gen:aeperar:1,13,14,1"
+   },
+   {
+    "id": "fix_two_sides",
+    "title": "Going round a rectangle passes all FOUR sides",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:aeperar:1,2,12,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:aeperar:1,2,12,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:aeperar:1,5,7,1:mc"
+     }
+    ],
+    "guided": "gen:aeperar:1,5,7,1:mc",
+    "check": "gen:aeperar:1,4,6,2:mc"
+   }
+  ],
+  "registryProposal": [
+   {
+    "competency": "MATH.measurement.area-squares",
+    "strategy": "fix_perimeter_for_area",
+    "misconceptionSpecific": true,
+    "addresses": "perimeter-for-area",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.measurement.area-squares",
+    "strategy": "fix_area_for_perimeter",
+    "misconceptionSpecific": true,
+    "addresses": "area-for-perimeter",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.measurement.area-squares",
+    "strategy": "fix_two_sides",
+    "misconceptionSpecific": true,
+    "addresses": "two-sides",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   }
+  ],
+  "generalStrategyProposal": {
+   "id": "aeperar_concept",
+   "screens": [
+    "concept + visual",
+    "worked example(s)",
+    "alternative explanation"
+   ],
+   "note": "for modules where this family has only a chapter screen"
+  },
+  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+ },
+ "sources": [
+  "packages/learning/src/fam/b05.ts:861 aeperar: teach idea/method, alternative act_it; bugs perimeter-for-area, area-for-perimeter, two-sides",
+  "library.v1.json MATH.measurement.area-squares (seeded from aearea; aeperar has a chapter screen only)"
+ ],
+ "uncertainties": [
+  "The oracle decides area vs perimeter from the words 'cover'/'round'; every pool prompt was checked (see validation) but a new context word would need review."
+ ],
+ "validation": {
+  "items": 22,
+  "itemsOk": 22,
+  "poolAgreement": "400/400",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:aeperar:0,3,15,2",
+    "role": "diagnostic",
+    "prompt": "A rectangular stage is 15 m long and 3 m wide. How many square mats of side 1 m are needed to cover the stage?",
+    "answer": "45",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "3 rows of 15 squares = 15 × 3 = 45"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 15 + 15 + 15 = 45"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "36"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "18"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,4,11,2",
+    "role": "diagnostic",
+    "prompt": "A rectangular playground is 11 m long and 4 m wide. How many metres of rope are needed to go once round the playground?",
+    "answer": "30",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "11 + 4 + 11 + 4 = 30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (11 + 4) = 30"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "44"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "15"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,9,11,0",
+    "role": "worked-example",
+    "prompt": "A rectangular floor is 11 m long and 9 m wide. How many square tiles of side 1 m are needed to cover the floor?",
+    "answer": "99",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "9 rows of 11 squares = 11 × 9 = 99"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 = 99"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,9,10,1",
+    "role": "worked-example",
+    "prompt": "A rectangular card is 10 cm long and 9 cm wide. How many centimetres of lace are needed to go once round the edge of the card?",
+    "answer": "38",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "10 + 9 + 10 + 9 = 38"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (10 + 9) = 38"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "90"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "19"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,6,9,1",
+    "role": "misconception-example",
+    "prompt": "A rectangular card is 9 cm long and 6 cm wide. How many 1 cm squares of coloured paper are needed to cover the card?",
+    "answer": "54",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "6 rows of 9 squares = 9 × 6 = 54"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 9 + 9 + 9 + 9 + 9 + 9 = 54"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "15"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,12,16,2:mc",
+    "role": "misconception-guided",
+    "prompt": "A rectangular stage is 16 m long and 12 m wide. How many square mats of side 1 m are needed to cover the stage? Choose one.",
+    "answer": "192",
+    "options": [
+     "28",
+     "56",
+     "40",
+     "192"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "12 rows of 16 squares = 16 × 12 = 192"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 16 + 16 + 16 + 16 + 16 + 16 + 16 + 16 + 16 + 16 + 16 + 16 = 192"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "56"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "28"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,2,11,2",
+    "role": "misconception-check",
+    "prompt": "A rectangular stage is 11 m long and 2 m wide. How many square mats of side 1 m are needed to cover the stage?",
+    "answer": "22",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "2 rows of 11 squares = 11 × 2 = 22"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 11 + 11 = 22"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "26"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "13"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,8,15,2",
+    "role": "misconception-example",
+    "prompt": "A rectangular playground is 15 m long and 8 m wide. How many metres of rope are needed to go once round the playground?",
+    "answer": "46",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "15 + 8 + 15 + 8 = 46"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (15 + 8) = 46"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "120"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "23"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,14,15,2",
+    "role": "misconception-guided",
+    "prompt": "A rectangular playground is 15 m long and 14 m wide. How many metres of rope are needed to go once round the playground?",
+    "answer": "58",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "15 + 14 + 15 + 14 = 58"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (15 + 14) = 58"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "210"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "29"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,13,14,1",
+    "role": "misconception-check",
+    "prompt": "A rectangular card is 14 cm long and 13 cm wide. How many centimetres of lace are needed to go once round the edge of the card?",
+    "answer": "54",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "14 + 13 + 14 + 13 = 54"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (14 + 13) = 54"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "182"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "27"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,2,12,1",
+    "role": "misconception-example",
+    "prompt": "A rectangular card is 12 cm long and 2 cm wide. How many centimetres of lace are needed to go once round the edge of the card?",
+    "answer": "28",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "12 + 2 + 12 + 2 = 28"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (12 + 2) = 28"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "14"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,5,7,1:mc",
+    "role": "misconception-guided",
+    "prompt": "A rectangular card is 7 cm long and 5 cm wide. How many centimetres of lace are needed to go once round the edge of the card? Choose one.",
+    "answer": "24",
+    "options": [
+     "24",
+     "35",
+     "17",
+     "12"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "7 + 5 + 7 + 5 = 24"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (7 + 5) = 24"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "35"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,4,6,2:mc",
+    "role": "misconception-check",
+    "prompt": "A rectangular playground is 6 m long and 4 m wide. How many metres of rope are needed to go once round the playground? Choose one.",
+    "answer": "20",
+    "options": [
+     "20",
+     "24",
+     "14",
+     "10"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "6 + 4 + 6 + 4 = 20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (6 + 4) = 20"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,6,14,2",
+    "role": "guided-practice",
+    "prompt": "A rectangular stage is 14 m long and 6 m wide. How many square mats of side 1 m are needed to cover the stage?",
+    "answer": "84",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "6 rows of 14 squares = 14 × 6 = 84"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 14 + 14 + 14 + 14 + 14 + 14 = 84"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,5,6,0:mc",
+    "role": "guided-practice",
+    "prompt": "A rectangular floor is 6 m long and 5 m wide. How many square tiles of side 1 m are needed to cover the floor? Choose one.",
+    "answer": "30",
+    "options": [
+     "30",
+     "11",
+     "16",
+     "22"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "5 rows of 6 squares = 6 × 5 = 30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 6 + 6 + 6 + 6 + 6 = 30"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "22"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,7,12,2:mc",
+    "role": "guided-practice",
+    "prompt": "A rectangular stage is 12 m long and 7 m wide. How many square mats of side 1 m are needed to cover the stage? Choose one.",
+    "answer": "84",
+    "options": [
+     "38",
+     "19",
+     "84",
+     "26"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "7 rows of 12 squares = 12 × 7 = 84"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 12 + 12 + 12 + 12 + 12 + 12 + 12 = 84"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "38"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "19"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,11,15,1:mc",
+    "role": "recheck",
+    "prompt": "A rectangular card is 15 cm long and 11 cm wide. How many 1 cm squares of coloured paper are needed to cover the card? Choose one.",
+    "answer": "165",
+    "options": [
+     "26",
+     "165",
+     "37",
+     "52"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "11 rows of 15 squares = 15 × 11 = 165"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 15 + 15 + 15 + 15 + 15 + 15 + 15 + 15 + 15 + 15 + 15 = 165"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "52"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "26"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,10,13,1",
+    "role": "recheck",
+    "prompt": "A rectangular card is 13 cm long and 10 cm wide. How many centimetres of lace are needed to go once round the edge of the card?",
+    "answer": "46",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "13 + 10 + 13 + 10 = 46"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (13 + 10) = 46"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "130"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "23"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,6,7,1:w",
+    "role": "transfer",
+    "prompt": "A rectangular card is 7 cm long and 6 cm wide. How many 1 cm squares of coloured paper are needed to cover the card?",
+    "answer": "42",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "6 rows of 7 squares = 7 × 6 = 42"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 7 + 7 + 7 + 7 + 7 + 7 = 42"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "26"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "13"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,8,14,1:w",
+    "role": "transfer",
+    "prompt": "A rectangular card is 14 cm long and 8 cm wide. How many 1 cm squares of coloured paper are needed to cover the card?",
+    "answer": "112",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "8 rows of 14 squares = 14 × 8 = 112"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 14 + 14 + 14 + 14 + 14 + 14 + 14 + 14 = 112"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "44"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "22"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:0,4,5,1:mc",
+    "role": "delayed-check",
+    "prompt": "A rectangular card is 5 cm long and 4 cm wide. How many 1 cm squares of coloured paper are needed to cover the card? Choose one.",
+    "answer": "20",
+    "options": [
+     "18",
+     "20",
+     "13",
+     "9"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Covering the inside: area",
+      "4 rows of 5 squares = 5 × 4 = 20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "area, row by row: 5 + 5 + 5 + 5 = 20"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "predicts": [
+       "18"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aeperar:1,10,16,0",
+    "role": "delayed-check",
+    "prompt": "A rectangular garden is 16 m long and 10 m wide. How many metres of fencing are needed to go once round the garden?",
+    "answer": "52",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Going once round the edge: perimeter",
+      "16 + 10 + 16 + 10 = 52"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Another way to compute it (perimeter: 2 × (length + width); area: add the rows)",
+      "ok": true,
+      "lines": [
+       "perimeter = 2 × (16 + 10) = 52"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "predicts": [
+       "160"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "predicts": [
+       "26"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

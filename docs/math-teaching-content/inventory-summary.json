@@ -1,0 +1,22 @@
+{
+ "modules": 336,
+ "authored": 24,
+ "synthesised": 312,
+ "families": 1082,
+ "orphanFamilies": 0,
+ "multiFamilyModules": 279,
+ "multiFamilyModulesWithUntaughtFamilies": 279,
+ "familiesWithoutStrategy": 767,
+ "familiesChapterOnly": 726,
+ "familiesNoTeachingAtAll": 41,
+ "alternativesDisconnected": 848,
+ "familiesNotInPools": 2,
+ "modulesWithAnyMisconceptionSpecific": 300,
+ "misconceptionsTotal": 4460,
+ "misconceptionsWithoutSpecific": 4153,
+ "modulesWithWorkingChecker": 32,
+ "familiesNoAlternative": 38,
+ "familiesNoTeach": 0,
+ "familiesNoWord": 323,
+ "familiesNoBugs": 1
+}

@@ -1,0 +1,1149 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP-NUM-02",
+ "title": "Adding like fractions: the bottom number names the piece size",
+ "competency": "MATH.number.fraction-add-like",
+ "competencyName": "Add and subtract like fractions",
+ "grades": [
+  4,
+  4
+ ],
+ "strand": "number",
+ "family": "fadd",
+ "familyTitle": "Adding or subtracting like fractions",
+ "skill": "Add two fractions with the same denominator: add the numerators, keep the denominator.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.number.equivalent-fractions",
+    "type": "disputed"
+   },
+   {
+    "from": "MATH.number.fraction-models",
+    "type": "support"
+   }
+  ],
+  "knowledge": [
+   "a/n is a pieces of size 1/n",
+   "equal pieces of the same whole can be counted together"
+  ],
+  "note": "graph: fraction-models (support), equivalent-fractions (disputed). No mandatory prerequisite is recorded; 'fraction as a count of unit pieces' is the real prerequisite."
+ },
+ "explanation": {
+  "concept": [
+   "3/8 means 3 pieces, each 1/8 of the whole. 2/8 means 2 more pieces of the same size.",
+   "Adding counts the pieces: 3 + 2 = 5 pieces, still eighths. The size of a piece does not change, so the bottom number stays 8."
+  ],
+  "visual": {
+   "type": "grid",
+   "rows": 1,
+   "cols": 9,
+   "shaded": 8,
+   "note": "one strip of n equal parts; shade a parts, then b more"
+  },
+  "visualNote": "Reuses the grid strip used by fraction families ({type:'grid', rows:1, cols:n, shaded:k}). For a sum above one whole, draw a second strip."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:fadd:6,2,9,1",
+   "prompt": "6/9 + 2/9 = ?",
+   "lines": [
+    "Every piece has size 1/9: 6 piece(s) and 2 piece(s) = 8 piece(s) of size 1/9",
+    "8/9"
+   ],
+   "familyExplainSteps": [
+    "6 + 2 = 8 pieces of the same size"
+   ],
+   "answer": "8/9"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:fadd:6,2,9,1",
+   "hints": [
+    "What size is each piece in these fractions?",
+    "Every piece is 1/9. Count all the pieces together.",
+    "Add the top numbers; the pieces are still 9ths."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Units that do not change",
+  "text": [
+   "3 apples + 2 apples = 5 apples, not 5 'double apples'.",
+   "3 eighths + 2 eighths = 5 eighths: 'eighths' is the unit, like 'apples'."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Number line in steps of 1/n",
+   "valid": true,
+   "example": [
+    "Start at 6/9 and jump 2 steps of 1/9",
+    "You land on 8/9"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: fadd has a family contract statement (a/n ± b/n), so the existing derivation authority (working-assessment@1) can examine typed arithmetic working; the answer alone earns answer credit only.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "sum below one",
+   "why": "add-denominators gives (a+b)/2n, multiply-tops gives ab/n: distinct values",
+   "id": "gen:fadd:3,5,9,1",
+   "fromPhase": "diagnostic",
+   "prompt": "3/9 + 5/9 = ?",
+   "answer": "8/9",
+   "readings": [
+    {
+     "response": "8/9",
+     "reading": "correct"
+    },
+    {
+     "response": "8/18",
+     "reading": "TARGET modelled error add-denominators (conceptual): suspected on one answer"
+    },
+    {
+     "response": "15/9",
+     "reading": "TARGET modelled error multiply-tops (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "add-denominators",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "fractions treated as two whole numbers (add top, add bottom)",
+   "example": "gen:fadd:2,3,6,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"2/6 + 3/6 = ?\", one wrong answer is 5/12.",
+     "The bottom numbers were added too; they name the size of the pieces, which does not change.",
+     "The bottom number is the SIZE of the pieces. Adding pieces does not make them smaller.",
+     "Not 5/12, but 5/6."
+    ],
+    "counterCheck": "Check with one strip cut into 6 equal parts: shade 2 parts, then 3 more. 5 parts are shaded and the strip still has 6 parts: 5/6. Nothing cut the strip into 12 parts.",
+    "solvedCorrectly": [
+     "Every piece has size 1/6: 2 piece(s) and 3 piece(s) = 5 piece(s) of size 1/6",
+     "5/6"
+    ]
+   },
+   "guided": "gen:fadd:3,4,12,1:mc",
+   "check": "gen:fadd:7,2,10,1:mc"
+  },
+  {
+   "bug": "multiply-tops",
+   "kind": "procedural",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "wrong operation on the numerators",
+   "example": "gen:fadd:2,3,7,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"2/7 + 3/7 = ?\", one wrong answer is 6/7.",
+     "The top numbers were multiplied; adding fractions adds the pieces.",
+     "Adding fractions adds the pieces; multiplication is a different operation.",
+     "Not 6/7, but 5/7."
+    ],
+    "counterCheck": "Check: 2 pieces and 3 more pieces make 5 pieces, not 6.",
+    "solvedCorrectly": [
+     "Every piece has size 1/7: 2 piece(s) and 3 piece(s) = 5 piece(s) of size 1/7",
+     "5/7"
+    ]
+   },
+   "guided": "gen:fadd:5,2,9,1:mc",
+   "check": "gen:fadd:3,2,11,1:mc"
+  }
+ ],
+ "authoredTransfer": [
+  {
+   "text": "Meena ate 2/8 of a cake in the morning and 3/8 of the same cake in the evening. What fraction of the cake did she eat?",
+   "answer": "5/8",
+   "arithmeticChecked": true,
+   "graderVerified": false
+  },
+  {
+   "text": "A ribbon is cut into 10 equal pieces. Ravi uses 3 pieces and Anu uses 4 pieces. What fraction of the ribbon did they use together?",
+   "answer": "7/10",
+   "arithmeticChecked": true,
+   "graderVerified": false
+  }
+ ],
+ "practice": {
+  "guided": [
+   "gen:fadd:3,2,8,1:mc",
+   "gen:fadd:4,2,7,1:mc",
+   "gen:fadd:2,9,12,1"
+  ],
+  "rechecks": [
+   "gen:fadd:4,3,9,1:mc",
+   "gen:fadd:5,6,12,1:mc"
+  ],
+  "transfer": [],
+  "delayedChecks": [
+   "gen:fadd:4,3,8,1:mc",
+   "gen:fadd:2,5,11,1:mc"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "integration": {
+  "strategyProposals": [
+   {
+    "id": "fix_add_denominators",
+    "title": "The bottom number is the SIZE of the pieces. Adding pieces d",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:fadd:2,3,6,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:fadd:2,3,6,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:fadd:3,4,12,1:mc"
+     }
+    ],
+    "guided": "gen:fadd:3,4,12,1:mc",
+    "check": "gen:fadd:7,2,10,1:mc"
+   },
+   {
+    "id": "fix_multiply_tops",
+    "title": "Adding fractions adds the pieces; multiplication is a differ",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:fadd:2,3,7,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:fadd:2,3,7,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:fadd:5,2,9,1:mc"
+     }
+    ],
+    "guided": "gen:fadd:5,2,9,1:mc",
+    "check": "gen:fadd:3,2,11,1:mc"
+   }
+  ],
+  "registryProposal": [
+   {
+    "competency": "MATH.number.fraction-add-like",
+    "strategy": "fix_add_denominators",
+    "misconceptionSpecific": true,
+    "addresses": "add-denominators",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.number.fraction-add-like",
+    "strategy": "fix_multiply_tops",
+    "misconceptionSpecific": true,
+    "addresses": "multiply-tops",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   }
+  ],
+  "generalStrategyProposal": {
+   "id": "fadd_concept",
+   "screens": [
+    "concept + visual",
+    "worked example(s)",
+    "alternative explanation"
+   ],
+   "note": "for modules where this family has only a chapter screen"
+  },
+  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+ },
+ "sources": [
+  "packages/learning/src/families.ts:116 fadd: teach idea/method only, NO alternatives, NO word form; bugs add-denominators, multiply-tops",
+  "content/learning/modules.v1.json MATH.number.fraction-add-like (authored; one strategy count_pieces)"
+ ],
+ "uncertainties": [
+  "fadd has no word (transfer) form: transfer candidates cannot be drawn from the generator; transfer is MISSING CONTENT (authored candidates below are text only, unverified by the grader).",
+  "The family's diagnostic pool has no sum-above-one item, so the diagnostic cannot test improper results (one case only).",
+  "Some fadd items give the same value for both bugs (e.g. 1/3 + 1/3: both predict 1/3); the builder excludes such items from diagnostics.",
+  "The subtraction bug 'subtract-reversed' predicts a negative value although the family rejects b > a; not targeted here."
+ ],
+ "validation": {
+  "items": 15,
+  "itemsOk": 15,
+  "poolAgreement": "220/220",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:fadd:3,5,9,1",
+    "role": "diagnostic",
+    "prompt": "3/9 + 5/9 = ?",
+    "answer": "8/9",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/9: 3 piece(s) and 5 piece(s) = 8 piece(s) of size 1/9",
+      "8/9"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 3/9 and jump 5 steps of 1/9",
+       "You land on 8/9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "4/9",
+       "8/18"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "5/3",
+       "15/9"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:6,2,9,1",
+    "role": "worked-example",
+    "prompt": "6/9 + 2/9 = ?",
+    "answer": "8/9",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/9: 6 piece(s) and 2 piece(s) = 8 piece(s) of size 1/9",
+      "8/9"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 6/9 and jump 2 steps of 1/9",
+       "You land on 8/9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "4/9",
+       "8/18"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "4/3",
+       "12/9"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:2,3,6,1",
+    "role": "misconception-example",
+    "prompt": "2/6 + 3/6 = ?",
+    "answer": "5/6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/6: 2 piece(s) and 3 piece(s) = 5 piece(s) of size 1/6",
+      "5/6"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 2/6 and jump 3 steps of 1/6",
+       "You land on 5/6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "5/12",
+       "5/12"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "1",
+       "6/6"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:3,4,12,1:mc",
+    "role": "misconception-guided",
+    "prompt": "3/12 + 4/12 = ? Choose one.",
+    "answer": "7/12",
+    "options": [
+     "7/24",
+     "7/12",
+     "1",
+     "19/12"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/12: 3 piece(s) and 4 piece(s) = 7 piece(s) of size 1/12",
+      "7/12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 3/12 and jump 4 steps of 1/12",
+       "You land on 7/12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "7/24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:7,2,10,1:mc",
+    "role": "misconception-check",
+    "prompt": "7/10 + 2/10 = ? Choose one.",
+    "answer": "9/10",
+    "options": [
+     "9/20",
+     "9/10",
+     "7/5",
+     "19/10"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/10: 7 piece(s) and 2 piece(s) = 9 piece(s) of size 1/10",
+      "9/10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 7/10 and jump 2 steps of 1/10",
+       "You land on 9/10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "0.45"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "1.4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:2,3,7,1",
+    "role": "misconception-example",
+    "prompt": "2/7 + 3/7 = ?",
+    "answer": "5/7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/7: 2 piece(s) and 3 piece(s) = 5 piece(s) of size 1/7",
+      "5/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 2/7 and jump 3 steps of 1/7",
+       "You land on 5/7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "5/14",
+       "5/14"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "6/7",
+       "6/7"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:5,2,9,1:mc",
+    "role": "misconception-guided",
+    "prompt": "5/9 + 2/9 = ? Choose one.",
+    "answer": "7/9",
+    "options": [
+     "7/18",
+     "7/9",
+     "10/9",
+     "16/9"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/9: 5 piece(s) and 2 piece(s) = 7 piece(s) of size 1/9",
+      "7/9"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 5/9 and jump 2 steps of 1/9",
+       "You land on 7/9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "7/18"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "10/9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:3,2,11,1:mc",
+    "role": "misconception-check",
+    "prompt": "3/11 + 2/11 = ? Choose one.",
+    "answer": "5/11",
+    "options": [
+     "5/22",
+     "5/11",
+     "6/11",
+     "16/11"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/11: 3 piece(s) and 2 piece(s) = 5 piece(s) of size 1/11",
+      "5/11"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 3/11 and jump 2 steps of 1/11",
+       "You land on 5/11"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "5/22"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "6/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:3,2,8,1:mc",
+    "role": "guided-practice",
+    "prompt": "3/8 + 2/8 = ? Choose one.",
+    "answer": "5/8",
+    "options": [
+     "5/16",
+     "5/8",
+     "3/4",
+     "13/8"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/8: 3 piece(s) and 2 piece(s) = 5 piece(s) of size 1/8",
+      "5/8"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 3/8 and jump 2 steps of 1/8",
+       "You land on 5/8"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "5/16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "0.75"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:4,2,7,1:mc",
+    "role": "guided-practice",
+    "prompt": "4/7 + 2/7 = ? Choose one.",
+    "answer": "6/7",
+    "options": [
+     "3/7",
+     "6/7",
+     "8/7",
+     "13/7"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/7: 4 piece(s) and 2 piece(s) = 6 piece(s) of size 1/7",
+      "6/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 4/7 and jump 2 steps of 1/7",
+       "You land on 6/7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "3/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "8/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:2,9,12,1",
+    "role": "guided-practice",
+    "prompt": "2/12 + 9/12 = ?",
+    "answer": "11/12",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/12: 2 piece(s) and 9 piece(s) = 11 piece(s) of size 1/12",
+      "11/12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 2/12 and jump 9 steps of 1/12",
+       "You land on 11/12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "11/24",
+       "11/24"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "1.5",
+       "18/12"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:4,3,9,1:mc",
+    "role": "recheck",
+    "prompt": "4/9 + 3/9 = ? Choose one.",
+    "answer": "7/9",
+    "options": [
+     "7/18",
+     "7/9",
+     "4/3",
+     "16/9"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/9: 4 piece(s) and 3 piece(s) = 7 piece(s) of size 1/9",
+      "7/9"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 4/9 and jump 3 steps of 1/9",
+       "You land on 7/9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "7/18"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "4/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:5,6,12,1:mc",
+    "role": "recheck",
+    "prompt": "5/12 + 6/12 = ? Choose one.",
+    "answer": "11/12",
+    "options": [
+     "11/24",
+     "11/12",
+     "23/12",
+     "5/2"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/12: 5 piece(s) and 6 piece(s) = 11 piece(s) of size 1/12",
+      "11/12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 5/12 and jump 6 steps of 1/12",
+       "You land on 11/12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "11/24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "2.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:4,3,8,1:mc",
+    "role": "delayed-check",
+    "prompt": "4/8 + 3/8 = ? Choose one.",
+    "answer": "7/8",
+    "options": [
+     "7/16",
+     "7/8",
+     "3/2",
+     "15/8"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/8: 4 piece(s) and 3 piece(s) = 7 piece(s) of size 1/8",
+      "7/8"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 4/8 and jump 3 steps of 1/8",
+       "You land on 7/8"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "7/16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "1.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:fadd:2,5,11,1:mc",
+    "role": "delayed-check",
+    "prompt": "2/11 + 5/11 = ? Choose one.",
+    "answer": "7/11",
+    "options": [
+     "7/22",
+     "7/11",
+     "10/11",
+     "18/11"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Every piece has size 1/11: 2 piece(s) and 5 piece(s) = 7 piece(s) of size 1/11",
+      "7/11"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number line in steps of 1/n",
+      "ok": true,
+      "lines": [
+       "Start at 2/11 and jump 5 steps of 1/11",
+       "You land on 7/11"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "predicts": [
+       "7/22"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "predicts": [
+       "10/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

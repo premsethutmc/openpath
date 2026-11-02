@@ -1,0 +1,1419 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP-GEO-02",
+ "title": "Vertically opposite angles are equal",
+ "competency": "MATH.geometry.angle-pairs",
+ "competencyName": "Use linear pairs, vertically opposite, complementary and supplementary angles",
+ "grades": [
+  5,
+  7
+ ],
+ "strand": "geometry",
+ "family": "afcross",
+ "familyTitle": "Angles where two straight lines cross",
+ "skill": "At two crossing lines: vertically opposite angles are equal; adjacent angles make 180°; all four make 360°.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.geometry.angle-measure",
+    "type": "plausible"
+   },
+   {
+    "from": "MATH.geometry.lines-segments",
+    "type": "support"
+   },
+   {
+    "from": "MATH.geometry.parallel-angles",
+    "type": "support"
+   }
+  ],
+  "knowledge": [
+   "angles on a straight line add to 180°",
+   "a full turn is 360°"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
+   "Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°."
+  ],
+  "visual": {
+   "type": "angle",
+   "deg": 128,
+   "note": "reuses go_round; a full crossing-lines figure is not in the Visual union"
+  },
+  "visualNote": "Reuses the family's own go_round visual ({type:'angle', deg}); a two-line crossing figure is a MISSING VISUAL CAPABILITY."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:afcross:128,0",
+   "prompt": "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
+   "lines": [
+    "next angle round = 180° − 128° = 52° (straight line)",
+    "the one after = 180° − 52° = 128° (straight line): the opposite angle is 128°"
+   ],
+   "familyExplainSteps": [
+    "Vertically opposite angles are equal: 128°"
+   ],
+   "answer": "128"
+  },
+  {
+   "id": "gen:afcross:149,1",
+   "prompt": "Two straight lines cross each other, making four angles. One of the angles is 149°. What is an angle next to it (they form a straight line together), in degrees?",
+   "lines": [
+    "adjacent angles lie on a straight line: 180° − 149° = 31°"
+   ],
+   "familyExplainSteps": [
+    "Angles on a straight line add to 180°: 180° − 149° = 31°"
+   ],
+   "answer": "31"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:afcross:128,0",
+   "hints": [
+    "Which angles lie on the same straight line?",
+    "Angles next to each other make 180°.",
+    "Go round twice: 180° − (180° − x) is back to x."
+   ]
+  },
+  {
+   "for": "gen:afcross:149,1",
+   "hints": [
+    "Which angles lie on the same straight line?",
+    "Angles next to each other make 180°.",
+    "180° minus the angle you know."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Two crossed pencils",
+  "text": [
+   "Hold two straight pencils crossed like an X.",
+   "Open them wider: the top and bottom angles grow together while the two side angles shrink together. Opposite angles stay equal."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Full turn",
+   "valid": true,
+   "example": [
+    "each angle next to 128° is 180° − 128° = 52° (straight line)",
+    "all four make 360°: opposite angle = 360° − 128° − 2 × 52° = 128°"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: afcross modes 0/1 have a geometry task (foundation adapter); mode 2 (other three) has none (geometry-task.ts excludes b === 2). G5 R06: a vertically-opposite citation for a MEASURE was rejected by the reasoner; route through straight-line steps is supported.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "vertically opposite",
+   "why": "opposite-as-linear gives 180 − x",
+   "id": "gen:afcross:105,0",
+   "fromPhase": "diagnostic",
+   "prompt": "Two straight lines cross each other, making four angles. One of the angles is 105°. What is the angle opposite it (vertically opposite), in degrees?",
+   "answer": "105",
+   "readings": [
+    {
+     "response": "105",
+     "reading": "correct"
+    },
+    {
+     "response": "75",
+     "reading": "TARGET modelled error opposite-as-linear (conceptual): suspected on one answer"
+    },
+    {
+     "response": "255",
+     "reading": "other modelled error full-turn (recall): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "adjacent",
+   "why": "neighbour-equal gives x; a learner with the swapped rule errs on both items in mirror image",
+   "id": "gen:afcross:126,1",
+   "fromPhase": "diagnostic",
+   "prompt": "Two straight lines cross each other, making four angles. One of the angles is 126°. What is an angle next to it (they form a straight line together), in degrees?",
+   "answer": "54",
+   "readings": [
+    {
+     "response": "54",
+     "reading": "correct"
+    },
+    {
+     "response": "126",
+     "reading": "TARGET modelled error neighbour-equal (conceptual): suspected on one answer"
+    },
+    {
+     "response": "234",
+     "reading": "other modelled error full-turn (recall): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "other three",
+   "why": "straight-only / all-equal separate a full-turn gap from the opposite/adjacent confusion",
+   "id": "gen:afcross:84,2",
+   "fromPhase": "diagnostic",
+   "prompt": "Two straight lines cross each other, making four angles. One of the angles is 84°. What do the other three angles add up to, in degrees?",
+   "answer": "276",
+   "readings": [
+    {
+     "response": "276",
+     "reading": "correct"
+    },
+    {
+     "response": "96",
+     "reading": "other modelled error straight-only (procedural): suspected on one answer"
+    },
+    {
+     "response": "252",
+     "reading": "other modelled error all-equal (conceptual): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "opposite-as-linear",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "vertically opposite taken as a linear pair",
+   "example": "gen:afcross:104,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"Two straight lines cross each other, making four angles. One of the angles is 104°. What is the angle opposite it (vertically opposite), in degrees?\", one wrong answer is 76.",
+     "Vertically opposite angles were taken as a pair on a straight line. They are not on one straight line together; they are equal.",
+     "Opposite angles do not lie together on one straight line, so they need not add to 180°: they are equal. Angles next to each other make 180°.",
+     "Not 76, but 104."
+    ],
+    "counterCheck": "Counter-check: going round the crossing, each angle makes 180° with the next one: 104°, then 76°, then 104° again. The angle opposite 104° is the third one round, so it is 104°, not 76°.",
+    "solvedCorrectly": [
+     "next angle round = 180° − 104° = 76° (straight line)",
+     "the one after = 180° − 76° = 104° (straight line): the opposite angle is 104°"
+    ]
+   },
+   "guided": "gen:afcross:109,0:mc",
+   "check": "gen:afcross:70,0"
+  },
+  {
+   "bug": "neighbour-equal",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "adjacent taken as equal",
+   "example": "gen:afcross:147,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"Two straight lines cross each other, making four angles. One of the angles is 147°. What is an angle next to it (they form a straight line together), in degrees?\", one wrong answer is 147.",
+     "Angles next to each other are not equal (unless both are 90°); together they make a straight line, 180°.",
+     "Angles next to each other lie on a straight line: they add to 180°. They are equal only when both are 90°.",
+     "Not 147, but 33."
+    ],
+    "counterCheck": "Check: the two angles together fill one side of a straight line, which is 180°. 147° + 147° = 294° is more than a straight line.",
+    "solvedCorrectly": [
+     "adjacent angles lie on a straight line: 180° − 147° = 33°"
+    ]
+   },
+   "guided": "gen:afcross:27,1:mc",
+   "check": "gen:afcross:146,1:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:afcross:29,0:mc",
+   "gen:afcross:107,1:mc",
+   "gen:afcross:152,0:mc"
+  ],
+  "rechecks": [
+   "gen:afcross:158,0:mc",
+   "gen:afcross:40,1:mc"
+  ],
+  "transfer": [
+   "gen:afcross:35,0:w",
+   "gen:afcross:81,0:w"
+  ],
+  "delayedChecks": [
+   "gen:afcross:42,0",
+   "gen:afcross:37,1"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "integration": {
+  "strategyProposals": [
+   {
+    "id": "fix_opposite_as_linear",
+    "title": "Opposite angles do not lie together on one straight line, so",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:afcross:104,0"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:afcross:104,0"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:afcross:109,0:mc"
+     }
+    ],
+    "guided": "gen:afcross:109,0:mc",
+    "check": "gen:afcross:70,0"
+   },
+   {
+    "id": "fix_neighbour_equal",
+    "title": "Angles next to each other lie on a straight line",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:afcross:147,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:afcross:147,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:afcross:27,1:mc"
+     }
+    ],
+    "guided": "gen:afcross:27,1:mc",
+    "check": "gen:afcross:146,1:mc"
+   }
+  ],
+  "registryProposal": [
+   {
+    "competency": "MATH.geometry.angle-pairs",
+    "strategy": "fix_opposite_as_linear",
+    "misconceptionSpecific": true,
+    "addresses": "opposite-as-linear",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.geometry.angle-pairs",
+    "strategy": "fix_neighbour_equal",
+    "misconceptionSpecific": true,
+    "addresses": "neighbour-equal",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   }
+  ],
+  "generalStrategyProposal": {
+   "id": "afcross_concept",
+   "screens": [
+    "concept + visual",
+    "worked example(s)",
+    "alternative explanation"
+   ],
+   "note": "for modules where this family has only a chapter screen"
+  },
+  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+ },
+ "sources": [
+  "packages/learning/src/fam/b06.ts:1266 afcross: teach idea/method, go_round; bugs opposite-as-linear, full-turn, neighbour-equal, straight-only, all-equal",
+  "docs/geometry-cross-domain-validation (G5) G-06"
+ ],
+ "uncertainties": [
+  "The 'adjacent' full-turn route uses the opposite-angle fact; it is valid but not independent of it."
+ ],
+ "validation": {
+  "items": 20,
+  "itemsOk": 20,
+  "poolAgreement": "300/300",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:afcross:105,0",
+    "role": "diagnostic",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 105°. What is the angle opposite it (vertically opposite), in degrees?",
+    "answer": "105",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 105° = 75° (straight line)",
+      "the one after = 180° − 75° = 105° (straight line): the opposite angle is 105°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 105° is 180° − 105° = 75° (straight line)",
+       "all four make 360°: opposite angle = 360° − 105° − 2 × 75° = 105°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "75"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "255"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:126,1",
+    "role": "diagnostic",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 126°. What is an angle next to it (they form a straight line together), in degrees?",
+    "answer": "54",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 126° = 54°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 126° is also 126°; the other two are opposite each other, so equal",
+       "(360° − 2 × 126°) ÷ 2 = 54°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "126"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "234"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:84,2",
+    "role": "diagnostic",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 84°. What do the other three angles add up to, in degrees?",
+    "answer": "276",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "the other three = 96° + 84° + 96° = 276°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "all four make 360°: 360° − 84° = 276°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "straight-only",
+      "kind": "procedural",
+      "predicts": [
+       "96"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "all-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "252"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:128,0",
+    "role": "worked-example",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
+    "answer": "128",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 128° = 52° (straight line)",
+      "the one after = 180° − 52° = 128° (straight line): the opposite angle is 128°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 128° is 180° − 128° = 52° (straight line)",
+       "all four make 360°: opposite angle = 360° − 128° − 2 × 52° = 128°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "52"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "232"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:149,1",
+    "role": "worked-example",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 149°. What is an angle next to it (they form a straight line together), in degrees?",
+    "answer": "31",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 149° = 31°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 149° is also 149°; the other two are opposite each other, so equal",
+       "(360° − 2 × 149°) ÷ 2 = 31°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "149"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "211"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:104,0",
+    "role": "misconception-example",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 104°. What is the angle opposite it (vertically opposite), in degrees?",
+    "answer": "104",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 104° = 76° (straight line)",
+      "the one after = 180° − 76° = 104° (straight line): the opposite angle is 104°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 104° is 180° − 104° = 76° (straight line)",
+       "all four make 360°: opposite angle = 360° − 104° − 2 × 76° = 104°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "76"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "256"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:109,0:mc",
+    "role": "misconception-guided",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 109°. What is the angle opposite it (vertically opposite), in degrees? Choose one.",
+    "answer": "109",
+    "options": [
+     "71",
+     "251",
+     "109",
+     "110"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 109° = 71° (straight line)",
+      "the one after = 180° − 71° = 109° (straight line): the opposite angle is 109°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 109° is 180° − 109° = 71° (straight line)",
+       "all four make 360°: opposite angle = 360° − 109° − 2 × 71° = 109°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "71"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "251"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:70,0",
+    "role": "misconception-check",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 70°. What is the angle opposite it (vertically opposite), in degrees?",
+    "answer": "70",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 70° = 110° (straight line)",
+      "the one after = 180° − 110° = 70° (straight line): the opposite angle is 70°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 70° is 180° − 70° = 110° (straight line)",
+       "all four make 360°: opposite angle = 360° − 70° − 2 × 110° = 70°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "110"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "290"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:147,1",
+    "role": "misconception-example",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 147°. What is an angle next to it (they form a straight line together), in degrees?",
+    "answer": "33",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 147° = 33°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 147° is also 147°; the other two are opposite each other, so equal",
+       "(360° − 2 × 147°) ÷ 2 = 33°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "147"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "213"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:27,1:mc",
+    "role": "misconception-guided",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 27°. What is an angle next to it (they form a straight line together), in degrees? Choose one.",
+    "answer": "153",
+    "options": [
+     "333",
+     "153",
+     "154",
+     "27"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 27° = 153°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 27° is also 27°; the other two are opposite each other, so equal",
+       "(360° − 2 × 27°) ÷ 2 = 153°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "27"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "333"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:146,1:mc",
+    "role": "misconception-check",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 146°. What is an angle next to it (they form a straight line together), in degrees? Choose one.",
+    "answer": "34",
+    "options": [
+     "146",
+     "214",
+     "35",
+     "34"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 146° = 34°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 146° is also 146°; the other two are opposite each other, so equal",
+       "(360° − 2 × 146°) ÷ 2 = 34°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "146"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "214"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:29,0:mc",
+    "role": "guided-practice",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 29°. What is the angle opposite it (vertically opposite), in degrees? Choose one.",
+    "answer": "29",
+    "options": [
+     "151",
+     "331",
+     "30",
+     "29"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 29° = 151° (straight line)",
+      "the one after = 180° − 151° = 29° (straight line): the opposite angle is 29°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 29° is 180° − 29° = 151° (straight line)",
+       "all four make 360°: opposite angle = 360° − 29° − 2 × 151° = 29°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "151"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "331"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:107,1:mc",
+    "role": "guided-practice",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 107°. What is an angle next to it (they form a straight line together), in degrees? Choose one.",
+    "answer": "73",
+    "options": [
+     "107",
+     "253",
+     "74",
+     "73"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 107° = 73°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 107° is also 107°; the other two are opposite each other, so equal",
+       "(360° − 2 × 107°) ÷ 2 = 73°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "107"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "253"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:152,0:mc",
+    "role": "guided-practice",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 152°. What is the angle opposite it (vertically opposite), in degrees? Choose one.",
+    "answer": "152",
+    "options": [
+     "152",
+     "153",
+     "28",
+     "208"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 152° = 28° (straight line)",
+      "the one after = 180° − 28° = 152° (straight line): the opposite angle is 152°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 152° is 180° − 152° = 28° (straight line)",
+       "all four make 360°: opposite angle = 360° − 152° − 2 × 28° = 152°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "28"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "208"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:158,0:mc",
+    "role": "recheck",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 158°. What is the angle opposite it (vertically opposite), in degrees? Choose one.",
+    "answer": "158",
+    "options": [
+     "202",
+     "22",
+     "158",
+     "159"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 158° = 22° (straight line)",
+      "the one after = 180° − 22° = 158° (straight line): the opposite angle is 158°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 158° is 180° − 158° = 22° (straight line)",
+       "all four make 360°: opposite angle = 360° − 158° − 2 × 22° = 158°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "22"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "202"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:40,1:mc",
+    "role": "recheck",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 40°. What is an angle next to it (they form a straight line together), in degrees? Choose one.",
+    "answer": "140",
+    "options": [
+     "320",
+     "40",
+     "140",
+     "141"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 40° = 140°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 40° is also 40°; the other two are opposite each other, so equal",
+       "(360° − 2 × 40°) ÷ 2 = 140°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "320"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:35,0:w",
+    "role": "transfer",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 35°. What is the angle opposite it (vertically opposite), in degrees?",
+    "answer": "35",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 35° = 145° (straight line)",
+      "the one after = 180° − 145° = 35° (straight line): the opposite angle is 35°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 35° is 180° − 35° = 145° (straight line)",
+       "all four make 360°: opposite angle = 360° − 35° − 2 × 145° = 35°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "145"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "325"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:81,0:w",
+    "role": "transfer",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 81°. What is the angle opposite it (vertically opposite), in degrees?",
+    "answer": "81",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 81° = 99° (straight line)",
+      "the one after = 180° − 99° = 81° (straight line): the opposite angle is 81°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 81° is 180° − 81° = 99° (straight line)",
+       "all four make 360°: opposite angle = 360° − 81° − 2 × 99° = 81°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "99"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "279"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:42,0",
+    "role": "delayed-check",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 42°. What is the angle opposite it (vertically opposite), in degrees?",
+    "answer": "42",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "next angle round = 180° − 42° = 138° (straight line)",
+      "the one after = 180° − 138° = 42° (straight line): the opposite angle is 42°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "each angle next to 42° is 180° − 42° = 138° (straight line)",
+       "all four make 360°: opposite angle = 360° − 42° − 2 × 138° = 42°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "predicts": [
+       "138"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "318"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afcross:37,1",
+    "role": "delayed-check",
+    "prompt": "Two straight lines cross each other, making four angles. One of the angles is 37°. What is an angle next to it (they form a straight line together), in degrees?",
+    "answer": "143",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "adjacent angles lie on a straight line: 180° − 37° = 143°"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Full turn",
+      "ok": true,
+      "lines": [
+       "the angle opposite 37° is also 37°; the other two are opposite each other, so equal",
+       "(360° − 2 × 37°) ÷ 2 = 143°"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "37"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "full-turn",
+      "kind": "recall",
+      "predicts": [
+       "323"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

@@ -1,0 +1,1096 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP-NUM-03",
+ "title": "Comparing decimals: place value, not length",
+ "competency": "MATH.number.decimal-tenths",
+ "competencyName": "Represent tenths and hundredths",
+ "grades": [
+  4,
+  4
+ ],
+ "strand": "number",
+ "family": "aedecc",
+ "familyTitle": "Comparing a tenths decimal with a hundredths decimal",
+ "skill": "Compare a tenths decimal with a hundredths decimal by place value.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.number.fraction-add-like",
+    "type": "mandatory"
+   }
+  ],
+  "knowledge": [
+   "tenths and hundredths place value",
+   "0.7 = 0.70 (seven tenths = seventy hundredths)"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "Decimals are compared place by place from the left: wholes, then tenths, then hundredths.",
+   "Writing both with the same number of places makes them easy to compare: 0.7 = 0.70, which is more than 0.65."
+  ],
+  "visual": {
+   "type": "grid",
+   "rows": 10,
+   "cols": 10,
+   "shaded": 1,
+   "note": "hundred grid: one shaded square = 0.01; a full column = 0.1"
+  },
+  "visualNote": "Reuses the hundred grid ({type:'grid', rows:10, cols:10, shaded:k}) of the decimal-tenths module's hundred_grid strategy; shade each number on its own grid."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:aedecc:0,5,0,1",
+   "prompt": "Which number is greater: 0.01 or 0.5? Write the greater number.",
+   "lines": [
+    "Write both with two decimal places: 0.01 and 0.50",
+    "0.01 is 1 hundredth; 0.50 is 50 hundredths. So 0.5 is greater"
+   ],
+   "familyExplainSteps": [
+    "Compare the tenths: 5 and 0. The greater number is 0.5"
+   ],
+   "answer": "0.5"
+  },
+  {
+   "id": "gen:aedecc:3,1,4,2",
+   "prompt": "Which number is greater: 3.1 or 3.42? Write the greater number.",
+   "lines": [
+    "Write both with two decimal places: 3.10 and 3.42",
+    "3.10 is 310 hundredths; 3.42 is 342 hundredths. So 3.42 is greater"
+   ],
+   "familyExplainSteps": [
+    "Compare the tenths: 1 and 4. The greater number is 3.42"
+   ],
+   "answer": "3.42"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:aedecc:0,5,0,1",
+   "hints": [
+    "Compare the tenths digits first.",
+    "Write both with two places: 0.01 and 0.50.",
+    "Compare 1 hundredth with 50 hundredths."
+   ]
+  },
+  {
+   "for": "gen:aedecc:3,1,4,2",
+   "hints": [
+    "Compare the tenths digits first.",
+    "Write both with two places: 3.10 and 3.42.",
+    "Compare 310 hundredths with 342 hundredths."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Number line in tenths",
+  "text": [
+   "Mark 0, 0.1, 0.2, … 1 on a line.",
+   "Find which tenth each number is in first; only if they are in the same tenth do the hundredths decide."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Money (paise)",
+   "valid": true,
+   "example": [
+    "₹0.01 is 1 paisa; ₹0.50 is 50 paise",
+    "50 paise is more, so 0.5 is greater"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: comparison answers have no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "tenths decimal is greater",
+   "why": "longer-is-larger picks the hundredths number",
+   "id": "gen:aedecc:2,8,1,3",
+   "fromPhase": "diagnostic",
+   "prompt": "Which number is greater: 2.13 or 2.8? Write the greater number.",
+   "answer": "2.8",
+   "readings": [
+    {
+     "response": "2.8",
+     "reading": "correct"
+    },
+    {
+     "response": "2.13",
+     "reading": "TARGET modelled error longer-is-larger (conceptual): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "hundredths decimal is greater",
+   "why": "the opposite belief (shorter is larger, from 'tenths are bigger than hundredths') errs here instead",
+   "id": "gen:aedecc:1,4,8,7",
+   "fromPhase": "diagnostic",
+   "prompt": "Which number is greater: 1.4 or 1.87? Write the greater number.",
+   "answer": "1.87",
+   "readings": [
+    {
+     "response": "1.87",
+     "reading": "correct"
+    },
+    {
+     "response": "1.4",
+     "reading": "TARGET modelled error shorter-is-larger (conceptual): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "longer-is-larger",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "digits after the point read as a whole number",
+   "example": "gen:aedecc:2,2,0,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"Which number is greater: 2.2 or 2.01? Write the greater number.\", one wrong answer is 2.01.",
+     "2.01 was taken as greater because it has more digits after the point. Compare the tenths first.",
+     "More digits after the point does not mean bigger: compare the tenths first.",
+     "Not 2.01, but 2.2."
+    ],
+    "counterCheck": "Counter-check: 0.5 is half; 0.45 is less than half (45 of 100). So 0.5 > 0.45 although 0.45 has more digits.",
+    "solvedCorrectly": [
+     "Write both with two decimal places: 2.20 and 2.01",
+     "2.20 is 220 hundredths; 2.01 is 201 hundredths. So 2.2 is greater"
+    ]
+   },
+   "guided": "gen:aedecc:3,6,1,5",
+   "check": "gen:aedecc:1,7,6,4"
+  },
+  {
+   "bug": "shorter-is-larger",
+   "kind": "conceptual",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "over-generalised 'tenths beat hundredths'",
+   "example": "gen:aedecc:1,2,7,7",
+   "screens": {
+    "whatWentWrong": [
+     "In \"Which number is greater: 1.77 or 1.2? Write the greater number.\", one wrong answer is 1.2.",
+     "1.2 was taken as greater because hundredths are small pieces; but 1.77 has more tenths (7 against 2).",
+     "A tenths number is not always bigger than a hundredths number: compare the tenths digits.",
+     "Not 1.2, but 1.77."
+    ],
+    "counterCheck": "Counter-check: 0.91 is 9 tenths and 1 hundredth; 0.1 is only 1 tenth. 0.91 > 0.1.",
+    "solvedCorrectly": [
+     "Write both with two decimal places: 1.77 and 1.20",
+     "1.77 is 177 hundredths; 1.20 is 120 hundredths. So 1.77 is greater"
+    ]
+   },
+   "guided": "gen:aedecc:3,3,8,1",
+   "check": "gen:aedecc:1,1,2,9"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:aedecc:0,6,8,7",
+   "gen:aedecc:1,3,4,8",
+   "gen:aedecc:2,1,7,9"
+  ],
+  "rechecks": [
+   "gen:aedecc:3,4,3,8",
+   "gen:aedecc:2,6,7,7"
+  ],
+  "transfer": [
+   "gen:aedecc:0,7,4,9:w",
+   "gen:aedecc:0,9,7,9:w"
+  ],
+  "delayedChecks": [
+   "gen:aedecc:0,8,7,4",
+   "gen:aedecc:2,7,8,8"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "integration": {
+  "strategyProposals": [
+   {
+    "id": "fix_longer_is_larger",
+    "title": "More digits after the point does not mean bigger",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:aedecc:2,2,0,1"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:aedecc:2,2,0,1"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:aedecc:3,6,1,5"
+     }
+    ],
+    "guided": "gen:aedecc:3,6,1,5",
+    "check": "gen:aedecc:1,7,6,4"
+   },
+   {
+    "id": "fix_shorter_is_larger",
+    "title": "A tenths number is not always bigger than a hundredths numbe",
+    "kind": "conceptual|procedural (from bug kind)",
+    "needs": [],
+    "screens": [
+     {
+      "role": "misconception",
+      "instance": "gen:aedecc:1,2,7,7"
+     },
+     {
+      "role": "worked-example",
+      "instance": "gen:aedecc:1,2,7,7"
+     },
+     {
+      "role": "practice",
+      "instance": "gen:aedecc:3,3,8,1"
+     }
+    ],
+    "guided": "gen:aedecc:3,3,8,1",
+    "check": "gen:aedecc:1,1,2,9"
+   }
+  ],
+  "registryProposal": [
+   {
+    "competency": "MATH.number.decimal-tenths",
+    "strategy": "fix_longer_is_larger",
+    "misconceptionSpecific": true,
+    "addresses": "longer-is-larger",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   },
+   {
+    "competency": "MATH.number.decimal-tenths",
+    "strategy": "fix_shorter_is_larger",
+    "misconceptionSpecific": true,
+    "addresses": "shorter-is-larger",
+    "status": "pending_review",
+    "scope": [
+     "demonstration"
+    ]
+   }
+  ],
+  "generalStrategyProposal": {
+   "id": "aedecc_concept",
+   "screens": [
+    "concept + visual",
+    "worked example(s)",
+    "alternative explanation"
+   ],
+   "note": "for modules where this family has only a chapter screen"
+  },
+  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+ },
+ "sources": [
+  "packages/learning/src/fam/b05.ts:1301 aedecc: teach idea/method, alternative money; bugs longer-is-larger, shorter-is-larger",
+  "library.v1.json MATH.number.decimal-tenths (seeded from aedec; aedecc has only a chapter screen; spot_the_mistake addresses one aedec bug)"
+ ],
+ "uncertainties": [
+  "aedecc has no figure; the hundred grid is a proposal reusing an existing visual.",
+  "CONTENT DEFECT (existing family text, fam/b05.ts aedecc bugs, longer-is-larger 'says'): it claims the hundredths digits 'uv' are more than the tenths digit t; this is false whenever uv ≤ t (e.g. '03 is more than 5'). The package replaces that sentence for its own screens; the family text itself is not changed here.",
+  "The competency is 'Represent tenths'; comparison sits inside it (the family is one of its five)."
+ ],
+ "validation": {
+  "items": 19,
+  "itemsOk": 19,
+  "poolAgreement": "300/300",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:aedecc:2,8,1,3",
+    "role": "diagnostic",
+    "prompt": "Which number is greater: 2.13 or 2.8? Write the greater number.",
+    "answer": "2.8",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 2.13 and 2.80",
+      "2.13 is 213 hundredths; 2.80 is 280 hundredths. So 2.8 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹2.13 is 213 paise; ₹2.80 is 280 paise",
+       "280 paise is more, so 2.8 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "2.13"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:1,4,8,7",
+    "role": "diagnostic",
+    "prompt": "Which number is greater: 1.4 or 1.87? Write the greater number.",
+    "answer": "1.87",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 1.40 and 1.87",
+      "1.40 is 140 hundredths; 1.87 is 187 hundredths. So 1.87 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹1.40 is 140 paise; ₹1.87 is 187 paise",
+       "187 paise is more, so 1.87 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "1.4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:0,5,0,1",
+    "role": "worked-example",
+    "prompt": "Which number is greater: 0.01 or 0.5? Write the greater number.",
+    "answer": "0.5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 0.01 and 0.50",
+      "0.01 is 1 hundredth; 0.50 is 50 hundredths. So 0.5 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹0.01 is 1 paisa; ₹0.50 is 50 paise",
+       "50 paise is more, so 0.5 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "0.01"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:3,1,4,2",
+    "role": "worked-example",
+    "prompt": "Which number is greater: 3.1 or 3.42? Write the greater number.",
+    "answer": "3.42",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 3.10 and 3.42",
+      "3.10 is 310 hundredths; 3.42 is 342 hundredths. So 3.42 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹3.10 is 310 paise; ₹3.42 is 342 paise",
+       "342 paise is more, so 3.42 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "3.1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:2,2,0,1",
+    "role": "misconception-example",
+    "prompt": "Which number is greater: 2.2 or 2.01? Write the greater number.",
+    "answer": "2.2",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 2.20 and 2.01",
+      "2.20 is 220 hundredths; 2.01 is 201 hundredths. So 2.2 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹2.20 is 220 paise; ₹2.01 is 201 paise",
+       "220 paise is more, so 2.2 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "2.01"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:3,6,1,5",
+    "role": "misconception-guided",
+    "prompt": "Which number is greater: 3.15 or 3.6? Write the greater number.",
+    "answer": "3.6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 3.15 and 3.60",
+      "3.15 is 315 hundredths; 3.60 is 360 hundredths. So 3.6 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹3.15 is 315 paise; ₹3.60 is 360 paise",
+       "360 paise is more, so 3.6 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "3.15"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:1,7,6,4",
+    "role": "misconception-check",
+    "prompt": "Which number is greater: 1.7 or 1.64? Write the greater number.",
+    "answer": "1.7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 1.70 and 1.64",
+      "1.70 is 170 hundredths; 1.64 is 164 hundredths. So 1.7 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹1.70 is 170 paise; ₹1.64 is 164 paise",
+       "170 paise is more, so 1.7 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "1.64"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:1,2,7,7",
+    "role": "misconception-example",
+    "prompt": "Which number is greater: 1.77 or 1.2? Write the greater number.",
+    "answer": "1.77",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 1.77 and 1.20",
+      "1.77 is 177 hundredths; 1.20 is 120 hundredths. So 1.77 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹1.77 is 177 paise; ₹1.20 is 120 paise",
+       "177 paise is more, so 1.77 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "1.2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:3,3,8,1",
+    "role": "misconception-guided",
+    "prompt": "Which number is greater: 3.81 or 3.3? Write the greater number.",
+    "answer": "3.81",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 3.81 and 3.30",
+      "3.81 is 381 hundredths; 3.30 is 330 hundredths. So 3.81 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹3.81 is 381 paise; ₹3.30 is 330 paise",
+       "381 paise is more, so 3.81 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "3.3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:1,1,2,9",
+    "role": "misconception-check",
+    "prompt": "Which number is greater: 1.29 or 1.1? Write the greater number.",
+    "answer": "1.29",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 1.29 and 1.10",
+      "1.29 is 129 hundredths; 1.10 is 110 hundredths. So 1.29 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹1.29 is 129 paise; ₹1.10 is 110 paise",
+       "129 paise is more, so 1.29 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "1.1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:0,6,8,7",
+    "role": "guided-practice",
+    "prompt": "Which number is greater: 0.6 or 0.87? Write the greater number.",
+    "answer": "0.87",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 0.60 and 0.87",
+      "0.60 is 60 hundredths; 0.87 is 87 hundredths. So 0.87 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹0.60 is 60 paise; ₹0.87 is 87 paise",
+       "87 paise is more, so 0.87 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "0.6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:1,3,4,8",
+    "role": "guided-practice",
+    "prompt": "Which number is greater: 1.3 or 1.48? Write the greater number.",
+    "answer": "1.48",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 1.30 and 1.48",
+      "1.30 is 130 hundredths; 1.48 is 148 hundredths. So 1.48 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹1.30 is 130 paise; ₹1.48 is 148 paise",
+       "148 paise is more, so 1.48 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "1.3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:2,1,7,9",
+    "role": "guided-practice",
+    "prompt": "Which number is greater: 2.1 or 2.79? Write the greater number.",
+    "answer": "2.79",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 2.10 and 2.79",
+      "2.10 is 210 hundredths; 2.79 is 279 hundredths. So 2.79 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹2.10 is 210 paise; ₹2.79 is 279 paise",
+       "279 paise is more, so 2.79 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "2.1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:3,4,3,8",
+    "role": "recheck",
+    "prompt": "Which number is greater: 3.4 or 3.38? Write the greater number.",
+    "answer": "3.4",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 3.40 and 3.38",
+      "3.40 is 340 hundredths; 3.38 is 338 hundredths. So 3.4 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹3.40 is 340 paise; ₹3.38 is 338 paise",
+       "340 paise is more, so 3.4 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "3.38"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:2,6,7,7",
+    "role": "recheck",
+    "prompt": "Which number is greater: 2.77 or 2.6? Write the greater number.",
+    "answer": "2.77",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 2.77 and 2.60",
+      "2.77 is 277 hundredths; 2.60 is 260 hundredths. So 2.77 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹2.77 is 277 paise; ₹2.60 is 260 paise",
+       "277 paise is more, so 2.77 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "2.6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:0,7,4,9:w",
+    "role": "transfer",
+    "prompt": "Which number is greater: 0.49 or 0.7? Write the greater number.",
+    "answer": "0.7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 0.49 and 0.70",
+      "0.49 is 49 hundredths; 0.70 is 70 hundredths. So 0.7 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹0.49 is 49 paise; ₹0.70 is 70 paise",
+       "70 paise is more, so 0.7 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "0.49"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:0,9,7,9:w",
+    "role": "transfer",
+    "prompt": "Which number is greater: 0.9 or 0.79? Write the greater number.",
+    "answer": "0.9",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 0.90 and 0.79",
+      "0.90 is 90 hundredths; 0.79 is 79 hundredths. So 0.9 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹0.90 is 90 paise; ₹0.79 is 79 paise",
+       "90 paise is more, so 0.9 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "0.79"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:0,8,7,4",
+    "role": "delayed-check",
+    "prompt": "Which number is greater: 0.8 or 0.74? Write the greater number.",
+    "answer": "0.8",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 0.80 and 0.74",
+      "0.80 is 80 hundredths; 0.74 is 74 hundredths. So 0.8 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹0.80 is 80 paise; ₹0.74 is 74 paise",
+       "80 paise is more, so 0.8 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "0.74"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aedecc:2,7,8,8",
+    "role": "delayed-check",
+    "prompt": "Which number is greater: 2.7 or 2.88? Write the greater number.",
+    "answer": "2.88",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Write both with two decimal places: 2.70 and 2.88",
+      "2.70 is 270 hundredths; 2.88 is 288 hundredths. So 2.88 is greater"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Money (paise)",
+      "ok": true,
+      "lines": [
+       "₹2.70 is 270 paise; ₹2.88 is 288 paise",
+       "288 paise is more, so 2.88 is greater"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "predicts": [
+       "2.7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

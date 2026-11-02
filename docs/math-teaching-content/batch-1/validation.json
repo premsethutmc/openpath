@@ -1,0 +1,107 @@
+{
+ "checks": "server grader (answer correct; every modelled wrong answer incorrect) + prompt-text oracle + every alternative method + quarantine + whole-pool oracle agreement",
+ "packages": [
+  {
+   "id": "TP-NUM-01",
+   "family": "adfcmp",
+   "competency": "MATH.number.fraction-comparison",
+   "items": 17,
+   "itemsOk": 17,
+   "poolAgreement": "250/250",
+   "transfer": 2,
+   "diagnostics": 3,
+   "misconceptionScreens": 1
+  },
+  {
+   "id": "TP-NUM-02",
+   "family": "fadd",
+   "competency": "MATH.number.fraction-add-like",
+   "items": 15,
+   "itemsOk": 15,
+   "poolAgreement": "220/220",
+   "transfer": 0,
+   "diagnostics": 1,
+   "misconceptionScreens": 2
+  },
+  {
+   "id": "TP-NUM-03",
+   "family": "aedecc",
+   "competency": "MATH.number.decimal-tenths",
+   "items": 19,
+   "itemsOk": 19,
+   "poolAgreement": "300/300",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 2
+  },
+  {
+   "id": "TP-MEA-01",
+   "family": "aeperar",
+   "competency": "MATH.measurement.area-squares",
+   "items": 22,
+   "itemsOk": 22,
+   "poolAgreement": "400/400",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 3
+  },
+  {
+   "id": "TP-GEO-01",
+   "family": "ahext",
+   "competency": "MATH.geometry.triangle-properties",
+   "items": 22,
+   "itemsOk": 22,
+   "poolAgreement": "400/400",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 3
+  },
+  {
+   "id": "TP-GEO-02",
+   "family": "afcross",
+   "competency": "MATH.geometry.angle-pairs",
+   "items": 20,
+   "itemsOk": 20,
+   "poolAgreement": "300/300",
+   "transfer": 2,
+   "diagnostics": 3,
+   "misconceptionScreens": 2
+  },
+  {
+   "id": "TP-STA-01",
+   "family": "akmed",
+   "competency": "MATH.statistics.median-mode",
+   "items": 22,
+   "itemsOk": 22,
+   "poolAgreement": "400/400",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 3
+  },
+  {
+   "id": "TP-ALG-01",
+   "family": "ahid",
+   "competency": "MATH.algebra.identities",
+   "items": 19,
+   "itemsOk": 19,
+   "poolAgreement": "90/90",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 2
+  },
+  {
+   "id": "TP-PRO-01",
+   "family": "akdice",
+   "competency": "MATH.probability.sample-space",
+   "items": 22,
+   "itemsOk": 22,
+   "poolAgreement": "80/80",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 3
+  }
+ ],
+ "failures": [
+  "TP-NUM-02: family has no word form: transfer candidates MISSING (content gap, recorded)"
+ ]
+}
