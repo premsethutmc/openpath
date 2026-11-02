@@ -15,7 +15,7 @@
 The bottom number says how many equal parts the whole is cut into. Cutting the same whole into more parts makes each part smaller.
 So with the same top number (the same number of parts), the fraction with the smaller bottom number is greater.
 
-Visual: `[{"type":"grid","rows":1,"cols":9,"shaded":1,"note":"1/9: the same whole cut into 9 equal parts"},{"type":"grid","rows":1,"cols":11,"shaded":1,"note":"1/11: the same whole cut into 11 equal parts"}]`. Reuses the family's own grid strip (adfcmp draw_both: {type:'grid', rows:1, cols:b, shaded:a}) once per fraction; the two strips must be drawn the SAME length. The existing Visual union has no two-strip comparison; draw two grid strips.
+Visual: `{"type":"strips","top":9,"shaded":1,"bottom":11,"bottomShaded":1,"labels":["1/9","1/11"],"description":"Two strips of the same length, each one whole: the first cut into 9 equal parts with 1 shaded (1/9), the second cut into 11 equal parts with 1 shaded (1/11)."}`. Spec 09 V1 (supersedes the earlier two-grid placeholder, which drew unequal wholes: grid cells are min(30, 360/cols) px, so 9 and 11 columns gave 270 and 330 px). RENDERING BLOCKED until Codex adds (a) `bottomShaded` to the strips widget (Learn.tsx Picture derives the second row's shading as an equivalent fraction, wrong for comparison) and (b) a `strips` case in Figure.tsx (TeachingContent sends widgets only to Figure, which shows the 'A picture' placeholder). `description` is the required screen-reader text. Until then: text only. **UNSUPPORTED BY THE RENDERER (blocked): 09 V1: needs `bottomShaded` in Learn.tsx strips and a `strips` case in Figure.tsx. The integration screens carry no widget (text only).**
 
 ## Worked examples (instances from the generator; lines from the independent oracle; checked)
 
@@ -143,6 +143,6 @@ The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in
 ## Uncertainties
 
 - The family's mc flag is false, so no multiple-choice delayed check exists; delayed checks are typed.
-- The two-strip picture needs a renderer decision (two grid strips of equal width).
+- The two-strip picture (09 V1: one strips widget, equal wholes, each row shaded for its own fraction) cannot be rendered yet (no bottomShaded in Learn.tsx, no strips case in Figure.tsx): the strategy screens carry NO widget (text only) until Codex adds them.
 
 ## Validation: 18/18 items pass; whole-pool oracle + alternatives agreement 250/250

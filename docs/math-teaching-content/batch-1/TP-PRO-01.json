@@ -278,7 +278,7 @@
   ],
   "rechecks": [
    "gen:akdice:4,4,0,6",
-   "gen:akdice:4,6,0,10:mc"
+   "gen:akdice:4,5,0,5"
   ],
   "transfer": [
    "gen:akdice:4,6,0,8:w",
@@ -345,7 +345,7 @@
     "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
     "candidates": [
      "gen:akdice:4,4,0,6",
-     "gen:akdice:4,6,0,10:mc"
+     "gen:akdice:4,5,0,5"
     ]
    },
    "retentionTarget": {
@@ -799,8 +799,7 @@
  ],
  "uncertainties": [
   "Only 'total is exactly k' (mode 0) is taught here; 'k or more' (mode 1) and 'second bigger than first' (mode 2) are not.",
-  "The family models order-ignored only for equal-size spinners (fam/b11.ts akdice bugs); that is a modelling choice, not a mathematical fact.",
-  "rechecks: no usable check item for case \"different-size spinners, a total made by several pairs\" (another case's item stands in)"
+  "The family models order-ignored only for equal-size spinners (fam/b11.ts akdice bugs); that is a modelling choice, not a mathematical fact."
  ],
  "validation": {
   "items": 22,
@@ -1808,17 +1807,10 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:4,6,0,10:mc",
+    "id": "gen:akdice:4,5,0,5",
     "role": "recheck",
-    "prompt": "Priya uses a spinner numbered 1 to 4 and an ordinary die. The first gives a number from 1 to 4 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 10? Choose one.",
-    "answer": "1/24",
-    "options": [
-     "1/12",
-     "1/10",
-     "1/9",
-     "1/24"
-    ],
-    "correctOption": "D",
+    "prompt": "Meena uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 5? (A fraction is fine.)",
+    "answer": "1/5",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1827,9 +1819,9 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "All pairs: 4 × 6 = 24, equally likely",
-      "Pairs with total 10: 1",
-      "P = 1/24"
+      "All pairs: 4 × 5 = 20, equally likely",
+      "Pairs with total 5: 4",
+      "P = 4/20 = 1/5"
      ]
     },
     "alternatives": [
@@ -1838,7 +1830,7 @@
       "ok": true,
       "lines": [
        "one branch per first number, then per second number; count the ticked paths",
-       "P = 1/24"
+       "P = 4/20 = 1/5"
       ]
      }
     ],
@@ -1847,7 +1839,7 @@
       "id": "totals-equally-likely",
       "kind": "conceptual",
       "predicts": [
-       "1/9"
+       "0.125"
       ],
       "graded": [
        "incorrect"
@@ -1857,7 +1849,7 @@
       "id": "added-sides",
       "kind": "procedural",
       "predicts": [
-       "0.1"
+       "4/9"
       ],
       "graded": [
        "incorrect"

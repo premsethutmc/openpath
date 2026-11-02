@@ -270,8 +270,8 @@
    "gen:aadigit:43,1"
   ],
   "rechecks": [
-   "gen:aadigit:50,0",
-   "gen:aadigit:20,0"
+   "gen:aadigit:39,0:mc",
+   "gen:aadigit:28,1:mc"
   ],
   "transfer": [
    "gen:aadigit:31,0:w",
@@ -526,8 +526,8 @@
     "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
     "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
     "candidates": [
-     "gen:aadigit:50,0",
-     "gen:aadigit:20,0"
+     "gen:aadigit:39,0:mc",
+     "gen:aadigit:28,1:mc"
     ]
    },
    "retentionTarget": {
@@ -611,7 +611,7 @@
       }
      ],
      "guided": "gen:aadigit:13,1:mc",
-     "check": "gen:aadigit:50,0"
+     "check": "gen:aadigit:39,0:mc"
     }
    },
    {
@@ -702,7 +702,7 @@
     "addresses": null,
     "revisions": [
      {
-      "contentHash": "sha256:bb40ed2edee6ab97ef8b400f9e74567d180c82b40ee7f759dc95216282092068",
+      "contentHash": "sha256:a8a5fd7bcbe5befffb6077ef0886d9fea39fb0814033c745bb659635e08b11b7",
       "status": "pending_review",
       "provenance": {
        "source": "engineering",
@@ -869,8 +869,7 @@
   "packages/learning/src/fam/b01.ts:1691 aadigit: teach idea/method, alternative chart, figure blocks; bugs face-value, value-not-count, times-ten, wrong-digit"
  ],
  "uncertainties": [
-  "place-value-tens' existing spot_the_mistake addresses count-blocks (seed aatens); nothing covers face-value.",
-  "rechecks: no usable check item for case \"how many tens\" (another case's item stands in)"
+  "place-value-tens' existing spot_the_mistake addresses count-blocks (seed aatens); nothing covers face-value."
  ],
  "validation": {
   "items": 21,
@@ -1679,10 +1678,17 @@
     "ok": true
    },
    {
-    "id": "gen:aadigit:50,0",
+    "id": "gen:aadigit:39,0:mc",
     "role": "recheck",
-    "prompt": "In 50, what is the value of the digit 5?",
-    "answer": "50",
+    "prompt": "In 39, what is the value of the digit 3? Choose one.",
+    "answer": "30",
+    "options": [
+     "9",
+     "3",
+     "31",
+     "30"
+    ],
+    "correctOption": "D",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1691,8 +1697,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "50 = 5 tens and 0 ones",
-      "the 5 is in the tens place: 5 tens = 50"
+      "39 = 3 tens and 9 ones",
+      "the 3 is in the tens place: 3 tens = 30"
      ]
     },
     "alternatives": [
@@ -1700,8 +1706,8 @@
       "name": "Expanded form",
       "ok": true,
       "lines": [
-       "50 = 50 + 0",
-       "50"
+       "39 = 30 + 9",
+       "30"
       ]
      }
     ],
@@ -1710,7 +1716,7 @@
       "id": "face-value",
       "kind": "conceptual",
       "predicts": [
-       "5"
+       "3"
       ],
       "graded": [
        "incorrect"
@@ -1720,7 +1726,7 @@
       "id": "wrong-digit",
       "kind": "procedural",
       "predicts": [
-       "0"
+       "9"
       ],
       "graded": [
        "incorrect"
@@ -1730,10 +1736,17 @@
     "ok": true
    },
    {
-    "id": "gen:aadigit:20,0",
+    "id": "gen:aadigit:28,1:mc",
     "role": "recheck",
-    "prompt": "In 20, what is the value of the digit 2?",
-    "answer": "20",
+    "prompt": "How many tens are there in 28? Choose one.",
+    "answer": "2",
+    "options": [
+     "3",
+     "2",
+     "8",
+     "20"
+    ],
+    "correctOption": "B",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1742,8 +1755,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "20 = 2 tens and 0 ones",
-      "the 2 is in the tens place: 2 tens = 20"
+      "28 = 2 tens and 8 ones",
+      "2 tens"
      ]
     },
     "alternatives": [
@@ -1751,17 +1764,17 @@
       "name": "Expanded form",
       "ok": true,
       "lines": [
-       "20 = 20 + 0",
-       "20"
+       "28 = 20 + 8",
+       "2"
       ]
      }
     ],
     "bugs": [
      {
-      "id": "face-value",
+      "id": "value-not-count",
       "kind": "conceptual",
       "predicts": [
-       "2"
+       "20"
       ],
       "graded": [
        "incorrect"
@@ -1771,7 +1784,7 @@
       "id": "wrong-digit",
       "kind": "procedural",
       "predicts": [
-       "0"
+       "8"
       ],
       "graded": [
        "incorrect"

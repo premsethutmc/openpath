@@ -21,13 +21,13 @@ Shared runtime requirements (Codex):
 | [TP-NUM-01](batch-1/TP-NUM-01.md) | **Blocked by missing questions or visuals** | Blocked by missing questions or visuals; Blocked by shared runtime support | P1 | 1 | — |
 | [TP-NUM-02](batch-1/TP-NUM-02.md) | **Blocked by missing questions or visuals** | Blocked by missing questions or visuals; Blocked by shared runtime support | P1 | 2 | — |
 | [TP-NUM-03](batch-1/TP-NUM-03.md) | **Blocked by shared runtime support** | Blocked by shared runtime support | B1, B2, B3 | — | — |
-| [TP-PRO-01](batch-1/TP-PRO-01.md) | **Blocked by missing questions or visuals** | Blocked by missing questions or visuals; Blocked by shared runtime support | B1 | 1 | — |
+| [TP-PRO-01](batch-1/TP-PRO-01.md) | **Blocked by shared runtime support** | Blocked by shared runtime support | B1 | — | — |
 | [TP-STA-01](batch-1/TP-STA-01.md) | **Ready for integration review** | Ready for integration review | — | — | — |
 | [TP2-CH-BAG](batch-2/TP2-CH-BAG.md) | **Blocked by missing questions or visuals** | Blocked by missing questions or visuals | — | 1 | — |
 | [TP2-CH-BALL](batch-2/TP2-CH-BALL.md) | **Ready for integration review** | Ready for integration review | — | — | — |
 | [TP2-PRT-NAME](batch-2/TP2-PRT-NAME.md) | **Ready for integration review** | Ready for integration review | — | — | — |
 | [TP2-PRT-SHADE](batch-2/TP2-PRT-SHADE.md) | **Blocked by shared runtime support** | Blocked by shared runtime support | B1 | — | — |
-| [TP2-PV-DIGIT](batch-2/TP2-PV-DIGIT.md) | **Blocked by missing questions or visuals** | Blocked by missing questions or visuals; Blocked by shared runtime support | B1, P1 | 1 | — |
+| [TP2-PV-DIGIT](batch-2/TP2-PV-DIGIT.md) | **Blocked by shared runtime support** | Blocked by shared runtime support | B1, P1 | — | — |
 | [TP2-REG-MONEY](batch-2/TP2-REG-MONEY.md) | **Blocked by shared runtime support** | Blocked by shared runtime support | B1, B2 | — | — |
 | [TP2-REG-TIME](batch-2/TP2-REG-TIME.md) | **Blocked by missing questions or visuals** | Blocked by missing questions or visuals; Blocked by shared runtime support | B1, B2 | 2 | — |
 | [TP2-SCL-BAR](batch-2/TP2-SCL-BAR.md) | **Ready for integration review** | Ready for integration review | — | — | — |
@@ -42,8 +42,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** (px + q)², middle `gen:ahid:0,4,9,1` (check); (px − q)², middle `gen:ahid:1,4,3,1` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: ahid has no working contract; an expansion written as working is not examined (answer-level only).
-- **Visuals:** used `grid`; missing: labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels).
+- **Visuals:** used `grid`. **Unsupported visuals:** UNSUPPORTED BY THE RENDERER (spec 09 V5): labelled 2 × 2 area model ('grid' + labels, rowLabels, colLabels).
 - **New strategies:** `ahid_concept`, `fix_middle_not_doubled`, `fix_middle_sign`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -69,7 +71,7 @@ Shared runtime requirements (Codex):
 
 **Missing questions:** diagnostic case "(px + q)², middle": the family's diagnostic partition has no usable item (only ambiguous ones); candidate gen:ahid:0,4,9,1 is taken from the CHECK partition and must be re-partitioned or replaced at integration; delayed checks: no usable retention item for case "(px + q)², middle" (another case's item stands in); binomial delayed checks: 14 of 54 retention items ask the cross term; 3 of them are (px + q)² and 0 of those avoid a copied-number reading. The positive-square delayed check is MISSING: the retention partition has no unambiguous (px + q)² cross-term item, so the delayed check of the title skill is not covered (generator partition change: Codex)..
 
-**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+**Proposed pool changes (NOT served; Codex; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
 
 | Need | Role | Proposed question | Served today as | Change |
 |---|---|---|---|---|
@@ -80,7 +82,7 @@ Shared runtime requirements (Codex):
 
 - B1 teaching scope: ahid_concept, fix_middle_not_doubled, fix_middle_sign are outside teachingScopeFor (main family expand); ineligible until the selector accepts 'ahid'
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
-- visual: labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels)
+- visual: UNSUPPORTED BY THE RENDERER (spec 09 V5): labelled 2 × 2 area model ('grid' + labels, rowLabels, colLabels)
 
 **Independent review:** Pass 4: no outstanding finding. The (px + q)² cross-term delayed check is a recorded missing question.
 
@@ -91,8 +93,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** find the exterior angle `gen:ahext:51,21,0` (diagnostic); find an interior opposite angle `gen:ahext:32,96,1` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: ahext has a geometry task (geometry-task.ts) for the foundation's geometry working adapter; the Python reasoner has NO exterior-angle rule (G5 R07), so a citation of the exterior-angle theorem is not verifiable; the 'via the third angle' route uses supported rules (triangle-sum, straight-line).
-- **Visuals:** used `triangle`; missing: triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex).
+- **Visuals:** used none. **Unsupported visuals:** UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V3): extended side, exterior angle and 'not to scale' caption ('triangle' + exterior + notToScale); Figure.tsx ignores both fields today, so the screen is text-only.
 - **New strategies:** `ahext_concept`, `fix_third_interior`, `fix_adjacent_interior`, `fix_exterior_as_interior`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -125,9 +129,9 @@ Shared runtime requirements (Codex):
 
 - B1 teaching scope: ahext_concept, fix_third_interior, fix_adjacent_interior, fix_exterior_as_interior are outside teachingScopeFor (main family ahtri); ineligible until the selector accepts 'ahext'
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
-- visual: triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex)
+- visual: UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V3): extended side, exterior angle and 'not to scale' caption ('triangle' + exterior + notToScale); Figure.tsx ignores both fields today, so the screen is text-only
 
-**Independent review:** Pass 4: no outstanding finding.
+**Independent review:** Pass 4: no outstanding finding. Pass 7: corrected exterior-angle data (opposite angles at vertices 0 and 2, not to scale) cleared on all 400 items; rendering blocked, screens text-only. Note: concept text names vertex C, which a figure would need to label.
 
 ### TP-GEO-02 — Vertically opposite angles are equal
 
@@ -136,8 +140,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** vertically opposite `gen:afcross:105,0` (diagnostic); adjacent `gen:afcross:126,1` (diagnostic); other three `gen:afcross:84,2` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: afcross modes 0/1 have a geometry task (foundation adapter); mode 2 (other three) has none (geometry-task.ts excludes b === 2). G5 R06: a vertically-opposite citation for a MEASURE was rejected by the reasoner; route through straight-line steps is supported.
-- **Visuals:** used `angle`; missing: two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels).
+- **Visuals:** used `angle`. **Unsupported visuals:** UNSUPPORTED BY THE RENDERER (spec 09 V4): two crossing lines with four angles ('angle' + cross + labels).
 - **New strategies:** `afcross_concept`, `fix_opposite_as_linear`, `fix_neighbour_equal`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -169,7 +175,7 @@ Shared runtime requirements (Codex):
 - B1 teaching scope: afcross_concept, fix_opposite_as_linear, fix_neighbour_equal are outside teachingScopeFor (main family afpair); ineligible until the selector accepts 'afcross'
 - B3 addresses: fix_opposite_as_linear — the platform reads addresses = null (family 'says' overridden); the gate would accept any established misconception
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
-- visual: two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels)
+- visual: UNSUPPORTED BY THE RENDERER (spec 09 V4): two crossing lines with four angles ('angle' + cross + labels)
 
 **Independent review:** Pass 4: no outstanding finding.
 
@@ -180,8 +186,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** covering (area), first context `gen:aeperar:0,3,15,2` (diagnostic); going round (perimeter), first context `gen:aeperar:1,4,11,2` (diagnostic); covering (area), another context `gen:aeperar:0,4,16,0` (diagnostic); going round (perimeter), another context `gen:aeperar:1,5,7,2` (diagnostic). Rule: A 'two-sides' answer (length + width) on the covering item and on the going-round item counts as two different errors (adding instead of multiplying; adding only half the sides), so the pair must not establish one misconception. A learner who multiplies on both items is right on the covering item and is suspected of area-for-perimeter only; one who adds all four sides on both is suspected of perimeter-for-area only. Trigger conditions: `fix_perimeter_for_area`: a response pattern below with establishes = true; patterns with competing explanations must not establish it; `fix_area_for_perimeter`: a response pattern below with establishes = true; patterns with competing explanations must not establish it; `fix_two_sides`: a response pattern below with establishes = true; patterns with competing explanations must not establish it.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `grid`; missing: perimeter outline (spec 09 V2: 'shape' rectangle + outline).
+- **Visuals:** used `grid`. **Unsupported visuals:** UNSUPPORTED BY THE RENDERER (spec 09 V2): perimeter outline ('shape' rectangle + outline).
 - **New strategies:** `aeperar_concept`, `fix_perimeter_for_area`, `fix_area_for_perimeter`, `fix_two_sides`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -217,7 +225,7 @@ Shared runtime requirements (Codex):
 - B1 teaching scope: aeperar_concept, fix_perimeter_for_area, fix_area_for_perimeter, fix_two_sides are outside teachingScopeFor (main family aearea); ineligible until the selector accepts 'aeperar'
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
 - policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)
-- visual: perimeter outline (spec 09 V2: 'shape' rectangle + outline)
+- visual: UNSUPPORTED BY THE RENDERER (spec 09 V2): perimeter outline ('shape' rectangle + outline)
 
 **Independent review:** Pass 4: no outstanding finding.
 
@@ -228,8 +236,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** same top, asks greater `gen:adfcmp:1,1,8,2,0` (diagnostic); same top, asks smaller `gen:adfcmp:1,7,12,11,1` (diagnostic); same bottom, asks greater (contrast) `gen:adfcmp:0,11,1,10,0` (diagnostic); same bottom, asks smaller (contrast) `gen:adfcmp:0,11,6,3,1` (diagnostic). Rule: Read the four items together (response patterns below). Two same-top matches establish bigger-bottom-bigger ONLY when both same-bottom contrast items are right; if the contrast items are wrong too, a reversal explains all the answers and nothing is established. misconception-evidence@1 today would establish it from the two same-top matches alone; the contrast condition is a policy request for Codex (05). Trigger conditions: `fix_bigger_bottom_bigger`: a response pattern below with establishes = true; patterns with competing explanations must not establish it.
 - **Answer formats:** family type `fraction`; forms used: typed, word; multiple choice not available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `grid`; missing: two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes).
+- **Visuals:** used none. **Unsupported visuals:** UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V1): two equal-length fraction strips with each row's own shading. Needs `bottomShaded` in Learn.tsx strips and a `strips` case in Figure.tsx; until then the screen is text-only.
 - **New strategies:** `adfcmp_concept`, `fix_bigger_bottom_bigger`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -258,9 +268,9 @@ Shared runtime requirements (Codex):
 
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
 - policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)
-- visual: two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes)
+- visual: UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V1): two equal-length fraction strips with each row's own shading. Needs `bottomShaded` in Learn.tsx strips and a `strips` case in Figure.tsx; until then the screen is text-only
 
-**Independent review:** Pass 4: no outstanding mathematical/instructional finding.
+**Independent review:** Pass 4: no outstanding mathematical/instructional finding. Pass 7: corrected strips data (equal wholes, own shading) cleared on all 500 items; rendering blocked, screens text-only.
 
 ### TP-NUM-02 — Adding like fractions: the bottom number names the piece size
 
@@ -269,8 +279,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** sum below one `gen:fadd:3,5,9,1` (diagnostic). Rule: The value (a + b)/(2n) is also what 'averaging the two fractions' gives, for EVERY like-fraction sum, so no item can separate add-denominators from averaging by value. Only the written form separates them: '(a+b)/(2n)' written unsimplified (e.g. 8/18) supports add-denominators; a simplified equal value (4/9) leaves both open. The grader compares values, so the raw response text must be read for this (integration note, 05). One diagnostic case only (no improper-sum item in the diagnostic partition). Trigger conditions: `fix_add_denominators`: both matching responses are WRITTEN unsimplified as (a + b)/(2n) (e.g. 8/18), read from the raw response text; a simplified equal value (4/9) also fits 'averaging the two fractions' and must not count. Even the unsimplified form can come from halving 8/9 as 8/18, so the fix teaches piece size and the recheck must use a new item.
 - **Answer formats:** family type `fraction`; forms used: typed, mc; multiple choice available; everyday form NOT available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: fadd has a family contract statement (a/n ± b/n), so the existing derivation authority (working-assessment@1) can examine typed arithmetic working; the answer alone earns answer credit only.
-- **Visuals:** used `grid`; missing: none.
+- **Visuals:** used `grid`. **Unsupported visuals:** none.
 - **New strategies:** `fadd_concept`, `fix_add_denominators`, `fix_multiply_tops`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -292,18 +304,19 @@ Shared runtime requirements (Codex):
 
 **Missing questions:** fadd has no word (transfer) form: transfer candidates cannot be drawn from the generator; transfer is MISSING CONTENT (authored candidates below are text only, unverified by the grader).; transfer: the family has no word (everyday) form; authored transfer text is NOT gradable.
 
-**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+**Proposed pool changes (NOT served; Codex; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
 
 | Need | Role | Proposed question | Served today as | Change |
 |---|---|---|---|---|
 | MQ4 | transfer | `gen:fadd:1,2,5,1:w` | practice gen:fadd:1,2,5,1:mc | generator: add fadd.word(p) (one function; same answer) |
+| MQ7 | diagnostic (sum above one whole) | `gen:fadd:4,2,5,1` | not served | one-item release override into the diagnostic partition (fadd keep excludes a + b > n); relaxing keep instead releases 220 items and flips 9 referenced forms unless forms are frozen |
 
 **Unresolved contract requirements (Codex):**
 
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
 - policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)
 
-**Independent review:** Pass 4: no outstanding finding. Transfer is missing content (manifest).
+**Independent review:** Pass 4: no outstanding finding. Transfer is missing content (manifest). Pass 7: proposed improper-sum diagnostic gen:fadd:4,2,5,1 cleared; whole-dropped and capped-at-one need modelling (Codex).
 
 ### TP-NUM-03 — Comparing decimals: place value, not length
 
@@ -312,8 +325,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** tenths decimal is greater `gen:aedecc:2,8,1,3` (diagnostic); hundredths decimal is greater `gen:aedecc:1,4,8,7` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `exact`; forms used: typed, word; multiple choice not available; everyday form available. Trusted grader: supported. Diagnosis reader: **not supported (B2)**.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `grid`; missing: none.
+- **Visuals:** used `grid`. **Unsupported visuals:** none.
 - **New strategies:** `aedecc_concept`, `fix_longer_is_larger`, `fix_shorter_is_larger`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -356,8 +371,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** same-size spinners, a total made by several pairs `gen:akdice:5,5,0,4` (diagnostic); different-size spinners, a total made by several pairs `gen:akdice:4,5,0,7` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `fraction`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `table`; missing: none.
+- **Visuals:** used `table`. **Unsupported visuals:** none.
 - **New strategies:** `akdice_concept`, `fix_totals_equally_likely`, `fix_order_ignored`, `fix_added_sides`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -378,26 +395,20 @@ Shared runtime requirements (Codex):
 | guided practice | `gen:akdice:3,3,0,3:mc` | practice | mc | served, fresh, unexposed |
 | guided practice | `gen:akdice:5,6,0,11:mc` | practice | mc | served, fresh, unexposed |
 | fresh recheck | `gen:akdice:4,4,0,6` | check | typed | served, fresh, unexposed |
-| fresh recheck | `gen:akdice:4,6,0,10:mc` | check | mc | served, fresh, unexposed |
+| fresh recheck | `gen:akdice:4,5,0,5` | check | typed | served, fresh, unexposed |
 | transfer | `gen:akdice:4,6,0,8:w` | practice | word | served, fresh, unexposed |
 | transfer | `gen:akdice:3,4,0,4:w` | practice | word | served, fresh, unexposed |
 | retention (delayed) | `gen:akdice:6,6,0,6` | retention | typed | served, fresh, unexposed |
 | retention (delayed) | `gen:akdice:4,6,0,3:mc` | retention | mc | served, fresh, unexposed |
 
-**Missing questions:** rechecks: no usable check item for case "different-size spinners, a total made by several pairs" (another case's item stands in).
-
-**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
-
-| Need | Role | Proposed question | Served today as | Change |
-|---|---|---|---|---|
-| MQ5 | recheck | `gen:akdice:4,5,0,4:mc` | check gen:akdice:4,5,0,4:mc | selection only, after decision A (a recheck may repeat a diagnostic's answer) |
+**Missing questions:** none.
 
 **Unresolved contract requirements (Codex):**
 
 - B1 teaching scope: akdice_concept, fix_totals_equally_likely, fix_order_ignored, fix_added_sides are outside teachingScopeFor (main family akss); ineligible until the selector accepts 'akdice'
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
 
-**Independent review:** Pass 5: the dice/spinner wording is fixed; no outstanding finding.
+**Independent review:** Pass 5: the dice/spinner wording is fixed; no outstanding finding. Pass 7: freshness@2 recheck gen:akdice:4,5,0,5 and the mirror-total relabelling cleared.
 
 ### TP-STA-01 — The median: order first, then find the middle
 
@@ -406,8 +417,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** odd count `gen:akmed:13,5` (diagnostic); even count `gen:akmed:23,8` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `fraction`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used none; missing: none.
+- **Visuals:** used none. **Unsupported visuals:** none.
 - **New strategies:** `fix_mean_for_median`, `fix_one_middle`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -449,8 +462,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** unequal colours `gen:akchance:2,3,2,0` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `fraction`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used none; missing: none.
+- **Visuals:** used none. **Unsupported visuals:** none.
 - **New strategies:** `fix_colours_equal`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -471,7 +486,7 @@ Shared runtime requirements (Codex):
 
 **Missing questions:** CONTRAST GAP: an equal-count two-colour bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) is served, but not as a typed diagnostic: gen:akchance:8,8,0,0 is served as :mc in the CHECK partition and gen:akchance:6,6,0,0 as :mc in the PRACTICE partition; no equal-count bag is in the diagnostic partition, and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Partition change for Codex: 09-MISSING-QUESTIONS-AND-VISUALS.md MQ2. (Corrected: an earlier revision said these bags were in no served partition; that check missed their :mc ids.).
 
-**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+**Proposed pool changes (NOT served; Codex; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
 
 | Need | Role | Proposed question | Served today as | Change |
 |---|---|---|---|---|
@@ -490,8 +505,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** unequal colours `gen:anbag:6,9,7,2` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `fraction`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used none; missing: none.
+- **Visuals:** used none. **Unsupported visuals:** none.
 - **New strategies:** `fix_colours_equally_likely`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -525,8 +542,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** shaded fraction `gen:adfname:2,6,7` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `fraction`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `grid`; missing: none.
+- **Visuals:** used `grid`. **Unsupported visuals:** none.
 - **New strategies:** `adfname_concept`, `fix_shaded_to_unshaded`, `fix_count_only`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -563,8 +582,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** grid larger than the bottom number `gen:adshade:2,8,3,8` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `grid`; missing: none.
+- **Visuals:** used `grid`. **Unsupported visuals:** none.
 - **New strategies:** `adshade_concept`, `fix_top_number`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -599,8 +620,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** value of the tens digit `gen:aadigit:42,0` (diagnostic); how many tens `gen:aadigit:34,1` (diagnostic); value of the ones digit `gen:aadigit:91,2` (diagnostic); value of the tens digit, another number `gen:aadigit:95,0` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers. Trigger conditions: `fix_face_value`: a response pattern below with establishes = true; patterns with competing explanations must not establish it; `fix_value_not_count`: a response pattern below with establishes = true; patterns with competing explanations must not establish it.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `blocks`; missing: none.
+- **Visuals:** used `blocks`. **Unsupported visuals:** none.
 - **New strategies:** `aadigit_concept`, `fix_face_value`, `fix_value_not_count`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -619,20 +642,14 @@ Shared runtime requirements (Codex):
 | guided practice | `gen:aadigit:13,1:mc` | practice | mc | served, fresh, unexposed |
 | guided practice | `gen:aadigit:26,1:mc` | practice | mc | served, fresh, unexposed |
 | guided practice | `gen:aadigit:43,1` | practice | typed | served, fresh, unexposed |
-| fresh recheck | `gen:aadigit:50,0` | check | typed | served, fresh, unexposed |
-| fresh recheck | `gen:aadigit:20,0` | check | typed | served, fresh, unexposed |
+| fresh recheck | `gen:aadigit:39,0:mc` | check | mc | served, fresh, unexposed |
+| fresh recheck | `gen:aadigit:28,1:mc` | check | mc | served, fresh, unexposed |
 | transfer | `gen:aadigit:31,0:w` | practice | word | served, fresh, unexposed |
 | transfer | `gen:aadigit:37,0:w` | practice | word | served, fresh, unexposed |
 | retention (delayed) | `gen:aadigit:74,0` | retention | typed | served, fresh, unexposed |
 | retention (delayed) | `gen:aadigit:92,1:mc` | retention | mc | served, fresh, unexposed |
 
-**Missing questions:** rechecks: no usable check item for case "how many tens" (another case's item stands in).
-
-**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
-
-| Need | Role | Proposed question | Served today as | Change |
-|---|---|---|---|---|
-| MQ6 | recheck | `gen:aadigit:39,1` | check gen:aadigit:39,1 | selection only, after decision A (a recheck may repeat a diagnostic's answer) |
+**Missing questions:** none.
 
 **Unresolved contract requirements (Codex):**
 
@@ -640,7 +657,7 @@ Shared runtime requirements (Codex):
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
 - policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)
 
-**Independent review:** Pass 4: no outstanding finding.
+**Independent review:** Pass 4: no outstanding finding. Pass 7: freshness@2 rechecks gen:aadigit:39,0:mc and 28,1:mc cleared (notes: both now :mc; non-target option 8 equals a shown answer).
 
 ### TP2-REG-MONEY — Adding rupees and paise: 100 paise make ₹1
 
@@ -649,8 +666,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** paise add to 100 or more `gen:acmoneyadd:3,7,11,13,0` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `fraction`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: **not supported (B2)**.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `table`; missing: none.
+- **Visuals:** used `table`. **Unsupported visuals:** none.
 - **New strategies:** `acmoneyadd_concept`, `fix_paise_over_100`, `fix_no_carry`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -690,8 +709,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** minutes add to 100 or more `gen:addur:0,27` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `tuple`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: **not supported (B2)**.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `numberline`; missing: none.
+- **Visuals:** used `numberline`. **Unsupported visuals:** none.
 - **New strategies:** `addur_concept`, `fix_no_carry`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -712,12 +733,13 @@ Shared runtime requirements (Codex):
 
 **Missing questions:** rechecks: no usable check item for case "minutes add to 100 or more" (another case's item stands in); delayed checks: no usable retention item for case "minutes add to 100 or more" (another case's item stands in).
 
-**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+**Proposed pool changes (NOT served; Codex; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
 
 | Need | Role | Proposed question | Served today as | Change |
 |---|---|---|---|---|
-| MQ3 | recheck | `gen:addur:0,7` | diagnostic gen:addur:0,7:mc | partition override diagnostic → check, applied after form assignment |
-| MQ3 | retention | `gen:addur:0,291` | not served | generator bounds: addur mode 0 x ≤ 299 (hashes into retention without override) |
+| MQ3 | recheck (hours and minutes) | `gen:addur:0,7` | diagnostic gen:addur:0,7:mc | partition override diagnostic → check, applied after form assignment |
+| MQ3 | retention (hours and minutes) | `gen:addur:0,291` | not served | generator bounds: addur mode 0 x ≤ 299 (hashes into retention without override) |
+| MQ3 | additional transfer practice only (minutes and seconds; NOT the recheck) | `gen:addur:1,39` | check gen:addur:1,39 | none (already served typed in check); widen the package restriction for this one transfer role only |
 
 **Unresolved contract requirements (Codex):**
 
@@ -734,8 +756,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** read one bar `gen:afbar:0,0,10` (diagnostic); how many more `gen:afbar:0,1,6` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used none; missing: none.
+- **Visuals:** used none. **Unsupported visuals:** none.
 - **New strategies:** `fix_assume_tens`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|
@@ -771,8 +795,10 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** draw a row `gen:acpicttab:2,22,2,0` (diagnostic); read a total `gen:acpicttab:2,1,0,1` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers. Trigger conditions: `fix_one_each`: a competing explanation ('copied the table value', or 'answered children instead of pictures') gives the SAME number on every draw item, so answers alone cannot establish one-each: establish it only from a drawn pictograph (the learner draws one symbol per child) or after asking the learner what one symbol stands for.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `table`; missing: none.
+- **Visuals:** used `table`. **Unsupported visuals:** none.
 - **New strategies:** `acpicttab_concept`, `fix_one_each`.
+
+**Verified served items** (each id checked against the served partitions at the source commit):
 
 | Role | Question | Partition | Form | Reconciliation |
 |---|---|---|---|---|

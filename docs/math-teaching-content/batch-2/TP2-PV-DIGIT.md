@@ -119,7 +119,7 @@ Example `gen:aadigit:75,1`; guided `gen:aadigit:82,1`; fresh check `gen:aadigit:
 ## Practice, transfer and delayed checks (fresh; same skill)
 
 - Guided practice: `gen:aadigit:13,1:mc`, `gen:aadigit:26,1:mc`, `gen:aadigit:43,1`
-- Rechecks after teaching: `gen:aadigit:50,0`, `gen:aadigit:20,0`
+- Rechecks after teaching: `gen:aadigit:39,0:mc`, `gen:aadigit:28,1:mc`
 - Transfer (everyday form): `gen:aadigit:31,0:w`, `gen:aadigit:37,0:w`
 - Delayed checks: `gen:aadigit:74,0`, `gen:aadigit:92,1:mc`
 
@@ -133,7 +133,7 @@ Example `gen:aadigit:75,1`; guided `gen:aadigit:82,1`; fresh check `gen:aadigit:
 - **Trigger** `bundles`: existing explanation reused: tens as bundles (general)
 - **Trigger** `spot_the_mistake`: existing explanation reused: count-blocks
 - **Allowed methods:** the oracle's method (worked lines); Expanded form
-- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:aadigit:50,0`, `gen:aadigit:20,0`
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:aadigit:39,0:mc`, `gen:aadigit:28,1:mc`
 - **Retention target:** MATH.number.place-value-tens / `aadigit`, cases: value of the tens digit; how many tens. Candidates: `gen:aadigit:74,0`, `gen:aadigit:92,1:mc`
 - **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
 - **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
@@ -159,6 +159,5 @@ The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in
 ## Uncertainties
 
 - place-value-tens' existing spot_the_mistake addresses count-blocks (seed aatens); nothing covers face-value.
-- rechecks: no usable check item for case "how many tens" (another case's item stands in)
 
 ## Validation: 21/21 items pass; whole-pool oracle + alternatives agreement 234/234

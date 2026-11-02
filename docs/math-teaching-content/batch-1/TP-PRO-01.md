@@ -131,7 +131,7 @@ Example `gen:akdice:4,5,0,2`; guided `gen:akdice:5,5,0,10`; fresh check `gen:akd
 ## Practice, transfer and delayed checks (fresh; same skill)
 
 - Guided practice: `gen:akdice:3,3,0,2`, `gen:akdice:3,3,0,3:mc`, `gen:akdice:5,6,0,11:mc`
-- Rechecks after teaching: `gen:akdice:4,4,0,6`, `gen:akdice:4,6,0,10:mc`
+- Rechecks after teaching: `gen:akdice:4,4,0,6`, `gen:akdice:4,5,0,5`
 - Transfer (everyday form): `gen:akdice:4,6,0,8:w`, `gen:akdice:3,4,0,4:w`
 - Delayed checks: `gen:akdice:6,6,0,6`, `gen:akdice:4,6,0,3:mc`
 
@@ -144,7 +144,7 @@ Example `gen:akdice:4,5,0,2`; guided `gen:akdice:5,5,0,10`; fresh check `gen:akd
 - **Trigger** `fix_order_ignored`: verified-misconception 'order-ignored' (two matching answers, misconception-evidence@1)
 - **Trigger** `fix_added_sides`: verified-misconception 'added-sides' (two matching answers, misconception-evidence@1)
 - **Allowed methods:** the oracle's method (worked lines); Tree diagram
-- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:akdice:4,4,0,6`, `gen:akdice:4,6,0,10:mc`
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:akdice:4,4,0,6`, `gen:akdice:4,5,0,5`
 - **Retention target:** MATH.probability.sample-space / `akdice`, cases: same-size spinners, a total made by several pairs; different-size spinners, a total made by several pairs. Candidates: `gen:akdice:6,6,0,6`, `gen:akdice:4,6,0,3:mc`
 - **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
 - **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
@@ -173,6 +173,5 @@ The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in
 
 - Only 'total is exactly k' (mode 0) is taught here; 'k or more' (mode 1) and 'second bigger than first' (mode 2) are not.
 - The family models order-ignored only for equal-size spinners (fam/b11.ts akdice bugs); that is a modelling choice, not a mathematical fact.
-- rechecks: no usable check item for case "different-size spinners, a total made by several pairs" (another case's item stands in)
 
 ## Validation: 22/22 items pass; whole-pool oracle + alternatives agreement 80/80

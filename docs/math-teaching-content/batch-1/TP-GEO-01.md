@@ -16,7 +16,7 @@
 At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.
 The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together.
 
-Visual: `{"type":"triangle","angles":["39°","112°",""],"exterior":"?"}`. MISSING VISUAL CAPABILITY: the existing 'triangle' visual draws interior angles only; an extended side with an exterior angle cannot be drawn. Proposed: triangle + extended side + marked exterior angle (field 'exterior'). Until then, text only (structured givens; nothing is read from a picture).
+Visual: `{"type":"triangle","angles":["39°","","112°"],"exterior":{"at":1,"label":"?"},"notToScale":true,"description":"A triangle (not drawn to scale) with one side extended. The two interior angles opposite the exterior angle are 39° and 112°. The exterior angle is marked ?."}`. Spec 09 V3 (supersedes the earlier placeholder, which put the second opposite angle at vertex 1, next to the exterior angle). RENDERING BLOCKED until Codex adds the `exterior` field (extended side, arc and label at vertex 1) and the `notToScale` caption to Figure.tsx `triangle`; today the field is ignored and a plain triangle would be drawn without the exterior angle, so the screen must stay text-only. The vertices are fixed, so the figure is NOT to scale; `description` is the required screen-reader text. Nothing is read from the picture. **UNSUPPORTED BY THE RENDERER (blocked): 09 V3: needs `exterior` and `notToScale` in Figure.tsx triangle. The integration screens carry no widget (text only).**
 
 ## Worked examples (instances from the generator; lines from the independent oracle; checked)
 

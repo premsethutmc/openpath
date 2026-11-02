@@ -37,12 +37,18 @@
    "type": "triangle",
    "angles": [
     "39°",
-    "112°",
-    ""
+    "",
+    "112°"
    ],
-   "exterior": "?"
+   "exterior": {
+    "at": 1,
+    "label": "?"
+   },
+   "notToScale": true,
+   "description": "A triangle (not drawn to scale) with one side extended. The two interior angles opposite the exterior angle are 39° and 112°. The exterior angle is marked ?."
   },
-  "visualNote": "MISSING VISUAL CAPABILITY: the existing 'triangle' visual draws interior angles only; an extended side with an exterior angle cannot be drawn. Proposed: triangle + extended side + marked exterior angle (field 'exterior'). Until then, text only (structured givens; nothing is read from a picture)."
+  "visualNote": "Spec 09 V3 (supersedes the earlier placeholder, which put the second opposite angle at vertex 1, next to the exterior angle). RENDERING BLOCKED until Codex adds the `exterior` field (extended side, arc and label at vertex 1) and the `notToScale` caption to Figure.tsx `triangle`; today the field is ignored and a plain triangle would be drawn without the exterior angle, so the screen must stay text-only. The vertices are fixed, so the figure is NOT to scale; `description` is the required screen-reader text. Nothing is read from the picture.",
+  "visualStatus": "UNSUPPORTED BY THE RENDERER (blocked): 09 V3: needs `exterior` and `notToScale` in Figure.tsx triangle. The integration screens carry no widget (text only)."
  },
  "workedExamples": [
   {
@@ -363,15 +369,6 @@
         "Exterior angle = 180° − 29° = 151° (straight line)",
         "Check: 39° + 112° = 151° (exterior-angle theorem)"
        ],
-       "widget": {
-        "type": "triangle",
-        "angles": [
-         "39°",
-         "112°",
-         ""
-        ],
-        "exterior": "?"
-       },
        "role": "concept",
        "instance": "gen:ahext:39,112,0"
       },
@@ -547,7 +544,7 @@
     "addresses": null,
     "revisions": [
      {
-      "contentHash": "sha256:ffdb8604f953ee93f33d82e0033b36e4658dae9b56267e4dc59fd1976ff62f12",
+      "contentHash": "sha256:a7eb02811a5d9d135a68d5b87769b140ec11659134582eade42c16af70d6f2d4",
       "status": "pending_review",
       "provenance": {
        "source": "engineering",

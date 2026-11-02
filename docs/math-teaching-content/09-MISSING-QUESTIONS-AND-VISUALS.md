@@ -2,7 +2,13 @@
 
 > **Status: proposals only.** Nothing here is served, integrated or approved. The questions verified as served today are listed separately in [08-INTEGRATION-MANIFEST.md](08-INTEGRATION-MANIFEST.md) (`items`). In `integration-manifest.json` these proposals appear under `proposed`, never under `items`.
 >
-> Data: `missing-questions.json`. Tool: `tools/question-specs.mts` (read-only). Source commit: `637938c7`.
+> Data: `missing-questions.json`, `improper-sum.json`. Tools: `tools/question-specs.mts`, `tools/improper-sum.mts`, `tools/freshness.test.mts` (all read-only). Source commit: `637938c7`.
+>
+> **Revision (bounded corrections).**
+> - MQ5 and MQ6 are now **resolved inside the packages** by freshness@2 (below). They need no pool change and are verified served items.
+> - MQ3's recheck stays in hours and minutes. Minutes and seconds are additional transfer practice only.
+> - MQ7 (improper-sum diagnostic) is added.
+> - V1 and V3 data are now in the packages, but **rendering is blocked**.
 
 Ownership is unchanged. Codex owns runtime scope, answer normalization, misconception ids, contrast requirements and integration. This document only names, for each gap:
 - the existing generator;
@@ -46,7 +52,7 @@ The tool simulates this. Its simulator reproduces `phasePool` exactly when no mo
 
 Adding items (MQ3 retention, MQ4) also re-indexes partitions. Any pool change must therefore be followed by re-checking the package references, for example with `tools/manifest.mts`.
 
-## The six questions
+## The questions
 
 ### MQ1 — TP-ALG-01: unambiguous (px + q)² cross-term questions (diagnostic and retention)
 
@@ -127,10 +133,13 @@ Notes on the retention row:
 - The durations shown for seeds above 99 are predicted with the same hash. They must be re-checked by the generator once the bound changes.
 - The bound change adds items, which re-indexes forms (see the side-effect section above).
 
-**Alternative needing no generator change: decide.** Mode 1 (minutes and seconds) has the same regroup-at-100 structure, and `gen:addur:1,39` is served typed in the check partition today:
+**The recheck stays in hours and minutes.** The recheck must test the package's own skill (60 minutes make an hour), so it is `gen:addur:0,7` after the partition change.
+
+`gen:addur:1,39` (minutes and seconds) is served typed in the check partition today:
 - "Priya runs two laps in 4 min 55 s and 1 min 50 s": **(6, 45)**; no-carry **(5, 105)**; carry-kept **(6, 105)**.
-- Using it means widening TP2-REG-TIME's restriction to seconds. The skill is the same (60 of the small unit make one big unit), but the unit is different.
-- It covers only the recheck. Retention would still need the bound change.
+- It may be added only as **additional transfer practice**: the same regrouping idea with a different unit.
+- It is never the recheck and never its replacement, and it is not evidence for the hours-and-minutes skill.
+- Using it needs TP2-REG-TIME's restriction widened for that one transfer role.
 
 **Ambiguity.** None. All the predicted values differ from each other and from the answer.
 
@@ -161,7 +170,7 @@ Notes on the retention row:
 - Avoid items where add-denominators equals multiply-tops. For example, `fadd:1,1,3,1` gives 1/3 for both.
 - Answers that simplify (for example 1,2,9 gives 3/9 = 1/3) need both forms accepted. That is answer normalization, which belongs to Codex.
 
-The improper-sum diagnostic gap in NUM-02 is a separate partition question and is not part of this request.
+The improper-sum diagnostic gap in NUM-02 is specified in MQ7.
 
 ### MQ5 — TP-PRO-01: different-size-spinner recheck
 
@@ -171,23 +180,20 @@ The improper-sum diagnostic gap in NUM-02 is a separate partition question and i
 
 **Constraint.** `[m, n, 0, k]` with m ≠ n and 2 < k < m + n, so the total is made by at least two pairs.
 
-**What exists.**
-- All 36 such items are released.
-- Six are served in the **check** partition.
-- **Every one is blocked only by this branch's distinct-answer rule** for TP-PRO-01. Nothing in the generator or the partitions blocks them.
+**Before.**
+- All 36 such items are released, and six are in the check partition.
+- Every one was blocked only by this branch's distinct-answer rule. The package's "different-size" recheck slot was filled by `gen:akdice:4,6,0,10:mc`, which is a single-pair total.
 
-| Proposed | Served as | Answer (hand check) | Anticipated wrong answers | Answer repeats |
-|---|---|---|---|---|
-| **`gen:akdice:4,5,0,4:mc`** (recommended) | check, `:mc`; options 3/20, 1/5, 1/3, 1/8 | Pairs (1,3), (2,2), (3,1): **3/20** (option A) | totals-equally-likely **1/8** (option D); added-sides **1/3** (option C) | the diagnostic `4,5,0,7` (3/20), which reveals no answer |
-| `gen:akdice:5,6,0,3` (not recommended) | check, typed | (1,2), (2,1) out of 30: **1/15** | totals-equally-likely **1/10**; added-sides **2/11** | misconception-branch check `3,5,0,2` |
+**Now (freshness@2, built into the package).**
 
-**Why 5,6,0,3 is not recommended.** Its totals-equally-likely value (1/10) equals the answer of the worked example `4,5,0,3`, which the learner has been shown. A copied answer would then read as the misconception. `gen:akdice:5,6,0,8` and `gen:akdice:5,6,0,9` share this problem.
+| Recheck | Served as | Answer (hand check) | Anticipated wrong answers |
+|---|---|---|---|
+| **`gen:akdice:4,5,0,5`** | check, typed | (1,4), (2,3), (3,2), (4,1) out of 4 × 5 = 20: **1/5** | totals-equally-likely **1/8** (8 possible totals, 2–9); added-sides **4/9** (4 pairs out of 4 + 5) |
 
-**Change: selection only.** The required decision (the same rule as MQ6) is:
-> A recheck's answer may repeat the answer of a diagnostic item, because diagnostics reveal no answer.
-> It may not repeat the answer of any item the learner was shown.
-
-**Ambiguity.** `4,5,0,4` uses the same spinner pair as the worked example. That is the same sample space with a different total, so it is less fresh than a new pair, but every other different-size check item has a worse answer collision.
+- Its answer 1/5 repeats the misconception example `gen:akdice:3,5,0,6`. That example is a different problem (other spinners, other total), so freshness@2 allows it.
+- Neither wrong value equals an answer the learner has been shown.
+- `gen:akdice:4,5,0,4` (proposed earlier) is now **excluded**. Total 4 on spinners 1–4 and 1–5 is the diagnostic `4,5,0,7` relabelled: renumbering each face x → (size + 1 − x) maps total k to 11 − k and pairs to pairs.
+- `gen:akdice:5,6,0,3`, `5,6,0,8` and `5,6,0,9` are **excluded** by the shown-answer guard. Their totals-equally-likely value (1/10) is the answer of the worked example `4,5,0,3`.
 
 ### MQ6 — TP2-PV-DIGIT: "how many tens" recheck
 
@@ -197,31 +203,101 @@ The improper-sum diagnostic gap in NUM-02 is a separate partition question and i
 
 **Constraint.** `[n, 1]` with two different digits. The tens digit, which is the answer, must differ from the answers of the items the learner was **shown**.
 
-**What exists.**
-- 81 such items exist, all released. 16 are in the check partition.
-- **Every one is blocked only by this branch's signature rule.** The package already uses each of the nine possible tens counts somewhere:
+**Before.**
+- 81 such items exist, all released, and 16 are in the check partition.
+- Every one was blocked only by this branch's `q:1:<tens>` key. That key is in effect an answer key, and the package already uses each of the nine possible tens counts somewhere.
+- No two-digit item can avoid repeating a tens count. Three-digit numbers would be a different, harder skill.
 
-| Tens count | Item | Role |
+**Now (freshness@2, built into the package).**
+
+| Recheck | Served as | Answer | Anticipated wrong answers |
+|---|---|---|---|
+| **`gen:aadigit:28,1:mc`** ("how many tens") | check, `:mc`; options 3, 2, 8, 20 | 28 = 2 tens and 8 ones: **2** (B) | value-not-count **20** (D); wrong-digit **8** (C) |
+| `gen:aadigit:39,0:mc` (value of the tens digit; replaces `50,0`) | check, `:mc`; options 9, 3, 31, 30 | **30** (D) | face-value **3** (B); wrong-digit **9** (A) |
+
+Both PV-DIGIT rechecks are now served as `:mc` (previously typed). In `28,1:mc`, the non-target option 8 equals the answer of the shown item `82,1`: the shown-answer guard covers target wrong values only.
+
+- Answer 2 repeats the guided `gen:aadigit:26,1:mc`, which is a different number, so freshness@2 allows it. The answer digit is printed in the question by construction anyway.
+- Under freshness@2, the same number asked any other way is the same problem (`problem:digit:n`).
+- The shown-answer guard also replaced the earlier value rechecks:
+  - `50,0`: its face-value error (5) is the answer of the worked example `56,1`;
+  - `20,0`: its face-value error (2) is the answer of the guided `26,1`.
+- `gen:aadigit:39,1`, proposed earlier, is still fresh. The build takes the first fresh item in the served order, which is 28,1. 39,1 remains a valid alternative.
+
+## Freshness rule, revised (freshness@2)
+
+| | Before | Now |
 |---|---|---|
-| 1 | `13,1` | guided |
-| 2 | `26,1` | guided |
-| 3 | `34,1` | diagnostic |
-| 4 | `43,1` | guided |
-| 5 | `56,1` | worked example |
-| 6 | `68,1` | misconception check |
-| 7 | `75,1` | misconception example |
-| 8 | `82,1` | misconception guided |
-| 9 | `92,1` | delayed check |
+| Recheck blocked by | same exposure key, number signature, or **answer** (PRO-01's distinct-answer rule; PV-DIGIT's tens-count key) | same exposure key (covering the `:mc` form and distinct@1 duplicates), or the same **problem**: the same numbers, or the same problem relabelled |
+| Repeated answer of a different question | blocked | **allowed** |
+| Target wrong value equals an answer the learner was shown | not checked | **blocked**: a copied answer would read as the misconception |
+| Scope | — | rechecks of TP-PRO-01 and TP2-PV-DIGIT (`recheckProblem` in the package definitions; `sigR`/`freeR` in `tools/build.mts`) |
 
-**What would need a generator change.** No two-digit item can avoid repeating a tens count. Avoiding it entirely would need three-digit numbers ("how many tens in 347" is 34). That is a different, harder skill, so it is not recommended.
+Other roles and packages keep their rules unchanged. The full rebuild was compared file by file with the previous build:
+- only TP-PRO-01 and TP2-PV-DIGIT changed, and only in their rechecks (every other role keeps the same items);
+- TP-NUM-01 and TP-GEO-01 changed only in their corrected visuals (V1, V3);
+- every other package file is byte-identical.
 
-| Proposed | Served as | Answer | Anticipated wrong answers | Answer repeats |
+**Tests** (`tools/freshness.test.mts`): **18 passed, 0 failed.**
+- **Excluded:**
+  - the same question;
+  - its `:mc` form;
+  - the mirror (relabelled) total;
+  - the same number asked another way.
+- **Allowed:** a different problem with the same answer (each of these was blocked under the old rule).
+- **Guard rejections:** `5,6,0,3` and `50,0`.
+- **Built rechecks:** no collision and no copy risk.
+- **Pools:** no two served `akdice` or `aadigit` questions show the same thing (distinct@1).
+
+**Known limits** (review pass 7, notes):
+- A recheck may share its **answer** with a shown item (`4,5,0,5` and `3,5,0,6`: 1/5; `28,1` and `26,1`: 2). A learner copying that answer would pass. The guard stops a copied answer from being read as the misconception; it does not stop copying.
+- `shownAnswers` counts the same family only.
+- Other roles detect problem-key clashes in the reuse audit (a build failure), not during selection. There are none today.
+- `missing-questions.json` "available" counts apply the problem keys but not the shown-answer guard. The build applies both.
+
+### MQ7 — TP-NUM-02: improper-sum diagnostic (sum above one whole)
+
+**Existing generators.**
+- `fadd` (`families.ts:116`; release rule at `families.ts:1192`) releases **220** additions and **none** with a sum above one: `keep` requires a + b < n.
+- No other family adds like fractions to more than one whole. `faddu` and `avfas` are unlike-denominator families (`fraction-add`), and the only like-denominator sums elsewhere are integer, property or distributive items.
+- So **no suitable item exists today**.
+
+**Same skill, same generator.** `fadd`'s `reject`, `solve`, `validate` and bugs all accept a + b > n: `keep` is a release filter, not a validity rule. `problemOf` builds the item, and the family's independent `validate` accepts the answer.
+
+| Proposed | Partition (hash) | Answer (hand check) | Modelled wrong answers | Unmodelled readings (no diagnosis) |
 |---|---|---|---|---|
-| **`gen:aadigit:39,1`** | check, typed | 39 = 3 tens and 9 ones: **3** | value-not-count **30**; wrong-digit **9** | only the diagnostic `34,1`, which reveals no answer |
+| **`gen:fadd:4,2,5,1`**: "4/5 + 2/5 = ?" | diagnostic, typed | 4 fifths + 2 fifths = 6 fifths: **6/5** (= 1 1/5) | add-denominators **6/10** (value 3/5; the written form 6/10 is the NUM-02 trigger); multiply-tops **8/5** | whole dropped **1/5**; capped at one **1** (or 5/5) |
 
-**Change: selection only, under the MQ5 rule.**
+**Checks** (`tools/improper-sum.mts`):
+- the generator answer, the family's `validate`, this branch's prompt-text oracle and the number-line method all give 6/5;
+- all four wrong values are distinct, differ from the answer and are not printed in the question;
+- gcd(6, 5) = 1, so the answer needs no simplifying;
+- its numbers and answer do not repeat any TP-NUM-02 item.
 
-**Ambiguity.** None. 30 and 9 differ from 3. The answer digit is printed in the question by construction; the value-not-count error is what the recheck reads.
+**What it adds.**
+- add-denominators gives 6/10, **less than either addend's 4/5**. That is a sense-check that the below-one item cannot offer.
+- It shows whether answers above one are accepted.
+- Accepting 1 1/5 as well as 6/5 is answer normalization, which belongs to Codex.
+
+**Smallest change: a one-item release override** that serves `gen:fadd:4,2,5,1` in the diagnostic partition, **typed** (Codex, pool).
+- No release-override mechanism exists today: `question-status` can only quarantine.
+- If the item were simply added to the pool, it would sort to index 73 of 80 in the diagnostic partition. It would then be served as `:mc` itself, and it would flip the form of 6 other diagnostic items, none of them referenced by TP-NUM-02 or the module.
+- The override must therefore place the item outside `phasePool`'s typed/`:mc` alternation, or pin it to the package.
+
+**Required with it (Codex owns misconception ids).** The two errors this item exists to catch are **not modelled** as `fadd` bugs:
+- whole dropped: **1/5**;
+- capped at one: **1** or 5/5.
+
+Today both would grade as plain "incorrect", with no reading. Add them (for addition with a + b > n) so the diagnostic can name them.
+
+**Not recommended: relaxing `keep`** (`a + b < n` → `a < n && b < n && a + b ≠ n`):
+- it releases **220** new items;
+- the simulation, which matches `phasePool`, shows **9 referenced TP-NUM-02 items would flip** between typed and `:mc`, including the diagnostic `gen:fadd:3,5,9,1` (typed → `:mc`);
+- it is acceptable only if existing items' served forms are frozen.
+
+**Ambiguity.**
+- The value 3/5 also fits "averaging". As on the existing item, only the written form 6/10 supports add-denominators (P1, Codex).
+- A single answer establishes nothing.
 
 ## The five visuals: existing primitives plus minimal renderer requirements
 
@@ -245,6 +321,8 @@ The tool generated each data object from the package's own worked-example and di
 | V5 | `ahid` (forms 0–1) | 252 | 0 | the cells must be p², ±pq, ±pq and q², and the two rectangles must add to the checked middle coefficient |
 
 ### V1 — TP-NUM-01: paired fraction strips of equal length
+
+> **Package status:** the TP-NUM-01 package now carries this data, with a `description` (screen-reader text), and the earlier two-grid placeholder is removed. **Rendering is blocked:** today's renderer cannot draw it correctly. `Learn.tsx` derives the second row's shading and has no `bottomShaded`, and `Figure.tsx` has no `strips` case. The screen must stay text-only until Codex adds both.
 
 **Existing primitives.**
 - The `strips` widget (`Learn.tsx` `Picture`: two rows of equal width, `top` parts with `shaded` shaded, then `bottom` parts).
@@ -280,6 +358,8 @@ The tool generated each data object from the package's own worked-example and di
 It needs no new shape. The answer is never labelled.
 
 ### V3 — TP-GEO-01: triangle with an extended side and its exterior angle
+
+> **Package status:** the TP-GEO-01 package now carries this data, with `notToScale: true` and a `description` (screen-reader text, which says "not drawn to scale"). The placeholder that put the second opposite angle next to the exterior angle is removed. **Rendering is blocked:** `Figure.tsx` ignores `exterior` and `notToScale`, so it would draw a plain triangle with no extended side. The screen must stay text-only until Codex adds both fields.
 
 **Existing primitive.** `Figure` `triangle`: fixed vertices P0 (20,160), P1 (240,160), P2 (100,30), with `angles[i]` labels at vertex i.
 
@@ -362,23 +442,33 @@ Equal cell sizes are acceptable (the picture is schematic), so proportional size
 
 ## Implementation-ready list
 
-| # | Change | Kind | Owner |
-|---|---|---|---|
-| 1 | TP-ALG-01 diagnostic → `gen:ahid:0,3,7,1`, pinned to the typed form | form pin | Codex (pool) |
-| 2 | TP-ALG-01 retention: add `gen:ahid:0,2,9,1` to retention | override applied after forms are assigned | Codex (pool) |
-| 3 | TP2-CH-BAG contrast: `gen:akchance:8,8,0,0` → diagnostic, typed | override applied after forms are assigned | Codex (pool) |
-| 4 | TP2-REG-TIME recheck: `gen:addur:0,7` → check | override applied after forms are assigned | Codex (pool) |
-| 5 | TP2-REG-TIME retention: `addur` mode-0 bound x ≤ 299; then `gen:addur:0,291` is in retention | generator bounds | Codex (generator) |
-| 6 | TP-NUM-02 transfer: `fadd.word(p)` (template above) | generator, one function | Codex (generator) |
-| 7 | TP-PRO-01 recheck `gen:akdice:4,5,0,4:mc` | selection only, after decision A | package rebuild |
-| 8 | TP2-PV-DIGIT recheck `gen:aadigit:39,1` | selection only, after decision A | package rebuild |
-| 9 | V1–V5 optional fields in `Figure.tsx` / `Learn.tsx`, with `describe()` clauses | renderer, minimal | Codex (UI) |
+**Verified served items (in the packages now; no change needed):**
+- TP-PRO-01 recheck `gen:akdice:4,5,0,5`;
+- TP2-PV-DIGIT rechecks `gen:aadigit:28,1:mc` and `gen:aadigit:39,0:mc`.
+
+**Proposed pool and generator changes (Codex):**
+
+| # | Change | Kind |
+|---|---|---|
+| 1 | TP-ALG-01 diagnostic → `gen:ahid:0,3,7,1`, pinned to the typed form | form pin |
+| 2 | TP-ALG-01 retention: add `gen:ahid:0,2,9,1` to retention | override applied after forms are assigned |
+| 3 | TP2-CH-BAG contrast: `gen:akchance:8,8,0,0` → diagnostic, typed | override applied after forms are assigned |
+| 4 | TP2-REG-TIME recheck (hours and minutes): `gen:addur:0,7` → check | override applied after forms are assigned |
+| 5 | TP2-REG-TIME retention: `addur` mode-0 bound x ≤ 299; then `gen:addur:0,291` is in retention | generator bounds |
+| 6 | TP-NUM-02 transfer: `fadd.word(p)` (template above) | generator, one function |
+| 7 | TP-NUM-02 improper-sum diagnostic: release `gen:fadd:4,2,5,1` into diagnostic | one-item release override |
+| 8 | Optional: `gen:addur:1,39` as additional minutes-and-seconds transfer practice for TP2-REG-TIME | package restriction (transfer role only) |
+
+**Unsupported visuals (renderer, Codex).**
+- V1 and V3 data are in the packages but **blocked**.
+- V2, V4 and V5 are specified only.
+- Each needs the optional fields and `describe()` clauses above.
 
 ## Decisions still open
 
-- **A. Recheck answer reuse.** May a recheck's answer repeat the answer of a diagnostic item, given that diagnostics reveal no answer? Items 7 and 8 depend on it. If not:
-  - TP-PRO-01's different-size recheck has no candidate without a worse collision;
-  - TP2-PV-DIGIT's recheck would need three-digit numbers (a different skill).
-- **B. Seconds as the regroup-at-100 recheck.** Use `gen:addur:1,39` (seconds) now, with no generator change, or wait for change 5?
-- **C. Exterior-angle triangle.** Keep it not to scale (the minimum), or draw it to scale?
-- **D. Override mechanism.** An explicit override list after form assignment is required to avoid the form flips shown above. How to implement it is Codex's choice.
+- **A. Exterior-angle triangle.** Keep it not to scale (the minimum), or draw it to scale?
+- **B. Override mechanism.** An explicit override list applied after form assignment (or frozen forms for existing items) is required to avoid the form flips shown above. How to implement it is Codex's choice.
+- **C. Wider freshness@2.** The other packages with a distinct-answer rule (TP-NUM-02, TP-STA-01, TP2-SCL-BAR, TP2-CH-BAG, TP2-CH-BALL) are unchanged. Should freshness@2 replace their rule too? That would re-select their items and need re-review.
+- **Resolved:**
+  - *recheck answer reuse* is settled by freshness@2;
+  - *seconds as the recheck* is settled: hours and minutes only; seconds are transfer practice.

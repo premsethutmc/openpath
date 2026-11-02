@@ -187,3 +187,44 @@ These were made after the last independent pass. They are checked by the build (
 ## Outcome
 
 **No outstanding mathematical or instructional finding remains on any of the 18 packages** after passes 4–6 (`review-status.json`). Remaining blockers are runtime support, missing questions and missing visuals (08, 05). Every package is still a review candidate, and none is educator-approved.
+
+## Pass 7: independent review of the bounded corrections (visuals, improper-sum diagnostic, freshness@2)
+
+**Scope.** This pass reviewed only the changed material:
+- the V1 and V3 visual data in TP-NUM-01 and TP-GEO-01, and the claim that they cannot be rendered;
+- the proposed TP-NUM-02 improper-sum diagnostic (09 MQ7);
+- freshness@2 and the rebuilt rechecks of TP-PRO-01 and TP2-PV-DIGIT.
+
+The reviewer worked from the code and generated data (read-only), not from the author's summary. Earlier evidence for every other package is reused: the rebuild is byte-identical for them.
+
+**Verified.**
+- **Strips (V1):** correct on all 500 `adfcmp` items, including 372 non-unit items. Today's `Learn.tsx` strips would shade the second row wrongly on 182 of them.
+- **Exterior angle (V3):** correct on all 400 `ahext` items, in both modes. The opposite angles are at vertices 0 and 2, the exterior angle at vertex 1, and every item is marked not to scale. The screen-reader descriptions never contain the answer.
+- **"Rendering blocked":** confirmed for `exterior` and `notToScale` (ignored), `strips` in `Figure` (falls to the "A picture" placeholder) and `bottomShaded` (ignored).
+- **Improper sum:** no released like-fraction sum exceeds one whole, and no other generator covers the skill.
+  - 4/5 + 2/5 = 6/5. The wrong values (3/5, 8/5, 1/5, 1) are distinct, and none is printed in the question.
+  - The grader accepts 6/5, 1 1/5, 12/10 and 1.2, and rejects 6/10.
+  - The 9-flip simulation reproduces `phasePool` exactly.
+- **freshness@2:**
+  - the mirror total (x, y) → (m + 1 − x, n + 1 − y) is a one-to-one renumbering that sends total k to m + n + 2 − k;
+  - the new rechecks are fresh and still discriminate the target errors;
+  - the `:mc` form, the same number asked another way, and distinct@1 duplicates all stay blocked;
+  - `tools/freshness.test.mts` passes 18/18;
+  - only the rechecks, and the fields derived from them, changed in the two packages.
+
+**Findings and author action.**
+
+| # | Severity | Finding | Action |
+|---|---|---|---|
+| 1 | should-fix | The integration screens still carried the unsupported widgets. Text-only was not enforced (GEO-01 would draw a plain triangle with 39° and 112° and no extended side). | **Fixed:** `visualBlocked`. The TP-NUM-01 and TP-GEO-01 integration screens now carry no widget; the gates still pass and the rebuild changes only these two packages. |
+| 2 | should-fix | TP-NUM-01 uncertainty still said "two grid strips of equal width". | **Fixed.** |
+| 3 | should-fix | whole-dropped (1/5) and capped-at-one (1) are not modelled `fadd` bugs, so the improper-sum item cannot name them. | Recorded as required with the item (09 MQ7, 05). The misconception ids are Codex's. |
+| 4 | note | No release-override mechanism exists. Adding `4,2,5,1` alone would make it `:mc` and flip 6 unreferenced diagnostic items. | Recorded: the override must place the item outside the `:mc` alternation, typed (09 MQ7). |
+| 5 | note | A recheck may share an answer with a shown item, so copying could pass. In `28,1:mc`, non-target option 8 equals the shown answer of `82,1`. Both PV-DIGIT rechecks are now `:mc`. `shownAnswers` is same-family only. Other roles catch problem-key clashes in the audit, not in selection. | Recorded as known limits (09). |
+| 6 | note | GEO-01 concept text names vertex "C"; a figure would need vertex letters. | Recorded (review-status). |
+
+**Outcome.** All three were cleared with notes, and no mathematical or instructional finding is outstanding.
+
+**Readiness changes:**
+- TP-PRO-01 and TP2-PV-DIGIT move to "shared runtime support" (their rechecks now exist).
+- TP-NUM-01 and TP-GEO-01 stay blocked on visuals that cannot be rendered.

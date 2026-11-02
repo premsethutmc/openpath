@@ -46,14 +46,14 @@ for primary, o in rows:
           f"- **Diagnostic contrast:** {'; '.join(f'{c['case']} `{c['id']}` ({c['partition']})' for c in o['contrast']['cases'])}. Rule: {o['contrast']['rule']}" + (f" Trigger conditions: {'; '.join(f'`{t['strategy']}`: {t['condition']}' for t in o['contrast']['triggerConditions'])}." if o['contrast']['triggerConditions'] else ""),
           f"- **Answer formats:** family type `{o['answerFormats']['familyType']}`; forms used: {', '.join(o['answerFormats']['forms'])}; multiple choice {'available' if o['answerFormats']['mcAvailable'] else 'not available'}; everyday form {'available' if o['answerFormats']['wordAvailable'] else 'NOT available'}. Trusted grader: supported. Diagnosis reader: {'supported' if o['answerFormats']['diagnosisReaderSupported'] else '**not supported (B2)**'}.",
           f"- **Evidence:** answer evidence comes from {o['evidence']['answer']}. Method evidence: {o['evidence']['method']}.",
-          f"- **Visuals:** used {', '.join(f'`{v}`' for v in o['visuals']['used']) or 'none'}; missing: {'; '.join(o['visuals']['missing']) or 'none'}.",
+          f"- **Visuals:** used {', '.join(f'`{v}`' for v in o['visuals']['used']) or 'none'}. **Unsupported visuals:** {'; '.join(o['visuals']['missing']) or 'none'}.",
           f"- **New strategies:** {', '.join(f'`{x}`' for x in o['newStrategies'])}.", "",
-          "| Role | Question | Partition | Form | Reconciliation |", "|---|---|---|---|---|"]
+          "**Verified served items** (each id checked against the served partitions at the source commit):", "", "| Role | Question | Partition | Form | Reconciliation |", "|---|---|---|---|---|"]
     L += [f"| {i['role']} | `{i['id']}` | {i['partition']} | {i['form']} | {'; '.join(i['issues']) or 'served, fresh, unexposed'} |" for i in o["items"]]
     L += ["", "**Missing questions:** " + ("; ".join(o["missingQuestions"]) or "none") + "."]
     pq = o.get("proposed", {}).get("questions", [])
     if pq:
-        L += ["", "**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**", "", "| Need | Role | Proposed question | Served today as | Change |", "|---|---|---|---|---|"]
+        L += ["", "**Proposed pool changes (NOT served; Codex; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**", "", "| Need | Role | Proposed question | Served today as | Change |", "|---|---|---|---|---|"]
         L += [f"| {x['need']} | {x['role']} | `{x['id']}` | {x['currentlyServedAs']} | {x['change']} |" for x in pq]
     L += ["", "**Unresolved contract requirements (Codex):**", ""] + [f"- {x}" for x in o["contract"]] + [""]
     rv = rs["packages"].get(o["id"], {})

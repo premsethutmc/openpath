@@ -73,10 +73,17 @@ for (const pk of ALL) {
   const used = new Set<string>();
   { const m0 = moduleFor(pk.competency)!; const shownIds: string[] = []; for (const st of m0.strategies) { for (const sc of st.screens) if (sc.instance) shownIds.push(sc.instance); if (st.guided) shownIds.push(st.guided); if (st.check) shownIds.push(st.check); } for (const sc of (Array.isArray(m0.chapter) ? m0.chapter : []) as { instance?: string }[]) if (sc.instance) shownIds.push(sc.instance);
     // excluded by exposure key AND by this package's own number signatures (same bag, table or numbers under other labels) and answers
-    for (const id of shownIds) { used.add(exposureKey(id)); const pr = problemOf(id.replace(/:(mc|w)$/, "")); if (pr && pr.family === pk.family) { try { for (const k of [...(pk.answerDistinct ? [`answer:${pr.answer}`] : []), ...(pk.signature?.(pr) ?? [])]) used.add(k); } catch { /* not a signature-bearing item */ } } } }
+    for (const id of shownIds) { used.add(exposureKey(id)); const pr = problemOf(id.replace(/:(mc|w)$/, "")); if (pr && pr.family === pk.family) { try { for (const k of [...(pk.answerDistinct ? [`answer:${pr.answer}`] : []), ...(pk.signature?.(pr) ?? [])]) used.add(k); for (const k of pk.recheckProblem?.(pr) ?? []) used.add(k); } catch { /* not a signature-bearing item */ } } } }
   const gaps: string[] = [];
   const sig = (id: string) => [exposureKey(id), ...(pk.answerDistinct ? [`answer:${P(id).answer}`] : []), ...(pk.signature?.(P(id)) ?? [])];
-  const take = (id: string) => { for (const k of sig(id)) used.add(k); return id; };
+  const problemKeys = (id: string) => pk.recheckProblem?.(P(id)) ?? [];
+  const take = (id: string) => { for (const k of [...sig(id), ...problemKeys(id)]) used.add(k); return id; };
+  // freshness@2 (rechecks of packages with recheckProblem): blocked by the same exposure key or the same problem only, not by a repeated answer
+  const sigR = (id: string) => [exposureKey(id), ...problemKeys(id)];
+  const takeR = (id: string) => { for (const k of sigR(id)) used.add(k); return id; };
+  let shownAnswers = new Set<string>();
+  const normQ = (v: unknown) => typedForm(v).map((x) => (toQ(x) ? qs(toQ(x)!) : x));
+  const freeR = (id: string) => sigR(id).every((k) => !used.has(k)) && selectable(id) && isQuestion(id) && targetBugs(P(id)).every((b) => normQ(b.predict).every((v) => !shownAnswers.has(v)));
   const free = (id: string) => sig(id).every((k) => !used.has(k)) && selectable(id) && isQuestion(id);
   const promptNums = (p: Problem) => new Set([...p.prompt.replace(/−/g, "-").matchAll(/-?\d+(?:\.\d+)?(?:\/\d+)?/g)].map((m) => { const Q = toQ(m[0]); return Q ? qs(Q) : m[0]; }));
   const fits = (id: string) => pk.applies(P(id));
@@ -110,7 +117,11 @@ for (const pk of ALL) {
   }).filter(Boolean) as { bug: string; example: string; guided: string | null; check: string | null }[];
   const pickN = (l: string[], n: number, ok: (x: string) => boolean) => { const got: string[] = []; for (const x of l) { if (got.length >= n) break; if (free(x) && ok(x)) got.push(take(x)); } return got; };
   const guided = pickN(prefer(list("practice")), 3, (x) => discriminating(P(x)));
-  const perCase = (phase: "check" | "retention") => { const cs = pk.diagnosticCases.filter((c) => !c.contrast); const got: string[] = []; for (const c of cs) { const id = list(phase).find((x) => free(x) && c.pick(P(x)) && discriminating(P(x))); if (id) got.push(take(id)); else gaps.push(`${phase === "check" ? "rechecks" : "delayed checks"}: no usable ${phase} item for case "${c.label}" (another case's item stands in)`); } while (got.length < 2) { const id = list(phase).find((x) => free(x) && discriminating(P(x))); if (!id) break; got.push(take(id)); } if (got.length < cs.length) fail(pk.id, `${phase}: only ${got.length} discriminating item(s) for ${cs.length} case(s)`); return got.slice(0, Math.max(2, cs.length)); };
+  const perCase = (phase: "check" | "retention") => { const R = phase === "check" && !!pk.recheckProblem; const fr = R ? freeR : free, tk = R ? takeR : take; const cs = pk.diagnosticCases.filter((c) => !c.contrast); const got: string[] = []; for (const c of cs) { const id = list(phase).find((x) => fr(x) && c.pick(P(x)) && discriminating(P(x))); if (id) got.push(tk(id)); else gaps.push(`${phase === "check" ? "rechecks" : "delayed checks"}: no usable ${phase} item for case "${c.label}" (another case's item stands in)`); } while (got.length < 2) { const id = list(phase).find((x) => fr(x) && discriminating(P(x))); if (!id) break; got.push(tk(id)); } if (got.length < cs.length) fail(pk.id, `${phase}: only ${got.length} discriminating item(s) for ${cs.length} case(s)`); return got.slice(0, Math.max(2, cs.length)); };
+  // answers the learner has been SHOWN before a recheck (worked, misconception and guided items, and the module's own shown items);
+  // diagnostics reveal no answer. A recheck's target wrong value must not equal one of these (a copied answer would read as the error).
+  { const m1 = moduleFor(pk.competency)!; const ids: string[] = [...worked, ...misconceptions.flatMap((m) => [m.example, m.guided, m.check].filter(Boolean) as string[]), ...guided]; for (const st of m1.strategies) { for (const sc of st.screens) if (sc.instance) ids.push(sc.instance); if (st.guided) ids.push(st.guided); if (st.check) ids.push(st.check); }
+    shownAnswers = new Set(ids.map((x) => problemOf(x.replace(/:(mc|w)$/, ""))).filter((pr) => pr && pr.family === pk.family).flatMap((pr) => normQ(pr!.answer))); }
   const rechecks = perCase("check");
   const transfer = def.word ? pickN(list("practice").filter(typed).filter((x) => discriminating(P(x))).map((x) => `${x}:w`), 2, () => true) : [];
   if (!def.word) fail(pk.id, "family has no word form: transfer candidates MISSING (content gap, recorded)");
@@ -120,7 +131,8 @@ for (const pk of ALL) {
   const checks = roles.map(([r, id]) => checkItem(pk, id, r));
   // reuse audit: every pair of chosen items, and each chosen item against the module's already-shown items, must share no key
   const keyOwners = new Map<string, string[]>();
-  for (const [r, id] of roles) for (const k of sig(id)) keyOwners.set(k, [...(keyOwners.get(k) ?? []), `${r} ${id}`]);
+  // freshness@2: a recheck is audited on its exposure key and problem keys (a repeated answer alone is allowed); every other role on its full signature plus problem keys
+  for (const [r, id] of roles) for (const k of r === "recheck" && pk.recheckProblem ? sigR(id) : [...sig(id), ...problemKeys(id)]) keyOwners.set(k, [...(keyOwners.get(k) ?? []), `${r} ${id}`]);
   const reuseCollisions = [...keyOwners.entries()].filter(([, v]) => v.length > 1).map(([k, v]) => `${k}: ${v.join(" / ")}`);
   if (reuseCollisions.length) fail(pk.id, `reuse collisions: ${reuseCollisions.join("; ")}`);
 
@@ -152,7 +164,7 @@ for (const pk of ALL) {
   const mod = moduleFor(pk.competency)!;
   const existing = REG.entries.filter((e) => e.competency === pk.competency && e.misconceptionSpecific);
   const familyTaught = mod.strategies.some((st) => st.screens.some((sc) => sc.instance && P(sc.instance)?.family === pk.family));
-  const widget = (id: string) => { const v = pk.visual(P(id)); return (Array.isArray(v) ? v[0] : v) as Screen["widget"] | undefined; };
+  const widget = (id: string) => { if (pk.visualBlocked) return undefined; /* unsupported by the renderer: text only */ const v = pk.visual(P(id)); return (Array.isArray(v) ? v[0] : v) as Screen["widget"] | undefined; };
   const kindOf = (k: string): Strategy["kind"] => (["conceptual", "procedural", "recall", "prerequisite"].includes(k) ? k : "conceptual") as Strategy["kind"];
   const proposals: { strategy: Strategy; purpose: string; addresses: string | null; reuse?: string }[] = [];
   const reused: { bug: string; strategy: string }[] = [];
@@ -221,7 +233,7 @@ for (const pk of ALL) {
     schema: "teaching-package@0", status: "review-candidate (not approved, not registered, not served)", id: pk.id, batch: pk.batch, pattern: pk.pattern ?? null, title: pk.title,
     competency: pk.competency, competencyName: comp.name, grades: comp.gradeRange, strand: pk.strand, family: pk.family, familyTitle: def.title, skill: pk.skill,
     prerequisites: { graph: (relations().get(pk.competency) ?? []).map((r) => ({ from: r.from, type: r.type })), knowledge: pk.prerequisites.knowledge, note: pk.prerequisites.graphNote ?? null },
-    explanation: { concept: pk.concept, visual: worked[0] ? pk.visual(P(worked[0])) : null, visualNote: pk.visualNote },
+    explanation: { concept: pk.concept, visual: worked[0] ? pk.visual(P(worked[0])) : null, visualNote: pk.visualNote, ...(pk.visualBlocked ? { visualStatus: `UNSUPPORTED BY THE RENDERER (blocked): ${pk.visualBlocked}. The integration screens carry no widget (text only).` } : {}) },
     workedExamples: worked.map((id) => ({ id, prompt: P(id).prompt, lines: pk.oracle(P(id).prompt, figOf(P(id))).lines, familyExplainSteps: pk.quoteFamilySteps === false ? null : P(id).steps.map((s) => (def.explain(s))), answer: P(id).answer })),
     hints: worked.map((id) => ({ for: id, hints: pk.hints(P(id).prompt) })),
     alternativeExplanation: { ...pk.alternativeExplanation, visual: pk.alternativeExplanation.visual && worked[0] ? pk.alternativeExplanation.visual(P(worked[0])) : null },
@@ -272,7 +284,7 @@ function patMd(o: any): string {
   return L.join("\n") + "\n";
 }
 function md(p: any): string {
-  const L: string[] = [`# ${p.id}: ${p.title}`, "", `**Status:** ${p.status}. Competency \`${p.competency}\` (${p.competencyName}, grade${p.grades[0] === p.grades[1] ? ` ${p.grades[0]}` : `s ${p.grades.join("–")}`}), family \`${p.family}\` (${p.familyTitle}).`, "", `**Skill.** ${p.skill}`, "", "## Prerequisites", "", ...p.prerequisites.knowledge.map((k: string) => `- ${k}`), `- Graph: ${p.prerequisites.graph.map((r: any) => `${r.from} (${r.type})`).join(", ") || "none recorded"}`, ...(p.prerequisites.note ? [`- ${p.prerequisites.note}`] : []), "", "## Explanation", "", ...p.explanation.concept, "", `Visual: \`${JSON.stringify(p.explanation.visual)}\`. ${p.explanation.visualNote}`, "", "## Worked examples (instances from the generator; lines from the independent oracle; checked)", ""];
+  const L: string[] = [`# ${p.id}: ${p.title}`, "", `**Status:** ${p.status}. Competency \`${p.competency}\` (${p.competencyName}, grade${p.grades[0] === p.grades[1] ? ` ${p.grades[0]}` : `s ${p.grades.join("–")}`}), family \`${p.family}\` (${p.familyTitle}).`, "", `**Skill.** ${p.skill}`, "", "## Prerequisites", "", ...p.prerequisites.knowledge.map((k: string) => `- ${k}`), `- Graph: ${p.prerequisites.graph.map((r: any) => `${r.from} (${r.type})`).join(", ") || "none recorded"}`, ...(p.prerequisites.note ? [`- ${p.prerequisites.note}`] : []), "", "## Explanation", "", ...p.explanation.concept, "", `Visual: \`${JSON.stringify(p.explanation.visual)}\`. ${p.explanation.visualNote}${p.explanation.visualStatus ? ` **${p.explanation.visualStatus}**` : ""}`, "", "## Worked examples (instances from the generator; lines from the independent oracle; checked)", ""];
   for (const w of p.workedExamples) L.push(`**\`${w.id}\`** — ${w.prompt}`, "", ...w.lines.map((l: string) => `1. ${l}`), "", `Answer **${w.answer}**.${w.familyExplainSteps ? ` (The family's own step text: ${w.familyExplainSteps.join("; ")}.)` : " (The family's own step text is not quoted: it has a recorded defect.)"}`, "");
   L.push("## Hints (graded, per worked example)", "", ...p.hints.flatMap((h: any) => [`For \`${h.for}\`:`, "", ...h.hints.map((x: string, i: number) => `${i + 1}. ${x}`), ""]), `## Alternative explanation: ${p.alternativeExplanation.title}`, "", ...p.alternativeExplanation.text, "", "## Valid alternative methods (each checked to reach the same answer on every applicable generated item)", "");
   for (const a of p.alternativeMethods) L.push(`- **${a.name}**: ${a.example.join(" → ")}`);

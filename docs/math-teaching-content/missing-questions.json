@@ -396,7 +396,7 @@
    ]
   },
   {
-   "recommended": "recheck gen:addur:0,7 (override diagnostic → check); retention gen:addur:0,291 after the bounds change (mode 0, x ≤ 299)",
+   "recommended": "recheck gen:addur:0,7 in hours and minutes (override diagnostic → check); retention gen:addur:0,291 after the bounds change (mode 0, x ≤ 299). gen:addur:1,39 (minutes and seconds) is ADDITIONAL transfer practice only, never the recheck",
    "need": "MQ3",
    "title": "Durations whose minutes total 100 or more",
    "package": "TP2-REG-TIME",
@@ -673,7 +673,7 @@
    ]
   },
   {
-   "recommended": "recheck gen:akdice:4,5,0,4:mc (selection only, after decision A)",
+   "recommended": "RESOLVED in the package by freshness@2 (no pool change): recheck gen:akdice:4,5,0,5 (4,5,0,4 is the mirror of the diagnostic 4,5,0,7, a relabelled problem)",
    "need": "MQ5",
    "title": "Different-size-spinner multi-pair recheck",
    "package": "TP-PRO-01",
@@ -686,168 +686,56 @@
    "counts": {
     "qualifyingInDomain": 36,
     "released": 36,
-    "availableInRequiredPartition": 0,
-    "releasedOtherPartition": 0,
+    "availableInRequiredPartition": 3,
+    "releasedOtherPartition": 17,
     "notReleased": 0,
-    "alreadyUsedOrShown": 36
+    "alreadyUsedOrShown": 16
    },
    "reuseByPartition": {
     "diagnostic": [
-     "gen:akdice:3,6,0,5: answer 1/6 already used (the package requires distinct answers) [diagnostic]",
      "gen:akdice:4,5,0,7: already used by the package [diagnostic]"
     ],
     "check": [
      "gen:akdice:3,5,0,3: already used by the package [check]",
-     "gen:akdice:4,5,0,4: answer 3/20 already used (the package requires distinct answers) [check]",
-     "gen:akdice:4,5,0,5: answer 1/5 already used (the package requires distinct answers) [check]",
-     "gen:akdice:5,6,0,3: answer 1/15 already used (the package requires distinct answers) [check]",
-     "gen:akdice:5,6,0,8: answer 2/15 already used (the package requires distinct answers) [check]",
-     "gen:akdice:5,6,0,9: answer 1/10 already used (the package requires distinct answers) [check]"
+     "gen:akdice:4,5,0,4: same numbers (problem:dice:4,5,4) as an item the package uses or the module shows [check]",
+     "gen:akdice:4,5,0,5: already used by the package [check]"
     ],
     "retention": [
-     "gen:akdice:3,4,0,5: answer 1/4 already used (the package requires distinct answers) [retention]",
-     "gen:akdice:3,4,0,6: answer 1/6 already used (the package requires distinct answers) [retention]",
-     "gen:akdice:3,6,0,4: answer 1/6 already used (the package requires distinct answers) [retention]",
-     "gen:akdice:3,6,0,7: answer 1/6 already used (the package requires distinct answers) [retention]",
-     "gen:akdice:4,5,0,6: answer 1/5 already used (the package requires distinct answers) [retention]",
-     "gen:akdice:4,5,0,8: answer 1/10 already used (the package requires distinct answers) [retention]",
-     "gen:akdice:4,6,0,3: already used by the package [retention]",
-     "gen:akdice:5,6,0,7: answer 1/6 already used (the package requires distinct answers) [retention]"
+     "gen:akdice:3,4,0,5: same numbers (problem:dice:3,4,4) as an item the package uses or the module shows [retention]",
+     "gen:akdice:4,5,0,6: same numbers (problem:dice:4,5,5) as an item the package uses or the module shows [retention]",
+     "gen:akdice:4,5,0,8: same numbers (problem:dice:4,5,3) as an item the package uses or the module shows [retention]",
+     "gen:akdice:4,6,0,3: already used by the package [retention]"
     ],
     "practice": [
-     "gen:akdice:3,4,0,3: answer 1/6 already used (the package requires distinct answers) [practice]",
      "gen:akdice:3,4,0,4: already used by the package [practice]",
-     "gen:akdice:3,5,0,4: answer 1/5 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:3,5,0,5: answer 1/5 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,5,0,4: same numbers (problem:dice:3,5,4) as an item the package uses or the module shows [practice]",
      "gen:akdice:3,5,0,6: already used by the package [practice]",
-     "gen:akdice:3,5,0,7: answer 2/15 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:3,6,0,3: answer 1/9 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:3,6,0,6: answer 1/6 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:3,6,0,8: answer 1/9 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,5,0,7: same numbers (problem:dice:3,5,3) as an item the package uses or the module shows [practice]",
      "gen:akdice:4,5,0,3: already used by the package [practice]",
-     "gen:akdice:4,6,0,4: answer 1/8 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:4,6,0,5: answer 1/6 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:4,6,0,6: answer 1/6 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:4,6,0,7: answer 1/6 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:4,6,0,4: same numbers (problem:dice:4,6,4) as an item the package uses or the module shows [practice]",
      "gen:akdice:4,6,0,8: already used by the package [practice]",
-     "gen:akdice:4,6,0,9: answer 1/12 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:5,6,0,4: answer 1/10 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:5,6,0,5: answer 2/15 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:5,6,0,6: answer 1/6 already used (the package requires distinct answers) [practice]",
-     "gen:akdice:5,6,0,10: answer 1/15 already used (the package requires distinct answers) [practice]"
+     "gen:akdice:4,6,0,9: same numbers (problem:dice:4,6,3) as an item the package uses or the module shows [practice]"
     ]
    },
    "perRole": [
     {
      "role": "check",
-     "available": [],
-     "inOtherPartitions": 0,
+     "available": [
+      "gen:akdice:5,6,0,3",
+      "gen:akdice:5,6,0,8:mc",
+      "gen:akdice:5,6,0,9"
+     ],
+     "inOtherPartitions": 17,
      "unreleased": 0
     }
    ],
    "decision": {
-    "check": "SERVED BUT BLOCKED BY THIS BRANCH'S REUSE RULE: 6 item(s) in this partition repeat a number signature or answer the package already uses"
+    "check": "SERVED: 3 qualifying item(s) already served in this partition and unused; only the package selection changes"
    },
    "proposals": [
     {
-     "id": "gen:akdice:3,5,0,3",
-     "status": "already used by the package [check]",
-     "partition": "check",
-     "prompt": "Lakshmi uses a spinner numbered 1 to 3 and a spinner numbered 1 to 5. The first gives a number from 1 to 3 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
-     "answer": "2/15",
-     "independentOracle": {
-      "agrees": true,
-      "lines": [
-       "All pairs: 3 × 5 = 15, equally likely",
-       "Pairs with total 3: 2",
-       "P = 2/15"
-      ]
-     },
-     "generatorValidate": true,
-     "trustedGrader": "correct",
-     "anticipatedWrong": [
-      {
-       "id": "totals-equally-likely",
-       "kind": "conceptual",
-       "value": 0.14285714285714285,
-       "targeted": true
-      },
-      {
-       "id": "added-sides",
-       "kind": "procedural",
-       "value": 0.25,
-       "targeted": true
-      }
-     ],
-     "ambiguity": []
-    },
-    {
-     "id": "gen:akdice:4,5,0,4",
-     "status": "answer 3/20 already used (the package requires distinct answers) [check]",
-     "partition": "check",
-     "prompt": "Ravi uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)",
-     "answer": "3/20",
-     "independentOracle": {
-      "agrees": true,
-      "lines": [
-       "All pairs: 4 × 5 = 20, equally likely",
-       "Pairs with total 4: 3",
-       "P = 3/20"
-      ]
-     },
-     "generatorValidate": true,
-     "trustedGrader": "correct",
-     "anticipatedWrong": [
-      {
-       "id": "totals-equally-likely",
-       "kind": "conceptual",
-       "value": 0.125,
-       "targeted": true
-      },
-      {
-       "id": "added-sides",
-       "kind": "procedural",
-       "value": 0.3333333333333333,
-       "targeted": true
-      }
-     ],
-     "ambiguity": []
-    },
-    {
-     "id": "gen:akdice:4,5,0,5",
-     "status": "answer 1/5 already used (the package requires distinct answers) [check]",
-     "partition": "check",
-     "prompt": "Meena uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 5? (A fraction is fine.)",
-     "answer": "1/5",
-     "independentOracle": {
-      "agrees": true,
-      "lines": [
-       "All pairs: 4 × 5 = 20, equally likely",
-       "Pairs with total 5: 4",
-       "P = 4/20 = 1/5"
-      ]
-     },
-     "generatorValidate": true,
-     "trustedGrader": "correct",
-     "anticipatedWrong": [
-      {
-       "id": "totals-equally-likely",
-       "kind": "conceptual",
-       "value": 0.125,
-       "targeted": true
-      },
-      {
-       "id": "added-sides",
-       "kind": "procedural",
-       "value": 0.4444444444444444,
-       "targeted": true
-      }
-     ],
-     "ambiguity": []
-    },
-    {
      "id": "gen:akdice:5,6,0,3",
-     "status": "answer 1/15 already used (the package requires distinct answers) [check]",
+     "status": "AVAILABLE: served in the check partition as gen:akdice:5,6,0,3",
      "partition": "check",
      "prompt": "Meena uses a spinner numbered 1 to 5 and an ordinary die. The first gives a number from 1 to 5 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
      "answer": "1/15",
@@ -879,7 +767,7 @@
     },
     {
      "id": "gen:akdice:5,6,0,8",
-     "status": "answer 2/15 already used (the package requires distinct answers) [check]",
+     "status": "AVAILABLE: served in the check partition as gen:akdice:5,6,0,8:mc",
      "partition": "check",
      "prompt": "Karthik uses a spinner numbered 1 to 5 and an ordinary die. The first gives a number from 1 to 5 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 8? (A fraction is fine.)",
      "answer": "2/15",
@@ -911,7 +799,7 @@
     },
     {
      "id": "gen:akdice:5,6,0,9",
-     "status": "answer 1/10 already used (the package requires distinct answers) [check]",
+     "status": "AVAILABLE: served in the check partition as gen:akdice:5,6,0,9",
      "partition": "check",
      "prompt": "Priya uses a spinner numbered 1 to 5 and an ordinary die. The first gives a number from 1 to 5 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 9? (A fraction is fine.)",
      "answer": "1/10",
@@ -934,11 +822,127 @@
       }
      ],
      "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:3,4,0,3",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "Farhan uses a spinner numbered 1 to 3 and a spinner numbered 1 to 4. The first gives a number from 1 to 3 and the second a number from 1 to 4, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
+     "answer": "1/6",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 3 × 4 = 12, equally likely",
+       "Pairs with total 3: 2",
+       "P = 2/12 = 1/6"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.2857142857142857,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:3,4,0,6",
+     "status": "released, but hashed into the retention partition",
+     "partition": "retention",
+     "prompt": "Ravi uses a spinner numbered 1 to 3 and a spinner numbered 1 to 4. The first gives a number from 1 to 3 and the second a number from 1 to 4, every number equally likely. What is the probability that the total of the two numbers is 6? (A fraction is fine.)",
+     "answer": "1/6",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 3 × 4 = 12, equally likely",
+       "Pairs with total 6: 2",
+       "P = 2/12 = 1/6"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.2857142857142857,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:3,5,0,5",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "Ravi uses a spinner numbered 1 to 3 and a spinner numbered 1 to 5. The first gives a number from 1 to 3 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 5? (A fraction is fine.)",
+     "answer": "1/5",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 3 × 5 = 15, equally likely",
+       "Pairs with total 5: 3",
+       "P = 3/15 = 1/5"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "totals-equally-likely",
+       "kind": "conceptual",
+       "value": 0.14285714285714285,
+       "targeted": true
+      },
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.375,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:3,6,0,3",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "Anu uses a spinner numbered 1 to 3 and an ordinary die. The first gives a number from 1 to 3 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
+     "answer": "1/9",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 3 × 6 = 18, equally likely",
+       "Pairs with total 3: 2",
+       "P = 2/18 = 1/9"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "totals-equally-likely",
+       "kind": "conceptual",
+       "value": 0.125,
+       "targeted": true
+      },
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.2222222222222222,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
     }
    ]
   },
   {
-   "recommended": "recheck gen:aadigit:39,1 (selection only, after decision A)",
+   "recommended": "RESOLVED in the package by freshness@2 (no pool change): recheck gen:aadigit:28,1:mc",
    "need": "MQ6",
    "title": "'How many tens' recheck",
    "package": "TP2-PV-DIGIT",
@@ -951,117 +955,69 @@
    "counts": {
     "qualifyingInDomain": 81,
     "released": 81,
-    "availableInRequiredPartition": 0,
-    "releasedOtherPartition": 0,
+    "availableInRequiredPartition": 11,
+    "releasedOtherPartition": 49,
     "notReleased": 0,
-    "alreadyUsedOrShown": 81
+    "alreadyUsedOrShown": 21
    },
    "reuseByPartition": {
     "diagnostic": [
-     "gen:aadigit:29,1: same numbers (q:1:2) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:30,1: same numbers (q:1:3) as an item the package uses or the module shows [diagnostic]",
      "gen:aadigit:34,1: already used by the package [diagnostic]",
-     "gen:aadigit:58,1: same numbers (q:1:5) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:61,1: same numbers (q:1:6) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:67,1: same numbers (q:1:6) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:74,1: same numbers (n:74, q:1:7) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:78,1: same numbers (q:1:7) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:85,1: same numbers (q:1:8) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:87,1: same numbers (q:1:8) as an item the package uses or the module shows [diagnostic]",
-     "gen:aadigit:98,1: same numbers (q:1:9) as an item the package uses or the module shows [diagnostic]"
+     "gen:aadigit:74,1: same numbers (problem:digit:74) as an item the package uses or the module shows [diagnostic]"
     ],
     "check": [
-     "gen:aadigit:12,1: same numbers (q:1:1) as an item the package uses or the module shows [check]",
-     "gen:aadigit:14,1: same numbers (q:1:1) as an item the package uses or the module shows [check]",
-     "gen:aadigit:20,1: same numbers (n:20, q:1:2) as an item the package uses or the module shows [check]",
-     "gen:aadigit:21,1: same numbers (q:1:2) as an item the package uses or the module shows [check]",
-     "gen:aadigit:23,1: same numbers (q:1:2) as an item the package uses or the module shows [check]",
-     "gen:aadigit:28,1: same numbers (q:1:2) as an item the package uses or the module shows [check]",
-     "gen:aadigit:39,1: same numbers (q:1:3) as an item the package uses or the module shows [check]",
-     "gen:aadigit:40,1: same numbers (q:1:4) as an item the package uses or the module shows [check]",
-     "gen:aadigit:41,1: same numbers (q:1:4) as an item the package uses or the module shows [check]",
-     "gen:aadigit:50,1: same numbers (n:50, q:1:5) as an item the package uses or the module shows [check]",
-     "gen:aadigit:54,1: same numbers (q:1:5) as an item the package uses or the module shows [check]",
-     "gen:aadigit:64,1: same numbers (q:1:6) as an item the package uses or the module shows [check]",
+     "gen:aadigit:28,1: already used by the package [check]",
+     "gen:aadigit:39,1: same numbers (problem:digit:39) as an item the package uses or the module shows [check]",
      "gen:aadigit:68,1: already used by the package [check]",
-     "gen:aadigit:81,1: same numbers (q:1:8) as an item the package uses or the module shows [check]",
-     "gen:aadigit:83,1: same numbers (n:83, q:1:8) as an item the package uses or the module shows [check]",
-     "gen:aadigit:91,1: same numbers (n:91, q:1:9) as an item the package uses or the module shows [check]"
+     "gen:aadigit:83,1: same numbers (problem:digit:83) as an item the package uses or the module shows [check]",
+     "gen:aadigit:91,1: same numbers (problem:digit:91) as an item the package uses or the module shows [check]"
     ],
     "retention": [
-     "gen:aadigit:17,1: same numbers (q:1:1) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:18,1: same numbers (n:18, q:1:1) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:42,1: same numbers (n:42, q:1:4) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:45,1: same numbers (q:1:4) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:47,1: same numbers (q:1:4) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:69,1: same numbers (n:69, q:1:6) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:70,1: same numbers (q:1:7) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:71,1: same numbers (q:1:7) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:72,1: same numbers (q:1:7) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:80,1: same numbers (q:1:8) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:89,1: same numbers (q:1:8) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:18,1: same numbers (problem:digit:18) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:42,1: same numbers (problem:digit:42) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:69,1: same numbers (problem:digit:69) as an item the package uses or the module shows [retention]",
      "gen:aadigit:92,1: already used by the package [retention]",
-     "gen:aadigit:94,1: same numbers (q:1:9) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:95,1: same numbers (n:95, q:1:9) as an item the package uses or the module shows [retention]",
-     "gen:aadigit:97,1: same numbers (q:1:9) as an item the package uses or the module shows [retention]"
+     "gen:aadigit:95,1: same numbers (problem:digit:95) as an item the package uses or the module shows [retention]"
     ],
     "practice": [
-     "gen:aadigit:10,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
      "gen:aadigit:13,1: already used by the package [practice]",
-     "gen:aadigit:15,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:16,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:19,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:24,1: same numbers (q:1:2) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:25,1: same numbers (q:1:2) as an item the package uses or the module shows [practice]",
      "gen:aadigit:26,1: already used by the package [practice]",
-     "gen:aadigit:27,1: same numbers (q:1:2) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:31,1: same numbers (n:31, q:1:3) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:32,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:35,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:36,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:37,1: same numbers (n:37, q:1:3) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:38,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:31,1: same numbers (problem:digit:31) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:37,1: same numbers (problem:digit:37) as an item the package uses or the module shows [practice]",
      "gen:aadigit:43,1: already used by the package [practice]",
-     "gen:aadigit:46,1: same numbers (q:1:4) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:48,1: same numbers (q:1:4) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:49,1: same numbers (n:49, q:1:4) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:51,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:52,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:53,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:49,1: same numbers (problem:digit:49) as an item the package uses or the module shows [practice]",
      "gen:aadigit:56,1: already used by the package [practice]",
-     "gen:aadigit:57,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:59,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:60,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:62,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:63,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:65,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:73,1: same numbers (q:1:7) as an item the package uses or the module shows [practice]",
      "gen:aadigit:75,1: already used by the package [practice]",
-     "gen:aadigit:76,1: same numbers (q:1:7) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:79,1: same numbers (q:1:7) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:82,1: already used by the package [practice]",
-     "gen:aadigit:84,1: same numbers (q:1:8) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:86,1: same numbers (q:1:8) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:90,1: same numbers (q:1:9) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:93,1: same numbers (q:1:9) as an item the package uses or the module shows [practice]",
-     "gen:aadigit:96,1: same numbers (q:1:9) as an item the package uses or the module shows [practice]"
+     "gen:aadigit:82,1: already used by the package [practice]"
     ]
    },
    "perRole": [
     {
      "role": "check",
-     "available": [],
-     "inOtherPartitions": 0,
+     "available": [
+      "gen:aadigit:12,1",
+      "gen:aadigit:14,1",
+      "gen:aadigit:20,1:mc",
+      "gen:aadigit:21,1",
+      "gen:aadigit:23,1",
+      "gen:aadigit:40,1",
+      "gen:aadigit:41,1",
+      "gen:aadigit:50,1:mc",
+      "gen:aadigit:54,1",
+      "gen:aadigit:64,1:mc",
+      "gen:aadigit:81,1:mc"
+     ],
+     "inOtherPartitions": 49,
      "unreleased": 0
     }
    ],
    "decision": {
-    "check": "SERVED BUT BLOCKED BY THIS BRANCH'S REUSE RULE: 16 item(s) in this partition repeat a number signature or answer the package already uses"
+    "check": "SERVED: 11 qualifying item(s) already served in this partition and unused; only the package selection changes"
    },
    "proposals": [
     {
      "id": "gen:aadigit:12,1",
-     "status": "same numbers (q:1:1) as an item the package uses or the module shows [check]",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:12,1",
      "partition": "check",
      "prompt": "How many tens are there in 12?",
      "answer": "1",
@@ -1092,7 +1048,7 @@
     },
     {
      "id": "gen:aadigit:14,1",
-     "status": "same numbers (q:1:1) as an item the package uses or the module shows [check]",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:14,1",
      "partition": "check",
      "prompt": "How many tens are there in 14?",
      "answer": "1",
@@ -1123,7 +1079,7 @@
     },
     {
      "id": "gen:aadigit:20,1",
-     "status": "same numbers (n:20, q:1:2) as an item the package uses or the module shows [check]",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:20,1:mc",
      "partition": "check",
      "prompt": "How many tens are there in 20?",
      "answer": "2",
@@ -1154,7 +1110,7 @@
     },
     {
      "id": "gen:aadigit:21,1",
-     "status": "same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:21,1",
      "partition": "check",
      "prompt": "How many tens are there in 21?",
      "answer": "2",
@@ -1185,7 +1141,7 @@
     },
     {
      "id": "gen:aadigit:23,1",
-     "status": "same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:23,1",
      "partition": "check",
      "prompt": "How many tens are there in 23?",
      "answer": "2",
@@ -1215,16 +1171,16 @@
      "ambiguity": []
     },
     {
-     "id": "gen:aadigit:28,1",
-     "status": "same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "id": "gen:aadigit:40,1",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:40,1",
      "partition": "check",
-     "prompt": "How many tens are there in 28?",
-     "answer": "2",
+     "prompt": "How many tens are there in 40?",
+     "answer": "4",
      "independentOracle": {
       "agrees": true,
       "lines": [
-       "28 = 2 tens and 8 ones",
-       "2 tens"
+       "40 = 4 tens and 0 ones",
+       "4 tens"
       ]
      },
      "generatorValidate": true,
@@ -1233,13 +1189,292 @@
       {
        "id": "value-not-count",
        "kind": "conceptual",
-       "value": 20,
+       "value": 40,
        "targeted": true
       },
       {
        "id": "wrong-digit",
        "kind": "procedural",
-       "value": 8,
+       "value": 0,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:41,1",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:41,1",
+     "partition": "check",
+     "prompt": "How many tens are there in 41?",
+     "answer": "4",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "41 = 4 tens and 1 one",
+       "4 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 40,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 1,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:50,1",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:50,1:mc",
+     "partition": "check",
+     "prompt": "How many tens are there in 50?",
+     "answer": "5",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "50 = 5 tens and 0 ones",
+       "5 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 50,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 0,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:54,1",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:54,1",
+     "partition": "check",
+     "prompt": "How many tens are there in 54?",
+     "answer": "5",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "54 = 5 tens and 4 ones",
+       "5 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 50,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 4,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:64,1",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:64,1:mc",
+     "partition": "check",
+     "prompt": "How many tens are there in 64?",
+     "answer": "6",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "64 = 6 tens and 4 ones",
+       "6 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 60,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 4,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:81,1",
+     "status": "AVAILABLE: served in the check partition as gen:aadigit:81,1:mc",
+     "partition": "check",
+     "prompt": "How many tens are there in 81?",
+     "answer": "8",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "81 = 8 tens and 1 one",
+       "8 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 80,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 1,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:10,1",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "How many tens are there in 10?",
+     "answer": "1",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "10 = 1 ten and 0 ones",
+       "1 ten"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 10,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 0,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:15,1",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "How many tens are there in 15?",
+     "answer": "1",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "15 = 1 ten and 5 ones",
+       "1 ten"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 10,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 5,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:16,1",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "How many tens are there in 16?",
+     "answer": "1",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "16 = 1 ten and 6 ones",
+       "1 ten"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 10,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 6,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:17,1",
+     "status": "released, but hashed into the retention partition",
+     "partition": "retention",
+     "prompt": "How many tens are there in 17?",
+     "answer": "1",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "17 = 1 ten and 7 ones",
+       "1 ten"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 10,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 7,
        "targeted": false
       }
      ],

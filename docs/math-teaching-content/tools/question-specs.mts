@@ -75,17 +75,17 @@ const results: any[] = [];
 const RECOMMENDED: Record<string, string> = {
   MQ1: "diagnostic gen:ahid:0,3,7,1 (pin typed; already in diagnostic); retention gen:ahid:0,2,9,1 (override practice → retention after form assignment)",
   MQ2: "diagnostic gen:akchance:8,8,0,0 (override check → diagnostic, typed, after form assignment)",
-  MQ3: "recheck gen:addur:0,7 (override diagnostic → check); retention gen:addur:0,291 after the bounds change (mode 0, x ≤ 299)",
+  MQ3: "recheck gen:addur:0,7 in hours and minutes (override diagnostic → check); retention gen:addur:0,291 after the bounds change (mode 0, x ≤ 299). gen:addur:1,39 (minutes and seconds) is ADDITIONAL transfer practice only, never the recheck",
   MQ4: "add fadd.word(p); transfer gen:fadd:1,2,5,1:w (also 1,2,4,1 and 1,2,11,1)",
-  MQ5: "recheck gen:akdice:4,5,0,4:mc (selection only, after decision A)",
-  MQ6: "recheck gen:aadigit:39,1 (selection only, after decision A)",
+  MQ5: "RESOLVED in the package by freshness@2 (no pool change): recheck gen:akdice:4,5,0,5 (4,5,0,4 is the mirror of the diagnostic 4,5,0,7, a relabelled problem)",
+  MQ6: "RESOLVED in the package by freshness@2 (no pool change): recheck gen:aadigit:28,1:mc",
 };
 for (const n of NEEDS) {
   const def: any = FAMILIES.get(n.family);
   const P0 = pk(n.package);
   const usedKeys = used(n.package), shownKeys = new Set(shownIds(P0.competency).map(exposureKey));
   const sigUsed = new Set<string>();
-  for (const id of [...pkgIds(n.package), ...shownIds(P0.competency)]) { const pr = problemOf(id.replace(/:(mc|w)$/, "")); if (pr && pr.family === n.family) { try { for (const k of P0.signature?.(pr) ?? []) sigUsed.add(k); } catch { /* none */ } } }
+  for (const id of [...pkgIds(n.package), ...shownIds(P0.competency)]) { const pr = problemOf(id.replace(/:(mc|w)$/, "")); if (pr && pr.family === n.family) { try { for (const k of [...(P0.signature?.(pr) ?? []), ...(P0.recheckProblem?.(pr) ?? [])]) sigUsed.add(k); } catch { /* none */ } } }
   const usedAnswers = new Set<string>([...pkgIds(n.package), ...shownIds(P0.competency)].map((id) => problemOf(id.replace(/:(mc|w)$/, ""))).filter((pr) => pr && pr.family === n.family).map((pr) => pr!.answer));
   const released = new Map(pool(n.family).items.map((p) => [p.id, p]));
   const excluded = new Map(pool(n.family).excluded.map((e) => [`gen:${n.family}:${e.params.join(",")}`, e.reason]));
@@ -98,8 +98,10 @@ for (const n of NEEDS) {
     const part = isReleased ? phaseOf(id) : null;
     const servedForms = isReleased ? (["diagnostic", "check", "retention", "practice"] as const).flatMap((ph) => phasePool(n.family, ph).filter((x) => x === id || x === `${id}:mc`)) : [];
     const k = exposureKey(id);
-    const sig = P0.signature?.(p!) ?? [];
-    const ans = (P0 as any).answerDistinct && usedAnswers.has(p!.answer);
+    // freshness@2: a recheck of a package with recheckProblem is blocked by the same problem only, not by a repeated answer
+    const R = !!P0.recheckProblem && n.roles.length === 1 && n.roles[0] === "check";
+    const sig = R ? P0.recheckProblem!(p!) : P0.signature?.(p!) ?? [];
+    const ans = !R && (P0 as any).answerDistinct && usedAnswers.has(p!.answer);
     const reuse = usedKeys.has(k) ? "already used by the package" : shownKeys.has(k) ? "already shown by the module's existing explanations" : sig.some((s) => sigUsed.has(s)) ? `same numbers (${sig.filter((s) => sigUsed.has(s)).join(", ")}) as an item the package uses or the module shows` : ans ? `answer ${p!.answer} already used (the package requires distinct answers)` : null;
     const status = !isReleased ? (excluded.has(id) ? `not released: ${excluded.get(id)}` : `not released: outside the family's release cap (if released it would hash into ${phaseOf(id)})`) : !selectable(id) ? "released but quarantined" : reuse ? `${reuse} [${part}]` : n.roles.includes(part as never) && part === "diagnostic" && !servedForms.some((f) => !f.endsWith(":mc")) ? `FORM: in the diagnostic partition but served only as ${servedForms.join(", ")} (a diagnostic needs the typed form)` : n.roles.includes(part as never) ? `AVAILABLE: served in the ${part} partition as ${servedForms.join(", ")}` : `released, but hashed into the ${part} partition`;
     return { id, params, partition: part, servedAs: servedForms, status, prompt: p!.prompt, answer: p!.answer, p: p! };

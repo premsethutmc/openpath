@@ -217,6 +217,9 @@ export const PACKAGES_B2: Package[] = [
     id: "TP2-PV-DIGIT", batch: "batch-2", pattern: "PAT-PLACE", title: "The value of a digit, and how many tens", family: "aadigit", competency: "MATH.number.place-value-tens", strand: "number",
     reuses: [{ strategy: "bundles", covers: "tens as bundles (general)" }, { strategy: "spot_the_mistake", covers: "count-blocks" }],
     signature: (p) => [`n:${p.params[0]}`, `q:${p.params[1]}:${p.params[1] === 1 ? Math.floor(p.params[0] / 10) : p.params[0]}`],
+    // freshness@2: the same number (asked in any of the three ways) is the same problem for a recheck; another number is a different
+    // problem even when its tens count repeats (the q:1:<tens> key above is an answer key and does not apply to rechecks)
+    recheckProblem: (p) => [`problem:digit:${p.params[0]}`],
     skill: "Give the value of a digit in a two-digit number, and the number of tens.",
     restriction: "aadigit, all three forms (params[1] = 0 value of the tens digit, 1 how many tens, 2 value of the ones digit); numbers with two equal digits excluded (the question would be ambiguous).",
     applies: (p) => Math.floor(p.params[0] / 10) !== p.params[0] % 10,

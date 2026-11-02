@@ -1,0 +1,107 @@
+{
+ "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+ "status": "PROPOSED (not served)",
+ "existing": {
+  "faddAdditionReleased": 220,
+  "faddImproperSumsReleased": 0,
+  "keepToday": "s > 0 ? a + b < n : b < a (families.ts:1192)"
+ },
+ "change": "families.ts:1192 fadd keep: for addition `a + b < n` → `a < n && b < n && a + b !== n` (each addend a proper fraction; the sum may exceed one whole but not equal it)",
+ "addedItems": 220,
+ "addedInDiagnostic": 21,
+ "simulatorMatchesPhasePool": true,
+ "packageReferencesChecked": 15,
+ "servedFormFlipsForPackageReferences": [
+  "gen:fadd:2,3,6,1: practice gen:fadd:2,3,6,1 -> practice gen:fadd:2,3,6,1:mc",
+  "gen:fadd:3,5,9,1: diagnostic gen:fadd:3,5,9,1 -> diagnostic gen:fadd:3,5,9,1:mc",
+  "gen:fadd:2,3,7,1: practice gen:fadd:2,3,7,1 -> practice gen:fadd:2,3,7,1:mc",
+  "gen:fadd:2,5,9,1: practice gen:fadd:2,5,9,1 -> practice gen:fadd:2,5,9,1:mc",
+  "gen:fadd:5,4,11,1: practice gen:fadd:5,4,11,1 -> practice gen:fadd:5,4,11,1:mc",
+  "gen:fadd:3,2,11,1:mc: check gen:fadd:3,2,11,1:mc -> check gen:fadd:3,2,11,1",
+  "gen:fadd:8,2,11,1:mc: check gen:fadd:8,2,11,1:mc -> check gen:fadd:8,2,11,1",
+  "gen:fadd:4,3,11,1: check gen:fadd:4,3,11,1 -> check gen:fadd:4,3,11,1:mc",
+  "gen:fadd:4,3,8,1:mc: retention gen:fadd:4,3,8,1:mc -> retention gen:fadd:4,3,8,1"
+ ],
+ "candidates": [
+  {
+   "id": "gen:fadd:2,3,4,1",
+   "prompt": "2/4 + 3/4 = ?",
+   "answer": "5/4",
+   "modelled": {
+    "add-denominators": "5/8",
+    "multiply-tops": "3/2"
+   },
+   "unmodelled": {
+    "whole-dropped": "1/4",
+    "capped-at-one": "1"
+   },
+   "checks": {
+    "validate": true,
+    "oracle": true,
+    "numberLine": true,
+    "handAnswer": true
+   },
+   "issues": []
+  },
+  {
+   "id": "gen:fadd:4,2,5,1",
+   "prompt": "4/5 + 2/5 = ?",
+   "answer": "6/5",
+   "modelled": {
+    "add-denominators": "3/5",
+    "multiply-tops": "8/5"
+   },
+   "unmodelled": {
+    "whole-dropped": "1/5",
+    "capped-at-one": "1"
+   },
+   "checks": {
+    "validate": true,
+    "oracle": true,
+    "numberLine": true,
+    "handAnswer": true
+   },
+   "issues": []
+  },
+  {
+   "id": "gen:fadd:4,3,6,1",
+   "prompt": "4/6 + 3/6 = ?",
+   "answer": "7/6",
+   "modelled": {
+    "add-denominators": "7/12",
+    "multiply-tops": "2"
+   },
+   "unmodelled": {
+    "whole-dropped": "1/6",
+    "capped-at-one": "1"
+   },
+   "checks": {
+    "validate": true,
+    "oracle": true,
+    "numberLine": true,
+    "handAnswer": true
+   },
+   "issues": []
+  },
+  {
+   "id": "gen:fadd:7,6,8,1",
+   "prompt": "7/8 + 6/8 = ?",
+   "answer": "13/8",
+   "modelled": {
+    "add-denominators": "13/16",
+    "multiply-tops": "21/4"
+   },
+   "unmodelled": {
+    "whole-dropped": "5/8",
+    "capped-at-one": "1"
+   },
+   "checks": {
+    "validate": true,
+    "oracle": true,
+    "numberLine": true,
+    "handAnswer": true
+   },
+   "issues": []
+  }
+ ]
+}

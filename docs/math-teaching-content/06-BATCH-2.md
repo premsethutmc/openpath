@@ -26,11 +26,11 @@ Member packages (`batch-2/TP2-*`) contain only what is family-specific: examples
 | [TP2-SCL-BAR](batch-2/TP2-SCL-BAR.md) | `afbar` (module seed) | `statistics.scaled-bars` | 1 (no concept strategy: the family is already taught) | spot_the_mistake (count-lines) | 16/16 | 360/360 |
 | [TP2-PRT-NAME](batch-2/TP2-PRT-NAME.md) | `adfname` | `number.fraction-models` | 3 | — | 17/17 | 145/145 |
 | [TP2-PRT-SHADE](batch-2/TP2-PRT-SHADE.md) | `adshade` | `number.fraction-models` | 2 | — | 14/14 | 300/300 |
-| [TP2-PV-DIGIT](batch-2/TP2-PV-DIGIT.md) | `aadigit` | `number.place-value-tens` | 3 | spot_the_mistake (count-blocks) | 20/20 | 234/234 |
+| [TP2-PV-DIGIT](batch-2/TP2-PV-DIGIT.md) | `aadigit` | `number.place-value-tens` | 3 | spot_the_mistake (count-blocks) | 21/21 | 234/234 |
 | [TP2-CH-BAG](batch-2/TP2-CH-BAG.md) | `akchance` (module seed) | `probability.chance-language` | 1 | spot_the_mistake (odds) | 14/14 | 317/317 |
 | [TP2-CH-BALL](batch-2/TP2-CH-BALL.md) | `anbag` (module seed) | `probability.classical` | 1 | spot_the_mistake (odds) | 14/14 | 400/400 |
 
-Totals: **141/141 instances pass. 2,395/2,395 applicable pool items agree** (oracle and every alternative method). 18 new strategies are proposed.
+Totals: **142/142 instances pass. 2,395/2,395 applicable pool items agree** (oracle and every alternative method). 18 new strategies are proposed.
 
 ## Not duplicated
 

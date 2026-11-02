@@ -1,13 +1,13 @@
 {
- "note": "Outcome of the independent review passes on the final text (04-REVIEW.md, passes 4, 5 and 6). 'outstanding' lists mathematical or instructional findings not yet independently cleared. Missing questions, visuals and runtime blockers are tracked in integration-manifest.json, not here. This is not educator approval.",
+ "note": "Outcome of the independent review passes on the final text (04-REVIEW.md, passes 4, 5, 6 and 7). 'outstanding' lists mathematical or instructional findings not yet independently cleared. Missing questions, visuals and runtime blockers are tracked in integration-manifest.json, not here. This is not educator approval.",
  "packages": {
   "TP-NUM-01": {
    "outstanding": [],
-   "summary": "Pass 4: no outstanding mathematical/instructional finding."
+   "summary": "Pass 4: no outstanding mathematical/instructional finding. Pass 7: corrected strips data (equal wholes, own shading) cleared on all 500 items; rendering blocked, screens text-only."
   },
   "TP-NUM-02": {
    "outstanding": [],
-   "summary": "Pass 4: no outstanding finding. Transfer is missing content (manifest)."
+   "summary": "Pass 4: no outstanding finding. Transfer is missing content (manifest). Pass 7: proposed improper-sum diagnostic gen:fadd:4,2,5,1 cleared; whole-dropped and capped-at-one need modelling (Codex)."
   },
   "TP-NUM-03": {
    "outstanding": [],
@@ -19,7 +19,7 @@
   },
   "TP-GEO-01": {
    "outstanding": [],
-   "summary": "Pass 4: no outstanding finding."
+   "summary": "Pass 4: no outstanding finding. Pass 7: corrected exterior-angle data (opposite angles at vertices 0 and 2, not to scale) cleared on all 400 items; rendering blocked, screens text-only. Note: concept text names vertex C, which a figure would need to label."
   },
   "TP-GEO-02": {
    "outstanding": [],
@@ -31,11 +31,11 @@
   },
   "TP-ALG-01": {
    "outstanding": [],
-   "summary": "Pass 4: no outstanding finding. The (px + q)\u00b2 cross-term delayed check is a recorded missing question."
+   "summary": "Pass 4: no outstanding finding. The (px + q)² cross-term delayed check is a recorded missing question."
   },
   "TP-PRO-01": {
    "outstanding": [],
-   "summary": "Pass 5: the dice/spinner wording is fixed; no outstanding finding."
+   "summary": "Pass 5: the dice/spinner wording is fixed; no outstanding finding. Pass 7: freshness@2 recheck gen:akdice:4,5,0,5 and the mirror-total relabelling cleared."
   },
   "TP2-REG-TIME": {
    "outstanding": [],
@@ -63,7 +63,7 @@
   },
   "TP2-PV-DIGIT": {
    "outstanding": [],
-   "summary": "Pass 4: no outstanding finding."
+   "summary": "Pass 4: no outstanding finding. Pass 7: freshness@2 rechecks gen:aadigit:39,0:mc and 28,1:mc cleared (notes: both now :mc; non-target option 8 equals a shown answer)."
   },
   "TP2-CH-BAG": {
    "outstanding": [],

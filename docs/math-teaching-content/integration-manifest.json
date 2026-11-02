@@ -217,7 +217,7 @@
      "grid"
     ],
     "missing": [
-     "labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels)"
+     "UNSUPPORTED BY THE RENDERER (spec 09 V5): labelled 2 × 2 area model ('grid' + labels, rowLabels, colLabels)"
     ]
    },
    "proposed": {
@@ -263,7 +263,7 @@
    "contract": [
     "B1 teaching scope: ahid_concept, fix_middle_not_doubled, fix_middle_sign are outside teachingScopeFor (main family expand); ineligible until the selector accepts 'ahid'",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
-    "visual: labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels)"
+    "visual: UNSUPPORTED BY THE RENDERER (spec 09 V5): labelled 2 × 2 area model ('grid' + labels, rowLabels, colLabels)"
    ],
    "missingQuestions": [
     "diagnostic case \"(px + q)², middle\": the family's diagnostic partition has no usable item (only ambiguous ones); candidate gen:ahid:0,4,9,1 is taken from the CHECK partition and must be re-partitioned or replaced at integration",
@@ -523,11 +523,9 @@
     }
    ],
    "visuals": {
-    "used": [
-     "triangle"
-    ],
+    "used": [],
     "missing": [
-     "triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex)"
+     "UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V3): extended side, exterior angle and 'not to scale' caption ('triangle' + exterior + notToScale); Figure.tsx ignores both fields today, so the screen is text-only"
     ]
    },
    "proposed": {
@@ -559,7 +557,7 @@
    "contract": [
     "B1 teaching scope: ahext_concept, fix_third_interior, fix_adjacent_interior, fix_exterior_as_interior are outside teachingScopeFor (main family ahtri); ineligible until the selector accepts 'ahext'",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
-    "visual: triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex)"
+    "visual: UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V3): extended side, exterior angle and 'not to scale' caption ('triangle' + exterior + notToScale); Figure.tsx ignores both fields today, so the screen is text-only"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -794,7 +792,7 @@
      "angle"
     ],
     "missing": [
-     "two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels)"
+     "UNSUPPORTED BY THE RENDERER (spec 09 V4): two crossing lines with four angles ('angle' + cross + labels)"
     ]
    },
    "proposed": {
@@ -826,7 +824,7 @@
     "B1 teaching scope: afcross_concept, fix_opposite_as_linear, fix_neighbour_equal are outside teachingScopeFor (main family afpair); ineligible until the selector accepts 'afcross'",
     "B3 addresses: fix_opposite_as_linear — the platform reads addresses = null (family 'says' overridden); the gate would accept any established misconception",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
-    "visual: two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels)"
+    "visual: UNSUPPORTED BY THE RENDERER (spec 09 V4): two crossing lines with four angles ('angle' + cross + labels)"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -1169,7 +1167,7 @@
      "grid"
     ],
     "missing": [
-     "perimeter outline (spec 09 V2: 'shape' rectangle + outline)"
+     "UNSUPPORTED BY THE RENDERER (spec 09 V2): perimeter outline ('shape' rectangle + outline)"
     ]
    },
    "proposed": {
@@ -1202,7 +1200,7 @@
     "B1 teaching scope: aeperar_concept, fix_perimeter_for_area, fix_area_for_perimeter, fix_two_sides are outside teachingScopeFor (main family aearea); ineligible until the selector accepts 'aeperar'",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
     "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)",
-    "visual: perimeter outline (spec 09 V2: 'shape' rectangle + outline)"
+    "visual: UNSUPPORTED BY THE RENDERER (spec 09 V2): perimeter outline ('shape' rectangle + outline)"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -1464,11 +1462,9 @@
     }
    ],
    "visuals": {
-    "used": [
-     "grid"
-    ],
+    "used": [],
     "missing": [
-     "two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes)"
+     "UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V1): two equal-length fraction strips with each row's own shading. Needs `bottomShaded` in Learn.tsx strips and a `strips` case in Figure.tsx; until then the screen is text-only"
     ]
    },
    "proposed": {
@@ -1497,7 +1493,7 @@
    "contract": [
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
     "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)",
-    "visual: two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes)"
+    "visual: UNSUPPORTED BY THE RENDERER (data corrected in the package, spec 09 V1): two equal-length fraction strips with each row's own shading. Needs `bottomShaded` in Learn.tsx strips and a `strips` case in Figure.tsx; until then the screen is text-only"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -1693,6 +1689,13 @@
       "id": "gen:fadd:1,2,5,1:w",
       "change": "generator: add fadd.word(p) (one function; same answer)",
       "currentlyServedAs": "practice gen:fadd:1,2,5,1:mc"
+     },
+     {
+      "need": "MQ7",
+      "role": "diagnostic (sum above one whole)",
+      "id": "gen:fadd:4,2,5,1",
+      "change": "one-item release override into the diagnostic partition (fadd keep excludes a + b > n); relaxing keep instead releases 220 items and flips 9 referenced forms unless forms are frozen",
+      "currentlyServedAs": "not served"
      }
     ]
    },
@@ -2174,10 +2177,10 @@
     },
     {
      "role": "fresh recheck",
-     "id": "gen:akdice:4,6,0,10:mc",
+     "id": "gen:akdice:4,5,0,5",
      "fresh": true,
      "partition": "check",
-     "form": "mc",
+     "form": "typed",
      "issues": []
     },
     {
@@ -2221,15 +2224,7 @@
    },
    "proposed": {
     "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
-    "questions": [
-     {
-      "need": "MQ5",
-      "role": "recheck",
-      "id": "gen:akdice:4,5,0,4:mc",
-      "change": "selection only, after decision A (a recheck may repeat a diagnostic's answer)",
-      "currentlyServedAs": "check gen:akdice:4,5,0,4:mc"
-     }
-    ]
+    "questions": []
    },
    "answerFormats": {
     "familyType": "fraction",
@@ -2257,9 +2252,7 @@
     "B1 teaching scope: akdice_concept, fix_totals_equally_likely, fix_order_ignored, fix_added_sides are outside teachingScopeFor (main family akss); ineligible until the selector accepts 'akdice'",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
    ],
-   "missingQuestions": [
-    "rechecks: no usable check item for case \"different-size spinners, a total made by several pairs\" (another case's item stands in)"
-   ],
+   "missingQuestions": [],
    "itemIssues": []
   },
   {
@@ -3645,18 +3638,18 @@
     },
     {
      "role": "fresh recheck",
-     "id": "gen:aadigit:50,0",
+     "id": "gen:aadigit:39,0:mc",
      "fresh": true,
      "partition": "check",
-     "form": "typed",
+     "form": "mc",
      "issues": []
     },
     {
      "role": "fresh recheck",
-     "id": "gen:aadigit:20,0",
+     "id": "gen:aadigit:28,1:mc",
      "fresh": true,
      "partition": "check",
-     "form": "typed",
+     "form": "mc",
      "issues": []
     },
     {
@@ -3700,15 +3693,7 @@
    },
    "proposed": {
     "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
-    "questions": [
-     {
-      "need": "MQ6",
-      "role": "recheck",
-      "id": "gen:aadigit:39,1",
-      "change": "selection only, after decision A (a recheck may repeat a diagnostic's answer)",
-      "currentlyServedAs": "check gen:aadigit:39,1"
-     }
-    ]
+    "questions": []
    },
    "answerFormats": {
     "familyType": "integer",
@@ -3736,9 +3721,7 @@
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
     "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)"
    ],
-   "missingQuestions": [
-    "rechecks: no usable check item for case \"how many tens\" (another case's item stands in)"
-   ],
+   "missingQuestions": [],
    "itemIssues": []
   },
   {
@@ -4151,17 +4134,24 @@
     "questions": [
      {
       "need": "MQ3",
-      "role": "recheck",
+      "role": "recheck (hours and minutes)",
       "id": "gen:addur:0,7",
       "change": "partition override diagnostic → check, applied after form assignment",
       "currentlyServedAs": "diagnostic gen:addur:0,7:mc"
      },
      {
       "need": "MQ3",
-      "role": "retention",
+      "role": "retention (hours and minutes)",
       "id": "gen:addur:0,291",
       "change": "generator bounds: addur mode 0 x ≤ 299 (hashes into retention without override)",
       "currentlyServedAs": "not served"
+     },
+     {
+      "need": "MQ3",
+      "role": "additional transfer practice only (minutes and seconds; NOT the recheck)",
+      "id": "gen:addur:1,39",
+      "change": "none (already served typed in check); widen the package restriction for this one transfer role only",
+      "currentlyServedAs": "check gen:addur:1,39"
      }
     ]
    },

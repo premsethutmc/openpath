@@ -9,9 +9,14 @@ Readiness per package is given in [08-INTEGRATION-MANIFEST.md](08-INTEGRATION-MA
 | Category (primary) | Packages |
 |---|---|
 | Ready for integration review | TP-STA-01, TP2-CH-BALL, TP2-PRT-NAME, TP2-SCL-BAR |
-| Blocked by shared runtime support | TP-NUM-03 (B1, B2, B3), TP2-PRT-SHADE (B1), TP2-REG-MONEY (B1, B2), TP2-SCL-PICT (B1, P1) |
-| Blocked by missing questions or visuals | TP-NUM-01 (visual), TP-NUM-02 (transfer, improper-sum diagnostic; P1), TP-MEA-01 (visual; B1, P1), TP-GEO-01 (visual; B1), TP-GEO-02 (visual; B1, B3), TP-ALG-01 (cross-term retention and diagnostic, visual; B1), TP-PRO-01 (different-size recheck; B1), TP2-CH-BAG (equal-count contrast), TP2-PV-DIGIT ("how many tens" recheck; B1, P1), TP2-REG-TIME (100+ minute recheck and retention; B1, B2) |
-| Unresolved mathematical or instructional review | **none**: passes 4–6 leave no outstanding finding (low-severity notes in 04) |
+| Blocked by shared runtime support | TP-NUM-03 (B1, B2, B3), **TP-PRO-01 (B1)**, TP2-PRT-SHADE (B1), **TP2-PV-DIGIT (B1, P1)**, TP2-REG-MONEY (B1, B2), TP2-SCL-PICT (B1, P1) |
+| Blocked by missing questions or visuals | TP-NUM-01 (visual: blocked in the renderer), TP-NUM-02 (transfer, improper-sum diagnostic; P1), TP-MEA-01 (visual; B1, P1), TP-GEO-01 (visual: blocked in the renderer; B1), TP-GEO-02 (visual; B1, B3), TP-ALG-01 (cross-term retention and diagnostic, visual; B1), TP2-CH-BAG (equal-count contrast), TP2-REG-TIME (100+ minute recheck and retention; B1, B2) |
+| Unresolved mathematical or instructional review | **none**: pass 7 (04) cleared the corrections with notes |
+
+**Readiness changes in this revision.**
+- TP-PRO-01 and TP2-PV-DIGIT move from "missing questions" to "shared runtime support". Their missing rechecks now exist in the served pools under freshness@2.
+- TP-NUM-01 and TP-GEO-01 stay content-blocked. Their visual data is corrected, but the renderer cannot draw it yet.
+- No package became ready.
 
 ### Priority for Codex
 
@@ -23,19 +28,25 @@ The four "ready" packages need no shared runtime change. Their family is the mod
 4. **B3 addressed misconception**: GEO-02 and NUM-03 (`fix_opposite_as_linear`, `fix_longer_is_larger`). The alternative is to fix family text D1/D3 so it can be quoted verbatim.
 5. **Missing questions**: specified in [09-MISSING-QUESTIONS-AND-VISUALS.md](09-MISSING-QUESTIONS-AND-VISUALS.md), with data in `missing-questions.json`. These are **proposed** questions, kept apart from the verified served items in 08. Every proposal uses the existing generator; there is no parallel generator.
 
+   **Verified served items** (in the packages now; no pool change needed):
+   - TP-PRO-01 recheck `gen:akdice:4,5,0,5`;
+   - TP2-PV-DIGIT rechecks `gen:aadigit:28,1:mc` and `gen:aadigit:39,0:mc`.
+
+   **Proposed pool and generator changes** (Codex):
+
    | Package | Proposed question (role) | What changes |
    |---|---|---|
    | TP-ALG-01 | `gen:ahid:0,3,7,1` (diagnostic) | pin the typed form: it is already in the diagnostic partition but served as `:mc` |
    | TP-ALG-01 | `gen:ahid:0,2,9,1` (retention) | partition override: practice → retention |
    | TP2-CH-BAG | `gen:akchance:8,8,0,0` (diagnostic contrast) | partition override: check → diagnostic, typed |
-   | TP2-REG-TIME | `gen:addur:0,7` (recheck) | partition override: diagnostic → check |
+   | TP2-REG-TIME | `gen:addur:0,7` (recheck, **hours and minutes**) | partition override: diagnostic → check |
    | TP2-REG-TIME | `gen:addur:0,291` (retention) | generator bounds only: mode 0, x ≤ 299 |
+   | TP2-REG-TIME | `gen:addur:1,39` (optional **additional transfer practice**, minutes and seconds; not the recheck) | package restriction for that role only |
    | TP-NUM-02 | `gen:fadd:1,2,5,1:w` and others (transfer) | generator: add `fadd.word(p)` |
-   | TP-PRO-01 | `gen:akdice:4,5,0,4:mc` (recheck) | selection only, after decision A in 09 |
-   | TP2-PV-DIGIT | `gen:aadigit:39,1` (recheck) | selection only, after decision A in 09 |
+   | TP-NUM-02 | `gen:fadd:4,2,5,1` (improper-sum diagnostic, 4/5 + 2/5 = 6/5) | one-item release override into diagnostic, typed and outside the `:mc` alternation (no such mechanism exists yet). Also model `fadd` bugs for whole-dropped (1/5) and capped-at-one (1). Relaxing `keep` instead would release 220 items and flip 9 referenced forms |
 
    - **Partition overrides must be applied after `phasePool` assigns typed/`:mc` forms.** Changing `phaseOf` itself would flip 3 referenced ALG-01 items from typed to `:mc`: the worked example `1,3,8,1` and the delayed checks `1,2,3,1` and `1,2,6,1`.
-   - The improper-sum diagnostic for TP-NUM-02 is still unspecified; it was outside this request.
+   - The improper-sum diagnostic for TP-NUM-02 is specified in 09 MQ7 (`improper-sum.json`).
    - **No substitute was used:** each package records the missing case instead of testing a different skill or reusing an exposed question.
    - **Correction.** This file previously said `gen:akchance:6,6,0,0` and `gen:akchance:8,8,0,0` were "in no partition". They are served as `:mc`, in practice and check respectively; the earlier check missed the `:mc` ids. What is actually missing is a typed **diagnostic** equal-count item.
 6. **Visual types:** specified in 09 (V1–V5). Each one reuses an existing primitive with one or two optional fields and a `describe()` clause:
@@ -45,13 +56,22 @@ The four "ready" packages need no shared runtime change. Their family is the mod
    - **V4 crossing lines:** `angle` with `cross` and `labels`.
    - **V5 area model:** `grid` with `labels`, `rowLabels` and `colLabels`.
 
-   V1 and V3 supersede the packages' provisional visual data:
-   - the two `grid` strips drew unequal wholes;
-   - the exterior triangle put the second opposite angle on the wrong vertex.
+   **Unsupported visuals.**
+   - V1 and V3 data now **replace** the packages' placeholders, each with a screen-reader `description`:
+     - the two `grid` strips drew unequal wholes;
+     - the exterior triangle put the second opposite angle on the wrong vertex.
+   - V1 and V3 are **blocked in the renderer**: `Figure.tsx` ignores `exterior` and `notToScale`, has no `strips` case, and `Learn.tsx` has no `bottomShaded`. The screens stay text-only until then.
+   - The packages enforce this: TP-NUM-01 and TP-GEO-01 integration screens carry **no widget** (`visualBlocked`). Add the widget back only after the renderer supports the fields.
+   - V2, V4 and V5 are specified only.
 
 ### Item freshness rule (applies to every package)
 
-Fresh checks, rechecks, transfer and delayed items exclude every question already **shown** by the module's existing explanations, by exposure key **and** by the package's number signature (same bag, table or numbers under other labels). Several package items are also ordinary **practice or diagnostic** items of the module (CH-BAG, CH-BALL, STA-01, SCL-BAR, PRO-01; listed in pass 5). At integration, the selector must treat a package item as fresh only if **this learner** has not been served it: per-learner exposure, which is Codex's.
+**freshness@2** applies to the rechecks of TP-PRO-01 and TP2-PV-DIGIT (09):
+- a recheck is blocked by the same exposure key or the same **problem** (same numbers, or relabelled, e.g. the mirror spinner total), not by a repeated answer alone;
+- its target wrong value must not equal an answer the learner was shown;
+- tests: `tools/freshness.test.mts`.
+
+The general rule below is unchanged for all other roles and packages: fresh checks, rechecks, transfer and delayed items exclude every question already **shown** by the module's existing explanations, by exposure key **and** by the package's number signature (same bag, table or numbers under other labels). Several package items are also ordinary **practice or diagnostic** items of the module (CH-BAG, CH-BALL, STA-01, SCL-BAR, PRO-01; listed in pass 5). At integration, the selector must treat a package item as fresh only if **this learner** has not been served it: per-learner exposure, which is Codex's.
 
 ## What to integrate: `batch-*/<id>.json` → `integration`
 

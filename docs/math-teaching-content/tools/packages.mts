@@ -31,6 +31,10 @@ export interface Package {
   exampleOk?: (p: Problem) => boolean;
   /** extra reuse keys: two items sharing a key (e.g. the same pair of numbers in another mode) are never both used */
   signature?: (p: Problem) => string[];
+  /** freshness@2 for RECHECKS (where set): a recheck is blocked only by the same exposure key or the same PROBLEM (these keys:
+   * the same numbers, or the same counting problem relabelled), never by a repeated answer alone; and its target wrong value
+   * must not equal an answer the learner has been shown. Other roles keep `signature` / `answerDistinct` unchanged. */
+  recheckProblem?: (p: Problem) => string[];
   /** per-bug condition on an example for that bug's screen */
   bugExampleOk?: Record<string, (p: Problem) => boolean>;
   /** replaces a family's wrong-answer text where it is mathematically wrong for some instances (recorded as a content defect) */
@@ -48,6 +52,8 @@ export interface Package {
   prerequisites: { knowledge: string[]; graphNote?: string };
   concept: string[];
   visual: (p: Problem) => Record<string, unknown> | Record<string, unknown>[] | null;
+  /** the visual needs renderer support that does not exist yet: the integration screens carry no widget (text only); the data stays in the explanation */
+  visualBlocked?: string;
   visualNote: string;
   /** the independent oracle: reads the prompt text only, returns the answer and a valid line-by-line solution */
   oracle: (prompt: string, fig?: any) => Oracle;
@@ -107,8 +113,10 @@ export const PACKAGES: Package[] = [
     ],
     prerequisites: { knowledge: ["a fraction a/b means a of b equal parts of one whole", "the parts must be equal and of the same whole"] },
     concept: ["The bottom number says how many equal parts the whole is cut into. Cutting the same whole into more parts makes each part smaller.", "So with the same top number (the same number of parts), the fraction with the smaller bottom number is greater."],
-    visual: (p) => { const [a, b] = fracPair(p.prompt); return [a, b].map((f) => ({ type: "grid", rows: 1, cols: Number(f.d), shaded: Number(f.n), note: `${qs(f)}: the same whole cut into ${f.d} equal parts` })); },
-    visualNote: "Reuses the family's own grid strip (adfcmp draw_both: {type:'grid', rows:1, cols:b, shaded:a}) once per fraction; the two strips must be drawn the SAME length. The existing Visual union has no two-strip comparison; draw two grid strips.",
+    // spec 09 V1: ONE strips widget, both strips the SAME length (equal wholes), each row's own shading; numbers read from the question text
+    visual: (p) => { const m = p.prompt.match(/(\d+)\/(\d+)[^/]*? or (\d+)\/(\d+)/)!; const [n1, d1, n2, d2] = [m[1], m[2], m[3], m[4]].map(Number); return { type: "strips", top: d1, shaded: n1, bottom: d2, bottomShaded: n2, labels: [`${n1}/${d1}`, `${n2}/${d2}`], description: `Two strips of the same length, each one whole: the first cut into ${d1} equal parts with ${n1} shaded (${n1}/${d1}), the second cut into ${d2} equal parts with ${n2} shaded (${n2}/${d2}).` }; },
+    visualNote: "Spec 09 V1 (supersedes the earlier two-grid placeholder, which drew unequal wholes: grid cells are min(30, 360/cols) px, so 9 and 11 columns gave 270 and 330 px). RENDERING BLOCKED until Codex adds (a) `bottomShaded` to the strips widget (Learn.tsx Picture derives the second row's shading as an equivalent fraction, wrong for comparison) and (b) a `strips` case in Figure.tsx (TeachingContent sends widgets only to Figure, which shows the 'A picture' placeholder). `description` is the required screen-reader text. Until then: text only.",
+    visualBlocked: "09 V1: needs `bottomShaded` in Learn.tsx strips and a `strips` case in Figure.tsx",
     // the decision is computed by cross-multiplication (exact), but the learner-facing lines reason by part size or part count
     oracle: (t) => { const [a, b] = fracPair(t); const greater = /greater/.test(t); const pick = cmpQ(a, b) > 0 === greater ? a : b; const big = cmpQ(a, b) > 0 ? a : b; const lines = a.n === b.n ? [`Both fractions have ${a.n} ${a.n === 1n ? "part" : "parts"}. In ${qs(a)} the whole is cut into ${a.d} equal parts; in ${qs(b)} into ${b.d}.`, `Cutting the same whole into fewer parts makes each part bigger, so ${qs(big)} is greater.`, `The ${greater ? "greater" : "smaller"} fraction is ${qs(pick)}.`] : [`Both are cut into ${a.d} equal parts of the same size: ${a.n} parts against ${b.n} parts.`, `More parts of the same size is more, so ${qs(big)} is greater.`, `The ${greater ? "greater" : "smaller"} fraction is ${qs(pick)}.`]; return { value: pick, lines }; },
     alternatives: [
@@ -120,7 +128,7 @@ export const PACKAGES: Package[] = [
     fixes: { "bigger-bottom-bigger": { title: "A bigger bottom number means smaller parts", fix: "A bigger bottom number means MORE pieces from the same whole, so each piece is SMALLER.", counter: (t) => { const [a, b] = fracPair(t); const [lo, hi] = a.d < b.d ? [a, b] : [b, a]; return `Check with two strips of the SAME length: cut one into ${lo.d} equal parts and the other into ${hi.d}. One part of the ${hi.d}-part strip is shorter than one part of the ${lo.d}-part strip, so ${qs(hi)} is less than ${qs(lo)}.`; } } },
     workingChecker: "none: comparison answers have no working contract (answer-level evidence only)",
     sources: ["packages/learning/src/fam/b04.ts:427 adfcmp: teach.idea/method, alternatives draw_both, sharing; bug bigger-bottom-bigger", "content/learning/modules.v1.json MATH.number.fraction-comparison (authored module; one strategy same_size_pieces; no misconception-specific explanation)"],
-    uncertainties: ["The family's mc flag is false, so no multiple-choice delayed check exists; delayed checks are typed.", "The two-strip picture needs a renderer decision (two grid strips of equal width)."],
+    uncertainties: ["The family's mc flag is false, so no multiple-choice delayed check exists; delayed checks are typed.", "The two-strip picture (09 V1: one strips widget, equal wholes, each row shaded for its own fraction) cannot be rendered yet (no bottomShaded in Learn.tsx, no strips case in Figure.tsx): the strategy screens carry NO widget (text only) until Codex adds them."],
   },
   {
     id: "TP-NUM-02", title: "Adding like fractions: the bottom number names the piece size", family: "fadd", competency: "MATH.number.fraction-add-like", strand: "number",
@@ -244,8 +252,10 @@ export const PACKAGES: Package[] = [
     targets: [{ bug: "third-interior", status: "modelled", note: "the exterior angle confused with the adjacent interior angle" }, { bug: "adjacent-interior", status: "modelled", note: "the same confusion in reverse" }, { bug: "exterior-as-interior", status: "modelled", note: "the exterior angle used as a third interior angle" }],
     prerequisites: { knowledge: ["angles on a straight line add to 180° (MATH.geometry.angle-pairs)", "angle sum of a triangle is 180°"], graphNote: "SUSPECTED GRAPH GAP: triangle-properties lists only basic-constructions as mandatory; the exterior-angle theorem depends on angles on a straight line (angle-pairs). Not changed here; for Codex/curriculum review." },
     concept: ["At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.", "The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together."],
-    visual: (p) => { const [a, b] = nums(p.prompt).map(Number); return p.params[2] === 0 ? { type: "triangle", angles: [`${a}°`, `${b}°`, ""], exterior: "?" } : { type: "triangle", angles: [`${a}°`, "?", ""], exterior: `${a + b}°` }; },
-    visualNote: "MISSING VISUAL CAPABILITY: the existing 'triangle' visual draws interior angles only; an extended side with an exterior angle cannot be drawn. Proposed: triangle + extended side + marked exterior angle (field 'exterior'). Until then, text only (structured givens; nothing is read from a picture).",
+    // spec 09 V3: the exterior angle is at vertex 1 (side 0→1 extended); its two OPPOSITE interior angles are at vertices 0 and 2; vertex 1's interior angle is unlabelled
+    visual: (p) => { const [a, b] = nums(p.prompt).map(Number); return p.params[2] === 0 ? { type: "triangle", angles: [`${a}°`, "", `${b}°`], exterior: { at: 1, label: "?" }, notToScale: true, description: `A triangle (not drawn to scale) with one side extended. The two interior angles opposite the exterior angle are ${a}° and ${b}°. The exterior angle is marked ?.` } : { type: "triangle", angles: [`${b}°`, "", "?"], exterior: { at: 1, label: `${a}°` }, notToScale: true, description: `A triangle (not drawn to scale) with one side extended. The exterior angle is ${a}°. One interior angle opposite it is ${b}°; the other opposite angle is marked ?.` }; },
+    visualNote: "Spec 09 V3 (supersedes the earlier placeholder, which put the second opposite angle at vertex 1, next to the exterior angle). RENDERING BLOCKED until Codex adds the `exterior` field (extended side, arc and label at vertex 1) and the `notToScale` caption to Figure.tsx `triangle`; today the field is ignored and a plain triangle would be drawn without the exterior angle, so the screen must stay text-only. The vertices are fixed, so the figure is NOT to scale; `description` is the required screen-reader text. Nothing is read from the picture.",
+    visualBlocked: "09 V3: needs `exterior` and `notToScale` in Figure.tsx triangle",
     oracle: (t) => { const v = nums(t).map(Number); if (/What is the exterior angle/.test(t)) { const [a, b] = v; const c = 180 - a - b; return { value: q(180 - c), lines: [`Third interior angle C = 180° − ${a}° − ${b}° = ${c}° (angle sum)`, `Exterior angle = 180° − ${c}° = ${180 - c}° (straight line)`, `Check: ${a}° + ${b}° = ${a + b}° (exterior-angle theorem)`] }; } const [e, a] = v; const c = 180 - e; return { value: q(180 - a - c), lines: [`Interior angle next to the exterior angle C = 180° − ${e}° = ${c}° (straight line)`, `Other opposite angle = 180° − ${a}° − ${c}° = ${180 - a - c}° (angle sum)`, `Check: ${a}° + ${180 - a - c}° = ${e}° (exterior-angle theorem)`] }; },
     alternatives: [{ name: "Exterior-angle theorem directly", valid: true, run: (t) => { const v = nums(t).map(Number); return /What is the exterior angle/.test(t) ? { value: q(v[0] + v[1]), lines: [`exterior = ${v[0]}° + ${v[1]}° = ${v[0] + v[1]}°`] } : { value: q(v[0] - v[1]), lines: [`other opposite angle = ${v[0]}° − ${v[1]}° = ${v[0] - v[1]}°`] }; } }],
     alternativeExplanation: { title: "Go through the third angle", text: ["Find the third interior angle with the angle sum.", "The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle."], math: "oracle" },
@@ -355,6 +365,9 @@ export const PACKAGES: Package[] = [
   {
     id: "TP-PRO-01", title: "Two spinners or dice: totals are not equally likely", family: "akdice", competency: "MATH.probability.sample-space", strand: "probability",
     answerDistinct: true,
+    // freshness@2: the same spinners and the same total, or the mirror total m + n + 2 − k (renumber each face x → size + 1 − x:
+    // exactly the same pairs counted), is the same problem; another total or other spinners is a different problem even if its answer repeats
+    recheckProblem: (p) => { const [m, n, , k] = p.params; return [`problem:dice:${m},${n},${Math.min(k, m + n + 2 - k)}`]; },
     restriction: "akdice with params[2] = 0 (\"the total is exactly k\"); totals made by at least two pairs for diagnostics, rechecks and delayed checks.",
     bugExampleOk: { "totals-equally-likely": (p) => p.params[3] !== 2 && p.params[3] !== p.params[0] + p.params[1] },
     skill: "Find the probability of a total with two dice/spinners by listing all m × n equally likely pairs.",
