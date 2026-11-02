@@ -1,0 +1,161 @@
+{
+  "schema": "math-connection-domains@1",
+  "source": "audit.v1.json",
+  "limits": "Teaching counts use existing demonstration eligibility, not educator approval or exact-skill alignment. Working counts inspect only existing diagnostic/guided/check examples; absent working support does not mean answer grading is unavailable. This report does not exhaustively certify answer grading or curriculum completeness.",
+  "domains": [
+    {
+      "domain": "algebra",
+      "competencies": 58,
+      "missingModule": 2,
+      "missingSkillMetadata": 54,
+      "partialSkillConnections": 2,
+      "connectedAnswerChains": 4,
+      "noEligibleGeneralTeaching": 0,
+      "withBoundedWorkingExamples": 4,
+      "withoutBoundedWorkingExamples": 52
+    },
+    {
+      "domain": "calculus",
+      "competencies": 34,
+      "missingModule": 5,
+      "missingSkillMetadata": 29,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 1,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 29
+    },
+    {
+      "domain": "coordinate",
+      "competencies": 13,
+      "missingModule": 0,
+      "missingSkillMetadata": 13,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 0,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 13
+    },
+    {
+      "domain": "geometry",
+      "competencies": 44,
+      "missingModule": 0,
+      "missingSkillMetadata": 42,
+      "partialSkillConnections": 2,
+      "connectedAnswerChains": 1,
+      "noEligibleGeneralTeaching": 2,
+      "withBoundedWorkingExamples": 2,
+      "withoutBoundedWorkingExamples": 42
+    },
+    {
+      "domain": "matrices",
+      "competencies": 4,
+      "missingModule": 0,
+      "missingSkillMetadata": 4,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 0,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 4
+    },
+    {
+      "domain": "measurement",
+      "competencies": 40,
+      "missingModule": 0,
+      "missingSkillMetadata": 40,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 3,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 40
+    },
+    {
+      "domain": "number",
+      "competencies": 79,
+      "missingModule": 8,
+      "missingSkillMetadata": 70,
+      "partialSkillConnections": 1,
+      "connectedAnswerChains": 1,
+      "noEligibleGeneralTeaching": 14,
+      "withBoundedWorkingExamples": 21,
+      "withoutBoundedWorkingExamples": 50
+    },
+    {
+      "domain": "probability",
+      "competencies": 14,
+      "missingModule": 0,
+      "missingSkillMetadata": 14,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 1,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 14
+    },
+    {
+      "domain": "reasoning",
+      "competencies": 24,
+      "missingModule": 2,
+      "missingSkillMetadata": 22,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 1,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 22
+    },
+    {
+      "domain": "sequences",
+      "competencies": 7,
+      "missingModule": 0,
+      "missingSkillMetadata": 7,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 0,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 7
+    },
+    {
+      "domain": "sets-relations",
+      "competencies": 5,
+      "missingModule": 0,
+      "missingSkillMetadata": 5,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 0,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 5
+    },
+    {
+      "domain": "statistics",
+      "competencies": 18,
+      "missingModule": 0,
+      "missingSkillMetadata": 18,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 0,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 18
+    },
+    {
+      "domain": "trigonometry",
+      "competencies": 9,
+      "missingModule": 0,
+      "missingSkillMetadata": 9,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 1,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 9
+    },
+    {
+      "domain": "vectors",
+      "competencies": 4,
+      "missingModule": 0,
+      "missingSkillMetadata": 4,
+      "partialSkillConnections": 0,
+      "connectedAnswerChains": 0,
+      "noEligibleGeneralTeaching": 0,
+      "withBoundedWorkingExamples": 0,
+      "withoutBoundedWorkingExamples": 4
+    }
+  ]
+}

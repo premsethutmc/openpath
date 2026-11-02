@@ -39,3 +39,32 @@ Claude candidate schema: competency; family; parameter conditions; guided and fr
 ## Validation
 
 See `validation.md` for final commands and outcomes. Frozen benchmarks, historical results and workflow definitions are unchanged.
+
+## Other mathematics topics
+
+The inventory uses the shared graph’s actual domain/strand labels across supported ages and curricula. “Partial” means explicit skill contracts exist but the competency is not fully connected. A missing working checker is not a missing answer grader. The working columns inspect existing diagnostic/guided/check examples only.
+
+| Domain | Competencies | No module | No precise skill mapping | Partial | No eligible general teaching | No bounded working in inspected examples |
+|---|---:|---:|---:|---:|---:|---:|
+| algebra | 58 | 2 | 54 | 2 | 0 | 52 |
+| calculus | 34 | 5 | 29 | 0 | 1 | 29 |
+| coordinate | 13 | 0 | 13 | 0 | 0 | 13 |
+| geometry | 44 | 0 | 42 | 2 | 2 | 42 |
+| matrices | 4 | 0 | 4 | 0 | 0 | 4 |
+| measurement | 40 | 0 | 40 | 0 | 3 | 40 |
+| number | 79 | 8 | 70 | 1 | 14 | 50 |
+| probability | 14 | 0 | 14 | 0 | 1 | 14 |
+| reasoning | 24 | 2 | 22 | 0 | 1 | 22 |
+| sequences | 7 | 0 | 7 | 0 | 0 | 7 |
+| sets-relations | 5 | 0 | 5 | 0 | 0 | 5 |
+| statistics | 18 | 0 | 18 | 0 | 0 | 18 |
+| trigonometry | 9 | 0 | 9 | 0 | 1 | 9 |
+| vectors | 4 | 0 | 4 | 0 | 0 | 4 |
+
+The six connected answer chains are binomial middle products, two-step equations, equations on both sides, bracket equations, addition totals and triangle angle sums. They are constituent chains, not six completed topics. The five configured competencies are identities, linear equations, addition, triangle properties and angle pairs.
+
+Shared freshness exclusions apply wherever the existing requirement selector is used. Strict opted-in hypothesis replay also excludes taught examples across topics. Parameter-level alignment and skill-specific retention need explicit validated configuration; this milestone does not guess such mappings for the other 331 modules. Existing teaching, practice and answer grading continue there. Calculus, coordinate geometry, matrices, measurement, probability, reasoning, sequences, sets/relations, statistics, trigonometry and vectors need further skill contracts and, where the audit identifies them, content or bounded working adapters. No existing solver or renderer is rebuilt.
+
+The binomial gap remains explicit: `ahid` square-coefficient tasks have no eligible same-skill teaching chain here, no new `contract.statement`, no new missing-middle diagnosis and no new expression-working checker. The shared mechanism prevents other coefficient evidence or generic `expand` teaching from pretending to close that gap; authoring the missing content/contracts is future work. Claude’s content instructions were delivered, but no Claude execution or output is assumed.
+
+Generate this breakdown with `node --import tsx ../tools/mathematics/connection-domain-summary.mts` from `frontend`. The [machine-readable domain report](domains.v1.json) distinguishes existing teaching eligibility and bounded-working examples; it does not exhaustively certify answer grading.
