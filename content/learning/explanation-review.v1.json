@@ -17218,6 +17218,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:0b71d32119756ea342cfb16774af77918d6d1cd0ecc32ccf83e9a0aa05da292f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T07:13:50.636Z",
+      "note": "content changed: the decision on sha256:c403c7f30569 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:c403c7f305694eb5fa43b7aa94deca336139d9d4f7f51a24d433f72885a0dcd4"
     }
    ]
   },
@@ -25259,6 +25275,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:9f9858478a261d64ac3ffeef08ee9e1bb9e008e5eb946b3f714aeb3b3ead018e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T07:13:50.596Z",
+      "note": "content changed: the decision on sha256:c7a206916e4e (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:c7a206916e4ed92b37ea6fdecfe135df8a61753caa559f9ac0e9e524ba44def7"
     }
    ]
   },
@@ -25285,6 +25317,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:0aeb0d94a6423a4037fcae2788f9bf8f43650f0daebfe257264a4ff84982acd0",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T07:13:50.582Z",
+      "note": "content changed: the decision on sha256:d7637c54cf38 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:d7637c54cf383e17778048b1ca3b2b578cf60529b20c57909463437d58ce8f6e"
     }
    ]
   },
@@ -29240,6 +29288,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:0fec9addcae6929cfd53dff75794f64cf551758c9ca700f9f12165ec85fbb0cc",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T07:13:50.655Z",
+      "note": "content changed: the decision on sha256:e4e2279df641 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:e4e2279df641cc53d25d38fff95439d02eecc5758f07c9f6c3c500cec3923a00"
     }
    ]
   },
@@ -29318,6 +29382,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:16a59fc687bc3a4e22a9c0336c552f06f971d85b3e95d61c5f874070da9657ac",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T07:13:50.643Z",
+      "note": "content changed: the decision on sha256:8256fd30d968 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:8256fd30d968211b0210f4638d86b0244b7808d98d558bf59c325c436194b063"
     }
    ]
   },
@@ -30595,6 +30675,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:010d23e2825f81381638e837ea2b76f13e37eedebdbb67e4f552ca0148f78c36",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T07:13:50.619Z",
+      "note": "content changed: the decision on sha256:8eec511bfaae (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:8eec511bfaae4a0b7a6732e378d446a62ef47a6615fa9019fb672043b3c22b5e"
     }
    ]
   },

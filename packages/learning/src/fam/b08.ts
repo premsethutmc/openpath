@@ -1235,6 +1235,9 @@ export const B08: Def[] = [
     teach: {
       idea: "An exterior angle and the interior angle next to it make a straight line (180°), and the three interior angles also make 180°, so the exterior angle equals the two far interior angles together.",
       method: "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle.",
+      // visuals@2: the exterior angle at C (side AC extended to D); its two opposite interior angles at A and B, as in the idea text
+      // ("the two far interior angles"); the figure is not to scale and the asked angle is marked ?
+      visual: ([a, b, f]) => ({ type: "triangle", angles: [`${a}°`, "", f === 0 ? `${b}°` : "?"], exterior: { at: 1, label: f === 0 ? "?" : `${a + b}°` }, notToScale: true, vertices: ["A", "C", "B"], extendedTo: "D" }),
       alternatives: [
         { id: "via_third", title: "Go through the third angle", kind: "procedural", text: ["Find the third interior angle with the angle sum (180° minus the other two).", "The exterior angle is 180° minus that third angle, because they lie on a straight line."] },
       ],

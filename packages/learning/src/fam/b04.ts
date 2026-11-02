@@ -1412,7 +1412,8 @@ export const B04: Def[] = [
     teach: {
       idea: "On a number line from 0 to 1, 1/2 is halfway and 1/4 is halfway to the half: cutting the line into more equal parts makes each part shorter, so 1/4 is nearer to 0 than 1/2.",
       method: "Picture the line from 0 to 1 cut into as many equal parts as the bottom number; the first mark is the unit fraction. More parts means the first mark is closer to 0.",
-      visual: ([i, j]) => ({ type: "strips", top: UF[i], bottom: UF[j], shaded: 1 }),
+      // visuals@2: both unit fractions stated, so the two equal wholes are shaded independently (1/UF[i] and 1/UF[j])
+      visual: ([i, j]) => ({ type: "strips", top: UF[i], shaded: 1, bottom: UF[j], bottomShaded: 1, labels: [`1/${UF[i]}`, `1/${UF[j]}`] }),
       alternatives: [
         { id: "fold", title: "Fold a strip", kind: "conceptual", text: ["Fold a paper strip in half and mark the fold: that is 1/2.", "Fold it in half again: the first fold from the start is 1/4, closer to the start."], visual: () => ({ type: "numberline", from: 0, to: 1, step: 1, marks: [0.25, 0.5, 0.75] }) },
       ],
@@ -2364,7 +2365,8 @@ export const B04: Def[] = [
     teach: {
       idea: "A unit can be a fraction of a metre: if a strip is 1/b of a metre, b strips make 1 metre, and k strips make k/b of a metre.",
       method: "For a length, write the number of strips over b (and change to a mixed number if you like). For how many strips, multiply the metres by b.",
-      visual: ([, b]) => ({ type: "strips", top: 1, bottom: b, shaded: 1 }),
+      // visuals@2: the whole metre, and the same metre cut into b strips with one strip (1/b of a metre) shaded
+      visual: ([, b]) => ({ type: "strips", top: 1, shaded: 1, bottom: b, bottomShaded: 1, labels: ["1", `1/${b}`] }),
       alternatives: [{ id: "number_line", title: "Jump along a number line", kind: "procedural", text: ["Mark 0, 1, 2 … metres and cut each metre into b equal jumps.", "Count the jumps: k jumps land on k/b."] }],
     },
     limits: "Strips of 1/2 to 1/10 m, up to 5 m; non-unit fractional units (such as 3/4 m) are not included.",
@@ -2415,7 +2417,8 @@ export const B04: Def[] = [
     teach: {
       idea: "Fractions with different bottom numbers count parts of different sizes; writing them with a common bottom number makes the parts the same size, so the tops can be compared.",
       method: "Find a common multiple of the bottom numbers (the smallest is easiest). Change both fractions to it, then the one with the bigger top is greater.",
-      visual: ([a, b, , d]) => ({ type: "strips", top: b, bottom: d, shaded: a }),
+      // visuals@2: a/b and c/d, each on its own equal whole
+      visual: ([a, b, c, d]) => ({ type: "strips", top: b, shaded: a, bottom: d, bottomShaded: c, labels: [`${a}/${b}`, `${c}/${d}`] }),
       alternatives: [
         { id: "benchmark", title: "Compare with 1/2", kind: "conceptual", text: ["If one fraction is more than half and the other less than half, the first is greater.", "3/5 is more than 1/2 (3 is more than half of 5); 3/8 is less than 1/2."] },
         { id: "cross", title: "Cross-multiply", kind: "procedural", text: ["For a/b and c/d, compare a × d with c × b.", "The bigger product goes with the greater fraction."] },
@@ -2495,7 +2498,8 @@ export const B04: Def[] = [
     teach: {
       idea: "To order fractions with different bottom numbers, write them all with one common bottom number; then their tops are in the same order as the fractions.",
       method: "Find a common multiple of all three bottom numbers. Change each fraction to it, order the tops, and write the original fractions in that order.",
-      visual: ([i, j]) => ({ type: "strips", top: fracList()[i][1], bottom: fracList()[j][1], shaded: fracList()[i][0] }),
+      // visuals@2: no picture. The question orders THREE fractions and a strips picture shows two; a picture of two of them
+      // (the old data, which also derived the second row's shading) can leave out the fraction that decides the order.
       alternatives: [{ id: "benchmarks", title: "Sort by 0, 1/2 and 1", kind: "conceptual", text: ["First put each fraction into 'less than 1/2' or 'more than 1/2'.", "Then compare only the fractions in the same group."] }],
     },
     limits: "Three fractions less than 1 in simplest form with three different bottom numbers from 2 to 10.",

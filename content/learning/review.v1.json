@@ -36261,7 +36261,7 @@
    "competency": "MATH.geometry.triangle-properties",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "b1c755a7",
+   "contentHash": "29672653",
    "state": "draft",
    "history": [
     {
@@ -36294,6 +36294,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "b1c755a7",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T07:17:08.987Z",
+     "contentHash": "29672653",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -39854,7 +39862,7 @@
    "competency": "MATH.number.fraction-comparison",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "43ddcb38",
+   "contentHash": "e301fd1e",
    "state": "draft",
    "history": [
     {
@@ -39904,6 +39912,14 @@
      "at": "2026-10-20T09:28:27.196Z",
      "contentHash": "43ddcb38",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T07:17:08.987Z",
+     "contentHash": "e301fd1e",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -39912,7 +39928,7 @@
    "competency": "MATH.number.fraction-models",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "8d90ffa2",
+   "contentHash": "30c206da",
    "state": "draft",
    "history": [
     {
@@ -39961,6 +39977,14 @@
      "role": "engineer",
      "at": "2026-10-20T09:28:27.196Z",
      "contentHash": "8d90ffa2",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T07:17:08.987Z",
+     "contentHash": "30c206da",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -41762,7 +41786,7 @@
    "competency": "MATH.number.ratio-division",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "17983046",
+   "contentHash": "441f0b45",
    "state": "draft",
    "history": [
     {
@@ -41787,6 +41811,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "17983046",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T07:17:08.987Z",
+     "contentHash": "441f0b45",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -42331,7 +42363,7 @@
    "competency": "MATH.number.unit-fractions",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "1fcc0f6f",
+   "contentHash": "50d16f88",
    "state": "draft",
    "history": [
     {
@@ -42372,6 +42404,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "1fcc0f6f",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T07:17:08.987Z",
+     "contentHash": "50d16f88",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

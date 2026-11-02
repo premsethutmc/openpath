@@ -103,3 +103,17 @@ Before drawing, each new form is checked. Data that does not fit together is **n
 - **Compound area-model labels are not drawn** (with side labels). The exact single-variable kernel `e6-cas` `compareExpr` can check products such as (x + 3) × x = x² + 3x. Using it would add the CAS (about 85 kB of source) to the client bundle, so that is left as a decision for Codex; until then such models are shown as text.
 - **Unit spelling counts in the rectangle check.** "10cm" and "10 cm" count as different labels, so the figure is refused.
 - **Vertex names need data.** The TP-GEO-01 concept text refers to vertex "C", so its widget must carry `vertices: ["A", "C", "B"]`; adding that is Codex's integration step. The renderer then draws and describes the names.
+
+## Data follow-up (`feat/math-coverage-expansion`)
+
+The data gaps listed above were repaired in family and module data where the intended values could be established:
+- comparison strips now state both fractions;
+- the unit-fraction fold is one 4-part strip;
+- ratio bars are one bar with the asked share shaded;
+- the exterior-angle triangle carries vertex names `["A", "C", "B"]` and `extendedTo: "D"`.
+
+Two cases keep the text fallback, by decision:
+- `aifword` `bar`: no instance values;
+- `adfordu`: it orders three fractions, so it has no picture.
+
+See `docs/math-skill-connections/README.md` ("Coverage expansion").

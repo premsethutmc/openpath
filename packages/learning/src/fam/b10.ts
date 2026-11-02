@@ -1172,7 +1172,9 @@ export const B10: Def[] = [
     teach: {
       idea: "A ratio a : b splits the whole into a + b equal parts; the first person gets a of them and the second b.",
       method: "Add the terms to find the number of parts, divide the total by it to find one part, then multiply by the person's number of parts.",
-      visual: ([a, b, c]) => ({ type: "strips", top: (c ? a + b + c : a + b), bottom: 1, shaded: a }),
+      // visuals@2: ONE bar of a + b (+ c) equal parts, with the parts of the person the question asks about (WHO[w]) shaded
+      // (the old strips data had no second strip to draw, and always shaded the first person's a parts)
+      visual: ([a, b, c, , w]) => ({ type: "grid", rows: 1, cols: c ? a + b + c : a + b, shaded: [a, b, c][w] }),
       alternatives: [
         { id: "bar_model", title: "A bar model", kind: "conceptual", text: ["Draw one bar for each person: a boxes, b boxes (and c boxes).", "All the boxes are equal; the total divided by the number of boxes is the value of one box."] },
       ],
