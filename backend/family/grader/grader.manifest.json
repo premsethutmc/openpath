@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "db4db0c8696a8c8797a377022ec790d95a003c59faaa35a13b0d90f86dacb959",
+ "sha256": "82090ecf8bee710e8c6222d43ae48351daaf541b048409fc6d05915bab73f349",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
@@ -88,7 +88,7 @@
   "content/learning/modules.v1.json": "5221f0c0530c3e3516f962a81e9cc231a42074a6ac57b483dac5252f936795df",
   "content/learning/problems.v1.json": "2d0cca6da92e398d4077e07be65162787e59652cda5319b8928ab0ab52c4e727",
   "content/learning/question-status.v1.json": "4a368546d264f94ed741ac32a4aebe75d610bbdd55e8f39aae17809a82144a61",
-  "content/learning/review.v1.json": "b13ba330dd188871162de1eb1fa51d4934cc383d5123625e428c75d8261b2f1e",
+  "content/learning/review.v1.json": "4f50e2d32ee6e3b27be1c1eb8933d37fd2f0bc8bd521d2c447e6b9942db71af8",
   "content/learning/showcase-grade10.v1.json": "68f993d4546bd2be88eb63d4c3a6edc8ab46c59fc2bfefd0deff3e8a0a32dbd5",
   "content/learning/teaching-contract-exemptions.v1.json": "06fdf5a0d8d49a7633d0caefe5d698b6325116d4928a5f764d7db41de29d0531",
   "content/learning/written-modules.v1.json": "d9a0a9c5af5a65353d1ecc984a55166e8a7c572d1d6ef76e25f52962f96ad08a",
