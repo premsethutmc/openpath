@@ -1,19 +1,54 @@
 {
- "checks": "server grader (answer correct; every modelled wrong answer incorrect) + prompt-text oracle + every alternative method + quarantine + whole-pool oracle agreement",
+ "checks": "server grader (answer correct; every modelled wrong answer incorrect) + prompt/figure oracle + every alternative method + quarantine + whole-pool oracle agreement + response patterns graded + proposed strategies through teachingEligibility, contentEligibility (in-memory registry) and validateRegistry",
  "packages": [
   {
    "id": "TP-NUM-01",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [],
+   "pattern": null,
+   "newStrategies": 2,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "adfcmp_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "adfcmp_concept",
+    "fix_bigger_bottom_bigger"
+   ],
+   "registryProblems": 0,
    "family": "adfcmp",
    "competency": "MATH.number.fraction-comparison",
-   "items": 17,
-   "itemsOk": 17,
+   "items": 18,
+   "itemsOk": 18,
    "poolAgreement": "250/250",
    "transfer": 2,
-   "diagnostics": 3,
+   "diagnostics": 4,
    "misconceptionScreens": 1
   },
   {
    "id": "TP-NUM-02",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [],
+   "pattern": null,
+   "newStrategies": 3,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "fadd_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "fadd_concept",
+    "fix_add_denominators",
+    "fix_multiply_tops"
+   ],
+   "registryProblems": 0,
    "family": "fadd",
    "competency": "MATH.number.fraction-add-like",
    "items": 15,
@@ -25,6 +60,31 @@
   },
   {
    "id": "TP-NUM-03",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [
+    "longer-is-larger",
+    "shorter-is-larger"
+   ],
+   "notChecked": [
+    "aedecc_concept",
+    "fix_longer_is_larger",
+    "fix_shorter_is_larger"
+   ],
+   "pattern": null,
+   "newStrategies": 3,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "aedecc_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "aedecc_concept",
+    "fix_longer_is_larger",
+    "fix_shorter_is_larger"
+   ],
+   "registryProblems": 0,
    "family": "aedecc",
    "competency": "MATH.number.decimal-tenths",
    "items": 19,
@@ -36,17 +96,65 @@
   },
   {
    "id": "TP-MEA-01",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "aeperar_concept",
+    "fix_perimeter_for_area",
+    "fix_area_for_perimeter",
+    "fix_two_sides"
+   ],
+   "pattern": null,
+   "newStrategies": 4,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "aeperar_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "aeperar_concept",
+    "fix_perimeter_for_area",
+    "fix_area_for_perimeter",
+    "fix_two_sides"
+   ],
+   "registryProblems": 0,
    "family": "aeperar",
    "competency": "MATH.measurement.area-squares",
-   "items": 22,
-   "itemsOk": 22,
+   "items": 24,
+   "itemsOk": 24,
    "poolAgreement": "400/400",
    "transfer": 2,
-   "diagnostics": 2,
+   "diagnostics": 4,
    "misconceptionScreens": 3
   },
   {
    "id": "TP-GEO-01",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "ahext_concept",
+    "fix_third_interior",
+    "fix_adjacent_interior",
+    "fix_exterior_as_interior"
+   ],
+   "pattern": null,
+   "newStrategies": 4,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "ahext_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "ahext_concept",
+    "fix_third_interior",
+    "fix_adjacent_interior",
+    "fix_exterior_as_interior"
+   ],
+   "registryProblems": 0,
    "family": "ahext",
    "competency": "MATH.geometry.triangle-properties",
    "items": 22,
@@ -58,6 +166,28 @@
   },
   {
    "id": "TP-GEO-02",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "afcross_concept",
+    "fix_opposite_as_linear",
+    "fix_neighbour_equal"
+   ],
+   "pattern": null,
+   "newStrategies": 3,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "afcross_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "afcross_concept",
+    "fix_opposite_as_linear",
+    "fix_neighbour_equal"
+   ],
+   "registryProblems": 0,
    "family": "afcross",
    "competency": "MATH.geometry.angle-pairs",
    "items": 20,
@@ -69,6 +199,21 @@
   },
   {
    "id": "TP-STA-01",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [],
+   "pattern": null,
+   "newStrategies": 2,
+   "reused": 1,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [],
+   "gatesWithEvidenceEligible": [
+    "fix_mean_for_median",
+    "fix_one_middle"
+   ],
+   "registryProblems": 0,
    "family": "akmed",
    "competency": "MATH.statistics.median-mode",
    "items": 22,
@@ -80,6 +225,28 @@
   },
   {
    "id": "TP-ALG-01",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "ahid_concept",
+    "fix_middle_not_doubled",
+    "fix_middle_sign"
+   ],
+   "pattern": null,
+   "newStrategies": 3,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "ahid_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "ahid_concept",
+    "fix_middle_not_doubled",
+    "fix_middle_sign"
+   ],
+   "registryProblems": 0,
    "family": "ahid",
    "competency": "MATH.algebra.identities",
    "items": 19,
@@ -91,6 +258,30 @@
   },
   {
    "id": "TP-PRO-01",
+   "batch": "batch-1",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "akdice_concept",
+    "fix_totals_equally_likely",
+    "fix_order_ignored",
+    "fix_added_sides"
+   ],
+   "pattern": null,
+   "newStrategies": 4,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "akdice_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "akdice_concept",
+    "fix_totals_equally_likely",
+    "fix_order_ignored",
+    "fix_added_sides"
+   ],
+   "registryProblems": 0,
    "family": "akdice",
    "competency": "MATH.probability.sample-space",
    "items": 22,

@@ -111,90 +111,32 @@ Example `gen:afcross:147,1`; guided `gen:afcross:27,1:mc`; fresh check `gen:afcr
 - Transfer (everyday form): `gen:afcross:35,0:w`, `gen:afcross:81,0:w`
 - Delayed checks: `gen:afcross:42,0`, `gen:afcross:37,1`
 
-## Integration mapping (proposal for Codex; nothing written)
+## Integration specification (for the shared teaching selector; nothing written)
 
-```json
-{
- "strategyProposals": [
-  {
-   "id": "fix_opposite_as_linear",
-   "title": "Opposite angles do not lie together on one straight line, so",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:afcross:104,0"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:afcross:104,0"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:afcross:109,0:mc"
-    }
-   ],
-   "guided": "gen:afcross:109,0:mc",
-   "check": "gen:afcross:70,0"
-  },
-  {
-   "id": "fix_neighbour_equal",
-   "title": "Angles next to each other lie on a straight line",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:afcross:147,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:afcross:147,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:afcross:27,1:mc"
-    }
-   ],
-   "guided": "gen:afcross:27,1:mc",
-   "check": "gen:afcross:146,1:mc"
-  }
- ],
- "registryProposal": [
-  {
-   "competency": "MATH.geometry.angle-pairs",
-   "strategy": "fix_opposite_as_linear",
-   "misconceptionSpecific": true,
-   "addresses": "opposite-as-linear",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.geometry.angle-pairs",
-   "strategy": "fix_neighbour_equal",
-   "misconceptionSpecific": true,
-   "addresses": "neighbour-equal",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  }
- ],
- "generalStrategyProposal": {
-  "id": "afcross_concept",
-  "screens": [
-   "concept + visual",
-   "worked example(s)",
-   "alternative explanation"
-  ],
-  "note": "for modules where this family has only a chapter screen"
- },
- "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
-}
-```
+- **Skill:** At two crossing lines: vertically opposite angles are equal; adjacent angles make 180°; all four make 360°.
+- **Generator:** `afcross` — afcross, all three forms: params[1] = 0 vertically opposite, 1 adjacent, 2 the other three (contrast); angles within 5° of 90 excluded from examples.
+- **Trigger** `afcross_concept`: general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page
+- **Trigger** `fix_opposite_as_linear`: verified-misconception 'opposite-as-linear' (two matching answers, misconception-evidence@1)
+- **Trigger** `fix_neighbour_equal`: verified-misconception 'neighbour-equal' (two matching answers, misconception-evidence@1)
+- **Allowed methods:** the oracle's method (worked lines); Full turn
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:afcross:158,0:mc`, `gen:afcross:40,1:mc`
+- **Retention target:** MATH.geometry.angle-pairs / `afcross`, cases: vertically opposite; adjacent. Candidates: `gen:afcross:42,0`, `gen:afcross:37,1`
+- **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
+- **Method evidence:** afcross modes 0/1 have a geometry task (foundation adapter); mode 2 (other three) has none (geometry-task.ts excludes b === 2). G5 R06: a vertically-opposite citation for a MEASURE was rejected by the reasoner; route through straight-line steps is supported
+- **Ungradable / text-only:** none
+- **Reused existing explanations:** none
+
+Platform checks of the proposed objects (in memory):
+
+| Strategy | teaching contract (as integrated today) | contract with this family as the lesson scope | eligible without evidence | eligible with the misconception established | addresses (read by platform) |
+|---|---|---|---|---|---|
+| `afcross_concept` | **not checked**: outside the module's teaching scope (ineligible today) | 4/4 sections checked, no violations | yes | yes | — |
+| `fix_opposite_as_linear` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | — |
+| `fix_neighbour_equal` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | neighbour-equal |
+
+Registry validation problems for the new records: none.
+
+The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in the package JSON (`integration.strategies`, `integration.registryRecords`).
 
 ## Sources
 
@@ -204,5 +146,6 @@ Example `gen:afcross:147,1`; guided `gen:afcross:27,1:mc`; fresh check `gen:afcr
 ## Uncertainties
 
 - The 'adjacent' full-turn route uses the opposite-angle fact; it is valid but not independent of it.
+- fix_opposite_as_linear: the platform reads the addressed misconception from the family's verbatim 'says' text; it reads nothing here (the package overrides a defective family sentence), so the registry cannot record 'addresses: opposite-as-linear' until the family text is fixed (05)
 
 ## Validation: 20/20 items pass; whole-pool oracle + alternatives agreement 300/300

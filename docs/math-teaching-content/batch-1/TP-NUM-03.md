@@ -13,7 +13,7 @@
 ## Explanation
 
 Decimals are compared place by place from the left: wholes, then tenths, then hundredths.
-Writing both with the same number of places makes them easy to compare: 0.7 = 0.70, which is more than 0.65.
+Writing both with the same number of places (put a zero at the end of the shorter one) makes them easy to compare as hundredths.
 
 Visual: `{"type":"grid","rows":10,"cols":10,"shaded":1,"note":"hundred grid: one shaded square = 0.01; a full column = 0.1"}`. Reuses the hundred grid ({type:'grid', rows:10, cols:10, shaded:k}) of the decimal-tenths module's hundred_grid strategy; shade each number on its own grid.
 
@@ -49,7 +49,7 @@ For `gen:aedecc:3,1,4,2`:
 
 ## Alternative explanation: Number line in tenths
 
-Mark 0, 0.1, 0.2, … 1 on a line.
+Mark the tenths on a number line from one whole number to the next.
 Find which tenth each number is in first; only if they are in the same tenth do the hundredths decide.
 
 ## Valid alternative methods (each checked to reach the same answer on every applicable generated item)
@@ -78,7 +78,7 @@ Status: modelled (a single matching answer is a SUSPECTED error; established onl
 > More digits after the point does not mean bigger: compare the tenths first.
 > Not 2.01, but 2.2.
 
-Counter-check: 0.5 is half; 0.45 is less than half (45 of 100). So 0.5 > 0.45 although 0.45 has more digits.
+Check with hundredths: 2.2 = 2.20, which is 220 hundredths; 2.01 is 201 hundredths. 2.2 is greater although it has fewer digits.
 
 Solved correctly:
 
@@ -96,7 +96,7 @@ Status: modelled (a single matching answer is a SUSPECTED error; established onl
 > A tenths number is not always bigger than a hundredths number: compare the tenths digits.
 > Not 1.2, but 1.77.
 
-Counter-check: 0.91 is 9 tenths and 1 hundredth; 0.1 is only 1 tenth. 0.91 > 0.1.
+Check with hundredths: 1.77 is 177 hundredths; 1.2 = 1.20, which is only 120 hundredths.
 
 Solved correctly:
 
@@ -112,90 +112,32 @@ Example `gen:aedecc:1,2,7,7`; guided `gen:aedecc:3,3,8,1`; fresh check `gen:aede
 - Transfer (everyday form): `gen:aedecc:0,7,4,9:w`, `gen:aedecc:0,9,7,9:w`
 - Delayed checks: `gen:aedecc:0,8,7,4`, `gen:aedecc:2,7,8,8`
 
-## Integration mapping (proposal for Codex; nothing written)
+## Integration specification (for the shared teaching selector; nothing written)
 
-```json
-{
- "strategyProposals": [
-  {
-   "id": "fix_longer_is_larger",
-   "title": "More digits after the point does not mean bigger",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:aedecc:2,2,0,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:aedecc:2,2,0,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:aedecc:3,6,1,5"
-    }
-   ],
-   "guided": "gen:aedecc:3,6,1,5",
-   "check": "gen:aedecc:1,7,6,4"
-  },
-  {
-   "id": "fix_shorter_is_larger",
-   "title": "A tenths number is not always bigger than a hundredths numbe",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:aedecc:1,2,7,7"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:aedecc:1,2,7,7"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:aedecc:3,3,8,1"
-    }
-   ],
-   "guided": "gen:aedecc:3,3,8,1",
-   "check": "gen:aedecc:1,1,2,9"
-  }
- ],
- "registryProposal": [
-  {
-   "competency": "MATH.number.decimal-tenths",
-   "strategy": "fix_longer_is_larger",
-   "misconceptionSpecific": true,
-   "addresses": "longer-is-larger",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.number.decimal-tenths",
-   "strategy": "fix_shorter_is_larger",
-   "misconceptionSpecific": true,
-   "addresses": "shorter-is-larger",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  }
- ],
- "generalStrategyProposal": {
-  "id": "aedecc_concept",
-  "screens": [
-   "concept + visual",
-   "worked example(s)",
-   "alternative explanation"
-  ],
-  "note": "for modules where this family has only a chapter screen"
- },
- "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
-}
-```
+- **Skill:** Compare a tenths decimal with a hundredths decimal by place value.
+- **Generator:** `aedecc` — aedecc, all items (one tenths and one hundredths decimal with the same whole part).
+- **Trigger** `aedecc_concept`: general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page
+- **Trigger** `fix_longer_is_larger`: verified-misconception 'longer-is-larger' (two matching answers, misconception-evidence@1) — **UNREACHABLE today**: the diagnosis reader reads this wrong answer as "other": unreachable until fixed (05)
+- **Trigger** `fix_shorter_is_larger`: verified-misconception 'shorter-is-larger' (two matching answers, misconception-evidence@1) — **UNREACHABLE today**: the diagnosis reader reads this wrong answer as "other": unreachable until fixed (05)
+- **Allowed methods:** the oracle's method (worked lines); Money (paise)
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:aedecc:3,4,3,8`, `gen:aedecc:2,6,7,7`
+- **Retention target:** MATH.number.decimal-tenths / `aedecc`, cases: tenths decimal is greater; hundredths decimal is greater. Candidates: `gen:aedecc:0,8,7,4`, `gen:aedecc:2,7,8,8`
+- **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
+- **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
+- **Ungradable / text-only:** none
+- **Reused existing explanations:** none
+
+Platform checks of the proposed objects (in memory):
+
+| Strategy | teaching contract (as integrated today) | contract with this family as the lesson scope | eligible without evidence | eligible with the misconception established | addresses (read by platform) |
+|---|---|---|---|---|---|
+| `aedecc_concept` | **not checked**: outside the module's teaching scope (ineligible today) | 4/4 sections checked, no violations | yes | yes | — |
+| `fix_longer_is_larger` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | — |
+| `fix_shorter_is_larger` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | shorter-is-larger |
+
+Registry validation problems for the new records: none.
+
+The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in the package JSON (`integration.strategies`, `integration.registryRecords`).
 
 ## Sources
 
@@ -207,5 +149,8 @@ Example `gen:aedecc:1,2,7,7`; guided `gen:aedecc:3,3,8,1`; fresh check `gen:aede
 - aedecc has no figure; the hundred grid is a proposal reusing an existing visual.
 - CONTENT DEFECT (existing family text, fam/b05.ts aedecc bugs, longer-is-larger 'says'): it claims the hundredths digits 'uv' are more than the tenths digit t; this is false whenever uv ≤ t (e.g. '03 is more than 5'). The package replaces that sentence for its own screens; the family text itself is not changed here.
 - The competency is 'Represent tenths'; comparison sits inside it (the family is one of its five).
+- longer-is-larger: the platform's diagnosis reader (reasoning.ts probeReading) reads the predicted wrong answer "2.01" on gen:aedecc:2,2,0,1 as "other", so this misconception can NEVER be established and fix_longer_is_larger can never be triggered until the reader handles this answer type (Codex)
+- shorter-is-larger: the platform's diagnosis reader (reasoning.ts probeReading) reads the predicted wrong answer "1.2" on gen:aedecc:1,2,7,7 as "other", so this misconception can NEVER be established and fix_shorter_is_larger can never be triggered until the reader handles this answer type (Codex)
+- fix_longer_is_larger: the platform reads the addressed misconception from the family's verbatim 'says' text; it reads nothing here (the package overrides a defective family sentence), so the registry cannot record 'addresses: longer-is-larger' until the family text is fixed (05)
 
 ## Validation: 19/19 items pass; whole-pool oracle + alternatives agreement 300/300

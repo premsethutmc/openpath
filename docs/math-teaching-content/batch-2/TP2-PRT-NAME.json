@@ -1,0 +1,1653 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-PRT-NAME",
+ "batch": "batch-2",
+ "pattern": "PAT-PARTS",
+ "title": "Naming a shaded fraction: out of ALL the equal parts",
+ "competency": "MATH.number.fraction-models",
+ "competencyName": "Represent fractions of a whole",
+ "grades": [
+  3,
+  3
+ ],
+ "strand": "number",
+ "family": "adfname",
+ "familyTitle": "Naming the shaded fraction of a shape",
+ "skill": "Name the shaded fraction of a shape cut into equal parts.",
+ "prerequisites": {
+  "graph": [],
+  "knowledge": [
+   "equal parts",
+   "counting squares"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "A fraction names equal parts of ONE whole. The bottom number is how many equal parts the whole is cut into, all of them, shaded or not.",
+   "The top number is how many of those parts we mean. So the fraction of a shape that is shaded is (shaded parts) over (all the equal parts)."
+  ],
+  "visual": {
+   "type": "grid",
+   "rows": 1,
+   "cols": 7,
+   "shaded": 1
+  },
+  "visualNote": "Reuses the family's own grid figure."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:adfname:1,7,1",
+   "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+   "lines": [
+    "All the equal squares: 1 × 7 = 7",
+    "Shaded: 1",
+    "1/7"
+   ],
+   "familyExplainSteps": [
+    "The whole has 1 × 7 = 7 equal squares: the bottom number",
+    "1 of them are shaded: 1/7"
+   ],
+   "answer": "1/7"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:adfname:1,7,1",
+   "hints": [
+    "How many equal parts make the whole shape?",
+    "How many of them are shaded?",
+    "Write shaded over ALL the parts."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Same fraction on a cake",
+  "text": [
+   "Cut a round cake into the same number of equal pieces and colour the same number. The fraction is the same."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Unshaded first",
+   "valid": true,
+   "example": [
+    "unshaded 6, so shaded = 7 − 6 = 1 of 7"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "shaded fraction",
+   "why": "shaded-to-unshaded gives shaded/unshaded; count-only gives the shaded count",
+   "id": "gen:adfname:2,6,7",
+   "fromPhase": "diagnostic",
+   "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+   "answer": "7/12",
+   "readings": [
+    {
+     "response": "7/12",
+     "reading": "correct"
+    },
+    {
+     "response": "7/5",
+     "reading": "TARGET modelled error shaded-to-unshaded (conceptual): suspected on one answer"
+    },
+    {
+     "response": "5/12",
+     "reading": "other modelled error unshaded (procedural): suspected on one answer"
+    },
+    {
+     "response": "7",
+     "reading": "TARGET modelled error count-only (conceptual): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "shaded-to-unshaded",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "part-to-part instead of part-to-whole",
+   "example": "gen:adfname:4,2,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"What fraction of the shape in the picture is shaded? All the small squares are the same size.\", one wrong answer is 1/7.",
+     "The shaded squares were put over the unshaded ones. The bottom number is ALL the equal parts of the whole.",
+     "The bottom number counts ALL the equal parts of the whole, the shaded ones too.",
+     "Not 1/7, but 1/8."
+    ],
+    "counterCheck": "Check: the whole shape is cut into 8 equal squares, so each square is 1/8 of it, and 1 shaded square is 1/8.",
+    "solvedCorrectly": [
+     "All the equal squares: 4 × 2 = 8",
+     "Shaded: 1",
+     "1/8"
+    ]
+   },
+   "guided": "gen:adfname:5,2,7",
+   "check": "gen:adfname:2,7,1:mc"
+  },
+  {
+   "bug": "count-only",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "a count, not a fraction",
+   "example": "gen:adfname:4,3,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"What fraction of the shape in the picture is shaded? All the small squares are the same size.\", one wrong answer is 1.",
+     "Only the shaded squares were counted. A fraction also says how many equal parts make the whole.",
+     "A fraction says how many parts out of how many: write the shaded parts over all the parts.",
+     "Not 1, but 1/12."
+    ],
+    "counterCheck": "Check: 1 shaded square out of 12 is a part of the shape; the number 1 alone does not say out of how many.",
+    "solvedCorrectly": [
+     "All the equal squares: 4 × 3 = 12",
+     "Shaded: 1",
+     "1/12"
+    ]
+   },
+   "guided": "gen:adfname:3,5,8",
+   "check": "gen:adfname:2,9,11:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:adfname:3,2,1:mc",
+   "gen:adfname:1,5,2:mc",
+   "gen:adfname:1,8,3:mc"
+  ],
+  "rechecks": [
+   "gen:adfname:4,4,9",
+   "gen:adfname:1,9,1"
+  ],
+  "transfer": [
+   "gen:adfname:2,10,11:w",
+   "gen:adfname:1,10,3:w"
+  ],
+  "delayedChecks": [
+   "gen:adfname:2,3,1",
+   "gen:adfname:2,2,1:mc"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Name the shaded fraction of a shape cut into equal parts.",
+   "competency": "MATH.number.fraction-models",
+   "generator": {
+    "family": "adfname",
+    "restriction": "adfname, all items (grids of equal squares); diagnostics need shaded ≠ unshaded so the two errors differ."
+   },
+   "existingMisconceptionExplanations": [],
+   "triggers": [
+    {
+     "strategy": "adfname_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_shaded_to_unshaded",
+     "when": "verified-misconception 'shaded-to-unshaded' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_count_only",
+     "when": "verified-misconception 'count-only' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "equal_parts",
+     "when": "existing explanation reused: equal parts (authored, general)"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Unshaded first",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "adfname",
+    "partition": "check",
+    "restriction": "adfname, all items (grids of equal squares); diagnostics need shaded ≠ unshaded so the two errors differ.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:adfname:4,4,9",
+     "gen:adfname:1,9,1"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.number.fraction-models",
+    "family": "adfname",
+    "partition": "retention",
+    "cases": [
+     "shaded fraction"
+    ],
+    "candidates": [
+     "gen:adfname:2,3,1",
+     "gen:adfname:2,2,1:mc"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "adfname_concept",
+     "title": "Naming a shaded fraction: out of ALL the equal parts",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "A fraction names equal parts of ONE whole. The bottom number is how many equal parts the whole is cut into, all of them, shaded or not.",
+        "The top number is how many of those parts we mean. So the fraction of a shape that is shaded is (shaded parts) over (all the equal parts)."
+       ],
+       "math": [
+        "All the equal squares: 1 × 7 = 7",
+        "Shaded: 1",
+        "1/7"
+       ],
+       "widget": {
+        "type": "grid",
+        "rows": 1,
+        "cols": 7,
+        "shaded": 1
+       },
+       "role": "concept",
+       "instance": "gen:adfname:1,7,1"
+      },
+      {
+       "title": "Same fraction on a cake",
+       "text": [
+        "Cut a round cake into the same number of equal pieces and colour the same number. The fraction is the same."
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:1,7,1"
+      },
+      {
+       "title": "Another way: Unshaded first",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "unshaded 6, so shaded = 7 − 6 = 1 of 7"
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:1,7,1"
+      }
+     ],
+     "guided": "gen:adfname:3,2,1:mc",
+     "check": "gen:adfname:4,4,9"
+    }
+   },
+   {
+    "purpose": "misconception-specific: shaded-to-unshaded",
+    "strategy": {
+     "id": "fix_shaded_to_unshaded",
+     "title": "Shaded out of ALL the parts",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Shaded out of ALL the parts: what went wrong",
+       "text": [
+        "The shaded squares were put over the unshaded ones. The bottom number is ALL the equal parts of the whole.",
+        "The bottom number counts ALL the equal parts of the whole, the shaded ones too."
+       ],
+       "math": [
+        "Not 1/7, but 1/8",
+        "Check: the whole shape is cut into 8 equal squares, so each square is 1/8 of it, and 1 shaded square is 1/8."
+       ],
+       "role": "misconception",
+       "instance": "gen:adfname:4,2,1"
+      },
+      {
+       "title": "Shaded out of ALL the parts: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the equal squares: 4 × 2 = 8",
+        "Shaded: 1",
+        "1/8"
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:4,2,1"
+      }
+     ],
+     "guided": "gen:adfname:5,2,7",
+     "check": "gen:adfname:2,7,1:mc"
+    }
+   },
+   {
+    "purpose": "misconception-specific: count-only",
+    "strategy": {
+     "id": "fix_count_only",
+     "title": "A fraction is parts out of the whole",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A fraction is parts out of the whole: what went wrong",
+       "text": [
+        "Only the shaded squares were counted. A fraction also says how many equal parts make the whole.",
+        "A fraction says how many parts out of how many: write the shaded parts over all the parts."
+       ],
+       "math": [
+        "Not 1, but 1/12",
+        "Check: 1 shaded square out of 12 is a part of the shape; the number 1 alone does not say out of how many."
+       ],
+       "role": "misconception",
+       "instance": "gen:adfname:4,3,1"
+      },
+      {
+       "title": "A fraction is parts out of the whole: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the equal squares: 4 × 3 = 12",
+        "Shaded: 1",
+        "1/12"
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:4,3,1"
+      }
+     ],
+     "guided": "gen:adfname:3,5,8",
+     "check": "gen:adfname:2,9,11:mc"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.number.fraction-models#adfname_concept",
+    "subject": "mathematics",
+    "competency": "MATH.number.fraction-models",
+    "strategy": "adfname_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:c9bbe50b21cc5b0fdfb94a710f7f7bbb45e42d613b7899577a1de598fe09b977",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.number.fraction-models#fix_shaded_to_unshaded",
+    "subject": "mathematics",
+    "competency": "MATH.number.fraction-models",
+    "strategy": "fix_shaded_to_unshaded",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "shaded-to-unshaded",
+    "revisions": [
+     {
+      "contentHash": "sha256:1e5bf52db51960991d270b3109d10f1573978c11ce0d3be4194ceddbb001e7ad",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.number.fraction-models#fix_count_only",
+    "subject": "mathematics",
+    "competency": "MATH.number.fraction-models",
+    "strategy": "fix_count_only",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "count-only",
+    "revisions": [
+     {
+      "contentHash": "sha256:e6dad409814bb1717d4512514b4002ad214fa05c50cc17dc5327a21f4e0b68c1",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "equal_parts",
+    "covers": "equal parts (authored, general)"
+   }
+  ],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "adfname_concept",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 3,
+      "of": 3,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_shaded_to_unshaded",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "shaded-to-unshaded"
+    },
+    {
+     "strategy": "fix_count_only",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "count-only"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b04.ts:567 adfname: teach idea/method, alternative pie, figure grid; bugs shaded-to-unshaded, unshaded, count-only"
+ ],
+ "uncertainties": [
+  "MATH.number.fraction-models is an authored module (one strategy equal_parts); no misconception-specific explanation exists."
+ ],
+ "validation": {
+  "items": 17,
+  "itemsOk": 17,
+  "poolAgreement": "145/145",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:adfname:2,6,7",
+    "role": "diagnostic",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "7/12",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 2 × 6 = 12",
+      "Shaded: 7",
+      "7/12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 5, so shaded = 12 − 5 = 7 of 12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "1.4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "5/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:1,7,1",
+    "role": "worked-example",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "1/7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 1 × 7 = 7",
+      "Shaded: 1",
+      "1/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 6, so shaded = 7 − 6 = 1 of 7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "1/6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "6/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:4,2,1",
+    "role": "misconception-example",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "1/8",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 4 × 2 = 8",
+      "Shaded: 1",
+      "1/8"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 7, so shaded = 8 − 7 = 1 of 8"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "1/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "0.875"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:5,2,7",
+    "role": "misconception-guided",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "7/10",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 5 × 2 = 10",
+      "Shaded: 7",
+      "7/10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 3, so shaded = 10 − 3 = 7 of 10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "7/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "0.3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:2,7,1:mc",
+    "role": "misconception-check",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size. Choose one.",
+    "answer": "1/14",
+    "options": [
+     "1",
+     "1/13",
+     "1/14",
+     "13/14"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 2 × 7 = 14",
+      "Shaded: 1",
+      "1/14"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 13, so shaded = 14 − 13 = 1 of 14"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "1/13"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "13/14"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:4,3,1",
+    "role": "misconception-example",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "1/12",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 4 × 3 = 12",
+      "Shaded: 1",
+      "1/12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 11, so shaded = 12 − 11 = 1 of 12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "1/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "11/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:3,5,8",
+    "role": "misconception-guided",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "8/15",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 3 × 5 = 15",
+      "Shaded: 8",
+      "8/15"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 7, so shaded = 15 − 7 = 8 of 15"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "8/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "7/15"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:2,9,11:mc",
+    "role": "misconception-check",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size. Choose one.",
+    "answer": "11/18",
+    "options": [
+     "11",
+     "11/18",
+     "11/7",
+     "7/18"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 2 × 9 = 18",
+      "Shaded: 11",
+      "11/18"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 7, so shaded = 18 − 7 = 11 of 18"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "11/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "7/18"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:3,2,1:mc",
+    "role": "guided-practice",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size. Choose one.",
+    "answer": "1/6",
+    "options": [
+     "1/6",
+     "1/5",
+     "5/6",
+     "1"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 3 × 2 = 6",
+      "Shaded: 1",
+      "1/6"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 5, so shaded = 6 − 5 = 1 of 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "0.2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "5/6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:1,5,2:mc",
+    "role": "guided-practice",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size. Choose one.",
+    "answer": "2/5",
+    "options": [
+     "2/5",
+     "2/3",
+     "3/5",
+     "2"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 1 × 5 = 5",
+      "Shaded: 2",
+      "2/5"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 3, so shaded = 5 − 3 = 2 of 5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "2/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "0.6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:1,8,3:mc",
+    "role": "guided-practice",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size. Choose one.",
+    "answer": "3/8",
+    "options": [
+     "5/8",
+     "3",
+     "3/5",
+     "3/8"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 1 × 8 = 8",
+      "Shaded: 3",
+      "3/8"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 5, so shaded = 8 − 5 = 3 of 8"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "0.6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "0.625"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:4,4,9",
+    "role": "recheck",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "9/16",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 4 × 4 = 16",
+      "Shaded: 9",
+      "9/16"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 7, so shaded = 16 − 7 = 9 of 16"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "9/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "7/16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:1,9,1",
+    "role": "recheck",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "1/9",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 1 × 9 = 9",
+      "Shaded: 1",
+      "1/9"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 8, so shaded = 9 − 8 = 1 of 9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "0.125"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "8/9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:2,10,11:w",
+    "role": "transfer",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "11/20",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 2 × 10 = 20",
+      "Shaded: 11",
+      "11/20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 9, so shaded = 20 − 9 = 11 of 20"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "11/9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "0.45"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:1,10,3:w",
+    "role": "transfer",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "3/10",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 1 × 10 = 10",
+      "Shaded: 3",
+      "3/10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 7, so shaded = 10 − 7 = 3 of 10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "3/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "0.7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:2,3,1",
+    "role": "delayed-check",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size.",
+    "answer": "1/6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 2 × 3 = 6",
+      "Shaded: 1",
+      "1/6"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 5, so shaded = 6 − 5 = 1 of 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "0.2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "5/6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfname:2,2,1:mc",
+    "role": "delayed-check",
+    "prompt": "What fraction of the shape in the picture is shaded? All the small squares are the same size. Choose one.",
+    "answer": "1/4",
+    "options": [
+     "1/4",
+     "1/3",
+     "1",
+     "3/4"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the equal squares: 2 × 2 = 4",
+      "Shaded: 1",
+      "1/4"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Unshaded first",
+      "ok": true,
+      "lines": [
+       "unshaded 3, so shaded = 4 − 3 = 1 of 4"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "0.75"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

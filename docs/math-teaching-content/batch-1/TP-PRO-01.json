@@ -2,7 +2,9 @@
  "schema": "teaching-package@0",
  "status": "review-candidate (not approved, not registered, not served)",
  "id": "TP-PRO-01",
- "title": "Two dice: totals are not equally likely",
+ "batch": "batch-1",
+ "pattern": null,
+ "title": "Two spinners or dice: totals are not equally likely",
  "competency": "MATH.probability.sample-space",
  "competencyName": "Enumerate simple sample spaces",
  "grades": [
@@ -28,7 +30,7 @@
  },
  "explanation": {
   "concept": [
-   "Each die gives each number equally often, so every PAIR (first, second) is equally likely: m × n pairs.",
+   "Each spinner (or die) gives each of its numbers equally often, so every PAIR (first number, second number) is equally likely: m × n pairs.",
    "The totals are not equally likely: a middle total can be made by many pairs, an end total by only one."
   ],
   "visual": {
@@ -37,50 +39,26 @@
     "",
     "1",
     "2",
-    "3",
-    "4",
-    "5"
+    "3"
    ],
    "rows": [
     [
      "1",
      "2",
      "3",
-     "4",
-     "5",
-     "6"
+     "4"
     ],
     [
      "2",
      "3",
      "4",
-     "5",
-     "6",
-     "7"
+     "5"
     ],
     [
      "3",
      "4",
      "5",
-     "6",
-     "7",
-     "8"
-    ],
-    [
-     "4",
-     "5",
-     "6",
-     "7",
-     "8",
-     "9"
-    ],
-    [
-     "5",
-     "6",
-     "7",
-     "8",
-     "9",
-     "10"
+     "6"
     ]
    ]
   },
@@ -88,19 +66,19 @@
  },
  "workedExamples": [
   {
-   "id": "gen:akdice:5,5,0,8",
-   "prompt": "Divya uses two spinners, each numbered 1 to 5. Each gives a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 8? (A fraction is fine.)",
+   "id": "gen:akdice:3,3,0,4",
+   "prompt": "Farhan uses two spinners, each numbered 1 to 3. Each gives a number from 1 to 3, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)",
    "lines": [
-    "All pairs: 5 × 5 = 25, equally likely",
-    "Pairs with total 8: 3",
-    "P = 3/25"
+    "All pairs: 3 × 3 = 9, equally likely",
+    "Pairs with total 4: 3",
+    "P = 3/9 = 1/3"
    ],
    "familyExplainSteps": [
-    "There are 5 × 5 = 25 equally likely pairs",
-    "3 pairs fit: the total of the two numbers is 8",
-    "Probability = 3 ÷ 25 = 3/25"
+    "There are 3 × 3 = 9 equally likely pairs",
+    "3 pairs fit: the total of the two numbers is 4",
+    "Probability = 3 ÷ 9 = 1/3"
    ],
-   "answer": "3/25"
+   "answer": "1/3"
   },
   {
    "id": "gen:akdice:4,5,0,3",
@@ -120,7 +98,7 @@
  ],
  "hints": [
   {
-   "for": "gen:akdice:5,5,0,8",
+   "for": "gen:akdice:3,3,0,4",
    "hints": [
     "Is each TOTAL equally likely, or each PAIR?",
     "Draw the table of all pairs.",
@@ -137,10 +115,10 @@
   }
  ],
  "alternativeExplanation": {
-  "title": "Why 7 is common with two dice",
+  "title": "Why middle totals are more common",
   "text": [
-   "Total 2 needs (1,1): one way. Total 7 can be (1,6), (2,5), (3,4), (4,3), (5,2), (6,1): six ways.",
-   "Each way is equally likely, so 7 is six times as likely as 2."
+   "The smallest total can be made in only one way: the smallest number on both spinners.",
+   "A total in the middle can be made in several ways, and each way is equally likely, so a middle total is more likely."
   ],
   "visual": null
  },
@@ -150,7 +128,7 @@
    "valid": true,
    "example": [
     "one branch per first number, then per second number; count the ticked paths",
-    "P = 3/25"
+    "P = 3/9 = 1/3"
    ]
   }
  ],
@@ -218,6 +196,8 @@
   {
    "bug": "totals-equally-likely",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "conceptual: outcomes (totals) taken as equally likely",
    "example": "gen:akdice:3,5,0,6",
@@ -228,7 +208,7 @@
      "The pairs are equally likely, not the totals: count the pairs that give each total.",
      "Not 1/7, but 1/5."
     ],
-    "counterCheck": "Counter-check with two dice: total 2 is only (1,1), total 7 has six pairs; they cannot both be 1/11.",
+    "counterCheck": "Check: total 2 can only be made as 1 + 1, but total 6 can be made in 3 ways: 1 + 5, 2 + 4, 3 + 3. The totals do not all have the same chance.",
     "solvedCorrectly": [
      "All pairs: 3 × 5 = 15, equally likely",
      "Pairs with total 6: 3",
@@ -236,34 +216,38 @@
     ]
    },
    "guided": "gen:akdice:5,5,0,7:mc",
-   "check": "gen:akdice:4,5,0,5"
+   "check": "gen:akdice:5,5,0,3"
   },
   {
    "bug": "order-ignored",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "conceptual: (1,2) and (2,1) counted once",
-   "example": "gen:akdice:3,3,0,4",
+   "example": "gen:akdice:6,6,0,7",
    "screens": {
     "whatWentWrong": [
-     "In \"Farhan uses two spinners, each numbered 1 to 3. Each gives a number from 1 to 3, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)\", one wrong answer is 2/9.",
+     "In \"Karthik uses two ordinary dice. Each gives a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 7? (A fraction is fine.)\", one wrong answer is 1/12.",
      "Pairs such as (1, 3) and (3, 1) were counted once. They are different outcomes: the first and second number are different.",
-     "(1,2) and (2,1) are different pairs: the first die and the second die are different objects.",
-     "Not 2/9, but 1/3."
+     "First 1 then 2 and first 2 then 1 are different pairs: the first and the second spinner are different objects.",
+     "Not 1/12, but 1/6."
     ],
-    "counterCheck": "Counter-check: colour one die red: red 1 & blue 2 and red 2 & blue 1 are clearly two outcomes.",
+    "counterCheck": "Check: colour the first spinner red: red 1 with blue 6, and red 6 with blue 1, are two different outcomes.",
     "solvedCorrectly": [
-     "All pairs: 3 × 3 = 9, equally likely",
-     "Pairs with total 4: 3",
-     "P = 3/9 = 1/3"
+     "All pairs: 6 × 6 = 36, equally likely",
+     "Pairs with total 7: 6",
+     "P = 6/36 = 1/6"
     ]
    },
-   "guided": "gen:akdice:5,5,0,9:mc",
-   "check": "gen:akdice:5,5,0,3"
+   "guided": "gen:akdice:3,3,0,3:mc",
+   "check": "gen:akdice:6,6,0,3"
   },
   {
    "bug": "added-sides",
    "kind": "procedural",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "procedural: sample space m + n instead of m × n",
    "example": "gen:akdice:4,5,0,2",
@@ -282,141 +266,532 @@
     ]
    },
    "guided": "gen:akdice:5,5,0,10",
-   "check": "gen:akdice:4,5,0,4:mc"
+   "check": "gen:akdice:4,6,0,10:mc"
   }
  ],
  "authoredTransfer": [],
  "practice": {
   "guided": [
    "gen:akdice:3,5,0,7:mc",
-   "gen:akdice:3,5,0,4",
-   "gen:akdice:3,5,0,5:mc"
+   "gen:akdice:3,3,0,2",
+   "gen:akdice:5,6,0,10"
   ],
   "rechecks": [
-   "gen:akdice:6,6,0,3",
-   "gen:akdice:3,5,0,3:mc"
+   "gen:akdice:4,4,0,6",
+   "gen:akdice:6,6,0,2:mc"
   ],
   "transfer": [
-   "gen:akdice:3,3,0,2:w",
-   "gen:akdice:5,6,0,10:w"
+   "gen:akdice:4,6,0,8:w",
+   "gen:akdice:3,4,0,4:w"
   ],
   "delayedChecks": [
-   "gen:akdice:5,5,0,5",
-   "gen:akdice:4,5,0,6:mc"
+   "gen:akdice:6,6,0,6",
+   "gen:akdice:4,6,0,3:mc"
   ],
   "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
  },
+ "responsePatterns": [],
+ "delayedAudit": null,
  "integration": {
-  "strategyProposals": [
-   {
-    "id": "fix_totals_equally_likely",
-    "title": "The pairs are equally likely, not the totals",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:akdice:3,5,0,6"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:akdice:3,5,0,6"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:akdice:5,5,0,7:mc"
-     }
+  "spec": {
+   "skill": "Find the probability of a total with two dice/spinners by listing all m × n equally likely pairs.",
+   "competency": "MATH.probability.sample-space",
+   "generator": {
+    "family": "akdice",
+    "restriction": "akdice with params[2] = 0 (\"the total is exactly k\"); totals made by at least two pairs for diagnostics, rechecks and delayed checks."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "added"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "akdice_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_totals_equally_likely",
+     "when": "verified-misconception 'totals-equally-likely' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_order_ignored",
+     "when": "verified-misconception 'order-ignored' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_added_sides",
+     "when": "verified-misconception 'added-sides' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Tree diagram",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "akdice",
+    "partition": "check",
+    "restriction": "akdice with params[2] = 0 (\"the total is exactly k\"); totals made by at least two pairs for diagnostics, rechecks and delayed checks.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:akdice:4,4,0,6",
+     "gen:akdice:6,6,0,2:mc"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.probability.sample-space",
+    "family": "akdice",
+    "partition": "retention",
+    "cases": [
+     "same-size spinners, a total made by several pairs",
+     "different-size spinners, a total made by several pairs"
     ],
-    "guided": "gen:akdice:5,5,0,7:mc",
-    "check": "gen:akdice:4,5,0,5"
+    "candidates": [
+     "gen:akdice:6,6,0,6",
+     "gen:akdice:4,6,0,3:mc"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "akdice_concept",
+     "title": "Two spinners or dice: totals are not equally likely",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "Each spinner (or die) gives each of its numbers equally often, so every PAIR (first number, second number) is equally likely: m × n pairs.",
+        "The totals are not equally likely: a middle total can be made by many pairs, an end total by only one."
+       ],
+       "math": [
+        "All pairs: 3 × 3 = 9, equally likely",
+        "Pairs with total 4: 3",
+        "P = 3/9 = 1/3"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "1",
+         "2",
+         "3"
+        ],
+        "rows": [
+         [
+          "1",
+          "2",
+          "3",
+          "4"
+         ],
+         [
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         [
+          "3",
+          "4",
+          "5",
+          "6"
+         ]
+        ]
+       },
+       "role": "concept",
+       "instance": "gen:akdice:3,3,0,4"
+      },
+      {
+       "title": "Another example",
+       "text": [
+        "The same idea on a different question."
+       ],
+       "math": [
+        "All pairs: 4 × 5 = 20, equally likely",
+        "Pairs with total 3: 2",
+        "P = 2/20 = 1/10"
+       ],
+       "role": "strategy",
+       "instance": "gen:akdice:4,5,0,3"
+      },
+      {
+       "title": "Why middle totals are more common",
+       "text": [
+        "The smallest total can be made in only one way: the smallest number on both spinners.",
+        "A total in the middle can be made in several ways, and each way is equally likely, so a middle total is more likely."
+       ],
+       "role": "strategy",
+       "instance": "gen:akdice:3,3,0,4"
+      },
+      {
+       "title": "Another way: Tree diagram",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "one branch per first number, then per second number; count the ticked paths",
+        "P = 3/9 = 1/3"
+       ],
+       "role": "strategy",
+       "instance": "gen:akdice:3,3,0,4"
+      }
+     ],
+     "guided": "gen:akdice:3,5,0,7:mc",
+     "check": "gen:akdice:4,4,0,6"
+    }
    },
    {
-    "id": "fix_order_ignored",
-    "title": "(1,2) and (2,1) are different pairs",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:akdice:3,3,0,4"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:akdice:3,3,0,4"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:akdice:5,5,0,9:mc"
-     }
-    ],
-    "guided": "gen:akdice:5,5,0,9:mc",
-    "check": "gen:akdice:5,5,0,3"
+    "purpose": "misconception-specific: totals-equally-likely",
+    "strategy": {
+     "id": "fix_totals_equally_likely",
+     "title": "Pairs are equally likely, totals are not",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Pairs are equally likely, totals are not: what went wrong",
+       "text": [
+        "The 7 possible totals were taken as equally likely. They are not: list all 15 pairs and count the ones that fit.",
+        "The pairs are equally likely, not the totals: count the pairs that give each total."
+       ],
+       "math": [
+        "Not 1/7, but 1/5",
+        "Check: total 2 can only be made as 1 + 1, but total 6 can be made in 3 ways: 1 + 5, 2 + 4, 3 + 3. The totals do not all have the same chance."
+       ],
+       "role": "misconception",
+       "instance": "gen:akdice:3,5,0,6"
+      },
+      {
+       "title": "Pairs are equally likely, totals are not: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All pairs: 3 × 5 = 15, equally likely",
+        "Pairs with total 6: 3",
+        "P = 3/15 = 1/5"
+       ],
+       "role": "strategy",
+       "instance": "gen:akdice:3,5,0,6"
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,7:mc",
+     "check": "gen:akdice:5,5,0,3"
+    }
    },
    {
-    "id": "fix_added_sides",
-    "title": "Each first number goes with EACH second number",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:akdice:4,5,0,2"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:akdice:4,5,0,2"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:akdice:5,5,0,10"
-     }
-    ],
-    "guided": "gen:akdice:5,5,0,10",
-    "check": "gen:akdice:4,5,0,4:mc"
+    "purpose": "misconception-specific: order-ignored",
+    "strategy": {
+     "id": "fix_order_ignored",
+     "title": "The order of the two spinners matters",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The order of the two spinners matters: what went wrong",
+       "text": [
+        "Pairs such as (1, 3) and (3, 1) were counted once. They are different outcomes: the first and second number are different.",
+        "First 1 then 2 and first 2 then 1 are different pairs: the first and the second spinner are different objects."
+       ],
+       "math": [
+        "Not 1/12, but 1/6",
+        "Check: colour the first spinner red: red 1 with blue 6, and red 6 with blue 1, are two different outcomes."
+       ],
+       "role": "misconception",
+       "instance": "gen:akdice:6,6,0,7"
+      },
+      {
+       "title": "The order of the two spinners matters: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All pairs: 6 × 6 = 36, equally likely",
+        "Pairs with total 7: 6",
+        "P = 6/36 = 1/6"
+       ],
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,7"
+      }
+     ],
+     "guided": "gen:akdice:3,3,0,3:mc",
+     "check": "gen:akdice:6,6,0,3"
+    }
+   },
+   {
+    "purpose": "misconception-specific: added-sides",
+    "strategy": {
+     "id": "fix_added_sides",
+     "title": "m × n pairs, not m + n",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "m × n pairs, not m + n: what went wrong",
+       "text": [
+        "The sample space was taken as 4 + 5 = 9 outcomes. Each of the 4 first numbers goes with each of the 5 second numbers: 4 × 5 = 20.",
+        "Each first number goes with EACH second number: m × n pairs, not m + n."
+       ],
+       "math": [
+        "Not 1/9, but 1/20",
+        "Counter-check: two spinners numbered 1 to 3 give the pairs 11, 12, 13, 21, 22, 23, 31, 32, 33: 9 = 3 × 3 pairs, not 3 + 3 = 6."
+       ],
+       "role": "misconception",
+       "instance": "gen:akdice:4,5,0,2"
+      },
+      {
+       "title": "m × n pairs, not m + n: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All pairs: 4 × 5 = 20, equally likely",
+        "Pairs with total 2: 1",
+        "P = 1/20"
+       ],
+       "role": "strategy",
+       "instance": "gen:akdice:4,5,0,2"
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,10",
+     "check": "gen:akdice:4,6,0,10:mc"
+    }
    }
   ],
-  "registryProposal": [
+  "registryRecords": [
    {
+    "id": "MATH.probability.sample-space#akdice_concept",
+    "subject": "mathematics",
+    "competency": "MATH.probability.sample-space",
+    "strategy": "akdice_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:99a69249f3be13a36ab10d340147b9c4ff82493965825277508c70aa50c6177f",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.probability.sample-space#fix_totals_equally_likely",
+    "subject": "mathematics",
     "competency": "MATH.probability.sample-space",
     "strategy": "fix_totals_equally_likely",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "totals-equally-likely",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:88b8bc838fa6989d577de24709be5a38a7e765cd9e7e12ce847df97cf873954f",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    },
    {
+    "id": "MATH.probability.sample-space#fix_order_ignored",
+    "subject": "mathematics",
     "competency": "MATH.probability.sample-space",
     "strategy": "fix_order_ignored",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "order-ignored",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:c2ec6bfe5c08a53649b73045845ac33231e04b67df145b2408ffb9ad585aa897",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    },
    {
+    "id": "MATH.probability.sample-space#fix_added_sides",
+    "subject": "mathematics",
     "competency": "MATH.probability.sample-space",
     "strategy": "fix_added_sides",
+    "intervention": "procedural",
     "misconceptionSpecific": true,
     "addresses": "added-sides",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:ae71e5963d9177078da60ca5f9ec49a084b00df91a1c649f8a54e6d5cea06ac8",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    }
   ],
-  "generalStrategyProposal": {
-   "id": "akdice_concept",
-   "screens": [
-    "concept + visual",
-    "worked example(s)",
-    "alternative explanation"
+  "reusedExisting": [],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "akdice_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 4,
+      "of": 4,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_totals_equally_likely",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "totals-equally-likely"
+    },
+    {
+     "strategy": "fix_order_ignored",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "order-ignored"
+    },
+    {
+     "strategy": "fix_added_sides",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "added-sides"
+    }
    ],
-   "note": "for modules where this family has only a chapter screen"
+   "registryProblems": []
   },
-  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
  },
  "sources": [
   "packages/learning/src/fam/b11.ts:803 akdice: teach idea/method, alternative tree; bugs totals-equally-likely, added-sides, order-ignored, more-than, equal-included",
@@ -424,7 +799,8 @@
  ],
  "uncertainties": [
   "Only 'total is exactly k' (mode 0) is taught here; 'k or more' (mode 1) and 'second bigger than first' (mode 2) are not.",
-  "The family models order-ignored only for equal-size spinners (fam/b11.ts akdice bugs); that is a modelling choice, not a mathematical fact."
+  "The family models order-ignored only for equal-size spinners (fam/b11.ts akdice bugs); that is a modelling choice, not a mathematical fact.",
+  "rechecks: no usable check item for case \"different-size spinners, a total made by several pairs\" (another case's item stands in)"
  ],
  "validation": {
   "items": 22,
@@ -547,10 +923,10 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:5,5,0,8",
+    "id": "gen:akdice:3,3,0,4",
     "role": "worked-example",
-    "prompt": "Divya uses two spinners, each numbered 1 to 5. Each gives a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 8? (A fraction is fine.)",
-    "answer": "3/25",
+    "prompt": "Farhan uses two spinners, each numbered 1 to 3. Each gives a number from 1 to 3, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)",
+    "answer": "1/3",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -559,9 +935,9 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "All pairs: 5 × 5 = 25, equally likely",
-      "Pairs with total 8: 3",
-      "P = 3/25"
+      "All pairs: 3 × 3 = 9, equally likely",
+      "Pairs with total 4: 3",
+      "P = 3/9 = 1/3"
      ]
     },
     "alternatives": [
@@ -570,7 +946,7 @@
       "ok": true,
       "lines": [
        "one branch per first number, then per second number; count the ticked paths",
-       "P = 3/25"
+       "P = 3/9 = 1/3"
       ]
      }
     ],
@@ -579,7 +955,7 @@
       "id": "totals-equally-likely",
       "kind": "conceptual",
       "predicts": [
-       "1/9"
+       "0.2"
       ],
       "graded": [
        "incorrect"
@@ -589,7 +965,7 @@
       "id": "added-sides",
       "kind": "procedural",
       "predicts": [
-       "0.3"
+       "0.5"
       ],
       "graded": [
        "incorrect"
@@ -599,7 +975,7 @@
       "id": "order-ignored",
       "kind": "conceptual",
       "predicts": [
-       "0.08"
+       "2/9"
       ],
       "graded": [
        "incorrect"
@@ -782,189 +1158,6 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:4,5,0,5",
-    "role": "misconception-check",
-    "prompt": "Meena uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 5? (A fraction is fine.)",
-    "answer": "1/5",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "All pairs: 4 × 5 = 20, equally likely",
-      "Pairs with total 5: 4",
-      "P = 4/20 = 1/5"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Tree diagram",
-      "ok": true,
-      "lines": [
-       "one branch per first number, then per second number; count the ticked paths",
-       "P = 4/20 = 1/5"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "totals-equally-likely",
-      "kind": "conceptual",
-      "predicts": [
-       "0.125"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "added-sides",
-      "kind": "procedural",
-      "predicts": [
-       "4/9"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akdice:3,3,0,4",
-    "role": "misconception-example",
-    "prompt": "Farhan uses two spinners, each numbered 1 to 3. Each gives a number from 1 to 3, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)",
-    "answer": "1/3",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "All pairs: 3 × 3 = 9, equally likely",
-      "Pairs with total 4: 3",
-      "P = 3/9 = 1/3"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Tree diagram",
-      "ok": true,
-      "lines": [
-       "one branch per first number, then per second number; count the ticked paths",
-       "P = 3/9 = 1/3"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "totals-equally-likely",
-      "kind": "conceptual",
-      "predicts": [
-       "0.2"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "added-sides",
-      "kind": "procedural",
-      "predicts": [
-       "0.5"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "order-ignored",
-      "kind": "conceptual",
-      "predicts": [
-       "2/9"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akdice:5,5,0,9:mc",
-    "role": "misconception-guided",
-    "prompt": "Karthik uses two spinners, each numbered 1 to 5. Each gives a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 9? Choose one.",
-    "answer": "2/25",
-    "options": [
-     "1/5",
-     "1/9",
-     "2/25",
-     "1/25"
-    ],
-    "correctOption": "C",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "All pairs: 5 × 5 = 25, equally likely",
-      "Pairs with total 9: 2",
-      "P = 2/25"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Tree diagram",
-      "ok": true,
-      "lines": [
-       "one branch per first number, then per second number; count the ticked paths",
-       "P = 2/25"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "totals-equally-likely",
-      "kind": "conceptual",
-      "predicts": [
-       "1/9"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "added-sides",
-      "kind": "procedural",
-      "predicts": [
-       "0.2"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "order-ignored",
-      "kind": "conceptual",
-      "predicts": [
-       "0.04"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
     "id": "gen:akdice:5,5,0,3",
     "role": "misconception-check",
     "prompt": "Ravi uses two spinners, each numbered 1 to 5. Each gives a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
@@ -1018,6 +1211,199 @@
       "kind": "conceptual",
       "predicts": [
        "0.04"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akdice:6,6,0,7",
+    "role": "misconception-example",
+    "prompt": "Karthik uses two ordinary dice. Each gives a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 7? (A fraction is fine.)",
+    "answer": "1/6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All pairs: 6 × 6 = 36, equally likely",
+      "Pairs with total 7: 6",
+      "P = 6/36 = 1/6"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Tree diagram",
+      "ok": true,
+      "lines": [
+       "one branch per first number, then per second number; count the ticked paths",
+       "P = 6/36 = 1/6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "predicts": [
+       "0.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "order-ignored",
+      "kind": "conceptual",
+      "predicts": [
+       "1/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akdice:3,3,0,3:mc",
+    "role": "misconception-guided",
+    "prompt": "Selvi uses two spinners, each numbered 1 to 3. Each gives a number from 1 to 3, every number equally likely. What is the probability that the total of the two numbers is 3? Choose one.",
+    "answer": "2/9",
+    "options": [
+     "2/9",
+     "1/5",
+     "1/3",
+     "1/9"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All pairs: 3 × 3 = 9, equally likely",
+      "Pairs with total 3: 2",
+      "P = 2/9"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Tree diagram",
+      "ok": true,
+      "lines": [
+       "one branch per first number, then per second number; count the ticked paths",
+       "P = 2/9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "0.2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "order-ignored",
+      "kind": "conceptual",
+      "predicts": [
+       "1/9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akdice:6,6,0,3",
+    "role": "misconception-check",
+    "prompt": "Arjun uses two ordinary dice. Each gives a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
+    "answer": "1/18",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All pairs: 6 × 6 = 36, equally likely",
+      "Pairs with total 3: 2",
+      "P = 2/36 = 1/18"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Tree diagram",
+      "ok": true,
+      "lines": [
+       "one branch per first number, then per second number; count the ticked paths",
+       "P = 2/36 = 1/18"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "predicts": [
+       "1/6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "order-ignored",
+      "kind": "conceptual",
+      "predicts": [
+       "1/36"
       ],
       "graded": [
        "incorrect"
@@ -1131,17 +1517,17 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:4,5,0,4:mc",
+    "id": "gen:akdice:4,6,0,10:mc",
     "role": "misconception-check",
-    "prompt": "Ravi uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 4? Choose one.",
-    "answer": "3/20",
+    "prompt": "Priya uses a spinner numbered 1 to 4 and an ordinary die. The first gives a number from 1 to 4 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 10? Choose one.",
+    "answer": "1/24",
     "options": [
-     "3/20",
-     "1/5",
-     "1/3",
-     "1/8"
+     "1/12",
+     "1/10",
+     "1/9",
+     "1/24"
     ],
-    "correctOption": "A",
+    "correctOption": "D",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1150,9 +1536,9 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "All pairs: 4 × 5 = 20, equally likely",
-      "Pairs with total 4: 3",
-      "P = 3/20"
+      "All pairs: 4 × 6 = 24, equally likely",
+      "Pairs with total 10: 1",
+      "P = 1/24"
      ]
     },
     "alternatives": [
@@ -1161,7 +1547,7 @@
       "ok": true,
       "lines": [
        "one branch per first number, then per second number; count the ticked paths",
-       "P = 3/20"
+       "P = 1/24"
       ]
      }
     ],
@@ -1170,7 +1556,7 @@
       "id": "totals-equally-likely",
       "kind": "conceptual",
       "predicts": [
-       "0.125"
+       "1/9"
       ],
       "graded": [
        "incorrect"
@@ -1180,7 +1566,7 @@
       "id": "added-sides",
       "kind": "procedural",
       "predicts": [
-       "1/3"
+       "0.1"
       ],
       "graded": [
        "incorrect"
@@ -1249,240 +1635,8 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:3,5,0,4",
+    "id": "gen:akdice:3,3,0,2",
     "role": "guided-practice",
-    "prompt": "Anu uses a spinner numbered 1 to 3 and a spinner numbered 1 to 5. The first gives a number from 1 to 3 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)",
-    "answer": "1/5",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "All pairs: 3 × 5 = 15, equally likely",
-      "Pairs with total 4: 3",
-      "P = 3/15 = 1/5"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Tree diagram",
-      "ok": true,
-      "lines": [
-       "one branch per first number, then per second number; count the ticked paths",
-       "P = 3/15 = 1/5"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "totals-equally-likely",
-      "kind": "conceptual",
-      "predicts": [
-       "1/7"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "added-sides",
-      "kind": "procedural",
-      "predicts": [
-       "0.375"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akdice:3,5,0,5:mc",
-    "role": "guided-practice",
-    "prompt": "Ravi uses a spinner numbered 1 to 3 and a spinner numbered 1 to 5. The first gives a number from 1 to 3 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 5? Choose one.",
-    "answer": "1/5",
-    "options": [
-     "3/8",
-     "4/15",
-     "1/5",
-     "1/7"
-    ],
-    "correctOption": "C",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "All pairs: 3 × 5 = 15, equally likely",
-      "Pairs with total 5: 3",
-      "P = 3/15 = 1/5"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Tree diagram",
-      "ok": true,
-      "lines": [
-       "one branch per first number, then per second number; count the ticked paths",
-       "P = 3/15 = 1/5"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "totals-equally-likely",
-      "kind": "conceptual",
-      "predicts": [
-       "1/7"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "added-sides",
-      "kind": "procedural",
-      "predicts": [
-       "0.375"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akdice:6,6,0,3",
-    "role": "recheck",
-    "prompt": "Arjun uses two ordinary dice. Each gives a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
-    "answer": "1/18",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "All pairs: 6 × 6 = 36, equally likely",
-      "Pairs with total 3: 2",
-      "P = 2/36 = 1/18"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Tree diagram",
-      "ok": true,
-      "lines": [
-       "one branch per first number, then per second number; count the ticked paths",
-       "P = 2/36 = 1/18"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "totals-equally-likely",
-      "kind": "conceptual",
-      "predicts": [
-       "1/11"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "added-sides",
-      "kind": "procedural",
-      "predicts": [
-       "1/6"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "order-ignored",
-      "kind": "conceptual",
-      "predicts": [
-       "1/36"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akdice:3,5,0,3:mc",
-    "role": "recheck",
-    "prompt": "Lakshmi uses a spinner numbered 1 to 3 and a spinner numbered 1 to 5. The first gives a number from 1 to 3 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 3? Choose one.",
-    "answer": "2/15",
-    "options": [
-     "2/15",
-     "1/7",
-     "1/5",
-     "1/4"
-    ],
-    "correctOption": "A",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "All pairs: 3 × 5 = 15, equally likely",
-      "Pairs with total 3: 2",
-      "P = 2/15"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Tree diagram",
-      "ok": true,
-      "lines": [
-       "one branch per first number, then per second number; count the ticked paths",
-       "P = 2/15"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "totals-equally-likely",
-      "kind": "conceptual",
-      "predicts": [
-       "1/7"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "added-sides",
-      "kind": "procedural",
-      "predicts": [
-       "0.25"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akdice:3,3,0,2:w",
-    "role": "transfer",
     "prompt": "Priya uses two spinners, each numbered 1 to 3. Each gives a number from 1 to 3, every number equally likely. What is the probability that the total of the two numbers is 2? (A fraction is fine.)",
     "answer": "1/9",
     "grader": {
@@ -1533,8 +1687,8 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:5,6,0,10:w",
-    "role": "transfer",
+    "id": "gen:akdice:5,6,0,10",
+    "role": "guided-practice",
     "prompt": "Selvi uses a spinner numbered 1 to 5 and an ordinary die. The first gives a number from 1 to 5 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 10? (A fraction is fine.)",
     "answer": "1/15",
     "grader": {
@@ -1585,10 +1739,10 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:5,5,0,5",
-    "role": "delayed-check",
-    "prompt": "Arjun uses two spinners, each numbered 1 to 5. Each gives a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 5? (A fraction is fine.)",
-    "answer": "4/25",
+    "id": "gen:akdice:4,4,0,6",
+    "role": "recheck",
+    "prompt": "Meena uses two spinners, each numbered 1 to 4. Each gives a number from 1 to 4, every number equally likely. What is the probability that the total of the two numbers is 6? (A fraction is fine.)",
+    "answer": "3/16",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1597,9 +1751,9 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "All pairs: 5 × 5 = 25, equally likely",
-      "Pairs with total 5: 4",
-      "P = 4/25"
+      "All pairs: 4 × 4 = 16, equally likely",
+      "Pairs with total 6: 3",
+      "P = 3/16"
      ]
     },
     "alternatives": [
@@ -1608,7 +1762,128 @@
       "ok": true,
       "lines": [
        "one branch per first number, then per second number; count the ticked paths",
-       "P = 4/25"
+       "P = 3/16"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "predicts": [
+       "0.375"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "order-ignored",
+      "kind": "conceptual",
+      "predicts": [
+       "0.125"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akdice:6,6,0,2:mc",
+    "role": "recheck",
+    "prompt": "Meena uses two ordinary dice. Each gives a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 2? Choose one.",
+    "answer": "1/36",
+    "options": [
+     "1/18",
+     "1/11",
+     "1/12",
+     "1/36"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All pairs: 6 × 6 = 36, equally likely",
+      "Pairs with total 2: 1",
+      "P = 1/36"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Tree diagram",
+      "ok": true,
+      "lines": [
+       "one branch per first number, then per second number; count the ticked paths",
+       "P = 1/36"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "predicts": [
+       "1/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akdice:4,6,0,8:w",
+    "role": "transfer",
+    "prompt": "Divya uses a spinner numbered 1 to 4 and an ordinary die. The first gives a number from 1 to 4 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 8? (A fraction is fine.)",
+    "answer": "1/8",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All pairs: 4 × 6 = 24, equally likely",
+      "Pairs with total 8: 3",
+      "P = 3/24 = 1/8"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Tree diagram",
+      "ok": true,
+      "lines": [
+       "one branch per first number, then per second number; count the ticked paths",
+       "P = 3/24 = 1/8"
       ]
      }
     ],
@@ -1627,17 +1902,7 @@
       "id": "added-sides",
       "kind": "procedural",
       "predicts": [
-       "0.4"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "order-ignored",
-      "kind": "conceptual",
-      "predicts": [
-       "0.08"
+       "0.3"
       ],
       "graded": [
        "incorrect"
@@ -1647,17 +1912,10 @@
     "ok": true
    },
    {
-    "id": "gen:akdice:4,5,0,6:mc",
-    "role": "delayed-check",
-    "prompt": "Arjun uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 6? Choose one.",
-    "answer": "1/5",
-    "options": [
-     "1/5",
-     "1/4",
-     "1/8",
-     "4/9"
-    ],
-    "correctOption": "A",
+    "id": "gen:akdice:3,4,0,4:w",
+    "role": "transfer",
+    "prompt": "Lakshmi uses a spinner numbered 1 to 3 and a spinner numbered 1 to 4. The first gives a number from 1 to 3 and the second a number from 1 to 4, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)",
+    "answer": "1/4",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1666,9 +1924,9 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "All pairs: 4 × 5 = 20, equally likely",
-      "Pairs with total 6: 4",
-      "P = 4/20 = 1/5"
+      "All pairs: 3 × 4 = 12, equally likely",
+      "Pairs with total 4: 3",
+      "P = 3/12 = 1/4"
      ]
     },
     "alternatives": [
@@ -1677,7 +1935,7 @@
       "ok": true,
       "lines": [
        "one branch per first number, then per second number; count the ticked paths",
-       "P = 4/20 = 1/5"
+       "P = 3/12 = 1/4"
       ]
      }
     ],
@@ -1686,7 +1944,7 @@
       "id": "totals-equally-likely",
       "kind": "conceptual",
       "predicts": [
-       "0.125"
+       "1/6"
       ],
       "graded": [
        "incorrect"
@@ -1696,7 +1954,128 @@
       "id": "added-sides",
       "kind": "procedural",
       "predicts": [
-       "4/9"
+       "3/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akdice:6,6,0,6",
+    "role": "delayed-check",
+    "prompt": "Divya uses two ordinary dice. Each gives a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 6? (A fraction is fine.)",
+    "answer": "5/36",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All pairs: 6 × 6 = 36, equally likely",
+      "Pairs with total 6: 5",
+      "P = 5/36"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Tree diagram",
+      "ok": true,
+      "lines": [
+       "one branch per first number, then per second number; count the ticked paths",
+       "P = 5/36"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "predicts": [
+       "5/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "order-ignored",
+      "kind": "conceptual",
+      "predicts": [
+       "1/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akdice:4,6,0,3:mc",
+    "role": "delayed-check",
+    "prompt": "Ravi uses a spinner numbered 1 to 4 and an ordinary die. The first gives a number from 1 to 4 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 3? Choose one.",
+    "answer": "1/12",
+    "options": [
+     "1/5",
+     "1/9",
+     "1/8",
+     "1/12"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All pairs: 4 × 6 = 24, equally likely",
+      "Pairs with total 3: 2",
+      "P = 2/24 = 1/12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Tree diagram",
+      "ok": true,
+      "lines": [
+       "one branch per first number, then per second number; count the ticked paths",
+       "P = 2/24 = 1/12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "predicts": [
+       "0.2"
       ],
       "graded": [
        "incorrect"

@@ -48,7 +48,7 @@ For `gen:ahid:1,3,8,1`:
 2. Multiply each term in the first bracket by each term in the second: four products.
 3. Two of the four products are the same; add them.
 
-## Alternative explanation: Multiply it out (the family's multiply_out)
+## Alternative explanation: Multiply it out
 
 Write (px + q)² as (px + q)(px + q) and multiply each term by each term.
 The two middle products come out equal, so the middle term is doubled.
@@ -113,90 +113,91 @@ Example `gen:ahid:0,5,4,1`; guided `gen:ahid:1,3,4,1:mc`; fresh check `gen:ahid:
 - Transfer (everyday form): `gen:ahid:0,3,2,1:w`, `gen:ahid:0,5,6,1:w`
 - Delayed checks: `gen:ahid:1,2,3,1`, `gen:ahid:1,2,6,1`
 
-## Integration mapping (proposal for Codex; nothing written)
+## Integration specification (for the shared teaching selector; nothing written)
 
-```json
-{
- "strategyProposals": [
-  {
-   "id": "fix_middle_not_doubled",
-   "title": "There are two middle products, a×b and b×a; together they ma",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:ahid:0,5,7,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:ahid:0,5,7,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:ahid:0,2,5,1:mc"
-    }
-   ],
-   "guided": "gen:ahid:0,2,5,1:mc",
-   "check": "gen:ahid:1,4,5,1"
-  },
-  {
-   "id": "fix_middle_sign",
-   "title": "Square of a sum",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:ahid:0,5,4,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:ahid:0,5,4,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:ahid:1,3,4,1:mc"
-    }
-   ],
-   "guided": "gen:ahid:1,3,4,1:mc",
-   "check": "gen:ahid:0,4,6,1"
-  }
- ],
- "registryProposal": [
-  {
-   "competency": "MATH.algebra.identities",
-   "strategy": "fix_middle_not_doubled",
-   "misconceptionSpecific": true,
-   "addresses": "middle-not-doubled",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.algebra.identities",
-   "strategy": "fix_middle_sign",
-   "misconceptionSpecific": true,
-   "addresses": "middle-sign",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  }
- ],
- "generalStrategyProposal": {
-  "id": "ahid_concept",
-  "screens": [
-   "concept + visual",
-   "worked example(s)",
-   "alternative explanation"
-  ],
-  "note": "for modules where this family has only a chapter screen"
- },
- "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
-}
-```
+- **Skill:** Expand (px ± q)² with the identity; in particular the middle coefficient ±2pq.
+- **Generator:** `ahid` — ahid with params[0] ∈ {0, 1} ((px + q)², (px − q)²) and params[3] = 1 (the box is the x coefficient); examples need p ≥ 2, p ≠ q, q ≠ 2p, p ≠ 2q.
+- **Trigger** `ahid_concept`: general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page
+- **Trigger** `fix_middle_not_doubled`: verified-misconception 'middle-not-doubled' (two matching answers, misconception-evidence@1)
+- **Trigger** `fix_middle_sign`: verified-misconception 'middle-sign' (two matching answers, misconception-evidence@1)
+- **Allowed methods:** the oracle's method (worked lines); Multiply it out: four products
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:ahid:0,3,9,1:mc`, `gen:ahid:1,5,1,1:mc`
+- **Retention target:** MATH.algebra.identities / `ahid`, cases: (px + q)², middle; (px − q)², middle. Candidates: `gen:ahid:1,2,3,1`, `gen:ahid:1,2,6,1`
+- **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
+- **Method evidence:** ahid has no working contract; an expansion written as working is not examined (answer-level only)
+- **Ungradable / text-only:** none
+- **Reused existing explanations:** none
+
+Platform checks of the proposed objects (in memory):
+
+| Strategy | teaching contract (as integrated today) | contract with this family as the lesson scope | eligible without evidence | eligible with the misconception established | addresses (read by platform) |
+|---|---|---|---|---|---|
+| `ahid_concept` | **not checked**: outside the module's teaching scope (ineligible today) | 4/4 sections checked, no violations | yes | yes | — |
+| `fix_middle_not_doubled` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | middle-not-doubled |
+| `fix_middle_sign` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | middle-sign |
+
+Registry validation problems for the new records: none.
+
+The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in the package JSON (`integration.strategies`, `integration.registryRecords`).
+
+## Delayed-check audit (cross term)
+
+| Retention item | Form | Asks | Tests the cross term | not-doubled distinct | copied-number risk |
+|---|---|---|---|---|---|
+| `gen:ahid:0,2,5,2` | (px + q)² | constant | no | no | no |
+| `gen:ahid:1,4,5,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:0,4,8,1` | (px + q)² | x coefficient (cross term) | yes | yes | yes |
+| `gen:ahid:1,2,8,0:mc` | (px − q)² | x² coefficient | no | no | no |
+| `gen:ahid:0,3,3,0` | (px + q)² | x² coefficient | no | no | no |
+| `gen:ahid:1,3,5,1:mc` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:2,4,1,0` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:2,2,1,0:mc` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:1,1,7,1` | (px − q)² | x coefficient (cross term) | yes | yes | yes |
+| `gen:ahid:2,3,7,0:mc` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:1,4,1,0` | (px − q)² | x² coefficient | no | no | no |
+| `gen:ahid:2,2,4,2:mc` | (px + q)(px − q) | constant | no | no | no |
+| `gen:ahid:2,5,1,0` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:2,3,4,0:mc` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:0,4,3,2` | (px + q)² | constant | no | no | no |
+| `gen:ahid:1,5,6,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:1,5,6,1` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:1,2,5,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:1,2,5,1` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:2,4,3,0:mc` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:1,4,9,1` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:0,2,1,1:mc` | (px + q)² | x coefficient (cross term) | yes | yes | yes |
+| `gen:ahid:0,5,5,0` | (px + q)² | x² coefficient | no | no | no |
+| `gen:ahid:0,2,2,1:mc` | (px + q)² | x coefficient (cross term) | yes | yes | yes |
+| `gen:ahid:1,2,7,2` | (px − q)² | constant | no | no | no |
+| `gen:ahid:1,1,3,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:0,4,1,0` | (px + q)² | x² coefficient | no | no | no |
+| `gen:ahid:0,2,9,0:mc` | (px + q)² | x² coefficient | no | no | no |
+| `gen:ahid:1,1,9,1` | (px − q)² | x coefficient (cross term) | yes | yes | yes |
+| `gen:ahid:1,1,9,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:1,3,3,0` | (px − q)² | x² coefficient | no | no | no |
+| `gen:ahid:1,3,2,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:2,4,6,0` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:1,4,3,0:mc` | (px − q)² | x² coefficient | no | no | no |
+| `gen:ahid:1,4,2,2` | (px − q)² | constant | no | no | no |
+| `gen:ahid:2,2,7,0:mc` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:2,2,9,2` | (px + q)(px − q) | constant | no | no | no |
+| `gen:ahid:1,3,6,0:mc` | (px − q)² | x² coefficient | no | no | no |
+| `gen:ahid:0,4,4,0` | (px + q)² | x² coefficient | no | no | no |
+| `gen:ahid:1,1,4,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:1,2,3,1` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:2,4,9,0:mc` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:0,3,7,0` | (px + q)² | x² coefficient | no | no | no |
+| `gen:ahid:1,3,9,1:mc` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:2,2,5,0` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:2,1,9,2:mc` | (px + q)(px − q) | constant | no | no | no |
+| `gen:ahid:1,5,7,0` | (px − q)² | x² coefficient | no | no | no |
+| `gen:ahid:0,5,9,2:mc` | (px + q)² | constant | no | no | no |
+| `gen:ahid:2,4,4,0` | (px + q)(px − q) | x² coefficient | no | no | no |
+| `gen:ahid:1,4,6,1:mc` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:1,5,5,1` | (px − q)² | x coefficient (cross term) | yes | yes | yes |
+| `gen:ahid:1,5,5,2:mc` | (px − q)² | constant | no | no | no |
+| `gen:ahid:1,2,6,1` | (px − q)² | x coefficient (cross term) | yes | yes | no |
+| `gen:ahid:1,2,6,2:mc` | (px − q)² | constant | no | no | no |
 
 ## Sources
 
@@ -210,5 +211,6 @@ Example `gen:ahid:0,5,4,1`; guided `gen:ahid:1,3,4,1:mc`; fresh check `gen:ahid:
 - CONTENT DEFECT (existing family step text, fam/b08.ts:2232 ahid explain): for every (px − q)² item it prints e.g. '2ab = 2 × 3x × 8 = -48x' (b shown as +8 while the product is negative) and '1x²' when p = 1. The package does NOT quote the family's step text for this family. Not changed here.
 - diagnostic case "(px + q)², middle": the family's diagnostic partition has no usable item (only ambiguous ones); candidate gen:ahid:0,4,9,1 is taken from the CHECK partition and must be re-partitioned or replaced at integration
 - delayed checks: no usable retention item for case "(px + q)², middle" (another case's item stands in)
+- binomial delayed checks: 14 of 54 retention items ask the cross term; 3 of them are (px + q)² and 0 of those avoid a copied-number reading. The positive-square delayed check is MISSING: the retention partition has no unambiguous (px + q)² cross-term item, so the delayed check of the title skill is not covered (generator partition change: Codex).
 
 ## Validation: 19/19 items pass; whole-pool oracle + alternatives agreement 90/90

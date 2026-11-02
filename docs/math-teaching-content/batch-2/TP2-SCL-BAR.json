@@ -1,0 +1,1372 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-SCL-BAR",
+ "batch": "batch-2",
+ "pattern": "PAT-SCALE",
+ "title": "Scaled bar charts: read the scale, do not count lines",
+ "competency": "MATH.statistics.scaled-bars",
+ "competencyName": "Interpret scaled bar charts",
+ "grades": [
+  4,
+  4
+ ],
+ "strand": "statistics",
+ "family": "afbar",
+ "familyTitle": "Reading a bar chart with a scale",
+ "skill": "Read values from a bar chart whose scale steps by more than 1, then compare or add them.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.statistics.bar-charts",
+    "type": "mandatory"
+   }
+  ],
+  "knowledge": [
+   "skip counting in 2s, 5s, 10s",
+   "difference and total"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "On a scaled bar chart one line on the side does not always stand for 1: the numbers on the scale say how much each line stands for.",
+   "Read the top of each bar against the scale, then add or subtract as the question asks."
+  ],
+  "visual": {
+   "type": "bars",
+   "title": "Mangoes sold at a shop",
+   "labels": [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri"
+   ],
+   "values": [
+    100,
+    50,
+    300,
+    150,
+    400
+   ],
+   "scale": 50
+  },
+  "visualNote": "Reuses the family's own bars figure (with scale)."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:afbar:4,0,1",
+   "prompt": "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Friday?",
+   "lines": [
+    "Fri: 8 lines × 50 = 400"
+   ],
+   "familyExplainSteps": [
+    "The bar reaches 8 lines; each line is 50, so it shows 400"
+   ],
+   "answer": "400"
+  },
+  {
+   "id": "gen:afbar:1,1,5",
+   "prompt": "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many more mangoes were sold on Friday than on Wednesday?",
+   "lines": [
+    "Fri: 40; Wed: 5 (scale 5 per line)",
+    "40 − 5 = 35"
+   ],
+   "familyExplainSteps": [
+    "The bar reaches 8 lines; each line is 5, so it shows 40",
+    "The bar reaches 1 lines; each line is 5, so it shows 5",
+    "How many more: 40 − 5 = 35"
+   ],
+   "answer": "35"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:afbar:4,0,1",
+   "hints": [
+    "Look at the numbers on the side of the chart.",
+    "How much does one line stand for?",
+    "Read the top of the bar against the scale."
+   ]
+  },
+  {
+   "for": "gen:afbar:1,1,5",
+   "hints": [
+    "Look at the numbers on the side of the chart.",
+    "How much does one line stand for?",
+    "Read the top of the bar against the scale."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Read the numbers on the side",
+  "text": [
+   "Look at two numbers next to each other on the scale: their difference is what one line stands for."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Skip count up the bar",
+   "valid": true,
+   "example": [
+    "count up in 50s to the top of each bar",
+    "Fri: 8 lines × 50 = 400"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "read one bar",
+   "why": "count-lines gives the number of lines, assume-tens 10 per line",
+   "id": "gen:afbar:3,0,4",
+   "fromPhase": "diagnostic",
+   "prompt": "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Tuesday?",
+   "answer": "200",
+   "readings": [
+    {
+     "response": "200",
+     "reading": "correct"
+    },
+    {
+     "response": "10",
+     "reading": "other modelled error count-lines (conceptual): suspected on one answer"
+    },
+    {
+     "response": "100",
+     "reading": "TARGET modelled error assume-tens (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "how many more",
+   "why": "adds an operation error (add-for-more) that is separate from scale reading",
+   "id": "gen:afbar:0,1,6",
+   "fromPhase": "diagnostic",
+   "prompt": "The bar chart shows visitors to a park. Read the scale carefully. How many more visitors came in February than in May?",
+   "answer": "6",
+   "readings": [
+    {
+     "response": "6",
+     "reading": "correct"
+    },
+    {
+     "response": "3",
+     "reading": "other modelled error count-lines (conceptual): suspected on one answer"
+    },
+    {
+     "response": "30",
+     "reading": "TARGET modelled error assume-tens (procedural): suspected on one answer"
+    },
+    {
+     "response": "34",
+     "reading": "other modelled error add-for-more (conceptual): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "assume-tens",
+   "kind": "procedural",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "each line assumed to be 10 (procedural)",
+   "example": "gen:afbar:1,2,13",
+   "screens": {
+    "whatWentWrong": [
+     "In \"The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Thursday and on Friday together?\", one wrong answer is 60.",
+     "Each line was taken as 10. Read the numbers on the scale: they tell how much each line stands for.",
+     "Do not assume 10: read the numbers on the scale to see what one line stands for.",
+     "Not 60, but 30."
+    ],
+    "counterCheck": "Check: two numbers next to each other on the scale differ by the size of one line.",
+    "solvedCorrectly": [
+     "Thu: 10; Fri: 20 (scale 5 per line)",
+     "10 + 20 = 30"
+    ]
+   },
+   "guided": "gen:afbar:4,0,3:mc",
+   "check": "gen:afbar:1,2,10:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:afbar:4,0,2:mc",
+   "gen:afbar:4,0,0:mc",
+   "gen:afbar:0,2,8:mc"
+  ],
+  "rechecks": [
+   "gen:afbar:4,0,7",
+   "gen:afbar:1,1,1"
+  ],
+  "transfer": [
+   "gen:afbar:3,2,5:w",
+   "gen:afbar:3,2,3:w"
+  ],
+  "delayedChecks": [
+   "gen:afbar:4,0,4",
+   "gen:afbar:1,1,8:mc"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Read values from a bar chart whose scale steps by more than 1, then compare or add them.",
+   "competency": "MATH.statistics.scaled-bars",
+   "generator": {
+    "family": "afbar",
+    "restriction": "afbar, all forms (params[1] = 0 read, 1 how many more, 2 together); scale > 1."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "count-lines"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "fix_assume_tens",
+     "when": "verified-misconception 'assume-tens' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "worked_steps",
+     "when": "existing explanation reused: reading a scaled bar (general)"
+    },
+    {
+     "strategy": "skip_count",
+     "when": "existing explanation reused: counting up the scale"
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "when": "existing explanation reused: count-lines"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Skip count up the bar",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "afbar",
+    "partition": "check",
+    "restriction": "afbar, all forms (params[1] = 0 read, 1 how many more, 2 together); scale > 1.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:afbar:4,0,7",
+     "gen:afbar:1,1,1"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.statistics.scaled-bars",
+    "family": "afbar",
+    "partition": "retention",
+    "cases": [
+     "read one bar",
+     "how many more"
+    ],
+    "candidates": [
+     "gen:afbar:4,0,4",
+     "gen:afbar:1,1,8:mc"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "misconception-specific: assume-tens",
+    "strategy": {
+     "id": "fix_assume_tens",
+     "title": "Read the scale; do not assume 10",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Read the scale; do not assume 10: what went wrong",
+       "text": [
+        "Each line was taken as 10. Read the numbers on the scale: they tell how much each line stands for.",
+        "Do not assume 10: read the numbers on the scale to see what one line stands for."
+       ],
+       "math": [
+        "Not 60, but 30",
+        "Check: two numbers next to each other on the scale differ by the size of one line."
+       ],
+       "role": "misconception",
+       "instance": "gen:afbar:1,2,13"
+      },
+      {
+       "title": "Read the scale; do not assume 10: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Thu: 10; Fri: 20 (scale 5 per line)",
+        "10 + 20 = 30"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:1,2,13"
+      }
+     ],
+     "guided": "gen:afbar:4,0,3:mc",
+     "check": "gen:afbar:1,2,10:mc"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.statistics.scaled-bars#fix_assume_tens",
+    "subject": "mathematics",
+    "competency": "MATH.statistics.scaled-bars",
+    "strategy": "fix_assume_tens",
+    "intervention": "procedural",
+    "misconceptionSpecific": true,
+    "addresses": "assume-tens",
+    "revisions": [
+     {
+      "contentHash": "sha256:7542ca85a6eb4de6a0fc4d44167b85e51c125083d41a5cac93f257ad4d6eb975",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "worked_steps",
+    "covers": "reading a scaled bar (general)"
+   },
+   {
+    "strategy": "skip_count",
+    "covers": "counting up the scale"
+   },
+   {
+    "strategy": "spot_the_mistake",
+    "covers": "count-lines"
+   }
+  ],
+  "familyAlreadyTaughtByModule": true,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "fix_assume_tens",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "assume-tens"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b06.ts:824 afbar (seed of MATH.statistics.scaled-bars): bugs count-lines, assume-tens, add-for-more, difference-for-total"
+ ],
+ "uncertainties": [
+  "afbar is the module's seed: its general teaching (worked_steps, skip_count) and spot_the_mistake (count-lines) already exist and are REUSED; only assume-tens gets a new explanation."
+ ],
+ "validation": {
+  "items": 16,
+  "itemsOk": 16,
+  "poolAgreement": "360/360",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:afbar:3,0,4",
+    "role": "diagnostic",
+    "prompt": "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Tuesday?",
+    "answer": "200",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Tue: 10 lines × 20 = 200"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 20s to the top of each bar",
+       "Tue: 10 lines × 20 = 200"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "100"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:0,1,6",
+    "role": "diagnostic",
+    "prompt": "The bar chart shows visitors to a park. Read the scale carefully. How many more visitors came in February than in May?",
+    "answer": "6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Feb: 20; May: 14 (scale 2 per line)",
+      "20 − 14 = 6"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 2s to the top of each bar",
+       "20 − 14 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "add-for-more",
+      "kind": "conceptual",
+      "predicts": [
+       "34"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:4,0,1",
+    "role": "worked-example",
+    "prompt": "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Friday?",
+    "answer": "400",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Fri: 8 lines × 50 = 400"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 50s to the top of each bar",
+       "Fri: 8 lines × 50 = 400"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "80"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:1,1,5",
+    "role": "worked-example",
+    "prompt": "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many more mangoes were sold on Friday than on Wednesday?",
+    "answer": "35",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Fri: 40; Wed: 5 (scale 5 per line)",
+      "40 − 5 = 35"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 5s to the top of each bar",
+       "40 − 5 = 35"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "70"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "add-for-more",
+      "kind": "conceptual",
+      "predicts": [
+       "45"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:1,2,13",
+    "role": "misconception-example",
+    "prompt": "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Thursday and on Friday together?",
+    "answer": "30",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Thu: 10; Fri: 20 (scale 5 per line)",
+      "10 + 20 = 30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 5s to the top of each bar",
+       "10 + 20 = 30"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "difference-for-total",
+      "kind": "procedural",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:4,0,3:mc",
+    "role": "misconception-guided",
+    "prompt": "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 2? Choose one.",
+    "answer": "450",
+    "options": [
+     "451",
+     "450",
+     "90",
+     "9"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Class 2: 9 lines × 50 = 450"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 50s to the top of each bar",
+       "Class 2: 9 lines × 50 = 450"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "90"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:1,2,10:mc",
+    "role": "misconception-check",
+    "prompt": "The bar chart shows visitors to a park. Read the scale carefully. How many visitors came in April and in May together? Choose one.",
+    "answer": "30",
+    "options": [
+     "6",
+     "30",
+     "20",
+     "60"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Apr: 5; May: 25 (scale 5 per line)",
+      "5 + 25 = 30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 5s to the top of each bar",
+       "5 + 25 = 30"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "difference-for-total",
+      "kind": "procedural",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:4,0,2:mc",
+    "role": "guided-practice",
+    "prompt": "The bar chart shows visitors to a park. Read the scale carefully. How many visitors came in March? Choose one.",
+    "answer": "300",
+    "options": [
+     "300",
+     "301",
+     "60",
+     "6"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Mar: 6 lines × 50 = 300"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 50s to the top of each bar",
+       "Mar: 6 lines × 50 = 300"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:4,0,0:mc",
+    "role": "guided-practice",
+    "prompt": "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Thursday? Choose one.",
+    "answer": "400",
+    "options": [
+     "8",
+     "80",
+     "401",
+     "400"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Thu: 8 lines × 50 = 400"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 50s to the top of each bar",
+       "Thu: 8 lines × 50 = 400"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "80"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:0,2,8:mc",
+    "role": "guided-practice",
+    "prompt": "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Friday and on Wednesday together? Choose one.",
+    "answer": "24",
+    "options": [
+     "120",
+     "4",
+     "24",
+     "12"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Fri: 10; Wed: 14 (scale 2 per line)",
+      "10 + 14 = 24"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 2s to the top of each bar",
+       "10 + 14 = 24"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "120"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "difference-for-total",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:4,0,7",
+    "role": "recheck",
+    "prompt": "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 2?",
+    "answer": "400",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Class 2: 8 lines × 50 = 400"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 50s to the top of each bar",
+       "Class 2: 8 lines × 50 = 400"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "80"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:1,1,1",
+    "role": "recheck",
+    "prompt": "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many more mangoes were sold on Tuesday than on Thursday?",
+    "answer": "5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Tue: 35; Thu: 30 (scale 5 per line)",
+      "35 − 30 = 5"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 5s to the top of each bar",
+       "35 − 30 = 5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "add-for-more",
+      "kind": "conceptual",
+      "predicts": [
+       "65"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:3,2,5:w",
+    "role": "transfer",
+    "prompt": "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Monday and on Thursday together?",
+    "answer": "320",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Mon: 200; Thu: 120 (scale 20 per line)",
+      "200 + 120 = 320"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 20s to the top of each bar",
+       "200 + 120 = 320"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "160"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "difference-for-total",
+      "kind": "procedural",
+      "predicts": [
+       "80"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:3,2,3:w",
+    "role": "transfer",
+    "prompt": "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 3 and by Class 1 together?",
+    "answer": "240",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Class 3: 40; Class 1: 200 (scale 20 per line)",
+      "40 + 200 = 240"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 20s to the top of each bar",
+       "40 + 200 = 240"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "120"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "difference-for-total",
+      "kind": "procedural",
+      "predicts": [
+       "160"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:4,0,4",
+    "role": "delayed-check",
+    "prompt": "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Tuesday?",
+    "answer": "50",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Tue: 1 lines × 50 = 50"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 50s to the top of each bar",
+       "Tue: 1 lines × 50 = 50"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:afbar:1,1,8:mc",
+    "role": "delayed-check",
+    "prompt": "The bar chart shows books borrowed from the library. Read the scale carefully. How many more books were borrowed on Monday than on Friday? Choose one.",
+    "answer": "10",
+    "options": [
+     "10",
+     "90",
+     "20",
+     "2"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Mon: 50; Fri: 40 (scale 5 per line)",
+      "50 − 40 = 10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Skip count up the bar",
+      "ok": true,
+      "lines": [
+       "count up in 5s to the top of each bar",
+       "50 − 40 = 10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "count-lines",
+      "kind": "conceptual",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "add-for-more",
+      "kind": "conceptual",
+      "predicts": [
+       "90"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

@@ -2,6 +2,8 @@
  "schema": "teaching-package@0",
  "status": "review-candidate (not approved, not registered, not served)",
  "id": "TP-STA-01",
+ "batch": "batch-1",
+ "pattern": null,
  "title": "The median: order first, then find the middle",
  "competency": "MATH.statistics.median-mode",
  "competencyName": "Calculate median and mode",
@@ -180,6 +182,8 @@
   {
    "bug": "not-ordered",
    "kind": "procedural",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "PROCEDURAL slip or missing step: treat a single occurrence as a suspected error, not a misconception",
    "example": "gen:akmed:76,5",
@@ -202,6 +206,8 @@
   {
    "bug": "mean-for-median",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "conceptual: averages not distinguished",
    "example": "gen:akmed:32,5",
@@ -212,7 +218,7 @@
      "The mean shares the total equally; the median is the middle value in order. They are different averages.",
      "Not 72.6, but 81."
     ],
-    "counterCheck": "Counter-check: for 1, 2, 30 the mean is 11 but the middle value is 2.",
+    "counterCheck": "Check: the total 363 shared equally among 5 values is 72.6 (the mean); in order, 50, 59, 81, 86, 87, the middle value is different.",
     "solvedCorrectly": [
      "In order: 50, 59, 81, 86, 87 (5 values)",
      "The middle one is the 3rd value: 81"
@@ -224,6 +230,8 @@
   {
    "bug": "one-middle",
    "kind": "procedural",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "procedural: even count",
    "example": "gen:akmed:71,10",
@@ -234,7 +242,7 @@
      "With an even number of values there are two middle values: take halfway between them.",
      "Not 62 or 63, but 62.5."
     ],
-    "counterCheck": "Counter-check: for 2, 4, 6, 8 the middle values are 4 and 6; the median is 5.",
+    "counterCheck": "Check: 10 values have no single middle; the 5th and 6th values, 62 and 63, share the middle, so the median is halfway: 62.5.",
     "solvedCorrectly": [
      "In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90 (10 values)",
      "The two middle values are the 5th and 6th: 62 and 63; halfway: (62 + 63) ÷ 2 = 62.5"
@@ -265,117 +273,275 @@
   ],
   "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
  },
+ "responsePatterns": [],
+ "delayedAudit": null,
  "integration": {
-  "strategyProposals": [
-   {
-    "id": "fix_not_ordered",
-    "title": "The middle of the list only means something once the list is",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:akmed:76,5"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:akmed:76,5"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:akmed:77,9:mc"
-     }
-    ],
-    "guided": "gen:akmed:77,9:mc",
-    "check": "gen:akmed:77,7:mc"
+  "spec": {
+   "skill": "Find the median of 5–10 whole numbers (order first; halfway between the two middle values for an even count).",
+   "competency": "MATH.statistics.median-mode",
+   "generator": {
+    "family": "akmed",
+    "restriction": "akmed, all items (5–10 different whole numbers); examples, diagnostics and rechecks need |mean − median| ≥ 3."
    },
-   {
-    "id": "fix_mean_for_median",
-    "title": "The mean shares the total equally; the median is the middle ",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:akmed:32,5"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:akmed:32,5"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:akmed:3,10:mc"
-     }
-    ],
-    "guided": "gen:akmed:3,10:mc",
-    "check": "gen:akmed:27,5"
-   },
-   {
-    "id": "fix_one_middle",
-    "title": "With an even number of values there are two middle values",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:akmed:71,10"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:akmed:71,10"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:akmed:8,6:mc"
-     }
-    ],
-    "guided": "gen:akmed:8,6:mc",
-    "check": "gen:akmed:33,6"
-   }
-  ],
-  "registryProposal": [
-   {
-    "competency": "MATH.statistics.median-mode",
-    "strategy": "fix_not_ordered",
-    "misconceptionSpecific": true,
-    "addresses": "not-ordered",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "not-ordered"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "fix_mean_for_median",
+     "when": "verified-misconception 'mean-for-median' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_one_middle",
+     "when": "verified-misconception 'one-middle' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "when": "already exists for 'not-ordered': reuse, do not add"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Cross off from both ends",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "akmed",
+    "partition": "check",
+    "restriction": "akmed, all items (5–10 different whole numbers); examples, diagnostics and rechecks need |mean − median| ≥ 3.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:akmed:0,9",
+     "gen:akmed:0,8:mc"
     ]
    },
+   "retentionTarget": {
+    "competency": "MATH.statistics.median-mode",
+    "family": "akmed",
+    "partition": "retention",
+    "cases": [
+     "odd count",
+     "even count"
+    ],
+    "candidates": [
+     "gen:akmed:8,7",
+     "gen:akmed:24,10"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
    {
+    "purpose": "misconception-specific: mean-for-median",
+    "strategy": {
+     "id": "fix_mean_for_median",
+     "title": "The median is not the mean",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The median is not the mean: what went wrong",
+       "text": [
+        "The mean was worked out. The median is the middle value once the numbers are in order.",
+        "The mean shares the total equally; the median is the middle value in order. They are different averages."
+       ],
+       "math": [
+        "Not 72.6, but 81",
+        "Check: the total 363 shared equally among 5 values is 72.6 (the mean); in order, 50, 59, 81, 86, 87, the middle value is different."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:32,5"
+      },
+      {
+       "title": "The median is not the mean: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 50, 59, 81, 86, 87 (5 values)",
+        "The middle one is the 3rd value: 81"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:32,5"
+      }
+     ],
+     "guided": "gen:akmed:3,10:mc",
+     "check": "gen:akmed:27,5"
+    }
+   },
+   {
+    "purpose": "misconception-specific: one-middle",
+    "strategy": {
+     "id": "fix_one_middle",
+     "title": "Two middle values: take halfway",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two middle values: take halfway: what went wrong",
+       "text": [
+        "With 10 numbers there are two middle numbers (62 and 63); the median is halfway between them.",
+        "With an even number of values there are two middle values: take halfway between them."
+       ],
+       "math": [
+        "Not 62, but 62.5",
+        "Check: 10 values have no single middle; the 5th and 6th values, 62 and 63, share the middle, so the median is halfway: 62.5."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:71,10"
+      },
+      {
+       "title": "Two middle values: take halfway: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90 (10 values)",
+        "The two middle values are the 5th and 6th: 62 and 63; halfway: (62 + 63) ÷ 2 = 62.5"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:71,10"
+      }
+     ],
+     "guided": "gen:akmed:8,6:mc",
+     "check": "gen:akmed:33,6"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.statistics.median-mode#fix_mean_for_median",
+    "subject": "mathematics",
     "competency": "MATH.statistics.median-mode",
     "strategy": "fix_mean_for_median",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "mean-for-median",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:d1b181a28d918aeb8e94554a3b7d6b071eecbb9f5742da1f2c2caac93f7c5884",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    },
    {
+    "id": "MATH.statistics.median-mode#fix_one_middle",
+    "subject": "mathematics",
     "competency": "MATH.statistics.median-mode",
     "strategy": "fix_one_middle",
+    "intervention": "procedural",
     "misconceptionSpecific": true,
     "addresses": "one-middle",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:608e4ea162f788d44be564c5e2407cd586b09749c66c9c39881647607dc35283",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    }
   ],
-  "generalStrategyProposal": {
-   "id": "akmed_concept",
-   "screens": [
-    "concept + visual",
-    "worked example(s)",
-    "alternative explanation"
+  "reusedExisting": [
+   {
+    "strategy": "spot_the_mistake",
+    "covers": "not-ordered"
+   }
+  ],
+  "familyAlreadyTaughtByModule": true,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "fix_mean_for_median",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "mean-for-median"
+    },
+    {
+     "strategy": "fix_one_middle",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "one-middle"
+    }
    ],
-   "note": "for modules where this family has only a chapter screen"
+   "registryProblems": []
   },
-  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
  },
  "sources": [
   "packages/learning/src/fam/b11.ts:1729 akmed: teach idea/method, alternative cross_off; bugs not-ordered, mean-for-median, one-middle",

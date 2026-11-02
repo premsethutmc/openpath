@@ -1,0 +1,274 @@
+{
+ "checks": "server grader (answer correct; every modelled wrong answer incorrect) + prompt/figure oracle + every alternative method + quarantine + whole-pool oracle agreement + response patterns graded + proposed strategies through teachingEligibility, contentEligibility (in-memory registry) and validateRegistry",
+ "packages": [
+  {
+   "id": "TP2-REG-TIME",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [
+    "no-carry"
+   ],
+   "notChecked": [
+    "addur_concept",
+    "fix_no_carry"
+   ],
+   "pattern": "PAT-REGROUP",
+   "newStrategies": 2,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "addur_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "addur_concept",
+    "fix_no_carry"
+   ],
+   "registryProblems": 0,
+   "family": "addur",
+   "competency": "MATH.measurement.time-unit-conversion",
+   "items": 14,
+   "itemsOk": 14,
+   "poolAgreement": "99/99",
+   "transfer": 2,
+   "diagnostics": 1,
+   "misconceptionScreens": 1
+  },
+  {
+   "id": "TP2-REG-MONEY",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [
+    "paise-over-100",
+    "no-carry"
+   ],
+   "notChecked": [
+    "acmoneyadd_concept",
+    "fix_paise_over_100",
+    "fix_no_carry"
+   ],
+   "pattern": "PAT-REGROUP",
+   "newStrategies": 3,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "acmoneyadd_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "acmoneyadd_concept",
+    "fix_paise_over_100",
+    "fix_no_carry"
+   ],
+   "registryProblems": 0,
+   "family": "acmoneyadd",
+   "competency": "MATH.measurement.money-decimals",
+   "items": 17,
+   "itemsOk": 17,
+   "poolAgreement": "240/240",
+   "transfer": 2,
+   "diagnostics": 1,
+   "misconceptionScreens": 2
+  },
+  {
+   "id": "TP2-SCL-PICT",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "acpicttab_concept",
+    "fix_one_each"
+   ],
+   "pattern": "PAT-SCALE",
+   "newStrategies": 2,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "acpicttab_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "acpicttab_concept",
+    "fix_one_each"
+   ],
+   "registryProblems": 0,
+   "family": "acpicttab",
+   "competency": "MATH.statistics.pictographs",
+   "items": 15,
+   "itemsOk": 15,
+   "poolAgreement": "300/300",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 1
+  },
+  {
+   "id": "TP2-SCL-BAR",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [],
+   "pattern": "PAT-SCALE",
+   "newStrategies": 1,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [],
+   "gatesWithEvidenceEligible": [
+    "fix_assume_tens"
+   ],
+   "registryProblems": 0,
+   "family": "afbar",
+   "competency": "MATH.statistics.scaled-bars",
+   "items": 16,
+   "itemsOk": 16,
+   "poolAgreement": "360/360",
+   "transfer": 2,
+   "diagnostics": 2,
+   "misconceptionScreens": 1
+  },
+  {
+   "id": "TP2-PRT-NAME",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [],
+   "pattern": "PAT-PARTS",
+   "newStrategies": 3,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "adfname_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "adfname_concept",
+    "fix_shaded_to_unshaded",
+    "fix_count_only"
+   ],
+   "registryProblems": 0,
+   "family": "adfname",
+   "competency": "MATH.number.fraction-models",
+   "items": 17,
+   "itemsOk": 17,
+   "poolAgreement": "145/145",
+   "transfer": 2,
+   "diagnostics": 1,
+   "misconceptionScreens": 2
+  },
+  {
+   "id": "TP2-PRT-SHADE",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "adshade_concept",
+    "fix_top_number"
+   ],
+   "pattern": "PAT-PARTS",
+   "newStrategies": 2,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "adshade_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "adshade_concept",
+    "fix_top_number"
+   ],
+   "registryProblems": 0,
+   "family": "adshade",
+   "competency": "MATH.number.fraction-models",
+   "items": 14,
+   "itemsOk": 14,
+   "poolAgreement": "300/300",
+   "transfer": 2,
+   "diagnostics": 1,
+   "misconceptionScreens": 1
+  },
+  {
+   "id": "TP2-PV-DIGIT",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [
+    "aadigit_concept",
+    "fix_face_value",
+    "fix_value_not_count"
+   ],
+   "pattern": "PAT-PLACE",
+   "newStrategies": 3,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [
+    "aadigit_concept"
+   ],
+   "gatesWithEvidenceEligible": [
+    "aadigit_concept",
+    "fix_face_value",
+    "fix_value_not_count"
+   ],
+   "registryProblems": 0,
+   "family": "aadigit",
+   "competency": "MATH.number.place-value-tens",
+   "items": 21,
+   "itemsOk": 21,
+   "poolAgreement": "234/234",
+   "transfer": 2,
+   "diagnostics": 4,
+   "misconceptionScreens": 2
+  },
+  {
+   "id": "TP2-CH-BAG",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [],
+   "pattern": "PAT-CHANCE",
+   "newStrategies": 1,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [],
+   "gatesWithEvidenceEligible": [
+    "fix_colours_equal"
+   ],
+   "registryProblems": 0,
+   "family": "akchance",
+   "competency": "MATH.probability.chance-language",
+   "items": 14,
+   "itemsOk": 14,
+   "poolAgreement": "317/317",
+   "transfer": 2,
+   "diagnostics": 1,
+   "misconceptionScreens": 1
+  },
+  {
+   "id": "TP2-CH-BALL",
+   "batch": "batch-2",
+   "scopedViolations": [],
+   "scopedUnchecked": [],
+   "undiagnosable": [],
+   "notChecked": [],
+   "pattern": "PAT-CHANCE",
+   "newStrategies": 1,
+   "reused": 0,
+   "contractViolations": [],
+   "gatesNoEvidenceEligible": [],
+   "gatesWithEvidenceEligible": [
+    "fix_colours_equally_likely"
+   ],
+   "registryProblems": 0,
+   "family": "anbag",
+   "competency": "MATH.probability.classical",
+   "items": 14,
+   "itemsOk": 14,
+   "poolAgreement": "400/400",
+   "transfer": 2,
+   "diagnostics": 1,
+   "misconceptionScreens": 1
+  }
+ ],
+ "failures": []
+}

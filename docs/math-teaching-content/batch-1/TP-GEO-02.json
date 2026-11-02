@@ -2,6 +2,8 @@
  "schema": "teaching-package@0",
  "status": "review-candidate (not approved, not registered, not served)",
  "id": "TP-GEO-02",
+ "batch": "batch-1",
+ "pattern": null,
  "title": "Vertically opposite angles are equal",
  "competency": "MATH.geometry.angle-pairs",
  "competencyName": "Use linear pairs, vertically opposite, complementary and supplementary angles",
@@ -193,6 +195,8 @@
   {
    "bug": "opposite-as-linear",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "vertically opposite taken as a linear pair",
    "example": "gen:afcross:104,0",
@@ -215,6 +219,8 @@
   {
    "bug": "neighbour-equal",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "adjacent taken as equal",
    "example": "gen:afcross:147,1",
@@ -255,92 +261,390 @@
   ],
   "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
  },
+ "responsePatterns": [],
+ "delayedAudit": null,
  "integration": {
-  "strategyProposals": [
-   {
-    "id": "fix_opposite_as_linear",
-    "title": "Opposite angles do not lie together on one straight line, so",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:afcross:104,0"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:afcross:104,0"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:afcross:109,0:mc"
-     }
+  "spec": {
+   "skill": "At two crossing lines: vertically opposite angles are equal; adjacent angles make 180°; all four make 360°.",
+   "competency": "MATH.geometry.angle-pairs",
+   "generator": {
+    "family": "afcross",
+    "restriction": "afcross, all three forms: params[1] = 0 vertically opposite, 1 adjacent, 2 the other three (contrast); angles within 5° of 90 excluded from examples."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "wrong-total"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "afcross_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_opposite_as_linear",
+     "when": "verified-misconception 'opposite-as-linear' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_neighbour_equal",
+     "when": "verified-misconception 'neighbour-equal' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Full turn",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "afcross",
+    "partition": "check",
+    "restriction": "afcross, all three forms: params[1] = 0 vertically opposite, 1 adjacent, 2 the other three (contrast); angles within 5° of 90 excluded from examples.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:afcross:158,0:mc",
+     "gen:afcross:40,1:mc"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.geometry.angle-pairs",
+    "family": "afcross",
+    "partition": "retention",
+    "cases": [
+     "vertically opposite",
+     "adjacent"
     ],
-    "guided": "gen:afcross:109,0:mc",
-    "check": "gen:afcross:70,0"
+    "candidates": [
+     "gen:afcross:42,0",
+     "gen:afcross:37,1"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "afcross modes 0/1 have a geometry task (foundation adapter); mode 2 (other three) has none (geometry-task.ts excludes b === 2). G5 R06: a vertically-opposite citation for a MEASURE was rejected by the reasoner; route through straight-line steps is supported"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "afcross_concept",
+     "title": "Vertically opposite angles are equal",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
+        "Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°."
+       ],
+       "math": [
+        "next angle round = 180° − 128° = 52° (straight line)",
+        "the one after = 180° − 52° = 128° (straight line): the opposite angle is 128°"
+       ],
+       "widget": {
+        "type": "angle",
+        "deg": 128,
+        "note": "reuses go_round; a full crossing-lines figure is not in the Visual union"
+       },
+       "role": "concept",
+       "instance": "gen:afcross:128,0"
+      },
+      {
+       "title": "Another example",
+       "text": [
+        "The same idea on a different question."
+       ],
+       "math": [
+        "adjacent angles lie on a straight line: 180° − 149° = 31°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:149,1"
+      },
+      {
+       "title": "Two crossed pencils",
+       "text": [
+        "Hold two straight pencils crossed like an X.",
+        "Open them wider: the top and bottom angles grow together while the two side angles shrink together. Opposite angles stay equal."
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:128,0"
+      },
+      {
+       "title": "Another way: Full turn",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "each angle next to 128° is 180° − 128° = 52° (straight line)",
+        "all four make 360°: opposite angle = 360° − 128° − 2 × 52° = 128°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:128,0"
+      }
+     ],
+     "guided": "gen:afcross:29,0:mc",
+     "check": "gen:afcross:158,0:mc"
+    }
    },
    {
-    "id": "fix_neighbour_equal",
-    "title": "Angles next to each other lie on a straight line",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:afcross:147,1"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:afcross:147,1"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:afcross:27,1:mc"
-     }
-    ],
-    "guided": "gen:afcross:27,1:mc",
-    "check": "gen:afcross:146,1:mc"
+    "purpose": "misconception-specific: opposite-as-linear",
+    "strategy": {
+     "id": "fix_opposite_as_linear",
+     "title": "Vertically opposite angles are equal",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Vertically opposite angles are equal: what went wrong",
+       "text": [
+        "Vertically opposite angles were taken as a pair on a straight line. They are not on one straight line together; they are equal.",
+        "Opposite angles do not lie together on one straight line, so they need not add to 180°: they are equal. Angles next to each other make 180°."
+       ],
+       "math": [
+        "Not 76°, but 104°",
+        "Counter-check: going round the crossing, each angle makes 180° with the next one: 104°, then 76°, then 104° again. The angle opposite 104° is the third one round, so it is 104°, not 76°."
+       ],
+       "role": "misconception",
+       "instance": "gen:afcross:104,0"
+      },
+      {
+       "title": "Vertically opposite angles are equal: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "next angle round = 180° − 104° = 76° (straight line)",
+        "the one after = 180° − 76° = 104° (straight line): the opposite angle is 104°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:104,0"
+      }
+     ],
+     "guided": "gen:afcross:109,0:mc",
+     "check": "gen:afcross:70,0"
+    }
+   },
+   {
+    "purpose": "misconception-specific: neighbour-equal",
+    "strategy": {
+     "id": "fix_neighbour_equal",
+     "title": "Angles next to each other make 180°",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Angles next to each other make 180°: what went wrong",
+       "text": [
+        "Angles next to each other are not equal (unless both are 90°); together they make a straight line, 180°.",
+        "Angles next to each other lie on a straight line: they add to 180°. They are equal only when both are 90°."
+       ],
+       "math": [
+        "Not 147°, but 33°",
+        "Check: the two angles together fill one side of a straight line, which is 180°. 147° + 147° = 294° is more than a straight line."
+       ],
+       "role": "misconception",
+       "instance": "gen:afcross:147,1"
+      },
+      {
+       "title": "Angles next to each other make 180°: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "adjacent angles lie on a straight line: 180° − 147° = 33°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:147,1"
+      }
+     ],
+     "guided": "gen:afcross:27,1:mc",
+     "check": "gen:afcross:146,1:mc"
+    }
    }
   ],
-  "registryProposal": [
+  "registryRecords": [
    {
+    "id": "MATH.geometry.angle-pairs#afcross_concept",
+    "subject": "mathematics",
+    "competency": "MATH.geometry.angle-pairs",
+    "strategy": "afcross_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:d370415a25effd4a7cd74660a2e83627165da7f1087c073fbe2fc39c53c4ca87",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.geometry.angle-pairs#fix_opposite_as_linear",
+    "subject": "mathematics",
     "competency": "MATH.geometry.angle-pairs",
     "strategy": "fix_opposite_as_linear",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
-    "addresses": "opposite-as-linear",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:cb163fd97429aed75c7572970f78a4b704210716ba773f644c2186efa22eb319",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    },
    {
+    "id": "MATH.geometry.angle-pairs#fix_neighbour_equal",
+    "subject": "mathematics",
     "competency": "MATH.geometry.angle-pairs",
     "strategy": "fix_neighbour_equal",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "neighbour-equal",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:1e21fc5cdf0b472a78a01db71e0040f7facd1aad3ab159b779173f0420449914",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    }
   ],
-  "generalStrategyProposal": {
-   "id": "afcross_concept",
-   "screens": [
-    "concept + visual",
-    "worked example(s)",
-    "alternative explanation"
+  "reusedExisting": [],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "afcross_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 4,
+      "of": 4,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_opposite_as_linear",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_neighbour_equal",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "neighbour-equal"
+    }
    ],
-   "note": "for modules where this family has only a chapter screen"
+   "registryProblems": []
   },
-  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
  },
  "sources": [
   "packages/learning/src/fam/b06.ts:1266 afcross: teach idea/method, go_round; bugs opposite-as-linear, full-turn, neighbour-equal, straight-only, all-equal",
   "docs/geometry-cross-domain-validation (G5) G-06"
  ],
  "uncertainties": [
-  "The 'adjacent' full-turn route uses the opposite-angle fact; it is valid but not independent of it."
+  "The 'adjacent' full-turn route uses the opposite-angle fact; it is valid but not independent of it.",
+  "fix_opposite_as_linear: the platform reads the addressed misconception from the family's verbatim 'says' text; it reads nothing here (the package overrides a defective family sentence), so the registry cannot record 'addresses: opposite-as-linear' until the family text is fixed (05)"
  ],
  "validation": {
   "items": 20,

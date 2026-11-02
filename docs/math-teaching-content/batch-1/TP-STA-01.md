@@ -96,7 +96,7 @@ Status: modelled (a single matching answer is a SUSPECTED error; established onl
 > The mean shares the total equally; the median is the middle value in order. They are different averages.
 > Not 72.6, but 81.
 
-Counter-check: for 1, 2, 30 the mean is 11 but the middle value is 2.
+Check: the total 363 shared equally among 5 values is 72.6 (the mean); in order, 50, 59, 81, 86, 87, the middle value is different.
 
 Solved correctly:
 
@@ -114,7 +114,7 @@ Status: modelled (a single matching answer is a SUSPECTED error; established onl
 > With an even number of values there are two middle values: take halfway between them.
 > Not 62 or 63, but 62.5.
 
-Counter-check: for 2, 4, 6, 8 the middle values are 4 and 6; the median is 5.
+Check: 10 values have no single middle; the 5th and 6th values, 62 and 63, share the middle, so the median is halfway: 62.5.
 
 Solved correctly:
 
@@ -130,122 +130,31 @@ Example `gen:akmed:71,10`; guided `gen:akmed:8,6:mc`; fresh check `gen:akmed:33,
 - Transfer (everyday form): `gen:akmed:32,6:w`, `gen:akmed:76,9:w`
 - Delayed checks: `gen:akmed:8,7`, `gen:akmed:24,10`
 
-## Integration mapping (proposal for Codex; nothing written)
+## Integration specification (for the shared teaching selector; nothing written)
 
-```json
-{
- "strategyProposals": [
-  {
-   "id": "fix_not_ordered",
-   "title": "The middle of the list only means something once the list is",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:akmed:76,5"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:akmed:76,5"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:akmed:77,9:mc"
-    }
-   ],
-   "guided": "gen:akmed:77,9:mc",
-   "check": "gen:akmed:77,7:mc"
-  },
-  {
-   "id": "fix_mean_for_median",
-   "title": "The mean shares the total equally; the median is the middle ",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:akmed:32,5"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:akmed:32,5"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:akmed:3,10:mc"
-    }
-   ],
-   "guided": "gen:akmed:3,10:mc",
-   "check": "gen:akmed:27,5"
-  },
-  {
-   "id": "fix_one_middle",
-   "title": "With an even number of values there are two middle values",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:akmed:71,10"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:akmed:71,10"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:akmed:8,6:mc"
-    }
-   ],
-   "guided": "gen:akmed:8,6:mc",
-   "check": "gen:akmed:33,6"
-  }
- ],
- "registryProposal": [
-  {
-   "competency": "MATH.statistics.median-mode",
-   "strategy": "fix_not_ordered",
-   "misconceptionSpecific": true,
-   "addresses": "not-ordered",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.statistics.median-mode",
-   "strategy": "fix_mean_for_median",
-   "misconceptionSpecific": true,
-   "addresses": "mean-for-median",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.statistics.median-mode",
-   "strategy": "fix_one_middle",
-   "misconceptionSpecific": true,
-   "addresses": "one-middle",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  }
- ],
- "generalStrategyProposal": {
-  "id": "akmed_concept",
-  "screens": [
-   "concept + visual",
-   "worked example(s)",
-   "alternative explanation"
-  ],
-  "note": "for modules where this family has only a chapter screen"
- },
- "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
-}
-```
+- **Skill:** Find the median of 5–10 whole numbers (order first; halfway between the two middle values for an even count).
+- **Generator:** `akmed` — akmed, all items (5–10 different whole numbers); examples, diagnostics and rechecks need |mean − median| ≥ 3.
+- **Trigger** `fix_mean_for_median`: verified-misconception 'mean-for-median' (two matching answers, misconception-evidence@1)
+- **Trigger** `fix_one_middle`: verified-misconception 'one-middle' (two matching answers, misconception-evidence@1)
+- **Trigger** `spot_the_mistake`: already exists for 'not-ordered': reuse, do not add
+- **Allowed methods:** the oracle's method (worked lines); Cross off from both ends
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:akmed:0,9`, `gen:akmed:0,8:mc`
+- **Retention target:** MATH.statistics.median-mode / `akmed`, cases: odd count; even count. Candidates: `gen:akmed:8,7`, `gen:akmed:24,10`
+- **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
+- **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
+- **Ungradable / text-only:** none
+- **Reused existing explanations:** `spot_the_mistake` (not-ordered)
+
+Platform checks of the proposed objects (in memory):
+
+| Strategy | teaching contract (as integrated today) | contract with this family as the lesson scope | eligible without evidence | eligible with the misconception established | addresses (read by platform) |
+|---|---|---|---|---|---|
+| `fix_mean_for_median` | pass | 2/2 sections checked, no violations | no (misconception-evidence) | yes | mean-for-median |
+| `fix_one_middle` | pass | 2/2 sections checked, no violations | no (misconception-evidence) | yes | one-middle |
+
+Registry validation problems for the new records: none.
+
+The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in the package JSON (`integration.strategies`, `integration.registryRecords`).
 
 ## Sources
 

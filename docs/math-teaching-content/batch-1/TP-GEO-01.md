@@ -50,10 +50,10 @@ For `gen:ahext:93,36,1`:
 2. That angle and the exterior angle make 180°; the three interior angles also make 180°.
 3. So the far angle is the exterior angle minus the other far angle.
 
-## Alternative explanation: Go through the third angle (the family's own via_third)
+## Alternative explanation: Go through the third angle
 
 Find the third interior angle with the angle sum.
-The exterior angle is 180° minus that angle, because they lie on a straight line.
+The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle.
 
 ## Valid alternative methods (each checked to reach the same answer on every applicable generated item)
 
@@ -136,122 +136,34 @@ Example `gen:ahext:45,83,1`; guided `gen:ahext:25,60,1:mc`; fresh check `gen:ahe
 - Transfer (everyday form): `gen:ahext:44,105,1:w`, `gen:ahext:21,85,1:w`
 - Delayed checks: `gen:ahext:56,89,0:mc`, `gen:ahext:77,74,1`
 
-## Integration mapping (proposal for Codex; nothing written)
+## Integration specification (for the shared teaching selector; nothing written)
 
-```json
-{
- "strategyProposals": [
-  {
-   "id": "fix_third_interior",
-   "title": "The exterior angle is OUTSIDE the triangle, on the straight ",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:ahext:34,27,0"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:ahext:34,27,0"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:ahext:34,53,0:mc"
-    }
-   ],
-   "guided": "gen:ahext:34,53,0:mc",
-   "check": "gen:ahext:111,26,0"
-  },
-  {
-   "id": "fix_adjacent_interior",
-   "title": "The question asks for an angle FAR from the exterior angle, ",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:ahext:108,27,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:ahext:108,27,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:ahext:23,76,1"
-    }
-   ],
-   "guided": "gen:ahext:23,76,1",
-   "check": "gen:ahext:47,45,1"
-  },
-  {
-   "id": "fix_exterior_as_interior",
-   "title": "The exterior angle is outside the triangle; it is not one of",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:ahext:45,83,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:ahext:45,83,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:ahext:25,60,1:mc"
-    }
-   ],
-   "guided": "gen:ahext:25,60,1:mc",
-   "check": "gen:ahext:69,32,1:mc"
-  }
- ],
- "registryProposal": [
-  {
-   "competency": "MATH.geometry.triangle-properties",
-   "strategy": "fix_third_interior",
-   "misconceptionSpecific": true,
-   "addresses": "third-interior",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.geometry.triangle-properties",
-   "strategy": "fix_adjacent_interior",
-   "misconceptionSpecific": true,
-   "addresses": "adjacent-interior",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.geometry.triangle-properties",
-   "strategy": "fix_exterior_as_interior",
-   "misconceptionSpecific": true,
-   "addresses": "exterior-as-interior",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  }
- ],
- "generalStrategyProposal": {
-  "id": "ahext_concept",
-  "screens": [
-   "concept + visual",
-   "worked example(s)",
-   "alternative explanation"
-  ],
-  "note": "for modules where this family has only a chapter screen"
- },
- "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
-}
-```
+- **Skill:** Use the exterior-angle theorem: an exterior angle equals the sum of the two interior opposite angles (both directions).
+- **Generator:** `ahext` — ahext, both forms: params[2] = 0 (find the exterior angle) and 1 (find an interior opposite angle); examples avoid coincident angles.
+- **Trigger** `ahext_concept`: general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page
+- **Trigger** `fix_third_interior`: verified-misconception 'third-interior' (two matching answers, misconception-evidence@1)
+- **Trigger** `fix_adjacent_interior`: verified-misconception 'adjacent-interior' (two matching answers, misconception-evidence@1)
+- **Trigger** `fix_exterior_as_interior`: verified-misconception 'exterior-as-interior' (two matching answers, misconception-evidence@1)
+- **Allowed methods:** the oracle's method (worked lines); Exterior-angle theorem directly
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:ahext:86,70,0:mc`, `gen:ahext:44,76,1`
+- **Retention target:** MATH.geometry.triangle-properties / `ahext`, cases: find the exterior angle; find an interior opposite angle. Candidates: `gen:ahext:56,89,0:mc`, `gen:ahext:77,74,1`
+- **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
+- **Method evidence:** ahext has a geometry task (geometry-task.ts) for the foundation's geometry working adapter; the Python reasoner has NO exterior-angle rule (G5 R07), so a citation of the exterior-angle theorem is not verifiable; the 'via the third angle' route uses supported rules (triangle-sum, straight-line)
+- **Ungradable / text-only:** none
+- **Reused existing explanations:** none
+
+Platform checks of the proposed objects (in memory):
+
+| Strategy | teaching contract (as integrated today) | contract with this family as the lesson scope | eligible without evidence | eligible with the misconception established | addresses (read by platform) |
+|---|---|---|---|---|---|
+| `ahext_concept` | **not checked**: outside the module's teaching scope (ineligible today) | 4/4 sections checked, no violations | yes | yes | — |
+| `fix_third_interior` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | third-interior |
+| `fix_adjacent_interior` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | adjacent-interior |
+| `fix_exterior_as_interior` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | exterior-as-interior |
+
+Registry validation problems for the new records: none.
+
+The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in the package JSON (`integration.strategies`, `integration.registryRecords`).
 
 ## Sources
 

@@ -2,6 +2,8 @@
  "schema": "teaching-package@0",
  "status": "review-candidate (not approved, not registered, not served)",
  "id": "TP-GEO-01",
+ "batch": "batch-1",
+ "pattern": null,
  "title": "The exterior angle of a triangle",
  "competency": "MATH.geometry.triangle-properties",
  "competencyName": "Use elementary triangle properties",
@@ -89,11 +91,12 @@
   }
  ],
  "alternativeExplanation": {
-  "title": "Go through the third angle (the family's own via_third)",
+  "title": "Go through the third angle",
   "text": [
    "Find the third interior angle with the angle sum.",
-   "The exterior angle is 180° minus that angle, because they lie on a straight line."
+   "The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle."
   ],
+  "math": "oracle",
   "visual": null
  },
  "alternativeMethods": [
@@ -169,6 +172,8 @@
   {
    "bug": "third-interior",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "the exterior angle confused with the adjacent interior angle",
    "example": "gen:ahext:34,27,0",
@@ -192,6 +197,8 @@
   {
    "bug": "adjacent-interior",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "the same confusion in reverse",
    "example": "gen:ahext:108,27,1",
@@ -215,6 +222,8 @@
   {
    "bug": "exterior-as-interior",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "the exterior angle used as a third interior angle",
    "example": "gen:ahext:45,83,1",
@@ -257,117 +266,492 @@
   ],
   "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
  },
+ "responsePatterns": [],
+ "delayedAudit": null,
  "integration": {
-  "strategyProposals": [
-   {
-    "id": "fix_third_interior",
-    "title": "The exterior angle is OUTSIDE the triangle, on the straight ",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:ahext:34,27,0"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:ahext:34,27,0"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:ahext:34,53,0:mc"
-     }
+  "spec": {
+   "skill": "Use the exterior-angle theorem: an exterior angle equals the sum of the two interior opposite angles (both directions).",
+   "competency": "MATH.geometry.triangle-properties",
+   "generator": {
+    "family": "ahext",
+    "restriction": "ahext, both forms: params[2] = 0 (find the exterior angle) and 1 (find an interior opposite angle); examples avoid coincident angles."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "used-360"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "ahext_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_third_interior",
+     "when": "verified-misconception 'third-interior' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_adjacent_interior",
+     "when": "verified-misconception 'adjacent-interior' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_exterior_as_interior",
+     "when": "verified-misconception 'exterior-as-interior' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Exterior-angle theorem directly",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "ahext",
+    "partition": "check",
+    "restriction": "ahext, both forms: params[2] = 0 (find the exterior angle) and 1 (find an interior opposite angle); examples avoid coincident angles.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:ahext:86,70,0:mc",
+     "gen:ahext:44,76,1"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.geometry.triangle-properties",
+    "family": "ahext",
+    "partition": "retention",
+    "cases": [
+     "find the exterior angle",
+     "find an interior opposite angle"
     ],
-    "guided": "gen:ahext:34,53,0:mc",
-    "check": "gen:ahext:111,26,0"
+    "candidates": [
+     "gen:ahext:56,89,0:mc",
+     "gen:ahext:77,74,1"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "ahext has a geometry task (geometry-task.ts) for the foundation's geometry working adapter; the Python reasoner has NO exterior-angle rule (G5 R07), so a citation of the exterior-angle theorem is not verifiable; the 'via the third angle' route uses supported rules (triangle-sum, straight-line)"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "ahext_concept",
+     "title": "The exterior angle of a triangle",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.",
+        "The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together."
+       ],
+       "math": [
+        "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
+        "Exterior angle = 180° − 29° = 151° (straight line)",
+        "Check: 39° + 112° = 151° (exterior-angle theorem)"
+       ],
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "39°",
+         "112°",
+         ""
+        ],
+        "exterior": "?"
+       },
+       "role": "concept",
+       "instance": "gen:ahext:39,112,0"
+      },
+      {
+       "title": "Another example",
+       "text": [
+        "The same idea on a different question."
+       ],
+       "math": [
+        "Interior angle next to the exterior angle C = 180° − 129° = 51° (straight line)",
+        "Other opposite angle = 180° − 93° − 51° = 36° (angle sum)",
+        "Check: 93° + 36° = 129° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:93,36,1"
+      },
+      {
+       "title": "Go through the third angle",
+       "text": [
+        "Find the third interior angle with the angle sum.",
+        "The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle."
+       ],
+       "math": [
+        "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
+        "Exterior angle = 180° − 29° = 151° (straight line)",
+        "Check: 39° + 112° = 151° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:39,112,0"
+      },
+      {
+       "title": "Another way: Exterior-angle theorem directly",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "exterior = 39° + 112° = 151°"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:39,112,0"
+      }
+     ],
+     "guided": "gen:ahext:62,79,0:mc",
+     "check": "gen:ahext:86,70,0:mc"
+    }
    },
    {
-    "id": "fix_adjacent_interior",
-    "title": "The question asks for an angle FAR from the exterior angle, ",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:ahext:108,27,1"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:ahext:108,27,1"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:ahext:23,76,1"
-     }
-    ],
-    "guided": "gen:ahext:23,76,1",
-    "check": "gen:ahext:47,45,1"
+    "purpose": "misconception-specific: third-interior",
+    "strategy": {
+     "id": "fix_third_interior",
+     "title": "The exterior angle is outside the triangle",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The exterior angle is outside the triangle: what went wrong",
+       "text": [
+        "The third interior angle was found instead. The exterior angle sits outside, next to that angle, on the straight line.",
+        "The exterior angle is OUTSIDE the triangle, on the straight line next to the third angle; it is not the third angle."
+       ],
+       "math": [
+        "Not 119°, but 61°",
+        "Counter-check: the third angle is 119°; it and the exterior angle must make 180°, so the exterior angle is 61°."
+       ],
+       "role": "misconception",
+       "instance": "gen:ahext:34,27,0"
+      },
+      {
+       "title": "The exterior angle is outside the triangle: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Third interior angle C = 180° − 34° − 27° = 119° (angle sum)",
+        "Exterior angle = 180° − 119° = 61° (straight line)",
+        "Check: 34° + 27° = 61° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:34,27,0"
+      }
+     ],
+     "guided": "gen:ahext:34,53,0:mc",
+     "check": "gen:ahext:111,26,0"
+    }
    },
    {
-    "id": "fix_exterior_as_interior",
-    "title": "The exterior angle is outside the triangle; it is not one of",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:ahext:45,83,1"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:ahext:45,83,1"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:ahext:25,60,1:mc"
-     }
-    ],
-    "guided": "gen:ahext:25,60,1:mc",
-    "check": "gen:ahext:69,32,1:mc"
+    "purpose": "misconception-specific: adjacent-interior",
+    "strategy": {
+     "id": "fix_adjacent_interior",
+     "title": "Find the far angle, not the one next to it",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Find the far angle, not the one next to it: what went wrong",
+       "text": [
+        "The interior angle next to the exterior angle was found (180° − exterior). The question asks for the other opposite angle.",
+        "The question asks for an angle FAR from the exterior angle, not the one next to it."
+       ],
+       "math": [
+        "Not 45°, but 27°",
+        "Counter-check: 45° is the angle next to the exterior angle; the far angles add to 135°, so the other far angle is 27°."
+       ],
+       "role": "misconception",
+       "instance": "gen:ahext:108,27,1"
+      },
+      {
+       "title": "Find the far angle, not the one next to it: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Interior angle next to the exterior angle C = 180° − 135° = 45° (straight line)",
+        "Other opposite angle = 180° − 108° − 45° = 27° (angle sum)",
+        "Check: 108° + 27° = 135° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:108,27,1"
+      }
+     ],
+     "guided": "gen:ahext:23,76,1",
+     "check": "gen:ahext:47,45,1"
+    }
+   },
+   {
+    "purpose": "misconception-specific: exterior-as-interior",
+    "strategy": {
+     "id": "fix_exterior_as_interior",
+     "title": "The exterior angle is not one of the three",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The exterior angle is not one of the three: what went wrong",
+       "text": [
+        "The exterior angle was used as if it were inside the triangle (180° − 128° − 45°). The exterior angle equals the two opposite interior angles together.",
+        "The exterior angle is outside the triangle; it is not one of the three angles that make 180°."
+       ],
+       "math": [
+        "Not 7°, but 83°",
+        "Counter-check: 128° makes 180° with the interior angle next to it (52°). The interior angles are 45°, 52° and the one you want: 180° − 45° − 52° = 83°."
+       ],
+       "role": "misconception",
+       "instance": "gen:ahext:45,83,1"
+      },
+      {
+       "title": "The exterior angle is not one of the three: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Interior angle next to the exterior angle C = 180° − 128° = 52° (straight line)",
+        "Other opposite angle = 180° − 45° − 52° = 83° (angle sum)",
+        "Check: 45° + 83° = 128° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:45,83,1"
+      }
+     ],
+     "guided": "gen:ahext:25,60,1:mc",
+     "check": "gen:ahext:69,32,1:mc"
+    }
    }
   ],
-  "registryProposal": [
+  "registryRecords": [
    {
+    "id": "MATH.geometry.triangle-properties#ahext_concept",
+    "subject": "mathematics",
+    "competency": "MATH.geometry.triangle-properties",
+    "strategy": "ahext_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:ffdb8604f953ee93f33d82e0033b36e4658dae9b56267e4dc59fd1976ff62f12",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.geometry.triangle-properties#fix_third_interior",
+    "subject": "mathematics",
     "competency": "MATH.geometry.triangle-properties",
     "strategy": "fix_third_interior",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "third-interior",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:65151c96f5e343e23aea6aa770d4c5855169f9edf4083f73227c5d30668128b5",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    },
    {
+    "id": "MATH.geometry.triangle-properties#fix_adjacent_interior",
+    "subject": "mathematics",
     "competency": "MATH.geometry.triangle-properties",
     "strategy": "fix_adjacent_interior",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "adjacent-interior",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:ac4779efebddbea3342b97b3a7f5d18ce0ba5b21787ac60c9ada4172e04d00a3",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    },
    {
+    "id": "MATH.geometry.triangle-properties#fix_exterior_as_interior",
+    "subject": "mathematics",
     "competency": "MATH.geometry.triangle-properties",
     "strategy": "fix_exterior_as_interior",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "exterior-as-interior",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:0e08aaee263c4a52d7e509ee5b0018dc684cd61d5d52f569587a893aeb7ba959",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    }
   ],
-  "generalStrategyProposal": {
-   "id": "ahext_concept",
-   "screens": [
-    "concept + visual",
-    "worked example(s)",
-    "alternative explanation"
+  "reusedExisting": [],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "ahext_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 4,
+      "of": 4,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_third_interior",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "third-interior"
+    },
+    {
+     "strategy": "fix_adjacent_interior",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "adjacent-interior"
+    },
+    {
+     "strategy": "fix_exterior_as_interior",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "exterior-as-interior"
+    }
    ],
-   "note": "for modules where this family has only a chapter screen"
+   "registryProblems": []
   },
-  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
  },
  "sources": [
   "packages/learning/src/fam/b08.ts:1199 ahext: teach, via_third, bugs third-interior / one-angle / exterior-as-interior / added / adjacent-interior",

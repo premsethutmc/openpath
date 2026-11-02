@@ -40,36 +40,47 @@ Answer **1/9**. (The family's own step text: Both have the same number of parts 
 For `gen:adfcmp:1,1,9,11,0`:
 
 1. Is the top number or the bottom number the same?
-2. Both are 1 part(s). Which whole is cut into bigger parts: 9 parts or 11 parts?
+2. Both have 1 part. Which whole is cut into bigger parts: 9 parts or 11 parts?
 3. A whole cut into 9 parts has the bigger parts, so 1/9 is greater.
 
 For `gen:adfcmp:1,1,3,9,1`:
 
 1. Is the top number or the bottom number the same?
-2. Both are 1 part(s). Which whole is cut into bigger parts: 3 parts or 9 parts?
+2. Both have 1 part. Which whole is cut into bigger parts: 3 parts or 9 parts?
 3. A whole cut into 3 parts has the bigger parts, so 1/3 is greater.
 
 ## Alternative explanation: Sharing a roti
 
-One roti shared by 3 children, another identical roti shared by 8.
-Each of the 8 gets less: 1/8 is less than 1/3. More sharers, smaller shares.
+Share one roti among a few children, and an identical roti among more children.
+In the bigger group each child gets less: more sharers, smaller shares.
 
 ## Valid alternative methods (each checked to reach the same answer on every applicable generated item)
 
-- **Same number of parts, compare part size**: Both have 1 part. A whole cut into 9 parts has bigger parts than one cut into 11. → So 1/9 is greater; the greater is 1/9.
+- **Compare part size (same top) or part count (same bottom)**: Both have 1 part. A whole cut into 9 parts has bigger parts than one cut into 11. → So 1/9 is greater; the greater is 1/9.
 - **Common denominator (later grades; computing check)**: 1/9 = 11/99 and 1/11 = 9/99 → 11/99 is more, so the greater fraction is 1/9
 
 **Method credit.** A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: comparison answers have no working contract (answer-level evidence only).
 
 ## Diagnostic (distinguishes the difficulties)
 
-Interpretation rule: Read the three items together. bigger-bottom-bigger is SUSPECTED only when both same-top items are answered with the bigger-bottom fraction AND the same-bottom item is right. If the same-bottom item is also wrong (its modelled reading is 'more-parts-wrong-way'), all three answers fit a greater/smaller (or reversal) confusion instead, and no misconception is suspected. misconception-evidence@1 today would establish bigger-bottom-bigger from the two same-top matches alone; adopting this contrast condition is a policy decision for Codex (05).
+Interpretation rule: Read the four items together (response patterns below). Two same-top matches establish bigger-bottom-bigger ONLY when both same-bottom contrast items are right; if the contrast items are wrong too, a reversal explains all the answers and nothing is established. misconception-evidence@1 today would establish it from the two same-top matches alone; the contrast condition is a policy request for Codex (05).
 
 | Item | Case | Correct | Readings of other answers |
 |---|---|---|---|
 | `gen:adfcmp:1,1,8,2,0`: Which fraction is greater: 1/8 or 1/2 (one-half)? Write that fraction. | same top, asks greater — bigger-bottom-bigger answers the larger denominator | 1/2 | 1/8 → TARGET modelled error bigger-bottom-bigger (conceptual): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
 | `gen:adfcmp:1,7,12,11,1`: Which fraction is smaller: 7/12 or 7/11? Write that fraction. | same top, asks smaller — the belief gives the opposite wrong answer here; a greater/smaller mix-up gives the SAME answers on these two items, which only the same-bottom item separates | 7/12 | 7/11 → TARGET modelled error bigger-bottom-bigger (conceptual): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
-| `gen:adfcmp:0,11,1,10,0`: Which fraction is greater: 1/11 or 10/11? Write that fraction. | same bottom (contrast) — the bigger-bottom belief is right here; a greater/smaller mix-up (or answering in reverse) is wrong here too | 10/11 | 1/11 → other modelled error more-parts-wrong-way (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+| `gen:adfcmp:0,11,1,10,0`: Which fraction is greater: 1/11 or 10/11? Write that fraction. | same bottom, asks greater (contrast) — the bigger-bottom belief is right here; a greater/smaller mix-up (or answering in reverse) is wrong here too | 10/11 | 1/11 → other modelled error more-parts-wrong-way (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+| `gen:adfcmp:0,11,6,3,1`: Which fraction is smaller: 6/11 or 3/11? Write that fraction. | same bottom, asks smaller (contrast) — a second contrast, so one slip on a contrast item is not read as a reversal | 3/11 | 6/11 → other modelled error more-parts-wrong-way (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+
+### What each response pattern supports
+
+| Answers on the diagnostic items (in order) | Supports | Leaves uncertain | Establishes? |
+|---|---|---|---|
+| 1/8 (bug:bigger-bottom-bigger); 7/11 (bug:bigger-bottom-bigger); 10/11 (correct); 3/11 (correct) | bigger-bottom-bigger: the larger denominator is read as the larger fraction, while same-denominator fractions are compared correctly | nothing that competes with the diagnosis; teach fix_bigger_bottom_bigger | yes |
+| 1/8 (bug:bigger-bottom-bigger); 7/11 (bug:bigger-bottom-bigger); 1/11 (bug:more-parts-wrong-way); 6/11 (bug:more-parts-wrong-way) | a consistent reversal (answers the opposite of 'greater'/'smaller', or reads the words the other way) | it is NOT evidence of bigger-bottom-bigger: the same two same-top answers come from the reversal; re-ask with the words emphasised | **no** |
+| 1/8 (bug:bigger-bottom-bigger); 7/11 (bug:bigger-bottom-bigger); 1/11 (bug:more-parts-wrong-way); 3/11 (correct) | mixed: one contrast item wrong | a reversal and the misconception both remain possible; ask another same-bottom item before deciding | **no** |
+| 1/8 (bug:bigger-bottom-bigger); 7/12 (correct); 10/11 (correct); 3/11 (correct) | one matching answer: a suspected error only | a slip or the misconception; general teaching only, re-probe later | **no** |
+| 1/2 (correct); 7/12 (correct); 10/11 (correct); 3/11 (correct) | compares same-top and same-bottom fractions correctly | answer evidence only: the reasoning (part size or a memorised rule) is not seen | **no** |
 
 ## Misconception-specific teaching (only after the misconception is ESTABLISHED)
 
@@ -99,58 +110,30 @@ Example `gen:adfcmp:1,1,9,10,0`; guided `gen:adfcmp:1,1,4,8,1`; fresh check `gen
 - Transfer (everyday form): `gen:adfcmp:1,2,9,7,1:w`, `gen:adfcmp:1,3,8,5,1:w`
 - Delayed checks: `gen:adfcmp:1,1,2,12,0`, `gen:adfcmp:1,7,10,8,1`
 
-## Integration mapping (proposal for Codex; nothing written)
+## Integration specification (for the shared teaching selector; nothing written)
 
-```json
-{
- "strategyProposals": [
-  {
-   "id": "fix_bigger_bottom_bigger",
-   "title": "A bigger bottom number means MORE pieces from the same whole",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:adfcmp:1,1,9,10,0"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:adfcmp:1,1,9,10,0"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:adfcmp:1,1,4,8,1"
-    }
-   ],
-   "guided": "gen:adfcmp:1,1,4,8,1",
-   "check": "gen:adfcmp:1,1,6,7,1"
-  }
- ],
- "registryProposal": [
-  {
-   "competency": "MATH.number.fraction-comparison",
-   "strategy": "fix_bigger_bottom_bigger",
-   "misconceptionSpecific": true,
-   "addresses": "bigger-bottom-bigger",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  }
- ],
- "generalStrategyProposal": {
-  "id": "adfcmp_concept",
-  "screens": [
-   "concept + visual",
-   "worked example(s)",
-   "alternative explanation"
-  ],
-  "note": "for modules where this family has only a chapter screen"
- },
- "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
-}
-```
+- **Skill:** Compare two fractions with the same numerator: more equal parts in the whole means each part is smaller.
+- **Generator:** `adfcmp` — adfcmp with params[0] = 1 (same numerator); both asks (params[4] = 0 greater, 1 smaller). Contrast items: params[0] = 0 (same denominator).
+- **Trigger** `adfcmp_concept`: general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page
+- **Trigger** `fix_bigger_bottom_bigger`: verified-misconception 'bigger-bottom-bigger' (two matching answers, misconception-evidence@1) AND a response pattern below with establishes = true; patterns with competing explanations must not establish it
+- **Allowed methods:** the oracle's method (worked lines); Compare part size (same top) or part count (same bottom); Common denominator (later grades; computing check)
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:adfcmp:1,1,10,5,0`, `gen:adfcmp:1,2,11,7,1`
+- **Retention target:** MATH.number.fraction-comparison / `adfcmp`, cases: same top, asks greater; same top, asks smaller. Candidates: `gen:adfcmp:1,1,2,12,0`, `gen:adfcmp:1,7,10,8,1`
+- **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
+- **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
+- **Ungradable / text-only:** none
+- **Reused existing explanations:** none
+
+Platform checks of the proposed objects (in memory):
+
+| Strategy | teaching contract (as integrated today) | contract with this family as the lesson scope | eligible without evidence | eligible with the misconception established | addresses (read by platform) |
+|---|---|---|---|---|---|
+| `adfcmp_concept` | pass | 5/5 sections checked, no violations | yes | yes | — |
+| `fix_bigger_bottom_bigger` | pass | 2/2 sections checked, no violations | no (misconception-evidence) | yes | bigger-bottom-bigger |
+
+Registry validation problems for the new records: none.
+
+The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in the package JSON (`integration.strategies`, `integration.registryRecords`).
 
 ## Sources
 
@@ -162,4 +145,4 @@ Example `gen:adfcmp:1,1,9,10,0`; guided `gen:adfcmp:1,1,4,8,1`; fresh check `gen
 - The family's mc flag is false, so no multiple-choice delayed check exists; delayed checks are typed.
 - The two-strip picture needs a renderer decision (two grid strips of equal width).
 
-## Validation: 17/17 items pass; whole-pool oracle + alternatives agreement 250/250
+## Validation: 18/18 items pass; whole-pool oracle + alternatives agreement 250/250

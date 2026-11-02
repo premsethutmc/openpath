@@ -1,0 +1,1191 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-SCL-PICT",
+ "batch": "batch-2",
+ "pattern": "PAT-SCALE",
+ "title": "Pictographs: each picture stands for the key",
+ "competency": "MATH.statistics.pictographs",
+ "competencyName": "Interpret pictographs with a key",
+ "grades": [
+  2,
+  2
+ ],
+ "strand": "statistics",
+ "family": "acpicttab",
+ "familyTitle": "Pictographs and tables: completing, totals and the largest group",
+ "skill": "Use a pictograph key (each symbol stands for k) to draw a row and to read totals.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.statistics.picture-data",
+    "type": "mandatory"
+   }
+  ],
+  "knowledge": [
+   "multiplying and sharing by 2, 5, 10",
+   "reading a table"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "In a pictograph one picture does not always stand for 1 thing: the key says how many it stands for.",
+   "To read, count the pictures and multiply by the key; to draw, share the number into groups of the key."
+  ],
+  "visual": {
+   "type": "table",
+   "head": [
+    "Choice",
+    "Children"
+   ],
+   "rows": [
+    [
+     "Mango",
+     12
+    ],
+    [
+     "Banana",
+     12
+    ],
+    [
+     "Guava",
+     16
+    ],
+    [
+     "Apple",
+     8
+    ]
+   ]
+  },
+  "visualNote": "Reuses the family's own table / pictograph figures."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:acpicttab:0,9,2,0",
+   "prompt": "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Guava?",
+   "lines": [
+    "Guava: 16 children, each ● for 2",
+    "16 ÷ 2 = 8 pictures"
+   ],
+   "familyExplainSteps": [
+    "16 children ÷ 2 = 8 pictures"
+   ],
+   "answer": "8"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:acpicttab:0,9,2,0",
+   "hints": [
+    "What does one picture stand for?",
+    "Share the number into groups of the key.",
+    "One picture for each group."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Bundles",
+  "text": [
+   "Think of each picture as a bundle of children tied together.",
+   "Count bundles, then children in the bundles."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Make a table",
+   "valid": true,
+   "example": [
+    "pictures × key = children, or children ÷ key = pictures, row by row",
+    "16 ÷ 2 = 8 pictures"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "draw a row",
+   "why": "one-each draws one picture per child",
+   "id": "gen:acpicttab:2,22,2,0",
+   "fromPhase": "diagnostic",
+   "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Cycle?",
+   "answer": "7",
+   "readings": [
+    {
+     "response": "7",
+     "reading": "correct"
+    },
+    {
+     "response": "70",
+     "reading": "TARGET modelled error one-each (conceptual): suspected on one answer (competing explanation: see the trigger condition; answers alone may not establish it)"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "read a total",
+   "why": "no-key counts pictures; drawing and reading separate 'ignores the key both ways' from a one-direction gap",
+   "id": "gen:acpicttab:2,1,0,1",
+   "fromPhase": "diagnostic",
+   "prompt": "The pictograph shows how the children of a school come to school. Each ● stands for 10 children. How many children are there in all?",
+   "answer": "240",
+   "readings": [
+    {
+     "response": "240",
+     "reading": "correct"
+    },
+    {
+     "response": "24",
+     "reading": "other modelled error no-key (conceptual): suspected on one answer"
+    },
+    {
+     "response": "180 | 220 | 160",
+     "reading": "other modelled error missed-row (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "one-each",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "one picture per child when drawing",
+   "example": "gen:acpicttab:2,7,0,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Walk?\", one wrong answer is 40.",
+     "One ● was drawn for each child, but each ● stands for 10 children: share the number into groups of 10.",
+     "Each picture stands for the key's number of children, so draw one picture for each GROUP, not each child.",
+     "Not 40, but 4."
+    ],
+    "counterCheck": "Check: 10 children make one picture.",
+    "solvedCorrectly": [
+     "Walk: 40 children, each ● for 10",
+     "40 ÷ 10 = 4 pictures"
+    ]
+   },
+   "guided": "gen:acpicttab:2,4,3,0:mc",
+   "check": "gen:acpicttab:1,5,2,0:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:acpicttab:1,29,3,0",
+   "gen:acpicttab:0,16,3,0",
+   "gen:acpicttab:1,19,1,0:mc"
+  ],
+  "rechecks": [
+   "gen:acpicttab:2,0,1,0",
+   "gen:acpicttab:2,14,0,0:mc"
+  ],
+  "transfer": [
+   "gen:acpicttab:0,23,2,0:w",
+   "gen:acpicttab:2,16,1,0:w"
+  ],
+  "delayedChecks": [
+   "gen:acpicttab:2,10,1,0",
+   "gen:acpicttab:0,25,3,0:mc"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Use a pictograph key (each symbol stands for k) to draw a row and to read totals.",
+   "competency": "MATH.statistics.pictographs",
+   "generator": {
+    "family": "acpicttab",
+    "restriction": "acpicttab, all three forms: params[3] = 0 draw a row (÷ key), 1 total (× key), 2 largest group; key > 1 in diagnostics."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "no-key"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "acpicttab_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_one_each",
+     "when": "verified-misconception 'one-each' (two matching answers, misconception-evidence@1) AND a competing explanation ('copied the table value', or 'answered children instead of pictures') gives the SAME number on every draw item, so answers alone cannot establish one-each: establish it only from a drawn pictograph (the learner draws one symbol per child) or after asking the learner what one symbol stands for",
+     "reachable": true
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "when": "existing explanation reused: no-key (reading a pictograph)"
+    },
+    {
+     "strategy": "table",
+     "when": "existing explanation reused: pictures × key (general, seed acpict)"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Make a table",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "acpicttab",
+    "partition": "check",
+    "restriction": "acpicttab, all three forms: params[3] = 0 draw a row (÷ key), 1 total (× key), 2 largest group; key > 1 in diagnostics.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:acpicttab:2,0,1,0",
+     "gen:acpicttab:2,14,0,0:mc"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.statistics.pictographs",
+    "family": "acpicttab",
+    "partition": "retention",
+    "cases": [
+     "draw a row"
+    ],
+    "candidates": [
+     "gen:acpicttab:2,10,1,0",
+     "gen:acpicttab:0,25,3,0:mc"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "acpicttab_concept",
+     "title": "Pictographs: each picture stands for the key",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "In a pictograph one picture does not always stand for 1 thing: the key says how many it stands for.",
+        "To read, count the pictures and multiply by the key; to draw, share the number into groups of the key."
+       ],
+       "math": [
+        "Guava: 16 children, each ● for 2",
+        "16 ÷ 2 = 8 pictures"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "Choice",
+         "Children"
+        ],
+        "rows": [
+         [
+          "Mango",
+          12
+         ],
+         [
+          "Banana",
+          12
+         ],
+         [
+          "Guava",
+          16
+         ],
+         [
+          "Apple",
+          8
+         ]
+        ]
+       },
+       "role": "concept",
+       "instance": "gen:acpicttab:0,9,2,0"
+      },
+      {
+       "title": "Bundles",
+       "text": [
+        "Think of each picture as a bundle of children tied together.",
+        "Count bundles, then children in the bundles."
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,9,2,0"
+      },
+      {
+       "title": "Another way: Make a table",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "pictures × key = children, or children ÷ key = pictures, row by row",
+        "16 ÷ 2 = 8 pictures"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,9,2,0"
+      }
+     ],
+     "guided": "gen:acpicttab:1,29,3,0",
+     "check": "gen:acpicttab:2,0,1,0"
+    }
+   },
+   {
+    "purpose": "misconception-specific: one-each",
+    "strategy": {
+     "id": "fix_one_each",
+     "title": "One picture for each group",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "One picture for each group: what went wrong",
+       "text": [
+        "One ● was drawn for each child, but each ● stands for 10 children: share the number into groups of 10.",
+        "Each picture stands for the key's number of children, so draw one picture for each GROUP, not each child."
+       ],
+       "math": [
+        "Not 40, but 4",
+        "Check: 10 children make one picture."
+       ],
+       "role": "misconception",
+       "instance": "gen:acpicttab:2,7,0,0"
+      },
+      {
+       "title": "One picture for each group: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Walk: 40 children, each ● for 10",
+        "40 ÷ 10 = 4 pictures"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:2,7,0,0"
+      }
+     ],
+     "guided": "gen:acpicttab:2,4,3,0:mc",
+     "check": "gen:acpicttab:1,5,2,0:mc"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.statistics.pictographs#acpicttab_concept",
+    "subject": "mathematics",
+    "competency": "MATH.statistics.pictographs",
+    "strategy": "acpicttab_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:9d49a9ddd6a209392c96f83ed34bc031acb9fd57c83e2492c4079ab19638b1dd",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.statistics.pictographs#fix_one_each",
+    "subject": "mathematics",
+    "competency": "MATH.statistics.pictographs",
+    "strategy": "fix_one_each",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "one-each",
+    "revisions": [
+     {
+      "contentHash": "sha256:50e6a467976fcc39454b296239c81b689a477e259c95129ff32140577cf501be",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "spot_the_mistake",
+    "covers": "no-key (reading a pictograph)"
+   },
+   {
+    "strategy": "table",
+    "covers": "pictures × key (general, seed acpict)"
+   }
+  ],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "acpicttab_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 3,
+      "of": 3,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_one_each",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "one-each"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b03.ts:1958 acpicttab: teach idea/method, alternative table, figures table/pictograph; bugs one-each, no-key, missed-row, smallest"
+ ],
+ "uncertainties": [
+  "no-key (reading) is already taught by the pictographs module's spot_the_mistake (seed acpict); this package adds one-each (drawing) and the shared concept for the family.",
+  "one-each always predicts the number printed in the table, so it competes with copying: see the trigger condition."
+ ],
+ "validation": {
+  "items": 15,
+  "itemsOk": 15,
+  "poolAgreement": "300/300",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:acpicttab:2,22,2,0",
+    "role": "diagnostic",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Cycle?",
+    "answer": "7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Cycle: 70 children, each ● for 10",
+      "70 ÷ 10 = 7 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "70 ÷ 10 = 7 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "70"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:2,1,0,1",
+    "role": "diagnostic",
+    "prompt": "The pictograph shows how the children of a school come to school. Each ● stands for 10 children. How many children are there in all?",
+    "answer": "240",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Pictures: 6 + 2 + 8 + 8 = 24",
+      "24 × 10 = 240 children"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "24 × 10 = 240 children"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-key",
+      "kind": "conceptual",
+      "predicts": [
+       "24"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "missed-row",
+      "kind": "procedural",
+      "predicts": [
+       "180",
+       "220",
+       "160"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:0,9,2,0",
+    "role": "worked-example",
+    "prompt": "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Guava?",
+    "answer": "8",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Guava: 16 children, each ● for 2",
+      "16 ÷ 2 = 8 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "16 ÷ 2 = 8 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:2,7,0,0",
+    "role": "misconception-example",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Walk?",
+    "answer": "4",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Walk: 40 children, each ● for 10",
+      "40 ÷ 10 = 4 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "40 ÷ 10 = 4 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:2,4,3,0:mc",
+    "role": "misconception-guided",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Auto? Choose one.",
+    "answer": "5",
+    "options": [
+     "50",
+     "5",
+     "7",
+     "6"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Auto: 50 children, each ● for 10",
+      "50 ÷ 10 = 5 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "50 ÷ 10 = 5 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "50"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:1,5,2,0:mc",
+    "role": "misconception-check",
+    "prompt": "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 5 children. How many ● should be drawn for Kho-kho? Choose one.",
+    "answer": "8",
+    "options": [
+     "10",
+     "8",
+     "9",
+     "40"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Kho-kho: 40 children, each ● for 5",
+      "40 ÷ 5 = 8 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "40 ÷ 5 = 8 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:1,29,3,0",
+    "role": "guided-practice",
+    "prompt": "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 5 children. How many ● should be drawn for Football?",
+    "answer": "6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Football: 30 children, each ● for 5",
+      "30 ÷ 5 = 6 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "30 ÷ 5 = 6 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:0,16,3,0",
+    "role": "guided-practice",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Auto?",
+    "answer": "3",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Auto: 6 children, each ● for 2",
+      "6 ÷ 2 = 3 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "6 ÷ 2 = 3 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:1,19,1,0:mc",
+    "role": "guided-practice",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 5 children. How many ● should be drawn for Bus? Choose one.",
+    "answer": "5",
+    "options": [
+     "25",
+     "6",
+     "7",
+     "5"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Bus: 25 children, each ● for 5",
+      "25 ÷ 5 = 5 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "25 ÷ 5 = 5 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "25"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:2,0,1,0",
+    "role": "recheck",
+    "prompt": "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Banana?",
+    "answer": "5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Banana: 50 children, each ● for 10",
+      "50 ÷ 10 = 5 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "50 ÷ 10 = 5 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "50"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:2,14,0,0:mc",
+    "role": "recheck",
+    "prompt": "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Kabaddi? Choose one.",
+    "answer": "7",
+    "options": [
+     "7",
+     "9",
+     "8",
+     "70"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Kabaddi: 70 children, each ● for 10",
+      "70 ÷ 10 = 7 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "70 ÷ 10 = 7 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "70"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:0,23,2,0:w",
+    "role": "transfer",
+    "prompt": "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Kho-kho?",
+    "answer": "4",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Kho-kho: 8 children, each ● for 2",
+      "8 ÷ 2 = 4 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "8 ÷ 2 = 4 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:2,16,1,0:w",
+    "role": "transfer",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Bus?",
+    "answer": "5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Bus: 50 children, each ● for 10",
+      "50 ÷ 10 = 5 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "50 ÷ 10 = 5 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "50"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:2,10,1,0",
+    "role": "delayed-check",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Bus?",
+    "answer": "4",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Bus: 40 children, each ● for 10",
+      "40 ÷ 10 = 4 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "40 ÷ 10 = 4 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:0,25,3,0:mc",
+    "role": "delayed-check",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Auto? Choose one.",
+    "answer": "4",
+    "options": [
+     "6",
+     "4",
+     "5",
+     "8"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Auto: 8 children, each ● for 2",
+      "8 ÷ 2 = 4 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "8 ÷ 2 = 4 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

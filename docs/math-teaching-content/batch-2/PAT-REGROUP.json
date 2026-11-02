@@ -1,0 +1,155 @@
+{
+ "id": "PAT-REGROUP",
+ "title": "Regroup at the unit boundary (60 minutes, 100 paise)",
+ "strands": [
+  "measurement"
+ ],
+ "concept": [
+  "A bigger unit is made of a fixed number of smaller units: 60 minutes make 1 hour, 100 paise make ₹1.",
+  "When the small units add up to that number or more, make one big unit from them and keep the rest as small units. The number to regroup at depends on the unit: 60 for time, 100 for money (10 for ones and tens)."
+ ],
+ "alternative": {
+  "title": "Like carrying, but at 60 or 100",
+  "text": [
+   "Carrying in ones and tens happens at 10. Time carries at 60, money at 100."
+  ]
+ },
+ "reuses": [
+  {
+   "competency": "MATH.measurement.time-unit-conversion",
+   "strategy": "spot_the_mistake",
+   "covers": "hour-as-100 (an hour taken as 100 minutes)"
+  },
+  {
+   "competency": "MATH.measurement.time-unit-conversion",
+   "strategy": "clock_round",
+   "covers": "the 60-minute hour (general)"
+  },
+  {
+   "competency": "MATH.measurement.money-decimals",
+   "strategy": "drop_dot",
+   "covers": "money as paise (general)"
+  }
+ ],
+ "members": [
+  {
+   "id": "TP2-REG-TIME",
+   "title": "Adding durations: 60 minutes make an hour",
+   "family": "addur",
+   "competency": "MATH.measurement.time-unit-conversion"
+  },
+  {
+   "id": "TP2-REG-MONEY",
+   "title": "Adding rupees and paise: 100 paise make ₹1",
+   "family": "acmoneyadd",
+   "competency": "MATH.measurement.money-decimals"
+  }
+ ],
+ "crossDiagnostic": [
+  {
+   "pkg": "TP2-REG-TIME",
+   "case": "minutes add to 100 or more",
+   "id": "gen:addur:0,27"
+  },
+  {
+   "pkg": "TP2-REG-MONEY",
+   "case": "paise add to 100 or more",
+   "id": "gen:acmoneyadd:3,7,11,13,0"
+  }
+ ],
+ "responsePatterns": [
+  {
+   "answers": [
+    "bug:no-carry",
+    "correct"
+   ],
+   "supports": "minutes kept at 100 or more while money is regrouped: the 60-minute boundary is the gap",
+   "uncertain": "on a 100+ minute item regrouping at 100 would give (h + 1, minutes − 100), which is different, so hour-as-100 does not explain this answer",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:addur:0,27",
+     "key": "bug:no-carry",
+     "response": "(5, 105)",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:acmoneyadd:3,7,11,13,0",
+     "key": "correct",
+     "response": "15.00",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:no-carry",
+    "bug:paise-over-100"
+   ],
+   "supports": "small units kept past the boundary in both units (100 or more minutes kept as minutes; 100 or more paise written after the dot)",
+   "uncertain": "the money answer also fits a notation habit (paise written in full after the dot); two different families: guide the shared concept, do not establish either misconception from this pair",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:addur:0,27",
+     "key": "bug:no-carry",
+     "response": "(5, 105)",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:acmoneyadd:3,7,11,13,0",
+     "key": "bug:paise-over-100",
+     "response": "14.100",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "correct",
+    "bug:no-carry"
+   ],
+   "supports": "regroups time but loses the regrouped rupee in money",
+   "uncertain": "money-specific; the money no-carry answer also fits adding the rupees only",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:addur:0,27",
+     "key": "correct",
+     "response": "(6, 45)",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:acmoneyadd:3,7,11,13,0",
+     "key": "bug:no-carry",
+     "response": "14.00",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "correct",
+    "correct"
+   ],
+   "supports": "regroups at both boundaries",
+   "uncertain": "answer evidence only",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:addur:0,27",
+     "key": "correct",
+     "response": "(6, 45)",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:acmoneyadd:3,7,11,13,0",
+     "key": "correct",
+     "response": "15.00",
+     "verdict": "correct"
+    }
+   ]
+  }
+ ],
+ "whyThisPattern": "19 families across 10 competencies model a 60/100/24 boundary error (hour-as-100, minute-as-100, paise-over-100, no-carry, past-24); one strategy serves them all."
+}

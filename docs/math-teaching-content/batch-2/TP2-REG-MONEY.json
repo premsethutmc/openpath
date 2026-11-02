@@ -1,0 +1,1551 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-REG-MONEY",
+ "batch": "batch-2",
+ "pattern": "PAT-REGROUP",
+ "title": "Adding rupees and paise: 100 paise make ₹1",
+ "competency": "MATH.measurement.money-decimals",
+ "competencyName": "Read money in rupees and paise",
+ "grades": [
+  3,
+  3
+ ],
+ "strand": "measurement",
+ "family": "acmoneyadd",
+ "familyTitle": "Adding and taking away rupees and paise",
+ "skill": "Add two amounts in rupees and paise, regrouping 100 paise as ₹1.",
+ "prerequisites": {
+  "graph": [],
+  "knowledge": [
+   "₹1 = 100 paise",
+   "₹4.50 means 4 rupees and 50 paise"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "A bigger unit is made of a fixed number of smaller units. When the small units reach that number, make one big unit from them and keep the rest as small units.",
+   "100 paise make ₹1, so when the paise add up to 100 or more, 100 of them become ₹1."
+  ],
+  "visual": {
+   "type": "table",
+   "head": [
+    "",
+    "₹",
+    "paise"
+   ],
+   "rows": [
+    [
+     "",
+     25,
+     "90"
+    ],
+    [
+     "+",
+     14,
+     "75"
+    ]
+   ]
+  },
+  "visualNote": "Reuses the family's own ₹/paise table figure."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:acmoneyadd:25,18,14,15,0",
+   "prompt": "₹25.90 + ₹14.75 = ? Write the answer in rupees, like 4.50.",
+   "lines": [
+    "Paise: 90 + 75 = 165 = 100 + 65: 100 paise make ₹1",
+    "Rupees: 25 + 14 + 1 = 40",
+    "₹40.65"
+   ],
+   "familyExplainSteps": [
+    "Paise: 90 + 75 = 165, which is ₹1 and 65 paise",
+    "Rupees: 25 + 14 + 1 carried = ₹40"
+   ],
+   "answer": "40.65"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:acmoneyadd:25,18,14,15,0",
+   "hints": [
+    "Add the paise first.",
+    "90 + 75 paise: is that 100 or more?",
+    "Swap 100 paise for ₹1 and add it to the rupees."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Notes and coins",
+  "text": [
+   "Count the coins: when you have 100 paise in coins, swap them for a ₹1 coin.",
+   "Then count the rupees."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "All in paise",
+   "valid": true,
+   "example": [
+    "2590 paise + 1475 paise = 4065 paise",
+    "4065 paise = ₹40.65 (the dot two places from the right)"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "paise add to 100 or more",
+   "why": "paise-over-100 writes three paise digits; no-carry drops the regrouped rupee",
+   "id": "gen:acmoneyadd:3,7,11,13,0",
+   "fromPhase": "diagnostic",
+   "prompt": "₹3.35 + ₹11.65 = ? Write the answer in rupees, like 4.50.",
+   "answer": "15.00",
+   "readings": [
+    {
+     "response": "15.00",
+     "reading": "correct"
+    },
+    {
+     "response": "14.100",
+     "reading": "TARGET modelled error paise-over-100 (conceptual): suspected on one answer"
+    },
+    {
+     "response": "14.00",
+     "reading": "TARGET modelled error no-carry (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "paise-over-100",
+   "kind": "conceptual",
+   "platformCanDiagnose": false,
+   "platformReading": "other",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "115 paise written as .115",
+   "example": "gen:acmoneyadd:17,19,11,5,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"₹17.95 + ₹11.25 = ? Write the answer in rupees, like 4.50.\", one wrong answer is 28.120.",
+     "The paise came to 120, which is more than 100: 100 paise make ₹1, so 120 paise is ₹1 and 20 paise.",
+     "Paise always have two places after the dot: 100 paise or more must become rupees.",
+     "Not 28.120, but 29.20."
+    ],
+    "counterCheck": "Check: 120 paise = ₹1 and 20 paise, not 120 after the dot.",
+    "solvedCorrectly": [
+     "Paise: 95 + 25 = 120 = 100 + 20: 100 paise make ₹1",
+     "Rupees: 17 + 11 + 1 = 29",
+     "₹29.20"
+    ]
+   },
+   "guided": "gen:acmoneyadd:19,13,11,11,0:mc",
+   "check": "gen:acmoneyadd:29,15,15,6,0"
+  },
+  {
+   "bug": "no-carry",
+   "kind": "procedural",
+   "platformCanDiagnose": false,
+   "platformReading": "other",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the rupee made from 100 paise not carried",
+   "example": "gen:acmoneyadd:14,15,18,12,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"₹14.75 + ₹18.60 = ? Write the answer in rupees, like 4.50.\", one wrong answer is 32.35.",
+     "The rupee made from 100 paise was not carried to the rupees.",
+     "The ₹1 made from 100 paise must be added to the rupees.",
+     "Not 32.35, but 33.35."
+    ],
+    "counterCheck": "Check: all in paise, 1475 + 1860 = 3335 paise = ₹33.35.",
+    "solvedCorrectly": [
+     "Paise: 75 + 60 = 135 = 100 + 35: 100 paise make ₹1",
+     "Rupees: 14 + 18 + 1 = 33",
+     "₹33.35"
+    ]
+   },
+   "guided": "gen:acmoneyadd:26,17,15,9,0",
+   "check": "gen:acmoneyadd:16,7,20,19,0:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:acmoneyadd:17,17,19,18,0:mc",
+   "gen:acmoneyadd:15,14,11,7,0",
+   "gen:acmoneyadd:6,7,10,18,0:mc"
+  ],
+  "rechecks": [
+   "gen:acmoneyadd:28,9,19,11,0:mc",
+   "gen:acmoneyadd:2,15,7,15,0:mc"
+  ],
+  "transfer": [
+   "gen:acmoneyadd:26,17,12,15,0:w",
+   "gen:acmoneyadd:4,18,6,15,0:w"
+  ],
+  "delayedChecks": [
+   "gen:acmoneyadd:1,16,6,15,0:mc",
+   "gen:acmoneyadd:25,17,11,15,0:mc"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Add two amounts in rupees and paise, regrouping 100 paise as ₹1.",
+   "competency": "MATH.measurement.money-decimals",
+   "generator": {
+    "family": "acmoneyadd",
+    "restriction": "acmoneyadd with params[4] = 0 (addition); diagnostics, rechecks and delayed checks need paise that add to 100 or more."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "wrote-together"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "acmoneyadd_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_paise_over_100",
+     "when": "verified-misconception 'paise-over-100' (two matching answers, misconception-evidence@1)",
+     "reachable": false,
+     "blockedBy": "the diagnosis reader reads this wrong answer as \"other\": unreachable until fixed (05)"
+    },
+    {
+     "strategy": "fix_no_carry",
+     "when": "verified-misconception 'no-carry' (two matching answers, misconception-evidence@1)",
+     "reachable": false,
+     "blockedBy": "the diagnosis reader reads this wrong answer as \"other\": unreachable until fixed (05)"
+    },
+    {
+     "strategy": "drop_dot",
+     "when": "existing explanation reused: money as paise (general)"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "All in paise",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "acmoneyadd",
+    "partition": "check",
+    "restriction": "acmoneyadd with params[4] = 0 (addition); diagnostics, rechecks and delayed checks need paise that add to 100 or more.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:acmoneyadd:28,9,19,11,0:mc",
+     "gen:acmoneyadd:2,15,7,15,0:mc"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.measurement.money-decimals",
+    "family": "acmoneyadd",
+    "partition": "retention",
+    "cases": [
+     "paise add to 100 or more"
+    ],
+    "candidates": [
+     "gen:acmoneyadd:1,16,6,15,0:mc",
+     "gen:acmoneyadd:25,17,11,15,0:mc"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "acmoneyadd_concept",
+     "title": "Adding rupees and paise: 100 paise make ₹1",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "A bigger unit is made of a fixed number of smaller units. When the small units reach that number, make one big unit from them and keep the rest as small units.",
+        "100 paise make ₹1, so when the paise add up to 100 or more, 100 of them become ₹1."
+       ],
+       "math": [
+        "Paise: 90 + 75 = 165 = 100 + 65: 100 paise make ₹1",
+        "Rupees: 25 + 14 + 1 = 40",
+        "₹40.65"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "₹",
+         "paise"
+        ],
+        "rows": [
+         [
+          "",
+          25,
+          "90"
+         ],
+         [
+          "+",
+          14,
+          "75"
+         ]
+        ]
+       },
+       "role": "concept",
+       "instance": "gen:acmoneyadd:25,18,14,15,0"
+      },
+      {
+       "title": "Notes and coins",
+       "text": [
+        "Count the coins: when you have 100 paise in coins, swap them for a ₹1 coin.",
+        "Then count the rupees."
+       ],
+       "role": "strategy",
+       "instance": "gen:acmoneyadd:25,18,14,15,0"
+      },
+      {
+       "title": "Another way: All in paise",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "2590 paise + 1475 paise = 4065 paise",
+        "4065 paise = ₹40.65 (the dot two places from the right)"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmoneyadd:25,18,14,15,0"
+      }
+     ],
+     "guided": "gen:acmoneyadd:17,17,19,18,0:mc",
+     "check": "gen:acmoneyadd:28,9,19,11,0:mc"
+    }
+   },
+   {
+    "purpose": "misconception-specific: paise-over-100",
+    "strategy": {
+     "id": "fix_paise_over_100",
+     "title": "Paise stop at 99",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Paise stop at 99: what went wrong",
+       "text": [
+        "The paise came to 120, which is more than 100: 100 paise make ₹1, so 120 paise is ₹1 and 20 paise.",
+        "Paise always have two places after the dot: 100 paise or more must become rupees."
+       ],
+       "math": [
+        "Not 28.120, but 29.20",
+        "Check: 120 paise = ₹1 and 20 paise, not 120 after the dot."
+       ],
+       "role": "misconception",
+       "instance": "gen:acmoneyadd:17,19,11,5,0"
+      },
+      {
+       "title": "Paise stop at 99: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Paise: 95 + 25 = 120 = 100 + 20: 100 paise make ₹1",
+        "Rupees: 17 + 11 + 1 = 29",
+        "₹29.20"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmoneyadd:17,19,11,5,0"
+      }
+     ],
+     "guided": "gen:acmoneyadd:19,13,11,11,0:mc",
+     "check": "gen:acmoneyadd:29,15,15,6,0"
+    }
+   },
+   {
+    "purpose": "misconception-specific: no-carry",
+    "strategy": {
+     "id": "fix_no_carry",
+     "title": "Carry 100 paise as ₹1",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Carry 100 paise as ₹1: what went wrong",
+       "text": [
+        "The rupee made from 100 paise was not carried to the rupees.",
+        "The ₹1 made from 100 paise must be added to the rupees."
+       ],
+       "math": [
+        "Not 32.35, but 33.35",
+        "Check: all in paise, 1475 + 1860 = 3335 paise = ₹33.35."
+       ],
+       "role": "misconception",
+       "instance": "gen:acmoneyadd:14,15,18,12,0"
+      },
+      {
+       "title": "Carry 100 paise as ₹1: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Paise: 75 + 60 = 135 = 100 + 35: 100 paise make ₹1",
+        "Rupees: 14 + 18 + 1 = 33",
+        "₹33.35"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmoneyadd:14,15,18,12,0"
+      }
+     ],
+     "guided": "gen:acmoneyadd:26,17,15,9,0",
+     "check": "gen:acmoneyadd:16,7,20,19,0:mc"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.measurement.money-decimals#acmoneyadd_concept",
+    "subject": "mathematics",
+    "competency": "MATH.measurement.money-decimals",
+    "strategy": "acmoneyadd_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:04a24e9a2d3d75269a0d1cdc5efc57b80c165d8f8f4e63b9cdac7da11286f8df",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.measurement.money-decimals#fix_paise_over_100",
+    "subject": "mathematics",
+    "competency": "MATH.measurement.money-decimals",
+    "strategy": "fix_paise_over_100",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "paise-over-100",
+    "revisions": [
+     {
+      "contentHash": "sha256:7610c389234622b6cc1a4edb896791024cde395a9326e9203e72d85b91992848",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.measurement.money-decimals#fix_no_carry",
+    "subject": "mathematics",
+    "competency": "MATH.measurement.money-decimals",
+    "strategy": "fix_no_carry",
+    "intervention": "procedural",
+    "misconceptionSpecific": true,
+    "addresses": "no-carry",
+    "revisions": [
+     {
+      "contentHash": "sha256:62b5b0f7cb803a51ebc5c88218a47d7f0c397a33ee3781e91a765bf23d0598c9",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "drop_dot",
+    "covers": "money as paise (general)"
+   }
+  ],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "acmoneyadd_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 3,
+      "of": 3,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_paise_over_100",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "paise-over-100"
+    },
+    {
+     "strategy": "fix_no_carry",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "no-carry"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b03.ts:1451 acmoneyadd: teach idea/method, alternative all_paise, figure table; bugs paise-over-100, no-carry, smaller-from-larger, rupee-not-reduced"
+ ],
+ "uncertainties": [
+  "Money-decimals' existing spot_the_mistake addresses 'wrote-together' (seed acpaise); nothing existing covers regrouping.",
+  "paise-over-100: the platform's diagnosis reader (reasoning.ts probeReading) reads the predicted wrong answer \"28.120\" on gen:acmoneyadd:17,19,11,5,0 as \"other\", so this misconception can NEVER be established and fix_paise_over_100 can never be triggered until the reader handles this answer type (Codex)",
+  "no-carry: the platform's diagnosis reader (reasoning.ts probeReading) reads the predicted wrong answer \"32.35\" on gen:acmoneyadd:14,15,18,12,0 as \"other\", so this misconception can NEVER be established and fix_no_carry can never be triggered until the reader handles this answer type (Codex)"
+ ],
+ "validation": {
+  "items": 17,
+  "itemsOk": 17,
+  "poolAgreement": "240/240",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:acmoneyadd:3,7,11,13,0",
+    "role": "diagnostic",
+    "prompt": "₹3.35 + ₹11.65 = ? Write the answer in rupees, like 4.50.",
+    "answer": "15.00",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 35 + 65 = 100 = 100 + 0: 100 paise make ₹1",
+      "Rupees: 3 + 11 + 1 = 15",
+      "₹15.00"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "335 paise + 1165 paise = 1500 paise",
+       "1500 paise = ₹15.00 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "14.100"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "14.00"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:25,18,14,15,0",
+    "role": "worked-example",
+    "prompt": "₹25.90 + ₹14.75 = ? Write the answer in rupees, like 4.50.",
+    "answer": "40.65",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 90 + 75 = 165 = 100 + 65: 100 paise make ₹1",
+      "Rupees: 25 + 14 + 1 = 40",
+      "₹40.65"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "2590 paise + 1475 paise = 4065 paise",
+       "4065 paise = ₹40.65 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "39.165"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "39.65"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:17,19,11,5,0",
+    "role": "misconception-example",
+    "prompt": "₹17.95 + ₹11.25 = ? Write the answer in rupees, like 4.50.",
+    "answer": "29.20",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 95 + 25 = 120 = 100 + 20: 100 paise make ₹1",
+      "Rupees: 17 + 11 + 1 = 29",
+      "₹29.20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "1795 paise + 1125 paise = 2920 paise",
+       "2920 paise = ₹29.20 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "28.120"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "28.20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:19,13,11,11,0:mc",
+    "role": "misconception-guided",
+    "prompt": "₹19.65 + ₹11.55 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "31.20",
+    "options": [
+     "32.20",
+     "30.120",
+     "30.20",
+     "31.20"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 65 + 55 = 120 = 100 + 20: 100 paise make ₹1",
+      "Rupees: 19 + 11 + 1 = 31",
+      "₹31.20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "1965 paise + 1155 paise = 3120 paise",
+       "3120 paise = ₹31.20 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "30.120"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "30.20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:29,15,15,6,0",
+    "role": "misconception-check",
+    "prompt": "₹29.75 + ₹15.30 = ? Write the answer in rupees, like 4.50.",
+    "answer": "45.05",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 75 + 30 = 105 = 100 + 5: 100 paise make ₹1",
+      "Rupees: 29 + 15 + 1 = 45",
+      "₹45.05"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "2975 paise + 1530 paise = 4505 paise",
+       "4505 paise = ₹45.05 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "44.105"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "44.05"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:14,15,18,12,0",
+    "role": "misconception-example",
+    "prompt": "₹14.75 + ₹18.60 = ? Write the answer in rupees, like 4.50.",
+    "answer": "33.35",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 75 + 60 = 135 = 100 + 35: 100 paise make ₹1",
+      "Rupees: 14 + 18 + 1 = 33",
+      "₹33.35"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "1475 paise + 1860 paise = 3335 paise",
+       "3335 paise = ₹33.35 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "32.135"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "32.35"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:26,17,15,9,0",
+    "role": "misconception-guided",
+    "prompt": "₹26.85 + ₹15.45 = ? Write the answer in rupees, like 4.50.",
+    "answer": "42.30",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 85 + 45 = 130 = 100 + 30: 100 paise make ₹1",
+      "Rupees: 26 + 15 + 1 = 42",
+      "₹42.30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "2685 paise + 1545 paise = 4230 paise",
+       "4230 paise = ₹42.30 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "41.130"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "41.30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:16,7,20,19,0:mc",
+    "role": "misconception-check",
+    "prompt": "₹16.35 + ₹20.95 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "37.30",
+    "options": [
+     "36.30",
+     "36.130",
+     "38.30",
+     "37.30"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 35 + 95 = 130 = 100 + 30: 100 paise make ₹1",
+      "Rupees: 16 + 20 + 1 = 37",
+      "₹37.30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "1635 paise + 2095 paise = 3730 paise",
+       "3730 paise = ₹37.30 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "36.130"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "36.30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:17,17,19,18,0:mc",
+    "role": "guided-practice",
+    "prompt": "₹17.85 + ₹19.90 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "37.75",
+    "options": [
+     "38.75",
+     "36.75",
+     "37.75",
+     "36.175"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 85 + 90 = 175 = 100 + 75: 100 paise make ₹1",
+      "Rupees: 17 + 19 + 1 = 37",
+      "₹37.75"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "1785 paise + 1990 paise = 3775 paise",
+       "3775 paise = ₹37.75 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "36.175"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "36.75"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:15,14,11,7,0",
+    "role": "guided-practice",
+    "prompt": "₹15.70 + ₹11.35 = ? Write the answer in rupees, like 4.50.",
+    "answer": "27.05",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 70 + 35 = 105 = 100 + 5: 100 paise make ₹1",
+      "Rupees: 15 + 11 + 1 = 27",
+      "₹27.05"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "1570 paise + 1135 paise = 2705 paise",
+       "2705 paise = ₹27.05 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "26.105"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "26.05"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:6,7,10,18,0:mc",
+    "role": "guided-practice",
+    "prompt": "₹6.35 + ₹10.90 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "17.25",
+    "options": [
+     "16.125",
+     "16.25",
+     "18.25",
+     "17.25"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 35 + 90 = 125 = 100 + 25: 100 paise make ₹1",
+      "Rupees: 6 + 10 + 1 = 17",
+      "₹17.25"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "635 paise + 1090 paise = 1725 paise",
+       "1725 paise = ₹17.25 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "16.125"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "16.25"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:28,9,19,11,0:mc",
+    "role": "recheck",
+    "prompt": "₹28.45 + ₹19.55 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "48.00",
+    "options": [
+     "47.100",
+     "47.00",
+     "48.00",
+     "49.00"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 45 + 55 = 100 = 100 + 0: 100 paise make ₹1",
+      "Rupees: 28 + 19 + 1 = 48",
+      "₹48.00"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "2845 paise + 1955 paise = 4800 paise",
+       "4800 paise = ₹48.00 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "47.100"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "47.00"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:2,15,7,15,0:mc",
+    "role": "recheck",
+    "prompt": "₹2.75 + ₹7.75 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "10.50",
+    "options": [
+     "9.50",
+     "9.150",
+     "10.50",
+     "11.50"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 75 + 75 = 150 = 100 + 50: 100 paise make ₹1",
+      "Rupees: 2 + 7 + 1 = 10",
+      "₹10.50"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "275 paise + 775 paise = 1050 paise",
+       "1050 paise = ₹10.50 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "9.150"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "9.50"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:26,17,12,15,0:w",
+    "role": "transfer",
+    "prompt": "₹26.85 + ₹12.75 = ? Write the answer in rupees, like 4.50.",
+    "answer": "39.60",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 85 + 75 = 160 = 100 + 60: 100 paise make ₹1",
+      "Rupees: 26 + 12 + 1 = 39",
+      "₹39.60"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "2685 paise + 1275 paise = 3960 paise",
+       "3960 paise = ₹39.60 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "38.160"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "38.60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:4,18,6,15,0:w",
+    "role": "transfer",
+    "prompt": "₹4.90 + ₹6.75 = ? Write the answer in rupees, like 4.50.",
+    "answer": "11.65",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 90 + 75 = 165 = 100 + 65: 100 paise make ₹1",
+      "Rupees: 4 + 6 + 1 = 11",
+      "₹11.65"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "490 paise + 675 paise = 1165 paise",
+       "1165 paise = ₹11.65 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "10.165"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "10.65"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:1,16,6,15,0:mc",
+    "role": "delayed-check",
+    "prompt": "₹1.80 + ₹6.75 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "8.55",
+    "options": [
+     "8.55",
+     "7.55",
+     "7.155",
+     "9.55"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 80 + 75 = 155 = 100 + 55: 100 paise make ₹1",
+      "Rupees: 1 + 6 + 1 = 8",
+      "₹8.55"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "180 paise + 675 paise = 855 paise",
+       "855 paise = ₹8.55 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "7.155"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "7.55"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acmoneyadd:25,17,11,15,0:mc",
+    "role": "delayed-check",
+    "prompt": "₹25.85 + ₹11.75 = ? Write the answer in rupees, like 4.50. Choose one.",
+    "answer": "37.60",
+    "options": [
+     "38.60",
+     "37.60",
+     "36.160",
+     "36.60"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Paise: 85 + 75 = 160 = 100 + 60: 100 paise make ₹1",
+      "Rupees: 25 + 11 + 1 = 37",
+      "₹37.60"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "All in paise",
+      "ok": true,
+      "lines": [
+       "2585 paise + 1175 paise = 3760 paise",
+       "3760 paise = ₹37.60 (the dot two places from the right)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "predicts": [
+       "36.160"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "predicts": [
+       "36.60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

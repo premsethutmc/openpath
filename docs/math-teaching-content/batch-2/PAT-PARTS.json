@@ -1,0 +1,122 @@
+{
+ "id": "PAT-PARTS",
+ "title": "The bottom number counts all the equal parts",
+ "strands": [
+  "number"
+ ],
+ "concept": [
+  "A fraction names equal parts of ONE whole. The bottom number is how many equal parts the whole is cut into, all of them, shaded or not.",
+  "The top number is how many of those parts we mean. So the fraction of a shape that is shaded is (shaded parts) over (all the equal parts)."
+ ],
+ "alternative": {
+  "title": "Whole first",
+  "text": [
+   "Before naming a fraction, say what the whole is and how many equal parts it has."
+  ]
+ },
+ "reuses": [
+  {
+   "competency": "MATH.number.fraction-models",
+   "strategy": "equal_parts",
+   "covers": "equal parts (general, authored)"
+  }
+ ],
+ "members": [
+  {
+   "id": "TP2-PRT-NAME",
+   "title": "Naming a shaded fraction: out of ALL the equal parts",
+   "family": "adfname",
+   "competency": "MATH.number.fraction-models"
+  },
+  {
+   "id": "TP2-PRT-SHADE",
+   "title": "Shading a fraction of a grid: parts of the whole, not the top number",
+   "family": "adshade",
+   "competency": "MATH.number.fraction-models"
+  }
+ ],
+ "crossDiagnostic": [
+  {
+   "pkg": "TP2-PRT-NAME",
+   "case": "shaded fraction",
+   "id": "gen:adfname:2,6,7"
+  },
+  {
+   "pkg": "TP2-PRT-SHADE",
+   "case": "grid larger than the bottom number",
+   "id": "gen:adshade:2,8,3,8"
+  }
+ ],
+ "responsePatterns": [
+  {
+   "answers": [
+    "bug:shaded-to-unshaded",
+    "correct"
+   ],
+   "supports": "names the fraction part-to-part (shaded over unshaded) while shading a given fraction is right",
+   "uncertain": "a conceptual part-to-part reading of naming, or a habit only in naming tasks; one answer: suspected only",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:adfname:2,6,7",
+     "key": "bug:shaded-to-unshaded",
+     "response": "7/5",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adshade:2,8,3,8",
+     "key": "correct",
+     "response": "6",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "correct",
+    "bug:top-number"
+   ],
+   "supports": "names fractions but reads the top number as squares when shading",
+   "uncertain": "the size of a part in a bigger whole; fix_top_number",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:adfname:2,6,7",
+     "key": "correct",
+     "response": "7/12",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:adshade:2,8,3,8",
+     "key": "bug:top-number",
+     "response": "3",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:count-only",
+    "bug:top-number"
+   ],
+   "supports": "fractions treated as plain counts in both directions",
+   "uncertain": "the two answers are different errors, and typing only the top number also explains the first; teach the shared concept as general teaching, but do NOT establish either misconception from this pair",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:adfname:2,6,7",
+     "key": "bug:count-only",
+     "response": "7",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adshade:2,8,3,8",
+     "key": "bug:top-number",
+     "response": "3",
+     "verdict": "incorrect"
+    }
+   ]
+  }
+ ],
+ "whyThisPattern": "9 families in 5 competencies model a part–whole error in naming or making fractions (count-only, shaded-to-unshaded, top-number, add-bottoms)."
+}

@@ -1,0 +1,1269 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-PRT-SHADE",
+ "batch": "batch-2",
+ "pattern": "PAT-PARTS",
+ "title": "Shading a fraction of a grid: parts of the whole, not the top number",
+ "competency": "MATH.number.fraction-models",
+ "competencyName": "Represent fractions of a whole",
+ "grades": [
+  3,
+  3
+ ],
+ "strand": "number",
+ "family": "adshade",
+ "familyTitle": "How many squares to shade to show a fraction",
+ "skill": "Shade a/b of a grid of n equal squares: n ÷ b squares per part, a parts.",
+ "prerequisites": {
+  "graph": [],
+  "knowledge": [
+   "sharing into equal groups",
+   "what a/b means"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "A fraction names equal parts of ONE whole. The bottom number is how many equal parts the whole is cut into, all of them, shaded or not.",
+   "The top number is how many of those parts we mean. So the fraction of a shape that is shaded is (shaded parts) over (all the equal parts)."
+  ],
+  "visual": {
+   "type": "grid",
+   "rows": 5,
+   "cols": 3,
+   "shaded": 0
+  },
+  "visualNote": "Reuses the family's own empty grid figure."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:adshade:5,3,2,5",
+   "prompt": "The grid in the picture has 15 equal squares. How many squares must be shaded to show 2/5 of the grid?",
+   "lines": [
+    "Share 15 squares into 5 equal parts: 15 ÷ 5 = 3 squares in each part",
+    "2 parts: 2 × 3 = 6 squares"
+   ],
+   "familyExplainSteps": [
+    "1/5 of 15 squares is 3 squares",
+    "2 of those parts: 2 × 3 = 6 squares"
+   ],
+   "answer": "6"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:adshade:5,3,2,5",
+   "hints": [
+    "Into how many equal parts must the grid be shared for /5?",
+    "How many squares are in each part?",
+    "Shade 2 of those parts."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Two wholes",
+  "text": [
+   "Half of a small grid and half of a big grid are different numbers of squares, but each is half of its own grid."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Multiply first",
+   "valid": true,
+   "example": [
+    "2 × 15 = 30; ÷ 5 = 6"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "grid larger than the bottom number",
+   "why": "top-number shades a squares instead of a × (n ÷ b)",
+   "id": "gen:adshade:2,8,3,8",
+   "fromPhase": "diagnostic",
+   "prompt": "The grid in the picture has 16 equal squares. How many squares must be shaded to show 3/8 of the grid?",
+   "answer": "6",
+   "readings": [
+    {
+     "response": "6",
+     "reading": "correct"
+    },
+    {
+     "response": "3",
+     "reading": "TARGET modelled error top-number (conceptual): suspected on one answer"
+    },
+    {
+     "response": "2",
+     "reading": "other modelled error one-part (procedural): suspected on one answer"
+    },
+    {
+     "response": "10",
+     "reading": "other modelled error unshaded (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "top-number",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the top number read as a count of squares",
+   "example": "gen:adshade:6,2,1,2",
+   "screens": {
+    "whatWentWrong": [
+     "In \"The grid in the picture has 12 equal squares. How many squares must be shaded to show 1/2 (one-half) of the grid?\", one wrong answer is 1.",
+     "1 squares were shaded, the top number. The top number counts parts of size 1/2 of the WHOLE grid, and each such part here is 6 squares.",
+     "The top number counts PARTS of the whole, and each part may be several squares.",
+     "Not 1, but 6."
+    ],
+    "counterCheck": "Check: 1 square out of 12 is 1/12, not 1/2.",
+    "solvedCorrectly": [
+     "Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part",
+     "1 part: 1 × 6 = 6 squares"
+    ]
+   },
+   "guided": "gen:adshade:4,4,5,8:mc",
+   "check": "gen:adshade:6,5,7,10"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:adshade:2,5,3,5:mc",
+   "gen:adshade:3,5,1,5:mc",
+   "gen:adshade:3,6,1,9:mc"
+  ],
+  "rechecks": [
+   "gen:adshade:4,8,3,8:mc",
+   "gen:adshade:2,9,1,3:mc"
+  ],
+  "transfer": [
+   "gen:adshade:4,9,5,9:w",
+   "gen:adshade:4,5,1,10:w"
+  ],
+  "delayedChecks": [
+   "gen:adshade:6,3,5,9",
+   "gen:adshade:5,4,3,10"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Shade a/b of a grid of n equal squares: n ÷ b squares per part, a parts.",
+   "competency": "MATH.number.fraction-models",
+   "generator": {
+    "family": "adshade",
+    "restriction": "adshade, all items; diagnostics need n > b so 'top-number' differs from the answer."
+   },
+   "existingMisconceptionExplanations": [],
+   "triggers": [
+    {
+     "strategy": "adshade_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_top_number",
+     "when": "verified-misconception 'top-number' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "equal_parts",
+     "when": "existing explanation reused: equal parts (authored, general)"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Multiply first",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "adshade",
+    "partition": "check",
+    "restriction": "adshade, all items; diagnostics need n > b so 'top-number' differs from the answer.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:adshade:4,8,3,8:mc",
+     "gen:adshade:2,9,1,3:mc"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.number.fraction-models",
+    "family": "adshade",
+    "partition": "retention",
+    "cases": [
+     "grid larger than the bottom number"
+    ],
+    "candidates": [
+     "gen:adshade:6,3,5,9",
+     "gen:adshade:5,4,3,10"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "adshade_concept",
+     "title": "Shading a fraction of a grid: parts of the whole, not the top number",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "A fraction names equal parts of ONE whole. The bottom number is how many equal parts the whole is cut into, all of them, shaded or not.",
+        "The top number is how many of those parts we mean. So the fraction of a shape that is shaded is (shaded parts) over (all the equal parts)."
+       ],
+       "math": [
+        "Share 15 squares into 5 equal parts: 15 ÷ 5 = 3 squares in each part",
+        "2 parts: 2 × 3 = 6 squares"
+       ],
+       "widget": {
+        "type": "grid",
+        "rows": 5,
+        "cols": 3,
+        "shaded": 0
+       },
+       "role": "concept",
+       "instance": "gen:adshade:5,3,2,5"
+      },
+      {
+       "title": "Two wholes",
+       "text": [
+        "Half of a small grid and half of a big grid are different numbers of squares, but each is half of its own grid."
+       ],
+       "role": "strategy",
+       "instance": "gen:adshade:5,3,2,5"
+      },
+      {
+       "title": "Another way: Multiply first",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "2 × 15 = 30; ÷ 5 = 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:adshade:5,3,2,5"
+      }
+     ],
+     "guided": "gen:adshade:2,5,3,5:mc",
+     "check": "gen:adshade:4,8,3,8:mc"
+    }
+   },
+   {
+    "purpose": "misconception-specific: top-number",
+    "strategy": {
+     "id": "fix_top_number",
+     "title": "The top number counts parts, not squares",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The top number counts parts, not squares: what went wrong",
+       "text": [
+        "1 squares were shaded, the top number. The top number counts parts of size 1/2 of the WHOLE grid, and each such part here is 6 squares.",
+        "The top number counts PARTS of the whole, and each part may be several squares."
+       ],
+       "math": [
+        "Not 1, but 6",
+        "Check: 1 square out of 12 is 1/12, not 1/2."
+       ],
+       "role": "misconception",
+       "instance": "gen:adshade:6,2,1,2"
+      },
+      {
+       "title": "The top number counts parts, not squares: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part",
+        "1 part: 1 × 6 = 6 squares"
+       ],
+       "role": "strategy",
+       "instance": "gen:adshade:6,2,1,2"
+      }
+     ],
+     "guided": "gen:adshade:4,4,5,8:mc",
+     "check": "gen:adshade:6,5,7,10"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.number.fraction-models#adshade_concept",
+    "subject": "mathematics",
+    "competency": "MATH.number.fraction-models",
+    "strategy": "adshade_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:00d507a5978df616b175193342ad7975ed562932e2a183fadff9c4b4e6f9bed6",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.number.fraction-models#fix_top_number",
+    "subject": "mathematics",
+    "competency": "MATH.number.fraction-models",
+    "strategy": "fix_top_number",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "top-number",
+    "revisions": [
+     {
+      "contentHash": "sha256:4d44640c68e6b5c8fbf60228c46b31ab90b25dbafe2658ed9b6aff32f3909c8a",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "equal_parts",
+    "covers": "equal parts (authored, general)"
+   }
+  ],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "adshade_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 3,
+      "of": 3,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_top_number",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "top-number"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b04.ts:1945 adshade: teach idea/method, alternative two_wholes, figure grid; bugs top-number, one-part, unshaded"
+ ],
+ "uncertainties": [],
+ "validation": {
+  "items": 14,
+  "itemsOk": 14,
+  "poolAgreement": "300/300",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:adshade:2,8,3,8",
+    "role": "diagnostic",
+    "prompt": "The grid in the picture has 16 equal squares. How many squares must be shaded to show 3/8 of the grid?",
+    "answer": "6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 16 squares into 8 equal parts: 16 ÷ 8 = 2 squares in each part",
+      "3 parts: 3 × 2 = 6 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "3 × 16 = 48; ÷ 8 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:5,3,2,5",
+    "role": "worked-example",
+    "prompt": "The grid in the picture has 15 equal squares. How many squares must be shaded to show 2/5 of the grid?",
+    "answer": "6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 15 squares into 5 equal parts: 15 ÷ 5 = 3 squares in each part",
+      "2 parts: 2 × 3 = 6 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "2 × 15 = 30; ÷ 5 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:6,2,1,2",
+    "role": "misconception-example",
+    "prompt": "The grid in the picture has 12 equal squares. How many squares must be shaded to show 1/2 (one-half) of the grid?",
+    "answer": "6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part",
+      "1 part: 1 × 6 = 6 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "1 × 12 = 12; ÷ 2 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:4,4,5,8:mc",
+    "role": "misconception-guided",
+    "prompt": "The grid in the picture has 16 equal squares. How many squares must be shaded to show 5/8 of the grid? Choose one.",
+    "answer": "10",
+    "options": [
+     "2",
+     "5",
+     "6",
+     "10"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 16 squares into 8 equal parts: 16 ÷ 8 = 2 squares in each part",
+      "5 parts: 5 × 2 = 10 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "5 × 16 = 80; ÷ 8 = 10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:6,5,7,10",
+    "role": "misconception-check",
+    "prompt": "The grid in the picture has 30 equal squares. How many squares must be shaded to show 7/10 of the grid?",
+    "answer": "21",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 30 squares into 10 equal parts: 30 ÷ 10 = 3 squares in each part",
+      "7 parts: 7 × 3 = 21 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "7 × 30 = 210; ÷ 10 = 21"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:2,5,3,5:mc",
+    "role": "guided-practice",
+    "prompt": "The grid in the picture has 10 equal squares. How many squares must be shaded to show 3/5 of the grid? Choose one.",
+    "answer": "6",
+    "options": [
+     "4",
+     "6",
+     "2",
+     "3"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 10 squares into 5 equal parts: 10 ÷ 5 = 2 squares in each part",
+      "3 parts: 3 × 2 = 6 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "3 × 10 = 30; ÷ 5 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:3,5,1,5:mc",
+    "role": "guided-practice",
+    "prompt": "The grid in the picture has 15 equal squares. How many squares must be shaded to show 1/5 of the grid? Choose one.",
+    "answer": "3",
+    "options": [
+     "4",
+     "1",
+     "3",
+     "12"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 15 squares into 5 equal parts: 15 ÷ 5 = 3 squares in each part",
+      "1 part: 1 × 3 = 3 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "1 × 15 = 15; ÷ 5 = 3"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:3,6,1,9:mc",
+    "role": "guided-practice",
+    "prompt": "The grid in the picture has 18 equal squares. How many squares must be shaded to show 1/9 of the grid? Choose one.",
+    "answer": "2",
+    "options": [
+     "1",
+     "2",
+     "3",
+     "16"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 18 squares into 9 equal parts: 18 ÷ 9 = 2 squares in each part",
+      "1 part: 1 × 2 = 2 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "1 × 18 = 18; ÷ 9 = 2"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:4,8,3,8:mc",
+    "role": "recheck",
+    "prompt": "The grid in the picture has 32 equal squares. How many squares must be shaded to show 3/8 of the grid? Choose one.",
+    "answer": "12",
+    "options": [
+     "12",
+     "4",
+     "3",
+     "20"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 32 squares into 8 equal parts: 32 ÷ 8 = 4 squares in each part",
+      "3 parts: 3 × 4 = 12 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "3 × 32 = 96; ÷ 8 = 12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:2,9,1,3:mc",
+    "role": "recheck",
+    "prompt": "The grid in the picture has 18 equal squares. How many squares must be shaded to show 1/3 (one-third) of the grid? Choose one.",
+    "answer": "6",
+    "options": [
+     "12",
+     "6",
+     "7",
+     "1"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 18 squares into 3 equal parts: 18 ÷ 3 = 6 squares in each part",
+      "1 part: 1 × 6 = 6 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "1 × 18 = 18; ÷ 3 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:4,9,5,9:w",
+    "role": "transfer",
+    "prompt": "The grid in the picture has 36 equal squares. How many squares must be shaded to show 5/9 of the grid?",
+    "answer": "20",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 36 squares into 9 equal parts: 36 ÷ 9 = 4 squares in each part",
+      "5 parts: 5 × 4 = 20 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "5 × 36 = 180; ÷ 9 = 20"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:4,5,1,10:w",
+    "role": "transfer",
+    "prompt": "The grid in the picture has 20 equal squares. How many squares must be shaded to show 1/10 of the grid?",
+    "answer": "2",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 20 squares into 10 equal parts: 20 ÷ 10 = 2 squares in each part",
+      "1 part: 1 × 2 = 2 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "1 × 20 = 20; ÷ 10 = 2"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "18"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:6,3,5,9",
+    "role": "delayed-check",
+    "prompt": "The grid in the picture has 18 equal squares. How many squares must be shaded to show 5/9 of the grid?",
+    "answer": "10",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 18 squares into 9 equal parts: 18 ÷ 9 = 2 squares in each part",
+      "5 parts: 5 × 2 = 10 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "5 × 18 = 90; ÷ 9 = 10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adshade:5,4,3,10",
+    "role": "delayed-check",
+    "prompt": "The grid in the picture has 20 equal squares. How many squares must be shaded to show 3/10 of the grid?",
+    "answer": "6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 20 squares into 10 equal parts: 20 ÷ 10 = 2 squares in each part",
+      "3 parts: 3 × 2 = 6 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "3 × 20 = 60; ÷ 10 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "14"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

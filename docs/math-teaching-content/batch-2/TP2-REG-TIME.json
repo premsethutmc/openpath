@@ -1,0 +1,1260 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-REG-TIME",
+ "batch": "batch-2",
+ "pattern": "PAT-REGROUP",
+ "title": "Adding durations: 60 minutes make an hour",
+ "competency": "MATH.measurement.time-unit-conversion",
+ "competencyName": "Convert between hours, minutes and seconds",
+ "grades": [
+  3,
+  5
+ ],
+ "strand": "measurement",
+ "family": "addur",
+ "familyTitle": "Adding durations and changing seconds into minutes and seconds",
+ "skill": "Add two durations in hours and minutes, regrouping 60 minutes as 1 hour.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.measurement.clock",
+    "type": "plausible"
+   },
+   {
+    "from": "MATH.number.multiplication-tables",
+    "type": "plausible"
+   },
+   {
+    "from": "MATH.measurement.elapsed-time",
+    "type": "support"
+   }
+  ],
+  "knowledge": [
+   "1 hour = 60 minutes",
+   "adding two-digit numbers"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "A bigger unit is made of a fixed number of smaller units. When the small units reach that number, make one big unit from them and keep the rest as small units.",
+   "60 minutes make 1 hour, so when the minutes of a duration add up to 60 or more, 60 of them become 1 hour."
+  ],
+  "visual": {
+   "type": "numberline",
+   "from": 0,
+   "to": 120,
+   "marks": [
+    45,
+    100,
+    60
+   ],
+   "note": "45 + 55 minutes passes 60: one hour"
+  },
+  "visualNote": "Reuses the numberline visual (0–120 minutes, a mark at 60). A clock-face 'past the hour' visual exists (clock) but shows times, not durations."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:addur:0,57",
+   "prompt": "A bus ride takes 4 h 45 min and a train ride after it takes 1 h 55 min. How long is the whole journey? Write the answer as (hours, minutes).",
+   "lines": [
+    "Minutes: 45 + 55 = 100 = 60 + 40: 60 minutes make 1 hour",
+    "Hours: 4 + 1 + 1 = 6",
+    "(6, 40)"
+   ],
+   "familyExplainSteps": [
+    "45 + 55 = 100, which is 1 and 40 more",
+    "4 + 1 + 1 carried = 6"
+   ],
+   "answer": "(6, 40)"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:addur:0,57",
+   "hints": [
+    "Add the minutes first.",
+    "45 + 55 minutes: is that 60 or more?",
+    "Take 60 minutes out as 1 hour and add it to the hours."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Like carrying, but at an hour",
+  "text": [
+   "It works like carrying in addition, but you carry when the minutes make a whole hour, not when they make ten."
+  ],
+  "math": "oracle",
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Change everything to minutes, then back",
+   "valid": true,
+   "example": [
+    "4 h 45 min = 285 min; 1 h 55 min = 115 min; together 400 min",
+    "400 = 6 × 60 + 40: (6, 40)"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract (answer-level evidence only).",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "minutes add to 100 or more",
+   "why": "no-carry keeps 100+ minutes; regrouping at 100 instead of 60 (hour-as-100, unmodelled here) would give (h + 1, minutes − 100), a different answer, so the two beliefs are separated",
+   "id": "gen:addur:0,27",
+   "fromPhase": "diagnostic",
+   "prompt": "A bus ride takes 4 h 50 min and a train ride after it takes 1 h 55 min. How long is the whole journey? Write the answer as (hours, minutes).",
+   "answer": "(6, 45)",
+   "readings": [
+    {
+     "response": "(6, 45)",
+     "reading": "correct"
+    },
+    {
+     "response": "(5, 105)",
+     "reading": "TARGET modelled error no-carry (conceptual): suspected on one answer"
+    },
+    {
+     "response": "(6, 105)",
+     "reading": "other modelled error carry-kept (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "no-carry",
+   "kind": "conceptual",
+   "platformCanDiagnose": false,
+   "platformReading": "unreadable",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the minutes are not regrouped into hours",
+   "example": "gen:addur:0,84",
+   "screens": {
+    "whatWentWrong": [
+     "In \"A bus ride takes 4 h 40 min and a train ride after it takes 4 h 35 min. How long is the whole journey? Write the answer as (hours, minutes).\", one wrong answer is (8, 75).",
+     "The minutes came to 75, but 60 of them make one hour.",
+     "60 minutes always make 1 hour, so the minutes part of a duration stays below 60.",
+     "Not (8, 75), but (9, 15)."
+    ],
+    "counterCheck": "Check in minutes: 280 + 275 = 555 minutes = 9 × 60 + 15, so 9 h 15 min. An answer with 75 minutes still holds a whole hour inside the minutes.",
+    "solvedCorrectly": [
+     "Minutes: 40 + 35 = 75 = 60 + 15: 60 minutes make 1 hour",
+     "Hours: 4 + 4 + 1 = 9",
+     "(9, 15)"
+    ]
+   },
+   "guided": "gen:addur:0,35:mc",
+   "check": "gen:addur:0,92"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:addur:0,36:mc",
+   "gen:addur:0,97",
+   "gen:addur:0,37:mc"
+  ],
+  "rechecks": [
+   "gen:addur:0,44:mc",
+   "gen:addur:0,87"
+  ],
+  "transfer": [
+   "gen:addur:0,95:w",
+   "gen:addur:0,23:w"
+  ],
+  "delayedChecks": [
+   "gen:addur:0,91:mc",
+   "gen:addur:0,26"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Add two durations in hours and minutes, regrouping 60 minutes as 1 hour.",
+   "competency": "MATH.measurement.time-unit-conversion",
+   "generator": {
+    "family": "addur",
+    "restriction": "addur with params[0] = 0 (adding two durations in h and min); diagnostics, rechecks and delayed checks need minutes that add to 60 or more (the no-carry error is possible)."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "hour-as-100"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "addur_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_no_carry",
+     "when": "verified-misconception 'no-carry' (two matching answers, misconception-evidence@1)",
+     "reachable": false,
+     "blockedBy": "the diagnosis reader reads this wrong answer as \"unreadable\": unreachable until fixed (05)"
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "when": "existing explanation reused: hour-as-100 (an hour taken as 100 minutes)"
+    },
+    {
+     "strategy": "clock_round",
+     "when": "existing explanation reused: the 60-minute hour (general)"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Change everything to minutes, then back",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "addur",
+    "partition": "check",
+    "restriction": "addur with params[0] = 0 (adding two durations in h and min); diagnostics, rechecks and delayed checks need minutes that add to 60 or more (the no-carry error is possible).",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:addur:0,44:mc",
+     "gen:addur:0,87"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.measurement.time-unit-conversion",
+    "family": "addur",
+    "partition": "retention",
+    "cases": [
+     "minutes add to 100 or more"
+    ],
+    "candidates": [
+     "gen:addur:0,91:mc",
+     "gen:addur:0,26"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "addur_concept",
+     "title": "Adding durations: 60 minutes make an hour",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "A bigger unit is made of a fixed number of smaller units. When the small units reach that number, make one big unit from them and keep the rest as small units.",
+        "60 minutes make 1 hour, so when the minutes of a duration add up to 60 or more, 60 of them become 1 hour."
+       ],
+       "math": [
+        "Minutes: 45 + 55 = 100 = 60 + 40: 60 minutes make 1 hour",
+        "Hours: 4 + 1 + 1 = 6",
+        "(6, 40)"
+       ],
+       "widget": {
+        "type": "numberline",
+        "from": 0,
+        "to": 120,
+        "marks": [
+         45,
+         100,
+         60
+        ],
+        "note": "45 + 55 minutes passes 60: one hour"
+       },
+       "role": "concept",
+       "instance": "gen:addur:0,57"
+      },
+      {
+       "title": "Like carrying, but at an hour",
+       "text": [
+        "It works like carrying in addition, but you carry when the minutes make a whole hour, not when they make ten."
+       ],
+       "math": [
+        "Minutes: 45 + 55 = 100 = 60 + 40: 60 minutes make 1 hour",
+        "Hours: 4 + 1 + 1 = 6",
+        "(6, 40)"
+       ],
+       "role": "strategy",
+       "instance": "gen:addur:0,57"
+      },
+      {
+       "title": "Another way: Change everything to minutes, then back",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "4 h 45 min = 285 min; 1 h 55 min = 115 min; together 400 min",
+        "400 = 6 × 60 + 40: (6, 40)"
+       ],
+       "role": "strategy",
+       "instance": "gen:addur:0,57"
+      }
+     ],
+     "guided": "gen:addur:0,36:mc",
+     "check": "gen:addur:0,44:mc"
+    }
+   },
+   {
+    "purpose": "misconception-specific: no-carry",
+    "strategy": {
+     "id": "fix_no_carry",
+     "title": "Carry 60 minutes as an hour",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Carry 60 minutes as an hour: what went wrong",
+       "text": [
+        "The minutes came to 75, but 60 of them make one hour.",
+        "60 minutes always make 1 hour, so the minutes part of a duration stays below 60."
+       ],
+       "math": [
+        "Not (8, 75), but (9, 15)",
+        "Check in minutes: 280 + 275 = 555 minutes = 9 × 60 + 15, so 9 h 15 min. An answer with 75 minutes still holds a whole hour inside the minutes."
+       ],
+       "role": "misconception",
+       "instance": "gen:addur:0,84"
+      },
+      {
+       "title": "Carry 60 minutes as an hour: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Minutes: 40 + 35 = 75 = 60 + 15: 60 minutes make 1 hour",
+        "Hours: 4 + 4 + 1 = 9",
+        "(9, 15)"
+       ],
+       "role": "strategy",
+       "instance": "gen:addur:0,84"
+      }
+     ],
+     "guided": "gen:addur:0,35:mc",
+     "check": "gen:addur:0,92"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.measurement.time-unit-conversion#addur_concept",
+    "subject": "mathematics",
+    "competency": "MATH.measurement.time-unit-conversion",
+    "strategy": "addur_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:091ccc650217e97ebda8a9a0534a785336e78422aadfc9121651d64c01afafec",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.measurement.time-unit-conversion#fix_no_carry",
+    "subject": "mathematics",
+    "competency": "MATH.measurement.time-unit-conversion",
+    "strategy": "fix_no_carry",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "no-carry",
+    "revisions": [
+     {
+      "contentHash": "sha256:e639002f6d1ab0dafcfa1c1282dd4a0cb2d8df732b7a32cc9c9011860cfba760",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "spot_the_mistake",
+    "covers": "hour-as-100 (an hour taken as 100 minutes)"
+   },
+   {
+    "strategy": "clock_round",
+    "covers": "the 60-minute hour (general)"
+   }
+  ],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "addur_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 3,
+      "of": 3,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_no_carry",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "no-carry"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b04.ts:2140 addur: teach idea/method, alternative like_carrying; bugs no-carry, carry-kept, small-unit-left-out"
+ ],
+ "uncertainties": [
+  "The existing spot_the_mistake of MATH.measurement.time-unit-conversion addresses hour-as-100 (seed adhmin); this package adds no-carry only.",
+  "no-carry: the platform's diagnosis reader (reasoning.ts probeReading) reads the predicted wrong answer \"(8, 75)\" on gen:addur:0,84 as \"unreadable\", so this misconception can NEVER be established and fix_no_carry can never be triggered until the reader handles this answer type (Codex)",
+  "rechecks: no usable check item for case \"minutes add to 100 or more\" (another case's item stands in)",
+  "delayed checks: no usable retention item for case \"minutes add to 100 or more\" (another case's item stands in)"
+ ],
+ "validation": {
+  "items": 14,
+  "itemsOk": 14,
+  "poolAgreement": "99/99",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:addur:0,27",
+    "role": "diagnostic",
+    "prompt": "A bus ride takes 4 h 50 min and a train ride after it takes 1 h 55 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(6, 45)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 50 + 55 = 105 = 60 + 45: 60 minutes make 1 hour",
+      "Hours: 4 + 1 + 1 = 6",
+      "(6, 45)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "4 h 50 min = 290 min; 1 h 55 min = 115 min; together 405 min",
+       "405 = 6 × 60 + 45: (6, 45)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(5, 105)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(6, 105)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,57",
+    "role": "worked-example",
+    "prompt": "A bus ride takes 4 h 45 min and a train ride after it takes 1 h 55 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(6, 40)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 45 + 55 = 100 = 60 + 40: 60 minutes make 1 hour",
+      "Hours: 4 + 1 + 1 = 6",
+      "(6, 40)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "4 h 45 min = 285 min; 1 h 55 min = 115 min; together 400 min",
+       "400 = 6 × 60 + 40: (6, 40)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(5, 100)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(6, 100)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,84",
+    "role": "misconception-example",
+    "prompt": "A bus ride takes 4 h 40 min and a train ride after it takes 4 h 35 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(9, 15)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 40 + 35 = 75 = 60 + 15: 60 minutes make 1 hour",
+      "Hours: 4 + 4 + 1 = 9",
+      "(9, 15)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "4 h 40 min = 280 min; 4 h 35 min = 275 min; together 555 min",
+       "555 = 9 × 60 + 15: (9, 15)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(8, 75)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(9, 75)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,35:mc",
+    "role": "misconception-guided",
+    "prompt": "A bus ride takes 2 h 50 min and a train ride after it takes 1 h 30 min. How long is the whole journey? Write the answer as (hours, minutes). Choose one.",
+    "answer": "(4, 20)",
+    "options": [
+     "(3, 80)",
+     "(5, 20)",
+     "(4, 80)",
+     "(4, 20)"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 50 + 30 = 80 = 60 + 20: 60 minutes make 1 hour",
+      "Hours: 2 + 1 + 1 = 4",
+      "(4, 20)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "2 h 50 min = 170 min; 1 h 30 min = 90 min; together 260 min",
+       "260 = 4 × 60 + 20: (4, 20)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(3, 80)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(4, 80)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,92",
+    "role": "misconception-check",
+    "prompt": "A bus ride takes 5 h 25 min and a train ride after it takes 4 h 35 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(10, 0)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 25 + 35 = 60 = 60 + 0: 60 minutes make 1 hour",
+      "Hours: 5 + 4 + 1 = 10",
+      "(10, 0)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "5 h 25 min = 325 min; 4 h 35 min = 275 min; together 600 min",
+       "600 = 10 × 60 + 0: (10, 0)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(9, 60)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(10, 60)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,36:mc",
+    "role": "guided-practice",
+    "prompt": "A bus ride takes 3 h 55 min and a train ride after it takes 2 h 30 min. How long is the whole journey? Write the answer as (hours, minutes). Choose one.",
+    "answer": "(6, 25)",
+    "options": [
+     "(7, 25)",
+     "(6, 25)",
+     "(5, 85)",
+     "(6, 85)"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 55 + 30 = 85 = 60 + 25: 60 minutes make 1 hour",
+      "Hours: 3 + 2 + 1 = 6",
+      "(6, 25)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "3 h 55 min = 235 min; 2 h 30 min = 150 min; together 385 min",
+       "385 = 6 × 60 + 25: (6, 25)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(5, 85)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(6, 85)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,97",
+    "role": "guided-practice",
+    "prompt": "A bus ride takes 3 h 50 min and a train ride after it takes 2 h 15 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(6, 5)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 50 + 15 = 65 = 60 + 5: 60 minutes make 1 hour",
+      "Hours: 3 + 2 + 1 = 6",
+      "(6, 5)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "3 h 50 min = 230 min; 2 h 15 min = 135 min; together 365 min",
+       "365 = 6 × 60 + 5: (6, 5)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(5, 65)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(6, 65)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,37:mc",
+    "role": "guided-practice",
+    "prompt": "A bus ride takes 5 h 55 min and a train ride after it takes 2 h 15 min. How long is the whole journey? Write the answer as (hours, minutes). Choose one.",
+    "answer": "(8, 10)",
+    "options": [
+     "(8, 10)",
+     "(8, 70)",
+     "(7, 70)",
+     "(9, 10)"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 55 + 15 = 70 = 60 + 10: 60 minutes make 1 hour",
+      "Hours: 5 + 2 + 1 = 8",
+      "(8, 10)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "5 h 55 min = 355 min; 2 h 15 min = 135 min; together 490 min",
+       "490 = 8 × 60 + 10: (8, 10)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(7, 70)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(8, 70)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,44:mc",
+    "role": "recheck",
+    "prompt": "A bus ride takes 4 h 40 min and a train ride after it takes 4 h 55 min. How long is the whole journey? Write the answer as (hours, minutes). Choose one.",
+    "answer": "(9, 35)",
+    "options": [
+     "(8, 95)",
+     "(10, 35)",
+     "(9, 95)",
+     "(9, 35)"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 40 + 55 = 95 = 60 + 35: 60 minutes make 1 hour",
+      "Hours: 4 + 4 + 1 = 9",
+      "(9, 35)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "4 h 40 min = 280 min; 4 h 55 min = 295 min; together 575 min",
+       "575 = 9 × 60 + 35: (9, 35)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(8, 95)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(9, 95)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,87",
+    "role": "recheck",
+    "prompt": "A bus ride takes 2 h 40 min and a train ride after it takes 5 h 25 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(8, 5)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 40 + 25 = 65 = 60 + 5: 60 minutes make 1 hour",
+      "Hours: 2 + 5 + 1 = 8",
+      "(8, 5)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "2 h 40 min = 160 min; 5 h 25 min = 325 min; together 485 min",
+       "485 = 8 × 60 + 5: (8, 5)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(7, 65)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(8, 65)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,95:w",
+    "role": "transfer",
+    "prompt": "A bus ride takes 1 h 45 min and a train ride after it takes 4 h 45 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(6, 30)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 45 + 45 = 90 = 60 + 30: 60 minutes make 1 hour",
+      "Hours: 1 + 4 + 1 = 6",
+      "(6, 30)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "1 h 45 min = 105 min; 4 h 45 min = 285 min; together 390 min",
+       "390 = 6 × 60 + 30: (6, 30)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(5, 90)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(6, 90)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,23:w",
+    "role": "transfer",
+    "prompt": "A bus ride takes 2 h 55 min and a train ride after it takes 4 h 40 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(7, 35)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 55 + 40 = 95 = 60 + 35: 60 minutes make 1 hour",
+      "Hours: 2 + 4 + 1 = 7",
+      "(7, 35)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "2 h 55 min = 175 min; 4 h 40 min = 280 min; together 455 min",
+       "455 = 7 × 60 + 35: (7, 35)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(6, 95)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(7, 95)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,91:mc",
+    "role": "delayed-check",
+    "prompt": "A bus ride takes 1 h 35 min and a train ride after it takes 2 h 35 min. How long is the whole journey? Write the answer as (hours, minutes). Choose one.",
+    "answer": "(4, 10)",
+    "options": [
+     "(5, 10)",
+     "(3, 70)",
+     "(4, 70)",
+     "(4, 10)"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 35 + 35 = 70 = 60 + 10: 60 minutes make 1 hour",
+      "Hours: 1 + 2 + 1 = 4",
+      "(4, 10)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "1 h 35 min = 95 min; 2 h 35 min = 155 min; together 250 min",
+       "250 = 4 × 60 + 10: (4, 10)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(3, 70)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(4, 70)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:addur:0,26",
+    "role": "delayed-check",
+    "prompt": "A bus ride takes 3 h 20 min and a train ride after it takes 1 h 55 min. How long is the whole journey? Write the answer as (hours, minutes).",
+    "answer": "(5, 15)",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Minutes: 20 + 55 = 75 = 60 + 15: 60 minutes make 1 hour",
+      "Hours: 3 + 1 + 1 = 5",
+      "(5, 15)"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Change everything to minutes, then back",
+      "ok": true,
+      "lines": [
+       "3 h 20 min = 200 min; 1 h 55 min = 115 min; together 315 min",
+       "315 = 5 × 60 + 15: (5, 15)"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "predicts": [
+       "(4, 75)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "carry-kept",
+      "kind": "procedural",
+      "predicts": [
+       "(5, 75)"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

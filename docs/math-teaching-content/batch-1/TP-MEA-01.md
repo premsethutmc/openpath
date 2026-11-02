@@ -54,7 +54,7 @@ Fencing a garden: you walk round the edge (perimeter).
 
 ## Valid alternative methods (each checked to reach the same answer on every applicable generated item)
 
-- **Another way to compute it (perimeter: 2 × (length + width); area: add the rows)**: area, row by row: 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 = 99
+- **Perimeter as twice (length + width); area row by row**: area, row by row: 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 + 11 = 99
 
 **Method credit.** A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.
 
@@ -64,8 +64,21 @@ Interpretation rule: A 'two-sides' answer (length + width) on the covering item 
 
 | Item | Case | Correct | Readings of other answers |
 |---|---|---|---|
-| `gen:aeperar:0,3,15,2`: A rectangular stage is 15 m long and 3 m wide. How many square mats of side 1 m are needed to cover the stage? | covering (area) — perimeter-for-area gives 2(l+w) | 45 | 36 → TARGET modelled error perimeter-for-area (conceptual): suspected on one answer; 18 → TARGET modelled error two-sides (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
-| `gen:aeperar:1,4,11,2`: A rectangular playground is 11 m long and 4 m wide. How many metres of rope are needed to go once round the playground? | going round (perimeter) — area-for-perimeter gives l×w; a learner who always multiplies is right on the first item only | 30 | 44 → TARGET modelled error area-for-perimeter (conceptual): suspected on one answer; 15 → TARGET modelled error two-sides (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+| `gen:aeperar:0,3,15,2`: A rectangular stage is 15 m long and 3 m wide. How many square mats of side 1 m are needed to cover the stage? | covering (area), first context — perimeter-for-area gives 2(l+w); two-sides gives l+w | 45 | 36 → TARGET modelled error perimeter-for-area (conceptual): suspected on one answer; 18 → TARGET modelled error two-sides (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+| `gen:aeperar:1,4,11,2`: A rectangular playground is 11 m long and 4 m wide. How many metres of rope are needed to go once round the playground? | going round (perimeter), first context — area-for-perimeter gives l×w; a learner who always multiplies is right on the covering item only | 30 | 44 → TARGET modelled error area-for-perimeter (conceptual): suspected on one answer; 15 → TARGET modelled error two-sides (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+| `gen:aeperar:0,4,16,0`: A rectangular floor is 16 m long and 4 m wide. How many square tiles of side 1 m are needed to cover the floor? | covering (area), another context — a second covering item, so one answer is not taken as a pattern | 64 | 40 → TARGET modelled error perimeter-for-area (conceptual): suspected on one answer; 20 → TARGET modelled error two-sides (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+| `gen:aeperar:1,5,7,2`: A rectangular playground is 7 m long and 5 m wide. How many metres of rope are needed to go once round the playground? | going round (perimeter), another context — a second going-round item | 24 | 35 → TARGET modelled error area-for-perimeter (conceptual): suspected on one answer; 12 → TARGET modelled error two-sides (procedural): suspected on one answer; anything else → unexplained (no diagnosis; policy A: a single slip is kept, not acted on) |
+
+### What each response pattern supports
+
+| Answers on the diagnostic items (in order) | Supports | Leaves uncertain | Establishes? |
+|---|---|---|---|
+| 36 (bug:perimeter-for-area); 30 (correct); 40 (bug:perimeter-for-area); 24 (correct) | perimeter-for-area: the boundary is computed when the inside is asked, while perimeter itself is done correctly | whether the area idea (squares inside) is missing or only the word 'cover' is misread; the concept strategy first, then fix_perimeter_for_area | yes |
+| 45 (correct); 44 (bug:area-for-perimeter); 64 (correct); 35 (bug:area-for-perimeter) | area-for-perimeter: multiplies whenever two lengths are given | a 'multiply the two numbers' habit and the misconception give the same answers; both are treated by the same fix | yes |
+| 36 (bug:perimeter-for-area); 44 (bug:area-for-perimeter); 40 (bug:perimeter-for-area); 35 (bug:area-for-perimeter) | the two words are consistently swapped | a vocabulary swap (which word means which), not missing concepts: both computations are done correctly. Teach the meanings (act_it), not the formulas; do NOT establish either single misconception | **no** |
+| 45 (correct); 15 (bug:two-sides); 64 (correct); 12 (bug:two-sides) | two-sides on going-round items only: half the boundary (one length and one width) is taken as the whole way round, while covering is right | no competing explanation gives both: 'adding the given numbers' as a general habit would also fail the covering items | yes |
+| 18 (bug:two-sides); 15 (bug:two-sides); 20 (bug:two-sides); 12 (bug:two-sides) | adds the two given numbers whatever is asked | two different errors (adding instead of multiplying; half the sides) or no model of the situation at all; general teaching, no misconception established | **no** |
+| 36 (bug:perimeter-for-area); 30 (correct); 64 (correct); 24 (correct) | one matching answer: suspected only | a slip or the misconception | **no** |
 
 ## Misconception-specific teaching (only after the misconception is ESTABLISHED)
 
@@ -121,131 +134,43 @@ Solved correctly:
 1. Going once round the edge: perimeter
 1. 12 + 2 + 12 + 2 = 28
 
-Example `gen:aeperar:1,2,12,1`; guided `gen:aeperar:1,5,7,1:mc`; fresh check `gen:aeperar:1,4,6,2:mc`.
+Example `gen:aeperar:1,2,12,1`; guided `gen:aeperar:1,10,16,1:mc`; fresh check `gen:aeperar:1,4,6,2:mc`.
 
 ## Practice, transfer and delayed checks (fresh; same skill)
 
 - Guided practice: `gen:aeperar:0,6,14,2`, `gen:aeperar:0,5,6,0:mc`, `gen:aeperar:0,7,12,2:mc`
 - Rechecks after teaching: `gen:aeperar:0,11,15,1:mc`, `gen:aeperar:1,10,13,1`
 - Transfer (everyday form): `gen:aeperar:0,6,7,1:w`, `gen:aeperar:0,8,14,1:w`
-- Delayed checks: `gen:aeperar:0,4,5,1:mc`, `gen:aeperar:1,10,16,0`
+- Delayed checks: `gen:aeperar:0,4,5,1:mc`, `gen:aeperar:1,7,16,0`
 
-## Integration mapping (proposal for Codex; nothing written)
+## Integration specification (for the shared teaching selector; nothing written)
 
-```json
-{
- "strategyProposals": [
-  {
-   "id": "fix_perimeter_for_area",
-   "title": "Covering needs the squares INSIDE, not the length of the edg",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:aeperar:0,6,9,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:aeperar:0,6,9,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:aeperar:0,12,16,2:mc"
-    }
-   ],
-   "guided": "gen:aeperar:0,12,16,2:mc",
-   "check": "gen:aeperar:0,2,11,2"
-  },
-  {
-   "id": "fix_area_for_perimeter",
-   "title": "Going round needs the length of the EDGE, not the squares in",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:aeperar:1,8,15,2"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:aeperar:1,8,15,2"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:aeperar:1,14,15,2"
-    }
-   ],
-   "guided": "gen:aeperar:1,14,15,2",
-   "check": "gen:aeperar:1,13,14,1"
-  },
-  {
-   "id": "fix_two_sides",
-   "title": "Going round a rectangle passes all FOUR sides",
-   "kind": "conceptual|procedural (from bug kind)",
-   "needs": [],
-   "screens": [
-    {
-     "role": "misconception",
-     "instance": "gen:aeperar:1,2,12,1"
-    },
-    {
-     "role": "worked-example",
-     "instance": "gen:aeperar:1,2,12,1"
-    },
-    {
-     "role": "practice",
-     "instance": "gen:aeperar:1,5,7,1:mc"
-    }
-   ],
-   "guided": "gen:aeperar:1,5,7,1:mc",
-   "check": "gen:aeperar:1,4,6,2:mc"
-  }
- ],
- "registryProposal": [
-  {
-   "competency": "MATH.measurement.area-squares",
-   "strategy": "fix_perimeter_for_area",
-   "misconceptionSpecific": true,
-   "addresses": "perimeter-for-area",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.measurement.area-squares",
-   "strategy": "fix_area_for_perimeter",
-   "misconceptionSpecific": true,
-   "addresses": "area-for-perimeter",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  },
-  {
-   "competency": "MATH.measurement.area-squares",
-   "strategy": "fix_two_sides",
-   "misconceptionSpecific": true,
-   "addresses": "two-sides",
-   "status": "pending_review",
-   "scope": [
-    "demonstration"
-   ]
-  }
- ],
- "generalStrategyProposal": {
-  "id": "aeperar_concept",
-  "screens": [
-   "concept + visual",
-   "worked example(s)",
-   "alternative explanation"
-  ],
-  "note": "for modules where this family has only a chapter screen"
- },
- "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
-}
-```
+- **Skill:** Decide whether a rectangle problem asks for area (covering) or perimeter (going round), then compute it.
+- **Generator:** `aeperar` — aeperar, both forms: params[0] = 0 (covering: area) and 1 (going round: perimeter); items where 2(l + w) = l × w are excluded (they cannot separate the two).
+- **Trigger** `aeperar_concept`: general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page
+- **Trigger** `fix_perimeter_for_area`: verified-misconception 'perimeter-for-area' (two matching answers, misconception-evidence@1) AND a response pattern below with establishes = true; patterns with competing explanations must not establish it
+- **Trigger** `fix_area_for_perimeter`: verified-misconception 'area-for-perimeter' (two matching answers, misconception-evidence@1) AND a response pattern below with establishes = true; patterns with competing explanations must not establish it
+- **Trigger** `fix_two_sides`: verified-misconception 'two-sides' (two matching answers, misconception-evidence@1) AND a response pattern below with establishes = true; patterns with competing explanations must not establish it
+- **Allowed methods:** the oracle's method (worked lines); Perimeter as twice (length + width); area row by row
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:aeperar:0,11,15,1:mc`, `gen:aeperar:1,10,13,1`
+- **Retention target:** MATH.measurement.area-squares / `aeperar`, cases: covering (area), first context; going round (perimeter), first context. Candidates: `gen:aeperar:0,4,5,1:mc`, `gen:aeperar:1,7,16,0`
+- **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
+- **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
+- **Ungradable / text-only:** none
+- **Reused existing explanations:** none
+
+Platform checks of the proposed objects (in memory):
+
+| Strategy | teaching contract (as integrated today) | contract with this family as the lesson scope | eligible without evidence | eligible with the misconception established | addresses (read by platform) |
+|---|---|---|---|---|---|
+| `aeperar_concept` | **not checked**: outside the module's teaching scope (ineligible today) | 4/4 sections checked, no violations | yes | yes | — |
+| `fix_perimeter_for_area` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | perimeter-for-area |
+| `fix_area_for_perimeter` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | area-for-perimeter |
+| `fix_two_sides` | **not checked**: outside the module's teaching scope (ineligible today) | 2/2 sections checked, no violations | no (misconception-evidence) | yes | two-sides |
+
+Registry validation problems for the new records: none.
+
+The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in the package JSON (`integration.strategies`, `integration.registryRecords`).
 
 ## Sources
 
@@ -256,4 +181,4 @@ Example `gen:aeperar:1,2,12,1`; guided `gen:aeperar:1,5,7,1:mc`; fresh check `ge
 
 - The oracle decides area vs perimeter from the words 'cover'/'round'; every pool prompt was checked (see validation) but a new context word would need review.
 
-## Validation: 22/22 items pass; whole-pool oracle + alternatives agreement 400/400
+## Validation: 24/24 items pass; whole-pool oracle + alternatives agreement 400/400

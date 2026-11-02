@@ -2,6 +2,8 @@
  "schema": "teaching-package@0",
  "status": "review-candidate (not approved, not registered, not served)",
  "id": "TP-NUM-01",
+ "batch": "batch-1",
+ "pattern": null,
  "title": "Comparing fractions with the same top number",
  "competency": "MATH.number.fraction-comparison",
  "competencyName": "Compare fractions with like denominators",
@@ -82,7 +84,7 @@
    "for": "gen:adfcmp:1,1,9,11,0",
    "hints": [
     "Is the top number or the bottom number the same?",
-    "Both are 1 part(s). Which whole is cut into bigger parts: 9 parts or 11 parts?",
+    "Both have 1 part. Which whole is cut into bigger parts: 9 parts or 11 parts?",
     "A whole cut into 9 parts has the bigger parts, so 1/9 is greater."
    ]
   },
@@ -90,7 +92,7 @@
    "for": "gen:adfcmp:1,1,3,9,1",
    "hints": [
     "Is the top number or the bottom number the same?",
-    "Both are 1 part(s). Which whole is cut into bigger parts: 3 parts or 9 parts?",
+    "Both have 1 part. Which whole is cut into bigger parts: 3 parts or 9 parts?",
     "A whole cut into 3 parts has the bigger parts, so 1/3 is greater."
    ]
   }
@@ -98,14 +100,14 @@
  "alternativeExplanation": {
   "title": "Sharing a roti",
   "text": [
-   "One roti shared by 3 children, another identical roti shared by 8.",
-   "Each of the 8 gets less: 1/8 is less than 1/3. More sharers, smaller shares."
+   "Share one roti among a few children, and an identical roti among more children.",
+   "In the bigger group each child gets less: more sharers, smaller shares."
   ],
   "visual": null
  },
  "alternativeMethods": [
   {
-   "name": "Same number of parts, compare part size",
+   "name": "Compare part size (same top) or part count (same bottom)",
    "valid": true,
    "example": [
     "Both have 1 part. A whole cut into 9 parts has bigger parts than one cut into 11.",
@@ -122,7 +124,7 @@
   }
  ],
  "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: comparison answers have no working contract (answer-level evidence only).",
- "diagnosticRule": "Read the three items together. bigger-bottom-bigger is SUSPECTED only when both same-top items are answered with the bigger-bottom fraction AND the same-bottom item is right. If the same-bottom item is also wrong (its modelled reading is 'more-parts-wrong-way'), all three answers fit a greater/smaller (or reversal) confusion instead, and no misconception is suspected. misconception-evidence@1 today would establish bigger-bottom-bigger from the two same-top matches alone; adopting this contrast condition is a policy decision for Codex (05).",
+ "diagnosticRule": "Read the four items together (response patterns below). Two same-top matches establish bigger-bottom-bigger ONLY when both same-bottom contrast items are right; if the contrast items are wrong too, a reversal explains all the answers and nothing is established. misconception-evidence@1 today would establish it from the two same-top matches alone; the contrast condition is a policy request for Codex (05).",
  "diagnostic": [
   {
    "case": "same top, asks greater",
@@ -169,7 +171,7 @@
    ]
   },
   {
-   "case": "same bottom (contrast)",
+   "case": "same bottom, asks greater (contrast)",
    "why": "the bigger-bottom belief is right here; a greater/smaller mix-up (or answering in reverse) is wrong here too",
    "id": "gen:adfcmp:0,11,1,10,0",
    "fromPhase": "diagnostic",
@@ -189,12 +191,36 @@
      "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
     }
    ]
+  },
+  {
+   "case": "same bottom, asks smaller (contrast)",
+   "why": "a second contrast, so one slip on a contrast item is not read as a reversal",
+   "id": "gen:adfcmp:0,11,6,3,1",
+   "fromPhase": "diagnostic",
+   "prompt": "Which fraction is smaller: 6/11 or 3/11? Write that fraction.",
+   "answer": "3/11",
+   "readings": [
+    {
+     "response": "3/11",
+     "reading": "correct"
+    },
+    {
+     "response": "6/11",
+     "reading": "other modelled error more-parts-wrong-way (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
   }
  ],
  "misconceptions": [
   {
    "bug": "bigger-bottom-bigger",
    "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "whole-number thinking: a bigger denominator is read as a bigger fraction",
    "example": "gen:adfcmp:1,1,9,10,0",
@@ -237,53 +263,491 @@
   ],
   "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
  },
+ "responsePatterns": [
+  {
+   "answers": [
+    "bug:bigger-bottom-bigger",
+    "bug:bigger-bottom-bigger",
+    "correct",
+    "correct"
+   ],
+   "supports": "bigger-bottom-bigger: the larger denominator is read as the larger fraction, while same-denominator fractions are compared correctly",
+   "uncertain": "nothing that competes with the diagnosis; teach fix_bigger_bottom_bigger",
+   "establishes": true,
+   "cells": [
+    {
+     "item": "gen:adfcmp:1,1,8,2,0",
+     "key": "bug:bigger-bottom-bigger",
+     "response": "1/8",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:1,7,12,11,1",
+     "key": "bug:bigger-bottom-bigger",
+     "response": "7/11",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:0,11,1,10,0",
+     "key": "correct",
+     "response": "10/11",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:adfcmp:0,11,6,3,1",
+     "key": "correct",
+     "response": "3/11",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:bigger-bottom-bigger",
+    "bug:bigger-bottom-bigger",
+    "bug:more-parts-wrong-way",
+    "bug:more-parts-wrong-way"
+   ],
+   "supports": "a consistent reversal (answers the opposite of 'greater'/'smaller', or reads the words the other way)",
+   "uncertain": "it is NOT evidence of bigger-bottom-bigger: the same two same-top answers come from the reversal; re-ask with the words emphasised",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:adfcmp:1,1,8,2,0",
+     "key": "bug:bigger-bottom-bigger",
+     "response": "1/8",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:1,7,12,11,1",
+     "key": "bug:bigger-bottom-bigger",
+     "response": "7/11",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:0,11,1,10,0",
+     "key": "bug:more-parts-wrong-way",
+     "response": "1/11",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:0,11,6,3,1",
+     "key": "bug:more-parts-wrong-way",
+     "response": "6/11",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:bigger-bottom-bigger",
+    "bug:bigger-bottom-bigger",
+    "bug:more-parts-wrong-way",
+    "correct"
+   ],
+   "supports": "mixed: one contrast item wrong",
+   "uncertain": "a reversal and the misconception both remain possible; ask another same-bottom item before deciding",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:adfcmp:1,1,8,2,0",
+     "key": "bug:bigger-bottom-bigger",
+     "response": "1/8",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:1,7,12,11,1",
+     "key": "bug:bigger-bottom-bigger",
+     "response": "7/11",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:0,11,1,10,0",
+     "key": "bug:more-parts-wrong-way",
+     "response": "1/11",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:0,11,6,3,1",
+     "key": "correct",
+     "response": "3/11",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:bigger-bottom-bigger",
+    "correct",
+    "correct",
+    "correct"
+   ],
+   "supports": "one matching answer: a suspected error only",
+   "uncertain": "a slip or the misconception; general teaching only, re-probe later",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:adfcmp:1,1,8,2,0",
+     "key": "bug:bigger-bottom-bigger",
+     "response": "1/8",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:adfcmp:1,7,12,11,1",
+     "key": "correct",
+     "response": "7/12",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:adfcmp:0,11,1,10,0",
+     "key": "correct",
+     "response": "10/11",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:adfcmp:0,11,6,3,1",
+     "key": "correct",
+     "response": "3/11",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "correct",
+    "correct",
+    "correct",
+    "correct"
+   ],
+   "supports": "compares same-top and same-bottom fractions correctly",
+   "uncertain": "answer evidence only: the reasoning (part size or a memorised rule) is not seen",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:adfcmp:1,1,8,2,0",
+     "key": "correct",
+     "response": "1/2",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:adfcmp:1,7,12,11,1",
+     "key": "correct",
+     "response": "7/12",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:adfcmp:0,11,1,10,0",
+     "key": "correct",
+     "response": "10/11",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:adfcmp:0,11,6,3,1",
+     "key": "correct",
+     "response": "3/11",
+     "verdict": "correct"
+    }
+   ]
+  }
+ ],
+ "delayedAudit": null,
  "integration": {
-  "strategyProposals": [
-   {
-    "id": "fix_bigger_bottom_bigger",
-    "title": "A bigger bottom number means MORE pieces from the same whole",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:adfcmp:1,1,9,10,0"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:adfcmp:1,1,9,10,0"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:adfcmp:1,1,4,8,1"
-     }
+  "spec": {
+   "skill": "Compare two fractions with the same numerator: more equal parts in the whole means each part is smaller.",
+   "competency": "MATH.number.fraction-comparison",
+   "generator": {
+    "family": "adfcmp",
+    "restriction": "adfcmp with params[0] = 1 (same numerator); both asks (params[4] = 0 greater, 1 smaller). Contrast items: params[0] = 0 (same denominator)."
+   },
+   "existingMisconceptionExplanations": [],
+   "triggers": [
+    {
+     "strategy": "adfcmp_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_bigger_bottom_bigger",
+     "when": "verified-misconception 'bigger-bottom-bigger' (two matching answers, misconception-evidence@1) AND a response pattern below with establishes = true; patterns with competing explanations must not establish it",
+     "reachable": true
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Compare part size (same top) or part count (same bottom)",
+     "valid": true
+    },
+    {
+     "name": "Common denominator (later grades; computing check)",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "adfcmp",
+    "partition": "check",
+    "restriction": "adfcmp with params[0] = 1 (same numerator); both asks (params[4] = 0 greater, 1 smaller). Contrast items: params[0] = 0 (same denominator).",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:adfcmp:1,1,10,5,0",
+     "gen:adfcmp:1,2,11,7,1"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.number.fraction-comparison",
+    "family": "adfcmp",
+    "partition": "retention",
+    "cases": [
+     "same top, asks greater",
+     "same top, asks smaller"
     ],
-    "guided": "gen:adfcmp:1,1,4,8,1",
-    "check": "gen:adfcmp:1,1,6,7,1"
+    "candidates": [
+     "gen:adfcmp:1,1,2,12,0",
+     "gen:adfcmp:1,7,10,8,1"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "adfcmp_concept",
+     "title": "Comparing fractions with the same top number",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "The bottom number says how many equal parts the whole is cut into. Cutting the same whole into more parts makes each part smaller.",
+        "So with the same top number (the same number of parts), the fraction with the smaller bottom number is greater."
+       ],
+       "math": [
+        "Both fractions have 1 part. In 1/9 the whole is cut into 9 equal parts; in 1/11 into 11.",
+        "Cutting the same whole into fewer parts makes each part bigger, so 1/9 is greater.",
+        "The greater fraction is 1/9."
+       ],
+       "widget": {
+        "type": "grid",
+        "rows": 1,
+        "cols": 9,
+        "shaded": 1,
+        "note": "1/9: the same whole cut into 9 equal parts"
+       },
+       "role": "concept",
+       "instance": "gen:adfcmp:1,1,9,11,0"
+      },
+      {
+       "title": "Another example",
+       "text": [
+        "The same idea on a different question."
+       ],
+       "math": [
+        "Both fractions have 1 part. In 1/3 the whole is cut into 3 equal parts; in 1/9 into 9.",
+        "Cutting the same whole into fewer parts makes each part bigger, so 1/3 is greater.",
+        "The smaller fraction is 1/9."
+       ],
+       "role": "strategy",
+       "instance": "gen:adfcmp:1,1,3,9,1"
+      },
+      {
+       "title": "Sharing a roti",
+       "text": [
+        "Share one roti among a few children, and an identical roti among more children.",
+        "In the bigger group each child gets less: more sharers, smaller shares."
+       ],
+       "role": "strategy",
+       "instance": "gen:adfcmp:1,1,9,11,0"
+      },
+      {
+       "title": "Another way: Compare part size (same top) or part count (same bottom)",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "Both have 1 part. A whole cut into 9 parts has bigger parts than one cut into 11.",
+        "So 1/9 is greater; the greater is 1/9."
+       ],
+       "role": "strategy",
+       "instance": "gen:adfcmp:1,1,9,11,0"
+      },
+      {
+       "title": "Another way: Common denominator (later grades; computing check)",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "1/9 = 11/99 and 1/11 = 9/99",
+        "11/99 is more, so the greater fraction is 1/9"
+       ],
+       "role": "strategy",
+       "instance": "gen:adfcmp:1,1,9,11,0"
+      }
+     ],
+     "guided": "gen:adfcmp:1,1,9,8,0",
+     "check": "gen:adfcmp:1,1,10,5,0"
+    }
+   },
+   {
+    "purpose": "misconception-specific: bigger-bottom-bigger",
+    "strategy": {
+     "id": "fix_bigger_bottom_bigger",
+     "title": "A bigger bottom number means smaller parts",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A bigger bottom number means smaller parts: what went wrong",
+       "text": [
+        "The fraction with the bigger bottom number was chosen as greater. A bigger bottom number means the whole is cut into more parts, so each part is smaller.",
+        "A bigger bottom number means MORE pieces from the same whole, so each piece is SMALLER."
+       ],
+       "math": [
+        "Not 1/10, but 1/9",
+        "Check with two strips of the SAME length: cut one into 9 equal parts and the other into 10. One part of the 10-part strip is shorter than one part of the 9-part strip, so 1/10 is less than 1/9."
+       ],
+       "role": "misconception",
+       "instance": "gen:adfcmp:1,1,9,10,0"
+      },
+      {
+       "title": "A bigger bottom number means smaller parts: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Both fractions have 1 part. In 1/9 the whole is cut into 9 equal parts; in 1/10 into 10.",
+        "Cutting the same whole into fewer parts makes each part bigger, so 1/9 is greater.",
+        "The greater fraction is 1/9."
+       ],
+       "role": "strategy",
+       "instance": "gen:adfcmp:1,1,9,10,0"
+      }
+     ],
+     "guided": "gen:adfcmp:1,1,4,8,1",
+     "check": "gen:adfcmp:1,1,6,7,1"
+    }
    }
   ],
-  "registryProposal": [
+  "registryRecords": [
    {
+    "id": "MATH.number.fraction-comparison#adfcmp_concept",
+    "subject": "mathematics",
+    "competency": "MATH.number.fraction-comparison",
+    "strategy": "adfcmp_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:de47959642b2faf011e949669d39f50f564da672c361c388afc4d9c84ad28128",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.number.fraction-comparison#fix_bigger_bottom_bigger",
+    "subject": "mathematics",
     "competency": "MATH.number.fraction-comparison",
     "strategy": "fix_bigger_bottom_bigger",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "bigger-bottom-bigger",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:77135cd2b6c9aa01375c708fb22a8f99e1f79c1e04088f763a2bd20be305e9eb",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    }
   ],
-  "generalStrategyProposal": {
-   "id": "adfcmp_concept",
-   "screens": [
-    "concept + visual",
-    "worked example(s)",
-    "alternative explanation"
+  "reusedExisting": [],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "adfcmp_concept",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 5,
+      "of": 5,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_bigger_bottom_bigger",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "bigger-bottom-bigger"
+    }
    ],
-   "note": "for modules where this family has only a chapter screen"
+   "registryProblems": []
   },
-  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
  },
  "sources": [
   "packages/learning/src/fam/b04.ts:427 adfcmp: teach.idea/method, alternatives draw_both, sharing; bug bigger-bottom-bigger",
@@ -294,8 +758,8 @@
   "The two-strip picture needs a renderer decision (two grid strips of equal width)."
  ],
  "validation": {
-  "items": 17,
-  "itemsOk": 17,
+  "items": 18,
+  "itemsOk": 18,
   "poolAgreement": "250/250",
   "disagreements": [],
   "checks": [
@@ -319,7 +783,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 2 parts has bigger parts than one cut into 8.",
@@ -369,7 +833,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 7 parts. A whole cut into 11 parts has bigger parts than one cut into 12.",
@@ -419,11 +883,10 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
-       "Both have 1 part. A whole cut into 11 parts has bigger parts than one cut into 11.",
-       "So 10/11 is greater; the greater is 10/11."
+       "Same size of part (11ths): 1 parts against 10 parts, so 10/11 is greater; the greater is 10/11."
       ]
      },
      {
@@ -441,6 +904,55 @@
       "kind": "procedural",
       "predicts": [
        "1/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:adfcmp:0,11,6,3,1",
+    "role": "diagnostic",
+    "prompt": "Which fraction is smaller: 6/11 or 3/11? Write that fraction.",
+    "answer": "3/11",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Both are cut into 11 equal parts of the same size: 6 parts against 3 parts.",
+      "More parts of the same size is more, so 6/11 is greater.",
+      "The smaller fraction is 3/11."
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Compare part size (same top) or part count (same bottom)",
+      "ok": true,
+      "lines": [
+       "Same size of part (11ths): 6 parts against 3 parts, so 6/11 is greater; the smaller is 3/11."
+      ]
+     },
+     {
+      "name": "Common denominator (later grades; computing check)",
+      "ok": true,
+      "lines": [
+       "6/11 = 66/121 and 3/11 = 33/121",
+       "66/121 is more, so the smaller fraction is 3/11"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "more-parts-wrong-way",
+      "kind": "procedural",
+      "predicts": [
+       "6/11"
       ],
       "graded": [
        "incorrect"
@@ -469,7 +981,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 9 parts has bigger parts than one cut into 11.",
@@ -519,7 +1031,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 3 parts has bigger parts than one cut into 9.",
@@ -569,7 +1081,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 9 parts has bigger parts than one cut into 10.",
@@ -619,7 +1131,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 4 parts has bigger parts than one cut into 8.",
@@ -669,7 +1181,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 6 parts has bigger parts than one cut into 7.",
@@ -719,7 +1231,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 8 parts has bigger parts than one cut into 9.",
@@ -769,7 +1281,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 4 parts has bigger parts than one cut into 11.",
@@ -819,7 +1331,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 3 parts has bigger parts than one cut into 8.",
@@ -869,7 +1381,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 5 parts has bigger parts than one cut into 10.",
@@ -919,7 +1431,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 2 parts. A whole cut into 7 parts has bigger parts than one cut into 11.",
@@ -969,7 +1481,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 2 parts. A whole cut into 7 parts has bigger parts than one cut into 9.",
@@ -1019,7 +1531,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 3 parts. A whole cut into 5 parts has bigger parts than one cut into 8.",
@@ -1069,7 +1581,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 1 part. A whole cut into 2 parts has bigger parts than one cut into 12.",
@@ -1119,7 +1631,7 @@
     },
     "alternatives": [
      {
-      "name": "Same number of parts, compare part size",
+      "name": "Compare part size (same top) or part count (same bottom)",
       "ok": true,
       "lines": [
        "Both have 7 parts. A whole cut into 8 parts has bigger parts than one cut into 10.",

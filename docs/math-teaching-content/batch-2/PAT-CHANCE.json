@@ -1,0 +1,160 @@
+{
+ "id": "PAT-CHANCE",
+ "title": "Count equally likely outcomes, not categories",
+ "strands": [
+  "probability"
+ ],
+ "concept": [
+  "Each marble (or ball) is equally likely to be picked, not each colour. So count marbles, not colours.",
+  "Probability = (marbles that fit) ÷ (ALL the marbles). It is a number from 0 to 1, never more than 1."
+ ],
+ "alternative": {
+  "title": "Number the objects",
+  "text": [
+   "Give every marble a number: each number is equally likely, so count numbers that fit."
+  ]
+ },
+ "reuses": [
+  {
+   "competency": "MATH.probability.chance-language",
+   "strategy": "spot_the_mistake",
+   "covers": "odds"
+  },
+  {
+   "competency": "MATH.probability.classical",
+   "strategy": "spot_the_mistake",
+   "covers": "odds"
+  },
+  {
+   "competency": "MATH.probability.chance-language",
+   "strategy": "scale_words",
+   "covers": "0–1 scale (general)"
+  },
+  {
+   "competency": "MATH.probability.sample-space",
+   "strategy": "(batch 1) TP-PRO-01",
+   "covers": "two-stage sample spaces"
+  }
+ ],
+ "members": [
+  {
+   "id": "TP2-CH-BAG",
+   "title": "Count marbles, not colours",
+   "family": "akchance",
+   "competency": "MATH.probability.chance-language"
+  },
+  {
+   "id": "TP2-CH-BALL",
+   "title": "Balls of different counts: each ball is equally likely",
+   "family": "anbag",
+   "competency": "MATH.probability.classical"
+  }
+ ],
+ "crossDiagnostic": [
+  {
+   "pkg": "TP2-CH-BAG",
+   "case": "unequal colours",
+   "id": "gen:akchance:2,3,2,0"
+  },
+  {
+   "pkg": "TP2-CH-BALL",
+   "case": "unequal colours",
+   "id": "gen:anbag:6,9,7,2"
+  }
+ ],
+ "responsePatterns": [
+  {
+   "answers": [
+    "bug:colours-equal",
+    "bug:colours-equally-likely"
+   ],
+   "supports": "colours treated as equally likely in two different contexts (marbles, balls)",
+   "uncertain": "on unequal bags this answer differs from odds and from a count, so no competing explanation gives both; the equal-count contrast that would show it is not chance is unavailable (gap)",
+   "establishes": true,
+   "cells": [
+    {
+     "item": "gen:akchance:2,3,2,0",
+     "key": "bug:colours-equal",
+     "response": "1/3",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:anbag:6,9,7,2",
+     "key": "bug:colours-equally-likely",
+     "response": "1/3",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:odds",
+    "bug:odds"
+   ],
+   "supports": "compares with the others, not with all: odds",
+   "uncertain": "existing spot_the_mistake (odds) applies in both modules",
+   "establishes": true,
+   "cells": [
+    {
+     "item": "gen:akchance:2,3,2,0",
+     "key": "bug:odds",
+     "response": "2/5",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:anbag:6,9,7,2",
+     "key": "bug:odds",
+     "response": "7/15",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:colours-equal",
+    "correct"
+   ],
+   "supports": "one matching answer: suspected only",
+   "uncertain": "a slip or the belief",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:akchance:2,3,2,0",
+     "key": "bug:colours-equal",
+     "response": "1/3",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:anbag:6,9,7,2",
+     "key": "correct",
+     "response": "7/22",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:colours-equal",
+    "bug:odds"
+   ],
+   "supports": "two different errors",
+   "uncertain": "no single belief explains both; general teaching, re-probe",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:akchance:2,3,2,0",
+     "key": "bug:colours-equal",
+     "response": "1/3",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:anbag:6,9,7,2",
+     "key": "bug:odds",
+     "response": "7/15",
+     "verdict": "incorrect"
+    }
+   ]
+  }
+ ],
+ "whyThisPattern": "12 families in 8 competencies (chance, classical, sample spaces, distributions) model treating categories or totals as equally likely; TP-PRO-01 (batch 1) is the two-stage case of the same pattern."
+}

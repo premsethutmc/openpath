@@ -1,0 +1,132 @@
+{
+ "id": "PAT-SCALE",
+ "title": "One picture or line stands for the key",
+ "strands": [
+  "statistics"
+ ],
+ "concept": [
+  "In a pictograph or a scaled bar chart, one picture or one line does not always stand for 1. The key or the scale says how many it stands for.",
+  "Read the key first. Then count pictures (or lines) and multiply by the key; to draw, share the number into groups of the key."
+ ],
+ "alternative": {
+  "title": "Read the key first",
+  "text": [
+   "Before counting anything on a chart, find what one picture or one line stands for."
+  ]
+ },
+ "reuses": [
+  {
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "spot_the_mistake",
+   "covers": "no-key (reading)"
+  },
+  {
+   "competency": "MATH.statistics.scaled-bars",
+   "strategy": "spot_the_mistake",
+   "covers": "count-lines"
+  },
+  {
+   "competency": "MATH.statistics.scaled-bars",
+   "strategy": "skip_count",
+   "covers": "reading a scale (general)"
+  }
+ ],
+ "members": [
+  {
+   "id": "TP2-SCL-PICT",
+   "title": "Pictographs: each picture stands for the key",
+   "family": "acpicttab",
+   "competency": "MATH.statistics.pictographs"
+  },
+  {
+   "id": "TP2-SCL-BAR",
+   "title": "Scaled bar charts: read the scale, do not count lines",
+   "family": "afbar",
+   "competency": "MATH.statistics.scaled-bars"
+  }
+ ],
+ "crossDiagnostic": [
+  {
+   "pkg": "TP2-SCL-PICT",
+   "case": "read a total",
+   "id": "gen:acpicttab:2,1,0,1"
+  },
+  {
+   "pkg": "TP2-SCL-BAR",
+   "case": "read one bar",
+   "id": "gen:afbar:3,0,4"
+  }
+ ],
+ "responsePatterns": [
+  {
+   "answers": [
+    "bug:no-key",
+    "bug:count-lines"
+   ],
+   "supports": "every symbol and line read as 1 on both displays: the key/scale idea is missing",
+   "uncertain": "none competing; teach the shared concept",
+   "establishes": true,
+   "cells": [
+    {
+     "item": "gen:acpicttab:2,1,0,1",
+     "key": "bug:no-key",
+     "response": "24",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:afbar:3,0,4",
+     "key": "bug:count-lines",
+     "response": "10",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "correct",
+    "bug:assume-tens"
+   ],
+   "supports": "uses keys but assumes scales go in 10s",
+   "uncertain": "a habit from charts seen before; fix_assume_tens",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:acpicttab:2,1,0,1",
+     "key": "correct",
+     "response": "240",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:afbar:3,0,4",
+     "key": "bug:assume-tens",
+     "response": "100",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:no-key",
+    "correct"
+   ],
+   "supports": "pictograph key ignored, bar scale read",
+   "uncertain": "a pictograph-specific reading slip; existing spot_the_mistake",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:acpicttab:2,1,0,1",
+     "key": "bug:no-key",
+     "response": "24",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:afbar:3,0,4",
+     "key": "correct",
+     "response": "200",
+     "verdict": "correct"
+    }
+   ]
+  }
+ ],
+ "whyThisPattern": "6 families in 5 competencies (pictographs, tallies, bar charts, scaled bars) model reading a key or scale as 1 or 10."
+}

@@ -1,45 +1,61 @@
 # 2. Teaching batch 1: nine packages (review candidates)
 
 Each package (`batch-1/<id>.md` readable, `.json` machine-readable, schema `teaching-package@0`) contains:
-
 - the precise skill, prerequisite knowledge and graph prerequisites;
-- a conceptual explanation and a visual (using an existing `Visual` type, or a recorded visual gap);
-- worked examples with valid line-by-line reasoning;
-- three graded hints and an alternative explanation;
-- valid alternative methods;
-- the method-credit rule and checker status;
-- a diagnostic with an interpretation of each possible answer;
-- misconception-specific screens (wrong answer → why → fix → counter-check → correct solution), each with a fresh guided item and a fresh check item;
-- fresh guided practice, rechecks, transfer (everyday form) and delayed-check items;
-- integration proposals (strategy shape and explanation-review entry);
-- exact sources and uncertainties.
+- an explanation with a visual (an existing `Visual` type, or a recorded visual gap);
+- worked lines, checked by an independent oracle;
+- graded hints for each worked example, an alternative explanation, and valid alternative methods;
+- the method-credit rule;
+- a diagnostic with a reading of every possible answer, and, where repeated wrong answers could have different causes, a **response-pattern table**;
+- misconception-specific teaching;
+- fresh practice, rechecks, transfer and delayed-check items;
+- the **integration specification** and integration objects in the existing `Strategy` / `ExplanationRecord` shapes, run through the platform's own gates;
+- sources and uncertainties.
 
-Every question id is a real generator instance from the family's own phase partition, with quarantine applied. Within a package, no item repeats another item's exposure key or number signature (the same fraction pair, angle, rectangle or coefficient pair).
+Every question id is a real, quarantine-filtered generator instance. Within a package, no item repeats another item's exposure key or number signature. NUM-02 and PRO-01 also require distinct answers.
 
-| Package | Title | Diagnostic items | Worked | Misconception screens | Guided / recheck / transfer / delayed | Items passing checks | Oracle + alternatives agree on the whole applicable pool |
-|---|---|---|---|---|---|---|---|
-| [TP-NUM-01](batch-1/TP-NUM-01.md) | Comparing fractions with the same top number | 3 | 2 | 1 | 3/2/2/2 | 17/17 | 250/250 |
-| [TP-NUM-02](batch-1/TP-NUM-02.md) | Adding like fractions: the bottom number names the piece size | 1 | 1 | 2 | 3/2/**0**/2 | 15/15 | 220/220 |
-| [TP-NUM-03](batch-1/TP-NUM-03.md) | Comparing decimals: place value, not length | 2 | 2 | 2 | 3/2/2/2 | 19/19 | 300/300 |
-| [TP-MEA-01](batch-1/TP-MEA-01.md) | Area or perimeter? Covering versus going round | 2 | 2 | 3 | 3/2/2/2 | 22/22 | 400/400 |
-| [TP-GEO-01](batch-1/TP-GEO-01.md) | The exterior angle of a triangle | 2 | 2 | 3 | 3/2/2/2 | 22/22 | 400/400 |
-| [TP-GEO-02](batch-1/TP-GEO-02.md) | Vertically opposite angles are equal | 3 | 2 | 2 | 3/2/2/2 | 20/20 | 300/300 |
-| [TP-STA-01](batch-1/TP-STA-01.md) | The median: order first, then find the middle | 2 | 2 | 3 | 3/2/2/2 | 22/22 | 400/400 |
-| [TP-ALG-01](batch-1/TP-ALG-01.md) | (a + b)²: why the middle term is 2ab | 2 | 2 | 2 | 3/2/2/2 | 19/19 | 90/90 |
-| [TP-PRO-01](batch-1/TP-PRO-01.md) | Two dice: totals are not equally likely | 2 | 2 | 3 | 3/2/2/2 | 22/22 | 80/80 |
+| Package | Diagnostic items | Response patterns | New strategies | Guided / recheck / transfer / delayed | Items passing checks | Oracle + alternatives on the whole applicable pool | Platform teaching contract applies today | Errors the platform cannot diagnose |
+|---|---|---|---|---|---|---|---|---|
+| [TP-NUM-01](batch-1/TP-NUM-01.md) | 4 | 5 | 2 | 3/2/2/2 | 18/18 | 250/250 | yes | — |
+| [TP-NUM-02](batch-1/TP-NUM-02.md) | 1 | rule | 3 | 3/2/**0**/2 | 15/15 | 220/220 | yes | — |
+| [TP-NUM-03](batch-1/TP-NUM-03.md) | 2 | — | 3 | 3/2/2/2 | 19/19 | 300/300 | outside scope (3) | longer-is-larger, shorter-is-larger |
+| [TP-MEA-01](batch-1/TP-MEA-01.md) | 4 | 6 | 4 | 3/2/2/2 | 24/24 | 400/400 | outside scope (4) | — |
+| [TP-GEO-01](batch-1/TP-GEO-01.md) | 2 | — | 4 | 3/2/2/2 | 22/22 | 400/400 | outside scope (4) | — |
+| [TP-GEO-02](batch-1/TP-GEO-02.md) | 3 | — | 3 | 3/2/2/2 | 20/20 | 300/300 | outside scope (3) | — |
+| [TP-STA-01](batch-1/TP-STA-01.md) | 2 | — | 2 (+ reuses spot_the_mistake) | 3/2/2/2 | 22/22 | 400/400 | yes | — |
+| [TP-ALG-01](batch-1/TP-ALG-01.md) | 2 | — | 3 | 3/2/2/2 | 19/19 | 90/90 | outside scope (3) | — |
+| [TP-PRO-01](batch-1/TP-PRO-01.md) | 2 | — | 4 | 3/2/2/2 | 22/22 | 80/80 | outside scope (4) | — |
 
-Totals: **178 instances checked, 178 pass. Whole-pool agreement is 2,440 of 2,440 applicable generated items** (oracle and every alternative method). The one recorded failure is the content gap noted below; it is not a check failure.
+Totals: **181/181 instances pass. 2,440/2,440 applicable pool items agree** (oracle and every alternative method). 28 strategies are proposed. The one recorded build "failure" is NUM-02's missing transfer form, which is a content gap.
 
-## Principles applied
+## Instructional ambiguity resolved (this revision)
 
-- **Suspected or established.** One answer matching a modelled error is labelled *suspected*. Misconception screens are marked "only after the misconception is established" (misconception-evidence@1: two matching answers). Where two items could both match through a *different* cause, the package gives an extra interpretation rule (TP-NUM-01, TP-MEA-01). The engine does not apply that rule today; it is listed in 05.
-- **Procedural slips are not called misconceptions.** `not-ordered` (median), `two-sides`, `multiply-tops` and `added-sides` are marked procedural.
-- **Valid alternative methods** are included and checked: part size and common denominator; number line; money; repeated addition and 2(l + w); the theorem directly and via the third angle; going round and a full turn; crossing off; four products; tree diagram.
-- **Answer credit is not method credit.** Every package states that a correct final answer earns answer credit only, and names its checker status. Only `fadd` has a working checker today (the equation statement through the derivation authority). The two geometry families have an adapter that is not authoritative for method credit, and the reasoner has no exterior-angle rule.
-- **Rechecks test the same skill.** Rechecks and delayed checks are drawn only from items on which a target error is still possible and still gives a distinct wrong value. They cover each taught case (for example both area and perimeter, both directions of the exterior angle, same-size and different-size spinners).
+- **Fractions (TP-NUM-01).** There are now 4 diagnostic items: same top number asked greater, same top asked smaller, and two same-bottom **contrast** items. Two bigger-bottom answers establish the misconception **only** when both contrast items are right. Wrong contrast answers mean a greater/smaller reversal explains everything, so nothing is established. A mixed result means re-probe.
+- **Adding fractions (TP-NUM-02).** The add-denominators value equals "averaging the two fractions" on every item, so no contrast item can separate them by value. The fix trigger requires the answer to be **written** unsimplified (8/18). Even that form can come from halving, so the fix teaches piece size and is rechecked on a new item.
+- **Area and perimeter (TP-MEA-01).** There are now 4 items: two covering and two going round, in different contexts. The table separates these patterns:
+  - perimeter-for-area: establishes;
+  - area-for-perimeter: establishes;
+  - two-sides on going-round items only: establishes;
+  - a consistent **word swap**: does **not** establish either misconception (teach the meanings);
+  - "adds the given numbers" everywhere: does **not** establish (two different errors);
+  - one match: suspected only.
+- **Binomial delayed checks (TP-ALG-01).** The delayed-check audit lists every retention item: its form, whether it asks the cross term, and whether a copied number could read as the misconception (the same rule the examples use). **14 of 54** retention items ask the cross term. **3** of those are (px + q)², and **none** avoids a copied-number reading.
 
-## Recorded gaps inside the batch
+  **No unambiguous delayed check of the positive square exists.** The delayed checks used are (px − q)² cross-term items, labelled as such. Nothing is substituted silently; the missing item is a generator partition change for Codex (05).
 
-- `fadd` has no everyday (transfer) form. Two authored transfer candidates are included as **text only**: their arithmetic is checked, but the grader cannot verify them until a generator form exists. Its diagnostic partition has no improper-sum item, so the diagnostic has one case.
-- `ahid`: the diagnostic partition's only `(px + q)²` middle-term item is ambiguous ((4x + 4)², where copied numbers look like the misconception). The candidate is taken from the **check** partition and flagged for re-partitioning at integration.
-- Visual capabilities missing from the `Visual` union: a triangle with an extended side and its exterior angle; two crossing lines; a perimeter outline; two equal-length fraction strips side by side; a labelled area model.
+## Integration readiness (05 has the details)
+
+For every package, `integration.spec` gives:
+- the skill and the generator restriction;
+- the **trigger** of each strategy: general need, or the established misconception plus any response-pattern or written-form condition;
+- the allowed methods;
+- the fresh-check selection rule and candidates;
+- the retention target and candidates;
+- **answer evidence** (the trusted grader) versus **method evidence** (none for 8 of 9 families);
+- ungradable, text-only items.
+
+Platform findings that block parts of the batch today, recorded rather than hidden:
+1. **The teaching scope.** `teachingEligibility` checks only strategies whose guided item belongs to the module's main pool family. For six packages the new strategies fall outside that scope, so today they are "not checked" and therefore ineligible. Under the same contract rules, with the family as the lesson scope, every one of them passes with no violations.
+2. **The diagnosis reader.** `reasoning.ts probeReading` cannot read decimal-string predictions (`aedecc`), so TP-NUM-03's two fixes can never be triggered.
+
+Earlier revisions of this document said "no contract violations" for every proposal. That pass was **partly spurious**: identical screen titles matched other strategies' sections. Titles are now unique, and the two kinds of check are reported separately.

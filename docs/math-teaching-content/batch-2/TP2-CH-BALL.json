@@ -1,0 +1,1288 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-CH-BALL",
+ "batch": "batch-2",
+ "pattern": "PAT-CHANCE",
+ "title": "Balls of different counts: each ball is equally likely",
+ "competency": "MATH.probability.classical",
+ "competencyName": "Calculate equally likely event probabilities",
+ "grades": [
+  9,
+  9
+ ],
+ "strand": "probability",
+ "family": "anbag",
+ "familyTitle": "Probability of a colour drawn from a bag",
+ "skill": "Classical probability of a colour from a bag with unequal colour counts.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.probability.sample-space",
+    "type": "mandatory"
+   }
+  ],
+  "knowledge": [
+   "probability = favourable ÷ total for equally likely outcomes"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "Each marble (or ball) is equally likely to be picked, not each colour. So count marbles, not colours.",
+   "Probability = (marbles that fit) ÷ (ALL the marbles). It is a number from 0 to 1, never more than 1."
+  ],
+  "visual": {
+   "type": "table",
+   "head": [
+    "Colour",
+    "Balls"
+   ],
+   "rows": [
+    [
+     "red",
+     6
+    ],
+    [
+     "blue",
+     3
+    ]
+   ]
+  },
+  "visualNote": "anbag has no figure; a colour table (existing table visual) is proposed."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:anbag:6,3,0,1",
+   "prompt": "A bag has 6 red, 3 blue balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+   "lines": [
+    "All the balls: 6 red + 3 blue = 9, each equally likely",
+    "Balls that fit \"blue\": 3",
+    "P = 3/9 = 1/3"
+   ],
+   "familyExplainSteps": [
+    "All the balls: 6 + 3 = 9",
+    "3 of them are blue",
+    "P = 3/9"
+   ],
+   "answer": "1/3"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:anbag:6,3,0,1",
+   "hints": [
+    "Count all the balls.",
+    "Count the balls of the colour asked.",
+    "Write the second over the first."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Out of",
+  "text": [
+   "The probability is how many balls belong to the colour, out of how many balls there are."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Number every ball",
+   "valid": true,
+   "example": [
+    "number the balls; each number is equally likely",
+    "P = 3/9 = 1/3"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "unequal colours",
+   "why": "colours-equally-likely gives 1/(colours)",
+   "id": "gen:anbag:6,9,7,2",
+   "fromPhase": "diagnostic",
+   "prompt": "A bag has 6 red, 9 blue and 7 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+   "answer": "7/22",
+   "readings": [
+    {
+     "response": "7/22",
+     "reading": "correct"
+    },
+    {
+     "response": "7/15",
+     "reading": "other modelled error odds (conceptual): suspected on one answer"
+    },
+    {
+     "response": "1/3",
+     "reading": "TARGET modelled error colours-equally-likely (conceptual): suspected on one answer"
+    },
+    {
+     "response": "7",
+     "reading": "other modelled error count-not-probability (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "colours-equally-likely",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "colours taken as equally likely",
+   "example": "gen:anbag:8,7,3,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"A bag has 8 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.\", one wrong answer is 1/3.",
+     "Each colour was taken as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.",
+     "It is the balls that are equally likely, not the colours.",
+     "Not 1/3, but 4/9."
+    ],
+    "counterCheck": "Check: 8 red balls and only 3 green balls: a green ball is less likely to come out than a red one, so the colours cannot all have the same chance.",
+    "solvedCorrectly": [
+     "All the balls: 8 red + 7 blue + 3 green = 18, each equally likely",
+     "Balls that fit \"red\": 8",
+     "P = 8/18 = 4/9"
+    ]
+   },
+   "guided": "gen:anbag:9,7,3,1:mc",
+   "check": "gen:anbag:5,4,5,0"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:anbag:2,2,3,0",
+   "gen:anbag:3,2,3,0:mc",
+   "gen:anbag:2,6,2,0:mc"
+  ],
+  "rechecks": [
+   "gen:anbag:5,6,8,1:mc",
+   "gen:anbag:1,4,3,0"
+  ],
+  "transfer": [
+   "gen:anbag:3,9,6,1:w",
+   "gen:anbag:1,8,4,2:w"
+  ],
+  "delayedChecks": [
+   "gen:anbag:1,9,3,2:mc",
+   "gen:anbag:8,8,5,2"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Classical probability of a colour from a bag with unequal colour counts.",
+   "competency": "MATH.probability.classical",
+   "generator": {
+    "family": "anbag",
+    "restriction": "anbag, all three asked colours; diagnostics need unequal counts."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "odds"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "fix_colours_equally_likely",
+     "when": "verified-misconception 'colours-equally-likely' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "worked_steps",
+     "when": "existing explanation reused: favourable over all (general)"
+    },
+    {
+     "strategy": "out-of",
+     "when": "existing explanation reused: numbering the balls"
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "when": "existing explanation reused: odds"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Number every ball",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "anbag",
+    "partition": "check",
+    "restriction": "anbag, all three asked colours; diagnostics need unequal counts.",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:anbag:5,6,8,1:mc",
+     "gen:anbag:1,4,3,0"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.probability.classical",
+    "family": "anbag",
+    "partition": "retention",
+    "cases": [
+     "unequal colours"
+    ],
+    "candidates": [
+     "gen:anbag:1,9,3,2:mc",
+     "gen:anbag:8,8,5,2"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "misconception-specific: colours-equally-likely",
+    "strategy": {
+     "id": "fix_colours_equally_likely",
+     "title": "Count balls, not colours",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count balls, not colours: what went wrong",
+       "text": [
+        "Each colour was taken as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.",
+        "It is the balls that are equally likely, not the colours."
+       ],
+       "math": [
+        "Not 1/3, but 4/9",
+        "Check: 8 red balls and only 3 green balls: a green ball is less likely to come out than a red one, so the colours cannot all have the same chance."
+       ],
+       "role": "misconception",
+       "instance": "gen:anbag:8,7,3,0"
+      },
+      {
+       "title": "Count balls, not colours: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the balls: 8 red + 7 blue + 3 green = 18, each equally likely",
+        "Balls that fit \"red\": 8",
+        "P = 8/18 = 4/9"
+       ],
+       "role": "strategy",
+       "instance": "gen:anbag:8,7,3,0"
+      }
+     ],
+     "guided": "gen:anbag:9,7,3,1:mc",
+     "check": "gen:anbag:5,4,5,0"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.probability.classical#fix_colours_equally_likely",
+    "subject": "mathematics",
+    "competency": "MATH.probability.classical",
+    "strategy": "fix_colours_equally_likely",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "colours-equally-likely",
+    "revisions": [
+     {
+      "contentHash": "sha256:6f2c254364dd8eb50a5cffae8a4420c615a700fbc13b559adba1bdfc93eedbe3",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "worked_steps",
+    "covers": "favourable over all (general)"
+   },
+   {
+    "strategy": "out-of",
+    "covers": "numbering the balls"
+   },
+   {
+    "strategy": "spot_the_mistake",
+    "covers": "odds"
+   }
+  ],
+  "familyAlreadyTaughtByModule": true,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "fix_colours_equally_likely",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "colours-equally-likely"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b14.ts:649 anbag (seed of MATH.probability.classical): bugs odds, colours-equally-likely, count-not-probability"
+ ],
+ "uncertainties": [
+  "anbag is the seed: its spot_the_mistake (odds) is REUSED; this package adds colours-equally-likely only."
+ ],
+ "validation": {
+  "items": 14,
+  "itemsOk": 14,
+  "poolAgreement": "400/400",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:anbag:6,9,7,2",
+    "role": "diagnostic",
+    "prompt": "A bag has 6 red, 9 blue and 7 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+    "answer": "7/22",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 6 red + 9 blue + 7 green = 22, each equally likely",
+      "Balls that fit \"green\": 7",
+      "P = 7/22"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 7/22"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "7/15"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:6,3,0,1",
+    "role": "worked-example",
+    "prompt": "A bag has 6 red, 3 blue balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+    "answer": "1/3",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 6 red + 3 blue = 9, each equally likely",
+      "Balls that fit \"blue\": 3",
+      "P = 3/9 = 1/3"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 3/9 = 1/3"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "0.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:8,7,3,0",
+    "role": "misconception-example",
+    "prompt": "A bag has 8 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+    "answer": "4/9",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 8 red + 7 blue + 3 green = 18, each equally likely",
+      "Balls that fit \"red\": 8",
+      "P = 8/18 = 4/9"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 8/18 = 4/9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:9,7,3,1:mc",
+    "role": "misconception-guided",
+    "prompt": "A bag has 9 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction. Choose one.",
+    "answer": "7/19",
+    "options": [
+     "2/5",
+     "7/19",
+     "7/12",
+     "1/3"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 9 red + 7 blue + 3 green = 19, each equally likely",
+      "Balls that fit \"blue\": 7",
+      "P = 7/19"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 7/19"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "7/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:5,4,5,0",
+    "role": "misconception-check",
+    "prompt": "A bag has 5 red, 4 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+    "answer": "5/14",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 5 red + 4 blue + 5 green = 14, each equally likely",
+      "Balls that fit \"red\": 5",
+      "P = 5/14"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 5/14"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "5/9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:2,2,3,0",
+    "role": "guided-practice",
+    "prompt": "A bag has 2 red, 2 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+    "answer": "2/7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 2 red + 2 blue + 3 green = 7, each equally likely",
+      "Balls that fit \"red\": 2",
+      "P = 2/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 2/7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:3,2,3,0:mc",
+    "role": "guided-practice",
+    "prompt": "A bag has 3 red, 2 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction. Choose one.",
+    "answer": "3/8",
+    "options": [
+     "1/3",
+     "4/9",
+     "3/5",
+     "3/8"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 3 red + 2 blue + 3 green = 8, each equally likely",
+      "Balls that fit \"red\": 3",
+      "P = 3/8"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 3/8"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:2,6,2,0:mc",
+    "role": "guided-practice",
+    "prompt": "A bag has 2 red, 6 blue and 2 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction. Choose one.",
+    "answer": "1/5",
+    "options": [
+     "3/11",
+     "1/3",
+     "1/4",
+     "1/5"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 2 red + 6 blue + 2 green = 10, each equally likely",
+      "Balls that fit \"red\": 2",
+      "P = 2/10 = 1/5"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 2/10 = 1/5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.25"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:5,6,8,1:mc",
+    "role": "recheck",
+    "prompt": "A bag has 5 red, 6 blue and 8 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction. Choose one.",
+    "answer": "6/19",
+    "options": [
+     "7/20",
+     "6/13",
+     "6/19",
+     "1/3"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 5 red + 6 blue + 8 green = 19, each equally likely",
+      "Balls that fit \"blue\": 6",
+      "P = 6/19"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 6/19"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "6/13"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:1,4,3,0",
+    "role": "recheck",
+    "prompt": "A bag has 1 red, 4 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+    "answer": "1/8",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 1 red + 4 blue + 3 green = 8, each equally likely",
+      "Balls that fit \"red\": 1",
+      "P = 1/8"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 1/8"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "1/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:3,9,6,1:w",
+    "role": "transfer",
+    "prompt": "A bag has 3 red, 9 blue and 6 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+    "answer": "1/2",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 3 red + 9 blue + 6 green = 18, each equally likely",
+      "Balls that fit \"blue\": 9",
+      "P = 9/18 = 1/2"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 9/18 = 1/2"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:1,8,4,2:w",
+    "role": "transfer",
+    "prompt": "A bag has 1 red, 8 blue and 4 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+    "answer": "4/13",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 1 red + 8 blue + 4 green = 13, each equally likely",
+      "Balls that fit \"green\": 4",
+      "P = 4/13"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 4/13"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "4/9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:1,9,3,2:mc",
+    "role": "delayed-check",
+    "prompt": "A bag has 1 red, 9 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction. Choose one.",
+    "answer": "3/13",
+    "options": [
+     "2/7",
+     "3/13",
+     "3/10",
+     "1/3"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 1 red + 9 blue + 3 green = 13, each equally likely",
+      "Balls that fit \"green\": 3",
+      "P = 3/13"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 3/13"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:anbag:8,8,5,2",
+    "role": "delayed-check",
+    "prompt": "A bag has 8 red, 8 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+    "answer": "5/21",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the balls: 8 red + 8 blue + 5 green = 21, each equally likely",
+      "Balls that fit \"green\": 5",
+      "P = 5/21"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every ball",
+      "ok": true,
+      "lines": [
+       "number the balls; each number is equally likely",
+       "P = 5/21"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "5/16"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-not-probability",
+      "kind": "procedural",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

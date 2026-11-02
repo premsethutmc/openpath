@@ -1,0 +1,1996 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-PV-DIGIT",
+ "batch": "batch-2",
+ "pattern": "PAT-PLACE",
+ "title": "The value of a digit, and how many tens",
+ "competency": "MATH.number.place-value-tens",
+ "competencyName": "Compose tens and ones",
+ "grades": [
+  1,
+  1
+ ],
+ "strand": "number",
+ "family": "aadigit",
+ "familyTitle": "The value of a digit in a two-digit number",
+ "skill": "Give the value of a digit in a two-digit number, and the number of tens.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.number.compare-numbers",
+    "type": "mandatory"
+   }
+  ],
+  "knowledge": [
+   "counting in tens",
+   "a two-digit number is tens and ones"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "A digit is worth different amounts in different places. In a two-digit number the first digit counts tens and the second counts ones.",
+   "'The value of a digit' is how much it is worth (a tens digit is worth that many tens); 'how many tens' is just the count. The same digit answers the two questions differently."
+  ],
+  "visual": {
+   "type": "blocks",
+   "hundreds": 0,
+   "tens": 1,
+   "ones": 8
+  },
+  "visualNote": "Reuses the family's own base-ten blocks figure."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:aadigit:18,0",
+   "prompt": "In 18, what is the value of the digit 1?",
+   "lines": [
+    "18 = 1 ten and 8 ones",
+    "the 1 is in the tens place: 1 ten = 10"
+   ],
+   "familyExplainSteps": [
+    "In 18, the first digit is in the tens place.",
+    "So the answer is 10."
+   ],
+   "answer": "10"
+  },
+  {
+   "id": "gen:aadigit:56,1",
+   "prompt": "How many tens are there in 56?",
+   "lines": [
+    "56 = 5 tens and 6 ones",
+    "5 tens"
+   ],
+   "familyExplainSteps": [
+    "In 56, the first digit is in the tens place.",
+    "So the answer is 5."
+   ],
+   "answer": "5"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:aadigit:18,0",
+   "hints": [
+    "Which place is the digit in?",
+    "Tens place: it counts tens; ones place: it counts ones.",
+    "Its value is how much it is worth: tens digit × 10, ones digit as it is."
+   ]
+  },
+  {
+   "for": "gen:aadigit:56,1",
+   "hints": [
+    "Write the number in a Tens | Ones chart.",
+    "The first digit is how many tens.",
+    "The question asks for the COUNT of tens, not their value."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Bundles of ten sticks",
+  "text": [
+   "Bundle sticks in tens. The first digit tells how many bundles; each bundle is worth 10."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Expanded form",
+   "valid": true,
+   "example": [
+    "18 = 10 + 8",
+    "10"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "value of the tens digit",
+   "why": "face-value gives the digit",
+   "id": "gen:aadigit:42,0",
+   "fromPhase": "diagnostic",
+   "prompt": "In 42, what is the value of the digit 4?",
+   "answer": "40",
+   "readings": [
+    {
+     "response": "40",
+     "reading": "correct"
+    },
+    {
+     "response": "4",
+     "reading": "TARGET modelled error face-value (conceptual): suspected on one answer"
+    },
+    {
+     "response": "2",
+     "reading": "other modelled error wrong-digit (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "how many tens",
+   "why": "value-not-count gives the value; a learner who always answers 'the digit' is right here and wrong above",
+   "id": "gen:aadigit:34,1",
+   "fromPhase": "diagnostic",
+   "prompt": "How many tens are there in 34?",
+   "answer": "3",
+   "readings": [
+    {
+     "response": "3",
+     "reading": "correct"
+    },
+    {
+     "response": "30",
+     "reading": "TARGET modelled error value-not-count (conceptual): suspected on one answer"
+    },
+    {
+     "response": "4",
+     "reading": "other modelled error wrong-digit (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "value of the ones digit",
+   "why": "times-ten over-applies the tens rule",
+   "id": "gen:aadigit:91,2",
+   "fromPhase": "diagnostic",
+   "prompt": "In 91, what is the value of the digit 1?",
+   "answer": "1",
+   "readings": [
+    {
+     "response": "1",
+     "reading": "correct"
+    },
+    {
+     "response": "10",
+     "reading": "other modelled error times-ten (conceptual): suspected on one answer"
+    },
+    {
+     "response": "90",
+     "reading": "other modelled error wrong-digit (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  },
+  {
+   "case": "value of the tens digit, another number",
+   "why": "a second value item, so face-value rests on two answers",
+   "id": "gen:aadigit:95,0",
+   "fromPhase": "diagnostic",
+   "prompt": "In 95, what is the value of the digit 9?",
+   "answer": "90",
+   "readings": [
+    {
+     "response": "90",
+     "reading": "correct"
+    },
+    {
+     "response": "9",
+     "reading": "TARGET modelled error face-value (conceptual): suspected on one answer"
+    },
+    {
+     "response": "5",
+     "reading": "other modelled error wrong-digit (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "face-value",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the digit given instead of its value",
+   "example": "gen:aadigit:49,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"In 49, what is the value of the digit 4?\", one wrong answer is 4.",
+     "The digit itself was given. The 4 is in the tens place, so it stands for 4 tens, which is 40.",
+     "A digit in the tens place is worth that many TENS, not ones.",
+     "Not 4, but 40."
+    ],
+    "counterCheck": "Check: 49 is 4 tens and 9 ones = 40 + 9.",
+    "solvedCorrectly": [
+     "49 = 4 tens and 9 ones",
+     "the 4 is in the tens place: 4 tens = 40"
+    ]
+   },
+   "guided": "gen:aadigit:69,0:mc",
+   "check": "gen:aadigit:83,0:mc"
+  },
+  {
+   "bug": "value-not-count",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "the value given when the count of tens is asked",
+   "example": "gen:aadigit:75,1",
+   "screens": {
+    "whatWentWrong": [
+     "In \"How many tens are there in 75?\", one wrong answer is 70.",
+     "The value of the tens was given (70). The question asks how many tens: 7.",
+     "'How many tens' asks for a count of bundles, not their value.",
+     "Not 70, but 7."
+    ],
+    "counterCheck": "Check: 75 has 7 bundles of ten; together they are worth 70.",
+    "solvedCorrectly": [
+     "75 = 7 tens and 5 ones",
+     "7 tens"
+    ]
+   },
+   "guided": "gen:aadigit:82,1",
+   "check": "gen:aadigit:68,1:mc"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:aadigit:13,1:mc",
+   "gen:aadigit:26,1:mc",
+   "gen:aadigit:43,1"
+  ],
+  "rechecks": [
+   "gen:aadigit:50,0",
+   "gen:aadigit:20,0"
+  ],
+  "transfer": [
+   "gen:aadigit:31,0:w",
+   "gen:aadigit:37,0:w"
+  ],
+  "delayedChecks": [
+   "gen:aadigit:74,0",
+   "gen:aadigit:92,1:mc"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [
+  {
+   "answers": [
+    "bug:face-value",
+    "correct",
+    "correct",
+    "bug:face-value"
+   ],
+   "supports": "face-value on both value items while 'how many tens' and the ones digit are right",
+   "uncertain": "the word 'value' may be what is unknown rather than place value; fix_face_value teaches both (the chart and the word), so either cause is served",
+   "establishes": true,
+   "cells": [
+    {
+     "item": "gen:aadigit:42,0",
+     "key": "bug:face-value",
+     "response": "4",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:aadigit:34,1",
+     "key": "correct",
+     "response": "3",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:91,2",
+     "key": "correct",
+     "response": "1",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:95,0",
+     "key": "bug:face-value",
+     "response": "9",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:face-value",
+    "correct",
+    "correct",
+    "correct"
+   ],
+   "supports": "one face-value answer: suspected only",
+   "uncertain": "a slip, the word 'value', or place value",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:aadigit:42,0",
+     "key": "bug:face-value",
+     "response": "4",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:aadigit:34,1",
+     "key": "correct",
+     "response": "3",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:91,2",
+     "key": "correct",
+     "response": "1",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:95,0",
+     "key": "correct",
+     "response": "90",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "correct",
+    "bug:value-not-count",
+    "correct",
+    "correct"
+   ],
+   "supports": "value-not-count once",
+   "uncertain": "a question-reading difference; suspected only",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:aadigit:42,0",
+     "key": "correct",
+     "response": "40",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:34,1",
+     "key": "bug:value-not-count",
+     "response": "30",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:aadigit:91,2",
+     "key": "correct",
+     "response": "1",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:95,0",
+     "key": "correct",
+     "response": "90",
+     "verdict": "correct"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "bug:face-value",
+    "bug:value-not-count",
+    "correct",
+    "bug:face-value"
+   ],
+   "supports": "the two questions are answered the other way round",
+   "uncertain": "the place idea may be fine (both numbers are known): a vocabulary swap; teach the two questions side by side, do NOT establish face-value",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:aadigit:42,0",
+     "key": "bug:face-value",
+     "response": "4",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:aadigit:34,1",
+     "key": "bug:value-not-count",
+     "response": "30",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:aadigit:91,2",
+     "key": "correct",
+     "response": "1",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:95,0",
+     "key": "bug:face-value",
+     "response": "9",
+     "verdict": "incorrect"
+    }
+   ]
+  },
+  {
+   "answers": [
+    "correct",
+    "correct",
+    "bug:times-ten",
+    "correct"
+   ],
+   "supports": "times-ten: the tens rule applied to the ones digit, once",
+   "uncertain": "suspected only",
+   "establishes": false,
+   "cells": [
+    {
+     "item": "gen:aadigit:42,0",
+     "key": "correct",
+     "response": "40",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:34,1",
+     "key": "correct",
+     "response": "3",
+     "verdict": "correct"
+    },
+    {
+     "item": "gen:aadigit:91,2",
+     "key": "bug:times-ten",
+     "response": "10",
+     "verdict": "incorrect"
+    },
+    {
+     "item": "gen:aadigit:95,0",
+     "key": "correct",
+     "response": "90",
+     "verdict": "correct"
+    }
+   ]
+  }
+ ],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Give the value of a digit in a two-digit number, and the number of tens.",
+   "competency": "MATH.number.place-value-tens",
+   "generator": {
+    "family": "aadigit",
+    "restriction": "aadigit, all three forms (params[1] = 0 value of the tens digit, 1 how many tens, 2 value of the ones digit); numbers with two equal digits excluded (the question would be ambiguous)."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "count-blocks"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "aadigit_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_face_value",
+     "when": "verified-misconception 'face-value' (two matching answers, misconception-evidence@1) AND a response pattern below with establishes = true; patterns with competing explanations must not establish it",
+     "reachable": true
+    },
+    {
+     "strategy": "fix_value_not_count",
+     "when": "verified-misconception 'value-not-count' (two matching answers, misconception-evidence@1) AND a response pattern below with establishes = true; patterns with competing explanations must not establish it",
+     "reachable": true
+    },
+    {
+     "strategy": "bundles",
+     "when": "existing explanation reused: tens as bundles (general)"
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "when": "existing explanation reused: count-blocks"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Expanded form",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "aadigit",
+    "partition": "check",
+    "restriction": "aadigit, all three forms (params[1] = 0 value of the tens digit, 1 how many tens, 2 value of the ones digit); numbers with two equal digits excluded (the question would be ambiguous).",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:aadigit:50,0",
+     "gen:aadigit:20,0"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.number.place-value-tens",
+    "family": "aadigit",
+    "partition": "retention",
+    "cases": [
+     "value of the tens digit",
+     "how many tens"
+    ],
+    "candidates": [
+     "gen:aadigit:74,0",
+     "gen:aadigit:92,1:mc"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "aadigit_concept",
+     "title": "The value of a digit, and how many tens",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "A digit is worth different amounts in different places. In a two-digit number the first digit counts tens and the second counts ones.",
+        "'The value of a digit' is how much it is worth (a tens digit is worth that many tens); 'how many tens' is just the count. The same digit answers the two questions differently."
+       ],
+       "math": [
+        "18 = 1 ten and 8 ones",
+        "the 1 is in the tens place: 1 ten = 10"
+       ],
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 1,
+        "ones": 8
+       },
+       "role": "concept",
+       "instance": "gen:aadigit:18,0"
+      },
+      {
+       "title": "Another example",
+       "text": [
+        "The same idea on a different question."
+       ],
+       "math": [
+        "56 = 5 tens and 6 ones",
+        "5 tens"
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:56,1"
+      },
+      {
+       "title": "Bundles of ten sticks",
+       "text": [
+        "Bundle sticks in tens. The first digit tells how many bundles; each bundle is worth 10."
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:18,0"
+      },
+      {
+       "title": "Another way: Expanded form",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "18 = 10 + 8",
+        "10"
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:18,0"
+      }
+     ],
+     "guided": "gen:aadigit:13,1:mc",
+     "check": "gen:aadigit:50,0"
+    }
+   },
+   {
+    "purpose": "misconception-specific: face-value",
+    "strategy": {
+     "id": "fix_face_value",
+     "title": "A tens digit is worth tens",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A tens digit is worth tens: what went wrong",
+       "text": [
+        "The digit itself was given. The 4 is in the tens place, so it stands for 4 tens, which is 40.",
+        "A digit in the tens place is worth that many TENS, not ones."
+       ],
+       "math": [
+        "Not 4, but 40",
+        "Check: 49 is 4 tens and 9 ones = 40 + 9."
+       ],
+       "role": "misconception",
+       "instance": "gen:aadigit:49,0"
+      },
+      {
+       "title": "A tens digit is worth tens: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "49 = 4 tens and 9 ones",
+        "the 4 is in the tens place: 4 tens = 40"
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:49,0"
+      }
+     ],
+     "guided": "gen:aadigit:69,0:mc",
+     "check": "gen:aadigit:83,0:mc"
+    }
+   },
+   {
+    "purpose": "misconception-specific: value-not-count",
+    "strategy": {
+     "id": "fix_value_not_count",
+     "title": "How many tens is a count",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "How many tens is a count: what went wrong",
+       "text": [
+        "The value of the tens was given (70). The question asks how many tens: 7.",
+        "'How many tens' asks for a count of bundles, not their value."
+       ],
+       "math": [
+        "Not 70, but 7",
+        "Check: 75 has 7 bundles of ten; together they are worth 70."
+       ],
+       "role": "misconception",
+       "instance": "gen:aadigit:75,1"
+      },
+      {
+       "title": "How many tens is a count: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "75 = 7 tens and 5 ones",
+        "7 tens"
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:75,1"
+      }
+     ],
+     "guided": "gen:aadigit:82,1",
+     "check": "gen:aadigit:68,1:mc"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.number.place-value-tens#aadigit_concept",
+    "subject": "mathematics",
+    "competency": "MATH.number.place-value-tens",
+    "strategy": "aadigit_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:bb40ed2edee6ab97ef8b400f9e74567d180c82b40ee7f759dc95216282092068",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.number.place-value-tens#fix_face_value",
+    "subject": "mathematics",
+    "competency": "MATH.number.place-value-tens",
+    "strategy": "fix_face_value",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "face-value",
+    "revisions": [
+     {
+      "contentHash": "sha256:60a09c99f11b0a68e35624280dc974a55b47510309fc40283588299965176659",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.number.place-value-tens#fix_value_not_count",
+    "subject": "mathematics",
+    "competency": "MATH.number.place-value-tens",
+    "strategy": "fix_value_not_count",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "value-not-count",
+    "revisions": [
+     {
+      "contentHash": "sha256:37a0d039b1bfadb922182377a1c88484cd9526cef73d65fab8358afcd82b9d10",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "bundles",
+    "covers": "tens as bundles (general)"
+   },
+   {
+    "strategy": "spot_the_mistake",
+    "covers": "count-blocks"
+   }
+  ],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "aadigit_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 4,
+      "of": 4,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_face_value",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "face-value"
+    },
+    {
+     "strategy": "fix_value_not_count",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "value-not-count"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b01.ts:1691 aadigit: teach idea/method, alternative chart, figure blocks; bugs face-value, value-not-count, times-ten, wrong-digit"
+ ],
+ "uncertainties": [
+  "place-value-tens' existing spot_the_mistake addresses count-blocks (seed aatens); nothing covers face-value.",
+  "rechecks: no usable check item for case \"how many tens\" (another case's item stands in)"
+ ],
+ "validation": {
+  "items": 21,
+  "itemsOk": 21,
+  "poolAgreement": "234/234",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:aadigit:42,0",
+    "role": "diagnostic",
+    "prompt": "In 42, what is the value of the digit 4?",
+    "answer": "40",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "42 = 4 tens and 2 ones",
+      "the 4 is in the tens place: 4 tens = 40"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "42 = 40 + 2",
+       "40"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:34,1",
+    "role": "diagnostic",
+    "prompt": "How many tens are there in 34?",
+    "answer": "3",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "34 = 3 tens and 4 ones",
+      "3 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "34 = 30 + 4",
+       "3"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:91,2",
+    "role": "diagnostic",
+    "prompt": "In 91, what is the value of the digit 1?",
+    "answer": "1",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "91 = 9 tens and 1 one",
+      "the 1 is in the ones place: 1"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "91 = 90 + 1",
+       "1"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "times-ten",
+      "kind": "conceptual",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "90"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:95,0",
+    "role": "diagnostic",
+    "prompt": "In 95, what is the value of the digit 9?",
+    "answer": "90",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "95 = 9 tens and 5 ones",
+      "the 9 is in the tens place: 9 tens = 90"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "95 = 90 + 5",
+       "90"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:18,0",
+    "role": "worked-example",
+    "prompt": "In 18, what is the value of the digit 1?",
+    "answer": "10",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "18 = 1 ten and 8 ones",
+      "the 1 is in the tens place: 1 ten = 10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "18 = 10 + 8",
+       "10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:56,1",
+    "role": "worked-example",
+    "prompt": "How many tens are there in 56?",
+    "answer": "5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "56 = 5 tens and 6 ones",
+      "5 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "56 = 50 + 6",
+       "5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "50"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:49,0",
+    "role": "misconception-example",
+    "prompt": "In 49, what is the value of the digit 4?",
+    "answer": "40",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "49 = 4 tens and 9 ones",
+      "the 4 is in the tens place: 4 tens = 40"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "49 = 40 + 9",
+       "40"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:69,0:mc",
+    "role": "misconception-guided",
+    "prompt": "In 69, what is the value of the digit 6? Choose one.",
+    "answer": "60",
+    "options": [
+     "9",
+     "6",
+     "61",
+     "60"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "69 = 6 tens and 9 ones",
+      "the 6 is in the tens place: 6 tens = 60"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "69 = 60 + 9",
+       "60"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:83,0:mc",
+    "role": "misconception-check",
+    "prompt": "In 83, what is the value of the digit 8? Choose one.",
+    "answer": "80",
+    "options": [
+     "8",
+     "3",
+     "81",
+     "80"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "83 = 8 tens and 3 ones",
+      "the 8 is in the tens place: 8 tens = 80"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "83 = 80 + 3",
+       "80"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:75,1",
+    "role": "misconception-example",
+    "prompt": "How many tens are there in 75?",
+    "answer": "7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "75 = 7 tens and 5 ones",
+      "7 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "75 = 70 + 5",
+       "7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "70"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:82,1",
+    "role": "misconception-guided",
+    "prompt": "How many tens are there in 82?",
+    "answer": "8",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "82 = 8 tens and 2 ones",
+      "8 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "82 = 80 + 2",
+       "8"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "80"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:68,1:mc",
+    "role": "misconception-check",
+    "prompt": "How many tens are there in 68? Choose one.",
+    "answer": "6",
+    "options": [
+     "60",
+     "7",
+     "6",
+     "8"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "68 = 6 tens and 8 ones",
+      "6 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "68 = 60 + 8",
+       "6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "60"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:13,1:mc",
+    "role": "guided-practice",
+    "prompt": "How many tens are there in 13? Choose one.",
+    "answer": "1",
+    "options": [
+     "10",
+     "1",
+     "3",
+     "2"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "13 = 1 ten and 3 ones",
+      "1 ten"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "13 = 10 + 3",
+       "1"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "10"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:26,1:mc",
+    "role": "guided-practice",
+    "prompt": "How many tens are there in 26? Choose one.",
+    "answer": "2",
+    "options": [
+     "20",
+     "6",
+     "3",
+     "2"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "26 = 2 tens and 6 ones",
+      "2 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "26 = 20 + 6",
+       "2"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:43,1",
+    "role": "guided-practice",
+    "prompt": "How many tens are there in 43?",
+    "answer": "4",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "43 = 4 tens and 3 ones",
+      "4 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "43 = 40 + 3",
+       "4"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "40"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:50,0",
+    "role": "recheck",
+    "prompt": "In 50, what is the value of the digit 5?",
+    "answer": "50",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "50 = 5 tens and 0 ones",
+      "the 5 is in the tens place: 5 tens = 50"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "50 = 50 + 0",
+       "50"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "0"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:20,0",
+    "role": "recheck",
+    "prompt": "In 20, what is the value of the digit 2?",
+    "answer": "20",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "20 = 2 tens and 0 ones",
+      "the 2 is in the tens place: 2 tens = 20"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "20 = 20 + 0",
+       "20"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "0"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:31,0:w",
+    "role": "transfer",
+    "prompt": "In 31, what is the value of the digit 3?",
+    "answer": "30",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "31 = 3 tens and 1 one",
+      "the 3 is in the tens place: 3 tens = 30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "31 = 30 + 1",
+       "30"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:37,0:w",
+    "role": "transfer",
+    "prompt": "In 37, what is the value of the digit 3?",
+    "answer": "30",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "37 = 3 tens and 7 ones",
+      "the 3 is in the tens place: 3 tens = 30"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "37 = 30 + 7",
+       "30"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:74,0",
+    "role": "delayed-check",
+    "prompt": "In 74, what is the value of the digit 7?",
+    "answer": "70",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "74 = 7 tens and 4 ones",
+      "the 7 is in the tens place: 7 tens = 70"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "74 = 70 + 4",
+       "70"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:aadigit:92,1:mc",
+    "role": "delayed-check",
+    "prompt": "How many tens are there in 92? Choose one.",
+    "answer": "9",
+    "options": [
+     "2",
+     "9",
+     "10",
+     "90"
+    ],
+    "correctOption": "B",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "92 = 9 tens and 2 ones",
+      "9 tens"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Expanded form",
+      "ok": true,
+      "lines": [
+       "92 = 90 + 2",
+       "9"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "predicts": [
+       "90"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "wrong-digit",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}

@@ -2,6 +2,8 @@
  "schema": "teaching-package@0",
  "status": "review-candidate (not approved, not registered, not served)",
  "id": "TP-NUM-03",
+ "batch": "batch-1",
+ "pattern": null,
  "title": "Comparing decimals: place value, not length",
  "competency": "MATH.number.decimal-tenths",
  "competencyName": "Represent tenths and hundredths",
@@ -29,7 +31,7 @@
  "explanation": {
   "concept": [
    "Decimals are compared place by place from the left: wholes, then tenths, then hundredths.",
-   "Writing both with the same number of places makes them easy to compare: 0.7 = 0.70, which is more than 0.65."
+   "Writing both with the same number of places (put a zero at the end of the shorter one) makes them easy to compare as hundredths."
   ],
   "visual": {
    "type": "grid",
@@ -87,7 +89,7 @@
  "alternativeExplanation": {
   "title": "Number line in tenths",
   "text": [
-   "Mark 0, 0.1, 0.2, … 1 on a line.",
+   "Mark the tenths on a number line from one whole number to the next.",
    "Find which tenth each number is in first; only if they are in the same tenth do the hundredths decide."
   ],
   "visual": null
@@ -154,6 +156,8 @@
   {
    "bug": "longer-is-larger",
    "kind": "conceptual",
+   "platformCanDiagnose": false,
+   "platformReading": "other",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "digits after the point read as a whole number",
    "example": "gen:aedecc:2,2,0,1",
@@ -164,7 +168,7 @@
      "More digits after the point does not mean bigger: compare the tenths first.",
      "Not 2.01, but 2.2."
     ],
-    "counterCheck": "Counter-check: 0.5 is half; 0.45 is less than half (45 of 100). So 0.5 > 0.45 although 0.45 has more digits.",
+    "counterCheck": "Check with hundredths: 2.2 = 2.20, which is 220 hundredths; 2.01 is 201 hundredths. 2.2 is greater although it has fewer digits.",
     "solvedCorrectly": [
      "Write both with two decimal places: 2.20 and 2.01",
      "2.20 is 220 hundredths; 2.01 is 201 hundredths. So 2.2 is greater"
@@ -176,6 +180,8 @@
   {
    "bug": "shorter-is-larger",
    "kind": "conceptual",
+   "platformCanDiagnose": false,
+   "platformReading": "other",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "over-generalised 'tenths beat hundredths'",
    "example": "gen:aedecc:1,2,7,7",
@@ -186,7 +192,7 @@
      "A tenths number is not always bigger than a hundredths number: compare the tenths digits.",
      "Not 1.2, but 1.77."
     ],
-    "counterCheck": "Counter-check: 0.91 is 9 tenths and 1 hundredth; 0.1 is only 1 tenth. 0.91 > 0.1.",
+    "counterCheck": "Check with hundredths: 1.77 is 177 hundredths; 1.2 = 1.20, which is only 120 hundredths.",
     "solvedCorrectly": [
      "Write both with two decimal places: 1.77 and 1.20",
      "1.77 is 177 hundredths; 1.20 is 120 hundredths. So 1.77 is greater"
@@ -217,85 +223,388 @@
   ],
   "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
  },
+ "responsePatterns": [],
+ "delayedAudit": null,
  "integration": {
-  "strategyProposals": [
-   {
-    "id": "fix_longer_is_larger",
-    "title": "More digits after the point does not mean bigger",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:aedecc:2,2,0,1"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:aedecc:2,2,0,1"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:aedecc:3,6,1,5"
-     }
+  "spec": {
+   "skill": "Compare a tenths decimal with a hundredths decimal by place value.",
+   "competency": "MATH.number.decimal-tenths",
+   "generator": {
+    "family": "aedecc",
+    "restriction": "aedecc, all items (one tenths and one hundredths decimal with the same whole part)."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "places-swapped"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "aedecc_concept",
+     "when": "general need: repeated difficulty, hint dependence or no established misconception (misconception-evidence@1 general-need / repeated-difficulty), or the lesson page"
+    },
+    {
+     "strategy": "fix_longer_is_larger",
+     "when": "verified-misconception 'longer-is-larger' (two matching answers, misconception-evidence@1)",
+     "reachable": false,
+     "blockedBy": "the diagnosis reader reads this wrong answer as \"other\": unreachable until fixed (05)"
+    },
+    {
+     "strategy": "fix_shorter_is_larger",
+     "when": "verified-misconception 'shorter-is-larger' (two matching answers, misconception-evidence@1)",
+     "reachable": false,
+     "blockedBy": "the diagnosis reader reads this wrong answer as \"other\": unreachable until fixed (05)"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Money (paise)",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "aedecc",
+    "partition": "check",
+    "restriction": "aedecc, all items (one tenths and one hundredths decimal with the same whole part).",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:aedecc:3,4,3,8",
+     "gen:aedecc:2,6,7,7"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.number.decimal-tenths",
+    "family": "aedecc",
+    "partition": "retention",
+    "cases": [
+     "tenths decimal is greater",
+     "hundredths decimal is greater"
     ],
-    "guided": "gen:aedecc:3,6,1,5",
-    "check": "gen:aedecc:1,7,6,4"
+    "candidates": [
+     "gen:aedecc:0,8,7,4",
+     "gen:aedecc:2,7,8,8"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "general (concept) explanation for a family that has no selectable teaching",
+    "strategy": {
+     "id": "aedecc_concept",
+     "title": "Comparing decimals: place value, not length",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "Decimals are compared place by place from the left: wholes, then tenths, then hundredths.",
+        "Writing both with the same number of places (put a zero at the end of the shorter one) makes them easy to compare as hundredths."
+       ],
+       "math": [
+        "Write both with two decimal places: 0.01 and 0.50",
+        "0.01 is 1 hundredth; 0.50 is 50 hundredths. So 0.5 is greater"
+       ],
+       "widget": {
+        "type": "grid",
+        "rows": 10,
+        "cols": 10,
+        "shaded": 1,
+        "note": "hundred grid: one shaded square = 0.01; a full column = 0.1"
+       },
+       "role": "concept",
+       "instance": "gen:aedecc:0,5,0,1"
+      },
+      {
+       "title": "Another example",
+       "text": [
+        "The same idea on a different question."
+       ],
+       "math": [
+        "Write both with two decimal places: 3.10 and 3.42",
+        "3.10 is 310 hundredths; 3.42 is 342 hundredths. So 3.42 is greater"
+       ],
+       "role": "strategy",
+       "instance": "gen:aedecc:3,1,4,2"
+      },
+      {
+       "title": "Number line in tenths",
+       "text": [
+        "Mark the tenths on a number line from one whole number to the next.",
+        "Find which tenth each number is in first; only if they are in the same tenth do the hundredths decide."
+       ],
+       "role": "strategy",
+       "instance": "gen:aedecc:0,5,0,1"
+      },
+      {
+       "title": "Another way: Money (paise)",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "₹0.01 is 1 paisa; ₹0.50 is 50 paise",
+        "50 paise is more, so 0.5 is greater"
+       ],
+       "role": "strategy",
+       "instance": "gen:aedecc:0,5,0,1"
+      }
+     ],
+     "guided": "gen:aedecc:0,6,8,7",
+     "check": "gen:aedecc:3,4,3,8"
+    }
    },
    {
-    "id": "fix_shorter_is_larger",
-    "title": "A tenths number is not always bigger than a hundredths numbe",
-    "kind": "conceptual|procedural (from bug kind)",
-    "needs": [],
-    "screens": [
-     {
-      "role": "misconception",
-      "instance": "gen:aedecc:1,2,7,7"
-     },
-     {
-      "role": "worked-example",
-      "instance": "gen:aedecc:1,2,7,7"
-     },
-     {
-      "role": "practice",
-      "instance": "gen:aedecc:3,3,8,1"
-     }
-    ],
-    "guided": "gen:aedecc:3,3,8,1",
-    "check": "gen:aedecc:1,1,2,9"
+    "purpose": "misconception-specific: longer-is-larger",
+    "strategy": {
+     "id": "fix_longer_is_larger",
+     "title": "More digits does not mean bigger",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "More digits does not mean bigger: what went wrong",
+       "text": [
+        "2.01 was taken as greater because it has more digits after the point. Compare the tenths first.",
+        "More digits after the point does not mean bigger: compare the tenths first."
+       ],
+       "math": [
+        "Not 2.01, but 2.2",
+        "Check with hundredths: 2.2 = 2.20, which is 220 hundredths; 2.01 is 201 hundredths. 2.2 is greater although it has fewer digits."
+       ],
+       "role": "misconception",
+       "instance": "gen:aedecc:2,2,0,1"
+      },
+      {
+       "title": "More digits does not mean bigger: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Write both with two decimal places: 2.20 and 2.01",
+        "2.20 is 220 hundredths; 2.01 is 201 hundredths. So 2.2 is greater"
+       ],
+       "role": "strategy",
+       "instance": "gen:aedecc:2,2,0,1"
+      }
+     ],
+     "guided": "gen:aedecc:3,6,1,5",
+     "check": "gen:aedecc:1,7,6,4"
+    }
+   },
+   {
+    "purpose": "misconception-specific: shorter-is-larger",
+    "strategy": {
+     "id": "fix_shorter_is_larger",
+     "title": "Compare the tenths first",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Compare the tenths first: what went wrong",
+       "text": [
+        "1.2 was taken as greater because hundredths are small pieces; but 1.77 has more tenths (7 against 2).",
+        "A tenths number is not always bigger than a hundredths number: compare the tenths digits."
+       ],
+       "math": [
+        "Not 1.2, but 1.77",
+        "Check with hundredths: 1.77 is 177 hundredths; 1.2 = 1.20, which is only 120 hundredths."
+       ],
+       "role": "misconception",
+       "instance": "gen:aedecc:1,2,7,7"
+      },
+      {
+       "title": "Compare the tenths first: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Write both with two decimal places: 1.77 and 1.20",
+        "1.77 is 177 hundredths; 1.20 is 120 hundredths. So 1.77 is greater"
+       ],
+       "role": "strategy",
+       "instance": "gen:aedecc:1,2,7,7"
+      }
+     ],
+     "guided": "gen:aedecc:3,3,8,1",
+     "check": "gen:aedecc:1,1,2,9"
+    }
    }
   ],
-  "registryProposal": [
+  "registryRecords": [
    {
+    "id": "MATH.number.decimal-tenths#aedecc_concept",
+    "subject": "mathematics",
+    "competency": "MATH.number.decimal-tenths",
+    "strategy": "aedecc_concept",
+    "intervention": "conceptual",
+    "misconceptionSpecific": false,
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:fa633e6373245c1e77361e1b06bd5be95b8c60848e26a77cdc2ac2ef4136036d",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "MATH.number.decimal-tenths#fix_longer_is_larger",
+    "subject": "mathematics",
     "competency": "MATH.number.decimal-tenths",
     "strategy": "fix_longer_is_larger",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
-    "addresses": "longer-is-larger",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "addresses": null,
+    "revisions": [
+     {
+      "contentHash": "sha256:ea6928f3bb881de17f74d422f583f2ef2b6217b18030e948db86af9d4268b1ef",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    },
    {
+    "id": "MATH.number.decimal-tenths#fix_shorter_is_larger",
+    "subject": "mathematics",
     "competency": "MATH.number.decimal-tenths",
     "strategy": "fix_shorter_is_larger",
+    "intervention": "conceptual",
     "misconceptionSpecific": true,
     "addresses": "shorter-is-larger",
-    "status": "pending_review",
-    "scope": [
-     "demonstration"
+    "revisions": [
+     {
+      "contentHash": "sha256:143b4db54a3a86e83760e58c31f5e00724529e528eff3ade7df2ab9b150ce58d",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
     ]
    }
   ],
-  "generalStrategyProposal": {
-   "id": "aedecc_concept",
-   "screens": [
-    "concept + visual",
-    "worked example(s)",
-    "alternative explanation"
+  "reusedExisting": [],
+  "familyAlreadyTaughtByModule": false,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "aedecc_concept",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 4,
+      "of": 4,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_longer_is_larger",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": null
+    },
+    {
+     "strategy": "fix_shorter_is_larger",
+     "teachingContract": {
+      "eligible": false,
+      "checked": false,
+      "violations": [],
+      "review": "not-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "shorter-is-larger"
+    }
    ],
-   "note": "for modules where this family has only a chapter screen"
+   "registryProblems": []
   },
-  "target": "module strategies of the competency's served module (content.ts modules) + explanation-review.v1.json entries; NOT written here (Codex owns integration)"
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
  },
  "sources": [
   "packages/learning/src/fam/b05.ts:1301 aedecc: teach idea/method, alternative money; bugs longer-is-larger, shorter-is-larger",
@@ -304,7 +613,10 @@
  "uncertainties": [
   "aedecc has no figure; the hundred grid is a proposal reusing an existing visual.",
   "CONTENT DEFECT (existing family text, fam/b05.ts aedecc bugs, longer-is-larger 'says'): it claims the hundredths digits 'uv' are more than the tenths digit t; this is false whenever uv ≤ t (e.g. '03 is more than 5'). The package replaces that sentence for its own screens; the family text itself is not changed here.",
-  "The competency is 'Represent tenths'; comparison sits inside it (the family is one of its five)."
+  "The competency is 'Represent tenths'; comparison sits inside it (the family is one of its five).",
+  "longer-is-larger: the platform's diagnosis reader (reasoning.ts probeReading) reads the predicted wrong answer \"2.01\" on gen:aedecc:2,2,0,1 as \"other\", so this misconception can NEVER be established and fix_longer_is_larger can never be triggered until the reader handles this answer type (Codex)",
+  "shorter-is-larger: the platform's diagnosis reader (reasoning.ts probeReading) reads the predicted wrong answer \"1.2\" on gen:aedecc:1,2,7,7 as \"other\", so this misconception can NEVER be established and fix_shorter_is_larger can never be triggered until the reader handles this answer type (Codex)",
+  "fix_longer_is_larger: the platform reads the addressed misconception from the family's verbatim 'says' text; it reads nothing here (the package overrides a defective family sentence), so the registry cannot record 'addresses: longer-is-larger' until the family text is fixed (05)"
  ],
  "validation": {
   "items": 19,

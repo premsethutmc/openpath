@@ -1,0 +1,40 @@
+{
+ "id": "PAT-PLACE",
+ "title": "What a digit is worth depends on its place",
+ "strands": [
+  "number"
+ ],
+ "concept": [
+  "A digit is worth different amounts in different places. In a two-digit number the first digit counts tens and the second counts ones.",
+  "'The value of a digit' is how much it is worth (a tens digit is worth that many tens); 'how many tens' is just the count. The same digit answers the two questions differently."
+ ],
+ "alternative": {
+  "title": "Chart",
+  "text": [
+   "Write the number in a Tens | Ones chart before answering."
+  ]
+ },
+ "reuses": [
+  {
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "bundles",
+   "covers": "tens as bundles (general)"
+  },
+  {
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "spot_the_mistake",
+   "covers": "count-blocks"
+  }
+ ],
+ "members": [
+  {
+   "id": "TP2-PV-DIGIT",
+   "title": "The value of a digit, and how many tens",
+   "family": "aadigit",
+   "competency": "MATH.number.place-value-tens"
+  }
+ ],
+ "crossDiagnostic": [],
+ "responsePatterns": [],
+ "whyThisPattern": "10 families in 6 competencies (two-digit, four-digit, decimal place value) model a digit-versus-value error; batch 2 covers the two-digit entry point."
+}

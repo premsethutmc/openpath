@@ -1,0 +1,1291 @@
+{
+ "schema": "teaching-package@0",
+ "status": "review-candidate (not approved, not registered, not served)",
+ "id": "TP2-CH-BAG",
+ "batch": "batch-2",
+ "pattern": "PAT-CHANCE",
+ "title": "Count marbles, not colours",
+ "competency": "MATH.probability.chance-language",
+ "competencyName": "Compare possible and impossible events",
+ "grades": [
+  6,
+  6
+ ],
+ "strand": "probability",
+ "family": "akchance",
+ "familyTitle": "Probability from 0 (impossible) to 1 (certain)",
+ "skill": "Probability of picking a colour (or not a colour) from a bag of marbles of different counts.",
+ "prerequisites": {
+  "graph": [
+   {
+    "from": "MATH.number.addition",
+    "type": "mandatory"
+   }
+  ],
+  "knowledge": [
+   "fractions as part of a whole",
+   "counting"
+  ],
+  "note": null
+ },
+ "explanation": {
+  "concept": [
+   "Each marble (or ball) is equally likely to be picked, not each colour. So count marbles, not colours.",
+   "Probability = (marbles that fit) ÷ (ALL the marbles). It is a number from 0 to 1, never more than 1."
+  ],
+  "visual": {
+   "type": "table",
+   "head": [
+    "Colour",
+    "Number of marbles"
+   ],
+   "rows": [
+    [
+     "Red",
+     6
+    ],
+    [
+     "Blue",
+     8
+    ]
+   ]
+  },
+  "visualNote": "Reuses the family's own colour table figure."
+ },
+ "workedExamples": [
+  {
+   "id": "gen:akchance:6,8,0,0",
+   "prompt": "A bag has 6 red and 8 blue marbles, as in the table. Meena picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+   "lines": [
+    "All the marbles: 6 red + 8 blue = 14, each equally likely",
+    "Marbles that fit \"red\": 6",
+    "P = 6/14 = 3/7"
+   ],
+   "familyExplainSteps": [
+    "There are 6 + 8 = 14 marbles in all",
+    "6 of them fit: red",
+    "Probability = 6 ÷ 14 = 3/7"
+   ],
+   "answer": "3/7"
+  }
+ ],
+ "hints": [
+  {
+   "for": "gen:akchance:6,8,0,0",
+   "hints": [
+    "Count ALL the marbles.",
+    "Count the ones that fit.",
+    "Fit ÷ all."
+   ]
+  }
+ ],
+ "alternativeExplanation": {
+  "title": "Scale from 0 to 1",
+  "text": [
+   "No matching marbles: 0. All of them: 1. Some: in between; more matching marbles means nearer 1."
+  ],
+  "visual": null
+ },
+ "alternativeMethods": [
+  {
+   "name": "Number every marble",
+   "valid": true,
+   "example": [
+    "number the marbles 1, 2, 3, …; each number is equally likely",
+    "P = 6/14 = 3/7"
+   ]
+  }
+ ],
+ "methodCredit": "A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.",
+ "diagnosticRule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+ "diagnostic": [
+  {
+   "case": "unequal colours",
+   "why": "colours-equal gives 1/(colours); odds gives red : others",
+   "id": "gen:akchance:2,3,2,0",
+   "fromPhase": "diagnostic",
+   "prompt": "A bag has 2 red, 3 blue and 2 green marbles, as in the table. Karthik picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+   "answer": "2/7",
+   "readings": [
+    {
+     "response": "2/7",
+     "reading": "correct"
+    },
+    {
+     "response": "2/5",
+     "reading": "other modelled error odds (conceptual): suspected on one answer"
+    },
+    {
+     "response": "1/3",
+     "reading": "TARGET modelled error colours-equal (conceptual): suspected on one answer"
+    },
+    {
+     "response": "2",
+     "reading": "other modelled error count-only (procedural): suspected on one answer"
+    },
+    {
+     "response": "anything else",
+     "reading": "unexplained (no diagnosis; policy A: a single slip is kept, not acted on)"
+    }
+   ]
+  }
+ ],
+ "misconceptions": [
+  {
+   "bug": "colours-equal",
+   "kind": "conceptual",
+   "platformCanDiagnose": true,
+   "platformReading": "predicted",
+   "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
+   "note": "colours taken as equally likely",
+   "example": "gen:akchance:4,2,4,0",
+   "screens": {
+    "whatWentWrong": [
+     "In \"A bag has 4 red, 2 blue and 4 green marbles, as in the table. Farhan picks one marble without looking. What is the probability that it is red? (A fraction is fine.)\", one wrong answer is 1/3.",
+     "Each colour was taken as equally likely (1 out of 3 colours). The colours have different numbers of marbles, so count marbles, not colours.",
+     "Colours with more marbles are more likely: count marbles, not colours.",
+     "Not 1/3, but 2/5."
+    ],
+    "counterCheck": "Check: there are 4 red but only 2 blue, so blue is LESS likely than red. So the colours do not all have the same chance.",
+    "solvedCorrectly": [
+     "All the marbles: 4 red + 2 blue + 4 green = 10, each equally likely",
+     "Marbles that fit \"red\": 4",
+     "P = 4/10 = 2/5"
+    ]
+   },
+   "guided": "gen:akchance:2,8,5,0:mc",
+   "check": "gen:akchance:7,5,0,1"
+  }
+ ],
+ "authoredTransfer": [],
+ "practice": {
+  "guided": [
+   "gen:akchance:3,1,6,0:mc",
+   "gen:akchance:6,6,2,0:mc",
+   "gen:akchance:6,1,3,0"
+  ],
+  "rechecks": [
+   "gen:akchance:9,8,1,0:mc",
+   "gen:akchance:9,1,0,1"
+  ],
+  "transfer": [
+   "gen:akchance:3,8,4,1:w",
+   "gen:akchance:1,4,6,1:w"
+  ],
+  "delayedChecks": [
+   "gen:akchance:7,9,1,0:mc",
+   "gen:akchance:8,6,0,0"
+  ],
+  "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
+ },
+ "responsePatterns": [],
+ "delayedAudit": null,
+ "integration": {
+  "spec": {
+   "skill": "Probability of picking a colour (or not a colour) from a bag of marbles of different counts.",
+   "competency": "MATH.probability.chance-language",
+   "generator": {
+    "family": "akchance",
+    "restriction": "akchance with params[3] ∈ {0, 1} (is X / is not X); diagnostics need unequal colour counts (colours-equal differs from the answer)."
+   },
+   "existingMisconceptionExplanations": [
+    {
+     "strategy": "spot_the_mistake",
+     "addresses": "odds"
+    }
+   ],
+   "triggers": [
+    {
+     "strategy": "fix_colours_equal",
+     "when": "verified-misconception 'colours-equal' (two matching answers, misconception-evidence@1)",
+     "reachable": true
+    },
+    {
+     "strategy": "worked_steps",
+     "when": "existing explanation reused: favourable over all (general)"
+    },
+    {
+     "strategy": "scale_words",
+     "when": "existing explanation reused: the 0–1 scale"
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "when": "existing explanation reused: odds"
+    }
+   ],
+   "allowedMethods": [
+    {
+     "name": "the oracle's method (worked lines)",
+     "valid": true
+    },
+    {
+     "name": "Number every marble",
+     "valid": true
+    }
+   ],
+   "freshCheckSelection": {
+    "family": "akchance",
+    "partition": "check",
+    "restriction": "akchance with params[3] ∈ {0, 1} (is X / is not X); diagnostics need unequal colour counts (colours-equal differs from the answer).",
+    "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
+    "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
+    "candidates": [
+     "gen:akchance:9,8,1,0:mc",
+     "gen:akchance:9,1,0,1"
+    ]
+   },
+   "retentionTarget": {
+    "competency": "MATH.probability.chance-language",
+    "family": "akchance",
+    "partition": "retention",
+    "cases": [
+     "unequal colours"
+    ],
+    "candidates": [
+     "gen:akchance:7,9,1,0:mc",
+     "gen:akchance:8,6,0,0"
+    ]
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "ungradable": []
+  },
+  "strategies": [
+   {
+    "purpose": "misconception-specific: colours-equal",
+    "strategy": {
+     "id": "fix_colours_equal",
+     "title": "Count marbles, not colours",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count marbles, not colours: what went wrong",
+       "text": [
+        "Each colour was taken as equally likely (1 out of 3 colours). The colours have different numbers of marbles, so count marbles, not colours.",
+        "Colours with more marbles are more likely: count marbles, not colours."
+       ],
+       "math": [
+        "Not 1/3, but 2/5",
+        "Check: there are 4 red but only 2 blue, so blue is LESS likely than red. So the colours do not all have the same chance."
+       ],
+       "role": "misconception",
+       "instance": "gen:akchance:4,2,4,0"
+      },
+      {
+       "title": "Count marbles, not colours: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the marbles: 4 red + 2 blue + 4 green = 10, each equally likely",
+        "Marbles that fit \"red\": 4",
+        "P = 4/10 = 2/5"
+       ],
+       "role": "strategy",
+       "instance": "gen:akchance:4,2,4,0"
+      }
+     ],
+     "guided": "gen:akchance:2,8,5,0:mc",
+     "check": "gen:akchance:7,5,0,1"
+    }
+   }
+  ],
+  "registryRecords": [
+   {
+    "id": "MATH.probability.chance-language#fix_colours_equal",
+    "subject": "mathematics",
+    "competency": "MATH.probability.chance-language",
+    "strategy": "fix_colours_equal",
+    "intervention": "conceptual",
+    "misconceptionSpecific": true,
+    "addresses": "colours-equal",
+    "revisions": [
+     {
+      "contentHash": "sha256:0fb18741fe2b270a652552fb03f5545114e20e02bf772e389d50355a53fa8cbd",
+      "status": "pending_review",
+      "provenance": {
+       "source": "engineering",
+       "by": "docs/math-teaching-content (review candidate)",
+       "at": "2026-11-02T00:00:00.000Z",
+       "note": "proposed, not registered; not educator-reviewed"
+      },
+      "reviewerRole": "none",
+      "knownIssues": [],
+      "scope": [
+       "demonstration"
+      ]
+     }
+    ]
+   }
+  ],
+  "reusedExisting": [
+   {
+    "strategy": "worked_steps",
+    "covers": "favourable over all (general)"
+   },
+   {
+    "strategy": "scale_words",
+    "covers": "the 0–1 scale"
+   },
+   {
+    "strategy": "spot_the_mistake",
+    "covers": "odds"
+   }
+  ],
+  "familyAlreadyTaughtByModule": true,
+  "platformChecks": {
+   "gates": [
+    {
+     "strategy": "fix_colours_equal",
+     "teachingContract": {
+      "eligible": true,
+      "checked": true,
+      "violations": [],
+      "review": "machine-checked"
+     },
+     "familyScopedContract": {
+      "checked": true,
+      "sections": 2,
+      "of": 2,
+      "violations": []
+     },
+     "withoutEvidence": {
+      "eligible": false,
+      "failed": [
+       "misconception-evidence"
+      ]
+     },
+     "withEvidence": {
+      "eligible": true,
+      "failed": []
+     },
+     "addressesReadByPlatform": "colours-equal"
+    }
+   ],
+   "registryProblems": []
+  },
+  "target": "append `strategies[].strategy` to the served module's strategies (content.ts modules; library.ts for synthesised modules, content/learning/modules.v1.json for authored) and `registryRecords` to content/learning/explanation-review.v1.json, recomputing contentHash on the integrated revision. NOT written here (Codex owns integration)."
+ },
+ "sources": [
+  "packages/learning/src/fam/b11.ts:634 akchance (seed of MATH.probability.chance-language): bugs odds, colours-equal, count-only; figure table"
+ ],
+ "uncertainties": [
+  "akchance is the seed: worked_steps, scale_words and spot_the_mistake (odds) exist and are REUSED; this package adds colours-equal only.",
+  "CONTRAST GAP: an equal-count bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) exists in the generator (gen:akchance:6,6,0,0, gen:akchance:8,8,0,0) but in NO served partition (diagnostic/practice/check/retention), and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Generator partition change for Codex.",
+  "Family prompt grammar: '1 red and 1 blue marbles' (plural with 1); wording only, recorded in 05."
+ ],
+ "validation": {
+  "items": 14,
+  "itemsOk": 14,
+  "poolAgreement": "317/317",
+  "disagreements": [],
+  "checks": [
+   {
+    "id": "gen:akchance:2,3,2,0",
+    "role": "diagnostic",
+    "prompt": "A bag has 2 red, 3 blue and 2 green marbles, as in the table. Karthik picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+    "answer": "2/7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 2 red + 3 blue + 2 green = 7, each equally likely",
+      "Marbles that fit \"red\": 2",
+      "P = 2/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 2/7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:6,8,0,0",
+    "role": "worked-example",
+    "prompt": "A bag has 6 red and 8 blue marbles, as in the table. Meena picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+    "answer": "3/7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 6 red + 8 blue = 14, each equally likely",
+      "Marbles that fit \"red\": 6",
+      "P = 6/14 = 3/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 6/14 = 3/7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.75"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "0.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:4,2,4,0",
+    "role": "misconception-example",
+    "prompt": "A bag has 4 red, 2 blue and 4 green marbles, as in the table. Farhan picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+    "answer": "2/5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 4 red + 2 blue + 4 green = 10, each equally likely",
+      "Marbles that fit \"red\": 4",
+      "P = 4/10 = 2/5"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 4/10 = 2/5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "2/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:2,8,5,0:mc",
+    "role": "misconception-guided",
+    "prompt": "A bag has 2 red, 8 blue and 5 green marbles, as in the table. Arjun picks one marble without looking. What is the probability that it is red? Choose one.",
+    "answer": "2/15",
+    "options": [
+     "1/2",
+     "1/3",
+     "2/13",
+     "2/15"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 2 red + 8 blue + 5 green = 15, each equally likely",
+      "Marbles that fit \"red\": 2",
+      "P = 2/15"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 2/15"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "2/13"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:7,5,0,1",
+    "role": "misconception-check",
+    "prompt": "A bag has 7 red and 5 blue marbles, as in the table. Anu picks one marble without looking. What is the probability that it is not blue? (A fraction is fine.)",
+    "answer": "7/12",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 7 red + 5 blue = 12, each equally likely",
+      "Marbles that fit \"not blue\": 7",
+      "P = 7/12"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 7/12"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "event-itself",
+      "kind": "procedural",
+      "predicts": [
+       "5/12"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "0.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "1.4"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:3,1,6,0:mc",
+    "role": "guided-practice",
+    "prompt": "A bag has 3 red, 1 blue and 6 green marbles, as in the table. Farhan picks one marble without looking. What is the probability that it is red? Choose one.",
+    "answer": "3/10",
+    "options": [
+     "3/10",
+     "1/3",
+     "1/2",
+     "3/7"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 3 red + 1 blue + 6 green = 10, each equally likely",
+      "Marbles that fit \"red\": 3",
+      "P = 3/10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 3/10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "3/7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "3"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:6,6,2,0:mc",
+    "role": "guided-practice",
+    "prompt": "A bag has 6 red, 6 blue and 2 green marbles, as in the table. Meena picks one marble without looking. What is the probability that it is red? Choose one.",
+    "answer": "3/7",
+    "options": [
+     "3/7",
+     "3/4",
+     "1/3",
+     "1/2"
+    ],
+    "correctOption": "A",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 6 red + 6 blue + 2 green = 14, each equally likely",
+      "Marbles that fit \"red\": 6",
+      "P = 6/14 = 3/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 6/14 = 3/7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.75"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:6,1,3,0",
+    "role": "guided-practice",
+    "prompt": "A bag has 6 red, 1 blue and 3 green marbles, as in the table. Farhan picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+    "answer": "3/5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 6 red + 1 blue + 3 green = 10, each equally likely",
+      "Marbles that fit \"red\": 6",
+      "P = 6/10 = 3/5"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 6/10 = 3/5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "1.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "6"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:9,8,1,0:mc",
+    "role": "recheck",
+    "prompt": "A bag has 9 red, 8 blue and 1 green marbles, as in the table. Divya picks one marble without looking. What is the probability that it is red? Choose one.",
+    "answer": "1/2",
+    "options": [
+     "3/4",
+     "1",
+     "1/3",
+     "1/2"
+    ],
+    "correctOption": "D",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 9 red + 8 blue + 1 green = 18, each equally likely",
+      "Marbles that fit \"red\": 9",
+      "P = 9/18 = 1/2"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 9/18 = 1/2"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:9,1,0,1",
+    "role": "recheck",
+    "prompt": "A bag has 9 red and 1 blue marbles, as in the table. Farhan picks one marble without looking. What is the probability that it is not blue? (A fraction is fine.)",
+    "answer": "9/10",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 9 red + 1 blue = 10, each equally likely",
+      "Marbles that fit \"not blue\": 9",
+      "P = 9/10"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 9/10"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "event-itself",
+      "kind": "procedural",
+      "predicts": [
+       "0.1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "0.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "9"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:3,8,4,1:w",
+    "role": "transfer",
+    "prompt": "A bag has 3 red, 8 blue and 4 green marbles, as in the table. Arjun picks one marble without looking. What is the probability that it is not blue? (A fraction is fine.)",
+    "answer": "7/15",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 3 red + 8 blue + 4 green = 15, each equally likely",
+      "Marbles that fit \"not blue\": 7",
+      "P = 7/15"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 7/15"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "event-itself",
+      "kind": "procedural",
+      "predicts": [
+       "8/15"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "2/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.875"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:1,4,6,1:w",
+    "role": "transfer",
+    "prompt": "A bag has 1 red, 4 blue and 6 green marbles, as in the table. Lakshmi picks one marble without looking. What is the probability that it is not blue? (A fraction is fine.)",
+    "answer": "7/11",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 1 red + 4 blue + 6 green = 11, each equally likely",
+      "Marbles that fit \"not blue\": 7",
+      "P = 7/11"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 7/11"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "event-itself",
+      "kind": "procedural",
+      "predicts": [
+       "4/11"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "2/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "1.75"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:7,9,1,0:mc",
+    "role": "delayed-check",
+    "prompt": "A bag has 7 red, 9 blue and 1 green marbles, as in the table. Imran picks one marble without looking. What is the probability that it is red? Choose one.",
+    "answer": "7/17",
+    "options": [
+     "1/2",
+     "1/3",
+     "7/17",
+     "7/10"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 7 red + 9 blue + 1 green = 17, each equally likely",
+      "Marbles that fit \"red\": 7",
+      "P = 7/17"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 7/17"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "0.7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "1/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "7"
+      ],
+      "graded": [
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akchance:8,6,0,0",
+    "role": "delayed-check",
+    "prompt": "A bag has 8 red and 6 blue marbles, as in the table. Meena picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+    "answer": "4/7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "All the marbles: 8 red + 6 blue = 14, each equally likely",
+      "Marbles that fit \"red\": 8",
+      "P = 8/14 = 4/7"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Number every marble",
+      "ok": true,
+      "lines": [
+       "number the marbles 1, 2, 3, …; each number is equally likely",
+       "P = 8/14 = 4/7"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "odds",
+      "kind": "conceptual",
+      "predicts": [
+       "4/3"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "predicts": [
+       "0.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "count-only",
+      "kind": "procedural",
+      "predicts": [
+       "8"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   }
+  ]
+ }
+}
