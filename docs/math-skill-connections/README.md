@@ -1,6 +1,6 @@
 > **Current integration status (2026-11-02):** The sections below record earlier branch handovers, not an assertion that their blockers or coverage claims still apply. The shared task validator now uses the trusted grader on the actual question variant; supported choice/fraction/tuple/set examples are no longer rejected by `Number()`. Prepared choice mappings remain deliberately unregistered pending domain integration review. Prerequisite-only strategies are excluded from target-teaching connections, while optional prerequisite help remains available.
 >
-> PR101's author-time half-picture correction was incomplete. The subsequent integration uses Claude's `81923a1` tuple data through `SubSkillDef.parameterTuples` in `pictographs-subskills@2` / `pictographs-subskill-projection@2`. Whole-picture rows retain ordinary answer grading but earn no half-symbol evidence; the three former TODO classification/projection/selection regressions are active and pass. Saved records are not rewritten. See `../math-answer-contract-integration/known-mapping-gap.json` for the before/after evidence. The original total `fix_assume_tens` is preserved; the separate read-bar candidate is `fix_assume_tens_read`, pending review. Generated connection reports remain mechanical evidence, not educator approval or curriculum completion.
+> PR101's author-time half-picture correction was incomplete. The subsequent integration uses Claude's `81923a1` tuple data through `SubSkillDef.parameterTuples` in `pictographs-subskills@3` / `pictographs-subskill-projection@3`. Mapping history: @1 legacy (every row task, overclaims), @2 PR101 withdrawal (row tasks earn no skill evidence), @3 precise; each is exported for replay (`PICTOGRAPHS_MAPPING_HISTORY`) and tested on one saved ledger. Whole-picture rows retain ordinary answer grading but earn no half-symbol evidence; the three former TODO classification/projection/selection regressions are active and pass. Saved records are not rewritten. See `../math-answer-contract-integration/known-mapping-gap.json` for the before/after evidence. The original total `fix_assume_tens` is preserved; the separate read-bar candidate is `fix_assume_tens_read`, pending review. Generated connection reports remain mechanical evidence, not educator approval or curriculum completion.
 
 # Mathematics skill connections
 
@@ -209,6 +209,8 @@ Grading semantics did not change: every changed family's specification fingerpri
 
 ### 4. Skill-scoped teaching for the 17 unit-value skills
 
+> Historical (PR101). The half-symbol withdrawal below was mapping @2; the integrated mapping is the precise @3 (section 8).
+
 **Why blueprints.** A template module draws its strategy questions from the whole family (`take(...)`), so it cannot keep a strategy's worked example, guided question and check on one sub-skill. The existing blueprint contract can (`scope: {family, subSkill}`, validated by `synthesise`). Pictographs, scaled bars and place value (tens) are now blueprints (source: `content/learning/src/scale-blueprints.mts`, output appended to `blueprints.v1.json`).
 
 **Reuse.** Text comes from the `feat/math-teaching-content@4e655e73` candidates (TP2-SCL-PICT `acpicttab_concept`, TP2-SCL-BAR `fix_assume_tens`, TP2-PV-DIGIT `aadigit_concept`, split by skill) and the existing template strategies (`skip_count`, `table`, `bundles`, `count_on`). New text was written only where no candidate covered the skill (half symbols, row comparison, totals, largest group, bar difference and total, ones digit, the three grouping skills). Every worked line is the generator's own step text for the screen's instance; explanation text contains no instance numbers.
@@ -219,7 +221,12 @@ Grading semantics did not change: every changed family's specification fingerpri
 
 **Half pictures.** The generator's half-symbol questions may ask about a row with no half picture, so `half_pictures` uses only rows with an odd number of halves for its worked example, guided question and check. Both half-picture texts count in halves (the generator's own method), so they hold when halves do not pair up.
 
-**Open runtime defect (integration finding): the half-symbol mapping.** The authored examples filter above does not fix the runtime mapping. `pictographs.half-symbol@1` maps every `acpicthalf` q = 0 task. The skill should mean "the asked row holds a half picture", that is `halves(ki, s)[j]` odd. That is a joint condition on key, seed and row, which per-index `parameters` cannot express. So 197 of the 472 valid tasks (100 of the 242 served) still earn half-symbol credit for a whole-picture row. Reproducer: `gen:acpicthalf:0,8,1,0`, two halves, one whole picture. `HALF_SYMBOL_ROWS` (`subskill-config-scale.ts`) enumerates the 275 genuine `(ki, s, j)`, ready for a versioned `pictographs-subskills@2` once Codex extends the contract (a tuple list or a problem predicate). The regression tests ("half-symbol runtime" in `scale-pattern.test.ts`) cover classification, projection credit, and assessment/retention/recovery selection. They are `todo` and currently fail for exactly this reason; they become plain tests with the fix.
+**Half-symbol rows withdrawn from evidence (mapping `pictographs-subskills@2`).** Mapping @1 credited every `acpicthalf` row question (q = 0) as `pictographs.half-symbol@1`, including rows of whole pictures only. Reproducer: `gen:acpicthalf:0,8,1,0`, two halves, one whole picture; 197 of 472 valid tasks are like this.
+- **The limitation:** the precise condition (the asked row holds a half picture, `halves(ki, s)[j]` odd) is joint over key, seed and row. Per-index `parameters` cannot express it, and duplicate skill ids are not used.
+- **What @2 changes:** the row questions are unmapped. They are still served and graded and earn ordinary answer credit, but they earn no skill evidence. The totals skill (q = 1) is unchanged. The `half_pictures` explanation is withheld (kept in `scale-blueprints.mts`, not published).
+- **Protection** (plain tests in `scale-pattern.test.ts`): no row question classifies to any skill (typed or multiple-choice); a correct answer is credited but no pictograph skill is demonstrated; no pictograph skill's assessment, retention or recovery selects a row question.
+- **Pending restoration** (`todo`, **not counted as protection**): genuine-row inclusion, projection credit and selection. They are enabled once Codex extends the contract.
+- **Data for that version:** `HALF_SYMBOL_ROWS` (275 genuine `(ki, s, j)`). The version number is to be coordinated with Codex's replay handling.
 
 **Misconception teaching.** Only `fix_assume_tens` (scaled-bars.read) is added: its evidence is a numeric wrong answer and it needs no contrast item. It is never general teaching (`addresses: "assume-tens"`): with `assume-tens` evidence it is eligible for scaled-bars.read only (tested). The contrast-dependent fixes (`one-each`, `face-value`, `value-not-count`) are **not** added: they need contrast declarations, which belong with Codex's diagnosis integration.
 
@@ -228,7 +235,7 @@ Grading semantics did not change: every changed family's specification fingerpri
 | Sub-skill | Teaching (same skill, pending review) | Guided | Fresh check | Delayed check | Recovery |
 |---|---|---|---|---|---|
 | pictographs.read-with-key | read_with_key, table | yes | yes | yes | yes |
-| pictographs.half-symbol | half_pictures | yes | yes | yes | yes |
+| pictographs.half-symbol | **withdrawn in @2** (no skill evidence until the contract extension) | – | – | – | – |
 | pictographs.half-symbol-total | half_pictures_total | yes | yes | yes | yes |
 | pictographs.compare-rows | compare_rows | yes | yes | yes | yes |
 | pictographs.draw-from-table | draw_from_table | yes | yes | yes | yes |
@@ -245,9 +252,9 @@ Grading semantics did not change: every changed family's specification fingerpri
 | place-value.left-over-ones | left_over_ones | yes | yes | yes | yes |
 | place-value.grouped-total | grouped_total | yes | yes | yes | yes |
 
-**Coverage, kept separate (17 skills):** teaching 17 (pending review, demonstration only); assessment 17; recovery 17; retention 17.
+**Coverage, kept separate (16 mapped skills after @2; half-symbol withdrawn):** teaching 16 (pending review, demonstration only); assessment 16; recovery 16; retention 16.
 
-**Journeys** (`scale-pattern.test.ts`, 44/44; the test also checks every current revision is `pending_review`): for each of the 21 general strategies, teach → guided (the strategy's own question, same skill) → independent fresh check (same skill, not a taught or guided example) → reload keeps the check. The delayed check and recovery paths are the per-skill foundation journeys of section 2. **Blocked paths:** none for these skills in demonstration mode; under supervised evaluation, none teach until an educator approves (by design).
+**Journeys** (`scale-pattern.test.ts`, 46 pass, 3 pending `todo`; the test also checks every current revision is `pending_review`): for each of the 20 general strategies, teach → guided (the strategy's own question, same skill) → independent fresh check (same skill, not a taught or guided example) → reload keeps the check. The delayed check and recovery paths are the per-skill foundation journeys of section 2. **Blocked paths:** none for these skills in demonstration mode; under supervised evaluation, none teach until an educator approves (by design).
 
 ### 5. Next mapping group: "change between units by a fixed factor"
 
@@ -255,21 +262,57 @@ Grading semantics did not change: every changed family's specification fingerpri
 
 | Competency | Sub-skills (family, parameters) | Assessment + retention + recovery | Teaching |
 |---|---|---|---|
-| `MATH.measurement.money-decimals` | paise-to-rupees (`acp2r`); rupees-and-paise-to-paise (`acpaise` form 0); decimal-rupees-to-paise (`acpaise` form 1) | 3/3 | gap (see note) |
-| `MATH.measurement.length-conversion` | cm→decimal m, mm→decimal cm, m→decimal km, decimal m→cm (`acdecu` kinds 0–3); m cm→cm, cm→m cm (`acmcm`); cm mm→mm, mm→cm mm, m→km m, m→whole km, mm→whole cm (`acmmkm` kinds 0–4); compare-m-cm (`acmcmp`) **prepared, not registered** | 11/11 | gap |
-| `MATH.geometry.scale-drawings` | map→real, real→map (`aiscale`); plan 1 : n→metres, map 1 : n→km (`airatio`) | 4/4 | gap |
+| `MATH.measurement.money-decimals` | paise-to-rupees (`acp2r`); rupees-and-paise-to-paise (`acpaise` form 0); decimal-rupees-to-paise (`acpaise` form 1) | 3/3 | 3/3 (section 7) |
+| `MATH.measurement.length-conversion` | cm→decimal m, mm→decimal cm, m→decimal km, decimal m→cm (`acdecu` kinds 0–3); m cm→cm, cm→m cm (`acmcm`); cm mm→mm, mm→cm mm, m→km m, m→whole km, mm→whole cm (`acmmkm` kinds 0–4); compare-m-cm (`acmcmp`) **prepared, not registered** | 11/11 | 11/11 (section 7) |
+| `MATH.geometry.scale-drawings` | map→real, real→map (`aiscale`); plan 1 : n→metres, map 1 : n→km (`airatio`) | 4/4 | 4/4 (section 7) |
 
 Unmapped with reasons: `acbill`, `acmoneyadd`, `acmoneymul` (money arithmetic, not unit change).
 
 **Blocked (prepared, not registered):** `PREPARED_CHOICE_SKILLS` holds `length.compare-m-cm@1` (`acmcmp`, choice answer A/B/C); `acmcmp` is listed as unmapped. Registering it today would split the system: the foundation runtime **would** ask and credit it (it reads the stored verdict; verified), while `validSkillTask` refuses every one of its tasks, so teaching, the connection audit and diagnosis would report it unconnected. Reproducer (in `conversion-pattern.test.ts`): add the prepared skill to `LENGTH_CONVERSION_CONFIG`; `validSkillTask(cfg, "length.compare-m-cm@1", "gen:acmcmp:1,4,1,0") === false` (answer `"B"`), yet `foundationPlan` asks that skill and a correct answer is credited. Same shared blocker as section 3; no validator change was made here.
 
-**Teaching note:** these modules are still templates with no skill-scoped teaching. The audit shows `money.decimal-rupees-to-paise` and `length.cm-to-m-cm` as connected only through the unscoped `check_what_it_uses` pointer, whose drawn questions happen to share a skill. That is not teaching of the skill; it is pinned in `conversion-pattern.test.ts` and reported here, not counted.
+**Teaching note (superseded by section 7):** at this commit these modules were still templates with no skill-scoped teaching. The audit shows `money.decimal-rupees-to-paise` and `length.cm-to-m-cm` as connected only through the unscoped `check_what_it_uses` pointer, whose drawn questions happen to share a skill. That is not teaching of the skill; it is pinned in `conversion-pattern.test.ts` and reported here, not counted.
 
 **Journeys** (`conversion-pattern.test.ts`, 22/22): partitions over every served task, partition meanings read from the generated prompts, numeric diagnostic predictions, and for each of 18 skills same-skill fresh checks, a fresh delayed check after 8 days and recovery; plus the blocker reproducer.
 
+### 7. Skill-scoped teaching for the 18 conversion skills
+
+> Superseded in part by section 8: the choice skill is now registered (19 skills).
+
+The three conversion modules are now blueprints, from the same authoring source as section 4 (`scale-blueprints.mts`, the "change between units by a fixed factor" block). There is one scoped strategy per skill: worked instance, guided question and module check are all that skill. Text contains no instance numbers, and the worked lines are the generator's own steps.
+- **Reused text:** the template modules' family ideas and methods (`worked_steps`, `drop_dot`, `place_value`, `ratio_table`) and TP2-REG-MONEY's unit idea ("a bigger unit is made of a fixed number of smaller units").
+- **New text:** only per-direction method lines.
+- **Removed from these modules:**
+  - the unscoped `check_what_it_uses` pointer (decision 1);
+  - the template `spot_the_mistake` screens. They taught one misconception (added the numbers; multiplied instead of divided) as general teaching, with no contrast declaration. They return as `addresses`-scoped fixes once contrast items exist (decision 2).
+- **Review:** 18 explanations registered as `pending_review`; the modules are draft. Nothing is approved.
+
+**Coverage, kept separate (18 registered skills):** teaching 18 (pending review, demonstration only); assessment 18; recovery 18; retention 18. The prepared choice skill (`length.compare-m-cm`) stays unregistered.
+
+**Journeys** (`conversion-pattern.test.ts`, 40/40):
+- partitions and partition meanings;
+- per-skill foundation checks, a delayed check after 8 days and recovery;
+- the blocker reproducer;
+- teaching alignment, with no digits in explanation text, a non-trivial worked example and `pending_review` status;
+- for each of the 18 strategies, the path teach → guided → independent fresh check → reload.
+
+**Ratio scales:** the taught items avoid 1 : 100 (to metres) and 1 : 100000 (to km). At those scales the multiplication and the unit change cancel, which hides the method; they are still assessed.
+
+**Independent review:** fixed:
+- ratio items that cancel;
+- "the hundreds are the rupees" (now "the number of whole hundreds");
+- the length chapter now covers decimals;
+- tests now compare math lines with the generator's own lines, check every revision is pending, use exposure keys for freshness and apply the full non-trivial test.
+
+Open, outside this branch's ownership:
+- The engine-drawn sub-chapters (from `subSkills()` in `library.ts`) can draw a cancelling example (ratio 1 : 100, 12 cm → 12 m).
+- The length chapter includes `acmcmp` (unregistered) and an "equal lengths" example.
+- These sub-chapters are not skill teaching.
+
+**Integration note:** Codex's local integration now accepts choice answers. The blocker reproducer test asserts today's numeric-only `validSkillTask` on this branch. On the combined branch, it should be replaced by registering `PREPARED_CHOICE_SKILLS` as a new mapping version, with the usual journeys; registration stays explicit.
+
 ### 6. Decisions for Codex
 
-0. **Mapping contract: joint parameter conditions** (half-symbol runtime defect, section 4). Extend `SubSkillDef` with an enumerated tuple list or a problem predicate. Until then, choose: keep @1 (false credit on whole-picture rows) or unmap `acpicthalf` q = 0 (no false credit, but no genuine half-row evidence either).
+0. **Mapping contract: joint parameter conditions** (section 4). Extend `SubSkillDef` with an enumerated tuple list or a problem predicate. Decided meanwhile: row questions are unmapped (@2). With the contract change, Claude adds a new mapping version using `HALF_SYMBOL_ROWS` and enables the three pending tests; the version number is coordinated with replay handling.
 
 1. **Unscoped prerequisite strategies** (`check_what_it_uses` in template modules): should `strategyConnects` exclude `kind: "prerequisite"` or strategies with no scope? Today they count as same-skill teaching by chance (two skills above, and previously `scaled-bars.total`).
 2. **Contrast declarations** for `one-each` (pictographs), `face-value` and `value-not-count` (place value): the candidates on `feat/math-teaching-content` are ready to scope once contrast items are declared.
@@ -278,3 +321,80 @@ Unmapped with reasons: `acbill`, `acmoneyadd`, `acmoneymul` (money arithmetic, n
 5. **Template → blueprint conversion** of the three unit-value modules: an engine-visible change of module source (same contract, `synthesise`); confirm at integration.
 
 **Independent review of this branch:** two defects fixed (half-picture questions without a half picture; the total text failing on an odd number of halves). Also fixed from it: `bundles` now shows the regrouping, the blocked-skill test was strengthened (which exposed the runtime/audit split above), the registry status and the with-evidence misconception path are now tested. Open, for Codex: decision 1 (unscoped prerequisite pointers).
+
+## 8. Integration repair (Claude, `feat/math-integration-repair`, from PR102 `24d254fd`)
+
+PR101 and PR102 stay unchanged as checkpoints. This branch combines them selectively. Codex's shared fixes stay in place:
+- the trusted answer contracts and `parameterTuples`;
+- prerequisite exclusion in `strategyConnects`;
+- `fix_assume_tens_read` and the retained `fix_assume_tens` for totals.
+
+### Conversion teaching (from `2ec9c528`)
+
+**What was integrated:**
+- The conversion block of `scale-blueprints.mts`. The generated money, length and scale blueprints are byte-identical to `2ec9c528`, and the 12 existing blueprints are unchanged.
+- The explanation-review histories, merged by revision: 18 entries added, 3 chapter revisions appended. All are `pending_review`, and a resync registered nothing new.
+- The tests.
+
+**Codex's prerequisite test** used the money module's template pointer, which no longer exists. It now builds a pointer from the aligned target strategy (same guided and check questions, only the kind or role differs) and asserts it does not connect.
+
+### Half-symbol version collision, resolved
+
+Each meaning has its own identity, exported as `PICTOGRAPHS_MAPPING_HISTORY`:
+
+| Mapping | Meaning | Status |
+|---|---|---|
+| `pictographs-subskills@1` | Legacy: every row task is evidence, including whole-picture rows | Replay only |
+| `pictographs-subskills@2` | PR101 withdrawal: row tasks earn no skill evidence | Replay only |
+| `pictographs-subskills@3` | Precise: `parameterTuples` from `HALF_SYMBOL_ROWS` | Live |
+
+PR102 first labelled the precise mapping @2. It is renumbered @3, with the projection renumbered to match. The three runtime regressions (classification, projection credit, selection) are active against @3.
+
+**Replay test:** one saved ledger (whole rows, genuine rows, a totals task) projects as follows:
+- **@1** credits all row tasks;
+- **@2** has no half-symbol skill;
+- **@3** credits only the genuine rows;
+- the totals skill is the same under all three.
+
+The ledger is byte-identical before and after, and replay is order-independent.
+
+### Choice skill registered: `length-conversion-subskills@2`
+
+`length.compare-m-cm@1` (`acmcmp`, native A/B/C) is now a core skill, and `LENGTH_CONVERSION_CONFIG_V1` is kept for replay.
+- **Teaching:** `compare_m_cm`, pending review. Its worked example has unequal lengths. Its math lines are the generator's own, plus one line naming the chosen option, because the answer is a letter.
+- **Assessment, delayed check and recovery:** the per-skill foundation journey. The wrong answer is a different option letter.
+- **Saved replay:** @1 gives no skill evidence; @2 gives 4 attempts with 3 right. The ledger is unchanged and replay is order-independent.
+- **Diagnosis:** option predictions are not read as numeric diagnoses, and answer credit grants no method credit.
+- **Prerequisite pointers** do not count as target teaching (shared predicate, tested).
+
+`PREPARED_CHOICE_SKILLS` is now empty.
+
+### CI failure 1: the Completing-the-square browser journey
+
+**Cause (diagnosed):** `chapter/Main.tsx` rendered the learner's screens while `repo.load()` was still fetching the saved records. `Teach` and `Worked` take their starting part from the records once, in `useState(start)`. A learner who opened the unit before the records arrived started at part 1 and stayed there. CI saw this on a slow load; a rerun of PR102's job passed, so it is timing-dependent, not a broken assertion.
+
+**Fix:** the learner's screens wait for that learner's records ("Loading your progress…"). A late response for another learner is ignored.
+
+**Regression:** the existing e2e test now delays the records response by 2.5 s on reload and still requires "Part 2 of 3". The assertion is unchanged, and the timeout is not extended.
+
+### CI failure 2: generated coverage (scaled bars "independent")
+
+**Cause:** synthesised blueprint modules took their transfer from the other families' word forms only. Scaled bars has a single family, so it lost the word-problem transfer that its template module had, and independent assessment requires one.
+
+**Fix:** `library.ts` adds the primary family's own word form when no other family supplies one. Only scaled bars changes: `transfer` gains `gen:afbar:4,0,0:w`.
+
+**Result:** the regenerated `coverage-matrix.v1.json`, `COVERAGE_MATRIX.md` and `COVERAGE.md` match the committed versions: 336 required, 329 complete, 0 approved.
+
+### Grader and generated artifacts
+
+- **Grader:** rebuilt with the existing command (214 inputs). On 500 sampled requests across 15 families and the program items, the verdict, reason, expected answer and contract hash all match the PR102 bundle.
+- **Pipeline:** family specs and parity are unchanged. The library, coverage, expansion and board releases were regenerated, and the explanation and module registries synced.
+
+### Engine-drawn conversion sub-chapters (chapter introductions, not teaching evidence)
+
+The audit and `strategyConnects` count only strategies. Examples worth an educator's look:
+- Length, "Comparing lengths": an equal-lengths example ("Compare 571 cm with 571 cm") with no concluding line.
+- Scale, "Ratio scales 1 : n": a 1 : 100 example, where the multiplication and the unit change cancel.
+- Money, "Adding and taking away": an example with no regrouping.
+
+These come from `subSkills()` drawing the first practice item. They are left unchanged, and recorded here.

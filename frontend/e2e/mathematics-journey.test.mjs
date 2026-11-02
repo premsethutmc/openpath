@@ -397,8 +397,15 @@ test("Completing the square unit: predict before the reveal, misconception feedb
   await page.locator('.ask[data-qid="ds1"]').getByRole("status").filter({ hasText: "Correct!" }).waitFor();
   const saved = (await records(page, learner)).filter((e) => e.program === "completing-the-square");
   assert.deepEqual(saved.filter((e) => e.action === "answer").map((e) => [e.questionId, e.response]), [["p1", "25"], ["d1", "A"], ["ds1", "49"]], "answers saved to the account");
-  // leave and come back: the unit continues at the next part
+  // leave and come back: the unit continues at the next part. The saved records arrive late (a slow connection): the
+  // learner's screens wait for them, because the unit takes its starting place from the records once, when it opens
+  // (regression: it opened at part 1 before the records arrived and kept that place).
+  await page.route(/\/api\/pupils\/[^/]+\/events\/\?subject=mathematics/, async (route) => {
+    if (route.request().method() === "GET") await new Promise((resolve) => setTimeout(resolve, 2500));
+    await route.continue();
+  });
   await page.reload();
+  await page.getByRole("status").filter({ hasText: "Loading your progress" }).waitFor();
   await page.getByRole("button", { name: /JEE Main/ }).click();
   await page.getByRole("button", { name: /Completing the square/ }).click();
   await page.getByText("Part 2 of 3").waitFor();

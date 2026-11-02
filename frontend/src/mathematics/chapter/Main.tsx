@@ -67,6 +67,9 @@ function App() {
   const [learner, setLearner] = useState<string>(new URLSearchParams(location.search).get("learner") ?? "");
   const [screen, setScreen] = useState<Screen>({ name: "goal" });
   const [events, setEvents] = useState<MathEvent[]>([]);
+  // whose saved records `events` holds: the class and unit views take their starting place from the records once, when they
+  // open, so they must not open before the learner's records have arrived (otherwise a returning learner starts at part 1)
+  const [loadedFor, setLoadedFor] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [now, setNow] = useState(Date.now());
@@ -87,8 +90,11 @@ function App() {
   const repo = useMemo(() => (learner ? new Repo(learner) : null), [learner]);
   useEffect(() => {
     if (!repo || !signedIn) return;
-    repo.load().then(setEvents).catch((e) => setError(String(e.message ?? e)));
-  }, [repo, signedIn]);
+    let current = true;
+    setLoadedFor(null);
+    repo.load().then((rows) => { if (!current) return; setEvents(rows); setLoadedFor(learner); }).catch((e) => setError(String(e.message ?? e)));
+    return () => { current = false; };
+  }, [repo, signedIn, learner]);
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(t);
@@ -143,6 +149,7 @@ function App() {
       </Shell>
     );
 
+  if (loadedFor !== learner) return <Shell error={error}><p className="muted center" role="status">Loading your progress…</p></Shell>;
   const name = pupils.find((p) => p.id === learner)?.display_name ?? "Learner";
   if (screen.name === "goal")
     return (

@@ -15736,6 +15736,100 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:e694995846e2fb24d3bc134b953ad9761657b6db2585c433acc54b38a5910368",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.207Z",
+      "note": "content changed: the decision on sha256:d31f9e023fe3 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:d31f9e023fe321efc266900731a82d70d2ac31fff5f772f80ab5ac46ad42eb52"
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.scale-drawings#map_to_real",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.scale-drawings",
+   "strategy": "map_to_real",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:1054bf62e58244fa12be4f46d53cdd99a700f7ecf73a6f692c91aafd47e201c9",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.196Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.scale-drawings#ratio_map_to_km",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.scale-drawings",
+   "strategy": "ratio_map_to_km",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:7243944b5affa1f96bb157731e215ff0b1fb79fdfe443317f137352118143693",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.206Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.scale-drawings#ratio_plan_to_metres",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.scale-drawings",
+   "strategy": "ratio_plan_to_metres",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a7c09b7b5481b5bbef9dab802ef159f5c70685aa4eac15f0dab9d93345d6aa81",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.204Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -15755,6 +15849,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.474Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.scale-drawings#real_to_map",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.scale-drawings",
+   "strategy": "real_to_map",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:0c3b105b6b38d501f562ecddb5fac24940e11c73664220861be2f865b30c6627",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.197Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -20094,6 +20214,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:f180c827b56f26d2f219e11d19fffe8a7f80014a0e293e1bf9f9ea9f614a8d2f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.195Z",
+      "note": "content changed: the decision on sha256:bebff1aa3fa2 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:bebff1aa3fa2eee168189a880bad7216d7aa3a03d88b6927a45e2b54e1e53517"
     }
    ]
   },
@@ -20113,6 +20249,318 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.288Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#cm_mm_to_mm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "cm_mm_to_mm",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:c2c91d4e2061296aaef1c19f3edd25a673ead3c66b473b328cec8d06c54d03ed",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.189Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#cm_to_decimal_m",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "cm_to_decimal_m",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:5686db11b6396491b21b7a7dbe15263711894b6c29ca576a70f19c1a25ca8da2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.181Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#cm_to_m_cm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "cm_to_m_cm",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:0c4cec9d90c4d5c4a96a419d858b7ca5697eb53ba27af2486738006b928dc613",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.188Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#compare_m_cm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "compare_m_cm",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:38f5d5bf57afd4ba4a3a85eaab5c0e40b3971374f1ac073aa6f6bbfad503bcbf",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T11:16:49.240Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#decimal_m_to_cm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "decimal_m_to_cm",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:0bfb33002e749ed3448f250e56eeb2aa9c35899b65f691f0680e6e1bc4ff2299",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.185Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#m_cm_to_cm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "m_cm_to_cm",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:9e042be0e132a0b166b935bf7f07793245ea15f8e262fe0d6604c690ff892e15",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.186Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#m_to_decimal_km",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "m_to_decimal_km",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:3807869a3b1522b8f93487547b6f580e8db850b04acaba3a51a1f277949fa113",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.184Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#m_to_km_m",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "m_to_km_m",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:af09e3bc87d4415926be263c2e3486a25d6d454f9fe38ba667e495a3c8c03db1",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.191Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#m_to_whole_km",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "m_to_whole_km",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:555b578a1de2a6ab2716deb819141eaa70dacc0b222a3fa2058762021e1581dc",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.192Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#mm_to_cm_mm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "mm_to_cm_mm",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:9385337cb461edeb709f4c0c4b570d16d013316ab8ad73a9e18ebbba3c891ed0",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.190Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#mm_to_decimal_cm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "mm_to_decimal_cm",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:8dc15f2ebf45c26adcf3d7b278bc18bb1f914bde9d8fdb9113f36cc2093faa88",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.182Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.length-conversion#mm_to_whole_cm",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.length-conversion",
+   "strategy": "mm_to_whole_cm",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:36adcafbde406d8c5e2a8c4887d03011c61207714f88e1f9f7c5d2c3f92c7518",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.193Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -20562,6 +21010,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:3e0bcff6716859b128e0b93492295a896890be9ceebbaa609a3a6bc11cf9da93",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.179Z",
+      "note": "content changed: the decision on sha256:f2fce2417e36 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:f2fce2417e3641393c1a3c801abca7a504423868f8c85b81a7b5ba9aa4a34bb7"
     }
    ]
   },
@@ -20592,6 +21056,32 @@
    ]
   },
   {
+   "id": "MATH.measurement.money-decimals#decimal_rupees_to_paise",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.money-decimals",
+   "strategy": "decimal_rupees_to_paise",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:9a58148f59d65bcd73080aa9c5d4d18441baa8a6193c7d7e5457e9573e2daf6e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.176Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.measurement.money-decimals#drop_dot",
    "subject": "mathematics",
    "competency": "MATH.measurement.money-decimals",
@@ -20607,6 +21097,58 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.289Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.money-decimals#paise_to_rupees",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.money-decimals",
+   "strategy": "paise_to_rupees",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:714a0c735e86de6b7c4fa018f66091b98f4d716f341479b776352271bcb0f46d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.172Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.measurement.money-decimals#rupees_and_paise_to_paise",
+   "subject": "mathematics",
+   "competency": "MATH.measurement.money-decimals",
+   "strategy": "rupees_and_paise_to_paise",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:41cd67e10f75df18f7d7f7058b1f81e3c9c2a5d5234dc0913363e6adf6b2fd05",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T10:00:57.175Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",

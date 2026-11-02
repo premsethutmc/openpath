@@ -1812,6 +1812,642 @@
      }
     }
    ]
+  },
+  {
+   "competency": "MATH.measurement.money-decimals",
+   "title": "Changing between rupees and paise",
+   "family": "acpaise",
+   "seed": [
+    3,
+    1,
+    1
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Changing between rupees and paise",
+     "text": [
+      "A bigger unit is made of a fixed number of smaller units.",
+      "One rupee is a hundred paise. In an amount written with a dot, the digits before the dot are rupees and the two digits after it are paise."
+     ],
+     "worked": true,
+     "widget": {
+      "type": "table",
+      "head": [
+       "Rupees (₹)",
+       "Paise"
+      ],
+      "rows": [
+       [
+        3,
+        "05"
+       ]
+      ]
+     }
+    }
+   ],
+   "strategies": [
+    {
+     "id": "paise_to_rupees",
+     "title": "Paise into rupees",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Paise into rupees",
+       "text": [
+        "A hundred paise make one rupee, so every hundred paise is a rupee.",
+        "Divide the paise by a hundred: the number of whole hundreds is the rupees, and the last two digits are the paise, written after the dot."
+       ],
+       "math": [
+        "Change 3,260 paise into rupees. Write the answer in rupees, like 4.50.",
+        "3,260 paise holds 32 groups of 100 paise: ₹32",
+        "60 paise are left over, written after the point"
+       ],
+       "role": "strategy",
+       "instance": "gen:acp2r:32,12",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Paise",
+         "Rupees (₹)"
+        ],
+        "rows": [
+         [
+          "3,260",
+          "?"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acp2r:29,14:mc",
+     "check": "gen:acp2r:29,17:mc",
+     "scope": {
+      "family": "acp2r",
+      "subSkill": "money.paise-to-rupees@1"
+     }
+    },
+    {
+     "id": "rupees_and_paise_to_paise",
+     "title": "Rupees and paise into paise",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Rupees and paise into paise",
+       "text": [
+        "One rupee is a hundred paise.",
+        "Multiply the rupees by a hundred to get paise, then add the paise."
+       ],
+       "math": [
+        "How many paise are there in ₹12 and 5 paise?",
+        "₹12 = 12 × 100 paise = 1200 paise",
+        "1200 + 5 = 1205 paise"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpaise:12,1,0",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Rupees (₹)",
+         "Paise"
+        ],
+        "rows": [
+         [
+          12,
+          5
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acpaise:3,4,0:mc",
+     "check": "gen:acpaise:5,11,0:mc",
+     "scope": {
+      "family": "acpaise",
+      "subSkill": "money.rupees-and-paise-to-paise@1"
+     }
+    },
+    {
+     "id": "decimal_rupees_to_paise",
+     "title": "Rupees written with a dot, into paise",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Rupees written with a dot, into paise",
+       "text": [
+        "The digits before the dot are rupees and the two digits after it are paise.",
+        "Multiply the rupees by a hundred to get paise, then add the paise after the dot. That is the same as reading all the digits without the dot."
+       ],
+       "math": [
+        "How many paise make ₹2.70?",
+        "₹2 = 2 × 100 paise = 200 paise",
+        "200 + 70 = 270 paise"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpaise:2,14,1",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Rupees (₹)",
+         "Paise"
+        ],
+        "rows": [
+         [
+          2,
+          "70"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acpaise:13,18,1:mc",
+     "check": "gen:acpaise:5,11,1",
+     "scope": {
+      "family": "acpaise",
+      "subSkill": "money.decimal-rupees-to-paise@1"
+     }
+    }
+   ]
+  },
+  {
+   "competency": "MATH.measurement.length-conversion",
+   "title": "Changing between units of length",
+   "family": "acmcm",
+   "seed": [
+    2,
+    90,
+    0
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Changing between units of length",
+     "text": [
+      "A bigger unit is made of a fixed number of smaller units.",
+      "Ten millimetres make a centimetre, a hundred centimetres make a metre and a thousand metres make a kilometre. Going to a smaller unit gives a bigger number; going to a bigger unit gives a smaller number, as whole units and some left over, or as a decimal."
+     ],
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "cm_to_decimal_m",
+     "title": "Centimetres as a decimal of a metre",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Centimetres as a decimal of a metre",
+       "text": [
+        "A hundred centimetres make a metre, so one centimetre is one hundredth of a metre.",
+        "To write centimetres in metres, divide by a hundred: the point moves two places to the left."
+       ],
+       "math": [
+        "Write 846 cm in metres, as a decimal.",
+        "The bigger unit is 100 of the smaller unit",
+        "846 ÷ 100 = 8.46"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:0,846"
+      }
+     ],
+     "guided": "gen:acdecu:0,866:mc",
+     "check": "gen:acdecu:0,826",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.cm-to-decimal-m@1"
+     }
+    },
+    {
+     "id": "mm_to_decimal_cm",
+     "title": "Millimetres as a decimal of a centimetre",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Millimetres as a decimal of a centimetre",
+       "text": [
+        "Ten millimetres make a centimetre, so one millimetre is one tenth of a centimetre.",
+        "To write millimetres in centimetres, divide by ten: the point moves one place to the left."
+       ],
+       "math": [
+        "Write 862 mm in centimetres, as a decimal.",
+        "The bigger unit is 10 of the smaller unit",
+        "862 ÷ 10 = 86.2"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:1,862"
+      }
+     ],
+     "guided": "gen:acdecu:1,568:mc",
+     "check": "gen:acdecu:1,572",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.mm-to-decimal-cm@1"
+     }
+    },
+    {
+     "id": "m_to_decimal_km",
+     "title": "Metres as a decimal of a kilometre",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Metres as a decimal of a kilometre",
+       "text": [
+        "A thousand metres make a kilometre, so one metre is one thousandth of a kilometre.",
+        "To write metres in kilometres, divide by a thousand: the point moves three places to the left."
+       ],
+       "math": [
+        "Write 1,600 m in kilometres, as a decimal.",
+        "The bigger unit is 1000 of the smaller unit",
+        "1600 ÷ 1000 = 1.6"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:2,1600"
+      }
+     ],
+     "guided": "gen:acdecu:2,8960:mc",
+     "check": "gen:acdecu:2,600:mc",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.m-to-decimal-km@1"
+     }
+    },
+    {
+     "id": "decimal_m_to_cm",
+     "title": "Metres written as a decimal, into centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Metres written as a decimal, into centimetres",
+       "text": [
+        "One metre is a hundred centimetres.",
+        "Multiply the metres by a hundred: the point moves two places to the right."
+       ],
+       "math": [
+        "3.99 m = how many centimetres?",
+        "The bigger unit is 100 of the smaller unit",
+        "3.99 × 100 = 399"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:3,399"
+      }
+     ],
+     "guided": "gen:acdecu:3,492:mc",
+     "check": "gen:acdecu:3,372",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.decimal-m-to-cm@1"
+     }
+    },
+    {
+     "id": "m_cm_to_cm",
+     "title": "Metres and centimetres into centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Metres and centimetres into centimetres",
+       "text": [
+        "Metres and centimetres are different sizes, so change the metres first: one metre is a hundred centimetres.",
+        "Multiply the metres by a hundred, then add the extra centimetres."
+       ],
+       "math": [
+        "6 m 49 cm = how many centimetres?",
+        "6 m = 600 cm",
+        "600 cm + 49 cm = 649 cm"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmcm:6,49,0"
+      }
+     ],
+     "guided": "gen:acmcm:9,3,0:mc",
+     "check": "gen:acmcm:6,65,0:mc",
+     "scope": {
+      "family": "acmcm",
+      "subSkill": "length.m-cm-to-cm@1"
+     }
+    },
+    {
+     "id": "cm_to_m_cm",
+     "title": "Centimetres into metres and centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Centimetres into metres and centimetres",
+       "text": [
+        "Every hundred centimetres make one metre.",
+        "Take away the whole metres as hundreds of centimetres; the centimetres left are the answer."
+       ],
+       "math": [
+        "903 cm = 9 m and how many cm?",
+        "9 m = 900 cm",
+        "903 cm − 900 cm = 3 cm left over"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmcm:9,3,1"
+      }
+     ],
+     "guided": "gen:acmcm:6,49,1:mc",
+     "check": "gen:acmcm:9,36,1",
+     "scope": {
+      "family": "acmcm",
+      "subSkill": "length.cm-to-m-cm@1"
+     }
+    },
+    {
+     "id": "cm_mm_to_mm",
+     "title": "Centimetres and millimetres into millimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Centimetres and millimetres into millimetres",
+       "text": [
+        "One centimetre is ten millimetres.",
+        "Multiply the centimetres by ten, then add the extra millimetres."
+       ],
+       "math": [
+        "8 cm 3 mm = how many millimetres?",
+        "8 cm = 80 mm",
+        "80 + 3 = 83 mm"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:0,8,3"
+      }
+     ],
+     "guided": "gen:acmmkm:0,8,2:mc",
+     "check": "gen:acmmkm:0,4,1:mc",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.cm-mm-to-mm@1"
+     }
+    },
+    {
+     "id": "mm_to_cm_mm",
+     "title": "Millimetres into centimetres and millimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Millimetres into centimetres and millimetres",
+       "text": [
+        "Every ten millimetres make one centimetre.",
+        "Take away the whole centimetres as tens of millimetres; the millimetres left are the answer."
+       ],
+       "math": [
+        "69 mm = 6 cm and how many mm?",
+        "6 cm = 60 mm",
+        "69 − 60 = 9 left over"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:1,6,9"
+      }
+     ],
+     "guided": "gen:acmmkm:1,10,2:mc",
+     "check": "gen:acmmkm:1,7,1:mc",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.mm-to-cm-mm@1"
+     }
+    },
+    {
+     "id": "m_to_km_m",
+     "title": "Metres into kilometres and metres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Metres into kilometres and metres",
+       "text": [
+        "Every thousand metres make one kilometre.",
+        "Take away the whole kilometres as thousands of metres; the metres left are the answer."
+       ],
+       "math": [
+        "2,405 m = 2 km and how many m?",
+        "2 km = 2000 m",
+        "2405 − 2000 = 405 left over"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:2,2,81"
+      }
+     ],
+     "guided": "gen:acmmkm:2,1,98",
+     "check": "gen:acmmkm:2,1,38:mc",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.m-to-km-m@1"
+     }
+    },
+    {
+     "id": "m_to_whole_km",
+     "title": "Thousands of metres into kilometres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Thousands of metres into kilometres",
+       "text": [
+        "A thousand metres make one kilometre.",
+        "Divide the metres by a thousand to count the kilometres."
+       ],
+       "math": [
+        "11,000 m = how many kilometres?",
+        "11000 ÷ 1000 = 11"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:3,11,0"
+      }
+     ],
+     "guided": "gen:acmmkm:3,18,0:mc",
+     "check": "gen:acmmkm:3,6,0",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.m-to-whole-km@1"
+     }
+    },
+    {
+     "id": "compare_m_cm",
+     "title": "Which is longer: change to one unit first",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Which is longer: change to one unit first",
+       "text": [
+        "Metres and centimetres are different sizes, so the two lengths cannot be compared digit by digit.",
+        "Change the length in metres and centimetres into centimetres (one metre is a hundred centimetres), then compare the two numbers of centimetres. If they are equal, the lengths are the same."
+       ],
+       "math": [
+        "Which is longer: 7 m 76 cm or 772 cm?",
+        "7 m 76 cm = 776 cm",
+        "Compare 776 cm with 772 cm",
+        "So: 7 m 76 cm is longer"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmcmp:7,76,2,1"
+      }
+     ],
+     "guided": "gen:acmcmp:7,59,0,0",
+     "check": "gen:acmcmp:7,67,2,4",
+     "scope": {
+      "family": "acmcmp",
+      "subSkill": "length.compare-m-cm@1"
+     }
+    },
+    {
+     "id": "mm_to_whole_cm",
+     "title": "Tens of millimetres into centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Tens of millimetres into centimetres",
+       "text": [
+        "Ten millimetres make one centimetre.",
+        "Divide the millimetres by ten to count the centimetres."
+       ],
+       "math": [
+        "100 mm = how many centimetres?",
+        "100 ÷ 10 = 10"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:4,10,0"
+      }
+     ],
+     "guided": "gen:acmmkm:4,21,0:mc",
+     "check": "gen:acmmkm:4,9,0",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.mm-to-whole-cm@1"
+     }
+    }
+   ]
+  },
+  {
+   "competency": "MATH.geometry.scale-drawings",
+   "title": "Using a map or plan scale",
+   "family": "aiscale",
+   "seed": [
+    5,
+    4,
+    0
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Using a map or plan scale",
+     "text": [
+      "A scale says how much real length each length on the map or plan stands for. Map lengths and real lengths are in the same proportion."
+     ],
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "map_to_real",
+     "title": "From the map to the real distance",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "From the map to the real distance",
+       "text": [
+        "The scale says how many real kilometres one centimetre on the map stands for.",
+        "Map to real: multiply the map length by the scale. The real distance is the bigger number."
+       ],
+       "math": [
+        "On a map, 1 cm stands for 50 km. Two villages are 10 cm apart on the map. How far apart are they really, in km?",
+        "10 cm × 50 km for each cm = 500 km"
+       ],
+       "role": "strategy",
+       "instance": "gen:aiscale:5,10,0"
+      }
+     ],
+     "guided": "gen:aiscale:0,13,0",
+     "check": "gen:aiscale:4,6,0:mc",
+     "scope": {
+      "family": "aiscale",
+      "subSkill": "scale.map-to-real@1"
+     }
+    },
+    {
+     "id": "real_to_map",
+     "title": "From the real distance to the map",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "From the real distance to the map",
+       "text": [
+        "The map is smaller than the real world, so the map distance is the smaller number.",
+        "Real to map: divide the real distance by the scale."
+       ],
+       "math": [
+        "On a map, 1 cm stands for 2 km. Two towns are really 26 km apart. How far apart are they on the map, in cm?",
+        "26 km ÷ 2 km for each cm = 13 cm"
+       ],
+       "role": "strategy",
+       "instance": "gen:aiscale:0,13,1"
+      }
+     ],
+     "guided": "gen:aiscale:2,14,1:mc",
+     "check": "gen:aiscale:4,6,1",
+     "scope": {
+      "family": "aiscale",
+      "subSkill": "scale.real-to-map@1"
+     }
+    },
+    {
+     "id": "ratio_plan_to_metres",
+     "title": "A plan scale written as a ratio",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A plan scale written as a ratio",
+       "text": [
+        "A scale of one to n means every real length is n times the length on the plan, in the same unit.",
+        "Multiply the plan length by n to get real centimetres, then divide by a hundred to get metres."
+       ],
+       "math": [
+        "A plan is drawn to the scale 1 : 500. A wall is 19 cm long on the plan. How long is the real wall, in metres?",
+        "Every 1 cm stands for 500 cm: 19 × 500 = 9500 cm",
+        "9500 cm ÷ 100 = 95 m"
+       ],
+       "role": "strategy",
+       "instance": "gen:airatio:2,19"
+      }
+     ],
+     "guided": "gen:airatio:2,18:mc",
+     "check": "gen:airatio:2,10:mc",
+     "scope": {
+      "family": "airatio",
+      "subSkill": "scale.ratio-plan-to-metres@1"
+     }
+    },
+    {
+     "id": "ratio_map_to_km",
+     "title": "A map scale written as a ratio",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A map scale written as a ratio",
+       "text": [
+        "A scale of one to n means every real length is n times the length on the map, in the same unit.",
+        "Multiply the map length by n to get real centimetres, then divide by a hundred thousand to get kilometres."
+       ],
+       "math": [
+        "A map is drawn to the scale 1 : 25000. A road is 14 cm long on the map. How long is the real road, in km?",
+        "Every 1 cm stands for 25000 cm: 14 × 25000 = 350000 cm",
+        "350000 cm ÷ 100000 = 3.5 km"
+       ],
+       "role": "strategy",
+       "instance": "gen:airatio:4,14"
+      }
+     ],
+     "guided": "gen:airatio:5,6:mc",
+     "check": "gen:airatio:5,20",
+     "scope": {
+      "family": "airatio",
+      "subSkill": "scale.ratio-map-to-km@1"
+     }
+    }
+   ]
   }
  ]
 }

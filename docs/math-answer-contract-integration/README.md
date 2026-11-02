@@ -29,7 +29,7 @@ Reconciliation validation: 96 of 97 focused checks initially passed; the obsolet
 
 ## Versioned half-symbol correction
 
-Claude's `81923a1` handoff supplied the finite row relation and regression cases. Independent enumeration verified all 275 genuine rows among 472 valid row tasks (142 genuine among 242 served tasks). The integrated `pictographs-subskills@2` / `pictographs-subskill-projection@2` uses that supplied data as complete `parameterTuples`, with the data declared before the configuration reads it.
+Claude's `81923a1` handoff supplied the finite row relation and regression cases. Independent enumeration verified all 275 genuine rows among 472 valid row tasks (142 genuine among 242 served tasks). The integrated `pictographs-subskills@3` / `pictographs-subskill-projection@3` (first labelled @2 here, renumbered because PR101's withdrawal already used @2; see `PICTOGRAPHS_MAPPING_HISTORY`) uses that supplied data as complete `parameterTuples`, with the data declared before the configuration reads it.
 
 `gen:acpicthalf:0,8,1,0` still earns ordinary correct-answer credit, but no half-symbol evidence. The three former TODO regressions are enabled and pass. The strengthened tests require actual assessment, delayed checking and recovery, and show that old whole-row answers remain unchanged in the ledger while the explicitly versioned projection no longer overclaims their meaning. All 52 Node 22 tuple/domain tests pass with zero TODOs. The correction is isolated on Codex's integration branch; no Claude branch was changed, and a forthcoming interim exclusion must not overwrite this verified relation.
 

@@ -212,7 +212,9 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
     diagnostics,
     strategies,
     practice: [take("practice", "typed"), take("practice", "mc"), take("practice", "typed"), ...sub.practice],
-    transfer: [take("practice", "mc"), ...sub.transfer],
+    // a word-problem transfer, as a template module has (independent assessment needs one): from the other families when they
+    // have word forms, otherwise from the primary family's own word form
+    transfer: [take("practice", "mc"), ...sub.transfer, ...(sub.transfer.length === 0 && FAMILIES.get(bp.family)!.word ? [take("practice", "word")] : [])],
     retention: [take("retention", "typed"), sub.retention ?? take("retention", "mc")],
     probes,
     pool: { family: bp.family, version: FAMILY_VERSION[bp.family] },

@@ -5,7 +5,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { HALF_SYMBOL_ROWS, PICTOGRAPHS_CONFIG, SCALED_BARS_CONFIG, PLACE_VALUE_TENS_CONFIG, SCALE_PATTERN_CONFIGS } from "../../../packages/learning/src/subskill-config-scale";
+import { HALF_SYMBOL_ROWS, PICTOGRAPHS_CONFIG, PICTOGRAPHS_CONFIG_V1, PICTOGRAPHS_CONFIG_V2, PICTOGRAPHS_MAPPING_HISTORY, SCALED_BARS_CONFIG, PLACE_VALUE_TENS_CONFIG, SCALE_PATTERN_CONFIGS } from "../../../packages/learning/src/subskill-config-scale";
 import { connectedSkill, connectionConfig, strategyConnects, validSkillTask } from "../../../packages/learning/src/skill-connections";
 import { classifyQuestionWith, projectFromEventsWith } from "../../../packages/learning/src/subskill-projection";
 import { foundationPlan, FOUNDATION_POLICY, type FoundationPolicy } from "../../../packages/learning/src/foundation";
@@ -241,11 +241,11 @@ test("half-symbol runtime: correct answers to whole-picture rows earn no half-sy
   const L = new SliceSession("half-whole-only", PICTOGRAPHS_CONFIG.competency, at);
   for (const id of halfRowIds().filter(wholeOnly).slice(0, 12)) assert.equal(L.submit(id, question(id).answer, "check").credit, true, "ordinary answer credit is preserved");
   const events = withDecisions(L.events, L.decisions), original = JSON.stringify(events);
-  const legacy = { ...PICTOGRAPHS_CONFIG, version: "pictographs-subskill-projection@1", mapping: "pictographs-subskills@1", subSkills: PICTOGRAPHS_CONFIG.subSkills.map(s => ({ ...s, parameterTuples: undefined })) };
+  const legacy = PICTOGRAPHS_CONFIG_V1;
   assert.equal(projectFromEventsWith(legacy, L.learnerId, events, L.now).subSkills.find(x => x.id === HALF)!.historical.everDemonstrated, true, "the prior mapping overclaimed these same saved answers");
   const corrected = projectFromEventsWith(PICTOGRAPHS_CONFIG, L.learnerId, events, L.now);
-  assert.equal(corrected.mapping, "pictographs-subskills@2");
-  assert.equal(corrected.version, "pictographs-subskill-projection@2");
+  assert.equal(corrected.mapping, "pictographs-subskills@3");
+  assert.equal(corrected.version, "pictographs-subskill-projection@3");
   const proj = corrected.subSkills.find((x) => x.id === HALF)!;
   assert.equal(proj.historical.everDemonstrated, false, JSON.stringify(proj));
   assert.equal(proj.attempts.total, 0);
@@ -267,4 +267,32 @@ test("half-symbol runtime: assessment, retention and recovery select only rows h
   p = foundationPlan(policy, L.learnerId, saved(), L.now);
   assert.equal(p.status, "recovery"); assert.ok(p.question); asked.push(p.question);
   assert.deepEqual(asked.filter(wholeOnly), [], "whole-picture rows asked as half-symbol evidence");
+});
+
+test("half-symbol mapping history: three meanings, three identities; saved answers replay under each without reinterpretation", () => {
+  // distinct semantics never share a version identity
+  assert.deepEqual(PICTOGRAPHS_MAPPING_HISTORY.map((c) => [c.mapping, c.version]), [["pictographs-subskills@1", "pictographs-subskill-projection@1"], ["pictographs-subskills@2", "pictographs-subskill-projection@2"], ["pictographs-subskills@3", "pictographs-subskill-projection@3"]]);
+  assert.equal(new Set(PICTOGRAPHS_MAPPING_HISTORY.map((c) => c.mapping)).size, 3);
+  assert.equal(PICTOGRAPHS_MAPPING_HISTORY.at(-1), PICTOGRAPHS_CONFIG, "the precise mapping is live");
+  assert.equal(connectionConfig(PICTOGRAPHS_CONFIG.competency)!.mapping, "pictographs-subskills@3");
+  // one saved ledger: whole-picture rows, genuine half rows, and a totals task, all answered correctly
+  const whole = halfRowIds().filter(wholeOnly).slice(0, 3), half = halfRowIds().filter((x) => !wholeOnly(x)).slice(0, 3), total = "gen:acpicthalf:3,27,0,1";
+  const L = new SliceSession("half-history", PICTOGRAPHS_CONFIG.competency, at);
+  for (const id of [...whole, ...half, total]) assert.equal(L.submit(id, question(id).answer, "check").credit, true, `${id}: ordinary answer credit under every mapping`);
+  const events = withDecisions(L.events, L.decisions), frozen = JSON.stringify(events);
+  const at3 = (c: typeof PICTOGRAPHS_CONFIG) => projectFromEventsWith(c, L.learnerId, JSON.parse(frozen), L.now);
+  const [p1, p2, p3] = PICTOGRAPHS_MAPPING_HISTORY.map(at3);
+  const half1 = p1.subSkills.find((x) => x.id === HALF)!, half3 = p3.subSkills.find((x) => x.id === HALF)!;
+  // @1 legacy: every row task counted, whole rows included (the recorded overclaim)
+  assert.equal(p1.mapping, "pictographs-subskills@1"); assert.equal(half1.attempts.total, whole.length + half.length);
+  // @2 withdrawal: no half-symbol skill; the row tasks are unknown to the mapping, and still answer-credited
+  assert.equal(p2.mapping, "pictographs-subskills@2"); assert.equal(p2.subSkills.find((x) => x.id === HALF), undefined);
+  for (const id of [...whole, ...half]) assert.equal(classifyQuestionWith(PICTOGRAPHS_CONFIG_V2, id).kind, "unknown", id);
+  // @3 precise: only the genuine half rows
+  assert.equal(p3.mapping, "pictographs-subskills@3"); assert.equal(half3.attempts.total, half.length); assert.equal(half3.historical.everDemonstrated, true);
+  // the totals skill means the same thing under all three
+  for (const p of [p1, p2, p3]) assert.equal(p.subSkills.find((x) => x.id === "pictographs.half-symbol-total@1")!.attempts.total, 1, p.mapping);
+  // replay is a pure read: the ledger is untouched, each projection is stamped with its own mapping, and order does not matter
+  assert.equal(JSON.stringify(events), frozen);
+  for (const c of PICTOGRAPHS_MAPPING_HISTORY) assert.deepEqual(projectFromEventsWith(c, L.learnerId, JSON.parse(frozen).reverse(), L.now), at3(c), c.mapping);
 });

@@ -1,5 +1,6 @@
 /**
- * Authoring source for the unit-value teaching blueprints (pictographs, scaled bar charts, place value: tens) in
+ * Authoring source for the unit-value teaching blueprints (pictographs, scaled bar charts, place value: tens) and the
+ * unit-conversion blueprints (money in rupees and paise, length conversion, scale drawings; subskill-config-conversion.ts) in
  * content/learning/blueprints.v1.json. One general, skill-scoped explanation per configured sub-skill
  * (packages/learning/src/subskill-config-scale.ts), plus the misconception fix whose evidence needs no contrast.
  * Text reuses the teaching candidates on feat/math-teaching-content@4e655e73 (TP2-SCL-PICT, TP2-SCL-BAR, TP2-PV-DIGIT)
@@ -14,15 +15,16 @@ import { explainStep, exposureKey, FAMILIES, phasePool, problemOf, type Problem 
 import { selectable } from "../../../packages/learning/src/question-status";
 import { connectedSkill } from "../../../packages/learning/src/skill-connections";
 import { SCALE_PATTERN_CONFIGS } from "../../../packages/learning/src/subskill-config-scale";
+import { CONVERSION_PATTERN_CONFIGS } from "../../../packages/learning/src/subskill-config-conversion";
 
 const file = new URL("../blueprints.v1.json", import.meta.url);
 const AUTHOR = "OpenPath (written with AI assistance; not educator-reviewed)";
 const worked = (p: Problem) => [p.prompt.replace(/ \(.*\)$/, "").replace(/ Choose one\.$/, ""), ...p.steps.map((s) => explainStep(p, s))];
 const P = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))!;
 const fig = (p: Problem) => (p.figure ? { widget: p.figure as Record<string, unknown> } : {});
-const configOf = (c: string) => SCALE_PATTERN_CONFIGS.find((x) => x.competency === c)!;
+const configOf = (c: string) => [...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS].find((x) => x.competency === c)!;
 
-interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean }
+interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean; conclude?: boolean }
 interface ModuleSpec { competency: string; family: string; title: string; chapter: string[]; seed: (p: Problem) => boolean; strategies: Spec[] }
 
 /** a worked example with several pictures in the row, so the multiplication by the key is visible */
@@ -130,6 +132,59 @@ const retainedTotal = {
   "addresses": "assume-tens"
 };
 
+// ---- "change between units by a fixed factor" (subskill-config-conversion.ts). Text reuses the template modules' own
+// family ideas and methods (worked_steps, drop_dot, place_value, ratio_table) and TP2-REG-MONEY's unit idea, without numbers.
+const MONEY = "MATH.measurement.money-decimals", LEN = "MATH.measurement.length-conversion", SCALE = "MATH.geometry.scale-drawings";
+/** ratio scales: teach with 1 : 200, 500, 1000 (metres) and 1 : 25000, 50000 (km). At 1 : 100 to metres and 1 : 100000 to km the
+ * multiplication and the unit change cancel, which hides the method (those scales are still assessed). */
+/** a worked example that shows the change, not a trivial one (a zero part, a whole unit, or one map centimetre) */
+const notTrivial = (p: Problem) => Number(p.answer) !== 0 && Number(p.answer) !== 1 && !/\b0 (paise|cm|mm|m)\b/.test(p.prompt);
+/** a native-choice task: the generator's lines, then the chosen option itself (the answer is a letter) */
+const concluded = (p: Problem) => [...worked(p), `So: ${(p as Problem & { options: string[] }).options["ABCDEFGH".indexOf(String(p.answer))]}`];
+const UNIT = "A bigger unit is made of a fixed number of smaller units.";
+MODULES.push(
+  {
+    competency: MONEY, family: "acpaise", title: "Changing between rupees and paise",
+    chapter: [UNIT, "One rupee is a hundred paise. In an amount written with a dot, the digits before the dot are rupees and the two digits after it are paise."],
+    seed: (p) => p.params[2] === 1 && notTrivial(p),
+    strategies: [
+      { id: "paise_to_rupees", title: "Paise into rupees", kind: "procedural", family: "acp2r", subSkill: "money.paise-to-rupees@1", example: notTrivial, text: ["A hundred paise make one rupee, so every hundred paise is a rupee.", "Divide the paise by a hundred: the number of whole hundreds is the rupees, and the last two digits are the paise, written after the dot."] },
+      { id: "rupees_and_paise_to_paise", title: "Rupees and paise into paise", kind: "procedural", family: "acpaise", subSkill: "money.rupees-and-paise-to-paise@1", example: notTrivial, text: ["One rupee is a hundred paise.", "Multiply the rupees by a hundred to get paise, then add the paise."] },
+      { id: "decimal_rupees_to_paise", title: "Rupees written with a dot, into paise", kind: "procedural", family: "acpaise", subSkill: "money.decimal-rupees-to-paise@1", example: notTrivial, text: ["The digits before the dot are rupees and the two digits after it are paise.", "Multiply the rupees by a hundred to get paise, then add the paise after the dot. That is the same as reading all the digits without the dot."] },
+    ],
+  },
+  {
+    competency: LEN, family: "acmcm", title: "Changing between units of length",
+    chapter: [UNIT, "Ten millimetres make a centimetre, a hundred centimetres make a metre and a thousand metres make a kilometre. Going to a smaller unit gives a bigger number; going to a bigger unit gives a smaller number, as whole units and some left over, or as a decimal."],
+    seed: (p) => p.params[2] === 0 && notTrivial(p),
+    strategies: [
+      { id: "cm_to_decimal_m", title: "Centimetres as a decimal of a metre", kind: "conceptual", family: "acdecu", subSkill: "length.cm-to-decimal-m@1", example: notTrivial, text: ["A hundred centimetres make a metre, so one centimetre is one hundredth of a metre.", "To write centimetres in metres, divide by a hundred: the point moves two places to the left."] },
+      { id: "mm_to_decimal_cm", title: "Millimetres as a decimal of a centimetre", kind: "conceptual", family: "acdecu", subSkill: "length.mm-to-decimal-cm@1", example: notTrivial, text: ["Ten millimetres make a centimetre, so one millimetre is one tenth of a centimetre.", "To write millimetres in centimetres, divide by ten: the point moves one place to the left."] },
+      { id: "m_to_decimal_km", title: "Metres as a decimal of a kilometre", kind: "conceptual", family: "acdecu", subSkill: "length.m-to-decimal-km@1", example: notTrivial, text: ["A thousand metres make a kilometre, so one metre is one thousandth of a kilometre.", "To write metres in kilometres, divide by a thousand: the point moves three places to the left."] },
+      { id: "decimal_m_to_cm", title: "Metres written as a decimal, into centimetres", kind: "procedural", family: "acdecu", subSkill: "length.decimal-m-to-cm@1", example: notTrivial, text: ["One metre is a hundred centimetres.", "Multiply the metres by a hundred: the point moves two places to the right."] },
+      { id: "m_cm_to_cm", title: "Metres and centimetres into centimetres", kind: "procedural", family: "acmcm", subSkill: "length.m-cm-to-cm@1", example: notTrivial, text: ["Metres and centimetres are different sizes, so change the metres first: one metre is a hundred centimetres.", "Multiply the metres by a hundred, then add the extra centimetres."] },
+      { id: "cm_to_m_cm", title: "Centimetres into metres and centimetres", kind: "procedural", family: "acmcm", subSkill: "length.cm-to-m-cm@1", example: notTrivial, text: ["Every hundred centimetres make one metre.", "Take away the whole metres as hundreds of centimetres; the centimetres left are the answer."] },
+      { id: "cm_mm_to_mm", title: "Centimetres and millimetres into millimetres", kind: "procedural", family: "acmmkm", subSkill: "length.cm-mm-to-mm@1", example: notTrivial, text: ["One centimetre is ten millimetres.", "Multiply the centimetres by ten, then add the extra millimetres."] },
+      { id: "mm_to_cm_mm", title: "Millimetres into centimetres and millimetres", kind: "procedural", family: "acmmkm", subSkill: "length.mm-to-cm-mm@1", example: notTrivial, text: ["Every ten millimetres make one centimetre.", "Take away the whole centimetres as tens of millimetres; the millimetres left are the answer."] },
+      { id: "m_to_km_m", title: "Metres into kilometres and metres", kind: "procedural", family: "acmmkm", subSkill: "length.m-to-km-m@1", example: notTrivial, text: ["Every thousand metres make one kilometre.", "Take away the whole kilometres as thousands of metres; the metres left are the answer."] },
+      { id: "m_to_whole_km", title: "Thousands of metres into kilometres", kind: "procedural", family: "acmmkm", subSkill: "length.m-to-whole-km@1", example: notTrivial, text: ["A thousand metres make one kilometre.", "Divide the metres by a thousand to count the kilometres."] },
+      { id: "compare_m_cm", title: "Which is longer: change to one unit first", kind: "procedural", family: "acmcmp", subSkill: "length.compare-m-cm@1", example: (p) => p.params[2] !== 0, conclude: true, text: ["Metres and centimetres are different sizes, so the two lengths cannot be compared digit by digit.", "Change the length in metres and centimetres into centimetres (one metre is a hundred centimetres), then compare the two numbers of centimetres. If they are equal, the lengths are the same."] },
+      { id: "mm_to_whole_cm", title: "Tens of millimetres into centimetres", kind: "procedural", family: "acmmkm", subSkill: "length.mm-to-whole-cm@1", example: notTrivial, text: ["Ten millimetres make one centimetre.", "Divide the millimetres by ten to count the centimetres."] },
+    ],
+  },
+  {
+    competency: SCALE, family: "aiscale", title: "Using a map or plan scale",
+    chapter: ["A scale says how much real length each length on the map or plan stands for. Map lengths and real lengths are in the same proportion."],
+    seed: (p) => p.params[2] === 0 && notTrivial(p),
+    strategies: [
+      { id: "map_to_real", title: "From the map to the real distance", kind: "procedural", family: "aiscale", subSkill: "scale.map-to-real@1", example: notTrivial, text: ["The scale says how many real kilometres one centimetre on the map stands for.", "Map to real: multiply the map length by the scale. The real distance is the bigger number."] },
+      { id: "real_to_map", title: "From the real distance to the map", kind: "procedural", family: "aiscale", subSkill: "scale.real-to-map@1", example: notTrivial, text: ["The map is smaller than the real world, so the map distance is the smaller number.", "Real to map: divide the real distance by the scale."] },
+      { id: "ratio_plan_to_metres", title: "A plan scale written as a ratio", kind: "procedural", family: "airatio", subSkill: "scale.ratio-plan-to-metres@1", extra: (p) => p.params[0] !== 0, example: notTrivial, text: ["A scale of one to n means every real length is n times the length on the plan, in the same unit.", "Multiply the plan length by n to get real centimetres, then divide by a hundred to get metres."] },
+      { id: "ratio_map_to_km", title: "A map scale written as a ratio", kind: "procedural", family: "airatio", subSkill: "scale.ratio-map-to-km@1", extra: (p) => p.params[0] !== 6, example: notTrivial, text: ["A scale of one to n means every real length is n times the length on the map, in the same unit.", "Multiply the map length by n to get real centimetres, then divide by a hundred thousand to get kilometres."] },
+    ],
+  },
+);
+
 const bps = JSON.parse(readFileSync(file, "utf8"));
 const out: unknown[] = [];
 for (const M of MODULES) {
@@ -156,7 +211,7 @@ for (const M of MODULES) {
           { title: `${s.title}: what went wrong`, text: s.misconception(inst), math: [`Not ${b.predict}, but ${inst.answer}`], role: "misconception", instance: inst.id, ...fig(inst) },
           { title: `${s.title}: solved correctly`, text: ["Each step, then the answer."], math: worked(inst), role: "strategy", instance: inst.id },
         ]; })()
-              : [{ title: s.title, text: s.text, math: s.regroup ? regrouped(inst) : worked(inst), role: "strategy", instance: inst.id, ...fig(inst) }];
+              : [{ title: s.title, text: s.text, math: s.regroup ? regrouped(inst) : s.conclude ? concluded(inst) : worked(inst), role: "strategy", instance: inst.id, ...fig(inst) }];
     return { id: s.id, title: s.title, kind: s.kind, screens, guided, check, scope: { family: s.family, subSkill: s.subSkill }, ...(s.addresses ? { addresses: s.addresses } : {}) };
   });
   if (M.competency === BARS) strategies.push(retainedTotal);

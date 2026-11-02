@@ -27,8 +27,10 @@ const LEN = "MATH.measurement.length-conversion";
 /** acdecu [kind, n]: 0 cm→m, 1 mm→cm, 2 m→km (as decimals), 3 decimal m→cm; acmcm [m, c, dir]: 0 "m cm"→cm, 1 cm→"m and ? cm";
  * acmmkm [kind, a, b]: 0 "cm mm"→mm, 1 mm→"cm and ? mm", 2 m→"km and ? m", 3 m→whole km, 4 mm→whole cm;
  * acmcmp [m, c, distractor, d]: which of "m cm" and a cm length is longer (a choice answer) */
+/** @2 (live) registers the native-choice comparison skill length.compare-m-cm@1 (acmcmp, trusted A/B/C answers). @1 left acmcmp
+ * unmapped; it is kept as LENGTH_CONVERSION_CONFIG_V1 for replay of saved answers under the mapping that produced them. */
 export const LENGTH_CONVERSION_CONFIG: SubSkillConfig = {
-  version: "length-conversion-subskill-projection@1", mapping: "length-conversion-subskills@1", competency: LEN,
+  version: "length-conversion-subskill-projection@2", mapping: "length-conversion-subskills@2", competency: LEN,
   subSkills: [
     { id: "length.cm-to-decimal-m@1", name: "Centimetres to metres, as a decimal", example: "gen:acdecu:0,38", families: ["acdecu"], competency: LEN, parameters: [{ index: 0, values: [0] }] },
     { id: "length.mm-to-decimal-cm@1", name: "Millimetres to centimetres, as a decimal", example: "gen:acdecu:1,5", families: ["acdecu"], competency: LEN, parameters: [{ index: 0, values: [1] }] },
@@ -41,10 +43,18 @@ export const LENGTH_CONVERSION_CONFIG: SubSkillConfig = {
     { id: "length.m-to-km-m@1", name: "Metres to kilometres and metres", example: "gen:acmmkm:2,1,5", families: ["acmmkm"], competency: LEN, parameters: [{ index: 0, values: [2] }] },
     { id: "length.m-to-whole-km@1", name: "Thousands of metres to kilometres", example: "gen:acmmkm:3,1,0", families: ["acmmkm"], competency: LEN, parameters: [{ index: 0, values: [3] }] },
     { id: "length.mm-to-whole-cm@1", name: "Tens of millimetres to centimetres", example: "gen:acmmkm:4,1,0", families: ["acmmkm"], competency: LEN, parameters: [{ index: 0, values: [4] }] },
+    { id: "length.compare-m-cm@1", name: "Which is longer: metres and centimetres, or centimetres", example: "gen:acmcmp:1,4,1,0", families: ["acmcmp"], competency: LEN, note: "native choice answer (A/B/C), trusted typed answer contract; answer credit grants no method or misconception credit" },
   ],
-  unmapped: { acmcmp: "Which is longer (a choice answer A/B/C): prepared as PREPARED_CHOICE_SKILLS below, not registered pending explicit domain integration review; the shared validator now supports its trusted native-choice contract." },
-  core: ["length.cm-to-decimal-m@1", "length.mm-to-decimal-cm@1", "length.m-to-decimal-km@1", "length.decimal-m-to-cm@1", "length.m-cm-to-cm@1", "length.cm-to-m-cm@1", "length.cm-mm-to-mm@1", "length.mm-to-cm-mm@1", "length.m-to-km-m@1", "length.m-to-whole-km@1", "length.mm-to-whole-cm@1"],
+  unmapped: {},
+  core: ["length.cm-to-decimal-m@1", "length.mm-to-decimal-cm@1", "length.m-to-decimal-km@1", "length.decimal-m-to-cm@1", "length.m-cm-to-cm@1", "length.cm-to-m-cm@1", "length.cm-mm-to-mm@1", "length.mm-to-cm-mm@1", "length.m-to-km-m@1", "length.m-to-whole-km@1", "length.mm-to-whole-cm@1", "length.compare-m-cm@1"],
   broadClaim: (label) => `Length conversion reads ${label} across configured unit-change tasks only`,
+};
+/** @1 (replay only): the comparison task was unmapped (answer credit only). */
+export const LENGTH_CONVERSION_CONFIG_V1: SubSkillConfig = {
+  ...LENGTH_CONVERSION_CONFIG, version: "length-conversion-subskill-projection@1", mapping: "length-conversion-subskills@1",
+  subSkills: LENGTH_CONVERSION_CONFIG.subSkills.filter((s) => s.id !== "length.compare-m-cm@1"),
+  core: LENGTH_CONVERSION_CONFIG.core.filter((s) => s !== "length.compare-m-cm@1"),
+  unmapped: { acmcmp: "Which is longer (a choice answer A/B/C): prepared as PREPARED_CHOICE_SKILLS below, not registered pending explicit domain integration review; the shared validator now supports its trusted native-choice contract." },
 };
 
 const SCALE = "MATH.geometry.scale-drawings";
@@ -63,11 +73,8 @@ export const SCALE_DRAWINGS_CONFIG: SubSkillConfig = {
   broadClaim: (label) => `Scale drawings read ${label} across configured unit-change tasks only`,
 };
 
-/** Prepared, NOT registered: the shared trusted-answer contract supports these native choice tasks.
- * Registration still requires explicit domain integration review and a mapping/version decision; type support alone
- * does not add a curriculum skill or teaching. Add to LENGTH_CONVERSION_CONFIG (subSkills and core) only in that handoff. */
-export const PREPARED_CHOICE_SKILLS = [
-  { id: "length.compare-m-cm@1", name: "Which is longer: metres and centimetres, or centimetres", example: "gen:acmcmp:1,4,1,0", families: ["acmcmp"], competency: LEN, blocker: "Pending explicit domain mapping integration; trusted native-choice answer support is available" },
-] as const;
+/** Formerly prepared choice skills; length.compare-m-cm@1 is now registered in LENGTH_CONVERSION_CONFIG (@2). Kept empty so a
+ * future prepared skill has a documented place; nothing listed here is mapped. */
+export const PREPARED_CHOICE_SKILLS: readonly { id: string; name: string; example: string; families: readonly string[]; competency: string; blocker: string }[] = [];
 
 export const CONVERSION_PATTERN_CONFIGS = [MONEY_DECIMALS_CONFIG, LENGTH_CONVERSION_CONFIG, SCALE_DRAWINGS_CONFIG];

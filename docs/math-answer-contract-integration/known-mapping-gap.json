@@ -8,8 +8,8 @@
     "actualSkill": "pictographs.half-symbol@1"
   },
   "after": {
-    "mapping": "pictographs-subskills@2",
-    "projection": "pictographs-subskill-projection@2",
+    "mapping": "pictographs-subskills@3",
+    "projection": "pictographs-subskill-projection@3",
     "contract": "parameterTuples",
     "actualSkill": null,
     "expectedSkill": null
@@ -22,5 +22,10 @@
     "whole": 197,
     "served": 242,
     "genuineServed": 142
+  },
+  "versionHistory": {
+    "pictographs-subskills@1": "legacy: every row task counted (overclaim)",
+    "pictographs-subskills@2": "PR101 withdrawal: row tasks earn no skill evidence",
+    "pictographs-subskills@3": "precise: parameterTuples from HALF_SYMBOL_ROWS (first labelled @2 in PR102; renumbered to avoid the collision)"
   }
 }
