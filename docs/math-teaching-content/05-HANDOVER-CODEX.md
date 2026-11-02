@@ -21,19 +21,33 @@ The four "ready" packages need no shared runtime change. Their family is the mod
 2. **P1 diagnosis policy** (contrast or written-form condition): NUM-01, NUM-02, MEA-01, PV-DIGIT, SCL-PICT. **This is not among the three blockers Codex is handling.** Without it, a greater/smaller reversal (NUM-01), a word swap (MEA-01) or a copied table value (SCL-PICT) could establish the wrong misconception and trigger the wrong fix. Until it exists, the affected fix strategies should stay unregistered.
 3. **B2 diagnosis reader**: NUM-03, REG-MONEY, REG-TIME.
 4. **B3 addressed misconception**: GEO-02 and NUM-03 (`fix_opposite_as_linear`, `fix_longer_is_larger`). The alternative is to fix family text D1/D3 so it can be quoted verbatim.
-5. **Missing questions**, as generator or partition changes:
+5. **Missing questions**: specified in [09-MISSING-QUESTIONS-AND-VISUALS.md](09-MISSING-QUESTIONS-AND-VISUALS.md), with data in `missing-questions.json`. These are **proposed** questions, kept apart from the verified served items in 08. Every proposal uses the existing generator; there is no parallel generator.
 
-   | Package | Missing question |
-   |---|---|
-   | TP-ALG-01 | Unambiguous (px + q)² cross-term items in the **retention** and **diagnostic** partitions (p ≥ 2, p ≠ q, q ≠ 2p, p ≠ 2q). Today 3 retention items ask the (px + q)² cross term and all 3 are copy-ambiguous; the diagnostic uses `gen:ahid:0,4,9,1` from the check partition. |
-   | TP2-CH-BAG | An equal-count bag contrast in a served partition. `gen:akchance:6,6,0,0` and `gen:akchance:8,8,0,0` exist in the pool but in no partition. |
-   | TP2-REG-TIME | `addur` items with minutes adding to **100 or more** in the check and retention partitions. Without them, rechecks cannot separate no-carry from regrouping at 100. |
-   | TP-NUM-02 | A `fadd` word (transfer) form, and an improper-sum item in the diagnostic partition. |
-   | TP-PRO-01 | A different-size-spinner multi-pair `akdice` item in the check partition. |
-   | TP2-PV-DIGIT | An unexposed "how many tens" `aadigit` item in the check partition. |
+   | Package | Proposed question (role) | What changes |
+   |---|---|---|
+   | TP-ALG-01 | `gen:ahid:0,3,7,1` (diagnostic) | pin the typed form: it is already in the diagnostic partition but served as `:mc` |
+   | TP-ALG-01 | `gen:ahid:0,2,9,1` (retention) | partition override: practice → retention |
+   | TP2-CH-BAG | `gen:akchance:8,8,0,0` (diagnostic contrast) | partition override: check → diagnostic, typed |
+   | TP2-REG-TIME | `gen:addur:0,7` (recheck) | partition override: diagnostic → check |
+   | TP2-REG-TIME | `gen:addur:0,291` (retention) | generator bounds only: mode 0, x ≤ 299 |
+   | TP-NUM-02 | `gen:fadd:1,2,5,1:w` and others (transfer) | generator: add `fadd.word(p)` |
+   | TP-PRO-01 | `gen:akdice:4,5,0,4:mc` (recheck) | selection only, after decision A in 09 |
+   | TP2-PV-DIGIT | `gen:aadigit:39,1` (recheck) | selection only, after decision A in 09 |
 
-   **No substitute was used:** each package records the missing case instead of testing a different skill or reusing an exposed question.
-6. **Visual types:** two equal-length fraction strips (NUM-01), a perimeter outline (MEA-01), a triangle with an extended side and its exterior angle (GEO-01), crossing lines (GEO-02), and a labelled 2 × 2 area model (ALG-01).
+   - **Partition overrides must be applied after `phasePool` assigns typed/`:mc` forms.** Changing `phaseOf` itself would flip 3 referenced ALG-01 items from typed to `:mc`: the worked example `1,3,8,1` and the delayed checks `1,2,3,1` and `1,2,6,1`.
+   - The improper-sum diagnostic for TP-NUM-02 is still unspecified; it was outside this request.
+   - **No substitute was used:** each package records the missing case instead of testing a different skill or reusing an exposed question.
+   - **Correction.** This file previously said `gen:akchance:6,6,0,0` and `gen:akchance:8,8,0,0` were "in no partition". They are served as `:mc`, in practice and check respectively; the earlier check missed the `:mc` ids. What is actually missing is a typed **diagnostic** equal-count item.
+6. **Visual types:** specified in 09 (V1–V5). Each one reuses an existing primitive with one or two optional fields and a `describe()` clause:
+   - **V1 fraction strips:** the `strips` widget with `bottomShaded`, plus a `strips` case in `Figure`. The lesson path already has `fraction-strip` + `comparison` for `adfcmp`.
+   - **V2 perimeter:** `shape` rectangle with `outline`.
+   - **V3 exterior angle:** `triangle` with `exterior` and `notToScale`.
+   - **V4 crossing lines:** `angle` with `cross` and `labels`.
+   - **V5 area model:** `grid` with `labels`, `rowLabels` and `colLabels`.
+
+   V1 and V3 supersede the packages' provisional visual data:
+   - the two `grid` strips drew unequal wholes;
+   - the exterior triangle put the second opposite angle on the wrong vertex.
 
 ### Item freshness rule (applies to every package)
 
@@ -83,10 +97,10 @@ Before integrating, rerun `tools/build.mts` against the target commit. Ids, part
 2. **Form, not value.** For TP-NUM-02, the add-denominators answer has the same value as "averaging the two fractions" on every item. Only the written form (`8/18` unsimplified) separates them. Should the evidence reader see the raw response text?
 3. **B3. The addressed misconception is read from verbatim family text.** `addressedMisconception()` finds the bug whose `says` sentence is quoted verbatim in the screen. Where a package must *replace* a defective family sentence (`fix_longer_is_larger` TP-NUM-03, `fix_opposite_as_linear` TP-GEO-02), the platform reads `addresses: null`. The gate then accepts **any** established misconception for that strategy, which is over-permissive. Fix the family text, or let a record carry `addresses` explicitly.
 4. **Teaching for non-seed families.** 726 families have a chapter screen only (01). Each package proposes one per-family concept strategy where the module has no selectable teaching for the family.
-5. **Visual types.** These are missing from the `Visual` union: an exterior-angle triangle, crossing lines, a perimeter outline, two equal-length fraction strips, and a labelled 2×2 area model.
+5. **Visual types.** These cannot be drawn today: an exterior-angle triangle, crossing lines, a perimeter outline, two equal-length fraction strips, and a labelled 2×2 area model. Each one is an existing `Visual` type that needs one or two optional fields (the union's index signature already allows them) and a `describe()` clause. 09 V1–V5 gives the exact data and renderer requirements.
 6. **Partitions.**
-   - `ahid`: no unambiguous `(px + q)²` cross-term item exists in the diagnostic **or** retention partition. The TP-ALG-01 delayed-check audit shows which retention items do test the cross term.
-   - `akchance`: the equal-count contrast item (`gen:akchance:6,6,0,0`, `gen:akchance:8,8,0,0`) is in the generator pool but in no served partition.
+   - `ahid`: no unambiguous `(px + q)²` cross-term item is served in a usable form in the diagnostic **or** retention partition. `gen:ahid:0,3,7,1` is in diagnostic but served only as `:mc`, and retention has none. The TP-ALG-01 delayed-check audit shows which retention items do test the cross term; see 09 MQ1.
+   - `akchance`: no equal-count contrast item is in the diagnostic partition. `gen:akchance:6,6,0,0` and `gen:akchance:8,8,0,0` are served only as `:mc`, in practice and check (corrected; see 09 MQ2).
 
 ## Runtime defects and concerns (reproducible; Codex to verify and repair)
 

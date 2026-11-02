@@ -50,7 +50,12 @@ for primary, o in rows:
           f"- **New strategies:** {', '.join(f'`{x}`' for x in o['newStrategies'])}.", "",
           "| Role | Question | Partition | Form | Reconciliation |", "|---|---|---|---|---|"]
     L += [f"| {i['role']} | `{i['id']}` | {i['partition']} | {i['form']} | {'; '.join(i['issues']) or 'served, fresh, unexposed'} |" for i in o["items"]]
-    L += ["", "**Missing questions:** " + ("; ".join(o["missingQuestions"]) or "none") + ".", "", "**Unresolved contract requirements (Codex):**", ""] + [f"- {x}" for x in o["contract"]] + [""]
+    L += ["", "**Missing questions:** " + ("; ".join(o["missingQuestions"]) or "none") + "."]
+    pq = o.get("proposed", {}).get("questions", [])
+    if pq:
+        L += ["", "**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**", "", "| Need | Role | Proposed question | Served today as | Change |", "|---|---|---|---|---|"]
+        L += [f"| {x['need']} | {x['role']} | `{x['id']}` | {x['currentlyServedAs']} | {x['change']} |" for x in pq]
+    L += ["", "**Unresolved contract requirements (Codex):**", ""] + [f"- {x}" for x in o["contract"]] + [""]
     rv = rs["packages"].get(o["id"], {})
     L += [f"**Independent review:** {rv.get('summary', 'not recorded')}", ""]
 open(f"{root}/08-INTEGRATION-MANIFEST.md", "w").write("\n".join(L) + "\n")

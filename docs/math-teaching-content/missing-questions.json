@@ -1,0 +1,1833 @@
+{
+ "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+ "status": "PROPOSED questions (not served, not integrated). Verified-served questions are listed separately in integration-manifest.json.",
+ "needs": [
+  {
+   "recommended": "diagnostic gen:ahid:0,3,7,1 (pin typed; already in diagnostic); retention gen:ahid:0,2,9,1 (override practice → retention after form assignment)",
+   "need": "MQ1",
+   "title": "Unambiguous (px + q)² cross-term questions",
+   "package": "TP-ALG-01",
+   "family": "ahid",
+   "source": "packages/learning/src/fam/b08.ts:2188",
+   "roles": [
+    "diagnostic",
+    "retention"
+   ],
+   "constraint": "params = [0, p, q, 1]: form (px + q)², the box is the x coefficient (answer 2pq); p ≥ 2, p ≠ q, q ≠ 2p, p ≠ 2q, and neither modelled wrong value (pq, −2pq) is a number printed in the question",
+   "counts": {
+    "qualifyingInDomain": 24,
+    "released": 24,
+    "availableInRequiredPartition": 0,
+    "releasedOtherPartition": 5,
+    "notReleased": 0,
+    "alreadyUsedOrShown": 18
+   },
+   "reuseByPartition": {
+    "diagnostic": [],
+    "check": [
+     "gen:ahid:0,2,3,1: same numbers (pq:2,3) as an item the package uses or the module shows [check]",
+     "gen:ahid:0,3,4,1: same numbers (pq:3,4) as an item the package uses or the module shows [check]",
+     "gen:ahid:0,3,8,1: same numbers (pq:3,8) as an item the package uses or the module shows [check]",
+     "gen:ahid:0,3,9,1: already used by the package [check]",
+     "gen:ahid:0,4,5,1: same numbers (pq:4,5) as an item the package uses or the module shows [check]",
+     "gen:ahid:0,4,6,1: already used by the package [check]",
+     "gen:ahid:0,4,9,1: already used by the package [check]",
+     "gen:ahid:0,5,9,1: same numbers (pq:5,9) as an item the package uses or the module shows [check]"
+    ],
+    "retention": [],
+    "practice": [
+     "gen:ahid:0,2,5,1: already used by the package [practice]",
+     "gen:ahid:0,2,6,1: same numbers (pq:2,6) as an item the package uses or the module shows [practice]",
+     "gen:ahid:0,2,8,1: same numbers (pq:2,8) as an item the package uses or the module shows [practice]",
+     "gen:ahid:0,3,2,1: already used by the package [practice]",
+     "gen:ahid:0,3,5,1: already used by the package [practice]",
+     "gen:ahid:0,4,3,1: same numbers (pq:4,3) as an item the package uses or the module shows [practice]",
+     "gen:ahid:0,5,2,1: already used by the package [practice]",
+     "gen:ahid:0,5,4,1: already used by the package [practice]",
+     "gen:ahid:0,5,6,1: already used by the package [practice]",
+     "gen:ahid:0,5,7,1: already used by the package [practice]"
+    ]
+   },
+   "perRole": [
+    {
+     "role": "diagnostic",
+     "available": [],
+     "inOtherPartitions": 5,
+     "unreleased": 0
+    },
+    {
+     "role": "retention",
+     "available": [],
+     "inOtherPartitions": 5,
+     "unreleased": 0
+    }
+   ],
+   "decision": {
+    "diagnostic": "FORM CHANGE ONLY: 1 qualifying item(s) sit in this partition but phasePool serves them as :mc; pin the typed form",
+    "retention": "PARTITION CHANGE: qualifying items are released but hashed into other partitions"
+   },
+   "proposals": [
+    {
+     "id": "gen:ahid:0,3,7,1",
+     "status": "FORM: in the diagnostic partition but served only as gen:ahid:0,3,7,1:mc (a diagnostic needs the typed form)",
+     "partition": "diagnostic",
+     "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (3x + 7)². (3x + 7)² = 9x² + □x + 49. What number goes in the box? (It may be negative.)",
+     "answer": "42",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "(3x + 7)² = 9x² + 42x + 49 (every term times every term)",
+       "The box is the x coefficient: 42"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "middle-not-doubled",
+       "kind": "conceptual",
+       "value": 21,
+       "targeted": true
+      },
+      {
+       "id": "middle-sign",
+       "kind": "procedural",
+       "value": -42,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:ahid:0,2,7,1",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (2x + 7)². (2x + 7)² = 4x² + □x + 49. What number goes in the box? (It may be negative.)",
+     "answer": "28",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "(2x + 7)² = 4x² + 28x + 49 (every term times every term)",
+       "The box is the x coefficient: 28"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "middle-not-doubled",
+       "kind": "conceptual",
+       "value": 14,
+       "targeted": true
+      },
+      {
+       "id": "middle-sign",
+       "kind": "procedural",
+       "value": -28,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:ahid:0,2,9,1",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (2x + 9)². (2x + 9)² = 4x² + □x + 81. What number goes in the box? (It may be negative.)",
+     "answer": "36",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "(2x + 9)² = 4x² + 36x + 81 (every term times every term)",
+       "The box is the x coefficient: 36"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "middle-not-doubled",
+       "kind": "conceptual",
+       "value": 18,
+       "targeted": true
+      },
+      {
+       "id": "middle-sign",
+       "kind": "procedural",
+       "value": -36,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:ahid:0,4,7,1",
+     "status": "released, but hashed into the check partition",
+     "partition": "check",
+     "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (4x + 7)². (4x + 7)² = 16x² + □x + 49. What number goes in the box? (It may be negative.)",
+     "answer": "56",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "(4x + 7)² = 16x² + 56x + 49 (every term times every term)",
+       "The box is the x coefficient: 56"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "middle-not-doubled",
+       "kind": "conceptual",
+       "value": 28,
+       "targeted": true
+      },
+      {
+       "id": "middle-sign",
+       "kind": "procedural",
+       "value": -56,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:ahid:0,5,3,1",
+     "status": "released, but hashed into the practice partition",
+     "partition": "practice",
+     "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 3)². (5x + 3)² = 25x² + □x + 9. What number goes in the box? (It may be negative.)",
+     "answer": "30",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "(5x + 3)² = 25x² + 30x + 9 (every term times every term)",
+       "The box is the x coefficient: 30"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "middle-not-doubled",
+       "kind": "conceptual",
+       "value": 15,
+       "targeted": true
+      },
+      {
+       "id": "middle-sign",
+       "kind": "procedural",
+       "value": -30,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    }
+   ]
+  },
+  {
+   "recommended": "diagnostic gen:akchance:8,8,0,0 (override check → diagnostic, typed, after form assignment)",
+   "need": "MQ2",
+   "title": "Equal-colour-count probability contrast",
+   "package": "TP2-CH-BAG",
+   "family": "akchance",
+   "source": "packages/learning/src/fam/b11.ts:634",
+   "roles": [
+    "diagnostic"
+   ],
+   "constraint": "params = [r, b, g, 0] with every colour present in equal numbers (r = b and g ∈ {0, r}) and r ≥ 2: then 1/(number of colours) IS the right answer, so the contrast separates 'colours-equal' from understanding only together with an unequal item; odds (r : others) and count-only (r) give different values",
+   "counts": {
+    "qualifyingInDomain": 13,
+    "released": 2,
+    "availableInRequiredPartition": 0,
+    "releasedOtherPartition": 0,
+    "notReleased": 11,
+    "alreadyUsedOrShown": 2
+   },
+   "reuseByPartition": {
+    "diagnostic": [],
+    "check": [
+     "gen:akchance:8,8,0,0: answer 1/2 already used (the package requires distinct answers) [check]"
+    ],
+    "retention": [],
+    "practice": [
+     "gen:akchance:6,6,0,0: answer 1/2 already used (the package requires distinct answers) [practice]"
+    ]
+   },
+   "perRole": [
+    {
+     "role": "diagnostic",
+     "available": [],
+     "inOtherPartitions": 0,
+     "unreleased": 11
+    }
+   ],
+   "decision": {
+    "diagnostic": "PARTITION CHANGE: only released items in other partitions (some blocked by this branch's reuse rule) qualify; no released or unreleased item hashes into this partition"
+   },
+   "proposals": [
+    {
+     "id": "gen:akchance:2,2,0,0",
+     "status": "not released: outside the family's release cap (if released it would hash into practice)",
+     "partition": null,
+     "prompt": "A bag has 2 red and 2 blue marbles, as in the table. Kavya picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+     "answer": "1/2",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All the marbles: 2 red + 2 blue = 4, each equally likely",
+       "Marbles that fit \"red\": 2",
+       "P = 2/4 = 1/2"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "not gradable until released",
+     "anticipatedWrong": [
+      {
+       "id": "odds",
+       "kind": "conceptual",
+       "value": 1,
+       "targeted": true
+      },
+      {
+       "id": "count-only",
+       "kind": "procedural",
+       "value": 2,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akchance:2,2,2,0",
+     "status": "not released: outside the family's release cap (if released it would hash into check)",
+     "partition": null,
+     "prompt": "A bag has 2 red, 2 blue and 2 green marbles, as in the table. Divya picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+     "answer": "1/3",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All the marbles: 2 red + 2 blue + 2 green = 6, each equally likely",
+       "Marbles that fit \"red\": 2",
+       "P = 2/6 = 1/3"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "not gradable until released",
+     "anticipatedWrong": [
+      {
+       "id": "odds",
+       "kind": "conceptual",
+       "value": 0.5,
+       "targeted": true
+      },
+      {
+       "id": "count-only",
+       "kind": "procedural",
+       "value": 2,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akchance:3,3,0,0",
+     "status": "not released: outside the family's release cap (if released it would hash into check)",
+     "partition": null,
+     "prompt": "A bag has 3 red and 3 blue marbles, as in the table. Divya picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+     "answer": "1/2",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All the marbles: 3 red + 3 blue = 6, each equally likely",
+       "Marbles that fit \"red\": 3",
+       "P = 3/6 = 1/2"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "not gradable until released",
+     "anticipatedWrong": [
+      {
+       "id": "odds",
+       "kind": "conceptual",
+       "value": 1,
+       "targeted": true
+      },
+      {
+       "id": "count-only",
+       "kind": "procedural",
+       "value": 3,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akchance:3,3,3,0",
+     "status": "not released: outside the family's release cap (if released it would hash into practice)",
+     "partition": null,
+     "prompt": "A bag has 3 red, 3 blue and 3 green marbles, as in the table. Selvi picks one marble without looking. What is the probability that it is red? (A fraction is fine.)",
+     "answer": "1/3",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All the marbles: 3 red + 3 blue + 3 green = 9, each equally likely",
+       "Marbles that fit \"red\": 3",
+       "P = 3/9 = 1/3"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "not gradable until released",
+     "anticipatedWrong": [
+      {
+       "id": "odds",
+       "kind": "conceptual",
+       "value": 0.5,
+       "targeted": true
+      },
+      {
+       "id": "count-only",
+       "kind": "procedural",
+       "value": 3,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    }
+   ]
+  },
+  {
+   "recommended": "recheck gen:addur:0,7 (override diagnostic → check); retention gen:addur:0,291 after the bounds change (mode 0, x ≤ 299)",
+   "need": "MQ3",
+   "title": "Durations whose minutes total 100 or more",
+   "package": "TP2-REG-TIME",
+   "family": "addur",
+   "source": "packages/learning/src/fam/b04.ts:2140",
+   "roles": [
+    "check",
+    "retention"
+   ],
+   "constraint": "params = [0, x] (two durations in h and min) where the two minute parts add to 100 or more: then no-carry keeps 100+ minutes and regrouping at 100 gives (h + 1, minutes − 100), which differ",
+   "counts": {
+    "qualifyingInDomain": 3,
+    "released": 3,
+    "availableInRequiredPartition": 0,
+    "releasedOtherPartition": 1,
+    "notReleased": 0,
+    "alreadyUsedOrShown": 2
+   },
+   "reuseByPartition": {
+    "diagnostic": [
+     "gen:addur:0,27: already used by the package [diagnostic]"
+    ],
+    "check": [],
+    "retention": [],
+    "practice": [
+     "gen:addur:0,57: already used by the package [practice]"
+    ]
+   },
+   "perRole": [
+    {
+     "role": "check",
+     "available": [],
+     "inOtherPartitions": 1,
+     "unreleased": 0
+    },
+    {
+     "role": "retention",
+     "available": [],
+     "inOtherPartitions": 1,
+     "unreleased": 0
+    }
+   ],
+   "decision": {
+    "check": "PARTITION CHANGE: qualifying items are released but hashed into other partitions",
+    "retention": "PARTITION CHANGE: qualifying items are released but hashed into other partitions"
+   },
+   "proposals": [
+    {
+     "id": "gen:addur:0,7",
+     "status": "released, but hashed into the diagnostic partition",
+     "partition": "diagnostic",
+     "prompt": "A bus ride takes 3 h 55 min and a train ride after it takes 2 h 55 min. How long is the whole journey? Write the answer as (hours, minutes).",
+     "answer": "(6, 50)",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "Minutes: 55 + 55 = 110 = 60 + 50: 60 minutes make 1 hour",
+       "Hours: 3 + 2 + 1 = 6",
+       "(6, 50)"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "no-carry",
+       "kind": "conceptual",
+       "value": "(5, 110)",
+       "targeted": true
+      },
+      {
+       "id": "carry-kept",
+       "kind": "procedural",
+       "value": "(6, 110)",
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    }
+   ]
+  },
+  {
+   "recommended": "add fadd.word(p); transfer gen:fadd:1,2,5,1:w (also 1,2,4,1 and 1,2,11,1)",
+   "need": "MQ4",
+   "title": "Everyday transfer question for adding like fractions",
+   "package": "TP-NUM-02",
+   "family": "fadd",
+   "source": "packages/learning/src/families.ts:116",
+   "roles": [
+    "practice (transfer, :w form)"
+   ],
+   "constraint": "params = [a, b, n, 1] (addition) with a + b < n, so the everyday situation (parts of ONE whole) makes sense; the word form keeps the same answer (family-kit contract: 'word(p): the same mathematics in an everyday situation … Same answer')",
+   "counts": {
+    "familyHasWordForm": false,
+    "eligibleReleasedItems": 220
+   },
+   "decision": "GENERATOR CHANGE NEEDED (small): add a `word(p)` function to the existing fadd definition, returning text only for addition with a + b < n (subtraction and sums of one whole or more keep no word form); no new family, no new solve/validate",
+   "proposedWordTemplate": "Meena cut a cake into {n} equal pieces. She ate {a} piece(s) and her brother ate {b} piece(s). What fraction of the cake did they eat altogether?",
+   "proposals": [
+    {
+     "typedId": "gen:fadd:1,2,4,1",
+     "wouldBe": "gen:fadd:1,2,4,1:w",
+     "word": "Meena cut a cake into 4 equal pieces. She ate 1 piece and her brother ate 2 pieces. What fraction of the cake did they eat altogether?",
+     "answer": "3/4",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "Every piece has size 1/4: 1 piece and 2 pieces = 3 pieces of size 1/4",
+       "3/4"
+      ]
+     },
+     "trustedGraderOnTypedForm": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "add-denominators",
+       "kind": "conceptual",
+       "value": 0.375,
+       "targeted": true
+      },
+      {
+       "id": "multiply-tops",
+       "kind": "procedural",
+       "value": 0.5,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "typedId": "gen:fadd:1,2,5,1",
+     "wouldBe": "gen:fadd:1,2,5,1:w",
+     "word": "Meena cut a cake into 5 equal pieces. She ate 1 piece and her brother ate 2 pieces. What fraction of the cake did they eat altogether?",
+     "answer": "3/5",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "Every piece has size 1/5: 1 piece and 2 pieces = 3 pieces of size 1/5",
+       "3/5"
+      ]
+     },
+     "trustedGraderOnTypedForm": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "add-denominators",
+       "kind": "conceptual",
+       "value": 0.3,
+       "targeted": true
+      },
+      {
+       "id": "multiply-tops",
+       "kind": "procedural",
+       "value": 0.4,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "typedId": "gen:fadd:1,2,9,1",
+     "wouldBe": "gen:fadd:1,2,9,1:w",
+     "word": "Meena cut a cake into 9 equal pieces. She ate 1 piece and her brother ate 2 pieces. What fraction of the cake did they eat altogether?",
+     "answer": "1/3",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "Every piece has size 1/9: 1 piece and 2 pieces = 3 pieces of size 1/9",
+       "3/9 = 1/3"
+      ]
+     },
+     "trustedGraderOnTypedForm": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "add-denominators",
+       "kind": "conceptual",
+       "value": 0.16666666666666666,
+       "targeted": true
+      },
+      {
+       "id": "multiply-tops",
+       "kind": "procedural",
+       "value": 0.2222222222222222,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "typedId": "gen:fadd:1,2,10,1",
+     "wouldBe": "gen:fadd:1,2,10,1:w",
+     "word": "Meena cut a cake into 10 equal pieces. She ate 1 piece and her brother ate 2 pieces. What fraction of the cake did they eat altogether?",
+     "answer": "3/10",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "Every piece has size 1/10: 1 piece and 2 pieces = 3 pieces of size 1/10",
+       "3/10"
+      ]
+     },
+     "trustedGraderOnTypedForm": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "add-denominators",
+       "kind": "conceptual",
+       "value": 0.15,
+       "targeted": true
+      },
+      {
+       "id": "multiply-tops",
+       "kind": "procedural",
+       "value": 0.2,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "typedId": "gen:fadd:1,2,11,1",
+     "wouldBe": "gen:fadd:1,2,11,1:w",
+     "word": "Meena cut a cake into 11 equal pieces. She ate 1 piece and her brother ate 2 pieces. What fraction of the cake did they eat altogether?",
+     "answer": "3/11",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "Every piece has size 1/11: 1 piece and 2 pieces = 3 pieces of size 1/11",
+       "3/11"
+      ]
+     },
+     "trustedGraderOnTypedForm": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "add-denominators",
+       "kind": "conceptual",
+       "value": 0.13636363636363635,
+       "targeted": true
+      },
+      {
+       "id": "multiply-tops",
+       "kind": "procedural",
+       "value": 0.18181818181818182,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "typedId": "gen:fadd:1,2,12,1",
+     "wouldBe": "gen:fadd:1,2,12,1:w",
+     "word": "Meena cut a cake into 12 equal pieces. She ate 1 piece and her brother ate 2 pieces. What fraction of the cake did they eat altogether?",
+     "answer": "1/4",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "Every piece has size 1/12: 1 piece and 2 pieces = 3 pieces of size 1/12",
+       "3/12 = 1/4"
+      ]
+     },
+     "trustedGraderOnTypedForm": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "add-denominators",
+       "kind": "conceptual",
+       "value": 0.125,
+       "targeted": true
+      },
+      {
+       "id": "multiply-tops",
+       "kind": "procedural",
+       "value": 0.16666666666666666,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    }
+   ]
+  },
+  {
+   "recommended": "recheck gen:akdice:4,5,0,4:mc (selection only, after decision A)",
+   "need": "MQ5",
+   "title": "Different-size-spinner multi-pair recheck",
+   "package": "TP-PRO-01",
+   "family": "akdice",
+   "source": "packages/learning/src/fam/b11.ts:803",
+   "roles": [
+    "check"
+   ],
+   "constraint": "params = [m, n, 0, k] with m ≠ n (different sizes) and 2 < k < m + n (a total made by at least two pairs); not already used by TP-PRO-01 or shown by the module",
+   "counts": {
+    "qualifyingInDomain": 36,
+    "released": 36,
+    "availableInRequiredPartition": 0,
+    "releasedOtherPartition": 0,
+    "notReleased": 0,
+    "alreadyUsedOrShown": 36
+   },
+   "reuseByPartition": {
+    "diagnostic": [
+     "gen:akdice:3,6,0,5: answer 1/6 already used (the package requires distinct answers) [diagnostic]",
+     "gen:akdice:4,5,0,7: already used by the package [diagnostic]"
+    ],
+    "check": [
+     "gen:akdice:3,5,0,3: already used by the package [check]",
+     "gen:akdice:4,5,0,4: answer 3/20 already used (the package requires distinct answers) [check]",
+     "gen:akdice:4,5,0,5: answer 1/5 already used (the package requires distinct answers) [check]",
+     "gen:akdice:5,6,0,3: answer 1/15 already used (the package requires distinct answers) [check]",
+     "gen:akdice:5,6,0,8: answer 2/15 already used (the package requires distinct answers) [check]",
+     "gen:akdice:5,6,0,9: answer 1/10 already used (the package requires distinct answers) [check]"
+    ],
+    "retention": [
+     "gen:akdice:3,4,0,5: answer 1/4 already used (the package requires distinct answers) [retention]",
+     "gen:akdice:3,4,0,6: answer 1/6 already used (the package requires distinct answers) [retention]",
+     "gen:akdice:3,6,0,4: answer 1/6 already used (the package requires distinct answers) [retention]",
+     "gen:akdice:3,6,0,7: answer 1/6 already used (the package requires distinct answers) [retention]",
+     "gen:akdice:4,5,0,6: answer 1/5 already used (the package requires distinct answers) [retention]",
+     "gen:akdice:4,5,0,8: answer 1/10 already used (the package requires distinct answers) [retention]",
+     "gen:akdice:4,6,0,3: already used by the package [retention]",
+     "gen:akdice:5,6,0,7: answer 1/6 already used (the package requires distinct answers) [retention]"
+    ],
+    "practice": [
+     "gen:akdice:3,4,0,3: answer 1/6 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,4,0,4: already used by the package [practice]",
+     "gen:akdice:3,5,0,4: answer 1/5 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,5,0,5: answer 1/5 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,5,0,6: already used by the package [practice]",
+     "gen:akdice:3,5,0,7: answer 2/15 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,6,0,3: answer 1/9 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,6,0,6: answer 1/6 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:3,6,0,8: answer 1/9 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:4,5,0,3: already used by the package [practice]",
+     "gen:akdice:4,6,0,4: answer 1/8 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:4,6,0,5: answer 1/6 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:4,6,0,6: answer 1/6 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:4,6,0,7: answer 1/6 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:4,6,0,8: already used by the package [practice]",
+     "gen:akdice:4,6,0,9: answer 1/12 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:5,6,0,4: answer 1/10 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:5,6,0,5: answer 2/15 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:5,6,0,6: answer 1/6 already used (the package requires distinct answers) [practice]",
+     "gen:akdice:5,6,0,10: answer 1/15 already used (the package requires distinct answers) [practice]"
+    ]
+   },
+   "perRole": [
+    {
+     "role": "check",
+     "available": [],
+     "inOtherPartitions": 0,
+     "unreleased": 0
+    }
+   ],
+   "decision": {
+    "check": "SERVED BUT BLOCKED BY THIS BRANCH'S REUSE RULE: 6 item(s) in this partition repeat a number signature or answer the package already uses"
+   },
+   "proposals": [
+    {
+     "id": "gen:akdice:3,5,0,3",
+     "status": "already used by the package [check]",
+     "partition": "check",
+     "prompt": "Lakshmi uses a spinner numbered 1 to 3 and a spinner numbered 1 to 5. The first gives a number from 1 to 3 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
+     "answer": "2/15",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 3 × 5 = 15, equally likely",
+       "Pairs with total 3: 2",
+       "P = 2/15"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "totals-equally-likely",
+       "kind": "conceptual",
+       "value": 0.14285714285714285,
+       "targeted": true
+      },
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.25,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:4,5,0,4",
+     "status": "answer 3/20 already used (the package requires distinct answers) [check]",
+     "partition": "check",
+     "prompt": "Ravi uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 4? (A fraction is fine.)",
+     "answer": "3/20",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 4 × 5 = 20, equally likely",
+       "Pairs with total 4: 3",
+       "P = 3/20"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "totals-equally-likely",
+       "kind": "conceptual",
+       "value": 0.125,
+       "targeted": true
+      },
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.3333333333333333,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:4,5,0,5",
+     "status": "answer 1/5 already used (the package requires distinct answers) [check]",
+     "partition": "check",
+     "prompt": "Meena uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 5? (A fraction is fine.)",
+     "answer": "1/5",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 4 × 5 = 20, equally likely",
+       "Pairs with total 5: 4",
+       "P = 4/20 = 1/5"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "totals-equally-likely",
+       "kind": "conceptual",
+       "value": 0.125,
+       "targeted": true
+      },
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.4444444444444444,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:5,6,0,3",
+     "status": "answer 1/15 already used (the package requires distinct answers) [check]",
+     "partition": "check",
+     "prompt": "Meena uses a spinner numbered 1 to 5 and an ordinary die. The first gives a number from 1 to 5 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 3? (A fraction is fine.)",
+     "answer": "1/15",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 5 × 6 = 30, equally likely",
+       "Pairs with total 3: 2",
+       "P = 2/30 = 1/15"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "totals-equally-likely",
+       "kind": "conceptual",
+       "value": 0.1,
+       "targeted": true
+      },
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.18181818181818182,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:5,6,0,8",
+     "status": "answer 2/15 already used (the package requires distinct answers) [check]",
+     "partition": "check",
+     "prompt": "Karthik uses a spinner numbered 1 to 5 and an ordinary die. The first gives a number from 1 to 5 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 8? (A fraction is fine.)",
+     "answer": "2/15",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 5 × 6 = 30, equally likely",
+       "Pairs with total 8: 4",
+       "P = 4/30 = 2/15"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "totals-equally-likely",
+       "kind": "conceptual",
+       "value": 0.1,
+       "targeted": true
+      },
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.36363636363636365,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:akdice:5,6,0,9",
+     "status": "answer 1/10 already used (the package requires distinct answers) [check]",
+     "partition": "check",
+     "prompt": "Priya uses a spinner numbered 1 to 5 and an ordinary die. The first gives a number from 1 to 5 and the second a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 9? (A fraction is fine.)",
+     "answer": "1/10",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "All pairs: 5 × 6 = 30, equally likely",
+       "Pairs with total 9: 3",
+       "P = 3/30 = 1/10"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "added-sides",
+       "kind": "procedural",
+       "value": 0.2727272727272727,
+       "targeted": true
+      }
+     ],
+     "ambiguity": []
+    }
+   ]
+  },
+  {
+   "recommended": "recheck gen:aadigit:39,1 (selection only, after decision A)",
+   "need": "MQ6",
+   "title": "'How many tens' recheck",
+   "package": "TP2-PV-DIGIT",
+   "family": "aadigit",
+   "source": "packages/learning/src/fam/b01.ts:1691",
+   "roles": [
+    "check"
+   ],
+   "constraint": "params = [n, 1] with two different digits; not already used by TP2-PV-DIGIT (including its 'how many tens' tens-digit signature) or shown by the module",
+   "counts": {
+    "qualifyingInDomain": 81,
+    "released": 81,
+    "availableInRequiredPartition": 0,
+    "releasedOtherPartition": 0,
+    "notReleased": 0,
+    "alreadyUsedOrShown": 81
+   },
+   "reuseByPartition": {
+    "diagnostic": [
+     "gen:aadigit:29,1: same numbers (q:1:2) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:30,1: same numbers (q:1:3) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:34,1: already used by the package [diagnostic]",
+     "gen:aadigit:58,1: same numbers (q:1:5) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:61,1: same numbers (q:1:6) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:67,1: same numbers (q:1:6) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:74,1: same numbers (n:74, q:1:7) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:78,1: same numbers (q:1:7) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:85,1: same numbers (q:1:8) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:87,1: same numbers (q:1:8) as an item the package uses or the module shows [diagnostic]",
+     "gen:aadigit:98,1: same numbers (q:1:9) as an item the package uses or the module shows [diagnostic]"
+    ],
+    "check": [
+     "gen:aadigit:12,1: same numbers (q:1:1) as an item the package uses or the module shows [check]",
+     "gen:aadigit:14,1: same numbers (q:1:1) as an item the package uses or the module shows [check]",
+     "gen:aadigit:20,1: same numbers (n:20, q:1:2) as an item the package uses or the module shows [check]",
+     "gen:aadigit:21,1: same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "gen:aadigit:23,1: same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "gen:aadigit:28,1: same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "gen:aadigit:39,1: same numbers (q:1:3) as an item the package uses or the module shows [check]",
+     "gen:aadigit:40,1: same numbers (q:1:4) as an item the package uses or the module shows [check]",
+     "gen:aadigit:41,1: same numbers (q:1:4) as an item the package uses or the module shows [check]",
+     "gen:aadigit:50,1: same numbers (n:50, q:1:5) as an item the package uses or the module shows [check]",
+     "gen:aadigit:54,1: same numbers (q:1:5) as an item the package uses or the module shows [check]",
+     "gen:aadigit:64,1: same numbers (q:1:6) as an item the package uses or the module shows [check]",
+     "gen:aadigit:68,1: already used by the package [check]",
+     "gen:aadigit:81,1: same numbers (q:1:8) as an item the package uses or the module shows [check]",
+     "gen:aadigit:83,1: same numbers (n:83, q:1:8) as an item the package uses or the module shows [check]",
+     "gen:aadigit:91,1: same numbers (n:91, q:1:9) as an item the package uses or the module shows [check]"
+    ],
+    "retention": [
+     "gen:aadigit:17,1: same numbers (q:1:1) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:18,1: same numbers (n:18, q:1:1) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:42,1: same numbers (n:42, q:1:4) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:45,1: same numbers (q:1:4) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:47,1: same numbers (q:1:4) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:69,1: same numbers (n:69, q:1:6) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:70,1: same numbers (q:1:7) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:71,1: same numbers (q:1:7) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:72,1: same numbers (q:1:7) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:80,1: same numbers (q:1:8) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:89,1: same numbers (q:1:8) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:92,1: already used by the package [retention]",
+     "gen:aadigit:94,1: same numbers (q:1:9) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:95,1: same numbers (n:95, q:1:9) as an item the package uses or the module shows [retention]",
+     "gen:aadigit:97,1: same numbers (q:1:9) as an item the package uses or the module shows [retention]"
+    ],
+    "practice": [
+     "gen:aadigit:10,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:13,1: already used by the package [practice]",
+     "gen:aadigit:15,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:16,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:19,1: same numbers (q:1:1) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:24,1: same numbers (q:1:2) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:25,1: same numbers (q:1:2) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:26,1: already used by the package [practice]",
+     "gen:aadigit:27,1: same numbers (q:1:2) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:31,1: same numbers (n:31, q:1:3) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:32,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:35,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:36,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:37,1: same numbers (n:37, q:1:3) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:38,1: same numbers (q:1:3) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:43,1: already used by the package [practice]",
+     "gen:aadigit:46,1: same numbers (q:1:4) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:48,1: same numbers (q:1:4) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:49,1: same numbers (n:49, q:1:4) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:51,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:52,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:53,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:56,1: already used by the package [practice]",
+     "gen:aadigit:57,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:59,1: same numbers (q:1:5) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:60,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:62,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:63,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:65,1: same numbers (q:1:6) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:73,1: same numbers (q:1:7) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:75,1: already used by the package [practice]",
+     "gen:aadigit:76,1: same numbers (q:1:7) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:79,1: same numbers (q:1:7) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:82,1: already used by the package [practice]",
+     "gen:aadigit:84,1: same numbers (q:1:8) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:86,1: same numbers (q:1:8) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:90,1: same numbers (q:1:9) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:93,1: same numbers (q:1:9) as an item the package uses or the module shows [practice]",
+     "gen:aadigit:96,1: same numbers (q:1:9) as an item the package uses or the module shows [practice]"
+    ]
+   },
+   "perRole": [
+    {
+     "role": "check",
+     "available": [],
+     "inOtherPartitions": 0,
+     "unreleased": 0
+    }
+   ],
+   "decision": {
+    "check": "SERVED BUT BLOCKED BY THIS BRANCH'S REUSE RULE: 16 item(s) in this partition repeat a number signature or answer the package already uses"
+   },
+   "proposals": [
+    {
+     "id": "gen:aadigit:12,1",
+     "status": "same numbers (q:1:1) as an item the package uses or the module shows [check]",
+     "partition": "check",
+     "prompt": "How many tens are there in 12?",
+     "answer": "1",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "12 = 1 ten and 2 ones",
+       "1 ten"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 10,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 2,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:14,1",
+     "status": "same numbers (q:1:1) as an item the package uses or the module shows [check]",
+     "partition": "check",
+     "prompt": "How many tens are there in 14?",
+     "answer": "1",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "14 = 1 ten and 4 ones",
+       "1 ten"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 10,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 4,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:20,1",
+     "status": "same numbers (n:20, q:1:2) as an item the package uses or the module shows [check]",
+     "partition": "check",
+     "prompt": "How many tens are there in 20?",
+     "answer": "2",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "20 = 2 tens and 0 ones",
+       "2 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 20,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 0,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:21,1",
+     "status": "same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "partition": "check",
+     "prompt": "How many tens are there in 21?",
+     "answer": "2",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "21 = 2 tens and 1 one",
+       "2 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 20,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 1,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:23,1",
+     "status": "same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "partition": "check",
+     "prompt": "How many tens are there in 23?",
+     "answer": "2",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "23 = 2 tens and 3 ones",
+       "2 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 20,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 3,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    },
+    {
+     "id": "gen:aadigit:28,1",
+     "status": "same numbers (q:1:2) as an item the package uses or the module shows [check]",
+     "partition": "check",
+     "prompt": "How many tens are there in 28?",
+     "answer": "2",
+     "independentOracle": {
+      "agrees": true,
+      "lines": [
+       "28 = 2 tens and 8 ones",
+       "2 tens"
+      ]
+     },
+     "generatorValidate": true,
+     "trustedGrader": "correct",
+     "anticipatedWrong": [
+      {
+       "id": "value-not-count",
+       "kind": "conceptual",
+       "value": 20,
+       "targeted": true
+      },
+      {
+       "id": "wrong-digit",
+       "kind": "procedural",
+       "value": 8,
+       "targeted": false
+      }
+     ],
+     "ambiguity": []
+    }
+   ]
+  }
+ ],
+ "partitionMoveSideEffects": [
+  {
+   "need": "MQ1",
+   "family": "ahid",
+   "move": {
+    "gen:ahid:0,2,9,1": "retention"
+   },
+   "pinTyped": [
+    "gen:ahid:0,3,7,1"
+   ],
+   "simulatorMatchesPhasePool": true,
+   "packageReferencesChecked": 17,
+   "ifPhaseOfIsChanged": {
+    "referencedItemsWhoseServedFormChanges": [
+     "gen:ahid:1,3,8,1: practice gen:ahid:1,3,8,1 -> practice gen:ahid:1,3,8,1:mc",
+     "gen:ahid:1,2,3,1: retention gen:ahid:1,2,3,1 -> retention gen:ahid:1,2,3,1:mc",
+     "gen:ahid:1,2,6,1: retention gen:ahid:1,2,6,1 -> retention gen:ahid:1,2,6,1:mc"
+    ]
+   },
+   "ifOverrideIsAppliedAfterFormAssignment": {
+    "referencedItemsWhoseServedFormChanges": [],
+    "movedItemNow": [
+     "gen:ahid:0,2,9,1: retention gen:ahid:0,2,9,1"
+    ]
+   }
+  },
+  {
+   "need": "MQ2",
+   "family": "akchance",
+   "move": {
+    "gen:akchance:8,8,0,0": "diagnostic"
+   },
+   "pinTyped": [
+    "gen:akchance:8,8,0,0"
+   ],
+   "simulatorMatchesPhasePool": true,
+   "packageReferencesChecked": 12,
+   "ifPhaseOfIsChanged": {
+    "referencedItemsWhoseServedFormChanges": []
+   },
+   "ifOverrideIsAppliedAfterFormAssignment": {
+    "referencedItemsWhoseServedFormChanges": [],
+    "movedItemNow": [
+     "gen:akchance:8,8,0,0: diagnostic gen:akchance:8,8,0,0"
+    ]
+   }
+  },
+  {
+   "need": "MQ3",
+   "family": "addur",
+   "move": {
+    "gen:addur:0,7": "check"
+   },
+   "pinTyped": [],
+   "simulatorMatchesPhasePool": true,
+   "packageReferencesChecked": 12,
+   "ifPhaseOfIsChanged": {
+    "referencedItemsWhoseServedFormChanges": []
+   },
+   "ifOverrideIsAppliedAfterFormAssignment": {
+    "referencedItemsWhoseServedFormChanges": [],
+    "movedItemNow": [
+     "gen:addur:0,7: check gen:addur:0,7"
+    ]
+   }
+  }
+ ],
+ "visuals": [
+  {
+   "id": "V1",
+   "package": "TP-NUM-01",
+   "family": "adfcmp",
+   "need": "paired fraction strips of equal length",
+   "primitive": "existing 'strips' widget (Learn.tsx Picture) + one field; the lesson-page path already has TeachingVisual 'fraction-strip' with 'comparison' (familyTeachingVisual adfcmp)",
+   "samples": [
+    {
+     "id": "gen:adfcmp:1,1,9,11,0",
+     "prompt": "Which fraction is greater: 1/9 or 1/11? Write that fraction.",
+     "answer": "1/9",
+     "data": {
+      "type": "strips",
+      "top": 9,
+      "shaded": 1,
+      "bottom": 11,
+      "bottomShaded": 1,
+      "labels": [
+       "1/9",
+       "1/11"
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:adfcmp:1,1,3,9,1",
+     "prompt": "Which fraction is smaller: 1/3 (one-third) or 1/9? Write that fraction.",
+     "answer": "1/9",
+     "data": {
+      "type": "strips",
+      "top": 3,
+      "shaded": 1,
+      "bottom": 9,
+      "bottomShaded": 1,
+      "labels": [
+       "1/3",
+       "1/9"
+      ]
+     },
+     "issues": [
+      "NOTE: today's strips widget would shade the second row wrongly (it derives an equivalent shading); bottomShaded is required"
+     ]
+    },
+    {
+     "id": "gen:adfcmp:1,1,8,2,0",
+     "prompt": "Which fraction is greater: 1/8 or 1/2 (one-half)? Write that fraction.",
+     "answer": "1/2",
+     "data": {
+      "type": "strips",
+      "top": 8,
+      "shaded": 1,
+      "bottom": 2,
+      "bottomShaded": 1,
+      "labels": [
+       "1/8",
+       "1/2"
+      ]
+     },
+     "issues": [
+      "NOTE: today's strips widget would shade the second row wrongly (it derives an equivalent shading); bottomShaded is required"
+     ]
+    },
+    {
+     "id": "gen:adfcmp:1,7,12,11,1",
+     "prompt": "Which fraction is smaller: 7/12 or 7/11? Write that fraction.",
+     "answer": "7/12",
+     "data": {
+      "type": "strips",
+      "top": 12,
+      "shaded": 7,
+      "bottom": 11,
+      "bottomShaded": 7,
+      "labels": [
+       "7/12",
+       "7/11"
+      ]
+     },
+     "issues": [
+      "NOTE: today's strips widget would shade the second row wrongly (it derives an equivalent shading); bottomShaded is required"
+     ]
+    },
+    {
+     "id": "gen:adfcmp:0,11,1,10,0",
+     "prompt": "Which fraction is greater: 1/11 or 10/11? Write that fraction.",
+     "answer": "10/11",
+     "data": {
+      "type": "strips",
+      "top": 11,
+      "shaded": 1,
+      "bottom": 11,
+      "bottomShaded": 10,
+      "labels": [
+       "1/11",
+       "10/11"
+      ]
+     },
+     "issues": [
+      "NOTE: today's strips widget would shade the second row wrongly (it derives an equivalent shading); bottomShaded is required"
+     ]
+    },
+    {
+     "id": "gen:adfcmp:0,11,6,3,1",
+     "prompt": "Which fraction is smaller: 6/11 or 3/11? Write that fraction.",
+     "answer": "3/11",
+     "data": {
+      "type": "strips",
+      "top": 11,
+      "shaded": 6,
+      "bottom": 11,
+      "bottomShaded": 3,
+      "labels": [
+       "6/11",
+       "3/11"
+      ]
+     },
+     "issues": [
+      "NOTE: today's strips widget would shade the second row wrongly (it derives an equivalent shading); bottomShaded is required"
+     ]
+    }
+   ],
+   "allFamilyPoolChecked": 0
+  },
+  {
+   "id": "V2",
+   "package": "TP-MEA-01",
+   "family": "aeperar",
+   "need": "perimeter outline",
+   "primitive": "existing Figure 'shape' kind 'rectangle' with four side labels + one optional field",
+   "samples": [
+    {
+     "id": "gen:aeperar:0,9,11,0",
+     "prompt": "A rectangular floor is 11 m long and 9 m wide. How many square tiles of side 1 m are needed to cover the floor?",
+     "answer": "99",
+     "data": {
+      "type": "grid",
+      "rows": 9,
+      "cols": 11,
+      "shaded": 99
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:aeperar:1,9,10,1",
+     "prompt": "A rectangular card is 10 cm long and 9 cm wide. How many centimetres of lace are needed to go once round the edge of the card?",
+     "answer": "38",
+     "data": {
+      "type": "shape",
+      "kind": "rectangle",
+      "name": "rectangle",
+      "lengths": [
+       "10 cm",
+       "9 cm",
+       "10 cm",
+       "9 cm"
+      ],
+      "outline": true
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:aeperar:0,3,15,2",
+     "prompt": "A rectangular stage is 15 m long and 3 m wide. How many square mats of side 1 m are needed to cover the stage?",
+     "answer": "45",
+     "data": {
+      "type": "grid",
+      "rows": 3,
+      "cols": 15,
+      "shaded": 45
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:aeperar:1,4,11,2",
+     "prompt": "A rectangular playground is 11 m long and 4 m wide. How many metres of rope are needed to go once round the playground?",
+     "answer": "30",
+     "data": {
+      "type": "shape",
+      "kind": "rectangle",
+      "name": "rectangle",
+      "lengths": [
+       "11 m",
+       "4 m",
+       "11 m",
+       "4 m"
+      ],
+      "outline": true
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:aeperar:0,4,16,0",
+     "prompt": "A rectangular floor is 16 m long and 4 m wide. How many square tiles of side 1 m are needed to cover the floor?",
+     "answer": "64",
+     "data": {
+      "type": "grid",
+      "rows": 4,
+      "cols": 16,
+      "shaded": 64
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:aeperar:1,5,7,2",
+     "prompt": "A rectangular playground is 7 m long and 5 m wide. How many metres of rope are needed to go once round the playground?",
+     "answer": "24",
+     "data": {
+      "type": "shape",
+      "kind": "rectangle",
+      "name": "rectangle",
+      "lengths": [
+       "7 m",
+       "5 m",
+       "7 m",
+       "5 m"
+      ],
+      "outline": true
+     },
+     "issues": []
+    }
+   ],
+   "allFamilyPoolChecked": 0
+  },
+  {
+   "id": "V3",
+   "package": "TP-GEO-01",
+   "family": "ahext",
+   "need": "triangle with an extended side and its exterior angle",
+   "primitive": "existing Figure 'triangle' + one field 'exterior'",
+   "samples": [
+    {
+     "id": "gen:ahext:39,112,0",
+     "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 39° and 112°. What is the exterior angle, in degrees?",
+     "answer": "151",
+     "data": {
+      "type": "triangle",
+      "angles": [
+       "39°",
+       "",
+       "112°"
+      ],
+      "exterior": {
+       "at": 1,
+       "label": "?"
+      },
+      "notToScale": true
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:ahext:93,36,1",
+     "prompt": "One side of a triangle is extended. The exterior angle is 129° and one of the two interior opposite angles is 93°. What is the other interior opposite angle, in degrees?",
+     "answer": "36",
+     "data": {
+      "type": "triangle",
+      "angles": [
+       "93°",
+       "",
+       "?"
+      ],
+      "exterior": {
+       "at": 1,
+       "label": "129°"
+      },
+      "notToScale": true
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:ahext:51,21,0",
+     "prompt": "One side of a triangle is extended. The two interior angles opposite the exterior angle are 51° and 21°. What is the exterior angle, in degrees?",
+     "answer": "72",
+     "data": {
+      "type": "triangle",
+      "angles": [
+       "51°",
+       "",
+       "21°"
+      ],
+      "exterior": {
+       "at": 1,
+       "label": "?"
+      },
+      "notToScale": true
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:ahext:32,96,1",
+     "prompt": "One side of a triangle is extended. The exterior angle is 128° and one of the two interior opposite angles is 32°. What is the other interior opposite angle, in degrees?",
+     "answer": "96",
+     "data": {
+      "type": "triangle",
+      "angles": [
+       "32°",
+       "",
+       "?"
+      ],
+      "exterior": {
+       "at": 1,
+       "label": "128°"
+      },
+      "notToScale": true
+     },
+     "issues": []
+    }
+   ],
+   "allFamilyPoolChecked": 0
+  },
+  {
+   "id": "V4",
+   "package": "TP-GEO-02",
+   "family": "afcross",
+   "need": "two crossing lines with four angles",
+   "primitive": "existing Figure 'angle' (drawn to scale from deg) + fields 'cross' and 'labels'",
+   "samples": [
+    {
+     "id": "gen:afcross:128,0",
+     "prompt": "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
+     "answer": "128",
+     "data": {
+      "type": "angle",
+      "deg": 128,
+      "cross": true,
+      "labels": [
+       "128°",
+       "",
+       "?",
+       ""
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:afcross:149,1",
+     "prompt": "Two straight lines cross each other, making four angles. One of the angles is 149°. What is an angle next to it (they form a straight line together), in degrees?",
+     "answer": "31",
+     "data": {
+      "type": "angle",
+      "deg": 149,
+      "cross": true,
+      "labels": [
+       "149°",
+       "?",
+       "",
+       ""
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:afcross:105,0",
+     "prompt": "Two straight lines cross each other, making four angles. One of the angles is 105°. What is the angle opposite it (vertically opposite), in degrees?",
+     "answer": "105",
+     "data": {
+      "type": "angle",
+      "deg": 105,
+      "cross": true,
+      "labels": [
+       "105°",
+       "",
+       "?",
+       ""
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:afcross:126,1",
+     "prompt": "Two straight lines cross each other, making four angles. One of the angles is 126°. What is an angle next to it (they form a straight line together), in degrees?",
+     "answer": "54",
+     "data": {
+      "type": "angle",
+      "deg": 126,
+      "cross": true,
+      "labels": [
+       "126°",
+       "?",
+       "",
+       ""
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:afcross:84,2",
+     "prompt": "Two straight lines cross each other, making four angles. One of the angles is 84°. What do the other three angles add up to, in degrees?",
+     "answer": "276",
+     "data": {
+      "type": "angle",
+      "deg": 84,
+      "cross": true,
+      "labels": [
+       "84°",
+       "?",
+       "?",
+       "?"
+      ]
+     },
+     "issues": []
+    }
+   ],
+   "allFamilyPoolChecked": 0
+  },
+  {
+   "id": "V5",
+   "package": "TP-ALG-01",
+   "family": "ahid",
+   "need": "labelled 2 × 2 area model",
+   "primitive": "existing Figure 'grid' (rows 2, cols 2: ahid's own 'area' visual) + fields 'labels', 'rowLabels', 'colLabels'",
+   "samples": [
+    {
+     "id": "gen:ahid:0,5,2,1",
+     "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (5x + 2)². (5x + 2)² = 25x² + □x + 4. What number goes in the box? (It may be negative.)",
+     "answer": "20",
+     "data": {
+      "type": "grid",
+      "rows": 2,
+      "cols": 2,
+      "colLabels": [
+       "5x",
+       "2"
+      ],
+      "rowLabels": [
+       "5x",
+       "2"
+      ],
+      "labels": [
+       "25x²",
+       "10x",
+       "10x",
+       "4"
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:ahid:1,3,8,1",
+     "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (3x − 8)². (3x − 8)² = 9x² + □x + 64. What number goes in the box? (It may be negative.)",
+     "answer": "-48",
+     "data": {
+      "type": "grid",
+      "rows": 2,
+      "cols": 2,
+      "colLabels": [
+       "3x",
+       "−8"
+      ],
+      "rowLabels": [
+       "3x",
+       "−8"
+      ],
+      "labels": [
+       "9x²",
+       "−24x",
+       "−24x",
+       "64"
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:ahid:0,4,9,1",
+     "prompt": "Use the identity (a + b)² = a² + 2ab + b² to expand (4x + 9)². (4x + 9)² = 16x² + □x + 81. What number goes in the box? (It may be negative.)",
+     "answer": "72",
+     "data": {
+      "type": "grid",
+      "rows": 2,
+      "cols": 2,
+      "colLabels": [
+       "4x",
+       "9"
+      ],
+      "rowLabels": [
+       "4x",
+       "9"
+      ],
+      "labels": [
+       "16x²",
+       "36x",
+       "36x",
+       "81"
+      ]
+     },
+     "issues": []
+    },
+    {
+     "id": "gen:ahid:1,4,3,1",
+     "prompt": "Use the identity (a − b)² = a² − 2ab + b² to expand (4x − 3)². (4x − 3)² = 16x² + □x + 9. What number goes in the box? (It may be negative.)",
+     "answer": "-24",
+     "data": {
+      "type": "grid",
+      "rows": 2,
+      "cols": 2,
+      "colLabels": [
+       "4x",
+       "−3"
+      ],
+      "rowLabels": [
+       "4x",
+       "−3"
+      ],
+      "labels": [
+       "16x²",
+       "−12x",
+       "−12x",
+       "9"
+      ]
+     },
+     "issues": []
+    }
+   ],
+   "allFamilyPoolChecked": 0
+  }
+ ]
+}

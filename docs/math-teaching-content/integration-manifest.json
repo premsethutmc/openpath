@@ -217,7 +217,26 @@
      "grid"
     ],
     "missing": [
-     "labelled 2 × 2 area model (the grid visual has no cell labels)"
+     "labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels)"
+    ]
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": [
+     {
+      "need": "MQ1",
+      "role": "diagnostic",
+      "id": "gen:ahid:0,3,7,1",
+      "change": "pin typed form (already in the diagnostic partition, served as :mc)",
+      "currentlyServedAs": "diagnostic gen:ahid:0,3,7,1:mc"
+     },
+     {
+      "need": "MQ1",
+      "role": "retention",
+      "id": "gen:ahid:0,2,9,1",
+      "change": "partition override practice → retention, applied after form assignment",
+      "currentlyServedAs": "practice gen:ahid:0,2,9,1:mc"
+     }
     ]
    },
    "answerFormats": {
@@ -244,7 +263,7 @@
    "contract": [
     "B1 teaching scope: ahid_concept, fix_middle_not_doubled, fix_middle_sign are outside teachingScopeFor (main family expand); ineligible until the selector accepts 'ahid'",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
-    "visual: labelled 2 × 2 area model (the grid visual has no cell labels)"
+    "visual: labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels)"
    ],
    "missingQuestions": [
     "diagnostic case \"(px + q)², middle\": the family's diagnostic partition has no usable item (only ambiguous ones); candidate gen:ahid:0,4,9,1 is taken from the CHECK partition and must be re-partitioned or replaced at integration",
@@ -508,8 +527,12 @@
      "triangle"
     ],
     "missing": [
-     "triangle with an extended side and its exterior angle (the triangle visual draws interior angles only; the proposed 'exterior' field is not in the Visual contract)"
+     "triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex)"
     ]
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "integer",
@@ -536,7 +559,7 @@
    "contract": [
     "B1 teaching scope: ahext_concept, fix_third_interior, fix_adjacent_interior, fix_exterior_as_interior are outside teachingScopeFor (main family ahtri); ineligible until the selector accepts 'ahext'",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
-    "visual: triangle with an extended side and its exterior angle (the triangle visual draws interior angles only; the proposed 'exterior' field is not in the Visual contract)"
+    "visual: triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex)"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -771,8 +794,12 @@
      "angle"
     ],
     "missing": [
-     "two crossing lines with four angles (the angle visual draws one angle)"
+     "two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels)"
     ]
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "integer",
@@ -799,7 +826,7 @@
     "B1 teaching scope: afcross_concept, fix_opposite_as_linear, fix_neighbour_equal are outside teachingScopeFor (main family afpair); ineligible until the selector accepts 'afcross'",
     "B3 addresses: fix_opposite_as_linear — the platform reads addresses = null (family 'says' overridden); the gate would accept any established misconception",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
-    "visual: two crossing lines with four angles (the angle visual draws one angle)"
+    "visual: two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels)"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -1142,8 +1169,12 @@
      "grid"
     ],
     "missing": [
-     "perimeter outline (the grid visual shades the inside only)"
+     "perimeter outline (spec 09 V2: 'shape' rectangle + outline)"
     ]
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "integer",
@@ -1171,7 +1202,7 @@
     "B1 teaching scope: aeperar_concept, fix_perimeter_for_area, fix_area_for_perimeter, fix_two_sides are outside teachingScopeFor (main family aearea); ineligible until the selector accepts 'aeperar'",
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
     "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)",
-    "visual: perimeter outline (the grid visual shades the inside only)"
+    "visual: perimeter outline (spec 09 V2: 'shape' rectangle + outline)"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -1437,8 +1468,12 @@
      "grid"
     ],
     "missing": [
-     "two equal-length fraction strips side by side (two grid strips of the same width is a renderer decision)"
+     "two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes)"
     ]
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "fraction",
@@ -1462,7 +1497,7 @@
    "contract": [
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
     "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)",
-    "visual: two equal-length fraction strips side by side (two grid strips of the same width is a renderer decision)"
+    "visual: two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes)"
    ],
    "missingQuestions": [],
    "itemIssues": []
@@ -1648,6 +1683,18 @@
      "grid"
     ],
     "missing": []
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": [
+     {
+      "need": "MQ4",
+      "role": "transfer",
+      "id": "gen:fadd:1,2,5,1:w",
+      "change": "generator: add fadd.word(p) (one function; same answer)",
+      "currentlyServedAs": "practice gen:fadd:1,2,5,1:mc"
+     }
+    ]
    },
    "answerFormats": {
     "familyType": "fraction",
@@ -1892,6 +1939,10 @@
      "grid"
     ],
     "missing": []
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "exact",
@@ -2167,6 +2218,18 @@
      "table"
     ],
     "missing": []
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": [
+     {
+      "need": "MQ5",
+      "role": "recheck",
+      "id": "gen:akdice:4,5,0,4:mc",
+      "change": "selection only, after decision A (a recheck may repeat a diagnostic's answer)",
+      "currentlyServedAs": "check gen:akdice:4,5,0,4:mc"
+     }
+    ]
    },
    "answerFormats": {
     "familyType": "fraction",
@@ -2447,6 +2510,10 @@
     "used": [],
     "missing": []
    },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
+   },
    "answerFormats": {
     "familyType": "fraction",
     "forms": [
@@ -2649,6 +2716,18 @@
     "used": [],
     "missing": []
    },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": [
+     {
+      "need": "MQ2",
+      "role": "diagnostic contrast",
+      "id": "gen:akchance:8,8,0,0",
+      "change": "partition override check → diagnostic, typed, applied after form assignment",
+      "currentlyServedAs": "check gen:akchance:8,8,0,0:mc"
+     }
+    ]
+   },
    "answerFormats": {
     "familyType": "fraction",
     "forms": [
@@ -2672,7 +2751,7 @@
     "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
    ],
    "missingQuestions": [
-    "CONTRAST GAP: an equal-count bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) exists in the generator (gen:akchance:6,6,0,0, gen:akchance:8,8,0,0) but in NO served partition (diagnostic/practice/check/retention), and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Generator partition change for Codex."
+    "CONTRAST GAP: an equal-count two-colour bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) is served, but not as a typed diagnostic: gen:akchance:8,8,0,0 is served as :mc in the CHECK partition and gen:akchance:6,6,0,0 as :mc in the PRACTICE partition; no equal-count bag is in the diagnostic partition, and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Partition change for Codex: 09-MISSING-QUESTIONS-AND-VISUALS.md MQ2. (Corrected: an earlier revision said these bags were in no served partition; that check missed their :mc ids.)"
    ],
    "itemIssues": []
   },
@@ -2850,6 +2929,10 @@
    "visuals": {
     "used": [],
     "missing": []
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "fraction",
@@ -3076,6 +3159,10 @@
     ],
     "missing": []
    },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
+   },
    "answerFormats": {
     "familyType": "fraction",
     "forms": [
@@ -3272,6 +3359,10 @@
      "grid"
     ],
     "missing": []
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "integer",
@@ -3607,6 +3698,18 @@
     ],
     "missing": []
    },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": [
+     {
+      "need": "MQ6",
+      "role": "recheck",
+      "id": "gen:aadigit:39,1",
+      "change": "selection only, after decision A (a recheck may repeat a diagnostic's answer)",
+      "currentlyServedAs": "check gen:aadigit:39,1"
+     }
+    ]
+   },
    "answerFormats": {
     "familyType": "integer",
     "forms": [
@@ -3836,6 +3939,10 @@
     ],
     "missing": []
    },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
+   },
    "answerFormats": {
     "familyType": "fraction",
     "forms": [
@@ -4038,6 +4145,25 @@
      "numberline"
     ],
     "missing": []
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": [
+     {
+      "need": "MQ3",
+      "role": "recheck",
+      "id": "gen:addur:0,7",
+      "change": "partition override diagnostic → check, applied after form assignment",
+      "currentlyServedAs": "diagnostic gen:addur:0,7:mc"
+     },
+     {
+      "need": "MQ3",
+      "role": "retention",
+      "id": "gen:addur:0,291",
+      "change": "generator bounds: addur mode 0 x ≤ 299 (hashes into retention without override)",
+      "currentlyServedAs": "not served"
+     }
+    ]
    },
    "answerFormats": {
     "familyType": "tuple",
@@ -4267,6 +4393,10 @@
     "used": [],
     "missing": []
    },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
+   },
    "answerFormats": {
     "familyType": "integer",
     "forms": [
@@ -4483,6 +4613,10 @@
      "table"
     ],
     "missing": []
+   },
+   "proposed": {
+    "status": "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)",
+    "questions": []
    },
    "answerFormats": {
     "familyType": "integer",

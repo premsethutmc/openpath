@@ -78,6 +78,7 @@ Three more independent reviewer agents, all read-only. None had seen the work be
   - item reuse across roles;
   - `reusedExisting` empty although reuse was claimed.
 - **Not reproduced:** the reviewer's statement that `gen:akchance:6,6,0,0` "is not produced". `problemOf` and `pool` both return it; it is only outside every served partition.
+  - *Correction (missing-questions pass):* "outside every served partition" was itself wrong. The check compared bare ids with `phasePool`, which serves odd-indexed items as `:mc`. `gen:akchance:6,6,0,0:mc` is served in practice and `gen:akchance:8,8,0,0:mc` in check; neither is in the diagnostic partition (09 MQ2).
 
 ## Author fixes after passes 3 and B2, then a confirmation pass
 

@@ -18,11 +18,20 @@ const P = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))!;
 const form = (id: string) => (id.endsWith(":mc") ? "mc" : id.endsWith(":w") ? "word" : "typed");
 const VISUAL_TYPES = new Set(["strips", "array", "dots", "tenframe", "blocks", "numberline", "clock", "coins", "bars", "pictograph", "table", "shape", "angle", "circle", "grid", "triangle", "plane", "pie", "balance", "solid"]);
 const MISSING_VISUALS: Record<string, string[]> = {
-  "TP-NUM-01": ["two equal-length fraction strips side by side (two grid strips of the same width is a renderer decision)"],
-  "TP-MEA-01": ["perimeter outline (the grid visual shades the inside only)"],
-  "TP-GEO-01": ["triangle with an extended side and its exterior angle (the triangle visual draws interior angles only; the proposed 'exterior' field is not in the Visual contract)"],
-  "TP-GEO-02": ["two crossing lines with four angles (the angle visual draws one angle)"],
-  "TP-ALG-01": ["labelled 2 × 2 area model (the grid visual has no cell labels)"],
+  "TP-NUM-01": ["two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes)"],
+  "TP-MEA-01": ["perimeter outline (spec 09 V2: 'shape' rectangle + outline)"],
+  "TP-GEO-01": ["triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex)"],
+  "TP-GEO-02": ["two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels)"],
+  "TP-ALG-01": ["labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels)"],
+};
+// PROPOSED questions (09, missing-questions.json): kept apart from the verified served items; never counted as served
+const PROPOSED: Record<string, { need: string; role: string; id: string; change: string }[]> = {
+  "TP-ALG-01": [{ need: "MQ1", role: "diagnostic", id: "gen:ahid:0,3,7,1", change: "pin typed form (already in the diagnostic partition, served as :mc)" }, { need: "MQ1", role: "retention", id: "gen:ahid:0,2,9,1", change: "partition override practice → retention, applied after form assignment" }],
+  "TP2-CH-BAG": [{ need: "MQ2", role: "diagnostic contrast", id: "gen:akchance:8,8,0,0", change: "partition override check → diagnostic, typed, applied after form assignment" }],
+  "TP2-REG-TIME": [{ need: "MQ3", role: "recheck", id: "gen:addur:0,7", change: "partition override diagnostic → check, applied after form assignment" }, { need: "MQ3", role: "retention", id: "gen:addur:0,291", change: "generator bounds: addur mode 0 x ≤ 299 (hashes into retention without override)" }],
+  "TP-NUM-02": [{ need: "MQ4", role: "transfer", id: "gen:fadd:1,2,5,1:w", change: "generator: add fadd.word(p) (one function; same answer)" }],
+  "TP-PRO-01": [{ need: "MQ5", role: "recheck", id: "gen:akdice:4,5,0,4:mc", change: "selection only, after decision A (a recheck may repeat a diagnostic's answer)" }],
+  "TP2-PV-DIGIT": [{ need: "MQ6", role: "recheck", id: "gen:aadigit:39,1", change: "selection only, after decision A (a recheck may repeat a diagnostic's answer)" }],
 };
 
 // exposure in existing teaching: every question shown solved (screen instance) or used as guided/check by an EXISTING module strategy
@@ -103,6 +112,7 @@ for (const p of pkgs) {
     contrast,
     items,
     visuals: { used: widgets, missing: MISSING_VISUALS[p.id] ?? [] },
+    proposed: { status: "PROPOSED, not served or integrated (09-MISSING-QUESTIONS-AND-VISUALS.md, missing-questions.json)", questions: (PROPOSED[p.id] ?? []).map((x) => ({ ...x, currentlyServedAs: (["diagnostic", "check", "retention", "practice"] as const).flatMap((ph) => phasePool(p.family, ph).filter((y) => y === x.id.replace(/:(mc|w)$/, "") || y === `${x.id.replace(/:(mc|w)$/, "")}:mc`).map((y) => `${ph} ${y}`))[0] ?? "not served" })) },
     answerFormats: { familyType: def.type, forms: [...new Set(items.map((i) => i.form))], mcAvailable: !!def.mc, wordAvailable: !!def.word, graderSupported: true, diagnosisReaderSupported: targets.every((t: any) => t.diagnosable) },
     evidence: p.integration.spec.evidence,
     newStrategies: p.integration.strategies.map((s: any) => s.strategy.id),

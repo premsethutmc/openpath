@@ -16,8 +16,9 @@ Every package is a **review candidate**; no educator approval is claimed.
 | 6 | [06-BATCH-2.md](06-BATCH-2.md) | Batch 2: five instructional patterns (regroup, scale/key, equal parts, place value, chance) across measurement, statistics, number and probability; nine family packages. |
 | 7 | [07-PATTERN-MAP.md](07-PATTERN-MAP.md) | Missing teaching grouped by reusable instructional pattern, ranked by impact, breadth and ease; the next batch (on hold: finish the 18 first). |
 | 8 | [08-INTEGRATION-MANIFEST.md](08-INTEGRATION-MANIFEST.md) | **Start here for integration.** For each of the 18 packages: family/parameter scope, misconception ids, contrast requirements, item roles reconciled with the served pools, visuals, answer formats, unresolved contract requirements, and readiness category. |
+| 9 | [09-MISSING-QUESTIONS-AND-VISUALS.md](09-MISSING-QUESTIONS-AND-VISUALS.md) | **Proposed, not served.** Specifications for the six missing questions (existing generator, parameters, partition/role, hand-checked answers, anticipated wrong answers, ambiguity, and what must change) and the five missing visuals (existing primitives plus minimal renderer fields). |
 
-Data: `integration-manifest.json`, `review-status.json`, `inventory.json`, `inventory-summary.json`, `batch-1/*`, `batch-2/*` (packages, `PAT-*` pattern files, `validation.json`).
+Data: `integration-manifest.json`, `missing-questions.json` (proposals only), `review-status.json`, `inventory.json`, `inventory-summary.json`, `batch-1/*`, `batch-2/*` (packages, `PAT-*` pattern files, `validation.json`).
 
 Reproduce (from `frontend/`, with its `node_modules`):
 
@@ -26,5 +27,6 @@ node --import tsx ../docs/math-teaching-content/tools/inventory.mts ../docs/math
 node --import tsx ../docs/math-teaching-content/tools/build.mts ../docs/math-teaching-content       # both batches + checks (~3 min)
 node --import tsx ../docs/math-teaching-content/tools/manifest.mts ../docs/math-teaching-content    # pool reconciliation -> integration-manifest.json
 python3 ../docs/math-teaching-content/tools/manifest-md.py ../docs/math-teaching-content            # 08-INTEGRATION-MANIFEST.md (uses review-status.json)
+node --import tsx ../docs/math-teaching-content/tools/question-specs.mts ../docs/math-teaching-content # 09 data: missing-questions.json (read-only, ~1 min)
 python3 ../docs/math-teaching-content/tools/patterns.py ../docs/math-teaching-content               # pattern ranking rows
 ```

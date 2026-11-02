@@ -42,7 +42,7 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** (px + q)², middle `gen:ahid:0,4,9,1` (check); (px − q)², middle `gen:ahid:1,4,3,1` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: ahid has no working contract; an expansion written as working is not examined (answer-level only).
-- **Visuals:** used `grid`; missing: labelled 2 × 2 area model (the grid visual has no cell labels).
+- **Visuals:** used `grid`; missing: labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels).
 - **New strategies:** `ahid_concept`, `fix_middle_not_doubled`, `fix_middle_sign`.
 
 | Role | Question | Partition | Form | Reconciliation |
@@ -69,11 +69,18 @@ Shared runtime requirements (Codex):
 
 **Missing questions:** diagnostic case "(px + q)², middle": the family's diagnostic partition has no usable item (only ambiguous ones); candidate gen:ahid:0,4,9,1 is taken from the CHECK partition and must be re-partitioned or replaced at integration; delayed checks: no usable retention item for case "(px + q)², middle" (another case's item stands in); binomial delayed checks: 14 of 54 retention items ask the cross term; 3 of them are (px + q)² and 0 of those avoid a copied-number reading. The positive-square delayed check is MISSING: the retention partition has no unambiguous (px + q)² cross-term item, so the delayed check of the title skill is not covered (generator partition change: Codex)..
 
+**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+
+| Need | Role | Proposed question | Served today as | Change |
+|---|---|---|---|---|
+| MQ1 | diagnostic | `gen:ahid:0,3,7,1` | diagnostic gen:ahid:0,3,7,1:mc | pin typed form (already in the diagnostic partition, served as :mc) |
+| MQ1 | retention | `gen:ahid:0,2,9,1` | practice gen:ahid:0,2,9,1:mc | partition override practice → retention, applied after form assignment |
+
 **Unresolved contract requirements (Codex):**
 
 - B1 teaching scope: ahid_concept, fix_middle_not_doubled, fix_middle_sign are outside teachingScopeFor (main family expand); ineligible until the selector accepts 'ahid'
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
-- visual: labelled 2 × 2 area model (the grid visual has no cell labels)
+- visual: labelled 2 × 2 area model (spec 09 V5: 'grid' + labels, rowLabels, colLabels)
 
 **Independent review:** Pass 4: no outstanding finding. The (px + q)² cross-term delayed check is a recorded missing question.
 
@@ -84,7 +91,7 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** find the exterior angle `gen:ahext:51,21,0` (diagnostic); find an interior opposite angle `gen:ahext:32,96,1` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: ahext has a geometry task (geometry-task.ts) for the foundation's geometry working adapter; the Python reasoner has NO exterior-angle rule (G5 R07), so a citation of the exterior-angle theorem is not verifiable; the 'via the third angle' route uses supported rules (triangle-sum, straight-line).
-- **Visuals:** used `triangle`; missing: triangle with an extended side and its exterior angle (the triangle visual draws interior angles only; the proposed 'exterior' field is not in the Visual contract).
+- **Visuals:** used `triangle`; missing: triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex).
 - **New strategies:** `ahext_concept`, `fix_third_interior`, `fix_adjacent_interior`, `fix_exterior_as_interior`.
 
 | Role | Question | Partition | Form | Reconciliation |
@@ -118,7 +125,7 @@ Shared runtime requirements (Codex):
 
 - B1 teaching scope: ahext_concept, fix_third_interior, fix_adjacent_interior, fix_exterior_as_interior are outside teachingScopeFor (main family ahtri); ineligible until the selector accepts 'ahext'
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
-- visual: triangle with an extended side and its exterior angle (the triangle visual draws interior angles only; the proposed 'exterior' field is not in the Visual contract)
+- visual: triangle with an extended side and its exterior angle (spec 09 V3: 'triangle' + exterior + notToScale; supersedes the provisional data, which put the second opposite angle on the wrong vertex)
 
 **Independent review:** Pass 4: no outstanding finding.
 
@@ -129,7 +136,7 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** vertically opposite `gen:afcross:105,0` (diagnostic); adjacent `gen:afcross:126,1` (diagnostic); other three `gen:afcross:84,2` (diagnostic). Rule: A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: afcross modes 0/1 have a geometry task (foundation adapter); mode 2 (other three) has none (geometry-task.ts excludes b === 2). G5 R06: a vertically-opposite citation for a MEASURE was rejected by the reasoner; route through straight-line steps is supported.
-- **Visuals:** used `angle`; missing: two crossing lines with four angles (the angle visual draws one angle).
+- **Visuals:** used `angle`; missing: two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels).
 - **New strategies:** `afcross_concept`, `fix_opposite_as_linear`, `fix_neighbour_equal`.
 
 | Role | Question | Partition | Form | Reconciliation |
@@ -162,7 +169,7 @@ Shared runtime requirements (Codex):
 - B1 teaching scope: afcross_concept, fix_opposite_as_linear, fix_neighbour_equal are outside teachingScopeFor (main family afpair); ineligible until the selector accepts 'afcross'
 - B3 addresses: fix_opposite_as_linear — the platform reads addresses = null (family 'says' overridden); the gate would accept any established misconception
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
-- visual: two crossing lines with four angles (the angle visual draws one angle)
+- visual: two crossing lines with four angles (spec 09 V4: 'angle' + cross + labels)
 
 **Independent review:** Pass 4: no outstanding finding.
 
@@ -173,7 +180,7 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** covering (area), first context `gen:aeperar:0,3,15,2` (diagnostic); going round (perimeter), first context `gen:aeperar:1,4,11,2` (diagnostic); covering (area), another context `gen:aeperar:0,4,16,0` (diagnostic); going round (perimeter), another context `gen:aeperar:1,5,7,2` (diagnostic). Rule: A 'two-sides' answer (length + width) on the covering item and on the going-round item counts as two different errors (adding instead of multiplying; adding only half the sides), so the pair must not establish one misconception. A learner who multiplies on both items is right on the covering item and is suspected of area-for-perimeter only; one who adds all four sides on both is suspected of perimeter-for-area only. Trigger conditions: `fix_perimeter_for_area`: a response pattern below with establishes = true; patterns with competing explanations must not establish it; `fix_area_for_perimeter`: a response pattern below with establishes = true; patterns with competing explanations must not establish it; `fix_two_sides`: a response pattern below with establishes = true; patterns with competing explanations must not establish it.
 - **Answer formats:** family type `integer`; forms used: typed, mc, word; multiple choice available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `grid`; missing: perimeter outline (the grid visual shades the inside only).
+- **Visuals:** used `grid`; missing: perimeter outline (spec 09 V2: 'shape' rectangle + outline).
 - **New strategies:** `aeperar_concept`, `fix_perimeter_for_area`, `fix_area_for_perimeter`, `fix_two_sides`.
 
 | Role | Question | Partition | Form | Reconciliation |
@@ -210,7 +217,7 @@ Shared runtime requirements (Codex):
 - B1 teaching scope: aeperar_concept, fix_perimeter_for_area, fix_area_for_perimeter, fix_two_sides are outside teachingScopeFor (main family aearea); ineligible until the selector accepts 'aeperar'
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
 - policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)
-- visual: perimeter outline (the grid visual shades the inside only)
+- visual: perimeter outline (spec 09 V2: 'shape' rectangle + outline)
 
 **Independent review:** Pass 4: no outstanding finding.
 
@@ -221,7 +228,7 @@ Shared runtime requirements (Codex):
 - **Diagnostic contrast:** same top, asks greater `gen:adfcmp:1,1,8,2,0` (diagnostic); same top, asks smaller `gen:adfcmp:1,7,12,11,1` (diagnostic); same bottom, asks greater (contrast) `gen:adfcmp:0,11,1,10,0` (diagnostic); same bottom, asks smaller (contrast) `gen:adfcmp:0,11,6,3,1` (diagnostic). Rule: Read the four items together (response patterns below). Two same-top matches establish bigger-bottom-bigger ONLY when both same-bottom contrast items are right; if the contrast items are wrong too, a reversal explains all the answers and nothing is established. misconception-evidence@1 today would establish it from the two same-top matches alone; the contrast condition is a policy request for Codex (05). Trigger conditions: `fix_bigger_bottom_bigger`: a response pattern below with establishes = true; patterns with competing explanations must not establish it.
 - **Answer formats:** family type `fraction`; forms used: typed, word; multiple choice not available; everyday form available. Trusted grader: supported. Diagnosis reader: supported.
 - **Evidence:** answer evidence comes from grading-decision@1 correctness from the trusted server grader (every item here is gradable). Method evidence: none: no method evidence can be recorded; a correct answer never implies the method.
-- **Visuals:** used `grid`; missing: two equal-length fraction strips side by side (two grid strips of the same width is a renderer decision).
+- **Visuals:** used `grid`; missing: two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes).
 - **New strategies:** `adfcmp_concept`, `fix_bigger_bottom_bigger`.
 
 | Role | Question | Partition | Form | Reconciliation |
@@ -251,7 +258,7 @@ Shared runtime requirements (Codex):
 
 - worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family
 - policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)
-- visual: two equal-length fraction strips side by side (two grid strips of the same width is a renderer decision)
+- visual: two equal-length fraction strips (spec 09 V1: 'strips' widget + bottomShaded, and a 'strips' case in Figure; the provisional two-grid data draws unequal wholes)
 
 **Independent review:** Pass 4: no outstanding mathematical/instructional finding.
 
@@ -284,6 +291,12 @@ Shared runtime requirements (Codex):
 | retention (delayed) | `gen:fadd:5,3,11,1` | retention | typed | served, fresh, unexposed |
 
 **Missing questions:** fadd has no word (transfer) form: transfer candidates cannot be drawn from the generator; transfer is MISSING CONTENT (authored candidates below are text only, unverified by the grader).; transfer: the family has no word (everyday) form; authored transfer text is NOT gradable.
+
+**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+
+| Need | Role | Proposed question | Served today as | Change |
+|---|---|---|---|---|
+| MQ4 | transfer | `gen:fadd:1,2,5,1:w` | practice gen:fadd:1,2,5,1:mc | generator: add fadd.word(p) (one function; same answer) |
 
 **Unresolved contract requirements (Codex):**
 
@@ -373,6 +386,12 @@ Shared runtime requirements (Codex):
 
 **Missing questions:** rechecks: no usable check item for case "different-size spinners, a total made by several pairs" (another case's item stands in).
 
+**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+
+| Need | Role | Proposed question | Served today as | Change |
+|---|---|---|---|---|
+| MQ5 | recheck | `gen:akdice:4,5,0,4:mc` | check gen:akdice:4,5,0,4:mc | selection only, after decision A (a recheck may repeat a diagnostic's answer) |
+
 **Unresolved contract requirements (Codex):**
 
 - B1 teaching scope: akdice_concept, fix_totals_equally_likely, fix_order_ignored, fix_added_sides are outside teachingScopeFor (main family akss); ineligible until the selector accepts 'akdice'
@@ -450,7 +469,13 @@ Shared runtime requirements (Codex):
 | retention (delayed) | `gen:akchance:7,9,1,0:mc` | retention | mc | served, fresh, unexposed |
 | retention (delayed) | `gen:akchance:5,7,5,1` | retention | typed | served, fresh, unexposed |
 
-**Missing questions:** CONTRAST GAP: an equal-count bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) exists in the generator (gen:akchance:6,6,0,0, gen:akchance:8,8,0,0) but in NO served partition (diagnostic/practice/check/retention), and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Generator partition change for Codex..
+**Missing questions:** CONTRAST GAP: an equal-count two-colour bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) is served, but not as a typed diagnostic: gen:akchance:8,8,0,0 is served as :mc in the CHECK partition and gen:akchance:6,6,0,0 as :mc in the PRACTICE partition; no equal-count bag is in the diagnostic partition, and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Partition change for Codex: 09-MISSING-QUESTIONS-AND-VISUALS.md MQ2. (Corrected: an earlier revision said these bags were in no served partition; that check missed their :mc ids.).
+
+**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+
+| Need | Role | Proposed question | Served today as | Change |
+|---|---|---|---|---|
+| MQ2 | diagnostic contrast | `gen:akchance:8,8,0,0` | check gen:akchance:8,8,0,0:mc | partition override check → diagnostic, typed, applied after form assignment |
 
 **Unresolved contract requirements (Codex):**
 
@@ -603,6 +628,12 @@ Shared runtime requirements (Codex):
 
 **Missing questions:** rechecks: no usable check item for case "how many tens" (another case's item stands in).
 
+**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+
+| Need | Role | Proposed question | Served today as | Change |
+|---|---|---|---|---|
+| MQ6 | recheck | `gen:aadigit:39,1` | check gen:aadigit:39,1 | selection only, after decision A (a recheck may repeat a diagnostic's answer) |
+
 **Unresolved contract requirements (Codex):**
 
 - B1 teaching scope: aadigit_concept, fix_face_value, fix_value_not_count are outside teachingScopeFor (main family aatens); ineligible until the selector accepts 'aadigit'
@@ -680,6 +711,13 @@ Shared runtime requirements (Codex):
 | retention (delayed) | `gen:addur:0,26` | retention | typed | served, fresh, unexposed |
 
 **Missing questions:** rechecks: no usable check item for case "minutes add to 100 or more" (another case's item stands in); delayed checks: no usable retention item for case "minutes add to 100 or more" (another case's item stands in).
+
+**Proposed questions (NOT served; specification in [09](09-MISSING-QUESTIONS-AND-VISUALS.md)):**
+
+| Need | Role | Proposed question | Served today as | Change |
+|---|---|---|---|---|
+| MQ3 | recheck | `gen:addur:0,7` | diagnostic gen:addur:0,7:mc | partition override diagnostic → check, applied after form assignment |
+| MQ3 | retention | `gen:addur:0,291` | not served | generator bounds: addur mode 0 x ≤ 299 (hashes into retention without override) |
 
 **Unresolved contract requirements (Codex):**
 

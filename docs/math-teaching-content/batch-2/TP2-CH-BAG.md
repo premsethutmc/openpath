@@ -114,7 +114,7 @@ The objects themselves (existing `Strategy` / `ExplanationRecord` shapes) are in
 ## Uncertainties
 
 - akchance is the seed: worked_steps, scale_words and spot_the_mistake (odds) exist and are REUSED; this package adds colours-equal only.
-- CONTRAST GAP: an equal-count bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) exists in the generator (gen:akchance:6,6,0,0, gen:akchance:8,8,0,0) but in NO served partition (diagnostic/practice/check/retention), and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Generator partition change for Codex.
+- CONTRAST GAP: an equal-count two-colour bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) is served, but not as a typed diagnostic: gen:akchance:8,8,0,0 is served as :mc in the CHECK partition and gen:akchance:6,6,0,0 as :mc in the PRACTICE partition; no equal-count bag is in the diagnostic partition, and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Partition change for Codex: 09-MISSING-QUESTIONS-AND-VISUALS.md MQ2. (Corrected: an earlier revision said these bags were in no served partition; that check missed their :mc ids.)
 - Family prompt grammar: '1 red and 1 blue marbles' (plural with 1); wording only, recorded in 05.
 
 ## Validation: 14/14 items pass; whole-pool oracle + alternatives agreement 317/317

@@ -43,6 +43,6 @@ Five families answer from a figure: the pictograph or table, bars, grids, blocks
 
 ## Recorded gaps inside batch 2
 
-- `akchance`: the equal-colour-count contrast item exists only outside every served partition (`gen:akchance:6,6,0,0`, `gen:akchance:8,8,0,0`). The only partitioned candidate, `gen:akchance:1,1,0,0`, is ambiguous because two errors give the same value. PAT-CHANCE therefore uses a marbles + balls cross-check, and records that "not chance" cannot be shown.
+- `akchance`: no equal-colour-count contrast item is in the **diagnostic** partition. `gen:akchance:8,8,0,0` and `gen:akchance:6,6,0,0` are served, but only as `:mc` in the check and practice partitions. (Corrected: an earlier revision said they were outside every served partition; that check missed their `:mc` ids.) `gen:akchance:1,1,0,0` (check, typed) is ambiguous because two errors give the same value. PAT-CHANCE therefore uses a marbles + balls cross-check, and records that "not chance" cannot be shown yet. 09 MQ2 specifies the partition change.
 - `aadigit`: numbers with two equal digits are excluded, because "the value of the digit 1 in 11" is ambiguous.
 - Pictographs: no-key (reading) is already taught. The package adds one-each (drawing) only.
