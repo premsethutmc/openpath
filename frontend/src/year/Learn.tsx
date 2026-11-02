@@ -247,7 +247,9 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
 }
 
 function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
-  if (w.type !== "strips" && w.type !== "array") return <Figure v={w} />;
+  // visuals@2: strips with their own second-row shading (or row labels) are drawn by Figure (equal wholes, independent shading);
+  // the legacy strips below are unchanged
+  if ((w.type !== "strips" && w.type !== "array") || (w.type === "strips" && (w.bottomShaded !== undefined || w.labels !== undefined))) return <Figure v={w} />;
   if (w.type === "strips") {
     const row = (n: number, shaded: number) => (
       <div className="strip" style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}>

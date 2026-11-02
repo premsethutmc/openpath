@@ -10,6 +10,101 @@ const arr = <T,>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);
 const str = (v: unknown, d = "") => (typeof v === "string" ? v : typeof v === "number" ? String(v) : d);
 const minus = (n: number) => (n < 0 ? `−${-n}` : String(n));
 
+
+/** visuals@2: optional fields on existing types (strips, shape outline, triangle exterior angle, crossing lines, labelled grid).
+ * Each is checked before it is drawn: data that is impossible or would mislead (unequal sides on a rectangle, an exterior
+ * angle that is not the sum of its opposite angles, a crossing-line label that is not θ or 180° − θ, labels that do not fit
+ * the grid) is NOT drawn; the figure then says the picture is not available instead of showing a wrong one. */
+const degOf = (s: unknown): number | null => { const m = /^\s*(\d+(?:\.\d+)?)\s*°?\s*$/.exec(str(s)); return m ? Number(m[1]) : null; };
+const intIn = (v: unknown, lo: number, hi: number) => typeof v === "number" && Number.isInteger(v) && v >= lo && v <= hi;
+const strList = (v: unknown, n: number) => Array.isArray(v) && v.length === n && v.every((x) => typeof x === "string" || typeof x === "number");
+type Strip = { parts: number; shaded: number; label: string };
+/** the two strips of a strips visual: explicit bottomShaded, or (legacy) the equivalent shading only when it is exact */
+function stripsOf(v: V): Strip[] | null {
+  const top = v.top ?? 2, bottom = v.bottom ?? 4, shaded = v.shaded ?? 1;
+  if (!intIn(top, 1, 60) || !intIn(bottom, 1, 60) || !intIn(shaded, 0, top as number)) return null;
+  const t = top as number, b = bottom as number, sh = shaded as number;
+  let bs: number;
+  if (v.bottomShaded !== undefined) { if (!intIn(v.bottomShaded, 0, b)) return null; bs = v.bottomShaded as number; }
+  else { if ((sh * b) % t !== 0) return null; bs = (sh * b) / t; }
+  const labels = v.labels === undefined ? null : strList(v.labels, 2) ? arr<string | number>(v.labels).map(String) : undefined;
+  if (labels === undefined) return null;
+  // a label written as a fraction must be the fraction that row shows (n shaded of d parts), never another one
+  const frac = (t: string) => /^\s*(\d+)\s*\/\s*(\d+)\s*$/.exec(t);
+  const rowsDrawn: [number, number][] = [[sh, t], [bs, b]];
+  if (labels && labels.some((l, i) => { const m = frac(l); return m ? Number(m[1]) !== rowsDrawn[i][0] || Number(m[2]) !== rowsDrawn[i][1] : false; })) return null;
+  return [{ parts: t, shaded: sh, label: labels?.[0] ?? "" }, { parts: b, shaded: bs, label: labels?.[1] ?? "" }];
+}
+/** a rectangle/square outline's four side labels must agree with the shape (opposite sides equal; a square's all equal) */
+function shapeOk(v: V): boolean {
+  const L = arr<string | number>(v.lengths).map((x) => String(x).trim());
+  if (!L.length) return true;
+  // only labelled sides are compared (a figure may label some sides and leave others blank)
+  const eq = (a: string, b: string) => !a || !b || a === b;
+  if (str(v.kind) === "rectangle" && L.length === 4) return eq(L[0], L[2]) && eq(L[1], L[3]);
+  if (str(v.kind) === "square" && L.length === 4) return L.every((x) => eq(x, L[0]) && L.every((y) => eq(x, y)));
+  return true;
+}
+type Ext = { at: 1; label: string };
+/** a triangle with one side extended: the exterior angle is at vertex 1 (side 0→1 extended); numeric labels must fit together */
+function exteriorOk(v: V): Ext | null {
+  const e = v.exterior as { at?: unknown; label?: unknown } | undefined;
+  if (!e || typeof e !== "object" || e.at !== 1 || (typeof e.label !== "string" && typeof e.label !== "number")) return null;
+  const A = arr<unknown>(v.angles);
+  if (A.length && A.length !== 3) return null;
+  const a0 = [0, 1, 2].map((i) => (A[i] === undefined || str(A[i]).trim() === "" || str(A[i]).trim() === "?" ? undefined : degOf(A[i])));
+  if (a0.some((x) => x === null)) return null; // a label that is not a number of degrees, "?" or empty
+  const a = a0 as (number | undefined)[];
+  const ext = str(e.label).trim() === "?" ? undefined : degOf(e.label);
+  if (ext === null) return null;
+  const known = a.filter((x): x is number => x !== undefined);
+  if (known.some((x) => x <= 0 || x >= 180) || (ext !== undefined && (ext <= 0 || ext >= 180))) return null;
+  if (known.reduce((p, x) => p + x, 0) >= 180 + (known.length === 3 ? 1e-9 : 0) || (known.length === 3 && Math.abs(known[0] + known[1] + known[2] - 180) > 1e-9)) return null;
+  if (ext !== undefined && a[0] !== undefined && a[2] !== undefined && Math.abs(ext - a[0] - a[2]) > 1e-9) return null; // exterior = sum of the two opposite angles
+  if (ext !== undefined && a[1] !== undefined && Math.abs(ext + a[1] - 180) > 1e-9) return null; // exterior + adjacent interior = 180
+  if (ext !== undefined && (a[0] !== undefined && a[0] >= ext || a[2] !== undefined && a[2] >= ext)) return null;
+  return { at: 1, label: str(e.label) };
+}
+/** two crossing lines: θ strictly between 0° and 180°; four labels; a numeric label must be θ (angles 0, 2) or 180° − θ (1, 3) */
+function crossOk(v: V): string[] | null {
+  const d = num(v.deg, NaN);
+  // narrower than 15° (or wider than 165°) the labels cannot sit between the lines: not drawn rather than drawn unreadably
+  if (!(d >= 15 && d <= 165)) return null;
+  const L = v.labels === undefined ? ["", "", "", ""] : strList(v.labels, 4) ? arr<string | number>(v.labels).map(String) : null;
+  if (!L) return null;
+  for (let i = 0; i < 4; i++) { const t = L[i].trim(); if (t === "" || t === "?") continue; const x = degOf(t); if (x === null || Math.abs(x - (i % 2 === 0 ? d : 180 - d)) > 1e-9) return null; }
+  return L;
+}
+/** a labelled grid (area model): one label per cell, one per row and column; with the same row and column labels (a square
+ * of side a + b) the model is symmetric, so cell (i, j) and cell (j, i) must carry the same label */
+function gridLabelsOk(v: V): { cells: string[]; rows: string[]; cols: string[] } | null {
+  const R = num(v.rows, 3), C = num(v.cols, 4);
+  if (!intIn(R, 1, 12) || !intIn(C, 1, 12)) return null;
+  const cells = v.labels === undefined ? [] : strList(v.labels, R * C) ? arr<string | number>(v.labels).map(String) : null;
+  const rows = v.rowLabels === undefined ? [] : strList(v.rowLabels, R) ? arr<string | number>(v.rowLabels).map(String) : null;
+  const cols = v.colLabels === undefined ? [] : strList(v.colLabels, C) ? arr<string | number>(v.colLabels).map(String) : null;
+  if (!cells || !rows || !cols) return null;
+  if (cells.length && rows.length && cols.length && R === C && rows.every((x, i) => x === cols[i])) for (let i = 0; i < R; i++) for (let j = 0; j < C; j++) if (cells[i * C + j] !== cells[j * C + i]) return null;
+  // an area model whose side and cell labels are all monomials (25x², −24x, ab, 4) must have cell = row label × column label
+  if (cells.length && rows.length && cols.length) {
+    const P = [...rows, ...cols, ...cells].map(mono);
+    if (P.every((x) => x !== null)) for (let i = 0; i < R; i++) for (let j = 0; j < C; j++) if (!sameMono(mul(P[i]!, P[R + j]!), P[R + C + i * C + j]!)) return null;
+  }
+  return { cells, rows, cols };
+}
+const NA = "Picture not available: its numbers do not fit together.";
+/** a monomial label: optional sign and whole-number coefficient, then letters each with an optional ² or ³ (25x², −24x, ab, 4) */
+type Mono = { c: number; v: Record<string, number> };
+function mono(t: string): Mono | null {
+  const m = /^\s*([−-])?\s*(\d+)?((?:[a-z][²³]?)*)\s*$/.exec(t);
+  if (!m || (!m[2] && !m[3])) return null;
+  const v: Record<string, number> = {};
+  for (const [, x, p] of m[3].matchAll(/([a-z])([²³]?)/g)) v[x] = (v[x] ?? 0) + (p === "²" ? 2 : p === "³" ? 3 : 1);
+  return { c: (m[1] ? -1 : 1) * (m[2] ? Number(m[2]) : 1), v };
+}
+const mul = (a: Mono, b: Mono): Mono => { const v = { ...a.v }; for (const [k, p] of Object.entries(b.v)) v[k] = (v[k] ?? 0) + p; return { c: a.c * b.c, v }; };
+const sameMono = (a: Mono, b: Mono) => a.c === b.c && Object.keys({ ...a.v, ...b.v }).every((k) => (a.v[k] ?? 0) === (b.v[k] ?? 0));
+
 export function describe(v: V): string {
   switch (v.type) {
     case "dots":
@@ -31,15 +126,40 @@ export function describe(v: V): string {
     case "table":
       return `A table: ${arr<string>(v.head).join(", ")}; ${arr<(string | number)[]>(v.rows).map((r) => r.join(", ")).join("; ")}`;
     case "shape":
-      return `A ${str(v.name) || `${num(v.sides)}-sided shape`}${arr(v.lengths).length ? ` with sides ${arr(v.lengths).join(", ")}` : ""}`;
-    case "angle":
-      return "An angle (estimate or measure it)";
+      if (!shapeOk(v)) return NA;
+      return `A ${str(v.name) || (v.outline && str(v.kind) ? str(v.kind) : `${num(v.sides)}-sided shape`)}${arr(v.lengths).length ? ` with sides ${arr(v.lengths).join(", ")}` : ""}${v.outline ? ", drawn as an outline" : ""}`;
+    case "strips": {
+      if (v.bottomShaded === undefined && v.labels === undefined) return "A picture"; // legacy strips keep their existing (Learn.tsx) path
+      const S = stripsOf(v);
+      if (!S) return NA;
+      const one = (x: Strip) => `${x.parts} equal part${x.parts === 1 ? "" : "s"} with ${x.shaded} shaded${x.label ? ` (${x.label})` : ""}`;
+      return `Two strips of the same length, each one whole: the first in ${one(S[0])}, the second in ${one(S[1])}`;
+    }
+    case "angle": {
+      if (v.cross !== true) return "An angle (estimate or measure it)";
+      const L = crossOk(v);
+      if (!L) return NA;
+      const name = ["the first angle", "the angle next to it", "the angle opposite the first", "the other angle next to the first"];
+      const said = L.map((t, i) => (t.trim() === "?" ? `${name[i]} is marked ?` : t.trim() ? `${name[i]} is ${t.trim()}` : "")).filter(Boolean);
+      return `Two straight lines crossing at a point, making four angles${said.length ? `: ${said.join("; ")}` : ""}`;
+    }
     case "circle":
       return `A circle${v.radius !== undefined ? ` with radius ${str(v.radius)}` : ""}${v.diameter !== undefined ? ` with diameter ${str(v.diameter)}` : ""}${v.sector !== undefined ? (v.estimate ? ", with a shaded angle (estimate it from the picture)" : `, a sector of ${num(v.sector)}°`) : ""}`;
-    case "grid":
-      return `A grid of ${num(v.rows)} rows and ${num(v.cols)} columns${num(v.shaded) ? ` with ${num(v.shaded)} squares shaded` : ""}`;
-    case "triangle":
-      return `A triangle${arr(v.sides).length ? ` with sides ${arr(v.sides).join(", ")}` : ""}${arr(v.angles).length ? ` and angles ${arr(v.angles).join(", ")}` : ""}${v.right ? ", right-angled" : ""}`;
+    case "grid": {
+      const base = `A grid of ${num(v.rows)} rows and ${num(v.cols)} columns${num(v.shaded) ? ` with ${num(v.shaded)} squares shaded` : ""}`;
+      if (v.labels === undefined && v.rowLabels === undefined && v.colLabels === undefined) return base;
+      const G = gridLabelsOk(v);
+      if (!G) return NA;
+      return `${base}${G.cols.length ? `; the top side is labelled ${G.cols.join(" and ")}` : ""}${G.rows.length ? `; the left side is labelled ${G.rows.join(" and ")}` : ""}${G.cells.some((c) => c.trim()) ? `; the parts, row by row, are ${G.cells.map((c) => c.trim() || "unlabelled").join(", ")}` : ""}`;
+    }
+    case "triangle": {
+      if (v.exterior === undefined) return `A triangle${arr(v.sides).length ? ` with sides ${arr(v.sides).join(", ")}` : ""}${arr(v.angles).length ? ` and angles ${arr(v.angles).join(", ")}` : ""}${v.right ? ", right-angled" : ""}${v.notToScale ? " (not drawn to scale)" : ""}`;
+      const E = exteriorOk(v);
+      if (!E || v.right) return NA;
+      const A = arr<string | number>(v.angles).map((x) => String(x).trim());
+      const say = (t: string | undefined) => (t === "?" ? "marked ?" : t ? t : "not labelled");
+      return `A triangle (not drawn to scale) with one side extended. The two interior angles opposite the exterior angle are ${say(A[0])} and ${say(A[2])}; the interior angle next to the exterior angle is ${say(A[1])}; the exterior angle is ${say(E.label.trim())}`;
+    }
     case "plane":
       return `${num(v.quadrant) === 1 ? "The first quadrant of coordinate axes" : "Coordinate axes"} with points ${arr<[number, number, string?]>(v.points).map(([x, y, l]) => `${l ? `${l} ` : ""}(${minus(x)}, ${minus(y)})`).join(", ")}`;
     case "pie":
@@ -72,6 +192,11 @@ export function Figure({ v }: { v: V }) {
       <svg viewBox={`0 0 ${w} ${h}`} width="100%" style={{ maxWidth: Math.min(w, 420) }} aria-hidden="true">
         {body}
       </svg>
+    </figure>
+  );
+  const unavailable = (
+    <figure className="figure figure-unavailable" aria-label={NA} role="img" data-invalid="true">
+      <p>{NA}</p>
     </figure>
   );
   switch (v.type) {
@@ -214,6 +339,7 @@ export function Figure({ v }: { v: V }) {
       );
     }
     case "shape": {
+      if (!shapeOk(v)) return unavailable;
       // named quadrilaterals and an L-shape are drawn as themselves (not as a regular polygon); labels go side by side
       const KIND: Record<string, number[][]> = {
         rectangle: [[30, 50], [190, 50], [190, 150], [30, 150]],
@@ -228,22 +354,30 @@ export function Figure({ v }: { v: V }) {
       const kp = KIND[str(v.kind)];
       if (kp) {
         const lengths = arr<string | number>(v.lengths);
-        return box(220, 200, [
-          <polygon key="p" points={kp.map((q) => q.join(",")).join(" ")} fill={SOFT} stroke={INK} strokeWidth={2} />,
+        const parts = [
+          // outline: the edge is what is measured (perimeter), so the inside is left empty and the edge is drawn strongly
+          <polygon key="p" points={kp.map((q) => q.join(",")).join(" ")} fill={v.outline ? "none" : SOFT} stroke={v.outline ? ACC : INK} strokeWidth={v.outline ? 4 : 2} />,
           ...(v.diagonals ? [<line key="d1" x1={kp[0][0]} y1={kp[0][1]} x2={kp[2][0]} y2={kp[2][1]} stroke={ACC} strokeDasharray="5 4" />, <line key="d2" x1={kp[1][0]} y1={kp[1][1]} x2={kp[3][0]} y2={kp[3][1]} stroke={ACC} strokeDasharray="5 4" />] : []),
           ...(v.height !== undefined && kp.length === 4 ? [<line key="h" x1={kp[0][0]} y1={kp[0][1]} x2={kp[0][0]} y2={kp[3][1]} stroke={ACC} strokeDasharray="4 3" />, <text key="ht" x={kp[0][0] + 6} y={(kp[0][1] + kp[3][1]) / 2} fontSize={12} fill={ACC}>{str(v.height)}</text>] : []),
           ...lengths.map((l, i) => {
             const [a, b] = [kp[i % kp.length], kp[(i + 1) % kp.length]];
             const [mx, my] = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+            // outline (perimeter): every side label sits clearly outside its side, so none is drawn across the edge being measured
+            if (v.outline && kp.length === 4 && (a[0] === b[0] || a[1] === b[1])) {
+              const vertical = a[0] === b[0], right = vertical && mx > 110, below = !vertical && my > 100;
+              return <text key={`l${i}`} x={vertical ? mx + (right ? 8 : -8) : mx} y={vertical ? my + 5 : my + (below ? 20 : -9)} fontSize={13} textAnchor={vertical ? (right ? "start" : "end") : "middle"} fill={INK}>{String(l)}</text>;
+            }
             return <text key={`l${i}`} x={mx + (mx - 110) * 0.15} y={my + (my - 100) * 0.15 + 4} fontSize={13} textAnchor="middle" fill={INK}>{String(l)}</text>;
           }),
-        ]);
+        ];
+        // an outline's side labels sit outside the shape: widen the picture and shift it so they are not cut off
+        return v.outline ? box(290, 200, <g transform="translate(35,0)">{parts}</g>) : box(220, 200, parts);
       }
       const n = Math.max(3, num(v.sides, 4));
       const lengths = arr<string | number>(v.lengths);
       const pts = Array.from({ length: n }, (_, i) => [110 + 80 * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), 100 + 80 * Math.sin((2 * Math.PI * i) / n - Math.PI / 2)]);
       return box(220, 200, [
-        <polygon key="p" points={pts.map((p) => p.join(",")).join(" ")} fill={SOFT} stroke={INK} strokeWidth={2} />,
+        <polygon key="p" points={pts.map((p) => p.join(",")).join(" ")} fill={v.outline ? "none" : SOFT} stroke={v.outline ? ACC : INK} strokeWidth={v.outline ? 4 : 2} />,
         ...lengths.map((l, i) => {
           const [a, b] = [pts[i], pts[(i + 1) % n]];
           return <text key={`l${i}`} x={(a[0] + b[0]) / 2 + ((a[0] + b[0]) / 2 - 110) * 0.18} y={(a[1] + b[1]) / 2 + ((a[1] + b[1]) / 2 - 100) * 0.18 + 4} fontSize={13} textAnchor="middle" fill={INK}>{String(l)}</text>;
@@ -251,6 +385,33 @@ export function Figure({ v }: { v: V }) {
       ]);
     }
     case "angle": {
+      if (v.cross === true) {
+        const L = crossOk(v);
+        if (!L) return unavailable;
+        const d = num(v.deg);
+        const [cx, cy, len] = [130, 120, 115];
+        const pt = (deg: number, r: number) => [cx + r * Math.cos((deg * Math.PI) / 180), cy - r * Math.sin((deg * Math.PI) / 180)];
+        const [ax, ay] = pt(d, len), [bx, by] = pt(d + 180, len);
+        // angle i runs anticlockwise from start[i] for width[i]: 0 = the given angle θ, 1 next to it, 2 opposite, 3 the other neighbour
+        const start = [0, d, 180, 180 + d], width = [d, 180 - d, d, 180 - d];
+        const out: JSX.Element[] = [
+          <line key="l1" x1={cx - len} y1={cy} x2={cx + len} y2={cy} stroke={INK} strokeWidth={3} />,
+          <line key="l2" x1={bx} y1={by} x2={ax} y2={ay} stroke={INK} strokeWidth={3} />,
+          <circle key="o" cx={cx} cy={cy} r={3} fill={INK} />,
+        ];
+        L.forEach((t, i) => {
+          if (!t.trim()) return;
+          const [s0, w] = [start[i], width[i]];
+          const r = 22 + (i % 2) * 6;
+          const [x0, y0] = pt(s0, r), [x1, y1] = pt(s0 + w, r);
+          out.push(<path key={`arc${i}`} d={`M ${x0} ${y0} A ${r} ${r} 0 0 0 ${x1} ${y1}`} fill="none" stroke={ACC} strokeWidth={2} />);
+          // the label sits on the angle's bisector, far enough out to clear both lines in a narrow angle
+          const rl = Math.min(95, Math.max(48, 16 / Math.sin(((w / 2) * Math.PI) / 180)));
+          const [lx, ly] = pt(s0 + w / 2, rl);
+          out.push(<text key={`t${i}`} x={lx} y={ly + 5} fontSize={14} textAnchor="middle" fill={t.trim() === "?" ? ACC : INK} fontWeight={t.trim() === "?" ? 700 : 400}>{t.trim()}</text>);
+        });
+        return box(260, 240, out);
+      }
       const d = num(v.deg);
       const r = (deg: number, len: number) => [40 + len * Math.cos((-deg * Math.PI) / 180), 150 + len * Math.sin((-deg * Math.PI) / 180)];
       const [x, y] = r(d, 140);
@@ -277,10 +438,48 @@ export function Figure({ v }: { v: V }) {
       const rows = num(v.rows, 3);
       const cols = num(v.cols, 4);
       const shaded = num(v.shaded);
+      if (v.labels !== undefined || v.rowLabels !== undefined || v.colLabels !== undefined) {
+        // labelled grid (an area model): larger cells so the labels are readable; side labels outside the left and top edges
+        const G = gridLabelsOk(v);
+        if (!G) return unavailable;
+        const s = Math.min(90, 300 / Math.max(rows, cols));
+        const [ox, oy] = [G.rows.length ? Math.max(44, 14 + 8.5 * Math.max(...G.rows.map((t) => t.length))) : 4, G.cols.length ? 26 : 4];
+        const fit = (t: string) => Math.max(10, Math.min(18, (s * 1.7) / Math.max(1, t.length)));
+        const out: JSX.Element[] = [];
+        for (let i = 0; i < rows * cols; i++) {
+          const [x, y] = [ox + (i % cols) * s, oy + Math.floor(i / cols) * s];
+          out.push(<rect key={`c${i}`} x={x} y={y} width={s} height={s} fill={i < shaded ? ACC : "#fff"} stroke={INK} strokeWidth={1.5} />);
+          if (G.cells[i]) out.push(<text key={`ct${i}`} x={x + s / 2} y={y + s / 2 + fit(G.cells[i]) / 3} fontSize={fit(G.cells[i])} textAnchor="middle" fill={INK}>{G.cells[i]}</text>);
+        }
+        G.cols.forEach((t, j) => out.push(<text key={`cl${j}`} x={ox + j * s + s / 2} y={oy - 8} fontSize={14} textAnchor="middle" fill={ACC}>{t}</text>));
+        G.rows.forEach((t, i) => out.push(<text key={`rl${i}`} x={ox - 6} y={oy + i * s + s / 2 + 5} fontSize={14} textAnchor="end" fill={ACC}>{t}</text>));
+        return box(ox + cols * s + 4, oy + rows * s + 4, out);
+      }
       const s = Math.min(30, 360 / Math.max(rows, cols));
       return box(cols * s + 4, rows * s + 4, Array.from({ length: rows * cols }, (_, i) => <rect key={i} x={2 + (i % cols) * s} y={2 + Math.floor(i / cols) * s} width={s} height={s} fill={i < shaded ? ACC : "#fff"} stroke={INK} />));
     }
     case "triangle": {
+      if (v.exterior !== undefined) {
+        const E = exteriorOk(v);
+        if (!E || v.right) return unavailable;
+        // fixed shape (not to scale): side 0→1 is extended beyond vertex 1; the exterior angle lies between the extension and side 1→2
+        const P = [[20, 160], [240, 160], [100, 30]];
+        const A = arr<string | number>(v.angles).map((x) => String(x).trim());
+        const r = 26;
+        const toApex = Math.atan2(P[1][1] - P[2][1], P[2][0] - P[1][0]); // angle of side 1→2, measured anticlockwise from the extension
+        const [ex, ey] = [P[1][0] + r * Math.cos(toApex), P[1][1] - r * Math.sin(toApex)];
+        const [lx, ly] = [P[1][0] + 50 * Math.cos(toApex / 2), P[1][1] - 50 * Math.sin(toApex / 2)];
+        const out: JSX.Element[] = [
+          <polygon key="t" points={P.map((p) => p.join(",")).join(" ")} fill={SOFT} stroke={INK} strokeWidth={2} />,
+          <line key="ext" x1={P[1][0]} y1={P[1][1]} x2={322} y2={P[1][1]} stroke={INK} strokeWidth={2} strokeDasharray="7 4" />,
+          <path key="earc" d={`M ${P[1][0] + r} ${P[1][1]} A ${r} ${r} 0 0 0 ${ex} ${ey}`} fill="none" stroke={ACC} strokeWidth={2.5} />,
+          <text key="et" x={lx} y={ly + 5} fontSize={14} textAnchor="middle" fill={ACC} fontWeight={700}>{E.label.trim()}</text>,
+          // the apex label sits lower than in the plain triangle, so it clears both sides of the apex
+          ...A.map((a, i) => (a ? <text key={`a${i}`} x={P[i][0] + (i === 1 ? -30 : i === 0 ? 26 : 0)} y={P[i][1] + (i === 2 ? 42 : -8)} fontSize={13} textAnchor="middle" fill={a === "?" ? ACC : INK} fontWeight={a === "?" ? 700 : 400}>{a}</text> : null)).filter((x): x is JSX.Element => !!x),
+          <text key="nts" x={326} y={186} fontSize={11} textAnchor="end" fill={INK} fontStyle="italic">Not to scale</text>,
+        ];
+        return box(330, 192, out);
+      }
       const sides = arr<string>(v.sides);
       const angles = arr<string>(v.angles);
       const P = v.right ? [[30, 160], [230, 160], [30, 30]] : [[20, 160], [240, 160], [100, 30]];
@@ -295,6 +494,8 @@ export function Figure({ v }: { v: V }) {
           return <text key={`s${i}`} x={x + (i === 0 ? 0 : i === 1 ? 14 : -14)} y={y + (i === 0 ? 20 : 0)} fontSize={13} textAnchor="middle" fill={INK}>{s}</text>;
         }),
         ...angles.map((a, i) => <text key={`a${i}`} x={P[i][0] + (i === 1 ? -28 : i === 0 ? 22 : 0)} y={P[i][1] + (i === 2 ? 26 : -8)} fontSize={12} textAnchor="middle" fill={ACC}>{a}</text>),
+        // notToScale (optional): the caption the description promises; legacy triangles do not set it and are unchanged
+        ...(v.notToScale ? [<text key="nts" x={254} y={186} fontSize={11} textAnchor="end" fill={INK} fontStyle="italic">Not to scale</text>] : []),
       ]);
     }
     case "plane": {
@@ -350,6 +551,23 @@ export function Figure({ v }: { v: V }) {
         <text key="lt" x={80} y={49} fontSize={14} textAnchor="middle" fill={INK}>{str(v.left)}</text>,
         <text key="rt" x={240} y={49} fontSize={14} textAnchor="middle" fill={INK}>{str(v.right)}</text>,
       ]);
+    case "strips": {
+      // two strips of the SAME length (each one whole), each shaded for its own fraction; legacy strips (no bottomShaded,
+      // no labels) keep the existing behaviour (Learn.tsx draws them; here they fall through to the default)
+      if (v.bottomShaded === undefined && v.labels === undefined) return <figure className="figure" aria-label={label}><p>{label}</p></figure>;
+      const S = stripsOf(v);
+      if (!S) return unavailable;
+      const lw = S.some((x) => x.label) ? 52 : 0;
+      const W = 340, H = 34, gap = 12;
+      const out: JSX.Element[] = [];
+      S.forEach((st, r) => {
+        const y = 4 + r * (H + gap), pw = W / st.parts;
+        if (st.label) out.push(<text key={`lb${r}`} x={lw - 8} y={y + H / 2 + 5} fontSize={14} textAnchor="end" fill={INK}>{st.label}</text>);
+        for (let i = 0; i < st.parts; i++) out.push(<rect key={`p${r}-${i}`} x={lw + i * pw} y={y} width={pw} height={H} fill={i < st.shaded ? ACC : "#fff"} stroke={INK} strokeWidth={1.2} />);
+        out.push(<rect key={`w${r}`} x={lw} y={y} width={W} height={H} fill="none" stroke={INK} strokeWidth={2} />);
+      });
+      return box(lw + W + 4, 8 + 2 * H + gap, out);
+    }
     default:
       return <figure className="figure" aria-label={label}><p>{label}</p></figure>;
   }
