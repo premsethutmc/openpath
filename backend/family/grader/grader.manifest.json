@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "4a08df7ecc07c2bff23f0e85b8c91946fb6278675457fcb65c837b983dca44dd",
+ "sha256": "81f0e5939c5aeb5a15b0e2c62f1455730af4b80a193098c4a222d83a30f05290",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
@@ -216,7 +216,7 @@
   "packages/learning/src/symbolic-equivalence.ts": "909857c3d33d52535b0b91057c74896a20a9304bfd9f0f38a804b8d51248fb12",
   "packages/learning/src/teaching-contract.ts": "4a955b9efb7a9c67b3013cf75e8f34c524fe65ce18a3418781bf4bbe0e210214",
   "packages/learning/src/teaching-exposure.ts": "0de322e1501780c367654f3f298c237aeecbad2feeb86ce2feaf73d826c087c9",
-  "packages/learning/src/teaching-presentation.ts": "4d77a40e9ed2f40173be79d87c35479db2aee81711ac0b7d8359221613b67f6b",
+  "packages/learning/src/teaching-presentation.ts": "1078f7124d9de52b0442fbfa3f9bb58b3e2e7c494a39da1589cc4a4f2c4d886c",
   "packages/learning/src/tiles.ts": "1551a720952ce91bd1c2375b65c5a1167440c91443b05e7ec675637fad5a89a7",
   "packages/learning/src/typed-contract.ts": "cc155562e22ec53e9289ef0f563281bbdae6ad5309affe35e237642b8f00ec17",
   "packages/learning/src/validate.ts": "40a499d1365d9954e5741ad0206137453642dc119dd677d21e62088f6eb8dad8",

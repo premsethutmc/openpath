@@ -34,7 +34,7 @@ test('every square-identity step states a true signed equality, including differ
    const value=String(step.value), coefficient=Number(value.replace(/x²?$/,'' )||1);
    if(step.id==='a2'){assert.equal(coefficient,a*a);assert.doesNotMatch(f.explain(step),/= 1x²$/);}
    if(step.id==='2ab'){assert.equal(coefficient,Number(step.inputs[0])*a*b);assert.equal(Number(step.inputs[0]),form===1?-2:2);assert.ok(familyStepExplanation(problemOf('gen:ahid:'+params.join(','))!,step).startsWith(`${form===1?'−2':'2'} × ${step.inputs[1]} × ${b} = ${String(step.value).replace('-', '−')}`));assert.match(f.explain(step),form===1?/^−2ab = −2 ×/:/^2ab = 2 ×/);}
-   if(step.id==='b2'){assert.equal(Number(step.value),(form===2?-1:1)*b*b);assert.equal(step.op,form===2?'negate-square':'square');}
+   if(step.id==='b2'){assert.equal(Number(step.value),(form===2?-1:1)*b*b);assert.equal(step.op,form===2?'negate-square':'square');if(form===2)assert.equal(familyStepExplanation(problemOf('gen:ahid:'+params.join(','))!,step),`−(${b}²) = −${b*b}: square ${b}, then take its negative.`);}
   }
   const [lead,middle,constant]=[a*a,form===2?0:(form===1?-2:2)*a*b,(form===2?-1:1)*b*b];
   for(const x of [-3,0,2,7])assert.ok(lead*x*x+middle*x+constant === (form===2?(a*x+b)*(a*x-b):(a*x+(form===1?-b:b))**2));

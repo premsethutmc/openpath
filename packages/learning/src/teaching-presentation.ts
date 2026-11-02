@@ -179,6 +179,8 @@ function mathematicalExplanation(step: Step, family: Def): string {
     }
     case "divide":
       return why ? `${a} ÷ ${b} = ${result} — ${why}.` : `${a} ÷ ${b} = ${result}.`;
+    case "negate-square":
+      return `−(${a}²) = ${result}: square ${a}, then take its negative.`;
     case "compare":
       return `Comparing ${a} and ${b}: ${result}.`;
     case "count":
