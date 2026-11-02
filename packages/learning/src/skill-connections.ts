@@ -1,5 +1,6 @@
 /** Auditable skill connections. Metadata narrows existing tasks; it grants no method authority or content approval. */
 import { FAMILIES, problemOf } from './families';
+import { grade } from './grading/decision';
 import type { Module, Strategy } from './content';
 import { classifyQuestionWith, type SubSkillConfig } from './subskill-projection';
 import { LINEAR_EQUATIONS_CONFIG } from './subskill-config-linear';
@@ -39,12 +40,19 @@ export function connectedSkill(config: SubSkillConfig, id: string): string | nul
 }
 /** Check task semantics through the generator's independent validator, not only matching tags. */
 export function validSkillTask(config: SubSkillConfig, skill: string, id: string): boolean {
-  const p = problemOf(id.replace(/:(mc|w)$/, ''));
-  const f = p && FAMILIES.get(p.family);
-  if (!p || !f || f.competency !== config.competency || connectedSkill(config, id) !== skill) return false;
-  const answer = Number(p.answer);
-  // These contracts currently cover numeric tasks. Other answer types remain explicit gaps.
-  return Number.isFinite(answer) && f.validate(p.params, answer) && p.steps.length > 0;
+  try {
+    // Resolve the served variant itself. buildRaw checks the family's original typed
+    // solve value; converting its displayed answer to Number loses fractions, tuples and choices.
+    const p = problemOf(id);
+    const f = p && FAMILIES.get(p.family);
+    if (!p || !f || f.competency !== config.competency || connectedSkill(config, id) !== skill || !p.steps.length) return false;
+    // Reuse the authoritative answer contract, including quarantine, form rules and
+    // contract consistency. This establishes task support, never method evidence or approval.
+    const result = grade(id, p.answer);
+    return result.decision.verdict === 'correct' && result.assessment.credit === true;
+  } catch {
+    return false;
+  }
 }
 export function strategyConnects(config: SubSkillConfig, skill: string, strategy: Strategy): boolean {
   return validSkillTask(config, skill, strategy.guided) && validSkillTask(config, skill, strategy.check)

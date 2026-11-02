@@ -57,8 +57,17 @@ export function PlaceValueChart({ headings, rows }: Extract<TeachingVisual, { ki
 }
 
 export function FractionStrip({ numerator, denominator, comparison }: Extract<TeachingVisual, { kind: "fraction-strip" }>) {
+  const valid = (top: number, bottom: number) => Number.isInteger(top) && Number.isInteger(bottom) && bottom > 0 && bottom <= 60 && top >= 0 && top <= bottom;
+  if (!valid(numerator, denominator) || (comparison && !valid(comparison.numerator, comparison.denominator))) {
+    return <figure className="teaching-data-visual fraction-strip-visual" data-invalid="true" role="img" aria-label="Picture not available: its numbers do not fit together.">Picture not available: its numbers do not fit together.</figure>;
+  }
   const strip = (top: number, bottom: number, label: string) => <div className="fraction-strip-row" aria-label={`${top} out of ${bottom} equal parts`}><b>{label}</b><span className="fraction-parts" style={{ gridTemplateColumns: `repeat(${bottom}, 1fr)` }}>{Array.from({ length: bottom }, (_, index) => <i className={index < top ? "shaded" : ""} key={index} />)}</span><strong>{top}/{bottom}</strong></div>;
-  return <figure className="teaching-data-visual fraction-strip-visual">{strip(numerator, denominator, "Whole")}{comparison ? strip(comparison.numerator, comparison.denominator, "Compare") : null}<figcaption>Equal fractions cover the same length of the same whole.</figcaption></figure>;
+  const caption = comparison
+    ? numerator * comparison.denominator === comparison.numerator * denominator
+      ? "Equal fractions cover the same length of the same whole."
+      : "Compare the shaded lengths using the same-sized whole."
+    : "The shaded parts show the fraction of one whole.";
+  return <figure className="teaching-data-visual fraction-strip-visual">{strip(numerator, denominator, "Whole")}{comparison ? strip(comparison.numerator, comparison.denominator, "Compare") : null}<figcaption>{caption}</figcaption></figure>;
 }
 
 export function EquationTransformation({ lines }: Extract<TeachingVisual, { kind: "equation" }>) {
