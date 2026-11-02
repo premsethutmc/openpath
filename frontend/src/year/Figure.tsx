@@ -19,14 +19,35 @@ const degOf = (s: unknown): number | null => { const m = /^\s*(\d+(?:\.\d+)?)\s*
 const intIn = (v: unknown, lo: number, hi: number) => typeof v === "number" && Number.isInteger(v) && v >= lo && v <= hi;
 const strList = (v: unknown, n: number) => Array.isArray(v) && v.length === n && v.every((x) => typeof x === "string" || typeof x === "number");
 type Strip = { parts: number; shaded: number; label: string };
-/** the two strips of a strips visual: explicit bottomShaded, or (legacy) the equivalent shading only when it is exact */
+/** Competencies whose lessons use legacy strips (top, bottom, shaded) to show an EQUIVALENT fraction: there the second
+ * strip's shading is derived (shaded × bottom / top). Elsewhere the same data is ambiguous (a comparison such as 1/2 vs 1/4
+ * has exactly the same shape), so the second strip is not drawn. */
+export const EQUIVALENCE_COMPETENCIES: ReadonlySet<string> = new Set(["MATH.number.equivalent-fractions"]);
+/** legacy strips data: no bottomShaded and no labels (the second fraction is not stated) */
+export const legacyStrips = (v: V) => v.type === "strips" && v.bottomShaded === undefined && v.labels === undefined;
+/** the strips widget as a lesson of this competency may draw it: legacy strips are marked as equivalence pictures only in an
+ * equivalence lesson; everything else is passed through unchanged */
+/** the equivalence mark is a Symbol, so content data (JSON) can never set it: only stripsFor, from the lesson's competency */
+const EQUIV: unique symbol = Symbol("visuals@2 equivalence lesson");
+export const stripsFor = <W extends V>(w: W, competency?: string): W => (legacyStrips(w) && competency && EQUIVALENCE_COMPETENCIES.has(competency) ? ({ ...w, [EQUIV]: true } as W) : w);
+/** legacy strips: "equivalent" (the second shading is an exact equivalent and the lesson is about equivalence), "missing"
+ * (the first strip is valid but the second strip's shading is not given), or "invalid" */
+export function legacyStripKind(v: V): "equivalent" | "missing" | "invalid" {
+  const top = v.top ?? 2, bottom = v.bottom ?? 4, shaded = v.shaded ?? 1;
+  if (!intIn(top, 1, 60) || !intIn(bottom, 1, 60) || !intIn(shaded, 0, top as number)) return "invalid";
+  // a fully shaded first strip (one whole) and its fully shaded k-part copy (k/k) are the same amount in any lesson; any other
+  // derived shading is an equivalence only where the lesson is about equivalence (the same data is also sent for comparisons)
+  if (shaded === top && (shaded as number) > 0) return "equivalent";
+  return (v as { [EQUIV]?: boolean })[EQUIV] === true && ((shaded as number) * (bottom as number)) % (top as number) === 0 ? "equivalent" : "missing";
+}
+/** the two strips of a strips visual: explicit bottomShaded, or (legacy, equivalence lessons only) the exact equivalent shading */
 function stripsOf(v: V): Strip[] | null {
   const top = v.top ?? 2, bottom = v.bottom ?? 4, shaded = v.shaded ?? 1;
   if (!intIn(top, 1, 60) || !intIn(bottom, 1, 60) || !intIn(shaded, 0, top as number)) return null;
   const t = top as number, b = bottom as number, sh = shaded as number;
   let bs: number;
   if (v.bottomShaded !== undefined) { if (!intIn(v.bottomShaded, 0, b)) return null; bs = v.bottomShaded as number; }
-  else { if ((sh * b) % t !== 0) return null; bs = (sh * b) / t; }
+  else { if (legacyStripKind(v) !== "equivalent") return null; bs = (sh * b) / t; }
   const labels = v.labels === undefined ? null : strList(v.labels, 2) ? arr<string | number>(v.labels).map(String) : undefined;
   if (labels === undefined) return null;
   // a label written as a fraction must be the fraction that row shows (n shaded of d parts), never another one
@@ -45,7 +66,15 @@ function shapeOk(v: V): boolean {
   if (str(v.kind) === "square" && L.length === 4) return L.every((x) => eq(x, L[0]) && L.every((y) => eq(x, y)));
   return true;
 }
-type Ext = { at: 1; label: string };
+type Ext = { at: 1; label: string; names: string[] | null; extendedTo: string };
+/** vertex names (optional): three distinct short names (A, B, C, A′ …), and optionally the name of the point on the extension */
+function namesOk(v: V): { names: string[] | null; extendedTo: string } | null {
+  const ok = (t: unknown) => typeof t === "string" && /^[A-Z]′?$/.test(t); // one prime character only (A′), so no look-alike names
+  if (v.vertices === undefined && v.extendedTo === undefined) return { names: null, extendedTo: "" };
+  if (!Array.isArray(v.vertices) || v.vertices.length !== 3 || !v.vertices.every(ok) || new Set(v.vertices).size !== 3) return null;
+  if (v.extendedTo !== undefined && (!ok(v.extendedTo) || (v.vertices as string[]).includes(v.extendedTo as string))) return null;
+  return { names: v.vertices as string[], extendedTo: (v.extendedTo as string | undefined) ?? "" };
+}
 /** a triangle with one side extended: the exterior angle is at vertex 1 (side 0→1 extended); numeric labels must fit together */
 function exteriorOk(v: V): Ext | null {
   const e = v.exterior as { at?: unknown; label?: unknown } | undefined;
@@ -63,7 +92,9 @@ function exteriorOk(v: V): Ext | null {
   if (ext !== undefined && a[0] !== undefined && a[2] !== undefined && Math.abs(ext - a[0] - a[2]) > 1e-9) return null; // exterior = sum of the two opposite angles
   if (ext !== undefined && a[1] !== undefined && Math.abs(ext + a[1] - 180) > 1e-9) return null; // exterior + adjacent interior = 180
   if (ext !== undefined && (a[0] !== undefined && a[0] >= ext || a[2] !== undefined && a[2] >= ext)) return null;
-  return { at: 1, label: str(e.label) };
+  const N = namesOk(v);
+  if (!N) return null;
+  return { at: 1, label: str(e.label), ...N };
 }
 /** two crossing lines: θ strictly between 0° and 180°; four labels; a numeric label must be θ (angles 0, 2) or 180° − θ (1, 3) */
 function crossOk(v: V): string[] | null {
@@ -77,22 +108,34 @@ function crossOk(v: V): string[] | null {
 }
 /** a labelled grid (area model): one label per cell, one per row and column; with the same row and column labels (a square
  * of side a + b) the model is symmetric, so cell (i, j) and cell (j, i) must carry the same label */
-function gridLabelsOk(v: V): { cells: string[]; rows: string[]; cols: string[] } | null {
+const UNCHECKED = "unchecked" as const;
+function gridLabelsOk(v: V): { cells: string[]; rows: string[]; cols: string[] } | null | typeof UNCHECKED {
   const R = num(v.rows, 3), C = num(v.cols, 4);
   if (!intIn(R, 1, 12) || !intIn(C, 1, 12)) return null;
   const cells = v.labels === undefined ? [] : strList(v.labels, R * C) ? arr<string | number>(v.labels).map(String) : null;
   const rows = v.rowLabels === undefined ? [] : strList(v.rowLabels, R) ? arr<string | number>(v.rowLabels).map(String) : null;
   const cols = v.colLabels === undefined ? [] : strList(v.colLabels, C) ? arr<string | number>(v.colLabels).map(String) : null;
   if (!cells || !rows || !cols) return null;
-  if (cells.length && rows.length && cols.length && R === C && rows.every((x, i) => x === cols[i])) for (let i = 0; i < R; i++) for (let j = 0; j < C; j++) if (cells[i * C + j] !== cells[j * C + i]) return null;
-  // an area model whose side and cell labels are all monomials (25x², −24x, ab, 4) must have cell = row label × column label
-  if (cells.length && rows.length && cols.length) {
-    const P = [...rows, ...cols, ...cells].map(mono);
-    if (P.every((x) => x !== null)) for (let i = 0; i < R; i++) for (let j = 0; j < C; j++) if (!sameMono(mul(P[i]!, P[R + j]!), P[R + C + i * C + j]!)) return null;
+  // a square area model (same row and column labels) is symmetric; compared as single terms (a compound label is left to the check below)
+  if (cells.length && rows.length && cols.length && R === C && rows.every((x, i) => x === cols[i])) for (let i = 0; i < R; i++) for (let j = 0; j < C; j++) { const [a, b] = [mono(cells[i * C + j]), mono(cells[j * C + i])]; if (a && b && !sameMono(a, b)) return null; }
+  // with side labels AND cell labels the picture claims cell = row label × column label. That is checked exactly for single
+  // terms (25x², −24x, ab, 4). A compound label (x + 3, 2a − b) is not checked here, so the picture is not drawn (UNCHECKED)
+  // rather than drawn as if it had been checked. A blank cell claims nothing; a blank side label with a labelled cell cannot be checked.
+  if (cells.some((c) => c.trim()) && (rows.length || cols.length)) {
+    if (!rows.length || !cols.length) return UNCHECKED;
+    for (let i = 0; i < R; i++) for (let j = 0; j < C; j++) {
+      const cell = cells[i * C + j].trim();
+      if (!cell) continue;
+      const [r, c, x] = [mono(rows[i]), mono(cols[j]), mono(cell)];
+      if (!r || !c || !x) return UNCHECKED;
+      if (!sameMono(mul(r, c), x)) return null;
+    }
   }
   return { cells, rows, cols };
 }
 const NA = "Picture not available: its numbers do not fit together.";
+const NA_UNCHECKED = "Picture not available: its labels cannot be checked.";
+const NA_MISSING = "Picture not available: the second strip's shading is not given.";
 /** a monomial label: optional sign and whole-number coefficient, then letters each with an optional ² or ³ (25x², −24x, ab, 4) */
 type Mono = { c: number; v: Record<string, number> };
 function mono(t: string): Mono | null {
@@ -100,10 +143,12 @@ function mono(t: string): Mono | null {
   if (!m || (!m[2] && !m[3])) return null;
   const v: Record<string, number> = {};
   for (const [, x, p] of m[3].matchAll(/([a-z])([²³]?)/g)) v[x] = (v[x] ?? 0) + (p === "²" ? 2 : p === "³" ? 3 : 1);
-  return { c: (m[1] ? -1 : 1) * (m[2] ? Number(m[2]) : 1), v };
+  const c = m[2] ? Number(m[2]) : 1;
+  if (c > 1e6) return null; // beyond exact integer arithmetic for products: not checked
+  return { c: (m[1] ? -1 : 1) * c, v };
 }
 const mul = (a: Mono, b: Mono): Mono => { const v = { ...a.v }; for (const [k, p] of Object.entries(b.v)) v[k] = (v[k] ?? 0) + p; return { c: a.c * b.c, v }; };
-const sameMono = (a: Mono, b: Mono) => a.c === b.c && Object.keys({ ...a.v, ...b.v }).every((k) => (a.v[k] ?? 0) === (b.v[k] ?? 0));
+const sameMono = (a: Mono, b: Mono) => (a.c === 0 && b.c === 0) || a.c === b.c && Object.keys({ ...a.v, ...b.v }).every((k) => (a.v[k] ?? 0) === (b.v[k] ?? 0));
 
 export function describe(v: V): string {
   switch (v.type) {
@@ -129,7 +174,15 @@ export function describe(v: V): string {
       if (!shapeOk(v)) return NA;
       return `A ${str(v.name) || (v.outline && str(v.kind) ? str(v.kind) : `${num(v.sides)}-sided shape`)}${arr(v.lengths).length ? ` with sides ${arr(v.lengths).join(", ")}` : ""}${v.outline ? ", drawn as an outline" : ""}`;
     case "strips": {
-      if (v.bottomShaded === undefined && v.labels === undefined) return "A picture"; // legacy strips keep their existing (Learn.tsx) path
+      if (legacyStrips(v)) {
+        const k = legacyStripKind(v);
+        if (k === "invalid") return NA;
+        const one = `${num(v.top, 2)} equal part${num(v.top, 2) === 1 ? "" : "s"} with ${num(v.shaded, 1)} shaded`;
+        if (k === "missing") return `A strip in ${one}. A second strip, in ${num(v.bottom, 4)} equal parts, is not drawn because how much of it is shaded is not given`;
+        const bs = (num(v.shaded, 1) * num(v.bottom, 4)) / num(v.top, 2);
+        return `Two strips of the same length, each one whole: the first in ${one}, the second in ${num(v.bottom, 4)} equal parts with ${bs} shaded, the same amount`;
+      }
+      if (v.bottomShaded === undefined) return NA_MISSING;
       const S = stripsOf(v);
       if (!S) return NA;
       const one = (x: Strip) => `${x.parts} equal part${x.parts === 1 ? "" : "s"} with ${x.shaded} shaded${x.label ? ` (${x.label})` : ""}`;
@@ -149,6 +202,7 @@ export function describe(v: V): string {
       const base = `A grid of ${num(v.rows)} rows and ${num(v.cols)} columns${num(v.shaded) ? ` with ${num(v.shaded)} squares shaded` : ""}`;
       if (v.labels === undefined && v.rowLabels === undefined && v.colLabels === undefined) return base;
       const G = gridLabelsOk(v);
+      if (G === UNCHECKED) return NA_UNCHECKED;
       if (!G) return NA;
       return `${base}${G.cols.length ? `; the top side is labelled ${G.cols.join(" and ")}` : ""}${G.rows.length ? `; the left side is labelled ${G.rows.join(" and ")}` : ""}${G.cells.some((c) => c.trim()) ? `; the parts, row by row, are ${G.cells.map((c) => c.trim() || "unlabelled").join(", ")}` : ""}`;
     }
@@ -158,6 +212,10 @@ export function describe(v: V): string {
       if (!E || v.right) return NA;
       const A = arr<string | number>(v.angles).map((x) => String(x).trim());
       const say = (t: string | undefined) => (t === "?" ? "marked ?" : t ? t : "not labelled");
+      if (E.names) {
+        const [p, q, r] = E.names;
+        return `Triangle with vertices ${p}, ${q} and ${r} (not drawn to scale). Side ${p}${q} is extended beyond ${q}${E.extendedTo ? ` to ${E.extendedTo}` : ""}, making an exterior angle at ${q}. The interior angles opposite it, at ${p} and ${r}, are ${say(A[0])} and ${say(A[2])}; the interior angle at ${q} is ${say(A[1])}; the exterior angle at ${q} is ${say(E.label.trim())}`;
+      }
       return `A triangle (not drawn to scale) with one side extended. The two interior angles opposite the exterior angle are ${say(A[0])} and ${say(A[2])}; the interior angle next to the exterior angle is ${say(A[1])}; the exterior angle is ${say(E.label.trim())}`;
     }
     case "plane":
@@ -441,6 +499,7 @@ export function Figure({ v }: { v: V }) {
       if (v.labels !== undefined || v.rowLabels !== undefined || v.colLabels !== undefined) {
         // labelled grid (an area model): larger cells so the labels are readable; side labels outside the left and top edges
         const G = gridLabelsOk(v);
+        if (G === UNCHECKED) return <figure className="figure figure-unavailable" aria-label={NA_UNCHECKED} role="img" data-invalid="unchecked"><p>{NA_UNCHECKED}</p></figure>;
         if (!G) return unavailable;
         const s = Math.min(90, 300 / Math.max(rows, cols));
         const [ox, oy] = [G.rows.length ? Math.max(44, 14 + 8.5 * Math.max(...G.rows.map((t) => t.length))) : 4, G.cols.length ? 26 : 4];
@@ -477,6 +536,13 @@ export function Figure({ v }: { v: V }) {
           // the apex label sits lower than in the plain triangle, so it clears both sides of the apex
           ...A.map((a, i) => (a ? <text key={`a${i}`} x={P[i][0] + (i === 1 ? -30 : i === 0 ? 26 : 0)} y={P[i][1] + (i === 2 ? 42 : -8)} fontSize={13} textAnchor="middle" fill={a === "?" ? ACC : INK} fontWeight={a === "?" ? 700 : 400}>{a}</text> : null)).filter((x): x is JSX.Element => !!x),
           <text key="nts" x={326} y={186} fontSize={11} textAnchor="end" fill={INK} fontStyle="italic">Not to scale</text>,
+          // vertex names outside each corner (and at the end of the extension), matching the description
+          ...(E.names ? [
+            <text key="n0" x={P[0][0] - 8} y={P[0][1] + 16} fontSize={15} fontWeight={700} textAnchor="middle" fill={INK}>{E.names[0]}</text>,
+            <text key="n1" x={P[1][0]} y={P[1][1] + 20} fontSize={15} fontWeight={700} textAnchor="middle" fill={INK}>{E.names[1]}</text>,
+            <text key="n2" x={P[2][0]} y={P[2][1] - 8} fontSize={15} fontWeight={700} textAnchor="middle" fill={INK}>{E.names[2]}</text>,
+            ...(E.extendedTo ? [<text key="n3" x={316} y={P[1][1] - 8} fontSize={15} fontWeight={700} textAnchor="middle" fill={INK}>{E.extendedTo}</text>] : []),
+          ] : []),
         ];
         return box(330, 192, out);
       }
@@ -554,7 +620,9 @@ export function Figure({ v }: { v: V }) {
     case "strips": {
       // two strips of the SAME length (each one whole), each shaded for its own fraction; legacy strips (no bottomShaded,
       // no labels) keep the existing behaviour (Learn.tsx draws them; here they fall through to the default)
-      if (v.bottomShaded === undefined && v.labels === undefined) return <figure className="figure" aria-label={label}><p>{label}</p></figure>;
+      // legacy strips whose second shading is not stated (or not an equivalence lesson): text, never a guessed picture
+      if (legacyStrips(v) && legacyStripKind(v) === "missing") return <figure className="figure figure-text" role="img" aria-label={label} data-fallback="strips"><p>{label}.</p></figure>;
+      if (!legacyStrips(v) && v.bottomShaded === undefined) return <figure className="figure figure-unavailable" aria-label={NA_MISSING} role="img" data-invalid="missing"><p>{NA_MISSING}</p></figure>;
       const S = stripsOf(v);
       if (!S) return unavailable;
       const lw = S.some((x) => x.label) ? 52 : 0;
