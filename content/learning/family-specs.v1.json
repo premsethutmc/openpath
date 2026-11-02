@@ -18082,7 +18082,7 @@
     "gen:aedecc:3,4,3,3"
    ],
    "explanations": [
-    "longer-is-larger (conceptual): 3.39 was taken as greater because 39 is more than 9; compare the tenths first: 9 tenths are more than 3 tenths.",
+    "longer-is-larger (conceptual): More decimal digits do not make 3.39 greater. Compare the tenths first: 9 tenths are more than 3 tenths.",
     "shorter-is-larger (conceptual): 3.6 was taken as greater because hundredths are small pieces; but 3.89 has more tenths (8 against 6)."
    ],
    "teach": {
@@ -18100,7 +18100,7 @@
      }
     ]
    },
-   "fingerprint": "4d750dcd",
+   "fingerprint": "cc507e15",
    "validation": {
     "family": "aedecc",
     "deterministic": {
@@ -29816,7 +29816,7 @@
     "gen:ahid:2,3,4,0:mc"
    ],
    "explanations": [
-    "middle-not-doubled (conceptual): The middle term was written as ab. The identity has 2ab: the two products 5x × 9 and 9 × 5x are both there.",
+    "middle-not-doubled (conceptual): The middle term has two products: 5x × (−9) and (−9) × 5x. Collect both to get −2ab.",
     "middle-sign (procedural): The middle term of (a − b)² is −2ab: it carries the minus sign.",
     "minus-squared (conceptual): (−9)² was written as −81. The square of a negative number is positive: the last term of (a − b)² is +b².",
     "q-doubled (procedural): 9 was doubled instead of squared: b² = 9 × 9.",
@@ -29849,7 +29849,7 @@
      }
     ]
    },
-   "fingerprint": "09bb7499",
+   "fingerprint": "e54c66e1",
    "validation": {
     "family": "ahid",
     "deterministic": {

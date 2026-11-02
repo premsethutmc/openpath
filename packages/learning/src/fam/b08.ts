@@ -2202,9 +2202,9 @@ B08.push(
       const [form, pp, q, box] = p;
       const c = idCoef(p);
       const steps = [
-        { id: "a2", op: "square", competency: IDN, inputs: [ww(pp)], value: `${c[0]}x²` },
-        ...(form === 2 ? [] : [{ id: "2ab", op: "multiply", competency: IDN, inputs: [2, ww(pp), q], value: `${c[1]}x` }]),
-        { id: "b2", op: "square", competency: IDN, inputs: [q], value: c[2] },
+        { id: "a2", op: "square", competency: IDN, inputs: [ww(pp)], value: c[0] === 1 ? "x²" : `${c[0]}x²` },
+        ...(form === 2 ? [] : [{ id: "2ab", op: "multiply", competency: IDN, inputs: [form === 1 ? -2 : 2, ww(pp), q], value: `${c[1]}x` }]),
+        { id: "b2", op: form === 2 ? "negate-square" : "square", competency: IDN, inputs: [q], value: c[2] },
       ];
       return { steps, answer: c[box] };
     },
@@ -2223,13 +2223,21 @@ B08.push(
       const c = idCoef(p);
       const k = (x: number) => (x === c[box] ? null : x);
       if (box === 0) return [Bq("p-not-squared", "procedural", IDN, `${ww(pp)} was not squared fully: (${ww(pp)})² = ${pp}x × ${pp}x = ${pp * pp}x².`, k(pp)), Bq("doubled-not-squared", "procedural", IDN, `${pp} was doubled instead of squared: ${pp}² = ${pp * pp}.`, k(2 * pp))];
-      if (box === 1) return [Bq("middle-not-doubled", "conceptual", IDN, `The middle term was written as ab. The identity has 2ab: the two products ${ww(pp)} × ${q} and ${q} × ${ww(pp)} are both there.`, k(form === 0 ? pp * q : -pp * q)), Bq("middle-sign", "procedural", IDN, form === 1 ? "The middle term of (a − b)² is −2ab: it carries the minus sign." : "The middle term of (a + b)² is +2ab.", k(-c[1]))];
+      if (box === 1) return [Bq("middle-not-doubled", "conceptual", IDN, `The middle term has two products: ${ww(pp)} × ${form === 1 ? `(−${q})` : q} and ${form === 1 ? `(−${q})` : q} × ${ww(pp)}. Collect both to get ${form === 1 ? "−2ab" : "2ab"}.`, k(form === 0 ? pp * q : -pp * q)), Bq("middle-sign", "procedural", IDN, form === 1 ? "The middle term of (a − b)² is −2ab: it carries the minus sign." : "The middle term of (a + b)² is +2ab.", k(-c[1]))];
       return form === 2
         ? [Bq("sign-of-b2", "conceptual", IDN, "The last term of (a + b)(a − b) is −b²: the middle terms cancel and the product of +b and −b is negative.", k(q * q)), Bq("q-not-squared", "procedural", IDN, `${q} was not squared: b² = ${q} × ${q} = ${q * q}.`, k(-q))]
         : [Bq("minus-squared", "conceptual", IDN, `(−${q})² was written as −${q * q}. The square of a negative number is positive: the last term of (a − b)² is +b².`, form === 1 ? k(-(q * q)) : null), Bq("q-doubled", "procedural", IDN, `${q} was doubled instead of squared: b² = ${q} × ${q}.`, k(2 * q))];
     },
     variants: () => [],
-    explain: (s) => (s.id === "a2" ? `a² = (${s.inputs[0]})² = ${s.value}` : s.id === "2ab" ? `2ab = 2 × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value}` : `b² = ${s.inputs[0]}² = ${s.value}`),
+    explain: (s) => {
+      const value = String(s.value).replace(/^-/, "−");
+      if (s.id === "a2") return `a² = (${s.inputs[0]})² = ${value}`;
+      if (s.id === "2ab") {
+        const factor = Number(s.inputs[0]) < 0 ? "−2" : "2";
+        return `${factor}ab = ${factor} × ${s.inputs[1]} × ${s.inputs[2]} = ${value}`;
+      }
+      return s.op === "negate-square" ? `−b² = −(${s.inputs[0]}²) = ${value}` : `b² = ${s.inputs[0]}² = ${value}`;
+    },
     domain: [[0, 2], [1, 5], [1, 9], [0, 2]],
     keep: idOk,
     difficulty: ([form, p, , box]) => (p === 1 && box !== 0 ? 1 : form === 1 || box === 1 ? 2 : 3),

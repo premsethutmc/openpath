@@ -173,8 +173,10 @@ function mathematicalExplanation(step: Step, family: Def): string {
       return why ? `${a} + ${b} = ${result} — ${why}.` : `${a} + ${b} = ${result}.`;
     case "subtract":
       return why ? `${a} − ${b} = ${result} — ${why}.` : `${a} − ${b} = ${result}.`;
-    case "multiply":
-      return why ? `${a} × ${b} = ${result} — ${why}.` : `${a} × ${b} = ${result}.`;
+    case "multiply": {
+      const product = step.inputs.map(shown).join(" × ");
+      return why ? `${product} = ${result} — ${why}.` : `${product} = ${result}.`;
+    }
     case "divide":
       return why ? `${a} ÷ ${b} = ${result} — ${why}.` : `${a} ÷ ${b} = ${result}.`;
     case "compare":

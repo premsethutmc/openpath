@@ -1325,7 +1325,7 @@ export const B05: Def[] = [
       const x = ds(100 * w + 10 * t);
       const y = ds(100 * w + 10 * u + v);
       return t > u
-        ? [{ id: "longer-is-larger", kind: "conceptual", competency: DEC, says: `${w}.${u}${v} was taken as greater because ${u}${v} is more than ${t}; compare the tenths first: ${t} tenths ${t === 1 ? "is" : "are"} more than ${u} ${u === 1 ? "tenth" : "tenths"}.`, predict: y }]
+        ? [{ id: "longer-is-larger", kind: "conceptual", competency: DEC, says: `More decimal digits do not make ${w}.${u}${v} greater. Compare the tenths first: ${t} ${t === 1 ? "tenth is" : "tenths are"} more than ${u} ${u === 1 ? "tenth" : "tenths"}.`, predict: y }]
         : [{ id: "shorter-is-larger", kind: "conceptual", competency: DEC, says: `${w}.${t} was taken as greater because hundredths are small pieces; but ${w}.${u}${v} has more tenths (${u} against ${t}).`, predict: x }];
     },
     variants: () => [],
